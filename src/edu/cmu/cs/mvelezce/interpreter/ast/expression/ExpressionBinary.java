@@ -7,8 +7,8 @@ import edu.cmu.cs.mvelezce.interpreter.visitor.Visitor;
  */
 public class ExpressionBinary extends Expression {
     private Expression left;
-    private Expression right;
     private String operation;
+    private Expression right;
 
 
     public ExpressionBinary(Expression left, String operation, Expression right) {
@@ -18,7 +18,7 @@ public class ExpressionBinary extends Expression {
     }
 
     @Override
-    public Object accept(Visitor visitor) {
+    public <T> T accept(Visitor<T> visitor) {
         return visitor.visitExpressionBinary(this);
     }
 
@@ -30,4 +30,5 @@ public class ExpressionBinary extends Expression {
 
     @Override
     public String toString() { return this.left + " " + this.operation + " " + this.right; }
+
 }

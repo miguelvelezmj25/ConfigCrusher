@@ -1,16 +1,21 @@
 package edu.cmu.cs.mvelezce.interpreter.visitor;
 
-import edu.cmu.cs.mvelezce.interpreter.ast.expression.Expression;
-import edu.cmu.cs.mvelezce.interpreter.ast.expression.ExpressionBinary;
-import edu.cmu.cs.mvelezce.interpreter.ast.expression.ExpressionConstantInt;
-import edu.cmu.cs.mvelezce.interpreter.ast.expression.ExpressionUnary;
+import edu.cmu.cs.mvelezce.interpreter.ast.expression.*;
+import edu.cmu.cs.mvelezce.interpreter.ast.statement.StatementAssignment;
+import edu.cmu.cs.mvelezce.interpreter.ast.value.ValueInt;
 import edu.cmu.cs.mvelezce.interpreter.parser.Parser;
+
+import java.util.HashMap;
 
 /**
  * Created by miguelvelez on 1/31/17.
  */
-public class NodeVisitor implements Visitor {
+public class NodeVisitor implements Visitor<ValueInt> {
     private Parser parser;
+
+//    private final HashMap<String, ValueInt> store = new HashMap<>();
+//    int time;
+//    StringBuffer output;
 
     public NodeVisitor(Parser parser) {
         this.parser = parser;
@@ -22,51 +27,65 @@ public class NodeVisitor implements Visitor {
         return ast.accept(this);
     }
 
-    public Object evaluate(Expression ast) {
+    public ValueInt evaluate(Expression ast) {
         return ast.accept(this);
     }
 
     @Override
-    public Object visitExpressionBinary(ExpressionBinary expressionBinary) {
-        Expression left = (Expression) expressionBinary.getLeft().accept(this);
-        Expression right = (Expression) expressionBinary.getRight().accept(this);
+    public ValueInt visitExpressionBinary(ExpressionBinary expressionBinary) {
+        ValueInt left = expressionBinary.getLeft().accept(this);
+        ValueInt right =  expressionBinary.getRight().accept(this);
 
         if(expressionBinary.getOperation().equals("+")) {
-            int result = ((ExpressionConstantInt) left).getValue() + ((ExpressionConstantInt) right).getValue();
-            return new ExpressionConstantInt(result);
+            int result = left.getValue() + (right).getValue();
+
+
+            return new ValueInt(result);
         }
         else if(expressionBinary.getOperation().equals("-")) {
-            int result = ((ExpressionConstantInt) left).getValue() - ((ExpressionConstantInt) right).getValue();
-            return new ExpressionConstantInt(result);
+            int result = (left).getValue() - (right).getValue();
+            return new ValueInt(result);
         }
         else if(expressionBinary.getOperation().equals("*")) {
-            int result = ((ExpressionConstantInt) left).getValue() * ((ExpressionConstantInt) right).getValue();
-            return new ExpressionConstantInt(result);
+            int result = (left).getValue() * (right).getValue();
+            return new ValueInt(result);
         }
         else if(expressionBinary.getOperation().equals("/")) {
-            int result = ((ExpressionConstantInt) left).getValue() / ((ExpressionConstantInt) right).getValue();
-            return new ExpressionConstantInt(result);
+            int result = (left).getValue() / (right).getValue();
+            return new ValueInt(result);
         }
 
+        // TODO do not return null
         return null;
 
     }
 
     @Override
-    public Object visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt) {
-        return expressionConstantInt;
+    public ValueInt visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt) {
+        return new ValueInt(expressionConstantInt.getValue());
     }
 
     @Override
-    public Object visitExpressionUnary(ExpressionUnary expressionUnary) {
-        Expression expression = (Expression) expressionUnary.getExpression().accept(this);
+    public ValueInt visitExpressionUnary(ExpressionUnary expressionUnary) {
+        ValueInt result = expressionUnary.getExpression().accept(this);
 
         // TODO it seems like the "-" should be gotten from somewhere
         // TODO it seems weird how the int is generated
         if(expressionUnary.getOperation().equals("-")) {
-            return new ExpressionConstantInt(-Integer.parseInt(expression.toString()));
+            return new ValueInt(-result.getValue());
         }
 
-        return expression;
+        return result;
+    }
+
+    @Override
+    public ValueInt visitVarExpr(ExpressionVariable varExpr) {
+//        return store.get(varExpr.getName());
+        return null;
+    }
+
+    public void visitAssignment(StatementAssignment a) {
+//        ValueInt rhv = a.getRight().accept(this);
+//        store.put(a.getLeft(), rhv);
     }
 }

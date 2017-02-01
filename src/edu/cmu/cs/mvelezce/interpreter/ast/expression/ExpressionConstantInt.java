@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.interpreter.ast.expression;
 import edu.cmu.cs.mvelezce.interpreter.visitor.Visitor;
 
 /**
- * Created by miguelvelez on 1/31/17.
+ * Created by mvelezce on 2/1/17.
  */
 public class ExpressionConstantInt extends Expression {
     private final int value;
@@ -12,12 +12,12 @@ public class ExpressionConstantInt extends Expression {
         this.value = value;
     }
 
+    public int getValue() { return this.value; }
+
     @Override
-    public Object accept(Visitor visitor) {
+    public <T> T accept(Visitor<T> visitor) {
         return visitor.visitExpressionConstantInt(this);
     }
-
-    public int getValue() { return this.value; }
 
     @Override
     public String toString() { return String.valueOf(this.value); }

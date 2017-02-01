@@ -7,5 +7,5 @@ import edu.cmu.cs.mvelezce.interpreter.visitor.Visitor;
  */
 public abstract class Node {
 
-    public abstract Object accept(Visitor visitor);
+    public abstract <T> T accept(Visitor<T> visitor);
 }

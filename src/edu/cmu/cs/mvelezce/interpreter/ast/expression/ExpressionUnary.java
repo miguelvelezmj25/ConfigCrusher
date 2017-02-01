@@ -24,5 +24,5 @@ public class ExpressionUnary extends Expression {
     public String getOperation() { return this.operation; }
 
     @Override
-    public String toString() { return this.operation + " " + this.expression; }
+    public String toString() { return this.operation + "" + this.expression; }
 }

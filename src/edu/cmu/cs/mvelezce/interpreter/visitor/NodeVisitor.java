@@ -38,8 +38,6 @@ public class NodeVisitor implements Visitor<ValueInt> {
 
         if(expressionBinary.getOperation().equals("+")) {
             int result = left.getValue() + (right).getValue();
-
-
             return new ValueInt(result);
         }
         else if(expressionBinary.getOperation().equals("-")) {

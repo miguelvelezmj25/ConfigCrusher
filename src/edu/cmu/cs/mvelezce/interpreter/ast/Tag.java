@@ -11,5 +11,11 @@ public enum Tag {
     DIV,
     LEFT_PARENT,
     RIGHT_PARENT,
+
+    NEW_LINE,
+    EQUALS,
+    LESS_THAN,
+    GREATER_THAN,
+
     EOF
 }

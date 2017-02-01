@@ -1,19 +1,19 @@
 package edu.cmu.cs.mvelezce.interpreter.visitor;
 
 import edu.cmu.cs.mvelezce.interpreter.ast.expression.*;
-import edu.cmu.cs.mvelezce.interpreter.ast.statement.StatementAssignment;
+import edu.cmu.cs.mvelezce.interpreter.ast.statement.*;
 import edu.cmu.cs.mvelezce.interpreter.ast.value.ValueInt;
 import edu.cmu.cs.mvelezce.interpreter.parser.Parser;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by miguelvelez on 1/31/17.
  */
-public class NodeVisitor implements Visitor<ValueInt> {
+public class NodeVisitor implements Visitor<ValueInt>  {
+    private final Map<ExpressionVariable, ValueInt> store = new HashMap<>();
     private Parser parser;
-
-//    private final HashMap<String, ValueInt> store = new HashMap<>();
 //    int time;
 //    StringBuffer output;
 
@@ -78,12 +78,33 @@ public class NodeVisitor implements Visitor<ValueInt> {
 
     @Override
     public ValueInt visitVarExpr(ExpressionVariable varExpr) {
-//        return store.get(varExpr.getName());
-        return null;
+        return this.store.get(varExpr);
     }
 
-    public void visitAssignment(StatementAssignment a) {
-//        ValueInt rhv = a.getRight().accept(this);
-//        store.put(a.getLeft(), rhv);
+    @Override
+    public void visitStatementAssignment(StatementAssignment statementAssignment) {
+        ValueInt value = statementAssignment.getRight().accept(this);
+        this.store.put(statementAssignment.getVariable(), value);
     }
+
+    @Override
+    public void visitStatementBlock(StatementBlock statementBlock) {
+
+    }
+
+    @Override
+    public void visitStatementIf(StatementIf statementIf) {
+
+    }
+
+    @Override
+    public void visitStatementSleep(StatementSleep statementSleep) {
+        System.out.println(statementSleep);
+    }
+
+    @Override
+    public void visitStatementWhile(StatementWhile statementAssignment) {
+
+    }
+
 }

@@ -9,12 +9,10 @@ import edu.cmu.cs.mvelezce.interpreter.visitor.Visitor;
 public class StatementIf extends Statement {
     private Expression condition; // TODO this is a binaryop
     private Statement statementThen;
-    private Statement statementElse;
 
-    private StatementIf(Expression condition, Statement statementThen, Statement statementElse) {
+    private StatementIf(Expression condition, Statement statementThen) {
         this.condition = condition;
         this.statementThen = statementThen;
-        this.statementElse = statementElse;
     }
 
     @Override
@@ -25,6 +23,4 @@ public class StatementIf extends Statement {
     public Expression getCondition() { return this.condition; }
 
     public Statement getStatementThen() { return this.statementThen; }
-
-    public Statement getStatementElse() { return this.statementElse; }
 }

@@ -111,4 +111,13 @@ public class SimpleInterpreterTest {
         Assert.assertEquals(10, interpreter.evaluate(ast).getValue());
     }
 
+    @Test
+    public void test12() {
+        Lexer lexer = new Lexer(" a = 5 ");
+        Parser parser = new Parser(lexer);
+        Expression ast = parser.parse();
+        NodeVisitor interpreter = new NodeVisitor(parser);
+        Assert.assertEquals(5, interpreter.evaluate(ast).getValue());
+    }
+
 }

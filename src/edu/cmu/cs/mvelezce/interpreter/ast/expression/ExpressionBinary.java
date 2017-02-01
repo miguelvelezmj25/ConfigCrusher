@@ -27,4 +27,7 @@ public class ExpressionBinary extends Expression {
     public Expression getRight() { return this.right; }
 
     public String getOperation() { return this.operation; }
+
+    @Override
+    public String toString() { return this.left + " " + this.operation + " " + this.right; }
 }

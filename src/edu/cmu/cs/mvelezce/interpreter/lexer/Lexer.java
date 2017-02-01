@@ -70,7 +70,7 @@ public class Lexer {
 
     }
 
-    public int integer() {
+    public String integer() {
         String integer = "";
 
         while(StringUtils.isNumeric(this.currentCharacter)) {
@@ -78,7 +78,7 @@ public class Lexer {
             this.advance();
         }
 
-        return Integer.parseInt(integer);
+        return integer;
     }
 
     private void skipWhitespace() {

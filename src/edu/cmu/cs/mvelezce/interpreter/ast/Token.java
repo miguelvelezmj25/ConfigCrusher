@@ -5,10 +5,10 @@ package edu.cmu.cs.mvelezce.interpreter.ast;
  */
 public class Token {
 
-    private Object value;
+    private String value;
     private Tag tag;
 
-    public Token(Object value, Tag tag) {
+    public Token(String value, Tag tag) {
         this.value = value;
         this.tag = tag;
     }
@@ -17,7 +17,7 @@ public class Token {
         this(null, Tag.EOF);
     }
 
-    public Object getValue() { return this.value; }
+    public String getValue() { return this.value; }
 
     public Tag getTag() { return this.tag; }
 

@@ -18,4 +18,7 @@ public class ExpressionConstantInt extends Expression {
     }
 
     public int getValue() { return this.value; }
+
+    @Override
+    public String toString() { return String.valueOf(this.value); }
 }

@@ -6,12 +6,12 @@ import edu.cmu.cs.mvelezce.interpreter.visitor.Visitor;
  * Created by miguelvelez on 1/31/17.
  */
 public class ExpressionUnary extends Expression {
-    private Expression expression;
     private String operation;
+    private Expression expression;
 
-    public ExpressionUnary(Expression expression, String operation) {
-        this.expression = expression;
+    public ExpressionUnary(String operation, Expression expression) {
         this.operation = operation;
+        this.expression = expression;
     }
 
     @Override
@@ -22,4 +22,7 @@ public class ExpressionUnary extends Expression {
     public Expression getExpression() { return this.expression; }
 
     public String getOperation() { return this.operation; }
+
+    @Override
+    public String toString() { return this.operation + " " + this.expression; }
 }

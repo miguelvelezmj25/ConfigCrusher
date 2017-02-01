@@ -1,0 +1,7 @@
+package edu.cmu.cs.mvelezce.interpreter.ast.statement;
+
+/**
+ * Created by miguelvelez on 1/31/17.
+ */
+public class Statement {
+}

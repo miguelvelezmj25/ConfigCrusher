@@ -1,12 +1,12 @@
+package edu.cmu.cs.mvelezce.interpreter;
+
 /**
- * SimpleInterpreter class.
- *
- * @author Miguel Velez - miguelvelezmj25
- * @version 0.1.0
+ * Created by miguelvelez on 1/31/17.
  */
 public class SimpleInterpreter {
 
     public static void main(String[] args) {
         System.out.println("hi");
     }
+
 }

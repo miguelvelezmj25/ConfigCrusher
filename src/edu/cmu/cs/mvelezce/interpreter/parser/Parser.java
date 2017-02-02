@@ -6,6 +6,9 @@ import edu.cmu.cs.mvelezce.interpreter.ast.expression.*;
 import edu.cmu.cs.mvelezce.interpreter.ast.statement.*;
 import edu.cmu.cs.mvelezce.interpreter.lexer.Lexer;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by miguelvelez on 1/31/17.
  */
@@ -49,9 +52,18 @@ public class Parser {
             this.checkToken(Tag.LEFT_PARENT);
             Expression expression = this.expr();
             this.checkToken(Tag.RIGHT_PARENT);
-            Statement statement = this.stmt();
+            this.checkToken(Tag.LEFT_BRACKET);
 
-            return new StatementIf(expression, statement);
+            List<Statement> statements = new LinkedList<>();
+            statements.add(this.stmt());
+
+            while(this.currentToken.getTag() != Tag.RIGHT_BRACKET) {
+                statements.add(this.stmt());
+            }
+
+            this.checkToken(Tag.RIGHT_BRACKET);
+
+            return new StatementIf(expression, new StatementBlock(statements));
         }
 
         if(this.currentToken.getTag() == Tag.SLEEP) {
@@ -68,9 +80,18 @@ public class Parser {
             this.checkToken(Tag.LEFT_PARENT);
             Expression expression = this.expr();
             this.checkToken(Tag.RIGHT_PARENT);
-            Statement statement = this.stmt();
+            this.checkToken(Tag.LEFT_BRACKET);
 
-            return new StatementWhile(expression, statement);
+            List<Statement> statements = new LinkedList<>();
+            statements.add(this.stmt());
+
+            while(this.currentToken.getTag() != Tag.RIGHT_BRACKET) {
+                statements.add(this.stmt());
+            }
+
+            this.checkToken(Tag.RIGHT_BRACKET);
+
+            return new StatementWhile(expression, new StatementBlock(statements));
         }
 
         throw new IllegalArgumentException("Error while parsing input");

@@ -23,10 +23,12 @@ factor  : (PLUS | MINUS) factor
 program : (stmt)+
 
 stmt : variable EQUAL expr
-     | IF LEFT_PARENT expr RIGHT_PAREN stmt
+     | IF LEFT_PARENT expr RIGHT_PAREN { stmt_block }
      | stmt SEMI stmt
      | WHILE LEFT_PARENT expr RIGHT_PARENT stmt
      | SLEEP LEFT_PARENT expr RIGHT_PARENT
+
+stmt_block : (stmt)+
 
 expr : variable
      | INTEGER

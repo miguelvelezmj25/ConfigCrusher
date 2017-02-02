@@ -1,6 +1,8 @@
 z=a
-if(z)
+if(z) {
     sleep(2)
     z=0
-if(z)
+}
+if(z) {
     sleep(2)
+}

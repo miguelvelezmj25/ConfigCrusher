@@ -20,5 +20,7 @@ public enum Tag {
     WHILE,
     IF,
     ID,
+    LEFT_BRACKET,
+    RIGHT_BRACKET,
     EOF
 }

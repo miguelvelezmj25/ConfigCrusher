@@ -1,5 +1,6 @@
 z=a
-if(z)
+if(z) {
     sleep(2)
     z=b
+}
 sleep(2)

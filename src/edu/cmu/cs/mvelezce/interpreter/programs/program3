@@ -1,0 +1,4 @@
+z=a
+if(z)
+    sleep(2)
+sleep(3)

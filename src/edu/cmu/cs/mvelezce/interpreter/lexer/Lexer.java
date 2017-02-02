@@ -135,7 +135,7 @@ public class Lexer {
         }
     }
 
-    private String peek() {
+    public String peek() {
         int peekPosition = this.position + 1;
 
         if(peekPosition >= this.input.length()) {

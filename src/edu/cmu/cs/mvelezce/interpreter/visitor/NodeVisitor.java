@@ -23,9 +23,10 @@ public class NodeVisitor implements Visitor<ValueInt>  {
     }
 
     public Object evaluate() {
-        // TODO this should return a program
-        Expression ast = this.parser.parse();
-        return ast.accept(this);
+        return null;
+//        // TODO this should return a program
+//        Expression ast = this.parser.parse();
+//        return ast.accept(this);
     }
 
     public ValueInt evaluate(Expression ast) {

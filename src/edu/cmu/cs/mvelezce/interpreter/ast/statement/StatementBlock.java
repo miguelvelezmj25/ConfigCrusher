@@ -8,11 +8,13 @@ import java.util.List;
  * Created by mvelezce on 2/1/17.
  */
 public class StatementBlock extends Statement {
-    private List<Statement> statements;
+    private Statement statement1;
+    private Statement statement2;
 
     // TODO List<? extends Statement> ?
-    public StatementBlock(List<Statement> statements) {
-        this.statements = statements;
+    public StatementBlock(Statement statement1, Statement statement2) {
+        this.statement1 = statement1;
+        this.statement2 = statement2;
     }
 
     @Override
@@ -22,5 +24,6 @@ public class StatementBlock extends Statement {
         return null;
     }
 
-    public List<Statement> getStatements() { return this.statements; }
+    @Override
+    public String toString() { return this.statement1 + "; " + this.statement2; }
 }

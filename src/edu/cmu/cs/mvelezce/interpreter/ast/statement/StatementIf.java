@@ -10,7 +10,7 @@ public class StatementIf extends Statement {
     private Expression condition; // TODO this is a binaryop
     private Statement statementThen;
 
-    private StatementIf(Expression condition, Statement statementThen) {
+    public StatementIf(Expression condition, Statement statementThen) {
         this.condition = condition;
         this.statementThen = statementThen;
     }
@@ -22,7 +22,9 @@ public class StatementIf extends Statement {
         return null;
     }
 
-    public Expression getCondition() { return this.condition; }
-
-    public Statement getStatementThen() { return this.statementThen; }
+    @Override
+    public String toString() {
+        return "if(" + this.condition +")\n    "
+            + this.statementThen;
+    }
 }

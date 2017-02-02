@@ -30,4 +30,7 @@ public class StatementAssignment extends Statement {
         visitor.visitStatementAssignment(this);
         return null;
     }
+
+    @Override
+    public String toString() { return this.variable + this.operation + this.right; }
 }

@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.interpreter.ast.Token;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
+import java.util.IllegalFormatException;
 import java.util.Map;
 
 /**
@@ -166,7 +167,15 @@ public class Lexer {
             return this.reservedWords.get(result);
         }
 
-        return new Token(result, Tag.ID);
+        if(StringUtils.isAllLowerCase(result)) {
+            return new Token(result, Tag.VAR);
+        }
+
+        if(StringUtils.isAllUpperCase(result)) {
+            return new Token(result, Tag.CONFIG);
+        }
+
+        throw new IllegalArgumentException(this.currentCharacter + " is not a valid id");
     }
 
 }

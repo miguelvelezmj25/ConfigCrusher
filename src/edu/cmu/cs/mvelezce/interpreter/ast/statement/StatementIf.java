@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  * Created by mvelezce on 2/1/17.
  */
 public class StatementIf extends Statement {
-    private Expression condition; // TODO this is a binaryop
+    private Expression condition;
     private Statement statementThen;
 
     public StatementIf(Expression condition, Statement statementThen) {
@@ -20,6 +20,10 @@ public class StatementIf extends Statement {
     public <T> void accept(Visitor<T> visitor) {
         visitor.visitStatementIf(this);
     }
+
+    public Expression getCondition() { return this.condition; }
+
+    public Statement getStatementThen() { return this.statementThen; }
 
     @Override
     public String toString() {

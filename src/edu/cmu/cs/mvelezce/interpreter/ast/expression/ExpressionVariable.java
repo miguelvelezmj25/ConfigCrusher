@@ -14,7 +14,7 @@ public class ExpressionVariable extends Expression {
 
     @Override
     public <T> T accept(Visitor<T> visitor) {
-        return visitor.visitVarExpr(this);
+        return visitor.visitExpressionVariable(this);
     }
 
     public String getName() { return this.name; }

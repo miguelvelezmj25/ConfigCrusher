@@ -1,5 +1,6 @@
-z=a
-if(z) {
+a=0
+C=a
+if(C) {
     sleep(2)
 }
 sleep(3)

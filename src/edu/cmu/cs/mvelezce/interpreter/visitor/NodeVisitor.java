@@ -6,13 +6,14 @@ import edu.cmu.cs.mvelezce.interpreter.ast.value.ValueInt;
 import edu.cmu.cs.mvelezce.interpreter.parser.Parser;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by miguelvelez on 1/31/17.
  */
 public class NodeVisitor implements Visitor<ValueInt>  {
-    private final Map<ExpressionVariable, ValueInt> store;
+    private final Map<String, ValueInt> store;
     private Parser parser;
 //    int time;
 //    StringBuffer output;
@@ -29,8 +30,9 @@ public class NodeVisitor implements Visitor<ValueInt>  {
 //        return ast.accept(this);
     }
 
-    public ValueInt evaluate(Expression ast) {
-        return ast.accept(this);
+    public Map<String, ValueInt> evaluate(Statement ast) {
+        ast.accept(this);
+        return this.store;
     }
 
     @Override
@@ -61,6 +63,11 @@ public class NodeVisitor implements Visitor<ValueInt>  {
     }
 
     @Override
+    public ValueInt visitExpressionConfiguration(ExpressionConfiguration expressionConfiguration) {
+        return this.store.get(expressionConfiguration.getName());
+    }
+
+    @Override
     public ValueInt visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt) {
         return new ValueInt(expressionConstantInt.getValue());
     }
@@ -79,34 +86,43 @@ public class NodeVisitor implements Visitor<ValueInt>  {
     }
 
     @Override
-    public ValueInt visitVarExpr(ExpressionVariable varExpr) {
-        return this.store.get(varExpr);
+    public ValueInt visitExpressionVariable(ExpressionVariable expressionVariable) {
+        return this.store.get(expressionVariable.getName());
     }
 
     @Override
     public void visitStatementAssignment(StatementAssignment statementAssignment) {
         ValueInt value = statementAssignment.getRight().accept(this);
-        this.store.put(statementAssignment.getVariable(), value);
+        this.store.put(statementAssignment.getVariable().getName(), value);
     }
 
     @Override
     public void visitStatementBlock(StatementBlock statementBlock) {
+        List<Statement> statements = statementBlock.getStatements();
 
+        for(Statement statement : statements) {
+            statement.accept(this);
+        }
     }
 
     @Override
     public void visitStatementIf(StatementIf statementIf) {
+        ValueInt condition = statementIf.getCondition().accept(this);
 
+        if(condition.getValue() > 0) {
+            statementIf.getStatementThen().accept(this);
+        }
     }
 
     @Override
     public void visitStatementSleep(StatementSleep statementSleep) {
-        System.out.println(statementSleep);
+        statementSleep.getTime().accept(this);
     }
 
     @Override
     public void visitStatementWhile(StatementWhile statementAssignment) {
-
+        statementAssignment.getCondition().accept(this);
+        statementAssignment.getBody().accept(this);
     }
 
 }

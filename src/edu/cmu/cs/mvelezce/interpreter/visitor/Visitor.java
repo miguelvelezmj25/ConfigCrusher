@@ -1,9 +1,6 @@
 package edu.cmu.cs.mvelezce.interpreter.visitor;
 
-import edu.cmu.cs.mvelezce.interpreter.ast.expression.ExpressionBinary;
-import edu.cmu.cs.mvelezce.interpreter.ast.expression.ExpressionConstantInt;
-import edu.cmu.cs.mvelezce.interpreter.ast.expression.ExpressionUnary;
-import edu.cmu.cs.mvelezce.interpreter.ast.expression.ExpressionVariable;
+import edu.cmu.cs.mvelezce.interpreter.ast.expression.*;
 import edu.cmu.cs.mvelezce.interpreter.ast.statement.*;
 
 /**
@@ -12,9 +9,10 @@ import edu.cmu.cs.mvelezce.interpreter.ast.statement.*;
 public interface Visitor<V> {
 
     public V visitExpressionBinary(ExpressionBinary expressionBinary);
+    public V visitExpressionConfiguration(ExpressionConfiguration expressionConfiguration);
     public V visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt);
     public V visitExpressionUnary(ExpressionUnary expressionUnary);
-    public V visitVarExpr(ExpressionVariable varExpr);
+    public V visitExpressionVariable(ExpressionVariable varExpr);
     // TODO
     public void visitStatementAssignment(StatementAssignment statementAssignment);
     public void visitStatementBlock(StatementBlock statementBlock);

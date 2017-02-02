@@ -19,7 +19,8 @@ public enum Tag {
     SLEEP,
     WHILE,
     IF,
-    ID,
+    VAR,
+    CONFIG,
     LEFT_BRACKET,
     RIGHT_BRACKET,
     EOF

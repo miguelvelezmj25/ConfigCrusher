@@ -22,6 +22,10 @@ public class StatementWhile extends Statement {
         visitor.visitStatementWhile(this);
     }
 
+    public Expression getCondition() { return this.condition; }
+
+    public Statement getBody() { return this.body; }
+
     @Override
     public String toString() {
         String result = "while(" + this.condition +") {\n";

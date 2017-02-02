@@ -20,6 +20,8 @@ public class StatementBlock extends Statement {
         visitor.visitStatementBlock(this);
     }
 
+    public List<Statement> getStatements() { return this.statements; }
+
     @Override
     public String toString() {
         String result = "";

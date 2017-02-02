@@ -22,19 +22,21 @@ factor  : (PLUS | MINUS) factor
 
 program : (stmt)+
 
-stmt : variable EQUAL expr
+stmt : (variable | CONFIG) EQUAL expr
      | IF LEFT_PARENT expr RIGHT_PAREN { stmt_block }
-     | stmt SEMI stmt
      | WHILE LEFT_PARENT expr RIGHT_PARENT stmt
      | SLEEP LEFT_PARENT expr RIGHT_PARENT
 
 stmt_block : (stmt)+
 
-expr : variable
+expr : expr ((PLUS | MINUS | MULT | DIV) expr)+
+
+term : variable
      | INTEGER
      | CONFIG
-     |
+     | arith
 
- variable : ID
 
- config : ID
+ variable : ('a'..'z')+
+
+ CONFIG : ('A'..'Z')+

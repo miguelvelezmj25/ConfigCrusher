@@ -21,30 +21,38 @@ public class Parser {
         this.currentToken = this.lexer.getNextToken();
     }
 
-//    public Expression parse() { return this.expr(); }
-
-    public String parse() {
-        String program = this.stmt() + "\n";
+    public Statement parse() {
+        List<Statement> program = new LinkedList<>();
+        program.add(this.stmt());
 
         while(this.currentToken.getTag() != Tag.EOF) {
-//            this.checkToken(Tag.SEMI);
-            program += this.stmt() + "\n";
+            program.add(this.stmt());
         }
 
-        return program;
+        return new StatementBlock(program);
     }
 
     private Statement stmt() {
-        if(this.currentToken.getTag() == Tag.ID) {
+        if(this.currentToken.getTag() == Tag.VAR || this.currentToken.getTag() == Tag.CONFIG) {
             Token token = this.currentToken;
-            this.checkToken(Tag.ID);
-            ExpressionVariable variable = new ExpressionVariable(token.getValue());
+
+            ExpressionVariable variable = null;
+
+            if(this.currentToken.getTag() == Tag.VAR) {
+                this.checkToken(Tag.VAR);
+                variable = new ExpressionVariable(token.getValue());
+
+            }
+            else {
+                this.checkToken(Tag.CONFIG);
+                variable = new ExpressionConfiguration(token.getValue());
+            }
 
             token = this.currentToken;
             this.checkToken(Tag.EQUAL);
             String operation = token.getValue();
 
-           return new StatementAssignment(variable, operation, this.expr());
+            return new StatementAssignment(variable, operation, this.expr());
         }
 
         if(this.currentToken.getTag() == Tag.IF) {
@@ -95,19 +103,13 @@ public class Parser {
         }
 
         throw new IllegalArgumentException("Error while parsing input");
-
-//        Statement statement1 = this.stmt();
-//        this.checkToken(Tag.SEMI);
-//        Statement statement2 = this.stmt();
-//
-//        return new StatementBlock(statement1, statement2);
     }
 
-    private Expression expr() {
+    private Expression term() {
         Token token = this.currentToken;
 
-        if(token.getTag() == Tag.ID) {
-            this.checkToken(Tag.ID);
+        if(token.getTag() == Tag.VAR) {
+            this.checkToken(Tag.VAR);
             return new ExpressionVariable(token.getValue());
         }
 
@@ -116,7 +118,36 @@ public class Parser {
             return new ExpressionConstantInt(Integer.parseInt(token.getValue()));
         }
 
+        if(token.getTag() == Tag.CONFIG) {
+            this.checkToken(Tag.CONFIG);
+            return new ExpressionConfiguration(token.getValue());
+        }
+
         throw new IllegalArgumentException("Error while parsing input");
+    }
+
+    private Expression expr() {
+        Expression expression = this.term();
+
+        Token token = this.currentToken;
+
+        if(token.getTag() == Tag.PLUS) {
+            this.checkToken(Tag.PLUS);
+        }
+        else if(token.getTag() == Tag.MINUS) {
+            this.checkToken(Tag.MINUS);
+        }
+        else if(token.getTag() == Tag.MULT) {
+            this.checkToken(Tag.MULT);
+        }
+        else if(token.getTag() == Tag.DIV) {
+            this.checkToken(Tag.DIV);
+        }
+        else {
+            return expression;
+        }
+
+        return new ExpressionBinary(expression, token.getValue(), this.term());
     }
 
 //    private Expression expr() {

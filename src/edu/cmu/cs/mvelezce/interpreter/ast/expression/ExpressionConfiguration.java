@@ -5,18 +5,13 @@ import edu.cmu.cs.mvelezce.interpreter.visitor.Visitor;
 /**
  * Created by mvelezce on 2/1/17.
  */
-public class ExpressionConfiguration extends Expression {
-    private final int value;
-
-    // TODO should be final?
-    public ExpressionConfiguration(int value) {
-        this.value = value;
+public class ExpressionConfiguration extends ExpressionVariable {
+    public ExpressionConfiguration(String name) {
+        super(name);
     }
 
     @Override
     public <T> T accept(Visitor<T> visitor) {
-        return null;// TODO
+        return visitor.visitExpressionConfiguration(this);
     }
-
-    public int getValue() { return this.value; }
 }

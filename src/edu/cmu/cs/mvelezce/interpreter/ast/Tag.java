@@ -23,5 +23,6 @@ public enum Tag {
     CONFIG,
     LEFT_BRACKET,
     RIGHT_BRACKET,
+    NOT,
     EOF
 }

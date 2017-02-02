@@ -34,7 +34,7 @@ expr : expr ((PLUS | MINUS | MULT | DIV) expr)+
 term : variable
      | INTEGER
      | CONFIG
-     | arith
+     | NOT term
 
 
  variable : ('a'..'z')+

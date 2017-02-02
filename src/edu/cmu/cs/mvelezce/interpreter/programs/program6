@@ -1,0 +1,9 @@
+a=1
+C=a
+if(C) {
+    sleep(2)
+    C=0
+}
+if(!C) {
+    sleep(2)
+}

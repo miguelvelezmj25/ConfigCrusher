@@ -78,8 +78,12 @@ public class NodeVisitor implements Visitor<ValueInt>  {
 
         // TODO it seems like the "-" should be gotten from somewhere
         // TODO it seems weird how the int is generated
-        if(expressionUnary.getOperation().equals("-")) {
-            return new ValueInt(-result.getValue());
+        // Negates ints
+        if(expressionUnary.getOperation().equals("!")) {
+            if(result.getValue() == 0) {
+                return new ValueInt(1);
+            }
+            return new ValueInt(0);
         }
 
         return result;
@@ -116,7 +120,7 @@ public class NodeVisitor implements Visitor<ValueInt>  {
 
     @Override
     public void visitStatementSleep(StatementSleep statementSleep) {
-        statementSleep.getTime().accept(this);
+        ValueInt time = statementSleep.getTime().accept(this);
     }
 
     @Override

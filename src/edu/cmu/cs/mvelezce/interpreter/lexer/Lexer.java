@@ -110,6 +110,11 @@ public class Lexer {
                 return new Token("}", Tag.RIGHT_BRACKET);
             }
 
+            if(this.currentCharacter.equals("!")) {
+                this.advance();
+                return new Token("!", Tag.NOT);
+            }
+
             throw new IllegalArgumentException(this.currentCharacter + " is not a valid character");
 
         }

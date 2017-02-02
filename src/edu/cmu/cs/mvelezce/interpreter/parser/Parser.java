@@ -108,6 +108,11 @@ public class Parser {
     private Expression term() {
         Token token = this.currentToken;
 
+        if (this.currentToken.getTag() == Tag.NOT) {
+            this.checkToken(Tag.NOT);
+            return new ExpressionUnary(token.getValue(), this.term());
+        }
+
         if(token.getTag() == Tag.VAR) {
             this.checkToken(Tag.VAR);
             return new ExpressionVariable(token.getValue());

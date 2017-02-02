@@ -16,8 +16,10 @@ public class StatementIf extends Statement {
     }
 
     @Override
-    public Object accept(Visitor visitor) {
-        return null; // TODO
+    public <T> T accept(Visitor<T> visitor) {
+        // TODO
+        visitor.visitStatementIf(this);
+        return null;
     }
 
     public Expression getCondition() { return this.condition; }

@@ -12,12 +12,13 @@ import java.util.Map;
  * Created by miguelvelez on 1/31/17.
  */
 public class NodeVisitor implements Visitor<ValueInt>  {
-    private final Map<ExpressionVariable, ValueInt> store = new HashMap<>();
+    private final Map<ExpressionVariable, ValueInt> store;
     private Parser parser;
 //    int time;
 //    StringBuffer output;
 
     public NodeVisitor(Parser parser) {
+        this.store = new HashMap<>();
         this.parser = parser;
     }
 

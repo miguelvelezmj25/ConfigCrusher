@@ -10,9 +10,10 @@ public class StatementWhile extends Statement {
     private Expression condition;
     private Statement body;
 
-
     @Override
     public <T> T accept(Visitor<T> visitor) {
+        // TODO
+        visitor.visitStatementWhile(this);
         return null;
     }
 }

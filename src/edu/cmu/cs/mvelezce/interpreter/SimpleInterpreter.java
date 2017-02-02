@@ -12,11 +12,16 @@ import edu.cmu.cs.mvelezce.interpreter.visitor.NodeVisitor;
 public class SimpleInterpreter {
 
     public static void main(String[] args) {
-        Lexer lexer = new Lexer(" 3  + 5 *   8 - 12   ");
-        Parser parser = new Parser(lexer);
-        Expression ast = parser.parse();
-        NodeVisitor interpreter = new NodeVisitor(parser);
-        System.out.println("31 == " +interpreter.evaluate(ast));
+        Lexer lexer = new Lexer("a=2;\nb=a");
+        System.out.println(lexer.getNextToken());
+        System.out.println(lexer.getNextToken());
+        System.out.println(lexer.getNextToken());
+        System.out.println(lexer.getNextToken());
+        System.out.println(lexer.getNextToken());
+        System.out.println(lexer.getNextToken());
+        System.out.println(lexer.getNextToken());
+        System.out.println(lexer.getNextToken());
+
     }
 
 }

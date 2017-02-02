@@ -8,8 +8,10 @@ import edu.cmu.cs.mvelezce.interpreter.visitor.NodeVisitor;
 import java.io.File;
 import java.util.Scanner;
 
-/**fix pont loop
+/**fix point loop
  * worklist algorithm from cfg
+ * Transfer function is to check how abstraction is changed from statement to statement
+ * Join function is to join abstractions after they have branched out
  * Created by miguelvelez on 1/31/17.
  */
 public class SimpleInterpreter {

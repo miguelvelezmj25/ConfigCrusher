@@ -14,10 +14,8 @@ public class StatementSleep extends Statement {
     }
 
     @Override
-    public <T> T accept(Visitor<T> visitor) {
-        // TODO
+    public <T> void accept(Visitor<T> visitor) {
         visitor.visitStatementSleep(this);
-        return null;
     }
 
     public Expression getTime() { return this.time; }

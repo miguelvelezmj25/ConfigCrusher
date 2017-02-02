@@ -16,10 +16,8 @@ public class StatementBlock extends Statement {
     }
 
     @Override
-    public <T> T accept(Visitor<T> visitor) {
-        // TODO
+    public <T> void accept(Visitor<T> visitor) {
         visitor.visitStatementBlock(this);
-        return null;
     }
 
     @Override

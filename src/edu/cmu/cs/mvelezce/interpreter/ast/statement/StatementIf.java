@@ -17,10 +17,8 @@ public class StatementIf extends Statement {
     }
 
     @Override
-    public <T> T accept(Visitor<T> visitor) {
-        // TODO
+    public <T> void accept(Visitor<T> visitor) {
         visitor.visitStatementIf(this);
-        return null;
     }
 
     @Override

@@ -25,12 +25,10 @@ public class StatementAssignment extends Statement {
     public Expression getRight() { return this.right; }
 
     @Override
-    public <T> T accept(Visitor<T> visitor) {
-        // TODO
-        visitor.visitStatementAssignment(this);
-        return null;
-    }
+    public String toString() { return this.variable + this.operation + this.right; }
 
     @Override
-    public String toString() { return this.variable + this.operation + this.right; }
+    public <T> void accept(Visitor<T> visitor) {
+        visitor.visitStatementAssignment(this);
+    }
 }

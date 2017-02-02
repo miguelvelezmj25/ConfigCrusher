@@ -18,10 +18,8 @@ public class StatementWhile extends Statement {
 
     // TODO automatic increment
     @Override
-    public <T> T accept(Visitor<T> visitor) {
-        // TODO
+    public <T> void accept(Visitor<T> visitor) {
         visitor.visitStatementWhile(this);
-        return null;
     }
 
     @Override

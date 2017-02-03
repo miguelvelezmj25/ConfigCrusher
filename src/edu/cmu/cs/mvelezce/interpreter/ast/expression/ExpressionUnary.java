@@ -24,5 +24,23 @@ public class ExpressionUnary extends Expression {
     public String getOperation() { return this.operation; }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ExpressionUnary that = (ExpressionUnary) o;
+
+        if (!operation.equals(that.operation)) return false;
+        return expression.equals(that.expression);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = operation.hashCode();
+        result = 31 * result + expression.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() { return this.operation + "" + this.expression; }
 }

@@ -25,10 +25,31 @@ public class StatementAssignment extends Statement {
     public Expression getRight() { return this.right; }
 
     @Override
-    public String toString() { return this.variable + this.operation + this.right; }
-
-    @Override
     public <T> void accept(Visitor<T> visitor) {
         visitor.visitStatementAssignment(this);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StatementAssignment that = (StatementAssignment) o;
+
+        if (!variable.equals(that.variable)) return false;
+        if (!operation.equals(that.operation)) return false;
+        return right.equals(that.right);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = variable.hashCode();
+        result = 31 * result + operation.hashCode();
+        result = 31 * result + right.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() { return this.variable + this.operation + this.right; }
+
 }

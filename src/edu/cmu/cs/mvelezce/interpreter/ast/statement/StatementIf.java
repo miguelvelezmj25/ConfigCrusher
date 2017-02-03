@@ -26,6 +26,24 @@ public class StatementIf extends Statement {
     public Statement getStatementThen() { return this.statementThen; }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StatementIf that = (StatementIf) o;
+
+        if (!condition.equals(that.condition)) return false;
+        return statementThen.equals(that.statementThen);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = condition.hashCode();
+        result = 31 * result + statementThen.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         String result = "if(" + this.condition +") {\n";
         String[] statements = StringUtils.split(this.statementThen.toString(), '\n');

@@ -29,6 +29,26 @@ public class ExpressionBinary extends Expression {
     public String getOperation() { return this.operation; }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ExpressionBinary that = (ExpressionBinary) o;
+
+        if (!left.equals(that.left)) return false;
+        if (!operation.equals(that.operation)) return false;
+        return right.equals(that.right);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = left.hashCode();
+        result = 31 * result + operation.hashCode();
+        result = 31 * result + right.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() { return this.left + " " + this.operation + " " + this.right; }
 
 }

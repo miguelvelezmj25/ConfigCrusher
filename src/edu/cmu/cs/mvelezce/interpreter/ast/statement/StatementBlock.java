@@ -23,6 +23,21 @@ public class StatementBlock extends Statement {
     public List<Statement> getStatements() { return this.statements; }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StatementBlock that = (StatementBlock) o;
+
+        return statements.equals(that.statements);
+    }
+
+    @Override
+    public int hashCode() {
+        return statements.hashCode();
+    }
+
+    @Override
     public String toString() {
         String result = "";
 

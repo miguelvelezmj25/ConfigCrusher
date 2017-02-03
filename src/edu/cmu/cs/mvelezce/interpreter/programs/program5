@@ -4,6 +4,6 @@ if(C) {
     sleep(2)
     C=0
 }
-if(C) {
+if(!C) {
     sleep(2)
 }

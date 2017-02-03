@@ -1,9 +1,11 @@
 a=1
 C=a
+D=0
 if(C) {
-    sleep(2)
-    C=0
+    sleep(1)
+    if(!D) {
+        sleep(2)
+    }
+    sleep(3)
 }
-if(!C) {
-    sleep(2)
-}
+

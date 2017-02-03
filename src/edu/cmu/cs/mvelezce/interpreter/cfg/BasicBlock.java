@@ -12,15 +12,11 @@ import java.util.List;
 public class BasicBlock {
 
     private String id;
-    private List<BasicBlock> predecessors;
-    private List<BasicBlock> successors;
     private Statement statement;
     private Expression expression;
 
     public BasicBlock(String id, Statement statement, Expression expression) {
         this.id = id;
-        this.predecessors = new ArrayList<>();
-        this.successors = new ArrayList<>();
         this.statement = statement;
         this.expression = expression;
 
@@ -29,11 +25,21 @@ public class BasicBlock {
         }
     }
 
+    public BasicBlock(String id, Statement statement) {
+        this(id, statement, null);
+    }
+
+    public BasicBlock(String id, Expression expression) {
+        this(id, null, expression);
+    }
+
+    public boolean isSpecial() { return this.statement == null && this.expression == null; }
+
+    public boolean isStatement() { return this.statement != null && this.expression == null; }
+
+    public boolean isExpression() { return this.statement == null && this.expression != null; }
+
     public String getId() { return this.id; }
-
-    public List<BasicBlock> getPredecessors() { return this.predecessors; }
-
-    public List<BasicBlock> getSuccessors() { return this.successors; }
 
     public Statement getStatement() { return this.statement; }
 
@@ -47,19 +53,41 @@ public class BasicBlock {
         BasicBlock that = (BasicBlock) o;
 
         if (!id.equals(that.id)) return false;
-        if (predecessors != null ? !predecessors.equals(that.predecessors) : that.predecessors != null) return false;
-        if (successors != null ? !successors.equals(that.successors) : that.successors != null) return false;
-        if (statement != null ? !statement.equals(that.statement) : that.statement != null) return false;
+
+        boolean crap;
+
+        if (statement != null) {
+            crap = !statement.equals(that.statement);
+        }
+        else {
+            crap = that.statement != null;
+        }
+
+        if(crap) {
+            return false;
+        }
+
         return expression != null ? expression.equals(that.expression) : that.expression == null;
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + (predecessors != null ? predecessors.hashCode() : 0);
-        result = 31 * result + (successors != null ? successors.hashCode() : 0);
         result = 31 * result + (statement != null ? statement.hashCode() : 0);
         result = 31 * result + (expression != null ? expression.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        if(this.statement != null) {
+            return this.statement.toString();
+        }
+
+        if(this.expression != null) {
+            return this.expression.toString();
+        }
+
+        return this.id;
     }
 }

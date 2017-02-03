@@ -14,13 +14,11 @@ import java.util.Map;
  */
 public class NodeVisitor implements Visitor<ValueInt>  {
     private final Map<String, ValueInt> store;
-    private Parser parser;
     private int sleepTime;
 //    StringBuffer output;
 
     public NodeVisitor(Parser parser) {
         this.store = new HashMap<>();
-        this.parser = parser;
         this.sleepTime = 0;
     }
 
@@ -132,4 +130,7 @@ public class NodeVisitor implements Visitor<ValueInt>  {
         statementAssignment.getBody().accept(this);
     }
 
+    public Map<String, ValueInt> getStore() { return this.store; }
+
+    public int getSleepTime() { return this.sleepTime; }
 }

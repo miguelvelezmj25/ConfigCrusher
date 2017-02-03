@@ -66,8 +66,7 @@ public class CFGVisitor implements Visitor<ValueInt> {
 
     @Override
     public void visitStatementAssignment(StatementAssignment statementAssignment) {
-        BasicBlock statement = new BasicBlock(this.steps++ + "| " + statementAssignment.toString(),
-                statementAssignment);
+        BasicBlock statement = new BasicBlock(this.steps++ + "| " + statementAssignment, statementAssignment);
 //        this.cfg.addBasicBlock(statement);
         this.cfg.addEdge(this.currentBasicBlock, statement);
         this.checkBranching(statement);
@@ -76,7 +75,7 @@ public class CFGVisitor implements Visitor<ValueInt> {
 
     @Override
     public void visitStatementIf(StatementIf statementIf) {
-        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementIf.getCondition().toString(),
+        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementIf.getCondition(),
                 statementIf.getCondition());
 //        this.cfg.addBasicBlock(expression);
         this.cfg.addEdge(this.currentBasicBlock, expression);
@@ -91,7 +90,7 @@ public class CFGVisitor implements Visitor<ValueInt> {
 
     @Override
     public void visitStatementSleep(StatementSleep statementSleep) {
-        BasicBlock statement = new BasicBlock(this.steps++ + "| " + statementSleep.toString(), statementSleep);
+        BasicBlock statement = new BasicBlock(this.steps++ + "| " + statementSleep, statementSleep);
 //        this.cfg.addBasicBlock(statement);
         this.cfg.addEdge(this.currentBasicBlock, statement);
         this.checkBranching(statement);
@@ -101,7 +100,7 @@ public class CFGVisitor implements Visitor<ValueInt> {
 
     @Override
     public void visitStatementWhile(StatementWhile statementAssignment) {
-        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementAssignment.getCondition().toString(),
+        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementAssignment.getCondition(),
             statementAssignment.getCondition());
 //        this.cfg.addBasicBlock(expression);
         this.cfg.addEdge(this.currentBasicBlock, expression);

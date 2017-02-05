@@ -50,20 +50,7 @@ public class BasicBlock {
         BasicBlock that = (BasicBlock) o;
 
         if (!id.equals(that.id)) return false;
-
-        boolean crap;
-
-        if (statement != null) {
-            crap = !statement.equals(that.statement);
-        }
-        else {
-            crap = that.statement != null;
-        }
-
-        if(crap) {
-            return false;
-        }
-
+        if (statement != null ? !statement.equals(that.statement) : that.statement != null) return false;
         return expression != null ? expression.equals(that.expression) : that.expression == null;
     }
 

@@ -13,7 +13,6 @@ public interface Visitor<V> {
     public V visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt);
     public V visitExpressionUnary(ExpressionUnary expressionUnary);
     public V visitExpressionVariable(ExpressionVariable varExpr);
-    // TODO
     public void visitStatementAssignment(StatementAssignment statementAssignment);
     public void visitStatementBlock(StatementBlock statementBlock);
     public void visitStatementIf(StatementIf statementIf);

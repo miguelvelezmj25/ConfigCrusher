@@ -1,5 +1,7 @@
-package edu.cmu.cs.mvelezce.analysis.interpreter;
+package edu.cmu.cs.mvelezce.analysis.visitor;
 
+import edu.cmu.cs.mvelezce.analysis.interpreter.SimpleInterpreter;
+import edu.cmu.cs.mvelezce.analysis.visitor.NodeVisitor;
 import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.language.ast.value.ValueInt;
 import edu.cmu.cs.mvelezce.language.lexer.Lexer;

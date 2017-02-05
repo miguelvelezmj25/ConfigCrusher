@@ -1,6 +1,9 @@
-package edu.cmu.cs.mvelezce.analysis.cfg;
+package edu.cmu.cs.mvelezce.analysis.visitor;
 
+import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
+import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.interpreter.SimpleInterpreter;
+import edu.cmu.cs.mvelezce.analysis.visitor.CFGVisitor;
 import edu.cmu.cs.mvelezce.language.ast.expression.*;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
 import edu.cmu.cs.mvelezce.language.lexer.Lexer;
@@ -317,4 +320,5 @@ public class CFGVisitorTest {
 
         Assert.assertEquals(cfg, builder.buildCFG(ast));
     }
+
 }

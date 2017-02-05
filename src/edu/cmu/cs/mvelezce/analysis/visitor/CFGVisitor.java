@@ -1,5 +1,7 @@
-package edu.cmu.cs.mvelezce.analysis.cfg;
+package edu.cmu.cs.mvelezce.analysis.visitor;
 
+import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
+import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.language.ast.expression.*;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
 import edu.cmu.cs.mvelezce.language.ast.value.ValueInt;
@@ -12,7 +14,7 @@ import java.util.Stack;
 /**
  * Created by miguelvelez on 2/2/17.
  */
-public class CFGVisitor implements Visitor<ValueInt> {
+public class CFGVisitor implements Visitor {
     private int steps;
     private CFG cfg;
     private BasicBlock currentBasicBlock;
@@ -35,28 +37,6 @@ public class CFGVisitor implements Visitor<ValueInt> {
         return this.cfg;
     }
 
-    @Override
-    public ValueInt visitExpressionBinary(ExpressionBinary expressionBinary) { return null; }
-
-    @Override
-    public ValueInt visitExpressionConfiguration(ExpressionConfiguration expressionConfiguration) {
-        return null;
-    }
-
-    @Override
-    public ValueInt visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt) {
-        return null;
-    }
-
-    @Override
-    public ValueInt visitExpressionUnary(ExpressionUnary expressionUnary) {
-        return null;
-    }
-
-    @Override
-    public ValueInt visitExpressionVariable(ExpressionVariable varExpr) {
-        return null;
-    }
 
     @Override
     public void visitStatementBlock(StatementBlock statementBlock) {
@@ -65,6 +45,31 @@ public class CFGVisitor implements Visitor<ValueInt> {
         for(Statement statement : statements) {
             statement.accept(this);
         }
+    }
+
+    @Override
+    public Object visitExpressionBinary(ExpressionBinary expressionBinary) {
+        return null;
+    }
+
+    @Override
+    public Object visitExpressionConfiguration(ExpressionConfiguration expressionConfiguration) {
+        return null;
+    }
+
+    @Override
+    public Object visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt) {
+        return null;
+    }
+
+    @Override
+    public Object visitExpressionUnary(ExpressionUnary expressionUnary) {
+        return null;
+    }
+
+    @Override
+    public Object visitExpressionVariable(ExpressionVariable varExpr) {
+        return null;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class CFGVisitorTest {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
-        CFGVisitor builder = new CFGVisitor(parser);
+        CFGVisitor builder = new CFGVisitor();
 
         int steps = 0;
         CFG cfg = new CFG();
@@ -65,7 +65,7 @@ public class CFGVisitorTest {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
-        CFGVisitor builder = new CFGVisitor(parser);
+        CFGVisitor builder = new CFGVisitor();
 
         int steps = 0;
         CFG cfg = new CFG();
@@ -101,7 +101,7 @@ public class CFGVisitorTest {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
-        CFGVisitor builder = new CFGVisitor(parser);
+        CFGVisitor builder = new CFGVisitor();
 
         int steps = 0;
         CFG cfg = new CFG();
@@ -146,7 +146,7 @@ public class CFGVisitorTest {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
-        CFGVisitor builder = new CFGVisitor(parser);
+        CFGVisitor builder = new CFGVisitor();
 
         int steps = 0;
         CFG cfg = new CFG();
@@ -207,7 +207,7 @@ public class CFGVisitorTest {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
-        CFGVisitor builder = new CFGVisitor(parser);
+        CFGVisitor builder = new CFGVisitor();
 
         int steps = 0;
         CFG cfg = new CFG();
@@ -268,7 +268,7 @@ public class CFGVisitorTest {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
-        CFGVisitor builder = new CFGVisitor(parser);
+        CFGVisitor builder = new CFGVisitor();
 
         int steps = 0;
         CFG cfg = new CFG();

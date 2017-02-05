@@ -20,11 +20,11 @@ public class CFGVisitor implements Visitor {
     private BasicBlock currentBasicBlock;
     private Stack<BasicBlock> expressionStack;
 
-    public CFGVisitor(Parser parser) {
+    public CFGVisitor() {
         this.steps = 0;
         this.cfg = new CFG();
         this.currentBasicBlock = this.cfg.getEntry();
-        this.expressionStack = new Stack();
+        this.expressionStack = new Stack<>();
     }
 
     public CFG buildCFG(Statement ast) {

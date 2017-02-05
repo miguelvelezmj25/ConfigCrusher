@@ -3,6 +3,8 @@ package edu.cmu.cs.mvelezce.analysis.taint;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
+import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.language.ast.statement.StatementAssignment;
 
 import java.util.*;
 
@@ -11,14 +13,22 @@ import java.util.*;
  */
 public class TaintAnalysis {
 
-    private Map<ExpressionVariable, ExpressionVariable> taintedValues;
+// TODO Fix point loop
+// TODO Worklist algorithm from cfg
+// TODO Transfer function is to check how abstraction is changed from statement to statement
+// TODO Join function is to join abstractions after they have branched out
+
+
+//    private Map<ExpressionVariable, ExpressionVariable> taintedValues;
+    private Set<ExpressionVariable> taintedValues;
     private CFG cfg;
     private Queue<BasicBlock> worklist;
 
     public TaintAnalysis(CFG cfg) {
-        this.taintedValues = new HashMap<>();
+//        this.taintedValues = new HashMap<>();
+        this.taintedValues = new HashSet<>();
         this.cfg = cfg;
-        this.worklist = new LinkedList();
+        this.worklist = new LinkedList<>();
     }
 
     public void analyze() {
@@ -31,9 +41,25 @@ public class TaintAnalysis {
         this.worklist.add(entry.get(0));
 
         while(!this.worklist.isEmpty()) {
+            // Get the next available instruction
             BasicBlock instruction = this.worklist.remove();
-            System.out.println(instruction);
 
+            // Analyze
+            System.out.println(instruction);
+            if(instruction.getStatement() != null) {
+                Statement statement = instruction.getStatement();
+
+                if(statement instanceof StatementAssignment) {
+                    StatementAssignment assignment = (StatementAssignment) statement;
+
+                    if(this.taintedValues.contains(assignment.getRight())) {
+                        this.taintedValues.add(assignment.getVariable());
+                    }
+                }
+            }
+
+
+            // Add next instructions to process
             List<BasicBlock> successors = this.cfg.getSuccessors(instruction);
 
             if(successors.size() > 2) {

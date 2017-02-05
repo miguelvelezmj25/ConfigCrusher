@@ -6,7 +6,7 @@ import edu.cmu.cs.mvelezce.language.ast.statement.*;
 /**
  * Created by miguelvelez on 1/31/17.
  */
-public interface Visitor<V> {
+public interface Visitor <V> {
 
     public V visitExpressionBinary(ExpressionBinary expressionBinary);
     public V visitExpressionConfiguration(ExpressionConfiguration expressionConfiguration);

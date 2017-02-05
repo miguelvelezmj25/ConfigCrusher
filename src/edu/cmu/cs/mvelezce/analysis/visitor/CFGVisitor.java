@@ -8,12 +8,14 @@ import edu.cmu.cs.mvelezce.language.ast.value.ValueInt;
 import edu.cmu.cs.mvelezce.language.parser.Parser;
 import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
 /**
  * Created by miguelvelez on 2/2/17.
  */
+// TODO what if I leave <> empty
 public class CFGVisitor implements Visitor {
     private int steps;
     private CFG cfg;
@@ -35,16 +37,6 @@ public class CFGVisitor implements Visitor {
             this.cfg.addEdge(this.expressionStack.pop(), this.cfg.getExit());
         }
         return this.cfg;
-    }
-
-
-    @Override
-    public void visitStatementBlock(StatementBlock statementBlock) {
-        List<Statement> statements = statementBlock.getStatements();
-
-        for(Statement statement : statements) {
-            statement.accept(this);
-        }
     }
 
     @Override
@@ -70,6 +62,15 @@ public class CFGVisitor implements Visitor {
     @Override
     public Object visitExpressionVariable(ExpressionVariable varExpr) {
         return null;
+    }
+
+    @Override
+    public void visitStatementBlock(StatementBlock statementBlock) {
+        List<Statement> statements = statementBlock.getStatements();
+
+        for(Statement statement : statements) {
+            statement.accept(this);
+        }
     }
 
     @Override

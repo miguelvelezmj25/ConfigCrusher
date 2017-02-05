@@ -31,12 +31,12 @@ public class CFGVisitorTest {
         int steps = 0;
         CFG cfg = new CFG();
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(1));
+        Statement statement = new StatementAssignment(new ExpressionConfiguration("C"), "=", new ExpressionConstantInt(1));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
 
-        statement = new StatementAssignment(new ExpressionConfiguration("C"), "=", new ExpressionConstantInt(0));
+        statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConfiguration("C"));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
@@ -70,22 +70,23 @@ public class CFGVisitorTest {
         int steps = 0;
         CFG cfg = new CFG();
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(2));
+        Statement statement = new StatementAssignment(new ExpressionConfiguration("C"), "=", new ExpressionConstantInt(2));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
 
+        statement = new StatementSleep(new ExpressionConfiguration("C"));
+        basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
+        cfg.addEdge(currentBasicBlock, basicBlock);
+        currentBasicBlock = basicBlock;
+
+        statement = new StatementAssignment(new ExpressionVariable("a"), "=",
+                new ExpressionBinary(new ExpressionConfiguration("C"), "-", new ExpressionConstantInt(1)));
+        basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
+        cfg.addEdge(currentBasicBlock, basicBlock);
+        currentBasicBlock = basicBlock;
+
         statement = new StatementSleep(new ExpressionVariable("a"));
-        basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
-        cfg.addEdge(currentBasicBlock, basicBlock);
-        currentBasicBlock = basicBlock;
-
-        statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(1));
-        basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
-        cfg.addEdge(currentBasicBlock, basicBlock);
-        currentBasicBlock = basicBlock;
-
-        statement = new StatementSleep(new ExpressionConstantInt(1));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
@@ -106,17 +107,17 @@ public class CFGVisitorTest {
         int steps = 0;
         CFG cfg = new CFG();
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(0));
+        Statement statement = new StatementAssignment(new ExpressionConfiguration("C"), "=", new ExpressionConstantInt(0));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
 
-        statement = new StatementAssignment(new ExpressionConfiguration("C"), "=", new ExpressionVariable("a"));
+        statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConfiguration("C"));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
 
-        StatementIf statementIf = new StatementIf(new ExpressionConfiguration("C"),
+        StatementIf statementIf = new StatementIf(new ExpressionVariable("a"),
                 new StatementSleep(new ExpressionConstantInt(2)));
         basicBlock = new BasicBlock(steps++ + "| " + statementIf.getCondition(), statementIf.getCondition());
         cfg.addEdge(currentBasicBlock, basicBlock);
@@ -134,7 +135,6 @@ public class CFGVisitorTest {
         currentBasicBlock = basicBlock;
 
         cfg.addEdge(basicBlockIf, currentBasicBlock);
-
         cfg.addEdge(currentBasicBlock, cfg.getExit());
 
         Assert.assertEquals(cfg, builder.buildCFG(ast));
@@ -151,18 +151,19 @@ public class CFGVisitorTest {
         int steps = 0;
         CFG cfg = new CFG();
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(0));
+        Statement statement = new StatementAssignment(new ExpressionConfiguration("C"), "=",
+               new ExpressionConstantInt(1));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
 
-        statement = new StatementAssignment(new ExpressionVariable("b"), "=", new ExpressionVariable("a"));
+        statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(0));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
 
-        statement = new StatementAssignment(new ExpressionConfiguration("C"), "=",
-                new ExpressionBinary(new ExpressionVariable("a"), "+", new ExpressionConstantInt(1)));
+        statement = new StatementAssignment(new ExpressionVariable("b"), "=",
+                new ExpressionBinary(new ExpressionVariable("a"), "+", new ExpressionConfiguration("C")));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
@@ -172,7 +173,7 @@ public class CFGVisitorTest {
         statements.add(new StatementAssignment(
                 new ExpressionConfiguration("C"), "=", new ExpressionVariable("b")));
 
-        StatementIf statementIf = new StatementIf(new ExpressionConfiguration("C"),
+        StatementIf statementIf = new StatementIf(new ExpressionVariable("b"),
                 new StatementBlock(statements));
         basicBlock = new BasicBlock(steps++ + "| " + statementIf.getCondition(), statementIf.getCondition());
         cfg.addEdge(currentBasicBlock, basicBlock);
@@ -189,13 +190,12 @@ public class CFGVisitorTest {
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
 
-        statement = new StatementSleep(new ExpressionConstantInt(2));
+        statement = new StatementSleep(new ExpressionConfiguration("C"));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
 
         cfg.addEdge(basicBlockIf, currentBasicBlock);
-
         cfg.addEdge(currentBasicBlock, cfg.getExit());
 
         Assert.assertEquals(cfg, builder.buildCFG(ast));
@@ -212,12 +212,12 @@ public class CFGVisitorTest {
         int steps = 0;
         CFG cfg = new CFG();
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(1));
+        Statement statement = new StatementAssignment(new ExpressionConfiguration("C"), "=", new ExpressionConstantInt(1));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
 
-        statement = new StatementAssignment(new ExpressionConfiguration("C"), "=", new ExpressionVariable("a"));
+        statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConfiguration("C"));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
@@ -227,7 +227,7 @@ public class CFGVisitorTest {
         statements.add(new StatementAssignment(
                 new ExpressionConfiguration("C"), "=", new ExpressionConstantInt(0)));
 
-        StatementIf statementIf = new StatementIf(new ExpressionConfiguration("C"),
+        StatementIf statementIf = new StatementIf(new ExpressionVariable("a"),
                 new StatementBlock(statements));
         basicBlock = new BasicBlock(steps++ + "| " + statementIf.getCondition(), statementIf.getCondition());
         cfg.addEdge(currentBasicBlock, basicBlock);
@@ -273,22 +273,22 @@ public class CFGVisitorTest {
         int steps = 0;
         CFG cfg = new CFG();
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(1));
+        Statement statement = new StatementAssignment(new ExpressionConfiguration("C"), "=", new ExpressionConstantInt(1));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
-
-        statement = new StatementAssignment(new ExpressionConfiguration("C"), "=", new ExpressionVariable("a"));
-        basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
-        cfg.addEdge(currentBasicBlock, basicBlock);
-        currentBasicBlock = basicBlock;
 
         statement = new StatementAssignment(new ExpressionConfiguration("D"), "=", new ExpressionConstantInt(0));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
 
-        StatementIf statementIf = new StatementIf(new ExpressionConfiguration("C"), new StatementBlock(new LinkedList<>()));
+        statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConfiguration("C"));
+        basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
+        cfg.addEdge(currentBasicBlock, basicBlock);
+        currentBasicBlock = basicBlock;
+
+        StatementIf statementIf = new StatementIf(new ExpressionVariable("a"), new StatementBlock(new LinkedList<>()));
         basicBlock = new BasicBlock(steps++ + "| " + statementIf.getCondition(), statementIf.getCondition());
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;

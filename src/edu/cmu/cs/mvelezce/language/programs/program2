@@ -1,4 +1,4 @@
-a=2
+C=2
+sleep(C)
+a=C - 1
 sleep(a)
-a=1
-sleep(1)

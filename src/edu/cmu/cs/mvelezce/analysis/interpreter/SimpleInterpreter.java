@@ -6,10 +6,7 @@ import edu.cmu.cs.mvelezce.language.parser.Parser;
 import java.io.File;
 import java.util.Scanner;
 
-/**fix point loop
- * worklist algorithm from cfg
- * Transfer function is to check how abstraction is changed from statement to statement
- * Join function is to join abstractions after they have branched out
+/**
  * Created by miguelvelez on 1/31/17.
  */
 public class SimpleInterpreter {

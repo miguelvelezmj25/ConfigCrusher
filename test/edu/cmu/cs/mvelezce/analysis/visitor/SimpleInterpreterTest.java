@@ -23,14 +23,15 @@ public class SimpleInterpreterTest {
         String program = SimpleInterpreter.loadFile(PATH + "program1");
 
         Map<String, ValueInt> store = new HashMap<>();
-        store.put("a", new ValueInt(1));
         store.put("C", new ValueInt(1));
+        store.put("a", new ValueInt(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
         NodeVisitor interpreter = new NodeVisitor(parser);
         Assert.assertEquals(store, interpreter.evaluate(ast));
+
         Assert.assertEquals(0, interpreter.getSleepTime());
         Assert.assertEquals(0, interpreter.getSleepTime());
     }
@@ -40,12 +41,14 @@ public class SimpleInterpreterTest {
         String program = SimpleInterpreter.loadFile(PATH + "program2");
 
         Map<String, ValueInt> store = new HashMap<>();
+        store.put("C", new ValueInt(2));
         store.put("a", new ValueInt(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
         NodeVisitor interpreter = new NodeVisitor(parser);
+
         Assert.assertEquals(store, interpreter.evaluate(ast));
         Assert.assertEquals(3, interpreter.getSleepTime());
     }
@@ -55,13 +58,14 @@ public class SimpleInterpreterTest {
         String program = SimpleInterpreter.loadFile(PATH + "program3");
 
         Map<String, ValueInt> store = new HashMap<>();
-        store.put("a", new ValueInt(0));
         store.put("C", new ValueInt(0));
+        store.put("a", new ValueInt(0));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
         NodeVisitor interpreter = new NodeVisitor(parser);
+
         Assert.assertEquals(store, interpreter.evaluate(ast));
         Assert.assertEquals(3, interpreter.getSleepTime());
     }
@@ -71,16 +75,17 @@ public class SimpleInterpreterTest {
         String program = SimpleInterpreter.loadFile(PATH + "program4");
 
         Map<String, ValueInt> store = new HashMap<>();
+        store.put("C", new ValueInt(1));
         store.put("a", new ValueInt(0));
-        store.put("b", new ValueInt(0));
-        store.put("C", new ValueInt(0));
+        store.put("b", new ValueInt(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
         NodeVisitor interpreter = new NodeVisitor(parser);
+
         Assert.assertEquals(store, interpreter.evaluate(ast));
-        Assert.assertEquals(4, interpreter.getSleepTime());
+        Assert.assertEquals(3, interpreter.getSleepTime());
     }
 
     @Test
@@ -88,13 +93,14 @@ public class SimpleInterpreterTest {
         String program = SimpleInterpreter.loadFile(PATH + "program5");
 
         Map<String, ValueInt> store = new HashMap<>();
-        store.put("a", new ValueInt(1));
         store.put("C", new ValueInt(0));
+        store.put("a", new ValueInt(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
         NodeVisitor interpreter = new NodeVisitor(parser);
+
         Assert.assertEquals(store, interpreter.evaluate(ast));
         Assert.assertEquals(4, interpreter.getSleepTime());
     }
@@ -104,14 +110,15 @@ public class SimpleInterpreterTest {
         String program = SimpleInterpreter.loadFile(PATH + "program6");
 
         Map<String, ValueInt> store = new HashMap<>();
-        store.put("a", new ValueInt(1));
         store.put("C", new ValueInt(1));
         store.put("D", new ValueInt(0));
+        store.put("a", new ValueInt(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
         NodeVisitor interpreter = new NodeVisitor(parser);
+
         Assert.assertEquals(store, interpreter.evaluate(ast));
         Assert.assertEquals(6, interpreter.getSleepTime());
     }

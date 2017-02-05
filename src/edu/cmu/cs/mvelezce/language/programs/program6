@@ -1,7 +1,7 @@
-a=1
-C=a
+C=1
 D=0
-if(C) {
+a=C
+if(a) {
     sleep(1)
     if(!D) {
         sleep(2)

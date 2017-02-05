@@ -1,8 +1,8 @@
+C=1
 a=0
-b=a
-C=a + 1
-if(C) {
+b=a + C
+if(b) {
     sleep(2)
     C=b
 }
-sleep(2)
+sleep(C)

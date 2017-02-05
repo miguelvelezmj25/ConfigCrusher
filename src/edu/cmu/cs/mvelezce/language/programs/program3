@@ -1,6 +1,6 @@
-a=0
-C=a
-if(C) {
+C=0
+a=C
+if(a) {
     sleep(2)
 }
 sleep(3)

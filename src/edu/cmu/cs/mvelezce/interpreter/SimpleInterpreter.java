@@ -1,9 +1,7 @@
 package edu.cmu.cs.mvelezce.interpreter;
 
-import edu.cmu.cs.mvelezce.interpreter.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.interpreter.lexer.Lexer;
 import edu.cmu.cs.mvelezce.interpreter.parser.Parser;
-import edu.cmu.cs.mvelezce.interpreter.visitor.NodeVisitor;
 
 import java.io.File;
 import java.util.Scanner;

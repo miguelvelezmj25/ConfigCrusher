@@ -28,7 +28,10 @@ public class CFGVisitor implements Visitor<ValueInt> {
     public CFG buildCFG(Statement ast) {
         ast.accept(this);
         this.cfg.addEdge(this.currentBasicBlock, this.cfg.getExit());
-        // TODO add the current basic block to the exit and the if condition
+
+        if(!this.expressionStack.isEmpty()) {
+            this.cfg.addEdge(this.expressionStack.pop(), this.cfg.getExit());
+        }
         return this.cfg;
     }
 

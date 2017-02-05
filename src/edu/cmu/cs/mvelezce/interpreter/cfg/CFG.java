@@ -21,11 +21,11 @@ public class CFG {
         this.edges.put(this.exit, new ArrayList<>());
     }
 
-    public void addBasicBlock(BasicBlock basicBlock) {
-        if(!this.edges.containsKey(basicBlock)) {
-            this.edges.put(basicBlock, new ArrayList<>());
-        }
-    }
+//    public void addBasicBlock(BasicBlock basicBlock) {
+//        if(!this.edges.containsKey(basicBlock)) {
+//            this.edges.put(basicBlock, new ArrayList<>());
+//        }
+//    }
 
     public void addEdge(BasicBlock from, BasicBlock to) {
         // TODO check if the from and to are already in the block se
@@ -66,6 +66,8 @@ public class CFG {
         List<BasicBlock> predecessors = new ArrayList<>();
         Iterator<Map.Entry<BasicBlock, List<BasicBlock>>> iterator = this.edges.entrySet().iterator();
 
+
+        // TODO use queue
         while(iterator.hasNext()) {
             //TODO
         }

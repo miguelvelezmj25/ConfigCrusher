@@ -138,9 +138,9 @@ public class Interpreter implements Visitor<ValueInt> {
     }
 
     @Override
-    public void visitStatementWhile(StatementWhile statementAssignment) {
-        statementAssignment.getCondition().accept(this);
-        statementAssignment.getBody().accept(this);
+    public void visitStatementWhile(StatementWhile statementWhile) {
+        statementWhile.getCondition().accept(this);
+        statementWhile.getBody().accept(this);
     }
 
     public Map<String, ValueInt> getStore() { return this.store; }

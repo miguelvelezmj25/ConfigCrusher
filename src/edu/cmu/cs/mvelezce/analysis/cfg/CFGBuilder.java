@@ -73,8 +73,8 @@ public class CFGBuilder extends BaseVisitor {
     }
 
     @Override
-    public void visitStatementWhile(StatementWhile statementAssignment) {
-        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementAssignment, statementAssignment);
+    public void visitStatementWhile(StatementWhile statementWhile) {
+        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementWhile, statementWhile);
         this.cfg.addEdge(this.currentBasicBlock, expression);
         this.checkBranching(expression);
 

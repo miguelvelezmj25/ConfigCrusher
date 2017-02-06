@@ -18,5 +18,5 @@ public interface Visitor <V> {
     public void visitStatementBlock(StatementBlock statementBlock);
     public void visitStatementIf(StatementIf statementIf);
     public void visitStatementSleep(StatementSleep statementSleep);
-    public void visitStatementWhile(StatementWhile statementAssignment);
+    public void visitStatementWhile(StatementWhile statementWhile);
 }

@@ -1,6 +1,7 @@
-C=0
-a=C
+b=C
+a=b
 if(a) {
     sleep(2)
 }
+b=0
 sleep(3)

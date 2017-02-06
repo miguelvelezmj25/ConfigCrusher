@@ -38,15 +38,15 @@ public class Parser {
 
             ExpressionVariable variable = null;
 
-            if(this.currentToken.getTag() == Tag.VAR) {
+//            if(this.currentToken.getTag() == Tag.VAR) {
                 this.checkToken(Tag.VAR);
                 variable = new ExpressionVariable(token.getValue());
 
-            }
-            else {
-                this.checkToken(Tag.CONFIG);
-                variable = new ExpressionConfiguration(token.getValue());
-            }
+//            }
+//            else {
+//                this.checkToken(Tag.CONFIG);
+//                variable = new ExpressionConstantConfiguration(token.getValue());
+//            }
 
             token = this.currentToken;
             this.checkToken(Tag.EQUAL);
@@ -125,7 +125,7 @@ public class Parser {
 
         if(token.getTag() == Tag.CONFIG) {
             this.checkToken(Tag.CONFIG);
-            return new ExpressionConfiguration(token.getValue());
+            return new ExpressionConstantConfiguration(token.getValue());
         }
 
         throw new IllegalArgumentException("Error while parsing input");

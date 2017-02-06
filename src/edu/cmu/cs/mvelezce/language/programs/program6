@@ -1,9 +1,8 @@
-C=1
-D=0
 a=C
 if(a) {
     sleep(1)
-    if(!D) {
+    b=D
+    if(!b) {
         sleep(2)
     }
     sleep(3)

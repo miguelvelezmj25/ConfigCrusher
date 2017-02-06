@@ -1,4 +1,3 @@
-C=2
 sleep(C)
 a=C - 1
 sleep(a)

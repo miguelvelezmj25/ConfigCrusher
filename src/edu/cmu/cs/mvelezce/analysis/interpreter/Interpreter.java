@@ -1,36 +1,37 @@
-package edu.cmu.cs.mvelezce.analysis.visitor;
+package edu.cmu.cs.mvelezce.analysis.interpreter;
 
 import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 import edu.cmu.cs.mvelezce.language.ast.expression.*;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
 import edu.cmu.cs.mvelezce.language.ast.value.ValueInt;
-import edu.cmu.cs.mvelezce.language.parser.Parser;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
+ * Configurations cannot be changed.
+ *
  * Created by miguelvelez on 1/31/17.
  */
-public class NodeVisitor implements Visitor<ValueInt> {
+public class Interpreter implements Visitor<ValueInt> {
+    private Statement ast;
+    private Set<String> activatedConfigurations;
+    // TODO to CK: can I change configurations?
     private final Map<String, ValueInt> store;
     private int sleepTime;
-//    StringBuffer output;
+// private StringBuffer output; TODO could be done
 
-    public NodeVisitor(Parser parser) {
+    public Interpreter(Statement ast, Set<String> activatedConfigurations) {
+        this.ast = ast;
+        this.activatedConfigurations = activatedConfigurations;
         this.store = new HashMap<>();
         this.sleepTime = 0;
     }
 
-    public Object evaluate() {
-        return null;
-//        // TODO this should return a program
-//        Expression ast = this.parser.parse();
-//        return ast.accept(this);
-    }
-
-    public Map<String, ValueInt> evaluate(Statement ast) {
+    // TODO this seems weird
+    public Map<String, ValueInt> evaluate() {
         ast.accept(this);
         System.out.println("Sleep " + this.sleepTime);
         return this.store;
@@ -64,8 +65,19 @@ public class NodeVisitor implements Visitor<ValueInt> {
     }
 
     @Override
-    public ValueInt visitExpressionConfiguration(ExpressionConfiguration expressionConfiguration) {
-        return this.store.get(expressionConfiguration.getName());
+    public ValueInt visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration) {
+        int value = 0;
+
+//        if(this.activatedConfigurations.contains(expressionConstantConfiguration.getName())
+//                || this.store.containsKey(expressionConstantConfiguration.getName())) {
+//            value = 1;
+//        }
+
+        if(this.activatedConfigurations.contains(expressionConstantConfiguration.getName())) {
+            value = 1;
+        }
+
+        return new ValueInt(value);
     }
 
     @Override

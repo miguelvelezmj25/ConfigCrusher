@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.language.ast.value;
 
+import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
+
 /**
  * Created by mvelezce on 2/1/17.
  */

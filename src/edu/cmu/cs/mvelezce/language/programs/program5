@@ -1,8 +1,7 @@
-C=1
 a=C
 if(a) {
     sleep(2)
-    C=0
+    a=0
 }
 if(!C) {
     sleep(2)

@@ -1,14 +1,9 @@
-package edu.cmu.cs.mvelezce.analysis.visitor;
+package edu.cmu.cs.mvelezce.analysis.cfg;
 
-import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
-import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.language.ast.expression.*;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
-import edu.cmu.cs.mvelezce.language.ast.value.ValueInt;
-import edu.cmu.cs.mvelezce.language.parser.Parser;
 import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -45,7 +40,7 @@ public class CFGVisitor implements Visitor {
     }
 
     @Override
-    public Object visitExpressionConfiguration(ExpressionConfiguration expressionConfiguration) {
+    public Object visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration) {
         return null;
     }
 
@@ -60,7 +55,7 @@ public class CFGVisitor implements Visitor {
     }
 
     @Override
-    public Object visitExpressionVariable(ExpressionVariable varExpr) {
+    public Object visitExpressionVariable(ExpressionVariable expressionVariable) {
         return null;
     }
 

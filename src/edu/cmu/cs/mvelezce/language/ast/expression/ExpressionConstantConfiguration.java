@@ -5,16 +5,11 @@ import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 /**
  * Created by mvelezce on 2/1/17.
  */
-public class ExpressionConstantConfiguration extends ExpressionConstantInt {
+public class ExpressionConstantConfiguration extends Expression {
     private String name;
 
-    public ExpressionConstantConfiguration(String name, int value) {
-        super(value);
-        this.name = name;
-    }
-
     public ExpressionConstantConfiguration(String name) {
-        this(name, 0);
+        this.name = name;
     }
 
     public String getName() { return this.name; }
@@ -23,7 +18,6 @@ public class ExpressionConstantConfiguration extends ExpressionConstantInt {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
 
         ExpressionConstantConfiguration that = (ExpressionConstantConfiguration) o;
 
@@ -32,9 +26,7 @@ public class ExpressionConstantConfiguration extends ExpressionConstantInt {
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + name.hashCode();
-        return result;
+        return name.hashCode();
     }
 
     @Override
@@ -42,4 +34,6 @@ public class ExpressionConstantConfiguration extends ExpressionConstantInt {
         return visitor.visitExpressionConstantConfiguration(this);
     }
 
+    @Override
+    public String toString() { return this.name; }
 }

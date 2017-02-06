@@ -8,24 +8,17 @@ import java.util.*;
 public class CFG {
     private BasicBlock entry;
     private BasicBlock exit;
-//    private Set<BasicBlock> basicBlockSet;
     private Map<BasicBlock, List<BasicBlock>> edges;
 
 
     public CFG() {
-        this.entry = new BasicBlock("entry", null, null);
-        this.exit = new BasicBlock("exit", null, null);
-        this.edges = new HashMap<BasicBlock, List<BasicBlock>>();
+        this.entry = new BasicBlock("entry");
+        this.exit = new BasicBlock("exit");
+        this.edges = new HashMap<>();
 
         this.edges.put(this.entry, new ArrayList<>());
         this.edges.put(this.exit, new ArrayList<>());
     }
-
-//    public void addBasicBlock(BasicBlock basicBlock) {
-//        if(!this.edges.containsKey(basicBlock)) {
-//            this.edges.put(basicBlock, new ArrayList<>());
-//        }
-//    }
 
     public void addEdge(BasicBlock from, BasicBlock to) {
         // TODO check if the from and to are already in the edges set
@@ -40,12 +33,8 @@ public class CFG {
     public List<BasicBlock> getPredecessors(BasicBlock basicBlock) {
         List<BasicBlock> predecessors = new LinkedList<>();
 
-        Iterator<Map.Entry<BasicBlock, List<BasicBlock>>> iterator = this.edges.entrySet().iterator();
-        
-        while(iterator.hasNext()) {
-            Map.Entry<BasicBlock, List<BasicBlock>> entry = iterator.next();
-
-            if(entry.getValue().contains(basicBlock)) {
+        for (Map.Entry<BasicBlock, List<BasicBlock>> entry : this.edges.entrySet()) {
+            if (entry.getValue().contains(basicBlock)) {
                 predecessors.add(entry.getKey());
             }
         }

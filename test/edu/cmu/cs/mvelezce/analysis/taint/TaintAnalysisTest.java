@@ -1,12 +1,5 @@
 package edu.cmu.cs.mvelezce.analysis.taint;
 
-import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
-import edu.cmu.cs.mvelezce.analysis.cfg.CFGVisitor;
-import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
-import edu.cmu.cs.mvelezce.language.lexer.Lexer;
-import edu.cmu.cs.mvelezce.language.parser.Parser;
-import org.junit.Test;
-
 /**
  * Created by miguelvelez on 2/5/17.
  */
@@ -19,7 +12,7 @@ public class TaintAnalysisTest {
 //        Lexer lexer = new Lexer(program);
 //        Parser parser = new Parser(lexer);
 //        Statement ast = parser.parse();
-//        CFGVisitor builder = new CFGVisitor();
+//        CFGBuilder builder = new CFGBuilder();
 //        CFG cfg = builder.buildCFG(ast);
 //
 //        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -32,7 +25,7 @@ public class TaintAnalysisTest {
 //        Lexer lexer = new Lexer(program);
 //        Parser parser = new Parser(lexer);
 //        Statement ast = parser.parse();
-//        CFGVisitor builder = new CFGVisitor();
+//        CFGBuilder builder = new CFGBuilder();
 //        CFG cfg = builder.buildCFG(ast);
 //
 //        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -45,7 +38,7 @@ public class TaintAnalysisTest {
 //        Lexer lexer = new Lexer(program);
 //        Parser parser = new Parser(lexer);
 //        Statement ast = parser.parse();
-//        CFGVisitor builder = new CFGVisitor();
+//        CFGBuilder builder = new CFGBuilder();
 //        CFG cfg = builder.buildCFG(ast);
 //
 //        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -58,7 +51,7 @@ public class TaintAnalysisTest {
 //        Lexer lexer = new Lexer(program);
 //        Parser parser = new Parser(lexer);
 //        Statement ast = parser.parse();
-//        CFGVisitor builder = new CFGVisitor();
+//        CFGBuilder builder = new CFGBuilder();
 //        CFG cfg = builder.buildCFG(ast);
 //
 //        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -71,7 +64,7 @@ public class TaintAnalysisTest {
 //        Lexer lexer = new Lexer(program);
 //        Parser parser = new Parser(lexer);
 //        Statement ast = parser.parse();
-//        CFGVisitor builder = new CFGVisitor();
+//        CFGBuilder builder = new CFGBuilder();
 //        CFG cfg = builder.buildCFG(ast);
 //
 //        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -84,7 +77,7 @@ public class TaintAnalysisTest {
 //        Lexer lexer = new Lexer(program);
 //        Parser parser = new Parser(lexer);
 //        Statement ast = parser.parse();
-//        CFGVisitor builder = new CFGVisitor();
+//        CFGBuilder builder = new CFGBuilder();
 //        CFG cfg = builder.buildCFG(ast);
 //
 //        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);

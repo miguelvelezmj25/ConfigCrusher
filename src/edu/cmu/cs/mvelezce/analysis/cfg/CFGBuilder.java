@@ -1,8 +1,7 @@
 package edu.cmu.cs.mvelezce.analysis.cfg;
 
-import edu.cmu.cs.mvelezce.language.ast.expression.*;
+import edu.cmu.cs.mvelezce.analysis.visitor.BaseVisitor;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
-import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 
 import java.util.List;
 import java.util.Stack;
@@ -10,53 +9,28 @@ import java.util.Stack;
 /**
  * Created by miguelvelez on 2/2/17.
  */
-// TODO what if I leave <> empty
-public class CFGVisitor implements Visitor {
+public class CFGBuilder extends BaseVisitor {
     private int steps;
     private CFG cfg;
     private BasicBlock currentBasicBlock;
-    private Stack<BasicBlock> expressionStack;
+    private Stack<BasicBlock> branchStack;
 
-    public CFGVisitor() {
+    public CFGBuilder() {
         this.steps = 0;
         this.cfg = new CFG();
         this.currentBasicBlock = this.cfg.getEntry();
-        this.expressionStack = new Stack<>();
+        this.branchStack = new Stack<>();
     }
 
     public CFG buildCFG(Statement ast) {
         ast.accept(this);
         this.cfg.addEdge(this.currentBasicBlock, this.cfg.getExit());
 
-        if(!this.expressionStack.isEmpty()) {
-            this.cfg.addEdge(this.expressionStack.pop(), this.cfg.getExit());
+        if(!this.branchStack.isEmpty()) {
+            this.cfg.addEdge(this.branchStack.pop(), this.cfg.getExit());
         }
+
         return this.cfg;
-    }
-
-    @Override
-    public Object visitExpressionBinary(ExpressionBinary expressionBinary) {
-        return null;
-    }
-
-    @Override
-    public Object visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration) {
-        return null;
-    }
-
-    @Override
-    public Object visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt) {
-        return null;
-    }
-
-    @Override
-    public Object visitExpressionUnary(ExpressionUnary expressionUnary) {
-        return null;
-    }
-
-    @Override
-    public Object visitExpressionVariable(ExpressionVariable expressionVariable) {
-        return null;
     }
 
     @Override
@@ -71,7 +45,6 @@ public class CFGVisitor implements Visitor {
     @Override
     public void visitStatementAssignment(StatementAssignment statementAssignment) {
         BasicBlock statement = new BasicBlock(this.steps++ + "| " + statementAssignment, statementAssignment);
-//        this.cfg.addBasicBlock(statement);
         this.cfg.addEdge(this.currentBasicBlock, statement);
         this.checkBranching(statement);
         this.currentBasicBlock = statement;
@@ -79,9 +52,7 @@ public class CFGVisitor implements Visitor {
 
     @Override
     public void visitStatementIf(StatementIf statementIf) {
-        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementIf.getCondition(),
-                statementIf.getCondition());
-//        this.cfg.addBasicBlock(expression);
+        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementIf, statementIf);
         this.cfg.addEdge(this.currentBasicBlock, expression);
         this.checkBranching(expression);
 
@@ -89,13 +60,12 @@ public class CFGVisitor implements Visitor {
 
         statementIf.getStatementThen().accept(this);
 
-        this.expressionStack.push(expression);
+        this.branchStack.push(expression);
     }
 
     @Override
     public void visitStatementSleep(StatementSleep statementSleep) {
         BasicBlock statement = new BasicBlock(this.steps++ + "| " + statementSleep, statementSleep);
-//        this.cfg.addBasicBlock(statement);
         this.cfg.addEdge(this.currentBasicBlock, statement);
         this.checkBranching(statement);
 
@@ -104,9 +74,7 @@ public class CFGVisitor implements Visitor {
 
     @Override
     public void visitStatementWhile(StatementWhile statementAssignment) {
-        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementAssignment.getCondition(),
-            statementAssignment.getCondition());
-//        this.cfg.addBasicBlock(expression);
+        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementAssignment, statementAssignment);
         this.cfg.addEdge(this.currentBasicBlock, expression);
         this.checkBranching(expression);
 
@@ -114,8 +82,8 @@ public class CFGVisitor implements Visitor {
     }
 
     private void checkBranching(BasicBlock basicBlock) {
-        if(!this.expressionStack.isEmpty()) {
-            this.cfg.addEdge(this.expressionStack.pop(), basicBlock);
+        if(!this.branchStack.isEmpty()) {
+            this.cfg.addEdge(this.branchStack.pop(), basicBlock);
         }
     }
 }

@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 import edu.cmu.cs.mvelezce.language.ast.expression.*;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
-import edu.cmu.cs.mvelezce.language.ast.value.ValueInt;
 
 import java.util.*;
 
@@ -29,7 +28,7 @@ public class TaintAnalysis implements Visitor<Expression> {
     private boolean taintedStatement;
 
     public TaintAnalysis(CFG cfg) {
-        this.instructionToTainted = new HashMap<>();
+        this.instructionToTainted = new LinkedHashMap<>();
         this.taintedValues = new HashSet<>();
         this.cfg = cfg;
         this.worklist = new LinkedList<>();
@@ -58,6 +57,10 @@ public class TaintAnalysis implements Visitor<Expression> {
             else {
                 instruction.getExpression().accept(this);
             }
+
+            List<ExpressionVariable> currentTaintedVariables = new ArrayList<>();
+            currentTaintedVariables.addAll(this.taintedValues);
+            this.instructionToTainted.put(instruction, currentTaintedVariables);
 
 //            if(instruction.getStatement() != null) {
 //                Statement statement = instruction.getStatement();
@@ -113,6 +116,7 @@ public class TaintAnalysis implements Visitor<Expression> {
         }
 
         System.out.println(this.taintedValues);
+        System.out.println(this.instructionToTainted);
     }
 
     private void transfer() {

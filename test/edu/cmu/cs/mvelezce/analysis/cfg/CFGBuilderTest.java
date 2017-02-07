@@ -194,7 +194,7 @@ public class CFGBuilderTest {
         currentBasicBlock = basicBlock;
 
         cfg.addEdge(branchStack.pop(), currentBasicBlock);
-//        cfg.addEdge(currentBasicBlock, cfg.getExit());
+        cfg.addEdge(currentBasicBlock, cfg.getExit());
 
         Assert.assertEquals(cfg, builder.buildCFG(ast));
     }

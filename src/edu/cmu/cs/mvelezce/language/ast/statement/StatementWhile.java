@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Created by mvelezce on 2/1/17.
  */
-// TODO
+// TODO automatic increment
 public class StatementWhile extends Statement {
     private Expression condition;
     private Statement body;
@@ -17,7 +17,6 @@ public class StatementWhile extends Statement {
         this.body = body;
     }
 
-    // TODO automatic increment
     @Override
     public <T> void accept(Visitor<T> visitor) {
         visitor.visitStatementWhile(this);

@@ -12,14 +12,13 @@ import java.util.*;
 /**
  * Created by miguelvelez on 2/5/17.
  */
+// TODO Fix point loop
+// TODO Transfer function is to check how abstraction is changed from statement to statement
+// TODO Join function is to join abstractions after they have branched out
 // TODO should I implement the visitor pattern?
 // TODO what should be the generic?
 public class TaintAnalysis {
 
-// TODO Fix point loop
-// TODO Worklist algorithm from cfg
-// TODO Transfer function is to check how abstraction is changed from statement to statement
-// TODO Join function is to join abstractions after they have branched out
     private Map<BasicBlock, Set<ExpressionVariable>> instructionToTainted;
     private CFG cfg;
 
@@ -28,7 +27,7 @@ public class TaintAnalysis {
         this.cfg = cfg;
     }
 
-    public void analyze() {
+    public Map<BasicBlock, Set<ExpressionVariable>> analyze() {
         List<BasicBlock> entry = this.cfg.getSuccessors(this.cfg.getEntry());
 
         if(entry.size() > 1) {
@@ -37,30 +36,26 @@ public class TaintAnalysis {
 
         Queue<BasicBlock> worklist = new LinkedList<>();
         worklist.add(entry.get(0));
+        this.instructionToTainted.put(entry.get(0), new HashSet<>());
 
         while(!worklist.isEmpty()) {
             // Get the next available instruction
             BasicBlock instruction = worklist.remove();
 
             // Analyze
-            System.out.println(instruction);
+// CK          taintsBefore = this.instructionToTainted.get(for all previousIstr)
+            Set<ExpressionVariable> taintsBefore = this.instructionToTainted.get(instruction);
 
-            //taintsBefore = instructionToTainted.get(for all previousIstr)
-
-            if(instruction.getStatement() != null) {
-                instruction.getStatement().accept(this);
-            }
-            else {
-                instruction.getExpression().accept(this);
-            }
-
-            //S' = transfer(S, instruction)
-            taintedValues=transfer(taintedValues, instruction);
+// CK           S' = transfer(S, instruction)
+// CK           taintedValues=transfer(taintedValues, instruction);
+            Set<ExpressionVariable> taintsAfter = transfer(taintsBefore, instruction);
 
 
-            List<ExpressionVariable> currentTaintedVariables = new ArrayList<>();
-            currentTaintedVariables.addAll(this.taintedValues);
-            this.instructionToTainted.put(instruction, /*taintsAfter*/currentTaintedVariables);
+//            List<ExpressionVariable> currentTaintedVariables = new ArrayList<>();
+//            currentTaintedVariables.addAll(this.taintedValues);
+
+// CK           this.instructionToTainted.put(instruction, /*taintsAfter*/currentTaintedVariables);
+            this.instructionToTainted.put(instruction, taintsAfter);
 
             // Add next instructions to process
             List<BasicBlock> successors = this.cfg.getSuccessors(instruction);
@@ -81,38 +76,87 @@ public class TaintAnalysis {
 
                 if(!possibleInstruction.isSpecial()) {
                     worklist.add(possibleInstruction);
+                    taintsAfter = this.join(taintsAfter, this.instructionToTainted.get(possibleInstruction));
+                    this.instructionToTainted.put(possibleInstruction, taintsAfter);
+//                    this.instructionToTainted.put(possibleInstruction, new HashSet<>());
                 }
             }
 
             possibleInstruction = successors.get(0);
             if(!possibleInstruction.isSpecial()) {
                 worklist.add(possibleInstruction);
+                taintsAfter = this.join(taintsAfter, this.instructionToTainted.get(possibleInstruction));
+                this.instructionToTainted.put(possibleInstruction, taintsAfter);
+//                this.instructionToTainted.put(possibleInstruction, new HashSet<>());
             }
 
         }
 
-        System.out.println(this.instructionToTainted);
+        return this.instructionToTainted;
     }
 
     private Set<ExpressionVariable> transfer(Set<ExpressionVariable> oldTaints, BasicBlock instruction) {
         Set<ExpressionVariable> output = new HashSet<>(oldTaints);
-        instruction.getStatement().accept(new TransferVisitor());
+        TransferVisitor transferVisitor = new TransferVisitor(oldTaints);
+        instruction.getStatement().accept(transferVisitor);
+
+        Set<ExpressionVariable> newTaints = transferVisitor.getTaintedValues();
+        Set<ExpressionVariable> killedTaints = transferVisitor.getKilledTaintedValues();
+
+        Set<ExpressionVariable> result = new HashSet<>();
+        Set<ExpressionVariable> merge = new HashSet<>();
+
+        if(oldTaints.isEmpty()) {
+            merge.addAll(newTaints);
+        }
+        else if(newTaints.isEmpty()) {
+            merge.addAll(oldTaints);
+        }
+        else {
+            merge.addAll(oldTaints);
+            merge.addAll(newTaints);
+        }
+
+        if(!killedTaints.isEmpty()) {
+            for(ExpressionVariable possibleTaint : merge) {
+                if(!killedTaints.contains(possibleTaint)) {
+                    result.add(possibleTaint);
+                }
+            }
+        }
+        else {
+            result.addAll(merge);
+        }
+
+        return result;
     }
 
-    private void transfer() {
-        // TODO
-    }
+    private Set<ExpressionVariable> join(Set<ExpressionVariable> taintsOne, Set<ExpressionVariable> taintsTwo) {
+        Set<ExpressionVariable> result = new HashSet<>();
 
-    private void join() {
-        // TODO
+        if(taintsOne != null) {
+            result.addAll(taintsOne);
+        }
+
+        if(taintsTwo != null) {
+            result.addAll(taintsTwo);
+        }
+
+        return result;
     }
 
 
     private class TransferVisitor extends BaseVisitor {
+        private final Set<ExpressionVariable> oldTaints;
         private boolean taintedAssignment;
+        private Set<ExpressionVariable> taintedValues;
+        private Set<ExpressionVariable> killedTaintedValues;
 
-        public TransferVisitor() {
+        public TransferVisitor(Set<ExpressionVariable> oldTaints) {
+            this.oldTaints = oldTaints;
             this.taintedAssignment = false;
+            this.taintedValues = new HashSet<>();
+            this.killedTaintedValues = new HashSet<>();
         }
 
         @Override
@@ -128,7 +172,11 @@ public class TaintAnalysis {
             Expression expression = super.visitExpressionVariable(expressionVariable);
             
             if(this.taintedAssignment) {
-                // TODO tainted
+                this.taintedValues.add((ExpressionVariable) expression);
+            }
+
+            if(this.oldTaints.contains(expressionVariable)) {
+                this.taintedAssignment = true;
             }
 
             return expression;
@@ -136,13 +184,31 @@ public class TaintAnalysis {
 
         @Override
         public void visitStatementAssignment(StatementAssignment statementAssignment) {
-            super.visitStatementAssignment(statementAssignment);
+            statementAssignment.getRight().accept(this);
 
             if(this.taintedAssignment) {
-                // TODO tainted
+                this.taintedValues.add(statementAssignment.getVariable());
+            }
+            else if(this.oldTaints.contains(statementAssignment.getVariable())) {
+                this.killedTaintedValues.add(statementAssignment.getVariable());
             }
         }
 
+        @Override
+        public void visitStatementIf(StatementIf statementIf) {
+            statementIf.getCondition().accept(this);
+        }
+
+        public Set<ExpressionVariable> getTaintedValues() {
+            return this.taintedValues;
+        }
+
+        public Set<ExpressionVariable> getKilledTaintedValues() {
+            return this.killedTaintedValues;
+        }
     }
 
+    public Map<BasicBlock, Set<ExpressionVariable>> getInstructionToTainted() {
+        return this.instructionToTainted;
+    }
 }

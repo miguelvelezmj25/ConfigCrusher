@@ -35,10 +35,16 @@ public class CFGBuilderTest {
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
 
+        statement = new StatementAssignment(new ExpressionVariable("b"), "=", new ExpressionVariable("a"));
+        basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
+        cfg.addEdge(currentBasicBlock, basicBlock);
+        currentBasicBlock = basicBlock;
+
         List<Statement> statements = new LinkedList<>();
+        statements.add(new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(0)));
         statements.add(new StatementSleep(new ExpressionConstantInt(2)));
 
-        StatementIf statementIf = new StatementIf(new ExpressionVariable("a"), new StatementBlock(statements));
+        StatementIf statementIf = new StatementIf(new ExpressionVariable("b"), new StatementBlock(statements));
         basicBlock = new BasicBlock(steps++ + "| " + statementIf, statementIf);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
@@ -188,7 +194,7 @@ public class CFGBuilderTest {
         currentBasicBlock = basicBlock;
 
         cfg.addEdge(branchStack.pop(), currentBasicBlock);
-        cfg.addEdge(currentBasicBlock, cfg.getExit());
+//        cfg.addEdge(currentBasicBlock, cfg.getExit());
 
         Assert.assertEquals(cfg, builder.buildCFG(ast));
     }

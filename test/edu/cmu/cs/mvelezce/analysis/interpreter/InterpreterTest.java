@@ -25,6 +25,7 @@ public class InterpreterTest {
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(0));
+        store.put("b", new ValueInt(0));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);

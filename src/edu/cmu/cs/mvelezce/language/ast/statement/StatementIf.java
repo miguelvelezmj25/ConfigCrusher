@@ -45,14 +45,15 @@ public class StatementIf extends Statement {
 
     @Override
     public String toString() {
-        String result = "if(" + this.condition +") {\n";
-        String[] statements = StringUtils.split(this.statementThen.toString(), '\n');
-
-        for(String statement : statements) {
-            result += "    " + statement + "\n";
-        }
-
-        result += "}";
+        String result = "if(" + this.condition +")";
+//                "{\n";
+//        String[] statements = StringUtils.split(this.statementThen.toString(), '\n');
+//
+//        for(String statement : statements) {
+//            result += "    " + statement + "\n";
+//        }
+//
+//        result += "}";
 
         return result;
     }

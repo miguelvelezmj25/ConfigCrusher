@@ -18,7 +18,6 @@ import java.util.Set;
 public class Interpreter implements Visitor<ValueInt> {
     private Statement ast;
     private Set<String> activatedConfigurations;
-    // TODO to CK: can I change configurations?
     private final Map<String, ValueInt> store;
     private int sleepTime;
 // private StringBuffer output; TODO could be done

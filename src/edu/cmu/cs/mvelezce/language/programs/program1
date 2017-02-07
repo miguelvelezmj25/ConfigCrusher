@@ -1,4 +1,6 @@
 a=C
-if(a) {
+b=a
+if(b) {
+    a=0
     sleep(2)
 }

@@ -39,10 +39,8 @@ public class TaintAnalysis {
         this.instructionToTainted.put(entry.get(0), new HashSet<>());
 
         while(!worklist.isEmpty()) {
-            // Get the next available instruction
             BasicBlock instruction = worklist.remove();
 
-            // Analyze
 // CK          taintsBefore = this.instructionToTainted.get(for all previousIstr)
             Set<ExpressionVariable> taintsBefore = this.instructionToTainted.get(instruction);
 
@@ -50,14 +48,9 @@ public class TaintAnalysis {
 // CK           taintedValues=transfer(taintedValues, instruction);
             Set<ExpressionVariable> taintsAfter = transfer(taintsBefore, instruction);
 
-
-//            List<ExpressionVariable> currentTaintedVariables = new ArrayList<>();
-//            currentTaintedVariables.addAll(this.taintedValues);
-
 // CK           this.instructionToTainted.put(instruction, /*taintsAfter*/currentTaintedVariables);
             this.instructionToTainted.put(instruction, taintsAfter);
 
-            // Add next instructions to process
             List<BasicBlock> successors = this.cfg.getSuccessors(instruction);
 
             if(successors.size() > 2) {
@@ -96,6 +89,7 @@ public class TaintAnalysis {
     }
 
     private Set<ExpressionVariable> transfer(Set<ExpressionVariable> oldTaints, BasicBlock instruction) {
+        // TODO CK why do I need this?
         Set<ExpressionVariable> output = new HashSet<>(oldTaints);
         TransferVisitor transferVisitor = new TransferVisitor(oldTaints);
         instruction.getStatement().accept(transferVisitor);
@@ -131,6 +125,7 @@ public class TaintAnalysis {
         return result;
     }
 
+    // Can only stay in the same level of the lattice or go up
     private Set<ExpressionVariable> join(Set<ExpressionVariable> taintsOne, Set<ExpressionVariable> taintsTwo) {
         Set<ExpressionVariable> result = new HashSet<>();
 

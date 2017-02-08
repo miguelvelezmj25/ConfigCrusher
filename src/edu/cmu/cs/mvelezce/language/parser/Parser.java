@@ -36,17 +36,8 @@ public class Parser {
         if(this.currentToken.getTag() == Tag.VAR || this.currentToken.getTag() == Tag.CONFIG) {
             Token token = this.currentToken;
 
-            ExpressionVariable variable = null;
-
-//            if(this.currentToken.getTag() == Tag.VAR) {
-                this.checkToken(Tag.VAR);
-                variable = new ExpressionVariable(token.getValue());
-
-//            }
-//            else {
-//                this.checkToken(Tag.CONFIG);
-//                variable = new ExpressionConstantConfiguration(token.getValue());
-//            }
+            this.checkToken(Tag.VAR);
+            ExpressionVariable variable = new ExpressionVariable(token.getValue());
 
             token = this.currentToken;
             this.checkToken(Tag.EQUAL);

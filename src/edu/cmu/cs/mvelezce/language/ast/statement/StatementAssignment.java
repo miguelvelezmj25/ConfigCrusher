@@ -8,7 +8,6 @@ import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
  * Created by mvelezce on 2/1/17.
  */
 public class StatementAssignment extends Statement {
-    // TODO to CK: can I change configurations?
     private ExpressionVariable variable;
     private String operation;
     private Expression right;

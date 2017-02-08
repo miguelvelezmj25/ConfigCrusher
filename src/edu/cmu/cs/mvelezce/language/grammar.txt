@@ -1,28 +1,6 @@
-program : stmt_block
-
-stmt_block : (stmt)+
-
-stmt : variable EQUAL expr SEMI
-     | IF LEFT_PARENT expr RIGHT_PAREN stmt_block
-     | WHILE LEFT_PARENT expr RIGHT_PAREN stmt_block
-
-expr : variable
-     | term ((PLUS | MINUS) term)*
-
-term : factor ((MULT | DIV) factor)*
-
-factor  : (PLUS | MINUS) factor
-        | INTEGER
-        | LEFT_PARENT expr RIGHT_PARENT
-
-
-
-
-
-
 program : (stmt)+
 
-stmt : (variable | CONFIG) EQUAL expr
+stmt : variable EQUAL expr
      | IF LEFT_PARENT expr RIGHT_PAREN { stmt_block }
      | WHILE LEFT_PARENT expr RIGHT_PARENT stmt
      | SLEEP LEFT_PARENT expr RIGHT_PARENT

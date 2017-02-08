@@ -69,7 +69,7 @@ public class TaintAnalysis {
 
                 if(!possibleInstruction.isSpecial()) {
                     worklist.add(possibleInstruction);
-                    taintsAfter = this.join(taintsAfter, this.instructionToTainted.get(possibleInstruction));
+                    taintsAfter = TaintAnalysis.join(taintsAfter, this.instructionToTainted.get(possibleInstruction));
                     this.instructionToTainted.put(possibleInstruction, taintsAfter);
 //                    this.instructionToTainted.put(possibleInstruction, new HashSet<>());
                 }
@@ -78,7 +78,7 @@ public class TaintAnalysis {
             possibleInstruction = successors.get(0);
             if(!possibleInstruction.isSpecial()) {
                 worklist.add(possibleInstruction);
-                taintsAfter = this.join(taintsAfter, this.instructionToTainted.get(possibleInstruction));
+                taintsAfter = TaintAnalysis.join(taintsAfter, this.instructionToTainted.get(possibleInstruction));
                 this.instructionToTainted.put(possibleInstruction, taintsAfter);
 //                this.instructionToTainted.put(possibleInstruction, new HashSet<>());
             }
@@ -88,7 +88,8 @@ public class TaintAnalysis {
         return this.instructionToTainted;
     }
 
-    private Set<ExpressionVariable> transfer(Set<ExpressionVariable> oldTaints, BasicBlock instruction) {
+    // TODO should be private. Protected allows testing
+    public Set<ExpressionVariable> transfer(Set<ExpressionVariable> oldTaints, BasicBlock instruction) {
         // TODO CK why do I need this?
         Set<ExpressionVariable> output = new HashSet<>(oldTaints);
         TransferVisitor transferVisitor = new TransferVisitor(oldTaints);
@@ -125,8 +126,9 @@ public class TaintAnalysis {
         return result;
     }
 
+    // TODO should be private. Protected allows testing
     // Can only stay in the same level of the lattice or go up
-    private Set<ExpressionVariable> join(Set<ExpressionVariable> taintsOne, Set<ExpressionVariable> taintsTwo) {
+    protected static Set<ExpressionVariable> join(Set<ExpressionVariable> taintsOne, Set<ExpressionVariable> taintsTwo) {
         Set<ExpressionVariable> result = new HashSet<>();
 
         if(taintsOne != null) {

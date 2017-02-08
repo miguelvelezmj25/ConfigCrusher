@@ -4,8 +4,14 @@ import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.language.Helper;
+import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
+import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConstantConfiguration;
+import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConstantInt;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
 import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.language.ast.statement.StatementAssignment;
+import edu.cmu.cs.mvelezce.language.ast.statement.StatementSleep;
+import edu.cmu.cs.mvelezce.language.ast.value.ValueInt;
 import edu.cmu.cs.mvelezce.language.lexer.Lexer;
 import edu.cmu.cs.mvelezce.language.parser.Parser;
 import org.junit.Assert;
@@ -299,6 +305,44 @@ public class TaintAnalysisTest {
         TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
         Assert.assertEquals(instructionsToTainted ,taintAnalysis.analyze());
         System.out.println(taintAnalysis.getInstructionToTainted());
+    }
+
+    @Test
+    public void join() throws Exception {
+        Set<ExpressionVariable> set = new HashSet<>();
+        Assert.assertEquals(set, TaintAnalysis.join(set, set));
+
+        set.add(new ExpressionVariable("a"));
+        Assert.assertEquals(set, TaintAnalysis.join(new HashSet<>(), set));
+
+        Assert.assertEquals(set, TaintAnalysis.join(set, set));
+
+        Set<ExpressionVariable> set1 = new HashSet<>();
+        set1.add(new ExpressionVariable("b"));
+
+        Set<ExpressionVariable> set2 = new HashSet<>();
+        set2.add(new ExpressionVariable("a"));
+        set2.add(new ExpressionVariable("b"));
+        Assert.assertEquals(set2, TaintAnalysis.join(set, set1));
+    }
+
+    @Test
+    public void transfer() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        BasicBlock basicBlock = new BasicBlock("1", new StatementSleep(new ExpressionConstantInt(1)));
+        Set<ExpressionVariable> set = new HashSet<>();
+        Assert.assertEquals(set, taintAnalysis.transfer(set, basicBlock));
+
+        set.add(new ExpressionVariable("a"));
+        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C")));
+        Assert.assertEquals(set, taintAnalysis.transfer(new HashSet<>(), basicBlock));
+
+        Set<ExpressionVariable> set1 = new HashSet<>();
+        set1.add(new ExpressionVariable("b"));
+        set.add(new ExpressionVariable("b"));
+        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C")));
+        Assert.assertEquals(set, taintAnalysis.transfer(set1, basicBlock));
+
     }
 
 }

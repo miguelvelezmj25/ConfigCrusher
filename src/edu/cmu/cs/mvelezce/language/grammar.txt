@@ -15,6 +15,6 @@ term : variable
      | NOT term
 
 
- variable : ('a'..'z')+
+variable : ('a'..'z')+
 
- CONFIG : ('A'..'Z')+
+CONFIG : ('A'..'Z')+

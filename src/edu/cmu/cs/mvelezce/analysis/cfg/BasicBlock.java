@@ -62,10 +62,6 @@ public class BasicBlock {
     @Override
     public String toString() {
         if(this.statement != null) {
-            if(!this.conditions.isEmpty()) {
-                return this.statement.toString() + "->[" + this.conditions.toString() + "]";
-            }
-
             return this.statement.toString();
         }
 

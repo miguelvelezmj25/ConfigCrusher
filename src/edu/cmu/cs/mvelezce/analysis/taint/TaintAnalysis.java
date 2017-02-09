@@ -91,7 +91,7 @@ public class TaintAnalysis {
     public Set<TaintedVariable> transfer(Set<TaintedVariable> oldTaints, BasicBlock instruction) {
         // TODO CK why do I need this?
         Set<TaintedVariable> output = new HashSet<>(oldTaints);
-        TransferVisitor transferVisitor = new TransferVisitor(oldTaints);
+        TransferVisitor transferVisitor = new TransferVisitor(oldTaints, instruction.getConditions());
         instruction.getStatement().accept(transferVisitor);
 
         Set<TaintedVariable> newTaints = transferVisitor.getTaintedValues();
@@ -145,20 +145,22 @@ public class TaintAnalysis {
     private class TransferVisitor extends BaseVisitor {
         private final Set<TaintedVariable> oldTaints;
         private boolean inAssignment;
-        private boolean inIfStatement;
         private boolean taintedConfiguration;
         private boolean taintedVariable;
         private Set<ExpressionConstantConfiguration> taintingConfigurations;
         private Set<TaintedVariable> taintedValues;
         private Set<TaintedVariable> killedTaintedValues;
+        private List<Expression> conditions;
 
-        public TransferVisitor(Set<TaintedVariable> oldTaints) {
+        public TransferVisitor(Set<TaintedVariable> oldTaints, List<Expression> conditions) {
             this.oldTaints = oldTaints;
+            this.inAssignment = false;
             this.taintedConfiguration = false;
             this.taintedVariable = false;
             this.taintingConfigurations = new HashSet<>();
             this.taintedValues = new HashSet<>();
             this.killedTaintedValues = new HashSet<>();
+            this.conditions = conditions;
         }
 
         @Override
@@ -197,8 +199,16 @@ public class TaintAnalysis {
                 }
             }
 
-            for (TaintedVariable taintedVariable : this.oldTaints) {
-                if (taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
+            if(!this.conditions.isEmpty()) {
+                for(TaintedVariable taintedVariable : this.oldTaints) {
+                    if(this.conditions.contains(taintedVariable.getVariable())) {
+                        this.taintedValues.add(new TaintedVariable(statementAssignment.getVariable(), taintedVariable.getConfiguration()));
+                    }
+                }
+            }
+
+            for(TaintedVariable taintedVariable : this.oldTaints) {
+                if(taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
                     this.killedTaintedValues.add(taintedVariable);
                 }
             }

@@ -253,7 +253,7 @@ public class TaintAnalysisTest {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = new LinkedHashMap<>();
-
+        
         BasicBlock succesor = cfg.getSuccessors(cfg.getEntry()).get(0);
         Set<TaintAnalysis.TaintedVariable> tainted = new HashSet<>();
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
@@ -272,24 +272,28 @@ public class TaintAnalysisTest {
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("D")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("D")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("D")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("D")));
         instructionsToTainted.put(succesor, tainted);
 

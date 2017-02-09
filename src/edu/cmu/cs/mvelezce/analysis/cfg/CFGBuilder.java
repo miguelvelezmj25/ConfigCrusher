@@ -58,7 +58,7 @@ public class CFGBuilder extends BaseVisitor {
 
         this.currentBasicBlock = expression;
 
-        statementIf.getStatementThen().accept(this);
+        statementIf.getThenBlock().accept(this);
 
         this.branchStack.push(expression);
     }

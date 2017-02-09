@@ -57,7 +57,7 @@ public class BaseVisitor implements Visitor<Expression> {
     @Override
     public void visitStatementIf(StatementIf statementIf) {
         statementIf.getCondition().accept(this);
-        statementIf.getStatementThen().accept(this);
+        statementIf.getThenBlock().accept(this);
     }
 
     @Override

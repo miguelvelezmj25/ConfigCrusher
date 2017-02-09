@@ -126,7 +126,7 @@ public class Interpreter implements Visitor<ValueInt> {
         ValueInt condition = statementIf.getCondition().accept(this);
 
         if(condition.getValue() > 0) {
-            statementIf.getStatementThen().accept(this);
+            statementIf.getThenBlock().accept(this);
         }
     }
 

@@ -10,9 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 // TODO automatic increment
 public class StatementWhile extends Statement {
     private Expression condition;
-    private Statement body;
+    private StatementBlock body;
 
-    public StatementWhile(Expression condition, Statement body) {
+    public StatementWhile(Expression condition, StatementBlock body) {
         this.condition = condition;
         this.body = body;
     }
@@ -24,7 +24,7 @@ public class StatementWhile extends Statement {
 
     public Expression getCondition() { return this.condition; }
 
-    public Statement getBody() { return this.body; }
+    public StatementBlock getBody() { return this.body; }
 
     @Override
     public boolean equals(Object o) {

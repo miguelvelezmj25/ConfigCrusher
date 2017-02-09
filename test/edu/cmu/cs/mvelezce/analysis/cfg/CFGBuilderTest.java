@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.language.parser.Parser;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -50,8 +51,10 @@ public class CFGBuilderTest {
         currentBasicBlock = basicBlock;
         branchStack.push(currentBasicBlock);
 
-        for(Statement trueStatement : ((StatementBlock) statementIf.getThenBlock()).getStatements()) {
-            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement);
+        List<Expression> conditions = new ArrayList<>();
+        conditions.add(statementIf.getCondition());
+        for(Statement trueStatement : statementIf.getThenBlock().getStatements()) {
+            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement, conditions);
             cfg.addEdge(currentBasicBlock, basicBlock);
             currentBasicBlock = basicBlock;
         }
@@ -72,7 +75,6 @@ public class CFGBuilderTest {
 
         int steps = 0;
         CFG cfg = new CFG();
-        Stack<BasicBlock> branchStack = new Stack<>();
 
         Statement statement = new StatementSleep(new ExpressionConstantConfiguration("C"));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
@@ -126,8 +128,10 @@ public class CFGBuilderTest {
         currentBasicBlock = basicBlock;
         branchStack.push(currentBasicBlock);
 
-        for(Statement trueStatement : ((StatementBlock) statementIf.getThenBlock()).getStatements()) {
-            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement);
+        List<Expression> conditions = new ArrayList<>();
+        conditions.add(statementIf.getCondition());
+        for(Statement trueStatement : statementIf.getThenBlock().getStatements()) {
+            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement, conditions);
             cfg.addEdge(currentBasicBlock, basicBlock);
             currentBasicBlock = basicBlock;
         }
@@ -182,8 +186,10 @@ public class CFGBuilderTest {
         currentBasicBlock = basicBlock;
         branchStack.push(currentBasicBlock);
 
-        for(Statement trueStatement : ((StatementBlock) statementIf.getThenBlock()).getStatements()) {
-            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement);
+        List<Expression> conditions = new ArrayList<>();
+        conditions.add(statementIf.getCondition());
+        for(Statement trueStatement : statementIf.getThenBlock().getStatements()) {
+            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement, conditions);
             cfg.addEdge(currentBasicBlock, basicBlock);
             currentBasicBlock = basicBlock;
         }
@@ -226,8 +232,10 @@ public class CFGBuilderTest {
         currentBasicBlock = basicBlock;
         branchStack.push(currentBasicBlock);
 
-        for(Statement trueStatement : ((StatementBlock) statementIf.getThenBlock()).getStatements()) {
-            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement);
+        List<Expression> conditions = new ArrayList<>();
+        conditions.add(statementIf.getCondition());
+        for(Statement trueStatement : statementIf.getThenBlock().getStatements()) {
+            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement, conditions);
             cfg.addEdge(currentBasicBlock, basicBlock);
             currentBasicBlock = basicBlock;
         }
@@ -242,8 +250,10 @@ public class CFGBuilderTest {
         cfg.addEdge(branchStack.pop(), currentBasicBlock);
         branchStack.push(currentBasicBlock);
 
-        for(Statement trueStatements : ((StatementBlock) statementIf.getThenBlock()).getStatements()) {
-            basicBlock = new BasicBlock(steps++ + "| " + trueStatements, trueStatements);
+        conditions = new ArrayList<>();
+        conditions.add(statementIf.getCondition());
+        for(Statement trueStatements : statementIf.getThenBlock().getStatements()) {
+            basicBlock = new BasicBlock(steps++ + "| " + trueStatements, trueStatements, conditions);
             cfg.addEdge(currentBasicBlock, basicBlock);
             currentBasicBlock = basicBlock;
         }
@@ -290,8 +300,10 @@ public class CFGBuilderTest {
         currentBasicBlock = basicBlock;
         branchStack.push(currentBasicBlock);
 
-        for(Statement trueStatement : ((StatementBlock) statementIf.getThenBlock()).getStatements()) {
-            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement);
+        List<Expression> conditions = new ArrayList<>();
+        conditions.add(statementIf.getCondition());
+        for(Statement trueStatement : statementIf.getThenBlock().getStatements()) {
+            basicBlock = new BasicBlock(steps++ + "| " + trueStatement, trueStatement, conditions);
             cfg.addEdge(currentBasicBlock, basicBlock);
             currentBasicBlock = basicBlock;
 
@@ -304,11 +316,14 @@ public class CFGBuilderTest {
                 cameFromInner = true;
                 branchStack.push(currentBasicBlock);
 
-                for(Statement trueStatementInner : ((StatementBlock) ((StatementIf) trueStatement).getThenBlock()).getStatements()) {
-                    basicBlock = new BasicBlock(steps++ + "| " + trueStatementInner, trueStatementInner);
+                List<Expression> innerConditions = new ArrayList<>(conditions);
+                innerConditions.add(0, ((StatementIf) trueStatement).getCondition());
+                for(Statement trueStatementInner : ((StatementIf) trueStatement).getThenBlock().getStatements()) {
+                    basicBlock = new BasicBlock(steps++ + "| " + trueStatementInner, trueStatementInner, innerConditions);
                     cfg.addEdge(currentBasicBlock, basicBlock);
                     currentBasicBlock = basicBlock;
                 }
+
             }
 
         }

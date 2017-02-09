@@ -1,8 +1,11 @@
 package edu.cmu.cs.mvelezce.analysis.cfg;
 
 import edu.cmu.cs.mvelezce.analysis.visitor.BaseVisitor;
+import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -14,12 +17,14 @@ public class CFGBuilder extends BaseVisitor {
     private CFG cfg;
     private BasicBlock currentBasicBlock;
     private Stack<BasicBlock> branchStack;
+    private Stack<Expression> conditionStack;
 
     public CFGBuilder() {
         this.steps = 0;
         this.cfg = new CFG();
         this.currentBasicBlock = this.cfg.getEntry();
         this.branchStack = new Stack<>();
+        this.conditionStack = new Stack<>();
     }
 
     public CFG buildCFG(Statement ast) {
@@ -44,46 +49,58 @@ public class CFGBuilder extends BaseVisitor {
 
     @Override
     public void visitStatementAssignment(StatementAssignment statementAssignment) {
-        BasicBlock statement = new BasicBlock(this.steps++ + "| " + statementAssignment, statementAssignment);
-        this.cfg.addEdge(this.currentBasicBlock, statement);
-        this.checkBranching(statement);
-        this.currentBasicBlock = statement;
+        this.checkConditions(statementAssignment);
     }
 
     @Override
     public void visitStatementIf(StatementIf statementIf) {
-        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementIf, statementIf);
-        this.cfg.addEdge(this.currentBasicBlock, expression);
-        this.checkBranching(expression);
+        BasicBlock basicBlock = this.checkConditions(statementIf);
 
-        this.currentBasicBlock = expression;
+        this.conditionStack.push(statementIf.getCondition());
 
         statementIf.getThenBlock().accept(this);
 
-        this.branchStack.push(expression);
+        this.conditionStack.pop();
+        this.branchStack.push(basicBlock);
     }
 
     @Override
     public void visitStatementSleep(StatementSleep statementSleep) {
-        BasicBlock statement = new BasicBlock(this.steps++ + "| " + statementSleep, statementSleep);
-        this.cfg.addEdge(this.currentBasicBlock, statement);
-        this.checkBranching(statement);
-
-        this.currentBasicBlock = statement;
+        this.checkConditions(statementSleep);
     }
 
     @Override
     public void visitStatementWhile(StatementWhile statementWhile) {
-        BasicBlock expression = new BasicBlock(this.steps++ + "| " + statementWhile, statementWhile);
-        this.cfg.addEdge(this.currentBasicBlock, expression);
-        this.checkBranching(expression);
-
-        this.currentBasicBlock = expression;
+        // TODO might have to visit block
+        this.checkConditions(statementWhile);
     }
 
     private void checkBranching(BasicBlock basicBlock) {
         if(!this.branchStack.isEmpty()) {
             this.cfg.addEdge(this.branchStack.pop(), basicBlock);
         }
+    }
+
+    private BasicBlock checkConditions(Statement statement) {
+        BasicBlock basicBlock;
+
+        if(this.conditionStack.isEmpty()) {
+            basicBlock = new BasicBlock(this.steps++ + "| " + statement, statement);
+        }
+        else {
+            List<Expression> conditions = new ArrayList<>();
+            for(Expression condition : this.conditionStack) {
+                conditions.add(condition);
+            }
+
+            Collections.reverse(conditions);
+            basicBlock = new BasicBlock(this.steps++ + "| " + statement, statement, conditions);
+        }
+
+        this.cfg.addEdge(this.currentBasicBlock, basicBlock);
+        this.checkBranching(basicBlock);
+        this.currentBasicBlock = basicBlock;
+
+        return basicBlock;
     }
 }

@@ -221,6 +221,7 @@ public class TaintAnalysis {
 
     public static class TaintedVariable {
         private ExpressionVariable variable;
+        // TODO maybe have a set of configurations that affect this variable instead of having multiple variables.
         private ExpressionConstantConfiguration configuration;
 
         public TaintedVariable(ExpressionVariable variable, ExpressionConstantConfiguration configuration) {

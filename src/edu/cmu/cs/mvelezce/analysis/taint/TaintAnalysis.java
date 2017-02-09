@@ -180,7 +180,8 @@ public class TaintAnalysis {
                 for (TaintedVariable taintedVariable : this.oldTaints) {
                     if (taintedVariable.getVariable().equals(expressionVariable)) {
                         this.taintedVariable = true;
-                        this.taintingConfigurations.add(taintedVariable.getConfiguration());
+                        this.taintingConfigurations.addAll(taintedVariable.getConfigurations());
+                        break;
                     }
                 }
             }
@@ -194,15 +195,15 @@ public class TaintAnalysis {
             statementAssignment.getRight().accept(this);
 
             if(this.taintedConfiguration || this.taintedVariable) {
-                for(ExpressionConstantConfiguration configuration : this.taintingConfigurations) {
-                    this.taintedValues.add(new TaintedVariable(statementAssignment.getVariable(), configuration));
-                }
+                Set<ExpressionConstantConfiguration> configurations = new HashSet<>(this.taintingConfigurations);
+                this.taintedValues.add(new TaintedVariable(statementAssignment.getVariable(), configurations));
             }
 
             if(!this.conditions.isEmpty()) {
                 for(TaintedVariable taintedVariable : this.oldTaints) {
                     if(this.conditions.contains(taintedVariable.getVariable())) {
-                        this.taintedValues.add(new TaintedVariable(statementAssignment.getVariable(), taintedVariable.getConfiguration()));
+                        this.taintedValues.add(new TaintedVariable(statementAssignment.getVariable(), taintedVariable.getConfigurations()));
+                        break;
                     }
                 }
             }
@@ -210,6 +211,7 @@ public class TaintAnalysis {
             for(TaintedVariable taintedVariable : this.oldTaints) {
                 if(taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
                     this.killedTaintedValues.add(taintedVariable);
+                    break;
                 }
             }
 
@@ -232,16 +234,16 @@ public class TaintAnalysis {
     public static class TaintedVariable {
         private ExpressionVariable variable;
         // TODO maybe have a set of configurations that affect this variable instead of having multiple variables.
-        private ExpressionConstantConfiguration configuration;
+        private Set<ExpressionConstantConfiguration> configurations;
 
-        public TaintedVariable(ExpressionVariable variable, ExpressionConstantConfiguration configuration) {
+        public TaintedVariable(ExpressionVariable variable, Set<ExpressionConstantConfiguration> configuration) {
             this.variable = variable;
-            this.configuration = configuration;
+            this.configurations = configuration;
         }
 
         public ExpressionVariable getVariable() { return this.variable; }
 
-        public ExpressionConstantConfiguration getConfiguration() { return this.configuration; }
+        public Set<ExpressionConstantConfiguration> getConfigurations() { return this.configurations; }
 
         @Override
         public boolean equals(Object o) {
@@ -251,18 +253,18 @@ public class TaintAnalysis {
             TaintedVariable that = (TaintedVariable) o;
 
             if (!variable.equals(that.variable)) return false;
-            return configuration.equals(that.configuration);
+            return configurations.equals(that.configurations);
         }
 
         @Override
         public int hashCode() {
             int result = variable.hashCode();
-            result = 31 * result + configuration.hashCode();
+            result = 31 * result + configurations.hashCode();
             return result;
         }
 
         @Override
-        public String toString() { return this.variable + "<-" + this.configuration; }
+        public String toString() { return this.variable + "<-" + this.configurations; }
     }
 
     public Map<BasicBlock, Set<TaintedVariable>> getInstructionToTainted() {

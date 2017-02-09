@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.analysis.taint;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.visitor.BaseVisitor;
-import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 import edu.cmu.cs.mvelezce.language.ast.expression.*;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
 
@@ -19,7 +18,7 @@ import java.util.*;
 // TODO what should be the generic?
 public class TaintAnalysis {
 
-    private Map<BasicBlock, Set<ExpressionVariable>> instructionToTainted;
+    private Map<BasicBlock, Set<TaintedVariable>> instructionToTainted;
     private CFG cfg;
 
     public TaintAnalysis(CFG cfg) {
@@ -27,7 +26,7 @@ public class TaintAnalysis {
         this.cfg = cfg;
     }
 
-    public Map<BasicBlock, Set<ExpressionVariable>> analyze() {
+    public Map<BasicBlock, Set<TaintedVariable>> analyze() {
         List<BasicBlock> entry = this.cfg.getSuccessors(this.cfg.getEntry());
 
         if(entry.size() > 1) {
@@ -42,11 +41,11 @@ public class TaintAnalysis {
             BasicBlock instruction = worklist.remove();
 
 // CK          taintsBefore = this.instructionToTainted.get(for all previousIstr)
-            Set<ExpressionVariable> taintsBefore = this.instructionToTainted.get(instruction);
+            Set<TaintedVariable> taintsBefore = this.instructionToTainted.get(instruction);
 
 // CK           S' = transfer(S, instruction)
 // CK           taintedValues=transfer(taintedValues, instruction);
-            Set<ExpressionVariable> taintsAfter = transfer(taintsBefore, instruction);
+            Set<TaintedVariable> taintsAfter = transfer(taintsBefore, instruction);
 
 // CK           this.instructionToTainted.put(instruction, /*taintsAfter*/currentTaintedVariables);
             this.instructionToTainted.put(instruction, taintsAfter);
@@ -89,17 +88,17 @@ public class TaintAnalysis {
     }
 
     // TODO should be private. Protected allows testing
-    public Set<ExpressionVariable> transfer(Set<ExpressionVariable> oldTaints, BasicBlock instruction) {
+    public Set<TaintedVariable> transfer(Set<TaintedVariable> oldTaints, BasicBlock instruction) {
         // TODO CK why do I need this?
-        Set<ExpressionVariable> output = new HashSet<>(oldTaints);
+        Set<TaintedVariable> output = new HashSet<>(oldTaints);
         TransferVisitor transferVisitor = new TransferVisitor(oldTaints);
         instruction.getStatement().accept(transferVisitor);
 
-        Set<ExpressionVariable> newTaints = transferVisitor.getTaintedValues();
-        Set<ExpressionVariable> killedTaints = transferVisitor.getKilledTaintedValues();
+        Set<TaintedVariable> newTaints = transferVisitor.getTaintedValues();
+        Set<TaintedVariable> killedTaints = transferVisitor.getKilledTaintedValues();
 
-        Set<ExpressionVariable> result = new HashSet<>();
-        Set<ExpressionVariable> merge = new HashSet<>();
+        Set<TaintedVariable> result = new HashSet<>();
+        Set<TaintedVariable> merge = new HashSet<>();
 
         if(oldTaints.isEmpty()) {
             merge.addAll(newTaints);
@@ -113,7 +112,7 @@ public class TaintAnalysis {
         }
 
         if(!killedTaints.isEmpty()) {
-            for(ExpressionVariable possibleTaint : merge) {
+            for(TaintedVariable possibleTaint : merge) {
                 if(!killedTaints.contains(possibleTaint)) {
                     result.add(possibleTaint);
                 }
@@ -128,8 +127,8 @@ public class TaintAnalysis {
 
     // TODO should be private. Protected allows testing
     // Can only stay in the same level of the lattice or go up
-    protected static Set<ExpressionVariable> join(Set<ExpressionVariable> taintsOne, Set<ExpressionVariable> taintsTwo) {
-        Set<ExpressionVariable> result = new HashSet<>();
+    protected static Set<TaintedVariable> join(Set<TaintedVariable> taintsOne, Set<TaintedVariable> taintsTwo) {
+        Set<TaintedVariable> result = new HashSet<>();
 
         if(taintsOne != null) {
             result.addAll(taintsOne);
@@ -144,14 +143,16 @@ public class TaintAnalysis {
 
 
     private class TransferVisitor extends BaseVisitor {
-        private final Set<ExpressionVariable> oldTaints;
+        private final Set<TaintedVariable> oldTaints;
         private boolean taintedAssignment;
-        private Set<ExpressionVariable> taintedValues;
-        private Set<ExpressionVariable> killedTaintedValues;
+        private Set<ExpressionConstantConfiguration> taintingConfigurations;
+        private Set<TaintedVariable> taintedValues;
+        private Set<TaintedVariable> killedTaintedValues;
 
-        public TransferVisitor(Set<ExpressionVariable> oldTaints) {
+        public TransferVisitor(Set<TaintedVariable> oldTaints) {
             this.oldTaints = oldTaints;
             this.taintedAssignment = false;
+            this.taintingConfigurations = new HashSet<>();
             this.taintedValues = new HashSet<>();
             this.killedTaintedValues = new HashSet<>();
         }
@@ -160,6 +161,7 @@ public class TaintAnalysis {
         public Expression visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration) {
             Expression expression = super.visitExpressionConstantConfiguration(expressionConstantConfiguration);
             this.taintedAssignment = true;
+            this.taintingConfigurations.add(expressionConstantConfiguration);
 
             return expression;
         }
@@ -167,13 +169,12 @@ public class TaintAnalysis {
         @Override
         public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
             Expression expression = super.visitExpressionVariable(expressionVariable);
-            
-            if(this.taintedAssignment) {
-                this.taintedValues.add((ExpressionVariable) expression);
-            }
 
-            if(this.oldTaints.contains(expressionVariable)) {
-                this.taintedAssignment = true;
+            for (TaintedVariable taintedVariable : this.oldTaints) {
+                if (taintedVariable.getVariable().equals(expressionVariable)) {
+                    this.taintedAssignment = true;
+                    this.taintingConfigurations.add(taintedVariable.getConfiguration());
+                }
             }
 
             return expression;
@@ -184,10 +185,15 @@ public class TaintAnalysis {
             statementAssignment.getRight().accept(this);
 
             if(this.taintedAssignment) {
-                this.taintedValues.add(statementAssignment.getVariable());
+                for(ExpressionConstantConfiguration configuration : this.taintingConfigurations) {
+                    this.taintedValues.add(new TaintedVariable(statementAssignment.getVariable(), configuration));
+                }
             }
-            else if(this.oldTaints.contains(statementAssignment.getVariable())) {
-                this.killedTaintedValues.add(statementAssignment.getVariable());
+
+            for (TaintedVariable taintedVariable : this.oldTaints) {
+                if (taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
+                    this.killedTaintedValues.add(taintedVariable);
+                }
             }
         }
 
@@ -196,16 +202,50 @@ public class TaintAnalysis {
             statementIf.getCondition().accept(this);
         }
 
-        public Set<ExpressionVariable> getTaintedValues() {
-            return this.taintedValues;
+        public Set<TaintedVariable> getTaintedValues() { return this.taintedValues;
         }
 
-        public Set<ExpressionVariable> getKilledTaintedValues() {
+        public Set<TaintedVariable> getKilledTaintedValues() {
             return this.killedTaintedValues;
         }
     }
 
-    public Map<BasicBlock, Set<ExpressionVariable>> getInstructionToTainted() {
+    public static class TaintedVariable {
+        private ExpressionVariable variable;
+        private ExpressionConstantConfiguration configuration;
+
+        public TaintedVariable(ExpressionVariable variable, ExpressionConstantConfiguration configuration) {
+            this.variable = variable;
+            this.configuration = configuration;
+        }
+
+        public ExpressionVariable getVariable() { return this.variable; }
+
+        public ExpressionConstantConfiguration getConfiguration() { return this.configuration; }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            TaintedVariable that = (TaintedVariable) o;
+
+            if (!variable.equals(that.variable)) return false;
+            return configuration.equals(that.configuration);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = variable.hashCode();
+            result = 31 * result + configuration.hashCode();
+            return result;
+        }
+
+        @Override
+        public String toString() { return this.variable + "<-" + this.configuration; }
+    }
+
+    public Map<BasicBlock, Set<TaintedVariable>> getInstructionToTainted() {
         return this.instructionToTainted;
     }
 }

@@ -1,5 +1,5 @@
 a=0
-b=a + C
+b=C + a
 if(b) {
     sleep(2)
     b=2

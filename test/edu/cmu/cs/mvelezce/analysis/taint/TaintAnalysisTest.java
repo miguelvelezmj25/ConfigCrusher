@@ -34,33 +34,33 @@ public class TaintAnalysisTest {
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
 
-        Map<BasicBlock, Set<ExpressionVariable>> instructionsToTainted = new LinkedHashMap<>();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = new LinkedHashMap<>();
 
         BasicBlock succesor = cfg.getSuccessors(cfg.getEntry()).get(0);
-        Set<ExpressionVariable> tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        Set<TaintAnalysis.TaintedVariable> tainted = new HashSet<>();
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -77,20 +77,20 @@ public class TaintAnalysisTest {
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
 
-        Map<BasicBlock, Set<ExpressionVariable>> instructionsToTainted = new LinkedHashMap<>();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = new LinkedHashMap<>();
 
         BasicBlock succesor = cfg.getSuccessors(cfg.getEntry()).get(0);
-        Set<ExpressionVariable> tainted = new HashSet<>();
+        Set<TaintAnalysis.TaintedVariable> tainted = new HashSet<>();
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -107,46 +107,38 @@ public class TaintAnalysisTest {
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
 
-        Map<BasicBlock, Set<ExpressionVariable>> instructionsToTainted = new LinkedHashMap<>();
-
-//        b=C
-//        a=b
-//        if(a) {
-//            sleep(2)
-//        }
-//        b=0
-//        sleep(3)
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = new LinkedHashMap<>();
 
         BasicBlock succesor = cfg.getSuccessors(cfg.getEntry()).get(0);
-        Set<ExpressionVariable> tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("b"));
+        Set<TaintAnalysis.TaintedVariable> tainted = new HashSet<>();
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(cfg.getSuccessors(succesor).get(0), tainted);
 
         succesor = cfg.getSuccessors(succesor).get(1);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -163,25 +155,25 @@ public class TaintAnalysisTest {
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
 
-        Map<BasicBlock, Set<ExpressionVariable>> instructionsToTainted = new LinkedHashMap<>();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = new LinkedHashMap<>();
 
         BasicBlock succesor = cfg.getSuccessors(cfg.getEntry()).get(0);
-        Set<ExpressionVariable> tainted = new HashSet<>();
+        Set<TaintAnalysis.TaintedVariable> tainted = new HashSet<>();
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
@@ -190,7 +182,7 @@ public class TaintAnalysisTest {
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -207,7 +199,7 @@ public class TaintAnalysisTest {
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
 
-        Map<BasicBlock, Set<ExpressionVariable>> instructionsToTainted = new LinkedHashMap<>();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = new LinkedHashMap<>();
 
 //        a=C
 //        if(a) {
@@ -219,23 +211,23 @@ public class TaintAnalysisTest {
 //        }
 
         BasicBlock succesor = cfg.getSuccessors(cfg.getEntry()).get(0);
-        Set<ExpressionVariable> tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        Set<TaintAnalysis.TaintedVariable> tainted = new HashSet<>();
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         BasicBlock firstIfSuccessor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(firstIfSuccessor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(1);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         tainted = new HashSet<>();
@@ -243,7 +235,7 @@ public class TaintAnalysisTest {
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
@@ -260,45 +252,45 @@ public class TaintAnalysisTest {
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
 
-        Map<BasicBlock, Set<ExpressionVariable>> instructionsToTainted = new LinkedHashMap<>();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = new LinkedHashMap<>();
 
         BasicBlock succesor = cfg.getSuccessors(cfg.getEntry()).get(0);
-        Set<ExpressionVariable> tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        Set<TaintAnalysis.TaintedVariable> tainted = new HashSet<>();
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("D")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("D")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("D")));
         instructionsToTainted.put(succesor, tainted);
 
         succesor = cfg.getSuccessors(succesor).get(0);
         tainted = new HashSet<>();
-        tainted.add(new ExpressionVariable("a"));
-        tainted.add(new ExpressionVariable("b"));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("D")));
         instructionsToTainted.put(succesor, tainted);
 
 
@@ -309,20 +301,20 @@ public class TaintAnalysisTest {
 
     @Test
     public void join() throws Exception {
-        Set<ExpressionVariable> set = new HashSet<>();
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
         Assert.assertEquals(set, TaintAnalysis.join(set, set));
 
-        set.add(new ExpressionVariable("a"));
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         Assert.assertEquals(set, TaintAnalysis.join(new HashSet<>(), set));
 
         Assert.assertEquals(set, TaintAnalysis.join(set, set));
 
-        Set<ExpressionVariable> set1 = new HashSet<>();
-        set1.add(new ExpressionVariable("b"));
+        Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
 
-        Set<ExpressionVariable> set2 = new HashSet<>();
-        set2.add(new ExpressionVariable("a"));
-        set2.add(new ExpressionVariable("b"));
+        Set<TaintAnalysis.TaintedVariable> set2 = new HashSet<>();
+        set2.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        set2.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         Assert.assertEquals(set2, TaintAnalysis.join(set, set1));
     }
 
@@ -330,19 +322,37 @@ public class TaintAnalysisTest {
     public void transfer() throws Exception {
         TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
         BasicBlock basicBlock = new BasicBlock("1", new StatementSleep(new ExpressionConstantInt(1)));
-        Set<ExpressionVariable> set = new HashSet<>();
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
+        // Rules 1
         Assert.assertEquals(set, taintAnalysis.transfer(set, basicBlock));
 
-        set.add(new ExpressionVariable("a"));
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
         basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C")));
+        // Rule 2
         Assert.assertEquals(set, taintAnalysis.transfer(new HashSet<>(), basicBlock));
 
-        Set<ExpressionVariable> set1 = new HashSet<>();
-        set1.add(new ExpressionVariable("b"));
-        set.add(new ExpressionVariable("b"));
+        Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
         basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C")));
+        // Rule 3
         Assert.assertEquals(set, taintAnalysis.transfer(set1, basicBlock));
 
+        set = new HashSet<>();
+        set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(0)));
+        // Rule 4
+        Assert.assertEquals(set, taintAnalysis.transfer(set1, basicBlock));
+
+        set = new HashSet<>();
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), new ExpressionConstantConfiguration("C")));
+        set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), new ExpressionConstantConfiguration("C")));
+        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("b"), "=", new ExpressionVariable("a")));
+        // Rule 5
+        Assert.assertEquals(set, taintAnalysis.transfer(set1, basicBlock));
     }
 
 }

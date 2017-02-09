@@ -167,7 +167,7 @@ public class CFGBuilderTest {
         BasicBlock currentBasicBlock = basicBlock;
 
         statement = new StatementAssignment(new ExpressionVariable("b"), "=",
-                new ExpressionBinary(new ExpressionVariable("a"), "+", new ExpressionConstantConfiguration("C")));
+                new ExpressionBinary(new ExpressionConstantConfiguration("C"), "+", new ExpressionVariable("a")));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;

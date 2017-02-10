@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by miguelvelez on 2/2/17.
+ * TODO
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class BasicBlock {
 
@@ -15,28 +18,63 @@ public class BasicBlock {
     private Statement statement;
     private List<Expression> conditions;
 
+    /**
+     * TODO
+     * @param id
+     * @param statement
+     * @param conditions
+     */
     public BasicBlock(String id, Statement statement, List<Expression> conditions) {
         this.id = id;
         this.statement = statement;
         this.conditions = conditions;
     }
 
+    /**
+     * TODO
+     * @param id
+     * @param statement
+     */
     public BasicBlock(String id, Statement statement) {
         this(id, statement, new ArrayList<>());
     }
 
+    /**
+     * TODO
+     * @param id
+     */
     public BasicBlock(String id) {
         this(id, null);
     }
 
+    /**
+     * TODO
+     * @return
+     */
     public boolean isSpecial() { return this.statement == null; }
 
+    /**
+     * TODO
+     * @return
+     */
     public boolean isStatement() { return this.statement != null; }
 
+    /**
+     * TODO
+     * @return
+     */
     public String getId() { return this.id; }
 
+    /**
+     * TODO
+     * @return
+     */
     public Statement getStatement() { return this.statement; }
 
+    /**
+     * TODO
+     * @return
+     */
     public List<Expression> getConditions() { return this.conditions; }
 
     @Override

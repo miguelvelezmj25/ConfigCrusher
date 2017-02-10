@@ -393,19 +393,44 @@ public class TaintAnalysisTest {
     }
 
     @Test
-    public void join() throws Exception {
+    public void join1() throws Exception {
         Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
         Assert.assertEquals(set, TaintAnalysis.join(set, set));
+    }
 
+    @Test
+    public void join2() throws Exception {
         Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
         configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
         set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
+
         Assert.assertEquals(set, TaintAnalysis.join(new HashSet<>(), set));
+    }
+
+    @Test
+    public void join3() throws Exception {
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
 
         Assert.assertEquals(set, TaintAnalysis.join(set, set));
+    }
+
+    @Test
+    public void join4() throws Exception {
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
 
         Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
+
 
         Set<TaintAnalysis.TaintedVariable> set2 = new HashSet<>();
         set2.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
@@ -414,41 +439,71 @@ public class TaintAnalysisTest {
     }
 
     @Test
-    public void transfer() throws Exception {
-        // RULE 1
+    public void transfer1() throws Exception {
         TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
-        BasicBlock basicBlock = new BasicBlock("1", new StatementSleep(new ExpressionConstantInt(1)));
         Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
+        BasicBlock basicBlock = new BasicBlock("1", new StatementSleep(new ExpressionConstantInt(1)));
 
         Assert.assertEquals(set, taintAnalysis.transfer(set, basicBlock));
+    }
 
-        // RULE 2
+    @Test
+    public void transfer2() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+
         Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
         configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
         set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
-        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C")));
+
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C")));
 
         Assert.assertEquals(set, taintAnalysis.transfer(new HashSet<>(), basicBlock));
+    }
 
-        // RULE 3
+    @Test
+    public void transfer3() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+
         Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
         set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
-        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C")));
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C")));
 
         Assert.assertEquals(set, taintAnalysis.transfer(set1, basicBlock));
+    }
 
-        // RULE 4
-        set1 = new HashSet<>();
+    @Test
+    public void transfer4() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
-        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(0)));
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(0)));
 
         Assert.assertEquals(new HashSet<>(), taintAnalysis.transfer(set1, basicBlock));
+    }
 
-        // RULE 5
-        set = new HashSet<>();
+    @Test
+    public void transfer5() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
         set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
-        set1 = new HashSet<>();
+
+        Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
         set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("x"), configurations));
 
@@ -459,37 +514,120 @@ public class TaintAnalysisTest {
 
         List<Expression> conditions = new ArrayList<>();
         conditions.add(statementIf.getCondition());
-        for(Statement trueStatement : statementIf.getThenBlock().getStatements()) {
+
+        BasicBlock basicBlock = null;
+        for (Statement trueStatement : statementIf.getThenBlock().getStatements()) {
             basicBlock = new BasicBlock("1| " + trueStatement, trueStatement, conditions);
         }
 
         Assert.assertEquals(set1, taintAnalysis.transfer(set, basicBlock));
+    }
 
-        // RULE 7
-        set = new HashSet<>();
+    @Test
+    public void transfer6() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
         set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
         set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
-        set1 = new HashSet<>();
+
+        Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
-        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("b"), "=", new ExpressionVariable("a")));
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("x"), configurations));
+
+        List<Statement> statements = new LinkedList<>();
+        statements.add(new StatementAssignment(new ExpressionVariable("x"), "=", new ExpressionConstantInt(0)));
+
+        StatementIf statementIf = new StatementIf(new ExpressionBinary(new ExpressionVariable("a"), "+", new ExpressionVariable("b")),
+                new StatementBlock(statements));
+
+        List<Expression> conditions = new ArrayList<>();
+        conditions.add(statementIf.getCondition());
+
+        BasicBlock basicBlock = null;
+        for (Statement trueStatement : statementIf.getThenBlock().getStatements()) {
+            basicBlock = new BasicBlock("1| " + trueStatement, trueStatement, conditions);
+        }
+
+        Assert.assertEquals(set1, taintAnalysis.transfer(set, basicBlock));
+    }
+
+    @Test
+    public void transfer7() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
+
+        Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
+
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("b"), "=",
+                new ExpressionVariable("a")));
 
         Assert.assertEquals(set, taintAnalysis.transfer(set1, basicBlock));
+    }
 
-        // RULE A
-        set = new HashSet<>();
+    @Test
+    public void transferA() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
         set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
-        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=",
+
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=",
                 new ExpressionBinary(new ExpressionConstantInt(1), "+", new ExpressionConstantConfiguration("C"))));
 
         Assert.assertEquals(set, taintAnalysis.transfer(new HashSet<>(), basicBlock));
+    }
 
-        // RULE B
-        set = new HashSet<>();
+    @Test
+    public void transferB() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
         set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
-        basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=",
+
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=",
                 new ExpressionBinary(new ExpressionVariable("b"), "+", new ExpressionConstantConfiguration("C"))));
 
         Assert.assertEquals(set, taintAnalysis.transfer(new HashSet<>(), basicBlock));
+    }
+
+    @Test
+    public void transferC() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+
+        Set<ExpressionConstantConfiguration> configurations = new HashSet<>();
+        configurations.add(new ExpressionConstantConfiguration("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("d"), configurations));
+
+        Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
+
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("d"), "=",
+                new ExpressionBinary(new ExpressionVariable("b"), "+", new ExpressionVariable("a"))));
+
+        Assert.assertEquals(set, taintAnalysis.transfer(set1, basicBlock));
     }
 
 }

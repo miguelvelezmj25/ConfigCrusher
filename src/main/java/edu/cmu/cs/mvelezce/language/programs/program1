@@ -1,0 +1,6 @@
+a=C
+b=a
+if(b) {
+    a=0
+    sleep(2)
+}

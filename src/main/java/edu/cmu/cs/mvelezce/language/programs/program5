@@ -1,0 +1,8 @@
+a=C
+if(a) {
+    sleep(2)
+    a=0
+}
+if(!C) {
+    sleep(3)
+}

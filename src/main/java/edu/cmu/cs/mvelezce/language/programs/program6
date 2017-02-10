@@ -1,0 +1,10 @@
+a=C
+if(a) {
+    sleep(1)
+    b=D
+    if(!b) {
+        sleep(2)
+    }
+    sleep(3)
+}
+

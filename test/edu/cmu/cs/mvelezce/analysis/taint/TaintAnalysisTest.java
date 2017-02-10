@@ -546,7 +546,8 @@ public class TaintAnalysisTest {
                 new StatementBlock(statements));
 
         List<Expression> conditions = new ArrayList<>();
-        conditions.add(statementIf.getCondition());
+        conditions.add(new ExpressionVariable("a"));
+        conditions.add(new ExpressionVariable("b"));
 
         BasicBlock basicBlock = null;
         for (Statement trueStatement : statementIf.getThenBlock().getStatements()) {

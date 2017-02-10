@@ -4,5 +4,5 @@ if(a) {
     a=0
 }
 if(!C) {
-    sleep(2)
+    sleep(3)
 }

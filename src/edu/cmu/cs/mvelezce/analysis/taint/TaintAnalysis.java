@@ -181,7 +181,7 @@ public class TaintAnalysis {
                     if (taintedVariable.getVariable().equals(expressionVariable)) {
                         this.taintedVariable = true;
                         this.taintingConfigurations.addAll(taintedVariable.getConfigurations());
-//                        break; // TODO can I break?
+                        break;
                     }
                 }
             }
@@ -201,17 +201,24 @@ public class TaintAnalysis {
             }
 
             if(!this.conditions.isEmpty()) {
+
                 for(TaintedVariable oldTaintedVariable : this.oldTaints) {
+
                     if(this.conditions.contains(oldTaintedVariable.getVariable())) {
+
                         if(this.taintedVariables.isEmpty()) {
                             this.taintedVariables.add(new TaintedVariable(statementAssignment.getVariable(), oldTaintedVariable.getConfigurations()));
                         }
-                        for(TaintedVariable taintedVariable : this.taintedVariables) {
-                            if(taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
-                                taintedVariable.getConfigurations().addAll(oldTaintedVariable.getConfigurations());
+                        else {
+
+                            for(TaintedVariable taintedVariable : this.taintedVariables) {
+
+                                if (taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
+                                    taintedVariable.getConfigurations().addAll(oldTaintedVariable.getConfigurations());
+                                    break;
+                                }
                             }
                         }
-//                        break; // TODO can I break?
                     }
                 }
             }
@@ -220,7 +227,7 @@ public class TaintAnalysis {
                 for (TaintedVariable taintedVariable : this.oldTaints) {
                     if (taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
                         this.killedTaintedVariables.add(taintedVariable);
-//                        break; // TODO can I break?
+                        break;
                     }
                 }
             }
@@ -230,9 +237,9 @@ public class TaintAnalysis {
 
         @Override
         public void visitStatementIf(StatementIf statementIf) {
-//            statementIf.getThenBlock()
             statementIf.getCondition().accept(this);
         }
+
 
         public Set<TaintedVariable> getTaintedVariables() { return this.taintedVariables; }
 

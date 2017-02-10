@@ -2,6 +2,8 @@ package edu.cmu.cs.mvelezce.analysis.cfg;
 
 import edu.cmu.cs.mvelezce.analysis.visitor.BaseVisitor;
 import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
+import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConstantConfiguration;
+import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
 
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ public class CFGBuilder extends BaseVisitor {
     private BasicBlock currentBasicBlock;
     private Stack<BasicBlock> branchStack;
     private Stack<Expression> conditionStack;
+    private List<Expression> currentConditions;
+    private boolean checkingConditions;
 
     public CFGBuilder() {
         this.steps = 0;
@@ -25,6 +29,8 @@ public class CFGBuilder extends BaseVisitor {
         this.currentBasicBlock = this.cfg.getEntry();
         this.branchStack = new Stack<>();
         this.conditionStack = new Stack<>();
+        this.currentConditions = null;
+        this.checkingConditions = false;
     }
 
     public CFG buildCFG(Statement ast) {
@@ -36,6 +42,22 @@ public class CFGBuilder extends BaseVisitor {
         }
 
         return this.cfg;
+    }
+
+    @Override
+    public Expression visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration) {
+        if(this.checkingConditions) {
+            this.currentConditions.add(expressionConstantConfiguration);
+        }
+        return expressionConstantConfiguration;
+    }
+
+    @Override
+    public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
+        if(this.checkingConditions) {
+            this.currentConditions.add(expressionVariable);
+        }
+        return expressionVariable;
     }
 
     @Override
@@ -82,25 +104,27 @@ public class CFGBuilder extends BaseVisitor {
     }
 
     private BasicBlock checkConditions(Statement statement) {
+        this.checkingConditions = true;
         BasicBlock basicBlock;
 
         if(this.conditionStack.isEmpty()) {
             basicBlock = new BasicBlock(this.steps++ + "| " + statement, statement);
         }
         else {
-            List<Expression> conditions = new ArrayList<>();
+            this.currentConditions = new ArrayList<>();
             for(Expression condition : this.conditionStack) {
-                conditions.add(condition);
+                condition.accept(this);
             }
 
-            Collections.reverse(conditions);
-            basicBlock = new BasicBlock(this.steps++ + "| " + statement, statement, conditions);
+            Collections.reverse(this.currentConditions);
+            basicBlock = new BasicBlock(this.steps++ + "| " + statement, statement, this.currentConditions);
         }
 
         this.cfg.addEdge(this.currentBasicBlock, basicBlock);
         this.checkBranching(basicBlock);
         this.currentBasicBlock = basicBlock;
 
+        this.checkingConditions = false;
         return basicBlock;
     }
 }

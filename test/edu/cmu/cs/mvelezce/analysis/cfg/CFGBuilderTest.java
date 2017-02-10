@@ -241,7 +241,7 @@ public class CFGBuilderTest {
         }
 
         statements = new LinkedList<>();
-        statements.add(new StatementSleep(new ExpressionConstantInt(2)));
+        statements.add(new StatementSleep(new ExpressionConstantInt(3)));
 
         statementIf = new StatementIf(new ExpressionUnary("!", new ExpressionConstantConfiguration("C")), new StatementBlock(statements));
         basicBlock = new BasicBlock(steps++ + "| " + statementIf, statementIf);
@@ -251,7 +251,7 @@ public class CFGBuilderTest {
         branchStack.push(currentBasicBlock);
 
         conditions = new ArrayList<>();
-        conditions.add(statementIf.getCondition());
+        conditions.add(new ExpressionConstantConfiguration("C"));
         for(Statement trueStatements : statementIf.getThenBlock().getStatements()) {
             basicBlock = new BasicBlock(steps++ + "| " + trueStatements, trueStatements, conditions);
             cfg.addEdge(currentBasicBlock, basicBlock);
@@ -317,7 +317,7 @@ public class CFGBuilderTest {
                 branchStack.push(currentBasicBlock);
 
                 List<Expression> innerConditions = new ArrayList<>(conditions);
-                innerConditions.add(0, ((StatementIf) trueStatement).getCondition());
+                innerConditions.add(0, new ExpressionVariable("b"));
                 for(Statement trueStatementInner : ((StatementIf) trueStatement).getThenBlock().getStatements()) {
                     basicBlock = new BasicBlock(steps++ + "| " + trueStatementInner, trueStatementInner, innerConditions);
                     cfg.addEdge(currentBasicBlock, basicBlock);

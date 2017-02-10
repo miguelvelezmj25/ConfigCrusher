@@ -44,7 +44,7 @@ public class TaintAnalysis {
             Set<TaintedVariable> taintsBefore = this.instructionToTainted.get(instruction);
 
 // CK           S' = transfer(S, instruction)
-// CK           taintedValues=transfer(taintedValues, instruction);
+// CK           taintedVariables=transfer(taintedVariables, instruction);
             Set<TaintedVariable> taintsAfter = transfer(taintsBefore, instruction);
 
 // CK           this.instructionToTainted.put(instruction, /*taintsAfter*/currentTaintedVariables);
@@ -94,8 +94,8 @@ public class TaintAnalysis {
         TransferVisitor transferVisitor = new TransferVisitor(oldTaints, instruction.getConditions());
         instruction.getStatement().accept(transferVisitor);
 
-        Set<TaintedVariable> newTaints = transferVisitor.getTaintedValues();
-        Set<TaintedVariable> killedTaints = transferVisitor.getKilledTaintedValues();
+        Set<TaintedVariable> newTaints = transferVisitor.getTaintedVariables();
+        Set<TaintedVariable> killedTaints = transferVisitor.getKilledTaintedVariables();
 
         Set<TaintedVariable> result = new HashSet<>();
         Set<TaintedVariable> merge = new HashSet<>();
@@ -148,8 +148,8 @@ public class TaintAnalysis {
         private boolean taintedConfiguration;
         private boolean taintedVariable;
         private Set<ExpressionConstantConfiguration> taintingConfigurations;
-        private Set<TaintedVariable> taintedValues;
-        private Set<TaintedVariable> killedTaintedValues;
+        private Set<TaintedVariable> taintedVariables;
+        private Set<TaintedVariable> killedTaintedVariables;
         private List<Expression> conditions;
 
         public TransferVisitor(Set<TaintedVariable> oldTaints, List<Expression> conditions) {
@@ -158,8 +158,8 @@ public class TaintAnalysis {
             this.taintedConfiguration = false;
             this.taintedVariable = false;
             this.taintingConfigurations = new HashSet<>();
-            this.taintedValues = new HashSet<>();
-            this.killedTaintedValues = new HashSet<>();
+            this.taintedVariables = new HashSet<>();
+            this.killedTaintedVariables = new HashSet<>();
             this.conditions = conditions;
         }
 
@@ -181,7 +181,7 @@ public class TaintAnalysis {
                     if (taintedVariable.getVariable().equals(expressionVariable)) {
                         this.taintedVariable = true;
                         this.taintingConfigurations.addAll(taintedVariable.getConfigurations());
-                        break;
+//                        break; // TODO can I break?
                     }
                 }
             }
@@ -196,22 +196,32 @@ public class TaintAnalysis {
 
             if(this.taintedConfiguration || this.taintedVariable) {
                 Set<ExpressionConstantConfiguration> configurations = new HashSet<>(this.taintingConfigurations);
-                this.taintedValues.add(new TaintedVariable(statementAssignment.getVariable(), configurations));
+
+                this.taintedVariables.add(new TaintedVariable(statementAssignment.getVariable(), configurations));
             }
 
             if(!this.conditions.isEmpty()) {
-                for(TaintedVariable taintedVariable : this.oldTaints) {
-                    if(this.conditions.contains(taintedVariable.getVariable())) {
-                        this.taintedValues.add(new TaintedVariable(statementAssignment.getVariable(), taintedVariable.getConfigurations()));
-                        break;
+                for(TaintedVariable oldTaintedVariable : this.oldTaints) {
+                    if(this.conditions.contains(oldTaintedVariable.getVariable())) {
+                        if(this.taintedVariables.isEmpty()) {
+                            this.taintedVariables.add(new TaintedVariable(statementAssignment.getVariable(), oldTaintedVariable.getConfigurations()));
+                        }
+                        for(TaintedVariable taintedVariable : this.taintedVariables) {
+                            if(taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
+                                taintedVariable.getConfigurations().addAll(oldTaintedVariable.getConfigurations());
+                            }
+                        }
+//                        break; // TODO can I break?
                     }
                 }
             }
 
-            for(TaintedVariable taintedVariable : this.oldTaints) {
-                if(taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
-                    this.killedTaintedValues.add(taintedVariable);
-                    break;
+            if(!this.taintedConfiguration && !this.taintedVariable) {
+                for (TaintedVariable taintedVariable : this.oldTaints) {
+                    if (taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
+                        this.killedTaintedVariables.add(taintedVariable);
+//                        break; // TODO can I break?
+                    }
                 }
             }
 
@@ -224,10 +234,10 @@ public class TaintAnalysis {
             statementIf.getCondition().accept(this);
         }
 
-        public Set<TaintedVariable> getTaintedValues() { return this.taintedValues; }
+        public Set<TaintedVariable> getTaintedVariables() { return this.taintedVariables; }
 
-        public Set<TaintedVariable> getKilledTaintedValues() {
-            return this.killedTaintedValues;
+        public Set<TaintedVariable> getKilledTaintedVariables() {
+            return this.killedTaintedVariables;
         }
     }
 

@@ -37,8 +37,7 @@ public class Helper {
         }
 
         configurations.add(new HashSet<>());
-
-         return configurations;
+        return configurations;
     }
 
     /**

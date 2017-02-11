@@ -67,11 +67,6 @@ public class Interpreter implements Visitor<ValueInt> {
     public ValueInt visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
         int value = 0;
 
-//        if(this.activatedConfigurations.contains(expressionConfigurationConstant.getName())
-//                || this.store.containsKey(expressionConfigurationConstant.getName())) {
-//            value = 1;
-//        }
-
         if(this.activatedConfigurations.contains(expressionConfigurationConstant.getName())) {
             value = 1;
         }

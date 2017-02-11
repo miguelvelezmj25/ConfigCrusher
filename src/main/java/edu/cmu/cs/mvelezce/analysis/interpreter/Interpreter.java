@@ -64,15 +64,15 @@ public class Interpreter implements Visitor<ValueInt> {
     }
 
     @Override
-    public ValueInt visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration) {
+    public ValueInt visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
         int value = 0;
 
-//        if(this.activatedConfigurations.contains(expressionConstantConfiguration.getName())
-//                || this.store.containsKey(expressionConstantConfiguration.getName())) {
+//        if(this.activatedConfigurations.contains(expressionConfigurationConstant.getName())
+//                || this.store.containsKey(expressionConfigurationConstant.getName())) {
 //            value = 1;
 //        }
 
-        if(this.activatedConfigurations.contains(expressionConstantConfiguration.getName())) {
+        if(this.activatedConfigurations.contains(expressionConfigurationConstant.getName())) {
             value = 1;
         }
 

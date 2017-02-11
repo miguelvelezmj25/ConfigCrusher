@@ -9,7 +9,7 @@ import edu.cmu.cs.mvelezce.language.ast.statement.*;
 public interface Visitor <V> {
 
     public V visitExpressionBinary(ExpressionBinary expressionBinary);
-    public V visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration);
+    public V visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant);
     public V visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt);
     public V visitExpressionUnary(ExpressionUnary expressionUnary);
     public V visitExpressionVariable(ExpressionVariable expressionVariable);

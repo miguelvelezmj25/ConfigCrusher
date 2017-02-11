@@ -31,7 +31,7 @@ public class CFGBuilderTest {
         CFG cfg = new CFG();
         Stack<BasicBlock> branchStack = new Stack<>();
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C"));
+        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConfigurationConstant("C"));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
@@ -76,13 +76,13 @@ public class CFGBuilderTest {
         int steps = 0;
         CFG cfg = new CFG();
 
-        Statement statement = new StatementSleep(new ExpressionConstantConfiguration("C"));
+        Statement statement = new StatementSleep(new ExpressionConfigurationConstant("C"));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
 
         statement = new StatementAssignment(new ExpressionVariable("a"), "=",
-                new ExpressionBinary(new ExpressionConstantConfiguration("C"), "-", new ExpressionConstantInt(1)));
+                new ExpressionBinary(new ExpressionConfigurationConstant("C"), "-", new ExpressionConstantInt(1)));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
@@ -109,7 +109,7 @@ public class CFGBuilderTest {
         CFG cfg = new CFG();
         Stack<BasicBlock> branchStack = new Stack<>();
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("b"), "=", new ExpressionConstantConfiguration("C"));
+        Statement statement = new StatementAssignment(new ExpressionVariable("b"), "=", new ExpressionConfigurationConstant("C"));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
@@ -171,7 +171,7 @@ public class CFGBuilderTest {
         BasicBlock currentBasicBlock = basicBlock;
 
         statement = new StatementAssignment(new ExpressionVariable("b"), "=",
-                new ExpressionBinary(new ExpressionConstantConfiguration("C"), "+", new ExpressionVariable("a")));
+                new ExpressionBinary(new ExpressionConfigurationConstant("C"), "+", new ExpressionVariable("a")));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
@@ -194,7 +194,7 @@ public class CFGBuilderTest {
             currentBasicBlock = basicBlock;
         }
 
-        statement = new StatementSleep(new ExpressionConstantConfiguration("C"));
+        statement = new StatementSleep(new ExpressionConfigurationConstant("C"));
         basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
@@ -217,7 +217,7 @@ public class CFGBuilderTest {
         CFG cfg = new CFG();
         Stack<BasicBlock> branchStack = new Stack<>();
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C"));
+        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConfigurationConstant("C"));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
@@ -243,7 +243,7 @@ public class CFGBuilderTest {
         statements = new LinkedList<>();
         statements.add(new StatementSleep(new ExpressionConstantInt(3)));
 
-        statementIf = new StatementIf(new ExpressionUnary("!", new ExpressionConstantConfiguration("C")), new StatementBlock(statements));
+        statementIf = new StatementIf(new ExpressionUnary("!", new ExpressionConfigurationConstant("C")), new StatementBlock(statements));
         basicBlock = new BasicBlock(steps++ + "| " + statementIf, statementIf);
         cfg.addEdge(currentBasicBlock, basicBlock);
         currentBasicBlock = basicBlock;
@@ -251,7 +251,7 @@ public class CFGBuilderTest {
         branchStack.push(currentBasicBlock);
 
         conditions = new ArrayList<>();
-        conditions.add(new ExpressionConstantConfiguration("C"));
+        conditions.add(new ExpressionConfigurationConstant("C"));
         for(Statement trueStatements : statementIf.getThenBlock().getStatements()) {
             basicBlock = new BasicBlock(steps++ + "| " + trueStatements, trueStatements, conditions);
             cfg.addEdge(currentBasicBlock, basicBlock);
@@ -277,7 +277,7 @@ public class CFGBuilderTest {
         Stack<BasicBlock> branchStack = new Stack<>();
         boolean cameFromInner = false;
 
-        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantConfiguration("C"));
+        Statement statement = new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConfigurationConstant("C"));
         BasicBlock basicBlock = new BasicBlock(steps++ + "| " + statement, statement);
         cfg.addEdge(cfg.getEntry(), basicBlock);
         BasicBlock currentBasicBlock = basicBlock;
@@ -290,7 +290,7 @@ public class CFGBuilderTest {
 
         List<Statement> statements = new LinkedList<>();
         statements.add(new StatementSleep(new ExpressionConstantInt(1)));
-        statements.add(new StatementAssignment(new ExpressionVariable("b"), "=", new ExpressionConstantConfiguration("D")));
+        statements.add(new StatementAssignment(new ExpressionVariable("b"), "=", new ExpressionConfigurationConstant("D")));
         statements.add(statementIfInner);
         statements.add(new StatementSleep(new ExpressionConstantInt(3)));
 

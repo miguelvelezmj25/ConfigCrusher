@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.analysis.cfg;
 
 import edu.cmu.cs.mvelezce.analysis.visitor.BaseVisitor;
 import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConstantConfiguration;
+import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
 
@@ -45,11 +45,11 @@ public class CFGBuilder extends BaseVisitor {
     }
 
     @Override
-    public Expression visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration) {
+    public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
         if(this.checkingConditions) {
-            this.currentConditions.add(expressionConstantConfiguration);
+            this.currentConditions.add(expressionConfigurationConstant);
         }
-        return expressionConstantConfiguration;
+        return expressionConfigurationConstant;
     }
 
     @Override

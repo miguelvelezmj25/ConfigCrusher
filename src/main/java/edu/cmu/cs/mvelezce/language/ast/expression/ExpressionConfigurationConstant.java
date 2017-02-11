@@ -5,10 +5,10 @@ import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 /**
  * Created by mvelezce on 2/1/17.
  */
-public class ExpressionConstantConfiguration extends Expression {
+public class ExpressionConfigurationConstant extends Expression {
     private String name;
 
-    public ExpressionConstantConfiguration(String name) {
+    public ExpressionConfigurationConstant(String name) {
         this.name = name;
     }
 
@@ -19,7 +19,7 @@ public class ExpressionConstantConfiguration extends Expression {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ExpressionConstantConfiguration that = (ExpressionConstantConfiguration) o;
+        ExpressionConfigurationConstant that = (ExpressionConfigurationConstant) o;
 
         return name.equals(that.name);
     }

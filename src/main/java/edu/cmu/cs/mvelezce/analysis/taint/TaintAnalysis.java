@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.visitor.BaseVisitor;
 import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConstantConfiguration;
+import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
 import edu.cmu.cs.mvelezce.language.ast.statement.StatementAssignment;
 import edu.cmu.cs.mvelezce.language.ast.statement.StatementIf;
@@ -150,7 +150,7 @@ public class TaintAnalysis {
         private boolean inAssignment;
         private boolean taintedConfiguration;
         private boolean taintedVariable;
-        private Set<ExpressionConstantConfiguration> taintingConfigurations;
+        private Set<ExpressionConfigurationConstant> taintingConfigurations;
         private Set<TaintedVariable> taintedVariables;
         private Set<TaintedVariable> killedTaintedVariables;
         private List<Expression> conditions;
@@ -167,10 +167,10 @@ public class TaintAnalysis {
         }
 
         @Override
-        public Expression visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration) {
-            Expression expression = super.visitExpressionConstantConfiguration(expressionConstantConfiguration);
+        public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
+            Expression expression = super.visitExpressionConstantConfiguration(expressionConfigurationConstant);
             this.taintedConfiguration = true;
-            this.taintingConfigurations.add(expressionConstantConfiguration);
+            this.taintingConfigurations.add(expressionConfigurationConstant);
 
             return expression;
         }
@@ -198,7 +198,7 @@ public class TaintAnalysis {
             statementAssignment.getRight().accept(this);
 
             if(this.taintedConfiguration || this.taintedVariable) {
-                Set<ExpressionConstantConfiguration> configurations = new HashSet<>(this.taintingConfigurations);
+                Set<ExpressionConfigurationConstant> configurations = new HashSet<>(this.taintingConfigurations);
 
                 this.taintedVariables.add(new TaintedVariable(statementAssignment.getVariable(), configurations));
             }
@@ -254,16 +254,16 @@ public class TaintAnalysis {
     public static class TaintedVariable {
         private ExpressionVariable variable;
         // TODO maybe have a set of configurations that affect this variable instead of having multiple variables.
-        private Set<ExpressionConstantConfiguration> configurations;
+        private Set<ExpressionConfigurationConstant> configurations;
 
-        public TaintedVariable(ExpressionVariable variable, Set<ExpressionConstantConfiguration> configuration) {
+        public TaintedVariable(ExpressionVariable variable, Set<ExpressionConfigurationConstant> configuration) {
             this.variable = variable;
             this.configurations = configuration;
         }
 
         public ExpressionVariable getVariable() { return this.variable; }
 
-        public Set<ExpressionConstantConfiguration> getConfigurations() { return this.configurations; }
+        public Set<ExpressionConfigurationConstant> getConfigurations() { return this.configurations; }
 
         @Override
         public boolean equals(Object o) {

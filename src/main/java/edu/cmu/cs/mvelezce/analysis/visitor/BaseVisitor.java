@@ -18,8 +18,8 @@ public class BaseVisitor implements Visitor<Expression> {
     }
 
     @Override
-    public Expression visitExpressionConstantConfiguration(ExpressionConstantConfiguration expressionConstantConfiguration) {
-        return expressionConstantConfiguration;
+    public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
+        return expressionConfigurationConstant;
     }
 
     @Override

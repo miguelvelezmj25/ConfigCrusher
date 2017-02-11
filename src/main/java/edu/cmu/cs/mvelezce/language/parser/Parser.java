@@ -116,7 +116,7 @@ public class Parser {
 
         if(token.getTag() == Tag.CONFIG) {
             this.checkToken(Tag.CONFIG);
-            return new ExpressionConstantConfiguration(token.getValue());
+            return new ExpressionConfigurationConstant(token.getValue());
         }
 
         throw new IllegalArgumentException("Error while parsing input");

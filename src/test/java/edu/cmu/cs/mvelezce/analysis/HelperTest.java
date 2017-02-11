@@ -53,6 +53,9 @@ public class HelperTest {
         configuration.add("C");
         configurations.add(configuration);
 
+        configuration = new HashSet<>();
+        configurations.add(configuration);
+
         Assert.assertEquals(configurations, Helper.getConfigurations(parameters));
     }
 

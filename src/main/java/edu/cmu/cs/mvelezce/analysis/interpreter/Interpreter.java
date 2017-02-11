@@ -16,21 +16,20 @@ import java.util.Set;
  * Created by miguelvelez on 1/31/17.
  */
 public class Interpreter implements Visitor<ValueInt> {
-    private Statement ast;
     private Set<String> activatedConfigurations;
     private final Map<String, ValueInt> store;
     private int sleepTime;
 // private StringBuffer output; TODO could be done
 
-    public Interpreter(Statement ast, Set<String> activatedConfigurations) {
-        this.ast = ast;
-        this.activatedConfigurations = activatedConfigurations;
+    public Interpreter() {
         this.store = new HashMap<>();
         this.sleepTime = 0;
+        this.activatedConfigurations = null;
     }
 
     // TODO this seems weird
-    public Map<String, ValueInt> evaluate() {
+    public Map<String, ValueInt> evaluate(Statement ast, Set<String> activatedConfigurations) {
+        this.activatedConfigurations = activatedConfigurations;
         ast.accept(this);
         System.out.println("Sleep " + this.sleepTime);
         return this.store;

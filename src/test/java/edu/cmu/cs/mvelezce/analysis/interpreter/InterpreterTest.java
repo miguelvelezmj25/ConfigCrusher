@@ -32,9 +32,9 @@ public class InterpreterTest {
 
         Set<String> activatedConfigurations = new HashSet<>();
 
-        Interpreter interpreter = new Interpreter(ast, activatedConfigurations);
+        Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate());
+        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
         Assert.assertEquals(0, interpreter.getSleepTime());
     }
 
@@ -52,9 +52,9 @@ public class InterpreterTest {
         Set<String> activatedConfigurations = new HashSet<>();
         activatedConfigurations.add("C");
 
-        Interpreter interpreter = new Interpreter(ast, activatedConfigurations);
+        Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate());
+        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
         Assert.assertEquals(1, interpreter.getSleepTime());
     }
 
@@ -73,9 +73,9 @@ public class InterpreterTest {
         Set<String> activatedConfigurations = new HashSet<>();
         activatedConfigurations.add("C");
 
-        Interpreter interpreter = new Interpreter(ast, activatedConfigurations);
+        Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate());
+        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
         Assert.assertEquals(5, interpreter.getSleepTime());
     }
 
@@ -94,9 +94,9 @@ public class InterpreterTest {
         Set<String> activatedConfigurations = new HashSet<>();
         activatedConfigurations.add("C");
 
-        Interpreter interpreter = new Interpreter(ast, activatedConfigurations);
+        Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate());
+        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
         Assert.assertEquals(3, interpreter.getSleepTime());
     }
 
@@ -114,9 +114,9 @@ public class InterpreterTest {
         Set<String> activatedConfigurations = new HashSet<>();
         activatedConfigurations.add("C");
 
-        Interpreter interpreter = new Interpreter(ast, activatedConfigurations);
+        Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate());
+        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
         Assert.assertEquals(2, interpreter.getSleepTime());
     }
 
@@ -135,9 +135,9 @@ public class InterpreterTest {
         Set<String> activatedConfigurations = new HashSet<>();
         activatedConfigurations.add("C");
 
-        Interpreter interpreter = new Interpreter(ast, activatedConfigurations);
+        Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate());
+        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
         Assert.assertEquals(6, interpreter.getSleepTime());
     }
 

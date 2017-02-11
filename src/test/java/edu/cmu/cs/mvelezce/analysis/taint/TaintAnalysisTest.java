@@ -58,8 +58,8 @@ public class TaintAnalysisTest {
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
         instructionsToTainted.put(successor, tainted);
 
-        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
-        Assert.assertEquals(instructionsToTainted ,taintAnalysis.analyze());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+        Assert.assertEquals(instructionsToTainted, taintAnalysis.analyze(cfg));
         System.out.println(taintAnalysis.getInstructionToTainted());
     }
 
@@ -90,8 +90,8 @@ public class TaintAnalysisTest {
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
         instructionsToTainted.put(successor, tainted);
 
-        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
-        Assert.assertEquals(instructionsToTainted ,taintAnalysis.analyze());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+        Assert.assertEquals(instructionsToTainted, taintAnalysis.analyze(cfg));
         System.out.println(taintAnalysis.getInstructionToTainted());
     }
 
@@ -140,8 +140,8 @@ public class TaintAnalysisTest {
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
         instructionsToTainted.put(successor, tainted);
 
-        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
-        Assert.assertEquals(instructionsToTainted ,taintAnalysis.analyze());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+        Assert.assertEquals(instructionsToTainted, taintAnalysis.analyze(cfg));
         System.out.println(taintAnalysis.getInstructionToTainted());
     }
 
@@ -186,8 +186,8 @@ public class TaintAnalysisTest {
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
         instructionsToTainted.put(successor, tainted);
 
-        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
-        Assert.assertEquals(instructionsToTainted ,taintAnalysis.analyze());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+        Assert.assertEquals(instructionsToTainted, taintAnalysis.analyze(cfg));
         System.out.println(taintAnalysis.getInstructionToTainted());
     }
 
@@ -232,8 +232,8 @@ public class TaintAnalysisTest {
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
         instructionsToTainted.put(successor, tainted);
 
-        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
-        Assert.assertEquals(instructionsToTainted ,taintAnalysis.analyze());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+        Assert.assertEquals(instructionsToTainted, taintAnalysis.analyze(cfg));
         System.out.println(taintAnalysis.getInstructionToTainted());
     }
 
@@ -292,8 +292,8 @@ public class TaintAnalysisTest {
         instructionsToTainted.put(successor, tainted);
 
 
-        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
-        Assert.assertEquals(instructionsToTainted ,taintAnalysis.analyze());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+        Assert.assertEquals(instructionsToTainted, taintAnalysis.analyze(cfg));
         System.out.println(taintAnalysis.getInstructionToTainted());
     }
 
@@ -343,8 +343,8 @@ public class TaintAnalysisTest {
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("x"), configurations));
         instructionsToTainted.put(succesor, tainted);
 
-        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
-        Assert.assertEquals(instructionsToTainted ,taintAnalysis.analyze());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+        Assert.assertEquals(instructionsToTainted, taintAnalysis.analyze(cfg));
         System.out.println(taintAnalysis.getInstructionToTainted());
     }
 
@@ -385,8 +385,8 @@ public class TaintAnalysisTest {
         tainted.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("x"), configurationsx));
         instructionsToTainted.put(succesor, tainted);
 
-        TaintAnalysis taintAnalysis = new TaintAnalysis(cfg);
-        Assert.assertEquals(instructionsToTainted ,taintAnalysis.analyze());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+        Assert.assertEquals(instructionsToTainted, taintAnalysis.analyze(cfg));
         System.out.println(taintAnalysis.getInstructionToTainted());
     }
 
@@ -438,7 +438,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transfer1() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
         Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
         BasicBlock basicBlock = new BasicBlock("1", new StatementSleep(new ExpressionConstantInt(1)));
 
@@ -447,7 +447,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transfer2() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
         Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
         configurations.add(new ExpressionConfigurationConstant("C"));
@@ -462,7 +462,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transfer3() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
         Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
         configurations.add(new ExpressionConfigurationConstant("C"));
@@ -480,7 +480,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transfer4() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
         Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
         configurations.add(new ExpressionConfigurationConstant("C"));
@@ -494,7 +494,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transfer5() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
         Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
         configurations.add(new ExpressionConfigurationConstant("C"));
@@ -523,7 +523,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transfer6() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
         Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
         configurations.add(new ExpressionConfigurationConstant("C"));
@@ -557,7 +557,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transfer7() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
         Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
         configurations.add(new ExpressionConfigurationConstant("C"));
@@ -577,7 +577,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transferA() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
         Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
         configurations.add(new ExpressionConfigurationConstant("C"));
@@ -593,7 +593,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transferB() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
         Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
         configurations.add(new ExpressionConfigurationConstant("C"));
@@ -609,7 +609,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void transferC() throws Exception {
-        TaintAnalysis taintAnalysis = new TaintAnalysis(new CFG());
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
         Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
         configurations.add(new ExpressionConfigurationConstant("C"));

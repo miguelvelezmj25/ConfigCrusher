@@ -20,17 +20,14 @@ import java.util.*;
 // TODO should I implement the visitor pattern?
 // TODO what should be the generic?
 public class TaintAnalysis {
-
     private Map<BasicBlock, Set<TaintedVariable>> instructionToTainted;
-    private CFG cfg;
 
-    public TaintAnalysis(CFG cfg) {
+    public TaintAnalysis() {
         this.instructionToTainted = new LinkedHashMap<>();
-        this.cfg = cfg;
     }
 
-    public Map<BasicBlock, Set<TaintedVariable>> analyze() {
-        List<BasicBlock> entry = this.cfg.getSuccessors(this.cfg.getEntry());
+    public Map<BasicBlock, Set<TaintedVariable>> analyze(CFG cfg) {
+        List<BasicBlock> entry = cfg.getSuccessors(cfg.getEntry());
 
         if(entry.size() > 1) {
             throw new IllegalArgumentException("The entry point of the CFG has more than 1 edge");
@@ -53,7 +50,7 @@ public class TaintAnalysis {
 // CK           this.instructionToTainted.put(instruction, /*taintsAfter*/currentTaintedVariables);
             this.instructionToTainted.put(instruction, taintsAfter);
 
-            List<BasicBlock> successors = this.cfg.getSuccessors(instruction);
+            List<BasicBlock> successors = cfg.getSuccessors(instruction);
 
             if(successors.size() > 2) {
                 throw new IllegalArgumentException("We do not support switch statements yet");

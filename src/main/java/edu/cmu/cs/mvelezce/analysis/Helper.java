@@ -24,12 +24,11 @@ public class Helper {
         for(int i = 1; i <= configurationMaxLength; i++) {
             Combinations combinations = new Combinations(configurationMaxLength, i);
 
-            for(Iterator<int[]> it = combinations.iterator(); it.hasNext();) {
+            for (int[] combination : combinations) {
                 Set<String> configuration = new HashSet<>();
-                int[] combination = it.next();
 
-                for(int j = 0; j < combination.length; j++) {
-                    configuration.add(parametersList.get(combination[j]));
+                for(int aCombination : combination) {
+                    configuration.add(parametersList.get(aCombination));
                 }
 
                 configurations.add(configuration);
@@ -40,6 +39,69 @@ public class Helper {
         configurations.add(new HashSet<>());
 
          return configurations;
+    }
+
+    /**
+     * TODO
+     * @param configurations
+     * @return
+     */
+    public static Set<String> getNextConfiguration(Set<Set<String>> configurations, Set<String> considerParameters) {
+        if (configurations.isEmpty()) {
+            return null;
+        }
+
+        // TODO we always start with all configurations set to false. Should we start with all True?
+        if (configurations.contains(new HashSet<String>())) {
+            Set<String> configuration = new HashSet<>();
+            configurations.remove(configuration);
+
+            return configuration;
+        }
+
+        if(!considerParameters.isEmpty()) {
+            List<Set<String>> possibleConfigurations = new ArrayList<>();
+
+            for (Set<String> configuration : configurations) {
+                boolean contains = false;
+
+                for (String considerParameter : considerParameters) {
+                    if (configuration.contains(considerParameter)) {
+                        contains = true;
+                    } else {
+                        contains = false;
+                        break;
+                    }
+                }
+
+                if (contains) {
+                    possibleConfigurations.add(configuration);
+                }
+            }
+
+            if (!possibleConfigurations.isEmpty()) {
+                // We get the smallest configuration that contains all parameter under consideration
+                int minLength = Integer.MAX_VALUE;
+                int minLengthPosition = -1;
+
+                for (int i = 0; i < possibleConfigurations.size(); i++) {
+                    if (possibleConfigurations.get(i).size() < minLength) {
+                        minLength = possibleConfigurations.get(i).size();
+                        minLengthPosition = i;
+                    }
+                }
+
+                configurations.remove(possibleConfigurations.get(minLengthPosition));
+
+                return possibleConfigurations.get(minLengthPosition);
+            }
+        }
+
+        // Pick a random configuration
+        Set<String> randomConfiguration = configurations.iterator().next();
+        configurations.remove(randomConfiguration);
+
+        return randomConfiguration;
     }
 
 }

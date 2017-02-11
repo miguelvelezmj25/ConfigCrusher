@@ -13,6 +13,93 @@ import static org.junit.Assert.*;
  */
 public class HelperTest {
     @Test
+    public void getNextConfiguration1() throws Exception {
+        Set<String> parameters = new HashSet<>();
+        parameters.add("A");
+        parameters.add("B");
+
+        Set<Set<String>> configurations = Helper.getConfigurations(parameters);
+
+        Assert.assertEquals(new HashSet<>(), Helper.getNextConfiguration(configurations, new HashSet<>()));
+    }
+
+    @Test
+    public void getNextConfiguration2() throws Exception {
+        Set<String> parameters = new HashSet<>();
+        parameters.add("A");
+        parameters.add("B");
+
+        Set<String> consider = new HashSet<>();
+        consider.add("A");
+
+        Set<Set<String>> configurations = Helper.getConfigurations(parameters);
+
+        Helper.getNextConfiguration(configurations, consider);
+        Set<String> nextConfiguration = new HashSet<>();
+        nextConfiguration.add("A");
+
+        Assert.assertEquals(nextConfiguration, Helper.getNextConfiguration(configurations, consider));
+    }
+
+    @Test
+    public void getNextConfiguration3() throws Exception {
+        Set<String> parameters = new HashSet<>();
+        parameters.add("A");
+        parameters.add("B");
+
+        Set<String> consider = new HashSet<>();
+        consider.add("A");
+        consider.add("B");
+
+        Set<Set<String>> configurations = Helper.getConfigurations(parameters);
+
+        Helper.getNextConfiguration(configurations, consider);
+        Set<String> nextConfiguration = new HashSet<>();
+        nextConfiguration.add("A");
+        nextConfiguration.add("B");
+
+        Assert.assertEquals(nextConfiguration, Helper.getNextConfiguration(configurations, consider));
+    }
+
+    @Test
+    public void getNextConfiguration4() throws Exception {
+        Set<String> parameters = new HashSet<>();
+        parameters.add("A");
+        parameters.add("B");
+
+        Set<String> consider = new HashSet<>();
+        consider.add("A");
+        consider.add("B");
+
+        Set<Set<String>> configurations = Helper.getConfigurations(parameters);
+
+        Helper.getNextConfiguration(configurations, consider);
+        Set<String> nextConfiguration = new HashSet<>();
+        nextConfiguration.add("A");
+
+        Helper.getNextConfiguration(configurations, consider);
+
+        Assert.assertEquals(nextConfiguration, Helper.getNextConfiguration(configurations, consider));
+    }
+
+    @Test
+    public void getNextConfiguration5() throws Exception {
+        Set<String> parameters = new HashSet<>();
+        parameters.add("A");
+        parameters.add("B");
+
+        Set<String> consider = new HashSet<>();
+
+        Set<Set<String>> configurations = Helper.getConfigurations(parameters);
+
+        Helper.getNextConfiguration(configurations, consider);
+        Set<String> nextConfiguration = new HashSet<>();
+        nextConfiguration.add("A");
+
+        Assert.assertEquals(nextConfiguration, Helper.getNextConfiguration(configurations, consider));
+    }
+
+    @Test
     public void getConfigurations() throws Exception {
         Set<String> parameters = new HashSet<>();
         parameters.add("A");

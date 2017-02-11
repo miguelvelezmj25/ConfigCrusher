@@ -17,11 +17,10 @@ import java.util.*;
  * Created by miguelvelez on 2/5/17.
  */
 public class TaintAnalysisTest {
-    private static final String PATH = "src/main/java/edu/cmu/cs/mvelezce/language/programs/";
 
     @Test
     public void test1() throws Exception {
-        String program = Helper.loadFile(PATH + "program1");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program1");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -66,7 +65,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void test2() throws Exception {
-        String program = Helper.loadFile(PATH + "program2");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program2");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -98,7 +97,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void test3() throws Exception {
-        String program = Helper.loadFile(PATH + "program3");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program3");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -148,7 +147,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void test4() throws Exception {
-        String program = Helper.loadFile(PATH + "program4");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program4");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -194,7 +193,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void test5() throws Exception {
-        String program = Helper.loadFile(PATH + "program5");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program5");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -240,7 +239,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void test6() throws Exception {
-        String program = Helper.loadFile(PATH + "program6");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program6");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -300,7 +299,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void test7() throws Exception {
-        String program = Helper.loadFile(PATH + "program7");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program7");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -351,7 +350,7 @@ public class TaintAnalysisTest {
 
     @Test
     public void test8() throws Exception {
-        String program = Helper.loadFile(PATH + "program8");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program8");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();

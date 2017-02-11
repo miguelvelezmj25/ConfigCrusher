@@ -11,6 +11,8 @@ import java.util.Scanner;
  */
 public class Helper {
 
+    public static final String PROGRAMS_PATH = "src/main/java/edu/cmu/cs/mvelezce/language/programs/";
+
     /**
      * TODO
      * @param name

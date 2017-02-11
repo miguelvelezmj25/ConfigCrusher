@@ -17,11 +17,10 @@ import java.util.Set;
  * Created by mvelezce on 2/1/17.
  */
 public class InterpreterTest {
-    private static final String PATH = "src/main/java/edu/cmu/cs/mvelezce/language/programs/";
 
     @Test
     public void test1() throws Exception {
-        String program = Helper.loadFile(PATH + "program1");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program1");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(0));
@@ -41,7 +40,7 @@ public class InterpreterTest {
 
     @Test
     public void test2() throws Exception {
-        String program = Helper.loadFile(PATH + "program2");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program2");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(0));
@@ -61,7 +60,7 @@ public class InterpreterTest {
 
     @Test
     public void test3() throws Exception {
-        String program = Helper.loadFile(PATH + "program3");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program3");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("b", new ValueInt(0));
@@ -82,7 +81,7 @@ public class InterpreterTest {
 
     @Test
     public void test4() throws Exception {
-        String program = Helper.loadFile(PATH + "program4");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program4");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(0));
@@ -103,7 +102,7 @@ public class InterpreterTest {
 
     @Test
     public void test5() throws Exception {
-        String program = Helper.loadFile(PATH + "program5");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program5");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(0));
@@ -123,7 +122,7 @@ public class InterpreterTest {
 
     @Test
     public void test6() throws Exception {
-        String program = Helper.loadFile(PATH + "program6");
+        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program6");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(1));

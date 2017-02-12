@@ -16,8 +16,8 @@ import java.util.Set;
  * Created by miguelvelez on 1/31/17.
  */
 public class Interpreter implements Visitor<ValueInt> {
+    private Map<String, ValueInt> store;
     private Set<String> activatedConfigurations;
-    private final Map<String, ValueInt> store;
     private int sleepTime;
 // private StringBuffer output; TODO could be done
 

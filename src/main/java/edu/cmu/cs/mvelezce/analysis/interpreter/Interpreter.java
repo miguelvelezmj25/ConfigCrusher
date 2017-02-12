@@ -22,6 +22,13 @@ public class Interpreter implements Visitor<ValueInt> {
 // private StringBuffer output; TODO could be done
 
     public Interpreter() {
+        this.reset();
+    }
+
+    /**
+     * TODO
+     */
+    private void reset() {
         this.store = new HashMap<>();
         this.sleepTime = 0;
         this.activatedConfigurations = null;
@@ -29,9 +36,11 @@ public class Interpreter implements Visitor<ValueInt> {
 
     // TODO this seems weird
     public Map<String, ValueInt> evaluate(Statement ast, Set<String> activatedConfigurations) {
+        this.reset();
         this.activatedConfigurations = activatedConfigurations;
+
         ast.accept(this);
-        System.out.println("Sleep " + this.sleepTime);
+//        System.out.println("Sleep " + this.sleepTime);
         return this.store;
     }
 

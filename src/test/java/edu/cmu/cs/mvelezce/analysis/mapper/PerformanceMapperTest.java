@@ -1,11 +1,10 @@
 package edu.cmu.cs.mvelezce.analysis.mapper;
 
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
+import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
+import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
-import edu.cmu.cs.mvelezce.language.Helper;
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConstantInt;
 import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
-import edu.cmu.cs.mvelezce.language.ast.statement.StatementSleep;
 import edu.cmu.cs.mvelezce.language.lexer.Lexer;
 import edu.cmu.cs.mvelezce.language.parser.Parser;
 import org.junit.Assert;
@@ -19,16 +18,35 @@ import java.util.Set;
  * Created by miguelvelez on 2/11/17.
  */
 public class PerformanceMapperTest {
-
     @Test
-    public void getTaintingConfigurations1() throws Exception {
-        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program1");
+    public void computeAll1() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
-        PerformanceMapper mapper = new PerformanceMapper(ast, new HashSet<String>());
-        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = mapper.getTaintAnalysis().analyze();
+        Set<String> parameters = new HashSet<>();
+        parameters.add("A");
+        parameters.add("B");
+        parameters.add("C");
+
+        PerformanceMapper mapper = new PerformanceMapper();
+
+        mapper.computeAll(ast, parameters);
+    }
+
+    @Test
+    public void getTaintingConfigurations1() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+
+        PerformanceMapper mapper = new PerformanceMapper();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
 
         Set<String> taintingConfigurations = new HashSet<>();
         taintingConfigurations.add("C");
@@ -38,14 +56,16 @@ public class PerformanceMapperTest {
 
     @Test
     public void getTaintingConfigurations2() throws Exception {
-        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program6");
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
 
-        PerformanceMapper mapper = new PerformanceMapper(ast, new HashSet<String>());
-        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = mapper.getTaintAnalysis().analyze();
-
+        PerformanceMapper mapper = new PerformanceMapper();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
         Set<String> taintingConfigurations = new HashSet<>();
         taintingConfigurations.add("C");
         taintingConfigurations.add("D");
@@ -55,16 +75,18 @@ public class PerformanceMapperTest {
 
     @Test
     public void pruneConfigurations1() throws Exception {
+        PerformanceMapper mapper = new PerformanceMapper();
+
         Set<String> parameters = new HashSet<>();
         parameters.add("A");
         parameters.add("B");
-
-        PerformanceMapper mapper = new PerformanceMapper(new StatementSleep(new ExpressionConstantInt(1)), parameters);
+        Set<Set<String>> allConfigurations = edu.cmu.cs.mvelezce.analysis.Helper.getConfigurations(parameters);
+        mapper.setAllConfigurations(allConfigurations);
 
         Set<String> consider = new HashSet<>();
         consider.add("A");
 
-        mapper.pruneConfigurations(consider);
+        mapper.pruneConfigurations(consider, new HashSet<>());
 
         Set<Set<String>> configurations = new HashSet<>();
         Set<String> configuration = new HashSet<>();
@@ -81,19 +103,44 @@ public class PerformanceMapperTest {
 
     @Test
     public void pruneConfigurations2() throws Exception {
+        PerformanceMapper mapper = new PerformanceMapper();
+
+        Set<String> parameters = new HashSet<>();
+        parameters.add("A");
+        parameters.add("B");
+        Set<Set<String>> allConfigurations = edu.cmu.cs.mvelezce.analysis.Helper.getConfigurations(parameters);
+        mapper.setAllConfigurations(allConfigurations);
+
+        Set<String> consider = new HashSet<>();
+        consider.add("A");
+
+        Set<String> configuration = new HashSet<>();
+        mapper.pruneConfigurations(consider, configuration);
+        configuration.add("A");
+        mapper.pruneConfigurations(consider, configuration);
+
+        Set<Set<String>> configurations = new HashSet<>();
+
+        Assert.assertEquals(configurations, mapper.getAllConfigurations());
+    }
+
+    @Test
+    public void pruneConfigurations3() throws Exception {
+        PerformanceMapper mapper = new PerformanceMapper();
+
         Set<String> parameters = new HashSet<>();
         parameters.add("A");
         parameters.add("B");
         parameters.add("C");
         parameters.add("D");
-
-        PerformanceMapper mapper = new PerformanceMapper(new StatementSleep(new ExpressionConstantInt(1)), parameters);
+        Set<Set<String>> allConfigurations = edu.cmu.cs.mvelezce.analysis.Helper.getConfigurations(parameters);
+        mapper.setAllConfigurations(allConfigurations);
 
         Set<String> consider = new HashSet<>();
         consider.add("A");
         consider.add("B");
 
-        mapper.pruneConfigurations(consider);
+        mapper.pruneConfigurations(consider, new HashSet<>());
 
         Set<Set<String>> configurations = new HashSet<>();
         Set<String> configuration = new HashSet<>();
@@ -169,6 +216,38 @@ public class PerformanceMapperTest {
         configuration.add("C");
         configuration.add("D");
         configurations.add(configuration);
+
+        Assert.assertEquals(configurations, mapper.getAllConfigurations());
+    }
+
+    @Test
+    public void pruneConfigurations4() throws Exception {
+        PerformanceMapper mapper = new PerformanceMapper();
+
+        Set<String> parameters = new HashSet<>();
+        parameters.add("A");
+        parameters.add("B");
+        parameters.add("C");
+        Set<Set<String>> allConfigurations = edu.cmu.cs.mvelezce.analysis.Helper.getConfigurations(parameters);
+        mapper.setAllConfigurations(allConfigurations);
+
+        Set<String> consider = new HashSet<>();
+        consider.add("A");
+        consider.add("B");
+
+        Set<String> configuration = edu.cmu.cs.mvelezce.analysis.Helper.getNextConfiguration(allConfigurations, consider);
+        mapper.pruneConfigurations(consider, configuration);
+
+        configuration = edu.cmu.cs.mvelezce.analysis.Helper.getNextConfiguration(allConfigurations, consider);
+        mapper.pruneConfigurations(consider, configuration);
+
+        configuration = edu.cmu.cs.mvelezce.analysis.Helper.getNextConfiguration(allConfigurations, consider);
+        mapper.pruneConfigurations(consider, configuration);
+
+        configuration = edu.cmu.cs.mvelezce.analysis.Helper.getNextConfiguration(allConfigurations, consider);
+        mapper.pruneConfigurations(consider, configuration);
+
+        Set<Set<String>> configurations = new HashSet<>();
 
         Assert.assertEquals(configurations, mapper.getAllConfigurations());
     }

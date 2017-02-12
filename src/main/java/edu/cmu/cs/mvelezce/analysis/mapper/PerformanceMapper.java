@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.analysis.Helper;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
+import edu.cmu.cs.mvelezce.analysis.interpreter.Interpreter;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
@@ -16,61 +17,59 @@ import java.util.*;
  */
 public class PerformanceMapper {
     private Set<Set<String>> allConfigurations;
-    private Statement ast;
-    private CFG cfg;
-    private TaintAnalysis taintAnalysis;
+    private Map<Set<String>, Integer> performanceMap;
 
     /**
      * TODO
-     * @param parameters
      */
-    public PerformanceMapper(Statement ast, Set<String> parameters) {
+    public PerformanceMapper() {
+        this.performanceMap = new HashMap<>();
+        this.allConfigurations = null;
+    }
+
+    /**
+     * TODO
+     */
+    public Map<Set<String>, Integer> computeAll(Statement ast, Set<String> parameters) {
         this.allConfigurations = Helper.getConfigurations(parameters);
-        this.ast = ast;
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+        Interpreter interpreter = new Interpreter();
 
         CFGBuilder builder = new CFGBuilder();
-        this.cfg = builder.buildCFG(ast);
+        CFG cfg = builder.buildCFG(ast);
 
-        this.taintAnalysis = new TaintAnalysis(this.cfg);
-    }
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
+        Set<String> taintingConfigurations = this.getTaintingConfigurations(instructionsToTainted);
+        Set<String> nextConfiguration = null;
 
-    /**
-     * TODO
-     */
-    private void computeAll() {
-        // TODO
-        // TODO if nothing is tainted, pick configurations at random
-    }
+        while(!this.allConfigurations.isEmpty()) {
+            nextConfiguration = Helper.getNextConfiguration(this.allConfigurations, taintingConfigurations);
+            System.out.println(nextConfiguration);
+            interpreter.evaluate(ast, nextConfiguration);
 
-    /**
-     * TODO
-     */
-    public void evaluate() {
-        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = this.taintAnalysis.analyze();
-        this.getTaintingConfigurations(instructionsToTainted);
+            this.pruneConfigurations(taintingConfigurations, nextConfiguration);
+        }
+
+        return this.performanceMap;
     }
 
     /**
      * TODO
      * @param considerParameters
      */
-    protected void pruneConfigurations(Set<String> considerParameters) {
+    protected void pruneConfigurations(Set<String> considerParameters, Set<String> lastConfiguration) {
+        System.out.println(lastConfiguration);
         List<Set<String>> redundantConfigurations = new ArrayList<>();
 
-        if(!considerParameters.isEmpty()) {
-            for (Set<String> configuration : allConfigurations) {
-                boolean contains = false;
+        if(!considerParameters.isEmpty()) { // TODO check if this is needed
+            Set<String> consideredParametersValues = new HashSet<>(considerParameters);
+            consideredParametersValues.retainAll(lastConfiguration);
 
-                for (String considerParameter : considerParameters) {
-                    if (configuration.contains(considerParameter)) {
-                        contains = true;
-                        break;
-                    } else {
-                        contains = false;
-                    }
-                }
+            for (Set<String> configuration : this.allConfigurations) {
+                Set<String> something = new HashSet<>(configuration);
+                something.retainAll(considerParameters);
 
-                if (!contains) {
+                if(something.equals(lastConfiguration)) {
                     redundantConfigurations.add(configuration);
                 }
             }
@@ -83,6 +82,14 @@ public class PerformanceMapper {
         }
     }
 
+//    mapConfigurationToPerformanceAfterPruning //TODO
+
+    /**
+     * TODO
+     * @param instructionsToTainted
+     * @return
+     */
+    // TODO should be tainting configurations that affect the execution of the program or function call
     protected Set<String> getTaintingConfigurations(Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted) {
         Set<String> taintingConfigurations = new HashSet<>();
 
@@ -101,9 +108,7 @@ public class PerformanceMapper {
 
     public Set<Set<String>> getAllConfigurations() { return this.allConfigurations; }
 
-    public Statement getAst() { return this.ast; }
+    public Map<Set<String>, Integer> getPerformanceMap() { return this.performanceMap; }
 
-    public CFG getCfg() { return this.cfg; }
-
-    public TaintAnalysis getTaintAnalysis() { return this.taintAnalysis; }
+    public void setAllConfigurations(Set<Set<String>> allConfigurations) { this.allConfigurations = allConfigurations; }
 }

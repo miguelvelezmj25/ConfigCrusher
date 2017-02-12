@@ -58,7 +58,8 @@ public class Helper {
             return configuration;
         }
 
-        if(!considerParameters.isEmpty()) {
+        if(!considerParameters.isEmpty()) {// TODO check if this is needed
+            // TODO this can be done using set theory
             List<Set<String>> possibleConfigurations = new ArrayList<>();
 
             for (Set<String> configuration : configurations) {

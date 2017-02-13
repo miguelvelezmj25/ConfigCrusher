@@ -58,7 +58,6 @@ public class PerformanceMapper {
      * @param considerParameters
      */
     protected void pruneConfigurations(Set<String> considerParameters, Set<String> lastConfiguration) {
-        System.out.println(lastConfiguration);
         List<Set<String>> redundantConfigurations = new ArrayList<>();
 
         if(!considerParameters.isEmpty()) { // TODO check if this is needed

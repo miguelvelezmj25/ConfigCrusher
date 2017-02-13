@@ -59,22 +59,13 @@ public class Helper {
         }
 
         if(!considerParameters.isEmpty()) {// TODO check if this is needed
-            // TODO this can be done using set theory
             List<Set<String>> possibleConfigurations = new ArrayList<>();
 
             for (Set<String> configuration : configurations) {
-                boolean contains = false;
+                Set<String> possibleConsiderParametersConfiguration = new HashSet<>(considerParameters);
+                possibleConsiderParametersConfiguration.retainAll(configuration);
 
-                for (String considerParameter : considerParameters) {
-                    if (configuration.contains(considerParameter)) {
-                        contains = true;
-                    } else {
-                        contains = false;
-                        break;
-                    }
-                }
-
-                if (contains) {
+                if(possibleConsiderParametersConfiguration.equals(considerParameters)) {
                     possibleConfigurations.add(configuration);
                 }
             }

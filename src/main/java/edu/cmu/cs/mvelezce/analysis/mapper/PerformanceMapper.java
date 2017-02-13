@@ -62,14 +62,11 @@ public class PerformanceMapper {
         List<Set<String>> redundantConfigurations = new ArrayList<>();
 
         if(!considerParameters.isEmpty()) { // TODO check if this is needed
-            Set<String> consideredParametersValues = new HashSet<>(considerParameters);
-            consideredParametersValues.retainAll(lastConfiguration);
-
             for (Set<String> configuration : this.allConfigurations) {
-                Set<String> something = new HashSet<>(configuration);
-                something.retainAll(considerParameters);
+                Set<String> possibleEquivalentConfiguration = new HashSet<>(configuration);
+                possibleEquivalentConfiguration.retainAll(considerParameters);
 
-                if(something.equals(lastConfiguration)) {
+                if(possibleEquivalentConfiguration.equals(lastConfiguration)) {
                     redundantConfigurations.add(configuration);
                 }
             }

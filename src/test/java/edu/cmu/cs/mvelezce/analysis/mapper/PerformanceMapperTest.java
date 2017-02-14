@@ -20,7 +20,7 @@ import java.util.Set;
 public class PerformanceMapperTest {
     @Test
     public void computeAll1() throws Exception {
-        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program10");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -28,7 +28,6 @@ public class PerformanceMapperTest {
         Set<String> parameters = new HashSet<>();
         parameters.add("A");
         parameters.add("B");
-        parameters.add("C");
 
         PerformanceMapper mapper = new PerformanceMapper();
 
@@ -51,12 +50,12 @@ public class PerformanceMapperTest {
         Set<String> taintingConfigurations = new HashSet<>();
         taintingConfigurations.add("C");
 
-        Assert.assertEquals(taintingConfigurations, mapper.getTaintingConfigurations(instructionsToTainted));
+        Assert.assertEquals(taintingConfigurations, mapper.getConfigurationsInRelevantStatements(instructionsToTainted));
     }
 
     @Test
     public void getTaintingConfigurations2() throws Exception {
-        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program2");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -70,7 +69,7 @@ public class PerformanceMapperTest {
         taintingConfigurations.add("C");
         taintingConfigurations.add("D");
 
-        Assert.assertEquals(taintingConfigurations, mapper.getTaintingConfigurations(instructionsToTainted));
+        Assert.assertEquals(taintingConfigurations, mapper.getConfigurationsInRelevantStatements(instructionsToTainted));
     }
 
     @Test

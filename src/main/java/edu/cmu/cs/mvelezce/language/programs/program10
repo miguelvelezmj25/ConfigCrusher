@@ -1,0 +1,6 @@
+x=A
+sleep(1)
+if(x) {
+    sleep(2)
+}
+sleep(3)

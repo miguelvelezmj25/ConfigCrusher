@@ -196,23 +196,17 @@ public class TaintAnalysis {
 
             if(this.taintedConfiguration || this.taintedVariable) {
                 Set<ExpressionConfigurationConstant> configurations = new HashSet<>(this.taintingConfigurations);
-
                 this.taintedVariables.add(new TaintedVariable(statementAssignment.getVariable(), configurations));
             }
 
             if(!this.conditions.isEmpty()) {
-
                 for(TaintedVariable oldTaintedVariable : this.oldTaints) {
-
                     if(this.conditions.contains(oldTaintedVariable.getVariable())) {
-
                         if(this.taintedVariables.isEmpty()) {
                             this.taintedVariables.add(new TaintedVariable(statementAssignment.getVariable(), oldTaintedVariable.getConfigurations()));
                         }
                         else {
-
                             for(TaintedVariable taintedVariable : this.taintedVariables) {
-
                                 if (taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
                                     taintedVariable.getConfigurations().addAll(oldTaintedVariable.getConfigurations());
                                     break;

@@ -6,7 +6,10 @@ import edu.cmu.cs.mvelezce.language.ast.statement.*;
 import java.util.List;
 
 /**
- * Created by mvelezce on 2/6/17.
+ * A concrete implementation of the Visitor Pattern that returns the same expressions that are passed.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class BaseVisitor implements Visitor<Expression> {
     @Override

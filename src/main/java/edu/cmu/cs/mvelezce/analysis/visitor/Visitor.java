@@ -7,8 +7,11 @@ import edu.cmu.cs.mvelezce.language.ast.statement.*;
  * An interface that specifies the methods of the Visitor Pattern.
  *
  * @param <V> the type of elements returned by the Visitor.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
-public interface Visitor <V> {
+interface Visitor <V> {
 
     /**
      * Evaluates an ExpressionBinary.
@@ -16,7 +19,7 @@ public interface Visitor <V> {
      * @param expressionBinary
      * @return
      */
-    public V visitExpressionBinary(ExpressionBinary expressionBinary);
+    V visitExpressionBinary(ExpressionBinary expressionBinary);
 
     /**
      * Evaluates an ExpressionConfigurationConstant.
@@ -24,7 +27,7 @@ public interface Visitor <V> {
      * @param expressionConfigurationConstant
      * @return
      */
-    public V visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant);
+    V visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant);
 
     /**
      * Evaluates an ExpressionConstantInt.
@@ -32,7 +35,7 @@ public interface Visitor <V> {
      * @param expressionConstantInt
      * @return
      */
-    public V visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt);
+    V visitExpressionConstantInt(ExpressionConstantInt expressionConstantInt);
 
     /**
      * Evaluates an ExpressionUnary.
@@ -40,7 +43,7 @@ public interface Visitor <V> {
      * @param expressionUnary
      * @return
      */
-    public V visitExpressionUnary(ExpressionUnary expressionUnary);
+    V visitExpressionUnary(ExpressionUnary expressionUnary);
 
     /**
      * Evaluates an ExpressionVariable.
@@ -48,40 +51,40 @@ public interface Visitor <V> {
      * @param expressionVariable
      * @return
      */
-    public V visitExpressionVariable(ExpressionVariable expressionVariable);
+    V visitExpressionVariable(ExpressionVariable expressionVariable);
 
     /**
      * Visit a StatementAssignment.
      *
      * @param statementAssignment
      */
-    public void visitStatementAssignment(StatementAssignment statementAssignment);
+    void visitStatementAssignment(StatementAssignment statementAssignment);
 
     /**
      * Visit a StatementBlock.
      *
      * @param statementBlock
      */
-    public void visitStatementBlock(StatementBlock statementBlock);
+    void visitStatementBlock(StatementBlock statementBlock);
 
     /**
      * Visit a StatementIf.
      *
      * @param statementIf
      */
-    public void visitStatementIf(StatementIf statementIf);
+    void visitStatementIf(StatementIf statementIf);
 
     /**
      * Visit a StatementSleep.
      *
      * @param statementSleep
      */
-    public void visitStatementSleep(StatementSleep statementSleep);
+    void visitStatementSleep(StatementSleep statementSleep);
 
     /**
      * Visit a StatementWhile.
      *
      * @param statementWhile
      */
-    public void visitStatementWhile(StatementWhile statementWhile);
+    void visitStatementWhile(StatementWhile statementWhile);
 }

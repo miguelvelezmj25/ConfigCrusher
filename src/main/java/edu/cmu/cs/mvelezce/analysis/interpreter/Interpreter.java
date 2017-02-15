@@ -15,10 +15,11 @@ import java.util.Set;
  *
  * Created by miguelvelez on 1/31/17.
  */
-public class Interpreter implements Visitor<ValueInt> {
+public class Interpreter implements Visitor<ValueInt, Void> {
     private Map<String, ValueInt> store;
     private Set<String> activatedConfigurations;
-    private int sleepTime;
+    private int totalTime;
+    Map<StatementTimed, Integer> timedBlocks;
 // private StringBuffer output; TODO could be done
 
     public Interpreter() {
@@ -30,21 +31,12 @@ public class Interpreter implements Visitor<ValueInt> {
      */
     private void reset() {
         this.store = new HashMap<>();
-        this.sleepTime = 0;
+        this.totalTime = 0;
         this.activatedConfigurations = null;
     }
 
     // TODO this seems weird
     public Map<String, ValueInt> evaluate(Statement ast, Set<String> activatedConfigurations) {
-        this.reset();
-        this.activatedConfigurations = activatedConfigurations;
-
-        ast.accept(this);
-        return this.store;
-    }
-
-    // TODO this seems weird
-    public Map<String, ValueInt> evaluate(Statement ast, Set<String> activatedConfigurations, Object data) {
         this.reset();
         this.activatedConfigurations = activatedConfigurations;
 
@@ -118,42 +110,55 @@ public class Interpreter implements Visitor<ValueInt> {
     }
 
     @Override
-    public void visitStatementAssignment(StatementAssignment statementAssignment) {
+    public Void visitStatementAssignment(StatementAssignment statementAssignment) {
         ValueInt value = statementAssignment.getRight().accept(this);
         this.store.put(statementAssignment.getVariable().getName(), value);
+        return null;
     }
 
     @Override
-    public void visitStatementBlock(StatementBlock statementBlock) {
+    public Void visitStatementBlock(StatementBlock statementBlock) {
         List<Statement> statements = statementBlock.getStatements();
 
         for(Statement statement : statements) {
             statement.accept(this);
         }
+        return null;
     }
 
     @Override
-    public void visitStatementIf(StatementIf statementIf) {
+    public Void visitStatementIf(StatementIf statementIf) {
         ValueInt condition = statementIf.getCondition().accept(this);
 
         if(condition.getValue() > 0) {
             statementIf.getThenBlock().accept(this);
         }
+        return null;
     }
 
     @Override
-    public void visitStatementSleep(StatementSleep statementSleep) {
+    public Void visitStatementSleep(StatementSleep statementSleep) {
         ValueInt time = statementSleep.getTime().accept(this);
-        this.sleepTime += time.getValue();
+        this.totalTime += time.getValue();
+        return null;
     }
 
     @Override
-    public void visitStatementWhile(StatementWhile statementWhile) {
+    public Void visitStatementTimed(StatementTimed statement) {
+        int time = totalTime;
+        statement.getStatements().accept(this);
+        this.timedBlocks.put(statement, this.totalTime - time);
+        return null;
+    }
+
+    @Override
+    public Void visitStatementWhile(StatementWhile statementWhile) {
         statementWhile.getCondition().accept(this);
         statementWhile.getBody().accept(this);
+        return null;
     }
 
     public Map<String, ValueInt> getStore() { return this.store; }
 
-    public int getSleepTime() { return this.sleepTime; }
+    public int getTotalTime() { return this.totalTime; }
 }

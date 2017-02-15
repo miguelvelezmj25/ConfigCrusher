@@ -22,8 +22,8 @@ public class StatementSleep extends Statement {
     }
 
     @Override
-    public <T> void accept(Visitor<T> visitor) {
-        visitor.visitStatementSleep(this);
+    public <T,U> U accept(Visitor<T,U> visitor) {
+        return visitor.visitStatementSleep(this);
     }
 
     /**

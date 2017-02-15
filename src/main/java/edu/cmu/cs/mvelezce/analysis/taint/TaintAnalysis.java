@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.analysis.taint;
 
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
-import edu.cmu.cs.mvelezce.analysis.visitor.BaseVisitor;
+import edu.cmu.cs.mvelezce.analysis.visitor.VisitorReturner;
 import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
@@ -22,10 +22,20 @@ import java.util.*;
 public class TaintAnalysis {
     private Map<BasicBlock, Set<TaintedVariable>> instructionToTainted;
 
+    /**
+     * Initialize a {@code TaintAnalysis}.
+     */
     public TaintAnalysis() {
         this.instructionToTainted = new LinkedHashMap<>();
     }
 
+    /**
+     * Performan a taint analysis in the CFG and a map that represents, for every basic block, the variables that might
+     * be tainted.
+     *
+     * @param cfg
+     * @return
+     */
     public Map<BasicBlock, Set<TaintedVariable>> analyze(CFG cfg) {
         List<BasicBlock> entry = cfg.getSuccessors(cfg.getEntry());
 
@@ -141,8 +151,16 @@ public class TaintAnalysis {
         return result;
     }
 
+    /**
+     * Returns a map detailing, for each basic block, what variables might be tainted.
+     *
+     * @return
+     */
+    public Map<BasicBlock, Set<TaintedVariable>> getInstructionToTainted() {
+        return this.instructionToTainted;
+    }
 
-    private class TransferVisitor extends BaseVisitor {
+    private class TransferVisitor extends VisitorReturner {
         private final Set<TaintedVariable> oldTaints;
         private boolean inAssignment;
         private boolean tainting;
@@ -188,7 +206,7 @@ public class TaintAnalysis {
         }
 
         @Override
-        public void visitStatementAssignment(StatementAssignment statementAssignment) {
+        public Void visitStatementAssignment(StatementAssignment statementAssignment) {
             this.inAssignment = true;
             statementAssignment.getRight().accept(this);
 
@@ -225,11 +243,13 @@ public class TaintAnalysis {
             }
 
             this.inAssignment = false;
+            return null;
         }
 
         @Override
-        public void visitStatementIf(StatementIf statementIf) {
+        public Void visitStatementIf(StatementIf statementIf) {
             statementIf.getCondition().accept(this);
+            return null;
         }
 
 
@@ -240,18 +260,38 @@ public class TaintAnalysis {
         }
     }
 
+    /**
+     * A possible tainted variable and a set of configurations that might have tainted it.
+     */
     public static class TaintedVariable {
         private ExpressionVariable variable;
-        // TODO maybe have a set of configurations that affect this variable instead of having multiple variables.
         private Set<ExpressionConfigurationConstant> configurations;
 
-        public TaintedVariable(ExpressionVariable variable, Set<ExpressionConfigurationConstant> configuration) {
+        public TaintedVariable(ExpressionVariable variable, Set<ExpressionConfigurationConstant> configurations) {
+            if(variable == null) {
+                throw new IllegalArgumentException("The variable cannot be null");
+            }
+
+            if(configurations == null) {
+                throw new IllegalArgumentException("The configuration cannot be null");
+            }
+
             this.variable = variable;
-            this.configurations = configuration;
+            this.configurations = configurations;
         }
 
+        /**
+         * Returns the variable that might be tainted.
+         *
+         * @return
+         */
         public ExpressionVariable getVariable() { return this.variable; }
 
+        /**
+         * Returns the configurations that might have tainted the variable.
+         *
+         * @return
+         */
         public Set<ExpressionConfigurationConstant> getConfigurations() { return this.configurations; }
 
         @Override
@@ -276,7 +316,4 @@ public class TaintAnalysis {
         public String toString() { return this.variable + "<-" + this.configurations; }
     }
 
-    public Map<BasicBlock, Set<TaintedVariable>> getInstructionToTainted() {
-        return this.instructionToTainted;
-    }
 }

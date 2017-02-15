@@ -6,10 +6,11 @@ import edu.cmu.cs.mvelezce.language.ast.expression.*;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
 import edu.cmu.cs.mvelezce.language.lexer.Lexer;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * TODO
  * Created by miguelvelez on 1/31/17.
  */
 public class Parser {
@@ -22,7 +23,7 @@ public class Parser {
     }
 
     public Statement parse() {
-        List<Statement> program = new LinkedList<>();
+        List<Statement> program = new ArrayList<>();
         program.add(this.stmt());
 
         while(this.currentToken.getTag() != Tag.EOF) {
@@ -53,7 +54,7 @@ public class Parser {
             this.checkToken(Tag.RIGHT_PARENT);
             this.checkToken(Tag.LEFT_BRACKET);
 
-            List<Statement> statements = new LinkedList<>();
+            List<Statement> statements = new ArrayList<>();
             statements.add(this.stmt());
 
             while(this.currentToken.getTag() != Tag.RIGHT_BRACKET) {
@@ -81,7 +82,7 @@ public class Parser {
             this.checkToken(Tag.RIGHT_PARENT);
             this.checkToken(Tag.LEFT_BRACKET);
 
-            List<Statement> statements = new LinkedList<>();
+            List<Statement> statements = new ArrayList<>();
             statements.add(this.stmt());
 
             while(this.currentToken.getTag() != Tag.RIGHT_BRACKET) {

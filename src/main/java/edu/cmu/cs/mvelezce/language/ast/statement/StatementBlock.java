@@ -29,8 +29,8 @@ public class StatementBlock extends Statement {
     }
 
     @Override
-    public <T> void accept(Visitor<T> visitor) {
-        visitor.visitStatementBlock(this);
+    public <T,U> U accept(Visitor<T,U> visitor) {
+        return visitor.visitStatementBlock(this);
     }
 
     /**

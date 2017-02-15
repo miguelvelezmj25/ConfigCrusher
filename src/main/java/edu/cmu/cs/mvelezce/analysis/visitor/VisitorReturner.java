@@ -11,7 +11,7 @@ import java.util.List;
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1
  */
-public class BaseVisitor implements Visitor<Expression> {
+public class VisitorReturner implements Visitor<Expression, Void> {
     @Override
     public Expression visitExpressionBinary(ExpressionBinary expressionBinary) {
         if(expressionBinary == null) {
@@ -64,17 +64,18 @@ public class BaseVisitor implements Visitor<Expression> {
     }
 
     @Override
-    public void visitStatementAssignment(StatementAssignment statementAssignment) {
+    public Void visitStatementAssignment(StatementAssignment statementAssignment) {
         if(statementAssignment == null) {
             throw new IllegalArgumentException("The statementAssignment cannot be null");
         }
 
         statementAssignment.getVariable().accept(this);
         statementAssignment.getRight().accept(this);
+        return null;
     }
 
     @Override
-    public void visitStatementBlock(StatementBlock statementBlock) {
+    public Void visitStatementBlock(StatementBlock statementBlock) {
         if(statementBlock == null) {
             throw new IllegalArgumentException("The statementBlock cannot be null");
         }
@@ -84,34 +85,47 @@ public class BaseVisitor implements Visitor<Expression> {
         for(Statement statement : statements) {
             statement.accept(this);
         }
+        return null;
     }
 
     @Override
-    public void visitStatementIf(StatementIf statementIf) {
+    public Void visitStatementIf(StatementIf statementIf) {
         if(statementIf == null) {
             throw new IllegalArgumentException("The statementIf cannot be null");
         }
 
         statementIf.getCondition().accept(this);
         statementIf.getThenBlock().accept(this);
+        return null;
     }
 
     @Override
-    public void visitStatementSleep(StatementSleep statementSleep) {
+    public Void visitStatementSleep(StatementSleep statementSleep) {
         if(statementSleep == null) {
             throw new IllegalArgumentException("The statementSleep cannot be null");
         }
 
         statementSleep.getTime().accept(this);
+        return null;
     }
 
     @Override
-    public void visitStatementWhile(StatementWhile statementWhile) {
+    public Void visitStatementWhile(StatementWhile statementWhile) {
         if(statementWhile == null) {
             throw new IllegalArgumentException("The statementWhile cannot be null");
         }
 
         statementWhile.getCondition().accept(this);
         statementWhile.getBody().accept(this);
+        return null;
+    }
+
+    @Override
+    public Void visitStatementTimed(StatementTimed statementTimed) {
+        if(statementTimed == null) {
+            throw new IllegalArgumentException("The statementTimed cannot be null");
+        }
+        // TODO
+        return null;
     }
 }

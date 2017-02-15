@@ -34,8 +34,8 @@ public class StatementIf extends Statement {
     }
 
     @Override
-    public <T> void accept(Visitor<T> visitor) {
-        visitor.visitStatementIf(this);
+    public <T, U> U accept(Visitor<T, U> visitor) {
+        return visitor.visitStatementIf(this);
     }
 
     /**

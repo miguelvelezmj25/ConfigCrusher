@@ -16,7 +16,8 @@ public abstract class Expression extends Node {
      *
      * @param visitor
      * @param <T>
+     * @param <U>
      * @return
      */
-    public abstract <T> T accept(Visitor<T> visitor);
+    public abstract <T,U> T accept(Visitor<T,U> visitor);
 }

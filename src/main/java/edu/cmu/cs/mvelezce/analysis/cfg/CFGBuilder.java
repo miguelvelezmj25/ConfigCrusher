@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.analysis.cfg;
 
-import edu.cmu.cs.mvelezce.analysis.visitor.BaseVisitor;
+import edu.cmu.cs.mvelezce.analysis.visitor.VisitorReturner;
 import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
@@ -17,7 +17,7 @@ import java.util.Stack;
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1
  */
-public class CFGBuilder extends BaseVisitor {
+public class CFGBuilder extends VisitorReturner {
     private int steps;
     private CFG cfg;
     private BasicBlock currentBasicBlock;
@@ -86,12 +86,13 @@ public class CFGBuilder extends BaseVisitor {
     }
 
     @Override
-    public void visitStatementAssignment(StatementAssignment statementAssignment) {
+    public Void visitStatementAssignment(StatementAssignment statementAssignment) {
         if(statementAssignment == null) {
             throw new IllegalArgumentException("The statementAssignment cannot be null");
         }
 
         this.checkConditions(statementAssignment);
+        return null;
     }
 
     /**
@@ -101,7 +102,7 @@ public class CFGBuilder extends BaseVisitor {
      * @param statementIf
      */
     @Override
-    public void visitStatementIf(StatementIf statementIf) {
+    public Void visitStatementIf(StatementIf statementIf) {
         if(statementIf == null) {
             throw new IllegalArgumentException("The statementIf cannot be null");
         }
@@ -114,26 +115,29 @@ public class CFGBuilder extends BaseVisitor {
 
         this.conditionStack.pop();
         this.branchStack.push(basicBlock);
+        return null;
     }
 
     @Override
-    public void visitStatementSleep(StatementSleep statementSleep) {
+    public Void visitStatementSleep(StatementSleep statementSleep) {
         if(statementSleep == null) {
             throw new IllegalArgumentException("The statementSleep cannot be null");
         }
 
         this.checkConditions(statementSleep);
+        return null;
     }
 
 
     @Override
-    public void visitStatementWhile(StatementWhile statementWhile) {
+    public Void visitStatementWhile(StatementWhile statementWhile) {
         if(statementWhile == null) {
             throw new IllegalArgumentException("The statementWhile cannot be null");
         }
 
         // TODO might have to visit block
         this.checkConditions(statementWhile);
+        return null;
     }
 
     /**

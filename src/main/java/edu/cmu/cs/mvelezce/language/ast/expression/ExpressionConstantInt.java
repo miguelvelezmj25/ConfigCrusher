@@ -24,7 +24,7 @@ public class ExpressionConstantInt extends Expression {
     public int getValue() { return this.value; }
 
     @Override
-    public <T> T accept(Visitor<T> visitor) {
+    public <T,U> T accept(Visitor<T,U> visitor) {
         return visitor.visitExpressionConstantInt(this);
     }
 

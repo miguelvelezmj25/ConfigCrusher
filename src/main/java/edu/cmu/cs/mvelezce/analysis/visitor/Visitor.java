@@ -11,7 +11,7 @@ import edu.cmu.cs.mvelezce.language.ast.statement.*;
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1
  */
-public interface Visitor <V> {
+public interface Visitor <V,W> {
 
     /**
      * Evaluates an ExpressionBinary.
@@ -58,33 +58,40 @@ public interface Visitor <V> {
      *
      * @param statementAssignment
      */
-    void visitStatementAssignment(StatementAssignment statementAssignment);
+    W visitStatementAssignment(StatementAssignment statementAssignment);
 
     /**
      * Visit a StatementBlock.
      *
      * @param statementBlock
      */
-    void visitStatementBlock(StatementBlock statementBlock);
+    W visitStatementBlock(StatementBlock statementBlock);
 
     /**
      * Visit a StatementIf.
      *
      * @param statementIf
      */
-    void visitStatementIf(StatementIf statementIf);
+    W visitStatementIf(StatementIf statementIf);
 
     /**
      * Visit a StatementSleep.
      *
      * @param statementSleep
      */
-    void visitStatementSleep(StatementSleep statementSleep);
+    W visitStatementSleep(StatementSleep statementSleep);
 
     /**
      * Visit a StatementWhile.
      *
      * @param statementWhile
      */
-    void visitStatementWhile(StatementWhile statementWhile);
+    W visitStatementWhile(StatementWhile statementWhile);
+
+    /**
+     * Visit a StatementTimed
+     *
+     * @param statementTimed
+     */
+    W visitStatementTimed(StatementTimed statementTimed);
 }

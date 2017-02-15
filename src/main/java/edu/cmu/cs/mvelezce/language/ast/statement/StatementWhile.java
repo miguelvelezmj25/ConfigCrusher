@@ -35,8 +35,8 @@ public class StatementWhile extends Statement {
     }
 
     @Override
-    public <T> void accept(Visitor<T> visitor) {
-        visitor.visitStatementWhile(this);
+    public <T,U> U accept(Visitor<T,U> visitor) {
+        return visitor.visitStatementWhile(this);
     }
 
     /**

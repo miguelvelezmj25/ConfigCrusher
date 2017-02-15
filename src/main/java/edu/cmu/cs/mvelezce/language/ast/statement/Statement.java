@@ -17,7 +17,8 @@ public abstract class Statement extends Node {
      *
      * @param visitor
      * @param <T>
+     * @param <U>
      */
-    public abstract <T> void accept(Visitor<T> visitor);
+    public abstract <T,U> U accept(Visitor<T,U> visitor);
 
 }

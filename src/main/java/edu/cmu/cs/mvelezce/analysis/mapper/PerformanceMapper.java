@@ -6,13 +6,14 @@ import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.analysis.interpreter.Interpreter;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
-import edu.cmu.cs.mvelezce.analysis.visitor.BaseVisitor;
+import edu.cmu.cs.mvelezce.analysis.visitor.VisitorReturner;
 import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
 import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.language.ast.statement.StatementIf;
 import edu.cmu.cs.mvelezce.language.ast.statement.StatementSleep;
+import edu.cmu.cs.mvelezce.language.ast.statement.StatementTimed;
 
 import java.util.*;
 
@@ -23,29 +24,30 @@ import java.util.*;
 public class PerformanceMapper {
     private Set<Set<String>> allConfigurations;
     private Map<Set<String>, Integer> performanceMap;
-    private List<Class<? extends Statement>> relevantStatements;
+    private Statement ast;
+    private List<Class<? extends Statement>> relevantStatementsClasses;
 
     /**
      * TODO
      */
-    public PerformanceMapper() {
+    public PerformanceMapper(Statement ast, Set<String> parameters) {
+        this.allConfigurations = Helper.getConfigurations(parameters);
         this.performanceMap = new HashMap<>();
-        this.allConfigurations = null;
-        relevantStatements = new ArrayList<>();
-        relevantStatements.add(StatementSleep.class);
-        relevantStatements.add(StatementIf.class);
+        this.ast = ast;
+        relevantStatementsClasses = new ArrayList<>();
+        relevantStatementsClasses.add(StatementSleep.class);
+        relevantStatementsClasses.add(StatementIf.class);
     }
 
     /**
      * TODO
      */
-    public Map<Set<String>, Integer> computeAll(Statement ast, Set<String> parameters) {
-        this.allConfigurations = Helper.getConfigurations(parameters);
+    public Map<Set<String>, Integer> computeAll() {
         TaintAnalysis taintAnalysis = new TaintAnalysis();
         Interpreter interpreter = new Interpreter();
 
         CFGBuilder builder = new CFGBuilder();
-        CFG cfg = builder.buildCFG(ast);
+        CFG cfg = builder.buildCFG(this.ast);
 
         Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
         Set<String> relevantConfigurations = this.getConfigurationsInRelevantStatements(instructionsToTainted);
@@ -100,8 +102,8 @@ public class PerformanceMapper {
         Set<String> taintingConfigurations = new HashSet<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.TaintedVariable>> entry : instructionsToTainted.entrySet()) {
-            if(this.relevantStatements.contains(entry.getKey().getStatement().getClass())) {
-                TaintingVisitor taintingVisitor = new TaintingVisitor(entry.getValue(), taintingConfigurations);
+            if(this.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
+                PerformanceVisitor taintingVisitor = new PerformanceVisitor(entry.getValue(), taintingConfigurations);
                 entry.getKey().getStatement().accept(taintingVisitor);
             }
         }
@@ -110,79 +112,103 @@ public class PerformanceMapper {
 
     }
 
-
     public Set<Set<String>> getAllConfigurations() { return this.allConfigurations; }
 
     public Map<Set<String>, Integer> getPerformanceMap() { return this.performanceMap; }
 
-    public void setAllConfigurations(Set<Set<String>> allConfigurations) { this.allConfigurations = allConfigurations; }
-
-    private class TaintingVisitor extends BaseVisitor {
+    private class PerformanceVisitor extends VisitorReturner {
         private Set<TaintAnalysis.TaintedVariable> taintedVariables;
         private Set<String> taintingConfigurations;
-        private boolean inRelevantStatement;
+        private boolean inPossibleRelevantStatement;
+        private boolean relevantStatement;
 
-        public TaintingVisitor(Set<TaintAnalysis.TaintedVariable> taintedVariables, Set<String> taintingConfigurations) {
+        public PerformanceVisitor(Set<TaintAnalysis.TaintedVariable> taintedVariables, Set<String> taintingConfigurations) {
             this.taintedVariables = taintedVariables;
             this.taintingConfigurations = taintingConfigurations;
-            this.inRelevantStatement = false;
+            this.inPossibleRelevantStatement = false;
+            this.relevantStatement = false;
         }
 
         @Override
         public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
-            Expression expression = super.visitExpressionConstantConfiguration(expressionConfigurationConstant);
-
-            if(this.inRelevantStatement) {
+            if(this.inPossibleRelevantStatement) {
                 this.taintingConfigurations.add(expressionConfigurationConstant.getName());
+                this.relevantStatement = true;
             }
 
 
-            return expression;
+            return expressionConfigurationConstant;
         }
 
         @Override
         public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
-            Expression expression = super.visitExpressionVariable(expressionVariable);
-
-            if(this.inRelevantStatement) {
+            if(this.inPossibleRelevantStatement) {
                 for(TaintAnalysis.TaintedVariable taintedVariable : this.taintedVariables) {
-                    if (taintedVariable.getVariable().equals(expressionVariable)) {
-                        for (ExpressionConfigurationConstant parameter : taintedVariable.getConfigurations()) {
+                    if(taintedVariable.getVariable().equals(expressionVariable)) {
+                        this.relevantStatement = true;
+                        for(ExpressionConfigurationConstant parameter : taintedVariable.getConfigurations()) {
                             this.taintingConfigurations.add(parameter.getName());
                         }
                     }
                 }
             }
 
-            return expression;
+            return expressionVariable;
         }
 
         @Override
-        public void visitStatementIf(StatementIf statementIf) {
+        public Void visitStatementIf(StatementIf statementIf) {
             boolean cameFromRelevantStatement = true;
-            if(!this.inRelevantStatement) {
-                this.inRelevantStatement = true;
+            if(!this.inPossibleRelevantStatement) {
+                this.inPossibleRelevantStatement = true;
                 cameFromRelevantStatement = false;
             }
+
             statementIf.getCondition().accept(this);
 
             if(!cameFromRelevantStatement) {
-                this.inRelevantStatement = false;
+                this.inPossibleRelevantStatement = false;
             }
+            return null;
         }
 
         @Override
-        public void visitStatementSleep(StatementSleep statementSleep) {
+        public Void visitStatementSleep(StatementSleep statementSleep) {
             boolean cameFromRelevantStatement = true;
-            if(!this.inRelevantStatement) {
-                this.inRelevantStatement = true;
+            if(!this.inPossibleRelevantStatement) {
+                this.inPossibleRelevantStatement = true;
                 cameFromRelevantStatement = false;
             }
+
             statementSleep.getTime().accept(this);
 
             if(!cameFromRelevantStatement) {
-                this.inRelevantStatement = false;
+                this.inPossibleRelevantStatement = false;
             }
+            return null;
         }
+    }
+
+    private class AddTimedVisitor extends VisitorReturner {
+        private Set<Statement> relevantStatements;
+
+        public AddTimedVisitor(Set<Statement> relevantStatements) {
+            this.relevantStatements = relevantStatements;
+        }
+
+        @Override
+        public Void visitStatementIf(StatementIf statementIf) {
+            if(this.relevantStatements.contains(statementIf)) {
+                StatementTimed then = new StatementTimed(statementIf.getThenBlock());
+            }
+            return null;
+        }
+
+        @Override
+        public Void visitStatementSleep(StatementSleep statementSleep) {
+
+            return null;
+        }
+
     }
 }

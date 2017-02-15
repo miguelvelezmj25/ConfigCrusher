@@ -38,8 +38,8 @@ public class StatementAssignment extends Statement {
     }
 
     @Override
-    public <T> void accept(Visitor<T> visitor) {
-        visitor.visitStatementAssignment(this);
+    public <T,U> U accept(Visitor<T,U> visitor) {
+        return visitor.visitStatementAssignment(this);
     }
 
     /**

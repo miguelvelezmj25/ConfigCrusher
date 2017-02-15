@@ -42,7 +42,7 @@ public class ExpressionUnary extends Expression {
     public String getOperation() { return this.operation; }
 
     @Override
-    public <T> T accept(Visitor<T> visitor) {
+    public <T,U> T accept(Visitor<T,U> visitor) {
         return visitor.visitExpressionUnary(this);
     }
 

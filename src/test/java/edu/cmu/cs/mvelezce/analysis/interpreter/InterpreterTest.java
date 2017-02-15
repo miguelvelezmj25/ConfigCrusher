@@ -35,7 +35,7 @@ public class InterpreterTest {
         Interpreter interpreter = new Interpreter();
 
         Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(0, interpreter.getSleepTime());
+        Assert.assertEquals(0, interpreter.getTotalTime());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class InterpreterTest {
         Interpreter interpreter = new Interpreter();
 
         Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(1, interpreter.getSleepTime());
+        Assert.assertEquals(1, interpreter.getTotalTime());
     }
 
     @Test
@@ -76,7 +76,7 @@ public class InterpreterTest {
         Interpreter interpreter = new Interpreter();
 
         Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(5, interpreter.getSleepTime());
+        Assert.assertEquals(5, interpreter.getTotalTime());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class InterpreterTest {
         Interpreter interpreter = new Interpreter();
 
         Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(3, interpreter.getSleepTime());
+        Assert.assertEquals(3, interpreter.getTotalTime());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class InterpreterTest {
         Interpreter interpreter = new Interpreter();
 
         Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(2, interpreter.getSleepTime());
+        Assert.assertEquals(2, interpreter.getTotalTime());
     }
 
     @Test
@@ -138,7 +138,7 @@ public class InterpreterTest {
         Interpreter interpreter = new Interpreter();
 
         Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(6, interpreter.getSleepTime());
+        Assert.assertEquals(6, interpreter.getTotalTime());
     }
 
 }

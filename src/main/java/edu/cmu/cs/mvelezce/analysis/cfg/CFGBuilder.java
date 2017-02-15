@@ -12,7 +12,10 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * Created by miguelvelez on 2/2/17.
+ * A Control Flow Graph builder. It implements the Visitor pattern to add each statement to the CFG.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class CFGBuilder extends BaseVisitor {
     private int steps;
@@ -23,6 +26,9 @@ public class CFGBuilder extends BaseVisitor {
     private List<Expression> currentConditions;
     private boolean checkingConditions;
 
+    /**
+     * Initializes a {@code CFGBuilder}.
+     */
     public CFGBuilder() {
         this.steps = 0;
         this.cfg = new CFG();
@@ -33,7 +39,16 @@ public class CFGBuilder extends BaseVisitor {
         this.checkingConditions = false;
     }
 
+    /**
+     * Starts building a CFG from the provided statement.
+     * @param ast
+     * @return
+     */
     public CFG buildCFG(Statement ast) {
+        if(ast == null) {
+            throw new IllegalArgumentException("The statement cannot be null");
+        }
+
         ast.accept(this);
         this.cfg.addEdge(this.currentBasicBlock, this.cfg.getExit());
 
@@ -46,36 +61,51 @@ public class CFGBuilder extends BaseVisitor {
 
     @Override
     public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
+        if(expressionConfigurationConstant == null) {
+            throw new IllegalArgumentException("The expressionConfigurationConstant cannot be null");
+        }
+
         if(this.checkingConditions) {
             this.currentConditions.add(expressionConfigurationConstant);
         }
+
         return expressionConfigurationConstant;
     }
 
     @Override
     public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
+        if(expressionVariable == null) {
+            throw new IllegalArgumentException("The expressionVariable cannot be null");
+        }
+
         if(this.checkingConditions) {
             this.currentConditions.add(expressionVariable);
         }
+
         return expressionVariable;
     }
 
     @Override
-    public void visitStatementBlock(StatementBlock statementBlock) {
-        List<Statement> statements = statementBlock.getStatements();
-
-        for(Statement statement : statements) {
-            statement.accept(this);
-        }
-    }
-
-    @Override
     public void visitStatementAssignment(StatementAssignment statementAssignment) {
+        if(statementAssignment == null) {
+            throw new IllegalArgumentException("The statementAssignment cannot be null");
+        }
+
         this.checkConditions(statementAssignment);
     }
 
+    /**
+     * This method pushes this StatementIf to a stack that and analyzes the Then branch. This is done so that this
+     * BasicBlock also has an edge to the next BasicBlock after then Then branch.
+     *
+     * @param statementIf
+     */
     @Override
     public void visitStatementIf(StatementIf statementIf) {
+        if(statementIf == null) {
+            throw new IllegalArgumentException("The statementIf cannot be null");
+        }
+
         BasicBlock basicBlock = this.checkConditions(statementIf);
 
         this.conditionStack.push(statementIf.getCondition());
@@ -88,22 +118,51 @@ public class CFGBuilder extends BaseVisitor {
 
     @Override
     public void visitStatementSleep(StatementSleep statementSleep) {
+        if(statementSleep == null) {
+            throw new IllegalArgumentException("The statementSleep cannot be null");
+        }
+
         this.checkConditions(statementSleep);
     }
 
+
     @Override
     public void visitStatementWhile(StatementWhile statementWhile) {
+        if(statementWhile == null) {
+            throw new IllegalArgumentException("The statementWhile cannot be null");
+        }
+
         // TODO might have to visit block
         this.checkConditions(statementWhile);
     }
 
+    /**
+     * Checks if there the builder came from analyzing a StatementIf. This allows to create an edge between the
+     * StatementIf and the BasicBlock after it.
+     * @param basicBlock
+     */
     private void checkBranching(BasicBlock basicBlock) {
+        if(basicBlock == null) {
+            throw new IllegalArgumentException("The basicBlock cannot be null");
+        }
+
         if(!this.branchStack.isEmpty()) {
             this.cfg.addEdge(this.branchStack.pop(), basicBlock);
         }
     }
 
+    /**
+     * Adds the conditions that affect this statement. It does not know the exact value of the expression; rather it
+     * knows what the expression(s) are.
+     * 
+     * @param statement
+     * @return
+     */
     private BasicBlock checkConditions(Statement statement) {
+        if(statement == null) {
+            throw new IllegalArgumentException("The statement cannot be null");
+        }
+
         this.checkingConditions = true;
         BasicBlock basicBlock;
 

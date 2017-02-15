@@ -60,6 +60,10 @@ public class CFG {
      * @return
      */
     public List<BasicBlock> getPredecessors(BasicBlock basicBlock) {
+        if(basicBlock == null) {
+            throw new IllegalArgumentException("The basicBlock cannot be null");
+        }
+
         List<BasicBlock> predecessors = new LinkedList<>();
 
         for (Map.Entry<BasicBlock, List<BasicBlock>> entry : this.edges.entrySet()) {
@@ -78,7 +82,7 @@ public class CFG {
      */
     public List<BasicBlock> getSuccessors(BasicBlock basicBlock) {
         if(basicBlock == null) {
-            throw new IllegalArgumentException("The BasicBlock cannot be null");
+            throw new IllegalArgumentException("The basicBlock cannot be null");
         }
 
         return this.edges.get(basicBlock);

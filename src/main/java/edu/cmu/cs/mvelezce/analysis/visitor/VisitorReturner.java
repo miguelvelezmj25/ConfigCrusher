@@ -6,7 +6,8 @@ import edu.cmu.cs.mvelezce.language.ast.statement.*;
 import java.util.List;
 
 /**
- * A concrete implementation of the Visitor Pattern that returns the same expressions that are passed.
+ * A concrete implementation of the Visitor Pattern that returns the same expressions that are passed. The statements
+ * are analyzed, but they do not return anything.
  *
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1
@@ -125,7 +126,8 @@ public class VisitorReturner implements Visitor<Expression, Void> {
         if(statementTimed == null) {
             throw new IllegalArgumentException("The statementTimed cannot be null");
         }
-        // TODO
+
+        statementTimed.getStatements().accept(this);
         return null;
     }
 }

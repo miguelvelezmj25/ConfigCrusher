@@ -138,7 +138,7 @@ public class PerformanceMapper {
             }
 
 
-            return expressionConfigurationConstant;
+            return expression;
         }
 
         @Override

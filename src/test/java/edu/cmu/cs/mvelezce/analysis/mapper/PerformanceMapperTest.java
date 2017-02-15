@@ -35,7 +35,7 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void getTaintingConfigurations1() throws Exception {
+    public void getConfigurationsInRelevantStatements1() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
@@ -54,7 +54,7 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void getTaintingConfigurations2() throws Exception {
+    public void getConfigurationsInRelevantStatements2() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program2");
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
@@ -67,7 +67,60 @@ public class PerformanceMapperTest {
         Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
         Set<String> taintingConfigurations = new HashSet<>();
         taintingConfigurations.add("C");
+
+        Assert.assertEquals(taintingConfigurations, mapper.getConfigurationsInRelevantStatements(instructionsToTainted));
+    }
+
+    @Test
+    public void getConfigurationsInRelevantStatements3() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+
+        PerformanceMapper mapper = new PerformanceMapper();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
+        Set<String> taintingConfigurations = new HashSet<>();
+        taintingConfigurations.add("C");
         taintingConfigurations.add("D");
+
+        Assert.assertEquals(taintingConfigurations, mapper.getConfigurationsInRelevantStatements(instructionsToTainted));
+    }
+
+    @Test
+    public void getConfigurationsInRelevantStatements4() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program10");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+
+        PerformanceMapper mapper = new PerformanceMapper();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
+        Set<String> taintingConfigurations = new HashSet<>();
+        taintingConfigurations.add("A");
+
+        Assert.assertEquals(taintingConfigurations, mapper.getConfigurationsInRelevantStatements(instructionsToTainted));
+    }
+
+    @Test
+    public void getConfigurationsInRelevantStatements5() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program11");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+
+        PerformanceMapper mapper = new PerformanceMapper();
+        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
+        Set<String> taintingConfigurations = new HashSet<>();
 
         Assert.assertEquals(taintingConfigurations, mapper.getConfigurationsInRelevantStatements(instructionsToTainted));
     }

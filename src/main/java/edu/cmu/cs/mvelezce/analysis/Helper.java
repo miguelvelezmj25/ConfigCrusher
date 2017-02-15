@@ -1,21 +1,28 @@
 package edu.cmu.cs.mvelezce.analysis;
 
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import org.apache.commons.math3.util.Combinations;
 
 import java.util.*;
 
 /**
- * TODO
+ * Helper class for performing analyses.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class Helper {
 
     /**
-     * TODO
+     * Get all combinations of the specified parameters.
+     *
      * @param parameters
      * @return
      */
     public static Set<Set<String>> getConfigurations(Set<String> parameters) {
+        if(parameters == null) {
+            throw new IllegalArgumentException("The parameters cannot be null");
+        }
+
         List<String> parametersList= new ArrayList<>(parameters);
         Set<Set<String>> configurations = new HashSet<>();
 
@@ -41,11 +48,23 @@ public class Helper {
     }
 
     /**
-     * TODO
+     * Get the next configurations based on the available ones and the parameters that should be considered. First, it
+     * returns the configuration where all options are set to false. Next, it returns the next smallest configuration that
+     * has all parameters under consideration set to true. Finally, it return a random configuration.
+     *
      * @param configurations
+     * @param considerParameters
      * @return
      */
     public static Set<String> getNextConfiguration(Set<Set<String>> configurations, Set<String> considerParameters) {
+        if(configurations == null) {
+            throw new IllegalArgumentException("The configurations cannot be null");
+        }
+
+        if(considerParameters == null) {
+            throw new IllegalArgumentException("The considerParameters cannot be null");
+        }
+
         if (configurations.isEmpty()) {
             return null;
         }

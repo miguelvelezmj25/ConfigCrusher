@@ -3,7 +3,12 @@ package edu.cmu.cs.mvelezce.analysis.cfg;
 import java.util.*;
 
 /**
- * Created by miguelvelez on 2/2/17.
+ * A Control Flow Graph built with BasicBlocks. This is build with a pseudo-adjacency list; it has a map of BasicBlocks
+ * with a list of BasicBlock representing the edges. It has special entry and exit Basic Blocks to represent the entry
+ * and exit.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class CFG {
     private BasicBlock entry;
@@ -11,6 +16,9 @@ public class CFG {
     private Map<BasicBlock, List<BasicBlock>> edges;
 
 
+    /**
+     * Initializes a {@code CFG}.
+     */
     public CFG() {
         this.entry = new BasicBlock("entry");
         this.exit = new BasicBlock("exit");
@@ -20,16 +28,37 @@ public class CFG {
         this.edges.put(this.exit, new ArrayList<>());
     }
 
+    /**
+     * Add an edge to the CFG.
+     * @param from
+     * @param to
+     */
     public void addEdge(BasicBlock from, BasicBlock to) {
-        // TODO check if the from and to are already in the edges set
+        if(from == null) {
+            throw new IllegalArgumentException("The from BasicBlock cannot be null");
+        }
+
+        if(to == null) {
+            throw new IllegalArgumentException("The to BasicBlock cannot be null");
+        }
+
         if(!this.edges.containsKey(from)) {
             this.edges.put(from, new ArrayList<>());
+        }
+
+        if(!this.edges.containsKey(to)) {
+            this.edges.put(to, new ArrayList<>());
         }
 
         List<BasicBlock> basicBlockEdges = this.edges.get(from);
         basicBlockEdges.add(to);
     }
 
+    /**
+     * Returns a list of all predecessors of this BasicBlock.
+     * @param basicBlock
+     * @return
+     */
     public List<BasicBlock> getPredecessors(BasicBlock basicBlock) {
         List<BasicBlock> predecessors = new LinkedList<>();
 
@@ -42,12 +71,29 @@ public class CFG {
         return predecessors;
     }
 
+    /**
+     * Returns a list of all successors of this BasicBlock.
+     * @param basicBlock
+     * @return
+     */
     public List<BasicBlock> getSuccessors(BasicBlock basicBlock) {
+        if(basicBlock == null) {
+            throw new IllegalArgumentException("The BasicBlock cannot be null");
+        }
+
         return this.edges.get(basicBlock);
     }
 
+    /**
+     * Returns the entry BasicBlock
+     * @return
+     */
     public BasicBlock getEntry() { return this.entry; }
 
+    /**
+     * Returns the exit BasicBlock
+     * @return
+     */
     public BasicBlock getExit() { return this.exit; }
 
     @Override

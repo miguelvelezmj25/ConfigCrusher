@@ -5,14 +5,31 @@ import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Created by mvelezce on 2/1/17.
+ * A while statement that executes a list of statements as long as the condition evaluates to true.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
-// TODO automatic increment
 public class StatementWhile extends Statement {
+// TODO automatic increment
     private Expression condition;
     private StatementBlock body;
 
+    /**
+     * Instantiates a {@code StatementWhile}.
+     *
+     * @param condition
+     * @param body
+     */
     public StatementWhile(Expression condition, StatementBlock body) {
+        if(condition == null) {
+            throw new IllegalArgumentException("The condition cannot be null");
+        }
+
+        if(body == null) {
+            throw new IllegalArgumentException("The body cannot be null");
+        }
+
         this.condition = condition;
         this.body = body;
     }
@@ -22,8 +39,18 @@ public class StatementWhile extends Statement {
         visitor.visitStatementWhile(this);
     }
 
+    /**
+     * Returns the condition of the statement.
+     *
+     * @return
+     */
     public Expression getCondition() { return this.condition; }
 
+    /**
+     * Returns the body of the statement that is executed as long as the condition evaluates to truw.
+     *
+     * @return
+     */
     public StatementBlock getBody() { return this.body; }
 
     @Override

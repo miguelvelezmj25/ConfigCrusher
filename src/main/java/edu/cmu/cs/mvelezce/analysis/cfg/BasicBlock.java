@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * A BasicBlock in a CFG. It contains an id, a statement, and a list of expressions which are the conditions
- * for this statement to be executied.
+ * for this statement to be executed.
  *
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1

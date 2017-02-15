@@ -5,13 +5,26 @@ import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 import java.util.List;
 
 /**
- * Created by mvelezce on 2/1/17.
+ * A block of statements as a list. Used to represent a whole program and groups of statements inside of branches.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class StatementBlock extends Statement {
     private List<Statement> statements;
 
     // TODO List<? extends Statement> ?
+
+    /**
+     * Instantiate a {@code StatementBlock}.
+     *
+     * @param statements
+     */
     public StatementBlock(List<Statement> statements) {
+        if(statements == null) {
+            throw new IllegalArgumentException("The statements cannot be null");
+        }
+
         this.statements = statements;
     }
 
@@ -20,6 +33,11 @@ public class StatementBlock extends Statement {
         visitor.visitStatementBlock(this);
     }
 
+    /**
+     * Returns the list of statements in the block.
+     *
+     * @return
+     */
     public List<Statement> getStatements() { return this.statements; }
 
     @Override

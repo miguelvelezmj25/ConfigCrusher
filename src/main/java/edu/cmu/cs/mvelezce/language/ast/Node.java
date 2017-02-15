@@ -1,7 +1,10 @@
 package edu.cmu.cs.mvelezce.language.ast;
 
 /**
- * Created by miguelvelez on 1/31/17.
+ * An abstract Node in an Abstract Syntax Tree.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public abstract class Node {
 

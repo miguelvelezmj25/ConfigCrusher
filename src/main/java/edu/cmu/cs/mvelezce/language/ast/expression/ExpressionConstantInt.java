@@ -3,7 +3,11 @@ package edu.cmu.cs.mvelezce.language.ast.expression;
 import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 
 /**
- * Created by mvelezce on 2/1/17.
+ * A constant integer expression. This is different than the ValueInt object since this is not the result of evaluating
+ * expressions.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class ExpressionConstantInt extends Expression {
     private final int value;
@@ -12,6 +16,11 @@ public class ExpressionConstantInt extends Expression {
         this.value = value;
     }
 
+    /**
+     * Returns the value of this constant.
+     *
+     * @return
+     */
     public int getValue() { return this.value; }
 
     @Override

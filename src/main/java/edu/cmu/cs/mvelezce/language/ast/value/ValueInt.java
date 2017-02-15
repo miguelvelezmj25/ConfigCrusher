@@ -1,15 +1,21 @@
 package edu.cmu.cs.mvelezce.language.ast.value;
 
 /**
- * Created by mvelezce on 2/1/17.
+ * A ValueInt that represent the result of evaluating an expression
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class ValueInt {
     private final int value;
 
-    public ValueInt(int value) {
-        this.value = value;
-    }
+    public ValueInt(int value) { this.value = value; }
 
+    /**
+     * Returns the value.
+     *
+     * @return
+     */
     public int getValue() { return this.value; }
 
     @Override

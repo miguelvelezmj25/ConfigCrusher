@@ -3,21 +3,38 @@ package edu.cmu.cs.mvelezce.language.ast.expression;
 import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 
 /**
- * Created by mvelezce on 2/1/17.
+ * A variable expression.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class ExpressionVariable extends Expression {
     private String name;
 
     public ExpressionVariable(String name) {
+        if(name == null) {
+            throw new IllegalArgumentException("The name cannot be null");
+        }
+
+        if(name.isEmpty()) {
+            throw new IllegalArgumentException("The name cannot be empty");
+        }
+
         this.name = name;
     }
+
+    /**
+     * Returns the name of the variable.
+     *
+     * @return
+     */
+    public String getName() { return this.name; }
+
 
     @Override
     public <T> T accept(Visitor<T> visitor) {
         return visitor.visitExpressionVariable(this);
     }
-
-    public String getName() { return this.name; }
 
     @Override
     public boolean equals(Object o) {

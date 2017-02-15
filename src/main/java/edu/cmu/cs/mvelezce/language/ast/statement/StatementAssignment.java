@@ -5,7 +5,10 @@ import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
 
 /**
- * Created by mvelezce on 2/1/17.
+ * An assignment statement of the form {@code exprVariable op expr}.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class StatementAssignment extends Statement {
     private ExpressionVariable variable;
@@ -13,21 +16,53 @@ public class StatementAssignment extends Statement {
     private Expression right;
 
     public StatementAssignment(ExpressionVariable variable, String operation, Expression right) {
+        if(variable == null) {
+            throw new IllegalArgumentException("The variable cannot be null");
+        }
+
+        if(operation == null) {
+            throw new IllegalArgumentException("The operation cannot be null");
+        }
+
+        if(!operation.equals("=")) {
+            throw new IllegalArgumentException("The operation must be '='");
+        }
+
+        if(right == null) {
+            throw new IllegalArgumentException("The right cannot be null");
+        }
+
         this.variable = variable;
         this.operation = operation;
-        this.right = right ;
+        this.right = right;
     }
-
-    public ExpressionVariable getVariable() { return this.variable; }
-
-    public String getOperation() { return this.operation; }
-
-    public Expression getRight() { return this.right; }
 
     @Override
     public <T> void accept(Visitor<T> visitor) {
         visitor.visitStatementAssignment(this);
     }
+
+    /**
+     * Returns the variable of the assignment.
+     *
+     * @return
+     */
+    public ExpressionVariable getVariable() { return this.variable; }
+
+    /**
+     * Returns the operation of the assignment.
+     *
+     * @return
+     */
+    public String getOperation() { return this.operation; }
+
+    /**
+     * Returns the expression of the assignment.
+     *
+     * @return
+     */
+    public Expression getRight() { return this.right; }
+
 
     @Override
     public boolean equals(Object o) {

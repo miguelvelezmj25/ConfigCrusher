@@ -4,15 +4,33 @@ import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 
 /**
- * Created by mvelezce on 2/1/17.
+ * An if statement with a then branch. The then branch has a list of statements that are executed if the condition
+ * evaluates to true.
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class StatementIf extends Statement {
     private Expression condition;
     private StatementBlock thenBlock;
 
-    public StatementIf(Expression condition, StatementBlock statementThen) {
+    /**
+     * Instantiates a {@code StatementIf}.
+     *
+     * @param condition
+     * @param thenBlock
+     */
+    public StatementIf(Expression condition, StatementBlock thenBlock) {
+        if(condition == null) {
+            throw new IllegalArgumentException("The condition cannot be null");
+        }
+
+        if(thenBlock == null) {
+            throw new IllegalArgumentException("The thenBlock cannot be null");
+        }
+
         this.condition = condition;
-        this.thenBlock = statementThen;
+        this.thenBlock = thenBlock;
     }
 
     @Override
@@ -20,8 +38,17 @@ public class StatementIf extends Statement {
         visitor.visitStatementIf(this);
     }
 
+    /**
+     * Returns the condition of the statement.
+     *
+     * @return
+     */
     public Expression getCondition() { return this.condition; }
 
+    /**
+     * Returns the list of statements of the then branch.
+     * @return
+     */
     public StatementBlock getThenBlock() { return this.thenBlock; }
 
     @Override
@@ -44,16 +71,6 @@ public class StatementIf extends Statement {
 
     @Override
     public String toString() {
-        String result = "if(" + this.condition +")";
-//                "{\n";
-//        String[] statements = StringUtils.split(this.thenBlock.toString(), '\n');
-//
-//        for(String statement : statements) {
-//            result += "    " + statement + "\n";
-//        }
-//
-//        result += "}";
-
-        return result;
+        return "if(" + this.condition +")";
     }
 }

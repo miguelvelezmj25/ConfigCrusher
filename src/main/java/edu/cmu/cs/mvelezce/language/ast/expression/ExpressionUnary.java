@@ -3,25 +3,48 @@ package edu.cmu.cs.mvelezce.language.ast.expression;
 import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 
 /**
- * Created by miguelvelez on 1/31/17.
+ * A unary expression. It currently supports negation of expressions (!).
+ *
+ * @author Miguel Velez - miguelvelezmj25
+ * @version 0.1.0.1
  */
 public class ExpressionUnary extends Expression {
     private String operation;
     private Expression expression;
 
     public ExpressionUnary(String operation, Expression expression) {
+        if(operation == null) {
+            throw new IllegalArgumentException("The operation cannot be null");
+        }
+        if(operation.isEmpty()) {
+            throw new IllegalArgumentException("The operation cannot be empty");
+        }
+        if(expression == null) {
+            throw new IllegalArgumentException("The expression cannot be null");
+        }
+
         this.operation = operation;
         this.expression = expression;
     }
+
+    /**
+     * Returns the expression.
+     *
+     * @return
+     */
+    public Expression getExpression() { return this.expression; }
+
+    /**
+     * Returns the operation.
+     *
+     * @return
+     */
+    public String getOperation() { return this.operation; }
 
     @Override
     public <T> T accept(Visitor<T> visitor) {
         return visitor.visitExpressionUnary(this);
     }
-
-    public Expression getExpression() { return this.expression; }
-
-    public String getOperation() { return this.operation; }
 
     @Override
     public boolean equals(Object o) {

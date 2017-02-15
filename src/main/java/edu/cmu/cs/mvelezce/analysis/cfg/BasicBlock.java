@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO
+ * A BasicBlock in a CFG. It contains an id, a statement, and a list of expressions which are the conditions
+ * for this statement to be executied.
  *
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1
@@ -19,7 +20,7 @@ public class BasicBlock {
     private List<Expression> conditions;
 
     /**
-     * TODO
+     * Initializes a {@code BasicBlock}.
      * @param id
      * @param statement
      * @param conditions
@@ -31,7 +32,7 @@ public class BasicBlock {
     }
 
     /**
-     * TODO
+     * Initializes a {@code Basic Block} without conditions.
      * @param id
      * @param statement
      */
@@ -40,7 +41,7 @@ public class BasicBlock {
     }
 
     /**
-     * TODO
+     * Initializes a {@code Basic Block} without a statement and conditions.
      * @param id
      */
     public BasicBlock(String id) {
@@ -48,31 +49,26 @@ public class BasicBlock {
     }
 
     /**
-     * TODO
+     * Returns true if the BasicBlock does not contain a statement. This means that it is either the entry or exit
+     * BasicBlock fo the CFG.
      * @return
      */
     public boolean isSpecial() { return this.statement == null; }
 
     /**
-     * TODO
+     * Returns true if the BasicBlock does contain a statement.
      * @return
      */
     public boolean isStatement() { return this.statement != null; }
 
     /**
-     * TODO
-     * @return
-     */
-    public String getId() { return this.id; }
-
-    /**
-     * TODO
+     * Returns the statement of this BasicBlock.
      * @return
      */
     public Statement getStatement() { return this.statement; }
 
     /**
-     * TODO
+     * Returns a list of the expressions that this BasicBlock depends on.
      * @return
      */
     public List<Expression> getConditions() { return this.conditions; }

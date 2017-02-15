@@ -48,17 +48,16 @@ public class PerformanceMapper {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
-        Set<String> taintingConfigurations = this.getConfigurationsInRelevantStatements(instructionsToTainted);
-        Set<String> nextConfiguration = null;
+        Set<String> relevantConfigurations = this.getConfigurationsInRelevantStatements(instructionsToTainted);
+        Set<String> nextConfiguration;
 
         while(!this.allConfigurations.isEmpty()) {
-            nextConfiguration = Helper.getNextConfiguration(this.allConfigurations, taintingConfigurations);
-            System.out.println(nextConfiguration);
+            nextConfiguration = Helper.getNextConfiguration(this.allConfigurations, relevantConfigurations);
             // TODO measure sleeps at each chunck of code that does not branch.
             // TODO record the configuration and the time it took at relevant chuncks of code
             interpreter.evaluate(ast, nextConfiguration);
 
-            this.pruneConfigurations(taintingConfigurations, nextConfiguration);
+            this.pruneConfigurations(relevantConfigurations, nextConfiguration);
         }
 
         return this.performanceMap;

@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Configurations cannot be changed.
+ * TODO
  *
  * Created by miguelvelez on 1/31/17.
  */
@@ -40,7 +40,15 @@ public class Interpreter implements Visitor<ValueInt> {
         this.activatedConfigurations = activatedConfigurations;
 
         ast.accept(this);
-//        System.out.println("Sleep " + this.sleepTime);
+        return this.store;
+    }
+
+    // TODO this seems weird
+    public Map<String, ValueInt> evaluate(Statement ast, Set<String> activatedConfigurations, Object data) {
+        this.reset();
+        this.activatedConfigurations = activatedConfigurations;
+
+        ast.accept(this);
         return this.store;
     }
 

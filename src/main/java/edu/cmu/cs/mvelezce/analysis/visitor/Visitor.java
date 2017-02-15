@@ -11,7 +11,7 @@ import edu.cmu.cs.mvelezce.language.ast.statement.*;
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1
  */
-interface Visitor <V> {
+public interface Visitor <V> {
 
     /**
      * Evaluates an ExpressionBinary.

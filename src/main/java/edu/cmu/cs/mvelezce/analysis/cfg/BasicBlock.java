@@ -26,6 +26,18 @@ public class BasicBlock {
      * @param conditions
      */
     public BasicBlock(String id, Statement statement, List<Expression> conditions) {
+        if(id == null) {
+            throw new IllegalArgumentException("The id cannot be null");
+        }
+
+        if(id.isEmpty()) {
+            throw new IllegalArgumentException("The id cannot be an empty string");
+        }
+
+        if(conditions == null) {
+            throw new IllegalArgumentException("The conditions cannot be null");
+        }
+
         this.id = id;
         this.statement = statement;
         this.conditions = conditions;

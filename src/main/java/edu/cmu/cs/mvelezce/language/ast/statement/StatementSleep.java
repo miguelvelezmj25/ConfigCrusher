@@ -49,6 +49,5 @@ public class StatementSleep extends Statement {
     }
 
     @Override
-    public String toString() { return "sleep(" + this.time + ")";
-    }
+    public String toString() { return "sleep(" + this.time + ")"; }
 }

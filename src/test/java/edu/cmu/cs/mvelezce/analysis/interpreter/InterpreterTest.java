@@ -33,9 +33,10 @@ public class InterpreterTest {
         Set<String> activatedConfigurations = new HashSet<>();
 
         Interpreter interpreter = new Interpreter();
+        interpreter.evaluate(ast, activatedConfigurations);
 
-        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(0, interpreter.getTotalTime());
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(0, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -54,8 +55,10 @@ public class InterpreterTest {
 
         Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(1, interpreter.getTotalTime());
+        interpreter.evaluate(ast, activatedConfigurations);
+
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(1, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -75,8 +78,10 @@ public class InterpreterTest {
 
         Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(5, interpreter.getTotalTime());
+        interpreter.evaluate(ast, activatedConfigurations);
+
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(5, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -96,8 +101,10 @@ public class InterpreterTest {
 
         Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(3, interpreter.getTotalTime());
+        interpreter.evaluate(ast, activatedConfigurations);
+
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(3, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -116,8 +123,10 @@ public class InterpreterTest {
 
         Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(2, interpreter.getTotalTime());
+        interpreter.evaluate(ast, activatedConfigurations);
+
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(2, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -137,8 +146,10 @@ public class InterpreterTest {
 
         Interpreter interpreter = new Interpreter();
 
-        Assert.assertEquals(store, interpreter.evaluate(ast, activatedConfigurations));
-        Assert.assertEquals(6, interpreter.getTotalTime());
+        interpreter.evaluate(ast, activatedConfigurations);
+
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(6, interpreter.getTotalExecutionTime());
     }
 
 }

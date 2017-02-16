@@ -18,30 +18,29 @@ import java.util.Set;
 public class Interpreter implements Visitor<ValueInt, Void> {
     private Map<String, ValueInt> store;
     private Set<String> activatedConfigurations;
-    private int totalTime;
-    Map<StatementTimed, Integer> timedBlocks;
-// private StringBuffer output; TODO could be done
+    private int totalExecutionTime;
+    private Map<StatementTimed, Integer> timedBlocks;
 
     public Interpreter() {
         this.reset();
     }
 
     /**
-     * TODO
+     *
      */
     private void reset() {
         this.store = new HashMap<>();
-        this.totalTime = 0;
+        this.totalExecutionTime = 0;
         this.activatedConfigurations = null;
+        this.timedBlocks = new HashMap<>();
     }
 
     // TODO this seems weird
-    public Map<String, ValueInt> evaluate(Statement ast, Set<String> activatedConfigurations) {
+    public void evaluate(Statement ast, Set<String> activatedConfigurations) {
         this.reset();
         this.activatedConfigurations = activatedConfigurations;
 
         ast.accept(this);
-        return this.store;
     }
 
     @Override
@@ -139,15 +138,15 @@ public class Interpreter implements Visitor<ValueInt, Void> {
     @Override
     public Void visitStatementSleep(StatementSleep statementSleep) {
         ValueInt time = statementSleep.getTime().accept(this);
-        this.totalTime += time.getValue();
+        this.totalExecutionTime += time.getValue();
         return null;
     }
 
     @Override
     public Void visitStatementTimed(StatementTimed statement) {
-        int time = totalTime;
+        int time = totalExecutionTime;
         statement.getStatements().accept(this);
-        this.timedBlocks.put(statement, this.totalTime - time);
+        this.timedBlocks.put(statement, this.totalExecutionTime - time);
         return null;
     }
 
@@ -160,5 +159,7 @@ public class Interpreter implements Visitor<ValueInt, Void> {
 
     public Map<String, ValueInt> getStore() { return this.store; }
 
-    public int getTotalTime() { return this.totalTime; }
+    public int getTotalExecutionTime() { return this.totalExecutionTime; }
+
+    public Map<StatementTimed, Integer> getTimedBlocks() { return this.timedBlocks; }
 }

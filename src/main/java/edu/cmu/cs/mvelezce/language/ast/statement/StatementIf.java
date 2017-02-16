@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
 import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 
 /**
- * An if statement with a then branch. The then branch has a list of statements that are executed if the condition
+ * An if statement with a then branch. The then branch has statements that are executed if the condition
  * evaluates to true.
  *
  * @author Miguel Velez - miguelvelezmj25
@@ -12,7 +12,7 @@ import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
  */
 public class StatementIf extends Statement {
     private Expression condition;
-    private StatementBlock thenBlock;
+    private Statement thenBlock;
 
     /**
      * Instantiates a {@code StatementIf}.
@@ -20,7 +20,7 @@ public class StatementIf extends Statement {
      * @param condition
      * @param thenBlock
      */
-    public StatementIf(Expression condition, StatementBlock thenBlock) {
+    public StatementIf(Expression condition, Statement thenBlock) {
         if(condition == null) {
             throw new IllegalArgumentException("The condition cannot be null");
         }
@@ -46,10 +46,10 @@ public class StatementIf extends Statement {
     public Expression getCondition() { return this.condition; }
 
     /**
-     * Returns the list of statements of the then branch.
+     * Returns the statements of the then branch.
      * @return
      */
-    public StatementBlock getThenBlock() { return this.thenBlock; }
+    public Statement getThenBlock() { return this.thenBlock; }
 
     @Override
     public boolean equals(Object o) {

@@ -9,7 +9,9 @@ import java.util.List;
 /**
  * TODO and also check usage of LinkedList
  */
-public class VisitStatementReplacer implements Visitor<Expression, Statement> {
+public class VisitorReplacer implements Visitor<Expression, Statement> {
+
+    public VisitorReplacer() { ; }
 
     @Override
     public Expression visitExpressionBinary(ExpressionBinary expressionBinary) {
@@ -117,7 +119,7 @@ public class VisitStatementReplacer implements Visitor<Expression, Statement> {
         }
 
         Expression condition = statementIf.getCondition().accept(this);
-        StatementBlock thenBlock = (StatementBlock) statementIf.getThenBlock().accept(this);
+        Statement thenBlock = statementIf.getThenBlock().accept(this);
 
         if(statementIf.getCondition().equals(condition) && statementIf.getThenBlock().equals(thenBlock)) {
             return statementIf;
@@ -148,7 +150,7 @@ public class VisitStatementReplacer implements Visitor<Expression, Statement> {
         }
 
         Expression condition = statementWhile.getCondition().accept(this);
-        StatementBlock body = (StatementBlock) statementWhile.getBody().accept(this);
+        Statement body = statementWhile.getBody().accept(this);
         
         if(statementWhile.getCondition().equals(condition) && statementWhile.getBody().equals(body)) {
             return statementWhile;

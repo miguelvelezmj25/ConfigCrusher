@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 public class StatementWhile extends Statement {
 // TODO automatic increment
     private Expression condition;
-    private StatementBlock body;
+    private Statement body;
 
     /**
      * Instantiates a {@code StatementWhile}.
@@ -21,7 +21,7 @@ public class StatementWhile extends Statement {
      * @param condition
      * @param body
      */
-    public StatementWhile(Expression condition, StatementBlock body) {
+    public StatementWhile(Expression condition, Statement body) {
         if(condition == null) {
             throw new IllegalArgumentException("The condition cannot be null");
         }
@@ -51,7 +51,7 @@ public class StatementWhile extends Statement {
      *
      * @return
      */
-    public StatementBlock getBody() { return this.body; }
+    public Statement getBody() { return this.body; }
 
     @Override
     public boolean equals(Object o) {

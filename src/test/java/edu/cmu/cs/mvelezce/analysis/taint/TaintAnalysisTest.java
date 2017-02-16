@@ -629,4 +629,24 @@ public class TaintAnalysisTest {
         Assert.assertEquals(set, taintAnalysis.transfer(set1, basicBlock));
     }
 
+    @Test
+    public void transferD() throws Exception {
+        TaintAnalysis taintAnalysis = new TaintAnalysis();
+
+        Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
+        configurations.add(new ExpressionConfigurationConstant("C"));
+
+        Set<TaintAnalysis.TaintedVariable> set = new HashSet<>();
+        set.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
+
+        Set<TaintAnalysis.TaintedVariable> set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("a"), configurations));
+        set1.add(new TaintAnalysis.TaintedVariable(new ExpressionVariable("b"), configurations));
+
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("b"), "=",
+                new ExpressionBinary(new ExpressionVariable("x"), "+", new ExpressionConstantInt(2))));
+
+        Assert.assertEquals(set, taintAnalysis.transfer(set1, basicBlock));
+    }
+
 }

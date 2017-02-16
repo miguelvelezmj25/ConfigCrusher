@@ -233,12 +233,11 @@ public class TaintAnalysis {
                 }
             }
 
-            if(!this.tainting) {
-                for (TaintedVariable taintedVariable : this.oldTaints) {
-                    if (taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
-                        this.killedTaintedVariables.add(taintedVariable);
-                        break;
-                    }
+            // Can have the case where x<-[A,B] and now is x<-[A]. We must kill the former.
+            for (TaintedVariable taintedVariable : this.oldTaints) {
+                if (taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
+                    this.killedTaintedVariables.add(taintedVariable);
+                    break;
                 }
             }
 

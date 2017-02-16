@@ -126,25 +126,27 @@ public class Parser {
     private Expression expr() {
         Expression expression = this.term();
 
-        Token token = this.currentToken;
+        while(this.currentToken.getTag() == Tag.PLUS || this.currentToken.getTag() == Tag.MINUS
+                || this.currentToken.getTag() == Tag.MULT || this.currentToken.getTag() == Tag.DIV) {
+            Token token = this.currentToken;
 
-        if(token.getTag() == Tag.PLUS) {
-            this.checkToken(Tag.PLUS);
-        }
-        else if(token.getTag() == Tag.MINUS) {
-            this.checkToken(Tag.MINUS);
-        }
-        else if(token.getTag() == Tag.MULT) {
-            this.checkToken(Tag.MULT);
-        }
-        else if(token.getTag() == Tag.DIV) {
-            this.checkToken(Tag.DIV);
-        }
-        else {
-            return expression;
-        }
+            if (token.getTag() == Tag.PLUS) {
+                this.checkToken(Tag.PLUS);
+            }
+            else if(token.getTag() == Tag.MINUS) {
+                this.checkToken(Tag.MINUS);
+            }
+            else if(token.getTag() == Tag.MULT) {
+                this.checkToken(Tag.MULT);
+            }
+            else if(token.getTag() == Tag.DIV) {
+                this.checkToken(Tag.DIV);
+            }
 
-        return new ExpressionBinary(expression, token.getValue(), this.term());
+            expression = new ExpressionBinary(expression, token.getValue(), this.term());
+
+        }
+        return expression;
     }
 
     private void checkToken(Tag type) {

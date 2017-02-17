@@ -199,9 +199,9 @@ public class TaintAnalysis {
 
             // Can have the case where x<-[A,B] and now is x<-[A]. We must kill the former.
             for (PossibleTaint taintedVariable : this.oldPossibleTaints) {
-                if (taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
+                if(!this.possibleTaintedVariables.contains(taintedVariable) && taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
                     this.killedPossibleTaintedVariables.add(taintedVariable);
-                    break;
+                    break; // TODO can I have this here
                 }
             }
 

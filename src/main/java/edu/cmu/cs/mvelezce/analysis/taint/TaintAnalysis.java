@@ -20,7 +20,6 @@ import java.util.*;
 // TODO should I implement the visitor pattern?
 // TODO what should be the generic?
 public class TaintAnalysis {
-//    private Map<BasicBlock, Set<PossibleTaint>> instructionsToPossibleTaints;
 
     /**
      * Initialize a {@code TaintAnalysis}.

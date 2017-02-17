@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.analysis.interpreter.Interpreter;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
+import edu.cmu.cs.mvelezce.analysis.visitor.VisitorReplacer;
 import edu.cmu.cs.mvelezce.analysis.visitor.VisitorReturner;
 import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
@@ -42,24 +43,26 @@ public class PerformanceMapper {
     /**
      * TODO
      */
-    public Map<Set<String>, Integer> computeAll() {
+    public Map<Set<String>, Integer> calculatePerformance() {
         TaintAnalysis taintAnalysis = new TaintAnalysis();
         Interpreter interpreter = new Interpreter();
 
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(this.ast);
 
-        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
-        Set<String> relevantConfigurations = this.getConfigurationsInRelevantStatements(instructionsToTainted);
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = taintAnalysis.analyze(cfg);
+        Set<Statement> relevantStatements = new HashSet<>();
+        Set<String> relevantConfigurations = this.getConfigurationsInRelevantStatements(instructionsToTainted,
+                relevantStatements);
+        this.updateASTToTimeRelevantStatements(relevantStatements);
+
         Set<String> nextConfiguration;
 
         while(!this.allConfigurations.isEmpty()) {
             nextConfiguration = Helper.getNextConfiguration(this.allConfigurations, relevantConfigurations);
-            // TODO measure sleeps at each chunck of code that does not branch.
-            // TODO record the configuration and the time it took at relevant chuncks of code
             interpreter.evaluate(ast, nextConfiguration);
 
-            this.pruneConfigurations(relevantConfigurations, nextConfiguration);
+            this.pruneAndMapConfigurations(relevantConfigurations, nextConfiguration);
         }
 
         return this.performanceMap;
@@ -69,7 +72,7 @@ public class PerformanceMapper {
      * TODO
      * @param considerParameters
      */
-    protected void pruneConfigurations(Set<String> considerParameters, Set<String> lastConfiguration) {
+    protected void pruneAndMapConfigurations(Set<String> considerParameters, Set<String> lastConfiguration) {
         List<Set<String>> redundantConfigurations = new ArrayList<>();
 
         if(!considerParameters.isEmpty()) { // TODO check if this is needed
@@ -93,17 +96,18 @@ public class PerformanceMapper {
 //    mapConfigurationToPerformanceAfterPruning //TODO
 
     /**
-     * TODO it uses tainted variables, but can also be configurations used in relevant statements
      * @param instructionsToTainted
      * @return
      */
-    // TODO should be tainting configurations that affect the execution of the program or function call
-    protected Set<String> getConfigurationsInRelevantStatements(Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted) {
+    protected Set<String> getConfigurationsInRelevantStatements(
+            Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted,
+            Set<Statement> relevantStatements) {
         Set<String> taintingConfigurations = new HashSet<>();
 
-        for(Map.Entry<BasicBlock, Set<TaintAnalysis.TaintedVariable>> entry : instructionsToTainted.entrySet()) {
+        for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
             if(this.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
-                PerformanceVisitor taintingVisitor = new PerformanceVisitor(entry.getValue(), taintingConfigurations);
+                PerformanceVisitor taintingVisitor = new PerformanceVisitor(entry.getValue(), taintingConfigurations,
+                        relevantStatements);
                 entry.getKey().getStatement().accept(taintingVisitor);
             }
         }
@@ -112,19 +116,28 @@ public class PerformanceMapper {
 
     }
 
+    protected void updateASTToTimeRelevantStatements(Set<Statement> relevantStatements) {
+        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
+        this.ast = this.ast.accept(addTimedVisitor);
+    }
+
     public Set<Set<String>> getAllConfigurations() { return this.allConfigurations; }
 
     public Map<Set<String>, Integer> getPerformanceMap() { return this.performanceMap; }
 
+
     private class PerformanceVisitor extends VisitorReturner {
-        private Set<TaintAnalysis.TaintedVariable> taintedVariables;
+        private Set<TaintAnalysis.PossibleTaint> taintedVariables;
         private Set<String> taintingConfigurations;
+        private Set<Statement> relevantStatements;
         private boolean inPossibleRelevantStatement;
         private boolean relevantStatement;
 
-        public PerformanceVisitor(Set<TaintAnalysis.TaintedVariable> taintedVariables, Set<String> taintingConfigurations) {
+        public PerformanceVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables,
+                                  Set<String> taintingConfigurations, Set<Statement> relevantStatements) {
             this.taintedVariables = taintedVariables;
             this.taintingConfigurations = taintingConfigurations;
+            this.relevantStatements = relevantStatements;
             this.inPossibleRelevantStatement = false;
             this.relevantStatement = false;
         }
@@ -143,7 +156,7 @@ public class PerformanceMapper {
         @Override
         public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
             if(this.inPossibleRelevantStatement) {
-                for(TaintAnalysis.TaintedVariable taintedVariable : this.taintedVariables) {
+                for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
                     if(taintedVariable.getVariable().equals(expressionVariable)) {
                         this.relevantStatement = true;
                         for(ExpressionConfigurationConstant parameter : taintedVariable.getConfigurations()) {
@@ -158,15 +171,28 @@ public class PerformanceMapper {
 
         @Override
         public Void visitStatementIf(StatementIf statementIf) {
-            boolean cameFromRelevantStatement = true;
+            boolean cameFromPossibleRelevantStatement = true;
             if(!this.inPossibleRelevantStatement) {
                 this.inPossibleRelevantStatement = true;
+                cameFromPossibleRelevantStatement = false;
+            }
+
+            boolean cameFromRelevantStatement = true;
+            if(!this.relevantStatement) {
                 cameFromRelevantStatement = false;
             }
 
             statementIf.getCondition().accept(this);
 
+            if(this.relevantStatement) {
+                this.relevantStatements.add(statementIf);
+            }
+
             if(!cameFromRelevantStatement) {
+                this.relevantStatement = false;
+            }
+
+            if(!cameFromPossibleRelevantStatement) {
                 this.inPossibleRelevantStatement = false;
             }
             return null;
@@ -182,6 +208,10 @@ public class PerformanceMapper {
 
             statementSleep.getTime().accept(this);
 
+            if(this.relevantStatement) {
+                this.relevantStatements.add(statementSleep);
+            }
+
             if(!cameFromRelevantStatement) {
                 this.inPossibleRelevantStatement = false;
             }
@@ -189,25 +219,51 @@ public class PerformanceMapper {
         }
     }
 
-    private class AddTimedVisitor extends VisitorReturner {
+    /**
+     * Concrete visitor that replaces statements with StatementTimed for measuring time
+     */
+    private class AddTimedVisitor extends VisitorReplacer {
         private Set<Statement> relevantStatements;
 
+        /**
+         * Instantiate a {@code AddTimedVisitor}.
+         *
+         * @param relevantStatements
+         */
         public AddTimedVisitor(Set<Statement> relevantStatements) {
             this.relevantStatements = relevantStatements;
         }
 
+        /**
+         * Replace the thenBlock of a StatementIf if the entire statement is relevant.
+         *
+         * @param statementIf
+         * @return
+         */
         @Override
-        public Void visitStatementIf(StatementIf statementIf) {
+        public Statement visitStatementIf(StatementIf statementIf) {
             if(this.relevantStatements.contains(statementIf)) {
-                StatementTimed then = new StatementTimed(statementIf.getThenBlock());
+                StatementTimed thenBlock = new StatementTimed(statementIf.getThenBlock());
+
+                return new StatementIf(statementIf.getCondition(), thenBlock);
             }
-            return null;
+
+            return super.visitStatementIf(statementIf);
         }
 
+        /**
+         * Replace the thenBlock of a StatementIf if the entire statement is relevant.
+         *
+         * @param statementSleep
+         * @return
+         */
         @Override
-        public Void visitStatementSleep(StatementSleep statementSleep) {
+        public Statement visitStatementSleep(StatementSleep statementSleep) {
+            if(relevantStatements.contains(statementSleep)) {
+                return new StatementTimed(statementSleep);
+            }
 
-            return null;
+            return statementSleep;
         }
 
     }

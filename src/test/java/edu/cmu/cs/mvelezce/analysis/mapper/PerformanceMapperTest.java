@@ -28,10 +28,12 @@ public class PerformanceMapperTest {
         Set<String> parameters = new HashSet<>();
         parameters.add("A");
         parameters.add("B");
+        parameters.add("C");
+        parameters.add("D");
 
         PerformanceMapper mapper = new PerformanceMapper(ast, parameters);
 
-        mapper.computeAll();
+        mapper.calculatePerformance();
     }
 
 //    @Test
@@ -45,7 +47,7 @@ public class PerformanceMapperTest {
 //        TaintAnalysis taintAnalysis = new TaintAnalysis();
 //
 //        PerformanceMapper mapper = new PerformanceMapper();
-//        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
+//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = taintAnalysis.analyze(cfg);
 //
 //        Set<String> taintingConfigurations = new HashSet<>();
 //        taintingConfigurations.add("C");
@@ -64,7 +66,7 @@ public class PerformanceMapperTest {
 //        TaintAnalysis taintAnalysis = new TaintAnalysis();
 //
 //        PerformanceMapper mapper = new PerformanceMapper();
-//        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
+//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = taintAnalysis.analyze(cfg);
 //        Set<String> taintingConfigurations = new HashSet<>();
 //        taintingConfigurations.add("C");
 //
@@ -82,7 +84,7 @@ public class PerformanceMapperTest {
 //        TaintAnalysis taintAnalysis = new TaintAnalysis();
 //
 //        PerformanceMapper mapper = new PerformanceMapper();
-//        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
+//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = taintAnalysis.analyze(cfg);
 //        Set<String> taintingConfigurations = new HashSet<>();
 //        taintingConfigurations.add("C");
 //        taintingConfigurations.add("D");
@@ -101,7 +103,7 @@ public class PerformanceMapperTest {
 //        TaintAnalysis taintAnalysis = new TaintAnalysis();
 //
 //        PerformanceMapper mapper = new PerformanceMapper();
-//        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
+//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = taintAnalysis.analyze(cfg);
 //        Set<String> taintingConfigurations = new HashSet<>();
 //        taintingConfigurations.add("A");
 //
@@ -119,7 +121,7 @@ public class PerformanceMapperTest {
 //        TaintAnalysis taintAnalysis = new TaintAnalysis();
 //
 //        PerformanceMapper mapper = new PerformanceMapper();
-//        Map<BasicBlock, Set<TaintAnalysis.TaintedVariable>> instructionsToTainted = taintAnalysis.analyze(cfg);
+//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = taintAnalysis.analyze(cfg);
 //        Set<String> taintingConfigurations = new HashSet<>();
 //
 //        Assert.assertEquals(taintingConfigurations, mapper.getConfigurationsInRelevantStatements(instructionsToTainted));
@@ -138,7 +140,7 @@ public class PerformanceMapperTest {
 //        Set<String> consider = new HashSet<>();
 //        consider.add("A");
 //
-//        mapper.pruneConfigurations(consider, new HashSet<>());
+//        mapper.pruneAndMapConfigurations(consider, new HashSet<>());
 //
 //        Set<Set<String>> configurations = new HashSet<>();
 //        Set<String> configuration = new HashSet<>();
@@ -167,9 +169,9 @@ public class PerformanceMapperTest {
 //        consider.add("A");
 //
 //        Set<String> configuration = new HashSet<>();
-//        mapper.pruneConfigurations(consider, configuration);
+//        mapper.pruneAndMapConfigurations(consider, configuration);
 //        configuration.add("A");
-//        mapper.pruneConfigurations(consider, configuration);
+//        mapper.pruneAndMapConfigurations(consider, configuration);
 //
 //        Set<Set<String>> configurations = new HashSet<>();
 //
@@ -192,7 +194,7 @@ public class PerformanceMapperTest {
 //        consider.add("A");
 //        consider.add("B");
 //
-//        mapper.pruneConfigurations(consider, new HashSet<>());
+//        mapper.pruneAndMapConfigurations(consider, new HashSet<>());
 //
 //        Set<Set<String>> configurations = new HashSet<>();
 //        Set<String> configuration = new HashSet<>();
@@ -288,16 +290,16 @@ public class PerformanceMapperTest {
 //        consider.add("B");
 //
 //        Set<String> configuration = edu.cmu.cs.mvelezce.analysis.Helper.getNextConfiguration(allConfigurations, consider);
-//        mapper.pruneConfigurations(consider, configuration);
+//        mapper.pruneAndMapConfigurations(consider, configuration);
 //
 //        configuration = edu.cmu.cs.mvelezce.analysis.Helper.getNextConfiguration(allConfigurations, consider);
-//        mapper.pruneConfigurations(consider, configuration);
+//        mapper.pruneAndMapConfigurations(consider, configuration);
 //
 //        configuration = edu.cmu.cs.mvelezce.analysis.Helper.getNextConfiguration(allConfigurations, consider);
-//        mapper.pruneConfigurations(consider, configuration);
+//        mapper.pruneAndMapConfigurations(consider, configuration);
 //
 //        configuration = edu.cmu.cs.mvelezce.analysis.Helper.getNextConfiguration(allConfigurations, consider);
-//        mapper.pruneConfigurations(consider, configuration);
+//        mapper.pruneAndMapConfigurations(consider, configuration);
 //
 //        Set<Set<String>> configurations = new HashSet<>();
 //

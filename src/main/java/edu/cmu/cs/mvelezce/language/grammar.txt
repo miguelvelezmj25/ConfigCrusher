@@ -1,20 +1,18 @@
 program : stmt_block
 
-stmt_block : (stmt)+
+  stmt_block : (stmt)+
 
-stmt : variable EQUAL expr
-     | IF LEFT_PARENT expr RIGHT_PAREN { stmt_block }
-     | WHILE LEFT_PARENT expr RIGHT_PARENT stmt
-     | SLEEP LEFT_PARENT expr RIGHT_PARENT
+stmt : variable EQUAL expr 
+     | IF LEFT_PARENT expr RIGHT_PAREN { stmt_block } 
+     | SLEEP LEFT_PARENT expr RIGHT_PARENT  
 
-expr : expr ((PLUS | MINUS | MULT | DIV) expr)+
+expr : term ((PLUS | MINUS | MULT | DIV) term)*
 
-term : variable
-     | INTEGER
-     | CONFIG
-     | NOT term
-
+  term : variable 
+     | INTEGER 
+     | CONFIG 
+     | NOT term  
 
 variable : ('a'..'z')+
 
-CONFIG : ('A'..'Z')+
+  CONFIG : ('A'..'Z')+

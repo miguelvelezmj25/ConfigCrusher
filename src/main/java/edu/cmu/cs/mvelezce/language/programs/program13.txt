@@ -1,0 +1,7 @@
+a=A
+b=C + a
+if(b) {
+    sleep(2)
+    a=D
+}
+sleep(C)

@@ -44,13 +44,12 @@ public class PerformanceMapper {
      * TODO
      */
     public Map<Set<String>, Integer> calculatePerformance() {
-        TaintAnalysis taintAnalysis = new TaintAnalysis();
-        Interpreter interpreter = new Interpreter();
-
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(this.ast);
 
-        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = taintAnalysis.analyze(cfg);
+        Interpreter interpreter = new Interpreter();
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
         Set<Statement> relevantStatements = new HashSet<>();
         Set<String> relevantConfigurations = this.getConfigurationsInRelevantStatements(instructionsToTainted,
                 relevantStatements);

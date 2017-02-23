@@ -42,17 +42,36 @@ public class TaintAnalysis {
             throw new IllegalArgumentException("The entry point of the CFG has more than 1 edge");
         }
 
-        List<BasicBlock> worklist = new LinkedList<>();
+
+        Queue<BasicBlock> worklist = new LinkedList<>();
         worklist.add(entry.get(0));
 
         Map<BasicBlock, Set<PossibleTaint>> instructionsToPossibleTaints = new LinkedHashMap<>();
-        instructionsToPossibleTaints.put(entry.get(0), new HashSet<>());
 
         while(!worklist.isEmpty()) {
-            BasicBlock instruction = worklist.remove(0);
+            BasicBlock instruction = worklist.remove();
+            instructionsToPossibleTaints.put(instruction, new HashSet<>());
+
+            List<BasicBlock> successors = cfg.getSuccessors(instruction);
+
+            for (BasicBlock successor : successors) {
+                if (successor.isSpecial()) {
+                    continue;
+                }
+
+                if(!worklist.contains(successor)) {
+                    worklist.add(successor);
+                }
+            }
+        }
+
+        worklist.add(entry.get(0));
+
+        while(!worklist.isEmpty()) {
+            BasicBlock instruction = worklist.remove();
             Set<PossibleTaint> possibleTaintsBefore = instructionsToPossibleTaints.get(instruction);
             Set<PossibleTaint> possibleTaintsAfter = transfer(possibleTaintsBefore, instruction);
-            instructionsToPossibleTaints.put(instruction, possibleTaintsAfter);
+//            instructionsToPossibleTaints.put(instruction, possibleTaintsAfter);
 
             List<BasicBlock> successors = cfg.getSuccessors(instruction);
 
@@ -64,18 +83,13 @@ public class TaintAnalysis {
                 continue;
             }
 
-            if(successors.size() == 2){
-                successors = new ArrayList<>(successors);
-                Collections.reverse(successors);
-            }
-
             for (BasicBlock successor : successors) {
                 if (successor.isSpecial()) {
                     continue;
                 }
 
                 if(!worklist.contains(successor)) {
-                    worklist.add(0, successor);
+                    worklist.add(successor);
                 }
 
                 Set<PossibleTaint> possibleTaintsEntry = TaintAnalysis.join(possibleTaintsAfter,
@@ -111,13 +125,33 @@ public class TaintAnalysis {
     // Can only stay in the same level of the lattice or go up
     public static Set<PossibleTaint> join(Set<PossibleTaint> possibleTaintsA, Set<PossibleTaint> possibleTaintsB) {
         Set<PossibleTaint> result = new HashSet<>();
+        Set<ExpressionVariable> possibleTaintedVariablesB = new HashSet<>();
 
-        if(possibleTaintsA != null) {
-            result.addAll(possibleTaintsA);
+        for(PossibleTaint possibleTaintB : possibleTaintsB) {
+            possibleTaintedVariablesB.add(possibleTaintB.getVariable());
         }
 
-        if(possibleTaintsB != null) {
-            result.addAll(possibleTaintsB);
+        for(PossibleTaint possibleTaintA : possibleTaintsA) {
+            Set<ExpressionConfigurationConstant> hold = new HashSet<>(possibleTaintA.getConfigurations());
+
+            if(possibleTaintedVariablesB.contains(possibleTaintA.getVariable())) {
+                possibleTaintedVariablesB.remove(possibleTaintA.getVariable());
+
+                for(PossibleTaint possibleTaintB : possibleTaintsB) {
+                    if(possibleTaintB.getVariable().equals(possibleTaintA.getVariable())) {
+                        hold.addAll(possibleTaintB.getConfigurations());
+                        break;
+                    }
+                }
+            }
+
+            result.add(new PossibleTaint(possibleTaintA.getVariable(), hold));
+        }
+
+        for(PossibleTaint possibleTaintB : possibleTaintsB) {
+            if(possibleTaintedVariablesB.contains(possibleTaintB.getVariable())) {
+                result.add(possibleTaintB);
+            }
         }
 
         return result;

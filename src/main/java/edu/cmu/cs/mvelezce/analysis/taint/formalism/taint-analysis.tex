@@ -1,4 +1,4 @@
-\documentclass[11pt,letterpaper,roman]{article}
+\documentclass[11pt,letterpaper]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[margin=1in]{geometry}
@@ -15,17 +15,18 @@
 \usepackage{amsmath}
 \usepackage{multirow}
 \usepackage{mathtools}
+\usepackage[linesnumbered,ruled]{algorithm2e}
 			
 %\setlength\bibitemsep{1pt}
 %\setstretch{1.0}
 %\titleformat*{\section}{\large\bfseries}
 
 %\renewcommand*{\intitlepunct}{\space}
+\SetKwProg{Fn}{Function}{}{end}			 
+			 
 			 
 \begin{document}
 \centerline{\Large\bf Taint Analysis}
-\hfill \par
-%\centerline{\large Miguel Velez}
 \hfill \par
 \hfill \par
 
@@ -38,7 +39,7 @@ Let $O = \{A,B,C,...\}$ and $V_t \subseteq var \times O$
   \begin{split}
   	\text{GEN}(var := expr) &= 
   	\begin{cases}
-  		(var, o) & \text{for}\ \exists\ o \subseteq O: o\ \text{in}\ expr \\
+  	    (var, o) & \text{for}\ \exists\ o \subseteq O: o\ \text{in}\ expr \\
   		& \text{or}\ \exists\ o \subseteq V_t({var}^\prime): {var}^\prime\ \text{in}\ expr
   	\end{cases}\\ 
 	\text{GEN}(\text{if}(expr)?t:e)) &=  	
@@ -72,5 +73,38 @@ Let $O = \{A,B,C,...\}$ and $V_t \subseteq var \times O$
    \end{split}
 \end{equation*}
 
+\section{Worklist Algorithm}
+
+\begin{algorithm}
+	\SetKwInOut{Input}{Input}
+	\SetKwInOut{Output}{Output}
+
+	\Input{CFG cfg}
+	\Output{Set of possible tainted variables}
+	\Fn{analyze}{
+		worklist.add(cfg.entry.get(0))\;
+		\While{!worklist.empty}{
+			i = worklist.remove\;		
+			itpt.put(i, $\{\emptyset\}$)\;
+			\For{s : i.successors}{
+				worklist.add(s)\;
+			}	
+		}		
+		worklist.add(cfg.entry.get(0))\;
+		\While{!worklist.empty}{
+			i = worklist.remove\;		
+			ptb = itpt.get(i)\;
+			pta = transfer(ptb, i)\;
+			\For{s : i.successors}{
+				worklist.add(s)\;
+				pte = join(pta, itpt.get(s))\;
+				iptp.put(s, pte)\;
+			}	
+		}
+	}
+	
+	
+	\caption{Worklist algorithm for Taint Analysis}
+\end{algorithm}
 
 \end{document}

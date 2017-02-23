@@ -20,7 +20,7 @@ import java.util.*;
 // TODO should I implement the visitor pattern?
 // TODO what should be the generic?
 public class TaintAnalysis {
-    
+
     /**
      * Perform a taint analysis in the CFG and a map that represents, for every basic block, the variables that might
      * be tainted.
@@ -118,33 +118,24 @@ public class TaintAnalysis {
     // Can only stay in the same level of the lattice or go up
     public static Set<PossibleTaint> join(Set<PossibleTaint> possibleTaintsA, Set<PossibleTaint> possibleTaintsB) {
         Set<PossibleTaint> result = new HashSet<>();
-        Set<ExpressionVariable> possibleTaintedVariablesB = new HashSet<>();
+        Map<ExpressionVariable, Set<ExpressionConfigurationConstant>> possibleTaintedVariablesB = new HashMap<>();
 
         for(PossibleTaint possibleTaintB : possibleTaintsB) {
-            possibleTaintedVariablesB.add(possibleTaintB.getVariable());
+            possibleTaintedVariablesB.put(possibleTaintB.getVariable(), possibleTaintB.getConfigurations());
         }
 
         for(PossibleTaint possibleTaintA : possibleTaintsA) {
             Set<ExpressionConfigurationConstant> hold = new HashSet<>(possibleTaintA.getConfigurations());
 
-            if(possibleTaintedVariablesB.contains(possibleTaintA.getVariable())) {
-                possibleTaintedVariablesB.remove(possibleTaintA.getVariable());
-
-                for(PossibleTaint possibleTaintB : possibleTaintsB) {
-                    if(possibleTaintB.getVariable().equals(possibleTaintA.getVariable())) {
-                        hold.addAll(possibleTaintB.getConfigurations());
-                        break;
-                    }
-                }
+            if(possibleTaintedVariablesB.containsKey(possibleTaintA.getVariable())) {
+                hold.addAll(possibleTaintedVariablesB.remove(possibleTaintA.getVariable()));
             }
 
             result.add(new PossibleTaint(possibleTaintA.getVariable(), hold));
         }
 
-        for(PossibleTaint possibleTaintB : possibleTaintsB) {
-            if(possibleTaintedVariablesB.contains(possibleTaintB.getVariable())) {
-                result.add(possibleTaintB);
-            }
+        for(Map.Entry<ExpressionVariable, Set<ExpressionConfigurationConstant>> entry : possibleTaintedVariablesB.entrySet()) {
+            result.add(new PossibleTaint(entry.getKey(), entry.getValue()));
         }
 
         return result;

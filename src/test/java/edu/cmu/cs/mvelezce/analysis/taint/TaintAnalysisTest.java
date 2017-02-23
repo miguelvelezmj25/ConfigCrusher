@@ -450,6 +450,118 @@ public class TaintAnalysisTest {
     }
 
     @Test
+    public void join5() throws Exception {
+        Set<ExpressionConfigurationConstant> configurations1 = new HashSet<>();
+        configurations1.add(new ExpressionConfigurationConstant("A"));
+        configurations1.add(new ExpressionConfigurationConstant("B"));
+
+        Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations1));
+
+        Set<ExpressionConfigurationConstant> configurations2 = new HashSet<>();
+        configurations2.add(new ExpressionConfigurationConstant("C"));
+
+        Set<TaintAnalysis.PossibleTaint> set2 = new HashSet<>();
+        set2.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations2));
+
+        Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
+        configurations.add(new ExpressionConfigurationConstant("A"));
+        configurations.add(new ExpressionConfigurationConstant("B"));
+        configurations.add(new ExpressionConfigurationConstant("C"));
+
+        Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
+        set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations));
+
+        Assert.assertEquals(set, TaintAnalysis.join(set1, set2));
+    }
+
+    @Test
+    public void join6() throws Exception {
+        Set<ExpressionConfigurationConstant> configurations1 = new HashSet<>();
+        configurations1.add(new ExpressionConfigurationConstant("C"));
+
+        Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations1));
+
+        Set<ExpressionConfigurationConstant> configurations2 = new HashSet<>();
+        configurations2.add(new ExpressionConfigurationConstant("D"));
+
+        Set<TaintAnalysis.PossibleTaint> set2 = new HashSet<>();
+        set2.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations2));
+
+        Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
+        configurations.add(new ExpressionConfigurationConstant("C"));
+        configurations.add(new ExpressionConfigurationConstant("D"));
+
+        Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
+        set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations));
+
+        Assert.assertEquals(set, TaintAnalysis.join(set1, set2));
+    }
+
+    @Test
+    public void join7() throws Exception {
+        Set<ExpressionConfigurationConstant> configurations1 = new HashSet<>();
+        configurations1.add(new ExpressionConfigurationConstant("A"));
+
+        Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
+        set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("y"), configurations1));
+
+        configurations1 = new HashSet<>();
+        configurations1.add(new ExpressionConfigurationConstant("C"));
+
+        set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("z"), configurations1));
+
+        configurations1 = new HashSet<>();
+        configurations1.add(new ExpressionConfigurationConstant("B"));
+        configurations1.add(new ExpressionConfigurationConstant("C"));
+
+        set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("w"), configurations1));
+
+        configurations1 = new HashSet<>();
+        configurations1.add(new ExpressionConfigurationConstant("C"));
+        configurations1.add(new ExpressionConfigurationConstant("D"));
+
+        set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations1));
+
+        Set<ExpressionConfigurationConstant> configurations2 = new HashSet<>();
+        configurations2.add(new ExpressionConfigurationConstant("A"));
+        configurations2.add(new ExpressionConfigurationConstant("B"));
+        configurations2.add(new ExpressionConfigurationConstant("C"));
+
+        Set<TaintAnalysis.PossibleTaint> set2 = new HashSet<>();
+        set2.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations2));
+
+
+        Set<ExpressionConfigurationConstant> configurations = new HashSet<>();
+        configurations.add(new ExpressionConfigurationConstant("A"));
+
+        Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
+        set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("y"), configurations));
+
+        configurations = new HashSet<>();
+        configurations.add(new ExpressionConfigurationConstant("C"));
+
+        set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("z"), configurations));
+
+        configurations = new HashSet<>();
+        configurations.add(new ExpressionConfigurationConstant("B"));
+        configurations.add(new ExpressionConfigurationConstant("C"));
+
+        set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("w"), configurations));
+
+        configurations = new HashSet<>();
+        configurations.add(new ExpressionConfigurationConstant("A"));
+        configurations.add(new ExpressionConfigurationConstant("B"));
+        configurations.add(new ExpressionConfigurationConstant("C"));
+        configurations.add(new ExpressionConfigurationConstant("D"));
+
+        set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations));
+
+        Assert.assertEquals(set, TaintAnalysis.join(set1, set2));
+    }
+
+    @Test
     public void transfer1() throws Exception {
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         BasicBlock basicBlock = new BasicBlock("1", new StatementSleep(new ExpressionConstantInt(1)));

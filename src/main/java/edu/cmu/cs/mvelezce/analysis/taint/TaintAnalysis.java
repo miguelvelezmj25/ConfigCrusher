@@ -20,14 +20,7 @@ import java.util.*;
 // TODO should I implement the visitor pattern?
 // TODO what should be the generic?
 public class TaintAnalysis {
-
-    /**
-     * Initialize a {@code TaintAnalysis}.
-     */
-    public TaintAnalysis() {
-        ;
-    }
-
+    
     /**
      * Perform a taint analysis in the CFG and a map that represents, for every basic block, the variables that might
      * be tainted.

@@ -1,6 +1,6 @@
 a=C
 b=a
-if(x) {
+if(b) {
     a=0
     sleep(2)
 }

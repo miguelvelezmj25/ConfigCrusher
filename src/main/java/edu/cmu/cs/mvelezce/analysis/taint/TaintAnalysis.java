@@ -65,6 +65,8 @@ public class TaintAnalysis {
             Set<PossibleTaint> possibleTaintsBefore = instructionsToPossibleTaints.get(instruction);
             Set<PossibleTaint> possibleTaintsAfter = transfer(possibleTaintsBefore, instruction);
 //            instructionsToPossibleTaints.put(instruction, possibleTaintsAfter);
+            // TODO this only works because the we do not currently support cases were the state changes
+            // in the last instruction of a block that we need to time ie sleep(x=A)
 
             List<BasicBlock> successors = cfg.getSuccessors(instruction);
 

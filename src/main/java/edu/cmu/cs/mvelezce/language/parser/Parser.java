@@ -34,7 +34,7 @@ public class Parser {
     }
 
     private Statement stmt() {
-        if(this.currentToken.getTag() == Tag.VAR || this.currentToken.getTag() == Tag.CONFIG) {
+        if(this.currentToken.getTag() == Tag.VAR) {
             Token token = this.currentToken;
 
             this.checkToken(Tag.VAR);

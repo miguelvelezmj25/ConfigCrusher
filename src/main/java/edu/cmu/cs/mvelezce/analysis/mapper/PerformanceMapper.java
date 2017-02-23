@@ -44,15 +44,16 @@ public class PerformanceMapper {
      * TODO
      */
     public Map<Set<String>, Integer> calculatePerformance() {
+        Interpreter interpreter = new Interpreter();
+
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(this.ast);
 
-        Interpreter interpreter = new Interpreter();
-
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Set<Statement> relevantStatements = new HashSet<>();
-        Set<String> relevantConfigurations = this.getConfigurationsInRelevantStatements(instructionsToTainted,
-                relevantStatements);
+
+        Set<Statement> relevantStatements = this.getRelevantStatements(instructionsToTainted);
+        Set<String> relevantConfigurations = this.getRelevantParametersInRelevantStatements(instructionsToTainted, relevantStatements);
+
         this.updateASTToTimeRelevantStatements(relevantStatements);
 
         Set<String> nextConfiguration;
@@ -65,6 +66,17 @@ public class PerformanceMapper {
         }
 
         return this.performanceMap;
+    }
+
+    private Set<Statement> getRelevantStatements(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+        Set<Statement> relevantStatements = new HashSet<>();
+
+        for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
+            if (this.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
+                PerformanceStatementVisitor performanceStatementVisitor = null;
+            }
+        }
+        return relevantStatements;
     }
 
     /**
@@ -98,9 +110,8 @@ public class PerformanceMapper {
      * @param instructionsToTainted
      * @return
      */
-    protected Set<String> getConfigurationsInRelevantStatements(
-            Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted,
-            Set<Statement> relevantStatements) {
+    protected Set<String> getRelevantParametersInRelevantStatements(
+            Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted, Set<Statement> relevantStatements) {
         Set<String> taintingConfigurations = new HashSet<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
@@ -112,7 +123,6 @@ public class PerformanceMapper {
         }
 
         return taintingConfigurations;
-
     }
 
     protected void updateASTToTimeRelevantStatements(Set<Statement> relevantStatements) {
@@ -120,10 +130,100 @@ public class PerformanceMapper {
         this.ast = this.ast.accept(addTimedVisitor);
     }
 
-    public Set<Set<String>> getAllConfigurations() { return this.allConfigurations; }
-
     public Map<Set<String>, Integer> getPerformanceMap() { return this.performanceMap; }
 
+    private class PerformanceStatementVisitor extends VisitorReturner {
+        private Set<TaintAnalysis.PossibleTaint> taintedVariables;
+        private Set<String> taintingConfigurations;
+        private Set<Statement> relevantStatements;
+        private boolean inPossibleRelevantStatement;
+        private boolean relevantStatement;
+
+        public PerformanceStatementVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables,
+                                           Set<String> taintingConfigurations, Set<Statement> relevantStatements) {
+            this.taintedVariables = taintedVariables;
+            this.taintingConfigurations = taintingConfigurations;
+            this.relevantStatements = relevantStatements;
+            this.inPossibleRelevantStatement = false;
+            this.relevantStatement = false;
+        }
+
+        @Override
+        public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
+            if(this.inPossibleRelevantStatement) {
+                this.taintingConfigurations.add(expressionConfigurationConstant.getName());
+                this.relevantStatement = true;
+            }
+
+
+            return expressionConfigurationConstant;
+        }
+
+        @Override
+        public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
+            if(this.inPossibleRelevantStatement) {
+                for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
+                    if(taintedVariable.getVariable().equals(expressionVariable)) {
+                        this.relevantStatement = true;
+                        for(ExpressionConfigurationConstant parameter : taintedVariable.getConfigurations()) {
+                            this.taintingConfigurations.add(parameter.getName());
+                        }
+                    }
+                }
+            }
+
+            return expressionVariable;
+        }
+
+        @Override
+        public Void visitStatementIf(StatementIf statementIf) {
+            boolean cameFromPossibleRelevantStatement = true;
+            if(!this.inPossibleRelevantStatement) {
+                this.inPossibleRelevantStatement = true;
+                cameFromPossibleRelevantStatement = false;
+            }
+
+            boolean cameFromRelevantStatement = true;
+            if(!this.relevantStatement) {
+                cameFromRelevantStatement = false;
+            }
+
+            statementIf.getCondition().accept(this);
+
+            if(this.relevantStatement) {
+                this.relevantStatements.add(statementIf);
+            }
+
+            if(!cameFromRelevantStatement) {
+                this.relevantStatement = false;
+            }
+
+            if(!cameFromPossibleRelevantStatement) {
+                this.inPossibleRelevantStatement = false;
+            }
+            return null;
+        }
+
+        @Override
+        public Void visitStatementSleep(StatementSleep statementSleep) {
+            boolean cameFromRelevantStatement = true;
+            if(!this.inPossibleRelevantStatement) {
+                this.inPossibleRelevantStatement = true;
+                cameFromRelevantStatement = false;
+            }
+
+            statementSleep.getTime().accept(this);
+
+            if(this.relevantStatement) {
+                this.relevantStatements.add(statementSleep);
+            }
+
+            if(!cameFromRelevantStatement) {
+                this.inPossibleRelevantStatement = false;
+            }
+            return null;
+        }
+    }
 
     private class PerformanceVisitor extends VisitorReturner {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;

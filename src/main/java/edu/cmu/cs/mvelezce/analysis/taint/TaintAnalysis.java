@@ -14,11 +14,6 @@ import java.util.*;
 /**
  * Created by miguelvelez on 2/5/17.
  */
-// TODO Fix point loop
-// TODO Transfer function is to check how abstraction is changed from statement to statement
-// TODO Join function is to join abstractions after they have branched out
-// TODO should I implement the visitor pattern?
-// TODO what should be the generic?
 public class TaintAnalysis {
 
     /**

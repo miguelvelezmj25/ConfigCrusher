@@ -16,31 +16,30 @@ import java.util.Set;
  * Created by miguelvelez on 1/31/17.
  */
 public class Interpreter implements Visitor<ValueInt, Void> {
-    private Map<String, ValueInt> store;
     private Set<String> activatedConfigurations;
+    private Statement ast;
+    private Map<String, ValueInt> store;
     private int totalExecutionTime;
     private Map<StatementTimed, Integer> timedBlocks;
 
-    public Interpreter() {
+    public Interpreter(Statement ast) {
         this.reset();
+        this.ast = ast;
+        this.activatedConfigurations = null;
     }
 
-    /**
-     *
-     */
     private void reset() {
         this.store = new HashMap<>();
         this.totalExecutionTime = 0;
-        this.activatedConfigurations = null;
         this.timedBlocks = new HashMap<>();
     }
 
     // TODO this seems weird
-    public void evaluate(Statement ast, Set<String> activatedConfigurations) {
+    public void evaluate(Set<String> activatedConfigurations) {
         this.reset();
         this.activatedConfigurations = activatedConfigurations;
 
-        ast.accept(this);
+        this.ast.accept(this);
     }
 
     @Override

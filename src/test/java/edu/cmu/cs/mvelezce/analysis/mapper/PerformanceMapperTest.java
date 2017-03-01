@@ -44,6 +44,7 @@ public class PerformanceMapperTest {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
+
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
@@ -58,8 +59,7 @@ public class PerformanceMapperTest {
         Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -90,8 +90,7 @@ public class PerformanceMapperTest {
         taintingConfigurations.add("C");
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -114,8 +113,7 @@ public class PerformanceMapperTest {
         Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -146,8 +144,7 @@ public class PerformanceMapperTest {
         taintingConfigurations.add("C");
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -178,8 +175,7 @@ public class PerformanceMapperTest {
         taintingConfigurations.add("C");
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -211,8 +207,7 @@ public class PerformanceMapperTest {
         taintingConfigurations.add("D");
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -243,8 +238,7 @@ public class PerformanceMapperTest {
         taintingConfigurations.add("C");
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -259,8 +253,7 @@ public class PerformanceMapperTest {
 
         Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -291,8 +284,7 @@ public class PerformanceMapperTest {
         taintingConfigurations.add("B");
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -316,8 +308,7 @@ public class PerformanceMapperTest {
         Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -340,8 +331,7 @@ public class PerformanceMapperTest {
         Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -356,8 +346,7 @@ public class PerformanceMapperTest {
 
         Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -389,8 +378,7 @@ public class PerformanceMapperTest {
         taintingConfigurations.add("C");
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -421,8 +409,7 @@ public class PerformanceMapperTest {
         taintingConfigurations.add("B");
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-        Assert.assertEquals(relevantStatementToOptions, mapper.getRelevantStatementsAndOptions(instructionsToTainted));
+        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted));
     }
 
     @Test
@@ -431,11 +418,10 @@ public class PerformanceMapperTest {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
+
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-
-        PerformanceMapper mapper = new PerformanceMapper();
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
@@ -443,7 +429,8 @@ public class PerformanceMapperTest {
         options.add("C");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -456,15 +443,14 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
         options.add("C");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -477,15 +463,14 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
         options.add("C");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -498,15 +483,14 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
         options.add("C");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -519,15 +503,14 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
         options.add("C");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -540,8 +523,6 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
@@ -549,7 +530,8 @@ public class PerformanceMapperTest {
         options.add("D");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -562,15 +544,14 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
         options.add("C");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -583,13 +564,10 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
-        Set<String> options = new HashSet<>();
-
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -602,15 +580,14 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
         options.add("B");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -623,8 +600,6 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
@@ -632,7 +607,8 @@ public class PerformanceMapperTest {
         options.add("B");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -645,15 +621,14 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
         options.add("C");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -666,13 +641,10 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
-        Set<String> options = new HashSet<>();
-
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -685,8 +657,6 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
@@ -694,7 +664,8 @@ public class PerformanceMapperTest {
         options.add("C");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
 
     @Test
@@ -707,8 +678,6 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        PerformanceMapper mapper = new PerformanceMapper();
-
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         Set<String> options = new HashSet<>();
@@ -719,13 +688,238 @@ public class PerformanceMapperTest {
         options.add("B");
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Assert.assertEquals(configurationsToExecute, mapper.getConfigurationsToExecute(mapper.getRelevantStatementsAndOptions(instructionsToTainted)));
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
     }
+
+    @Test
+    public void updateASTToTimeRelevantStatements1() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements2() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program2");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements3() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program3");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements4() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program4");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements5() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program5");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements6() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements7() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program7");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements8() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program8");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements9() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program9");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements10() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program10");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements11() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program11");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements12() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program12");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements13() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program13");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
+    @Test
+    public void updateASTToTimeRelevantStatements14() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program14");
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsAndOptions(instructionsToTainted);
+
+        Assert.assertNotEquals(ast, PerformanceMapper.updateASTToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
+    }
+
 
 //    @Test
 //    public void pruneConfigurations1() throws Exception {
-//        PerformanceMapper mapper = new PerformanceMapper();
-//
+///
 //        Set<String> parameters = new HashSet<>();
 //        parameters.add("A");
 //        parameters.add("B");
@@ -752,8 +946,7 @@ public class PerformanceMapperTest {
 //
 //    @Test
 //    public void pruneConfigurations2() throws Exception {
-//        PerformanceMapper mapper = new PerformanceMapper();
-//
+///
 //        Set<String> parameters = new HashSet<>();
 //        parameters.add("A");
 //        parameters.add("B");
@@ -775,8 +968,7 @@ public class PerformanceMapperTest {
 //
 //    @Test
 //    public void pruneConfigurations3() throws Exception {
-//        PerformanceMapper mapper = new PerformanceMapper();
-//
+///
 //        Set<String> parameters = new HashSet<>();
 //        parameters.add("A");
 //        parameters.add("B");
@@ -871,8 +1063,7 @@ public class PerformanceMapperTest {
 //
 //    @Test
 //    public void pruneConfigurations4() throws Exception {
-//        PerformanceMapper mapper = new PerformanceMapper();
-//
+///
 //        Set<String> parameters = new HashSet<>();
 //        parameters.add("A");
 //        parameters.add("B");

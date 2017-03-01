@@ -26,19 +26,13 @@ import static edu.cmu.cs.mvelezce.analysis.Helper.getConfigurations;
  * Created by miguelvelez on 2/11/17.
  */
 public class PerformanceMapper {
-    private Map<Set<String>, Integer> performanceMap;
-    private List<Class<? extends Statement>> relevantStatementsClasses;
 
-
-    /**
-     * TODO
-     */
-    public PerformanceMapper() {
-        this.performanceMap = new HashMap<>();
-        this.relevantStatementsClasses = new ArrayList<>();
-        this.relevantStatementsClasses.add(StatementSleep.class);
-        this.relevantStatementsClasses.add(StatementIf.class);
-    }
+    private static List<Class<? extends Statement>> relevantStatementsClasses = new ArrayList<Class<? extends Statement>>() {
+        {
+            add(StatementSleep.class);
+            add(StatementIf.class);
+        }
+    };
 
     /**
      * TODO
@@ -56,7 +50,7 @@ public class PerformanceMapper {
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        this.getRelevantStatementsAndOptions(instructionsToTainted);
+//        this.getRelevantStatementsAndOptions(instructionsToTainted);
 //        Set<Statement> relevantStatements = this.getRelevantStatements(instructionsToTainted);
 //        Set<String> relevantConfigurations = this.getRelevantParametersInRelevantStatements(instructionsToTainted, relevantStatements);
 //
@@ -75,11 +69,11 @@ public class PerformanceMapper {
         return null;
     }
 
-    public Map<Statement, Set<String>> getRelevantStatementsAndOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+    public static Map<Statement, Set<String>> getRelevantStatementsAndOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
         Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
-            if (this.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
+            if(PerformanceMapper.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
                 RelevantInfoGetterVisitor performanceStatementVisitor = new RelevantInfoGetterVisitor(entry.getValue());
                 Set<String> result = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
 
@@ -92,7 +86,7 @@ public class PerformanceMapper {
         return relevantStatementToOptions;
     }
 
-    public Set<Set<String>> getConfigurationsToExecute(Map<Statement, Set<String>> relevantStatementToOptions) {
+    public static Set<Set<String>> getConfigurationsToExecute(Map<Statement, Set<String>> relevantStatementToOptions) {
         // TODO this does not figure out that there is not an interaction between relevant statements
         Set<Set<String>> relevantOptions = new HashSet<>();
 
@@ -134,7 +128,7 @@ public class PerformanceMapper {
 
     }
 
-    public Statement updateASTToTimeRelevantStatements(Statement program, Set<Statement> relevantStatements) {
+    public static Statement updateASTToTimeRelevantStatements(Statement program, Set<Statement> relevantStatements) {
         AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
         return program.accept(addTimedVisitor);
     }
@@ -167,10 +161,7 @@ public class PerformanceMapper {
 
 //    mapConfigurationToPerformanceAfterPruning //TODO
 
-
-    public Map<Set<String>, Integer> getPerformanceMap() { return this.performanceMap; }
-
-    private class RelevantInfoGetterVisitor extends VisitorReturner {
+    private static class RelevantInfoGetterVisitor extends VisitorReturner {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;
         private Set<String> relevantOptions;
 
@@ -223,7 +214,7 @@ public class PerformanceMapper {
     /**
      * Concrete visitor that replaces statements with StatementTimed for measuring time
      */
-    private class AddTimedVisitor extends VisitorReplacer {
+    private static class AddTimedVisitor extends VisitorReplacer {
         private Set<Statement> relevantStatements;
 
         /**

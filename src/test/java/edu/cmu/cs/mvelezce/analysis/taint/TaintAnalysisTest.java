@@ -79,6 +79,7 @@ public class TaintAnalysisTest {
         instructionsToTainted.put(successor, tainted);
 
         Assert.assertEquals(instructionsToTainted, TaintAnalysis.analyze(cfg));
+        System.out.println(TaintAnalysis.analyze(cfg));
 
     }
 
@@ -150,6 +151,7 @@ public class TaintAnalysisTest {
         instructionsToTainted.put(successor, tainted);
 
         Assert.assertEquals(instructionsToTainted, TaintAnalysis.analyze(cfg));
+        System.out.println(TaintAnalysis.analyze(cfg));
     }
 
     @Test
@@ -235,6 +237,7 @@ public class TaintAnalysisTest {
         instructionsToTainted.put(successor, tainted);
 
         Assert.assertEquals(instructionsToTainted, TaintAnalysis.analyze(cfg));
+        System.out.println(TaintAnalysis.analyze(cfg));
     }
 
     @Test
@@ -308,6 +311,7 @@ public class TaintAnalysisTest {
         instructionsToTainted.put(successor, tainted);
 
         Assert.assertEquals(instructionsToTainted, TaintAnalysis.analyze(cfg));
+        System.out.println(TaintAnalysis.analyze(cfg));
     }
 
     @Test
@@ -392,6 +396,7 @@ public class TaintAnalysisTest {
         tainted.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("b"), configurations));
         instructionsToTainted.put(successor, tainted);
         Assert.assertEquals(instructionsToTainted, TaintAnalysis.analyze(cfg));
+        System.out.println(TaintAnalysis.analyze(cfg));
     }
 
     @Test
@@ -526,6 +531,7 @@ public class TaintAnalysisTest {
         instructionsToTainted.put(successor, tainted);
 
         Assert.assertEquals(instructionsToTainted, TaintAnalysis.analyze(cfg));
+        System.out.println(TaintAnalysis.analyze(cfg));
     }
 
     @Test

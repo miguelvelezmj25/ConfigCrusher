@@ -69,6 +69,7 @@ public class PerformanceMapperTest {
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
+        System.out.println(relevantStatementToOptions);
     }
 
     @Test
@@ -109,6 +110,7 @@ public class PerformanceMapperTest {
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
+        System.out.println(relevantStatementToOptions);
     }
 
     @Test
@@ -141,6 +143,7 @@ public class PerformanceMapperTest {
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
+        System.out.println(relevantStatementToOptions);
     }
 
     @Test
@@ -184,6 +187,7 @@ public class PerformanceMapperTest {
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
+        System.out.println(relevantStatementToOptions);
     }
 
     @Test
@@ -239,6 +243,7 @@ public class PerformanceMapperTest {
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
+        System.out.println(relevantStatementToOptions);
     }
 
     @Test
@@ -287,6 +292,7 @@ public class PerformanceMapperTest {
         relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
+        System.out.println(relevantStatementToOptions);
     }
 
     @Test
@@ -309,6 +315,7 @@ public class PerformanceMapperTest {
 
         Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
+        System.out.println(configurationsToExecute);
     }
 
     @Test
@@ -330,6 +337,8 @@ public class PerformanceMapperTest {
 
         Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
+        // TODO can do better
+        System.out.println(configurationsToExecute);
     }
 
     @Test
@@ -351,6 +360,7 @@ public class PerformanceMapperTest {
 
         Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
+        System.out.println(configurationsToExecute);
     }
 
     @Test
@@ -374,6 +384,8 @@ public class PerformanceMapperTest {
 
         Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
+        // TODO have to combine A and B since they are independent
+        System.out.println(configurationsToExecute);
     }
 
     @Test
@@ -395,6 +407,7 @@ public class PerformanceMapperTest {
 
         Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
+        System.out.println(configurationsToExecute);
     }
 
     @Test
@@ -420,6 +433,8 @@ public class PerformanceMapperTest {
 
         Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
+        // TODO this is wrong, have to do, for now, brute force.
+        System.out.println(configurationsToExecute);
     }
 
 

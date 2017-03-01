@@ -34,7 +34,7 @@ public class PerformanceMapper {
         }
     };
     
-    public static Map<Set<String>, Integer> calculatePerformance(String program, Set<String> parameters) {
+    public static Map<Set<String>, Integer> getPerformance(String program) {
         Map<Set<String>, Integer> perfomanceMap = new HashMap<>();
 
         Lexer lexer = new Lexer(program);
@@ -54,6 +54,7 @@ public class PerformanceMapper {
         for(Set<String> configuration : configurationsToExecute) {
             interpreter.evaluate(configuration);
             perfomanceMap.put(configuration, interpreter.getTotalExecutionTime());
+            // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
 
         return perfomanceMap;
@@ -122,6 +123,11 @@ public class PerformanceMapper {
         AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
         return program.accept(addTimedVisitor);
     }
+
+    // TODO
+//    public static void getPerformanceTable(, Set<String> parameters) {
+//
+//    }
 
 
 //    /**

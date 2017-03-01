@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.analysis.mapper;
 
-import edu.cmu.cs.mvelezce.analysis.Helper;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
@@ -20,6 +19,8 @@ import edu.cmu.cs.mvelezce.language.parser.Parser;
 
 import java.util.*;
 
+import static edu.cmu.cs.mvelezce.analysis.Helper.getConfigurations;
+
 /**
  * TODO
  * Created by miguelvelez on 2/11/17.
@@ -27,14 +28,13 @@ import java.util.*;
 public class PerformanceMapper {
     private Map<Set<String>, Integer> performanceMap;
     private List<Class<? extends Statement>> relevantStatementsClasses;
-    private Map<Statement, Set<String>> relevantStatementToOptions;
+
 
     /**
      * TODO
      */
     public PerformanceMapper() {
         this.performanceMap = new HashMap<>();
-        this.relevantStatementToOptions = new HashMap<>();
         this.relevantStatementsClasses = new ArrayList<>();
         this.relevantStatementsClasses.add(StatementSleep.class);
         this.relevantStatementsClasses.add(StatementIf.class);
@@ -48,8 +48,8 @@ public class PerformanceMapper {
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
-        Set<Set<String>> allConfigurations = Helper.getConfigurations(parameters);
-        Interpreter interpreter = new Interpreter();
+        Set<Set<String>> allConfigurations = getConfigurations(parameters);
+        Interpreter interpreter = new Interpreter(ast);
 
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
@@ -75,26 +75,70 @@ public class PerformanceMapper {
         return null;
     }
 
-    // TODO protected to be able to test
-    protected void getRelevantStatementsAndOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+    public Map<Statement, Set<String>> getRelevantStatementsAndOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
+
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
             if (this.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
-                PerformanceVisitor performanceStatementVisitor = new PerformanceVisitor(entry.getValue());
-                entry.getKey().getStatement().accept(performanceStatementVisitor);
+                RelevantInfoGetterVisitor performanceStatementVisitor = new RelevantInfoGetterVisitor(entry.getValue());
+                Set<String> result = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
+
+                if(!result.isEmpty()) {
+                    relevantStatementToOptions.put(entry.getKey().getStatement(), result);
+                }
             }
         }
+
+        return relevantStatementToOptions;
     }
 
-//    private Set<Statement> getRelevantStatements(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
-//        Set<Statement> relevantStatements = new HashSet<>();
-//
-//        for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
-//            if (this.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
-//                PerformanceStatementVisitor performanceStatementVisitor = null;
-//            }
-//        }
-//        return relevantStatements;
-//    }
+    public Set<Set<String>> getConfigurationsToExecute(Map<Statement, Set<String>> relevantStatementToOptions) {
+        // TODO this does not figure out that there is not an interaction between relevant statements
+        Set<Set<String>> relevantOptions = new HashSet<>();
+
+        for(Map.Entry <Statement, Set<String>> entry : relevantStatementToOptions.entrySet()) {
+
+            if(relevantOptions.isEmpty()) {
+                relevantOptions.add(entry.getValue());
+                continue;
+            }
+
+            Set<Set<String>> toRemove = new HashSet<>();
+            Set<Set<String>> toAdd = new HashSet<>();
+
+            for(Set<String> options : relevantOptions) {
+                if(options.equals(entry.getValue()) || options.containsAll(entry.getValue())) {
+                    toAdd.remove(entry.getValue());
+                    break;
+                }
+
+                if(!options.containsAll(entry.getValue()) && entry.getValue().containsAll(options)) {
+                    toRemove.add(options);
+                }
+
+                toAdd.add(entry.getValue());
+
+            }
+
+            relevantOptions.removeAll(toRemove);
+            relevantOptions.addAll(toAdd);
+        }
+
+        Set<Set<String>> configurationsToExecute = new HashSet<>();
+
+        for(Set<String> option : relevantOptions) {
+            configurationsToExecute.addAll(getConfigurations(option));
+        }
+
+        return configurationsToExecute;
+
+    }
+
+    public Statement updateASTToTimeRelevantStatements(Statement program, Set<Statement> relevantStatements) {
+        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
+        return program.accept(addTimedVisitor);
+    }
+
 
 //    /**
 //     * TODO
@@ -123,306 +167,55 @@ public class PerformanceMapper {
 
 //    mapConfigurationToPerformanceAfterPruning //TODO
 
-    /**
-     * @param instructionsToTainted
-     * @return
-     */
-    protected Set<String> getRelevantParametersInRelevantStatements(
-            Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted, Set<Statement> relevantStatements) {
-        Set<String> taintingConfigurations = new HashSet<>();
-
-//        for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
-//            if(this.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
-//                PerformanceVisitor taintingVisitor = new PerformanceVisitor(entry.getValue(), taintingConfigurations,
-//                        relevantStatements);
-//                entry.getKey().getStatement().accept(taintingVisitor);
-//            }
-//        }
-
-        return taintingConfigurations;
-    }
-
-//    protected void updateASTToTimeRelevantStatements(Set<Statement> relevantStatements) {
-//        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
-//        this.ast = this.ast.accept(addTimedVisitor);
-//    }
 
     public Map<Set<String>, Integer> getPerformanceMap() { return this.performanceMap; }
 
-    public Map<Statement, Set<String>> getRelevantStatementToOptions() { return this.relevantStatementToOptions; }
-
-    //    private class PerformanceStatementVisitor extends VisitorReturner {
-//        private Set<TaintAnalysis.PossibleTaint> taintedVariables;
-//        private Set<String> taintingConfigurations;
-//        private Set<Statement> relevantStatements;
-//        private boolean inPossibleRelevantStatement;
-//        private boolean relevantStatement;
-//
-//        public PerformanceStatementVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables,
-//                                           Set<String> taintingConfigurations, Set<Statement> relevantStatements) {
-//            this.taintedVariables = taintedVariables;
-//            this.taintingConfigurations = taintingConfigurations;
-//            this.relevantStatements = relevantStatements;
-//            this.inPossibleRelevantStatement = false;
-//            this.relevantStatement = false;
-//        }
-//
-//        @Override
-//        public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
-//            if(this.inPossibleRelevantStatement) {
-//                this.taintingConfigurations.add(expressionConfigurationConstant.getName());
-//                this.relevantStatement = true;
-//            }
-//
-//
-//            return expressionConfigurationConstant;
-//        }
-//
-//        @Override
-//        public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
-//            if(this.inPossibleRelevantStatement) {
-//                for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
-//                    if(taintedVariable.getVariable().equals(expressionVariable)) {
-//                        this.relevantStatement = true;
-//                        for(ExpressionConfigurationConstant parameter : taintedVariable.getConfigurations()) {
-//                            this.taintingConfigurations.add(parameter.getName());
-//                        }
-//                    }
-//                }
-//            }
-//
-//            return expressionVariable;
-//        }
-//
-//        @Override
-//        public Void visitStatementIf(StatementIf statementIf) {
-//            boolean cameFromPossibleRelevantStatement = true;
-//            if(!this.inPossibleRelevantStatement) {
-//                this.inPossibleRelevantStatement = true;
-//                cameFromPossibleRelevantStatement = false;
-//            }
-//
-//            boolean cameFromRelevantStatement = true;
-//            if(!this.relevantStatement) {
-//                cameFromRelevantStatement = false;
-//            }
-//
-//            statementIf.getCondition().accept(this);
-//
-//            if(this.relevantStatement) {
-//                this.relevantStatements.add(statementIf);
-//            }
-//
-//            if(!cameFromRelevantStatement) {
-//                this.relevantStatement = false;
-//            }
-//
-//            if(!cameFromPossibleRelevantStatement) {
-//                this.inPossibleRelevantStatement = false;
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        public Void visitStatementSleep(StatementSleep statementSleep) {
-//            boolean cameFromRelevantStatement = true;
-//            if(!this.inPossibleRelevantStatement) {
-//                this.inPossibleRelevantStatement = true;
-//                cameFromRelevantStatement = false;
-//            }
-//
-//            statementSleep.getTime().accept(this);
-//
-//            if(this.relevantStatement) {
-//                this.relevantStatements.add(statementSleep);
-//            }
-//
-//            if(!cameFromRelevantStatement) {
-//                this.inPossibleRelevantStatement = false;
-//            }
-//            return null;
-//        }
-//    }
-
-//    private class PerformanceVisitor extends VisitorReturner {
-//        private Set<TaintAnalysis.PossibleTaint> taintedVariables;
-//        private Set<String> taintingConfigurations;
-//        private Set<Statement> relevantStatements;
-//        private boolean inPossibleRelevantStatement;
-//        private boolean relevantStatement;
-//
-//        public PerformanceVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables,
-//                                  Set<String> taintingConfigurations, Set<Statement> relevantStatements) {
-//            this.taintedVariables = taintedVariables;
-//            this.taintingConfigurations = taintingConfigurations;
-//            this.relevantStatements = relevantStatements;
-//            this.inPossibleRelevantStatement = false;
-//            this.relevantStatement = false;
-//        }
-//
-//        @Override
-//        public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
-//            if(this.inPossibleRelevantStatement) {
-//                this.taintingConfigurations.add(expressionConfigurationConstant.getName());
-//                this.relevantStatement = true;
-//            }
-//
-//
-//            return expressionConfigurationConstant;
-//        }
-//
-//        @Override
-//        public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
-//            if(this.inPossibleRelevantStatement) {
-//                for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
-//                    if(taintedVariable.getVariable().equals(expressionVariable)) {
-//                        this.relevantStatement = true;
-//                        for(ExpressionConfigurationConstant parameter : taintedVariable.getConfigurations()) {
-//                            this.taintingConfigurations.add(parameter.getName());
-//                        }
-//                    }
-//                }
-//            }
-//
-//            return expressionVariable;
-//        }
-//
-//        @Override
-//        public Void visitStatementIf(StatementIf statementIf) {
-//            boolean cameFromPossibleRelevantStatement = true;
-//            if(!this.inPossibleRelevantStatement) {
-//                this.inPossibleRelevantStatement = true;
-//                cameFromPossibleRelevantStatement = false;
-//            }
-//
-//            boolean cameFromRelevantStatement = true;
-//            if(!this.relevantStatement) {
-//                cameFromRelevantStatement = false;
-//            }
-//
-//            statementIf.getCondition().accept(this);
-//
-//            if(this.relevantStatement) {
-//                this.relevantStatements.add(statementIf);
-//            }
-//
-//            if(!cameFromRelevantStatement) {
-//                this.relevantStatement = false;
-//            }
-//
-//            if(!cameFromPossibleRelevantStatement) {
-//                this.inPossibleRelevantStatement = false;
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        public Void visitStatementSleep(StatementSleep statementSleep) {
-//            boolean cameFromRelevantStatement = true;
-//            if(!this.inPossibleRelevantStatement) {
-//                this.inPossibleRelevantStatement = true;
-//                cameFromRelevantStatement = false;
-//            }
-//
-//            statementSleep.getTime().accept(this);
-//
-//            if(this.relevantStatement) {
-//                this.relevantStatements.add(statementSleep);
-//            }
-//
-//            if(!cameFromRelevantStatement) {
-//                this.inPossibleRelevantStatement = false;
-//            }
-//            return null;
-//        }
-//    }
-
-    private class PerformanceVisitor extends VisitorReturner {
+    private class RelevantInfoGetterVisitor extends VisitorReturner {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;
-        private boolean inPossibleRelevantStatement;
-        private boolean relevantStatement;
         private Set<String> relevantOptions;
 
-        public PerformanceVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables) {
+        public RelevantInfoGetterVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables) {
             this.taintedVariables = taintedVariables;
             this.relevantOptions = new HashSet<>();
-            this.inPossibleRelevantStatement = false;
-            this.relevantStatement = false;
+        }
+
+        public Set<String> getRelevantInfo(Statement statement) {
+            statement.accept(this);
+
+            return this.relevantOptions;
         }
 
         @Override
         public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
-            if(this.inPossibleRelevantStatement) {
-                this.relevantOptions.add(expressionConfigurationConstant.getName());
-                this.relevantStatement = true;
-            }
-
+            this.relevantOptions.add(expressionConfigurationConstant.getName());
 
             return expressionConfigurationConstant;
         }
 
         @Override
         public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
-            if(this.inPossibleRelevantStatement) {
                 for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
                     if(taintedVariable.getVariable().equals(expressionVariable)) {
-                        this.relevantStatement = true;
                         for(ExpressionConfigurationConstant parameter : taintedVariable.getConfigurations()) {
                             this.relevantOptions.add(parameter.getName());
                         }
                     }
                 }
-            }
 
             return expressionVariable;
         }
 
         @Override
         public Void visitStatementIf(StatementIf statementIf) {
-            boolean cameFromPossibleRelevantStatement = true;
-            if(!this.inPossibleRelevantStatement) {
-                this.inPossibleRelevantStatement = true;
-                cameFromPossibleRelevantStatement = false;
-            }
-
-            boolean cameFromRelevantStatement = true;
-            if(!this.relevantStatement) {
-                cameFromRelevantStatement = false;
-            }
-
             statementIf.getCondition().accept(this);
 
-            if(this.relevantStatement) {
-                relevantStatementToOptions.put(statementIf, this.relevantOptions);
-            }
-
-            if(!cameFromRelevantStatement) {
-                this.relevantStatement = false;
-            }
-
-            if(!cameFromPossibleRelevantStatement) {
-                this.inPossibleRelevantStatement = false;
-            }
             return null;
         }
 
         @Override
         public Void visitStatementSleep(StatementSleep statementSleep) {
-            boolean cameFromRelevantStatement = true;
-            if(!this.inPossibleRelevantStatement) {
-                this.inPossibleRelevantStatement = true;
-                cameFromRelevantStatement = false;
-            }
-
             statementSleep.getTime().accept(this);
 
-            if(this.relevantStatement) {
-                relevantStatementToOptions.put(statementSleep, this.relevantOptions);
-            }
-
-            if(!cameFromRelevantStatement) {
-                this.inPossibleRelevantStatement = false;
-            }
             return null;
         }
     }

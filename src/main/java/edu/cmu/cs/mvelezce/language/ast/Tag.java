@@ -27,5 +27,7 @@ public enum Tag {
     LEFT_BRACKET,
     RIGHT_BRACKET,
     NOT,
+    AND,
+    OR,
     EOF
 }

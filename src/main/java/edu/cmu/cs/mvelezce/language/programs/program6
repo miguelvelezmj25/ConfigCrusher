@@ -1,10 +1,13 @@
-a=C
+a=A
+b=B
+c=C
+x=0
 if(a) {
-    sleep(1)
-    b=D
-    if(!b) {
-        sleep(2)
-    }
-    sleep(3)
+    x = 5
 }
-
+if(b) {
+    x = x + 1
+}
+if(c) {
+    sleep(x)
+}

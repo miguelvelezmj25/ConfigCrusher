@@ -33,43 +33,33 @@ public class PerformanceMapper {
             add(StatementIf.class);
         }
     };
+    
+    public static Map<Set<String>, Integer> calculatePerformance(String program, Set<String> parameters) {
+        Map<Set<String>, Integer> perfomanceMap = new HashMap<>();
 
-    /**
-     * TODO
-     */
-    public Map<Set<String>, Integer> calculatePerformance(String program, Set<String> parameters) {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
-
-        Set<Set<String>> allConfigurations = getConfigurations(parameters);
-        Interpreter interpreter = new Interpreter(ast);
 
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-//        this.getRelevantStatementsAndOptions(instructionsToTainted);
-//        Set<Statement> relevantStatements = this.getRelevantStatements(instructionsToTainted);
-//        Set<String> relevantConfigurations = this.getRelevantParametersInRelevantStatements(instructionsToTainted, relevantStatements);
-//
-//        this.updateASTToTimeRelevantStatements(relevantStatements);
-//
-//        Set<String> nextConfiguration;
-//
-//        while(!this.allConfigurations.isEmpty()) {
-//            nextConfiguration = Helper.getNextConfiguration(this.allConfigurations, relevantConfigurations);
-//            interpreter.evaluate(ast, nextConfiguration);
-//
-//            this.pruneAndMapConfigurations(relevantConfigurations, nextConfiguration);
-//        }
-//
-//        return this.performanceMap;
-        return null;
+        Map<Statement, Set<String>> relevantStatementsToOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        ast = PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, relevantStatementsToOptions.keySet());
+        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantStatementsToOptions);
+        Interpreter interpreter = new Interpreter(ast);
+
+        for(Set<String> configuration : configurationsToExecute) {
+            interpreter.evaluate(configuration);
+            perfomanceMap.put(configuration, interpreter.getTotalExecutionTime());
+        }
+
+        return perfomanceMap;
     }
 
-    public static Map<Statement, Set<String>> getRelevantStatementsAndOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+    public static Map<Statement, Set<String>> getRelevantStatementsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
         Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
@@ -128,7 +118,7 @@ public class PerformanceMapper {
 
     }
 
-    public static Statement updateASTToTimeRelevantStatements(Statement program, Set<Statement> relevantStatements) {
+    public static Statement instrumentProgramToTimeRelevantStatements(Statement program, Set<Statement> relevantStatements) {
         AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
         return program.accept(addTimedVisitor);
     }

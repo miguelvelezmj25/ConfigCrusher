@@ -115,6 +115,18 @@ public class Lexer {
                 return new Token("!", Tag.NOT);
             }
 
+            if(this.currentCharacter.equals("&") && this.peek().equals("&")) {
+                this.advance();
+                this.advance();
+                return new Token("&&", Tag.AND);
+            }
+
+            if(this.currentCharacter.equals("|") && this.peek().equals("|")) {
+                this.advance();
+                this.advance();
+                return new Token("&&", Tag.OR);
+            }
+
             throw new IllegalArgumentException(this.currentCharacter + " is not a valid character");
 
         }

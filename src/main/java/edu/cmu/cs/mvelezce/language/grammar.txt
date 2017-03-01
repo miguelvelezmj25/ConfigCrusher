@@ -6,7 +6,7 @@ stmt : variable EQUAL expr 
      | IF LEFT_PARENT expr RIGHT_PAREN { stmt_block } 
      | SLEEP LEFT_PARENT expr RIGHT_PARENT  
 
-expr : term ((PLUS | MINUS | MULT | DIV) term)*
+expr : term ((PLUS | MINUS | MULT | DIV | AND | OR) term)*
 
   term : variable 
      | INTEGER 

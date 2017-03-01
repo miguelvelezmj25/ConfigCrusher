@@ -1,6 +1,7 @@
-a=C
-b=a
-if(b) {
-    a=0
+a=A
+b=B
+sleep(a)
+if(a && b) {
     sleep(2)
 }
+sleep(3)

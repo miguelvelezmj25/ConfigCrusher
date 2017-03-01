@@ -1,7 +1,9 @@
-a=0
-b=C + a
-if(b) {
-    sleep(2)
-    b=2
+a=A
+b=B
+sleep(6)
+if(a) {
+    sleep(a)
 }
-sleep(C)
+if(b) {
+    sleep(b)
+}

@@ -1,3 +1,10 @@
-sleep(C)
-a=C - 1
-sleep(a)
+a=A
+if(a) {
+    sleep(a)
+    b=B
+    if(!b) {
+        sleep(2)
+    }
+    sleep(3)
+}
+

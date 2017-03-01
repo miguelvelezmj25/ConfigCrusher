@@ -1,7 +1,0 @@
-x=A
-y=B
-sleep(1)
-if(x + y) {
-    sleep(2)
-}
-sleep(3)

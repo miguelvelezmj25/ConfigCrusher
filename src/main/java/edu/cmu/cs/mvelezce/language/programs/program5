@@ -1,8 +1,10 @@
-a=C
+a=A
+b=B
+sleep(a+b)
 if(a) {
-    sleep(2)
-    a=0
+    sleep(a)
+    b=1
 }
-if(!C) {
-    sleep(3)
+if(b) {
+    sleep(b)
 }

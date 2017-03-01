@@ -48,20 +48,34 @@ public class Interpreter implements Visitor<ValueInt, Void> {
         ValueInt right =  expressionBinary.getRight().accept(this);
 
         if(expressionBinary.getOperation().equals("+")) {
-            int result = left.getValue() + (right).getValue();
+            int result = left.getValue() + right.getValue();
             return new ValueInt(result);
         }
         else if(expressionBinary.getOperation().equals("-")) {
-            int result = (left).getValue() - (right).getValue();
+            int result = left.getValue() - right.getValue();
             return new ValueInt(result);
         }
         else if(expressionBinary.getOperation().equals("*")) {
-            int result = (left).getValue() * (right).getValue();
+            int result = left.getValue() * right.getValue();
             return new ValueInt(result);
         }
         else if(expressionBinary.getOperation().equals("/")) {
-            int result = (left).getValue() / (right).getValue();
+            int result = left.getValue() / right.getValue();
             return new ValueInt(result);
+        }
+        else if(expressionBinary.getOperation().equals("&&")) {
+            if(left.getValue() == 1 && right.getValue() == 1) {
+                return new ValueInt(1);
+            }
+
+            return new ValueInt(0);
+        }
+        else if(expressionBinary.getOperation().equals("||")) {
+            if(left.getValue() == 0 && right.getValue() == 0) {
+                return new ValueInt(0);
+            }
+
+            return new ValueInt(1);
         }
 
         // TODO do not return null

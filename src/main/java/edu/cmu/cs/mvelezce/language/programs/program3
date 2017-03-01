@@ -1,7 +1,10 @@
-b=C
-a=b
+a=A
+b=B
+sleep(6)
 if(a) {
-    sleep(2)
+    sleep(3)
+    b=1
 }
-b=0
-sleep(3)
+if(b) {
+    sleep(1)
+}

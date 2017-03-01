@@ -23,20 +23,22 @@ public class InterpreterTest {
         String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program1");
 
         Map<String, ValueInt> store = new HashMap<>();
-        store.put("a", new ValueInt(0));
-        store.put("b", new ValueInt(0));
+        store.put("a", new ValueInt(1));
+        store.put("b", new ValueInt(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
         Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
 
         Interpreter interpreter = new Interpreter(ast);
         interpreter.evaluate(activatedConfigurations);
 
         Assert.assertEquals(store, interpreter.getStore());
-        Assert.assertEquals(0, interpreter.getTotalExecutionTime());
+        Assert.assertEquals(6, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -44,21 +46,22 @@ public class InterpreterTest {
         String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program2");
 
         Map<String, ValueInt> store = new HashMap<>();
-        store.put("a", new ValueInt(0));
+        store.put("a", new ValueInt(1));
+        store.put("b", new ValueInt(0));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
         Set<String> activatedConfigurations = new HashSet<>();
-        activatedConfigurations.add("C");
+        activatedConfigurations.add("A");
 
         Interpreter interpreter = new Interpreter(ast);
 
         interpreter.evaluate(activatedConfigurations);
 
         Assert.assertEquals(store, interpreter.getStore());
-        Assert.assertEquals(1, interpreter.getTotalExecutionTime());
+        Assert.assertEquals(6, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -66,22 +69,23 @@ public class InterpreterTest {
         String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program3");
 
         Map<String, ValueInt> store = new HashMap<>();
-        store.put("b", new ValueInt(0));
         store.put("a", new ValueInt(1));
+        store.put("b", new ValueInt(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
         Set<String> activatedConfigurations = new HashSet<>();
-        activatedConfigurations.add("C");
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
 
         Interpreter interpreter = new Interpreter(ast);
 
         interpreter.evaluate(activatedConfigurations);
 
         Assert.assertEquals(store, interpreter.getStore());
-        Assert.assertEquals(5, interpreter.getTotalExecutionTime());
+        Assert.assertEquals(10, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -89,22 +93,23 @@ public class InterpreterTest {
         String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program4");
 
         Map<String, ValueInt> store = new HashMap<>();
-        store.put("a", new ValueInt(0));
-        store.put("b", new ValueInt(2));
+        store.put("a", new ValueInt(1));
+        store.put("b", new ValueInt(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
         Set<String> activatedConfigurations = new HashSet<>();
-        activatedConfigurations.add("C");
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
 
         Interpreter interpreter = new Interpreter(ast);
 
         interpreter.evaluate(activatedConfigurations);
 
         Assert.assertEquals(store, interpreter.getStore());
-        Assert.assertEquals(3, interpreter.getTotalExecutionTime());
+        Assert.assertEquals(8, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -112,21 +117,23 @@ public class InterpreterTest {
         String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program5");
 
         Map<String, ValueInt> store = new HashMap<>();
-        store.put("a", new ValueInt(0));
+        store.put("a", new ValueInt(1));
+        store.put("b", new ValueInt(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
         Set<String> activatedConfigurations = new HashSet<>();
-        activatedConfigurations.add("C");
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
 
         Interpreter interpreter = new Interpreter(ast);
 
         interpreter.evaluate(activatedConfigurations);
 
         Assert.assertEquals(store, interpreter.getStore());
-        Assert.assertEquals(2, interpreter.getTotalExecutionTime());
+        Assert.assertEquals(4, interpreter.getTotalExecutionTime());
     }
 
     @Test
@@ -135,13 +142,17 @@ public class InterpreterTest {
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(1));
-        store.put("b", new ValueInt(0));
+        store.put("b", new ValueInt(1));
+        store.put("c", new ValueInt(1));
+        store.put("x", new ValueInt(6));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
         Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
         activatedConfigurations.add("C");
 
         Interpreter interpreter = new Interpreter(ast);
@@ -151,5 +162,6 @@ public class InterpreterTest {
         Assert.assertEquals(store, interpreter.getStore());
         Assert.assertEquals(6, interpreter.getTotalExecutionTime());
     }
+
 
 }

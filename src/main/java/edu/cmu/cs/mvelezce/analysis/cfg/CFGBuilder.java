@@ -179,7 +179,8 @@ public class CFGBuilder extends VisitorReturner {
                 condition.accept(this);
             }
 
-            Collections.reverse(this.currentConditions);
+            // TODO should we reverse this list? If it is reverse, we know what is the first condition for this statement, specially in nested ifs
+//            Collections.reverse(this.currentConditions);
             basicBlock = new BasicBlock(this.steps++ + "| " + statement, statement, this.currentConditions);
         }
 

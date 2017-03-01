@@ -1,9 +1,0 @@
-x=A
-y=B
-sleep(6)
-if(x) {
-    sleep(3)
-}
-if(y) {
-    sleep(1)
-}

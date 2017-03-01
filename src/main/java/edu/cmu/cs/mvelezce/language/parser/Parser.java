@@ -127,7 +127,8 @@ public class Parser {
         Expression expression = this.term();
 
         while(this.currentToken.getTag() == Tag.PLUS || this.currentToken.getTag() == Tag.MINUS
-                || this.currentToken.getTag() == Tag.MULT || this.currentToken.getTag() == Tag.DIV) {
+                || this.currentToken.getTag() == Tag.MULT || this.currentToken.getTag() == Tag.DIV
+                || this.currentToken.getTag() == Tag.AND || this.currentToken.getTag() == Tag.OR) {
             Token token = this.currentToken;
 
             if (token.getTag() == Tag.PLUS) {
@@ -142,10 +143,17 @@ public class Parser {
             else if(token.getTag() == Tag.DIV) {
                 this.checkToken(Tag.DIV);
             }
+            else if(token.getTag() == Tag.AND) {
+                this.checkToken(Tag.AND);
+            }
+            else if(token.getTag() == Tag.OR) {
+                this.checkToken(Tag.OR);
+            }
 
             expression = new ExpressionBinary(expression, token.getValue(), this.term());
 
         }
+
         return expression;
     }
 

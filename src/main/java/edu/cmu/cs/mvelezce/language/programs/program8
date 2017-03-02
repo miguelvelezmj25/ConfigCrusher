@@ -1,0 +1,9 @@
+a=A
+b=B
+c=C
+if(a || b) {
+    sleep(1)
+}
+if(c && a) {
+    sleep(3)
+}

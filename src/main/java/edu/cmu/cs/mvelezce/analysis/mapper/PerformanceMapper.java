@@ -78,11 +78,10 @@ public class PerformanceMapper {
     }
 
     public static Set<Set<String>> getConfigurationsToExecute(Map<Statement, Set<String>> relevantStatementToOptions) {
-        // TODO this does not figure out that there is not an interaction between relevant statements
         Set<Set<String>> relevantOptions = new HashSet<>();
 
+        // Calculates which options are included in other options
         for(Map.Entry <Statement, Set<String>> entry : relevantStatementToOptions.entrySet()) {
-
             if(relevantOptions.isEmpty()) {
                 relevantOptions.add(entry.getValue());
                 continue;
@@ -109,10 +108,50 @@ public class PerformanceMapper {
             relevantOptions.addAll(toAdd);
         }
 
-        Set<Set<String>> configurationsToExecute = new HashSet<>();
+        // Get the configurations for each option
+        Map<Set<String>, Set<Set<String>>> optionsToConfigurationsToExecute = new HashMap<>();
 
         for(Set<String> option : relevantOptions) {
-            configurationsToExecute.addAll(getConfigurations(option));
+            Set<Set<String>> configurationsToExecuteForOption = new HashSet<>();
+            configurationsToExecuteForOption.addAll(getConfigurations(option));
+            optionsToConfigurationsToExecute.put(option, configurationsToExecuteForOption);
+        }
+
+        // Compresses which configurations to execute
+        Set<Set<String>> configurationsToExecute = new HashSet<>();
+
+        if(optionsToConfigurationsToExecute.isEmpty()) {
+            return configurationsToExecute;
+        }
+
+        if(optionsToConfigurationsToExecute.size() == 1) {
+            configurationsToExecute.addAll(optionsToConfigurationsToExecute.entrySet().iterator().next().getValue());
+            return configurationsToExecute;
+        }
+
+        Iterator<Map.Entry<Set<String>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator = optionsToConfigurationsToExecute.entrySet().iterator();
+        Iterator<Set<String>> set1 = optionsToConfigurationsToExecuteIterator.next().getValue().iterator();
+
+        while(optionsToConfigurationsToExecuteIterator.hasNext()) {
+            configurationsToExecute = new HashSet<>();
+            Iterator<Set<String>> set2 = optionsToConfigurationsToExecuteIterator.next().getValue().iterator();
+
+            while (set1.hasNext() && set2.hasNext()) {
+                Set<String> hold = new HashSet<>(set1.next());
+                hold.addAll(set2.next());
+
+                configurationsToExecute.add(hold);
+            }
+
+            while (set1.hasNext()) {
+                configurationsToExecute.add(set1.next());
+            }
+
+            while (set2.hasNext()) {
+                configurationsToExecute.add(set2.next());
+            }
+
+            set1 = configurationsToExecute.iterator();
         }
 
         return configurationsToExecute;

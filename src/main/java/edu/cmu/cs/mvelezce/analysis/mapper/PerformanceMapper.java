@@ -35,7 +35,7 @@ public class PerformanceMapper {
     };
     
     public static Map<Set<String>, Integer> getPerformance(String program) {
-        Map<Set<String>, Integer> perfomanceMap = new HashMap<>();
+        Map<Set<String>, Integer> performanceMap = new HashMap<>();
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
@@ -46,27 +46,27 @@ public class PerformanceMapper {
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        Map<Statement, Set<String>> relevantStatementsToOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         ast = PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, relevantStatementsToOptions.keySet());
         Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantStatementsToOptions);
         Interpreter interpreter = new Interpreter(ast);
 
         for(Set<String> configuration : configurationsToExecute) {
             interpreter.evaluate(configuration);
-            perfomanceMap.put(configuration, interpreter.getTotalExecutionTime());
+            performanceMap.put(configuration, interpreter.getTotalExecutionTime());
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
 
-        return perfomanceMap;
+        return performanceMap;
     }
 
-    public static Map<Statement, Set<String>> getRelevantStatementsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
-        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
+    public static Map<Statement, Set<ExpressionConfigurationConstant>> getRelevantStatementsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
             if(PerformanceMapper.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
                 RelevantInfoGetterVisitor performanceStatementVisitor = new RelevantInfoGetterVisitor(entry.getValue());
-                Set<String> result = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
+                Set<ExpressionConfigurationConstant> result = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
 
                 if(!result.isEmpty()) {
                     relevantStatementToOptions.put(entry.getKey().getStatement(), result);
@@ -77,20 +77,20 @@ public class PerformanceMapper {
         return relevantStatementToOptions;
     }
 
-    public static Set<Set<String>> getConfigurationsToExecute(Map<Statement, Set<String>> relevantStatementToOptions) {
-        Set<Set<String>> relevantOptions = new HashSet<>();
+    public static Set<Set<String>> getConfigurationsToExecute(Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions) {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>();
 
         // Calculates which options are included in other options
-        for(Map.Entry <Statement, Set<String>> entry : relevantStatementToOptions.entrySet()) {
+        for(Map.Entry <Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementToOptions.entrySet()) {
             if(relevantOptions.isEmpty()) {
                 relevantOptions.add(entry.getValue());
                 continue;
             }
 
-            Set<Set<String>> toRemove = new HashSet<>();
-            Set<Set<String>> toAdd = new HashSet<>();
+            Set<Set<ExpressionConfigurationConstant>> toRemove = new HashSet<>();
+            Set<Set<ExpressionConfigurationConstant>> toAdd = new HashSet<>();
 
-            for(Set<String> options : relevantOptions) {
+            for(Set<ExpressionConfigurationConstant> options : relevantOptions) {
                 if(options.equals(entry.getValue()) || options.containsAll(entry.getValue())) {
                     toAdd.remove(entry.getValue());
                     break;
@@ -109,9 +109,9 @@ public class PerformanceMapper {
         }
 
         // Get the configurations for each option
-        Map<Set<String>, Set<Set<String>>> optionsToConfigurationsToExecute = new HashMap<>();
+        Map<Set<ExpressionConfigurationConstant>, Set<Set<String>>> optionsToConfigurationsToExecute = new HashMap<>();
 
-        for(Set<String> option : relevantOptions) {
+        for(Set<ExpressionConfigurationConstant> option : relevantOptions) {
             Set<Set<String>> configurationsToExecuteForOption = new HashSet<>();
             configurationsToExecuteForOption.addAll(getConfigurations(option));
             optionsToConfigurationsToExecute.put(option, configurationsToExecuteForOption);
@@ -129,7 +129,7 @@ public class PerformanceMapper {
             return configurationsToExecute;
         }
 
-        Iterator<Map.Entry<Set<String>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator = optionsToConfigurationsToExecute.entrySet().iterator();
+        Iterator<Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator = optionsToConfigurationsToExecute.entrySet().iterator();
         Iterator<Set<String>> set1 = optionsToConfigurationsToExecuteIterator.next().getValue().iterator();
 
         while(optionsToConfigurationsToExecuteIterator.hasNext()) {
@@ -198,14 +198,14 @@ public class PerformanceMapper {
 
     private static class RelevantInfoGetterVisitor extends VisitorReturner {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;
-        private Set<String> relevantOptions;
+        private Set<ExpressionConfigurationConstant> relevantOptions;
 
         public RelevantInfoGetterVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables) {
             this.taintedVariables = taintedVariables;
             this.relevantOptions = new HashSet<>();
         }
 
-        public Set<String> getRelevantInfo(Statement statement) {
+        public Set<ExpressionConfigurationConstant> getRelevantInfo(Statement statement) {
             statement.accept(this);
 
             return this.relevantOptions;
@@ -213,7 +213,7 @@ public class PerformanceMapper {
 
         @Override
         public Expression visitExpressionConstantConfiguration(ExpressionConfigurationConstant expressionConfigurationConstant) {
-            this.relevantOptions.add(expressionConfigurationConstant.getName());
+            this.relevantOptions.add(expressionConfigurationConstant);
 
             return expressionConfigurationConstant;
         }
@@ -223,7 +223,7 @@ public class PerformanceMapper {
                 for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
                     if(taintedVariable.getVariable().equals(expressionVariable)) {
                         for(ExpressionConfigurationConstant parameter : taintedVariable.getConfigurations()) {
-                            this.relevantOptions.add(parameter.getName());
+                            this.relevantOptions.add(parameter);
                         }
                     }
                 }
@@ -294,4 +294,17 @@ public class PerformanceMapper {
         }
 
     }
+
+//    private class PerformanceEntry {
+//        private Set<String> configuration;
+//        private Map<Statement, Integer> blockToTime;
+//        private int totalTime;
+//
+//        public PerformanceEntry(Set<String> configuration, Map<Statement, Integer> blockToTime, int totalTime) {
+//            this.configuration = configuration;
+//            this.blockToTime =
+//            this.
+//
+//        }
+//    }
 }

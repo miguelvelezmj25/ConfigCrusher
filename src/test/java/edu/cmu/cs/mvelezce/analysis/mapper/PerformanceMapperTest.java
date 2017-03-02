@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
+import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.language.lexer.Lexer;
 import edu.cmu.cs.mvelezce.language.parser.Parser;
@@ -54,19 +55,19 @@ public class PerformanceMapperTest {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        Set<String> taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        Set<ExpressionConfigurationConstant> taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 3; i < 4; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        taintingConfigurations.add("B");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
@@ -87,27 +88,27 @@ public class PerformanceMapperTest {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        Set<String> taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        Set<ExpressionConfigurationConstant> taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 2; i < 3; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 3; i < 5; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        taintingConfigurations.add("B");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
@@ -128,19 +129,19 @@ public class PerformanceMapperTest {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        Set<String> taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        Set<ExpressionConfigurationConstant> taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 4; i < 7; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        taintingConfigurations.add("B");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
@@ -161,30 +162,30 @@ public class PerformanceMapperTest {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        Set<String> taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        Set<ExpressionConfigurationConstant> taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 4; i < 5; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 5; i < 6; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("B");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 6; i < 7; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
@@ -205,42 +206,42 @@ public class PerformanceMapperTest {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        Set<String> taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        taintingConfigurations.add("B");
-        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        Set<ExpressionConfigurationConstant> taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 3; i < 4; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 4; i < 5; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 5; i < 7; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        taintingConfigurations.add("B");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 7; i < 8; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
@@ -261,35 +262,35 @@ public class PerformanceMapperTest {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        Set<String> taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        Set<ExpressionConfigurationConstant> taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 5; i < 7; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("B");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 7; i < 9; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("C");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("C"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 9; i < 10; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        taintingConfigurations.add("B");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
@@ -310,27 +311,27 @@ public class PerformanceMapperTest {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        Set<String> taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        Set<ExpressionConfigurationConstant> taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 5; i < 7; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("B");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 7; i < 9; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("C");
-        taintingConfigurations.add("D");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("C"));
+        taintingOptions.add(new ExpressionConfigurationConstant("D"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
@@ -351,20 +352,20 @@ public class PerformanceMapperTest {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        Set<String> taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        taintingConfigurations.add("B");
-        Map<Statement, Set<String>> relevantStatementToOptions = new HashMap<>();
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        Set<ExpressionConfigurationConstant> taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        taintingOptions.add(new ExpressionConfigurationConstant("B"));
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         for(int i = 4; i < 6; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
-        taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add("A");
-        taintingConfigurations.add("C");
-        relevantStatementToOptions.put(successor.getStatement(), taintingConfigurations);
+        taintingOptions = new HashSet<>();
+        taintingOptions.add(new ExpressionConfigurationConstant("A"));
+        taintingOptions.add(new ExpressionConfigurationConstant("C"));
+        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
@@ -383,12 +384,12 @@ public class PerformanceMapperTest {
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
-        Set<String> options = new HashSet<>();
-        options.add("A");
-        options.add("B");
+        Set<ExpressionConfigurationConstant> options = new HashSet<>();
+        options.add(new ExpressionConfigurationConstant("A"));
+        options.add(new ExpressionConfigurationConstant("B"));
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
         System.out.println(configurationsToExecute);
@@ -406,12 +407,12 @@ public class PerformanceMapperTest {
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
-        Set<String> options = new HashSet<>();
-        options.add("A");
-        options.add("B");
+        Set<ExpressionConfigurationConstant> options = new HashSet<>();
+        options.add(new ExpressionConfigurationConstant("A"));
+        options.add(new ExpressionConfigurationConstant("B"));
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
         // TODO can do better
@@ -430,12 +431,12 @@ public class PerformanceMapperTest {
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
-        Set<String> options = new HashSet<>();
-        options.add("A");
-        options.add("B");
+        Set<ExpressionConfigurationConstant> options = new HashSet<>();
+        options.add(new ExpressionConfigurationConstant("A"));
+        options.add(new ExpressionConfigurationConstant("B"));
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
         System.out.println(configurationsToExecute);
@@ -453,14 +454,13 @@ public class PerformanceMapperTest {
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
+        configurationsToExecute.add(new HashSet<>());
         Set<String> options = new HashSet<>();
-        configurationsToExecute.addAll(Helper.getConfigurations(options));
-        options = new HashSet<>();
         options.add("A");
         options.add("B");
         configurationsToExecute.add(options);
 
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
         System.out.println(PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
@@ -478,12 +478,12 @@ public class PerformanceMapperTest {
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
-        Set<String> options = new HashSet<>();
-        options.add("A");
-        options.add("B");
+        Set<ExpressionConfigurationConstant> options = new HashSet<>();
+        options.add(new ExpressionConfigurationConstant("A"));
+        options.add(new ExpressionConfigurationConstant("B"));
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
         System.out.println(configurationsToExecute);
@@ -501,13 +501,13 @@ public class PerformanceMapperTest {
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
-        Set<String> options = new HashSet<>();
-        options.add("A");
-        options.add("B");
-        options.add("C");
+        Set<ExpressionConfigurationConstant> options = new HashSet<>();
+        options.add(new ExpressionConfigurationConstant("A"));
+        options.add(new ExpressionConfigurationConstant("B"));
+        options.add(new ExpressionConfigurationConstant("C"));
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
         System.out.println(PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
@@ -543,7 +543,7 @@ public class PerformanceMapperTest {
         options.add("C");
         configurationsToExecute.add(options);
 
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
         System.out.println(PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
@@ -579,7 +579,7 @@ public class PerformanceMapperTest {
         options.add("C");
         configurationsToExecute.add(options);
 
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
         System.out.println(PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
@@ -597,7 +597,7 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
 
         Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
     }
@@ -613,7 +613,7 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
 
         Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
     }
@@ -629,7 +629,7 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
 
         Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
     }
@@ -645,7 +645,7 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
 
         Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
     }
@@ -661,7 +661,7 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
 
         Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
     }
@@ -677,7 +677,7 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
 
         Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
     }
@@ -693,7 +693,7 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
 
         Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
     }
@@ -709,7 +709,7 @@ public class PerformanceMapperTest {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<String>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
 
         Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
     }

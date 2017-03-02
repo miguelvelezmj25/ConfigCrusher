@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.analysis;
 
+import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import org.apache.commons.math3.util.Combinations;
 
 import java.util.*;
@@ -18,12 +19,17 @@ public class Helper {
      * @param parameters
      * @return
      */
-    public static Set<Set<String>> getConfigurations(Set<String> parameters) {
+    public static Set<Set<String>> getConfigurations(Set<ExpressionConfigurationConstant> parameters) {
         if(parameters == null) {
             throw new IllegalArgumentException("The parameters cannot be null");
         }
 
-        List<String> parametersList= new ArrayList<>(parameters);
+        List<String> parametersList = new ArrayList<>();
+
+        for(ExpressionConfigurationConstant option : parameters) {
+            parametersList.add(option.getName());
+        }
+
         Set<Set<String>> configurations = new HashSet<>();
 
         int configurationMaxLength = parameters.size();

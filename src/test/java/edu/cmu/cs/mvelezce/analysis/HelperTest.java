@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.analysis;
 
+import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,9 +15,9 @@ import static org.junit.Assert.*;
 public class HelperTest {
     @Test
     public void getNextConfiguration1() throws Exception {
-        Set<String> parameters = new HashSet<>();
-        parameters.add("A");
-        parameters.add("B");
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
 
         Set<Set<String>> configurations = Helper.getConfigurations(parameters);
 
@@ -25,9 +26,9 @@ public class HelperTest {
 
     @Test
     public void getNextConfiguration2() throws Exception {
-        Set<String> parameters = new HashSet<>();
-        parameters.add("A");
-        parameters.add("B");
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
 
         Set<String> consider = new HashSet<>();
         consider.add("A");
@@ -43,9 +44,9 @@ public class HelperTest {
 
     @Test
     public void getNextConfiguration3() throws Exception {
-        Set<String> parameters = new HashSet<>();
-        parameters.add("A");
-        parameters.add("B");
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
 
         Set<String> consider = new HashSet<>();
         consider.add("A");
@@ -63,9 +64,9 @@ public class HelperTest {
 
     @Test
     public void getNextConfiguration4() throws Exception {
-        Set<String> parameters = new HashSet<>();
-        parameters.add("A");
-        parameters.add("B");
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
 
         Set<String> consider = new HashSet<>();
         consider.add("A");
@@ -84,9 +85,9 @@ public class HelperTest {
 
     @Test
     public void getNextConfiguration5() throws Exception {
-        Set<String> parameters = new HashSet<>();
-        parameters.add("A");
-        parameters.add("B");
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
 
         Set<String> consider = new HashSet<>();
 
@@ -101,10 +102,10 @@ public class HelperTest {
 
     @Test
     public void getConfigurations() throws Exception {
-        Set<String> parameters = new HashSet<>();
-        parameters.add("A");
-        parameters.add("B");
-        parameters.add("C");
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
+        parameters.add(new ExpressionConfigurationConstant("C"));
 
         Set<Set<String>> configurations = new HashSet<>();
         Set<String> configuration = new HashSet<>();

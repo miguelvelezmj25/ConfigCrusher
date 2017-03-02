@@ -20,7 +20,7 @@ public class Interpreter implements Visitor<ValueInt, Void> {
     private Statement ast;
     private Map<String, ValueInt> store;
     private int totalExecutionTime;
-    private Map<StatementTimed, Integer> timedBlocks;
+    private Map<Statement, Integer> timedBlocks;
 
     public Interpreter(Statement ast) {
         this.reset();
@@ -159,7 +159,7 @@ public class Interpreter implements Visitor<ValueInt, Void> {
     public Void visitStatementTimed(StatementTimed statement) {
         int time = totalExecutionTime;
         statement.getStatements().accept(this);
-        this.timedBlocks.put(statement, this.totalExecutionTime - time);
+        this.timedBlocks.put(statement.getStatements(), this.totalExecutionTime - time);
         return null;
     }
 
@@ -174,5 +174,5 @@ public class Interpreter implements Visitor<ValueInt, Void> {
 
     public int getTotalExecutionTime() { return this.totalExecutionTime; }
 
-    public Map<StatementTimed, Integer> getTimedBlocks() { return this.timedBlocks; }
+    public Map<Statement, Integer> getTimedBlocks() { return this.timedBlocks; }
 }

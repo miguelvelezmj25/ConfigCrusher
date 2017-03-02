@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.analysis.mapper;
 
+import edu.cmu.cs.mvelezce.analysis.Helper;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
@@ -19,8 +20,6 @@ import edu.cmu.cs.mvelezce.language.parser.Parser;
 
 import java.util.*;
 
-import static edu.cmu.cs.mvelezce.analysis.Helper.getConfigurations;
-
 /**
  * TODO
  * Created by miguelvelez on 2/11/17.
@@ -34,8 +33,8 @@ public class PerformanceMapper {
         }
     };
     
-    public static Map<Set<String>, Integer> getPerformance(String program) {
-        Map<Set<String>, Integer> performanceMap = new HashMap<>();
+    public static Map<Set<String>, Integer> measurePerformance(String program, Set<ExpressionConfigurationConstant> parameters) {
+        Map<Set<String>, Integer> measuredPerformanceMap = new HashMap<>();
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
@@ -51,11 +50,75 @@ public class PerformanceMapper {
         Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantStatementsToOptions);
         Interpreter interpreter = new Interpreter(ast);
 
+        Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
+
         for(Set<String> configuration : configurationsToExecute) {
             interpreter.evaluate(configuration);
-            performanceMap.put(configuration, interpreter.getTotalExecutionTime());
+            measuredPerformanceMap.put(configuration, interpreter.getTotalExecutionTime());
+
+            configurationsToPerformance.add(new PerformanceEntry(configuration, interpreter.getTimedBlocks(), interpreter.getTotalExecutionTime()));
+
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
+
+        Set<Set<String>> powerSet = Helper.getConfigurations(parameters);
+        Map<Set<String>, Integer> performanceMap = new HashMap<>();
+
+        for(Set<String> configuration : powerSet) {
+            System.out.println();
+            System.out.println(configuration);
+
+            if(measuredPerformanceMap.containsKey(configuration)) {
+                performanceMap.put(configuration, measuredPerformanceMap.get(configuration));
+                continue;
+            }
+
+            System.out.println("HAVE TO CALCULATE");
+            Map<Statement, Integer> predictedBlockToTime = new HashMap<>();
+
+            for(Map.Entry<Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementsToOptions.entrySet()) {
+                Set<ExpressionConfigurationConstant> statementDependsOn = entry.getValue();
+                Set<String> statementDependsOnConvenient = new HashSet<>();
+
+                for(ExpressionConfigurationConstant option : statementDependsOn) {
+                    statementDependsOnConvenient.add(option.getName());
+                }
+
+                for(PerformanceEntry performanceEntry : configurationsToPerformance) {
+
+                    Set<String> a = new HashSet<>(statementDependsOnConvenient);
+                    a.retainAll(configuration);
+
+                    Set<String> b = new HashSet<>(performanceEntry.getConfiguration());
+                    b.retainAll(statementDependsOnConvenient);
+
+                    if(b.equals(a)) {
+                        if(entry.getKey() instanceof StatementIf) {
+                            StatementIf statementIf = (StatementIf) entry.getKey();
+                            if(performanceEntry.getBlockToTime().containsKey(statementIf.getThenBlock())) {
+                                predictedBlockToTime.put(statementIf, performanceEntry.getBlockToTime().get(statementIf.getThenBlock()));
+                            }
+                        }
+                        else {
+                            // TODO sleep statement
+                        }
+                        break;
+                    }
+                }
+            }
+
+            System.out.println(predictedBlockToTime);
+            int totalTime = PerformanceEntry.getBaseTime();
+            for(Map.Entry<Statement, Integer> entry : predictedBlockToTime.entrySet()) {
+                totalTime += entry.getValue();
+            }
+
+            performanceMap.put(configuration, totalTime);
+        }
+
+        System.out.println();
+        System.out.println("AND THE TABLE IS");
+        System.out.println(performanceMap);
 
         return performanceMap;
     }
@@ -113,7 +176,7 @@ public class PerformanceMapper {
 
         for(Set<ExpressionConfigurationConstant> option : relevantOptions) {
             Set<Set<String>> configurationsToExecuteForOption = new HashSet<>();
-            configurationsToExecuteForOption.addAll(getConfigurations(option));
+            configurationsToExecuteForOption.addAll(Helper.getConfigurations(option));
             optionsToConfigurationsToExecute.put(option, configurationsToExecuteForOption);
         }
 
@@ -162,11 +225,6 @@ public class PerformanceMapper {
         AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
         return program.accept(addTimedVisitor);
     }
-
-    // TODO
-//    public static void getPerformanceTable(, Set<String> parameters) {
-//
-//    }
 
 
 //    /**
@@ -295,16 +353,62 @@ public class PerformanceMapper {
 
     }
 
-//    private class PerformanceEntry {
-//        private Set<String> configuration;
-//        private Map<Statement, Integer> blockToTime;
-//        private int totalTime;
-//
-//        public PerformanceEntry(Set<String> configuration, Map<Statement, Integer> blockToTime, int totalTime) {
-//            this.configuration = configuration;
-//            this.blockToTime =
-//            this.
-//
-//        }
-//    }
+    private static class PerformanceEntry {
+        private Set<String> configuration;
+        private Map<Statement, Integer> blockToTime;
+        private int totalTime;
+        private static int baseTime = -1; // TODO this looks weird
+
+        public PerformanceEntry(Set<String> configuration, Map<Statement, Integer> blockToTime, int totalTime) {
+            this.configuration = configuration;
+            this.blockToTime = blockToTime;
+            this.totalTime = totalTime;
+
+            PerformanceEntry.calculateBaseTime(blockToTime,totalTime);
+        }
+
+        public Set<String> getConfiguration() { return this.configuration; }
+
+        public Map<Statement, Integer> getBlockToTime() { return this.blockToTime; }
+
+        public int getTotalTime() { return this.totalTime; }
+
+        public static int getBaseTime() { return PerformanceEntry.baseTime; }
+
+        private static void calculateBaseTime(Map<Statement, Integer> blockToTime, int totalTime) {
+            PerformanceEntry.baseTime = totalTime;
+            for(Map.Entry<Statement, Integer> entry : blockToTime.entrySet()) {
+                PerformanceEntry.baseTime -= entry.getValue();
+            }
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            PerformanceEntry that = (PerformanceEntry) o;
+
+            if (totalTime != that.totalTime) return false;
+            if (!configuration.equals(that.configuration)) return false;
+            return blockToTime.equals(that.blockToTime);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = configuration.hashCode();
+            result = 31 * result + blockToTime.hashCode();
+            result = 31 * result + totalTime;
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return "PerformanceEntry{" +
+                    "configuration=" + configuration +
+                    ", blockToTime=" + blockToTime +
+                    ", totalTime=" + totalTime +
+                    '}';
+        }
+    }
 }

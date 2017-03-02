@@ -60,7 +60,7 @@ public class StatementBlock extends Statement {
         String result = "";
 
         for(Statement statement : this.statements) {
-            result += statement + "\n";
+            result += statement; // + "\n";
         }
 
         return result.substring(0, result.length());

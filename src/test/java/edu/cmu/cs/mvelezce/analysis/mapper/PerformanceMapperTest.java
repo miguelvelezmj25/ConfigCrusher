@@ -36,7 +36,7 @@ public class PerformanceMapperTest {
 //
 //        PerformanceMapper mapper = new PerformanceMapper(ast, parameters);
 //
-//        mapper.getPerformance();
+//        mapper.measurePerformance();
 //    }
 
     @Test
@@ -734,8 +734,11 @@ public class PerformanceMapperTest {
         configuration.add("B");
         configurationToPerformance.put(configuration, 6);
 
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.getPerformance(program));
+        Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
     }
 
     @Test
@@ -758,8 +761,11 @@ public class PerformanceMapperTest {
         configuration.add("B");
         configurationToPerformance.put(configuration, 4);
 
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.getPerformance(program));
+        Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
     }
 
     @Test
@@ -782,8 +788,11 @@ public class PerformanceMapperTest {
         configuration.add("B");
         configurationToPerformance.put(configuration, 10);
 
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.getPerformance(program));
+        Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
     }
 
     @Test
@@ -796,9 +805,21 @@ public class PerformanceMapperTest {
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        configurationToPerformance.put(configuration, 8);
+        configurationToPerformance.put(configuration, 10);
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.getPerformance(program));
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configurationToPerformance.put(configuration, 9);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configurationToPerformance.put(configuration, 7);
+
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
+
+        Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
     }
 
     @Test
@@ -821,8 +842,11 @@ public class PerformanceMapperTest {
         configuration.add("B");
         configurationToPerformance.put(configuration, 4);
 
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.getPerformance(program));
+        Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
     }
 
     @Test
@@ -831,7 +855,12 @@ public class PerformanceMapperTest {
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.getPerformance(program));
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
+        parameters.add(new ExpressionConfigurationConstant("C"));
+
+        Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
     }
 
 

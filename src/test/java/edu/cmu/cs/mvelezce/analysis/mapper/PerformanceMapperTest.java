@@ -21,24 +21,6 @@ import java.util.Set;
  * Created by miguelvelez on 2/11/17.
  */
 public class PerformanceMapperTest {
-//    @Test
-//    public void computeAll1() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program10");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        Set<String> parameters = new HashSet<>();
-//        parameters.add("A");
-//        parameters.add("B");
-//        parameters.add("C");
-//        parameters.add("D");
-//
-//        PerformanceMapper mapper = new PerformanceMapper(ast, parameters);
-//
-//        mapper.measurePerformance();
-//    }
-
     @Test
     public void getConfigurationsInRelevantStatements1() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
@@ -110,6 +92,7 @@ public class PerformanceMapperTest {
         taintingOptions.add(new ExpressionConfigurationConstant("B"));
         relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
+        // TODO track that !b depends on A because implicit flow
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
     }
@@ -280,6 +263,7 @@ public class PerformanceMapperTest {
         taintingOptions.add(new ExpressionConfigurationConstant("B"));
         relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
+        // TODO track that sleep(x) depends on C because implicit flow
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
         System.out.println(relevantStatementToOptions);
     }
@@ -371,7 +355,6 @@ public class PerformanceMapperTest {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
-
         Set<ExpressionConfigurationConstant> options = new HashSet<>();
         options.add(new ExpressionConfigurationConstant("A"));
         options.add(new ExpressionConfigurationConstant("B"));
@@ -394,16 +377,22 @@ public class PerformanceMapperTest {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
+        Set<String> configuration = new HashSet<>();
+        configurationsToExecute.add(configuration);
 
-        Set<ExpressionConfigurationConstant> options = new HashSet<>();
-        options.add(new ExpressionConfigurationConstant("A"));
-        options.add(new ExpressionConfigurationConstant("B"));
-        configurationsToExecute.addAll(Helper.getConfigurations(options));
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configurationsToExecute.add(configuration);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configurationsToExecute.add(configuration);
 
         Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-        // TODO can do better
+
         System.out.println(configurationsToExecute);
     }
 
@@ -418,12 +407,12 @@ public class PerformanceMapperTest {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
-
         Set<ExpressionConfigurationConstant> options = new HashSet<>();
         options.add(new ExpressionConfigurationConstant("A"));
         options.add(new ExpressionConfigurationConstant("B"));
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
+        // TODO can it be improved to not run all?
         Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
@@ -441,7 +430,6 @@ public class PerformanceMapperTest {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
-
         configurationsToExecute.add(new HashSet<>());
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -465,12 +453,12 @@ public class PerformanceMapperTest {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
-
         Set<ExpressionConfigurationConstant> options = new HashSet<>();
         options.add(new ExpressionConfigurationConstant("A"));
         options.add(new ExpressionConfigurationConstant("B"));
         configurationsToExecute.addAll(Helper.getConfigurations(options));
 
+        // TODO can it be improved to not run all?
         Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
         Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
@@ -488,7 +476,6 @@ public class PerformanceMapperTest {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
         Set<Set<String>> configurationsToExecute = new HashSet<>();
-
         Set<ExpressionConfigurationConstant> options = new HashSet<>();
         options.add(new ExpressionConfigurationConstant("A"));
         options.add(new ExpressionConfigurationConstant("B"));
@@ -727,6 +714,7 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("B"));
 
         Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
+        System.out.println(configurationToPerformance);
     }
 
     @Test
@@ -753,7 +741,9 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("A"));
         parameters.add(new ExpressionConfigurationConstant("B"));
 
+        // TODO must calculate B
         Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
+        System.out.println(configurationToPerformance);
     }
 
     @Test
@@ -781,6 +771,7 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("B"));
 
         Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
+        System.out.println(configurationToPerformance);
     }
 
     @Test
@@ -836,6 +827,7 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("B"));
 
         Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
+        System.out.println(configurationToPerformance);
     }
 
     @Test
@@ -843,6 +835,40 @@ public class PerformanceMapperTest {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
+        configurationToPerformance.put(new HashSet<>(), 0);
+
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+        configurationToPerformance.put(configuration, 0);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configurationToPerformance.put(configuration, 0);
+
+        configuration = new HashSet<>();
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 0);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configurationToPerformance.put(configuration, 0);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 5);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 1);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 6);
 
         Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
         parameters.add(new ExpressionConfigurationConstant("A"));
@@ -850,6 +876,7 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("C"));
 
         Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
+        System.out.println(configurationToPerformance);
     }
 
     @Test

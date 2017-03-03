@@ -47,24 +47,6 @@ public class StatementAssignment extends Statement {
     public Expression getRight() { return this.right; }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        StatementAssignment that = (StatementAssignment) o;
-
-        if (!variable.equals(that.variable)) return false;
-        return right != null ? right.equals(that.right) : that.right == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = variable.hashCode();
-        result = 31 * result + (right != null ? right.hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public String toString() { return this.variable + "=" + this.right; }
 
 }

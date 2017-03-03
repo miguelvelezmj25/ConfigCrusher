@@ -23,22 +23,15 @@ public class Interpreter implements Visitor<ValueInt, Void> {
     private Map<Statement, Integer> timedBlocks;
 
     public Interpreter(Statement ast) {
-        this.reset();
+        this.store = new HashMap<>();
+        this.totalExecutionTime = 0;
+        this.timedBlocks = new HashMap<>();
         this.ast = ast;
         this.activatedConfigurations = null;
     }
 
-    private void reset() {
-        this.store = new HashMap<>();
-        this.totalExecutionTime = 0;
-        this.timedBlocks = new HashMap<>();
-    }
-
-    // TODO this seems weird
     public void evaluate(Set<String> activatedConfigurations) {
-        this.reset();
         this.activatedConfigurations = activatedConfigurations;
-
         this.ast.accept(this);
     }
 

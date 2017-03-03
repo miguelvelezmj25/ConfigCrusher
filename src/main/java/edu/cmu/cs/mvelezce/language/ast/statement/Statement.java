@@ -21,4 +21,8 @@ public abstract class Statement extends Node {
      */
     public abstract <T,U> U accept(Visitor<T,U> visitor);
 
+//    public abstract boolean myEquals(Object o);
+//
+//    public abstract int myHashCode();
+
 }

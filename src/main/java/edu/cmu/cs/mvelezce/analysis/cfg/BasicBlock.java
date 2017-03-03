@@ -45,11 +45,19 @@ public class BasicBlock {
 
     /**
      * Initializes a {@code Basic Block} without conditions.
-     * @param id
+     * @param statement
+     * @param conditions
+     */
+    public BasicBlock(Statement statement, List<Expression> conditions) {
+        this(statement.toString(), statement, conditions);
+    }
+
+    /**
+     * Initializes a {@code Basic Block} without conditions.
      * @param statement
      */
-    public BasicBlock(String id, Statement statement) {
-        this(id, statement, new ArrayList<>());
+    public BasicBlock(Statement statement) {
+        this(statement, new ArrayList<>());
     }
 
     /**
@@ -57,7 +65,7 @@ public class BasicBlock {
      * @param id
      */
     public BasicBlock(String id) {
-        this(id, null);
+        this(id, null, new ArrayList<>());
     }
 
     /**
@@ -84,26 +92,6 @@ public class BasicBlock {
      * @return
      */
     public List<Expression> getConditions() { return this.conditions; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BasicBlock that = (BasicBlock) o;
-
-        if (!id.equals(that.id)) return false;
-        if (statement != null ? !statement.equals(that.statement) : that.statement != null) return false;
-        return conditions.equals(that.conditions);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (statement != null ? statement.hashCode() : 0);
-        result = 31 * result + conditions.hashCode();
-        return result;
-    }
 
     @Override
     public String toString() {

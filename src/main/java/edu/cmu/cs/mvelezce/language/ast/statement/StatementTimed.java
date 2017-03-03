@@ -32,20 +32,5 @@ public class StatementTimed extends Statement {
     public Statement getStatements() { return this.statements; }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        StatementTimed that = (StatementTimed) o;
-
-        return statements.equals(that.statements);
-    }
-
-    @Override
-    public int hashCode() {
-        return statements.hashCode();
-    }
-
-    @Override
     public String toString() { return "Time: " + this.statements; }
 }

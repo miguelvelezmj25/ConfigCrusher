@@ -34,20 +34,5 @@ public class StatementSleep extends Statement {
     public Expression getTime() { return this.time; }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        StatementSleep that = (StatementSleep) o;
-
-        return time.equals(that.time);
-    }
-
-    @Override
-    public int hashCode() {
-        return time.hashCode();
-    }
-
-    @Override
     public String toString() { return "sleep(" + this.time + ")"; }
 }

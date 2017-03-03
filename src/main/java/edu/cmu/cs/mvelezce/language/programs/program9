@@ -1,0 +1,6 @@
+a=A
+sleep(a)
+if(a) {
+    a = a + 1
+    sleep(a)
+}

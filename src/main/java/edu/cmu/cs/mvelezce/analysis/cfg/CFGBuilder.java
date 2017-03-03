@@ -18,7 +18,6 @@ import java.util.Stack;
  * @version 0.1.0.1
  */
 public class CFGBuilder extends VisitorReturner {
-    private int steps;
     private CFG cfg;
     private BasicBlock currentBasicBlock;
     private Stack<BasicBlock> branchStack;
@@ -30,7 +29,6 @@ public class CFGBuilder extends VisitorReturner {
      * Initializes a {@code CFGBuilder}.
      */
     public CFGBuilder() {
-        this.steps = 0;
         this.cfg = new CFG();
         this.currentBasicBlock = this.cfg.getEntry();
         this.branchStack = new Stack<>();
@@ -171,7 +169,7 @@ public class CFGBuilder extends VisitorReturner {
         BasicBlock basicBlock;
 
         if(this.conditionStack.isEmpty()) {
-            basicBlock = new BasicBlock(this.steps++ + "| " + statement, statement);
+            basicBlock = new BasicBlock(statement);
         }
         else {
             this.currentConditions = new ArrayList<>();
@@ -181,7 +179,7 @@ public class CFGBuilder extends VisitorReturner {
 
             // TODO should we reverse this list? If it is reverse, we know what is the first condition for this statement, specially in nested ifs
 //            Collections.reverse(this.currentConditions);
-            basicBlock = new BasicBlock(this.steps++ + "| " + statement, statement, this.currentConditions);
+            basicBlock = new BasicBlock(statement, this.currentConditions);
         }
 
         this.cfg.addEdge(this.currentBasicBlock, basicBlock);

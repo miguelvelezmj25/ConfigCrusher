@@ -167,24 +167,12 @@ public class PerformanceMapperTest {
         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
         relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
-        for(int i = 4; i < 5; i++) {
-            successor = cfg.getSuccessors(successor).get(0);
-        }
-
-        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
-
-        for(int i = 5; i < 6; i++) {
+        for(int i = 4; i < 6; i++) {
             successor = cfg.getSuccessors(successor).get(0);
         }
 
         taintingOptions = new HashSet<>();
         taintingOptions.add(new ExpressionConfigurationConstant("B"));
-        relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
-
-        for(int i = 6; i < 7; i++) {
-            successor = cfg.getSuccessors(successor).get(0);
-        }
-
         relevantStatementToOptions.put(successor.getStatement(), taintingOptions);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
@@ -820,6 +808,7 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("B"));
 
         Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
+        System.out.println(configurationToPerformance);
     }
 
     @Test
@@ -863,6 +852,148 @@ public class PerformanceMapperTest {
         Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
     }
 
+    @Test
+    public void calculatePerformance7() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program7");
+
+        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
+        configurationToPerformance.put(new HashSet<>(), 0);
+
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+        configurationToPerformance.put(configuration, 1);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configurationToPerformance.put(configuration, 2);
+
+        configuration = new HashSet<>();
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 0);
+
+        configuration = new HashSet<>();
+        configuration.add("D");
+        configurationToPerformance.put(configuration, 0);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configurationToPerformance.put(configuration, 3);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 1);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("D");
+        configurationToPerformance.put(configuration, 1);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 2);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("D");
+        configurationToPerformance.put(configuration, 2);
+
+        configuration = new HashSet<>();
+        configuration.add("C");
+        configuration.add("D");
+        configurationToPerformance.put(configuration, 3);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 3);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("D");
+        configurationToPerformance.put(configuration, 3);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        configuration.add("D");
+        configurationToPerformance.put(configuration, 4);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        configuration.add("D");
+        configurationToPerformance.put(configuration, 5);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        configuration.add("D");
+        configurationToPerformance.put(configuration, 6);
+
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
+        parameters.add(new ExpressionConfigurationConstant("C"));
+        parameters.add(new ExpressionConfigurationConstant("D"));
+
+        Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
+        System.out.println(configurationToPerformance);
+    }
+
+    @Test
+    public void calculatePerformance8() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program8");
+
+        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
+        configurationToPerformance.put(new HashSet<>(), 0);
+
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+        configurationToPerformance.put(configuration, 1);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configurationToPerformance.put(configuration, 1);
+
+        configuration = new HashSet<>();
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 0);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configurationToPerformance.put(configuration, 1);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 4);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 1);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        configurationToPerformance.put(configuration, 4);
+
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
+        parameters.add(new ExpressionConfigurationConstant("C"));
+
+        Assert.assertEquals(configurationToPerformance, PerformanceMapper.measurePerformance(program, parameters));
+        System.out.println(configurationToPerformance);
+    }
 
 
 //    @Test

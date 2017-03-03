@@ -65,60 +65,58 @@ public class PerformanceMapper {
         Map<Set<String>, Integer> performanceMap = new HashMap<>();
 
         for(Set<String> configuration : powerSet) {
-            System.out.println();
-            System.out.println(configuration);
-
             if(measuredPerformanceMap.containsKey(configuration)) {
                 performanceMap.put(configuration, measuredPerformanceMap.get(configuration));
                 continue;
             }
 
-            System.out.println("HAVE TO CALCULATE");
+            System.out.println("Have to calculate: " + configuration);
             Map<Statement, Integer> predictedBlockToTime = new HashMap<>();
 
+            int totalTime = 0;
+            // Predicting each relevant block at a time
             for(Map.Entry<Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementsToOptions.entrySet()) {
-                Set<ExpressionConfigurationConstant> statementDependsOn = entry.getValue();
-                Set<String> statementDependsOnConvenient = new HashSet<>();
+                Set<ExpressionConfigurationConstant> affectingOptions = entry.getValue();
+                Set<String> affectingOptionsConvenient = new HashSet<>();
 
-                for(ExpressionConfigurationConstant option : statementDependsOn) {
-                    statementDependsOnConvenient.add(option.getName());
+                // Compare with actual string values
+                for(ExpressionConfigurationConstant option : affectingOptions) {
+                    affectingOptionsConvenient.add(option.getName());
                 }
 
                 for(PerformanceEntry performanceEntry : configurationsToPerformance) {
+                    Set<String> valuesOfAffectingOptionsInConfiguration = new HashSet<>(affectingOptionsConvenient);
+                    valuesOfAffectingOptionsInConfiguration.retainAll(configuration);
 
-                    Set<String> a = new HashSet<>(statementDependsOnConvenient);
-                    a.retainAll(configuration);
+                    Set<String> valuesOfAffectionOptionsInMeasuredConfiguration = new HashSet<>(affectingOptionsConvenient);
+                    valuesOfAffectionOptionsInMeasuredConfiguration.retainAll(performanceEntry.getConfiguration());
 
-                    Set<String> b = new HashSet<>(performanceEntry.getConfiguration());
-                    b.retainAll(statementDependsOnConvenient);
-
-                    if(b.equals(a)) {
+                    // If the current measured configuration has the same configuration in this block
+                    if(valuesOfAffectionOptionsInMeasuredConfiguration.equals(valuesOfAffectingOptionsInConfiguration)) {
                         if(entry.getKey() instanceof StatementIf) {
                             StatementIf statementIf = (StatementIf) entry.getKey();
-                            if(performanceEntry.getBlockToTime().containsKey(statementIf.getThenBlock())) {
-                                predictedBlockToTime.put(statementIf, performanceEntry.getBlockToTime().get(statementIf.getThenBlock()));
+                            Integer time = performanceEntry.getBlockToTime().get(statementIf.getThenBlock());
+
+                            if(time != null) {
+                                predictedBlockToTime.put(statementIf, time);
                             }
                         }
-                        else {
+                        else if(entry.getKey() instanceof StatementSleep) {
                             // TODO sleep statement
                         }
+
+                        totalTime = performanceEntry.getBaseTime();
                         break;
                     }
                 }
             }
 
-            System.out.println(predictedBlockToTime);
-            int totalTime = PerformanceEntry.getBaseTime();
             for(Map.Entry<Statement, Integer> entry : predictedBlockToTime.entrySet()) {
                 totalTime += entry.getValue();
             }
 
             performanceMap.put(configuration, totalTime);
         }
-
-        System.out.println();
-        System.out.println("AND THE TABLE IS");
-        System.out.println(performanceMap);
 
         return performanceMap;
     }
@@ -357,14 +355,17 @@ public class PerformanceMapper {
         private Set<String> configuration;
         private Map<Statement, Integer> blockToTime;
         private int totalTime;
-        private static int baseTime = -1; // TODO this looks weird
+        private int baseTime;
 
         public PerformanceEntry(Set<String> configuration, Map<Statement, Integer> blockToTime, int totalTime) {
             this.configuration = configuration;
             this.blockToTime = blockToTime;
             this.totalTime = totalTime;
+            this.baseTime = totalTime;
 
-            PerformanceEntry.calculateBaseTime(blockToTime,totalTime);
+            for(Map.Entry<Statement, Integer> entry : this.blockToTime.entrySet()) {
+                this.baseTime -= entry.getValue();
+            }
         }
 
         public Set<String> getConfiguration() { return this.configuration; }
@@ -373,14 +374,8 @@ public class PerformanceMapper {
 
         public int getTotalTime() { return this.totalTime; }
 
-        public static int getBaseTime() { return PerformanceEntry.baseTime; }
+        public int getBaseTime() { return this.baseTime; }
 
-        private static void calculateBaseTime(Map<Statement, Integer> blockToTime, int totalTime) {
-            PerformanceEntry.baseTime = totalTime;
-            for(Map.Entry<Statement, Integer> entry : blockToTime.entrySet()) {
-                PerformanceEntry.baseTime -= entry.getValue();
-            }
-        }
 
         @Override
         public boolean equals(Object o) {

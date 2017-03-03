@@ -109,7 +109,7 @@ public class InterpreterTest {
         interpreter.evaluate(activatedConfigurations);
 
         Assert.assertEquals(store, interpreter.getStore());
-        Assert.assertEquals(8, interpreter.getTotalExecutionTime());
+        Assert.assertEquals(10, interpreter.getTotalExecutionTime());
     }
 
     @Test

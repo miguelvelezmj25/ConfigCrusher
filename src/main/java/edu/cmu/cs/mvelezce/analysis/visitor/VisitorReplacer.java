@@ -84,7 +84,7 @@ public class VisitorReplacer implements Visitor<Expression, Statement> {
             return statementAssignment;
         }
 
-        return new StatementAssignment(variable, statementAssignment.getOperation(), right);
+        return new StatementAssignment(variable, right);
     }
 
     @Override

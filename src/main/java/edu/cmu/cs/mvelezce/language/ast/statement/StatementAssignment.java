@@ -12,20 +12,11 @@ import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
  */
 public class StatementAssignment extends Statement {
     private ExpressionVariable variable;
-    private String operation;
     private Expression right;
 
-    public StatementAssignment(ExpressionVariable variable, String operation, Expression right) {
+    public StatementAssignment(ExpressionVariable variable, Expression right) {
         if(variable == null) {
             throw new IllegalArgumentException("The variable cannot be null");
-        }
-
-        if(operation == null) {
-            throw new IllegalArgumentException("The operation cannot be null");
-        }
-
-        if(!operation.equals("=")) {
-            throw new IllegalArgumentException("The operation must be '='");
         }
 
         if(right == null) {
@@ -33,7 +24,6 @@ public class StatementAssignment extends Statement {
         }
 
         this.variable = variable;
-        this.operation = operation;
         this.right = right;
     }
 
@@ -50,19 +40,11 @@ public class StatementAssignment extends Statement {
     public ExpressionVariable getVariable() { return this.variable; }
 
     /**
-     * Returns the operation of the assignment.
-     *
-     * @return
-     */
-    public String getOperation() { return this.operation; }
-
-    /**
      * Returns the expression of the assignment.
      *
      * @return
      */
     public Expression getRight() { return this.right; }
-
 
     @Override
     public boolean equals(Object o) {
@@ -72,19 +54,17 @@ public class StatementAssignment extends Statement {
         StatementAssignment that = (StatementAssignment) o;
 
         if (!variable.equals(that.variable)) return false;
-        if (!operation.equals(that.operation)) return false;
-        return right.equals(that.right);
+        return right != null ? right.equals(that.right) : that.right == null;
     }
 
     @Override
     public int hashCode() {
         int result = variable.hashCode();
-        result = 31 * result + operation.hashCode();
-        result = 31 * result + right.hashCode();
+        result = 31 * result + (right != null ? right.hashCode() : 0);
         return result;
     }
 
     @Override
-    public String toString() { return this.variable + this.operation + this.right; }
+    public String toString() { return this.variable + "=" + this.right; }
 
 }

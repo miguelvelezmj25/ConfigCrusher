@@ -42,9 +42,8 @@ public class Parser {
 
             token = this.currentToken;
             this.checkToken(Tag.EQUAL);
-            String operation = token.getValue();
 
-            return new StatementAssignment(variable, operation, this.expr());
+            return new StatementAssignment(variable, this.expr());
         }
 
         if(this.currentToken.getTag() == Tag.IF) {

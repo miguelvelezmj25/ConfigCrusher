@@ -707,7 +707,7 @@ public class TaintAnalysisTest {
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("a"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConfigurationConstant("C")));
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), new ExpressionConfigurationConstant("C")));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(new HashSet<>(), basicBlock));
     }
@@ -723,7 +723,7 @@ public class TaintAnalysisTest {
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("a"), configurations));
         set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("b"), configurations));
-        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConfigurationConstant("C")));
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), new ExpressionConfigurationConstant("C")));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(set1, basicBlock));
     }
@@ -735,7 +735,7 @@ public class TaintAnalysisTest {
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("a"), configurations));
-        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=", new ExpressionConstantInt(0)));
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), new ExpressionConstantInt(0)));
 
         Assert.assertEquals(new HashSet<>(), TaintAnalysis.transfer(set1, basicBlock));
     }
@@ -752,7 +752,7 @@ public class TaintAnalysisTest {
         set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations));
 
         List<Statement> statements = new LinkedList<>();
-        statements.add(new StatementAssignment(new ExpressionVariable("x"), "=", new ExpressionConstantInt(0)));
+        statements.add(new StatementAssignment(new ExpressionVariable("x"), new ExpressionConstantInt(0)));
 
         StatementIf statementIf = new StatementIf(new ExpressionVariable("a"), new StatementBlock(statements));
 
@@ -782,7 +782,7 @@ public class TaintAnalysisTest {
         set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("x"), configurations));
 
         List<Statement> statements = new LinkedList<>();
-        statements.add(new StatementAssignment(new ExpressionVariable("x"), "=", new ExpressionConstantInt(0)));
+        statements.add(new StatementAssignment(new ExpressionVariable("x"), new ExpressionConstantInt(0)));
 
         StatementIf statementIf = new StatementIf(new ExpressionBinary(new ExpressionVariable("a"), "+", new ExpressionVariable("b")),
                 new StatementBlock(statements));
@@ -811,7 +811,7 @@ public class TaintAnalysisTest {
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("a"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("b"), "=",
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("b"),
                 new ExpressionVariable("a")));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(set1, basicBlock));
@@ -825,7 +825,7 @@ public class TaintAnalysisTest {
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("a"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=",
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"),
                 new ExpressionBinary(new ExpressionConstantInt(1), "+", new ExpressionConfigurationConstant("C"))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(new HashSet<>(), basicBlock));
@@ -839,7 +839,7 @@ public class TaintAnalysisTest {
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("a"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"), "=",
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("a"),
                 new ExpressionBinary(new ExpressionVariable("b"), "+", new ExpressionConfigurationConstant("C"))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(new HashSet<>(), basicBlock));
@@ -859,7 +859,7 @@ public class TaintAnalysisTest {
         set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("a"), configurations));
         set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("b"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("d"), "=",
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("d"),
                 new ExpressionBinary(new ExpressionVariable("b"), "+", new ExpressionVariable("a"))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(set1, basicBlock));
@@ -877,7 +877,7 @@ public class TaintAnalysisTest {
         set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("a"), configurations));
         set1.add(new TaintAnalysis.PossibleTaint(new ExpressionVariable("b"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("b"), "=",
+        BasicBlock basicBlock = new BasicBlock("1", new StatementAssignment(new ExpressionVariable("b"),
                 new ExpressionBinary(new ExpressionVariable("x"), "+", new ExpressionConstantInt(2))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(set1, basicBlock));

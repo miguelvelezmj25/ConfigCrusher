@@ -32,94 +32,112 @@ public class PerformanceMapper {
             add(StatementIf.class);
         }
     };
-    
-    public static Map<Set<String>, Integer> measurePerformance(String program, Set<ExpressionConfigurationConstant> parameters) {
-        Map<Set<String>, Integer> measuredPerformanceMap = new HashMap<>();
 
+    public static Map<Set<String>, Integer> calculatePerformance(String program, Set<ExpressionConfigurationConstant> parameters) {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(ast);
-
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
 
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions =
+                PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         ast = PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, relevantStatementsToOptions.keySet());
-        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantStatementsToOptions);
+        Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantStatementsToOptions.values());
+        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptions);
+
+        Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measurePerformance(ast, configurationsToExecute);
+        Map<Set<String>, Integer> precitedAllPerformance = null;
+//                PerformanceMapper.predictPerformanceForAllConfigurations(parameters, relevantOptions, measuredPerformance);
+
+        return precitedAllPerformance;
+    }
+
+    public static Set<PerformanceEntry> measurePerformance(Statement ast, Set<Set<String>> configurationsToExecute) {
         Interpreter interpreter = new Interpreter(ast);
 
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 
-        for(Set<String> configuration : configurationsToExecute) {
+        for (Set<String> configuration : configurationsToExecute) {
             interpreter.evaluate(configuration);
-            measuredPerformanceMap.put(configuration, interpreter.getTotalExecutionTime());
-
             configurationsToPerformance.add(new PerformanceEntry(configuration, interpreter.getTimedBlocks(), interpreter.getTotalExecutionTime()));
 
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
 
-        Set<Set<String>> powerSet = Helper.getConfigurations(parameters);
-        Map<Set<String>, Integer> performanceMap = new HashMap<>();
-
-        for(Set<String> configuration : powerSet) {
-            if(measuredPerformanceMap.containsKey(configuration)) {
-                performanceMap.put(configuration, measuredPerformanceMap.get(configuration));
-                continue;
-            }
-
-            System.out.println("Have to calculate: " + configuration);
-            Map<Statement, Integer> predictedBlockToTime = new HashMap<>();
-
-            int totalTime = 0;
-            // Predicting each relevant block at a time
-            for(Map.Entry<Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementsToOptions.entrySet()) {
-                Set<ExpressionConfigurationConstant> affectingOptions = entry.getValue();
-                Set<String> affectingOptionsConvenient = new HashSet<>();
-
-                // Compare with actual string values
-                for(ExpressionConfigurationConstant option : affectingOptions) {
-                    affectingOptionsConvenient.add(option.getName());
-                }
-
-                for(PerformanceEntry performanceEntry : configurationsToPerformance) {
-                    Set<String> valuesOfAffectingOptionsInConfiguration = new HashSet<>(affectingOptionsConvenient);
-                    valuesOfAffectingOptionsInConfiguration.retainAll(configuration);
-
-                    Set<String> valuesOfAffectionOptionsInMeasuredConfiguration = new HashSet<>(affectingOptionsConvenient);
-                    valuesOfAffectionOptionsInMeasuredConfiguration.retainAll(performanceEntry.getConfiguration());
-
-                    // If the current measured configuration has the same configuration in this block
-                    if(valuesOfAffectionOptionsInMeasuredConfiguration.equals(valuesOfAffectingOptionsInConfiguration)) {
-                        if(entry.getKey() instanceof StatementIf) {
-                            StatementIf statementIf = (StatementIf) entry.getKey();
-                            Integer time = performanceEntry.getBlockToTime().get(statementIf.getThenBlock());
-
-                            if(time != null) {
-                                predictedBlockToTime.put(statementIf, time);
-                            }
-                        }
-                        else if(entry.getKey() instanceof StatementSleep) {
-                            // TODO sleep statement
-                        }
-
-                        totalTime = performanceEntry.getBaseTime();
-                        break;
-                    }
-                }
-            }
-
-            for(Map.Entry<Statement, Integer> entry : predictedBlockToTime.entrySet()) {
-                totalTime += entry.getValue();
-            }
-
-            performanceMap.put(configuration, totalTime);
-        }
-
-        return performanceMap;
+        return configurationsToPerformance;
     }
+
+//    public static Map<Set<String>, Integer> predictPerformanceForAllConfigurations(
+//            Set<ExpressionConfigurationConstant> parameters, Set<Set<ExpressionConfigurationConstant>> relevantOptions,
+//            Set<PerformanceEntry> measuredPerformance) {
+//        Set<Set<String>> powerSet = Helper.getConfigurations(parameters);
+//        Map<Set<String>, Integer> performanceMap = new HashMap<>();
+//
+//        for(Set<String> configuration : powerSet) {
+//            boolean calculatedConfiguration = false;
+//            for(PerformanceEntry entry : measuredPerformance) {
+//                if (entry.getConfiguration().equals(configuration)) {
+//                    performanceMap.put(configuration, entry.getTotalTime());
+//                    calculatedConfiguration = true;
+//                    break;
+//                }
+//            }
+//
+//            if(calculatedConfiguration) { continue; }
+//
+//            System.out.println("Have to calculate: " + configuration);
+//            Map<Statement, Integer> predictedBlockToTime = new HashMap<>();
+//
+//            int totalTime = 0;
+//            // Predicting each relevant block at a time
+//            for(Set<ExpressionConfigurationConstant> entry : relevantStatementsToOptions.entrySet()) {
+//                Set<ExpressionConfigurationConstant> affectingOptions = entry.getValue();
+//                Set<String> affectingOptionsConvenient = new HashSet<>();
+//
+//                // Compare with actual string values
+//                for(ExpressionConfigurationConstant option : affectingOptions) {
+//                    affectingOptionsConvenient.add(option.getName());
+//                }
+//
+//                for(PerformanceEntry performanceEntry : configurationsToPerformance) {
+//                    Set<String> valuesOfAffectingOptionsInConfiguration = new HashSet<>(affectingOptionsConvenient);
+//                    valuesOfAffectingOptionsInConfiguration.retainAll(configuration);
+//
+//                    Set<String> valuesOfAffectionOptionsInMeasuredConfiguration = new HashSet<>(affectingOptionsConvenient);
+//                    valuesOfAffectionOptionsInMeasuredConfiguration.retainAll(performanceEntry.getConfiguration());
+//
+//                    // If the current measured configuration has the same configuration in this block
+//                    if(valuesOfAffectionOptionsInMeasuredConfiguration.equals(valuesOfAffectingOptionsInConfiguration)) {
+//                        if(entry.getKey() instanceof StatementIf) {
+//                            StatementIf statementIf = (StatementIf) entry.getKey();
+//                            Integer time = performanceEntry.getBlockToTime().get(statementIf.getThenBlock());
+//
+//                            if(time != null) {
+//                                predictedBlockToTime.put(statementIf, time);
+//                            }
+//                        }
+//                        else if(entry.getKey() instanceof StatementSleep) {
+//                            // TODO sleep statement
+//                        }
+//
+//                        totalTime = performanceEntry.getBaseTime();
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            for(Map.Entry<Statement, Integer> entry : predictedBlockToTime.entrySet()) {
+//                totalTime += entry.getValue();
+//            }
+//
+//            performanceMap.put(configuration, totalTime);
+//        }
+//
+//        return performanceMap;
+//    }
 
     public static Map<Statement, Set<ExpressionConfigurationConstant>> getRelevantStatementsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
@@ -138,41 +156,41 @@ public class PerformanceMapper {
         return relevantStatementToOptions;
     }
 
-    public static Set<Set<String>> getConfigurationsToExecute(Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions) {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>();
+    public static Set<Set<String>> getConfigurationsToExecute(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
+        Set<Set<ExpressionConfigurationConstant>> relevantUniqueOptions = new HashSet<>();
 
-        // Calculates which options are included in other options
-        for(Map.Entry <Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementToOptions.entrySet()) {
-            if(relevantOptions.isEmpty()) {
-                relevantOptions.add(entry.getValue());
+        // Calculates which options are subsets of other options
+        for(Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
+            if(relevantUniqueOptions.isEmpty()) {
+                relevantUniqueOptions.add(relevantOptions);
                 continue;
             }
 
             Set<Set<ExpressionConfigurationConstant>> toRemove = new HashSet<>();
             Set<Set<ExpressionConfigurationConstant>> toAdd = new HashSet<>();
 
-            for(Set<ExpressionConfigurationConstant> options : relevantOptions) {
-                if(options.equals(entry.getValue()) || options.containsAll(entry.getValue())) {
-                    toAdd.remove(entry.getValue());
+            for(Set<ExpressionConfigurationConstant> options : relevantUniqueOptions) {
+                if(options.equals(relevantOptions) || options.containsAll(relevantOptions)) {
+                    toAdd.remove(relevantOptions);
                     break;
                 }
 
-                if(!options.containsAll(entry.getValue()) && entry.getValue().containsAll(options)) {
+                if(!options.containsAll(relevantOptions) && relevantOptions.containsAll(options)) {
                     toRemove.add(options);
                 }
 
-                toAdd.add(entry.getValue());
+                toAdd.add(relevantOptions);
 
             }
 
-            relevantOptions.removeAll(toRemove);
-            relevantOptions.addAll(toAdd);
+            relevantUniqueOptions.removeAll(toRemove);
+            relevantUniqueOptions.addAll(toAdd);
         }
 
         // Get the configurations for each option
         Map<Set<ExpressionConfigurationConstant>, Set<Set<String>>> optionsToConfigurationsToExecute = new HashMap<>();
 
-        for(Set<ExpressionConfigurationConstant> option : relevantOptions) {
+        for(Set<ExpressionConfigurationConstant> option : relevantUniqueOptions) {
             Set<Set<String>> configurationsToExecuteForOption = new HashSet<>();
             configurationsToExecuteForOption.addAll(Helper.getConfigurations(option));
             optionsToConfigurationsToExecute.put(option, configurationsToExecuteForOption);
@@ -191,17 +209,53 @@ public class PerformanceMapper {
         }
 
         Iterator<Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator = optionsToConfigurationsToExecute.entrySet().iterator();
-        Iterator<Set<String>> set1 = optionsToConfigurationsToExecuteIterator.next().getValue().iterator();
+        Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry1 = optionsToConfigurationsToExecuteIterator.next();
 
         while(optionsToConfigurationsToExecuteIterator.hasNext()) {
+            Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry2 = optionsToConfigurationsToExecuteIterator.next();
+
+            Set<ExpressionConfigurationConstant> pivotOptions = new HashSet<>(entry1.getKey());
+            pivotOptions.retainAll(entry2.getKey());
+
+            Set<String> pivotOptionsConvenient = new HashSet<>();
+
+            for(ExpressionConfigurationConstant expressionConfigurationConstant : pivotOptions) {
+                pivotOptionsConvenient.add(expressionConfigurationConstant.getName());
+            }
+
             configurationsToExecute = new HashSet<>();
-            Iterator<Set<String>> set2 = optionsToConfigurationsToExecuteIterator.next().getValue().iterator();
+            Iterator<Set<String>> set1 = entry1.getValue().iterator();
+            Iterator<Set<String>> set2 = entry2.getValue().iterator();
 
             while (set1.hasNext() && set2.hasNext()) {
-                Set<String> hold = new HashSet<>(set1.next());
-                hold.addAll(set2.next());
+                Set<String> configurationInSet1 = set1.next();
 
-                configurationsToExecute.add(hold);
+                Set<String> valuePivotOptionsInSet1 = new HashSet<>(configurationInSet1);
+                valuePivotOptionsInSet1.retainAll(pivotOptionsConvenient);
+                boolean merged = false;
+
+                while(set2.hasNext()) {
+                    Set<String> configurationInSet2 = set2.next();
+
+                    Set<String> valuePivotOptionsInSet2 = new HashSet<>(configurationInSet2);
+                    valuePivotOptionsInSet2.retainAll(pivotOptionsConvenient);
+
+                    if(valuePivotOptionsInSet1.equals(valuePivotOptionsInSet2)) {
+                        Set<String> compressedConfiguration = new HashSet<>(configurationInSet1);
+                        compressedConfiguration.addAll(configurationInSet2);
+                        configurationsToExecute.add(compressedConfiguration);
+
+                        entry2.getValue().remove(configurationInSet2);
+                        merged = true;
+                        break;
+                    }
+                }
+
+                if(!merged) {
+                    throw new IllegalArgumentException("Bye");
+                }
+
+                set2 = entry2.getValue().iterator();
             }
 
             while (set1.hasNext()) {
@@ -212,6 +266,7 @@ public class PerformanceMapper {
                 configurationsToExecute.add(set2.next());
             }
 
+//            System.out.println(configurationsToExecute);
             set1 = configurationsToExecute.iterator();
         }
 
@@ -375,27 +430,6 @@ public class PerformanceMapper {
         public int getTotalTime() { return this.totalTime; }
 
         public int getBaseTime() { return this.baseTime; }
-
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            PerformanceEntry that = (PerformanceEntry) o;
-
-            if (totalTime != that.totalTime) return false;
-            if (!configuration.equals(that.configuration)) return false;
-            return blockToTime.equals(that.blockToTime);
-        }
-
-        @Override
-        public int hashCode() {
-            int result = configuration.hashCode();
-            result = 31 * result + blockToTime.hashCode();
-            result = 31 * result + totalTime;
-            return result;
-        }
 
         @Override
         public String toString() {

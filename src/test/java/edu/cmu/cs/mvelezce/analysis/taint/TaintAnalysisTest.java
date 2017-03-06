@@ -1,13 +1,8 @@
 package edu.cmu.cs.mvelezce.analysis.taint;
 
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
-import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
-import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
-import edu.cmu.cs.mvelezce.language.Helper;
 import edu.cmu.cs.mvelezce.language.ast.expression.*;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
-import edu.cmu.cs.mvelezce.language.lexer.Lexer;
-import edu.cmu.cs.mvelezce.language.parser.Parser;
 import org.junit.Assert;
 import org.junit.Test;
 

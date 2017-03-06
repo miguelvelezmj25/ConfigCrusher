@@ -2,10 +2,7 @@ package edu.cmu.cs.mvelezce.analysis.mapper;
 
 import edu.cmu.cs.mvelezce.analysis.Helper;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
-import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
-import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
-import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConstantInt;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
@@ -13,8 +10,7 @@ import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.language.ast.statement.StatementBlock;
 import edu.cmu.cs.mvelezce.language.ast.statement.StatementIf;
 import edu.cmu.cs.mvelezce.language.ast.statement.StatementSleep;
-import edu.cmu.cs.mvelezce.language.lexer.Lexer;
-import edu.cmu.cs.mvelezce.language.parser.Parser;
+import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -86,20 +82,64 @@ public class PerformanceMapperTest {
         relevantOptionsSet.add(relevantOptions);
 
         relevantOptions = new HashSet<>();
+        relevantOptions.add(new ExpressionConfigurationConstant("A"));
+        relevantOptions.add(new ExpressionConfigurationConstant("D"));
+        relevantOptionsSet.add(relevantOptions);
+
+        relevantOptions = new HashSet<>();
         relevantOptions.add(new ExpressionConfigurationConstant("B"));
         relevantOptions.add(new ExpressionConfigurationConstant("C"));
         relevantOptionsSet.add(relevantOptions);
 
-//        relevantOptions = new HashSet<>();
-//        relevantOptions.add(new ExpressionConfigurationConstant("C"));
-//        relevantOptions.add(new ExpressionConfigurationConstant("D"));
-//        relevantOptionsSet.add(relevantOptions);
+        relevantOptions = new HashSet<>();
+        relevantOptions.add(new ExpressionConfigurationConstant("C"));
+        relevantOptions.add(new ExpressionConfigurationConstant("D"));
+        relevantOptionsSet.add(relevantOptions);
 //
 //        relevantOptions = new HashSet<>();
 //        relevantOptions.add(new ExpressionConfigurationConstant("A"));
 //        relevantOptions.add(new ExpressionConfigurationConstant("B"));
-//        relevantOptions.add(new ExpressionConfigurationConstant("E"));
+//        relevantOptions.add(new ExpressionConfigurationConstant("D"));
 //        relevantOptionsSet.add(relevantOptions);
+
+
+
+
+//        Set<Set<String>> results = new HashSet<>();
+//        Set<String> hold = new HashSet<>();
+//        hold.add("A");
+//        results.add(hold);
+//
+//        Set<String> check = new HashSet<>();
+//        check.add("A");
+//        check.add("B");
+//
+//        for(Set<ExpressionConfigurationConstant> relevantOption : relevantOptionsSet) {
+//            Set<String> relevantOptionConvenient = new HashSet<>();
+//            for(ExpressionConfigurationConstant option : relevantOption) {
+//                relevantOptionConvenient.add(option.getName());
+//            }
+//
+//            System.out.println("Checking relevant options: " + relevantOptionConvenient);
+//
+//            hold = new HashSet<>(relevantOptionConvenient);
+//            hold.retainAll(check);
+//
+//            System.out.println("Value of possible config in relevant options: " + hold);
+//
+//            for(Set<String> entry : results) {
+//                Set<String> hold1 = new HashSet<>(relevantOptionConvenient);
+//                hold1.retainAll(entry);
+//
+//                System.out.println("Value of result in relevant options: " + hold1);
+//
+//                if(hold1.equals(hold)) {
+//                    throw new IllegalArgumentException("BAD");
+//                }
+//            }
+//        }
+
+
 
         PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
 
@@ -114,39 +154,64 @@ public class PerformanceMapperTest {
     }
 
     private static void getConfigurationsToExecute(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
-        Set<Set<String>> results = PerformanceMapper.getConfigurationsToExecute(relevantOptionsSet);
-        System.out.println(results);
+        Collection<List<Set<ExpressionConfigurationConstant>>> permutations = CollectionUtils.permutations(relevantOptionsSet);
 
-        for(Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
-            Set<String> relevantOptionsConvenient = new HashSet<>();
+        for(List<Set<ExpressionConfigurationConstant>> permutation : permutations) {
+//            System.out.println("Permutation: " + permutation);
+            Set<Set<ExpressionConfigurationConstant>> a = new HashSet<>(permutation);
+            Set<Set<String>> results = PerformanceMapper.getConfigurationsToExecute(a);
+//        Set<Set<String>> results = new HashSet<>();
+//        Set<String> hold = new HashSet<>();
+////        hold.add("A");
+//        results.add(hold);
+//        hold = new HashSet<>();
+//        hold.add("A");
+//        hold.add("B");
+//        results.add(hold);
+//        hold = new HashSet<>();
+//        hold.add("B");
+//        hold.add("C");
+//        hold.add("D");
+//        results.add(hold);
+//        hold = new HashSet<>();
+//        hold.add("A");
+//        hold.add("C");
+//        hold.add("D");
+//        results.add(hold);
 
-            for(ExpressionConfigurationConstant relevantOption : relevantOptions) {
-                relevantOptionsConvenient.add(relevantOption.getName());
-            }
+            System.out.println(results);
 
-            Set<Set<String>> powerSet = Helper.getConfigurations(relevantOptions);
+            for (Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
+                Set<String> relevantOptionsConvenient = new HashSet<>();
 
-            for(Set<String> configuration : powerSet) {
-                System.out.println("Want configuration: " + configuration + " from: " + relevantOptionsConvenient);
-                boolean hasConfiguration = false;
-
-                for(Set<String> result : results) {
-                    if(PerformanceMapperTest.matches(result, configuration, relevantOptionsConvenient)) {
-                        hasConfiguration = true;
-                        break;
-                    }
+                for (ExpressionConfigurationConstant relevantOption : relevantOptions) {
+                    relevantOptionsConvenient.add(relevantOption.getName());
                 }
 
-                Assert.assertTrue(hasConfiguration);
+                Set<Set<String>> powerSet = Helper.getConfigurations(relevantOptions);
+
+                for (Set<String> configuration : powerSet) {
+//                    System.out.println("Want configuration: " + configuration + " from: " + relevantOptionsConvenient);
+                    boolean hasConfiguration = false;
+
+                    for (Set<String> result : results) {
+                        if (PerformanceMapperTest.matches(result, configuration, relevantOptionsConvenient)) {
+                            hasConfiguration = true;
+                            break;
+                        }
+                    }
+
+                    Assert.assertTrue(hasConfiguration);
+                }
             }
+            return ;
         }
     }
 
     private static boolean matches(Set<String> result, Set<String> configuration, Set<String> relevantOptionsConvenient) {
         Set<String> hold = new HashSet<>(relevantOptionsConvenient);
         hold.retainAll(result);
-        boolean matches = hold.equals(configuration);
-        return matches;
+        return  hold.equals(configuration);
     }
 
 //

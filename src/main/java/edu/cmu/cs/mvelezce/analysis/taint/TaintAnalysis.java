@@ -17,7 +17,7 @@ import java.util.*;
 public class TaintAnalysis {
 
     /**
-     * Perform a taint analysis in the CFG and a map that represents, for every basic block, the variables that might
+     * Perform a taint analysis in the CFG and a map that represents, for every simpleMerging block, the variables that might
      * be tainted.
      *
      * @param cfg

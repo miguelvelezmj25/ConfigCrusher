@@ -20,6 +20,117 @@ import java.util.*;
  * Created by miguelvelez on 2/11/17.
  */
 public class PerformanceMapperTest {
+
+    private static Set<Set<ExpressionConfigurationConstant>> getOptionsSet(String string) {
+        Set<Set<ExpressionConfigurationConstant>> result = new HashSet<>();
+        String[] allOptions = string.split(",");
+
+        for(String options : allOptions) {
+            Set<ExpressionConfigurationConstant> newOption = new HashSet<>();
+            options = options.trim();
+
+            for(int i = 0; i < options.length(); i++) {
+                ExpressionConfigurationConstant option = new ExpressionConfigurationConstant(options.charAt(i) + "");
+                newOption.add(option);
+            }
+
+            result.add(newOption);
+        }
+
+        return result;
+    }
+
+    private static void getConfigurationsToExecute(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
+        Collection<List<Set<ExpressionConfigurationConstant>>> permutations = CollectionUtils.permutations(relevantOptionsSet);
+
+        for(List<Set<ExpressionConfigurationConstant>> permutation : permutations) {
+            System.out.println("\nPermutation: " + permutation);
+            Set<Set<ExpressionConfigurationConstant>> a = new HashSet<>(permutation);
+            Set<Set<String>> results = PerformanceMapper.getConfigurationsToExecute(a);
+
+//            Set<Set<String>> results = new HashSet<>();
+//            Set<String> hold = new HashSet<>();
+//            hold.add("D");
+//            results.add(hold);
+//            hold = new HashSet<>();
+//            hold.add("A");
+//            hold.add("B");
+//            results.add(hold);
+//            hold = new HashSet<>();
+//            hold.add("A");
+//            hold.add("C");
+//            hold.add("D");
+//            results.add(hold);
+//            hold = new HashSet<>();
+//            hold.add("B");
+//            hold.add("C");
+//            results.add(hold);
+
+
+            System.out.println(results);
+
+            for (Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
+                Set<String> relevantOptionsConvenient = new HashSet<>();
+
+                for (ExpressionConfigurationConstant relevantOption : relevantOptions) {
+                    relevantOptionsConvenient.add(relevantOption.getName());
+                }
+
+                Set<Set<String>> powerSet = Helper.getConfigurations(relevantOptions);
+
+                for (Set<String> configuration : powerSet) {
+                    System.out.println("Want configuration: " + configuration + " from: " + relevantOptionsConvenient);
+                    boolean hasConfiguration = false;
+
+                    for (Set<String> result : results) {
+                        if (PerformanceMapperTest.matches(result, configuration, relevantOptionsConvenient)) {
+                            hasConfiguration = true;
+                            break;
+                        }
+                    }
+
+                    Assert.assertTrue(hasConfiguration);
+                }
+            }
+        }
+    }
+
+    private static boolean matches(Set<String> result, Set<String> configuration, Set<String> relevantOptionsConvenient) {
+        Set<String> hold = new HashSet<>(relevantOptionsConvenient);
+        hold.retainAll(result);
+        return hold.equals(configuration);
+    }
+
+    @Test
+    public void testGetRelevantUniqueOptions1() throws Exception {
+        Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, AC");
+
+        Assert.assertEquals(set, PerformanceMapper.getRelevantUniqueOptions(set));
+    }
+
+    @Test
+    public void testGetRelevantUniqueOptions2() throws Exception {
+        Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("ABC, ACD");
+
+        Assert.assertEquals(set, PerformanceMapper.getRelevantUniqueOptions(set));
+    }
+
+    @Test
+    public void testGetRelevantUniqueOptions3() throws Exception {
+        Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, ABC");
+        Set<Set<ExpressionConfigurationConstant>> result = PerformanceMapperTest.getOptionsSet("ABC");
+
+        Assert.assertEquals(result, PerformanceMapper.getRelevantUniqueOptions(set));
+    }
+
+    @Test
+    public void testGetRelevantUniqueOptions4() throws Exception {
+        Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
+        Set<Set<ExpressionConfigurationConstant>> result = PerformanceMapperTest.getOptionsSet("ABC, BCD, DEF");
+
+        Assert.assertEquals(result, PerformanceMapper.getRelevantUniqueOptions(set));
+    }
+
     @Test
     public void testGetConfigurationsInRelevantStatements1() {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = new HashMap<>();
@@ -52,7 +163,7 @@ public class PerformanceMapperTest {
         relevantStatementToOptions.put(statement2, taintingConfigurations);
 
         Statement statement3 = new StatementSleep(new ExpressionConstantInt(3));
-        currentBasicBlock = new BasicBlock(statement1);
+        currentBasicBlock = new BasicBlock(statement3);
         instructionsToTainted.put(currentBasicBlock, possibleTaints);
 
         Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
@@ -70,148 +181,68 @@ public class PerformanceMapperTest {
 
     @Test
     public void testGetConfigurationsToExecute1() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = new HashSet<>();
-        Set<ExpressionConfigurationConstant> relevantOptions = new HashSet<>();
-        relevantOptions.add(new ExpressionConfigurationConstant("A"));
-        relevantOptions.add(new ExpressionConfigurationConstant("B"));
-        relevantOptionsSet.add(relevantOptions);
-
-        relevantOptions = new HashSet<>();
-        relevantOptions.add(new ExpressionConfigurationConstant("A"));
-        relevantOptions.add(new ExpressionConfigurationConstant("C"));
-        relevantOptionsSet.add(relevantOptions);
-
-        relevantOptions = new HashSet<>();
-        relevantOptions.add(new ExpressionConfigurationConstant("A"));
-        relevantOptions.add(new ExpressionConfigurationConstant("D"));
-        relevantOptionsSet.add(relevantOptions);
-
-        relevantOptions = new HashSet<>();
-        relevantOptions.add(new ExpressionConfigurationConstant("B"));
-        relevantOptions.add(new ExpressionConfigurationConstant("C"));
-        relevantOptionsSet.add(relevantOptions);
-
-        relevantOptions = new HashSet<>();
-        relevantOptions.add(new ExpressionConfigurationConstant("C"));
-        relevantOptions.add(new ExpressionConfigurationConstant("D"));
-        relevantOptionsSet.add(relevantOptions);
-//
-//        relevantOptions = new HashSet<>();
-//        relevantOptions.add(new ExpressionConfigurationConstant("A"));
-//        relevantOptions.add(new ExpressionConfigurationConstant("B"));
-//        relevantOptions.add(new ExpressionConfigurationConstant("D"));
-//        relevantOptionsSet.add(relevantOptions);
-
-
-
-
-//        Set<Set<String>> results = new HashSet<>();
-//        Set<String> hold = new HashSet<>();
-//        hold.add("A");
-//        results.add(hold);
-//
-//        Set<String> check = new HashSet<>();
-//        check.add("A");
-//        check.add("B");
-//
-//        for(Set<ExpressionConfigurationConstant> relevantOption : relevantOptionsSet) {
-//            Set<String> relevantOptionConvenient = new HashSet<>();
-//            for(ExpressionConfigurationConstant option : relevantOption) {
-//                relevantOptionConvenient.add(option.getName());
-//            }
-//
-//            System.out.println("Checking relevant options: " + relevantOptionConvenient);
-//
-//            hold = new HashSet<>(relevantOptionConvenient);
-//            hold.retainAll(check);
-//
-//            System.out.println("Value of possible config in relevant options: " + hold);
-//
-//            for(Set<String> entry : results) {
-//                Set<String> hold1 = new HashSet<>(relevantOptionConvenient);
-//                hold1.retainAll(entry);
-//
-//                System.out.println("Value of result in relevant options: " + hold1);
-//
-//                if(hold1.equals(hold)) {
-//                    throw new IllegalArgumentException("BAD");
-//                }
-//            }
-//        }
-
-
-
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, AD, BE");
         PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-
-
-
-//       Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//
-//        Set<Set<ExpressionConfigurationConstant>> statementsAndOptions = new HashSet<>()
-//        Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
-//        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//        System.out.println(configurationsToExecute);
     }
 
-    private static void getConfigurationsToExecute(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
-        Collection<List<Set<ExpressionConfigurationConstant>>> permutations = CollectionUtils.permutations(relevantOptionsSet);
-
-        for(List<Set<ExpressionConfigurationConstant>> permutation : permutations) {
-//            System.out.println("Permutation: " + permutation);
-            Set<Set<ExpressionConfigurationConstant>> a = new HashSet<>(permutation);
-            Set<Set<String>> results = PerformanceMapper.getConfigurationsToExecute(a);
-//        Set<Set<String>> results = new HashSet<>();
-//        Set<String> hold = new HashSet<>();
-////        hold.add("A");
-//        results.add(hold);
-//        hold = new HashSet<>();
-//        hold.add("A");
-//        hold.add("B");
-//        results.add(hold);
-//        hold = new HashSet<>();
-//        hold.add("B");
-//        hold.add("C");
-//        hold.add("D");
-//        results.add(hold);
-//        hold = new HashSet<>();
-//        hold.add("A");
-//        hold.add("C");
-//        hold.add("D");
-//        results.add(hold);
-
-            System.out.println(results);
-
-            for (Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
-                Set<String> relevantOptionsConvenient = new HashSet<>();
-
-                for (ExpressionConfigurationConstant relevantOption : relevantOptions) {
-                    relevantOptionsConvenient.add(relevantOption.getName());
-                }
-
-                Set<Set<String>> powerSet = Helper.getConfigurations(relevantOptions);
-
-                for (Set<String> configuration : powerSet) {
-//                    System.out.println("Want configuration: " + configuration + " from: " + relevantOptionsConvenient);
-                    boolean hasConfiguration = false;
-
-                    for (Set<String> result : results) {
-                        if (PerformanceMapperTest.matches(result, configuration, relevantOptionsConvenient)) {
-                            hasConfiguration = true;
-                            break;
-                        }
-                    }
-
-                    Assert.assertTrue(hasConfiguration);
-                }
-            }
-            return ;
-        }
+    @Test
+    public void testGetConfigurationsToExecute2() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, BCD");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
     }
 
-    private static boolean matches(Set<String> result, Set<String> configuration, Set<String> relevantOptionsConvenient) {
-        Set<String> hold = new HashSet<>(relevantOptionsConvenient);
-        hold.retainAll(result);
-        return  hold.equals(configuration);
+    @Test
+    public void testGetConfigurationsToExecute3() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, BCD");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test
+    public void testGetConfigurationsToExecute4() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, CD");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test
+    public void testGetConfigurationsToExecute5() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, CDE");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test
+    public void testGetConfigurationsToExecute6() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, BC");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test
+    public void testGetConfigurationsToExecute7() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, AD, BC, BD");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test
+    public void testGetConfigurationsToExecute8() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, AD, BC, CD");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test
+    public void testGetConfigurationsToExecute9() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, CD, BD");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test
+    public void testGetConfigurationsToExecute10() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, CD");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test
+    public void testGetConfigurationsToExecute11() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, DEF");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
     }
 
 //

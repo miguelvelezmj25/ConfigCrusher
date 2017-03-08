@@ -33,7 +33,8 @@ public class PerformanceMapper {
         }
     };
 
-    public static Map<Set<String>, Integer> calculatePerformance(String program, Set<ExpressionConfigurationConstant> parameters) {
+    public static Map<Set<String>, Integer> calculatePerformance(String program,
+                                                                 Set<ExpressionConfigurationConstant> parameters) {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -45,6 +46,7 @@ public class PerformanceMapper {
         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions =
                 PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         ast = PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, relevantStatementsToOptions.keySet());
+
         Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantStatementsToOptions.values());
         Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptions);
 
@@ -56,30 +58,31 @@ public class PerformanceMapper {
     }
 
     public static Set<PerformanceEntry> measurePerformance(Statement ast, Set<Set<String>> configurationsToExecute) {
-        Interpreter interpreter = new Interpreter(ast);
-
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 
         for (Set<String> configuration : configurationsToExecute) {
+            Interpreter interpreter = new Interpreter(ast);
             interpreter.evaluate(configuration);
-            configurationsToPerformance.add(new PerformanceEntry(configuration, interpreter.getTimedBlocks(), interpreter.getTotalExecutionTime()));
-
+            configurationsToPerformance.add(new PerformanceEntry(configuration, interpreter.getTimedBlocks(),
+                    interpreter.getTotalExecutionTime()));
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
 
         return configurationsToPerformance;
     }
 
-    public static Map<Statement, Set<ExpressionConfigurationConstant>> getRelevantStatementsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+    public static Map<Statement, Set<ExpressionConfigurationConstant>> getRelevantStatementsToOptions(
+            Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
             if(PerformanceMapper.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
                 RelevantInfoGetterVisitor performanceStatementVisitor = new RelevantInfoGetterVisitor(entry.getValue());
-                Set<ExpressionConfigurationConstant> result = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
+                Set<ExpressionConfigurationConstant> possibleTaintingConfigurations =
+                        performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
 
-                if(!result.isEmpty()) {
-                    relevantStatementToOptions.put(entry.getKey().getStatement(), result);
+                if(!possibleTaintingConfigurations.isEmpty()) {
+                    relevantStatementToOptions.put(entry.getKey().getStatement(), possibleTaintingConfigurations);
                 }
             }
         }
@@ -87,123 +90,75 @@ public class PerformanceMapper {
         return relevantStatementToOptions;
     }
 
-    public static Set<Set<ExpressionConfigurationConstant>> getRelevantUniqueOptions(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
-        Set<Set<ExpressionConfigurationConstant>> relevantUniqueOptions = new HashSet<>();
+    public static Set<Set<ExpressionConfigurationConstant>> getUniqueRelevantOptions(
+            Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
+        Set<Set<ExpressionConfigurationConstant>> uniqueRelevantOptions = new HashSet<>();
 
         for(Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
-            if(relevantUniqueOptions.isEmpty()) {
-                relevantUniqueOptions.add(relevantOptions);
+            if(uniqueRelevantOptions.isEmpty()) {
+                uniqueRelevantOptions.add(relevantOptions);
                 continue;
             }
 
-            Set<Set<ExpressionConfigurationConstant>> toRemove = new HashSet<>();
-            Set<Set<ExpressionConfigurationConstant>> toAdd = new HashSet<>();
+            Set<Set<ExpressionConfigurationConstant>> optionsToRemove = new HashSet<>();
+            Set<Set<ExpressionConfigurationConstant>> optionsToAdd = new HashSet<>();
 
-            for(Set<ExpressionConfigurationConstant> options : relevantUniqueOptions) {
+            for(Set<ExpressionConfigurationConstant> options : uniqueRelevantOptions) {
                 if(options.equals(relevantOptions) || options.containsAll(relevantOptions)) {
-                    toAdd.remove(relevantOptions);
+                    optionsToAdd.remove(relevantOptions);
                     break;
                 }
 
                 if(!options.containsAll(relevantOptions) && relevantOptions.containsAll(options)) {
-                    toRemove.add(options);
+                    optionsToRemove.add(options);
                 }
 
-                toAdd.add(relevantOptions);
-
+                optionsToAdd.add(relevantOptions);
             }
 
-            relevantUniqueOptions.removeAll(toRemove);
-            relevantUniqueOptions.addAll(toAdd);
+            uniqueRelevantOptions.removeAll(optionsToRemove);
+            uniqueRelevantOptions.addAll(optionsToAdd);
         }
 
-        return relevantUniqueOptions;
+        return uniqueRelevantOptions;
 
     }
 
-//    public static void something() {
-//        Set<Set<String>> powerSet1 = Helper.getConfigurations(entry1.getKey());
-//
-//        Map<Set<String>, Set<Set<String>>> relevantOptionsSoFarToPowerSet = new HashMap<>();
-//
-//        for(Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSoFar) {
-//            Set<String> relevantOptionsConvenient = new HashSet<>();
-//
-//            for(ExpressionConfigurationConstant relevantOption : relevantOptions) {
-//                relevantOptionsConvenient.add(relevantOption.getName());
-//            }
-//            relevantOptionsSoFarToPowerSet.put(relevantOptionsConvenient, Helper.getConfigurations(relevantOptions));
-//        }
-//
-//        for(Set<String> possibleConfiguration : powerSet1) {
-//            System.out.println(possibleConfiguration);
-//            boolean addConfiguration = true;
-//
-//            for(Map.Entry<Set<String>, Set<Set<String>>> entry : relevantOptionsSoFarToPowerSet.entrySet()) {
-//                Set<String> valueOfPossibleConfigurationInCurrentOptions = new HashSet<>(entry.getKey());
-//                valueOfPossibleConfigurationInCurrentOptions.retainAll(possibleConfiguration);
-//
-//                if(!entry.getValue().contains(valueOfPossibleConfigurationInCurrentOptions)) {
-//                    addConfiguration = false;
-//                    break;
-//                }
-//            }
-//
-//            if(addConfiguration) {
-//                System.out.println("Configuration satisfied all");
-//                configurationsToExecute.add(possibleConfiguration);
-//
-//                for(Map.Entry<Set<String>, Set<Set<String>>> entry : relevantOptionsSoFarToPowerSet.entrySet()) {
-//                    Set<String> valueOfPossibleConfigurationInCurrentOptions = new HashSet<>(entry.getKey());
-//                    valueOfPossibleConfigurationInCurrentOptions.retainAll(possibleConfiguration);
-//                    entry.getValue().remove(valueOfPossibleConfigurationInCurrentOptions);
-//                }
-//
-//            }
-//        }
-//
-//        for(Map.Entry<Set<String>, Set<Set<String>>> entry : relevantOptionsSoFarToPowerSet.entrySet()) {
-//            if(!entry.getValue().isEmpty()) {
-//                throw new RuntimeException("Did not satisfy all constrains from previous options");
-//            }
-//        }
-//    }
-
-    public static Set<Set<String>> getConfigurationsToExecute(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
+    public static Set<Set<String>> getConfigurationsToExecute(
+            Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
         // Calculates which options are subsets of other options
-        Set<Set<ExpressionConfigurationConstant>> relevantUniqueOptions = PerformanceMapper.getRelevantUniqueOptions(relevantOptionsSet);
+        Set<Set<ExpressionConfigurationConstant>> uniqueRelevantOptions =
+                PerformanceMapper.getUniqueRelevantOptions(relevantOptionsSet);
 
         // Get the configurations for each option
         Map<Set<ExpressionConfigurationConstant>, Set<Set<String>>> optionsToConfigurationsToExecute = new HashMap<>();
 
-        for(Set<ExpressionConfigurationConstant> option : relevantUniqueOptions) {
+        for(Set<ExpressionConfigurationConstant> relevantOptions : uniqueRelevantOptions) {
             Set<Set<String>> configurationsToExecuteForOption = new HashSet<>();
-            configurationsToExecuteForOption.addAll(Helper.getConfigurations(option));
-            optionsToConfigurationsToExecute.put(option, configurationsToExecuteForOption);
+            configurationsToExecuteForOption.addAll(Helper.getConfigurations(relevantOptions));
+            optionsToConfigurationsToExecute.put(relevantOptions, configurationsToExecuteForOption);
         }
 
         // Compresses which configurations to execute
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
-        // Base case 1
-        if(optionsToConfigurationsToExecute.isEmpty()) {
-            return configurationsToExecute;
-        }
-
-        // Base case 2
+        // Base case covering 0 and 1 configurations
         if(optionsToConfigurationsToExecute.size() == 1) {
             configurationsToExecute.addAll(optionsToConfigurationsToExecute.entrySet().iterator().next().getValue());
             return configurationsToExecute;
         }
 
-        Iterator<Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator = optionsToConfigurationsToExecute.entrySet().iterator();
-        Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry1 = optionsToConfigurationsToExecuteIterator.next();
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSoFar = new HashSet<>();
-        relevantOptionsSoFar.add(entry1.getKey());
+        Iterator<Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator =
+                optionsToConfigurationsToExecute.entrySet().iterator();
+        Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry1 =
+                optionsToConfigurationsToExecuteIterator.next();
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsCovered = new HashSet<>();
+        relevantOptionsCovered.add(entry1.getKey());
 
         while(optionsToConfigurationsToExecuteIterator.hasNext()) {
-            Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry2 = optionsToConfigurationsToExecuteIterator.next();
-            relevantOptionsSoFar.add(entry2.getKey());
+            Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry2 =
+                    optionsToConfigurationsToExecuteIterator.next();
+            relevantOptionsCovered.add(entry2.getKey());
 
             Set<ExpressionConfigurationConstant> pivotOptions = new HashSet<>(entry1.getKey());
             pivotOptions.retainAll(entry2.getKey());
@@ -211,12 +166,11 @@ public class PerformanceMapper {
 
             Set<String> pivotOptionsConvenient = new HashSet<>();
 
-            for(ExpressionConfigurationConstant expressionConfigurationConstant : pivotOptions) {
-                pivotOptionsConvenient.add(expressionConfigurationConstant.getName());
+            for(ExpressionConfigurationConstant pivotOption : pivotOptions) {
+                pivotOptionsConvenient.add(pivotOption.getName());
             }
 
             configurationsToExecute = new HashSet<>();
-
 
             if(entry2.getKey().containsAll(entry1.getKey())) {
                 throw new RuntimeException("I have never seen the case where the built sets " + entry1.getKey() + " is a " +
@@ -224,28 +178,77 @@ public class PerformanceMapper {
             }
 
             if(entry1.getKey().containsAll(entry2.getKey())) {
-                throw new RuntimeException(entry2.getKey() + " is a subset of " + entry1.getKey());
+                PerformanceMapper.subsetMerging(entry1, relevantOptionsCovered, configurationsToExecute);
             }
             else {
-                simpleMerging(entry1, entry2, pivotOptionsConvenient, configurationsToExecute);
-
+                PerformanceMapper.simpleMerging(entry1, entry2, pivotOptionsConvenient, configurationsToExecute);
             }
 
             System.out.println(configurationsToExecute);
+
             Set<ExpressionConfigurationConstant> newCalculatedOptions = new HashSet<>(entry1.getKey());
             newCalculatedOptions.addAll(entry2.getKey());
-            Map<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entryPlaceholder = new HashMap<>();
-            entryPlaceholder.put(newCalculatedOptions, configurationsToExecute);
-            entry1 = entryPlaceholder.entrySet().iterator().next();
+            Map<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entryHolder = new HashMap<>();
+            entryHolder.put(newCalculatedOptions, configurationsToExecute);
+            entry1 = entryHolder.entrySet().iterator().next();
         }
 
         return configurationsToExecute;
-
     }
 
-    public static Statement instrumentProgramToTimeRelevantStatements(Statement program, Set<Statement> relevantStatements) {
-        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
-        return program.accept(addTimedVisitor);
+    private static void subsetMerging(Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> superSet,
+                                      Set<Set<ExpressionConfigurationConstant>> relevantOptionsCovered,
+                                      Set<Set<String>> configurationsToExecute) {
+        Set<Set<String>> powerSet = Helper.getConfigurations(superSet.getKey());
+
+        // Getting the power set for all options covered
+        Map<Set<String>, Set<Set<String>>> relevantOptionsCoveredToPowerSet = new HashMap<>();
+
+        for(Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsCovered) {
+            Set<String> relevantOptionsConvenient = new HashSet<>();
+
+            for(ExpressionConfigurationConstant relevantOption : relevantOptions) {
+                relevantOptionsConvenient.add(relevantOption.getName());
+            }
+
+            relevantOptionsCoveredToPowerSet.put(relevantOptionsConvenient, Helper.getConfigurations(relevantOptions));
+        }
+
+        // Go through the powerset of the superset checking if a possible configuration satisfies constrains in the
+        // smaller powersets
+        for(Set<String> possibleConfiguration : powerSet) {
+            System.out.println(possibleConfiguration);
+            boolean addConfiguration = true;
+
+            for(Map.Entry<Set<String>, Set<Set<String>>> entry : relevantOptionsCoveredToPowerSet.entrySet()) {
+                Set<String> valueOfPossibleConfigurationInCurrentOptions = new HashSet<>(entry.getKey());
+                valueOfPossibleConfigurationInCurrentOptions.retainAll(possibleConfiguration);
+
+                if(!entry.getValue().contains(valueOfPossibleConfigurationInCurrentOptions)) {
+                    addConfiguration = false;
+                    break;
+                }
+            }
+
+            if(addConfiguration) {
+                System.out.println("Configuration satisfied all");
+                configurationsToExecute.add(possibleConfiguration);
+
+                for(Map.Entry<Set<String>, Set<Set<String>>> entry : relevantOptionsCoveredToPowerSet.entrySet()) {
+                    Set<String> valueOfPossibleConfigurationInCurrentOptions = new HashSet<>(entry.getKey());
+                    valueOfPossibleConfigurationInCurrentOptions.retainAll(possibleConfiguration);
+                    entry.getValue().remove(valueOfPossibleConfigurationInCurrentOptions);
+                }
+
+            }
+        }
+
+        // Sanity check
+        for(Map.Entry<Set<String>, Set<Set<String>>> entry : relevantOptionsCoveredToPowerSet.entrySet()) {
+            if(!entry.getValue().isEmpty()) {
+                throw new RuntimeException("Did not satisfy all constrains from previous options");
+            }
+        }
     }
 
     private static void simpleMerging(Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry1,
@@ -258,7 +261,7 @@ public class PerformanceMapper {
         System.out.println("entry 2 size: " + entry2.getValue().size());
 
         if(entry1.getValue().size() <= entry2.getValue().size()) {
-            while (set1.hasNext() && set2.hasNext()) {
+            while(set1.hasNext() && set2.hasNext()) {
                 Set<String> configurationInSet1 = set1.next();
                 System.out.println("Set1: " + configurationInSet1);
 
@@ -266,7 +269,7 @@ public class PerformanceMapper {
                 valuePivotOptionsInSet1.retainAll(pivotOptionsConvenient);
                 boolean merged = false;
 
-                while (set2.hasNext()) {
+                while(set2.hasNext()) {
                     Set<String> configurationInSet2 = set2.next();
                     System.out.println("Set2: " + configurationInSet2);
 
@@ -285,7 +288,7 @@ public class PerformanceMapper {
                     }
                 }
 
-                if (!merged) {
+                if(!merged) {
                     throw new RuntimeException("Could not merge the sets");
                 }
 
@@ -293,7 +296,7 @@ public class PerformanceMapper {
             }
         }
         else {
-            while (set1.hasNext() && set2.hasNext()) {
+            while(set1.hasNext() && set2.hasNext()) {
                 Set<String> configurationInSet2 = set2.next();
                 System.out.println("Set2: " + configurationInSet2);
 
@@ -301,14 +304,14 @@ public class PerformanceMapper {
                 valuePivotOptionsInSet2.retainAll(pivotOptionsConvenient);
                 boolean merged = false;
 
-                while (set1.hasNext()) {
+                while(set1.hasNext()) {
                     Set<String> configurationInSet1 = set1.next();
                     System.out.println("Set1: " + configurationInSet1);
 
                     Set<String> valuePivotOptionsInSet1 = new HashSet<>(configurationInSet1);
                     valuePivotOptionsInSet1.retainAll(pivotOptionsConvenient);
 
-                    if(valuePivotOptionsInSet2.equals(valuePivotOptionsInSet1)) {
+                    if(valuePivotOptionsInSet1.equals(valuePivotOptionsInSet2)) {
                         System.out.println("Can compress");
                         Set<String> compressedConfiguration = new HashSet<>(configurationInSet2);
                         compressedConfiguration.addAll(configurationInSet1);
@@ -320,13 +323,14 @@ public class PerformanceMapper {
                     }
                 }
 
-                if (!merged) {
+                if(!merged) {
                     throw new RuntimeException("Could not merge the sets");
                 }
 
                 set1 = entry1.getValue().iterator();
             }
         }
+
         while(set1.hasNext()) {
             configurationsToExecute.add(set1.next());
         }
@@ -336,6 +340,11 @@ public class PerformanceMapper {
         }
     }
 
+    public static Statement instrumentProgramToTimeRelevantStatements(Statement program,
+                                                                      Set<Statement> relevantStatements) {
+        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
+        return program.accept(addTimedVisitor);
+    }
 
 //    /**
 //     * TODO

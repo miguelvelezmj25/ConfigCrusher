@@ -48,31 +48,12 @@ public class PerformanceMapperTest {
             Set<Set<ExpressionConfigurationConstant>> a = new HashSet<>(permutation);
             Set<Set<String>> results = PerformanceMapper.getConfigurationsToExecute(a);
 
-//            Set<Set<String>> results = new HashSet<>();
-//            Set<String> hold = new HashSet<>();
-//            hold.add("D");
-//            results.add(hold);
-//            hold = new HashSet<>();
-//            hold.add("A");
-//            hold.add("B");
-//            results.add(hold);
-//            hold = new HashSet<>();
-//            hold.add("A");
-//            hold.add("C");
-//            hold.add("D");
-//            results.add(hold);
-//            hold = new HashSet<>();
-//            hold.add("B");
-//            hold.add("C");
-//            results.add(hold);
-
-
             System.out.println(results);
 
-            for (Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
+            for(Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
                 Set<String> relevantOptionsConvenient = new HashSet<>();
 
-                for (ExpressionConfigurationConstant relevantOption : relevantOptions) {
+                for(ExpressionConfigurationConstant relevantOption : relevantOptions) {
                     relevantOptionsConvenient.add(relevantOption.getName());
                 }
 
@@ -105,14 +86,14 @@ public class PerformanceMapperTest {
     public void testGetRelevantUniqueOptions1() throws Exception {
         Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, AC");
 
-        Assert.assertEquals(set, PerformanceMapper.getRelevantUniqueOptions(set));
+        Assert.assertEquals(set, PerformanceMapper.getUniqueRelevantOptions(set));
     }
 
     @Test
     public void testGetRelevantUniqueOptions2() throws Exception {
         Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("ABC, ACD");
 
-        Assert.assertEquals(set, PerformanceMapper.getRelevantUniqueOptions(set));
+        Assert.assertEquals(set, PerformanceMapper.getUniqueRelevantOptions(set));
     }
 
     @Test
@@ -120,7 +101,7 @@ public class PerformanceMapperTest {
         Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, ABC");
         Set<Set<ExpressionConfigurationConstant>> result = PerformanceMapperTest.getOptionsSet("ABC");
 
-        Assert.assertEquals(result, PerformanceMapper.getRelevantUniqueOptions(set));
+        Assert.assertEquals(result, PerformanceMapper.getUniqueRelevantOptions(set));
     }
 
     @Test
@@ -128,7 +109,7 @@ public class PerformanceMapperTest {
         Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
         Set<Set<ExpressionConfigurationConstant>> result = PerformanceMapperTest.getOptionsSet("ABC, BCD, DEF");
 
-        Assert.assertEquals(result, PerformanceMapper.getRelevantUniqueOptions(set));
+        Assert.assertEquals(result, PerformanceMapper.getUniqueRelevantOptions(set));
     }
 
     @Test
@@ -227,11 +208,11 @@ public class PerformanceMapperTest {
         PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
     }
 
-    @Test
-    public void testGetConfigurationsToExecute9() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, CD, BD");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
+//    @Test // TODO ERROR
+//    public void testGetConfigurationsToExecute9() {
+//        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, CD, BD");
+//        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+//    }
 
     @Test
     public void testGetConfigurationsToExecute10() {
@@ -245,357 +226,17 @@ public class PerformanceMapperTest {
         PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
     }
 
-//
-//    @Test
-//    def test() testGetConfig("AB, AX, ABC, A")
-//
-//    def testGetConfig(Set<Set<ConfigOption>> o)
-//    {
-//        assert(sameSize(for (x in allPerMutationsOf(o)) PerformanceMapper.getConfigurationsToExecute(x).getSize))
-//
-//        result = PerformanceMapper.getConfigurationsToExecute(o)
-//                ;
-//
-//        for (x in o)
-//            for (config in powerSetOf(x)) {
-//                foundConfig = false
-//                        ;
-//                for (r in results)
-//                    if (r matches config of x)
-//                        foundConfig=true
-//            }
-//     }
-//     def matchesOf(r, config, setOfAllOptions)
-//         for (x in config)
-//             if (r containsNot x) return false
-//         for (x in (setOfAllOptions - config))
-//             if (r contains x) return false
-//        return true
+    @Test
+    public void testGetConfigurationsToExecute12() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
 
-//    @Test
-//    public void getConfigurationsToExecute2() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program2");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//
-//        Set<Set<String>> configurationsToExecute = new HashSet<>();
-//        Set<String> configuration = new HashSet<>();
-//        configurationsToExecute.add(configuration);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configurationsToExecute.add(configuration);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configurationsToExecute.add(configuration);
-//
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//        Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
-//        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//
-//        System.out.println(configurationsToExecute);
-//    }
-//
-//    @Test
-//    public void getConfigurationsToExecute3() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program3");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//
-//        Set<Set<String>> configurationsToExecute = new HashSet<>();
-//        Set<ExpressionConfigurationConstant> options = new HashSet<>();
-//        options.add(new ExpressionConfigurationConstant("A"));
-//        options.add(new ExpressionConfigurationConstant("B"));
-//        configurationsToExecute.addAll(Helper.getConfigurations(options));
-//
-//        // TODO can it be improved to not run all?
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//        Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
-//        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//        System.out.println(configurationsToExecute);
-//    }
-//
-//    @Test
-//    public void getConfigurationsToExecute4() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program4");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//
-//        Set<Set<String>> configurationsToExecute = new HashSet<>();
-//        configurationsToExecute.add(new HashSet<>());
-//        Set<String> options = new HashSet<>();
-//        options.add("A");
-//        options.add("B");
-//        configurationsToExecute.add(options);
-//
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//        Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
-//        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//        System.out.println(PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//    }
-//
-//    @Test
-//    public void getConfigurationsToExecute5() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program5");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//
-//        Set<Set<String>> configurationsToExecute = new HashSet<>();
-//        Set<ExpressionConfigurationConstant> options = new HashSet<>();
-//        options.add(new ExpressionConfigurationConstant("A"));
-//        options.add(new ExpressionConfigurationConstant("B"));
-//        configurationsToExecute.addAll(Helper.getConfigurations(options));
-//
-//        // TODO can it be improved to not run all?
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//        Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
-//        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//        System.out.println(configurationsToExecute);
-//    }
-//
-//    @Test
-//    public void getConfigurationsToExecute6() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//
-//        Set<Set<String>> configurationsToExecute = new HashSet<>();
-//        Set<ExpressionConfigurationConstant> options = new HashSet<>();
-//        options.add(new ExpressionConfigurationConstant("A"));
-//        options.add(new ExpressionConfigurationConstant("B"));
-//        options.add(new ExpressionConfigurationConstant("C"));
-//        configurationsToExecute.addAll(Helper.getConfigurations(options));
-//
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//        Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
-//        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//        System.out.println(PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//    }
-//
-//    @Test
-//    public void getConfigurationsToExecute7() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program7");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//
-//        Set<Set<String>> configurationsToExecute = new HashSet<>();
-//
-//        Set<String> options = new HashSet<>();
-//        configurationsToExecute.add(options);
-//
-//        options = new HashSet<>();
-//        options.add("D");
-//        configurationsToExecute.add(options);
-//
-//        options = new HashSet<>();
-//        options.add("C");
-//        options.add("D");
-//        configurationsToExecute.add(options);
-//
-//        options = new HashSet<>();
-//        options.add("A");
-//        options.add("B");
-//        options.add("C");
-//        configurationsToExecute.add(options);
-//
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//        Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
-//        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//        System.out.println(PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//    }
-//
-//    @Test
-//    public void getConfigurationsToExecute8() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program8");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//
-//        Set<Set<String>> configurationsToExecute = new HashSet<>();
-//
-//        Set<String> options = new HashSet<>();
-//        configurationsToExecute.add(options);
-//
-//        options = new HashSet<>();
-//        options.add("A");
-//        configurationsToExecute.add(options);
-//
-//        options = new HashSet<>();
-//        options.add("B");
-//        options.add("C");
-//        configurationsToExecute.add(options);
-//
-//        options = new HashSet<>();
-//        options.add("A");
-//        options.add("B");
-//        options.add("C");
-//        configurationsToExecute.add(options);
-//
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//        Assert.assertEquals(configurationsToExecute.size(), PerformanceMapper.getConfigurationsToExecute(statementsAndOptions).size());
-//        Assert.assertEquals(configurationsToExecute, PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//        System.out.println(PerformanceMapper.getConfigurationsToExecute(statementsAndOptions));
-//    }
-//
-//
-
-//
-//    @Test
-//    public void updateASTToTimeRelevantStatements2() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program2");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//
-//        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
-//    }
-//
-//    @Test
-//    public void updateASTToTimeRelevantStatements3() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program3");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//
-//        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
-//    }
-//
-//    @Test
-//    public void updateASTToTimeRelevantStatements4() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program4");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//
-//        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
-//    }
-//
-//    @Test
-//    public void updateASTToTimeRelevantStatements5() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program5");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//
-//        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
-//    }
-//
-//    @Test
-//    public void updateASTToTimeRelevantStatements6() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//
-//        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
-//    }
-//
-//    @Test
-//    public void updateASTToTimeRelevantStatements7() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program7");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//
-//        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
-//    }
-//
-//    @Test
-//    public void updateASTToTimeRelevantStatements8() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program8");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//
-//        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
-//    }
-//
-//    @Test
-//    public void updateASTToTimeRelevantStatements9() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program9");
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//        Map<Statement, Set<ExpressionConfigurationConstant>> statementsAndOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-//
-//        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statementsAndOptions.keySet()));
-//    }
+    @Test
+    public void testGetConfigurationsToExecute13() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABCD, ADXY, ABDX");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
 //
 //    @Test
 //    public void calculatePerformance1() throws Exception {

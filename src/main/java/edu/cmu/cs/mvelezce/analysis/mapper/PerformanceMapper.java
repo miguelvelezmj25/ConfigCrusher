@@ -60,7 +60,7 @@ public class PerformanceMapper {
     public static Set<PerformanceEntry> measurePerformance(Statement ast, Set<Set<String>> configurationsToExecute) {
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 
-        for (Set<String> configuration : configurationsToExecute) {
+        for(Set<String> configuration : configurationsToExecute) {
             Interpreter interpreter = new Interpreter(ast);
             interpreter.evaluate(configuration);
             configurationsToPerformance.add(new PerformanceEntry(configuration, interpreter.getTimedBlocks(),
@@ -472,7 +472,7 @@ public class PerformanceMapper {
 
     }
 
-    private static class PerformanceEntry {
+    public static class PerformanceEntry {
         private Set<String> configuration;
         private Map<Statement, Integer> blockToTime;
         private int totalTime;
@@ -496,6 +496,29 @@ public class PerformanceMapper {
         public int getTotalTime() { return this.totalTime; }
 
         public int getBaseTime() { return this.baseTime; }
+
+        // TODO this is used for testing puposes. Do we need to remove this for shipping?
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            PerformanceEntry that = (PerformanceEntry) o;
+
+            if (totalTime != that.totalTime) return false;
+            if (baseTime != that.baseTime) return false;
+            if (!configuration.equals(that.configuration)) return false;
+            return blockToTime.equals(that.blockToTime);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = configuration.hashCode();
+            result = 31 * result + blockToTime.hashCode();
+            result = 31 * result + totalTime;
+            result = 31 * result + baseTime;
+            return result;
+        }
 
         @Override
         public String toString() {

@@ -6,10 +6,7 @@ import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConstantInt;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
-import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
-import edu.cmu.cs.mvelezce.language.ast.statement.StatementBlock;
-import edu.cmu.cs.mvelezce.language.ast.statement.StatementIf;
-import edu.cmu.cs.mvelezce.language.ast.statement.StatementSleep;
+import edu.cmu.cs.mvelezce.language.ast.statement.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -236,6 +233,98 @@ public class PerformanceMapperTest {
     public void testGetConfigurationsToExecute13() {
         Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABCD, ADXY, ABDX");
         PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test
+    public void testMeasurePerformance1() throws Exception {
+        List<Statement> statementBlock = new ArrayList<>();
+
+        Statement timedStatement = new StatementSleep(new ExpressionConfigurationConstant("B"));
+        StatementTimed statement = new StatementTimed(timedStatement);
+        statementBlock.add(statement);
+
+
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB");
+        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptionsSet);
+
+        Statement ast = new StatementBlock(statementBlock);
+
+        Set<PerformanceMapper.PerformanceEntry> measuredPerformance = new HashSet<>();
+        Set<String> configurationToExecute = new HashSet<>();
+        Map<Statement, Integer> blockToTime = new HashMap<>();
+        blockToTime.put(timedStatement, 0);
+        PerformanceMapper.PerformanceEntry performanceEntry =
+                new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        measuredPerformance.add(performanceEntry);
+
+        configurationToExecute = new HashSet<>();
+        configurationToExecute.add("A");
+        blockToTime = new HashMap<>();
+        blockToTime.put(timedStatement, 0);
+        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        measuredPerformance.add(performanceEntry);
+
+        configurationToExecute = new HashSet<>();
+        configurationToExecute.add("B");
+        blockToTime = new HashMap<>();
+        blockToTime.put(timedStatement, 1);
+        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 1);
+        measuredPerformance.add(performanceEntry);
+
+        configurationToExecute = new HashSet<>();
+        configurationToExecute.add("A");
+        configurationToExecute.add("B");
+        blockToTime = new HashMap<>();
+        blockToTime.put(timedStatement, 1);
+        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 1);
+        measuredPerformance.add(performanceEntry);
+
+        Assert.assertEquals(measuredPerformance, PerformanceMapper.measurePerformance(ast, configurationsToExecute));
+    }
+
+    @Test
+    public void testMeasurePerformance2() throws Exception {
+        List<Statement> statementBlock = new ArrayList<>();
+
+        Statement timedStatement = new StatementSleep(new ExpressionConstantInt(2));
+        Statement statement = new StatementTimed(timedStatement);
+        statement = new StatementIf(new ExpressionConfigurationConstant("A"), statement);
+        statementBlock.add(statement);
+
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB");
+        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptionsSet);
+
+        Statement ast = new StatementBlock(statementBlock);
+
+        Set<PerformanceMapper.PerformanceEntry> measuredPerformance = new HashSet<>();
+        Set<String> configurationToExecute = new HashSet<>();
+        Map<Statement, Integer> blockToTime = new HashMap<>();
+        PerformanceMapper.PerformanceEntry performanceEntry =
+                new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        measuredPerformance.add(performanceEntry);
+
+        configurationToExecute = new HashSet<>();
+        configurationToExecute.add("A");
+        blockToTime = new HashMap<>();
+        blockToTime.put(timedStatement, 2);
+        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 2);
+        measuredPerformance.add(performanceEntry);
+
+        configurationToExecute = new HashSet<>();
+        configurationToExecute.add("B");
+        blockToTime = new HashMap<>();
+        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        measuredPerformance.add(performanceEntry);
+
+        configurationToExecute = new HashSet<>();
+        configurationToExecute.add("A");
+        configurationToExecute.add("B");
+        blockToTime = new HashMap<>();
+        blockToTime.put(timedStatement, 2);
+        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 2);
+        measuredPerformance.add(performanceEntry);
+
+        Assert.assertEquals(measuredPerformance, PerformanceMapper.measurePerformance(ast, configurationsToExecute));
     }
 //
 //    @Test

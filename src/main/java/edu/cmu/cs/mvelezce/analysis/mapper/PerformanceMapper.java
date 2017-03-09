@@ -64,7 +64,7 @@ public class PerformanceMapper {
             Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
 
-        Set<Set<String>> powerSet = Helper.getConfigurations(parameters);
+        Set<Set<String>> configurationSpace = Helper.getConfigurations(parameters);
         Set<Set<String>> measuredConfigurations = new HashSet<>();
 
         for(PerformanceEntry performanceEntry : measuredPerformance) {
@@ -72,7 +72,7 @@ public class PerformanceMapper {
             measuredConfigurations.add(performanceEntry.getConfiguration());
         }
 
-        powerSet.removeAll(measuredConfigurations);
+        configurationSpace.removeAll(measuredConfigurations);
 
         Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = new HashMap<>();
 
@@ -86,23 +86,48 @@ public class PerformanceMapper {
             relevantStatementsToOptionsConvenient.put(entry.getKey(), relevantOptionsConvenient);
         }
 
-        for(Set<String> configuration : powerSet) {
+        for(Set<String> configuration : configurationSpace) {
             Map<Statement, Integer> blockToTime = new HashMap<>();
 
             for(Map.Entry<Statement, Set<String>> entry : relevantStatementsToOptionsConvenient.entrySet()) {
-                Set<String> configurationValuesInRelevantBlock = new HashSet<>(configuration);
-                configurationValuesInRelevantBlock.retainAll(entry.getValue());
+                Set<String> configurationValueInRelevantBlockForConfiguration = new HashSet<>(configuration);
+                configurationValueInRelevantBlockForConfiguration.retainAll(entry.getValue());
 
+                int baseTime = -1;
                 for(PerformanceEntry performanceEntry : measuredPerformance) {
-                    if(configurationValuesInRelevantBlock.equals(performanceEntry.getConfiguration())) {
-                        System.out.println(0);
+                    Set<String> configurationValueInMeasuredConfiguration = new HashSet<>(performanceEntry.getConfiguration());
+                    configurationValueInMeasuredConfiguration.retainAll(entry.getValue());
+
+                    if(configurationValueInMeasuredConfiguration.equals(configurationValueInRelevantBlockForConfiguration)) {
+                        Statement statement = entry.getKey();
+                        if(statement instanceof StatementIf) {
+                            statement = ((StatementIf) statement).getThenBlock();
+                        }
+
+                        Integer time = performanceEntry.getBlockToTime().get(statement);
+
+                        if(time != null) {
+                            blockToTime.put(entry.getKey(), time);
+                        }
+                        else {
+                            blockToTime.put(entry.getKey(), 0);
+                        }
+
+                        baseTime = performanceEntry.getBaseTime();
+                        break;
                     }
                 }
 
-            }
+                int totalTime = baseTime;
+                for(Integer blockTime : blockToTime.values()) {
+                    totalTime += blockTime;
+                }
 
+                configurationToPerformance.put(configuration, totalTime);
+            }
         }
 
+//        System.out.println(configurationToPerformance);
         return configurationToPerformance;
     }
 

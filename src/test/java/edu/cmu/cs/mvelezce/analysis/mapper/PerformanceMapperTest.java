@@ -205,11 +205,11 @@ public class PerformanceMapperTest {
         PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
     }
 
-//    @Test // TODO ERROR
-//    public void testGetConfigurationsToExecute9() {
-//        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, CD, BD");
-//        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-//    }
+    @Test // TODO ERROR because I need to get the other 4 configs from ABC
+    public void testGetConfigurationsToExecute9() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, CD, BD");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
 
     @Test
     public void testGetConfigurationsToExecute10() {
@@ -232,6 +232,12 @@ public class PerformanceMapperTest {
     @Test
     public void testGetConfigurationsToExecute13() {
         Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABCD, ADXY, ABDX");
+        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
+    }
+
+    @Test // TODO Error
+    public void testGetConfigurationsToExecute14() {
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, AD, BC, CD, BD");
         PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
     }
 

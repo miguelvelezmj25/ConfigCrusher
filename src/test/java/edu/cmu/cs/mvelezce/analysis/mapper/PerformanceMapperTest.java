@@ -83,14 +83,14 @@ public class PerformanceMapperTest {
     public void testGetRelevantUniqueOptions1() throws Exception {
         Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, AC");
 
-        Assert.assertEquals(set, PerformanceMapper.getUniqueRelevantOptions(set));
+        Assert.assertEquals(set, PerformanceMapper.filterOptions(set));
     }
 
     @Test
     public void testGetRelevantUniqueOptions2() throws Exception {
         Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("ABC, ACD");
 
-        Assert.assertEquals(set, PerformanceMapper.getUniqueRelevantOptions(set));
+        Assert.assertEquals(set, PerformanceMapper.filterOptions(set));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class PerformanceMapperTest {
         Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, ABC");
         Set<Set<ExpressionConfigurationConstant>> result = PerformanceMapperTest.getOptionsSet("ABC");
 
-        Assert.assertEquals(result, PerformanceMapper.getUniqueRelevantOptions(set));
+        Assert.assertEquals(result, PerformanceMapper.filterOptions(set));
     }
 
     @Test
@@ -106,7 +106,7 @@ public class PerformanceMapperTest {
         Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
         Set<Set<ExpressionConfigurationConstant>> result = PerformanceMapperTest.getOptionsSet("ABC, BCD, DEF");
 
-        Assert.assertEquals(result, PerformanceMapper.getUniqueRelevantOptions(set));
+        Assert.assertEquals(result, PerformanceMapper.filterOptions(set));
     }
 
     @Test
@@ -235,7 +235,7 @@ public class PerformanceMapperTest {
         PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
     }
 
-    @Test // TODO Error
+    @Test
     public void testGetConfigurationsToExecute14() {
         Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, AD, BC, CD, BD");
         PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
@@ -331,6 +331,34 @@ public class PerformanceMapperTest {
         measuredPerformance.add(performanceEntry);
 
         Assert.assertEquals(measuredPerformance, PerformanceMapper.measurePerformance(ast, configurationsToExecute));
+    }
+
+    @Test
+    public void testPredictPerformanceForAllConfigurations1() {
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+        parameters.add(new ExpressionConfigurationConstant("B"));
+
+        Set<PerformanceMapper.PerformanceEntry> measuredPerformance = new HashSet<>();
+
+        Statement timedStatement = new StatementSleep(new ExpressionConstantInt(2));
+
+        Set<String> configurationToExecute = new HashSet<>();
+        Map<Statement, Integer> blockToTime = new HashMap<>();
+        PerformanceMapper.PerformanceEntry performanceEntry =
+                new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        measuredPerformance.add(performanceEntry);
+
+        configurationToExecute = new HashSet<>();
+        configurationToExecute.add("A");
+        configurationToExecute.add("B");
+        blockToTime = new HashMap<>();
+        blockToTime.put(timedStatement, 2);
+        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 2);
+        measuredPerformance.add(performanceEntry);
+
+//        PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance);
+
     }
 //
 //    @Test

@@ -35,7 +35,7 @@ public class PerformanceMapper {
     };
 
     public static PerformanceModel buildPerformanceModel(Set<PerformanceEntry> measuredPerformance,
-                                             Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
+                                                         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
         Map<Statement, Set<String>> relevantStatementsToOptionsConvenient =
                 PerformanceMapper.getMapConvenient(relevantStatementsToOptions);
 
@@ -71,6 +71,27 @@ public class PerformanceMapper {
         return new PerformanceModel(baseTime, blockTimeList);
     }
 
+    public static PerformanceModel buildPerformanceModel(String program) {
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(ast);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions =
+                PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        ast = PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, relevantStatementsToOptions.keySet());
+
+        Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantStatementsToOptions.values());
+        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptions);
+
+        Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
+
+        return PerformanceMapper.buildPerformanceModel(measuredPerformance, relevantStatementsToOptions);
+    }
+
     public static Map<Set<String>, Integer> buildPerformanceTable(String program,
                                                                   Set<ExpressionConfigurationConstant> parameters) {
         Lexer lexer = new Lexer(program);
@@ -88,12 +109,10 @@ public class PerformanceMapper {
         Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantStatementsToOptions.values());
         Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptions);
 
-        Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measurePerformance(ast, configurationsToExecute);
-        Map<Set<String>, Integer> predictedPerformanceForAllConfigurations =
-                PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance,
-                        relevantStatementsToOptions);
+        Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
 
-        return predictedPerformanceForAllConfigurations;
+        return PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance,
+                relevantStatementsToOptions);
     }
 
     public static Map<Set<String>, Integer> predictPerformanceForAllConfigurations(
@@ -159,7 +178,7 @@ public class PerformanceMapper {
         return configurationToPerformance;
     }
 
-    public static Set<PerformanceEntry> measurePerformance(Statement ast, Set<Set<String>> configurationsToExecute) {
+    public static Set<PerformanceEntry> measureConfigurationPerformance(Statement ast, Set<Set<String>> configurationsToExecute) {
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 
         for(Set<String> configuration : configurationsToExecute) {
@@ -265,7 +284,7 @@ public class PerformanceMapper {
 
             Set<ExpressionConfigurationConstant> pivotOptions = new HashSet<>(entry1.getKey());
             pivotOptions.retainAll(entry2.getKey());
-            System.out.println("\nPivot: " + pivotOptions + " for set1: " + entry1.getKey() + " set2: " + entry2.getKey());
+//            System.out.println("\nPivot: " + pivotOptions + " for set1: " + entry1.getKey() + " set2: " + entry2.getKey());
 
             // TODO use convenient method
             Set<String> pivotOptionsConvenient = PerformanceMapper.getSetConvenient(pivotOptions);
@@ -287,7 +306,7 @@ public class PerformanceMapper {
                 PerformanceMapper.simpleMerging(entry2, entry1, pivotOptionsConvenient, configurationsToExecute);
             }
 //            }
-            System.out.println(configurationsToExecute);
+//            System.out.println(configurationsToExecute);
 
             Set<ExpressionConfigurationConstant> newCalculatedOptions = new HashSet<>(entry1.getKey());
             newCalculatedOptions.addAll(entry2.getKey());
@@ -360,12 +379,12 @@ public class PerformanceMapper {
         Iterator<Set<String>> largeSet = largeEntry.getValue().iterator();
         Iterator<Set<String>> smallSet = smallEntry.getValue().iterator();
 
-        System.out.println("entry 1 size: " + largeEntry.getValue().size());
-        System.out.println("entry 2 size: " + smallEntry.getValue().size());
+//        System.out.println("entry 1 size: " + largeEntry.getValue().size());
+//        System.out.println("entry 2 size: " + smallEntry.getValue().size());
 
         while(largeSet.hasNext() && smallSet.hasNext()) {
             Set<String> configurationInLargeSet = largeSet.next();
-            System.out.println("Set1: " + configurationInLargeSet);
+//            System.out.println("Set1: " + configurationInLargeSet);
 
             Set<String> valuePivotOptionsInLargeSet = new HashSet<>(configurationInLargeSet);
             valuePivotOptionsInLargeSet.retainAll(pivotOptionsConvenient);
@@ -373,13 +392,13 @@ public class PerformanceMapper {
 
             while(smallSet.hasNext()) {
                 Set<String> configurationInSmallSet = smallSet.next();
-                System.out.println("Set2: " + configurationInSmallSet);
+//                System.out.println("Set2: " + configurationInSmallSet);
 
                 Set<String> valuePivotOptionsInSmallSet = new HashSet<>(configurationInSmallSet);
                 valuePivotOptionsInSmallSet.retainAll(pivotOptionsConvenient);
 
                 if(valuePivotOptionsInLargeSet.equals(valuePivotOptionsInSmallSet)) {
-                    System.out.println("Can compress");
+//                    System.out.println("Can compress");
                     Set<String> compressedConfiguration = new HashSet<>(configurationInLargeSet);
                     compressedConfiguration.addAll(configurationInSmallSet);
                     configurationsToExecute.add(compressedConfiguration);
@@ -542,9 +561,17 @@ public class PerformanceMapper {
         @Override
         public Statement visitStatementIf(StatementIf statementIf) {
             if(this.relevantStatements.contains(statementIf)) {
-                StatementTimed thenBlock = new StatementTimed(statementIf.getThenBlock());
+                Statement thenBlock = statementIf.getThenBlock().accept(this);
+                StatementTimed timedThenBlock = null;
 
-                return new StatementIf(statementIf.getCondition(), thenBlock);
+                if(thenBlock.equals(statementIf.getThenBlock())) {
+                    timedThenBlock = new StatementTimed(statementIf.getThenBlock());
+                }
+                else {
+                    timedThenBlock = new StatementTimed(thenBlock);
+                }
+
+                return new StatementIf(statementIf.getCondition(), timedThenBlock);
             }
 
             return super.visitStatementIf(statementIf);

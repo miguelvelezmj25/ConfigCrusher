@@ -11,7 +11,7 @@ import java.util.*;
 public class PerformanceModelTest {
 
     @Test
-    public void testToString1() {
+    public void testEvaluate1() {
         List<Map<Set<String>, Integer>> blocks = new ArrayList<>();
         Map<Set<String>, Integer> block = new HashMap<>();
         Set<String> configuration = new HashSet<>();
@@ -25,7 +25,6 @@ public class PerformanceModelTest {
 
         block = new HashMap<>();
         configuration = new HashSet<>();
-        configuration.add("B");
         block.put(configuration, 0);
 
         configuration = new HashSet<>();
@@ -35,12 +34,30 @@ public class PerformanceModelTest {
         blocks.add(block);
 
         PerformanceModel pm = new PerformanceModel(6, blocks);
-        String performanceModel = "T = 6 + (3A) + (1B)";
-        Assert.assertEquals(performanceModel, pm.toString());
+
+        int performance = 6;
+        configuration = new HashSet<>();
+        Assert.assertEquals(performance, pm.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, pm.evaluate(configuration));
+
+        performance = 9;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, pm.evaluate(configuration));
+
+        performance = 7;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, pm.evaluate(configuration));
     }
 
     @Test
-    public void testToString2() {
+    public void testEvaluate2() {
         List<Map<Set<String>, Integer>> blocks = new ArrayList<>();
         Map<Set<String>, Integer> block = new HashMap<>();
         Set<String> configuration = new HashSet<>();
@@ -55,14 +72,14 @@ public class PerformanceModelTest {
         block.put(configuration, 3);
 
         configuration = new HashSet<>();
-        configuration.add("AB");
+        configuration.add("A");
+        configuration.add("B");
         block.put(configuration, 3);
 
         blocks.add(block);
 
         block = new HashMap<>();
         configuration = new HashSet<>();
-        configuration.add("B");
         block.put(configuration, 0);
 
         configuration = new HashSet<>();
@@ -72,7 +89,25 @@ public class PerformanceModelTest {
         blocks.add(block);
 
         PerformanceModel pm = new PerformanceModel(6, blocks);
-        String performanceModel = "T = 6 + (3A v +3AB v +3B) + (1B)";
-        Assert.assertEquals(performanceModel, pm.toString());
+
+        int performance = 6;
+        configuration = new HashSet<>();
+        Assert.assertEquals(performance, pm.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, pm.evaluate(configuration));
+
+        performance = 9;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, pm.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, pm.evaluate(configuration));
     }
 }

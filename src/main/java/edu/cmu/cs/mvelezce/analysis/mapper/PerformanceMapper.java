@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.analysis.mapper;
 
 import edu.cmu.cs.mvelezce.analysis.Helper;
+import edu.cmu.cs.mvelezce.analysis.PerformanceModel;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
@@ -33,8 +34,54 @@ public class PerformanceMapper {
         }
     };
 
-    public static Map<Set<String>, Integer> calculatePerformance(String program,
-                                                                 Set<ExpressionConfigurationConstant> parameters) {
+    public static PerformanceModel buildPerformanceModel(Set<PerformanceEntry> measuredPerformance,
+                                             Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
+        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = new HashMap<>();
+
+        for(Map.Entry<Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementsToOptions.entrySet()) {
+            Set<String> relevantOptionsConvenient = new HashSet<>();
+
+            for(ExpressionConfigurationConstant relevantOption : entry.getValue()) {
+                relevantOptionsConvenient.add(relevantOption.getName());
+            }
+
+            relevantStatementsToOptionsConvenient.put(entry.getKey(), relevantOptionsConvenient);
+        }
+
+        List<Map<Set<String>, Integer>> blockTimeList = new ArrayList<>();
+        int baseTime = -1;
+
+        for(Map.Entry<Statement, Set<String>> entry : relevantStatementsToOptionsConvenient.entrySet()) {
+            Map<Set<String>, Integer> blockTime = new HashMap<>();
+
+            for(PerformanceEntry performanceEntry : measuredPerformance) {
+                Set<String> configurationValueInMeasuredConfiguration = new HashSet<>(performanceEntry.getConfiguration());
+                configurationValueInMeasuredConfiguration.retainAll(entry.getValue());
+
+                Statement statement = entry.getKey();
+                if (statement instanceof StatementIf) {
+                    statement = ((StatementIf) statement).getThenBlock();
+                }
+
+                Integer time = performanceEntry.getBlockToTime().get(statement);
+
+                if(time != null) {
+                    blockTime.put(configurationValueInMeasuredConfiguration, time);
+                } else {
+                    blockTime.put(configurationValueInMeasuredConfiguration, 0);
+                }
+
+                baseTime = performanceEntry.getBaseTime();
+            }
+
+            blockTimeList.add(blockTime);
+        }
+
+        return new PerformanceModel(baseTime, blockTimeList);
+    }
+
+    public static Map<Set<String>, Integer> buildPerformanceTable(String program,
+                                                                  Set<ExpressionConfigurationConstant> parameters) {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -127,7 +174,6 @@ public class PerformanceMapper {
             }
         }
 
-//        System.out.println(configurationToPerformance);
         return configurationToPerformance;
     }
 
@@ -239,6 +285,7 @@ public class PerformanceMapper {
             pivotOptions.retainAll(entry2.getKey());
             System.out.println("\nPivot: " + pivotOptions + " for set1: " + entry1.getKey() + " set2: " + entry2.getKey());
 
+            // TODO use convenient method
             Set<String> pivotOptionsConvenient = new HashSet<>();
 
             for(ExpressionConfigurationConstant pivotOption : pivotOptions) {
@@ -388,6 +435,16 @@ public class PerformanceMapper {
                                                                       Set<Statement> relevantStatements) {
         AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
         return program.accept(addTimedVisitor);
+    }
+
+    private Set<String> getSetConvenient(Set<ExpressionConfigurationConstant> optionSet) {
+        Set<String> optionSetConvenient = new HashSet<>();
+
+        for(ExpressionConfigurationConstant option : optionSet) {
+            optionSetConvenient.add(option.getName());
+        }
+
+        return optionSetConvenient;
     }
 
 //    /**

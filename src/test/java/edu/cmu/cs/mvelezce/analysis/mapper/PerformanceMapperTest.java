@@ -1,7 +1,9 @@
 package edu.cmu.cs.mvelezce.analysis.mapper;
 
 import edu.cmu.cs.mvelezce.analysis.Helper;
+import edu.cmu.cs.mvelezce.analysis.PerformanceModel;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
+import edu.cmu.cs.mvelezce.analysis.interpreter.Interpreter;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConstantInt;
@@ -11,6 +13,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.swing.plaf.nimbus.State;
 import java.util.*;
 
 /**
@@ -77,6 +80,73 @@ public class PerformanceMapperTest {
         Set<String> hold = new HashSet<>(relevantOptionsConvenient);
         hold.retainAll(result);
         return hold.equals(configuration);
+    }
+
+    @Test
+    public void testBuildPerformanceModel() throws Exception {
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = new HashMap<>();
+
+        Set<String> configuration = new HashSet<>();
+        Map<Statement, Integer> blockToTime = new HashMap<>();
+
+        Set<ExpressionConfigurationConstant> relevantOptions = new HashSet<>();
+        relevantOptions.add(new ExpressionConfigurationConstant("A"));
+        Statement timedStatement1 = new StatementSleep(new ExpressionConstantInt(3));
+        relevantStatementsToOptions.put(timedStatement1, relevantOptions);
+
+        int baseTime = 6;
+        PerformanceMapper.PerformanceEntry performanceEntry = new PerformanceMapper.PerformanceEntry(configuration, blockToTime, baseTime);
+        Set<PerformanceMapper.PerformanceEntry> measuredPerformance = new HashSet<>();
+        measuredPerformance.add(performanceEntry);
+
+        relevantOptions = new HashSet<>();
+        relevantOptions.add(new ExpressionConfigurationConstant("B"));
+        Statement timedStatement2 = new StatementSleep(new ExpressionConstantInt(1));
+        relevantStatementsToOptions.put(timedStatement2, relevantOptions);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        blockToTime = new HashMap<>();
+        int executionTime = 3;
+        baseTime += executionTime;
+        blockToTime.put(timedStatement1, executionTime);
+
+        relevantOptions = new HashSet<>();
+        relevantOptions.add(new ExpressionConfigurationConstant("A"));
+        relevantStatementsToOptions.put(timedStatement1, relevantOptions);
+
+        executionTime = 1;
+        baseTime += executionTime;
+        blockToTime.put(timedStatement2, executionTime);
+        performanceEntry = new PerformanceMapper.PerformanceEntry(configuration, blockToTime, baseTime);
+        measuredPerformance.add(performanceEntry);
+
+        relevantOptions = new HashSet<>();
+        relevantOptions.add(new ExpressionConfigurationConstant("B"));
+        relevantStatementsToOptions.put(timedStatement2, relevantOptions);
+
+        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(measuredPerformance, relevantStatementsToOptions);
+
+        int performance = 6;
+        configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 9;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 7;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
     }
 
     @Test
@@ -248,7 +318,6 @@ public class PerformanceMapperTest {
         Statement timedStatement = new StatementSleep(new ExpressionConfigurationConstant("B"));
         StatementTimed statement = new StatementTimed(timedStatement);
         statementBlock.add(statement);
-
 
         Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptionsSet);
@@ -432,6 +501,8 @@ public class PerformanceMapperTest {
         Assert.assertEquals(result, PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions));
     }
 
+
+
 //    @Test
 //    public void testCalculatePerformance1() throws Exception {
 //        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
@@ -456,7 +527,7 @@ public class PerformanceMapperTest {
 //        parameters.add(new ExpressionConfigurationConstant("A"));
 //        parameters.add(new ExpressionConfigurationConstant("B"));
 //
-//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.calculatePerformance(program, parameters));
+//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
 //    }
 //
@@ -485,7 +556,7 @@ public class PerformanceMapperTest {
 //        parameters.add(new ExpressionConfigurationConstant("B"));
 //
 //        // TODO must calculate B
-//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.calculatePerformance(program, parameters));
+//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
 //    }
 //

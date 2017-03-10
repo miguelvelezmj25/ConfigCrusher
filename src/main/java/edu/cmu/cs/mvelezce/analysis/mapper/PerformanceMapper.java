@@ -36,17 +36,8 @@ public class PerformanceMapper {
 
     public static PerformanceModel buildPerformanceModel(Set<PerformanceEntry> measuredPerformance,
                                              Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
-        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = new HashMap<>();
-
-        for(Map.Entry<Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementsToOptions.entrySet()) {
-            Set<String> relevantOptionsConvenient = new HashSet<>();
-
-            for(ExpressionConfigurationConstant relevantOption : entry.getValue()) {
-                relevantOptionsConvenient.add(relevantOption.getName());
-            }
-
-            relevantStatementsToOptionsConvenient.put(entry.getKey(), relevantOptionsConvenient);
-        }
+        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient =
+                PerformanceMapper.getMapConvenient(relevantStatementsToOptions);
 
         List<Map<Set<String>, Integer>> blockTimeList = new ArrayList<>();
         int baseTime = -1;
@@ -121,17 +112,8 @@ public class PerformanceMapper {
 
         configurationSpace.removeAll(measuredConfigurations);
 
-        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = new HashMap<>();
-
-        for(Map.Entry<Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementsToOptions.entrySet()) {
-            Set<String> relevantOptionsConvenient = new HashSet<>();
-
-            for(ExpressionConfigurationConstant relevantOption : entry.getValue()) {
-                relevantOptionsConvenient.add(relevantOption.getName());
-            }
-
-            relevantStatementsToOptionsConvenient.put(entry.getKey(), relevantOptionsConvenient);
-        }
+        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient =
+                PerformanceMapper.getMapConvenient(relevantStatementsToOptions);
 
         for(Set<String> configuration : configurationSpace) {
             Map<Statement, Integer> blockToTime = new HashMap<>();
@@ -286,12 +268,7 @@ public class PerformanceMapper {
             System.out.println("\nPivot: " + pivotOptions + " for set1: " + entry1.getKey() + " set2: " + entry2.getKey());
 
             // TODO use convenient method
-            Set<String> pivotOptionsConvenient = new HashSet<>();
-
-            for(ExpressionConfigurationConstant pivotOption : pivotOptions) {
-                pivotOptionsConvenient.add(pivotOption.getName());
-            }
-
+            Set<String> pivotOptionsConvenient = PerformanceMapper.getSetConvenient(pivotOptions);
             configurationsToExecute = new HashSet<>();
 
 //            if(entry2.getKey().containsAll(entry1.getKey())) {
@@ -437,7 +414,7 @@ public class PerformanceMapper {
         return program.accept(addTimedVisitor);
     }
 
-    private Set<String> getSetConvenient(Set<ExpressionConfigurationConstant> optionSet) {
+    private static Set<String> getSetConvenient(Set<ExpressionConfigurationConstant> optionSet) {
         Set<String> optionSetConvenient = new HashSet<>();
 
         for(ExpressionConfigurationConstant option : optionSet) {
@@ -445,6 +422,23 @@ public class PerformanceMapper {
         }
 
         return optionSetConvenient;
+    }
+
+    private static Map<Statement, Set<String>> getMapConvenient(
+            Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
+        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = new HashMap<>();
+
+        for(Map.Entry<Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementsToOptions.entrySet()) {
+            Set<String> relevantOptionsConvenient = new HashSet<>();
+
+            for(ExpressionConfigurationConstant relevantOption : entry.getValue()) {
+                relevantOptionsConvenient.add(relevantOption.getName());
+            }
+
+            relevantStatementsToOptionsConvenient.put(entry.getKey(), relevantOptionsConvenient);
+        }
+
+        return relevantStatementsToOptionsConvenient;
     }
 
 //    /**

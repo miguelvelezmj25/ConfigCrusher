@@ -498,8 +498,6 @@ public class PerformanceMapperTest {
         Assert.assertEquals(result, PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions));
     }
 
-
-
     @Test
     public void testBuildPerformanceTable1() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
@@ -558,7 +556,7 @@ public class PerformanceMapperTest {
 //    }
 
     @Test
-    public void calculatePerformance3() throws Exception {
+    public void testBuildPerformanceTable3() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program3");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -586,7 +584,7 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void calculatePerformance4() throws Exception {
+    public void testBuildPerformanceTable4() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program4");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -614,7 +612,7 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void calculatePerformance5() throws Exception {
+    public void testBuildPerformanceTable5() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program5");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -642,7 +640,7 @@ public class PerformanceMapperTest {
     }
 
 //    @Test
-//    public void calculatePerformance6() throws Exception {
+//    public void testBuildPerformanceTable6() throws Exception {
 //        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -691,7 +689,7 @@ public class PerformanceMapperTest {
 //    }
 
     @Test
-    public void calculatePerformance7() throws Exception {
+    public void testBuildPerformanceTable7() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program7");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -785,7 +783,7 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void calculatePerformance8() throws Exception {
+    public void testBuildPerformanceTable8() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program8");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -833,4 +831,410 @@ public class PerformanceMapperTest {
 //        System.out.println(configurationToPerformance);
     }
 
+    @Test
+    public void testBuildPerformanceTable9() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program9");
+
+        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
+        configurationToPerformance.put(new HashSet<>(), 0);
+
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+        configurationToPerformance.put(configuration, 3);
+
+        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+        parameters.add(new ExpressionConfigurationConstant("A"));
+
+        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+//        System.out.println(configurationToPerformance);
+    }
+
+    @Test
+    public void testBuildPerformanceModelFinal1() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
+        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+
+        int performance = 3;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 6;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+//    @Test
+//    public void testBuildPerformanceTable2() throws Exception {
+//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program2");
+//
+//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
+//        configurationToPerformance.put(new HashSet<>(), 0);
+//
+//        Set<String> configuration = new HashSet<>();
+//        configuration.add("A");
+//        configurationToPerformance.put(configuration, 6);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        configurationToPerformance.put(configuration, 0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        configurationToPerformance.put(configuration, 4);
+//
+//        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+//        parameters.add(new ExpressionConfigurationConstant("A"));
+//        parameters.add(new ExpressionConfigurationConstant("B"));
+//
+//        // TODO must calculate B
+//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+//        System.out.println(configurationToPerformance);
+//    }
+
+    @Test
+    public void testBuildPerformanceModelFinal3() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program3");
+        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+        System.out.println(performanceModel);
+
+        int performance = 6;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 7;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModelFinal4() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program4");
+        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+
+        int performance = 6;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 7;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+//    @Test
+//    public void testBuildPerformanceModelFinal5() throws Exception {
+//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program5");
+//        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+//        System.out.println(performanceModel);
+//
+//        int performance = 0;
+//        Set<String> configuration = new HashSet<>();
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 4;
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 3;
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 2;
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//    }
+//
+//    @Test
+//    public void testBuildPerformanceModelFinal6() throws Exception {
+//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
+//
+//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
+//        configurationToPerformance.put(new HashSet<>(), 0);
+//
+//        Set<String> configuration = new HashSet<>();
+//        configuration.add("A");
+//        configurationToPerformance.put(configuration, 0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        configurationToPerformance.put(configuration, 0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("C");
+//        configurationToPerformance.put(configuration, 0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        configurationToPerformance.put(configuration, 0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("C");
+//        configurationToPerformance.put(configuration, 5);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        configuration.add("C");
+//        configurationToPerformance.put(configuration, 1);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        configuration.add("C");
+//        configurationToPerformance.put(configuration, 6);
+//
+//        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
+//        parameters.add(new ExpressionConfigurationConstant("A"));
+//        parameters.add(new ExpressionConfigurationConstant("B"));
+//        parameters.add(new ExpressionConfigurationConstant("C"));
+//
+//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+//        System.out.println(configurationToPerformance);
+//    }
+
+    @Test
+    public void testBuildPerformanceModelFinal7() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program7");
+        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+//        System.out.println(performanceModel);
+
+        int performance = 0;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 2;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 2;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 2;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("C");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 5;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 6;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModelFinal8() throws Exception {
+        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program8");
+        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+        System.out.println(performanceModel);
+
+        int performance = 0;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+//    @Test
+//    public void testBuildPerformanceModelFinal9() throws Exception {
+//        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program9");
+//        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+//        System.out.println(performanceModel);
+//
+//        int performance = 0;
+//        Set<String> configuration = new HashSet<>();
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 1;
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 1;
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 0;
+//        configuration = new HashSet<>();
+//        configuration.add("C");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 1;
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 4;
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("C");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 1;
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        configuration.add("C");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 4;
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        configuration.add("C");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//    }
 }

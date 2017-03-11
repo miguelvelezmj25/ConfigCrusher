@@ -88,6 +88,7 @@ public class PerformanceMapper {
         Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptions);
 
         Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
+        System.out.println(measuredPerformance.size());
 
         return PerformanceMapper.buildPerformanceModel(measuredPerformance, relevantStatementsToOptions);
     }
@@ -557,19 +558,19 @@ public class PerformanceMapper {
          *
          * @param statementIf
          * @return
-         */
+         */ // TODO check this
         @Override
         public Statement visitStatementIf(StatementIf statementIf) {
             if(this.relevantStatements.contains(statementIf)) {
-                Statement thenBlock = statementIf.getThenBlock().accept(this);
+//                Statement thenBlock = statementIf.getThenBlock().accept(this);
                 StatementTimed timedThenBlock = null;
 
-                if(thenBlock.equals(statementIf.getThenBlock())) {
+//                if(thenBlock.equals(statementIf.getThenBlock())) {
                     timedThenBlock = new StatementTimed(statementIf.getThenBlock());
-                }
-                else {
-                    timedThenBlock = new StatementTimed(thenBlock);
-                }
+//                }
+//                else {
+//                    timedThenBlock = new StatementTimed(thenBlock);
+//                }
 
                 return new StatementIf(statementIf.getCondition(), timedThenBlock);
             }
@@ -598,7 +599,7 @@ public class PerformanceMapper {
         private Set<String> configuration;
         private Map<Statement, Integer> blockToTime;
         private int totalTime;
-        private int baseTime;
+        private int baseTime; // TODO might be calculated in the outer class since it is the same for all
 
         public PerformanceEntry(Set<String> configuration, Map<Statement, Integer> blockToTime, int totalTime) {
             this.configuration = configuration;

@@ -34,7 +34,7 @@ public class PerformanceMapper {
         }
     };
 
-    public static PerformanceModel buildPerformanceModel(Set<PerformanceEntry> measuredPerformance,
+    public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance,
                                                          Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
         Map<Statement, Set<String>> relevantStatementsToOptionsConvenient =
                 PerformanceMapper.getMapConvenient(relevantStatementsToOptions);
@@ -90,7 +90,7 @@ public class PerformanceMapper {
         Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
 //        System.out.println(measuredPerformance.size());
 
-        return PerformanceMapper.buildPerformanceModel(measuredPerformance, relevantStatementsToOptions);
+        return PerformanceMapper.createPerformanceModel(measuredPerformance, relevantStatementsToOptions);
     }
 
     public static Map<Set<String>, Integer> buildPerformanceTable(String program,

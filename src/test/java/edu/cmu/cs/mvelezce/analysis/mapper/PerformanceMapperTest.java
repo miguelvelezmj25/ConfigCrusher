@@ -80,7 +80,7 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void testBuildPerformanceModel1() throws Exception {
+    public void testCreatePerformanceModel1() throws Exception {
         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = new HashMap<>();
 
         Set<String> configuration = new HashSet<>();
@@ -123,7 +123,7 @@ public class PerformanceMapperTest {
         relevantOptions.add(new ExpressionConfigurationConstant("B"));
         relevantStatementsToOptions.put(timedStatement2, relevantOptions);
 
-        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(measuredPerformance, relevantStatementsToOptions);
+        PerformanceModel performanceModel = PerformanceMapper.createPerformanceModel(measuredPerformance, relevantStatementsToOptions);
 
         int performance = 6;
         configuration = new HashSet<>();
@@ -850,7 +850,7 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void testBuildPerformanceModelFinal1() throws Exception {
+    public void testBuildPerformanceModel1() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program1");
         PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
 
@@ -876,7 +876,7 @@ public class PerformanceMapperTest {
     }
 
 //    @Test
-//    public void testBuildPerformanceTable2() throws Exception {
+//    public void testBuildPerformanceModel2() throws Exception {
 //        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program2");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -905,7 +905,7 @@ public class PerformanceMapperTest {
 //    }
 
     @Test
-    public void testBuildPerformanceModelFinal3() throws Exception {
+    public void testBuildPerformanceModel3() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program3");
         PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
@@ -932,7 +932,7 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void testBuildPerformanceModelFinal4() throws Exception {
+    public void testBuildPerformanceModel4() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program4");
         PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
 
@@ -958,7 +958,7 @@ public class PerformanceMapperTest {
     }
 
 //    @Test
-//    public void testBuildPerformanceModelFinal5() throws Exception {
+//    public void testBuildPerformanceModel5() throws Exception {
 //        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program5");
 //        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
@@ -985,7 +985,7 @@ public class PerformanceMapperTest {
 //    }
 //
 //    @Test
-//    public void testBuildPerformanceModelFinal6() throws Exception {
+//    public void testBuildPerformanceModel6() throws Exception {
 //        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program6");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -1034,7 +1034,7 @@ public class PerformanceMapperTest {
 //    }
 
     @Test
-    public void testBuildPerformanceModelFinal7() throws Exception {
+    public void testBuildPerformanceModel7() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program7");
         PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
@@ -1137,7 +1137,7 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void testBuildPerformanceModelFinal8() throws Exception {
+    public void testBuildPerformanceModel8() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program8");
         PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
@@ -1188,7 +1188,7 @@ public class PerformanceMapperTest {
     }
 
 //    @Test
-//    public void testBuildPerformanceModelFinal9() throws Exception {
+//    public void testBuildPerformanceModel9() throws Exception {
 //        String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program9");
 //        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
 //        System.out.println(performanceModel);

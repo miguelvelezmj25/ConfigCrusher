@@ -908,7 +908,7 @@ public class PerformanceMapperTest {
     public void testBuildPerformanceModelFinal3() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program3");
         PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
-        System.out.println(performanceModel);
+//        System.out.println(performanceModel);
 
         int performance = 6;
         Set<String> configuration = new HashSet<>();
@@ -946,7 +946,7 @@ public class PerformanceMapperTest {
         configuration.add("B");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
 
-        performance = 10;
+        performance = 9;
         configuration = new HashSet<>();
         configuration.add("A");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
@@ -1140,7 +1140,7 @@ public class PerformanceMapperTest {
     public void testBuildPerformanceModelFinal8() throws Exception {
         String program = edu.cmu.cs.mvelezce.language.Helper.loadFile(edu.cmu.cs.mvelezce.language.Helper.PROGRAMS_PATH + "program8");
         PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
-        System.out.println(performanceModel);
+//        System.out.println(performanceModel);
 
         int performance = 0;
         Set<String> configuration = new HashSet<>();

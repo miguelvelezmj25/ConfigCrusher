@@ -88,7 +88,7 @@ public class PerformanceMapper {
         Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptions);
 
         Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
-        System.out.println(measuredPerformance.size());
+//        System.out.println(measuredPerformance.size());
 
         return PerformanceMapper.buildPerformanceModel(measuredPerformance, relevantStatementsToOptions);
     }

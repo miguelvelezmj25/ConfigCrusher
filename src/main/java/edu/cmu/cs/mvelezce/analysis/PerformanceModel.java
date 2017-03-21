@@ -7,11 +7,11 @@ import java.util.*;
  */
 public class PerformanceModel {
     private int baseTime;
-    private Map<Set<String>, Map<Set<String>, Integer>> configurationToBlocks;
+    private Map<Set<String>, Map<Set<String>, Integer>> optionToBlock;
 
     public PerformanceModel(int baseTime, List<Map<Set<String>, Integer>> blocks) {
         this.baseTime = baseTime;
-        this.configurationToBlocks = new HashMap<>();
+        this.optionToBlock = new HashMap<>();
 
         for(Map<Set<String>, Integer> block : blocks) {
             Set<String> relevantOptions = new HashSet<>();
@@ -20,7 +20,9 @@ public class PerformanceModel {
                 relevantOptions.addAll(configuration);
             }
 
-            this.configurationToBlocks.put(relevantOptions, block);
+            // This is an option and it should be stored as an ExpressionConfigurationConstant, but for convenience, we
+            // leave it as a string
+            this.optionToBlock.put(relevantOptions, block);
         }
 
     }
@@ -28,11 +30,11 @@ public class PerformanceModel {
     public int evaluate(Set<String> configuration) {
         int performance = this.baseTime;
 
-        for(Map.Entry<Set<String>, Map<Set<String>, Integer>> entry : this.configurationToBlocks.entrySet()) {
-            Set<String> configurationValueInBlockForConfiguration = new HashSet<>(configuration);
-            configurationValueInBlockForConfiguration.retainAll(entry.getKey());
+        for(Map.Entry<Set<String>, Map<Set<String>, Integer>> entry : this.optionToBlock.entrySet()) {
+            Set<String> configurationValueOfOptionInBlock = new HashSet<>(configuration);
+            configurationValueOfOptionInBlock.retainAll(entry.getKey());
 
-            performance += entry.getValue().get(configurationValueInBlockForConfiguration);
+            performance += entry.getValue().get(configurationValueOfOptionInBlock);
         }
 
         return performance;
@@ -42,7 +44,7 @@ public class PerformanceModel {
     public String toString() {
         String performanceModel = "T = " + this.baseTime;
 
-        for(Map<Set<String>, Integer> block : this.configurationToBlocks.values()) {
+        for(Map<Set<String>, Integer> block : this.optionToBlock.values()) {
             performanceModel += " + (";
             int count = 0;
 

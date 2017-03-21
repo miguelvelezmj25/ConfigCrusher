@@ -250,8 +250,7 @@ public class PerformanceMapper {
     public static Set<Set<String>> getConfigurationsToExecute(
             Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
         // Calculates which options are subsets of other options
-        Set<Set<ExpressionConfigurationConstant>> filteredOptions =
-                PerformanceMapper.filterOptions(relevantOptionsSet);
+        Set<Set<ExpressionConfigurationConstant>> filteredOptions = PerformanceMapper.filterOptions(relevantOptionsSet);
 
         // Get the configurations for each option
         Map<Set<ExpressionConfigurationConstant>, Set<Set<String>>> optionsToConfigurationsToExecute = new HashMap<>();
@@ -287,7 +286,6 @@ public class PerformanceMapper {
             pivotOptions.retainAll(entry2.getKey());
 //            System.out.println("\nPivot: " + pivotOptions + " for set1: " + entry1.getKey() + " set2: " + entry2.getKey());
 
-            // TODO use convenient method
             Set<String> pivotOptionsConvenient = PerformanceMapper.getSetConvenient(pivotOptions);
             configurationsToExecute = new HashSet<>();
 
@@ -413,6 +411,7 @@ public class PerformanceMapper {
             if(!merged) {
                 Set<String> compressedConfiguration = new HashSet<>(configurationInLargeSet);
                 configurationsToExecute.add(compressedConfiguration);
+//                System.out.println("Just add");
 //                    throw new RuntimeException("Could not merge the sets");
             }
 
@@ -421,10 +420,12 @@ public class PerformanceMapper {
 
         while(largeSet.hasNext()) {
             configurationsToExecute.add(largeSet.next());
+//            System.out.println("Added rest from largetset");
         }
 
         while(smallSet.hasNext()) {
             configurationsToExecute.add(smallSet.next());
+//            System.out.println("Added rest from smallset");
         }
     }
 

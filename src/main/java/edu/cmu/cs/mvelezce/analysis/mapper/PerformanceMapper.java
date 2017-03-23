@@ -34,15 +34,14 @@ public class PerformanceMapper {
         }
     };
 
-    public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance,
-                                                         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
-        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient =
-                PerformanceMapper.getMapConvenient(relevantStatementsToOptions);
+    public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
+        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = PerformanceMapper.getMapConvenient(relevantStatementsToOptions);
 
         List<Map<Set<String>, Integer>> blockTimeList = new ArrayList<>();
         int baseTime = -1;
 
         for(Map.Entry<Statement, Set<String>> entry : relevantStatementsToOptionsConvenient.entrySet()) {
+            System.out.println(entry.getKey());
             Map<Set<String>, Integer> blockTime = new HashMap<>();
 
             for(PerformanceEntry performanceEntry : measuredPerformance) {
@@ -50,7 +49,8 @@ public class PerformanceMapper {
                 configurationValueInMeasuredConfiguration.retainAll(entry.getValue());
 
                 Statement statement = entry.getKey();
-                if (statement instanceof StatementIf) {
+
+                if(statement instanceof StatementIf) {
                     statement = ((StatementIf) statement).getThenBlock();
                 }
 
@@ -58,8 +58,11 @@ public class PerformanceMapper {
 
                 if(time != null) {
                     blockTime.put(configurationValueInMeasuredConfiguration, time);
-                } else {
+                    System.out.println(configurationValueInMeasuredConfiguration + " " + time);
+                }
+                else {
                     blockTime.put(configurationValueInMeasuredConfiguration, 0);
+                    System.out.println(configurationValueInMeasuredConfiguration + " " + 0);
                 }
 
                 baseTime = performanceEntry.getBaseTime();
@@ -80,8 +83,7 @@ public class PerformanceMapper {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions =
-                PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         ast = PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, relevantStatementsToOptions.keySet());
 
         Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantStatementsToOptions.values());
@@ -93,8 +95,7 @@ public class PerformanceMapper {
         return PerformanceMapper.createPerformanceModel(measuredPerformance, relevantStatementsToOptions);
     }
 
-    public static Map<Set<String>, Integer> buildPerformanceTable(String program,
-                                                                  Set<ExpressionConfigurationConstant> parameters) {
+    public static Map<Set<String>, Integer> buildPerformanceTable(String program, Set<ExpressionConfigurationConstant> parameters) {
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
@@ -103,8 +104,7 @@ public class PerformanceMapper {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions =
-                PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
         ast = PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, relevantStatementsToOptions.keySet());
 
         Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantStatementsToOptions.values());
@@ -112,14 +112,10 @@ public class PerformanceMapper {
 
         Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
 
-        return PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance,
-                relevantStatementsToOptions);
+        return PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions);
     }
 
-    public static Map<Set<String>, Integer> predictPerformanceForAllConfigurations(
-            Set<ExpressionConfigurationConstant> parameters,
-            Set<PerformanceEntry> measuredPerformance,
-            Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
+    public static Map<Set<String>, Integer> predictPerformanceForAllConfigurations(Set<ExpressionConfigurationConstant> parameters, Set<PerformanceEntry> measuredPerformance, Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
 
         Set<Set<String>> configurationSpace = Helper.getConfigurations(parameters);
@@ -132,8 +128,7 @@ public class PerformanceMapper {
 
         configurationSpace.removeAll(measuredConfigurations);
 
-        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient =
-                PerformanceMapper.getMapConvenient(relevantStatementsToOptions);
+        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = PerformanceMapper.getMapConvenient(relevantStatementsToOptions);
 
         for(Set<String> configuration : configurationSpace) {
             Map<Statement, Integer> blockToTime = new HashMap<>();
@@ -143,12 +138,14 @@ public class PerformanceMapper {
                 configurationValueInRelevantBlockForConfiguration.retainAll(entry.getValue());
 
                 int baseTime = -1;
+
                 for(PerformanceEntry performanceEntry : measuredPerformance) {
                     Set<String> configurationValueInMeasuredConfiguration = new HashSet<>(performanceEntry.getConfiguration());
                     configurationValueInMeasuredConfiguration.retainAll(entry.getValue());
 
                     if(configurationValueInMeasuredConfiguration.equals(configurationValueInRelevantBlockForConfiguration)) {
                         Statement statement = entry.getKey();
+
                         if(statement instanceof StatementIf) {
                             statement = ((StatementIf) statement).getThenBlock();
                         }
@@ -168,6 +165,7 @@ public class PerformanceMapper {
                 }
 
                 int totalTime = baseTime;
+
                 for(Integer blockTime : blockToTime.values()) {
                     totalTime += blockTime;
                 }
@@ -185,23 +183,20 @@ public class PerformanceMapper {
         for(Set<String> configuration : configurationsToExecute) {
             Interpreter interpreter = new Interpreter(ast);
             interpreter.evaluate(configuration);
-            configurationsToPerformance.add(new PerformanceEntry(configuration, interpreter.getTimedBlocks(),
-                    interpreter.getTotalExecutionTime()));
+            configurationsToPerformance.add(new PerformanceEntry(configuration, interpreter.getTimedBlocks(), interpreter.getTotalExecutionTime()));
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
 
         return configurationsToPerformance;
     }
 
-    public static Map<Statement, Set<ExpressionConfigurationConstant>> getRelevantStatementsToOptions(
-            Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+    public static Map<Statement, Set<ExpressionConfigurationConstant>> getRelevantStatementsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
             if(PerformanceMapper.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
                 RelevantInfoGetterVisitor performanceStatementVisitor = new RelevantInfoGetterVisitor(entry.getValue());
-                Set<ExpressionConfigurationConstant> possibleTaintingConfigurations =
-                        performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
+                Set<ExpressionConfigurationConstant> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
 
                 if(!possibleTaintingConfigurations.isEmpty()) {
                     relevantStatementToOptions.put(entry.getKey().getStatement(), possibleTaintingConfigurations);
@@ -212,8 +207,7 @@ public class PerformanceMapper {
         return relevantStatementToOptions;
     }
 
-    public static Set<Set<ExpressionConfigurationConstant>> filterOptions(
-            Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
+    public static Set<Set<ExpressionConfigurationConstant>> filterOptions(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
         Set<Set<ExpressionConfigurationConstant>> filteredOptions = new HashSet<>();
 
         for(Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
@@ -247,8 +241,7 @@ public class PerformanceMapper {
     }
 
     // Sound method
-    public static Set<Set<String>> getConfigurationsToExecute(
-            Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
+    public static Set<Set<String>> getConfigurationsToExecute(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
         // Calculates which options are subsets of other options
         Set<Set<ExpressionConfigurationConstant>> filteredOptions = PerformanceMapper.filterOptions(relevantOptionsSet);
 
@@ -270,16 +263,13 @@ public class PerformanceMapper {
             return configurationsToExecute;
         }
 
-        Iterator<Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator =
-                optionsToConfigurationsToExecute.entrySet().iterator();
-        Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry1 =
-                optionsToConfigurationsToExecuteIterator.next();
+        Iterator<Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator = optionsToConfigurationsToExecute.entrySet().iterator();
+        Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry1 = optionsToConfigurationsToExecuteIterator.next();
 //        Set<Set<ExpressionConfigurationConstant>> relevantOptionsCovered = new HashSet<>();
 //        relevantOptionsCovered.add(entry1.getKey());
 
         while(optionsToConfigurationsToExecuteIterator.hasNext()) {
-            Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry2 =
-                    optionsToConfigurationsToExecuteIterator.next();
+            Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry2 = optionsToConfigurationsToExecuteIterator.next();
 //            relevantOptionsCovered.add(entry2.getKey());
 
             Set<ExpressionConfigurationConstant> pivotOptions = new HashSet<>(entry1.getKey());
@@ -372,9 +362,7 @@ public class PerformanceMapper {
 //        }
 //    }
 
-    private static void simpleMerging(Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> largeEntry,
-                                     Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> smallEntry,
-                                     Set<String> pivotOptionsConvenient, Set<Set<String>> configurationsToExecute) {
+    private static void simpleMerging(Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> largeEntry, Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> smallEntry, Set<String> pivotOptionsConvenient, Set<Set<String>> configurationsToExecute) {
         Iterator<Set<String>> largeSet = largeEntry.getValue().iterator();
         Iterator<Set<String>> smallSet = smallEntry.getValue().iterator();
 
@@ -429,8 +417,7 @@ public class PerformanceMapper {
         }
     }
 
-    public static Statement instrumentProgramToTimeRelevantStatements(Statement program,
-                                                                      Set<Statement> relevantStatements) {
+    public static Statement instrumentProgramToTimeRelevantStatements(Statement program, Set<Statement> relevantStatements) {
         AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
         return program.accept(addTimedVisitor);
     }
@@ -445,8 +432,7 @@ public class PerformanceMapper {
         return optionSetConvenient;
     }
 
-    private static Map<Statement, Set<String>> getMapConvenient(
-            Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
+    private static Map<Statement, Set<String>> getMapConvenient(Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
         Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = new HashMap<>();
 
         for(Map.Entry<Statement, Set<ExpressionConfigurationConstant>> entry : relevantStatementsToOptions.entrySet()) {

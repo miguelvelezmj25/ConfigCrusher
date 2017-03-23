@@ -73,7 +73,7 @@ public class TaintAnalysis {
                 continue;
             }
 
-            for (BasicBlock successor : successors) {
+            for(BasicBlock successor : successors) {
                 if (successor.isSpecial()) {
                     continue;
                 }

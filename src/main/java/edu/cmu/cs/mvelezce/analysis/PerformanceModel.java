@@ -20,8 +20,7 @@ public class PerformanceModel {
                 relevantOptions.addAll(configuration);
             }
 
-            // This is an option and it should be stored as an ExpressionConfigurationConstant, but for convenience, we
-            // leave it as a string
+            // This is an option and it should be stored as an ExpressionConfigurationConstant, but for convenience, we leave it as a string
             this.optionToBlock.put(relevantOptions, block);
         }
 

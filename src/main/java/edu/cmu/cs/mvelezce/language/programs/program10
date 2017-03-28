@@ -1,0 +1,14 @@
+a=A
+b=B
+c=C
+d=0
+if(a) {
+    sleep(3)
+}
+if(b) {
+    sleep(1)
+    d=1
+}
+if(d && c) {
+    sleep(4)
+}

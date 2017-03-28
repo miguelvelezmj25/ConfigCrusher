@@ -41,7 +41,11 @@ public class PerformanceModel {
 
     @Override
     public String toString() {
-        String performanceModel = "T = " + this.baseTime;
+        String performanceModel = "T =" ;
+
+        if(this.baseTime != 0) {
+            performanceModel += this.baseTime;
+        }
 
         for(Map<Set<String>, Integer> block : this.optionToBlock.values()) {
             performanceModel += " + (";
@@ -53,7 +57,7 @@ public class PerformanceModel {
                         performanceModel += "";
                     }
                     else {
-                        performanceModel += " v +";
+                        performanceModel += " v + ";
                     }
 
                     performanceModel += "" + entry.getValue();

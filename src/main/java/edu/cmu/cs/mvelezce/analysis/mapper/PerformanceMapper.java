@@ -41,7 +41,6 @@ public class PerformanceMapper {
         int baseTime = -1;
 
         for(Map.Entry<Statement, Set<String>> entry : relevantStatementsToOptionsConvenient.entrySet()) {
-            System.out.println(entry.getKey());
             Map<Set<String>, Integer> blockTime = new HashMap<>();
 
             for(PerformanceEntry performanceEntry : measuredPerformance) {
@@ -58,11 +57,11 @@ public class PerformanceMapper {
 
                 if(time != null) {
                     blockTime.put(configurationValueInMeasuredConfiguration, time);
-                    System.out.println(configurationValueInMeasuredConfiguration + " " + time);
+//                    System.out.println(configurationValueInMeasuredConfiguration + " " + time);
                 }
                 else {
                     blockTime.put(configurationValueInMeasuredConfiguration, 0);
-                    System.out.println(configurationValueInMeasuredConfiguration + " " + 0);
+//                    System.out.println(configurationValueInMeasuredConfiguration + " " + 0);
                 }
 
                 baseTime = performanceEntry.getBaseTime();

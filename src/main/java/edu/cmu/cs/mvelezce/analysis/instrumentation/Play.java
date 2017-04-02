@@ -2,7 +2,9 @@ package edu.cmu.cs.mvelezce.analysis.instrumentation;
 
 import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
@@ -34,7 +36,19 @@ public class Play {
 //                System.out.println(classNode.name);
             }
         }
+    }
 
+    public static void readFile(String fileName) throws IOException {
+        ClassReader classReader = new ClassReader(fileName);
+        ClassNode classNode =  new ClassNode();
+        classReader.accept(classNode, 0);
+
+        for(MethodNode method : classNode.methods) {
+//            if(method.name.equals(("inc"))) {
+//                System.out.println(method.localVariables);
+//                System.out.println(method.instructions);
+//            }
+        }
     }
 
 }

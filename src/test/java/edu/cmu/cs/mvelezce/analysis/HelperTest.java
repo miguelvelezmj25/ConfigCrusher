@@ -11,11 +11,7 @@ import java.util.Set;
  * Created by miguelvelez on 2/11/17.
  */
 public class HelperTest {
-    @Test
-    public void incling() throws Exception {
-        Helper helper = new Helper();
-        helper.incling();
-    }
+
 //    @Test
 //    public void getNextConfiguration1() throws Exception {
 //        Set<ExpressionConfigurationConstant> parameters = new HashSet<>();

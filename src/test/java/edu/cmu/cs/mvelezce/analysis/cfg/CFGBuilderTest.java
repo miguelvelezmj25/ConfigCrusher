@@ -1,18 +1,5 @@
 package edu.cmu.cs.mvelezce.analysis.cfg;
 
-import edu.cmu.cs.mvelezce.language.Helper;
-import edu.cmu.cs.mvelezce.language.ast.expression.*;
-import edu.cmu.cs.mvelezce.language.ast.statement.*;
-import edu.cmu.cs.mvelezce.language.lexer.Lexer;
-import edu.cmu.cs.mvelezce.language.parser.Parser;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
-
 /**
  * Created by mvelezce on 2/6/17.
  */

@@ -7,7 +7,6 @@ import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
 import edu.cmu.cs.mvelezce.language.ast.statement.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 

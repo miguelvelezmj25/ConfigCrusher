@@ -75,7 +75,7 @@ public class Play {
         ClassNode classNode =  new ClassNode();
         classReader.accept(classNode, 0);
 
-        ClassTransformer classTransformer = new TimerClassTransformer(null);
+        ClassTransformer classTransformer = new TimerClassTransformer();
         classTransformer.transform(classNode);
 
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);

@@ -81,7 +81,7 @@ public class PerformanceMapperTest {
 
     @Test
     public void testCreatePerformanceModel1() throws Exception {
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = new HashMap<>();
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionsToOptions = new HashMap<>();
 
         Set<String> configuration = new HashSet<>();
         Map<Statement, Integer> blockToTime = new HashMap<>();
@@ -89,7 +89,7 @@ public class PerformanceMapperTest {
         Set<ExpressionConfigurationConstant> relevantOptions = new HashSet<>();
         relevantOptions.add(new ExpressionConfigurationConstant("A"));
         Statement timedStatement1 = new StatementSleep(new ExpressionConstantInt(3));
-        relevantStatementsToOptions.put(timedStatement1, relevantOptions);
+        relevantRegionsToOptions.put(timedStatement1, relevantOptions);
 
         int baseTime = 6;
         PerformanceMapper.PerformanceEntry performanceEntry = new PerformanceMapper.PerformanceEntry(configuration, blockToTime, baseTime);
@@ -99,7 +99,7 @@ public class PerformanceMapperTest {
         relevantOptions = new HashSet<>();
         relevantOptions.add(new ExpressionConfigurationConstant("B"));
         Statement timedStatement2 = new StatementSleep(new ExpressionConstantInt(1));
-        relevantStatementsToOptions.put(timedStatement2, relevantOptions);
+        relevantRegionsToOptions.put(timedStatement2, relevantOptions);
 
         configuration = new HashSet<>();
         configuration.add("A");
@@ -111,7 +111,7 @@ public class PerformanceMapperTest {
 
         relevantOptions = new HashSet<>();
         relevantOptions.add(new ExpressionConfigurationConstant("A"));
-        relevantStatementsToOptions.put(timedStatement1, relevantOptions);
+        relevantRegionsToOptions.put(timedStatement1, relevantOptions);
 
         executionTime = 1;
         baseTime += executionTime;
@@ -121,9 +121,9 @@ public class PerformanceMapperTest {
 
         relevantOptions = new HashSet<>();
         relevantOptions.add(new ExpressionConfigurationConstant("B"));
-        relevantStatementsToOptions.put(timedStatement2, relevantOptions);
+        relevantRegionsToOptions.put(timedStatement2, relevantOptions);
 
-        PerformanceModel performanceModel = PerformanceMapper.createPerformanceModel(measuredPerformance, relevantStatementsToOptions);
+        PerformanceModel performanceModel = PerformanceMapper.createPerformanceModel(measuredPerformance, relevantRegionsToOptions);
 
         int performance = 6;
         configuration = new HashSet<>();
@@ -177,10 +177,10 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void testGetConfigurationsInRelevantStatements1() {
+    public void testGetConfigurationsInRelevantRegions1() {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = new HashMap<>();
         Set<TaintAnalysis.PossibleTaint> possibleTaints = new HashSet<>();
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionToOptions = new HashMap<>();
 
         Set<ExpressionConfigurationConstant> taintingConfigurations = new HashSet<>();
         taintingConfigurations.add(new ExpressionConfigurationConstant("A"));
@@ -192,7 +192,7 @@ public class PerformanceMapperTest {
         BasicBlock currentBasicBlock = new BasicBlock(statement1);
         instructionsToTainted.put(currentBasicBlock, possibleTaints);
 
-        relevantStatementToOptions.put(statement1, taintingConfigurations);
+        relevantRegionToOptions.put(statement1, taintingConfigurations);
 
         taintingConfigurations = new HashSet<>();
         taintingConfigurations.add(new ExpressionConfigurationConstant("B"));
@@ -205,23 +205,23 @@ public class PerformanceMapperTest {
         currentBasicBlock = new BasicBlock(statement2);
         instructionsToTainted.put(currentBasicBlock, possibleTaints);
 
-        relevantStatementToOptions.put(statement2, taintingConfigurations);
+        relevantRegionToOptions.put(statement2, taintingConfigurations);
 
         Statement statement3 = new StatementSleep(new ExpressionConstantInt(3));
         currentBasicBlock = new BasicBlock(statement3);
         instructionsToTainted.put(currentBasicBlock, possibleTaints);
 
-        Assert.assertEquals(relevantStatementToOptions, PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted));
-//        System.out.println(relevantStatementToOptions);
+        Assert.assertEquals(relevantRegionToOptions, PerformanceMapper.getRelevantRegionsToOptions(instructionsToTainted));
+//        System.out.println(relevantRegionToOptions);
     }
 
     @Test
-    public void testUpdateASTToTimeRelevantStatements1() {
+    public void testUpdateASTToTimeRelevantRegions1() {
         Set<Statement> statements = new HashSet<>();
         Statement ast = new StatementSleep(new ExpressionVariable("a"));
         statements.add(ast);
 
-        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, statements));
+        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantRegions(ast, statements));
     }
 
     @Test

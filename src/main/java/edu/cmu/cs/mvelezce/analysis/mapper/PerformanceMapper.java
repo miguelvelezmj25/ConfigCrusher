@@ -82,16 +82,14 @@ public class PerformanceMapper {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-        ast = PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, relevantStatementsToOptions.keySet());
-
-        Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantStatementsToOptions.values());
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionsToOptions = PerformanceMapper.getRelevantRegionsToOptions(instructionsToTainted);
+        Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptions);
-
+        ast = PerformanceMapper.instrumentProgramToTimeRelevantRegions(ast, relevantRegionsToOptions.keySet());
         Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
 //        System.out.println(measuredPerformance.size());
 
-        return PerformanceMapper.createPerformanceModel(measuredPerformance, relevantStatementsToOptions);
+        return PerformanceMapper.createPerformanceModel(measuredPerformance, relevantRegionsToOptions);
     }
 
     public static Map<Set<String>, Integer> buildPerformanceTable(String program, Set<ExpressionConfigurationConstant> parameters) {
@@ -103,15 +101,13 @@ public class PerformanceMapper {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = PerformanceMapper.getRelevantStatementsToOptions(instructionsToTainted);
-        ast = PerformanceMapper.instrumentProgramToTimeRelevantStatements(ast, relevantStatementsToOptions.keySet());
-
-        Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantStatementsToOptions.values());
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionsToOptions = PerformanceMapper.getRelevantRegionsToOptions(instructionsToTainted);
+        Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptions);
-
+        ast = PerformanceMapper.instrumentProgramToTimeRelevantRegions(ast, relevantRegionsToOptions.keySet());
         Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
 
-        return PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions);
+        return PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantRegionsToOptions);
     }
 
     public static Map<Set<String>, Integer> predictPerformanceForAllConfigurations(Set<ExpressionConfigurationConstant> parameters, Set<PerformanceEntry> measuredPerformance, Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
@@ -189,21 +185,21 @@ public class PerformanceMapper {
         return configurationsToPerformance;
     }
 
-    public static Map<Statement, Set<ExpressionConfigurationConstant>> getRelevantStatementsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementToOptions = new HashMap<>();
+    public static Map<Statement, Set<ExpressionConfigurationConstant>> getRelevantRegionsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionToOptions = new HashMap<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
             if(PerformanceMapper.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
-                RelevantInfoGetterVisitor performanceStatementVisitor = new RelevantInfoGetterVisitor(entry.getValue());
+                RelevantRegionGetterVisitor performanceStatementVisitor = new RelevantRegionGetterVisitor(entry.getValue());
                 Set<ExpressionConfigurationConstant> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
 
                 if(!possibleTaintingConfigurations.isEmpty()) {
-                    relevantStatementToOptions.put(entry.getKey().getStatement(), possibleTaintingConfigurations);
+                    relevantRegionToOptions.put(entry.getKey().getStatement(), possibleTaintingConfigurations);
                 }
             }
         }
 
-        return relevantStatementToOptions;
+        return relevantRegionToOptions;
     }
 
     public static Set<Set<ExpressionConfigurationConstant>> filterOptions(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
@@ -236,7 +232,6 @@ public class PerformanceMapper {
         }
 
         return filteredOptions;
-
     }
 
     // Sound method
@@ -264,37 +259,21 @@ public class PerformanceMapper {
 
         Iterator<Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator = optionsToConfigurationsToExecute.entrySet().iterator();
         Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry1 = optionsToConfigurationsToExecuteIterator.next();
-//        Set<Set<ExpressionConfigurationConstant>> relevantOptionsCovered = new HashSet<>();
-//        relevantOptionsCovered.add(entry1.getKey());
 
         while(optionsToConfigurationsToExecuteIterator.hasNext()) {
             Map.Entry<Set<ExpressionConfigurationConstant>, Set<Set<String>>> entry2 = optionsToConfigurationsToExecuteIterator.next();
-//            relevantOptionsCovered.add(entry2.getKey());
-
             Set<ExpressionConfigurationConstant> pivotOptions = new HashSet<>(entry1.getKey());
             pivotOptions.retainAll(entry2.getKey());
-//            System.out.println("\nPivot: " + pivotOptions + " for set1: " + entry1.getKey() + " set2: " + entry2.getKey());
 
             Set<String> pivotOptionsConvenient = PerformanceMapper.getSetConvenient(pivotOptions);
             configurationsToExecute = new HashSet<>();
 
-//            if(entry2.getKey().containsAll(entry1.getKey())) {
-//                throw new RuntimeException("I have never seen the case where the built sets " + entry1.getKey() + " is a " +
-//                        "subset of a previously established set " + entry2.getKey());
-//            }
-//
-//            if(entry1.getKey().containsAll(entry2.getKey())) {
-//                PerformanceMapper.subsetMerging(entry1, relevantOptionsCovered, configurationsToExecute);
-//            }
-//            else {
             if(entry1.getValue().size() <= entry2.getValue().size()) {
                 PerformanceMapper.simpleMerging(entry1, entry2, pivotOptionsConvenient, configurationsToExecute);
             }
             else {
                 PerformanceMapper.simpleMerging(entry2, entry1, pivotOptionsConvenient, configurationsToExecute);
             }
-//            }
-//            System.out.println(configurationsToExecute);
 
             Set<ExpressionConfigurationConstant> newCalculatedOptions = new HashSet<>(entry1.getKey());
             newCalculatedOptions.addAll(entry2.getKey());
@@ -416,7 +395,7 @@ public class PerformanceMapper {
         }
     }
 
-    public static Statement instrumentProgramToTimeRelevantStatements(Statement program, Set<Statement> relevantStatements) {
+    public static Statement instrumentProgramToTimeRelevantRegions(Statement program, Set<Statement> relevantStatements) {
         AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
         return program.accept(addTimedVisitor);
     }
@@ -474,11 +453,11 @@ public class PerformanceMapper {
 
 //    mapConfigurationToPerformanceAfterPruning //TODO
 
-    private static class RelevantInfoGetterVisitor extends VisitorReturner {
+    private static class RelevantRegionGetterVisitor extends VisitorReturner {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;
         private Set<ExpressionConfigurationConstant> relevantOptions;
 
-        public RelevantInfoGetterVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables) {
+        public RelevantRegionGetterVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables) {
             this.taintedVariables = taintedVariables;
             this.relevantOptions = new HashSet<>();
         }
@@ -500,9 +479,7 @@ public class PerformanceMapper {
         public Expression visitExpressionVariable(ExpressionVariable expressionVariable) {
                 for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
                     if(taintedVariable.getVariable().equals(expressionVariable)) {
-                        for(ExpressionConfigurationConstant parameter : taintedVariable.getConfigurations()) {
-                            this.relevantOptions.add(parameter);
-                        }
+                        this.relevantOptions.addAll(taintedVariable.getConfigurations());
                     }
                 }
 
@@ -548,15 +525,7 @@ public class PerformanceMapper {
         @Override
         public Statement visitStatementIf(StatementIf statementIf) {
             if(this.relevantStatements.contains(statementIf)) {
-//                Statement thenBlock = statementIf.getThenBlock().accept(this);
-                StatementTimed timedThenBlock = null;
-
-//                if(thenBlock.equals(statementIf.getThenBlock())) {
-                    timedThenBlock = new StatementTimed(statementIf.getThenBlock());
-//                }
-//                else {
-//                    timedThenBlock = new StatementTimed(thenBlock);
-//                }
+                StatementTimed timedThenBlock = new StatementTimed(statementIf.getThenBlock());
 
                 return new StatementIf(statementIf.getCondition(), timedThenBlock);
             }

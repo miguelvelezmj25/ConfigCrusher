@@ -1,62 +1,61 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>edu.cmu.cs.mvelezce</groupId>
-  <artifactId>performance-mapper</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
-  <inceptionYear>2016</inceptionYear>
-  <packaging>jar</packaging>
+    <groupId>edu.cmu.cs.mvelezce</groupId>
+    <artifactId>performance-mapper</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <inceptionYear>2017</inceptionYear>
+    <packaging>jar</packaging>
+    <name>performance-mapper</name>
+    <url>http://www.cs.cmu.edu/~mvelezce/</url>
 
-  <name>performance-mapper</name>
-  <url>http://maven.apache.org</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
 
-  <dependencies>
-      <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.12</version>
-          <scope>test</scope>
-      </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
 
-      <dependency>
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-lang3</artifactId>
-          <version>3.4</version>
-      </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+        </dependency>
 
-      <dependency>
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-math3</artifactId>
-          <version>3.6.1</version>
-      </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.1</version>
+        </dependency>
 
-      <dependency>
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-collections4</artifactId>
-          <version>4.1</version>
-      </dependency>
+        <dependency>
+            <groupId>de.ovgu.featureide</groupId>
+            <artifactId>de.ovgu.featureide.lib.fm</artifactId>
+            <version>3.2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/de.ovgu.featureide.lib.fm-v3.2.0.jar</systemPath>
+        </dependency>
 
-      <dependency>
-          <groupId>de.ovgu.featureide</groupId>
-          <artifactId>de.ovgu.featureide.lib.fm</artifactId>
-          <version>3.2.0</version>
-          <scope>system</scope>
-          <systemPath>${project.basedir}/de.ovgu.featureide.lib.fm-v3.2.0.jar</systemPath>
-      </dependency>
-
-      <dependency>
-          <groupId>org.sat4j</groupId>
-          <artifactId>org.sat4j.core</artifactId>
-          <version>2.3.5</version>
-          <scope>system</scope>
-          <systemPath>${project.basedir}/org.sat4j.core.jar</systemPath>
-      </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>org.sat4j</groupId>
+            <artifactId>org.sat4j.core</artifactId>
+            <version>2.3.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/org.sat4j.core.jar</systemPath>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

@@ -40,18 +40,15 @@ public class ClassTransformerTimer extends ClassTransformerBase {
 
                 if((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN) || opcode == Opcodes.ATHROW) {
                     InsnList newInstructions = new InsnList();
-                    newInstructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "java/lang/System", "nanoTime", "()J", false));
-                    newInstructions.add(new InsnNode(Opcodes.POP2));
+                    newInstructions.add(new LdcInsnNode("MiguelId"));
+                    newInstructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/analysis/instrumentation/Timer", "stopTimer", "(Ljava/lang/String;)V", false));
                     instructions.insert(instruction.getPrevious(), newInstructions);
                 }
             }
 
             InsnList newInstructions = new InsnList();
-            newInstructions.add(new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
-            newInstructions.add(new LdcInsnNode("Mom"));
-            newInstructions.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false));
-//            newInstructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "java/lang/System", "nanoTime", "()J", false));
-//            newInstructions.add(new InsnNode(Opcodes.POP2));
+            newInstructions.add(new LdcInsnNode("MiguelId"));
+            newInstructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/analysis/instrumentation/Timer", "startTimer", "(Ljava/lang/String;)V", false));
             instructions.insert(newInstructions);
         }
     }

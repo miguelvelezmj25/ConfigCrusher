@@ -38,16 +38,12 @@ public class ClassTransformerPrinterTest {
             e.printStackTrace();
         }
 
-//        System.out.println(output);
+        System.out.println(output);
         return output.toString();
     }
 
     @Test
-    public void testTransform() throws Exception {
-        String command = "java -cp ./target/classes edu.cmu.cs.mvelezce.analysis.instrumentation.Play";
-        String output = ClassTransformerPrinterTest.executeCommand(command);
-        Assert.assertEquals(0, output.length());
-
+    public void testTransform1() throws Exception {
         Set<String> methods = new HashSet<>();
         methods.add("inc1");
 
@@ -74,7 +70,41 @@ public class ClassTransformerPrinterTest {
 
         classTransformer.writeClass(classNode, "target/classes/" + ClassTransformerPrinterTest.FILE_NAME);
 
-        output = ClassTransformerPrinterTest.executeCommand(command);
+        String command = "java -cp ./target/classes edu.cmu.cs.mvelezce.analysis.instrumentation.Play";
+        String output = ClassTransformerPrinterTest.executeCommand(command);
+        Assert.assertNotEquals(0, output.length());
+    }
+
+    @Test
+    public void testTransform2() throws Exception {
+        Set<String> methods = new HashSet<>();
+        methods.add("inc2");
+
+        ClassTransformer classTransformer = new ClassTransformerTimer(ClassTransformerPrinterTest.FILE_NAME, methods);
+        ClassNode classNode = classTransformer.readClass();
+
+        Map<MethodNode, Integer> methodToInstructionCount = new HashMap<>();
+
+        for(MethodNode methodNode : classNode.methods) {
+            methodToInstructionCount.put(methodNode, methodNode.instructions.size());
+        }
+
+        classTransformer.transform(classNode);
+
+        boolean transformed = false;
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(methodNode.instructions.size() != methodToInstructionCount.get(methodNode)) {
+                transformed = true;
+            }
+        }
+
+        Assert.assertTrue(transformed);
+
+        classTransformer.writeClass(classNode, "target/classes/" + ClassTransformerPrinterTest.FILE_NAME);
+
+        String command = "java -cp ./target/classes edu.cmu.cs.mvelezce.analysis.instrumentation.Play";
+        String output = ClassTransformerPrinterTest.executeCommand(command);
         Assert.assertNotEquals(0, output.length());
     }
 

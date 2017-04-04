@@ -15,7 +15,7 @@ import java.util.jar.JarFile;
 public class Play {
 
     public static void main(String[] args) {
-        inc1(2);
+        inc2(2);
     }
 
     public static void inc1(int a) {
@@ -24,10 +24,10 @@ public class Play {
 //        System.out.println(result);
     }
 
-    public void inc2(int a) {
+    public static void inc2(int a) {
 //        Timer.startTimer("MiguelId");
         int result = a + 1;
-        System.out.println(result);
+//        System.out.println(result);
 //        Timer.stopTimer("MiguelId");
     }
 

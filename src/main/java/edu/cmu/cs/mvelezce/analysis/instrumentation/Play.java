@@ -1,13 +1,9 @@
 package edu.cmu.cs.mvelezce.analysis.instrumentation;
 
 import jdk.internal.org.objectweb.asm.ClassReader;
-import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
@@ -18,17 +14,21 @@ import java.util.jar.JarFile;
  */
 public class Play {
 
-    public void inc1(int a) {
+    public static void main(String[] args) {
+        inc1(2);
+    }
+
+    public static void inc1(int a) {
 //        System.out.println("Mom");
         int result = a + 1;
-        System.out.println(result);
+//        System.out.println(result);
     }
 
     public void inc2(int a) {
-        Timer.startTimer("MiguelId");
+//        Timer.startTimer("MiguelId");
         int result = a + 1;
         System.out.println(result);
-        Timer.stopTimer("MiguelId");
+//        Timer.stopTimer("MiguelId");
     }
 
     public void inc3(int a) {
@@ -63,28 +63,25 @@ public class Play {
         classReader.accept(classNode, 0);
 
         for(MethodNode method : classNode.methods) {
-//            if(method.name.equals(("inc"))) {
-//                System.out.println(method.localVariables);
-//                System.out.println(method.instructions);
-//            }
+//            System.out.println(method.instructions.size());
         }
     }
 
-    public static void instrument(String fileName) throws IOException {
-        ClassReader classReader = new ClassReader(fileName);
-        ClassNode classNode =  new ClassNode();
-        classReader.accept(classNode, 0);
-
-        ClassTransformer classTransformer = new TimerClassTransformer();
-        classTransformer.transform(classNode);
-
-        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-        classNode.accept(classWriter);
-        File newfile = new File("target/classes/");
-        DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(newfile, fileName + ".class")));
-        output.write(classWriter.toByteArray());
-        output.flush();
-        output.close();
-    }
+//    public static void instrument(String fileName) throws IOException {
+//        ClassReader classReader = new ClassReader(fileName);
+//        ClassNode classNode =  new ClassNode();
+//        classReader.accept(classNode, 0);
+//
+//        ClassTransformer classTransformer = new ClassTransformerTimer(fileName, null);
+//        classTransformer.transform(classNode);
+//
+//        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+//        classNode.accept(classWriter);
+//        File newfile = new File("target/classes/");
+//        DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(newfile, fileName + ".class")));
+//        output.write(classWriter.toByteArray());
+//        output.flush();
+//        output.close();
+//    }
 
 }

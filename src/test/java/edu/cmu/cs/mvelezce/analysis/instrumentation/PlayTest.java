@@ -17,8 +17,8 @@ public class PlayTest {
         Play.readFile("edu/cmu/cs/mvelezce/analysis/instrumentation/Play");
     }
 
-    @Test
-    public void testTest() throws Exception {
-        Play.instrument("edu/cmu/cs/mvelezce/analysis/instrumentation/Play");
-    }
+//    @Test
+//    public void testTest() throws Exception {
+//        Play.instrument("edu/cmu/cs/mvelezce/analysis/instrumentation/Play");
+//    }
 }

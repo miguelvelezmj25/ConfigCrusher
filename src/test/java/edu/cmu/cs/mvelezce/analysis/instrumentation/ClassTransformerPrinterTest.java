@@ -1,11 +1,12 @@
 package edu.cmu.cs.mvelezce.analysis.instrumentation;
 
-import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -18,11 +19,40 @@ public class ClassTransformerPrinterTest {
 
     private static final String FILE_NAME = "edu/cmu/cs/mvelezce/analysis/instrumentation/Play";
 
+    private static String executeCommand(String command) {
+        StringBuilder output = new StringBuilder();
+        Process process;
+
+        try {
+            process = Runtime.getRuntime().exec(command);
+            process.waitFor();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+
+            while((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        System.out.println(output);
+        return output.toString();
+    }
+
     @Test
     public void testTransform() throws Exception {
-        ClassReader classReader = new ClassReader(ClassTransformerPrinterTest.FILE_NAME);
-        ClassNode classNode =  new ClassNode();
-        classReader.accept(classNode, 0);
+        String command = "java -cp ./target/classes edu.cmu.cs.mvelezce.analysis.instrumentation.Play";
+        String output = ClassTransformerPrinterTest.executeCommand(command);
+        Assert.assertEquals(0, output.length());
+
+        Set<String> methods = new HashSet<>();
+        methods.add("inc1");
+
+        ClassTransformer classTransformer = new ClassTransformerPrinter(ClassTransformerPrinterTest.FILE_NAME, methods, "Hello, world!");
+        ClassNode classNode = classTransformer.readClass();
 
         Map<MethodNode, Integer> methodToInstructionCount = new HashMap<>();
 
@@ -30,10 +60,6 @@ public class ClassTransformerPrinterTest {
             methodToInstructionCount.put(methodNode, methodNode.instructions.size());
         }
 
-        Set<String> methods = new HashSet<>();
-        methods.add("inc1");
-
-        ClassTransformer classTransformer = new ClassTransformerPrinter(methods, "Hello, world!");
         classTransformer.transform(classNode);
 
         boolean transformed = false;
@@ -45,13 +71,11 @@ public class ClassTransformerPrinterTest {
         }
 
         Assert.assertTrue(transformed);
-//        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-//        classNode.accept(classWriter);
-//        File newfile = new File("target/classes/");
-//        DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(newfile, FILE_NAME + ".class")));
-//        output.write(classWriter.toByteArray());
-//        output.flush();
-//        output.close();
+
+        classTransformer.writeClass(classNode, "target/classes/" + ClassTransformerPrinterTest.FILE_NAME);
+
+        output = ClassTransformerPrinterTest.executeCommand(command);
+        Assert.assertNotEquals(0, output.length());
     }
 
 }

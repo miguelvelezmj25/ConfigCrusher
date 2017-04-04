@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.analysis.instrumentation;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -14,7 +13,8 @@ public class ClassTransformerPrinter extends ClassTransformerBase {
     private Set<String> methodsToInstrument;
     private String messageToPrint;
 
-    public ClassTransformerPrinter(Set<String> methodsToInstrument, String messageToPrint) {
+    public ClassTransformerPrinter(String fileName, Set<String> methodsToInstrument, String messageToPrint) {
+        super(fileName);
         this.methodsToInstrument = methodsToInstrument;
         this.messageToPrint = messageToPrint;
     }

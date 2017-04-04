@@ -1,10 +1,11 @@
 package edu.cmu.cs.mvelezce.analysis.cfg;
 
-import edu.cmu.cs.mvelezce.analysis.visitor.VisitorReturner;
-import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
-import edu.cmu.cs.mvelezce.language.ast.statement.*;
+
+import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConfigurationConstant;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionVariable;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
+import edu.cmu.cs.mvelezce.sleep.visitor.VisitorReturner;
 
 import java.util.ArrayList;
 import java.util.List;

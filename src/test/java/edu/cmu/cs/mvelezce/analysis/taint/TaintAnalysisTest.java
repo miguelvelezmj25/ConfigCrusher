@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.analysis.taint;
 
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
-import edu.cmu.cs.mvelezce.language.ast.expression.*;
-import edu.cmu.cs.mvelezce.language.ast.statement.*;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.*;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
 import org.junit.Assert;
 import org.junit.Test;
 

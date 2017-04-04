@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.analysis.cfg;
 
-import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
-import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
 package edu.cmu.cs.mvelezce.analysis.interpreter;
 
-import edu.cmu.cs.mvelezce.language.Helper;
-import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
-import edu.cmu.cs.mvelezce.language.ast.value.ValueInt;
-import edu.cmu.cs.mvelezce.language.lexer.Lexer;
-import edu.cmu.cs.mvelezce.language.parser.Parser;
+import edu.cmu.cs.mvelezce.sleep.Helper;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.sleep.ast.value.ValueInt;
+import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
+import edu.cmu.cs.mvelezce.sleep.parser.Parser;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,11 +16,13 @@ import java.util.Set;
 /**
  * Created by mvelezce on 2/1/17.
  */
-public class InterpreterTest {
+public class SleepInterpreterTest {
+
+    public static final String PROGRAMS_PATH = "src/main/java/edu/cmu/cs/mvelezce/sleep/programs/";
 
     @Test
     public void test1() throws Exception {
-        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program1");
+        String program = Helper.loadFile(SleepInterpreterTest.PROGRAMS_PATH + "program1");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(1));
@@ -34,7 +36,7 @@ public class InterpreterTest {
         activatedConfigurations.add("A");
         activatedConfigurations.add("B");
 
-        Interpreter interpreter = new Interpreter(ast);
+        SleepInterpreter interpreter = new SleepInterpreter(ast);
         interpreter.evaluate(activatedConfigurations);
 
         Assert.assertEquals(store, interpreter.getStore());
@@ -43,7 +45,7 @@ public class InterpreterTest {
 
     @Test
     public void test2() throws Exception {
-        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program2");
+        String program = Helper.loadFile(SleepInterpreterTest.PROGRAMS_PATH + "program2");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(1));
@@ -56,7 +58,7 @@ public class InterpreterTest {
         Set<String> activatedConfigurations = new HashSet<>();
         activatedConfigurations.add("A");
 
-        Interpreter interpreter = new Interpreter(ast);
+        SleepInterpreter interpreter = new SleepInterpreter(ast);
 
         interpreter.evaluate(activatedConfigurations);
 
@@ -66,7 +68,7 @@ public class InterpreterTest {
 
     @Test
     public void test3() throws Exception {
-        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program3");
+        String program = Helper.loadFile(SleepInterpreterTest.PROGRAMS_PATH + "program3");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(1));
@@ -80,7 +82,7 @@ public class InterpreterTest {
         activatedConfigurations.add("A");
         activatedConfigurations.add("B");
 
-        Interpreter interpreter = new Interpreter(ast);
+        SleepInterpreter interpreter = new SleepInterpreter(ast);
 
         interpreter.evaluate(activatedConfigurations);
 
@@ -90,7 +92,7 @@ public class InterpreterTest {
 
     @Test
     public void test4() throws Exception {
-        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program4");
+        String program = Helper.loadFile(SleepInterpreterTest.PROGRAMS_PATH + "program4");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(1));
@@ -104,7 +106,7 @@ public class InterpreterTest {
         activatedConfigurations.add("A");
         activatedConfigurations.add("B");
 
-        Interpreter interpreter = new Interpreter(ast);
+        SleepInterpreter interpreter = new SleepInterpreter(ast);
 
         interpreter.evaluate(activatedConfigurations);
 
@@ -114,7 +116,7 @@ public class InterpreterTest {
 
     @Test
     public void test5() throws Exception {
-        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program5");
+        String program = Helper.loadFile(SleepInterpreterTest.PROGRAMS_PATH + "program5");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(1));
@@ -128,7 +130,7 @@ public class InterpreterTest {
         activatedConfigurations.add("A");
         activatedConfigurations.add("B");
 
-        Interpreter interpreter = new Interpreter(ast);
+        SleepInterpreter interpreter = new SleepInterpreter(ast);
 
         interpreter.evaluate(activatedConfigurations);
 
@@ -138,7 +140,7 @@ public class InterpreterTest {
 
     @Test
     public void test6() throws Exception {
-        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program6");
+        String program = Helper.loadFile(SleepInterpreterTest.PROGRAMS_PATH + "program6");
 
         Map<String, ValueInt> store = new HashMap<>();
         store.put("a", new ValueInt(1));
@@ -155,7 +157,7 @@ public class InterpreterTest {
         activatedConfigurations.add("B");
         activatedConfigurations.add("C");
 
-        Interpreter interpreter = new Interpreter(ast);
+        SleepInterpreter interpreter = new SleepInterpreter(ast);
 
         interpreter.evaluate(activatedConfigurations);
 

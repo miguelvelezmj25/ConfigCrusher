@@ -2,12 +2,12 @@ package edu.cmu.cs.mvelezce.analysis.taint;
 
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
-import edu.cmu.cs.mvelezce.analysis.visitor.VisitorReturner;
-import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
-import edu.cmu.cs.mvelezce.language.ast.statement.StatementAssignment;
-import edu.cmu.cs.mvelezce.language.ast.statement.StatementIf;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConfigurationConstant;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionVariable;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.StatementAssignment;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.StatementIf;
+import edu.cmu.cs.mvelezce.sleep.visitor.VisitorReturner;
 
 import java.util.*;
 

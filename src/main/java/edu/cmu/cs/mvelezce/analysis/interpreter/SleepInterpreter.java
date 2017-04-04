@@ -1,9 +1,10 @@
 package edu.cmu.cs.mvelezce.analysis.interpreter;
 
-import edu.cmu.cs.mvelezce.analysis.visitor.Visitor;
-import edu.cmu.cs.mvelezce.language.ast.expression.*;
-import edu.cmu.cs.mvelezce.language.ast.statement.*;
-import edu.cmu.cs.mvelezce.language.ast.value.ValueInt;
+
+import edu.cmu.cs.mvelezce.sleep.ast.expression.*;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
+import edu.cmu.cs.mvelezce.sleep.ast.value.ValueInt;
+import edu.cmu.cs.mvelezce.sleep.visitor.Visitor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,14 +16,14 @@ import java.util.Set;
  *
  * Created by miguelvelez on 1/31/17.
  */
-public class Interpreter implements Visitor<ValueInt, Void> {
+public class SleepInterpreter implements Visitor<ValueInt, Void> {
     private Set<String> activatedConfigurations;
     private Statement ast;
     private Map<String, ValueInt> store;
     private int totalExecutionTime;
     private Map<Statement, Integer> timedBlocks;
 
-    public Interpreter(Statement ast) {
+    public SleepInterpreter(Statement ast) {
         this.store = new HashMap<>();
         this.totalExecutionTime = 0;
         this.timedBlocks = new HashMap<>();

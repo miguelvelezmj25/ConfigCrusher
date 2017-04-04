@@ -5,19 +5,19 @@ import edu.cmu.cs.mvelezce.analysis.PerformanceModel;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
-import edu.cmu.cs.mvelezce.analysis.interpreter.Interpreter;
+import edu.cmu.cs.mvelezce.analysis.interpreter.SleepInterpreter;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
-import edu.cmu.cs.mvelezce.analysis.visitor.VisitorReplacer;
-import edu.cmu.cs.mvelezce.analysis.visitor.VisitorReturner;
-import edu.cmu.cs.mvelezce.language.ast.expression.Expression;
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionConfigurationConstant;
-import edu.cmu.cs.mvelezce.language.ast.expression.ExpressionVariable;
-import edu.cmu.cs.mvelezce.language.ast.statement.Statement;
-import edu.cmu.cs.mvelezce.language.ast.statement.StatementIf;
-import edu.cmu.cs.mvelezce.language.ast.statement.StatementSleep;
-import edu.cmu.cs.mvelezce.language.ast.statement.StatementTimed;
-import edu.cmu.cs.mvelezce.language.lexer.Lexer;
-import edu.cmu.cs.mvelezce.language.parser.Parser;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConfigurationConstant;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionVariable;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.StatementIf;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.StatementSleep;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.StatementTimed;
+import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
+import edu.cmu.cs.mvelezce.sleep.parser.Parser;
+import edu.cmu.cs.mvelezce.sleep.visitor.VisitorReplacer;
+import edu.cmu.cs.mvelezce.sleep.visitor.VisitorReturner;
 
 import java.util.*;
 
@@ -176,7 +176,7 @@ public class PerformanceMapper {
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 
         for(Set<String> configuration : configurationsToExecute) {
-            Interpreter interpreter = new Interpreter(ast);
+            SleepInterpreter interpreter = new SleepInterpreter(ast);
             interpreter.evaluate(configuration);
             configurationsToPerformance.add(new PerformanceEntry(configuration, interpreter.getTimedBlocks(), interpreter.getTotalExecutionTime()));
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute

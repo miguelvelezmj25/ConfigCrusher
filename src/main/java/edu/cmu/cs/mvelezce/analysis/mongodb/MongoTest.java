@@ -26,7 +26,8 @@ public class MongoTest {
 
     public static final String LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL = "_";
 
-    public static void test() {
+    public static Map<Region, Set<String>> getRegionsToOptions() {
+        // This is hardcode to get the output of Lotrack
         List<String> fields = new ArrayList<>();
         fields.add(MongoTest.PACKAGE);
         fields.add(MongoTest.CLASS);
@@ -48,7 +49,6 @@ public class MongoTest {
         Map<Region, Set<String>> regionsToOptions = new HashedMap<>();
 
         for(Map<String, String> result : queryResult) {
-//            System.out.println(result.get(MongoTest.CONSTRAINT));
             String[] constraints = result.get(MongoTest.CONSTRAINT).split(" ");
             Set<String> options = new HashSet<>();
 
@@ -80,16 +80,25 @@ public class MongoTest {
             regionsToOptions.put(currentRegion, options);
         }
 
-        for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
-//            System.out.println(entry.getKey() + " : " + entry.getValue());
-            System.out.println(entry.getValue());
-        }
-
+        return regionsToOptions;
     }
 
-//    public static Map<Region, Set<String>> filterBoleans(Map<Region, Set<String>> regionToOptions) {
-//        Map<Region, Set<String>> filteredMap = new HashedMap<>();
-//
-//
-//    }
+    public static Map<Region, Set<String>> filterBooleans(Map<Region, Set<String>> regionToOptions) {
+        // These are language dependent since they can be writen with other capitalization
+        Set<String> optionsToRemove = new HashSet<>();
+        optionsToRemove.add("true");
+        optionsToRemove.add("false");
+
+        Map<Region, Set<String>> filteredMap = new HashedMap<>();
+
+        for(Map.Entry<Region, Set<String>> entry : regionToOptions.entrySet()) {
+            Set<String> options = entry.getValue();
+            options.removeAll(optionsToRemove);
+            filteredMap.put(entry.getKey(), options);
+        }
+
+        return filteredMap;
+    }
+
+    // TODO filter regions that do not have options
 }

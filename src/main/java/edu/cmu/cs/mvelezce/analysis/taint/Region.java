@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.analysis.mapper;
+package edu.cmu.cs.mvelezce.analysis.taint;
 
 /**
  * Created by miguelvelez on 4/7/17.

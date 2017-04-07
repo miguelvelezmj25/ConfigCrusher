@@ -1,6 +1,5 @@
-package edu.cmu.cs.mvelezce.analysis.mongodb;
+package edu.cmu.cs.mvelezce.analysis.taint;
 
-import edu.cmu.cs.mvelezce.analysis.mapper.Region;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,10 +11,10 @@ import java.util.Set;
 /**
  * Created by mvelezce on 4/6/17.
  */
-public class MongoTestTest {
+public class ProcessorTest {
     @Test
     public void getRegionsToOptions() throws Exception {
-        Assert.assertFalse(MongoTest.getRegionsToOptions().isEmpty());
+        Assert.assertFalse(Processor.getRegionsToOptions().isEmpty());
     }
 
     @Test
@@ -30,7 +29,7 @@ public class MongoTestTest {
         Map<Region, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
 
-        Map<Region, Set<String>> result = MongoTest.filterBooleans(regionToOptions);
+        Map<Region, Set<String>> result = Processor.filterBooleans(regionToOptions);
 
         Assert.assertTrue(!result.get(region).contains(TRUE));
         Assert.assertTrue(!result.get(region).contains(FALSE));

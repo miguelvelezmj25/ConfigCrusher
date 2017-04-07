@@ -1,6 +1,5 @@
-package edu.cmu.cs.mvelezce.analysis.mongodb;
+package edu.cmu.cs.mvelezce.analysis.taint;
 
-import edu.cmu.cs.mvelezce.analysis.mapper.Region;
 import edu.cmu.cs.mvelezce.mongo.connector.Casbah;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +9,7 @@ import java.util.*;
 /**
  * Created by mvelezce on 4/5/17.
  */
-public class MongoTest {
+public class Processor {
 
     public static final String PACKAGE = "Package";
     public static final String CLASS = "Class";
@@ -29,27 +28,27 @@ public class MongoTest {
     public static Map<Region, Set<String>> getRegionsToOptions() {
         // This is hardcode to get the output of Lotrack
         List<String> fields = new ArrayList<>();
-        fields.add(MongoTest.PACKAGE);
-        fields.add(MongoTest.CLASS);
-        fields.add(MongoTest.METHOD);
-        fields.add(MongoTest.JAVA_LINE_NO);
-        fields.add(MongoTest.JIMPLE_LINE_NO);
-        fields.add(MongoTest.CONSTRAINT);
-        fields.add(MongoTest.CONSTRAINT_PRETTY);
-        fields.add(MongoTest.BYTECODE_INDEXES);
-        fields.add(MongoTest.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
+        fields.add(Processor.PACKAGE);
+        fields.add(Processor.CLASS);
+        fields.add(Processor.METHOD);
+        fields.add(Processor.JAVA_LINE_NO);
+        fields.add(Processor.JIMPLE_LINE_NO);
+        fields.add(Processor.CONSTRAINT);
+        fields.add(Processor.CONSTRAINT_PRETTY);
+        fields.add(Processor.BYTECODE_INDEXES);
+        fields.add(Processor.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
 
         List<String> sortBy = new ArrayList<>();
-        fields.add(MongoTest.PACKAGE);
-        fields.add(MongoTest.CLASS);
-        fields.add(MongoTest.METHOD);
-        fields.add(MongoTest.JIMPLE_LINE_NO);
+        fields.add(Processor.PACKAGE);
+        fields.add(Processor.CLASS);
+        fields.add(Processor.METHOD);
+        fields.add(Processor.JIMPLE_LINE_NO);
 
-        List<Map<String, String>> queryResult = Casbah.connect(MongoTest.PLAYYPUS, fields, sortBy);
+        List<Map<String, String>> queryResult = Casbah.connect(Processor.PLAYYPUS, fields, sortBy);
         Map<Region, Set<String>> regionsToOptions = new HashedMap<>();
 
         for(Map<String, String> result : queryResult) {
-            String[] constraints = result.get(MongoTest.CONSTRAINT).split(" ");
+            String[] constraints = result.get(Processor.CONSTRAINT).split(" ");
             Set<String> options = new HashSet<>();
 
             for(String constraint : constraints) {
@@ -58,8 +57,8 @@ public class MongoTest {
                     continue;
                 }
 
-                if(constraint.contains(MongoTest.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
-                    constraint = constraint.split(MongoTest.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
+                if(constraint.contains(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
+                    constraint = constraint.split(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
                 }
 
                 // Because the constraint gotten from Lotrack might be too long
@@ -70,7 +69,7 @@ public class MongoTest {
                 options.add(constraint);
             }
 
-            Region currentRegion = new Region(result.get(MongoTest.PACKAGE), result.get(MongoTest.CLASS), result.get(MongoTest.METHOD));
+            Region currentRegion = new Region(result.get(Processor.PACKAGE), result.get(Processor.CLASS), result.get(Processor.METHOD));
 
             if(regionsToOptions.containsKey(currentRegion)) {
                 Set<String> oldOptions = regionsToOptions.get(currentRegion);

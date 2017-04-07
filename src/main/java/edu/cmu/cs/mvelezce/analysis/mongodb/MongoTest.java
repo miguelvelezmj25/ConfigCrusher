@@ -1,68 +1,95 @@
 package edu.cmu.cs.mvelezce.analysis.mongodb;
 
+import edu.cmu.cs.mvelezce.analysis.mapper.Region;
 import edu.cmu.cs.mvelezce.mongo.connector.Casbah;
+import org.apache.commons.collections4.map.HashedMap;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/5/17.
  */
 public class MongoTest {
 
+    public static final String PACKAGE = "Package";
+    public static final String CLASS = "Class";
+    public static final String METHOD = "Method";
+    public static final String JAVA_LINE_NO = "JavaLineNo";
+    public static final String JIMPLE_LINE_NO = "JimpleLineNo";
+    public static final String CONSTRAINT = "Constraint";
+    public static final String CONSTRAINT_PRETTY = "ConstraintPretty";
+    public static final String BYTECODE_INDEXES = "bytecodeIndexes";
+    public static final String METHOD_BYTECODE_SIGNATURE_JOANA_STYLE = "methodBytecodeSignatureJoanaStyle";
+
+    public static final String PLAYYPUS = "platypus";
+
+    public static final String LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL = "_";
+
     public static void test() {
         List<String> fields = new ArrayList<>();
-        fields.add("Package");
-        fields.add("Class");
-        fields.add("Method");
-        fields.add("JavaLineNo");
-        fields.add("JimpleLineNo");
-        fields.add("Constraint");
-        fields.add("ConstraintPretty");
-        fields.add("bytecodeIndexes");
-        fields.add("methodBytecodeSignatureJoanaStyle");
+        fields.add(MongoTest.PACKAGE);
+        fields.add(MongoTest.CLASS);
+        fields.add(MongoTest.METHOD);
+        fields.add(MongoTest.JAVA_LINE_NO);
+        fields.add(MongoTest.JIMPLE_LINE_NO);
+        fields.add(MongoTest.CONSTRAINT);
+        fields.add(MongoTest.CONSTRAINT_PRETTY);
+        fields.add(MongoTest.BYTECODE_INDEXES);
+        fields.add(MongoTest.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
 
         List<String> sortBy = new ArrayList<>();
-        fields.add("Package");
-        fields.add("Class");
-        fields.add("Method");
-        fields.add("JimpleLineNo");
+        fields.add(MongoTest.PACKAGE);
+        fields.add(MongoTest.CLASS);
+        fields.add(MongoTest.METHOD);
+        fields.add(MongoTest.JIMPLE_LINE_NO);
 
-        List<Map<String, String>> query = Casbah.connect("platypus", fields, sortBy);
+        List<Map<String, String>> queryResult = Casbah.connect(MongoTest.PLAYYPUS, fields, sortBy);
+        Map<Region, Set<String>> regionsToOptions = new HashedMap<>();
 
-        String currentMethod = "";
-        for(Map<String, String> result : query) {
-            String method = result.get("Method");
+        for(Map<String, String> result : queryResult) {
+//            System.out.println(result.get(MongoTest.CONSTRAINT));
+            String[] constraints = result.get(MongoTest.CONSTRAINT).split(" ");
+            Set<String> options = new HashSet<>();
 
-//            if(!method.contains("loadCommandFile")) {
-//                continue;
-//            }
+            for(String constraint : constraints) {
+                constraint = constraint.replaceAll("[()^|!=]", "");
+                if(constraint.isEmpty() || StringUtils.isNumeric(constraint)) {
+                    continue;
+                }
 
-//            if(method.contains("createCommandLine") || method.contains("appendFormatExtension") || method.contains("dummy") || method.contains("<init>") || method.contains("getRoot") || method.contains("notExecutedInCodeSection")) {
-//                continue;
-//            }
-//
-//            if(currentMethod.isEmpty()) {
-//                currentMethod = method;
-//            }
-//
-//            if(!result.get("Method").equals(currentMethod)) {
-//                break;
-//            }
+                if(constraint.contains(MongoTest.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
+                    constraint = constraint.split(MongoTest.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
+                }
 
-//            if(result.get("Constraint").equals("true")) {
-//                continue;
-//            }
+                // Because the constraint gotten from Lotrack might be too long
+                if(constraint.contains(".")) {
+                    continue;
+                }
 
-            for(Map.Entry<String, String> entry : result.entrySet()) {
-//                String key = entry.getKey();
-
-//                if(key.equals("JavaLineNo") || key.equals("Package") || key.equals("Class") || key.equals("Method") || key.equals("JimpleLineNo") || key.equals("Constraint")) {
-                    System.out.println(entry.getKey() + ":" + entry.getValue());
-//                }
+                options.add(constraint);
             }
-            System.out.println();
+
+            Region currentRegion = new Region(result.get(MongoTest.PACKAGE), result.get(MongoTest.CLASS), result.get(MongoTest.METHOD));
+
+            if(regionsToOptions.containsKey(currentRegion)) {
+                Set<String> oldOptions = regionsToOptions.get(currentRegion);
+                options.addAll(oldOptions);
+            }
+
+            regionsToOptions.put(currentRegion, options);
         }
+
+        for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
+//            System.out.println(entry.getKey() + " : " + entry.getValue());
+            System.out.println(entry.getValue());
+        }
+
     }
+
+//    public static Map<Region, Set<String>> filterBoleans(Map<Region, Set<String>> regionToOptions) {
+//        Map<Region, Set<String>> filteredMap = new HashedMap<>();
+//
+//
+//    }
 }

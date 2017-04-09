@@ -22,7 +22,7 @@ public class ClassTransformerBase implements ClassTransformer {
 
     @Override
     public void transform(ClassNode classNode) {
-        ;
+        System.out.println("The " + this.getClass() + " does not make any transformations");
     }
 
     @Override

@@ -13,6 +13,31 @@ import java.util.Set;
  */
 public class ProcessorTest {
     @Test
+    public void filterRegionsNoOptions1() throws Exception {
+        Region region = new Region("a", "b", "c");
+        Set<String> options = new HashSet<>();
+        Map<Region, Set<String>> regionToOptions = new HashMap<>();
+        regionToOptions.put(region, options);
+
+        Assert.assertTrue(Processor.filterRegionsNoOptions(regionToOptions).isEmpty());
+    }
+
+    @Test
+    public void filterRegionsNoOptions2() throws Exception {
+        Region region = new Region("a", "b", "c");
+        Set<String> options = new HashSet<>();
+        Map<Region, Set<String>> regionToOptions = new HashMap<>();
+        regionToOptions.put(region, options);
+
+        region = new Region("d", "e", "c");
+        options = new HashSet<>();
+        options.add("String");
+        regionToOptions.put(region, options);
+
+        Assert.assertTrue(Processor.filterRegionsNoOptions(regionToOptions).size() == 1);
+    }
+
+    @Test
     public void getRegionsToOptions() throws Exception {
         Assert.assertFalse(Processor.getRegionsToOptions().isEmpty());
     }

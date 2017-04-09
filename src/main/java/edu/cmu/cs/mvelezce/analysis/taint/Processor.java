@@ -99,5 +99,16 @@ public class Processor {
         return filteredMap;
     }
 
-    // TODO filter regions that do not have options
+    public static Map<Region, Set<String>> filterRegionsNoOptions(Map<Region, Set<String>> regionToOptions) {
+        Map<Region, Set<String>> filteredMap = new HashedMap<>();
+
+        for(Map.Entry<Region, Set<String>> entry : regionToOptions.entrySet()) {
+            if(!entry.getValue().isEmpty()) {
+                filteredMap.put(entry.getKey(), entry.getValue());
+            }
+        }
+
+        return filteredMap;
+    }
+
 }

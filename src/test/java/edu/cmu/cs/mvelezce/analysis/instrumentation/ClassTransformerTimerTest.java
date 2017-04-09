@@ -11,17 +11,17 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by mvelezce on 4/3/17.
+ * Created by miguelvelez on 4/9/17.
  */
-public class ClassTransformerPrinterTest {
+public class ClassTransformerTimerTest {
 
     @Test
-    public void testTransform1() throws Exception {
-        int methodNumber = 1;
+    public void testTransform2() throws Exception {
+        int methodNumber = 2;
         Set<String> methods = new HashSet<>();
         methods.add("inc" + methodNumber);
 
-        ClassTransformer classTransformer = new ClassTransformerPrinter(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methods, "Hello, world!");
+        ClassTransformer classTransformer = new ClassTransformerTimer(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methods);
         ClassNode classNode = classTransformer.readClass();
         classTransformer.transform(classNode);
         classTransformer.writeClass(classNode, "target/classes/" + ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME);
@@ -32,7 +32,7 @@ public class ClassTransformerPrinterTest {
             methodToInstructionCount.put(methodNode.name, methodNode.instructions.size());
         }
 
-        classTransformer = new ClassTransformerPrinter(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methods, "Hello, world!");
+        classTransformer = new ClassTransformerTimer(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methods);
         classNode = classTransformer.readClass();
         classTransformer.transform(classNode);
 

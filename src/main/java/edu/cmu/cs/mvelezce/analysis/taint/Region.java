@@ -8,15 +8,45 @@ public class Region {
     private String regionPackage;
     private String regionClass;
     private String regionMethod;
+    private long startTime;
+    private long endTime;
 
     public Region(String regionPackage, String regionClass, String regionMethod) {
         this.regionPackage = regionPackage;
         this.regionClass = regionClass;
         this.regionMethod = regionMethod;
+        this.startTime = 0;
+        this.endTime = 0;
     }
 
     public Region(String regionClass, String regionMethod) {
         this("", regionClass, regionMethod);
+    }
+
+    public void startTime() {
+        this.startTime = System.nanoTime();
+    }
+
+    public void endTime() {
+        this.endTime = System.nanoTime();
+        System.out.println(this.getNanoExecutionTime());
+        System.out.println(this.getMilliExecutionTime());
+    }
+
+    public long getNanoExecutionTime() {
+        if(this.startTime == 0 || this.endTime == 0) {
+            return 0;
+        }
+
+        return this.endTime - this.startTime;
+    }
+
+    public double getMilliExecutionTime() {
+        return this.getNanoExecutionTime()/1000000.0;
+    }
+
+    public double getSecondsExecutionTime() {
+        return this.getMilliExecutionTime()/1000.0;
     }
 
     @Override

@@ -17,7 +17,7 @@ import java.util.jar.JarFile;
 public class InstrumentationArea {
 
     public static void main(String[] args) {
-        InstrumentationArea.executeDummyClass(Integer.valueOf(args[0]));
+        InstrumentationArea.executeDummyClass(Integer.valueOf(4));
     }
 
     public static void executeDummyClass(int methodNumber) {

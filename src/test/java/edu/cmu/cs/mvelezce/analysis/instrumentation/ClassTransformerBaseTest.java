@@ -8,9 +8,15 @@ import java.io.InputStreamReader;
  */
 public class ClassTransformerBaseTest {
 
-    protected static final String FILE_TO_INSTRUMENT_NAME = "edu/cmu/cs/mvelezce/analysis/instrumentation/DummyClass";
+    protected static final String CLASS_CONTAINER = "target/classes/";
+    protected static final String PACKAGE = "edu.cmu.cs.mvelezce.analysis.instrumentation";
+    protected static final String CONTROLLER_CLASS = "InstrumentationArea";
+    protected static final String CLASS = "DummyClass";
+    protected static final String METHOD = "inc";
+    protected static final String FILE_TO_INSTRUMENT_NAME = (PACKAGE + "." + CLASS).replace(".", "/");
 
     protected static String executeCommand(String command) {
+        System.out.println(command);
         StringBuilder output = new StringBuilder();
         Process process;
 
@@ -26,6 +32,7 @@ public class ClassTransformerBaseTest {
             }
 
         } catch (Exception e) {
+            System.out.println(e);
             e.printStackTrace();
         }
 

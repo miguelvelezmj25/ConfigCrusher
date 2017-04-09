@@ -12,14 +12,15 @@ public class DummyClass {
     }
 
     public void execute() {
-        if(this.methodNumber == 1) {
-            this.inc1(1);
-        }
-        else if(this.methodNumber == 2) {
-            this.inc2(2);
-        }
-        else if(this.methodNumber == 3) {
-            this.inc3(3);
+        switch(this.methodNumber) {
+            case 1: this.inc1(1);
+                    break;
+            case 2: this.inc2(2);
+                    break;
+            case 3: this.inc3(3);
+                    break;
+            case 4: this.inc4(4);
+                    break;
         }
     }
 
@@ -42,6 +43,18 @@ public class DummyClass {
         System.out.println(result);
 //        System.nanoTime();
 //        long finalTime = end - start;
+    }
+
+    public void inc4(int a) {
+//        Regions.getRegion("edu.cmu.cs.mvelezce.analysis.instrumentation", "DummyClass", "inc3").startTime();
+        int result = a + 1;
+        System.out.println(result);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        Regions.getRegion("edu.cmu.cs.mvelezce.analysis.instrumentation", "DummyClass", "inc3").endTime();
     }
 
 }

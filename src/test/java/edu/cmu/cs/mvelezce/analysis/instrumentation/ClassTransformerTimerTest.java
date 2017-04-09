@@ -19,12 +19,12 @@ public class ClassTransformerTimerTest {
     public void testTransform2() throws Exception {
         int methodNumber = 2;
         Set<String> methods = new HashSet<>();
-        methods.add("inc" + methodNumber);
+        methods.add(ClassTransformerBaseTest.METHOD + methodNumber);
 
         ClassTransformer classTransformer = new ClassTransformerTimer(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methods);
         ClassNode classNode = classTransformer.readClass();
         classTransformer.transform(classNode);
-        classTransformer.writeClass(classNode, "target/classes/" + ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME);
+        classTransformer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME);
 
         Map<String, Integer> methodToInstructionCount = new HashMap<>();
 
@@ -46,9 +46,7 @@ public class ClassTransformerTimerTest {
 
         Assert.assertTrue(transformed);
 
-//        classTransformer.writeClass(classNode, "target/classes/" + ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME);
-//
-//        String command = "java -cp ./target/classes edu.cmu.cs.mvelezce.analysis.instrumentation.InstrumentationArea " + methodNumber;
+//        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + ClassTransformerBaseTest.PACKAGE + "." + ClassTransformerBaseTest.CONTROLLER_CLASS + " " + methodNumber;
 //        String output = ClassTransformerBaseTest.executeCommand(command);
 //        Assert.assertNotEquals(0, output.length());
     }

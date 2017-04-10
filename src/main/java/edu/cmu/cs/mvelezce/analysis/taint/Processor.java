@@ -21,11 +21,9 @@ public class Processor {
     public static final String BYTECODE_INDEXES = "bytecodeIndexes";
     public static final String METHOD_BYTECODE_SIGNATURE_JOANA_STYLE = "methodBytecodeSignatureJoanaStyle";
 
-    public static final String PLAYYPUS = "platypus";
-
     public static final String LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL = "_";
 
-    public static Map<Region, Set<String>> getRegionsToOptions() {
+    public static Map<Region, Set<String>> getRegionsToOptions(String program) {
         // This is hardcode to get the output of Lotrack
         List<String> fields = new ArrayList<>();
         fields.add(Processor.PACKAGE);
@@ -44,7 +42,7 @@ public class Processor {
         fields.add(Processor.METHOD);
         fields.add(Processor.JIMPLE_LINE_NO);
 
-        List<Map<String, String>> queryResult = Casbah.connect(Processor.PLAYYPUS, fields, sortBy);
+        List<Map<String, String>> queryResult = Casbah.connect(program, fields, sortBy);
         Map<Region, Set<String>> regionsToOptions = new HashedMap<>();
 
         for(Map<String, String> result : queryResult) {

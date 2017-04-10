@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.analysis.taint;
 
+import edu.cmu.cs.mvelezce.analysis.mapper.JavaPipeline;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,7 +40,7 @@ public class ProcessorTest {
 
     @Test
     public void getRegionsToOptions() throws Exception {
-        Assert.assertFalse(Processor.getRegionsToOptions().isEmpty());
+        Assert.assertFalse(Processor.getRegionsToOptions(JavaPipeline.PLAYYPUS).isEmpty());
     }
 
     @Test

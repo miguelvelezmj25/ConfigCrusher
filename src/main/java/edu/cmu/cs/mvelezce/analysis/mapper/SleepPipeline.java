@@ -25,7 +25,7 @@ import java.util.*;
  * TODO
  * Created by miguelvelez on 2/11/17.
  */
-public class PerformanceMapper extends Pipeline {
+public class SleepPipeline extends Pipeline {
 
     private static List<Class<? extends Statement>> relevantStatementsClasses = new ArrayList<Class<? extends Statement>>() {
         {
@@ -38,7 +38,7 @@ public class PerformanceMapper extends Pipeline {
         List<Map<Set<String>, Integer>> blockTimeList = new ArrayList<>();
         int baseTime = -1;
 
-        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = PerformanceMapper.sleepConfigurationMapToStringMap(relevantStatementsToOptions);
+        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = SleepPipeline.sleepConfigurationMapToStringMap(relevantStatementsToOptions);
 
         for(Map.Entry<Statement, Set<String>> entry : relevantStatementsToOptionsConvenient.entrySet()) {
             Map<Set<String>, Integer> blockTime = new HashMap<>();
@@ -82,7 +82,7 @@ public class PerformanceMapper extends Pipeline {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionsToOptions = PerformanceMapper.getRelevantRegionsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
         Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());
 
         Set<Set<String>> convenient = new HashSet<>();
@@ -90,12 +90,12 @@ public class PerformanceMapper extends Pipeline {
             convenient.add(sleepConfigurationSetToStringSet(relevantOption));
         }
 
-        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(convenient);
-        ast = PerformanceMapper.instrumentProgramToTimeRelevantRegions(ast, relevantRegionsToOptions.keySet());
-        Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
+        Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(convenient);
+        ast = SleepPipeline.instrumentProgramToTimeRelevantRegions(ast, relevantRegionsToOptions.keySet());
+        Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute);
 //        System.out.println(measuredPerformance.size());
 
-        return PerformanceMapper.createPerformanceModel(measuredPerformance, relevantRegionsToOptions);
+        return SleepPipeline.createPerformanceModel(measuredPerformance, relevantRegionsToOptions);
     }
 
     public static Map<Set<String>, Integer> buildPerformanceTable(String program, Set<ExpressionConfigurationConstant> parameters) {
@@ -107,7 +107,7 @@ public class PerformanceMapper extends Pipeline {
         CFG cfg = builder.buildCFG(ast);
 
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionsToOptions = PerformanceMapper.getRelevantRegionsToOptions(instructionsToTainted);
+        Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
         Set<Set<ExpressionConfigurationConstant>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());
 
         Set<Set<String>> convenient = new HashSet<>();
@@ -115,17 +115,17 @@ public class PerformanceMapper extends Pipeline {
             convenient.add(sleepConfigurationSetToStringSet(relevantOption));
         }
 
-        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(convenient);
-        ast = PerformanceMapper.instrumentProgramToTimeRelevantRegions(ast, relevantRegionsToOptions.keySet());
-        Set<PerformanceEntry> measuredPerformance = PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute);
+        Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(convenient);
+        ast = SleepPipeline.instrumentProgramToTimeRelevantRegions(ast, relevantRegionsToOptions.keySet());
+        Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute);
 
-        return PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantRegionsToOptions);
+        return SleepPipeline.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantRegionsToOptions);
     }
 
     public static Map<Set<String>, Integer> predictPerformanceForAllConfigurations(Set<ExpressionConfigurationConstant> parameters, Set<PerformanceEntry> measuredPerformance, Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions) {
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
 
-        Set<Set<String>> configurationSpace = Helper.getConfigurations(PerformanceMapper.sleepConfigurationSetToStringSet(parameters));
+        Set<Set<String>> configurationSpace = Helper.getConfigurations(SleepPipeline.sleepConfigurationSetToStringSet(parameters));
         Set<Set<String>> measuredConfigurations = new HashSet<>();
 
         for(PerformanceEntry performanceEntry : measuredPerformance) {
@@ -135,7 +135,7 @@ public class PerformanceMapper extends Pipeline {
 
         configurationSpace.removeAll(measuredConfigurations);
 
-        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = PerformanceMapper.sleepConfigurationMapToStringMap(relevantStatementsToOptions);
+        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = SleepPipeline.sleepConfigurationMapToStringMap(relevantStatementsToOptions);
 
         for(Set<String> configuration : configurationSpace) {
             Map<Statement, Integer> blockToTime = new HashMap<>();
@@ -201,7 +201,7 @@ public class PerformanceMapper extends Pipeline {
         Map<Statement, Set<ExpressionConfigurationConstant>> relevantRegionToOptions = new HashMap<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
-            if(PerformanceMapper.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
+            if(SleepPipeline.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
                 RelevantRegionGetterVisitor performanceStatementVisitor = new RelevantRegionGetterVisitor(entry.getValue());
                 Set<ExpressionConfigurationConstant> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
 
@@ -233,7 +233,7 @@ public class PerformanceMapper extends Pipeline {
         Set<Set<ExpressionConfigurationConstant>> setOfOptionSetConvenient = new HashSet<>();
 
         for(Set<String> optionSet : setOfStringOptionsSets) {
-            setOfOptionSetConvenient.add(PerformanceMapper.stringSetToSleepConfigurationSet(optionSet));
+            setOfOptionSetConvenient.add(SleepPipeline.stringSetToSleepConfigurationSet(optionSet));
         }
 
         return setOfOptionSetConvenient;

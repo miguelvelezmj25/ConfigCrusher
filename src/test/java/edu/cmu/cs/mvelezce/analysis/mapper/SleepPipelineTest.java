@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * Created by miguelvelez on 2/11/17.
  */
-public class PerformanceMapperTest {
+public class SleepPipelineTest {
 
     public static final String PROGRAMS_PATH = "src/main/java/edu/cmu/cs/mvelezce/sleep/programs/";
 
@@ -32,8 +32,8 @@ public class PerformanceMapperTest {
         relevantRegionsToOptions.put(timedStatement1, relevantOptions);
 
         int baseTime = 6;
-        PerformanceMapper.PerformanceEntry performanceEntry = new PerformanceMapper.PerformanceEntry(configuration, blockToTime, baseTime);
-        Set<PerformanceMapper.PerformanceEntry> measuredPerformance = new HashSet<>();
+        SleepPipeline.PerformanceEntry performanceEntry = new SleepPipeline.PerformanceEntry(configuration, blockToTime, baseTime);
+        Set<SleepPipeline.PerformanceEntry> measuredPerformance = new HashSet<>();
         measuredPerformance.add(performanceEntry);
 
         relevantOptions = new HashSet<>();
@@ -56,14 +56,14 @@ public class PerformanceMapperTest {
         executionTime = 1;
         baseTime += executionTime;
         blockToTime.put(timedStatement2, executionTime);
-        performanceEntry = new PerformanceMapper.PerformanceEntry(configuration, blockToTime, baseTime);
+        performanceEntry = new SleepPipeline.PerformanceEntry(configuration, blockToTime, baseTime);
         measuredPerformance.add(performanceEntry);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add(new ExpressionConfigurationConstant("B"));
         relevantRegionsToOptions.put(timedStatement2, relevantOptions);
 
-        PerformanceModel performanceModel = PerformanceMapper.createPerformanceModel(measuredPerformance, relevantRegionsToOptions);
+        PerformanceModel performanceModel = SleepPipeline.createPerformanceModel(measuredPerformance, relevantRegionsToOptions);
 
         int performance = 6;
         configuration = new HashSet<>();
@@ -121,7 +121,7 @@ public class PerformanceMapperTest {
         currentBasicBlock = new BasicBlock(statement3);
         instructionsToTainted.put(currentBasicBlock, possibleTaints);
 
-        Assert.assertEquals(relevantRegionToOptions, PerformanceMapper.getRelevantRegionsToOptions(instructionsToTainted));
+        Assert.assertEquals(relevantRegionToOptions, SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted));
 //        System.out.println(relevantRegionToOptions);
     }
 
@@ -131,7 +131,7 @@ public class PerformanceMapperTest {
         Statement ast = new StatementSleep(new ExpressionVariable("a"));
         statements.add(ast);
 
-        Assert.assertNotEquals(ast, PerformanceMapper.instrumentProgramToTimeRelevantRegions(ast, statements));
+        Assert.assertNotEquals(ast, SleepPipeline.instrumentProgramToTimeRelevantRegions(ast, statements));
     }
 
     @Test
@@ -142,31 +142,31 @@ public class PerformanceMapperTest {
         StatementTimed statement = new StatementTimed(timedStatement);
         statementBlock.add(statement);
 
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapper.setOfStringSetsToSetOfSleepConfigurationSets(PipelineTest.getOptionsSet("AB"));
-        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(PerformanceMapper.setOfSleepConfigurationSetsToSetOfStringSets(relevantOptionsSet));
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = SleepPipeline.setOfStringSetsToSetOfSleepConfigurationSets(PipelineTest.getOptionsSet("AB"));
+        Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantOptionsSet));
 
         Statement ast = new StatementBlock(statementBlock);
 
-        Set<PerformanceMapper.PerformanceEntry> measuredPerformance = new HashSet<>();
+        Set<SleepPipeline.PerformanceEntry> measuredPerformance = new HashSet<>();
         Set<String> configurationToExecute = new HashSet<>();
         Map<Statement, Integer> blockToTime = new HashMap<>();
         blockToTime.put(timedStatement, 0);
-        PerformanceMapper.PerformanceEntry performanceEntry =
-                new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        SleepPipeline.PerformanceEntry performanceEntry =
+                new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
         measuredPerformance.add(performanceEntry);
 
         configurationToExecute = new HashSet<>();
         configurationToExecute.add("A");
         blockToTime = new HashMap<>();
         blockToTime.put(timedStatement, 0);
-        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
         measuredPerformance.add(performanceEntry);
 
         configurationToExecute = new HashSet<>();
         configurationToExecute.add("B");
         blockToTime = new HashMap<>();
         blockToTime.put(timedStatement, 1);
-        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 1);
+        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 1);
         measuredPerformance.add(performanceEntry);
 
         configurationToExecute = new HashSet<>();
@@ -174,10 +174,10 @@ public class PerformanceMapperTest {
         configurationToExecute.add("B");
         blockToTime = new HashMap<>();
         blockToTime.put(timedStatement, 1);
-        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 1);
+        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 1);
         measuredPerformance.add(performanceEntry);
 
-        Assert.assertEquals(measuredPerformance, PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute));
+        Assert.assertEquals(measuredPerformance, SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute));
     }
 
     @Test
@@ -189,29 +189,29 @@ public class PerformanceMapperTest {
         statement = new StatementIf(new ExpressionConfigurationConstant("A"), statement);
         statementBlock.add(statement);
 
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapper.setOfStringSetsToSetOfSleepConfigurationSets(PipelineTest.getOptionsSet("AB"));
-        Set<Set<String>> configurationsToExecute = Pipeline.getConfigurationsToExecute(PerformanceMapper.setOfSleepConfigurationSetsToSetOfStringSets(relevantOptionsSet));
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = SleepPipeline.setOfStringSetsToSetOfSleepConfigurationSets(PipelineTest.getOptionsSet("AB"));
+        Set<Set<String>> configurationsToExecute = Pipeline.getConfigurationsToExecute(SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantOptionsSet));
 
         Statement ast = new StatementBlock(statementBlock);
 
-        Set<PerformanceMapper.PerformanceEntry> measuredPerformance = new HashSet<>();
+        Set<SleepPipeline.PerformanceEntry> measuredPerformance = new HashSet<>();
         Set<String> configurationToExecute = new HashSet<>();
         Map<Statement, Integer> blockToTime = new HashMap<>();
-        PerformanceMapper.PerformanceEntry performanceEntry =
-                new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        SleepPipeline.PerformanceEntry performanceEntry =
+                new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
         measuredPerformance.add(performanceEntry);
 
         configurationToExecute = new HashSet<>();
         configurationToExecute.add("A");
         blockToTime = new HashMap<>();
         blockToTime.put(timedStatement, 2);
-        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 2);
+        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 2);
         measuredPerformance.add(performanceEntry);
 
         configurationToExecute = new HashSet<>();
         configurationToExecute.add("B");
         blockToTime = new HashMap<>();
-        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
         measuredPerformance.add(performanceEntry);
 
         configurationToExecute = new HashSet<>();
@@ -219,10 +219,10 @@ public class PerformanceMapperTest {
         configurationToExecute.add("B");
         blockToTime = new HashMap<>();
         blockToTime.put(timedStatement, 2);
-        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 2);
+        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 2);
         measuredPerformance.add(performanceEntry);
 
-        Assert.assertEquals(measuredPerformance, PerformanceMapper.measureConfigurationPerformance(ast, configurationsToExecute));
+        Assert.assertEquals(measuredPerformance, SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute));
     }
 
     @Test
@@ -231,14 +231,14 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("A"));
         parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Set<PerformanceMapper.PerformanceEntry> measuredPerformance = new HashSet<>();
+        Set<SleepPipeline.PerformanceEntry> measuredPerformance = new HashSet<>();
 
         Statement timedStatement = new StatementSleep(new ExpressionConstantInt(2));
 
         Set<String> configurationToExecute = new HashSet<>();
         Map<Statement, Integer> blockToTime = new HashMap<>();
-        PerformanceMapper.PerformanceEntry performanceEntry =
-                new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        SleepPipeline.PerformanceEntry performanceEntry =
+                new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
         measuredPerformance.add(performanceEntry);
 
         configurationToExecute = new HashSet<>();
@@ -246,7 +246,7 @@ public class PerformanceMapperTest {
         configurationToExecute.add("B");
         blockToTime = new HashMap<>();
         blockToTime.put(timedStatement, 2);
-        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 2);
+        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 2);
         measuredPerformance.add(performanceEntry);
 
         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = new HashMap<>();
@@ -271,7 +271,7 @@ public class PerformanceMapperTest {
         configuration.add("B");
         result.put(configuration, 2);
 
-        Assert.assertEquals(result, PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions));
+        Assert.assertEquals(result, SleepPipeline.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions));
     }
 
     @Test
@@ -280,15 +280,15 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("A"));
         parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Set<PerformanceMapper.PerformanceEntry> measuredPerformance = new HashSet<>();
+        Set<SleepPipeline.PerformanceEntry> measuredPerformance = new HashSet<>();
 
         Statement timedStatement = new StatementSleep(new ExpressionConstantInt(2));
         Statement statement = new StatementIf(new ExpressionConfigurationConstant("A"), timedStatement);
 
         Set<String> configurationToExecute = new HashSet<>();
         Map<Statement, Integer> blockToTime = new HashMap<>();
-        PerformanceMapper.PerformanceEntry performanceEntry =
-                new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 0);
+        SleepPipeline.PerformanceEntry performanceEntry =
+                new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
         measuredPerformance.add(performanceEntry);
 
         configurationToExecute = new HashSet<>();
@@ -296,7 +296,7 @@ public class PerformanceMapperTest {
         configurationToExecute.add("B");
         blockToTime = new HashMap<>();
         blockToTime.put(timedStatement, 2);
-        performanceEntry = new PerformanceMapper.PerformanceEntry(configurationToExecute, blockToTime, 2);
+        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 2);
         measuredPerformance.add(performanceEntry);
 
         Map<Statement, Set<ExpressionConfigurationConstant>> relevantStatementsToOptions = new HashMap<>();
@@ -321,12 +321,12 @@ public class PerformanceMapperTest {
         configuration.add("B");
         result.put(configuration, 2);
 
-        Assert.assertEquals(result, PerformanceMapper.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions));
+        Assert.assertEquals(result, SleepPipeline.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions));
     }
 
     @Test
     public void testBuildPerformanceTable1() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program1");
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program1");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
         configurationToPerformance.put(new HashSet<>(), 3);
@@ -348,13 +348,13 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("A"));
         parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
     }
 
 //    @Test
 //    public void testBuildPerformanceTable2() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program2");
+//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program2");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
 //        configurationToPerformance.put(new HashSet<>(), 0);
@@ -377,13 +377,13 @@ public class PerformanceMapperTest {
 //        parameters.add(new ExpressionConfigurationConstant("B"));
 //
 //        // TODO must calculate B
-//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
 //    }
 
     @Test
     public void testBuildPerformanceTable3() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program3");
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program3");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
         configurationToPerformance.put(new HashSet<>(), 6);
@@ -405,13 +405,13 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("A"));
         parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
     }
 
     @Test
     public void testBuildPerformanceTable4() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program4");
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program4");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
         configurationToPerformance.put(new HashSet<>(), 6);
@@ -433,13 +433,13 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("A"));
         parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
     }
 
     @Test
     public void testBuildPerformanceTable5() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program5");
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program5");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
         configurationToPerformance.put(new HashSet<>(), 0);
@@ -461,13 +461,13 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("A"));
         parameters.add(new ExpressionConfigurationConstant("B"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
     }
 
 //    @Test
 //    public void testBuildPerformanceTable6() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program6");
+//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program6");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
 //        configurationToPerformance.put(new HashSet<>(), 0);
@@ -510,13 +510,13 @@ public class PerformanceMapperTest {
 //        parameters.add(new ExpressionConfigurationConstant("B"));
 //        parameters.add(new ExpressionConfigurationConstant("C"));
 //
-//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
 //    }
 
     @Test
     public void testBuildPerformanceTable7() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program7");
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program7");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
         configurationToPerformance.put(new HashSet<>(), 0);
@@ -604,13 +604,13 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("C"));
         parameters.add(new ExpressionConfigurationConstant("D"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
     }
 
     @Test
     public void testBuildPerformanceTable8() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program8");
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program8");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
         configurationToPerformance.put(new HashSet<>(), 0);
@@ -653,13 +653,13 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("B"));
         parameters.add(new ExpressionConfigurationConstant("C"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
     }
 
     @Test
     public void testBuildPerformanceTable9() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program9");
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program9");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
         configurationToPerformance.put(new HashSet<>(), 0);
@@ -671,13 +671,13 @@ public class PerformanceMapperTest {
         Set<ExpressionConfigurationConstant> parameters = new HashSet<>();
         parameters.add(new ExpressionConfigurationConstant("A"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
     }
 
     @Test
     public void testBuildPerformanceTable10() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program10");
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program10");
 
         Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
         configurationToPerformance.put(new HashSet<>(), 0);
@@ -720,14 +720,14 @@ public class PerformanceMapperTest {
         parameters.add(new ExpressionConfigurationConstant("B"));
         parameters.add(new ExpressionConfigurationConstant("C"));
 
-        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
     }
 
     @Test
     public void testBuildPerformanceModel1() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program1");
-        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program1");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
         int performance = 3;
         Set<String> configuration = new HashSet<>();
@@ -752,7 +752,7 @@ public class PerformanceMapperTest {
 
 //    @Test
 //    public void testBuildPerformanceModel2() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program2");
+//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program2");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
 //        configurationToPerformance.put(new HashSet<>(), 0);
@@ -775,14 +775,14 @@ public class PerformanceMapperTest {
 //        parameters.add(new ExpressionConfigurationConstant("B"));
 //
 //        // TODO must calculate B
-//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
 //    }
 
     @Test
     public void testBuildPerformanceModel3() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program3");
-        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program3");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
 
         int performance = 6;
@@ -808,8 +808,8 @@ public class PerformanceMapperTest {
 
     @Test
     public void testBuildPerformanceModel4() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program4");
-        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program4");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
         int performance = 6;
         Set<String> configuration = new HashSet<>();
@@ -834,8 +834,8 @@ public class PerformanceMapperTest {
 
 //    @Test
 //    public void testBuildPerformanceModel5() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program5");
-//        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program5");
+//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
 //
 //        int performance = 0;
@@ -861,7 +861,7 @@ public class PerformanceMapperTest {
 //
 //    @Test
 //    public void testBuildPerformanceModel6() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program6");
+//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program6");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
 //        configurationToPerformance.put(new HashSet<>(), 0);
@@ -904,14 +904,14 @@ public class PerformanceMapperTest {
 //        parameters.add(new ExpressionConfigurationConstant("B"));
 //        parameters.add(new ExpressionConfigurationConstant("C"));
 //
-//        Assert.assertEquals(configurationToPerformance, PerformanceMapper.buildPerformanceTable(program, parameters));
+//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
 //        System.out.println(configurationToPerformance);
 //    }
 
     @Test
     public void testBuildPerformanceModel7() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program7");
-        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program7");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
 
         int performance = 0;
@@ -1013,8 +1013,8 @@ public class PerformanceMapperTest {
 
     @Test
     public void testBuildPerformanceModel8() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program8");
-        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program8");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
 
         int performance = 0;
@@ -1064,8 +1064,8 @@ public class PerformanceMapperTest {
 
 //    @Test
 //    public void testBuildPerformanceModel9() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program9");
-//        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program9");
+//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
 //
 //        int performance = 0;
@@ -1115,8 +1115,8 @@ public class PerformanceMapperTest {
 
     @Test
     public void testBuildPerformanceModel10() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(PerformanceMapperTest.PROGRAMS_PATH + "program10");
-        PerformanceModel performanceModel = PerformanceMapper.buildPerformanceModel(program);
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program10");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
 
         int performance = 0;

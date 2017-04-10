@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.analysis.mapper;
 
-import edu.cmu.cs.mvelezce.analysis.Helper;
 import edu.cmu.cs.mvelezce.analysis.PerformanceModel;
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
@@ -8,7 +7,6 @@ import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConfigurationConstant;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConstantInt;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionVariable;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
-import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,66 +18,6 @@ import java.util.*;
 public class PerformanceMapperTest {
 
     public static final String PROGRAMS_PATH = "src/main/java/edu/cmu/cs/mvelezce/sleep/programs/";
-
-    private static Set<Set<ExpressionConfigurationConstant>> getOptionsSet(String string) {
-        Set<Set<ExpressionConfigurationConstant>> result = new HashSet<>();
-        String[] allOptions = string.split(",");
-
-        for(String options : allOptions) {
-            Set<ExpressionConfigurationConstant> newOption = new HashSet<>();
-            options = options.trim();
-
-            for(int i = 0; i < options.length(); i++) {
-                ExpressionConfigurationConstant option = new ExpressionConfigurationConstant(options.charAt(i) + "");
-                newOption.add(option);
-            }
-
-            result.add(newOption);
-        }
-
-        return result;
-    }
-
-    private static void getConfigurationsToExecute(Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet) {
-        Collection<List<Set<ExpressionConfigurationConstant>>> permutations = CollectionUtils.permutations(relevantOptionsSet);
-
-        for(List<Set<ExpressionConfigurationConstant>> permutation : permutations) {
-//            System.out.println("\nPermutation: " + permutation);
-            Set<Set<ExpressionConfigurationConstant>> a = new HashSet<>(permutation);
-            Set<Set<String>> results = PerformanceMapper.getConfigurationsToExecute(a);
-//            System.out.println(results);
-
-            for(Set<ExpressionConfigurationConstant> relevantOptions : relevantOptionsSet) {
-                Set<String> relevantOptionsConvenient = new HashSet<>();
-
-                for(ExpressionConfigurationConstant relevantOption : relevantOptions) {
-                    relevantOptionsConvenient.add(relevantOption.getName());
-                }
-
-                Set<Set<String>> powerSet = Helper.getConfigurations(relevantOptions);
-
-                for (Set<String> configuration : powerSet) {
-//                    System.out.println("Want configuration: " + configuration + " from: " + relevantOptionsConvenient);
-                    boolean hasConfiguration = false;
-
-                    for (Set<String> result : results) {
-                        if (PerformanceMapperTest.matches(result, configuration, relevantOptionsConvenient)) {
-                            hasConfiguration = true;
-                            break;
-                        }
-                    }
-
-                    Assert.assertTrue(hasConfiguration);
-                }
-            }
-        }
-    }
-
-    private static boolean matches(Set<String> result, Set<String> configuration, Set<String> relevantOptionsConvenient) {
-        Set<String> hold = new HashSet<>(relevantOptionsConvenient);
-        hold.retainAll(result);
-        return hold.equals(configuration);
-    }
 
     @Test
     public void testCreatePerformanceModel1() throws Exception {
@@ -149,36 +87,6 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void testGetRelevantUniqueOptions1() throws Exception {
-        Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, AC");
-
-        Assert.assertEquals(set, PerformanceMapper.filterOptions(set));
-    }
-
-    @Test
-    public void testGetRelevantUniqueOptions2() throws Exception {
-        Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("ABC, ACD");
-
-        Assert.assertEquals(set, PerformanceMapper.filterOptions(set));
-    }
-
-    @Test
-    public void testGetRelevantUniqueOptions3() throws Exception {
-        Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, ABC");
-        Set<Set<ExpressionConfigurationConstant>> result = PerformanceMapperTest.getOptionsSet("ABC");
-
-        Assert.assertEquals(result, PerformanceMapper.filterOptions(set));
-    }
-
-    @Test
-    public void testGetRelevantUniqueOptions4() throws Exception {
-        Set<Set<ExpressionConfigurationConstant>> set = PerformanceMapperTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
-        Set<Set<ExpressionConfigurationConstant>> result = PerformanceMapperTest.getOptionsSet("ABC, BCD, DEF");
-
-        Assert.assertEquals(result, PerformanceMapper.filterOptions(set));
-    }
-
-    @Test
     public void testGetConfigurationsInRelevantRegions1() {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = new HashMap<>();
         Set<TaintAnalysis.PossibleTaint> possibleTaints = new HashSet<>();
@@ -227,90 +135,6 @@ public class PerformanceMapperTest {
     }
 
     @Test
-    public void testGetConfigurationsToExecute1() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, AD, BE");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute2() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, BCD");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute3() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, BCD");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute4() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, BC");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute5() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, CDE");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute6() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, BC");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute7() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, AD, BC, BD");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute8() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, AD, BC, CD");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test // TODO ERROR because I need to get the other 4 configs from ABC
-    public void testGetConfigurationsToExecute9() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, CD, BD");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute10() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, CD");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute11() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABC, DEF");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute12() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute13() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("ABCD, ADXY, ABDX");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
-    public void testGetConfigurationsToExecute14() {
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB, AC, AD, BC, CD, BD");
-        PerformanceMapperTest.getConfigurationsToExecute(relevantOptionsSet);
-    }
-
-    @Test
     public void testMeasureConfigurationPerformance1() throws Exception {
         List<Statement> statementBlock = new ArrayList<>();
 
@@ -318,8 +142,8 @@ public class PerformanceMapperTest {
         StatementTimed statement = new StatementTimed(timedStatement);
         statementBlock.add(statement);
 
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB");
-        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptionsSet);
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapper.setOfStringSetsToSetOfSleepConfigurationSets(PipelineTest.getOptionsSet("AB"));
+        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(PerformanceMapper.setOfSleepConfigurationSetsToSetOfStringSets(relevantOptionsSet));
 
         Statement ast = new StatementBlock(statementBlock);
 
@@ -365,8 +189,8 @@ public class PerformanceMapperTest {
         statement = new StatementIf(new ExpressionConfigurationConstant("A"), statement);
         statementBlock.add(statement);
 
-        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapperTest.getOptionsSet("AB");
-        Set<Set<String>> configurationsToExecute = PerformanceMapper.getConfigurationsToExecute(relevantOptionsSet);
+        Set<Set<ExpressionConfigurationConstant>> relevantOptionsSet = PerformanceMapper.setOfStringSetsToSetOfSleepConfigurationSets(PipelineTest.getOptionsSet("AB"));
+        Set<Set<String>> configurationsToExecute = Pipeline.getConfigurationsToExecute(PerformanceMapper.setOfSleepConfigurationSetsToSetOfStringSets(relevantOptionsSet));
 
         Statement ast = new StatementBlock(statementBlock);
 

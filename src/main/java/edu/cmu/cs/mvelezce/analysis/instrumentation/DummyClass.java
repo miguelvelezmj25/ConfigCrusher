@@ -46,7 +46,9 @@ public class DummyClass {
     }
 
     public void inc4(int a) {
-//        Regions.getRegion("edu.cmu.cs.mvelezce.analysis.instrumentation", "DummyClass", "inc3").startTime();
+//        Region hold = new Region("edu.cmu.cs.mvelezce.analysis.instrumentation", "DummyClass", "inc3");
+//        Region region = Regions.getRegion(hold);
+//        region.startTime();
         int result = a + 1;
         System.out.println(result);
         try {
@@ -54,7 +56,7 @@ public class DummyClass {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        Regions.getRegion("edu.cmu.cs.mvelezce.analysis.instrumentation", "DummyClass", "inc3").endTime();
+//        region.endTime();
     }
 
 }

@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.analysis;
 
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConfigurationConstant;
 import org.junit.Assert;
 import org.junit.Test;
 

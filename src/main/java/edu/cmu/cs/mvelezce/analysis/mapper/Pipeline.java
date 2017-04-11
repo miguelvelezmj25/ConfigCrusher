@@ -1,6 +1,9 @@
 package edu.cmu.cs.mvelezce.analysis.mapper;
 
 import edu.cmu.cs.mvelezce.analysis.Helper;
+import edu.cmu.cs.mvelezce.analysis.performance.PerformanceEntry;
+import edu.cmu.cs.mvelezce.analysis.performance.PerformanceModel;
+import edu.cmu.cs.mvelezce.analysis.taint.Region;
 
 import java.util.*;
 
@@ -144,6 +147,43 @@ public abstract class Pipeline {
             configurationsToExecute.add(smallSet.next());
 //            System.out.println("Added rest from smallset");
         }
+    }
+
+    public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
+        List<Map<Set<String>, Integer>> blockTimeList = new ArrayList<>();
+        int baseTime = -1;
+
+//        for(Map.PerformanceEntry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
+//            Map<Set<String>, Integer> blockTime = new HashMap<>();
+//
+//            for(PerformanceEntry performanceEntry : measuredPerformance) {
+//                Set<String> configurationValueInMeasuredConfiguration = new HashSet<>(performanceEntry.getConfiguration());
+//                configurationValueInMeasuredConfiguration.retainAll(entry.getValue());
+//
+//                Statement statement = entry.getKey();
+//
+//                if(statement instanceof StatementIf) {
+//                    statement = ((StatementIf) statement).getThenBlock();
+//                }
+//
+//                Integer time = performanceEntry.getRegions().get(statement);
+//
+//                if(time != null) {
+//                    blockTime.put(configurationValueInMeasuredConfiguration, time);
+////                    System.out.println(configurationValueInMeasuredConfiguration + " " + time);
+//                }
+//                else {
+//                    blockTime.put(configurationValueInMeasuredConfiguration, 0);
+////                    System.out.println(configurationValueInMeasuredConfiguration + " " + 0);
+//                }
+//
+//                baseTime = performanceEntry.getBaseTime();
+//            }
+//
+//            blockTimeList.add(blockTime);
+//        }
+
+        return new PerformanceModel(baseTime, blockTimeList);
     }
 
 }

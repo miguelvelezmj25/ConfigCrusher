@@ -1,5 +1,6 @@
-package edu.cmu.cs.mvelezce.analysis;
+package edu.cmu.cs.mvelezce.analysis.performance;
 
+import edu.cmu.cs.mvelezce.analysis.performance.PerformanceModel;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,9 @@
 package edu.cmu.cs.mvelezce.analysis.interpreter;
 
 
+import edu.cmu.cs.mvelezce.analysis.mapper.SleepPipeline;
+import edu.cmu.cs.mvelezce.analysis.taint.Region;
+import edu.cmu.cs.mvelezce.analysis.taint.Regions;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.*;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
 import edu.cmu.cs.mvelezce.sleep.ast.value.ValueInt;
@@ -21,12 +24,12 @@ public class SleepInterpreter implements Visitor<ValueInt, Void> {
     private Statement ast;
     private Map<String, ValueInt> store;
     private int totalExecutionTime;
-    private Map<Statement, Integer> timedBlocks;
+//    private Map<Statement, Integer> timedBlocks;
 
     public SleepInterpreter(Statement ast) {
         this.store = new HashMap<>();
         this.totalExecutionTime = 0;
-        this.timedBlocks = new HashMap<>();
+//        this.timedBlocks = new HashMap<>();
         this.ast = ast;
         this.activatedConfigurations = null;
     }
@@ -151,9 +154,15 @@ public class SleepInterpreter implements Visitor<ValueInt, Void> {
 
     @Override
     public Void visitStatementTimed(StatementTimed statement) {
-        int time = totalExecutionTime;
+        SleepPipeline.RegionSleep hold = new SleepPipeline.RegionSleep(statement);
+        Region region = Regions.getRegion(hold);
+        region.startTime(this.totalExecutionTime);
+
+//        int time = totalExecutionTime;
         statement.getStatements().accept(this);
-        this.timedBlocks.put(statement.getStatements(), this.totalExecutionTime - time);
+
+        region.endTime(this.totalExecutionTime);
+//        this.timedBlocks.put(statement.getStatements(), this.totalExecutionTime - time);
         return null;
     }
 
@@ -168,5 +177,5 @@ public class SleepInterpreter implements Visitor<ValueInt, Void> {
 
     public int getTotalExecutionTime() { return this.totalExecutionTime; }
 
-    public Map<Statement, Integer> getTimedBlocks() { return this.timedBlocks; }
+//    public Map<Statement, Integer> getTimedBlocks() { return this.timedBlocks; }
 }

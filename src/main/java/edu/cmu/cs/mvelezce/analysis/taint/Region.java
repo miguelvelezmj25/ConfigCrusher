@@ -23,12 +23,27 @@ public class Region {
         this("", regionClass, regionMethod);
     }
 
+    public Region(String regionMethod) {
+        this("", "", regionMethod);
+    }
+    public Region() {
+        this("", "", "");
+    }
+
     public void startTime() {
-        this.startTime = System.nanoTime();
+        this.startTime(System.nanoTime());
+    }
+
+    public void startTime(long startTime) {
+        this.startTime = startTime;
     }
 
     public void endTime() {
-        this.endTime = System.nanoTime();
+        this.endTime(System.nanoTime());
+    }
+
+    public void endTime(long endTime) {
+        this.endTime = endTime;
         System.out.println(this.getNanoExecutionTime());
         System.out.println(this.getMilliExecutionTime());
     }

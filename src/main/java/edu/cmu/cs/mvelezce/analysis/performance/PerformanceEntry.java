@@ -1,7 +1,9 @@
 package edu.cmu.cs.mvelezce.analysis.performance;
 
 import edu.cmu.cs.mvelezce.analysis.taint.Region;
+import org.apache.commons.collections4.map.HashedMap;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -9,16 +11,25 @@ import java.util.Set;
  */
 public class PerformanceEntry {
     private Set<String> configuration;
-    private Set<Region> regions;
+    private Map<Region, Region> regions;
+
 
     public PerformanceEntry(Set<String> configuration, Set<Region> regions) {
         this.configuration = configuration;
-        this.regions = regions;
+        this.regions = new HashedMap<>();
+
+        for(Region region : regions) {
+            this.regions.put(region, region);
+        }
+    }
+
+    public Region getRegion(Region region) {
+        return this.regions.get(region);
     }
 
     public Set<String> getConfiguration() { return this.configuration; }
 
-    public Set<Region> getRegions() { return this.regions; }
+    public Set<Region> getRegions() { return this.regions.keySet(); }
 
     @Override
     public boolean equals(Object o) {

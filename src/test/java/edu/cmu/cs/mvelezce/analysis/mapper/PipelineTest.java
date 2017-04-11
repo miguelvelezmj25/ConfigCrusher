@@ -1,14 +1,18 @@
 package edu.cmu.cs.mvelezce.analysis.mapper;
 
 import edu.cmu.cs.mvelezce.analysis.Helper;
+import edu.cmu.cs.mvelezce.analysis.performance.PerformanceEntry;
+import edu.cmu.cs.mvelezce.analysis.performance.PerformanceModel;
+import edu.cmu.cs.mvelezce.analysis.taint.Region;
+import edu.cmu.cs.mvelezce.analysis.taint.Regions;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConstantInt;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.StatementSleep;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/10/17.
@@ -176,6 +180,76 @@ public class PipelineTest {
         Set<Set<String>> set = PipelineTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
         Set<Set<String>> result = PipelineTest.getOptionsSet("ABC, BCD, DEF");
         Assert.assertEquals(result, Pipeline.filterOptions(set));
+    }
+
+    @Test
+    public void testCreatePerformanceModel1() throws Exception {
+        // Map<Region, Set<String>> regionsToOptions
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+        Set<String> relevantOptions = new HashSet<>();
+        relevantOptions.add("A");
+        int duration1 = 3;
+        Statement timedStatement1 = new StatementSleep(new ExpressionConstantInt(duration1));
+        Region region1 = new SleepPipeline.RegionSleep(timedStatement1);
+//        Regions.addRegion(region);
+        regionsToOptions.put(region1.clone(), relevantOptions);
+
+        relevantOptions = new HashSet<>();
+        relevantOptions.add("B");
+        int duration2 = 1;
+        Statement timedStatement2 = new StatementSleep(new ExpressionConstantInt(duration2));
+        Region region2 = new SleepPipeline.RegionSleep(timedStatement2);
+//        Regions.addRegion(region);
+        regionsToOptions.put(region2.clone(), relevantOptions);
+
+        // Set<PerformanceEntry> measuredPerformance
+        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
+        Set<String> configuration = new HashSet<>();
+        Set<Region> regions = new HashSet<>();
+        region1.startTime(0);
+        region1.endTime(0);
+        region2.startTime(0);
+        region2.endTime(0);
+        regions.add(region1.clone());
+        regions.add(region2.clone());
+        PerformanceEntry performanceEntry = new PerformanceEntry(configuration, regions);
+        measuredPerformance.add(performanceEntry);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        regions = new HashSet<>();
+        region1.startTime(0);
+        region1.endTime(duration1);
+        region2.startTime(0);
+        region2.endTime(duration2);
+        regions.add(region1.clone());
+        regions.add(region2.clone());
+        performanceEntry = new PerformanceEntry(configuration, regions);
+        measuredPerformance.add(performanceEntry);
+
+        // Performance model
+        PerformanceModel performanceModel = SleepPipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
+
+        int performance = 0;
+        configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
     }
 
 }

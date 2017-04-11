@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.analysis.taint;
 /**
  * Created by miguelvelez on 4/7/17.
  */
-public class Region {
+public class Region implements Cloneable {
 
     private String regionPackage;
     private String regionClass;
@@ -26,6 +26,7 @@ public class Region {
     public Region(String regionMethod) {
         this("", "", regionMethod);
     }
+
     public Region() {
         this("", "", "");
     }
@@ -35,6 +36,7 @@ public class Region {
     }
 
     public void startTime(long startTime) {
+        this.resetExecution();
         this.startTime = startTime;
     }
 
@@ -44,12 +46,25 @@ public class Region {
 
     public void endTime(long endTime) {
         this.endTime = endTime;
-        System.out.println(this.getNanoExecutionTime());
-        System.out.println(this.getMilliExecutionTime());
+    }
+
+    public void resetExecution() {
+        this.startTime = 0;
+        this.endTime = 0;
+    }
+
+    public int getExecutionTime() {
+        // Still measuring
+        if(this.startTime != 0 && this.endTime == 0) {
+            return -1;
+        }
+
+        return (int) (this.endTime - this.startTime);
     }
 
     public long getNanoExecutionTime() {
-        if(this.startTime == 0 || this.endTime == 0) {
+        // Still measuring
+        if(this.startTime != 1 && this.endTime == 0) {
             return 0;
         }
 
@@ -65,21 +80,25 @@ public class Region {
     }
 
     @Override
+    public Region clone() throws CloneNotSupportedException {
+        return (Region) super.clone();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Region region = (Region) o;
 
-        if (regionPackage != null ? !regionPackage.equals(region.regionPackage) : region.regionPackage != null)
-            return false;
+        if (!regionPackage.equals(region.regionPackage)) return false;
         if (!regionClass.equals(region.regionClass)) return false;
         return regionMethod.equals(region.regionMethod);
     }
 
     @Override
     public int hashCode() {
-        int result = regionPackage != null ? regionPackage.hashCode() : 0;
+        int result = regionPackage.hashCode();
         result = 31 * result + regionClass.hashCode();
         result = 31 * result + regionMethod.hashCode();
         return result;

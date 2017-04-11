@@ -2,12 +2,17 @@ package edu.cmu.cs.mvelezce.analysis.performance;
 
 import java.util.*;
 
+// TODO time can be in seconds, milliseonds, minutes,.... That affects the type of the block.
 /**
  * Created by mvelezce on 3/9/17.
  */
 public class PerformanceModel {
     private int baseTime;
     private Map<Set<String>, Map<Set<String>, Integer>> optionToBlock;
+
+    public PerformanceModel(List<Map<Set<String>, Integer>> blocks) {
+        this(0, blocks);
+    }
 
     public PerformanceModel(int baseTime, List<Map<Set<String>, Integer>> blocks) {
         this.baseTime = baseTime;
@@ -20,7 +25,6 @@ public class PerformanceModel {
                 relevantOptions.addAll(configuration);
             }
 
-            // This is an option and it should be stored as an ExpressionConfigurationConstant, but for convenience, we leave it as a string
             this.optionToBlock.put(relevantOptions, block);
         }
 
@@ -41,7 +45,7 @@ public class PerformanceModel {
 
     @Override
     public String toString() {
-        String performanceModel = "T =" ;
+        String performanceModel = "T = " ;
 
         if(this.baseTime != 0) {
             performanceModel += this.baseTime;

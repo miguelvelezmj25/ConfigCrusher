@@ -39,8 +39,17 @@ public class ProcessorTest {
     }
 
     @Test
-    public void getRegionsToOptions() throws Exception {
+    public void getRegionsToOptions1() throws Exception {
         Map<Region, Set<String>> output = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
+//        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
+//            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
+//        }
+        Assert.assertFalse(output.isEmpty());
+    }
+
+    @Test
+    public void getRegionsToOptions2() throws Exception {
+        Map<Region, Set<String>> output = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.LANGUAGETOOL_PROGRAM);
 //        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
 //            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
 //        }

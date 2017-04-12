@@ -61,30 +61,28 @@ public class Processor {
                 }
             }
             else {
-                // TODO with logic from below
+                // Be careful that this is imprecise since the constraints can be very large and does not fit in the db field
+                String[] constraints = JSONResult.getString(Processor.CONSTRAINT).split(" ");
+
+                for(String constraint : constraints) {
+                    constraint = constraint.replaceAll("[()^|!=]", "");
+                    if(constraint.isEmpty() || StringUtils.isNumeric(constraint)) {
+                        continue;
+                    }
+
+                    if(constraint.contains(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
+                        constraint = constraint.split(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
+                    }
+
+                    // Because the constraint gotten from Lotrack might be too long
+                    if(constraint.contains(".")) {
+                        continue;
+                    }
+
+                    options.add(constraint);
+                }
             }
 
-//            String[] constraints = result.get(Processor.CONSTRAINT).split(" ");
-//            Set<String> options = new HashSet<>();
-//
-//            for(String constraint : constraints) {
-//                constraint = constraint.replaceAll("[()^|!=]", "");
-//                if(constraint.isEmpty() || StringUtils.isNumeric(constraint)) {
-//                    continue;
-//                }
-//
-//                if(constraint.contains(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
-//                    constraint = constraint.split(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
-//                }
-//
-//                // Because the constraint gotten from Lotrack might be too long
-//                if(constraint.contains(".")) {
-//                    continue;
-//                }
-//
-//                options.add(constraint);
-//            }
-//
             Region currentRegion = new Region(JSONResult.get(Processor.PACKAGE).toString(), JSONResult.get(Processor.CLASS).toString(), JSONResult.get(Processor.METHOD).toString());
 
             if(regionsToOptions.containsKey(currentRegion)) {

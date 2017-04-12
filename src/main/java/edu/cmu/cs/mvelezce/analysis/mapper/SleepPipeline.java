@@ -152,8 +152,7 @@ public class SleepPipeline extends Pipeline {
         for(Set<String> configuration : configurationsToExecute) {
             SleepInterpreter interpreter = new SleepInterpreter(ast);
             interpreter.evaluate(configuration);
-            Set<Region> regions = new HashSet<>(Regions.getRegions().values());
-            configurationsToPerformance.add(new PerformanceEntry(configuration, regions));
+            configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions()));
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
 
@@ -279,14 +278,6 @@ public class SleepPipeline extends Pipeline {
 
         public RegionSleep(Statement statement) {
             this.statement = statement;
-        }
-
-        public void startTime(int startTime ) {
-
-        }
-
-        public void endTime() {
-
         }
 
         public Statement getStatement() { return this.statement; }

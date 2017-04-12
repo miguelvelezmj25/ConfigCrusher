@@ -191,7 +191,6 @@ public class PipelineTest {
         int duration1 = 3;
         Statement timedStatement1 = new StatementSleep(new ExpressionConstantInt(duration1));
         Region region1 = new SleepPipeline.RegionSleep(timedStatement1);
-//        Regions.addRegion(region);
         regionsToOptions.put(region1.clone(), relevantOptions);
 
         relevantOptions = new HashSet<>();
@@ -199,7 +198,6 @@ public class PipelineTest {
         int duration2 = 1;
         Statement timedStatement2 = new StatementSleep(new ExpressionConstantInt(duration2));
         Region region2 = new SleepPipeline.RegionSleep(timedStatement2);
-//        Regions.addRegion(region);
         regionsToOptions.put(region2.clone(), relevantOptions);
 
         // Set<PerformanceEntry> measuredPerformance
@@ -251,5 +249,7 @@ public class PipelineTest {
         configuration.add("B");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
     }
+
+    // TODO test create a performance mondel with a base time
 
 }

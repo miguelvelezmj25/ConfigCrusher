@@ -64,7 +64,7 @@
 
         <dependency>
             <groupId>edu.cmu.cs.mvelezce</groupId>
-            <artifactId>mongo_2.12</artifactId>
+            <artifactId>mongo-connector_2.12</artifactId>
             <version>0.1.0-SNAPSHOT</version>
         </dependency>
 

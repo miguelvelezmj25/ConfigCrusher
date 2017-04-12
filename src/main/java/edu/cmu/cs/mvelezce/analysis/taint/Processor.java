@@ -1,8 +1,10 @@
 package edu.cmu.cs.mvelezce.analysis.taint;
 
-import edu.cmu.cs.mvelezce.mongo.connector.Casbah;
+import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.*;
 
@@ -20,10 +22,11 @@ public class Processor {
     public static final String CONSTRAINT_PRETTY = "ConstraintPretty";
     public static final String BYTECODE_INDEXES = "bytecodeIndexes";
     public static final String METHOD_BYTECODE_SIGNATURE_JOANA_STYLE = "methodBytecodeSignatureJoanaStyle";
+    public static final String USED_TERMS = "usedTerms";
 
     public static final String LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL = "_";
 
-    public static Map<Region, Set<String>> getRegionsToOptions(String program) {
+    public static Map<Region, Set<String>> getRegionsToOptions(String database, String program) {
         // This is hardcode to get the output of Lotrack
         List<String> fields = new ArrayList<>();
         fields.add(Processor.PACKAGE);
@@ -35,6 +38,7 @@ public class Processor {
         fields.add(Processor.CONSTRAINT_PRETTY);
         fields.add(Processor.BYTECODE_INDEXES);
         fields.add(Processor.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
+        fields.add(Processor.USED_TERMS);
 
         List<String> sortBy = new ArrayList<>();
         fields.add(Processor.PACKAGE);
@@ -42,38 +46,52 @@ public class Processor {
         fields.add(Processor.METHOD);
         fields.add(Processor.JIMPLE_LINE_NO);
 
-        List<Map<String, String>> queryResult = Casbah.connect(program, fields, sortBy);
+        ScalaMongoDriverConnector.connect(database);
+        List<String> queryResult = ScalaMongoDriverConnector.queryAscending(program, fields, sortBy);
+        ScalaMongoDriverConnector.close();
         Map<Region, Set<String>> regionsToOptions = new HashedMap<>();
 
-        for(Map<String, String> result : queryResult) {
-            String[] constraints = result.get(Processor.CONSTRAINT).split(" ");
+        for(String result : queryResult) {
+            JSONObject JSONResult = new JSONObject(result);
             Set<String> options = new HashSet<>();
 
-            for(String constraint : constraints) {
-                constraint = constraint.replaceAll("[()^|!=]", "");
-                if(constraint.isEmpty() || StringUtils.isNumeric(constraint)) {
-                    continue;
+            if(JSONResult.has(Processor.USED_TERMS)) {
+                for(Object string : JSONResult.getJSONArray(Processor.USED_TERMS).toList()) {
+                    options.add(string.toString());
                 }
-
-                if(constraint.contains(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
-                    constraint = constraint.split(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
-                }
-
-                // Because the constraint gotten from Lotrack might be too long
-                if(constraint.contains(".")) {
-                    continue;
-                }
-
-                options.add(constraint);
+            }
+            else {
+                // TODO with logic from below
             }
 
-            Region currentRegion = new Region(result.get(Processor.PACKAGE), result.get(Processor.CLASS), result.get(Processor.METHOD));
+//            String[] constraints = result.get(Processor.CONSTRAINT).split(" ");
+//            Set<String> options = new HashSet<>();
+//
+//            for(String constraint : constraints) {
+//                constraint = constraint.replaceAll("[()^|!=]", "");
+//                if(constraint.isEmpty() || StringUtils.isNumeric(constraint)) {
+//                    continue;
+//                }
+//
+//                if(constraint.contains(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
+//                    constraint = constraint.split(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
+//                }
+//
+//                // Because the constraint gotten from Lotrack might be too long
+//                if(constraint.contains(".")) {
+//                    continue;
+//                }
+//
+//                options.add(constraint);
+//            }
+//
+            Region currentRegion = new Region(JSONResult.get(Processor.PACKAGE).toString(), JSONResult.get(Processor.CLASS).toString(), JSONResult.get(Processor.METHOD).toString());
 
             if(regionsToOptions.containsKey(currentRegion)) {
                 Set<String> oldOptions = regionsToOptions.get(currentRegion);
                 options.addAll(oldOptions);
             }
-
+//
             regionsToOptions.put(currentRegion, options);
         }
 

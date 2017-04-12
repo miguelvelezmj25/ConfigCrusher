@@ -12,10 +12,11 @@ import java.util.Set;
  */
 public class JavaPipeline {
 
-    public static final String PLAYYPUS = "platypus";
+    public static final String LOTRACK_DATABASE = "lotrack";
+    public static final String PLAYYPUS_PROGRAM = "platypus";
 
     public static PerformanceModel getPerformanceModel() {
-        Map<Region, Set<String>> regionsToOptions = Processor.getRegionsToOptions(JavaPipeline.PLAYYPUS);
+        Map<Region, Set<String>> regionsToOptions = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
 
 
         return null;

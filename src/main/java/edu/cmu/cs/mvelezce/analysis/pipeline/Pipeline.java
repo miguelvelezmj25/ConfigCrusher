@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.analysis.mapper;
+package edu.cmu.cs.mvelezce.analysis.pipeline;
 
 import edu.cmu.cs.mvelezce.analysis.Helper;
 import edu.cmu.cs.mvelezce.analysis.performance.PerformanceEntry;

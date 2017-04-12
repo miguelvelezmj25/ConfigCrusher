@@ -1,16 +1,4 @@
-package edu.cmu.cs.mvelezce.analysis.mapper;
-
-import edu.cmu.cs.mvelezce.analysis.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
-import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConfigurationConstant;
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConstantInt;
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionVariable;
-import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.*;
+package edu.cmu.cs.mvelezce.analysis.pipeline;
 
 /**
  * Created by miguelvelez on 2/11/17.

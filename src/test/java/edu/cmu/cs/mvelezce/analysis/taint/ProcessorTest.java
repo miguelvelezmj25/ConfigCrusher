@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.analysis.taint;
 
-import edu.cmu.cs.mvelezce.analysis.mapper.JavaPipeline;
+import edu.cmu.cs.mvelezce.analysis.pipeline.JavaPipeline;
 import org.junit.Assert;
 import org.junit.Test;
 

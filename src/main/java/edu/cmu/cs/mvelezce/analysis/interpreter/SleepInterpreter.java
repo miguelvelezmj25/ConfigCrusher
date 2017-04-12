@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.analysis.interpreter;
 
 
-import edu.cmu.cs.mvelezce.analysis.mapper.SleepPipeline;
+import edu.cmu.cs.mvelezce.analysis.pipeline.SleepPipeline;
 import edu.cmu.cs.mvelezce.analysis.taint.Region;
 import edu.cmu.cs.mvelezce.analysis.taint.Regions;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.*;

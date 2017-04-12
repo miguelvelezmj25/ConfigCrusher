@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.analysis.pipeline;
+package edu.cmu.cs.mvelezce.analysis.pipeline.sleep;
 
 /**
  * Created by miguelvelez on 2/11/17.

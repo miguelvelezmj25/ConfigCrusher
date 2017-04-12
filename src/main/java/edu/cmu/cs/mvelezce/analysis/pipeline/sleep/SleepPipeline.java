@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.analysis.pipeline;
+package edu.cmu.cs.mvelezce.analysis.pipeline.sleep;
 
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;
@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.analysis.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.analysis.interpreter.SleepInterpreter;
 import edu.cmu.cs.mvelezce.analysis.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.analysis.performance.PerformanceModel;
+import edu.cmu.cs.mvelezce.analysis.pipeline.Pipeline;
 import edu.cmu.cs.mvelezce.analysis.taint.Region;
 import edu.cmu.cs.mvelezce.analysis.taint.Regions;
 import edu.cmu.cs.mvelezce.analysis.taint.TaintAnalysis;
@@ -46,7 +47,7 @@ public class SleepPipeline extends Pipeline {
 
         // Taint Analysis (Language dependent)
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<RegionSleep, Set<ExpressionConfigurationConstant>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
+        Map<SleepRegion, Set<ExpressionConfigurationConstant>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
         // Configuration compression (Language independent)
         Set<Set<ExpressionConfigurationConstant>> relevantSleepOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> relevantOptions = SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantSleepOptions);
@@ -159,8 +160,8 @@ public class SleepPipeline extends Pipeline {
         return configurationsToPerformance;
     }
 
-    public static Map<RegionSleep, Set<ExpressionConfigurationConstant>> getRelevantRegionsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
-        Map<RegionSleep, Set<ExpressionConfigurationConstant>> relevantRegionToOptions = new HashMap<>();
+    public static Map<SleepRegion, Set<ExpressionConfigurationConstant>> getRelevantRegionsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+        Map<SleepRegion, Set<ExpressionConfigurationConstant>> relevantRegionToOptions = new HashMap<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
             if(SleepPipeline.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
@@ -168,7 +169,7 @@ public class SleepPipeline extends Pipeline {
                 Set<ExpressionConfigurationConstant> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
 
                 if(!possibleTaintingConfigurations.isEmpty()) {
-                    RegionSleep relevantRegion = new RegionSleep(entry.getKey().getStatement());
+                    SleepRegion relevantRegion = new SleepRegion(entry.getKey().getStatement());
                     Regions.addRegion(relevantRegion);
                     relevantRegionToOptions.put(relevantRegion, possibleTaintingConfigurations);
                 }
@@ -178,10 +179,10 @@ public class SleepPipeline extends Pipeline {
         return relevantRegionToOptions;
     }
 
-    public static Statement instrumentProgramToTimeRelevantRegions(Statement program, Set<RegionSleep> relevantRegions) {
+    public static Statement instrumentProgramToTimeRelevantRegions(Statement program, Set<SleepRegion> relevantRegions) {
         Set<Statement> relevantStatements = new HashSet<>();
 
-        for(RegionSleep regionSleep : relevantRegions) {
+        for(SleepRegion regionSleep : relevantRegions) {
             relevantStatements.add(regionSleep.getStatement());
         }
 
@@ -271,42 +272,6 @@ public class SleepPipeline extends Pipeline {
 //    }
 
 //    mapConfigurationToPerformanceAfterPruning //TODO
-
-
-    public static class RegionSleep extends Region {
-        private Statement statement;
-
-        public RegionSleep(Statement statement) {
-            this.statement = statement;
-        }
-
-        public Statement getStatement() { return this.statement; }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            if (!super.equals(o)) return false;
-
-            RegionSleep that = (RegionSleep) o;
-
-            return statement.equals(that.statement);
-        }
-
-        @Override
-        public int hashCode() {
-            int result = super.hashCode();
-            result = 31 * result + statement.hashCode();
-            return result;
-        }
-
-        @Override
-        public String toString() {
-            return "RegionSleep{" +
-                    "statement=" + statement +
-                    '}';
-        }
-    }
 
     private static class RelevantRegionGetterVisitor extends VisitorReturner {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;

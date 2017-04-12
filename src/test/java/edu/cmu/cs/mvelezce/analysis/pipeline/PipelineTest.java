@@ -3,6 +3,8 @@ package edu.cmu.cs.mvelezce.analysis.pipeline;
 import edu.cmu.cs.mvelezce.analysis.Helper;
 import edu.cmu.cs.mvelezce.analysis.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.analysis.performance.PerformanceModel;
+import edu.cmu.cs.mvelezce.analysis.pipeline.sleep.SleepPipeline;
+import edu.cmu.cs.mvelezce.analysis.pipeline.sleep.SleepRegion;
 import edu.cmu.cs.mvelezce.analysis.taint.Region;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConstantInt;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
@@ -189,14 +191,14 @@ public class PipelineTest {
         relevantOptions.add("A");
         int duration1 = 3;
         Statement timedStatement1 = new StatementSleep(new ExpressionConstantInt(duration1));
-        Region region1 = new SleepPipeline.RegionSleep(timedStatement1);
+        Region region1 = new SleepRegion(timedStatement1);
         regionsToOptions.put(region1.clone(), relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("B");
         int duration2 = 1;
         Statement timedStatement2 = new StatementSleep(new ExpressionConstantInt(duration2));
-        Region region2 = new SleepPipeline.RegionSleep(timedStatement2);
+        Region region2 = new SleepRegion(timedStatement2);
         regionsToOptions.put(region2.clone(), relevantOptions);
 
         // Set<PerformanceEntry> measuredPerformance

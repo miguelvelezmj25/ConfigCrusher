@@ -1,7 +1,8 @@
 package edu.cmu.cs.mvelezce.analysis.interpreter;
 
 
-import edu.cmu.cs.mvelezce.analysis.pipeline.SleepPipeline;
+import edu.cmu.cs.mvelezce.analysis.pipeline.sleep.SleepPipeline;
+import edu.cmu.cs.mvelezce.analysis.pipeline.sleep.SleepRegion;
 import edu.cmu.cs.mvelezce.analysis.taint.Region;
 import edu.cmu.cs.mvelezce.analysis.taint.Regions;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.*;
@@ -154,7 +155,7 @@ public class SleepInterpreter implements Visitor<ValueInt, Void> {
 
     @Override
     public Void visitStatementTimed(StatementTimed statement) {
-        SleepPipeline.RegionSleep hold = new SleepPipeline.RegionSleep(statement);
+        SleepRegion hold = new SleepRegion(statement);
         Region region = Regions.getRegion(hold);
         region.startTime(this.totalExecutionTime);
 

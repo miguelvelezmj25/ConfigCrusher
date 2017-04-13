@@ -29,7 +29,12 @@ public abstract class Pipeline {
         // Compresses which configurations to execute
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
-        // Base case covering 0 and 1 configurations
+        if(optionsToConfigurationsToExecute.size() == 0) {
+            configurationsToExecute.add(new HashSet<>());
+            return configurationsToExecute;
+        }
+
+        // Base case covering 1 configuration
         if(optionsToConfigurationsToExecute.size() == 1) {
             configurationsToExecute.addAll(optionsToConfigurationsToExecute.entrySet().iterator().next().getValue());
             return configurationsToExecute;

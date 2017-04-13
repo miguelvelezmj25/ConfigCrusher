@@ -16,8 +16,13 @@ public class JavaPipeline {
     public static final String PLAYYPUS_PROGRAM = "platypus";
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
-    public static PerformanceModel getPerformanceModel() {
-        Map<Region, Set<String>> regionsToOptions = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
+    public static PerformanceModel getPerformanceModel() throws NoSuchFieldException {
+        try {
+            Map<Region, Set<String>> regionsToOptions = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
+        } catch (NoSuchFieldException nsfe) {
+            throw nsfe;
+//            throw new NoSuchFieldException("s", nsfe);
+        }
 
 
         return null;

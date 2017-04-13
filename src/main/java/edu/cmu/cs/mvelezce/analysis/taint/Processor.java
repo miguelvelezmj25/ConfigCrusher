@@ -25,7 +25,7 @@ public class Processor {
 
     public static final String LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL = "_";
 
-    public static Map<Region, Set<String>> getRegionsToOptions(String database, String program) {
+    public static Map<Region, Set<String>> getRegionsToOptions(String database, String program) throws NoSuchFieldException {
         // This is hardcode to get the output of Lotrack
         List<String> fields = new ArrayList<>();
         fields.add(Processor.PACKAGE);
@@ -59,7 +59,7 @@ public class Processor {
                     options.add(string.toString());
                 }
             }
-            else {
+            else if(JSONResult.has(Processor.CONSTRAINT)) {
                 // Be careful that this is imprecise since the constraints can be very large and does not fit in the db field
                 String[] constraints = JSONResult.getString(Processor.CONSTRAINT).split(" ");
 
@@ -81,6 +81,10 @@ public class Processor {
                     options.add(constraint);
                 }
             }
+            else {
+                throw new NoSuchFieldException("The query result does not have neither a " + Processor.USED_TERMS + " or " + Processor.CONSTRAINT + " fields");
+            }
+
 
             Region currentRegion = new Region(JSONResult.get(Processor.PACKAGE).toString(), JSONResult.get(Processor.CLASS).toString(), JSONResult.get(Processor.METHOD).toString());
 
@@ -90,6 +94,12 @@ public class Processor {
             }
 //
             regionsToOptions.put(currentRegion, options);
+        }
+
+        for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
+            if(entry.getValue().size() > 4) {
+                int a = 0;
+            }
         }
 
         return regionsToOptions;

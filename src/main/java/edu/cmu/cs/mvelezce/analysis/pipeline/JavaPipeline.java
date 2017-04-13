@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.analysis.pipeline;
 
 import edu.cmu.cs.mvelezce.analysis.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.analysis.taint.Processor;
+import edu.cmu.cs.mvelezce.analysis.taint.java.LotrackProcessor;
 import edu.cmu.cs.mvelezce.analysis.taint.Region;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ public class JavaPipeline {
 
     public static PerformanceModel getPerformanceModel() throws NoSuchFieldException {
         try {
-            Map<Region, Set<String>> regionsToOptions = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
+            Map<Region, Set<String>> regionsToOptions = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
         } catch (NoSuchFieldException nsfe) {
             throw nsfe;
 //            throw new NoSuchFieldException("s", nsfe);

@@ -1,5 +1,6 @@
-package edu.cmu.cs.mvelezce.analysis.taint;
+package edu.cmu.cs.mvelezce.analysis.taint.java;
 
+import edu.cmu.cs.mvelezce.analysis.taint.Region;
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +11,7 @@ import java.util.*;
 /**
  * Created by mvelezce on 4/5/17.
  */
-public class Processor {
+public class LotrackProcessor {
 
     public static final String PACKAGE = "Package";
     public static final String CLASS = "Class";
@@ -28,22 +29,22 @@ public class Processor {
     public static Map<Region, Set<String>> getRegionsToOptions(String database, String program) throws NoSuchFieldException {
         // This is hardcode to get the output of Lotrack
         List<String> fields = new ArrayList<>();
-        fields.add(Processor.PACKAGE);
-        fields.add(Processor.CLASS);
-        fields.add(Processor.METHOD);
-        fields.add(Processor.JAVA_LINE_NO);
-        fields.add(Processor.JIMPLE_LINE_NO);
-        fields.add(Processor.CONSTRAINT);
-        fields.add(Processor.CONSTRAINT_PRETTY);
-        fields.add(Processor.BYTECODE_INDEXES);
-        fields.add(Processor.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
-        fields.add(Processor.USED_TERMS);
+        fields.add(LotrackProcessor.PACKAGE);
+        fields.add(LotrackProcessor.CLASS);
+        fields.add(LotrackProcessor.METHOD);
+        fields.add(LotrackProcessor.JAVA_LINE_NO);
+        fields.add(LotrackProcessor.JIMPLE_LINE_NO);
+        fields.add(LotrackProcessor.CONSTRAINT);
+        fields.add(LotrackProcessor.CONSTRAINT_PRETTY);
+        fields.add(LotrackProcessor.BYTECODE_INDEXES);
+        fields.add(LotrackProcessor.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
+        fields.add(LotrackProcessor.USED_TERMS);
 
         List<String> sortBy = new ArrayList<>();
-        fields.add(Processor.PACKAGE);
-        fields.add(Processor.CLASS);
-        fields.add(Processor.METHOD);
-        fields.add(Processor.JIMPLE_LINE_NO);
+        fields.add(LotrackProcessor.PACKAGE);
+        fields.add(LotrackProcessor.CLASS);
+        fields.add(LotrackProcessor.METHOD);
+        fields.add(LotrackProcessor.JIMPLE_LINE_NO);
 
         ScalaMongoDriverConnector.connect(database);
         List<String> queryResult = ScalaMongoDriverConnector.queryAscending(program, fields, sortBy);
@@ -54,14 +55,14 @@ public class Processor {
             JSONObject JSONResult = new JSONObject(result);
             Set<String> options = new HashSet<>();
 
-            if(JSONResult.has(Processor.USED_TERMS)) {
-                for(Object string : JSONResult.getJSONArray(Processor.USED_TERMS).toList()) {
+            if(JSONResult.has(LotrackProcessor.USED_TERMS)) {
+                for(Object string : JSONResult.getJSONArray(LotrackProcessor.USED_TERMS).toList()) {
                     options.add(string.toString());
                 }
             }
-            else if(JSONResult.has(Processor.CONSTRAINT)) {
+            else if(JSONResult.has(LotrackProcessor.CONSTRAINT)) {
                 // Be careful that this is imprecise since the constraints can be very large and does not fit in the db field
-                String[] constraints = JSONResult.getString(Processor.CONSTRAINT).split(" ");
+                String[] constraints = JSONResult.getString(LotrackProcessor.CONSTRAINT).split(" ");
 
                 for(String constraint : constraints) {
                     constraint = constraint.replaceAll("[()^|!=]", "");
@@ -69,8 +70,8 @@ public class Processor {
                         continue;
                     }
 
-                    if(constraint.contains(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
-                        constraint = constraint.split(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
+                    if(constraint.contains(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
+                        constraint = constraint.split(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
                     }
 
                     // Because the constraint gotten from Lotrack might be too long
@@ -82,11 +83,11 @@ public class Processor {
                 }
             }
             else {
-                throw new NoSuchFieldException("The query result does not have neither a " + Processor.USED_TERMS + " or " + Processor.CONSTRAINT + " fields");
+                throw new NoSuchFieldException("The query result does not have neither a " + LotrackProcessor.USED_TERMS + " or " + LotrackProcessor.CONSTRAINT + " fields");
             }
 
 
-            Region currentRegion = new Region(JSONResult.get(Processor.PACKAGE).toString(), JSONResult.get(Processor.CLASS).toString(), JSONResult.get(Processor.METHOD).toString());
+            Region currentRegion = new Region(JSONResult.get(LotrackProcessor.PACKAGE).toString(), JSONResult.get(LotrackProcessor.CLASS).toString(), JSONResult.get(LotrackProcessor.METHOD).toString());
 
             if(regionsToOptions.containsKey(currentRegion)) {
                 Set<String> oldOptions = regionsToOptions.get(currentRegion);

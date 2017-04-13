@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.analysis.taint;
+package edu.cmu.cs.mvelezce.analysis.taint.sleep;
 
 import edu.cmu.cs.mvelezce.analysis.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.analysis.cfg.CFG;

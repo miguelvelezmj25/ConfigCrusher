@@ -5,7 +5,7 @@ import edu.cmu.cs.mvelezce.analysis.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.analysis.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.analysis.pipeline.sleep.SleepPipeline;
 import edu.cmu.cs.mvelezce.analysis.pipeline.sleep.SleepRegion;
-import edu.cmu.cs.mvelezce.analysis.taint.Processor;
+import edu.cmu.cs.mvelezce.analysis.taint.java.LotrackProcessor;
 import edu.cmu.cs.mvelezce.analysis.taint.Region;
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConstantInt;
@@ -51,15 +51,15 @@ public class PipelineTest {
             System.out.println(program);
         }
 
-        Map<Region, Set<String>> queryResult = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, program);
+        Map<Region, Set<String>> queryResult = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, program);
         if(csv) {
             System.out.print(queryResult.size() + ", ");
         }
         else {
             System.out.println("Lotrack total number of regions: " + queryResult.size());
         }
-        queryResult = Processor.filterBooleans(queryResult);
-        queryResult = Processor.filterRegionsNoOptions(queryResult);
+        queryResult = LotrackProcessor.filterBooleans(queryResult);
+        queryResult = LotrackProcessor.filterRegionsNoOptions(queryResult);
 
         Set<Set<String>> optionsSet = new HashSet<>(queryResult.values());
         Set<String> uniqueOptions = new HashSet<>();
@@ -81,8 +81,8 @@ public class PipelineTest {
         }
 
         List<String> fields = new ArrayList<>();
-        fields.add(Processor.USED_TERMS);
-        fields.add(Processor.CONSTRAINT);
+        fields.add(LotrackProcessor.USED_TERMS);
+        fields.add(LotrackProcessor.CONSTRAINT);
 
         ScalaMongoDriverConnector.connect(JavaPipeline.LOTRACK_DATABASE);
         List<String> queryResult = ScalaMongoDriverConnector.query(program, fields);
@@ -101,8 +101,8 @@ public class PipelineTest {
             JSONObject JSONResult = new JSONObject(result);
             Set<String> options = new HashSet<>();
 
-            if(JSONResult.has(Processor.USED_TERMS)) {
-                for(Object string : JSONResult.getJSONArray(Processor.USED_TERMS).toList()) {
+            if(JSONResult.has(LotrackProcessor.USED_TERMS)) {
+                for(Object string : JSONResult.getJSONArray(LotrackProcessor.USED_TERMS).toList()) {
                     String possibleString = string.toString();
 
                     if(possibleString.equals("true") || possibleString.equals("false")) {
@@ -112,9 +112,9 @@ public class PipelineTest {
                     options.add(string.toString());
                 }
             }
-            else if(JSONResult.has(Processor.CONSTRAINT)) {
+            else if(JSONResult.has(LotrackProcessor.CONSTRAINT)) {
                 // Be careful that this is imprecise since the constraints can be very large and does not fit in the db field
-                String[] constraints = JSONResult.getString(Processor.CONSTRAINT).split(" ");
+                String[] constraints = JSONResult.getString(LotrackProcessor.CONSTRAINT).split(" ");
 
                 for(String constraint : constraints) {
                     constraint = constraint.replaceAll("[()^|!=]", "");
@@ -122,8 +122,8 @@ public class PipelineTest {
                         continue;
                     }
 
-                    if(constraint.contains(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
-                        constraint = constraint.split(Processor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
+                    if(constraint.contains(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
+                        constraint = constraint.split(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
                     }
 
                     // Because the constraint gotten from Lotrack might be too long
@@ -139,7 +139,7 @@ public class PipelineTest {
                 }
             }
             else {
-                throw new NoSuchFieldException("The query result does not have neither a " + Processor.USED_TERMS + " or " + Processor.CONSTRAINT + " fields");
+                throw new NoSuchFieldException("The query result does not have neither a " + LotrackProcessor.USED_TERMS + " or " + LotrackProcessor.CONSTRAINT + " fields");
             }
 
             if(!options.isEmpty()) {

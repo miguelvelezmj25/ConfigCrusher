@@ -1,6 +1,7 @@
-package edu.cmu.cs.mvelezce.analysis.taint;
+package edu.cmu.cs.mvelezce.analysis.taint.java;
 
 import edu.cmu.cs.mvelezce.analysis.pipeline.JavaPipeline;
+import edu.cmu.cs.mvelezce.analysis.taint.Region;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 /**
  * Created by mvelezce on 4/6/17.
  */
-public class ProcessorTest {
+public class LotrackProcessorTest {
     @Test
     public void filterRegionsNoOptions1() throws Exception {
         Region region = new Region("a", "b", "c");
@@ -20,7 +21,7 @@ public class ProcessorTest {
         Map<Region, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
 
-        Assert.assertTrue(Processor.filterRegionsNoOptions(regionToOptions).isEmpty());
+        Assert.assertTrue(LotrackProcessor.filterRegionsNoOptions(regionToOptions).isEmpty());
     }
 
     @Test
@@ -35,12 +36,12 @@ public class ProcessorTest {
         options.add("String");
         regionToOptions.put(region, options);
 
-        Assert.assertTrue(Processor.filterRegionsNoOptions(regionToOptions).size() == 1);
+        Assert.assertTrue(LotrackProcessor.filterRegionsNoOptions(regionToOptions).size() == 1);
     }
 
     @Test
     public void getRegionsToOptions1() throws Exception {
-        Map<Region, Set<String>> output = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
+        Map<Region, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
 //        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
 //            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
 //        }
@@ -49,7 +50,7 @@ public class ProcessorTest {
 
     @Test
     public void getRegionsToOptions2() throws Exception {
-        Map<Region, Set<String>> output = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.LANGUAGETOOL_PROGRAM);
+        Map<Region, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.LANGUAGETOOL_PROGRAM);
 //        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
 //            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
 //        }
@@ -68,7 +69,7 @@ public class ProcessorTest {
         Map<Region, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
 
-        Map<Region, Set<String>> result = Processor.filterBooleans(regionToOptions);
+        Map<Region, Set<String>> result = LotrackProcessor.filterBooleans(regionToOptions);
 
         Assert.assertTrue(!result.get(region).contains(TRUE));
         Assert.assertTrue(!result.get(region).contains(FALSE));

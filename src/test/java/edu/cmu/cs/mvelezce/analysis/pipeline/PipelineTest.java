@@ -5,7 +5,9 @@ import edu.cmu.cs.mvelezce.analysis.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.analysis.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.analysis.pipeline.sleep.SleepPipeline;
 import edu.cmu.cs.mvelezce.analysis.pipeline.sleep.SleepRegion;
+import edu.cmu.cs.mvelezce.analysis.taint.Processor;
 import edu.cmu.cs.mvelezce.analysis.taint.Region;
+import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ExpressionConstantInt;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.StatementSleep;
@@ -38,39 +40,69 @@ public class PipelineTest {
         return result;
     }
 
+    public static void compareCompressionToBF(String program) {
+        System.out.println(program);
+        Map<Region, Set<String>> queryResult = Processor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, program);
+        System.out.println("Lotrack total number of regions: " + queryResult.size());
+        queryResult = Processor.filterBooleans(queryResult);
+        queryResult = Processor.filterRegionsNoOptions(queryResult);
+
+        Set<Set<String>> optionsSet = new HashSet<>(queryResult.values());
+        System.out.println("Unique set of constraints: " + optionsSet.size());
+
+        Set<String> uniqueOptions = new HashSet<>();
+
+        for(Set<String> options : optionsSet) {
+            uniqueOptions.addAll(options);
+        }
+
+        System.out.println("Number of options: " + uniqueOptions.size());
+        System.out.println("Brute force number of configurations: " + (int) Math.pow(2, uniqueOptions.size()));
+
+        Set<Set<String>> configurations = Pipeline.getConfigurationsToExecute(optionsSet);
+        PipelineTest.checkConfigurationIsStatisfied(configurations);
+
+        System.out.println("Compressed number of configurations: " + configurations.size());
+        System.out.println("Compressed over BF: " + configurations.size()/Math.pow(2, uniqueOptions.size()));
+    }
+
     public static void getConfigurationsToExecute(Set<Set<String>> relevantOptionsSet) {
         Collection<List<Set<String>>> permutations = CollectionUtils.permutations(relevantOptionsSet);
 
         for(List<Set<String>> permutation : permutations) {
 //            System.out.println("\nPermutation: " + permutation);
-            Set<Set<String>> permutationAsSet = new HashSet<>(permutation);
-            Set<Set<String>> results = Pipeline.getConfigurationsToExecute(permutationAsSet);
-//            System.out.println(results);
-
-            for(Set<String> relevantOptions : relevantOptionsSet) {
-                Set<Set<String>> powerSet = Helper.getConfigurations(relevantOptions);
-
-                for (Set<String> configuration : powerSet) {
-//                    System.out.println("Want configuration: " + configuration + " from: " + relevantOptionsConvenient);
-                    boolean hasConfiguration = false;
-
-                    for (Set<String> result : results) {
-                        if (PipelineTest.matches(result, configuration, relevantOptions)) {
-                            hasConfiguration = true;
-                            break;
-                        }
-                    }
-
-                    Assert.assertTrue(hasConfiguration);
-                }
-            }
+            PipelineTest.checkConfigurationIsStatisfied(new HashSet<>(permutation));
         }
     }
 
+    public static void checkConfigurationIsStatisfied(Set<Set<String>> relevantOptionsSet) {
+        Set<Set<String>> results = Pipeline.getConfigurationsToExecute(relevantOptionsSet);
+//            System.out.println(results);
+
+        for(Set<String> relevantOptions : relevantOptionsSet) {
+            Set<Set<String>> powerSet = Helper.getConfigurations(relevantOptions);
+
+            for (Set<String> configuration : powerSet) {
+//                    System.out.println("Want configuration: " + configuration + " from: " + relevantOptionsConvenient);
+                boolean hasConfiguration = false;
+
+                for (Set<String> result : results) {
+                    if (PipelineTest.matches(result, configuration, relevantOptions)) {
+                        hasConfiguration = true;
+                        break;
+                    }
+                }
+
+                Assert.assertTrue(hasConfiguration);
+            }
+        }
+
+    }
+
     public static boolean matches(Set<String> result, Set<String> configuration, Set<String> relevantOptions) {
-        Set<String> hold = new HashSet<>(relevantOptions);
-        hold.retainAll(result);
-        return hold.equals(configuration);
+        Set<String> valueOfResultInRelevantOption = new HashSet<>(relevantOptions);
+        valueOfResultInRelevantOption.retainAll(result);
+        return valueOfResultInRelevantOption.equals(configuration);
     }
 
     @Test
@@ -156,6 +188,55 @@ public class PipelineTest {
         Set<Set<String>> relevantOptionsSet = PipelineTest.getOptionsSet("AB, AC, AD, BC, CD, BD");
         PipelineTest.getConfigurationsToExecute(relevantOptionsSet);
     }
+
+    @Test
+    public void tesCompareCompressionToBF1() {
+        PipelineTest.compareCompressionToBF(JavaPipeline.PLAYYPUS_PROGRAM);
+    }
+
+    @Test
+    public void tesCompareCompressionToBFAll() {
+        ScalaMongoDriverConnector.connect(JavaPipeline.LOTRACK_DATABASE);
+        List<String> collections = ScalaMongoDriverConnector.getCollectionNames();
+
+        for(String collection : collections) {
+            PipelineTest.compareCompressionToBF(collection);
+            System.out.println();
+        }
+    }
+
+//    @Test
+//    public void testGetConfigurationsToExecute16() {
+//        List<String> fields = new ArrayList<>();
+//        fields.add(Processor.USED_TERMS);
+//
+//        ScalaMongoDriverConnector.connect(JavaPipeline.LOTRACK_DATABASE);
+//        List<String> queryResult = ScalaMongoDriverConnector.query(JavaPipeline.PLAYYPUS_PROGRAM, fields);
+//        ScalaMongoDriverConnector.close();
+//        System.out.println("Lotrack total number of entries: " + queryResult.size());
+//
+//        Set<Set<String>> optionsSet = new HashSet<>();
+//
+//        for(String result : queryResult) {
+//            Set<String> options = new HashSet<>();
+//            JSONObject JSONResult = new JSONObject(result);
+//
+//            for(Object string : JSONResult.getJSONArray(Processor.USED_TERMS).toList()) {
+//                String potentialString = string.toString();
+//                if (!potentialString.equals("true") && !potentialString.equals("false")) {
+//                    options.add(string.toString());
+//                }
+//            }
+//
+//            if(!options.isEmpty()) {
+//                optionsSet.add(options);
+//            }
+//        }
+//
+//        System.out.println("Unique set of constraints: " + optionsSet.size());
+//
+//        PipelineTest.compareCompressionToBF(optionsSet);
+//    }
 
     @Test
     public void filterOptions1() throws Exception {
@@ -251,6 +332,6 @@ public class PipelineTest {
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
     }
 
-    // TODO test create a performance mondel with a base time
+    // TODO test create compareCompressionToBF performance mondel with compareCompressionToBF base time
 
 }

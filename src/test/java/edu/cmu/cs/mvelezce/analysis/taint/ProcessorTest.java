@@ -15,7 +15,7 @@ import java.util.Set;
 public class ProcessorTest {
     @Test
     public void filterRegionsNoOptions1() throws Exception {
-        Region region = new Region("a", "b", "c");
+        Region region = new Region("compareCompressionToBF", "b", "c");
         Set<String> options = new HashSet<>();
         Map<Region, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
@@ -25,7 +25,7 @@ public class ProcessorTest {
 
     @Test
     public void filterRegionsNoOptions2() throws Exception {
-        Region region = new Region("a", "b", "c");
+        Region region = new Region("compareCompressionToBF", "b", "c");
         Set<String> options = new HashSet<>();
         Map<Region, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
@@ -60,7 +60,7 @@ public class ProcessorTest {
     public void filterBooleans() throws Exception {
         String TRUE = "true";
         String FALSE = "false";
-        Region region = new Region("a", "b", "c");
+        Region region = new Region("compareCompressionToBF", "b", "c");
         Set<String> options = new HashSet<>();
         options.add(TRUE);
         options.add(FALSE);

@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis;
 
+import org.apache.commons.collections4.map.HashedMap;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -39,20 +41,15 @@ public class Regions {
     public static void resetRegions() {
         HashMap<Region, Region> hold = new HashMap<>();
         for(Region region : Regions.regions.values()) {
-//            Region holdR = null;
-//            try {
-//                holdR = region.clone();
-//                holdR.resetExecution();
-//                hold.put(holdR, holdR);
-//            } catch (CloneNotSupportedException e) {
-//                e.printStackTrace();
-//            }
-
             region.resetExecution();
         }
     }
 
     public static Set<Region> getRegions() {
         return new HashSet<>(Regions.regions.values());
+    }
+
+    public static void removeAllRegions() {
+        Regions.regions = new HashedMap<>();
     }
 }

@@ -26,7 +26,6 @@ public class SleepPipelineTest {
 
     @Test
     public void testGetConfigurationsInRelevantRegions1() {
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>>
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = new HashMap<>();
 
         // Possible taint
@@ -72,19 +71,24 @@ public class SleepPipelineTest {
         region = new SleepRegion(statement2);
         relevantRegionToOptions.put(region, taintingConfigurations);
 
+        // Assert
         Assert.assertEquals(relevantRegionToOptions, SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted));
-        System.out.println(relevantRegionToOptions);
+//        System.out.println(relevantRegionToOptions);
     }
-//
-//    @Test
-//    public void testUpdateASTToTimeRelevantRegions1() {
-//        Set<Statement> statements = new HashSet<>();
-//        Statement ast = new SleepStatement(new VariableExpression("a"));
-//        statements.add(ast);
-//
-//        Assert.assertNotEquals(ast, SleepPipeline.instrumentProgramToTimeRelevantRegions(ast, statements));
-//    }
-//
+
+    @Test
+    public void testInstrumentProgramToTimeRelevantRegions1() {
+        // Program
+        Statement program = new SleepStatement(new VariableExpression("a"));
+
+        // Region
+        Set<SleepRegion> statements = new HashSet<>();
+        statements.add(new SleepRegion(program));
+
+        // Assert
+        Assert.assertNotEquals(program, SleepPipeline.instrumentProgramToTimeRelevantRegions(program, statements));
+    }
+
 //    @Test
 //    public void testMeasureConfigurationPerformance1() throws Exception {
 //        List<Statement> statementBlock = new ArrayList<>();

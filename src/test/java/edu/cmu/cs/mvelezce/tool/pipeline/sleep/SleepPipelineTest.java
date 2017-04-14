@@ -741,7 +741,6 @@ public class SleepPipelineTest {
 //
     @Test
     public void testBuildPerformanceModel1() throws Exception {
-
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program1");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
@@ -766,34 +765,32 @@ public class SleepPipelineTest {
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
     }
 
-////    @Test
-////    public void testBuildPerformanceModel2() throws Exception {
-////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program2");
-////
-////        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-////        configurationToPerformance.put(new HashSet<>(), 0);
-////
-////        Set<String> configuration = new HashSet<>();
-////        configuration.add("A");
-////        configurationToPerformance.put(configuration, 6);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("B");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("B");
-////        configurationToPerformance.put(configuration, 4);
-////
-////        Set<ConfigurationExpression> parameters = new HashSet<>();
-////        parameters.add(new ConfigurationExpression("A"));
-////        parameters.add(new ConfigurationExpression("B"));
-////
-////        // TODO must calculate B
-////        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-////    }
+//    @Test
+//    public void testBuildPerformanceModel2() throws Exception {
+//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program2");
+//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+//        System.out.println(performanceModel);
+//
+//        int performance = 0;
+//        Set<String> configuration = new HashSet<>();
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 4;
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 6;
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//
+//        performance = 0;
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+//    }
 //
 //    @Test
 //    public void testBuildPerformanceModel3() throws Exception {

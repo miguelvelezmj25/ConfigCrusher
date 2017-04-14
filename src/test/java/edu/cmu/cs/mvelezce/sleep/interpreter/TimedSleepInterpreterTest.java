@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.sleep.interpreter;
 
 import edu.cmu.cs.mvelezce.sleep.Helper;
+import edu.cmu.cs.mvelezce.sleep.ast.Program;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.ast.value.IntValue;
 import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
@@ -23,11 +24,11 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test1() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program1");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program1");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
@@ -35,7 +36,7 @@ public class TimedSleepInterpreterTest {
         activatedConfigurations.add("B");
 
 
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store
@@ -51,18 +52,18 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test2() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program2");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program2");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
         activatedConfigurations.add("A");
 
         // Execute
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store
@@ -78,11 +79,11 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test3() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program3");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program3");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
@@ -90,7 +91,7 @@ public class TimedSleepInterpreterTest {
         activatedConfigurations.add("B");
 
         // Execute
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store
@@ -106,11 +107,11 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test4() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program4");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program4");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
@@ -118,7 +119,7 @@ public class TimedSleepInterpreterTest {
         activatedConfigurations.add("B");
 
         // Execute
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store
@@ -134,11 +135,11 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test5() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program5");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program5");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
@@ -146,7 +147,7 @@ public class TimedSleepInterpreterTest {
         activatedConfigurations.add("B");
 
         // Execute
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store
@@ -162,11 +163,11 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test6() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program6");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program6");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
@@ -175,7 +176,7 @@ public class TimedSleepInterpreterTest {
         activatedConfigurations.add("C");
 
         // Execute
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store
@@ -193,11 +194,11 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test7() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program7");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program7");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
@@ -206,7 +207,7 @@ public class TimedSleepInterpreterTest {
         activatedConfigurations.add("D");
 
         // Execute
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store
@@ -224,17 +225,17 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test8() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program8");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program8");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
 
         // Execute
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store
@@ -251,18 +252,18 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test9() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program9");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program9");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
         activatedConfigurations.add("A");
 
         // Execute
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store
@@ -277,11 +278,11 @@ public class TimedSleepInterpreterTest {
     @Test
     public void test10() throws Exception {
         // Compile
-        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program10");
+        String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program10");
 
-        Lexer lexer = new Lexer(program);
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
@@ -290,7 +291,7 @@ public class TimedSleepInterpreterTest {
         activatedConfigurations.add("D");
 
         // Execute
-        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(program);
         interpreter.evaluate(activatedConfigurations);
 
         // Store

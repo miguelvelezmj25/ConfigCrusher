@@ -76,10 +76,10 @@ public class SleepPipeline extends Pipeline {
         return SleepPipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
 
-//    public static Map<Set<String>, Integer> buildPerformanceTable(String program, Set<ConfigurationExpression> parameters) {
+//    public static Map<Set<String>, Integer> buildPerformanceTable(String programFile, Set<ConfigurationExpression> parameters) {
 //        Lexer lexer = new Lexer(program);
 //        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
+//        Program program = parser.parse();
 //
 //        CFGBuilder builder = new CFGBuilder();
 //        CFG cfg = builder.buildCFG(ast);

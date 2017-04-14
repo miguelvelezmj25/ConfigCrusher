@@ -7,10 +7,10 @@ public class CFGBuilderTest {
 
 //    @Test
 //    public void test1() throws Exception {
-//        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program1");
-//        Lexer lexer = new Lexer(program);
+//        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program1");
+//        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
+//        Program program = parser.parse();
 //        CFGBuilder builder = new CFGBuilder();
 //
 //        int steps = 0;
@@ -59,7 +59,7 @@ public class CFGBuilderTest {
 //        cfg.addEdge(branchStack.pop(), currentBasicBlock);
 //        cfg.addEdge(currentBasicBlock, cfg.getExit());
 //
-//        CFG builtCFG = builder.buildCFG(ast);
+//        CFG builtCFG = builder.buildCFG(program);
 //
 //        BasicBlock currentBasicBlockCFG = cfg.getSuccessors(cfg.getEntry()).get(0);
 //        BasicBlock currentBasicBlockBuiltCFG = builtCFG.getSuccessors(builtCFG.getEntry()).get(0);
@@ -81,10 +81,10 @@ public class CFGBuilderTest {
 //
 //    @Test
 //    public void test2() throws Exception {
-//        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program2");
-//        Lexer lexer = new Lexer(program);
+//        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program2");
+//        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
+//        Program program = parser.parse();
 //        CFGBuilder builder = new CFGBuilder();
 //
 //        int steps = 0;
@@ -142,15 +142,15 @@ public class CFGBuilderTest {
 //        cfg.addEdge(branchStack.pop(), cfg.getExit());
 //        cfg.addEdge(currentBasicBlock, cfg.getExit());
 //
-//        Assert.assertEquals(cfg, builder.buildCFG(ast));
+//        Assert.assertEquals(cfg, builder.buildCFG(program));
 //    }
 //
 //    @Test
 //    public void test3() throws Exception {
-//        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program3");
-//        Lexer lexer = new Lexer(program);
+//        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program3");
+//        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
+//        Program program = parser.parse();
 //        CFGBuilder builder = new CFGBuilder();
 //
 //        int steps = 0;
@@ -211,15 +211,15 @@ public class CFGBuilderTest {
 //        cfg.addEdge(branchStack.pop(), cfg.getExit());
 //        cfg.addEdge(currentBasicBlock, cfg.getExit());
 //
-//        Assert.assertEquals(cfg, builder.buildCFG(ast));
+//        Assert.assertEquals(cfg, builder.buildCFG(program));
 //    }
 //
 //    @Test
 //    public void test4() throws Exception {
-//        String program = Helper.loadFile(Helper.PROGRAMS_PATH + "program4");
-//        Lexer lexer = new Lexer(program);
+//        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program4");
+//        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
+//        Program program = parser.parse();
 //        CFGBuilder builder = new CFGBuilder();
 //
 //        int steps = 0;
@@ -279,7 +279,7 @@ public class CFGBuilderTest {
 //        cfg.addEdge(branchStack.pop(), cfg.getExit());
 //        cfg.addEdge(currentBasicBlock, cfg.getExit());
 //
-//        Assert.assertEquals(cfg, builder.buildCFG(ast));
+//        Assert.assertEquals(cfg, builder.buildCFG(program));
 //    }
 
 }

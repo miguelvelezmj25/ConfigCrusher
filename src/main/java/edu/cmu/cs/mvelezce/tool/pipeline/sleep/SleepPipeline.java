@@ -151,6 +151,7 @@ public class SleepPipeline extends Pipeline {
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 
         for(Set<String> configuration : configurationsToExecute) {
+            // TODO use TimedVisitor type, but then you have to add evaluate method in interface
             TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
             interpreter.evaluate(configuration);
             configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions()));
@@ -169,7 +170,14 @@ public class SleepPipeline extends Pipeline {
                 Set<ConfigurationExpression> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
 
                 if(!possibleTaintingConfigurations.isEmpty()) {
-                    SleepRegion relevantRegion = new SleepRegion(entry.getKey().getStatement());
+                    Statement statement = entry.getKey().getStatement();
+
+                    // If we only want to consider the then branch as the region
+//                    if(statement instanceof IfStatement) {
+//                        statement = ((IfStatement) statement).getThenBlock();
+//                    }
+
+                    SleepRegion relevantRegion = new SleepRegion(statement);
                     Regions.addRegion(relevantRegion);
                     relevantRegionToOptions.put(relevantRegion, possibleTaintingConfigurations);
                 }
@@ -190,26 +198,6 @@ public class SleepPipeline extends Pipeline {
         return program.accept(addTimedVisitor);
     }
 
-//    public static Set<ConfigurationExpression> stringSetToSleepConfigurationSet(Set<String> stringOptionsSet) {
-//        Set<ConfigurationExpression> optionSetConvenient = new HashSet<>();
-//
-//        for(String option : stringOptionsSet) {
-//            optionSetConvenient.add(new ConfigurationExpression(option));
-//        }
-//
-//        return optionSetConvenient;
-//    }
-//
-//    public static Set<Set<ConfigurationExpression>> setOfStringSetsToSetOfSleepConfigurationSets(Set<Set<String>> setOfStringOptionsSets) {
-//        Set<Set<ConfigurationExpression>> setOfOptionSetConvenient = new HashSet<>();
-//
-//        for(Set<String> optionSet : setOfStringOptionsSets) {
-//            setOfOptionSetConvenient.add(SleepPipeline.stringSetToSleepConfigurationSet(optionSet));
-//        }
-//
-//        return setOfOptionSetConvenient;
-//    }
-
     public static Set<String> sleepConfigurationSetToStringSet(Set<ConfigurationExpression> sleepOptionsSet) {
         Set<String> optionSetConvenient = new HashSet<>();
 
@@ -229,22 +217,6 @@ public class SleepPipeline extends Pipeline {
 
         return setOfOptionSetConvenient;
     }
-
-//    public static Map<Statement, Set<String>> sleepConfigurationMapToStringMap(Map<Statement, Set<ConfigurationExpression>> relevantStatementsToOptions) {
-//        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = new HashMap<>();
-//
-//        for(Map.Entry<Statement, Set<ConfigurationExpression>> entry : relevantStatementsToOptions.entrySet()) {
-//            Set<String> relevantOptionsConvenient = new HashSet<>();
-//
-//            for(ConfigurationExpression relevantOption : entry.getValue()) {
-//                relevantOptionsConvenient.add(relevantOption.getName());
-//            }
-//
-//            relevantStatementsToOptionsConvenient.put(entry.getKey(), relevantOptionsConvenient);
-//        }
-//
-//        return relevantStatementsToOptionsConvenient;
-//    }
 
 //    /**
 //     * TODO

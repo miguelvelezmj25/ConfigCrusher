@@ -4,7 +4,6 @@ package edu.cmu.cs.mvelezce.tool.analysis;
  * Created by miguelvelez on 4/7/17.
  */
 public class Region implements Cloneable {
-
     private String regionPackage;
     private String regionClass;
     private String regionMethod;

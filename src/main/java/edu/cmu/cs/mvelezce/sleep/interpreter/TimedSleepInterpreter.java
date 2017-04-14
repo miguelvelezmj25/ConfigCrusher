@@ -36,7 +36,7 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
 
     @Override
     public Void visitTimedStatement(TimedStatement timedStatement) {
-        SleepRegion hold = new SleepRegion(timedStatement);
+        SleepRegion hold = new SleepRegion(timedStatement.getStatements());
         Region region = Regions.getRegion(hold);
         region.startTime(this.totalExecutionTime);
 

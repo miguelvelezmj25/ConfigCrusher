@@ -6,7 +6,7 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 /**
  * Created by mvelezce on 4/11/17.
  */
-public class SleepRegion extends Region {
+public class SleepRegion extends Region implements Cloneable {
     private Statement statement;
 
     public SleepRegion(Statement statement) {

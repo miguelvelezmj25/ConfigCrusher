@@ -403,7 +403,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testCreatePerformanceModel1() throws Exception {
+    public void testCreatePerformanceModel1() {
         // Map<Region, Set<String>> regionsToOptions
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
@@ -411,14 +411,14 @@ public class JavaPipelineTest {
         int duration1 = 3;
         Statement timedStatement1 = new SleepStatement(new ConstantIntExpression(duration1));
         Region region1 = new SleepRegion(timedStatement1);
-        regionsToOptions.put(region1.clone(), relevantOptions);
+        regionsToOptions.put(region1, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("B");
         int duration2 = 1;
         Statement timedStatement2 = new SleepStatement(new ConstantIntExpression(duration2));
         Region region2 = new SleepRegion(timedStatement2);
-        regionsToOptions.put(region2.clone(), relevantOptions);
+        regionsToOptions.put(region2, relevantOptions);
 
         // Set<PerformanceEntry> measuredPerformance
         Set<PerformanceEntry> measuredPerformance = new HashSet<>();
@@ -428,8 +428,8 @@ public class JavaPipelineTest {
         region1.endTime(0);
         region2.startTime(0);
         region2.endTime(0);
-        regions.add(region1.clone());
-        regions.add(region2.clone());
+        regions.add(region1);
+        regions.add(region2);
         PerformanceEntry performanceEntry = new PerformanceEntry(configuration, regions);
         measuredPerformance.add(performanceEntry);
 
@@ -441,8 +441,8 @@ public class JavaPipelineTest {
         region1.endTime(duration1);
         region2.startTime(0);
         region2.endTime(duration2);
-        regions.add(region1.clone());
-        regions.add(region2.clone());
+        regions.add(region1);
+        regions.add(region2);
         performanceEntry = new PerformanceEntry(configuration, regions);
         measuredPerformance.add(performanceEntry);
 

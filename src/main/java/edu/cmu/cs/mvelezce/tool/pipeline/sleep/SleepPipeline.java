@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.sleep.interpreter.TimedSleepInterpreter;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReplacerVisitor;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReturnerVisitor;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
+import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFG;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFGBuilder;
@@ -20,6 +21,7 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
 import edu.cmu.cs.mvelezce.sleep.parser.Parser;
+import org.apache.commons.collections4.map.HashedMap;
 
 
 import java.util.*;
@@ -152,6 +154,7 @@ public class SleepPipeline extends Pipeline {
 
         for(Set<String> configuration : configurationsToExecute) {
             // TODO use TimedVisitor type, but then you have to add evaluate method in interface
+            Regions.resetRegions();
             TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
             interpreter.evaluate(configuration);
             configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions()));

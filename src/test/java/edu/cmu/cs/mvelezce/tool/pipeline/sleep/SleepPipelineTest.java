@@ -9,9 +9,15 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.ast.value.IntValue;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
+import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.analysis.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipelineTest;
+import org.bson.assertions.Assertions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -89,58 +95,83 @@ public class SleepPipelineTest {
         Assert.assertNotEquals(program, SleepPipeline.instrumentProgramToTimeRelevantRegions(program, statements));
     }
 
-//    @Test
-//    public void testMeasureConfigurationPerformance1() throws Exception {
-//        List<Statement> statementBlock = new ArrayList<>();
-//
-//        Statement timedStatement = new SleepStatement(new ConfigurationExpression("B"));
-//        StatementTimed statement = new StatementTimed(timedStatement);
-//        statementBlock.add(statement);
-//
-//        Set<Set<ConfigurationExpression>> relevantOptionsSet = SleepPipeline.setOfStringSetsToSetOfSleepConfigurationSets(JavaPipelineTest.getOptionsSet("AB"));
-//        Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantOptionsSet));
-//
-//        Statement ast = new BlockStatement(statementBlock);
-//
-//        Set<SleepPipeline.PerformanceEntry> measuredPerformance = new HashSet<>();
-//        Set<String> configurationToExecute = new HashSet<>();
-//        Map<Statement, Integer> blockToTime = new HashMap<>();
-//        blockToTime.put(timedStatement, 0);
-//        SleepPipeline.PerformanceEntry performanceEntry =
-//                new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
-//        measuredPerformance.add(performanceEntry);
-//
-//        configurationToExecute = new HashSet<>();
-//        configurationToExecute.add("A");
-//        blockToTime = new HashMap<>();
-//        blockToTime.put(timedStatement, 0);
-//        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
-//        measuredPerformance.add(performanceEntry);
-//
-//        configurationToExecute = new HashSet<>();
-//        configurationToExecute.add("B");
-//        blockToTime = new HashMap<>();
-//        blockToTime.put(timedStatement, 1);
-//        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 1);
-//        measuredPerformance.add(performanceEntry);
-//
-//        configurationToExecute = new HashSet<>();
-//        configurationToExecute.add("A");
-//        configurationToExecute.add("B");
-//        blockToTime = new HashMap<>();
-//        blockToTime.put(timedStatement, 1);
-//        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 1);
-//        measuredPerformance.add(performanceEntry);
-//
-//        Assert.assertEquals(measuredPerformance, SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute));
-//    }
+    @Test
+    public void testMeasureConfigurationPerformance1() throws Exception {
+//        Statement ast, Set<Set<String>> configurationsToExecute
+
+        // Statement block
+        List<Statement> statementBlock = new ArrayList<>();
+
+        // TimedStatement
+        // Sleep statement has configuration to avoid having a statement assignment
+        Statement statement = new SleepStatement(new ConfigurationExpression("B"));
+        TimedStatement timedStatement = new TimedStatement(statement);
+        statementBlock.add(timedStatement);
+        Region region = new SleepRegion(statement);
+        Regions.addRegion(region);
+
+        // Program
+        Statement ast = new BlockStatement(statementBlock);
+
+        // Configurations
+        Set<Set<String>> optionsSet = JavaPipelineTest.getOptionsSet("AB");
+        Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
+
+        // Set of performance entries
+        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
+
+        // Empty configuration
+        Set<String> configuration = new HashSet<>();
+        PerformanceEntry performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        measuredPerformance.add(performanceEntry);
+
+        // Configuration A
+        configuration = new HashSet<>();
+        configuration.add("A");
+        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        measuredPerformance.add(performanceEntry);
+
+        // Configuration B
+        configuration = new HashSet<>();
+        configuration.add("B");
+        region.startTime(0);
+        region.endTime(1);
+        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        measuredPerformance.add(performanceEntry);
+
+        // Configuration AB
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Regions.resetRegions();
+        region.startTime(0);
+        region.endTime(1);
+        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        measuredPerformance.add(performanceEntry);
+
+        // Assert
+        Set<PerformanceEntry> results = SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute);
+        Assert.assertEquals(measuredPerformance, results);
+
+        for(PerformanceEntry result : results) {
+            for(PerformanceEntry entry : measuredPerformance) {
+                for(Region resultRegion : result.getRegions()) {
+                    for(Region entryRegion : entry.getRegions()) {
+                        if(result.getConfiguration().equals(entry.getConfiguration())) {
+                            Assert.assertEquals(entryRegion.getExecutionTime(), resultRegion.getExecutionTime());
+                        }
+                    }
+                }
+            }
+        }
+    }
 //
 //    @Test
 //    public void testMeasureConfigurationPerformance2() throws Exception {
 //        List<Statement> statementBlock = new ArrayList<>();
 //
 //        Statement timedStatement = new SleepStatement(new ConstantIntExpression(2));
-//        Statement statement = new StatementTimed(timedStatement);
+//        Statement statement = new TimedStatement(timedStatement);
 //        statement = new IfStatement(new ConfigurationExpression("A"), statement);
 //        statementBlock.add(statement);
 //
@@ -149,24 +180,24 @@ public class SleepPipelineTest {
 //
 //        Statement ast = new BlockStatement(statementBlock);
 //
-//        Set<SleepPipeline.PerformanceEntry> measuredPerformance = new HashSet<>();
+//        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
 //        Set<String> configurationToExecute = new HashSet<>();
 //        Map<Statement, Integer> blockToTime = new HashMap<>();
-//        SleepPipeline.PerformanceEntry performanceEntry =
-//                new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
+//        PerformanceEntry performanceEntry =
+//                new PerformanceEntry(configurationToExecute, blockToTime, 0);
 //        measuredPerformance.add(performanceEntry);
 //
 //        configurationToExecute = new HashSet<>();
 //        configurationToExecute.add("A");
 //        blockToTime = new HashMap<>();
 //        blockToTime.put(timedStatement, 2);
-//        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 2);
+//        performanceEntry = new PerformanceEntry(configurationToExecute, blockToTime, 2);
 //        measuredPerformance.add(performanceEntry);
 //
 //        configurationToExecute = new HashSet<>();
 //        configurationToExecute.add("B");
 //        blockToTime = new HashMap<>();
-//        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
+//        performanceEntry = new PerformanceEntry(configurationToExecute, blockToTime, 0);
 //        measuredPerformance.add(performanceEntry);
 //
 //        configurationToExecute = new HashSet<>();
@@ -174,7 +205,7 @@ public class SleepPipelineTest {
 //        configurationToExecute.add("B");
 //        blockToTime = new HashMap<>();
 //        blockToTime.put(timedStatement, 2);
-//        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 2);
+//        performanceEntry = new PerformanceEntry(configurationToExecute, blockToTime, 2);
 //        measuredPerformance.add(performanceEntry);
 //
 //        Assert.assertEquals(measuredPerformance, SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute));
@@ -186,14 +217,14 @@ public class SleepPipelineTest {
 //        parameters.add(new ConfigurationExpression("A"));
 //        parameters.add(new ConfigurationExpression("B"));
 //
-//        Set<SleepPipeline.PerformanceEntry> measuredPerformance = new HashSet<>();
+//        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
 //
 //        Statement timedStatement = new SleepStatement(new ConstantIntExpression(2));
 //
 //        Set<String> configurationToExecute = new HashSet<>();
 //        Map<Statement, Integer> blockToTime = new HashMap<>();
-//        SleepPipeline.PerformanceEntry performanceEntry =
-//                new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
+//        PerformanceEntry performanceEntry =
+//                new PerformanceEntry(configurationToExecute, blockToTime, 0);
 //        measuredPerformance.add(performanceEntry);
 //
 //        configurationToExecute = new HashSet<>();
@@ -201,7 +232,7 @@ public class SleepPipelineTest {
 //        configurationToExecute.add("B");
 //        blockToTime = new HashMap<>();
 //        blockToTime.put(timedStatement, 2);
-//        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 2);
+//        performanceEntry = new PerformanceEntry(configurationToExecute, blockToTime, 2);
 //        measuredPerformance.add(performanceEntry);
 //
 //        Map<Statement, Set<ConfigurationExpression>> relevantStatementsToOptions = new HashMap<>();
@@ -235,15 +266,15 @@ public class SleepPipelineTest {
 //        parameters.add(new ConfigurationExpression("A"));
 //        parameters.add(new ConfigurationExpression("B"));
 //
-//        Set<SleepPipeline.PerformanceEntry> measuredPerformance = new HashSet<>();
+//        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
 //
 //        Statement timedStatement = new SleepStatement(new ConstantIntExpression(2));
 //        Statement statement = new IfStatement(new ConfigurationExpression("A"), timedStatement);
 //
 //        Set<String> configurationToExecute = new HashSet<>();
 //        Map<Statement, Integer> blockToTime = new HashMap<>();
-//        SleepPipeline.PerformanceEntry performanceEntry =
-//                new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 0);
+//        PerformanceEntry performanceEntry =
+//                new PerformanceEntry(configurationToExecute, blockToTime, 0);
 //        measuredPerformance.add(performanceEntry);
 //
 //        configurationToExecute = new HashSet<>();
@@ -251,7 +282,7 @@ public class SleepPipelineTest {
 //        configurationToExecute.add("B");
 //        blockToTime = new HashMap<>();
 //        blockToTime.put(timedStatement, 2);
-//        performanceEntry = new SleepPipeline.PerformanceEntry(configurationToExecute, blockToTime, 2);
+//        performanceEntry = new PerformanceEntry(configurationToExecute, blockToTime, 2);
 //        measuredPerformance.add(performanceEntry);
 //
 //        Map<Statement, Set<ConfigurationExpression>> relevantStatementsToOptions = new HashMap<>();

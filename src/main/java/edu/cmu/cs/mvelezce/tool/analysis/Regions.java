@@ -36,23 +36,18 @@ public class Regions {
         return Regions.regions.get(region);
     }
 
-//    public static Region getRegion(String regionPackage, String regionClass, String regionMethod) {
-//        // TODO check for empty strings
-//        Region hold = new Region(regionPackage, regionClass, regionMethod);
-//        Region result = Regions.regions.get(hold);
-//
-//        if(result == null) {
-//            // TODO this is for testing. We would change this for the full pipeline
-////            throw new NoSuchElementException("This region is not a relevant region");
-//            Regions.addRegion(hold);
-//            return hold;
-//        }
-//
-//        return result;
-//    }
-
-    public void resetRegions() {
+    public static void resetRegions() {
+        HashMap<Region, Region> hold = new HashMap<>();
         for(Region region : Regions.regions.values()) {
+//            Region holdR = null;
+//            try {
+//                holdR = region.clone();
+//                holdR.resetExecution();
+//                hold.put(holdR, holdR);
+//            } catch (CloneNotSupportedException e) {
+//                e.printStackTrace();
+//            }
+
             region.resetExecution();
         }
     }

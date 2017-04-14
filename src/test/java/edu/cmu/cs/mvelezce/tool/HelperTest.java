@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool;
 
-import edu.cmu.cs.mvelezce.tool.Helper;
 import org.junit.Assert;
 import org.junit.Test;
 

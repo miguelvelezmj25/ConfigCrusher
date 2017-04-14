@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
+import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;

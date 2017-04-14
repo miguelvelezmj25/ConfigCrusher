@@ -1,28 +1,25 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.sleep;
 
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ConfigurationExpression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.interpreter.TimedSleepInterpreter;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReplacerVisitor;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReturnerVisitor;
+import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
+import edu.cmu.cs.mvelezce.sleep.parser.Parser;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFG;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.Pipeline;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
-import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ConfigurationExpression;
-import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
-import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
-import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
-import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
-import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
-import edu.cmu.cs.mvelezce.sleep.parser.Parser;
-import org.apache.commons.collections4.map.HashedMap;
-
 
 import java.util.*;
 

@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg;
 
 
-import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ConfigurationExpression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReturnerVisitor;

@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.LotrackProcessor;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.LotrackProcessor;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 
 import java.util.Map;
 import java.util.Set;

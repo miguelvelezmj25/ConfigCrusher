@@ -1,9 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.pipeline;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 
 import java.util.*;
 

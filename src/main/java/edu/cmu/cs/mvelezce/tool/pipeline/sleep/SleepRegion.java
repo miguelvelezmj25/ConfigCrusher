@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.sleep;
 
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.tool.analysis.Region;
 
 /**
  * Created by mvelezce on 4/11/17.

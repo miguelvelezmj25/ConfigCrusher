@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.compression;
 
-import edu.cmu.cs.mvelezce.tool.compression.Helper;
 import org.junit.Test;
 
 /**

@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis;
 
+import edu.cmu.cs.mvelezce.sleep.ast.Program;
+import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepRegion;
 import org.apache.commons.collections4.map.HashedMap;
 
 import java.util.HashMap;
@@ -11,8 +13,21 @@ import java.util.Set;
  * Created by miguelvelez on 4/7/17.
  */
 public class Regions {
+    private static Region program = null;
     // This looks weird
     private static Map<Region, Region> regions = new HashMap<>();
+
+    public static void addProgram(Region program) {
+        if(program == null) {
+            throw new IllegalArgumentException("Program cannot be null");
+        }
+
+        Regions.program = program;
+    }
+
+    public static void removeProgram() {
+        Regions.program = null;
+    }
 
     public static void addRegion(Region region) {
         if(region == null) {
@@ -39,11 +54,12 @@ public class Regions {
     }
 
     public static void resetRegions() {
-        HashMap<Region, Region> hold = new HashMap<>();
         for(Region region : Regions.regions.values()) {
             region.resetExecution();
         }
     }
+
+    public static Region getProgram() { return Regions.program; }
 
     public static Set<Region> getRegions() {
         return new HashSet<>(Regions.regions.values());
@@ -51,5 +67,10 @@ public class Regions {
 
     public static void removeAllRegions() {
         Regions.regions = new HashedMap<>();
+    }
+
+    public static void reset() {
+        Regions.removeProgram();
+        Regions.removeAllRegions();
     }
 }

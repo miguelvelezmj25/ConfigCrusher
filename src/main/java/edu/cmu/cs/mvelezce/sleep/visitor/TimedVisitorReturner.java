@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.sleep.visitor;
 
 import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReturnerVisitor;
+import edu.cmu.cs.mvelezce.sleep.statements.TimedProgram;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
 
 /**
@@ -16,6 +17,12 @@ public class TimedVisitorReturner extends ReturnerVisitor implements TimedVisito
         }
 
         timedStatement.getStatements().accept(this);
+        return null;
+    }
+
+    @Override
+    public Void visitTimedProgram(TimedProgram timedProgram) {
+        // TODO
         return null;
     }
 

@@ -6,7 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.Region;
 /**
  * Created by mvelezce on 4/11/17.
  */
-public class SleepRegion extends Region implements Cloneable {
+public class SleepRegion extends Region {
     private Statement statement;
 
     public SleepRegion(Statement statement) {

@@ -7,14 +7,10 @@ import java.util.*;
  * Created by mvelezce on 3/9/17.
  */
 public class PerformanceModel {
-    private int baseTime;
+    private long baseTime;
     private Map<Set<String>, Map<Set<String>, Integer>> optionToBlock;
 
-    public PerformanceModel(List<Map<Set<String>, Integer>> blocks) {
-        this(0, blocks);
-    }
-
-    public PerformanceModel(int baseTime, List<Map<Set<String>, Integer>> blocks) {
+    public PerformanceModel(long baseTime, List<Map<Set<String>, Integer>> blocks) {
         this.baseTime = baseTime;
         this.optionToBlock = new HashMap<>();
 
@@ -27,11 +23,10 @@ public class PerformanceModel {
 
             this.optionToBlock.put(relevantOptions, block);
         }
-
     }
 
-    public int evaluate(Set<String> configuration) {
-        int performance = this.baseTime;
+    public long evaluate(Set<String> configuration) {
+        long performance = this.baseTime;
 
         for(Map.Entry<Set<String>, Map<Set<String>, Integer>> entry : this.optionToBlock.entrySet()) {
             Set<String> configurationValueOfOptionInBlock = new HashSet<>(configuration);
@@ -45,38 +40,38 @@ public class PerformanceModel {
 
     @Override
     public String toString() {
-        String performanceModel = "T = " ;
+        StringBuilder performanceModel = new StringBuilder("T = ");
 
         if(this.baseTime != 0) {
-            performanceModel += this.baseTime;
+            performanceModel.append(this.baseTime);
         }
 
         for(Map<Set<String>, Integer> block : this.optionToBlock.values()) {
-            performanceModel += " + (";
+            performanceModel.append(" + (");
             int count = 0;
 
             for(Map.Entry<Set<String>, Integer> entry : block.entrySet()) {
                 if(entry.getValue() != 0) {
                     if(count == 0) {
-                        performanceModel += "";
+                        performanceModel.append("");
                     }
                     else {
-                        performanceModel += " v + ";
+                        performanceModel.append(" v + ");
                     }
 
-                    performanceModel += "" + entry.getValue();
+                    performanceModel.append("").append(entry.getValue());
 
                     for(String configuration : entry.getKey()) {
-                        performanceModel += configuration;
+                        performanceModel.append(configuration);
                     }
 
                     count++;
                 }
             }
 
-            performanceModel += ")";
+            performanceModel.append(")");
         }
 
-        return performanceModel;
+        return performanceModel.toString();
     }
 }

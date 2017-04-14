@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.sleep;
 
+import edu.cmu.cs.mvelezce.sleep.ast.Program;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ConfigurationExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
@@ -11,7 +12,9 @@ import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReplacerVisitor;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReturnerVisitor;
 import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
 import edu.cmu.cs.mvelezce.sleep.parser.Parser;
+import edu.cmu.cs.mvelezce.sleep.statements.TimedProgram;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
+import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
@@ -36,28 +39,41 @@ public class SleepPipeline extends Pipeline {
         }
     };
 
-    public static PerformanceModel buildPerformanceModel(String program) {
-        Lexer lexer = new Lexer(program);
+    public static PerformanceModel buildPerformanceModel(String programFile) {
+        // Reset
+        Regions.reset();
+        PerformanceEntry.reset();
+
+        Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
-        Statement ast = parser.parse();
+        Program program = parser.parse();
 
         CFGBuilder builder = new CFGBuilder();
-        CFG cfg = builder.buildCFG(ast);
+        CFG cfg = builder.buildCFG(program);
 
         // Taint Analysis (Language dependent)
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
         Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
+
         // Configuration compression (Language independent)
         Set<Set<ConfigurationExpression>> relevantSleepOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> relevantOptions = SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantSleepOptions);
         Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(relevantOptions);
+
         // Instrumentation (Language dependent)
-        ast = SleepPipeline.instrumentProgramToTimeRelevantRegions(ast, relevantRegionsToOptions.keySet());
-        Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute);
+        program = SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions.keySet());
+        Statement timedProgram = SleepPipeline.instrumentProgram(program);
+        Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(timedProgram, configurationsToExecute);
+
         // Performance Model (Language independent)
-//        return SleepPipeline.createPerformanceModel(measuredPerformance, relevantRegionsToOptions);
-        // TODO
-        return null;
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<SleepRegion, Set<ConfigurationExpression>> entry : relevantRegionsToOptions.entrySet()) {
+            Set<String> options = SleepPipeline.sleepConfigurationSetToStringSet(entry.getValue());
+            regionsToOptions.put(entry.getKey(), options);
+        }
+
+        return SleepPipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
 
 //    public static Map<Set<String>, Integer> buildPerformanceTable(String program, Set<ConfigurationExpression> parameters) {
@@ -78,7 +94,7 @@ public class SleepPipeline extends Pipeline {
 //        }
 //
 //        Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(convenient);
-//        ast = SleepPipeline.instrumentProgramToTimeRelevantRegions(ast, relevantRegionsToOptions.keySet());
+//        ast = SleepPipeline.instrumentRelevantRegions(ast, relevantRegionsToOptions.keySet());
 //        Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute);
 //
 //        return SleepPipeline.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantRegionsToOptions);
@@ -154,7 +170,7 @@ public class SleepPipeline extends Pipeline {
             Regions.resetRegions();
             TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
             interpreter.evaluate(configuration);
-            configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions()));
+            configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
 
@@ -187,7 +203,7 @@ public class SleepPipeline extends Pipeline {
         return relevantRegionToOptions;
     }
 
-    public static Statement instrumentProgramToTimeRelevantRegions(Statement program, Set<SleepRegion> relevantRegions) {
+    public static Program instrumentRelevantRegions(Program program, Set<SleepRegion> relevantRegions) {
         Set<Statement> relevantStatements = new HashSet<>();
 
         for(SleepRegion regionSleep : relevantRegions) {
@@ -195,7 +211,15 @@ public class SleepPipeline extends Pipeline {
         }
 
         AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
-        return program.accept(addTimedVisitor);
+        return (Program) program.accept(addTimedVisitor);
+    }
+
+    public static TimedProgram instrumentProgram(Program program) {
+        TimedProgram timedProgram = new TimedProgram(program);
+        SleepRegion region = new SleepRegion(timedProgram.getStatements());
+        Regions.addProgram(region);
+
+        return timedProgram;
     }
 
     public static Set<String> sleepConfigurationSetToStringSet(Set<ConfigurationExpression> sleepOptionsSet) {
@@ -261,33 +285,33 @@ public class SleepPipeline extends Pipeline {
         }
 
         @Override
-        public Expression visitConfigurationExpression(ConfigurationExpression expressionConfigurationConstant) {
-            this.relevantOptions.add(expressionConfigurationConstant);
+        public Expression visitConfigurationExpression(ConfigurationExpression configurationExpression) {
+            this.relevantOptions.add(configurationExpression);
 
-            return expressionConfigurationConstant;
+            return configurationExpression;
         }
 
         @Override
-        public Expression visitVariableExpression(VariableExpression expressionVariable) {
+        public Expression visitVariableExpression(VariableExpression variableExpression) {
                 for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
-                    if(taintedVariable.getVariable().equals(expressionVariable)) {
+                    if(taintedVariable.getVariable().equals(variableExpression)) {
                         this.relevantOptions.addAll(taintedVariable.getConfigurations());
                     }
                 }
 
-            return expressionVariable;
+            return variableExpression;
         }
 
         @Override
-        public Void visitIfStatement(IfStatement statementIf) {
-            statementIf.getCondition().accept(this);
+        public Void visitIfStatement(IfStatement ifStatement) {
+            ifStatement.getCondition().accept(this);
 
             return null;
         }
 
         @Override
-        public Void visitSleepStatement(SleepStatement statementSleep) {
-            statementSleep.getTime().accept(this);
+        public Void visitSleepStatement(SleepStatement sleepStatement) {
+            sleepStatement.getTime().accept(this);
 
             return null;
         }
@@ -313,13 +337,15 @@ public class SleepPipeline extends Pipeline {
          *
          * @param statementIf
          * @return
-         */ // TODO check this
+         */ // TODO check this since this is where we might need to work on to get inner regions
         @Override
         public Statement visitIfStatement(IfStatement statementIf) {
             if(this.relevantStatements.contains(statementIf)) {
-                TimedStatement timedThenBlock = new TimedStatement(statementIf.getThenBlock());
+//                TimedStatement timedThenBlock = new TimedStatement(statementIf.getThenBlock());
+//                TimedStatement timedThenBlock = new TimedStatement(statementIf);
 
-                return new IfStatement(statementIf.getCondition(), timedThenBlock);
+                return new TimedStatement(statementIf);
+//                return new IfStatement(statementIf.getCondition(), timedThenBlock);
             }
 
             return super.visitIfStatement(statementIf);
@@ -328,16 +354,16 @@ public class SleepPipeline extends Pipeline {
         /**
          * Replace the thenBlock of a IfStatement if the entire statement is relevant.
          *
-         * @param statementSleep
+         * @param sleepStatement
          * @return
          */
         @Override
-        public Statement visitSleepStatement(SleepStatement statementSleep) {
-            if(relevantStatements.contains(statementSleep)) {
-                return new TimedStatement(statementSleep);
+        public Statement visitSleepStatement(SleepStatement sleepStatement) {
+            if(relevantStatements.contains(sleepStatement)) {
+                return new TimedStatement(sleepStatement);
             }
 
-            return statementSleep;
+            return sleepStatement;
         }
 
     }

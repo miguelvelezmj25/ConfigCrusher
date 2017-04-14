@@ -156,7 +156,7 @@ public abstract class Pipeline {
 
     public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
         List<Map<Set<String>, Integer>> blockTimeList = new ArrayList<>();
-//        int baseTime = -1;
+        long baseTime = measuredPerformance.iterator().next().getBaseTime();
 
         for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
             Map<Set<String>, Integer> blockTime = new HashMap<>();
@@ -174,7 +174,7 @@ public abstract class Pipeline {
             blockTimeList.add(blockTime);
         }
 
-        return new PerformanceModel(blockTimeList);
+        return new PerformanceModel(baseTime, blockTimeList);
     }
 
 }

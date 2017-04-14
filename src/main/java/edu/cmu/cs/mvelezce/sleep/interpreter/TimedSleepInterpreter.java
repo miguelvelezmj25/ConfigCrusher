@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.sleep.interpreter;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.ast.value.IntValue;
+import edu.cmu.cs.mvelezce.sleep.statements.TimedProgram;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
 import edu.cmu.cs.mvelezce.sleep.visitor.TimedVisitor;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
@@ -17,6 +18,7 @@ import java.util.Map;
  */
 public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisitor<IntValue, Void> {
     private int totalExecutionTime;
+    // TODO who uses this?
     private Map<Statement, Integer> regionToTime;
 
     public TimedSleepInterpreter(Statement ast) {
@@ -45,6 +47,19 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
 
         region.endTime(this.totalExecutionTime);
         this.regionToTime.put(timedStatement.getStatements(), this.totalExecutionTime - time);
+
+        return null;
+    }
+
+    @Override
+    public Void visitTimedProgram(TimedProgram timedProgram) {
+        Regions.getProgram().startTime(this.totalExecutionTime);
+
+        int time = totalExecutionTime;
+        timedProgram.getStatements().accept(this);
+
+        Regions.getProgram().endTime(this.totalExecutionTime);
+        this.regionToTime.put(timedProgram.getStatements(), this.totalExecutionTime - time);
 
         return null;
     }

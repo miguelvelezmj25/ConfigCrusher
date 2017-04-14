@@ -10,22 +10,44 @@ import java.util.Set;
  * Created by mvelezce on 4/10/17.
  */
 public class PerformanceEntry {
+    private static long baseTime = -1;
+
     private Set<String> configuration;
     private Map<Region, Region> regions;
+    private Region program;
 
-
-    public PerformanceEntry(Set<String> configuration, Set<Region> regions) {
+    public PerformanceEntry(Set<String> configuration, Set<Region> regions, Region program) {
         this.configuration = configuration;
         this.regions = new HashedMap<>();
 
-        for(Region region : regions) {
-            try {
-                Region clonedRegion = region.clone();
-                this.regions.put(clonedRegion, clonedRegion);
-            } catch (CloneNotSupportedException e) {
-                throw new RuntimeException("The region could not be cloned");
+        try {
+            for(Region region : regions) {
+                    Region clonedRegion = region.clone();
+                    this.regions.put(clonedRegion, clonedRegion);
+            }
+
+            this.program = program.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException("The region could not be cloned");
+        }
+
+    }
+
+    public long getBaseTime() {
+        if(PerformanceEntry.baseTime < 0) {
+            PerformanceEntry.baseTime = this.program.getExecutionTime();
+
+            for(Region region : this.regions.values()) {
+                PerformanceEntry.baseTime -= region.getExecutionTime();
             }
         }
+
+        return PerformanceEntry.baseTime;
+    }
+
+    public static void reset() {
+        PerformanceEntry.baseTime = -1;
     }
 
     public Region getRegion(Region region) {
@@ -35,6 +57,8 @@ public class PerformanceEntry {
     public Set<String> getConfiguration() { return this.configuration; }
 
     public Set<Region> getRegions() { return this.regions.keySet(); }
+
+    public Region getProgram() { return this.program; }
 
     @Override
     public boolean equals(Object o) {

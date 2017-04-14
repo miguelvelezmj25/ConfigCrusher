@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.sleep;
 
+import edu.cmu.cs.mvelezce.sleep.ast.Program;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ConfigurationExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ConstantIntExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
@@ -14,7 +15,8 @@ import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipelineTest;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -94,20 +96,26 @@ public class SleepPipelineTest {
     }
 
     @Test
-    public void testInstrumentProgramToTimeRelevantRegions1() {
+    public void testInstrumentRelevantRegions1() {
         // Program
-        Statement program = new SleepStatement(new VariableExpression("a"));
+        Statement sleepStatement = new SleepStatement(new VariableExpression("a"));
+        List<Statement> programStatements = new ArrayList<>();
+        programStatements.add(sleepStatement);
+        BlockStatement blockStatement = new BlockStatement(programStatements);
+        Program program = new Program(blockStatement);
 
         // Region
         Set<SleepRegion> statements = new HashSet<>();
-        statements.add(new SleepRegion(program));
+        statements.add(new SleepRegion(sleepStatement));
 
         // Assert
-        Assert.assertNotEquals(program, SleepPipeline.instrumentProgramToTimeRelevantRegions(program, statements));
+        SleepPipeline.instrumentRelevantRegions(program, statements);
+        Assert.assertNotEquals(program, SleepPipeline.instrumentRelevantRegions(program, statements));
     }
 
     @Test
-    public void testMeasureConfigurationPerformance1() throws Exception {
+    public void testMeasureConfigurationPerformance1() {
+        Regions.reset();
 //        Statement ast, Set<Set<String>> configurationsToExecute
 
         // Statement block
@@ -119,14 +127,14 @@ public class SleepPipelineTest {
         TimedStatement timedStatement = new TimedStatement(statement);
         statementBlock.add(timedStatement);
         Region region = new SleepRegion(statement);
-        Regions.removeAllRegions();
         Regions.addRegion(region);
 
         // Program
-        Statement ast = new BlockStatement(statementBlock);
+        Program program = new Program(new BlockStatement(statementBlock));
+        Regions.addProgram(new SleepRegion(program));
 
         // Configurations
-        Set<Set<String>> optionsSet = JavaPipelineTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = PipelineTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Set of performance entries
@@ -134,13 +142,14 @@ public class SleepPipelineTest {
 
         // Empty configuration
         Set<String> configuration = new HashSet<>();
-        PerformanceEntry performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        Region programRegion = new SleepRegion(new SleepStatement(new ConstantIntExpression(0)));
+        PerformanceEntry performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
         // Configuration A
         configuration = new HashSet<>();
         configuration.add("A");
-        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
         // Configuration B
@@ -148,7 +157,7 @@ public class SleepPipelineTest {
         configuration.add("B");
         region.startTime(0);
         region.endTime(1);
-        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
         // Configuration AB
@@ -158,17 +167,18 @@ public class SleepPipelineTest {
         Regions.resetRegions();
         region.startTime(0);
         region.endTime(1);
-        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
         // Assert
-        Set<PerformanceEntry> results = SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute);
+        Set<PerformanceEntry> results = SleepPipeline.measureConfigurationPerformance(program, configurationsToExecute);
         Assert.assertEquals(measuredPerformance, results);
         SleepPipelineTest.checkExecutionTimes(measuredPerformance, results);
     }
 
     @Test
-    public void testMeasureConfigurationPerformance2() throws Exception {
+    public void testMeasureConfigurationPerformance2() {
+        Regions.reset();
         // Statement block
         List<Statement> statementBlock = new ArrayList<>();
 
@@ -179,14 +189,15 @@ public class SleepPipelineTest {
         Statement timedStatement = new TimedStatement(statement);
         statementBlock.add(timedStatement);
         Region region = new SleepRegion(statement);
-        Regions.removeAllRegions();
+        Regions.reset();
         Regions.addRegion(region);
 
         // Program
-        Statement ast = new BlockStatement(statementBlock);
+        Program program = new Program(new BlockStatement(statementBlock));
+        Regions.addProgram(new SleepRegion(program));
 
         // Configurations
-        Set<Set<String>> optionsSet = JavaPipelineTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = PipelineTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Set of performance entries
@@ -194,7 +205,8 @@ public class SleepPipelineTest {
 
         // Empty configuration
         Set<String> configuration = new HashSet<>();
-        PerformanceEntry performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        Region programRegion = new SleepRegion(new SleepStatement(new ConstantIntExpression(0)));
+        PerformanceEntry performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
         // Configuration A
@@ -202,14 +214,14 @@ public class SleepPipelineTest {
         configuration.add("A");
         region.startTime(0);
         region.endTime(2);
-        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
         // Configuration B
         configuration = new HashSet<>();
         configuration.add("B");
         Regions.resetRegions();
-        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
         // Configuration AB
@@ -219,11 +231,11 @@ public class SleepPipelineTest {
         Regions.resetRegions();
         region.startTime(0);
         region.endTime(2);
-        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions());
+        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
         // Assert
-        Set<PerformanceEntry> results = SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute);
+        Set<PerformanceEntry> results = SleepPipeline.measureConfigurationPerformance(program, configurationsToExecute);
         Assert.assertEquals(measuredPerformance, results);
         SleepPipelineTest.checkExecutionTimes(measuredPerformance, results);
     }
@@ -727,32 +739,33 @@ public class SleepPipelineTest {
 ////        System.out.println(configurationToPerformance);
 //    }
 //
-//    @Test
-//    public void testBuildPerformanceModel1() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program1");
-//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-//
-//        int performance = 3;
-//        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 6;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 4;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 3;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//    }
-//
+    @Test
+    public void testBuildPerformanceModel1() throws Exception {
+
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program1");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+
+        int performance = 3;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 6;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
 ////    @Test
 ////    public void testBuildPerformanceModel2() throws Exception {
 ////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program2");

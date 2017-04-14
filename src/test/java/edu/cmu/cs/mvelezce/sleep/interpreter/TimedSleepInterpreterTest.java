@@ -22,147 +22,286 @@ public class TimedSleepInterpreterTest {
 
     @Test
     public void test1() throws Exception {
+        // Compile
         String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program1");
-
-        Map<String, IntValue> store = new HashMap<>();
-        store.put("a", new IntValue(1));
-        store.put("b", new IntValue(1));
 
         Lexer lexer = new Lexer(program);
         Parser parser = new Parser(lexer);
         Statement ast = parser.parse();
 
+        // Configurations
         Set<String> activatedConfigurations = new HashSet<>();
         activatedConfigurations.add("A");
         activatedConfigurations.add("B");
 
+
         TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
         interpreter.evaluate(activatedConfigurations);
 
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(1));
+        store.put("b", new IntValue(1));
+
+        // Assert
         Assert.assertEquals(store, interpreter.getStore());
         Assert.assertEquals(6, interpreter.getTotalExecutionTime());
     }
 
-//    @Test
-//    public void test2() throws Exception {
-//        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program2");
-//
-//        Map<String, IntValue> store = new HashMap<>();
-//        store.put("a", new IntValue(1));
-//        store.put("b", new IntValue(0));
-//
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        Set<String> activatedConfigurations = new HashSet<>();
-//        activatedConfigurations.add("A");
-//
-//        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
-//
-//        interpreter.evaluate(activatedConfigurations);
-//
-//        Assert.assertEquals(store, interpreter.getStore());
-//        Assert.assertEquals(6, interpreter.getTotalExecutionTime());
-//    }
-//
-//    @Test
-//    public void test3() throws Exception {
-//        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program3");
-//
-//        Map<String, IntValue> store = new HashMap<>();
-//        store.put("a", new IntValue(1));
-//        store.put("b", new IntValue(1));
-//
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        Set<String> activatedConfigurations = new HashSet<>();
-//        activatedConfigurations.add("A");
-//        activatedConfigurations.add("B");
-//
-//        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
-//
-//        interpreter.evaluate(activatedConfigurations);
-//
-//        Assert.assertEquals(store, interpreter.getStore());
-//        Assert.assertEquals(10, interpreter.getTotalExecutionTime());
-//    }
-//
-//    @Test
-//    public void test4() throws Exception {
-//        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program4");
-//
-//        Map<String, IntValue> store = new HashMap<>();
-//        store.put("a", new IntValue(1));
-//        store.put("b", new IntValue(1));
-//
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        Set<String> activatedConfigurations = new HashSet<>();
-//        activatedConfigurations.add("A");
-//        activatedConfigurations.add("B");
-//
-//        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
-//
-//        interpreter.evaluate(activatedConfigurations);
-//
-//        Assert.assertEquals(store, interpreter.getStore());
-//        Assert.assertEquals(10, interpreter.getTotalExecutionTime());
-//    }
-//
-//    @Test
-//    public void test5() throws Exception {
-//        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program5");
-//
-//        Map<String, IntValue> store = new HashMap<>();
-//        store.put("a", new IntValue(1));
-//        store.put("b", new IntValue(1));
-//
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        Set<String> activatedConfigurations = new HashSet<>();
-//        activatedConfigurations.add("A");
-//        activatedConfigurations.add("B");
-//
-//        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
-//
-//        interpreter.evaluate(activatedConfigurations);
-//
-//        Assert.assertEquals(store, interpreter.getStore());
-//        Assert.assertEquals(4, interpreter.getTotalExecutionTime());
-//    }
-//
-//    @Test
-//    public void test6() throws Exception {
-//        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program6");
-//
-//        Map<String, IntValue> store = new HashMap<>();
-//        store.put("a", new IntValue(1));
-//        store.put("b", new IntValue(1));
-//        store.put("c", new IntValue(1));
-//        store.put("x", new IntValue(6));
-//
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Statement ast = parser.parse();
-//
-//        Set<String> activatedConfigurations = new HashSet<>();
-//        activatedConfigurations.add("A");
-//        activatedConfigurations.add("B");
-//        activatedConfigurations.add("C");
-//
-//        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
-//
-//        interpreter.evaluate(activatedConfigurations);
-//
-//        Assert.assertEquals(store, interpreter.getStore());
-//        Assert.assertEquals(6, interpreter.getTotalExecutionTime());
-//    }
+    @Test
+    public void test2() throws Exception {
+        // Compile
+        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program2");
 
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        // Configurations
+        Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("A");
+
+        // Execute
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        interpreter.evaluate(activatedConfigurations);
+
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(1));
+        store.put("b", new IntValue(0));
+
+        // Assert
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(6, interpreter.getTotalExecutionTime());
+    }
+
+    @Test
+    public void test3() throws Exception {
+        // Compile
+        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program3");
+
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        // Configurations
+        Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
+
+        // Execute
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        interpreter.evaluate(activatedConfigurations);
+
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(1));
+        store.put("b", new IntValue(1));
+
+        // Assert
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(10, interpreter.getTotalExecutionTime());
+    }
+
+    @Test
+    public void test4() throws Exception {
+        // Compile
+        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program4");
+
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        // Configurations
+        Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
+
+        // Execute
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        interpreter.evaluate(activatedConfigurations);
+
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(1));
+        store.put("b", new IntValue(1));
+
+        // Assert
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(10, interpreter.getTotalExecutionTime());
+    }
+
+    @Test
+    public void test5() throws Exception {
+        // Compile
+        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program5");
+
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        // Configurations
+        Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
+
+        // Execute
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        interpreter.evaluate(activatedConfigurations);
+
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(1));
+        store.put("b", new IntValue(1));
+
+        // Assert
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(4, interpreter.getTotalExecutionTime());
+    }
+
+    @Test
+    public void test6() throws Exception {
+        // Compile
+        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program6");
+
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        // Configurations
+        Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
+        activatedConfigurations.add("C");
+
+        // Execute
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        interpreter.evaluate(activatedConfigurations);
+
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(1));
+        store.put("b", new IntValue(1));
+        store.put("c", new IntValue(1));
+        store.put("x", new IntValue(6));
+
+        // Assert
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(6, interpreter.getTotalExecutionTime());
+    }
+
+    @Test
+    public void test7() throws Exception {
+        // Compile
+        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program7");
+
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        // Configurations
+        Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("A");
+        activatedConfigurations.add("B");
+        activatedConfigurations.add("D");
+
+        // Execute
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        interpreter.evaluate(activatedConfigurations);
+
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(1));
+        store.put("b", new IntValue(1));
+        store.put("c", new IntValue(0));
+        store.put("d", new IntValue(1));
+
+        // Assert
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(3, interpreter.getTotalExecutionTime());
+    }
+
+    @Test
+    public void test8() throws Exception {
+        // Compile
+        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program8");
+
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        // Configurations
+        Set<String> activatedConfigurations = new HashSet<>();
+
+        // Execute
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        interpreter.evaluate(activatedConfigurations);
+
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(0));
+        store.put("b", new IntValue(0));
+        store.put("c", new IntValue(0));
+
+        // Assert
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(0, interpreter.getTotalExecutionTime());
+    }
+
+    @Test
+    public void test9() throws Exception {
+        // Compile
+        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program9");
+
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        // Configurations
+        Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("A");
+
+        // Execute
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        interpreter.evaluate(activatedConfigurations);
+
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(2));
+
+        // Assert
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(3, interpreter.getTotalExecutionTime());
+    }
+
+    @Test
+    public void test10() throws Exception {
+        // Compile
+        String program = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program10");
+
+        Lexer lexer = new Lexer(program);
+        Parser parser = new Parser(lexer);
+        Statement ast = parser.parse();
+
+        // Configurations
+        Set<String> activatedConfigurations = new HashSet<>();
+        activatedConfigurations.add("B");
+        activatedConfigurations.add("C");
+        activatedConfigurations.add("D");
+
+        // Execute
+        TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+        interpreter.evaluate(activatedConfigurations);
+
+        // Store
+        Map<String, IntValue> store = new HashMap<>();
+        store.put("a", new IntValue(0));
+        store.put("b", new IntValue(1));
+        store.put("c", new IntValue(1));
+        store.put("d", new IntValue(1));
+
+        // Assert
+        Assert.assertEquals(store, interpreter.getStore());
+        Assert.assertEquals(5, interpreter.getTotalExecutionTime());
+    }
 }

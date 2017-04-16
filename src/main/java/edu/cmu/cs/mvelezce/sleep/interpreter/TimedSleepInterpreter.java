@@ -40,12 +40,12 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
     public Void visitTimedStatement(TimedStatement timedStatement) {
         SleepRegion hold = new SleepRegion(timedStatement.getStatements());
         Region region = Regions.getRegion(hold);
-        region.startTime(this.totalExecutionTime);
+        region.enter(this.totalExecutionTime);
 
         int time = totalExecutionTime;
         timedStatement.getStatements().accept(this);
 
-        region.endTime(this.totalExecutionTime);
+        region.exit(this.totalExecutionTime);
         this.regionToTime.put(timedStatement.getStatements(), this.totalExecutionTime - time);
 
         return null;
@@ -53,7 +53,9 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
 
     @Override
     public Void visitTimedProgram(TimedProgram timedProgram) {
-        Regions.getProgram().startTime(this.totalExecutionTime);
+        Region program = Regions.getProgram();
+        Regions.setCurrentExecutingRegion(program);
+        program.startTime(this.totalExecutionTime);
 
         int time = totalExecutionTime;
         timedProgram.getStatements().accept(this);

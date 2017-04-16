@@ -15,6 +15,7 @@ import java.util.List;
 public class SleepRegion extends Region {
     private Statement statement;
 
+
     public SleepRegion(Statement statement) {
         this.statement = statement;
     }
@@ -30,6 +31,7 @@ public class SleepRegion extends Region {
         SleepRegion that = (SleepRegion) o;
         if(statement.equals(that.statement)) return true;
 
+        // TODO make this less awful
         if(statement instanceof IfStatement && that.statement instanceof IfStatement) {
             IfStatement thisIfStatement = ((IfStatement) statement);
             IfStatement thatIfStatement = ((IfStatement) that.statement);

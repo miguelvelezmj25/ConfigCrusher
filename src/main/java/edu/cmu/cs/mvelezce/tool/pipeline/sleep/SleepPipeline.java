@@ -72,7 +72,7 @@ public class SleepPipeline extends Pipeline {
 
         // Instrumentation (Language dependent)
         program = SleepPipeline.instrumentRelevantRegions(program);
-        Statement timedProgram = SleepPipeline.instrumentProgram(program);
+        TimedProgram timedProgram = SleepPipeline.instrumentProgram(program);
         Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(timedProgram, configurationsToExecute);
 
         // Performance Model (Language independent)
@@ -173,14 +173,15 @@ public class SleepPipeline extends Pipeline {
 //        return configurationToPerformance;
 //    }
 
-    public static Set<PerformanceEntry> measureConfigurationPerformance(Statement ast, Set<Set<String>> configurationsToExecute) {
+    public static Set<PerformanceEntry> measureConfigurationPerformance(TimedProgram ttimedProgram, Set<Set<String>> configurationsToExecute) {
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 
         for(Set<String> configuration : configurationsToExecute) {
             // TODO use TimedVisitor type, but then you have to add evaluate method in interface
             Regions.resetRegions();
-            TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ast);
+            TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ttimedProgram);
             interpreter.evaluate(configuration);
+            System.out.println();
             configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }

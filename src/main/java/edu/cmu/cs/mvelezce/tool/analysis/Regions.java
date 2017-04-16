@@ -9,6 +9,7 @@ import java.util.Set;
 public class Regions {
     private static Region program = null;
     private static Set<Region> regions = new HashSet<>();
+    private static Region currentExecutingRegion = null;
 
     public static void addProgram(Region program) {
         if(program == null) {
@@ -44,7 +45,6 @@ public class Regions {
         }
 
         for(Region entry : Regions.regions) {
-            // TODO check equals
             if(entry.equals(region)) {
                 return entry;
             }
@@ -59,12 +59,6 @@ public class Regions {
         }
     }
 
-    public static Region getProgram() { return Regions.program; }
-
-    public static Set<Region> getRegions() {
-        return Regions.regions;
-    }
-
     public static void removeAllRegions() {
         Regions.regions = new HashSet<>();
     }
@@ -73,4 +67,21 @@ public class Regions {
         Regions.removeProgram();
         Regions.removeAllRegions();
     }
+
+    public static void setCurrentExecutingRegion(Region region) {
+        if(region == null) {
+            throw new IllegalArgumentException("The region cannot be null");
+        }
+
+        System.out.println("Executing " + region);
+        Regions.currentExecutingRegion = region;
+    }
+
+    public static Region getProgram() { return Regions.program; }
+
+    public static Set<Region> getRegions() {
+        return Regions.regions;
+    }
+
+    public static Region getCurrentExecutingRegion() { return Regions.currentExecutingRegion; }
 }

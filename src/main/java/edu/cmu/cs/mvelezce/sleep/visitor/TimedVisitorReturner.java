@@ -23,7 +23,7 @@ public class TimedVisitorReturner extends ReturnerVisitor implements TimedVisito
     @Override
     public Void visitTimedProgram(TimedProgram timedProgram) {
         // TODO
-        return null;
+        throw new IllegalArgumentException("WHAT IS HAPPENING");
     }
 
 }

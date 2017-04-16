@@ -1,14 +1,20 @@
 package edu.cmu.cs.mvelezce.tool.analysis;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by miguelvelez on 4/7/17.
  */
 public class Region implements Cloneable {
+
     private String regionPackage;
     private String regionClass;
     private String regionMethod;
     private long startTime;
     private long endTime;
+    private Set<Region> innerRegions;
+    private Region previousExecutingRegion;
 
     public Region(String regionPackage, String regionClass, String regionMethod) {
         this.regionPackage = regionPackage;
@@ -16,6 +22,44 @@ public class Region implements Cloneable {
         this.regionMethod = regionMethod;
         this.startTime = 0;
         this.endTime = 0;
+        this.innerRegions = new HashSet<>();
+        this.previousExecutingRegion = null;
+    }
+
+    public void enter() {
+        this.previousExecutingRegion = Regions.getCurrentExecutingRegion();
+        this.previousExecutingRegion.addInnerRegion(this);
+        Regions.setCurrentExecutingRegion(this);
+
+        this.startTime();
+    }
+
+    public void enter(long startTime) {
+        this.previousExecutingRegion = Regions.getCurrentExecutingRegion();
+        this.previousExecutingRegion.addInnerRegion(this);
+        Regions.setCurrentExecutingRegion(this);
+
+        this.startTime(startTime);
+    }
+
+    public void exit() {
+        Regions.setCurrentExecutingRegion(this.previousExecutingRegion);
+
+        this.endTime();
+    }
+
+    public void exit(long endTime) {
+        Regions.setCurrentExecutingRegion(this.previousExecutingRegion);
+
+        this.endTime(endTime);
+    }
+
+    public void addInnerRegion(Region region) {
+        if(region == null) {
+            throw new IllegalArgumentException("The region cannot be null");
+        }
+
+        this.innerRegions.add(region);
     }
 
     public Region(String regionClass, String regionMethod) {
@@ -47,6 +91,9 @@ public class Region implements Cloneable {
         this.endTime = endTime;
     }
 
+    /**
+     * Mostly for testing
+     */
     public void resetExecution() {
         this.startTime = 0;
         this.endTime = 0;
@@ -117,4 +164,6 @@ public class Region implements Cloneable {
     public String getRegionClass() { return this.regionClass; }
 
     public String getRegionMethod() { return this.regionMethod; }
+
+    public Set<Region> getInnerRegions() { return this.innerRegions; }
 }

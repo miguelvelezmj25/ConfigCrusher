@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.BlockStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.sleep.statements.TimedProgram;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
@@ -131,7 +132,9 @@ public class SleepPipelineTest {
 
         // Program
         Program program = new Program(new BlockStatement(statementBlock));
-        Regions.addProgram(new SleepRegion(program));
+        Region programRegion = new SleepRegion(program);
+        Regions.addProgram(programRegion);
+        TimedProgram timedProgram = new TimedProgram(program);
 
         // Configurations
         Set<Set<String>> optionsSet = PipelineTest.getOptionsSet("AB");
@@ -142,7 +145,6 @@ public class SleepPipelineTest {
 
         // Empty configuration
         Set<String> configuration = new HashSet<>();
-        Region programRegion = new SleepRegion(new SleepStatement(new ConstantIntExpression(0)));
         PerformanceEntry performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
@@ -171,7 +173,7 @@ public class SleepPipelineTest {
         measuredPerformance.add(performanceEntry);
 
         // Assert
-        Set<PerformanceEntry> results = SleepPipeline.measureConfigurationPerformance(program, configurationsToExecute);
+        Set<PerformanceEntry> results = SleepPipeline.measureConfigurationPerformance(timedProgram, configurationsToExecute);
         Assert.assertEquals(measuredPerformance, results);
         SleepPipelineTest.checkExecutionTimes(measuredPerformance, results);
     }
@@ -194,7 +196,9 @@ public class SleepPipelineTest {
 
         // Program
         Program program = new Program(new BlockStatement(statementBlock));
-        Regions.addProgram(new SleepRegion(program));
+        Region programRegion = new SleepRegion(program);
+        Regions.addProgram(programRegion);
+        TimedProgram timedProgram = new TimedProgram(program);
 
         // Configurations
         Set<Set<String>> optionsSet = PipelineTest.getOptionsSet("AB");
@@ -205,7 +209,6 @@ public class SleepPipelineTest {
 
         // Empty configuration
         Set<String> configuration = new HashSet<>();
-        Region programRegion = new SleepRegion(new SleepStatement(new ConstantIntExpression(0)));
         PerformanceEntry performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
@@ -235,7 +238,7 @@ public class SleepPipelineTest {
         measuredPerformance.add(performanceEntry);
 
         // Assert
-        Set<PerformanceEntry> results = SleepPipeline.measureConfigurationPerformance(program, configurationsToExecute);
+        Set<PerformanceEntry> results = SleepPipeline.measureConfigurationPerformance(timedProgram, configurationsToExecute);
         Assert.assertEquals(measuredPerformance, results);
         SleepPipelineTest.checkExecutionTimes(measuredPerformance, results);
     }
@@ -791,7 +794,7 @@ public class SleepPipelineTest {
 //        configuration.add("B");
 //        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
 //    }
-//
+
 //    @Test
 //    public void testBuildPerformanceModel3() throws Exception {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program3");

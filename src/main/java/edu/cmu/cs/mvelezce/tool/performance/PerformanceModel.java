@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
+import org.apache.commons.collections4.map.HashedMap;
+
 import java.util.*;
 
 // TODO time can be in seconds, milliseonds, minutes,.... That affects the type of the block.
@@ -8,11 +10,11 @@ import java.util.*;
  */
 public class PerformanceModel {
     private long baseTime;
-    private Map<Set<String>, Map<Set<String>, Integer>> optionToBlock;
+    private Map<Set<String>, Map<Set<String>, Integer>> regionToInfluenceTable;
 
     public PerformanceModel(long baseTime, List<Map<Set<String>, Integer>> blocks) {
         this.baseTime = baseTime;
-        this.optionToBlock = new HashMap<>();
+        this.regionToInfluenceTable = new HashMap<>();
 
         for(Map<Set<String>, Integer> block : blocks) {
             Set<String> relevantOptions = new HashSet<>();
@@ -21,55 +23,109 @@ public class PerformanceModel {
                 relevantOptions.addAll(configuration);
             }
 
-            this.optionToBlock.put(relevantOptions, block);
+            this.regionToInfluenceTable.put(relevantOptions, this.calculateConfigurationsInfluence(block));
         }
     }
 
     public long evaluate(Set<String> configuration) {
         long performance = this.baseTime;
 
-        for(Map.Entry<Set<String>, Map<Set<String>, Integer>> entry : this.optionToBlock.entrySet()) {
-            Set<String> configurationValueOfOptionInBlock = new HashSet<>(configuration);
-            configurationValueOfOptionInBlock.retainAll(entry.getKey());
+        for(Map.Entry<Set<String>, Map<Set<String>, Integer>> region : this.regionToInfluenceTable.entrySet()) {
+            for(Map.Entry<Set<String>, Integer> entry : region.getValue().entrySet()) {
+                Set<String> configurationValueOfOptionInBlock = new HashSet<>(entry.getKey());
+                configurationValueOfOptionInBlock.retainAll(configuration);
 
-            performance += entry.getValue().get(configurationValueOfOptionInBlock);
+                if(entry.getKey().equals(configurationValueOfOptionInBlock)) {
+                    performance += entry.getValue();
+                }
+            }
         }
 
         return performance;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder performanceModel = new StringBuilder("T = ");
+    public static Map<Set<String>, Integer> calculateConfigurationsInfluence(Map<Set<String>, Integer> regionTable) {
+        Map<Set<String>, Integer> configurationToInfluence = new HashedMap<>();
 
-        if(this.baseTime != 0) {
-            performanceModel.append(this.baseTime);
+        int numberOfOptions = (int) Math.sqrt(regionTable.size());
+        Set<String> regionOptions = new HashSet<>();
+
+        for(Map.Entry<Set<String>, Integer> entry : regionTable.entrySet()) {
+            if(entry.getKey().size() == numberOfOptions) {
+                regionOptions.addAll(entry.getKey());
+            }
         }
 
-        for(Map<Set<String>, Integer> block : this.optionToBlock.values()) {
-            performanceModel.append(" + (");
-            int count = 0;
+        PerformanceModel.calculateConfigurationInfluence(regionOptions, regionTable, configurationToInfluence);
 
-            for(Map.Entry<Set<String>, Integer> entry : block.entrySet()) {
-                if(entry.getValue() != 0) {
-                    if(count == 0) {
-                        performanceModel.append("");
+        return configurationToInfluence;
+    }
+
+    public static int calculateConfigurationInfluence(Set<String> longestConfiguration, Map<Set<String>, Integer> configurationsToPerformance, Map<Set<String>, Integer> memoizationStore) {
+        if(!memoizationStore.containsKey(longestConfiguration)) {
+            int currentLength = longestConfiguration.size();
+            int influence = configurationsToPerformance.get(longestConfiguration);
+
+            if(currentLength > 0) {
+                influence = configurationsToPerformance.get(longestConfiguration);
+
+                for(Map.Entry<Set<String>, Integer> entry : configurationsToPerformance.entrySet()) {
+                    Set<String> configuration = entry.getKey();
+                    Set<String> intersectionWithLongestConfiguration = new HashSet<>(longestConfiguration);
+                    intersectionWithLongestConfiguration.retainAll(configuration);
+
+                    if(configuration.size() < currentLength && intersectionWithLongestConfiguration.equals(configuration)/*!intersectionWithLongestConfiguration.isEmpty()*/) {
+                        influence -= PerformanceModel.calculateConfigurationInfluence(entry.getKey(), configurationsToPerformance, memoizationStore);
                     }
-                    else {
-                        performanceModel.append(" v + ");
-                    }
-
-                    performanceModel.append("").append(entry.getValue());
-
-                    for(String configuration : entry.getKey()) {
-                        performanceModel.append(configuration);
-                    }
-
-                    count++;
                 }
             }
 
-            performanceModel.append(")");
+            memoizationStore.put(longestConfiguration, influence);
+        }
+
+        return memoizationStore.get(longestConfiguration);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder performanceModel = new StringBuilder("T =");
+
+//        if(this.baseTime != 0) {
+            performanceModel.append(" ");
+            performanceModel.append(this.baseTime);
+//        }
+
+        for(Map<Set<String>, Integer> region : this.regionToInfluenceTable.values()) {
+            Set<String> regionOptions = new HashSet<>();
+
+            for(Set<String> configurations : region.keySet()) {
+                regionOptions.addAll(configurations);
+            }
+
+            for(int i = 0; i <= regionOptions.size(); i++) {
+                for(Map.Entry<Set<String>, Integer> entry : region.entrySet()) {
+                    if(entry.getKey().size() != i) {
+                        continue;
+                    }
+
+                    if(entry.getValue() == 0) {
+                        continue;
+                    }
+
+                    if(entry.getValue() > 0) {
+                        performanceModel.append(" + ");
+                    }
+                    else {
+                        performanceModel.append(" - ");
+                    }
+
+                    performanceModel.append(Math.abs(entry.getValue()));
+
+                    for(String option : entry.getKey()) {
+                        performanceModel.append(option);
+                    }
+                }
+            }
         }
 
         return performanceModel.toString();

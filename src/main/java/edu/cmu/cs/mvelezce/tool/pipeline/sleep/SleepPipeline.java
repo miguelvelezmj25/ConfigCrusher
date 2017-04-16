@@ -39,6 +39,16 @@ public class SleepPipeline extends Pipeline {
         }
     };
 
+    public static boolean sameRelSta(IfStatement ifStatement1, IfStatement ifStatement2) {
+        if(ifStatement1.equals(ifStatement2)) {
+            return true;
+        }
+
+        System.out.println(ifStatement1.getCondition().equals(ifStatement2.getCondition()));
+
+        return false;
+    }
+
     public static PerformanceModel buildPerformanceModel(String programFile) {
         // Reset
         Regions.reset();
@@ -61,7 +71,7 @@ public class SleepPipeline extends Pipeline {
         Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(relevantOptions);
 
         // Instrumentation (Language dependent)
-        program = SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions.keySet());
+        program = SleepPipeline.instrumentRelevantRegions(program);
         Statement timedProgram = SleepPipeline.instrumentProgram(program);
         Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(timedProgram, configurationsToExecute);
 
@@ -69,8 +79,9 @@ public class SleepPipeline extends Pipeline {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<SleepRegion, Set<ConfigurationExpression>> entry : relevantRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey());
             Set<String> options = SleepPipeline.sleepConfigurationSetToStringSet(entry.getValue());
-            regionsToOptions.put(entry.getKey(), options);
+            regionsToOptions.put(region, options);
         }
 
         return SleepPipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
@@ -203,14 +214,13 @@ public class SleepPipeline extends Pipeline {
         return relevantRegionToOptions;
     }
 
-    public static Program instrumentRelevantRegions(Program program, Set<SleepRegion> relevantRegions) {
-        Set<Statement> relevantStatements = new HashSet<>();
-
-        for(SleepRegion regionSleep : relevantRegions) {
-            relevantStatements.add(regionSleep.getStatement());
-        }
-
-        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantStatements);
+    /**
+     * We do not pass the regions since that is already stored in Regions.
+     * @param program
+     * @return
+     */
+    public static Program instrumentRelevantRegions(Program program) {
+        AddTimedVisitor addTimedVisitor = new AddTimedVisitor();
         return (Program) program.accept(addTimedVisitor);
     }
 
@@ -321,34 +331,34 @@ public class SleepPipeline extends Pipeline {
      * Concrete visitor that replaces statements with TimedStatement for measuring time
      */
     private static class AddTimedVisitor extends ReplacerVisitor {
-        private Set<Statement> relevantStatements;
-
         /**
          * Instantiate a {@code AddTimedVisitor}.
-         *
-         * @param relevantStatements
          */
-        public AddTimedVisitor(Set<Statement> relevantStatements) {
-            this.relevantStatements = relevantStatements;
+        public AddTimedVisitor() {
+            ;
         }
 
         /**
          * Replace the thenBlock of a IfStatement if the entire statement is relevant.
          *
-         * @param statementIf
+         * @param ifStatement
          * @return
          */ // TODO check this since this is where we might need to work on to get inner regions
         @Override
-        public Statement visitIfStatement(IfStatement statementIf) {
-            if(this.relevantStatements.contains(statementIf)) {
-//                TimedStatement timedThenBlock = new TimedStatement(statementIf.getThenBlock());
-//                TimedStatement timedThenBlock = new TimedStatement(statementIf);
+        public Statement visitIfStatement(IfStatement ifStatement) {
+            Statement visitedIfStatement = super.visitIfStatement(ifStatement);
 
-                return new TimedStatement(statementIf);
-//                return new IfStatement(statementIf.getCondition(), timedThenBlock);
+            Region region = new SleepRegion(ifStatement);
+            region = Regions.getRegion(region);
+
+            if(region != null) {
+                Regions.removeRegion(region);
+                region = new SleepRegion(visitedIfStatement);
+                Regions.addRegion(region);
+                return new TimedStatement(visitedIfStatement);
             }
 
-            return super.visitIfStatement(statementIf);
+            return visitedIfStatement;
         }
 
         /**
@@ -359,11 +369,19 @@ public class SleepPipeline extends Pipeline {
          */
         @Override
         public Statement visitSleepStatement(SleepStatement sleepStatement) {
-            if(relevantStatements.contains(sleepStatement)) {
-                return new TimedStatement(sleepStatement);
+            Statement visitedSleepStatement = super.visitSleepStatement(sleepStatement);
+
+            Region region = new SleepRegion(sleepStatement);
+            region = Regions.getRegion(region);
+
+            if(region != null) {
+                Regions.removeRegion(region);
+                region = new SleepRegion(visitedSleepStatement);
+                Regions.addRegion(region);
+                return new TimedStatement(visitedSleepStatement);
             }
 
-            return sleepStatement;
+            return super.visitSleepStatement(sleepStatement);
         }
 
     }

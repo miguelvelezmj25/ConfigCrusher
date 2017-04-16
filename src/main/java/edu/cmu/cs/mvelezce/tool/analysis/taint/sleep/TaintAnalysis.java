@@ -30,7 +30,6 @@ public class TaintAnalysis {
             throw new IllegalArgumentException("The entry point of the CFG has more than 1 edge");
         }
 
-
         Queue<BasicBlock> worklist = new LinkedList<>();
         worklist.add(entry.get(0));
 
@@ -58,7 +57,7 @@ public class TaintAnalysis {
         while(!worklist.isEmpty()) {
             BasicBlock instruction = worklist.remove();
             Set<PossibleTaint> possibleTaintsBefore = instructionsToPossibleTaints.get(instruction);
-            Set<PossibleTaint> possibleTaintsAfter = transfer(possibleTaintsBefore, instruction);
+            Set<PossibleTaint> possibleTaintsAfter = TaintAnalysis.transfer(possibleTaintsBefore, instruction);
 //            instructionsToPossibleTaints.put(instruction, possibleTaintsAfter);
             // TODO this only works because the we do not currently support cases were the state changes
             // in the last instruction of a block that we need to time ie sleep(x=A)

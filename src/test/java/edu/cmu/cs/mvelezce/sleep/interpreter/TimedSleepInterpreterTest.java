@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.sleep.interpreter;
 
 import edu.cmu.cs.mvelezce.sleep.Helper;
 import edu.cmu.cs.mvelezce.sleep.ast.Program;
-import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.ast.value.IntValue;
 import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
 import edu.cmu.cs.mvelezce.sleep.parser.Parser;

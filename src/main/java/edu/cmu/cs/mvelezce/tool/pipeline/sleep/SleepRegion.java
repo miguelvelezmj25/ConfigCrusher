@@ -1,7 +1,13 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.sleep;
 
+import edu.cmu.cs.mvelezce.sleep.ast.statement.BlockStatement;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by mvelezce on 4/11/17.
@@ -22,8 +28,50 @@ public class SleepRegion extends Region {
         if (!super.equals(o)) return false;
 
         SleepRegion that = (SleepRegion) o;
+        if(statement.equals(that.statement)) return true;
 
-        return statement.equals(that.statement);
+        if(statement instanceof IfStatement && that.statement instanceof IfStatement) {
+            IfStatement thisIfStatement = ((IfStatement) statement);
+            IfStatement thatIfStatement = ((IfStatement) that.statement);
+
+            if(!thisIfStatement.getCondition().equals(thatIfStatement.getCondition())) return false;
+
+            Statement thisThenBlock = thisIfStatement.getThenBlock();
+            Statement thatThenBlock = thatIfStatement.getThenBlock();
+
+            if(!(thisThenBlock instanceof BlockStatement) && !(thatThenBlock instanceof BlockStatement)) {
+                return thisThenBlock.equals(thatThenBlock);
+            }
+
+            if(thisThenBlock instanceof BlockStatement && !(thatThenBlock instanceof BlockStatement)) return false;
+
+            if(!(thisThenBlock instanceof BlockStatement) && thatThenBlock instanceof BlockStatement) return false;
+
+            List<Statement> thisThenBlockStatements = ((BlockStatement) thisThenBlock).getStatements();
+            List<Statement> thatThenBlockStatements = ((BlockStatement) thatThenBlock).getStatements();
+
+            Iterator<Statement> thisThenBlockStatementsIterator = thisThenBlockStatements.iterator();
+            Iterator<Statement> thatThenBlockStatementsIterator = thatThenBlockStatements.iterator();
+
+            while(thisThenBlockStatementsIterator.hasNext() && thatThenBlockStatementsIterator.hasNext()) {
+                Statement thisStatement = thisThenBlockStatementsIterator.next();
+                Statement thatStatement = thatThenBlockStatementsIterator.next();
+
+                if(thisStatement instanceof TimedStatement) {
+                    thisStatement = ((TimedStatement) thisStatement).getStatements();
+                }
+
+                if(thatStatement instanceof TimedStatement) {
+                    thatStatement = ((TimedStatement) thatStatement).getStatements();
+                }
+
+                if(!thisStatement.equals(thatStatement)) return false;
+            }
+
+            if(!thisThenBlockStatementsIterator.hasNext() && !thatThenBlockStatementsIterator.hasNext()) return true;
+        }
+
+        return false;
     }
 
     @Override

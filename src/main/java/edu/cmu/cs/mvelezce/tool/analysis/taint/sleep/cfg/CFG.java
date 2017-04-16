@@ -15,7 +15,6 @@ public class CFG {
     private BasicBlock exit;
     private Map<BasicBlock, List<BasicBlock>> edges;
 
-
     /**
      * Initializes a {@code CFG}.
      */

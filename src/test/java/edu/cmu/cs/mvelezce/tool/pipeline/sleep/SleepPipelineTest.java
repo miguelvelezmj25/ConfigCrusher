@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.BlockStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
+import edu.cmu.cs.mvelezce.sleep.interpreter.TimedSleepInterpreterTest;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedProgram;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
 import edu.cmu.cs.mvelezce.tool.Helper;
@@ -21,14 +22,13 @@ import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
  * Created by miguelvelez on 2/11/17.
  */
 public class SleepPipelineTest {
-
-    public static final String PROGRAMS_PATH = "src/main/java/edu/cmu/cs/mvelezce/sleep/programs/";
 
     public static void checkExecutionTimes(Set<PerformanceEntry> expectedPerformances, Set<PerformanceEntry> actualPerformances) {
         for(PerformanceEntry expected : expectedPerformances) {
@@ -343,7 +343,7 @@ public class SleepPipelineTest {
 //    }
 //
 //    @Test
-//    public void testBuildPerformanceTable1() throws Exception {
+//    public void testBuildPerformanceTable1() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program1");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -371,7 +371,7 @@ public class SleepPipelineTest {
 //    }
 //
 ////    @Test
-////    public void testBuildPerformanceTable2() throws Exception {
+////    public void testBuildPerformanceTable2() {
 ////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program2");
 ////
 ////        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -400,7 +400,7 @@ public class SleepPipelineTest {
 ////    }
 //
 //    @Test
-//    public void testBuildPerformanceTable3() throws Exception {
+//    public void testBuildPerformanceTable3() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program3");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -428,7 +428,7 @@ public class SleepPipelineTest {
 //    }
 //
 //    @Test
-//    public void testBuildPerformanceTable4() throws Exception {
+//    public void testBuildPerformanceTable4() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program4");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -456,7 +456,7 @@ public class SleepPipelineTest {
 //    }
 //
 //    @Test
-//    public void testBuildPerformanceTable5() throws Exception {
+//    public void testBuildPerformanceTable5() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program5");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -484,7 +484,7 @@ public class SleepPipelineTest {
 //    }
 //
 ////    @Test
-////    public void testBuildPerformanceTable6() throws Exception {
+////    public void testBuildPerformanceTable6() {
 ////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program6");
 ////
 ////        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -533,7 +533,7 @@ public class SleepPipelineTest {
 ////    }
 //
 //    @Test
-//    public void testBuildPerformanceTable7() throws Exception {
+//    public void testBuildPerformanceTable7() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program7");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -627,7 +627,7 @@ public class SleepPipelineTest {
 //    }
 //
 //    @Test
-//    public void testBuildPerformanceTable8() throws Exception {
+//    public void testBuildPerformanceTable8() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program8");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -676,7 +676,7 @@ public class SleepPipelineTest {
 //    }
 //
 //    @Test
-//    public void testBuildPerformanceTable9() throws Exception {
+//    public void testBuildPerformanceTable9() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program9");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -694,7 +694,7 @@ public class SleepPipelineTest {
 //    }
 //
 //    @Test
-//    public void testBuildPerformanceTable10() throws Exception {
+//    public void testBuildPerformanceTable10() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program10");
 //
 //        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -743,8 +743,8 @@ public class SleepPipelineTest {
 //    }
 //
     @Test
-    public void testBuildPerformanceModel1() throws Exception {
-        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program1");
+    public void testBuildPerformanceModel1() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program1");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
         int performance = 3;
@@ -769,8 +769,8 @@ public class SleepPipelineTest {
     }
 
 //    @Test
-//    public void testBuildPerformanceModel2() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program5");
+//    public void testBuildPerformanceModel2() throws FileNotFoundException {
+//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program12");
 //        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
 //
@@ -778,13 +778,13 @@ public class SleepPipelineTest {
 //        Set<String> configuration = new HashSet<>();
 //        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
 //
-//        performance = 6;
+//        performance = 4;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
 //        configuration.add("B");
 //        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
 //
-//        performance = 4;
+//        performance = 3;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
 //        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
@@ -796,7 +796,7 @@ public class SleepPipelineTest {
 //    }
 
 //    @Test
-//    public void testBuildPerformanceModel3() throws Exception {
+//    public void testBuildPerformanceModel3() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program3");
 //        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 ////        System.out.println(performanceModel);
@@ -823,7 +823,7 @@ public class SleepPipelineTest {
 //    }
 //
 //    @Test
-//    public void testBuildPerformanceModel4() throws Exception {
+//    public void testBuildPerformanceModel4() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program4");
 //        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //
@@ -849,7 +849,7 @@ public class SleepPipelineTest {
 //    }
 //
 ////    @Test
-////    public void testBuildPerformanceModel5() throws Exception {
+////    public void testBuildPerformanceModel5() {
 ////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program5");
 ////        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 ////        System.out.println(performanceModel);
@@ -876,7 +876,7 @@ public class SleepPipelineTest {
 ////    }
 ////
 ////    @Test
-////    public void testBuildPerformanceModel6() throws Exception {
+////    public void testBuildPerformanceModel6() {
 ////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program6");
 ////
 ////        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
@@ -925,7 +925,7 @@ public class SleepPipelineTest {
 ////    }
 //
 //    @Test
-//    public void testBuildPerformanceModel7() throws Exception {
+//    public void testBuildPerformanceModel7() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program7");
 //        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 ////        System.out.println(performanceModel);
@@ -1028,7 +1028,7 @@ public class SleepPipelineTest {
 //    }
 //
 //    @Test
-//    public void testBuildPerformanceModel8() throws Exception {
+//    public void testBuildPerformanceModel8() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program8");
 //        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 ////        System.out.println(performanceModel);
@@ -1079,7 +1079,7 @@ public class SleepPipelineTest {
 //    }
 //
 ////    @Test
-////    public void testBuildPerformanceModel9() throws Exception {
+////    public void testBuildPerformanceModel9() {
 ////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program9");
 ////        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 ////        System.out.println(performanceModel);
@@ -1130,7 +1130,7 @@ public class SleepPipelineTest {
 ////    }
 //
 //    @Test
-//    public void testBuildPerformanceModel10() throws Exception {
+//    public void testBuildPerformanceModel10() {
 //        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program10");
 //        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 ////        System.out.println(performanceModel);

@@ -12,7 +12,7 @@ import java.util.Set;
 public class HelperTest {
 
     @Test
-    public void getConfigurations1() throws Exception {
+    public void getConfigurations1() {
         Set<String> parameters = new HashSet<>();
         parameters.add("A");
         parameters.add("B");

@@ -7,6 +7,7 @@ import org.apache.commons.collections4.map.HashedMap;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import java.util.Map;
 public class ClassTransformerRegionTimerTest {
 
     @Test
-    public void transform1() throws Exception {
+    public void transform1() throws IOException {
         int methodNumber = 4;
         Region region = new Region(ClassTransformerBaseTest.PACKAGE, ClassTransformerBaseTest.CLASS, ClassTransformerBaseTest.METHOD + methodNumber);
         Map<String, Region> methodToRegionToInstrument = new HashedMap<>();

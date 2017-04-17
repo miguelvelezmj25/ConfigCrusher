@@ -5,6 +5,7 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.Set;
 public class ClassTransformerTimerTest {
 
     @Test
-    public void testTransform2() throws Exception {
+    public void testTransform2() throws IOException {
         int methodNumber = 2;
         Set<String> methods = new HashSet<>();
         methods.add(ClassTransformerBaseTest.METHOD + methodNumber);

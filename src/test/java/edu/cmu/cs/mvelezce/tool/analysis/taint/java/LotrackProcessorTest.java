@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public class LotrackProcessorTest {
     @Test
-    public void filterRegionsNoOptions1() throws Exception {
+    public void filterRegionsNoOptions1() {
         Region region = new Region("a", "b", "c");
         Set<String> options = new HashSet<>();
         Map<Region, Set<String>> regionToOptions = new HashMap<>();
@@ -25,7 +25,7 @@ public class LotrackProcessorTest {
     }
 
     @Test
-    public void filterRegionsNoOptions2() throws Exception {
+    public void filterRegionsNoOptions2() {
         Region region = new Region("a", "b", "c");
         Set<String> options = new HashSet<>();
         Map<Region, Set<String>> regionToOptions = new HashMap<>();
@@ -40,7 +40,7 @@ public class LotrackProcessorTest {
     }
 
     @Test
-    public void getRegionsToOptions1() throws Exception {
+    public void getRegionsToOptions1() throws NoSuchFieldException {
         Map<Region, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
 //        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
 //            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
@@ -49,7 +49,7 @@ public class LotrackProcessorTest {
     }
 
     @Test
-    public void getRegionsToOptions2() throws Exception {
+    public void getRegionsToOptions2() throws NoSuchFieldException {
         Map<Region, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.LANGUAGETOOL_PROGRAM);
 //        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
 //            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
@@ -58,7 +58,7 @@ public class LotrackProcessorTest {
     }
 
     @Test
-    public void filterBooleans() throws Exception {
+    public void filterBooleans() {
         String TRUE = "true";
         String FALSE = "false";
         Region region = new Region("a", "b", "c");

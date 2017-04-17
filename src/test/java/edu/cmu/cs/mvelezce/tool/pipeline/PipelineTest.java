@@ -159,26 +159,26 @@ public class PipelineTest {
     }
 
     @Test
-    public void filterOptions1() throws Exception {
+    public void filterOptions1() {
         Set<Set<String>> set = PipelineTest.getOptionsSet("AB, AC");
         Assert.assertEquals(set, edu.cmu.cs.mvelezce.tool.pipeline.Pipeline.filterOptions(set));
     }
 
     @Test
-    public void filterOptions2() throws Exception {
+    public void filterOptions2() {
         Set<Set<String>> set = PipelineTest.getOptionsSet("ABC, ACD");
         Assert.assertEquals(set, edu.cmu.cs.mvelezce.tool.pipeline.Pipeline.filterOptions(set));
     }
 
     @Test
-    public void filterOptions3() throws Exception {
+    public void filterOptions3() {
         Set<Set<String>> set = PipelineTest.getOptionsSet("AB, ABC");
         Set<Set<String>> result = PipelineTest.getOptionsSet("ABC");
         Assert.assertEquals(result, edu.cmu.cs.mvelezce.tool.pipeline.Pipeline.filterOptions(set));
     }
 
     @Test
-    public void filterOptions4() throws Exception {
+    public void filterOptions4() {
         Set<Set<String>> set = PipelineTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
         Set<Set<String>> result = PipelineTest.getOptionsSet("ABC, BCD, DEF");
         Assert.assertEquals(result, edu.cmu.cs.mvelezce.tool.pipeline.Pipeline.filterOptions(set));

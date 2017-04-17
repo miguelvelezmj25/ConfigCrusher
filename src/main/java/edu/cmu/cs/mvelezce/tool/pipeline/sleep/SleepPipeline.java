@@ -56,9 +56,18 @@ public class SleepPipeline extends Pipeline {
         Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
 
         // Configuration compression (Language independent)
+        // TODO add regions dependencies
         Set<Set<ConfigurationExpression>> relevantSleepOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> relevantOptions = SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantSleepOptions);
         Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(relevantOptions);
+
+//        Set<String> h = new HashSet<>();
+//        h.add("A");
+//        configurationsToExecute.add(h);
+//
+//        h = new HashSet<>();
+//        h.add("B");
+//        configurationsToExecute.add(h);
 
         // Instrumentation (Language dependent)
         program = SleepPipeline.instrumentRelevantRegions(program);

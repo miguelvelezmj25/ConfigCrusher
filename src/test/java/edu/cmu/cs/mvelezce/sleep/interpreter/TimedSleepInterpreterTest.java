@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.sleep.parser.Parser;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class TimedSleepInterpreterTest {
     public static final String PROGRAMS_PATH = "src/main/java/edu/cmu/cs/mvelezce/sleep/programs/";
 
     @Test
-    public void test1() throws Exception {
+    public void test1() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program1");
 
@@ -49,7 +50,7 @@ public class TimedSleepInterpreterTest {
     }
 
     @Test
-    public void test2() throws Exception {
+    public void test2() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program2");
 
@@ -76,7 +77,7 @@ public class TimedSleepInterpreterTest {
     }
 
     @Test
-    public void test3() throws Exception {
+    public void test3() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program3");
 
@@ -104,7 +105,7 @@ public class TimedSleepInterpreterTest {
     }
 
     @Test
-    public void test4() throws Exception {
+    public void test4() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program4");
 
@@ -132,7 +133,7 @@ public class TimedSleepInterpreterTest {
     }
 
     @Test
-    public void test5() throws Exception {
+    public void test5() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program5");
 
@@ -160,7 +161,7 @@ public class TimedSleepInterpreterTest {
     }
 
     @Test
-    public void test6() throws Exception {
+    public void test6() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program6");
 
@@ -191,7 +192,7 @@ public class TimedSleepInterpreterTest {
     }
 
     @Test
-    public void test7() throws Exception {
+    public void test7() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program7");
 
@@ -222,7 +223,7 @@ public class TimedSleepInterpreterTest {
     }
 
     @Test
-    public void test8() throws Exception {
+    public void test8() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program8");
 
@@ -249,7 +250,7 @@ public class TimedSleepInterpreterTest {
     }
 
     @Test
-    public void test9() throws Exception {
+    public void test9() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program9");
 
@@ -275,7 +276,7 @@ public class TimedSleepInterpreterTest {
     }
 
     @Test
-    public void test10() throws Exception {
+    public void test10() throws FileNotFoundException {
         // Compile
         String programFile = Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program10");
 

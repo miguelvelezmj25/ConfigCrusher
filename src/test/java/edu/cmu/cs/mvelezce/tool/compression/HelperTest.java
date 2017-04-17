@@ -8,7 +8,7 @@ import org.junit.Test;
 public class HelperTest {
 
     @Test
-    public void testIncling() throws Exception {
+    public void testIncling() throws InterruptedException {
         Helper.incling();
     }
 

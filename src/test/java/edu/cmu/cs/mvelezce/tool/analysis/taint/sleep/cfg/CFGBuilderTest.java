@@ -6,7 +6,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg;
 public class CFGBuilderTest {
 
 //    @Test
-//    public void test1() throws Exception {
+//    public void test1() {
 //        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program1");
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
@@ -80,7 +80,7 @@ public class CFGBuilderTest {
 //    }
 //
 //    @Test
-//    public void test2() throws Exception {
+//    public void test2() {
 //        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program2");
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
@@ -146,7 +146,7 @@ public class CFGBuilderTest {
 //    }
 //
 //    @Test
-//    public void test3() throws Exception {
+//    public void test3() {
 //        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program3");
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
@@ -215,7 +215,7 @@ public class CFGBuilderTest {
 //    }
 //
 //    @Test
-//    public void test4() throws Exception {
+//    public void test4() {
 //        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program4");
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);

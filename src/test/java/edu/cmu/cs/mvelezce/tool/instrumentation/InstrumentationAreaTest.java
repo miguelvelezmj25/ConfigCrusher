@@ -4,6 +4,7 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -12,14 +13,14 @@ import java.util.List;
 public class InstrumentationAreaTest {
 
     @Test
-    public void testReadJar() throws Exception {
+    public void testReadJar() throws IOException {
         String jarName = "org.sat4j.core.jar";
         List<String> classFiles = InstrumentationArea.readJar(jarName);
         Assert.assertFalse(classFiles.isEmpty());
     }
 
     @Test
-    public void testReadFile() throws Exception {
+    public void testReadFile() throws IOException {
         String fileName = "edu/cmu/cs/mvelezce/tool/instrumentation/DummyClass";
         List<MethodNode> methods = InstrumentationArea.readFile(fileName);
         Assert.assertFalse(methods.isEmpty());

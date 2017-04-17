@@ -1,11 +1,18 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.sleep;
 
+import edu.cmu.cs.mvelezce.sleep.ast.Program;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.*;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
+import edu.cmu.cs.mvelezce.sleep.interpreter.TimedSleepInterpreterTest;
+import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
+import edu.cmu.cs.mvelezce.sleep.parser.Parser;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFG;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFGBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
@@ -289,8 +296,7 @@ public class TaintAnalysisTest {
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("b"),
-                new VariableExpression("a")));
+        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("b"), new VariableExpression("a")));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(set1, basicBlock));
     }
@@ -359,6 +365,21 @@ public class TaintAnalysisTest {
                 new BinaryExpression(new VariableExpression("x"), "+", new ConstantIntExpression(2))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(set1, basicBlock));
+    }
+
+    @Test
+    public void testAnalyze() throws FileNotFoundException {
+        String programFile = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program12");
+
+        Lexer lexer = new Lexer(programFile);
+        Parser parser = new Parser(lexer);
+        Program program = parser.parse();
+
+        CFGBuilder builder = new CFGBuilder();
+        CFG cfg = builder.buildCFG(program);
+
+        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+        System.out.println(instructionsToTainted);
     }
 
 }

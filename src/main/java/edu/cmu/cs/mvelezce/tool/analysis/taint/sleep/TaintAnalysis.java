@@ -24,16 +24,15 @@ public class TaintAnalysis {
      * @return
      */
     public static Map<BasicBlock, Set<PossibleTaint>> analyze(CFG cfg) {
-        List<BasicBlock> entry = cfg.getSuccessors(cfg.getEntry());
-
-        if(entry.size() > 1) {
+        if(cfg.getSuccessors(cfg.getEntry()).size() > 1) {
             throw new IllegalArgumentException("The entry point of the CFG has more than 1 edge");
         }
 
-        Queue<BasicBlock> worklist = new LinkedList<>();
-        worklist.add(entry.get(0));
-
+        // Initialize all basic bloks to an empty set
         Map<BasicBlock, Set<PossibleTaint>> instructionsToPossibleTaints = new LinkedHashMap<>();
+
+        Queue<BasicBlock> worklist = new LinkedList<>();
+        worklist.add(cfg.getEntry());
 
         while(!worklist.isEmpty()) {
             BasicBlock instruction = worklist.remove();
@@ -52,16 +51,41 @@ public class TaintAnalysis {
             }
         }
 
+        // Loop through the call graph
+        List<BasicBlock> entry = cfg.getSuccessors(cfg.getEntry());
         worklist.add(entry.get(0));
 
         while(!worklist.isEmpty()) {
             BasicBlock instruction = worklist.remove();
-            Set<PossibleTaint> possibleTaintsBefore = instructionsToPossibleTaints.get(instruction);
+
+            List<BasicBlock> predecessors = cfg.getPredecessors(instruction);
+
+            if(predecessors.isEmpty()) {
+                throw new IllegalArgumentException("There should be at least one predecessor");
+            }
+            if(predecessors.size() > 2) {
+                throw new IllegalArgumentException("We do not support switch statements yet");
+            }
+
+            // Join previous states
+            Set<PossibleTaint> possibleTaintsBefore = new HashSet<>();
+
+            if(predecessors.size() == 1) {
+                possibleTaintsBefore = instructionsToPossibleTaints.get(predecessors.get(0));
+            }
+            else if(predecessors.size() == 2){
+                possibleTaintsBefore = TaintAnalysis.join(instructionsToPossibleTaints.get(predecessors.get(0)), instructionsToPossibleTaints.get(predecessors.get(1)));
+
+            }
+            possibleTaintsBefore = TaintAnalysis.join(instructionsToPossibleTaints.get(instruction), possibleTaintsBefore);
+
+            // Calculate new state and save
             Set<PossibleTaint> possibleTaintsAfter = TaintAnalysis.transfer(possibleTaintsBefore, instruction);
-//            instructionsToPossibleTaints.put(instruction, possibleTaintsAfter);
+            instructionsToPossibleTaints.put(instruction, possibleTaintsAfter);
             // TODO this only works because the we do not currently support cases were the state changes
             // in the last instruction of a block that we need to time ie sleep(x=A)
 
+            // Add successors to worklist algorithm
             List<BasicBlock> successors = cfg.getSuccessors(instruction);
 
             if(successors.size() > 2) {
@@ -77,15 +101,11 @@ public class TaintAnalysis {
                     continue;
                 }
 
-                if(!worklist.contains(successor)) {
+                if (!worklist.contains(successor)) {
                     worklist.add(successor);
                 }
 
-                Set<PossibleTaint> possibleTaintsEntry = TaintAnalysis.join(possibleTaintsAfter,
-                            instructionsToPossibleTaints.get(successor));
-                instructionsToPossibleTaints.put(successor, possibleTaintsEntry);
             }
-
         }
 
         return instructionsToPossibleTaints;

@@ -65,7 +65,7 @@ public class CFG {
 
         List<BasicBlock> predecessors = new LinkedList<>();
 
-        for (Map.Entry<BasicBlock, List<BasicBlock>> entry : this.edges.entrySet()) {
+        for(Map.Entry<BasicBlock, List<BasicBlock>> entry : this.edges.entrySet()) {
             if (entry.getValue().contains(basicBlock)) {
                 predecessors.add(entry.getKey());
             }

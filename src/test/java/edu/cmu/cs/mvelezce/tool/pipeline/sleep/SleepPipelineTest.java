@@ -768,32 +768,32 @@ public class SleepPipelineTest {
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
     }
 
-//    @Test
-//    public void testBuildPerformanceModel2() throws FileNotFoundException {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program12");
-//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-//        System.out.println(performanceModel);
-//
-//        int performance = 0;
-//        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 4;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 3;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 0;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//    }
+    @Test
+    public void testBuildPerformanceModel2() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program12");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+        System.out.println(performanceModel);
+
+        int performance = 0;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
 
 //    @Test
 //    public void testBuildPerformanceModel3() {

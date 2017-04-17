@@ -770,7 +770,7 @@ public class SleepPipelineTest {
 
 //    @Test
 //    public void testBuildPerformanceModel2() throws Exception {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program2");
+//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program5");
 //        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
 //
@@ -778,13 +778,13 @@ public class SleepPipelineTest {
 //        Set<String> configuration = new HashSet<>();
 //        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
 //
-//        performance = 4;
+//        performance = 6;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
 //        configuration.add("B");
 //        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
 //
-//        performance = 6;
+//        performance = 4;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
 //        Assert.assertEquals(performance, performanceModel.evaluate(configuration));

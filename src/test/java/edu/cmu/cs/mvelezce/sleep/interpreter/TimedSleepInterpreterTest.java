@@ -72,7 +72,7 @@ public class TimedSleepInterpreterTest {
 
         // Assert
         Assert.assertEquals(store, interpreter.getStore());
-        Assert.assertEquals(6, interpreter.getTotalExecutionTime());
+        Assert.assertEquals(4, interpreter.getTotalExecutionTime());
     }
 
     @Test

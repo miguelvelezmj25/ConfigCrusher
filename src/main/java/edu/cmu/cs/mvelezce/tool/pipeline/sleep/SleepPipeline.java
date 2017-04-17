@@ -39,16 +39,6 @@ public class SleepPipeline extends Pipeline {
         }
     };
 
-    public static boolean sameRelSta(IfStatement ifStatement1, IfStatement ifStatement2) {
-        if(ifStatement1.equals(ifStatement2)) {
-            return true;
-        }
-
-        System.out.println(ifStatement1.getCondition().equals(ifStatement2.getCondition()));
-
-        return false;
-    }
-
     public static PerformanceModel buildPerformanceModel(String programFile) {
         // Reset
         Regions.reset();
@@ -181,7 +171,7 @@ public class SleepPipeline extends Pipeline {
             Regions.resetRegions();
             TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ttimedProgram);
             interpreter.evaluate(configuration);
-            System.out.println();
+//            System.out.println();
             configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }

@@ -73,7 +73,7 @@ public class Regions {
             throw new IllegalArgumentException("The region cannot be null");
         }
 
-        System.out.println("Executing " + region);
+//        System.out.println("Executing " + region);
         Regions.currentExecutingRegion = region;
     }
 

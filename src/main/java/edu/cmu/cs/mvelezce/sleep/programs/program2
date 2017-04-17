@@ -2,7 +2,7 @@ a=A
 if(a) {
     sleep(a)
     b=B
-    if(!b) {
+    if(b) {
         sleep(2)
     }
     sleep(3)

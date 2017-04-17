@@ -1,8 +1,13 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
+import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.map.HashedMap;
+import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 // TODO time can be in seconds, milliseonds, minutes,.... That affects the type of the block.
 /**
@@ -10,11 +15,11 @@ import java.util.*;
  */
 public class PerformanceModel {
     private long baseTime;
-    private Map<Set<String>, Map<Set<String>, Integer>> regionToInfluenceTable;
+    private MultiValuedMap<Set<String>, Map<Set<String>, Integer>> regionToInfluenceTable;
 
     public PerformanceModel(long baseTime, List<Map<Set<String>, Integer>> blocks) {
         this.baseTime = baseTime;
-        this.regionToInfluenceTable = new HashMap<>();
+        this.regionToInfluenceTable = new HashSetValuedHashMap<>();
 
         for(Map<Set<String>, Integer> block : blocks) {
             Set<String> relevantOptions = new HashSet<>();
@@ -23,14 +28,14 @@ public class PerformanceModel {
                 relevantOptions.addAll(configuration);
             }
 
-            this.regionToInfluenceTable.put(relevantOptions, this.calculateConfigurationsInfluence(block));
+            this.regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
         }
     }
 
     public long evaluate(Set<String> configuration) {
         long performance = this.baseTime;
 
-        for(Map.Entry<Set<String>, Map<Set<String>, Integer>> region : this.regionToInfluenceTable.entrySet()) {
+        for(Map.Entry<Set<String>, Map<Set<String>, Integer>> region : this.regionToInfluenceTable.entries()) {
             for(Map.Entry<Set<String>, Integer> entry : region.getValue().entrySet()) {
                 Set<String> configurationValueOfOptionInBlock = new HashSet<>(entry.getKey());
                 configurationValueOfOptionInBlock.retainAll(configuration);

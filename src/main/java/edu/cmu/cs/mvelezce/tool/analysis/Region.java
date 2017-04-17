@@ -7,7 +7,6 @@ import java.util.Set;
  * Created by miguelvelez on 4/7/17.
  */
 public class Region implements Cloneable {
-
     private String regionPackage;
     private String regionClass;
     private String regionMethod;

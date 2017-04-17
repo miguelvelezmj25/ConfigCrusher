@@ -1,0 +1,19 @@
+a=A
+b=B
+c=C
+if(a) {
+    sleep(1)
+}
+if(b) {
+sleep(3)
+}
+if(b || c) {
+sleep(5)
+}
+if(a || b) {
+sleep(2)
+}
+sleep(5)
+if(c || b) {
+sleep (8)
+}

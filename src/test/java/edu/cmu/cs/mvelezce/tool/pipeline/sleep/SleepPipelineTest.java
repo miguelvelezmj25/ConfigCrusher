@@ -243,506 +243,7 @@ public class SleepPipelineTest {
         Assert.assertEquals(measuredPerformance, results);
         SleepPipelineTest.checkExecutionTimes(measuredPerformance, results);
     }
-//
-//    @Test
-//    public void testPredictPerformanceForAllConfigurations1() {
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//        parameters.add(new ConfigurationExpression("B"));
-//
-//        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
-//
-//        Statement timedStatement = new SleepStatement(new ConstantIntExpression(2));
-//
-//        Set<String> configurationToExecute = new HashSet<>();
-//        Map<Statement, Integer> blockToTime = new HashMap<>();
-//        PerformanceEntry performanceEntry =
-//                new PerformanceEntry(configurationToExecute, blockToTime, 0);
-//        measuredPerformance.add(performanceEntry);
-//
-//        configurationToExecute = new HashSet<>();
-//        configurationToExecute.add("A");
-//        configurationToExecute.add("B");
-//        blockToTime = new HashMap<>();
-//        blockToTime.put(timedStatement, 2);
-//        performanceEntry = new PerformanceEntry(configurationToExecute, blockToTime, 2);
-//        measuredPerformance.add(performanceEntry);
-//
-//        Map<Statement, Set<ConfigurationExpression>> relevantStatementsToOptions = new HashMap<>();
-//        Set<ConfigurationExpression> relevantOptions = new HashSet<>();
-//        relevantOptions.add(new ConfigurationExpression("A"));
-//        relevantStatementsToOptions.put(timedStatement, relevantOptions);
-//
-//        Map<Set<String>, Integer> result = new HashMap<>();
-//        Set<String> configuration = new HashSet<>();
-//        result.put(configuration, 0);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        result.put(configuration, 2);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        result.put(configuration, 0);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        result.put(configuration, 2);
-//
-//        Assert.assertEquals(result, SleepPipeline.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions));
-//    }
-//
-//    @Test
-//    public void testPredictPerformanceForAllConfigurations2() {
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//        parameters.add(new ConfigurationExpression("B"));
-//
-//        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
-//
-//        Statement timedStatement = new SleepStatement(new ConstantIntExpression(2));
-//        Statement statement = new IfStatement(new ConfigurationExpression("A"), timedStatement);
-//
-//        Set<String> configurationToExecute = new HashSet<>();
-//        Map<Statement, Integer> blockToTime = new HashMap<>();
-//        PerformanceEntry performanceEntry =
-//                new PerformanceEntry(configurationToExecute, blockToTime, 0);
-//        measuredPerformance.add(performanceEntry);
-//
-//        configurationToExecute = new HashSet<>();
-//        configurationToExecute.add("A");
-//        configurationToExecute.add("B");
-//        blockToTime = new HashMap<>();
-//        blockToTime.put(timedStatement, 2);
-//        performanceEntry = new PerformanceEntry(configurationToExecute, blockToTime, 2);
-//        measuredPerformance.add(performanceEntry);
-//
-//        Map<Statement, Set<ConfigurationExpression>> relevantStatementsToOptions = new HashMap<>();
-//        Set<ConfigurationExpression> relevantOptions = new HashSet<>();
-//        relevantOptions.add(new ConfigurationExpression("A"));
-//        relevantStatementsToOptions.put(statement, relevantOptions);
-//
-//        Map<Set<String>, Integer> result = new HashMap<>();
-//        Set<String> configuration = new HashSet<>();
-//        result.put(configuration, 0);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        result.put(configuration, 2);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        result.put(configuration, 0);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        result.put(configuration, 2);
-//
-//        Assert.assertEquals(result, SleepPipeline.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantStatementsToOptions));
-//    }
-//
-//    @Test
-//    public void testBuildPerformanceTable1() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program1");
-//
-//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-//        configurationToPerformance.put(new HashSet<>(), 3);
-//
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//        configurationToPerformance.put(configuration, 4);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 3);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 6);
-//
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//        parameters.add(new ConfigurationExpression("B"));
-//
-//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-//    }
-//
-////    @Test
-////    public void testBuildPerformanceTable2() {
-////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program2");
-////
-////        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-////        configurationToPerformance.put(new HashSet<>(), 0);
-////
-////        Set<String> configuration = new HashSet<>();
-////        configuration.add("A");
-////        configurationToPerformance.put(configuration, 6);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("B");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("B");
-////        configurationToPerformance.put(configuration, 4);
-////
-////        Set<ConfigurationExpression> parameters = new HashSet<>();
-////        parameters.add(new ConfigurationExpression("A"));
-////        parameters.add(new ConfigurationExpression("B"));
-////
-////        // TODO must calculate B
-////        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-////    }
-//
-//    @Test
-//    public void testBuildPerformanceTable3() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program3");
-//
-//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-//        configurationToPerformance.put(new HashSet<>(), 6);
-//
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//        configurationToPerformance.put(configuration, 10);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 7);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 10);
-//
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//        parameters.add(new ConfigurationExpression("B"));
-//
-//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-//    }
-//
-//    @Test
-//    public void testBuildPerformanceTable4() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program4");
-//
-//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-//        configurationToPerformance.put(new HashSet<>(), 6);
-//
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 10);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configurationToPerformance.put(configuration, 9);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 7);
-//
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//        parameters.add(new ConfigurationExpression("B"));
-//
-//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-//    }
-//
-//    @Test
-//    public void testBuildPerformanceTable5() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program5");
-//
-//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-//        configurationToPerformance.put(new HashSet<>(), 0);
-//
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//        configurationToPerformance.put(configuration, 3);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 2);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 4);
-//
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//        parameters.add(new ConfigurationExpression("B"));
-//
-//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-//    }
-//
-////    @Test
-////    public void testBuildPerformanceTable6() {
-////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program6");
-////
-////        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-////        configurationToPerformance.put(new HashSet<>(), 0);
-////
-////        Set<String> configuration = new HashSet<>();
-////        configuration.add("A");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("B");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("C");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("B");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("C");
-////        configurationToPerformance.put(configuration, 5);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("B");
-////        configuration.add("C");
-////        configurationToPerformance.put(configuration, 1);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("B");
-////        configuration.add("C");
-////        configurationToPerformance.put(configuration, 6);
-////
-////        Set<ConfigurationExpression> parameters = new HashSet<>();
-////        parameters.add(new ConfigurationExpression("A"));
-////        parameters.add(new ConfigurationExpression("B"));
-////        parameters.add(new ConfigurationExpression("C"));
-////
-////        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-////    }
-//
-//    @Test
-//    public void testBuildPerformanceTable7() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program7");
-//
-//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-//        configurationToPerformance.put(new HashSet<>(), 0);
-//
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//        configurationToPerformance.put(configuration, 1);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 2);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 0);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("D");
-//        configurationToPerformance.put(configuration, 0);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 3);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 1);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("D");
-//        configurationToPerformance.put(configuration, 1);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 2);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("D");
-//        configurationToPerformance.put(configuration, 2);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("C");
-//        configuration.add("D");
-//        configurationToPerformance.put(configuration, 3);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 3);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("D");
-//        configurationToPerformance.put(configuration, 3);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("C");
-//        configuration.add("D");
-//        configurationToPerformance.put(configuration, 4);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("C");
-//        configuration.add("D");
-//        configurationToPerformance.put(configuration, 5);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("C");
-//        configuration.add("D");
-//        configurationToPerformance.put(configuration, 6);
-//
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//        parameters.add(new ConfigurationExpression("B"));
-//        parameters.add(new ConfigurationExpression("C"));
-//        parameters.add(new ConfigurationExpression("D"));
-//
-//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-//    }
-//
-//    @Test
-//    public void testBuildPerformanceTable8() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program8");
-//
-//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-//        configurationToPerformance.put(new HashSet<>(), 0);
-//
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//        configurationToPerformance.put(configuration, 1);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 1);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 0);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 1);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 4);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 1);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 4);
-//
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//        parameters.add(new ConfigurationExpression("B"));
-//        parameters.add(new ConfigurationExpression("C"));
-//
-//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-//    }
-//
-//    @Test
-//    public void testBuildPerformanceTable9() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program9");
-//
-//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-//        configurationToPerformance.put(new HashSet<>(), 0);
-//
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//        configurationToPerformance.put(configuration, 3);
-//
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//
-//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-//    }
-//
-//    @Test
-//    public void testBuildPerformanceTable10() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program10");
-//
-//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-//        configurationToPerformance.put(new HashSet<>(), 0);
-//
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//        configurationToPerformance.put(configuration, 3);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 1);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 0);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configurationToPerformance.put(configuration, 4);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 3);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 5);
-//
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("C");
-//        configurationToPerformance.put(configuration, 8);
-//
-//        Set<ConfigurationExpression> parameters = new HashSet<>();
-//        parameters.add(new ConfigurationExpression("A"));
-//        parameters.add(new ConfigurationExpression("B"));
-//        parameters.add(new ConfigurationExpression("C"));
-//
-//        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-//    }
-//
+
     @Test
     public void testBuildPerformanceModel1() throws FileNotFoundException {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program1");
@@ -925,389 +426,352 @@ public class SleepPipelineTest {
 
     }
 
-//    @Test
-//    public void testBuildPerformanceModel3() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program3");
-//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-////        System.out.println(performanceModel);
-//
-//        int performance = 6;
-//        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 10;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 10;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 7;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//    }
-//
-//    @Test
-//    public void testBuildPerformanceModel4() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program4");
-//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-//
-//        int performance = 6;
-//        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 10;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 9;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 7;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//    }
-//
-////    @Test
-////    public void testBuildPerformanceModel5() {
-////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program5");
-////        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-////        System.out.println(performanceModel);
-////
-////        int performance = 0;
-////        Set<String> configuration = new HashSet<>();
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 4;
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("B");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 3;
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 2;
-////        configuration = new HashSet<>();
-////        configuration.add("B");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////    }
-////
-////    @Test
-////    public void testBuildPerformanceModel6() {
-////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program6");
-////
-////        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-////        configurationToPerformance.put(new HashSet<>(), 0);
-////
-////        Set<String> configuration = new HashSet<>();
-////        configuration.add("A");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("B");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("C");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("B");
-////        configurationToPerformance.put(configuration, 0);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("C");
-////        configurationToPerformance.put(configuration, 5);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("B");
-////        configuration.add("C");
-////        configurationToPerformance.put(configuration, 1);
-////
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("B");
-////        configuration.add("C");
-////        configurationToPerformance.put(configuration, 6);
-////
-////        Set<ConfigurationExpression> parameters = new HashSet<>();
-////        parameters.add(new ConfigurationExpression("A"));
-////        parameters.add(new ConfigurationExpression("B"));
-////        parameters.add(new ConfigurationExpression("C"));
-////
-////        Assert.assertEquals(configurationToPerformance, SleepPipeline.buildPerformanceTable(program, parameters));
-////        System.out.println(configurationToPerformance);
-////    }
-//
-//    @Test
-//    public void testBuildPerformanceModel7() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program7");
-//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-////        System.out.println(performanceModel);
-//
-//        int performance = 0;
-//        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 1;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 2;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 0;
-//        configuration = new HashSet<>();
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 0;
-//        configuration = new HashSet<>();
-//        configuration.add("D");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 3;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 1;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 1;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("D");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 2;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 2;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("D");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 3;
-//        configuration = new HashSet<>();
-//        configuration.add("C");
-//        configuration.add("D");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 3;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 3;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("D");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 4;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("C");
-//        configuration.add("D");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 5;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("C");
-//        configuration.add("D");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 6;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("C");
-//        configuration.add("D");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//    }
-//
-//    @Test
-//    public void testBuildPerformanceModel8() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program8");
-//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-////        System.out.println(performanceModel);
-//
-//        int performance = 0;
-//        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 1;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 1;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 0;
-//        configuration = new HashSet<>();
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 1;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 4;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 1;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 4;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//    }
-//
-////    @Test
-////    public void testBuildPerformanceModel9() {
-////        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program9");
-////        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-////        System.out.println(performanceModel);
-////
-////        int performance = 0;
-////        Set<String> configuration = new HashSet<>();
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 1;
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 1;
-////        configuration = new HashSet<>();
-////        configuration.add("B");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 0;
-////        configuration = new HashSet<>();
-////        configuration.add("C");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 1;
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("B");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 4;
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("C");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 1;
-////        configuration = new HashSet<>();
-////        configuration.add("B");
-////        configuration.add("C");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////
-////        performance = 4;
-////        configuration = new HashSet<>();
-////        configuration.add("A");
-////        configuration.add("B");
-////        configuration.add("C");
-////        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-////    }
-//
-//    @Test
-//    public void testBuildPerformanceModel10() {
-//        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(SleepPipelineTest.PROGRAMS_PATH + "program10");
-//        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-////        System.out.println(performanceModel);
-//
-//        int performance = 0;
-//        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 3;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 1;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 0;
-//        configuration = new HashSet<>();
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 4;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 3;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 5;
-//        configuration = new HashSet<>();
-//        configuration.add("B");
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//
-//        performance = 8;
-//        configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//        configuration.add("C");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-//    }
+    @Test
+    public void testBuildPerformanceModel3() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program3");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+//        System.out.println(performanceModel);
+
+        int performance = 6;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 7;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModel4() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program4");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+
+        int performance = 6;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 10;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 9;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 7;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModel5() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program5");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+
+        int performance = 0;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 2;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModel6() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program6");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+
+        int performance = 0;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 5;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 6;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModel7() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program7");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+
+        int performance = 0;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 2;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 2;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 2;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("C");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 5;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 6;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        configuration.add("D");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModel8() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program8");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+
+        int performance = 0;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModel9() throws FileNotFoundException {
+        // TODO check that this is not further instrumented since the constraint is the same
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program9");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+        System.out.println(performanceModel);
+
+        int performance = 0;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModel10() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program10");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+
+        int performance = 0;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 1;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 0;
+        configuration = new HashSet<>();
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 4;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 5;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 8;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
 
 }

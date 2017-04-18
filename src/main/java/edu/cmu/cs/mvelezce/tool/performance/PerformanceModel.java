@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 // TODO time can be in seconds, milliseonds, minutes,.... That affects the type of the block.
+// TODO add equal terms to not have +3A + 1A
 /**
  * Created by mvelezce on 3/9/17.
  */

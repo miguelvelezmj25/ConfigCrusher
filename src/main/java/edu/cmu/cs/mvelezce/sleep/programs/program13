@@ -1,0 +1,9 @@
+a=A
+b=B
+c=C
+sleep(2)
+if(a) {
+    sleep(b)
+    sleep(3)
+}
+sleep(c)

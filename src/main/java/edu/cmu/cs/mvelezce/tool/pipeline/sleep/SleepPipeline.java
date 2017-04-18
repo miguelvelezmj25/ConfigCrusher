@@ -56,23 +56,15 @@ public class SleepPipeline extends Pipeline {
         Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
 
         // Configuration compression (Language independent)
-        // TODO add regions dependencies
         Set<Set<ConfigurationExpression>> relevantSleepOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> relevantOptions = SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantSleepOptions);
         Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(relevantOptions);
-
-//        Set<String> h = new HashSet<>();
-//        h.add("A");
-//        configurationsToExecute.add(h);
-//
-//        h = new HashSet<>();
-//        h.add("B");
-//        configurationsToExecute.add(h);
 
         // Instrumentation (Language dependent)
         program = SleepPipeline.instrumentRelevantRegions(program);
         TimedProgram timedProgram = SleepPipeline.instrumentProgram(program);
         Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(timedProgram, configurationsToExecute);
+//        System.out.println("Executed configurations: " + configurationsToExecute.size());
 
         // Performance Model (Language independent)
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -85,92 +77,6 @@ public class SleepPipeline extends Pipeline {
 
         return SleepPipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
-
-//    public static Map<Set<String>, Integer> buildPerformanceTable(String programFile, Set<ConfigurationExpression> parameters) {
-//        Lexer lexer = new Lexer(program);
-//        Parser parser = new Parser(lexer);
-//        Program program = parser.parse();
-//
-//        CFGBuilder builder = new CFGBuilder();
-//        CFG cfg = builder.buildCFG(ast);
-//
-//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-//        Map<Statement, Set<ConfigurationExpression>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
-//        Set<Set<ConfigurationExpression>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());
-//
-//        Set<Set<String>> convenient = new HashSet<>();
-//        for(Set<ConfigurationExpression> relevantOption : relevantOptions) {
-//            convenient.add(sleepConfigurationSetToStringSet(relevantOption));
-//        }
-//
-//        Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(convenient);
-//        ast = SleepPipeline.instrumentRelevantRegions(ast, relevantRegionsToOptions.keySet());
-//        Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(ast, configurationsToExecute);
-//
-//        return SleepPipeline.predictPerformanceForAllConfigurations(parameters, measuredPerformance, relevantRegionsToOptions);
-//    }
-
-//    public static Map<Set<String>, Integer> predictPerformanceForAllConfigurations(Set<ConfigurationExpression> parameters, Set<PerformanceEntry> measuredPerformance, Map<Statement, Set<ConfigurationExpression>> relevantStatementsToOptions) {
-//        Map<Set<String>, Integer> configurationToPerformance = new HashMap<>();
-//
-//        Set<Set<String>> configurationSpace = Helper.getConfigurations(SleepPipeline.sleepConfigurationSetToStringSet(parameters));
-//        Set<Set<String>> measuredConfigurations = new HashSet<>();
-//
-//        for(PerformanceEntry performanceEntry : measuredPerformance) {
-//            configurationToPerformance.put(performanceEntry.getConfiguration(), performanceEntry.getTotalTime());
-//            measuredConfigurations.add(performanceEntry.getConfiguration());
-//        }
-//
-//        configurationSpace.removeAll(measuredConfigurations);
-//
-//        Map<Statement, Set<String>> relevantStatementsToOptionsConvenient = SleepPipeline.sleepConfigurationMapToStringMap(relevantStatementsToOptions);
-//
-//        for(Set<String> configuration : configurationSpace) {
-//            Map<Statement, Integer> blockToTime = new HashMap<>();
-//
-//            for(Map.Entry<Statement, Set<String>> entry : relevantStatementsToOptionsConvenient.entrySet()) {
-//                Set<String> configurationValueInRelevantBlockForConfiguration = new HashSet<>(configuration);
-//                configurationValueInRelevantBlockForConfiguration.retainAll(entry.getValue());
-//
-//                int baseTime = -1;
-//
-//                for(PerformanceEntry performanceEntry : measuredPerformance) {
-//                    Set<String> configurationValueInMeasuredConfiguration = new HashSet<>(performanceEntry.getConfiguration());
-//                    configurationValueInMeasuredConfiguration.retainAll(entry.getValue());
-//
-//                    if(configurationValueInMeasuredConfiguration.equals(configurationValueInRelevantBlockForConfiguration)) {
-//                        Statement statement = entry.getKey();
-//
-//                        if(statement instanceof IfStatement) {
-//                            statement = ((IfStatement) statement).getThenBlock();
-//                        }
-//
-//                        Integer time = performanceEntry.getBlockToTime().get(statement);
-//
-//                        if(time != null) {
-//                            blockToTime.put(entry.getKey(), time);
-//                        }
-//                        else {
-//                            blockToTime.put(entry.getKey(), 0);
-//                        }
-//
-//                        baseTime = performanceEntry.getBaseTime();
-//                        break;
-//                    }
-//                }
-//
-//                int totalTime = baseTime;
-//
-//                for(Integer blockTime : blockToTime.values()) {
-//                    totalTime += blockTime;
-//                }
-//
-//                configurationToPerformance.put(configuration, totalTime);
-//            }
-//        }
-//
-//        return configurationToPerformance;
-//    }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(TimedProgram ttimedProgram, Set<Set<String>> configurationsToExecute) {
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
@@ -194,20 +100,21 @@ public class SleepPipeline extends Pipeline {
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
             if(SleepPipeline.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
                 RelevantRegionGetterVisitor performanceStatementVisitor = new RelevantRegionGetterVisitor(entry.getValue());
-                Set<ConfigurationExpression> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
-
-                if(!possibleTaintingConfigurations.isEmpty()) {
-                    Statement statement = entry.getKey().getStatement();
-
-                    // If we only want to consider the then branch as the region
+                relevantRegionToOptions.putAll(performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement()));
+//                Set<ConfigurationExpression> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
+//
+//                if(!possibleTaintingConfigurations.isEmpty()) {
+//                    Statement statement = entry.getKey().getStatement();
+//
+//                    // If we only want to consider the then branch as the region
 //                    if(statement instanceof IfStatement) {
 //                        statement = ((IfStatement) statement).getThenBlock();
 //                    }
-
-                    SleepRegion relevantRegion = new SleepRegion(statement);
-                    Regions.addRegion(relevantRegion);
-                    relevantRegionToOptions.put(relevantRegion, possibleTaintingConfigurations);
-                }
+//
+//                    SleepRegion relevantRegion = new SleepRegion(statement);
+//                    Regions.addRegion(relevantRegion);
+//                    relevantRegionToOptions.put(relevantRegion, possibleTaintingConfigurations);
+//                }
             }
         }
 
@@ -282,16 +189,18 @@ public class SleepPipeline extends Pipeline {
     private static class RelevantRegionGetterVisitor extends ReturnerVisitor {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;
         private Set<ConfigurationExpression> relevantOptions;
+        private Map<SleepRegion, Set<ConfigurationExpression>> regionToOptions;
 
         public RelevantRegionGetterVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables) {
             this.taintedVariables = taintedVariables;
             this.relevantOptions = new HashSet<>();
+            this.regionToOptions = new HashMap<>();
         }
 
-        public Set<ConfigurationExpression> getRelevantInfo(Statement statement) {
+        public  Map<SleepRegion, Set<ConfigurationExpression>> getRelevantInfo(Statement statement) {
             statement.accept(this);
 
-            return this.relevantOptions;
+            return this.regionToOptions;
         }
 
         @Override
@@ -314,7 +223,16 @@ public class SleepPipeline extends Pipeline {
 
         @Override
         public Void visitIfStatement(IfStatement ifStatement) {
+            // TODO should we visit the then branch?
             ifStatement.getCondition().accept(this);
+
+            if(!this.relevantOptions.isEmpty()) {
+                Statement statement = ifStatement.getThenBlock();
+
+                SleepRegion region = new SleepRegion(statement);
+                Regions.addRegion(region);
+                this.regionToOptions.put(region, this.relevantOptions);
+            }
 
             return null;
         }
@@ -322,6 +240,12 @@ public class SleepPipeline extends Pipeline {
         @Override
         public Void visitSleepStatement(SleepStatement sleepStatement) {
             sleepStatement.getTime().accept(this);
+
+            if(!this.relevantOptions.isEmpty()) {
+                SleepRegion region = new SleepRegion(sleepStatement);
+                Regions.addRegion(region);
+                this.regionToOptions.put(region, this.relevantOptions);
+            }
 
             return null;
         }
@@ -346,16 +270,17 @@ public class SleepPipeline extends Pipeline {
          */ // TODO check this since this is where we might need to work on to get inner regions
         @Override
         public Statement visitIfStatement(IfStatement ifStatement) {
-            Statement visitedIfStatement = super.visitIfStatement(ifStatement);
+            IfStatement visitedIfStatement = (IfStatement) super.visitIfStatement(ifStatement);
 
-            Region region = new SleepRegion(ifStatement);
+            Region region = new SleepRegion(ifStatement.getThenBlock());
             region = Regions.getRegion(region);
 
             if(region != null) {
                 Regions.removeRegion(region);
-                region = new SleepRegion(visitedIfStatement);
+                region = new SleepRegion(visitedIfStatement.getThenBlock());
                 Regions.addRegion(region);
-                return new TimedStatement(visitedIfStatement);
+
+                return new IfStatement(visitedIfStatement.getCondition(), new TimedStatement(visitedIfStatement.getThenBlock()));
             }
 
             return visitedIfStatement;
@@ -378,10 +303,11 @@ public class SleepPipeline extends Pipeline {
                 Regions.removeRegion(region);
                 region = new SleepRegion(visitedSleepStatement);
                 Regions.addRegion(region);
+
                 return new TimedStatement(visitedSleepStatement);
             }
 
-            return super.visitSleepStatement(sleepStatement);
+            return visitedSleepStatement;
         }
 
     }

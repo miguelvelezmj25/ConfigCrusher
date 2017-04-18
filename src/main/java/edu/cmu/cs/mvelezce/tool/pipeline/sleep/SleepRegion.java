@@ -32,25 +32,28 @@ public class SleepRegion extends Region {
         if(statement.equals(that.statement)) return true;
 
         // TODO make this less awful
-        if(statement instanceof IfStatement && that.statement instanceof IfStatement) {
-            IfStatement thisIfStatement = ((IfStatement) statement);
-            IfStatement thatIfStatement = ((IfStatement) that.statement);
+        if(statement instanceof BlockStatement && that.statement instanceof BlockStatement) {
+//            IfStatement thisIfStatement = ((IfStatement) statement);
+//            IfStatement thatIfStatement = ((IfStatement) that.statement);
+//
+//            if(!thisIfStatement.getCondition().equals(thatIfStatement.getCondition())) return false;
+//
+//            Statement thisThenBlock = thisIfStatement.getThenBlock();
+//            Statement thatThenBlock = thatIfStatement.getThenBlock();
+//
+//            if(!(thisThenBlock instanceof BlockStatement) && !(thatThenBlock instanceof BlockStatement)) {
+//                return thisThenBlock.equals(thatThenBlock);
+//            }
+//
+//            if(thisThenBlock instanceof BlockStatement && !(thatThenBlock instanceof BlockStatement)) return false;
+//
+//            if(!(thisThenBlock instanceof BlockStatement) && thatThenBlock instanceof BlockStatement) return false;
+//
+//            List<Statement> thisThenBlockStatements = ((BlockStatement) thisThenBlock).getStatements();
+//            List<Statement> thatThenBlockStatements = ((BlockStatement) thatThenBlock).getStatements();
 
-            if(!thisIfStatement.getCondition().equals(thatIfStatement.getCondition())) return false;
-
-            Statement thisThenBlock = thisIfStatement.getThenBlock();
-            Statement thatThenBlock = thatIfStatement.getThenBlock();
-
-            if(!(thisThenBlock instanceof BlockStatement) && !(thatThenBlock instanceof BlockStatement)) {
-                return thisThenBlock.equals(thatThenBlock);
-            }
-
-            if(thisThenBlock instanceof BlockStatement && !(thatThenBlock instanceof BlockStatement)) return false;
-
-            if(!(thisThenBlock instanceof BlockStatement) && thatThenBlock instanceof BlockStatement) return false;
-
-            List<Statement> thisThenBlockStatements = ((BlockStatement) thisThenBlock).getStatements();
-            List<Statement> thatThenBlockStatements = ((BlockStatement) thatThenBlock).getStatements();
+            List<Statement> thisThenBlockStatements = ((BlockStatement) statement).getStatements();
+            List<Statement> thatThenBlockStatements = ((BlockStatement) that.statement).getStatements();
 
             Iterator<Statement> thisThenBlockStatementsIterator = thisThenBlockStatements.iterator();
             Iterator<Statement> thatThenBlockStatementsIterator = thatThenBlockStatements.iterator();

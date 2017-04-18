@@ -155,24 +155,90 @@ public abstract class Pipeline {
     }
 
     public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
-        List<Map<Set<String>, Integer>> blockTimeList = new ArrayList<>();
-        long baseTime = measuredPerformance.iterator().next().getBaseTime();
+        // Get region dependencies
+        Map<Region, Set<Region>> regionsToChildRegions = new HashMap<>();
 
         for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
-            Map<Set<String>, Integer> blockTime = new HashMap<>();
+            regionsToChildRegions.put(entry.getKey(), entry.getKey().getInnerRegions());
+        }
+
+        // Calculate raw performance for each region
+        Map<Region, Map<Set<String>, Integer>> regionsToRawPerformance = new HashMap<>();
+
+        for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
+            Map<Set<String>, Integer> configurationsToPerformance = new HashMap<>();
+            Set<String> entryConfiguration = entry.getValue();
+
+            // So that we track the performance of inner regions
+            for(Region innerRegion : entry.getKey().getInnerRegions()) {
+                entryConfiguration.addAll(regionsToOptions.get(innerRegion));
+            }
 
             for(PerformanceEntry performanceEntry : measuredPerformance) {
                 Set<String> configurationValueInMeasuredConfiguration = new HashSet<>(performanceEntry.getConfiguration());
-                configurationValueInMeasuredConfiguration.retainAll(entry.getValue());
+                configurationValueInMeasuredConfiguration.retainAll(entryConfiguration);
 
                 Region region = entry.getKey();
                 Integer time = performanceEntry.getRegion(region).getExecutionTime();
 
-                blockTime.put(configurationValueInMeasuredConfiguration, time);
+                configurationsToPerformance.put(configurationValueInMeasuredConfiguration, time);
             }
 
-            blockTimeList.add(blockTime);
+            regionsToRawPerformance.put(entry.getKey(), configurationsToPerformance);
         }
+
+        // Calculate real performance by subtracting child regions' performance for each region's performance
+        Map<Region, Map<Set<String>, Integer>> regionsToRealPerformance = new HashMap<>();
+
+        // Method to track that all regions have been updated
+        while(regionsToRealPerformance.size() != regionsToRawPerformance.size()) {
+            for(Map.Entry<Region, Set<Region>> entry : regionsToChildRegions.entrySet()) {
+                // Already have real performance
+                if(regionsToRealPerformance.containsKey(entry.getKey())) {
+                    continue;
+                }
+
+                // Region does not have inner regions
+                if(entry.getKey().getInnerRegions().isEmpty()) {
+                    regionsToRealPerformance.put(entry.getKey(), regionsToRawPerformance.get(entry.getKey()));
+                    continue;
+                }
+
+                // Calculate if all inner regions have been calculated with real performance
+                Set<Region> innerRegions = entry.getKey().getInnerRegions();
+                boolean allCalculated = true;
+
+                for(Region innerRegion : innerRegions) {
+                    if(!regionsToRealPerformance.containsKey(innerRegion)) {
+                        allCalculated = false;
+                        break;
+                    }
+                }
+
+                // If there are inner regions to still calculate
+                if(!allCalculated) {
+                    continue;
+                }
+
+                // Calculate real performance by subtracting inner performances
+                Map<Set<String>, Integer> configurationsToRealPerformance = regionsToRawPerformance.get(entry.getKey());
+
+                for(Region innerRegion : innerRegions) {
+                    Map<Set<String>, Integer> innerConfigurationsToRealPerformance = regionsToRealPerformance.get(innerRegion);
+
+                    for(Map.Entry<Set<String>, Integer> innerConfigurationToRealPerformance : innerConfigurationsToRealPerformance.entrySet()) {
+                        int time = configurationsToRealPerformance.get(innerConfigurationToRealPerformance.getKey());
+                        time -= innerConfigurationToRealPerformance.getValue();
+                        configurationsToRealPerformance.put(innerConfigurationToRealPerformance.getKey(), time);
+                    }
+                }
+
+                regionsToRealPerformance.put(entry.getKey(), configurationsToRealPerformance);
+            }
+        }
+
+        long baseTime = measuredPerformance.iterator().next().getBaseTime();
+        List<Map<Set<String>, Integer>> blockTimeList = new ArrayList<>(regionsToRealPerformance.values());
 
         return new PerformanceModel(baseTime, blockTimeList);
     }

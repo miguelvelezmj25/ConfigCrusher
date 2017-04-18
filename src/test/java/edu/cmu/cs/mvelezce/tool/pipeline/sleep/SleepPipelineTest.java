@@ -65,7 +65,7 @@ public class SleepPipelineTest {
 
         // Region
         Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionToOptions = new HashMap<>();
-        SleepRegion region = new SleepRegion(statement1);
+        SleepRegion region = new SleepRegion(((IfStatement) statement1).getThenBlock());
         relevantRegionToOptions.put(region, taintingConfigurations);
 
         // Possible taint
@@ -769,10 +769,9 @@ public class SleepPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel2() throws FileNotFoundException {
+    public void testBuildPerformanceModel12() throws FileNotFoundException {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program12");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-        System.out.println(performanceModel);
 
         int performance = 0;
         Set<String> configuration = new HashSet<>();
@@ -793,6 +792,58 @@ public class SleepPipelineTest {
         configuration = new HashSet<>();
         configuration.add("B");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    @Test
+    public void testBuildPerformanceModel13() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program13");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+
+        int performance = 2;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 5;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 2;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 6;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 6;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 7;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        configuration.add("C");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+
     }
 
 //    @Test

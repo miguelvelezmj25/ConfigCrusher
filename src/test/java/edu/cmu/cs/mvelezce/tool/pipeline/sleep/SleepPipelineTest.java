@@ -106,12 +106,13 @@ public class SleepPipelineTest {
         Program program = new Program(blockStatement);
 
         // Region
+        Regions.reset();
         Set<SleepRegion> statements = new HashSet<>();
-        statements.add(new SleepRegion(sleepStatement));
-// TODO this should work
-//        // Assert
-//        SleepPipeline.instrumentRelevantRegions(program, statements);
-//        Assert.assertNotEquals(program, SleepPipeline.instrumentRelevantRegions(program, statements));
+        Regions.addRegion(new SleepRegion(sleepStatement));
+
+        // Assert
+        SleepPipeline.instrumentRelevantRegions(program);
+        Assert.assertNotEquals(program, SleepPipeline.instrumentRelevantRegions(program));
     }
 
     @Test

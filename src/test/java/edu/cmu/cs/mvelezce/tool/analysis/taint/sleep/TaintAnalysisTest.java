@@ -380,7 +380,6 @@ public class TaintAnalysisTest {
         configurations.add(new ConfigurationExpression("B"));
         result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
 
-
         List<Statement> statements = new LinkedList<>();
         statements.add(new SleepStatement(new VariableExpression("b")));
 
@@ -392,6 +391,55 @@ public class TaintAnalysisTest {
         BasicBlock basicBlock = null;
 
         for(Statement trueStatement : ((BlockStatement) statementIf.getThenBlock()).getStatements()) {
+            basicBlock = new BasicBlock("1| " + trueStatement, trueStatement, conditions);
+        }
+
+        Set<TaintAnalysis.PossibleTaint> currentTaints = new HashSet<>();
+        configurations = new HashSet<>();
+        configurations.add(new ConfigurationExpression("A"));
+        currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
+        configurations = new HashSet<>();
+        configurations.add(new ConfigurationExpression("B"));
+        currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+
+        Assert.assertEquals(result, TaintAnalysis.transfer(basicBlock, currentTaints));
+    }
+
+    @Test
+    public void testTransfer13() {
+        Set<TaintAnalysis.PossibleTaint> result = new HashSet<>();
+
+        Set<ConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConfigurationExpression("A"));
+        result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
+
+        configurations = new HashSet<>();
+        configurations.add(new ConfigurationExpression("A"));
+        configurations.add(new ConfigurationExpression("B"));
+        result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+
+        List<Statement> statements = new LinkedList<>();
+        statements.add(new SleepStatement(new ConstantIntExpression(2)));
+
+        IfStatement statementIf = new IfStatement(new VariableExpression("b"), new BlockStatement(statements));
+
+        List<Expression> conditions = new ArrayList<>();
+        conditions.add(statementIf.getCondition());
+
+        BasicBlock basicBlock = null;
+        for(Statement trueStatement : ((BlockStatement) statementIf.getThenBlock()).getStatements()) {
+            basicBlock = new BasicBlock("1| " + trueStatement, trueStatement, conditions);
+        }
+
+        statements = new LinkedList<>();
+        statements.add(statementIf);
+
+        IfStatement outerStatementIf = new IfStatement(new VariableExpression("a"), new BlockStatement(statements));
+
+        conditions = new ArrayList<>();
+        conditions.add(outerStatementIf.getCondition());
+
+        for(Statement trueStatement : ((BlockStatement) outerStatementIf.getThenBlock()).getStatements()) {
             basicBlock = new BasicBlock("1| " + trueStatement, trueStatement, conditions);
         }
 

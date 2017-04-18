@@ -178,7 +178,6 @@ public class TaintAnalysis {
             this.conditions = conditions;
         }
 
-        @Override
         public Expression visitConfigurationExpression(ConfigurationExpression expressionConfigurationConstant) {
             Expression expression = super.visitConfigurationExpression(expressionConfigurationConstant);
             this.tainting = true;
@@ -228,16 +227,14 @@ public class TaintAnalysis {
                 }
             }
 
-            if(this.inSleep) {
+            if(this.inSleep && !this.possibleTaintedVariables.isEmpty()) {
                 for(PossibleTaint oldPossibleTaint : this.oldPossibleTaints) {
                     if(!this.possibleTaintedVariables.contains(oldPossibleTaint) && oldPossibleTaint.getVariable().equals(expressionVariable)) {
                         this.killedPossibleTaintedVariables.add(oldPossibleTaint);
 
                         for(PossibleTaint possibleTaint : this.possibleTaintedVariables) {
                             if(possibleTaint.getVariable().equals(expressionVariable)) {
-                                Set<ConfigurationExpression> configs = oldPossibleTaint.getConfigurations();
-                                Set<ConfigurationExpression> possibleCOnfigus = possibleTaint.getConfigurations();
-                                possibleCOnfigus.addAll(configs);
+                                possibleTaint.getConfigurations().addAll(oldPossibleTaint.getConfigurations());
 //                                break;
                             }
                         }
@@ -275,7 +272,9 @@ public class TaintAnalysis {
 
         @Override
         public Void visitIfStatement(IfStatement statementIf) {
+            this.inSleep = true;
             statementIf.getCondition().accept(this);
+            this.inSleep = false;
             return null;
         }
 

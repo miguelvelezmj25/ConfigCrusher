@@ -31,6 +31,14 @@ public class SleepRegion extends Region {
         SleepRegion that = (SleepRegion) o;
         if(statement.equals(that.statement)) return true;
 
+        if(statement instanceof TimedStatement) {
+            statement = ((TimedStatement) statement).getStatements();
+        }
+
+        if(that.statement instanceof TimedStatement) {
+            that.statement = ((TimedStatement) that.statement).getStatements();
+        }
+
         // TODO make this less awful
         if(statement instanceof BlockStatement && that.statement instanceof BlockStatement) {
 //            IfStatement thisIfStatement = ((IfStatement) statement);
@@ -68,6 +76,13 @@ public class SleepRegion extends Region {
 
                 if(thatStatement instanceof TimedStatement) {
                     thatStatement = ((TimedStatement) thatStatement).getStatements();
+                }
+
+                if(thisStatement instanceof IfStatement && thatStatement instanceof IfStatement) {
+                    SleepRegion thisRegion = new SleepRegion(((IfStatement) thisStatement).getThenBlock());
+                    SleepRegion thatRegion = new SleepRegion(((IfStatement) thatStatement).getThenBlock());
+
+                    return thisRegion.equals(thatRegion);
                 }
 
                 if(!thisStatement.equals(thatStatement)) return false;

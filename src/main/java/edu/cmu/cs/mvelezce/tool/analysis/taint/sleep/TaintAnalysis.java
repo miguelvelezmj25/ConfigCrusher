@@ -109,6 +109,7 @@ public class TaintAnalysis {
             }
         }
 
+        instructionsToPossibleTaints.remove(cfg.getEntry());
         return instructionsToPossibleTaints;
     }
 
@@ -161,7 +162,8 @@ public class TaintAnalysis {
     private static class TransferVisitor extends ReturnerVisitor {
         private final Set<PossibleTaint> oldPossibleTaints;
         private boolean inAssignment;
-        private boolean inSleep;
+        private boolean inRelevantStatement;
+        private boolean mergingOptions;
         private boolean tainting;
         private Set<ConfigurationExpression> possibleTaintingConfigurations;
         private Set<PossibleTaint> possibleTaintedVariables;
@@ -171,6 +173,8 @@ public class TaintAnalysis {
         public TransferVisitor(Set<PossibleTaint> oldPossibleTaints, List<Expression> conditions) {
             this.oldPossibleTaints = oldPossibleTaints;
             this.inAssignment = false;
+            this.inRelevantStatement = false;
+            this.mergingOptions = false;
             this.tainting = false;
             this.possibleTaintingConfigurations = new HashSet<>();
             this.possibleTaintedVariables = new HashSet<>();
@@ -178,28 +182,48 @@ public class TaintAnalysis {
             this.conditions = conditions;
         }
 
+        /**
+         * Signals that this is a configuration option an that it is possibly tainting something.
+         *
+         * @param expressionConfigurationConstant
+         * @return
+         */
         public Expression visitConfigurationExpression(ConfigurationExpression expressionConfigurationConstant) {
             Expression expression = super.visitConfigurationExpression(expressionConfigurationConstant);
             this.tainting = true;
             this.possibleTaintingConfigurations.add(expressionConfigurationConstant);
+
+            if(this.mergingOptions) {
+                for(PossibleTaint taintedVariable : this.possibleTaintedVariables) {
+                    taintedVariable.getConfigurations().add(expressionConfigurationConstant);
+                }
+            }
 
             return expression;
         }
 
         @Override
         public Expression visitVariableExpression(VariableExpression expressionVariable) {
+            // We are merging options, but this is not an option
+            if(this.mergingOptions) {
+                return expressionVariable;
+            }
+
             Expression expression = super.visitVariableExpression(expressionVariable);
 
+            // Add all of the configurations for assignment
             if(this.inAssignment) {
                 for(PossibleTaint taintedVariable : this.oldPossibleTaints) {
                     if(taintedVariable.getVariable().equals(expressionVariable)) {
                         this.tainting = true;
                         this.possibleTaintingConfigurations.addAll(taintedVariable.getConfigurations());
-//                        break;
+                        // Since we are checking for the variable, we can break, since there is only one variable in the assignment
+                        break;
                     }
                 }
             }
 
+            // Conditionals for figuring out inner regions
             if(!this.conditions.isEmpty()) {
                 for(PossibleTaint oldTaintedVariable : this.oldPossibleTaints) {
                     if(this.conditions.contains(oldTaintedVariable.getVariable())) {
@@ -211,23 +235,27 @@ public class TaintAnalysis {
                             for(PossibleTaint taintedVariable : this.possibleTaintedVariables) {
                                 if(taintedVariable.getVariable().equals(expressionVariable)) {
                                     taintedVariable.getConfigurations().addAll(oldTaintedVariable.getConfigurations());
-//                                    break;
+                                    // Since we are checking for the variable, we can break, since there is only one variable in the assignment
+                                    break;
                                 }
                             }
                         }
+
+                        // Since we are checking for the variable, we can break, since there is only one variable in the assignment
+                        break;
                     }
                 }
 
+                // Merging conditional options
+                this.mergingOptions = true;
                 for(Expression conditionalExpression : this.conditions) {
-                    if(conditionalExpression instanceof ConfigurationExpression) {
-                        for(PossibleTaint taintedVariable : this.possibleTaintedVariables) {
-                            taintedVariable.getConfigurations().add((ConfigurationExpression) conditionalExpression);
-                        }
-                    }
+                    conditionalExpression.accept(this);
                 }
+                this.mergingOptions = false;
             }
 
-            if(this.inSleep && !this.possibleTaintedVariables.isEmpty()) {
+            // Killing and merging sleep and if statements
+            if(this.inRelevantStatement && !this.possibleTaintedVariables.isEmpty()) {
                 for(PossibleTaint oldPossibleTaint : this.oldPossibleTaints) {
                     if(!this.possibleTaintedVariables.contains(oldPossibleTaint) && oldPossibleTaint.getVariable().equals(expressionVariable)) {
                         this.killedPossibleTaintedVariables.add(oldPossibleTaint);
@@ -235,10 +263,12 @@ public class TaintAnalysis {
                         for(PossibleTaint possibleTaint : this.possibleTaintedVariables) {
                             if(possibleTaint.getVariable().equals(expressionVariable)) {
                                 possibleTaint.getConfigurations().addAll(oldPossibleTaint.getConfigurations());
-//                                break;
+                                // Since we are checking for the variable, we can break, since there is only one variable in the assignment
+                                break;
                             }
                         }
-//                    break; // TODO can I have this here
+                        // Since we are checking for the variable, we can break, since there is only one variable in the assignment
+                        break;
                     }
                 }
             }
@@ -246,9 +276,15 @@ public class TaintAnalysis {
             return expression;
         }
 
-        @Override
+        /**
+         * Statement where tainting can occur. It can be x = X, x = a (where a is possibly tainted), and all previous
+         * cases and implicit flow by being inside a relevant statement
+         * @param statementAssignment
+         * @return
+         */
         public Void visitAssignmentStatement(AssignmentStatement statementAssignment) {
             this.inAssignment = true;
+            // Right side option or right side possibly tainted
             statementAssignment.getRight().accept(this);
 
             if(this.tainting) {
@@ -256,13 +292,16 @@ public class TaintAnalysis {
                 this.possibleTaintedVariables.add(new PossibleTaint(statementAssignment.getVariable(), configurations));
             }
 
+            // Implicit flow
             statementAssignment.getVariable().accept(this);
 
-            // Kill taints because of assignments. x <-[A,B] to x <-[A}
+            // Kill taints because of assignments.
+            // This has to be here since we are checking for updates in the variable
             for(PossibleTaint taintedVariable : this.oldPossibleTaints) {
                 if(!this.possibleTaintedVariables.contains(taintedVariable) && taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
                     this.killedPossibleTaintedVariables.add(taintedVariable);
-//                    break; // TODO can I have this here
+                    // Since we are checking for the variable, we can break, since there is only one variable in the assignment
+                    break;
                 }
             }
 
@@ -270,19 +309,27 @@ public class TaintAnalysis {
             return null;
         }
 
-        @Override
+        /**
+         * Relevant statement that can be inside a region and its condition could be tainted.
+         * @param statementIf
+         * @return
+         */
         public Void visitIfStatement(IfStatement statementIf) {
-            this.inSleep = true;
+            this.inRelevantStatement = true;
             statementIf.getCondition().accept(this);
-            this.inSleep = false;
+            this.inRelevantStatement = false;
             return null;
         }
 
-        @Override
+        /**
+         * Relevant statement that can be inside a region and its condition could be tainted.
+         * @param sleepStatement
+         * @return
+         */
         public Void visitSleepStatement(SleepStatement sleepStatement) {
-            this.inSleep = true;
+            this.inRelevantStatement = true;
             sleepStatement.getTime().accept(this);
-            this.inSleep = false;
+            this.inRelevantStatement = false;
 
             return null;
         }

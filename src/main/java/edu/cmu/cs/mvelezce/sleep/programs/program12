@@ -1,8 +1,6 @@
 a=A
 b=B
 if(a) {
-    if(b) {
-        sleep(1)
-    }
-    sleep(2)
+    sleep(b)
+    sleep(3)
 }

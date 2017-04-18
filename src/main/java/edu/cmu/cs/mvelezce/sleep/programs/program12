@@ -1,6 +1,8 @@
 a=A
 b=B
-if(a) {
-    b=B + C
+if(a + C) {
+    if(b) {
+        sleep(1)
+    }
     sleep(2)
 }

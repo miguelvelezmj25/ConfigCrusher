@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.AssignmentStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
+import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReturnerVisitor;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFG;
@@ -80,7 +81,7 @@ public class TaintAnalysis {
             possibleTaintsBefore = TaintAnalysis.join(instructionsToPossibleTaints.get(instruction), possibleTaintsBefore);
 
             // Calculate new state and save
-            Set<PossibleTaint> possibleTaintsAfter = TaintAnalysis.transfer(possibleTaintsBefore, instruction);
+            Set<PossibleTaint> possibleTaintsAfter = TaintAnalysis.transfer(instruction, possibleTaintsBefore);
             instructionsToPossibleTaints.put(instruction, possibleTaintsAfter);
             // TODO this only works because the we do not currently support cases were the state changes
             // in the last instruction of a block that we need to time ie sleep(x=A)
@@ -111,7 +112,7 @@ public class TaintAnalysis {
         return instructionsToPossibleTaints;
     }
 
-    public static Set<PossibleTaint> transfer(Set<PossibleTaint> oldPossibleTaints, BasicBlock instruction) {
+    public static Set<PossibleTaint> transfer(BasicBlock instruction, Set<PossibleTaint> oldPossibleTaints) {
         TransferVisitor transferVisitor = new TransferVisitor(oldPossibleTaints, instruction.getConditions());
         instruction.getStatement().accept(transferVisitor);
 
@@ -160,6 +161,7 @@ public class TaintAnalysis {
     private static class TransferVisitor extends ReturnerVisitor {
         private final Set<PossibleTaint> oldPossibleTaints;
         private boolean inAssignment;
+        private boolean inSleep;
         private boolean tainting;
         private Set<ConfigurationExpression> possibleTaintingConfigurations;
         private Set<PossibleTaint> possibleTaintedVariables;
@@ -190,11 +192,56 @@ public class TaintAnalysis {
             Expression expression = super.visitVariableExpression(expressionVariable);
 
             if(this.inAssignment) {
-                for (PossibleTaint taintedVariable : this.oldPossibleTaints) {
-                    if (taintedVariable.getVariable().equals(expressionVariable)) {
+                for(PossibleTaint taintedVariable : this.oldPossibleTaints) {
+                    if(taintedVariable.getVariable().equals(expressionVariable)) {
                         this.tainting = true;
                         this.possibleTaintingConfigurations.addAll(taintedVariable.getConfigurations());
-                        break;
+//                        break;
+                    }
+                }
+            }
+
+            if(!this.conditions.isEmpty()) {
+                for(PossibleTaint oldTaintedVariable : this.oldPossibleTaints) {
+                    if(this.conditions.contains(oldTaintedVariable.getVariable())) {
+                        if(this.possibleTaintedVariables.isEmpty()) {
+                            Set<ConfigurationExpression> implicitConfigurations = new HashSet<>(oldTaintedVariable.getConfigurations());
+                            this.possibleTaintedVariables.add(new PossibleTaint(expressionVariable, implicitConfigurations));
+                        }
+                        else {
+                            for(PossibleTaint taintedVariable : this.possibleTaintedVariables) {
+                                if(taintedVariable.getVariable().equals(expressionVariable)) {
+                                    taintedVariable.getConfigurations().addAll(oldTaintedVariable.getConfigurations());
+//                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for(Expression conditionalExpression : this.conditions) {
+                    if(conditionalExpression instanceof ConfigurationExpression) {
+                        for(PossibleTaint taintedVariable : this.possibleTaintedVariables) {
+                            taintedVariable.getConfigurations().add((ConfigurationExpression) conditionalExpression);
+                        }
+                    }
+                }
+            }
+
+            if(this.inSleep) {
+                for(PossibleTaint oldPossibleTaint : this.oldPossibleTaints) {
+                    if(!this.possibleTaintedVariables.contains(oldPossibleTaint) && oldPossibleTaint.getVariable().equals(expressionVariable)) {
+                        this.killedPossibleTaintedVariables.add(oldPossibleTaint);
+
+                        for(PossibleTaint possibleTaint : this.possibleTaintedVariables) {
+                            if(possibleTaint.getVariable().equals(expressionVariable)) {
+                                Set<ConfigurationExpression> configs = oldPossibleTaint.getConfigurations();
+                                Set<ConfigurationExpression> possibleCOnfigus = possibleTaint.getConfigurations();
+                                possibleCOnfigus.addAll(configs);
+//                                break;
+                            }
+                        }
+//                    break; // TODO can I have this here
                     }
                 }
             }
@@ -212,30 +259,13 @@ public class TaintAnalysis {
                 this.possibleTaintedVariables.add(new PossibleTaint(statementAssignment.getVariable(), configurations));
             }
 
-            // Implicit flow
-            if(!this.conditions.isEmpty()) {
-                for(PossibleTaint oldTaintedVariable : this.oldPossibleTaints) {
-                    if(this.conditions.contains(oldTaintedVariable.getVariable())) {
-                        if(this.possibleTaintedVariables.isEmpty()) {
-                            this.possibleTaintedVariables.add(new PossibleTaint(statementAssignment.getVariable(), oldTaintedVariable.getConfigurations()));
-                        }
-                        else {
-                            for(PossibleTaint taintedVariable : this.possibleTaintedVariables) {
-                                if(taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
-                                    taintedVariable.getConfigurations().addAll(oldTaintedVariable.getConfigurations());
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            statementAssignment.getVariable().accept(this);
 
-            // Can have the case where x<-[A,B] and now is x<-[A]. We must kill the former.
-            for (PossibleTaint taintedVariable : this.oldPossibleTaints) {
+            // Kill taints because of assignments. x <-[A,B] to x <-[A}
+            for(PossibleTaint taintedVariable : this.oldPossibleTaints) {
                 if(!this.possibleTaintedVariables.contains(taintedVariable) && taintedVariable.getVariable().equals(statementAssignment.getVariable())) {
                     this.killedPossibleTaintedVariables.add(taintedVariable);
-                    break; // TODO can I have this here
+//                    break; // TODO can I have this here
                 }
             }
 
@@ -243,8 +273,18 @@ public class TaintAnalysis {
             return null;
         }
 
+        @Override
         public Void visitIfStatement(IfStatement statementIf) {
             statementIf.getCondition().accept(this);
+            return null;
+        }
+
+        @Override
+        public Void visitSleepStatement(SleepStatement sleepStatement) {
+            this.inSleep = true;
+            sleepStatement.getTime().accept(this);
+            this.inSleep = false;
+
             return null;
         }
 

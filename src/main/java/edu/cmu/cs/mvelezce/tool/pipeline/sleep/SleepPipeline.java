@@ -58,7 +58,7 @@ public class SleepPipeline extends Pipeline {
         // Configuration compression (Language independent)
         Set<Set<ConstantConfigurationExpression>> relevantSleepOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> relevantOptions = SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantSleepOptions);
-        Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(relevantOptions);
+        Set<Set<String>> configurationsToExecute = Pipeline.getConfigurationsToExecute(relevantOptions);
 
         // Instrumentation (Language dependent)
         program = SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions);
@@ -75,7 +75,7 @@ public class SleepPipeline extends Pipeline {
             regionsToOptions.put(region, options);
         }
 
-        return SleepPipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
+        return Pipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(TimedProgram timedProgram, Set<Set<String>> configurationsToExecute) {

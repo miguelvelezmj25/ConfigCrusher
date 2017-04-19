@@ -456,17 +456,17 @@ public class TaintAnalysisTest {
 
     @Test
     public void testAnalyze() throws FileNotFoundException {
-        String programFile = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program12");
-
-        Lexer lexer = new Lexer(programFile);
-        Parser parser = new Parser(lexer);
-        Program program = parser.parse();
-
-        CFGBuilder builder = new CFGBuilder();
-        CFG cfg = builder.buildCFG(program);
-
-        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        System.out.println(instructionsToTainted);
+//        String programFile = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program12");
+//
+//        Lexer lexer = new Lexer(programFile);
+//        Parser parser = new Parser(lexer);
+//        Program program = parser.parse();
+//
+//        CFGBuilder builder = new CFGBuilder();
+//        CFG cfg = builder.buildCFG(program);
+//
+//        Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
+//        System.out.println(instructionsToTainted);
     }
 
 }

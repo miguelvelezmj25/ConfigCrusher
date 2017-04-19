@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.sleep;
 
 import edu.cmu.cs.mvelezce.sleep.ast.Program;
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ConfigurationExpression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ConstantConfigurationExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.ConstantIntExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.BlockStatement;
@@ -50,8 +50,8 @@ public class SleepPipelineTest {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = new HashMap<>();
 
         // Possible taint
-        Set<ConfigurationExpression> taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add(new ConfigurationExpression("A"));
+        Set<ConstantConfigurationExpression> taintingConfigurations = new HashSet<>();
+        taintingConfigurations.add(new ConstantConfigurationExpression("A"));
         String variableValue = "a";
         VariableExpression variable = new VariableExpression(variableValue);
         TaintAnalysis.PossibleTaint possibleTaint = new TaintAnalysis.PossibleTaint(variable, taintingConfigurations);
@@ -65,14 +65,14 @@ public class SleepPipelineTest {
         instructionsToTainted.put(currentBasicBlock, possibleTaints);
 
         // Region
-        Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionToOptions = new HashMap<>();
+        Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionToOptions = new HashMap<>();
         SleepRegion region = new SleepRegion(((IfStatement) statement1).getThenBlock());
         relevantRegionToOptions.put(region, taintingConfigurations);
 
         // Possible taint
         taintingConfigurations = new HashSet<>();
-        taintingConfigurations.add(new ConfigurationExpression("B"));
-        taintingConfigurations.add(new ConfigurationExpression("A"));
+        taintingConfigurations.add(new ConstantConfigurationExpression("B"));
+        taintingConfigurations.add(new ConstantConfigurationExpression("A"));
         variableValue = "b";
         variable = new VariableExpression(variableValue);
         possibleTaint = new TaintAnalysis.PossibleTaint(variable, taintingConfigurations);
@@ -112,9 +112,9 @@ public class SleepPipelineTest {
         Regions.addRegion(region);
 
         // Regions to options
-        Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions = new HashedMap<>();
-        Set<ConfigurationExpression> options = new HashSet<>();
-        options.add(new ConfigurationExpression("A"));
+        Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions = new HashedMap<>();
+        Set<ConstantConfigurationExpression> options = new HashSet<>();
+        options.add(new ConstantConfigurationExpression("A"));
         relevantRegionsToOptions.put(region, options);
 
 
@@ -133,7 +133,7 @@ public class SleepPipelineTest {
 
         // TimedStatement
         // Sleep statement has configuration to avoid having a statement assignment
-        Statement statement = new SleepStatement(new ConfigurationExpression("B"));
+        Statement statement = new SleepStatement(new ConstantConfigurationExpression("B"));
         TimedStatement timedStatement = new TimedStatement(statement);
         statementBlock.add(timedStatement);
         Region region = new SleepRegion(statement);
@@ -196,7 +196,7 @@ public class SleepPipelineTest {
         // TimedStatement
         // Sleep statement has configuration to avoid having a statement assignment
         Statement statement = new SleepStatement(new ConstantIntExpression(2));
-        statement = new IfStatement(new ConfigurationExpression("A"), statement);
+        statement = new IfStatement(new ConstantConfigurationExpression("A"), statement);
         Statement timedStatement = new TimedStatement(statement);
         statementBlock.add(timedStatement);
         Region region = new SleepRegion(statement);

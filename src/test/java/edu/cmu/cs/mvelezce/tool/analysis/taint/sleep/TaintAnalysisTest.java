@@ -27,8 +27,8 @@ public class TaintAnalysisTest {
 
     @Test
     public void testJoin2() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
@@ -38,8 +38,8 @@ public class TaintAnalysisTest {
 
     @Test
     public void testJoin3() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
@@ -49,8 +49,8 @@ public class TaintAnalysisTest {
 
     @Test
     public void testJoin4() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
@@ -66,23 +66,23 @@ public class TaintAnalysisTest {
 
     @Test
     public void testJoin5() {
-        Set<ConfigurationExpression> configurations1 = new HashSet<>();
-        configurations1.add(new ConfigurationExpression("A"));
-        configurations1.add(new ConfigurationExpression("B"));
+        Set<ConstantConfigurationExpression> configurations1 = new HashSet<>();
+        configurations1.add(new ConstantConfigurationExpression("A"));
+        configurations1.add(new ConstantConfigurationExpression("B"));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations1));
 
-        Set<ConfigurationExpression> configurations2 = new HashSet<>();
-        configurations2.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations2 = new HashSet<>();
+        configurations2.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set2 = new HashSet<>();
         set2.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations2));
 
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("A"));
-        configurations.add(new ConfigurationExpression("B"));
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("A"));
+        configurations.add(new ConstantConfigurationExpression("B"));
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations));
@@ -92,21 +92,21 @@ public class TaintAnalysisTest {
 
     @Test
     public void testJoin6() {
-        Set<ConfigurationExpression> configurations1 = new HashSet<>();
-        configurations1.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations1 = new HashSet<>();
+        configurations1.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations1));
 
-        Set<ConfigurationExpression> configurations2 = new HashSet<>();
-        configurations2.add(new ConfigurationExpression("D"));
+        Set<ConstantConfigurationExpression> configurations2 = new HashSet<>();
+        configurations2.add(new ConstantConfigurationExpression("D"));
 
         Set<TaintAnalysis.PossibleTaint> set2 = new HashSet<>();
         set2.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations2));
 
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
-        configurations.add(new ConfigurationExpression("D"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
+        configurations.add(new ConstantConfigurationExpression("D"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations));
@@ -116,60 +116,60 @@ public class TaintAnalysisTest {
 
     @Test
     public void testJoin7() {
-        Set<ConfigurationExpression> configurations1 = new HashSet<>();
-        configurations1.add(new ConfigurationExpression("A"));
+        Set<ConstantConfigurationExpression> configurations1 = new HashSet<>();
+        configurations1.add(new ConstantConfigurationExpression("A"));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("y"), configurations1));
 
         configurations1 = new HashSet<>();
-        configurations1.add(new ConfigurationExpression("C"));
+        configurations1.add(new ConstantConfigurationExpression("C"));
 
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("z"), configurations1));
 
         configurations1 = new HashSet<>();
-        configurations1.add(new ConfigurationExpression("B"));
-        configurations1.add(new ConfigurationExpression("C"));
+        configurations1.add(new ConstantConfigurationExpression("B"));
+        configurations1.add(new ConstantConfigurationExpression("C"));
 
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("w"), configurations1));
 
         configurations1 = new HashSet<>();
-        configurations1.add(new ConfigurationExpression("C"));
-        configurations1.add(new ConfigurationExpression("D"));
+        configurations1.add(new ConstantConfigurationExpression("C"));
+        configurations1.add(new ConstantConfigurationExpression("D"));
 
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations1));
 
-        Set<ConfigurationExpression> configurations2 = new HashSet<>();
-        configurations2.add(new ConfigurationExpression("A"));
-        configurations2.add(new ConfigurationExpression("B"));
-        configurations2.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations2 = new HashSet<>();
+        configurations2.add(new ConstantConfigurationExpression("A"));
+        configurations2.add(new ConstantConfigurationExpression("B"));
+        configurations2.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set2 = new HashSet<>();
         set2.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations2));
 
 
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("A"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("A"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("y"), configurations));
 
         configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("z"), configurations));
 
         configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("B"));
-        configurations.add(new ConfigurationExpression("C"));
+        configurations.add(new ConstantConfigurationExpression("B"));
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("w"), configurations));
 
         configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("A"));
-        configurations.add(new ConfigurationExpression("B"));
-        configurations.add(new ConfigurationExpression("C"));
-        configurations.add(new ConfigurationExpression("D"));
+        configurations.add(new ConstantConfigurationExpression("A"));
+        configurations.add(new ConstantConfigurationExpression("B"));
+        configurations.add(new ConstantConfigurationExpression("C"));
+        configurations.add(new ConstantConfigurationExpression("D"));
 
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations));
 
@@ -186,21 +186,21 @@ public class TaintAnalysisTest {
 
     @Test
     public void testTransfer2() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("a"), new ConfigurationExpression("C")));
+        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("a"), new ConstantConfigurationExpression("C")));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(basicBlock, new HashSet<>()));
     }
 
     @Test
     public void testTransfer3() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
@@ -208,15 +208,15 @@ public class TaintAnalysisTest {
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
-        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("a"), new ConfigurationExpression("C")));
+        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("a"), new ConstantConfigurationExpression("C")));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(basicBlock, set1));
     }
 
     @Test
     public void testTransfer4() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
@@ -227,8 +227,8 @@ public class TaintAnalysisTest {
 
     @Test
     public void testTransfer5() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
@@ -254,8 +254,8 @@ public class TaintAnalysisTest {
 
     @Test
     public void testTransfer6() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
@@ -286,8 +286,8 @@ public class TaintAnalysisTest {
 
     @Test
     public void testTransfer7() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
@@ -303,36 +303,36 @@ public class TaintAnalysisTest {
 
     @Test
     public void testTransfer8() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
         BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("a"),
-                new BinaryExpression(new ConstantIntExpression(1), "+", new ConfigurationExpression("C"))));
+                new BinaryExpression(new ConstantIntExpression(1), "+", new ConstantConfigurationExpression("C"))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(basicBlock, new HashSet<>()));
     }
 
     @Test
     public void testTransfer9() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
         BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("a"),
-                new BinaryExpression(new VariableExpression("b"), "+", new ConfigurationExpression("C"))));
+                new BinaryExpression(new VariableExpression("b"), "+", new ConstantConfigurationExpression("C"))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(basicBlock, new HashSet<>()));
     }
 
     @Test
     public void testTransfer10() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
@@ -351,8 +351,8 @@ public class TaintAnalysisTest {
 
     @Test
     public void testTransfer11() {
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("C"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
@@ -371,13 +371,13 @@ public class TaintAnalysisTest {
     public void testTransfer12() {
         Set<TaintAnalysis.PossibleTaint> result = new HashSet<>();
 
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("A"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("A"));
         result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
         configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("A"));
-        configurations.add(new ConfigurationExpression("B"));
+        configurations.add(new ConstantConfigurationExpression("A"));
+        configurations.add(new ConstantConfigurationExpression("B"));
         result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
 
         List<Statement> statements = new LinkedList<>();
@@ -396,10 +396,10 @@ public class TaintAnalysisTest {
 
         Set<TaintAnalysis.PossibleTaint> currentTaints = new HashSet<>();
         configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("A"));
+        configurations.add(new ConstantConfigurationExpression("A"));
         currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
         configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("B"));
+        configurations.add(new ConstantConfigurationExpression("B"));
         currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
 
         Assert.assertEquals(result, TaintAnalysis.transfer(basicBlock, currentTaints));
@@ -409,13 +409,13 @@ public class TaintAnalysisTest {
     public void testTransfer13() {
         Set<TaintAnalysis.PossibleTaint> result = new HashSet<>();
 
-        Set<ConfigurationExpression> configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("A"));
+        Set<ConstantConfigurationExpression> configurations = new HashSet<>();
+        configurations.add(new ConstantConfigurationExpression("A"));
         result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
         configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("A"));
-        configurations.add(new ConfigurationExpression("B"));
+        configurations.add(new ConstantConfigurationExpression("A"));
+        configurations.add(new ConstantConfigurationExpression("B"));
         result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
 
         List<Statement> statements = new LinkedList<>();
@@ -445,10 +445,10 @@ public class TaintAnalysisTest {
 
         Set<TaintAnalysis.PossibleTaint> currentTaints = new HashSet<>();
         configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("A"));
+        configurations.add(new ConstantConfigurationExpression("A"));
         currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
         configurations = new HashSet<>();
-        configurations.add(new ConfigurationExpression("B"));
+        configurations.add(new ConstantConfigurationExpression("B"));
         currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
 
         Assert.assertEquals(result, TaintAnalysis.transfer(basicBlock, currentTaints));

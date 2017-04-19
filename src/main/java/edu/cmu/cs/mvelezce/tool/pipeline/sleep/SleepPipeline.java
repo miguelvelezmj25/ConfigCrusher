@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.sleep;
 
 import edu.cmu.cs.mvelezce.sleep.ast.Program;
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ConfigurationExpression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ConstantConfigurationExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
@@ -53,10 +53,10 @@ public class SleepPipeline extends Pipeline {
 
         // Taint Analysis (Language dependent)
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
-        Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
+        Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
 
         // Configuration compression (Language independent)
-        Set<Set<ConfigurationExpression>> relevantSleepOptions = new HashSet<>(relevantRegionsToOptions.values());
+        Set<Set<ConstantConfigurationExpression>> relevantSleepOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> relevantOptions = SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantSleepOptions);
         Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(relevantOptions);
 
@@ -69,7 +69,7 @@ public class SleepPipeline extends Pipeline {
         // Performance Model (Language independent)
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
-        for(Map.Entry<SleepRegion, Set<ConfigurationExpression>> entry : relevantRegionsToOptions.entrySet()) {
+        for(Map.Entry<SleepRegion, Set<ConstantConfigurationExpression>> entry : relevantRegionsToOptions.entrySet()) {
             Region region = Regions.getRegion(entry.getKey());
             Set<String> options = SleepPipeline.sleepConfigurationSetToStringSet(entry.getValue());
             regionsToOptions.put(region, options);
@@ -94,14 +94,14 @@ public class SleepPipeline extends Pipeline {
         return configurationsToPerformance;
     }
 
-    public static Map<SleepRegion, Set<ConfigurationExpression>> getRelevantRegionsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
-        Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionToOptions = new HashMap<>();
+    public static Map<SleepRegion, Set<ConstantConfigurationExpression>> getRelevantRegionsToOptions(Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted) {
+        Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionToOptions = new HashMap<>();
 
         for(Map.Entry<BasicBlock, Set<TaintAnalysis.PossibleTaint>> entry : instructionsToTainted.entrySet()) {
             if(SleepPipeline.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
                 RelevantRegionGetterVisitor performanceStatementVisitor = new RelevantRegionGetterVisitor(entry.getValue());
                 relevantRegionToOptions.putAll(performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement()));
-//                Set<ConfigurationExpression> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
+//                Set<ConstantConfigurationExpression> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
 //
 //                if(!possibleTaintingConfigurations.isEmpty()) {
 //                    Statement statement = entry.getKey().getStatement();
@@ -126,7 +126,7 @@ public class SleepPipeline extends Pipeline {
      * @param program
      * @return
      */
-    public static Program instrumentRelevantRegions(Program program, Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions) {
+    public static Program instrumentRelevantRegions(Program program, Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
         AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantRegionsToOptions);
         return (Program) program.accept(addTimedVisitor);
     }
@@ -139,20 +139,20 @@ public class SleepPipeline extends Pipeline {
         return timedProgram;
     }
 
-    public static Set<String> sleepConfigurationSetToStringSet(Set<ConfigurationExpression> sleepOptionsSet) {
+    public static Set<String> sleepConfigurationSetToStringSet(Set<ConstantConfigurationExpression> sleepOptionsSet) {
         Set<String> optionSetConvenient = new HashSet<>();
 
-        for(ConfigurationExpression option : sleepOptionsSet) {
+        for(ConstantConfigurationExpression option : sleepOptionsSet) {
             optionSetConvenient.add(option.getName());
         }
 
         return optionSetConvenient;
     }
 
-    public static Set<Set<String>> setOfSleepConfigurationSetsToSetOfStringSets(Set<Set<ConfigurationExpression>> setOfSleepOptionsSet) {
+    public static Set<Set<String>> setOfSleepConfigurationSetsToSetOfStringSets(Set<Set<ConstantConfigurationExpression>> setOfSleepOptionsSet) {
         Set<Set<String>> setOfOptionSetConvenient = new HashSet<>();
 
-        for(Set<ConfigurationExpression> optionSet : setOfSleepOptionsSet) {
+        for(Set<ConstantConfigurationExpression> optionSet : setOfSleepOptionsSet) {
             setOfOptionSetConvenient.add(sleepConfigurationSetToStringSet(optionSet));
         }
 
@@ -161,8 +161,8 @@ public class SleepPipeline extends Pipeline {
 
     private static class RelevantRegionGetterVisitor extends ReturnerVisitor {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;
-        private Set<ConfigurationExpression> relevantOptions;
-        private Map<SleepRegion, Set<ConfigurationExpression>> regionToOptions;
+        private Set<ConstantConfigurationExpression> relevantOptions;
+        private Map<SleepRegion, Set<ConstantConfigurationExpression>> regionToOptions;
 
         public RelevantRegionGetterVisitor(Set<TaintAnalysis.PossibleTaint> taintedVariables) {
             this.taintedVariables = taintedVariables;
@@ -170,14 +170,14 @@ public class SleepPipeline extends Pipeline {
             this.regionToOptions = new HashMap<>();
         }
 
-        public  Map<SleepRegion, Set<ConfigurationExpression>> getRelevantInfo(Statement statement) {
+        public  Map<SleepRegion, Set<ConstantConfigurationExpression>> getRelevantInfo(Statement statement) {
             statement.accept(this);
 
             return this.regionToOptions;
         }
 
         @Override
-        public Expression visitConfigurationExpression(ConfigurationExpression configurationExpression) {
+        public Expression visitConstantConfigurationExpression(ConstantConfigurationExpression configurationExpression) {
             this.relevantOptions.add(configurationExpression);
 
             return configurationExpression;
@@ -228,13 +228,13 @@ public class SleepPipeline extends Pipeline {
      * Concrete visitor that replaces statements with TimedStatement for measuring time
      */
     private static class AddTimedVisitor extends ReplacerVisitor {
-        private Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions;
-        private Stack<Set<ConfigurationExpression>> constraints;
+        private Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions;
+        private Stack<Set<ConstantConfigurationExpression>> constraints;
 
         /**
          * Instantiate a {@code AddTimedVisitor}.
          */
-        public AddTimedVisitor(Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions) {
+        public AddTimedVisitor(Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
             this.relevantRegionsToOptions = relevantRegionsToOptions;
             this.constraints = new Stack<>();
         }

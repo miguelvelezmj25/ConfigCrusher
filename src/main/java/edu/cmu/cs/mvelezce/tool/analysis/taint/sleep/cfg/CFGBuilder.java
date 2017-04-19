@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg;
 
 
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ConfigurationExpression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ConstantConfigurationExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
@@ -58,7 +58,7 @@ public class CFGBuilder extends ReturnerVisitor {
     }
 
     @Override
-    public Expression visitConfigurationExpression(ConfigurationExpression expressionConfigurationConstant) {
+    public Expression visitConstantConfigurationExpression(ConstantConfigurationExpression expressionConfigurationConstant) {
         if(expressionConfigurationConstant == null) {
             throw new IllegalArgumentException("The expressionConfigurationConstant cannot be null");
         }

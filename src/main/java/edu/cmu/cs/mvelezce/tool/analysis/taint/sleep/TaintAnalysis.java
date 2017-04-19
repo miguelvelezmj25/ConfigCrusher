@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.sleep;
 
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ConfigurationExpression;
+import edu.cmu.cs.mvelezce.sleep.ast.expression.ConstantConfigurationExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.Expression;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.VariableExpression;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.AssignmentStatement;
@@ -136,14 +136,14 @@ public class TaintAnalysis {
     // Can only stay in the same level of the lattice or go up
     public static Set<PossibleTaint> join(Set<PossibleTaint> possibleTaintsA, Set<PossibleTaint> possibleTaintsB) {
         Set<PossibleTaint> result = new HashSet<>();
-        Map<VariableExpression, Set<ConfigurationExpression>> possibleTaintedVariablesB = new HashMap<>();
+        Map<VariableExpression, Set<ConstantConfigurationExpression>> possibleTaintedVariablesB = new HashMap<>();
 
         for(PossibleTaint possibleTaintB : possibleTaintsB) {
             possibleTaintedVariablesB.put(possibleTaintB.getVariable(), possibleTaintB.getConfigurations());
         }
 
         for(PossibleTaint possibleTaintA : possibleTaintsA) {
-            Set<ConfigurationExpression> hold = new HashSet<>(possibleTaintA.getConfigurations());
+            Set<ConstantConfigurationExpression> hold = new HashSet<>(possibleTaintA.getConfigurations());
 
             if(possibleTaintedVariablesB.containsKey(possibleTaintA.getVariable())) {
                 hold.addAll(possibleTaintedVariablesB.remove(possibleTaintA.getVariable()));
@@ -152,7 +152,7 @@ public class TaintAnalysis {
             result.add(new PossibleTaint(possibleTaintA.getVariable(), hold));
         }
 
-        for(Map.Entry<VariableExpression, Set<ConfigurationExpression>> entry : possibleTaintedVariablesB.entrySet()) {
+        for(Map.Entry<VariableExpression, Set<ConstantConfigurationExpression>> entry : possibleTaintedVariablesB.entrySet()) {
             result.add(new PossibleTaint(entry.getKey(), entry.getValue()));
         }
 
@@ -165,7 +165,7 @@ public class TaintAnalysis {
         private boolean inRelevantStatement;
         private boolean mergingOptions;
         private boolean tainting;
-        private Set<ConfigurationExpression> possibleTaintingConfigurations;
+        private Set<ConstantConfigurationExpression> possibleTaintingConfigurations;
         private Set<PossibleTaint> possibleTaintedVariables;
         private Set<PossibleTaint> killedPossibleTaintedVariables;
         private List<Expression> conditions;
@@ -188,8 +188,8 @@ public class TaintAnalysis {
          * @param expressionConfigurationConstant
          * @return
          */
-        public Expression visitConfigurationExpression(ConfigurationExpression expressionConfigurationConstant) {
-            Expression expression = super.visitConfigurationExpression(expressionConfigurationConstant);
+        public Expression visitConstantConfigurationExpression(ConstantConfigurationExpression expressionConfigurationConstant) {
+            Expression expression = super.visitConstantConfigurationExpression(expressionConfigurationConstant);
             this.tainting = true;
             this.possibleTaintingConfigurations.add(expressionConfigurationConstant);
 
@@ -228,7 +228,7 @@ public class TaintAnalysis {
                 for(PossibleTaint oldTaintedVariable : this.oldPossibleTaints) {
                     if(this.conditions.contains(oldTaintedVariable.getVariable())) {
                         if(this.possibleTaintedVariables.isEmpty()) {
-                            Set<ConfigurationExpression> implicitConfigurations = new HashSet<>(oldTaintedVariable.getConfigurations());
+                            Set<ConstantConfigurationExpression> implicitConfigurations = new HashSet<>(oldTaintedVariable.getConfigurations());
                             this.possibleTaintedVariables.add(new PossibleTaint(expressionVariable, implicitConfigurations));
                         }
                         else {
@@ -288,7 +288,7 @@ public class TaintAnalysis {
             statementAssignment.getRight().accept(this);
 
             if(this.tainting) {
-                Set<ConfigurationExpression> configurations = new HashSet<>(this.possibleTaintingConfigurations);
+                Set<ConstantConfigurationExpression> configurations = new HashSet<>(this.possibleTaintingConfigurations);
                 this.possibleTaintedVariables.add(new PossibleTaint(statementAssignment.getVariable(), configurations));
             }
 
@@ -347,9 +347,9 @@ public class TaintAnalysis {
      */
     public static class PossibleTaint {
         private VariableExpression variable;
-        private Set<ConfigurationExpression> configurations;
+        private Set<ConstantConfigurationExpression> configurations;
 
-        public PossibleTaint(VariableExpression variable, Set<ConfigurationExpression> configurations) {
+        public PossibleTaint(VariableExpression variable, Set<ConstantConfigurationExpression> configurations) {
             if(variable == null) {
                 throw new IllegalArgumentException("The variable cannot be null");
             }
@@ -374,7 +374,7 @@ public class TaintAnalysis {
          *
          * @return
          */
-        public Set<ConfigurationExpression> getConfigurations() { return this.configurations; }
+        public Set<ConstantConfigurationExpression> getConfigurations() { return this.configurations; }
 
         @Override
         public boolean equals(Object o) {

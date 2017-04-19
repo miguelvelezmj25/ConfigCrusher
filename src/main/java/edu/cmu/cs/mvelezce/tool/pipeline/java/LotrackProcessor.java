@@ -93,15 +93,18 @@ public class LotrackProcessor {
                 Set<String> oldOptions = regionsToOptions.get(currentRegion);
                 options.addAll(oldOptions);
             }
-//
+
             regionsToOptions.put(currentRegion, options);
         }
 
-        for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
-            if(entry.getValue().size() > 4) {
-                int a = 0;
-            }
-        }
+//        int max = Integer.MIN_VALUE;
+//        for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
+//            max = Math.max(max, entry.getValue().size());
+////            System.out.println(max);
+//            if(entry.getValue().size() > 2) {
+//                System.out.println(entry.getKey().getRegionClass() + entry.getKey().getRegionMethod() + " " + entry.getValue());
+//            }
+//        }
 
         return regionsToOptions;
     }

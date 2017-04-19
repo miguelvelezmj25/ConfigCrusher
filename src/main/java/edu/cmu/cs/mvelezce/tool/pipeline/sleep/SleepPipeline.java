@@ -78,13 +78,13 @@ public class SleepPipeline extends Pipeline {
         return SleepPipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
 
-    public static Set<PerformanceEntry> measureConfigurationPerformance(TimedProgram ttimedProgram, Set<Set<String>> configurationsToExecute) {
+    public static Set<PerformanceEntry> measureConfigurationPerformance(TimedProgram timedProgram, Set<Set<String>> configurationsToExecute) {
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 
         for(Set<String> configuration : configurationsToExecute) {
             // TODO use TimedVisitor type, but then you have to add evaluate method in interface
             Regions.resetRegions();
-            TimedSleepInterpreter interpreter = new TimedSleepInterpreter(ttimedProgram);
+            TimedSleepInterpreter interpreter = new TimedSleepInterpreter(timedProgram);
             interpreter.evaluate(configuration);
 //            System.out.println();
             configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));

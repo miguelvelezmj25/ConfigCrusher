@@ -1,14 +1,12 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
+package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
+import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/6/17.
@@ -73,6 +71,28 @@ public class LotrackProcessorTest {
 
         Assert.assertTrue(!result.get(region).contains(TRUE));
         Assert.assertTrue(!result.get(region).contains(FALSE));
+    }
+
+    @Test
+    public void test() {
+        List<String> projection = new ArrayList<>();
+        projection.add(LotrackProcessor.JAVA_LINE_NO);
+//        projection.add(LotrackProcessor.JIMPLE_LINE_NO);
+        projection.add(LotrackProcessor.CONSTRAINT_PRETTY);
+//        projection.add(LotrackProcessor.USED_TERMS);
+
+        List<String> sort = new ArrayList<>();
+        sort.add(LotrackProcessor.JIMPLE_LINE_NO);
+
+        ScalaMongoDriverConnector.connect(JavaPipeline.LOTRACK_DATABASE);
+        List<String> queryResult = ScalaMongoDriverConnector.findProjectionFilterAscending(JavaPipeline.PLAYYPUS_PROGRAM, projection, LotrackProcessor.METHOD, "getCommandData", sort);
+        ScalaMongoDriverConnector.close();
+
+        for(String result : queryResult) {
+            JSONObject JSONResult = new JSONObject(result);
+            System.out.println(JSONResult);
+
+        }
     }
 
 }

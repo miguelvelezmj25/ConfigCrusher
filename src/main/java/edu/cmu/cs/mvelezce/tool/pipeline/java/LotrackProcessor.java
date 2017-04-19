@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
+package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.*;
 
+// TODO what should be a region?
 /**
  * Created by mvelezce on 4/5/17.
  */
@@ -41,14 +42,15 @@ public class LotrackProcessor {
         fields.add(LotrackProcessor.USED_TERMS);
 
         List<String> sortBy = new ArrayList<>();
-        fields.add(LotrackProcessor.PACKAGE);
-        fields.add(LotrackProcessor.CLASS);
-        fields.add(LotrackProcessor.METHOD);
-        fields.add(LotrackProcessor.JIMPLE_LINE_NO);
+        sortBy.add(LotrackProcessor.PACKAGE);
+        sortBy.add(LotrackProcessor.CLASS);
+        sortBy.add(LotrackProcessor.METHOD);
+        sortBy.add(LotrackProcessor.JIMPLE_LINE_NO);
 
         ScalaMongoDriverConnector.connect(database);
-        List<String> queryResult = ScalaMongoDriverConnector.queryAscending(program, fields, sortBy);
+        List<String> queryResult = ScalaMongoDriverConnector.findProjectionAscending(program, fields, sortBy);
         ScalaMongoDriverConnector.close();
+
         Map<Region, Set<String>> regionsToOptions = new HashedMap<>();
 
         for(String result : queryResult) {
@@ -85,7 +87,6 @@ public class LotrackProcessor {
             else {
                 throw new NoSuchFieldException("The query result does not have neither a " + LotrackProcessor.USED_TERMS + " or " + LotrackProcessor.CONSTRAINT + " fields");
             }
-
 
             Region currentRegion = new Region(JSONResult.get(LotrackProcessor.PACKAGE).toString(), JSONResult.get(LotrackProcessor.CLASS).toString(), JSONResult.get(LotrackProcessor.METHOD).toString());
 

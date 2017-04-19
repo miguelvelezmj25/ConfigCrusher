@@ -19,6 +19,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
+import org.apache.commons.collections4.map.HashedMap;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -107,12 +108,19 @@ public class SleepPipelineTest {
 
         // Region
         Regions.reset();
-        Set<SleepRegion> statements = new HashSet<>();
-        Regions.addRegion(new SleepRegion(sleepStatement));
+        SleepRegion region = new SleepRegion(sleepStatement);
+        Regions.addRegion(region);
+
+        // Regions to options
+        Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions = new HashedMap<>();
+        Set<ConfigurationExpression> options = new HashSet<>();
+        options.add(new ConfigurationExpression("A"));
+        relevantRegionsToOptions.put(region, options);
+
 
         // Assert
-        SleepPipeline.instrumentRelevantRegions(program);
-        Assert.assertNotEquals(program, SleepPipeline.instrumentRelevantRegions(program));
+        SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions);
+        Assert.assertNotEquals(program, SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions));
     }
 
     @Test
@@ -709,10 +717,8 @@ public class SleepPipelineTest {
 
     @Test
     public void testBuildPerformanceModel9() throws FileNotFoundException {
-        // TODO check that this is not further instrumented since the constraint is the same
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program9");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-        System.out.println(performanceModel);
 
         int performance = 0;
         Set<String> configuration = new HashSet<>();

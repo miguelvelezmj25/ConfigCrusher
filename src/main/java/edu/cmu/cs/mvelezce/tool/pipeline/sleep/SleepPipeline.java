@@ -61,7 +61,7 @@ public class SleepPipeline extends Pipeline {
         Set<Set<String>> configurationsToExecute = SleepPipeline.getConfigurationsToExecute(relevantOptions);
 
         // Instrumentation (Language dependent)
-        program = SleepPipeline.instrumentRelevantRegions(program);
+        program = SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions);
         TimedProgram timedProgram = SleepPipeline.instrumentProgram(program);
         Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(timedProgram, configurationsToExecute);
 //        System.out.println("Executed configurations: " + configurationsToExecute.size());
@@ -126,8 +126,8 @@ public class SleepPipeline extends Pipeline {
      * @param program
      * @return
      */
-    public static Program instrumentRelevantRegions(Program program) {
-        AddTimedVisitor addTimedVisitor = new AddTimedVisitor();
+    public static Program instrumentRelevantRegions(Program program, Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions) {
+        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantRegionsToOptions);
         return (Program) program.accept(addTimedVisitor);
     }
 
@@ -158,33 +158,6 @@ public class SleepPipeline extends Pipeline {
 
         return setOfOptionSetConvenient;
     }
-
-//    /**
-//     * TODO
-//     * @param considerParameters
-//     */
-//    protected void pruneAndMapConfigurations(Set<String> considerParameters, Set<String> lastConfiguration) {
-//        List<Set<String>> redundantConfigurations = new ArrayList<>();
-//
-//        if(!considerParameters.isEmpty()) { // TODO check if this is needed
-//            for (Set<String> configuration : this.allConfigurations) {
-//                Set<String> possibleEquivalentConfiguration = new HashSet<>(configuration);
-//                possibleEquivalentConfiguration.retainAll(considerParameters);
-//
-//                if(possibleEquivalentConfiguration.equals(lastConfiguration)) {
-//                    redundantConfigurations.add(configuration);
-//                }
-//            }
-//
-//            if (!redundantConfigurations.isEmpty()) {
-//                for (Set<String> redundantConfiguration : redundantConfigurations) {
-//                    this.allConfigurations.remove(redundantConfiguration);
-//                }
-//            }
-//        }
-//    }
-
-//    mapConfigurationToPerformanceAfterPruning //TODO
 
     private static class RelevantRegionGetterVisitor extends ReturnerVisitor {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;
@@ -255,11 +228,15 @@ public class SleepPipeline extends Pipeline {
      * Concrete visitor that replaces statements with TimedStatement for measuring time
      */
     private static class AddTimedVisitor extends ReplacerVisitor {
+        private Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions;
+        private Stack<Set<ConfigurationExpression>> constraints;
+
         /**
          * Instantiate a {@code AddTimedVisitor}.
          */
-        public AddTimedVisitor() {
-            ;
+        public AddTimedVisitor(Map<SleepRegion, Set<ConfigurationExpression>> relevantRegionsToOptions) {
+            this.relevantRegionsToOptions = relevantRegionsToOptions;
+            this.constraints = new Stack<>();
         }
 
         /**
@@ -270,17 +247,25 @@ public class SleepPipeline extends Pipeline {
          */ // TODO check this since this is where we might need to work on to get inner regions
         @Override
         public Statement visitIfStatement(IfStatement ifStatement) {
+            SleepRegion oldRegion = new SleepRegion(ifStatement.getThenBlock());
+            oldRegion = (SleepRegion) Regions.getRegion(oldRegion);
+
+            if(oldRegion != null) {
+                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
+            }
+
             IfStatement visitedIfStatement = (IfStatement) super.visitIfStatement(ifStatement);
 
-            Region region = new SleepRegion(ifStatement.getThenBlock());
-            region = Regions.getRegion(region);
+            if(oldRegion != null) {
+                this.constraints.pop();
 
-            if(region != null) {
-                Regions.removeRegion(region);
-                region = new SleepRegion(visitedIfStatement.getThenBlock());
+                Regions.removeRegion(oldRegion);
+                SleepRegion region = new SleepRegion(visitedIfStatement.getThenBlock());
                 Regions.addRegion(region);
 
-                return new IfStatement(visitedIfStatement.getCondition(), new TimedStatement(visitedIfStatement.getThenBlock()));
+                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
+                    return new IfStatement(visitedIfStatement.getCondition(), new TimedStatement(visitedIfStatement.getThenBlock()));
+                }
             }
 
             return visitedIfStatement;
@@ -294,17 +279,25 @@ public class SleepPipeline extends Pipeline {
          */
         @Override
         public Statement visitSleepStatement(SleepStatement sleepStatement) {
+            SleepRegion oldRegion = new SleepRegion(sleepStatement);
+            oldRegion = (SleepRegion) Regions.getRegion(oldRegion);
+
+            if(oldRegion != null) {
+                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
+            }
+
             Statement visitedSleepStatement = super.visitSleepStatement(sleepStatement);
 
-            Region region = new SleepRegion(sleepStatement);
-            region = Regions.getRegion(region);
+            if(oldRegion != null) {
+                this.constraints.pop();
 
-            if(region != null) {
-                Regions.removeRegion(region);
-                region = new SleepRegion(visitedSleepStatement);
+                Regions.removeRegion(oldRegion);
+                SleepRegion region = new SleepRegion(visitedSleepStatement);
                 Regions.addRegion(region);
 
-                return new TimedStatement(visitedSleepStatement);
+                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
+                    return new TimedStatement(visitedSleepStatement);
+                }
             }
 
             return visitedSleepStatement;

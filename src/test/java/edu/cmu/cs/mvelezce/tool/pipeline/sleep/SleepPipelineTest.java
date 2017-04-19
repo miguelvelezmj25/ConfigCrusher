@@ -279,6 +279,33 @@ public class SleepPipelineTest {
     }
 
     @Test
+    public void testBuildPerformanceModel16() throws FileNotFoundException {
+        String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program16");
+        PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+
+        int performance = 6;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 2;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 5;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+
+        performance = 3;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+
+    @Test
     public void testBuildPerformanceModel12() throws FileNotFoundException {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program12");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
@@ -438,7 +465,6 @@ public class SleepPipelineTest {
     public void testBuildPerformanceModel3() throws FileNotFoundException {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program3");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
-//        System.out.println(performanceModel);
 
         int performance = 6;
         Set<String> configuration = new HashSet<>();

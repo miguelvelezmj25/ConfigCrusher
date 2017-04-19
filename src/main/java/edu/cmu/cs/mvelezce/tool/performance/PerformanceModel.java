@@ -17,10 +17,13 @@ import java.util.Set;
 public class PerformanceModel {
     private long baseTime;
     private MultiValuedMap<Set<String>, Map<Set<String>, Integer>> regionToInfluenceTable;
+    private Map<Set<String>, Integer> configurationToPerformance;
+
 
     public PerformanceModel(long baseTime, List<Map<Set<String>, Integer>> blocks) {
         this.baseTime = baseTime;
         this.regionToInfluenceTable = new HashSetValuedHashMap<>();
+        this.configurationToPerformance = new HashedMap<>();
 
         for(Map<Set<String>, Integer> block : blocks) {
             Set<String> relevantOptions = new HashSet<>();
@@ -31,21 +34,37 @@ public class PerformanceModel {
 
             this.regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
         }
+
+        for(Map.Entry<Set<String>, Map<Set<String>, Integer>> optionToPerformanceTable : this.regionToInfluenceTable.entries()) {
+            for(Map.Entry<Set<String>, Integer> configurationToPerformance : optionToPerformanceTable.getValue().entrySet()) {
+                int time = configurationToPerformance.getValue();
+
+                if(this.configurationToPerformance.containsKey(configurationToPerformance.getKey())) {
+                    time += this.configurationToPerformance.get(configurationToPerformance.getKey());
+                }
+
+                this.configurationToPerformance.put(configurationToPerformance.getKey(), time);
+            }
+        }
+
+        HashSet<String> emptyConfiguration = new HashSet<>();
+        long emptyConfigurationPerformance = this.baseTime;
+        emptyConfigurationPerformance += this.configurationToPerformance.get(emptyConfiguration);
+        this.configurationToPerformance.put(emptyConfiguration, (int) emptyConfigurationPerformance);
     }
 
     public long evaluate(Set<String> configuration) {
-        long performance = this.baseTime;
+        long performance = 0;
 
-        for(Map.Entry<Set<String>, Map<Set<String>, Integer>> region : this.regionToInfluenceTable.entries()) {
-            for(Map.Entry<Set<String>, Integer> entry : region.getValue().entrySet()) {
-                Set<String> configurationValueOfOptionInBlock = new HashSet<>(entry.getKey());
-                configurationValueOfOptionInBlock.retainAll(configuration);
+        for(Map.Entry<Set<String>, Integer> entry : this.configurationToPerformance.entrySet()) {
+            Set<String> configurationValueOfOptionInBlock = new HashSet<>(entry.getKey());
+            configurationValueOfOptionInBlock.retainAll(configuration);
 
-                if(entry.getKey().equals(configurationValueOfOptionInBlock)) {
-                    performance += entry.getValue();
-                }
+            if(entry.getKey().equals(configurationValueOfOptionInBlock)) {
+                performance += entry.getValue();
             }
         }
+
 
         return performance;
     }
@@ -95,43 +114,36 @@ public class PerformanceModel {
     @Override
     public String toString() {
         StringBuilder performanceModel = new StringBuilder("T =");
+        Set<String> allOptions = new HashSet<>();
 
-//        if(this.baseTime != 0) {
-            performanceModel.append(" ");
-            performanceModel.append(this.baseTime);
-//        }
+        for(Set<String> configurations : this.configurationToPerformance.keySet()) {
+            allOptions.addAll(configurations);
+        }
 
-        for(Map<Set<String>, Integer> region : this.regionToInfluenceTable.values()) {
-            Set<String> regionOptions = new HashSet<>();
+        for(int i = 0; i <= allOptions.size(); i++) {
+            for(Map.Entry<Set<String>, Integer> entry : this.configurationToPerformance.entrySet()) {
+                if(entry.getKey().size() != i) {
+                    continue;
+                }
 
-            for(Set<String> configurations : region.keySet()) {
-                regionOptions.addAll(configurations);
-            }
+                if(entry.getValue() == 0) {
+                    continue;
+                }
 
-            for(int i = 0; i <= regionOptions.size(); i++) {
-                for(Map.Entry<Set<String>, Integer> entry : region.entrySet()) {
-                    if(entry.getKey().size() != i) {
-                        continue;
-                    }
+                if(entry.getValue() > 0) {
+                    performanceModel.append(" + ");
+                }
+                else {
+                    performanceModel.append(" - ");
+                }
 
-                    if(entry.getValue() == 0) {
-                        continue;
-                    }
+                performanceModel.append(Math.abs(entry.getValue()));
 
-                    if(entry.getValue() > 0) {
-                        performanceModel.append(" + ");
-                    }
-                    else {
-                        performanceModel.append(" - ");
-                    }
-
-                    performanceModel.append(Math.abs(entry.getValue()));
-
-                    for(String option : entry.getKey()) {
-                        performanceModel.append(option);
-                    }
+                for(String option : entry.getKey()) {
+                    performanceModel.append(option);
                 }
             }
+
         }
 
         return performanceModel.toString();

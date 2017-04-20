@@ -22,8 +22,7 @@ public class TimedVisitorReturner extends ReturnerVisitor implements TimedVisito
 
     @Override
     public Void visitTimedProgram(TimedProgram timedProgram) {
-        // TODO
-        throw new IllegalArgumentException("WHAT IS HAPPENING");
+        throw new RuntimeException("This method is currently not implemented");
     }
 
 }

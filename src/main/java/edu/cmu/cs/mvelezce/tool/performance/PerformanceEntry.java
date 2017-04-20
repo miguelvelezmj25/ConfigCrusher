@@ -22,8 +22,8 @@ public class PerformanceEntry {
 
         try {
             for(Region region : regions) {
-                    Region clonedRegion = region.clone();
-                    this.regions.put(clonedRegion, clonedRegion);
+                Region clonedRegion = region.clone();
+                this.regions.put(clonedRegion, clonedRegion);
             }
 
             this.program = program.clone();
@@ -35,6 +35,7 @@ public class PerformanceEntry {
     }
 
     public long getBaseTime() {
+        // TODO be careful because of inner regions are double counting. Only works because the performance entry that I pick does not have inner regions
         if(PerformanceEntry.baseTime < 0) {
             PerformanceEntry.baseTime = this.program.getExecutionTime();
 

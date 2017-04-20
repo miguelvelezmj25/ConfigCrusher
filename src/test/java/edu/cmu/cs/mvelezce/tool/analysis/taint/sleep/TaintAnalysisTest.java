@@ -1,14 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.sleep;
 
-import edu.cmu.cs.mvelezce.sleep.ast.Program;
 import edu.cmu.cs.mvelezce.sleep.ast.expression.*;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.*;
-import edu.cmu.cs.mvelezce.sleep.interpreter.TimedSleepInterpreterTest;
-import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
-import edu.cmu.cs.mvelezce.sleep.parser.Parser;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFG;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFGBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 

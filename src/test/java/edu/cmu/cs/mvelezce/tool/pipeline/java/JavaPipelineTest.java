@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.LotrackProcessor;
 import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -58,7 +57,7 @@ public class JavaPipelineTest {
         fields.add(LotrackProcessor.CONSTRAINT);
 
         ScalaMongoDriverConnector.connect(JavaPipeline.LOTRACK_DATABASE);
-        List<String> queryResult = ScalaMongoDriverConnector.query(program, fields);
+        List<String> queryResult = ScalaMongoDriverConnector.findProjection(program, fields);
         ScalaMongoDriverConnector.close();
 
         if(csv) {

@@ -98,6 +98,12 @@ public class Region implements Cloneable {
         this.endTime = 0;
     }
 
+    public void resetState() {
+        this.resetExecution();
+        this.innerRegions = new HashSet<>();
+        this.previousExecutingRegion = null;
+    }
+
     public int getExecutionTime() {
         // Still measuring
         if(this.startTime != 0 && this.endTime == 0) {
@@ -126,7 +132,19 @@ public class Region implements Cloneable {
 
     @Override
     public Region clone() throws CloneNotSupportedException {
-        return (Region) super.clone();
+        Region region = new Region();
+        region.regionPackage = this.regionPackage;
+        region.regionClass = this.regionClass;
+        region.regionMethod = this.regionMethod;
+        region.startTime = this.startTime;
+        region.endTime = this.endTime;
+        region.innerRegions = new HashSet<>(this.innerRegions);
+
+        if(this.previousExecutingRegion != null) {
+            region.previousExecutingRegion = this.previousExecutingRegion.clone();
+        }
+
+        return region;
     }
 
     @Override
@@ -165,4 +183,24 @@ public class Region implements Cloneable {
     public String getRegionMethod() { return this.regionMethod; }
 
     public Set<Region> getInnerRegions() { return this.innerRegions; }
+
+    public long getStartTime() { return this.startTime; }
+
+    public long getEndTime() { return this.endTime; }
+
+    public Region getPreviousExecutingRegion() { return this.previousExecutingRegion; }
+
+    protected void setRegionPackage(String regionPackage) { this.regionPackage = regionPackage; }
+
+    protected void setRegionClass(String regionClass) { this.regionClass = regionClass; }
+
+    protected void setRegionMethod(String regionMethod) { this.regionMethod = regionMethod; }
+
+    protected void setStartTime(long startTime) { this.startTime = startTime; }
+
+    protected void setEndTime(long endTime) { this.endTime = endTime; }
+
+    protected void setInnerRegions(Set<Region> innerRegions) { this.innerRegions = innerRegions; }
+
+    protected void setPreviousExecutingRegion(Region previousExecutingRegion) { this.previousExecutingRegion = previousExecutingRegion; }
 }

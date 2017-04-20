@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,12 +16,30 @@ import java.util.List;
 public class SleepRegion extends Region {
     private Statement statement;
 
-
     public SleepRegion(Statement statement) {
         this.statement = statement;
     }
 
     public Statement getStatement() { return this.statement; }
+
+    public Region clone() throws CloneNotSupportedException {
+        SleepRegion sleepRegion = new SleepRegion(this.statement);
+
+        sleepRegion.setRegionPackage(this.getRegionPackage());
+        sleepRegion.setRegionClass(this.getRegionClass());
+        sleepRegion.setRegionMethod(this.getRegionMethod());
+        sleepRegion.setStartTime(this.getStartTime());
+        sleepRegion.setEndTime(this.getEndTime());
+        sleepRegion.setInnerRegions(new HashSet<>(this.getInnerRegions()));
+
+        if(this.getPreviousExecutingRegion() != null) {
+            sleepRegion.setPreviousExecutingRegion(this.getPreviousExecutingRegion().clone());
+        }
+
+        return sleepRegion;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

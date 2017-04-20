@@ -90,7 +90,7 @@ public class LotrackProcessorTest {
 
         for(String result : queryResult) {
             JSONObject JSONResult = new JSONObject(result);
-            System.out.println(JSONResult);
+//            System.out.println(JSONResult);
 
         }
     }

@@ -6,6 +6,8 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/7/17.
  */
+// TODO use types
+// TODO keep track of each regions inner regions
 public class Regions {
     private static Region program = null;
     private static Set<Region> regions = new HashSet<>();
@@ -55,8 +57,10 @@ public class Regions {
 
     public static void resetRegions() {
         for(Region region : Regions.regions) {
-            region.resetExecution();
+            region.resetState();
         }
+
+        Regions.program.resetState();
     }
 
     public static void removeAllRegions() {

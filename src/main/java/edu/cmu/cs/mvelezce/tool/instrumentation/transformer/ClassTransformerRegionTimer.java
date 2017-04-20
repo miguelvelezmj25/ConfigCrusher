@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.transformer;
 
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 
@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public class ClassTransformerRegionTimer extends ClassTransformerBase {
 
-    private Map<String, Region> methodToRegionToInstrument;
+    private Map<String, JavaRegion> methodToRegionToInstrument;
 
-    public ClassTransformerRegionTimer(String fileName, Map<String, Region> methodToRegionToInstrument) {
+    public ClassTransformerRegionTimer(String fileName, Map<String, JavaRegion> methodToRegionToInstrument) {
         super(fileName);
         this.methodToRegionToInstrument = methodToRegionToInstrument;
     }
@@ -26,7 +26,7 @@ public class ClassTransformerRegionTimer extends ClassTransformerBase {
                 continue;
             }
 
-            Region currentRegion = this.methodToRegionToInstrument.get(methodNode.name);
+            JavaRegion currentRegion = this.methodToRegionToInstrument.get(methodNode.name);
             InsnList instructions = methodNode.instructions;
 
             if(instructions.size() == 0) {

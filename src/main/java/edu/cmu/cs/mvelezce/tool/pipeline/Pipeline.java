@@ -158,6 +158,7 @@ public abstract class Pipeline {
         // Get region dependencies
         Map<Region, Set<Region>> regionsToChildRegions = new HashMap<>();
 
+        // TODO get this from the REGIONS
         for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
             // TODO further analysze children of children. You are not doing that
             regionsToChildRegions.put(entry.getKey(), entry.getKey().getInnerRegions());

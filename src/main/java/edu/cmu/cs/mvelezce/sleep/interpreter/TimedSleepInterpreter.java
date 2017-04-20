@@ -9,23 +9,17 @@ import edu.cmu.cs.mvelezce.sleep.visitor.TimedVisitor;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepRegion;
-import org.apache.commons.collections4.map.HashedMap;
-
-import java.util.Map;
 
 /**
  * Created by mvelezce on 4/13/17.
  */
 public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisitor<IntValue, Void> {
     private int totalExecutionTime;
-    // TODO who uses this?
-    private Map<Statement, Integer> regionToTime;
 
     public TimedSleepInterpreter(Statement ast) {
         super(ast);
 
         this.totalExecutionTime = 0;
-        this.regionToTime = new HashedMap<>();
     }
 
     @Override
@@ -46,7 +40,6 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
         timedStatement.getStatements().accept(this);
 
         region.exit(this.totalExecutionTime);
-        this.regionToTime.put(timedStatement.getStatements(), this.totalExecutionTime - time);
 
         return null;
     }
@@ -61,13 +54,10 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
         timedProgram.getStatements().accept(this);
 
         Regions.getProgram().endTime(this.totalExecutionTime);
-        this.regionToTime.put(timedProgram.getStatements(), this.totalExecutionTime - time);
 
         return null;
     }
 
     public int getTotalExecutionTime() { return this.totalExecutionTime; }
-
-    public Map<Statement, Integer> getRegionToTime() { return this.regionToTime; }
 
 }

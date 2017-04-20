@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,9 +13,9 @@ import java.util.*;
 public class LotrackProcessorTest {
     @Test
     public void filterRegionsNoOptions1() {
-        Region region = new Region("a", "b", "c");
+        JavaRegion region = new JavaRegion("a", "b", "c");
         Set<String> options = new HashSet<>();
-        Map<Region, Set<String>> regionToOptions = new HashMap<>();
+        Map<JavaRegion, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
 
         Assert.assertTrue(LotrackProcessor.filterRegionsNoOptions(regionToOptions).isEmpty());
@@ -24,12 +23,12 @@ public class LotrackProcessorTest {
 
     @Test
     public void filterRegionsNoOptions2() {
-        Region region = new Region("a", "b", "c");
+        JavaRegion region = new JavaRegion("a", "b", "c");
         Set<String> options = new HashSet<>();
-        Map<Region, Set<String>> regionToOptions = new HashMap<>();
+        Map<JavaRegion, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
 
-        region = new Region("d", "e", "c");
+        region = new JavaRegion("d", "e", "c");
         options = new HashSet<>();
         options.add("String");
         regionToOptions.put(region, options);
@@ -39,7 +38,7 @@ public class LotrackProcessorTest {
 
     @Test
     public void getRegionsToOptions1() throws NoSuchFieldException {
-        Map<Region, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
+        Map<JavaRegion, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
 //        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
 //            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
 //        }
@@ -48,7 +47,7 @@ public class LotrackProcessorTest {
 
     @Test
     public void getRegionsToOptions2() throws NoSuchFieldException {
-        Map<Region, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.LANGUAGETOOL_PROGRAM);
+        Map<JavaRegion, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.LANGUAGETOOL_PROGRAM);
 //        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
 //            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
 //        }
@@ -59,15 +58,15 @@ public class LotrackProcessorTest {
     public void filterBooleans() {
         String TRUE = "true";
         String FALSE = "false";
-        Region region = new Region("a", "b", "c");
+        JavaRegion region = new JavaRegion("a", "b", "c");
         Set<String> options = new HashSet<>();
         options.add(TRUE);
         options.add(FALSE);
         options.add("WIFI");
-        Map<Region, Set<String>> regionToOptions = new HashMap<>();
+        Map<JavaRegion, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
 
-        Map<Region, Set<String>> result = LotrackProcessor.filterBooleans(regionToOptions);
+        Map<JavaRegion, Set<String>> result = LotrackProcessor.filterBooleans(regionToOptions);
 
         Assert.assertTrue(!result.get(region).contains(TRUE));
         Assert.assertTrue(!result.get(region).contains(FALSE));

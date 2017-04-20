@@ -101,20 +101,6 @@ public class SleepPipeline extends Pipeline {
             if(SleepPipeline.relevantStatementsClasses.contains(entry.getKey().getStatement().getClass())) {
                 RelevantRegionGetterVisitor performanceStatementVisitor = new RelevantRegionGetterVisitor(entry.getValue());
                 relevantRegionToOptions.putAll(performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement()));
-//                Set<ConstantConfigurationExpression> possibleTaintingConfigurations = performanceStatementVisitor.getRelevantInfo(entry.getKey().getStatement());
-//
-//                if(!possibleTaintingConfigurations.isEmpty()) {
-//                    Statement statement = entry.getKey().getStatement();
-//
-//                    // If we only want to consider the then branch as the region
-//                    if(statement instanceof IfStatement) {
-//                        statement = ((IfStatement) statement).getThenBlock();
-//                    }
-//
-//                    SleepRegion relevantRegion = new SleepRegion(statement);
-//                    Regions.addRegion(relevantRegion);
-//                    relevantRegionToOptions.put(relevantRegion, possibleTaintingConfigurations);
-//                }
             }
         }
 
@@ -244,7 +230,7 @@ public class SleepPipeline extends Pipeline {
          *
          * @param ifStatement
          * @return
-         */ // TODO check this since this is where we might need to work on to get inner regions
+         */
         @Override
         public Statement visitIfStatement(IfStatement ifStatement) {
             SleepRegion oldRegion = new SleepRegion(ifStatement.getThenBlock());

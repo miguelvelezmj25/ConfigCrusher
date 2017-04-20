@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -27,7 +26,7 @@ public class LotrackProcessor {
 
     public static final String LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL = "_";
 
-    public static Map<Region, Set<String>> getRegionsToOptions(String database, String program) throws NoSuchFieldException {
+    public static Map<JavaRegion, Set<String>> getRegionsToOptions(String database, String program) throws NoSuchFieldException {
         // This is hardcode to get the output of Lotrack
         List<String> fields = new ArrayList<>();
         fields.add(LotrackProcessor.PACKAGE);
@@ -51,7 +50,8 @@ public class LotrackProcessor {
         List<String> queryResult = ScalaMongoDriverConnector.findProjectionAscending(program, fields, sortBy);
         ScalaMongoDriverConnector.close();
 
-        Map<Region, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        int currentJimpleLine = Integer.MIN_VALUE;
 
         for(String result : queryResult) {
             JSONObject JSONResult = new JSONObject(result);
@@ -88,18 +88,21 @@ public class LotrackProcessor {
                 throw new NoSuchFieldException("The query result does not have neither a " + LotrackProcessor.USED_TERMS + " or " + LotrackProcessor.CONSTRAINT + " fields");
             }
 
-            Region currentRegion = new Region(JSONResult.get(LotrackProcessor.PACKAGE).toString(), JSONResult.get(LotrackProcessor.CLASS).toString(), JSONResult.get(LotrackProcessor.METHOD).toString());
+            JavaRegion currentRegion = new JavaRegion(JSONResult.get(LotrackProcessor.PACKAGE).toString(),
+                                                        JSONResult.get(LotrackProcessor.CLASS).toString(),
+                                                        JSONResult.get(LotrackProcessor.METHOD).toString());
 
             if(regionsToOptions.containsKey(currentRegion)) {
                 Set<String> oldOptions = regionsToOptions.get(currentRegion);
                 options.addAll(oldOptions);
             }
-
+//            else{
+//            }
             regionsToOptions.put(currentRegion, options);
         }
 
 //        int max = Integer.MIN_VALUE;
-//        for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
+//        for(Map.Entry<JavaRegion, Set<String>> entry : regionsToOptions.entrySet()) {
 //            max = Math.max(max, entry.getValue().size());
 ////            System.out.println(max);
 //            if(entry.getValue().size() > 2) {
@@ -110,15 +113,15 @@ public class LotrackProcessor {
         return regionsToOptions;
     }
 
-    public static Map<Region, Set<String>> filterBooleans(Map<Region, Set<String>> regionToOptions) {
+    public static Map<JavaRegion, Set<String>> filterBooleans(Map<JavaRegion, Set<String>> regionToOptions) {
         // These are language dependent since they can be writen with other capitalization
         Set<String> optionsToRemove = new HashSet<>();
         optionsToRemove.add("true");
         optionsToRemove.add("false");
 
-        Map<Region, Set<String>> filteredMap = new HashedMap<>();
+        Map<JavaRegion, Set<String>> filteredMap = new HashedMap<>();
 
-        for(Map.Entry<Region, Set<String>> entry : regionToOptions.entrySet()) {
+        for(Map.Entry<JavaRegion, Set<String>> entry : regionToOptions.entrySet()) {
             Set<String> options = entry.getValue();
             options.removeAll(optionsToRemove);
             filteredMap.put(entry.getKey(), options);
@@ -127,10 +130,10 @@ public class LotrackProcessor {
         return filteredMap;
     }
 
-    public static Map<Region, Set<String>> filterRegionsNoOptions(Map<Region, Set<String>> regionToOptions) {
-        Map<Region, Set<String>> filteredMap = new HashedMap<>();
+    public static Map<JavaRegion, Set<String>> filterRegionsNoOptions(Map<JavaRegion, Set<String>> regionToOptions) {
+        Map<JavaRegion, Set<String>> filteredMap = new HashedMap<>();
 
-        for(Map.Entry<Region, Set<String>> entry : regionToOptions.entrySet()) {
+        for(Map.Entry<JavaRegion, Set<String>> entry : regionToOptions.entrySet()) {
             if(!entry.getValue().isEmpty()) {
                 filteredMap.put(entry.getKey(), entry.getValue());
             }

@@ -4,8 +4,8 @@ c=C
 sleep(2)
 if(a) {
     if(b) {
-            sleep(1)
-        }
+        sleep(1)
+    }
     sleep(3)
 }
 sleep(c)

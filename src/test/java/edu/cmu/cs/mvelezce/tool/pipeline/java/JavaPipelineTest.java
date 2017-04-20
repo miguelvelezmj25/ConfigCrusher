@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -23,7 +22,7 @@ public class JavaPipelineTest {
             System.out.println(program);
         }
 
-        Map<Region, Set<String>> queryResult = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, program);
+        Map<JavaRegion, Set<String>> queryResult = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, program);
         if(csv) {
             System.out.print(queryResult.size() + ", ");
         }
@@ -226,6 +225,8 @@ public class JavaPipelineTest {
 //        }
     }
 
-    // TODO test create compareRegionOptionsCompressionToBF performance mondel with compareRegionOptionsCompressionToBF base time
-
+    @Test
+    public void testBuildPerformanceModel1() throws NoSuchFieldException {
+        JavaPipeline.buildPerformanceModel(JavaPipeline.PLAYYPUS_PROGRAM);
+    }
 }

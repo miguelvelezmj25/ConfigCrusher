@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.transformer;
 
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.apache.commons.collections4.map.HashedMap;
@@ -19,8 +19,8 @@ public class ClassTransformerRegionTimerTest {
     @Test
     public void transform1() throws IOException {
         int methodNumber = 4;
-        Region region = new Region(ClassTransformerBaseTest.PACKAGE, ClassTransformerBaseTest.CLASS, ClassTransformerBaseTest.METHOD + methodNumber);
-        Map<String, Region> methodToRegionToInstrument = new HashedMap<>();
+        JavaRegion region = new JavaRegion(ClassTransformerBaseTest.PACKAGE, ClassTransformerBaseTest.CLASS, ClassTransformerBaseTest.METHOD + methodNumber);
+        Map<String, JavaRegion> methodToRegionToInstrument = new HashedMap<>();
         methodToRegionToInstrument.put(region.getRegionMethod(), region);
 
         ClassTransformer classTransformer = new ClassTransformerRegionTimer(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methodToRegionToInstrument);

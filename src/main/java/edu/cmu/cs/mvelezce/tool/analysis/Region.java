@@ -6,24 +6,22 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/7/17.
  */
-public class Region implements Cloneable {
-    private String regionPackage;
-    private String regionClass;
-    private String regionMethod;
+public abstract class Region implements Cloneable {
+
     private long startTime;
     private long endTime;
     private Set<Region> innerRegions;
     private Region previousExecutingRegion;
 
-    public Region(String regionPackage, String regionClass, String regionMethod) {
-        this.regionPackage = regionPackage;
-        this.regionClass = regionClass;
-        this.regionMethod = regionMethod;
+    public Region() {
         this.startTime = 0;
         this.endTime = 0;
         this.innerRegions = new HashSet<>();
         this.previousExecutingRegion = null;
     }
+
+    @Override
+    public abstract Region clone() throws CloneNotSupportedException;
 
     public void enter() {
         this.previousExecutingRegion = Regions.getCurrentExecutingRegion();
@@ -61,18 +59,6 @@ public class Region implements Cloneable {
         this.innerRegions.add(region);
     }
 
-    public Region(String regionClass, String regionMethod) {
-        this("", regionClass, regionMethod);
-    }
-
-    public Region(String regionMethod) {
-        this("", "", regionMethod);
-    }
-
-    public Region() {
-        this("", "", "");
-    }
-
     public void startTime() {
         this.startTime(System.nanoTime());
     }
@@ -90,9 +76,6 @@ public class Region implements Cloneable {
         this.endTime = endTime;
     }
 
-    /**
-     * Mostly for testing
-     */
     public void resetExecution() {
         this.startTime = 0;
         this.endTime = 0;
@@ -130,58 +113,6 @@ public class Region implements Cloneable {
         return this.getMilliExecutionTime()/1000.0;
     }
 
-    @Override
-    public Region clone() throws CloneNotSupportedException {
-        Region region = new Region();
-        region.regionPackage = this.regionPackage;
-        region.regionClass = this.regionClass;
-        region.regionMethod = this.regionMethod;
-        region.startTime = this.startTime;
-        region.endTime = this.endTime;
-        region.innerRegions = new HashSet<>(this.innerRegions);
-
-        if(this.previousExecutingRegion != null) {
-            region.previousExecutingRegion = this.previousExecutingRegion.clone();
-        }
-
-        return region;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Region region = (Region) o;
-
-        if (!regionPackage.equals(region.regionPackage)) return false;
-        if (!regionClass.equals(region.regionClass)) return false;
-        return regionMethod.equals(region.regionMethod);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = regionPackage.hashCode();
-        result = 31 * result + regionClass.hashCode();
-        result = 31 * result + regionMethod.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Region{" +
-                "regionPackage=" + '"' + regionPackage + '"' +
-                ", regionClass=" + '"' + regionClass + '"' +
-                ", regionMethod=" + '"' + regionMethod + '"' +
-                '}';
-    }
-
-    public String getRegionPackage() { return this.regionPackage; }
-
-    public String getRegionClass() { return this.regionClass; }
-
-    public String getRegionMethod() { return this.regionMethod; }
-
     public Set<Region> getInnerRegions() { return this.innerRegions; }
 
     public long getStartTime() { return this.startTime; }
@@ -189,12 +120,6 @@ public class Region implements Cloneable {
     public long getEndTime() { return this.endTime; }
 
     public Region getPreviousExecutingRegion() { return this.previousExecutingRegion; }
-
-    protected void setRegionPackage(String regionPackage) { this.regionPackage = regionPackage; }
-
-    protected void setRegionClass(String regionClass) { this.regionClass = regionClass; }
-
-    protected void setRegionMethod(String regionMethod) { this.regionMethod = regionMethod; }
 
     protected void setStartTime(long startTime) { this.startTime = startTime; }
 

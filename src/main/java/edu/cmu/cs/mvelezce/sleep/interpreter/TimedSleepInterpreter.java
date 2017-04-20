@@ -47,7 +47,7 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
     @Override
     public Void visitTimedProgram(TimedProgram timedProgram) {
         Region program = Regions.getProgram();
-        Regions.setCurrentExecutingRegion(program);
+        Regions.addExecutingRegion(program);
         program.startTime(this.totalExecutionTime);
 
         int time = totalExecutionTime;

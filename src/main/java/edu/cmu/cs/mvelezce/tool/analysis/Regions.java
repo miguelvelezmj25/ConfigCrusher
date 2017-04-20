@@ -1,17 +1,16 @@
 package edu.cmu.cs.mvelezce.tool.analysis;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by miguelvelez on 4/7/17.
  */
 // TODO use types
-// TODO keep track of each regions inner regions
 public class Regions {
     private static Region program = null;
     private static Set<Region> regions = new HashSet<>();
-    private static Region currentExecutingRegion = null;
+    private static Stack<Region> executingRegions = new Stack<>();
+    private static Map<Region, Set<Region>> regionsToInnerRegions = new HashMap<>();
 
     public static void addProgram(Region program) {
         if(program == null) {
@@ -25,12 +24,12 @@ public class Regions {
         Regions.program = null;
     }
 
-    public static void addRegion(Region region) {
+    public static void addRegion(Region region) throws CloneNotSupportedException {
         if(region == null) {
             throw new IllegalArgumentException("Region cannot be null");
         }
 
-        Regions.regions.add(region);
+        Regions.regions.add(region.clone());
     }
 
     public static void removeRegion(Region region) {
@@ -63,23 +62,94 @@ public class Regions {
         Regions.program.resetState();
     }
 
-    public static void removeAllRegions() {
-        Regions.regions = new HashSet<>();
+    // TODO do we need to track the configuration to get the option?
+    public static void addInnerRegion(Region parent, Region child) {
+        if(parent == null) {
+            throw new IllegalArgumentException("The parent region cannot be null");
+        }
+
+        if(child == null) {
+            throw new IllegalArgumentException("The child region cannot be null");
+        }
+
+        if(!Regions.regionsToInnerRegions.containsKey(parent)) {
+            Regions.regionsToInnerRegions.put(parent, new HashSet<>());
+        }
+
+        Regions.regionsToInnerRegions.get(parent).add(child);
+
+        if(!Regions.regionsToInnerRegions.containsKey(child)) {
+            Regions.regionsToInnerRegions.put(child, new HashSet<>());
+        }
     }
 
-    public static void reset() {
-        Regions.removeProgram();
-        Regions.removeAllRegions();
-    }
-
-    public static void setCurrentExecutingRegion(Region region) {
+    public static void addExecutingRegion(Region region) {
         if(region == null) {
             throw new IllegalArgumentException("The region cannot be null");
         }
 
 //        System.out.println("Executing " + region);
-        Regions.currentExecutingRegion = region;
+        Regions.executingRegions.push(region);
     }
+
+    public static Region getExecutingRegion() {
+        return Regions.executingRegions.peek();
+    }
+
+    public static void removeExecutingRegion(Region region) {
+        Region executing = Regions.executingRegions.pop();
+        // TODO this is for testing that the region that believes to have executed is the one that was executing
+        if(!region.equals(executing)) {
+            throw new RuntimeException("The region that wanted to be remove from the executing regions is not the last region " +
+                    "to be executing");
+        }
+    }
+
+    public static Map<Region, Set<String>> getOptionsInRegionsWithInnerRegions(Map<Region, Set<String>> regionsToOptions) {
+        Map<Region, Set<String>> regionsToInvolvedOptions = new HashMap<>();
+
+        Set<Region> programInnerRegions = Regions.regionsToInnerRegions.get(Regions.program);
+
+        if(programInnerRegions != null) {
+            for (Region programInnerRegion : programInnerRegions) {
+                Regions.calculateOptionsOfRegionsWithInnerRegions(programInnerRegion, regionsToOptions, regionsToInvolvedOptions);
+            }
+        }
+
+        // The program is not a region in the sense that it has options affecting it
+        Regions.regionsToInnerRegions.remove(Regions.program);
+
+        return regionsToInvolvedOptions;
+    }
+
+    private static void calculateOptionsOfRegionsWithInnerRegions(Region region, Map<Region, Set<String>> regionsToOptions, Map<Region, Set<String>> result) {
+        if(!result.containsKey(region)) {
+            Set<String> allAffectingOptions = regionsToOptions.get(region);
+            Set<Region> innerRegions = Regions.regionsToInnerRegions.get(region);
+
+            if(!innerRegions.isEmpty()) {
+                for(Region innerRegion : Regions.regionsToInnerRegions.get(region)) {
+                    Regions.calculateOptionsOfRegionsWithInnerRegions(innerRegion, regionsToOptions, result);
+                }
+
+                for(Region innerRegion : Regions.regionsToInnerRegions.get(region)) {
+                    allAffectingOptions.addAll(result.get(innerRegion));
+                }
+            }
+
+            result.put(region, allAffectingOptions);
+        }
+    }
+
+    public static void reset() {
+        Regions.removeProgram();
+        Regions.regions = new HashSet<>();
+        Regions.executingRegions = new Stack<>();
+        Regions.regionsToInnerRegions = new HashMap<>();
+
+    }
+
+    public static Map<Region, Set<Region>> getRegionsToInnerRegions() { return Regions.regionsToInnerRegions; }
 
     public static Region getProgram() { return Regions.program; }
 
@@ -87,5 +157,5 @@ public class Regions {
         return Regions.regions;
     }
 
-    public static Region getCurrentExecutingRegion() { return Regions.currentExecutingRegion; }
+    public static Stack<Region> getExecutingRegions() { return Regions.executingRegions; }
 }

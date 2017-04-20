@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepRegion;
@@ -122,7 +123,7 @@ public class PipelineTest {
         PipelineTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
     }
 
-    @Test // TODO ERROR because I need to get the other 4 configs from ABC
+    @Test
     public void testGetConfigurationsToExecute9() {
         Set<Set<String>> relevantOptionsSet = PipelineTest.getOptionsSet("ABC, CD, BD");
         PipelineTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
@@ -185,7 +186,8 @@ public class PipelineTest {
     }
 
     @Test
-    public void testCreatePerformanceModel1() {
+    public void testCreatePerformanceModel1() throws CloneNotSupportedException {
+        Regions.reset();
         // Map<Region, Set<String>> regionsToOptions
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
@@ -193,6 +195,7 @@ public class PipelineTest {
         int duration1 = 3;
         Statement timedStatement1 = new SleepStatement(new ConstantIntExpression(duration1));
         Region region1 = new SleepRegion(timedStatement1);
+        Regions.addRegion(region1);
         regionsToOptions.put(region1, relevantOptions);
 
         relevantOptions = new HashSet<>();
@@ -200,6 +203,7 @@ public class PipelineTest {
         int duration2 = 1;
         Statement timedStatement2 = new SleepStatement(new ConstantIntExpression(duration2));
         Region region2 = new SleepRegion(timedStatement2);
+        Regions.addRegion(region2);
         regionsToOptions.put(region2, relevantOptions);
 
         // Set<PerformanceEntry> measuredPerformance
@@ -214,6 +218,9 @@ public class PipelineTest {
         regions.add(region2);
         int programDuration = 2;
         Region program = new SleepRegion(new SleepStatement(new ConstantIntExpression(programDuration)));
+        Regions.addProgram(program);
+        Regions.addInnerRegion(program, region1);
+        Regions.addInnerRegion(program, region2);
         program.startTime(0);
         program.endTime(programDuration);
         PerformanceEntry performanceEntry = new PerformanceEntry(configuration, regions, program);

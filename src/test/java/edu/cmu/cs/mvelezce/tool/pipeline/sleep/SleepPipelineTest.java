@@ -98,7 +98,7 @@ public class SleepPipelineTest {
     }
 
     @Test
-    public void testInstrumentRelevantRegions1() {
+    public void testInstrumentRelevantRegions1() throws CloneNotSupportedException {
         // Program
         Statement sleepStatement = new SleepStatement(new VariableExpression("a"));
         List<Statement> programStatements = new ArrayList<>();
@@ -124,7 +124,7 @@ public class SleepPipelineTest {
     }
 
     @Test
-    public void testMeasureConfigurationPerformance1() {
+    public void testMeasureConfigurationPerformance1() throws CloneNotSupportedException {
         Regions.reset();
 //        Statement ast, Set<Set<String>> configurationsToExecute
 
@@ -166,8 +166,8 @@ public class SleepPipelineTest {
         // Configuration B
         configuration = new HashSet<>();
         configuration.add("B");
-        region.startTime(0);
-        region.endTime(1);
+        Regions.getRegion(region).startTime(0);
+        Regions.getRegion(region).endTime(1);
         performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
@@ -176,8 +176,8 @@ public class SleepPipelineTest {
         configuration.add("A");
         configuration.add("B");
         Regions.resetRegions();
-        region.startTime(0);
-        region.endTime(1);
+        Regions.getRegion(region).startTime(0);
+        Regions.getRegion(region).endTime(1);
         performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
@@ -188,7 +188,7 @@ public class SleepPipelineTest {
     }
 
     @Test
-    public void testMeasureConfigurationPerformance2() {
+    public void testMeasureConfigurationPerformance2() throws CloneNotSupportedException {
         Regions.reset();
         // Statement block
         List<Statement> statementBlock = new ArrayList<>();
@@ -224,8 +224,8 @@ public class SleepPipelineTest {
         // Configuration A
         configuration = new HashSet<>();
         configuration.add("A");
-        region.startTime(0);
-        region.endTime(2);
+        Regions.getRegion(region).startTime(0);
+        Regions.getRegion(region).endTime(2);
         performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
@@ -241,8 +241,8 @@ public class SleepPipelineTest {
         configuration.add("A");
         configuration.add("B");
         Regions.resetRegions();
-        region.startTime(0);
-        region.endTime(2);
+        Regions.getRegion(region).startTime(0);
+        Regions.getRegion(region).endTime(2);
         performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), programRegion);
         measuredPerformance.add(performanceEntry);
 
@@ -303,7 +303,6 @@ public class SleepPipelineTest {
         configuration.add("B");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
     }
-
 
     @Test
     public void testBuildPerformanceModel12() throws FileNotFoundException {

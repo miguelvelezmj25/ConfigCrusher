@@ -27,7 +27,6 @@ import edu.cmu.cs.mvelezce.tool.pipeline.Pipeline;
 import java.util.*;
 
 /**
- * TODO
  * Created by miguelvelez on 2/11/17.
  */
 public class SleepPipeline extends Pipeline {
@@ -189,7 +188,11 @@ public class SleepPipeline extends Pipeline {
                 Statement statement = ifStatement.getThenBlock();
 
                 SleepRegion region = new SleepRegion(statement);
-                Regions.addRegion(region);
+                try {
+                    Regions.addRegion(region);
+                } catch (CloneNotSupportedException e) {
+                   e.printStackTrace();
+                }
                 this.regionToOptions.put(region, this.relevantOptions);
             }
 
@@ -202,7 +205,11 @@ public class SleepPipeline extends Pipeline {
 
             if(!this.relevantOptions.isEmpty()) {
                 SleepRegion region = new SleepRegion(sleepStatement);
-                Regions.addRegion(region);
+                try {
+                    Regions.addRegion(region);
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
                 this.regionToOptions.put(region, this.relevantOptions);
             }
 
@@ -247,7 +254,11 @@ public class SleepPipeline extends Pipeline {
 
                 Regions.removeRegion(oldRegion);
                 SleepRegion region = new SleepRegion(visitedIfStatement.getThenBlock());
-                Regions.addRegion(region);
+                try {
+                    Regions.addRegion(region);
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
 
                 if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
                     return new IfStatement(visitedIfStatement.getCondition(), new TimedStatement(visitedIfStatement.getThenBlock()));
@@ -279,7 +290,11 @@ public class SleepPipeline extends Pipeline {
 
                 Regions.removeRegion(oldRegion);
                 SleepRegion region = new SleepRegion(visitedSleepStatement);
-                Regions.addRegion(region);
+                try {
+                    Regions.addRegion(region);
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
 
                 if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
                     return new TimedStatement(visitedSleepStatement);

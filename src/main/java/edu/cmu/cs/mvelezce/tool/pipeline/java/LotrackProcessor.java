@@ -7,12 +7,11 @@ import org.json.JSONObject;
 
 import java.util.*;
 
-// TODO what should be a region?
+// TODO what should a region be?
 /**
  * Created by mvelezce on 4/5/17.
  */
 public class LotrackProcessor {
-
     public static final String PACKAGE = "Package";
     public static final String CLASS = "Class";
     public static final String METHOD = "Method";

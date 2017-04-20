@@ -133,9 +133,10 @@ public class CFGBuilder extends ReturnerVisitor {
             throw new IllegalArgumentException("The statementWhile cannot be null");
         }
 
-        // TODO might have to visit block
-        this.checkConditions(statementWhile);
-        return null;
+        throw new RuntimeException("This method is currently not implemented");
+//        We might have to visit block
+//        this.checkConditions(statementWhile);
+//        return null;
     }
 
     /**

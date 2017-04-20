@@ -11,42 +11,43 @@ public abstract class Region implements Cloneable {
     private long startTime;
     private long endTime;
     private Set<Region> innerRegions;
-    private Region previousExecutingRegion;
+//    private Region previousExecutingRegion;
 
     public Region() {
         this.startTime = 0;
         this.endTime = 0;
         this.innerRegions = new HashSet<>();
-        this.previousExecutingRegion = null;
+//        this.previousExecutingRegion = null;
     }
 
     @Override
     public abstract Region clone() throws CloneNotSupportedException;
 
-    public void enter() {
-        this.previousExecutingRegion = Regions.getCurrentExecutingRegion();
-        this.previousExecutingRegion.addInnerRegion(this);
-        Regions.setCurrentExecutingRegion(this);
+    private void enterRegion() {
+        Region previousExecutingRegion = Regions.getExecutingRegion();
+        previousExecutingRegion.addInnerRegion(this);
+        Regions.addExecutingRegion(this);
+        Regions.addInnerRegion(previousExecutingRegion, this);
+    }
 
+    public void enter() {
+        this.enterRegion();
         this.startTime();
     }
 
     public void enter(long startTime) {
-        this.previousExecutingRegion = Regions.getCurrentExecutingRegion();
-        this.previousExecutingRegion.addInnerRegion(this);
-        Regions.setCurrentExecutingRegion(this);
-
+        this.enterRegion();
         this.startTime(startTime);
     }
 
     public void exit() {
-        Regions.setCurrentExecutingRegion(this.previousExecutingRegion);
+        Regions.removeExecutingRegion(this);
 
         this.endTime();
     }
 
     public void exit(long endTime) {
-        Regions.setCurrentExecutingRegion(this.previousExecutingRegion);
+        Regions.removeExecutingRegion(this);
 
         this.endTime(endTime);
     }
@@ -84,7 +85,6 @@ public abstract class Region implements Cloneable {
     public void resetState() {
         this.resetExecution();
         this.innerRegions = new HashSet<>();
-        this.previousExecutingRegion = null;
     }
 
     public int getExecutionTime() {
@@ -119,13 +119,9 @@ public abstract class Region implements Cloneable {
 
     public long getEndTime() { return this.endTime; }
 
-    public Region getPreviousExecutingRegion() { return this.previousExecutingRegion; }
-
     protected void setStartTime(long startTime) { this.startTime = startTime; }
 
     protected void setEndTime(long endTime) { this.endTime = endTime; }
 
     protected void setInnerRegions(Set<Region> innerRegions) { this.innerRegions = innerRegions; }
-
-    protected void setPreviousExecutingRegion(Region previousExecutingRegion) { this.previousExecutingRegion = previousExecutingRegion; }
 }

@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 
 // TODO time can be in seconds, milliseonds, minutes,.... That affects the type of the block.
-// TODO add equal terms to not have +3A + 1A
 /**
  * Created by mvelezce on 3/9/17.
  */
@@ -86,8 +85,8 @@ public class PerformanceModel {
         return configurationToInfluence;
     }
 
-    public static int calculateConfigurationInfluence(Set<String> longestConfiguration, Map<Set<String>, Integer> configurationsToPerformance, Map<Set<String>, Integer> memoizationStore) {
-        if(!memoizationStore.containsKey(longestConfiguration)) {
+    public static int calculateConfigurationInfluence(Set<String> longestConfiguration, Map<Set<String>, Integer> configurationsToPerformance, Map<Set<String>, Integer> configurationToInfluence) {
+        if(!configurationToInfluence.containsKey(longestConfiguration)) {
             int currentLength = longestConfiguration.size();
             int influence = configurationsToPerformance.get(longestConfiguration);
 
@@ -100,15 +99,15 @@ public class PerformanceModel {
                     intersectionWithLongestConfiguration.retainAll(configuration);
 
                     if(configuration.size() < currentLength && intersectionWithLongestConfiguration.equals(configuration)/*!intersectionWithLongestConfiguration.isEmpty()*/) {
-                        influence -= PerformanceModel.calculateConfigurationInfluence(entry.getKey(), configurationsToPerformance, memoizationStore);
+                        influence -= PerformanceModel.calculateConfigurationInfluence(entry.getKey(), configurationsToPerformance, configurationToInfluence);
                     }
                 }
             }
 
-            memoizationStore.put(longestConfiguration, influence);
+            configurationToInfluence.put(longestConfiguration, influence);
         }
 
-        return memoizationStore.get(longestConfiguration);
+        return configurationToInfluence.get(longestConfiguration);
     }
 
     @Override

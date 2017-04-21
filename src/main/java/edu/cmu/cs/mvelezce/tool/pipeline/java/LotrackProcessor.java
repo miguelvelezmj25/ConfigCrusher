@@ -141,31 +141,31 @@ public class LotrackProcessor {
                     JavaRegion peekedMetadataRegion = new JavaRegion(peekedRegion.getRegionPackage(), peekedRegion.getRegionClass(), peekedRegion.getRegionMethod());
 
                     if(peekedMetadataRegion.equals(currentRegion)) {
-                        List<Integer> endBytecodeIndexes = new LinkedList<>();
+                        int endBytecodeIndex = Integer.MIN_VALUE;
                         List<Object> endBytecodeIndexesAsObjects = currentJSONResult.getJSONArray(LotrackProcessor.BYTECODE_INDEXES).toList();
 
-                        for (Object bytecodeIndex : endBytecodeIndexesAsObjects) {
-                            endBytecodeIndexes.add((Integer) bytecodeIndex);
+                        for(Object bytecodeIndex : endBytecodeIndexesAsObjects) {
+                            endBytecodeIndex = Math.max(endBytecodeIndex, (Integer) bytecodeIndex);
                         }
 
                         JavaRegion oldPartialRegion = partialRegions.pop();
-                        oldPartialRegion.setEndBytecodeIndexes(endBytecodeIndexes);
+                        oldPartialRegion.setEndBytecodeIndex(endBytecodeIndex);
 
                         regionsToOptions.put(oldPartialRegion, options);
                     }
                 }
 
-                List<Integer> startBytecodeIndexes = new LinkedList<>();
+                int startBytecodeIndex = Integer.MAX_VALUE;
                 List<Object> startBytecodeIndexesAsObjects = JSONResult.getJSONArray(LotrackProcessor.BYTECODE_INDEXES).toList();
 
                 for(Object bytecodeIndex : startBytecodeIndexesAsObjects) {
-                    startBytecodeIndexes.add((Integer) bytecodeIndex);
+                    startBytecodeIndex = Math.min(startBytecodeIndex, (Integer) bytecodeIndex);
                 }
 
                 JavaRegion newPartialRegion = new JavaRegion(JSONResult.get(LotrackProcessor.PACKAGE).toString(),
                         JSONResult.get(LotrackProcessor.CLASS).toString(),
                         JSONResult.get(LotrackProcessor.METHOD).toString(),
-                        startBytecodeIndexes);
+                        startBytecodeIndex);
 
                 partialRegions.push(newPartialRegion);
 
@@ -181,15 +181,15 @@ public class LotrackProcessor {
         }
 
         if(!partialRegions.isEmpty()) {
-            List<Integer> endBytecodeIndexes = new LinkedList<>();
+            int endBytecodeIndex = Integer.MIN_VALUE;
             List<Object> endBytecodeIndexesAsObjects = currentJSONResult.getJSONArray(LotrackProcessor.BYTECODE_INDEXES).toList();
 
             for(Object bytecodeIndex : endBytecodeIndexesAsObjects) {
-                endBytecodeIndexes.add((Integer) bytecodeIndex);
+                endBytecodeIndex = Math.max(endBytecodeIndex, (Integer) bytecodeIndex);
             }
 
             JavaRegion oldPartialRegion = partialRegions.pop();
-            oldPartialRegion.setEndBytecodeIndexes(endBytecodeIndexes);
+            oldPartialRegion.setEndBytecodeIndex(endBytecodeIndex);
 
             regionsToOptions.put(oldPartialRegion, currentOptions);
         }

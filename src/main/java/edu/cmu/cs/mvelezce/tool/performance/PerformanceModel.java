@@ -15,16 +15,16 @@ import java.util.Set;
  */
 public class PerformanceModel {
     private long baseTime;
-    private MultiValuedMap<Set<String>, Map<Set<String>, Integer>> regionToInfluenceTable;
-    private Map<Set<String>, Integer> configurationToPerformance;
+    private MultiValuedMap<Set<String>, Map<Set<String>, Long>> regionToInfluenceTable;
+    private Map<Set<String>, Long> configurationToPerformance;
 
 
-    public PerformanceModel(long baseTime, List<Map<Set<String>, Integer>> blocks) {
+    public PerformanceModel(long baseTime, List<Map<Set<String>, Long>> blocks) {
         this.baseTime = baseTime;
         this.regionToInfluenceTable = new HashSetValuedHashMap<>();
         this.configurationToPerformance = new HashedMap<>();
 
-        for(Map<Set<String>, Integer> block : blocks) {
+        for(Map<Set<String>, Long> block : blocks) {
             Set<String> relevantOptions = new HashSet<>();
 
             for(Set<String> configuration : block.keySet()) {
@@ -34,9 +34,9 @@ public class PerformanceModel {
             this.regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
         }
 
-        for(Map.Entry<Set<String>, Map<Set<String>, Integer>> optionToPerformanceTable : this.regionToInfluenceTable.entries()) {
-            for(Map.Entry<Set<String>, Integer> configurationToPerformance : optionToPerformanceTable.getValue().entrySet()) {
-                int time = configurationToPerformance.getValue();
+        for(Map.Entry<Set<String>, Map<Set<String>, Long>> optionToPerformanceTable : this.regionToInfluenceTable.entries()) {
+            for(Map.Entry<Set<String>, Long> configurationToPerformance : optionToPerformanceTable.getValue().entrySet()) {
+                long time = configurationToPerformance.getValue();
 
                 if(this.configurationToPerformance.containsKey(configurationToPerformance.getKey())) {
                     time += this.configurationToPerformance.get(configurationToPerformance.getKey());
@@ -49,13 +49,13 @@ public class PerformanceModel {
         HashSet<String> emptyConfiguration = new HashSet<>();
         long emptyConfigurationPerformance = this.baseTime;
         emptyConfigurationPerformance += this.configurationToPerformance.get(emptyConfiguration);
-        this.configurationToPerformance.put(emptyConfiguration, (int) emptyConfigurationPerformance);
+        this.configurationToPerformance.put(emptyConfiguration, emptyConfigurationPerformance);
     }
 
     public long evaluate(Set<String> configuration) {
         long performance = 0;
 
-        for(Map.Entry<Set<String>, Integer> entry : this.configurationToPerformance.entrySet()) {
+        for(Map.Entry<Set<String>, Long> entry : this.configurationToPerformance.entrySet()) {
             Set<String> configurationValueOfOptionInBlock = new HashSet<>(entry.getKey());
             configurationValueOfOptionInBlock.retainAll(configuration);
 
@@ -68,13 +68,13 @@ public class PerformanceModel {
         return performance;
     }
 
-    public static Map<Set<String>, Integer> calculateConfigurationsInfluence(Map<Set<String>, Integer> regionTable) {
-        Map<Set<String>, Integer> configurationToInfluence = new HashedMap<>();
+    public static Map<Set<String>, Long> calculateConfigurationsInfluence(Map<Set<String>, Long> regionTable) {
+        Map<Set<String>, Long> configurationToInfluence = new HashedMap<>();
 
-        int numberOfOptions = (int) Math.sqrt(regionTable.size());
+        long numberOfOptions = (long) Math.sqrt(regionTable.size());
         Set<String> regionOptions = new HashSet<>();
 
-        for(Map.Entry<Set<String>, Integer> entry : regionTable.entrySet()) {
+        for(Map.Entry<Set<String>, Long> entry : regionTable.entrySet()) {
             if(entry.getKey().size() == numberOfOptions) {
                 regionOptions.addAll(entry.getKey());
             }
@@ -85,15 +85,15 @@ public class PerformanceModel {
         return configurationToInfluence;
     }
 
-    public static int calculateConfigurationInfluence(Set<String> longestConfiguration, Map<Set<String>, Integer> configurationsToPerformance, Map<Set<String>, Integer> configurationToInfluence) {
+    public static long calculateConfigurationInfluence(Set<String> longestConfiguration, Map<Set<String>, Long> configurationsToPerformance, Map<Set<String>, Long> configurationToInfluence) {
         if(!configurationToInfluence.containsKey(longestConfiguration)) {
             int currentLength = longestConfiguration.size();
-            int influence = configurationsToPerformance.get(longestConfiguration);
+            long influence = configurationsToPerformance.get(longestConfiguration);
 
             if(currentLength > 0) {
                 influence = configurationsToPerformance.get(longestConfiguration);
 
-                for(Map.Entry<Set<String>, Integer> entry : configurationsToPerformance.entrySet()) {
+                for(Map.Entry<Set<String>, Long> entry : configurationsToPerformance.entrySet()) {
                     Set<String> configuration = entry.getKey();
                     Set<String> intersectionWithLongestConfiguration = new HashSet<>(longestConfiguration);
                     intersectionWithLongestConfiguration.retainAll(configuration);
@@ -120,7 +120,7 @@ public class PerformanceModel {
         }
 
         for(int i = 0; i <= allOptions.size(); i++) {
-            for(Map.Entry<Set<String>, Integer> entry : this.configurationToPerformance.entrySet()) {
+            for(Map.Entry<Set<String>, Long> entry : this.configurationToPerformance.entrySet()) {
                 if(entry.getKey().size() != i) {
                     continue;
                 }

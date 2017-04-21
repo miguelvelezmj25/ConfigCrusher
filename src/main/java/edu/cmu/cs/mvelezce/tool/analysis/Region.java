@@ -87,13 +87,13 @@ public abstract class Region implements Cloneable {
         this.innerRegions = new HashSet<>();
     }
 
-    public int getExecutionTime() {
+    public long getExecutionTime() {
         // Still measuring
         if(this.startTime != 0 && this.endTime == 0) {
             return -1;
         }
 
-        return (int) (this.endTime - this.startTime);
+        return this.endTime - this.startTime;
     }
 
     public long getNanoExecutionTime() {

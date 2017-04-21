@@ -3,10 +3,19 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by mvelezce on 4/19/17.
+ */
+/*
+TODO JAVA regions are:
+Method call
+Then branch if statement
+Else branch if statement
+Block in while statement
+Block in for statement
  */
 public class JavaRegion extends Region {
     private String regionPackage;
@@ -24,10 +33,14 @@ public class JavaRegion extends Region {
         this.endBytecodeIndexes = endBytecodeIndexes;
     }
 
+
+    public JavaRegion(String regionPackage, String regionClass, String regionMethod, List<Integer> startBytecodeIndexes) {
+        this(regionPackage, regionClass, regionMethod, startBytecodeIndexes, new LinkedList<>());
+    }
+
     public JavaRegion(String regionPackage, String regionClass, String regionMethod) {
         this(regionPackage, regionClass, regionMethod, new ArrayList<>(), new ArrayList<>());
     }
-
     public JavaRegion(String regionClass, String regionMethod) {
         this("", regionClass, regionMethod);
     }
@@ -79,4 +92,8 @@ public class JavaRegion extends Region {
     public List<Integer> getStartBytecodeIndexes() { return this.startBytecodeIndexes; }
 
     public List<Integer> getEndBytecodeIndexes() { return this.endBytecodeIndexes; }
+
+    public void setStartBytecodeIndexes(List<Integer> startBytecodeIndexes) { this.startBytecodeIndexes = startBytecodeIndexes; }
+
+    public void setEndBytecodeIndexes(List<Integer> endBytecodeIndexes) { this.endBytecodeIndexes = endBytecodeIndexes; }
 }

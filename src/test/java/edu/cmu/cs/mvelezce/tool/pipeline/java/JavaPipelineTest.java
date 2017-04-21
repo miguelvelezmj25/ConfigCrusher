@@ -155,7 +155,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testCompareRegionOptionsCompressionToBF1() throws NoSuchFieldException {
-        JavaPipelineTest.compareRegionOptionsCompressionToBF("ZipMeChangedSimplified", false);
+        JavaPipelineTest.compareRegionOptionsCompressionToBF("platypus", false);
     }
 
     @Test

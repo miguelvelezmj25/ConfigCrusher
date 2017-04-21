@@ -11,6 +11,7 @@ import java.util.*;
  * Created by mvelezce on 4/5/17.
  */
 // TODO how to create regions if there are execptions that the bytecode goes back to -1?
+// TODO this is not correct
 public class LotrackProcessor {
     public static final String PACKAGE = "Package";
     public static final String CLASS = "Class";
@@ -49,110 +50,149 @@ public class LotrackProcessor {
         List<String> queryResult = ScalaMongoDriverConnector.findProjectionAscending(program, fields, sortBy);
         ScalaMongoDriverConnector.close();
 
-        String currentMethod = "";
-        String currentClass = "";
-        int currentJimpleLine = -10;
-        int currentByteCodeIndex = -10;
-        for(String result : queryResult) {
-            JSONObject JSONResult = new JSONObject(result);
-            String method = JSONResult.getString("Method");
-            String classNew = JSONResult.getString("Class");
-
-            int jimpleLine = JSONResult.getInt("JimpleLineNo");
-
-            if(classNew.equals(currentClass) && method.equals(currentMethod)) {
-                if(currentJimpleLine > jimpleLine) {
-                    throw new RuntimeException(currentClass + " " + currentMethod + " " + currentJimpleLine + " " + jimpleLine);
-                }
-
-                if(currentByteCodeIndex > JSONResult.getJSONArray("bytecodeIndexes").getInt(0)) {
-                    throw new RuntimeException(currentClass + " " + currentMethod + " " + currentByteCodeIndex + " " + JSONResult.getJSONArray("bytecodeIndexes").getInt(0));
-                }
-
-                if(JSONResult.getJSONArray("bytecodeIndexes").length() > 1) {
-                    if(currentByteCodeIndex > JSONResult.getJSONArray("bytecodeIndexes").getInt(1)) {
-                        throw new RuntimeException(currentClass + " " + currentMethod + " " + currentByteCodeIndex + " " + JSONResult.getJSONArray("bytecodeIndexes").getInt(1));
-                    }
-                }
-            }
-            else {
-                currentMethod = method;
-                currentClass = classNew;
-            }
-            currentJimpleLine = jimpleLine;
-
-            if(JSONResult.getJSONArray("bytecodeIndexes").length() > 1) {
-                currentByteCodeIndex = Math.max(JSONResult.getJSONArray("bytecodeIndexes").getInt(0), JSONResult.getJSONArray("bytecodeIndexes").getInt(1));
-            }
-            else {
-                currentByteCodeIndex = JSONResult.getJSONArray("bytecodeIndexes").getInt(0);
-
-            }
-
-        }
+//        String currentMethod = "";
+//        String currentClass = "";
+//        int currentJimpleLine = -10;
+//        int currentByteCodeIndex = -10;
+//        for(String result : queryResult) {
+//            JSONObject JSONResult = new JSONObject(result);
+//            String method = JSONResult.getString("Method");
+//            String classNew = JSONResult.getString("Class");
+//
+//            int jimpleLine = JSONResult.getInt("JimpleLineNo");
+//
+//            if(classNew.equals(currentClass) && method.equals(currentMethod)) {
+//                if(currentJimpleLine > jimpleLine) {
+//                    System.out.println("jimpleline: " + currentClass + " " + currentMethod + " " + currentJimpleLine + " " + jimpleLine);
+//                }
+//
+//                if(currentByteCodeIndex > JSONResult.getJSONArray("bytecodeIndexes").getInt(0)) {
+//                    System.out.println("bytecodeIndex: " + currentClass + " " + currentMethod + " " + currentByteCodeIndex + " " + JSONResult.getJSONArray("bytecodeIndexes").getInt(0));
+//                }
+//
+//                if(JSONResult.getJSONArray("bytecodeIndexes").length() > 1) {
+//                    if(currentByteCodeIndex > JSONResult.getJSONArray("bytecodeIndexes").getInt(1)) {
+//                        System.out.println("bytecodeIndex: " + currentClass + " " + currentMethod + " " + currentByteCodeIndex + " " + JSONResult.getJSONArray("bytecodeIndexes").getInt(1));
+//                    }
+//                }
+//            }
+//            else {
+//                currentMethod = method;
+//                currentClass = classNew;
+//            }
+//            currentJimpleLine = jimpleLine;
+//
+//            if(JSONResult.getJSONArray("bytecodeIndexes").length() > 1) {
+//                currentByteCodeIndex = Math.max(JSONResult.getJSONArray("bytecodeIndexes").getInt(0), JSONResult.getJSONArray("bytecodeIndexes").getInt(1));
+//            }
+//            else {
+//                currentByteCodeIndex = JSONResult.getJSONArray("bytecodeIndexes").getInt(0);
+//
+//            }
+//
+//        }
 
         Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
-        currentJimpleLine = Integer.MIN_VALUE;
+        Stack<JavaRegion> partialRegions = new Stack<>();
+        JavaRegion currentRegion = new JavaRegion();
+        Set<String> currentOptions = new HashSet<>();
+        JSONObject currentJSONResult = new JSONObject();
 
         for(String result : queryResult) {
             JSONObject JSONResult = new JSONObject(result);
             Set<String> options = new HashSet<>();
 
-            if(JSONResult.has(LotrackProcessor.USED_TERMS)) {
-                for(Object string : JSONResult.getJSONArray(LotrackProcessor.USED_TERMS).toList()) {
+            if (JSONResult.has(LotrackProcessor.USED_TERMS)) {
+                for (Object string : JSONResult.getJSONArray(LotrackProcessor.USED_TERMS).toList()) {
                     options.add(string.toString());
                 }
-            }
-            else if(JSONResult.has(LotrackProcessor.CONSTRAINT)) {
+            } else if (JSONResult.has(LotrackProcessor.CONSTRAINT)) {
                 // Be careful that this is imprecise since the constraints can be very large and does not fit in the db field
                 String[] constraints = JSONResult.getString(LotrackProcessor.CONSTRAINT).split(" ");
 
-                for(String constraint : constraints) {
+                for (String constraint : constraints) {
                     constraint = constraint.replaceAll("[()^|!=]", "");
-                    if(constraint.isEmpty() || StringUtils.isNumeric(constraint)) {
+                    if (constraint.isEmpty() || StringUtils.isNumeric(constraint)) {
                         continue;
                     }
 
-                    if(constraint.contains(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
+                    if (constraint.contains(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
                         constraint = constraint.split(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
                     }
 
                     // Because the constraint gotten from Lotrack might be too long
-                    if(constraint.contains(".")) {
+                    if (constraint.contains(".")) {
                         continue;
                     }
 
                     options.add(constraint);
                 }
-            }
-            else {
+            } else {
                 throw new NoSuchFieldException("The query result does not have neither a " + LotrackProcessor.USED_TERMS + " or " + LotrackProcessor.CONSTRAINT + " fields");
             }
 
-            currentJimpleLine = currentJimpleLine + 1 -1;
+            JavaRegion region = new JavaRegion(JSONResult.get(LotrackProcessor.PACKAGE).toString(),
+                    JSONResult.get(LotrackProcessor.CLASS).toString(),
+                    JSONResult.get(LotrackProcessor.METHOD).toString());
 
+            if(!currentRegion.equals(region) || !currentOptions.equals(options)) {
+                if(!partialRegions.isEmpty()) {
+                    JavaRegion peekedRegion = partialRegions.peek();
+                    JavaRegion peekedMetadataRegion = new JavaRegion(peekedRegion.getRegionPackage(), peekedRegion.getRegionClass(), peekedRegion.getRegionMethod());
 
-            JavaRegion currentRegion = new JavaRegion(JSONResult.get(LotrackProcessor.PACKAGE).toString(),
-                                                        JSONResult.get(LotrackProcessor.CLASS).toString(),
-                                                        JSONResult.get(LotrackProcessor.METHOD).toString());
+                    if(peekedMetadataRegion.equals(currentRegion)) {
+                        List<Integer> endBytecodeIndexes = new LinkedList<>();
+                        List<Object> endBytecodeIndexesAsObjects = currentJSONResult.getJSONArray(LotrackProcessor.BYTECODE_INDEXES).toList();
 
-            if(regionsToOptions.containsKey(currentRegion)) {
-                Set<String> oldOptions = regionsToOptions.get(currentRegion);
-                options.addAll(oldOptions);
+                        for (Object bytecodeIndex : endBytecodeIndexesAsObjects) {
+                            endBytecodeIndexes.add((Integer) bytecodeIndex);
+                        }
+
+                        JavaRegion oldPartialRegion = partialRegions.pop();
+                        oldPartialRegion.setEndBytecodeIndexes(endBytecodeIndexes);
+
+                        regionsToOptions.put(oldPartialRegion, options);
+                    }
+                }
+
+                List<Integer> startBytecodeIndexes = new LinkedList<>();
+                List<Object> startBytecodeIndexesAsObjects = JSONResult.getJSONArray(LotrackProcessor.BYTECODE_INDEXES).toList();
+
+                for(Object bytecodeIndex : startBytecodeIndexesAsObjects) {
+                    startBytecodeIndexes.add((Integer) bytecodeIndex);
+                }
+
+                JavaRegion newPartialRegion = new JavaRegion(JSONResult.get(LotrackProcessor.PACKAGE).toString(),
+                        JSONResult.get(LotrackProcessor.CLASS).toString(),
+                        JSONResult.get(LotrackProcessor.METHOD).toString(),
+                        startBytecodeIndexes);
+
+                partialRegions.push(newPartialRegion);
+
             }
-//            else{
-//            }
-            regionsToOptions.put(currentRegion, options);
+
+            currentRegion = region;
+            currentOptions = options;
+            currentJSONResult = JSONResult;
         }
 
-//        int max = Integer.MIN_VALUE;
-//        for(Map.Entry<JavaRegion, Set<String>> entry : regionsToOptions.entrySet()) {
-//            max = Math.max(max, entry.getValue().size());
-////            System.out.println(max);
-//            if(entry.getValue().size() > 2) {
-//                System.out.println(entry.getKey().getRegionClass() + entry.getKey().getRegionMethod() + " " + entry.getValue());
-//            }
-//        }
+        if(partialRegions.size() > 1) {
+            throw new RuntimeException("There was an error calculating the java regions");
+        }
+
+        if(!partialRegions.isEmpty()) {
+            List<Integer> endBytecodeIndexes = new LinkedList<>();
+            List<Object> endBytecodeIndexesAsObjects = currentJSONResult.getJSONArray(LotrackProcessor.BYTECODE_INDEXES).toList();
+
+            for(Object bytecodeIndex : endBytecodeIndexesAsObjects) {
+                endBytecodeIndexes.add((Integer) bytecodeIndex);
+            }
+
+            JavaRegion oldPartialRegion = partialRegions.pop();
+            oldPartialRegion.setEndBytecodeIndexes(endBytecodeIndexes);
+
+            regionsToOptions.put(oldPartialRegion, currentOptions);
+        }
 
         return regionsToOptions;
     }

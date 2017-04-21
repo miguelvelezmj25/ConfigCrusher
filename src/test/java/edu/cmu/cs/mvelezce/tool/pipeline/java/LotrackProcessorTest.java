@@ -39,20 +39,16 @@ public class LotrackProcessorTest {
     @Test
     public void getRegionsToOptions1() throws NoSuchFieldException {
         Map<JavaRegion, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
-//        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
-//            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
-//        }
+        // TODO not working correctly
         Assert.assertFalse(output.isEmpty());
     }
 
-    @Test
-    public void getRegionsToOptions2() throws NoSuchFieldException {
-        Map<JavaRegion, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.LANGUAGETOOL_PROGRAM);
-//        for(Map.Entry<Region, Set<String>> entry : output.entrySet()) {
-//            System.out.println(entry.getKey() + " " + entry.getValue().size() + " " + entry.getValue());
-//        }
-        Assert.assertFalse(output.isEmpty());
-    }
+//    @Test
+//    public void getRegionsToOptions2() throws NoSuchFieldException {
+//        Map<JavaRegion, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.LANGUAGETOOL_PROGRAM);
+//        // TODO not working correctly
+//        Assert.assertFalse(output.isEmpty());
+//    }
 
     @Test
     public void filterBooleans() {
@@ -70,28 +66,6 @@ public class LotrackProcessorTest {
 
         Assert.assertTrue(!result.get(region).contains(TRUE));
         Assert.assertTrue(!result.get(region).contains(FALSE));
-    }
-
-    @Test
-    public void test() {
-        List<String> projection = new ArrayList<>();
-        projection.add(LotrackProcessor.JAVA_LINE_NO);
-//        projection.add(LotrackProcessor.JIMPLE_LINE_NO);
-        projection.add(LotrackProcessor.CONSTRAINT_PRETTY);
-//        projection.add(LotrackProcessor.USED_TERMS);
-
-        List<String> sort = new ArrayList<>();
-        sort.add(LotrackProcessor.JIMPLE_LINE_NO);
-
-        ScalaMongoDriverConnector.connect(JavaPipeline.LOTRACK_DATABASE);
-        List<String> queryResult = ScalaMongoDriverConnector.findProjectionFilterAscending(JavaPipeline.PLAYYPUS_PROGRAM, projection, LotrackProcessor.METHOD, "getCommandData", sort);
-        ScalaMongoDriverConnector.close();
-
-        for(String result : queryResult) {
-            JSONObject JSONResult = new JSONObject(result);
-//            System.out.println(JSONResult);
-
-        }
     }
 
 }

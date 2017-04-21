@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.transformer;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;

@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;

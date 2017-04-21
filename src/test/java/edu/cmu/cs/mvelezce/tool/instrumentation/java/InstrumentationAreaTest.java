@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.InstrumentationArea;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class InstrumentationAreaTest {
 
     @Test
     public void testReadFile() throws IOException {
-        String fileName = "edu/cmu/cs/mvelezce/tool/instrumentation/DummyClass";
+        String fileName = "edu/cmu/cs/mvelezce/tool/instrumentation/java/DummyClass";
         List<MethodNode> methods = InstrumentationArea.readFile(fileName);
         Assert.assertFalse(methods.isEmpty());
     }

@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.transformer;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -12,17 +12,17 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by mvelezce on 4/3/17.
+ * Created by miguelvelez on 4/9/17.
  */
-public class ClassTransformerPrinterTest {
+public class ClassTransformerTimerTest {
 
     @Test
-    public void testTransform1() throws IOException {
-        int methodNumber = 1;
+    public void testTransform2() throws IOException {
+        int methodNumber = 2;
         Set<String> methods = new HashSet<>();
         methods.add(ClassTransformerBaseTest.METHOD + methodNumber);
 
-        ClassTransformer classTransformer = new ClassTransformerPrinter(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methods, "Hello, world!");
+        ClassTransformer classTransformer = new ClassTransformerTimer(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methods);
         ClassNode classNode = classTransformer.readClass();
         classTransformer.transform(classNode);
         classTransformer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME);
@@ -33,7 +33,7 @@ public class ClassTransformerPrinterTest {
             methodToInstructionCount.put(methodNode.name, methodNode.instructions.size());
         }
 
-        classTransformer = new ClassTransformerPrinter(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methods, "Hello, world!");
+        classTransformer = new ClassTransformerTimer(ClassTransformerBaseTest.FILE_TO_INSTRUMENT_NAME, methods);
         classNode = classTransformer.readClass();
         classTransformer.transform(classNode);
 

@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.transformer;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 public class ClassTransformerBaseTest {
 
     protected static final String CLASS_CONTAINER = "target/classes/";
-    protected static final String PACKAGE = "edu.cmu.cs.mvelezce.tool.instrumentation";
+    protected static final String PACKAGE = "edu.cmu.cs.mvelezce.tool.instrumentation.java";
     protected static final String CONTROLLER_CLASS = "InstrumentationArea";
     protected static final String CLASS = "DummyClass";
     protected static final String METHOD = "inc";

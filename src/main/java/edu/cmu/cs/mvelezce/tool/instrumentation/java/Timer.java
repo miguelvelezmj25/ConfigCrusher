@@ -1,11 +1,9 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 /**
  * Created by mvelezce on 4/3/17.
  */
 public class Timer {
-
-
 
     public static void startTimer(String id) {
         System.out.println("Starting timer: " + id);

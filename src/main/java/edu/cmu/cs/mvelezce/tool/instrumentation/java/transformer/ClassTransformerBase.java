@@ -12,17 +12,12 @@ import java.io.IOException;
 /**
  * Created by mvelezce on 4/3/17.
  */
-public class ClassTransformerBase implements ClassTransformer {
+public abstract class ClassTransformerBase implements ClassTransformer {
 
     private String fileName;
 
     public ClassTransformerBase(String fileName) {
         this.fileName = fileName;
-    }
-
-    @Override
-    public void transform(ClassNode classNode) {
-        System.out.println("The " + this.getClass() + " does not make any transformations");
     }
 
     @Override

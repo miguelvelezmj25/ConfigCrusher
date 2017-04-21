@@ -20,8 +20,6 @@ public class SleepRegion extends Region {
         this.statement = statement;
     }
 
-    public Statement getStatement() { return this.statement; }
-
     public Region clone() throws CloneNotSupportedException {
         SleepRegion sleepRegion = new SleepRegion(this.statement);
         sleepRegion.setStartTime(this.getStartTime());
@@ -97,4 +95,5 @@ public class SleepRegion extends Region {
                 '}';
     }
 
+    public Statement getStatement() { return this.statement; }
 }

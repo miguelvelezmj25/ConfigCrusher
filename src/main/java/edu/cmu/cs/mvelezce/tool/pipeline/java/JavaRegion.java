@@ -2,6 +2,9 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by mvelezce on 4/19/17.
  */
@@ -9,26 +12,20 @@ public class JavaRegion extends Region {
     private String regionPackage;
     private String regionClass;
     private String regionMethod;
-    // TODO What is a region in java and how to identify it and limit it
-    private int startJimpleLine;
-    private int endJimpleLine;
-    private String unit;
+    private List<Integer> startBytecodeIndexes;
+    private List<Integer> endBytecodeIndexes;
 
-    public JavaRegion(String regionPackage, String regionClass, String regionMethod, int startJimpleLine, int endJimpleLine) {
+    public JavaRegion(String regionPackage, String regionClass, String regionMethod, List<Integer> startBytecodeIndexes, List<Integer> endBytecodeIndexes) {
         super();
         this.regionPackage = regionPackage;
         this.regionClass = regionClass;
         this.regionMethod = regionMethod;
-        this.startJimpleLine = startJimpleLine;
-        this.endJimpleLine = endJimpleLine;
-    }
-
-    public JavaRegion(String regionPackage, String regionClass, String regionMethod, int startJimpleLine) {
-        this(regionPackage, regionClass, regionMethod, startJimpleLine, Integer.MIN_VALUE);
+        this.startBytecodeIndexes = startBytecodeIndexes;
+        this.endBytecodeIndexes = endBytecodeIndexes;
     }
 
     public JavaRegion(String regionPackage, String regionClass, String regionMethod) {
-        this(regionPackage, regionClass, regionMethod, Integer.MIN_VALUE);
+        this(regionPackage, regionClass, regionMethod, new ArrayList<>(), new ArrayList<>());
     }
 
     public JavaRegion(String regionClass, String regionMethod) {
@@ -56,33 +53,21 @@ public class JavaRegion extends Region {
 
         JavaRegion that = (JavaRegion) o;
 
-        if (startJimpleLine != that.startJimpleLine) return false;
-        if (endJimpleLine != that.endJimpleLine) return false;
-        if (regionPackage != null ? !regionPackage.equals(that.regionPackage) : that.regionPackage != null)
-            return false;
-        if (regionClass != null ? !regionClass.equals(that.regionClass) : that.regionClass != null) return false;
-        return regionMethod.equals(that.regionMethod);
+        if (!regionPackage.equals(that.regionPackage)) return false;
+        if (!regionClass.equals(that.regionClass)) return false;
+        if (!regionMethod.equals(that.regionMethod)) return false;
+        if (!startBytecodeIndexes.equals(that.startBytecodeIndexes)) return false;
+        return endBytecodeIndexes.equals(that.endBytecodeIndexes);
     }
 
     @Override
     public int hashCode() {
-        int result = regionPackage != null ? regionPackage.hashCode() : 0;
-        result = 31 * result + (regionClass != null ? regionClass.hashCode() : 0);
+        int result = regionPackage.hashCode();
+        result = 31 * result + regionClass.hashCode();
         result = 31 * result + regionMethod.hashCode();
-        result = 31 * result + startJimpleLine;
-        result = 31 * result + endJimpleLine;
+        result = 31 * result + startBytecodeIndexes.hashCode();
+        result = 31 * result + endBytecodeIndexes.hashCode();
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "JavaRegion{" +
-                "regionPackage='" + regionPackage + '\'' +
-                ", regionClass='" + regionClass + '\'' +
-                ", regionMethod='" + regionMethod + '\'' +
-                ", startJimpleLine=" + startJimpleLine +
-                ", endJimpleLine=" + endJimpleLine +
-                '}';
     }
 
     public String getRegionPackage() { return this.regionPackage; }
@@ -91,11 +76,7 @@ public class JavaRegion extends Region {
 
     public String getRegionMethod() { return this.regionMethod; }
 
-    public int getStartJimpleLine() { return this.startJimpleLine; }
+    public List<Integer> getStartBytecodeIndexes() { return this.startBytecodeIndexes; }
 
-    public int getEndJimpleLine() { return this.endJimpleLine; }
-
-    public void setStartJimpleLine(int startJimpleLine) { this.startJimpleLine = startJimpleLine; }
-
-    public void setEndJimpleLine(int endJimpleLine) { this.endJimpleLine = endJimpleLine; }
+    public List<Integer> getEndBytecodeIndexes() { return this.endBytecodeIndexes; }
 }

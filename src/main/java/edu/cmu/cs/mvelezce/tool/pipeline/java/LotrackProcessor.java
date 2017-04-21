@@ -7,10 +7,10 @@ import org.json.JSONObject;
 
 import java.util.*;
 
-// TODO what should a region be?
 /**
  * Created by mvelezce on 4/5/17.
  */
+// TODO how to create regions if there are execptions that the bytecode goes back to -1?
 public class LotrackProcessor {
     public static final String PACKAGE = "Package";
     public static final String CLASS = "Class";
@@ -49,8 +49,50 @@ public class LotrackProcessor {
         List<String> queryResult = ScalaMongoDriverConnector.findProjectionAscending(program, fields, sortBy);
         ScalaMongoDriverConnector.close();
 
+        String currentMethod = "";
+        String currentClass = "";
+        int currentJimpleLine = -10;
+        int currentByteCodeIndex = -10;
+        for(String result : queryResult) {
+            JSONObject JSONResult = new JSONObject(result);
+            String method = JSONResult.getString("Method");
+            String classNew = JSONResult.getString("Class");
+
+            int jimpleLine = JSONResult.getInt("JimpleLineNo");
+
+            if(classNew.equals(currentClass) && method.equals(currentMethod)) {
+                if(currentJimpleLine > jimpleLine) {
+                    throw new RuntimeException(currentClass + " " + currentMethod + " " + currentJimpleLine + " " + jimpleLine);
+                }
+
+                if(currentByteCodeIndex > JSONResult.getJSONArray("bytecodeIndexes").getInt(0)) {
+                    throw new RuntimeException(currentClass + " " + currentMethod + " " + currentByteCodeIndex + " " + JSONResult.getJSONArray("bytecodeIndexes").getInt(0));
+                }
+
+                if(JSONResult.getJSONArray("bytecodeIndexes").length() > 1) {
+                    if(currentByteCodeIndex > JSONResult.getJSONArray("bytecodeIndexes").getInt(1)) {
+                        throw new RuntimeException(currentClass + " " + currentMethod + " " + currentByteCodeIndex + " " + JSONResult.getJSONArray("bytecodeIndexes").getInt(1));
+                    }
+                }
+            }
+            else {
+                currentMethod = method;
+                currentClass = classNew;
+            }
+            currentJimpleLine = jimpleLine;
+
+            if(JSONResult.getJSONArray("bytecodeIndexes").length() > 1) {
+                currentByteCodeIndex = Math.max(JSONResult.getJSONArray("bytecodeIndexes").getInt(0), JSONResult.getJSONArray("bytecodeIndexes").getInt(1));
+            }
+            else {
+                currentByteCodeIndex = JSONResult.getJSONArray("bytecodeIndexes").getInt(0);
+
+            }
+
+        }
+
         Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
-        int currentJimpleLine = Integer.MIN_VALUE;
+        currentJimpleLine = Integer.MIN_VALUE;
 
         for(String result : queryResult) {
             JSONObject JSONResult = new JSONObject(result);
@@ -86,6 +128,9 @@ public class LotrackProcessor {
             else {
                 throw new NoSuchFieldException("The query result does not have neither a " + LotrackProcessor.USED_TERMS + " or " + LotrackProcessor.CONSTRAINT + " fields");
             }
+
+            currentJimpleLine = currentJimpleLine + 1 -1;
+
 
             JavaRegion currentRegion = new JavaRegion(JSONResult.get(LotrackProcessor.PACKAGE).toString(),
                                                         JSONResult.get(LotrackProcessor.CLASS).toString(),

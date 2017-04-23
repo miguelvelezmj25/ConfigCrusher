@@ -21,7 +21,7 @@ public class JavaRegionClassTransformerPrinterTest {
     public void testTransform1() throws IOException, CloneNotSupportedException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        JavaRegion region = new JavaRegion(Sleep.PACKAGE, Sleep.CLASS, Sleep.METHOD_1, 14, 15);
+        JavaRegion region = new JavaRegion(Sleep.PACKAGE, Sleep.CLASS, Sleep.METHOD_1, 19, 20);
         Regions.addRegion(region);
 
         // Get class
@@ -50,10 +50,13 @@ public class JavaRegionClassTransformerPrinterTest {
 
         Assert.assertTrue(transformed);
 
-//        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
-//        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Main.FILENAME + " " + Sleep.CLASS.toLowerCase() + " 1 A";
-//        String output = ClassTransformerBaseTest.executeCommand(command);
-//        Assert.assertNotEquals(0, output.length());
+        // Actually modify the class file
+        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
+
+        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep.FILENAME  + " true";
+        String output = ClassTransformerBaseTest.executeCommand(command);
+
+        Assert.assertNotEquals(0, output.length());
     }
 
 }

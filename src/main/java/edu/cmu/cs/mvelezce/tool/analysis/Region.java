@@ -24,6 +24,7 @@ public abstract class Region implements Cloneable {
     public abstract Region clone() throws CloneNotSupportedException;
 
     private void enterRegion() {
+        System.out.println("Enter region");
         Region previousExecutingRegion = Regions.getExecutingRegion();
         previousExecutingRegion.addInnerRegion(this);
         Regions.addExecutingRegion(this);
@@ -41,6 +42,7 @@ public abstract class Region implements Cloneable {
     }
 
     public void exit() {
+        System.out.println("Exit region");
         Regions.removeExecutingRegion(this);
 
         this.endTime();
@@ -75,6 +77,8 @@ public abstract class Region implements Cloneable {
 
     public void endTime(long endTime) {
         this.endTime = endTime;
+
+        System.out.println(this.getExecutionTime());
     }
 
     public void resetExecution() {

@@ -50,13 +50,13 @@ public class JavaRegionClassTransformerPrinterTest {
 
         Assert.assertTrue(transformed);
 
-//        // Actually modify the class file
-//        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
-//
-//        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep.FILENAME  + " true";
-//        String output = ClassTransformerBaseTest.executeCommand(command);
-//
-//        Assert.assertNotEquals(0, output.length());
+        // Actually modify the class file
+        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
+
+        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep.FILENAME  + " true";
+        String output = ClassTransformerBaseTest.executeCommand(command);
+
+        Assert.assertNotEquals(0, output.length());
     }
 
     @Test

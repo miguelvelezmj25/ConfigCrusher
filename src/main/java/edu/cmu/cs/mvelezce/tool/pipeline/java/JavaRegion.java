@@ -73,6 +73,17 @@ public class JavaRegion extends Region {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "JavaRegion{" +
+                "regionPackage='" + this.regionPackage + '\'' +
+                ", regionClass='" + this.regionClass + '\'' +
+                ", regionMethod='" + this.regionMethod + '\'' +
+                ", startBytecodeIndex=" + this.startBytecodeIndex +
+                ", endBytecodeIndex=" + this.endBytecodeIndex +
+                '}';
+    }
+
     public String getRegionPackage() { return this.regionPackage; }
 
     public String getRegionClass() { return this.regionClass; }

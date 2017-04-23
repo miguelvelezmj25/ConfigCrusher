@@ -41,16 +41,19 @@ public class Regions {
     }
 
     public static Region getRegion(Region region) {
+        System.out.println(region);
         if(region == null) {
             throw new IllegalArgumentException("Region cannot be null");
         }
 
         for(Region entry : Regions.regions) {
             if(entry.equals(region)) {
+                System.out.println("Found region");
                 return entry;
             }
         }
 
+        System.out.println("Did not find region");
         return null;
     }
 

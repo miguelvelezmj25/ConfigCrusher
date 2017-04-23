@@ -10,6 +10,8 @@ import java.util.Set;
  */
 public class Main {
 
+    public static final String FILENAME = Main.class.getCanonicalName();
+
     public static void main(String[] args) throws InterruptedException {
         if(args[0].equals("sleep")) {
             Main.callSleep(Integer.valueOf(args[1]), Main.getOptionsSet(args[2]));

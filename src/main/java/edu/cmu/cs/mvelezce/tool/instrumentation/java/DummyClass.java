@@ -4,6 +4,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
  * Created by mvelezce on 3/31/17.
  */
 public class DummyClass {
+    // TODO what should I do with this now that we have the programs folder
 
     private int methodNumber;
 

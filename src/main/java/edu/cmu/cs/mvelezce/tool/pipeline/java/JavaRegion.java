@@ -2,10 +2,6 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Created by mvelezce on 4/19/17.
  */
@@ -33,7 +29,6 @@ public class JavaRegion extends Region {
         this.endBytecodeIndex = endBytecodeIndex;
     }
 
-
     public JavaRegion(String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex) {
         this(regionPackage, regionClass, regionMethod, startBytecodeIndex, Integer.MIN_VALUE);
     }
@@ -51,8 +46,7 @@ public class JavaRegion extends Region {
 
     @Override
     public Region clone() throws CloneNotSupportedException {
-        // TODO implement
-        return null;
+        return new JavaRegion(this.regionPackage, this.regionClass, this.regionMethod, this.startBytecodeIndex, this.endBytecodeIndex);
     }
 
     @Override
@@ -85,7 +79,12 @@ public class JavaRegion extends Region {
 
     public String getRegionMethod() { return this.regionMethod; }
 
+    public int getStartBytecodeIndex() { return this.startBytecodeIndex; }
+
+    public int getEndBytecodeIndex() { return this.endBytecodeIndex; }
+
     public void setStartBytecodeIndex(int startBytecodeIndex) { this.startBytecodeIndex = startBytecodeIndex; }
 
     public void setEndBytecodeIndex(int endBytecodeIndex) { this.endBytecodeIndex = endBytecodeIndex; }
+
 }

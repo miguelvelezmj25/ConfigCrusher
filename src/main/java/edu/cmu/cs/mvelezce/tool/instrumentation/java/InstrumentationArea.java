@@ -15,6 +15,7 @@ import java.util.jar.JarFile;
  * Created by miguelvelez on 4/9/17.
  */
 public class InstrumentationArea {
+    // TODO what should I do with this now that we have the programs folder
 
     public static void main(String[] args) {
         InstrumentationArea.executeDummyClass(Integer.valueOf(args[0]));

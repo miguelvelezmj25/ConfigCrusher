@@ -21,6 +21,48 @@ public class JavaRegionClassTransformerPrinterTest {
     public void testTransform1() throws IOException, CloneNotSupportedException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        JavaRegion region = new JavaRegion(Sleep.PACKAGE, Sleep.CLASS, Sleep.MAIN_METHOD, 23, 24);
+        Regions.addRegion(region);
+
+        // Get class
+        JavaRegionClassTransformerPrinter printer = new JavaRegionClassTransformerPrinter(Sleep.FILENAME, "Money!");
+        ClassNode classNode = printer.readClass();
+
+        // Save size of instructions for each method in the class
+        Map<String, Integer> methodToInstructionCount = new HashMap<>();
+
+        for(MethodNode methodNode : classNode.methods) {
+            methodToInstructionCount.put(methodNode.name, methodNode.instructions.size());
+        }
+
+        // Transform the Java region
+        printer.transform(classNode);
+
+        // Check if the transform actually made changes to the bytecode
+        boolean transformed = false;
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(methodNode.instructions.size() != methodToInstructionCount.get(methodNode.name)) {
+                transformed = true;
+                break;
+            }
+        }
+
+        Assert.assertTrue(transformed);
+
+//        // Actually modify the class file
+//        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
+//
+//        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep.FILENAME  + " true";
+//        String output = ClassTransformerBaseTest.executeCommand(command);
+//
+//        Assert.assertNotEquals(0, output.length());
+    }
+
+    @Test
+    public void testTransform2() throws IOException, CloneNotSupportedException {
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep.PACKAGE, Sleep.CLASS, Sleep.METHOD_1, 19, 20);
         Regions.addRegion(region);
 
@@ -50,13 +92,13 @@ public class JavaRegionClassTransformerPrinterTest {
 
         Assert.assertTrue(transformed);
 
-        // Actually modify the class file
-        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
-
-        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep.FILENAME  + " true";
-        String output = ClassTransformerBaseTest.executeCommand(command);
-
-        Assert.assertNotEquals(0, output.length());
+//        // Actually modify the class file
+//        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
+//
+//        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep.FILENAME  + " true";
+//        String output = ClassTransformerBaseTest.executeCommand(command);
+//
+//        Assert.assertNotEquals(0, output.length());
     }
 
 }

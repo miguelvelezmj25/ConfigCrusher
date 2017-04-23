@@ -220,6 +220,7 @@ public class SleepPipeline extends Pipeline {
     /**
      * Concrete visitor that replaces statements with TimedStatement for measuring time
      */
+    // TODO why do we pass the constraints? We are only instrumenting regions. Maybe change what regions are in the region selector so that we are not selecting regions that have the same constraints as outer region
     private static class AddTimedVisitor extends ReplacerVisitor {
         private Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions;
         private Stack<Set<ConstantConfigurationExpression>> constraints;

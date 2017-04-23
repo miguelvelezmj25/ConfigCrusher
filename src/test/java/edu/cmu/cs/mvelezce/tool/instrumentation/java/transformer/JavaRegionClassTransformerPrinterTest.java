@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Main;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;

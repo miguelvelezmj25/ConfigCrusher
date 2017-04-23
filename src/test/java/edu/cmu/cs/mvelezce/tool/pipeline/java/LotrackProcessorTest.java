@@ -1,11 +1,12 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
-import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 4/6/17.

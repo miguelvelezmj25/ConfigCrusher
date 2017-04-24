@@ -33,6 +33,8 @@ public class Sleep {
     }
 
     public static void program1(boolean A) throws InterruptedException {
+        Integer c = new Integer(2);
+        c = new Integer(3);
         System.out.println("program1");
         boolean a = A;
         Thread.sleep(200);

@@ -17,7 +17,9 @@ public class JavaRegionClassTransformerTimer extends JavaRegionClassTransformer 
     @Override
     public InsnList addInstructionsBeforeRegion(JavaRegion javaRegion) {
         InsnList instructionsBeforeRegion = new InsnList();
+        // Creates an uninitialized object in the operand stack
         instructionsBeforeRegion.add(new TypeInsnNode(Opcodes.NEW, "edu/cmu/cs/mvelezce/tool/pipeline/java/JavaRegion"));
+        // Since INVOKESPECIAL will consume the value created by NEW from the operand stack, I need to DUP since I may need to use the object reference later; e.g. for returning it
         instructionsBeforeRegion.add(new InsnNode(Opcodes.DUP));
         instructionsBeforeRegion.add(new LdcInsnNode(Type.getType("Ledu/cmu/cs/mvelezce/tool/instrumentation/java/programs/Sleep;")));
         instructionsBeforeRegion.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/lang/Class", "getPackage", "()Ljava/lang/Package;", false));

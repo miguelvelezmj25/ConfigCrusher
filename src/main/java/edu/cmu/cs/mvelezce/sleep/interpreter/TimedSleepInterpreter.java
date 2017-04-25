@@ -8,7 +8,6 @@ import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
 import edu.cmu.cs.mvelezce.sleep.visitor.TimedVisitor;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepRegion;
 
 /**
  * Created by mvelezce on 4/13/17.
@@ -32,11 +31,9 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
 
     @Override
     public Void visitTimedStatement(TimedStatement timedStatement) {
-        SleepRegion hold = new SleepRegion(timedStatement.getStatements());
-        Region region = Regions.getRegion(hold);
+        Region region = Regions.getRegion(timedStatement.getRegionID());
         region.enter(this.totalExecutionTime);
 
-        int time = totalExecutionTime;
         timedStatement.getStatements().accept(this);
 
         region.exit(this.totalExecutionTime);
@@ -50,7 +47,6 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
         Regions.addExecutingRegion(program);
         program.startTime(this.totalExecutionTime);
 
-        int time = totalExecutionTime;
         timedProgram.getStatements().accept(this);
 
         Regions.getProgram().endTime(this.totalExecutionTime);

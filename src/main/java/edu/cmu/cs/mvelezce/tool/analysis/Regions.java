@@ -40,29 +40,43 @@ public class Regions {
         Regions.regions.remove(region);
     }
 
+    /**
+     * Get a region by id where the location is not important
+     * @param regionID
+     * @return
+     */
+    public static Region getRegion(UUID regionID) {
+        if(regionID == null) {
+            throw new IllegalArgumentException("RegionID cannot be null");
+        }
+
+        for(Region entry : Regions.regions) {
+            if(entry.getRegionID().equals(regionID)) {
+                return entry;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Getting a region that uses the context of the region rather than the ID
+     * @param region
+     *
+     * @return
+     */
     public static Region getRegion(Region region) {
-        System.out.println(region);
         if(region == null) {
             throw new IllegalArgumentException("Region cannot be null");
         }
 
         for(Region entry : Regions.regions) {
             if(entry.equals(region)) {
-                System.out.println("Found region");
                 return entry;
             }
         }
 
-        System.out.println("Did not find region");
         return null;
-    }
-
-    public static void resetRegions() {
-        for(Region region : Regions.regions) {
-            region.resetState();
-        }
-
-        Regions.program.resetState();
     }
 
     // TODO do we need to track the configuration to get the option?
@@ -106,6 +120,14 @@ public class Regions {
             throw new RuntimeException("The region that wanted to be remove from the executing regions is not the last region " +
                     "to be executing");
         }
+    }
+
+    public static void resetRegions() {
+        for(Region region : Regions.regions) {
+            region.resetState();
+        }
+
+        Regions.program.resetState();
     }
 
     public static Map<Region, Set<String>> getOptionsInRegionsWithInnerRegions(Map<Region, Set<String>> regionsToOptions) {
@@ -152,8 +174,6 @@ public class Regions {
 
     }
 
-    public static Map<Region, Set<Region>> getRegionsToInnerRegions() { return Regions.regionsToInnerRegions; }
-
     public static Region getProgram() { return Regions.program; }
 
     public static Set<Region> getRegions() {
@@ -161,4 +181,6 @@ public class Regions {
     }
 
     public static Stack<Region> getExecutingRegions() { return Regions.executingRegions; }
+
+    public static Map<Region, Set<Region>> getRegionsToInnerRegions() { return Regions.regionsToInnerRegions; }
 }

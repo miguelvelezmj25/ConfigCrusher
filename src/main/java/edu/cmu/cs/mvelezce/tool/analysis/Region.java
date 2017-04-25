@@ -2,33 +2,39 @@ package edu.cmu.cs.mvelezce.tool.analysis;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by miguelvelez on 4/7/17.
  */
 public abstract class Region implements Cloneable {
 
+    private UUID regionID;
     private long startTime;
     private long endTime;
     private Set<Region> innerRegions;
-//    private Region previousExecutingRegion;
 
-    public Region() {
+
+    public Region(UUID regionID) {
+        this.regionID = regionID;
         this.startTime = 0;
         this.endTime = 0;
         this.innerRegions = new HashSet<>();
-//        this.previousExecutingRegion = null;
+    }
+
+    public Region() {
+        this(UUID.randomUUID());
     }
 
     @Override
     public abstract Region clone() throws CloneNotSupportedException;
 
     private void enterRegion() {
-        System.out.println("Enter region");
+        // TODO why both regions and region have inner region field?
         Region previousExecutingRegion = Regions.getExecutingRegion();
+        Regions.addInnerRegion(previousExecutingRegion, this);
         previousExecutingRegion.addInnerRegion(this);
         Regions.addExecutingRegion(this);
-        Regions.addInnerRegion(previousExecutingRegion, this);
     }
 
     public void enter() {
@@ -42,7 +48,6 @@ public abstract class Region implements Cloneable {
     }
 
     public void exit() {
-        System.out.println("Exit region");
         Regions.removeExecutingRegion(this);
 
         this.endTime();
@@ -77,8 +82,6 @@ public abstract class Region implements Cloneable {
 
     public void endTime(long endTime) {
         this.endTime = endTime;
-
-        System.out.println(this.getExecutionTime());
     }
 
     public void resetExecution() {
@@ -116,6 +119,8 @@ public abstract class Region implements Cloneable {
     public double getSecondsExecutionTime() {
         return this.getMilliExecutionTime()/1000.0;
     }
+
+    public UUID getRegionID() { return this.regionID; }
 
     public Set<Region> getInnerRegions() { return this.innerRegions; }
 

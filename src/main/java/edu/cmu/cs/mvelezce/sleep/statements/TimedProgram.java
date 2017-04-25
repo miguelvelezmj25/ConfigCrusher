@@ -4,17 +4,21 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.Visitor;
 import edu.cmu.cs.mvelezce.sleep.visitor.TimedVisitor;
 
+import java.util.UUID;
+
 /**
  * Created by mvelezce on 4/14/17.
  */
 public class TimedProgram extends TimedStatement {
+
     /**
      * Instantiates a {@code TimedStatement}.
      *
+     * @param regionID
      * @param statements
      */
-    public TimedProgram(Statement statements) {
-        super(statements);
+    public TimedProgram(UUID regionID, Statement statements) {
+        super(regionID, statements);
     }
 
     @Override

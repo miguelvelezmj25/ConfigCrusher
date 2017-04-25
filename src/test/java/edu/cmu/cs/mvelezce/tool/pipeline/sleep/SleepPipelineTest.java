@@ -134,16 +134,16 @@ public class SleepPipelineTest {
         // TimedStatement
         // Sleep statement has configuration to avoid having a statement assignment
         Statement statement = new SleepStatement(new ConstantConfigurationExpression("B"));
-        TimedStatement timedStatement = new TimedStatement(statement);
-        statementBlock.add(timedStatement);
         Region region = new SleepRegion(statement);
+        TimedStatement timedStatement = new TimedStatement(region.getRegionID(), statement);
+        statementBlock.add(timedStatement);
         Regions.addRegion(region);
 
         // Program
         Program program = new Program(new BlockStatement(statementBlock));
         Region programRegion = new SleepRegion(program);
         Regions.addProgram(programRegion);
-        TimedProgram timedProgram = new TimedProgram(program);
+        TimedProgram timedProgram = new TimedProgram(programRegion.getRegionID(), program);
 
         // Configurations
         Set<Set<String>> optionsSet = PipelineTest.getOptionsSet("AB");
@@ -197,9 +197,9 @@ public class SleepPipelineTest {
         // Sleep statement has configuration to avoid having a statement assignment
         Statement statement = new SleepStatement(new ConstantIntExpression(2));
         statement = new IfStatement(new ConstantConfigurationExpression("A"), statement);
-        Statement timedStatement = new TimedStatement(statement);
-        statementBlock.add(timedStatement);
         Region region = new SleepRegion(statement);
+        Statement timedStatement = new TimedStatement(region.getRegionID(), statement);
+        statementBlock.add(timedStatement);
         Regions.reset();
         Regions.addRegion(region);
 
@@ -207,7 +207,7 @@ public class SleepPipelineTest {
         Program program = new Program(new BlockStatement(statementBlock));
         Region programRegion = new SleepRegion(program);
         Regions.addProgram(programRegion);
-        TimedProgram timedProgram = new TimedProgram(program);
+        TimedProgram timedProgram = new TimedProgram(programRegion.getRegionID(), program);
 
         // Configurations
         Set<Set<String>> optionsSet = PipelineTest.getOptionsSet("AB");

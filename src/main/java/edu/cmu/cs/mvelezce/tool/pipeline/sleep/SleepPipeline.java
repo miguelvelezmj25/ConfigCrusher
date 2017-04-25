@@ -69,7 +69,7 @@ public class SleepPipeline extends Pipeline {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<SleepRegion, Set<ConstantConfigurationExpression>> entry : relevantRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey());
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
             Set<String> options = SleepPipeline.sleepConfigurationSetToStringSet(entry.getValue());
             regionsToOptions.put(region, options);
         }
@@ -117,8 +117,8 @@ public class SleepPipeline extends Pipeline {
     }
 
     public static TimedProgram instrumentProgram(Program program) {
-        TimedProgram timedProgram = new TimedProgram(program);
-        SleepRegion region = new SleepRegion(timedProgram.getStatements());
+        SleepRegion region = new SleepRegion(program.getBlockStatement());
+        TimedProgram timedProgram = new TimedProgram(region.getRegionID(), program);
         Regions.addProgram(region);
 
         return timedProgram;
@@ -186,13 +186,15 @@ public class SleepPipeline extends Pipeline {
 
             if(!this.relevantOptions.isEmpty()) {
                 Statement statement = ifStatement.getThenBlock();
-
                 SleepRegion region = new SleepRegion(statement);
+
                 try {
                     Regions.addRegion(region);
-                } catch (CloneNotSupportedException e) {
+                }
+                catch (CloneNotSupportedException e) {
                    e.printStackTrace();
                 }
+
                 this.regionToOptions.put(region, this.relevantOptions);
             }
 
@@ -205,11 +207,14 @@ public class SleepPipeline extends Pipeline {
 
             if(!this.relevantOptions.isEmpty()) {
                 SleepRegion region = new SleepRegion(sleepStatement);
+
                 try {
                     Regions.addRegion(region);
-                } catch (CloneNotSupportedException e) {
+                }
+                catch (CloneNotSupportedException e) {
                     e.printStackTrace();
                 }
+
                 this.regionToOptions.put(region, this.relevantOptions);
             }
 
@@ -242,27 +247,20 @@ public class SleepPipeline extends Pipeline {
         @Override
         public Statement visitIfStatement(IfStatement ifStatement) {
             SleepRegion oldRegion = new SleepRegion(ifStatement.getThenBlock());
-            oldRegion = (SleepRegion) Regions.getRegion(oldRegion);
+            Region region = Regions.getRegion(oldRegion);
 
-            if(oldRegion != null) {
+            if(region != null) {
                 this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
             }
 
             IfStatement visitedIfStatement = (IfStatement) super.visitIfStatement(ifStatement);
 
-            if(oldRegion != null) {
+            if(region != null) {
                 this.constraints.pop();
 
-                Regions.removeRegion(oldRegion);
-                SleepRegion region = new SleepRegion(visitedIfStatement.getThenBlock());
-                try {
-                    Regions.addRegion(region);
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                }
-
                 if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
-                    return new IfStatement(visitedIfStatement.getCondition(), new TimedStatement(visitedIfStatement.getThenBlock()));
+                    TimedStatement timedStatement = new TimedStatement(region.getRegionID(), visitedIfStatement.getThenBlock());
+                    return new IfStatement(visitedIfStatement.getCondition(), timedStatement);
                 }
             }
 
@@ -278,27 +276,19 @@ public class SleepPipeline extends Pipeline {
         @Override
         public Statement visitSleepStatement(SleepStatement sleepStatement) {
             SleepRegion oldRegion = new SleepRegion(sleepStatement);
-            oldRegion = (SleepRegion) Regions.getRegion(oldRegion);
+            Region region = Regions.getRegion(oldRegion);
 
-            if(oldRegion != null) {
+            if(region != null) {
                 this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
             }
 
             Statement visitedSleepStatement = super.visitSleepStatement(sleepStatement);
 
-            if(oldRegion != null) {
+            if(region != null) {
                 this.constraints.pop();
 
-                Regions.removeRegion(oldRegion);
-                SleepRegion region = new SleepRegion(visitedSleepStatement);
-                try {
-                    Regions.addRegion(region);
-                } catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                }
-
                 if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
-                    return new TimedStatement(visitedSleepStatement);
+                    return new TimedStatement(region.getRegionID(), visitedSleepStatement);
                 }
             }
 

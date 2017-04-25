@@ -2,6 +2,8 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 
+import java.util.UUID;
+
 /**
  * Created by mvelezce on 4/19/17.
  */
@@ -14,14 +16,23 @@ Block in while statement
 Block in for statement
  */
 public class JavaRegion extends Region {
+    // Used for location
     private String regionPackage;
     private String regionClass;
     private String regionMethod;
     private int startBytecodeIndex;
     private int endBytecodeIndex;
 
+    private JavaRegion(UUID regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
+        super(regionId);
+        this.regionPackage = regionPackage;
+        this.regionClass = regionClass;
+        this.regionMethod = regionMethod;
+        this.startBytecodeIndex = startBytecodeIndex;
+        this.endBytecodeIndex = endBytecodeIndex;
+    }
+
     public JavaRegion(String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
-        super();
         this.regionPackage = regionPackage;
         this.regionClass = regionClass;
         this.regionMethod = regionMethod;
@@ -44,9 +55,10 @@ public class JavaRegion extends Region {
         this("", "");
     }
 
+
     @Override
     public Region clone() throws CloneNotSupportedException {
-        return new JavaRegion(this.regionPackage, this.regionClass, this.regionMethod, this.startBytecodeIndex, this.endBytecodeIndex);
+        return new JavaRegion(this.getRegionID(), this.regionPackage, this.regionClass, this.regionMethod, this.startBytecodeIndex, this.endBytecodeIndex);
     }
 
     @Override

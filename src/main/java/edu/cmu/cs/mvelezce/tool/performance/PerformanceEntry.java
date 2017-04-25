@@ -34,19 +34,6 @@ public class PerformanceEntry {
 
     }
 
-    public long getBaseTime() {
-        // TODO be careful because of inner regions are double counting. Only works because the performance entry that I pick does not have inner regions
-        if(PerformanceEntry.baseTime < 0) {
-            PerformanceEntry.baseTime = this.program.getExecutionTime();
-
-            for(Region region : this.regions.values()) {
-                PerformanceEntry.baseTime -= region.getExecutionTime();
-            }
-        }
-
-        return PerformanceEntry.baseTime;
-    }
-
     public static void reset() {
         PerformanceEntry.baseTime = -1;
     }

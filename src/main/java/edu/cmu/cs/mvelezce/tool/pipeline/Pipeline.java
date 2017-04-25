@@ -230,7 +230,17 @@ public abstract class Pipeline {
             }
         }
 
-        long baseTime = measuredPerformance.iterator().next().getBaseTime();
+        PerformanceEntry performanceEntry = measuredPerformance.iterator().next();
+        Set<String> baseConfiguration =  performanceEntry.getConfiguration();
+        long baseTime = performanceEntry.getProgram().getExecutionTime();
+
+        for(Map.Entry<Region, Map<Set<String>, Long>> regionToRealPerformance : regionsToRealPerformance.entrySet()) {
+            Set<String> baseConfigurationValueOnRealPerformance = regionsToOptions.get(regionToRealPerformance.getKey());
+            baseConfigurationValueOnRealPerformance.retainAll(baseConfiguration);
+
+            baseTime -= regionToRealPerformance.getValue().get(baseConfigurationValueOnRealPerformance);
+        }
+
         List<Map<Set<String>, Long>> blockTimeList = new ArrayList<>(regionsToRealPerformance.values());
 
         return new PerformanceModel(baseTime, blockTimeList);

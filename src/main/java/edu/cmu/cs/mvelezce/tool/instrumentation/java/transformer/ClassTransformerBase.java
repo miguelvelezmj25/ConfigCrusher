@@ -30,11 +30,11 @@ public abstract class ClassTransformerBase implements ClassTransformer {
     }
 
     @Override
-    public void writeClass(ClassNode classNode, String fileName) throws IOException {
+    public void writeClass(ClassNode classNode) throws IOException {
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         classNode.accept(classWriter);
 
-        DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(fileName + ".class")));
+        DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(this.fileName + ".class")));
         output.write(classWriter.toByteArray());
         output.flush();
         output.close();

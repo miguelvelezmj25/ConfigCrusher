@@ -112,7 +112,8 @@ public class SleepPipeline extends Pipeline {
      * @return
      */
     public static Program instrumentRelevantRegions(Program program, Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
-        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantRegionsToOptions);
+//        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantRegionsToOptions);
+        AddTimedVisitor addTimedVisitor = new AddTimedVisitor();
         return (Program) program.accept(addTimedVisitor);
     }
 
@@ -170,18 +171,17 @@ public class SleepPipeline extends Pipeline {
 
         @Override
         public Expression visitVariableExpression(VariableExpression variableExpression) {
-                for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
-                    if(taintedVariable.getVariable().equals(variableExpression)) {
-                        this.relevantOptions.addAll(taintedVariable.getConfigurations());
-                    }
+            for(TaintAnalysis.PossibleTaint taintedVariable : this.taintedVariables) {
+                if(taintedVariable.getVariable().equals(variableExpression)) {
+                    this.relevantOptions.addAll(taintedVariable.getConfigurations());
                 }
+            }
 
             return variableExpression;
         }
 
         @Override
         public Void visitIfStatement(IfStatement ifStatement) {
-            // TODO should we visit the then branch?
             ifStatement.getCondition().accept(this);
 
             if(!this.relevantOptions.isEmpty()) {
@@ -227,16 +227,21 @@ public class SleepPipeline extends Pipeline {
      */
     // TODO why do we pass the constraints? We are only instrumenting regions. Maybe change what regions are in the region selector so that we are not selecting regions that have the same constraints as outer region
     private static class AddTimedVisitor extends ReplacerVisitor {
-        private Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions;
-        private Stack<Set<ConstantConfigurationExpression>> constraints;
+//        private Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions;
+//        private Stack<Set<ConstantConfigurationExpression>> constraints;
+
+//        /**
+//         * Instantiate a {@code AddTimedVisitor}.
+//         */
+//        public AddTimedVisitor(Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
+//            this.relevantRegionsToOptions = relevantRegionsToOptions;
+//            this.constraints = new Stack<>();
+//        }
 
         /**
          * Instantiate a {@code AddTimedVisitor}.
          */
-        public AddTimedVisitor(Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
-            this.relevantRegionsToOptions = relevantRegionsToOptions;
-            this.constraints = new Stack<>();
-        }
+        public AddTimedVisitor() { ; }
 
         /**
          * Replace the thenBlock of a IfStatement if the entire statement is relevant.
@@ -249,19 +254,19 @@ public class SleepPipeline extends Pipeline {
             SleepRegion oldRegion = new SleepRegion(ifStatement.getThenBlock());
             Region region = Regions.getRegion(oldRegion);
 
-            if(region != null) {
-                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
-            }
+//            if(region != null) {
+//                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
+//            }
 
             IfStatement visitedIfStatement = (IfStatement) super.visitIfStatement(ifStatement);
 
             if(region != null) {
-                this.constraints.pop();
+//                this.constraints.pop();
 
-                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
-                    TimedStatement timedStatement = new TimedStatement(region.getRegionID(), visitedIfStatement.getThenBlock());
-                    return new IfStatement(visitedIfStatement.getCondition(), timedStatement);
-                }
+//                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
+            TimedStatement timedStatement = new TimedStatement(region.getRegionID(), visitedIfStatement.getThenBlock());
+            return new IfStatement(visitedIfStatement.getCondition(), timedStatement);
+//                }
             }
 
             return visitedIfStatement;
@@ -278,18 +283,18 @@ public class SleepPipeline extends Pipeline {
             SleepRegion oldRegion = new SleepRegion(sleepStatement);
             Region region = Regions.getRegion(oldRegion);
 
-            if(region != null) {
-                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
-            }
+//            if(region != null) {
+//                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
+//            }
 
             Statement visitedSleepStatement = super.visitSleepStatement(sleepStatement);
 
             if(region != null) {
-                this.constraints.pop();
+//                this.constraints.pop();
 
-                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
-                    return new TimedStatement(region.getRegionID(), visitedSleepStatement);
-                }
+//                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
+            return new TimedStatement(region.getRegionID(), visitedSleepStatement);
+//                }
             }
 
             return visitedSleepStatement;

@@ -1,7 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep2;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -21,11 +22,11 @@ public class JavaRegionClassTransformerPrinterTest {
     public void testTransform1() throws IOException, CloneNotSupportedException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        JavaRegion region = new JavaRegion(Sleep.PACKAGE, Sleep.CLASS, Sleep.MAIN_METHOD, 23, 24);
+        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
         Regions.addRegion(region);
 
         // Get class
-        JavaRegionClassTransformerPrinter printer = new JavaRegionClassTransformerPrinter(Sleep.FILENAME, "Money!");
+        JavaRegionClassTransformerPrinter printer = new JavaRegionClassTransformerPrinter(Sleep1.FILENAME, "Money!");
         ClassNode classNode = printer.readClass();
 
         // Save size of instructions for each method in the class
@@ -51,9 +52,9 @@ public class JavaRegionClassTransformerPrinterTest {
         Assert.assertTrue(transformed);
 
         // Actually modify the class file
-        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
+        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep1.FILENAME.replace(".", "/"));
 
-        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep.FILENAME  + " true";
+        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep1.FILENAME  + " true";
         String output = ClassTransformerBaseTest.executeCommand(command);
 
         Assert.assertNotEquals(0, output.length());
@@ -63,11 +64,11 @@ public class JavaRegionClassTransformerPrinterTest {
     public void testTransform2() throws IOException, CloneNotSupportedException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        JavaRegion region = new JavaRegion(Sleep.PACKAGE, Sleep.CLASS, Sleep.METHOD_1, 19, 20);
+        JavaRegion region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 19, 20);
         Regions.addRegion(region);
 
         // Get class
-        JavaRegionClassTransformerPrinter printer = new JavaRegionClassTransformerPrinter(Sleep.FILENAME, "Money!");
+        JavaRegionClassTransformerPrinter printer = new JavaRegionClassTransformerPrinter(Sleep2.FILENAME, "Money!");
         ClassNode classNode = printer.readClass();
 
         // Save size of instructions for each method in the class
@@ -92,13 +93,13 @@ public class JavaRegionClassTransformerPrinterTest {
 
         Assert.assertTrue(transformed);
 
-//        // Actually modify the class file
-//        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
-//
-//        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep.FILENAME  + " true";
-//        String output = ClassTransformerBaseTest.executeCommand(command);
-//
-//        Assert.assertNotEquals(0, output.length());
+        // Actually modify the class file
+        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep2.FILENAME.replace(".", "/"));
+
+        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep2.FILENAME  + " true";
+        String output = ClassTransformerBaseTest.executeCommand(command);
+
+        Assert.assertNotEquals(0, output.length());
     }
 
 }

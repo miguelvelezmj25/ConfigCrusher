@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -22,18 +22,18 @@ public class JavaRegionClassTransformerTimerTest {
     public void run() throws CloneNotSupportedException, InterruptedException {
 //        String[] args = new String[1];
 //        args[0] = "true";
-//        Sleep.main(args);
+//        Sleep1.main(args);
     }
 
     @Test
     public void transform1() throws IOException, CloneNotSupportedException, InterruptedException, ClassNotFoundException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        JavaRegion region = new JavaRegion(Sleep.PACKAGE, Sleep.CLASS, Sleep.MAIN_METHOD, 38, 39);
+        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 38, 39);
         Regions.addRegion(region);
 
         // Get class
-        JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(Sleep.FILENAME);
+        JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(Sleep1.FILENAME);
         ClassNode classNode = printer.readClass();
 
         // TODO abstract
@@ -60,13 +60,13 @@ public class JavaRegionClassTransformerTimerTest {
         Assert.assertTrue(transformed);
 
         // Actually modify the class file
-        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep.FILENAME.replace(".", "/"));
+        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep1.FILENAME.replace(".", "/"));
 
         String[] args = new String[1];
         args[0] = "true";
-        Sleep.main(args);
+        Sleep1.main(args);
 
-//        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep.FILENAME  + " true";
+//        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep1.FILENAME  + " true";
 //        String output = ClassTransformerBaseTest.executeCommand(command);
 
 //        Assert.assertNotEquals(0, output.length());

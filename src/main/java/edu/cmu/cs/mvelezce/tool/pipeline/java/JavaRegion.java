@@ -1,14 +1,17 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
  * Created by mvelezce on 4/19/17.
  */
 /*
-TODO JAVA regions are:
+JAVA regions are:
 Method call
 Then branch if statement
 Else branch if statement
@@ -55,6 +58,24 @@ public class JavaRegion extends Region {
         this("", "");
     }
 
+    // Todo Seems weird to have this here
+    public static Set<JavaRegion> getRegionsInClass(String regionClass) {
+        return JavaRegion.getRegionsInClass("", regionClass);
+    }
+
+    public static Set<JavaRegion> getRegionsInClass(String regionPackage, String regionClass) {
+        Set<JavaRegion> javaRegions = new HashSet<>();
+
+        for(Region region : Regions.getRegions()) {
+            JavaRegion javaRegion = (JavaRegion) region;
+
+            if(javaRegion.getRegionPackage().equals(regionPackage) && javaRegion.getRegionClass().equals(regionClass)) {
+                javaRegions.add(javaRegion);
+            }
+        }
+
+        return javaRegions;
+    }
 
     @Override
     public Region clone() throws CloneNotSupportedException {

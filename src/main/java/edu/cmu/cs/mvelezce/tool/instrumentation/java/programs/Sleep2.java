@@ -3,28 +3,26 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
 /**
  * Created by mvelezce on 4/21/17.
  */
-public class Sleep {
+public class Sleep2 {
 
-
-    public static final String FILENAME = Sleep.class.getCanonicalName();
-    public static final String PACKAGE = Sleep.class.getPackage().getName();
-    public static final String CLASS = Sleep.class.getSimpleName();
+    public static final String FILENAME = Sleep2.class.getCanonicalName();
+    public static final String PACKAGE = Sleep2.class.getPackage().getName();
+    public static final String CLASS = Sleep2.class.getSimpleName();
     public static final String MAIN_METHOD = "main";
-    public static final String METHOD_1 = "program1";
+    public static final String METHOD_1 = "method1";
 
     public static void main(String[] args) throws InterruptedException, CloneNotSupportedException {
-//        JavaRegion region = new JavaRegion(Sleep.PACKAGE, Sleep.CLASS, Sleep.MAIN_METHOD, 38, 39);
-//        Regions.addRegion(region);
         // Region program start
         System.out.println("main");
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
         if(a) {
-//            JavaRegion hold = new JavaRegion(Sleep.class.getPackage().getName(), Sleep.class.getSimpleName(), "METHOD_NAME", -12, 327);
+//            JavaRegion hold = new JavaRegion(Sleep1.class.getPackage().getName(), Sleep1.class.getSimpleName(), "METHOD_NAME", -12, 327);
 //            Region region = Regions.getRegion(hold);
 //            region.enter();
 //             Region A start
             Thread.sleep(300);
+            Sleep2.method1(a);
 //            region.exit();
             // Region A end
         }
@@ -32,10 +30,8 @@ public class Sleep {
         // Region program end
     }
 
-    public static void program1(boolean A) throws InterruptedException {
-        Integer c = new Integer(2);
-        c = new Integer(3);
-        System.out.println("program1");
+    public static void method1(boolean A) throws InterruptedException {
+        System.out.println("method1");
         boolean a = A;
         Thread.sleep(200);
         if(a) {

@@ -181,53 +181,8 @@ public abstract class Pipeline {
         // Calculate real performance by subtracting child regions' performance for each region's performance
         Map<Region, Map<Set<String>, Long>> regionsToRealPerformance = new HashMap<>();
 
-        // TODO use dynamic programming
-        // Method to track that all regions have been updated
-        while(regionsToRealPerformance.size() != regionsToRawPerformance.size()) {
-            for(Map.Entry<Region, Set<Region>> regionToInnerRegions : Regions.getRegionsToAllPossibleInnerRegions().entrySet()) {
-                // Already have real performance
-                if(regionsToRealPerformance.containsKey(regionToInnerRegions.getKey())) {
-                    continue;
-                }
-
-                // Region does not have inner regions
-                if(regionToInnerRegions.getValue().isEmpty()) {
-                    regionsToRealPerformance.put(regionToInnerRegions.getKey(), regionsToRawPerformance.get(regionToInnerRegions.getKey()));
-                    continue;
-                }
-
-                // Calculate if all inner regions have been calculated with real performance
-                Set<Region> innerRegions = regionToInnerRegions.getValue();
-                boolean allCalculated = true;
-
-                for(Region innerRegion : innerRegions) {
-                    if(!regionsToRealPerformance.containsKey(innerRegion)) {
-                        allCalculated = false;
-                        break;
-                    }
-                }
-
-                // If there are inner regions to still calculate
-                if(!allCalculated) {
-                    continue;
-                }
-
-                // Calculate real performance by subtracting inner performances
-                Map<Set<String>, Long> configurationsToRealPerformance = regionsToRawPerformance.get(regionToInnerRegions.getKey());
-
-                for(Region innerRegion : innerRegions) {
-                    Map<Set<String>, Long> innerConfigurationsToRealPerformance = regionsToRealPerformance.get(innerRegion);
-
-                    for(Map.Entry<Set<String>, Long> innerConfigurationToRealPerformance : innerConfigurationsToRealPerformance.entrySet()) {
-                        Set<String> key = innerConfigurationToRealPerformance.getKey();
-                        long time = configurationsToRealPerformance.get(key);
-                        time -= innerConfigurationToRealPerformance.getValue();
-                        configurationsToRealPerformance.put(innerConfigurationToRealPerformance.getKey(), time);
-                    }
-                }
-
-                regionsToRealPerformance.put(regionToInnerRegions.getKey(), configurationsToRealPerformance);
-            }
+        for(Region region : Regions.getRegionsToAllPossibleInnerRegions().keySet()) {
+            Pipeline.calculateRealPerformanceOfRegion(region, regionsToRawPerformance, regionsToRealPerformance);
         }
 
         PerformanceEntry performanceEntry = measuredPerformance.iterator().next();
@@ -244,6 +199,41 @@ public abstract class Pipeline {
         List<Map<Set<String>, Long>> blockTimeList = new ArrayList<>(regionsToRealPerformance.values());
 
         return new PerformanceModel(baseTime, blockTimeList);
+    }
+
+    private static void calculateRealPerformanceOfRegion(Region region, Map<Region, Map<Set<String>, Long>> regionsToRawPerformance, Map<Region, Map<Set<String>, Long>> regionsToRealPerformance) {
+        // Already have real performance
+        if(regionsToRealPerformance.containsKey(region)) {
+            return;
+        }
+
+        Set<Region> possibleInnerRegions = Regions.getPossibleInnerRegions(region);
+
+        // Region does not have inner regions
+        if(possibleInnerRegions.isEmpty()) {
+            regionsToRealPerformance.put(region, regionsToRawPerformance.get(region));
+            return;
+        }
+
+        // Calculate real performance by subtracting inner performances
+        Map<Set<String>, Long> configurationsToRealPerformance = regionsToRawPerformance.get(region);
+
+        for(Region innerRegion : possibleInnerRegions) {
+            Pipeline.calculateRealPerformanceOfRegion(innerRegion, regionsToRawPerformance, regionsToRealPerformance);
+        }
+
+        for(Region innerRegion : possibleInnerRegions) {
+            Map<Set<String>, Long> innerConfigurationsToRealPerformance = regionsToRealPerformance.get(innerRegion);
+
+            for(Map.Entry<Set<String>, Long> innerConfigurationToRealPerformance : innerConfigurationsToRealPerformance.entrySet()) {
+                Set<String> key = innerConfigurationToRealPerformance.getKey();
+                long time = configurationsToRealPerformance.get(key);
+                time -= innerConfigurationToRealPerformance.getValue();
+                configurationsToRealPerformance.put(innerConfigurationToRealPerformance.getKey(), time);
+            }
+        }
+
+        regionsToRealPerformance.put(region, configurationsToRealPerformance);
     }
 
 }

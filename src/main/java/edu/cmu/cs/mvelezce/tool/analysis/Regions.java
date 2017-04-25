@@ -106,6 +106,10 @@ public class Regions {
         }
     }
 
+    public static Set<Region> getPossibleInnerRegions(Region region) {
+        return Regions.regionsToAllPossibleInnerRegions.get(region);
+    }
+
     public static void addExecutingRegion(Region region) {
         if(region == null) {
             throw new IllegalArgumentException("The region cannot be null");

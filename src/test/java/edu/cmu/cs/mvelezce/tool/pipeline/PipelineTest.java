@@ -219,8 +219,8 @@ public class PipelineTest {
         int programDuration = 2;
         Region program = new SleepRegion(new SleepStatement(new ConstantIntExpression(programDuration)));
         Regions.addProgram(program);
-        Regions.addInnerRegion(program, region1);
-        Regions.addInnerRegion(program, region2);
+        Regions.addPossibleInnerRegion(program, region1);
+        Regions.addPossibleInnerRegion(program, region2);
         program.startTime(0);
         program.endTime(programDuration);
         PerformanceEntry performanceEntry = new PerformanceEntry(configuration, regions, program);

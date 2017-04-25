@@ -156,7 +156,7 @@ public abstract class Pipeline {
     }
 
     public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
-        Map<Region, Set<String>> regionsToOptionsOfInnerRegions = Regions.getOptionsInRegionsWithInnerRegions(regionsToOptions);
+        Map<Region, Set<String>> regionsToOptionsOfInnerRegions = Regions.getOptionsInRegionsWithPossibleInnerRegions(regionsToOptions);
 
         // Calculate raw performance for each region
         Map<Region, Map<Set<String>, Long>> regionsToRawPerformance = new HashMap<>();
@@ -184,7 +184,7 @@ public abstract class Pipeline {
         // TODO use dynamic programming
         // Method to track that all regions have been updated
         while(regionsToRealPerformance.size() != regionsToRawPerformance.size()) {
-            for(Map.Entry<Region, Set<Region>> regionToInnerRegions : Regions.getRegionsToInnerRegions().entrySet()) {
+            for(Map.Entry<Region, Set<Region>> regionToInnerRegions : Regions.getRegionsToAllPossibleInnerRegions().entrySet()) {
                 // Already have real performance
                 if(regionsToRealPerformance.containsKey(regionToInnerRegions.getKey())) {
                     continue;

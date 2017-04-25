@@ -251,21 +251,22 @@ public class SleepPipeline extends Pipeline {
          */
         @Override
         public Statement visitIfStatement(IfStatement ifStatement) {
-            SleepRegion oldRegion = new SleepRegion(ifStatement.getThenBlock());
-            Region region = Regions.getRegion(oldRegion);
-
 //            if(region != null) {
 //                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
 //            }
 
-            IfStatement visitedIfStatement = (IfStatement) super.visitIfStatement(ifStatement);
+            Statement visitedIfStatement = super.visitIfStatement(ifStatement);
+
+            Region region = new SleepRegion(ifStatement.getThenBlock());
+            region = Regions.getRegion(region);
 
             if(region != null) {
 //                this.constraints.pop();
 
 //                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
-            TimedStatement timedStatement = new TimedStatement(region.getRegionID(), visitedIfStatement.getThenBlock());
-            return new IfStatement(visitedIfStatement.getCondition(), timedStatement);
+                IfStatement hold = (IfStatement) visitedIfStatement;
+                TimedStatement timedStatement = new TimedStatement(region.getRegionID(), hold.getThenBlock());
+                return new IfStatement(hold.getCondition(), timedStatement);
 //                }
             }
 
@@ -280,20 +281,20 @@ public class SleepPipeline extends Pipeline {
          */
         @Override
         public Statement visitSleepStatement(SleepStatement sleepStatement) {
-            SleepRegion oldRegion = new SleepRegion(sleepStatement);
-            Region region = Regions.getRegion(oldRegion);
-
 //            if(region != null) {
 //                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
 //            }
 
             Statement visitedSleepStatement = super.visitSleepStatement(sleepStatement);
 
+            Region region = new SleepRegion(visitedSleepStatement);
+            region = Regions.getRegion(region);
+
             if(region != null) {
 //                this.constraints.pop();
 
 //                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
-            return new TimedStatement(region.getRegionID(), visitedSleepStatement);
+                return new TimedStatement(region.getRegionID(), visitedSleepStatement);
 //                }
             }
 

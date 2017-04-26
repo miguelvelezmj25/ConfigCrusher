@@ -44,11 +44,13 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
+            Set<JavaRegion> regionsInMethod = JavaRegion.getRegionsInMethod(classPackage, className, methodNode.name);
+
             InsnList instructions = methodNode.instructions;
             InsnList newInstructions = new InsnList();
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-            while (instructionsIterator.hasNext()) {
+            while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
                 boolean instrumented = false;
 
@@ -59,12 +61,13 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 int bytecodeIndex = instructions.indexOf(instruction);
 
-                for (JavaRegion javaRegion : regionsInClass) {
-                    if (javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
+                for(JavaRegion javaRegion : regionsInMethod) {
+                    if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
                         newInstructions.add(this.addInstructionsBeforeRegion(javaRegion));
                         newInstructions.add(instruction);
                         instrumented = true;
-                    } else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
+                    }
+                    else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
                         newInstructions.add(instruction);
                         newInstructions.add(this.addInstructionsAfterRegion(javaRegion));
                         instrumented = true;

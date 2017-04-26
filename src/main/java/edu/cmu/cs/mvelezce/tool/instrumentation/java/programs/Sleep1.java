@@ -23,7 +23,7 @@ public class Sleep1 {
 //            r.enter();
             // Region A start
 //            Sleep2 s = new Sleep2();
-            Thread.sleep(1000);
+            Thread.sleep(600);
 //            r.exit();
             // Region A end
         }

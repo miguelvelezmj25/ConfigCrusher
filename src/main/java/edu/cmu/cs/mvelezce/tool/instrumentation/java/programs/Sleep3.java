@@ -21,7 +21,7 @@ public class Sleep3 {
             // Region A start
             Thread.sleep(300);
             Sleep3.method1(a);
-            Thread.sleep(1000);
+            Thread.sleep(200);
             Sleep3.method2(a);
             // Region A end
         }
@@ -35,7 +35,7 @@ public class Sleep3 {
         Thread.sleep(200);
         if(a) {
             // Region A start
-            Thread.sleep(1000);
+            Thread.sleep(600);
             // Region A end
         }
         Thread.sleep(100);
@@ -44,10 +44,10 @@ public class Sleep3 {
     public static void method2(boolean A) throws InterruptedException {
         System.out.println("method2");
         boolean a = A;
-        Thread.sleep(300);
+        Thread.sleep(100);
         if(a) {
             // Region A start
-            Thread.sleep(2000);
+            Thread.sleep(600);
             // Region A end
         }
         Thread.sleep(200);

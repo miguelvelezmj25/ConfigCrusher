@@ -76,6 +76,20 @@ public class JavaRegion extends Region {
         return javaRegions;
     }
 
+    public static Set<JavaRegion> getRegionsInMethod(String regionPackage, String regionClass, String regionMethod) {
+        Set<JavaRegion> javaRegions = new HashSet<>();
+
+        for(Region region : Regions.getRegions()) {
+            JavaRegion javaRegion = (JavaRegion) region;
+
+            if(javaRegion.getRegionPackage().equals(regionPackage) && javaRegion.getRegionClass().equals(regionClass) && javaRegion.getRegionMethod().equals(regionMethod)) {
+                javaRegions.add(javaRegion);
+            }
+        }
+
+        return javaRegions;
+    }
+
     @Override
     public Region clone() throws CloneNotSupportedException {
         return new JavaRegion(this.getRegionID(), this.regionPackage, this.regionClass, this.regionMethod, this.startBytecodeIndex, this.endBytecodeIndex);

@@ -61,10 +61,10 @@ public class JavaRegionClassTransformerPrinterTest {
         instrumentedClasses.add(classNode);
 
         Set<String> configuration = new HashSet<>();
-        configuration.add("true");
+        configuration.add("A");
 
-        Adapter adapter = new SleepAdapter(Sleep1.FILENAME, instrumentedClasses, configuration);
-        adapter.execute();
+        Adapter adapter = new SleepAdapter(Sleep1.FILENAME, instrumentedClasses);
+        adapter.execute(configuration);
     }
 
     @Test
@@ -106,10 +106,10 @@ public class JavaRegionClassTransformerPrinterTest {
         instrumentedClasses.add(classNode);
 
         Set<String> configuration = new HashSet<>();
-        configuration.add("true");
+        configuration.add("A");
 
-        Adapter adapter = new SleepAdapter(Sleep2.FILENAME, instrumentedClasses, configuration);
-        adapter.execute();
+        Adapter adapter = new SleepAdapter(Sleep2.FILENAME, instrumentedClasses);
+        adapter.execute(configuration);
     }
 
 }

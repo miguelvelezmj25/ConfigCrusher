@@ -20,15 +20,15 @@ public class Sleep4 {
         Thread.sleep(200);
         if(a) {
             // Region A start
-            Thread.sleep(300);
+            Thread.sleep(600);
             Sleep4.method1(a);
             // Region A end
         }
         Thread.sleep(100);
         if(b) {
             // Region B start
-            Thread.sleep(100);
-            Sleep4.method2(a);
+            Thread.sleep(600);
+            Sleep4.method2(b);
             // Region B start
         }
         // Region program end
@@ -40,20 +40,20 @@ public class Sleep4 {
         Thread.sleep(200);
         if(a) {
             // Region A start
-            Thread.sleep(300);
+            Thread.sleep(600);
             // Region A end
         }
         Thread.sleep(100);
     }
 
-    public static void method2(boolean A) throws InterruptedException {
+    public static void method2(boolean B) throws InterruptedException {
         System.out.println("method2");
-        boolean a = A;
+        boolean b = B;
         Thread.sleep(300);
-        if(a) {
-            // Region A start
-            Thread.sleep(100);
-            // Region A end
+        if(b) {
+            // Region B start
+            Thread.sleep(600);
+            // Region B end
         }
         Thread.sleep(200);
     }

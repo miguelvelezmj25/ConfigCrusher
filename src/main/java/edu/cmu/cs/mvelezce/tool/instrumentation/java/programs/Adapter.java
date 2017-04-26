@@ -11,15 +11,13 @@ import java.util.Set;
 public abstract class Adapter extends ClassLoader {
     public static final String MAIN = "main";
 
-    protected Set<String> configuration;
     protected Set<ClassNode> instrumentedClassNodes;
 
-    public Adapter(Set<ClassNode> instrumentedClassNodes, Set<String> configuration) {
+    public Adapter(Set<ClassNode> instrumentedClassNodes) {
         this.instrumentedClassNodes = instrumentedClassNodes;
-        this.configuration = configuration;
     }
 
-    public abstract void execute() throws ClassNotFoundException, NoSuchMethodException;
+    public abstract void execute(Set<String> configuration) throws ClassNotFoundException, NoSuchMethodException;
 
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {

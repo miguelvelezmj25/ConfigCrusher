@@ -18,7 +18,7 @@ public class Sleep2 {
         Thread.sleep(200);
         if(a) {
             // Region A start
-            Thread.sleep(1000);
+            Thread.sleep(600);
             Sleep2.method1(a);
             // Region A end
         }
@@ -32,7 +32,7 @@ public class Sleep2 {
         Thread.sleep(200);
         if(a) {
             // Region A start
-            Thread.sleep(100);
+            Thread.sleep(600);
             // Region A end
         }
         Thread.sleep(100);

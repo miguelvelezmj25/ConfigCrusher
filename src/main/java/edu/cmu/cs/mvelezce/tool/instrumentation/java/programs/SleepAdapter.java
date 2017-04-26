@@ -6,7 +6,6 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -14,14 +13,16 @@ import java.util.Set;
  */
 public class SleepAdapter extends Adapter {
 
+    private static final String[] CONFIGURATIONS = {"A", "B", "C", "D"};
+
     private String mainClassFile;
 
-    public SleepAdapter(String mainClassFile, Set<ClassNode> instrumentedClassNodes, Set<String> configuration) {
-        super(instrumentedClassNodes, configuration);
+    public SleepAdapter(String mainClassFile, Set<ClassNode> instrumentedClassNodes) {
+        super(instrumentedClassNodes);
         this.mainClassFile = mainClassFile;
     }
 
-    public void execute() throws ClassNotFoundException, NoSuchMethodException {
+    public void execute(Set<String> configuration) throws ClassNotFoundException, NoSuchMethodException {
         Class<?> mainClass = this.loadClass(this.mainClassFile);
         Method method = mainClass.getMethod(Adapter.MAIN, String[].class);
 
@@ -30,13 +31,27 @@ public class SleepAdapter extends Adapter {
             Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
-            String[] params = Arrays.copyOf(this.configuration.toArray(), this.configuration.size(), String[].class);
             program.startTime();
-            method.invoke(null, (Object) params);
+            method.invoke(null, (Object) this.adaptConfiguration(configuration));
             program.endTime();
         }
         catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+    public String[] adaptConfiguration(Set<String> configuration) {
+        String[] sleepConfiguration = new String[4];
+
+        for(int i = 0; i < sleepConfiguration.length; i++) {
+            if(configuration.contains(SleepAdapter.CONFIGURATIONS[i])) {
+                sleepConfiguration[i] = "true";
+            }
+            else {
+                sleepConfiguration[i] = "false";
+            }
+        }
+
+        return sleepConfiguration;
     }
 }

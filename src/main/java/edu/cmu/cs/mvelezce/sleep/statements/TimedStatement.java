@@ -4,8 +4,6 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.Visitor;
 import edu.cmu.cs.mvelezce.sleep.visitor.TimedVisitor;
 
-import java.util.UUID;
-
 /**
  * A statement that should be timed.
  *

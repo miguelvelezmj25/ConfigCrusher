@@ -1,19 +1,16 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**

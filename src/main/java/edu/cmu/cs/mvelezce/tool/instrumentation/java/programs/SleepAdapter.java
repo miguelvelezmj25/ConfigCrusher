@@ -2,8 +2,6 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

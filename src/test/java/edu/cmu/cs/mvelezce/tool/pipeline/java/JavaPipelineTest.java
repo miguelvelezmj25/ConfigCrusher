@@ -4,11 +4,9 @@ import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep4;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformer;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import org.apache.commons.lang3.StringUtils;
@@ -71,6 +69,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testMeasureConfigurationPerformance1() throws Exception {
+        Regions.reset();
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region1 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);

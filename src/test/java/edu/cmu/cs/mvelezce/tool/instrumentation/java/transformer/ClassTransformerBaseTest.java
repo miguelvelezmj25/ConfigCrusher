@@ -8,15 +8,12 @@ import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Map;
 
 /**
  * Created by miguelvelez on 4/9/17.

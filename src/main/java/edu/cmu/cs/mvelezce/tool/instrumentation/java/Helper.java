@@ -14,17 +14,7 @@ import java.util.jar.JarFile;
 /**
  * Created by miguelvelez on 4/9/17.
  */
-public class InstrumentationArea {
-    // TODO what should I do with this now that we have the programs folder
-
-    public static void main(String[] args) {
-        InstrumentationArea.executeDummyClass(Integer.valueOf(args[0]));
-    }
-
-    public static void executeDummyClass(int methodNumber) {
-        DummyClass dummyClass = new DummyClass(methodNumber);
-        dummyClass.execute();
-    }
+public class Helper {
 
     public static List<String> readJar(String jar) throws IOException {
         JarFile file = new JarFile(jar);

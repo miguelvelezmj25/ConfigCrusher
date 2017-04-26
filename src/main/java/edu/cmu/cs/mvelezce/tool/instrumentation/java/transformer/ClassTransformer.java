@@ -13,6 +13,6 @@ public interface ClassTransformer {
 
     public ClassNode readClass() throws IOException;
 
-    public void writeClass(ClassNode classNode) throws IOException;
+    public void writeClass(ClassNode classNode, String fileName) throws IOException;
 
 }

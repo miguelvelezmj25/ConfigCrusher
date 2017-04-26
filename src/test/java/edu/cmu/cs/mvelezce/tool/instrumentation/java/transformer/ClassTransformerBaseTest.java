@@ -66,7 +66,13 @@ public class ClassTransformerBaseTest {
                 output.append(line).append("\n");
             }
 
-        } catch (Exception e) {
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            while ((line = errorReader.readLine()) != null) {
+                System.out.println(line);
+            }
+
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 

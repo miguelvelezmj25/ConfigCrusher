@@ -9,13 +9,13 @@ import java.util.UUID;
  */
 public abstract class Region implements Cloneable {
 
-    private UUID regionID;
+    private String regionID;
     private long startTime;
     private long endTime;
     private Set<Region> innerRegions;
 
 
-    public Region(UUID regionID) {
+    public Region(String regionID) {
         this.regionID = regionID;
         this.startTime = 0;
         this.endTime = 0;
@@ -23,7 +23,7 @@ public abstract class Region implements Cloneable {
     }
 
     public Region() {
-        this(UUID.randomUUID());
+        this(UUID.randomUUID().toString());
     }
 
     @Override
@@ -37,6 +37,7 @@ public abstract class Region implements Cloneable {
     }
 
     public void enter() {
+        System.out.println("enter");
         this.enterRegion();
         this.startTime();
     }
@@ -47,9 +48,10 @@ public abstract class Region implements Cloneable {
     }
 
     public void exit() {
+        this.endTime();
+        System.out.println("exit");
         Regions.removeExecutingRegion(this);
 
-        this.endTime();
     }
 
     public void exit(long endTime) {
@@ -81,6 +83,8 @@ public abstract class Region implements Cloneable {
 
     public void endTime(long endTime) {
         this.endTime = endTime;
+
+        System.out.println(this.getNanoExecutionTime());
     }
 
     public void resetExecution() {
@@ -119,7 +123,7 @@ public abstract class Region implements Cloneable {
         return this.getMilliExecutionTime()/1000.0;
     }
 
-    public UUID getRegionID() { return this.regionID; }
+    public String getRegionID() { return this.regionID; }
 
     public Set<Region> getInnerRegions() { return this.innerRegions; }
 

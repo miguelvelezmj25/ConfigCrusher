@@ -25,8 +25,9 @@ public class JavaRegionClassTransformerTimerTest {
 //        Sleep1.main(args);
     }
 
+    // TODO this does not work because the region have different ids
     @Test
-    public void transform1() throws IOException, CloneNotSupportedException, InterruptedException, ClassNotFoundException {
+    public void testTransform1() throws IOException, CloneNotSupportedException, InterruptedException, ClassNotFoundException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 38, 39);
@@ -62,14 +63,14 @@ public class JavaRegionClassTransformerTimerTest {
         // Actually modify the class file
         printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep1.FILENAME.replace(".", "/"));
 
-        String[] args = new String[1];
-        args[0] = "true";
-        Sleep1.main(args);
+//        String[] args = new String[1];
+//        args[0] = "true";
+//        Sleep1.main(args);
 
-//        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep1.FILENAME  + " true";
-//        String output = ClassTransformerBaseTest.executeCommand(command);
-
-//        Assert.assertNotEquals(0, output.length());
+        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep1.FILENAME  + " true";
+        String output = ClassTransformerBaseTest.executeCommand(command);
+//
+        Assert.assertFalse(output.contains("exception"));
     }
 
 }

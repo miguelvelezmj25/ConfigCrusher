@@ -13,7 +13,7 @@ import java.util.UUID;
  * @version 0.1.0.1
  */
 public class TimedStatement extends Statement {
-    private UUID regionID;
+    private String regionID;
     private Statement statements;
 
     /**
@@ -21,7 +21,7 @@ public class TimedStatement extends Statement {
      *
      * @param statements
      */
-    public TimedStatement(UUID regionID, Statement statements) {
+    public TimedStatement(String regionID, Statement statements) {
         if(regionID == null) {
             throw new IllegalArgumentException("The regionID cannot be null");
         }
@@ -34,7 +34,7 @@ public class TimedStatement extends Statement {
         this.statements = statements;
     }
 
-    public UUID getRegionID() { return this.regionID; }
+    public String getRegionID() { return this.regionID; }
 
     public Statement getStatements() { return this.statements; }
 

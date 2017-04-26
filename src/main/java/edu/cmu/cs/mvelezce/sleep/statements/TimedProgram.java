@@ -17,7 +17,7 @@ public class TimedProgram extends TimedStatement {
      * @param regionID
      * @param statements
      */
-    public TimedProgram(UUID regionID, Statement statements) {
+    public TimedProgram(String regionID, Statement statements) {
         super(regionID, statements);
     }
 

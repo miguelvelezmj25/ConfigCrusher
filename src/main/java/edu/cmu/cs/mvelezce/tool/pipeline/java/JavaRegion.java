@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * Created by mvelezce on 4/19/17.
@@ -26,7 +25,7 @@ public class JavaRegion extends Region {
     private int startBytecodeIndex;
     private int endBytecodeIndex;
 
-    private JavaRegion(UUID regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
+    private JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
         super(regionId);
         this.regionPackage = regionPackage;
         this.regionClass = regionClass;

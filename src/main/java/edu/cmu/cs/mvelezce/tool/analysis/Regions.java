@@ -45,7 +45,7 @@ public class Regions {
      * @param regionID
      * @return
      */
-    public static Region getRegion(UUID regionID) {
+    public static Region getRegion(String regionID) {
         if(regionID == null) {
             throw new IllegalArgumentException("RegionID cannot be null");
         }

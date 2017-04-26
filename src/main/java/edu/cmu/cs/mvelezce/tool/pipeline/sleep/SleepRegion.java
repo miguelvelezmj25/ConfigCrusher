@@ -4,7 +4,6 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 
 import java.util.HashSet;
-import java.util.UUID;
 
 /**
  * Created by mvelezce on 4/11/17.
@@ -13,7 +12,7 @@ public class SleepRegion extends Region {
     // Used for location
     private Statement statement;
 
-    private SleepRegion(UUID regionID, Statement statement) {
+    private SleepRegion(String regionID, Statement statement) {
         super(regionID);
         this.statement = statement;
     }

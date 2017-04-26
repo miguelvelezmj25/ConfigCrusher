@@ -272,10 +272,4 @@ public class PipelineTest {
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
     }
 
-    public void testCreatePerformanceModel2() {
-
-
-
-    }
-
 }

@@ -1,17 +1,18 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
+import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.SleepAdapter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.pipeline.Pipeline;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/10/17.
@@ -22,12 +23,14 @@ public class JavaPipeline {
     public static final String PLAYYPUS_PROGRAM = "platypus";
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
-    public static PerformanceModel buildPerformanceModel(String program) throws NoSuchFieldException {
+    // TODO how do we pass the main class and all files of a program?
+    public static PerformanceModel buildPerformanceModel(String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException {
         // Reset
-        Regions.reset();
+        // TODO we need to execute this once we are not passing the regions in the unit tests
+//        Regions.reset();
         PerformanceEntry.reset();
 
-//        // Taint Analysis (Language dependent)
+        // Taint Analysis (Language dependent)
 //        // TODO call Lotrack
 //        Map<JavaRegion, Set<String>> regionsToOptions = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, program);
 //        for(Map.Entry<JavaRegion, Set<String>> regionToOptions : regionsToOptions.entrySet()) {
@@ -36,11 +39,34 @@ public class JavaPipeline {
 //            }
 //        }
 
-        return null;
+        // TODO we should get this from Lotrack and not pass it ourselves
+//        Map<JavaRegion, Set<String>> relevantRegionsToOptions = null;
+
+        // Configuration compression (Language independent)
+        Set<Set<String>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Pipeline.getConfigurationsToExecute(relevantOptions);
+
+        // Instrumentation (Language dependent)
+        Set<ClassNode> instrumentedClasses = JavaPipeline.instrumentRelevantRegions(mainClass, programFiles);
+        Set<PerformanceEntry> measuredPerformance = JavaPipeline.measureConfigurationPerformance(mainClass, instrumentedClasses, configurationsToExecute);
+//        System.out.println("Executed configurations: " + configurationsToExecute.size());
+
+        // Performance Model (Language independent)
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : relevantRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            if(region.getMilliExecutionTime() < 0) {
+                throw new RuntimeException("A region has a negative execution time. This might be caused by incorrect instrumentation");
+            }
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        return Pipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
 
     // TODO how do we know what files we need to instrument from a program?
-    public static Set<ClassNode> instrumentRelevantRegions(List<String> programFiles) throws IOException {
+    public static Set<ClassNode> instrumentRelevantRegions(String mainClass, List<String> programFiles) throws IOException {
         Set<ClassNode> classNodes = new HashSet<>();
 
         for(String file : programFiles) {
@@ -50,6 +76,8 @@ public class JavaPipeline {
 
             classNodes.add(classNode);
         }
+
+        JavaRegionClassTransformer.setMainClass(mainClass);
 
         return classNodes;
     }

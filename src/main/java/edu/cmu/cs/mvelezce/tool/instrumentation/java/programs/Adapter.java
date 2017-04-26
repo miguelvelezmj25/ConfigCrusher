@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
 import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,10 +12,9 @@ import java.util.Set;
 public abstract class Adapter extends ClassLoader {
     public static final String MAIN = "main";
 
-    protected Set<ClassNode> instrumentedClassNodes;
+    protected static Set<ClassNode> instrumentedClassNodes = new HashSet<>();
 
-    public Adapter(Set<ClassNode> instrumentedClassNodes) {
-        this.instrumentedClassNodes = instrumentedClassNodes;
+    public Adapter() {
     }
 
     public abstract void execute(Set<String> configuration) throws ClassNotFoundException, NoSuchMethodException;
@@ -43,5 +43,13 @@ public abstract class Adapter extends ClassLoader {
         }
 
         throw new RuntimeException("The class node was not found for this name");
+    }
+
+    public static Set<ClassNode> getInstrumentedClassNodes() {
+        return Adapter.instrumentedClassNodes;
+    }
+
+    public static void setInstrumentedClassNodes(Set<ClassNode> instrumentedClassNodes) {
+        Adapter.instrumentedClassNodes = instrumentedClassNodes;
     }
 }

@@ -32,6 +32,7 @@ public class JavaRegionClassTransformerTimerTest {
         System.out.println();
     }
 
+    // TODO we will have to pass multiple file names when instrumenting multiple files
     public static void execute(String fileName, Set<String> configuration) throws IOException, NoSuchMethodException, ClassNotFoundException {
         // Get class
         JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(fileName);
@@ -64,7 +65,8 @@ public class JavaRegionClassTransformerTimerTest {
         Set<ClassNode> instrumentedClasses = new HashSet<>();
         instrumentedClasses.add(classNode);
 
-        Adapter adapter = new SleepAdapter(fileName, instrumentedClasses);
+        Adapter.setInstrumentedClassNodes(instrumentedClasses);
+        Adapter adapter = new SleepAdapter(fileName);
         adapter.execute(configuration);
     }
 
@@ -74,6 +76,9 @@ public class JavaRegionClassTransformerTimerTest {
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
         Regions.addRegion(region);
+
+        // Program
+        JavaRegionClassTransformer.setMainClass(Sleep1.FILENAME);
 
         // Configuration
         Set<String> configuration = new HashSet<>();
@@ -103,6 +108,9 @@ public class JavaRegionClassTransformerTimerTest {
 
         region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 19, 20);
         Regions.addRegion(region);
+
+        // Program
+        JavaRegionClassTransformer.setMainClass(Sleep2.FILENAME);
 
         // Configuration
         Set<String> configuration = new HashSet<>();
@@ -136,6 +144,9 @@ public class JavaRegionClassTransformerTimerTest {
         region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_2, 19, 20);
         Regions.addRegion(region);
 
+        // Program
+        JavaRegionClassTransformer.setMainClass(Sleep3.FILENAME);
+
         // Configuration
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
@@ -162,7 +173,7 @@ public class JavaRegionClassTransformerTimerTest {
         JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);
         Regions.addRegion(region);
 
-        region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 45, 53);
+        region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 48, 53);
         Regions.addRegion(region);
 
         region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_1, 19, 20);
@@ -170,6 +181,9 @@ public class JavaRegionClassTransformerTimerTest {
 
         region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_2, 19, 20);
         Regions.addRegion(region);
+
+        // Program
+        JavaRegionClassTransformer.setMainClass(Sleep4.FILENAME);
 
         // Configuration
         Set<String> configuration = new HashSet<>();

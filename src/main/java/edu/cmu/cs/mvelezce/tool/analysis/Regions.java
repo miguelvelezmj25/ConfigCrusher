@@ -183,7 +183,9 @@ public class Regions {
 
     }
 
-    public static Region getProgram() { return Regions.program; }
+    public static Region getProgram() {
+        return Regions.program;
+    }
 
     public static Set<Region> getRegions() {
         return Regions.regions;

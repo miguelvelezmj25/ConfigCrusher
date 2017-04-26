@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
 
+import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -17,8 +18,7 @@ public class SleepAdapter extends Adapter {
 
     private String mainClassFile;
 
-    public SleepAdapter(String mainClassFile, Set<ClassNode> instrumentedClassNodes) {
-        super(instrumentedClassNodes);
+    public SleepAdapter(String mainClassFile) {
         this.mainClassFile = mainClassFile;
     }
 
@@ -27,8 +27,7 @@ public class SleepAdapter extends Adapter {
         Method method = mainClass.getMethod(Adapter.MAIN, String[].class);
 
         try {
-            JavaRegion program = new JavaRegion(this.mainClassFile, Adapter.MAIN);
-            Regions.addProgram(program);
+            Region program = Regions.getProgram();
             Regions.addExecutingRegion(program);
 
             program.startTime();

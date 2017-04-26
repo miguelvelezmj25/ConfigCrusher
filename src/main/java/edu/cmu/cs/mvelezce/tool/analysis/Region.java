@@ -94,19 +94,19 @@ public abstract class Region implements Cloneable {
     }
 
     public long getExecutionTime() {
-        // Still measuring
-        if(this.startTime != 0 && this.endTime == 0) {
-            return -1;
-        }
+//        // Still measuring
+//        if(this.startTime != 0 && this.endTime == 0) {
+//            return -1;
+//        }
 
         return this.endTime - this.startTime;
     }
 
     public long getNanoExecutionTime() {
-        // Still measuring
-        if(this.startTime != 1 && this.endTime == 0) {
-            return 0;
-        }
+//        // Still measuring
+//        if(this.startTime != 1 && this.endTime == 0) {
+//            return 0;
+//        }
 
         return this.endTime - this.startTime;
     }

@@ -1,10 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep2;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.SleepAdapter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -28,6 +25,9 @@ public class JavaRegionClassTransformerPrinterTest {
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
         Regions.addRegion(region);
+
+        // Program
+        JavaRegionClassTransformer.setMainClass(Sleep1.FILENAME);
 
         // Get class
         JavaRegionClassTransformerPrinter printer = new JavaRegionClassTransformerPrinter(Sleep1.FILENAME, "Money!");
@@ -63,7 +63,8 @@ public class JavaRegionClassTransformerPrinterTest {
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
 
-        Adapter adapter = new SleepAdapter(Sleep1.FILENAME, instrumentedClasses);
+        Adapter.setInstrumentedClassNodes(instrumentedClasses);
+        Adapter adapter = new SleepAdapter(Sleep1.FILENAME);
         adapter.execute(configuration);
     }
 
@@ -73,6 +74,9 @@ public class JavaRegionClassTransformerPrinterTest {
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 19, 20);
         Regions.addRegion(region);
+
+        // Program
+        JavaRegionClassTransformer.setMainClass(Sleep2.FILENAME);
 
         // Get class
         JavaRegionClassTransformerPrinter printer = new JavaRegionClassTransformerPrinter(Sleep2.FILENAME, "Money!");
@@ -108,7 +112,8 @@ public class JavaRegionClassTransformerPrinterTest {
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
 
-        Adapter adapter = new SleepAdapter(Sleep2.FILENAME, instrumentedClasses);
+        Adapter.setInstrumentedClassNodes(instrumentedClasses);
+        Adapter adapter = new SleepAdapter(Sleep2.FILENAME);
         adapter.execute(configuration);
     }
 

@@ -19,7 +19,6 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
-import org.apache.commons.collections4.map.HashedMap;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -95,32 +94,6 @@ public class SleepPipelineTest {
         // Assert
         Assert.assertEquals(relevantRegionToOptions, SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted));
 //        System.out.println(relevantRegionToOptions);
-    }
-
-    @Test
-    public void testInstrumentRelevantRegions1() throws CloneNotSupportedException {
-        // Program
-        Statement sleepStatement = new SleepStatement(new VariableExpression("a"));
-        List<Statement> programStatements = new ArrayList<>();
-        programStatements.add(sleepStatement);
-        BlockStatement blockStatement = new BlockStatement(programStatements);
-        Program program = new Program(blockStatement);
-
-        // Region
-        Regions.reset();
-        SleepRegion region = new SleepRegion(sleepStatement);
-        Regions.addRegion(region);
-
-        // Regions to options
-        Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions = new HashedMap<>();
-        Set<ConstantConfigurationExpression> options = new HashSet<>();
-        options.add(new ConstantConfigurationExpression("A"));
-        relevantRegionsToOptions.put(region, options);
-
-
-        // Assert
-        SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions);
-        Assert.assertNotEquals(program, SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions));
     }
 
     @Test

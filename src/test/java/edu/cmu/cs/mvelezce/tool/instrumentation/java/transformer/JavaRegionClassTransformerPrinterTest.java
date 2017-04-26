@@ -52,7 +52,7 @@ public class JavaRegionClassTransformerPrinterTest {
         Assert.assertTrue(transformed);
 
         // Actually modify the class file
-        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep1.FILENAME.replace(".", "/"));
+        printer.writeClass(classNode);
 
         String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep1.FILENAME  + " true";
         String output = ClassTransformerBaseTest.executeCommand(command);
@@ -94,7 +94,7 @@ public class JavaRegionClassTransformerPrinterTest {
         Assert.assertTrue(transformed);
 
         // Actually modify the class file
-        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep2.FILENAME.replace(".", "/"));
+        printer.writeClass(classNode);
 
         String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep2.FILENAME  + " true";
         String output = ClassTransformerBaseTest.executeCommand(command);

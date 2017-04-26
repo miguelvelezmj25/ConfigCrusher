@@ -8,18 +8,17 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.interpreter.TimedSleepInterpreter;
-import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReplacerVisitor;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReturnerVisitor;
 import edu.cmu.cs.mvelezce.sleep.lexer.Lexer;
 import edu.cmu.cs.mvelezce.sleep.parser.Parser;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedProgram;
-import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFG;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFGBuilder;
+import edu.cmu.cs.mvelezce.tool.instrumentation.sleep.InstrumentVisitor;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.Pipeline;
@@ -60,8 +59,8 @@ public class SleepPipeline extends Pipeline {
         Set<Set<String>> configurationsToExecute = Pipeline.getConfigurationsToExecute(relevantOptions);
 
         // Instrumentation (Language dependent)
-        program = SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions);
-        TimedProgram timedProgram = SleepPipeline.instrumentProgram(program);
+        TimedProgram timedProgram = SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions);
+//        TimedProgram timedProgram = SleepPipeline.instrumentProgram(program);
         Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(timedProgram, configurationsToExecute);
 //        System.out.println("Executed configurations: " + configurationsToExecute.size());
 
@@ -111,18 +110,10 @@ public class SleepPipeline extends Pipeline {
      * @param program
      * @return
      */
-    public static Program instrumentRelevantRegions(Program program, Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
-//        AddTimedVisitor addTimedVisitor = new AddTimedVisitor(relevantRegionsToOptions);
-        AddTimedVisitor addTimedVisitor = new AddTimedVisitor();
-        return (Program) program.accept(addTimedVisitor);
-    }
-
-    public static TimedProgram instrumentProgram(Program program) {
-        SleepRegion region = new SleepRegion(program.getBlockStatement());
-        TimedProgram timedProgram = new TimedProgram(region.getRegionID(), program);
-        Regions.addProgram(region);
-
-        return timedProgram;
+    public static TimedProgram instrumentRelevantRegions(Program program, Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
+//        InstrumentVisitor addTimedVisitor = new InstrumentVisitor(relevantRegionsToOptions);
+        InstrumentVisitor addTimedVisitor = new InstrumentVisitor();
+        return (TimedProgram) program.accept(addTimedVisitor);
     }
 
     public static Set<String> sleepConfigurationSetToStringSet(Set<ConstantConfigurationExpression> sleepOptionsSet) {
@@ -145,6 +136,7 @@ public class SleepPipeline extends Pipeline {
         return setOfOptionSetConvenient;
     }
 
+    // TODO move to outside
     private static class RelevantRegionGetterVisitor extends ReturnerVisitor {
         private Set<TaintAnalysis.PossibleTaint> taintedVariables;
         private Set<ConstantConfigurationExpression> relevantOptions;
@@ -220,86 +212,5 @@ public class SleepPipeline extends Pipeline {
 
             return null;
         }
-    }
-
-    /**
-     * Concrete visitor that replaces statements with TimedStatement for measuring time
-     */
-    // TODO why do we pass the constraints? We are only instrumenting regions. Maybe change what regions are in the region selector so that we are not selecting regions that have the same constraints as outer region
-    private static class AddTimedVisitor extends ReplacerVisitor {
-//        private Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions;
-//        private Stack<Set<ConstantConfigurationExpression>> constraints;
-
-//        /**
-//         * Instantiate a {@code AddTimedVisitor}.
-//         */
-//        public AddTimedVisitor(Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
-//            this.relevantRegionsToOptions = relevantRegionsToOptions;
-//            this.constraints = new Stack<>();
-//        }
-
-        /**
-         * Instantiate a {@code AddTimedVisitor}.
-         */
-        public AddTimedVisitor() { ; }
-
-        /**
-         * Replace the thenBlock of a IfStatement if the entire statement is relevant.
-         *
-         * @param ifStatement
-         * @return
-         */
-        @Override
-        public Statement visitIfStatement(IfStatement ifStatement) {
-//            if(region != null) {
-//                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
-//            }
-
-            Statement visitedIfStatement = super.visitIfStatement(ifStatement);
-
-            Region region = new SleepRegion(ifStatement.getThenBlock());
-            region = Regions.getRegion(region);
-
-            if(region != null) {
-//                this.constraints.pop();
-
-//                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
-                IfStatement hold = (IfStatement) visitedIfStatement;
-                TimedStatement timedStatement = new TimedStatement(region.getRegionID(), hold.getThenBlock());
-                return new IfStatement(hold.getCondition(), timedStatement);
-//                }
-            }
-
-            return visitedIfStatement;
-        }
-
-        /**
-         * Replace the thenBlock of a IfStatement if the entire statement is relevant.
-         *
-         * @param sleepStatement
-         * @return
-         */
-        @Override
-        public Statement visitSleepStatement(SleepStatement sleepStatement) {
-//            if(region != null) {
-//                this.constraints.push(this.relevantRegionsToOptions.get(oldRegion));
-//            }
-
-            Statement visitedSleepStatement = super.visitSleepStatement(sleepStatement);
-
-            Region region = new SleepRegion(visitedSleepStatement);
-            region = Regions.getRegion(region);
-
-            if(region != null) {
-//                this.constraints.pop();
-
-//                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
-                return new TimedStatement(region.getRegionID(), visitedSleepStatement);
-//                }
-            }
-
-            return visitedSleepStatement;
-        }
-
     }
 }

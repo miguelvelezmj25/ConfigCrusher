@@ -34,6 +34,7 @@ public abstract class ClassTransformerBase implements ClassTransformer {
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         classNode.accept(classWriter);
 
+        // TODO .replace(".", "/")
         DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(this.fileName + ".class")));
         output.write(classWriter.toByteArray());
         output.flush();

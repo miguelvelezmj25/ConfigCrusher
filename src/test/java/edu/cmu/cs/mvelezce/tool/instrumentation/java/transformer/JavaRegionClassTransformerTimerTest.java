@@ -60,7 +60,7 @@ public class JavaRegionClassTransformerTimerTest {
         Assert.assertTrue(transformed);
 
         // Actually modify the class file
-        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep1.FILENAME.replace(".", "/"));
+        printer.writeClass(classNode);
 
         String[] args = new String[1];
         args[0] = "true";

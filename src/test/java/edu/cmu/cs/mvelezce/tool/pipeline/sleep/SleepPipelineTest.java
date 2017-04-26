@@ -20,6 +20,7 @@ import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -42,6 +43,11 @@ public class SleepPipelineTest {
                 }
             }
         }
+    }
+
+    @Before
+    public void before() {
+        Regions.reset();
     }
 
     @Test
@@ -98,7 +104,6 @@ public class SleepPipelineTest {
 
     @Test
     public void testMeasureConfigurationPerformance1() throws CloneNotSupportedException {
-        Regions.reset();
 //        Statement ast, Set<Set<String>> configurationsToExecute
 
         // Statement block
@@ -162,7 +167,6 @@ public class SleepPipelineTest {
 
     @Test
     public void testMeasureConfigurationPerformance2() throws CloneNotSupportedException {
-        Regions.reset();
         // Statement block
         List<Statement> statementBlock = new ArrayList<>();
 
@@ -173,7 +177,6 @@ public class SleepPipelineTest {
         Region region = new SleepRegion(statement);
         Statement timedStatement = new TimedStatement(region.getRegionID(), statement);
         statementBlock.add(timedStatement);
-        Regions.reset();
         Regions.addRegion(region);
 
         // Program

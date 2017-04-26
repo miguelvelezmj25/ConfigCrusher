@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepPipeline;
 import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepRegion;
 import org.apache.commons.collections4.map.HashedMap;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -19,6 +20,12 @@ import java.util.*;
  * Created by miguelvelez on 4/25/17.
  */
 public class InstrumentVisitorTest {
+
+    @Before
+    public void before() {
+        Regions.reset();
+    }
+
     @Test
     public void testVisitProgram1() throws Exception {
         // Program
@@ -29,7 +36,6 @@ public class InstrumentVisitorTest {
         Program program = new Program(blockStatement);
 
         // Region
-        Regions.reset();
         SleepRegion region = new SleepRegion(sleepStatement);
         Regions.addRegion(region);
 

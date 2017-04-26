@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepRegion;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -73,6 +74,11 @@ public class PipelineTest {
         Set<String> valueOfResultInRelevantOption = new HashSet<>(relevantOptions);
         valueOfResultInRelevantOption.retainAll(result);
         return valueOfResultInRelevantOption.equals(configuration);
+    }
+
+    @Before
+    public void before() {
+        Regions.reset();
     }
 
     @Test
@@ -187,7 +193,6 @@ public class PipelineTest {
 
     @Test
     public void testCreatePerformanceModel1() throws CloneNotSupportedException {
-        Regions.reset();
         // Map<Region, Set<String>> regionsToOptions
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
@@ -265,6 +270,12 @@ public class PipelineTest {
         configuration = new HashSet<>();
         configuration.add("B");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+    }
+
+    public void testCreatePerformanceModel2() {
+
+
+
     }
 
 }

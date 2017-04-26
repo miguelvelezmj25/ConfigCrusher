@@ -12,6 +12,7 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -43,6 +44,11 @@ public class JavaPipelineTest {
         }
     }
 
+    @Before
+    public void before() {
+        Regions.reset();
+    }
+
     @Test
     public void testInstrumentRelevantRegions1() throws Exception {
         // Java Region
@@ -69,7 +75,6 @@ public class JavaPipelineTest {
 
     @Test
     public void testMeasureConfigurationPerformance1() throws Exception {
-        Regions.reset();
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region1 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);

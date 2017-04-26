@@ -30,14 +30,14 @@ public abstract class Region implements Cloneable {
     public abstract Region clone() throws CloneNotSupportedException;
 
     private void enterRegion() {
-        Region previousExecutingRegion = Regions.getExecutingRegion();
-        Regions.addPossibleInnerRegion(previousExecutingRegion, this);
-        previousExecutingRegion.addInnerRegion(this);
+        // TODO this should be included
+//        Region previousExecutingRegion = Regions.getExecutingRegion();
+//        Regions.addPossibleInnerRegion(previousExecutingRegion, this);
+//        previousExecutingRegion.addInnerRegion(this);
         Regions.addExecutingRegion(this);
     }
 
     public void enter() {
-        System.out.println("enter");
         this.enterRegion();
         this.startTime();
     }
@@ -49,9 +49,8 @@ public abstract class Region implements Cloneable {
 
     public void exit() {
         this.endTime();
-        System.out.println("exit");
-        Regions.removeExecutingRegion(this);
 
+        Regions.removeExecutingRegion(this);
     }
 
     public void exit(long endTime) {
@@ -83,8 +82,6 @@ public abstract class Region implements Cloneable {
 
     public void endTime(long endTime) {
         this.endTime = endTime;
-
-        System.out.println(this.getNanoExecutionTime());
     }
 
     public void resetExecution() {

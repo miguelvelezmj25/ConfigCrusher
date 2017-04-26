@@ -1,7 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -11,7 +13,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by miguelvelez on 4/9/17.
@@ -27,10 +31,10 @@ public class JavaRegionClassTransformerTimerTest {
 
     // TODO this does not work because the region have different ids
     @Test
-    public void testTransform1() throws IOException, CloneNotSupportedException, InterruptedException, ClassNotFoundException {
+    public void testTransform1() throws IOException, CloneNotSupportedException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 38, 39);
+        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
         Regions.addRegion(region);
 
         // Get class
@@ -58,19 +62,21 @@ public class JavaRegionClassTransformerTimerTest {
             }
         }
 
+        // Assert
         Assert.assertTrue(transformed);
 
-        // Actually modify the class file
-        printer.writeClass(classNode, ClassTransformerBaseTest.CLASS_CONTAINER + Sleep1.FILENAME.replace(".", "/"));
+        // Execute instrumented code
+        Set<ClassNode> instrumentedClasses = new HashSet<>();
+        instrumentedClasses.add(classNode);
 
-//        String[] args = new String[1];
-//        args[0] = "true";
-//        Sleep1.main(args);
+        Set<String> configuration = new HashSet<>();
+        configuration.add("true");
 
-        String command = "java -cp " + ClassTransformerBaseTest.CLASS_CONTAINER + " " + Sleep1.FILENAME  + " true";
-        String output = ClassTransformerBaseTest.executeCommand(command);
-//
-        Assert.assertFalse(output.contains("exception"));
+        Adapter adapter = new SleepAdapter(Sleep1.FILENAME, instrumentedClasses, configuration);
+        adapter.execute();
+
+        // Assert it executed
+        Assert.assertNotEquals(0, Regions.getRegion(region.getRegionID()).getExecutionTime());
     }
 
 }

@@ -1,10 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
-import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.Opcodes;
+import jdk.internal.org.objectweb.asm.tree.*;
 
 import java.util.ListIterator;
 import java.util.Set;
@@ -50,31 +48,30 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             InsnList newInstructions = new InsnList();
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-            while(instructionsIterator.hasNext()) {
+            while (instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
                 boolean instrumented = false;
 
-                if(instruction.getOpcode() < 0) {
+                if (instruction.getOpcode() < 0) {
                     newInstructions.add(instruction);
                     continue;
                 }
 
                 int bytecodeIndex = instructions.indexOf(instruction);
 
-                for(JavaRegion javaRegion : regionsInClass) {
-                    if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
+                for (JavaRegion javaRegion : regionsInClass) {
+                    if (javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
                         newInstructions.add(this.addInstructionsBeforeRegion(javaRegion));
                         newInstructions.add(instruction);
                         instrumented = true;
-                    }
-                    else if(javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
+                    } else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
                         newInstructions.add(instruction);
                         newInstructions.add(this.addInstructionsAfterRegion(javaRegion));
                         instrumented = true;
                     }
                 }
 
-                if(!instrumented) {
+                if (!instrumented) {
                     newInstructions.add(instruction);
                 }
             }
@@ -83,5 +80,4 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             methodNode.instructions.add(newInstructions);
         }
     }
-
 }

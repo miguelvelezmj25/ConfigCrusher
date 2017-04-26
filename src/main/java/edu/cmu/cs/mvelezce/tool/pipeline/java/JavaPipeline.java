@@ -3,7 +3,10 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
+import jdk.internal.org.objectweb.asm.ClassWriter;
+import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,23 +33,18 @@ public class JavaPipeline {
             }
         }
 
-        // Configuration compression (Language independent)
-//        Set<Set<String>> configurationsToExecute = Pipeline.getConfigurationsToExecute(relevantOptions);
-
-        // Instrumentation (Language dependent)
-
-        // Performance Model (Language independent)
-
-//        return Pipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
-
-//        try {
-//            Map<Region, Set<String>> regionsToOptions = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
-//        } catch (NoSuchFieldException nsfe) {
-//            throw nsfe;
-////            throw new NoSuchFieldException("s", nsfe);
-//        }
-
-
         return null;
+    }
+
+    public static Set<PerformanceEntry> measureConfigurationPerformance(String mainClass, Set<Set<String>> configurationsToExecute) {
+        Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
+
+        for(Set<String> configuration : configurationsToExecute) {
+            Regions.resetRegions();
+
+        }
+
+
+        return configurationsToPerformance;
     }
 }

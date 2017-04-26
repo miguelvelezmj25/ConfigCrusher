@@ -14,17 +14,18 @@ public class Sleep1 {
     public static final String MAIN_METHOD = "main";
 
     public static void main(String[] args) throws InterruptedException, CloneNotSupportedException {
-        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 38, 39);
-        Regions.addRegion(region);
+//        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 38, 39);
+//        Regions.addRegion(region);
         // Region program start
-        System.out.println("main");
+        System.out.println("mains");
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
         if(a) {
-//            Region r = Regions.getRegion("WTF");
 //            r.enter();
             // Region A start
-            Thread.sleep(2000);
+//            Sleep2 s = new Sleep2();
+//            s.method1(a);
+            Thread.sleep(1000);
 //            r.exit();
             // Region A end
         }

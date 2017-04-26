@@ -8,6 +8,8 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by mvelezce on 4/3/17.
@@ -34,7 +36,7 @@ public abstract class ClassTransformerBase implements ClassTransformer {
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         classNode.accept(classWriter);
 
-        DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(fileName + ".class")));
+        DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(this.fileName + ".class")));
         output.write(classWriter.toByteArray());
         output.flush();
         output.close();

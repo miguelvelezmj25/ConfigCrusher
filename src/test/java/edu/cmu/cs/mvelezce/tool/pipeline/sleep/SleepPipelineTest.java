@@ -351,8 +351,6 @@ public class SleepPipelineTest {
         configuration.add("B");
         configuration.add("C");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration));
-
-
     }
 
     @Test

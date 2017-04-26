@@ -41,8 +41,8 @@ public class InstrumentVisitorTest {
 
 
         // Assert
-        SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions);
-        Assert.assertNotEquals(program, SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions));
+//        SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions);
+        Assert.assertNotEquals(program, SleepPipeline.instrumentRelevantRegions(program)); //, relevantRegionsToOptions));
     }
 
 }

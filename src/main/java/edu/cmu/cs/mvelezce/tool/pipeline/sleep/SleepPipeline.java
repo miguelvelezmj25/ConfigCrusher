@@ -59,7 +59,7 @@ public class SleepPipeline extends Pipeline {
         Set<Set<String>> configurationsToExecute = Pipeline.getConfigurationsToExecute(relevantOptions);
 
         // Instrumentation (Language dependent)
-        TimedProgram timedProgram = SleepPipeline.instrumentRelevantRegions(program, relevantRegionsToOptions);
+        TimedProgram timedProgram = SleepPipeline.instrumentRelevantRegions(program); //, relevantRegionsToOptions);
 //        TimedProgram timedProgram = SleepPipeline.instrumentProgram(program);
         Set<PerformanceEntry> measuredPerformance = SleepPipeline.measureConfigurationPerformance(timedProgram, configurationsToExecute);
 //        System.out.println("Executed configurations: " + configurationsToExecute.size());
@@ -110,7 +110,7 @@ public class SleepPipeline extends Pipeline {
      * @param program
      * @return
      */
-    public static TimedProgram instrumentRelevantRegions(Program program, Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
+    public static TimedProgram instrumentRelevantRegions(Program program) { //, Map<SleepRegion), Set<ConstantConfigurationExpression>> relevantRegionsToOptions) {
 //        InstrumentVisitor addTimedVisitor = new InstrumentVisitor(relevantRegionsToOptions);
         InstrumentVisitor addTimedVisitor = new InstrumentVisitor();
         return (TimedProgram) program.accept(addTimedVisitor);

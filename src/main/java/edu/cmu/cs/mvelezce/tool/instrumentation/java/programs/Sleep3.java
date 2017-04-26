@@ -18,15 +18,11 @@ public class Sleep3 {
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
         if(a) {
-//            JavaRegion hold = new JavaRegion(Sleep1.class.getPackage().getName(), Sleep1.class.getSimpleName(), "METHOD_NAME", -12, 327);
-//            Region region = Regions.getRegion(hold);
-//            region.enter();
-//             Region A start
+            // Region A start
             Thread.sleep(300);
             Sleep3.method1(a);
-            Thread.sleep(100);
+            Thread.sleep(1000);
             Sleep3.method2(a);
-//            region.exit();
             // Region A end
         }
         Thread.sleep(100);
@@ -39,7 +35,7 @@ public class Sleep3 {
         Thread.sleep(200);
         if(a) {
             // Region A start
-            Thread.sleep(300);
+            Thread.sleep(1000);
             // Region A end
         }
         Thread.sleep(100);
@@ -51,7 +47,7 @@ public class Sleep3 {
         Thread.sleep(300);
         if(a) {
             // Region A start
-            Thread.sleep(100);
+            Thread.sleep(2000);
             // Region A end
         }
         Thread.sleep(200);

@@ -19,21 +19,17 @@ public class Sleep4 {
         boolean b = Boolean.valueOf(args[1]);
         Thread.sleep(200);
         if(a) {
-//            JavaRegion hold = new JavaRegion(Sleep1.class.getPackage().getName(), Sleep1.class.getSimpleName(), "METHOD_NAME", -12, 327);
-//            Region region = Regions.getRegion(hold);
-//            region.enter();
-//             Region A start
+            // Region A start
             Thread.sleep(300);
             Sleep4.method1(a);
-//            region.exit();
             // Region A end
         }
-
         Thread.sleep(100);
-
         if(b) {
+            // Region B start
             Thread.sleep(100);
             Sleep4.method2(a);
+            // Region B start
         }
         // Region program end
     }

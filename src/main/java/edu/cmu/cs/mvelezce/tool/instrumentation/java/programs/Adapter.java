@@ -9,6 +9,8 @@ import java.util.Set;
  * Created by mvelezce on 4/26/17.
  */
 public abstract class Adapter extends ClassLoader {
+    public static final String MAIN = "main";
+
     protected Set<String> configuration;
     protected Set<ClassNode> instrumentedClassNodes;
 

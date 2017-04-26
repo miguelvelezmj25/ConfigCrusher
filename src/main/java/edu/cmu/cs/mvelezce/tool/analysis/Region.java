@@ -30,10 +30,9 @@ public abstract class Region implements Cloneable {
     public abstract Region clone() throws CloneNotSupportedException;
 
     private void enterRegion() {
-        // TODO this should be included
-//        Region previousExecutingRegion = Regions.getExecutingRegion();
-//        Regions.addPossibleInnerRegion(previousExecutingRegion, this);
-//        previousExecutingRegion.addInnerRegion(this);
+        Region previousExecutingRegion = Regions.getExecutingRegion();
+        Regions.addPossibleInnerRegion(previousExecutingRegion, this);
+        previousExecutingRegion.addInnerRegion(this);
         Regions.addExecutingRegion(this);
     }
 

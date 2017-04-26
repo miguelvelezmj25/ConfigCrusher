@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep2;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
@@ -20,7 +21,11 @@ import java.util.Map;
  */
 public class ClassTransformerBaseTest {
 
+    private static final String SLEEP1 = Sleep1.FILENAME;
+    private static final String SLEEP2 = Sleep2.FILENAME;
+
     protected static final String CLASS_CONTAINER = "target/classes/";
+
 
     /**
      * Helpful to find the indexes for regions when testing
@@ -28,7 +33,7 @@ public class ClassTransformerBaseTest {
      */
     @Test
     public void testReadClass() throws Exception {
-        ClassTransformerBase base = new ClassTransformerBase(Sleep1.FILENAME) {
+        ClassTransformerBase base = new ClassTransformerBase(ClassTransformerBaseTest.SLEEP2) {
             @Override
             public void transform(ClassNode classNode) {
 
@@ -82,5 +87,5 @@ public class ClassTransformerBaseTest {
         System.out.println(output);
         return output.toString();
     }
-    
+
 }

@@ -25,6 +25,7 @@ public class ClassTransformerBaseTest {
     private static final String SLEEP6 = Sleep6.FILENAME;
     private static final String SLEEP8 = Sleep8.FILENAME;
     private static final String SLEEP9 = Sleep9.FILENAME;
+    private static final String SLEEP10 = Sleep10.FILENAME;
 
     protected static final String CLASS_CONTAINER = "target/classes/";
 
@@ -35,7 +36,7 @@ public class ClassTransformerBaseTest {
      */
     @Test
     public void testReadClass() throws Exception {
-        ClassTransformerBase base = new ClassTransformerBase(ClassTransformerBaseTest.SLEEP9) {
+        ClassTransformerBase base = new ClassTransformerBase(ClassTransformerBaseTest.SLEEP10) {
             @Override
             public void transform(ClassNode classNode) {
 

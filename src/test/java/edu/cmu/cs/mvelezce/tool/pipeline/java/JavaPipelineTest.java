@@ -847,4 +847,73 @@ public class JavaPipelineTest {
         configuration.add("B");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
     }
+
+    @Test
+    public void testBuildPerformanceModel10() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+        // TODO we still need to get Lotrack working
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        JavaRegion region1 = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.MAIN_METHOD, 31, 36);
+        Regions.addRegion(region1);
+
+        JavaRegion region2 = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.MAIN_METHOD, 45, 50);
+        Regions.addRegion(region2);
+
+        JavaRegion region3 = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.METHOD_1, 19, 20);
+        Regions.addRegion(region3);
+
+        JavaRegion region4 = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.METHOD_2, 19, 20);
+        Regions.addRegion(region4);
+
+        // Regions to options
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+
+        Set<String> options = new HashSet<>();
+        options.add("A");
+        regionsToOptions.put(region1, options);
+
+        options = new HashSet<>();
+        options.add("A");
+        options.add("B");
+        regionsToOptions.put(region2, options);
+
+        options = new HashSet<>();
+        options.add("A");
+        regionsToOptions.put(region3, options);
+
+        options = new HashSet<>();
+        options.add("A");
+        options.add("B");
+        regionsToOptions.put(region4, options);
+        // TODO we still need to get Lotrack working
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep10.FILENAME);
+
+        // Performance model
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep10.FILENAME, programFiles, regionsToOptions);
+//        System.out.println(performanceModel);
+
+        // Compare
+        double performance = 0.3;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+
+        performance = 1.8;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+
+        performance = 2.1;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+
+        performance = 1.8;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+    }
 }

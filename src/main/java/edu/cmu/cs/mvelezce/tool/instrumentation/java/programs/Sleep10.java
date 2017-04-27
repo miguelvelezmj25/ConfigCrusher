@@ -25,10 +25,10 @@ public class Sleep10 {
             // TODO Region A end 36 but there is a jump statement at 37
         }
         else if(b){
-            // Region !A start 41
+            // Region B start 45
             Thread.sleep(700);
             Sleep10.method2(b);
-            // Region !A end 46
+            // Region B end 50
         }
         Thread.sleep(100);
         // Region program end

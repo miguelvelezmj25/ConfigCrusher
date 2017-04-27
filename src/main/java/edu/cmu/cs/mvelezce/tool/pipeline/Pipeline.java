@@ -223,21 +223,30 @@ public abstract class Pipeline {
         }
 
         for(Map.Entry<Set<String>, Double> configurationsToRealPerformanceEntry : configurationsToRealPerformance.entrySet()) {
+            Set<String> parentConfiguration = configurationsToRealPerformanceEntry.getKey();
+
             for(Region innerRegion : possibleInnerRegions) {
+                double time = configurationsToRealPerformanceEntry.getValue();
                 Map<Set<String>, Double> innerConfigurationsToRealPerformance = regionsToRealPerformance.get(innerRegion);
 
-                for(Map.Entry<Set<String>, Double> innerConfigurationToRealPerformance : innerConfigurationsToRealPerformance.entrySet()) {
-                    Set<String> key = innerConfigurationToRealPerformance.getKey();
-                    Set<String> a = new HashSet<>(configurationsToRealPerformanceEntry.getKey());
-                    a.retainAll(key);
+                if(innerConfigurationsToRealPerformance.keySet().contains(configurationsToRealPerformanceEntry.getKey())) {
+                    time -= innerConfigurationsToRealPerformance.get(parentConfiguration);
+                }
+                else if(parentConfiguration.size() > 1){
+                    // If there is a region that executed a sub configuration of the current parent configuration
+                    for(Map.Entry<Set<String>, Double> innerConfigurationToRealPerformance : innerConfigurationsToRealPerformance.entrySet()) {
+                        Set<String> childConfiguration = innerConfigurationToRealPerformance.getKey();
+                        Set<String> childConfigurationValueOfParentConfiguration = new HashSet<>(parentConfiguration);
+                        childConfigurationValueOfParentConfiguration.retainAll(childConfiguration);
 
-                    if(key.equals(configurationsToRealPerformanceEntry.getKey()) || (!a.isEmpty() && a.equals(key))) {
-                        double time = configurationsToRealPerformanceEntry.getValue();
-                        time -= innerConfigurationToRealPerformance.getValue();
-                        // Might be double counting the subtraction
-                        configurationsToRealPerformance.put(configurationsToRealPerformanceEntry.getKey(), Math.max(0.0,time));
+                        if(!childConfigurationValueOfParentConfiguration.isEmpty() && childConfigurationValueOfParentConfiguration.equals(childConfiguration)) {
+                            time -= innerConfigurationToRealPerformance.getValue();
+                        }
                     }
                 }
+
+                // Could have subtracted from something that was not executed
+                configurationsToRealPerformance.put(configurationsToRealPerformanceEntry.getKey(), Math.max(0.0, time));
             }
         }
 

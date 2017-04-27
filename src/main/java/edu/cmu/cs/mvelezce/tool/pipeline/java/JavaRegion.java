@@ -1,10 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by mvelezce on 4/19/17.

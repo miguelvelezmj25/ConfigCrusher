@@ -3,8 +3,6 @@ package edu.cmu.cs.mvelezce.tool.pipeline.sleep;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 
-import java.util.HashSet;
-
 /**
  * Created by mvelezce on 4/11/17.
  */

@@ -27,11 +27,18 @@ public class Region implements Cloneable {
     }
 
     @Override
-    public Region clone() {
-        Region region = new Region(this.regionID);
-        region.startTime = this.startTime;
-        region.endTime = this.endTime;
-        region.innerRegions = new HashSet<>(this.innerRegions);
+    public Region clone()  {
+        Region region = null;
+
+        try {
+            region = (Region) super.clone();
+            region.startTime = this.startTime;
+            region.endTime = this.endTime;
+            region.innerRegions = new HashSet<>(this.innerRegions);
+        }
+        catch (CloneNotSupportedException cnse) {
+            throw new RuntimeException("The region could not be cloned");
+        }
 
         return region;
     }

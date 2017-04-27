@@ -50,6 +50,7 @@ public class Regions {
             throw new IllegalArgumentException("RegionID cannot be null");
         }
 
+        // TODO this is were a new region should be created if it is not found. But how do you link this region to options, which was found before?
         for(Region entry : Regions.regions) {
             if(entry.getRegionID().equals(regionID)) {
                 return entry;
@@ -65,6 +66,7 @@ public class Regions {
      *
      * @return
      */
+    // TODO this is only used for testing and in the Sleep pipeline
     public static Region getRegion(Region region) {
         if(region == null) {
             throw new IllegalArgumentException("Region cannot be null");

@@ -27,10 +27,8 @@ public class SleepRegion extends Region {
 
     @Override
     public Region clone() {
-        SleepRegion sleepRegion = new SleepRegion(this.getRegionID(), this.statement);
-        sleepRegion.setStartTime(this.getStartTime());
-        sleepRegion.setEndTime(this.getEndTime());
-        sleepRegion.setInnerRegions(new HashSet<>(this.getInnerRegions()));
+        SleepRegion sleepRegion = (SleepRegion) super.clone();
+        sleepRegion.statement = this.statement;
 
         return sleepRegion;
     }

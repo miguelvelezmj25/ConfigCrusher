@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
+import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
@@ -8,6 +9,7 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
+import java.util.HashSet;
 import java.util.ListIterator;
 import java.util.Set;
 
@@ -38,7 +40,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         classPackage = classPackage.replaceAll("/", ".");
         className = className.replaceAll("/", ".");
 
-        Set<JavaRegion> regionsInClass = JavaRegion.getRegionsInClass(classPackage, className);
+        Set<JavaRegion> regionsInClass = JavaRegionClassTransformer.getRegionsInClass(classPackage, className);
 
         for(MethodNode methodNode : classNode.methods) {
             boolean instrumentMethod = false;
@@ -54,7 +56,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
-            Set<JavaRegion> regionsInMethod = JavaRegion.getRegionsInMethod(classPackage, className, methodNode.name);
+            Set<JavaRegion> regionsInMethod = JavaRegionClassTransformer.getRegionsInMethod(classPackage, className, methodNode.name);
 
             InsnList instructions = methodNode.instructions;
             InsnList newInstructions = new InsnList();
@@ -92,5 +94,34 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             methodNode.instructions.clear();
             methodNode.instructions.add(newInstructions);
         }
+    }
+
+    // Todo Seems weird to have this here
+    private static Set<JavaRegion> getRegionsInClass(String regionPackage, String regionClass) {
+        Set<JavaRegion> javaRegions = new HashSet<>();
+
+        for(Region region : Regions.getRegions()) {
+            JavaRegion javaRegion = (JavaRegion) region;
+
+            if(javaRegion.getRegionPackage().equals(regionPackage) && javaRegion.getRegionClass().equals(regionClass)) {
+                javaRegions.add(javaRegion);
+            }
+        }
+
+        return javaRegions;
+    }
+
+    private static Set<JavaRegion> getRegionsInMethod(String regionPackage, String regionClass, String regionMethod) {
+        Set<JavaRegion> javaRegions = new HashSet<>();
+
+        for(Region region : Regions.getRegions()) {
+            JavaRegion javaRegion = (JavaRegion) region;
+
+            if(javaRegion.getRegionPackage().equals(regionPackage) && javaRegion.getRegionClass().equals(regionClass) && javaRegion.getRegionMethod().equals(regionMethod)) {
+                javaRegions.add(javaRegion);
+            }
+        }
+
+        return javaRegions;
     }
 }

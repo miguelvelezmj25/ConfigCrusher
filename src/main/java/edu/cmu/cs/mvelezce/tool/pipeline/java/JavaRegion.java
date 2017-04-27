@@ -57,50 +57,14 @@ public class JavaRegion extends Region {
         this("", "");
     }
 
-    // Todo Seems weird to have this here
-    public static Set<JavaRegion> getRegionsInClass(String regionClass) {
-        return JavaRegion.getRegionsInClass("", regionClass);
-    }
-
-    public static Set<JavaRegion> getRegionsInClass(String regionPackage, String regionClass) {
-        Set<JavaRegion> javaRegions = new HashSet<>();
-
-        for(Region region : Regions.getRegions()) {
-            JavaRegion javaRegion = (JavaRegion) region;
-
-            if(javaRegion.getRegionPackage().equals(regionPackage) && javaRegion.getRegionClass().equals(regionClass)) {
-                javaRegions.add(javaRegion);
-            }
-        }
-
-        return javaRegions;
-    }
-
-    public static Set<JavaRegion> getRegionsInMethod(String regionPackage, String regionClass, String regionMethod) {
-        Set<JavaRegion> javaRegions = new HashSet<>();
-
-        for(Region region : Regions.getRegions()) {
-            JavaRegion javaRegion = (JavaRegion) region;
-
-            if(javaRegion.getRegionPackage().equals(regionPackage) && javaRegion.getRegionClass().equals(regionClass) && javaRegion.getRegionMethod().equals(regionMethod)) {
-                javaRegions.add(javaRegion);
-            }
-        }
-
-        return javaRegions;
-    }
-
-    // TODO for testing purposes
-    public long getExecutionTime() {
-        return (long) this.getMilliExecutionTime();
-    }
-
     @Override
     public Region clone() {
-        JavaRegion javaRegion = new JavaRegion(this.getRegionID(), this.regionPackage, this.regionClass, this.regionMethod, this.startBytecodeIndex, this.endBytecodeIndex);
-        javaRegion.setStartTime(this.getStartTime());
-        javaRegion.setEndTime(this.getEndTime());
-        javaRegion.setInnerRegions(new HashSet<>(this.getInnerRegions()));
+        JavaRegion javaRegion = (JavaRegion) super.clone();
+        javaRegion.regionPackage = this.regionPackage;
+        javaRegion.regionClass = this.regionClass;
+        javaRegion.regionMethod = this.regionMethod;
+        javaRegion.startBytecodeIndex = this.startBytecodeIndex;
+        javaRegion.endBytecodeIndex = this.endBytecodeIndex;
 
         return javaRegion;
     }

@@ -24,7 +24,7 @@ import java.util.*;
  */
 public class JavaPipelineTest {
 
-    public static final double TIMING_ERROR = 100.0;
+    public static final double TIMING_ERROR = 0.1;
 
     public static void checkExecutionTimes(Set<PerformanceEntry> expectedPerformances, Set<PerformanceEntry> actualPerformances) {
         for(PerformanceEntry expected : expectedPerformances) {
@@ -33,10 +33,9 @@ public class JavaPipelineTest {
                     for(Region actualRegion : actual.getRegions()) {
                         if(expected.getConfiguration().equals(actual.getConfiguration()) && expectedRegion.equals(actualRegion)) {
                             System.out.println("Configuration: " + actual.getConfiguration());
-                            System.out.println("Expected: " + expectedRegion.getMilliExecutionTime());
-                            System.out.println("Actual: " + actualRegion.getMilliExecutionTime());
-                            Assert.assertTrue(actualRegion.getMilliExecutionTime() >= expectedRegion.getMilliExecutionTime());
-                            Assert.assertTrue(actualRegion.getMilliExecutionTime() < expectedRegion.getMilliExecutionTime() + JavaPipelineTest.TIMING_ERROR);
+                            System.out.println("Expected: " + expectedRegion.getExecutionTime()/1000.0);
+                            System.out.println("Actual: " + actualRegion.getSecondsExecutionTime());
+                            Assert.assertEquals(actualRegion.getSecondsExecutionTime(), expectedRegion.getExecutionTime()/1000.0, JavaPipelineTest.TIMING_ERROR);
                         }
                     }
                 }
@@ -113,11 +112,11 @@ public class JavaPipelineTest {
         configuration.add("A");
         Regions.resetRegions();
         Regions.getRegion(region1).startTime(0);
-        Regions.getRegion(region1).endTime(1500 * 1000000);
+        Regions.getRegion(region1).endTime(1500);
         Regions.getRegion(region3).startTime(0);
-        Regions.getRegion(region3).endTime(600 * 1000000);
+        Regions.getRegion(region3).endTime(600);
         Regions.getProgram().startTime(0);
-        Regions.getProgram().endTime(1800 * 1000000);
+        Regions.getProgram().endTime(1800);
         performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram());
         measuredPerformance.add(performanceEntry);
 
@@ -126,11 +125,11 @@ public class JavaPipelineTest {
         configuration.add("B");
         Regions.resetRegions();
         Regions.getRegion(region2).startTime(0);
-        Regions.getRegion(region2).endTime(1700 * 1000000);
+        Regions.getRegion(region2).endTime(1700);
         Regions.getRegion(region4).startTime(0);
-        Regions.getRegion(region4).endTime(600 * 1000000);
+        Regions.getRegion(region4).endTime(600);
         Regions.getProgram().startTime(0);
-        Regions.getProgram().endTime(1900 * 1000000);
+        Regions.getProgram().endTime(1900);
         performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram());
         measuredPerformance.add(performanceEntry);
 
@@ -140,15 +139,15 @@ public class JavaPipelineTest {
         configuration.add("B");
         Regions.resetRegions();
         Regions.getRegion(region1).startTime(0);
-        Regions.getRegion(region1).endTime(1500 * 1000000);
+        Regions.getRegion(region1).endTime(1500);
         Regions.getRegion(region2).startTime(0);
-        Regions.getRegion(region2).endTime(1700 * 1000000);
+        Regions.getRegion(region2).endTime(1700);
         Regions.getRegion(region3).startTime(0);
-        Regions.getRegion(region3).endTime(600 * 1000000);
+        Regions.getRegion(region3).endTime(600);
         Regions.getRegion(region4).startTime(0);
-        Regions.getRegion(region4).endTime(600 * 1000000);
+        Regions.getRegion(region4).endTime(600);
         Regions.getProgram().startTime(0);
-        Regions.getProgram().endTime(3500 * 1000000);
+        Regions.getProgram().endTime(3500);
         performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram());
         measuredPerformance.add(performanceEntry);
 

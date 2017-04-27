@@ -568,33 +568,6 @@ public class JavaPipelineTest {
 
     @Test
     public void testBuildPerformanceModel5() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
-        Set<String> ab = new HashSet<>();
-        ab.add("A");
-        ab.add("B");
-
-        Set<String> a = new HashSet<>();
-        a.add("A");
-
-        Set<String> b = new HashSet<>();
-        b.add("B");
-
-        Set<String> c = new HashSet<>();
-        c.add("C");
-
-        Set<String> empty = new HashSet<>();
-
-        Set<String> hold = new HashSet<>(a);
-        hold.retainAll(ab);
-        System.out.println(!hold.isEmpty());
-
-        hold = new HashSet<>(ab);
-        hold.retainAll(ab);
-        System.out.println(!hold.isEmpty());
-
-        hold = new HashSet<>(ab);
-        hold.retainAll(empty);
-        System.out.println(!hold.isEmpty());
-
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -651,6 +624,48 @@ public class JavaPipelineTest {
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+    }
+
+    @Test
+    public void testBuildPerformanceModel6() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+        // TODO we still need to get Lotrack working
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        JavaRegion region1 = new JavaRegion(Sleep6.PACKAGE, Sleep6.CLASS, Sleep6.MAIN_METHOD, 23, 24);
+        Regions.addRegion(region1);
+
+        JavaRegion region2 = new JavaRegion(Sleep6.PACKAGE, Sleep6.CLASS, Sleep6.MAIN_METHOD, 29, 30);
+        Regions.addRegion(region2);
+
+        // Regions to options
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+
+        Set<String> options = new HashSet<>();
+        options.add("A");
+        regionsToOptions.put(region1, options);
+
+        options = new HashSet<>();
+        options.add("A");
+        regionsToOptions.put(region2, options);
+        // TODO we still need to get Lotrack working
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep6.FILENAME);
+
+        // Performance model
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep6.FILENAME, programFiles, regionsToOptions);
+        System.out.println(performanceModel);
+
+        // Compare
+        double performance = 0.9;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+
+        performance = 0.8;
+        configuration = new HashSet<>();
+        configuration.add("A");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
     }
 }

@@ -21,6 +21,10 @@ public class PerformanceEntry {
         this.regions = new HashedMap<>();
 
         for(Region region : regions) {
+            if(region.getStartTime() > region.getEndTime()) {
+                throw new RuntimeException("A region has a negative execution time. This might be caused by incorrect instrumentation");
+            }
+
             Region clonedRegion = region.clone();
             this.regions.put(clonedRegion, clonedRegion);
         }

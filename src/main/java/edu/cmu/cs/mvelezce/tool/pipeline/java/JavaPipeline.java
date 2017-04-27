@@ -56,9 +56,6 @@ public class JavaPipeline {
 
         for(Map.Entry<JavaRegion, Set<String>> entry : relevantRegionsToOptions.entrySet()) {
             Region region = Regions.getRegion(entry.getKey().getRegionID());
-            if(region.getMilliExecutionTime() < 0) {
-                throw new RuntimeException("A region has a negative execution time. This might be caused by incorrect instrumentation");
-            }
             regionsToOptions.put(region, entry.getValue());
         }
 

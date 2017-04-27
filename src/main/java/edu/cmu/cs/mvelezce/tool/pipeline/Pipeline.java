@@ -222,14 +222,22 @@ public abstract class Pipeline {
             Pipeline.calculateRealPerformanceOfRegion(innerRegion, regionsToRawPerformance, regionsToRealPerformance);
         }
 
-        for(Region innerRegion : possibleInnerRegions) {
-            Map<Set<String>, Double> innerConfigurationsToRealPerformance = regionsToRealPerformance.get(innerRegion);
+        for(Map.Entry<Set<String>, Double> configurationsToRealPerformanceEntry : configurationsToRealPerformance.entrySet()) {
+            for(Region innerRegion : possibleInnerRegions) {
+                Map<Set<String>, Double> innerConfigurationsToRealPerformance = regionsToRealPerformance.get(innerRegion);
 
-            for(Map.Entry<Set<String>, Double> innerConfigurationToRealPerformance : innerConfigurationsToRealPerformance.entrySet()) {
-                Set<String> key = innerConfigurationToRealPerformance.getKey();
-                double time = configurationsToRealPerformance.get(key);
-                time -= innerConfigurationToRealPerformance.getValue();
-                configurationsToRealPerformance.put(innerConfigurationToRealPerformance.getKey(), time);
+                for(Map.Entry<Set<String>, Double> innerConfigurationToRealPerformance : innerConfigurationsToRealPerformance.entrySet()) {
+                    Set<String> key = innerConfigurationToRealPerformance.getKey();
+                    Set<String> a = new HashSet<>(configurationsToRealPerformanceEntry.getKey());
+                    a.retainAll(key);
+
+                    if(key.equals(configurationsToRealPerformanceEntry.getKey()) || (!a.isEmpty() && a.equals(key))) {
+                        double time = configurationsToRealPerformanceEntry.getValue();
+                        time -= innerConfigurationToRealPerformance.getValue();
+                        // Might be double counting the subtraction
+                        configurationsToRealPerformance.put(configurationsToRealPerformanceEntry.getKey(), Math.max(0.0,time));
+                    }
+                }
             }
         }
 

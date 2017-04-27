@@ -1,9 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep2;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep3;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep4;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.*;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
@@ -24,6 +21,7 @@ public class ClassTransformerBaseTest {
     private static final String SLEEP2 = Sleep2.FILENAME;
     private static final String SLEEP3 = Sleep3.FILENAME;
     private static final String SLEEP4 = Sleep4.FILENAME;
+    private static final String SLEEP5 = Sleep5.FILENAME;
 
     protected static final String CLASS_CONTAINER = "target/classes/";
 
@@ -34,7 +32,7 @@ public class ClassTransformerBaseTest {
      */
     @Test
     public void testReadClass() throws Exception {
-        ClassTransformerBase base = new ClassTransformerBase(ClassTransformerBaseTest.SLEEP4) {
+        ClassTransformerBase base = new ClassTransformerBase(ClassTransformerBaseTest.SLEEP5) {
             @Override
             public void transform(ClassNode classNode) {
 

@@ -37,7 +37,7 @@ public class SleepPipelineTest {
                 for(Region expectedRegion : expected.getRegions()) {
                     for(Region actualRegion : actual.getRegions()) {
                         if(expected.getConfiguration().equals(actual.getConfiguration())) {
-                            Assert.assertEquals(actualRegion.getExecutionTime(), expectedRegion.getExecutionTime());
+                            Assert.assertEquals(actualRegion.getExecutionTime(), expectedRegion.getExecutionTime(), 0);
                         }
                     }
                 }
@@ -232,26 +232,27 @@ public class SleepPipelineTest {
     public void testBuildPerformanceModel1() throws FileNotFoundException {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program1");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+        System.out.println(performanceModel);
 
-        int performance = 3;
+        double performance = 3;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 6;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 4;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -259,25 +260,25 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program16");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 6;
+        double performance = 6;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 2;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 5;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -285,25 +286,25 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program12");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 2;
+        double performance = 2;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 6;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 5;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 2;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -311,49 +312,49 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program13");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 2;
+        double performance = 2;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 5;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 2;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 6;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 6;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 7;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -361,25 +362,25 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program14");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 0;
+        double performance = 0;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 4;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 0;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -387,49 +388,49 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program15");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 2;
+        double performance = 2;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 5;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 2;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 6;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 6;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 7;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
 
     }
@@ -439,25 +440,25 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program3");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 6;
+        double performance = 6;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 10;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 7;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 10;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -465,25 +466,25 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program4");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 6;
+        double performance = 6;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 10;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 9;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 7;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -492,25 +493,25 @@ public class SleepPipelineTest {
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 //        System.out.println(performanceModel);
 
-        int performance = 0;
+        double performance = 0;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 4;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 2;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -518,49 +519,49 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program6");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 0;
+        double performance = 0;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 0;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 0;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 0;
         configuration = new HashSet<>();
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 0;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 5;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 1;
         configuration = new HashSet<>();
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 6;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -568,93 +569,93 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program7");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 0;
+        double performance = 0;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 1;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 2;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 0;
         configuration = new HashSet<>();
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 0;
         configuration = new HashSet<>();
         configuration.add("D");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 1;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 1;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("D");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 2;
         configuration = new HashSet<>();
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 2;
         configuration = new HashSet<>();
         configuration.add("B");
         configuration.add("D");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("C");
         configuration.add("D");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
         configuration.add("D");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 4;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("C");
         configuration.add("D");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 5;
         configuration = new HashSet<>();
         configuration.add("B");
         configuration.add("C");
         configuration.add("D");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 6;
         configuration = new HashSet<>();
@@ -662,7 +663,7 @@ public class SleepPipelineTest {
         configuration.add("B");
         configuration.add("C");
         configuration.add("D");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -670,49 +671,49 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program8");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 0;
+        double performance = 0;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 1;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 1;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 0;
         configuration = new HashSet<>();
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 1;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 4;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 1;
         configuration = new HashSet<>();
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 4;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -720,14 +721,14 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program9");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 0;
+        double performance = 0;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
     @Test
@@ -735,49 +736,49 @@ public class SleepPipelineTest {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program10");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
 
-        int performance = 0;
+        double performance = 0;
         Set<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 1;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 0;
         configuration = new HashSet<>();
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 4;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 5;
         configuration = new HashSet<>();
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 8;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
         configuration.add("C");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
 }

@@ -391,10 +391,6 @@ public class JavaPipelineTest {
         JavaRegion region4 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_2, 19, 20);
         Regions.addRegion(region4);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep4.FILENAME);
-
         // Regions to options
         Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
 
@@ -413,8 +409,32 @@ public class JavaPipelineTest {
         options = new HashSet<>();
         options.add("B");
         regionsToOptions.put(region4, options);
+        // TODO we still need to get Lotrack working
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep4.FILENAME);
 
         PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep4.FILENAME, programFiles, regionsToOptions);
-        System.out.println(performanceModel);
+
+        double performance = 0.3;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+
+        performance = 3.5;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+
+        performance = 1.8;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+
+        performance = 2.0;
+        configuration = new HashSet<>();
+        configuration.add("B");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
     }
 }

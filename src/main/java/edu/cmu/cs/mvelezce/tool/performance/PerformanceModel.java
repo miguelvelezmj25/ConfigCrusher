@@ -53,8 +53,8 @@ public class PerformanceModel {
         this.configurationToPerformance.put(emptyConfiguration, emptyConfigurationPerformance);
     }
 
-    public long evaluate(Set<String> configuration) {
-        long performance = 0;
+    public double evaluate(Set<String> configuration) {
+        double performance = 0;
 
         for(Map.Entry<Set<String>, Double> entry : this.configurationToPerformance.entrySet()) {
             Set<String> configurationValueOfOptionInBlock = new HashSet<>(entry.getKey());

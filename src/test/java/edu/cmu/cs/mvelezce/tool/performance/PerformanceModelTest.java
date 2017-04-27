@@ -38,23 +38,23 @@ public class PerformanceModelTest {
 
         long performance = 6;
         configuration = new HashSet<>();
-        Assert.assertEquals(performance, pm.evaluate(configuration));
+        Assert.assertEquals(performance, pm.evaluate(configuration), 0);
 
         performance = 10;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, pm.evaluate(configuration));
+        Assert.assertEquals(performance, pm.evaluate(configuration), 0);
 
         performance = 9;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, pm.evaluate(configuration));
+        Assert.assertEquals(performance, pm.evaluate(configuration), 0);
 
         performance = 7;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, pm.evaluate(configuration));
+        Assert.assertEquals(performance, pm.evaluate(configuration), 0);
     }
 
     @Test
@@ -93,23 +93,23 @@ public class PerformanceModelTest {
 
         long performance = 6;
         configuration = new HashSet<>();
-        Assert.assertEquals(performance, pm.evaluate(configuration));
+        Assert.assertEquals(performance, pm.evaluate(configuration), 0);
 
         performance = 10;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, pm.evaluate(configuration));
+        Assert.assertEquals(performance, pm.evaluate(configuration), 0);
 
         performance = 9;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, pm.evaluate(configuration));
+        Assert.assertEquals(performance, pm.evaluate(configuration), 0);
 
         performance = 10;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, pm.evaluate(configuration));
+        Assert.assertEquals(performance, pm.evaluate(configuration), 0);
     }
 
     @Test

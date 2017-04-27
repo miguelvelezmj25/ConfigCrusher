@@ -253,23 +253,23 @@ public class PipelineTest {
 
         int performance = 2;
         configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 6;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 5;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
 
         performance = 3;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration));
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0);
     }
 
 }

@@ -25,7 +25,8 @@ public class SleepRegion extends Region {
         return this.getExecutionTime();
     }
 
-    public Region clone() throws CloneNotSupportedException {
+    @Override
+    public Region clone() {
         SleepRegion sleepRegion = new SleepRegion(this.getRegionID(), this.statement);
         sleepRegion.setStartTime(this.getStartTime());
         sleepRegion.setEndTime(this.getEndTime());

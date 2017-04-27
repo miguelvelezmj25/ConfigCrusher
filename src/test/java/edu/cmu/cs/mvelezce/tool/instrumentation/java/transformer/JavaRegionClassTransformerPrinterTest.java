@@ -23,7 +23,7 @@ import java.util.Set;
 public class JavaRegionClassTransformerPrinterTest {
 
     @Test
-    public void testTransform1() throws IOException, CloneNotSupportedException, NoSuchMethodException, ClassNotFoundException {
+    public void testTransform1() throws IOException, NoSuchMethodException, ClassNotFoundException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
@@ -72,7 +72,7 @@ public class JavaRegionClassTransformerPrinterTest {
     }
 
     @Test
-    public void testTransform2() throws IOException, CloneNotSupportedException, NoSuchMethodException, ClassNotFoundException {
+    public void testTransform2() throws IOException, NoSuchMethodException, ClassNotFoundException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 19, 20);

@@ -179,14 +179,7 @@ public class SleepPipeline extends Pipeline {
             if(!this.relevantOptions.isEmpty()) {
                 Statement statement = ifStatement.getThenBlock();
                 SleepRegion region = new SleepRegion(statement);
-
-                try {
-                    Regions.addRegion(region);
-                }
-                catch (CloneNotSupportedException e) {
-                   e.printStackTrace();
-                }
-
+                Regions.addRegion(region);
                 this.regionToOptions.put(region, this.relevantOptions);
             }
 
@@ -199,14 +192,7 @@ public class SleepPipeline extends Pipeline {
 
             if(!this.relevantOptions.isEmpty()) {
                 SleepRegion region = new SleepRegion(sleepStatement);
-
-                try {
-                    Regions.addRegion(region);
-                }
-                catch (CloneNotSupportedException e) {
-                    e.printStackTrace();
-                }
-
+                Regions.addRegion(region);
                 this.regionToOptions.put(region, this.relevantOptions);
             }
 

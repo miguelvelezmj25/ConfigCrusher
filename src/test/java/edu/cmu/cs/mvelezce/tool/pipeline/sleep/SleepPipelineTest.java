@@ -103,7 +103,7 @@ public class SleepPipelineTest {
     }
 
     @Test
-    public void testMeasureConfigurationPerformance1() throws CloneNotSupportedException {
+    public void testMeasureConfigurationPerformance1() {
 //        Statement ast, Set<Set<String>> configurationsToExecute
 
         // Statement block
@@ -166,7 +166,7 @@ public class SleepPipelineTest {
     }
 
     @Test
-    public void testMeasureConfigurationPerformance2() throws CloneNotSupportedException {
+    public void testMeasureConfigurationPerformance2() {
         // Statement block
         List<Statement> statementBlock = new ArrayList<>();
 

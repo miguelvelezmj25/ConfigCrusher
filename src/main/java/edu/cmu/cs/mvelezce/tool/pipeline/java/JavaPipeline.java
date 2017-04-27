@@ -83,6 +83,7 @@ public class JavaPipeline {
     }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String mainClass, Set<ClassNode> instrumentedClasses, Set<Set<String>> configurationsToExecute) throws NoSuchMethodException, ClassNotFoundException {
+        Set<Region> rs = Regions.getRegions();
         Adapter.setInstrumentedClassNodes(instrumentedClasses);
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 

@@ -96,7 +96,7 @@ public class JavaRegion extends Region {
     }
 
     @Override
-    public Region clone() throws CloneNotSupportedException {
+    public Region clone() {
         JavaRegion javaRegion = new JavaRegion(this.getRegionID(), this.regionPackage, this.regionClass, this.regionMethod, this.startBytecodeIndex, this.endBytecodeIndex);
         javaRegion.setStartTime(this.getStartTime());
         javaRegion.setEndTime(this.getEndTime());

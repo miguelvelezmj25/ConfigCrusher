@@ -20,18 +20,12 @@ public class PerformanceEntry {
         this.configuration = configuration;
         this.regions = new HashedMap<>();
 
-        try {
-            for(Region region : regions) {
-                Region clonedRegion = region.clone();
-                this.regions.put(clonedRegion, clonedRegion);
-            }
-
-            this.program = program.clone();
-        }
-        catch (CloneNotSupportedException e) {
-            throw new RuntimeException("The region could not be cloned");
+        for(Region region : regions) {
+            Region clonedRegion = region.clone();
+            this.regions.put(clonedRegion, clonedRegion);
         }
 
+        this.program = program.clone();
     }
 
     public static void reset() {

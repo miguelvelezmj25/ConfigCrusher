@@ -11,7 +11,7 @@ public class Sleep2 {
     public static final String MAIN_METHOD = "main";
     public static final String METHOD_1 = "method1";
 
-    public static void main(String[] args) throws InterruptedException, CloneNotSupportedException {
+    public static void main(String[] args) throws InterruptedException {
         // Region program start
         System.out.println("main");
         boolean a = Boolean.valueOf(args[0]);

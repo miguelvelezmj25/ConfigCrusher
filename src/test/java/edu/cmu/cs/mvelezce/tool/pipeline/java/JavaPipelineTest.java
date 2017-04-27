@@ -376,7 +376,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel4() throws CloneNotSupportedException, ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel4() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest

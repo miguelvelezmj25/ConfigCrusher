@@ -192,7 +192,7 @@ public class PipelineTest {
     }
 
     @Test
-    public void testCreatePerformanceModel1() throws CloneNotSupportedException {
+    public void testCreatePerformanceModel1() {
         // Map<Region, Set<String>> regionsToOptions
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();

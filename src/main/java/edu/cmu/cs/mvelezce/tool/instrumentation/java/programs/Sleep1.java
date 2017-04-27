@@ -10,7 +10,7 @@ public class Sleep1 {
     public static final String CLASS = Sleep1.class.getSimpleName();
     public static final String MAIN_METHOD = "main";
 
-    public static void main(String[] args) throws InterruptedException, CloneNotSupportedException {
+    public static void main(String[] args) throws InterruptedException {
         // Region program start
         System.out.println("mains");
         boolean a = Boolean.valueOf(args[0]);

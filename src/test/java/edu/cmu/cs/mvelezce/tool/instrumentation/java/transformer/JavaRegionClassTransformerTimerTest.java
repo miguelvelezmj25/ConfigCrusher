@@ -71,7 +71,7 @@ public class JavaRegionClassTransformerTimerTest {
     }
 
     @Test
-    public void testTransform1() throws IOException, CloneNotSupportedException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
+    public void testTransform1() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
@@ -100,7 +100,7 @@ public class JavaRegionClassTransformerTimerTest {
     }
 
     @Test
-    public void testTransform2() throws IOException, CloneNotSupportedException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
+    public void testTransform2() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.MAIN_METHOD, 23, 28);
@@ -132,7 +132,7 @@ public class JavaRegionClassTransformerTimerTest {
     }
 
     @Test
-    public void testTransform3() throws IOException, CloneNotSupportedException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
+    public void testTransform3() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.MAIN_METHOD, 23, 36);
@@ -167,7 +167,7 @@ public class JavaRegionClassTransformerTimerTest {
     }
 
     @Test
-    public void testTransform4() throws IOException, CloneNotSupportedException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
+    public void testTransform4() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);

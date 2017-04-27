@@ -24,7 +24,7 @@ public class Regions {
         Regions.program = null;
     }
 
-    public static void addRegion(Region region) throws CloneNotSupportedException {
+    public static void addRegion(Region region) {
         if(region == null) {
             throw new IllegalArgumentException("Region cannot be null");
         }

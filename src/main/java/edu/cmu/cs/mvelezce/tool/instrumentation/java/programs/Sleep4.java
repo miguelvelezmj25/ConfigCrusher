@@ -19,17 +19,17 @@ public class Sleep4 {
         boolean b = Boolean.valueOf(args[1]);
         Thread.sleep(200);
         if(a) {
-            // Region A start
+            // Region A start 31
             Thread.sleep(600);
             Sleep4.method1(a);
-            // Region A end
+            // Region A end 36
         }
         Thread.sleep(100);
         if(b) {
-            // Region B start
+            // Region B start 48
             Thread.sleep(600);
             Sleep4.method2(b);
-            // Region B start
+            // Region B start 53
         }
         // Region program end
     }
@@ -39,9 +39,9 @@ public class Sleep4 {
         boolean a = A;
         Thread.sleep(200);
         if(a) {
-            // Region A start
+            // Region A start 19
             Thread.sleep(600);
-            // Region A end
+            // Region A end 20
         }
         Thread.sleep(100);
     }
@@ -51,9 +51,9 @@ public class Sleep4 {
         boolean b = B;
         Thread.sleep(300);
         if(b) {
-            // Region B start
+            // Region B start 19
             Thread.sleep(600);
-            // Region B end
+            // Region B end 20
         }
         Thread.sleep(200);
     }

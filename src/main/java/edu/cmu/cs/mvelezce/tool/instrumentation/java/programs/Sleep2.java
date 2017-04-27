@@ -17,10 +17,10 @@ public class Sleep2 {
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
         if(a) {
-            // Region A start
+            // Region A start 23
             Thread.sleep(600);
             Sleep2.method1(a);
-            // Region A end
+            // Region A end 28
         }
         Thread.sleep(100);
         // Region program end
@@ -31,9 +31,9 @@ public class Sleep2 {
         boolean a = A;
         Thread.sleep(200);
         if(a) {
-            // Region A start
+            // Region A start 19
             Thread.sleep(600);
-            // Region A end
+            // Region A end 20
         }
         Thread.sleep(100);
     }

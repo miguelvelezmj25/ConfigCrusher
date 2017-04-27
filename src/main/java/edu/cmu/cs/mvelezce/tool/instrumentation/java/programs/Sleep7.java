@@ -12,16 +12,12 @@ public class Sleep7 {
 
     public static void main(String[] args) throws InterruptedException {
         // Region program start
-        System.out.println("mains");
+        System.out.println("main");
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
         if(a) {
-//            Region region = Regions.getRegion("ID");
-//            r.enter();
             // Region A start 23
-//            Sleep2 s = new Sleep2();
             Thread.sleep(600);
-//            r.exit();
             // TODO Region A end 24 but there is a jump statement at 25
         }
         else {

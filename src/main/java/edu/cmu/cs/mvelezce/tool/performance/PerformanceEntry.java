@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import org.apache.commons.collections4.map.HashedMap;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,7 +18,7 @@ public class PerformanceEntry {
 
     public PerformanceEntry(Set<String> configuration, Set<Region> regions, Region program) {
         this.configuration = configuration;
-        this.regions = new HashedMap<>();
+        this.regions = new HashMap<>();
 
         for(Region region : regions) {
             if(region.getStartTime() > region.getEndTime()) {

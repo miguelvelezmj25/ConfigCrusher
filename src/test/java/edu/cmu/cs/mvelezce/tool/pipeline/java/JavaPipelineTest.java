@@ -9,8 +9,6 @@ import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import org.apache.commons.collections4.map.HashedMap;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -391,7 +389,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region4);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -448,7 +446,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region1);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -486,7 +484,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region2);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -531,7 +529,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region3);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -580,7 +578,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region3);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -638,7 +636,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region2);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -680,7 +678,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region2);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -728,7 +726,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region4);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -796,7 +794,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region4);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -865,7 +863,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region4);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");
@@ -931,7 +929,7 @@ public class JavaPipelineTest {
         Regions.addRegion(region3);
 
         // Regions to options
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
         Set<String> options = new HashSet<>();
         options.add("A");

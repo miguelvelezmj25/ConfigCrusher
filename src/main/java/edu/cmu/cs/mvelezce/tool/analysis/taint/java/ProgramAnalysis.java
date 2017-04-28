@@ -1,19 +1,19 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
-import edu.cmu.cs.mvelezce.sleep.ast.expression.ConstantConfigurationExpression;
-import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepRegion;
-import org.apache.commons.collections4.map.HashedMap;
+import org.apache.commons.cli.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -23,6 +23,10 @@ public class ProgramAnalysis {
 
     public static final String DIRECTORY = "output/analysis/java/programs";
     public static final String DOT_JSON = ".json";
+
+    // Component cmd options
+    public static final String DELRES = "delres";
+    public static final String SAVERES = "saveres";
 
     // JSON strings
     public static final String ANALYSIS = "analysis";
@@ -34,38 +38,53 @@ public class ProgramAnalysis {
     public static final String START_BYTECODE_INDEX = "startBytecodeIndex";
     public static final String END_BYTCODE_INDEX = "endBytecodeIndex"; // TODO this could be array if there are multiple exit points
 
-    public static Map<JavaRegion, Set<String>> analyse(String programName, String mainClass, List<String> programFiles) throws IOException {
+    // TODO the parameters are for testing. We should not be passing the map since that is what this component needs to calculate
+    public static Map<JavaRegion, Set<String>> analyse(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions, String[] args) throws IOException {
+        Options componentOptions = new Options();
+
+        Option componentOption = new Option(ProgramAnalysis.DELRES, "Deletes the stored result");
+        componentOptions.addOption(componentOption);
+
+        componentOption = new Option(ProgramAnalysis.SAVERES, "Saves the result");
+        componentOptions.addOption(componentOption);
+
         // Reset
         Regions.reset();
         PerformanceEntry.reset();
 
-        // Check if we already have this information
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd;
+
+        try {
+            cmd = parser.parse(componentOptions, args);
+        } catch (org.apache.commons.cli.ParseException pe) {
+            throw new RuntimeException("Could not parse the options you provided");
+        }
+
         String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + ProgramAnalysis.DOT_JSON;
         File file = new File(outputFile);
 
-        if(file.exists()) {
-            try {
-                return ProgramAnalysis.readFromFile(file);
-            } catch (ParseException pe) {
-                throw new RuntimeException("Could not parse the cached results");
+        if(cmd.hasOption(ProgramAnalysis.DELRES)) {
+            if(file.exists()) {
+                file.delete();
+            }
+        }
+        else {
+            if(file.exists()) {
+                try {
+                    return ProgramAnalysis.readFromFile(file);
+                }
+                catch (ParseException pe) {
+                    throw new RuntimeException("Could not parse the cached results");
+               }
             }
         }
 
         // TODO call Lotrack
-        // Java Region
-        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        JavaRegion region1 = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
-        Regions.addRegion(region1);
 
-        // Regions to options
-        Map<JavaRegion, Set<String>> relevantRegionToOptions = new HashedMap<>();
-
-        Set<String> options = new HashSet<>();
-        options.add("A");
-        relevantRegionToOptions.put(region1, options);
-        // TODO call Lotrack
-
-        ProgramAnalysis.writeToFile(programName, relevantRegionToOptions);
+        if(cmd.hasOption(ProgramAnalysis.SAVERES)) {
+            ProgramAnalysis.writeToFile(programName, relevantRegionToOptions);
+        }
 
         return relevantRegionToOptions;
     }

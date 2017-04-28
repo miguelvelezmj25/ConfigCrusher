@@ -1,15 +1,13 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
+import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep2;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
+import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import static org.junit.Assert.*;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/28/17.
@@ -17,13 +15,72 @@ import static org.junit.Assert.*;
 public class ProgramAnalysisTest {
 
     @Test
-    public void testAnalyse() throws Exception {
+    public void testAnalyse1() throws Exception {
+        // TODO call Lotrack
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        JavaRegion region1 = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
+
+        // Regions to options
+        Map<JavaRegion, Set<String>> relevantRegionToOptions = new HashMap<>();
+
+        Set<String> options = new HashSet<>();
+        options.add("A");
+        relevantRegionToOptions.put(region1, options);
+        // TODO call Lotrack
+
+        // Program files
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep1.FILENAME);
 
-        Map<JavaRegion, Set<String>> output = ProgramAnalysis.analyse(Sleep1.CLASS, Sleep1.FILENAME, programFiles);
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
-        System.out.println(output);
+        Map<JavaRegion, Set<String>> outputSave = ProgramAnalysis.analyse(Sleep1.CLASS, Sleep1.FILENAME, programFiles, relevantRegionToOptions, args);
+
+        args = new String[0];
+        Map<JavaRegion, Set<String>> outputRead = ProgramAnalysis.analyse(Sleep1.CLASS, Sleep1.FILENAME, programFiles, relevantRegionToOptions, args);
+
+        Assert.assertEquals(outputSave, outputRead);
+    }
+
+    @Test
+    public void testAnalyse2() throws Exception {
+        // TODO call Lotrack
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        JavaRegion region1 = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.MAIN_METHOD, 23, 28);
+        JavaRegion region2 = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 19, 20);
+
+        // Regions to options
+        Map<JavaRegion, Set<String>> relevantRegionToOptions = new HashMap<>();
+
+        Set<String> options = new HashSet<>();
+        options.add("A");
+        relevantRegionToOptions.put(region1, options);
+
+        options = new HashSet<>();
+        options.add("A");
+        relevantRegionToOptions.put(region2, options);
+        // TODO call Lotrack
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep1.FILENAME);
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> outputSave = ProgramAnalysis.analyse(Sleep2.CLASS, Sleep2.FILENAME, programFiles, relevantRegionToOptions, args);
+
+        args = new String[0];
+        Map<JavaRegion, Set<String>> outputRead = ProgramAnalysis.analyse(Sleep2.CLASS, Sleep2.FILENAME, programFiles, relevantRegionToOptions, args);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
 }

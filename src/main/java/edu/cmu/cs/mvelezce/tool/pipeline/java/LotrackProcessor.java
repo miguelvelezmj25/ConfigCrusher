@@ -1,9 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
-import org.apache.commons.collections4.map.HashedMap;
-import org.apache.commons.lang3.StringUtils;
-import org.json.simple.JSONObject;
 
 import java.util.*;
 
@@ -92,7 +89,7 @@ public class LotrackProcessor {
 //
 //        }
 
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 //        Stack<JavaRegion> partialRegions = new Stack<>();
 //        JavaRegion currentRegion = new JavaRegion();
 //        Set<String> currentOptions = new HashSet<>();
@@ -203,7 +200,7 @@ public class LotrackProcessor {
         optionsToRemove.add("true");
         optionsToRemove.add("false");
 
-        Map<JavaRegion, Set<String>> filteredMap = new HashedMap<>();
+        Map<JavaRegion, Set<String>> filteredMap = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : regionToOptions.entrySet()) {
             Set<String> options = entry.getValue();
@@ -215,7 +212,7 @@ public class LotrackProcessor {
     }
 
     public static Map<JavaRegion, Set<String>> filterRegionsNoOptions(Map<JavaRegion, Set<String>> regionToOptions) {
-        Map<JavaRegion, Set<String>> filteredMap = new HashedMap<>();
+        Map<JavaRegion, Set<String>> filteredMap = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : regionToOptions.entrySet()) {
             if(!entry.getValue().isEmpty()) {

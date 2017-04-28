@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
-import org.apache.commons.collections4.map.HashedMap;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -118,11 +117,11 @@ public class PerformanceModelTest {
         Set<String> longestConfiguration = new HashSet<>();
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashedMap<>();
+        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
         configurationsToPerformace.put(longestConfiguration, 0.0);
 
         // Memoization storage
-        Map<Set<String>, Double> memoizationStore = new HashedMap<>();
+        Map<Set<String>, Double> memoizationStore = new HashMap<>();
 
         // Influence
         double influence = 0.0;
@@ -138,7 +137,7 @@ public class PerformanceModelTest {
         longestConfiguration.add("A");
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashedMap<>();
+        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();
@@ -150,7 +149,7 @@ public class PerformanceModelTest {
         configurationsToPerformace.put(configuration, 5.0);
 
         // Memoization storage
-        Map<Set<String>, Double> memoizationStore = new HashedMap<>();
+        Map<Set<String>, Double> memoizationStore = new HashMap<>();
 
         // Influence
         double influence = 5;
@@ -167,7 +166,7 @@ public class PerformanceModelTest {
         longestConfiguration.add("B");
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashedMap<>();
+        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();
@@ -190,7 +189,7 @@ public class PerformanceModelTest {
         configurationsToPerformace.put(configuration, 5.0);
 
         // Memoization storage
-        Map<Set<String>, Double> memoizationStore = new HashedMap<>();
+        Map<Set<String>, Double> memoizationStore = new HashMap<>();
 
         // Influence
         double influence = -5;
@@ -207,7 +206,7 @@ public class PerformanceModelTest {
         longestConfiguration.add("B");
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashedMap<>();
+        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();
@@ -230,7 +229,7 @@ public class PerformanceModelTest {
         configurationsToPerformace.put(configuration, 5.0);
 
         // Memoization storage
-        Map<Set<String>, Double> memoizationStore = new HashedMap<>();
+        Map<Set<String>, Double> memoizationStore = new HashMap<>();
 
         // Influence
         double influence = 5;
@@ -246,7 +245,7 @@ public class PerformanceModelTest {
         longestConfiguration.add("A");
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashedMap<>();
+        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();
@@ -258,7 +257,7 @@ public class PerformanceModelTest {
         configurationsToPerformace.put(configuration, 5.0);
 
         // Memoization storage
-        Map<Set<String>, Double> memoizationStore = new HashedMap<>();
+        Map<Set<String>, Double> memoizationStore = new HashMap<>();
 
         // Influence
         double influence = 2;
@@ -269,10 +268,10 @@ public class PerformanceModelTest {
 
     @Test
     public void testCalculateInfluence1() {
-        Map<Set<String>, Double> regionTable = new HashedMap<>();
+        Map<Set<String>, Double> regionTable = new HashMap<>();
 
         // Influences
-        Map<Set<String>, Double> configurationToInfluence = new HashedMap<>();
+        Map<Set<String>, Double> configurationToInfluence = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();
@@ -340,10 +339,10 @@ public class PerformanceModelTest {
 
     @Test
     public void testCalculateInfluence2() {
-        Map<Set<String>, Double> regionTable = new HashedMap<>();
+        Map<Set<String>, Double> regionTable = new HashMap<>();
 
         // Influences
-        Map<Set<String>, Double> configurationToInfluence = new HashedMap<>();
+        Map<Set<String>, Double> configurationToInfluence = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();

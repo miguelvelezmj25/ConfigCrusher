@@ -1,14 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
 import org.apache.commons.collections4.MultiValuedMap;
-import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 
 import java.text.DecimalFormat;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 // TODO time can be in seconds, milliseonds, minutes,.... That affects the type of the block.
 /**
@@ -23,7 +19,7 @@ public class PerformanceModel {
     public PerformanceModel(double baseTime, List<Map<Set<String>, Double>> blocks) {
         this.baseTime = baseTime;
         this.regionToInfluenceTable = new HashSetValuedHashMap<>();
-        this.configurationToPerformance = new HashedMap<>();
+        this.configurationToPerformance = new HashMap<>();
 
         for(Map<Set<String>, Double> block : blocks) {
             Set<String> relevantOptions = new HashSet<>();
@@ -69,7 +65,7 @@ public class PerformanceModel {
     }
 
     public static Map<Set<String>, Double> calculateConfigurationsInfluence(Map<Set<String>, Double> regionTable) {
-        Map<Set<String>, Double> configurationToInfluence = new HashedMap<>();
+        Map<Set<String>, Double> configurationToInfluence = new HashMap<>();
 
         long numberOfOptions = (long) Math.sqrt(regionTable.size());
         Set<String> regionOptions = new HashSet<>();

@@ -9,7 +9,6 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepPipeline;
 import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepRegion;
-import org.apache.commons.collections4.map.HashedMap;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +39,7 @@ public class InstrumentVisitorTest {
         Regions.addRegion(region);
 
         // Regions to options
-        Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions = new HashedMap<>();
+        Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions = new HashMap<>();
         Set<ConstantConfigurationExpression> options = new HashSet<>();
         options.add(new ConstantConfigurationExpression("A"));
         relevantRegionsToOptions.put(region, options);

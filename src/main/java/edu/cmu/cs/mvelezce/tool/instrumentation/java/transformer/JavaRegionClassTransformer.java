@@ -12,6 +12,7 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import java.util.HashSet;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * Created by mvelezce on 4/21/17.
@@ -22,9 +23,9 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         super(fileName);
     }
 
-    public abstract InsnList addInstructionsBeforeRegion(JavaRegion javaRegion);
+    public abstract InsnList addInstructionsBeforeRegion(JavaRegion javaRegion, int maxLocals);
 
-    public abstract InsnList addInstructionsAfterRegion(JavaRegion javaRegion);
+    public abstract InsnList addInstructionsAfterRegion(JavaRegion javaRegion, int maxLocals);
 
     // TODO there might be some programs that do not have a main method and we will have to create custom main classes for them
     public static void setMainClass(String mainClassFile) {
@@ -58,9 +59,12 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
             Set<JavaRegion> regionsInMethod = JavaRegionClassTransformer.getRegionsInMethod(classPackage, className, methodNode.name);
 
+
+            Stack<Integer> localVariableIndexes = new Stack<>();
+            int nextLocalVariableIndex = methodNode.maxLocals;
             InsnList instructions = methodNode.instructions;
-            InsnList newInstructions = new InsnList();
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
+            InsnList newInstructions = new InsnList();
 
             while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
@@ -75,13 +79,16 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 for(JavaRegion javaRegion : regionsInMethod) {
                     if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
-                        newInstructions.add(this.addInstructionsBeforeRegion(javaRegion));
+                        newInstructions.add(this.addInstructionsBeforeRegion(javaRegion, nextLocalVariableIndex));
                         newInstructions.add(instruction);
+
                         instrumented = true;
+                        localVariableIndexes.push(nextLocalVariableIndex);
+                        nextLocalVariableIndex++;
                     }
                     else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
                         newInstructions.add(instruction);
-                        newInstructions.add(this.addInstructionsAfterRegion(javaRegion));
+                        newInstructions.add(this.addInstructionsAfterRegion(javaRegion, localVariableIndexes.pop()));
                         instrumented = true;
                     }
                 }

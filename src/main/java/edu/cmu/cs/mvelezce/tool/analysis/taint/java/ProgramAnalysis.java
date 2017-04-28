@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import org.json.simple.JSONArray;
@@ -20,12 +19,7 @@ import java.util.*;
  */
 public class ProgramAnalysis {
 
-    public static final String DIRECTORY = "output/analysis/java/programs";
-    public static final String DOT_JSON = ".json";
-
-    // Component cmd options
-    public static final String DELRES = "delres";
-    public static final String SAVERES = "saveres";
+    public static final String DIRECTORY = Options.DIRECTORY + "/analysis/java/programs";
 
     // JSON strings
     public static final String ANALYSIS = "analysis";
@@ -37,10 +31,10 @@ public class ProgramAnalysis {
     public static final String START_BYTECODE_INDEX = "startBytecodeIndex";
     public static final String END_BYTCODE_INDEX = "endBytecodeIndex"; // TODO this could be array if there are multiple exit points
 
-    public static Map<JavaRegion, Set<String>> analyse(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions, String[] args) throws IOException {
+    public static Map<JavaRegion, Set<String>> analyse(String programName, String[] args, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions) throws IOException {
         Options.getCommandLine(args);
 
-        String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + ProgramAnalysis.DOT_JSON;
+        String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
@@ -66,7 +60,7 @@ public class ProgramAnalysis {
     // TODO the parameters are for testing. We should not be passing the map since that is what this component needs to calculate
     public static Map<JavaRegion, Set<String>> analyse(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions) {
         // Reset // TODO this should not be part of the analysis, but rather of the script that calls the entire pipeline
-        Regions.reset();
+//        Regions.reset();
         PerformanceEntry.reset();
 
         return relevantRegionToOptions;
@@ -105,7 +99,7 @@ public class ProgramAnalysis {
             directory.mkdirs();
         }
 
-        String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + ProgramAnalysis.DOT_JSON;
+        String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
         FileWriter writer = new FileWriter(file);
         writer.write(result.toJSONString());

@@ -10,7 +10,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClass
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.pipeline.Pipeline;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
 import java.io.IOException;
@@ -53,7 +53,7 @@ public class JavaPipeline {
             regionsToOptions.put(region, entry.getValue());
         }
 
-        return Pipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
+        return PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
 
     // TODO how do we know what files we need to instrument from a program?

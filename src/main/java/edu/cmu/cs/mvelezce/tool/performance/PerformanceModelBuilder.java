@@ -1,17 +1,58 @@
-package edu.cmu.cs.mvelezce.tool.pipeline;
+package edu.cmu.cs.mvelezce.tool.performance;
 
+import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
- * Created by mvelezce on 4/10/17.
+ * Created by mvelezce on 4/28/17.
  */
-// TODO Create adapter for each program/language to pass configurationss
-public abstract class Pipeline {
+public class PerformanceModelBuilder {
+
+    public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
+
+    // JSON strings
+    public static final String MODEL = "model";
+    public static final String BASE_TIME = "baseTime";
+    public static final String CONFIGURATION = "configuration";
+    public static final String PERFORMANCE = "performance";
+    public static final String CONFIGURATION_TO_PERFORMANCE = "configurationToPerformance";
+
+    public static PerformanceModel createPerformanceModel(String programName, String[] args, Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) throws IOException {
+        Options.getCommandLine(args);
+
+        String outputFile = PerformanceModelBuilder.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        File file = new File(outputFile);
+
+        Options.checkIfDeleteResult(file);
+
+        if(file.exists()) {
+            try {
+                return PerformanceModelBuilder.readFromFile(file);
+            }
+            catch (ParseException pe) {
+                throw new RuntimeException("Could not parse the cached results");
+            }
+        }
+
+        PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+
+        if(Options.checkIfSave()) {
+            PerformanceModelBuilder.writeToFile(programName, performanceModel);
+        }
+
+        return performanceModel;
+    }
 
     public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
         Map<Region, Set<String>> regionsToOptionsOfInnerRegions = Regions.getOptionsInRegionsWithPossibleInnerRegions(regionsToOptions);
@@ -40,7 +81,7 @@ public abstract class Pipeline {
         Map<Region, Map<Set<String>, Double>> regionsToRealPerformance = new HashMap<>();
 
         for(Region region : Regions.getRegionsToAllPossibleInnerRegions().keySet()) {
-            Pipeline.calculateRealPerformanceOfRegion(region, regionsToRawPerformance, regionsToRealPerformance);
+            PerformanceModelBuilder.calculateRealPerformanceOfRegion(region, regionsToRawPerformance, regionsToRealPerformance);
         }
 
         // Calculate base time
@@ -78,7 +119,7 @@ public abstract class Pipeline {
         Map<Set<String>, Double> configurationsToRealPerformance = regionsToRawPerformance.get(region);
 
         for(Region innerRegion : possibleInnerRegions) {
-            Pipeline.calculateRealPerformanceOfRegion(innerRegion, regionsToRawPerformance, regionsToRealPerformance);
+            PerformanceModelBuilder.calculateRealPerformanceOfRegion(innerRegion, regionsToRawPerformance, regionsToRealPerformance);
         }
 
         for(Map.Entry<Set<String>, Double> configurationsToRealPerformanceEntry : configurationsToRealPerformance.entrySet()) {
@@ -112,4 +153,75 @@ public abstract class Pipeline {
         regionsToRealPerformance.put(region, configurationsToRealPerformance);
     }
 
+    private static void writeToFile(String programName, PerformanceModel performanceModel) throws IOException {
+        JSONObject model = new JSONObject();
+
+        model.put(PerformanceModelBuilder.BASE_TIME, performanceModel.getBaseTime());
+
+        JSONArray configurationToPerformance = new JSONArray();
+
+        for(Map.Entry<Set<String>, Double> configurationToPerformanceEntry : performanceModel.getConfigurationToPerformance().entrySet()) {
+            JSONObject configuration = new JSONObject();
+            configuration.put(PerformanceModelBuilder.PERFORMANCE, configurationToPerformanceEntry.getValue());
+
+            JSONArray values = new JSONArray();
+            for(String option : configurationToPerformanceEntry.getKey()) {
+                values.add(option);
+            }
+
+            configuration.put(PerformanceModelBuilder.CONFIGURATION, values);
+
+            configurationToPerformance.add(configuration);
+        }
+
+        model.put(PerformanceModelBuilder.CONFIGURATION_TO_PERFORMANCE, configurationToPerformance);
+
+        JSONObject result = new JSONObject();
+        result.put(PerformanceModelBuilder.MODEL, model);
+
+        File directory = new File(PerformanceModelBuilder.DIRECTORY);
+
+        if(!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String outputFile = PerformanceModelBuilder.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        File file = new File(outputFile);
+        FileWriter writer = new FileWriter(file);
+        writer.write(result.toJSONString());
+        writer.flush();
+        writer.close();
+    }
+
+    private static PerformanceModel readFromFile(File file) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONObject result = (JSONObject) parser.parse(new FileReader(file));
+
+        JSONObject model = (JSONObject) result.get(PerformanceModelBuilder.MODEL);
+
+        double baseTime = (double) model.get(PerformanceModelBuilder.BASE_TIME);
+        Map<Set<String>, Double> configurationsToPerformances = new HashMap<>();
+
+        JSONArray configurationsToPerformancesResult = (JSONArray) model.get(PerformanceModelBuilder.CONFIGURATION_TO_PERFORMANCE);
+
+        for(Object entry : configurationsToPerformancesResult) {
+            JSONObject configurationToPerformanceResult = (JSONObject) entry;
+
+            double performance = (double) configurationToPerformanceResult.get(PerformanceModelBuilder.PERFORMANCE);
+
+            Set<String> configuration = new HashSet<>();
+            JSONArray optionsResult = (JSONArray) configurationToPerformanceResult.get(PerformanceModelBuilder.CONFIGURATION);
+
+            for(Object optionResult : optionsResult) {
+                configuration.add((String) optionResult);
+            }
+
+            configurationsToPerformances.put(configuration, performance);
+        }
+
+        PerformanceModel performanceModel = new PerformanceModel(baseTime, new ArrayList<>());
+        performanceModel.setConfigurationToPerformance(configurationsToPerformances);
+
+        return performanceModel;
+    }
 }

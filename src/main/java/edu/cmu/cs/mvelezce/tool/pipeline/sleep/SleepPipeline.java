@@ -22,14 +22,14 @@ import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.instrumentation.sleep.InstrumentVisitor;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.pipeline.Pipeline;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
 
 import java.util.*;
 
 /**
  * Created by miguelvelez on 2/11/17.
  */
-public class SleepPipeline extends Pipeline {
+public class SleepPipeline {
 
     private static List<Class<? extends Statement>> relevantStatementsClasses = new ArrayList<Class<? extends Statement>>() {
         {
@@ -74,7 +74,7 @@ public class SleepPipeline extends Pipeline {
             regionsToOptions.put(region, options);
         }
 
-        return Pipeline.createPerformanceModel(measuredPerformance, regionsToOptions);
+        return PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(TimedProgram timedProgram, Set<Set<String>> configurationsToExecute) {

@@ -258,6 +258,7 @@ public class SleepPipelineTest {
     public void testBuildPerformanceModel16() throws FileNotFoundException {
         String program = edu.cmu.cs.mvelezce.sleep.Helper.loadFile(TimedSleepInterpreterTest.PROGRAMS_PATH + "program16");
         PerformanceModel performanceModel = SleepPipeline.buildPerformanceModel(program);
+        System.out.println(performanceModel);
 
         double performance = 6;
         Set<String> configuration = new HashSet<>();

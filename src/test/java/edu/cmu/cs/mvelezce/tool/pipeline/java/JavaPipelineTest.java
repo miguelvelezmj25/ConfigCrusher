@@ -9,7 +9,6 @@ import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import org.junit.Assert;
 import org.junit.Before;
@@ -892,7 +891,7 @@ public class JavaPipelineTest {
 
         // Performance model
         PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep9.CLASS, Sleep10.FILENAME, programFiles, regionsToOptions);
-//        System.out.println(performanceModel);
+        System.out.println(performanceModel);
 
         // Compare
         double performance = 0.3;

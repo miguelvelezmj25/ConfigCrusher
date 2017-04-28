@@ -12,14 +12,20 @@ import java.util.*;
  */
 public class PerformanceModel {
     private double baseTime;
-    private MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable;
     private Map<Set<String>, Double> configurationToPerformance;
+    // TODO we can make this a local variable
+    private MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable;
 
 
     public PerformanceModel(double baseTime, List<Map<Set<String>, Double>> blocks) {
         this.baseTime = baseTime;
         this.regionToInfluenceTable = new HashSetValuedHashMap<>();
         this.configurationToPerformance = new HashMap<>();
+
+        // TODO this is a hacky way of creating an empty performance model. Either add new constructor or move the methods below to a method call
+        if(blocks.isEmpty()) {
+            return ;
+        }
 
         for(Map<Set<String>, Double> block : blocks) {
             Set<String> relevantOptions = new HashSet<>();
@@ -106,6 +112,22 @@ public class PerformanceModel {
         return configurationToInfluence.get(longestConfiguration);
     }
 
+    public double getBaseTime() {
+        return this.baseTime;
+    }
+
+    public void setBaseTime(double baseTime) {
+        this.baseTime = baseTime;
+    }
+
+    public Map<Set<String>, Double> getConfigurationToPerformance() {
+        return this.configurationToPerformance;
+    }
+
+    public void setConfigurationToPerformance(Map<Set<String>, Double> configurationToPerformance) {
+        this.configurationToPerformance = configurationToPerformance;
+    }
+
     @Override
     public String toString() {
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -143,5 +165,26 @@ public class PerformanceModel {
         }
 
         return performanceModel.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PerformanceModel that = (PerformanceModel) o;
+
+        if (Double.compare(that.baseTime, baseTime) != 0) return false;
+        return configurationToPerformance.equals(that.configurationToPerformance);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(baseTime);
+        result = (int) (temp ^ (temp >>> 32));
+        result = 31 * result + configurationToPerformance.hashCode();
+        return result;
     }
 }

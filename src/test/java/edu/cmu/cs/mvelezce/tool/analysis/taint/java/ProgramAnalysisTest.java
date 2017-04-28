@@ -14,7 +14,7 @@ import java.util.*;
 public class ProgramAnalysisTest {
 
     @Test
-    public void testAnalyse1() throws Exception {
+    public void testAnalysePipeline1() throws Exception {
         // TODO call Lotrack
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -37,16 +37,16 @@ public class ProgramAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> outputSave = ProgramAnalysis.analyse(Sleep1.CLASS, Sleep1.FILENAME, programFiles, relevantRegionToOptions, args);
+        Map<JavaRegion, Set<String>>  outputSave = ProgramAnalysis.analyse(Sleep1.CLASS, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
 
         args = new String[0];
-        Map<JavaRegion, Set<String>> outputRead = ProgramAnalysis.analyse(Sleep1.CLASS, Sleep1.FILENAME, programFiles, relevantRegionToOptions, args);
+        Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyse(Sleep1.CLASS, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
 
         Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testAnalyse2() throws Exception {
+    public void testAnalysePipeline2() throws Exception {
         // TODO call Lotrack
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -74,10 +74,10 @@ public class ProgramAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> outputSave = ProgramAnalysis.analyse(Sleep2.CLASS, Sleep2.FILENAME, programFiles, relevantRegionToOptions, args);
+        Map<JavaRegion, Set<String>> outputSave = ProgramAnalysis.analyse(Sleep2.CLASS, args, Sleep2.FILENAME, programFiles, relevantRegionToOptions);
 
         args = new String[0];
-        Map<JavaRegion, Set<String>> outputRead = ProgramAnalysis.analyse(Sleep2.CLASS, Sleep2.FILENAME, programFiles, relevantRegionToOptions, args);
+        Map<JavaRegion, Set<String>> outputRead = ProgramAnalysis.analyse(Sleep2.CLASS, args, Sleep2.FILENAME, programFiles, relevantRegionToOptions);
 
         Assert.assertEquals(outputSave, outputRead);
     }

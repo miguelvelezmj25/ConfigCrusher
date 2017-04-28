@@ -49,7 +49,7 @@ public class SleepPipeline extends Pipeline {
         CFGBuilder builder = new CFGBuilder();
         CFG cfg = builder.buildCFG(program);
 
-        // Taint Analysis (Language dependent)
+        // Taint ProgramAnalysis (Language dependent)
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = TaintAnalysis.analyze(cfg);
         Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions = SleepPipeline.getRelevantRegionsToOptions(instructionsToTainted);
 

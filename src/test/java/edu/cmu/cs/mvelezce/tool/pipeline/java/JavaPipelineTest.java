@@ -11,7 +11,6 @@ import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -217,56 +216,56 @@ public class JavaPipelineTest {
 
         Set<Set<String>> optionsSet = new HashSet<>();
 
-        for(String result : queryResult) {
-            JSONObject JSONResult = new JSONObject(result);
-            Set<String> options = new HashSet<>();
-
-            if(JSONResult.has(LotrackProcessor.USED_TERMS)) {
-                for(Object string : JSONResult.getJSONArray(LotrackProcessor.USED_TERMS).toList()) {
-                    String possibleString = string.toString();
-
-                    if(possibleString.equals("true") || possibleString.equals("false")) {
-                        continue;
-                    }
-
-                    options.add(string.toString());
-                }
-            }
-            else if(JSONResult.has(LotrackProcessor.CONSTRAINT)) {
-                // Be careful that this is imprecise since the constraints can be very large and does not fit in the db field
-                String[] constraints = JSONResult.getString(LotrackProcessor.CONSTRAINT).split(" ");
-
-                for(String constraint : constraints) {
-                    constraint = constraint.replaceAll("[()^|!=]", "");
-                    if(constraint.isEmpty() || StringUtils.isNumeric(constraint)) {
-                        continue;
-                    }
-
-                    if(constraint.contains(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
-                        constraint = constraint.split(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
-                    }
-
-                    // Because the constraint gotten from Lotrack might be too long
-                    if(constraint.contains(".")) {
-                        continue;
-                    }
-
-                    if(constraint.equals("false") || constraint.equals("true")) {
-                        continue;
-                    }
-
-                    options.add(constraint);
-                }
-            }
-            else {
-                throw new NoSuchFieldException("The query result does not have neither a " + LotrackProcessor.USED_TERMS + " or " + LotrackProcessor.CONSTRAINT + " fields");
-            }
-
-            if(!options.isEmpty()) {
-                optionsSet.add(options);
-            }
-
-        }
+//        for(String result : queryResult) {
+//            JSONObject JSONResult = new JSONObject(result);
+//            Set<String> options = new HashSet<>();
+//
+//            if(JSONResult.has(LotrackProcessor.USED_TERMS)) {
+//                for(Object string : JSONResult.getJSONArray(LotrackProcessor.USED_TERMS).toList()) {
+//                    String possibleString = string.toString();
+//
+//                    if(possibleString.equals("true") || possibleString.equals("false")) {
+//                        continue;
+//                    }
+//
+//                    options.add(string.toString());
+//                }
+//            }
+//            else if(JSONResult.has(LotrackProcessor.CONSTRAINT)) {
+//                // Be careful that this is imprecise since the constraints can be very large and does not fit in the db field
+//                String[] constraints = JSONResult.getString(LotrackProcessor.CONSTRAINT).split(" ");
+//
+//                for(String constraint : constraints) {
+//                    constraint = constraint.replaceAll("[()^|!=]", "");
+//                    if(constraint.isEmpty() || StringUtils.isNumeric(constraint)) {
+//                        continue;
+//                    }
+//
+//                    if(constraint.contains(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)) {
+//                        constraint = constraint.split(LotrackProcessor.LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL)[0];
+//                    }
+//
+//                    // Because the constraint gotten from Lotrack might be too long
+//                    if(constraint.contains(".")) {
+//                        continue;
+//                    }
+//
+//                    if(constraint.equals("false") || constraint.equals("true")) {
+//                        continue;
+//                    }
+//
+//                    options.add(constraint);
+//                }
+//            }
+//            else {
+//                throw new NoSuchFieldException("The query result does not have neither a " + LotrackProcessor.USED_TERMS + " or " + LotrackProcessor.CONSTRAINT + " fields");
+//            }
+//
+//            if(!options.isEmpty()) {
+//                optionsSet.add(options);
+//            }
+//
+//        }
 
         Set<String> uniqueOptions = new HashSet<>();
 

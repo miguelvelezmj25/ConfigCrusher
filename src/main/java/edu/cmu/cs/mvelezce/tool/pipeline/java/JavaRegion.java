@@ -21,7 +21,7 @@ public class JavaRegion extends Region {
     private int startBytecodeIndex;
     private int endBytecodeIndex;
 
-    private JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
+    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
         super(regionId);
         this.regionPackage = regionPackage;
         this.regionClass = regionClass;

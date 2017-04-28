@@ -1,8 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
 
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-
 /**
  * Created by mvelezce on 4/21/17.
  */

@@ -30,7 +30,7 @@ public class JavaPipeline {
 //        Regions.reset();
         PerformanceEntry.reset();
 
-        // Taint Analysis (Language dependent)
+        // ProgramAnalysis (Language dependent)
 //        // TODO call Lotrack
 //        Map<JavaRegion, Set<String>> regionsToOptions = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, program);
 //        for(Map.Entry<JavaRegion, Set<String>> regionToOptions : regionsToOptions.entrySet()) {

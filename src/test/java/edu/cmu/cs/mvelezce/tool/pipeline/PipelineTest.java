@@ -20,7 +20,7 @@ import java.util.*;
  * Created by mvelezce on 4/14/17.
  */
 public class PipelineTest {
-    
+
     @Before
     public void before() {
         Regions.reset();

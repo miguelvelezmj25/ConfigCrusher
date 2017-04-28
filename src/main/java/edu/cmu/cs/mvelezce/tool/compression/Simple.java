@@ -100,7 +100,7 @@ public class Simple extends Options {
         return configurationsToExecute;
     }
 
-    private static Set<Set<String>> filterOptions(Set<Set<String>> relevantOptionsSet) {
+    public static Set<Set<String>> filterOptions(Set<Set<String>> relevantOptionsSet) {
         Set<Set<String>> filteredOptions = new HashSet<>();
 
         for(Set<String> relevantOptions : relevantOptionsSet) {

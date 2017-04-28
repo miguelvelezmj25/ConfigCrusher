@@ -16,9 +16,9 @@ import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
+import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.pipeline.PipelineTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -124,7 +124,7 @@ public class SleepPipelineTest {
         TimedProgram timedProgram = new TimedProgram(programRegion.getRegionID(), program);
 
         // Configurations
-        Set<Set<String>> optionsSet = PipelineTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Set of performance entries
@@ -186,7 +186,7 @@ public class SleepPipelineTest {
         TimedProgram timedProgram = new TimedProgram(programRegion.getRegionID(), program);
 
         // Configurations
-        Set<Set<String>> optionsSet = PipelineTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Set of performance entries

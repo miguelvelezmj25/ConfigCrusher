@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformer;
@@ -44,7 +45,7 @@ public class JavaPipeline {
 
         // Configuration compression (Language independent)
         Set<Set<String>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());
-        Set<Set<String>> configurationsToExecute = Pipeline.getConfigurationsToExecute(relevantOptions);
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(relevantOptions);
 
         // Instrumentation (Language dependent)
         Set<ClassNode> instrumentedClasses = JavaPipeline.instrumentRelevantRegions(mainClass, programFiles);

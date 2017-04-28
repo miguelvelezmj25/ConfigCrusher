@@ -4,6 +4,8 @@ import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.compression.Simple;
+import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
@@ -149,7 +151,7 @@ public class JavaPipelineTest {
         measuredPerformance.add(performanceEntry);
 
         // Configurations
-        Set<Set<String>> optionsSet = PipelineTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Assert
@@ -286,8 +288,8 @@ public class JavaPipelineTest {
             System.out.println("Number of constraints: " + optionsSet.size());
         }
 
-        Set<Set<String>> configurations = edu.cmu.cs.mvelezce.tool.pipeline.Pipeline.getConfigurationsToExecute(optionsSet);
-        PipelineTest.checkConfigurationIsStatisfied(optionsSet, configurations);
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(optionsSet);
+        SimpleTest.checkConfigurationIsStatisfied(optionsSet, configurations);
 
         if(csv) {
             System.out.print(configurations.size() + ", ");

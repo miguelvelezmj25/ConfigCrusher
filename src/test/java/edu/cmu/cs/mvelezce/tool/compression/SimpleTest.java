@@ -178,27 +178,27 @@ public class SimpleTest {
     @Test
     public void filterOptions1() {
         Set<Set<String>> set = SimpleTest.getOptionsSet("AB, AC");
-        Assert.assertEquals(set, edu.cmu.cs.mvelezce.tool.pipeline.Pipeline.filterOptions(set));
+        Assert.assertEquals(set, Simple.filterOptions(set));
     }
 
     @Test
     public void filterOptions2() {
         Set<Set<String>> set = SimpleTest.getOptionsSet("ABC, ACD");
-        Assert.assertEquals(set, edu.cmu.cs.mvelezce.tool.pipeline.Pipeline.filterOptions(set));
+        Assert.assertEquals(set, Simple.filterOptions(set));
     }
 
     @Test
     public void filterOptions3() {
         Set<Set<String>> set = SimpleTest.getOptionsSet("AB, ABC");
         Set<Set<String>> result = SimpleTest.getOptionsSet("ABC");
-        Assert.assertEquals(result, edu.cmu.cs.mvelezce.tool.pipeline.Pipeline.filterOptions(set));
+        Assert.assertEquals(result, Simple.filterOptions(set));
     }
 
     @Test
     public void filterOptions4() {
         Set<Set<String>> set = SimpleTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
         Set<Set<String>> result = SimpleTest.getOptionsSet("ABC, BCD, DEF");
-        Assert.assertEquals(result, edu.cmu.cs.mvelezce.tool.pipeline.Pipeline.filterOptions(set));
+        Assert.assertEquals(result, Simple.filterOptions(set));
     }
 
 }

@@ -1,10 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
+import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
-import org.apache.commons.cli.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -38,37 +37,13 @@ public class ProgramAnalysis {
     public static final String START_BYTECODE_INDEX = "startBytecodeIndex";
     public static final String END_BYTCODE_INDEX = "endBytecodeIndex"; // TODO this could be array if there are multiple exit points
 
-    // TODO the parameters are for testing. We should not be passing the map since that is what this component needs to calculate
     public static Map<JavaRegion, Set<String>> analyse(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions, String[] args) throws IOException {
-        Options componentOptions = new Options();
-
-        Option componentOption = new Option(ProgramAnalysis.DELRES, "Deletes the stored result");
-        componentOptions.addOption(componentOption);
-
-        componentOption = new Option(ProgramAnalysis.SAVERES, "Saves the result");
-        componentOptions.addOption(componentOption);
-
-        // Reset
-        Regions.reset();
-        PerformanceEntry.reset();
-
-        CommandLineParser parser = new DefaultParser();
-        CommandLine cmd;
-
-        try {
-            cmd = parser.parse(componentOptions, args);
-        } catch (org.apache.commons.cli.ParseException pe) {
-            throw new RuntimeException("Could not parse the options you provided");
-        }
+        Options.getCommandLine(args);
 
         String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + ProgramAnalysis.DOT_JSON;
         File file = new File(outputFile);
 
-        if(cmd.hasOption(ProgramAnalysis.DELRES)) {
-            if(file.exists()) {
-                file.delete();
-            }
-        }
+        Options.checkIfDeleteResult(file);
 
         if(file.exists()) {
             try {
@@ -76,14 +51,23 @@ public class ProgramAnalysis {
             }
             catch (ParseException pe) {
                 throw new RuntimeException("Could not parse the cached results");
-           }
+            }
         }
 
-        // TODO call Lotrack
+        relevantRegionToOptions = ProgramAnalysis.analyse(programName, mainClass, programFiles, relevantRegionToOptions);
 
-        if(cmd.hasOption(ProgramAnalysis.SAVERES)) {
+        if(Options.checkIfSave()) {
             ProgramAnalysis.writeToFile(programName, relevantRegionToOptions);
         }
+
+        return relevantRegionToOptions;
+    }
+
+    // TODO the parameters are for testing. We should not be passing the map since that is what this component needs to calculate
+    public static Map<JavaRegion, Set<String>> analyse(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions) {
+        // Reset // TODO this should not be part of the analysis, but rather of the script that calls the entire pipeline
+        Regions.reset();
+        PerformanceEntry.reset();
 
         return relevantRegionToOptions;
     }

@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * Created by mvelezce on 4/28/17.
  */
-public class Simple extends Options {
+public class Simple {
 
     public static final String DIRECTORY = Options.DIRECTORY + "/compression/java/programs";
 
@@ -23,7 +23,7 @@ public class Simple extends Options {
     public static Set<Set<String>> getConfigurationsToExecute(String programName, String[] args, Set<Set<String>> relevantOptionsSet) throws IOException {
         Options.getCommandLine(args);
 
-        String outputFile = Simple.DIRECTORY + "/" + programName + Simple.DOT_JSON;
+        String outputFile = Simple.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
@@ -209,7 +209,7 @@ public class Simple extends Options {
             directory.mkdirs();
         }
 
-        String outputFile = Simple.DIRECTORY + "/" + programName + Simple.DOT_JSON;
+        String outputFile = Simple.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
         FileWriter writer = new FileWriter(file);
         writer.write(result.toJSONString());

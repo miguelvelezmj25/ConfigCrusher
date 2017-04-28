@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.SleepAdapter;
@@ -25,23 +26,15 @@ public class JavaPipeline {
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
     // TODO how do we pass the main class and all files of a program?
-    public static PerformanceModel buildPerformanceModel(String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException {
+    public static PerformanceModel buildPerformanceModel(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException {
         // Reset
         // TODO we need to execute this once we are not passing the regions in the unit tests
 //        Regions.reset();
         PerformanceEntry.reset();
 
         // ProgramAnalysis (Language dependent)
-//        // TODO call Lotrack
-//        Map<JavaRegion, Set<String>> regionsToOptions = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, program);
-//        for(Map.Entry<JavaRegion, Set<String>> regionToOptions : regionsToOptions.entrySet()) {
-//            if(regionToOptions.getKey().getRegionMethod().equals("getCommandData")) {
-//
-//            }
-//        }
-
         // TODO we should get this from Lotrack and not pass it ourselves
-//        Map<JavaRegion, Set<String>> relevantRegionsToOptions = null;
+        relevantRegionsToOptions = ProgramAnalysis.analyse(programName, mainClass, programFiles, relevantRegionsToOptions);
 
         // Configuration compression (Language independent)
         Set<Set<String>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());

@@ -415,7 +415,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep4.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep4.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep4.CLASS, Sleep4.FILENAME, programFiles, regionsToOptions);
 
         // Compare
         double performance = 0.3;
@@ -460,7 +460,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep1.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep1.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep1.CLASS, Sleep1.FILENAME, programFiles, regionsToOptions);
 //        System.out.println(performanceModel);
 
         // Compare
@@ -502,7 +502,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep2.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep2.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep2.CLASS, Sleep2.FILENAME, programFiles, regionsToOptions);
 //        System.out.println(performanceModel);
 
         // Compare
@@ -551,7 +551,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep3.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep3.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep3.CLASS, Sleep3.FILENAME, programFiles, regionsToOptions);
         System.out.println(performanceModel);
 
         // Compare
@@ -601,7 +601,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep5.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep5.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep5.CLASS, Sleep5.FILENAME, programFiles, regionsToOptions);
         System.out.println(performanceModel);
 
         // Compare
@@ -654,7 +654,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep6.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep6.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep6.CLASS, Sleep6.FILENAME, programFiles, regionsToOptions);
         System.out.println(performanceModel);
 
         // Compare
@@ -696,7 +696,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep7.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep7.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep7.CLASS, Sleep7.FILENAME, programFiles, regionsToOptions);
         System.out.println(performanceModel);
 
         // Compare
@@ -753,7 +753,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep8.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep8.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep8.CLASS, Sleep8.FILENAME, programFiles, regionsToOptions);
         System.out.println(performanceModel);
 
         // Compare
@@ -822,7 +822,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep9.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep9.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep9.CLASS, Sleep9.FILENAME, programFiles, regionsToOptions);
 //        System.out.println(performanceModel);
 
         // Compare
@@ -891,7 +891,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep10.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep10.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep9.CLASS, Sleep10.FILENAME, programFiles, regionsToOptions);
 //        System.out.println(performanceModel);
 
         // Compare
@@ -951,7 +951,7 @@ public class JavaPipelineTest {
         programFiles.add(Sleep11.FILENAME);
 
         // Performance model
-        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep11.FILENAME, programFiles, regionsToOptions);
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep11.CLASS, Sleep11.FILENAME, programFiles, regionsToOptions);
         System.out.println(performanceModel);
 
         // Compare

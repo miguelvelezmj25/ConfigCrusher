@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Created by miguelvelez on 4/7/17.
  */
-// TODO use types
+// TODO use types?
 public class Regions {
     private static Region program = null;
     private static Set<Region> regions = new HashSet<>();

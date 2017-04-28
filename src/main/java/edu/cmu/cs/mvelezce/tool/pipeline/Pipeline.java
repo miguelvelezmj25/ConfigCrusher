@@ -185,6 +185,7 @@ public abstract class Pipeline {
             Pipeline.calculateRealPerformanceOfRegion(region, regionsToRawPerformance, regionsToRealPerformance);
         }
 
+        // Calculate base time
         PerformanceEntry performanceEntry = measuredPerformance.iterator().next();
         Set<String> baseConfiguration =  performanceEntry.getConfiguration();
         double baseTime = performanceEntry.getProgram().getSecondsExecutionTime();

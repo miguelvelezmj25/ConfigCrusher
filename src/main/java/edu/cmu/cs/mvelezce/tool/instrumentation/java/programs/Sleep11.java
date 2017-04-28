@@ -33,14 +33,14 @@ public class Sleep11 {
             // Region !A end 35
         }
 
-        Region region = Regions.getRegion("ID");
-        region.enter();
+//        Region region = Regions.getRegion("ID");
+//        region.enter();
         for(int i = 0; i < repeat; i++) { // TODO do we make it run all executions?
             // Region A start TODO where to instrument? It does not break before the i = 0 @ 39
             Thread.sleep(200);
             // Region A end TODO where to instrument? 53
         }
-        region.exit();
+//        region.exit();
     }
 
 }

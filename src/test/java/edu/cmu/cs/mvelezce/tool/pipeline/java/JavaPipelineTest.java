@@ -928,7 +928,7 @@ public class JavaPipelineTest {
         JavaRegion region2 = new JavaRegion(Sleep11.PACKAGE, Sleep11.CLASS, Sleep11.MAIN_METHOD, 30, 35);
         Regions.addRegion(region2);
 
-        JavaRegion region3 = new JavaRegion(Sleep11.PACKAGE, Sleep11.CLASS, Sleep11.MAIN_METHOD, 39, 58);
+        JavaRegion region3 = new JavaRegion(Sleep11.PACKAGE, Sleep11.CLASS, Sleep11.MAIN_METHOD, 39, 57);
         Regions.addRegion(region3);
 
         // Regions to options

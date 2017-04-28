@@ -69,15 +69,14 @@ public class ProgramAnalysis {
                 file.delete();
             }
         }
-        else {
-            if(file.exists()) {
-                try {
-                    return ProgramAnalysis.readFromFile(file);
-                }
-                catch (ParseException pe) {
-                    throw new RuntimeException("Could not parse the cached results");
-               }
+
+        if(file.exists()) {
+            try {
+                return ProgramAnalysis.readFromFile(file);
             }
+            catch (ParseException pe) {
+                throw new RuntimeException("Could not parse the cached results");
+           }
         }
 
         // TODO call Lotrack

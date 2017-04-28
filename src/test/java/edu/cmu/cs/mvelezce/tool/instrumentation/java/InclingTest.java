@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by mvelezce on 3/31/17.
  */
-public class HelperTest {
+public class InclingTest {
 
     @Test
     public void testReadJar() throws IOException {

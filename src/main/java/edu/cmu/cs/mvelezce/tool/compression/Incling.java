@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by mvelezce on 4/2/17.
  */
-public class Helper {
+public class Incling {
 
     public static void incling() throws InterruptedException {
         IFeatureModelFactory factory = DefaultFeatureModelFactory.getInstance();
@@ -52,7 +52,7 @@ public class Helper {
         PairWiseConfigurationGenerator generator = new PairWiseConfigurationGenerator(satInstance, 200);
 //        satInstance.convertToString(generator.q.take().getModel());
 
-        Helper.exec(satInstance, generator, new NullMonitor());
+        Incling.exec(satInstance, generator, new NullMonitor());
 
     }
 

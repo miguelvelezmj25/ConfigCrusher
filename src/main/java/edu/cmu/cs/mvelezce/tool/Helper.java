@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Helper class for performing analyses.
+ * Incling class for performing analyses.
  *
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1

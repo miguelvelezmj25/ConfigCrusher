@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 2/11/17.
  */
-public class HelperTest {
+public class InclingTest {
 
     @Test
     public void getConfigurations1() {

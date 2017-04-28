@@ -5,11 +5,11 @@ import org.junit.Test;
 /**
  * Created by mvelezce on 4/2/17.
  */
-public class HelperTest {
+public class InclingTest {
 
     @Test
     public void testIncling() throws InterruptedException {
-        Helper.incling();
+        Incling.incling();
     }
 
 }

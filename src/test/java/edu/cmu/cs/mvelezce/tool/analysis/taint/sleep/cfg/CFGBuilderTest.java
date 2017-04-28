@@ -7,7 +7,7 @@ public class CFGBuilderTest {
 
 //    @Test
 //    public void test1() {
-//        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program1");
+//        String programFile = Incling.loadFile(Incling.PROGRAMS_PATH + "program1");
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();
@@ -81,7 +81,7 @@ public class CFGBuilderTest {
 //
 //    @Test
 //    public void test2() {
-//        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program2");
+//        String programFile = Incling.loadFile(Incling.PROGRAMS_PATH + "program2");
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();
@@ -147,7 +147,7 @@ public class CFGBuilderTest {
 //
 //    @Test
 //    public void test3() {
-//        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program3");
+//        String programFile = Incling.loadFile(Incling.PROGRAMS_PATH + "program3");
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();
@@ -216,7 +216,7 @@ public class CFGBuilderTest {
 //
 //    @Test
 //    public void test4() {
-//        String programFile = Helper.loadFile(Helper.PROGRAMS_PATH + "program4");
+//        String programFile = Incling.loadFile(Incling.PROGRAMS_PATH + "program4");
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();

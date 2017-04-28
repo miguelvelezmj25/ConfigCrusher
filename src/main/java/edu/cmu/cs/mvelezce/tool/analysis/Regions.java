@@ -128,7 +128,7 @@ public class Regions {
         Region executing = Regions.executingRegions.pop();
         // TODO this is for testing that the region that believes to have executed is the one that was executing
         if(!region.equals(executing)) {
-            throw new RuntimeException("The region that wanted to be remove from the executing regions is not the last region " +
+            throw new RuntimeException("The region that wanted to be removed from the executing regions is not the last region " +
                     "to be executing");
         }
     }

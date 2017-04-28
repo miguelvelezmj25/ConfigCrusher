@@ -51,6 +51,7 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
         timedProgram.getStatements().accept(this);
 
         Regions.getProgram().endTime(this.totalExecutionTime);
+        Regions.removeExecutingRegion(program);
 
         return null;
     }

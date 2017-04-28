@@ -84,7 +84,11 @@ public class SleepPipeline extends Pipeline {
             Regions.resetRegions();
             TimedSleepInterpreter interpreter = new TimedSleepInterpreter(timedProgram);
             interpreter.evaluate(configuration);
-//            System.out.println();
+
+            if(!Regions.getExecutingRegions().isEmpty()) {
+                throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");
+            }
+
             configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }

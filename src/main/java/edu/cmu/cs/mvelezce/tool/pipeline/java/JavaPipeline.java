@@ -89,6 +89,11 @@ public class JavaPipeline {
             // TODO factory pattern or switch statement to create the right adapter
             Adapter adapter = new SleepAdapter(mainClass);
             adapter.execute(configuration);
+
+            if(!Regions.getExecutingRegions().isEmpty()) {
+                throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");
+            }
+
             configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
         }
 

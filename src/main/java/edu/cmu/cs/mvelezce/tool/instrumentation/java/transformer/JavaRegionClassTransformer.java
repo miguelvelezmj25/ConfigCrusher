@@ -86,7 +86,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     }
                 }
 
-                if (!instrumented) {
+                if(!instrumented) {
                     newInstructions.add(instruction);
                 }
             }

@@ -916,4 +916,53 @@ public class JavaPipelineTest {
         configuration.add("B");
         Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
     }
+
+    @Test
+    public void testBuildPerformanceModel11() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+        // TODO we still need to get Lotrack working
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        JavaRegion region1 = new JavaRegion(Sleep11.PACKAGE, Sleep11.CLASS, Sleep11.MAIN_METHOD, 19, 24);
+        Regions.addRegion(region1);
+
+        JavaRegion region2 = new JavaRegion(Sleep11.PACKAGE, Sleep11.CLASS, Sleep11.MAIN_METHOD, 30, 35);
+        Regions.addRegion(region2);
+
+        JavaRegion region3 = new JavaRegion(Sleep11.PACKAGE, Sleep11.CLASS, Sleep11.MAIN_METHOD, 39, 58);
+        Regions.addRegion(region3);
+
+        // Regions to options
+        Map<JavaRegion, Set<String>> regionsToOptions = new HashedMap<>();
+
+        Set<String> options = new HashSet<>();
+        options.add("A");
+        regionsToOptions.put(region1, options);
+
+        options = new HashSet<>();
+        options.add("A");
+        regionsToOptions.put(region2, options);
+
+        options = new HashSet<>();
+        options.add("A");
+        regionsToOptions.put(region3, options);
+        // TODO we still need to get Lotrack working
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep11.FILENAME);
+
+        // Performance model
+        PerformanceModel performanceModel = JavaPipeline.buildPerformanceModel(Sleep11.FILENAME, programFiles, regionsToOptions);
+        System.out.println(performanceModel);
+
+        // Compare
+        double performance = 2.2;
+        Set<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+
+        performance = 1.1;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+    }
 }

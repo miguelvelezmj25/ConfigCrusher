@@ -31,6 +31,8 @@ public class SleepAdapter extends Adapter {
             program.startTime();
             method.invoke(null, (Object) this.adaptConfiguration(configuration));
             program.endTime();
+
+            Regions.removeExecutingRegion(program);
         }
         catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();

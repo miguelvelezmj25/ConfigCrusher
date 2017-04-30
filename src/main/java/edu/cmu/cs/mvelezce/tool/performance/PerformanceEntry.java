@@ -13,7 +13,7 @@ public class PerformanceEntry {
     private static long baseTime = -1;
 
     private Set<String> configuration;
-    private Map<Region, Region> regions;
+    private Map<Region, Region> regions; // TODO make set
     private Region program;
 
     public PerformanceEntry(Set<String> configuration, Set<Region> regions, Region program) {

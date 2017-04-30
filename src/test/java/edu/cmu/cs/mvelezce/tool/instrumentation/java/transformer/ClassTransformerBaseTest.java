@@ -1,15 +1,13 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.*;
+import edu.cmu.cs.mvelezce.java.programs.*;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
@@ -50,7 +48,7 @@ public class ClassTransformerBaseTest {
 
             }
         };
-        ClassNode classNode = base.readClass(ClassTransformerBaseTest.SLEEP11);
+        ClassNode classNode = base.readClass(ClassTransformerBaseTest.SLEEP1);
 
         List<MethodNode> methods = classNode.methods;
 
@@ -67,36 +65,6 @@ public class ClassTransformerBaseTest {
             System.out.println();
         }
 
-    }
-
-    protected static String executeCommand(String command) {
-        System.out.println(command);
-        StringBuilder output = new StringBuilder();
-        Process process;
-
-        try {
-            process = Runtime.getRuntime().exec(command);
-            process.waitFor();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            String line;
-
-            while((line = reader.readLine()) != null) {
-                output.append(line).append("\n");
-            }
-
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            while ((line = errorReader.readLine()) != null) {
-                System.out.println(line);
-            }
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(output);
-        return output.toString();
     }
 
 }

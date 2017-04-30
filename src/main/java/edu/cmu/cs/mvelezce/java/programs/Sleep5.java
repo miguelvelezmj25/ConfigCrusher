@@ -1,13 +1,13 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
+package edu.cmu.cs.mvelezce.java.programs;
 
 /**
  * Created by mvelezce on 4/21/17.
  */
-public class Sleep4 {
+public class Sleep5 {
 
-    public static final String FILENAME = Sleep4.class.getCanonicalName();
-    public static final String PACKAGE = Sleep4.class.getPackage().getName();
-    public static final String CLASS = Sleep4.class.getSimpleName();
+    public static final String FILENAME = Sleep5.class.getCanonicalName();
+    public static final String PACKAGE = Sleep5.class.getPackage().getName();
+    public static final String CLASS = Sleep5.class.getSimpleName();
     public static final String MAIN_METHOD = "main";
     public static final String METHOD_1 = "method1";
     public static final String METHOD_2 = "method2";
@@ -21,16 +21,12 @@ public class Sleep4 {
         if(a) {
             // Region A start 31
             Thread.sleep(600);
-            Sleep4.method1(a);
-            // Region A end 36
+            Sleep5.method1(a);
+            Thread.sleep(600);
+            Sleep5.method2(b);
+            // Region A end 44
         }
         Thread.sleep(100);
-        if(b) {
-            // Region B start 48
-            Thread.sleep(600);
-            Sleep4.method2(b);
-            // Region B start 53
-        }
         // Region program end
     }
 

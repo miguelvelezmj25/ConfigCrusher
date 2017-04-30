@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
+package edu.cmu.cs.mvelezce.java.programs;
 
 /**
  * Created by mvelezce on 3/31/17.

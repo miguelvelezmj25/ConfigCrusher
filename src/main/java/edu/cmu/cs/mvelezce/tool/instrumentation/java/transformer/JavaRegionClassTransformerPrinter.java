@@ -7,6 +7,9 @@ import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 
+import java.util.List;
+import java.util.Set;
+
 // TODO do i need to update the stack and frame?
 /**
  * Created by mvelezce on 4/3/17.
@@ -15,8 +18,8 @@ public class JavaRegionClassTransformerPrinter extends JavaRegionClassTransforme
 
     private String messageToPrint;
 
-    public JavaRegionClassTransformerPrinter(String fileName, String messageToPrint) {
-        super(fileName);
+    public JavaRegionClassTransformerPrinter(List<String> programFiles, Set<JavaRegion> regions, String messageToPrint) {
+        super(programFiles, regions);
 
         this.messageToPrint = messageToPrint;
     }

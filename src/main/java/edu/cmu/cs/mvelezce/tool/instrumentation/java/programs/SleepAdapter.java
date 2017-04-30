@@ -20,6 +20,7 @@ public class SleepAdapter extends Adapter {
         this.mainClassFile = mainClassFile;
     }
 
+    // TODO pass the main class to execute
     public void execute(Set<String> configuration) throws ClassNotFoundException, NoSuchMethodException {
         Class<?> mainClass = this.loadClass(this.mainClassFile);
         Method method = mainClass.getMethod(Adapter.MAIN, String[].class);

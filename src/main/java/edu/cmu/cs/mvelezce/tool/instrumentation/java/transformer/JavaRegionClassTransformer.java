@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
@@ -9,26 +8,43 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
-import java.util.HashSet;
-import java.util.ListIterator;
-import java.util.Set;
-import java.util.Stack;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/21/17.
  */
 public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
-    public JavaRegionClassTransformer(String fileName) {
-        super(fileName);
+    protected List<String> fileNames;
+    protected Set<JavaRegion> regions;
+
+    public JavaRegionClassTransformer(List<String> fileNames, Set<JavaRegion> regions) {
+        this.fileNames = fileNames;
+        this.regions = regions;
     }
 
     public abstract InsnList addInstructionsBeforeRegion(JavaRegion javaRegion, int maxLocals);
 
     public abstract InsnList addInstructionsAfterRegion(JavaRegion javaRegion, int maxLocals);
 
+    @Override
+    public Set<ClassNode> transformClasses() throws IOException {
+        Set<ClassNode> classNodes = new HashSet<>();
+
+        for(String fileName : this.fileNames) {
+            ClassNode classNode = this.readClass(fileName);
+            this.transform(classNode);
+
+            classNodes.add(classNode);
+        }
+
+        return classNodes;
+    }
+
     // TODO there might be some programs that do not have a main method and we will have to create custom main classes for them
     public static void setMainClass(String mainClassFile) {
+        // TODO I do not think this should be here
         JavaRegion program = new JavaRegion(mainClassFile, Adapter.MAIN);
         Regions.addProgram(program);
     }
@@ -41,7 +57,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         classPackage = classPackage.replaceAll("/", ".");
         className = className.replaceAll("/", ".");
 
-        Set<JavaRegion> regionsInClass = JavaRegionClassTransformer.getRegionsInClass(classPackage, className);
+        Set<JavaRegion> regionsInClass = this.getRegionsInClass(classPackage, className);
 
         for(MethodNode methodNode : classNode.methods) {
             boolean instrumentMethod = false;
@@ -57,7 +73,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
-            Set<JavaRegion> regionsInMethod = JavaRegionClassTransformer.getRegionsInMethod(classPackage, className, methodNode.name);
+            Set<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
 
 
             Stack<Integer> localVariableIndexes = new Stack<>();
@@ -104,12 +120,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
     }
 
     // Todo Seems weird to have this here
-    private static Set<JavaRegion> getRegionsInClass(String regionPackage, String regionClass) {
+    private Set<JavaRegion> getRegionsInClass(String regionPackage, String regionClass) {
         Set<JavaRegion> javaRegions = new HashSet<>();
 
-        for(Region region : Regions.getRegions()) {
-            JavaRegion javaRegion = (JavaRegion) region;
-
+        for(JavaRegion javaRegion : this.regions) {
             if(javaRegion.getRegionPackage().equals(regionPackage) && javaRegion.getRegionClass().equals(regionClass)) {
                 javaRegions.add(javaRegion);
             }
@@ -118,12 +132,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         return javaRegions;
     }
 
-    private static Set<JavaRegion> getRegionsInMethod(String regionPackage, String regionClass, String regionMethod) {
+    private Set<JavaRegion> getRegionsInMethod(String regionPackage, String regionClass, String regionMethod) {
         Set<JavaRegion> javaRegions = new HashSet<>();
 
-        for(Region region : Regions.getRegions()) {
-            JavaRegion javaRegion = (JavaRegion) region;
-
+        for(JavaRegion javaRegion : this.regions) {
             if(javaRegion.getRegionPackage().equals(regionPackage) && javaRegion.getRegionClass().equals(regionClass) && javaRegion.getRegionMethod().equals(regionMethod)) {
                 javaRegions.add(javaRegion);
             }

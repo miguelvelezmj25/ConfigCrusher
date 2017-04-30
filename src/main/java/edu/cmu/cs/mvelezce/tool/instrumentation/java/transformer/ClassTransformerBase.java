@@ -14,15 +14,11 @@ import java.io.IOException;
  */
 public abstract class ClassTransformerBase implements ClassTransformer {
 
-    private String fileName;
-
-    public ClassTransformerBase(String fileName) {
-        this.fileName = fileName;
-    }
+    public ClassTransformerBase() { ; }
 
     @Override
-    public ClassNode readClass() throws IOException {
-        ClassReader classReader = new ClassReader(this.fileName);
+    public ClassNode readClass(String fileName) throws IOException {
+        ClassReader classReader = new ClassReader(fileName);
         ClassNode classNode =  new ClassNode();
         classReader.accept(classNode, 0);
 
@@ -34,7 +30,7 @@ public abstract class ClassTransformerBase implements ClassTransformer {
         ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         classNode.accept(classWriter);
 
-        DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(this.fileName + ".class")));
+        DataOutputStream output = new DataOutputStream(new FileOutputStream(new File(fileName + ".class")));
         output.write(classWriter.toByteArray());
         output.flush();
         output.close();

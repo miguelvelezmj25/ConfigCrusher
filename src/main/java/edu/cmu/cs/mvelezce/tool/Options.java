@@ -1,8 +1,10 @@
 package edu.cmu.cs.mvelezce.tool;
 
 import org.apache.commons.cli.*;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by mvelezce on 4/28/17.
@@ -34,9 +36,12 @@ public abstract class Options {
         }
     }
 
-    public static void checkIfDeleteResult(File file) {
+    public static void checkIfDeleteResult(File file) throws IOException {
         if(cmd.hasOption(Options.DELRES)) {
-            if (file.exists()) {
+            if(file.isDirectory()) {
+                FileUtils.deleteDirectory(file);
+            }
+            else {
                 file.delete();
             }
         }

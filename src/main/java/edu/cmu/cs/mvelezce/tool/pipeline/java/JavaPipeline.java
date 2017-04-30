@@ -4,10 +4,9 @@ import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.SleepAdapter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
@@ -41,8 +40,8 @@ public class JavaPipeline {
         Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(relevantOptions);
 
         // Instrumentation (Language dependent)
-        Set<ClassNode> instrumentedClasses = JavaPipeline.instrumentRelevantRegions(mainClass, programFiles);
-        Set<PerformanceEntry> measuredPerformance = JavaPipeline.measureConfigurationPerformance(mainClass, instrumentedClasses, configurationsToExecute);
+        Instrumenter.instrument(programName, programFiles, relevantRegionsToOptions.keySet()); // TODO
+        Set<PerformanceEntry> measuredPerformance = JavaPipeline.measureConfigurationPerformance(mainClass, null, configurationsToExecute);
 //        System.out.println("Executed configurations: " + configurationsToExecute.size());
 
         // Performance Model (Language independent)
@@ -56,22 +55,22 @@ public class JavaPipeline {
         return PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
 
-    // TODO how do we know what files we need to instrument from a program?
-    public static Set<ClassNode> instrumentRelevantRegions(String mainClass, List<String> programFiles) throws IOException {
-        Set<ClassNode> classNodes = new HashSet<>();
-
-        for(String file : programFiles) {
-            JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(file);
-            ClassNode classNode = printer.readClass();
-            printer.transform(classNode);
-
-            classNodes.add(classNode);
-        }
-
-        JavaRegionClassTransformer.setMainClass(mainClass);
-
-        return classNodes;
-    }
+//    // TODO how do we know what files we need to instrument from a program?
+//    public static Set<ClassNode> instrumentRelevantRegions(String mainClass, List<String> programFiles) throws IOException {
+//        Set<ClassNode> classNodes = new HashSet<>();
+//
+//        for(String file : programFiles) {
+//            JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(file);
+//            ClassNode classNode = printer.readClass();
+//            printer.transform(classNode);
+//
+//            classNodes.add(classNode);
+//        }
+//
+//        JavaRegionClassTransformer.setMainClass(mainClass);
+//
+//        return classNodes;
+//    }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String mainClass, Set<ClassNode> instrumentedClasses, Set<Set<String>> configurationsToExecute) throws NoSuchMethodException, ClassNotFoundException {
         Adapter.setInstrumentedClassNodes(instrumentedClasses);

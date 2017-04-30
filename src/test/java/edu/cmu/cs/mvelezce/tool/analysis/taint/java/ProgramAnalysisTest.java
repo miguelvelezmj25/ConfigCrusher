@@ -37,10 +37,10 @@ public class ProgramAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>>  outputSave = ProgramAnalysis.analyse(Sleep1.CLASS, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
+        Map<JavaRegion, Set<String>>  outputSave = ProgramAnalysis.analyse(Sleep1.CLASS, args, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
 
         args = new String[0];
-        Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyse(Sleep1.CLASS, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
+        Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyse(Sleep1.CLASS, args, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -67,7 +67,7 @@ public class ProgramAnalysisTest {
 
         // Program files
         List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep1.FILENAME);
+        programFiles.add(Sleep2.FILENAME);
 
         // Program arguments
         String[] args = new String[2];

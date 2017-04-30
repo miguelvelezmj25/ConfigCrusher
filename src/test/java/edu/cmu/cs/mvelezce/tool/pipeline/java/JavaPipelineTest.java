@@ -6,10 +6,10 @@ import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +52,7 @@ public class JavaPipelineTest {
     public void testInstrumentRelevantRegions1() throws Exception {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
         JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);
         Regions.addRegion(region);
 
@@ -69,31 +70,32 @@ public class JavaPipelineTest {
         programFiles.add(Sleep4.FILENAME);
 
         // Instrument and assert
-        Assert.assertTrue(JavaPipeline.instrumentRelevantRegions(Sleep4.FILENAME, programFiles).size() > 0);
+        Instrumenter.instrument(Sleep4.FILENAME, programFiles, regions);
     }
 
     @Test
     public void testMeasureConfigurationPerformance1() throws Exception {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
         JavaRegion region1 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);
-        Regions.addRegion(region1);
+        regions.add(region1);
 
         JavaRegion region2 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 48, 53);
-        Regions.addRegion(region2);
+        regions.add(region2);
 
         JavaRegion region3 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_1, 19, 20);
-        Regions.addRegion(region3);
+        regions.add(region3);
 
         JavaRegion region4 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_2, 19, 20);
-        Regions.addRegion(region4);
+        regions.add(region4);
 
         // Program files
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep4.FILENAME);
 
         // Instrument
-        Set<ClassNode> instrumentedClasses = JavaPipeline.instrumentRelevantRegions(Sleep4.FILENAME, programFiles);
+        Instrumenter.instrument(Sleep4.FILENAME, programFiles, regions);
 
         // Set of performance entries
         Set<PerformanceEntry> measuredPerformance = new HashSet<>();
@@ -153,8 +155,8 @@ public class JavaPipelineTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        // Assert
-        Set<PerformanceEntry> results = JavaPipeline.measureConfigurationPerformance(Sleep4.FILENAME, instrumentedClasses, configurationsToExecute);
+        // Assert TODO
+        Set<PerformanceEntry> results = JavaPipeline.measureConfigurationPerformance(Sleep4.FILENAME, null, configurationsToExecute);
 
         Assert.assertEquals(measuredPerformance, results);
         JavaPipelineTest.checkExecutionTimes(measuredPerformance, results);

@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -59,9 +58,6 @@ public class ProgramAnalysis {
 
     // TODO the parameters are for testing. We should not be passing the map since that is what this component needs to calculate
     public static Map<JavaRegion, Set<String>> analyse(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions) {
-        // Reset // TODO this should not be part of the analysis, but rather of the script that calls the entire pipeline
-//        Regions.reset();
-        PerformanceEntry.reset();
 
         return relevantRegionToOptions;
     }

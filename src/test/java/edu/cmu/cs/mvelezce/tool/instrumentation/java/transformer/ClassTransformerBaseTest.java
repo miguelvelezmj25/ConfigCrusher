@@ -8,9 +8,11 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Set;
 
 /**
  * Created by miguelvelez on 4/9/17.
@@ -37,13 +39,18 @@ public class ClassTransformerBaseTest {
      */
     @Test
     public void testReadClass() throws Exception {
-        ClassTransformerBase base = new ClassTransformerBase(ClassTransformerBaseTest.SLEEP11) {
+        ClassTransformerBase base = new ClassTransformerBase() {
+            @Override
+            public Set<ClassNode> transformClasses() throws IOException {
+                return null;
+            }
+
             @Override
             public void transform(ClassNode classNode) {
 
             }
         };
-        ClassNode classNode = base.readClass();
+        ClassNode classNode = base.readClass(ClassTransformerBaseTest.SLEEP11);
 
         List<MethodNode> methods = classNode.methods;
 

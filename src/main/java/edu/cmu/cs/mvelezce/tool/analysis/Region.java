@@ -28,13 +28,13 @@ public class Region implements Cloneable {
 
     @Override
     public Region clone()  {
-        Region region = null;
+        Region region;
 
         try {
             region = (Region) super.clone();
             region.startTime = this.startTime;
             region.endTime = this.endTime;
-            region.innerRegions = new HashSet<>(this.innerRegions);
+//            region.innerRegions = new HashSet<>(this.innerRegions);
         }
         catch (CloneNotSupportedException cnse) {
             throw new RuntimeException("The region could not be cloned");
@@ -51,6 +51,7 @@ public class Region implements Cloneable {
     }
 
     public void enter() {
+//        System.out.println("enter " + this.getRegionID() + "," + this.getStartTime() + "," + this.getEndTime());
         this.enterRegion();
         this.startTime();
     }
@@ -62,14 +63,22 @@ public class Region implements Cloneable {
 
     public void exit() {
         this.endTime();
+        System.out.print("exit " + this.getRegionID() + "," + this.getStartTime() + "," + this.getEndTime());
+
+        // TODO this is adding noisy to the measurement
+        for(Region innerRegion : this.innerRegions) {
+            System.out.print("," + innerRegion.getRegionID());
+        }
+
+        System.out.println("");
 
         Regions.removeExecutingRegion(this);
     }
 
     public void exit(long endTime) {
-        Regions.removeExecutingRegion(this);
-
         this.endTime(endTime);
+//        System.out.println(this.getRegionID() + "," + this.getStartTime() + "," + this.getEndTime());
+        Regions.removeExecutingRegion(this);
     }
 
     public void addInnerRegion(Region region) {
@@ -104,7 +113,7 @@ public class Region implements Cloneable {
 
     public void resetState() {
         this.resetExecution();
-        this.innerRegions = new HashSet<>();
+//        this.innerRegions = new HashSet<>();
     }
 
     public long getExecutionTime() {

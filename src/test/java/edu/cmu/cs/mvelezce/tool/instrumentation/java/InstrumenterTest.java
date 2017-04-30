@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep4;
+import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.java.programs.Sleep4;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -67,31 +67,6 @@ public class InstrumenterTest {
         Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, args, programFiles, regions);
 
         Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
-    }
-
-    @Test
-    public void testInstrument1() throws Exception {
-        // Java Region
-        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        Set<JavaRegion> regions = new HashSet<>();
-        JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);
-        regions.add(region);
-
-        region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 48, 53);
-        regions.add(region);
-
-        region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_1, 19, 20);
-        regions.add(region);
-
-        region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_2, 19, 20);
-        regions.add(region);
-
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep4.FILENAME);
-
-        // Instrument and assert
-        Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, programFiles, regions);
     }
 
 }

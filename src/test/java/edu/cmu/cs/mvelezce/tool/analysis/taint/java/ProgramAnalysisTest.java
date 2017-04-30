@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep2;
+import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.java.programs.Sleep2;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import org.junit.Assert;
 import org.junit.Test;

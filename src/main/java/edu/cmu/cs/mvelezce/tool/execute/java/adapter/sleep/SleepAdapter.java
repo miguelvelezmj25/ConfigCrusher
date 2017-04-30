@@ -1,9 +1,7 @@
-package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
+package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
 
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -23,9 +21,6 @@ public class SleepAdapter extends Adapter {
 
     @Override
     public void execute(Set<String> configuration) {
-        Region program = Regions.getProgram();
-        Regions.addExecutingRegion(program);
-
         String[] argsArray = this.adaptConfiguration(configuration);
         StringBuilder args = new StringBuilder();
 
@@ -34,11 +29,7 @@ public class SleepAdapter extends Adapter {
             args.append(" ");
         }
 
-        program.startTime();
         Adapter.executeJavaProgram(this.mainClass, this.directory, args.toString().trim());
-        program.endTime();
-
-        Regions.removeExecutingRegion(program);
     }
 
     public String[] adaptConfiguration(Set<String> configuration) {
@@ -53,7 +44,7 @@ public class SleepAdapter extends Adapter {
             }
         }
 
-        return Arrays.copyOfRange(sleepConfiguration, 0, configuration.size());
+        return sleepConfiguration;
     }
 
 

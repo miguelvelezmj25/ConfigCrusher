@@ -58,7 +58,10 @@ public class Regions {
             }
         }
 
-        return null;
+        Region region = new Region(regionID);
+        Regions.addRegion(region);
+
+        return region;
     }
 
     /**
@@ -122,6 +125,12 @@ public class Regions {
     }
 
     public static Region getExecutingRegion() {
+        if(Regions.executingRegions.isEmpty()) {
+            Region program = new Region("PROGRAM");
+            Regions.addProgram(program);
+            Regions.addExecutingRegion(program);
+        }
+
         return Regions.executingRegions.peek();
     }
 

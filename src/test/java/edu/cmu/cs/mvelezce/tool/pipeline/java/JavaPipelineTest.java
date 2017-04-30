@@ -1,14 +1,11 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
+import edu.cmu.cs.mvelezce.java.programs.*;
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
-import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.*;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,25 +20,6 @@ import java.util.*;
 public class JavaPipelineTest {
 
     public static final double TIMING_ERROR = 0.1;
-
-    public static void checkExecutionTimes(Set<PerformanceEntry> expectedPerformances, Set<PerformanceEntry> actualPerformances) {
-        for(PerformanceEntry expected : expectedPerformances) {
-            for(PerformanceEntry actual : actualPerformances) {
-                for(Region expectedRegion : expected.getRegions()) {
-                    for(Region actualRegion : actual.getRegions()) {
-                        if(expected.getConfiguration().equals(actual.getConfiguration()) && expectedRegion.equals(actualRegion)) {
-                            System.out.println("Configuration: " + actual.getConfiguration());
-                            System.out.println("Expected: " + expectedRegion.getExecutionTime()/1000.0);
-                            System.out.println("Actual: " + actualRegion.getSecondsExecutionTime());
-                            Assert.assertEquals(actualRegion.getSecondsExecutionTime(), expectedRegion.getExecutionTime()/1000.0, JavaPipelineTest.TIMING_ERROR);
-                        }
-                    }
-                }
-            }
-
-            System.out.println();
-        }
-    }
 
     @Before
     public void before() {
@@ -73,97 +51,6 @@ public class JavaPipelineTest {
 
         // Instrument and assert
         Instrumenter.instrument(program, Sleep4.FILENAME, programFiles, regions);
-    }
-
-    @Test
-    public void testMeasureConfigurationPerformance1() throws Exception {
-        // Java Region
-        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        Set<JavaRegion> regions = new HashSet<>();
-        JavaRegion region1 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);
-        regions.add(region1);
-
-        JavaRegion region2 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 48, 53);
-        regions.add(region2);
-
-        JavaRegion region3 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_1, 19, 20);
-        regions.add(region3);
-
-        JavaRegion region4 = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_2, 19, 20);
-        regions.add(region4);
-
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep4.FILENAME);
-
-        String program = Sleep4.FILENAME.substring(Sleep4.FILENAME.lastIndexOf(".") + 1);
-
-        // Instrument
-        Instrumenter.instrument(program, Sleep4.FILENAME, programFiles, regions);
-
-        // Set of performance entries
-        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
-
-        // Empty configuration
-        Set<String> configuration = new HashSet<>();
-        Regions.getProgram().startTime(0);
-        Regions.getProgram().endTime(300);
-        PerformanceEntry performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram());
-        measuredPerformance.add(performanceEntry);
-
-        // Configuration A
-        configuration = new HashSet<>();
-        configuration.add("A");
-        Regions.resetRegions();
-        Regions.getRegion(region1).startTime(0);
-        Regions.getRegion(region1).endTime(1500);
-        Regions.getRegion(region3).startTime(0);
-        Regions.getRegion(region3).endTime(600);
-        Regions.getProgram().startTime(0);
-        Regions.getProgram().endTime(1800);
-        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram());
-        measuredPerformance.add(performanceEntry);
-
-        // Configuration B
-        configuration = new HashSet<>();
-        configuration.add("B");
-        Regions.resetRegions();
-        Regions.getRegion(region2).startTime(0);
-        Regions.getRegion(region2).endTime(1700);
-        Regions.getRegion(region4).startTime(0);
-        Regions.getRegion(region4).endTime(600);
-        Regions.getProgram().startTime(0);
-        Regions.getProgram().endTime(1900);
-        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram());
-        measuredPerformance.add(performanceEntry);
-
-        // Configuration AB
-        configuration = new HashSet<>();
-        configuration.add("A");
-        configuration.add("B");
-        Regions.resetRegions();
-        Regions.getRegion(region1).startTime(0);
-        Regions.getRegion(region1).endTime(1500);
-        Regions.getRegion(region2).startTime(0);
-        Regions.getRegion(region2).endTime(1700);
-        Regions.getRegion(region3).startTime(0);
-        Regions.getRegion(region3).endTime(600);
-        Regions.getRegion(region4).startTime(0);
-        Regions.getRegion(region4).endTime(600);
-        Regions.getProgram().startTime(0);
-        Regions.getProgram().endTime(3500);
-        performanceEntry = new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram());
-        measuredPerformance.add(performanceEntry);
-
-        // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
-        Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
-
-        // Assert TODO
-        Set<PerformanceEntry> results = JavaPipeline.measureConfigurationPerformance(Sleep4.FILENAME, null, configurationsToExecute);
-
-        Assert.assertEquals(measuredPerformance, results);
-        JavaPipelineTest.checkExecutionTimes(measuredPerformance, results);
     }
 
     public static void compareRegionOptionsCompressionToBF(String program, boolean csv) throws NoSuchFieldException {

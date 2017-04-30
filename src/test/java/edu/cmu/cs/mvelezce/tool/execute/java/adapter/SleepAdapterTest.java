@@ -1,8 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
+import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.java.programs.Sleep4;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import org.junit.Test;
 
@@ -25,6 +27,23 @@ public class SleepAdapterTest {
 
         // Add program region
         JavaRegion program = new JavaRegion(Sleep1.FILENAME, Adapter.MAIN);
+        Regions.addProgram(program);
+
+        // Execute
+        adapter.execute(configuration);
+    }
+
+    @Test
+    public void testExecute4() throws Exception {
+        // Adapter
+        Adapter adapter = new SleepAdapter(Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS);
+
+        // Configuration
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+
+        // Add program region
+        JavaRegion program = new JavaRegion(Sleep4.FILENAME, Adapter.MAIN);
         Regions.addProgram(program);
 
         // Execute

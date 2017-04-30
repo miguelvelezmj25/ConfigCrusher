@@ -1,13 +1,13 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
+package edu.cmu.cs.mvelezce.java.programs;
 
 /**
  * Created by mvelezce on 4/21/17.
  */
-public class Sleep7 {
+public class Sleep6 {
 
-    public static final String FILENAME = Sleep7.class.getCanonicalName();
-    public static final String PACKAGE = Sleep7.class.getPackage().getName();
-    public static final String CLASS = Sleep7.class.getSimpleName();
+    public static final String FILENAME = Sleep6.class.getCanonicalName();
+    public static final String PACKAGE = Sleep6.class.getPackage().getName();
+    public static final String CLASS = Sleep6.class.getSimpleName();
     public static final String MAIN_METHOD = "main";
 
     public static void main(String[] args) throws InterruptedException {
@@ -25,7 +25,6 @@ public class Sleep7 {
             Thread.sleep(700);
             // Region !A end 30
         }
-        Thread.sleep(100);
         // Region program end
     }
 

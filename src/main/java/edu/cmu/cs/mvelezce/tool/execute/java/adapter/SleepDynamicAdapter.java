@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
+package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
@@ -10,20 +10,20 @@ import java.util.Set;
 /**
  * Created by mvelezce on 4/26/17.
  */
-public class SleepAdapter extends Adapter {
+public class SleepDynamicAdapter extends DynamicAdapter {
 
     private static final String[] CONFIGURATIONS = {"A", "B", "C", "D"};
 
     private String mainClassFile;
 
-    public SleepAdapter(String mainClassFile) {
+    public SleepDynamicAdapter(String mainClassFile) {
         this.mainClassFile = mainClassFile;
     }
 
     // TODO pass the main class to execute
     public void execute(Set<String> configuration) throws ClassNotFoundException, NoSuchMethodException {
         Class<?> mainClass = this.loadClass(this.mainClassFile);
-        Method method = mainClass.getMethod(Adapter.MAIN, String[].class);
+        Method method = mainClass.getMethod(DynamicAdapter.MAIN, String[].class);
 
         try {
             Region program = Regions.getProgram();
@@ -44,7 +44,7 @@ public class SleepAdapter extends Adapter {
         String[] sleepConfiguration = new String[4];
 
         for(int i = 0; i < sleepConfiguration.length; i++) {
-            if(configuration.contains(SleepAdapter.CONFIGURATIONS[i])) {
+            if(configuration.contains(SleepDynamicAdapter.CONFIGURATIONS[i])) {
                 sleepConfiguration[i] = "true";
             }
             else {

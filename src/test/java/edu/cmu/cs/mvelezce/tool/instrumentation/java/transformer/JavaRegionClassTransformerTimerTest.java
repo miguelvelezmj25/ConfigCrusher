@@ -43,8 +43,8 @@ public class JavaRegionClassTransformerTimerTest {
 //        Set<ClassNode> instrumentedClasses = new HashSet<>();
 //        instrumentedClasses.add(classNode);
 //
-//        Adapter.setInstrumentedClassNodes(instrumentedClasses);
-//        Adapter adapter = new SleepAdapter(fileNames);
+//        DynamicAdapter.setInstrumentedClassNodes(instrumentedClasses);
+//        DynamicAdapter adapter = new SleepDynamicAdapter(fileNames);
 //        adapter.execute(configuration);
 //    }
 //

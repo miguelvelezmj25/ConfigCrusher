@@ -4,9 +4,9 @@ import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.DynamicAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.SleepDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Adapter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
@@ -40,7 +40,7 @@ public class JavaPipeline {
         Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(relevantOptions);
 
         // Instrumentation (Language dependent)
-        Instrumenter.instrument(programName, programFiles, relevantRegionsToOptions.keySet()); // TODO
+        Instrumenter.instrument(programName, mainClass, programFiles, relevantRegionsToOptions.keySet()); // TODO
         Set<PerformanceEntry> measuredPerformance = JavaPipeline.measureConfigurationPerformance(mainClass, null, configurationsToExecute);
 //        System.out.println("Executed configurations: " + configurationsToExecute.size());
 
@@ -73,15 +73,15 @@ public class JavaPipeline {
 //    }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String mainClass, Set<ClassNode> instrumentedClasses, Set<Set<String>> configurationsToExecute) throws NoSuchMethodException, ClassNotFoundException {
-        Adapter.setInstrumentedClassNodes(instrumentedClasses);
+        DynamicAdapter.setInstrumentedClassNodes(instrumentedClasses);
         Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
 
         for(Set<String> configuration : configurationsToExecute) {
             Regions.resetRegions();
 
-            // TODO factory pattern or switch statement to create the right adapter
-            Adapter adapter = new SleepAdapter(mainClass);
-            adapter.execute(configuration);
+            // TODO factory pattern or switch statement to create the right dynamicAdapter
+            DynamicAdapter dynamicAdapter = new SleepDynamicAdapter(mainClass);
+            dynamicAdapter.execute(configuration);
 
             if(!Regions.getExecutingRegions().isEmpty()) {
                 throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");

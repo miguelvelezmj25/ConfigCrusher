@@ -21,7 +21,6 @@ public class Simple {
 
     // JSON strings
     public static final String COMPRESSION = "compression";
-    public static final String CONFIGURATION = "configuration";
 
     public static Set<Set<String>> getConfigurationsToExecute(String programName, String[] args, Set<Set<String>> relevantOptionsSet) throws IOException {
         Options.getCommandLine(args);

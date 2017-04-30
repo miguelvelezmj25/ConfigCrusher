@@ -5,6 +5,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -72,7 +73,7 @@ public class SimpleTest {
     }
 
     @Test
-    public void testGetConfigurationsToExecutePipeline1() throws Exception {
+    public void testGetConfigurationsToExecutePipeline1() throws IOException {
         // Program arguments
         String[] args = new String[2];
         args[0] = "-delres";
@@ -92,87 +93,263 @@ public class SimpleTest {
     }
 
     @Test
-    public void testGetConfigurationsToExecute1() {
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, AD, BE");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
-    }
+    public void testGetConfigurationsToExecutePipeline2() throws IOException {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
-    @Test
-    public void testGetConfigurationsToExecute2() {
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABC, BCD");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test2";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute3() {
+    public void testGetConfigurationsToExecutePipeline3() throws IOException {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, BCD");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test3";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute4() {
+    public void testGetConfigurationsToExecutePipeline4() throws IOException {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, BC");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test4";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute5() {
+    public void testGetConfigurationsToExecutePipeline5() throws IOException {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, CDE");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test5";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute6() {
+    public void testGetConfigurationsToExecutePipeline6() throws IOException {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, BC");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test6";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute7() {
+    public void testGetConfigurationsToExecutePipeline7() throws IOException {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, AD, BC, BD");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test7";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute8() {
+    public void testGetConfigurationsToExecutePipeline8() throws IOException {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, AD, BC, CD");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test8";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute9() {
+    public void testGetConfigurationsToExecutePipeline9() throws IOException {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABC, CD, BD");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test9";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute10() {
+    public void testGetConfigurationsToExecutePipeline10() throws IOException{
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABC, CD");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test10";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute11() {
+    public void testGetConfigurationsToExecutePipeline11() throws IOException{
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABC, DEF");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test11";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute12() {
+    public void testGetConfigurationsToExecutePipeline12() throws IOException{
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test12";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute13() {
+    public void testGetConfigurationsToExecutePipeline13() throws IOException {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABCD, ADXY, ABDX");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test13";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
-    public void testGetConfigurationsToExecute14() {
+    public void testGetConfigurationsToExecutePipeline14() throws IOException{
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Options
         Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, AD, BC, CD, BD");
-        SimpleTest.checktOptionsPermuatationsToGetConfigurationsToExecute(relevantOptionsSet);
+
+        // Program
+        String program = "test14";
+        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        args = new String[0];
+        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test

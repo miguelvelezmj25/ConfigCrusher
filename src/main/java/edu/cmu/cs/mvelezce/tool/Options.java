@@ -12,7 +12,7 @@ import java.io.IOException;
 public abstract class Options {
     private static CommandLine cmd = null;
 
-    public static final String DIRECTORY = "output";
+    public static final String DIRECTORY = "src/main/resources";
     public static final String DOT_JSON = ".json";
 
     // Component cmd options

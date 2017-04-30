@@ -49,8 +49,8 @@ public class JavaRegionClassTransformerPrinterTest {
 //        Set<String> configuration = new HashSet<>();
 //        configuration.add("A");
 //
-//        Adapter.setInstrumentedClassNodes(instrumentedClasses);
-//        Adapter adapter = new SleepAdapter(Sleep1.FILENAME);
+//        DynamicAdapter.setInstrumentedClassNodes(instrumentedClasses);
+//        DynamicAdapter adapter = new SleepDynamicAdapter(Sleep1.FILENAME);
 //        adapter.execute(configuration);
 //    }
 //
@@ -98,8 +98,8 @@ public class JavaRegionClassTransformerPrinterTest {
 //        Set<String> configuration = new HashSet<>();
 //        configuration.add("A");
 //
-//        Adapter.setInstrumentedClassNodes(instrumentedClasses);
-//        Adapter adapter = new SleepAdapter(Sleep2.FILENAME);
+//        DynamicAdapter.setInstrumentedClassNodes(instrumentedClasses);
+//        DynamicAdapter adapter = new SleepDynamicAdapter(Sleep2.FILENAME);
 //        adapter.execute(configuration);
 //    }
 

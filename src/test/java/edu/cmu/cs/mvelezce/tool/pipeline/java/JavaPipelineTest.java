@@ -69,8 +69,10 @@ public class JavaPipelineTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep4.FILENAME);
 
+        String program = Sleep4.FILENAME.substring(Sleep4.FILENAME.lastIndexOf(".") + 1);
+
         // Instrument and assert
-        Instrumenter.instrument(Sleep4.FILENAME, programFiles, regions);
+        Instrumenter.instrument(program, Sleep4.FILENAME, programFiles, regions);
     }
 
     @Test
@@ -94,8 +96,10 @@ public class JavaPipelineTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep4.FILENAME);
 
+        String program = Sleep4.FILENAME.substring(Sleep4.FILENAME.lastIndexOf(".") + 1);
+
         // Instrument
-        Instrumenter.instrument(Sleep4.FILENAME, programFiles, regions);
+        Instrumenter.instrument(program, Sleep4.FILENAME, programFiles, regions);
 
         // Set of performance entries
         Set<PerformanceEntry> measuredPerformance = new HashSet<>();

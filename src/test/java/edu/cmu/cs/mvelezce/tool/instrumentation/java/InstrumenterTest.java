@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep1;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.programs.Sleep4;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import org.junit.Assert;
@@ -25,6 +26,28 @@ public class InstrumenterTest {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep1.FILENAME);
+
+        Instrumenter.instrument(Sleep1.CLASS, Sleep1.FILENAME, args, programFiles, regions);
+
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep1.CLASS, programFiles));
+    }
+
+    @Test
+    public void testInstrumentPipeline4() throws Exception {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
         JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);
         regions.add(region);
 
@@ -41,9 +64,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep4.FILENAME);
 
-        Instrumenter.instrument(Sleep4.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
     }
 
     @Test
@@ -68,7 +91,7 @@ public class InstrumenterTest {
         programFiles.add(Sleep4.FILENAME);
 
         // Instrument and assert
-        Instrumenter.instrument(Sleep4.FILENAME, programFiles, regions);
+        Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, programFiles, regions);
     }
 
 }

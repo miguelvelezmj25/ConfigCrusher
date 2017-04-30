@@ -18,32 +18,28 @@ public class Instrumenter {
     // TODO change this other directory when testing programs
     public static final String DIRECTORY = "src/main/resources";
 
-    // JSON strings
-    public static final String INSTRUMENTED = "instrumented";
-    public static final String CLASS = "class";
-
-    public static void instrument(String programName, String[] args, List<String> programFiles, Set<JavaRegion> regions) throws IOException {
+    public static void instrument(String programName, String mainClass, String[] args, List<String> programFiles, Set<JavaRegion> regions) throws IOException {
         Options.getCommandLine(args);
 
-        File directory = new File(Instrumenter.DIRECTORY + "/" + programName.replace(".", "/"));
+        File directory = new File(Instrumenter.DIRECTORY + "/" + programName + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
 
         Options.checkIfDeleteResult(directory);
 
         if(directory.exists()) {
-            if(Instrumenter.checkAllFilesInstrumented(programFiles)) {
+            if(Instrumenter.checkAllFilesInstrumented(programName, programFiles)) {
                 return;
             }
         }
 
-        Instrumenter.instrument(programName, programFiles, regions);
+        Instrumenter.instrument(programName, mainClass, programFiles, regions);
     }
 
 
-    public static void instrument(String programName, List<String> programFiles, Set<JavaRegion> regions) throws IOException {
+    public static void instrument(String programName, String mainClass, List<String> programFiles, Set<JavaRegion> regions) throws IOException {
         JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(programFiles, regions);
         Set<ClassNode> classNodes = timer.transformClasses();
 
-        File directory = new File(Instrumenter.DIRECTORY + "/" + programName.replace(".", "/"));
+        File directory = new File(Instrumenter.DIRECTORY + "/" + programName + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
 
         if(!directory.exists()) {
             directory.mkdirs();
@@ -56,10 +52,10 @@ public class Instrumenter {
         }
     }
 
-    public static boolean checkAllFilesInstrumented(List<String> programFiles) throws IOException {
+    public static boolean checkAllFilesInstrumented(String programName, List<String> programFiles) throws IOException {
         for(String fileName : programFiles) {
             fileName = fileName.replace(".", "/");
-            File file = new File(Instrumenter.DIRECTORY + "/" + fileName);
+            File file = new File(Instrumenter.DIRECTORY + "/" + programName + "/" + fileName + ".class");
 
             if(!file.exists()) {
                 return false;

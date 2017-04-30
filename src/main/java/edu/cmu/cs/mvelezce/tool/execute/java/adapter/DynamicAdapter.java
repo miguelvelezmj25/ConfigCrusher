@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.programs;
+package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
 import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -9,13 +9,12 @@ import java.util.Set;
 /**
  * Created by mvelezce on 4/26/17.
  */
-public abstract class Adapter extends ClassLoader {
+public abstract class DynamicAdapter extends ClassLoader {
     public static final String MAIN = "main";
 
     protected static Set<ClassNode> instrumentedClassNodes = new HashSet<>();
 
-    public Adapter() {
-    }
+    public DynamicAdapter() { ; }
 
     public abstract void execute(Set<String> configuration) throws ClassNotFoundException, NoSuchMethodException;
 
@@ -46,10 +45,10 @@ public abstract class Adapter extends ClassLoader {
     }
 
     public static Set<ClassNode> getInstrumentedClassNodes() {
-        return Adapter.instrumentedClassNodes;
+        return DynamicAdapter.instrumentedClassNodes;
     }
 
     public static void setInstrumentedClassNodes(Set<ClassNode> instrumentedClassNodes) {
-        Adapter.instrumentedClassNodes = instrumentedClassNodes;
+        DynamicAdapter.instrumentedClassNodes = instrumentedClassNodes;
     }
 }

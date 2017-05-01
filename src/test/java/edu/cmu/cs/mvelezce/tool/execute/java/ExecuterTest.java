@@ -1,10 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
+import edu.cmu.cs.mvelezce.java.programs.Sleep4;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
-import edu.cmu.cs.mvelezce.java.programs.Sleep4;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipelineTest;
 import org.junit.Assert;

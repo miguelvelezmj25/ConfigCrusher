@@ -30,7 +30,8 @@ public class Regions {
             throw new IllegalArgumentException("Region cannot be null");
         }
 
-        Regions.regions.add(region.clone());
+        // TODO there used to be a clone method here
+        Regions.regions.add(region);
     }
 
     public static void removeRegion(Region region) {
@@ -125,12 +126,6 @@ public class Regions {
     }
 
     public static Region getExecutingRegion() {
-        if(Regions.executingRegions.isEmpty()) {
-            Region program = new Region("PROGRAM");
-            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-        }
-
         return Regions.executingRegions.peek();
     }
 

@@ -11,7 +11,7 @@ public class Regions {
     private static Region program = null;
     private static Set<Region> regions = new HashSet<>();
     private static Stack<Region> executingRegions = new Stack<>();
-    private static Map<Region, Set<Region>> regionsToAllPossibleInnerRegions = new HashMap<>();
+    private static Map<Region, Set<Region>> regionsToInnerRegions = new HashMap<>();
 
     public static void addProgram(Region program) {
         if(program == null) {
@@ -101,19 +101,19 @@ public class Regions {
             throw new IllegalArgumentException("The child region cannot be null");
         }
 
-        if(!Regions.regionsToAllPossibleInnerRegions.containsKey(parent)) {
-            Regions.regionsToAllPossibleInnerRegions.put(parent, new HashSet<>());
+        if(!Regions.regionsToInnerRegions.containsKey(parent)) {
+            Regions.regionsToInnerRegions.put(parent, new HashSet<>());
         }
 
-        Regions.regionsToAllPossibleInnerRegions.get(parent).add(child);
+        Regions.regionsToInnerRegions.get(parent).add(child);
 
-        if(!Regions.regionsToAllPossibleInnerRegions.containsKey(child)) {
-            Regions.regionsToAllPossibleInnerRegions.put(child, new HashSet<>());
+        if(!Regions.regionsToInnerRegions.containsKey(child)) {
+            Regions.regionsToInnerRegions.put(child, new HashSet<>());
         }
     }
 
     public static Set<Region> getPossibleInnerRegions(Region region) {
-        return Regions.regionsToAllPossibleInnerRegions.get(region);
+        return Regions.regionsToInnerRegions.get(region);
     }
 
     public static void addExecutingRegion(Region region) {
@@ -149,7 +149,7 @@ public class Regions {
     public static Map<Region, Set<String>> getOptionsInRegionsWithPossibleInnerRegions(Map<Region, Set<String>> regionsToOptions) {
         Map<Region, Set<String>> regionsToInvolvedOptions = new HashMap<>();
 
-        Set<Region> programInnerRegions = Regions.regionsToAllPossibleInnerRegions.get(Regions.program);
+        Set<Region> programInnerRegions = Regions.regionsToInnerRegions.get(Regions.program);
 
         if(programInnerRegions != null) {
             for(Region programInnerRegion : programInnerRegions) {
@@ -158,7 +158,7 @@ public class Regions {
         }
 
         // The program is not a region in the sense that it has options affecting it
-        Regions.regionsToAllPossibleInnerRegions.remove(Regions.program);
+        Regions.regionsToInnerRegions.remove(Regions.program);
 
         return regionsToInvolvedOptions;
     }
@@ -166,14 +166,14 @@ public class Regions {
     private static void calculateOptionsOfRegionsWithPossibleInnerRegions(Region region, Map<Region, Set<String>> regionsToOptions, Map<Region, Set<String>> result) {
         if(!result.containsKey(region)) {
             Set<String> allAffectingOptions = regionsToOptions.get(region);
-            Set<Region> innerRegions = Regions.regionsToAllPossibleInnerRegions.get(region);
+            Set<Region> innerRegions = Regions.regionsToInnerRegions.get(region);
 
             if(!innerRegions.isEmpty()) {
-                for(Region innerRegion : Regions.regionsToAllPossibleInnerRegions.get(region)) {
+                for(Region innerRegion : Regions.regionsToInnerRegions.get(region)) {
                     Regions.calculateOptionsOfRegionsWithPossibleInnerRegions(innerRegion, regionsToOptions, result);
                 }
 
-                for(Region innerRegion : Regions.regionsToAllPossibleInnerRegions.get(region)) {
+                for(Region innerRegion : Regions.regionsToInnerRegions.get(region)) {
                     allAffectingOptions.addAll(result.get(innerRegion));
                 }
             }
@@ -186,7 +186,7 @@ public class Regions {
         Regions.removeProgram();
         Regions.regions = new HashSet<>();
         Regions.executingRegions = new Stack<>();
-        Regions.regionsToAllPossibleInnerRegions = new HashMap<>();
+        Regions.regionsToInnerRegions = new HashMap<>();
 
     }
 
@@ -200,5 +200,5 @@ public class Regions {
 
     public static Stack<Region> getExecutingRegions() { return Regions.executingRegions; }
 
-    public static Map<Region, Set<Region>> getRegionsToAllPossibleInnerRegions() { return Regions.regionsToAllPossibleInnerRegions; }
+    public static Map<Region, Set<Region>> getRegionsToInnerRegions() { return Regions.regionsToInnerRegions; }
 }

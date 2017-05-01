@@ -49,6 +49,7 @@ public class ExecuterTest {
 
         // Execute
         Set<PerformanceEntry> results = Executer.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS, configurationsToExecute);
+
     }
 
         @Test
@@ -58,7 +59,7 @@ public class ExecuterTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> results = Executer.measureConfigurationPerformance(Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> results = Executer.measureConfigurationPerformance(Sleep4.CLASS, Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS, configurationsToExecute);
 
 //        // Java Region
 //        // Indexes were gotten by looking at output of running ClassTransformerBaseTest

@@ -1,7 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -12,14 +10,14 @@ public class Region implements Cloneable {
     private String regionID;
     private long startTime;
     private long endTime;
-    private Set<Region> innerRegions;
+//    private Set<Region> innerRegions;
 
 
     public Region(String regionID) {
         this.regionID = regionID;
         this.startTime = 0;
         this.endTime = 0;
-        this.innerRegions = new HashSet<>();
+//        this.innerRegions = new HashSet<>();
     }
 
     public Region() {
@@ -46,7 +44,7 @@ public class Region implements Cloneable {
     private void enterRegion() {
         Region previousExecutingRegion = Regions.getExecutingRegion();
         Regions.addPossibleInnerRegion(previousExecutingRegion, this);
-        previousExecutingRegion.addInnerRegion(this);
+//        previousExecutingRegion.addInnerRegion(this);
         Regions.addExecutingRegion(this);
     }
 
@@ -63,14 +61,6 @@ public class Region implements Cloneable {
 
     public void exit() {
         this.endTime();
-        System.out.print("exit " + this.getRegionID() + "," + this.getStartTime() + "," + this.getEndTime());
-
-        // TODO this is adding noisy to the measurement
-        for(Region innerRegion : this.innerRegions) {
-            System.out.print("," + innerRegion.getRegionID());
-        }
-
-        System.out.println("");
 
         Regions.removeExecutingRegion(this);
     }
@@ -81,13 +71,13 @@ public class Region implements Cloneable {
         Regions.removeExecutingRegion(this);
     }
 
-    public void addInnerRegion(Region region) {
-        if(region == null) {
-            throw new IllegalArgumentException("The region cannot be null");
-        }
-
-        this.innerRegions.add(region);
-    }
+//    public void addInnerRegion(Region region) {
+//        if(region == null) {
+//            throw new IllegalArgumentException("The region cannot be null");
+//        }
+//
+//        this.innerRegions.add(region);
+//    }
 
     public void startTime() {
         this.startTime(System.nanoTime());
@@ -134,6 +124,15 @@ public class Region implements Cloneable {
         return this.endTime - this.startTime;
     }
 
+    @Override
+    public String toString() {
+        return "Region{" +
+                "regionID='" + regionID + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                '}';
+    }
+
     public double getMilliExecutionTime() {
         return this.getNanoExecutionTime()/1000000.0;
     }
@@ -144,7 +143,7 @@ public class Region implements Cloneable {
 
     public String getRegionID() { return this.regionID; }
 
-    public Set<Region> getInnerRegions() { return this.innerRegions; }
+//    public Set<Region> getInnerRegions() { return this.innerRegions; }
 
     public long getStartTime() { return this.startTime; }
 
@@ -154,5 +153,5 @@ public class Region implements Cloneable {
 
     protected void setEndTime(long endTime) { this.endTime = endTime; }
 
-    protected void setInnerRegions(Set<Region> innerRegions) { this.innerRegions = innerRegions; }
+//    protected void setInnerRegions(Set<Region> innerRegions) { this.innerRegions = innerRegions; }
 }

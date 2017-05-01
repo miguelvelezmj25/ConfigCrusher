@@ -29,7 +29,7 @@ public class SleepAdapter extends Adapter {
             args.append(" ");
         }
 
-        Adapter.executeJavaProgram(this.mainClass, this.directory, args.toString().trim());
+        Adapter.executeJavaProgram(SleepMain.SLEEP_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
     public String[] adaptConfiguration(Set<String> configuration) {

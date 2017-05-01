@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,17 +12,19 @@ public class SleepAdapter extends Adapter {
 
     private static final String[] CONFIGURATIONS = {"A", "B", "C", "D"};
 
+    private String programName;
     private String mainClass;
     private String directory;
 
-    public SleepAdapter(String mainClass, String directory) {
+    public SleepAdapter(String programName, String mainClass, String directory) {
+        this.programName = programName;
         this.mainClass = mainClass;
         this.directory = directory;
     }
 
     @Override
     public void execute(Set<String> configuration) {
-        String[] argsArray = this.adaptConfiguration(configuration);
+        String[] argsArray = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
         StringBuilder args = new StringBuilder();
 
         for(String arg : argsArray) {
@@ -29,10 +32,10 @@ public class SleepAdapter extends Adapter {
             args.append(" ");
         }
 
-        Adapter.executeJavaProgram(SleepMain.SLEEP_MAIN, this.mainClass, this.directory, args.toString().trim());
+        Adapter.executeJavaProgram(programName, SleepMain.SLEEP_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
-    public String[] adaptConfiguration(Set<String> configuration) {
+    public static String[] adaptConfigurationToSleepProgram(Set<String> configuration) {
         String[] sleepConfiguration = new String[4];
 
         for(int i = 0; i < sleepConfiguration.length; i++) {
@@ -47,5 +50,16 @@ public class SleepAdapter extends Adapter {
         return sleepConfiguration;
     }
 
+    public static Set<String> adaptConfigurationToPerformanceMeasurement(String[] configuration) {
+        Set<String> performanceConfiguration = new HashSet<>();
+
+        for(int i = 0; i < configuration.length; i++) {
+            if(configuration[i].equals("true")) {
+                performanceConfiguration.add(SleepAdapter.CONFIGURATIONS[i]);
+            }
+        }
+
+        return performanceConfiguration;
+    }
 
 }

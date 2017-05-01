@@ -19,7 +19,7 @@ public class SleepAdapterTest {
     @Test
     public void testExecute1() throws Exception {
         // Adapter
-        Adapter adapter = new SleepAdapter(Sleep1.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep1.CLASS);
+        Adapter adapter = new SleepAdapter(Sleep1.CLASS, Sleep1.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep1.CLASS);
 
         // Configuration
         Set<String> configuration = new HashSet<>();
@@ -36,7 +36,7 @@ public class SleepAdapterTest {
     @Test
     public void testExecute4() throws Exception {
         // Adapter
-        Adapter adapter = new SleepAdapter(Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS);
+        Adapter adapter = new SleepAdapter(Sleep1.CLASS, Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS);
 
         // Configuration
         Set<String> configuration = new HashSet<>();

@@ -80,7 +80,7 @@ public class PerformanceModelBuilder {
         // Calculate real performance by subtracting child regions' performance for each region's performance
         Map<Region, Map<Set<String>, Double>> regionsToRealPerformance = new HashMap<>();
 
-        for(Region region : Regions.getRegionsToAllPossibleInnerRegions().keySet()) {
+        for(Region region : Regions.getRegionsToInnerRegions().keySet()) {
             PerformanceModelBuilder.calculateRealPerformanceOfRegion(region, regionsToRawPerformance, regionsToRealPerformance);
         }
 

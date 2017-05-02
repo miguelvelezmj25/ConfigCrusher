@@ -37,6 +37,6 @@ public class SleepMain {
         }
 
         Set<String> performanceConfiguration = SleepAdapter.adaptConfigurationToPerformanceMeasurement(sleepArgs);
-        Executer.logExecutedRegion(programName, performanceConfiguration, Regions.getRegions(), Regions.getProgram(), Regions.getRegionsToInnerRegions());
+        Executer.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
     }
 }

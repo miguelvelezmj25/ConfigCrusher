@@ -10,6 +10,7 @@ import java.util.*;
 public class Regions {
     private static Region program = null;
     private static Set<Region> regions = new HashSet<>();
+    private static List<Region> executedRegionsTrace = new LinkedList<>();
     private static Stack<Region> executingRegions = new Stack<>();
     private static Map<Region, Set<Region>> regionsToInnerRegions = new HashMap<>();
 
@@ -122,6 +123,7 @@ public class Regions {
         }
 
 //        System.out.println("Executing " + region);
+        Regions.executedRegionsTrace.add(region);
         Regions.executingRegions.push(region);
     }
 
@@ -136,6 +138,8 @@ public class Regions {
             throw new RuntimeException("The region that wanted to be removed from the executing regions is not the last region " +
                     "to be executing");
         }
+
+        Regions.executedRegionsTrace.add(region);
     }
 
     public static void resetRegions() {
@@ -189,6 +193,8 @@ public class Regions {
         Regions.regionsToInnerRegions = new HashMap<>();
 
     }
+
+    public static List<Region> getExecutedRegionsTrace() { return Regions.executedRegionsTrace; }
 
     public static Region getProgram() {
         return Regions.program;

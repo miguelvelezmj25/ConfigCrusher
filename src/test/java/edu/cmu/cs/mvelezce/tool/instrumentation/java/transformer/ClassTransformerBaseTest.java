@@ -48,7 +48,7 @@ public class ClassTransformerBaseTest {
 
             }
         };
-        ClassNode classNode = base.readClass(ClassTransformerBaseTest.SLEEP1);
+        ClassNode classNode = base.readClass(ClassTransformerBaseTest.SLEEP2);
 
         List<MethodNode> methods = classNode.methods;
 

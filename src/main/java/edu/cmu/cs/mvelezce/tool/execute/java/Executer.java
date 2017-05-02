@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,6 +17,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -82,6 +84,12 @@ public class Executer {
     }
 
     public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
+
+        PerformanceEntry pe = new PerformanceEntry(configuration, executedRegions);
+        for(Map.Entry<Region, Long> entry : pe.getRegionsToExecutionTime().entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue()/1000000000.0);
+        }
+
         // TODO why not just call the writeToFile method?
         Executer.writeToFile(programName, configuration, executedRegions);
     }
@@ -131,7 +139,7 @@ public class Executer {
         if(!directory.exists()) {
             directory.mkdirs();
         }
-        
+
         FileWriter writer = new FileWriter(file);
         writer.write(result.toJSONString());
         writer.flush();

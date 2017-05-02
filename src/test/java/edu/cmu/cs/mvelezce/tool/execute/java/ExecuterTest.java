@@ -47,6 +47,7 @@ public class ExecuterTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
+
         // Execute
         Set<PerformanceEntry> results = Executer.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS, configurationsToExecute);
 

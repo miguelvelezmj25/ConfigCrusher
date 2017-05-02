@@ -43,44 +43,44 @@ public class PerformanceEntry {
      *
      * @param executedRegions
      */
-    private void calculateRealPerformance(List<Region> executedRegions) {
-        // TODO broken
+    public void calculateRealPerformance(List<Region> executedRegions) {
         Stack<Region> executingRegions = new Stack<>();
+        Stack<Long> innerRegionExecutionTime = new Stack<>();
         Region previousRegionEntry = null;
-        long innerRegionExecutionTime = 0;
 
         for(Region executingRegion : executedRegions) {
-            if(executingRegions.isEmpty()) {
-                previousRegionEntry = executingRegion;
+            if(executingRegions.isEmpty() || !executingRegions.peek().getRegionID().equals(executingRegion.getRegionID())) {
                 executingRegions.add(executingRegion);
-                innerRegionExecutionTime = 0;
-                continue;
+                innerRegionExecutionTime.push((long) 0);
             }
-
-            if(executingRegions.peek().getRegionID().equals(executingRegion.getRegionID())) {
+            else {
                 if(executingRegion.getStartTime() > executingRegion.getEndTime()) {
                     throw new RuntimeException("A region has a negative execution time. This might be caused by incorrect instrumentation");
                 }
 
+                executingRegions.pop();
                 long regionExecutionTime = executingRegion.getEndTime() - executingRegion.getStartTime();
 
                 if(!previousRegionEntry.getRegionID().equals(executingRegion.getRegionID())) {
-                    regionExecutionTime -= innerRegionExecutionTime;
+                    regionExecutionTime -= innerRegionExecutionTime.peek();
                 }
 
-                executingRegions.pop();
+                innerRegionExecutionTime.pop();
 
                 if(!executingRegions.isEmpty()) {
-                    innerRegionExecutionTime += regionExecutionTime;
-                }
-                else {
-                    innerRegionExecutionTime = 0;
+                    Stack<Long> added = new Stack<>();
+
+                    while(!innerRegionExecutionTime.isEmpty()) {
+                        long currentInnerRegionExecutionTime = innerRegionExecutionTime.pop();
+                        added.push(currentInnerRegionExecutionTime + regionExecutionTime);
+                    }
+
+                    while(!added.isEmpty()) {
+                        innerRegionExecutionTime.push(added.pop());
+                    }
                 }
 
                 this.regionsToExecutionTime.put(executingRegion, regionExecutionTime);
-            }
-            else {
-                executingRegions.add(executingRegion);
             }
 
             previousRegionEntry = executingRegion;

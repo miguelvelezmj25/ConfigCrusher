@@ -407,4 +407,6 @@ public class PerformanceModelTest {
         // Assert
         Assert.assertEquals(configurationToInfluence, PerformanceModel.calculateConfigurationsInfluence(regionTable));
     }
+
+
 }

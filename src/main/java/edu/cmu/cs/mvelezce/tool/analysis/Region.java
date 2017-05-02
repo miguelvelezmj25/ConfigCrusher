@@ -12,11 +12,14 @@ public class Region implements Cloneable {
     private long endTime;
 //    private Set<Region> innerRegions;
 
+    public Region(String regionID, long startTime, long endTime) {
+        this.regionID = regionID;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     public Region(String regionID) {
-        this.regionID = regionID;
-        this.startTime = 0;
-        this.endTime = 0;
+        this(regionID, 0, 0);
 //        this.innerRegions = new HashSet<>();
     }
 
@@ -131,6 +134,26 @@ public class Region implements Cloneable {
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Region region = (Region) o;
+
+        if (startTime != region.startTime) return false;
+        if (endTime != region.endTime) return false;
+        return regionID.equals(region.regionID);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = regionID.hashCode();
+        result = 31 * result + (int) (startTime ^ (startTime >>> 32));
+        result = 31 * result + (int) (endTime ^ (endTime >>> 32));
+        return result;
     }
 
     public double getMilliExecutionTime() {

@@ -39,9 +39,11 @@ public class ExecuterTest {
     @Test
     public void testMeasureConfigurationPerformancePipeline4() throws Exception {
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        String[] args = new String[0];
 
         // Configurations
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");

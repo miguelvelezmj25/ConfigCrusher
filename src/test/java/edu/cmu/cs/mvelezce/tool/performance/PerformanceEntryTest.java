@@ -6,14 +6,12 @@ import org.junit.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by mvelezce on 5/2/17.
  */
 public class PerformanceEntryTest {
     @Test
-    public void testCalculateRealPerformance() throws Exception {
+    public void testCalculateRealPerformance1() throws Exception {
         // Configuration
         Set<String> configuration = new HashSet<>();
 

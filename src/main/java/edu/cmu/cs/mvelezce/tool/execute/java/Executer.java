@@ -16,10 +16,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by miguelvelez on 4/30/17.
@@ -43,14 +40,14 @@ public class Executer {
 
         Options.checkIfDeleteResult(file);
 
-//        if(file.exists()) {
-//            try {
-//                return Executer.readFromFile(file);
-//            }
-//            catch (ParseException pe) {
-//                throw new RuntimeException("Could not parse the cached results");
-//            }
-//        }
+        if(file.exists()) {
+            try {
+                return Executer.readFromFile(file);
+            }
+            catch (ParseException pe) {
+                throw new RuntimeException("Could not parse the cached results");
+            }
+        }
 
         Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(programName, mainClass, directory, configurationsToExecute);
 
@@ -84,12 +81,6 @@ public class Executer {
     }
 
     public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
-
-        PerformanceEntry pe = new PerformanceEntry(configuration, executedRegions);
-        for(Map.Entry<Region, Long> entry : pe.getRegionsToExecutionTime().entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue()/1000000000.0);
-        }
-
         // TODO why not just call the writeToFile method?
         Executer.writeToFile(programName, configuration, executedRegions);
     }
@@ -146,74 +137,41 @@ public class Executer {
         writer.close();
 
     }
-//    private static void writeToFile(String programName, PerformanceEntry measuredPerformance, Map<Region, Set<Region>> regionsToInnerRegions) throws IOException {
-//        JSONObject performanceEntry = new JSONObject();
-//        JSONArray values = new JSONArray();
-//
-//        for(String value : measuredPerformance.getConfiguration()) {
-//            values.add(value);
-//        }
-//
-//        performanceEntry.put(Executer.CONFIGURATION, values);
-//
-//        JSONObject program = new JSONObject();
-//        Region measuredProgram = measuredPerformance.getProgram();
-//        program.put(Executer.ID, measuredProgram.getRegionID());
-//        program.put(Executer.START_TIME, measuredProgram.getStartTime());
-//        program.put(Executer.END_TIME, measuredProgram.getEndTime());
-//
-//        performanceEntry.put(Executer.PROGRAM, program);
-//
-//        JSONArray regions = new JSONArray();
-//
-//        for(Region measuredRegion : measuredPerformance.getRegions()) {
-//            JSONObject region = new JSONObject();
-//            region.put(Executer.ID, measuredRegion.getRegionID());
-//            region.put(Executer.START_TIME, measuredRegion.getStartTime());
-//            region.put(Executer.END_TIME, measuredRegion.getEndTime());
-//
-//            regions.add(region);
-//        }
-//
-//        performanceEntry.put(Executer.REGIONS, regions);
-//
-//        JSONArray regionsToInnerRegion = new JSONArray();
-//
-//        for(Map.Entry<Region, Set<Region>> regionToInnerRegion : regionsToInnerRegions.entrySet()) {
-//            JSONObject region = new JSONObject();
-//            region.put(Executer.ID, regionToInnerRegion.getKey().getRegionID());
-//
-//            JSONArray innerRegions = new JSONArray();
-//
-//            for(Region innerRegionEntry : regionToInnerRegion.getValue()) {
-//                JSONObject innerRegion = new JSONObject();
-//                innerRegion.put(Executer.ID, innerRegionEntry.getRegionID());
-//
-//                innerRegions.add(innerRegion);
-//            }
-//
-//            region.put(Executer.INNER_REGIONS, innerRegions);
-//
-//            regionsToInnerRegion.add(region);
-//        }
-//
-//        performanceEntry.put(Executer.REGIONS_TO_INNER_REGIONS, regionsToInnerRegion);
-//
-//        JSONObject result = new JSONObject();
-//        result.put(Executer.MEASURED_EXECUTION, performanceEntry);
-//
-//        File directory = new File(Executer.DIRECTORY);
-//
-//        if(!directory.exists()) {
-//            directory.mkdirs();
-//        }
-//
-//        String outputFile = Executer.DIRECTORY + "/" + programName + "_" + UUID.randomUUID().toString().substring(0, 8) + Options.DOT_JSON;
-//        File file = new File(outputFile);
-//        FileWriter writer = new FileWriter(file);
-//        writer.write(result.toJSONString());
-//        writer.flush();
-//        writer.close();
-//    }
+
+    private static Set<PerformanceEntry> readFromFile(File file) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
+        JSONArray result = (JSONArray) cache.get(Executer.EXECUTIONS);
+
+        Set<PerformanceEntry> performanceEntries = new HashSet<>();
+
+        for(Object resultEntry : result) {
+            JSONObject execution = (JSONObject) resultEntry;
+            Set<String> configuration = new HashSet<>();
+            JSONArray configurationResult = (JSONArray) execution.get(Executer.CONFIGURATION);
+
+            for(Object configurationResultEntry : configurationResult) {
+                configuration.add((String) configurationResultEntry);
+            }
+
+            JSONArray executionTraceResult = (JSONArray) execution.get(Executer.EXECUTION_TRACE);
+            List<Region> executionTrace = new LinkedList<>();
+
+            for(Object executionTraceResultEntry : executionTraceResult) {
+                JSONObject regionResult = (JSONObject) executionTraceResultEntry;
+                String regionID = (String) regionResult.get(Executer.ID);
+                long startTime  = (long) regionResult.get(Executer.START_TIME);
+                long endTime = (long) regionResult.get(Executer.END_TIME);
+
+                Region region = new Region(regionID, startTime, endTime);
+                executionTrace.add(region);
+            }
+
+            PerformanceEntry performanceEntry = new PerformanceEntry(configuration, executionTrace);
+            performanceEntries.add(performanceEntry);
+        }
+
+        return performanceEntries;
+    }
 
 }

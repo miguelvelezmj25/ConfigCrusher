@@ -12,7 +12,7 @@ public abstract class Adapter {
     public static final String MAIN = "main";
     public static final String CLASS_CONTAINER = "target/classes/";
 
-    private static final String JSON_SIMPLE_PATH = "/Users/miguelvelez/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar";
+    private static final String JSON_SIMPLE_PATH = "json-simple-1.1.1.jar";
 
     public abstract void execute(Set<String> configuration);
 

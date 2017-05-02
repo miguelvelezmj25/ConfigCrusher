@@ -44,6 +44,7 @@ public class PerformanceEntry {
      * @param executedRegions
      */
     private void calculateRealPerformance(List<Region> executedRegions) {
+        // TODO broken
         Stack<Region> executingRegions = new Stack<>();
         Region previousRegionEntry = null;
         long innerRegionExecutionTime = 0;

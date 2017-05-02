@@ -8,8 +8,11 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +26,7 @@ public class Executer {
     public static final String DIRECTORY = Options.DIRECTORY + "/executer/java/programs";
 
     // JSON strings
-    public static final String MEASURED_EXECUTION = "measuredExecution";
+    public static final String EXECUTIONS = "executions";
     public static final String CONFIGURATION = "configuration";
     public static final String EXECUTION_TRACE = "executionTrace";
     public static final String ID = "ID";
@@ -78,12 +81,13 @@ public class Executer {
         return null;
     }
 
-    public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException {
+    public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
         // TODO why not just call the writeToFile method?
         Executer.writeToFile(programName, configuration, executedRegions);
     }
 
-    private static void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException {
+    private static void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
+        JSONArray executions = new JSONArray();
         JSONObject measuredExecution = new JSONObject();
         JSONArray values = new JSONArray();
 
@@ -105,23 +109,34 @@ public class Executer {
         }
 
         measuredExecution.put(Executer.EXECUTION_TRACE, regions);
+        executions.add(measuredExecution);
+
+        // TODO check if file exists and append. Otherwise create
+        String outputFile = Executer.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        File file = new File(outputFile);
+
+        if(file.exists()) {
+            JSONParser parser = new JSONParser();
+            JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
+            JSONArray executionsResult = (JSONArray) cache.get(Executer.EXECUTIONS);
+
+            executions.addAll(executionsResult);
+        }
 
         JSONObject result = new JSONObject();
-        result.put(Executer.MEASURED_EXECUTION, measuredExecution);
+        result.put(Executer.EXECUTIONS, executions);
 
         File directory = new File(Executer.DIRECTORY);
 
         if(!directory.exists()) {
             directory.mkdirs();
         }
-
-        // TODO check if file exists and append. Otherwise create
-        String outputFile = Executer.DIRECTORY + "/" + programName + "_" + UUID.randomUUID().toString().substring(0, 8) + Options.DOT_JSON;
-        File file = new File(outputFile);
+        
         FileWriter writer = new FileWriter(file);
         writer.write(result.toJSONString());
         writer.flush();
         writer.close();
+
     }
 //    private static void writeToFile(String programName, PerformanceEntry measuredPerformance, Map<Region, Set<Region>> regionsToInnerRegions) throws IOException {
 //        JSONObject performanceEntry = new JSONObject();

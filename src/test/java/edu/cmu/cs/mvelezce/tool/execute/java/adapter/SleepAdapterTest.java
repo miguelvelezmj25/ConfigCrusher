@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
 import edu.cmu.cs.mvelezce.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.java.programs.Sleep4;
+import edu.cmu.cs.mvelezce.java.programs.Sleep3;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
@@ -36,14 +36,14 @@ public class SleepAdapterTest {
     @Test
     public void testExecute4() throws Exception {
         // Adapter
-        Adapter adapter = new SleepAdapter(Sleep1.CLASS, Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS);
+        Adapter adapter = new SleepAdapter(Sleep1.CLASS, Sleep3.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep3.CLASS);
 
         // Configuration
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
 
         // Add program region
-        JavaRegion program = new JavaRegion(Sleep4.FILENAME, Adapter.MAIN);
+        JavaRegion program = new JavaRegion(Sleep3.FILENAME, Adapter.MAIN);
         Regions.addProgram(program);
 
         // Execute

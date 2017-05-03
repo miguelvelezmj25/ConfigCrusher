@@ -2,8 +2,8 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 import edu.cmu.cs.mvelezce.java.programs.Sleep1;
 import edu.cmu.cs.mvelezce.java.programs.Sleep2;
+import edu.cmu.cs.mvelezce.java.programs.Sleep3;
 import edu.cmu.cs.mvelezce.java.programs.Sleep4;
-import edu.cmu.cs.mvelezce.java.programs.Sleep6;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.ClassTransformerBase;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -84,7 +84,7 @@ public class MethodGraphBuilderTest {
 
             }
         };
-        ClassNode classNode = base.readClass(Sleep4.FILENAME);
+        ClassNode classNode = base.readClass(Sleep3.FILENAME);
 
         List<MethodNode> methods = classNode.methods;
 
@@ -110,7 +110,7 @@ public class MethodGraphBuilderTest {
 
             }
         };
-        ClassNode classNode = base.readClass(Sleep6.FILENAME);
+        ClassNode classNode = base.readClass(Sleep4.FILENAME);
 
         List<MethodNode> methods = classNode.methods;
 

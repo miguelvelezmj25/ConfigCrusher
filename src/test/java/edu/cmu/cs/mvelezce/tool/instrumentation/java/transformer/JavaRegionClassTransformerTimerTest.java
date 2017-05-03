@@ -151,16 +151,16 @@ public class JavaRegionClassTransformerTimerTest {
 //    public void testTransform4() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
 //        // Java Region
 //        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-//        JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 31, 36);
+//        JavaRegion region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.MAIN_METHOD, 31, 36);
 //        Regions.addRegion(region);
 //
-//        region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 48, 53);
+//        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.MAIN_METHOD, 48, 53);
 //        Regions.addRegion(region);
 //
-//        region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_1, 19, 20);
+//        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_1, 19, 20);
 //        Regions.addRegion(region);
 //
-//        region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.METHOD_2, 19, 20);
+//        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_2, 19, 20);
 //        Regions.addRegion(region);
 //
 //        // Program

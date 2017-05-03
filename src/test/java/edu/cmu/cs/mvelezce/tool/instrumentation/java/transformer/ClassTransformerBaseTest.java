@@ -19,10 +19,8 @@ public class ClassTransformerBaseTest {
 
     private static final String SLEEP1 = Sleep1.FILENAME;
     private static final String SLEEP2 = Sleep2.FILENAME;
-    private static final String SLEEP3 = Sleep3.FILENAME;
-    private static final String SLEEP4 = Sleep4.FILENAME;
-    private static final String SLEEP5 = Sleep5.FILENAME;
-    private static final String SLEEP6 = Sleep6.FILENAME;
+    private static final String SLEEP4 = Sleep3.FILENAME;
+    private static final String SLEEP6 = Sleep4.FILENAME;
     private static final String SLEEP8 = Sleep8.FILENAME;
     private static final String SLEEP9 = Sleep9.FILENAME;
     private static final String SLEEP10 = Sleep10.FILENAME;

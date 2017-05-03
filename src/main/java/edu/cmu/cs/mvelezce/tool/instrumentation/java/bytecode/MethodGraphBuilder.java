@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
+import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 
 import java.util.ListIterator;
@@ -32,19 +33,19 @@ public class MethodGraphBuilder {
 
         instructions = methodNode.instructions;
         instructionsIterator = instructions.iterator();
-
-
-        LabelNode labelNode = null;
         MethodBlock currentMethodBlock = null;
+        AbstractInsnNode previousInstruction = null;
+
 
         while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
 
             if(instruction.getType() == AbstractInsnNode.LABEL) {
-                labelNode = (LabelNode) instruction;
+                LabelNode labelNode = (LabelNode) instruction;
                 MethodBlock successor = graph.getMethodBlock(labelNode.getLabel());
 
-                if(currentMethodBlock != null) {
+                // TODO what other opcodes should not have an edge with the next label?
+                if(currentMethodBlock != null && previousInstruction.getOpcode() != Opcodes.GOTO) {
                     successor.addPredecessor(currentMethodBlock);
                     currentMethodBlock.addSuccessor(successor);
                 }
@@ -54,12 +55,14 @@ public class MethodGraphBuilder {
             else if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
                 JumpInsnNode jumpNode = (JumpInsnNode) instruction;
 
-                labelNode = jumpNode.label;
+                LabelNode labelNode = jumpNode.label;
 
                 MethodBlock successor = graph.getMethodBlock(labelNode.getLabel());
                 successor.addPredecessor(currentMethodBlock);
                 currentMethodBlock.addSuccessor(successor);
             }
+
+            previousInstruction = instruction;
         }
 
         return graph;

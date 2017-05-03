@@ -1,6 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.java.programs.Sleep2;
+import edu.cmu.cs.mvelezce.java.programs.Sleep4;
+import edu.cmu.cs.mvelezce.java.programs.Sleep6;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.ClassTransformerBase;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -36,8 +39,86 @@ public class MethodGraphBuilderTest {
         for(MethodNode method : methods) {
             if(method.name.equals("main")) {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
-                Assert.assertTrue(methodGraph.getBlockCount() == 8);
-                Assert.assertTrue(methodGraph.getEdgeCount() == 8);
+                Assert.assertEquals(8, methodGraph.getBlockCount());
+                Assert.assertEquals(8, methodGraph.getEdgeCount());
+            }
+        }
+    }
+
+    @Test
+    public void testBuildMethodGraph2() throws IOException {
+        ClassTransformerBase base = new ClassTransformerBase() {
+            @Override
+            public Set<ClassNode> transformClasses() throws IOException {
+                return null;
+            }
+
+            @Override
+            public void transform(ClassNode classNode) {
+
+            }
+        };
+        ClassNode classNode = base.readClass(Sleep2.FILENAME);
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("main")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                Assert.assertEquals(9, methodGraph.getBlockCount());
+                Assert.assertEquals(9, methodGraph.getEdgeCount());
+            }
+        }
+    }
+
+    @Test
+    public void testBuildMethodGraph3() throws IOException {
+        ClassTransformerBase base = new ClassTransformerBase() {
+            @Override
+            public Set<ClassNode> transformClasses() throws IOException {
+                return null;
+            }
+
+            @Override
+            public void transform(ClassNode classNode) {
+
+            }
+        };
+        ClassNode classNode = base.readClass(Sleep4.FILENAME);
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("main")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                Assert.assertEquals(13, methodGraph.getBlockCount());
+                Assert.assertEquals(14, methodGraph.getEdgeCount());
+            }
+        }
+    }
+
+    @Test
+    public void testBuildMethodGraph4() throws IOException {
+        ClassTransformerBase base = new ClassTransformerBase() {
+            @Override
+            public Set<ClassNode> transformClasses() throws IOException {
+                return null;
+            }
+
+            @Override
+            public void transform(ClassNode classNode) {
+
+            }
+        };
+        ClassNode classNode = base.readClass(Sleep6.FILENAME);
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("main")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                Assert.assertEquals(8, methodGraph.getBlockCount());
+                Assert.assertEquals(8, methodGraph.getEdgeCount());
             }
         }
     }

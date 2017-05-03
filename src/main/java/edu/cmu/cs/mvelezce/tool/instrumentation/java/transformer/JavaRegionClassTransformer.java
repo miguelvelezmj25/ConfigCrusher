@@ -35,7 +35,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         for(String fileName : this.fileNames) {
             ClassNode classNode = this.readClass(fileName);
             this.transform(classNode);
-
             classNodes.add(classNode);
         }
 
@@ -74,7 +73,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             }
 
             Set<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
-
 
             Stack<Integer> localVariableIndexes = new Stack<>();
             int nextLocalVariableIndex = methodNode.maxLocals;

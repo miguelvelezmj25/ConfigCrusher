@@ -45,7 +45,7 @@ public class MethodGraphBuilder {
                 MethodBlock successor = graph.getMethodBlock(labelNode.getLabel());
 
                 // TODO what other opcodes should not have an edge with the next label?
-                if(currentMethodBlock != null && previousInstruction.getOpcode() != Opcodes.GOTO) {
+                if(currentMethodBlock != null && (previousInstruction.getOpcode() < Opcodes.GOTO || previousInstruction.getOpcode() > Opcodes.RETURN)) {
                     successor.addPredecessor(currentMethodBlock);
                     currentMethodBlock.addSuccessor(successor);
                 }

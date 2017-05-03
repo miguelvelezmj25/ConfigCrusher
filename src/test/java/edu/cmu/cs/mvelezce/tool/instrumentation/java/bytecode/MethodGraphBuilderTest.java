@@ -40,7 +40,7 @@ public class MethodGraphBuilderTest {
             if(method.name.equals("main")) {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(8, methodGraph.getBlockCount());
-                Assert.assertEquals(8, methodGraph.getEdgeCount());
+                Assert.assertEquals(7, methodGraph.getEdgeCount());
             }
         }
     }
@@ -66,7 +66,7 @@ public class MethodGraphBuilderTest {
             if(method.name.equals("main")) {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(9, methodGraph.getBlockCount());
-                Assert.assertEquals(9, methodGraph.getEdgeCount());
+                Assert.assertEquals(8, methodGraph.getEdgeCount());
             }
         }
     }
@@ -92,7 +92,7 @@ public class MethodGraphBuilderTest {
             if(method.name.equals("main")) {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(13, methodGraph.getBlockCount());
-                Assert.assertEquals(14, methodGraph.getEdgeCount());
+                Assert.assertEquals(13, methodGraph.getEdgeCount());
             }
         }
     }
@@ -118,7 +118,7 @@ public class MethodGraphBuilderTest {
             if(method.name.equals("main")) {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(8, methodGraph.getBlockCount());
-                Assert.assertEquals(8, methodGraph.getEdgeCount());
+                Assert.assertEquals(7, methodGraph.getEdgeCount());
             }
         }
     }

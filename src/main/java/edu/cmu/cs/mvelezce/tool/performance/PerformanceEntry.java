@@ -8,32 +8,16 @@ import java.util.*;
  * Created by mvelezce on 4/10/17.
  */
 public class PerformanceEntry {
-    private static long baseTime = -1; // TODO make this non static since it does not make sense. It makes sense for a single program, but we have to be general.
-
     private Set<String> configuration;
-    private Map<Region, Region> regions; // TODO make set
-    private Map<Region, Long> regionsToExecutionTime; // TODO make set
+    private Map<Region, Long> regionsToExecutionTime;
+    private Map<Region, Set<Region>> regionToInnerRegions;
     private Region program;
-
-    public PerformanceEntry(Set<String> configuration, Set<Region> regions, Region program) {
-        this.configuration = configuration;
-        this.regions = new HashMap<>();
-
-        for(Region region : regions) {
-            if(region.getStartTime() > region.getEndTime()) {
-                throw new RuntimeException("A region has a negative execution time. This might be caused by incorrect instrumentation");
-            }
-
-            Region clonedRegion = region.clone();
-            this.regions.put(clonedRegion, clonedRegion);
-        }
-
-        this.program = program.clone();
-    }
 
     public PerformanceEntry(Set<String> configuration, List<Region> executedRegions) {
         this.configuration = configuration;
         this.regionsToExecutionTime = new HashMap<>();
+        this.program = null;
+        this.regionToInnerRegions = new HashMap<>();
 
         this.calculateRealPerformance(executedRegions);
     }
@@ -49,7 +33,24 @@ public class PerformanceEntry {
         Region previousRegionEntry = null;
 
         for(Region executingRegion : executedRegions) {
-            if(executingRegions.isEmpty() || !executingRegions.peek().getRegionID().equals(executingRegion.getRegionID())) {
+            if(executingRegions.isEmpty()) {
+                this.program = executingRegion;
+                executingRegions.add(executingRegion);
+                innerRegionExecutionTime.push((long) 0);
+                this.regionToInnerRegions.put(executingRegion, new HashSet<>());
+            }
+            else if(!executingRegions.peek().getRegionID().equals(executingRegion.getRegionID())) {
+                if(!this.regionToInnerRegions.containsKey(executingRegions.peek())) {
+                    this.regionToInnerRegions.put(executingRegions.peek(), new HashSet<>());
+                }
+
+                if(!this.regionToInnerRegions.containsKey(executingRegion)) {
+                    this.regionToInnerRegions.put(executingRegion, new HashSet<>());
+                }
+
+                Set<Region> previousInnerRegions = this.regionToInnerRegions.get(executingRegions.peek());
+                previousInnerRegions.add(executingRegion);
+
                 executingRegions.add(executingRegion);
                 innerRegionExecutionTime.push((long) 0);
             }
@@ -87,21 +88,23 @@ public class PerformanceEntry {
         }
     }
 
-    public static void reset() {
-        PerformanceEntry.baseTime = -1;
-    }
+    public long getTimeOfRegionID(String ID) {
+        for(Map.Entry<Region, Long> regionToTime : this.regionsToExecutionTime.entrySet()) {
+            if(regionToTime.getKey().getRegionID().equals(ID)) {
+                return regionToTime.getValue();
+            }
+        }
 
-    public Region getRegion(Region region) {
-        return this.regions.get(region);
+        return -1;
     }
 
     public Set<String> getConfiguration() { return this.configuration; }
 
-    public Set<Region> getRegions() { return this.regions.keySet(); }
+    public Map<Region, Long> getRegionsToExecutionTime() { return this.regionsToExecutionTime; }
 
     public Region getProgram() { return this.program; }
 
-    public Map<Region, Long> getRegionsToExecutionTime() { return this.regionsToExecutionTime; }
+    public Map<Region, Set<Region>> getRegionToInnerRegions() { return this.regionToInnerRegions; }
 
     @Override
     public boolean equals(Object o) {
@@ -111,21 +114,17 @@ public class PerformanceEntry {
         PerformanceEntry that = (PerformanceEntry) o;
 
         if (!configuration.equals(that.configuration)) return false;
-        return regions.equals(that.regions);
+        if (!regionsToExecutionTime.equals(that.regionsToExecutionTime)) return false;
+        if (!regionToInnerRegions.equals(that.regionToInnerRegions)) return false;
+        return program.equals(that.program);
     }
 
     @Override
     public int hashCode() {
         int result = configuration.hashCode();
-        result = 31 * result + regions.hashCode();
+        result = 31 * result + regionsToExecutionTime.hashCode();
+        result = 31 * result + regionToInnerRegions.hashCode();
+        result = 31 * result + program.hashCode();
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "PerformanceEntry{" +
-                "configuration=" + configuration +
-                ", regions=" + regions +
-                '}';
     }
 }

@@ -2,12 +2,9 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.java.programs.Sleep4;
 import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipelineTest;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Set;
@@ -20,16 +17,16 @@ public class ExecuterTest {
     public static void checkExecutionTimes(Set<PerformanceEntry> expectedPerformances, Set<PerformanceEntry> actualPerformances) {
         for(PerformanceEntry expected : expectedPerformances) {
             for(PerformanceEntry actual : actualPerformances) {
-                for(Region expectedRegion : expected.getRegions()) {
-                    for(Region actualRegion : actual.getRegions()) {
-                        if(expected.getConfiguration().equals(actual.getConfiguration()) && expectedRegion.equals(actualRegion)) {
-                            System.out.println("Configuration: " + actual.getConfiguration());
-                            System.out.println("Expected: " + expectedRegion.getExecutionTime()/1000.0);
-                            System.out.println("Actual: " + actualRegion.getSecondsExecutionTime());
-                            Assert.assertEquals(actualRegion.getSecondsExecutionTime(), expectedRegion.getExecutionTime()/1000.0, JavaPipelineTest.TIMING_ERROR);
-                        }
-                    }
-                }
+//                for(Region expectedRegion : expected.getRegions()) {
+//                    for(Region actualRegion : actual.getRegions()) {
+//                        if(expected.getConfiguration().equals(actual.getConfiguration()) && expectedRegion.equals(actualRegion)) {
+//                            System.out.println("Configuration: " + actual.getConfiguration());
+//                            System.out.println("Expected: " + expectedRegion.getExecutionTime()/1000.0);
+//                            System.out.println("Actual: " + actualRegion.getSecondsExecutionTime());
+//                            Assert.assertEquals(actualRegion.getSecondsExecutionTime(), expectedRegion.getExecutionTime()/1000.0, JavaPipelineTest.TIMING_ERROR);
+//                        }
+//                    }
+//                }
             }
 
             System.out.println();

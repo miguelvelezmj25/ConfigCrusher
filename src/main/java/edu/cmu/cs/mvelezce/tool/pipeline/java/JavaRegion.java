@@ -7,11 +7,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.Region;
  */
 /*
 JAVA regions are:
-Method call
-Then branch if statement
-Else branch if statement
-Block in while statement
-Block in for statement
+control flow decision
  */
 public class JavaRegion extends Region {
     // Used for location

@@ -41,7 +41,6 @@ public class SleepPipeline {
     public static PerformanceModel buildPerformanceModel(String programFile) {
         // Reset
         Regions.reset();
-        PerformanceEntry.reset();
 
         Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
@@ -90,7 +89,7 @@ public class SleepPipeline {
                 throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");
             }
 
-            configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
+//            configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
             // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
 

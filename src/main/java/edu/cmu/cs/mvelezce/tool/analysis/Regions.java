@@ -12,7 +12,6 @@ public class Regions {
     private static Set<Region> regions = new HashSet<>();
     private static List<Region> executedRegionsTrace = new LinkedList<>();
     private static Stack<Region> executingRegions = new Stack<>();
-    private static Map<Region, Set<Region>> regionsToInnerRegions = new HashMap<>();
 
     public static void addProgram(Region program) {
         if(program == null) {
@@ -53,7 +52,6 @@ public class Regions {
             throw new IllegalArgumentException("RegionID cannot be null");
         }
 
-        // TODO this is were a new region should be created if it is not found. But how do you link this region to options, which was found before?
         for(Region entry : Regions.regions) {
             if(entry.getRegionID().equals(regionID)) {
                 return entry;
@@ -87,42 +85,11 @@ public class Regions {
         return null;
     }
 
-    /**
-     * Adds an inner region to a region. This track the inner regions of an specific region regardless of the configuration
-     * that was executed. Essentially it has all possible inner regions of a region.
-     * @param parent
-     * @param child
-     */
-    public static void addPossibleInnerRegion(Region parent, Region child) {
-        if(parent == null) {
-            throw new IllegalArgumentException("The parent region cannot be null");
-        }
-
-        if(child == null) {
-            throw new IllegalArgumentException("The child region cannot be null");
-        }
-
-        if(!Regions.regionsToInnerRegions.containsKey(parent)) {
-            Regions.regionsToInnerRegions.put(parent, new HashSet<>());
-        }
-
-        Regions.regionsToInnerRegions.get(parent).add(child);
-
-        if(!Regions.regionsToInnerRegions.containsKey(child)) {
-            Regions.regionsToInnerRegions.put(child, new HashSet<>());
-        }
-    }
-
-    public static Set<Region> getPossibleInnerRegions(Region region) {
-        return Regions.regionsToInnerRegions.get(region);
-    }
-
     public static void addExecutingRegion(Region region) {
         if(region == null) {
             throw new IllegalArgumentException("The region cannot be null");
         }
 
-//        System.out.println("Executing " + region);
         Regions.executedRegionsTrace.add(region);
         Regions.executingRegions.push(region);
     }
@@ -143,6 +110,7 @@ public class Regions {
     }
 
     public static void resetRegions() {
+        // TODO do we need to use this?
         for(Region region : Regions.regions) {
             region.resetState();
         }
@@ -150,48 +118,46 @@ public class Regions {
         Regions.program.resetState();
     }
 
-    public static Map<Region, Set<String>> getOptionsInRegionsWithPossibleInnerRegions(Map<Region, Set<String>> regionsToOptions) {
-        Map<Region, Set<String>> regionsToInvolvedOptions = new HashMap<>();
-
-        Set<Region> programInnerRegions = Regions.regionsToInnerRegions.get(Regions.program);
-
-        if(programInnerRegions != null) {
-            for(Region programInnerRegion : programInnerRegions) {
-                Regions.calculateOptionsOfRegionsWithPossibleInnerRegions(programInnerRegion, regionsToOptions, regionsToInvolvedOptions);
-            }
-        }
-
-        // The program is not a region in the sense that it has options affecting it
-        Regions.regionsToInnerRegions.remove(Regions.program);
-
-        return regionsToInvolvedOptions;
-    }
-
-    private static void calculateOptionsOfRegionsWithPossibleInnerRegions(Region region, Map<Region, Set<String>> regionsToOptions, Map<Region, Set<String>> result) {
-        if(!result.containsKey(region)) {
-            Set<String> allAffectingOptions = regionsToOptions.get(region);
-            Set<Region> innerRegions = Regions.regionsToInnerRegions.get(region);
-
-            if(!innerRegions.isEmpty()) {
-                for(Region innerRegion : Regions.regionsToInnerRegions.get(region)) {
-                    Regions.calculateOptionsOfRegionsWithPossibleInnerRegions(innerRegion, regionsToOptions, result);
-                }
-
-                for(Region innerRegion : Regions.regionsToInnerRegions.get(region)) {
-                    allAffectingOptions.addAll(result.get(innerRegion));
-                }
-            }
-
-            result.put(region, allAffectingOptions);
-        }
-    }
+//    public static Map<Region, Set<String>> getOptionsInRegionsWithInnerRegions(Map<Region, Set<String>> regionsToOptions) {
+//        Map<Region, Set<String>> regionsToInvolvedOptions = new HashMap<>();
+//
+//        Set<Region> programInnerRegions = Regions.regionsToInnerRegions.get(Regions.program);
+//
+//        if(programInnerRegions != null) {
+//            for(Region programInnerRegion : programInnerRegions) {
+//                Regions.calculateOptionsOfRegionsWithPossibleInnerRegions(programInnerRegion, regionsToOptions, regionsToInvolvedOptions);
+//            }
+//        }
+//
+//        // The program is not a region in the sense that it has options affecting it
+//        Regions.regionsToInnerRegions.remove(Regions.program);
+//
+//        return regionsToInvolvedOptions;
+//    }
+//
+//    private static void calculateOptionsOfRegionsWithPossibleInnerRegions(Region region, Map<Region, Set<String>> regionsToOptions, Map<Region, Set<String>> result) {
+//        if(!result.containsKey(region)) {
+//            Set<String> allAffectingOptions = regionsToOptions.get(region);
+//            Set<Region> innerRegions = Regions.regionsToInnerRegions.get(region);
+//
+//            if(!innerRegions.isEmpty()) {
+//                for(Region innerRegion : Regions.regionsToInnerRegions.get(region)) {
+//                    Regions.calculateOptionsOfRegionsWithPossibleInnerRegions(innerRegion, regionsToOptions, result);
+//                }
+//
+//                for(Region innerRegion : Regions.regionsToInnerRegions.get(region)) {
+//                    allAffectingOptions.addAll(result.get(innerRegion));
+//                }
+//            }
+//
+//            result.put(region, allAffectingOptions);
+//        }
+//    }
 
     public static void reset() {
         Regions.removeProgram();
         Regions.regions = new HashSet<>();
         Regions.executingRegions = new Stack<>();
-        Regions.regionsToInnerRegions = new HashMap<>();
-
     }
 
     public static List<Region> getExecutedRegionsTrace() { return Regions.executedRegionsTrace; }
@@ -205,6 +171,4 @@ public class Regions {
     }
 
     public static Stack<Region> getExecutingRegions() { return Regions.executingRegions; }
-
-    public static Map<Region, Set<Region>> getRegionsToInnerRegions() { return Regions.regionsToInnerRegions; }
 }

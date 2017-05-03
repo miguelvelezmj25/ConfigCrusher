@@ -4,13 +4,11 @@ import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.DynamicAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.SleepDynamicAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.Executer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
 import java.io.IOException;
 import java.util.*;
@@ -29,7 +27,6 @@ public class JavaPipeline {
         // Reset
         // TODO we need to execute this once we are not passing the regions in the unit tests
 //        Regions.reset();
-        PerformanceEntry.reset();
 
         // ProgramAnalysis (Language dependent)
         // TODO we should get this from Lotrack and not pass it ourselves
@@ -41,7 +38,7 @@ public class JavaPipeline {
 
         // Instrumentation (Language dependent)
         Instrumenter.instrument(programName, mainClass, programFiles, relevantRegionsToOptions.keySet()); // TODO
-        Set<PerformanceEntry> measuredPerformance = JavaPipeline.measureConfigurationPerformance(mainClass, null, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(programName, mainClass, null, configurationsToExecute);
 //        System.out.println("Executed configurations: " + configurationsToExecute.size());
 
         // Performance Model (Language independent)
@@ -55,41 +52,4 @@ public class JavaPipeline {
         return PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
     }
 
-//    // TODO how do we know what files we need to instrument from a program?
-//    public static Set<ClassNode> instrumentRelevantRegions(String mainClass, List<String> programFiles) throws IOException {
-//        Set<ClassNode> classNodes = new HashSet<>();
-//
-//        for(String file : programFiles) {
-//            JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(file);
-//            ClassNode classNode = printer.readClass();
-//            printer.transform(classNode);
-//
-//            classNodes.add(classNode);
-//        }
-//
-//        JavaRegionClassTransformer.setMainClass(mainClass);
-//
-//        return classNodes;
-//    }
-
-    public static Set<PerformanceEntry> measureConfigurationPerformance(String mainClass, Set<ClassNode> instrumentedClasses, Set<Set<String>> configurationsToExecute) throws NoSuchMethodException, ClassNotFoundException {
-        DynamicAdapter.setInstrumentedClassNodes(instrumentedClasses);
-        Set<PerformanceEntry> configurationsToPerformance = new HashSet<>();
-
-        for(Set<String> configuration : configurationsToExecute) {
-            Regions.resetRegions();
-
-            // TODO factory pattern or switch statement to create the right dynamicAdapter
-            DynamicAdapter dynamicAdapter = new SleepDynamicAdapter(mainClass);
-            dynamicAdapter.execute(configuration);
-
-            if(!Regions.getExecutingRegions().isEmpty()) {
-                throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");
-            }
-
-            configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
-        }
-
-        return configurationsToPerformance;
-    }
 }

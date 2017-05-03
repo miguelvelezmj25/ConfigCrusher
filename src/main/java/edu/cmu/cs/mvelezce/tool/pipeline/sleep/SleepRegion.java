@@ -19,10 +19,6 @@ public class SleepRegion extends Region {
         this.statement = statement;
     }
 
-    public double getSecondsExecutionTime() {
-        return this.getExecutionTime();
-    }
-
     @Override
     public Region clone() {
         SleepRegion sleepRegion = (SleepRegion) super.clone();

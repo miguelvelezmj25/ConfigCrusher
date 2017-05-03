@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
 
-import edu.cmu.cs.mvelezce.java.programs.Sleep4;
+import edu.cmu.cs.mvelezce.java.programs.Sleep3;
 import edu.cmu.cs.mvelezce.tool.analysis.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executer;
@@ -30,7 +30,7 @@ public class SleepMain {
             Regions.addExecutingRegion(program);
 
             program.startTime();
-            Sleep4.main(sleepArgs);
+            Sleep3.main(sleepArgs);
             program.endTime();
 
             Regions.removeExecutingRegion(program);

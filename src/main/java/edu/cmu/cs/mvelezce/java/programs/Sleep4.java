@@ -9,53 +9,23 @@ public class Sleep4 {
     public static final String PACKAGE = Sleep4.class.getPackage().getName();
     public static final String CLASS = Sleep4.class.getSimpleName();
     public static final String MAIN_METHOD = "main";
-    public static final String METHOD_1 = "method1";
-    public static final String METHOD_2 = "method2";
 
     public static void main(String[] args) throws InterruptedException {
         // Region program start
         System.out.println("main");
         boolean a = Boolean.valueOf(args[0]);
-        boolean b = Boolean.valueOf(args[1]);
         Thread.sleep(200);
         if(a) {
-            // Region A start 31
+            // Region A start 23
             Thread.sleep(600);
-            Sleep4.method1(a);
-            // Region A end 36
+            // TODO Region A end 24 but there is a jump statement at 25
         }
-        Thread.sleep(100);
-        if(b) {
-            // Region B start 48
-            Thread.sleep(600);
-            Sleep4.method2(b);
-            // Region B start 53
+        else {
+            // Region !A start 29
+            Thread.sleep(700);
+            // Region !A end 30
         }
         // Region program end
-    }
-
-    public static void method1(boolean A) throws InterruptedException {
-        System.out.println("method1");
-        boolean a = A;
-        Thread.sleep(200);
-        if(a) {
-            // Region A start 19
-            Thread.sleep(600);
-            // Region A end 20
-        }
-        Thread.sleep(100);
-    }
-
-    public static void method2(boolean B) throws InterruptedException {
-        System.out.println("method2");
-        boolean b = B;
-        Thread.sleep(300);
-        if(b) {
-            // Region B start 19
-            Thread.sleep(600);
-            // Region B end 20
-        }
-        Thread.sleep(200);
     }
 
 }

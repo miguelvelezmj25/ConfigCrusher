@@ -16,16 +16,21 @@ public class Sleep3 {
         // Region program start
         System.out.println("main");
         boolean a = Boolean.valueOf(args[0]);
+        boolean b = Boolean.valueOf(args[1]);
         Thread.sleep(200);
         if(a) {
-            // Region A start 23
-            Thread.sleep(300);
+            // Region A start 31
+            Thread.sleep(600);
             Sleep3.method1(a);
-            Thread.sleep(200);
-            Sleep3.method2(a);
             // Region A end 36
         }
         Thread.sleep(100);
+        if(b) {
+            // Region B start 48
+            Thread.sleep(600);
+            Sleep3.method2(b);
+            // Region B start 53
+        }
         // Region program end
     }
 
@@ -41,14 +46,14 @@ public class Sleep3 {
         Thread.sleep(100);
     }
 
-    public static void method2(boolean A) throws InterruptedException {
+    public static void method2(boolean B) throws InterruptedException {
         System.out.println("method2");
-        boolean a = A;
-        Thread.sleep(100);
-        if(a) {
-            // Region A start 19
+        boolean b = B;
+        Thread.sleep(300);
+        if(b) {
+            // Region B start 19
             Thread.sleep(600);
-            // Region A end 20
+            // Region B end 20
         }
         Thread.sleep(200);
     }

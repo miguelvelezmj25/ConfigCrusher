@@ -17,17 +17,7 @@ import java.util.Set;
  */
 public class ClassTransformerBaseTest {
 
-    private static final String SLEEP1 = Sleep1.FILENAME;
-    private static final String SLEEP2 = Sleep2.FILENAME;
-    private static final String SLEEP4 = Sleep3.FILENAME;
-    private static final String SLEEP6 = Sleep4.FILENAME;
-    private static final String SLEEP8 = Sleep8.FILENAME;
-    private static final String SLEEP9 = Sleep9.FILENAME;
-    private static final String SLEEP10 = Sleep10.FILENAME;
-    private static final String SLEEP11 = Sleep11.FILENAME;
-
     protected static final String CLASS_CONTAINER = "target/classes/";
-
 
     /**
      * Helpful to find the indexes for regions when testing
@@ -46,7 +36,7 @@ public class ClassTransformerBaseTest {
 
             }
         };
-        ClassNode classNode = base.readClass(ClassTransformerBaseTest.SLEEP2);
+        ClassNode classNode = base.readClass(Sleep1.FILENAME);
 
         List<MethodNode> methods = classNode.methods;
 

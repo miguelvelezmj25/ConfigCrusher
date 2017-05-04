@@ -1,5 +1,16 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
+import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
+import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by miguelvelez on 4/9/17.
  */
@@ -47,24 +58,27 @@ public class JavaRegionClassTransformerTimerTest {
 //        DynamicAdapter adapter = new SleepDynamicAdapter(fileNames);
 //        adapter.execute(configuration);
 //    }
-//
-//    @Test
-//    public void testTransform1() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
-//        // Java Region
-//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-//        Set<Region> regions = new HashSet<>();
-//        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
-//        regions.add(region);
-//
-//        // Program files
-//        List<String> programFiles = new ArrayList<>();
-//        programFiles.add(Sleep1.FILENAME);
-////        JavaRegionClassTransformer.setMainClass(Sleep1.FILENAME);
-//
-//        // Configuration
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//
+
+    @Test
+    public void testTransform1() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 20);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep1.FILENAME);
+
+        // Configuration
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+
+        // Transform the Java region
+        JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(programFiles, regions);
+        Set<ClassNode> classNode = printer.transformClasses();
+
 //        JavaRegionClassTransformerTimerTest.execute(Sleep1.FILENAME, configuration, regions);
 //
 //        // Assert it executed
@@ -78,8 +92,8 @@ public class JavaRegionClassTransformerTimerTest {
 //        for(Region measuredRegion : regions) {
 //            System.out.println(((JavaRegion) measuredRegion).getRegionMethod() + " Execution time: " + measuredRegion.getMilliExecutionTime());
 //        }
-//    }
-//
+    }
+
 //    @Test
 //    public void testTransform2() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
 //        // Java Region

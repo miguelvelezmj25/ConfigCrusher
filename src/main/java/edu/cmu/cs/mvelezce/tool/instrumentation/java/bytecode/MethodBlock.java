@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 import jdk.internal.org.objectweb.asm.Label;
-import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 
 import java.util.Collection;
@@ -12,14 +11,20 @@ import java.util.HashSet;
  */
 public class MethodBlock {
 
+    private String ID;
     private Label label;
     private InsnList instructions;
     private Collection<MethodBlock> successors = new HashSet<>(2);
     private Collection<MethodBlock> predecessors = new HashSet<>();
 
-    public MethodBlock(Label label, InsnList instructions) {
+    public MethodBlock(String ID, Label label, InsnList instructions) {
+        this.ID = ID;
         this.label = label;
         this.instructions = instructions;
+    }
+
+    public MethodBlock(Label label, InsnList instructions) {
+        this(label.toString(), label, instructions);
     }
 
     public void addSuccessor(MethodBlock methodBlock) {
@@ -34,6 +39,8 @@ public class MethodBlock {
         predecessors.add(methodBlock);
     }
 
+    public String getID() { return this.ID; }
+
     public Label getLabel() { return this.label; }
 
     public InsnList getInstructions() { return this.instructions; }
@@ -44,12 +51,12 @@ public class MethodBlock {
 
     @Override
     public String toString() {
-        String result =  "MethodBlock{";
-        result += "label=" + this.label;
-        result += ", instructions=" + this.instructions.size();
-        result += ", successors=" + this.successors.size();
-        result += ", predecessors=" + this.predecessors.size() + '}';
-
-        return result;
+        return "MethodBlock{" +
+                "ID='" + this.ID + '\'' +
+                ", label=" + this.label +
+                ", instructions=" + this.instructions.size() +
+                ", successors=" + this.successors.size() +
+                ", predecessors=" + this.predecessors.size() +
+                '}';
     }
 }

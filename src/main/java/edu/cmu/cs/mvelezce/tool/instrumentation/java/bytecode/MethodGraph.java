@@ -10,6 +10,7 @@ import java.util.*;
 public class MethodGraph {
 
     private MethodBlock entryBlock;
+    private MethodBlock exitBlock;
     private Map<Label, MethodBlock> blocks = new HashMap<>();
 
     public void addMethodBlock(MethodBlock methodBlock) {
@@ -18,6 +19,7 @@ public class MethodGraph {
         }
 
         this.blocks.put(methodBlock.getLabel(), methodBlock);
+        this.exitBlock = methodBlock;
     }
 
     public void addEdge(MethodBlock from, MethodBlock to) {
@@ -79,7 +81,8 @@ public class MethodGraph {
         // Taint the other branch
         this.taintBranch(currentBlock, currentTaintedBlocks, blocksWithTwoSuccessors);
 
-//        this.removeLoops(taintedBlocks);
+        // TODO remove loop to avoid expanding where to end the instrumentation
+//        this.removeLoops(rootBlock, taintedBlocks);
 
         // For each inner block with two successors, taint the blocks reached by those blocks
         while(!blocksWithTwoSuccessors.isEmpty()) {
@@ -136,9 +139,17 @@ public class MethodGraph {
         return null;
     }
 
-
     // TODO make it work
-//    public void removeLoops(Set<Set<MethodBlock>> taintedBlocks) {
+    public void removeLoops(MethodBlock methodBlock, Set<Set<MethodBlock>> taintedBlocks) {
+        Set<MethodBlock> visited = new HashSet<>();
+        Stack<MethodBlock> stack = new Stack<>();
+        stack.push(methodBlock);
+        visited.add(methodBlock);
+
+        while(!stack.isEmpty()) {
+            MethodBlock currentBlock = stack.pop();
+        }
+
 //        for(Set<MethodBlock> taintedBlock : taintedBlocks) {
 //            for(MethodBlock block : taintedBlock) {
 //                Set<MethodBlock> path = new LinkedHashSet<>();
@@ -160,7 +171,7 @@ public class MethodGraph {
 //                }
 //            }
 //        }
-//    }
+    }
 
     public String toDotString() {
         StringBuilder dotString = new StringBuilder("digraph MethodGraph {\n");

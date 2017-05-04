@@ -230,6 +230,7 @@ public class MethodGraphTest {
 
         System.out.println(methodGraph.toDotString());
 
+        // TODO this might be the case where we need to
         // Assert
         Assert.assertEquals(c, methodGraph.getWhereBranchesConverge(a));
     }
@@ -342,6 +343,43 @@ public class MethodGraphTest {
 
         // Assert
         Assert.assertEquals(e, methodGraph.getWhereBranchesConverge(b));
+    }
+
+    @Test
+    public void testGetWhereBranchesConverge10() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label(), new InsnList());
+        MethodBlock b = new MethodBlock("B", new Label(), new InsnList());
+        MethodBlock c = new MethodBlock("C", new Label(), new InsnList());
+        MethodBlock d = new MethodBlock("D", new Label(), new InsnList());
+        MethodBlock e = new MethodBlock("E", new Label(), new InsnList());
+        MethodBlock f = new MethodBlock("F", new Label(), new InsnList());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, c);
+        methodGraph.addEdge(c, f);
+        methodGraph.addEdge(b, e);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(d, e);
+        methodGraph.addEdge(e, f);
+
+        System.out.println(methodGraph.toDotString());
+
+        // Assert
+        Assert.assertEquals(f, methodGraph.getWhereBranchesConverge(a));
     }
 
     @Test

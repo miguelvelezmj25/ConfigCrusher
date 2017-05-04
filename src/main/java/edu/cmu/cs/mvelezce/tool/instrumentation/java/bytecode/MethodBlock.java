@@ -5,6 +5,7 @@ import jdk.internal.org.objectweb.asm.tree.InsnList;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 5/3/17.
@@ -14,13 +15,15 @@ public class MethodBlock {
     private String ID;
     private Label label;
     private InsnList instructions;
-    private Collection<MethodBlock> successors = new HashSet<>(2);
-    private Collection<MethodBlock> predecessors = new HashSet<>();
+    private Set<MethodBlock> successors;
+    private Set<MethodBlock> predecessors;
 
     public MethodBlock(String ID, Label label, InsnList instructions) {
         this.ID = ID;
         this.label = label;
         this.instructions = instructions;
+        this.successors = new HashSet<>();
+        this.predecessors = new HashSet<>();
     }
 
     public MethodBlock(Label label, InsnList instructions) {

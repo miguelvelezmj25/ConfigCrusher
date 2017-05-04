@@ -2,16 +2,17 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.Label;
+import jdk.internal.org.objectweb.asm.tree.*;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 /**
@@ -27,9 +28,9 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         this.regions = regions;
     }
 
-    public abstract InsnList addInstructionsBeforeRegion(JavaRegion javaRegion, int maxLocals);
+    public abstract InsnList addInstructionsBeforeRegion(JavaRegion javaRegion);
 
-    public abstract InsnList addInstructionsAfterRegion(JavaRegion javaRegion, int maxLocals);
+    public abstract InsnList addInstructionsAfterRegion(JavaRegion javaRegion);
 
     @Override
     public Set<ClassNode> transformClasses() throws IOException {
@@ -76,46 +77,60 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             }
 
             MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
+            // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
+            methodNode.instructions.toArray();
             Set<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
             InsnList newInstructions = new InsnList();
 
+            InsnList instructions = methodNode.instructions;
+            ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-//            Stack<Integer> localVariableIndexes = new Stack<>();
-//            int nextLocalVariableIndex = methodNode.maxLocals;
-//            InsnList instructions = methodNode.instructions;
-//            ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
-//
-//            while(instructionsIterator.hasNext()) {
-//                AbstractInsnNode instruction = instructionsIterator.next();
-//                boolean instrumented = false;
-//
-//                if (instruction.getOpcode() < 0) {
-//                    newInstructions.add(instruction);
-//                    continue;
-//                }
-//
-//                int bytecodeIndex = instructions.indexOf(instruction);
-//
-//                for(JavaRegion javaRegion : regionsInMethod) {
-//                    if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
-//                        newInstructions.add(this.addInstructionsBeforeRegion(javaRegion, nextLocalVariableIndex));
-//                        newInstructions.add(instruction);
-//
-//                        instrumented = true;
-//                        localVariableIndexes.push(nextLocalVariableIndex);
-//                        nextLocalVariableIndex++;
-//                    }
-//                    else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
-//                        newInstructions.add(instruction);
-//                        newInstructions.add(this.addInstructionsAfterRegion(javaRegion, localVariableIndexes.pop()));
-//                        instrumented = true;
-//                    }
-//                }
-//
-//                if(!instrumented) {
-//                    newInstructions.add(instruction);
-//                }
-//            }
+            Label currentLabel = null;
+
+            while(instructionsIterator.hasNext()) {
+                AbstractInsnNode instruction = instructionsIterator.next();
+                boolean instrumented = false;
+
+                if(instruction.getType() == AbstractInsnNode.LABEL) {
+                    currentLabel = ((LabelNode) instruction).getLabel();
+                }
+
+                if(instruction.getOpcode() < 0) {
+                    newInstructions.add(instruction);
+                    continue;
+                }
+
+                int bytecodeIndex = instructions.indexOf(instruction);
+
+                for(JavaRegion javaRegion : regionsInMethod) {
+                    if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
+                        newInstructions.add(this.addInstructionsBeforeRegion(javaRegion));
+                        newInstructions.add(instruction);
+
+                        instrumented = true;
+
+                        MethodBlock currentMethodBlock = graph.getMethodBlock(currentLabel);
+                        MethodBlock blockToEndInstrumentation = graph.getWhereBranchesConverge(currentMethodBlock);
+                        List<AbstractInsnNode> endBlockInstructions = blockToEndInstrumentation.getInstructions();
+
+                        for(AbstractInsnNode endBlockInstruction : endBlockInstructions) {
+                            if(endBlockInstruction.getType() != AbstractInsnNode.LABEL && endBlockInstruction.getType() != AbstractInsnNode.LINE && endBlockInstruction.getType() != AbstractInsnNode.FRAME) {
+                                javaRegion.setEndBytecodeIndex(instructions.indexOf(endBlockInstruction));
+                                break;
+                            }
+                        }
+                    }
+                    else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
+                        newInstructions.add(instruction);
+                        newInstructions.add(this.addInstructionsAfterRegion(javaRegion));
+                        instrumented = true;
+                    }
+                }
+
+                if(!instrumented) {
+                    newInstructions.add(instruction);
+                }
+            }
 
             methodNode.instructions.clear();
             methodNode.instructions.add(newInstructions);

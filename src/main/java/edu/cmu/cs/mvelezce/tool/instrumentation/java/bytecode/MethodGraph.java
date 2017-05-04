@@ -25,52 +25,27 @@ public class MethodGraph {
         to.addPredecessor(from);
     }
 
-//    public MethodBlock getNextCommonSuccessor(MethodBlock blockOne, MethodBlock blockTwo) {
-//        if(blockOne == blockTwo) {
-//            return blockOne;
-//        }
-//
-//        Set<MethodBlock> visitedBlockOne = new HashSet<>();
-//        Set<MethodBlock> visitedBlockTwo = new HashSet<>();
-//        Queue<MethodBlock> blockOneQueue = new LinkedList<>();
-//        blockOneQueue.add(blockOne);
-//
-//        while(!blockOneQueue.isEmpty()) {
-//            MethodBlock currentBlockOne = blockOneQueue.remove();
-//
-//            visitedBlockOne.add(currentBlockOne);
-//            Collection<MethodBlock> successorsCurrentBlockOne = currentBlockOne.getSuccessors();
-//
-//            for(MethodBlock methodBlock : successorsCurrentBlockOne) {
-//                if(!visitedBlockOne.contains(methodBlock)) {
-//                    blockOneQueue.add(methodBlock);
-//                }
-//            }
-//        }
-//
-//        Queue<MethodBlock> blockTwoQueue = new LinkedList<>();
-//        blockTwoQueue.add(blockTwo);
-//
-//        while(!blockTwoQueue.isEmpty()) {
-//            MethodBlock currentBlockTwo = blockTwoQueue.remove();
-//
-//            if(visitedBlockOne.contains(currentBlockTwo)) {
-//                // TODO return the next successor that does not go back to this block.
-//                return currentBlockTwo;
-//            }
-//
-//            visitedBlockTwo.add(currentBlockTwo);
-//            Collection<MethodBlock> successorsCurrentBlockTwo = currentBlockTwo.getSuccessors();
-//
-//            for(MethodBlock methodBlock : successorsCurrentBlockTwo) {
-//                if(!visitedBlockTwo.contains(methodBlock)) {
-//                    blockTwoQueue.add(methodBlock);
-//                }
-//            }
-//        }
-//
-//        return null;
-//    }
+    public void taintBranch(MethodBlock currentBlock, Set<MethodBlock> currentTaintedBlocks, Queue<MethodBlock> blocksWithTwoSuccessors) {
+        Queue<MethodBlock> blockQueue = new LinkedList<>();
+        blockQueue.add(currentBlock);
+
+        while(!blockQueue.isEmpty()) {
+            currentBlock = blockQueue.remove();
+
+            currentTaintedBlocks.add(currentBlock);
+            Collection<MethodBlock> successorsOne = currentBlock.getSuccessors();
+
+            for(MethodBlock methodBlock : successorsOne) {
+                if(!currentTaintedBlocks.contains(methodBlock)) {
+                    blockQueue.add(methodBlock);
+                }
+            }
+
+            if(successorsOne.size() == 2 && !blocksWithTwoSuccessors.contains(currentBlock)) {
+                blocksWithTwoSuccessors.add(currentBlock);
+            }
+        }
+    }
 
     public MethodBlock getWhereBranchesConverge(MethodBlock rootBlock) {
         if(rootBlock.getSuccessors().size() == 1) {
@@ -80,114 +55,54 @@ public class MethodGraph {
         Collection<MethodBlock> successors = rootBlock.getSuccessors();
         Iterator<MethodBlock> successorsIterator = successors.iterator();
         MethodBlock currentBlock = successorsIterator.next();
-        Set<Set<MethodBlock>> paths = new HashSet<>();
-        Set<MethodBlock> currentPath = new LinkedHashSet<>();
 
-        System.out.println("Adding new path starting with block " + currentBlock);
-        paths.add(currentPath);
-        currentPath.add(currentBlock);
+        Set<Set<MethodBlock>> taintedBlocks = new HashSet<>();
+        Set<MethodBlock> currentTaintedBlocks = new LinkedHashSet<>();
+        taintedBlocks.add(currentTaintedBlocks);
+        currentTaintedBlocks.add(currentBlock);
 
         Queue<MethodBlock> blockQueue = new LinkedList<>();
         blockQueue.add(currentBlock);
 
         Queue<MethodBlock> blocksWithTwoSuccessors = new LinkedList<>();
 
-        while(!blockQueue.isEmpty()) {
-            currentBlock = blockQueue.remove();
-            System.out.println("Current block of one: " + currentBlock);
-
-            currentPath.add(currentBlock);
-            Collection<MethodBlock> successorsOne = currentBlock.getSuccessors();
-
-            for(MethodBlock methodBlock : successorsOne) {
-                if(!currentPath.contains(methodBlock)) {
-                    blockQueue.add(methodBlock);
-                }
-            }
-
-            if(successorsOne.size() == 2) {
-                blocksWithTwoSuccessors.add(currentBlock);
-            }
-        }
+        // Taint one of the branches
+        this.taintBranch(currentBlock, currentTaintedBlocks, blocksWithTwoSuccessors);
 
         currentBlock = successorsIterator.next();
+        currentTaintedBlocks = new LinkedHashSet<>();
+        taintedBlocks.add(currentTaintedBlocks);
+        currentTaintedBlocks.add(currentBlock);
         blockQueue = new LinkedList<>();
         blockQueue.add(currentBlock);
-        currentPath = new LinkedHashSet<>();
 
-        System.out.println("Adding new path starting with block " + currentBlock);
-        paths.add(currentPath);
-        currentPath.add(currentBlock);
+        // Taint the other branch
+        this.taintBranch(currentBlock, currentTaintedBlocks, blocksWithTwoSuccessors);
 
-        while(!blockQueue.isEmpty()) {
-            currentBlock = blockQueue.remove();
-            System.out.println("Current block of two: " + currentBlock);
+//        this.removeLoops(taintedBlocks);
 
-            currentPath.add(currentBlock);
-            Collection<MethodBlock> successorsOne = currentBlock.getSuccessors();
-
-            for(MethodBlock methodBlock : successorsOne) {
-                if(!currentPath.contains(methodBlock)) {
-                    blockQueue.add(methodBlock);
-                }
-            }
-
-            if(successorsOne.size() == 2) {
-                blocksWithTwoSuccessors.add(currentBlock);
-            }
-        }
-
+        // For each inner block with two successors, taint the blocks reached by those blocks
         while(!blocksWithTwoSuccessors.isEmpty()) {
             currentBlock = blocksWithTwoSuccessors.remove();
-            System.out.println("Current block with two paths: " + currentBlock);
-            successors = currentBlock.getSuccessors();
-            successorsIterator = successors.iterator();
-            currentBlock = successorsIterator.next();
-            System.out.println("Current block: " + currentBlock);
 
-            currentPath = new LinkedHashSet<>();
+            for(MethodBlock successor : currentBlock.getSuccessors()) {
+                currentTaintedBlocks = new LinkedHashSet<>();
+                taintedBlocks.add(currentTaintedBlocks);
+                currentTaintedBlocks.add(successor);
 
-            System.out.println("Adding new path starting with block " + currentBlock);
-            paths.add(currentPath);
-            currentPath.add(currentBlock);
+                blockQueue = new LinkedList<>();
+                blockQueue.add(successor);
 
-            blockQueue = new LinkedList<>();
-            blockQueue.add(currentBlock);
+                while(!blockQueue.isEmpty()) {
+                    successor = blockQueue.remove();
 
-            while(!blockQueue.isEmpty()) {
-                currentBlock = blockQueue.remove();
+                    currentTaintedBlocks.add(successor);
+                    Collection<MethodBlock> successorsOne = successor.getSuccessors();
 
-                currentPath.add(currentBlock);
-                Collection<MethodBlock> successorsOne = currentBlock.getSuccessors();
-
-                for(MethodBlock methodBlock : successorsOne) {
-                    if(!currentPath.contains(methodBlock)) {
-                        blockQueue.add(methodBlock);
-                    }
-                }
-            }
-
-            currentBlock = successorsIterator.next();
-            System.out.println("Current block: " + currentBlock);
-
-            currentPath = new LinkedHashSet<>();
-
-            System.out.println("Adding new path starting with block " + currentBlock);
-            paths.add(currentPath);
-            currentPath.add(currentBlock);
-
-            blockQueue = new LinkedList<>();
-            blockQueue.add(currentBlock);
-
-            while(!blockQueue.isEmpty()) {
-                currentBlock = blockQueue.remove();
-
-                currentPath.add(currentBlock);
-                Collection<MethodBlock> successorsOne = currentBlock.getSuccessors();
-
-                for(MethodBlock methodBlock : successorsOne) {
-                    if(!currentPath.contains(methodBlock)) {
-                        blockQueue.add(methodBlock);
+                    for(MethodBlock methodBlock : successorsOne) {
+                        if(!currentTaintedBlocks.contains(methodBlock)) {
+                            blockQueue.add(methodBlock);
+                        }
                     }
                 }
             }
@@ -195,26 +110,22 @@ public class MethodGraph {
 
         Set<MethodBlock> longestPath = null;
 
-        for(Set<MethodBlock> path : paths) {
+        for(Set<MethodBlock> path : taintedBlocks) {
             if(longestPath == null || path.size() > longestPath.size()) {
                 longestPath = path;
             }
         }
 
-        paths.remove(longestPath);
-
-        Set<MethodBlock> previousPath = null;
+        taintedBlocks.remove(longestPath);
 
         for(MethodBlock possibleMethodBlock : longestPath) {
             boolean inAllPaths = true;
 
-            for(Set<MethodBlock> path : paths) {
+            for(Set<MethodBlock> path : taintedBlocks) {
                 if(!path.contains(possibleMethodBlock)) {
                     inAllPaths = false;
                     break;
                 }
-
-                previousPath = path;
             }
 
             if(inAllPaths) {
@@ -222,9 +133,34 @@ public class MethodGraph {
             }
         }
 
-
         return null;
     }
+
+
+    // TODO make it work
+//    public void removeLoops(Set<Set<MethodBlock>> taintedBlocks) {
+//        for(Set<MethodBlock> taintedBlock : taintedBlocks) {
+//            for(MethodBlock block : taintedBlock) {
+//                Set<MethodBlock> path = new LinkedHashSet<>();
+//                Stack<MethodBlock> blockStack = new Stack<>();
+//                blockStack.push(block);
+//
+//                while(!blockStack.isEmpty()) {
+//                    MethodBlock currentBlock = blockStack.pop();
+//
+//                    path.add(currentBlock);
+//                    Collection<MethodBlock> successorsOne = currentBlock.getSuccessors();
+//
+//                    for(MethodBlock methodBlock : successorsOne) {
+////                        if(!path.contains(methodBlock)) {
+//                            blockStack.push(methodBlock);
+////                        }
+//                    }
+//
+//                }
+//            }
+//        }
+//    }
 
     public String toDotString() {
         StringBuilder dotString = new StringBuilder("digraph MethodGraph {\n");

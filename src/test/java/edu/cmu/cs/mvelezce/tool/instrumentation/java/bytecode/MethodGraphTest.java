@@ -310,6 +310,41 @@ public class MethodGraphTest {
     }
 
     @Test
+    public void testGetWhereBranchesConverge9() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label(), new InsnList());
+        MethodBlock b = new MethodBlock("B", new Label(), new InsnList());
+        MethodBlock c = new MethodBlock("C", new Label(), new InsnList());
+        MethodBlock d = new MethodBlock("D", new Label(), new InsnList());
+        MethodBlock e = new MethodBlock("E", new Label(), new InsnList());
+        MethodBlock f = new MethodBlock("F", new Label(), new InsnList());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, b);
+
+        System.out.println(methodGraph.toDotString());
+
+        // Assert
+        Assert.assertEquals(e, methodGraph.getWhereBranchesConverge(b));
+    }
+
+    @Test
     public void testAddMethodBlock() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();

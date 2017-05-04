@@ -1,63 +1,21 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.java.programs.Sleep2;
+import edu.cmu.cs.mvelezce.java.programs.Sleep3;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by miguelvelez on 4/9/17.
  */
 public class JavaRegionClassTransformerTimerTest {
-
-//    @After
-//    public void after() {
-//        System.out.println();
-//    }
-//
-//    // TODO we will have to pass multiple file names when instrumenting multiple files
-//    public static void execute(List<String> fileNames, Set<String> configuration, Set<JavaRegion> regions) throws IOException, NoSuchMethodException, ClassNotFoundException {
-//        // Get class
-//        JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(fileNames, regions);
-//        ClassNode classNode = printer.readClass();
-//
-//        // Save size of instructions for each method in the class
-//        Map<String, Integer> methodToInstructionCount = new HashMap<>();
-//
-//        for(MethodNode methodNode : classNode.methods) {
-//            methodToInstructionCount.put(methodNode.name, methodNode.instructions.size());
-//        }
-//
-//        // Transform the Java region
-//        printer.transform(classNode);
-//
-//        // Check if the transform actually made changes to the bytecode
-//        boolean transformed = false;
-//
-//        for(MethodNode methodNode : classNode.methods) {
-//            if(methodNode.instructions.size() != methodToInstructionCount.get(methodNode.name)) {
-//                transformed = true;
-//                break;
-//            }
-//        }
-//
-//        // Assert
-//        Assert.assertTrue(transformed);
-//
-//        // Execute instrumented code
-//        Set<ClassNode> instrumentedClasses = new HashSet<>();
-//        instrumentedClasses.add(classNode);
-//
-//        DynamicAdapter.setInstrumentedClassNodes(instrumentedClasses);
-//        DynamicAdapter adapter = new SleepDynamicAdapter(fileNames);
-//        adapter.execute(configuration);
-//    }
 
     @Test
     public void testTransform1() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
@@ -75,128 +33,137 @@ public class JavaRegionClassTransformerTimerTest {
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
 
-        // Transform the Java region
+        // Get the instruction count in each method
         JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(programFiles, regions);
-        Set<ClassNode> classNode = printer.transformClasses();
+        ClassNode classNode = printer.readClass(Sleep1.FILENAME);
 
-//        JavaRegionClassTransformerTimerTest.execute(Sleep1.FILENAME, configuration, regions);
-//
-//        // Assert it executed
-//        Set<Region> regions = Regions.getRegions();
-//        Region program = Regions.getProgram();
-//
-//        Assert.assertTrue(program.getMilliExecutionTime() > 900.0);
-//
-//        System.out.println("Program execution time: " + program.getMilliExecutionTime());
-//
-//        for(Region measuredRegion : regions) {
-//            System.out.println(((JavaRegion) measuredRegion).getRegionMethod() + " Execution time: " + measuredRegion.getMilliExecutionTime());
-//        }
+        // Save size of instructions for each method in the class
+        Map<String, Integer> methodToInstructionCount = new HashMap<>();
+
+        for(MethodNode methodNode : classNode.methods) {
+            methodToInstructionCount.put(methodNode.name, methodNode.instructions.size());
+        }
+
+        // Transform the files
+        Set<ClassNode> classNodes = printer.transformClasses();
+
+        // Check if the transform actually made changes to the bytecode
+        boolean transformed = false;
+
+        for(ClassNode instrumentedClassNode : classNodes) {
+            for(MethodNode methodNode : instrumentedClassNode.methods) {
+                if(methodNode.instructions.size() != methodToInstructionCount.get(methodNode.name)) {
+                    transformed = true;
+                    break;
+                }
+            }
+        }
+
+        // Assert
+        Assert.assertTrue(transformed);
     }
 
-//    @Test
-//    public void testTransform2() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
-//        // Java Region
-//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-//        JavaRegion region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.MAIN_METHOD, 23, 28);
-//        Regions.addRegion(region);
-//
-//        region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 19, 20);
-//        Regions.addRegion(region);
-//
-//        // Program
-//        JavaRegionClassTransformer.setMainClass(Sleep2.FILENAME);
-//
-//        // Configuration
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//
-//        JavaRegionClassTransformerTimerTest.execute(Sleep2.FILENAME, configuration);
-//
-//        // Assert it executed
-//        Set<Region> regions = Regions.getRegions();
-//        Region program = Regions.getProgram();
-//
-//        Assert.assertTrue(program.getMilliExecutionTime() > 1800.0);
-//
-//        System.out.println("Program execution time: " + program.getMilliExecutionTime());
-//
-//        for(Region measuredRegion : regions) {
-//            System.out.println(((JavaRegion) measuredRegion).getRegionMethod() + " Execution time: " + measuredRegion.getMilliExecutionTime());
-//        }
-//    }
-//
-//    @Test
-//    public void testTransform3() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
-//        // Java Region
-//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-//        JavaRegion region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.MAIN_METHOD, 23, 36);
-//        Regions.addRegion(region);
-//
-//        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_1, 19, 20);
-//        Regions.addRegion(region);
-//
-//        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_2, 19, 20);
-//        Regions.addRegion(region);
-//
-//        // Program
-//        JavaRegionClassTransformer.setMainClass(Sleep3.FILENAME);
-//
-//        // Configuration
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//
-//        JavaRegionClassTransformerTimerTest.execute(Sleep3.FILENAME, configuration);
-//
-//        // Assert it executed
-//        Set<Region> regions = Regions.getRegions();
-//        Region program = Regions.getProgram();
-//
-//        Assert.assertTrue(program.getMilliExecutionTime() > 2600.0);
-//
-//        System.out.println("Program execution time: " + program.getMilliExecutionTime());
-//
-//        for(Region measuredRegion : regions) {
-//            System.out.println(((JavaRegion) measuredRegion).getRegionMethod() + " Execution time: " + measuredRegion.getMilliExecutionTime());
-//        }
-//    }
-//
-//    @Test
-//    public void testTransform4() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
-//        // Java Region
-//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-//        JavaRegion region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.MAIN_METHOD, 31, 36);
-//        Regions.addRegion(region);
-//
-//        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.MAIN_METHOD, 48, 53);
-//        Regions.addRegion(region);
-//
-//        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_1, 19, 20);
-//        Regions.addRegion(region);
-//
-//        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_2, 19, 20);
-//        Regions.addRegion(region);
-//
-//        // Program
-//        JavaRegionClassTransformer.setMainClass(Sleep4.FILENAME);
-//
-//        // Configuration
-//        Set<String> configuration = new HashSet<>();
-//        configuration.add("A");
-//        configuration.add("B");
-//
-//        JavaRegionClassTransformerTimerTest.execute(Sleep4.FILENAME, configuration);
-//
-//        // Assert it executed
-//        Set<Region> regions = Regions.getRegions();
-//        Region program = Regions.getProgram();
-//
-//        Assert.assertTrue(program.getMilliExecutionTime() > 3500.0);
-//
-//        System.out.println("Program execution time: " + program.getMilliExecutionTime());
-//
-//        for(Region measuredRegion : regions) {
-//            System.out.println(((JavaRegion) measuredRegion).getRegionMethod() + " Execution time: " + measuredRegion.getMilliExecutionTime());
-//        }
-//    }
+    @Test
+    public void testTransform2() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.MAIN_METHOD, 20);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 16);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep2.FILENAME);
+
+        // Configuration
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+
+        // Get the instruction count in each method
+        JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(programFiles, regions);
+        ClassNode classNode = printer.readClass(Sleep2.FILENAME);
+
+        // Save size of instructions for each method in the class
+        Map<String, Integer> methodToInstructionCount = new HashMap<>();
+
+        for(MethodNode methodNode : classNode.methods) {
+            methodToInstructionCount.put(methodNode.name, methodNode.instructions.size());
+        }
+
+        // Transform the files
+        Set<ClassNode> classNodes = printer.transformClasses();
+
+        // Check if the transform actually made changes to the bytecode
+        boolean transformed = false;
+
+        for(ClassNode instrumentedClassNode : classNodes) {
+            for(MethodNode methodNode : instrumentedClassNode.methods) {
+                if(methodNode.instructions.size() != methodToInstructionCount.get(methodNode.name)) {
+                    transformed = true;
+                    break;
+                }
+            }
+        }
+
+        // Assert
+        Assert.assertTrue(transformed);
+    }
+
+    @Test
+    public void testTransform3() throws IOException, InterruptedException, ClassNotFoundException, NoSuchMethodException {
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.MAIN_METHOD, 28);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.MAIN_METHOD, 45);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_1, 16);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_2, 16);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep3.FILENAME);
+
+        // Configuration
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+
+        // Get the instruction count in each method
+        JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(programFiles, regions);
+        ClassNode classNode = printer.readClass(Sleep3.FILENAME);
+
+        // Save size of instructions for each method in the class
+        Map<String, Integer> methodToInstructionCount = new HashMap<>();
+
+        for(MethodNode methodNode : classNode.methods) {
+            methodToInstructionCount.put(methodNode.name, methodNode.instructions.size());
+        }
+
+        // Transform the files
+        Set<ClassNode> classNodes = printer.transformClasses();
+
+        // Check if the transform actually made changes to the bytecode
+        boolean transformed = false;
+
+        for(ClassNode instrumentedClassNode : classNodes) {
+            for(MethodNode methodNode : instrumentedClassNode.methods) {
+                if(methodNode.instructions.size() != methodToInstructionCount.get(methodNode.name)) {
+                    transformed = true;
+                    break;
+                }
+            }
+        }
+
+        // Assert
+        Assert.assertTrue(transformed);
+    }
 }

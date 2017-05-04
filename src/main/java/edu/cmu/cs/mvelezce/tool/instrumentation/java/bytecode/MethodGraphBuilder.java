@@ -3,6 +3,8 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 
 /**
@@ -15,7 +17,7 @@ public class MethodGraphBuilder {
 
         InsnList instructions = methodNode.instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
-        InsnList labelInstructions = new InsnList();
+        List<AbstractInsnNode> labelInstructions = new ArrayList<>();
 
         while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
@@ -23,7 +25,7 @@ public class MethodGraphBuilder {
             if(instruction.getType() == AbstractInsnNode.LABEL) {
                 LabelNode labelNode = (LabelNode) instruction;
 
-                labelInstructions = new InsnList();
+                labelInstructions = new ArrayList<>();
                 MethodBlock methodBlock = new MethodBlock(labelNode.getLabel(), labelInstructions);
                 graph.addMethodBlock(methodBlock);
             }

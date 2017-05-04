@@ -36,7 +36,7 @@ public class ClassTransformerBaseTest {
 
             }
         };
-        ClassNode classNode = base.readClass(Sleep1.FILENAME);
+        ClassNode classNode = base.readClass(Sleep3.FILENAME);
 
         List<MethodNode> methods = classNode.methods;
 

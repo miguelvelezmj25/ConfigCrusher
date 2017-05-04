@@ -1,11 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 import jdk.internal.org.objectweb.asm.Label;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 5/3/17.
@@ -14,11 +12,11 @@ public class MethodBlock {
 
     private String ID;
     private Label label;
-    private InsnList instructions;
+    private List<AbstractInsnNode> instructions;
     private Set<MethodBlock> successors;
     private Set<MethodBlock> predecessors;
 
-    public MethodBlock(String ID, Label label, InsnList instructions) {
+    public MethodBlock(String ID, Label label, List<AbstractInsnNode> instructions) {
         this.ID = ID;
         this.label = label;
         this.instructions = instructions;
@@ -26,7 +24,15 @@ public class MethodBlock {
         this.predecessors = new HashSet<>();
     }
 
-    public MethodBlock(Label label, InsnList instructions) {
+    public MethodBlock(String ID, Label label) {
+        this(ID, label, new ArrayList<>());
+    }
+
+    public MethodBlock(Label label) {
+        this(label.toString(), label);
+    }
+
+    public MethodBlock(Label label, List<AbstractInsnNode> instructions) {
         this(label.toString(), label, instructions);
     }
 
@@ -46,7 +52,7 @@ public class MethodBlock {
 
     public Label getLabel() { return this.label; }
 
-    public InsnList getInstructions() { return this.instructions; }
+    public List<AbstractInsnNode> getInstructions() { return this.instructions; }
 
     public Collection<MethodBlock> getSuccessors() { return this.successors; }
 

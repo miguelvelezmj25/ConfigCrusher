@@ -2,14 +2,17 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
-import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 4/21/17.
@@ -72,45 +75,47 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
+            MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
             Set<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
-
-            Stack<Integer> localVariableIndexes = new Stack<>();
-            int nextLocalVariableIndex = methodNode.maxLocals;
-            InsnList instructions = methodNode.instructions;
-            ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
             InsnList newInstructions = new InsnList();
 
-            while(instructionsIterator.hasNext()) {
-                AbstractInsnNode instruction = instructionsIterator.next();
-                boolean instrumented = false;
 
-                if (instruction.getOpcode() < 0) {
-                    newInstructions.add(instruction);
-                    continue;
-                }
-
-                int bytecodeIndex = instructions.indexOf(instruction);
-
-                for(JavaRegion javaRegion : regionsInMethod) {
-                    if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
-                        newInstructions.add(this.addInstructionsBeforeRegion(javaRegion, nextLocalVariableIndex));
-                        newInstructions.add(instruction);
-
-                        instrumented = true;
-                        localVariableIndexes.push(nextLocalVariableIndex);
-                        nextLocalVariableIndex++;
-                    }
-                    else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
-                        newInstructions.add(instruction);
-                        newInstructions.add(this.addInstructionsAfterRegion(javaRegion, localVariableIndexes.pop()));
-                        instrumented = true;
-                    }
-                }
-
-                if(!instrumented) {
-                    newInstructions.add(instruction);
-                }
-            }
+//            Stack<Integer> localVariableIndexes = new Stack<>();
+//            int nextLocalVariableIndex = methodNode.maxLocals;
+//            InsnList instructions = methodNode.instructions;
+//            ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
+//
+//            while(instructionsIterator.hasNext()) {
+//                AbstractInsnNode instruction = instructionsIterator.next();
+//                boolean instrumented = false;
+//
+//                if (instruction.getOpcode() < 0) {
+//                    newInstructions.add(instruction);
+//                    continue;
+//                }
+//
+//                int bytecodeIndex = instructions.indexOf(instruction);
+//
+//                for(JavaRegion javaRegion : regionsInMethod) {
+//                    if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
+//                        newInstructions.add(this.addInstructionsBeforeRegion(javaRegion, nextLocalVariableIndex));
+//                        newInstructions.add(instruction);
+//
+//                        instrumented = true;
+//                        localVariableIndexes.push(nextLocalVariableIndex);
+//                        nextLocalVariableIndex++;
+//                    }
+//                    else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
+//                        newInstructions.add(instruction);
+//                        newInstructions.add(this.addInstructionsAfterRegion(javaRegion, localVariableIndexes.pop()));
+//                        instrumented = true;
+//                    }
+//                }
+//
+//                if(!instrumented) {
+//                    newInstructions.add(instruction);
+//                }
+//            }
 
             methodNode.instructions.clear();
             methodNode.instructions.add(newInstructions);

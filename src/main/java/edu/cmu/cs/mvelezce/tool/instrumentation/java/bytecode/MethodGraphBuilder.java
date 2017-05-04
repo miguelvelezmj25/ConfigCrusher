@@ -36,7 +36,6 @@ public class MethodGraphBuilder {
         MethodBlock currentMethodBlock = null;
         AbstractInsnNode previousInstruction = null;
 
-
         while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
 
@@ -44,7 +43,6 @@ public class MethodGraphBuilder {
                 LabelNode labelNode = (LabelNode) instruction;
                 MethodBlock successor = graph.getMethodBlock(labelNode.getLabel());
 
-                // TODO what other opcodes should not have an edge with the next label?
                 if(currentMethodBlock != null && (previousInstruction.getOpcode() < Opcodes.GOTO || previousInstruction.getOpcode() > Opcodes.RETURN)) {
                     successor.addPredecessor(currentMethodBlock);
                     currentMethodBlock.addSuccessor(successor);

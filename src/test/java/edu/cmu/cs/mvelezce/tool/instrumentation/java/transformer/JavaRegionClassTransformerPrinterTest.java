@@ -1,46 +1,35 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
-import edu.cmu.cs.mvelezce.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 /**
  * Created by mvelezce on 4/3/17.
  */
 public class JavaRegionClassTransformerPrinterTest {
 
-    @Test
-    public void testTransform1() throws IOException, NoSuchMethodException, ClassNotFoundException {
-        // Java Region
-        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        Set<JavaRegion> regions = new HashSet<>();
-        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
-        regions.add(region);
-
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep1.FILENAME);
-
-        // Get class
-        JavaRegionClassTransformerPrinter printer = new JavaRegionClassTransformerPrinter(programFiles, regions, "Money!");
-
-        Set<ClassNode> classNodes = new HashSet<>();
-
-        for(String fileName : programFiles) {
-            ClassNode classNode = printer.readClass(fileName);
-            printer.transform(classNode);
-            classNodes.add(classNode);
-        }
-
-
-
+//    @Test
+//    public void testTransform1() throws IOException, NoSuchMethodException, ClassNotFoundException {
+//        // Java Region
+//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+//        Set<JavaRegion> regions = new HashSet<>();
+//        JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
+//        regions.add(region);
+//
+//        // Program files
+//        List<String> programFiles = new ArrayList<>();
+//        programFiles.add(Sleep1.FILENAME);
+//
+//        // Get class
+//        JavaRegionClassTransformerPrinter printer = new JavaRegionClassTransformerPrinter(programFiles, regions, "Money!");
+//
+//        Set<ClassNode> classNodes = new HashSet<>();
+//
+//        for(String fileName : programFiles) {
+//            ClassNode classNode = printer.readClass(fileName);
+//            printer.transform(classNode);
+//            classNodes.add(classNode);
+//        }
+//
+//
+//
 //        // Save size of instructions for each method in the class
 //        Map<String, Integer> methodToInstructionCount = new HashMap<>();
 //
@@ -74,7 +63,7 @@ public class JavaRegionClassTransformerPrinterTest {
 //        DynamicAdapter.setInstrumentedClassNodes(instrumentedClasses);
 //        DynamicAdapter adapter = new SleepDynamicAdapter(Sleep1.FILENAME);
 //        adapter.execute(configuration);
-    }
+//    }
 //
 //    @Test
 //    public void testTransform2() throws IOException, NoSuchMethodException, ClassNotFoundException {

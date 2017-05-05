@@ -10,10 +10,7 @@ import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.*;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/21/17.
@@ -62,6 +59,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
         Set<JavaRegion> regionsInClass = this.getRegionsInClass(classPackage, className);
 
+        // TODO sort regions by start index
+
         for(MethodNode methodNode : classNode.methods) {
             boolean instrumentMethod = false;
 
@@ -80,7 +79,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             System.out.println(graph.toDotString(methodNode.name));
             // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
             methodNode.instructions.toArray();
-            Set<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
+            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
             InsnList newInstructions = new InsnList();
 
             InsnList instructions = methodNode.instructions;
@@ -90,6 +89,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
             while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
+                LabelNode endLabelNode = null;
 
                 if(instruction.getType() == AbstractInsnNode.LABEL) {
                     currentLabelNode = (LabelNode) instruction;
@@ -102,7 +102,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 int bytecodeIndex = instructions.indexOf(instruction);
 
-                boolean instrumentedEndWithThisIndex = false;
                 for(JavaRegion javaRegion : regionsInMethod) {
                     if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
                         Label label = new Label();
@@ -134,25 +133,35 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
                     }
                     else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
-                        InsnList endRegionInstructions = new InsnList();
-                        if(!instrumentedEndWithThisIndex) {
-                            Label label = new Label();
-                            label.info = bytecodeIndex;
-                            LabelNode endRegionLabelNode = new LabelNode(label);
-                            this.updateLabels(newInstructions, currentLabelNode, endRegionLabelNode);
-                            endRegionInstructions.add(endRegionLabelNode);
-                        }
+                        Label label = new Label();
+                        label.info = label.toString() + "00000" + bytecodeIndex;
+                        LabelNode endRegionLabelNode = new LabelNode(label);
+                        this.updateLabels(newInstructions, currentLabelNode, endRegionLabelNode);
 
+                        InsnList endRegionInstructions = new InsnList();
+                        endRegionInstructions.add(endRegionLabelNode);
                         endRegionInstructions.add(this.addInstructionsEndRegion(javaRegion));
 
                         AbstractInsnNode labelInstruction = instruction;
 
-                        while(labelInstruction.getType() != AbstractInsnNode.LABEL) {
-                            labelInstruction = labelInstruction.getPrevious();
-                        }
+                        // TODO not working correctly
+//                        if(endLabelNode != null) {
+//                            labelInstruction = newInstructions.getLast();
+//
+//                            while(labelInstruction != endLabelNode) {
+//                                labelInstruction = labelInstruction.getPrevious();
+//                            }
+//                        }
+//                        else {
+                            while(labelInstruction.getType() != AbstractInsnNode.LABEL) {
+                                labelInstruction = labelInstruction.getPrevious();
+                            }
+//                        }
 
                         newInstructions.insertBefore(labelInstruction, endRegionInstructions);
-                        instrumentedEndWithThisIndex = true;
+
+
+                        endLabelNode = endRegionLabelNode;
                     }
                 }
 
@@ -176,14 +185,16 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         return javaRegions;
     }
 
-    private Set<JavaRegion> getRegionsInMethod(String regionPackage, String regionClass, String regionMethod) {
-        Set<JavaRegion> javaRegions = new HashSet<>();
+    private List<JavaRegion> getRegionsInMethod(String regionPackage, String regionClass, String regionMethod) {
+        List<JavaRegion> javaRegions = new ArrayList<>();
 
         for(JavaRegion javaRegion : this.regions) {
             if(javaRegion.getRegionPackage().equals(regionPackage) && javaRegion.getRegionClass().equals(regionClass) && javaRegion.getRegionMethod().equals(regionMethod)) {
                 javaRegions.add(javaRegion);
             }
         }
+
+        javaRegions.sort((region1, region2) -> region2.getStartBytecodeIndex() - region1.getStartBytecodeIndex());
 
         return javaRegions;
     }

@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -266,7 +267,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel4() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel4() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException, ParseException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -332,7 +333,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel1() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel1() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException, ParseException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -367,7 +368,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel2() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel2() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException, ParseException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -409,7 +410,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel6() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel6() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException, ParseException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -451,7 +452,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel7() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel7() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException, ParseException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -493,7 +494,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel8() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel8() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException, ParseException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -546,7 +547,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel9() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel9() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException, ParseException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -599,7 +600,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel10() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel10() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException, ParseException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -668,7 +669,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testBuildPerformanceModel11() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException {
+    public void testBuildPerformanceModel11() throws ClassNotFoundException, IOException, NoSuchMethodException, NoSuchFieldException, ParseException {
         // TODO we still need to get Lotrack working
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest

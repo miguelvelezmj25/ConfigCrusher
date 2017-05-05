@@ -34,7 +34,7 @@ public class Executer {
     public static final String START_TIME = "startTime";
     public static final String END_TIME = "endTime";
 
-    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException {
+    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
         Options.getCommandLine(args);
 
         String outputFile = Executer.DIRECTORY + "/" + programName + Options.DOT_JSON;
@@ -53,14 +53,10 @@ public class Executer {
 
         Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(programName, mainClass, directory, configurationsToExecute);
 
-//        if(Options.checkIfSave()) {
-//            Executer.writeToFile(programName, measuredPerformance);
-//        }
-
         return measuredPerformance;
     }
 
-    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String mainClass, String directory, Set<Set<String>> configurationsToExecute) {
+    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
         //        JavaRegion program = new JavaRegion(mainClass, mainClass);
 //        Regions.addProgram(program);
 
@@ -79,7 +75,10 @@ public class Executer {
             // TODO how to read it an build the set of performance entries before returning
         }
 
-        return null;
+        String outputFile = Executer.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        File file = new File(outputFile);
+
+        return Executer.readFromFile(file);
     }
 
     public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {

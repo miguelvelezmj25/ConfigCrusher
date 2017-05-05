@@ -86,17 +86,27 @@ public class Regions {
     }
 
     public static void enter(String regionID) {
-        Region region = Regions.getRegion(regionID);
+        Region region = new Region(regionID);
+        Regions.addRegion(region);
         region.enter();
     }
 
     // TODO hacky way to not call the exit method of a region if it does not exit. This can be fixed if we can instrument
     // better and do not exit a region that has not been started
     public static void exit(String regionID) {
-        for(Region region : Regions.regions) {
+        boolean exit = false;
+
+        for(Region region : Regions.executedRegionsTrace) {
             if(region.getRegionID().equals(regionID)) {
-                region.exit();
+                exit = true;
+                break;
             }
+        }
+
+        if(exit) {
+            Region region = new Region(regionID);
+            Regions.addRegion(region);
+            region.exit();
         }
     }
 
@@ -117,11 +127,11 @@ public class Regions {
     public static void removeExecutingRegion(Region region) {
         System.out.println("exit " + region.getRegionID());
         Region executing = Regions.executingRegions.pop();
-        // TODO this is for testing that the region that believes to have executed is the one that was executing
-        if(!region.equals(executing)) {
-            throw new RuntimeException("The region that wanted to be removed from the executing regions is not the last region " +
-                    "to be executing");
-        }
+//        // TODO this is for testing that the region that believes to have executed is the one that was executing
+//        if(!region.equals(executing)) {
+//            throw new RuntimeException("The region that wanted to be removed from the executing regions is not the last region " +
+//                    "to be executing");
+//        }
 
         Regions.executedRegionsTrace.add(region);
     }

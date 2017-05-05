@@ -118,26 +118,6 @@ public class Region implements Cloneable {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Region region = (Region) o;
-
-        if (startTime != region.startTime) return false;
-        if (endTime != region.endTime) return false;
-        return regionID.equals(region.regionID);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = regionID.hashCode();
-        result = 31 * result + (int) (startTime ^ (startTime >>> 32));
-        result = 31 * result + (int) (endTime ^ (endTime >>> 32));
-        return result;
-    }
-
     public String getRegionID() { return this.regionID; }
 
     public long getStartTime() { return this.startTime; }

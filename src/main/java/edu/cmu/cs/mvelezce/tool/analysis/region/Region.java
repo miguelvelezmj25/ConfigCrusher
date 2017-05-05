@@ -58,7 +58,7 @@ public class Region implements Cloneable {
     }
 
     private void enterRegion() {
-        Region previousExecutingRegion = Regions.getExecutingRegion();
+//        Region previousExecutingRegion = Regions.getExecutingRegion();
 //        Regions.addPossibleInnerRegion(previousExecutingRegion, this);
         Regions.addExecutingRegion(this);
     }

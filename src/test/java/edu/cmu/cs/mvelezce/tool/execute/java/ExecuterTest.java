@@ -4,12 +4,16 @@ import edu.cmu.cs.mvelezce.java.programs.Sleep1;
 import edu.cmu.cs.mvelezce.java.programs.Sleep2;
 import edu.cmu.cs.mvelezce.java.programs.Sleep3;
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -20,16 +24,15 @@ public class ExecuterTest {
     public static void checkExecutionTimes(Set<PerformanceEntry> expectedPerformances, Set<PerformanceEntry> actualPerformances) {
         for(PerformanceEntry expected : expectedPerformances) {
             for(PerformanceEntry actual : actualPerformances) {
-//                for(Region expectedRegion : expected.getRegions()) {
-//                    for(Region actualRegion : actual.getRegions()) {
-//                        if(expected.getConfiguration().equals(actual.getConfiguration()) && expectedRegion.equals(actualRegion)) {
-//                            System.out.println("Configuration: " + actual.getConfiguration());
-//                            System.out.println("Expected: " + expectedRegion.getExecutionTime()/1000.0);
-//                            System.out.println("Actual: " + actualRegion.getSecondsExecutionTime());
-//                            Assert.assertEquals(actualRegion.getSecondsExecutionTime(), expectedRegion.getExecutionTime()/1000.0, JavaPipelineTest.TIMING_ERROR);
-//                        }
-//                    }
-//                }
+                if(expected.getConfiguration().equals(actual.getConfiguration())) {
+                    for(Map.Entry<Region, Long> actualResultEntry : actual.getRegionsToExecutionTime().entrySet()) {
+                        for(Map.Entry<Region, Long> expectedResultEntry : expected.getRegionsToExecutionTime().entrySet()) {
+                            if(actualResultEntry.getKey().getRegionID().equals(expectedResultEntry.getKey().getRegionID())) {
+                                Assert.assertEquals(expectedResultEntry.getValue(), actualResultEntry.getValue());
+                            }
+                        }
+                    }
+                }
             }
 
             System.out.println();
@@ -53,7 +56,7 @@ public class ExecuterTest {
         args = new String[0];
         Set<PerformanceEntry> outputRead = Executer.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep1.CLASS, configurationsToExecute);
 
-        Assert.assertEquals(outputSave, outputRead);
+        ExecuterTest.checkExecutionTimes(outputSave, outputRead);
     }
 
     @Test
@@ -77,13 +80,13 @@ public class ExecuterTest {
     }
 
         @Test
-    public void testMeasureConfigurationPerformance4() throws Exception {
+    public void testMeasureConfigurationPerformance1() throws Exception {
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> results = Executer.measureConfigurationPerformance(Sleep1.CLASS, Sleep3.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep3.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> results = Executer.measureConfigurationPerformance(Sleep1.CLASS, Sleep1.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep1.CLASS, configurationsToExecute);
 
 //        // Java Region
 //        // Indexes were gotten by looking at output of running ClassTransformerBaseTest

@@ -1,6 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.pipeline.java;
-
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
+package edu.cmu.cs.mvelezce.tool.analysis.region;
 
 /**
  * Created by mvelezce on 4/19/17.

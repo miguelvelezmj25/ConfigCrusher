@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.java.programs.*;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -115,7 +115,7 @@ public class InstrumenterTest {
         Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
     }
 
-    // TODO corner case
+//    // TODO corner case
 //    @Test
 //    public void testInstrumentPipeline5() throws Exception {
 //        // Program arguments
@@ -127,7 +127,7 @@ public class InstrumenterTest {
 //        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
 //        Set<JavaRegion> regions = new HashSet<>();
 //        JavaRegion region = new JavaRegion(Sleep5.PACKAGE, Sleep5.CLASS, Sleep5.MAIN_METHOD, 20);
-//        regions.add(region);
+//
 //
 //        // Program files
 //        List<String> programFiles = new ArrayList<>();
@@ -137,8 +137,8 @@ public class InstrumenterTest {
 //
 //        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep5.CLASS, programFiles));
 //    }
-
-    // TODO corner case
+//
+//    // TODO corner case
 //    @Test
 //    public void testInstrumentPipeline6() throws Exception {
 //        // Program arguments

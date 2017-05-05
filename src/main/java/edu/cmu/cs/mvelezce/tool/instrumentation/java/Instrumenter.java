@@ -3,9 +3,8 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.ClassTransformerBase;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 

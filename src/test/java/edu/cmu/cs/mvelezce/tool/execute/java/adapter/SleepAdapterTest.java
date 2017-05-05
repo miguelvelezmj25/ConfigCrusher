@@ -8,10 +8,10 @@ import edu.cmu.cs.mvelezce.java.programs.Sleep7;
 import edu.cmu.cs.mvelezce.java.programs.Sleep8;
 import edu.cmu.cs.mvelezce.java.programs.Sleep9;
 import edu.cmu.cs.mvelezce.java.programs.Sleep10;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import org.junit.Test;
 
 import java.util.HashSet;

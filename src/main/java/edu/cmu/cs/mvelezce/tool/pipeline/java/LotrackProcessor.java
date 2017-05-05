@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 
 import java.util.*;
 

@@ -12,8 +12,8 @@ import edu.cmu.cs.mvelezce.java.programs.Sleep9;
 import edu.cmu.cs.mvelezce.java.programs.Sleep10;
 import edu.cmu.cs.mvelezce.java.programs.Sleep11;
 import edu.cmu.cs.mvelezce.java.programs.Sleep12;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executer;
 import org.json.simple.parser.ParseException;
 

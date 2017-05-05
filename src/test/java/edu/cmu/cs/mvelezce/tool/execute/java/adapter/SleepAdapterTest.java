@@ -4,6 +4,10 @@ import edu.cmu.cs.mvelezce.java.programs.Sleep1;
 import edu.cmu.cs.mvelezce.java.programs.Sleep2;
 import edu.cmu.cs.mvelezce.java.programs.Sleep3;
 import edu.cmu.cs.mvelezce.java.programs.Sleep4;
+import edu.cmu.cs.mvelezce.java.programs.Sleep7;
+import edu.cmu.cs.mvelezce.java.programs.Sleep8;
+import edu.cmu.cs.mvelezce.java.programs.Sleep9;
+import edu.cmu.cs.mvelezce.java.programs.Sleep10;
 import edu.cmu.cs.mvelezce.tool.analysis.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
@@ -86,4 +90,71 @@ public class SleepAdapterTest {
         adapter.execute(configuration);
     }
 
+    @Test
+    public void testExecute7() throws Exception {
+        // Adapter
+        Adapter adapter = new SleepAdapter(Sleep7.CLASS, Sleep7.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep7.CLASS);
+
+        // Configuration
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+
+        // Add program region
+        JavaRegion program = new JavaRegion(Sleep7.FILENAME, Adapter.MAIN);
+        Regions.addProgram(program);
+
+        // Execute
+        adapter.execute(configuration);
+    }
+
+    @Test
+    public void testExecute8() throws Exception {
+        // Adapter
+        Adapter adapter = new SleepAdapter(Sleep8.CLASS, Sleep8.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep8.CLASS);
+
+        // Configuration
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+
+        // Add program region
+        JavaRegion program = new JavaRegion(Sleep8.FILENAME, Adapter.MAIN);
+        Regions.addProgram(program);
+
+        // Execute
+        adapter.execute(configuration);
+    }
+
+    @Test
+    public void testExecute9() throws Exception {
+        // Adapter
+        Adapter adapter = new SleepAdapter(Sleep9.CLASS, Sleep9.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep9.CLASS);
+
+        // Configuration
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+
+        // Add program region
+        JavaRegion program = new JavaRegion(Sleep9.FILENAME, Adapter.MAIN);
+        Regions.addProgram(program);
+
+        // Execute
+        adapter.execute(configuration);
+    }
+
+    @Test
+    public void testExecute10() throws Exception {
+        // Adapter
+        Adapter adapter = new SleepAdapter(Sleep10.CLASS, Sleep10.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep10.CLASS);
+
+        // Configuration
+        Set<String> configuration = new HashSet<>();
+        configuration.add("A");
+
+        // Add program region
+        JavaRegion program = new JavaRegion(Sleep10.FILENAME, Adapter.MAIN);
+        Regions.addProgram(program);
+
+        // Execute
+        adapter.execute(configuration);
+    }
 }

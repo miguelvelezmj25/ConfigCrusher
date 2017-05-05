@@ -1,6 +1,17 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
-import edu.cmu.cs.mvelezce.java.programs.*;
+import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.java.programs.Sleep2;
+import edu.cmu.cs.mvelezce.java.programs.Sleep3;
+import edu.cmu.cs.mvelezce.java.programs.Sleep4;
+import edu.cmu.cs.mvelezce.java.programs.Sleep5;
+import edu.cmu.cs.mvelezce.java.programs.Sleep6;
+import edu.cmu.cs.mvelezce.java.programs.Sleep7;
+import edu.cmu.cs.mvelezce.java.programs.Sleep8;
+import edu.cmu.cs.mvelezce.java.programs.Sleep9;
+import edu.cmu.cs.mvelezce.java.programs.Sleep10;
+import edu.cmu.cs.mvelezce.java.programs.Sleep11;
+import edu.cmu.cs.mvelezce.java.programs.Sleep12;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.ClassTransformerBase;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -38,6 +49,7 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(8, methodGraph.getBlockCount());
                 Assert.assertEquals(7, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }
@@ -64,6 +76,7 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(9, methodGraph.getBlockCount());
                 Assert.assertEquals(8, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }
@@ -90,6 +103,7 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(13, methodGraph.getBlockCount());
                 Assert.assertEquals(13, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }
@@ -116,6 +130,7 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(8, methodGraph.getBlockCount());
                 Assert.assertEquals(7, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }
@@ -142,6 +157,7 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(10, methodGraph.getBlockCount());
                 Assert.assertEquals(8, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }
@@ -168,6 +184,7 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(10, methodGraph.getBlockCount());
                 Assert.assertEquals(8, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }
@@ -194,6 +211,7 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(13, methodGraph.getBlockCount());
                 Assert.assertEquals(13, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }
@@ -220,6 +238,7 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(13, methodGraph.getBlockCount());
                 Assert.assertEquals(13, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }
@@ -246,6 +265,34 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 Assert.assertEquals(13, methodGraph.getBlockCount());
                 Assert.assertEquals(13, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+        }
+    }
+
+    @Test
+    public void testBuildMethodGraph10() throws IOException {
+        ClassTransformerBase base = new ClassTransformerBase() {
+            @Override
+            public Set<ClassNode> transformClasses() throws IOException {
+                return null;
+            }
+
+            @Override
+            public void transform(ClassNode classNode) {
+
+            }
+        };
+        ClassNode classNode = base.readClass(Sleep10.FILENAME);
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("main")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                Assert.assertEquals(13, methodGraph.getBlockCount());
+                Assert.assertEquals(13, methodGraph.getEdgeCount());
+                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }

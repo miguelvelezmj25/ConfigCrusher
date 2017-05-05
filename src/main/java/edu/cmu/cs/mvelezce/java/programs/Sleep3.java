@@ -18,19 +18,23 @@ public class Sleep3 {
         boolean a = Boolean.valueOf(args[0]);
         boolean b = Boolean.valueOf(args[1]);
         Thread.sleep(200);
+
+        // Region A start
         if(a) { // 28
-            // Region A start
             Thread.sleep(600);
             Sleep3.method1(a);
-            // Region A end
         }
+        // Region A end
+
         Thread.sleep(100);
+
+        // Region B start
         if(b) { // 45
-            // Region B start
             Thread.sleep(600);
             Sleep3.method2(b);
-            // Region B start
         }
+        // Region B start
+
         // Region program end
     }
 
@@ -38,11 +42,13 @@ public class Sleep3 {
         System.out.println("method1");
         boolean a = A;
         Thread.sleep(200);
+
+        // Region A start
         if(a) { // 16
-            // Region A start
             Thread.sleep(600);
-            // Region A end
         }
+        // Region A end
+
         Thread.sleep(100);
     }
 
@@ -50,11 +56,13 @@ public class Sleep3 {
         System.out.println("method2");
         boolean b = B;
         Thread.sleep(300);
+
+        // Region B start
         if(b) { // 16
-            // Region B start
             Thread.sleep(600);
-            // Region B end
         }
+        // Region B end
+
         Thread.sleep(200);
     }
 

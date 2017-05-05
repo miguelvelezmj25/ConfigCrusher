@@ -9,27 +9,32 @@ public class Sleep9 {
     public static final String PACKAGE = Sleep9.class.getPackage().getName();
     public static final String CLASS = Sleep9.class.getSimpleName();
     public static final String MAIN_METHOD = "main";
-    public static final String METHOD_1 = "method1";
 
     public static void main(String[] args) throws InterruptedException {
-// Region program start
+        // Region program start
         System.out.println("main");
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
 
         int i = 0;
+
+        // Region A start
         int repeat;
-        if(a) {
+        if(a) { // 24
             repeat = 5;
         }
         else {
             repeat = 10;
         }
+        // Region A end
 
-        while(i < repeat) {
+        // Region A start
+        while(i < repeat) { // 41
             Thread.sleep(100);
             i++;
         }
+        // Region A end
+
         // Region program end
     }
 

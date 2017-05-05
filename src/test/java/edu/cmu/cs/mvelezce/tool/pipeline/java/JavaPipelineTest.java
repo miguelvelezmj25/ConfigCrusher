@@ -503,12 +503,6 @@ public class JavaPipelineTest {
         JavaRegion region2 = new JavaRegion(Sleep8.PACKAGE, Sleep8.CLASS, Sleep8.MAIN_METHOD, 41, 46);
         Regions.addRegion(region2);
 
-        JavaRegion region3 = new JavaRegion(Sleep8.PACKAGE, Sleep8.CLASS, Sleep8.METHOD_1, 19, 20);
-        Regions.addRegion(region3);
-
-        JavaRegion region4 = new JavaRegion(Sleep8.PACKAGE, Sleep8.CLASS, Sleep8.METHOD_2, 19, 20);
-        Regions.addRegion(region4);
-
         // Regions to options
         Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
@@ -519,15 +513,6 @@ public class JavaPipelineTest {
         options = new HashSet<>();
         options.add("A");
         regionsToOptions.put(region2, options);
-
-        options = new HashSet<>();
-        options.add("A");
-        regionsToOptions.put(region3, options);
-
-        options = new HashSet<>();
-        options.add("A");
-        options.add("B");
-        regionsToOptions.put(region4, options);
         // TODO we still need to get Lotrack working
 
         // Program files
@@ -571,12 +556,6 @@ public class JavaPipelineTest {
         JavaRegion region2 = new JavaRegion(Sleep9.PACKAGE, Sleep9.CLASS, Sleep9.MAIN_METHOD, 41, 46);
         Regions.addRegion(region2);
 
-        JavaRegion region3 = new JavaRegion(Sleep9.PACKAGE, Sleep9.CLASS, Sleep9.METHOD_1, 19, 20);
-        Regions.addRegion(region3);
-
-        JavaRegion region4 = new JavaRegion(Sleep9.PACKAGE, Sleep9.CLASS, Sleep9.METHOD_1, 25, 26);
-        Regions.addRegion(region4);
-
         // Regions to options
         Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
 
@@ -587,16 +566,6 @@ public class JavaPipelineTest {
         options = new HashSet<>();
         options.add("A");
         regionsToOptions.put(region2, options);
-
-        options = new HashSet<>();
-        options.add("A");
-        options.add("B");
-        regionsToOptions.put(region3, options);
-
-        options = new HashSet<>();
-        options.add("A");
-        options.add("B");
-        regionsToOptions.put(region4, options);
         // TODO we still need to get Lotrack working
 
         // Program files

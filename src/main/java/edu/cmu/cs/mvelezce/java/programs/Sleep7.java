@@ -16,17 +16,22 @@ public class Sleep7 {
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
 
+        // Region A start
         int repeat;
-        if(a) {
+        if(a) { // 20
             repeat = 5;
         }
         else {
             repeat = 10;
         }
+        // Region A end
 
-        for(int i=0; i < repeat; i++) {
+        // Region A start
+        for(int i=0; i < repeat; i++) { // 41
             Thread.sleep(100);
         }
+        // Region A end
+
         // Region program end
     }
 

@@ -77,7 +77,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             }
 
             MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
-            System.out.println(graph.toDotString());
+            System.out.println(graph.toDotString(methodNode.name));
             // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
             methodNode.instructions.toArray();
             Set<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
@@ -86,14 +86,13 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             InsnList instructions = methodNode.instructions;
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-            Label currentLabel = null;
+            LabelNode currentLabelNode = null;
 
             while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
-                boolean instrumented = false;
 
                 if(instruction.getType() == AbstractInsnNode.LABEL) {
-                    currentLabel = ((LabelNode) instruction).getLabel();
+                    currentLabelNode = (LabelNode) instruction;
                 }
 
                 if(instruction.getOpcode() < 0) {
@@ -103,14 +102,27 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 int bytecodeIndex = instructions.indexOf(instruction);
 
+                boolean instrumentedEndWithThisIndex = false;
                 for(JavaRegion javaRegion : regionsInMethod) {
                     if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
-                        newInstructions.add(this.addInstructionsStartRegion(javaRegion));
-                        newInstructions.add(instruction);
+                        Label label = new Label();
+                        label.info = bytecodeIndex;
+                        LabelNode startRegionLabelNode = new LabelNode(label);
+                        this.updateLabels(newInstructions, currentLabelNode, startRegionLabelNode);
 
-                        instrumented = true;
+                        InsnList startRegionInstructions = new InsnList();
+                        startRegionInstructions.add(startRegionLabelNode);
+                        startRegionInstructions.add(this.addInstructionsStartRegion(javaRegion));
 
-                        MethodBlock currentMethodBlock = graph.getMethodBlock(currentLabel);
+                        AbstractInsnNode labelInstruction = instruction;
+
+                        while(labelInstruction.getType() != AbstractInsnNode.LABEL) {
+                            labelInstruction = labelInstruction.getPrevious();
+                        }
+
+                        newInstructions.insertBefore(labelInstruction, startRegionInstructions);
+
+                        MethodBlock currentMethodBlock = graph.getMethodBlock(currentLabelNode.getLabel());
                         MethodBlock blockToEndInstrumentation = graph.getWhereBranchesConverge(currentMethodBlock);
                         List<AbstractInsnNode> endBlockInstructions = blockToEndInstrumentation.getInstructions();
 
@@ -122,15 +134,29 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
                     }
                     else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
-                        newInstructions.add(this.addInstructionsEndRegion(javaRegion));
-                        newInstructions.add(instruction);
-                        instrumented = true;
+                        InsnList endRegionInstructions = new InsnList();
+                        if(!instrumentedEndWithThisIndex) {
+                            Label label = new Label();
+                            label.info = bytecodeIndex;
+                            LabelNode endRegionLabelNode = new LabelNode(label);
+                            this.updateLabels(newInstructions, currentLabelNode, endRegionLabelNode);
+                            endRegionInstructions.add(endRegionLabelNode);
+                        }
+
+                        endRegionInstructions.add(this.addInstructionsEndRegion(javaRegion));
+
+                        AbstractInsnNode labelInstruction = instruction;
+
+                        while(labelInstruction.getType() != AbstractInsnNode.LABEL) {
+                            labelInstruction = labelInstruction.getPrevious();
+                        }
+
+                        newInstructions.insertBefore(labelInstruction, endRegionInstructions);
+                        instrumentedEndWithThisIndex = true;
                     }
                 }
 
-                if(!instrumented) {
-                    newInstructions.add(instruction);
-                }
+                newInstructions.add(instruction);
             }
 
             methodNode.instructions.clear();
@@ -138,7 +164,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         }
     }
 
-    // Todo Seems weird to have this here
     private Set<JavaRegion> getRegionsInClass(String regionPackage, String regionClass) {
         Set<JavaRegion> javaRegions = new HashSet<>();
 
@@ -161,5 +186,22 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         }
 
         return javaRegions;
+    }
+
+    private void updateLabels(InsnList newInstructions, LabelNode oldLabel, LabelNode newLabel) {
+        int numberOfInstructions = newInstructions.size();
+        AbstractInsnNode instruction = newInstructions.getFirst();
+
+        for(int i = 0; i < numberOfInstructions; i++) {
+            if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
+                JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
+
+                if(jumpInsnNode.label == oldLabel) {
+                    jumpInsnNode.label = newLabel;
+                }
+            }
+
+            instruction = instruction.getNext();
+        }
     }
 }

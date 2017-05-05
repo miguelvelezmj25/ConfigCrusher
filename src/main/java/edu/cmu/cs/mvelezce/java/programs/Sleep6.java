@@ -10,6 +10,7 @@ public class Sleep6 {
     public static final String CLASS = Sleep6.class.getSimpleName();
     public static final String MAIN_METHOD = "main";
 
+    // TODO corner case with two returns
     public static void main(String[] args) throws InterruptedException {
         // Region program start
         System.out.println("main");

@@ -15,16 +15,16 @@ public class Sleep4 {
         System.out.println("main");
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
+
+        // Region A start
         if(a) { // 20
-            // Region A start
             Thread.sleep(600);
-            // Region A end
         }
         else {
-            // Region !A start
             Thread.sleep(700);
-            // Region !A end
         }
+        // Region A end
+
         // Region program end
     }
 

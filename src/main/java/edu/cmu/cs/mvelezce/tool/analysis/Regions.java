@@ -86,6 +86,7 @@ public class Regions {
     }
 
     public static void addExecutingRegion(Region region) {
+        System.out.println("enter " + region.getRegionID());
         if(region == null) {
             throw new IllegalArgumentException("The region cannot be null");
         }
@@ -99,6 +100,7 @@ public class Regions {
     }
 
     public static void removeExecutingRegion(Region region) {
+        System.out.println("exit " + region.getRegionID());
         Region executing = Regions.executingRegions.pop();
         // TODO this is for testing that the region that believes to have executed is the one that was executing
         if(!region.equals(executing)) {

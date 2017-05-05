@@ -54,9 +54,9 @@ public class MethodBlock {
 
     public List<AbstractInsnNode> getInstructions() { return this.instructions; }
 
-    public Collection<MethodBlock> getSuccessors() { return this.successors; }
+    public Set<MethodBlock> getSuccessors() { return this.successors; }
 
-    public Collection<MethodBlock> getPredecessors () { return  this.predecessors; }
+    public Set<MethodBlock> getPredecessors () { return  this.predecessors; }
 
     @Override
     public String toString() {

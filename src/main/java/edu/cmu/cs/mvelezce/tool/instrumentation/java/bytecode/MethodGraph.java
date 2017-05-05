@@ -35,7 +35,7 @@ public class MethodGraph {
             currentBlock = blockQueue.remove();
 
             currentTaintedBlocks.add(currentBlock);
-            Collection<MethodBlock> successorsOne = currentBlock.getSuccessors();
+            Set<MethodBlock> successorsOne = currentBlock.getSuccessors();
 
             for(MethodBlock methodBlock : successorsOne) {
                 if(!currentTaintedBlocks.contains(methodBlock)) {
@@ -54,7 +54,7 @@ public class MethodGraph {
             return rootBlock.getSuccessors().iterator().next();
         }
 
-        Collection<MethodBlock> successors = rootBlock.getSuccessors();
+        Set<MethodBlock> successors = rootBlock.getSuccessors();
         Iterator<MethodBlock> successorsIterator = successors.iterator();
         MethodBlock currentBlock = successorsIterator.next();
 
@@ -81,6 +81,62 @@ public class MethodGraph {
         // Taint the other branch
         this.taintBranch(currentBlock, currentTaintedBlocks, blocksWithTwoSuccessors);
 
+
+        Set<MethodBlock> longestPath = null;
+
+        for(Set<MethodBlock> path : taintedBlocks) {
+            if(longestPath == null || path.size() > longestPath.size()) {
+                longestPath = path;
+            }
+        }
+
+        Set<Set<MethodBlock>> hold = new HashSet<>(taintedBlocks);
+        hold.remove(longestPath);
+
+        for(MethodBlock possibleMethodBlock : longestPath) {
+            boolean inAllPaths = true;
+
+            for(Set<MethodBlock> path : taintedBlocks) {
+                if(!path.contains(possibleMethodBlock)) {
+                    inAllPaths = false;
+                    break;
+                }
+            }
+
+            if(inAllPaths) {
+                currentBlock = possibleMethodBlock;
+                break;
+            }
+        }
+
+        Set<List<MethodBlock>> pathsFromRootToCurrentBlock = new HashSet<>();
+        List<MethodBlock> visitedBlock = new ArrayList<>();
+        visitedBlock.add(rootBlock);
+        this.findAllPaths(rootBlock, currentBlock, visitedBlock, pathsFromRootToCurrentBlock);
+
+        Set<MethodBlock> allAncestors = new HashSet<>();
+
+        for(List<MethodBlock> pathFromRootToCurrentBlock : pathsFromRootToCurrentBlock) {
+            allAncestors.addAll(pathFromRootToCurrentBlock);
+        }
+
+        boolean done = true;
+
+        for(MethodBlock ancestor : allAncestors) {
+            if(ancestor == currentBlock) {
+                continue;
+            }
+
+            if(!allAncestors.containsAll(ancestor.getSuccessors())) {
+                done = false;
+            }
+        }
+
+        if(done) {
+            return currentBlock;
+        }
+
+
         // TODO remove loop to avoid expanding where to end the instrumentation
 //        this.removeLoops(rootBlock, taintedBlocks);
 
@@ -100,7 +156,7 @@ public class MethodGraph {
                     successor = blockQueue.remove();
 
                     currentTaintedBlocks.add(successor);
-                    Collection<MethodBlock> successorsOne = successor.getSuccessors();
+                    Set<MethodBlock> successorsOne = successor.getSuccessors();
 
                     for(MethodBlock methodBlock : successorsOne) {
                         if(!currentTaintedBlocks.contains(methodBlock)) {
@@ -111,7 +167,7 @@ public class MethodGraph {
             }
         }
 
-        Set<MethodBlock> longestPath = null;
+        longestPath = null;
 
         for(Set<MethodBlock> path : taintedBlocks) {
             if(longestPath == null || path.size() > longestPath.size()) {
@@ -139,6 +195,52 @@ public class MethodGraph {
         return null;
     }
 
+    public void findAllPaths(MethodBlock start, MethodBlock end, List<MethodBlock> visitedBlocks, Set<List<MethodBlock>> paths) {
+        Set<MethodBlock> successors = start.getSuccessors();
+
+        for(MethodBlock methodBlock : successors) {
+            if(visitedBlocks.contains(methodBlock)) {
+                continue;
+            }
+
+            if(methodBlock.equals(end)) {
+                visitedBlocks.add(methodBlock);
+                paths.add(new ArrayList<>(visitedBlocks));
+                visitedBlocks.remove(visitedBlocks.size()-1);
+            }
+        }
+
+        for(MethodBlock methodBlock : successors) {
+            if(visitedBlocks.contains(methodBlock) || methodBlock.equals(end)) {
+                continue;
+            }
+
+            visitedBlocks.add(methodBlock);
+            this.findAllPaths(methodBlock, end, visitedBlocks, paths);
+            visitedBlocks.remove(visitedBlocks.size()-1);
+        }
+
+//
+//        // add node v to current path from s
+//        path.push(v);
+//        onPath.add(v);
+//
+//        // found path from s to t - currently prints in reverse order because of stack
+//        if (v.equals(t))
+//            System.out.println(path);
+//
+//            // consider all neighbors that would continue path with repeating a node
+//        else {
+//            for (MethodBlock w : v.getSuccessors()) {
+//                if (!onPath.contains(w)) findAllPaths(w, t);
+//            }
+//        }
+//
+//        // done exploring from v, so remove from path
+//        path.pop();
+//        onPath.remove(v);
+    }
+
     // TODO make it work
     public void removeLoops(MethodBlock methodBlock, Set<Set<MethodBlock>> taintedBlocks) {
         Set<MethodBlock> visited = new HashSet<>();
@@ -160,7 +262,7 @@ public class MethodGraph {
 //                    MethodBlock currentBlock = blockStack.pop();
 //
 //                    path.add(currentBlock);
-//                    Collection<MethodBlock> successorsOne = currentBlock.getSuccessors();
+//                    Set<MethodBlock> successorsOne = currentBlock.getSuccessors();
 //
 //                    for(MethodBlock methodBlock : successorsOne) {
 ////                        if(!path.contains(methodBlock)) {
@@ -205,6 +307,8 @@ public class MethodGraph {
 
         return edges;
     }
+
+    public MethodBlock getExitBlock() { return this.exitBlock; }
 
     public MethodBlock getEntryBlock() { return this.entryBlock; }
 }

@@ -28,9 +28,9 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         this.regions = regions;
     }
 
-    public abstract InsnList addInstructionsBeforeRegion(JavaRegion javaRegion);
+    public abstract InsnList addInstructionsStartRegion(JavaRegion javaRegion);
 
-    public abstract InsnList addInstructionsAfterRegion(JavaRegion javaRegion);
+    public abstract InsnList addInstructionsEndRegion(JavaRegion javaRegion);
 
     @Override
     public Set<ClassNode> transformClasses() throws IOException {
@@ -77,6 +77,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             }
 
             MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
+            System.out.println(graph.toDotString());
             // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
             methodNode.instructions.toArray();
             Set<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
@@ -104,7 +105,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 for(JavaRegion javaRegion : regionsInMethod) {
                     if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
-                        newInstructions.add(this.addInstructionsBeforeRegion(javaRegion));
+                        newInstructions.add(this.addInstructionsStartRegion(javaRegion));
                         newInstructions.add(instruction);
 
                         instrumented = true;
@@ -121,8 +122,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
                     }
                     else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
+                        newInstructions.add(this.addInstructionsEndRegion(javaRegion));
                         newInstructions.add(instruction);
-                        newInstructions.add(this.addInstructionsAfterRegion(javaRegion));
                         instrumented = true;
                     }
                 }

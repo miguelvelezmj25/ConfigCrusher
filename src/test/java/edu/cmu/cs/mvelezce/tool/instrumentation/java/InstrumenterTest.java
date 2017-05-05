@@ -1,9 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
-import edu.cmu.cs.mvelezce.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.java.programs.Sleep2;
-import edu.cmu.cs.mvelezce.java.programs.Sleep3;
-import edu.cmu.cs.mvelezce.java.programs.Sleep4;
+import edu.cmu.cs.mvelezce.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -117,5 +114,201 @@ public class InstrumenterTest {
 
         Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
     }
+
+    // TODO corner case
+//    @Test
+//    public void testInstrumentPipeline5() throws Exception {
+//        // Program arguments
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        // Java Region
+//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+//        Set<JavaRegion> regions = new HashSet<>();
+//        JavaRegion region = new JavaRegion(Sleep5.PACKAGE, Sleep5.CLASS, Sleep5.MAIN_METHOD, 20);
+//        regions.add(region);
+//
+//        // Program files
+//        List<String> programFiles = new ArrayList<>();
+//        programFiles.add(Sleep5.FILENAME);
+//
+//        Instrumenter.instrument(Sleep5.CLASS, Sleep5.FILENAME, args, programFiles, regions);
+//
+//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep5.CLASS, programFiles));
+//    }
+
+    // TODO corner case
+//    @Test
+//    public void testInstrumentPipeline6() throws Exception {
+//        // Program arguments
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        // Java Region
+//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+//        Set<JavaRegion> regions = new HashSet<>();
+//        JavaRegion region = new JavaRegion(Sleep6.PACKAGE, Sleep6.CLASS, Sleep6.MAIN_METHOD, 20);
+//        regions.add(region);
+//
+//        // Program files
+//        List<String> programFiles = new ArrayList<>();
+//        programFiles.add(Sleep6.FILENAME);
+//
+//        Instrumenter.instrument(Sleep6.CLASS, Sleep6.FILENAME, args, programFiles, regions);
+//
+//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep6.CLASS, programFiles));
+//    }
+
+    @Test
+    public void testInstrumentPipeline7() throws Exception {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep7.PACKAGE, Sleep7.CLASS, Sleep7.MAIN_METHOD, 20);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep7.PACKAGE, Sleep7.CLASS, Sleep7.MAIN_METHOD, 41);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep7.FILENAME);
+
+        Instrumenter.instrument(Sleep7.CLASS, Sleep7.FILENAME, args, programFiles, regions);
+
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep7.CLASS, programFiles));
+    }
+
+    @Test
+    public void testInstrumentPipeline8() throws Exception {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep8.PACKAGE, Sleep8.CLASS, Sleep8.MAIN_METHOD, 20);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep8.PACKAGE, Sleep8.CLASS, Sleep8.MAIN_METHOD, 42);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep8.FILENAME);
+
+        Instrumenter.instrument(Sleep8.CLASS, Sleep8.FILENAME, args, programFiles, regions);
+
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep8.CLASS, programFiles));
+    }
+
+    @Test
+    public void testInstrumentPipeline9() throws Exception {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep9.PACKAGE, Sleep9.CLASS, Sleep9.MAIN_METHOD, 24);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep9.PACKAGE, Sleep9.CLASS, Sleep9.MAIN_METHOD, 41);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep9.FILENAME);
+
+        Instrumenter.instrument(Sleep9.CLASS, Sleep9.FILENAME, args, programFiles, regions);
+
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep9.CLASS, programFiles));
+    }
+
+    @Test
+    public void testInstrumentPipeline10() throws Exception {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.MAIN_METHOD, 28);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.MAIN_METHOD, 42);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.METHOD_1, 16);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.METHOD_2, 28);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep10.FILENAME);
+
+        Instrumenter.instrument(Sleep10.CLASS, Sleep10.FILENAME, args, programFiles, regions);
+
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep10.CLASS, programFiles));
+    }
+//
+//    @Test
+//    public void testInstrumentPipeline4() throws Exception {
+//        // Program arguments
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        // Java Region
+//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+//        Set<JavaRegion> regions = new HashSet<>();
+//        JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 20);
+//        regions.add(region);
+//
+//        // Program files
+//        List<String> programFiles = new ArrayList<>();
+//        programFiles.add(Sleep4.FILENAME);
+//
+//        Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, args, programFiles, regions);
+//
+//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
+//    }
+//
+//    @Test
+//    public void testInstrumentPipeline4() throws Exception {
+//        // Program arguments
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        // Java Region
+//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+//        Set<JavaRegion> regions = new HashSet<>();
+//        JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 20);
+//        regions.add(region);
+//
+//        // Program files
+//        List<String> programFiles = new ArrayList<>();
+//        programFiles.add(Sleep4.FILENAME);
+//
+//        Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, args, programFiles, regions);
+//
+//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
+//    }
 
 }

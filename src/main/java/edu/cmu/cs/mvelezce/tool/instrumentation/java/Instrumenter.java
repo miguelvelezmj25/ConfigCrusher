@@ -1,9 +1,13 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.ClassTransformerBase;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +50,14 @@ public class Instrumenter {
         }
 
         for(ClassNode classNode : classNodes) {
+            List<MethodNode> methods = classNode.methods;
+
+            System.out.println("INSTRUMENTED CLASSES");
+            for(MethodNode method : methods) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+
             String fileName = classNode.name;
             fileName = fileName.substring(fileName.lastIndexOf("/"));
             timer.writeClass(classNode, directory + fileName);

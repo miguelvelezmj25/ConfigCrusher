@@ -18,17 +18,17 @@ public class Sleep10 {
         boolean a = Boolean.valueOf(args[0]);
         boolean b = Boolean.valueOf(args[1]);
         Thread.sleep(200);
-        if(a) {
-            // Region A start 31
+        if(a) { // 28
+            // Region A start
             Thread.sleep(600);
             Sleep10.method1(a);
-            // TODO Region A end 36 but there is a jump statement at 37
+            // Region A end
         }
-        else if(b){
-            // Region B start 45
+        else if(b){ // 42
+            // Region B start
             Thread.sleep(700);
             Sleep10.method2(b);
-            // Region B end 50
+            // Region B end
         }
         Thread.sleep(100);
         // Region program end
@@ -38,11 +38,13 @@ public class Sleep10 {
         System.out.println("method1");
         boolean a = A;
         Thread.sleep(200);
-        if(a) {
-            // Region A start 19
+
+        // Region A start
+        if(a) { // 16
             Thread.sleep(600);
-            // Region A end 20
         }
+        // Region A end 20
+
         Thread.sleep(100);
     }
 
@@ -50,11 +52,13 @@ public class Sleep10 {
         System.out.println("method2");
         boolean b = B;
         Thread.sleep(300);
-        if(b) {
-            // Region B start 19
+
+        // Region B start
+        if(b) { // 16
             Thread.sleep(600);
-            // Region B end 20
         }
+        // Region B end
+
         Thread.sleep(200);
     }
 

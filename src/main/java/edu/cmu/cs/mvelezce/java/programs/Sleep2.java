@@ -16,12 +16,14 @@ public class Sleep2 {
         System.out.println("main");
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
+
+        // Region A start
         if(a) { // 20
-            // Region A start
             Thread.sleep(600);
             Sleep2.method1(a);
-            // Region A end
         }
+        // Region A end
+
         Thread.sleep(100);
         // Region program end
     }
@@ -30,11 +32,13 @@ public class Sleep2 {
         System.out.println("method1");
         boolean a = A;
         Thread.sleep(200);
+
+        // Region A start
         if(a) { // 16
-            // Region A start
             Thread.sleep(600);
-            // Region A end
         }
+        // Region A end
+
         Thread.sleep(100);
     }
 

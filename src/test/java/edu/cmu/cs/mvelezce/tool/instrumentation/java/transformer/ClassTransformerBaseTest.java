@@ -17,8 +17,6 @@ import java.util.Set;
  */
 public class ClassTransformerBaseTest {
 
-    protected static final String CLASS_CONTAINER = "target/classes/";
-
     /**
      * Helpful to find the indexes for regions when testing
      * @throws Exception
@@ -36,7 +34,7 @@ public class ClassTransformerBaseTest {
 
             }
         };
-        ClassNode classNode = base.readClass(Sleep3.FILENAME);
+        ClassNode classNode = base.readClass(Sleep10.FILENAME);
 
         List<MethodNode> methods = classNode.methods;
 

@@ -9,8 +9,6 @@ public class Sleep8 {
     public static final String PACKAGE = Sleep8.class.getPackage().getName();
     public static final String CLASS = Sleep8.class.getSimpleName();
     public static final String MAIN_METHOD = "main";
-    public static final String METHOD_1 = "method1";
-    public static final String METHOD_2 = "method2";
 
     public static void main(String[] args) throws InterruptedException {
         // Region program start
@@ -18,20 +16,25 @@ public class Sleep8 {
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
 
+        // Region A start
         int repeat;
-        if(a) {
+        if(a) { // 20
             repeat = 5;
         }
         else {
             repeat = 10;
         }
+        // Region A end
 
         int i = 0;
 
-        while(i < repeat) {
+        // Region A start
+        while(i < repeat) { // 42
             Thread.sleep(100);
             i++;
         }
+        // Region A end
+
         // Region program end
     }
 

@@ -275,14 +275,26 @@ public class MethodGraph {
 //        }
     }
 
-    public String toDotString() {
-        StringBuilder dotString = new StringBuilder("digraph MethodGraph {\n");
+    public String toDotString(String methodName) {
+        StringBuilder dotString = new StringBuilder("digraph " + methodName + " {\n");
 
         for(MethodBlock methodBlock : this.blocks.values()) {
             for(MethodBlock successor : methodBlock.getSuccessors()) {
-                dotString.append(methodBlock.getID());
+                if(methodBlock.getLabel().info == null) {
+                    dotString.append(methodBlock.getLabel());
+                }
+                else {
+                    dotString.append(methodBlock.getLabel().info);
+                }
+
                 dotString.append(" -> ");
-                dotString.append(successor.getID());
+
+                if(successor.getLabel().info == null) {
+                    dotString.append(successor.getLabel());
+                }
+                else {
+                    dotString.append(successor.getLabel().info);
+                }
                 dotString.append(";\n");
             }
         }

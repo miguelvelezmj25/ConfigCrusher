@@ -35,7 +35,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(c, d);
         methodGraph.addEdge(d, e);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(d, methodGraph.getWhereBranchesConverge(a));
@@ -73,7 +73,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(d, e);
         methodGraph.addEdge(e, g);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(e, methodGraph.getWhereBranchesConverge(f));
@@ -112,7 +112,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(c, a);
         methodGraph.addEdge(e, g);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(e, methodGraph.getWhereBranchesConverge(f));
@@ -148,7 +148,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(d, c);
         methodGraph.addEdge(c, b);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(b, methodGraph.getWhereBranchesConverge(f));
@@ -194,7 +194,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(h, d);
         methodGraph.addEdge(a, h);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(d, methodGraph.getWhereBranchesConverge(i));
@@ -227,7 +227,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(d, c);
         methodGraph.addEdge(c, e);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // TODO this might be the case where we need to
         // Assert
@@ -266,7 +266,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(c, e);
         methodGraph.addEdge(e, f);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(f, methodGraph.getWhereBranchesConverge(a));
@@ -303,7 +303,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(e, c);
         methodGraph.addEdge(c, e);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(f, methodGraph.getWhereBranchesConverge(a));
@@ -338,7 +338,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(c, d);
         methodGraph.addEdge(d, b);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(e, methodGraph.getWhereBranchesConverge(b));
@@ -375,7 +375,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(d, e);
         methodGraph.addEdge(e, f);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(f, methodGraph.getWhereBranchesConverge(a));
@@ -417,7 +417,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(f, g);
         methodGraph.addEdge(g, h);
 
-        System.out.println(methodGraph.toDotString());
+        System.out.println(methodGraph.toDotString("test"));
 
         // Assert
         Assert.assertEquals(c, methodGraph.getWhereBranchesConverge(a));

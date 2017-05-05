@@ -85,11 +85,26 @@ public class Regions {
         return null;
     }
 
+    public static void enter(String regionID) {
+        Region region = Regions.getRegion(regionID);
+        region.enter();
+    }
+
+    // TODO hacky way to not call the exit method of a region if it does not exit. This can be fixed if we can instrument
+    // better and do not exit a region that has not been started
+    public static void exit(String regionID) {
+        for(Region region : Regions.regions) {
+            if(region.getRegionID().equals(regionID)) {
+                region.exit();
+            }
+        }
+    }
+
     public static void addExecutingRegion(Region region) {
-        System.out.println("enter " + region.getRegionID());
         if(region == null) {
             throw new IllegalArgumentException("The region cannot be null");
         }
+        System.out.println("enter " + region.getRegionID());
 
         Regions.executedRegionsTrace.add(region);
         Regions.executingRegions.push(region);

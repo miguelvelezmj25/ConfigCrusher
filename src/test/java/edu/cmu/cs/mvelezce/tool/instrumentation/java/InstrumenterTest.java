@@ -255,7 +255,7 @@ public class InstrumenterTest {
         region = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.METHOD_1, 16);
         regions.add(region);
 
-        region = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.METHOD_2, 28);
+        region = new JavaRegion(Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.METHOD_2, 16);
         regions.add(region);
 
         // Program files

@@ -36,13 +36,13 @@ public class SleepMain {
         if(mainClass.toLowerCase().equals(Sleep1.FILENAME.toLowerCase())) {
             Region program = new Region();
             Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
+//            Regions.addExecutingRegion(program);
 
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep1.main(sleepArgs);
-            program.endTime();
+            Regions.exit(program.getRegionID());
 
-            Regions.removeExecutingRegion(program);
+//            Regions.removeExecutingRegion(program);
         }
         else if(mainClass.toLowerCase().equals(Sleep2.FILENAME.toLowerCase())) {
             Region program = new Region();

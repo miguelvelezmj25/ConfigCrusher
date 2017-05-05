@@ -55,12 +55,12 @@ public class PerformanceEntry {
                 innerRegionExecutionTime.push((long) 0);
             }
             else {
-                if(executingRegion.getStartTime() > executingRegion.getEndTime()) {
+                if(executingRegions.peek().getStartTime() > executingRegion.getEndTime()) {
                     throw new RuntimeException("A region has a negative execution time. This might be caused by incorrect instrumentation");
                 }
 
-                executingRegions.pop();
-                long regionExecutionTime = executingRegion.getEndTime() - executingRegion.getStartTime();
+                Region startInfoRegion = executingRegions.pop();
+                long regionExecutionTime = executingRegion.getEndTime() - startInfoRegion.getStartTime();
 
                 if(!previousRegionEntry.getRegionID().equals(executingRegion.getRegionID())) {
                     regionExecutionTime -= innerRegionExecutionTime.peek();

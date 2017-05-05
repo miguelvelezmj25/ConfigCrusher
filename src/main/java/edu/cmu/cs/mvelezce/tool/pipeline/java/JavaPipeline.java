@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.*;
@@ -23,7 +24,7 @@ public class JavaPipeline {
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
     // TODO how do we pass the main class and all files of a program?
-    public static PerformanceModel buildPerformanceModel(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException {
+    public static PerformanceModel buildPerformanceModel(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException, ParseException {
         // Reset
         // TODO we need to execute this once we are not passing the regions in the unit tests
 //        Regions.reset();

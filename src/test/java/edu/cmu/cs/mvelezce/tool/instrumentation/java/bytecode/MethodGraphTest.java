@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 import jdk.internal.org.objectweb.asm.Label;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -380,6 +379,48 @@ public class MethodGraphTest {
 
         // Assert
         Assert.assertEquals(f, methodGraph.getWhereBranchesConverge(a));
+    }
+
+    @Test
+    public void testGetWhereBranchesConverge11() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock g = new MethodBlock("G", new Label());
+        MethodBlock h = new MethodBlock("H", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(g);
+        methodGraph.addMethodBlock(h);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(d, c);
+        methodGraph.addEdge(c, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(e, h);
+        methodGraph.addEdge(f, g);
+        methodGraph.addEdge(g, h);
+
+        System.out.println(methodGraph.toDotString());
+
+        // Assert
+        Assert.assertEquals(c, methodGraph.getWhereBranchesConverge(a));
     }
 
     @Test

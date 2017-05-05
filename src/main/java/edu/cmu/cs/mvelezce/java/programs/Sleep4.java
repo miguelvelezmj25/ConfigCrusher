@@ -15,15 +15,15 @@ public class Sleep4 {
         System.out.println("main");
         boolean a = Boolean.valueOf(args[0]);
         Thread.sleep(200);
-        if(a) {
-            // Region A start 23
+        if(a) { // 20
+            // Region A start
             Thread.sleep(600);
-            // TODO Region A end 24 but there is a jump statement at 25
+            // Region A end
         }
         else {
-            // Region !A start 29
+            // Region !A start
             Thread.sleep(700);
-            // Region !A end 30
+            // Region !A end
         }
         // Region program end
     }

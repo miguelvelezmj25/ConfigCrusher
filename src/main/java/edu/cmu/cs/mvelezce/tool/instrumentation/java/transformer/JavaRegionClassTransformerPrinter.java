@@ -25,7 +25,7 @@ public class JavaRegionClassTransformerPrinter extends JavaRegionClassTransforme
     }
 
     @Override
-    public InsnList addInstructionsBeforeRegion(JavaRegion javaRegion) {
+    public InsnList addInstructionsStartRegion(JavaRegion javaRegion) {
         InsnList instructionsBeforeRegion = new InsnList();
         instructionsBeforeRegion.add(new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
         instructionsBeforeRegion.add(new LdcInsnNode(this.messageToPrint + " at start of region"));
@@ -35,7 +35,7 @@ public class JavaRegionClassTransformerPrinter extends JavaRegionClassTransforme
     }
 
     @Override
-    public InsnList addInstructionsAfterRegion(JavaRegion javaRegion) {
+    public InsnList addInstructionsEndRegion(JavaRegion javaRegion) {
         InsnList instructionsAfterRegion = new InsnList();
         instructionsAfterRegion.add(new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
         instructionsAfterRegion.add(new LdcInsnNode(messageToPrint + " at end of region"));

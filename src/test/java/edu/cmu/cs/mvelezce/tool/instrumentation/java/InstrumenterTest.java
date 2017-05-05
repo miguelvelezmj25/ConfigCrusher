@@ -1,7 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.java.programs.Sleep2;
 import edu.cmu.cs.mvelezce.java.programs.Sleep3;
+import edu.cmu.cs.mvelezce.java.programs.Sleep4;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaRegion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -48,6 +50,31 @@ public class InstrumenterTest {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.MAIN_METHOD, 20);
+        regions.add(region);
+
+        region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 16);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep2.FILENAME);
+
+        Instrumenter.instrument(Sleep2.CLASS, Sleep2.FILENAME, args, programFiles, regions);
+
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep2.CLASS, programFiles));
+    }
+
+    @Test
+    public void testInstrumentPipeline3() throws Exception {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
         JavaRegion region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.MAIN_METHOD, 28);
         regions.add(region);
 
@@ -67,6 +94,28 @@ public class InstrumenterTest {
         Instrumenter.instrument(Sleep3.CLASS, Sleep3.FILENAME, args, programFiles, regions);
 
         Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep3.CLASS, programFiles));
+    }
+
+    @Test
+    public void testInstrumentPipeline4() throws Exception {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 20);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep4.FILENAME);
+
+        Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, args, programFiles, regions);
+
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
     }
 
 }

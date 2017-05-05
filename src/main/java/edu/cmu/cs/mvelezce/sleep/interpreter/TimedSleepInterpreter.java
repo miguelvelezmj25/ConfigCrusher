@@ -6,8 +6,8 @@ import edu.cmu.cs.mvelezce.sleep.ast.value.IntValue;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedProgram;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
 import edu.cmu.cs.mvelezce.sleep.visitor.TimedVisitor;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 
 /**
  * Created by mvelezce on 4/13/17.

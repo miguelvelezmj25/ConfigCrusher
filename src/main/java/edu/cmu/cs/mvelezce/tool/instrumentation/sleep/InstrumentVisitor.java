@@ -9,9 +9,9 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.sleep.interpreter.visitor.ReplacerVisitor;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedProgram;
 import edu.cmu.cs.mvelezce.sleep.statements.TimedStatement;
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
-import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.region.SleepRegion;
 
 /**
  * Created by miguelvelez on 4/25/17.

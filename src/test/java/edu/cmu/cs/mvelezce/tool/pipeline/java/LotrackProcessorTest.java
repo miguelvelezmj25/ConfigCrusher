@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import org.junit.Assert;
 import org.junit.Test;
 

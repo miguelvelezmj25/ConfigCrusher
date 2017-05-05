@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
-import edu.cmu.cs.mvelezce.tool.analysis.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

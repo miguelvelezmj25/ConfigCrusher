@@ -62,30 +62,6 @@ public class JavaRegion extends Region {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        JavaRegion that = (JavaRegion) o;
-
-        if (startBytecodeIndex != that.startBytecodeIndex) return false;
-        if (endBytecodeIndex != that.endBytecodeIndex) return false;
-        if (!regionPackage.equals(that.regionPackage)) return false;
-        if (!regionClass.equals(that.regionClass)) return false;
-        return regionMethod.equals(that.regionMethod);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = regionPackage.hashCode();
-        result = 31 * result + regionClass.hashCode();
-        result = 31 * result + regionMethod.hashCode();
-        result = 31 * result + startBytecodeIndex;
-        result = 31 * result + endBytecodeIndex;
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "JavaRegion{" +
                 "regionPackage='" + this.regionPackage + '\'' +

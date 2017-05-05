@@ -25,6 +25,9 @@ public class Sleep2 {
         // Region A end
 
         Thread.sleep(100);
+        Sleep2.method1(a);
+        Thread.sleep(150);
+
         // Region program end
     }
 

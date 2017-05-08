@@ -40,11 +40,6 @@ public class SleepPipelineTest {
         }
     }
 
-    @Before
-    public void before() {
-        Regions.reset();
-    }
-
     @Test
     public void testGetConfigurationsInRelevantRegions1() {
         Map<BasicBlock, Set<TaintAnalysis.PossibleTaint>> instructionsToTainted = new HashMap<>();

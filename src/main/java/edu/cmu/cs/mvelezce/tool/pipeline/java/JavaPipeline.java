@@ -5,7 +5,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executer;
+import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
@@ -40,7 +40,7 @@ public class JavaPipeline {
 
         // Instrumentation (Language dependent)
         Instrumenter.instrument(programName, mainClass, programFiles, relevantRegionsToOptions.keySet()); // TODO
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(programName, mainClass, null, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, mainClass, null, configurationsToExecute);
 //        System.out.println("Executed configurations: " + configurationsToExecute.size());
 
         // Performance Model (Language independent)

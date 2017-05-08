@@ -36,11 +36,12 @@ public class InstrumentVisitor extends ReplacerVisitor {
 
     @Override
     public Statement visitProgram(Program program) {
+        // TODO make this work like instrumenting a java program
         Statement visitedProgram = super.visitProgram(program);
 
         SleepRegion region = new SleepRegion(program.getBlockStatement());
         TimedProgram timedProgram = new TimedProgram(region.getRegionID(), visitedProgram);
-        Regions.addProgram(region);
+//        Regions.addProgram(region);
 
         return timedProgram;
     }

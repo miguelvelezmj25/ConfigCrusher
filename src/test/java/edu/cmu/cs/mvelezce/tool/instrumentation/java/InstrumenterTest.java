@@ -115,52 +115,6 @@ public class InstrumenterTest {
         Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
     }
 
-//    // TODO corner case
-//    @Test
-//    public void testInstrumentPipeline5() throws Exception {
-//        // Program arguments
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        // Java Region
-//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-//        Set<JavaRegion> regions = new HashSet<>();
-//        JavaRegion region = new JavaRegion(Sleep5.PACKAGE, Sleep5.CLASS, Sleep5.MAIN_METHOD, 20);
-//
-//
-//        // Program files
-//        List<String> programFiles = new ArrayList<>();
-//        programFiles.add(Sleep5.FILENAME);
-//
-//        Instrumenter.instrument(Sleep5.CLASS, Sleep5.FILENAME, args, programFiles, regions);
-//
-//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep5.CLASS, programFiles));
-//    }
-//
-//    // TODO corner case
-//    @Test
-//    public void testInstrumentPipeline6() throws Exception {
-//        // Program arguments
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        // Java Region
-//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-//        Set<JavaRegion> regions = new HashSet<>();
-//        JavaRegion region = new JavaRegion(Sleep6.PACKAGE, Sleep6.CLASS, Sleep6.MAIN_METHOD, 20);
-//        regions.add(region);
-//
-//        // Program files
-//        List<String> programFiles = new ArrayList<>();
-//        programFiles.add(Sleep6.FILENAME);
-//
-//        Instrumenter.instrument(Sleep6.CLASS, Sleep6.FILENAME, args, programFiles, regions);
-//
-//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep6.CLASS, programFiles));
-//    }
-
     @Test
     public void testInstrumentPipeline7() throws Exception {
         // Program arguments
@@ -266,49 +220,4 @@ public class InstrumenterTest {
 
         Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep10.CLASS, programFiles));
     }
-//
-//    @Test
-//    public void testInstrumentPipeline4() throws Exception {
-//        // Program arguments
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        // Java Region
-//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-//        Set<JavaRegion> regions = new HashSet<>();
-//        JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 20);
-//        regions.add(region);
-//
-//        // Program files
-//        List<String> programFiles = new ArrayList<>();
-//        programFiles.add(Sleep4.FILENAME);
-//
-//        Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, args, programFiles, regions);
-//
-//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
-//    }
-//
-//    @Test
-//    public void testInstrumentPipeline4() throws Exception {
-//        // Program arguments
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        // Java Region
-//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-//        Set<JavaRegion> regions = new HashSet<>();
-//        JavaRegion region = new JavaRegion(Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 20);
-//        regions.add(region);
-//
-//        // Program files
-//        List<String> programFiles = new ArrayList<>();
-//        programFiles.add(Sleep4.FILENAME);
-//
-//        Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, args, programFiles, regions);
-//
-//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
-//    }
-
 }

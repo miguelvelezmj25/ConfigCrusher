@@ -23,8 +23,8 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class Executer {
-    public static final String DIRECTORY = Options.DIRECTORY + "/executer/java/programs";
+public class Executor {
+    public static final String DIRECTORY = Options.DIRECTORY + "/executor/java/programs";
 
     // JSON strings
     public static final String EXECUTIONS = "executions";
@@ -37,31 +37,27 @@ public class Executer {
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
         Options.getCommandLine(args);
 
-        String outputFile = Executer.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
 
         if(file.exists()) {
             try {
-                return Executer.readFromFile(file);
+                return Executor.readFromFile(file);
             }
             catch (ParseException pe) {
                 throw new RuntimeException("Could not parse the cached results");
             }
         }
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(programName, mainClass, directory, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, mainClass, directory, configurationsToExecute);
 
         return measuredPerformance;
     }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
-        //        JavaRegion program = new JavaRegion(mainClass, mainClass);
-//        Regions.addProgram(program);
-
         for(Set<String> configuration : configurationsToExecute) {
-//            Regions.resetRegions();
             // TODO factory pattern or switch statement to create the right adapter
             Adapter adapter = new SleepAdapter(programName, mainClass, directory);
             adapter.execute(configuration);
@@ -69,21 +65,17 @@ public class Executer {
             if(!Regions.getExecutingRegions().isEmpty()) {
                 throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");
             }
-
-//             TODO parse output from file
-//            configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
-            // TODO how to read it an build the set of performance entries before returning
         }
 
-        String outputFile = Executer.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
-        return Executer.readFromFile(file);
+        return Executor.readFromFile(file);
     }
 
     public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
         // TODO why not just call the writeToFile method?
-        Executer.writeToFile(programName, configuration, executedRegions);
+        Executor.writeToFile(programName, configuration, executedRegions);
     }
 
     private static void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
@@ -95,38 +87,38 @@ public class Executer {
             values.add(value);
         }
 
-        measuredExecution.put(Executer.CONFIGURATION, values);
+        measuredExecution.put(Executor.CONFIGURATION, values);
 
         JSONArray regions = new JSONArray();
 
         for(Region executedRegion : executedRegions) {
             JSONObject region = new JSONObject();
-            region.put(Executer.ID, executedRegion.getRegionID());
-            region.put(Executer.START_TIME, executedRegion.getStartTime());
-            region.put(Executer.END_TIME, executedRegion.getEndTime());
+            region.put(Executor.ID, executedRegion.getRegionID());
+            region.put(Executor.START_TIME, executedRegion.getStartTime());
+            region.put(Executor.END_TIME, executedRegion.getEndTime());
 
             regions.add(region);
         }
 
-        measuredExecution.put(Executer.EXECUTION_TRACE, regions);
+        measuredExecution.put(Executor.EXECUTION_TRACE, regions);
         executions.add(measuredExecution);
 
         // TODO check if file exists and append. Otherwise create
-        String outputFile = Executer.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         if(file.exists()) {
             JSONParser parser = new JSONParser();
             JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
-            JSONArray executionsResult = (JSONArray) cache.get(Executer.EXECUTIONS);
+            JSONArray executionsResult = (JSONArray) cache.get(Executor.EXECUTIONS);
 
             executions.addAll(executionsResult);
         }
 
         JSONObject result = new JSONObject();
-        result.put(Executer.EXECUTIONS, executions);
+        result.put(Executor.EXECUTIONS, executions);
 
-        File directory = new File(Executer.DIRECTORY);
+        File directory = new File(Executor.DIRECTORY);
 
         if(!directory.exists()) {
             directory.mkdirs();
@@ -142,27 +134,27 @@ public class Executer {
     private static Set<PerformanceEntry> readFromFile(File file) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
-        JSONArray result = (JSONArray) cache.get(Executer.EXECUTIONS);
+        JSONArray result = (JSONArray) cache.get(Executor.EXECUTIONS);
 
         Set<PerformanceEntry> performanceEntries = new HashSet<>();
 
         for(Object resultEntry : result) {
             JSONObject execution = (JSONObject) resultEntry;
             Set<String> configuration = new HashSet<>();
-            JSONArray configurationResult = (JSONArray) execution.get(Executer.CONFIGURATION);
+            JSONArray configurationResult = (JSONArray) execution.get(Executor.CONFIGURATION);
 
             for(Object configurationResultEntry : configurationResult) {
                 configuration.add((String) configurationResultEntry);
             }
 
-            JSONArray executionTraceResult = (JSONArray) execution.get(Executer.EXECUTION_TRACE);
+            JSONArray executionTraceResult = (JSONArray) execution.get(Executor.EXECUTION_TRACE);
             List<Region> executionTrace = new LinkedList<>();
 
             for(Object executionTraceResultEntry : executionTraceResult) {
                 JSONObject regionResult = (JSONObject) executionTraceResultEntry;
-                String regionID = (String) regionResult.get(Executer.ID);
-                long startTime  = (long) regionResult.get(Executer.START_TIME);
-                long endTime = (long) regionResult.get(Executer.END_TIME);
+                String regionID = (String) regionResult.get(Executor.ID);
+                long startTime  = (long) regionResult.get(Executor.START_TIME);
+                long endTime = (long) regionResult.get(Executor.END_TIME);
 
                 Region region = new Region(regionID, startTime, endTime);
                 executionTrace.add(region);

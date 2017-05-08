@@ -40,8 +40,8 @@ public class SleepPipeline {
     };
 
     public static PerformanceModel buildPerformanceModel(String programFile) {
-        // Reset
-        Regions.reset();
+//        // Reset
+//        Regions.reset();
 
         Lexer lexer = new Lexer(programFile);
         Parser parser = new Parser(lexer);
@@ -82,7 +82,7 @@ public class SleepPipeline {
 
         for(Set<String> configuration : configurationsToExecute) {
             // TODO use TimedVisitor type, but then you have to add evaluate method in interface
-            Regions.resetRegions();
+//            Regions.resetRegions();
             TimedSleepInterpreter interpreter = new TimedSleepInterpreter(timedProgram);
             interpreter.evaluate(configuration);
 

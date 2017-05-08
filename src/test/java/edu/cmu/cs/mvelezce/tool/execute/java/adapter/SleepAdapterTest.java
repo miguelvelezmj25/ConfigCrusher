@@ -26,7 +26,7 @@ public class SleepAdapterTest {
 
         // Add program region
         JavaRegion program = new JavaRegion(Sleep1.FILENAME, Adapter.MAIN);
-        Regions.addProgram(program);
+//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -43,7 +43,7 @@ public class SleepAdapterTest {
 
         // Add program region
         JavaRegion program = new JavaRegion(Sleep2.FILENAME, Adapter.MAIN);
-        Regions.addProgram(program);
+//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -60,7 +60,7 @@ public class SleepAdapterTest {
 
         // Add program region
         JavaRegion program = new JavaRegion(Sleep3.FILENAME, Adapter.MAIN);
-        Regions.addProgram(program);
+//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -77,7 +77,7 @@ public class SleepAdapterTest {
 
         // Add program region
         JavaRegion program = new JavaRegion(Sleep4.FILENAME, Adapter.MAIN);
-        Regions.addProgram(program);
+//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -94,7 +94,7 @@ public class SleepAdapterTest {
 
         // Add program region
         JavaRegion program = new JavaRegion(Sleep7.FILENAME, Adapter.MAIN);
-        Regions.addProgram(program);
+//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -111,7 +111,7 @@ public class SleepAdapterTest {
 
         // Add program region
         JavaRegion program = new JavaRegion(Sleep8.FILENAME, Adapter.MAIN);
-        Regions.addProgram(program);
+//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -128,7 +128,7 @@ public class SleepAdapterTest {
 
         // Add program region
         JavaRegion program = new JavaRegion(Sleep9.FILENAME, Adapter.MAIN);
-        Regions.addProgram(program);
+//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -145,7 +145,7 @@ public class SleepAdapterTest {
 
         // Add program region
         JavaRegion program = new JavaRegion(Sleep10.FILENAME, Adapter.MAIN);
-        Regions.addProgram(program);
+//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);

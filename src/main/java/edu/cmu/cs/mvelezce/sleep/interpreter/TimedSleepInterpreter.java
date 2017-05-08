@@ -43,15 +43,16 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
 
     @Override
     public Void visitTimedProgram(TimedProgram timedProgram) {
-        // TODO why not make it behave like the timed statement?
-        Region program = Regions.getProgram();
-        Regions.addExecutingRegion(program);
-        program.startTime(this.totalExecutionTime);
-
-        timedProgram.getStatements().accept(this);
-
-        Regions.getProgram().endTime(this.totalExecutionTime);
-        Regions.removeExecutingRegion(program);
+        // TODO make this work like a java program that is executed
+//        // TODO why not make it behave like the timed statement?
+//        Region program = Regions.getProgram();
+//        Regions.addExecutingRegion(program);
+//        program.startTime(this.totalExecutionTime);
+//
+//        timedProgram.getStatements().accept(this);
+//
+//        Regions.getProgram().endTime(this.totalExecutionTime);
+//        Regions.removeExecutingRegion(program);
 
         return null;
     }

@@ -33,7 +33,18 @@ public class PerformanceModelTest {
 
         blocks.add(block);
 
-        PerformanceModel pm = new PerformanceModel(6, blocks);
+        block = new HashMap<>();
+        configuration = new HashSet<>();
+        block.put(configuration, 6.0);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        block.put(configuration, 6.0);
+
+        blocks.add(block);
+
+        PerformanceModel pm = new PerformanceModel(blocks);
 
         long performance = 6;
         configuration = new HashSet<>();
@@ -88,7 +99,26 @@ public class PerformanceModelTest {
 
         blocks.add(block);
 
-        PerformanceModel pm = new PerformanceModel(6, blocks);
+        block = new HashMap<>();
+        configuration = new HashSet<>();
+        block.put(configuration, 6.0);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        block.put(configuration, 6.0);
+
+        configuration = new HashSet<>();
+        configuration.add("B");
+        block.put(configuration, 6.0);
+
+        configuration = new HashSet<>();
+        configuration.add("A");
+        configuration.add("B");
+        block.put(configuration, 6.0);
+
+        blocks.add(block);
+
+        PerformanceModel pm = new PerformanceModel(blocks);
 
         long performance = 6;
         configuration = new HashSet<>();
@@ -117,8 +147,8 @@ public class PerformanceModelTest {
         Set<String> longestConfiguration = new HashSet<>();
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
-        configurationsToPerformace.put(longestConfiguration, 0.0);
+        Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
+        configurationsToPerformance.put(longestConfiguration, 0.0);
 
         // Memoization storage
         Map<Set<String>, Double> memoizationStore = new HashMap<>();
@@ -127,7 +157,7 @@ public class PerformanceModelTest {
         double influence = 0.0;
 
         // Assert
-        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformace, memoizationStore), 0);
+        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformance, memoizationStore), 0);
     }
 
     @Test
@@ -137,16 +167,16 @@ public class PerformanceModelTest {
         longestConfiguration.add("A");
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
+        Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();
-        configurationsToPerformace.put(configuration, 0.0);
+        configurationsToPerformance.put(configuration, 0.0);
 
         // {A} configuration
         configuration = new HashSet<>();
         configuration.add("A");
-        configurationsToPerformace.put(configuration, 5.0);
+        configurationsToPerformance.put(configuration, 5.0);
 
         // Memoization storage
         Map<Set<String>, Double> memoizationStore = new HashMap<>();
@@ -155,7 +185,7 @@ public class PerformanceModelTest {
         double influence = 5;
 
         // Assert
-        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformace, memoizationStore), 0);
+        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformance, memoizationStore), 0);
     }
 
     @Test
@@ -166,27 +196,27 @@ public class PerformanceModelTest {
         longestConfiguration.add("B");
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
+        Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();
-        configurationsToPerformace.put(configuration, 0.0);
+        configurationsToPerformance.put(configuration, 0.0);
 
         // {A} configuration
         configuration = new HashSet<>();
         configuration.add("A");
-        configurationsToPerformace.put(configuration, 5.0);
+        configurationsToPerformance.put(configuration, 5.0);
 
         // {B} configuration
         configuration = new HashSet<>();
         configuration.add("B");
-        configurationsToPerformace.put(configuration, 5.0);
+        configurationsToPerformance.put(configuration, 5.0);
 
         // {A, B} configuration
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        configurationsToPerformace.put(configuration, 5.0);
+        configurationsToPerformance.put(configuration, 5.0);
 
         // Memoization storage
         Map<Set<String>, Double> memoizationStore = new HashMap<>();
@@ -195,7 +225,7 @@ public class PerformanceModelTest {
         double influence = -5;
 
         // Assert
-        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformace, memoizationStore), 0);
+        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformance, memoizationStore), 0);
     }
 
     @Test
@@ -206,27 +236,27 @@ public class PerformanceModelTest {
         longestConfiguration.add("B");
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
+        Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();
-        configurationsToPerformace.put(configuration, 0.0);
+        configurationsToPerformance.put(configuration, 0.0);
 
         // {A} configuration
         configuration = new HashSet<>();
         configuration.add("A");
-        configurationsToPerformace.put(configuration, 0.0);
+        configurationsToPerformance.put(configuration, 0.0);
 
         // {B} configuration
         configuration = new HashSet<>();
         configuration.add("B");
-        configurationsToPerformace.put(configuration, 0.0);
+        configurationsToPerformance.put(configuration, 0.0);
 
         // {A, B} configuration
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        configurationsToPerformace.put(configuration, 5.0);
+        configurationsToPerformance.put(configuration, 5.0);
 
         // Memoization storage
         Map<Set<String>, Double> memoizationStore = new HashMap<>();
@@ -235,7 +265,7 @@ public class PerformanceModelTest {
         double influence = 5;
 
         // Assert
-        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformace, memoizationStore), 0);
+        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformance, memoizationStore), 0);
     }
 
     @Test
@@ -245,16 +275,16 @@ public class PerformanceModelTest {
         longestConfiguration.add("A");
 
         // Configurations to performance
-        Map<Set<String>, Double> configurationsToPerformace = new HashMap<>();
+        Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
 
         // {} configuration
         Set<String> configuration = new HashSet<>();
-        configurationsToPerformace.put(configuration, 3.0);
+        configurationsToPerformance.put(configuration, 3.0);
 
         // {A} configuration
         configuration = new HashSet<>();
         configuration.add("A");
-        configurationsToPerformace.put(configuration, 5.0);
+        configurationsToPerformance.put(configuration, 5.0);
 
         // Memoization storage
         Map<Set<String>, Double> memoizationStore = new HashMap<>();
@@ -263,7 +293,7 @@ public class PerformanceModelTest {
         double influence = 2;
 
         // Assert
-        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformace, memoizationStore), 0);
+        Assert.assertEquals(influence, PerformanceModel.calculateConfigurationInfluence(longestConfiguration, configurationsToPerformance, memoizationStore), 0);
     }
 
     @Test

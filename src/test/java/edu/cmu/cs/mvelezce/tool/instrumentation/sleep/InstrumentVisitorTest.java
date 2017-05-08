@@ -10,7 +10,6 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.region.SleepRegion;
 import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepPipeline;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;

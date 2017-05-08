@@ -1,8 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
 import edu.cmu.cs.mvelezce.java.programs.*;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import org.junit.Test;
@@ -24,10 +22,6 @@ public class SleepAdapterTest {
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
 
-        // Add program region
-        JavaRegion program = new JavaRegion(Sleep1.FILENAME, Adapter.MAIN);
-//        Regions.addProgram(program);
-
         // Execute
         adapter.execute(configuration);
     }
@@ -40,10 +34,6 @@ public class SleepAdapterTest {
         // Configuration
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
-
-        // Add program region
-        JavaRegion program = new JavaRegion(Sleep2.FILENAME, Adapter.MAIN);
-//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -58,10 +48,6 @@ public class SleepAdapterTest {
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
 
-        // Add program region
-        JavaRegion program = new JavaRegion(Sleep3.FILENAME, Adapter.MAIN);
-//        Regions.addProgram(program);
-
         // Execute
         adapter.execute(configuration);
     }
@@ -74,10 +60,6 @@ public class SleepAdapterTest {
         // Configuration
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
-
-        // Add program region
-        JavaRegion program = new JavaRegion(Sleep4.FILENAME, Adapter.MAIN);
-//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -92,10 +74,6 @@ public class SleepAdapterTest {
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
 
-        // Add program region
-        JavaRegion program = new JavaRegion(Sleep7.FILENAME, Adapter.MAIN);
-//        Regions.addProgram(program);
-
         // Execute
         adapter.execute(configuration);
     }
@@ -108,10 +86,6 @@ public class SleepAdapterTest {
         // Configuration
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
-
-        // Add program region
-        JavaRegion program = new JavaRegion(Sleep8.FILENAME, Adapter.MAIN);
-//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);
@@ -126,10 +100,6 @@ public class SleepAdapterTest {
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
 
-        // Add program region
-        JavaRegion program = new JavaRegion(Sleep9.FILENAME, Adapter.MAIN);
-//        Regions.addProgram(program);
-
         // Execute
         adapter.execute(configuration);
     }
@@ -142,10 +112,6 @@ public class SleepAdapterTest {
         // Configuration
         Set<String> configuration = new HashSet<>();
         configuration.add("A");
-
-        // Add program region
-        JavaRegion program = new JavaRegion(Sleep10.FILENAME, Adapter.MAIN);
-//        Regions.addProgram(program);
 
         // Execute
         adapter.execute(configuration);

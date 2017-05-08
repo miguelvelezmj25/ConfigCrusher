@@ -19,14 +19,6 @@ public class SleepRegion extends Region {
     }
 
     @Override
-    public Region clone() {
-        SleepRegion sleepRegion = (SleepRegion) super.clone();
-        sleepRegion.statement = this.statement;
-
-        return sleepRegion;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

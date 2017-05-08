@@ -8,23 +8,9 @@ import java.util.*;
 public class Regions {
     public static final String PROGRAM_REGION_ID = "program";
 
-    // TODO why do we need to track the program?
-//    private static Region program = null;
     private static Set<Region> regions = new HashSet<>();
     private static List<Region> executedRegionsTrace = new LinkedList<>();
     private static Stack<Region> executingRegions = new Stack<>();
-
-//    public static void addProgram(Region program) {
-//        if(program == null) {
-//            throw new IllegalArgumentException("Program cannot be null");
-//        }
-//
-//        Regions.program = program;
-//    }
-
-//    public static void removeProgram() {
-//        Regions.program = null;
-//    }
 
     public static void addRegion(Region region) {
         if(region == null) {
@@ -137,27 +123,7 @@ public class Regions {
         Regions.executedRegionsTrace.add(region);
     }
 
-//    public static void resetRegions() {
-//        // TODO do we need to use this?
-//        for(Region region : Regions.regions) {
-//            region.resetState();
-//        }
-//
-////        Regions.program.resetState();
-//    }
-
-//    public static void reset() {
-////        Regions.removeProgram();
-//        Regions.regions = new HashSet<>();
-//        Regions.executingRegions = new Stack<>();
-//        Regions.executedRegionsTrace = new LinkedList<>();
-//    }
-
     public static List<Region> getExecutedRegionsTrace() { return Regions.executedRegionsTrace; }
-
-//    public static Region getProgram() {
-//        return Regions.program;
-//    }
 
     public static Set<Region> getRegions() {
         return Regions.regions;

@@ -18,9 +18,11 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline1() throws Exception {
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -40,9 +42,11 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline2() throws Exception {
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -65,9 +69,11 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline3() throws Exception {
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -96,9 +102,11 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline4() throws Exception {
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -118,9 +126,11 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline7() throws Exception {
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -143,9 +153,11 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline8() throws Exception {
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -168,9 +180,11 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline9() throws Exception {
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -193,9 +207,11 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline10() throws Exception {
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest

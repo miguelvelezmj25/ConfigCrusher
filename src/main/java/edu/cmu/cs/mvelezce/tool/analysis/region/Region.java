@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * Created by miguelvelez on 4/7/17.
  */
-public class Region implements Cloneable {
+public class Region {
 
     private String regionID;
     private long startTime;
@@ -41,25 +41,7 @@ public class Region implements Cloneable {
         return ((long) time) * 1000000000;
     }
 
-    @Override
-    public Region clone()  {
-        Region region;
-
-        try {
-            region = (Region) super.clone();
-            region.startTime = this.startTime;
-            region.endTime = this.endTime;
-        }
-        catch (CloneNotSupportedException cnse) {
-            throw new RuntimeException("The region could not be cloned");
-        }
-
-        return region;
-    }
-
     private void enterRegion() {
-//        Region previousExecutingRegion = Regions.getExecutingRegion();
-//        Regions.addPossibleInnerRegion(previousExecutingRegion, this);
         Regions.addExecutingRegion(this);
     }
 

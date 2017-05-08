@@ -5,10 +5,9 @@ package edu.cmu.cs.mvelezce.tool.analysis.region;
  */
 /*
 JAVA regions are:
-control flow decision
+control flow decisions
  */
 public class JavaRegion extends Region {
-    // Used for location
     private String regionPackage;
     private String regionClass;
     private String regionMethod;
@@ -45,18 +44,6 @@ public class JavaRegion extends Region {
 
     public JavaRegion() {
         this("", "");
-    }
-
-    @Override
-    public Region clone() {
-        JavaRegion javaRegion = (JavaRegion) super.clone();
-        javaRegion.regionPackage = this.regionPackage;
-        javaRegion.regionClass = this.regionClass;
-        javaRegion.regionMethod = this.regionMethod;
-        javaRegion.startBytecodeIndex = this.startBytecodeIndex;
-        javaRegion.endBytecodeIndex = this.endBytecodeIndex;
-
-        return javaRegion;
     }
 
     @Override

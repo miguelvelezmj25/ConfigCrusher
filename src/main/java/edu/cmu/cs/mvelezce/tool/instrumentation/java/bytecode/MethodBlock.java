@@ -3,7 +3,10 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 5/3/17.

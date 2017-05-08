@@ -21,7 +21,7 @@ public class HelperTest {
 
     @Test
     public void testReadFile() throws IOException {
-        String fileName = "edu/cmu/cs/mvelezce/java/programs/Dummy";
+        String fileName = "Sleep1/edu/cmu/cs/mvelezce/java/programs/Sleep1";
         List<MethodNode> methods = Helper.readFile(fileName);
         Assert.assertFalse(methods.isEmpty());
     }

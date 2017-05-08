@@ -26,10 +26,6 @@ public class JavaPipeline {
 
     // TODO how do we pass the main class and all files of a program?
     public static PerformanceModel buildPerformanceModel(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException, ParseException {
-        // Reset
-        // TODO we need to execute this once we are not passing the regions in the unit tests
-//        Regions.reset();
-
         // ProgramAnalysis (Language dependent)
         // TODO we should get this from Lotrack and not pass it ourselves
         relevantRegionsToOptions = ProgramAnalysis.analyse(programName, mainClass, programFiles, relevantRegionsToOptions);

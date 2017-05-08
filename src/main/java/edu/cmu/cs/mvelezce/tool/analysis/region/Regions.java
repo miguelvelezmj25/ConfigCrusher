@@ -17,7 +17,6 @@ public class Regions {
             throw new IllegalArgumentException("Region cannot be null");
         }
 
-        // TODO there used to be a clone method here
         Regions.regions.add(region);
     }
 

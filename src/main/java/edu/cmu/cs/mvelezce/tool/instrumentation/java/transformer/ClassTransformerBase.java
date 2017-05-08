@@ -14,8 +14,6 @@ import java.io.IOException;
  */
 public abstract class ClassTransformerBase implements ClassTransformer {
 
-    public ClassTransformerBase() { ; }
-
     @Override
     public ClassNode readClass(String fileName) throws IOException {
         ClassReader classReader = new ClassReader(fileName);

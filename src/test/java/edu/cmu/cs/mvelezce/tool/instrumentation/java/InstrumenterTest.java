@@ -18,9 +18,9 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline1() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest

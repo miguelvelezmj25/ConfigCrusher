@@ -8,6 +8,9 @@ import java.util.*;
 // TODO use types?
 // TODO this is only used when the program is executing
 public class Regions {
+    public static final String PROGRAM_REGION_ID = "program";
+
+    // TODO why do we need to track the program?
     private static Region program = null;
     private static Set<Region> regions = new HashSet<>();
     private static List<Region> executedRegionsTrace = new LinkedList<>();

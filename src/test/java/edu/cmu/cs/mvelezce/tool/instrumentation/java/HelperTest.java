@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.Helper;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
 import org.junit.Test;

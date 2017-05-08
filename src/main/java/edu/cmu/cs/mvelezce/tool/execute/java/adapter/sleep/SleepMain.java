@@ -1,17 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
 
-import edu.cmu.cs.mvelezce.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.java.programs.Sleep2;
-import edu.cmu.cs.mvelezce.java.programs.Sleep3;
-import edu.cmu.cs.mvelezce.java.programs.Sleep4;
-import edu.cmu.cs.mvelezce.java.programs.Sleep5;
-import edu.cmu.cs.mvelezce.java.programs.Sleep6;
-import edu.cmu.cs.mvelezce.java.programs.Sleep7;
-import edu.cmu.cs.mvelezce.java.programs.Sleep8;
-import edu.cmu.cs.mvelezce.java.programs.Sleep9;
-import edu.cmu.cs.mvelezce.java.programs.Sleep10;
-import edu.cmu.cs.mvelezce.java.programs.Sleep11;
-import edu.cmu.cs.mvelezce.java.programs.Sleep12;
+import edu.cmu.cs.mvelezce.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executer;

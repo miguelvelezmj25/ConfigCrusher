@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class PerformanceEntryTest {
         List<Region> executedRegions = new LinkedList<>();
 
         // Regions
-        Region region = new Region("program", 14723625672461L, 0);
+        Region region = new Region(Regions.PROGRAM_REGION_ID, 14723625672461L, 0);
         executedRegions.add(region);
 
         region = new Region("1", 14723832354023L, 0);
@@ -67,7 +68,7 @@ public class PerformanceEntryTest {
         region = new Region("4");
         expectedResult.put(region, 602990979L);
 
-        region = new Region("program");
+        region = new Region(Regions.PROGRAM_REGION_ID);
         expectedResult.put(region, 311263107L);
 
         for(Map.Entry<Region, Long> actualResultEntry : performanceEntry.getRegionsToExecutionTime().entrySet()) {

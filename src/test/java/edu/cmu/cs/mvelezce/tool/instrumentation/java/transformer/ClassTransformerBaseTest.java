@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
-import edu.cmu.cs.mvelezce.java.programs.Sleep2;
+import edu.cmu.cs.mvelezce.java.programs.Sleep1;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
@@ -34,7 +34,7 @@ public class ClassTransformerBaseTest {
 
             }
         };
-        ClassNode classNode = base.readClass(Sleep2.FILENAME);
+        ClassNode classNode = base.readClass(Sleep1.FILENAME);
 
         List<MethodNode> methods = classNode.methods;
 
@@ -44,9 +44,9 @@ public class ClassTransformerBaseTest {
 
             for(ListIterator<AbstractInsnNode> it = instructions.iterator(); it.hasNext(); ) {
                 AbstractInsnNode instruction = it.next();
-                if(instruction.getOpcode() >= 0) {
+//                if(instruction.getOpcode() >= 0) {
                     System.out.println("Opcode: " + instruction.getOpcode() + " |Index: " + instructions.indexOf(instruction) + " |Instruction: " + instruction.getClass());
-                }
+//                }
             }
             System.out.println();
         }

@@ -32,7 +32,7 @@ public class Sleep2 {
     }
 
     public static void method1(boolean A) throws InterruptedException {
-        System.out.println("method1");
+        System.out.println("method12");
         boolean a = A;
         Thread.sleep(200);
 

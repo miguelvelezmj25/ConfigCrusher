@@ -24,132 +24,75 @@ public class SleepMain {
 
         if(mainClass.toLowerCase().equals(Sleep1.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-
             Regions.enter(program.getRegionID());
             Sleep1.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep2.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep2.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep3.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep3.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep4.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep4.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep5.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep5.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep6.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep6.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep7.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep7.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep8.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep8.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep9.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep9.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep10.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep10.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep11.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep11.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
         else if(mainClass.toLowerCase().equals(Sleep12.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-//            Regions.addProgram(program);
-            Regions.addExecutingRegion(program);
-
-            program.startTime();
+            Regions.enter(program.getRegionID());
             Sleep12.main(sleepArgs);
-            program.endTime();
-
-            Regions.removeExecutingRegion(program);
+            Regions.exit(program.getRegionID());
         }
 
         Set<String> performanceConfiguration = SleepAdapter.adaptConfigurationToPerformanceMeasurement(sleepArgs);

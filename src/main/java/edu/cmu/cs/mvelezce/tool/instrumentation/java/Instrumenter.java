@@ -10,6 +10,7 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,6 +31,25 @@ public class Instrumenter {
 
         if(directory.exists()) {
             if(Instrumenter.checkAllFilesInstrumented(programName, programFiles)) {
+                File[] files = directory.listFiles();
+
+                for(File file : files) {
+                    // TODO do not hardcode the ending
+                    if(!file.getName().endsWith(".class")) {
+                        continue;
+                    }
+
+                    String filePath = programName + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/") + "/" + file.getName().substring(0, file.getName().length() - ".class".length());
+                    List<MethodNode> methods = Helper.readFile(filePath);
+
+                    System.out.println("INSTRUMENTED CLASSES");
+                    for (MethodNode method : methods) {
+                        MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                        System.out.println(methodGraph.toDotString(method.name));
+                    }
+
+                }
+
                 return;
             }
         }

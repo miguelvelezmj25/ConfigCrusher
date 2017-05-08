@@ -40,13 +40,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         return classNodes;
     }
 
-//    // TODO there might be some programs that do not have a main method and we will have to create custom main classes for them
-//    public static void setMainClass(String mainClassFile) {
-//        // TODO I do not think this should be here
-//        JavaRegion program = new JavaRegion(mainClassFile, Adapter.MAIN);
-//        Regions.addProgram(program);
-//    }
-
     @Override
     public void transform(ClassNode classNode) {
         String classCanonicalName = classNode.name;

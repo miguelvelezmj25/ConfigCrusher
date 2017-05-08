@@ -281,7 +281,7 @@ public class MethodGraph {
         for(MethodBlock methodBlock : this.blocks.values()) {
             for(MethodBlock successor : methodBlock.getSuccessors()) {
                 if(methodBlock.getLabel().info == null) {
-                    dotString.append(methodBlock.getLabel());
+                    dotString.append(methodBlock.getID());
                 }
                 else {
                     dotString.append(methodBlock.getLabel().info);
@@ -290,7 +290,7 @@ public class MethodGraph {
                 dotString.append(" -> ");
 
                 if(successor.getLabel().info == null) {
-                    dotString.append(successor.getLabel());
+                    dotString.append(successor.getID());
                 }
                 else {
                     dotString.append(successor.getLabel().info);

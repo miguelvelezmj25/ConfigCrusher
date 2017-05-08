@@ -41,22 +41,6 @@
         </dependency>
 
         <dependency>
-            <groupId>de.ovgu.featureide</groupId>
-            <artifactId>de.ovgu.featureide.lib.fm</artifactId>
-            <version>3.2.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/de.ovgu.featureide.lib.fm-v3.2.0.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.sat4j</groupId>
-            <artifactId>org.sat4j.core</artifactId>
-            <version>2.3.5</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/org.sat4j.core.jar</systemPath>
-        </dependency>
-
-        <dependency>
             <groupId>edu.cmu.cs.mvelezce</groupId>
             <artifactId>sleep</artifactId>
             <version>0.1.1-SNAPSHOT</version>

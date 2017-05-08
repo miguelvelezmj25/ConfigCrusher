@@ -1,17 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
-import edu.cmu.cs.mvelezce.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.java.programs.Sleep2;
-import edu.cmu.cs.mvelezce.java.programs.Sleep3;
-import edu.cmu.cs.mvelezce.java.programs.Sleep4;
-import edu.cmu.cs.mvelezce.java.programs.Sleep7;
-import edu.cmu.cs.mvelezce.java.programs.Sleep8;
-import edu.cmu.cs.mvelezce.java.programs.Sleep9;
-import edu.cmu.cs.mvelezce.java.programs.Sleep10;
+import edu.cmu.cs.mvelezce.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executer;
+import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
@@ -44,7 +37,7 @@ public class PerformanceModelBuilderTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep1.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep1.CLASS, configurationsToExecute);
 
         // Program arguments
         args = new String[2];
@@ -66,7 +59,7 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("ecb89258-9de1-416f-955c-194d09e9b249");
+        Region region = new Region("686ed958-c03c-4a6a-90f3-83575b3d3312");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -76,7 +69,7 @@ public class PerformanceModelBuilderTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep1.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep1.CLASS, configurationsToExecute);
 
         // Performance model
         PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
@@ -99,12 +92,12 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("ed9d27ad-9bbc-4532-9993-da786d3a8479");
+        Region region = new Region("73e49277-d0ba-4411-88da-f2f5857c279c");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("8ad7c2ec-0937-4b02-a774-71a3f118c308");
+        region = new Region("c545f85d-2722-4bfa-9d6a-dcf944dfac05");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -114,7 +107,7 @@ public class PerformanceModelBuilderTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(Sleep2.CLASS, args, Sleep2.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep2.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep2.CLASS, args, Sleep2.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep2.CLASS, configurationsToExecute);
 
         // Performance model
         PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
@@ -137,22 +130,22 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("f3f4660a-6e7c-4f9a-be57-315f058bd17a");
+        Region region = new Region("4cbc76d0-22a9-43f3-a01c-2ce902d3af04");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("B");
-        region = new Region("5d2b13b0-b9ff-4b69-b89d-dda9ed6c81a4");
+        region = new Region("88386ec4-6fec-471a-b676-97acc696830c");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("a8110578-2ed0-457f-838d-b4ab307a965e");
+        region = new Region("a91ca8dd-45b4-41eb-99a6-ee1774239a40");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("B");
-        region = new Region("7fdcdba2-cd2f-433e-82e7-4ddea2b808be");
+        region = new Region("66e75054-9a1c-4ea4-a478-c205406a8a0a");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -162,7 +155,7 @@ public class PerformanceModelBuilderTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(Sleep3.CLASS, args, Sleep3.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep3.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep3.CLASS, args, Sleep3.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep3.CLASS, configurationsToExecute);
 
         // Performance model
         PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
@@ -196,7 +189,7 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("d0a2da4a-2ab2-4bf4-b968-e7fd2e0852e3");
+        Region region = new Region("f9ebeca2-376c-4c6e-b7c1-83aa7c795f51");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -206,7 +199,7 @@ public class PerformanceModelBuilderTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep4.CLASS, configurationsToExecute);
 
         // Performance model
         PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
@@ -229,12 +222,12 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("9e4ba19e-6a13-4749-8b63-a860d4f522d7");
+        Region region = new Region("a8b6f1d1-18be-4c50-81e2-3d56b91e4a68");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("ef83d302-da38-4588-a5c9-7f15bdff48b5");
+        region = new Region("eab6e1e5-edfe-46e6-814e-deed59390795");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -244,7 +237,7 @@ public class PerformanceModelBuilderTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(Sleep7.CLASS, args, Sleep7.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep7.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep7.CLASS, args, Sleep7.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep7.CLASS, configurationsToExecute);
 
         // Performance model
         PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
@@ -267,12 +260,12 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("0c5a6d93-a36b-44fe-8d15-8c5a23ece2d0");
+        Region region = new Region("4567f7fa-84ce-4e38-ab82-57084191a32f");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("1fab409e-3c1d-4f0b-94b5-a1aee97174cb");
+        region = new Region("4edbec5f-0af6-4d7c-88ab-81991c601973");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -282,7 +275,7 @@ public class PerformanceModelBuilderTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(Sleep8.CLASS, args, Sleep8.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep8.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep8.CLASS, args, Sleep8.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep8.CLASS, configurationsToExecute);
 
         // Performance model
         PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
@@ -305,12 +298,12 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("59b21e7c-4334-4b3a-a54a-cda881a44a69");
+        Region region = new Region("37bdb3f1-b973-4580-8db5-5478fdb86099");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("12aff165-3e3f-4407-a062-63711dca41c3");
+        region = new Region("0154d129-081e-4359-925e-cc8d054589f5");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -320,7 +313,7 @@ public class PerformanceModelBuilderTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(Sleep9.CLASS, args, Sleep9.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep9.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep9.CLASS, args, Sleep9.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep9.CLASS, configurationsToExecute);
 
         // Performance model
         PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
@@ -343,24 +336,24 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("f72309ee-4cde-4ced-b7a7-57a7d0295938");
+        Region region = new Region("478d1824-b386-42da-b24b-21cb8c79809b");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
         relevantOptions.add("B");
-        region = new Region("8e260388-de0c-4a6c-a5f9-c81cecd5776a");
+        region = new Region("8694bd89-4a53-48b1-97a1-21128e6d8604");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("e0524ecf-548a-44b0-a619-662c994d0fab");
+        region = new Region("b5997cc5-faf0-49b6-99b3-c2f51227c909");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
         relevantOptions.add("B");
-        region = new Region("0e240af1-2818-437c-8d9c-ffce8ae82fb6");
+        region = new Region("cf3aff4e-0fda-458c-ba6d-77beae6d5c0f");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -370,7 +363,7 @@ public class PerformanceModelBuilderTest {
         Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
-        Set<PerformanceEntry> measuredPerformance = Executer.measureConfigurationPerformance(Sleep10.CLASS, args, Sleep10.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep10.CLASS, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep10.CLASS, args, Sleep10.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep10.CLASS, configurationsToExecute);
 
         // Performance model
         PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);

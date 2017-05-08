@@ -14,14 +14,14 @@ public class HelperTest {
 
     @Test
     public void testReadJar() throws IOException {
-        String jarName = "org.sat4j.core.jar";
+        String jarName = "json-simple-1.1.1.jar";
         List<String> classFiles = Helper.readJar(jarName);
         Assert.assertFalse(classFiles.isEmpty());
     }
 
     @Test
     public void testReadFile() throws IOException {
-        String fileName = "edu/cmu/cs/mvelezce/tool/instrumentation/java/programs/Dummy";
+        String fileName = "edu/cmu/cs/mvelezce/java/programs/Dummy";
         List<MethodNode> methods = Helper.readFile(fileName);
         Assert.assertFalse(methods.isEmpty());
     }

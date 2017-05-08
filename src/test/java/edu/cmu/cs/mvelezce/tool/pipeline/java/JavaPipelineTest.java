@@ -23,11 +23,6 @@ public class JavaPipelineTest {
 
     public static final double TIMING_ERROR = 0.1;
 
-    @Before
-    public void before() {
-        Regions.reset();
-    }
-
     @Test
     public void testInstrumentRelevantRegions1() throws Exception {
         // Java Region

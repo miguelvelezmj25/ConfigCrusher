@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
 import edu.cmu.cs.mvelezce.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executer;
+import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class SleepMain {
 
         if(mainClass.toLowerCase().equals(Sleep1.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
 
             Regions.enter(program.getRegionID());
             Sleep1.main(sleepArgs);
@@ -32,7 +32,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep2.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -43,7 +43,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep3.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -54,7 +54,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep4.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -65,7 +65,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep5.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -76,7 +76,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep6.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -87,7 +87,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep7.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -98,7 +98,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep8.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -109,7 +109,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep9.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -120,7 +120,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep10.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -131,7 +131,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep11.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -142,7 +142,7 @@ public class SleepMain {
         }
         else if(mainClass.toLowerCase().equals(Sleep12.FILENAME.toLowerCase())) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.addProgram(program);
+//            Regions.addProgram(program);
             Regions.addExecutingRegion(program);
 
             program.startTime();
@@ -153,6 +153,6 @@ public class SleepMain {
         }
 
         Set<String> performanceConfiguration = SleepAdapter.adaptConfigurationToPerformanceMeasurement(sleepArgs);
-        Executer.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
+        Executor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
     }
 }

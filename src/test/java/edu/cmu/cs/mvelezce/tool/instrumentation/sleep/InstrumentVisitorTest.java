@@ -20,11 +20,6 @@ import java.util.*;
  */
 public class InstrumentVisitorTest {
 
-    @Before
-    public void before() {
-        Regions.reset();
-    }
-
     @Test
     public void testVisitProgram1() throws Exception {
         // Program

@@ -63,9 +63,9 @@ public class MethodGraphBuilderTest {
         for(MethodNode method : methods) {
             if(method.name.equals("main")) {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
-                Assert.assertEquals(9, methodGraph.getBlockCount());
-                Assert.assertEquals(8, methodGraph.getEdgeCount());
                 System.out.println(methodGraph.toDotString(method.name));
+                Assert.assertEquals(11, methodGraph.getBlockCount());
+                Assert.assertEquals(10, methodGraph.getEdgeCount());
             }
         }
     }

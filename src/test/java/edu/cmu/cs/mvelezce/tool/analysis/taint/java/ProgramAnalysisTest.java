@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
 import edu.cmu.cs.mvelezce.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.java.programs.Sleep2;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,14 +17,11 @@ public class ProgramAnalysisTest {
         // TODO call Lotrack
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        JavaRegion region1 = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 23, 24);
-
-        // Regions to options
         Map<JavaRegion, Set<String>> relevantRegionToOptions = new HashMap<>();
-
-        Set<String> options = new HashSet<>();
-        options.add("A");
-        relevantRegionToOptions.put(region1, options);
+        Set<String> relevantOptions = new HashSet<>();
+        relevantOptions.add("A");
+        JavaRegion region = new JavaRegion("ecb89258-9de1-416f-955c-194d09e9b249", Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 20, -1);
+        relevantRegionToOptions.put(region, relevantOptions);
         // TODO call Lotrack
 
         // Program files
@@ -42,44 +38,27 @@ public class ProgramAnalysisTest {
         args = new String[0];
         Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyse(Sleep1.CLASS, args, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
 
-        Assert.assertEquals(outputSave, outputRead);
-    }
+        for(Map.Entry<JavaRegion, Set<String>> save : outputSave.entrySet()) {
+            boolean oneIsEqual = false;
+            for(Map.Entry<JavaRegion, Set<String>> read : outputRead.entrySet()) {
+                JavaRegion saveRegion = save.getKey();
+                Set<String> saveOptions = save.getValue();
+                JavaRegion readRegion = read.getKey();
+                Set<String> readOptions = read.getValue();
 
-    @Test
-    public void testAnalysePipeline2() throws Exception {
-        // TODO call Lotrack
-        // Java Region
-        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        JavaRegion region1 = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.MAIN_METHOD, 23, 28);
-        JavaRegion region2 = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 19, 20);
+                if(saveRegion.getRegionID().equals(readRegion.getRegionID()) && saveRegion.getStartBytecodeIndex() == readRegion.getStartBytecodeIndex()
+                        && saveRegion.getEndBytecodeIndex() == readRegion.getEndBytecodeIndex()
+                        && saveRegion.getRegionPackage().equals(readRegion.getRegionPackage())
+                        && saveRegion.getRegionClass().equals(readRegion.getRegionClass())
+                        && saveRegion.getRegionMethod().equals(readRegion.getRegionMethod())
+                        && saveOptions.equals(readOptions)) {
+                    oneIsEqual = true;
+                    break;
+                }
+            }
 
-        // Regions to options
-        Map<JavaRegion, Set<String>> relevantRegionToOptions = new HashMap<>();
-
-        Set<String> options = new HashSet<>();
-        options.add("A");
-        relevantRegionToOptions.put(region1, options);
-
-        options = new HashSet<>();
-        options.add("A");
-        relevantRegionToOptions.put(region2, options);
-        // TODO call Lotrack
-
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep2.FILENAME);
-
-        // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Map<JavaRegion, Set<String>> outputSave = ProgramAnalysis.analyse(Sleep2.CLASS, args, Sleep2.FILENAME, programFiles, relevantRegionToOptions);
-
-        args = new String[0];
-        Map<JavaRegion, Set<String>> outputRead = ProgramAnalysis.analyse(Sleep2.CLASS, args, Sleep2.FILENAME, programFiles, relevantRegionToOptions);
-
-        Assert.assertEquals(outputSave, outputRead);
+            Assert.assertTrue(oneIsEqual);
+        }
     }
 
 }

@@ -11,21 +11,30 @@ import java.util.*;
  * Created by mvelezce on 3/9/17.
  */
 public class PerformanceModel {
-    private double baseTime;
+//    private double baseTime;
     private Map<Set<String>, Double> configurationToPerformance;
-    // TODO we can make this a local variable
-    private MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable;
+//    private MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable;
 
-
-    public PerformanceModel(double baseTime, List<Map<Set<String>, Double>> blocks) {
-        this.baseTime = baseTime;
-        this.regionToInfluenceTable = new HashSetValuedHashMap<>();
+    public PerformanceModel(List<Map<Set<String>, Double>> blocks) {
         this.configurationToPerformance = new HashMap<>();
 
-        // TODO this is a hacky way of creating an empty performance model. Either add new constructor or move the methods below to a method call
-        if(blocks.isEmpty()) {
-            return ;
-        }
+        this.calculateConfigurationInfluence(blocks);
+    }
+
+//    public PerformanceModel(double baseTime, List<Map<Set<String>, Double>> blocks) {
+//        this.baseTime = baseTime;
+//        this.configurationToPerformance = new HashMap<>();
+//
+////        // TODO this is a hacky way of creating an empty performance model. Either add new constructor or move the methods below to a method call
+////        if(blocks.isEmpty()) {
+////            return ;
+////        }
+//
+//        this.calculateConfigurationInfluence(blocks);
+//    }
+
+    public void calculateConfigurationInfluence(List<Map<Set<String>, Double>> blocks) {
+        MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable = new HashSetValuedHashMap<>();
 
         for(Map<Set<String>, Double> block : blocks) {
             Set<String> relevantOptions = new HashSet<>();
@@ -34,10 +43,10 @@ public class PerformanceModel {
                 relevantOptions.addAll(configuration);
             }
 
-            this.regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
+            regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
         }
 
-        for(Map.Entry<Set<String>, Map<Set<String>, Double>> optionToPerformanceTable : this.regionToInfluenceTable.entries()) {
+        for(Map.Entry<Set<String>, Map<Set<String>, Double>> optionToPerformanceTable : regionToInfluenceTable.entries()) {
             for(Map.Entry<Set<String>, Double> configurationToPerformance : optionToPerformanceTable.getValue().entrySet()) {
                 double time = configurationToPerformance.getValue();
 
@@ -49,10 +58,10 @@ public class PerformanceModel {
             }
         }
 
-        HashSet<String> emptyConfiguration = new HashSet<>();
-        double emptyConfigurationPerformance = this.baseTime;
-        emptyConfigurationPerformance += this.configurationToPerformance.get(emptyConfiguration);
-        this.configurationToPerformance.put(emptyConfiguration, emptyConfigurationPerformance);
+//        HashSet<String> emptyConfiguration = new HashSet<>();
+//        double emptyConfigurationPerformance = this.baseTime;
+//        emptyConfigurationPerformance += this.configurationToPerformance.get(emptyConfiguration);
+//        this.configurationToPerformance.put(emptyConfiguration, emptyConfigurationPerformance);
     }
 
     public double evaluate(Set<String> configuration) {
@@ -112,13 +121,9 @@ public class PerformanceModel {
         return configurationToInfluence.get(longestConfiguration);
     }
 
-    public double getBaseTime() {
-        return this.baseTime;
-    }
-
-    public void setBaseTime(double baseTime) {
-        this.baseTime = baseTime;
-    }
+//    public double getBaseTime() {
+//        return this.baseTime;
+//    }
 
     public Map<Set<String>, Double> getConfigurationToPerformance() {
         return this.configurationToPerformance;
@@ -174,17 +179,11 @@ public class PerformanceModel {
 
         PerformanceModel that = (PerformanceModel) o;
 
-        if (Double.compare(that.baseTime, baseTime) != 0) return false;
         return configurationToPerformance.equals(that.configurationToPerformance);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(baseTime);
-        result = (int) (temp ^ (temp >>> 32));
-        result = 31 * result + configurationToPerformance.hashCode();
-        return result;
+        return configurationToPerformance.hashCode();
     }
 }

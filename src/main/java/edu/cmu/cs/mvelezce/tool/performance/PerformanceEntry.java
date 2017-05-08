@@ -11,12 +11,10 @@ public class PerformanceEntry {
     private Set<String> configuration;
     private Map<Region, Long> regionsToExecutionTime;
     private Map<Region, Set<Region>> regionToInnerRegions;
-    private Region program;
 
     public PerformanceEntry(Set<String> configuration, List<Region> executedRegions) {
         this.configuration = configuration;
         this.regionsToExecutionTime = new HashMap<>();
-        this.program = null;
         this.regionToInnerRegions = new HashMap<>();
 
         this.calculateRealPerformance(executedRegions);
@@ -34,7 +32,6 @@ public class PerformanceEntry {
 
         for(Region executingRegion : executedRegions) {
             if(executingRegions.isEmpty()) {
-                this.program = executingRegion;
                 executingRegions.add(executingRegion);
                 innerRegionExecutionTime.push((long) 0);
                 this.regionToInnerRegions.put(executingRegion, new HashSet<>());
@@ -102,8 +99,6 @@ public class PerformanceEntry {
 
     public Map<Region, Long> getRegionsToExecutionTime() { return this.regionsToExecutionTime; }
 
-    public Region getProgram() { return this.program; }
-
     public Map<Region, Set<Region>> getRegionToInnerRegions() { return this.regionToInnerRegions; }
 
     @Override
@@ -115,8 +110,7 @@ public class PerformanceEntry {
 
         if (!configuration.equals(that.configuration)) return false;
         if (!regionsToExecutionTime.equals(that.regionsToExecutionTime)) return false;
-        if (!regionToInnerRegions.equals(that.regionToInnerRegions)) return false;
-        return program.equals(that.program);
+        return regionToInnerRegions.equals(that.regionToInnerRegions);
     }
 
     @Override
@@ -124,7 +118,6 @@ public class PerformanceEntry {
         int result = configuration.hashCode();
         result = 31 * result + regionsToExecutionTime.hashCode();
         result = 31 * result + regionToInnerRegions.hashCode();
-        result = 31 * result + program.hashCode();
         return result;
     }
 }

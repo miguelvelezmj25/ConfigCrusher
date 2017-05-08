@@ -22,7 +22,7 @@ public class PerformanceModelBuilder {
 
     // JSON strings
     public static final String MODEL = "model";
-    public static final String BASE_TIME = "baseTime";
+//    public static final String BASE_TIME = "baseTime";
     public static final String CONFIGURATION = "configuration";
     public static final String PERFORMANCE = "performance";
     public static final String CONFIGURATION_TO_PERFORMANCE = "configurationToPerformance";
@@ -54,12 +54,10 @@ public class PerformanceModelBuilder {
     }
 
     public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
-        Map<Region, Set<String>> regionsToOptionsOfInnerRegions = PerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(regionsToOptions, measuredPerformance);
-
-        // Calculate raw performance for each region
+        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = PerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
         Map<Region, Map<Set<String>, Double>> regionsToConfigurationPerformance = new HashMap<>();
 
-        for(Map.Entry<Region, Set<String>> entry : regionsToOptions.entrySet()) {
+        for(Map.Entry<Region, Set<String>> entry : regionsToOptionsIncludingInnerRegions.entrySet()) {
             Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
             Set<String> entryConfiguration = entry.getValue();
 
@@ -68,7 +66,7 @@ public class PerformanceModelBuilder {
                 configurationValueInMeasuredConfiguration.retainAll(entryConfiguration);
 
                 Region region = entry.getKey();
-                long executionTime = Math.max(0 ,performanceEntry.getTimeOfRegionID(region.getRegionID()));
+                long executionTime = Math.max(0, performanceEntry.getTimeOfRegionID(region.getRegionID()));
                 double time = Region.getSecondsExecutionTime(0, executionTime);
 
                 configurationsToPerformance.put(configurationValueInMeasuredConfiguration, time);
@@ -76,29 +74,68 @@ public class PerformanceModelBuilder {
 
             regionsToConfigurationPerformance.put(entry.getKey(), configurationsToPerformance);
         }
-        
-        // Calculate base time
-        PerformanceEntry performanceEntry = measuredPerformance.iterator().next();
-        Set<String> baseConfiguration =  performanceEntry.getConfiguration();
-        // TODO fix this
-        long programTime = performanceEntry.getRegionsToExecutionTime().get(performanceEntry.getProgram());
-        double baseTime = Region.getSecondsExecutionTime(0, programTime);
 
-        for(Map.Entry<Region, Map<Set<String>, Double>> regionToRealPerformance : regionsToConfigurationPerformance.entrySet()) {
-            Set<String> baseConfigurationValueOnRealPerformance = regionsToOptions.get(regionToRealPerformance.getKey());
-            baseConfigurationValueOnRealPerformance.retainAll(baseConfiguration);
-
-            baseTime -= regionToRealPerformance.getValue().get(baseConfigurationValueOnRealPerformance);
-        }
+//        // Calculate base time
+//        PerformanceEntry performanceEntry = measuredPerformance.iterator().next();
+//        Set<String> baseConfiguration =  performanceEntry.getConfiguration();
+//        // TODO have a variable a not hard coded
+//        long programTime = performanceEntry.getTimeOfRegionID("program");
+//        double baseTime = Region.getSecondsExecutionTime(0, programTime);
+//
+//        for(Map.Entry<Region, Map<Set<String>, Double>> regionToConfigurationPerformance : regionsToConfigurationPerformance.entrySet()) {
+//            Set<String> baseConfigurationValueOnRealPerformance = regionsToOptions.get(regionToConfigurationPerformance.getKey());
+//            baseConfigurationValueOnRealPerformance.retainAll(baseConfiguration);
+//
+//            baseTime -= regionToConfigurationPerformance.getValue().get(baseConfigurationValueOnRealPerformance);
+//        }
 
         List<Map<Set<String>, Double>> blockTimeList = new ArrayList<>(regionsToConfigurationPerformance.values());
 
-        return new PerformanceModel(baseTime, blockTimeList);
+        return new PerformanceModel(blockTimeList);
     }
 
-    public static Map<Region, Set<String>> getOptionsInRegionsWithInnerRegions(Map<Region, Set<String>> regionsToOptions, Set<PerformanceEntry> measuredPerformance) {
+    public static Map<Region, Set<String>> getOptionsInRegionsWithInnerRegions(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
         Map<Region, Set<String>> regionsToInvolvedOptions = new HashMap<>();
 
+        for(PerformanceEntry performanceEntry : measuredPerformance) {
+            for(Map.Entry<Region, Set<Region>> regionToInnerRegions : performanceEntry.getRegionToInnerRegions().entrySet()) {
+                Set<String> options = new HashSet<>();
+
+                for(Region innerRegion : regionToInnerRegions.getValue()) {
+                    for(Map.Entry<Region, Set<String>> regionToOption : regionsToOptions.entrySet()) {
+                        if(regionToOption.getKey().getRegionID().equals(innerRegion.getRegionID())) {
+                            options.addAll(regionToOption.getValue());
+                        }
+                    }
+                }
+
+                for(Map.Entry<Region, Set<String>> regionToOption : regionsToOptions.entrySet()) {
+                    if(regionToOption.getKey().getRegionID().equals(regionToInnerRegions.getKey().getRegionID())) {
+                        options.addAll(regionToOption.getValue());
+                        break;
+                    }
+                }
+
+                if(regionsToInvolvedOptions.isEmpty()) {
+                    regionsToInvolvedOptions.put(regionToInnerRegions.getKey(), options);
+                }
+                else {
+                    boolean updated = false;
+
+                    for(Map.Entry<Region, Set<String>> regionToInvolvedOptions : regionsToInvolvedOptions.entrySet()) {
+                        if(regionToInvolvedOptions.getKey().getRegionID().equals(regionToInnerRegions.getKey().getRegionID())) {
+                            regionToInvolvedOptions.getValue().addAll(options);
+                            updated = true;
+                            break;
+                        }
+                    }
+
+                    if(!updated) {
+                        regionsToInvolvedOptions.put(regionToInnerRegions.getKey(), options);
+                    }
+                }
+            }
+        }
 
         return regionsToInvolvedOptions;
     }
@@ -148,7 +185,7 @@ public class PerformanceModelBuilder {
 //                    }
 //                }
 //
-//                // Could have subtracted from something that was not executed
+//                // Could have subtracted from calculateConfigurationInfluence that was not executed
 //                configurationsToRealPerformance.put(configurationsToRealPerformanceEntry.getKey(), Math.max(0.0, time));
 //            }
 //        }
@@ -159,7 +196,7 @@ public class PerformanceModelBuilder {
     private static void writeToFile(String programName, PerformanceModel performanceModel) throws IOException {
         JSONObject model = new JSONObject();
 
-        model.put(PerformanceModelBuilder.BASE_TIME, performanceModel.getBaseTime());
+//        model.put(PerformanceModelBuilder.BASE_TIME, performanceModel.getBaseTime());
 
         JSONArray configurationToPerformance = new JSONArray();
 
@@ -202,7 +239,7 @@ public class PerformanceModelBuilder {
 
         JSONObject model = (JSONObject) result.get(PerformanceModelBuilder.MODEL);
 
-        double baseTime = (double) model.get(PerformanceModelBuilder.BASE_TIME);
+//        double baseTime = (double) model.get(PerformanceModelBuilder.BASE_TIME);
         Map<Set<String>, Double> configurationsToPerformances = new HashMap<>();
 
         JSONArray configurationsToPerformancesResult = (JSONArray) model.get(PerformanceModelBuilder.CONFIGURATION_TO_PERFORMANCE);
@@ -222,7 +259,7 @@ public class PerformanceModelBuilder {
             configurationsToPerformances.put(configuration, performance);
         }
 
-        PerformanceModel performanceModel = new PerformanceModel(baseTime, new ArrayList<>());
+        PerformanceModel performanceModel = new PerformanceModel(/*baseTime,*/ new ArrayList<>());
         performanceModel.setConfigurationToPerformance(configurationsToPerformances);
 
         return performanceModel;

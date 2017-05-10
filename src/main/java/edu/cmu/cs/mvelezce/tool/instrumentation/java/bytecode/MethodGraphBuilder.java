@@ -40,26 +40,25 @@ public class MethodGraphBuilder {
 
         while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
+            int instructionType = instruction.getType();
 
-            if(instruction.getType() == AbstractInsnNode.LABEL) {
+            if(instructionType == AbstractInsnNode.LABEL) {
                 LabelNode labelNode = (LabelNode) instruction;
                 MethodBlock successor = graph.getMethodBlock(labelNode.getLabel());
 
                 if(currentMethodBlock != null && (previousInstruction.getOpcode() < Opcodes.GOTO || previousInstruction.getOpcode() > Opcodes.RETURN)) {
-                    successor.addPredecessor(currentMethodBlock);
-                    currentMethodBlock.addSuccessor(successor);
+                    graph.addEdge(currentMethodBlock, successor);
                 }
 
                 currentMethodBlock = successor;
             }
-            else if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
+            else if(instructionType == AbstractInsnNode.JUMP_INSN) {
                 JumpInsnNode jumpNode = (JumpInsnNode) instruction;
 
                 LabelNode labelNode = jumpNode.label;
 
                 MethodBlock successor = graph.getMethodBlock(labelNode.getLabel());
-                successor.addPredecessor(currentMethodBlock);
-                currentMethodBlock.addSuccessor(successor);
+                graph.addEdge(currentMethodBlock, successor);
             }
 
             previousInstruction = instruction;

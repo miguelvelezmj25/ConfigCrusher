@@ -27,6 +27,65 @@ public class MethodGraph {
         to.addPredecessor(from);
     }
 
+    public Map<MethodBlock, Set<MethodBlock>> getDominators() {
+        Map<MethodBlock, Set<MethodBlock>> blockToDominators = new HashMap<>();
+
+        for(MethodBlock block : this.blocks.values()) {
+            blockToDominators.put(block, new HashSet<>());
+        }
+
+        Set<MethodBlock> dominators = new HashSet<>();
+        dominators.add(this.entryBlock);
+        blockToDominators.put(this.entryBlock, dominators);
+
+        Set<MethodBlock> blocks = new HashSet<>(this.blocks.values());
+        blocks.remove(this.entryBlock);
+
+        boolean change = true;
+
+        while(change) {
+            change = false;
+
+            for(MethodBlock block : blocks) {
+                dominators = new HashSet<>();
+                dominators.add(block);
+
+                Set<MethodBlock> predecessorsDominators = new HashSet<>();
+                Set<MethodBlock> predecessors = block.getPredecessors();
+
+                if(!predecessors.isEmpty()) {
+                    Iterator<MethodBlock> predecessorsIterator = predecessors.iterator();
+                    MethodBlock predecessor = predecessorsIterator.next();
+                    predecessorsDominators.addAll(blockToDominators.get(predecessor));
+
+                    while(predecessorsIterator.hasNext()) {
+                        predecessor = predecessorsIterator.next();
+                        Set<MethodBlock> currentPredecesorDominators = blockToDominators.get(predecessor);
+
+                        if(currentPredecesorDominators.isEmpty()) {
+                            predecessorsDominators.addAll(blockToDominators.get(predecessor));
+                        }
+                        else {
+                            predecessorsDominators.retainAll(blockToDominators.get(predecessor));
+                        }
+                    }
+                }
+
+                dominators.addAll(predecessorsDominators);
+
+                Set<MethodBlock> previousDominators = blockToDominators.get(block);
+
+                if(!previousDominators.equals(dominators)) {
+                    change = true;
+                    blockToDominators.put(block, dominators);
+                }
+            }
+        }
+
+        return blockToDominators;
+    }
+
+    // Breadth first search
     public void taintBranch(MethodBlock currentBlock, Set<MethodBlock> currentTaintedBlocks, Queue<MethodBlock> blocksWithTwoSuccessors) {
         Queue<MethodBlock> blockQueue = new LinkedList<>();
         blockQueue.add(currentBlock);
@@ -81,7 +140,7 @@ public class MethodGraph {
         // Taint the other branch
         this.taintBranch(currentBlock, currentTaintedBlocks, blocksWithTwoSuccessors);
 
-
+        // Get set of tainted blocks with the most blocks
         Set<MethodBlock> longestPath = null;
 
         for(Set<MethodBlock> path : taintedBlocks) {
@@ -90,9 +149,11 @@ public class MethodGraph {
             }
         }
 
+        // Create a new set of tainted blocks and remove the one that has the one with the most blocks
         Set<Set<MethodBlock>> hold = new HashSet<>(taintedBlocks);
         hold.remove(longestPath);
 
+        // Find that first node that is in both sets to find where to get all the paths from the root node
         for(MethodBlock possibleMethodBlock : longestPath) {
             boolean inAllPaths = true;
 
@@ -109,11 +170,13 @@ public class MethodGraph {
             }
         }
 
+        // Get all paths between the root node and the first node in both sets of tainted blocks
         Set<List<MethodBlock>> pathsFromRootToCurrentBlock = new HashSet<>();
         List<MethodBlock> visitedBlock = new ArrayList<>();
         visitedBlock.add(rootBlock);
         this.findAllPaths(rootBlock, currentBlock, visitedBlock, pathsFromRootToCurrentBlock);
 
+        // If all blocks of all paths have their successors as part of the paths, then we found were the branches converge
         Set<MethodBlock> allAncestors = new HashSet<>();
 
         for(List<MethodBlock> pathFromRootToCurrentBlock : pathsFromRootToCurrentBlock) {

@@ -113,8 +113,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         newInstructions.insertBefore(labelInstruction, startRegionInstructions);
 
                         MethodBlock currentMethodBlock = graph.getMethodBlock(currentLabelNode.getLabel());
-                        MethodBlock blockToEndInstrumentation = graph.getWhereBranchesConverge(currentMethodBlock);
-                        List<AbstractInsnNode> endBlockInstructions = blockToEndInstrumentation.getInstructions();
+                        MethodBlock blockToEndInstrumentation = graph.getImmediatePostDominator(currentMethodBlock);
+                        List<AbstractInsnNode> endBlockInstructions = graph.getMethodBlock(blockToEndInstrumentation.getID()).getInstructions();
 
                         for(AbstractInsnNode endBlockInstruction : endBlockInstructions) {
                             if(endBlockInstruction.getType() != AbstractInsnNode.LABEL && endBlockInstruction.getType() != AbstractInsnNode.LINE && endBlockInstruction.getType() != AbstractInsnNode.FRAME) {

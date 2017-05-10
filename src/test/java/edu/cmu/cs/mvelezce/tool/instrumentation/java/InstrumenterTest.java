@@ -38,7 +38,7 @@ public class InstrumenterTest {
     }
 
     @Test
-    public void testInstrumentPipeline11() throws Exception {
+    public void testInstrumentPipeline13() throws Exception {
         // Program arguments
         String[] args = new String[1];
         args[0] = "-delres";
@@ -47,16 +47,16 @@ public class InstrumenterTest {
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
         Set<JavaRegion> regions = new HashSet<>();
-        JavaRegion region = new JavaRegion(Sleep1Dash1.PACKAGE, Sleep1Dash1.CLASS, Sleep1Dash1.MAIN_METHOD, 20);
+        JavaRegion region = new JavaRegion(Sleep13.PACKAGE, Sleep13.CLASS, Sleep13.MAIN_METHOD, 20);
         regions.add(region);
 
         // Program files
         List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep1Dash1.FILENAME);
+        programFiles.add(Sleep13.FILENAME);
 
-        Instrumenter.instrument(Sleep1Dash1.CLASS, Sleep1Dash1.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep13.CLASS, Sleep13.FILENAME, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep1Dash1.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep13.CLASS, programFiles));
     }
 
     @Test

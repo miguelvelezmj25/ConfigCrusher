@@ -33,9 +33,9 @@ public class MethodGraphBuilderTest {
     }
 
     @Test
-    public void testBuildMethodGraph1Dash1() throws IOException {
+    public void testBuildMethodGraph13() throws IOException {
         ClassTransformerReader reader = new ClassTransformerReader();
-        ClassNode classNode = reader.readClass(Sleep1Dash1.FILENAME);
+        ClassNode classNode = reader.readClass(Sleep13.FILENAME);
 
         List<MethodNode> methods = classNode.methods;
 

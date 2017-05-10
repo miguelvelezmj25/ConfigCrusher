@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
-import edu.cmu.cs.mvelezce.java.programs.Sleep1Dash1;
+import edu.cmu.cs.mvelezce.java.programs.Sleep13;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
@@ -20,9 +20,9 @@ public class ClassTransformerReaderTest {
      * @throws Exception
      */
     @Test
-    public void testReadClass() throws Exception {
+    public void testReadClass1() throws Exception {
         ClassTransformerReader reader = new ClassTransformerReader();
-        ClassNode classNode = reader.readClass(Sleep1Dash1.FILENAME);
+        ClassNode classNode = reader.readClass(Sleep13.FILENAME);
         List<MethodNode> methods = classNode.methods;
 
         for(MethodNode method : methods) {
@@ -38,5 +38,26 @@ public class ClassTransformerReaderTest {
         }
 
     }
+
+    @Test
+    public void testReadClass2() throws Exception {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass("Sleep13/edu/cmu/cs/mvlezce/java/programs/Sleep13");
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            System.out.println("Method: " + method.name);
+            InsnList instructions = method.instructions;
+
+            for(ListIterator<AbstractInsnNode> it = instructions.iterator(); it.hasNext(); ) {
+                AbstractInsnNode instruction = it.next();
+                System.out.println("Opcode: " + instruction.getOpcode() + " |Index: " + instructions.indexOf(instruction) + " |Instruction: " + instruction.getClass());
+            }
+
+            System.out.println();
+        }
+
+    }
+
 
 }

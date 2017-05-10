@@ -25,10 +25,6 @@ public class MethodGraph {
     }
 
     public void addEdge(MethodBlock from, MethodBlock to) {
-        if(from.getSuccessors().contains(to) && to.getPredecessors().contains(from)) {
-            return;
-        }
-
         from.addSuccessor(to);
         to.addPredecessor(from);
     }
@@ -128,13 +124,10 @@ public class MethodGraph {
                 MethodBlock newSuccessorBlock = reversedGraph.blocks.get(successor.getLabel());
                 reversedGraph.addEdge(newSuccessorBlock, newBlock);
             }
-
-            for(MethodBlock predecessor : block.getPredecessors()) {
-                MethodBlock newBlock = reversedGraph.blocks.get(block.getLabel());
-                MethodBlock newPredecessorBlock = reversedGraph.blocks.get(predecessor.getLabel());
-                reversedGraph.addEdge(newBlock, newPredecessorBlock);
-            }
         }
+
+        reversedGraph.entryBlock = reversedGraph.blocks.get(methodGraph.exitBlock.getLabel());
+        reversedGraph.exitBlock = reversedGraph.blocks.get(methodGraph.entryBlock.getLabel());
 
         return reversedGraph;
     }
@@ -386,4 +379,33 @@ public class MethodGraph {
     public MethodBlock getExitBlock() { return this.exitBlock; }
 
     public MethodBlock getEntryBlock() { return this.entryBlock; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MethodGraph that = (MethodGraph) o;
+
+        if (!entryBlock.equals(that.entryBlock)) return false;
+        if (!exitBlock.equals(that.exitBlock)) return false;
+        return blocks.values().equals(that.blocks.values());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = entryBlock.hashCode();
+        result = 31 * result + exitBlock.hashCode();
+        result = 31 * result + blocks.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "MethodGraph{" +
+                "entryBlock=" + entryBlock +
+                ", exitBlock=" + exitBlock +
+                ", blocks=" + blocks.values() +
+                '}';
+    }
 }

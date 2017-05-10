@@ -66,14 +66,31 @@ public class MethodBlock {
     public Set<MethodBlock> getPredecessors () { return  this.predecessors; }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MethodBlock that = (MethodBlock) o;
+
+        if (!ID.equals(that.ID)) return false;
+        if (!successors.equals(that.successors)) return false;
+        return predecessors.equals(that.predecessors);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ID.hashCode();
+        result = 31 * result + successors.size();
+        result = 31 * result + predecessors.size();
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return this.ID;
-//        return "MethodBlock{" +
-//                "ID='" + this.ID + '\'' +
-//                ", label=" + this.label +
-//                ", instructions=" + this.instructions.size() +
-//                ", successors=" + this.successors.size() +
-//                ", predecessors=" + this.predecessors.size() +
-//                '}';
+        return "MethodBlock{" +
+                ID +
+                ", successors=" + successors.size() +
+                ", predecessors=" + predecessors.size() +
+                '}';
     }
 }

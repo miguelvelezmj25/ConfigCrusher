@@ -42,7 +42,52 @@ public class MethodGraphTest {
 
         System.out.println(methodGraph.toDotString("test"));
         MethodGraph reversedGraph = methodGraph.reverseGraph();
-        System.out.println(reversedGraph.toDotString("test"));
+        System.out.println(reversedGraph.toDotString("reversed"));
+        MethodGraph normalGraph = MethodGraph.reverseGraph(reversedGraph);
+        System.out.println(normalGraph.toDotString("normal"));
+
+        Assert.assertEquals(methodGraph.toDotString("a"), normalGraph.toDotString("a"));
+    }
+
+    @Test
+    public void testReverseGraph2() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock g = new MethodBlock("G", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(g);
+
+        // Add edges
+        methodGraph.addEdge(f, a);
+        methodGraph.addEdge(f, c);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, e);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+        methodGraph.addEdge(e, g);
+
+        System.out.println(methodGraph.toDotString("test"));
+        MethodGraph reversedGraph = methodGraph.reverseGraph();
+        System.out.println(reversedGraph.toDotString("reversed"));
+        MethodGraph normalGraph = MethodGraph.reverseGraph(reversedGraph);
+        System.out.println(normalGraph.toDotString("normal"));
+
+        Assert.assertEquals(methodGraph.toDotString("a"), normalGraph.toDotString("a"));
     }
 
     @Test

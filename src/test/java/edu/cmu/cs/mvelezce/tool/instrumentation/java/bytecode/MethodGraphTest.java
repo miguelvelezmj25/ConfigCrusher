@@ -74,6 +74,137 @@ public class MethodGraphTest {
     }
 
     @Test
+    public void testGetDominators2() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(a);
+
+        // Add edges
+        methodGraph.addEdge(e, d);
+        methodGraph.addEdge(d, c);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(c, a);
+        methodGraph.addEdge(b, a);
+
+        System.out.println(methodGraph.toDotString("test"));
+
+        // Expected
+        Map<MethodBlock, Set<MethodBlock>> expected = new HashMap<>();
+        Set<MethodBlock> dominators = new HashSet<>();
+        dominators.add(e);
+        expected.put(e, dominators);
+
+        dominators = new HashSet<>();
+        dominators.add(e);
+        dominators.add(d);
+        expected.put(d, dominators);
+
+        dominators = new HashSet<>();
+        dominators.add(e);
+        dominators.add(d);
+        dominators.add(c);
+        expected.put(c, dominators);
+
+        dominators = new HashSet<>();
+        dominators.add(e);
+        dominators.add(d);
+        dominators.add(b);
+        expected.put(b, dominators);
+
+        dominators = new HashSet<>();
+        dominators.add(e);
+        dominators.add(d);
+        dominators.add(a);
+        expected.put(a, dominators);
+
+        Map<MethodBlock, Set<MethodBlock>> result = methodGraph.getDominators();
+
+        for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : result.entrySet()) {
+            System.out.println(blockToDominators.getKey() + " - " + blockToDominators.getValue());
+            Assert.assertEquals(expected.get(blockToDominators.getKey()), blockToDominators.getValue());
+        }
+
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGetImmediateDominator1() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        MethodBlock result = methodGraph.getImmediateDominator(d);
+
+        Assert.assertEquals(a, result);
+    }
+
+    @Test
+    public void testGetImmediateDominator2() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(a);
+
+        // Add edges
+        methodGraph.addEdge(e, d);
+        methodGraph.addEdge(d, c);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(c, a);
+        methodGraph.addEdge(b, a);
+
+        System.out.println(methodGraph.toDotString("test"));
+        MethodBlock result = methodGraph.getImmediateDominator(a);
+
+        Assert.assertEquals(d, result);
+    }
+
+    @Test
     public void testGetWhereBranchesConverge1() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();

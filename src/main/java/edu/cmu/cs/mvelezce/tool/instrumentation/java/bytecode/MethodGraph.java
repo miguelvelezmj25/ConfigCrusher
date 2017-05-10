@@ -85,6 +85,20 @@ public class MethodGraph {
         return blockToDominators;
     }
 
+    public MethodBlock getImmediateDominator(MethodBlock methodBlock) {
+        Map<MethodBlock, Set<MethodBlock>> blocksToDominators = this.getDominators();
+        Set<MethodBlock> dominators = new HashSet<>(blocksToDominators.get(methodBlock));
+        dominators.remove(methodBlock);
+
+        for(MethodBlock dominator : dominators) {
+            if(dominators.equals(blocksToDominators.get(dominator))) {
+                return dominator;
+            }
+        }
+
+        return null;
+    }
+
     // Breadth first search
     public void taintBranch(MethodBlock currentBlock, Set<MethodBlock> currentTaintedBlocks, Queue<MethodBlock> blocksWithTwoSuccessors) {
         Queue<MethodBlock> blockQueue = new LinkedList<>();

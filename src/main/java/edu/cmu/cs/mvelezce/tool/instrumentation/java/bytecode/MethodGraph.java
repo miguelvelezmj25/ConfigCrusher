@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 import jdk.internal.org.objectweb.asm.Label;
 
-import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -90,7 +89,7 @@ public class MethodGraph {
             }
         }
 
-        return null;
+        throw new RuntimeException("Could not find an immediate dominator");
     }
 
     public MethodBlock getImmediateDominator(MethodBlock methodBlock) {
@@ -358,8 +357,12 @@ public class MethodGraph {
         return dotString.toString();
     }
 
+    public MethodBlock getMethodBlock(String ID) {
+        return this.blocks.get(ID);
+    }
+
     public MethodBlock getMethodBlock(Label label) {
-        return this.blocks.get(label.toString());
+        return this.getMethodBlock(label.toString());
     }
 
     public int getBlockCount() { return this.blocks.size(); }

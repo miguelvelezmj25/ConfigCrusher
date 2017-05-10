@@ -3,9 +3,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 /**
  * Created by mvelezce on 5/3/17.
@@ -13,6 +11,7 @@ import java.util.ListIterator;
 public class MethodGraphBuilder {
 
     public static MethodGraph buildMethodGraph(MethodNode methodNode) {
+        Map<AbstractInsnNode, LabelNode> instructionToNewLabel = new HashMap<>();
         MethodGraph graph = new MethodGraph();
 
         InsnList instructions = methodNode.instructions;
@@ -21,13 +20,29 @@ public class MethodGraphBuilder {
 
         while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
+            int instructionType = instruction.getType();
 
-            if(instruction.getType() == AbstractInsnNode.LABEL) {
+            if(instructionType == AbstractInsnNode.LABEL) {
                 LabelNode labelNode = (LabelNode) instruction;
-
                 labelInstructions = new ArrayList<>();
                 MethodBlock methodBlock = new MethodBlock(labelNode.getLabel(), labelInstructions);
                 graph.addMethodBlock(methodBlock);
+            }
+            else if(instructionType == AbstractInsnNode.JUMP_INSN) {
+                AbstractInsnNode nextInstruction = instruction.getNext();
+
+                if(nextInstruction.getType() != AbstractInsnNode.LABEL) {
+                    labelInstructions.add(instruction);
+
+                    LabelNode labelNode = new LabelNode();
+                    labelInstructions = new ArrayList<>();
+                    labelInstructions.add(labelNode);
+                    MethodBlock methodBlock = new MethodBlock(labelNode.getLabel(), labelInstructions);
+                    graph.addMethodBlock(methodBlock);
+
+                    instructionToNewLabel.put(instruction, labelNode);
+                    instruction = instructionsIterator.next();
+                }
             }
 
             labelInstructions.add(instruction);
@@ -54,11 +69,19 @@ public class MethodGraphBuilder {
             }
             else if(instructionType == AbstractInsnNode.JUMP_INSN) {
                 JumpInsnNode jumpNode = (JumpInsnNode) instruction;
-
                 LabelNode labelNode = jumpNode.label;
-
                 MethodBlock successor = graph.getMethodBlock(labelNode.getLabel());
                 graph.addEdge(currentMethodBlock, successor);
+
+                AbstractInsnNode nextInstruction = instruction.getNext();
+
+                if(nextInstruction.getType() != AbstractInsnNode.LABEL) {
+                    labelNode = instructionToNewLabel.get(instruction);
+                    successor = graph.getMethodBlock(labelNode.getLabel());
+                    graph.addEdge(currentMethodBlock, successor);
+
+                    currentMethodBlock = successor;
+                }
             }
 
             previousInstruction = instruction;

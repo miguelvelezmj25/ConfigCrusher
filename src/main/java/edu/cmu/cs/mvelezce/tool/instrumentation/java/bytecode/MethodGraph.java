@@ -359,7 +359,7 @@ public class MethodGraph {
     }
 
     public MethodBlock getMethodBlock(Label label) {
-        return this.blocks.get(label);
+        return this.blocks.get(label.toString());
     }
 
     public int getBlockCount() { return this.blocks.size(); }

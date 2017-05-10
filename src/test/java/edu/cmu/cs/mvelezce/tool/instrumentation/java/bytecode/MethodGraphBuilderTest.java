@@ -44,7 +44,7 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 System.out.println(methodGraph.toDotString(method.name));
                 Assert.assertEquals(7, methodGraph.getBlockCount());
-                Assert.assertEquals(5, methodGraph.getEdgeCount());
+                Assert.assertEquals(6, methodGraph.getEdgeCount());
             }
         }
     }

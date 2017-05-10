@@ -30,15 +30,15 @@ public class MethodGraph {
     }
 
     public static Map<MethodBlock, Set<MethodBlock>> getDominators(MethodGraph methodGraph) {
-        Map<MethodBlock, Set<MethodBlock>> blockToDominators = new HashMap<>();
+        Map<MethodBlock, Set<MethodBlock>> blocksToDominators = new HashMap<>();
 
         for(MethodBlock block : methodGraph.blocks.values()) {
-            blockToDominators.put(block, new HashSet<>());
+            blocksToDominators.put(block, new HashSet<>(methodGraph.blocks.values()));
         }
 
         Set<MethodBlock> dominators = new HashSet<>();
         dominators.add(methodGraph.entryBlock);
-        blockToDominators.put(methodGraph.entryBlock, dominators);
+        blocksToDominators.put(methodGraph.entryBlock, dominators);
 
         Set<MethodBlock> blocks = new HashSet<>(methodGraph.blocks.values());
         blocks.remove(methodGraph.entryBlock);
@@ -52,39 +52,27 @@ public class MethodGraph {
                 dominators = new HashSet<>();
                 dominators.add(block);
 
-                Set<MethodBlock> predecessorsDominators = new HashSet<>();
-                Set<MethodBlock> predecessors = block.getPredecessors();
+                Set<MethodBlock> predecessorsDominators = new HashSet<>(methodGraph.blocks.values());
 
-                if(!predecessors.isEmpty()) {
-                    Iterator<MethodBlock> predecessorsIterator = predecessors.iterator();
-                    MethodBlock predecessor = predecessorsIterator.next();
-                    predecessorsDominators.addAll(blockToDominators.get(predecessor));
-
-                    while(predecessorsIterator.hasNext()) {
-                        predecessor = predecessorsIterator.next();
-                        Set<MethodBlock> currentPredecesorDominators = blockToDominators.get(predecessor);
-
-                        if(currentPredecesorDominators.isEmpty()) {
-                            predecessorsDominators.addAll(blockToDominators.get(predecessor));
-                        }
-                        else {
-                            predecessorsDominators.retainAll(blockToDominators.get(predecessor));
-                        }
-                    }
+                for(MethodBlock predecessor : block.getPredecessors()) {
+                    predecessorsDominators.retainAll(blocksToDominators.get(predecessor));
                 }
 
                 dominators.addAll(predecessorsDominators);
-
-                Set<MethodBlock> previousDominators = blockToDominators.get(block);
+                Set<MethodBlock> previousDominators = blocksToDominators.get(block);
 
                 if(!previousDominators.equals(dominators)) {
                     change = true;
-                    blockToDominators.put(block, dominators);
+                    blocksToDominators.put(block, dominators);
                 }
             }
         }
 
-        return blockToDominators;
+        for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : blocksToDominators.entrySet()) {
+            System.out.println(blockToDominators.getKey() + " - " + blockToDominators.getValue());
+        }
+
+        return blocksToDominators;
     }
 
     public Map<MethodBlock, Set<MethodBlock>> getDominators() {
@@ -134,6 +122,16 @@ public class MethodGraph {
 
     public MethodGraph reverseGraph() {
         return MethodGraph.reverseGraph(this);
+    }
+
+    public MethodBlock getImmediatePostDominator(MethodBlock methodBlock) {
+        return MethodGraph.getImmediatePostDominator(this, methodBlock);
+    }
+
+    private static MethodBlock getImmediatePostDominator(MethodGraph methodGraph, MethodBlock methodBlock) {
+        MethodGraph reversedGraph = MethodGraph.reverseGraph(methodGraph);
+        System.out.println(reversedGraph.toDotString("reverse"));
+        return MethodGraph.getImmediateDominator(reversedGraph, methodBlock);
     }
 
     // Breadth first search
@@ -379,26 +377,6 @@ public class MethodGraph {
     public MethodBlock getExitBlock() { return this.exitBlock; }
 
     public MethodBlock getEntryBlock() { return this.entryBlock; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MethodGraph that = (MethodGraph) o;
-
-        if (!entryBlock.equals(that.entryBlock)) return false;
-        if (!exitBlock.equals(that.exitBlock)) return false;
-        return blocks.values().equals(that.blocks.values());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = entryBlock.hashCode();
-        result = 31 * result + exitBlock.hashCode();
-        result = 31 * result + blocks.hashCode();
-        return result;
-    }
 
     @Override
     public String toString() {

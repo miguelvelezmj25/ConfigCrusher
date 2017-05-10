@@ -136,10 +136,6 @@ public class MethodGraph {
             return currentBlock;
         }
 
-
-        // TODO remove loop to avoid expanding where to end the instrumentation
-//        this.removeLoops(rootBlock, taintedBlocks);
-
         // For each inner block with two successors, taint the blocks reached by those blocks
         while(!blocksWithTwoSuccessors.isEmpty()) {
             currentBlock = blocksWithTwoSuccessors.remove();
@@ -219,60 +215,6 @@ public class MethodGraph {
             this.findAllPaths(methodBlock, end, visitedBlocks, paths);
             visitedBlocks.remove(visitedBlocks.size()-1);
         }
-
-//
-//        // add node v to current path from s
-//        path.push(v);
-//        onPath.add(v);
-//
-//        // found path from s to t - currently prints in reverse order because of stack
-//        if (v.equals(t))
-//            System.out.println(path);
-//
-//            // consider all neighbors that would continue path with repeating a node
-//        else {
-//            for (MethodBlock w : v.getSuccessors()) {
-//                if (!onPath.contains(w)) findAllPaths(w, t);
-//            }
-//        }
-//
-//        // done exploring from v, so remove from path
-//        path.pop();
-//        onPath.remove(v);
-    }
-
-    // TODO make it work
-    public void removeLoops(MethodBlock methodBlock, Set<Set<MethodBlock>> taintedBlocks) {
-        Set<MethodBlock> visited = new HashSet<>();
-        Stack<MethodBlock> stack = new Stack<>();
-        stack.push(methodBlock);
-        visited.add(methodBlock);
-
-        while(!stack.isEmpty()) {
-            MethodBlock currentBlock = stack.pop();
-        }
-
-//        for(Set<MethodBlock> taintedBlock : taintedBlocks) {
-//            for(MethodBlock block : taintedBlock) {
-//                Set<MethodBlock> path = new LinkedHashSet<>();
-//                Stack<MethodBlock> blockStack = new Stack<>();
-//                blockStack.push(block);
-//
-//                while(!blockStack.isEmpty()) {
-//                    MethodBlock currentBlock = blockStack.pop();
-//
-//                    path.add(currentBlock);
-//                    Set<MethodBlock> successorsOne = currentBlock.getSuccessors();
-//
-//                    for(MethodBlock methodBlock : successorsOne) {
-////                        if(!path.contains(methodBlock)) {
-//                            blockStack.push(methodBlock);
-////                        }
-//                    }
-//
-//                }
-//            }
-//        }
     }
 
     public String toDotString(String methodName) {

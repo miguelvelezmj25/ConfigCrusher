@@ -52,6 +52,7 @@ public class MethodGraphBuilder {
         instructionsIterator = instructions.iterator();
         MethodBlock currentMethodBlock = null;
         AbstractInsnNode previousInstruction = null;
+        Set<MethodBlock> blocksWithReturn = new HashSet<>();
 
         while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
@@ -83,8 +84,15 @@ public class MethodGraphBuilder {
                     currentMethodBlock = successor;
                 }
             }
+            else if(instruction.getOpcode() >= Opcodes.GOTO && instruction.getOpcode() <= Opcodes.RETURN) {
+                blocksWithReturn.add(currentMethodBlock);
+            }
 
             previousInstruction = instruction;
+
+            for(MethodBlock blockWithReturn : blocksWithReturn) {
+                graph.addEdge(blockWithReturn, graph.getExitBlock());
+            }
         }
 
         return graph;

@@ -201,4 +201,24 @@ public class ExecutorTest {
         ExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
+    @Test
+    public void testMeasureConfigurationPerformancePipeline13() throws Exception {
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        // Configurations
+        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
+
+        // Execute
+        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep13.CLASS, configurationsToExecute);
+
+        args = new String[0];
+        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep13.CLASS, configurationsToExecute);
+
+        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+    }
+
 }

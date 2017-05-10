@@ -78,12 +78,12 @@ public class PerformanceModelBuilderTest {
 
         double performance = 0.3;
         HashSet<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 0.9;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
     }
 
     @Test
@@ -116,12 +116,12 @@ public class PerformanceModelBuilderTest {
 
         double performance = 0.75;
         HashSet<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 2.250;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
     }
 
     @Test
@@ -164,23 +164,23 @@ public class PerformanceModelBuilderTest {
 
         double performance = 0.3;
         HashSet<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 1.8;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 2.0;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 3.5;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
     }
 
     @Test
@@ -208,12 +208,12 @@ public class PerformanceModelBuilderTest {
 
         double performance = 0.9;
         HashSet<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 0.8;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
     }
 
     @Test
@@ -246,12 +246,12 @@ public class PerformanceModelBuilderTest {
 
         double performance = 1.2;
         HashSet<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 0.7;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
     }
 
     @Test
@@ -284,12 +284,12 @@ public class PerformanceModelBuilderTest {
 
         double performance = 1.2;
         HashSet<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 0.7;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
     }
 
     @Test
@@ -322,12 +322,12 @@ public class PerformanceModelBuilderTest {
 
         double performance = 1.2;
         HashSet<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 0.7;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
     }
 
     @Test
@@ -372,23 +372,56 @@ public class PerformanceModelBuilderTest {
 
         double performance = 0.3;
         HashSet<String> configuration = new HashSet<>();
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 1.8;
         configuration = new HashSet<>();
         configuration.add("A");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 2.1;
         configuration = new HashSet<>();
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
 
         performance = 1.8;
         configuration = new HashSet<>();
         configuration.add("A");
         configuration.add("B");
-        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.1);
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
+    }
+
+    @Test
+    public void testCreatePerformanceModel13() throws IOException, ParseException {
+        // Map<Region, Set<String>> regionsToOptions
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+        Set<String> relevantOptions = new HashSet<>();
+        relevantOptions.add("A");
+        Region region = new Region("0fd507ca-aab9-46c4-8cdc-4bcf86f75043");
+        regionsToOptions.put(region, relevantOptions);
+
+        // Program arguments
+        String[] args = new String[0];
+
+        // Configurations
+        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
+
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, Instrumenter.DIRECTORY + "/" + Sleep13.CLASS, configurationsToExecute);
+
+        // Performance model
+        PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+
+        System.out.println(performanceModel);
+
+        double performance = 0.3;
+        HashSet<String> configuration = new HashSet<>();
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
+
+        performance = 0.9;
+        configuration = new HashSet<>();
+        configuration.add("A");
+        Assert.assertEquals(performance, performanceModel.evaluate(configuration), 0.05);
     }
 
 }

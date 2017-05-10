@@ -94,6 +94,12 @@ public class SleepMain {
             Sleep12.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
+        else if(mainClass.toLowerCase().equals(Sleep13.FILENAME.toLowerCase())) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep13.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
 
         Set<String> performanceConfiguration = SleepAdapter.adaptConfigurationToPerformanceMeasurement(sleepArgs);
         Executor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());

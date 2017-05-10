@@ -15,6 +15,37 @@ import java.util.Set;
 public class MethodGraphTest {
 
     @Test
+    public void testReverseGraph1() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        MethodGraph reversedGraph = methodGraph.reverseGraph();
+        System.out.println(reversedGraph.toDotString("test"));
+    }
+
+    @Test
     public void testGetDominators1() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();

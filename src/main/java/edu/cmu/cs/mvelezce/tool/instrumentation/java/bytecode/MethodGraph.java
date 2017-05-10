@@ -10,8 +10,9 @@ import java.util.*;
  */
 public class MethodGraph {
 
-    private MethodBlock entryBlock;
-    private MethodBlock exitBlock;
+    // TODO create a single exit block for the graph
+    private MethodBlock entryBlock = null;
+    private MethodBlock exitBlock = null;
     private Map<Label, MethodBlock> blocks = new HashMap<>();
 
     public void addMethodBlock(MethodBlock methodBlock) {
@@ -24,6 +25,10 @@ public class MethodGraph {
     }
 
     public void addEdge(MethodBlock from, MethodBlock to) {
+        if(from.getSuccessors().contains(to) && to.getPredecessors().contains(from)) {
+            return;
+        }
+
         from.addSuccessor(to);
         to.addPredecessor(from);
     }
@@ -106,6 +111,36 @@ public class MethodGraph {
 
     public MethodBlock getImmediateDominator(MethodBlock methodBlock) {
         return MethodGraph.getImmediateDominator(this, methodBlock);
+    }
+
+    public static MethodGraph reverseGraph(MethodGraph methodGraph) {
+        MethodGraph reversedGraph = new MethodGraph();
+        Set<MethodBlock> blocks = new HashSet<>(methodGraph.blocks.values());
+
+        for(MethodBlock block : blocks) {
+            MethodBlock newBlock = new MethodBlock(block.getID(), block.getLabel());
+            reversedGraph.addMethodBlock(newBlock);
+        }
+
+        for(MethodBlock block : blocks) {
+            for(MethodBlock successor : block.getSuccessors()) {
+                MethodBlock newBlock = reversedGraph.blocks.get(block.getLabel());
+                MethodBlock newSuccessorBlock = reversedGraph.blocks.get(successor.getLabel());
+                reversedGraph.addEdge(newSuccessorBlock, newBlock);
+            }
+
+            for(MethodBlock predecessor : block.getPredecessors()) {
+                MethodBlock newBlock = reversedGraph.blocks.get(block.getLabel());
+                MethodBlock newPredecessorBlock = reversedGraph.blocks.get(predecessor.getLabel());
+                reversedGraph.addEdge(newBlock, newPredecessorBlock);
+            }
+        }
+
+        return reversedGraph;
+    }
+
+    public MethodGraph reverseGraph() {
+        return MethodGraph.reverseGraph(this);
     }
 
     // Breadth first search

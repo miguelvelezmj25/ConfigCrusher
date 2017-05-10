@@ -31,6 +31,10 @@ public class MethodBlock {
         this(ID, label, new ArrayList<>());
     }
 
+    public MethodBlock(String ID) {
+        this(ID, new Label());
+    }
+
     public MethodBlock(Label label) {
         this(label.toString(), label);
     }

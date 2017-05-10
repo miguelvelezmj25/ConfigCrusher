@@ -63,12 +63,13 @@ public class MethodBlock {
 
     @Override
     public String toString() {
-        return "MethodBlock{" +
-                "ID='" + this.ID + '\'' +
-                ", label=" + this.label +
-                ", instructions=" + this.instructions.size() +
-                ", successors=" + this.successors.size() +
-                ", predecessors=" + this.predecessors.size() +
-                '}';
+        return this.ID;
+//        return "MethodBlock{" +
+//                "ID='" + this.ID + '\'' +
+//                ", label=" + this.label +
+//                ", instructions=" + this.instructions.size() +
+//                ", successors=" + this.successors.size() +
+//                ", predecessors=" + this.predecessors.size() +
+//                '}';
     }
 }

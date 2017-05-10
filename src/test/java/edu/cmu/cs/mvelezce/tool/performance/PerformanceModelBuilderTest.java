@@ -27,7 +27,7 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("ecb89258-9de1-416f-955c-194d09e9b249");
+        Region region = new Region("d9e007bd-0c4a-43b9-ac70-4404378b02ee");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -59,7 +59,7 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("686ed958-c03c-4a6a-90f3-83575b3d3312");
+        Region region = new Region("d9e007bd-0c4a-43b9-ac70-4404378b02ee");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -92,12 +92,12 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("73e49277-d0ba-4411-88da-f2f5857c279c");
+        Region region = new Region("820767c8-a7ee-431b-93b0-d422b44119b8");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("c545f85d-2722-4bfa-9d6a-dcf944dfac05");
+        region = new Region("d1c659ba-b32e-474f-ba07-9ff1b0e93e3d");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -130,22 +130,22 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("4cbc76d0-22a9-43f3-a01c-2ce902d3af04");
+        Region region = new Region("515dad72-acd8-4078-afd1-243d8a0a8159");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("B");
-        region = new Region("88386ec4-6fec-471a-b676-97acc696830c");
+        region = new Region("e175b797-442f-4af3-ae7b-df17f690cbb5");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("a91ca8dd-45b4-41eb-99a6-ee1774239a40");
+        region = new Region("49ccd1a0-4f72-4704-afed-da8c8fc07628");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("B");
-        region = new Region("66e75054-9a1c-4ea4-a478-c205406a8a0a");
+        region = new Region("35d3ea7b-b151-406b-8c40-8402f2aaf2d7");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -189,7 +189,7 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("f9ebeca2-376c-4c6e-b7c1-83aa7c795f51");
+        Region region = new Region("869447bc-1159-43aa-8cd6-76a941928dec");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -222,12 +222,12 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("a8b6f1d1-18be-4c50-81e2-3d56b91e4a68");
+        Region region = new Region("6b5f3599-b7be-48dd-a1e2-403b66e065c2");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("eab6e1e5-edfe-46e6-814e-deed59390795");
+        region = new Region("95df7be1-6bd8-4675-bbfd-1c0bdcc170d8");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -260,12 +260,12 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("4567f7fa-84ce-4e38-ab82-57084191a32f");
+        Region region = new Region("62a843e8-fda7-4296-9cb0-06f2ab7e922a");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("4edbec5f-0af6-4d7c-88ab-81991c601973");
+        region = new Region("55be5222-878e-480e-9b4c-19ee048e7d68");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -298,12 +298,12 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("37bdb3f1-b973-4580-8db5-5478fdb86099");
+        Region region = new Region("23cc14a5-0f8b-4647-9a9d-31124de65660");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("0154d129-081e-4359-925e-cc8d054589f5");
+        region = new Region("093455fe-df64-4f1f-9bcf-2c879c97ae1c");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -336,24 +336,24 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("478d1824-b386-42da-b24b-21cb8c79809b");
+        Region region = new Region("8991b0ff-a0a9-4967-8acd-ba823cf700f4");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
         relevantOptions.add("B");
-        region = new Region("8694bd89-4a53-48b1-97a1-21128e6d8604");
+        region = new Region("44f7b4e3-3af8-46c1-b9d0-1a93736950c7");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("b5997cc5-faf0-49b6-99b3-c2f51227c909");
+        region = new Region("96c809ce-733d-4647-8d10-d1d587144c8b");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
         relevantOptions.add("B");
-        region = new Region("cf3aff4e-0fda-458c-ba6d-77beae6d5c0f");
+        region = new Region("e80dd113-203e-477b-91bc-0c4889da64d2");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments
@@ -397,7 +397,7 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("0fd507ca-aab9-46c4-8cdc-4bcf86f75043");
+        Region region = new Region("37486f0a-e662-4a18-a7e7-a88ca76d9d2a");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments

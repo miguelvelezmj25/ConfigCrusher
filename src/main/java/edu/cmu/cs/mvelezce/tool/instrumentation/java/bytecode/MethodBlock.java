@@ -27,6 +27,10 @@ public class MethodBlock {
         this.predecessors = new HashSet<>();
     }
 
+    public MethodBlock(Label label, List<AbstractInsnNode> instructions) {
+        this(label.toString(), label, instructions);
+    }
+
     public MethodBlock(String ID, Label label) {
         this(ID, label, new ArrayList<>());
     }
@@ -39,12 +43,8 @@ public class MethodBlock {
         this(label.toString(), label);
     }
 
-    public MethodBlock(Label label, List<AbstractInsnNode> instructions) {
-        this(label.toString(), label, instructions);
-    }
 
     public void addSuccessor(MethodBlock methodBlock) {
-        // TODO make new block that allows this so that we can check this in this method
         if(this.successors.size() >= 2) {
             throw new IllegalArgumentException("A method block cannot have more than 2 successors");
         }
@@ -84,8 +84,6 @@ public class MethodBlock {
 
     @Override
     public String toString() {
-        return "MethodBlock{" +
-                ID +
-                '}';
+        return this.ID;
     }
 }

@@ -207,6 +207,49 @@ public class MethodGraphTest {
         expected.put(a, dominators);
 
         Map<MethodBlock, Set<MethodBlock>> result = methodGraph.getDominators();
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void testGetDominators3() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+
+        // Add edges
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, c);
+
+        System.out.println(methodGraph.toDotString("test"));
+
+        // Expected
+        Map<MethodBlock, Set<MethodBlock>> expected = new HashMap<>();
+        Set<MethodBlock> dominators = new HashSet<>();
+        dominators.add(b);
+        expected.put(b, dominators);
+
+        dominators = new HashSet<>();
+        dominators.add(c);
+        dominators.add(b);
+        expected.put(c, dominators);
+
+        dominators = new HashSet<>();
+        dominators.add(b);
+        dominators.add(c);
+        dominators.add(d);
+        expected.put(d, dominators);
+
+        Map<MethodBlock, Set<MethodBlock>> result = methodGraph.getDominators();
 
         for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : result.entrySet()) {
             System.out.println(blockToDominators.getKey() + " - " + blockToDominators.getValue());
@@ -281,7 +324,7 @@ public class MethodGraphTest {
     }
 
     @Test
-    public void testGetWhereBranchesConverge1() {
+    public void testGetImmediatePostDominator1() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -309,11 +352,11 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(d, methodGraph.getWhereBranchesConverge(a));
+        Assert.assertEquals(d.getID(), methodGraph.getImmediatePostDominator(a).getID());
     }
 
     @Test
-    public void testGetWhereBranchesConverge2() {
+    public void testGetImmediatePostDominator2() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -327,12 +370,12 @@ public class MethodGraphTest {
         MethodBlock g = new MethodBlock("G", new Label());
 
         // Add vertices
+        methodGraph.addMethodBlock(f);
         methodGraph.addMethodBlock(a);
         methodGraph.addMethodBlock(b);
         methodGraph.addMethodBlock(c);
         methodGraph.addMethodBlock(d);
         methodGraph.addMethodBlock(e);
-        methodGraph.addMethodBlock(f);
         methodGraph.addMethodBlock(g);
 
         // Add edges
@@ -347,11 +390,11 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(e, methodGraph.getWhereBranchesConverge(f));
+        Assert.assertEquals(e, methodGraph.getImmediatePostDominator(f));
     }
 
     @Test
-    public void testGetWhereBranchesConverge3() {
+    public void testGetImmediatePostDominator3() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -365,12 +408,12 @@ public class MethodGraphTest {
         MethodBlock g = new MethodBlock("G", new Label());
 
         // Add vertices
+        methodGraph.addMethodBlock(f);
         methodGraph.addMethodBlock(a);
         methodGraph.addMethodBlock(b);
         methodGraph.addMethodBlock(c);
         methodGraph.addMethodBlock(d);
         methodGraph.addMethodBlock(e);
-        methodGraph.addMethodBlock(f);
         methodGraph.addMethodBlock(g);
 
         // Add edges
@@ -386,11 +429,11 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(e, methodGraph.getWhereBranchesConverge(f));
+        Assert.assertEquals(e, methodGraph.getImmediatePostDominator(f));
     }
 
     @Test
-    public void testGetWhereBranchesConverge4() {
+    public void testGetImmediatePostDominator4() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -403,12 +446,12 @@ public class MethodGraphTest {
         MethodBlock f = new MethodBlock("F", new Label());
 
         // Add vertices
+        methodGraph.addMethodBlock(f);
         methodGraph.addMethodBlock(a);
         methodGraph.addMethodBlock(b);
         methodGraph.addMethodBlock(c);
         methodGraph.addMethodBlock(d);
         methodGraph.addMethodBlock(e);
-        methodGraph.addMethodBlock(f);
 
         // Add edges
         methodGraph.addEdge(f, a);
@@ -422,11 +465,11 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(b, methodGraph.getWhereBranchesConverge(f));
+        Assert.assertEquals(b, methodGraph.getImmediatePostDominator(f));
     }
 
     @Test
-    public void testGetWhereBranchesConverge5() {
+    public void testGetImmediatePostDominator5() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -442,15 +485,15 @@ public class MethodGraphTest {
         MethodBlock i = new MethodBlock("I", new Label());
 
         // Add vertices
+        methodGraph.addMethodBlock(i);
         methodGraph.addMethodBlock(a);
         methodGraph.addMethodBlock(b);
         methodGraph.addMethodBlock(c);
-        methodGraph.addMethodBlock(d);
         methodGraph.addMethodBlock(e);
         methodGraph.addMethodBlock(f);
         methodGraph.addMethodBlock(g);
         methodGraph.addMethodBlock(h);
-        methodGraph.addMethodBlock(i);
+        methodGraph.addMethodBlock(d);
 
         // Add edges
         methodGraph.addEdge(i, a);
@@ -468,11 +511,11 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(d, methodGraph.getWhereBranchesConverge(i));
+        Assert.assertEquals(d, methodGraph.getImmediatePostDominator(i));
     }
 
     @Test
-    public void testGetWhereBranchesConverge6() {
+    public void testGetImmediatePostDominator6() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -502,11 +545,11 @@ public class MethodGraphTest {
 
         // TODO this might be the case where we need to
         // Assert
-        Assert.assertEquals(c, methodGraph.getWhereBranchesConverge(a));
+        Assert.assertEquals(c, methodGraph.getImmediatePostDominator(a));
     }
 
     @Test
-    public void testGetWhereBranchesConverge7() {
+    public void testGetImmediatePostDominator7() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -540,11 +583,11 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(f, methodGraph.getWhereBranchesConverge(a));
+        Assert.assertEquals(f, methodGraph.getImmediatePostDominator(a));
     }
 
     @Test
-    public void testGetWhereBranchesConverge8() {
+    public void testGetImmediatePostDominator8() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -577,11 +620,11 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(f, methodGraph.getWhereBranchesConverge(a));
+        Assert.assertEquals(f, methodGraph.getImmediatePostDominator(a));
     }
 
     @Test
-    public void testGetWhereBranchesConverge9() {
+    public void testGetImmediatePostDominator9() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -612,11 +655,11 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(e, methodGraph.getWhereBranchesConverge(b));
+        Assert.assertEquals(e, methodGraph.getImmediatePostDominator(b));
     }
 
     @Test
-    public void testGetWhereBranchesConverge10() {
+    public void testGetImmediatePostDominator10() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -649,11 +692,11 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(f, methodGraph.getWhereBranchesConverge(a));
+        Assert.assertEquals(f, methodGraph.getImmediatePostDominator(a));
     }
 
     @Test
-    public void testGetWhereBranchesConverge11() {
+    public void testGetImmediatePostDominator11() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -691,7 +734,7 @@ public class MethodGraphTest {
         System.out.println(methodGraph.toDotString("test"));
 
         // Assert
-        Assert.assertEquals(c, methodGraph.getWhereBranchesConverge(a));
+        Assert.assertEquals(c, methodGraph.getImmediatePostDominator(a));
     }
 
     @Test
@@ -730,28 +773,28 @@ public class MethodGraphTest {
         Assert.assertEquals(source, end.getPredecessors().iterator().next());
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void testAddEdge2() {
-        // Build methodGraph
-        MethodGraph methodGraph = new MethodGraph();
-
-        // Build block
-        MethodBlock source = new MethodBlock(new Label());
-        MethodBlock target1 = new MethodBlock(new Label());
-        MethodBlock target2 = new MethodBlock(new Label());
-        MethodBlock target3 = new MethodBlock(new Label());
-
-        // Add vertices
-        methodGraph.addMethodBlock(source);
-        methodGraph.addMethodBlock(target1);
-        methodGraph.addMethodBlock(target2);
-
-        // Add edges
-        methodGraph.addEdge(source, target1);
-        methodGraph.addEdge(source, target2);
-
-        // Assert exception thrown
-        methodGraph.addEdge(source, target3);
-    }
+//    @Test(expected=IllegalArgumentException.class)
+//    public void testAddEdge2() {
+//        // Build methodGraph
+//        MethodGraph methodGraph = new MethodGraph();
+//
+//        // Build block
+//        MethodBlock source = new MethodBlock(new Label());
+//        MethodBlock target1 = new MethodBlock(new Label());
+//        MethodBlock target2 = new MethodBlock(new Label());
+//        MethodBlock target3 = new MethodBlock(new Label());
+//
+//        // Add vertices
+//        methodGraph.addMethodBlock(source);
+//        methodGraph.addMethodBlock(target1);
+//        methodGraph.addMethodBlock(target2);
+//
+//        // Add edges
+//        methodGraph.addEdge(source, target1);
+//        methodGraph.addEdge(source, target2);
+//
+//        // Assert exception thrown
+//        methodGraph.addEdge(source, target3);
+//    }
 
 }

@@ -44,9 +44,10 @@ public class MethodBlock {
     }
 
     public void addSuccessor(MethodBlock methodBlock) {
-        if(this.successors.size() >= 2) {
-            throw new IllegalArgumentException("A method block cannot have more than 2 successors");
-        }
+        // TODO make new block that allows this so that we can check this in this method
+//        if(this.successors.size() >= 2) {
+//            throw new IllegalArgumentException("A method block cannot have more than 2 successors");
+//        }
 
         successors.add(methodBlock);
     }
@@ -72,25 +73,18 @@ public class MethodBlock {
 
         MethodBlock that = (MethodBlock) o;
 
-        if (!ID.equals(that.ID)) return false;
-        if (!successors.equals(that.successors)) return false;
-        return predecessors.equals(that.predecessors);
+        return ID.equals(that.ID);
     }
 
     @Override
     public int hashCode() {
-        int result = ID.hashCode();
-        result = 31 * result + successors.size();
-        result = 31 * result + predecessors.size();
-        return result;
+        return ID.hashCode();
     }
 
     @Override
     public String toString() {
         return "MethodBlock{" +
                 ID +
-                ", successors=" + successors.size() +
-                ", predecessors=" + predecessors.size() +
                 '}';
     }
 }

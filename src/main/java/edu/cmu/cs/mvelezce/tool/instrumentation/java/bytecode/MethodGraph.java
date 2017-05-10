@@ -13,14 +13,14 @@ public class MethodGraph {
     // TODO create a single exit block for the graph
     private MethodBlock entryBlock = null;
     private MethodBlock exitBlock = null;
-    private Map<Label, MethodBlock> blocks = new HashMap<>();
+    private Map<String, MethodBlock> blocks = new HashMap<>();
 
     public void addMethodBlock(MethodBlock methodBlock) {
         if(this.entryBlock == null) {
             this.entryBlock = methodBlock;
         }
 
-        this.blocks.put(methodBlock.getLabel(), methodBlock);
+        this.blocks.put(methodBlock.getID(), methodBlock);
         this.exitBlock = methodBlock;
     }
 
@@ -102,20 +102,20 @@ public class MethodGraph {
         Set<MethodBlock> blocks = new HashSet<>(methodGraph.blocks.values());
 
         for(MethodBlock block : blocks) {
-            MethodBlock newBlock = new MethodBlock(block.getID(), block.getLabel());
+            MethodBlockReversed newBlock = new MethodBlockReversed(block.getID());
             reversedGraph.addMethodBlock(newBlock);
         }
 
         for(MethodBlock block : blocks) {
             for(MethodBlock successor : block.getSuccessors()) {
-                MethodBlock newBlock = reversedGraph.blocks.get(block.getLabel());
-                MethodBlock newSuccessorBlock = reversedGraph.blocks.get(successor.getLabel());
+                MethodBlock newBlock = reversedGraph.blocks.get(block.getID());
+                MethodBlock newSuccessorBlock = reversedGraph.blocks.get(successor.getID());
                 reversedGraph.addEdge(newSuccessorBlock, newBlock);
             }
         }
 
-        reversedGraph.entryBlock = reversedGraph.blocks.get(methodGraph.exitBlock.getLabel());
-        reversedGraph.exitBlock = reversedGraph.blocks.get(methodGraph.entryBlock.getLabel());
+        reversedGraph.entryBlock = reversedGraph.blocks.get(methodGraph.exitBlock.getID());
+        reversedGraph.exitBlock = reversedGraph.blocks.get(methodGraph.entryBlock.getID());
 
         return reversedGraph;
     }

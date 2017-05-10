@@ -38,6 +38,28 @@ public class InstrumenterTest {
     }
 
     @Test
+    public void testInstrumentPipeline11() throws Exception {
+        // Program arguments
+        String[] args = new String[1];
+        args[0] = "-delres";
+//        String[] args = new String[0];
+
+        // Java Region
+        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+        Set<JavaRegion> regions = new HashSet<>();
+        JavaRegion region = new JavaRegion(Sleep1Dash1.PACKAGE, Sleep1Dash1.CLASS, Sleep1Dash1.MAIN_METHOD, 20);
+        regions.add(region);
+
+        // Program files
+        List<String> programFiles = new ArrayList<>();
+        programFiles.add(Sleep1Dash1.FILENAME);
+
+        Instrumenter.instrument(Sleep1Dash1.CLASS, Sleep1Dash1.FILENAME, args, programFiles, regions);
+
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep1Dash1.CLASS, programFiles));
+    }
+
+    @Test
     public void testInstrumentPipeline2() throws Exception {
         // Program arguments
 //        String[] args = new String[1];

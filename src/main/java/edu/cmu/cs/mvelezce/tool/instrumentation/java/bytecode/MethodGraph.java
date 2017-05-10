@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 import jdk.internal.org.objectweb.asm.Label;
 
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -27,19 +28,19 @@ public class MethodGraph {
         to.addPredecessor(from);
     }
 
-    public Map<MethodBlock, Set<MethodBlock>> getDominators() {
+    public static Map<MethodBlock, Set<MethodBlock>> getDominators(MethodGraph methodGraph) {
         Map<MethodBlock, Set<MethodBlock>> blockToDominators = new HashMap<>();
 
-        for(MethodBlock block : this.blocks.values()) {
+        for(MethodBlock block : methodGraph.blocks.values()) {
             blockToDominators.put(block, new HashSet<>());
         }
 
         Set<MethodBlock> dominators = new HashSet<>();
-        dominators.add(this.entryBlock);
-        blockToDominators.put(this.entryBlock, dominators);
+        dominators.add(methodGraph.entryBlock);
+        blockToDominators.put(methodGraph.entryBlock, dominators);
 
-        Set<MethodBlock> blocks = new HashSet<>(this.blocks.values());
-        blocks.remove(this.entryBlock);
+        Set<MethodBlock> blocks = new HashSet<>(methodGraph.blocks.values());
+        blocks.remove(methodGraph.entryBlock);
 
         boolean change = true;
 
@@ -85,8 +86,12 @@ public class MethodGraph {
         return blockToDominators;
     }
 
-    public MethodBlock getImmediateDominator(MethodBlock methodBlock) {
-        Map<MethodBlock, Set<MethodBlock>> blocksToDominators = this.getDominators();
+    public Map<MethodBlock, Set<MethodBlock>> getDominators() {
+        return MethodGraph.getDominators(this);
+    }
+
+    public static MethodBlock getImmediateDominator(MethodGraph methodGraph, MethodBlock methodBlock) {
+        Map<MethodBlock, Set<MethodBlock>> blocksToDominators = MethodGraph.getDominators(methodGraph);
         Set<MethodBlock> dominators = new HashSet<>(blocksToDominators.get(methodBlock));
         dominators.remove(methodBlock);
 
@@ -97,6 +102,10 @@ public class MethodGraph {
         }
 
         return null;
+    }
+
+    public MethodBlock getImmediateDominator(MethodBlock methodBlock) {
+        return MethodGraph.getImmediateDominator(this, methodBlock);
     }
 
     // Breadth first search

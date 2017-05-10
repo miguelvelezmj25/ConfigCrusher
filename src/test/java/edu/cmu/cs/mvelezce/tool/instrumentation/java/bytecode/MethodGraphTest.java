@@ -738,6 +738,44 @@ public class MethodGraphTest {
     }
 
     @Test
+    public void testGetImmediatePostDominator12() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock f = new MethodBlock("F", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, c);
+        methodGraph.addEdge(a, d);
+        methodGraph.addEdge(d, a);
+        methodGraph.addEdge(c, f);
+
+        System.out.println(methodGraph.toDotString("test"));
+
+        // Assert
+        Assert.assertEquals(f, methodGraph.getImmediatePostDominator(a));
+    }
+
+    @Test
     public void testAddMethodBlock() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
@@ -773,28 +811,28 @@ public class MethodGraphTest {
         Assert.assertEquals(source, end.getPredecessors().iterator().next());
     }
 
-//    @Test(expected=IllegalArgumentException.class)
-//    public void testAddEdge2() {
-//        // Build methodGraph
-//        MethodGraph methodGraph = new MethodGraph();
-//
-//        // Build block
-//        MethodBlock source = new MethodBlock(new Label());
-//        MethodBlock target1 = new MethodBlock(new Label());
-//        MethodBlock target2 = new MethodBlock(new Label());
-//        MethodBlock target3 = new MethodBlock(new Label());
-//
-//        // Add vertices
-//        methodGraph.addMethodBlock(source);
-//        methodGraph.addMethodBlock(target1);
-//        methodGraph.addMethodBlock(target2);
-//
-//        // Add edges
-//        methodGraph.addEdge(source, target1);
-//        methodGraph.addEdge(source, target2);
-//
-//        // Assert exception thrown
-//        methodGraph.addEdge(source, target3);
-//    }
+    @Test(expected=IllegalArgumentException.class)
+    public void testAddEdge2() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock source = new MethodBlock(new Label());
+        MethodBlock target1 = new MethodBlock(new Label());
+        MethodBlock target2 = new MethodBlock(new Label());
+        MethodBlock target3 = new MethodBlock(new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(source);
+        methodGraph.addMethodBlock(target1);
+        methodGraph.addMethodBlock(target2);
+
+        // Add edges
+        methodGraph.addEdge(source, target1);
+        methodGraph.addEdge(source, target2);
+
+        // Assert exception thrown
+        methodGraph.addEdge(source, target3);
+    }
 
 }

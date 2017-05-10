@@ -45,9 +45,9 @@ public class MethodBlock {
 
     public void addSuccessor(MethodBlock methodBlock) {
         // TODO make new block that allows this so that we can check this in this method
-//        if(this.successors.size() >= 2) {
-//            throw new IllegalArgumentException("A method block cannot have more than 2 successors");
-//        }
+        if(this.successors.size() >= 2) {
+            throw new IllegalArgumentException("A method block cannot have more than 2 successors");
+        }
 
         successors.add(methodBlock);
     }
@@ -66,10 +66,11 @@ public class MethodBlock {
 
     public Set<MethodBlock> getPredecessors () { return  this.predecessors; }
 
+    // TODO be careful with the instanceof
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !(o instanceof MethodBlock)) return false;
 
         MethodBlock that = (MethodBlock) o;
 

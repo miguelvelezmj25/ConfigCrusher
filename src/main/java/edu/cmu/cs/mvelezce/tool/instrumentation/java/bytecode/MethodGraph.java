@@ -15,34 +15,6 @@ public class MethodGraph {
     private MethodBlock exitBlock = null;
     private Map<String, MethodBlock> blocks = new HashMap<>();
 
-    public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
-        MethodBlock immediatePostDominator = MethodGraph.getImmediatePostDominator(methodGraph, start);
-        Set<Set<MethodBlock>> stronglyConnectedComponents = MethodGraph.getStronglyConnectedComponents(methodGraph, start);
-        Set<MethodBlock> stronglyConnectedComponentOfImmediatePostDominator = new HashSet<>();
-
-        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
-            if(stronglyConnectedComponent.contains(immediatePostDominator) && stronglyConnectedComponent.size() > 1) {
-                stronglyConnectedComponentOfImmediatePostDominator = new HashSet<>(stronglyConnectedComponent);
-                break;
-            }
-        }
-
-        if(stronglyConnectedComponentOfImmediatePostDominator.isEmpty()) {
-            return start;
-        }
-
-        stronglyConnectedComponentOfImmediatePostDominator.add(start);
-
-        for(MethodBlock component : stronglyConnectedComponentOfImmediatePostDominator) {
-            MethodBlock immediateDominator = MethodGraph.getImmediateDominator(methodGraph, component);
-            if(!stronglyConnectedComponentOfImmediatePostDominator.contains(immediateDominator)) {
-                return component;
-            }
-        }
-
-        throw new RuntimeException("Could not find out where to start instrumenting");
-    }
-
     public static MethodBlock getImmediatePostDominator(MethodGraph methodGraph, MethodBlock start) {
         MethodGraph reversedGraph = MethodGraph.reverseGraph(methodGraph);
         return MethodGraph.getImmediateDominator(reversedGraph, start);
@@ -243,10 +215,6 @@ public class MethodGraph {
 
     public Set<Set<MethodBlock>> getStronglyConnectedComponents(MethodBlock methodBlock) {
         return MethodGraph.getStronglyConnectedComponents(this, methodBlock);
-    }
-
-    public MethodBlock getBlockToStartInstrumentingBeforeIt(MethodBlock start) {
-        return MethodGraph.getBlockToStartInstrumentingBeforeIt(this, start);
     }
 
     public String toDotString(String methodName) {

@@ -70,21 +70,25 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
             methodNode.instructions.toArray();
 
-            Set<AbstractInsnNode> instructionsToStartInstrumenting = new HashSet<>();
+            Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
             for(JavaRegion region : regionsInMethod) {
-                instructionsToStartInstrumenting.add(methodNode.instructions.get(region.getStartBytecodeIndex()));
+                instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
             }
 
-            List<MethodBlock> methodBlocksToInstrument = new ArrayList<>();
+            Map<MethodBlock, MethodBlock> methodBlocksToInstrument = new HashMap<>();
 
             for(MethodBlock block : graph.getBlocks()) {
                 List<AbstractInsnNode> blockInstructions = block.getInstructions();
 
-                for(AbstractInsnNode instructionToStartInstrumenting : instructionsToStartInstrumenting) {
+                for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
                         MethodBlock start = JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
-                        methodBlocksToInstrument.add(start);
+                        MethodBlock end = graph.getImmediatePostDominator(start);
+                        methodBlocksToInstrument.put(start, end);
+                        JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
+                        region.setStartMethodBlock(start);
+                        region.setEndMethodBlock(end);
                     }
                 }
             }
@@ -94,83 +98,43 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             InsnList instructions = methodNode.instructions;
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-            LabelNode currentLabelNode = null;
-
             while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
-                LabelNode endLabelNode = null;
+//                LabelNode endLabelNode = null;
+
+//                if(instruction.getType() == AbstractInsnNode.LABEL) {
+//                    currentLabelNode = (LabelNode) instruction;
+//                }
 
                 if(instruction.getType() == AbstractInsnNode.LABEL) {
-                    currentLabelNode = (LabelNode) instruction;
-                }
+                    LabelNode currentLabelNode = (LabelNode) instruction;
 
-                if(instruction.getOpcode() < 0) {
-                    newInstructions.add(instruction);
-                    continue;
-                }
+                    for(JavaRegion javaRegion : regionsInMethod) {
+                        if (javaRegion.getEndMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
+                            Label label = new Label();
+                            label.info = currentLabelNode.getLabel() + "000end";
+                            LabelNode endRegionLabelNode = new LabelNode(label);
+                            this.updateLabels(newInstructions, currentLabelNode, endRegionLabelNode);
 
-                int bytecodeIndex = instructions.indexOf(instruction);
-
-                for(JavaRegion javaRegion : regionsInMethod) {
-                    if(javaRegion.getStartBytecodeIndex() == bytecodeIndex) {
-                        Label label = new Label();
-                        label.info = bytecodeIndex;
-                        LabelNode startRegionLabelNode = new LabelNode(label);
-                        this.updateLabels(newInstructions, currentLabelNode, startRegionLabelNode);
-
-                        InsnList startRegionInstructions = new InsnList();
-                        startRegionInstructions.add(startRegionLabelNode);
-                        startRegionInstructions.add(this.addInstructionsStartRegion(javaRegion));
-
-                        AbstractInsnNode labelInstruction = instruction;
-
-                        while(labelInstruction.getType() != AbstractInsnNode.LABEL) {
-                            labelInstruction = labelInstruction.getPrevious();
-                        }
-
-                        newInstructions.insertBefore(labelInstruction, startRegionInstructions);
-
-                        MethodBlock currentMethodBlock = graph.getMethodBlock(currentLabelNode.getLabel());
-                        MethodBlock blockToEndInstrumentation = graph.getImmediatePostDominator(currentMethodBlock);
-                        List<AbstractInsnNode> endBlockInstructions = graph.getMethodBlock(blockToEndInstrumentation.getID()).getInstructions();
-
-                        for(AbstractInsnNode endBlockInstruction : endBlockInstructions) {
-                            if(endBlockInstruction.getType() != AbstractInsnNode.LABEL && endBlockInstruction.getType() != AbstractInsnNode.LINE && endBlockInstruction.getType() != AbstractInsnNode.FRAME) {
-                                javaRegion.setEndBytecodeIndex(instructions.indexOf(endBlockInstruction));
-                                break;
-                            }
+                            InsnList endRegionInstructions = new InsnList();
+                            endRegionInstructions.add(endRegionLabelNode);
+                            endRegionInstructions.add(this.addInstructionsEndRegion(javaRegion));
+                            newInstructions.add(endRegionInstructions);
                         }
                     }
-                    else if (javaRegion.getEndBytecodeIndex() == bytecodeIndex) {
-                        Label label = new Label();
-                        label.info = label.toString() + "00000" + bytecodeIndex;
-                        LabelNode endRegionLabelNode = new LabelNode(label);
-                        this.updateLabels(newInstructions, currentLabelNode, endRegionLabelNode);
 
-                        InsnList endRegionInstructions = new InsnList();
-                        endRegionInstructions.add(endRegionLabelNode);
-                        endRegionInstructions.add(this.addInstructionsEndRegion(javaRegion));
+                    for(JavaRegion javaRegion : regionsInMethod) {
+                        if(javaRegion.getStartMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
+                            Label label = new Label();
+                            label.info = currentLabelNode.getLabel() + "000start";
+                            LabelNode startRegionLabelNode = new LabelNode(label);
+                            this.updateLabels(newInstructions, currentLabelNode, startRegionLabelNode);
 
-                        AbstractInsnNode labelInstruction = instruction;
-
-                        // TODO not working correctly
-//                        if(endLabelNode != null) {
-//                            labelInstruction = newInstructions.getLast();
-//
-//                            while(labelInstruction != endLabelNode) {
-//                                labelInstruction = labelInstruction.getPrevious();
-//                            }
-//                        }
-//                        else {
-                            while(labelInstruction.getType() != AbstractInsnNode.LABEL) {
-                                labelInstruction = labelInstruction.getPrevious();
-                            }
-//                        }
-
-                        newInstructions.insertBefore(labelInstruction, endRegionInstructions);
-
-
-                        endLabelNode = endRegionLabelNode;
+                            InsnList startRegionInstructions = new InsnList();
+                            startRegionInstructions.add(startRegionLabelNode);
+                            startRegionInstructions.add(this.addInstructionsStartRegion(javaRegion));
+                            newInstructions.add(startRegionInstructions);
+                        }
                     }
                 }
 

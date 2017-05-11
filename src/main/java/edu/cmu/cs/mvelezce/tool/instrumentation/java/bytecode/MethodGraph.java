@@ -133,199 +133,72 @@ public class MethodGraph {
         return MethodGraph.getImmediateDominator(reversedGraph, methodBlock);
     }
 
-    // Breadth first search
-    public void taintBranch(MethodBlock currentBlock, Set<MethodBlock> currentTaintedBlocks, Queue<MethodBlock> blocksWithTwoSuccessors) {
-        Queue<MethodBlock> blockQueue = new LinkedList<>();
-        blockQueue.add(currentBlock);
+    public static Set<Set<MethodBlock>> getStronglyConnectedComponents(MethodGraph methodGraph, MethodBlock methodBlock) {
+        Stack<MethodBlock> visited = new Stack<>();
+        Stack<MethodBlock> dfs = new Stack<>();
+        dfs.push(methodBlock);
 
-        while(!blockQueue.isEmpty()) {
-            currentBlock = blockQueue.remove();
+        while(!dfs.isEmpty()) {
+            MethodBlock currentBlock = dfs.peek();
 
-            currentTaintedBlocks.add(currentBlock);
-            Set<MethodBlock> successorsOne = currentBlock.getSuccessors();
-
-            for(MethodBlock methodBlock : successorsOne) {
-                if(!currentTaintedBlocks.contains(methodBlock)) {
-                    blockQueue.add(methodBlock);
-                }
+            if(currentBlock.getSuccessors().isEmpty()) {
+                visited.push(dfs.pop());
             }
+            else {
+                boolean done = true;
 
-            if(successorsOne.size() == 2 && !blocksWithTwoSuccessors.contains(currentBlock)) {
-                blocksWithTwoSuccessors.add(currentBlock);
-            }
-        }
-    }
+                for(MethodBlock successor : currentBlock.getSuccessors()) {
+                    if(!visited.contains(successor) && !dfs.contains(successor)) {
+                        dfs.push(successor);
 
-    public MethodBlock getWhereBranchesConverge(MethodBlock rootBlock) {
-        if(rootBlock.getSuccessors().size() == 1) {
-            return rootBlock.getSuccessors().iterator().next();
-        }
-
-        Set<MethodBlock> successors = rootBlock.getSuccessors();
-        Iterator<MethodBlock> successorsIterator = successors.iterator();
-        MethodBlock currentBlock = successorsIterator.next();
-
-        Set<Set<MethodBlock>> taintedBlocks = new HashSet<>();
-        Set<MethodBlock> currentTaintedBlocks = new LinkedHashSet<>();
-        taintedBlocks.add(currentTaintedBlocks);
-        currentTaintedBlocks.add(currentBlock);
-
-        Queue<MethodBlock> blockQueue = new LinkedList<>();
-        blockQueue.add(currentBlock);
-
-        Queue<MethodBlock> blocksWithTwoSuccessors = new LinkedList<>();
-
-        // Taint one of the branches
-        this.taintBranch(currentBlock, currentTaintedBlocks, blocksWithTwoSuccessors);
-
-        currentBlock = successorsIterator.next();
-        currentTaintedBlocks = new LinkedHashSet<>();
-        taintedBlocks.add(currentTaintedBlocks);
-        currentTaintedBlocks.add(currentBlock);
-        blockQueue = new LinkedList<>();
-        blockQueue.add(currentBlock);
-
-        // Taint the other branch
-        this.taintBranch(currentBlock, currentTaintedBlocks, blocksWithTwoSuccessors);
-
-        // Get set of tainted blocks with the most blocks
-        Set<MethodBlock> longestPath = null;
-
-        for(Set<MethodBlock> path : taintedBlocks) {
-            if(longestPath == null || path.size() > longestPath.size()) {
-                longestPath = path;
-            }
-        }
-
-        // Create a new set of tainted blocks and remove the one that has the one with the most blocks
-        Set<Set<MethodBlock>> hold = new HashSet<>(taintedBlocks);
-        hold.remove(longestPath);
-
-        // Find that first node that is in both sets to find where to get all the paths from the root node
-        for(MethodBlock possibleMethodBlock : longestPath) {
-            boolean inAllPaths = true;
-
-            for(Set<MethodBlock> path : taintedBlocks) {
-                if(!path.contains(possibleMethodBlock)) {
-                    inAllPaths = false;
-                    break;
-                }
-            }
-
-            if(inAllPaths) {
-                currentBlock = possibleMethodBlock;
-                break;
-            }
-        }
-
-        // Get all paths between the root node and the first node in both sets of tainted blocks
-        Set<List<MethodBlock>> pathsFromRootToCurrentBlock = new HashSet<>();
-        List<MethodBlock> visitedBlock = new ArrayList<>();
-        visitedBlock.add(rootBlock);
-        this.findAllPaths(rootBlock, currentBlock, visitedBlock, pathsFromRootToCurrentBlock);
-
-        // If all blocks of all paths have their successors as part of the paths, then we found were the branches converge
-        Set<MethodBlock> allAncestors = new HashSet<>();
-
-        for(List<MethodBlock> pathFromRootToCurrentBlock : pathsFromRootToCurrentBlock) {
-            allAncestors.addAll(pathFromRootToCurrentBlock);
-        }
-
-        boolean done = true;
-
-        for(MethodBlock ancestor : allAncestors) {
-            if(ancestor == currentBlock) {
-                continue;
-            }
-
-            if(!allAncestors.containsAll(ancestor.getSuccessors())) {
-                done = false;
-            }
-        }
-
-        if(done) {
-            return currentBlock;
-        }
-
-        // For each inner block with two successors, taint the blocks reached by those blocks
-        while(!blocksWithTwoSuccessors.isEmpty()) {
-            currentBlock = blocksWithTwoSuccessors.remove();
-
-            for(MethodBlock successor : currentBlock.getSuccessors()) {
-                currentTaintedBlocks = new LinkedHashSet<>();
-                taintedBlocks.add(currentTaintedBlocks);
-                currentTaintedBlocks.add(successor);
-
-                blockQueue = new LinkedList<>();
-                blockQueue.add(successor);
-
-                while(!blockQueue.isEmpty()) {
-                    successor = blockQueue.remove();
-
-                    currentTaintedBlocks.add(successor);
-                    Set<MethodBlock> successorsOne = successor.getSuccessors();
-
-                    for(MethodBlock methodBlock : successorsOne) {
-                        if(!currentTaintedBlocks.contains(methodBlock)) {
-                            blockQueue.add(methodBlock);
-                        }
+                        done = false;
+                        break;
                     }
                 }
-            }
-        }
 
-        longestPath = null;
-
-        for(Set<MethodBlock> path : taintedBlocks) {
-            if(longestPath == null || path.size() > longestPath.size()) {
-                longestPath = path;
-            }
-        }
-
-        taintedBlocks.remove(longestPath);
-
-        for(MethodBlock possibleMethodBlock : longestPath) {
-            boolean inAllPaths = true;
-
-            for(Set<MethodBlock> path : taintedBlocks) {
-                if(!path.contains(possibleMethodBlock)) {
-                    inAllPaths = false;
-                    break;
+                if(done) {
+                    visited.push(dfs.pop());
                 }
             }
+        }
 
-            if(inAllPaths) {
-                return possibleMethodBlock;
+        MethodGraph reversedGraph = MethodGraph.reverseGraph(methodGraph);
+        System.out.println(reversedGraph.toDotString("reverse"));
+
+        Set<Set<MethodBlock>> stronglyConnectedComponents = new HashSet<>();
+        Set<MethodBlock> stronglyConnectedComponent = new HashSet<>();
+
+        while(!visited.isEmpty()) {
+            MethodBlock currentBlock = visited.pop();
+            currentBlock = reversedGraph.getMethodBlock(currentBlock.getID());
+            stronglyConnectedComponent.add(currentBlock);
+
+            if(!currentBlock.getSuccessors().isEmpty()) {
+                boolean done = true;
+
+                for(MethodBlock successor : currentBlock.getSuccessors()) {
+                    if(visited.contains(successor)) {
+                        stronglyConnectedComponent.add(successor);
+                        visited.remove(successor);
+                        visited.push(successor);
+
+                        done = false;
+                        break;
+                    }
+                }
+
+                if(done) {
+                    stronglyConnectedComponents.add(stronglyConnectedComponent);
+                    stronglyConnectedComponent = new HashSet<>();
+                }
+            }
+            else {
+                stronglyConnectedComponents.add(stronglyConnectedComponent);
+                stronglyConnectedComponent = new HashSet<>();
             }
         }
 
-        return null;
-    }
-
-    public void findAllPaths(MethodBlock start, MethodBlock end, List<MethodBlock> visitedBlocks, Set<List<MethodBlock>> paths) {
-        Set<MethodBlock> successors = start.getSuccessors();
-
-        for(MethodBlock methodBlock : successors) {
-            if(visitedBlocks.contains(methodBlock)) {
-                continue;
-            }
-
-            if(methodBlock.equals(end)) {
-                visitedBlocks.add(methodBlock);
-                paths.add(new ArrayList<>(visitedBlocks));
-                visitedBlocks.remove(visitedBlocks.size()-1);
-            }
-        }
-
-        for(MethodBlock methodBlock : successors) {
-            if(visitedBlocks.contains(methodBlock) || methodBlock.equals(end)) {
-                continue;
-            }
-
-            visitedBlocks.add(methodBlock);
-            this.findAllPaths(methodBlock, end, visitedBlocks, paths);
-            visitedBlocks.remove(visitedBlocks.size()-1);
-        }
+        return stronglyConnectedComponents;
     }
 
     public String toDotString(String methodName) {

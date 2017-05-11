@@ -50,8 +50,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
         Set<JavaRegion> regionsInClass = this.getRegionsInClass(classPackage, className);
 
-        // TODO sort regions by start index
-
         for(MethodNode methodNode : classNode.methods) {
             boolean instrumentMethod = false;
 
@@ -68,9 +66,29 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
             MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
             System.out.println(graph.toDotString(methodNode.name));
+            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
             // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
             methodNode.instructions.toArray();
-            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
+
+            Set<AbstractInsnNode> instructionsToStartInstrumenting = new HashSet<>();
+
+            for(JavaRegion region : regionsInMethod) {
+                instructionsToStartInstrumenting.add(methodNode.instructions.get(region.getStartBytecodeIndex()));
+            }
+
+            List<MethodBlock> methodBlocksToInstrument = new ArrayList<>();
+
+            for(MethodBlock block : graph.getBlocks()) {
+                List<AbstractInsnNode> blockInstructions = block.getInstructions();
+
+                for(AbstractInsnNode instructionToStartInstrumenting : instructionsToStartInstrumenting) {
+                    if(blockInstructions.contains(instructionToStartInstrumenting)) {
+                        MethodBlock start = JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
+                        methodBlocksToInstrument.add(start);
+                    }
+                }
+            }
+
             InsnList newInstructions = new InsnList();
 
             InsnList instructions = methodNode.instructions;
@@ -162,6 +180,34 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             methodNode.instructions.clear();
             methodNode.instructions.add(newInstructions);
         }
+    }
+
+    public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
+        MethodBlock immediatePostDominator = MethodGraph.getImmediatePostDominator(methodGraph, start);
+        Set<Set<MethodBlock>> stronglyConnectedComponents = MethodGraph.getStronglyConnectedComponents(methodGraph, start);
+        Set<MethodBlock> stronglyConnectedComponentOfImmediatePostDominator = new HashSet<>();
+
+        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
+            if(stronglyConnectedComponent.contains(immediatePostDominator) && stronglyConnectedComponent.size() > 1) {
+                stronglyConnectedComponentOfImmediatePostDominator = new HashSet<>(stronglyConnectedComponent);
+                break;
+            }
+        }
+
+        if(stronglyConnectedComponentOfImmediatePostDominator.isEmpty()) {
+            return start;
+        }
+
+        stronglyConnectedComponentOfImmediatePostDominator.add(start);
+
+        for(MethodBlock component : stronglyConnectedComponentOfImmediatePostDominator) {
+            MethodBlock immediateDominator = MethodGraph.getImmediateDominator(methodGraph, component);
+            if(!stronglyConnectedComponentOfImmediatePostDominator.contains(immediateDominator)) {
+                return component;
+            }
+        }
+
+        throw new RuntimeException("Could not find out where to start instrumenting");
     }
 
     private Set<JavaRegion> getRegionsInClass(String regionPackage, String regionClass) {

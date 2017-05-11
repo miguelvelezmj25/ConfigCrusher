@@ -207,7 +207,6 @@ public class MethodGraphTest {
 
         System.out.println(methodGraph.toDotString("test"));
         MethodGraph reversedGraph = methodGraph.reverseGraph();
-        System.out.println(reversedGraph.toDotString("reversed"));
         MethodGraph normalGraph = MethodGraph.reverseGraph(reversedGraph);
         System.out.println(normalGraph.toDotString("normal"));
 
@@ -248,7 +247,6 @@ public class MethodGraphTest {
 
         System.out.println(methodGraph.toDotString("test"));
         MethodGraph reversedGraph = methodGraph.reverseGraph();
-        System.out.println(reversedGraph.toDotString("reversed"));
         MethodGraph normalGraph = MethodGraph.reverseGraph(reversedGraph);
         System.out.println(normalGraph.toDotString("normal"));
 

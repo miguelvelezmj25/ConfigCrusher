@@ -115,6 +115,7 @@ public class MethodGraph {
 
         reversedGraph.entryBlock = reversedGraph.blocks.get(methodGraph.exitBlock.getID());
         reversedGraph.exitBlock = reversedGraph.blocks.get(methodGraph.entryBlock.getID());
+        System.out.println(reversedGraph.toDotString("reverse"));
 
         return reversedGraph;
     }
@@ -129,11 +130,12 @@ public class MethodGraph {
 
     private static MethodBlock getImmediatePostDominator(MethodGraph methodGraph, MethodBlock methodBlock) {
         MethodGraph reversedGraph = MethodGraph.reverseGraph(methodGraph);
-        System.out.println(reversedGraph.toDotString("reverse"));
         return MethodGraph.getImmediateDominator(reversedGraph, methodBlock);
     }
 
     public static Set<Set<MethodBlock>> getStronglyConnectedComponents(MethodGraph methodGraph, MethodBlock methodBlock) {
+        // DFS on the graph to find the order in which the blocks were last visited
+
         Stack<MethodBlock> visited = new Stack<>();
         Stack<MethodBlock> dfs = new Stack<>();
         dfs.push(methodBlock);
@@ -162,9 +164,10 @@ public class MethodGraph {
             }
         }
 
+        // Reverse the graph
         MethodGraph reversedGraph = MethodGraph.reverseGraph(methodGraph);
-        System.out.println(reversedGraph.toDotString("reverse"));
 
+        // DFS in order of last visited block from the first pass
         Set<Set<MethodBlock>> stronglyConnectedComponents = new HashSet<>();
         Set<MethodBlock> stronglyConnectedComponent = new HashSet<>();
 
@@ -173,7 +176,11 @@ public class MethodGraph {
             currentBlock = reversedGraph.getMethodBlock(currentBlock.getID());
             stronglyConnectedComponent.add(currentBlock);
 
-            if(!currentBlock.getSuccessors().isEmpty()) {
+            if(currentBlock.getSuccessors().isEmpty()) {
+                stronglyConnectedComponents.add(stronglyConnectedComponent);
+                stronglyConnectedComponent = new HashSet<>();
+            }
+            else {
                 boolean done = true;
 
                 for(MethodBlock successor : currentBlock.getSuccessors()) {
@@ -191,10 +198,6 @@ public class MethodGraph {
                     stronglyConnectedComponents.add(stronglyConnectedComponent);
                     stronglyConnectedComponent = new HashSet<>();
                 }
-            }
-            else {
-                stronglyConnectedComponents.add(stronglyConnectedComponent);
-                stronglyConnectedComponent = new HashSet<>();
             }
         }
 

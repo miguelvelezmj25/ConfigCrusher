@@ -14,131 +14,36 @@ public class MethodGraph {
     private MethodBlock exitBlock = null;
     private Map<String, MethodBlock> blocks = new HashMap<>();
 
-    public void addMethodBlock(MethodBlock methodBlock) {
-        if(this.entryBlock == null) {
-            this.entryBlock = methodBlock;
-        }
+    public static MethodBlock getWhereToEndInstrumenting(MethodGraph methodGraph, MethodBlock start) {
+        MethodBlock immediatePostDominator = MethodGraph.getImmediatePostDominator(methodGraph, start);
+        Set<Set<MethodBlock>> stronglyConnectedComponents = MethodGraph.getStronglyConnectedComponents(methodGraph, start);
 
-        this.blocks.put(methodBlock.getID(), methodBlock);
-        this.exitBlock = methodBlock;
-    }
+        boolean inLoop = false;
 
-    public void addEdge(MethodBlock from, MethodBlock to) {
-        from.addSuccessor(to);
-        to.addPredecessor(from);
-    }
-
-    public static Map<MethodBlock, Set<MethodBlock>> getDominators(MethodGraph methodGraph) {
-        Map<MethodBlock, Set<MethodBlock>> blocksToDominators = new HashMap<>();
-
-        for(MethodBlock block : methodGraph.blocks.values()) {
-            blocksToDominators.put(block, new HashSet<>(methodGraph.blocks.values()));
-        }
-
-        Set<MethodBlock> dominators = new HashSet<>();
-        dominators.add(methodGraph.entryBlock);
-        blocksToDominators.put(methodGraph.entryBlock, dominators);
-
-        Set<MethodBlock> blocks = new HashSet<>(methodGraph.blocks.values());
-        blocks.remove(methodGraph.entryBlock);
-
-        boolean change = true;
-
-        while(change) {
-            change = false;
-
-            for(MethodBlock block : blocks) {
-                dominators = new HashSet<>();
-                dominators.add(block);
-
-                Set<MethodBlock> predecessorsDominators = new HashSet<>(methodGraph.blocks.values());
-
-                for(MethodBlock predecessor : block.getPredecessors()) {
-                    predecessorsDominators.retainAll(blocksToDominators.get(predecessor));
-                }
-
-                dominators.addAll(predecessorsDominators);
-                Set<MethodBlock> previousDominators = blocksToDominators.get(block);
-
-                if(!previousDominators.equals(dominators)) {
-                    change = true;
-                    blocksToDominators.put(block, dominators);
-                }
+        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
+            if(stronglyConnectedComponent.contains(immediatePostDominator) && stronglyConnectedComponent.size() > 1) {
+                inLoop = true;
+                break;
             }
         }
 
-        for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : blocksToDominators.entrySet()) {
-            System.out.println(blockToDominators.getKey() + " - " + blockToDominators.getValue());
+        if(!inLoop) {
+            return immediatePostDominator;
         }
 
-        return blocksToDominators;
+        throw new RuntimeException("We need to do some more work");
     }
 
-    public Map<MethodBlock, Set<MethodBlock>> getDominators() {
-        return MethodGraph.getDominators(this);
-    }
-
-    public static MethodBlock getImmediateDominator(MethodGraph methodGraph, MethodBlock methodBlock) {
-        Map<MethodBlock, Set<MethodBlock>> blocksToDominators = MethodGraph.getDominators(methodGraph);
-        Set<MethodBlock> dominators = new HashSet<>(blocksToDominators.get(methodBlock));
-        dominators.remove(methodBlock);
-
-        for(MethodBlock dominator : dominators) {
-            if(dominators.equals(blocksToDominators.get(dominator))) {
-                return dominator;
-            }
-        }
-
-        throw new RuntimeException("Could not find an immediate dominator");
-    }
-
-    public MethodBlock getImmediateDominator(MethodBlock methodBlock) {
-        return MethodGraph.getImmediateDominator(this, methodBlock);
-    }
-
-    public static MethodGraph reverseGraph(MethodGraph methodGraph) {
-        MethodGraph reversedGraph = new MethodGraph();
-        Set<MethodBlock> blocks = new HashSet<>(methodGraph.blocks.values());
-
-        for(MethodBlock block : blocks) {
-            MethodBlockReversed newBlock = new MethodBlockReversed(block.getID());
-            reversedGraph.addMethodBlock(newBlock);
-        }
-
-        for(MethodBlock block : blocks) {
-            for(MethodBlock successor : block.getSuccessors()) {
-                MethodBlock newBlock = reversedGraph.blocks.get(block.getID());
-                MethodBlock newSuccessorBlock = reversedGraph.blocks.get(successor.getID());
-                reversedGraph.addEdge(newSuccessorBlock, newBlock);
-            }
-        }
-
-        reversedGraph.entryBlock = reversedGraph.blocks.get(methodGraph.exitBlock.getID());
-        reversedGraph.exitBlock = reversedGraph.blocks.get(methodGraph.entryBlock.getID());
-        System.out.println(reversedGraph.toDotString("reverse"));
-
-        return reversedGraph;
-    }
-
-    public MethodGraph reverseGraph() {
-        return MethodGraph.reverseGraph(this);
-    }
-
-    public MethodBlock getImmediatePostDominator(MethodBlock methodBlock) {
-        return MethodGraph.getImmediatePostDominator(this, methodBlock);
-    }
-
-    private static MethodBlock getImmediatePostDominator(MethodGraph methodGraph, MethodBlock methodBlock) {
+    public static MethodBlock getImmediatePostDominator(MethodGraph methodGraph, MethodBlock start) {
         MethodGraph reversedGraph = MethodGraph.reverseGraph(methodGraph);
-        return MethodGraph.getImmediateDominator(reversedGraph, methodBlock);
+        return MethodGraph.getImmediateDominator(reversedGraph, start);
     }
 
-    public static Set<Set<MethodBlock>> getStronglyConnectedComponents(MethodGraph methodGraph, MethodBlock methodBlock) {
+    public static Set<Set<MethodBlock>> getStronglyConnectedComponents(MethodGraph methodGraph, MethodBlock start) {
         // DFS on the graph to find the order in which the blocks were last visited
-
         Stack<MethodBlock> visited = new Stack<>();
         Stack<MethodBlock> dfs = new Stack<>();
-        dfs.push(methodBlock);
+        dfs.push(start);
 
         while(!dfs.isEmpty()) {
             MethodBlock currentBlock = dfs.peek();
@@ -202,6 +107,126 @@ public class MethodGraph {
         }
 
         return stronglyConnectedComponents;
+    }
+
+    public static MethodGraph reverseGraph(MethodGraph methodGraph) {
+        MethodGraph reversedGraph = new MethodGraph();
+        Set<MethodBlock> blocks = new HashSet<>(methodGraph.blocks.values());
+
+        for(MethodBlock block : blocks) {
+            MethodBlockReversed newBlock = new MethodBlockReversed(block.getID());
+            reversedGraph.addMethodBlock(newBlock);
+        }
+
+        for(MethodBlock block : blocks) {
+            for(MethodBlock successor : block.getSuccessors()) {
+                MethodBlock newBlock = reversedGraph.blocks.get(block.getID());
+                MethodBlock newSuccessorBlock = reversedGraph.blocks.get(successor.getID());
+                reversedGraph.addEdge(newSuccessorBlock, newBlock);
+            }
+        }
+
+        reversedGraph.entryBlock = reversedGraph.blocks.get(methodGraph.exitBlock.getID());
+        reversedGraph.exitBlock = reversedGraph.blocks.get(methodGraph.entryBlock.getID());
+        System.out.println(reversedGraph.toDotString("reverse"));
+
+        return reversedGraph;
+    }
+
+    public static MethodBlock getImmediateDominator(MethodGraph methodGraph, MethodBlock start) {
+        Map<MethodBlock, Set<MethodBlock>> blocksToDominators = MethodGraph.getDominators(methodGraph);
+        Set<MethodBlock> dominators = new HashSet<>(blocksToDominators.get(start));
+        dominators.remove(start);
+
+        for(MethodBlock dominator : dominators) {
+            if(dominators.equals(blocksToDominators.get(dominator))) {
+                return dominator;
+            }
+        }
+
+        throw new RuntimeException("Could not find an immediate dominator");
+    }
+
+    public static Map<MethodBlock, Set<MethodBlock>> getDominators(MethodGraph methodGraph) {
+        Map<MethodBlock, Set<MethodBlock>> blocksToDominators = new HashMap<>();
+
+        for(MethodBlock block : methodGraph.blocks.values()) {
+            blocksToDominators.put(block, new HashSet<>(methodGraph.blocks.values()));
+        }
+
+        Set<MethodBlock> dominators = new HashSet<>();
+        dominators.add(methodGraph.entryBlock);
+        blocksToDominators.put(methodGraph.entryBlock, dominators);
+
+        Set<MethodBlock> blocks = new HashSet<>(methodGraph.blocks.values());
+        blocks.remove(methodGraph.entryBlock);
+
+        boolean change = true;
+
+        while(change) {
+            change = false;
+
+            for(MethodBlock block : blocks) {
+                dominators = new HashSet<>();
+                dominators.add(block);
+
+                Set<MethodBlock> predecessorsDominators = new HashSet<>(methodGraph.blocks.values());
+
+                for(MethodBlock predecessor : block.getPredecessors()) {
+                    predecessorsDominators.retainAll(blocksToDominators.get(predecessor));
+                }
+
+                dominators.addAll(predecessorsDominators);
+                Set<MethodBlock> previousDominators = blocksToDominators.get(block);
+
+                if(!previousDominators.equals(dominators)) {
+                    change = true;
+                    blocksToDominators.put(block, dominators);
+                }
+            }
+        }
+
+        for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : blocksToDominators.entrySet()) {
+            System.out.println(blockToDominators.getKey() + " - " + blockToDominators.getValue());
+        }
+
+        return blocksToDominators;
+    }
+
+    public void addMethodBlock(MethodBlock methodBlock) {
+        if(this.entryBlock == null) {
+            this.entryBlock = methodBlock;
+        }
+
+        this.blocks.put(methodBlock.getID(), methodBlock);
+        this.exitBlock = methodBlock;
+    }
+
+    public void addEdge(MethodBlock from, MethodBlock to) {
+        from.addSuccessor(to);
+        to.addPredecessor(from);
+    }
+
+    public Map<MethodBlock, Set<MethodBlock>> getDominators() {
+        return MethodGraph.getDominators(this);
+    }
+
+    public MethodBlock getImmediateDominator(MethodBlock methodBlock) {
+        return MethodGraph.getImmediateDominator(this, methodBlock);
+    }
+
+
+
+    public MethodGraph reverseGraph() {
+        return MethodGraph.reverseGraph(this);
+    }
+
+    public MethodBlock getImmediatePostDominator(MethodBlock methodBlock) {
+        return MethodGraph.getImmediatePostDominator(this, methodBlock);
+    }
+
+    public Set<Set<MethodBlock>> getStronglyConnectedComponents(MethodBlock methodBlock) {
+        return MethodGraph.getStronglyConnectedComponents(this, methodBlock);
     }
 
     public String toDotString(String methodName) {

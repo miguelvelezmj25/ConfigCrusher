@@ -15,6 +15,40 @@ import java.util.Set;
 public class MethodGraphTest {
 
     @Test
+    public void testGetWhereToEndInstrumenting1() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock f = new MethodBlock("F", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, f);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(c, e);
+        methodGraph.addEdge(f, c);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(c, MethodGraph.getWhereToEndInstrumenting(methodGraph, a));
+    }
+
+    @Test
     public void testGetStronglyConnectedComponents1() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();

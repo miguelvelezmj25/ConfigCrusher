@@ -15,7 +15,7 @@ import java.util.Set;
 public class MethodGraphTest {
 
     @Test
-    public void testGetWhereToEndInstrumenting1() {
+    public void testGetWhereToStartInstrumenting1() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 
@@ -26,8 +26,10 @@ public class MethodGraphTest {
         MethodBlock d = new MethodBlock("D");
         MethodBlock e = new MethodBlock("E");
         MethodBlock f = new MethodBlock("F");
+        MethodBlock x = new MethodBlock("X");
 
         // Add vertices
+        methodGraph.addMethodBlock(x);
         methodGraph.addMethodBlock(a);
         methodGraph.addMethodBlock(b);
         methodGraph.addMethodBlock(c);
@@ -43,9 +45,118 @@ public class MethodGraphTest {
         methodGraph.addEdge(d, b);
         methodGraph.addEdge(c, e);
         methodGraph.addEdge(f, c);
+        methodGraph.addEdge(x, a);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(c, MethodGraph.getWhereToEndInstrumenting(methodGraph, a));
+        Assert.assertEquals(x, MethodGraph.getWhereToStartInstrumenting(methodGraph, a));
+    }
+
+    @Test
+    public void testGetWhereToStartInstrumenting2() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock x = new MethodBlock("X");
+
+        // Add vertices
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(x, a);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, d);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, a);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(b, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(x, MethodGraph.getWhereToStartInstrumenting(methodGraph, a));
+    }
+
+    @Test
+    public void testGetWhereToStartInstrumenting3() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock x = new MethodBlock("X");
+        MethodBlock y = new MethodBlock("Y");
+
+        // Add vertices
+        methodGraph.addMethodBlock(y);
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(y, x);
+        methodGraph.addEdge(x, a);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, d);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, x);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(b, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(y, MethodGraph.getWhereToStartInstrumenting(methodGraph, a));
+    }
+
+    @Test
+    public void testGetWhereToStartInstrumenting4() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock x = new MethodBlock("X");
+        MethodBlock y = new MethodBlock("Y");
+
+        // Add vertices
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(y);
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(d, x);
+        methodGraph.addEdge(x, a);
+        methodGraph.addEdge(x, y);
+        methodGraph.addEdge(y, c);
+        methodGraph.addEdge(c, a);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(b, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(d, MethodGraph.getWhereToStartInstrumenting(methodGraph, x));
     }
 
     @Test
@@ -1090,6 +1201,114 @@ public class MethodGraphTest {
 
         // Assert
         Assert.assertEquals(e, methodGraph.getImmediatePostDominator(b));
+    }
+
+    @Test
+    public void testGetImmediatePostDominator16() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock x = new MethodBlock("X");
+
+        // Add vertices
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, f);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(c, e);
+        methodGraph.addEdge(f, c);
+        methodGraph.addEdge(x, a);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(c, MethodGraph.getImmediatePostDominator(methodGraph, a));
+    }
+
+    @Test
+    public void testGetImmediatePostDominator17() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock x = new MethodBlock("X");
+
+        // Add vertices
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(x, a);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, d);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, a);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(b, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(b, MethodGraph.getImmediatePostDominator(methodGraph, a));
+    }
+
+    @Test
+    public void testGetImmediatePostDominator18() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock x = new MethodBlock("X");
+        MethodBlock y = new MethodBlock("Y");
+
+        // Add vertices
+        methodGraph.addMethodBlock(y);
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(y, x);
+        methodGraph.addEdge(x, a);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, d);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, x);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(b, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(b, MethodGraph.getImmediatePostDominator(methodGraph, a));
     }
 
     @Test

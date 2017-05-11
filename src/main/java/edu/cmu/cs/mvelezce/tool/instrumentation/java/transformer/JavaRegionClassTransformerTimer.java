@@ -23,8 +23,6 @@ public class JavaRegionClassTransformerTimer extends JavaRegionClassTransformer 
         InsnList instructionsStartRegion = new InsnList();
         instructionsStartRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
         instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "enter", "(Ljava/lang/String;)V", false));
-//        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "getRegion", "(Ljava/lang/String;)Ledu/cmu/cs/mvelezce/tool/analysis/Region;", false));
-//        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "edu/cmu/cs/mvelezce/tool/analysis/Region", "enter", "()V", false));
 
         return instructionsStartRegion;
     }
@@ -34,8 +32,6 @@ public class JavaRegionClassTransformerTimer extends JavaRegionClassTransformer 
         InsnList instructionsEndRegion = new InsnList();
         instructionsEndRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
         instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "exit", "(Ljava/lang/String;)V", false));
-//        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "getRegion", "(Ljava/lang/String;)Ledu/cmu/cs/mvelezce/tool/analysis/Region;", false));
-//        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "edu/cmu/cs/mvelezce/tool/analysis/Region", "exit", "()V", false));
 
         return instructionsEndRegion;
     }

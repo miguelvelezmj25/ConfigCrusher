@@ -48,7 +48,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(x, a);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(x, MethodGraph.getWhereToStartInstrumenting(methodGraph, a));
+        Assert.assertEquals(a, MethodGraph.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(x, MethodGraph.getWhereToStartInstrumenting(methodGraph, a));
+        Assert.assertEquals(a, MethodGraph.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
     }
 
     @Test
@@ -119,7 +119,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(y, MethodGraph.getWhereToStartInstrumenting(methodGraph, a));
+        Assert.assertEquals(x, MethodGraph.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
     }
 
     @Test
@@ -156,7 +156,84 @@ public class MethodGraphTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(d, MethodGraph.getWhereToStartInstrumenting(methodGraph, x));
+        Assert.assertEquals(x, MethodGraph.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
+    }
+
+    @Test
+    public void testGetWhereToStartInstrumenting5() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock x = new MethodBlock("X");
+
+        // Add vertices
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(x, a);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(a, MethodGraph.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
+    }
+
+    @Test
+    public void testGetWhereToStartInstrumenting6() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
+        MethodBlock x = new MethodBlock("X");
+        MethodBlock y = new MethodBlock("Y");
+
+        // Add vertices
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(g);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(y);
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(f, d);
+        methodGraph.addEdge(f, g);
+        methodGraph.addEdge(g, x);
+        methodGraph.addEdge(d, x);
+        methodGraph.addEdge(x, a);
+        methodGraph.addEdge(x, y);
+        methodGraph.addEdge(y, c);
+        methodGraph.addEdge(c, a);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(b, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(x, MethodGraph.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
     }
 
     @Test

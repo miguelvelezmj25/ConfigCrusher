@@ -9,12 +9,13 @@ import java.util.*;
  */
 public class MethodGraph {
 
+    // TODO some methods are recreating structures that have been previously calculated
     // TODO create a single exit block for the graph
     private MethodBlock entryBlock = null;
     private MethodBlock exitBlock = null;
     private Map<String, MethodBlock> blocks = new HashMap<>();
 
-    public static MethodBlock getWhereToStartInstrumenting(MethodGraph methodGraph, MethodBlock start) {
+    public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
         MethodBlock immediatePostDominator = MethodGraph.getImmediatePostDominator(methodGraph, start);
         Set<Set<MethodBlock>> stronglyConnectedComponents = MethodGraph.getStronglyConnectedComponents(methodGraph, start);
         Set<MethodBlock> stronglyConnectedComponentOfImmediatePostDominator = new HashSet<>();
@@ -35,7 +36,7 @@ public class MethodGraph {
         for(MethodBlock component : stronglyConnectedComponentOfImmediatePostDominator) {
             MethodBlock immediateDominator = MethodGraph.getImmediateDominator(methodGraph, component);
             if(!stronglyConnectedComponentOfImmediatePostDominator.contains(immediateDominator)) {
-                return immediateDominator;
+                return component;
             }
         }
 
@@ -244,8 +245,8 @@ public class MethodGraph {
         return MethodGraph.getStronglyConnectedComponents(this, methodBlock);
     }
 
-    public MethodBlock getWhereToStartInstrumenting(MethodBlock start) {
-        return MethodGraph.getWhereToStartInstrumenting(this, start);
+    public MethodBlock getBlockToStartInstrumentingBeforeIt(MethodBlock start) {
+        return MethodGraph.getBlockToStartInstrumentingBeforeIt(this, start);
     }
 
     public String toDotString(String methodName) {

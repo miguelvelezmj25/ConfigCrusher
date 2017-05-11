@@ -20,12 +20,12 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -54,11 +54,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -84,11 +84,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -114,12 +114,12 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
 
         // Add vertices
         methodGraph.addMethodBlock(f);
@@ -148,12 +148,12 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -180,14 +180,14 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
-        MethodBlock g = new MethodBlock("G", new Label());
-        MethodBlock h = new MethodBlock("H", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
+        MethodBlock h = new MethodBlock("H");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -219,11 +219,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -239,12 +239,18 @@ public class MethodGraphTest {
         methodGraph.addEdge(c, d);
         methodGraph.addEdge(d, e);
 
-        System.out.println(methodGraph.toDotString("test"));
         MethodGraph reversedGraph = methodGraph.reverseGraph();
         MethodGraph normalGraph = MethodGraph.reverseGraph(reversedGraph);
-        System.out.println(normalGraph.toDotString("normal"));
 
-        Assert.assertEquals(methodGraph.toDotString("a"), normalGraph.toDotString("a"));
+        Assert.assertEquals(methodGraph.getEntryBlock().getID(), normalGraph.getEntryBlock().getID());
+        Assert.assertEquals(methodGraph.getExitBlock().getID(), normalGraph.getExitBlock().getID());
+        Assert.assertEquals(methodGraph.getBlockCount(), normalGraph.getBlockCount());
+
+        for(MethodBlock methodBlock : methodGraph.getBlocks()) {
+            MethodBlock normalMethodBlock = normalGraph.getMethodBlock(methodBlock.getID());
+            Assert.assertEquals(methodBlock.getPredecessors().size(), normalMethodBlock.getPredecessors().size());
+            Assert.assertEquals(methodBlock.getSuccessors().size(), normalMethodBlock.getSuccessors().size());
+        }
     }
 
     @Test
@@ -253,13 +259,13 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
-        MethodBlock g = new MethodBlock("G", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -279,12 +285,18 @@ public class MethodGraphTest {
         methodGraph.addEdge(d, e);
         methodGraph.addEdge(e, g);
 
-        System.out.println(methodGraph.toDotString("test"));
         MethodGraph reversedGraph = methodGraph.reverseGraph();
         MethodGraph normalGraph = MethodGraph.reverseGraph(reversedGraph);
-        System.out.println(normalGraph.toDotString("normal"));
 
-        Assert.assertEquals(methodGraph.toDotString("a"), normalGraph.toDotString("a"));
+        Assert.assertEquals(methodGraph.getEntryBlock().getID(), normalGraph.getEntryBlock().getID());
+        Assert.assertEquals(methodGraph.getExitBlock().getID(), normalGraph.getExitBlock().getID());
+        Assert.assertEquals(methodGraph.getBlockCount(), normalGraph.getBlockCount());
+
+        for(MethodBlock methodBlock : methodGraph.getBlocks()) {
+            MethodBlock normalMethodBlock = normalGraph.getMethodBlock(methodBlock.getID());
+            Assert.assertEquals(methodBlock.getPredecessors().size(), normalMethodBlock.getPredecessors().size());
+            Assert.assertEquals(methodBlock.getSuccessors().size(), normalMethodBlock.getSuccessors().size());
+        }
     }
 
     @Test
@@ -293,11 +305,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -352,11 +364,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(e);
@@ -413,9 +425,9 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
 
         // Add vertices
         methodGraph.addMethodBlock(b);
@@ -462,11 +474,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -494,11 +506,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(e);
@@ -526,11 +538,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -558,13 +570,13 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
-        MethodBlock g = new MethodBlock("G", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
 
         // Add vertices
         methodGraph.addMethodBlock(f);
@@ -596,13 +608,13 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
-        MethodBlock g = new MethodBlock("G", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
 
         // Add vertices
         methodGraph.addMethodBlock(f);
@@ -635,12 +647,12 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
 
         // Add vertices
         methodGraph.addMethodBlock(f);
@@ -671,15 +683,15 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
-        MethodBlock g = new MethodBlock("G", new Label());
-        MethodBlock h = new MethodBlock("H", new Label());
-        MethodBlock i = new MethodBlock("I", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
+        MethodBlock h = new MethodBlock("H");
+        MethodBlock i = new MethodBlock("I");
 
         // Add vertices
         methodGraph.addMethodBlock(i);
@@ -717,11 +729,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -751,12 +763,12 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -789,12 +801,12 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -826,12 +838,12 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -861,12 +873,12 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -898,14 +910,14 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
-        MethodBlock g = new MethodBlock("G", new Label());
-        MethodBlock h = new MethodBlock("H", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
+        MethodBlock h = new MethodBlock("H");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -940,12 +952,12 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -978,11 +990,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -1011,11 +1023,11 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
 
         // Add vertices
         methodGraph.addMethodBlock(a);
@@ -1044,14 +1056,14 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock a = new MethodBlock("A", new Label());
-        MethodBlock b = new MethodBlock("B", new Label());
-        MethodBlock c = new MethodBlock("C", new Label());
-        MethodBlock d = new MethodBlock("D", new Label());
-        MethodBlock e = new MethodBlock("E", new Label());
-        MethodBlock f = new MethodBlock("F", new Label());
-        MethodBlock g = new MethodBlock("G", new Label());
-        MethodBlock h = new MethodBlock("H", new Label());
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
+        MethodBlock h = new MethodBlock("H");
 
         // Add vertices
         methodGraph.addMethodBlock(a);

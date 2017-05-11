@@ -15,6 +15,171 @@ import java.util.Set;
 public class MethodGraphTest {
 
     @Test
+    public void testGetStronglyConnectedComponents1() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, b);
+        methodGraph.addEdge(d, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(3, MethodGraph.getStronglyConnectedComponents(methodGraph, a).size());
+    }
+
+    @Test
+    public void testGetStronglyConnectedComponents2() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(5, MethodGraph.getStronglyConnectedComponents(methodGraph, a).size());
+    }
+
+    @Test
+    public void testGetStronglyConnectedComponents3() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock f = new MethodBlock("F", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(f, a);
+        methodGraph.addEdge(f, c);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, e);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, c);
+        methodGraph.addEdge(c, b);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(5, MethodGraph.getStronglyConnectedComponents(methodGraph, f).size());
+    }
+
+    @Test
+    public void testGetStronglyConnectedComponents4() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock f = new MethodBlock("F", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+
+        // Add edges
+        methodGraph.addEdge(a,b);
+        methodGraph.addEdge(b,e);
+        methodGraph.addEdge(e,f);
+        methodGraph.addEdge(b,c);
+        methodGraph.addEdge(c,d);
+        methodGraph.addEdge(d,b);
+
+        Assert.assertEquals(4, MethodGraph.getStronglyConnectedComponents(methodGraph, a).size());
+    }
+
+    @Test
+    public void testGetStronglyConnectedComponents5() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock g = new MethodBlock("G", new Label());
+        MethodBlock h = new MethodBlock("H", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(g);
+        methodGraph.addMethodBlock(h);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, e);
+        methodGraph.addEdge(e, h);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(d, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(f, g);
+        methodGraph.addEdge(g, d);
+
+        Assert.assertEquals(5, MethodGraph.getStronglyConnectedComponents(methodGraph, a).size());
+    }
+
+    @Test
     public void testReverseGraph1() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
@@ -773,6 +938,114 @@ public class MethodGraphTest {
 
         // Assert
         Assert.assertEquals(f, methodGraph.getImmediatePostDominator(a));
+    }
+
+    @Test
+    public void testGetImmediatePostDominator13() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, d);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+
+        // Assert
+        Assert.assertEquals(d, methodGraph.getImmediatePostDominator(a));
+    }
+
+    @Test
+    public void testGetImmediatePostDominator14() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, d);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+
+        // Assert
+        Assert.assertEquals(d, methodGraph.getImmediatePostDominator(b));
+    }
+
+    @Test
+    public void testGetImmediatePostDominator15() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A", new Label());
+        MethodBlock b = new MethodBlock("B", new Label());
+        MethodBlock c = new MethodBlock("C", new Label());
+        MethodBlock d = new MethodBlock("D", new Label());
+        MethodBlock e = new MethodBlock("E", new Label());
+        MethodBlock f = new MethodBlock("F", new Label());
+        MethodBlock g = new MethodBlock("G", new Label());
+        MethodBlock h = new MethodBlock("H", new Label());
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(g);
+        methodGraph.addMethodBlock(h);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, e);
+        methodGraph.addEdge(e, h);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(d, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(f, g);
+        methodGraph.addEdge(g, d);
+
+        System.out.println(methodGraph.toDotString("test"));
+
+        // Assert
+        Assert.assertEquals(e, methodGraph.getImmediatePostDominator(b));
     }
 
     @Test

@@ -39,6 +39,13 @@ public class MethodGraph {
         return MethodGraph.getImmediateDominator(reversedGraph, start);
     }
 
+    /**
+     * Kosaraju's algorithm
+     *
+     * @param methodGraph
+     * @param start
+     * @return
+     */
     public static Set<Set<MethodBlock>> getStronglyConnectedComponents(MethodGraph methodGraph, MethodBlock start) {
         // DFS on the graph to find the order in which the blocks were last visited
         Stack<MethodBlock> visited = new Stack<>();
@@ -187,7 +194,7 @@ public class MethodGraph {
         }
 
         for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : blocksToDominators.entrySet()) {
-            System.out.println(blockToDominators.getKey() + " - " + blockToDominators.getValue());
+            System.out.println(blockToDominators.getKey() + " dominated by " + blockToDominators.getValue());
         }
 
         return blocksToDominators;
@@ -264,6 +271,10 @@ public class MethodGraph {
 
     public MethodBlock getMethodBlock(Label label) {
         return this.getMethodBlock(label.toString());
+    }
+
+    public Set<MethodBlock> getBlocks() {
+        return new HashSet<>(this.blocks.values());
     }
 
     public int getBlockCount() { return this.blocks.size(); }

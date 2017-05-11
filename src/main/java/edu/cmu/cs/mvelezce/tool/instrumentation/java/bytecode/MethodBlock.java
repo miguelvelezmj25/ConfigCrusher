@@ -16,31 +16,25 @@ public class MethodBlock {
     private String ID;
     private Label label;
     private List<AbstractInsnNode> instructions;
-    private Set<MethodBlock> successors;
-    private Set<MethodBlock> predecessors;
+    private Set<MethodBlock> successors = new HashSet<>();
+    private Set<MethodBlock> predecessors = new HashSet<>();
 
     public MethodBlock(String ID, Label label, List<AbstractInsnNode> instructions) {
         this.ID = ID;
         this.label = label;
         this.instructions = instructions;
-        this.successors = new HashSet<>();
-        this.predecessors = new HashSet<>();
     }
 
     public MethodBlock(Label label, List<AbstractInsnNode> instructions) {
         this(label.toString(), label, instructions);
     }
 
-    public MethodBlock(String ID, Label label) {
-        this(ID, label, new ArrayList<>());
-    }
-
     public MethodBlock(String ID) {
-        this(ID, new Label());
+        this(ID, new Label(), new ArrayList<>());
     }
 
     public MethodBlock(Label label) {
-        this(label.toString(), label);
+        this(label.toString(), label, new ArrayList<>());
     }
 
 
@@ -66,7 +60,6 @@ public class MethodBlock {
 
     public Set<MethodBlock> getPredecessors () { return  this.predecessors; }
 
-    // TODO be careful with the instanceof
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,5 +78,12 @@ public class MethodBlock {
     @Override
     public String toString() {
         return this.ID;
+//        return "MethodBlock{" +
+//                "ID='" + ID + '\'' +
+//                ", label=" + label +
+//                ", instructions=" + instructions.size() +
+//                ", successors=" + successors.size() +
+//                ", predecessors=" + predecessors.size() +
+//                '}';
     }
 }

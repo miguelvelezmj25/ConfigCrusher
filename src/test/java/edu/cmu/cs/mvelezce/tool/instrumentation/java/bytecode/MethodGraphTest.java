@@ -41,7 +41,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(d, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(3, MethodGraph.getStronglyConnectedComponents(methodGraph, a).size());
+        Assert.assertEquals(3, methodGraph.getStronglyConnectedComponents(a).size());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(d, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(5, MethodGraph.getStronglyConnectedComponents(methodGraph, a).size());
+        Assert.assertEquals(5, methodGraph.getStronglyConnectedComponents(a).size());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(c, b);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(5, MethodGraph.getStronglyConnectedComponents(methodGraph, f).size());
+        Assert.assertEquals(5, methodGraph.getStronglyConnectedComponents(f).size());
     }
 
     @Test
@@ -137,7 +137,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(c,d);
         methodGraph.addEdge(d,b);
 
-        Assert.assertEquals(4, MethodGraph.getStronglyConnectedComponents(methodGraph, a).size());
+        Assert.assertEquals(4, methodGraph.getStronglyConnectedComponents(a).size());
     }
 
     @Test
@@ -176,7 +176,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(f, g);
         methodGraph.addEdge(g, d);
 
-        Assert.assertEquals(5, MethodGraph.getStronglyConnectedComponents(methodGraph, a).size());
+        Assert.assertEquals(5, methodGraph.getStronglyConnectedComponents(a).size());
     }
 
     @Test
@@ -206,7 +206,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(d, e);
 
         MethodGraph reversedGraph = methodGraph.reverseGraph();
-        MethodGraph normalGraph = MethodGraph.reverseGraph(reversedGraph);
+        MethodGraph normalGraph = reversedGraph.reverseGraph();
 
         Assert.assertEquals(methodGraph.getEntryBlock().getID(), normalGraph.getEntryBlock().getID());
         Assert.assertEquals(methodGraph.getExitBlock().getID(), normalGraph.getExitBlock().getID());
@@ -252,7 +252,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(e, g);
 
         MethodGraph reversedGraph = methodGraph.reverseGraph();
-        MethodGraph normalGraph = MethodGraph.reverseGraph(reversedGraph);
+        MethodGraph normalGraph = reversedGraph.reverseGraph();
 
         Assert.assertEquals(methodGraph.getEntryBlock().getID(), normalGraph.getEntryBlock().getID());
         Assert.assertEquals(methodGraph.getExitBlock().getID(), normalGraph.getExitBlock().getID());
@@ -1092,7 +1092,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(x, a);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(c, MethodGraph.getImmediatePostDominator(methodGraph, a));
+        Assert.assertEquals(c, methodGraph.getImmediatePostDominator(a));
     }
 
     @Test
@@ -1126,7 +1126,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(b, MethodGraph.getImmediatePostDominator(methodGraph, a));
+        Assert.assertEquals(b, methodGraph.getImmediatePostDominator(a));
     }
 
     @Test
@@ -1163,7 +1163,7 @@ public class MethodGraphTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(b, MethodGraph.getImmediatePostDominator(methodGraph, a));
+        Assert.assertEquals(b, methodGraph.getImmediatePostDominator(a));
     }
 
     @Test
@@ -1200,8 +1200,8 @@ public class MethodGraphTest {
         methodGraph.addEdge(f, d);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(d, MethodGraph.getImmediatePostDominator(methodGraph, b));
-        Assert.assertEquals(g, MethodGraph.getImmediatePostDominator(methodGraph, d));
+        Assert.assertEquals(d, methodGraph.getImmediatePostDominator(b));
+        Assert.assertEquals(g, methodGraph.getImmediatePostDominator(d));
     }
 
     @Test

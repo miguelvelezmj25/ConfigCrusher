@@ -139,8 +139,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
     }
 
     public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
-        MethodBlock immediatePostDominator = MethodGraph.getImmediatePostDominator(methodGraph, start);
-        Set<Set<MethodBlock>> stronglyConnectedComponents = MethodGraph.getStronglyConnectedComponents(methodGraph, start);
+        MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);
+        Set<Set<MethodBlock>> stronglyConnectedComponents = methodGraph.getStronglyConnectedComponents(start);
         Set<MethodBlock> problematicStronglyConnectedComponent = new HashSet<>();
 
         for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
@@ -160,7 +160,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
         while(methodBlockIterator.hasNext()) {
             MethodBlock component = methodBlockIterator.next();
-            MethodBlock immediateDominator = MethodGraph.getImmediateDominator(methodGraph, component);
+            MethodBlock immediateDominator = methodGraph.getImmediateDominator(component);
 
             if(immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(component)) {
                 if(!problematicStronglyConnectedComponent.contains(immediateDominator)) {

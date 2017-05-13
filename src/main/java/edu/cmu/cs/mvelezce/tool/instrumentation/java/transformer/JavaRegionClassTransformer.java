@@ -76,8 +76,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
             }
 
-            Map<MethodBlock, MethodBlock> methodBlocksToInstrument = new HashMap<>();
-
             for(MethodBlock block : graph.getBlocks()) {
                 List<AbstractInsnNode> blockInstructions = block.getInstructions();
 
@@ -85,7 +83,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
                         MethodBlock start = JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
                         MethodBlock end = graph.getImmediatePostDominator(start);
-                        methodBlocksToInstrument.put(start, end);
                         JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
                         region.setStartMethodBlock(start);
                         region.setEndMethodBlock(end);
@@ -100,11 +97,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
             while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
-//                LabelNode endLabelNode = null;
-
-//                if(instruction.getType() == AbstractInsnNode.LABEL) {
-//                    currentLabelNode = (LabelNode) instruction;
-//                }
 
                 if(instruction.getType() == AbstractInsnNode.LABEL) {
                     LabelNode currentLabelNode = (LabelNode) instruction;
@@ -149,24 +141,24 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
     public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
         MethodBlock immediatePostDominator = MethodGraph.getImmediatePostDominator(methodGraph, start);
         Set<Set<MethodBlock>> stronglyConnectedComponents = MethodGraph.getStronglyConnectedComponents(methodGraph, start);
-        Set<MethodBlock> stronglyConnectedComponentOfImmediatePostDominator = new HashSet<>();
+        Set<MethodBlock> problematicStronglyConnectedComponent = new HashSet<>();
 
         for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
-            if(stronglyConnectedComponent.contains(immediatePostDominator) && stronglyConnectedComponent.size() > 1) {
-                stronglyConnectedComponentOfImmediatePostDominator = new HashSet<>(stronglyConnectedComponent);
+            if(stronglyConnectedComponent.size() > 1 && (stronglyConnectedComponent.contains(immediatePostDominator) || stronglyConnectedComponent.contains(start))) {
+                problematicStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
                 break;
             }
         }
 
-        if(stronglyConnectedComponentOfImmediatePostDominator.isEmpty()) {
+        if(problematicStronglyConnectedComponent.isEmpty()) {
             return start;
         }
 
-        stronglyConnectedComponentOfImmediatePostDominator.add(start);
+        problematicStronglyConnectedComponent.add(start);
 
-        for(MethodBlock component : stronglyConnectedComponentOfImmediatePostDominator) {
+        for(MethodBlock component : problematicStronglyConnectedComponent) {
             MethodBlock immediateDominator = MethodGraph.getImmediateDominator(methodGraph, component);
-            if(!stronglyConnectedComponentOfImmediatePostDominator.contains(immediateDominator)) {
+            if(!problematicStronglyConnectedComponent.contains(immediateDominator)) {
                 return component;
             }
         }

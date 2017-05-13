@@ -1018,4 +1018,106 @@ public class JavaRegionClassTransformerTest {
         Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, e));
     }
 
+    @Test
+    public void testGetWhereToStartInstrumenting14() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
+        MethodBlock h = new MethodBlock("H");
+        MethodBlock i = new MethodBlock("I");
+        MethodBlock j = new MethodBlock("J");
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(g);
+        methodGraph.addMethodBlock(h);
+        methodGraph.addMethodBlock(i);
+        methodGraph.addMethodBlock(j);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(e, h);
+        methodGraph.addEdge(f, g);
+        methodGraph.addEdge(g, i);
+        methodGraph.addEdge(h, i);
+        methodGraph.addEdge(h, j);
+        methodGraph.addEdge(i, f);
+        methodGraph.addEdge(i, j);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
+        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, e));
+        Assert.assertEquals(h, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, h));
+        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, i));
+    }
+
+    @Test
+    public void testGetWhereToEndInstrumenting14() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
+        MethodBlock h = new MethodBlock("H");
+        MethodBlock i = new MethodBlock("I");
+        MethodBlock j = new MethodBlock("J");
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(g);
+        methodGraph.addMethodBlock(h);
+        methodGraph.addMethodBlock(i);
+        methodGraph.addMethodBlock(j);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(a, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(e, h);
+        methodGraph.addEdge(f, g);
+        methodGraph.addEdge(g, i);
+        methodGraph.addEdge(h, i);
+        methodGraph.addEdge(h, j);
+        methodGraph.addEdge(i, f);
+        methodGraph.addEdge(i, j);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
+        Assert.assertEquals(j, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, e));
+        Assert.assertEquals(j, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, h));
+        Assert.assertEquals(j, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, i));
+    }
+
 }

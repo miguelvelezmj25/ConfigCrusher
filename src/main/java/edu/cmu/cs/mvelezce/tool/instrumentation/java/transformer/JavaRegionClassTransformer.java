@@ -138,6 +138,37 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         }
     }
 
+    public static MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
+        MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);
+        Set<Set<MethodBlock>> stronglyConnectedComponents = methodGraph.getStronglyConnectedComponents(start);
+        Set<MethodBlock> problematicStronglyConnectedComponent = new HashSet<>();
+
+        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
+            if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(immediatePostDominator)) {
+                problematicStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
+                break;
+            }
+        }
+
+        if(problematicStronglyConnectedComponent.isEmpty()) {
+            return immediatePostDominator;
+        }
+
+        Set<MethodBlock> blocksToInstrumentAfterOfThem = new HashSet<>(problematicStronglyConnectedComponent);
+        Iterator<MethodBlock> methodBlockIterator = blocksToInstrumentAfterOfThem.iterator();
+
+        while(methodBlockIterator.hasNext()) {
+            MethodBlock component = methodBlockIterator.next();
+            MethodBlock immediateDominator = methodGraph.getImmediatePostDominator(component);
+
+            if(!blocksToInstrumentAfterOfThem.contains(immediateDominator)) {
+                return immediateDominator;
+            }
+        }
+
+        throw new RuntimeException("Could not find out where to start instrumenting");
+    }
+
     public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
         MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);
         Set<Set<MethodBlock>> stronglyConnectedComponents = methodGraph.getStronglyConnectedComponents(start);

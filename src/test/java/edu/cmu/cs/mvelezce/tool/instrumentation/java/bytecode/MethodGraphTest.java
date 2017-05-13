@@ -1167,6 +1167,44 @@ public class MethodGraphTest {
     }
 
     @Test
+    public void testGetImmediatePostDominator19() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(g);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, e);
+        methodGraph.addEdge(e, c);
+        methodGraph.addEdge(d, g);
+        methodGraph.addEdge(b, f);
+        methodGraph.addEdge(f, d);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(d, MethodGraph.getImmediatePostDominator(methodGraph, b));
+        Assert.assertEquals(g, MethodGraph.getImmediatePostDominator(methodGraph, d));
+    }
+
+    @Test
     public void testAddMethodBlock() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();

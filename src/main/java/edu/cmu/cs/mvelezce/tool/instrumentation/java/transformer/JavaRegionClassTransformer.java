@@ -154,23 +154,23 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             return start;
         }
 
-        // TODO change this name since it is now a new set
-        problematicStronglyConnectedComponent.add(start);
-        Iterator<MethodBlock> methodBlockIterator = problematicStronglyConnectedComponent.iterator();
+        Set<MethodBlock> blocksToInstrumentBeforeOfThem = new HashSet<>(problematicStronglyConnectedComponent);
+        blocksToInstrumentBeforeOfThem.add(start);
+        Iterator<MethodBlock> methodBlockIterator = blocksToInstrumentBeforeOfThem.iterator();
 
         while(methodBlockIterator.hasNext()) {
             MethodBlock component = methodBlockIterator.next();
             MethodBlock immediateDominator = methodGraph.getImmediateDominator(component);
 
             if(immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(component)) {
-                if(!problematicStronglyConnectedComponent.contains(immediateDominator)) {
-                    problematicStronglyConnectedComponent.add(immediateDominator);
-                    methodBlockIterator = problematicStronglyConnectedComponent.iterator();
+                if(!blocksToInstrumentBeforeOfThem.contains(immediateDominator)) {
+                    blocksToInstrumentBeforeOfThem.add(immediateDominator);
+                    methodBlockIterator = blocksToInstrumentBeforeOfThem.iterator();
                     continue;
                 }
             }
 
-            if(!problematicStronglyConnectedComponent.contains(immediateDominator)) {
+            if(!blocksToInstrumentBeforeOfThem.contains(immediateDominator)) {
                 return component;
             }
         }

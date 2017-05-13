@@ -9,6 +9,7 @@ import java.util.*;
  */
 public class MethodGraph {
 
+    // TODO calculate the dominators since we use that a lot
     // TODO some methods are recreating structures that have been previously calculated
     // TODO create a single exit block for the graph
     private MethodBlock entryBlock = null;
@@ -62,36 +63,41 @@ public class MethodGraph {
 
         // DFS in order of last visited block from the first pass
         Set<Set<MethodBlock>> stronglyConnectedComponents = new HashSet<>();
-        Set<MethodBlock> stronglyConnectedComponent = new HashSet<>();
 
         while(!visited.isEmpty()) {
-            MethodBlock currentBlock = visited.pop();
-            currentBlock = reversedGraph.getMethodBlock(currentBlock.getID());
-            stronglyConnectedComponent.add(currentBlock);
+            dfs.push(visited.pop());
+            Set<MethodBlock> stronglyConnectedComponent = new HashSet<>();
 
-            if(currentBlock.getSuccessors().isEmpty()) {
-                stronglyConnectedComponents.add(stronglyConnectedComponent);
-                stronglyConnectedComponent = new HashSet<>();
-            }
-            else {
-                boolean done = true;
+            while(!dfs.isEmpty()) {
+                MethodBlock currentBlock = dfs.peek();
+                currentBlock = reversedGraph.getMethodBlock(currentBlock.getID());
+                stronglyConnectedComponent.add(currentBlock);
 
-                for(MethodBlock successor : currentBlock.getSuccessors()) {
-                    if(visited.contains(successor)) {
-                        stronglyConnectedComponent.add(successor);
-                        visited.remove(successor);
-                        visited.push(successor);
-
-                        done = false;
-                        break;
-                    }
-                }
-
-                if(done) {
+                if(currentBlock.getSuccessors().isEmpty()) {
                     stronglyConnectedComponents.add(stronglyConnectedComponent);
                     stronglyConnectedComponent = new HashSet<>();
                 }
+                else {
+                    boolean done = true;
+
+                    for(MethodBlock successor : currentBlock.getSuccessors()) {
+                        if(visited.contains(successor) && !dfs.contains(successor)) {
+                            dfs.push(successor);
+
+                            done = false;
+                            break;
+                        }
+                    }
+
+                    if(done) {
+                        dfs.pop();
+                        visited.remove(currentBlock);
+
+                    }
+                }
             }
+
+            stronglyConnectedComponents.add(stronglyConnectedComponent);
         }
 
         return stronglyConnectedComponents;

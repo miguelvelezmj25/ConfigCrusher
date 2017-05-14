@@ -33,7 +33,23 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
         for(String fileName : this.fileNames) {
             ClassNode classNode = this.readClass(fileName);
+
+            System.out.println("Before transforming");
+
+            for(MethodNode method : classNode.methods) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+
             this.transform(classNode);
+
+            System.out.println("After transforming");
+
+            for(MethodNode method : classNode.methods) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+
             classNodes.add(classNode);
         }
 
@@ -82,7 +98,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
                         MethodBlock start = JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
-                        MethodBlock end = graph.getImmediatePostDominator(start);
+                        MethodBlock end = JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(graph, block);
                         JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
                         region.setStartMethodBlock(start);
                         region.setEndMethodBlock(end);
@@ -154,11 +170,25 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             return immediatePostDominator;
         }
 
-        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
-            MethodBlock immediateDominator = methodGraph.getImmediatePostDominator(methodBlock);
+        Set<MethodBlock> immediateDominatorsOfProblematicStronglyConnectedComponent = new HashSet<>();
 
-            if(!problematicStronglyConnectedComponent.contains(immediateDominator)) {
-                return immediateDominator;
+        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
+            if(methodBlock.equals(immediatePostDominator)) {
+                continue;
+            }
+
+            immediateDominatorsOfProblematicStronglyConnectedComponent.add(methodGraph.getImmediateDominator(methodBlock));
+        }
+
+        if(problematicStronglyConnectedComponent.containsAll(immediateDominatorsOfProblematicStronglyConnectedComponent)) {
+            return immediatePostDominator;
+        }
+
+        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
+            immediatePostDominator = methodGraph.getImmediatePostDominator(methodBlock);
+
+            if(!problematicStronglyConnectedComponent.contains(immediatePostDominator)) {
+                return immediatePostDominator;
             }
         }
 

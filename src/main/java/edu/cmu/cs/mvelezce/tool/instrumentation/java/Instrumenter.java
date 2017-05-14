@@ -68,13 +68,13 @@ public class Instrumenter {
         }
 
         for(ClassNode classNode : classNodes) {
-            List<MethodNode> methods = classNode.methods;
-
-            System.out.println("INSTRUMENTED CLASSES");
-            for(MethodNode method : methods) {
-                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
-                System.out.println(methodGraph.toDotString(method.name));
-            }
+//            List<MethodNode> methods = classNode.methods;
+//
+//            System.out.println("INSTRUMENTED CLASSES");
+//            for(MethodNode method : methods) {
+//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                System.out.println(methodGraph.toDotString(method.name));
+//            }
 
             String fileName = classNode.name;
             fileName = fileName.substring(fileName.lastIndexOf("/"));

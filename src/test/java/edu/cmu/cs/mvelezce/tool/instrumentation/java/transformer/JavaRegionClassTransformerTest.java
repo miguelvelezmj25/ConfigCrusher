@@ -850,7 +850,7 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(c, f);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
     }
 

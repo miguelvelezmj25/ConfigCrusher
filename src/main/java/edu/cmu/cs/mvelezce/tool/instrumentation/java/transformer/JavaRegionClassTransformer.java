@@ -211,23 +211,41 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             return start;
         }
 
-        Set<MethodBlock> blocksToInstrumentBeforeOfThem = new HashSet<>(problematicStronglyConnectedComponent);
-        blocksToInstrumentBeforeOfThem.add(start);
-        Iterator<MethodBlock> methodBlockIterator = blocksToInstrumentBeforeOfThem.iterator();
+        Set<MethodBlock> immediateDominatorsOfProblematicStronglyConnectedComponent = new HashSet<>();
+
+        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
+            if(methodBlock.equals(immediatePostDominator)) {
+                continue;
+            }
+
+            immediateDominatorsOfProblematicStronglyConnectedComponent.add(methodGraph.getImmediateDominator(methodBlock));
+        }
+
+        if(problematicStronglyConnectedComponent.containsAll(immediateDominatorsOfProblematicStronglyConnectedComponent)) {
+            return start;
+        }
+
+        Set<MethodBlock> addedBlocksToInstrumentBeforeThem = new HashSet<>();
+        Set<MethodBlock> blocksToInstrumentBeforeThem = new HashSet<>(problematicStronglyConnectedComponent);
+        blocksToInstrumentBeforeThem.add(start);
+        Iterator<MethodBlock> methodBlockIterator = blocksToInstrumentBeforeThem.iterator();
 
         while(methodBlockIterator.hasNext()) {
             MethodBlock component = methodBlockIterator.next();
             MethodBlock immediateDominator = methodGraph.getImmediateDominator(component);
 
             if(immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(component)) {
-                if(!blocksToInstrumentBeforeOfThem.contains(immediateDominator)) {
-                    blocksToInstrumentBeforeOfThem.add(immediateDominator);
-                    methodBlockIterator = blocksToInstrumentBeforeOfThem.iterator();
+                MethodBlock immediatePostDominatorOfImmediateDominator = methodGraph.getImmediatePostDominator(immediateDominator);
+
+                if(!blocksToInstrumentBeforeThem.contains(immediateDominator) && !addedBlocksToInstrumentBeforeThem.contains(immediatePostDominatorOfImmediateDominator)) {
+                    addedBlocksToInstrumentBeforeThem.add(immediateDominator);
+                    blocksToInstrumentBeforeThem.add(immediateDominator);
+                    methodBlockIterator = blocksToInstrumentBeforeThem.iterator();
                     continue;
                 }
             }
 
-            if(!blocksToInstrumentBeforeOfThem.contains(immediateDominator)) {
+            if(!blocksToInstrumentBeforeThem.contains(immediateDominator)) {
                 return component;
             }
         }

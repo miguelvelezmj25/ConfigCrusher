@@ -106,18 +106,32 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         region.setEndMethodBlock(end);
 
                         Set<Set<MethodBlock>> stronglyConnectedComponents = graph.getStronglyConnectedComponents(graph.getEntryBlock());
-                        boolean inStronglyConnectedComponent = false;
+                        boolean inProblematicStronglyConnectedComponent = false;
 
                         for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
                             if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(start)) {
-                                inStronglyConnectedComponent = true;
-                                break;
+                                // If post dominator is part of a strongly connected component, find all immediate dominators of cycle except for the immediate post dominator
+                                Set<MethodBlock> immediateDominators = new HashSet<>();
+
+                                for(MethodBlock methodBlock : stronglyConnectedComponent) {
+                                    if(methodBlock.equals(start)) {
+                                        continue;
+                                    }
+
+                                    immediateDominators.add(graph.getImmediateDominator(methodBlock));
+                                }
+
+                                // If all immediate dominators are within a strongly connected component
+                                if(!stronglyConnectedComponent.containsAll(immediateDominators)) {
+                                    inProblematicStronglyConnectedComponent = true;
+                                    break;
+                                }
                             }
                         }
 
                         MethodBlock immediateDominator = graph.getImmediateDominator(start);
 
-                        if(inStronglyConnectedComponent && immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(start)) {
+                        if(inProblematicStronglyConnectedComponent && immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(start)) {
                             specialBlocksToRegions.put(graph.getImmediateDominator(start), region);
                         }
 

@@ -200,6 +200,96 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         throw new RuntimeException("Could not find out where to start instrumenting");
     }
 
+//    public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
+//        // Find post dominator
+//        MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);
+//        Set<Set<MethodBlock>> stronglyConnectedComponents = methodGraph.getStronglyConnectedComponents(methodGraph.getEntryBlock());
+//        Set<MethodBlock> problematicStronglyConnectedComponent = new HashSet<>();
+//
+//        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
+//            if(stronglyConnectedComponent.size() > 1 && (stronglyConnectedComponent.contains(immediatePostDominator) || stronglyConnectedComponent.contains(start))) {
+//                problematicStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
+//                break;
+//            }
+//        }
+//
+//        // If post dominator is not part of a strongly connected component, return
+//        if(problematicStronglyConnectedComponent.isEmpty()) {
+//            return start;
+//        }
+//
+//        // If post dominator is part of a strongly connected component, find all immediate dominators of cycle except for the immediate post dominator
+//        Set<MethodBlock> immediateDominatorsOfProblematicStronglyConnectedComponent = new HashSet<>();
+//
+//        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
+//            if(methodBlock.equals(immediatePostDominator)/* || methodBlock.equals(start)*/) {
+//                continue;
+//            }
+//
+//            immediateDominatorsOfProblematicStronglyConnectedComponent.add(methodGraph.getImmediateDominator(methodBlock));
+//        }
+//
+//        // If all immediate dominators are within a strongly connected component
+//        if(problematicStronglyConnectedComponent.containsAll(immediateDominatorsOfProblematicStronglyConnectedComponent)) {
+//            return start;
+//        }
+//
+//        // Get the next post dominator of the strongly connected component that is not part of the strongly connected component
+//        Set<MethodBlock> addedBlocksToInstrumentBeforeThem = new HashSet<>();
+//        Set<MethodBlock> blocksToInstrumentBeforeThem = new HashSet<>(problematicStronglyConnectedComponent);
+//        blocksToInstrumentBeforeThem.add(start);
+//        Iterator<MethodBlock> methodBlockIterator = blocksToInstrumentBeforeThem.iterator();
+//
+//        while(methodBlockIterator.hasNext()) {
+//            MethodBlock component = methodBlockIterator.next();
+//            MethodBlock immediateDominator = methodGraph.getImmediateDominator(component);
+//
+////            if(immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(component)) {
+////                Set<MethodBlock> immediateDominatorStronglyConnectedComponent = new HashSet<>();
+////
+////                for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
+////                    if(stronglyConnectedComponent.contains(immediateDominator)) {
+////                        immediateDominatorStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
+////                        break;
+////                    }
+////                }
+////
+////                if(immediateDominatorStronglyConnectedComponent.size() > 1) {
+////                    Set<MethodBlock> immediateDominatorsOfImmediateDominatorStronglyConnectedComponent = new HashSet<>();
+////
+////                    for(MethodBlock methodBlock : immediateDominatorStronglyConnectedComponent) {
+////                        if(methodBlock.equals(immediatePostDominator)) {
+////                            continue;
+////                        }
+////
+////                        immediateDominatorsOfImmediateDominatorStronglyConnectedComponent.add(methodGraph.getImmediateDominator(methodBlock));
+////                    }
+////
+////                    // If all immediate dominators are within a strongly connected component
+////                    if(immediateDominatorStronglyConnectedComponent.containsAll(immediateDominatorsOfImmediateDominatorStronglyConnectedComponent)) {
+////                        return component;
+////                    }
+////                }
+////                else {
+////                    MethodBlock immediatePostDominatorOfImmediateDominator = methodGraph.getImmediatePostDominator(immediateDominator);
+////
+////                    if (!blocksToInstrumentBeforeThem.contains(immediateDominator) && !addedBlocksToInstrumentBeforeThem.contains(immediatePostDominatorOfImmediateDominator)) {
+////                        addedBlocksToInstrumentBeforeThem.add(immediateDominator);
+////                        blocksToInstrumentBeforeThem.add(immediateDominator);
+////                        methodBlockIterator = blocksToInstrumentBeforeThem.iterator();
+////                        continue;
+////                    }
+////                }
+////            }
+//
+//            if(!blocksToInstrumentBeforeThem.contains(immediateDominator)) {
+//                return component;
+//            }
+//        }
+//
+//        throw new RuntimeException("Could not find out where to start instrumenting");
+//    }
+
     public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
         // Find post dominator
         MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);
@@ -234,56 +324,15 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             return start;
         }
 
-        Set<MethodBlock> addedBlocksToInstrumentBeforeThem = new HashSet<>();
+        // Get the next post dominator of the strongly connected component that is not part of the strongly connected component
         Set<MethodBlock> blocksToInstrumentBeforeThem = new HashSet<>(problematicStronglyConnectedComponent);
         blocksToInstrumentBeforeThem.add(start);
-        Iterator<MethodBlock> methodBlockIterator = blocksToInstrumentBeforeThem.iterator();
 
-        while(methodBlockIterator.hasNext()) {
-            MethodBlock component = methodBlockIterator.next();
-            MethodBlock immediateDominator = methodGraph.getImmediateDominator(component);
-
-            if(immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(component)) {
-
-                Set<MethodBlock> immediateDominatorStronglyConnectedComponent = new HashSet<>();
-
-                for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
-                    if(stronglyConnectedComponent.contains(immediateDominator)) {
-                        immediateDominatorStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
-                        break;
-                    }
-                }
-
-                if(immediateDominatorStronglyConnectedComponent.size() > 1) {
-                    Set<MethodBlock> immediateDominatorsOfImmediateDominatorStronglyConnectedComponent = new HashSet<>();
-
-                    for(MethodBlock methodBlock : immediateDominatorStronglyConnectedComponent) {
-                        if(methodBlock.equals(immediatePostDominator)) {
-                            continue;
-                        }
-
-                        immediateDominatorsOfImmediateDominatorStronglyConnectedComponent.add(methodGraph.getImmediateDominator(methodBlock));
-                    }
-
-                    // If all immediate dominators are within a strongly connected component
-                    if(immediateDominatorStronglyConnectedComponent.containsAll(immediateDominatorsOfImmediateDominatorStronglyConnectedComponent)) {
-                        return component;
-                    }
-                }
-                else {
-                    MethodBlock immediatePostDominatorOfImmediateDominator = methodGraph.getImmediatePostDominator(immediateDominator);
-
-                    if (!blocksToInstrumentBeforeThem.contains(immediateDominator) && !addedBlocksToInstrumentBeforeThem.contains(immediatePostDominatorOfImmediateDominator)) {
-                        addedBlocksToInstrumentBeforeThem.add(immediateDominator);
-                        blocksToInstrumentBeforeThem.add(immediateDominator);
-                        methodBlockIterator = blocksToInstrumentBeforeThem.iterator();
-                        continue;
-                    }
-                }
-            }
+        for(MethodBlock methodBlock : blocksToInstrumentBeforeThem) {
+            MethodBlock immediateDominator = methodGraph.getImmediateDominator(methodBlock);
 
             if(!blocksToInstrumentBeforeThem.contains(immediateDominator)) {
-                return component;
+                return methodBlock;
             }
         }
 

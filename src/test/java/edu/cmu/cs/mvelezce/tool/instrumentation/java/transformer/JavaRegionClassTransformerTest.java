@@ -45,7 +45,7 @@ public class JavaRegionClassTransformerTest {
 
         System.out.println(methodGraph.toDotString("test"));
         Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
-        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
     }
 
     @Test
@@ -267,7 +267,7 @@ public class JavaRegionClassTransformerTest {
 
         System.out.println(methodGraph.toDotString("test"));
         Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
-        Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
 
     @Test
@@ -417,7 +417,7 @@ public class JavaRegionClassTransformerTest {
         System.out.println(methodGraph.toDotString("test"));
         Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, f));
         Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
-        Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
 
     @Test
@@ -502,7 +502,7 @@ public class JavaRegionClassTransformerTest {
 
         System.out.println(methodGraph.toDotString("test"));
         Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
-        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
     }
 
     @Test
@@ -667,7 +667,7 @@ public class JavaRegionClassTransformerTest {
 
         System.out.println(methodGraph.toDotString("test"));
         Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
-        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
     }
 
     @Test
@@ -743,7 +743,7 @@ public class JavaRegionClassTransformerTest {
 
         System.out.println(methodGraph.toDotString("test"));
         Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
-        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
     }
 
     @Test
@@ -890,7 +890,7 @@ public class JavaRegionClassTransformerTest {
 
         System.out.println(methodGraph.toDotString("test"));
         Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
-        Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
 
     @Test
@@ -971,8 +971,8 @@ public class JavaRegionClassTransformerTest {
 
         System.out.println(methodGraph.toDotString("test"));
         Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
-        Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
-        Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, e));
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, e));
     }
 
     @Test
@@ -1074,7 +1074,7 @@ public class JavaRegionClassTransformerTest {
         Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
         Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, g));
         Assert.assertEquals(k, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, k));
-        Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, j));
+        Assert.assertEquals(h, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, j));
     }
 
     @Test
@@ -1190,7 +1190,7 @@ public class JavaRegionClassTransformerTest {
         Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
         Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, g));
-        Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, j));
+        Assert.assertEquals(h, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, j));
     }
 
     @Test

@@ -92,6 +92,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
             }
 
+            Map<MethodBlock, JavaRegion> specialBlocksToRegions = new HashMap<>();
+
             for(MethodBlock block : graph.getBlocks()) {
                 List<AbstractInsnNode> blockInstructions = block.getInstructions();
 
@@ -102,6 +104,23 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
                         region.setStartMethodBlock(start);
                         region.setEndMethodBlock(end);
+
+                        Set<Set<MethodBlock>> stronglyConnectedComponents = graph.getStronglyConnectedComponents(graph.getEntryBlock());
+                        boolean inStronglyConnectedComponent = false;
+
+                        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
+                            if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(start)) {
+                                inStronglyConnectedComponent = true;
+                                break;
+                            }
+                        }
+
+                        MethodBlock immediateDominator = graph.getImmediateDominator(start);
+
+                        if(inStronglyConnectedComponent && immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(start)) {
+                            specialBlocksToRegions.put(graph.getImmediateDominator(start), region);
+                        }
+
                     }
                 }
             }
@@ -110,12 +129,33 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
             InsnList instructions = methodNode.instructions;
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
+            LabelNode currentLabelNode = null;
 
             while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
 
                 if(instruction.getType() == AbstractInsnNode.LABEL) {
-                    LabelNode currentLabelNode = (LabelNode) instruction;
+                    if(currentLabelNode != null) {
+                        MethodBlock methodBlock = graph.getMethodBlock(currentLabelNode.getLabel());
+
+                        if(specialBlocksToRegions.containsKey(methodBlock)) {
+                            Label label = new Label();
+                            label.info = currentLabelNode.getLabel() + "000specialstart";
+                            LabelNode startRegionLabelNode = new LabelNode(label);
+
+                            InsnList startRegionInstructions = new InsnList();
+                            startRegionInstructions.add(startRegionLabelNode);
+                            startRegionInstructions.add(this.addInstructionsStartRegion(specialBlocksToRegions.get(methodBlock)));
+
+                            if(newInstructions.getLast().getType() != AbstractInsnNode.JUMP_INSN) {
+                                throw new RuntimeException("The last instruction is not a jump");
+                            }
+
+                            newInstructions.insertBefore(newInstructions.getLast(), startRegionInstructions);
+                        }
+                    }
+
+                    currentLabelNode = (LabelNode) instruction;
 
                     for(JavaRegion javaRegion : regionsInMethod) {
                         if (javaRegion.getEndMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
@@ -133,6 +173,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                     for(JavaRegion javaRegion : regionsInMethod) {
                         if(javaRegion.getStartMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
+                            if(specialBlocksToRegions.containsValue(javaRegion)) {
+                                continue;
+                            }
+
                             Label label = new Label();
                             label.info = currentLabelNode.getLabel() + "000start";
                             LabelNode startRegionLabelNode = new LabelNode(label);

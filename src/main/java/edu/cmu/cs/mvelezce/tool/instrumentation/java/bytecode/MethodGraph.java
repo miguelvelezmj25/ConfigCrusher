@@ -11,13 +11,13 @@ public class MethodGraph {
 
     // TODO create a single exit block for the graph
     private MethodBlock entryBlock = new MethodBlock("entry");
-    private MethodBlock exitBlock = new MethodBlock("exit");
+    private MethodBlock exitBlock;// = new MethodBlock("exit");
     private Map<String, MethodBlock> blocks = new HashMap<>();
     private Map<MethodBlock, Set<MethodBlock>> blocksToDominators = new HashMap<>();
 
     public MethodGraph() {
         this.blocks.put(this.entryBlock.getID(), this.entryBlock);
-        this.blocks.put(this.exitBlock.getID(), this.exitBlock);
+//        this.blocks.put(this.exitBlock.getID(), this.exitBlock);
     }
 
     public MethodBlock getImmediatePostDominator(MethodBlock methodBlock) {
@@ -26,7 +26,7 @@ public class MethodGraph {
     }
 
     public void addMethodBlock(MethodBlock methodBlock) {
-        if(this.blocks.size() == 2) {
+        if(this.blocks.size() == 1) {
             this.addEdge(this.entryBlock, methodBlock);
         }
 
@@ -106,6 +106,10 @@ public class MethodGraph {
         for(MethodBlock block : blocks) {
             MethodBlockReversed newBlock = new MethodBlockReversed(block.getID());
             reversedGraph.addMethodBlock(newBlock);
+        }
+
+        for(MethodBlock block : reversedGraph.blocks.values()) {
+            block.reset();
         }
 
         for(MethodBlock block : blocks) {

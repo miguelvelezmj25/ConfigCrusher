@@ -205,6 +205,8 @@ public class MethodGraphTest {
         methodGraph.addEdge(c, d);
         methodGraph.addEdge(d, e);
 
+        System.out.println(methodGraph.toDotString("test"));
+
         MethodGraph reversedGraph = methodGraph.reverseGraph();
         MethodGraph normalGraph = reversedGraph.reverseGraph();
 
@@ -271,6 +273,7 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
+        MethodBlock entry = new MethodBlock("entry");
         MethodBlock a = new MethodBlock("A");
         MethodBlock b = new MethodBlock("B");
         MethodBlock c = new MethodBlock("C");
@@ -296,29 +299,38 @@ public class MethodGraphTest {
         // Expected
         Map<MethodBlock, Set<MethodBlock>> expected = new HashMap<>();
         Set<MethodBlock> dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(a);
         expected.put(a, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(a);
         dominators.add(b);
         expected.put(b, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(a);
         dominators.add(c);
         expected.put(c, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(a);
         dominators.add(d);
         expected.put(d, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(a);
         dominators.add(d);
         dominators.add(e);
         expected.put(e, dominators);
+
+        dominators = new HashSet<>();
+        dominators.add(entry);
+        expected.put(entry, dominators);
 
         Map<MethodBlock, Set<MethodBlock>> result = methodGraph.getDominators();
         Assert.assertEquals(expected, result);
@@ -330,6 +342,7 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
+        MethodBlock entry = new MethodBlock("entry");
         MethodBlock a = new MethodBlock("A");
         MethodBlock b = new MethodBlock("B");
         MethodBlock c = new MethodBlock("C");
@@ -355,31 +368,40 @@ public class MethodGraphTest {
         // Expected
         Map<MethodBlock, Set<MethodBlock>> expected = new HashMap<>();
         Set<MethodBlock> dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(e);
         expected.put(e, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(e);
         dominators.add(d);
         expected.put(d, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(e);
         dominators.add(d);
         dominators.add(c);
         expected.put(c, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(e);
         dominators.add(d);
         dominators.add(b);
         expected.put(b, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(e);
         dominators.add(d);
         dominators.add(a);
         expected.put(a, dominators);
+
+        dominators = new HashSet<>();
+        dominators.add(entry);
+        expected.put(entry, dominators);
 
         Map<MethodBlock, Set<MethodBlock>> result = methodGraph.getDominators();
         Assert.assertEquals(expected, result);
@@ -391,6 +413,7 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
+        MethodBlock entry = new MethodBlock("entry");
         MethodBlock b = new MethodBlock("B");
         MethodBlock c = new MethodBlock("C");
         MethodBlock d = new MethodBlock("D");
@@ -410,27 +433,28 @@ public class MethodGraphTest {
         // Expected
         Map<MethodBlock, Set<MethodBlock>> expected = new HashMap<>();
         Set<MethodBlock> dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(b);
         expected.put(b, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(c);
         dominators.add(b);
         expected.put(c, dominators);
 
         dominators = new HashSet<>();
+        dominators.add(entry);
         dominators.add(b);
         dominators.add(c);
         dominators.add(d);
         expected.put(d, dominators);
 
+        dominators = new HashSet<>();
+        dominators.add(entry);
+        expected.put(entry, dominators);
+
         Map<MethodBlock, Set<MethodBlock>> result = methodGraph.getDominators();
-
-        for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : result.entrySet()) {
-            System.out.println(blockToDominators.getKey() + " - " + blockToDominators.getValue());
-            Assert.assertEquals(expected.get(blockToDominators.getKey()), blockToDominators.getValue());
-        }
-
         Assert.assertEquals(expected, result);
     }
 
@@ -1216,7 +1240,7 @@ public class MethodGraphTest {
         methodGraph.addMethodBlock(methodBlock);
 
         // Assert
-        Assert.assertEquals(1, methodGraph.getBlockCount());
+        Assert.assertEquals(2, methodGraph.getBlockCount());
     }
 
     @Test

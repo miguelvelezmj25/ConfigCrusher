@@ -50,6 +50,11 @@ public class MethodBlock {
         predecessors.add(methodBlock);
     }
 
+    public void reset() {
+        this.predecessors.clear();
+        this.successors.clear();
+    }
+
     public String getID() { return this.ID; }
 
     public Label getLabel() { return this.label; }

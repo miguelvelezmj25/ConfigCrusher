@@ -1,4 +1,0 @@
-[submodule "src/test/resources/performance-mapper-evaluation"]
-	path = src/test/resources/performance-mapper-evaluation
-	url = git@github.com:miguelvelezmj25/performance-mapper-evaluation.git
-	branch = master

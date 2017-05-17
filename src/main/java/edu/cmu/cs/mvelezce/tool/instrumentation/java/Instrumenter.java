@@ -19,12 +19,14 @@ import java.util.Set;
 public class Instrumenter {
 
     // TODO change this other directory when testing programs
-    public static final String DIRECTORY = "src/main/resources";
+//    public static final String DIRECTORY = "src/main/resources";
+    public static final String DIRECTORY = "../performance-mapper-evaluation/instrumented/checkstyle/target/classes";
 
     public static void instrument(String programName, String mainClass, String[] args, List<String> programFiles, Set<JavaRegion> regions) throws IOException {
         Options.getCommandLine(args);
 
-        File directory = new File(Instrumenter.DIRECTORY + "/" + programName + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
+//        File directory = new File(Instrumenter.DIRECTORY + "/" + programName + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
+        File directory = new File(Instrumenter.DIRECTORY + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
 
         Options.checkIfDeleteResult(directory);
 
@@ -38,7 +40,8 @@ public class Instrumenter {
                         continue;
                     }
 
-                    String filePath = programName + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/") + "/" + file.getName().substring(0, file.getName().length() - ".class".length());
+//                    String filePath = programName + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/") + "/" + file.getName().substring(0, file.getName().length() - ".class".length());
+                    String filePath = mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/") + "/" + file.getName().substring(0, file.getName().length() - ".class".length());
                     List<MethodNode> methods = Helper.readFile(filePath);
 
                     System.out.println("INSTRUMENTED CLASSES");
@@ -61,7 +64,8 @@ public class Instrumenter {
         JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(programFiles, regions);
         Set<ClassNode> classNodes = timer.transformClasses();
 
-        File directory = new File(Instrumenter.DIRECTORY + "/" + programName + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
+//        File directory = new File(Instrumenter.DIRECTORY + "/" + programName + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
+        File directory = new File(Instrumenter.DIRECTORY + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
 
         if(!directory.exists()) {
             directory.mkdirs();

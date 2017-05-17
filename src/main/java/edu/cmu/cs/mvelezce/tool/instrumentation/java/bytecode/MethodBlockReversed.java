@@ -12,7 +12,7 @@ public class MethodBlockReversed extends MethodBlock {
     public void addPredecessor(MethodBlock methodBlock) {
         // TODO make new block that allows this so that we can check this in this method
         if(this.getPredecessors().size() >= 2) {
-            throw new IllegalArgumentException("A method block cannot have more than 2 successors");
+            throw new IllegalArgumentException(methodBlock.getID() + "A method block cannot have more than 2 predecessors");
         }
 
         this.getPredecessors().add(methodBlock);

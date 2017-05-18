@@ -42,7 +42,7 @@ public class ClassTransformerReaderTest {
     @Test
     public void testReadClass2() throws Exception {
         ClassTransformerReader reader = new ClassTransformerReader();
-        ClassNode classNode = reader.readClass("Sleep13/edu/cmu/cs/mvelezce/java/programs/Sleep13");
+        ClassNode classNode = reader.readClass("edu/cmu/cs/mvelezce/java/programs/Sleep1");
         List<MethodNode> methods = classNode.methods;
 
         for(MethodNode method : methods) {

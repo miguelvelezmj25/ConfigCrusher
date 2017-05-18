@@ -1,18 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
 
-import edu.cmu.cs.mvelezce.java.programs.Sleep10;
-import edu.cmu.cs.mvelezce.java.programs.Sleep11;
-import edu.cmu.cs.mvelezce.java.programs.Sleep12;
-import edu.cmu.cs.mvelezce.java.programs.Sleep13;
-import edu.cmu.cs.mvelezce.java.programs.Sleep2;
-import edu.cmu.cs.mvelezce.java.programs.Sleep3;
-import edu.cmu.cs.mvelezce.java.programs.Sleep4;
-import edu.cmu.cs.mvelezce.java.programs.Sleep5;
-import edu.cmu.cs.mvelezce.java.programs.Sleep6;
-import edu.cmu.cs.mvelezce.java.programs.Sleep7;
-import edu.cmu.cs.mvelezce.java.programs.Sleep8;
-import edu.cmu.cs.mvelezce.java.programs.Sleep9;
-import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -34,79 +22,79 @@ public class SleepMain {
         String mainClass = args[1];
         String[] sleepArgs = Arrays.copyOfRange(args, 2, args.length);
 
-        if(mainClass.toLowerCase().equals(Sleep1.FILENAME.toLowerCase())) {
+        if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep1")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep1.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep2.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep2")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep2.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep3.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep3")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep3.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep4.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep4")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep4.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep5.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep5")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep5.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep6.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep6")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep6.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep7.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep7")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep7.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep8.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep8")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep8.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep9.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep9")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep9.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep10.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep10")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep10.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep11.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep11")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep11.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep12.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep12")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep12.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
-        else if(mainClass.toLowerCase().equals(Sleep13.FILENAME.toLowerCase())) {
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.java.programs.Sleep13")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep13.main(sleepArgs);

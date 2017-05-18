@@ -2,11 +2,8 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,13 +15,20 @@ import java.util.Set;
  */
 public class Instrumenter {
 
-    public static final String DIRECTORY = "../performance-mapper-evaluation/instrumented";
+    public static final String TARGET_DIRECTORY = "../performance-mapper-evaluation/instrumented";
 
     public static void instrument(String mainClass, String directory, String[] args, List<String> programFiles, Set<JavaRegion> regions) throws IOException {
         // TODO do not delete folder with class files since we might delete files that do not need to be instrumented
         Options.getCommandLine(args);
 
-//        File fileDirectory = new File(Instrumenter.DIRECTORY + "/" + directory + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
+//        File fileDirectory = new File(Instrumenter.TARGET_DIRECTORY + "/" + directory + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
+//
+//        for(String programFile : programFiles) {
+//            File programFileToInstrument = new File(fileDirectory.getPath() + "/" + programFile.substring(programFile.lastIndexOf(".") + 1) + ".class");
+//            Options.checkIfDeleteResult(programFileToInstrument);
+//        }
+
+
 //        Options.checkIfDeleteResult(fileDirectory);
 //
 //        if(fileDirectory.exists()) {
@@ -61,7 +65,7 @@ public class Instrumenter {
         JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(programFiles, regions);
         Set<ClassNode> classNodes = timer.transformClasses();
 
-        File fileDirectory = new File(Instrumenter.DIRECTORY + "/" + directory + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
+        File fileDirectory = new File(Instrumenter.TARGET_DIRECTORY + "/" + directory + "/" + mainClass.substring(0, mainClass.lastIndexOf(".")).replace(".", "/"));
 
         if(!fileDirectory.exists()) {
             fileDirectory.mkdirs();
@@ -85,7 +89,7 @@ public class Instrumenter {
     public static boolean checkAllFilesInstrumented(String directory, List<String> programFiles) throws IOException {
         for(String fileName : programFiles) {
             fileName = fileName.replace(".", "/");
-            File file = new File(Instrumenter.DIRECTORY + "/" + directory + "/" + fileName + ".class");
+            File file = new File(Instrumenter.TARGET_DIRECTORY + "/" + directory + "/" + fileName + ".class");
 
             if(!file.exists()) {
                 return false;

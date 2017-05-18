@@ -1,15 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
-import edu.cmu.cs.mvelezce.java.programs.Sleep1;
-import edu.cmu.cs.mvelezce.java.programs.Sleep2;
-import edu.cmu.cs.mvelezce.java.programs.Sleep3;
-import edu.cmu.cs.mvelezce.java.programs.Sleep4;
-import edu.cmu.cs.mvelezce.java.programs.Sleep7;
-import edu.cmu.cs.mvelezce.java.programs.Sleep8;
-import edu.cmu.cs.mvelezce.java.programs.Sleep9;
-import edu.cmu.cs.mvelezce.java.programs.Sleep10;
-import edu.cmu.cs.mvelezce.java.programs.Sleep13;
+import edu.cmu.cs.mvelezce.java.programs.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,14 +16,12 @@ import java.util.Set;
  */
 public class InstrumenterTest {
 
-    public static final String TEST_DIRECTORY = "test/out/production/test";
-
     @Test
     public void testInstrumentPipeline1() throws Exception {
         // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
+        String[] args = new String[1];
+        args[0] = "-delres";
+//        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -42,9 +33,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep1.FILENAME);
 
-        Instrumenter.instrument(Sleep1.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
+        Instrumenter.instrument(Sleep1.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
     }
 
     @Test
@@ -64,9 +55,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep13.FILENAME);
 
-        Instrumenter.instrument(Sleep13.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
+        Instrumenter.instrument(Sleep13.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
     }
 
     @Test
@@ -89,9 +80,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep2.FILENAME);
 
-        Instrumenter.instrument(Sleep2.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
+        Instrumenter.instrument(Sleep2.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
     }
 
     @Test
@@ -120,9 +111,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep3.FILENAME);
 
-        Instrumenter.instrument(Sleep3.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
+        Instrumenter.instrument(Sleep3.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
     }
 
     @Test
@@ -142,9 +133,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep4.FILENAME);
 
-        Instrumenter.instrument(Sleep4.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
+        Instrumenter.instrument(Sleep4.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
     }
 
     @Test
@@ -167,9 +158,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep7.FILENAME);
 
-        Instrumenter.instrument(Sleep7.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
+        Instrumenter.instrument(Sleep7.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
     }
 
     @Test
@@ -192,9 +183,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep8.FILENAME);
 
-        Instrumenter.instrument(Sleep8.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
+        Instrumenter.instrument(Sleep8.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
     }
 
     @Test
@@ -217,9 +208,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep9.FILENAME);
 
-        Instrumenter.instrument(Sleep9.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
+        Instrumenter.instrument(Sleep9.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
     }
 
     @Test
@@ -248,9 +239,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep10.FILENAME);
 
-        Instrumenter.instrument(Sleep10.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
+        Instrumenter.instrument(Sleep10.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
     }
 
 //    @Test

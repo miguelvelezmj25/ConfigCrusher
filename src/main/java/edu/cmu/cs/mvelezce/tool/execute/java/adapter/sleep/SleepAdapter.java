@@ -12,6 +12,8 @@ public class SleepAdapter extends Adapter {
 
     private static final String[] CONFIGURATIONS = {"A", "B", "C", "D"};
 
+    public static final String TEST_DIRECTORY = "test/out/production/test";
+
     private String programName;
     private String mainClass;
     private String directory;

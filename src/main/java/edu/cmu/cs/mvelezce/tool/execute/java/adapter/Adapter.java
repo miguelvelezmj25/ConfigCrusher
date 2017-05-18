@@ -23,7 +23,6 @@ public abstract class Adapter {
         StringBuilder output = new StringBuilder();
         Process process;
 
-        // TODO where to measure the entire program? This is very noisy!
         try {
             process = Runtime.getRuntime().exec(command);
             process.waitFor();

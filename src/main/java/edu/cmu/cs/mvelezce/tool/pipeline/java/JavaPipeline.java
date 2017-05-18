@@ -25,7 +25,7 @@ public class JavaPipeline {
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
     // TODO how do we pass the main class and all files of a program?
-    public static PerformanceModel buildPerformanceModel(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException, ParseException {
+    public static PerformanceModel buildPerformanceModel(String programName, String mainClass, String directory, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException, ParseException {
         // ProgramAnalysis (Language dependent)
         // TODO we should get this from Lotrack and not pass it ourselves
         relevantRegionsToOptions = ProgramAnalysis.analyse(programName, mainClass, programFiles, relevantRegionsToOptions);
@@ -35,7 +35,7 @@ public class JavaPipeline {
         Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(relevantOptions);
 
         // Instrumentation (Language dependent)
-        Instrumenter.instrument(programName, mainClass, programFiles, relevantRegionsToOptions.keySet()); // TODO
+        Instrumenter.instrument(mainClass, directory, programFiles, relevantRegionsToOptions.keySet()); // TODO
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, mainClass, null, configurationsToExecute);
 //        System.out.println("Executed configurations: " + configurationsToExecute.size());
 

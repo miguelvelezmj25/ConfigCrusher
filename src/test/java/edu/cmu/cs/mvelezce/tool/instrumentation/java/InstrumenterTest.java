@@ -1,7 +1,14 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
-import com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck;
-import edu.cmu.cs.mvelezce.java.programs.*;
+import edu.cmu.cs.mvelezce.java.programs.Sleep1;
+import edu.cmu.cs.mvelezce.java.programs.Sleep2;
+import edu.cmu.cs.mvelezce.java.programs.Sleep3;
+import edu.cmu.cs.mvelezce.java.programs.Sleep4;
+import edu.cmu.cs.mvelezce.java.programs.Sleep7;
+import edu.cmu.cs.mvelezce.java.programs.Sleep8;
+import edu.cmu.cs.mvelezce.java.programs.Sleep9;
+import edu.cmu.cs.mvelezce.java.programs.Sleep10;
+import edu.cmu.cs.mvelezce.java.programs.Sleep13;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,9 +26,9 @@ public class InstrumenterTest {
     @Test
     public void testInstrumentPipeline1() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -244,25 +251,25 @@ public class InstrumenterTest {
         Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep10.CLASS, programFiles));
     }
 
-    @Test
-    public void testInstrumentPipeline99() throws Exception {
-        // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
-
-        // Java Region
-        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
-        Set<JavaRegion> regions = new HashSet<>();
-        JavaRegion region = new JavaRegion("8991b0ff-a0a9-4967-8acs-ba823cf700f4", LocalVariableNameCheck.class.getPackage().getName(), LocalVariableNameCheck.class.getSimpleName(), "mustCheckName", 4);
-        regions.add(region);
-
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(LocalVariableNameCheck.class.getCanonicalName());
-
-        Instrumenter.instrument(LocalVariableNameCheck.class.getSimpleName(), LocalVariableNameCheck.class.getCanonicalName(), args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(LocalVariableNameCheck.class.getSimpleName(), programFiles));
-    }
+//    @Test
+//    public void testInstrumentPipeline99() throws Exception {
+//        // Program arguments
+////        String[] args = new String[1];
+////        args[0] = "-delres";
+//        String[] args = new String[0];
+//
+//        // Java Region
+//        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
+//        Set<JavaRegion> regions = new HashSet<>();
+//        JavaRegion region = new JavaRegion("8991b0ff-a0a9-4967-8acs-ba823cf700f4", LocalVariableNameCheck.class.getPackage().getName(), LocalVariableNameCheck.class.getSimpleName(), "mustCheckName", 4);
+//        regions.add(region);
+//
+//        // Program files
+//        List<String> programFiles = new ArrayList<>();
+//        programFiles.add(LocalVariableNameCheck.class.getCanonicalName());
+//
+//        Instrumenter.instrument(LocalVariableNameCheck.class.getSimpleName(), LocalVariableNameCheck.class.getCanonicalName(), args, programFiles, regions);
+//
+//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(LocalVariableNameCheck.class.getSimpleName(), programFiles));
+//    }
 }

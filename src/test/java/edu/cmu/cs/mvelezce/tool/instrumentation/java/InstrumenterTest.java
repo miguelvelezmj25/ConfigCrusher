@@ -23,6 +23,8 @@ import java.util.Set;
  */
 public class InstrumenterTest {
 
+    public static final String TEST_DIRECTORY = "test/out/production/test";
+
     @Test
     public void testInstrumentPipeline1() throws Exception {
         // Program arguments
@@ -40,17 +42,17 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep1.FILENAME);
 
-        Instrumenter.instrument(Sleep1.CLASS, Sleep1.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep1.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep1.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
     }
 
     @Test
     public void testInstrumentPipeline13() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -62,17 +64,17 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep13.FILENAME);
 
-        Instrumenter.instrument(Sleep13.CLASS, Sleep13.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep13.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep13.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
     }
 
     @Test
     public void testInstrumentPipeline2() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -87,17 +89,17 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep2.FILENAME);
 
-        Instrumenter.instrument(Sleep2.CLASS, Sleep2.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep2.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep2.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
     }
 
     @Test
     public void testInstrumentPipeline3() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -118,17 +120,17 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep3.FILENAME);
 
-        Instrumenter.instrument(Sleep3.CLASS, Sleep3.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep3.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep3.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
     }
 
     @Test
     public void testInstrumentPipeline4() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -140,17 +142,17 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep4.FILENAME);
 
-        Instrumenter.instrument(Sleep4.CLASS, Sleep4.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep4.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep4.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
     }
 
     @Test
     public void testInstrumentPipeline7() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -165,17 +167,17 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep7.FILENAME);
 
-        Instrumenter.instrument(Sleep7.CLASS, Sleep7.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep7.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep7.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
     }
 
     @Test
     public void testInstrumentPipeline8() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -190,17 +192,17 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep8.FILENAME);
 
-        Instrumenter.instrument(Sleep8.CLASS, Sleep8.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep8.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep8.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
     }
 
     @Test
     public void testInstrumentPipeline9() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -215,17 +217,17 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep9.FILENAME);
 
-        Instrumenter.instrument(Sleep9.CLASS, Sleep9.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep9.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep9.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
     }
 
     @Test
     public void testInstrumentPipeline10() throws Exception {
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+//        String[] args = new String[1];
+//        args[0] = "-delres";
+        String[] args = new String[0];
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -246,9 +248,9 @@ public class InstrumenterTest {
         List<String> programFiles = new ArrayList<>();
         programFiles.add(Sleep10.FILENAME);
 
-        Instrumenter.instrument(Sleep10.CLASS, Sleep10.FILENAME, args, programFiles, regions);
+        Instrumenter.instrument(Sleep10.FILENAME, InstrumenterTest.TEST_DIRECTORY, args, programFiles, regions);
 
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(Sleep10.CLASS, programFiles));
+        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(InstrumenterTest.TEST_DIRECTORY, programFiles));
     }
 
 //    @Test

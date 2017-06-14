@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
-import edu.cmu.cs.mvelezce.java.programs.*;
+import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import org.junit.Test;

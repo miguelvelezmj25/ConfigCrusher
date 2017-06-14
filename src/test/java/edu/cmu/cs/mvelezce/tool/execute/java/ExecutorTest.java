@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
-import edu.cmu.cs.mvelezce.java.programs.*;
+import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;

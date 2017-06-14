@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
-import edu.cmu.cs.mvelezce.java.programs.*;
+import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.ClassTransformerReader;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;

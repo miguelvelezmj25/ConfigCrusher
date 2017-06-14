@@ -366,28 +366,26 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 //    }
 
     public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
-        // Find post dominator
-        MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);
         Set<Set<MethodBlock>> stronglyConnectedComponents = methodGraph.getStronglyConnectedComponents(methodGraph.getEntryBlock());
         Set<MethodBlock> problematicStronglyConnectedComponent = new HashSet<>();
 
         for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
-            if(stronglyConnectedComponent.size() > 1 && (stronglyConnectedComponent.contains(immediatePostDominator) || stronglyConnectedComponent.contains(start))) {
+            if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(start)) {
                 problematicStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
                 break;
             }
         }
 
-        // If post dominator is not part of a strongly connected component, return
+        // If start is not part of a strongly connected component, return
         if(problematicStronglyConnectedComponent.isEmpty()) {
             return start;
         }
 
-        // If post dominator is part of a strongly connected component, find all immediate dominators of cycle except for the immediate post dominator
+        // If start is part of a strongly connected component, find all immediate dominators of cycle except for the immediate start
         Set<MethodBlock> immediateDominatorsOfProblematicStronglyConnectedComponent = new HashSet<>();
 
         for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
-            if(methodBlock.equals(immediatePostDominator) || methodBlock.equals(start)) {
+            if(methodBlock.equals(start)) {
                 continue;
             }
 
@@ -399,7 +397,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             return start;
         }
 
-        // Get the next post dominator of the strongly connected component that is not part of the strongly connected component
+        // Get the next start of the strongly connected component that is not part of the strongly connected component
         Set<MethodBlock> blocksToInstrumentBeforeThem = new HashSet<>(problematicStronglyConnectedComponent);
         blocksToInstrumentBeforeThem.add(start);
 

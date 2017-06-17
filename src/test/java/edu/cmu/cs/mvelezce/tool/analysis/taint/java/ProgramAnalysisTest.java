@@ -1,16 +1,44 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
+import edu.cmu.cs.mvelezce.Dummy3;
 import edu.cmu.cs.mvelezce.Sleep1;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
  * Created by mvelezce on 4/28/17.
  */
 public class ProgramAnalysisTest {
+
+    private void checkIfEqual(Map<JavaRegion, Set<String>>  outputSave, Map<JavaRegion, Set<String>>  outputRead) {
+        for(Map.Entry<JavaRegion, Set<String>> save : outputSave.entrySet()) {
+            boolean oneIsEqual = false;
+            for(Map.Entry<JavaRegion, Set<String>> read : outputRead.entrySet()) {
+                JavaRegion saveRegion = save.getKey();
+                Set<String> saveOptions = save.getValue();
+                JavaRegion readRegion = read.getKey();
+                Set<String> readOptions = read.getValue();
+
+                if(saveRegion.getRegionID().equals(readRegion.getRegionID()) && saveRegion.getStartBytecodeIndex() == readRegion.getStartBytecodeIndex()
+                        && saveRegion.getEndBytecodeIndex() == readRegion.getEndBytecodeIndex()
+                        && saveRegion.getRegionPackage().equals(readRegion.getRegionPackage())
+                        && saveRegion.getRegionClass().equals(readRegion.getRegionClass())
+                        && saveRegion.getRegionMethod().equals(readRegion.getRegionMethod())
+                        && saveOptions.equals(readOptions)) {
+                    oneIsEqual = true;
+                    break;
+                }
+            }
+
+            Assert.assertTrue(oneIsEqual);
+        }
+    }
 
     @Test
     public void testAnalysePipeline1() throws Exception {
@@ -38,27 +66,24 @@ public class ProgramAnalysisTest {
         args = new String[0];
         Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyse(Sleep1.CLASS, args, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
 
-        for(Map.Entry<JavaRegion, Set<String>> save : outputSave.entrySet()) {
-            boolean oneIsEqual = false;
-            for(Map.Entry<JavaRegion, Set<String>> read : outputRead.entrySet()) {
-                JavaRegion saveRegion = save.getKey();
-                Set<String> saveOptions = save.getValue();
-                JavaRegion readRegion = read.getKey();
-                Set<String> readOptions = read.getValue();
+        this.checkIfEqual(outputSave, outputRead);
+    }
 
-                if(saveRegion.getRegionID().equals(readRegion.getRegionID()) && saveRegion.getStartBytecodeIndex() == readRegion.getStartBytecodeIndex()
-                        && saveRegion.getEndBytecodeIndex() == readRegion.getEndBytecodeIndex()
-                        && saveRegion.getRegionPackage().equals(readRegion.getRegionPackage())
-                        && saveRegion.getRegionClass().equals(readRegion.getRegionClass())
-                        && saveRegion.getRegionMethod().equals(readRegion.getRegionMethod())
-                        && saveOptions.equals(readOptions)) {
-                    oneIsEqual = true;
-                    break;
-                }
-            }
+    @Test
+    public void testAnalysePipeline2() throws IOException, ParseException {
+        String programName = "Dummy3";
 
-            Assert.assertTrue(oneIsEqual);
-        }
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>>  outputSave = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+
+        args = new String[0];
+        Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+
+        this.checkIfEqual(outputSave, outputRead);
     }
 
 }

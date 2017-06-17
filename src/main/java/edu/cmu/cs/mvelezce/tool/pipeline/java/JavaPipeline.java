@@ -21,7 +21,9 @@ import java.util.*;
 public class JavaPipeline {
 
     public static final String LOTRACK_DATABASE = "lotrack";
+    public static final String LOADTIME_DATABASE = "loadtime";
     public static final String PLAYYPUS_PROGRAM = "platypus";
+    public static final String TEST_COLLECTION = "Tests";
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
     // TODO how do we pass the main class and all files of a program?

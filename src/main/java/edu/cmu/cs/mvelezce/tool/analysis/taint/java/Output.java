@@ -23,12 +23,13 @@ public class Output {
     public static final String BYTECODE_INDEXES = "bytecodeIndexes";
     public static final String USED_TERMS = "usedTerms";
 
-    public static final String LOTRACK_UNKNOWN_CONSTRAINT_SYMBOL = "_";
-
     public static void main(String[] args) throws NoSuchFieldException, ParseException {
 
         String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/src/";
 //        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/jarchivelib/src/main/java/";
+//        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/java-lame/src/main/java/";
+//        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/src/main/java/";
+//        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/src/main/java/";
         String[] extensions = {"java"};
 
         Collection<File> files = FileUtils.listFiles(new File(root), extensions, true);
@@ -57,8 +58,24 @@ public class Output {
                     continue;
                 }
 
+                try {
+                    FileInputStream fstream = new FileInputStream(root + file.getPath().replace(root, ""));
+                    DataInputStream in = new DataInputStream(fstream);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                    String strLine = br.readLine();
+                    in.close();
+
+                    if(!strLine.contains((String) entry.get(Output.PACKAGE))) {
+                        continue;
+                    }
+                }
+                catch (Exception e){
+                    System.err.println("Error: " + e.getMessage());
+                }
+
                 int javaLineNumber = (int)(long) entry.get(Output.JAVA_LINE_NO);
-                linesToConstraints.put(javaLineNumber, constraint);
+                List<String> usedTerms = (List<String>) entry.get(Output.USED_TERMS);
+                linesToConstraints.put(javaLineNumber, constraint + " " + usedTerms.toString());
             }
 
             if(linesToConstraints.isEmpty()) {
@@ -79,7 +96,7 @@ public class Output {
                     lotrackedFile.append(strLine).append("    ");
 
                     if(linesToConstraints.containsKey(lineNumber)) {
-                        lotrackedFile.append("// ").append(linesToConstraints.get(lineNumber));
+                        lotrackedFile.append("// LT CONSTRAINT ").append(linesToConstraints.get(lineNumber));
                     }
 
                     lotrackedFile.append("\n");
@@ -90,6 +107,8 @@ public class Output {
 
                 try(PrintWriter out = new PrintWriter(file.getAbsolutePath().replace(".java", "") + "LOTRACK.java")  ){
                     out.print(lotrackedFile.toString());
+
+                    System.out.println("Done with " + file.getName());
                 }
             }
             catch (Exception e){

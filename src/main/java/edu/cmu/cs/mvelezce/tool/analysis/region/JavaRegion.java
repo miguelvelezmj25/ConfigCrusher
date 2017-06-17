@@ -15,6 +15,7 @@ public class JavaRegion extends Region {
     private String regionMethod = "";
     private int startBytecodeIndex = Integer.MIN_VALUE;
     private int endBytecodeIndex = Integer.MIN_VALUE;
+    private int javaLineNubmer = Integer.MIN_VALUE;
     private MethodBlock startMethodBlock = null;
     private MethodBlock endMethodBlock = null;
 
@@ -76,6 +77,8 @@ public class JavaRegion extends Region {
 
     public MethodBlock getEndMethodBlock() { return endMethodBlock; }
 
+    public int getJavaLineNubmer() { return this.javaLineNubmer; }
+
     public void setStartBytecodeIndex(int startBytecodeIndex) { this.startBytecodeIndex = startBytecodeIndex; }
 
     public void setEndBytecodeIndex(int endBytecodeIndex) { this.endBytecodeIndex = endBytecodeIndex; }
@@ -83,7 +86,10 @@ public class JavaRegion extends Region {
     public void setStartMethodBlock(MethodBlock startMethodBlock) {
         this.startMethodBlock = startMethodBlock;
     }
+
     public void setEndMethodBlock(MethodBlock endMethodBlock) {
         this.endMethodBlock = endMethodBlock;
     }
+
+    public void setJavaLineNubmer(int javaLineNubmer) { this.javaLineNubmer = javaLineNubmer; }
 }

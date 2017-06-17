@@ -141,12 +141,6 @@ public class ProgramAnalysis {
             List<String> usedTerms = (List<String>) entry.get(ProgramAnalysis.USED_TERMS);
 
             if(usedTerms.size() == 1 && (usedTerms.contains("true") || usedTerms.contains("false"))) {
-                if(currentJavaRegion != null) {
-                    regionsToOptions.put(currentJavaRegion, currentUsedTerms);
-                    System.out.println(currentJavaRegion.getRegionClass() + " " + currentJavaRegion.getRegionMethod() + " " + currentJavaRegion.getJavaLineNubmer() + " with " + currentUsedTerms);
-                }
-
-                currentJavaRegion = null;
                 currentUsedTerms = new HashSet<>();
                 continue;
             }
@@ -169,12 +163,11 @@ public class ProgramAnalysis {
 
             if(!currentUsedTerms.containsAll(usedTerms)) {
                 currentUsedTerms.addAll(usedTerms);
-
-                if(currentJavaRegion == null) {
-                    currentJavaRegion = new JavaRegion(entryPackage, entryClass, entryMethod);
-                    int entryJavaLineNumber = (int)(long) entry.get(ProgramAnalysis.JAVA_LINE_NO);
-                    currentJavaRegion.setJavaLineNubmer(entryJavaLineNumber);
-                }
+                currentJavaRegion = new JavaRegion(entryPackage, entryClass, entryMethod);
+                int entryJavaLineNumber = (int)(long) entry.get(ProgramAnalysis.JAVA_LINE_NO);
+                currentJavaRegion.setJavaLineNubmer(entryJavaLineNumber);
+                regionsToOptions.put(currentJavaRegion, new HashSet<>(currentUsedTerms));
+                System.out.println(currentJavaRegion.getRegionClass() + " " + currentJavaRegion.getRegionMethod() + " " + currentJavaRegion.getJavaLineNubmer() + " with " + currentUsedTerms);
             }
         }
 

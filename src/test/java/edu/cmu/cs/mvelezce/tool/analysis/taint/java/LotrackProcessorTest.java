@@ -12,7 +12,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+
 /**
+ * TODO might not be needed anymore
+ *
  * Created by mvelezce on 4/6/17.
  */
 public class LotrackProcessorTest {

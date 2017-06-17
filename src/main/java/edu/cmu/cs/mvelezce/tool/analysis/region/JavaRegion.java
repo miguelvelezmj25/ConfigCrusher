@@ -39,6 +39,13 @@ public class JavaRegion extends Region {
         this.endBytecodeIndex = endBytecodeIndex;
     }
 
+    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod) {
+        super(regionId);
+        this.regionPackage = regionPackage;
+        this.regionClass = regionClass;
+        this.regionMethod = regionMethod;
+    }
+
     public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex) {
         super(regionId);
         this.regionPackage = regionPackage;

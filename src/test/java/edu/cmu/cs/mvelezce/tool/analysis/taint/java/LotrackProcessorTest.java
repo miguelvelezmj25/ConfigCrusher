@@ -43,26 +43,6 @@ public class LotrackProcessorTest {
         Assert.assertTrue(LotrackProcessor.filterRegionsNoOptions(regionToOptions).size() == 1);
     }
 
-//    @Test
-//    public void getRegionsToOptions1() throws NoSuchFieldException {
-//        Map<JavaRegion, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.PLAYYPUS_PROGRAM);
-//        // TODO not working correctly
-//        Assert.assertFalse(output.isEmpty());
-//    }
-
-//    @Test
-//    public void getRegionsToOptions2() throws NoSuchFieldException {
-//        Map<JavaRegion, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOTRACK_DATABASE, JavaPipeline.LANGUAGETOOL_PROGRAM);
-//        // TODO not working correctly
-//        Assert.assertFalse(output.isEmpty());
-//    }
-
-    @Test
-    public void getRegionsToOptions3() throws ParseException {
-        Map<JavaRegion, Set<String>> output = LotrackProcessor.getRegionsToOptions(JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
-        Assert.assertEquals(2, output.size());
-    }
-
     @Test
     public void filterBooleans() {
         String TRUE = "true";

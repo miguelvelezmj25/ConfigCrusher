@@ -88,7 +88,7 @@ public class ProgramAnalysisTest {
     @Test
     public void testAnalyse1() throws ParseException {
         Map<JavaRegion, Set<String>> output = ProgramAnalysis.analyse(JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
-        Assert.assertEquals(2, output.size());
+        Assert.assertEquals(4, output.size());
     }
 
 }

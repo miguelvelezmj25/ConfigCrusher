@@ -2,13 +2,9 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
-import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,10 +14,8 @@ public class InstrumenterTest {
 
     @Test
     public void testInstrumentPipeline1() throws Exception {
-        // Program arguments
-        String[] args = new String[1];
-        args[0] = "-delres";
-//        String[] args = new String[0];
+        // Program directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -29,21 +23,13 @@ public class InstrumenterTest {
         JavaRegion region = new JavaRegion("d9e007bd-0c4a-43b9-ac70-4404378b02ee", Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 20);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep1.FILENAME);
-
-        Instrumenter.instrument(Sleep1.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
+        Instrumenter.instrument(directory, regions);
     }
 
     @Test
     public void testInstrumentPipeline13() throws Exception {
-        // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
+        // Program directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -51,21 +37,13 @@ public class InstrumenterTest {
         JavaRegion region = new JavaRegion("37486f0a-e662-4a18-a7e7-a88ca76d9d2a", Sleep13.PACKAGE, Sleep13.CLASS, Sleep13.MAIN_METHOD, 18);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep13.FILENAME);
-
-        Instrumenter.instrument(Sleep13.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
+        Instrumenter.instrument(directory, regions);
     }
 
     @Test
     public void testInstrumentPipeline2() throws Exception {
-        // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
+        // Program directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -76,21 +54,13 @@ public class InstrumenterTest {
         region = new JavaRegion("d1c659ba-b32e-474f-ba07-9ff1b0e93e3d", Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 16);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep2.FILENAME);
-
-        Instrumenter.instrument(Sleep2.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
+        Instrumenter.instrument(directory, regions);
     }
 
     @Test
     public void testInstrumentPipeline3() throws Exception {
-        // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
+        // Program directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -107,21 +77,13 @@ public class InstrumenterTest {
         region = new JavaRegion("35d3ea7b-b151-406b-8c40-8402f2aaf2d7", Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_2, 16);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep3.FILENAME);
-
-        Instrumenter.instrument(Sleep3.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
+        Instrumenter.instrument(directory, regions);
     }
 
     @Test
     public void testInstrumentPipeline4() throws Exception {
-        // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
+        // Program directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -129,21 +91,13 @@ public class InstrumenterTest {
         JavaRegion region = new JavaRegion("869447bc-1159-43aa-8cd6-76a941928dec", Sleep4.PACKAGE, Sleep4.CLASS, Sleep4.MAIN_METHOD, 20);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep4.FILENAME);
-
-        Instrumenter.instrument(Sleep4.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
+        Instrumenter.instrument(directory, regions);
     }
 
     @Test
     public void testInstrumentPipeline7() throws Exception {
-        // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
+        // Program directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -154,21 +108,13 @@ public class InstrumenterTest {
         region = new JavaRegion("95df7be1-6bd8-4675-bbfd-1c0bdcc170d8", Sleep7.PACKAGE, Sleep7.CLASS, Sleep7.MAIN_METHOD, 41);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep7.FILENAME);
-
-        Instrumenter.instrument(Sleep7.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
+        Instrumenter.instrument(directory, regions);
     }
 
     @Test
     public void testInstrumentPipeline8() throws Exception {
-        // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
+        // Program directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -179,21 +125,13 @@ public class InstrumenterTest {
         region = new JavaRegion("55be5222-878e-480e-9b4c-19ee048e7d68", Sleep8.PACKAGE, Sleep8.CLASS, Sleep8.MAIN_METHOD, 42);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep8.FILENAME);
-
-        Instrumenter.instrument(Sleep8.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
+        Instrumenter.instrument(directory, regions);
     }
 
     @Test
     public void testInstrumentPipeline9() throws Exception {
-        // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
+        // Program directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -204,21 +142,13 @@ public class InstrumenterTest {
         region = new JavaRegion("093455fe-df64-4f1f-9bcf-2c879c97ae1c", Sleep9.PACKAGE, Sleep9.CLASS, Sleep9.MAIN_METHOD, 41);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep9.FILENAME);
-
-        Instrumenter.instrument(Sleep9.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
+        Instrumenter.instrument(directory, regions);
     }
 
     @Test
     public void testInstrumentPipeline10() throws Exception {
-        // Program arguments
-//        String[] args = new String[1];
-//        args[0] = "-delres";
-        String[] args = new String[0];
+        // Program directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Java Region
         // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -235,21 +165,13 @@ public class InstrumenterTest {
         region = new JavaRegion("e80dd113-203e-477b-91bc-0c4889da64d2", Sleep10.PACKAGE, Sleep10.CLASS, Sleep10.METHOD_2, 16);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep10.FILENAME);
-
-        Instrumenter.instrument(Sleep10.FILENAME, SleepAdapter.TEST_DIRECTORY, args, programFiles, regions);
-
-        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(SleepAdapter.TEST_DIRECTORY, programFiles));
+        Instrumenter.instrument(directory, regions);
     }
 
 //    @Test
 //    public void testInstrumentPipeline99() throws Exception {
-//        // Program arguments
-////        String[] args = new String[1];
-////        args[0] = "-delres";
-//        String[] args = new String[0];
+//        // Program directory
+//        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //
 //        // Java Region
 //        // Indexes were gotten by looking at output of running ClassTransformerBaseTest
@@ -257,12 +179,6 @@ public class InstrumenterTest {
 //        JavaRegion region = new JavaRegion("8991b0ff-a0a9-4967-8acs-ba823cf700f4", LocalVariableNameCheck.class.getPackage().getName(), LocalVariableNameCheck.class.getSimpleName(), "mustCheckName", 4);
 //        regions.add(region);
 //
-//        // Program files
-//        List<String> programFiles = new ArrayList<>();
-//        programFiles.add(LocalVariableNameCheck.class.getCanonicalName());
-//
-//        Instrumenter.instrument(LocalVariableNameCheck.class.getSimpleName(), LocalVariableNameCheck.class.getCanonicalName(), args, programFiles, regions);
-//
-//        Assert.assertTrue(Instrumenter.checkAllFilesInstrumented(LocalVariableNameCheck.class.getSimpleName(), programFiles));
+//        Instrumenter.instrument(directory, regions);
 //    }
 }

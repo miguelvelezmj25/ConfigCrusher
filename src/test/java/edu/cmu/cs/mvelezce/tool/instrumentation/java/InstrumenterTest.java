@@ -11,6 +11,7 @@ import java.util.Set;
  * Created by miguelvelez on 4/30/17.
  */
 public class InstrumenterTest {
+    // TODO check that the regions are correct since we might have, at this point, java line numbers instead of bytecodeindex
 
     @Test
     public void testInstrumentPipeline1() throws Exception {

@@ -26,30 +26,49 @@ public class JavaPipeline {
     public static final String TEST_COLLECTION = "Tests";
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
-    // TODO how do we pass the main class and all files of a program?
-    public static PerformanceModel buildPerformanceModel(String programName, String mainClass, String directory, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException, ParseException {
-        // ProgramAnalysis (Language dependent)
-        // TODO we should get this from Lotrack and not pass it ourselves
-        relevantRegionsToOptions = ProgramAnalysis.analyse(programName, mainClass, programFiles, relevantRegionsToOptions);
+    public static void buildPerformanceModel(String programName, String[] args) throws IOException, ParseException {
+        // Get regions and options
+        System.out.println("Region and options");
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        System.out.println("");
 
         // Configuration compression (Language independent)
-        Set<Set<String>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(relevantOptions);
+        System.out.println("Configurations to execute");
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        System.out.println(configurationsToExecute);
+        System.out.println("");
 
-        // Instrumentation (Language dependent)
-        Instrumenter.instrument(mainClass, directory, programFiles, relevantRegionsToOptions.keySet()); // TODO
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, mainClass, null, configurationsToExecute);
-//        System.out.println("Executed configurations: " + configurationsToExecute.size());
+        System.out.println("Instrumenting");
 
-        // Performance Model (Language independent)
-        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
-
-        for(Map.Entry<JavaRegion, Set<String>> entry : relevantRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
-            regionsToOptions.put(region, entry.getValue());
-        }
-
-        return PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+        System.out.println("");
     }
+
+
+//    // TODO how do we pass the main class and all files of a program?
+//    public static PerformanceModel buildPerformanceModel(String programName, String mainClass, String directory, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException, ParseException {
+//        // ProgramAnalysis (Language dependent)
+//        // TODO we should get this from Lotrack and not pass it ourselves
+//        relevantRegionsToOptions = ProgramAnalysis.analyse(programName, mainClass, programFiles, relevantRegionsToOptions);
+//
+//        // Configuration compression (Language independent)
+//        Set<Set<String>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());
+//        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(relevantOptions);
+//
+//        // Instrumentation (Language dependent)
+//        Instrumenter.instrument(mainClass, directory, programFiles, relevantRegionsToOptions.keySet()); // TODO
+//        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, mainClass, null, configurationsToExecute);
+////        System.out.println("Executed configurations: " + configurationsToExecute.size());
+//
+//        // Performance Model (Language independent)
+//        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+//
+//        for(Map.Entry<JavaRegion, Set<String>> entry : relevantRegionsToOptions.entrySet()) {
+//            Region region = Regions.getRegion(entry.getKey().getRegionID());
+//            regionsToOptions.put(region, entry.getValue());
+//        }
+//
+//        return PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//    }
 
 }

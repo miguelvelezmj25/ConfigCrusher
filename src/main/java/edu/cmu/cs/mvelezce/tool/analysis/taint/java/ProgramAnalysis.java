@@ -47,31 +47,31 @@ public class ProgramAnalysis {
 //    public static final String START_BYTECODE_INDEX = "startBytecodeIndex";
 //    public static final String END_BYTCODE_INDEX = "endBytecodeIndex"; // TODO this could be array if there are multiple exit points
 
-    public static Map<JavaRegion, Set<String>> analyse(String programName, String[] args, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions) throws IOException {
-        Options.getCommandLine(args);
-
-        String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
-        File file = new File(outputFile);
-
-        Options.checkIfDeleteResult(file);
-
-        if(file.exists()) {
-            try {
-                return ProgramAnalysis.readFromFile(file);
-            }
-            catch (ParseException pe) {
-                throw new RuntimeException("Could not parse the cached results");
-            }
-        }
-
-        relevantRegionToOptions = ProgramAnalysis.analyse(programName, mainClass, programFiles, relevantRegionToOptions);
-
-        if(Options.checkIfSave()) {
-            ProgramAnalysis.writeToFile(programName, relevantRegionToOptions);
-        }
-
-        return relevantRegionToOptions;
-    }
+//    public static Map<JavaRegion, Set<String>> analyse(String programName, String[] args, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions) throws IOException {
+//        Options.getCommandLine(args);
+//
+//        String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
+//        File file = new File(outputFile);
+//
+//        Options.checkIfDeleteResult(file);
+//
+//        if(file.exists()) {
+//            try {
+//                return ProgramAnalysis.readFromFile(file);
+//            }
+//            catch (ParseException pe) {
+//                throw new RuntimeException("Could not parse the cached results");
+//            }
+//        }
+//
+//        relevantRegionToOptions = ProgramAnalysis.analyse(programName, mainClass, programFiles, relevantRegionToOptions);
+//
+//        if(Options.checkIfSave()) {
+//            ProgramAnalysis.writeToFile(programName, relevantRegionToOptions);
+//        }
+//
+//        return relevantRegionToOptions;
+//    }
 
     public static Map<JavaRegion, Set<String>> analyse(String programName, String[] args, String database, String program) throws IOException, ParseException {
         Options.getCommandLine(args);
@@ -99,10 +99,10 @@ public class ProgramAnalysis {
         return relevantRegionToOptions;
     }
 
-    // TODO the parameters are for testing. We should not be passing the map since that is what this component needs to calculate
-    public static Map<JavaRegion, Set<String>> analyse(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions) {
-        return relevantRegionToOptions;
-    }
+//    // TODO the parameters are for testing. We should not be passing the map since that is what this component needs to calculate
+//    public static Map<JavaRegion, Set<String>> analyse(String programName, String mainClass, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionToOptions) {
+//        return relevantRegionToOptions;
+//    }
 
     public static Map<JavaRegion, Set<String>> analyse(String database, String program) throws ParseException {
         // This is hardcode to get the output of Lotrack

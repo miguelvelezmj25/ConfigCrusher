@@ -42,7 +42,7 @@ public class TimedSleepInterpreterTest {
         // Store
         Map<String, IntValue> store = new HashMap<>();
         store.put("a", new IntValue(1));
-        store.put("b", new IntValue(1));
+        store.put("buildPerformanceModel", new IntValue(1));
 
         // Assert
         Assert.assertEquals(store, interpreter.getStore());
@@ -69,7 +69,7 @@ public class TimedSleepInterpreterTest {
         // Store
         Map<String, IntValue> store = new HashMap<>();
         store.put("a", new IntValue(1));
-        store.put("b", new IntValue(0));
+        store.put("buildPerformanceModel", new IntValue(0));
 
         // Assert
         Assert.assertEquals(store, interpreter.getStore());
@@ -97,7 +97,7 @@ public class TimedSleepInterpreterTest {
         // Store
         Map<String, IntValue> store = new HashMap<>();
         store.put("a", new IntValue(1));
-        store.put("b", new IntValue(1));
+        store.put("buildPerformanceModel", new IntValue(1));
 
         // Assert
         Assert.assertEquals(store, interpreter.getStore());
@@ -125,7 +125,7 @@ public class TimedSleepInterpreterTest {
         // Store
         Map<String, IntValue> store = new HashMap<>();
         store.put("a", new IntValue(1));
-        store.put("b", new IntValue(1));
+        store.put("buildPerformanceModel", new IntValue(1));
 
         // Assert
         Assert.assertEquals(store, interpreter.getStore());
@@ -153,7 +153,7 @@ public class TimedSleepInterpreterTest {
         // Store
         Map<String, IntValue> store = new HashMap<>();
         store.put("a", new IntValue(1));
-        store.put("b", new IntValue(1));
+        store.put("buildPerformanceModel", new IntValue(1));
 
         // Assert
         Assert.assertEquals(store, interpreter.getStore());
@@ -182,7 +182,7 @@ public class TimedSleepInterpreterTest {
         // Store
         Map<String, IntValue> store = new HashMap<>();
         store.put("a", new IntValue(1));
-        store.put("b", new IntValue(1));
+        store.put("buildPerformanceModel", new IntValue(1));
         store.put("c", new IntValue(1));
         store.put("x", new IntValue(6));
 
@@ -213,7 +213,7 @@ public class TimedSleepInterpreterTest {
         // Store
         Map<String, IntValue> store = new HashMap<>();
         store.put("a", new IntValue(1));
-        store.put("b", new IntValue(1));
+        store.put("buildPerformanceModel", new IntValue(1));
         store.put("c", new IntValue(0));
         store.put("d", new IntValue(1));
 
@@ -241,7 +241,7 @@ public class TimedSleepInterpreterTest {
         // Store
         Map<String, IntValue> store = new HashMap<>();
         store.put("a", new IntValue(0));
-        store.put("b", new IntValue(0));
+        store.put("buildPerformanceModel", new IntValue(0));
         store.put("c", new IntValue(0));
 
         // Assert
@@ -297,7 +297,7 @@ public class TimedSleepInterpreterTest {
         // Store
         Map<String, IntValue> store = new HashMap<>();
         store.put("a", new IntValue(0));
-        store.put("b", new IntValue(1));
+        store.put("buildPerformanceModel", new IntValue(1));
         store.put("c", new IntValue(1));
         store.put("d", new IntValue(1));
 

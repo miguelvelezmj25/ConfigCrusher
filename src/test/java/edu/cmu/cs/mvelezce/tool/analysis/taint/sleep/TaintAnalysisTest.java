@@ -50,11 +50,11 @@ public class TaintAnalysisTest {
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
-        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
         Set<TaintAnalysis.PossibleTaint> set2 = new HashSet<>();
         set2.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
-        set2.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set2.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
         Assert.assertEquals(set2, TaintAnalysis.join(set, set1));
     }
 
@@ -197,11 +197,11 @@ public class TaintAnalysisTest {
         configurations.add(new ConstantConfigurationExpression("C"));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
-        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
-        set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
         BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("a"), new ConstantConfigurationExpression("C")));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(basicBlock, set1));
@@ -253,22 +253,22 @@ public class TaintAnalysisTest {
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
-        set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
-        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("x"), configurations));
 
         List<Statement> statements = new LinkedList<>();
         statements.add(new AssignmentStatement(new VariableExpression("x"), new ConstantIntExpression(0)));
 
-        IfStatement statementIf = new IfStatement(new BinaryExpression(new VariableExpression("a"), "+", new VariableExpression("b")),
+        IfStatement statementIf = new IfStatement(new BinaryExpression(new VariableExpression("a"), "+", new VariableExpression("buildPerformanceModel")),
                 new BlockStatement(statements));
 
         List<Expression> conditions = new ArrayList<>();
         conditions.add(new VariableExpression("a"));
-        conditions.add(new VariableExpression("b"));
+        conditions.add(new VariableExpression("buildPerformanceModel"));
 
         BasicBlock basicBlock = null;
         for (Statement trueStatement : ((BlockStatement) statementIf.getThenBlock()).getStatements()) {
@@ -285,12 +285,12 @@ public class TaintAnalysisTest {
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
-        set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("b"), new VariableExpression("a")));
+        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("buildPerformanceModel"), new VariableExpression("a")));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(basicBlock, set1));
     }
@@ -318,7 +318,7 @@ public class TaintAnalysisTest {
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
 
         BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("a"),
-                new BinaryExpression(new VariableExpression("b"), "+", new ConstantConfigurationExpression("C"))));
+                new BinaryExpression(new VariableExpression("buildPerformanceModel"), "+", new ConstantConfigurationExpression("C"))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(basicBlock, new HashSet<>()));
     }
@@ -330,15 +330,15 @@ public class TaintAnalysisTest {
 
         Set<TaintAnalysis.PossibleTaint> set = new HashSet<>();
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
-        set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
         set.add(new TaintAnalysis.PossibleTaint(new VariableExpression("d"), configurations));
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
-        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
         BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("d"),
-                new BinaryExpression(new VariableExpression("b"), "+", new VariableExpression("a"))));
+                new BinaryExpression(new VariableExpression("buildPerformanceModel"), "+", new VariableExpression("a"))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(basicBlock, set1));
     }
@@ -353,9 +353,9 @@ public class TaintAnalysisTest {
 
         Set<TaintAnalysis.PossibleTaint> set1 = new HashSet<>();
         set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
-        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        set1.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
-        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("b"),
+        BasicBlock basicBlock = new BasicBlock(new AssignmentStatement(new VariableExpression("buildPerformanceModel"),
                 new BinaryExpression(new VariableExpression("x"), "+", new ConstantIntExpression(2))));
 
         Assert.assertEquals(set, TaintAnalysis.transfer(basicBlock, set1));
@@ -372,10 +372,10 @@ public class TaintAnalysisTest {
         configurations = new HashSet<>();
         configurations.add(new ConstantConfigurationExpression("A"));
         configurations.add(new ConstantConfigurationExpression("B"));
-        result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
         List<Statement> statements = new LinkedList<>();
-        statements.add(new SleepStatement(new VariableExpression("b")));
+        statements.add(new SleepStatement(new VariableExpression("buildPerformanceModel")));
 
         IfStatement statementIf = new IfStatement(new VariableExpression("a"), new BlockStatement(statements));
 
@@ -394,7 +394,7 @@ public class TaintAnalysisTest {
         currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
         configurations = new HashSet<>();
         configurations.add(new ConstantConfigurationExpression("B"));
-        currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
         Assert.assertEquals(result, TaintAnalysis.transfer(basicBlock, currentTaints));
     }
@@ -410,12 +410,12 @@ public class TaintAnalysisTest {
         configurations = new HashSet<>();
         configurations.add(new ConstantConfigurationExpression("A"));
         configurations.add(new ConstantConfigurationExpression("B"));
-        result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        result.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
         List<Statement> statements = new LinkedList<>();
         statements.add(new SleepStatement(new ConstantIntExpression(2)));
 
-        IfStatement statementIf = new IfStatement(new VariableExpression("b"), new BlockStatement(statements));
+        IfStatement statementIf = new IfStatement(new VariableExpression("buildPerformanceModel"), new BlockStatement(statements));
 
         List<Expression> conditions = new ArrayList<>();
         conditions.add(statementIf.getCondition());
@@ -443,7 +443,7 @@ public class TaintAnalysisTest {
         currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("a"), configurations));
         configurations = new HashSet<>();
         configurations.add(new ConstantConfigurationExpression("B"));
-        currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("b"), configurations));
+        currentTaints.add(new TaintAnalysis.PossibleTaint(new VariableExpression("buildPerformanceModel"), configurations));
 
         Assert.assertEquals(result, TaintAnalysis.transfer(basicBlock, currentTaints));
     }

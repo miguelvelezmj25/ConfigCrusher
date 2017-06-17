@@ -1,11 +1,28 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
+import org.json.simple.parser.ParseException;
+import org.junit.Test;
+
+import java.io.IOException;
+
 /**
  * Created by mvelezce on 4/10/17.
  */
 public class JavaPipelineTest {
 
     public static final double TIMING_ERROR = 0.1;
+
+    @Test
+    public void testDummy3() throws IOException, ParseException {
+        String programName = "Dummy3";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        JavaPipeline.buildPerformanceModel(programName, args);
+    }
 
 //    @Test
 //    public void testInstrumentRelevantRegions1() throws Exception {

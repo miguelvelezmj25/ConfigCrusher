@@ -21,7 +21,7 @@ import java.util.Set;
 public class LotrackProcessorTest {
     @Test
     public void filterRegionsNoOptions1() {
-        JavaRegion region = new JavaRegion("a", "b", "c");
+        JavaRegion region = new JavaRegion("a", "buildPerformanceModel", "c");
         Set<String> options = new HashSet<>();
         Map<JavaRegion, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
@@ -31,7 +31,7 @@ public class LotrackProcessorTest {
 
     @Test
     public void filterRegionsNoOptions2() {
-        JavaRegion region = new JavaRegion("a", "b", "c");
+        JavaRegion region = new JavaRegion("a", "buildPerformanceModel", "c");
         Set<String> options = new HashSet<>();
         Map<JavaRegion, Set<String>> regionToOptions = new HashMap<>();
         regionToOptions.put(region, options);
@@ -68,7 +68,7 @@ public class LotrackProcessorTest {
     public void filterBooleans() {
         String TRUE = "true";
         String FALSE = "false";
-        JavaRegion region = new JavaRegion("a", "b", "c");
+        JavaRegion region = new JavaRegion("a", "buildPerformanceModel", "c");
         Set<String> options = new HashSet<>();
         options.add(TRUE);
         options.add(FALSE);

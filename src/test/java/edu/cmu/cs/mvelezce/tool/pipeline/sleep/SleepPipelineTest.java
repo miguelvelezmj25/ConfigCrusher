@@ -66,7 +66,7 @@ public class SleepPipelineTest {
         taintingConfigurations = new HashSet<>();
         taintingConfigurations.add(new ConstantConfigurationExpression("B"));
         taintingConfigurations.add(new ConstantConfigurationExpression("A"));
-        variableValue = "b";
+        variableValue = "buildPerformanceModel";
         variable = new VariableExpression(variableValue);
         possibleTaint = new TaintAnalysis.PossibleTaint(variable, taintingConfigurations);
         possibleTaints.add(possibleTaint);

@@ -6,7 +6,9 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder;
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.*;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -15,11 +17,11 @@ import java.util.*;
  */
 public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
-    protected List<String> fileNames;
+    protected String directory;
     protected Set<JavaRegion> regions;
 
-    public JavaRegionClassTransformer(List<String> fileNames, Set<JavaRegion> regions) {
-        this.fileNames = fileNames;
+    public JavaRegionClassTransformer(String directory, Set<JavaRegion> regions) {
+        this.directory = directory;
         this.regions = regions;
     }
 
@@ -30,9 +32,30 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
     @Override
     public Set<ClassNode> transformClasses() throws IOException {
         Set<ClassNode> classNodes = new HashSet<>();
+        String[] extensions = {"class"};
 
-        for(String fileName : this.fileNames) {
-            ClassNode classNode = this.readClass(fileName);
+        Collection<File> files = FileUtils.listFiles(new File(this.directory), extensions, true);
+
+        for(File file : files) {
+            String filePackage = file.getAbsolutePath().replace(this.directory, "");
+            filePackage = filePackage.replace(".class", "");
+            filePackage = filePackage.replace("/", ".");
+            String fileClass = filePackage.substring(filePackage.lastIndexOf(".") + 1);
+            filePackage = filePackage.replace("." + fileClass, "");
+            boolean transform = false;
+
+            for(JavaRegion javaRegion : this.regions) {
+                if(javaRegion.getRegionPackage().equals(filePackage) && javaRegion.getRegionClass().equals(fileClass)) {
+                    transform = true;
+                    break;
+                }
+            }
+
+            if(!transform) {
+                continue;
+            }
+
+            ClassNode classNode = this.readClass(filePackage + "." + fileClass);
 
             System.out.println("Before transforming");
 

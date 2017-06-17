@@ -18,8 +18,8 @@ public class JavaRegionClassTransformerPrinter extends JavaRegionClassTransforme
 
     private String messageToPrint;
 
-    public JavaRegionClassTransformerPrinter(List<String> programFiles, Set<JavaRegion> regions, String messageToPrint) {
-        super(programFiles, regions);
+    public JavaRegionClassTransformerPrinter(String directory, Set<JavaRegion> regions, String messageToPrint) {
+        super(directory, regions);
 
         this.messageToPrint = messageToPrint;
     }

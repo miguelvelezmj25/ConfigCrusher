@@ -6,7 +6,6 @@ import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 
-import java.util.List;
 import java.util.Set;
 
 /**

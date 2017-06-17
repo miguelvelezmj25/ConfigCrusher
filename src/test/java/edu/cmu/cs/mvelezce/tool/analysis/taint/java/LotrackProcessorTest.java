@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.LotrackProcessor;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;

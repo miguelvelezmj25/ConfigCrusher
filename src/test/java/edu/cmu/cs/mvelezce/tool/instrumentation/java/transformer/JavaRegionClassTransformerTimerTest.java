@@ -25,17 +25,12 @@ public class JavaRegionClassTransformerTimerTest {
         JavaRegion region = new JavaRegion(Sleep1.PACKAGE, Sleep1.CLASS, Sleep1.MAIN_METHOD, 20);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep1.FILENAME);
-
-        // Configuration
-        Set<String> configuration = new HashSet<>();
-        configuration.add("A");
+        // Directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Get the instruction count in each method
-        JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(programFiles, regions);
-        ClassNode classNode = printer.readClass(Sleep1.FILENAME);
+        JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(directory, regions);
+        ClassNode classNode = timer.readClass(Sleep1.FILENAME);
 
         // Save size of instructions for each method in the class
         Map<String, Integer> methodToInstructionCount = new HashMap<>();
@@ -45,7 +40,7 @@ public class JavaRegionClassTransformerTimerTest {
         }
 
         // Transform the files
-        Set<ClassNode> classNodes = printer.transformClasses();
+        Set<ClassNode> classNodes = timer.transformClasses();
 
         // Check if the transform actually made changes to the bytecode
         boolean transformed = false;
@@ -74,17 +69,12 @@ public class JavaRegionClassTransformerTimerTest {
         region = new JavaRegion(Sleep2.PACKAGE, Sleep2.CLASS, Sleep2.METHOD_1, 16);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep2.FILENAME);
-
-        // Configuration
-        Set<String> configuration = new HashSet<>();
-        configuration.add("A");
+        // Directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Get the instruction count in each method
-        JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(programFiles, regions);
-        ClassNode classNode = printer.readClass(Sleep2.FILENAME);
+        JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(directory, regions);
+        ClassNode classNode = timer.readClass(Sleep2.FILENAME);
 
         // Save size of instructions for each method in the class
         Map<String, Integer> methodToInstructionCount = new HashMap<>();
@@ -94,7 +84,7 @@ public class JavaRegionClassTransformerTimerTest {
         }
 
         // Transform the files
-        Set<ClassNode> classNodes = printer.transformClasses();
+        Set<ClassNode> classNodes = timer.transformClasses();
 
         // Check if the transform actually made changes to the bytecode
         boolean transformed = false;
@@ -129,17 +119,12 @@ public class JavaRegionClassTransformerTimerTest {
         region = new JavaRegion(Sleep3.PACKAGE, Sleep3.CLASS, Sleep3.METHOD_2, 16);
         regions.add(region);
 
-        // Program files
-        List<String> programFiles = new ArrayList<>();
-        programFiles.add(Sleep3.FILENAME);
-
-        // Configuration
-        Set<String> configuration = new HashSet<>();
-        configuration.add("A");
+        // Directory
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Get the instruction count in each method
-        JavaRegionClassTransformerTimer printer = new JavaRegionClassTransformerTimer(programFiles, regions);
-        ClassNode classNode = printer.readClass(Sleep3.FILENAME);
+        JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(directory, regions);
+        ClassNode classNode = timer.readClass(Sleep3.FILENAME);
 
         // Save size of instructions for each method in the class
         Map<String, Integer> methodToInstructionCount = new HashMap<>();
@@ -149,7 +134,7 @@ public class JavaRegionClassTransformerTimerTest {
         }
 
         // Transform the files
-        Set<ClassNode> classNodes = printer.transformClasses();
+        Set<ClassNode> classNodes = timer.transformClasses();
 
         // Check if the transform actually made changes to the bytecode
         boolean transformed = false;

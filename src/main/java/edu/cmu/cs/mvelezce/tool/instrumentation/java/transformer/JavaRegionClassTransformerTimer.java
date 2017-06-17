@@ -14,8 +14,8 @@ import java.util.Set;
  */
 public class JavaRegionClassTransformerTimer extends JavaRegionClassTransformer {
 
-    public JavaRegionClassTransformerTimer(List<String> programFiles, Set<JavaRegion> regions) {
-        super(programFiles, regions);
+    public JavaRegionClassTransformerTimer(String directory, Set<JavaRegion> regions) {
+        super(directory, regions);
     }
 
     @Override

@@ -34,7 +34,7 @@ public class Executor {
     public static final String START_TIME = "startTime";
     public static final String END_TIME = "endTime";
 
-    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
+    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
         Options.getCommandLine(args);
 
         String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
@@ -51,7 +51,7 @@ public class Executor {
             }
         }
 
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, mainClass, directory, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, entryPoint, directory, configurationsToExecute);
 
         return measuredPerformance;
     }

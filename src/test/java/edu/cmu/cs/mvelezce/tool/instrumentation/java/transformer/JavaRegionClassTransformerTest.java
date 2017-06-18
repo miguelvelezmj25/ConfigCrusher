@@ -1,14 +1,60 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
+import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 5/11/17.
  */
 public class JavaRegionClassTransformerTest {
+    @Test
+    public void testCalculateASMStartIndex1() throws IOException, ParseException {
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String programName = "Dummy3";
+        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Set<JavaRegion> regions = partialRegionsToOptions.keySet();
+
+        JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(directory, regions);
+        ClassNode classNode = timer.readClass("edu.cmu.cs.mvelezce." + programName);
+        MethodNode methodNode = null;
+
+        for(MethodNode method : classNode.methods) {
+            if(method.name.equals("main")) {
+                methodNode = method;
+                break;
+            }
+        }
+
+        List<JavaRegion> regionList = new ArrayList<>();
+
+        for(JavaRegion region : regions) {
+            if(region.getRegionMethod().equals("main")) {
+                regionList.add(region);
+            }
+        }
+
+        timer.calculateASMStartIndex(regionList, methodNode);
+
+        for(JavaRegion region : regionList) {
+            System.out.println(region.getRegionMethod() + " " + region.getStartBytecodeIndex());
+        }
+    }
 
     @Test
     public void testGetWhereToStartInstrumenting1() {

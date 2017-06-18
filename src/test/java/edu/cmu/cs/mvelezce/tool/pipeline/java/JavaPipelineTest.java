@@ -15,13 +15,12 @@ public class JavaPipelineTest {
     @Test
     public void testDummy3() throws IOException, ParseException {
         String programName = "Dummy3";
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Program arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+        String[] args = new String[0];
 
-        JavaPipeline.buildPerformanceModel(programName, args);
+        JavaPipeline.buildPerformanceModel(programName, args, directory);
     }
 
 //    @Test

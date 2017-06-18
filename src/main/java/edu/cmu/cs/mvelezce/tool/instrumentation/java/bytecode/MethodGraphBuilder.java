@@ -17,15 +17,17 @@ public class MethodGraphBuilder {
         InsnList instructions = methodNode.instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
         List<AbstractInsnNode> labelInstructions = new ArrayList<>();
+        LabelNode currentLabelNode = null;
 
         while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
             int instructionType = instruction.getType();
 
             if(instructionType == AbstractInsnNode.LABEL) {
-                LabelNode labelNode = (LabelNode) instruction;
+                currentLabelNode = (LabelNode) instruction;
+//                LabelNode labelNode = (LabelNode) instruction;
                 labelInstructions = new ArrayList<>();
-                MethodBlock methodBlock = new MethodBlock(labelNode.getLabel(), labelInstructions);
+                MethodBlock methodBlock = new MethodBlock(currentLabelNode.getLabel(), labelInstructions);
                 graph.addMethodBlock(methodBlock);
             }
             else if(instructionType == AbstractInsnNode.JUMP_INSN) {
@@ -37,7 +39,7 @@ public class MethodGraphBuilder {
                     LabelNode labelNode = new LabelNode();
                     labelInstructions = new ArrayList<>();
                     labelInstructions.add(labelNode);
-                    MethodBlock methodBlock = new MethodBlock(labelNode.getLabel(), labelInstructions);
+                    MethodBlock methodBlock = new MethodBlock(labelNode.getLabel(), currentLabelNode.getLabel(), labelInstructions);
                     graph.addMethodBlock(methodBlock);
 
                     instructionToNewLabel.put(instruction, labelNode);

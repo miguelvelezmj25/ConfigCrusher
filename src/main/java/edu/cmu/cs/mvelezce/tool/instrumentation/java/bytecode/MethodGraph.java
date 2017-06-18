@@ -78,9 +78,9 @@ public class MethodGraph {
             }
         }
 
-        for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : this.blocksToDominators.entrySet()) {
-            System.out.println(blockToDominators.getKey() + " dominated by " + blockToDominators.getValue());
-        }
+//        for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : this.blocksToDominators.entrySet()) {
+//            System.out.println(blockToDominators.getKey() + " dominated by " + blockToDominators.getValue());
+//        }
 
         return this.blocksToDominators;
     }
@@ -123,7 +123,7 @@ public class MethodGraph {
         reversedGraph.entryBlock = reversedGraph.blocks.get(this.exitBlock.getID());
         reversedGraph.exitBlock = reversedGraph.blocks.get(this.entryBlock.getID());
 
-        System.out.println(reversedGraph.toDotString("reverse"));
+//        System.out.println(reversedGraph.toDotString("reverse"));
 
         return reversedGraph;
     }

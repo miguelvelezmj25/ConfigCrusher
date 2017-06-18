@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * TODO add options for each component of the pipeline
  * Created by mvelezce on 4/28/17.
  */
 public abstract class Options {

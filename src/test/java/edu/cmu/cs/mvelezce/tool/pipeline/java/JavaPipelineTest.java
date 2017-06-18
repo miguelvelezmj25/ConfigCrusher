@@ -59,20 +59,20 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        // TESTING
-        args = new String[0];
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
-
-        for(Set<String> configuration : configurations) {
-            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
-            long start = System.nanoTime();
-            Sleep14.main(sleepConfiguration);
-            long end = System.nanoTime();
-
-            System.out.println(pm.evaluate(configuration));
-            System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
-        }
+//        // TESTING
+//        args = new String[0];
+//        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+//
+//        for(Set<String> configuration : configurations) {
+//            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+//            long start = System.nanoTime();
+//            Sleep14.main(sleepConfiguration);
+//            long end = System.nanoTime();
+//
+//            System.out.println(pm.evaluate(configuration));
+//            System.out.println(Region.getSecondsExecutionTime(start, end));
+//            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+//        }
     }
 
 //    @Test

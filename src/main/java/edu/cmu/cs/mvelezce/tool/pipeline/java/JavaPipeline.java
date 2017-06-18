@@ -22,7 +22,7 @@ public class JavaPipeline {
     public static final String TEST_COLLECTION = "Tests";
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
-    public static void buildPerformanceModel(String programName, String[] args, String directory) throws IOException, ParseException {
+    public static void buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory) throws IOException, ParseException, InterruptedException {
         // Get regions and options
         System.out.println("Region and options");
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
@@ -36,7 +36,7 @@ public class JavaPipeline {
         System.out.println("");
 
         System.out.println("Instrumenting");
-        Instrumenter.instrument(directory, partialRegionsToOptions.keySet());
+        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
         System.out.println("");
     }
 

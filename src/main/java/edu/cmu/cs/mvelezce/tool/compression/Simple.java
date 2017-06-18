@@ -43,22 +43,11 @@ public class Simple {
         return results;
     }
 
-    // TODO use the above method
     public static Set<Set<String>> getConfigurationsToExecute(String programName, String[] args, Set<Set<String>> relevantOptionsSet) throws IOException {
-        Options.getCommandLine(args);
+        Set<Set<String>> results = Simple.getConfigurationsToExecute(programName, args);
 
-        String outputFile = Simple.DIRECTORY + "/" + programName + Options.DOT_JSON;
-        File file = new File(outputFile);
-
-        Options.checkIfDeleteResult(file);
-
-        if(file.exists()) {
-            try {
-                return Simple.readFromFile(file);
-            }
-            catch (ParseException pe) {
-                throw new RuntimeException("Could not parse the cached results");
-            }
+        if(results != null) {
+            return results;
         }
 
         Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(relevantOptionsSet);

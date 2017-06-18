@@ -20,6 +20,9 @@ public class JavaPipelineTest {
 
         // Program arguments
         String[] args = new String[0];
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory);
     }

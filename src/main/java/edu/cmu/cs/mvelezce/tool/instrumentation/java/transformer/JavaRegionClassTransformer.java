@@ -304,11 +304,16 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
         // 2 are the lines before the actual code in a method
         int instructionNumber = -2;
+        Set<JavaRegion> updatedRegions = new HashSet<>();
 
         for(int i = methodStartIndex; i < output.size(); i++) {
             String outputLine = output.get(i);
 
             for(JavaRegion region : regionsInMethod) {
+                if(updatedRegions.contains(region)) {
+                    continue;
+                }
+
                 if(outputLine.contains(region.getStartBytecodeIndex() + ":")) {
                     InsnList instructionsList = methodNode.instructions;
                     ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
@@ -326,9 +331,14 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                         if(instructionCounter == instructionNumber) {
                             region.setStartBytecodeIndex(instructionsList.indexOf(instruction));
+                            updatedRegions.add(region);
                             break;
                         }
                     }
+                }
+
+                if(updatedRegions.size() == regionsInMethod.size()) {
+                    break;
                 }
             }
 

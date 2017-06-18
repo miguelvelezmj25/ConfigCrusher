@@ -15,26 +15,32 @@ public class MethodBlock {
 
     private String ID;
     private Label label;
+    private Label originalLabel;
     private List<AbstractInsnNode> instructions;
     private Set<MethodBlock> successors = new HashSet<>();
     private Set<MethodBlock> predecessors = new HashSet<>();
 
-    public MethodBlock(String ID, Label label, List<AbstractInsnNode> instructions) {
+    public MethodBlock(String ID, Label label, Label originalLabel, List<AbstractInsnNode> instructions) {
         this.ID = ID;
         this.label = label;
+        this.originalLabel = originalLabel;
         this.instructions = instructions;
     }
 
     public MethodBlock(Label label, List<AbstractInsnNode> instructions) {
-        this(label.toString(), label, instructions);
+        this(label.toString(), label, label, instructions);
+    }
+
+    public MethodBlock(Label label, Label originalLabel, List<AbstractInsnNode> instructions) {
+        this(label.toString(), label, originalLabel, instructions);
     }
 
     public MethodBlock(String ID) {
-        this(ID, new Label(), new ArrayList<>());
+        this(ID, new Label(), new Label(), new ArrayList<>());
     }
 
     public MethodBlock(Label label) {
-        this(label.toString(), label, new ArrayList<>());
+        this(label.toString(), label, label, new ArrayList<>());
     }
 
 
@@ -58,6 +64,8 @@ public class MethodBlock {
     public String getID() { return this.ID; }
 
     public Label getLabel() { return this.label; }
+
+    public Label getOriginalLabel() { return this.originalLabel; }
 
     public List<AbstractInsnNode> getInstructions() { return this.instructions; }
 

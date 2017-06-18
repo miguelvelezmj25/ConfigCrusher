@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class JavaPipeline {
     public static final String TEST_COLLECTION = "Tests";
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
-    public static void buildPerformanceModel(String programName, String[] args) throws IOException, ParseException {
+    public static void buildPerformanceModel(String programName, String[] args, String directory) throws IOException, ParseException {
         // Get regions and options
         System.out.println("Region and options");
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
@@ -35,7 +36,7 @@ public class JavaPipeline {
         System.out.println("");
 
         System.out.println("Instrumenting");
-
+        Instrumenter.instrument(directory, partialRegionsToOptions.keySet());
         System.out.println("");
     }
 

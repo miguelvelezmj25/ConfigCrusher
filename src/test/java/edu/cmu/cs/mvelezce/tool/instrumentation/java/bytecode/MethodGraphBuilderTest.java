@@ -202,4 +202,21 @@ public class MethodGraphBuilderTest {
         }
     }
 
+    @Test
+    public void testBuildMethodGraph11() throws IOException {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass(Dummy3.class.getCanonicalName());
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("main")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+                Assert.assertEquals(14, methodGraph.getBlockCount());
+                Assert.assertEquals(15, methodGraph.getEdgeCount());
+            }
+        }
+    }
+
 }

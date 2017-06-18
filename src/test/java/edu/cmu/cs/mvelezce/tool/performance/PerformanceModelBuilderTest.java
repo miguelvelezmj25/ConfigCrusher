@@ -2,7 +2,10 @@ package edu.cmu.cs.mvelezce.tool.performance;
 
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
@@ -20,6 +23,26 @@ import java.util.Set;
  * Created by mvelezce on 4/28/17.
  */
 public class PerformanceModelBuilderTest {
+
+    @Test
+    public void testSleep2() throws IOException, ParseException {
+        String program = "Sleep2";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
+
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+    }
 
     @Test
     public void testCreatePerformanceModelPipeline1() throws IOException, ParseException {
@@ -92,12 +115,12 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
         Set<String> relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        Region region = new Region("820767c8-a7ee-431b-93b0-d422b44119b8");
+        Region region = new Region("ae664378-11a7-498f-bb1b-babc0a6dc4d6");
         regionsToOptions.put(region, relevantOptions);
 
         relevantOptions = new HashSet<>();
         relevantOptions.add("A");
-        region = new Region("d1c659ba-b32e-474f-ba07-9ff1b0e93e3d");
+        region = new Region("a8aaaaf2-bfb3-49ab-b5c9-8ceebae16124");
         regionsToOptions.put(region, relevantOptions);
 
         // Program arguments

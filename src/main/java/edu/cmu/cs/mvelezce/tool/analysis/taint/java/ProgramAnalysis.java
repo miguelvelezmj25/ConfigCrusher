@@ -43,21 +43,32 @@ public class ProgramAnalysis {
 //    public static final String REGION_JAVA_LINE_NUMBER = "regionJavaLineNumber";
     public static final String START_BYTECODE_INDEX = "startBytecodeIndex";
 
-    public static Map<JavaRegion, Set<String>> analyse(String programName, String[] args, String database, String program) throws IOException, ParseException {
+    public static Map<JavaRegion, Set<String>> analyse(String programName, String[] args) throws IOException, ParseException {
         Options.getCommandLine(args);
 
         String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
+        Map<JavaRegion, Set<String>> relevantRegionToOptions = null;
 
         if(file.exists()) {
             try {
-                return ProgramAnalysis.readFromFile(file);
+                relevantRegionToOptions = ProgramAnalysis.readFromFile(file);
             }
             catch (ParseException pe) {
                 throw new RuntimeException("Could not parse the cached results");
             }
+        }
+
+        return relevantRegionToOptions;
+    }
+
+    public static Map<JavaRegion, Set<String>> analyse(String programName, String[] args, String database, String program) throws IOException, ParseException {
+        Map<JavaRegion, Set<String>> results = ProgramAnalysis.analyse(programName, args);
+
+        if(results != null) {
+            return results;
         }
 
         Map<JavaRegion, Set<String>> relevantRegionToOptions = ProgramAnalysis.analyse(database, program);

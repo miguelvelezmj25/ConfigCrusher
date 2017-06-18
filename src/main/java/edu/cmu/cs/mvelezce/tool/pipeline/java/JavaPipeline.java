@@ -43,7 +43,7 @@ public class JavaPipeline {
         System.out.println("");
 
         System.out.println("Instrumenting");
-        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
         System.out.println("");
 
         System.out.println("Measure performance");

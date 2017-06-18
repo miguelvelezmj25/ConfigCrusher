@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
+import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -13,6 +14,14 @@ import java.util.Set;
 public class Instrumenter {
 
     public static final String TARGET_DIRECTORY = "../performance-mapper-evaluation/instrumented";
+
+    public static void instrument(String[] args, String srcDirectory, String classDirectory, Set<JavaRegion> regions) throws IOException, InterruptedException {
+        Options.getCommandLine(args);
+
+        if(Options.checkIfDeleteResult()) {
+            Instrumenter.instrument(srcDirectory, classDirectory, regions);
+        }
+    }
 
     public static void instrument(String srcDirectory, String classDirectory, Set<JavaRegion> regions) throws IOException, InterruptedException {
         String[] command = {"find", srcDirectory.substring(0, srcDirectory.length()-1), "-name", "*.java"};

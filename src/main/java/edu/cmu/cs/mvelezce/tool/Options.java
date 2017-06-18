@@ -50,4 +50,8 @@ public abstract class Options {
     public static boolean checkIfSave() {
         return cmd.hasOption(Options.SAVERES);
     }
+
+    public static boolean checkIfDeleteResult() {
+        return cmd.hasOption(Options.DELRES);
+    }
 }

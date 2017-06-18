@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class SleepAdapter extends Adapter {
 
-    private static final String[] CONFIGURATIONS = {"A", "B", "C", "D"};
+    private static final String[] CONFIGURATIONS = {"A", "B", "C", "D", "IA", "DA"};
 
     public static final String TEST_DIRECTORY = "test/out/production/test";
 
@@ -38,7 +38,7 @@ public class SleepAdapter extends Adapter {
     }
 
     public static String[] adaptConfigurationToSleepProgram(Set<String> configuration) {
-        String[] sleepConfiguration = new String[4];
+        String[] sleepConfiguration = new String[CONFIGURATIONS.length];
 
         for(int i = 0; i < sleepConfiguration.length; i++) {
             if(configuration.contains(SleepAdapter.CONFIGURATIONS[i])) {

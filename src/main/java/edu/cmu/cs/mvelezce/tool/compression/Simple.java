@@ -22,6 +22,28 @@ public class Simple {
     // JSON strings
     public static final String COMPRESSION = "compression";
 
+    public static Set<Set<String>> getConfigurationsToExecute(String programName, String[] args) throws IOException {
+        Options.getCommandLine(args);
+
+        String outputFile = Simple.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        File file = new File(outputFile);
+
+        Options.checkIfDeleteResult(file);
+        Set<Set<String>> results = null;
+
+        if(file.exists()) {
+            try {
+                results = Simple.readFromFile(file);
+            }
+            catch (ParseException pe) {
+                throw new RuntimeException("Could not parse the cached results");
+            }
+        }
+
+        return results;
+    }
+
+    // TODO use the above method
     public static Set<Set<String>> getConfigurationsToExecute(String programName, String[] args, Set<Set<String>> relevantOptionsSet) throws IOException {
         Options.getCommandLine(args);
 

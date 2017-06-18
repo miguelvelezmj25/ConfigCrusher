@@ -100,6 +100,12 @@ public class SleepMain {
             Sleep13.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep14")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep14.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
 
         Set<String> performanceConfiguration = SleepAdapter.adaptConfigurationToPerformanceMeasurement(sleepArgs);
         Executor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());

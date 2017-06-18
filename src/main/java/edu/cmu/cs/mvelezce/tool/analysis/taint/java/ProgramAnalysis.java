@@ -109,7 +109,7 @@ public class ProgramAnalysis {
         String currentClass = "";
         String currentMethod = "";
         JavaRegion currentJavaRegion;
-        int currentBytecodeIndex = Integer.MIN_VALUE;
+        int currentBytecodeIndex = 0;
         Set<String> currentUsedTerms = new HashSet<>();
         JSONParser parser = new JSONParser();
 
@@ -117,12 +117,6 @@ public class ProgramAnalysis {
             JSONObject entry = (JSONObject) parser.parse(result);
             List<String> usedTerms = (List<String>) entry.get(ProgramAnalysis.USED_TERMS);
             List<Long> entryBytecodeIndexes = (List<Long>) entry.get(ProgramAnalysis.BYTECODE_INDEXES);
-
-            if(usedTerms.size() == 1 && (usedTerms.contains("true") || usedTerms.contains("false"))) {
-                currentUsedTerms = new HashSet<>();
-                currentBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));
-                continue;
-            }
 
             String entryPackage = (String) entry.get(ProgramAnalysis.PACKAGE);
             String entryClass = (String) entry.get(ProgramAnalysis.CLASS);
@@ -133,12 +127,35 @@ public class ProgramAnalysis {
 
             String entryMethod = (String) entry.get(ProgramAnalysis.METHOD);
 
-            if(!currentPackage.equals(entryPackage) ||!currentClass.equals(entryClass) || !currentMethod.equals(entryMethod)) {
+            if(!currentPackage.equals(entryPackage) || !currentClass.equals(entryClass) || !currentMethod.equals(entryMethod)) {
+                currentBytecodeIndex = 0;
                 currentUsedTerms = new HashSet<>();
                 currentPackage = entryPackage;
                 currentClass = entryClass;
                 currentMethod = entryMethod;
             }
+
+            if(usedTerms.size() == 1 && (usedTerms.contains("true") || usedTerms.contains("false"))) {
+                currentUsedTerms = new HashSet<>();
+                currentBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));
+                continue;
+            }
+
+//            String entryPackage = (String) entry.get(ProgramAnalysis.PACKAGE);
+//            String entryClass = (String) entry.get(ProgramAnalysis.CLASS);
+//
+//            if(entryClass.contains(".")) {
+//                entryClass = entryClass.substring(entryClass.lastIndexOf(".") + 1);
+//            }
+//
+//            String entryMethod = (String) entry.get(ProgramAnalysis.METHOD);
+
+//            if(!currentPackage.equals(entryPackage) || !currentClass.equals(entryClass) || !currentMethod.equals(entryMethod)) {
+//                currentUsedTerms = new HashSet<>();
+//                currentPackage = entryPackage;
+//                currentClass = entryClass;
+//                currentMethod = entryMethod;
+//            }
 
             if(!currentUsedTerms.containsAll(usedTerms)) {
                 currentUsedTerms.addAll(usedTerms);

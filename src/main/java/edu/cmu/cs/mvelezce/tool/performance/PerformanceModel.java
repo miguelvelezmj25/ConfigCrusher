@@ -166,7 +166,9 @@ public class PerformanceModel {
                     performanceModel.append(option).append(" ");
                 }
 
-                performanceModel.deleteCharAt(performanceModel.length() - 1);
+                if(!entry.getKey().isEmpty()) {
+                    performanceModel.deleteCharAt(performanceModel.length() - 1);
+                }
             }
 
         }

@@ -34,21 +34,32 @@ public class Executor {
     public static final String START_TIME = "startTime";
     public static final String END_TIME = "endTime";
 
-    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
+    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args) throws IOException, ParseException {
         Options.getCommandLine(args);
 
         String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
+        Set<PerformanceEntry> measuredPerformance = null;
 
         if(file.exists()) {
             try {
-                return Executor.readFromFile(file);
+                measuredPerformance = Executor.readFromFile(file);
             }
             catch (ParseException pe) {
                 throw new RuntimeException("Could not parse the cached results");
             }
+        }
+
+        return measuredPerformance;
+    }
+
+    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
+        Set<PerformanceEntry> results = Executor.measureConfigurationPerformance(programName, args);
+
+        if(results != null) {
+            return results;
         }
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, entryPoint, directory, configurationsToExecute);

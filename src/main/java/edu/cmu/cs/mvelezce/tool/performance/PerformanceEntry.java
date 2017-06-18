@@ -86,13 +86,15 @@ public class PerformanceEntry {
     }
 
     public long getTimeOfRegionID(String ID) {
+        long time = -1;
+
         for(Map.Entry<Region, Long> regionToTime : this.regionsToExecutionTime.entrySet()) {
             if(regionToTime.getKey().getRegionID().equals(ID)) {
-                return regionToTime.getValue();
+                time += regionToTime.getValue();
             }
         }
 
-        return -1;
+        return time;
     }
 
     public Set<String> getConfiguration() { return this.configuration; }

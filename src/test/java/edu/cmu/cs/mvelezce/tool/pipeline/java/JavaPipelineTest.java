@@ -13,14 +13,15 @@ public class JavaPipelineTest {
     public static final double TIMING_ERROR = 0.1;
 
     @Test
-    public void testDummy3() throws IOException, ParseException {
+    public void testDummy3() throws IOException, ParseException, InterruptedException {
         String programName = "Dummy3";
-        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
 
         // Program arguments
         String[] args = new String[0];
 
-        JavaPipeline.buildPerformanceModel(programName, args, directory);
+        JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory);
     }
 
 //    @Test

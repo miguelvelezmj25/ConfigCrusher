@@ -163,8 +163,10 @@ public class PerformanceModel {
                 performanceModel.append(decimalFormat.format(Math.abs(entry.getValue())));
 
                 for(String option : entry.getKey()) {
-                    performanceModel.append(option);
+                    performanceModel.append(option).append(" ");
                 }
+
+                performanceModel.deleteCharAt(performanceModel.length() - 1);
             }
 
         }

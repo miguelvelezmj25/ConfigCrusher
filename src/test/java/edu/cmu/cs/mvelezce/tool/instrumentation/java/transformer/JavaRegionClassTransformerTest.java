@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
@@ -21,6 +22,20 @@ import java.util.Set;
  * Created by mvelezce on 5/11/17.
  */
 public class JavaRegionClassTransformerTest {
+
+    @Test
+    public void testSleep9() throws IOException, ParseException, InterruptedException {
+        String program = "Sleep9";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(program, args);
+        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+    }
+
     @Test
     public void testCalculateASMStartIndex1() throws IOException, ParseException {
         String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";

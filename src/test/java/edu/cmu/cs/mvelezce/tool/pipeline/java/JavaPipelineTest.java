@@ -1,9 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
-import edu.cmu.cs.mvelezce.Sleep1;
-import edu.cmu.cs.mvelezce.Sleep14;
-import edu.cmu.cs.mvelezce.Sleep2;
-import edu.cmu.cs.mvelezce.Sleep3;
+import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -182,6 +179,43 @@ public class JavaPipelineTest {
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep3.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+        }
+    }
+
+    @Test
+    public void testSleep4() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep4";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println("\n" + configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep4.main(sleepConfiguration);
             long end = System.nanoTime();
 
             System.out.println(pm.evaluate(configuration));

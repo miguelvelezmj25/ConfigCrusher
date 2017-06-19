@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.*;
+import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -21,23 +22,23 @@ import java.util.Set;
  */
 public class JavaPipelineTest {
 
-    public static final double TIMING_ERROR = 0.1;
+    public static final double TIMING_ERROR = 0.05;
 
-    @Test
-    public void testDummy3() throws IOException, ParseException, InterruptedException {
-        String programName = "Dummy3";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Dummy3";
-
-        // Program arguments
-        String[] args = new String[0];
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-
-        JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-    }
+//    @Test
+//    public void testDummy3() throws IOException, ParseException, InterruptedException {
+//        String programName = "Dummy3";
+//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+//        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+//        String entryPoint = "edu.cmu.cs.mvelezce.Dummy3";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+////        String[] args = new String[2];
+////        args[0] = "-delres";
+////        args[1] = "-saveres";
+//
+//        JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+//    }
 
     @Test
     public void testSleep14() throws IOException, ParseException, InterruptedException {
@@ -47,14 +48,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -62,6 +63,13 @@ public class JavaPipelineTest {
         // TESTING
         args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
 
         for(Set<String> configuration : configurations) {
             System.out.println(configuration);
@@ -72,7 +80,7 @@ public class JavaPipelineTest {
 
             System.out.println(pm.evaluate(configuration));
             System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 
@@ -84,14 +92,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -99,9 +107,16 @@ public class JavaPipelineTest {
         // TESTING
         args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
-            System.out.println("\n" + configuration);
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep1.main(sleepConfiguration);
@@ -109,7 +124,7 @@ public class JavaPipelineTest {
 
             System.out.println(pm.evaluate(configuration));
             System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 
@@ -122,14 +137,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -137,9 +152,16 @@ public class JavaPipelineTest {
         // TESTING
         args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
-            System.out.println("\n" + configuration);
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep2.main(sleepConfiguration);
@@ -147,7 +169,7 @@ public class JavaPipelineTest {
 
             System.out.println(pm.evaluate(configuration));
             System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 
@@ -159,14 +181,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -174,9 +196,16 @@ public class JavaPipelineTest {
         // TESTING
         args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
-            System.out.println("\n" + configuration);
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep3.main(sleepConfiguration);
@@ -184,7 +213,7 @@ public class JavaPipelineTest {
 
             System.out.println(pm.evaluate(configuration));
             System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 
@@ -196,14 +225,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -211,9 +240,16 @@ public class JavaPipelineTest {
         // TESTING
         args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
-            System.out.println("\n" + configuration);
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep4.main(sleepConfiguration);
@@ -221,7 +257,7 @@ public class JavaPipelineTest {
 
             System.out.println(pm.evaluate(configuration));
             System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 
@@ -234,14 +270,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -249,9 +285,16 @@ public class JavaPipelineTest {
         // TESTING
         args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
-            System.out.println("\n" + configuration);
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep7.main(sleepConfiguration);
@@ -259,7 +302,7 @@ public class JavaPipelineTest {
 
             System.out.println(pm.evaluate(configuration));
             System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 
@@ -272,14 +315,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -287,9 +330,16 @@ public class JavaPipelineTest {
         // TESTING
         args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
-            System.out.println("\n" + configuration);
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep8.main(sleepConfiguration);
@@ -297,7 +347,7 @@ public class JavaPipelineTest {
 
             System.out.println(pm.evaluate(configuration));
             System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 
@@ -310,14 +360,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep9";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -325,9 +375,16 @@ public class JavaPipelineTest {
         // TESTING
         args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
-            System.out.println("\n" + configuration);
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep9.main(sleepConfiguration);
@@ -335,7 +392,7 @@ public class JavaPipelineTest {
 
             System.out.println(pm.evaluate(configuration));
             System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 
@@ -348,14 +405,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -363,9 +420,16 @@ public class JavaPipelineTest {
         // TESTING
         args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
-            System.out.println("\n" + configuration);
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep10.main(sleepConfiguration);
@@ -373,7 +437,7 @@ public class JavaPipelineTest {
 
             System.out.println(pm.evaluate(configuration));
             System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), 0.05);
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 
@@ -663,23 +727,23 @@ public class JavaPipelineTest {
 //        // Compare
 //        double performance = 0.3;
 //        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 3.5;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
 //        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.8;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 2.0;
 //        configuration = new HashSet<>();
 //        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //    }
 //
 //    @Test
@@ -709,12 +773,12 @@ public class JavaPipelineTest {
 //        // Compare
 //        double performance = 0.3;
 //        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 0.9;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //    }
 //
 //    @Test
@@ -751,12 +815,12 @@ public class JavaPipelineTest {
 //        // Compare
 //        double performance = 0.3;
 //        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.8;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //    }
 //
 //    @Test
@@ -793,12 +857,12 @@ public class JavaPipelineTest {
 //        // Compare
 //        double performance = 0.9;
 //        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 0.8;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //    }
 //
 //    @Test
@@ -835,12 +899,12 @@ public class JavaPipelineTest {
 //        // Compare
 //        double performance = 1.0;
 //        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 0.9;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //    }
 //
 //    @Test
@@ -877,23 +941,23 @@ public class JavaPipelineTest {
 //        // Compare
 //        double performance = 1.5;
 //        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.8;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 2.1;
 //        configuration = new HashSet<>();
 //        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.8;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
 //        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //    }
 //
 //    @Test
@@ -930,23 +994,23 @@ public class JavaPipelineTest {
 //        // Compare
 //        double performance = 2.1;
 //        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.8;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.9;
 //        configuration = new HashSet<>();
 //        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.8;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
 //        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //    }
 //
 //    @Test
@@ -999,23 +1063,23 @@ public class JavaPipelineTest {
 //        // Compare
 //        double performance = 0.3;
 //        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.8;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 2.1;
 //        configuration = new HashSet<>();
 //        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.8;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
 //        configuration.add("B");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //    }
 //
 //    @Test
@@ -1059,11 +1123,11 @@ public class JavaPipelineTest {
 //        // Compare
 //        double performance = 2.2;
 //        Set<String> configuration = new HashSet<>();
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //
 //        performance = 1.1;
 //        configuration = new HashSet<>();
 //        configuration.add("A");
-//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.TIMING_ERROR);
+//        Assert.assertEquals(performance, performanceModel.evaluate(configuration), JavaPipelineTest.JavaPipelineTest.TIMING_ERROR);
 //    }
 }

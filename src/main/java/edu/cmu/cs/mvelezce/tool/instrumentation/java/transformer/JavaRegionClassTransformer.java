@@ -184,18 +184,17 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
             }
 
-            // TODO the graph creates labels, but the instructions might not have the created labels
-            // TODO the labels in the graph have instructions, so we can get the labels there to use for calculation.
             InsnList newInstructions = new InsnList();
             InsnList instructions = methodNode.instructions;
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
             LabelNode currentLabelNode = null;
-            Set<Map.Entry<LabelNode, LabelNode>> labelUpdates = new LinkedHashSet<>();
+//            Set<Map.Entry<LabelNode, LabelNode>> labelUpdates = new LinkedHashSet<>();
 
             while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
 
                 if(instruction.getType() == AbstractInsnNode.LABEL) {
+                    // TODO test special nodes
                     if(currentLabelNode != null) {
                         MethodBlock methodBlock = graph.getMethodBlock(currentLabelNode.getLabel());
 
@@ -223,7 +222,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                             Label label = new Label();
                             label.info = currentLabelNode.getLabel() + "000end";
                             LabelNode endRegionLabelNode = new LabelNode(label);
-                            labelUpdates.add(new AbstractMap.SimpleEntry<>(currentLabelNode, endRegionLabelNode));
+                            JavaRegionClassTransformer.updateLabels(newInstructions, currentLabelNode, endRegionLabelNode);
+//                            labelUpdates = new LinkedHashSet<>();
+//                            labelUpdates.add(new AbstractMap.SimpleEntry<>(currentLabelNode, endRegionLabelNode));
+//                            JavaRegionClassTransformer.updateLabels(newInstructions, labelUpdates);
 
                             InsnList endRegionInstructions = new InsnList();
                             endRegionInstructions.add(endRegionLabelNode);
@@ -242,7 +244,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                             Label label = new Label();
                             label.info = currentLabelNode.getLabel() + "000start";
                             LabelNode startRegionLabelNode = new LabelNode(label);
-                            labelUpdates.add(new AbstractMap.SimpleEntry<>(currentLabelNode, startRegionLabelNode));
+                            JavaRegionClassTransformer.updateLabels(newInstructions, currentLabelNode, startRegionLabelNode);
+//                            labelUpdates = new LinkedHashSet<>();
+//                            labelUpdates.add(new AbstractMap.SimpleEntry<>(currentLabelNode, startRegionLabelNode));
+//                            JavaRegionClassTransformer.updateLabels(newInstructions, labelUpdates);
 
                             InsnList startRegionInstructions = new InsnList();
                             startRegionInstructions.add(startRegionLabelNode);
@@ -255,8 +260,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 newInstructions.add(instruction);
             }
 
-            JavaRegionClassTransformer.updateLabels(newInstructions, labelUpdates);
-
+//            JavaRegionClassTransformer.updateLabels(newInstructions, labelUpdates);
 
             methodNode.instructions.clear();
             methodNode.instructions.add(newInstructions);
@@ -471,22 +475,73 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
      * @param changes
      */
     private static void updateLabels(InsnList instructions, Set<Map.Entry<LabelNode, LabelNode>> changes) {
+//        for(Map.Entry<LabelNode, LabelNode> change : changes) {
+//            System.out.println(change.getKey().getLabel() + " -> " + change.getValue().getLabel().info);
+//            ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
+//
+//            while (instructionsIterator.hasNext()) {
+//                AbstractInsnNode instruction = instructionsIterator.next();
+//
+//                if (instruction.getType() == AbstractInsnNode.JUMP_INSN) {
+//                    JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
+//
+//                    if (jumpInsnNode.label == change.getKey()) {
+//                        jumpInsnNode.label = change.getValue();
+//                        System.out.println("CHANGE");
+//                    }
+//                }
+//            }
+//        }
+
         for(Map.Entry<LabelNode, LabelNode> change : changes) {
             System.out.println(change.getKey().getLabel() + " -> " + change.getValue().getLabel().info);
-            ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
+            int numberOfInstructions = instructions.size();
+            AbstractInsnNode instruction = instructions.getFirst();
 
-            while (instructionsIterator.hasNext()) {
-                AbstractInsnNode instruction = instructionsIterator.next();
+            for(int i = 0; i < numberOfInstructions; i++) {
+//                if(instruction.getType() == AbstractInsnNode.LABEL) {
+//                    System.out.println(((LabelNode) instruction).getLabel());
+//                }
 
-                if (instruction.getType() == AbstractInsnNode.JUMP_INSN) {
+                if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
                     JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
 
-                    if (jumpInsnNode.label == change.getKey()) {
+                    if(jumpInsnNode.label == change.getKey()) {
                         jumpInsnNode.label = change.getValue();
                         System.out.println("CHANGE");
                     }
                 }
+
+                instruction = instruction.getNext();
             }
         }
     }
+
+    /**
+     * TODO this might execute extra iterations that are not needed since the LabelNodes are the same for both old and new labels, but the info is different
+     * @param instructions
+     */
+    private static void updateLabels(InsnList instructions, LabelNode oldLabel, LabelNode newLabel) {
+        System.out.println(oldLabel.getLabel() + " -> " + oldLabel.getLabel().info);
+        int numberOfInstructions = instructions.size();
+        AbstractInsnNode instruction = instructions.getFirst();
+
+        for(int i = 0; i < numberOfInstructions; i++) {
+//                if(instruction.getType() == AbstractInsnNode.LABEL) {
+//                    System.out.println(((LabelNode) instruction).getLabel());
+//                }
+
+            if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
+                JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
+
+                if(jumpInsnNode.label == oldLabel) {
+                    jumpInsnNode.label = newLabel;
+                    System.out.println("CHANGE");
+                }
+            }
+
+            instruction = instruction.getNext();
+        }
+    }
+
 }

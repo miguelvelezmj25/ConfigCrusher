@@ -522,7 +522,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
      * @param instructions
      */
     private static void updateLabels(InsnList instructions, LabelNode oldLabel, LabelNode newLabel) {
-        System.out.println(oldLabel.getLabel() + " -> " + oldLabel.getLabel().info);
+        System.out.println(oldLabel.getLabel() + " -> " + newLabel.getLabel().info);
         int numberOfInstructions = instructions.size();
         AbstractInsnNode instruction = instructions.getFirst();
 

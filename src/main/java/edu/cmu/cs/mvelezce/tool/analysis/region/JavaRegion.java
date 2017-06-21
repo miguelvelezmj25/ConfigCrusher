@@ -14,7 +14,7 @@ public class JavaRegion extends Region {
     private String regionClass = "";
     private String regionMethod = "";
     private int startBytecodeIndex = Integer.MIN_VALUE;
-    private int endBytecodeIndex = Integer.MIN_VALUE;
+//    private int endBytecodeIndex = Integer.MIN_VALUE;
     private int javaLineNubmer = Integer.MIN_VALUE;
     private MethodBlock startMethodBlock = null;
     private MethodBlock endMethodBlock = null;
@@ -34,10 +34,10 @@ public class JavaRegion extends Region {
         this.startBytecodeIndex = startBytecodeIndex;
     }
 
-    public JavaRegion(String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
-        this(regionPackage, regionClass, regionMethod, startBytecodeIndex);
-        this.endBytecodeIndex = endBytecodeIndex;
-    }
+//    public JavaRegion(String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
+//        this(regionPackage, regionClass, regionMethod, startBytecodeIndex);
+//        this.endBytecodeIndex = endBytecodeIndex;
+//    }
 
     public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod) {
         super(regionId);
@@ -54,10 +54,10 @@ public class JavaRegion extends Region {
         this.startBytecodeIndex = startBytecodeIndex;
     }
 
-    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
-        this(regionId, regionPackage, regionClass, regionMethod, startBytecodeIndex);
-        this.endBytecodeIndex = endBytecodeIndex;
-    }
+//    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
+//        this(regionId, regionPackage, regionClass, regionMethod, startBytecodeIndex);
+//        this.endBytecodeIndex = endBytecodeIndex;
+//    }
 
     @Override
     public String toString() {
@@ -66,7 +66,7 @@ public class JavaRegion extends Region {
                 ", regionClass='" + this.regionClass + '\'' +
                 ", regionMethod='" + this.regionMethod + '\'' +
                 ", startBytecodeIndex=" + this.startBytecodeIndex +
-                ", endBytecodeIndex=" + this.endBytecodeIndex +
+//                ", endBytecodeIndex=" + this.endBytecodeIndex +
                 '}';
     }
 
@@ -78,7 +78,7 @@ public class JavaRegion extends Region {
 
     public int getStartBytecodeIndex() { return this.startBytecodeIndex; }
 
-    public int getEndBytecodeIndex() { return this.endBytecodeIndex; }
+//    public int getEndBytecodeIndex() { return this.endBytecodeIndex; }
 
     public MethodBlock getStartMethodBlock() { return this.startMethodBlock; }
 
@@ -88,7 +88,7 @@ public class JavaRegion extends Region {
 
     public void setStartBytecodeIndex(int startBytecodeIndex) { this.startBytecodeIndex = startBytecodeIndex; }
 
-    public void setEndBytecodeIndex(int endBytecodeIndex) { this.endBytecodeIndex = endBytecodeIndex; }
+//    public void setEndBytecodeIndex(int endBytecodeIndex) { this.endBytecodeIndex = endBytecodeIndex; }
 
     public void setStartMethodBlock(MethodBlock startMethodBlock) {
         this.startMethodBlock = startMethodBlock;

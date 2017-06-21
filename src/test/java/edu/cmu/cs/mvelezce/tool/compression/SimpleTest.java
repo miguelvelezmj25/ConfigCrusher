@@ -1,15 +1,16 @@
 package edu.cmu.cs.mvelezce.tool.compression;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
 import org.apache.commons.collections4.CollectionUtils;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -376,6 +377,28 @@ public class SimpleTest {
         Set<Set<String>> set = SimpleTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
         Set<Set<String>> result = SimpleTest.getOptionsSet("ABC, BCD, DEF");
         Assert.assertEquals(result, Simple.filterOptions(set));
+    }
+
+    @Test
+    public void testElevator() throws IOException, ParseException {
+        String programName = "elevator";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args);
+
+
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        System.out.println(configurationsToExecute.size());
     }
 
 }

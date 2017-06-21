@@ -16,6 +16,57 @@ import java.util.List;
 public class MethodGraphBuilderTest {
 
     @Test
+    public void testDummy() throws IOException {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass(Dummy.class.getCanonicalName());
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("main")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+                Assert.assertEquals(9, methodGraph.getBlockCount());
+                Assert.assertEquals(9, methodGraph.getEdgeCount());
+            }
+        }
+    }
+
+    @Test
+    public void testDummy5() throws IOException {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass(Dummy5.class.getCanonicalName());
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("main")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+                Assert.assertEquals(9, methodGraph.getBlockCount());
+                Assert.assertEquals(9, methodGraph.getEdgeCount());
+            }
+        }
+    }
+
+    @Test
+    public void testSleep15() throws IOException {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass(Sleep15.FILENAME);
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("main")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+                Assert.assertEquals(9, methodGraph.getBlockCount());
+                Assert.assertEquals(9, methodGraph.getEdgeCount());
+            }
+        }
+    }
+
+    @Test
     public void testBuildMethodGraph1() throws IOException {
         ClassTransformerReader reader = new ClassTransformerReader();
         ClassNode classNode = reader.readClass(Sleep1.FILENAME);
@@ -25,9 +76,9 @@ public class MethodGraphBuilderTest {
         for(MethodNode method : methods) {
             if(method.name.equals("main")) {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
                 Assert.assertEquals(9, methodGraph.getBlockCount());
                 Assert.assertEquals(9, methodGraph.getEdgeCount());
-                System.out.println(methodGraph.toDotString(method.name));
             }
         }
     }

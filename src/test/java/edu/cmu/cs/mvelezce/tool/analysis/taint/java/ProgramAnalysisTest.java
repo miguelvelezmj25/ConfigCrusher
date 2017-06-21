@@ -25,7 +25,7 @@ public class ProgramAnalysisTest {
                 Set<String> readOptions = read.getValue();
 
                 if(saveRegion.getRegionID().equals(readRegion.getRegionID()) && saveRegion.getStartBytecodeIndex() == readRegion.getStartBytecodeIndex()
-                        && saveRegion.getEndBytecodeIndex() == readRegion.getEndBytecodeIndex()
+//                        && saveRegion.getEndBytecodeIndex() == readRegion.getEndBytecodeIndex()
                         && saveRegion.getRegionPackage().equals(readRegion.getRegionPackage())
                         && saveRegion.getRegionClass().equals(readRegion.getRegionClass())
                         && saveRegion.getRegionMethod().equals(readRegion.getRegionMethod())
@@ -89,6 +89,23 @@ public class ProgramAnalysisTest {
     public void testAnalyse1() throws ParseException {
         Map<JavaRegion, Set<String>> output = ProgramAnalysis.analyse(JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
         Assert.assertEquals(4, output.size());
+    }
+
+    @Test
+    public void testElevator() throws IOException, ParseException {
+        String programName = "elevator";
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
     }
 
 }

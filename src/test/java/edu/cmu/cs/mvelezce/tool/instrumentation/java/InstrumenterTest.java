@@ -2,10 +2,14 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -13,6 +17,48 @@ import java.util.Set;
  */
 public class InstrumenterTest {
     // TODO check that the regions are correct since we might have, at this point, java line numbers instead of bytecodeindex
+
+    @Test
+    public void testElevator() throws IOException, ParseException, InterruptedException {
+        String programName = "elevator";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args);
+
+        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+    }
+
+    @Test
+    public void testSleep1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep1";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args);
+
+        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+    }
 
     @Test
     public void testInstrumentPipeline1() throws IOException, InterruptedException {

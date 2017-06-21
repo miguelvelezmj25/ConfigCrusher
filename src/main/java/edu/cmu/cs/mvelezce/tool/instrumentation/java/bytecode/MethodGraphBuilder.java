@@ -68,6 +68,16 @@ public class MethodGraphBuilder {
                     graph.addEdge(currentMethodBlock, successor);
                 }
 
+                if(currentMethodBlock != null) {
+                    for(TryCatchBlockNode tryCatchBlockNode : methodNode.tryCatchBlocks) {
+                        if (tryCatchBlockNode.end.getLabel().equals(currentMethodBlock.getOriginalLabel())) {
+                            if (tryCatchBlockNode.handler.getLabel().equals(successor.getOriginalLabel())) {
+                                graph.addEdge(currentMethodBlock, successor);
+                            }
+                        }
+                    }
+                }
+
                 currentMethodBlock = successor;
             }
             else if(instructionType == AbstractInsnNode.JUMP_INSN) {

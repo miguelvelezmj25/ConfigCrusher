@@ -16,6 +16,31 @@ import java.util.List;
 public class MethodGraphBuilderTest {
 
     @Test
+    public void testDummy6() throws IOException {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass(Dummy6.class.getCanonicalName());
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("one")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+
+            if(method.name.equals("two")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+
+            if(method.name.equals("three")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+        }
+    }
+
+    @Test
     public void testDummy() throws IOException {
         ClassTransformerReader reader = new ClassTransformerReader();
         ClassNode classNode = reader.readClass(Dummy.class.getCanonicalName());

@@ -139,9 +139,23 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
                         MethodBlock start = JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
                         MethodBlock end = JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(graph, block);
+                        Set<MethodBlock> endMethodBlocks = new HashSet<>();
+
+//                        if(methodNode.name.equals("isBlocked")) {
+//                            int i = 0;
+//                        }
+
+                        if(graph.getExitBlock().equals(end)) {
+                            endMethodBlocks.addAll(graph.getExitBlock().getPredecessors());
+                            System.out.println();
+                        }
+                        else {
+                            endMethodBlocks.add(end);
+                        }
+
                         JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
                         region.setStartMethodBlock(start);
-                        region.setEndMethodBlock(end);
+                        region.setEndMethodBlocks(endMethodBlocks);
 
                         // TODO optimize
 //                        boolean inProblematicStronglyConnectedComponent = false;
@@ -227,19 +241,21 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     currentLabelNode = (LabelNode) instruction;
 
                     for(JavaRegion javaRegion : regionsInMethod) {
-                        if (javaRegion.getEndMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
-                            Label label = new Label();
-                            label.info = currentLabelNode.getLabel() + "000end";
-                            LabelNode endRegionLabelNode = new LabelNode(label);
-                            JavaRegionClassTransformer.updateLabels(newInstructions, currentLabelNode, endRegionLabelNode);
+                        for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
+                            if (endMethodBlock.getID().equals(currentLabelNode.getLabel().toString())) {
+                                Label label = new Label();
+                                label.info = currentLabelNode.getLabel() + "000end";
+                                LabelNode endRegionLabelNode = new LabelNode(label);
+                                JavaRegionClassTransformer.updateLabels(newInstructions, currentLabelNode, endRegionLabelNode);
 //                            labelUpdates = new LinkedHashSet<>();
 //                            labelUpdates.add(new AbstractMap.SimpleEntry<>(currentLabelNode, endRegionLabelNode));
 //                            JavaRegionClassTransformer.updateLabels(newInstructions, labelUpdates);
 
-                            InsnList endRegionInstructions = new InsnList();
-                            endRegionInstructions.add(endRegionLabelNode);
-                            endRegionInstructions.add(this.addInstructionsEndRegion(javaRegion));
-                            newInstructions.add(endRegionInstructions);
+                                InsnList endRegionInstructions = new InsnList();
+                                endRegionInstructions.add(endRegionLabelNode);
+                                endRegionInstructions.add(this.addInstructionsEndRegion(javaRegion));
+                                newInstructions.add(endRegionInstructions);
+                            }
                         }
                     }
 

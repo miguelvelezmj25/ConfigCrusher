@@ -133,43 +133,43 @@ public class JavaPipelineTest {
         String programName = "elevator";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
-        String entryPoint = "edu.cmu.cs.mvelezce.elevator";
+        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        // TESTING
-        args = new String[0];
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
-        Set<String> options = new HashSet<>();
-
-        for(Set<String> configuration : configurations) {
-            options.addAll(configuration);
-        }
-
-        configurations = Helper.getConfigurations(options);
-
-        for(Set<String> configuration : configurations) {
-            System.out.println(configuration);
-            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
-            long start = System.nanoTime();
-            PL_Interface_impl.main(sleepConfiguration);
-            long end = System.nanoTime();
-
-            System.out.println(pm.evaluate(configuration));
-            System.out.println(Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
-        }
+//        // TESTING
+//        args = new String[0];
+//        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+//        Set<String> options = new HashSet<>();
+//
+//        for(Set<String> configuration : configurations) {
+//            options.addAll(configuration);
+//        }
+//
+//        configurations = Helper.getConfigurations(options);
+//
+//        for(Set<String> configuration : configurations) {
+//            System.out.println(configuration);
+//            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+//            long start = System.nanoTime();
+//            PL_Interface_impl.main(sleepConfiguration);
+//            long end = System.nanoTime();
+//
+//            System.out.println(pm.evaluate(configuration));
+//            System.out.println(Region.getSecondsExecutionTime(start, end));
+//            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+//        }
     }
 
     @Test

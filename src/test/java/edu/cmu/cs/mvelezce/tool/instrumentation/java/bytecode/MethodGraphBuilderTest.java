@@ -37,6 +37,11 @@ public class MethodGraphBuilderTest {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 System.out.println(methodGraph.toDotString(method.name));
             }
+
+            if(method.name.equals("four")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
         }
     }
 

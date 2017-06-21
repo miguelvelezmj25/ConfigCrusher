@@ -158,6 +158,10 @@ public class ProgramAnalysis {
 //            }
 
             if(!currentUsedTerms.containsAll(usedTerms)) {
+//                if(currentBytecodeIndex < 0) {
+//                    int i = 0;
+//                }
+
                 currentUsedTerms.addAll(usedTerms);
                 currentJavaRegion = new JavaRegion(entryPackage, entryClass, entryMethod, currentBytecodeIndex);
 //                int entryJavaLineNumber = (int)(long) entry.get(ProgramAnalysis.JAVA_LINE_NO);

@@ -25,28 +25,31 @@ public abstract class Adapter {
 
         try {
             process = Runtime.getRuntime().exec(command);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            while ((reader.readLine()) != null) {}
             process.waitFor();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            String line;
-
-            while((line = reader.readLine()) != null) {
-                output.append(line).append("\n");
-            }
-
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            while ((line = errorReader.readLine()) != null) {
-                System.out.println(line);
-            }
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//
+//            String line;
+//
+//            while((line = reader.readLine()) != null) {
+//                output.append(line).append("\n");
+//            }
+//
+//            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+//            while ((line = errorReader.readLine()) != null) {
+//                System.out.println(line);
+//            }
 
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println(output);
-        return output.toString();
+//        System.out.println(output);
+//        return output.toString();
+        return null;
     }
 
 }

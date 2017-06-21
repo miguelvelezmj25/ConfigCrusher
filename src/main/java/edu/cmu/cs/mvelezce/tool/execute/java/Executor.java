@@ -71,8 +71,8 @@ public class Executor {
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
         for(Set<String> configuration : configurationsToExecute) {
             // TODO factory pattern or switch statement to create the right adapter
-            Adapter adapter = new SleepAdapter(programName, mainClass, directory);
-//            Adapter adapter = new ElevatorAdapter(programName, mainClass, directory);
+//            Adapter adapter = new SleepAdapter(programName, mainClass, directory);
+            Adapter adapter = new ElevatorAdapter(programName, mainClass, directory);
             adapter.execute(configuration);
 
             if(!Regions.getExecutingRegions().isEmpty()) {

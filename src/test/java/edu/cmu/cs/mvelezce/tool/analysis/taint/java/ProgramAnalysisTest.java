@@ -108,4 +108,21 @@ public class ProgramAnalysisTest {
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
     }
 
+    @Test
+    public void testSleep2() throws IOException, ParseException {
+        String programName = "Sleep2";
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+    }
+
 }

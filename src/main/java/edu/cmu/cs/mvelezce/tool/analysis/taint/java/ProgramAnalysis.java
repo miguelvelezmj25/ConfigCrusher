@@ -169,6 +169,64 @@ public class ProgramAnalysis {
             currentBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));
         }
 
+        Set<JavaRegion> regionsWithSameFeatureInAllInstructions = new HashSet<>();
+
+        for(JavaRegion javaRegion : regionsToOptions.keySet()) {
+            List<String> regionUsedTerms = new ArrayList<>();
+
+            for(String result : queryResult) {
+                JSONObject entry = (JSONObject) parser.parse(result);
+                String entryPackage = (String) entry.get(ProgramAnalysis.PACKAGE);
+                String entryClass = (String) entry.get(ProgramAnalysis.CLASS);
+
+                if(entryClass.contains(".")) {
+                    entryClass = entryClass.substring(entryClass.lastIndexOf(".") + 1);
+                }
+
+                String entryMethod = (String) entry.get(ProgramAnalysis.METHOD);
+
+                if(!javaRegion.getRegionPackage().equals(entryPackage) || !javaRegion.getRegionClass().equals(entryClass) || !javaRegion.getRegionMethod().equals(entryMethod)) {
+                    if(!regionUsedTerms.isEmpty()) {
+//                        System.out.println(javaRegion.getRegionMethod());
+//                        regionsWithSameFeatureInAllInstructions.add(javaRegion);
+//                        regionUsedTerms = new ArrayList<>();
+                        break;
+                    }
+
+                    continue;
+                }
+
+                if(regionUsedTerms.isEmpty()) {
+                    regionUsedTerms = (List<String>) entry.get(ProgramAnalysis.USED_TERMS);
+
+                    if(regionUsedTerms.size() == 1 && (regionUsedTerms.contains("true") || regionUsedTerms.contains("false"))) {
+                        regionUsedTerms = new ArrayList<>();
+                        break;
+                    }
+                    else {
+                        continue;
+                    }
+                }
+
+                List<String> usedTerms = (List<String>) entry.get(ProgramAnalysis.USED_TERMS);
+
+                if(!regionUsedTerms.equals(usedTerms)) {
+                    regionUsedTerms = new ArrayList<>();
+                    break;
+                }
+            }
+
+            if(!regionUsedTerms.isEmpty()) {
+                System.out.println(javaRegion.getRegionMethod());
+                regionsWithSameFeatureInAllInstructions.add(javaRegion);
+            }
+
+        }
+
+        for(JavaRegion javaRegion : regionsWithSameFeatureInAllInstructions) {
+            regionsToOptions.remove(javaRegion);
+        }
+
         return regionsToOptions;
     }
 

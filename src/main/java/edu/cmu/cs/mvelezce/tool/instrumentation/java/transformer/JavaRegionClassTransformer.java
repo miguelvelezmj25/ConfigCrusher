@@ -43,7 +43,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             filePackage = filePackage.replace(".class", "");
             filePackage = filePackage.replace("/", ".");
             String fileClass = filePackage.substring(filePackage.lastIndexOf(".") + 1);
-            filePackage = filePackage.replace("." + fileClass, "");
+            int indexOfFilePackage = filePackage.lastIndexOf("." + fileClass);
+            filePackage = filePackage.substring(0, indexOfFilePackage);
             boolean transform = false;
 
             for(JavaRegion javaRegion : this.regions) {
@@ -76,6 +77,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 //            }
 
             classNodes.add(classNode);
+            System.out.println(classNode.name);
         }
 
         return classNodes;
@@ -107,6 +109,13 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
             System.out.println("Before transforming");
             System.out.println(graph.toDotString(methodNode.name));
+
+            if(graph.getBlocks().size() <= 3) {
+                System.out.println("Special method that is not instrumented");
+                continue;
+                // TODO this happened in an enum method in which there were two labels in the bytecode and the first one had the return statement
+            }
+
             // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
             methodNode.instructions.toArray();
             List<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
@@ -268,6 +277,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             graph = MethodGraphBuilder.buildMethodGraph(methodNode);
             System.out.println("After transforming");
             System.out.println(graph.toDotString(methodNode.name));
+            System.out.print("");
         }
 
     }

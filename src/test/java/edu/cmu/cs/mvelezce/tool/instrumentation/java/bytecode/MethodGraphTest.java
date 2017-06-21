@@ -15,6 +15,38 @@ import java.util.Set;
 public class MethodGraphTest {
 
     @Test
+    public void testTODO() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(d, e);
+
+        System.out.println(methodGraph.toDotString("test"));
+        Assert.assertEquals(a, methodGraph.getImmediateDominator(b));
+        Assert.assertEquals(e, methodGraph.getImmediatePostDominator(b));
+    }
+
+    @Test
     public void testGetStronglyConnectedComponents1() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();

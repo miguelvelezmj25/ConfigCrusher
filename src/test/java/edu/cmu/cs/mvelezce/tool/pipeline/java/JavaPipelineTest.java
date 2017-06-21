@@ -48,14 +48,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -85,6 +85,94 @@ public class JavaPipelineTest {
     }
 
     @Test
+    public void testPngtastic() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep14";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep14.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testElevator() throws IOException, ParseException, InterruptedException {
+        String programName = "elevator";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
+        String entryPoint = "edu.cmu.cs.mvelezce.elevator";
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            PL_Interface_impl.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
     public void testSleep1() throws IOException, ParseException, InterruptedException {
         String programName = "Sleep1";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -92,14 +180,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -130,21 +218,20 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep2() throws IOException, ParseException, InterruptedException {
-        // TODO error in lotrack depending how the program is implemented
         String programName = "Sleep2";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -175,20 +262,21 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep3() throws IOException, ParseException, InterruptedException {
+        // TODO method 1 and method 2 depend on features so instrumentation is not needed
         String programName = "Sleep3";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -225,14 +313,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -263,21 +351,20 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep7() throws IOException, ParseException, InterruptedException {
-        // TODO there should be 3 regions
         String programName = "Sleep7";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -308,21 +395,20 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep8() throws IOException, ParseException, InterruptedException {
-        // TODO there should be 3 regions
         String programName = "Sleep8";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -353,7 +439,6 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep9() throws IOException, ParseException, InterruptedException {
-        // TODO there should be 3 regions
         String programName = "Sleep9";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
@@ -398,21 +483,21 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep10() throws IOException, ParseException, InterruptedException {
-        // TODO there should be 3 regions
+        // TODO method 1 and method 2 depend on features so instrumentation is not needed
         String programName = "Sleep10";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -442,8 +527,95 @@ public class JavaPipelineTest {
     }
 
     @Test
+    public void testSleep11() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep11";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep11";
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep11.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep12() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep12";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep12.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
     public void testSleep13() throws IOException, ParseException, InterruptedException {
-        // TODO there should be 3 regions
         String programName = "Sleep13";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";

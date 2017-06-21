@@ -16,6 +16,7 @@ public class Instrumenter {
     public static final String TARGET_DIRECTORY = "../performance-mapper-evaluation/instrumented";
 
     public static void instrument(String[] args, String srcDirectory, String classDirectory, Set<JavaRegion> regions) throws IOException, InterruptedException {
+//        args = new String[]{"-delres"};
         Options.getCommandLine(args);
 
         if(Options.checkIfDeleteResult()) {

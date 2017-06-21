@@ -2,6 +2,9 @@ package edu.cmu.cs.mvelezce.tool.analysis.region;
 
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by mvelezce on 4/19/17.
  */
@@ -17,7 +20,8 @@ public class JavaRegion extends Region {
 //    private int endBytecodeIndex = Integer.MIN_VALUE;
     private int javaLineNubmer = Integer.MIN_VALUE;
     private MethodBlock startMethodBlock = null;
-    private MethodBlock endMethodBlock = null;
+//    private MethodBlock endMethodBlocks = null;
+    private Set<MethodBlock> endMethodBlocks = new HashSet<>();
 
     public JavaRegion(String regionClass, String regionMethod) {
         this.regionClass = regionClass;
@@ -82,7 +86,7 @@ public class JavaRegion extends Region {
 
     public MethodBlock getStartMethodBlock() { return this.startMethodBlock; }
 
-    public MethodBlock getEndMethodBlock() { return endMethodBlock; }
+    public Set<MethodBlock> getEndMethodBlocks() { return endMethodBlocks; }
 
     public int getJavaLineNubmer() { return this.javaLineNubmer; }
 
@@ -94,8 +98,8 @@ public class JavaRegion extends Region {
         this.startMethodBlock = startMethodBlock;
     }
 
-    public void setEndMethodBlock(MethodBlock endMethodBlock) {
-        this.endMethodBlock = endMethodBlock;
+    public void setEndMethodBlocks(Set<MethodBlock> endMethodBlocks) {
+        this.endMethodBlocks = endMethodBlocks;
     }
 
     public void setJavaLineNubmer(int javaLineNubmer) { this.javaLineNubmer = javaLineNubmer; }

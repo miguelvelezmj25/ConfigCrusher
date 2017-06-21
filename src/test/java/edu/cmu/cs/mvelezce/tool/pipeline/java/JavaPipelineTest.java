@@ -32,7 +32,7 @@ public class JavaPipelineTest {
 //        String entryPoint = "edu.cmu.cs.mvelezce.Dummy3";
 //
 //        // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 ////        String[] args = new String[2];
 ////        args[0] = "-delres";
 ////        args[1] = "-saveres";
@@ -48,14 +48,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -92,7 +92,7 @@ public class JavaPipelineTest {
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
 //
 //        // Program arguments
-////        String[] args = new String[0];
+//        String[] args = new String[0];
 //
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
@@ -136,14 +136,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.elevator";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -180,14 +180,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -224,14 +224,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -269,14 +269,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -313,14 +313,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -357,14 +357,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -401,14 +401,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -445,14 +445,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep9";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -490,14 +490,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -534,14 +534,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep11";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -578,14 +578,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -622,14 +622,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep13";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);

@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import org.json.simple.JSONArray;
@@ -71,6 +72,7 @@ public class Executor {
         for(Set<String> configuration : configurationsToExecute) {
             // TODO factory pattern or switch statement to create the right adapter
             Adapter adapter = new SleepAdapter(programName, mainClass, directory);
+//            Adapter adapter = new ElevatorAdapter(programName, mainClass, directory);
             adapter.execute(configuration);
 
             if(!Regions.getExecutingRegions().isEmpty()) {

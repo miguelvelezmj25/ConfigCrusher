@@ -3,13 +3,17 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -220,6 +224,26 @@ public class ExecutorTest {
         Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+    }
+
+    @Test
+    public void testElevator() throws IOException, ParseException {
+        String programName = "elevator";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
+
+        String[] args = new String[0];
+
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, entryPoint, classDirectory, configurations);
+
     }
 
 }

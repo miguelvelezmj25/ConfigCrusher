@@ -110,16 +110,25 @@ public class Regions {
         return Regions.executingRegions.peek();
     }
 
+    // TODO this is hacking and not how it is supposed to be working due to problems with how we end instrumenting inner regions
     public static void removeExecutingRegion(Region region) {
         System.out.println("exit " + region.getRegionID());
+//        for(Region r : executingRegions) {
+//            System.out.println(r.getRegionID());
+//        }
+        if(!Regions.executingRegions.peek().getRegionID().equals(region.getRegionID())) {
+            return;
+        }
+
         Region executing = Regions.executingRegions.pop();
         // TODO this is for testing that the region that believes to have executed is the one that was executing
         if(!region.getRegionID().equals(executing.getRegionID())) {
-            throw new RuntimeException("The region that wanted to be removed from the executing regions is not the last region " +
-                    "to be executing");
+            throw new RuntimeException("The region that wanted to be removed " + region.getRegionID() + " from the executing regions is not the last region " +
+                    "to be executing " + executing.getRegionID());
         }
 
         Regions.executedRegionsTrace.add(region);
+//        System.out.println(" ");
     }
 
     public static List<Region> getExecutedRegionsTrace() { return Regions.executedRegionsTrace; }

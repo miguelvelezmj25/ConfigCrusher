@@ -77,7 +77,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 //            }
 
             classNodes.add(classNode);
-            System.out.println(classNode.name);
         }
 
         return classNodes;
@@ -93,6 +92,11 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         Set<JavaRegion> regionsInClass = this.getRegionsInClass(classPackage, className);
 
         for(MethodNode methodNode : classNode.methods) {
+            if(methodNode.name.equals("timeShift__before__overloaded")) {
+                int i = 0;
+            }
+
+
             boolean instrumentMethod = false;
 
             for(JavaRegion javaRegion : regionsInClass) {
@@ -121,6 +125,11 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             List<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
             List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
             Collections.reverse(regionsInMethodReversed);
+
+            if(methodNode.name.equals("timeShift__before__overloaded")) {
+                int i = 0;
+            }
+
             this.calculateASMStartIndex(regionsInMethod, methodNode);
 
             Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
@@ -137,17 +146,17 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
+                        if(methodNode.name.equals("timeShift__before__overloaded")) {
+                            int i = 0;
+                        }
+
                         MethodBlock start = JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
                         MethodBlock end = JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(graph, block);
+                        end = graph.getMethodBlock(end.getID());
                         Set<MethodBlock> endMethodBlocks = new HashSet<>();
-
-//                        if(methodNode.name.equals("isBlocked")) {
-//                            int i = 0;
-//                        }
 
                         if(graph.getExitBlock().equals(end)) {
                             endMethodBlocks.addAll(graph.getExitBlock().getPredecessors());
-                            System.out.println();
                         }
                         else {
                             endMethodBlocks.add(end);
@@ -207,6 +216,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
             }
 
+            if(methodNode.name.equals("timeShift__before__overloaded")) {
+                int i = 0;
+            }
+
             InsnList newInstructions = new InsnList();
             InsnList instructions = methodNode.instructions;
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
@@ -242,7 +255,11 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                     for(JavaRegion javaRegion : regionsInMethod) {
                         for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
-                            if (endMethodBlock.getID().equals(currentLabelNode.getLabel().toString())) {
+                            if (endMethodBlock.getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
+                                if(methodNode.name.equals("timeShift__before__overloaded")) {
+                                    int i = 0;
+                                }
+
                                 Label label = new Label();
                                 label.info = currentLabelNode.getLabel() + "000end";
                                 LabelNode endRegionLabelNode = new LabelNode(label);
@@ -262,6 +279,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     for(JavaRegion javaRegion : regionsInMethodReversed) {
 //                        if(javaRegion.getStartMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
                         if(javaRegion.getStartMethodBlock().getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
+                            if(methodNode.name.equals("timeShift__before__overloaded")) {
+                                int i = 0;
+                            }
+
                             if(specialBlocksToRegions.containsValue(javaRegion)) {
                                 continue;
                             }
@@ -332,9 +353,15 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             methodStartIndex++;
         }
 
+        if(methodNode.name.equals("timeShift__before__overloaded")) {
+            int i = 0;
+        }
+
         // 2 are the lines before the actual code in a method
         int instructionNumber = -2;
         Set<JavaRegion> updatedRegions = new HashSet<>();
+
+        // TODO exit method when all regions have been updated
 
         for(int i = methodStartIndex; i < output.size(); i++) {
             String outputLine = output.get(i);
@@ -360,6 +387,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
 
                         if(instructionCounter == instructionNumber) {
+                            if(methodNode.name.equals("timeShift__before__overloaded")) {
+                                int fsddf = 0;
+                            }
+
                             region.setStartBytecodeIndex(instructionsList.indexOf(instruction));
                             updatedRegions.add(region);
                             break;

@@ -29,7 +29,8 @@ public class Output {
 //        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/jarchivelib/src/main/java/";
 //        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/java-lame/src/main/java/";
 //        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/src/main/java/";
-        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/src/";
+//        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/src/";
+        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator-m/src/";
         String[] extensions = {"java"};
 
         Collection<File> files = FileUtils.listFiles(new File(root), extensions, true);
@@ -48,7 +49,7 @@ public class Output {
                 }
 
                 c = c.substring(c.lastIndexOf(".") + 1);
-                if (!file.getName().endsWith(c + ".java")) {
+                if (!file.getName().equals(c + ".java")) {
                     continue;
                 }
 
@@ -75,7 +76,7 @@ public class Output {
 
                 int javaLineNumber = (int)(long) entry.get(Output.JAVA_LINE_NO);
                 List<String> usedTerms = (List<String>) entry.get(Output.USED_TERMS);
-                linesToConstraints.put(javaLineNumber, constraint + " " + usedTerms.toString());
+                linesToConstraints.put(javaLineNumber, /*constraint + " " +*/ usedTerms.toString());
             }
 
             if(linesToConstraints.isEmpty()) {

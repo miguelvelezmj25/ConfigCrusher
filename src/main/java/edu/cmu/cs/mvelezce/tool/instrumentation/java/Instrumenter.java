@@ -41,8 +41,8 @@ public class Instrumenter {
         writer.close();
 
         command = new String[]{"javac", "-d", classDirectory, "@" + srcDirectory + "sources.txt"};
-//        process = Runtime.getRuntime().exec(command);
-//        process.waitFor();
+        process = Runtime.getRuntime().exec(command);
+        process.waitFor();
 
         reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 

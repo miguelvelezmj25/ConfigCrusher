@@ -92,7 +92,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         Set<JavaRegion> regionsInClass = this.getRegionsInClass(classPackage, className);
 
         for(MethodNode methodNode : classNode.methods) {
-            if(methodNode.name.equals("timeShift__before__overloaded")) {
+            if(methodNode.name.equals("display")) {
                 int i = 0;
             }
 
@@ -126,15 +126,19 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
             Collections.reverse(regionsInMethodReversed);
 
-            if(methodNode.name.equals("timeShift__before__overloaded")) {
+            if(methodNode.name.equals("display")) {
                 int i = 0;
             }
 
             this.calculateASMStartIndex(regionsInMethod, methodNode);
 
+            if(methodNode.name.equals("display")) {
+                int i = 0;
+            }
             Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
             for(JavaRegion region : regionsInMethod) {
+                System.out.println(region.getStartBytecodeIndex());
                 instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
             }
 
@@ -146,7 +150,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
-                        if(methodNode.name.equals("timeShift__before__overloaded")) {
+                        if(methodNode.name.equals("display")) {
                             int i = 0;
                         }
 
@@ -204,6 +208,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                         if(immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(start) && inProblematicStronglyConnectedComponent) {
                             specialBlocksToRegions.put(graph.getImmediateDominator(start), region);
+                            throw new RuntimeException("Special case");
                         }
 
 //                        MethodBlock immediateDominator = graph.getImmediateDominator(start);
@@ -216,7 +221,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
             }
 
-            if(methodNode.name.equals("timeShift__before__overloaded")) {
+            if(methodNode.name.equals("display")) {
                 int i = 0;
             }
 
@@ -256,7 +261,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     for(JavaRegion javaRegion : regionsInMethod) {
                         for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
                             if (endMethodBlock.getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
-                                if(methodNode.name.equals("timeShift__before__overloaded")) {
+                                if(methodNode.name.equals("display")) {
                                     int i = 0;
                                 }
 
@@ -279,7 +284,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     for(JavaRegion javaRegion : regionsInMethodReversed) {
 //                        if(javaRegion.getStartMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
                         if(javaRegion.getStartMethodBlock().getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
-                            if(methodNode.name.equals("timeShift__before__overloaded")) {
+                            if(methodNode.name.equals("display")) {
                                 int i = 0;
                             }
 
@@ -324,23 +329,52 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         String command = "javap -classpath " + this.directory + " -p -c "+ tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass();
         System.out.println(command);
         List<String> output = new LinkedList<>();
-        Process process;
+//        Process process;
+
+        if(methodNode.name.equals("display")) {
+            int i = 0;
+        }
 
         try {
-            process = Runtime.getRuntime().exec(command);
-            process.waitFor();
+            Process p = Runtime.getRuntime().exec(command);
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-
-            while((line = reader.readLine()) != null) {
-                if(!line.isEmpty()) {
-                    output.add(line);
+            String s;
+            while ((s = stdInput.readLine()) != null) {
+                if(!s.isEmpty()) {
+                    output.add(s);
                 }
             }
+
+//            ProcessBuilder pb = new ProcessBuilder(command);
+//            pb.redirectErrorStream(true);
+//            Process process = pb.start();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//            String line;
+//            while((line = reader.readLine()) != null) {
+//                if(!line.isEmpty()) {
+//                    output.add(line);
+//                }
+//            }
+//            process.waitFor();
+
+
+//            process = Runtime.getRuntime().exec(command);
+////            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+////            while ((reader.readLine()) != null) {}
+//            process.waitFor();
+//
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//            String line;
+//
+//            while((line = reader.readLine()) != null) {
+//                if(!line.isEmpty()) {
+//                    output.add(line);
+//                }
+//            }
         }
-        catch(IOException | InterruptedException ie) {
-            throw new RuntimeException("Could not execute the command");
+        catch(IOException ie) {
+            ie.printStackTrace();
         }
 
         int methodStartIndex = 0;
@@ -353,7 +387,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             methodStartIndex++;
         }
 
-        if(methodNode.name.equals("timeShift__before__overloaded")) {
+        if(methodNode.name.equals("display")) {
             int i = 0;
         }
 
@@ -387,7 +421,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
 
                         if(instructionCounter == instructionNumber) {
-                            if(methodNode.name.equals("timeShift__before__overloaded")) {
+                            if(methodNode.name.equals("display")) {
                                 int fsddf = 0;
                             }
 

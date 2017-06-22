@@ -40,6 +40,27 @@ public class InstrumenterTest {
     }
 
     @Test
+    public void testGPL() throws IOException, ParseException, InterruptedException {
+        String programName = "gpl";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/out/production/gpl/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args);
+
+        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+    }
+
+    @Test
     public void testSleep1() throws IOException, ParseException, InterruptedException {
         String programName = "Sleep1";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";

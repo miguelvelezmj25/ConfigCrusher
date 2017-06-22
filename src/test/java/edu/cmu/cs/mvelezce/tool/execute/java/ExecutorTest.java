@@ -241,8 +241,54 @@ public class ExecutorTest {
             options.addAll(configuration);
         }
 
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
         configurations = Helper.getConfigurations(options);
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+    }
+
+    @Test
+    public void testGPL() throws IOException, ParseException {
+        String programName = "gpl";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/out/production/gpl/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Main";
+
+        String[] args = new String[0];
+
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        configurations = Helper.getConfigurations(options);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+    }
+
+    @Test
+    public void testSleep2() throws IOException, ParseException {
+        String programName = "Sleep2";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
+
+        String[] args = new String[0];
+
+        Set<String> options = new HashSet<>();
+        options.add("A");
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Set<Set<String>> configurations = Helper.getConfigurations(options);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
 
     }
 

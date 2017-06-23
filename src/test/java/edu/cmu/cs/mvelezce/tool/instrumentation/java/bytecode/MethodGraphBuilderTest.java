@@ -1,6 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 import edu.cmu.cs.mvelezce.*;
+import edu.cmu.cs.mvelezce.gpl.CycleWorkSpace;
+import edu.cmu.cs.mvelezce.gpl.Graph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.ClassTransformerReader;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -14,6 +16,41 @@ import java.util.List;
  * Created by mvelezce on 5/3/17.
  */
 public class MethodGraphBuilderTest {
+
+    @Test
+    public void testCycleWorkSpace() throws IOException {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass(CycleWorkSpace.class.getCanonicalName());
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("<init>")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+
+            if(method.name.equals("checkNeighborAction")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+        }
+    }
+
+    @Test
+    public void testGraph() throws IOException {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass(Graph.class.getCanonicalName());
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("findsVertex")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+        }
+    }
 
     @Test
     public void testDummy6() throws IOException {

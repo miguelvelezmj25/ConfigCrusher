@@ -269,6 +269,10 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         configurations = Helper.getConfigurations(options);
+        options = new HashSet<>();
+        configurations.clear();
+        configurations.add(options);
+
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 

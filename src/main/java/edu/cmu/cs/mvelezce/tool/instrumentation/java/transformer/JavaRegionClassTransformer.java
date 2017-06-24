@@ -21,6 +21,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
     protected String directory;
     protected Set<JavaRegion> regions;
+    private List<String> javapResult = new ArrayList<>();
 
     public JavaRegionClassTransformer(String directory, Set<JavaRegion> regions) {
         this.directory = directory;
@@ -60,12 +61,34 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
             ClassNode classNode = this.readClass(filePackage + "." + fileClass);
 
+            String command = "javap -classpath " + this.directory + " -p -c "+ filePackage + "." + fileClass;
+            System.out.println(command);
+
+            try {
+                Process p = Runtime.getRuntime().exec(command);
+                BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+                String s;
+                while ((s = stdInput.readLine()) != null) {
+                    if(!s.isEmpty()) {
+                        this.javapResult.add(s);
+                    }
+                }
+            }
+            catch(IOException ie) {
+                ie.printStackTrace();
+            }
+
 //            System.out.println("Before transforming");
 //
 //            for(MethodNode method : classNode.methods) {
 //                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
+
+            if(fileClass.equals("Main")) {
+                int i = 0;
+            }
 
             this.transform(classNode);
 
@@ -92,10 +115,9 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         Set<JavaRegion> regionsInClass = this.getRegionsInClass(classPackage, className);
 
         for(MethodNode methodNode : classNode.methods) {
-            if(methodNode.name.equals("display")) {
+            if(methodNode.name.equals("enterElevator")) {
                 int i = 0;
             }
-
 
             boolean instrumentMethod = false;
 
@@ -126,19 +148,23 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
             Collections.reverse(regionsInMethodReversed);
 
-            if(methodNode.name.equals("display")) {
+            if(methodNode.name.equals("enterElevator")) {
                 int i = 0;
             }
 
             this.calculateASMStartIndex(regionsInMethod, methodNode);
 
-            if(methodNode.name.equals("display")) {
+            if(methodNode.name.equals("enterElevator")) {
                 int i = 0;
             }
             Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
             for(JavaRegion region : regionsInMethod) {
-                System.out.println(region.getStartBytecodeIndex());
+//                System.out.println(region.getStartBytecodeIndex());
+                if(methodNode.name.equals("enterElevator")) {
+                    int i = 0;
+                }
+
                 instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
             }
 
@@ -150,11 +176,12 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
-                        if(methodNode.name.equals("display")) {
+                        if(methodNode.name.equals("bftNodeSearch")) {
                             int i = 0;
                         }
 
                         MethodBlock start = JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
+                        start = graph.getMethodBlock(start.getID());
                         MethodBlock end = JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(graph, block);
                         end = graph.getMethodBlock(end.getID());
                         Set<MethodBlock> endMethodBlocks = new HashSet<>();
@@ -169,6 +196,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
                         region.setStartMethodBlock(start);
                         region.setEndMethodBlocks(endMethodBlocks);
+
 
                         // TODO optimize
 //                        boolean inProblematicStronglyConnectedComponent = false;
@@ -221,7 +249,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
             }
 
-            if(methodNode.name.equals("display")) {
+            if(methodNode.name.equals("bftNodeSearch")) {
                 int i = 0;
             }
 
@@ -261,7 +289,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     for(JavaRegion javaRegion : regionsInMethod) {
                         for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
                             if (endMethodBlock.getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
-                                if(methodNode.name.equals("display")) {
+                                if(methodNode.name.equals("bftNodeSearch")) {
                                     int i = 0;
                                 }
 
@@ -282,9 +310,14 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     }
 
                     for(JavaRegion javaRegion : regionsInMethodReversed) {
+                        if(javaRegion.getRegionID().equals("e99f8442-6e09-4b9f-af2e-5156c2e47c00")) {
+                            int i = 0;
+                        }
+
+
 //                        if(javaRegion.getStartMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
                         if(javaRegion.getStartMethodBlock().getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
-                            if(methodNode.name.equals("display")) {
+                            if(methodNode.name.equals("bftNodeSearch")) {
                                 int i = 0;
                             }
 
@@ -326,60 +359,61 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
     public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
         JavaRegion tempRegion = regionsInMethod.get(0);
-        String command = "javap -classpath " + this.directory + " -p -c "+ tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass();
-        System.out.println(command);
-        List<String> output = new LinkedList<>();
-//        Process process;
-
-        if(methodNode.name.equals("display")) {
-            int i = 0;
-        }
-
-        try {
-            Process p = Runtime.getRuntime().exec(command);
-            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-            String s;
-            while ((s = stdInput.readLine()) != null) {
-                if(!s.isEmpty()) {
-                    output.add(s);
-                }
-            }
-
-//            ProcessBuilder pb = new ProcessBuilder(command);
-//            pb.redirectErrorStream(true);
-//            Process process = pb.start();
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//            String line;
-//            while((line = reader.readLine()) != null) {
-//                if(!line.isEmpty()) {
-//                    output.add(line);
+//        String command = "javap -classpath " + this.directory + " -p -c "+ tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass();
+//        System.out.println(command);
+//        List<String> output = new LinkedList<>();
+////        Process process;
+//
+//        if(methodNode.name.equals("bftNodeSearch")) {
+//            int i = 0;
+//        }
+//
+//        try {
+//            // TODO do this call per class
+//            Process p = Runtime.getRuntime().exec(command);
+//            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+//
+//            String s;
+//            while ((s = stdInput.readLine()) != null) {
+//                if(!s.isEmpty()) {
+//                    output.add(s);
 //                }
 //            }
-//            process.waitFor();
-
-
-//            process = Runtime.getRuntime().exec(command);
+//
+////            ProcessBuilder pb = new ProcessBuilder(command);
+////            pb.redirectErrorStream(true);
+////            Process process = pb.start();
 ////            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-////            while ((reader.readLine()) != null) {}
-//            process.waitFor();
+////            String line;
+////            while((line = reader.readLine()) != null) {
+////                if(!line.isEmpty()) {
+////                    output.add(line);
+////                }
+////            }
+////            process.waitFor();
 //
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//            String line;
 //
-//            while((line = reader.readLine()) != null) {
-//                if(!line.isEmpty()) {
-//                    output.add(line);
-//                }
-//            }
-        }
-        catch(IOException ie) {
-            ie.printStackTrace();
-        }
+////            process = Runtime.getRuntime().exec(command);
+//////            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//////            while ((reader.readLine()) != null) {}
+////            process.waitFor();
+////
+////            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+////            String line;
+////
+////            while((line = reader.readLine()) != null) {
+////                if(!line.isEmpty()) {
+////                    output.add(line);
+////                }
+////            }
+//        }
+//        catch(IOException ie) {
+//            ie.printStackTrace();
+//        }
 
         int methodStartIndex = 0;
 
-        for(String outputLine : output) {
+        for(String outputLine : this.javapResult) {
             if(outputLine.contains(tempRegion.getRegionMethod() + "(")) {
                 break;
             }
@@ -387,7 +421,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             methodStartIndex++;
         }
 
-        if(methodNode.name.equals("display")) {
+        if(methodNode.name.equals("enterElevator")) {
             int i = 0;
         }
 
@@ -397,8 +431,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
         // TODO exit method when all regions have been updated
 
-        for(int i = methodStartIndex; i < output.size(); i++) {
-            String outputLine = output.get(i);
+        for(int i = methodStartIndex; i < this.javapResult.size(); i++) {
+            String outputLine = this.javapResult.get(i);
 
             for(JavaRegion region : regionsInMethod) {
                 if(updatedRegions.contains(region)) {
@@ -406,6 +440,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
 
                 if(outputLine.contains(region.getStartBytecodeIndex() + ":")) {
+//                if(instructionNumber == region.getStartBytecodeIndex()) {
                     InsnList instructionsList = methodNode.instructions;
                     ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
                     int instructionCounter = -1;
@@ -421,7 +456,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
 
                         if(instructionCounter == instructionNumber) {
-                            if(methodNode.name.equals("display")) {
+                            if(methodNode.name.equals("bftNodeSearch")) {
                                 int fsddf = 0;
                             }
 

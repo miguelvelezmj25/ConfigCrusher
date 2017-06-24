@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.gpl.CycleWorkSpace;
 import edu.cmu.cs.mvelezce.gpl.Graph;
+import edu.cmu.cs.mvelezce.gpl.Vertex;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.ClassTransformerReader;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -16,6 +17,21 @@ import java.util.List;
  * Created by mvelezce on 5/3/17.
  */
 public class MethodGraphBuilderTest {
+
+    @Test
+    public void testVertex() throws IOException {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass(Vertex.class.getCanonicalName());
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("bftNodeSearch")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+        }
+    }
 
     @Test
     public void testCycleWorkSpace() throws IOException {

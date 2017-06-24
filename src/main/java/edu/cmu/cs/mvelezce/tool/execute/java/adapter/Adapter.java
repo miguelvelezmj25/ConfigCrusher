@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Set;
 
@@ -9,12 +10,25 @@ import java.util.Set;
  */
 public abstract class Adapter {
 
-    public static final String MAIN = "main";
     public static final String CLASS_CONTAINER = "target/classes/";
 
     private static final String JSON_SIMPLE_PATH = "json-simple-1.1.1.jar";
 
+    protected String programName;
+    protected String mainClass;
+    protected String directory;
+
+    public Adapter(String programName, String mainClass, String directory) {
+        this.programName = programName;
+        this.mainClass = mainClass;
+        this.directory = directory;
+    }
+
     public abstract void execute(Set<String> configuration);
+
+//    public abstract String[] adaptConfigurationToProgram(Set<String> configuration);
+//
+//    public abstract Set<String> adaptConfigurationToPerformanceMeasurement(String[] configuration);
 
     // TODO how to do this better?
     public static String executeJavaProgram(String programName, String mainAdapter, String mainClass, String directory, String args) {
@@ -24,30 +38,21 @@ public abstract class Adapter {
         Process process;
 
         try {
-            process = Runtime.getRuntime().exec(command);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            while ((reader.readLine()) != null) {}
-            process.waitFor();
+            Process p = Runtime.getRuntime().exec(command);
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//
-//            String line;
-//
-//            while((line = reader.readLine()) != null) {
-//                output.append(line).append("\n");
-//            }
-//
-//            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-//            while ((line = errorReader.readLine()) != null) {
-//                System.out.println(line);
-//            }
-
+            String s;
+            while ((s = stdInput.readLine()) != null) {
+                if(!s.isEmpty()) {
+                    output.append(s).append("\n");
+                }
+            }
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch(IOException ie) {
+            ie.printStackTrace();
         }
 
-//        System.out.println(output);
+        System.out.println(output);
 //        return output.toString();
         return null;
     }

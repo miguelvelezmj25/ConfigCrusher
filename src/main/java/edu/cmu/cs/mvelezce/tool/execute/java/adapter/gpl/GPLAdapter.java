@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
+package edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 
@@ -10,23 +10,31 @@ import java.util.Set;
  */
 public class GPLAdapter extends Adapter {
 
-    private static final String[] CONFIGURATIONS = {"WEIGHTED", "SHORTEST"};
-
-    public static final String TEST_DIRECTORY = "test/out/production/test";
-
-    private String programName;
-    private String mainClass;
-    private String directory;
+    private static final String[] CONFIGURATIONS = {
+//            "BASE",
+//            "DIRECTED",
+//            "UNDIRECTED",
+            "WEIGHTED",
+//            "SEARCH",
+//            "BFS",
+//            "DFS",
+//            "NUMBER",
+//            "CONNECTED",
+//            "STRONGLYCONNECTED",
+//            "TRANSPOSE",
+//            "CYCLE",
+//            "MSTPRIM",
+//            "MSTKRUSKAL",
+            "SHORTEST"
+    };
 
     public GPLAdapter(String programName, String mainClass, String directory) {
-        this.programName = programName;
-        this.mainClass = mainClass;
-        this.directory = directory;
+        super(programName, mainClass, directory);
     }
 
     @Override
     public void execute(Set<String> configuration) {
-        String[] argsArray = GPLAdapter.adaptConfigurationToGPLProgram(configuration);
+        String[] argsArray = GPLAdapter.adaptConfigurationToProgram(configuration);
         StringBuilder args = new StringBuilder();
 
         for(String arg : argsArray) {
@@ -37,7 +45,7 @@ public class GPLAdapter extends Adapter {
         Adapter.executeJavaProgram(programName, GPLMain.GPL_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
-    public static String[] adaptConfigurationToGPLProgram(Set<String> configuration) {
+    public static String[] adaptConfigurationToProgram(Set<String> configuration) {
         String[] sleepConfiguration = new String[CONFIGURATIONS.length];
 
         for(int i = 0; i < sleepConfiguration.length; i++) {

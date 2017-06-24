@@ -1,6 +1,6 @@
-package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
+package edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl;
 
-import edu.cmu.cs.mvelezce.*;
+import edu.cmu.cs.mvelezce.Main;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -13,23 +13,23 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class ElevatorMain {
+public class GPLMain {
 
-    public static final String ELEVATOR_MAIN = ElevatorMain.class.getCanonicalName();
+    public static final String GPL_MAIN = GPLMain.class.getCanonicalName();
 
     public static void main(String[] args) throws InterruptedException, IOException, ParseException {
         String programName = args[0];
         String mainClass = args[1];
-        String[] elevatorArgs = Arrays.copyOfRange(args, 2, args.length);
+        String[] gplArgs = Arrays.copyOfRange(args, 2, args.length);
 
-        if(mainClass.equals("edu.cmu.cs.mvelezce.PL_Interface_impl")) {
+        if(mainClass.equals("edu.cmu.cs.mvelezce.Main")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
-            PL_Interface_impl.main(elevatorArgs);
+            Main.main(gplArgs);
             Regions.exit(program.getRegionID());
         }
 
-        Set<String> performanceConfiguration = ElevatorAdapter.adaptConfigurationToPerformanceMeasurement(elevatorArgs);
+        Set<String> performanceConfiguration = GPLAdapter.adaptConfigurationToPerformanceMeasurement(gplArgs);
         Executor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
     }
 }

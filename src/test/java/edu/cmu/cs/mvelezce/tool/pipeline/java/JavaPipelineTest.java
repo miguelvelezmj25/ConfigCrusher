@@ -226,14 +226,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Main";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -248,6 +248,10 @@ public class JavaPipelineTest {
         }
 
         configurations = Helper.getConfigurations(options);
+
+        options = new HashSet<>();
+        configurations.clear();
+        configurations.add(options);
 
         for(Set<String> configuration : configurations) {
             System.out.println(configuration);

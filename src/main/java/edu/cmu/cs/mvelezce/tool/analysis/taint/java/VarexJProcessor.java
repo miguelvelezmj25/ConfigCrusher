@@ -25,7 +25,7 @@ public class VarexJProcessor {
 //        factory.setValidating(true);
 //        factory.setIgnoringElementContentWhitespace(true);
         DocumentBuilder builder = factory.newDocumentBuilder();
-        File coverage = new File("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/coverage.xml");
+        File coverage = new File("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/coverage2.xml");
 
         if (!coverage.exists()) {
             throw new RuntimeException("No file");
@@ -122,9 +122,36 @@ public class VarexJProcessor {
         Set<String> firstUsedTermsInMethod = new HashSet<>();
         boolean atStartOfMethod = false;
 
+        Set<String> features = new HashSet<>();
+        features.add("SHORTEST");
+        features.add("WEIGHTED");
+
         for(Map<String, String> result : queryResult) {
             String usedTermsString = result.get("features");
             Set<String> usedTerms = new HashSet<>(Arrays.asList(usedTermsString.split(",")));
+            boolean addRegion = false;
+
+            for(String feature : features) {
+                if(usedTerms.contains(feature)) {
+                    addRegion = true;
+                    break;
+                }
+            }
+
+            if(!addRegion) {
+                continue;
+            }
+
+            Set<String> featuresToRemove = new HashSet<>();
+
+            for(String term : usedTerms) {
+                if(!features.contains(term)) {
+                    featuresToRemove.add(term);
+                }
+            }
+
+            usedTerms.removeAll(featuresToRemove);
+
             int entryBytecodeIndexes = Integer.parseInt(result.get("index"));
             String entryPackage = result.get("package");
             String entryClass = result.get("class");
@@ -154,7 +181,7 @@ public class VarexJProcessor {
                     continue;
                 }
 
-                if(!currentInstruction.contains("if") && !atStartOfMethod) {
+                if(!currentInstruction.contains("if") && !atStartOfMethod && currentBytecodeIndex == (entryBytecodeIndexes - 1)) {
                     continue;
                 }
 
@@ -167,6 +194,7 @@ public class VarexJProcessor {
             currentInstruction = entryInstruction;
         }
 
+        // TODO do this after compressing regions
         Set<JavaRegion> regionsWithSameFeatureInAllInstructions = new HashSet<>();
 
         for(JavaRegion javaRegion : regionsToOptions.keySet()) {
@@ -176,6 +204,7 @@ public class VarexJProcessor {
                 String entryPackage = result.get("package");
                 String entryClass = result.get("class");
                 String entryMethod = result.get("method");
+                int index = Integer.parseInt(result.get("index"));
 
                 if(!javaRegion.getRegionPackage().equals(entryPackage) || !javaRegion.getRegionClass().equals(entryClass) || !javaRegion.getRegionMethod().equals(entryMethod)) {
                     if(!regionUsedTerms.isEmpty()) {
@@ -186,6 +215,10 @@ public class VarexJProcessor {
                 }
 
                 if(regionUsedTerms.isEmpty()) {
+                    if(index != 0) {
+                        break;
+                    }
+
                     String usedTermsString = result.get("features");
                     regionUsedTerms = new HashSet<>(Arrays.asList(usedTermsString.split(",")));
                 }

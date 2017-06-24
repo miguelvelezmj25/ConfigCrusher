@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClass
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -40,7 +41,8 @@ public class Instrumenter {
 
         writer.close();
 
-        command = new String[]{"javac", "-d", classDirectory, "@" + srcDirectory + "sources.txt"};
+        command = new String[]{"javac", "-cp", "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator-m/lib/*", "-d", classDirectory, "@" + srcDirectory + "sources.txt"};
+        System.out.println(Arrays.toString(command));
         process = Runtime.getRuntime().exec(command);
         process.waitFor();
 

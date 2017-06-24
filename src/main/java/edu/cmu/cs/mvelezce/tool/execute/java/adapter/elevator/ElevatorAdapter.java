@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
+package edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 
@@ -10,24 +10,22 @@ import java.util.Set;
  */
 public class ElevatorAdapter extends Adapter {
 
-    private static final String[] CONFIGURATIONS = {"FEATUREBASE", "FEATUREWEIGHT", "FEATUREEMPTY", "FEATURETWOTHIRDSFULL",
-            "FEATUREEXECUTIVEFLOOR", "FEATUREOVERLOADED"};
-
-    public static final String TEST_DIRECTORY = "test/out/production/test";
-
-    private String programName;
-    private String mainClass;
-    private String directory;
+    private static final String[] CONFIGURATIONS = {
+//            "FEATUREBASE",
+            "FEATUREWEIGHT"//,
+//            "FEATUREEMPTY",
+//            "FEATURETWOTHIRDSFULL",
+//            "FEATUREEXECUTIVEFLOOR",
+//            "FEATUREOVERLOADED"
+    };
 
     public ElevatorAdapter(String programName, String mainClass, String directory) {
-        this.programName = programName;
-        this.mainClass = mainClass;
-        this.directory = directory;
+        super(programName, mainClass, directory);
     }
 
     @Override
     public void execute(Set<String> configuration) {
-        String[] argsArray = ElevatorAdapter.adaptConfigurationToElevatorProgram(configuration);
+        String[] argsArray = ElevatorAdapter.adaptConfigurationToProgram(configuration);
         StringBuilder args = new StringBuilder();
 
         for(String arg : argsArray) {
@@ -38,8 +36,8 @@ public class ElevatorAdapter extends Adapter {
         Adapter.executeJavaProgram(programName, ElevatorMain.ELEVATOR_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
-    public static String[] adaptConfigurationToElevatorProgram(Set<String> configuration) {
-        String[] sleepConfiguration = new String[CONFIGURATIONS.length];
+    public static String[] adaptConfigurationToProgram(Set<String> configuration) {
+        String[] sleepConfiguration = new String[ElevatorAdapter.CONFIGURATIONS.length];
 
         for(int i = 0; i < sleepConfiguration.length; i++) {
             if(configuration.contains(ElevatorAdapter.CONFIGURATIONS[i])) {

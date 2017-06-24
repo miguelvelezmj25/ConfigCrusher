@@ -14,14 +14,8 @@ public class SleepAdapter extends Adapter {
 
     public static final String TEST_DIRECTORY = "test/out/production/test";
 
-    private String programName;
-    private String mainClass;
-    private String directory;
-
     public SleepAdapter(String programName, String mainClass, String directory) {
-        this.programName = programName;
-        this.mainClass = mainClass;
-        this.directory = directory;
+        super(programName, mainClass, directory);
     }
 
     @Override

@@ -4,8 +4,8 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.ElevatorAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.GPLAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import org.json.simple.JSONArray;
@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  * Created by miguelvelez on 4/30/17.
@@ -72,9 +73,23 @@ public class Executor {
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
         for(Set<String> configuration : configurationsToExecute) {
             // TODO factory pattern or switch statement to create the right adapter
-            Adapter adapter = new GPLAdapter(programName, mainClass, directory);
-//            Adapter adapter = new SleepAdapter(programName, mainClass, directory);
-//            Adapter adapter = new ElevatorAdapter(programName, mainClass, directory);
+
+            Adapter adapter = null;
+
+            switch (programName) {
+                case "elevator":
+                    adapter = new ElevatorAdapter(programName, mainClass, directory);
+                    break;
+                case "gpl":
+                    adapter = new GPLAdapter(programName, mainClass, directory);
+                    break;
+                case "sleep":
+                    adapter = new SleepAdapter(programName, mainClass, directory);
+                    break;
+                default:
+                    throw new RuntimeException("Could not create an adapter for " + programName);
+            }
+
             adapter.execute(configuration);
 
             if(!Regions.getExecutingRegions().isEmpty()) {

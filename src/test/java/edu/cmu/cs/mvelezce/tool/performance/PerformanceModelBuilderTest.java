@@ -133,6 +133,46 @@ public class PerformanceModelBuilderTest {
     }
 
     @Test
+    public void testSleep15() throws IOException, ParseException {
+        String program = "Sleep15";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
+
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+    }
+
+    @Test
+    public void testSleep17() throws IOException, ParseException {
+        String program = "Sleep17";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
+
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+    }
+
+    @Test
     public void testSleep18() throws IOException, ParseException {
         String program = "Sleep18";
 

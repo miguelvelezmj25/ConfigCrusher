@@ -183,4 +183,51 @@ public class ProgramAnalysisTest {
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
     }
 
+    @Test
+    public void testSleep15() throws IOException, ParseException {
+        String programName = "sleep15";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep15/edu.cmu.cs.mvelezce.Sleep15.main.pdg";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep15.main";
+        List<String> features = new ArrayList<>();
+        features.add("A");
+        features.add("B");
+        features.add("C");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
+    }
+
+
+    @Test
+    public void testSleep17() throws IOException, ParseException {
+        String programName = "sleep17";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep17/edu.cmu.cs.mvelezce.Sleep17.main.pdg";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep17.main";
+        List<String> features = new ArrayList<>();
+        features.add("A");
+        features.add("B");
+        features.add("C");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
+    }
+
 }

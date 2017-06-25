@@ -57,8 +57,6 @@ public class PerformanceModelBuilder {
         Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = PerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
         Map<Region, Map<Set<String>, Double>> regionsToConfigurationPerformance = new HashMap<>();
 
-        // TODO check what is happening here
-
         for(Map.Entry<Region, Set<String>> entry : regionsToOptionsIncludingInnerRegions.entrySet()) {
             Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
             Set<String> entryConfiguration = entry.getValue();

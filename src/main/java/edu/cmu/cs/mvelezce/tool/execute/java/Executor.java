@@ -83,11 +83,12 @@ public class Executor {
                 case "gpl":
                     adapter = new GPLAdapter(programName, mainClass, directory);
                     break;
-                case "sleep":
-                    adapter = new SleepAdapter(programName, mainClass, directory);
-                    break;
+//                case "sleep":
+//                    adapter = new SleepAdapter(programName, mainClass, directory);
+//                    break;
                 default:
-                    throw new RuntimeException("Could not create an adapter for " + programName);
+                    adapter = new SleepAdapter(programName, mainClass, directory);
+//                    throw new RuntimeException("Could not create an adapter for " + programName);
             }
 
             adapter.execute(configuration);

@@ -13,10 +13,7 @@ import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/10/17.
@@ -32,7 +29,39 @@ public class JavaPipeline {
     public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint) throws IOException, ParseException, InterruptedException {
         // Get regions and options
         System.out.println("Region and options");
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        System.out.println("");
+
+        // Configuration compression (Language independent)
+        System.out.println("Configurations to execute");
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        System.out.println(configurationsToExecute);
+        System.out.println("");
+
+        System.out.println("Instrumenting");
+        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        System.out.println("");
+
+        System.out.println("Measure performance");
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
+        System.out.println("");
+
+        System.out.println("Build performance model");
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        return PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+    }
+
+    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint, String sdgFile, List<String> features) throws IOException, ParseException, InterruptedException {
+        // Get regions and options
+        System.out.println("Region and options");
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
         System.out.println("");
 
         // Configuration compression (Language independent)
@@ -66,7 +95,7 @@ public class JavaPipeline {
 //    public static PerformanceModel buildPerformanceModel(String programName, String mainClass, String directory, List<String> programFiles, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws NoSuchFieldException, IOException, NoSuchMethodException, ClassNotFoundException, ParseException {
 //        // ProgramAnalysis (Language dependent)
 //        // TODO we should get this from Lotrack and not pass it ourselves
-//        relevantRegionsToOptions = ProgramAnalysis.analyse(programName, mainClass, programFiles, relevantRegionsToOptions);
+//        relevantRegionsToOptions = ProgramAnalysis.analyze(programName, mainClass, programFiles, relevantRegionsToOptions);
 //
 //        // Configuration compression (Language independent)
 //        Set<Set<String>> relevantOptions = new HashSet<>(relevantRegionsToOptions.values());

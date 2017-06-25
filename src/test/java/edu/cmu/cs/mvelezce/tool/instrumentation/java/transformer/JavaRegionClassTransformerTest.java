@@ -32,7 +32,7 @@ public class JavaRegionClassTransformerTest {
         // Program arguments
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
         Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
     }
 
@@ -42,7 +42,7 @@ public class JavaRegionClassTransformerTest {
         String programName = "Dummy3";
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
         Set<JavaRegion> regions = partialRegionsToOptions.keySet();
 
         JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(directory, regions);

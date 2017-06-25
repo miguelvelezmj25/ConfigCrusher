@@ -106,10 +106,34 @@ public class SleepMain {
             Sleep14.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep15")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep15.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep16")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep16.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep17")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep17.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
         else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep18")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
             Sleep18.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep19")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep19.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
 

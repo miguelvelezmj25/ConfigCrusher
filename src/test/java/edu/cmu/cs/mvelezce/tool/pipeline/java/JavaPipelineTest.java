@@ -361,14 +361,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -389,6 +389,100 @@ public class JavaPipelineTest {
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep3.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep1_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep1";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep1/edu.cmu.cs.mvelezce.Sleep1.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep1.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep2_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep2";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep2/edu.cmu.cs.mvelezce.Sleep2.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep2.main(sleepConfiguration);
             long end = System.nanoTime();
 
             System.out.println(pm.evaluate(configuration));
@@ -437,6 +531,676 @@ public class JavaPipelineTest {
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
             long start = System.nanoTime();
             Sleep3.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep4_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep4";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep4/edu.cmu.cs.mvelezce.Sleep4.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep4.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep5_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep5";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep5";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep5/edu.cmu.cs.mvelezce.Sleep5.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep5.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep7_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep7";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep7/edu.cmu.cs.mvelezce.Sleep7.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep7.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep8_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep8";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep8/edu.cmu.cs.mvelezce.Sleep8.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep8.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep9_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep9";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep9";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep9/edu.cmu.cs.mvelezce.Sleep9.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep9.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep10_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep10";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep10/edu.cmu.cs.mvelezce.Sleep10.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+        features.add("B");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep10.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep11_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep11";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep11";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep11/edu.cmu.cs.mvelezce.Sleep11.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+        features.add("B");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep11.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep12_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep12";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep12/edu.cmu.cs.mvelezce.Sleep12.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+        features.add("B");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep12.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep13_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep13";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep13";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep13/edu.cmu.cs.mvelezce.Sleep13.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep13.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep14_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep14";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep14/edu.cmu.cs.mvelezce.Sleep14.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+        features.add("B");
+        features.add("C");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep14.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep15_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep15";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep15";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep15/edu.cmu.cs.mvelezce.Sleep15.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+        features.add("B");
+        features.add("C");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep15.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep16_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep16";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep16";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep16/edu.cmu.cs.mvelezce.Sleep16.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+        features.add("B");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep16.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep17_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep17";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep17";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep17/edu.cmu.cs.mvelezce.Sleep17.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+        features.add("B");
+        features.add("C");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep17.main(sleepConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+        }
+    }
+
+    @Test
+    public void testSleep18_1() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep18";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep18";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep18/edu.cmu.cs.mvelezce.Sleep18.main.pdg";
+        List<String> features = new java.util.ArrayList<>();
+        features.add("A");
+        features.add("B");
+        features.add("C");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
+        System.out.println(pm);
+
+        // TESTING
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            System.out.println(configuration);
+            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+            long start = System.nanoTime();
+            Sleep18.main(sleepConfiguration);
             long end = System.nanoTime();
 
             System.out.println(pm.evaluate(configuration));

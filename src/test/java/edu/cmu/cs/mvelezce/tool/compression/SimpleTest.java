@@ -400,8 +400,71 @@ public class SimpleTest {
     }
 
     @Test
-    public void testSleep3r() throws IOException, ParseException {
+    public void testSleep3() throws IOException, ParseException {
         String programName = "sleep3";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        System.out.println(configurationsToExecute.size());
+    }
+
+    @Test
+    public void testSleep10() throws IOException, ParseException {
+        String programName = "sleep10";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        System.out.println(configurationsToExecute.size());
+    }
+
+    @Test
+    public void testSleep14() throws IOException, ParseException {
+        String programName = "sleep14";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        System.out.println(configurationsToExecute.size());
+    }
+
+    @Test
+    public void testSleep15() throws IOException, ParseException {
+        String programName = "sleep15";
 
         // Program arguments
         String[] args = new String[0];

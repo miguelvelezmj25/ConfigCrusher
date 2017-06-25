@@ -37,11 +37,20 @@ public class PerformanceModel {
         MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable = new HashSetValuedHashMap<>();
 
         for(Map<Set<String>, Double> block : blocks) {
+//            for(Set<String> k : block.keySet()) {
+//                if(k.size() == 2) {
+//                    int i = 0;
+//                }
+//            }
             Set<String> relevantOptions = new HashSet<>();
 
             for(Set<String> configuration : block.keySet()) {
                 relevantOptions.addAll(configuration);
             }
+
+//            if(relevantOptions.size() == 2) {
+//                int i = 0;
+//            }
 
             regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
         }
@@ -82,7 +91,7 @@ public class PerformanceModel {
     public static Map<Set<String>, Double> calculateConfigurationsInfluence(Map<Set<String>, Double> regionTable) {
         Map<Set<String>, Double> configurationToInfluence = new HashMap<>();
 
-        long numberOfOptions = (long) Math.sqrt(regionTable.size());
+        int numberOfOptions = (int) (Math.log(regionTable.size())/Math.log(2));
         Set<String> regionOptions = new HashSet<>();
 
         for(Map.Entry<Set<String>, Double> entry : regionTable.entrySet()) {
@@ -91,7 +100,13 @@ public class PerformanceModel {
             }
         }
 
-        PerformanceModel.calculateConfigurationInfluence(regionOptions, regionTable, configurationToInfluence);
+        if(numberOfOptions == regionOptions.size()) {
+            PerformanceModel.calculateConfigurationInfluence(regionOptions, regionTable, configurationToInfluence);
+        }
+        else {
+            Set<String> empty = new HashSet<>();
+            configurationToInfluence.put(empty, regionTable.get(empty));
+        }
 
         return configurationToInfluence;
     }

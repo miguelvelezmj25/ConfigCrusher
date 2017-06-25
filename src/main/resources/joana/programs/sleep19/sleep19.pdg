@@ -1,0 +1,2958 @@
+SDG "edu.cmu.cs.mvelezce.Dummy7.main(java.lang.String[])" {
+ENTR 1 {
+O entry;
+V "edu.cmu.cs.mvelezce.Dummy7.main(java.lang.String[])";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":-1;
+C "Application";
+CE 2;
+CD 6;
+CE 3;
+CE 4;
+CE 24;
+CE 25;
+PS 3;
+PS 4;
+PS 24;
+PS 25;
+CE 176;
+PS 176;
+CE 177;
+PS 177;
+CE 197;
+CF 197;
+CF 2;
+HE 2;
+HE 6;
+HE 4;
+HE 24;
+HE 25;
+HE 176;
+HE 177;
+HE 197;
+}
+EXIT 2 {
+O exit;
+V "edu.cmu.cs.mvelezce.Dummy7.main(java.lang.String[])";
+T "V";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "<exit>":-2;
+RF 248;
+}
+FRMO 3 {
+O form-out;
+V "_exception_";
+T "Ljava/lang/Exception";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "<exception>":-2;
+CF 2: "exc";
+PO 49;
+}
+FRMI 4 {
+O form-in;
+V "param 1 $args ";
+T "[Ljava/lang/String";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "<param> 1":-2;
+LD ["args"];
+CF 24;
+DD 6;
+PS 197;
+}
+EXPR 5 {
+O reference;
+V "v4 = p1 $args [#(0)]";
+T "Ljava/lang/Object";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":2;
+LU ["args"];
+CE 7;
+CF 6;
+DD 10;
+HE 7;
+}
+NORM 6 {
+O compound;
+V "base";
+T "[Ljava/lang/Object";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "<base>":-6;
+DD 5;
+CE 8;
+PS 7;
+CF 8;
+CF 10;
+CF 3: "exc";
+CD 3;
+CD 9;
+HE 8;
+HE 3;
+HE 9;
+}
+NORM 7 {
+O compound;
+V "field [java.lang.Object]";
+T "Ljava/lang/Object";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "<[]>":-5;
+DD 5;
+CF 5;
+}
+NORM 8 {
+O compound;
+V "index";
+T "I";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "<index>":-7;
+CE 6;
+CE 5;
+DD 5;
+CF 7;
+HE 5;
+}
+CALL 9 {
+O call;
+V "v6 = valueOf(v4)";
+T "Ljava/lang/Boolean";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":3;
+CE 10;
+CE 11;
+CE 12;
+PS 10;
+PS 11;
+PS 12;
+CL 127: "virtual";
+CE 183;
+PS 183;
+CE 184;
+PS 184;
+CF 245;
+CE 245;
+HE 10;
+HE 11;
+HE 12;
+HE 183;
+HE 184;
+}
+ACTI 10 {
+O act-in;
+V "param 1 [v4]";
+T "Ljava/lang/String";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "<param> 1":-2;
+PI 130;
+CF 183;
+SU 11;
+SU 12;
+}
+ACTO 11 {
+O act-out;
+V "ret 0";
+T "Ljava/lang/Boolean";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "<exit>":-2;
+CF 12: "exc";
+CF 14;
+DD 14;
+}
+ACTO 12 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "<exception>":-2;
+CF 3: "exc";
+DD 3;
+CE 245;
+HE 245;
+}
+CALL 13 {
+O call;
+V "v8 = v6.booleanValue()";
+T "Z";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":6;
+CE 14;
+CE 15;
+CE 16;
+PS 14;
+PS 15;
+PS 16;
+CL 147: "virtual";
+CF 246;
+CE 246;
+HE 14;
+HE 15;
+HE 16;
+}
+ACTI 14 {
+O act-in;
+V "this [v6]";
+T "Ljava/lang/Boolean";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "<param> 0":-2;
+CF 13;
+CD 13;
+PI 150;
+SU 15;
+}
+ACTO 15 {
+O act-out;
+V "ret 0";
+T "Z";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "<exit>":-2;
+CF 16: "exc";
+CF 17;
+DD 17;
+}
+ACTO 16 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "<exception>":-2;
+CF 3: "exc";
+CE 246;
+HE 246;
+}
+EXPR 17 {
+O modify;
+V "edu.cmu.cs.mvelezce.Dummy7.A = v8";
+T "Z";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":9;
+DD 18;
+CE 18;
+CF 18;
+HE 18;
+}
+NORM 18 {
+O compound;
+V "field A";
+T "Z";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 20;
+DD 25;
+DD 20;
+}
+EXPR 19 {
+O reference;
+V "v9 = edu.cmu.cs.mvelezce.Dummy7.A";
+T "Z";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":15,0-15,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":12;
+CE 20;
+DD 21;
+CF 21;
+HE 20;
+}
+NORM 20 {
+O compound;
+V "field A";
+T "Z";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":15,0-15,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+DD 19;
+CF 19;
+}
+PRED 21 {
+O IF;
+V "if (v9 == #(0)) goto 25";
+T "Z";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":15,0-15,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":15;
+CD 22;
+CF 22;
+CF 23;
+HE 22;
+}
+NORM 22 {
+O compound;
+V "goto 25";
+T "Ljava/lang/Object";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":16,0-16,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":20;
+CF 23;
+}
+NORM 23 {
+O compound;
+V "return";
+T "V";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":20,0-20,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":25;
+CF 25;
+}
+FRMI 24 {
+O form-in;
+V "A";
+T "Z";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 6;
+DD 25;
+}
+FRMO 25 {
+O form-out;
+V "A";
+T "Z";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 2;
+PO 189;
+}
+ENTR 33 {
+O entry;
+V "com.ibm.wala.FakeRootClass.fakeRootMethod()";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+C "Primordial";
+CE 34;
+CD 35;
+CD 36;
+CE 35;
+PS 35;
+CE 178;
+PS 178;
+CE 179;
+PS 179;
+CE 180;
+PS 180;
+CE 181;
+PS 181;
+CE 192;
+CE 193;
+CF 192;
+CF 34;
+HE 34;
+HE 35;
+HE 36;
+HE 178;
+HE 179;
+HE 180;
+HE 181;
+HE 192;
+HE 193;
+}
+EXIT 34 {
+O exit;
+V "com.ibm.wala.FakeRootClass.fakeRootMethod()";
+T "V";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exit>":-2;
+}
+FRMO 35 {
+O form-out;
+V "_exception_";
+T "Ljava/lang/Exception";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 178: "exc";
+PS 192;
+PS 193;
+}
+CALL 36 {
+O call;
+V "fakeWorldClinit()";
+T "V";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+CE 37;
+PS 37;
+CL 64: "virtual";
+CE 185;
+PS 185;
+CF 247;
+CE 247;
+HE 37;
+HE 185;
+}
+ACTO 37 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 35: "exc";
+DD 35;
+CE 247;
+HE 247;
+}
+NORM 38 {
+O declaration;
+V "v3 = new java.lang.String[]";
+T "[Ljava/lang/String";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+CF 39;
+CF 35: "exc";
+CD 35;
+CD 39;
+CD 41;
+DD 41;
+DD 45;
+DD 48;
+HE 39;
+HE 41;
+}
+NORM 39 {
+O declaration;
+V "v5 = new java.lang.String";
+T "Ljava/lang/String";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+CF 41;
+DD 40;
+}
+EXPR 40 {
+O modify;
+V "v3[#(0)] = v5";
+T "Ljava/lang/String";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+DD 42;
+CE 42;
+CF 42;
+HE 42;
+}
+NORM 41 {
+O compound;
+V "base";
+T "[Ljava/lang/String";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+DD 40;
+CE 43;
+PS 42;
+CF 43;
+CF 45;
+CF 35: "exc";
+CD 35;
+CD 42;
+CD 43;
+CD 44;
+HE 43;
+HE 44;
+}
+NORM 42 {
+O compound;
+V "field [java.lang.String]";
+T "Ljava/lang/String";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+CF 41;
+DH 194;
+}
+NORM 43 {
+O compound;
+V "index";
+T "I";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+CE 41;
+CE 40;
+DD 40;
+CF 40;
+HE 40;
+}
+CALL 44 {
+O call;
+V "v3.<init>()";
+T "V";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+U "java.lang.Object.<init>()V";
+CF 46: "exc";
+CD 47;
+CE 45;
+CE 46;
+PS 45;
+PS 46;
+CE 213;
+CE 214;
+CF 214;
+HE 47;
+HE 45;
+HE 46;
+HE 213;
+HE 214;
+}
+ACTI 45 {
+O act-in;
+V "this [v3]";
+T "Ljava/lang/Object";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<param> 0":-2;
+CF 44;
+CD 44;
+DD 214;
+}
+ACTO 46 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 35: "exc";
+DD 35;
+DD 213;
+}
+CALL 47 {
+O call;
+V "main(v3)";
+T "V";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+CE 48;
+CE 49;
+PS 48;
+PS 49;
+CL 1: "virtual";
+CE 186;
+PS 186;
+CE 187;
+PS 187;
+CE 188;
+PS 188;
+CE 189;
+PS 189;
+CE 194;
+CF 248;
+CE 248;
+HE 48;
+HE 49;
+HE 186;
+HE 187;
+HE 188;
+HE 189;
+HE 194;
+}
+ACTI 48 {
+O act-in;
+V "param 1 [v3]";
+T "[Ljava/lang/String";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<param> 1":-2;
+PI 4;
+CF 186;
+PS 194;
+SU 49;
+SU 189;
+}
+ACTO 49 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 35: "exc";
+DD 35;
+CE 248;
+HE 248;
+}
+NORM 50 {
+O declaration;
+V "v9 = new java.io.FileInputStream";
+T "Ljava/io/FileInputStream";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+CF 52;
+DD 52;
+DD 55;
+}
+CALL 51 {
+O call;
+V "v9.<init>()";
+T "V";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+U "java.io.InputStream.<init>()V";
+CF 53: "exc";
+CD 54;
+CE 52;
+CE 53;
+PS 52;
+PS 53;
+CE 215;
+CF 215;
+HE 54;
+HE 52;
+HE 53;
+HE 215;
+}
+ACTI 52 {
+O act-in;
+V "this [v9]";
+T "Ljava/io/InputStream";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<param> 0":-2;
+CF 51;
+CD 51;
+DD 215;
+}
+ACTO 53 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 35: "exc";
+DD 35;
+}
+CALL 54 {
+O call;
+V "v9.finalize()";
+T "V";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+U "java.io.FileInputStream.finalize()V";
+CF 56: "exc";
+CD 57;
+CD 58;
+CE 55;
+CE 56;
+PS 55;
+PS 56;
+CE 195;
+CE 216;
+CF 216;
+HE 57;
+HE 58;
+HE 55;
+HE 56;
+HE 195;
+HE 216;
+}
+ACTI 55 {
+O act-in;
+V "this [v9]";
+T "Ljava/io/FileInputStream";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<param> 0":-2;
+CD 54;
+CF 195;
+PS 195;
+DD 216;
+}
+ACTO 56 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 35: "exc";
+DD 35;
+PS 195;
+}
+NORM 57 {
+O declaration;
+V "v12 = new java.io.FileOutputStream";
+T "Ljava/io/FileOutputStream";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+CF 59;
+DD 59;
+DD 62;
+}
+CALL 58 {
+O call;
+V "v12.<init>()";
+T "V";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+U "java.io.OutputStream.<init>()V";
+CF 60: "exc";
+CD 61;
+CE 59;
+CE 60;
+PS 59;
+PS 60;
+CE 217;
+CF 217;
+HE 61;
+HE 59;
+HE 60;
+HE 217;
+}
+ACTI 59 {
+O act-in;
+V "this [v12]";
+T "Ljava/io/OutputStream";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<param> 0":-2;
+CF 58;
+CD 58;
+DD 217;
+}
+ACTO 60 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 35: "exc";
+DD 35;
+}
+CALL 61 {
+O call;
+V "v12.finalize()";
+T "V";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+U "java.io.FileOutputStream.finalize()V";
+CF 63: "exc";
+CE 62;
+CE 63;
+PS 62;
+PS 63;
+CE 196;
+CE 218;
+CF 218;
+HE 62;
+HE 63;
+HE 196;
+HE 218;
+}
+ACTI 62 {
+O act-in;
+V "this [v12]";
+T "Ljava/io/FileOutputStream";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<param> 0":-2;
+CD 61;
+CF 196;
+PS 196;
+DD 218;
+}
+ACTO 63 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 35: "exc";
+DD 35;
+PS 196;
+}
+ENTR 64 {
+O entry;
+V "com.ibm.wala.FakeRootClass.fakeWorldClinit()";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+C "Primordial";
+CF 67;
+CF 66: "exc";
+CE 65;
+CD 66;
+CD 67;
+CE 66;
+PS 66;
+CE 182;
+PS 182;
+CF 182;
+CF 65;
+HE 65;
+HE 66;
+HE 67;
+HE 182;
+}
+EXIT 65 {
+O exit;
+V "com.ibm.wala.FakeRootClass.fakeWorldClinit()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exit>":-2;
+RF 247;
+}
+FRMO 66 {
+O form-out;
+V "_exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+PO 37;
+CF 182: "exc";
+}
+CALL 67 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Object.<clinit>()V";
+CF 68: "exc";
+CD 69;
+CE 68;
+PS 68;
+CE 219;
+CF 219;
+HE 69;
+HE 68;
+HE 219;
+}
+ACTO 68 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 69 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.String.<clinit>()V";
+CF 70: "exc";
+CD 71;
+CE 70;
+PS 70;
+CE 220;
+CF 220;
+HE 71;
+HE 70;
+HE 220;
+}
+ACTO 70 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 71 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+CE 72;
+PS 72;
+CL 119: "virtual";
+CE 190;
+PS 190;
+CF 249;
+CE 249;
+HE 72;
+HE 190;
+}
+ACTO 72 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+CE 249;
+HE 249;
+}
+CALL 73 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Boolean.<clinit>()V";
+CD 75;
+CE 74;
+PS 74;
+CE 198;
+CE 221;
+CF 221;
+HE 75;
+HE 74;
+HE 198;
+HE 221;
+}
+ACTO 74 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 75 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Class.<clinit>()V";
+CF 76: "exc";
+CD 77;
+CE 76;
+PS 76;
+CE 222;
+CF 222;
+HE 77;
+HE 76;
+HE 222;
+}
+ACTO 76 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 77 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.io.ObjectStreamClass.<clinit>()V";
+CF 78: "exc";
+CD 79;
+CE 78;
+PS 78;
+CE 223;
+CF 223;
+HE 79;
+HE 78;
+HE 223;
+}
+ACTO 78 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 79 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Character.<clinit>()V";
+CD 81;
+CE 80;
+PS 80;
+CE 199;
+CE 224;
+CF 224;
+HE 81;
+HE 80;
+HE 199;
+HE 224;
+}
+ACTO 80 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 81 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.CharacterDataLatin1.<clinit>()V";
+CD 83;
+CE 82;
+PS 82;
+CE 200;
+CE 201;
+CE 225;
+CF 225;
+HE 83;
+HE 82;
+HE 200;
+HE 201;
+HE 225;
+}
+ACTO 82 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+PS 200;
+PS 201;
+}
+CALL 83 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.CharacterData.<clinit>()V";
+CD 85;
+CE 84;
+PS 84;
+CE 202;
+CE 203;
+CE 226;
+CF 226;
+HE 85;
+HE 84;
+HE 202;
+HE 203;
+HE 226;
+}
+ACTO 84 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+PS 202;
+PS 203;
+}
+CALL 85 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.System.<clinit>()V";
+CD 87;
+CE 86;
+PS 86;
+CE 204;
+CE 205;
+CE 227;
+CF 227;
+HE 87;
+HE 86;
+HE 204;
+HE 205;
+HE 227;
+}
+ACTO 86 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+PS 204;
+PS 205;
+}
+CALL 87 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.StringBuffer.<clinit>()V";
+CD 89;
+CE 88;
+PS 88;
+CE 206;
+CE 207;
+CE 228;
+CF 228;
+HE 89;
+HE 88;
+HE 206;
+HE 207;
+HE 228;
+}
+ACTO 88 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+PS 206;
+PS 207;
+}
+CALL 89 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.SecurityManager.<clinit>()V";
+CF 90: "exc";
+CD 91;
+CE 90;
+PS 90;
+CE 208;
+CE 229;
+CF 229;
+HE 91;
+HE 90;
+HE 208;
+HE 229;
+}
+ACTO 90 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+PS 208;
+}
+CALL 91 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.util.Properties.<clinit>()V";
+CD 93;
+CE 92;
+PS 92;
+CE 209;
+CE 230;
+CF 230;
+HE 93;
+HE 92;
+HE 209;
+HE 230;
+}
+ACTO 92 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 93 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.util.Hashtable.<clinit>()V";
+CF 94: "exc";
+CD 95;
+CE 94;
+PS 94;
+CE 231;
+CF 231;
+HE 95;
+HE 94;
+HE 231;
+}
+ACTO 94 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 95 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.io.FileInputStream.<clinit>()V";
+CF 96: "exc";
+CD 97;
+CE 96;
+PS 96;
+CE 232;
+CF 232;
+HE 97;
+HE 96;
+HE 232;
+}
+ACTO 96 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 97 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.io.FileOutputStream.<clinit>()V";
+CF 98: "exc";
+CD 99;
+CE 98;
+PS 98;
+CE 233;
+CF 233;
+HE 99;
+HE 98;
+HE 233;
+}
+ACTO 98 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 99 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Integer.<clinit>()V";
+CD 101;
+CE 100;
+PS 100;
+CE 210;
+CE 234;
+CF 234;
+HE 101;
+HE 100;
+HE 210;
+HE 234;
+}
+ACTO 100 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 101 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Thread.<clinit>()V";
+CF 102: "exc";
+CD 103;
+CE 102;
+PS 102;
+CE 235;
+CF 235;
+HE 103;
+HE 102;
+HE 235;
+}
+ACTO 102 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 103 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.io.FileDescriptor.<clinit>()V";
+CD 105;
+CE 104;
+PS 104;
+CE 211;
+CE 236;
+CF 236;
+HE 105;
+HE 104;
+HE 211;
+HE 236;
+}
+ACTO 104 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+PS 211;
+}
+CALL 105 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.io.BufferedWriter.<clinit>()V";
+CF 106: "exc";
+CD 107;
+CE 106;
+PS 106;
+CE 237;
+CF 237;
+HE 107;
+HE 106;
+HE 237;
+}
+ACTO 106 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 107 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Float.<clinit>()V";
+CF 108: "exc";
+CD 109;
+CE 108;
+PS 108;
+CE 238;
+CF 238;
+HE 109;
+HE 108;
+HE 238;
+}
+ACTO 108 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 109 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.FloatingDecimal.<clinit>()V";
+CD 111;
+CE 110;
+PS 110;
+CE 212;
+CE 239;
+CF 239;
+HE 111;
+HE 110;
+HE 212;
+HE 239;
+}
+ACTO 110 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+PS 212;
+}
+CALL 111 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Math.<clinit>()V";
+CF 112: "exc";
+CD 113;
+CE 112;
+PS 112;
+CE 240;
+CF 240;
+HE 113;
+HE 112;
+HE 240;
+}
+ACTO 112 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 113 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Double.<clinit>()V";
+CF 114: "exc";
+CD 115;
+CE 114;
+PS 114;
+CE 241;
+CF 241;
+HE 115;
+HE 114;
+HE 241;
+}
+ACTO 114 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 115 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.StrictMath.<clinit>()V";
+CF 116: "exc";
+CD 117;
+CE 116;
+PS 116;
+CE 242;
+CF 242;
+HE 117;
+HE 116;
+HE 242;
+}
+ACTO 116 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+CALL 117 {
+O call;
+V "<clinit>()";
+T "V";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+U "java.lang.Long.<clinit>()V";
+CF 118: "exc";
+CE 118;
+PS 118;
+CE 243;
+CF 243;
+HE 118;
+HE 243;
+}
+ACTO 118 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<exception>":-2;
+CF 66: "exc";
+DD 66;
+}
+ENTR 119 {
+O entry;
+V "edu.cmu.cs.mvelezce.Dummy7.<clinit>()";
+P 7;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "edu.cmu.cs.mvelezce.Dummy7.<clinit>()V":-1;
+C "Application";
+CF 120;
+CF 121;
+CE 120;
+CD 121;
+CD 122;
+CD 124;
+CE 121;
+CE 125;
+CF 122;
+PS 121;
+PS 125;
+HE 120;
+HE 121;
+HE 122;
+HE 124;
+HE 125;
+}
+EXIT 120 {
+O exit;
+V "edu.cmu.cs.mvelezce.Dummy7.<clinit>()";
+T "V";
+P 7;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "<exit>":-2;
+RF 249;
+}
+FRMO 121 {
+O form-out;
+V "_exception_";
+T "Ljava/lang/Exception";
+P 7;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "<exception>":-2;
+CF 120: "exc";
+PO 72;
+}
+EXPR 122 {
+O modify;
+V "edu.cmu.cs.mvelezce.Dummy7.A = #(0)";
+T "Z";
+P 7;
+S "edu/cmu/cs/mvelezce/Dummy7.java":8,0-8,0;
+B "edu.cmu.cs.mvelezce.Dummy7.<clinit>()V":1;
+DD 123;
+CE 123;
+CF 123;
+HE 123;
+}
+NORM 123 {
+O compound;
+V "field A";
+T "Z";
+P 7;
+S "edu/cmu/cs/mvelezce/Dummy7.java":8,0-8,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 124;
+DD 125;
+}
+NORM 124 {
+O compound;
+V "return";
+T "V";
+P 7;
+S "edu/cmu/cs/mvelezce/Dummy7.java":8,0-8,0;
+B "edu.cmu.cs.mvelezce.Dummy7.<clinit>()V":4;
+CF 125;
+}
+FRMO 125 {
+O form-out;
+V "A";
+T "Z";
+P 7;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 120;
+PO 190;
+}
+ENTR 127 {
+O entry;
+V "java.lang.Boolean.valueOf(java.lang.String)";
+P 8;
+S "java/lang/Boolean.java":0,0-0,0;
+B "java.lang.Boolean.valueOf(Ljava/lang/String;)Ljava/lang/Boolean;":-1;
+C "Primordial";
+CF 130;
+CF 128;
+CE 128;
+CD 131;
+CE 129;
+CE 130;
+CE 143;
+CE 144;
+PS 128;
+PS 129;
+PS 130;
+PS 143;
+PS 144;
+HE 128;
+HE 131;
+HE 129;
+HE 130;
+HE 143;
+HE 144;
+}
+EXIT 128 {
+O exit;
+V "java.lang.Boolean.valueOf(java.lang.String)";
+T "Ljava/lang/Boolean";
+P 8;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<exit>":-2;
+PO 11;
+RF 245;
+}
+FRMO 129 {
+O form-out;
+V "_exception_";
+T "Ljava/lang/Exception";
+P 8;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<exception>":-2;
+CF 128: "exc";
+PO 12;
+}
+FRMI 130 {
+O form-in;
+V "param 1 $s ";
+T "Ljava/lang/String";
+P 8;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<param> 1":-2;
+LD ["s"];
+CF 143;
+DD 132;
+}
+CALL 131 {
+O call;
+V "v4 = toBoolean(p1 $s )";
+T "Z";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "java.lang.Boolean.valueOf(Ljava/lang/String;)Ljava/lang/Boolean;":1;
+CE 132;
+CE 133;
+CE 134;
+PS 132;
+PS 133;
+PS 134;
+CL 156: "virtual";
+CF 250;
+CE 250;
+HE 132;
+HE 133;
+HE 134;
+}
+ACTI 132 {
+O act-in;
+V "param 1 [p1 $s ]";
+T "Ljava/lang/String";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "<param> 1":-2;
+LU ["s"];
+CF 131;
+PI 159;
+SU 133;
+SU 134;
+}
+ACTO 133 {
+O act-out;
+V "ret 0";
+T "Z";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "<exit>":-2;
+CF 134: "exc";
+DD 135;
+CF 135;
+}
+ACTO 134 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "<exception>":-2;
+CF 129: "exc";
+DD 129;
+CE 250;
+HE 250;
+}
+PRED 135 {
+O IF;
+V "if (v4 == #(0)) goto 13";
+T "Z";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "java.lang.Boolean.valueOf(Ljava/lang/String;)Ljava/lang/Boolean;":4;
+CF 137;
+CF 140;
+CD 136;
+CD 138;
+CD 139;
+CD 142;
+HE 136;
+HE 138;
+HE 139;
+HE 142;
+}
+EXPR 136 {
+O reference;
+V "v7 = java.lang.Boolean.TRUE";
+T "Ljava/lang/Boolean";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "java.lang.Boolean.valueOf(Ljava/lang/String;)Ljava/lang/Boolean;":7;
+CE 137;
+CF 138;
+DD 142;
+HE 137;
+}
+NORM 137 {
+O compound;
+V "field TRUE";
+T "Ljava/lang/Boolean";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "Ljava/lang/Boolean.TRUE":-3;
+DD 136;
+CF 136;
+}
+NORM 138 {
+O compound;
+V "goto 16";
+T "Ljava/lang/Object";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "java.lang.Boolean.valueOf(Ljava/lang/String;)Ljava/lang/Boolean;":10;
+CF 142;
+}
+EXPR 139 {
+O reference;
+V "v6 = java.lang.Boolean.FALSE";
+T "Ljava/lang/Boolean";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "java.lang.Boolean.valueOf(Ljava/lang/String;)Ljava/lang/Boolean;":13;
+CE 140;
+CF 142;
+DD 142;
+HE 140;
+}
+NORM 140 {
+O compound;
+V "field FALSE";
+T "Ljava/lang/Boolean";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "Ljava/lang/Boolean.FALSE":-3;
+DD 139;
+CF 139;
+}
+NORM 141 {
+O compound;
+V "return v8";
+T "Ljava/lang/Boolean";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "java.lang.Boolean.valueOf(Ljava/lang/String;)Ljava/lang/Boolean;":16;
+CF 128;
+DD 128;
+}
+EXPR 142 {
+O assign;
+V "PHI v8 = v7, v6";
+P 8;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<phi>":-8;
+CF 141;
+DD 141;
+}
+FRMI 143 {
+O form-in;
+V "TRUE";
+T "Ljava/lang/Boolean";
+P 8;
+S "java/lang/Boolean.java":0,0-0,0;
+B "Ljava/lang/Boolean.TRUE":-3;
+CF 144;
+DD 137;
+}
+FRMI 144 {
+O form-in;
+V "FALSE";
+T "Ljava/lang/Boolean";
+P 8;
+S "java/lang/Boolean.java":0,0-0,0;
+B "Ljava/lang/Boolean.FALSE":-3;
+CF 132;
+DD 140;
+}
+ENTR 147 {
+O entry;
+V "java.lang.Boolean.booleanValue()";
+P 9;
+S "java/lang/Boolean.java":0,0-0,0;
+B "java.lang.Boolean.booleanValue()Z":-1;
+C "Primordial";
+CF 150;
+CF 148;
+CF 149;
+CE 148;
+CD 149;
+CD 152;
+CD 154;
+CE 149;
+CE 150;
+PS 148;
+PS 149;
+PS 150;
+HE 148;
+HE 149;
+HE 152;
+HE 154;
+HE 150;
+}
+EXIT 148 {
+O exit;
+V "java.lang.Boolean.booleanValue()";
+T "Z";
+P 9;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<exit>":-2;
+PO 15;
+RF 246;
+}
+FRMO 149 {
+O form-out;
+V "_exception_";
+T "Ljava/lang/Exception";
+P 9;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<exception>":-2;
+CF 148: "exc";
+PO 16;
+}
+FRMI 150 {
+O form-in;
+V "this";
+T "Ljava/lang/Boolean";
+P 9;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<param> 0":-2;
+LD ["this"];
+DD 152;
+CF 152;
+}
+EXPR 151 {
+O reference;
+V "v3 = p0 $this .value";
+T "Z";
+P 9;
+S "java/lang/Boolean.java":96,0-96,0;
+B "java.lang.Boolean.booleanValue()Z":1;
+LU ["this"];
+CE 153;
+CF 152;
+DD 154;
+HE 153;
+}
+NORM 152 {
+O compound;
+V "base";
+T "Ljava/lang/Boolean";
+P 9;
+S "java/lang/Boolean.java":96,0-96,0;
+B "<base>":-6;
+DD 151;
+CE 151;
+PS 153;
+CF 153;
+CF 154;
+HE 151;
+}
+NORM 153 {
+O compound;
+V "field value";
+T "Z";
+P 9;
+S "java/lang/Boolean.java":96,0-96,0;
+B "Ljava/lang/Boolean.value":-4;
+DD 151;
+CF 151;
+}
+NORM 154 {
+O compound;
+V "return v3";
+T "Z";
+P 9;
+S "java/lang/Boolean.java":96,0-96,0;
+B "java.lang.Boolean.booleanValue()Z":4;
+CF 148;
+DD 148;
+}
+ENTR 156 {
+O entry;
+V "java.lang.Boolean.toBoolean(java.lang.String)";
+P 10;
+S "java/lang/Boolean.java":0,0-0,0;
+B "java.lang.Boolean.toBoolean(Ljava/lang/String;)Z":-1;
+C "Primordial";
+CF 159;
+CF 157;
+CE 157;
+CD 160;
+CE 158;
+CE 159;
+PS 157;
+PS 158;
+PS 159;
+HE 157;
+HE 160;
+HE 158;
+HE 159;
+}
+EXIT 157 {
+O exit;
+V "java.lang.Boolean.toBoolean(java.lang.String)";
+T "Z";
+P 10;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<exit>":-2;
+PO 133;
+RF 250;
+}
+FRMO 158 {
+O form-out;
+V "_exception_";
+T "Ljava/lang/Exception";
+P 10;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<exception>":-2;
+CF 157: "exc";
+PO 134;
+}
+FRMI 159 {
+O form-in;
+V "param 1 $name ";
+T "Ljava/lang/String";
+P 10;
+S "java/lang/Boolean.java":0,0-0,0;
+B "<param> 1":-2;
+LD ["name"];
+DD 160;
+DD 162;
+CF 160;
+}
+PRED 160 {
+O IF;
+V "if (p1 $name  == #(null)) goto 16";
+T "Z";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "java.lang.Boolean.toBoolean(Ljava/lang/String;)Z":1;
+LU ["name"];
+CD 161;
+CD 168;
+CF 162;
+CF 168;
+HE 161;
+}
+CALL 161 {
+O call;
+V "v6 = p1 $name .equalsIgnoreCase(#(true))";
+T "Z";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "java.lang.Boolean.toBoolean(Ljava/lang/String;)Z":7;
+U "java.lang.String.equalsIgnoreCase(Ljava/lang/String;)Z";
+CD 166;
+CE 162;
+CE 163;
+CE 164;
+CE 165;
+PS 162;
+PS 163;
+PS 164;
+PS 165;
+CE 191;
+CE 244;
+CF 244;
+HE 166;
+HE 162;
+HE 163;
+HE 164;
+HE 165;
+HE 191;
+HE 244;
+}
+ACTI 162 {
+O act-in;
+V "this [p1 $name ]";
+T "Ljava/lang/String";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "<param> 0":-2;
+LU ["name"];
+CF 163;
+CD 161;
+PS 191;
+DD 244;
+}
+ACTI 163 {
+O act-in;
+V "param 1 [#(true)]";
+T "Ljava/lang/String";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "<param> 1":-2;
+CF 191;
+PS 191;
+DD 244;
+}
+ACTO 164 {
+O act-out;
+V "ret 0";
+T "Z";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "<exit>":-2;
+CF 165: "exc";
+DD 166;
+CF 166;
+}
+ACTO 165 {
+O act-out;
+V "ret _exception_";
+T "Ljava/lang/Exception";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "<exception>":-2;
+CF 158: "exc";
+DD 158;
+}
+PRED 166 {
+O IF;
+V "if (v6 == #(0)) goto 16";
+T "Z";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "java.lang.Boolean.toBoolean(Ljava/lang/String;)Z":10;
+CD 167;
+CD 168;
+CF 167;
+CF 168;
+HE 167;
+HE 168;
+}
+NORM 167 {
+O compound;
+V "return #(1)";
+T "Z";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "java.lang.Boolean.toBoolean(Ljava/lang/String;)Z":14;
+CF 157;
+DD 157;
+}
+NORM 168 {
+O compound;
+V "return #(0)";
+T "Z";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "java.lang.Boolean.toBoolean(Ljava/lang/String;)Z":16;
+CF 157;
+DD 157;
+}
+FRMI 176 {
+O form-in;
+V "TRUE";
+T "Ljava/lang/Boolean";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "Ljava/lang/Boolean.TRUE":-3;
+CF 4;
+DD 183;
+}
+FRMI 177 {
+O form-in;
+V "FALSE";
+T "Ljava/lang/Boolean";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "Ljava/lang/Boolean.FALSE":-3;
+CF 176;
+DD 184;
+}
+FRMO 178 {
+O form-out;
+V "A";
+T "Z";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 193;
+}
+FRMI 179 {
+O form-in;
+V "TRUE";
+T "Ljava/lang/Boolean";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ljava/lang/Boolean.TRUE":-3;
+CF 36;
+CF 178;
+DD 187;
+}
+FRMI 180 {
+O form-in;
+V "FALSE";
+T "Ljava/lang/Boolean";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ljava/lang/Boolean.FALSE":-3;
+CF 179;
+DD 188;
+}
+FRMI 181 {
+O form-in;
+V "A";
+T "Z";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 180;
+DD 186;
+DD 178;
+}
+FRMO 182 {
+O form-out;
+V "A";
+T "Z";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 65;
+PO 185;
+}
+ACTI 183 {
+O act-in;
+V "TRUE";
+T "Ljava/lang/Boolean";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "Ljava/lang/Boolean.TRUE":-3;
+PI 143;
+CF 184;
+SU 11;
+}
+ACTI 184 {
+O act-in;
+V "FALSE";
+T "Ljava/lang/Boolean";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "Ljava/lang/Boolean.FALSE":-3;
+CF 9;
+PI 144;
+SU 11;
+}
+ACTO 185 {
+O act-out;
+V "A";
+T "Z";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 38;
+CF 37: "exc";
+DD 186;
+DD 178;
+}
+ACTI 186 {
+O act-in;
+V "A";
+T "Z";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+PI 24;
+CF 187;
+SU 189;
+}
+ACTI 187 {
+O act-in;
+V "TRUE";
+T "Ljava/lang/Boolean";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ljava/lang/Boolean.TRUE":-3;
+PI 176;
+CF 188;
+SU 189;
+}
+ACTI 188 {
+O act-in;
+V "FALSE";
+T "Ljava/lang/Boolean";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ljava/lang/Boolean.FALSE":-3;
+PI 177;
+CF 194;
+SU 189;
+}
+ACTO 189 {
+O act-out;
+V "A";
+T "Z";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 50;
+CF 49: "exc";
+DD 178;
+}
+ACTO 190 {
+O act-out;
+V "A";
+T "Z";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ledu/cmu/cs/mvelezce/Dummy7.A":-3;
+CF 73;
+CF 72: "exc";
+DD 182;
+}
+ACTI 191 {
+O act-in;
+V "[R] |136|MERGE *";
+T "?unknown?";
+P 10;
+S "java/lang/Boolean.java":213,0-213,0;
+B "<???>":-4;
+CF 161;
+DD 244;
+}
+FRMI 192 {
+O form-in;
+V "[MR] |137|MERGE *";
+T "?unknown?";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 35: "exc";
+CF 181;
+DH 193;
+DH 195;
+DH 196;
+PS 193;
+}
+FRMO 193 {
+O form-out;
+V "[MR] |137|MERGE *";
+T "?unknown?";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 34;
+PS 192;
+}
+ACTI 194 {
+O act-in;
+V "[R] |0|UNIQ([])";
+T "Ljava/lang/String";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<[]>":-5;
+CF 47;
+PI 197;
+SU 189;
+SU 49;
+}
+ACTI 195 {
+O act-in;
+V "[R] |136|MERGE *";
+T "?unknown?";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 54;
+DD 216;
+}
+ACTI 196 {
+O act-in;
+V "[R] |136|MERGE *";
+T "?unknown?";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 61;
+DD 218;
+}
+FRMI 197 {
+O form-in;
+V "[R] |0|UNIQ([])";
+T "Ljava/lang/String";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":0,0-0,0;
+B "<[]>":-5;
+CF 2;
+CF 177;
+DH 7;
+}
+ACTO 198 {
+O act-out;
+V "[M] |8|MERGE value";
+T "Z";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "Ljava/lang/Boolean.value":-4;
+CF 74: "exc";
+CF 75;
+}
+ACTO 199 {
+O act-out;
+V "[M] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 80: "exc";
+CF 200;
+DH 206;
+DH 200;
+DH 202;
+DH 204;
+}
+ACTI 200 {
+O act-in;
+V "[MR] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 81;
+PS 201;
+DD 225;
+}
+ACTO 201 {
+O act-out;
+V "[MR] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 82: "exc";
+CF 202;
+DH 206;
+DH 208;
+DH 202;
+DH 204;
+PS 200;
+}
+ACTI 202 {
+O act-in;
+V "[MR] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 83;
+PS 203;
+DD 226;
+}
+ACTO 203 {
+O act-out;
+V "[MR] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 84: "exc";
+CF 204;
+DH 206;
+DH 208;
+DH 204;
+PS 202;
+}
+ACTI 204 {
+O act-in;
+V "[MR] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 85;
+PS 205;
+DD 227;
+}
+ACTO 205 {
+O act-out;
+V "[MR] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 86: "exc";
+CF 206;
+DH 206;
+DH 208;
+PS 204;
+}
+ACTI 206 {
+O act-in;
+V "[MR] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 87;
+PS 207;
+DD 228;
+}
+ACTO 207 {
+O act-out;
+V "[MR] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 88: "exc";
+CF 208;
+DH 208;
+PS 206;
+}
+ACTI 208 {
+O act-in;
+V "[R] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 89;
+DD 229;
+}
+ACTO 209 {
+O act-out;
+V "[M] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 92: "exc";
+CF 93;
+}
+ACTO 210 {
+O act-out;
+V "[M] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 100: "exc";
+CF 101;
+}
+ACTO 211 {
+O act-out;
+V "[M] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 104: "exc";
+CF 105;
+}
+ACTO 212 {
+O act-out;
+V "[M] |136|MERGE *";
+T "?unknown?";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "<???>":-4;
+CF 110: "exc";
+CF 111;
+}
+NORM 213 {
+O compound;
+V "immutable";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+DD 38;
+CF 48;
+}
+NORM 214 {
+O compound;
+V "many2many";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+DD 46;
+CF 213;
+}
+NORM 215 {
+O compound;
+V "many2many";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+DD 53;
+CF 55;
+}
+NORM 216 {
+O compound;
+V "many2many";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+DD 56;
+CF 57;
+}
+NORM 217 {
+O compound;
+V "many2many";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+DD 60;
+CF 62;
+}
+NORM 218 {
+O compound;
+V "many2many";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-1;
+DD 63;
+CF 178;
+}
+NORM 219 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 68;
+CF 69;
+}
+NORM 220 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 70;
+CF 71;
+}
+NORM 221 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 74;
+DD 198;
+CF 198;
+}
+NORM 222 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 76;
+CF 77;
+}
+NORM 223 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 78;
+CF 79;
+}
+NORM 224 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 80;
+DD 199;
+CF 199;
+}
+NORM 225 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 82;
+DD 201;
+CF 201;
+}
+NORM 226 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 84;
+DD 203;
+CF 203;
+}
+NORM 227 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 86;
+DD 205;
+CF 205;
+}
+NORM 228 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 88;
+DD 207;
+CF 207;
+}
+NORM 229 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 90;
+CF 91;
+}
+NORM 230 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 92;
+DD 209;
+CF 209;
+}
+NORM 231 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 94;
+CF 95;
+}
+NORM 232 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 96;
+CF 97;
+}
+NORM 233 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 98;
+CF 99;
+}
+NORM 234 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 100;
+DD 210;
+CF 210;
+}
+NORM 235 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 102;
+CF 103;
+}
+NORM 236 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 104;
+DD 211;
+CF 211;
+}
+NORM 237 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 106;
+CF 107;
+}
+NORM 238 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 108;
+CF 109;
+}
+NORM 239 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 110;
+DD 212;
+CF 212;
+}
+NORM 240 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 112;
+CF 113;
+}
+NORM 241 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 114;
+CF 115;
+}
+NORM 242 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 116;
+CF 117;
+}
+NORM 243 {
+O compound;
+V "many2many";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-1;
+DD 118;
+CF 182;
+}
+NORM 244 {
+O compound;
+V "many2many";
+P 10;
+S "java/lang/Boolean.java":0,0-0,0;
+B "java.lang.Boolean.toBoolean(Ljava/lang/String;)Z":-1;
+DD 164;
+DD 165;
+CF 164;
+}
+NORM 245 {
+O compound;
+V "CALL_RET";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":-9;
+CF 11;
+CD 13;
+HE 13;
+}
+NORM 246 {
+O compound;
+V "CALL_RET";
+P 4;
+S "edu/cmu/cs/mvelezce/Dummy7.java":11,0-11,0;
+B "edu.cmu.cs.mvelezce.Dummy7.main([Ljava/lang/String;)V":-9;
+CF 15;
+CD 17;
+CD 19;
+CD 21;
+CD 23;
+HE 17;
+HE 19;
+HE 21;
+HE 23;
+}
+NORM 247 {
+O compound;
+V "CALL_RET";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-9;
+CF 185;
+CD 38;
+HE 38;
+}
+NORM 248 {
+O compound;
+V "CALL_RET";
+P 5;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeRootMethod()V":-9;
+CF 189;
+CD 50;
+CD 51;
+HE 50;
+HE 51;
+}
+NORM 249 {
+O compound;
+V "CALL_RET";
+P 6;
+S "com/ibm/wala/FakeRootClass.java":0,0-0,0;
+B "com.ibm.wala.FakeRootClass.fakeWorldClinit()V":-9;
+CF 190;
+CD 73;
+HE 73;
+}
+NORM 250 {
+O compound;
+V "CALL_RET";
+P 8;
+S "java/lang/Boolean.java":129,0-129,0;
+B "java.lang.Boolean.valueOf(Ljava/lang/String;)Ljava/lang/Boolean;":-9;
+CF 133;
+CD 135;
+CD 141;
+CD 142;
+HE 135;
+HE 141;
+}
+}

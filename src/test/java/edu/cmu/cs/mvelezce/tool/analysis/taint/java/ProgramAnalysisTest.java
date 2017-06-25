@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -60,10 +62,10 @@ public class ProgramAnalysisTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        Map<JavaRegion, Set<String>>  outputSave = ProgramAnalysis.analyse(Sleep1.CLASS, args, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
+//        Map<JavaRegion, Set<String>>  outputSave = ProgramAnalysis.analyze(Sleep1.CLASS, args, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
 //
 //        args = new String[0];
-//        Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyse(Sleep1.CLASS, args, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
+//        Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyze(Sleep1.CLASS, args, Sleep1.FILENAME, programFiles, relevantRegionToOptions);
 //
 //        this.checkIfEqual(outputSave, outputRead);
 //    }
@@ -77,17 +79,17 @@ public class ProgramAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>>  outputSave = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>>  outputSave = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
 
         args = new String[0];
-        Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
 
         this.checkIfEqual(outputSave, outputRead);
     }
 
     @Test
     public void testAnalyse1() throws ParseException {
-        Map<JavaRegion, Set<String>> output = ProgramAnalysis.analyse(JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> output = ProgramAnalysis.analyze(JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
         Assert.assertEquals(4, output.size());
     }
 
@@ -105,7 +107,7 @@ public class ProgramAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
     }
 
     @Test
@@ -122,7 +124,7 @@ public class ProgramAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
     }
 
     @Test
@@ -139,7 +141,7 @@ public class ProgramAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
     }
 
     @Test
@@ -156,7 +158,29 @@ public class ProgramAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyse(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+    }
+
+    @Test
+    public void testSleep3() throws IOException, ParseException {
+        String programName = "sleep3";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep3/edu.cmu.cs.mvelezce.Sleep3.main.pdg";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep3.main";
+        List<String> features = new ArrayList<>();
+        features.add("A");
+        features.add("B");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
     }
 
 }

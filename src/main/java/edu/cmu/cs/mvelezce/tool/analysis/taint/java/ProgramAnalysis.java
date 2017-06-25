@@ -7,9 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -45,7 +43,7 @@ public class ProgramAnalysis {
 //    public static final String REGION_JAVA_LINE_NUMBER = "regionJavaLineNumber";
     public static final String START_BYTECODE_INDEX = "startBytecodeIndex";
 
-    public static Map<JavaRegion, Set<String>> analyse(String programName, String[] args) throws IOException, ParseException {
+    public static Map<JavaRegion, Set<String>> analyze(String programName, String[] args) throws IOException, ParseException {
         Options.getCommandLine(args);
 
         String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
@@ -66,14 +64,38 @@ public class ProgramAnalysis {
         return relevantRegionToOptions;
     }
 
-    public static Map<JavaRegion, Set<String>> analyse(String programName, String[] args, String database, String program) throws IOException, ParseException {
-        Map<JavaRegion, Set<String>> results = ProgramAnalysis.analyse(programName, args);
+    public static Map<JavaRegion, Set<String>> analyze(String programName, String[] args, String sdgFile, String entryPoint, List<String> features) throws IOException, ParseException {
+        Map<JavaRegion, Set<String>> results = ProgramAnalysis.analyze(programName, args);
 
         if(results != null) {
             return results;
         }
 
-        Map<JavaRegion, Set<String>> relevantRegionToOptions = ProgramAnalysis.analyse(database, program);
+        String criterionFormat = "booleanValue()";
+        List<String> criterionLabels = Slicer.getCriterionLabel(sdgFile, entryPoint, criterionFormat);
+        Map<String, String> featuresToLabels = new HashMap<>();
+
+        for(int i = 0; i < criterionLabels.size(); i++) {
+            featuresToLabels.put(features.get(i), criterionLabels.get(i));
+        }
+
+        Map<JavaRegion, Set<String>> relevantRegionToOptions = Slicer.analyze(sdgFile, featuresToLabels);
+
+        if(Options.checkIfSave()) {
+            ProgramAnalysis.writeToFile(programName, relevantRegionToOptions);
+        }
+
+        return relevantRegionToOptions;
+    }
+
+    public static Map<JavaRegion, Set<String>> analyze(String programName, String[] args, String database, String program) throws IOException, ParseException {
+        Map<JavaRegion, Set<String>> results = ProgramAnalysis.analyze(programName, args);
+
+        if(results != null) {
+            return results;
+        }
+
+        Map<JavaRegion, Set<String>> relevantRegionToOptions = ProgramAnalysis.analyze(database, program);
 
 //        try {
 //            Map<JavaRegion, Set<String>> = relevantRegionToOptions = VarexJProcessor.parse();
@@ -88,7 +110,7 @@ public class ProgramAnalysis {
         return relevantRegionToOptions;
     }
 
-    public static Map<JavaRegion, Set<String>> analyse(String database, String program) throws ParseException {
+    public static Map<JavaRegion, Set<String>> analyze(String database, String program) throws ParseException {
         // This is hardcode to get the output of Lotrack
         List<String> fields = new ArrayList<>();
         fields.add(ProgramAnalysis.PACKAGE);

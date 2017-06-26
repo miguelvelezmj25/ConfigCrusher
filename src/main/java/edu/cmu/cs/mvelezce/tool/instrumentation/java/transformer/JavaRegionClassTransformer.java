@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.*;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -132,6 +133,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
+            if(methodNode.name.equals("randomSequenceOfActions")) {
+                int i = 0;
+            }
+
             MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
             System.out.println("Before transforming");
             System.out.println(graph.toDotString(methodNode.name));
@@ -148,20 +153,20 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
             Collections.reverse(regionsInMethodReversed);
 
-            if(methodNode.name.equals("enterElevator")) {
+            if(methodNode.name.equals("randomSequenceOfActions")) {
                 int i = 0;
             }
 
             this.calculateASMStartIndex(regionsInMethod, methodNode);
 
-            if(methodNode.name.equals("enterElevator")) {
+            if(methodNode.name.equals("randomSequenceOfActions")) {
                 int i = 0;
             }
             Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
             for(JavaRegion region : regionsInMethod) {
 //                System.out.println(region.getStartBytecodeIndex());
-                if(methodNode.name.equals("enterElevator")) {
+                if(methodNode.name.equals("randomSequenceOfActions")) {
                     int i = 0;
                 }
 
@@ -412,27 +417,44 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 //        }
 
         int methodStartIndex = 0;
+        String method = tempRegion.getRegionMethod();
+
+        if(method.equals("<init>")) {
+            method = tempRegion.getRegionClass();
+        }
+
+        method += "(";
 
         for(String outputLine : this.javapResult) {
-            if(outputLine.contains(tempRegion.getRegionMethod() + "(")) {
+            if(outputLine.contains(method)) {
                 break;
             }
 
             methodStartIndex++;
         }
 
-        if(methodNode.name.equals("enterElevator")) {
+        if(methodNode.name.equals("randomSequenceOfActions")) {
             int i = 0;
         }
 
-        // 2 are the lines before the actual code in a method
-        int instructionNumber = -2;
+        int instructionNumber = 0;
+        int currentBytecodeIndex = -1;
         Set<JavaRegion> updatedRegions = new HashSet<>();
 
-        // TODO exit method when all regions have been updated
-
-        for(int i = methodStartIndex; i < this.javapResult.size(); i++) {
+        // 2 are the lines before the actual code in a method
+        for(int i = (methodStartIndex + 2); i < this.javapResult.size(); i++) {
             String outputLine = this.javapResult.get(i);
+
+            if(!outputLine.contains(":")) {
+                continue;
+            }
+
+            int outputLineBytecodeIndex = -1;
+            String outputLineBytecodeIndexString = outputLine.substring(0, outputLine.indexOf(":")).trim();
+
+            if(StringUtils.isNumeric(outputLineBytecodeIndexString)) {
+                outputLineBytecodeIndex = Integer.valueOf(outputLineBytecodeIndexString);
+            }
 
             for(JavaRegion region : regionsInMethod) {
                 if(updatedRegions.contains(region)) {
@@ -440,6 +462,9 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
 
                 if(outputLine.contains(region.getStartBytecodeIndex() + ":")) {
+                    if(methodNode.name.equals("randomSequenceOfActions")) {
+                        int z = 0;
+                    }
 //                if(instructionNumber == region.getStartBytecodeIndex()) {
                     InsnList instructionsList = methodNode.instructions;
                     ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
@@ -447,6 +472,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                     while(instructions.hasNext()) {
                         AbstractInsnNode instruction = instructions.next();
+
+                        if(methodNode.name.equals("randomSequenceOfActions") && !instructions.hasNext()) {
+                            int iasdfas = 0;
+                        }
 
                         if(instruction.getOpcode() >= 0) {
                             instructionCounter++;
@@ -456,7 +485,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
 
                         if(instructionCounter == instructionNumber) {
-                            if(methodNode.name.equals("bftNodeSearch")) {
+                            if(methodNode.name.equals("randomSequenceOfActions")) {
                                 int fsddf = 0;
                             }
 
@@ -468,11 +497,28 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
 
                 if(updatedRegions.size() == regionsInMethod.size()) {
+                    if(methodNode.name.equals("randomSequenceOfActions")) {
+                        int fsddf = 0;
+                    }
                     break;
                 }
             }
 
-            instructionNumber++;
+            if(outputLineBytecodeIndex > currentBytecodeIndex) {
+                instructionNumber++;
+                currentBytecodeIndex = outputLineBytecodeIndex;
+            }
+
+            if(updatedRegions.size() == regionsInMethod.size()) {
+                if(methodNode.name.equals("randomSequenceOfActions")) {
+                    int fsddf = 0;
+                }
+                break;
+            }
+        }
+
+        if(updatedRegions.size() != regionsInMethod.size()) {
+            throw new RuntimeException("Did not update some regions");
         }
     }
 

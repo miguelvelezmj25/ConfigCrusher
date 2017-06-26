@@ -45,9 +45,9 @@ public class MethodBlock {
 
 
     public void addSuccessor(MethodBlock methodBlock) {
-        if(this.successors.size() >= 2) {
-            throw new IllegalArgumentException("A method block cannot have more than 2 successors");
-        }
+//        if(this.successors.size() >= 2) {
+//            throw new IllegalArgumentException("A method block cannot have more than 2 successors");
+//        }
 
         successors.add(methodBlock);
     }

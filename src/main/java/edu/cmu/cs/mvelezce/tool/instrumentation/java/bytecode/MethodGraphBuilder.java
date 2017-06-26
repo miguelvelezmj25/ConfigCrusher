@@ -96,6 +96,25 @@ public class MethodGraphBuilder {
                     currentMethodBlock = successor;
                 }
             }
+            else if(instructionType == AbstractInsnNode.TABLESWITCH_INSN) {
+                TableSwitchInsnNode tableSwitchInsnNode = (TableSwitchInsnNode) instruction;
+                MethodBlock successor = graph.getMethodBlock(tableSwitchInsnNode.dflt.getLabel());
+                graph.addEdge(currentMethodBlock, successor);
+
+                for(LabelNode labelNode : tableSwitchInsnNode.labels) {
+                    successor = graph.getMethodBlock(labelNode.getLabel());
+                    graph.addEdge(currentMethodBlock, successor);
+                }
+            } else if(instructionType == AbstractInsnNode.LOOKUPSWITCH_INSN) {
+                LookupSwitchInsnNode lookupSwitchInsnNode = (LookupSwitchInsnNode) instruction;
+                MethodBlock successor = graph.getMethodBlock(lookupSwitchInsnNode.dflt.getLabel());
+                graph.addEdge(currentMethodBlock, successor);
+
+                for(LabelNode labelNode : lookupSwitchInsnNode.labels) {
+                    successor = graph.getMethodBlock(labelNode.getLabel());
+                    graph.addEdge(currentMethodBlock, successor);
+                }
+            }
             else if(instruction.getOpcode() >= Opcodes.GOTO && instruction.getOpcode() <= Opcodes.RETURN) {
                 blocksWithReturn.add(currentMethodBlock);
             }

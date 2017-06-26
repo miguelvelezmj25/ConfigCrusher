@@ -35,7 +35,7 @@ public class Slicer {
             Set<SDGNode> relevantNodes = new HashSet<>();
 
             for (SDGNode node : slice) {
-                if(node.getLabel().contains("if") && !node.getBytecodeMethod().startsWith("java.")) {
+                if(node.getLabel().startsWith("if ") && !node.getBytecodeMethod().startsWith("java.")) {
                     relevantNodes.add(node);
                 }
             }
@@ -43,8 +43,16 @@ public class Slicer {
             for(SDGNode node : relevantNodes) {
                 System.out.println(node.getBytecodeIndex());
                 System.out.println(node.getLabel());
+                if(node.getLabel().equals("cleanupTimeShifts")) {
+                    int i = 0;
+                }
                 System.out.println(node.getBytecodeMethod());
                 System.out.println(node.getBytecodeName());
+
+                if(node.getBytecodeIndex() < 0) {
+                    System.out.println("Skipped due to negative index");
+                    continue;
+                }
                 System.out.println("");
 
                 String entryPackage = node.getBytecodeMethod();

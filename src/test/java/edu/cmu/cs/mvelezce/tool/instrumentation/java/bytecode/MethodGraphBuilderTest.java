@@ -150,6 +150,21 @@ public class MethodGraphBuilderTest {
     }
 
     @Test
+    public void testSleep20() throws IOException {
+        ClassTransformerReader reader = new ClassTransformerReader();
+        ClassNode classNode = reader.readClass(Sleep20.class.getCanonicalName());
+
+        List<MethodNode> methods = classNode.methods;
+
+        for(MethodNode method : methods) {
+            if(method.name.equals("main")) {
+                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+                System.out.println(methodGraph.toDotString(method.name));
+            }
+        }
+    }
+
+    @Test
     public void testBuildMethodGraph1() throws IOException {
         ClassTransformerReader reader = new ClassTransformerReader();
         ClassNode classNode = reader.readClass(Sleep1.FILENAME);

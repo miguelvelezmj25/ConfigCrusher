@@ -36,7 +36,6 @@ public class ClassTransformerReaderTest {
 
             System.out.println();
         }
-
     }
 
     @Test

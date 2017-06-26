@@ -55,12 +55,16 @@ public class Slicer {
                 }
                 System.out.println("");
 
+                if(node.getBytecodeIndex() == 970) {
+                    int i = 0;
+                }
+
                 String entryPackage = node.getBytecodeMethod();
-                entryPackage = entryPackage.substring(0, entryPackage.lastIndexOf("("));
+//                entryPackage = entryPackage.substring(0, entryPackage.lastIndexOf("("));
                 String entryMethod = entryPackage.substring(entryPackage.lastIndexOf(".") + 1);
                 entryPackage = entryPackage.replace("." + entryMethod, "");
                 String entryClass = entryPackage.substring(entryPackage.lastIndexOf(".") + 1);
-                entryPackage = entryPackage.replace("." + entryClass, "");
+                entryPackage = entryPackage.substring(0, entryPackage.lastIndexOf("." + entryClass));
 
                 JavaRegion javaRegion = new JavaRegion(entryPackage, entryClass, entryMethod, node.getBytecodeIndex());
                 boolean newRegion = true;

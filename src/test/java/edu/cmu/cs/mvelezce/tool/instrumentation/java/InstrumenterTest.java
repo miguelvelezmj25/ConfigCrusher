@@ -123,6 +123,27 @@ public class InstrumenterTest {
     }
 
     @Test
+    public void testSleep17() throws IOException, ParseException, InterruptedException {
+        String programName = "Sleep17";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+    }
+
+    @Test
     public void testInstrumentPipeline1() throws IOException, InterruptedException {
         // Program directory
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";

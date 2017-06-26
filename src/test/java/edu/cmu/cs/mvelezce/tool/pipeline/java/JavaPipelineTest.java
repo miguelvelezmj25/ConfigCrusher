@@ -42,7 +42,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep14() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep14";
+        String programName = "sleep14";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
@@ -86,7 +86,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep18() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep18";
+        String programName = "sleep18";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep18";
@@ -130,7 +130,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testPngtastic() throws IOException, ParseException, InterruptedException {
-//        String programName = "Sleep14";
+//        String programName = "sleep14";
 //        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
@@ -267,7 +267,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep1";
+        String programName = "sleep1";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
@@ -311,7 +311,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep2() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep2";
+        String programName = "sleep2";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
@@ -355,7 +355,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep3() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep3";
+        String programName = "sleep3";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
@@ -399,7 +399,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep1_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep1";
+        String programName = "sleep1";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
@@ -446,7 +446,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep2_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep2";
+        String programName = "sleep2";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
@@ -493,7 +493,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep3_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep3";
+        String programName = "sleep3";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
@@ -541,7 +541,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep4_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep4";
+        String programName = "sleep4";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
@@ -588,7 +588,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep5_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep5";
+        String programName = "sleep5";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep5";
@@ -635,7 +635,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep7_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep7";
+        String programName = "sleep7";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
@@ -682,7 +682,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep8_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep8";
+        String programName = "sleep8";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
@@ -729,7 +729,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep9_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep9";
+        String programName = "sleep9";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep9";
@@ -776,7 +776,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep10_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep10";
+        String programName = "sleep10";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
@@ -824,7 +824,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep11_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep11";
+        String programName = "sleep11";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep11";
@@ -872,7 +872,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep12_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep12";
+        String programName = "sleep12";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
@@ -920,7 +920,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep13_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep13";
+        String programName = "sleep13";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep13";
@@ -967,7 +967,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep14_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep14";
+        String programName = "sleep14";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
@@ -1016,7 +1016,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep15_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep15";
+        String programName = "sleep15";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep15";
@@ -1065,7 +1065,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep16_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep16";
+        String programName = "sleep16";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep16";
@@ -1113,7 +1113,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep17_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep17";
+        String programName = "sleep17";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep17";
@@ -1162,7 +1162,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep18_1() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep18";
+        String programName = "sleep18";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep18";
@@ -1211,7 +1211,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep4() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep4";
+        String programName = "sleep4";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
@@ -1255,7 +1255,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep7() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep7";
+        String programName = "sleep7";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
@@ -1299,7 +1299,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep8() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep8";
+        String programName = "sleep8";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
@@ -1343,7 +1343,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep9() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep9";
+        String programName = "sleep9";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep9";
@@ -1388,7 +1388,7 @@ public class JavaPipelineTest {
     @Test
     public void testSleep10() throws IOException, ParseException, InterruptedException {
         // TODO method 1 and method 2 depend on features so instrumentation is not needed
-        String programName = "Sleep10";
+        String programName = "sleep10";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
@@ -1432,7 +1432,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep11() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep11";
+        String programName = "sleep11";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep11";
@@ -1476,7 +1476,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep12() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep12";
+        String programName = "sleep12";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
@@ -1520,7 +1520,7 @@ public class JavaPipelineTest {
 
     @Test
     public void testSleep13() throws IOException, ParseException, InterruptedException {
-        String programName = "Sleep13";
+        String programName = "sleep13";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep13";

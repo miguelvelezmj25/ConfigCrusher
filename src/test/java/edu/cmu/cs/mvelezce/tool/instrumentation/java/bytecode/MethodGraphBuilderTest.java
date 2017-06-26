@@ -157,7 +157,12 @@ public class MethodGraphBuilderTest {
         List<MethodNode> methods = classNode.methods;
 
         for(MethodNode method : methods) {
-            if(method.name.equals("main")) {
+//            if(method.name.equals("main")) {
+//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                System.out.println(methodGraph.toDotString(method.name));
+//            }
+
+            if(method.name.equals("method")) {
                 MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
                 System.out.println(methodGraph.toDotString(method.name));
             }

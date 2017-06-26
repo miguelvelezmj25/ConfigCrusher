@@ -15,7 +15,57 @@ import java.util.Set;
 public class MethodGraphTest {
 
     @Test
-    public void testTODO() {
+    public void testMethods2() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock g = new MethodBlock("G");
+        MethodBlock h = new MethodBlock("H");
+        MethodBlock i = new MethodBlock("I");
+        MethodBlock j = new MethodBlock("J");
+
+        // Add vertices
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+        methodGraph.addMethodBlock(g);
+        methodGraph.addMethodBlock(h);
+        methodGraph.addMethodBlock(i);
+        methodGraph.addMethodBlock(j);
+
+        // Add edges
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(b, d);
+        methodGraph.addEdge(b, e);
+        methodGraph.addEdge(c, f);
+        methodGraph.addEdge(d, g);
+        methodGraph.addEdge(e, h);
+        methodGraph.addEdge(f, h);
+        methodGraph.addEdge(g, h);
+        methodGraph.addEdge(h, i);
+        methodGraph.addEdge(i, j);
+
+        System.out.println(methodGraph.toDotString("test"));
+        MethodBlock result = methodGraph.getImmediateDominator(b);
+        Assert.assertEquals(a, result);
+
+        result = methodGraph.getImmediatePostDominator(b);
+        Assert.assertEquals(h, result);
+    }
+
+    @Test
+    public void testMethods1() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();
 

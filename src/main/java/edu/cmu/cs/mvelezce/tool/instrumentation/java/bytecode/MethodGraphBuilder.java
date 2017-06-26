@@ -64,7 +64,7 @@ public class MethodGraphBuilder {
                 LabelNode labelNode = (LabelNode) instruction;
                 MethodBlock successor = graph.getMethodBlock(labelNode.getLabel());
 
-                if(currentMethodBlock != null && (previousInstruction.getOpcode() < Opcodes.GOTO || previousInstruction.getOpcode() > Opcodes.RETURN)) {
+                if(currentMethodBlock != null && (previousInstruction.getOpcode() < Opcodes.GOTO || previousInstruction.getOpcode() > Opcodes.RETURN) && previousInstruction.getOpcode() != Opcodes.ATHROW) {
                     graph.addEdge(currentMethodBlock, successor);
                 }
 
@@ -105,7 +105,8 @@ public class MethodGraphBuilder {
                     successor = graph.getMethodBlock(labelNode.getLabel());
                     graph.addEdge(currentMethodBlock, successor);
                 }
-            } else if(instructionType == AbstractInsnNode.LOOKUPSWITCH_INSN) {
+            }
+            else if(instructionType == AbstractInsnNode.LOOKUPSWITCH_INSN) {
                 LookupSwitchInsnNode lookupSwitchInsnNode = (LookupSwitchInsnNode) instruction;
                 MethodBlock successor = graph.getMethodBlock(lookupSwitchInsnNode.dflt.getLabel());
                 graph.addEdge(currentMethodBlock, successor);
@@ -115,7 +116,7 @@ public class MethodGraphBuilder {
                     graph.addEdge(currentMethodBlock, successor);
                 }
             }
-            else if(instruction.getOpcode() >= Opcodes.GOTO && instruction.getOpcode() <= Opcodes.RETURN) {
+            else if(instruction.getOpcode() == Opcodes.ATHROW || (instruction.getOpcode() >= Opcodes.GOTO && instruction.getOpcode() <= Opcodes.RETURN)) {
                 blocksWithReturn.add(currentMethodBlock);
             }
 

@@ -206,7 +206,6 @@ public class ProgramAnalysisTest {
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
     }
 
-
     @Test
     public void testSleep17() throws IOException, ParseException {
         String programName = "sleep17";
@@ -216,6 +215,27 @@ public class ProgramAnalysisTest {
         features.add("A");
         features.add("B");
         features.add("C");
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
+    }
+
+    @Test
+    public void testElevatorM() throws IOException, ParseException {
+        String programName = "elevator-m";
+        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/elevator-m/edu.cmu.cs.mvelezce.PL_Interface_impl.main.pdg";
+        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl.main";
+        List<String> features = new ArrayList<>();
+        features.add("FEATUREWEIGHT");
 
         // Program arguments
 //        String[] args = new String[0];

@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder;
@@ -123,7 +124,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             boolean instrumentMethod = false;
 
             for(JavaRegion javaRegion : regionsInClass) {
-                if(javaRegion.getRegionMethod().equals(methodNode.name)) {
+                if(javaRegion.getRegionMethod().equals(methodNode.name + methodNode.desc)) {
                     instrumentMethod = true;
                     break;
                 }
@@ -133,7 +134,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
-            if(methodNode.name.equals("randomSequenceOfActions")) {
+            if(methodNode.name.equals("main")) {
                 int i = 0;
             }
 
@@ -149,24 +150,24 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
             // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
             methodNode.instructions.toArray();
-            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name);
+            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name + methodNode.desc);
             List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
             Collections.reverse(regionsInMethodReversed);
 
-            if(methodNode.name.equals("randomSequenceOfActions")) {
+            if(methodNode.name.equals("main")) {
                 int i = 0;
             }
 
             this.calculateASMStartIndex(regionsInMethod, methodNode);
 
-            if(methodNode.name.equals("randomSequenceOfActions")) {
+            if(methodNode.name.equals("main")) {
                 int i = 0;
             }
             Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
             for(JavaRegion region : regionsInMethod) {
 //                System.out.println(region.getStartBytecodeIndex());
-                if(methodNode.name.equals("randomSequenceOfActions")) {
+                if(methodNode.name.equals("main")) {
                     int i = 0;
                 }
 
@@ -364,58 +365,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
     public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
         JavaRegion tempRegion = regionsInMethod.get(0);
-//        String command = "javap -classpath " + this.directory + " -p -c "+ tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass();
-//        System.out.println(command);
-//        List<String> output = new LinkedList<>();
-////        Process process;
-//
-//        if(methodNode.name.equals("bftNodeSearch")) {
-//            int i = 0;
-//        }
-//
-//        try {
-//            // TODO do this call per class
-//            Process p = Runtime.getRuntime().exec(command);
-//            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-//
-//            String s;
-//            while ((s = stdInput.readLine()) != null) {
-//                if(!s.isEmpty()) {
-//                    output.add(s);
-//                }
-//            }
-//
-////            ProcessBuilder pb = new ProcessBuilder(command);
-////            pb.redirectErrorStream(true);
-////            Process process = pb.start();
-////            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-////            String line;
-////            while((line = reader.readLine()) != null) {
-////                if(!line.isEmpty()) {
-////                    output.add(line);
-////                }
-////            }
-////            process.waitFor();
-//
-//
-////            process = Runtime.getRuntime().exec(command);
-//////            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//////            while ((reader.readLine()) != null) {}
-////            process.waitFor();
-////
-////            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-////            String line;
-////
-////            while((line = reader.readLine()) != null) {
-////                if(!line.isEmpty()) {
-////                    output.add(line);
-////                }
-////            }
-//        }
-//        catch(IOException ie) {
-//            ie.printStackTrace();
-//        }
-
         int methodStartIndex = 0;
         String method = tempRegion.getRegionMethod();
 
@@ -423,18 +372,28 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             method = tempRegion.getRegionClass();
         }
 
-        method += "(";
+        method = method.substring(0, method.lastIndexOf("("));
 
         for(String outputLine : this.javapResult) {
-            if(outputLine.contains(method)) {
-                break;
+            if(outputLine.contains(" " + method + "(")) {
+                String formalParametersString = outputLine.substring(outputLine.indexOf("(") + 1, outputLine.indexOf(")"));
+                List<String> formalParameters = Arrays.asList(formalParametersString.split(","));
+                StringBuilder methodDescriptors = new StringBuilder();
+
+                for(String formalParameter : formalParameters) {
+                    String methodDescriptor = BytecodeUtils.toBytecodeDescriptor(formalParameter.trim());
+                    methodDescriptors.append(methodDescriptor);
+                }
+
+                method = tempRegion.getRegionMethod();
+                String regionFormalParameters = method.substring(method.indexOf("(") + 1, method.indexOf(")"));
+
+                if(methodDescriptors.toString().equals(regionFormalParameters)) {
+                    break;
+                }
             }
 
             methodStartIndex++;
-        }
-
-        if(methodNode.name.equals("randomSequenceOfActions")) {
-            int i = 0;
         }
 
         int instructionNumber = 0;
@@ -462,7 +421,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
 
                 if(outputLine.contains(region.getStartBytecodeIndex() + ":")) {
-                    if(methodNode.name.equals("randomSequenceOfActions")) {
+                    if(methodNode.name.equals("main")) {
                         int z = 0;
                     }
 //                if(instructionNumber == region.getStartBytecodeIndex()) {
@@ -473,7 +432,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     while(instructions.hasNext()) {
                         AbstractInsnNode instruction = instructions.next();
 
-                        if(methodNode.name.equals("randomSequenceOfActions") && !instructions.hasNext()) {
+                        if(methodNode.name.equals("main") && !instructions.hasNext()) {
                             int iasdfas = 0;
                         }
 
@@ -485,7 +444,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
 
                         if(instructionCounter == instructionNumber) {
-                            if(methodNode.name.equals("randomSequenceOfActions")) {
+                            if(methodNode.name.equals("main")) {
                                 int fsddf = 0;
                             }
 
@@ -497,7 +456,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
 
                 if(updatedRegions.size() == regionsInMethod.size()) {
-                    if(methodNode.name.equals("randomSequenceOfActions")) {
+                    if(methodNode.name.equals("main")) {
                         int fsddf = 0;
                     }
                     break;
@@ -510,7 +469,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             }
 
             if(updatedRegions.size() == regionsInMethod.size()) {
-                if(methodNode.name.equals("randomSequenceOfActions")) {
+                if(methodNode.name.equals("main")) {
                     int fsddf = 0;
                 }
                 break;
@@ -715,5 +674,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             instruction = instruction.getNext();
         }
     }
+
+
+
 
 }

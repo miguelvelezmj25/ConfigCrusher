@@ -277,6 +277,21 @@ public class ExecutorTest {
     }
 
     @Test
+    public void testSleep1() throws IOException, ParseException {
+        String programName = "Sleep1";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
+
+        String[] args = new String[0];
+
+        Set<String> options = new HashSet<>();
+        options.add("A");
+
+        Set<Set<String>> configurations = Helper.getConfigurations(options);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+    }
+
+    @Test
     public void testSleep2() throws IOException, ParseException {
         String programName = "Sleep2";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";

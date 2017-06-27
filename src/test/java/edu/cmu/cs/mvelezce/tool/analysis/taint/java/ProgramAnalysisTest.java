@@ -248,6 +248,7 @@ public class ProgramAnalysisTest {
         args[1] = "-saveres";
 
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
+        System.out.println(partialRegionsToOptions.size());
     }
 
 }

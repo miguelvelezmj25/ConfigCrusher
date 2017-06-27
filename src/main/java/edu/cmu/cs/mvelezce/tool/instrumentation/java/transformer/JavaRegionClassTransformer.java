@@ -117,7 +117,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         Set<JavaRegion> regionsInClass = this.getRegionsInClass(classPackage, className);
 
         for(MethodNode methodNode : classNode.methods) {
-            if(methodNode.name.equals("enterElevator")) {
+            if(methodNode.name.equals("<init>")) {
                 int i = 0;
             }
 
@@ -368,14 +368,19 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         int methodStartIndex = 0;
         String method = tempRegion.getRegionMethod();
 
-        if(method.equals("<init>")) {
-            method = tempRegion.getRegionClass();
+        if(method.startsWith("<init>")) {
+            method = method.replace("<init>", "");
+            method = tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass() + method;
         }
 
         method = method.substring(0, method.lastIndexOf("("));
 
         for(String outputLine : this.javapResult) {
             if(outputLine.contains(" " + method + "(")) {
+                if(tempRegion.getRegionMethod().contains("isBlocked")) {
+                    int z = 0;
+                }
+
                 String formalParametersString = outputLine.substring(outputLine.indexOf("(") + 1, outputLine.indexOf(")"));
                 List<String> formalParameters = Arrays.asList(formalParametersString.split(","));
                 StringBuilder methodDescriptors = new StringBuilder();
@@ -385,8 +390,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     methodDescriptors.append(methodDescriptor);
                 }
 
-                method = tempRegion.getRegionMethod();
-                String regionFormalParameters = method.substring(method.indexOf("(") + 1, method.indexOf(")"));
+                String regionMethod = tempRegion.getRegionMethod();
+                String regionFormalParameters = regionMethod.substring(regionMethod.indexOf("(") + 1, regionMethod.indexOf(")"));
 
                 if(methodDescriptors.toString().equals(regionFormalParameters)) {
                     break;
@@ -421,9 +426,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
 
                 if(outputLine.contains(region.getStartBytecodeIndex() + ":")) {
-                    if(methodNode.name.equals("main")) {
-                        int z = 0;
-                    }
 //                if(instructionNumber == region.getStartBytecodeIndex()) {
                     InsnList instructionsList = methodNode.instructions;
                     ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();

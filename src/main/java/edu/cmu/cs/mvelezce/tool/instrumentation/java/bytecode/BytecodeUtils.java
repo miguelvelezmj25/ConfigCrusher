@@ -60,6 +60,10 @@ public class BytecodeUtils {
      * Converts to a descriptor from a Java class name
      */
     public static String toBytecodeDescriptor(String classname) {
+        if(classname.isEmpty()) {
+            return "";
+        }
+
         boolean isArray = false;
 
         if(classname.endsWith("[]")) {

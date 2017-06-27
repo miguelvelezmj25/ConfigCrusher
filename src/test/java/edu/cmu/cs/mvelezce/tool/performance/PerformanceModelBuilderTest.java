@@ -67,6 +67,27 @@ public class PerformanceModelBuilderTest {
     }
 
     @Test
+    public void testElevatorM() throws IOException, ParseException {
+        String program = "elevator-m";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
+
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+        System.out.println(pm);
+    }
+
+    @Test
     public void testSleep2() throws IOException, ParseException {
         String program = "Sleep2";
 

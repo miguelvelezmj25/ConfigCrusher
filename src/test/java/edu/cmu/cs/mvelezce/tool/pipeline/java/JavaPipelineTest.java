@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
@@ -21,8 +22,9 @@ import java.util.*;
  */
 public class JavaPipelineTest {
 
-//    public static final double TIMING_ERROR = 0.5;
-    public static final double TIMING_ERROR = 0.05;
+    public static final double TIMING_ERROR = 0.5;
+//    public static final double TIMING_ERROR = 0.05;
+//    public static final double TIMING_ERROR = 1.0;
 
 //    @Test
 //    public void testDummy3() throws IOException, ParseException, InterruptedException {
@@ -214,6 +216,51 @@ public class JavaPipelineTest {
             System.out.println(Region.getSecondsExecutionTime(start, end));
             Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
             break;
+        }
+    }
+
+    @Test
+    public void testElevatorM() throws IOException, ParseException, InterruptedException {
+        String programName = "elevator-m";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator-m/out/production/elevator-m/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator-m/";
+        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+        System.out.println(pm);
+
+        // TESTING
+        System.out.println("\n################# Testing");
+        args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        for(Set<String> configuration : configurations) {
+            String[] elevatorConfiguration = ElevatorAdapter.adaptConfigurationToProgram(configuration);
+            System.out.println(elevatorConfiguration);
+            long start = System.nanoTime();
+            PL_Interface_impl.main(elevatorConfiguration);
+            long end = System.nanoTime();
+
+            System.out.println(pm.evaluate(configuration));
+            System.out.println(Region.getSecondsExecutionTime(start, end));
+            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
         }
     }
 

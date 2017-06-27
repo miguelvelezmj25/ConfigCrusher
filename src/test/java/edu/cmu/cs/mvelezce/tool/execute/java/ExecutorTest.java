@@ -250,6 +250,29 @@ public class ExecutorTest {
     }
 
     @Test
+    public void testElevatorM() throws IOException, ParseException {
+        String programName = "elevator-m";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator-m/out/production/elevator-m/";
+        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
+
+        String[] args = new String[0];
+
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        configurations = Helper.getConfigurations(options);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+    }
+
+    @Test
     public void testGPL() throws IOException, ParseException {
         String programName = "gpl";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/out/production/gpl/";

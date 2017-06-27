@@ -11,9 +11,9 @@ import java.util.Set;
 public class ElevatorAdapter extends Adapter {
 
     private static final String[] CONFIGURATIONS = {
-//            "FEATUREBASE",
-            "FEATUREWEIGHT"//,
-//            "FEATUREEMPTY",
+            "FEATUREBASE",
+            "FEATUREWEIGHT",
+            "FEATUREEMPTY"//,
 //            "FEATURETWOTHIRDSFULL",
 //            "FEATUREEXECUTIVEFLOOR",
 //            "FEATUREOVERLOADED"

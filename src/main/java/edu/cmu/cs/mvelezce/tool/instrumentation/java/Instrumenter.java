@@ -41,7 +41,7 @@ public class Instrumenter {
 
         writer.close();
 
-        command = new String[]{"javac", "-cp", "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator-m/lib/*", "-d", classDirectory, "@" + srcDirectory + "sources.txt"};
+        command = new String[]{"javac", "-cp", "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/lib/*", "-d", classDirectory, "@" + srcDirectory + "sources.txt"};
         System.out.println(Arrays.toString(command));
         process = Runtime.getRuntime().exec(command);
         process.waitFor();

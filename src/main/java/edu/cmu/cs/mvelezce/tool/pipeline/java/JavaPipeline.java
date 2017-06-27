@@ -28,8 +28,10 @@ public class JavaPipeline {
 
     public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint) throws IOException, ParseException, InterruptedException {
         // Get regions and options
+        String[] args1 = new String[0];
         System.out.println("Region and options");
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+//        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args1, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
         System.out.println("");
 
         // Configuration compression (Language independent)

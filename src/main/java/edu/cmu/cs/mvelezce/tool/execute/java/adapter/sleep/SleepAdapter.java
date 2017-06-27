@@ -20,7 +20,7 @@ public class SleepAdapter extends Adapter {
 
     @Override
     public void execute(Set<String> configuration) {
-        String[] argsArray = SleepAdapter.adaptConfigurationToSleepProgram(configuration);
+        String[] argsArray = SleepAdapter.adaptConfigurationToProgram(configuration);
         StringBuilder args = new StringBuilder();
 
         for(String arg : argsArray) {
@@ -31,7 +31,7 @@ public class SleepAdapter extends Adapter {
         Adapter.executeJavaProgram(programName, SleepMain.SLEEP_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
-    public static String[] adaptConfigurationToSleepProgram(Set<String> configuration) {
+    public static String[] adaptConfigurationToProgram(Set<String> configuration) {
         String[] sleepConfiguration = new String[CONFIGURATIONS.length];
 
         for(int i = 0; i < sleepConfiguration.length; i++) {

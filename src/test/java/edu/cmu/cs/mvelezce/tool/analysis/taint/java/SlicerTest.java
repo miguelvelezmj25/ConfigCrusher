@@ -14,6 +14,16 @@ import static org.junit.Assert.*;
  */
 public class SlicerTest {
     @Test
+    public void testBuild() {
+//        // Builds pdg and saves it into temp folder
+//        String name = "Sleep1";
+//        String className = "edu.cmu.cs.mvelezce";
+//        BuildSDG.standardConcBuild("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy",
+//                className + "." + name,
+//                "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep19/" + name + ".pdg");
+    }
+
+    @Test
     public void testSleep19() throws IOException {
         String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep19/edu.cmu.cs.mvelezce.Sleep19.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep19.main";
@@ -41,8 +51,11 @@ public class SlicerTest {
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
         features.add("A");
+//        features.add("B");
 
-        List<String> criterionLabels = Slicer.getCriterionLabel(file, entryPoint, criterionFormat);
+//        List<String> criterionLabels = Slicer.getCriterionLabel(file, entryPoint, criterionFormat);
+        List<String> criterionLabels = new ArrayList<>();
+        criterionLabels.add("v8 = v6.booleanValue()");
         Assert.assertEquals(features.size(), criterionLabels.size());
 
         Map<String, String> featuresToLabels = new HashMap<>();

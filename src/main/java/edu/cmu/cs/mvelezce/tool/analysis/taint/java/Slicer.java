@@ -35,7 +35,11 @@ public class Slicer {
             Set<SDGNode> relevantNodes = new HashSet<>();
 
             for (SDGNode node : slice) {
-                if(node.getLabel().startsWith("if ") && !node.getBytecodeMethod().startsWith("java.")) {
+//                System.out.println(node.getLabel());
+//                if(node.getLabel().startsWith("if ") && !node.getBytecodeMethod().startsWith("java.")) {
+//                    relevantNodes.add(node);
+//                }
+                if(node.getBytecodeMethod().contains("mvelezce")) {
                     relevantNodes.add(node);
                 }
             }
@@ -43,9 +47,6 @@ public class Slicer {
             for(SDGNode node : relevantNodes) {
                 System.out.println(node.getBytecodeIndex());
                 System.out.println(node.getLabel());
-                if(node.getLabel().equals("cleanupTimeShifts")) {
-                    int i = 0;
-                }
                 System.out.println(node.getBytecodeMethod());
                 System.out.println(node.getBytecodeName());
 
@@ -55,12 +56,7 @@ public class Slicer {
                 }
                 System.out.println("");
 
-                if(node.getBytecodeIndex() == 970) {
-                    int i = 0;
-                }
-
                 String entryPackage = node.getBytecodeMethod();
-//                entryPackage = entryPackage.substring(0, entryPackage.lastIndexOf("("));
                 String entryMethod = entryPackage.substring(entryPackage.lastIndexOf(".") + 1);
                 entryPackage = entryPackage.replace("." + entryMethod, "");
                 String entryClass = entryPackage.substring(entryPackage.lastIndexOf(".") + 1);

@@ -76,19 +76,17 @@ public class Executor {
 
             Adapter adapter = null;
 
-            switch (programName) {
-                case "elevator":
-                    adapter = new ElevatorAdapter(programName, mainClass, directory);
-                    break;
-                case "gpl":
-                    adapter = new GPLAdapter(programName, mainClass, directory);
-                    break;
-//                case "sleep":
-//                    adapter = new SleepAdapter(programName, mainClass, directory);
-//                    break;
-                default:
-                    adapter = new SleepAdapter(programName, mainClass, directory);
-//                    throw new RuntimeException("Could not create an adapter for " + programName);
+            if(programName.contains("elevator")) {
+                adapter = new ElevatorAdapter(programName, mainClass, directory);
+            }
+            else if(programName.contains("gpl")) {
+                adapter = new GPLAdapter(programName, mainClass, directory);
+            }
+            else if(programName.contains("sleep")) {
+                adapter = new SleepAdapter(programName, mainClass, directory);
+            }
+            else {
+                throw new RuntimeException("Could not create an adapter for " + programName);
             }
 
             adapter.execute(configuration);

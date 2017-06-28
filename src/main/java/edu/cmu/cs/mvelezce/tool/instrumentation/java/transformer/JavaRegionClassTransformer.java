@@ -21,8 +21,8 @@ import java.util.*;
  */
 public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
-    protected String directory;
-    protected Set<JavaRegion> regions;
+    private String directory;
+    private Set<JavaRegion> regions;
     private List<String> javapResult = new ArrayList<>();
 
     public JavaRegionClassTransformer(String directory, Set<JavaRegion> regions) {

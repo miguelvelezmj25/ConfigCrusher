@@ -19,6 +19,7 @@ public class MethodBlock {
     private List<AbstractInsnNode> instructions;
     private Set<MethodBlock> successors = new HashSet<>();
     private Set<MethodBlock> predecessors = new HashSet<>();
+    private boolean withRet = false;
 
     public MethodBlock(String ID, Label label, Label originalLabel, List<AbstractInsnNode> instructions) {
         this.ID = ID;
@@ -72,6 +73,14 @@ public class MethodBlock {
     public Set<MethodBlock> getSuccessors() { return this.successors; }
 
     public Set<MethodBlock> getPredecessors () { return  this.predecessors; }
+
+    public boolean isWithRet() {
+        return this.withRet;
+    }
+
+    public void setWithRet(boolean withRet) {
+        this.withRet = withRet;
+    }
 
     @Override
     public boolean equals(Object o) {

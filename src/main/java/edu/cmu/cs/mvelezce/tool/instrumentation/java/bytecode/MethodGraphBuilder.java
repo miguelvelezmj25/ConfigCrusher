@@ -124,6 +124,7 @@ public class MethodGraphBuilder {
 
             for(MethodBlock blockWithReturn : blocksWithReturn) {
                 graph.addEdge(blockWithReturn, graph.getExitBlock());
+                blockWithReturn.setWithRet(true);
             }
         }
 

@@ -134,7 +134,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
-            if(methodNode.name.equals("main")) {
+            if(methodNode.name.equals("isBlocked")) {
                 int i = 0;
             }
 
@@ -182,7 +182,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
-                        if(methodNode.name.equals("bftNodeSearch")) {
+                        if(methodNode.name.equals("timeShift")) {
                             int i = 0;
                         }
 
@@ -193,7 +193,11 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         Set<MethodBlock> endMethodBlocks = new HashSet<>();
 
                         if(graph.getExitBlock().equals(end)) {
-                            endMethodBlocks.addAll(graph.getExitBlock().getPredecessors());
+                            for(MethodBlock predecessor : graph.getExitBlock().getPredecessors()) {
+                                if(predecessor.isWithRet()) {
+                                    endMethodBlocks.add(predecessor);
+                                }
+                            }
                         }
                         else {
                             endMethodBlocks.add(end);
@@ -295,7 +299,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     for(JavaRegion javaRegion : regionsInMethod) {
                         for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
                             if (endMethodBlock.getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
-                                if(methodNode.name.equals("bftNodeSearch")) {
+                                if(methodNode.name.equals("timeShift")) {
                                     int i = 0;
                                 }
 
@@ -323,7 +327,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
 //                        if(javaRegion.getStartMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
                         if(javaRegion.getStartMethodBlock().getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
-                            if(methodNode.name.equals("bftNodeSearch")) {
+                            if(methodNode.name.equals("timeShift")) {
                                 int i = 0;
                             }
 

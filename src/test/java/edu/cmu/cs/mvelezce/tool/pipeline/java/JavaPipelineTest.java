@@ -18,10 +18,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/10/17.
@@ -1246,16 +1243,16 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, new HashMap<>());
         System.out.println(pm);
 
         JavaPipelineTest.comparePMToBF(programName, pm);

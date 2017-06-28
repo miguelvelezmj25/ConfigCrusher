@@ -15,6 +15,7 @@ public abstract class Options {
 
     public static final String DIRECTORY = "src/main/resources";
     public static final String DOT_JSON = ".json";
+    public static final String DOT_CSV = ".csv";
 
     // Component cmd options
     public static final String DELRES = "delres";

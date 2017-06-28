@@ -434,9 +434,46 @@ public class JavaPipelineTest {
 //        }
     }
 
+
+
     @Test
     public void testElevatorSimple() throws IOException, ParseException, InterruptedException {
         String programName = "elevator-simple";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
+        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+        // Program arguments
+//        args = new String[0];
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, partialRegionsToOptions);
+        System.out.println(pm);
+
+        JavaPipelineTest.comparePMToBF(programName, pm);
+    }
+
+    @Test
+    public void testElevatorInteractionsOne() throws IOException, ParseException, InterruptedException {
+        String programName = "elevator-interactions-one";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";

@@ -1,29 +1,34 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
-import com.ibm.wala.shrike.cg.Runtime;
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepMain;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 4/10/17.
  */
 public class JavaPipelineTest {
+
+    public static final String DIRECTORY = Options.DIRECTORY + "/comparison/java/programs";
 
     public static final double TIMING_ERROR = 0.5;
 //    public static final double TIMING_ERROR = 0.05;
@@ -37,233 +42,263 @@ public class JavaPipelineTest {
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
         Set<String> options = new HashSet<>();
 
-        for(Set<String> configuration : configurations) {
+        for (Set<String> configuration : configurations) {
             options.addAll(configuration);
         }
 
         configurations = Helper.getConfigurations(options);
+        StringBuilder result = new StringBuilder();
+        result.append("configuration,pm,bf,error");
+        result.append("\n");
 
-        for(Set<String> configuration : configurations) {
+        for (Set<String> configuration : configurations) {
             String[] programConfiguration;
 
-            if(programName.contains("elevator")) {
+            if (programName.contains("elevator")) {
                 programConfiguration = ElevatorAdapter.adaptConfigurationToProgram(configuration);
             }
-            else if(programName.contains("gpl")) {
+            else if (programName.contains("gpl")) {
                 programConfiguration = GPLAdapter.adaptConfigurationToProgram(configuration);
             }
-            else if(programName.contains("sleep")) {
+            else if (programName.contains("sleep")) {
                 programConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
             }
             else {
                 throw new RuntimeException("Could not compare for " + programName);
             }
 
-            System.out.println(Arrays.toString(programConfiguration));
+            System.out.println(configuration);
+            result.append('"');
+            result.append(configuration);
+            result.append('"');
             long start = 0;
             long end = 0;
 
-            switch (programName) {
-                case "elevator":
+            if (programName.contains("elevator")) {
+                start = System.nanoTime();
+                PL_Interface_impl.main(programConfiguration);
+                end = System.nanoTime();
+            }
+            else if (programName.contains("gpl")) {
+                start = System.nanoTime();
+                Main.main(programConfiguration);
+                end = System.nanoTime();
+            }
+            else if (programName.contains("sleep1")) {
+                try {
                     start = System.nanoTime();
-                    PL_Interface_impl.main(programConfiguration);
+                    Sleep1.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "gpl":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep2")) {
+                try {
                     start = System.nanoTime();
-                    Main.main(programConfiguration);
+                    Sleep2.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep1":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep3")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep1.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep3.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep2":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep4")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep2.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep4.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep3":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep5")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep3.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep5.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep4":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep6")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep4.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep6.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep5":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep7")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep5.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep7.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep6":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep8")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep6.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep8.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep7":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep9")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep7.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep9.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep8":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep10")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep8.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep10.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep9":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep11")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep9.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep11.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep10":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep12")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep10.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep12.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep11":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep13")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep11.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep13.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep12":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep14")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep12.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep14.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep13":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep15")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep13.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep15.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep14":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep16")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep14.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep16.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep15":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep17")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep15.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep17.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep16":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep18")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep16.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep18.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep17":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep19")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep17.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep19.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep18":
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if (programName.contains("sleep20")) {
+                try {
                     start = System.nanoTime();
-                    try {
-                        Sleep18.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Sleep20.main(programConfiguration);
                     end = System.nanoTime();
-                    break;
-                case "sleep19":
-                    start = System.nanoTime();
-                    try {
-                        Sleep19.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    end = System.nanoTime();
-                    break;
-                case "sleep20":
-                    start = System.nanoTime();
-                    try {
-                        Sleep20.main(programConfiguration);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    end = System.nanoTime();
-                    break;
-                default:
-                    throw new RuntimeException("Could not run: " + programName);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                throw new RuntimeException("Could not run: " + programName);
             }
 
-            System.out.println("PM time: " + pm.evaluate(configuration));
-            System.out.println("BF time: " + Region.getSecondsExecutionTime(start, end));
-            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
+            double pmTime = pm.evaluate(configuration);
+            double bfTime = Region.getSecondsExecutionTime(start, end);
+            double percentError = Math.abs(bfTime - pmTime) / bfTime * 100.0;
+            System.out.println("PM time: " + pmTime);
+            System.out.println("BF time: " + bfTime);
+            System.out.println("Percent error : " + percentError);
+            result.append(",");
+            result.append(pmTime);
+            result.append(",");
+            result.append(bfTime);
+            result.append(",");
+            result.append(percentError);
+            result.append("\n");
+//            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
             System.out.println("");
         }
 
+        File directory = new File(JavaPipelineTest.DIRECTORY);
+
+        if (!directory.exists())
+
+        {
+            directory.mkdirs();
+        }
+
+        String outputFile = JavaPipelineTest.DIRECTORY + "/" + programName + Options.DOT_CSV;
+        File file = new File(outputFile);
+        FileWriter writer = new FileWriter(file);
+        writer.write(result.toString());
+        writer.flush();
+        writer.close();
     }
 
 
@@ -292,13 +327,13 @@ public class JavaPipelineTest {
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
         Set<String> options = new HashSet<>();
 
-        for(Set<String> configuration : configurations) {
+        for (Set<String> configuration : configurations) {
             options.addAll(configuration);
         }
 
         configurations = Helper.getConfigurations(options);
 
-        for(Set<String> configuration : configurations) {
+        for (Set<String> configuration : configurations) {
             System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
             long start = System.nanoTime();
@@ -336,13 +371,13 @@ public class JavaPipelineTest {
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
         Set<String> options = new HashSet<>();
 
-        for(Set<String> configuration : configurations) {
+        for (Set<String> configuration : configurations) {
             options.addAll(configuration);
         }
 
         configurations = Helper.getConfigurations(options);
 
-        for(Set<String> configuration : configurations) {
+        for (Set<String> configuration : configurations) {
             System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
             long start = System.nanoTime();
@@ -397,6 +432,41 @@ public class JavaPipelineTest {
 //            System.out.println(Region.getSecondsExecutionTime(start, end));
 //            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
 //        }
+    }
+
+    @Test
+    public void testElevatorSimple() throws IOException, ParseException, InterruptedException {
+        String programName = "elevator-simple";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
+        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+        // Program arguments
+//        args = new String[0];
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, partialRegionsToOptions);
+        System.out.println(pm);
+
+        JavaPipelineTest.comparePMToBF(programName, pm);
     }
 
     @Test

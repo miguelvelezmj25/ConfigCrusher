@@ -26,12 +26,37 @@ public class JavaPipeline {
     public static final String TEST_COLLECTION = "Tests";
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
+    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException {
+        // Configuration compression (Language independent)
+        System.out.println("Configurations to execute");
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        System.out.println(configurationsToExecute);
+        System.out.println("");
+
+        System.out.println("Instrumenting");
+        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        System.out.println("");
+
+        System.out.println("Measure performance");
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
+        System.out.println("");
+
+        System.out.println("Build performance model");
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        return PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+    }
+
     public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint) throws IOException, ParseException, InterruptedException {
         // Get regions and options
-        String[] args1 = new String[0];
         System.out.println("Region and options");
-//        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args1, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
         System.out.println("");
 
         // Configuration compression (Language independent)

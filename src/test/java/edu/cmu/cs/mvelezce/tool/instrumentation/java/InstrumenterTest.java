@@ -18,8 +18,8 @@ public class InstrumenterTest {
     // TODO check that the regions are correct since we might have, at this point, java line numbers instead of bytecodeindex
 
     @Test
-    public void testElevator() throws IOException, ParseException, InterruptedException {
-        String programName = "elevator";
+    public void testElevatorSimple() throws IOException, ParseException, InterruptedException {
+        String programName = "elevator-simple";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
 

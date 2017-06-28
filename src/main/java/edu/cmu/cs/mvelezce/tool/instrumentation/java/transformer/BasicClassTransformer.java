@@ -37,6 +37,7 @@ public abstract class BasicClassTransformer extends ClassTransformerBase {
             int indexOfFilePackage = filePackage.lastIndexOf("." + fileClass);
             filePackage = filePackage.substring(0, indexOfFilePackage);
             ClassNode classNode = this.readClass(filePackage + "." + fileClass);
+//            ClassNode classNode = this.readClass("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/edu/cmu/cs/mvelezce/Actions");
 
             this.methodsToInsrument = new HashSet<>();
 
@@ -107,6 +108,7 @@ public abstract class BasicClassTransformer extends ClassTransformerBase {
 
             methodNode.instructions.clear();
             methodNode.instructions.add(newInsts);
+            int i = 0;
         }
     }
 }

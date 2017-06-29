@@ -13,10 +13,10 @@ public class ElevatorAdapter extends Adapter {
     private static final String[] CONFIGURATIONS = {
             "FEATUREBASE",
             "FEATUREWEIGHT",
-            "FEATUREEMPTY",
-            "FEATURETWOTHIRDSFULL",
-            "FEATUREEXECUTIVEFLOOR",
-            "FEATUREOVERLOADED"
+            "FEATUREEMPTY"//,
+//            "FEATURETWOTHIRDSFULL",
+//            "FEATUREEXECUTIVEFLOOR",
+//            "FEATUREOVERLOADED"
     };
 
     public ElevatorAdapter(String programName, String mainClass, String directory) {

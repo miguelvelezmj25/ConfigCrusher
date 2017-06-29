@@ -27,7 +27,10 @@ public class JavaPipeline {
     public static final String TEST_COLLECTION = "Tests";
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
-    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException {
+    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException {
+        // Format return statements with method calls
+        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+
         // Configuration compression (Language independent)
         System.out.println("Configurations to execute");
         Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
@@ -36,11 +39,11 @@ public class JavaPipeline {
         System.out.println("");
 
         System.out.println("Instrumenting");
-        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        Instrumenter.instrument(args, instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
         System.out.println("");
 
         System.out.println("Measure performance");
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, instrumentClassDirectory, configurationsToExecute);
         System.out.println("");
 
         System.out.println("Build performance model");

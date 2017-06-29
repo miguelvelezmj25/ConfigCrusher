@@ -67,8 +67,8 @@ public class PerformanceModelBuilderTest {
     }
 
     @Test
-    public void testElevatorM() throws IOException, ParseException {
-        String program = "elevator-m";
+    public void testElevatorSimple() throws IOException, ParseException {
+        String program = "elevator-simple";
 
         // Program arguments
         String[] args = new String[0];

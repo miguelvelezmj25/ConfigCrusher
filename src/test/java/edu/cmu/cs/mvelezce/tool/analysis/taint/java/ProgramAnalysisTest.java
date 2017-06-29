@@ -128,23 +128,6 @@ public class ProgramAnalysisTest {
     }
 
     @Test
-    public void testElevatorm() throws IOException, ParseException {
-        String programName = "elevator-m";
-
-        // Program arguments
-//        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
-    }
-
-    @Test
     public void testSleep2() throws IOException, ParseException {
         String programName = "Sleep2";
 
@@ -227,28 +210,6 @@ public class ProgramAnalysisTest {
         args[1] = "-saveres";
 
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
-    }
-
-    @Test
-    public void testElevatorM() throws IOException, ParseException {
-        String programName = "elevator-m";
-        String sdgFile = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/elevator-m/edu.cmu.cs.mvelezce.PL_Interface_impl.main.pdg";
-        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl.main";
-        List<String> features = new ArrayList<>();
-        features.add("FEATUREWEIGHT");
-
-        // Program arguments
-//        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
-        System.out.println(partialRegionsToOptions.size());
     }
 
 }

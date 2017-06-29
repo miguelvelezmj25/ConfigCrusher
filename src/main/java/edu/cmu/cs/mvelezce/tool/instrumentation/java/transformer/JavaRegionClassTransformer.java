@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder;
 import jdk.internal.org.objectweb.asm.Label;
+import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -134,13 +135,13 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
-            if(methodNode.name.equals("isBlocked")) {
-                int i = 0;
-            }
-
             MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
             System.out.println("Before transforming");
             System.out.println(graph.toDotString(methodNode.name));
+
+            if(methodNode.name.equals("isBlocked")) {
+                int i = 0;
+            }
 
             if(graph.getBlocks().size() <= 3) {
                 System.out.println("Special method that is not instrumented");
@@ -182,7 +183,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
-                        if(methodNode.name.equals("timeShift")) {
+                        if(methodNode.name.equals("isBlocked")) {
                             int i = 0;
                         }
 
@@ -294,12 +295,24 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
                     }
 
+                    if(methodNode.name.equals("isBlocked")) {
+                        int i = 0;
+                    }
+
                     currentLabelNode = (LabelNode) instruction;
+//                    else {
+//                        for(MethodBlock block : graph.getBlocks()) {
+//                            if(!block.getLabel().equals(block.getOriginalLabel()) && currentLabelNode.getLabel().equals(block.getOriginalLabel())) {
+//                                currentLabelNode = null;
+//                            }
+//                        }
+//                    }
+
 
                     for(JavaRegion javaRegion : regionsInMethod) {
                         for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
                             if (endMethodBlock.getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
-                                if(methodNode.name.equals("timeShift")) {
+                                if(methodNode.name.equals("isBlocked")) {
                                     int i = 0;
                                 }
 
@@ -324,13 +337,11 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                             int i = 0;
                         }
 
-
+                        if(methodNode.name.equals("isBlocked")) {
+                            int i = 0;
+                        }
 //                        if(javaRegion.getStartMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
                         if(javaRegion.getStartMethodBlock().getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
-                            if(methodNode.name.equals("timeShift")) {
-                                int i = 0;
-                            }
-
                             if(specialBlocksToRegions.containsValue(javaRegion)) {
                                 continue;
                             }

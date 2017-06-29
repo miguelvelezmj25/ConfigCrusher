@@ -164,7 +164,7 @@ public class PerformanceModel {
                     continue;
                 }
 
-                if(entry.getValue() == 0) {
+                if(Math.abs(entry.getValue()) < 0.01) {
                     continue;
                 }
 

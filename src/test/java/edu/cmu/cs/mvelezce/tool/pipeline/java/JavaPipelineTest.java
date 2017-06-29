@@ -45,7 +45,9 @@ public class JavaPipelineTest {
 
         configurations = Helper.getConfigurations(options);
         StringBuilder result = new StringBuilder();
-        result.append("configuration,pm,bf,error");
+        double se = 0;
+        int entries = 0;
+        result.append("configuration,pm,bf,absolute error,relative % error,squared error");
         result.append("\n");
 
         for (Set<String> configuration : configurations) {
@@ -267,20 +269,40 @@ public class JavaPipelineTest {
 
             double pmTime = pm.evaluate(configuration);
             double bfTime = Region.getSecondsExecutionTime(start, end);
-            double percentError = Math.abs(bfTime - pmTime) / bfTime * 100.0;
+            double absoluteError = Math.abs(bfTime - pmTime);
+            double relativeError = absoluteError / bfTime * 100.0;
+            double squaredError = Math.pow(bfTime - pmTime, 2);
             System.out.println("PM time: " + pmTime);
             System.out.println("BF time: " + bfTime);
-            System.out.println("Percent error : " + percentError);
+            System.out.println("Absolute error : " + absoluteError);
+            System.out.println("Relative % error : " + relativeError);
+            System.out.println("Squared error : " + squaredError);
             result.append(",");
             result.append(pmTime);
             result.append(",");
             result.append(bfTime);
             result.append(",");
-            result.append(percentError);
+            result.append(absoluteError);
+            result.append(",");
+            result.append(relativeError);
+            result.append(",");
+            result.append(squaredError);
             result.append("\n");
 //            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
             System.out.println("");
+
+            se += squaredError;
+            entries += 1;
         }
+
+        result.append("\n");
+        result.append("MSE: ");
+        double mse = se/entries;
+        result.append(mse);
+        result.append("\n");
+        result.append("RMSE: ");
+        result.append(Math.sqrt(mse));
+        result.append("\n");
 
         File directory = new File(JavaPipelineTest.DIRECTORY);
 
@@ -472,8 +494,8 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testElevatorInteractionsOne() throws IOException, ParseException, InterruptedException {
-        String programName = "elevator-interactions-one";
+    public void testElevator() throws IOException, ParseException, InterruptedException {
+        String programName = "elevator";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
         String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
@@ -504,52 +526,6 @@ public class JavaPipelineTest {
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
-        System.out.println(pm);
-
-        JavaPipelineTest.comparePMToBF(programName, pm);
-    }
-
-    @Test
-    public void testElevator() throws IOException, ParseException, InterruptedException {
-        String programName = "elevator";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
-        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
-
-        // Program arguments
-//        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
-
-        JavaPipelineTest.comparePMToBF(programName, pm);
-    }
-
-    @Test
-    public void testGPL() throws IOException, ParseException, InterruptedException {
-        String programName = "gpl";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/out/production/gpl/";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Main";
-
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
         JavaPipelineTest.comparePMToBF(programName, pm);

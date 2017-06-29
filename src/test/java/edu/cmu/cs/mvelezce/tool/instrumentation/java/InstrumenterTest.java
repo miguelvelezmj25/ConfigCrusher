@@ -39,27 +39,6 @@ public class InstrumenterTest {
     }
 
     @Test
-    public void testElevatorM() throws IOException, ParseException, InterruptedException {
-        String programName = "elevator-m";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator-m/out/production/elevator-m/";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator-m/";
-
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
-
-        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
-    }
-
-    @Test
     public void testGPL() throws IOException, ParseException, InterruptedException {
         String programName = "gpl";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/out/production/gpl/";

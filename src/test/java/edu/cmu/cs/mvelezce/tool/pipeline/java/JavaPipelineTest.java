@@ -436,8 +436,10 @@ public class JavaPipelineTest {
     @Test
     public void testElevatorSimple() throws IOException, ParseException, InterruptedException {
         String programName = "elevator-simple";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
         // Program arguments
@@ -462,7 +464,8 @@ public class JavaPipelineTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, partialRegionsToOptions);
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
         System.out.println(pm);
 
         JavaPipelineTest.comparePMToBF(programName, pm);
@@ -471,8 +474,10 @@ public class JavaPipelineTest {
     @Test
     public void testElevatorInteractionsOne() throws IOException, ParseException, InterruptedException {
         String programName = "elevator-interactions-one";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
         // Program arguments
@@ -497,7 +502,8 @@ public class JavaPipelineTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, partialRegionsToOptions);
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
         System.out.println(pm);
 
         JavaPipelineTest.comparePMToBF(programName, pm);
@@ -519,29 +525,6 @@ public class JavaPipelineTest {
         String[] args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
-
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
-
-        JavaPipelineTest.comparePMToBF(programName, pm);
-    }
-
-    @Test
-    public void testElevatorM() throws IOException, ParseException, InterruptedException {
-        String programName = "elevator-m";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator-m/out/production/elevator-m/";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator-m/";
-        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
-
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
@@ -580,14 +563,14 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
         // Program arguments
-        String[] args = new String[0];
+//        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);

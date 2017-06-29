@@ -26,31 +26,31 @@ public class Instrumenter {
     }
 
     public static void instrument(String srcDirectory, String classDirectory, Set<JavaRegion> regions) throws IOException, InterruptedException {
-        String[] command = {"find", srcDirectory.substring(0, srcDirectory.length()-1), "-name", "*.java"};
-        Process process = Runtime.getRuntime().exec(command);
-        process.waitFor();
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(srcDirectory + "sources.txt"));
-        String line;
-
-        while ((line= reader.readLine()) !=null) {
-            writer.write(line);
-            writer.write("\n");
-        }
-
-        writer.close();
-
-        command = new String[]{"javac", "-cp", "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/lib/*", "-d", classDirectory, "@" + srcDirectory + "sources.txt"};
-        System.out.println(Arrays.toString(command));
-        process = Runtime.getRuntime().exec(command);
-        process.waitFor();
-
-        reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-
-        while ((line= reader.readLine()) !=null) {
-            System.out.println(line);
-        }
+//        String[] command = {"find", srcDirectory.substring(0, srcDirectory.length()-1), "-name", "*.java"};
+//        Process process = Runtime.getRuntime().exec(command);
+//        process.waitFor();
+//
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//        BufferedWriter writer = new BufferedWriter(new FileWriter(srcDirectory + "sources.txt"));
+//        String line;
+//
+//        while ((line= reader.readLine()) !=null) {
+//            writer.write(line);
+//            writer.write("\n");
+//        }
+//
+//        writer.close();
+//
+//        command = new String[]{"javac", "-cp", "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/lib/*", "-d", classDirectory, "@" + srcDirectory + "sources.txt"};
+//        System.out.println(Arrays.toString(command));
+//        process = Runtime.getRuntime().exec(command);
+//        process.waitFor();
+//
+//        reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+//
+//        while ((line= reader.readLine()) !=null) {
+//            System.out.println(line);
+//        }
 
         JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(classDirectory, regions);
         Set<ClassNode> classNodes = timer.transformClasses();

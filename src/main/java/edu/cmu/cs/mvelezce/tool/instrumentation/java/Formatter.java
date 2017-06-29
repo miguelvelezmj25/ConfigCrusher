@@ -60,7 +60,7 @@ public class Formatter {
         for(ClassNode classNode : classNodes) {
             String fileName = classNode.name;
             System.out.println(fileName);
-//            timer.writeClass(classNode, classDirectory + fileName);
+            timer.writeClass(classNode, classDirectory + fileName);
         }
     }
 

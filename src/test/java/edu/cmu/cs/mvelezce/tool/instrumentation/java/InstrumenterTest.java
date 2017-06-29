@@ -19,10 +19,9 @@ public class InstrumenterTest {
 
     @Test
     public void testElevatorSimple() throws IOException, ParseException, InterruptedException {
-        // TODO check that it says ORIGINAL and it should be instrumented
         String programName = "elevator-simple";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
 
         // Program arguments
         String[] args = new String[0];

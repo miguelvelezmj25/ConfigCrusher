@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
@@ -22,6 +23,7 @@ import java.util.*;
  */
 public class JavaPipeline {
 
+    public static final String PM_RES_DIR = Options.DIRECTORY + "/perf_res/java/programs";
     public static final String LOTRACK_DATABASE = "lotrack";
     public static final String LOADTIME_DATABASE = "loadtime";
     public static final String PLAYYPUS_PROGRAM = "platypus";

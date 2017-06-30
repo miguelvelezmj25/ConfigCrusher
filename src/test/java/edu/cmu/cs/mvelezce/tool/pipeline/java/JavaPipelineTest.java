@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
-import edu.cmu.cs.mvelezce.*;
+import edu.cmu.cs.mvelezce.Sleep14;
+import edu.cmu.cs.mvelezce.Sleep18;
 import edu.cmu.cs.mvelezce.test.util.repeat.Repeat;
 import edu.cmu.cs.mvelezce.test.util.repeat.RepeatRule;
 import edu.cmu.cs.mvelezce.tool.Helper;
@@ -9,27 +10,25 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.zip.ZipMain;
 import org.json.simple.parser.ParseException;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 4/10/17.
  */
 public class JavaPipelineTest {
-
-    public static final String DIRECTORY = Options.DIRECTORY + "/comparison/java/programs";
-    public static final String PM_RES_DIR = Options.DIRECTORY + "/perf_res/java/programs";
 
     public static final double TIMING_ERROR = 0.5;
 //    public static final double TIMING_ERROR = 0.05;
@@ -40,7 +39,7 @@ public class JavaPipelineTest {
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
         Set<String> options = new HashSet<>();
 
-        for (Set<String> configuration : configurations) {
+        for(Set<String> configuration : configurations) {
             options.addAll(configuration);
         }
 
@@ -60,9 +59,9 @@ public class JavaPipelineTest {
             result.append("\n");
         }
 
-        File directory = new File(JavaPipelineTest.PM_RES_DIR);
+        File directory = new File(JavaPipeline.PM_RES_DIR);
 
-        if (!directory.exists()) {
+        if(!directory.exists()) {
             directory.mkdirs();
         }
 
@@ -74,306 +73,12 @@ public class JavaPipelineTest {
         writer.close();
     }
 
-    public static void comparePMToBF(String programName, PerformanceModel pm) throws IOException {
-        // TESTING
-        System.out.println("############# TESTING BF #############");
-        String[] args = new String[0];
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
-        Set<String> options = new HashSet<>();
-
-        for (Set<String> configuration : configurations) {
-            options.addAll(configuration);
-        }
-
-        configurations = Helper.getConfigurations(options);
-        StringBuilder result = new StringBuilder();
-        double se = 0;
-        int entries = 0;
-        result.append("configuration,pm,bf,absolute error,relative % error,squared error");
-        result.append("\n");
-
-        for (Set<String> configuration : configurations) {
-            String[] programConfiguration;
-
-            if (programName.contains("elevator")) {
-                programConfiguration = ElevatorAdapter.adaptConfigurationToProgram(configuration);
-            }
-            else if (programName.contains("gpl")) {
-                programConfiguration = GPLAdapter.adaptConfigurationToProgram(configuration);
-            }
-            else if (programName.contains("sleep")) {
-                programConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
-            }
-            else if (programName.contains("zipme")) {
-                programConfiguration = ZipmeAdapter.adaptConfigurationToProgram(configuration);
-            }
-            else {
-                throw new RuntimeException("Could not compare for " + programName);
-            }
-
-            System.out.println(configuration);
-            result.append('"');
-            result.append(configuration);
-            result.append('"');
-            long start = 0;
-            long end = 0;
-
-            if (programName.contains("elevator")) {
-                start = System.nanoTime();
-                PL_Interface_impl.main(programConfiguration);
-                end = System.nanoTime();
-            }
-            else if (programName.contains("gpl")) {
-                start = System.nanoTime();
-                Main.main(programConfiguration);
-                end = System.nanoTime();
-            }
-            else if (programName.contains("zipme")) {
-                start = System.nanoTime();
-                ZipMain.main(programConfiguration);
-                end = System.nanoTime();
-            }
-            else if (programName.contains("sleep1")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep1.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep2")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep2.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep3")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep3.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep4")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep4.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep5")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep5.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep6")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep6.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep7")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep7.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep8")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep8.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep9")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep9.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep10")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep10.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep11")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep11.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep12")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep12.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep13")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep13.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep14")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep14.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep15")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep15.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep16")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep16.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep17")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep17.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep18")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep18.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep19")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep19.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (programName.contains("sleep20")) {
-                try {
-                    start = System.nanoTime();
-                    Sleep20.main(programConfiguration);
-                    end = System.nanoTime();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else {
-                throw new RuntimeException("Could not run: " + programName);
-            }
-
-            double pmTime = pm.evaluate(configuration);
-            double bfTime = Region.getSecondsExecutionTime(start, end);
-            double absoluteError = Math.abs(bfTime - pmTime);
-            double relativeError = absoluteError / bfTime * 100.0;
-            double squaredError = Math.pow(bfTime - pmTime, 2);
-            System.out.println("PM time: " + pmTime);
-            System.out.println("BF time: " + bfTime);
-            System.out.println("Absolute error : " + absoluteError);
-            System.out.println("Relative % error : " + relativeError);
-            System.out.println("Squared error : " + squaredError);
-            result.append(",");
-            result.append(pmTime);
-            result.append(",");
-            result.append(bfTime);
-            result.append(",");
-            result.append(absoluteError);
-            result.append(",");
-            result.append(relativeError);
-            result.append(",");
-            result.append(squaredError);
-            result.append("\n");
-//            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
-            System.out.println("");
-
-            se += squaredError;
-            entries += 1;
-        }
-
-        result.append("\n");
-        result.append("MSE: ");
-        double mse = se/entries;
-        result.append(mse);
-        result.append("\n");
-        result.append("RMSE: ");
-        result.append(Math.sqrt(mse));
-        result.append("\n");
-
-        File directory = new File(JavaPipelineTest.DIRECTORY);
-
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-
-        String outputFile = JavaPipelineTest.DIRECTORY + "/" + programName + Options.DOT_CSV;
-        File file = new File(outputFile);
-        FileWriter writer = new FileWriter(file);
-        writer.write(result.toString());
-        writer.flush();
-        writer.close();
-    }
-
     @Rule
     public RepeatRule repeatRule = new RepeatRule();
 
     public void deletePMResult(String programName) {
         if(repeatRule.getIteration() == 0) {
-            File file = new File(JavaPipelineTest.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
+            File file = new File(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
 
             if(file.exists()) {
                 if(!file.delete()) {
@@ -408,13 +113,13 @@ public class JavaPipelineTest {
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
         Set<String> options = new HashSet<>();
 
-        for (Set<String> configuration : configurations) {
+        for(Set<String> configuration : configurations) {
             options.addAll(configuration);
         }
 
         configurations = Helper.getConfigurations(options);
 
-        for (Set<String> configuration : configurations) {
+        for(Set<String> configuration : configurations) {
             System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
             long start = System.nanoTime();
@@ -452,13 +157,13 @@ public class JavaPipelineTest {
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
         Set<String> options = new HashSet<>();
 
-        for (Set<String> configuration : configurations) {
+        for(Set<String> configuration : configurations) {
             options.addAll(configuration);
         }
 
         configurations = Helper.getConfigurations(options);
 
-        for (Set<String> configuration : configurations) {
+        for(Set<String> configuration : configurations) {
             System.out.println(configuration);
             String[] sleepConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
             long start = System.nanoTime();
@@ -551,7 +256,7 @@ public class JavaPipelineTest {
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -589,11 +294,11 @@ public class JavaPipelineTest {
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
         System.out.println(pm);
 
-//        JavaPipelineTest.comparePMToBF(programName, pm);
+//                JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
-    @Repeat(times=5)
+    @Repeat(times = 5)
     public void testElevator() throws IOException, ParseException, InterruptedException {
         String programName = "elevator";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
@@ -653,7 +358,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -676,7 +381,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -699,7 +404,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -725,7 +430,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -751,7 +456,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -778,7 +483,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -804,7 +509,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -830,7 +535,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -856,7 +561,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -882,7 +587,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -908,7 +613,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -935,7 +640,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -962,7 +667,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -989,7 +694,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1015,7 +720,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1043,7 +748,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1071,7 +776,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1098,7 +803,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1126,7 +831,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1154,7 +859,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1177,7 +882,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1200,7 +905,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1223,7 +928,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1246,7 +951,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1270,7 +975,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1293,7 +998,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1316,7 +1021,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1339,7 +1044,7 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
 //    @Test

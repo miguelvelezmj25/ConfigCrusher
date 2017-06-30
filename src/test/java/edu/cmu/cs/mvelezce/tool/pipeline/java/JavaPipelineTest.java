@@ -1,6 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java;
 
 import edu.cmu.cs.mvelezce.*;
+import edu.cmu.cs.mvelezce.test.util.repeat.Repeat;
+import edu.cmu.cs.mvelezce.test.util.repeat.RepeatRule;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
@@ -10,10 +12,11 @@ import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
+import edu.cmu.cs.mvelezce.zip.ZipMain;
 import org.json.simple.parser.ParseException;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -26,11 +29,50 @@ import java.util.*;
 public class JavaPipelineTest {
 
     public static final String DIRECTORY = Options.DIRECTORY + "/comparison/java/programs";
+    public static final String PM_RES_DIR = Options.DIRECTORY + "/perf_res/java/programs";
 
     public static final double TIMING_ERROR = 0.5;
 //    public static final double TIMING_ERROR = 0.05;
 //    public static final double TIMING_ERROR = 1.0;
 
+    public static void savePMPerformance(String programName, PerformanceModel pm) throws IOException {
+        String[] args = new String[0];
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for (Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        configurations = Helper.getConfigurations(options);
+
+        StringBuilder result = new StringBuilder();
+        result.append("configuration,performance");
+        result.append("\n");
+
+        for(Set<String> configuration : configurations) {
+            result.append('"');
+            result.append(configuration);
+            result.append('"');
+            result.append(",");
+            double perf = pm.evaluate(configuration);
+            result.append(perf);
+            result.append("\n");
+        }
+
+        File directory = new File(JavaPipelineTest.PM_RES_DIR);
+
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String outputFile = directory + "/" + programName + Options.DOT_CSV;
+        File file = new File(outputFile);
+        FileWriter writer = new FileWriter(file, true);
+        writer.write(result.toString());
+        writer.flush();
+        writer.close();
+    }
 
     public static void comparePMToBF(String programName, PerformanceModel pm) throws IOException {
         // TESTING
@@ -62,6 +104,9 @@ public class JavaPipelineTest {
             else if (programName.contains("sleep")) {
                 programConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
             }
+            else if (programName.contains("zipme")) {
+                programConfiguration = ZipmeAdapter.adaptConfigurationToProgram(configuration);
+            }
             else {
                 throw new RuntimeException("Could not compare for " + programName);
             }
@@ -81,6 +126,11 @@ public class JavaPipelineTest {
             else if (programName.contains("gpl")) {
                 start = System.nanoTime();
                 Main.main(programConfiguration);
+                end = System.nanoTime();
+            }
+            else if (programName.contains("zipme")) {
+                start = System.nanoTime();
+                ZipMain.main(programConfiguration);
                 end = System.nanoTime();
             }
             else if (programName.contains("sleep1")) {
@@ -306,9 +356,7 @@ public class JavaPipelineTest {
 
         File directory = new File(JavaPipelineTest.DIRECTORY);
 
-        if (!directory.exists())
-
-        {
+        if (!directory.exists()) {
             directory.mkdirs();
         }
 
@@ -320,6 +368,20 @@ public class JavaPipelineTest {
         writer.close();
     }
 
+    public void deletePMResult(String programName) {
+        if(repeatRule.getIteration() == 0) {
+            File file = new File(JavaPipelineTest.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
+
+            if(file.exists()) {
+                if(!file.delete()) {
+                    throw new RuntimeException("Could not delete " + file);
+                }
+            }
+        }
+    }
+
+    @Rule
+    public RepeatRule repeatRule = new RepeatRule();
 
     @Test
     public void testSleep14() throws IOException, ParseException, InterruptedException {
@@ -454,6 +516,43 @@ public class JavaPipelineTest {
     }
 
 
+    @Test
+    public void testZipSimple() throws IOException, ParseException, InterruptedException {
+        String programName = "zipme-simple";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/";
+        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+        // Program arguments
+//        args = new String[0];
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+        System.out.println(pm);
+
+        JavaPipelineTest.comparePMToBF(programName, pm);
+    }
 
     @Test
     public void testElevatorSimple() throws IOException, ParseException, InterruptedException {
@@ -490,17 +589,21 @@ public class JavaPipelineTest {
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+//        JavaPipelineTest.comparePMToBF(programName, pm);
     }
 
     @Test
+    @Repeat(times=5)
     public void testElevator() throws IOException, ParseException, InterruptedException {
+        // Before
         String programName = "elevator";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
         String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
         String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
+
+        deletePMResult(programName);
 
         // Program arguments
         String[] args = new String[0];
@@ -528,7 +631,8 @@ public class JavaPipelineTest {
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
         System.out.println(pm);
 
-        JavaPipelineTest.comparePMToBF(programName, pm);
+        JavaPipelineTest.savePMPerformance(programName, pm);
+//        JavaPipelineTest.comparePMToBF(programName, pm);
     }
 
     @Test

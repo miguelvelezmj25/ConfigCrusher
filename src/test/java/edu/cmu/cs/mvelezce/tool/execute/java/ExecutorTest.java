@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
+import edu.cmu.cs.mvelezce.zip.ZipMain;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -224,6 +225,31 @@ public class ExecutorTest {
         Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+    }
+
+    @Test
+    public void testZipmeSimple() throws IOException, ParseException {
+        String programName = "zipme-simple";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
+        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
+
+        String[] args = new String[0];
+
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        String[] a = new String[0];
+        ZipMain.main(a);
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        configurations = Helper.getConfigurations(options);
+//        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 
     @Test

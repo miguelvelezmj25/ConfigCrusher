@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -84,6 +85,9 @@ public class Executor {
             }
             else if(programName.contains("sleep")) {
                 adapter = new SleepAdapter(programName, mainClass, directory);
+            }
+            else if(programName.contains("zipme")) {
+                adapter = new ZipmeAdapter(programName, mainClass, directory);
             }
             else {
                 throw new RuntimeException("Could not create an adapter for " + programName);

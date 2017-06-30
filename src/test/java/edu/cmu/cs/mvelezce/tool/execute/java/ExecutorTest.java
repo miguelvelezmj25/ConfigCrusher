@@ -255,7 +255,7 @@ public class ExecutorTest {
     @Test
     public void testElevator() throws IOException, ParseException {
         String programName = "elevator";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
         String[] args = new String[0];

@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.pipeline.java.bf;
+package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.test.util.repeat.Repeat;
 import edu.cmu.cs.mvelezce.test.util.repeat.RepeatRule;
@@ -37,7 +37,7 @@ public class BruteForceTest {
             result.append("\n");
         }
 
-        File directory = new File(BruteForce.BF_RES_DIR);
+        File directory = new File(edu.cmu.cs.mvelezce.tool.execute.java.BruteForce.BF_RES_DIR);
 
         if (!directory.exists()) {
             directory.mkdirs();
@@ -56,7 +56,7 @@ public class BruteForceTest {
 
     public void deleteBFResult(String programName) {
         if(repeatRule.getIteration() == 0) {
-            File file = new File(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
+            File file = new File(edu.cmu.cs.mvelezce.tool.execute.java.BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
 
             if(file.exists()) {
                 if(!file.delete()) {

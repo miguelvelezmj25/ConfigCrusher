@@ -368,6 +368,9 @@ public class JavaPipelineTest {
         writer.close();
     }
 
+    @Rule
+    public RepeatRule repeatRule = new RepeatRule();
+
     public void deletePMResult(String programName) {
         if(repeatRule.getIteration() == 0) {
             File file = new File(JavaPipelineTest.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
@@ -379,9 +382,6 @@ public class JavaPipelineTest {
             }
         }
     }
-
-    @Rule
-    public RepeatRule repeatRule = new RepeatRule();
 
     @Test
     public void testSleep14() throws IOException, ParseException, InterruptedException {
@@ -595,7 +595,6 @@ public class JavaPipelineTest {
     @Test
     @Repeat(times=5)
     public void testElevator() throws IOException, ParseException, InterruptedException {
-        // Before
         String programName = "elevator";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
@@ -632,7 +631,6 @@ public class JavaPipelineTest {
         System.out.println(pm);
 
         JavaPipelineTest.savePMPerformance(programName, pm);
-//        JavaPipelineTest.comparePMToBF(programName, pm);
     }
 
     @Test

@@ -91,8 +91,8 @@ public class Regions {
 
         if(exit) {
             Region region = new Region(regionID);
-            Regions.addRegion(region);
             region.exit();
+            Regions.addRegion(region);
         }
     }
 

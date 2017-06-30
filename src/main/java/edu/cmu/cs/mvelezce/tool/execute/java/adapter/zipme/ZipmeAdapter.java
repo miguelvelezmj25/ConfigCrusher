@@ -12,7 +12,15 @@ public class ZipmeAdapter extends Adapter {
 
     private static final String[] CONFIGURATIONS = {
             "FEATUREArchiveCheck",
-            "FEATUREGZIP"
+            "FEATUREGZIP",
+            "FEATUREArchiveCheck",
+            "FEATUREGZIP",
+            "FEATUREAdler32Checksum",
+            "FEATURECompress",
+            "FEATUREExtract",
+            "FEATUREDerivativeGZIPCRC",
+            "FEATUREDerivativeCompressCRC",
+            "FEATUREDerivativeExtractCRC"
     };
 
     public ZipmeAdapter(String programName, String mainClass, String directory) {

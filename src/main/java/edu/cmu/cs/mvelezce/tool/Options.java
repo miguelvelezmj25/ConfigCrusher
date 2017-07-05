@@ -20,6 +20,7 @@ public abstract class Options {
     // Component cmd options
     public static final String DELRES = "delres";
     public static final String SAVERES = "saveres";
+    public static final String ITERATIONS = "i";
 
     public static void getCommandLine(String[] args) {
         org.apache.commons.cli.Options componentOptions = new org.apache.commons.cli.Options();
@@ -30,7 +31,11 @@ public abstract class Options {
         componentOption = new Option(Options.SAVERES, "Saves the result");
         componentOptions.addOption(componentOption);
 
+        componentOption = new Option(Options.ITERATIONS, true, "Iterations");
+        componentOptions.addOption(componentOption);
+
         CommandLineParser parser = new DefaultParser();
+
         try {
             Options.cmd = parser.parse(componentOptions, args);
         } catch (ParseException e) {
@@ -55,5 +60,10 @@ public abstract class Options {
 
     public static boolean checkIfDeleteResult() {
         return cmd.hasOption(Options.DELRES);
+    }
+
+    public static int getIterations() {
+        String iterations = cmd.getOptionValue(Options.ITERATIONS).trim();
+        return Integer.parseInt(iterations);
     }
 }

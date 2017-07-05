@@ -47,6 +47,14 @@ public abstract class Adapter {
                     output.append(s).append("\n");
                 }
             }
+
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+            while ((s = stdError.readLine()) != null) {
+                if(!s.isEmpty()) {
+                    output.append(s).append("\n");
+                }
+            }
         }
         catch(IOException ie) {
             ie.printStackTrace();

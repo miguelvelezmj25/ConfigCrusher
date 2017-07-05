@@ -35,6 +35,14 @@ public class JavaPipelineTest {
 //    public static final double TIMING_ERROR = 1.0;
 
     public static void savePMPerformance(String programName, PerformanceModel pm) throws IOException {
+        File file = new File(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
+
+        if(file.exists()) {
+            if(!file.delete()) {
+                throw new RuntimeException("Could not delete " + file);
+            }
+        }
+
         String[] args = new String[0];
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
         Set<String> options = new HashSet<>();
@@ -66,26 +74,11 @@ public class JavaPipelineTest {
         }
 
         String outputFile = directory + "/" + programName + Options.DOT_CSV;
-        File file = new File(outputFile);
+        file = new File(outputFile);
         FileWriter writer = new FileWriter(file, true);
         writer.write(result.toString());
         writer.flush();
         writer.close();
-    }
-
-    @Rule
-    public RepeatRule repeatRule = new RepeatRule();
-
-    public void deletePMResult(String programName) {
-        if(repeatRule.getIteration() == 0) {
-            File file = new File(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
-
-            if(file.exists()) {
-                if(!file.delete()) {
-                    throw new RuntimeException("Could not delete " + file);
-                }
-            }
-        }
     }
 
     @Test
@@ -220,6 +213,42 @@ public class JavaPipelineTest {
 //        }
     }
 
+    @Test
+    @Repeat(times=1)
+    public void testZip() throws IOException, ParseException, InterruptedException {
+        String programName = "zipme";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/";
+        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+        // Program arguments
+//        args = new String[0];
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+        System.out.println(pm);
+    }
 
     @Test
     @Repeat(times=1)
@@ -297,7 +326,6 @@ public class JavaPipelineTest {
     }
 
     @Test
-    @Repeat(times = 5)
     public void testElevator() throws IOException, ParseException, InterruptedException {
         String programName = "elevator";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
@@ -305,8 +333,6 @@ public class JavaPipelineTest {
         String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
         String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
-
-        deletePMResult(programName);
 
         // Program arguments
         String[] args = new String[0];
@@ -326,9 +352,10 @@ public class JavaPipelineTest {
 //        args = new String[1];
 //        args[0] = "-saveres";
 
-        args = new String[2];
+        args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
+        args[2] = "-i5";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);

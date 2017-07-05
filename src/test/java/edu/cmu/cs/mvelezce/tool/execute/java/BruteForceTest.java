@@ -68,11 +68,25 @@ public class BruteForceTest {
 
     @Test
     @Repeat(times=5)
-    public void testMeasureElevator() throws IOException, ParseException, InterruptedException {
+    public void testElevator() throws IOException, ParseException, InterruptedException {
         String programName = "elevator";
         String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
         String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
+
+        deleteBFResult(programName);
+
+        Set<PerformanceEntry> measuredPerf = BruteForce.measure(programName, srcDir, classDir, entryPoint);
+        BruteForceTest.saveBFPerformance(programName, measuredPerf);
+    }
+
+    @Test
+    @Repeat(times=1)
+    public void testZipme() throws IOException, ParseException, InterruptedException {
+        String programName = "zipme";
+        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
+        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
+        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
 
         deleteBFResult(programName);
 

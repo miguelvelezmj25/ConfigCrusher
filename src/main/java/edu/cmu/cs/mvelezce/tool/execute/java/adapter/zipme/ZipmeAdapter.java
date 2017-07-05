@@ -11,16 +11,14 @@ import java.util.Set;
 public class ZipmeAdapter extends Adapter {
 
     private static final String[] CONFIGURATIONS = {
-            "FEATUREArchiveCheck",
-            "FEATUREGZIP",
+            "FEATURECRC",
             "FEATUREArchiveCheck",
             "FEATUREGZIP",
             "FEATUREAdler32Checksum",
-            "FEATURECompress",
-            "FEATUREExtract",
             "FEATUREDerivativeGZIPCRC",
             "FEATUREDerivativeCompressCRC",
             "FEATUREDerivativeExtractCRC",
+            "FEATUREDerivativeCompressGZIP",
             "FEATUREDerivativeCompressAdler32Checksum",
             "FEATUREDerivativeCompressGZIPCRC"
     };

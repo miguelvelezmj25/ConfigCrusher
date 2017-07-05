@@ -21,43 +21,44 @@ public class Compare {
     public static final String COMPARE_DIR = Options.DIRECTORY + "/comparison/java/programs";
 
     public static void comparePMToBF(String programName) throws IOException {
-        FileInputStream fstream = new FileInputStream(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        String strLine;
-        int bfLineCount = 0;
-
-        while((strLine = br.readLine()) != null) {
-            if(!strLine.isEmpty()) {
-                bfLineCount ++;
-            }
-        }
-
-        in.close();
-
-        fstream = new FileInputStream(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
-        in = new DataInputStream(fstream);
-        br = new BufferedReader(new InputStreamReader(in));
-        int pfLineCount = 0;
-
-        while((strLine = br.readLine()) != null) {
-            if(!strLine.isEmpty()) {
-                pfLineCount ++;
-            }
-        }
-
-        in.close();
-
-        if(bfLineCount != pfLineCount) {
-            throw new RuntimeException("The pf and bf files do not have the same length");
-        }
+//        FileInputStream fstream = new FileInputStream(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
+//        DataInputStream in = new DataInputStream(fstream);
+//        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+//        String strLine;
+//        int bfLineCount = 0;
+//
+//        while((strLine = br.readLine()) != null) {
+//            if(!strLine.isEmpty()) {
+//                bfLineCount ++;
+//            }
+//        }
+//
+//        in.close();
+//
+//        fstream = new FileInputStream(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
+//        in = new DataInputStream(fstream);
+//        br = new BufferedReader(new InputStreamReader(in));
+//        int pfLineCount = 0;
+//
+//        while((strLine = br.readLine()) != null) {
+//            if(!strLine.isEmpty()) {
+//                pfLineCount ++;
+//            }
+//        }
+//
+//        in.close();
+//
+//        if(bfLineCount != pfLineCount) {
+//            throw new RuntimeException("The pf and bf files do not have the same length");
+//        }
 
         Set<String> allOptions = new HashSet<>();
 
-        fstream = new FileInputStream(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
-        in = new DataInputStream(fstream);
-        br = new BufferedReader(new InputStreamReader(in));
+        FileInputStream fstream = new FileInputStream(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
+        DataInputStream in = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String header = "";
+        String strLine = "";
 
         while((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
@@ -90,7 +91,7 @@ public class Compare {
         StringBuilder result = new StringBuilder();
         double se = 0;
         int entries = 0;
-        result.append("configuration,pm mean,pm std,bf mean,bf std,absolute error,relative % error,squared error");
+        result.append("configuration,pm mean,bf mean,absolute error,relative % error,squared error");
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
@@ -106,8 +107,6 @@ public class Compare {
                 if(entry.configuration.equals(configuration)) {
                     pmMean = entry.mean();
                     result.append(pmMean);
-                    result.append(",");
-                    result.append(entry.std());
                     break;
                 }
             }
@@ -118,8 +117,6 @@ public class Compare {
                 if(entry.configuration.equals(configuration)) {
                     bfMean = entry.mean();
                     result.append(bfMean);
-                    result.append(",");
-                    result.append(entry.std());
                     break;
                 }
             }
@@ -162,20 +159,20 @@ public class Compare {
         writer.close();
     }
 
-    private static StringBuilder calculateStats(Set<PerformanceEntry> performanceEntries, Set<String> configuration) {
-        StringBuilder result = new StringBuilder();
-
-        for(PerformanceEntry entry : performanceEntries) {
-            if(entry.configuration.equals(configuration)) {
-                result.append(entry.mean());
-                result.append(",");
-                result.append(entry.std());
-                break;
-            }
-        }
-
-        return result;
-    }
+//    private static StringBuilder calculateStats(Set<PerformanceEntry> performanceEntries, Set<String> configuration) {
+//        StringBuilder result = new StringBuilder();
+//
+//        for(PerformanceEntry entry : performanceEntries) {
+//            if(entry.configuration.equals(configuration)) {
+//                result.append(entry.mean());
+//                result.append(",");
+//                result.append(entry.std());
+//                break;
+//            }
+//        }
+//
+//        return result;
+//    }
 
     private static Set<PerformanceEntry> createEntries(String programName, String approachDir, Set<Set<String>> configurations) throws IOException {
         Set<PerformanceEntry> entries = new HashSet<>();

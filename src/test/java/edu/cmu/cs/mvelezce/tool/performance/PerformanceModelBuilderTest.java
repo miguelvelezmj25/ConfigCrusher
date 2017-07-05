@@ -1,7 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
 import edu.cmu.cs.mvelezce.*;
+import edu.cmu.cs.mvelezce.ArrayList;
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
@@ -14,10 +16,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/28/17.
@@ -50,11 +49,18 @@ public class PerformanceModelBuilderTest {
         String program = "elevator";
 
         // Program arguments
-        String[] args = new String[0];
+        String[] args = new String[1];
+        args[0] = "-i5";
+        Options.getCommandLine(args);
 
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
 
+        List<Set<PerformanceEntry>> executionsPerformance = new java.util.ArrayList<>();
+        for(int i = 0; i < Options.getIterations(); i++) {
+            executionsPerformance.add(Executor.measureConfigurationPerformance(program + Executor.UNDERSCORE + i, args));
+        }
+
+        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(executionsPerformance);
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
@@ -62,7 +68,11 @@ public class PerformanceModelBuilderTest {
             regionsToOptions.put(region, entry.getValue());
         }
 
-        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
         System.out.println(pm);
     }
 
@@ -83,7 +93,7 @@ public class PerformanceModelBuilderTest {
             regionsToOptions.put(region, entry.getValue());
         }
 
-        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
         System.out.println(pm);
     }
 

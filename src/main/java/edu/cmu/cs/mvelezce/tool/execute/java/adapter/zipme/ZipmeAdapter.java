@@ -20,7 +20,9 @@ public class ZipmeAdapter extends Adapter {
             "FEATUREExtract",
             "FEATUREDerivativeGZIPCRC",
             "FEATUREDerivativeCompressCRC",
-            "FEATUREDerivativeExtractCRC"
+            "FEATUREDerivativeExtractCRC",
+            "FEATUREDerivativeCompressAdler32Checksum",
+            "FEATUREDerivativeCompressGZIPCRC"
     };
 
     public ZipmeAdapter(String programName, String mainClass, String directory) {

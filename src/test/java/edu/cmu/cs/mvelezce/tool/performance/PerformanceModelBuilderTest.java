@@ -54,13 +54,8 @@ public class PerformanceModelBuilderTest {
         Options.getCommandLine(args);
 
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
 
-        List<Set<PerformanceEntry>> executionsPerformance = new java.util.ArrayList<>();
-        for(int i = 0; i < Options.getIterations(); i++) {
-            executionsPerformance.add(Executor.measureConfigurationPerformance(program + Executor.UNDERSCORE + i, args));
-        }
-
-        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(executionsPerformance);
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {

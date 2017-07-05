@@ -28,7 +28,7 @@ public class BruteForceTest {
         }
 
         StringBuilder result = new StringBuilder();
-        result.append("configuration,performance");
+        result.append("measured,configuration,performance");
         result.append("\n");
 
         for(PerformanceEntry perfEntry : measuredPerf) {
@@ -36,6 +36,8 @@ public class BruteForceTest {
                 throw new RuntimeException("The performance entry should only have measured the entire program " + perfEntry.getRegionToInnerRegions().keySet());
             }
 
+            result.append("true");
+            result.append(",");
             result.append('"');
             result.append(perfEntry.getConfiguration());
             result.append('"');
@@ -59,21 +61,6 @@ public class BruteForceTest {
         writer.close();
     }
 
-//    @Rule
-//    public RepeatRule repeatRule = new RepeatRule();
-//
-//    public void deleteBFResult(String programName) {
-//        if(repeatRule.getIteration() == 0) {
-//            File file = new File(edu.cmu.cs.mvelezce.tool.execute.java.BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
-//
-//            if(file.exists()) {
-//                if(!file.delete()) {
-//                    throw new RuntimeException("Could not delete " + file);
-//                }
-//            }
-//        }
-//    }
-
     @Test
     public void testElevator() throws IOException, ParseException, InterruptedException {
         String programName = "elevator";
@@ -81,7 +68,8 @@ public class BruteForceTest {
         String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
-        Set<PerformanceEntry> measuredPerf = BruteForce.measure(programName, 5, srcDir, classDir, entryPoint);
+//        Set<PerformanceEntry> measuredPerf = BruteForce.measure(programName, 5, srcDir, classDir, entryPoint);
+        Set<PerformanceEntry> measuredPerf = BruteForce.measure(programName, 5);
         BruteForceTest.saveBFPerformance(programName, measuredPerf);
     }
 

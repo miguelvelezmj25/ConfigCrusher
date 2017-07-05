@@ -44,20 +44,29 @@ public class JavaPipelineTest {
         }
 
         String[] args = new String[0];
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<Set<String>> measuredConfigurations = Simple.getConfigurationsToExecute(programName, args);
         Set<String> options = new HashSet<>();
 
-        for(Set<String> configuration : configurations) {
+        for(Set<String> configuration : measuredConfigurations) {
             options.addAll(configuration);
         }
 
-        configurations = Helper.getConfigurations(options);
+        Set<Set<String>> configurations = Helper.getConfigurations(options);
 
         StringBuilder result = new StringBuilder();
-        result.append("configuration,performance");
+        result.append("measured,configuration,performance");
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
+            if(measuredConfigurations.contains(configuration)) {
+                result.append("true");
+                result.append(",");
+            }
+            else {
+                result.append("null");
+                result.append(",");
+            }
+
             result.append('"');
             result.append(configuration);
             result.append('"');
@@ -349,13 +358,14 @@ public class JavaPipelineTest {
         // Program arguments
 //        args = new String[0];
 
-//        args = new String[1];
+        args = new String[1];
 //        args[0] = "-saveres";
+        args[0] = "-i5";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i5";
+//        args = new String[3];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//        args[2] = "-i5";
 
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);

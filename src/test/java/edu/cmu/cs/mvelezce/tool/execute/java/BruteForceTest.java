@@ -19,6 +19,14 @@ import java.util.Set;
 public class BruteForceTest {
 
     public static void saveBFPerformance(String programName, Set<PerformanceEntry> measuredPerf) throws IOException {
+        File file = new File(edu.cmu.cs.mvelezce.tool.execute.java.BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
+
+        if(file.exists()) {
+            if(!file.delete()) {
+                throw new RuntimeException("Could not delete " + file);
+            }
+        }
+
         StringBuilder result = new StringBuilder();
         result.append("configuration,performance");
         result.append("\n");
@@ -44,53 +52,47 @@ public class BruteForceTest {
         }
 
         String outputFile = directory + "/" + programName + Options.DOT_CSV;
-        File file = new File(outputFile);
+        file = new File(outputFile);
         FileWriter writer = new FileWriter(file, true);
         writer.write(result.toString());
         writer.flush();
         writer.close();
     }
 
-    @Rule
-    public RepeatRule repeatRule = new RepeatRule();
-
-    public void deleteBFResult(String programName) {
-        if(repeatRule.getIteration() == 0) {
-            File file = new File(edu.cmu.cs.mvelezce.tool.execute.java.BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
-
-            if(file.exists()) {
-                if(!file.delete()) {
-                    throw new RuntimeException("Could not delete " + file);
-                }
-            }
-        }
-    }
+//    @Rule
+//    public RepeatRule repeatRule = new RepeatRule();
+//
+//    public void deleteBFResult(String programName) {
+//        if(repeatRule.getIteration() == 0) {
+//            File file = new File(edu.cmu.cs.mvelezce.tool.execute.java.BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
+//
+//            if(file.exists()) {
+//                if(!file.delete()) {
+//                    throw new RuntimeException("Could not delete " + file);
+//                }
+//            }
+//        }
+//    }
 
     @Test
-    @Repeat(times=5)
     public void testElevator() throws IOException, ParseException, InterruptedException {
         String programName = "elevator";
         String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
         String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
-        deleteBFResult(programName);
-
-        Set<PerformanceEntry> measuredPerf = BruteForce.measure(programName, srcDir, classDir, entryPoint);
+        Set<PerformanceEntry> measuredPerf = BruteForce.measure(programName, 5, srcDir, classDir, entryPoint);
         BruteForceTest.saveBFPerformance(programName, measuredPerf);
     }
 
     @Test
-    @Repeat(times=1)
     public void testZipme() throws IOException, ParseException, InterruptedException {
         String programName = "zipme";
         String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
         String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
         String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
 
-        deleteBFResult(programName);
-
-        Set<PerformanceEntry> measuredPerf = BruteForce.measure(programName, srcDir, classDir, entryPoint);
+        Set<PerformanceEntry> measuredPerf = BruteForce.measure(programName, 1, srcDir, classDir, entryPoint);
         BruteForceTest.saveBFPerformance(programName, measuredPerf);
     }
 

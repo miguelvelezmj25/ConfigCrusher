@@ -62,14 +62,18 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
-            ClassNode classNode = this.readClass(filePackage + "." + fileClass);
+            if(fileClass.equals("GZIPOutputStream_hook22")) {
+                int i = 0;
+            }
 
+            ClassNode classNode = this.readClass(filePackage + "." + fileClass);
             String command = "javap -classpath " + this.directory + " -p -c "+ filePackage + "." + fileClass;
             System.out.println(command);
 
             try {
                 Process p = Runtime.getRuntime().exec(command);
                 BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                this.javapResult = new ArrayList<>();
 
                 String s;
                 while ((s = stdInput.readLine()) != null) {
@@ -89,7 +93,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 
-            if(fileClass.equals("Main")) {
+            if(fileClass.equals("GZIPOutputStream_hook22")) {
                 int i = 0;
             }
 
@@ -183,7 +187,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
-                        if(methodNode.name.equals("isBlocked")) {
+                        if(methodNode.name.equals("hook28")) {
                             int i = 0;
                         }
 
@@ -260,7 +264,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
             }
 
-            if(methodNode.name.equals("bftNodeSearch")) {
+            if(methodNode.name.equals("hook28")) {
                 int i = 0;
             }
 
@@ -337,7 +341,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                             int i = 0;
                         }
 
-                        if(methodNode.name.equals("isBlocked")) {
+                        if(methodNode.name.equals("hook28")) {
                             int i = 0;
                         }
 //                        if(javaRegion.getStartMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
@@ -379,6 +383,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
     }
 
     public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
+        if(methodNode.name.equals("execute")) {
+            int i = 0;
+        }
+
         JavaRegion tempRegion = regionsInMethod.get(0);
         int methodStartIndex = 0;
         String method = tempRegion.getRegionMethod();
@@ -392,7 +400,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
         for(String outputLine : this.javapResult) {
             if(outputLine.contains(" " + method + "(")) {
-                if(tempRegion.getRegionMethod().contains("isBlocked")) {
+                if(tempRegion.getRegionMethod().contains("execute")) {
                     int z = 0;
                 }
 
@@ -414,6 +422,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             }
 
             methodStartIndex++;
+        }
+
+        if(methodNode.name.equals("execute")) {
+            int i = 0;
         }
 
         int instructionNumber = 0;

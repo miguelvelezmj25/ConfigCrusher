@@ -18,17 +18,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ForkJoinPool;
+import java.util.*;
 
 /**
  * Created by miguelvelez on 4/30/17.
  */
 public class Executor {
     public static final String DIRECTORY = Options.DIRECTORY + "/executor/java/programs";
+    public static final String UNDERSCORE = "_";
 
     // JSON strings
     public static final String EXECUTIONS = "executions";
@@ -60,15 +57,25 @@ public class Executor {
     }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
-        Set<PerformanceEntry> results = Executor.measureConfigurationPerformance(programName, args);
+        Options.getCommandLine(args);
+        Set<PerformanceEntry> measuredPerformance;
+        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+        int iterations = Options.getIterations();
 
-        if(results != null) {
-            return results;
+        for(int i = 0; i < iterations; i++) {
+            Set<PerformanceEntry> results = Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args);
+
+            if(results != null) {
+//                return results;
+                executionsPerformance.add(results);
+                continue;
+            }
+
+            measuredPerformance = Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, entryPoint, directory, configurationsToExecute);
+            executionsPerformance.add(measuredPerformance);
         }
 
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, entryPoint, directory, configurationsToExecute);
-
-        return measuredPerformance;
+        return averageExecutions(executionsPerformance);
     }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
@@ -109,6 +116,57 @@ public class Executor {
     public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
         // TODO why not just call the writeToFile method?
         Executor.writeToFile(programName, configuration, executedRegions);
+    }
+
+    public static Set<PerformanceEntry> averageExecutions(List<Set<PerformanceEntry>> executionsPerformance) {
+        if(executionsPerformance.size() == 1) {
+            return executionsPerformance.get(0);
+        }
+
+        Set<PerformanceEntry> averagePerf = new HashSet<>(executionsPerformance.get(0));
+
+        for(int i = 1; i < executionsPerformance.size(); i++) {
+            Set<PerformanceEntry> measuredPerformance = executionsPerformance.get(i);
+
+            for(PerformanceEntry averagePerfEntry : averagePerf) {
+                for(PerformanceEntry perfEntry : measuredPerformance) {
+                    if(!averagePerfEntry.getConfiguration().equals(perfEntry.getConfiguration())) {
+                        continue;
+                    }
+
+                    if(averagePerfEntry.getRegionsToExecutionTime().size() != perfEntry.getRegionsToExecutionTime().size()) {
+                        throw new RuntimeException("The number of executed regions do not match "
+                                + averagePerfEntry.getRegionsToExecutionTime().size() + " vs "
+                                + perfEntry.getRegionsToExecutionTime().size());
+                    }
+
+                    Iterator<Map.Entry<Region, Long>> averageRegionsToPerfIter = averagePerfEntry.getRegionsToExecutionTime().entrySet().iterator();
+                    Iterator<Map.Entry<Region, Long>> regionsToPerfIter = perfEntry.getRegionsToExecutionTime().entrySet().iterator();
+
+                    while(averageRegionsToPerfIter.hasNext() && regionsToPerfIter.hasNext()) {
+                        Map.Entry<Region, Long> averageEntry = averageRegionsToPerfIter.next();
+                        Map.Entry<Region, Long> newEntry = regionsToPerfIter.next();
+
+                        if(!averageEntry.getKey().getRegionID().equals(newEntry.getKey().getRegionID())) {
+                            throw new RuntimeException("The regions ID do not match " + averageEntry.getKey().getRegionID()
+                                    + " vs " + newEntry.getKey().getRegionID());
+                        }
+
+                        long sum = averageEntry.getValue() + newEntry.getValue();
+                        averageEntry.setValue(sum);
+                    }
+                }
+            }
+        }
+
+        for(PerformanceEntry perfEntry : averagePerf) {
+            for(Map.Entry<Region, Long> regionToPerf : perfEntry.getRegionsToExecutionTime().entrySet()) {
+                Long average = regionToPerf.getValue() / executionsPerformance.size();
+                regionToPerf.setValue(average);
+            }
+        }
+
+        return averagePerf;
     }
 
     private static void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
@@ -200,5 +258,7 @@ public class Executor {
 
         return performanceEntries;
     }
+
+
 
 }

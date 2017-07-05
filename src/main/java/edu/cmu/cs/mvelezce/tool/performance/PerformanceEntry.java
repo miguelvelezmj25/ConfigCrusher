@@ -14,7 +14,7 @@ public class PerformanceEntry {
 
     public PerformanceEntry(Set<String> configuration, List<Region> executedRegions) {
         this.configuration = configuration;
-        this.regionsToExecutionTime = new HashMap<>();
+        this.regionsToExecutionTime = new LinkedHashMap<>();
         this.regionToInnerRegions = new HashMap<>();
 
         this.calculateRealPerformance(executedRegions);

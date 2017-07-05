@@ -236,11 +236,6 @@ public class ExecutorTest {
         String[] args = new String[0];
 
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
-        Set<String> options = new HashSet<>();
-
-        for(Set<String> configuration : configurations) {
-            options.addAll(configuration);
-        }
 
         String[] a = new String[0];
         ZipMain.main(a);
@@ -248,31 +243,29 @@ public class ExecutorTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        configurations = Helper.getConfigurations(options);
+
 //        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 
     @Test
     public void testElevator() throws IOException, ParseException {
         String programName = "elevator";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
         String[] args = new String[0];
 
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
-        Set<String> options = new HashSet<>();
 
-        for(Set<String> configuration : configurations) {
-            options.addAll(configuration);
-        }
-
-        args = new String[2];
+        args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
+        args[2] = "-i5";
 
-        configurations = Helper.getConfigurations(options);
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+//        args = new String[1];
+//        args[0] = "-i5";
+
+        Set<PerformanceEntry> measured = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 
     @Test

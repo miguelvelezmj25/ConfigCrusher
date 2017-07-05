@@ -18,7 +18,7 @@ public class BruteForce {
 
     public static final String BF_RES_DIR = Options.DIRECTORY + "/bf_res/java/programs";
 
-    public static Set<PerformanceEntry> measure(String programName, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
+    public static Set<PerformanceEntry> measure(String programName, int iterations, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
         Formatter.compile(srcDir, classDir);
         Formatter.formatReturnWithMethod(classDir);
 
@@ -32,9 +32,10 @@ public class BruteForce {
         }
 
         programName += "-bf";
-        args = new String[2];
+        args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
+        args[2] = "-i" + iterations;
 
         configurations = Helper.getConfigurations(options);
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDir, configurations);

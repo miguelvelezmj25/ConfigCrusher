@@ -37,7 +37,44 @@ public class Executor {
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args) throws IOException, ParseException {
         Options.getCommandLine(args);
+        int iterations = Options.getIterations();
+        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
 
+        for(int i = 0; i < iterations; i++) {
+            Set<PerformanceEntry> results = Executor.checkIfExists(programName + Executor.UNDERSCORE + i);
+
+            if(results != null) {
+                executionsPerformance.add(results);
+            }
+
+        }
+
+        return averageExecutions(executionsPerformance);
+    }
+
+    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
+        Options.getCommandLine(args);
+        Set<PerformanceEntry> measuredPerformance;
+        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+        int iterations = Options.getIterations();
+
+        for(int i = 0; i < iterations; i++) {
+            Set<PerformanceEntry> results = Executor.checkIfExists(programName + Executor.UNDERSCORE + i);
+
+            if(results != null) {
+//                return results;
+                executionsPerformance.add(results);
+                continue;
+            }
+
+            measuredPerformance = Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, entryPoint, directory, configurationsToExecute);
+            executionsPerformance.add(measuredPerformance);
+        }
+
+        return averageExecutions(executionsPerformance);
+    }
+
+    private static Set<PerformanceEntry> checkIfExists(String programName) throws IOException, ParseException {
         String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
@@ -54,28 +91,6 @@ public class Executor {
         }
 
         return measuredPerformance;
-    }
-
-    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
-        Options.getCommandLine(args);
-        Set<PerformanceEntry> measuredPerformance;
-        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
-        int iterations = Options.getIterations();
-
-        for(int i = 0; i < iterations; i++) {
-            Set<PerformanceEntry> results = Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args);
-
-            if(results != null) {
-//                return results;
-                executionsPerformance.add(results);
-                continue;
-            }
-
-            measuredPerformance = Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, entryPoint, directory, configurationsToExecute);
-            executionsPerformance.add(measuredPerformance);
-        }
-
-        return averageExecutions(executionsPerformance);
     }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
@@ -194,7 +209,7 @@ public class Executor {
         measuredExecution.put(Executor.EXECUTION_TRACE, regions);
         executions.add(measuredExecution);
 
-        // TODO check if file exists and append. Otherwise create
+        // TODO checkIfExists if file exists and append. Otherwise create
         String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 

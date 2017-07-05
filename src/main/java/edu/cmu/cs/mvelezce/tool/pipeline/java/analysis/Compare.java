@@ -70,7 +70,7 @@ public class Compare {
         while((strLine = br.readLine()) != null && !strLine.equals(header)) {
             if(!strLine.isEmpty()) {
                 Set<String> options = new HashSet<>();
-                String optionsString = strLine.substring(2, strLine.lastIndexOf('"') - 1);
+                String optionsString = strLine.substring(7, strLine.lastIndexOf('"') - 1);
                 String[] arrayOptions = optionsString.split(",");
 
                 for(int i = 0; i < arrayOptions.length; i++) {
@@ -91,10 +91,19 @@ public class Compare {
         StringBuilder result = new StringBuilder();
         double se = 0;
         int entries = 0;
-        result.append("configuration,pm mean,bf mean,absolute error,relative % error,squared error");
+        result.append("measured,configuration,pm mean,bf mean,absolute error,relative % error,squared error");
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
+            for(PerformanceEntry entry : pmEntries) {
+                if(entry.configuration.equals(configuration)) {
+                    result.append('"');
+                    result.append(entry.measured);
+                    result.append('"');
+                    result.append(",");
+                }
+            }
+
             result.append('"');
             result.append(configuration);
             result.append('"');
@@ -179,6 +188,7 @@ public class Compare {
 
         for(Set<String> configuration : configurations) {
             List<Double> valuesList = new ArrayList<>();
+            boolean measured = false;
             FileInputStream fstream = new FileInputStream(approachDir + "/" + programName + Options.DOT_CSV);
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -194,7 +204,7 @@ public class Compare {
 
             while((strLine = br.readLine()) != null) {
                 if(!strLine.isEmpty() && !strLine.equals(header)) {
-                    String optionsString = strLine.substring(2, strLine.lastIndexOf('"') - 1);
+                    String optionsString = strLine.substring(7, strLine.lastIndexOf('"') - 1);
                     String[] arrayOptions;
 
                     if(optionsString.isEmpty()) {
@@ -224,6 +234,8 @@ public class Compare {
                         continue;
                     }
 
+                    String measuredString = strLine.split(",")[0];
+                    measured = Boolean.valueOf(measuredString);
                     String perfString = strLine.substring(strLine.lastIndexOf(",") + 1);
                     valuesList.add(Double.valueOf(perfString));
                 }
@@ -237,7 +249,7 @@ public class Compare {
                 values[i] = valuesArray[i];
             }
 
-            PerformanceEntry performanceEntry = new PerformanceEntry(configuration, values);
+            PerformanceEntry performanceEntry = new PerformanceEntry(configuration, measured, values);
             entries.add(performanceEntry);
         }
 
@@ -246,12 +258,14 @@ public class Compare {
 
     public static class PerformanceEntry {
         private Set<String> configuration;
+        private boolean measured;
         private double mean = Double.MIN_VALUE;
         private double std = Double.MIN_VALUE;
         private double[] values;
 
-        public PerformanceEntry(Set<String> configuration, double[] values) {
+        public PerformanceEntry(Set<String> configuration, boolean measured, double[] values) {
             this.configuration = configuration;
+            this.measured = measured;
             this.values = values;
         }
 

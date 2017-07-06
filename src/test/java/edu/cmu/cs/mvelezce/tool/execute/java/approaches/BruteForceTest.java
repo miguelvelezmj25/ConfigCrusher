@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.execute.java;
+package edu.cmu.cs.mvelezce.tool.execute.java.approaches;
 
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import org.json.simple.parser.ParseException;

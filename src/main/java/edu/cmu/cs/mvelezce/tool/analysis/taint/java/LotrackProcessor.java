@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import org.json.simple.parser.ParseException;
 
 import java.util.HashMap;
 import java.util.HashSet;

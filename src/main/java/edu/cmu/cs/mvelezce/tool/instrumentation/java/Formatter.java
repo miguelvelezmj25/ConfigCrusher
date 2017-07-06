@@ -1,9 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.BasicClassTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.VariableBeforeReturnTransformer;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 

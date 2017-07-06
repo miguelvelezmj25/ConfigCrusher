@@ -95,8 +95,8 @@ public class BruteForce {
         result.append("\n");
 
         for(PerformanceStatistic perfStat : perfStats) {
-            if(perfStat.getRegionIdsToMean().size() != 1) {
-                throw new RuntimeException("The performance entry should only have measured the entire program " + perfStat.getRegionIdsToMean().keySet());
+            if(perfStat.getRegionsToMean().size() != 1) {
+                throw new RuntimeException("The performance entry should only have measured the entire program " + perfStat.getRegionsToMean().keySet());
             }
 
             perfStat.setMeasured("true");
@@ -106,9 +106,9 @@ public class BruteForce {
             result.append(perfStat.getConfiguration());
             result.append('"');
             result.append(",");
-            result.append(perfStat.getRegionIdsToMean().values().iterator().next() / 1000000000.0);
+            result.append(perfStat.getRegionsToMean().values().iterator().next() / 1000000000.0);
             result.append(",");
-            result.append(perfStat.getRegionIdsToStd().values().iterator().next() / 1000000000.0);
+            result.append(perfStat.getRegionsToStd().values().iterator().next() / 1000000000.0);
             result.append("\n");
         }
 

@@ -159,49 +159,56 @@ public class Executor {
 
     public static List<PerformanceStatistic> getExecutionsStats(List<Set<PerformanceEntry>> executionsPerformance) {
         Set<PerformanceEntry> entries = executionsPerformance.get(0);
-        List<PerformanceStatistic> perfStats = new ArrayList<>();
+        Map<Set<String>, PerformanceStatistic> regionsToPerfStat = new HashMap<>();
 
         for(PerformanceEntry entry : entries) {
-            Map<String, List<Long>> regionToValues = new LinkedHashMap<>();
+            Map<Region, List<Long>> regionToValues = new LinkedHashMap<>();
+            PerformanceStatistic perfStat = new PerformanceStatistic(entry.getConfiguration(), regionToValues);
 
             for(Map.Entry<Region, Long> regionsToTime : entry.getRegionsToExecutionTime().entrySet()) {
                 List<Long> values = new ArrayList<>();
                 values.add(regionsToTime.getValue());
-                regionToValues.put(regionsToTime.getKey().getRegionID(), values);
-
-                PerformanceStatistic perfStat = new PerformanceStatistic(entry.getConfiguration(), regionToValues);
-                perfStats.add(perfStat);
+                regionToValues.put(regionsToTime.getKey(), values);
             }
+
+            regionsToPerfStat.put(entry.getConfiguration(), perfStat);
         }
 
         for(int i = 1; i < executionsPerformance.size(); i++) {
             entries = executionsPerformance.get(i);
 
-            for(PerformanceStatistic perfStat : perfStats) {
+            for(Map.Entry<Set<String>, PerformanceStatistic> regionToPerfStat : regionsToPerfStat.entrySet()) {
                 for(PerformanceEntry entry : entries) {
-                    if(!perfStat.getConfiguration().equals(entry.getConfiguration())) {
+                    if(!regionToPerfStat.getKey().equals(entry.getConfiguration())) {
                         continue;
                     }
 
-                    if(perfStat.getRegionIdsToValues().size() != entry.getRegionsToExecutionTime().size()) {
+                    if(regionToPerfStat.getValue().getRegionsToValues().size() != entry.getRegionsToExecutionTime().size()) {
                         throw new RuntimeException("The number of executed regions do not match "
-                                + perfStat.getRegionIdsToValues().size() + " vs "
+                                + regionToPerfStat.getValue().getRegionsToValues().size() + " vs "
                                 + entry.getRegionsToExecutionTime().size());
                     }
 
-                    for(Map.Entry<String, List<Long>> regionToValues : perfStat.getRegionIdsToValues().entrySet()) {
-                        for(Map.Entry<Region, Long> entryRegionToValues : entry.getRegionsToExecutionTime().entrySet()) {
-                            if(!regionToValues.getKey().equals(entryRegionToValues.getKey().getRegionID())) {
-                                throw new RuntimeException("The regions ID do not match " + regionToValues.getKey()
-                                        + " vs " + entryRegionToValues.getKey().getRegionID());
-                            }
+                    Iterator<Map.Entry<Region, List<Long>>> regionToPerfStatValuesIter = regionToPerfStat.getValue().getRegionsToValues().entrySet().iterator();
+                    Iterator<Map.Entry<Region, Long>> entryRegionToValuesIter = entry.getRegionsToExecutionTime().entrySet().iterator();
 
-                            regionToValues.getValue().add(entryRegionToValues.getValue());
+                    while(regionToPerfStatValuesIter.hasNext() && entryRegionToValuesIter.hasNext()) {
+                        Map.Entry<Region, List<Long>> regionToPerfStatValuesEntry = regionToPerfStatValuesIter.next();
+                        Map.Entry<Region, Long> entryRegionToValuesEntry = entryRegionToValuesIter.next();
+
+                        if(!regionToPerfStatValuesEntry.getKey().getRegionID().equals(entryRegionToValuesEntry.getKey().getRegionID())) {
+                            throw new RuntimeException("The regions ID do not match "
+                                    + regionToPerfStatValuesEntry.getKey().getRegionID()
+                                    + " vs " + entryRegionToValuesEntry.getKey().getRegionID());
                         }
+
+                        regionToPerfStatValuesEntry.getValue().add(entryRegionToValuesEntry.getValue());
                     }
                 }
             }
         }
+
+        List<PerformanceStatistic> perfStats = new ArrayList<>(regionsToPerfStat.values());
 
         for(PerformanceStatistic perfStat : perfStats) {
             perfStat.calculateMean();
@@ -221,8 +228,10 @@ public class Executor {
                 }
 
                 Map<Region, Long> something = new LinkedHashMap<>();
-                Iterator<Map.Entry<String, Long>> regionIdsToMeanIter = perfStat.getRegionIdsToMean().entrySet().iterator();
+                Iterator<Map.Entry<Region, Long>> regionIdsToMeanIter = perfStat.getRegionsToMean().entrySet().iterator();
                 Iterator<Map.Entry<Region, Long>> regionsToTimeIter = perfEntry.getRegionsToExecutionTime().entrySet().iterator();
+
+                // TODO check if this is correct
 
                 while(regionIdsToMeanIter.hasNext() && regionsToTimeIter.hasNext()) {
                     something.put(regionsToTimeIter.next().getKey(), regionIdsToMeanIter.next().getValue());

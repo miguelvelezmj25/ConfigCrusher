@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -35,46 +36,7 @@ public class Executor {
     public static final String START_TIME = "startTime";
     public static final String END_TIME = "endTime";
 
-    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args) throws IOException, ParseException {
-        Options.getCommandLine(args);
-        int iterations = Options.getIterations();
-        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
-
-        for(int i = 0; i < iterations; i++) {
-            Set<PerformanceEntry> results = Executor.checkIfExists(programName + Executor.UNDERSCORE + i);
-
-            if(results != null) {
-                executionsPerformance.add(results);
-            }
-
-        }
-
-        return averageExecutions(executionsPerformance);
-    }
-
-    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
-        Options.getCommandLine(args);
-        Set<PerformanceEntry> measuredPerformance;
-        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
-        int iterations = Options.getIterations();
-
-        for(int i = 0; i < iterations; i++) {
-            Set<PerformanceEntry> results = Executor.checkIfExists(programName + Executor.UNDERSCORE + i);
-
-            if(results != null) {
-//                return results;
-                executionsPerformance.add(results);
-                continue;
-            }
-
-            measuredPerformance = Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, entryPoint, directory, configurationsToExecute);
-            executionsPerformance.add(measuredPerformance);
-        }
-
-        return averageExecutions(executionsPerformance);
-    }
-
-    private static Set<PerformanceEntry> checkIfExists(String programName) throws IOException, ParseException {
+    private static Set<PerformanceEntry> returnIfExists(String programName) throws IOException, ParseException {
         String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
@@ -91,6 +53,62 @@ public class Executor {
         }
 
         return measuredPerformance;
+    }
+
+    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args) throws IOException, ParseException {
+        Options.getCommandLine(args);
+
+        return Executor.returnIfExists(programName);
+    }
+
+    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
+        Set<PerformanceEntry> results = Executor.measureConfigurationPerformance(programName, args);
+
+        if(results != null) {
+            return results;
+        }
+
+        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, entryPoint, directory, configurationsToExecute);
+
+        return measuredPerformance;
+    }
+
+    public static Set<PerformanceEntry> repeatMeasureConfigurationPerformance(String programName, String[] args) throws IOException, ParseException {
+        Options.getCommandLine(args);
+        int iterations = Options.getIterations();
+        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+
+        for(int i = 0; i < iterations; i++) {
+            Set<PerformanceEntry> results = Executor.returnIfExists(programName + Executor.UNDERSCORE + i);
+
+            if(results != null) {
+                executionsPerformance.add(results);
+            }
+
+        }
+
+        return averageExecutions(executionsPerformance);
+    }
+
+    public static Set<PerformanceEntry> repeatMeasureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
+        Options.getCommandLine(args);
+        Set<PerformanceEntry> measuredPerformance;
+        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+        int iterations = Options.getIterations();
+
+        for(int i = 0; i < iterations; i++) {
+            Set<PerformanceEntry> results = Executor.returnIfExists(programName + Executor.UNDERSCORE + i);
+
+            if(results != null) {
+                executionsPerformance.add(results);
+                continue;
+            }
+
+            measuredPerformance = Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, entryPoint, directory, configurationsToExecute);
+            executionsPerformance.add(measuredPerformance);
+        }
+
+        return averageExecutions(executionsPerformance);
     }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String mainClass, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
@@ -131,6 +149,60 @@ public class Executor {
     public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
         // TODO why not just call the writeToFile method?
         Executor.writeToFile(programName, configuration, executedRegions);
+    }
+
+    public static List<PerformanceStatistic> getExecutionsStats(List<Set<PerformanceEntry>> executionsPerformance) {
+        Set<PerformanceEntry> entries = executionsPerformance.get(0);
+        List<PerformanceStatistic> perfStats = new ArrayList<>();
+
+        for(PerformanceEntry entry : entries) {
+            Map<String, List<Double>> regionToValues = new LinkedHashMap<>();
+
+            for(Map.Entry<Region, Long> regionsToTime : entry.getRegionsToExecutionTime().entrySet()) {
+                List<Double> values = new ArrayList<>();
+                values.add(regionsToTime.getValue() / 1000000000.0);
+                regionToValues.put(regionsToTime.getKey().getRegionID(), values);
+
+                PerformanceStatistic perfStat = new PerformanceStatistic(entry.getConfiguration(), regionToValues);
+                perfStats.add(perfStat);
+            }
+        }
+
+        for(int i = 1; i < executionsPerformance.size(); i++) {
+            entries = executionsPerformance.get(i);
+
+            for(PerformanceStatistic perfStat : perfStats) {
+                for(PerformanceEntry entry : entries) {
+                    if(!perfStat.getConfiguration().equals(entry.getConfiguration())) {
+                        continue;
+                    }
+
+                    if(perfStat.getRegionsToValues().size() != entry.getRegionsToExecutionTime().size()) {
+                        throw new RuntimeException("The number of executed regions do not match "
+                                + perfStat.getRegionsToValues().size() + " vs "
+                                + entry.getRegionsToExecutionTime().size());
+                    }
+
+                    for(Map.Entry<String, List<Double>> regionToValues : perfStat.getRegionsToValues().entrySet()) {
+                        for(Map.Entry<Region, Long> entryRegionToValues : entry.getRegionsToExecutionTime().entrySet()) {
+                            if(!regionToValues.getKey().equals(entryRegionToValues.getKey().getRegionID())) {
+                                throw new RuntimeException("The regions ID do not match " + regionToValues.getKey()
+                                        + " vs " + entryRegionToValues.getKey().getRegionID());
+                            }
+
+                            regionToValues.getValue().add(entryRegionToValues.getValue() / 1000000000.0);
+                        }
+                    }
+                }
+            }
+        }
+
+        for(PerformanceStatistic perfStat : perfStats) {
+            perfStat.calculateMean();
+            perfStat.calculateStd();
+        }
+
+        return perfStats;
     }
 
     public static Set<PerformanceEntry> averageExecutions(List<Set<PerformanceEntry>> executionsPerformance) {
@@ -273,7 +345,5 @@ public class Executor {
 
         return performanceEntries;
     }
-
-
 
 }

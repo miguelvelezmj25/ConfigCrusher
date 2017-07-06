@@ -257,13 +257,13 @@ public class ExecutorTest {
 
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i5";
+//        args = new String[3];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//        args[2] = "-i5";
 
-//        args = new String[1];
-//        args[0] = "-i5";
+        args = new String[1];
+        args[0] = "-i5";
 
         Set<PerformanceEntry> measured = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }

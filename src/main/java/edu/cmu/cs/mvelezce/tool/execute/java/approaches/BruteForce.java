@@ -24,8 +24,6 @@ public class BruteForce {
 
     public static final String BF_RES_DIR = Options.DIRECTORY + "/bf_res/java/programs";
 
-
-
     public static Set<PerformanceEntry> repeatProcessMeasure(String programName, int iterations) throws IOException, ParseException, InterruptedException {
         programName += "-bf";
         String[] args = new String[1];

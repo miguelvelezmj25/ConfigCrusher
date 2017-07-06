@@ -20,6 +20,12 @@ public class PerformanceEntry {
         this.calculateRealPerformance(executedRegions);
     }
 
+    public PerformanceEntry(Set<String> configuration, Map<Region, Long> regionsToExecutionTime, Map<Region, Set<Region>> regionToInnerRegions) {
+        this.configuration = configuration;
+        this.regionsToExecutionTime = regionsToExecutionTime;
+        this.regionToInnerRegions = regionToInnerRegions;
+    }
+
     /**
      * Recreating execution trace to calculate real performance of each region
      *

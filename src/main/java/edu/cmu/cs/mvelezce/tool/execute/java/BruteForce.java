@@ -5,10 +5,15 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,16 +23,34 @@ public class BruteForce {
 
     public static final String BF_RES_DIR = Options.DIRECTORY + "/bf_res/java/programs";
 
-    public static Set<PerformanceEntry> measure(String programName, int iterations) throws IOException, ParseException, InterruptedException {
+    public static Set<PerformanceEntry> repeatMeasure(String programName, int iterations) throws IOException, ParseException, InterruptedException {
         programName += "-bf";
         String[] args = new String[1];
         args[0] = "-i" + iterations;
+        Options.getCommandLine(args);
 
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args);
+        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+
+        for(int i = 0; i < Options.getIterations(); i++) {
+            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args));
+        }
+
+        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(executionsPerformance);
+//
+//        executionsPerformance = new ArrayList<>();
+//
+//        for(int i = 0; i < Options.getIterations(); i++) {
+//            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args));
+//        }
+//
+        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
+        programName = programName.substring(0, programName.indexOf("-"));
+        BruteForce.saveBFPerformance(programName, perfStats);
+
         return measuredPerformance;
     }
 
-    public static Set<PerformanceEntry> measure(String programName, int iterations, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
+    public static Set<PerformanceEntry> repeatMeasure(String programName, int iterations, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
         Formatter.compile(srcDir, classDir);
         Formatter.formatReturnWithMethod(classDir);
 
@@ -48,7 +71,54 @@ public class BruteForce {
 
         configurations = Helper.getConfigurations(options);
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDir, configurations);
+//        BruteForce.saveBFPerformance(programName, measuredPerformance);
+
         return measuredPerformance;
+    }
+
+    public static void saveBFPerformance(String programName, List<PerformanceStatistic> perfStats) throws IOException {
+        File file = new File(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
+
+        if(file.exists()) {
+            if(!file.delete()) {
+                throw new RuntimeException("Could not delete " + file);
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        result.append("measured,configuration,performance,std");
+        result.append("\n");
+
+        for(PerformanceStatistic perfStat : perfStats) {
+            if(perfStat.getRegionsToMean().size() != 1) {
+                throw new RuntimeException("The performance entry should only have measured the entire program " + perfStat.getRegionsToMean().keySet());
+            }
+
+            perfStat.setMeasured("true");
+            result.append("true");
+            result.append(",");
+            result.append('"');
+            result.append(perfStat.getConfiguration());
+            result.append('"');
+            result.append(",");
+            result.append(perfStat.getRegionsToMean().values().iterator().next());
+            result.append(",");
+            result.append(perfStat.getRegionsToStd().values().iterator().next());
+            result.append("\n");
+        }
+
+        File directory = new File(BruteForce.BF_RES_DIR);
+
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String outputFile = directory + "/" + programName + Options.DOT_CSV;
+        file = new File(outputFile);
+        FileWriter writer = new FileWriter(file, true);
+        writer.write(result.toString());
+        writer.flush();
+        writer.close();
     }
 
 }

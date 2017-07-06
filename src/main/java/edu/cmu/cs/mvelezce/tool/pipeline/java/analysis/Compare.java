@@ -4,13 +4,9 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.execute.java.approaches.BruteForce;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
-import org.apache.commons.math3.stat.descriptive.moment.Mean;
-import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,44 +17,43 @@ public class Compare {
     public static final String COMPARE_DIR = Options.DIRECTORY + "/comparison/java/programs";
 
     public static void comparePMToBF(String programName) throws IOException {
-//        FileInputStream fstream = new FileInputStream(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
-//        DataInputStream in = new DataInputStream(fstream);
-//        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-//        String strLine;
-//        int bfLineCount = 0;
-//
-//        while((strLine = br.readLine()) != null) {
-//            if(!strLine.isEmpty()) {
-//                bfLineCount ++;
-//            }
-//        }
-//
-//        in.close();
-//
-//        fstream = new FileInputStream(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
-//        in = new DataInputStream(fstream);
-//        br = new BufferedReader(new InputStreamReader(in));
-//        int pfLineCount = 0;
-//
-//        while((strLine = br.readLine()) != null) {
-//            if(!strLine.isEmpty()) {
-//                pfLineCount ++;
-//            }
-//        }
-//
-//        in.close();
-//
-//        if(bfLineCount != pfLineCount) {
-//            throw new RuntimeException("The pf and bf files do not have the same length");
-//        }
-
-        Set<String> allOptions = new HashSet<>();
-
         FileInputStream fstream = new FileInputStream(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
         DataInputStream in = new DataInputStream(fstream);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        String strLine;
+        int bfLineCount = 0;
+
+        while((strLine = br.readLine()) != null) {
+            if(!strLine.isEmpty()) {
+                bfLineCount ++;
+            }
+        }
+
+        in.close();
+
+        fstream = new FileInputStream(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
+        in = new DataInputStream(fstream);
+        br = new BufferedReader(new InputStreamReader(in));
+        int pfLineCount = 0;
+
+        while((strLine = br.readLine()) != null) {
+            if(!strLine.isEmpty()) {
+                pfLineCount ++;
+            }
+        }
+
+        in.close();
+
+        if(bfLineCount != pfLineCount) {
+            throw new RuntimeException("The pf and bf files do not have the same length");
+        }
+
+        Set<String> allOptions = new HashSet<>();
+
+        fstream = new FileInputStream(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
+        in = new DataInputStream(fstream);
+        br = new BufferedReader(new InputStreamReader(in));
         String header = "";
-        String strLine = "";
 
         while((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
@@ -85,55 +80,57 @@ public class Compare {
         allOptions.remove("");
 
         Set<Set<String>> configurations = Helper.getConfigurations(allOptions);
-        Set<PerformanceEntry> bfEntries = Compare.createEntries(programName, BruteForce.BF_RES_DIR, configurations);
-        Set<PerformanceEntry> pmEntries = Compare.createEntries(programName, JavaPipeline.PM_RES_DIR, configurations);
+        Set<PerformanceStatistic> bfEntries = Compare.createEntries(programName, BruteForce.BF_RES_DIR, configurations);
+        Set<PerformanceStatistic> pmEntries = Compare.createEntries(programName, JavaPipeline.PM_RES_DIR, configurations);
 
         StringBuilder result = new StringBuilder();
         double se = 0;
         int entries = 0;
-        result.append("measured,configuration,pm mean,bf mean,absolute error,relative % error,squared error");
+        result.append("measured,configuration,pm mean,bf mean,bf std, absolute error,relative % error,squared error");
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
-            for(PerformanceEntry entry : pmEntries) {
-                if(entry.configuration.equals(configuration)) {
-                    result.append('"');
-                    result.append(entry.measured);
-                    result.append('"');
-                    result.append(",");
+            PerformanceStatistic pmEntry = null;
+            PerformanceStatistic bfEntry = null;
+
+            for(PerformanceStatistic entry : pmEntries) {
+                if(!entry.getConfiguration().equals(configuration)) {
+                    continue;
                 }
+
+                pmEntry = entry;
+                break;
             }
 
+            result.append('"');
+            result.append(pmEntry.getMeasured());
+            result.append('"');
+            result.append(",");
             result.append('"');
             result.append(configuration);
             result.append('"');
             result.append(",");
-
-            double pmMean = Double.MIN_VALUE;
-            double bfMean = Double.MIN_VALUE;
-
-            for(PerformanceEntry entry : pmEntries) {
-                if(entry.configuration.equals(configuration)) {
-                    pmMean = entry.mean();
-                    result.append(pmMean);
-                    break;
-                }
-            }
-
+            result.append(pmEntry.getMean());
             result.append(",");
 
-            for(PerformanceEntry entry : bfEntries) {
-                if(entry.configuration.equals(configuration)) {
-                    bfMean = entry.mean();
-                    result.append(bfMean);
-                    break;
+            for(PerformanceStatistic entry : bfEntries) {
+                if(!entry.getConfiguration().equals(configuration)) {
+                    continue;
                 }
+
+                bfEntry = entry;
+                break;
             }
 
+            result.append(bfEntry.getMean());
             result.append(",");
-            double absoluteError = Math.abs(bfMean - pmMean);
-            double relativeError = absoluteError / bfMean * 100.0;
-            double squaredError = Math.pow(bfMean - pmMean, 2);
+            result.append(bfEntry.getStd());
+            result.append(",");
+
+            double absoluteError = Math.abs(bfEntry.getMean() - pmEntry.getMean());
+            double relativeError = absoluteError / bfEntry.getMean() * 100.0;
+            double squaredError = Math.pow(bfEntry.getMean() - pmEntry.getMean(), 2);
+
             result.append(absoluteError);
             result.append(",");
             result.append(relativeError);
@@ -168,27 +165,10 @@ public class Compare {
         writer.close();
     }
 
-//    private static StringBuilder calculateStats(Set<PerformanceEntry> performanceEntries, Set<String> configuration) {
-//        StringBuilder result = new StringBuilder();
-//
-//        for(PerformanceEntry entry : performanceEntries) {
-//            if(entry.configuration.equals(configuration)) {
-//                result.append(entry.mean());
-//                result.append(",");
-//                result.append(entry.std());
-//                break;
-//            }
-//        }
-//
-//        return result;
-//    }
-
-    private static Set<PerformanceEntry> createEntries(String programName, String approachDir, Set<Set<String>> configurations) throws IOException {
-        Set<PerformanceEntry> entries = new HashSet<>();
+    private static Set<PerformanceStatistic> createEntries(String programName, String approachDir, Set<Set<String>> configurations) throws IOException {
+        Set<PerformanceStatistic> entries = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
-            List<Double> valuesList = new ArrayList<>();
-            boolean measured = false;
             FileInputStream fstream = new FileInputStream(approachDir + "/" + programName + Options.DOT_CSV);
             DataInputStream in = new DataInputStream(fstream);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -203,92 +183,64 @@ public class Compare {
             }
 
             while((strLine = br.readLine()) != null) {
-                if(!strLine.isEmpty() && !strLine.equals(header)) {
-                    String optionsString = strLine.substring(7, strLine.lastIndexOf('"') - 1);
-                    String[] arrayOptions;
-
-                    if(optionsString.isEmpty()) {
-                        arrayOptions = new String[0];
-                    }
-                    else {
-                        arrayOptions = optionsString.split(",");
-                    }
-
-                    boolean matchedConfiguration = true;
-
-                    if(configuration.size() != arrayOptions.length) {
-                        matchedConfiguration = false;
-                    }
-
-                    if(!matchedConfiguration) {
-                        continue;
-                    }
-
-                    for(int i = 0; i < arrayOptions.length; i++) {
-                        if(!configuration.contains(arrayOptions[i].trim())) {
-                            matchedConfiguration = false;
-                        }
-                    }
-
-                    if(!matchedConfiguration) {
-                        continue;
-                    }
-
-                    String measuredString = strLine.split(",")[0];
-                    measured = Boolean.valueOf(measuredString);
-                    String perfString = strLine.substring(strLine.lastIndexOf(",") + 1);
-                    valuesList.add(Double.valueOf(perfString));
+                if(strLine.isEmpty() || strLine.equals(header)) {
+                    continue;
                 }
 
+                String optionsString = strLine.substring(7, strLine.lastIndexOf('"') - 1);
+                String[] arrayOptions;
+
+                if(optionsString.isEmpty()) {
+                    arrayOptions = new String[0];
+                }
+                else {
+                    arrayOptions = optionsString.split(",");
+                }
+
+                boolean matchedConfiguration = true;
+
+                if(configuration.size() != arrayOptions.length) {
+                    matchedConfiguration = false;
+                }
+
+                if(!matchedConfiguration) {
+                    continue;
+                }
+
+                for(int i = 0; i < arrayOptions.length; i++) {
+                    if(!configuration.contains(arrayOptions[i].trim())) {
+                        matchedConfiguration = false;
+                    }
+                }
+
+                if(!matchedConfiguration) {
+                    continue;
+                }
+
+                PerformanceStatistic perfStat;
+                int commaOffset = Math.max(0, configuration.size() - 1);
+                String[] strEntries = strLine.split(",");
+                String measuredString = strEntries[0].trim();
+                boolean measured = Boolean.valueOf(measuredString);
+                String perfString = strEntries[2 + commaOffset].trim();
+
+                if((strEntries.length - commaOffset) == 3) {
+                    perfStat = new PerformanceStatistic(measured + "", configuration, Double.valueOf(perfString), 0.0);
+                }
+                else if((strEntries.length - commaOffset) == 4) {
+                    String stdString = strEntries[3 + commaOffset].trim();
+                    perfStat = new PerformanceStatistic(measured + "", configuration, Double.valueOf(perfString), Double.valueOf(stdString));
+                }
+                else {
+                    throw new RuntimeException("Could not parse the file");
+                }
+
+                entries.add(perfStat);
             }
 
-            Double[] valuesArray = valuesList.toArray(new Double[0]);
-            double[] values = new double[valuesArray.length];
-
-            for(int i = 0; i < valuesArray.length; i++) {
-                values[i] = valuesArray[i];
-            }
-
-            PerformanceEntry performanceEntry = new PerformanceEntry(configuration, measured, values);
-            entries.add(performanceEntry);
         }
 
         return entries;
     }
-
-    // TODO delete
-    public static class PerformanceEntry {
-        private Set<String> configuration;
-        private boolean measured;
-        private double mean = Double.MIN_VALUE;
-        private double std = Double.MIN_VALUE;
-        private double[] values;
-
-        public PerformanceEntry(Set<String> configuration, boolean measured, double[] values) {
-            this.configuration = configuration;
-            this.measured = measured;
-            this.values = values;
-        }
-
-        public double mean() {
-            if(this.mean == Double.MIN_VALUE) {
-                Mean mathMean = new Mean();
-                this.mean = mathMean.evaluate(this.values);
-            }
-
-            return this.mean;
-        }
-
-        public double std() {
-            if(this.std == Double.MIN_VALUE) {
-                StandardDeviation mathStd = new StandardDeviation();
-                this.std = mathStd.evaluate(this.values);
-            }
-
-            return this.std;
-        }
-
-    }
-
 
 }

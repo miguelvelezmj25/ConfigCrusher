@@ -98,7 +98,7 @@ public class BruteForce {
                 throw new RuntimeException("The performance entry should only have measured the entire program " + perfStat.getRegionsToMean().keySet());
             }
 
-            perfStat.setMeasured("true");
+//            perfStat.setMeasured("true");
             result.append("true");
             result.append(",");
             result.append('"');

@@ -18,6 +18,8 @@ public class PerformanceStatistic {
     private Map<Region, List<Long>> regionsToValues;
     private Map<Region, Long> regionsToMean = new LinkedHashMap<>();
     private Map<Region, Long> regionsToStd = new LinkedHashMap<>();
+    private double mean = Double.MIN_VALUE;
+    private double std = Double.MIN_VALUE;
 
     public PerformanceStatistic(String measured, Set<String> configuration, Map<Region, List<Long>> regionsToValues) {
         if(Boolean.valueOf(measured)) {
@@ -34,6 +36,13 @@ public class PerformanceStatistic {
     public PerformanceStatistic(Set<String> configuration, Map<Region, List<Long>> regionsToValues) {
         this.configuration = configuration;
         this.regionsToValues = regionsToValues;
+    }
+
+    public PerformanceStatistic(String measured, Set<String> configuration, double mean, double std) {
+        this.measured = measured;
+        this.configuration = configuration;
+        this.mean = mean;
+        this.std = std;
     }
 
     public void calculateMean() {
@@ -83,6 +92,15 @@ public class PerformanceStatistic {
     public String getMeasured() {
         return this.measured;
     }
+
+    public double getMean() {
+        return this.mean;
+    }
+
+    public double getStd() {
+        return this.std;
+    }
+
 
     public void setMeasured(String measured) {
         this.measured = measured;

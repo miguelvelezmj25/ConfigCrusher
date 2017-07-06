@@ -11,11 +11,11 @@ import java.util.*;
 public class PerformanceStatistic {
     private String measured;
     private Set<String> configuration;
-    private Map<String, List<Double>> regionsToValues;
-    private Map<String, Double> regionsToMean = new LinkedHashMap<>();
-    private Map<String, Double> regionsToStd = new LinkedHashMap<>();
+    private Map<String, List<Long>> regionIdsToValues;
+    private Map<String, Long> regionIdsToMean = new LinkedHashMap<>();
+    private Map<String, Long> regionIdsToStd = new LinkedHashMap<>();
 
-    public PerformanceStatistic(String measured, Set<String> configuration, Map<String, List<Double>> regionsToValues) {
+    public PerformanceStatistic(String measured, Set<String> configuration, Map<String, List<Long>> regionIdsToValues) {
         if(Boolean.valueOf(measured)) {
             this.measured = "true";
         }
@@ -24,39 +24,39 @@ public class PerformanceStatistic {
         }
 
         this.configuration = configuration;
-        this.regionsToValues = regionsToValues;
+        this.regionIdsToValues = regionIdsToValues;
     }
 
-    public PerformanceStatistic(Set<String> configuration, Map<String, List<Double>> regionsToValues) {
+    public PerformanceStatistic(Set<String> configuration, Map<String, List<Long>> regionIdsToValues) {
         this.configuration = configuration;
-        this.regionsToValues = regionsToValues;
+        this.regionIdsToValues = regionIdsToValues;
     }
 
     public void calculateMean() {
-        for(Map.Entry<String, List<Double>> regionToValues : this.regionsToValues.entrySet()) {
-            Double[] arrayDouble = regionToValues.getValue().toArray(new Double[0]);
-            double[] array = new double[arrayDouble.length];
+        for(Map.Entry<String, List<Long>> regionToValues : this.regionIdsToValues.entrySet()) {
+            Long[] arrayLong = regionToValues.getValue().toArray(new Long[0]);
+            double[] array = new double[arrayLong.length];
 
             for(int i = 0; i < array.length; i++) {
-                array[i] = arrayDouble[i];
+                array[i] = arrayLong[i];
             }
 
             Mean mean = new Mean();
-            this.regionsToMean.put(regionToValues.getKey(), mean.evaluate(array));
+            this.regionIdsToMean.put(regionToValues.getKey(), (long) mean.evaluate(array));
         }
     }
 
     public void calculateStd() {
-        for(Map.Entry<String, List<Double>> regionToValues : this.regionsToValues.entrySet()) {
-            Double[] arrayDouble = regionToValues.getValue().toArray(new Double[0]);
-            double[] array = new double[arrayDouble.length];
+        for(Map.Entry<String, List<Long>> regionToValues : this.regionIdsToValues.entrySet()) {
+            Long[] arrayLong = regionToValues.getValue().toArray(new Long[0]);
+            double[] array = new double[arrayLong.length];
 
             for(int i = 0; i < array.length; i++) {
-                array[i] = arrayDouble[i];
+                array[i] = arrayLong[i];
             }
 
             StandardDeviation std = new StandardDeviation();
-            this.regionsToStd.put(regionToValues.getKey(), std.evaluate(array));
+            this.regionIdsToStd.put(regionToValues.getKey(), (long) std.evaluate(array));
         }
     }
 
@@ -64,16 +64,16 @@ public class PerformanceStatistic {
         return this.configuration;
     }
 
-    public Map<String, List<Double>> getRegionsToValues() {
-        return this.regionsToValues;
+    public Map<String, List<Long>> getRegionIdsToValues() {
+        return this.regionIdsToValues;
     }
 
-    public Map<String, Double> getRegionsToMean() {
-        return this.regionsToMean;
+    public Map<String, Long> getRegionIdsToMean() {
+        return this.regionIdsToMean;
     }
 
-    public Map<String, Double> getRegionsToStd() {
-        return this.regionsToStd;
+    public Map<String, Long> getRegionIdsToStd() {
+        return this.regionIdsToStd;
     }
 
     public String getMeasured() {

@@ -94,8 +94,6 @@ public class JavaPipeline {
 
         List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
         Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
-
-//        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(programName, args, entryPoint, instrumentClassDirectory, configurationsToExecute);
         System.out.println("");
 
         System.out.println("####################### Build performance model #######################");

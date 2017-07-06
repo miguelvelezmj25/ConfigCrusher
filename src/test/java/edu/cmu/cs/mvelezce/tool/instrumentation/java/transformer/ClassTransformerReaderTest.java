@@ -1,7 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
-import edu.cmu.cs.mvelezce.Dummy;
-import edu.cmu.cs.mvelezce.Dummy3;
 import edu.cmu.cs.mvelezce.ElevatorSystem.Elevator;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;

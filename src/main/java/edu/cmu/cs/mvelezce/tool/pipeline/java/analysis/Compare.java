@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java.analysis;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.execute.java.BruteForce;
+import edu.cmu.cs.mvelezce.tool.execute.java.approaches.BruteForce;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
@@ -256,6 +256,7 @@ public class Compare {
         return entries;
     }
 
+    // TODO delete
     public static class PerformanceEntry {
         private Set<String> configuration;
         private boolean measured;

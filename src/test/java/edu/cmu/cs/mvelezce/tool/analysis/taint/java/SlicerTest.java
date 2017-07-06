@@ -7,8 +7,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.*;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by mvelezce on 6/24/17.
  */

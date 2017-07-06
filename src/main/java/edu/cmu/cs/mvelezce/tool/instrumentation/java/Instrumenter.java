@@ -5,8 +5,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.JavaRegionClassTransformerTimer;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
-import java.io.*;
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.Set;
 
 /**

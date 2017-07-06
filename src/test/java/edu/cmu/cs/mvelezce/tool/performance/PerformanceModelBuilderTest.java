@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
 import edu.cmu.cs.mvelezce.*;
-import edu.cmu.cs.mvelezce.ArrayList;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
@@ -16,7 +15,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 4/28/17.

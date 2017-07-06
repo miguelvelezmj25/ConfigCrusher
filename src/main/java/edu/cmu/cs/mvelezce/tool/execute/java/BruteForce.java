@@ -23,7 +23,9 @@ public class BruteForce {
 
     public static final String BF_RES_DIR = Options.DIRECTORY + "/bf_res/java/programs";
 
-    public static Set<PerformanceEntry> repeatMeasure(String programName, int iterations) throws IOException, ParseException, InterruptedException {
+
+
+    public static Set<PerformanceEntry> repeatProcessMeasure(String programName, int iterations) throws IOException, ParseException, InterruptedException {
         programName += "-bf";
         String[] args = new String[1];
         args[0] = "-i" + iterations;
@@ -35,26 +37,20 @@ public class BruteForce {
             executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args));
         }
 
-        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(executionsPerformance);
-//
-//        executionsPerformance = new ArrayList<>();
-//
-//        for(int i = 0; i < Options.getIterations(); i++) {
-//            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args));
-//        }
-//
         List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
+        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
         programName = programName.substring(0, programName.indexOf("-"));
         BruteForce.saveBFPerformance(programName, perfStats);
 
         return measuredPerformance;
     }
 
-    public static Set<PerformanceEntry> repeatMeasure(String programName, int iterations, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
+    public static Set<PerformanceEntry> repeatProcessMeasure(String programName, int iterations, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
         Formatter.compile(srcDir, classDir);
         Formatter.formatReturnWithMethod(classDir);
 
         String[] args = new String[0];
+        Options.getCommandLine(args);
 
         Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
         Set<String> options = new HashSet<>();
@@ -68,10 +64,19 @@ public class BruteForce {
         args[0] = "-delres";
         args[1] = "-saveres";
         args[2] = "-i" + iterations;
+        Options.getCommandLine(args);
 
         configurations = Helper.getConfigurations(options);
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDir, configurations);
-//        BruteForce.saveBFPerformance(programName, measuredPerformance);
+        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+
+        for(int i = 0; i < Options.getIterations(); i++) {
+            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args, entryPoint, classDir, configurations));
+        }
+
+        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
+        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
+        programName = programName.substring(0, programName.indexOf("-"));
+        BruteForce.saveBFPerformance(programName, perfStats);
 
         return measuredPerformance;
     }
@@ -90,8 +95,8 @@ public class BruteForce {
         result.append("\n");
 
         for(PerformanceStatistic perfStat : perfStats) {
-            if(perfStat.getRegionsToMean().size() != 1) {
-                throw new RuntimeException("The performance entry should only have measured the entire program " + perfStat.getRegionsToMean().keySet());
+            if(perfStat.getRegionIdsToMean().size() != 1) {
+                throw new RuntimeException("The performance entry should only have measured the entire program " + perfStat.getRegionIdsToMean().keySet());
             }
 
             perfStat.setMeasured("true");
@@ -101,9 +106,9 @@ public class BruteForce {
             result.append(perfStat.getConfiguration());
             result.append('"');
             result.append(",");
-            result.append(perfStat.getRegionsToMean().values().iterator().next());
+            result.append(perfStat.getRegionIdsToMean().values().iterator().next() / 1000000000.0);
             result.append(",");
-            result.append(perfStat.getRegionsToStd().values().iterator().next());
+            result.append(perfStat.getRegionIdsToStd().values().iterator().next() / 1000000000.0);
             result.append("\n");
         }
 

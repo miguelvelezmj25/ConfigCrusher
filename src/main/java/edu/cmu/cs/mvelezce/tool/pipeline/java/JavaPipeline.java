@@ -13,8 +13,11 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -58,7 +61,56 @@ public class JavaPipeline {
             regionsToOptions.put(region, entry.getValue());
         }
 
-        return PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+        System.out.println(pm);
+        JavaPipeline.savePMPerformance(programName, pm);
+
+        return pm;
+    }
+
+    public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException {
+        Options.getCommandLine(args);
+        // Format return statements with method calls
+        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+        System.out.println("");
+
+        // Configuration compression (Language independent)
+        System.out.println("####################### Configurations to execute #######################");
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
+        System.out.println("");
+
+        System.out.println("####################### Instrumenting #######################");
+        Instrumenter.instrument(args, instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
+        System.out.println("");
+
+        System.out.println("####################### Measure performance #######################");
+        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+
+        for(int i = 0; i < Options.getIterations(); i++) {
+            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
+        }
+
+        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
+        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
+
+//        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(programName, args, entryPoint, instrumentClassDirectory, configurationsToExecute);
+        System.out.println("");
+
+        System.out.println("####################### Build performance model #######################");
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+        System.out.println(pm);
+        JavaPipeline.savePMPerformance(programName, pm);
+
+        return pm;
     }
 
     public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint) throws IOException, ParseException, InterruptedException {
@@ -135,6 +187,62 @@ public class JavaPipeline {
         System.out.println("Number of bf configurations: " + Helper.getConfigurations(allOptions).size());
         System.out.println("Number of configurations to execute: " + configurationsToExecute.size());
         System.out.println(configurationsToExecute);
+    }
+
+    public static void savePMPerformance(String programName, PerformanceModel pm) throws IOException {
+        File file = new File(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
+
+        if(file.exists()) {
+            if(!file.delete()) {
+                throw new RuntimeException("Could not delete " + file);
+            }
+        }
+
+        String[] args = new String[0];
+        Set<Set<String>> measuredConfigurations = Simple.getConfigurationsToExecute(programName, args);
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : measuredConfigurations) {
+            options.addAll(configuration);
+        }
+
+        Set<Set<String>> configurations = Helper.getConfigurations(options);
+
+        StringBuilder result = new StringBuilder();
+        result.append("measured,configuration,performance");
+        result.append("\n");
+
+        for(Set<String> configuration : configurations) {
+            if(measuredConfigurations.contains(configuration)) {
+                result.append("true");
+                result.append(",");
+            }
+            else {
+                result.append("null");
+                result.append(",");
+            }
+
+            result.append('"');
+            result.append(configuration);
+            result.append('"');
+            result.append(",");
+            double perf = pm.evaluate(configuration);
+            result.append(perf);
+            result.append("\n");
+        }
+
+        File directory = new File(JavaPipeline.PM_RES_DIR);
+
+        if(!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        String outputFile = directory + "/" + programName + Options.DOT_CSV;
+        file = new File(outputFile);
+        FileWriter writer = new FileWriter(file, true);
+        writer.write(result.toString());
+        writer.flush();
+        writer.close();
     }
 
 }

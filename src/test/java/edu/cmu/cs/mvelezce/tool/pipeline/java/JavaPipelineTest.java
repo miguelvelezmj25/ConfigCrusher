@@ -34,62 +34,6 @@ public class JavaPipelineTest {
 //    public static final double TIMING_ERROR = 0.05;
 //    public static final double TIMING_ERROR = 1.0;
 
-    public static void savePMPerformance(String programName, PerformanceModel pm) throws IOException {
-        File file = new File(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
-
-        if(file.exists()) {
-            if(!file.delete()) {
-                throw new RuntimeException("Could not delete " + file);
-            }
-        }
-
-        String[] args = new String[0];
-        Set<Set<String>> measuredConfigurations = Simple.getConfigurationsToExecute(programName, args);
-        Set<String> options = new HashSet<>();
-
-        for(Set<String> configuration : measuredConfigurations) {
-            options.addAll(configuration);
-        }
-
-        Set<Set<String>> configurations = Helper.getConfigurations(options);
-
-        StringBuilder result = new StringBuilder();
-        result.append("measured,configuration,performance");
-        result.append("\n");
-
-        for(Set<String> configuration : configurations) {
-            if(measuredConfigurations.contains(configuration)) {
-                result.append("true");
-                result.append(",");
-            }
-            else {
-                result.append("null");
-                result.append(",");
-            }
-
-            result.append('"');
-            result.append(configuration);
-            result.append('"');
-            result.append(",");
-            double perf = pm.evaluate(configuration);
-            result.append(perf);
-            result.append("\n");
-        }
-
-        File directory = new File(JavaPipeline.PM_RES_DIR);
-
-        if(!directory.exists()) {
-            directory.mkdirs();
-        }
-
-        String outputFile = directory + "/" + programName + Options.DOT_CSV;
-        file = new File(outputFile);
-        FileWriter writer = new FileWriter(file, true);
-        writer.write(result.toString());
-        writer.flush();
-        writer.close();
-    }
-
     @Test
     public void testSleep14() throws IOException, ParseException, InterruptedException {
         String programName = "sleep14";
@@ -331,7 +275,7 @@ public class JavaPipelineTest {
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
         System.out.println(pm);
 
-//                JavaPipelineTest.savePMPerformance(programName, pm);
+//
     }
 
     @Test
@@ -358,20 +302,19 @@ public class JavaPipelineTest {
         // Program arguments
 //        args = new String[0];
 
-        args = new String[1];
+//        args = new String[1];
 //        args[0] = "-saveres";
-        args[0] = "-i5";
+//        args[0] = "-i5";
 
-//        args = new String[3];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//        args[2] = "-i5";
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i5";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+//        JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
-        System.out.println(pm);
-
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -394,7 +337,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -417,7 +359,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -440,7 +381,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -466,7 +406,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -492,7 +431,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -519,7 +457,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -545,7 +482,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -571,7 +507,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -597,7 +532,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -623,7 +557,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -649,7 +582,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -676,7 +608,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -703,7 +634,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -730,7 +660,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -756,7 +685,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -784,7 +712,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -812,7 +739,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -839,7 +765,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -867,7 +792,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -895,7 +819,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -918,7 +841,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -941,7 +863,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -964,7 +885,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -987,7 +907,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1011,7 +930,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1034,7 +952,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1057,7 +974,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
     @Test
@@ -1080,7 +996,6 @@ public class JavaPipelineTest {
         PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
         System.out.println(pm);
 
-        JavaPipelineTest.savePMPerformance(programName, pm);
     }
 
 //    @Test

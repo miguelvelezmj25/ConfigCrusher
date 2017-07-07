@@ -51,12 +51,8 @@ public class BruteForce {
         String[] args = new String[0];
         Options.getCommandLine(args);
 
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
-        Set<String> options = new HashSet<>();
-
-        for(Set<String> configuration : configurations) {
-            options.addAll(configuration);
-        }
+        Set<String> options = Executor.getOptions(programName);
+        Set<Set<String>> configurations = Helper.getConfigurations(options);
 
         programName += "-bf";
         args = new String[3];
@@ -65,7 +61,6 @@ public class BruteForce {
         args[2] = "-i" + iterations;
         Options.getCommandLine(args);
 
-        configurations = Helper.getConfigurations(options);
         List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
 
         for(int i = 0; i < Options.getIterations(); i++) {

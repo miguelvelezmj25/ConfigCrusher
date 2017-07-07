@@ -15,10 +15,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -243,60 +240,18 @@ public class Executor {
 
         return processedRes;
     }
-//    public static Set<PerformanceEntry> averageExecutions(List<Set<PerformanceEntry>> executionsPerformance) {
-//        if(executionsPerformance.size() == 1) {
-//            return executionsPerformance.get(0);
-//        }
-//
-//        Set<PerformanceEntry> averagePerf = new HashSet<>(executionsPerformance.get(0));
-//
-//        for(int i = 1; i < executionsPerformance.size(); i++) {
-//            Set<PerformanceEntry> measuredPerformance = executionsPerformance.get(i);
-//
-//            for(PerformanceEntry averagePerfEntry : averagePerf) {
-//                for(PerformanceEntry perfEntry : measuredPerformance) {
-//                    if(!averagePerfEntry.getConfiguration().equals(perfEntry.getConfiguration())) {
-//                        continue;
-//                    }
-//
-//                    if(averagePerfEntry.getRegionsToExecutionTime().size() != perfEntry.getRegionsToExecutionTime().size()) {
-//                        throw new RuntimeException("The number of executed regions do not match "
-//                                + averagePerfEntry.getRegionsToExecutionTime().size() + " vs "
-//                                + perfEntry.getRegionsToExecutionTime().size());
-//                    }
-//
-//                    Iterator<Map.Entry<Region, Long>> averageRegionsToPerfIter = averagePerfEntry.getRegionsToExecutionTime().entrySet().iterator();
-//                    Iterator<Map.Entry<Region, Long>> regionsToPerfIter = perfEntry.getRegionsToExecutionTime().entrySet().iterator();
-//
-//                    while(averageRegionsToPerfIter.hasNext() && regionsToPerfIter.hasNext()) {
-//                        Map.Entry<Region, Long> averageEntry = averageRegionsToPerfIter.next();
-//                        Map.Entry<Region, Long> newEntry = regionsToPerfIter.next();
-//
-//                        if(!averageEntry.getKey().getRegionID().equals(newEntry.getKey().getRegionID())) {
-//                            throw new RuntimeException("The regions ID do not match " + averageEntry.getKey().getRegionID()
-//                                    + " vs " + newEntry.getKey().getRegionID());
-//                        }
-//
-//                        if(averagePerfEntry.getConfiguration().isEmpty()) {
-//                            System.out.println(averageEntry.getValue() + " - " + newEntry.getValue());
-//                        }
-//
-//                        long sum = averageEntry.getValue() + newEntry.getValue();
-//                        averageEntry.setValue(sum);
-//                    }
-//                }
-//            }
-//        }
-//
-//        for(PerformanceEntry perfEntry : averagePerf) {
-//            for(Map.Entry<Region, Long> regionToPerf : perfEntry.getRegionsToExecutionTime().entrySet()) {
-//                Long average = regionToPerf.getValue() / executionsPerformance.size();
-//                regionToPerf.setValue(average);
-//            }
-//        }
-//
-//        return averagePerf;
-//    }
+
+    public static Set<String> getOptions(String programName) throws IOException, ParseException {
+        File file = new File("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/java/edu/cmu/cs/mvelezce/tool/execute/java/options.json");
+        JSONParser parser = new JSONParser();
+        JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
+        JSONArray result = (JSONArray) cache.get(programName);
+
+        Set<String> options = new HashSet<>();
+        options.addAll(result.subList(0, result.size()));
+
+        return options;
+    }
 
     private static void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
         JSONArray executions = new JSONArray();

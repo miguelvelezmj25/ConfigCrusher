@@ -48,6 +48,14 @@ public class ExecutorTest {
     }
 
     @Test
+    public void testGetOptions() throws Exception {
+        String progName = "elevator";
+        Set<String> options = Executor.getOptions(progName);
+
+        Assert.assertEquals(6, options.size());
+    }
+
+    @Test
     public void testMeasureConfigurationPerformancePipeline1() throws Exception {
         // Program arguments
         String[] args = new String[2];

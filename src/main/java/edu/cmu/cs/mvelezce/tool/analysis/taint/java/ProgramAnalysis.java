@@ -127,6 +127,7 @@ public class ProgramAnalysis {
         List<String> sortBy = new ArrayList<>();
         sortBy.add(ProgramAnalysis.PACKAGE);
         sortBy.add(ProgramAnalysis.CLASS);
+        sortBy.add(ProgramAnalysis.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
         sortBy.add(ProgramAnalysis.METHOD);
         sortBy.add(ProgramAnalysis.BYTECODE_INDEXES);
 
@@ -155,7 +156,8 @@ public class ProgramAnalysis {
                 entryClass = entryClass.substring(entryClass.lastIndexOf(".") + 1);
             }
 
-            String entryMethod = (String) entry.get(ProgramAnalysis.METHOD);
+            String entryMethod = (String) entry.get(ProgramAnalysis.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
+            entryMethod = entryMethod.substring(entryMethod.lastIndexOf(".") + 1);
             int entryBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));
 
             if(entryBytecodeIndex < 0) {

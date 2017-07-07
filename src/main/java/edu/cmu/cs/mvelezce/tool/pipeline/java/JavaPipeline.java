@@ -187,7 +187,7 @@ public class JavaPipeline {
         System.out.println(configurationsToExecute);
     }
 
-    public static void savePMPerformance(String programName, PerformanceModel pm) throws IOException {
+    public static void savePMPerformance(String programName, PerformanceModel pm) throws IOException, ParseException {
         File file = new File(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
 
         if(file.exists()) {
@@ -198,12 +198,7 @@ public class JavaPipeline {
 
         String[] args = new String[0];
         Set<Set<String>> measuredConfigurations = Simple.getConfigurationsToExecute(programName, args);
-        Set<String> options = new HashSet<>();
-
-        for(Set<String> configuration : measuredConfigurations) {
-            options.addAll(configuration);
-        }
-
+        Set<String> options = Executor.getOptions(programName);
         Set<Set<String>> configurations = Helper.getConfigurations(options);
 
         StringBuilder result = new StringBuilder();

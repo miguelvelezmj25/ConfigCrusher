@@ -61,10 +61,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 continue;
             }
 
-            if(fileClass.equals("GZIPOutputStream_hook22")) {
-                int i = 0;
-            }
-
             ClassNode classNode = this.readClass(filePackage + "." + fileClass);
             String command = "javap -classpath " + this.directory + " -p -c "+ filePackage + "." + fileClass;
             System.out.println(command);
@@ -85,26 +81,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 ie.printStackTrace();
             }
 
-//            System.out.println("Before transforming");
-//
-//            for(MethodNode method : classNode.methods) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
-//                System.out.println(methodGraph.toDotString(method.name));
-//            }
-
-            if(fileClass.equals("GZIPOutputStream_hook22")) {
-                int i = 0;
-            }
-
             this.transform(classNode);
-
-//            System.out.println("After transforming");
-//
-//            for(MethodNode method : classNode.methods) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
-//                System.out.println(methodGraph.toDotString(method.name));
-//            }
-
             classNodes.add(classNode);
         }
 
@@ -121,14 +98,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         Set<JavaRegion> regionsInClass = this.getRegionsInClass(classPackage, className);
 
         for(MethodNode methodNode : classNode.methods) {
-            if(methodNode.name.equals("<init>")) {
-                int i = 0;
-            }
-
             boolean instrumentMethod = false;
 
             for(JavaRegion javaRegion : regionsInClass) {
-                if(javaRegion.getRegionMethod().equals(methodNode.name + methodNode.desc)) {
+                if(javaRegion.getRegionMethod().equals(methodNode.name /* + methodNode.desc*/)) {
                     instrumentMethod = true;
                     break;
                 }
@@ -142,10 +115,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             System.out.println("Before transforming");
             System.out.println(graph.toDotString(methodNode.name));
 
-            if(methodNode.name.equals("isBlocked")) {
-                int i = 0;
-            }
-
             if(graph.getBlocks().size() <= 3) {
                 System.out.println("Special method that is not instrumented");
                 continue;
@@ -154,65 +123,56 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
             // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
             methodNode.instructions.toArray();
-            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name + methodNode.desc);
+
+            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(classPackage, className, methodNode.name /*+ methodNode.desc*/);
             List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
             Collections.reverse(regionsInMethodReversed);
 
-            if(methodNode.name.equals("main")) {
-                int i = 0;
-            }
-
             this.calculateASMStartIndex(regionsInMethod, methodNode);
 
-            if(methodNode.name.equals("main")) {
-                int i = 0;
-            }
             Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
             for(JavaRegion region : regionsInMethod) {
-//                System.out.println(region.getStartBytecodeIndex());
-                if(methodNode.name.equals("main")) {
-                    int i = 0;
-                }
-
                 instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
             }
 
-            Set<Set<MethodBlock>> stronglyConnectedComponents = graph.getStronglyConnectedComponents(graph.getEntryBlock());
+            Set<JavaRegion> regionsToRemove = new HashSet<>();
             Map<MethodBlock, JavaRegion> specialBlocksToRegions = new HashMap<>();
+            Set<Set<MethodBlock>> stronglyConnectedComponents = graph.getStronglyConnectedComponents(graph.getEntryBlock());
 
             for(MethodBlock block : graph.getBlocks()) {
                 List<AbstractInsnNode> blockInstructions = block.getInstructions();
 
                 for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
-                        if(methodNode.name.equals("hook28")) {
-                            int i = 0;
-                        }
-
                         MethodBlock start = JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
                         start = graph.getMethodBlock(start.getID());
                         MethodBlock end = JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(graph, block);
                         end = graph.getMethodBlock(end.getID());
+
                         Set<MethodBlock> endMethodBlocks = new HashSet<>();
 
-                        if(graph.getExitBlock().equals(end)) {
-                            for(MethodBlock predecessor : graph.getExitBlock().getPredecessors()) {
-                                if(predecessor.isWithRet()) {
-                                    endMethodBlocks.add(predecessor);
-                                }
-                            }
+                        if(start.getSuccessors().size() == 1 && start.getSuccessors().iterator().next().getLabel().equals(end.getLabel())) {
+                            regionsToRemove.add(instructionsToRegion.get(instructionToStartInstrumenting));
                         }
                         else {
-                            endMethodBlocks.add(end);
-                        }
+                            if(graph.getExitBlock().equals(end)) {
+                                for(MethodBlock predecessor : graph.getExitBlock().getPredecessors()) {
+                                    if(predecessor.isWithRet()) {
+                                        endMethodBlocks.add(predecessor);
+                                    }
+                                }
+                            }
+                            else {
+                                endMethodBlocks.add(end);
+                            }
 
-                        JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
-                        region.setStartMethodBlock(start);
-                        region.setEndMethodBlocks(endMethodBlocks);
+                            JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
+                            region.setStartMethodBlock(start);
+                            region.setEndMethodBlocks(endMethodBlocks);
 
 
-                        // TODO optimize
+                            // TODO optimize
 //                        boolean inProblematicStronglyConnectedComponent = false;
 //
 //                        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
@@ -236,42 +196,44 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 //                            }
 //                        }
 
-                        // TODO test
-                        boolean inProblematicStronglyConnectedComponent = false;
+                            // TODO test
+                            boolean inProblematicStronglyConnectedComponent = false;
 
-                        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
-                            if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(start) && !stronglyConnectedComponent.containsAll(block.getPredecessors())) {
-                                inProblematicStronglyConnectedComponent = true;
-                                break;
+                            for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
+                                if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(start) && !stronglyConnectedComponent.containsAll(block.getPredecessors())) {
+                                    inProblematicStronglyConnectedComponent = true;
+                                    break;
+                                }
                             }
-                        }
 
-                        MethodBlock immediateDominator = graph.getImmediateDominator(start);
+                            MethodBlock immediateDominator = graph.getImmediateDominator(start);
 
-                        if(immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(start) && inProblematicStronglyConnectedComponent) {
-                            specialBlocksToRegions.put(graph.getImmediateDominator(start), region);
-                            throw new RuntimeException("Special case");
-                        }
+                            if(immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(start) && inProblematicStronglyConnectedComponent) {
+                                specialBlocksToRegions.put(graph.getImmediateDominator(start), region);
+                                throw new RuntimeException("Special case");
+                            }
 
 //                        MethodBlock immediateDominator = graph.getImmediateDominator(start);
 //
 //                        if(/*inProblematicStronglyConnectedComponent &&*/ immediateDominator.getSuccessors().size() > 1 && immediateDominator.getSuccessors().contains(start)) {
 //                            specialBlocksToRegions.put(graph.getImmediateDominator(start), region);
 //                        }
-
+                        }
                     }
                 }
             }
 
-            if(methodNode.name.equals("hook28")) {
-                int i = 0;
+            regionsInMethod.removeAll(regionsToRemove);
+            regionsInMethodReversed.removeAll(regionsToRemove);
+
+            if(regionsInMethod.isEmpty()) {
+                continue;
             }
 
+            LabelNode currentLabelNode = null;
             InsnList newInstructions = new InsnList();
             InsnList instructions = methodNode.instructions;
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
-            LabelNode currentLabelNode = null;
-//            Set<Map.Entry<LabelNode, LabelNode>> labelUpdates = new LinkedHashSet<>();
 
             while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
@@ -298,34 +260,15 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
                     }
 
-                    if(methodNode.name.equals("isBlocked")) {
-                        int i = 0;
-                    }
-
                     currentLabelNode = (LabelNode) instruction;
-//                    else {
-//                        for(MethodBlock block : graph.getBlocks()) {
-//                            if(!block.getLabel().equals(block.getOriginalLabel()) && currentLabelNode.getLabel().equals(block.getOriginalLabel())) {
-//                                currentLabelNode = null;
-//                            }
-//                        }
-//                    }
-
 
                     for(JavaRegion javaRegion : regionsInMethod) {
                         for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
                             if (endMethodBlock.getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
-                                if(methodNode.name.equals("isBlocked")) {
-                                    int i = 0;
-                                }
-
                                 Label label = new Label();
                                 label.info = currentLabelNode.getLabel() + "000end";
                                 LabelNode endRegionLabelNode = new LabelNode(label);
                                 JavaRegionClassTransformer.updateLabels(newInstructions, currentLabelNode, endRegionLabelNode);
-//                            labelUpdates = new LinkedHashSet<>();
-//                            labelUpdates.add(new AbstractMap.SimpleEntry<>(currentLabelNode, endRegionLabelNode));
-//                            JavaRegionClassTransformer.updateLabels(newInstructions, labelUpdates);
 
                                 InsnList endRegionInstructions = new InsnList();
                                 endRegionInstructions.add(endRegionLabelNode);
@@ -336,14 +279,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     }
 
                     for(JavaRegion javaRegion : regionsInMethodReversed) {
-                        if(javaRegion.getRegionID().equals("e99f8442-6e09-4b9f-af2e-5156c2e47c00")) {
-                            int i = 0;
-                        }
-
-                        if(methodNode.name.equals("hook28")) {
-                            int i = 0;
-                        }
-//                        if(javaRegion.getStartMethodBlock().getID().equals(currentLabelNode.getLabel().toString())) {
                         if(javaRegion.getStartMethodBlock().getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
                             if(specialBlocksToRegions.containsValue(javaRegion)) {
                                 continue;
@@ -353,9 +288,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                             label.info = currentLabelNode.getLabel() + "000start";
                             LabelNode startRegionLabelNode = new LabelNode(label);
                             JavaRegionClassTransformer.updateLabels(newInstructions, currentLabelNode, startRegionLabelNode);
-//                            labelUpdates = new LinkedHashSet<>();
-//                            labelUpdates.add(new AbstractMap.SimpleEntry<>(currentLabelNode, startRegionLabelNode));
-//                            JavaRegionClassTransformer.updateLabels(newInstructions, labelUpdates);
 
                             InsnList startRegionInstructions = new InsnList();
                             startRegionInstructions.add(startRegionLabelNode);
@@ -367,8 +299,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 newInstructions.add(instruction);
             }
-
-//            JavaRegionClassTransformer.updateLabels(newInstructions, labelUpdates);
 
             methodNode.instructions.clear();
             methodNode.instructions.add(newInstructions);
@@ -382,12 +312,8 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
     }
 
     public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
-        if(methodNode.name.equals("execute")) {
-            int i = 0;
-        }
-
-        JavaRegion tempRegion = regionsInMethod.get(0);
         int methodStartIndex = 0;
+        JavaRegion tempRegion = regionsInMethod.get(0);
         String method = tempRegion.getRegionMethod();
 
         if(method.startsWith("<init>")) {
@@ -395,36 +321,12 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             method = tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass() + method;
         }
 
-        method = method.substring(0, method.lastIndexOf("("));
-
         for(String outputLine : this.javapResult) {
             if(outputLine.contains(" " + method + "(")) {
-                if(tempRegion.getRegionMethod().contains("execute")) {
-                    int z = 0;
-                }
-
-                String formalParametersString = outputLine.substring(outputLine.indexOf("(") + 1, outputLine.indexOf(")"));
-                List<String> formalParameters = Arrays.asList(formalParametersString.split(","));
-                StringBuilder methodDescriptors = new StringBuilder();
-
-                for(String formalParameter : formalParameters) {
-                    String methodDescriptor = BytecodeUtils.toBytecodeDescriptor(formalParameter.trim());
-                    methodDescriptors.append(methodDescriptor);
-                }
-
-                String regionMethod = tempRegion.getRegionMethod();
-                String regionFormalParameters = regionMethod.substring(regionMethod.indexOf("(") + 1, regionMethod.indexOf(")"));
-
-                if(methodDescriptors.toString().equals(regionFormalParameters)) {
-                    break;
-                }
+                break;
             }
 
             methodStartIndex++;
-        }
-
-        if(methodNode.name.equals("execute")) {
-            int i = 0;
         }
 
         int instructionNumber = 0;
@@ -452,17 +354,12 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
 
                 if(outputLine.contains(region.getStartBytecodeIndex() + ":")) {
-//                if(instructionNumber == region.getStartBytecodeIndex()) {
                     InsnList instructionsList = methodNode.instructions;
                     ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
                     int instructionCounter = -1;
 
                     while(instructions.hasNext()) {
                         AbstractInsnNode instruction = instructions.next();
-
-                        if(methodNode.name.equals("main") && !instructions.hasNext()) {
-                            int iasdfas = 0;
-                        }
 
                         if(instruction.getOpcode() >= 0) {
                             instructionCounter++;
@@ -472,10 +369,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
 
                         if(instructionCounter == instructionNumber) {
-                            if(methodNode.name.equals("main")) {
-                                int fsddf = 0;
-                            }
-
                             region.setStartBytecodeIndex(instructionsList.indexOf(instruction));
                             updatedRegions.add(region);
                             break;
@@ -484,9 +377,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                 }
 
                 if(updatedRegions.size() == regionsInMethod.size()) {
-                    if(methodNode.name.equals("main")) {
-                        int fsddf = 0;
-                    }
                     break;
                 }
             }
@@ -497,9 +387,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             }
 
             if(updatedRegions.size() == regionsInMethod.size()) {
-                if(methodNode.name.equals("main")) {
-                    int fsddf = 0;
-                }
                 break;
             }
         }
@@ -508,6 +395,134 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             throw new RuntimeException("Did not update some regions");
         }
     }
+
+//    public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
+//        if(methodNode.name.equals("isBlocked__role__overloaded")) {
+//            int i = 0;
+//        }
+//
+//        JavaRegion tempRegion = regionsInMethod.get(0);
+//        int methodStartIndex = 0;
+//        String method = tempRegion.getRegionMethod();
+//
+//        if(method.startsWith("<init>")) {
+//            method = method.replace("<init>", "");
+//            method = tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass() + method;
+//        }
+//
+//        method = method.substring(0, method.lastIndexOf("("));
+//
+//        for(String outputLine : this.javapResult) {
+//            if(outputLine.contains(" " + method + "(")) {
+//                if(tempRegion.getRegionMethod().contains("execute")) {
+//                    int z = 0;
+//                }
+//
+//                String formalParametersString = outputLine.substring(outputLine.indexOf("(") + 1, outputLine.indexOf(")"));
+//                List<String> formalParameters = Arrays.asList(formalParametersString.split(","));
+//                StringBuilder methodDescriptors = new StringBuilder();
+//
+//                for(String formalParameter : formalParameters) {
+//                    String methodDescriptor = BytecodeUtils.toBytecodeDescriptor(formalParameter.trim());
+//                    methodDescriptors.append(methodDescriptor);
+//                }
+//
+//                String regionMethod = tempRegion.getRegionMethod();
+//                String regionFormalParameters = regionMethod.substring(regionMethod.indexOf("(") + 1, regionMethod.indexOf(")"));
+//
+//                if(methodDescriptors.toString().equals(regionFormalParameters)) {
+//                    break;
+//                }
+//            }
+//
+//            methodStartIndex++;
+//        }
+//
+//        if(methodNode.name.equals("execute")) {
+//            int i = 0;
+//        }
+//
+//        int instructionNumber = 0;
+//        int currentBytecodeIndex = -1;
+//        Set<JavaRegion> updatedRegions = new HashSet<>();
+//
+//        // 2 are the lines before the actual code in a method
+//        for(int i = (methodStartIndex + 2); i < this.javapResult.size(); i++) {
+//            String outputLine = this.javapResult.get(i);
+//
+//            if(!outputLine.contains(":")) {
+//                continue;
+//            }
+//
+//            int outputLineBytecodeIndex = -1;
+//            String outputLineBytecodeIndexString = outputLine.substring(0, outputLine.indexOf(":")).trim();
+//
+//            if(StringUtils.isNumeric(outputLineBytecodeIndexString)) {
+//                outputLineBytecodeIndex = Integer.valueOf(outputLineBytecodeIndexString);
+//            }
+//
+//            for(JavaRegion region : regionsInMethod) {
+//                if(updatedRegions.contains(region)) {
+//                    continue;
+//                }
+//
+//                if(outputLine.contains(region.getStartBytecodeIndex() + ":")) {
+////                if(instructionNumber == region.getStartBytecodeIndex()) {
+//                    InsnList instructionsList = methodNode.instructions;
+//                    ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
+//                    int instructionCounter = -1;
+//
+//                    while(instructions.hasNext()) {
+//                        AbstractInsnNode instruction = instructions.next();
+//
+//                        if(methodNode.name.equals("main") && !instructions.hasNext()) {
+//                            int iasdfas = 0;
+//                        }
+//
+//                        if(instruction.getOpcode() >= 0) {
+//                            instructionCounter++;
+//                        }
+//                        else {
+//                            continue;
+//                        }
+//
+//                        if(instructionCounter == instructionNumber) {
+//                            if(methodNode.name.equals("main")) {
+//                                int fsddf = 0;
+//                            }
+//
+//                            region.setStartBytecodeIndex(instructionsList.indexOf(instruction));
+//                            updatedRegions.add(region);
+//                            break;
+//                        }
+//                    }
+//                }
+//
+//                if(updatedRegions.size() == regionsInMethod.size()) {
+//                    if(methodNode.name.equals("main")) {
+//                        int fsddf = 0;
+//                    }
+//                    break;
+//                }
+//            }
+//
+//            if(outputLineBytecodeIndex > currentBytecodeIndex) {
+//                instructionNumber++;
+//                currentBytecodeIndex = outputLineBytecodeIndex;
+//            }
+//
+//            if(updatedRegions.size() == regionsInMethod.size()) {
+//                if(methodNode.name.equals("main")) {
+//                    int fsddf = 0;
+//                }
+//                break;
+//            }
+//        }
+//
+//        if(updatedRegions.size() != regionsInMethod.size()) {
+//            throw new RuntimeException("Did not update some regions");
+//        }
+//    }
 
     public static MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
         // Find post dominator
@@ -658,10 +673,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             AbstractInsnNode instruction = instructions.getFirst();
 
             for(int i = 0; i < numberOfInstructions; i++) {
-//                if(instruction.getType() == AbstractInsnNode.LABEL) {
-//                    System.out.println(((LabelNode) instruction).getLabel());
-//                }
-
                 if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
                     JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
 
@@ -686,10 +697,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         AbstractInsnNode instruction = instructions.getFirst();
 
         for(int i = 0; i < numberOfInstructions; i++) {
-//                if(instruction.getType() == AbstractInsnNode.LABEL) {
-//                    System.out.println(((LabelNode) instruction).getLabel());
-//                }
-
             if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
                 JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
 

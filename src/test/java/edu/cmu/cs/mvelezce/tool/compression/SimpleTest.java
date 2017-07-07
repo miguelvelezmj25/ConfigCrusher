@@ -388,12 +388,12 @@ public class SimpleTest {
 
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
 
-        args = new String[1];
-        args[0] = "-saveres";
+//        args = new String[1];
+//        args[0] = "-saveres";
 
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
         Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);

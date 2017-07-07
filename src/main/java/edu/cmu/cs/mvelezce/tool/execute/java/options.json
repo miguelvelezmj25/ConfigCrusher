@@ -9,7 +9,6 @@
   "zipme" : [
     "FEATURECRC",
     "FEATUREArchiveCheck",
-    "FEATUREGZIP",
     "FEATUREAdler32Checksum",
     "FEATUREDerivativeGZIPCRC",
     "FEATUREDerivativeCompressCRC",

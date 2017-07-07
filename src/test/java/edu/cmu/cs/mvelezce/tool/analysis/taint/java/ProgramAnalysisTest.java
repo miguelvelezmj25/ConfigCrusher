@@ -111,6 +111,23 @@ public class ProgramAnalysisTest {
     }
 
     @Test
+    public void testZipme() throws IOException, ParseException {
+        String programName = "zipme";
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+    }
+
+    @Test
     public void testGPL() throws IOException, ParseException {
         String programName = "gpl";
 

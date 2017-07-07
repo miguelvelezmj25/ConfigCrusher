@@ -51,9 +51,11 @@ public class PerformanceModelBuilderTest {
         String program = "elevator";
 
         // Program arguments
-        String[] args = new String[1];
-        args[0] = "-i5";
-        Options.getCommandLine(args);
+//        String[] args = new String[1];
+//        args[0] = "-i5";
+//        Options.getCommandLine(args);
+
+        String[] args = new String[0];
 
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);

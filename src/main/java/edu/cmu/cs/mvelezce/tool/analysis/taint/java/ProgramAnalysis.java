@@ -156,6 +156,11 @@ public class ProgramAnalysis {
             }
 
             String entryMethod = (String) entry.get(ProgramAnalysis.METHOD);
+            int entryBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));
+
+            if(entryBytecodeIndex < 0) {
+                continue;
+            }
 
             if(!currentPackage.equals(entryPackage) || !currentClass.equals(entryClass) || !currentMethod.equals(entryMethod)) {
                 currentBytecodeIndex = 0;

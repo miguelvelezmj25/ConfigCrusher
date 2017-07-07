@@ -54,7 +54,7 @@ public class PerformanceModelBuilder {
     }
 
     public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
-        PerformanceModelBuilder.getOuterRegions(measuredPerformance, regionsToOptions);
+//        PerformanceModelBuilder.getOuterRegions(measuredPerformance, regionsToOptions);
         Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = PerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
         Map<Region, Map<Set<String>, Double>> regionsToConfigurationPerformance = new HashMap<>();
 
@@ -81,11 +81,15 @@ public class PerformanceModelBuilder {
         return new PerformanceModel(blockTimeList);
     }
 
+    // TODO fix
     private static void getOuterRegions(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
         Map<Region, Set<Region>> regionsToOuterRegions = new HashMap<>();
 
         for(PerformanceEntry perfEntry : measuredPerformance) {
             for(Map.Entry<Region, Set<Region>> regionToInnerRegions : perfEntry.getRegionToInnerRegions().entrySet()) {
+                if(regionsToOuterRegions.size() == 19) {
+                    int asdf =9;
+                }
                 for(Region innerRegion : regionToInnerRegions.getValue()) {
                     if(regionsToOuterRegions.isEmpty()) {
                         Set<Region> outerRegions = new HashSet<>();

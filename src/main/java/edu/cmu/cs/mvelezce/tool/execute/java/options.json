@@ -1,6 +1,5 @@
 {
   "elevator" : [
-    "FEATUREBASE",
     "FEATUREWEIGHT",
     "FEATUREEMPTY",
     "FEATURETWOTHIRDSFULL",
@@ -8,13 +7,10 @@
     "FEATUREOVERLOADED"
   ],
   "zipme" : [
-    "FEATUREBase",
     "FEATURECRC",
     "FEATUREArchiveCheck",
-    "FEATUREZipMeTest",
     "FEATUREGZIP",
     "FEATUREAdler32Checksum",
-    "FEATURECompress",
     "FEATUREDerivativeGZIPCRC",
     "FEATUREDerivativeCompressCRC",
     "FEATUREDerivativeExtractCRC",

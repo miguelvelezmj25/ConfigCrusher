@@ -21,15 +21,24 @@ public class ZipmeMain {
         String programName = args[0];
         String mainClass = args[1];
         String[] zipmeArgs = Arrays.copyOfRange(args, 2, args.length);
+        boolean success = true;
 
-        if(mainClass.equals("edu.cmu.cs.mvelezce.ZipMain")) {
-            Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.enter(program.getRegionID());
-            ZipMain.main(zipmeArgs);
-            Regions.exit(program.getRegionID());
+        try {
+            if(mainClass.equals("edu.cmu.cs.mvelezce.ZipMain")) {
+                Region program = new Region(Regions.PROGRAM_REGION_ID);
+                Regions.enter(program.getRegionID());
+                ZipMain.main(zipmeArgs);
+                Regions.exit(program.getRegionID());
+            }
+        }
+        catch (RuntimeException re) {
+            success = false;
+            System.out.println("This execution had a runtime exception");
         }
 
-        Set<String> performanceConfiguration = ZipmeAdapter.adaptConfigurationToPerformanceMeasurement(zipmeArgs);
-        Executor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
+        if(success) {
+            Set<String> performanceConfiguration = ZipmeAdapter.adaptConfigurationToPerformanceMeasurement(zipmeArgs);
+            Executor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
+        }
     }
 }

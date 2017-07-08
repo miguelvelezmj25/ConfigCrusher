@@ -277,6 +277,30 @@ public class ExecutorTest {
     }
 
     @Test
+    public void testZipme() throws IOException, ParseException {
+        String programName = "zipme";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
+        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
+
+        Set<String> options = Executor.getOptions(programName);
+        Set<Set<String>> configurations = Helper.getConfigurations(options);
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+//        args = new String[3];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//        args[2] = "-i1";
+
+//        args = new String[1];
+//        args[0] = "-i5";
+
+        Set<PerformanceEntry> measured = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+    }
+
+    @Test
     public void testGPL() throws IOException, ParseException {
         String programName = "gpl";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/out/production/gpl/";

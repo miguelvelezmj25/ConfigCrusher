@@ -69,7 +69,6 @@ public class JavaPipeline {
     }
 
     public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException {
-        Options.getCommandLine(args);
         // Format return statements with method calls
         Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
         System.out.println("");
@@ -88,6 +87,7 @@ public class JavaPipeline {
         System.out.println("####################### Measure performance #######################");
         List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
 
+        Options.getCommandLine(args);
         for(int i = 0; i < Options.getIterations(); i++) {
             executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
         }

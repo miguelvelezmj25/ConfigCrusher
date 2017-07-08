@@ -68,6 +68,53 @@ public class JavaPipeline {
         return pm;
     }
 
+    public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint) throws IOException, ParseException, InterruptedException {
+        // Format return statements with method calls
+        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+        System.out.println("");
+
+        System.out.println("####################### Partial region and options #######################");
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        System.out.println("");
+
+        // Configuration compression (Language independent)
+        System.out.println("####################### Configurations to execute #######################");
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
+        System.out.println("");
+
+        System.out.println("####################### Instrumenting #######################");
+        Instrumenter.instrument(args, instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
+        System.out.println("");
+
+        System.out.println("####################### Measure performance #######################");
+        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+
+        Options.getCommandLine(args);
+        for(int i = 0; i < Options.getIterations(); i++) {
+            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
+        }
+
+        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
+        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
+        System.out.println("");
+
+        System.out.println("####################### Build performance model #######################");
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+        System.out.println(pm);
+        JavaPipeline.savePMPerformance(programName, pm);
+
+        return pm;
+    }
+
     public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException {
         // Format return statements with method calls
         Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);

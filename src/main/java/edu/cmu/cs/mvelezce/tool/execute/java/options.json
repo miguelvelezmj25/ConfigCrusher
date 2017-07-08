@@ -16,5 +16,8 @@
     "FEATUREDerivativeCompressGZIP",
     "FEATUREDerivativeCompressAdler32Checksum",
     "FEATUREDerivativeCompressGZIPCRC"
+  ],
+  "sleep1" : [
+    "A"
   ]
 }

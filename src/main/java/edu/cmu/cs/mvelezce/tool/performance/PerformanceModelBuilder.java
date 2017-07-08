@@ -81,7 +81,6 @@ public class PerformanceModelBuilder {
         return new PerformanceModel(blockTimeList);
     }
 
-    // TODO fix
     private static void getOuterRegions(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
         Map<Region, Set<Region>> regionsToOuterRegions = new HashMap<>();
 
@@ -113,7 +112,7 @@ public class PerformanceModelBuilder {
                             }
 
                             if(newRegion) {
-                                regionToInnerRegions.getValue().add(regionToInnerRegions.getKey());
+                                regionToOuterRegions.getValue().add(regionToInnerRegions.getKey());
                             }
 
                             update = true;

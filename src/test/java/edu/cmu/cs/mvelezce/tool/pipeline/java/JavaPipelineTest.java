@@ -316,23 +316,29 @@ public class JavaPipelineTest {
     @Test
     public void testSleep1() throws IOException, ParseException, InterruptedException {
         String programName = "sleep1";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args;
+//        args = new String[0];
 
-//        String[] args = new String[1];
+//        args = new String[1];
 //        args[0] = "-saveres";
+//        args[0] = "-i5";
 
-        String[] args = new String[2];
+        args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
+        args[2] = "-i5";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
-
+//        JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
     }
 
     @Test

@@ -13,4 +13,10 @@ public class CompareTest {
         Compare.comparePMToBF(programName);
     }
 
+    @Test
+    public void testComparePMToBFSleep1() throws Exception {
+        String programName = "sleep1";
+        Compare.comparePMToBF(programName);
+    }
+
 }

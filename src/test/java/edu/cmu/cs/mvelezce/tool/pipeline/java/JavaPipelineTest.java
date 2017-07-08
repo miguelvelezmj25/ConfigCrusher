@@ -162,7 +162,6 @@ public class JavaPipelineTest {
     }
 
     @Test
-    @Repeat(times=1)
     public void testZip() throws IOException, ParseException, InterruptedException {
         String programName = "zipme";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
@@ -188,18 +187,20 @@ public class JavaPipelineTest {
 
 //        args = new String[1];
 //        args[0] = "-saveres";
+//        args[0] = "-i5";
 
-        args = new String[2];
+        args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
+        args[2] = "-i1";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+//        JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
-        System.out.println(pm);
     }
 
     @Test
-    @Repeat(times=1)
     public void testZipSimple() throws IOException, ParseException, InterruptedException {
         String programName = "zipme-simple";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";

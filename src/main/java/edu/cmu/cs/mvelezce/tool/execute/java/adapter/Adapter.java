@@ -32,10 +32,9 @@ public abstract class Adapter {
 
     // TODO how to do this better?
     public static String executeJavaProgram(String programName, String mainAdapter, String mainClass, String directory, String args) {
-        String command = "java -cp " + directory + ":" + Adapter.CLASS_CONTAINER + ":" + Adapter.JSON_SIMPLE_PATH + " " + mainAdapter + " " + programName + " " + mainClass + " " + args;
+        String command = "java -cp " + Adapter.CLASS_CONTAINER + ":" + Adapter.JSON_SIMPLE_PATH + ":" + directory + " " + mainAdapter + " " + programName + " " + mainClass + " " + args;
         System.out.println(command);
         StringBuilder output = new StringBuilder();
-        Process process;
 
         try {
             Process p = Runtime.getRuntime().exec(command);
@@ -48,6 +47,9 @@ public abstract class Adapter {
                 }
             }
 
+            System.out.println(output);
+
+            output = new StringBuilder();
             BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
             while ((s = stdError.readLine()) != null) {
@@ -55,13 +57,13 @@ public abstract class Adapter {
                     output.append(s).append("\n");
                 }
             }
+
+            System.out.println(output);
         }
         catch(IOException ie) {
             ie.printStackTrace();
         }
 
-        System.out.println(output);
-//        return output.toString();
         return null;
     }
 

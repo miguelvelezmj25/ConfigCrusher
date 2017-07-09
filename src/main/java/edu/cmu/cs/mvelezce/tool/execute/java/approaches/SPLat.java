@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class SPLat {
 
-    private static final String SPLAT_RES_DIR = Options.DIRECTORY + "/splat_res/java/programs";
+    public static final String SPLAT_RES_DIR = Options.DIRECTORY + "/splat_res/java/programs";
 
     public static void measure(String programName) throws IOException, ParseException {
         // Get regions to options

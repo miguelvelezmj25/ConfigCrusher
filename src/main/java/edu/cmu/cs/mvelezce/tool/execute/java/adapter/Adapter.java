@@ -12,7 +12,7 @@ public abstract class Adapter {
 
     public static final String CLASS_CONTAINER = "target/classes/";
 
-    private static final String JSON_SIMPLE_PATH = "json-simple-1.1.1.jar";
+    private static final String JSON_SIMPLE_PATH = "lib/json-simple-1.1.1.jar";
 
     protected String programName;
     protected String mainClass;

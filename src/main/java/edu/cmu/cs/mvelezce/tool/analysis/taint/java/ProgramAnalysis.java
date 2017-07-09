@@ -139,7 +139,7 @@ public class ProgramAnalysis {
         String currentPackage = "";
         String currentClass = "";
         String currentMethod = "";
-        JavaRegion currentJavaRegion;
+        JavaRegion currentJavaRegion = null;
         int currentBytecodeIndex = 0;
         Set<String> currentUsedTerms = new HashSet<>();
         JSONParser parser = new JSONParser();
@@ -158,6 +158,11 @@ public class ProgramAnalysis {
 
             String entryMethod = (String) entry.get(ProgramAnalysis.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
             entryMethod = entryMethod.substring(entryMethod.lastIndexOf(".") + 1);
+
+            if(entryMethod.contains("isAnyLiftButtonPressed")) {
+                int dasfas =0;
+            }
+
             int entryBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));
 
             if(entryBytecodeIndex < 0) {
@@ -180,9 +185,18 @@ public class ProgramAnalysis {
 
             if(!currentUsedTerms.containsAll(usedTerms)) {
                 currentUsedTerms.addAll(usedTerms);
-                currentJavaRegion = new JavaRegion(entryPackage, entryClass, entryMethod, currentBytecodeIndex);
-                regionsToOptions.put(currentJavaRegion, new HashSet<>(currentUsedTerms));
-                System.out.println(currentJavaRegion.getRegionClass() + " " + currentJavaRegion.getRegionMethod() + " " + currentJavaRegion.getStartBytecodeIndex() + " with " + currentUsedTerms);
+                
+                if(currentJavaRegion != null && currentJavaRegion.getRegionPackage().equals(entryPackage)
+                        && currentJavaRegion.getRegionClass().equals(entryClass)
+                        && currentJavaRegion.getRegionMethod().equals(entryMethod)
+                        && currentJavaRegion.getStartBytecodeIndex() == currentBytecodeIndex) {
+                    regionsToOptions.get(currentJavaRegion).addAll(currentUsedTerms);
+                }
+                else {
+                    currentJavaRegion = new JavaRegion(entryPackage, entryClass, entryMethod, currentBytecodeIndex);
+                    regionsToOptions.put(currentJavaRegion, new HashSet<>(currentUsedTerms));
+                    System.out.println(currentJavaRegion.getRegionClass() + " " + currentJavaRegion.getRegionMethod() + " " + currentJavaRegion.getStartBytecodeIndex() + " with " + currentUsedTerms);
+                }
             }
 
             currentBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));

@@ -14,7 +14,7 @@ public class HelperTest {
 
     @Test
     public void testReadJar() throws IOException {
-        String jarName = "json-simple-1.1.1.jar";
+        String jarName = "/lib/json-simple-1.1.1.jar";
         List<String> classFiles = Helper.readJar(jarName);
         Assert.assertFalse(classFiles.isEmpty());
     }

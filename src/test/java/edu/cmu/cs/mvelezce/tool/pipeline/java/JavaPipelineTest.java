@@ -284,18 +284,7 @@ public class JavaPipelineTest {
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
         // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
-
-        // Program arguments
+        String[] args;
 //        args = new String[0];
 
 //        args = new String[1];
@@ -310,7 +299,7 @@ public class JavaPipelineTest {
 //        JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
         JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
     }
 
     @Test

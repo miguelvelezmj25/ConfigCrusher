@@ -19,7 +19,7 @@ public class BruteForceTest {
         String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
-        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 5, srcDir, classDir, entryPoint);
+        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 1, srcDir, classDir, entryPoint);
 //        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 5);
     }
 

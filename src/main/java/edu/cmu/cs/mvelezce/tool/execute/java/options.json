@@ -9,12 +9,12 @@
   "zipme" : [
     "FEATURECRC",
     "FEATUREArchiveCheck",
-    "FEATUREAdler32Checksum",
+    "FEATUREAdlerThreeTwoChecksum",
     "FEATUREDerivativeGZIPCRC",
     "FEATUREDerivativeCompressCRC",
     "FEATUREDerivativeExtractCRC",
     "FEATUREDerivativeCompressGZIP",
-    "FEATUREDerivativeCompressAdler32Checksum",
+    "FEATUREDerivativeCompressAdlerThreeTwoChecksum",
     "FEATUREDerivativeCompressGZIPCRC"
   ],
   "sleep1" : [

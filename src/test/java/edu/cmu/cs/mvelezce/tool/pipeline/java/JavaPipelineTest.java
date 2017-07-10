@@ -118,50 +118,6 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testPngtastic() throws IOException, ParseException, InterruptedException {
-//        String programName = "sleep14";
-//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-//        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-//        String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
-//
-//        // Program arguments
-//        String[] args = new String[0];
-//
-////        String[] args = new String[1];
-////        args[0] = "-saveres";
-//
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-//        System.out.println(pm);
-//
-//        // TESTING
-//        args = new String[0];
-//        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
-//        Set<String> options = new HashSet<>();
-//
-//        for(Set<String> configuration : configurations) {
-//            options.addAll(configuration);
-//        }
-//
-//        configurations = Helper.getConfigurations(options);
-//
-//        for(Set<String> configuration : configurations) {
-//            System.out.println(configuration);
-//            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
-//            long start = System.nanoTime();
-//            Sleep14.main(sleepConfiguration);
-//            long end = System.nanoTime();
-//
-//            System.out.println(pm.evaluate(configuration));
-//            System.out.println(Region.getSecondsExecutionTime(start, end));
-//            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
-//        }
-    }
-
-    @Test
     public void testZip() throws IOException, ParseException, InterruptedException {
         String programName = "zipme";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
@@ -272,6 +228,34 @@ public class JavaPipelineTest {
         System.out.println(pm);
 
 //
+    }
+
+    @Test
+    public void testPngtastic() throws IOException, ParseException, InterruptedException {
+        String programName = "pngtastic";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/target/classes/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic/target/classes/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic/";
+        String entryPoint = "com.googlecode.pngtastic.PngtasticColorCounter";
+
+        // Program arguments
+        String[] args;
+//        args = new String[0];
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i5";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
     }
 
     @Test

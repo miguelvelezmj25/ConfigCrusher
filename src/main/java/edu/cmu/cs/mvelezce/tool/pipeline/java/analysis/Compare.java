@@ -80,8 +80,8 @@ public class Compare {
         allOptions.remove("");
 
         Set<Set<String>> configurations = Helper.getConfigurations(allOptions);
-        Set<PerformanceStatistic> bfEntries = Compare.createEntries(programName, approach1Dir, configurations);
-        Set<PerformanceStatistic> pmEntries = Compare.createEntries(programName, approach2Dir, configurations);
+        Set<PerformanceStatistic> app1Stats = Compare.createEntries(programName, approach1Dir, configurations);
+        Set<PerformanceStatistic> app2Stats = Compare.createEntries(programName, approach2Dir, configurations);
 
         StringBuilder result = new StringBuilder();
         double se = 0;
@@ -90,46 +90,44 @@ public class Compare {
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
-            PerformanceStatistic pmEntry = null;
-            PerformanceStatistic bfEntry = null;
+            PerformanceStatistic app1Entry = null;
+            PerformanceStatistic app2Entry = null;
 
-            for(PerformanceStatistic entry : pmEntries) {
+            for(PerformanceStatistic entry : app1Stats) {
                 if(!entry.getConfiguration().equals(configuration)) {
                     continue;
                 }
 
-                pmEntry = entry;
+                app1Entry = entry;
                 break;
             }
 
             result.append('"');
-            result.append(pmEntry.getMeasured());
+            result.append(Boolean.valueOf(app1Entry.getMeasured()) || Boolean.valueOf(app2Entry.getMeasured()));
             result.append('"');
             result.append(",");
             result.append('"');
             result.append(configuration);
             result.append('"');
             result.append(",");
-            result.append(pmEntry.getMean());
+            result.append(app1Entry.getMean());
             result.append(",");
 
-            for(PerformanceStatistic entry : bfEntries) {
+            for(PerformanceStatistic entry : app2Stats) {
                 if(!entry.getConfiguration().equals(configuration)) {
                     continue;
                 }
 
-                bfEntry = entry;
+                app2Entry = entry;
                 break;
             }
 
-            result.append(bfEntry.getMean());
-            result.append(",");
-            result.append(bfEntry.getStd());
+            result.append(app2Entry.getMean());
             result.append(",");
 
-            double absoluteError = Math.abs(bfEntry.getMean() - pmEntry.getMean());
-            double relativeError = absoluteError / bfEntry.getMean() * 100.0;
-            double squaredError = Math.pow(bfEntry.getMean() - pmEntry.getMean(), 2);
+            double absoluteError = Math.abs(app2Entry.getMean() - app1Entry.getMean());
+            double relativeError = absoluteError / app2Entry.getMean() * 100.0;
+            double squaredError = Math.pow(app2Entry.getMean() - app1Entry.getMean(), 2);
 
             result.append(absoluteError);
             result.append(",");

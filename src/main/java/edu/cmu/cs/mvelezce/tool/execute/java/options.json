@@ -19,5 +19,12 @@
   ],
   "sleep1" : [
     "A"
+  ],
+  "pngtastic" : [
+    "FREQTHRESHOLD",
+    "DISTTHRESHOLD",
+    "MINALPHA",
+    "TIMEOUT",
+    "LOGLEVEL"
   ]
 }

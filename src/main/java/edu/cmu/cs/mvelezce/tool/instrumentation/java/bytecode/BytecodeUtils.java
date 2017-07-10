@@ -70,6 +70,10 @@ public class BytecodeUtils {
             isArray = true;
             classname = classname.replace("[]", "");
         }
+        else if(classname.endsWith("...")) {
+            isArray = true;
+            classname = classname.replace("...", "");
+        }
 
         String desc;
 
@@ -96,6 +100,10 @@ public class BytecodeUtils {
 
         if(isArray) {
             desc = "[" + desc;
+        }
+
+        if(desc.contains("<") && desc.contains(">")) {
+            desc = desc.replaceAll("<.*>", "");
         }
 
         return desc;

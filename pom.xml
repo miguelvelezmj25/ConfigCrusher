@@ -84,6 +84,13 @@
             <version>3.6.1</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>org.apache.ant</groupId>-->
+            <!--<artifactId>ant</artifactId>-->
+            <!--<version>1.9.4</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+
     </dependencies>
 
     <build>

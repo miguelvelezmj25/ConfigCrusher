@@ -145,6 +145,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                 for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
                     if(blockInstructions.contains(instructionToStartInstrumenting)) {
+                        if(methodNode.name.equals("getColors")) {
+                            int i = 0;
+                        }
+
                         MethodBlock start = JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
                         start = graph.getMethodBlock(start.getID());
                         MethodBlock end = JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(graph, block);
@@ -221,6 +225,10 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         }
                     }
                 }
+            }
+
+            if(methodNode.name.equals("getColors")) {
+                int i = 0;
             }
 
             regionsInMethod.removeAll(regionsToRemove);
@@ -397,7 +405,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 //    }
 
     public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
-        if(methodNode.name.equals("isBlocked__role__overloaded")) {
+        if(methodNode.name.equals("getColors")) {
             int i = 0;
         }
 
@@ -414,7 +422,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
         for(String outputLine : this.javapResult) {
             if(outputLine.contains(" " + method + "(")) {
-                if(tempRegion.getRegionMethod().contains("execute")) {
+                if(tempRegion.getRegionMethod().contains("getColors")) {
                     int z = 0;
                 }
 
@@ -438,7 +446,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             methodStartIndex++;
         }
 
-        if(methodNode.name.equals("execute")) {
+        if(methodNode.name.equals("getColors")) {
             int i = 0;
         }
 

@@ -13,12 +13,12 @@ public class ZipmeAdapter extends Adapter {
     private static final String[] CONFIGURATIONS = {
             "FEATURECRC",
             "FEATUREArchiveCheck",
-            "FEATUREAdler32Checksum",
+            "FEATUREAdlerThreeTwoChecksum",
             "FEATUREDerivativeGZIPCRC",
             "FEATUREDerivativeCompressCRC",
             "FEATUREDerivativeExtractCRC",
             "FEATUREDerivativeCompressGZIP",
-            "FEATUREDerivativeCompressAdler32Checksum",
+            "FEATUREDerivativeCompressAdlerThreeTwoChecksum",
             "FEATUREDerivativeCompressGZIPCRC"
     };
 

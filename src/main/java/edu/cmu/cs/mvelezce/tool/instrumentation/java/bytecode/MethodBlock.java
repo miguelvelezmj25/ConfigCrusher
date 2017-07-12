@@ -62,17 +62,29 @@ public class MethodBlock {
         this.successors.clear();
     }
 
-    public String getID() { return this.ID; }
+    public String getID() {
+        return this.ID;
+    }
 
-    public Label getLabel() { return this.label; }
+    public Label getLabel() {
+        return this.label;
+    }
 
-    public Label getOriginalLabel() { return this.originalLabel; }
+    public Label getOriginalLabel() {
+        return this.originalLabel;
+    }
 
-    public List<AbstractInsnNode> getInstructions() { return this.instructions; }
+    public List<AbstractInsnNode> getInstructions() {
+        return this.instructions;
+    }
 
-    public Set<MethodBlock> getSuccessors() { return this.successors; }
+    public Set<MethodBlock> getSuccessors() {
+        return this.successors;
+    }
 
-    public Set<MethodBlock> getPredecessors () { return  this.predecessors; }
+    public Set<MethodBlock> getPredecessors() {
+        return this.predecessors;
+    }
 
     public boolean isWithRet() {
         return this.withRet;
@@ -84,8 +96,12 @@ public class MethodBlock {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof MethodBlock)) return false;
+        if(this == o) {
+            return true;
+        }
+        if(o == null || !(o instanceof MethodBlock)) {
+            return false;
+        }
 
         MethodBlock that = (MethodBlock) o;
 

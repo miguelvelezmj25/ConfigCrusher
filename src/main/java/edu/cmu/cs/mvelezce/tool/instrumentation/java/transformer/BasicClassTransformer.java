@@ -48,7 +48,7 @@ public abstract class BasicClassTransformer extends ClassTransformerBase {
                 InsnList instructions = methodNode.instructions;
                 ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-                while(instructionsIterator.hasNext()) {
+                while (instructionsIterator.hasNext()) {
                     AbstractInsnNode instruction = instructionsIterator.next();
 
                     if(instruction.getOpcode() >= Opcodes.IRETURN && instruction.getOpcode() <= Opcodes.ARETURN) {
@@ -88,7 +88,7 @@ public abstract class BasicClassTransformer extends ClassTransformerBase {
             InsnList instructions = methodNode.instructions;
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-            while(instructionsIterator.hasNext()) {
+            while (instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
 
                 if(instruction.getOpcode() >= Opcodes.IRETURN && instruction.getOpcode() <= Opcodes.ARETURN) {

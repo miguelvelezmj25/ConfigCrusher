@@ -25,7 +25,7 @@ public class ProgramAnalysis {
     public static final String PACKAGE = "Package";
     public static final String CLASS = "Class";
     public static final String METHOD = "Method";
-//    public static final String JAVA_LINE_NO = "JavaLineNo";
+    //    public static final String JAVA_LINE_NO = "JavaLineNo";
     public static final String JIMPLE_LINE_NO = "JimpleLineNo";
     public static final String CONSTRAINT = "Constraint";
     public static final String CONSTRAINT_PRETTY = "ConstraintPretty";
@@ -40,7 +40,7 @@ public class ProgramAnalysis {
     public static final String REGION_PACKAGE = "regionPackage";
     public static final String REGION_CLASS = "regionClass";
     public static final String REGION_METHOD = "regionMethod";
-//    public static final String REGION_JAVA_LINE_NUMBER = "regionJavaLineNumber";
+    //    public static final String REGION_JAVA_LINE_NUMBER = "regionJavaLineNumber";
     public static final String START_BYTECODE_INDEX = "startBytecodeIndex";
 
     public static Map<JavaRegion, Set<String>> analyze(String programName, String[] args) throws IOException, ParseException {
@@ -55,8 +55,7 @@ public class ProgramAnalysis {
         if(file.exists()) {
             try {
                 relevantRegionToOptions = ProgramAnalysis.readFromFile(file);
-            }
-            catch (ParseException pe) {
+            } catch (ParseException pe) {
                 throw new RuntimeException("Could not parse the cached results");
             }
         }
@@ -185,7 +184,7 @@ public class ProgramAnalysis {
 
             if(!currentUsedTerms.containsAll(usedTerms)) {
                 currentUsedTerms.addAll(usedTerms);
-                
+
                 if(currentJavaRegion != null && currentJavaRegion.getRegionPackage().equals(entryPackage)
                         && currentJavaRegion.getRegionClass().equals(entryClass)
                         && currentJavaRegion.getRegionMethod().equals(entryMethod)

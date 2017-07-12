@@ -22,7 +22,7 @@ public class PerformanceModelBuilder {
 
     // JSON strings
     public static final String MODEL = "model";
-//    public static final String BASE_TIME = "baseTime";
+    //    public static final String BASE_TIME = "baseTime";
     public static final String CONFIGURATION = "configuration";
     public static final String PERFORMANCE = "performance";
     public static final String CONFIGURATION_TO_PERFORMANCE = "configurationToPerformance";
@@ -38,8 +38,7 @@ public class PerformanceModelBuilder {
         if(file.exists()) {
             try {
                 return PerformanceModelBuilder.readFromFile(file);
-            }
-            catch (ParseException pe) {
+            } catch (ParseException pe) {
                 throw new RuntimeException("Could not parse the cached results");
             }
         }
@@ -87,7 +86,7 @@ public class PerformanceModelBuilder {
         for(PerformanceEntry perfEntry : measuredPerformance) {
             for(Map.Entry<Region, Set<Region>> regionToInnerRegions : perfEntry.getRegionToInnerRegions().entrySet()) {
                 if(regionsToOuterRegions.size() == 19) {
-                    int asdf =9;
+                    int asdf = 9;
                 }
                 for(Region innerRegion : regionToInnerRegions.getValue()) {
                     if(regionsToOuterRegions.isEmpty()) {
@@ -146,7 +145,7 @@ public class PerformanceModelBuilder {
             Stack<Region> regionsToVisit = new Stack<>();
             regionsToVisit.addAll(regionToOuterRegions.getValue());
 
-            while(!regionsToVisit.isEmpty()) {
+            while (!regionsToVisit.isEmpty()) {
                 Region visitingRegion = regionsToVisit.pop();
 
                 for(Map.Entry<Region, Set<Region>> visitingRegionToOuterRegions : regionsToOuterRegions.entrySet()) {

@@ -93,15 +93,15 @@ public class PerformanceStatistic {
         return this.measured;
     }
 
+    public void setMeasured(String measured) {
+        this.measured = measured;
+    }
+
     public double getMean() {
         return this.mean;
     }
 
     public double getStd() {
         return this.std;
-    }
-
-    public void setMeasured(String measured) {
-        this.measured = measured;
     }
 }

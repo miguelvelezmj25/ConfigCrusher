@@ -12,25 +12,8 @@ public class RepeatRule implements TestRule {
 
     private RepeatStatement repeatStatement;
 
-    public int getIteration() { return repeatStatement.iteration; }
-
-    private static class RepeatStatement extends Statement {
-
-        private int iteration = 0;
-        private final int times;
-        private final Statement statement;
-
-        private RepeatStatement(int times, Statement statement) {
-            this.times = times;
-            this.statement = statement;
-        }
-
-        @Override
-        public void evaluate() throws Throwable {
-            for(this.iteration = 0; iteration < times; this.iteration++) {
-                statement.evaluate();
-            }
-        }
+    public int getIteration() {
+        return repeatStatement.iteration;
     }
 
     @Override
@@ -44,5 +27,24 @@ public class RepeatRule implements TestRule {
 
         this.repeatStatement = (RepeatStatement) result;
         return result;
+    }
+
+    private static class RepeatStatement extends Statement {
+
+        private final int times;
+        private final Statement statement;
+        private int iteration = 0;
+
+        private RepeatStatement(int times, Statement statement) {
+            this.times = times;
+            this.statement = statement;
+        }
+
+        @Override
+        public void evaluate() throws Throwable {
+            for(this.iteration = 0; iteration < times; this.iteration++) {
+                statement.evaluate();
+            }
+        }
     }
 }

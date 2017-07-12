@@ -78,13 +78,13 @@ public class SPLat {
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String strLine;
 
-        while((strLine = br.readLine()) != null) {
+        while ((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
                 break;
             }
         }
 
-        while((strLine = br.readLine()) != null) {
+        while ((strLine = br.readLine()) != null) {
             if(strLine.isEmpty()) {
                 continue;
             }
@@ -134,7 +134,7 @@ public class SPLat {
         in = new DataInputStream(fstream);
         br = new BufferedReader(new InputStreamReader(in));
 
-        while((strLine = br.readLine()) != null) {
+        while ((strLine = br.readLine()) != null) {
             if(strLine.isEmpty()) {
                 continue;
             }
@@ -197,7 +197,7 @@ public class SPLat {
 
         File directory = new File(SPLat.SPLAT_RES_DIR);
 
-        if (!directory.exists()) {
+        if(!directory.exists()) {
             directory.mkdirs();
         }
 

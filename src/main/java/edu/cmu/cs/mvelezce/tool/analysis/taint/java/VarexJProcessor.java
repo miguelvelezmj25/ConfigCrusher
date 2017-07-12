@@ -27,7 +27,7 @@ public class VarexJProcessor {
         DocumentBuilder builder = factory.newDocumentBuilder();
         File coverage = new File("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/coverage2.xml");
 
-        if (!coverage.exists()) {
+        if(!coverage.exists()) {
             throw new RuntimeException("No file");
         }
 
@@ -41,17 +41,17 @@ public class VarexJProcessor {
 
         List<Map<String, String>> queryResult = new ArrayList<>();
 
-        for (int i = 0; i < fileList.getLength(); i++) {
+        for(int i = 0; i < fileList.getLength(); i++) {
             Node fileNode = fileList.item(i);
             Element fileElement = (Element) fileNode;
             NodeList methodList = fileElement.getElementsByTagName("Method");
 
-            for (int j = 0; j < methodList.getLength(); j++) {
+            for(int j = 0; j < methodList.getLength(); j++) {
                 Node methodNode = methodList.item(j);
                 Element methodElement = (Element) methodNode;
                 NodeList instructionList = methodElement.getElementsByTagName("instr");
 
-                for (int k = 0; k < instructionList.getLength(); k++) {
+                for(int k = 0; k < instructionList.getLength(); k++) {
                     Node instructionNode = instructionList.item(k);
                     Element instructionElement = (Element) instructionNode;
 

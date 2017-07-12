@@ -1,12 +1,12 @@
 {
-  "elevator" : [
+  "elevator": [
     "FEATUREWEIGHT",
     "FEATUREEMPTY",
     "FEATURETWOTHIRDSFULL",
     "FEATUREEXECUTIVEFLOOR",
     "FEATUREOVERLOADED"
   ],
-  "zipme" : [
+  "zipme": [
     "FEATURECRC",
     "FEATUREArchiveCheck",
     "FEATUREAdlerThreeTwoChecksum",
@@ -17,10 +17,10 @@
     "FEATUREDerivativeCompressAdlerThreeTwoChecksum",
     "FEATUREDerivativeCompressGZIPCRC"
   ],
-  "sleep1" : [
+  "sleep1": [
     "A"
   ],
-  "pngtastic" : [
+  "pngtastic": [
     "FREQTHRESHOLD",
     "DISTTHRESHOLD",
     "MINALPHA",

@@ -24,8 +24,8 @@ public class Slicer {
 
             SDGNode criterion = null;
 
-            for (SDGNode node : nodes) {
-                if (node.getLabel().equals(featureToLabel.getValue())) {
+            for(SDGNode node : nodes) {
+                if(node.getLabel().equals(featureToLabel.getValue())) {
                     criterion = node;
                 }
             }
@@ -34,7 +34,7 @@ public class Slicer {
             Collection<SDGNode> slice = slicer.slice(criterion);
             Set<SDGNode> relevantNodes = new HashSet<>();
 
-            for (SDGNode node : slice) {
+            for(SDGNode node : slice) {
 //                System.out.println(node.getLabel());
 //                if(node.getLabel().startsWith("if ") && !node.getBytecodeMethod().startsWith("java.")) {
 //                    relevantNodes.add(node);
@@ -92,7 +92,7 @@ public class Slicer {
         return relevantRegionToOptions;
     }
 
-    public static List<String> getCriterionLabel(String file,  String entryPoint, String criteriaFormat) throws IOException {
+    public static List<String> getCriterionLabel(String file, String entryPoint, String criteriaFormat) throws IOException {
         List<String> criterionLabel = new ArrayList<>();
         SDG sdg = SDG.readFrom(file, new SecurityNode.SecurityNodeFactory());
         Set<SDGNode> nodes = sdg.vertexSet();

@@ -21,14 +21,14 @@ public class Helper {
         Enumeration<JarEntry> entries = file.entries();
         List<String> classFiles = new LinkedList<>();
 
-        while(entries.hasMoreElements()) {
+        while (entries.hasMoreElements()) {
             JarEntry entry = entries.nextElement();
 
             if(entry.getName().endsWith(".class")) {
                 String name = entry.getName();
                 name = name.substring(0, name.length() - 6);
                 ClassReader classReader = new ClassReader(name);
-                ClassNode classNode =  new ClassNode();
+                ClassNode classNode = new ClassNode();
                 classReader.accept(classNode, 0);
                 classFiles.add(classNode.name);
             }
@@ -39,7 +39,7 @@ public class Helper {
 
     public static List<MethodNode> readFile(String fileName) throws IOException {
         ClassReader classReader = new ClassReader(fileName);
-        ClassNode classNode =  new ClassNode();
+        ClassNode classNode = new ClassNode();
         classReader.accept(classNode, 0);
 
         return classNode.methods;

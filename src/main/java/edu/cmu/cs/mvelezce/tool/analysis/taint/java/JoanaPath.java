@@ -1,7 +1,7 @@
 /**
  * This file is part of the Joana IFC project. It is developed at the
  * Programming Paradigms Group of the Karlsruhe Institute of Technology.
- *
+ * <p>
  * For further details on licensing please read the information at
  * http://joana.ipd.kit.edu or contact the authors.
  */
@@ -31,18 +31,20 @@ public class JoanaPath {
 
     private static String loadPropertyOrFallback(String key, String fallback) {
         String ret = System.getProperty(key);
-        if (ret != null) {
+        if(ret != null) {
             return ret;
-        } else {
+        }
+        else {
             return fallback;
         }
     }
 
     private static String tryToLoadProperty(String key, String propertiesFile) {
         String jPath = System.getProperty(key);
-        if (jPath != null) {
+        if(jPath != null) {
             return jPath;
-        } else {
+        }
+        else {
             try {
                 InputStream propertyStream = new FileInputStream(propertiesFile);
                 Properties p = new Properties();
@@ -50,10 +52,11 @@ public class JoanaPath {
                 jPath = p.getProperty(key);
             } catch (Throwable t) {
             }
-            if (jPath != null) {
+            if(jPath != null) {
                 return jPath;
-            } else {
-                throw new IllegalStateException("Property '"+ key + "' not provided! Either add file '" + propertiesFile + "' with an appropriate specification or provide property via -D flag to the jvm!");
+            }
+            else {
+                throw new IllegalStateException("Property '" + key + "' not provided! Either add file '" + propertiesFile + "' with an appropriate specification or provide property via -D flag to the jvm!");
             }
         }
     }

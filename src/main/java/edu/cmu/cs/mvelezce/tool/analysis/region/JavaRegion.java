@@ -71,33 +71,51 @@ public class JavaRegion extends Region {
                 '}';
     }
 
-    public String getRegionPackage() { return this.regionPackage; }
+    public String getRegionPackage() {
+        return this.regionPackage;
+    }
 
-    public String getRegionClass() { return this.regionClass; }
+    public String getRegionClass() {
+        return this.regionClass;
+    }
 
-    public String getRegionMethod() { return this.regionMethod; }
+    public String getRegionMethod() {
+        return this.regionMethod;
+    }
 
-    public int getStartBytecodeIndex() { return this.startBytecodeIndex; }
+    public int getStartBytecodeIndex() {
+        return this.startBytecodeIndex;
+    }
 
 //    public int getEndBytecodeIndex() { return this.endBytecodeIndex; }
 
-    public MethodBlock getStartMethodBlock() { return this.startMethodBlock; }
+    public void setStartBytecodeIndex(int startBytecodeIndex) {
+        this.startBytecodeIndex = startBytecodeIndex;
+    }
 
-    public Set<MethodBlock> getEndMethodBlocks() { return endMethodBlocks; }
-
-    public int getJavaLineNubmer() { return this.javaLineNubmer; }
-
-    public void setStartBytecodeIndex(int startBytecodeIndex) { this.startBytecodeIndex = startBytecodeIndex; }
-
-//    public void setEndBytecodeIndex(int endBytecodeIndex) { this.endBytecodeIndex = endBytecodeIndex; }
+    public MethodBlock getStartMethodBlock() {
+        return this.startMethodBlock;
+    }
 
     public void setStartMethodBlock(MethodBlock startMethodBlock) {
         this.startMethodBlock = startMethodBlock;
     }
 
+    public Set<MethodBlock> getEndMethodBlocks() {
+        return endMethodBlocks;
+    }
+
+//    public void setEndBytecodeIndex(int endBytecodeIndex) { this.endBytecodeIndex = endBytecodeIndex; }
+
     public void setEndMethodBlocks(Set<MethodBlock> endMethodBlocks) {
         this.endMethodBlocks = endMethodBlocks;
     }
 
-    public void setJavaLineNubmer(int javaLineNubmer) { this.javaLineNubmer = javaLineNubmer; }
+    public int getJavaLineNubmer() {
+        return this.javaLineNubmer;
+    }
+
+    public void setJavaLineNubmer(int javaLineNubmer) {
+        this.javaLineNubmer = javaLineNubmer;
+    }
 }

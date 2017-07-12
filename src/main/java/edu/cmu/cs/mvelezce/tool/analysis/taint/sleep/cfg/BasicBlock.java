@@ -21,6 +21,7 @@ public class BasicBlock {
 
     /**
      * Initializes a {@code BasicBlock}.
+     *
      * @param id
      * @param statement
      * @param conditions
@@ -45,6 +46,7 @@ public class BasicBlock {
 
     /**
      * Initializes a {@code Basic Block} without conditions.
+     *
      * @param statement
      * @param conditions
      */
@@ -54,6 +56,7 @@ public class BasicBlock {
 
     /**
      * Initializes a {@code Basic Block} without conditions.
+     *
      * @param statement
      */
     public BasicBlock(Statement statement) {
@@ -62,6 +65,7 @@ public class BasicBlock {
 
     /**
      * Initializes a {@code Basic Block} without a statement and conditions.
+     *
      * @param id
      */
     public BasicBlock(String id) {
@@ -71,27 +75,39 @@ public class BasicBlock {
     /**
      * Returns true if the BasicBlock does not contain a statement. This means that it is either the entry or exit
      * BasicBlock fo the CFG.
+     *
      * @return
      */
-    public boolean isSpecial() { return this.statement == null; }
+    public boolean isSpecial() {
+        return this.statement == null;
+    }
 
     /**
      * Returns true if the BasicBlock does contain a statement.
+     *
      * @return
      */
-    public boolean isStatement() { return this.statement != null; }
+    public boolean isStatement() {
+        return this.statement != null;
+    }
 
     /**
      * Returns the statement of this BasicBlock.
+     *
      * @return
      */
-    public Statement getStatement() { return this.statement; }
+    public Statement getStatement() {
+        return this.statement;
+    }
 
     /**
      * Returns a list of the expressions that this BasicBlock depends on.
+     *
      * @return
      */
-    public List<Expression> getConditions() { return this.conditions; }
+    public List<Expression> getConditions() {
+        return this.conditions;
+    }
 
     @Override
     public String toString() {

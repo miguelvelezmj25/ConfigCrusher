@@ -19,7 +19,7 @@ public class MethodGraphBuilder {
         List<AbstractInsnNode> labelInstructions = new ArrayList<>();
         LabelNode currentLabelNode = null;
 
-        while(instructionsIterator.hasNext()) {
+        while (instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
             int instructionType = instruction.getType();
 
@@ -56,7 +56,7 @@ public class MethodGraphBuilder {
         AbstractInsnNode previousInstruction = null;
         Set<MethodBlock> blocksWithReturn = new HashSet<>();
 
-        while(instructionsIterator.hasNext()) {
+        while (instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
             int instructionType = instruction.getType();
 
@@ -70,8 +70,8 @@ public class MethodGraphBuilder {
 
                 if(currentMethodBlock != null) {
                     for(TryCatchBlockNode tryCatchBlockNode : methodNode.tryCatchBlocks) {
-                        if (tryCatchBlockNode.end.getLabel().equals(currentMethodBlock.getOriginalLabel())) {
-                            if (tryCatchBlockNode.handler.getLabel().equals(successor.getOriginalLabel())) {
+                        if(tryCatchBlockNode.end.getLabel().equals(currentMethodBlock.getOriginalLabel())) {
+                            if(tryCatchBlockNode.handler.getLabel().equals(successor.getOriginalLabel())) {
                                 graph.addEdge(currentMethodBlock, successor);
                             }
                         }

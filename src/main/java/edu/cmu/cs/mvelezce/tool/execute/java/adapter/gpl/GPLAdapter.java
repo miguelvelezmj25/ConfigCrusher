@@ -32,19 +32,6 @@ public class GPLAdapter extends Adapter {
         super(programName, mainClass, directory);
     }
 
-    @Override
-    public void execute(Set<String> configuration) {
-        String[] argsArray = GPLAdapter.adaptConfigurationToProgram(configuration);
-        StringBuilder args = new StringBuilder();
-
-        for(String arg : argsArray) {
-            args.append(arg);
-            args.append(" ");
-        }
-
-        Adapter.executeJavaProgram(programName, GPLMain.GPL_MAIN, this.mainClass, this.directory, args.toString().trim());
-    }
-
     public static String[] adaptConfigurationToProgram(Set<String> configuration) {
         String[] sleepConfiguration = new String[CONFIGURATIONS.length];
 
@@ -70,6 +57,19 @@ public class GPLAdapter extends Adapter {
         }
 
         return performanceConfiguration;
+    }
+
+    @Override
+    public void execute(Set<String> configuration) {
+        String[] argsArray = GPLAdapter.adaptConfigurationToProgram(configuration);
+        StringBuilder args = new StringBuilder();
+
+        for(String arg : argsArray) {
+            args.append(arg);
+            args.append(" ");
+        }
+
+        Adapter.executeJavaProgram(programName, GPLMain.GPL_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

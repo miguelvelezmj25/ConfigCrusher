@@ -29,6 +29,7 @@ public class CFG {
 
     /**
      * Add an edge to the CFG.
+     *
      * @param from
      * @param to
      */
@@ -55,6 +56,7 @@ public class CFG {
 
     /**
      * Returns a list of all predecessors of this BasicBlock.
+     *
      * @param basicBlock
      * @return
      */
@@ -66,7 +68,7 @@ public class CFG {
         List<BasicBlock> predecessors = new LinkedList<>();
 
         for(Map.Entry<BasicBlock, List<BasicBlock>> entry : this.edges.entrySet()) {
-            if (entry.getValue().contains(basicBlock)) {
+            if(entry.getValue().contains(basicBlock)) {
                 predecessors.add(entry.getKey());
             }
         }
@@ -76,6 +78,7 @@ public class CFG {
 
     /**
      * Returns a list of all successors of this BasicBlock.
+     *
      * @param basicBlock
      * @return
      */
@@ -89,25 +92,39 @@ public class CFG {
 
     /**
      * Returns the entry BasicBlock
+     *
      * @return
      */
-    public BasicBlock getEntry() { return this.entry; }
+    public BasicBlock getEntry() {
+        return this.entry;
+    }
 
     /**
      * Returns the exit BasicBlock
+     *
      * @return
      */
-    public BasicBlock getExit() { return this.exit; }
+    public BasicBlock getExit() {
+        return this.exit;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if(this == o) {
+            return true;
+        }
+        if(o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         CFG cfg = (CFG) o;
 
-        if (!entry.equals(cfg.entry)) return false;
-        if (!exit.equals(cfg.exit)) return false;
+        if(!entry.equals(cfg.entry)) {
+            return false;
+        }
+        if(!exit.equals(cfg.exit)) {
+            return false;
+        }
         return edges.equals(cfg.edges);
     }
 
@@ -120,5 +137,7 @@ public class CFG {
     }
 
     @Override
-    public String toString() { return edges.toString(); }
+    public String toString() {
+        return edges.toString();
+    }
 }

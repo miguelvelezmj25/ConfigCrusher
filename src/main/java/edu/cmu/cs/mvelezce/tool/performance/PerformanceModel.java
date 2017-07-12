@@ -7,11 +7,12 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 // TODO time can be in seconds, milliseonds, minutes,.... That affects the type of the block.
+
 /**
  * Created by mvelezce on 3/9/17.
  */
 public class PerformanceModel {
-//    private double baseTime;
+    //    private double baseTime;
     private Map<Set<String>, Double> configurationToPerformance;
 //    private MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable;
 
@@ -33,63 +34,10 @@ public class PerformanceModel {
 //        this.calculateConfigurationInfluence(blocks);
 //    }
 
-    public void calculateConfigurationInfluence(List<Map<Set<String>, Double>> blocks) {
-        MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable = new HashSetValuedHashMap<>();
-
-        for(Map<Set<String>, Double> block : blocks) {
-            Set<String> relevantOptions = new HashSet<>();
-
-            for(Set<String> configuration : block.keySet()) {
-                relevantOptions.addAll(configuration);
-            }
-
-            if(relevantOptions.size() == 5) {
-                int sdaf = 0;
-            }
-
-            regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
-        }
-
-        for(Map.Entry<Set<String>, Map<Set<String>, Double>> optionToPerformanceTable : regionToInfluenceTable.entries()) {
-            for(Map.Entry<Set<String>, Double> configurationToPerformance : optionToPerformanceTable.getValue().entrySet()) {
-                if(configurationToPerformance.getValue() == null) {
-                    int i =0;
-                }
-                double time = configurationToPerformance.getValue();
-
-                if(this.configurationToPerformance.containsKey(configurationToPerformance.getKey())) {
-                    time += this.configurationToPerformance.get(configurationToPerformance.getKey());
-                }
-
-                this.configurationToPerformance.put(configurationToPerformance.getKey(), time);
-            }
-        }
-
-//        HashSet<String> emptyConfiguration = new HashSet<>();
-//        double emptyConfigurationPerformance = this.baseTime;
-//        emptyConfigurationPerformance += this.configurationToPerformance.get(emptyConfiguration);
-//        this.configurationToPerformance.put(emptyConfiguration, emptyConfigurationPerformance);
-    }
-
-    public double evaluate(Set<String> configuration) {
-        double performance = 0;
-
-        for(Map.Entry<Set<String>, Double> entry : this.configurationToPerformance.entrySet()) {
-            Set<String> configurationValueOfOptionInBlock = new HashSet<>(entry.getKey());
-            configurationValueOfOptionInBlock.retainAll(configuration);
-
-            if(entry.getKey().equals(configurationValueOfOptionInBlock)) {
-                performance += entry.getValue();
-            }
-        }
-
-        return performance;
-    }
-
     public static Map<Set<String>, Double> calculateConfigurationsInfluence(Map<Set<String>, Double> regionTable) {
         Map<Set<String>, Double> configurationToInfluence = new HashMap<>();
 
-        int numberOfOptions = (int) (Math.log(regionTable.size())/Math.log(2));
+        int numberOfOptions = (int) (Math.log(regionTable.size()) / Math.log(2));
         Set<String> regionOptions = new HashSet<>();
 
         for(Map.Entry<Set<String>, Double> entry : regionTable.entrySet()) {
@@ -149,6 +97,59 @@ public class PerformanceModel {
         return configurationToInfluence.get(longestConfiguration);
     }
 
+    public void calculateConfigurationInfluence(List<Map<Set<String>, Double>> blocks) {
+        MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable = new HashSetValuedHashMap<>();
+
+        for(Map<Set<String>, Double> block : blocks) {
+            Set<String> relevantOptions = new HashSet<>();
+
+            for(Set<String> configuration : block.keySet()) {
+                relevantOptions.addAll(configuration);
+            }
+
+            if(relevantOptions.size() == 5) {
+                int sdaf = 0;
+            }
+
+            regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
+        }
+
+        for(Map.Entry<Set<String>, Map<Set<String>, Double>> optionToPerformanceTable : regionToInfluenceTable.entries()) {
+            for(Map.Entry<Set<String>, Double> configurationToPerformance : optionToPerformanceTable.getValue().entrySet()) {
+                if(configurationToPerformance.getValue() == null) {
+                    int i = 0;
+                }
+                double time = configurationToPerformance.getValue();
+
+                if(this.configurationToPerformance.containsKey(configurationToPerformance.getKey())) {
+                    time += this.configurationToPerformance.get(configurationToPerformance.getKey());
+                }
+
+                this.configurationToPerformance.put(configurationToPerformance.getKey(), time);
+            }
+        }
+
+//        HashSet<String> emptyConfiguration = new HashSet<>();
+//        double emptyConfigurationPerformance = this.baseTime;
+//        emptyConfigurationPerformance += this.configurationToPerformance.get(emptyConfiguration);
+//        this.configurationToPerformance.put(emptyConfiguration, emptyConfigurationPerformance);
+    }
+
+    public double evaluate(Set<String> configuration) {
+        double performance = 0;
+
+        for(Map.Entry<Set<String>, Double> entry : this.configurationToPerformance.entrySet()) {
+            Set<String> configurationValueOfOptionInBlock = new HashSet<>(entry.getKey());
+            configurationValueOfOptionInBlock.retainAll(configuration);
+
+            if(entry.getKey().equals(configurationValueOfOptionInBlock)) {
+                performance += entry.getValue();
+            }
+        }
+
+        return performance;
+    }
+
 //    public double getBaseTime() {
 //        return this.baseTime;
 //    }
@@ -206,8 +207,12 @@ public class PerformanceModel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if(this == o) {
+            return true;
+        }
+        if(o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         PerformanceModel that = (PerformanceModel) o;
 

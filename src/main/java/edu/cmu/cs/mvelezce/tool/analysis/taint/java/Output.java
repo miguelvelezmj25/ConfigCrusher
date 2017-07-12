@@ -49,7 +49,7 @@ public class Output {
                 }
 
                 c = c.substring(c.lastIndexOf(".") + 1);
-                if (!file.getName().equals(c + ".java")) {
+                if(!file.getName().equals(c + ".java")) {
                     continue;
                 }
 
@@ -69,12 +69,11 @@ public class Output {
                     if(!strLine.contains((String) entry.get(Output.PACKAGE))) {
                         continue;
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     System.err.println("Error: " + e.getMessage());
                 }
 
-                int javaLineNumber = (int)(long) entry.get(Output.JAVA_LINE_NO);
+                int javaLineNumber = (int) (long) entry.get(Output.JAVA_LINE_NO);
                 List<String> usedTerms = (List<String>) entry.get(Output.USED_TERMS);
                 linesToConstraints.put(javaLineNumber, /*constraint + " " +*/ usedTerms.toString());
             }
@@ -92,7 +91,7 @@ public class Output {
                 String strLine;
                 int lineNumber = 1;
 
-                while((strLine = br.readLine()) != null) {
+                while ((strLine = br.readLine()) != null) {
 //                    lotrackedFile.append(lineNumber).append("    ");
                     lotrackedFile.append(strLine).append("    ");
 
@@ -106,13 +105,12 @@ public class Output {
 
                 in.close();
 
-                try(PrintWriter out = new PrintWriter(file.getAbsolutePath().replace(".java", "") + "LOTRACK.java")  ){
+                try (PrintWriter out = new PrintWriter(file.getAbsolutePath().replace(".java", "") + "LOTRACK.java")) {
                     out.print(lotrackedFile.toString());
 
                     System.out.println("Done with " + file.getName());
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.err.println("Error: " + e.getMessage());
             }
         }

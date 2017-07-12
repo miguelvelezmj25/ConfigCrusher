@@ -212,12 +212,12 @@ public class MethodGraphTest {
         methodGraph.addMethodBlock(f);
 
         // Add edges
-        methodGraph.addEdge(a,b);
-        methodGraph.addEdge(b,e);
-        methodGraph.addEdge(e,f);
-        methodGraph.addEdge(b,c);
-        methodGraph.addEdge(c,d);
-        methodGraph.addEdge(d,b);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, b);
 
         Assert.assertEquals(4, methodGraph.getStronglyConnectedComponents(a).size());
     }
@@ -1346,7 +1346,7 @@ public class MethodGraphTest {
         Assert.assertEquals(source, end.getPredecessors().iterator().next());
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testAddEdge2() {
         // Build methodGraph
         MethodGraph methodGraph = new MethodGraph();

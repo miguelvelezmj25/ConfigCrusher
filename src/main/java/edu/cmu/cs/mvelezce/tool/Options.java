@@ -11,16 +11,14 @@ import java.io.IOException;
  * Created by mvelezce on 4/28/17.
  */
 public abstract class Options {
-    private static CommandLine cmd = null;
-
     public static final String DIRECTORY = "src/main/resources";
     public static final String DOT_JSON = ".json";
     public static final String DOT_CSV = ".csv";
-
     // Component cmd options
     public static final String DELRES = "delres";
     public static final String SAVERES = "saveres";
     public static final String ITERATIONS = "i";
+    private static CommandLine cmd = null;
 
     public static void getCommandLine(String[] args) {
         org.apache.commons.cli.Options componentOptions = new org.apache.commons.cli.Options();

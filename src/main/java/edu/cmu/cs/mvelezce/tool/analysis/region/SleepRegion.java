@@ -20,8 +20,12 @@ public class SleepRegion extends Region {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if(this == o) {
+            return true;
+        }
+        if(o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         SleepRegion that = (SleepRegion) o;
 
@@ -40,5 +44,7 @@ public class SleepRegion extends Region {
                 '}';
     }
 
-    public Statement getStatement() { return this.statement; }
+    public Statement getStatement() {
+        return this.statement;
+    }
 }

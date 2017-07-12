@@ -14,7 +14,17 @@ public abstract class DynamicAdapter extends ClassLoader {
 
     protected static Set<ClassNode> instrumentedClassNodes = new HashSet<>();
 
-    public DynamicAdapter() { ; }
+    public DynamicAdapter() {
+        ;
+    }
+
+    public static Set<ClassNode> getInstrumentedClassNodes() {
+        return DynamicAdapter.instrumentedClassNodes;
+    }
+
+    public static void setInstrumentedClassNodes(Set<ClassNode> instrumentedClassNodes) {
+        DynamicAdapter.instrumentedClassNodes = instrumentedClassNodes;
+    }
 
     public abstract void execute(Set<String> configuration) throws ClassNotFoundException, NoSuchMethodException;
 
@@ -42,13 +52,5 @@ public abstract class DynamicAdapter extends ClassLoader {
         }
 
         throw new RuntimeException("The class node was not found for this name");
-    }
-
-    public static Set<ClassNode> getInstrumentedClassNodes() {
-        return DynamicAdapter.instrumentedClassNodes;
-    }
-
-    public static void setInstrumentedClassNodes(Set<ClassNode> instrumentedClassNodes) {
-        DynamicAdapter.instrumentedClassNodes = instrumentedClassNodes;
     }
 }

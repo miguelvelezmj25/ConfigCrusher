@@ -34,8 +34,7 @@ public class Simple {
         if(file.exists()) {
             try {
                 results = Simple.readFromFile(file);
-            }
-            catch (ParseException pe) {
+            } catch (ParseException pe) {
                 throw new RuntimeException("Could not parse the cached results");
             }
         }
@@ -89,7 +88,7 @@ public class Simple {
         Iterator<Map.Entry<Set<String>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator = optionsToConfigurationsToExecute.entrySet().iterator();
         Map.Entry<Set<String>, Set<Set<String>>> entry1 = optionsToConfigurationsToExecuteIterator.next();
 
-        while(optionsToConfigurationsToExecuteIterator.hasNext()) {
+        while (optionsToConfigurationsToExecuteIterator.hasNext()) {
             Map.Entry<Set<String>, Set<Set<String>>> entry2 = optionsToConfigurationsToExecuteIterator.next();
             Set<String> pivotOptions = new HashSet<>(entry1.getKey());
             pivotOptions.retainAll(entry2.getKey());
@@ -152,7 +151,7 @@ public class Simple {
 //        System.out.println("entry 1 size: " + largeEntry.getValue().size());
 //        System.out.println("entry 2 size: " + smallEntry.getValue().size());
 
-        while(largeSet.hasNext() && smallSet.hasNext()) {
+        while (largeSet.hasNext() && smallSet.hasNext()) {
             Set<String> configurationInLargeSet = largeSet.next();
 //            System.out.println("Set1: " + configurationInLargeSet);
 
@@ -160,7 +159,7 @@ public class Simple {
             valuePivotOptionsInLargeSet.retainAll(pivotOptions);
             boolean merged = false;
 
-            while(smallSet.hasNext()) {
+            while (smallSet.hasNext()) {
                 Set<String> configurationInSmallSet = smallSet.next();
 //                System.out.println("Set2: " + configurationInSmallSet);
 
@@ -189,12 +188,12 @@ public class Simple {
             smallSet = smallEntry.getValue().iterator();
         }
 
-        while(largeSet.hasNext()) {
+        while (largeSet.hasNext()) {
             configurationsToExecute.add(largeSet.next());
 //            System.out.println("Added rest from largetset");
         }
 
-        while(smallSet.hasNext()) {
+        while (smallSet.hasNext()) {
             configurationsToExecute.add(smallSet.next());
 //            System.out.println("Added rest from smallset");
         }

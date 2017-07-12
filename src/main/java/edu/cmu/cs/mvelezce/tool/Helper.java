@@ -33,7 +33,7 @@ public class Helper {
         for(int i = 1; i <= configurationMaxLength; i++) {
             Combinations combinations = new Combinations(configurationMaxLength, i);
 
-            for (int[] combination : combinations) {
+            for(int[] combination : combinations) {
                 Set<String> configuration = new HashSet<>();
 
                 for(int element : combination) {

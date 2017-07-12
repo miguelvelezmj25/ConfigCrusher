@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.pngtastic;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.pngtastic.PngtasticMain;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,19 +20,6 @@ public class PngtasticAdapter extends Adapter {
 
     public PngtasticAdapter(String programName, String mainClass, String directory) {
         super(programName, mainClass, directory);
-    }
-
-    @Override
-    public void execute(Set<String> configuration) {
-        String[] argsArray = PngtasticAdapter.adaptConfigurationToProgram(configuration);
-        StringBuilder args = new StringBuilder();
-
-        for(String arg : argsArray) {
-            args.append(arg);
-            args.append(" ");
-        }
-
-        Adapter.executeJavaProgram(programName, PngtasticMain.PNGTASTIC_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
     public static String[] adaptConfigurationToProgram(Set<String> configuration) {
@@ -61,6 +47,19 @@ public class PngtasticAdapter extends Adapter {
         }
 
         return performanceConfiguration;
+    }
+
+    @Override
+    public void execute(Set<String> configuration) {
+        String[] argsArray = PngtasticAdapter.adaptConfigurationToProgram(configuration);
+        StringBuilder args = new StringBuilder();
+
+        for(String arg : argsArray) {
+            args.append(arg);
+            args.append(" ");
+        }
+
+        Adapter.executeJavaProgram(programName, PngtasticMain.PNGTASTIC_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

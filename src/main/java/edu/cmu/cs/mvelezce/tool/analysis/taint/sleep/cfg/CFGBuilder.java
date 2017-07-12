@@ -39,6 +39,7 @@ public class CFGBuilder extends ReturnerVisitor {
 
     /**
      * Starts building a CFG from the provided statement.
+     *
      * @param ast
      * @return
      */
@@ -142,6 +143,7 @@ public class CFGBuilder extends ReturnerVisitor {
     /**
      * Checks if there the builder came from analyzing a IfStatement. This allows to create an edge between the
      * IfStatement and the BasicBlock after it.
+     *
      * @param basicBlock
      */
     private void checkBranching(BasicBlock basicBlock) {

@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.analysis.region;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -134,11 +133,15 @@ public class Regions {
 //        System.out.println(" ");
     }
 
-    public static List<Region> getExecutedRegionsTrace() { return Regions.executedRegionsTrace; }
+    public static List<Region> getExecutedRegionsTrace() {
+        return Regions.executedRegionsTrace;
+    }
 
 //    public static Set<Region> getRegions() {
 //        return Regions.regions;
 //    }
 
-    public static Stack<Region> getExecutingRegions() { return Regions.executingRegions; }
+    public static Stack<Region> getExecutingRegions() {
+        return Regions.executingRegions;
+    }
 }

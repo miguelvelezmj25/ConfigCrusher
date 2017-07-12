@@ -15,37 +15,49 @@ public class BytecodeUtils {
         }
 
         String name;
-        if (c == 'L') {
+        if(c == 'L') {
             int i2 = descriptor.indexOf(';', i++);
             name = descriptor.substring(i, i2).replace('/', '.');
             i = i2;
         }
-        else if (c == 'V')
-            name =  "void";
-        else if (c == 'I')
+        else if(c == 'V') {
+            name = "void";
+        }
+        else if(c == 'I') {
             name = "int";
-        else if (c == 'B')
+        }
+        else if(c == 'B') {
             name = "byte";
-        else if (c == 'J')
+        }
+        else if(c == 'J') {
             name = "long";
-        else if (c == 'D')
+        }
+        else if(c == 'D') {
             name = "double";
-        else if (c == 'F')
+        }
+        else if(c == 'F') {
             name = "float";
-        else if (c == 'C')
+        }
+        else if(c == 'C') {
             name = "char";
-        else if (c == 'S')
+        }
+        else if(c == 'S') {
             name = "short";
-        else if (c == 'Z')
+        }
+        else if(c == 'Z') {
             name = "boolean";
-        else
+        }
+        else {
             throw new RuntimeException("bad descriptor: " + descriptor);
+        }
 
-        if (i + 1 != descriptor.length())
+        if(i + 1 != descriptor.length()) {
             throw new RuntimeException("multiple descriptors?: " + descriptor);
+        }
 
-        if (arrayDim == 0)
+        if(arrayDim == 0) {
             return name;
+        }
         else {
             StringBuffer sbuf = new StringBuffer(name);
             do {
@@ -77,26 +89,36 @@ public class BytecodeUtils {
 
         String desc;
 
-        if(classname.equals("void"))
+        if(classname.equals("void")) {
             desc = "V";
-        else if (classname.equals("int"))
+        }
+        else if(classname.equals("int")) {
             desc = "I";
-        else if (classname.equals("byte"))
+        }
+        else if(classname.equals("byte")) {
             desc = "B";
-        else if (classname.equals("long"))
+        }
+        else if(classname.equals("long")) {
             desc = "J";
-        else if (classname.equals("double"))
+        }
+        else if(classname.equals("double")) {
             desc = "D";
-        else if (classname.equals("float"))
+        }
+        else if(classname.equals("float")) {
             desc = "F";
-        else if (classname.equals("char"))
+        }
+        else if(classname.equals("char")) {
             desc = "C";
-        else if (classname.equals("short"))
+        }
+        else if(classname.equals("short")) {
             desc = "S";
-        else if (classname.equals("boolean"))
+        }
+        else if(classname.equals("boolean")) {
             desc = "Z";
-        else
+        }
+        else {
             desc = "L" + toJvmName(classname) + ";";
+        }
 
         if(isArray) {
             desc = "[" + desc;

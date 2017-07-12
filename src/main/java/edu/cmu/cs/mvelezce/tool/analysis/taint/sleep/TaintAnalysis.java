@@ -35,14 +35,14 @@ public class TaintAnalysis {
         Queue<BasicBlock> worklist = new LinkedList<>();
         worklist.add(cfg.getEntry());
 
-        while(!worklist.isEmpty()) {
+        while (!worklist.isEmpty()) {
             BasicBlock instruction = worklist.remove();
             instructionsToPossibleTaints.put(instruction, new HashSet<>());
 
             List<BasicBlock> successors = cfg.getSuccessors(instruction);
 
-            for (BasicBlock successor : successors) {
-                if (successor.isSpecial()) {
+            for(BasicBlock successor : successors) {
+                if(successor.isSpecial()) {
                     continue;
                 }
 
@@ -56,7 +56,7 @@ public class TaintAnalysis {
         List<BasicBlock> entry = cfg.getSuccessors(cfg.getEntry());
         worklist.add(entry.get(0));
 
-        while(!worklist.isEmpty()) {
+        while (!worklist.isEmpty()) {
             BasicBlock instruction = worklist.remove();
 
             List<BasicBlock> predecessors = cfg.getPredecessors(instruction);
@@ -74,7 +74,7 @@ public class TaintAnalysis {
             if(predecessors.size() == 1) {
                 possibleTaintsBefore = instructionsToPossibleTaints.get(predecessors.get(0));
             }
-            else if(predecessors.size() == 2){
+            else if(predecessors.size() == 2) {
                 possibleTaintsBefore = TaintAnalysis.join(instructionsToPossibleTaints.get(predecessors.get(0)), instructionsToPossibleTaints.get(predecessors.get(1)));
 
             }
@@ -98,11 +98,11 @@ public class TaintAnalysis {
             }
 
             for(BasicBlock successor : successors) {
-                if (successor.isSpecial()) {
+                if(successor.isSpecial()) {
                     continue;
                 }
 
-                if (!worklist.contains(successor)) {
+                if(!worklist.contains(successor)) {
                     worklist.add(successor);
                 }
 
@@ -279,6 +279,7 @@ public class TaintAnalysis {
         /**
          * Statement where tainting can occur. It can be x = X, x = a (where a is possibly tainted), and all previous
          * cases and implicit flow by being inside a relevant statement
+         *
          * @param statementAssignment
          * @return
          */
@@ -311,6 +312,7 @@ public class TaintAnalysis {
 
         /**
          * Relevant statement that can be inside a region and its condition could be tainted.
+         *
          * @param statementIf
          * @return
          */
@@ -323,6 +325,7 @@ public class TaintAnalysis {
 
         /**
          * Relevant statement that can be inside a region and its condition could be tainted.
+         *
          * @param sleepStatement
          * @return
          */
@@ -335,7 +338,9 @@ public class TaintAnalysis {
         }
 
 
-        public Set<PossibleTaint> getPossibleTaintedVariables() { return this.possibleTaintedVariables; }
+        public Set<PossibleTaint> getPossibleTaintedVariables() {
+            return this.possibleTaintedVariables;
+        }
 
         public Set<PossibleTaint> getKilledPossibleTaintedVariables() {
             return this.killedPossibleTaintedVariables;
@@ -367,23 +372,33 @@ public class TaintAnalysis {
          *
          * @return
          */
-        public VariableExpression getVariable() { return this.variable; }
+        public VariableExpression getVariable() {
+            return this.variable;
+        }
 
         /**
          * Returns the configurations that might have tainted the variable.
          *
          * @return
          */
-        public Set<ConstantConfigurationExpression> getConfigurations() { return this.configurations; }
+        public Set<ConstantConfigurationExpression> getConfigurations() {
+            return this.configurations;
+        }
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if(this == o) {
+                return true;
+            }
+            if(o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
             PossibleTaint that = (PossibleTaint) o;
 
-            if (!variable.equals(that.variable)) return false;
+            if(!variable.equals(that.variable)) {
+                return false;
+            }
             return configurations.equals(that.configurations);
         }
 
@@ -395,7 +410,9 @@ public class TaintAnalysis {
         }
 
         @Override
-        public String toString() { return this.variable + "<-" + this.configurations; }
+        public String toString() {
+            return this.variable + "<-" + this.configurations;
+        }
     }
 
 }

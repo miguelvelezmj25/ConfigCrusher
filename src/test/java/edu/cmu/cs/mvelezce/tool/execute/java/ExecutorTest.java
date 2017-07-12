@@ -258,7 +258,7 @@ public class ExecutorTest {
     @Test
     public void testElevator() throws IOException, ParseException {
         String programName = "elevator";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
         String[] args = new String[0];
@@ -268,7 +268,7 @@ public class ExecutorTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i1";
+        args[2] = "-i5";
 
 //        args = new String[1];
 //        args[0] = "-i5";
@@ -329,11 +329,15 @@ public class ExecutorTest {
 
     @Test
     public void testSleep1() throws IOException, ParseException {
-        String programName = "Sleep1";
+        String programName = "sleep1";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
         String[] args = new String[0];
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
 
         Set<String> options = new HashSet<>();
         options.add("A");

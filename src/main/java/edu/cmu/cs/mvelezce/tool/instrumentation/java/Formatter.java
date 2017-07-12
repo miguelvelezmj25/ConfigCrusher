@@ -45,7 +45,8 @@ public class Formatter {
 
         command = new String[]{"javac", "-cp",
 //                "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/lib/*",
-                "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic/lib/*",
+//                "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic/lib/*",
+                srcDir + "/lib/*",
                 "-d", classDir, "@" + srcDir + "sources.txt"};
         System.out.println(Arrays.toString(command));
         process = Runtime.getRuntime().exec(command);

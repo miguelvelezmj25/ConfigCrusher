@@ -38,11 +38,42 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
         PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+        System.out.println(pm);
+    }
+
+    @Test
+    public void testPngtastic() throws IOException, ParseException {
+        String program = "pngtastic";
+
+        // Program arguments
+        String[] args = new String[1];
+        args[0] = "-i1";
+//        Options.getCommandLine(args);
+
+//        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
+
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
         System.out.println(pm);
     }
 
@@ -63,7 +94,8 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -88,7 +120,8 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -109,7 +142,8 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -130,7 +164,8 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -155,7 +190,8 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -175,7 +211,8 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -195,7 +232,8 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -215,7 +253,8 @@ public class PerformanceModelBuilderTest {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 

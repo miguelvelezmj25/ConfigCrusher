@@ -159,8 +159,8 @@ public class ProgramAnalysis {
             String entryMethod = (String) entry.get(ProgramAnalysis.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
             entryMethod = entryMethod.substring(entryMethod.lastIndexOf(".") + 1);
 
-            if(entryMethod.contains("isAnyLiftButtonPressed")) {
-                int dasfas =0;
+            if(entryMethod.contains("rgbaDistance")) {
+                continue;
             }
 
             int entryBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));

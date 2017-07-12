@@ -57,7 +57,8 @@ public class JavaPipeline {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -104,7 +105,8 @@ public class JavaPipeline {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -147,7 +149,8 @@ public class JavaPipeline {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -183,7 +186,8 @@ public class JavaPipeline {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 
@@ -215,7 +219,8 @@ public class JavaPipeline {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
             regionsToOptions.put(region, entry.getValue());
         }
 

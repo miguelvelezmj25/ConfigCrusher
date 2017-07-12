@@ -37,26 +37,24 @@ public class PerformanceModel {
         MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable = new HashSetValuedHashMap<>();
 
         for(Map<Set<String>, Double> block : blocks) {
-//            for(Set<String> k : block.keySet()) {
-//                if(k.size() == 2) {
-//                    int i = 0;
-//                }
-//            }
             Set<String> relevantOptions = new HashSet<>();
 
             for(Set<String> configuration : block.keySet()) {
                 relevantOptions.addAll(configuration);
             }
 
-//            if(relevantOptions.size() == 2) {
-//                int i = 0;
-//            }
+            if(relevantOptions.size() == 5) {
+                int sdaf = 0;
+            }
 
             regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
         }
 
         for(Map.Entry<Set<String>, Map<Set<String>, Double>> optionToPerformanceTable : regionToInfluenceTable.entries()) {
             for(Map.Entry<Set<String>, Double> configurationToPerformance : optionToPerformanceTable.getValue().entrySet()) {
+                if(configurationToPerformance.getValue() == null) {
+                    int i =0;
+                }
                 double time = configurationToPerformance.getValue();
 
                 if(this.configurationToPerformance.containsKey(configurationToPerformance.getKey())) {
@@ -104,8 +102,23 @@ public class PerformanceModel {
             PerformanceModel.calculateConfigurationInfluence(regionOptions, regionTable, configurationToInfluence);
         }
         else {
-            Set<String> empty = new HashSet<>();
-            configurationToInfluence.put(empty, regionTable.get(empty));
+            int smallestSize = Integer.MAX_VALUE;
+
+            for(Map.Entry<Set<String>, Double> table : regionTable.entrySet()) {
+                if(table.getKey().size() < smallestSize) {
+                    smallestSize = table.getKey().size();
+                }
+            }
+
+            Set<String> smallest = new HashSet<>();
+
+            for(Map.Entry<Set<String>, Double> table : regionTable.entrySet()) {
+                if(table.getKey().size() == smallestSize) {
+                    smallest = new HashSet<>(table.getKey());
+                }
+            }
+
+            configurationToInfluence.put(smallest, regionTable.get(smallest));
         }
 
         return configurationToInfluence;

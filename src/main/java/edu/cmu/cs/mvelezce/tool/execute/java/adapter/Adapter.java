@@ -32,7 +32,7 @@ public abstract class Adapter {
 
     // TODO how to do this better?
     public static String executeJavaProgram(String programName, String mainAdapter, String mainClass, String directory, String args) {
-        String command = "java -cp " + Adapter.CLASS_CONTAINER + ":" + Adapter.JSON_SIMPLE_PATH + ":" + directory + " " + mainAdapter + " " + programName + " " + mainClass + " " + args;
+        String command = "java -Xmx8G -cp " + Adapter.CLASS_CONTAINER + ":" + Adapter.JSON_SIMPLE_PATH + ":" + directory + " " + mainAdapter + " " + programName + " " + mainClass + " " + args;
         System.out.println(command);
         StringBuilder output = new StringBuilder();
 

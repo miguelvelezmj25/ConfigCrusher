@@ -269,7 +269,9 @@ public class JavaPipelineTest {
 
         // Program arguments
         String[] args;
-//        args = new String[0];
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -280,10 +282,10 @@ public class JavaPipelineTest {
         args[1] = "-saveres";
         args[2] = "-i5";
 
-//        JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
-//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
         JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
     }
 
     @Test
@@ -297,7 +299,9 @@ public class JavaPipelineTest {
 
         // Program arguments
         String[] args;
-//        args = new String[0];
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -306,12 +310,12 @@ public class JavaPipelineTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i5";
+        args[2] = "-i1";
 
-//        JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
-//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
     }
 
     @Test

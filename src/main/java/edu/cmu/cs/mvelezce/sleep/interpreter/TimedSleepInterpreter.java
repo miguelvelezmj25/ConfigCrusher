@@ -31,12 +31,12 @@ public class TimedSleepInterpreter extends SleepInterpreter implements TimedVisi
 
     @Override
     public Void visitTimedStatement(TimedStatement timedStatement) {
-        Region region = Regions.getRegion(timedStatement.getRegionID());
-        region.enter(this.totalExecutionTime);
+//        Region region = Regions.getRegion(timedStatement.getRegionID()); TODO
+//        region.enter(this.totalExecutionTime); TODO
 
         timedStatement.getStatements().accept(this);
 
-        region.exit(this.totalExecutionTime);
+//        region.exit(this.totalExecutionTime); TODO
 
         return null;
     }

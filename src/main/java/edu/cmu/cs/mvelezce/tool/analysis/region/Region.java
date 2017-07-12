@@ -10,6 +10,7 @@ public class Region {
     private String regionID;
     private long startTime;
     private long endTime;
+    private long overhead = 0;
 
     public Region(String regionID, long startTime, long endTime) {
         this.regionID = regionID;
@@ -46,8 +47,10 @@ public class Region {
     }
 
     public void enter() {
+        this.overhead = System.nanoTime();
         this.enterRegion();
         this.startTime();
+        this.overhead = System.nanoTime() - this.overhead;
     }
 
     public void enter(long startTime) {
@@ -57,7 +60,9 @@ public class Region {
 
     public void exit() {
         this.endTime();
+        this.overhead = System.nanoTime();
         Regions.removeExecutingRegion(this);
+        this.overhead = System.nanoTime() - this.overhead;
     }
 
     public void exit(long endTime) {
@@ -70,7 +75,7 @@ public class Region {
     }
 
     public void startTime(long startTime) {
-        this.resetExecution();
+//        this.resetExecution();
         this.startTime = startTime;
     }
 
@@ -82,21 +87,13 @@ public class Region {
         this.endTime = endTime;
     }
 
-    public void resetExecution() {
-        this.startTime = 0;
-        this.endTime = 0;
-    }
-
-    public void resetState() {
-        this.resetExecution();
-    }
-
     @Override
     public String toString() {
         return "Region{" +
                 "regionID='" + regionID + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
+                ", overhead=" + this.overhead +
                 '}';
     }
 
@@ -105,4 +102,6 @@ public class Region {
     public long getStartTime() { return this.startTime; }
 
     public long getEndTime() { return this.endTime; }
+
+    public long getOverhead() { return this.overhead; }
 }

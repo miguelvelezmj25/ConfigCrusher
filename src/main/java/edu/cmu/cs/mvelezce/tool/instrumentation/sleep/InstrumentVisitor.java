@@ -61,7 +61,7 @@ public class InstrumentVisitor extends ReplacerVisitor {
         Statement visitedIfStatement = super.visitIfStatement(ifStatement);
 
         Region region = new SleepRegion(ifStatement.getThenBlock());
-        region = Regions.getRegion(region);
+//        region = Regions.getRegion(region); TODO
 
         if(region != null) {
 //                this.constraints.pop();
@@ -91,7 +91,7 @@ public class InstrumentVisitor extends ReplacerVisitor {
         Statement visitedSleepStatement = super.visitSleepStatement(sleepStatement);
 
         Region region = new SleepRegion(visitedSleepStatement);
-        region = Regions.getRegion(region);
+//        region = Regions.getRegion(region); TODO
 
         if(region != null) {
 //                this.constraints.pop();

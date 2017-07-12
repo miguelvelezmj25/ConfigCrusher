@@ -17,10 +17,8 @@ public class JavaRegion extends Region {
     private String regionClass = "";
     private String regionMethod = "";
     private int startBytecodeIndex = Integer.MIN_VALUE;
-//    private int endBytecodeIndex = Integer.MIN_VALUE;
     private int javaLineNubmer = Integer.MIN_VALUE;
     private MethodBlock startMethodBlock = null;
-//    private MethodBlock endMethodBlocks = null;
     private Set<MethodBlock> endMethodBlocks = new HashSet<>();
 
     public JavaRegion(String regionClass, String regionMethod) {
@@ -70,7 +68,6 @@ public class JavaRegion extends Region {
                 ", regionClass='" + this.regionClass + '\'' +
                 ", regionMethod='" + this.regionMethod + '\'' +
                 ", startBytecodeIndex=" + this.startBytecodeIndex +
-//                ", endBytecodeIndex=" + this.endBytecodeIndex +
                 '}';
     }
 

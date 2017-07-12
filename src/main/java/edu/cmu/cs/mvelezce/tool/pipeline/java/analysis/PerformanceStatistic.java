@@ -101,7 +101,6 @@ public class PerformanceStatistic {
         return this.std;
     }
 
-
     public void setMeasured(String measured) {
         this.measured = measured;
     }

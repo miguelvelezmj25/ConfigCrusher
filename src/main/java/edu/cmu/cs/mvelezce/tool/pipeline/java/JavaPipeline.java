@@ -112,7 +112,7 @@ public class JavaPipeline {
 
         PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
         System.out.println(pm);
-        JavaPipeline.savePMPerformance(programName, pm);
+        JavaPipeline.savePMPerformance(programName, pm, perfStats);
 
         return pm;
     }
@@ -156,7 +156,7 @@ public class JavaPipeline {
 
         PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
         System.out.println(pm);
-        JavaPipeline.savePMPerformance(programName, pm);
+        JavaPipeline.savePMPerformance(programName, pm, perfStats);
 
         return pm;
     }
@@ -286,6 +286,32 @@ public class JavaPipeline {
         file = new File(outputFile);
         FileWriter writer = new FileWriter(file, true);
         writer.write(result.toString());
+        writer.flush();
+        writer.close();
+    }
+
+    public static void savePMPerformance(String programName, PerformanceModel pm, List<PerformanceStatistic> perfStats) throws IOException, ParseException {
+        JavaPipeline.savePMPerformance(programName, pm);
+
+        double avgStd = 0;
+        int count = 0;
+
+        for(PerformanceStatistic perfStat : perfStats) {
+            for(Long std : perfStat.getRegionsToStd().values()) {
+                avgStd += std / 1000000000.0;
+                count++;
+            }
+        }
+
+        avgStd = avgStd / count;
+
+
+        String result = "Average std: " + avgStd + "\n";
+
+        String outputFile = JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV;
+        File file = new File(outputFile);
+        FileWriter writer = new FileWriter(file, true);
+        writer.write(result);
         writer.flush();
         writer.close();
     }

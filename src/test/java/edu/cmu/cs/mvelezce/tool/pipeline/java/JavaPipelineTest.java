@@ -280,7 +280,7 @@ public class JavaPipelineTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i";
+        args[2] = "-i5";
 
         JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
                 instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);

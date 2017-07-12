@@ -277,62 +277,11 @@ public class Executor {
         executions.add(execution);
 
         mapper.writeValue(file, executions);
-
-
-        //        JSONArray executions = new JSONArray();
-//        JSONObject measuredExecution = new JSONObject();
-//        JSONArray values = new JSONArray();
-//
-//        for(String value : configuration) {
-//            values.add(value);
-//        }
-//
-//        measuredExecution.put(Executor.CONFIGURATION, values);
-//
-//        JSONArray regions = new JSONArray();
-//
-//        for(Region executedRegion : executedRegions) {
-//            JSONObject region = new JSONObject();
-//            region.put(Executor.ID, executedRegion.getRegionID());
-//            region.put(Executor.START_TIME, executedRegion.getStartTime());
-//            region.put(Executor.END_TIME, executedRegion.getEndTime());
-//
-//            regions.add(region);
-//        }
-//
-//        measuredExecution.put(Executor.EXECUTION_TRACE, regions);
-//        executions.add(measuredExecution);
-//
-//        // TODO checkIfExists if file exists and append. Otherwise create
-//        String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
-//        File file = new File(outputFile);
-//
-//        if(file.exists()) {
-//            JSONParser parser = new JSONParser();
-//            JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
-//            JSONArray executionsResult = (JSONArray) cache.get(Executor.EXECUTIONS);
-//
-//            executions.addAll(executionsResult);
-//        }
-//
-//        JSONObject result = new JSONObject();
-//        result.put(Executor.EXECUTIONS, executions);
-//
-//        File directory = new File(Executor.DIRECTORY);
-//
-//        if(!directory.exists()) {
-//            directory.mkdirs();
-//        }
-//
-//        FileWriter writer = new FileWriter(file);
-//        writer.write(result.toJSONString());
-//        writer.flush();
-//        writer.close();
     }
 
     private static Set<PerformanceEntry> readFromFile(File file) throws IOException, ParseException {
         ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
-        List<Execution> executions = mapper.readValue(new File("result.json"), new TypeReference<List<Execution>>() {
+        List<Execution> executions = mapper.readValue(file, new TypeReference<List<Execution>>() {
             });
         Set<PerformanceEntry> performanceEntries = new HashSet<>();
 
@@ -341,39 +290,6 @@ public class Executor {
             performanceEntries.add(perfEntry);
         }
 
-//        JSONParser parser = new JSONParser();
-//        JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
-//        JSONArray result = (JSONArray) cache.get(Executor.EXECUTIONS);
-//
-//        Set<PerformanceEntry> performanceEntries = new HashSet<>();
-//
-//        for(Object resultEntry : result) {
-//            JSONObject execution = (JSONObject) resultEntry;
-//            Set<String> configuration = new HashSet<>();
-//            JSONArray configurationResult = (JSONArray) execution.get(Executor.CONFIGURATION);
-//
-//            for(Object configurationResultEntry : configurationResult) {
-//                configuration.add((String) configurationResultEntry);
-//            }
-//
-//            JSONArray executionTraceResult = (JSONArray) execution.get(Executor.EXECUTION_TRACE);
-//            List<Region> executionTrace = new LinkedList<>();
-//
-//            for(Object executionTraceResultEntry : executionTraceResult) {
-//                JSONObject regionResult = (JSONObject) executionTraceResultEntry;
-//                String regionID = (String) regionResult.get(Executor.ID);
-//                long startTime = (long) regionResult.get(Executor.START_TIME);
-//                long endTime = (long) regionResult.get(Executor.END_TIME);
-//
-//                Region region = new Region(regionID, startTime, endTime);
-//                executionTrace.add(region);
-//            }
-//
-//
-//            PerformanceEntry performanceEntry = new PerformanceEntry(configuration, executionTrace);
-//            performanceEntries.add(performanceEntry);
-//        }
-//
         return performanceEntries;
     }
 

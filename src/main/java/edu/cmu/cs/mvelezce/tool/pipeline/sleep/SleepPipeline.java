@@ -69,7 +69,9 @@ public class SleepPipeline {
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<SleepRegion, Set<ConstantConfigurationExpression>> entry : relevantRegionsToOptions.entrySet()) {
-            Region region = Regions.getRegion(entry.getKey().getRegionID());
+            SleepRegion sleepRegion = entry.getKey();
+            Region region = new Region(sleepRegion.getRegionID());
+//            Region region = Regions.getRegion(entry.getKey().getRegionID());
             Set<String> options = SleepPipeline.sleepConfigurationSetToStringSet(entry.getValue());
             regionsToOptions.put(region, options);
         }
@@ -184,7 +186,8 @@ public class SleepPipeline {
             if(!this.relevantOptions.isEmpty()) {
                 Statement statement = ifStatement.getThenBlock();
                 SleepRegion region = new SleepRegion(statement);
-                Regions.addRegion(region);
+
+//                Regions.addRegion(region); TODO
                 this.regionToOptions.put(region, this.relevantOptions);
             }
 
@@ -197,7 +200,7 @@ public class SleepPipeline {
 
             if(!this.relevantOptions.isEmpty()) {
                 SleepRegion region = new SleepRegion(sleepStatement);
-                Regions.addRegion(region);
+//                Regions.addRegion(region); TODO
                 this.regionToOptions.put(region, this.relevantOptions);
             }
 

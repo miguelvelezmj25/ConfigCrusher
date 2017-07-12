@@ -30,7 +30,7 @@ public class InstrumentVisitorTest {
 
         // Region
         SleepRegion region = new SleepRegion(sleepStatement);
-        Regions.addRegion(region);
+//        Regions.addRegion(region); TODO
 
         // Regions to options
         Map<SleepRegion, Set<ConstantConfigurationExpression>> relevantRegionsToOptions = new HashMap<>();

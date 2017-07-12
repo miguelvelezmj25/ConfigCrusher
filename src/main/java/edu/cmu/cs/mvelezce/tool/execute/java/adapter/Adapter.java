@@ -13,6 +13,7 @@ public abstract class Adapter {
     public static final String CLASS_CONTAINER = "target/classes/";
 
     private static final String JSON_SIMPLE_PATH = "lib/json-simple-1.1.1.jar";
+    private static final String JACKSON_PATH = "/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar";
 
     protected String programName;
     protected String mainClass;
@@ -32,7 +33,7 @@ public abstract class Adapter {
 
     // TODO how to do this better?
     public static String executeJavaProgram(String programName, String mainAdapter, String mainClass, String directory, String args) {
-        String command = "java -Xmx8G -cp " + Adapter.CLASS_CONTAINER + ":" + Adapter.JSON_SIMPLE_PATH + ":" + directory + " " + mainAdapter + " " + programName + " " + mainClass + " " + args;
+        String command = "java -Xmx8G -cp " + Adapter.CLASS_CONTAINER + ":" + Adapter.JACKSON_PATH + ":" + Adapter.JSON_SIMPLE_PATH + ":" + directory + " " + mainAdapter + " " + programName + " " + mainClass + " " + args;
         System.out.println(command);
         StringBuilder output = new StringBuilder();
 

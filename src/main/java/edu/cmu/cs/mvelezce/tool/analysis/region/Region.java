@@ -12,6 +12,13 @@ public class Region {
     private long endTime;
     private long overhead = 0;
 
+    public Region(String regionID, long startTime, long endTime, long overhead) {
+        this.regionID = regionID;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.overhead = overhead;
+    }
+
     public Region(String regionID, long startTime, long endTime) {
         this.regionID = regionID;
         this.startTime = startTime;

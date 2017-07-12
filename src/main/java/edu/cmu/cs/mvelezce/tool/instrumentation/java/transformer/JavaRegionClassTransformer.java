@@ -30,6 +30,253 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         this.regions = regions;
     }
 
+    public static MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
+        // Find post dominator
+        MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);
+        Set<Set<MethodBlock>> stronglyConnectedComponents = methodGraph.getStronglyConnectedComponents(methodGraph.getEntryBlock());
+        Set<MethodBlock> problematicStronglyConnectedComponent = new HashSet<>();
+
+        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
+            if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(immediatePostDominator)) {
+                problematicStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
+                break;
+            }
+        }
+
+        // If post dominator is not part of a strongly connected component, return
+        if(problematicStronglyConnectedComponent.isEmpty()) {
+            return immediatePostDominator;
+        }
+
+        // If post dominator is part of a strongly connected component, find all immediate dominators of cycle except for the immediate post dominator
+        Set<MethodBlock> immediateDominatorsOfProblematicStronglyConnectedComponent = new HashSet<>();
+
+        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
+            if(methodBlock.equals(immediatePostDominator)) {
+                continue;
+            }
+
+            immediateDominatorsOfProblematicStronglyConnectedComponent.add(methodGraph.getImmediateDominator(methodBlock));
+        }
+
+        // If all immediate dominators are within a strongly connected component
+        if(problematicStronglyConnectedComponent.containsAll(immediateDominatorsOfProblematicStronglyConnectedComponent)) {
+            return immediatePostDominator;
+        }
+
+        // Get the next post dominator of the strongly connected component that is not part of the strongly connected component
+        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
+            immediatePostDominator = methodGraph.getImmediatePostDominator(methodBlock);
+
+            if(!problematicStronglyConnectedComponent.contains(immediatePostDominator)) {
+                return immediatePostDominator;
+            }
+        }
+
+        throw new RuntimeException("Could not find out where to start instrumenting");
+    }
+
+    public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
+        Set<Set<MethodBlock>> stronglyConnectedComponents = methodGraph.getStronglyConnectedComponents(methodGraph.getEntryBlock());
+        Set<MethodBlock> problematicStronglyConnectedComponent = new HashSet<>();
+
+        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
+            if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(start)) {
+                problematicStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
+                break;
+            }
+        }
+
+        // If start is not part of a strongly connected component, return
+        if(problematicStronglyConnectedComponent.isEmpty()) {
+            return start;
+        }
+
+        // If start is part of a strongly connected component, find all immediate dominators of cycle except for the immediate start
+        Set<MethodBlock> immediateDominatorsOfProblematicStronglyConnectedComponent = new HashSet<>();
+
+        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
+            if(methodBlock.equals(start)) {
+                continue;
+            }
+
+            immediateDominatorsOfProblematicStronglyConnectedComponent.add(methodGraph.getImmediateDominator(methodBlock));
+        }
+
+        // If all immediate dominators are within a strongly connected component
+        if(problematicStronglyConnectedComponent.containsAll(immediateDominatorsOfProblematicStronglyConnectedComponent)) {
+            return start;
+        }
+
+        // Get the next start of the strongly connected component that is not part of the strongly connected component
+        Set<MethodBlock> blocksToInstrumentBeforeThem = new HashSet<>(problematicStronglyConnectedComponent);
+        blocksToInstrumentBeforeThem.add(start);
+
+        for(MethodBlock methodBlock : blocksToInstrumentBeforeThem) {
+            MethodBlock immediateDominator = methodGraph.getImmediateDominator(methodBlock);
+
+            if(!blocksToInstrumentBeforeThem.contains(immediateDominator)) {
+                return methodBlock;
+            }
+        }
+
+        throw new RuntimeException("Could not find out where to start instrumenting");
+    }
+
+    /**
+     * TODO this might execute extra iterations that are not needed since the LabelNodes are the same for both old and new labels, but the info is different
+     *
+     * @param instructions
+     * @param changes
+     */
+    private static void updateLabels(InsnList instructions, Set<Map.Entry<LabelNode, LabelNode>> changes) {
+//        for(Map.Entry<LabelNode, LabelNode> change : changes) {
+//            System.out.println(change.getKey().getLabel() + " -> " + change.getValue().getLabel().info);
+//            ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
+//
+//            while (instructionsIterator.hasNext()) {
+//                AbstractInsnNode instruction = instructionsIterator.next();
+//
+//                if (instruction.getType() == AbstractInsnNode.JUMP_INSN) {
+//                    JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
+//
+//                    if (jumpInsnNode.label == change.getKey()) {
+//                        jumpInsnNode.label = change.getValue();
+//                        System.out.println("CHANGE");
+//                    }
+//                }
+//            }
+//        }
+
+        for(Map.Entry<LabelNode, LabelNode> change : changes) {
+            System.out.println(change.getKey().getLabel() + " -> " + change.getValue().getLabel().info);
+            int numberOfInstructions = instructions.size();
+            AbstractInsnNode instruction = instructions.getFirst();
+
+            for(int i = 0; i < numberOfInstructions; i++) {
+                if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
+                    JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
+
+                    if(jumpInsnNode.label == change.getKey()) {
+                        jumpInsnNode.label = change.getValue();
+                        System.out.println("CHANGE");
+                    }
+                }
+
+                instruction = instruction.getNext();
+            }
+        }
+    }
+
+    /**
+     * TODO this might execute extra iterations that are not needed since the LabelNodes are the same for both old and new labels, but the info is different
+     *
+     * @param instructions
+     */
+    private static void updateLabels(InsnList instructions, LabelNode oldLabel, LabelNode newLabel) {
+        System.out.println(oldLabel.getLabel() + " -> " + newLabel.getLabel().info);
+        int numberOfInstructions = instructions.size();
+        AbstractInsnNode instruction = instructions.getFirst();
+
+        for(int i = 0; i < numberOfInstructions; i++) {
+            if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
+                JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
+
+                if(jumpInsnNode.label == oldLabel) {
+                    jumpInsnNode.label = newLabel;
+                    System.out.println("CHANGE");
+                }
+            }
+
+            instruction = instruction.getNext();
+        }
+    }
+
+//    public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
+//        int methodStartIndex = 0;
+//        JavaRegion tempRegion = regionsInMethod.get(0);
+//        String method = tempRegion.getRegionMethod();
+//
+//        if(method.startsWith("<init>")) {
+//            method = method.replace("<init>", "");
+//            method = tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass() + method;
+//        }
+//
+//        for(String outputLine : this.javapResult) {
+//            if(outputLine.contains(" " + method + "(")) {
+//                break;
+//            }
+//
+//            methodStartIndex++;
+//        }
+//
+//        int instructionNumber = 0;
+//        int currentBytecodeIndex = -1;
+//        Set<JavaRegion> updatedRegions = new HashSet<>();
+//
+//        // 2 are the lines before the actual code in a method
+//        for(int i = (methodStartIndex + 2); i < this.javapResult.size(); i++) {
+//            String outputLine = this.javapResult.get(i);
+//
+//            if(!outputLine.contains(":")) {
+//                continue;
+//            }
+//
+//            int outputLineBytecodeIndex = -1;
+//            String outputLineBytecodeIndexString = outputLine.substring(0, outputLine.indexOf(":")).trim();
+//
+//            if(StringUtils.isNumeric(outputLineBytecodeIndexString)) {
+//                outputLineBytecodeIndex = Integer.valueOf(outputLineBytecodeIndexString);
+//            }
+//
+//            for(JavaRegion region : regionsInMethod) {
+//                if(updatedRegions.contains(region)) {
+//                    continue;
+//                }
+//
+//                if(outputLine.contains(region.getStartBytecodeIndex() + ":")) {
+//                    InsnList instructionsList = methodNode.instructions;
+//                    ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
+//                    int instructionCounter = -1;
+//
+//                    while(instructions.hasNext()) {
+//                        AbstractInsnNode instruction = instructions.next();
+//
+//                        if(instruction.getOpcode() >= 0) {
+//                            instructionCounter++;
+//                        }
+//                        else {
+//                            continue;
+//                        }
+//
+//                        if(instructionCounter == instructionNumber) {
+//                            region.setStartBytecodeIndex(instructionsList.indexOf(instruction));
+//                            updatedRegions.add(region);
+//                            break;
+//                        }
+//                    }
+//                }
+//
+//                if(updatedRegions.size() == regionsInMethod.size()) {
+//                    break;
+//                }
+//            }
+//
+//            if(outputLineBytecodeIndex > currentBytecodeIndex) {
+//                instructionNumber++;
+//                currentBytecodeIndex = outputLineBytecodeIndex;
+//            }
+//
+//            if(updatedRegions.size() == regionsInMethod.size()) {
+//                break;
+//            }
+//        }
+//
+//        if(updatedRegions.size() != regionsInMethod.size()) {
+//            throw new RuntimeException("Did not update some regions");
+//        }
+//    }
+
     public abstract InsnList addInstructionsStartRegion(JavaRegion javaRegion);
 
     public abstract InsnList addInstructionsEndRegion(JavaRegion javaRegion);
@@ -62,7 +309,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             }
 
             ClassNode classNode = this.readClass(filePackage + "." + fileClass);
-            String command = "javap -classpath " + this.directory + " -p -c "+ filePackage + "." + fileClass;
+            String command = "javap -classpath " + this.directory + " -p -c " + filePackage + "." + fileClass;
             System.out.println(command);
 
             try {
@@ -76,8 +323,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                         this.javapResult.add(s);
                     }
                 }
-            }
-            catch(IOException ie) {
+            } catch (IOException ie) {
                 ie.printStackTrace();
             }
 
@@ -243,7 +489,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             InsnList instructions = methodNode.instructions;
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-            while(instructionsIterator.hasNext()) {
+            while (instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
 
                 if(instruction.getType() == AbstractInsnNode.LABEL) {
@@ -272,7 +518,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
                     for(JavaRegion javaRegion : regionsInMethod) {
                         for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
-                            if (endMethodBlock.getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
+                            if(endMethodBlock.getOriginalLabel().toString().equals(currentLabelNode.getLabel().toString())) {
                                 Label label = new Label();
                                 label.info = currentLabelNode.getLabel() + "000end";
                                 LabelNode endRegionLabelNode = new LabelNode(label);
@@ -318,91 +564,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         }
 
     }
-
-//    public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
-//        int methodStartIndex = 0;
-//        JavaRegion tempRegion = regionsInMethod.get(0);
-//        String method = tempRegion.getRegionMethod();
-//
-//        if(method.startsWith("<init>")) {
-//            method = method.replace("<init>", "");
-//            method = tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass() + method;
-//        }
-//
-//        for(String outputLine : this.javapResult) {
-//            if(outputLine.contains(" " + method + "(")) {
-//                break;
-//            }
-//
-//            methodStartIndex++;
-//        }
-//
-//        int instructionNumber = 0;
-//        int currentBytecodeIndex = -1;
-//        Set<JavaRegion> updatedRegions = new HashSet<>();
-//
-//        // 2 are the lines before the actual code in a method
-//        for(int i = (methodStartIndex + 2); i < this.javapResult.size(); i++) {
-//            String outputLine = this.javapResult.get(i);
-//
-//            if(!outputLine.contains(":")) {
-//                continue;
-//            }
-//
-//            int outputLineBytecodeIndex = -1;
-//            String outputLineBytecodeIndexString = outputLine.substring(0, outputLine.indexOf(":")).trim();
-//
-//            if(StringUtils.isNumeric(outputLineBytecodeIndexString)) {
-//                outputLineBytecodeIndex = Integer.valueOf(outputLineBytecodeIndexString);
-//            }
-//
-//            for(JavaRegion region : regionsInMethod) {
-//                if(updatedRegions.contains(region)) {
-//                    continue;
-//                }
-//
-//                if(outputLine.contains(region.getStartBytecodeIndex() + ":")) {
-//                    InsnList instructionsList = methodNode.instructions;
-//                    ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
-//                    int instructionCounter = -1;
-//
-//                    while(instructions.hasNext()) {
-//                        AbstractInsnNode instruction = instructions.next();
-//
-//                        if(instruction.getOpcode() >= 0) {
-//                            instructionCounter++;
-//                        }
-//                        else {
-//                            continue;
-//                        }
-//
-//                        if(instructionCounter == instructionNumber) {
-//                            region.setStartBytecodeIndex(instructionsList.indexOf(instruction));
-//                            updatedRegions.add(region);
-//                            break;
-//                        }
-//                    }
-//                }
-//
-//                if(updatedRegions.size() == regionsInMethod.size()) {
-//                    break;
-//                }
-//            }
-//
-//            if(outputLineBytecodeIndex > currentBytecodeIndex) {
-//                instructionNumber++;
-//                currentBytecodeIndex = outputLineBytecodeIndex;
-//            }
-//
-//            if(updatedRegions.size() == regionsInMethod.size()) {
-//                break;
-//            }
-//        }
-//
-//        if(updatedRegions.size() != regionsInMethod.size()) {
-//            throw new RuntimeException("Did not update some regions");
-//        }
-//    }
 
     public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
         if(methodNode.name.equals("getColors")) {
@@ -480,7 +641,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
                     ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
                     int instructionCounter = -1;
 
-                    while(instructions.hasNext()) {
+                    while (instructions.hasNext()) {
                         AbstractInsnNode instruction = instructions.next();
 
                         if(methodNode.name.equals("main") && !instructions.hasNext()) {
@@ -532,99 +693,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
         }
     }
 
-    public static MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
-        // Find post dominator
-        MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);
-        Set<Set<MethodBlock>> stronglyConnectedComponents = methodGraph.getStronglyConnectedComponents(methodGraph.getEntryBlock());
-        Set<MethodBlock> problematicStronglyConnectedComponent = new HashSet<>();
-
-        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
-            if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(immediatePostDominator)) {
-                problematicStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
-                break;
-            }
-        }
-
-        // If post dominator is not part of a strongly connected component, return
-        if(problematicStronglyConnectedComponent.isEmpty()) {
-            return immediatePostDominator;
-        }
-
-        // If post dominator is part of a strongly connected component, find all immediate dominators of cycle except for the immediate post dominator
-        Set<MethodBlock> immediateDominatorsOfProblematicStronglyConnectedComponent = new HashSet<>();
-
-        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
-            if(methodBlock.equals(immediatePostDominator)) {
-                continue;
-            }
-
-            immediateDominatorsOfProblematicStronglyConnectedComponent.add(methodGraph.getImmediateDominator(methodBlock));
-        }
-
-        // If all immediate dominators are within a strongly connected component
-        if(problematicStronglyConnectedComponent.containsAll(immediateDominatorsOfProblematicStronglyConnectedComponent)) {
-            return immediatePostDominator;
-        }
-
-        // Get the next post dominator of the strongly connected component that is not part of the strongly connected component
-        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
-            immediatePostDominator = methodGraph.getImmediatePostDominator(methodBlock);
-
-            if(!problematicStronglyConnectedComponent.contains(immediatePostDominator)) {
-                return immediatePostDominator;
-            }
-        }
-
-        throw new RuntimeException("Could not find out where to start instrumenting");
-    }
-
-    public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
-        Set<Set<MethodBlock>> stronglyConnectedComponents = methodGraph.getStronglyConnectedComponents(methodGraph.getEntryBlock());
-        Set<MethodBlock> problematicStronglyConnectedComponent = new HashSet<>();
-
-        for(Set<MethodBlock> stronglyConnectedComponent : stronglyConnectedComponents) {
-            if(stronglyConnectedComponent.size() > 1 && stronglyConnectedComponent.contains(start)) {
-                problematicStronglyConnectedComponent = new HashSet<>(stronglyConnectedComponent);
-                break;
-            }
-        }
-
-        // If start is not part of a strongly connected component, return
-        if(problematicStronglyConnectedComponent.isEmpty()) {
-            return start;
-        }
-
-        // If start is part of a strongly connected component, find all immediate dominators of cycle except for the immediate start
-        Set<MethodBlock> immediateDominatorsOfProblematicStronglyConnectedComponent = new HashSet<>();
-
-        for(MethodBlock methodBlock : problematicStronglyConnectedComponent) {
-            if(methodBlock.equals(start)) {
-                continue;
-            }
-
-            immediateDominatorsOfProblematicStronglyConnectedComponent.add(methodGraph.getImmediateDominator(methodBlock));
-        }
-
-        // If all immediate dominators are within a strongly connected component
-        if(problematicStronglyConnectedComponent.containsAll(immediateDominatorsOfProblematicStronglyConnectedComponent)) {
-            return start;
-        }
-
-        // Get the next start of the strongly connected component that is not part of the strongly connected component
-        Set<MethodBlock> blocksToInstrumentBeforeThem = new HashSet<>(problematicStronglyConnectedComponent);
-        blocksToInstrumentBeforeThem.add(start);
-
-        for(MethodBlock methodBlock : blocksToInstrumentBeforeThem) {
-            MethodBlock immediateDominator = methodGraph.getImmediateDominator(methodBlock);
-
-            if(!blocksToInstrumentBeforeThem.contains(immediateDominator)) {
-                return methodBlock;
-            }
-        }
-
-        throw new RuntimeException("Could not find out where to start instrumenting");
-    }
-
     private Set<JavaRegion> getRegionsInClass(String regionPackage, String regionClass) {
         Set<JavaRegion> javaRegions = new HashSet<>();
 
@@ -650,75 +718,6 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 
         return javaRegions;
     }
-
-    /**
-     * TODO this might execute extra iterations that are not needed since the LabelNodes are the same for both old and new labels, but the info is different
-     * @param instructions
-     * @param changes
-     */
-    private static void updateLabels(InsnList instructions, Set<Map.Entry<LabelNode, LabelNode>> changes) {
-//        for(Map.Entry<LabelNode, LabelNode> change : changes) {
-//            System.out.println(change.getKey().getLabel() + " -> " + change.getValue().getLabel().info);
-//            ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
-//
-//            while (instructionsIterator.hasNext()) {
-//                AbstractInsnNode instruction = instructionsIterator.next();
-//
-//                if (instruction.getType() == AbstractInsnNode.JUMP_INSN) {
-//                    JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
-//
-//                    if (jumpInsnNode.label == change.getKey()) {
-//                        jumpInsnNode.label = change.getValue();
-//                        System.out.println("CHANGE");
-//                    }
-//                }
-//            }
-//        }
-
-        for(Map.Entry<LabelNode, LabelNode> change : changes) {
-            System.out.println(change.getKey().getLabel() + " -> " + change.getValue().getLabel().info);
-            int numberOfInstructions = instructions.size();
-            AbstractInsnNode instruction = instructions.getFirst();
-
-            for(int i = 0; i < numberOfInstructions; i++) {
-                if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
-                    JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
-
-                    if(jumpInsnNode.label == change.getKey()) {
-                        jumpInsnNode.label = change.getValue();
-                        System.out.println("CHANGE");
-                    }
-                }
-
-                instruction = instruction.getNext();
-            }
-        }
-    }
-
-    /**
-     * TODO this might execute extra iterations that are not needed since the LabelNodes are the same for both old and new labels, but the info is different
-     * @param instructions
-     */
-    private static void updateLabels(InsnList instructions, LabelNode oldLabel, LabelNode newLabel) {
-        System.out.println(oldLabel.getLabel() + " -> " + newLabel.getLabel().info);
-        int numberOfInstructions = instructions.size();
-        AbstractInsnNode instruction = instructions.getFirst();
-
-        for(int i = 0; i < numberOfInstructions; i++) {
-            if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
-                JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
-
-                if(jumpInsnNode.label == oldLabel) {
-                    jumpInsnNode.label = newLabel;
-                    System.out.println("CHANGE");
-                }
-            }
-
-            instruction = instruction.getNext();
-        }
-    }
-
-
 
 
 }

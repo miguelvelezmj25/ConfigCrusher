@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.execute.java.approaches;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
@@ -13,7 +12,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -108,7 +106,7 @@ public class BruteForce {
 
         File directory = new File(BruteForce.BF_RES_DIR);
 
-        if (!directory.exists()) {
+        if(!directory.exists()) {
             directory.mkdirs();
         }
 

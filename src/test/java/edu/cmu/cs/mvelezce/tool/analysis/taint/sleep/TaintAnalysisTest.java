@@ -239,7 +239,7 @@ public class TaintAnalysisTest {
         conditions.add(statementIf.getCondition());
 
         BasicBlock basicBlock = null;
-        for (Statement trueStatement : ((BlockStatement) statementIf.getThenBlock()).getStatements()) {
+        for(Statement trueStatement : ((BlockStatement) statementIf.getThenBlock()).getStatements()) {
             basicBlock = new BasicBlock("1| " + trueStatement, trueStatement, conditions);
         }
 
@@ -271,7 +271,7 @@ public class TaintAnalysisTest {
         conditions.add(new VariableExpression("buildPerformanceModel"));
 
         BasicBlock basicBlock = null;
-        for (Statement trueStatement : ((BlockStatement) statementIf.getThenBlock()).getStatements()) {
+        for(Statement trueStatement : ((BlockStatement) statementIf.getThenBlock()).getStatements()) {
             basicBlock = new BasicBlock("1| " + trueStatement, trueStatement, conditions);
         }
 

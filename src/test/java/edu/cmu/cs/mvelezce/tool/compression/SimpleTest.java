@@ -50,12 +50,12 @@ public class SimpleTest {
         for(Set<String> relevantOptions : relevantOptionsSet) {
             Set<Set<String>> powerSet = Helper.getConfigurations(relevantOptions);
 
-            for (Set<String> configuration : powerSet) {
+            for(Set<String> configuration : powerSet) {
 //                    System.out.println("Want configuration: " + configuration + " from: " + relevantOptionsConvenient);
                 boolean hasConfiguration = false;
 
-                for (Set<String> result : results) {
-                    if (SimpleTest.matches(result, configuration, relevantOptions)) {
+                for(Set<String> result : results) {
+                    if(SimpleTest.matches(result, configuration, relevantOptions)) {
                         hasConfiguration = true;
                         break;
                     }
@@ -253,7 +253,7 @@ public class SimpleTest {
     }
 
     @Test
-    public void testGetConfigurationsToExecutePipeline10() throws IOException{
+    public void testGetConfigurationsToExecutePipeline10() throws IOException {
         // Program arguments
         String[] args = new String[2];
         args[0] = "-delres";
@@ -273,7 +273,7 @@ public class SimpleTest {
     }
 
     @Test
-    public void testGetConfigurationsToExecutePipeline11() throws IOException{
+    public void testGetConfigurationsToExecutePipeline11() throws IOException {
         // Program arguments
         String[] args = new String[2];
         args[0] = "-delres";
@@ -293,7 +293,7 @@ public class SimpleTest {
     }
 
     @Test
-    public void testGetConfigurationsToExecutePipeline12() throws IOException{
+    public void testGetConfigurationsToExecutePipeline12() throws IOException {
         // Program arguments
         String[] args = new String[2];
         args[0] = "-delres";
@@ -333,7 +333,7 @@ public class SimpleTest {
     }
 
     @Test
-    public void testGetConfigurationsToExecutePipeline14() throws IOException{
+    public void testGetConfigurationsToExecutePipeline14() throws IOException {
         // Program arguments
         String[] args = new String[2];
         args[0] = "-delres";

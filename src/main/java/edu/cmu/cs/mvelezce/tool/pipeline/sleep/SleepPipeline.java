@@ -114,6 +114,7 @@ public class SleepPipeline {
 
     /**
      * We do not pass the regions since that is already stored in Regions.
+     *
      * @param program
      * @return
      */
@@ -155,7 +156,7 @@ public class SleepPipeline {
             this.regionToOptions = new HashMap<>();
         }
 
-        public  Map<SleepRegion, Set<ConstantConfigurationExpression>> getRelevantInfo(Statement statement) {
+        public Map<SleepRegion, Set<ConstantConfigurationExpression>> getRelevantInfo(Statement statement) {
             statement.accept(this);
 
             return this.regionToOptions;

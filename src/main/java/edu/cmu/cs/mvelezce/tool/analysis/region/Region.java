@@ -38,11 +38,11 @@ public class Region {
     }
 
     public static double getMilliExecutionTime(long startTime, long endTime) {
-        return Region.getExecutionTime(startTime, endTime)/1000000.0;
+        return Region.getExecutionTime(startTime, endTime) / 1000000.0;
     }
 
     public static double getSecondsExecutionTime(long startTime, long endTime) {
-        return Region.getMilliExecutionTime(startTime, endTime)/1000.0;
+        return Region.getMilliExecutionTime(startTime, endTime) / 1000.0;
     }
 
     public static long toNanoTime(int time) {
@@ -104,11 +104,19 @@ public class Region {
                 '}';
     }
 
-    public String getRegionID() { return this.regionID; }
+    public String getRegionID() {
+        return this.regionID;
+    }
 
-    public long getStartTime() { return this.startTime; }
+    public long getStartTime() {
+        return this.startTime;
+    }
 
-    public long getEndTime() { return this.endTime; }
+    public long getEndTime() {
+        return this.endTime;
+    }
 
-    public long getOverhead() { return this.overhead; }
+    public long getOverhead() {
+        return this.overhead;
+    }
 }

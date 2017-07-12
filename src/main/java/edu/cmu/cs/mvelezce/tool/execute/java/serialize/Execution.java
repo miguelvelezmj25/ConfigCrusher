@@ -52,11 +52,13 @@ public class Execution {
             JsonNode node = oc.readTree(jsonParser);
 
             ObjectMapper mapper = new ObjectMapper();
-            ObjectReader reader = mapper.readerFor(new TypeReference<Set<String>>() {});
+            ObjectReader reader = mapper.readerFor(new TypeReference<Set<String>>() {
+            });
             Set<String> configuration = reader.readValue(node.get("configuration"));
 
             List<Region> regions = new ArrayList<>();
-            reader = mapper.readerFor(new TypeReference<List<ObjectNode>>() {});
+            reader = mapper.readerFor(new TypeReference<List<ObjectNode>>() {
+            });
             List<ObjectNode> trace = reader.readValue(node.get("trace"));
 
             for(ObjectNode object : trace) {

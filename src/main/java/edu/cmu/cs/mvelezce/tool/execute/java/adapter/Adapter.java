@@ -25,12 +25,6 @@ public abstract class Adapter {
         this.directory = directory;
     }
 
-    public abstract void execute(Set<String> configuration);
-
-//    public abstract String[] adaptConfigurationToProgram(Set<String> configuration);
-//
-//    public abstract Set<String> adaptConfigurationToPerformanceMeasurement(String[] configuration);
-
     // TODO how to do this better?
     public static String executeJavaProgram(String programName, String mainAdapter, String mainClass, String directory, String args) {
         String command = "java -Xmx8G -cp " + Adapter.CLASS_CONTAINER + ":" + Adapter.JACKSON_PATH + ":" + Adapter.JSON_SIMPLE_PATH + ":" + directory + " " + mainAdapter + " " + programName + " " + mainClass + " " + args;
@@ -60,12 +54,17 @@ public abstract class Adapter {
             }
 
             System.out.println(output);
-        }
-        catch(IOException ie) {
+        } catch (IOException ie) {
             ie.printStackTrace();
         }
 
         return null;
     }
+
+//    public abstract String[] adaptConfigurationToProgram(Set<String> configuration);
+//
+//    public abstract Set<String> adaptConfigurationToPerformanceMeasurement(String[] configuration);
+
+    public abstract void execute(Set<String> configuration);
 
 }

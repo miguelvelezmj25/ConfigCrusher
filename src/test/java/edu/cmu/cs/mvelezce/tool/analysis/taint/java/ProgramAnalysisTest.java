@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class ProgramAnalysisTest {
 
-    private void checkIfEqual(Map<JavaRegion, Set<String>>  outputSave, Map<JavaRegion, Set<String>>  outputRead) {
+    private void checkIfEqual(Map<JavaRegion, Set<String>> outputSave, Map<JavaRegion, Set<String>> outputRead) {
         for(Map.Entry<JavaRegion, Set<String>> save : outputSave.entrySet()) {
             boolean oneIsEqual = false;
             for(Map.Entry<JavaRegion, Set<String>> read : outputRead.entrySet()) {
@@ -79,10 +79,10 @@ public class ProgramAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>>  outputSave = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> outputSave = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
 
         args = new String[0];
-        Map<JavaRegion, Set<String>>  outputRead = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> outputRead = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
 
         this.checkIfEqual(outputSave, outputRead);
     }

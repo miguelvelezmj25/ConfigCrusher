@@ -32,12 +32,18 @@ public class TimedStatement extends Statement {
         this.statements = statements;
     }
 
-    public String getRegionID() { return this.regionID; }
+    public String getRegionID() {
+        return this.regionID;
+    }
 
-    public Statement getStatements() { return this.statements; }
+    public Statement getStatements() {
+        return this.statements;
+    }
 
     @Override
-    public String toString() { return "Time: " + this.statements; }
+    public String toString() {
+        return "Time: " + this.statements;
+    }
 
     @Override
     public <T, U> U accept(Visitor<T, U> visitor) {

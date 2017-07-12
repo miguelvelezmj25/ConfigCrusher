@@ -282,7 +282,7 @@ public class Executor {
     private static Set<PerformanceEntry> readFromFile(File file) throws IOException, ParseException {
         ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
         List<Execution> executions = mapper.readValue(file, new TypeReference<List<Execution>>() {
-            });
+        });
         Set<PerformanceEntry> performanceEntries = new HashSet<>();
 
         for(Execution execution : executions) {

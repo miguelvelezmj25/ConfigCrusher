@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by mvelezce on 7/9/17.
  */

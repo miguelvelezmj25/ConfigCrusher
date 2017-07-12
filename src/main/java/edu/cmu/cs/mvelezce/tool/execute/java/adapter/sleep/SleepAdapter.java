@@ -10,25 +10,11 @@ import java.util.Set;
  */
 public class SleepAdapter extends Adapter {
 
-    private static final String[] CONFIGURATIONS = {"A", "B", "C", "D", "IA", "DA"};
-
     public static final String TEST_DIRECTORY = "test/out/production/test";
+    private static final String[] CONFIGURATIONS = {"A", "B", "C", "D", "IA", "DA"};
 
     public SleepAdapter(String programName, String mainClass, String directory) {
         super(programName, mainClass, directory);
-    }
-
-    @Override
-    public void execute(Set<String> configuration) {
-        String[] argsArray = SleepAdapter.adaptConfigurationToProgram(configuration);
-        StringBuilder args = new StringBuilder();
-
-        for(String arg : argsArray) {
-            args.append(arg);
-            args.append(" ");
-        }
-
-        Adapter.executeJavaProgram(programName, SleepMain.SLEEP_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
     public static String[] adaptConfigurationToProgram(Set<String> configuration) {
@@ -56,6 +42,19 @@ public class SleepAdapter extends Adapter {
         }
 
         return performanceConfiguration;
+    }
+
+    @Override
+    public void execute(Set<String> configuration) {
+        String[] argsArray = SleepAdapter.adaptConfigurationToProgram(configuration);
+        StringBuilder args = new StringBuilder();
+
+        for(String arg : argsArray) {
+            args.append(arg);
+            args.append(" ");
+        }
+
+        Adapter.executeJavaProgram(programName, SleepMain.SLEEP_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

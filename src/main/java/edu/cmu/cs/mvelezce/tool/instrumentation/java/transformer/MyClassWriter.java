@@ -25,15 +25,18 @@ public class MyClassWriter extends ClassWriter {
 
         if(type3.isAssignableFrom(type4)) {
             return type1;
-        } else if(type4.isAssignableFrom(type3)) {
+        }
+        else if(type4.isAssignableFrom(type3)) {
             return type2;
-        } else if(!type3.isInterface() && !type4.isInterface()) {
+        }
+        else if(!type3.isInterface() && !type4.isInterface()) {
             do {
                 type3 = type3.getSuperclass();
-            } while(!type3.isAssignableFrom(type4));
+            } while (!type3.isAssignableFrom(type4));
 
             return type3.getName().replace('.', '/');
-        } else {
+        }
+        else {
             return "java/lang/Object";
         }
     }

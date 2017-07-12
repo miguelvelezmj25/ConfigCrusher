@@ -74,12 +74,12 @@ public class PerformanceEntry {
                 if(!executingRegions.isEmpty()) {
                     Stack<Long> added = new Stack<>();
 
-                    while(!innerRegionExecutionTime.isEmpty()) {
+                    while (!innerRegionExecutionTime.isEmpty()) {
                         long currentInnerRegionExecutionTime = innerRegionExecutionTime.pop();
                         added.push(currentInnerRegionExecutionTime + regionExecutionTime);
                     }
 
-                    while(!added.isEmpty()) {
+                    while (!added.isEmpty()) {
                         innerRegionExecutionTime.push(added.pop());
                     }
                 }
@@ -103,21 +103,35 @@ public class PerformanceEntry {
         return time;
     }
 
-    public Set<String> getConfiguration() { return this.configuration; }
+    public Set<String> getConfiguration() {
+        return this.configuration;
+    }
 
-    public Map<Region, Long> getRegionsToExecutionTime() { return this.regionsToExecutionTime; }
+    public Map<Region, Long> getRegionsToExecutionTime() {
+        return this.regionsToExecutionTime;
+    }
 
-    public Map<Region, Set<Region>> getRegionToInnerRegions() { return this.regionToInnerRegions; }
+    public Map<Region, Set<Region>> getRegionToInnerRegions() {
+        return this.regionToInnerRegions;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if(this == o) {
+            return true;
+        }
+        if(o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         PerformanceEntry that = (PerformanceEntry) o;
 
-        if (!configuration.equals(that.configuration)) return false;
-        if (!regionsToExecutionTime.equals(that.regionsToExecutionTime)) return false;
+        if(!configuration.equals(that.configuration)) {
+            return false;
+        }
+        if(!regionsToExecutionTime.equals(that.regionsToExecutionTime)) {
+            return false;
+        }
         return regionToInnerRegions.equals(that.regionToInnerRegions);
     }
 

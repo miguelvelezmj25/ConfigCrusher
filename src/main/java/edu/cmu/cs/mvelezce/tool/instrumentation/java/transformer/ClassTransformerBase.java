@@ -18,7 +18,7 @@ public abstract class ClassTransformerBase implements ClassTransformer {
     public ClassNode readClass(String fileName) throws IOException {
         System.out.println(fileName);
         ClassReader classReader = new ClassReader(fileName);
-        ClassNode classNode =  new ClassNode();
+        ClassNode classNode = new ClassNode();
         classReader.accept(classNode, 0);
 
         return classNode;

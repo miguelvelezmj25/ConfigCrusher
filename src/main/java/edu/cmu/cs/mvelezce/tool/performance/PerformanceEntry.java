@@ -10,20 +10,60 @@ import java.util.*;
 public class PerformanceEntry {
     private Set<String> configuration;
     private Map<Region, Long> regionsToExecutionTime;
-    private Map<Region, Set<Region>> regionToInnerRegions;
+    private Map<Region, Set<Region>> regionsToInnerRegions;
 
     public PerformanceEntry(Set<String> configuration, List<Region> executedRegions) {
         this.configuration = configuration;
         this.regionsToExecutionTime = new LinkedHashMap<>();
-        this.regionToInnerRegions = new HashMap<>();
+        this.regionsToInnerRegions = new HashMap<>();
 
+        this.calculateInnerRegions(executedRegions);
         this.calculateRealPerformance(executedRegions);
     }
 
-    public PerformanceEntry(Set<String> configuration, Map<Region, Long> regionsToExecutionTime, Map<Region, Set<Region>> regionToInnerRegions) {
+    public PerformanceEntry(Set<String> configuration, Map<Region, Long> regionsToExecutionTime, Map<Region, Set<Region>> regionsToInnerRegions) {
         this.configuration = configuration;
         this.regionsToExecutionTime = regionsToExecutionTime;
-        this.regionToInnerRegions = regionToInnerRegions;
+        this.regionsToInnerRegions = regionsToInnerRegions;
+    }
+
+    public void calculateInnerRegions(List<Region> executedRegions) {
+        Stack<Region> executingRegions = new Stack<>();
+
+        // Get all regions
+        for(Region executingRegion : executedRegions) {
+            if(executingRegions.isEmpty()) {
+                executingRegions.push(executingRegion);
+                this.regionsToInnerRegions.put(executingRegion, new HashSet<>());
+            }
+            else if(executingRegions.peek().getRegionID().equals(executingRegion.getRegionID())) {
+                executingRegions.pop();
+            }
+            else {
+                executingRegions.push(executingRegion);
+                this.regionsToInnerRegions.put(executingRegion, new HashSet<>());
+            }
+        }
+
+        for(Region executingRegion : executedRegions) {
+            if(executingRegions.isEmpty()) {
+                executingRegions.push(executingRegion);
+            }
+            else if(executingRegions.peek().getRegionID().equals(executingRegion.getRegionID())) {
+                executingRegions.pop();
+            }
+            else {
+                for(Map.Entry<Region, Set<Region>> regionToInnerRegions : this.regionsToInnerRegions.entrySet()) {
+                    for(Region region : executingRegions) {
+                        if(regionToInnerRegions.getKey().getRegionID().equals(region.getRegionID())) {
+                            regionToInnerRegions.getValue().add(executingRegion);
+                        }
+                    }
+                }
+
+                executingRegions.push(executingRegion);
+            }
+        }
     }
 
     /**
@@ -40,24 +80,8 @@ public class PerformanceEntry {
             if(executingRegions.isEmpty()) {
                 executingRegions.add(executingRegion);
                 innerRegionExecutionTime.push((long) 0);
-                this.regionToInnerRegions.put(executingRegion, new HashSet<>());
             }
-            else if(!executingRegions.peek().getRegionID().equals(executingRegion.getRegionID())) {
-                if(!this.regionToInnerRegions.containsKey(executingRegions.peek())) {
-                    this.regionToInnerRegions.put(executingRegions.peek(), new HashSet<>());
-                }
-
-                if(!this.regionToInnerRegions.containsKey(executingRegion)) {
-                    this.regionToInnerRegions.put(executingRegion, new HashSet<>());
-                }
-
-                Set<Region> previousInnerRegions = this.regionToInnerRegions.get(executingRegions.peek());
-                previousInnerRegions.add(executingRegion);
-
-                executingRegions.add(executingRegion);
-                innerRegionExecutionTime.push((long) 0);
-            }
-            else {
+            else if(executingRegions.peek().getRegionID().equals(executingRegion.getRegionID())) {
                 if(executingRegions.peek().getStartTime() > executingRegion.getEndTime()) {
                     throw new RuntimeException("A region has a negative execution time. This might be caused by incorrect instrumentation");
                 }
@@ -69,8 +93,10 @@ public class PerformanceEntry {
                     regionExecutionTime -= innerRegionExecutionTime.peek();
                 }
 
+                this.regionsToExecutionTime.put(executingRegion, regionExecutionTime);
                 innerRegionExecutionTime.pop();
 
+                // Adding new inner execution time
                 if(!executingRegions.isEmpty()) {
                     Stack<Long> added = new Stack<>();
 
@@ -83,8 +109,10 @@ public class PerformanceEntry {
                         innerRegionExecutionTime.push(added.pop());
                     }
                 }
-
-                this.regionsToExecutionTime.put(executingRegion, regionExecutionTime);
+            }
+            else {
+                executingRegions.add(executingRegion);
+                innerRegionExecutionTime.push((long) 0);
             }
 
             previousRegionEntry = executingRegion;
@@ -111,8 +139,8 @@ public class PerformanceEntry {
         return this.regionsToExecutionTime;
     }
 
-    public Map<Region, Set<Region>> getRegionToInnerRegions() {
-        return this.regionToInnerRegions;
+    public Map<Region, Set<Region>> getRegionsToInnerRegions() {
+        return this.regionsToInnerRegions;
     }
 
     @Override
@@ -132,14 +160,14 @@ public class PerformanceEntry {
         if(!regionsToExecutionTime.equals(that.regionsToExecutionTime)) {
             return false;
         }
-        return regionToInnerRegions.equals(that.regionToInnerRegions);
+        return regionsToInnerRegions.equals(that.regionsToInnerRegions);
     }
 
     @Override
     public int hashCode() {
         int result = configuration.hashCode();
         result = 31 * result + regionsToExecutionTime.hashCode();
-        result = 31 * result + regionToInnerRegions.hashCode();
+        result = 31 * result + regionsToInnerRegions.hashCode();
         return result;
     }
 }

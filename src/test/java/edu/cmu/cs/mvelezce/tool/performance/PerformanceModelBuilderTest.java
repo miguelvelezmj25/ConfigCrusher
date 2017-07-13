@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.performance;
 
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
@@ -42,36 +43,6 @@ public class PerformanceModelBuilderTest {
         }
 
         PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
-        System.out.println(pm);
-    }
-
-    @Test
-    public void testPngtastic() throws IOException, ParseException {
-        String program = "pngtastic";
-
-        // Program arguments
-        String[] args = new String[1];
-        args[0] = "-i1";
-//        Options.getCommandLine(args);
-
-//        String[] args = new String[0];
-
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
-        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
-
-        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
-
-        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            JavaRegion javaRegion = entry.getKey();
-            Region region = new Region(javaRegion.getRegionID());
-            regionsToOptions.put(region, entry.getValue());
-        }
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
         System.out.println(pm);
     }
 
@@ -151,13 +122,77 @@ public class PerformanceModelBuilderTest {
 
     @Test
     public void testSleep3() throws IOException, ParseException {
-        String program = "Sleep3";
+        String program = "sleep3";
 
         // Program arguments
-        String[] args = new String[0];
+        String[] args = new String[1];
+        args[0] = "-i1";
+        Options.getCommandLine(args);
+
+//        String[] args = new String[0];
 
         Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
+
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+        System.out.println(pm);
+    }
+
+    @Test
+    public void testSleep22() throws IOException, ParseException {
+        String program = "sleep22";
+
+        // Program arguments
+        String[] args = new String[1];
+        args[0] = "-i1";
+        Options.getCommandLine(args);
+
+//        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
+
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+        System.out.println(pm);
+    }
+
+    @Test
+    public void testPngtastic() throws IOException, ParseException {
+        String program = "pngtastic";
+
+        // Program arguments
+        String[] args = new String[1];
+        args[0] = "-i1";
+        Options.getCommandLine(args);
+
+//        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 

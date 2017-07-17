@@ -240,21 +240,23 @@ public class JavaPipelineTest {
 
         // Program arguments
         String[] args;
-//        args = new String[0];
+        args = new String[0];
 
-//        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
-//        args[0] = "-i5";
+//        args[0] = "-i1";
 
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i5";
+        args[2] = "-i1";
 
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
         JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
     }
@@ -320,47 +322,291 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep2() throws IOException, ParseException, InterruptedException {
-        String programName = "sleep2";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
-
-        // Program arguments
-//        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
-
-    }
-
-    @Test
     public void testSleep3() throws IOException, ParseException, InterruptedException {
         String programName = "sleep3";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
 
         // Program arguments
-        String[] args = new String[0];
+        String[] args;
+        args = new String[0];
 
-//        String[] args = new String[1];
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
 //        args[0] = "-saveres";
+//        args[0] = "-i1";
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+    }
 
+    @Test
+    public void testSleep21() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep21";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep21";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+    }
+
+    @Test
+    public void testSleep22() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep22";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep22";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+    }
+
+    @Test
+    public void testSleep23() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep23";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep23";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+    }
+
+    @Test
+    public void testSleep24() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep24";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep24";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+    }
+
+    @Test
+    public void testSleep25() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep25";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep25";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";R
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+    }
+
+    @Test
+    public void testSleep26() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep26";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep26";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+    }
+
+    @Test
+    public void testSleep27() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep27";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep27";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+
+        // T = + 1.31 + 0.2A - 0.3B + 0.4C
+    }
+
+    @Test
+    public void testSleep2() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep2";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
     }
 
     @Test

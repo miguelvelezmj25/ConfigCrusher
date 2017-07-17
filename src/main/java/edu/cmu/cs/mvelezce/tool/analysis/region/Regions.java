@@ -74,17 +74,23 @@ public class Regions {
 //    }
 
     public static void enter(String regionID) {
+        long start = System.nanoTime();
         Region region = new Region(regionID);
 //        Regions.addRegion(region);
         region.enter();
+        long end = System.nanoTime();
+        region.setOverhead(end - start);
     }
 
     // TODO hacky way to not call the exit method of a region if it does not exit. This can be fixed if we can instrument
     // better and do not exit a region that has not been started
     public static void exit(String regionID) {
+        long start = System.nanoTime();
         if(Regions.executingRegions.peek().getRegionID().equals(regionID)) {
             Region region = new Region(regionID);
             region.exit();
+            long end = System.nanoTime();
+            region.setOverhead(end - start);
 //            Regions.addRegion(region);
         }
 //        boolean exit = false;

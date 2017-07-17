@@ -54,10 +54,10 @@ public class Region {
     }
 
     public void enter() {
-        this.overhead = System.nanoTime();
+//        this.overhead = System.nanoTime();
         this.enterRegion();
         this.startTime();
-        this.overhead = System.nanoTime() - this.overhead;
+//        this.overhead = System.nanoTime() - this.overhead;
     }
 
     public void enter(long startTime) {
@@ -67,9 +67,9 @@ public class Region {
 
     public void exit() {
         this.endTime();
-        this.overhead = System.nanoTime();
+//        this.overhead = System.nanoTime();
         Regions.removeExecutingRegion(this);
-        this.overhead = System.nanoTime() - this.overhead;
+//        this.overhead = System.nanoTime() - this.overhead;
     }
 
     public void exit(long endTime) {
@@ -118,5 +118,9 @@ public class Region {
 
     public long getOverhead() {
         return this.overhead;
+    }
+
+    public void setOverhead(long overhead) {
+        this.overhead = overhead;
     }
 }

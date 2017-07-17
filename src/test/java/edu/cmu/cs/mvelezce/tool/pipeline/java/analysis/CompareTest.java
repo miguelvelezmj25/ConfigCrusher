@@ -29,15 +29,14 @@ public class CompareTest {
     }
 
     @Test
-    public void testComparePMToBFElevator() throws Exception {
-        String programName = "elevator";
-        Compare.comparePMToBF(programName);
+    public void comparePngtastic1() throws Exception {
+        String programName = "pngtastic";
+        Compare.compare(programName, JavaPipeline.PM_RES_DIR, BruteForce.BF_RES_DIR);
     }
 
     @Test
-    public void testComparePMToBFSleep1() throws Exception {
-        String programName = "sleep1";
-        Compare.comparePMToBF(programName);
+    public void compareSleep26_1() throws Exception {
+        String programName = "sleep26";
+        Compare.compare(programName, JavaPipeline.PM_RES_DIR, BruteForce.BF_RES_DIR);
     }
-
 }

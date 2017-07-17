@@ -367,23 +367,13 @@ public class ExecutorTest {
     }
 
     @Test
-    public void testSleep3() throws IOException, ParseException {
-        String programName = "Sleep3";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
+    public void testPngtastic() throws IOException, ParseException {
+        String programName = "pngtastic";
 
-        String[] args = new String[0];
+        String[] args = new String[1];
+        args[0] = "-i1";
 
-        Set<String> options = new HashSet<>();
-        options.add("A");
-        options.add("B");
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> configurations = Helper.getConfigurations(options);
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(programName, args);
     }
 
 }

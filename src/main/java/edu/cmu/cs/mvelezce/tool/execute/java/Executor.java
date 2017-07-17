@@ -232,17 +232,18 @@ public class Executor {
                     continue;
                 }
 
-                Map<Region, Long> something = new LinkedHashMap<>();
+                Map<Region, Long> regionsToTime = new LinkedHashMap<>();
                 Iterator<Map.Entry<Region, Long>> regionIdsToMeanIter = perfStat.getRegionsToMean().entrySet().iterator();
                 Iterator<Map.Entry<Region, Long>> regionsToTimeIter = perfEntry.getRegionsToExecutionTime().entrySet().iterator();
 
                 // TODO check if this is correct
 
                 while (regionIdsToMeanIter.hasNext() && regionsToTimeIter.hasNext()) {
-                    something.put(regionsToTimeIter.next().getKey(), regionIdsToMeanIter.next().getValue());
+                    regionsToTime.put(regionsToTimeIter.next().getKey(), regionIdsToMeanIter.next().getValue());
                 }
 
-                processedRes.add(new PerformanceEntry(perfStat.getConfiguration(), something, perfEntry.getRegionToInnerRegions()));
+                PerformanceEntry newPerfEntry = new PerformanceEntry(perfStat.getConfiguration(), regionsToTime, perfEntry.getRegionsToInnerRegions());
+                processedRes.add(newPerfEntry);
             }
         }
 

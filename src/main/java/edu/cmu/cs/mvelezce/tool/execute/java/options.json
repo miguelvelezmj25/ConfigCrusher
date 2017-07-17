@@ -20,6 +20,33 @@
   "sleep1": [
     "A"
   ],
+  "sleep3": [
+    "A",
+    "B"
+  ],
+  "sleep21": [
+    "A",
+    "B"
+  ],
+  "sleep22": [
+    "A",
+    "B"
+  ],
+  "sleep23": [
+    "A",
+    "B"
+  ],
+  "sleep24": [
+    "A",
+    "B"
+  ],
+  "sleep25": [
+    "A",
+    "B"
+  ],
+  "sleep26": [
+    "A"
+  ],
   "pngtastic": [
     "FREQTHRESHOLD",
     "DISTTHRESHOLD",

@@ -136,6 +136,54 @@ public class SleepMain {
             Sleep19.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep20")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep20.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep21")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep21.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep22")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep22.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep23")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep23.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep24")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep24.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep25")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep25.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep26")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep26.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep27")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep27.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
 
         Set<String> performanceConfiguration = SleepAdapter.adaptConfigurationToPerformanceMeasurement(sleepArgs);
         Executor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());

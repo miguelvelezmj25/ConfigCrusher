@@ -55,7 +55,7 @@ public class Output {
 
                 String constraint = (String) entry.get(Output.CONSTRAINT);
 
-                if(constraint.equals("true") || constraint.equals("false")) {
+                if(constraint.equals("true") /*|| constraint.equals("false")*/) {
                     continue;
                 }
 
@@ -75,7 +75,7 @@ public class Output {
 
                 int javaLineNumber = (int) (long) entry.get(Output.JAVA_LINE_NO);
                 List<String> usedTerms = (List<String>) entry.get(Output.USED_TERMS);
-                linesToConstraints.put(javaLineNumber, /*constraint + " " +*/ usedTerms.toString());
+                linesToConstraints.put(javaLineNumber, constraint + " " + usedTerms.toString());
             }
 
             if(linesToConstraints.isEmpty()) {

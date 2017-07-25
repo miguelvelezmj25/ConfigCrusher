@@ -94,6 +94,47 @@ public class ProgramAnalysisTest {
     }
 
     @Test
+    public void testReplaceConstraintWithUsedTerms1() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("DISTTHRESHOLD");
+        usedTerms.add("TIMEOUT");
+        usedTerms.add("FREQTHRESHOLD");
+
+        String constraint = "(DISTTHRESHOLD = 0 ^ TIMEOUT_Theta ^ !(TIMEOUT_Eta) || !(FREQTHRESHOLD_Beta))";
+
+        String res = ProgramAnalysis.replaceConstraintWithUsedTerms(constraint, usedTerms);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testReplaceConstraintWithUsedTerms2() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("FREQTHRESHOLD");
+        usedTerms.add("TIMEOUT");
+        usedTerms.add("DISTTHRESHOLD");
+        usedTerms.add("MINALPHA");
+
+        String constraint = "(TIMEOUT_Beta ^ TIMEOUT = 0 ^ TIMEOUT_Gamma) || (TIMEOUT_Beta ^ DISTTHRESHOLD = 0 ^ TIMEOUT_Gamma) || (TIMEOUT_Beta ^ FREQTHRESHOLD = 0 ^ TIMEOUT_Gamma) || (TIMEOUT_Beta ^ MINALPHA = 0 ^ TIMEOUT_Gamma)";
+
+        String res = ProgramAnalysis.replaceConstraintWithUsedTerms(constraint, usedTerms);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testReplaceConstraintWithUsedTerms3() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("A");
+        usedTerms.add("B");
+        usedTerms.add("C");
+        usedTerms.add("D");
+
+        String constraint = "(!A = 0 ^ !(C = 0) || !(D = 0)) || (!B = 0 ^ !(C = 0) || !(D = 0))";
+
+        String res = ProgramAnalysis.replaceConstraintWithUsedTerms(constraint, usedTerms);
+        System.out.println(res);
+    }
+
+    @Test
     public void testElevator() throws IOException, ParseException {
         String programName = "elevator";
 

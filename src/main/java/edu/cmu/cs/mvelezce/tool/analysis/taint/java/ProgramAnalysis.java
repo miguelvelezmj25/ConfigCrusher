@@ -158,9 +158,10 @@ public class ProgramAnalysis {
             String entryMethod = (String) entry.get(ProgramAnalysis.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
             entryMethod = entryMethod.substring(entryMethod.lastIndexOf(".") + 1);
 
-//            if(entryMethod.contains("rgbaDistance")) {
-//                continue;
-//            }
+            // TODO ignore regions in main method
+            if(entryMethod.contains("main")) {
+                continue;
+            }
 
             int entryBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));
 
@@ -338,6 +339,14 @@ public class ProgramAnalysis {
         }
 
         return relevantRegionsToOptions;
+    }
+
+    public static String replaceConstraintWithUsedTerms(String constraint, List<String> usedTerms) {
+        for(String usedTerm : usedTerms) {
+            constraint = constraint.replaceAll(usedTerm + "(_[a-zA-Z]*)?", usedTerm);
+        }
+
+        return constraint;
     }
 
 }

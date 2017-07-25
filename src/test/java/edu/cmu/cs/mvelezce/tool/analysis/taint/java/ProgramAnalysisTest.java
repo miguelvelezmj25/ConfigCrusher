@@ -136,11 +136,6 @@ public class ProgramAnalysisTest {
 
     @Test
     public void testGetConjunctions1() {
-        List<String> usedTerms = new ArrayList<>();
-        usedTerms.add("DISTTHRESHOLD");
-        usedTerms.add("TIMEOUT");
-        usedTerms.add("FREQTHRESHOLD");
-
         String constraint = "(DISTTHRESHOLD = 0 ^ TIMEOUT_Theta ^ !(TIMEOUT_Eta) || !(FREQTHRESHOLD_Beta))";
 
         List<String> res = ProgramAnalysis.getConjunctions(constraint);
@@ -149,12 +144,6 @@ public class ProgramAnalysisTest {
 
     @Test
     public void testGetConjunctions2() {
-        List<String> usedTerms = new ArrayList<>();
-        usedTerms.add("FREQTHRESHOLD");
-        usedTerms.add("TIMEOUT");
-        usedTerms.add("DISTTHRESHOLD");
-        usedTerms.add("MINALPHA");
-
         String constraint = "(TIMEOUT_Beta ^ TIMEOUT = 0 ^ TIMEOUT_Gamma) || (TIMEOUT_Beta ^ DISTTHRESHOLD = 0 ^ TIMEOUT_Gamma) || (TIMEOUT_Beta ^ FREQTHRESHOLD = 0 ^ TIMEOUT_Gamma) || (TIMEOUT_Beta ^ MINALPHA = 0 ^ TIMEOUT_Gamma)";
 
         List<String> res = ProgramAnalysis.getConjunctions(constraint);
@@ -163,15 +152,107 @@ public class ProgramAnalysisTest {
 
     @Test
     public void testGetConjunctions3() {
+        String constraint = "(!A = 0 ^ !(C = 0) || !(D = 0)) || (!B = 0 ^ !(C = 0) || !(D = 0))";
+
+        List<String> res = ProgramAnalysis.getConjunctions(constraint);
+        Assert.assertEquals(res.size(), 2);
+    }
+
+    @Test
+    public void testGetConstraintSet1() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("DISTTHRESHOLD");
+        usedTerms.add("TIMEOUT");
+        usedTerms.add("FREQTHRESHOLD");
+        usedTerms.add("MINALPHA");
+
+        String constraint = "(DISTTHRESHOLD = 0 ^ TIMEOUT ^ !(TIMEOUT) || !(FREQTHRESHOLD))";
+
+        Set<String> res = ProgramAnalysis.getConstraintSet(constraint, usedTerms);
+        Assert.assertEquals(res.size(), 3);
+    }
+
+    @Test
+    public void testGetConstraintSet2() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("FREQTHRESHOLD");
+        usedTerms.add("TIMEOUT");
+        usedTerms.add("DISTTHRESHOLD");
+        usedTerms.add("MINALPHA");
+
+        String constraint = "(TIMEOUT ^ TIMEOUT = 0 ^ TIMEOUT)";
+
+        Set<String> res = ProgramAnalysis.getConstraintSet(constraint, usedTerms);
+        Assert.assertEquals(res.size(), 1);
+    }
+
+    @Test
+    public void testGetConstraintSet3() {
         List<String> usedTerms = new ArrayList<>();
         usedTerms.add("A");
         usedTerms.add("B");
         usedTerms.add("C");
         usedTerms.add("D");
 
-        String constraint = "(!A = 0 ^ !(C = 0) || !(D = 0)) || (!B = 0 ^ !(C = 0) || !(D = 0))";
+        String constraint = "(!A = 0 ^ !(C = 0) || !(D = 0))";
 
-        List<String> res = ProgramAnalysis.getConjunctions(constraint);
+        Set<String> res = ProgramAnalysis.getConstraintSet(constraint, usedTerms);
+        Assert.assertEquals(res.size(), 3);
+    }
+
+    @Test
+    public void testGetConstraintSet4() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("A");
+        usedTerms.add("B");
+        usedTerms.add("C");
+        usedTerms.add("D");
+
+        String constraint = "(!B = 0 ^ !(C = 0) || !(D = 0))";
+
+        Set<String> res = ProgramAnalysis.getConstraintSet(constraint, usedTerms);
+        Assert.assertEquals(res.size(), 3);
+    }
+
+    @Test
+    public void testGetConstraintSet5() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("FREQTHRESHOLD");
+        usedTerms.add("TIMEOUT");
+        usedTerms.add("DISTTHRESHOLD");
+        usedTerms.add("MINALPHA");
+
+        String constraint = "(TIMEOUT ^ DISTTHRESHOLD = 0 ^ TIMEOUT)";
+
+        Set<String> res = ProgramAnalysis.getConstraintSet(constraint, usedTerms);
+        Assert.assertEquals(res.size(), 2);
+    }
+
+    @Test
+    public void testGetConstraintSet6() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("FREQTHRESHOLD");
+        usedTerms.add("TIMEOUT");
+        usedTerms.add("DISTTHRESHOLD");
+        usedTerms.add("MINALPHA");
+
+        String constraint = "(TIMEOUT ^ FREQTHRESHOLD = 0 ^ TIMEOUT)";
+
+        Set<String> res = ProgramAnalysis.getConstraintSet(constraint, usedTerms);
+        Assert.assertEquals(res.size(), 2);
+    }
+
+    @Test
+    public void testGetConstraintSet7() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("FREQTHRESHOLD");
+        usedTerms.add("TIMEOUT");
+        usedTerms.add("DISTTHRESHOLD");
+        usedTerms.add("MINALPHA");
+
+        String constraint = "(TIMEOUT ^ MINALPHA = 0 ^ TIMEOUT)";
+
+        Set<String> res = ProgramAnalysis.getConstraintSet(constraint, usedTerms);
         Assert.assertEquals(res.size(), 2);
     }
 

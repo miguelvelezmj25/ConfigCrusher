@@ -400,4 +400,20 @@ public class ProgramAnalysis {
         return conjunctions;
     }
 
+    public static Set<String> getConstraintSet(String constraint, List<String> usedTerms) {
+        Set<String> res = new HashSet<>();
+
+        String[] terms = constraint.split(" ");
+
+        for(int i = 0; i < terms.length; i++) {
+            for(String usedTerm : usedTerms) {
+                if(terms[i].contains(usedTerm)) {
+                    res.add(usedTerm);
+                }
+            }
+        }
+
+        return res;
+    }
+
 }

@@ -135,6 +135,47 @@ public class ProgramAnalysisTest {
     }
 
     @Test
+    public void testGetConjunctions1() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("DISTTHRESHOLD");
+        usedTerms.add("TIMEOUT");
+        usedTerms.add("FREQTHRESHOLD");
+
+        String constraint = "(DISTTHRESHOLD = 0 ^ TIMEOUT_Theta ^ !(TIMEOUT_Eta) || !(FREQTHRESHOLD_Beta))";
+
+        List<String> res = ProgramAnalysis.getConjunctions(constraint);
+        Assert.assertEquals(res.size(), 1);
+    }
+
+    @Test
+    public void testGetConjunctions2() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("FREQTHRESHOLD");
+        usedTerms.add("TIMEOUT");
+        usedTerms.add("DISTTHRESHOLD");
+        usedTerms.add("MINALPHA");
+
+        String constraint = "(TIMEOUT_Beta ^ TIMEOUT = 0 ^ TIMEOUT_Gamma) || (TIMEOUT_Beta ^ DISTTHRESHOLD = 0 ^ TIMEOUT_Gamma) || (TIMEOUT_Beta ^ FREQTHRESHOLD = 0 ^ TIMEOUT_Gamma) || (TIMEOUT_Beta ^ MINALPHA = 0 ^ TIMEOUT_Gamma)";
+
+        List<String> res = ProgramAnalysis.getConjunctions(constraint);
+        Assert.assertEquals(res.size(), 4);
+    }
+
+    @Test
+    public void testGetConjunctions3() {
+        List<String> usedTerms = new ArrayList<>();
+        usedTerms.add("A");
+        usedTerms.add("B");
+        usedTerms.add("C");
+        usedTerms.add("D");
+
+        String constraint = "(!A = 0 ^ !(C = 0) || !(D = 0)) || (!B = 0 ^ !(C = 0) || !(D = 0))";
+
+        List<String> res = ProgramAnalysis.getConjunctions(constraint);
+        Assert.assertEquals(res.size(), 2);
+    }
+
+    @Test
     public void testElevator() throws IOException, ParseException {
         String programName = "elevator";
 

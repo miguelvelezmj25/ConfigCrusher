@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
+import com.ibm.wala.shrike.cg.Runtime;
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
@@ -347,6 +348,56 @@ public class ProgramAnalysis {
         }
 
         return constraint;
+    }
+
+    public static List<String> getConjunctions(String constraint) {
+        List<String> conjunctions = new ArrayList<>();
+
+        StringBuilder conjunction = new StringBuilder();
+        int parenthesisCount = 0;
+
+        for(int i = 0; i < constraint.length(); i++) {
+            char currentChar = constraint.charAt(i);
+            conjunction.append(currentChar);
+
+            if(constraint.charAt(i) == '(') {
+                parenthesisCount++;
+            }
+            else if(constraint.charAt(i) == ')') {
+                parenthesisCount--;
+            }
+            else {
+                continue;
+            }
+
+            if(parenthesisCount == 0) {
+                conjunctions.add(conjunction.toString());
+                conjunction = new StringBuilder();
+            }
+
+        }
+
+        for(String conj : conjunctions) {
+            int openParenthesisCount = 0;
+
+            for(int i = 0; i < conj.length(); i++) {
+                char currentChar = constraint.charAt(i);
+                conjunction.append(currentChar);
+
+                if(constraint.charAt(i) == '(') {
+                    openParenthesisCount++;
+
+                    if(openParenthesisCount > 2) {
+                        throw new RuntimeException(conj + " is not a valid conjunction");
+                    }
+                }
+                else if(constraint.charAt(i) == ')') {
+                    openParenthesisCount--;
+                }
+            }
+        }
+
+        return conjunctions;
     }
 
 }

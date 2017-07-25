@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.compression;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import org.apache.commons.collections4.CollectionUtils;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
@@ -385,7 +384,28 @@ public class SimpleTest {
         // Program arguments
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        System.out.println(configurationsToExecute.size());
+    }
+
+    @Test
+    public void testSleep28() throws IOException, ParseException {
+        String programName = "sleep28";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -407,7 +427,7 @@ public class SimpleTest {
         String[] args = new String[0];
 
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -431,7 +451,7 @@ public class SimpleTest {
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         args = new String[2];
         args[0] = "-delres";
@@ -452,7 +472,7 @@ public class SimpleTest {
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         args = new String[2];
         args[0] = "-delres";
@@ -473,7 +493,7 @@ public class SimpleTest {
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         args = new String[2];
         args[0] = "-delres";
@@ -494,7 +514,7 @@ public class SimpleTest {
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         args = new String[2];
         args[0] = "-delres";
@@ -515,7 +535,7 @@ public class SimpleTest {
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         args = new String[2];
         args[0] = "-delres";

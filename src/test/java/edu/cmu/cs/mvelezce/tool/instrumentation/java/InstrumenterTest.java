@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
@@ -33,7 +32,7 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
     }
@@ -60,7 +59,7 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         Instrumenter.instrument(instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
     }
@@ -81,7 +80,7 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
     }
@@ -102,7 +101,7 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
     }
@@ -123,7 +122,7 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
     }
@@ -144,7 +143,7 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
     }

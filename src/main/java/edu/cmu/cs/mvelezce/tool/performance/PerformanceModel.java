@@ -13,13 +13,12 @@ import java.util.*;
  */
 public class PerformanceModel {
     //    private double baseTime;
-    private Map<Set<String>, Double> configurationToPerformance;
+    private Map<Set<String>, Double> configurationToPerformance = new HashMap<>();
+    private List<Map<Set<String>, Double>> tablesOfRegions = new ArrayList<>();
 //    private MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable;
 
-    public PerformanceModel(List<Map<Set<String>, Double>> blocks) {
-        this.configurationToPerformance = new HashMap<>();
-
-        this.calculateConfigurationInfluence(blocks);
+    public PerformanceModel(List<Map<Set<String>, Double>> bfTablePerRegion) {
+        this.calculateConfigurationInfluence(bfTablePerRegion);
     }
 
 //    public PerformanceModel(double baseTime, List<Map<Set<String>, Double>> blocks) {
@@ -35,7 +34,16 @@ public class PerformanceModel {
 //    }
 
     public static Map<Set<String>, Double> calculateConfigurationsInfluence(Map<Set<String>, Double> regionTable) {
-        Map<Set<String>, Double> configurationToInfluence = new HashMap<>();
+        Set<String> actualRegionOptions = new HashSet<>();
+
+        for(Map.Entry<Set<String>, Double> entry : regionTable.entrySet()) {
+            actualRegionOptions.addAll(entry.getKey());
+        }
+
+        if(Math.pow(2, actualRegionOptions.size()) != regionTable.size()) {
+//            return null;
+            throw new RuntimeException("FAILED");
+        }
 
         int numberOfOptions = (int) (Math.log(regionTable.size()) / Math.log(2));
         Set<String> regionOptions = new HashSet<>();
@@ -46,27 +54,45 @@ public class PerformanceModel {
             }
         }
 
+        Map<Set<String>, Double> configurationToInfluence = new HashMap<>();
+
         if(numberOfOptions == regionOptions.size()) {
             PerformanceModel.calculateConfigurationInfluence(regionOptions, regionTable, configurationToInfluence);
         }
         else {
-            int smallestSize = Integer.MAX_VALUE;
+//            System.out.println(regionTable.keySet());
+//
+//            double t = 0;
+//
+//            for(Double time : regionTable.values()) {
+//                t += time;
+//            }
+//
+//            t = t / regionTable.size();
+//
+//            configurationToInfluence.put(new HashSet<>(), t);
+            throw new RuntimeException("f");
+//            int smallestSize = Integer.MAX_VALUE;
+//
+//            for(Map.Entry<Set<String>, Double> table : regionTable.entrySet()) {
+//                if(table.getKey().size() < smallestSize) {
+//                    smallestSize = table.getKey().size();
+//                }
+//            }
+//
+//            Set<String> smallest = new HashSet<>();
+//
+//            for(Map.Entry<Set<String>, Double> table : regionTable.entrySet()) {
+//                if(table.getKey().size() == smallestSize) {
+//                    smallest = new HashSet<>(table.getKey());
+//                }
+//            }
+//
+//            configurationToInfluence.put(smallest, regionTable.get(smallest));
 
-            for(Map.Entry<Set<String>, Double> table : regionTable.entrySet()) {
-                if(table.getKey().size() < smallestSize) {
-                    smallestSize = table.getKey().size();
-                }
-            }
-
-            Set<String> smallest = new HashSet<>();
-
-            for(Map.Entry<Set<String>, Double> table : regionTable.entrySet()) {
-                if(table.getKey().size() == smallestSize) {
-                    smallest = new HashSet<>(table.getKey());
-                }
-            }
-
-            configurationToInfluence.put(smallest, regionTable.get(smallest));
+//            for(Map.Entry<Set<String>, Double> entry : regionTable.entrySet()) {
+//                configurationToInfluence.put(entry.getKey(), entry.getValue());
+//            }
         }
 
         return configurationToInfluence;
@@ -78,8 +104,6 @@ public class PerformanceModel {
             double influence = configurationsToPerformance.get(longestConfiguration);
 
             if(currentLength > 0) {
-                influence = configurationsToPerformance.get(longestConfiguration);
-
                 for(Map.Entry<Set<String>, Double> entry : configurationsToPerformance.entrySet()) {
                     Set<String> configuration = entry.getKey();
                     Set<String> intersectionWithLongestConfiguration = new HashSet<>(longestConfiguration);
@@ -97,28 +121,29 @@ public class PerformanceModel {
         return configurationToInfluence.get(longestConfiguration);
     }
 
-    public void calculateConfigurationInfluence(List<Map<Set<String>, Double>> blocks) {
+    public void calculateConfigurationInfluence(List<Map<Set<String>, Double>> bfTablePerRegion) {
         MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable = new HashSetValuedHashMap<>();
 
-        for(Map<Set<String>, Double> block : blocks) {
+        // Get influence for each table with the same configurations
+        for(Map<Set<String>, Double> bfTable : bfTablePerRegion) {
+            Map<Set<String>, Double> influenceTable = PerformanceModel.calculateConfigurationsInfluence(bfTable);
+
             Set<String> relevantOptions = new HashSet<>();
 
-            for(Set<String> configuration : block.keySet()) {
+            for(Set<String> configuration : bfTable.keySet()) {
                 relevantOptions.addAll(configuration);
             }
 
-            if(relevantOptions.size() == 5) {
-                int sdaf = 0;
+            if(influenceTable == null) {
+                this.tablesOfRegions.add(bfTable);
             }
-
-            regionToInfluenceTable.put(relevantOptions, PerformanceModel.calculateConfigurationsInfluence(block));
+            else {
+                regionToInfluenceTable.put(relevantOptions, influenceTable);
+            }
         }
 
         for(Map.Entry<Set<String>, Map<Set<String>, Double>> optionToPerformanceTable : regionToInfluenceTable.entries()) {
             for(Map.Entry<Set<String>, Double> configurationToPerformance : optionToPerformanceTable.getValue().entrySet()) {
-                if(configurationToPerformance.getValue() == null) {
-                    int i = 0;
-                }
                 double time = configurationToPerformance.getValue();
 
                 if(this.configurationToPerformance.containsKey(configurationToPerformance.getKey())) {

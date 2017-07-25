@@ -184,6 +184,21 @@ public class SleepMain {
             Sleep27.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep28")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep28.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep29")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep29.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
+        else {
+            throw new RuntimeException("Could not find the main class " + mainClass);
+        }
 
         Set<String> performanceConfiguration = SleepAdapter.adaptConfigurationToPerformanceMeasurement(sleepArgs);
         Executor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());

@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.Sleep18;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
@@ -135,7 +134,7 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         // Program arguments
 //        args = new String[0];
@@ -174,7 +173,7 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         // Program arguments
 //        args = new String[0];
@@ -210,7 +209,7 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
         // Program arguments
 //        args = new String[0];
@@ -242,7 +241,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -274,7 +273,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -304,7 +303,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -334,7 +333,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -364,7 +363,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -396,7 +395,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -428,7 +427,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -460,7 +459,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -492,7 +491,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -524,7 +523,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -556,7 +555,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
@@ -578,6 +577,70 @@ public class JavaPipelineTest {
     }
 
     @Test
+    public void testSleep28() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep28";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep28";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+    }
+
+    @Test
+    public void testSleep29() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep29";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep29";
+
+        // Program arguments
+        String[] args;
+        args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+//        args[0] = "-i1";
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+//        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
+//                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
+    }
+
+    @Test
     public void testSleep2() throws IOException, ParseException, InterruptedException {
         String programName = "sleep2";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
@@ -590,7 +653,7 @@ public class JavaPipelineTest {
         String[] args;
         args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";

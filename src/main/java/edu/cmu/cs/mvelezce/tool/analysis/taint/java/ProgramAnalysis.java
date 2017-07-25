@@ -1,17 +1,16 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
-import com.ibm.wala.shrike.cg.Runtime;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import org.json.simple.JSONArray;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionAndOptions;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -44,14 +43,14 @@ public class ProgramAnalysis {
     //    public static final String REGION_JAVA_LINE_NUMBER = "regionJavaLineNumber";
     public static final String START_BYTECODE_INDEX = "startBytecodeIndex";
 
-    public static Map<JavaRegion, Set<String>> analyze(String programName, String[] args) throws IOException, ParseException {
+    public static Map<JavaRegion, Set<Set<String>>> analyze(String programName, String[] args) throws IOException, ParseException {
         Options.getCommandLine(args);
 
         String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
-        Map<JavaRegion, Set<String>> relevantRegionToOptions = null;
+        Map<JavaRegion, Set<Set<String>>> relevantRegionToOptions = null;
 
         if(file.exists()) {
             try {
@@ -64,44 +63,38 @@ public class ProgramAnalysis {
         return relevantRegionToOptions;
     }
 
-    public static Map<JavaRegion, Set<String>> analyze(String programName, String[] args, String sdgFile, String entryPoint, List<String> features) throws IOException, ParseException {
-        Map<JavaRegion, Set<String>> results = ProgramAnalysis.analyze(programName, args);
-
-        if(results != null) {
-            return results;
-        }
-
-        String criterionFormat = "booleanValue()";
-        List<String> criterionLabels = Slicer.getCriterionLabel(sdgFile, entryPoint, criterionFormat);
-        Map<String, String> featuresToLabels = new HashMap<>();
-
-        for(int i = 0; i < criterionLabels.size(); i++) {
-            featuresToLabels.put(features.get(i), criterionLabels.get(i));
-        }
-
-        Map<JavaRegion, Set<String>> relevantRegionToOptions = Slicer.analyze(sdgFile, featuresToLabels);
-
-        if(Options.checkIfSave()) {
-            ProgramAnalysis.writeToFile(programName, relevantRegionToOptions);
-        }
-
-        return relevantRegionToOptions;
-    }
-
-    public static Map<JavaRegion, Set<String>> analyze(String programName, String[] args, String database, String program) throws IOException, ParseException {
-        Map<JavaRegion, Set<String>> results = ProgramAnalysis.analyze(programName, args);
-
-        if(results != null) {
-            return results;
-        }
-
-        Map<JavaRegion, Set<String>> relevantRegionToOptions = ProgramAnalysis.analyze(database, program);
-
-//        try {
-//            Map<JavaRegion, Set<String>> = relevantRegionToOptions = VarexJProcessor.parse();
-//        } catch (SAXException | ParserConfigurationException e) {
-//            e.printStackTrace();
+//    public static Map<JavaRegion, Set<Set<String>>> analyze(String programName, String[] args, String sdgFile, String entryPoint, List<String> features) throws IOException, ParseException {
+//        Map<JavaRegion, Set<Set<String>>> results = ProgramAnalysis.analyze(programName, args);
+//
+//        if(results != null) {
+//            return results;
 //        }
+//
+//        String criterionFormat = "booleanValue()";
+//        List<String> criterionLabels = Slicer.getCriterionLabel(sdgFile, entryPoint, criterionFormat);
+//        Map<String, String> featuresToLabels = new HashMap<>();
+//
+//        for(int i = 0; i < criterionLabels.size(); i++) {
+//            featuresToLabels.put(features.get(i), criterionLabels.get(i));
+//        }
+//
+//        Map<JavaRegion, Set<Set<String>>> relevantRegionToOptions = Slicer.analyze(sdgFile, featuresToLabels);
+//
+//        if(Options.checkIfSave()) {
+//            ProgramAnalysis.writeToFile(programName, relevantRegionToOptions);
+//        }
+//
+//        return relevantRegionToOptions;
+//    }
+
+    public static Map<JavaRegion, Set<Set<String>>> analyze(String programName, String[] args, String database, String program) throws IOException, ParseException {
+        Map<JavaRegion, Set<Set<String>>> results = ProgramAnalysis.analyze(programName, args);
+
+        if(results != null) {
+            return results;
+        }
+
+        Map<JavaRegion, Set<Set<String>>> relevantRegionToOptions = ProgramAnalysis.analyze(database, program);
 
         if(Options.checkIfSave()) {
             ProgramAnalysis.writeToFile(programName, relevantRegionToOptions);
@@ -110,7 +103,7 @@ public class ProgramAnalysis {
         return relevantRegionToOptions;
     }
 
-    public static Map<JavaRegion, Set<String>> analyze(String database, String program) throws ParseException {
+    public static Map<JavaRegion, Set<Set<String>>> analyze(String database, String program) throws ParseException {
         // This is hardcode to get the output of Lotrack
         List<String> fields = new ArrayList<>();
         fields.add(ProgramAnalysis.PACKAGE);
@@ -135,7 +128,7 @@ public class ProgramAnalysis {
         List<String> queryResult = ScalaMongoDriverConnector.findProjectionAscending(program, fields, sortBy);
         ScalaMongoDriverConnector.close();
 
-        Map<JavaRegion, Set<String>> regionsToOptions = new HashMap<>();
+        Map<JavaRegion, Set<Set<String>>> regionsToOptions = new HashMap<>();
         String currentPackage = "";
         String currentClass = "";
         String currentMethod = "";
@@ -159,10 +152,10 @@ public class ProgramAnalysis {
             String entryMethod = (String) entry.get(ProgramAnalysis.METHOD_BYTECODE_SIGNATURE_JOANA_STYLE);
             entryMethod = entryMethod.substring(entryMethod.lastIndexOf(".") + 1);
 
-            // TODO ignore regions in main method
-            if(entryMethod.contains("main")) {
-                continue;
-            }
+//            // TODO ignore regions in main method
+//            if(entryMethod.contains("main")) {
+//                continue;
+//            }
 
             int entryBytecodeIndex = Math.toIntExact(entryBytecodeIndexes.get(entryBytecodeIndexes.indexOf(Collections.min(entryBytecodeIndexes))));
 
@@ -173,9 +166,13 @@ public class ProgramAnalysis {
             if(!currentPackage.equals(entryPackage) || !currentClass.equals(entryClass) || !currentMethod.equals(entryMethod)) {
                 currentBytecodeIndex = 0;
                 currentUsedTerms = new HashSet<>();
+                currentUsedTerms.addAll(usedTerms);
                 currentPackage = entryPackage;
                 currentClass = entryClass;
                 currentMethod = entryMethod;
+
+                // TODO check this change that we do not want to start instrumenting at the beginning of a method
+                continue;
             }
 
             if(usedTerms.size() == 1 && (usedTerms.contains("true") || usedTerms.contains("false"))) {
@@ -191,11 +188,23 @@ public class ProgramAnalysis {
                         && currentJavaRegion.getRegionClass().equals(entryClass)
                         && currentJavaRegion.getRegionMethod().equals(entryMethod)
                         && currentJavaRegion.getStartBytecodeIndex() == currentBytecodeIndex) {
-                    regionsToOptions.get(currentJavaRegion).addAll(currentUsedTerms);
+                    regionsToOptions.get(currentJavaRegion).add(currentUsedTerms);
                 }
                 else {
                     currentJavaRegion = new JavaRegion(entryPackage, entryClass, entryMethod, currentBytecodeIndex);
-                    regionsToOptions.put(currentJavaRegion, new HashSet<>(currentUsedTerms));
+
+                    String constraint = (String) entry.get(ProgramAnalysis.CONSTRAINT_PRETTY);
+                    constraint = ProgramAnalysis.replaceConstraintWithUsedTerms(constraint, new ArrayList<>(currentUsedTerms));
+                    List<String> conjunctions = ProgramAnalysis.getConjunctions(constraint);
+
+                    Set<Set<String>> constraints = new HashSet<>();
+
+                    for(String conjunction : conjunctions) {
+                        Set<String> constraintSet = ProgramAnalysis.getConstraintSet(conjunction, new ArrayList<>(currentUsedTerms));
+                        constraints.add(constraintSet);
+                    }
+
+                    regionsToOptions.put(currentJavaRegion, constraints);
                     System.out.println(currentJavaRegion.getRegionClass() + " " + currentJavaRegion.getRegionMethod() + " " + currentJavaRegion.getStartBytecodeIndex() + " with " + currentUsedTerms);
                 }
             }
@@ -264,82 +273,65 @@ public class ProgramAnalysis {
         return regionsToOptions;
     }
 
-    private static void writeToFile(String programName, Map<JavaRegion, Set<String>> relevantRegionsToOptions) throws IOException {
-        JSONArray regions = new JSONArray();
-
-        for(Map.Entry<JavaRegion, Set<String>> relevantRegionToOptions : relevantRegionsToOptions.entrySet()) {
-            JavaRegion javaRegion = relevantRegionToOptions.getKey();
-            JSONObject region = new JSONObject();
-            region.put(ProgramAnalysis.ID, javaRegion.getRegionID());
-            region.put(ProgramAnalysis.REGION_PACKAGE, javaRegion.getRegionPackage());
-            region.put(ProgramAnalysis.REGION_CLASS, javaRegion.getRegionClass());
-            region.put(ProgramAnalysis.REGION_METHOD, javaRegion.getRegionMethod());
-            region.put(ProgramAnalysis.REGION_METHOD, javaRegion.getRegionMethod());
-//            region.put(ProgramAnalysis.REGION_JAVA_LINE_NUMBER, javaRegion.getJavaLineNubmer());
-            region.put(ProgramAnalysis.START_BYTECODE_INDEX, javaRegion.getStartBytecodeIndex());
-//            region.put(ProgramAnalysis.END_BYTCODE_INDEX, javaRegion.getEndBytecodeIndex());
-
-            JSONArray options = new JSONArray();
-
-            for(String option : relevantRegionToOptions.getValue()) {
-                options.add(option);
-            }
-
-            region.put(ProgramAnalysis.OPTIONS, options);
-
-            regions.add(region);
-        }
-
-        JSONObject result = new JSONObject();
-        result.put(ProgramAnalysis.ANALYSIS, regions);
-
-        File directory = new File(ProgramAnalysis.DIRECTORY);
-
-        if(!directory.exists()) {
-            directory.mkdirs();
-        }
-
+    private static void writeToFile(String programName, Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
         String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
-        FileWriter writer = new FileWriter(file);
-        writer.write(result.toJSONString());
-        writer.flush();
-        writer.close();
-    }
 
-    private static Map<JavaRegion, Set<String>> readFromFile(File file) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONObject result = (JSONObject) parser.parse(new FileReader(file));
+        List<DecisionAndOptions> decisionsAndOptions = new ArrayList<>();
 
-        Map<JavaRegion, Set<String>> relevantRegionsToOptions = new HashMap<>();
-
-        JSONArray regions = (JSONArray) result.get(ANALYSIS);
-
-        for(Object entry : regions) {
-            JSONObject regionResult = (JSONObject) entry;
-
-            String id = (String) regionResult.get(ProgramAnalysis.ID);
-            String regionPackage = (String) regionResult.get(ProgramAnalysis.REGION_PACKAGE);
-            String regionClass = (String) regionResult.get(ProgramAnalysis.REGION_CLASS);
-            String regionMethod = (String) regionResult.get(ProgramAnalysis.REGION_METHOD);
-//            int regionJavaLineNumber = (int) (long) regionResult.get(ProgramAnalysis.REGION_JAVA_LINE_NUMBER);
-            int startBytecodeIndex = (int) (long) regionResult.get(ProgramAnalysis.START_BYTECODE_INDEX);
-//            int endBytecodeIndex = (int) (long) regionResult.get(ProgramAnalysis.END_BYTCODE_INDEX);
-
-            JavaRegion javaRegion = new JavaRegion(id, regionPackage, regionClass, regionMethod, startBytecodeIndex);
-//            javaRegion.setJavaLineNubmer(regionJavaLineNumber);
-
-            Set<String> options = new HashSet<>();
-            JSONArray optionsResult = (JSONArray) regionResult.get(ProgramAnalysis.OPTIONS);
-
-            for(Object optionResult : optionsResult) {
-                options.add((String) optionResult);
-            }
-
-            relevantRegionsToOptions.put(javaRegion, options);
+        for(Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionsSet : relevantRegionsToOptions.entrySet()) {
+            DecisionAndOptions decisionAndOptions = new DecisionAndOptions(regionToOptionsSet.getKey(), regionToOptionsSet.getValue());
+            decisionsAndOptions.add(decisionAndOptions);
         }
 
-        return relevantRegionsToOptions;
+        mapper.writeValue(file, decisionsAndOptions);
+    }
+
+    private static Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException, ParseException {
+        ObjectMapper mapper = new ObjectMapper();
+        List<DecisionAndOptions> results = mapper.readValue(file, new TypeReference<List<DecisionAndOptions>>() {
+        });
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = new HashMap<>();
+
+        for(DecisionAndOptions result : results) {
+            decisionsToOptionsSet.put(result.getRegion(), result.getOptions());
+        }
+
+        return decisionsToOptionsSet;
+
+//        JSONParser parser = new JSONParser();
+//        JSONObject result = (JSONObject) parser.parse(new FileReader(file));
+//
+//        Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions = new HashMap<>();
+//
+//        JSONArray regions = (JSONArray) result.get(ANALYSIS);
+//
+//        for(Object entry : regions) {
+//            JSONObject regionResult = (JSONObject) entry;
+//
+//            String id = (String) regionResult.get(ProgramAnalysis.ID);
+//            String regionPackage = (String) regionResult.get(ProgramAnalysis.REGION_PACKAGE);
+//            String regionClass = (String) regionResult.get(ProgramAnalysis.REGION_CLASS);
+//            String regionMethod = (String) regionResult.get(ProgramAnalysis.REGION_METHOD);
+////            int regionJavaLineNumber = (int) (long) regionResult.get(ProgramAnalysis.REGION_JAVA_LINE_NUMBER);
+//            int startBytecodeIndex = (int) (long) regionResult.get(ProgramAnalysis.START_BYTECODE_INDEX);
+////            int endBytecodeIndex = (int) (long) regionResult.get(ProgramAnalysis.END_BYTCODE_INDEX);
+//
+//            JavaRegion javaRegion = new JavaRegion(id, regionPackage, regionClass, regionMethod, startBytecodeIndex);
+////            javaRegion.setJavaLineNubmer(regionJavaLineNumber);
+//
+//            Set<String> options = new HashSet<>();
+//            JSONArray optionsResult = (JSONArray) regionResult.get(ProgramAnalysis.OPTIONS);
+//
+//            for(Object optionResult : optionsResult) {
+//                options.add((String) optionResult);
+//            }
+//
+//            relevantRegionsToOptions.put(javaRegion, options);
+//        }
+//
+//        return relevantRegionsToOptions;
     }
 
     public static String replaceConstraintWithUsedTerms(String constraint, List<String> usedTerms) {
@@ -351,6 +343,10 @@ public class ProgramAnalysis {
     }
 
     public static List<String> getConjunctions(String constraint) {
+        if(!constraint.startsWith("(") && !constraint.endsWith(")")) {
+            constraint = "(" + constraint + ")";
+        }
+
         List<String> conjunctions = new ArrayList<>();
 
         StringBuilder conjunction = new StringBuilder();

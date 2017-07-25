@@ -159,6 +159,7 @@ public class Executor {
 
     public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
         // TODO why not just call the writeToFile method?
+        System.out.println("Executed regions size: " + executedRegions.size());
         Executor.writeToFile(programName, configuration, executedRegions);
     }
 
@@ -263,7 +264,7 @@ public class Executor {
     }
 
     private static void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
-        ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+        ObjectMapper mapper = new ObjectMapper();
         String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
@@ -281,7 +282,7 @@ public class Executor {
     }
 
     private static Set<PerformanceEntry> readFromFile(File file) throws IOException, ParseException {
-        ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+        ObjectMapper mapper = new ObjectMapper();
         List<Execution> executions = mapper.readValue(file, new TypeReference<List<Execution>>() {
         });
         Set<PerformanceEntry> performanceEntries = new HashSet<>();

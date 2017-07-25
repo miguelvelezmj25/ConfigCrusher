@@ -1,11 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.json.simple.parser.ParseException;
@@ -32,7 +30,7 @@ public class JavaRegionClassTransformerTest {
         // Program arguments
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
     }
 
@@ -42,7 +40,7 @@ public class JavaRegionClassTransformerTest {
         String programName = "Dummy3";
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
         Set<JavaRegion> regions = partialRegionsToOptions.keySet();
 
         JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(directory, regions);

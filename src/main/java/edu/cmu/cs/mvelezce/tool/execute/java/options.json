@@ -47,6 +47,18 @@
   "sleep26": [
     "A"
   ],
+  "sleep28": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "sleep29": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
   "pngtastic": [
     "FREQTHRESHOLD",
     "DISTTHRESHOLD",

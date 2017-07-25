@@ -6,9 +6,6 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
@@ -24,7 +21,7 @@ public class SPLat {
     public static void measure(String programName) throws IOException, ParseException {
         // Get regions to options
         String[] analysisArgs = new String[0];
-        Map<JavaRegion, Set<String>> regionsToOptions = ProgramAnalysis.analyze(programName, analysisArgs);
+        Map<JavaRegion, Set<Set<String>>> regionsToOptions = ProgramAnalysis.analyze(programName, analysisArgs);
 
         // Get a file with the execution trace of our approach
         File file = new File(Executor.DIRECTORY + "/" + programName + Executor.UNDERSCORE + 0 + Options.DOT_JSON);
@@ -39,30 +36,31 @@ public class SPLat {
         SPLat.saveSPLAtPerformance(programName, perfStats);
     }
 
-    public static Set<String> getOptions(File file, Map<JavaRegion, Set<String>> regionsToOptions) throws IOException, ParseException {
-        Set<String> splatOptions = new HashSet<>();
-        JSONParser parser = new JSONParser();
-        JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
-        JSONArray result = (JSONArray) cache.get(Executor.EXECUTIONS);
-
-        for(Object resultEntry : result) {
-            JSONObject execution = (JSONObject) resultEntry;
-            JSONArray executionTraceResult = (JSONArray) execution.get(Executor.EXECUTION_TRACE);
-
-            for(Object executionTraceResultEntry : executionTraceResult) {
-                JSONObject regionResult = (JSONObject) executionTraceResultEntry;
-                String regionID = (String) regionResult.get(Executor.ID);
-
-                for(Map.Entry<JavaRegion, Set<String>> regionToOptions : regionsToOptions.entrySet()) {
-                    if(regionToOptions.getKey().getRegionID().equals(regionID)) {
-                        splatOptions.addAll(regionToOptions.getValue());
-                        break;
-                    }
-                }
-            }
-        }
-
-        return splatOptions;
+    public static Set<String> getOptions(File file, Map<JavaRegion, Set<Set<String>>> regionsToOptions) throws IOException, ParseException {
+//        Set<String> splatOptions = new HashSet<>();
+//        JSONParser parser = new JSONParser();
+//        JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
+//        JSONArray result = (JSONArray) cache.get(Executor.EXECUTIONS);
+//
+//        for(Object resultEntry : result) {
+//            JSONObject execution = (JSONObject) resultEntry;
+//            JSONArray executionTraceResult = (JSONArray) execution.get(Executor.EXECUTION_TRACE);
+//
+//            for(Object executionTraceResultEntry : executionTraceResult) {
+//                JSONObject regionResult = (JSONObject) executionTraceResultEntry;
+//                String regionID = (String) regionResult.get(Executor.ID);
+//
+//                for(Map.Entry<JavaRegion, Set<String>> regionToOptions : regionsToOptions.entrySet()) {
+//                    if(regionToOptions.getKey().getRegionID().equals(regionID)) {
+//                        splatOptions.addAll(regionToOptions.getValue());
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//        return splatOptions;
+        return null; // TODO make change since interface changed
     }
 
     public static List<PerformanceStatistic> getTimesFromBF(String programName, Set<Set<String>> configurations) throws IOException, ParseException {

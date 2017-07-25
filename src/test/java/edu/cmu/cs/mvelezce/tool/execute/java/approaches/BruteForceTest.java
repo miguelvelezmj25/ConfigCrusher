@@ -57,6 +57,17 @@ public class BruteForceTest {
     }
 
     @Test
+    public void testSleep29() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep29";
+        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep29";
+
+        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 1, srcDir, classDir, entryPoint);
+//        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 5);
+    }
+
+    @Test
     public void testZipme() throws IOException, ParseException, InterruptedException {
         String programName = "zipme";
         String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";

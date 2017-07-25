@@ -10,6 +10,7 @@ import java.util.*;
 public class PerformanceEntry {
     private Set<String> configuration;
     private Map<Region, Long> regionsToExecutionTime;
+    private Map<Region, Double> regionsToExecutionTime2 = new LinkedHashMap<>();
     private Map<Region, Set<Region>> regionsToInnerRegions;
 
     public PerformanceEntry(Set<String> configuration, List<Region> executedRegions) {
@@ -17,14 +18,39 @@ public class PerformanceEntry {
         this.regionsToExecutionTime = new LinkedHashMap<>();
         this.regionsToInnerRegions = new HashMap<>();
 
+        long program = 0;
+
+        for(Region region : executedRegions) {
+            if(region.getRegionID().equals("program")) {
+                if(region.getStartTime() != 0) {
+                    program = region.getStartTime();
+                }
+                else {
+                    program = region.getEndTime() - program;
+                }
+            }
+        }
+
+        System.out.println(configuration /* + " " + program / 1000000000.0*/);
+
         this.calculateInnerRegions(executedRegions);
         this.calculateRealPerformance(executedRegions);
+
+        for(Map.Entry<Region, Long> entry : this.regionsToExecutionTime.entrySet()) {
+            if(entry.getKey().getRegionID().equals("program")) {
+                System.out.println(entry.getValue());
+            }
+        }
     }
 
     public PerformanceEntry(Set<String> configuration, Map<Region, Long> regionsToExecutionTime, Map<Region, Set<Region>> regionsToInnerRegions) {
         this.configuration = configuration;
         this.regionsToExecutionTime = regionsToExecutionTime;
         this.regionsToInnerRegions = regionsToInnerRegions;
+
+        for(Map.Entry<Region, Long> entry : regionsToExecutionTime.entrySet()) {
+            this.regionsToExecutionTime2.put(entry.getKey(), entry.getValue() / 1000000000.0);
+        }
     }
 
     public void calculateInnerRegions(List<Region> executedRegions) {
@@ -94,6 +120,7 @@ public class PerformanceEntry {
                 }
 
                 this.regionsToExecutionTime.put(executingRegion, regionExecutionTime);
+                this.regionsToExecutionTime2.put(executingRegion, regionExecutionTime / 1000000000.0);
                 innerRegionExecutionTime.pop();
 
                 // Adding new inner execution time

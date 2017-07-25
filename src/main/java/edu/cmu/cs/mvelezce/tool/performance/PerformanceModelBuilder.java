@@ -22,7 +22,6 @@ public class PerformanceModelBuilder {
 
     // JSON strings
     public static final String MODEL = "model";
-    //    public static final String BASE_TIME = "baseTime";
     public static final String CONFIGURATION = "configuration";
     public static final String PERFORMANCE = "performance";
     public static final String CONFIGURATION_TO_PERFORMANCE = "configurationToPerformance";
@@ -54,9 +53,21 @@ public class PerformanceModelBuilder {
 
     public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
 //        PerformanceModelBuilder.getOuterRegions(measuredPerformance, regionsToOptions);
-        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = PerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
+//        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = PerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
+        for(PerformanceEntry entry : measuredPerformance) {
+            for(Map.Entry<Region, Set<Region>> region : entry.getRegionsToInnerRegions().entrySet()) {
+                System.out.println("############### " + region.getKey().getRegionID());
+
+                for(Region inner : region.getValue()) {
+                    System.out.println(inner.getRegionID());
+                }
+            }
+        }
+
+        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = regionsToOptions;
         Map<Region, Map<Set<String>, Double>> regionsToConfigurationPerformance = new HashMap<>();
 
+        // Building the bf table for each region
         for(Map.Entry<Region, Set<String>> entry : regionsToOptionsIncludingInnerRegions.entrySet()) {
             Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
             Set<String> entryConfiguration = entry.getValue();
@@ -75,19 +86,18 @@ public class PerformanceModelBuilder {
             regionsToConfigurationPerformance.put(entry.getKey(), configurationsToPerformance);
         }
 
-        List<Map<Set<String>, Double>> blockTimeList = new ArrayList<>(regionsToConfigurationPerformance.values());
+        // We do not have region information here
+        List<Map<Set<String>, Double>> bfTablePerRegion = new ArrayList<>(regionsToConfigurationPerformance.values());
 
-        return new PerformanceModel(blockTimeList);
+        return new PerformanceModel(bfTablePerRegion);
     }
 
     private static void getOuterRegions(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
         Map<Region, Set<Region>> regionsToOuterRegions = new HashMap<>();
 
         for(PerformanceEntry perfEntry : measuredPerformance) {
-            for(Map.Entry<Region, Set<Region>> regionToInnerRegions : perfEntry.getRegionToInnerRegions().entrySet()) {
-                if(regionsToOuterRegions.size() == 19) {
-                    int asdf = 9;
-                }
+            for(Map.Entry<Region, Set<Region>> regionToInnerRegions : perfEntry.getRegionsToInnerRegions().entrySet()) {
+
                 for(Region innerRegion : regionToInnerRegions.getValue()) {
                     if(regionsToOuterRegions.isEmpty()) {
                         Set<Region> outerRegions = new HashSet<>();
@@ -188,10 +198,54 @@ public class PerformanceModelBuilder {
     public static Map<Region, Set<String>> getOptionsInRegionsWithInnerRegions(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
         Map<Region, Set<String>> regionsToInvolvedOptions = new HashMap<>();
 
+        for(Region region : regionsToOptions.keySet()) {
+            regionsToInvolvedOptions.put(region, new HashSet<>());
+        }
+
+        Set<Region> regionsToAdd = new HashSet<>();
+
+        // Mostly to add the program
+        for(PerformanceEntry perfEntry : measuredPerformance) {
+            for(Region region : perfEntry.getRegionsToExecutionTime().keySet()) {
+                boolean added = false;
+
+                for(Region regionWithOptions : regionsToInvolvedOptions.keySet()) {
+                    if(region.getRegionID().equals(regionWithOptions.getRegionID())) {
+                        added = true;
+
+                        break;
+                    }
+                }
+
+                if(!added) {
+                    added = false;
+
+                    for(Region toAddRegion : regionsToAdd) {
+                        if(toAddRegion.getRegionID().equals(region.getRegionID())) {
+                            added = true;
+
+                            break;
+                        }
+                    }
+
+                    if(!added) {
+                        regionsToAdd.add(region);
+                    }
+                }
+            }
+        }
+
+        //TODO are there repeated regions?
+        for(Region region : regionsToAdd) {
+            regionsToInvolvedOptions.put(region, new HashSet<>());
+        }
+
         for(PerformanceEntry performanceEntry : measuredPerformance) {
-            for(Map.Entry<Region, Set<Region>> regionToInnerRegions : performanceEntry.getRegionToInnerRegions().entrySet()) {
+            for(Map.Entry<Region, Set<Region>> regionToInnerRegions : performanceEntry.getRegionsToInnerRegions().entrySet()) {
+                Region region = regionToInnerRegions.getKey();
                 Set<String> options = new HashSet<>();
 
+                // Add options from inner regions
                 for(Region innerRegion : regionToInnerRegions.getValue()) {
                     for(Map.Entry<Region, Set<String>> regionToOption : regionsToOptions.entrySet()) {
                         if(regionToOption.getKey().getRegionID().equals(innerRegion.getRegionID())) {
@@ -200,29 +254,20 @@ public class PerformanceModelBuilder {
                     }
                 }
 
+                // Add options from this region
                 for(Map.Entry<Region, Set<String>> regionToOption : regionsToOptions.entrySet()) {
-                    if(regionToOption.getKey().getRegionID().equals(regionToInnerRegions.getKey().getRegionID())) {
+                    if(regionToOption.getKey().getRegionID().equals(region.getRegionID())) {
                         options.addAll(regionToOption.getValue());
+
                         break;
                     }
                 }
 
-                if(regionsToInvolvedOptions.isEmpty()) {
-                    regionsToInvolvedOptions.put(regionToInnerRegions.getKey(), options);
-                }
-                else {
-                    boolean updated = false;
+                for(Map.Entry<Region, Set<String>> regionToInvolvedOptions : regionsToInvolvedOptions.entrySet()) {
+                    if(regionToInvolvedOptions.getKey().getRegionID().equals(regionToInnerRegions.getKey().getRegionID())) {
+                        regionToInvolvedOptions.getValue().addAll(options);
 
-                    for(Map.Entry<Region, Set<String>> regionToInvolvedOptions : regionsToInvolvedOptions.entrySet()) {
-                        if(regionToInvolvedOptions.getKey().getRegionID().equals(regionToInnerRegions.getKey().getRegionID())) {
-                            regionToInvolvedOptions.getValue().addAll(options);
-                            updated = true;
-                            break;
-                        }
-                    }
-
-                    if(!updated) {
-                        regionsToInvolvedOptions.put(regionToInnerRegions.getKey(), options);
+                        break;
                     }
                 }
             }

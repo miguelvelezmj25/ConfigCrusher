@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
@@ -31,7 +30,7 @@ public class PerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -57,7 +56,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -83,7 +82,7 @@ public class PerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -109,7 +108,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -139,7 +138,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -169,7 +168,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -199,7 +198,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -229,7 +228,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -259,7 +258,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -289,7 +288,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -319,7 +318,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -349,7 +348,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -374,6 +373,76 @@ public class PerformanceModelBuilderTest {
     }
 
     @Test
+    public void testSleep28() throws IOException, ParseException {
+        String program = "sleep28";
+
+        // Program arguments
+        String[] args = new String[1];
+        args[0] = "-i1";
+        Options.getCommandLine(args);
+
+//        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
+
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+        System.out.println(pm);
+
+//        Set<String> log = new HashSet<>();
+//        log.add("LOGLEVEL");
+//        System.out.println(pm.evaluate(log));
+//
+    }
+
+    @Test
+    public void testSleep29() throws IOException, ParseException {
+        String program = "sleep29";
+
+        // Program arguments
+        String[] args = new String[1];
+        args[0] = "-i1";
+        Options.getCommandLine(args);
+
+//        String[] args = new String[0];
+
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
+        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
+
+        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+
+        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+            JavaRegion javaRegion = entry.getKey();
+            Region region = new Region(javaRegion.getRegionID());
+            regionsToOptions.put(region, entry.getValue());
+        }
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+        System.out.println(pm);
+
+//        Set<String> log = new HashSet<>();
+//        log.add("LOGLEVEL");
+//        System.out.println(pm.evaluate(log));
+//
+    }
+
+    @Test
     public void testSleep2() throws IOException, ParseException {
         String program = "sleep2";
 
@@ -384,7 +453,7 @@ public class PerformanceModelBuilderTest {
 
 //        String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -410,7 +479,7 @@ public class PerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -431,7 +500,7 @@ public class PerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -452,7 +521,7 @@ public class PerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
@@ -473,7 +542,7 @@ public class PerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(program, args);
+        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(program, args);
 
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();

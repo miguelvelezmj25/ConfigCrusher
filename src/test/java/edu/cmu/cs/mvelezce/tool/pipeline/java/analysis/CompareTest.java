@@ -39,4 +39,10 @@ public class CompareTest {
         String programName = "sleep26";
         Compare.compare(programName, JavaPipeline.PM_RES_DIR, BruteForce.BF_RES_DIR);
     }
+
+    @Test
+    public void compareSleep29_1() throws Exception {
+        String programName = "sleep29";
+        Compare.compare(programName, JavaPipeline.PM_RES_DIR, BruteForce.BF_RES_DIR);
+    }
 }

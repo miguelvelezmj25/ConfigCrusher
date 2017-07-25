@@ -4,7 +4,6 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Simple;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
@@ -73,47 +72,49 @@ public class JavaPipeline {
         Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
         System.out.println("");
 
-        System.out.println("####################### Partial region and options #######################");
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
-        System.out.println("");
+//        System.out.println("####################### Partial region and options #######################");
+//        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+//        System.out.println("");
+//
+//        // Configuration compression (Language independent)
+//        System.out.println("####################### Configurations to execute #######################");
+//        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+//        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+//        JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
+//        System.out.println("");
+//
+//        System.out.println("####################### Instrumenting #######################");
+//        Instrumenter.instrument(args, instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
+//        System.out.println("");
+//
+//        System.out.println("####################### Measure performance #######################");
+//        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+//
+//        Options.getCommandLine(args);
+//        for(int i = 0; i < Options.getIterations(); i++) {
+//            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
+//        }
+//
+//        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
+//        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
+//        System.out.println("");
+//
+//        System.out.println("####################### Build performance model #######################");
+//        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+//
+//        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+//            JavaRegion javaRegion = entry.getKey();
+//            Region region = new Region(javaRegion.getRegionID());
+//            regionsToOptions.put(region, entry.getValue());
+//        }
+//
+//        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        System.out.println(pm);
+//        JavaPipeline.savePMPerformance(programName, pm, perfStats);
+//
+//        return pm;
 
-        // Configuration compression (Language independent)
-        System.out.println("####################### Configurations to execute #######################");
-        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
-        JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
-        System.out.println("");
-
-        System.out.println("####################### Instrumenting #######################");
-        Instrumenter.instrument(args, instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
-        System.out.println("");
-
-        System.out.println("####################### Measure performance #######################");
-        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
-
-        Options.getCommandLine(args);
-        for(int i = 0; i < Options.getIterations(); i++) {
-            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
-        }
-
-        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
-        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
-        System.out.println("");
-
-        System.out.println("####################### Build performance model #######################");
-        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
-
-        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            JavaRegion javaRegion = entry.getKey();
-            Region region = new Region(javaRegion.getRegionID());
-            regionsToOptions.put(region, entry.getValue());
-        }
-
-        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
-        System.out.println(pm);
-        JavaPipeline.savePMPerformance(programName, pm, perfStats);
-
-        return pm;
+        return null; // TODO make change since interface changed
     }
 
     public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException {
@@ -161,69 +162,71 @@ public class JavaPipeline {
     }
 
     public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint) throws IOException, ParseException, InterruptedException {
-        // Get regions and options
-        System.out.println("Region and options");
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
-        System.out.println("");
-
-        // Configuration compression (Language independent)
-        System.out.println("Configurations to execute");
-        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
-        System.out.println(configurationsToExecute);
-        System.out.println("");
-
-        System.out.println("Instrumenting");
-        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
-        System.out.println("");
-
-        System.out.println("Measure performance");
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
-        System.out.println("");
-
-        System.out.println("Build performance model");
-        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
-
-        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            JavaRegion javaRegion = entry.getKey();
-            Region region = new Region(javaRegion.getRegionID());
-            regionsToOptions.put(region, entry.getValue());
-        }
-
-        return PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        // Get regions and options
+//        System.out.println("Region and options");
+//        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+//        System.out.println("");
+//
+//        // Configuration compression (Language independent)
+//        System.out.println("Configurations to execute");
+//        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+//        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+//        System.out.println(configurationsToExecute);
+//        System.out.println("");
+//
+//        System.out.println("Instrumenting");
+//        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+//        System.out.println("");
+//
+//        System.out.println("Measure performance");
+//        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
+//        System.out.println("");
+//
+//        System.out.println("Build performance model");
+//        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+//
+//        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+//            JavaRegion javaRegion = entry.getKey();
+//            Region region = new Region(javaRegion.getRegionID());
+//            regionsToOptions.put(region, entry.getValue());
+//        }
+//
+//        return PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+        return null; // TODO make change since interface changed
     }
 
     public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint, String sdgFile, List<String> features) throws IOException, ParseException, InterruptedException {
-        // Get regions and options
-        System.out.println("Region and options");
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
-        System.out.println("");
-
-        // Configuration compression (Language independent)
-        System.out.println("Configurations to execute");
-        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
-        System.out.println(configurationsToExecute);
-        System.out.println("");
-
-        System.out.println("Instrumenting");
-        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
-        System.out.println("");
-
-        System.out.println("Measure performance");
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
-        System.out.println("");
-
-        System.out.println("Build performance model");
-        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
-
-        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            JavaRegion javaRegion = entry.getKey();
-            Region region = new Region(javaRegion.getRegionID());
-            regionsToOptions.put(region, entry.getValue());
-        }
-
-        return PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        // Get regions and options
+//        System.out.println("Region and options");
+//        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
+//        System.out.println("");
+//
+//        // Configuration compression (Language independent)
+//        System.out.println("Configurations to execute");
+//        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+//        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+//        System.out.println(configurationsToExecute);
+//        System.out.println("");
+//
+//        System.out.println("Instrumenting");
+//        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+//        System.out.println("");
+//
+//        System.out.println("Measure performance");
+//        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
+//        System.out.println("");
+//
+//        System.out.println("Build performance model");
+//        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+//
+//        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+//            JavaRegion javaRegion = entry.getKey();
+//            Region region = new Region(javaRegion.getRegionID());
+//            regionsToOptions.put(region, entry.getValue());
+//        }
+//
+//        return PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+        return null; // TODO make change since interface changed
     }
 
     public static void compressionHelper(Collection<Set<String>> regionOptions, Set<Set<String>> configurationsToExecute) {

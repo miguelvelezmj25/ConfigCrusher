@@ -250,4 +250,14 @@ public class Simple {
 
         return configurationsToExecute;
     }
+
+    public static Set<Set<String>> expandOptions(Collection<Set<Set<String>>> optionsSets) {
+        Set<Set<String>> result = new HashSet<>();
+
+        for(Set<Set<String>> optionsSet : optionsSets) {
+            result.addAll(optionsSet);
+        }
+
+        return result;
+    }
 }

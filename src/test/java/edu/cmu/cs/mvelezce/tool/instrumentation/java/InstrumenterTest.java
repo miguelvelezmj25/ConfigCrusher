@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
@@ -32,9 +33,9 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = ProgramAnalysis.analyze(programName, args);
 
-        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        Instrumenter.instrument(srcDirectory, classDirectory, decisionsToOptions.keySet());
     }
 
     @Test
@@ -59,9 +60,35 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = ProgramAnalysis.analyze(programName, args);
 
-        Instrumenter.instrument(instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
+        Instrumenter.instrument(instrumentSrcDirectory, instrumentClassDirectory, decisionsToOptions.keySet());
+    }
+
+    @Test
+    public void testSleep30() throws IOException, ParseException, InterruptedException {
+        String programName = "sleep30";
+        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+
+        // Format return statements with method calls
+        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = ProgramAnalysis.analyze(programName, args);
+
+        Instrumenter.instrument(instrumentSrcDirectory, instrumentClassDirectory, decisionsToOptions.keySet());
     }
 
     @Test
@@ -80,9 +107,9 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = ProgramAnalysis.analyze(programName, args);
 
-        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        Instrumenter.instrument(srcDirectory, classDirectory, decisionsToOptions.keySet());
     }
 
     @Test
@@ -101,9 +128,9 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = ProgramAnalysis.analyze(programName, args);
 
-        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        Instrumenter.instrument(srcDirectory, classDirectory, decisionsToOptions.keySet());
     }
 
     @Test
@@ -122,9 +149,9 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = ProgramAnalysis.analyze(programName, args);
 
-        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        Instrumenter.instrument(srcDirectory, classDirectory, decisionsToOptions.keySet());
     }
 
     @Test
@@ -143,9 +170,9 @@ public class InstrumenterTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = ProgramAnalysis.analyze(programName, args);
 
-        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        Instrumenter.instrument(srcDirectory, classDirectory, decisionsToOptions.keySet());
     }
 
     @Test

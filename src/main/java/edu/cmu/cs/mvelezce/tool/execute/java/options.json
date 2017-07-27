@@ -59,6 +59,10 @@
     "C",
     "D"
   ],
+  "sleep30": [
+    "A",
+    "B"
+  ],
   "pngtastic": [
     "FREQTHRESHOLD",
     "DISTTHRESHOLD",

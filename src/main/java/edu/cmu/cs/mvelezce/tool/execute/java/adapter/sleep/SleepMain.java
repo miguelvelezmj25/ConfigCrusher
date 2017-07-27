@@ -196,6 +196,12 @@ public class SleepMain {
             Sleep29.main(sleepArgs);
             Regions.exit(program.getRegionID());
         }
+        else if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep30")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Sleep30.main(sleepArgs);
+            Regions.exit(program.getRegionID());
+        }
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);
         }

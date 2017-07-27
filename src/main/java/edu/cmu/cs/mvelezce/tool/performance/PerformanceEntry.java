@@ -33,14 +33,47 @@ public class PerformanceEntry {
 
         System.out.println(configuration /* + " " + program / 1000000000.0*/);
 
-        this.calculateInnerRegions(executedRegions);
-        this.calculateRealPerformance(executedRegions);
+//        this.calculateInnerRegions(executedRegions);
+//        this.calculateRealPerformance(executedRegions);
+        
+        this.calculatePerformance(executedRegions);
 
         for(Map.Entry<Region, Long> entry : this.regionsToExecutionTime.entrySet()) {
             if(entry.getKey().getRegionID().equals("program")) {
                 System.out.println(entry.getValue());
             }
         }
+    }
+
+    private void calculatePerformance(List<Region> executedRegions) {
+        Stack<Region> executingRegions = new Stack<>();
+
+        for(Region region : executedRegions) {
+            if(executingRegions.empty()) {
+                executingRegions.add(region);
+
+                continue;
+            }
+
+            Region top = executingRegions.peek();
+
+            if(top.getRegionID().equals(region.getRegionID())) {
+                if(region.getEndTime() < top.getStartTime()) {
+                    throw new RuntimeException("The end time of a future region is less than the start time of previously visited region");
+                }
+
+                long start = top.getStartTime();
+                long end = region.getEndTime();
+                double time = (end - start) / 1000000000.0;
+                this.regionsToExecutionTime2.put(region, time);
+
+                executingRegions.pop();
+            }
+            else {
+                executingRegions.add(region);
+            }
+        }
+
     }
 
     public PerformanceEntry(Set<String> configuration, Map<Region, Long> regionsToExecutionTime, Map<Region, Set<Region>> regionsToInnerRegions) {

@@ -21,6 +21,7 @@ public class MethodGraph {
     }
 
     public MethodBlock getImmediatePostDominator(MethodBlock methodBlock) {
+//        this.getDominators();
         MethodGraph reversedGraph = this.reverseGraph();
         return reversedGraph.getImmediateDominator(methodBlock);
     }
@@ -86,17 +87,26 @@ public class MethodGraph {
     }
 
     public MethodBlock getImmediateDominator(MethodBlock start) {
+        System.out.println(this.toDotString("reverse"));
         this.getDominators();
         Set<MethodBlock> dominators = new HashSet<>(this.blocksToDominators.get(start));
         dominators.remove(start);
 
+        Set<MethodBlock> ids = new HashSet<>();
+
         for(MethodBlock dominator : dominators) {
             if(dominators.equals(blocksToDominators.get(dominator))) {
-                return dominator;
+//                return dominator;
+                ids.add(dominator);
             }
         }
 
-        throw new RuntimeException("Could not find an immediate dominator");
+        if(ids.size() == 1) {
+            return ids.iterator().next();
+        }
+
+        throw new RuntimeException("Multiple ids");
+//        throw new RuntimeException("Could not find an immediate dominator");
     }
 
     public MethodGraph reverseGraph() {

@@ -103,8 +103,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(x, a);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
-        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
     }
 
     @Test
@@ -141,7 +148,14 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(x, a);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
     }
 
@@ -176,8 +190,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
-        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
 
     @Test
@@ -211,7 +232,13 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
     }
 
@@ -249,8 +276,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
-        Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
 
     @Test
@@ -287,7 +321,14 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
     }
 
@@ -325,8 +366,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
-        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
 
     @Test
@@ -363,7 +411,14 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
     }
 
@@ -397,6 +452,12 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(d, e);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
     }
 
@@ -430,6 +491,12 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(d, e);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
     }
 
@@ -474,9 +541,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, f));
         Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
-        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
 
     @Test
@@ -520,8 +593,14 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(b, e);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, f));
-        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
     }
 
@@ -560,8 +639,14 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(c, e);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
-        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
     }
 
     @Test
@@ -599,7 +684,13 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(c, e);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
     }
 
@@ -643,8 +734,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(g, i);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
-        Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, g));
+        Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, g));
     }
 
     @Test
@@ -687,6 +785,12 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(g, i);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(i, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, g));
     }
@@ -725,8 +829,14 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(f, d);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
-        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
+        Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
     }
 
     @Test
@@ -763,7 +873,13 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(f, d);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+        Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
     }
 
@@ -801,8 +917,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(f, d);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
-        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
+        Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
     }
 
     @Test
@@ -839,7 +962,14 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(f, d);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
+        Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
     }
 
@@ -874,6 +1004,13 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(c, f);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
     }
@@ -909,6 +1046,12 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(c, f);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
     }
@@ -948,8 +1091,16 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(c, e);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
-        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
     }
 
     @Test
@@ -987,8 +1138,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(c, e);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
     }
 
     @Test
@@ -1029,9 +1187,16 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(e, f);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(x, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
-        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
-        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, e));
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, e));
     }
 
     @Test
@@ -1072,8 +1237,14 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(e, f);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
-        Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+        Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
+        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, e));
     }
 
@@ -1129,11 +1300,18 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(j, l);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
         Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, g));
         Assert.assertEquals(k, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, k));
-        Assert.assertEquals(h, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, j));
+        Assert.assertEquals(j, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, j));
     }
 
     @Test
@@ -1188,6 +1366,12 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(j, l);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
         Assert.assertEquals(l, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, g));
@@ -1246,10 +1430,17 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(j, l);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
         Assert.assertEquals(a, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
         Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, g));
-        Assert.assertEquals(h, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, j));
+        Assert.assertEquals(j, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, j));
     }
 
     @Test
@@ -1303,9 +1494,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(j, l);
 
         System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
         Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
-        Assert.assertEquals(l, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, g));
+        Assert.assertEquals(j, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, g));
         Assert.assertEquals(l, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, j));
     }
 
@@ -1343,7 +1540,15 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(g, b);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
+        Assert.assertEquals(b, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(d, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
     }
 
     @Test
@@ -1380,7 +1585,104 @@ public class JavaRegionClassTransformerTest {
         methodGraph.addEdge(g, b);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
+        Assert.assertEquals(g, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
+    }
+
+    @Test
+    public void testGetWhereToStartInstrumenting17() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock x = new MethodBlock("X");
+
+        // Add vertices
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+
+        // Add edges
+        methodGraph.addEdge(x, a);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, a);
+        methodGraph.addEdge(c, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(e, d);
+
+        System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
+        Assert.assertEquals(c, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
+        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToStartInstrumentingBeforeIt(methodGraph, e));
+    }
+
+    @Test
+    public void testGetWhereToEndInstrumenting17() {
+        // Build methodGraph
+        MethodGraph methodGraph = new MethodGraph();
+
+        // Build block
+        MethodBlock a = new MethodBlock("A");
+        MethodBlock b = new MethodBlock("B");
+        MethodBlock c = new MethodBlock("C");
+        MethodBlock d = new MethodBlock("D");
+        MethodBlock e = new MethodBlock("E");
+        MethodBlock f = new MethodBlock("F");
+        MethodBlock x = new MethodBlock("X");
+
+        // Add vertices
+        methodGraph.addMethodBlock(x);
+        methodGraph.addMethodBlock(a);
+        methodGraph.addMethodBlock(b);
+        methodGraph.addMethodBlock(c);
+        methodGraph.addMethodBlock(d);
+        methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(f);
+
+        // Add edges
+        methodGraph.addEdge(x, a);
+        methodGraph.addEdge(a, b);
+        methodGraph.addEdge(b, c);
+        methodGraph.addEdge(c, d);
+        methodGraph.addEdge(d, a);
+        methodGraph.addEdge(c, e);
+        methodGraph.addEdge(e, f);
+        methodGraph.addEdge(e, d);
+
+        System.out.println(methodGraph.toDotString("test"));
+
+        for(MethodBlock block : methodGraph.getBlocks()) {
+            if(block.getSuccessors().size() > 1) {
+                System.out.println(block.getID());
+            }
+        }
+
+        Assert.assertEquals(e, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
+        Assert.assertEquals(f, JavaRegionClassTransformer.getBlockToEndInstrumentingBeforeIt(methodGraph, e));
     }
 
 }

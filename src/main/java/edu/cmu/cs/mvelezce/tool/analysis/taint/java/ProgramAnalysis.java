@@ -166,7 +166,7 @@ public class ProgramAnalysis {
             if(!currentPackage.equals(entryPackage) || !currentClass.equals(entryClass) || !currentMethod.equals(entryMethod)) {
                 currentBytecodeIndex = 0;
                 currentUsedTerms = new HashSet<>();
-                currentUsedTerms.addAll(usedTerms);
+//                currentUsedTerms.addAll(usedTerms);
                 currentPackage = entryPackage;
                 currentClass = entryClass;
                 currentMethod = entryMethod;
@@ -343,7 +343,7 @@ public class ProgramAnalysis {
     }
 
     public static List<String> getConjunctions(String constraint) {
-        if(!constraint.startsWith("(") && !constraint.endsWith(")")) {
+        if(!constraint.startsWith("(") || !constraint.endsWith(")")) {
             constraint = "(" + constraint + ")";
         }
 
@@ -383,9 +383,9 @@ public class ProgramAnalysis {
                 if(constraint.charAt(i) == '(') {
                     openParenthesisCount++;
 
-                    if(openParenthesisCount > 2) {
-                        throw new RuntimeException(conj + " is not a valid conjunction");
-                    }
+//                    if(openParenthesisCount > 2) {
+//                        throw new RuntimeException(conj + " is not a valid conjunction");
+//                    }
                 }
                 else if(constraint.charAt(i) == ')') {
                     openParenthesisCount--;

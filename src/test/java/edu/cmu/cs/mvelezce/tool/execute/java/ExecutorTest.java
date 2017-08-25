@@ -298,6 +298,27 @@ public class ExecutorTest {
     }
 
     @Test
+    public void testSleep31() throws IOException, ParseException {
+        String programName = "sleep31";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String entryPoint = "edu.cmu.cs.mvelezce.Sleep30";
+
+        String[] args = new String[0];
+
+        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+
+//        args = new String[3];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//        args[2] = "-i1";
+
+        args = new String[1];
+        args[0] = "-i1";
+
+        Set<PerformanceEntry> measured = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+    }
+
+    @Test
     public void testZipme() throws IOException, ParseException {
         String programName = "zipme";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";

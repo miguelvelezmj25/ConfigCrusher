@@ -136,7 +136,8 @@ public class ProgramAnalysisTest {
 
     @Test
     public void testGetConjunctions1() {
-        String constraint = "(DISTTHRESHOLD = 0 ^ TIMEOUT_Theta ^ !(TIMEOUT_Eta) || !(FREQTHRESHOLD_Beta))";
+//        String constraint = "(DISTTHRESHOLD = 0 ^ TIMEOUT_Theta ^ !(TIMEOUT_Eta) || !(FREQTHRESHOLD_Beta))";
+        String constraint = "false || (false || false || true ^ false || false || false || !(A = 0) || false)";
 
         List<String> res = ProgramAnalysis.getConjunctions(constraint);
         Assert.assertEquals(res.size(), 1);
@@ -361,6 +362,23 @@ public class ProgramAnalysisTest {
     @Test
     public void testSleep30() throws IOException, ParseException {
         String programName = "sleep30";
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Map<JavaRegion, Set<Set<String>>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
+    }
+
+    @Test
+    public void testSleep31() throws IOException, ParseException {
+        String programName = "sleep31";
 
         // Program arguments
 //        String[] args = new String[0];

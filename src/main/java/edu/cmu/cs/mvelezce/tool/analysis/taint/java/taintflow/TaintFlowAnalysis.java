@@ -21,28 +21,44 @@ public class TaintFlowAnalysis {
         this.programName = programName;
     }
 
-    public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
+    public Map<JavaRegion, Set<Set<String>>> analyze(String[] args) throws IOException {
+        Options.getCommandLine(args);
+
         String outputFile = TaintFlowAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
-        return this.readFromFile(file);
+        Options.checkIfDeleteResult(file);
+        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet;
 
-//        List<ControlFlowResult> results = this.readTaintFlowResults();
-//        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
-//
-//        for(ControlFlowResult result : results) {
-//            JavaRegion region = new JavaRegion(result.getPackageName(), result.getClassName(),
-//                    result.getMethodSignature(), result.getBytecodeIndex());
-//
-//            // TODO with the current implementation of taintflow, we only have 1 set of options
-//            Set<Set<String>> optionsSet = new HashSet<>();
-//            optionsSet.add(result.getOptions());
-//
-//            regionsToOptionsSet.put(region, optionsSet);
-//        }
-//
-//        this.writeToFile(regionsToOptionsSet);
-//        return regionsToOptionsSet;
+        if(file.exists()) {
+            return this.readFromFile(file);
+        }
+
+        regionsToOptionsSet = this.analyze();
+
+        if(Options.checkIfSave()) {
+            this.writeToFile(regionsToOptionsSet);
+        }
+
+        return regionsToOptionsSet;
+    }
+
+    public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
+        List<ControlFlowResult> results = this.readTaintFlowResults();
+        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
+
+        for(ControlFlowResult result : results) {
+            JavaRegion region = new JavaRegion(result.getPackageName(), result.getClassName(),
+                    result.getMethodSignature(), result.getBytecodeIndex());
+
+            // TODO with the current implementation of taintflow, we only have 1 set of options
+            Set<Set<String>> optionsSet = new HashSet<>();
+            optionsSet.add(result.getOptions());
+
+            regionsToOptionsSet.put(region, optionsSet);
+        }
+
+        return regionsToOptionsSet;
     }
 
     private List<ControlFlowResult> readTaintFlowResults() throws IOException {

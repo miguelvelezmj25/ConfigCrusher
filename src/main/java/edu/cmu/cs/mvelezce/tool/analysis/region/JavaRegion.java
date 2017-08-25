@@ -21,6 +21,8 @@ public class JavaRegion extends Region {
     private MethodBlock startMethodBlock = null;
     private Set<MethodBlock> endMethodBlocks = new HashSet<>();
 
+    private JavaRegion() { ; }
+
     public JavaRegion(String regionClass, String regionMethod) {
         this.regionClass = regionClass;
         this.regionMethod = regionMethod;

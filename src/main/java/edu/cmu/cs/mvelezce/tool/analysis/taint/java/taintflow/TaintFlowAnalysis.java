@@ -4,13 +4,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionAndOptions;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class TaintFlowAnalysis {
+public class TaintFlowAnalysis implements StaticAnalysis {
 
     private String programName;
 
@@ -71,7 +72,7 @@ public class TaintFlowAnalysis {
         return results;
     }
 
-    private void writeToFile(Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions) throws IOException {
+    public void writeToFile(Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String outputFile = TaintFlowAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
@@ -86,7 +87,7 @@ public class TaintFlowAnalysis {
         mapper.writeValue(file, decisionsAndOptions);
     }
 
-    private Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException {
+    public Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         List<DecisionAndOptions> results = mapper.readValue(file, new TypeReference<List<DecisionAndOptions>>() {
         });

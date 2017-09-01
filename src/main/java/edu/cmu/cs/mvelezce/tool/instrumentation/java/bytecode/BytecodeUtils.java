@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.Bytecode;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 /**
  * Created by mvelezce on 6/26/17.

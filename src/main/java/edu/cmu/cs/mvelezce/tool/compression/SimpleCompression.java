@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.compression;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.Serialize.CompressedConfigurations;
 
 import java.io.File;
@@ -171,30 +170,6 @@ public class SimpleCompression extends BaseCompression {
 
         CompressedConfigurations compressedConfigurations = new CompressedConfigurations(configurationsToExecute);
         mapper.writeValue(file, compressedConfigurations);
-    }
-
-    public Set<Set<String>> readFromFile(File file) throws IOException {
-//        JSONParser parser = new JSONParser();
-//        JSONObject result = (JSONObject) parser.parse(new FileReader(file));
-//
-//        Set<Set<String>> configurationsToExecute = new HashSet<>();
-//
-//        JSONArray configurations = (JSONArray) result.get(SimpleCompression.COMPRESSION);
-//
-//        for(Object entry : configurations) {
-//            JSONArray configurationsResult = (JSONArray) entry;
-//
-//            Set<String> configuration = new HashSet<>();
-//            for(Object configurationResult : configurationsResult) {
-//                configuration.add((String) configurationResult);
-//            }
-//
-//            configurationsToExecute.add(configuration);
-//        }
-//
-//        return configurationsToExecute;
-
-        return null;
     }
 
 }

@@ -3,8 +3,9 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.compression.Simple;
-import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
+import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
+import edu.cmu.cs.mvelezce.tool.compression.SimpleCompressionTest;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
@@ -63,7 +64,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
@@ -83,7 +84,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
@@ -103,7 +104,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
@@ -123,7 +124,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
@@ -143,7 +144,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
@@ -163,7 +164,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
@@ -183,7 +184,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
@@ -203,7 +204,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
@@ -223,7 +224,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
@@ -243,7 +244,8 @@ public class ExecutorTest {
 
         String[] args = new String[0];
 
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
 
         String[] a = new String[0];
         ZipMain.main(a);
@@ -263,7 +265,8 @@ public class ExecutorTest {
 
         String[] args = new String[0];
 
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
 
         args = new String[3];
         args[0] = "-delres";
@@ -284,7 +287,8 @@ public class ExecutorTest {
 
         String[] args = new String[0];
 
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
 
 //        args = new String[3];
 //        args[0] = "-delres";
@@ -305,7 +309,8 @@ public class ExecutorTest {
 
         String[] args = new String[0];
 
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
 
 //        args = new String[3];
 //        args[0] = "-delres";
@@ -350,7 +355,8 @@ public class ExecutorTest {
 
         String[] args = new String[0];
 
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
         Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {

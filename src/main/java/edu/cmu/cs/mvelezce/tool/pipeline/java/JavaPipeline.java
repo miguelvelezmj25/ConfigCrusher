@@ -4,7 +4,8 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.compression.Simple;
+import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
@@ -38,8 +39,9 @@ public class JavaPipeline {
 
         // Configuration compression (Language independent)
         System.out.println("####################### Configurations to execute #######################");
+        Compression compression = new SimpleCompression(programName);
         Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args, relevantOptions);
         JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
         System.out.println("");
 
@@ -79,7 +81,7 @@ public class JavaPipeline {
 //        // Configuration compression (Language independent)
 //        System.out.println("####################### Configurations to execute #######################");
 //        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-//        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+//        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(programName, args, relevantOptions);
 //        JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
 //        System.out.println("");
 //
@@ -124,8 +126,9 @@ public class JavaPipeline {
 
         // Configuration compression (Language independent)
         System.out.println("####################### Configurations to execute #######################");
+        Compression compression = new SimpleCompression(programName);
         Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args, relevantOptions);
         JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
         System.out.println("");
 
@@ -170,7 +173,7 @@ public class JavaPipeline {
 //        // Configuration compression (Language independent)
 //        System.out.println("Configurations to execute");
 //        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-//        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+//        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(programName, args, relevantOptions);
 //        System.out.println(configurationsToExecute);
 //        System.out.println("");
 //
@@ -204,7 +207,7 @@ public class JavaPipeline {
 //        // Configuration compression (Language independent)
 //        System.out.println("Configurations to execute");
 //        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-//        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, relevantOptions);
+//        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(programName, args, relevantOptions);
 //        System.out.println(configurationsToExecute);
 //        System.out.println("");
 //
@@ -251,7 +254,8 @@ public class JavaPipeline {
         }
 
         String[] args = new String[0];
-        Set<Set<String>> measuredConfigurations = Simple.getConfigurationsToExecute(programName, args);
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> measuredConfigurations = compression.compressConfigurations(args);
         Set<String> options = Executor.getOptions(programName);
         Set<Set<String>> configurations = Helper.getConfigurations(options);
 

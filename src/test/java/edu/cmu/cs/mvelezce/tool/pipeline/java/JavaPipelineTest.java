@@ -5,7 +5,8 @@ import edu.cmu.cs.mvelezce.Sleep18;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.compression.Simple;
+import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import org.json.simple.parser.ParseException;
@@ -49,7 +50,8 @@ public class JavaPipelineTest {
 
         // TESTING
         args = new String[0];
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
         Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
@@ -93,7 +95,8 @@ public class JavaPipelineTest {
 
         // TESTING
         args = new String[0];
-        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(programName, args);
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
         Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
@@ -1441,8 +1444,8 @@ public class JavaPipelineTest {
 //            System.out.println("Number of constraints: " + optionsSet.size());
 //        }
 //
-//        Set<Set<String>> configurations = Simple.getConfigurationsToExecute(optionsSet);
-//        SimpleTest.checkConfigurationIsStatisfied(optionsSet, configurations);
+//        Set<Set<String>> configurations = compression.compressConfigurations(optionsSet);
+//        SimpleCompressionTest.checkConfigurationIsStatisfied(optionsSet, configurations);
 //
 //        if(csv) {
 //            System.out.print(configurations.size() + ", ");

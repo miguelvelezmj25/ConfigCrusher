@@ -17,7 +17,7 @@ import java.util.*;
 /**
  * Created by mvelezce on 4/28/17.
  */
-public class SimpleTest {
+public class SimpleCompressionTest {
 
     public static Set<Set<String>> getOptionsSet(String string) {
         Set<Set<String>> result = new HashSet<>();
@@ -42,8 +42,9 @@ public class SimpleTest {
 
         for(List<Set<String>> permutation : permutations) {
 //            System.out.println("\nPermutation: " + permutation);
-            Set<Set<String>> results = Simple.getConfigurationsToExecute(relevantOptionsSet);
-            SimpleTest.checkConfigurationIsStatisfied(new HashSet<>(permutation), results);
+            Compression compression = new SimpleCompression();
+            Set<Set<String>> results = compression.compressConfigurations(relevantOptionsSet);
+            SimpleCompressionTest.checkConfigurationIsStatisfied(new HashSet<>(permutation), results);
         }
     }
 
@@ -57,7 +58,7 @@ public class SimpleTest {
                 boolean hasConfiguration = false;
 
                 for(Set<String> result : results) {
-                    if(SimpleTest.matches(result, configuration, relevantOptions)) {
+                    if(SimpleCompressionTest.matches(result, configuration, relevantOptions)) {
                         hasConfiguration = true;
                         break;
                     }
@@ -82,14 +83,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, AD, BE");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, AD, BE");
 
         // Program
-        String program = "test1";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test1";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -102,14 +106,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABC, BCD");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABC, BCD");
 
         // Program
-        String program = "test2";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test2";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -122,14 +129,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, BCD");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, BCD");
 
         // Program
-        String program = "test3";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test3";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -142,14 +152,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, BC");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, BC");
 
         // Program
-        String program = "test4";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test4";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -162,14 +175,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, CDE");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, CDE");
 
         // Program
-        String program = "test5";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test5";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -182,14 +198,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, BC");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, BC");
 
         // Program
-        String program = "test6";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test6";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -202,14 +221,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, AD, BC, BD");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, AD, BC, BD");
 
         // Program
-        String program = "test7";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test7";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -222,14 +244,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, AD, BC, CD");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, AD, BC, CD");
 
         // Program
-        String program = "test8";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test8";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -242,14 +267,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABC, CD, BD");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABC, CD, BD");
 
         // Program
-        String program = "test9";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test9";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -262,14 +290,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABC, CD");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABC, CD");
 
         // Program
-        String program = "test10";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test10";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -282,14 +313,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABC, DEF");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABC, DEF");
 
         // Program
-        String program = "test11";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test11";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -302,14 +336,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("");
 
         // Program
-        String program = "test12";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test12";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -322,14 +359,17 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("ABCD, ADXY, ABDX");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABCD, ADXY, ABDX");
 
         // Program
-        String program = "test13";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test13";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
@@ -342,42 +382,45 @@ public class SimpleTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleTest.getOptionsSet("AB, AC, AD, BC, CD, BD");
+        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, AD, BC, CD, BD");
 
         // Program
-        String program = "test14";
-        Set<Set<String>> outputSave = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+        String programName = "test14";
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> outputSave = compressor.compressConfigurations(args, relevantOptionsSet);
 
         args = new String[0];
-        Set<Set<String>> outputRead = Simple.getConfigurationsToExecute(program, args, relevantOptionsSet);
+
+        Set<Set<String>> outputRead = compressor.compressConfigurations(args, relevantOptionsSet);
 
         Assert.assertEquals(outputSave, outputRead);
     }
 
     @Test
     public void filterOptions1() {
-        Set<Set<String>> set = SimpleTest.getOptionsSet("AB, AC");
-        Assert.assertEquals(set, Simple.filterOptions(set));
+        Set<Set<String>> set = SimpleCompressionTest.getOptionsSet("AB, AC");
+        Assert.assertEquals(set, BaseCompression.filterOptions(set));
     }
 
     @Test
     public void filterOptions2() {
-        Set<Set<String>> set = SimpleTest.getOptionsSet("ABC, ACD");
-        Assert.assertEquals(set, Simple.filterOptions(set));
+        Set<Set<String>> set = SimpleCompressionTest.getOptionsSet("ABC, ACD");
+        Assert.assertEquals(set, BaseCompression.filterOptions(set));
     }
 
     @Test
     public void filterOptions3() {
-        Set<Set<String>> set = SimpleTest.getOptionsSet("AB, ABC");
-        Set<Set<String>> result = SimpleTest.getOptionsSet("ABC");
-        Assert.assertEquals(result, Simple.filterOptions(set));
+        Set<Set<String>> set = SimpleCompressionTest.getOptionsSet("AB, ABC");
+        Set<Set<String>> result = SimpleCompressionTest.getOptionsSet("ABC");
+        Assert.assertEquals(result, BaseCompression.filterOptions(set));
     }
 
     @Test
     public void filterOptions4() {
-        Set<Set<String>> set = SimpleTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
-        Set<Set<String>> result = SimpleTest.getOptionsSet("ABC, BCD, DEF");
-        Assert.assertEquals(result, Simple.filterOptions(set));
+        Set<Set<String>> set = SimpleCompressionTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
+        Set<Set<String>> result = SimpleCompressionTest.getOptionsSet("ABC, BCD, DEF");
+        Assert.assertEquals(result, BaseCompression.filterOptions(set));
     }
 
     @Test
@@ -396,8 +439,10 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
 
@@ -417,8 +462,10 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
 
@@ -438,8 +485,10 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
 
@@ -460,8 +509,10 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
 
@@ -481,8 +532,10 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
 
@@ -502,8 +555,10 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
 
@@ -523,8 +578,10 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
 
@@ -544,8 +601,10 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
 
@@ -565,8 +624,10 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
 
@@ -587,9 +648,23 @@ public class SimpleTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
         System.out.println(configurationsToExecute.size());
     }
+
+//    @Test
+//    public void testRunningExample1() throws IOException, ParseException {
+//        String programName = "running-example";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
+//        System.out.println(configurationsToExecute.size());
+//    }
 
 }

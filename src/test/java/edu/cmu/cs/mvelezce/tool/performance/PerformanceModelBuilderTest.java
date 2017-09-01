@@ -5,7 +5,7 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.compression.SimpleTest;
+import edu.cmu.cs.mvelezce.tool.compression.SimpleCompressionTest;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import org.json.simple.parser.ParseException;
@@ -570,7 +570,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep1.CLASS, configurationsToExecute);
@@ -602,7 +602,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep1.CLASS, configurationsToExecute);
@@ -640,7 +640,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep2.CLASS, args, Sleep2.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep2.CLASS, configurationsToExecute);
@@ -688,7 +688,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep3.CLASS, args, Sleep3.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep3.CLASS, configurationsToExecute);
@@ -732,7 +732,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep4.CLASS, configurationsToExecute);
@@ -770,7 +770,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep7.CLASS, args, Sleep7.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep7.CLASS, configurationsToExecute);
@@ -808,7 +808,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep8.CLASS, args, Sleep8.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep8.CLASS, configurationsToExecute);
@@ -846,7 +846,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep9.CLASS, args, Sleep9.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep9.CLASS, configurationsToExecute);
@@ -896,7 +896,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("AB");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep10.CLASS, args, Sleep10.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep10.CLASS, configurationsToExecute);
@@ -940,7 +940,7 @@ public class PerformanceModelBuilderTest {
         String[] args = new String[0];
 
         // Configurations
-        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("A");
+        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("A");
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, Instrumenter.TARGET_DIRECTORY + "/" + Sleep13.CLASS, configurationsToExecute);

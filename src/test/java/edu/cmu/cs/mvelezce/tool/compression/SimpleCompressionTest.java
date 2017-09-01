@@ -655,16 +655,16 @@ public class SimpleCompressionTest {
         System.out.println(configurationsToExecute.size());
     }
 
-//    @Test
-//    public void testRunningExample1() throws IOException, ParseException {
-//        String programName = "running-example";
-//
-//        // Program arguments
-//        String[] args = new String[0];
-//
-//        Compression compressor = new SimpleCompression(programName);
-//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
-//        System.out.println(configurationsToExecute.size());
-//    }
+    @Test
+    public void testRunningExample1() throws IOException, ParseException {
+        String programName = "running-example";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compressor = new SimpleCompression(programName);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
+        System.out.println(configurationsToExecute.size());
+    }
 
 }

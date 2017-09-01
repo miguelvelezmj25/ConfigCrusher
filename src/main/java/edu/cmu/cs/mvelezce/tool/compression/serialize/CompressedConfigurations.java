@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.compression.Serialize;
+package edu.cmu.cs.mvelezce.tool.compression.serialize;
 
 import java.util.Set;
 

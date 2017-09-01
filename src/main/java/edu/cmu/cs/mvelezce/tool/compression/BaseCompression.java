@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.compression;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.compression.Serialize.CompressedConfigurations;
+import edu.cmu.cs.mvelezce.tool.compression.serialize.CompressedConfigurations;
 
 import java.io.File;
 import java.io.IOException;

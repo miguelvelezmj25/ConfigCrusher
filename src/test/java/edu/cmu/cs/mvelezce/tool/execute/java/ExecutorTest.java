@@ -9,7 +9,6 @@ import edu.cmu.cs.mvelezce.tool.compression.SimpleCompressionTest;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.zip.ZipMain;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -236,26 +235,26 @@ public class ExecutorTest {
         ExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
-    @Test
-    public void testZipmeSimple() throws IOException, ParseException {
-        String programName = "zipme-simple";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
-        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
-
-        String[] args = new String[0];
-
-        Compression compression = new SimpleCompression(programName);
-        Set<Set<String>> configurations = compression.compressConfigurations(args);
-
-        String[] a = new String[0];
-        ZipMain.main(a);
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
+//    @Test
+//    public void testZipmeSimple() throws IOException, ParseException {
+//        String programName = "zipme-simple";
+//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
+//        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
 //
-
-//        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
-    }
+//        String[] args = new String[0];
+//
+//        Compression compression = new SimpleCompression(programName);
+//        Set<Set<String>> configurations = compression.compressConfigurations(args);
+//
+//        String[] a = new String[0];
+//        ZipMain.main(a);
+////        args = new String[2];
+////        args[0] = "-delres";
+////        args[1] = "-saveres";
+////
+//
+////        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+//    }
 
     @Test
     public void testElevator() throws IOException, ParseException {

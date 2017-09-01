@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl;
 
-import edu.cmu.cs.mvelezce.Main;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -25,7 +24,7 @@ public class GPLMain {
         if(mainClass.equals("edu.cmu.cs.mvelezce.Main")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
-            Main.main(gplArgs);
+//            Main.main(gplArgs);
             Regions.exit(program.getRegionID());
         }
 

@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.pngtastic;
 
-import com.googlecode.pngtastic.PngtasticColorCounter;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -25,7 +24,7 @@ public class PngtasticMain {
         if(mainClass.equals("com.googlecode.pngtastic.PngtasticColorCounter")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
-            PngtasticColorCounter.main(pngtasticArgs);
+//            PngtasticColorCounter.main(pngtasticArgs);
             Regions.exit(program.getRegionID());
         }
 

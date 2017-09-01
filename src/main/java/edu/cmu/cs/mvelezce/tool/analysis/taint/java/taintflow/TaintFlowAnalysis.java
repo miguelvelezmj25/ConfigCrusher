@@ -4,28 +4,25 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionAndOptions;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.BaseStaticAnalysis;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class TaintFlowAnalysis implements StaticAnalysis {
-
-    private String programName;
+public class TaintFlowAnalysis extends BaseStaticAnalysis {
 
     private static final String TAINTFLOW_OUTPUT_DIR = "/Users/mvelezce/Documents/Programming/Java/Projects/taintflow/src/main/resources/output";
-    private static final String DIRECTORY = Options.DIRECTORY + "/analysis/java/programs";
 
     public TaintFlowAnalysis(String programName) {
-        this.programName = programName;
+        super(programName);
     }
 
+    @Override
     public Map<JavaRegion, Set<Set<String>>> analyze(String[] args) throws IOException {
         Options.getCommandLine(args);
 
-        String outputFile = TaintFlowAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        String outputFile = BaseStaticAnalysis.DIRECTORY + "/" + this.getProgramName() + Options.DOT_JSON;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
@@ -43,6 +40,7 @@ public class TaintFlowAnalysis implements StaticAnalysis {
         return regionsToOptionsSet;
     }
 
+    @Override
     public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
         List<ControlFlowResult> results = this.readTaintFlowResults();
         Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
@@ -63,40 +61,12 @@ public class TaintFlowAnalysis implements StaticAnalysis {
 
     private List<ControlFlowResult> readTaintFlowResults() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        File inputFile = new File(TaintFlowAnalysis.TAINTFLOW_OUTPUT_DIR + "/" + this.programName + "/"
-                + this.programName + ".json");
+        File inputFile = new File(TaintFlowAnalysis.TAINTFLOW_OUTPUT_DIR + "/" + this.getProgramName() + "/"
+                + this.getProgramName() + ".json");
         List<ControlFlowResult> results = mapper.readValue(inputFile, new TypeReference<List<ControlFlowResult>>() {
         });
 
         return results;
-    }
-
-    public void writeToFile(Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String outputFile = TaintFlowAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
-        File file = new File(outputFile);
-
-        List<DecisionAndOptions> decisionsAndOptions = new ArrayList<>();
-
-        for(Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionsSet : relevantRegionsToOptions.entrySet()) {
-            DecisionAndOptions decisionAndOptions = new DecisionAndOptions(regionToOptionsSet.getKey(), regionToOptionsSet.getValue());
-            decisionsAndOptions.add(decisionAndOptions);
-        }
-
-        mapper.writeValue(file, decisionsAndOptions);
-    }
-
-    public Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        List<DecisionAndOptions> results = mapper.readValue(file, new TypeReference<List<DecisionAndOptions>>() {
-        });
-        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
-
-        for(DecisionAndOptions result : results) {
-            regionsToOptionsSet.put(result.getRegion(), result.getOptions());
-        }
-
-        return regionsToOptionsSet;
     }
 
 }

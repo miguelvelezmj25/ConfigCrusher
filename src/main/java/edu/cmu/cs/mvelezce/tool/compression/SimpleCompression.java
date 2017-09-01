@@ -23,6 +23,7 @@ public class SimpleCompression extends BaseCompression {
         super(programName);
     }
 
+    @Override
     public Set<Set<String>> compressConfigurations(String[] args) throws IOException {
         Options.getCommandLine(args);
 
@@ -38,6 +39,7 @@ public class SimpleCompression extends BaseCompression {
         return null;
     }
 
+    @Override
     public Set<Set<String>> compressConfigurations(String[] args, Set<Set<String>> relevantOptionsSet) throws IOException {
         Set<Set<String>> results = this.compressConfigurations(args);
 
@@ -54,6 +56,7 @@ public class SimpleCompression extends BaseCompression {
         return configurationsToExecute;
     }
 
+    @Override
     public Set<Set<String>> compressConfigurations(Set<Set<String>> relevantOptionsSet) {
         // Calculates which options are subsets of other options
         Set<Set<String>> filteredOptions = BaseCompression.filterOptions(relevantOptionsSet);
@@ -161,15 +164,6 @@ public class SimpleCompression extends BaseCompression {
             configurationsToExecute.add(smallSet.next());
 //            System.out.println("Added rest from smallset");
         }
-    }
-
-    public void writeToFile(Set<Set<String>> configurationsToExecute) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String outputFile = SimpleCompression.DIRECTORY + "/" + this.getProgramName() + Options.DOT_JSON;
-        File file = new File(outputFile);
-
-        CompressedConfigurations compressedConfigurations = new CompressedConfigurations(configurationsToExecute);
-        mapper.writeValue(file, compressedConfigurations);
     }
 
 }

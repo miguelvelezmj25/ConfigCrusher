@@ -17,4 +17,15 @@ public class TaintFlowAnalysisTest {
         analysis.analyze(args);
     }
 
+    @Test
+    public void analyzeTest2() throws Exception {
+        String systemName = "running-example";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
 }

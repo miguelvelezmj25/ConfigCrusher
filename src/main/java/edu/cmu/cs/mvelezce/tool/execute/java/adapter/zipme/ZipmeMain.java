@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
-import edu.cmu.cs.mvelezce.zip.ZipMain;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class ZipmeMain {
             if(mainClass.equals("edu.cmu.cs.mvelezce.ZipMain")) {
                 Region program = new Region(Regions.PROGRAM_REGION_ID);
                 Regions.enter(program.getRegionID());
-                ZipMain.main(zipmeArgs);
+//                ZipMain.main(zipmeArgs);
                 Regions.exit(program.getRegionID());
             }
         } catch (RuntimeException re) {

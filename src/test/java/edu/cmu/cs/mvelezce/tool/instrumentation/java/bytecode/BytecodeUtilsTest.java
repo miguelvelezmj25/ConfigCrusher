@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.Bytecode.BytecodeUtils;
 import org.junit.Test;
 
 /**

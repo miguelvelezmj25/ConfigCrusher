@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer.ClassTransformerReader;

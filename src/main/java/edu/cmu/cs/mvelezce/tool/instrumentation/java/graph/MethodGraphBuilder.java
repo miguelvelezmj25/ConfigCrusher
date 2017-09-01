@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;

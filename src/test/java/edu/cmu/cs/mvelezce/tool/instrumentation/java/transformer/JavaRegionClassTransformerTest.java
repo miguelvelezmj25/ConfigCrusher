@@ -2,8 +2,8 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.json.simple.parser.ParseException;

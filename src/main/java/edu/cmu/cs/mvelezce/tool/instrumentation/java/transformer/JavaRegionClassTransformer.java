@@ -1,10 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodGraphBuilder;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Bytecode.BytecodeUtils;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.*;
 import org.apache.commons.io.FileUtils;
@@ -396,7 +396,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
             if(graph.getBlocks().size() <= 3) {
                 System.out.println("Special method that is not instrumented");
                 continue;
-                // TODO this happened in an enum method in which there were two labels in the bytecode and the first one had the return statement
+                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
             }
 
             // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD

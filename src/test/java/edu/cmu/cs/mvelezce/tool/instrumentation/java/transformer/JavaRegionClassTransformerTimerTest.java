@@ -45,7 +45,7 @@ public class JavaRegionClassTransformerTimerTest {
         // Transform the files
         Set<ClassNode> classNodes = timer.transformClasses();
 
-        // Check if the transform actually made changes to the bytecode
+        // Check if the transform actually made changes to the graph
         boolean transformed = false;
 
         for(ClassNode instrumentedClassNode : classNodes) {
@@ -89,7 +89,7 @@ public class JavaRegionClassTransformerTimerTest {
         // Transform the files
         Set<ClassNode> classNodes = timer.transformClasses();
 
-        // Check if the transform actually made changes to the bytecode
+        // Check if the transform actually made changes to the graph
         boolean transformed = false;
 
         for(ClassNode instrumentedClassNode : classNodes) {
@@ -139,7 +139,7 @@ public class JavaRegionClassTransformerTimerTest {
         // Transform the files
         Set<ClassNode> classNodes = timer.transformClasses();
 
-        // Check if the transform actually made changes to the bytecode
+        // Check if the transform actually made changes to the graph
         boolean transformed = false;
 
         for(ClassNode instrumentedClassNode : classNodes) {

@@ -14,7 +14,7 @@ public class TaintFlowAnalysis {
 
     private String programName;
 
-    private static final String TAINTFLOW_OUTPUT_DIR = "/Users/mvelezce/Documents/Programming/Java/Projects/taint-analysis/src/main/resources/output";
+    private static final String TAINTFLOW_OUTPUT_DIR = "/Users/mvelezce/Documents/Programming/Java/Projects/taintflow/src/main/resources/output";
     private static final String DIRECTORY = Options.DIRECTORY + "/analysis/java/programs";
 
     public TaintFlowAnalysis(String programName) {

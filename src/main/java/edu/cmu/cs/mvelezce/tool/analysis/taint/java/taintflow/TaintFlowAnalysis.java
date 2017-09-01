@@ -29,13 +29,12 @@ public class TaintFlowAnalysis implements StaticAnalysis {
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
-        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet;
 
         if(file.exists()) {
             return this.readFromFile(file);
         }
 
-        regionsToOptionsSet = this.analyze();
+        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = this.analyze();
 
         if(Options.checkIfSave()) {
             this.writeToFile(regionsToOptionsSet);

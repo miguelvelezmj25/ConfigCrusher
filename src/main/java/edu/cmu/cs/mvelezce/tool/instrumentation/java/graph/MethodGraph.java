@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import jdk.internal.org.objectweb.asm.Label;
 
@@ -101,12 +101,15 @@ public class MethodGraph {
             }
         }
 
+        if(ids.size() > 1) {
+            throw new RuntimeException("Multiple ids");
+        }
+
         if(ids.size() == 1) {
             return ids.iterator().next();
         }
 
-        throw new RuntimeException("Multiple ids");
-//        throw new RuntimeException("Could not find an immediate dominator");
+        throw new RuntimeException("Could not find an immediate dominator");
     }
 
     public MethodGraph reverseGraph() {

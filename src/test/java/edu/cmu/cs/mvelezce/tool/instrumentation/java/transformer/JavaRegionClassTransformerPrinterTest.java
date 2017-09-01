@@ -40,7 +40,7 @@ public class JavaRegionClassTransformerPrinterTest {
 //        // Transform the Java region
 //        printer.transform(classNode);
 //
-//        // Check if the transform actually made changes to the bytecode
+//        // Check if the transform actually made changes to the graph
 //        boolean transformed = false;
 //
 //        for(MethodNode methodNode : classNode.methods) {
@@ -89,7 +89,7 @@ public class JavaRegionClassTransformerPrinterTest {
 //        // Transform the Java region
 //        printer.transform(classNode);
 //
-//        // Check if the transform actually made changes to the bytecode
+//        // Check if the transform actually made changes to the graph
 //        boolean transformed = false;
 //
 //        for(MethodNode methodNode : classNode.methods) {

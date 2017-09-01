@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.region;
 
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodBlock;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 
 import java.util.HashSet;
 import java.util.Set;

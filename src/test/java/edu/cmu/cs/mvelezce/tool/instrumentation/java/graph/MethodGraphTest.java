@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import jdk.internal.org.objectweb.asm.Label;
 import org.junit.Assert;
@@ -90,9 +90,11 @@ public class MethodGraphTest {
         methodGraph.addEdge(b, c);
         methodGraph.addEdge(b, d);
         methodGraph.addEdge(d, e);
+        methodGraph.addEdge(c, e);
+        methodGraph.addEdge(e, f);
 
         System.out.println(methodGraph.toDotString("test"));
-        Assert.assertEquals(a, methodGraph.getImmediateDominator(b));
+//        Assert.assertEquals(a, methodGraph.getImmediateDominator(b));
         Assert.assertEquals(e, methodGraph.getImmediatePostDominator(b));
     }
 
@@ -1346,28 +1348,28 @@ public class MethodGraphTest {
         Assert.assertEquals(source, end.getPredecessors().iterator().next());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testAddEdge2() {
-        // Build methodGraph
-        MethodGraph methodGraph = new MethodGraph();
-
-        // Build block
-        MethodBlock source = new MethodBlock(new Label());
-        MethodBlock target1 = new MethodBlock(new Label());
-        MethodBlock target2 = new MethodBlock(new Label());
-        MethodBlock target3 = new MethodBlock(new Label());
-
-        // Add vertices
-        methodGraph.addMethodBlock(source);
-        methodGraph.addMethodBlock(target1);
-        methodGraph.addMethodBlock(target2);
-
-        // Add edges
-        methodGraph.addEdge(source, target1);
-        methodGraph.addEdge(source, target2);
-
-        // Assert exception thrown
-        methodGraph.addEdge(source, target3);
-    }
+//    @Test(expected = IllegalArgumentException.class)
+//    public void testAddEdge2() {
+//        // Build methodGraph
+//        MethodGraph methodGraph = new MethodGraph();
+//
+//        // Build block
+//        MethodBlock source = new MethodBlock(new Label());
+//        MethodBlock target1 = new MethodBlock(new Label());
+//        MethodBlock target2 = new MethodBlock(new Label());
+//        MethodBlock target3 = new MethodBlock(new Label());
+//
+//        // Add vertices
+//        methodGraph.addMethodBlock(source);
+//        methodGraph.addMethodBlock(target1);
+//        methodGraph.addMethodBlock(target2);
+//
+//        // Add edges
+//        methodGraph.addEdge(source, target1);
+//        methodGraph.addEdge(source, target2);
+//
+//        // Assert exception thrown
+//        methodGraph.addEdge(source, target3);
+//    }
 
 }

@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator;
 
-import edu.cmu.cs.mvelezce.PL_Interface_impl;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -25,7 +24,7 @@ public class ElevatorMain {
         if(mainClass.equals("edu.cmu.cs.mvelezce.PL_Interface_impl")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
-            PL_Interface_impl.main(elevatorArgs);
+//            PL_Interface_impl.main(elevatorArgs);
             Regions.exit(program.getRegionID());
         }
 

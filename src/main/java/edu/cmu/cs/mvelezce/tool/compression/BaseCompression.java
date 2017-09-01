@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.compression;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.Serialize.CompressedConfigurations;
 
 import java.io.File;
@@ -22,6 +23,15 @@ public abstract class BaseCompression implements Compression {
 
     public String getProgramName() {
         return this.programName;
+    }
+
+    public void writeToFile(Set<Set<String>> configurationsToExecute) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String outputFile = SimpleCompression.DIRECTORY + "/" + this.getProgramName() + Options.DOT_JSON;
+        File file = new File(outputFile);
+
+        CompressedConfigurations compressedConfigurations = new CompressedConfigurations(configurationsToExecute);
+        mapper.writeValue(file, compressedConfigurations);
     }
 
     @Override

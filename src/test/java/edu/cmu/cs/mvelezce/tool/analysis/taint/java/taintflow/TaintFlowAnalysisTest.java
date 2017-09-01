@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow;
 
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import org.junit.Test;
 
 public class TaintFlowAnalysisTest {
@@ -12,7 +13,7 @@ public class TaintFlowAnalysisTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        TaintFlowAnalysis analysis = new TaintFlowAnalysis(systemName);
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
         analysis.analyze(args);
     }
 

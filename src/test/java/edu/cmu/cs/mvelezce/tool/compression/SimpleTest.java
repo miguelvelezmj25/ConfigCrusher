@@ -3,6 +3,8 @@ package edu.cmu.cs.mvelezce.tool.compression;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import org.apache.commons.collections4.CollectionUtils;
 import org.json.simple.parser.ParseException;
 import org.junit.Assert;
@@ -558,6 +560,28 @@ public class SimpleTest {
 //        args[0] = "-saveres";
 
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Set<Set<String>> options = Simple.expandOptions(decisionsToOptionsSet.values());
+        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(programName, args, options);
+        System.out.println(configurationsToExecute.size());
+    }
+
+    @Test
+    public void testRunningExample() throws IOException, ParseException {
+        String programName = "running-example";
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
         args[0] = "-delres";

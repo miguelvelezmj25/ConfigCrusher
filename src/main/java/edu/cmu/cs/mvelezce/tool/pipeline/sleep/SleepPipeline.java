@@ -19,7 +19,8 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFG;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFGBuilder;
-import edu.cmu.cs.mvelezce.tool.compression.Simple;
+import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.instrumentation.sleep.InstrumentVisitor;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
@@ -57,7 +58,8 @@ public class SleepPipeline {
         // Configuration compression (Language independent)
         Set<Set<ConstantConfigurationExpression>> relevantSleepOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> relevantOptions = SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantSleepOptions);
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(relevantOptions);
+        Compression compression = new SimpleCompression(programFile);
+        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(relevantOptions);
 
         // Instrumentation (Language dependent)
         TimedProgram timedProgram = SleepPipeline.instrumentRelevantRegions(program); //, relevantRegionsToOptions);

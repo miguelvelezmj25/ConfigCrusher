@@ -112,7 +112,7 @@ public class SleepPipelineTest {
 //        TimedProgram timedProgram = new TimedProgram(programRegion.getRegionID(), program);
 //
 //        // Configurations
-//        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
+//        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("AB");
 //        Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 //
 //        // Set of performance entries
@@ -174,7 +174,7 @@ public class SleepPipelineTest {
 //        TimedProgram timedProgram = new TimedProgram(programRegion.getRegionID(), program);
 //
 //        // Configurations
-//        Set<Set<String>> optionsSet = SimpleTest.getOptionsSet("AB");
+//        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("AB");
 //        Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 //
 //        // Set of performance entries

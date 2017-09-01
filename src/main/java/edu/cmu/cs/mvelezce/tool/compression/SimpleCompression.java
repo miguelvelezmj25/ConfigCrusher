@@ -1,66 +1,63 @@
 package edu.cmu.cs.mvelezce.tool.compression;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
+import edu.cmu.cs.mvelezce.tool.compression.Serialize.CompressedConfigurations;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
 /**
  * Created by mvelezce on 4/28/17.
  */
-public class Simple {
+public class SimpleCompression extends BaseCompression {
 
     public static final String DIRECTORY = Options.DIRECTORY + "/compression/java/programs";
 
-    // JSON strings
-    public static final String COMPRESSION = "compression";
+    public SimpleCompression() {
+        super();
+    }
 
-    public static Set<Set<String>> getConfigurationsToExecute(String programName, String[] args) throws IOException {
+    public SimpleCompression(String programName) {
+        super(programName);
+    }
+
+    public Set<Set<String>> compressConfigurations(String[] args) throws IOException {
         Options.getCommandLine(args);
 
-        String outputFile = Simple.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        String outputFile = SimpleCompression.DIRECTORY + "/" + this.getProgramName() + Options.DOT_JSON;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
-        Set<Set<String>> results = null;
 
         if(file.exists()) {
-            try {
-                results = Simple.readFromFile(file);
-            } catch (ParseException pe) {
-                throw new RuntimeException("Could not parse the cached results");
-            }
+            return this.readFromFile(file);
         }
 
-        return results;
+        return null;
     }
 
-    public static Set<Set<String>> getConfigurationsToExecute(String programName, String[] args, Set<Set<String>> relevantOptionsSet) throws IOException {
-        Set<Set<String>> results = Simple.getConfigurationsToExecute(programName, args);
+    public Set<Set<String>> compressConfigurations(String[] args, Set<Set<String>> relevantOptionsSet) throws IOException {
+        Set<Set<String>> results = this.compressConfigurations(args);
 
         if(results != null) {
             return results;
         }
 
-        Set<Set<String>> configurationsToExecute = Simple.getConfigurationsToExecute(relevantOptionsSet);
+        Set<Set<String>> configurationsToExecute = this.compressConfigurations(relevantOptionsSet);
 
         if(Options.checkIfSave()) {
-            Simple.writeToFile(programName, configurationsToExecute);
+            this.writeToFile(configurationsToExecute);
         }
 
         return configurationsToExecute;
     }
 
-    public static Set<Set<String>> getConfigurationsToExecute(Set<Set<String>> relevantOptionsSet) {
+    public Set<Set<String>> compressConfigurations(Set<Set<String>> relevantOptionsSet) {
         // Calculates which options are subsets of other options
-        Set<Set<String>> filteredOptions = Simple.filterOptions(relevantOptionsSet);
+        Set<Set<String>> filteredOptions = BaseCompression.filterOptions(relevantOptionsSet);
 
         // Get the configurations for each option
         Map<Set<String>, Set<Set<String>>> optionsToConfigurationsToExecute = new HashMap<>();
@@ -96,10 +93,10 @@ public class Simple {
             configurationsToExecute = new HashSet<>();
 
             if(entry1.getValue().size() <= entry2.getValue().size()) {
-                Simple.simpleMerging(entry1, entry2, pivotOptions, configurationsToExecute);
+                this.simpleMerging(entry1, entry2, pivotOptions, configurationsToExecute);
             }
             else {
-                Simple.simpleMerging(entry2, entry1, pivotOptions, configurationsToExecute);
+                this.simpleMerging(entry2, entry1, pivotOptions, configurationsToExecute);
             }
 
             Set<String> newCalculatedOptions = new HashSet<>(entry1.getKey());
@@ -112,39 +109,7 @@ public class Simple {
         return configurationsToExecute;
     }
 
-    public static Set<Set<String>> filterOptions(Set<Set<String>> relevantOptionsSet) {
-        Set<Set<String>> filteredOptions = new HashSet<>();
-
-        for(Set<String> relevantOptions : relevantOptionsSet) {
-            if(filteredOptions.isEmpty()) {
-                filteredOptions.add(relevantOptions);
-                continue;
-            }
-
-            Set<Set<String>> optionsToRemove = new HashSet<>();
-            Set<Set<String>> optionsToAdd = new HashSet<>();
-
-            for(Set<String> options : filteredOptions) {
-                if(options.equals(relevantOptions) || options.containsAll(relevantOptions)) {
-                    optionsToAdd.remove(relevantOptions);
-                    break;
-                }
-
-                if(!options.containsAll(relevantOptions) && relevantOptions.containsAll(options)) {
-                    optionsToRemove.add(options);
-                }
-
-                optionsToAdd.add(relevantOptions);
-            }
-
-            filteredOptions.removeAll(optionsToRemove);
-            filteredOptions.addAll(optionsToAdd);
-        }
-
-        return filteredOptions;
-    }
-
-    private static void simpleMerging(Map.Entry<Set<String>, Set<Set<String>>> largeEntry, Map.Entry<Set<String>, Set<Set<String>>> smallEntry, Set<String> pivotOptions, Set<Set<String>> configurationsToExecute) {
+    private void simpleMerging(Map.Entry<Set<String>, Set<Set<String>>> largeEntry, Map.Entry<Set<String>, Set<Set<String>>> smallEntry, Set<String> pivotOptions, Set<Set<String>> configurationsToExecute) {
         Iterator<Set<String>> largeSet = largeEntry.getValue().iterator();
         Iterator<Set<String>> smallSet = smallEntry.getValue().iterator();
 
@@ -199,65 +164,37 @@ public class Simple {
         }
     }
 
-    private static void writeToFile(String programName, Set<Set<String>> configurationsToExecute) throws IOException {
-        JSONArray configurations = new JSONArray();
-
-        for(Set<String> configurationToExecute : configurationsToExecute) {
-            JSONArray configuration = new JSONArray();
-
-            for(String value : configurationToExecute) {
-                configuration.add(value);
-            }
-
-            configurations.add(configuration);
-        }
-
-        JSONObject result = new JSONObject();
-        result.put(Simple.COMPRESSION, configurations);
-
-        File directory = new File(Simple.DIRECTORY);
-
-        if(!directory.exists()) {
-            directory.mkdirs();
-        }
-
-        String outputFile = Simple.DIRECTORY + "/" + programName + Options.DOT_JSON;
+    public void writeToFile(Set<Set<String>> configurationsToExecute) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String outputFile = SimpleCompression.DIRECTORY + "/" + this.getProgramName() + Options.DOT_JSON;
         File file = new File(outputFile);
-        FileWriter writer = new FileWriter(file);
-        writer.write(result.toJSONString());
-        writer.flush();
-        writer.close();
+
+        CompressedConfigurations compressedConfigurations = new CompressedConfigurations(configurationsToExecute);
+        mapper.writeValue(file, compressedConfigurations);
     }
 
-    private static Set<Set<String>> readFromFile(File file) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONObject result = (JSONObject) parser.parse(new FileReader(file));
+    public Set<Set<String>> readFromFile(File file) throws IOException {
+//        JSONParser parser = new JSONParser();
+//        JSONObject result = (JSONObject) parser.parse(new FileReader(file));
+//
+//        Set<Set<String>> configurationsToExecute = new HashSet<>();
+//
+//        JSONArray configurations = (JSONArray) result.get(SimpleCompression.COMPRESSION);
+//
+//        for(Object entry : configurations) {
+//            JSONArray configurationsResult = (JSONArray) entry;
+//
+//            Set<String> configuration = new HashSet<>();
+//            for(Object configurationResult : configurationsResult) {
+//                configuration.add((String) configurationResult);
+//            }
+//
+//            configurationsToExecute.add(configuration);
+//        }
+//
+//        return configurationsToExecute;
 
-        Set<Set<String>> configurationsToExecute = new HashSet<>();
-
-        JSONArray configurations = (JSONArray) result.get(Simple.COMPRESSION);
-
-        for(Object entry : configurations) {
-            JSONArray configurationsResult = (JSONArray) entry;
-
-            Set<String> configuration = new HashSet<>();
-            for(Object configurationResult : configurationsResult) {
-                configuration.add((String) configurationResult);
-            }
-
-            configurationsToExecute.add(configuration);
-        }
-
-        return configurationsToExecute;
+        return null;
     }
 
-    public static Set<Set<String>> expandOptions(Collection<Set<Set<String>>> optionsSets) {
-        Set<Set<String>> result = new HashSet<>();
-
-        for(Set<Set<String>> optionsSet : optionsSets) {
-            result.addAll(optionsSet);
-        }
-
-        return result;
-    }
 }

@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -11,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,7 @@ import java.util.Set;
 public class JavaRegionClassTransformerTest {
 
     @Test
-    public void testSleep9() throws IOException, ParseException, InterruptedException {
+    public void testSleep9() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String program = "Sleep9";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
@@ -31,7 +33,8 @@ public class JavaRegionClassTransformerTest {
         String[] args = new String[0];
 
         Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
-        Instrumenter.instrument(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerInstrumenter(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        instrumenter.instrument(args);
     }
 
     @Test

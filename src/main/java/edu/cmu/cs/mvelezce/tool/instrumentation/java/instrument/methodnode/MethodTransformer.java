@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
@@ -14,5 +15,7 @@ public interface MethodTransformer {
 
     public void transformMethods() throws IOException;
 
-    void transformMethods(Set<ClassNode> classNodes) throws IOException;
+    public void transformMethods(Set<ClassNode> classNodes) throws IOException;
+
+//    public void setClassTransformer(ClassTransformer classTransformer);
 }

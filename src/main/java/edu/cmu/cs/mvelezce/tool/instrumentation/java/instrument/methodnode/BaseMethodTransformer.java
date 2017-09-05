@@ -9,27 +9,13 @@ import java.util.Set;
 
 public abstract class BaseMethodTransformer implements MethodTransformer {
 
-    private ClassTransformer classTransformer = null;
+    private ClassTransformer classTransformer;
 
-////    public BaseMethodTransformer() {
-////
-////    }
-//
-//    public BaseMethodTransformer(String path) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-//        this.classTransformer = new DefaultBaseClassTransformer(path);
-//    }
-
-    public BaseMethodTransformer() {
-    }
-
-    public ClassTransformer getClassTransformer() {
-        return classTransformer;
-    }
-
-    public void setClassTransformer(ClassTransformer classTransformer) {
+    public BaseMethodTransformer(ClassTransformer classTransformer) {
         this.classTransformer = classTransformer;
     }
-
+    
+    @Override
     public void transformMethods() throws IOException {
         Set<ClassNode> classNodes = this.classTransformer.readClasses();
         this.transformMethods(classNodes);

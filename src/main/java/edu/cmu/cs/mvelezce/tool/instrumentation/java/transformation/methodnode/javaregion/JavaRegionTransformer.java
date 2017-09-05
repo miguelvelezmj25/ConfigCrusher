@@ -5,6 +5,8 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.*;
@@ -13,6 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.util.*;
 
 public abstract class JavaRegionTransformer extends BaseMethodTransformer {
@@ -21,9 +25,14 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
     private Set<JavaRegion> regions;
     private ClassNode currentClassNode = null;
 
-    public JavaRegionTransformer(String directory, Set<JavaRegion> regions) {
+    public JavaRegionTransformer(ClassTransformer classTransformer, String directory, Set<JavaRegion> regions) {
+        super(classTransformer);
         this.directory = directory;
         this.regions = regions;
+    }
+
+    public JavaRegionTransformer(String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        this(new DefaultBaseClassTransformer(directory), directory, regions);
     }
 
     public abstract InsnList addInstructionsStartRegion(JavaRegion javaRegion);
@@ -201,11 +210,7 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
         Collections.reverse(regionsInMethodReversed);
 
         // TODO do we?
-        try {
-            this.calculateASMStartIndex(regionsInMethod, methodNode);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        this.calculateASMStartIndex(regionsInMethod, methodNode);
 
         Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
@@ -289,7 +294,7 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
         }
     }
 
-    private List<String> getJavapResult() throws InterruptedException {
+    private List<String> getJavapResult() {
         String classPackage = this.currentClassNode.name;
         classPackage = classPackage.substring(0, classPackage.lastIndexOf("/"));
         classPackage = classPackage.replace("/", ".");
@@ -305,8 +310,8 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
             Process process = Runtime.getRuntime().exec(command);
 
             BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
             String string;
+
             while ((string = inputReader.readLine()) != null) {
                 if(!string.isEmpty()) {
                     javapResult.add(string);
@@ -320,8 +325,7 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
             }
 
             process.waitFor();
-
-        } catch (IOException ie) {
+        } catch (IOException | InterruptedException ie) {
             ie.printStackTrace();
         }
 
@@ -334,7 +338,7 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
     }
 
 
-    public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) throws InterruptedException {
+    public void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
         List<String> javapResult = this.getJavapResult();
         int methodStartIndex = 0;
 
@@ -416,7 +420,7 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
                 }
             }
 
-            int outputLineBytecodeIndex = -1;
+            int outputLineBytecodeIndex;
             String outputLineBytecodeIndexString = outputLine.substring(0, outputLine.indexOf(":")).trim();
 
             if(StringUtils.isNumeric(outputLineBytecodeIndexString)) {

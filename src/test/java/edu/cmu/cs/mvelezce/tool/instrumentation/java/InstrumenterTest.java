@@ -371,29 +371,6 @@ public class InstrumenterTest {
         Instrumenter.instrument(srcDirectory, classDirectory, regions);
     }
 
-    @Test
-    public void testRunningExample() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "running-example";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/src/main/java";
-
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
-
-        MethodTransformer methodTransformer = new TimerTransformer(classDirectory, decisionsToOptions.keySet());
-        methodTransformer.transformMethods();
-    }
-
 //    @Test
 //    public void testInstrumentPipeline99() throws IOException, InterruptedException {
 //        // Program directory

@@ -14,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class JavaPipelineTest {
 //    public static final double TIMING_ERROR = 1.0;
 
     @Test
-    public void testSleep14() throws IOException, ParseException, InterruptedException {
+    public void testSleep14() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep14";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -74,7 +75,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep18() throws IOException, ParseException, InterruptedException {
+    public void testSleep18() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep18";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -119,7 +120,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testZip() throws IOException, ParseException, InterruptedException {
+    public void testZip() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "zipme";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
@@ -158,7 +159,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testZipSimple() throws IOException, ParseException, InterruptedException {
+    public void testZipSimple() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "zipme-simple";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
@@ -194,7 +195,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testElevatorSimple() throws IOException, ParseException, InterruptedException {
+    public void testElevatorSimple() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "elevator-simple";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
@@ -232,7 +233,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testPngtastic() throws IOException, ParseException, InterruptedException {
+    public void testPngtastic() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "pngtastic";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/target/classes/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/";
@@ -264,7 +265,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testElevator() throws IOException, ParseException, InterruptedException {
+    public void testElevator() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "elevator";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
@@ -294,7 +295,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep1() throws IOException, ParseException, InterruptedException {
+    public void testSleep1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep1";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -324,7 +325,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep3() throws IOException, ParseException, InterruptedException {
+    public void testSleep3() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep3";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -354,7 +355,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep21() throws IOException, ParseException, InterruptedException {
+    public void testSleep21() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep21";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -386,7 +387,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep22() throws IOException, ParseException, InterruptedException {
+    public void testSleep22() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep22";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -418,7 +419,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep23() throws IOException, ParseException, InterruptedException {
+    public void testSleep23() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep23";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -450,7 +451,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep24() throws IOException, ParseException, InterruptedException {
+    public void testSleep24() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep24";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -482,7 +483,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep25() throws IOException, ParseException, InterruptedException {
+    public void testSleep25() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep25";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -514,7 +515,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep26() throws IOException, ParseException, InterruptedException {
+    public void testSleep26() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep26";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -546,7 +547,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep27() throws IOException, ParseException, InterruptedException {
+    public void testSleep27() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep27";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -580,7 +581,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep28() throws IOException, ParseException, InterruptedException {
+    public void testSleep28() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep28";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -612,7 +613,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep29() throws IOException, ParseException, InterruptedException {
+    public void testSleep29() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep29";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -644,7 +645,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep2() throws IOException, ParseException, InterruptedException {
+    public void testSleep2() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep2";
         String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
         String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
@@ -676,7 +677,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep1_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep1_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep1";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -701,7 +702,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep2_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep2_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep2";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -726,7 +727,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep3_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep3_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep3";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -752,7 +753,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep4_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep4_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep4";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -777,7 +778,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep5_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep5_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep5";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -802,7 +803,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep7_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep7_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep7";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -827,7 +828,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep8_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep8_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep8";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -852,7 +853,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep9_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep9_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep9";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -877,7 +878,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep10_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep10_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep10";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -903,7 +904,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep11_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep11_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep11";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -929,7 +930,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep12_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep12_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep12";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -955,7 +956,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep13_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep13_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep13";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -980,7 +981,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep14_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep14_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep14";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1007,7 +1008,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep15_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep15_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep15";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1034,7 +1035,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep16_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep16_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep16";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1060,7 +1061,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep17_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep17_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep17";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1087,7 +1088,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep18_1() throws IOException, ParseException, InterruptedException {
+    public void testSleep18_1() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep18";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1114,7 +1115,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep4() throws IOException, ParseException, InterruptedException {
+    public void testSleep4() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep4";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1136,7 +1137,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep7() throws IOException, ParseException, InterruptedException {
+    public void testSleep7() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep7";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1158,7 +1159,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep8() throws IOException, ParseException, InterruptedException {
+    public void testSleep8() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep8";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1180,7 +1181,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep9() throws IOException, ParseException, InterruptedException {
+    public void testSleep9() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep9";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1202,7 +1203,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep10() throws IOException, ParseException, InterruptedException {
+    public void testSleep10() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         // TODO method 1 and method 2 depend on features so instrumentation is not needed
         String programName = "sleep10";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
@@ -1225,7 +1226,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep11() throws IOException, ParseException, InterruptedException {
+    public void testSleep11() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep11";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1247,7 +1248,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep12() throws IOException, ParseException, InterruptedException {
+    public void testSleep12() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep12";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
@@ -1269,7 +1270,7 @@ public class JavaPipelineTest {
     }
 
     @Test
-    public void testSleep13() throws IOException, ParseException, InterruptedException {
+    public void testSleep13() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "sleep13";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";

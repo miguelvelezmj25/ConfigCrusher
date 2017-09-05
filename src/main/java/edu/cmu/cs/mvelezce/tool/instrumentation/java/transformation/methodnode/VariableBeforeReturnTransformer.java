@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
@@ -9,6 +10,10 @@ import java.util.ListIterator;
 import java.util.Set;
 
 public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
+
+    public VariableBeforeReturnTransformer(ClassTransformer classTransformer) {
+        super(classTransformer);
+    }
 
     @Override
     public Set<MethodNode> getMethodsToInstrument(ClassNode classNode) {

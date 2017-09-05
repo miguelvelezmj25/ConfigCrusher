@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
-import edu.cmu.cs.mvelezce.Example;
 import edu.cmu.cs.mvelezce.Sleep1;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -24,7 +23,7 @@ public class ClassTransformerReaderTest {
     @Test
     public void testReadClass1() throws Exception {
         ClassTransformerReader reader = new ClassTransformerReader();
-        ClassNode classNode = reader.readClass(Example.class.getCanonicalName());
+        ClassNode classNode = reader.readClass(Sleep1.class.getCanonicalName());
         List<MethodNode> methods = classNode.methods;
 
         for(MethodNode method : methods) {

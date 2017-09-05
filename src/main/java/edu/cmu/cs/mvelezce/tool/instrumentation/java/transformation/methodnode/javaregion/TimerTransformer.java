@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
@@ -16,8 +15,10 @@ public class TimerTransformer extends JavaRegionTransformer {
 
     public TimerTransformer(String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
         super(directory, regions);
-        ClassTransformer classTransformer = new DefaultBaseClassTransformer(directory);
-        this.setClassTransformer(classTransformer);
+    }
+
+    public TimerTransformer(ClassTransformer classTransformer, String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(classTransformer, directory, regions);
     }
 
     @Override

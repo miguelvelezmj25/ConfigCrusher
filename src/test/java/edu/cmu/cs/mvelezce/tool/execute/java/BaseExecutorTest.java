@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class ExecutorTest {
+public class BaseExecutorTest {
 
     public static void checkExecutionTimes(Set<PerformanceEntry> expectedPerformances, Set<PerformanceEntry> actualPerformances) {
         for(PerformanceEntry expected : expectedPerformances) {
@@ -50,7 +50,7 @@ public class ExecutorTest {
     @Test
     public void testGetOptions() throws Exception {
         String progName = "elevator";
-        Set<String> options = Executor.getOptions(progName);
+        Set<String> options = BaseExecutor.getOptions(progName);
 
         Assert.assertEquals(6, options.size());
     }
@@ -67,12 +67,12 @@ public class ExecutorTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputSave = BaseExecutor.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         args = new String[0];
-        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputRead = BaseExecutor.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
-        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+        BaseExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
     @Test
@@ -87,12 +87,12 @@ public class ExecutorTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep2.CLASS, args, Sleep2.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputSave = BaseExecutor.measureConfigurationPerformance(Sleep2.CLASS, args, Sleep2.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         args = new String[0];
-        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep2.CLASS, args, Sleep2.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputRead = BaseExecutor.measureConfigurationPerformance(Sleep2.CLASS, args, Sleep2.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
-        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+        BaseExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
     @Test
@@ -107,12 +107,12 @@ public class ExecutorTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep3.CLASS, args, Sleep3.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputSave = BaseExecutor.measureConfigurationPerformance(Sleep3.CLASS, args, Sleep3.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         args = new String[0];
-        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep3.CLASS, args, Sleep3.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputRead = BaseExecutor.measureConfigurationPerformance(Sleep3.CLASS, args, Sleep3.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
-        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+        BaseExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
     @Test
@@ -127,12 +127,12 @@ public class ExecutorTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputSave = BaseExecutor.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         args = new String[0];
-        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputRead = BaseExecutor.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
-        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+        BaseExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
     @Test
@@ -147,12 +147,12 @@ public class ExecutorTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep7.CLASS, args, Sleep7.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputSave = BaseExecutor.measureConfigurationPerformance(Sleep7.CLASS, args, Sleep7.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         args = new String[0];
-        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep7.CLASS, args, Sleep7.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputRead = BaseExecutor.measureConfigurationPerformance(Sleep7.CLASS, args, Sleep7.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
-        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+        BaseExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
     @Test
@@ -167,12 +167,12 @@ public class ExecutorTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep8.CLASS, args, Sleep8.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputSave = BaseExecutor.measureConfigurationPerformance(Sleep8.CLASS, args, Sleep8.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         args = new String[0];
-        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep8.CLASS, args, Sleep8.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputRead = BaseExecutor.measureConfigurationPerformance(Sleep8.CLASS, args, Sleep8.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
-        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+        BaseExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
     @Test
@@ -187,12 +187,12 @@ public class ExecutorTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep9.CLASS, args, Sleep9.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputSave = BaseExecutor.measureConfigurationPerformance(Sleep9.CLASS, args, Sleep9.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         args = new String[0];
-        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep9.CLASS, args, Sleep9.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputRead = BaseExecutor.measureConfigurationPerformance(Sleep9.CLASS, args, Sleep9.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
-        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+        BaseExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
     @Test
@@ -207,12 +207,12 @@ public class ExecutorTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep10.CLASS, args, Sleep10.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputSave = BaseExecutor.measureConfigurationPerformance(Sleep10.CLASS, args, Sleep10.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         args = new String[0];
-        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep10.CLASS, args, Sleep10.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputRead = BaseExecutor.measureConfigurationPerformance(Sleep10.CLASS, args, Sleep10.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
-        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+        BaseExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
     @Test
@@ -227,12 +227,12 @@ public class ExecutorTest {
         Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 
         // Execute
-        Set<PerformanceEntry> outputSave = Executor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputSave = BaseExecutor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
         args = new String[0];
-        Set<PerformanceEntry> outputRead = Executor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
+        Set<PerformanceEntry> outputRead = BaseExecutor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + SleepAdapter.TEST_DIRECTORY, configurationsToExecute);
 
-        ExecutorTest.checkExecutionTimes(outputSave, outputRead);
+        BaseExecutorTest.checkExecutionTimes(outputSave, outputRead);
     }
 
 //    @Test
@@ -253,7 +253,7 @@ public class ExecutorTest {
 ////        args[1] = "-saveres";
 ////
 //
-////        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+////        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
 //    }
 
     @Test
@@ -275,7 +275,7 @@ public class ExecutorTest {
 //        args = new String[1];
 //        args[0] = "-i5";
 
-        Set<PerformanceEntry> measured = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry> measured = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 
     @Test
@@ -297,7 +297,7 @@ public class ExecutorTest {
         args = new String[1];
         args[0] = "-i1";
 
-        Set<PerformanceEntry> measured = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry> measured = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 
     @Test
@@ -319,7 +319,7 @@ public class ExecutorTest {
         args = new String[1];
         args[0] = "-i1";
 
-        Set<PerformanceEntry> measured = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry> measured = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 
     @Test
@@ -328,7 +328,7 @@ public class ExecutorTest {
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
         String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
 
-        Set<String> options = Executor.getOptions(programName);
+        Set<String> options = BaseExecutor.getOptions(programName);
         Set<Set<String>> configurations = Helper.getConfigurations(options);
 
         String[] args = new String[2];
@@ -343,7 +343,7 @@ public class ExecutorTest {
 //        args = new String[1];
 //        args[0] = "-i5";
 
-        Set<PerformanceEntry> measured = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry> measured = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 
     @Test
@@ -371,7 +371,7 @@ public class ExecutorTest {
         configurations.clear();
         configurations.add(options);
 
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 
     @Test
@@ -390,7 +390,7 @@ public class ExecutorTest {
         options.add("A");
 
         Set<Set<String>> configurations = Helper.getConfigurations(options);
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
     }
 
     @Test
@@ -409,7 +409,7 @@ public class ExecutorTest {
         args[1] = "-saveres";
 
         Set<Set<String>> configurations = Helper.getConfigurations(options);
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurations);
 
     }
 
@@ -420,7 +420,7 @@ public class ExecutorTest {
         String[] args = new String[1];
         args[0] = "-i1";
 
-        Set<PerformanceEntry> measuredPerformance = Executor.repeatMeasureConfigurationPerformance(programName, args);
+        Set<PerformanceEntry> measuredPerformance = BaseExecutor.repeatMeasureConfigurationPerformance(programName, args);
     }
 
 }

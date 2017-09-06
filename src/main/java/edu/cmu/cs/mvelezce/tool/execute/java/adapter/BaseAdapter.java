@@ -73,6 +73,11 @@ public abstract class BaseAdapter implements Adapter {
     }
 
     @Override
+    public void execute(Set<String> configuration) {
+        this.execute(configuration, 0);
+    }
+
+    @Override
     public void execute(String mainAdapter, String[] args) {
         StringBuilder output = new StringBuilder();
 

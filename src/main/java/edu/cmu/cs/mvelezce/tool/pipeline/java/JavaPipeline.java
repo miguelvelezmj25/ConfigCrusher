@@ -14,7 +14,6 @@ import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
-import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -34,7 +33,7 @@ public class JavaPipeline {
     public static final String TEST_COLLECTION = "Tests";
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
-    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         // Format return statements with method calls
         // TODO compile both original and instrumented
 //        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
@@ -67,14 +66,16 @@ public class JavaPipeline {
             regionsToOptions.put(region, entry.getValue());
         }
 
-        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
-        System.out.println(pm);
-        JavaPipeline.savePMPerformance(programName, pm);
-
-        return pm;
+//        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        System.out.println(pm);
+//        JavaPipeline.savePMPerformance(programName, pm);
+//
+//        return pm;
+        // TODO
+        return null;
     }
 
-    public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint) throws IOException, ParseException, InterruptedException {
+    public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint) throws IOException, InterruptedException {
         // Format return statements with method calls
         // TODO compile both original and instrumented
 //        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
@@ -125,7 +126,7 @@ public class JavaPipeline {
         return null; // TODO make change since interface changed
     }
 
-    public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         // Format return statements with method calls
 // TODO compile both original and instrumented
 //        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
@@ -165,14 +166,16 @@ public class JavaPipeline {
             regionsToOptions.put(region, entry.getValue());
         }
 
-        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
-        System.out.println(pm);
-        JavaPipeline.savePMPerformance(programName, pm, null);
-
-        return pm;
+//        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        System.out.println(pm);
+//        JavaPipeline.savePMPerformance(programName, pm, null);
+//
+//        return pm;
+        // TODO
+        return null;
     }
 
-    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint) throws IOException, ParseException, InterruptedException {
+    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint) throws IOException, InterruptedException {
 //        // Get regions and options
 //        System.out.println("Region and options");
 //        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, JavaPipeline.LOADTIME_DATABASE, JavaPipeline.TEST_COLLECTION);
@@ -206,7 +209,7 @@ public class JavaPipeline {
         return null; // TODO make change since interface changed
     }
 
-    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint, String sdgFile, List<String> features) throws IOException, ParseException, InterruptedException {
+    public static PerformanceModel buildPerformanceModel(String programName, String[] args, String srcDirectory, String classDirectory, String entryPoint, String sdgFile, List<String> features) throws IOException, InterruptedException {
 //        // Get regions and options
 //        System.out.println("Region and options");
 //        Map<JavaRegion, Set<String>> partialRegionsToOptions = ProgramAnalysis.analyze(programName, args, sdgFile, entryPoint, features);
@@ -252,7 +255,7 @@ public class JavaPipeline {
         System.out.println(configurationsToExecute);
     }
 
-    public static void savePMPerformance(String programName, PerformanceModel pm) throws IOException, ParseException {
+    public static void savePMPerformance(String programName, PerformanceModel pm) throws IOException {
         File file = new File(JavaPipeline.PM_RES_DIR + "/" + programName + Options.DOT_CSV);
 
         if(file.exists()) {
@@ -305,7 +308,7 @@ public class JavaPipeline {
         writer.close();
     }
 
-    public static void savePMPerformance(String programName, PerformanceModel pm, List<PerformanceStatistic> perfStats) throws IOException, ParseException {
+    public static void savePMPerformance(String programName, PerformanceModel pm, List<PerformanceStatistic> perfStats) throws IOException {
         JavaPipeline.savePMPerformance(programName, pm);
 
         double avgStd = 0;

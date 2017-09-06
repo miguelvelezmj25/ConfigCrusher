@@ -6,7 +6,6 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import org.apache.commons.collections4.CollectionUtils;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -424,215 +423,215 @@ public class SimpleCompressionTest {
     }
 
     @Test
-    public void testPngtastic() throws IOException, ParseException {
-        String programName = "pngtastic";
-
-        // Program arguments
-        String[] args = new String[0];
-
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
-
-//        args = new String[1];
-//        args[0] = "-saveres";
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
-
-        Compression compressor = new SimpleCompression(programName);
-        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
-        System.out.println(configurationsToExecute.size());
+    public void testPngtastic() throws IOException {
+//        String programName = "pngtastic";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+//
+////        args = new String[1];
+////        args[0] = "-saveres";
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
+//        System.out.println(configurationsToExecute.size());
     }
 
     @Test
-    public void testSleep28() throws IOException, ParseException {
-        String programName = "sleep28";
-
-        // Program arguments
-        String[] args = new String[0];
-
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
-
-//        args = new String[1];
-//        args[0] = "-saveres";
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
-
-        Compression compressor = new SimpleCompression(programName);
-        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
-        System.out.println(configurationsToExecute.size());
+    public void testSleep28() throws IOException {
+//        String programName = "sleep28";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+//
+////        args = new String[1];
+////        args[0] = "-saveres";
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
+//        System.out.println(configurationsToExecute.size());
     }
 
     @Test
-    public void testSleep30() throws IOException, ParseException {
-        String programName = "sleep30";
-
-        // Program arguments
-        String[] args = new String[0];
-
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
-
-//        args = new String[1];
-//        args[0] = "-saveres";
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
-
-        Compression compressor = new SimpleCompression(programName);
-        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
-        System.out.println(configurationsToExecute.size());
+    public void testSleep30() throws IOException {
+//        String programName = "sleep30";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+//
+////        args = new String[1];
+////        args[0] = "-saveres";
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
+//        System.out.println(configurationsToExecute.size());
     }
 
     @Test
-    public void testElevator() throws IOException, ParseException {
-        String programName = "elevator";
-
-        // Program arguments
-        String[] args = new String[0];
-
-
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
-
-//        args = new String[1];
-//        args[0] = "-saveres";
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
-
-        Compression compressor = new SimpleCompression(programName);
-        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
-        System.out.println(configurationsToExecute.size());
+    public void testElevator() throws IOException {
+//        String programName = "elevator";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+//
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+//
+////        args = new String[1];
+////        args[0] = "-saveres";
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
+//        System.out.println(configurationsToExecute.size());
     }
 
     @Test
-    public void testSleep3() throws IOException, ParseException {
-        String programName = "sleep3";
-
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
-
-        Compression compressor = new SimpleCompression(programName);
-        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
-        System.out.println(configurationsToExecute.size());
+    public void testSleep3() throws IOException {
+//        String programName = "sleep3";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+////        String[] args = new String[1];
+////        args[0] = "-saveres";
+//
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
+//        System.out.println(configurationsToExecute.size());
     }
 
     @Test
-    public void testSleep10() throws IOException, ParseException {
-        String programName = "sleep10";
-
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
-
-        Compression compressor = new SimpleCompression(programName);
-        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
-        System.out.println(configurationsToExecute.size());
+    public void testSleep10() throws IOException {
+//        String programName = "sleep10";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+////        String[] args = new String[1];
+////        args[0] = "-saveres";
+//
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
+//        System.out.println(configurationsToExecute.size());
     }
 
     @Test
-    public void testSleep14() throws IOException, ParseException {
-        String programName = "sleep14";
-
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
-
-        Compression compressor = new SimpleCompression(programName);
-        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
-        System.out.println(configurationsToExecute.size());
+    public void testSleep14() throws IOException {
+//        String programName = "sleep14";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+////        String[] args = new String[1];
+////        args[0] = "-saveres";
+//
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
+//        System.out.println(configurationsToExecute.size());
     }
 
     @Test
-    public void testSleep15() throws IOException, ParseException {
-        String programName = "sleep15";
-
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
-
-        Compression compressor = new SimpleCompression(programName);
-        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
-        System.out.println(configurationsToExecute.size());
+    public void testSleep15() throws IOException {
+//        String programName = "sleep15";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+////        String[] args = new String[1];
+////        args[0] = "-saveres";
+//
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
+//        System.out.println(configurationsToExecute.size());
     }
 
     @Test
-    public void testGPL() throws IOException, ParseException {
-        String programName = "gpl";
-
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
-
-        Compression compressor = new SimpleCompression(programName);
-        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
-        System.out.println(configurationsToExecute.size());
+    public void testGPL() throws IOException {
+//        String programName = "gpl";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+////        String[] args = new String[1];
+////        args[0] = "-saveres";
+//
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = ProgramAnalysis.analyze(programName, args);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
+//        System.out.println(configurationsToExecute.size());
     }
 
     @Test
-    public void testRunningExample() throws IOException, ParseException {
+    public void testRunningExample() throws IOException {
         String programName = "running-example";
 
         // Program arguments
@@ -656,7 +655,7 @@ public class SimpleCompressionTest {
     }
 
     @Test
-    public void testRunningExample1() throws IOException, ParseException {
+    public void testRunningExample1() throws IOException {
         String programName = "running-example";
 
         // Program arguments

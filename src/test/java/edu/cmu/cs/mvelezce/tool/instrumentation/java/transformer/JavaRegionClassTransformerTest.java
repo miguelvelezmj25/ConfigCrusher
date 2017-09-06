@@ -7,7 +7,6 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,7 +23,7 @@ import java.util.Set;
 public class JavaRegionClassTransformerTest {
 
     @Test
-    public void testSleep9() throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public void testSleep9() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String program = "Sleep9";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
@@ -38,7 +37,7 @@ public class JavaRegionClassTransformerTest {
     }
 
     @Test
-    public void testCalculateASMStartIndex1() throws IOException, ParseException {
+    public void testCalculateASMStartIndex1() throws IOException {
         String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String programName = "Dummy3";
         String[] args = new String[0];

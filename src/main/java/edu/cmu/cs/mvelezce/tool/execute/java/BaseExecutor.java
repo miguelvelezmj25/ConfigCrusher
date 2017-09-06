@@ -8,7 +8,6 @@ import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 import org.apache.commons.io.FileUtils;
-import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,14 +21,14 @@ public abstract class BaseExecutor implements Executor {
     public static final String DIRECTORY = Options.DIRECTORY + "/executor/java/programs";
 
     private String programName;
-    private String mainClass;
+    private String entryPoint;
     private String dir;
     private Set<Set<String>> configurations;
     private int repetitions = 0;
 
-    public BaseExecutor(String programName, String mainClass, String dir, Set<Set<String>> configurations) {
+    public BaseExecutor(String programName, String entryPoint, String dir, Set<Set<String>> configurations) {
         this.programName = programName;
-        this.mainClass = mainClass;
+        this.entryPoint = entryPoint;
         this.dir = dir;
         this.configurations = configurations;
     }
@@ -87,8 +86,8 @@ public abstract class BaseExecutor implements Executor {
         return programName;
     }
 
-    public String getMainClass() {
-        return mainClass;
+    public String getEntryPoint() {
+        return entryPoint;
     }
 
     public String getDir() {

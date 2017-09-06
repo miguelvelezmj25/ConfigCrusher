@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
+import org.apache.commons.io.FileUtils;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
@@ -24,31 +25,39 @@ public abstract class BaseExecutor implements Executor {
     private String mainClass;
     private String dir;
     private Set<Set<String>> configurations;
-    private int repetitions;
+    private int repetitions = 0;
 
-    public BaseExecutor(String programName, String mainClass, String dir, Set<Set<String>> configurations, int repetitions) {
+    public BaseExecutor(String programName, String mainClass, String dir, Set<Set<String>> configurations) {
         this.programName = programName;
         this.mainClass = mainClass;
         this.dir = dir;
         this.configurations = configurations;
-        this.repetitions = repetitions;
     }
 
     @Override
     public Set<PerformanceEntry> execute(String[] args) throws IOException {
         Options.getCommandLine(args);
 
-        String outputFile = BaseExecutor.DIRECTORY + "/" + programName;
-        File file = new File(outputFile);
+        String outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
+        File outputFile = new File(outputDir);
 
-        Options.checkIfDeleteResult(file);
+        Options.checkIfDeleteResult(outputFile);
 
-        if(file.exists()) {
+        if(outputFile.exists()) {
             // TODO have to aggregate
-            Execution execution = this.readFromFile(file);
+            Execution execution = this.readFromFile(outputFile);
             throw new RuntimeException();
         }
 
+        // TODO remove this once we have fixed how to read and aggregate results
+        outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
+        outputFile = new File(outputDir);
+
+        if(outputFile.exists()) {
+            FileUtils.forceDelete(outputFile);
+        }
+
+        this.repetitions = Options.getIterations();
         Set<PerformanceEntry> performanceEntries = this.execute();
 
         // TODO
@@ -64,8 +73,7 @@ public abstract class BaseExecutor implements Executor {
         List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
 
         for(int i = 0; i < this.repetitions; i++) {
-            Set<PerformanceEntry> results = this.execute(this.programName + "_" + i);
-
+            Set<PerformanceEntry> results = this.execute(i);
             executionsPerformance.add(results);
         }
 
@@ -280,9 +288,10 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException {
+    public void writeToFile(String iteration, Set<String> configuration, List<Region> executedRegions) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String outputFile = BaseExecutor.DIRECTORY + "/" + programName + "/" + UUID.randomUUID() + Options.DOT_JSON;
+        String outputFile = BaseExecutor.DIRECTORY + "/" + this.programName + "/" + iteration + "/" + UUID.randomUUID()
+                + Options.DOT_JSON;
         File file = new File(outputFile);
         file.getParentFile().mkdirs();
 

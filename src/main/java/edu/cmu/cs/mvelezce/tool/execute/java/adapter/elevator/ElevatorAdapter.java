@@ -52,6 +52,11 @@ public class ElevatorAdapter extends BaseAdapter {
     }
 
     @Override
+    public void execute(Set<String> configuration, int iteration) {
+
+    }
+
+    @Override
     public void execute(Set<String> configuration) {
         String[] argsArray = ElevatorAdapter.adaptConfigurationToProgram(configuration);
         StringBuilder args = new StringBuilder();

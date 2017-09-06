@@ -145,7 +145,7 @@ public class JavaPipeline {
         System.out.println("");
 
         System.out.println("####################### Measure performance #######################");
-        Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute, Options.getIterations());
+        Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
         Set<PerformanceEntry> measuredPerformance = executor.execute(args);
 
         // TODO

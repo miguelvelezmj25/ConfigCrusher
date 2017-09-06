@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public interface Main {
 
-    public void logExecution(String programName, String[] args) throws IOException;
+    public void logExecution() throws IOException;
 
 }

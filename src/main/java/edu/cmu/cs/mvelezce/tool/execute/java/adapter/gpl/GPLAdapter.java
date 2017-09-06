@@ -61,6 +61,11 @@ public class GPLAdapter extends BaseAdapter {
     }
 
     @Override
+    public void execute(Set<String> configuration, int iteration) {
+
+    }
+
+    @Override
     public void execute(Set<String> configuration) {
         String[] argsArray = GPLAdapter.adaptConfigurationToProgram(configuration);
         StringBuilder args = new StringBuilder();

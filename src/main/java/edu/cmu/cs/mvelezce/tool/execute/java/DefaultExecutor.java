@@ -21,50 +21,51 @@ import java.util.Set;
 public class DefaultExecutor extends BaseExecutor {
 
     public DefaultExecutor() {
-        this(null, null, null, null);
+        this(null);
+    }
+
+    public DefaultExecutor(String programName) {
+        this(programName, null, null, null);
     }
 
     public DefaultExecutor(String programName, String mainClass, String dir, Set<Set<String>> configurations) {
-        this(programName, mainClass, dir, configurations, 1);
-    }
-
-    public DefaultExecutor(String programName, String mainClass, String dir, Set<Set<String>> configurations, int repetitions) {
-        super(programName, mainClass, dir, configurations, repetitions);
+        super(programName, mainClass, dir, configurations);
     }
 
     @Override
-    public Set<PerformanceEntry> execute(String programName) throws IOException {
+    public Set<PerformanceEntry> execute(int iteration) throws IOException {
         // TODO factory pattern or switch statement to create the right adapter
         BaseAdapter baseAdapter;
 
-        if(programName.contains("elevator")) {
-            baseAdapter = new ElevatorAdapter(programName, this.getMainClass(), this.getDir());
+        if(this.getProgramName().contains("elevator")) {
+            baseAdapter = new ElevatorAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
         }
-        else if(programName.contains("gpl")) {
-            baseAdapter = new GPLAdapter(programName, this.getMainClass(), this.getDir());
+        else if(this.getProgramName().contains("gpl")) {
+            baseAdapter = new GPLAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
         }
-        else if(programName.contains("sleep")) {
-            baseAdapter = new SleepAdapter(programName, this.getMainClass(), this.getDir());
+        else if(this.getProgramName().contains("sleep")) {
+            baseAdapter = new SleepAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
         }
-        else if(programName.contains("zipme")) {
-            baseAdapter = new ZipmeAdapter(programName, this.getMainClass(), this.getDir());
+        else if(this.getProgramName().contains("zipme")) {
+            baseAdapter = new ZipmeAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
         }
-        else if(programName.contains("pngtastic")) {
-            baseAdapter = new PngtasticAdapter(programName, this.getMainClass(), this.getDir());
+        else if(this.getProgramName().contains("pngtastic")) {
+            baseAdapter = new PngtasticAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
         }
         else {
-            throw new RuntimeException("Could not create an adapter for " + programName);
+            throw new RuntimeException("Could not create an adapter for " + this.getProgramName());
         }
 
         for(Set<String> configuration : this.getConfigurations()) {
-            baseAdapter.execute(configuration);
+            baseAdapter.execute(configuration, iteration);
 
             if(!Regions.getExecutingRegions().isEmpty()) {
                 throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");
             }
         }
 
-        String outputFile = BaseExecutor.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        // TODO get all files from this directory
+        String outputFile = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + Options.DOT_JSON;
         File file = new File(outputFile);
 
 //        Execution result = this.readFromFile(file);

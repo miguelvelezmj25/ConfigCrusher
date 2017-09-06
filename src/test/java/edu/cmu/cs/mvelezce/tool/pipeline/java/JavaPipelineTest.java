@@ -7,6 +7,8 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.DefaultAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import org.json.simple.parser.ParseException;
@@ -63,7 +65,8 @@ public class JavaPipelineTest {
 
         for(Set<String> configuration : configurations) {
             System.out.println(configuration);
-            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
+            Adapter adapter = new DefaultAdapter();
+            String[] sleepConfiguration = adapter.configurationAsMainArguments(configuration);
             long start = System.nanoTime();
             Sleep14.main(sleepConfiguration);
             long end = System.nanoTime();
@@ -108,7 +111,8 @@ public class JavaPipelineTest {
 
         for(Set<String> configuration : configurations) {
             System.out.println(configuration);
-            String[] sleepConfiguration = SleepAdapter.adaptConfigurationToProgram(configuration);
+            Adapter adapter = new DefaultAdapter();
+            String[] sleepConfiguration = adapter.configurationAsMainArguments(configuration);
             long start = System.nanoTime();
             Sleep18.main(sleepConfiguration);
             long end = System.nanoTime();

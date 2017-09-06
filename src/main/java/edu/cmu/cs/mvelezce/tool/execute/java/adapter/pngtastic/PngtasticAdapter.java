@@ -19,7 +19,8 @@ public class PngtasticAdapter extends BaseAdapter {
     };
 
     public PngtasticAdapter(String programName, String mainClass, String directory) {
-        super(programName, mainClass, directory);
+//        super(programName, mainClass, directory);
+        super(null, null, null, null);
     }
 
     public static String[] adaptConfigurationToProgram(Set<String> configuration) {
@@ -59,7 +60,7 @@ public class PngtasticAdapter extends BaseAdapter {
             args.append(" ");
         }
 
-        BaseAdapter.executeJavaProgram(programName, PngtasticMain.PNGTASTIC_MAIN, this.mainClass, this.directory, args.toString().trim());
+//        BaseAdapter.executeJavaProgram(programName, PngtasticMain.PNGTASTIC_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

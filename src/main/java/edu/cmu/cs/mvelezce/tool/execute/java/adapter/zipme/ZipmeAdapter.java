@@ -23,7 +23,8 @@ public class ZipmeAdapter extends BaseAdapter {
     };
 
     public ZipmeAdapter(String programName, String mainClass, String directory) {
-        super(programName, mainClass, directory);
+//        super(programName, mainClass, directory);
+        super(null, null, null, null);
     }
 
     public static String[] adaptConfigurationToProgram(Set<String> configuration) {
@@ -63,7 +64,7 @@ public class ZipmeAdapter extends BaseAdapter {
             args.append(" ");
         }
 
-        BaseAdapter.executeJavaProgram(programName, ZipmeMain.ZIPME_MAIN, this.mainClass, this.directory, args.toString().trim());
+//        BaseAdapter.executeJavaProgram(programName, ZipmeMain.ZIPME_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

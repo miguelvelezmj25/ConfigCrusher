@@ -2,7 +2,9 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,51 +12,26 @@ import java.util.Set;
  */
 public class SleepAdapter extends BaseAdapter {
 
-    public static final String TEST_DIRECTORY = "test/out/production/test";
-    private static final String[] CONFIGURATIONS = {"A", "B", "C", "D", "IA", "DA"};
+    public SleepAdapter() {
+        this(null, null, null);
+    }
 
     public SleepAdapter(String programName, String mainClass, String directory) {
-        super(programName, mainClass, directory);
-    }
-
-    public static String[] adaptConfigurationToProgram(Set<String> configuration) {
-        String[] sleepConfiguration = new String[CONFIGURATIONS.length];
-
-        for(int i = 0; i < sleepConfiguration.length; i++) {
-            if(configuration.contains(SleepAdapter.CONFIGURATIONS[i])) {
-                sleepConfiguration[i] = "true";
-            }
-            else {
-                sleepConfiguration[i] = "false";
-            }
-        }
-
-        return sleepConfiguration;
-    }
-
-    public static Set<String> adaptConfigurationToPerformanceMeasurement(String[] configuration) {
-        Set<String> performanceConfiguration = new HashSet<>();
-
-        for(int i = 0; i < configuration.length; i++) {
-            if(configuration[i].equals("true")) {
-                performanceConfiguration.add(SleepAdapter.CONFIGURATIONS[i]);
-            }
-        }
-
-        return performanceConfiguration;
+        super(programName, mainClass, directory, readOptions());
     }
 
     @Override
     public void execute(Set<String> configuration) {
-        String[] argsArray = SleepAdapter.adaptConfigurationToProgram(configuration);
-        StringBuilder args = new StringBuilder();
+        String[] args = this.configurationAsMainArguments(configuration);
 
-        for(String arg : argsArray) {
-            args.append(arg);
-            args.append(" ");
-        }
+        BaseAdapter.executeJavaProgram(this.getProgramName(), SleepMain.SLEEP_MAIN, this.getMainClass(),
+                this.getDirectory(), args);
+    }
 
-        BaseAdapter.executeJavaProgram(programName, SleepMain.SLEEP_MAIN, this.mainClass, this.directory, args.toString().trim());
+    public static List<String> readOptions() {
+        String[] options = {"A", "B", "C", "D", "IA", "DA"};
+
+        return Arrays.asList(options);
     }
 
 }

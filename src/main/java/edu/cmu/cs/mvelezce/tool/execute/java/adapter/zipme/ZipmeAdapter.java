@@ -55,6 +55,11 @@ public class ZipmeAdapter extends BaseAdapter {
     }
 
     @Override
+    public void execute(Set<String> configuration, int iteration) {
+
+    }
+
+    @Override
     public void execute(Set<String> configuration) {
         String[] argsArray = ZipmeAdapter.adaptConfigurationToProgram(configuration);
         StringBuilder args = new StringBuilder();

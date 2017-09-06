@@ -6,7 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
@@ -53,7 +53,7 @@ public class JavaPipeline {
         System.out.println("");
 
         System.out.println("####################### Measure performance #######################");
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, instrumentClassDirectory, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, instrumentClassDirectory, configurationsToExecute);
         System.out.println("");
 
         System.out.println("####################### Build performance model #######################");
@@ -98,11 +98,11 @@ public class JavaPipeline {
 //
 //        Options.getCommandLine(args);
 //        for(int i = 0; i < Options.getIterations(); i++) {
-//            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
+//            executionsPerformance.add(BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
 //        }
 //
-//        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
-//        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
+//        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+//        Set<PerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
 //        System.out.println("");
 //
 //        System.out.println("####################### Build performance model #######################");
@@ -147,11 +147,11 @@ public class JavaPipeline {
 
         Options.getCommandLine(args);
         for(int i = 0; i < Options.getIterations(); i++) {
-            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
+            executionsPerformance.add(BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
         }
 
-        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
-        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
+        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+        Set<PerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
         System.out.println("");
 
         System.out.println("####################### Build performance model #######################");
@@ -188,7 +188,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("Measure performance");
-//        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
+//        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
 //        System.out.println("");
 //
 //        System.out.println("Build performance model");
@@ -222,7 +222,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("Measure performance");
-//        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
+//        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
 //        System.out.println("");
 //
 //        System.out.println("Build performance model");
@@ -262,7 +262,7 @@ public class JavaPipeline {
         String[] args = new String[0];
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> measuredConfigurations = compression.compressConfigurations(args);
-        Set<String> options = Executor.getOptions(programName);
+        Set<String> options = BaseExecutor.getOptions(programName);
         Set<Set<String>> configurations = Helper.getConfigurations(options);
 
         StringBuilder result = new StringBuilder();

@@ -2,8 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.approaches;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
+import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 import org.json.simple.parser.ParseException;
@@ -31,11 +30,11 @@ public class BruteForce {
         List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
 
         for(int i = 0; i < Options.getIterations(); i++) {
-            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args));
+            executionsPerformance.add(BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, args));
         }
 
-        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
-        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
+        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+        Set<PerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
         programName = programName.substring(0, programName.indexOf("-"));
         BruteForce.saveBFPerformance(programName, perfStats);
 
@@ -50,7 +49,7 @@ public class BruteForce {
         String[] args = new String[0];
         Options.getCommandLine(args);
 
-        Set<String> options = Executor.getOptions(programName);
+        Set<String> options = BaseExecutor.getOptions(programName);
         Set<Set<String>> configurations = Helper.getConfigurations(options);
 
         programName += "-bf";
@@ -63,11 +62,11 @@ public class BruteForce {
         List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
 
         for(int i = 0; i < Options.getIterations(); i++) {
-            executionsPerformance.add(Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, args, entryPoint, classDir, configurations));
+            executionsPerformance.add(BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, args, entryPoint, classDir, configurations));
         }
 
-        List<PerformanceStatistic> perfStats = Executor.getExecutionsStats(executionsPerformance);
-        Set<PerformanceEntry> measuredPerformance = Executor.averageExecutions(perfStats, executionsPerformance.get(0));
+        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+        Set<PerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
         programName = programName.substring(0, programName.indexOf("-"));
         BruteForce.saveBFPerformance(programName, perfStats);
 

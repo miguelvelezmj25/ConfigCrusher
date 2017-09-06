@@ -27,7 +27,7 @@ import java.util.*;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class Executor {
+public class BaseExecutor {
     public static final String DIRECTORY = Options.DIRECTORY + "/executor/java/programs";
     public static final String UNDERSCORE = "_";
 
@@ -40,7 +40,7 @@ public class Executor {
     public static final String END_TIME = "endTime";
 
     private static Set<PerformanceEntry> returnIfExists(String programName) throws IOException, ParseException {
-        String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        String outputFile = BaseExecutor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
@@ -48,7 +48,7 @@ public class Executor {
 
         if(file.exists()) {
             try {
-                measuredPerformance = Executor.readFromFile(file);
+                measuredPerformance = BaseExecutor.readFromFile(file);
             } catch (ParseException pe) {
                 throw new RuntimeException("Could not parse the cached results");
             }
@@ -60,17 +60,17 @@ public class Executor {
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args) throws IOException, ParseException {
         Options.getCommandLine(args);
 
-        return Executor.returnIfExists(programName);
+        return BaseExecutor.returnIfExists(programName);
     }
 
     public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
-        Set<PerformanceEntry> results = Executor.measureConfigurationPerformance(programName, args);
+        Set<PerformanceEntry> results = BaseExecutor.measureConfigurationPerformance(programName, args);
 
         if(results != null) {
             return results;
         }
 
-        Set<PerformanceEntry> measuredPerformance = Executor.measureConfigurationPerformance(programName, entryPoint, directory, configurationsToExecute);
+        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, entryPoint, directory, configurationsToExecute);
 
         return measuredPerformance;
     }
@@ -81,7 +81,7 @@ public class Executor {
         List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
 
         for(int i = 0; i < iterations; i++) {
-            Set<PerformanceEntry> results = Executor.returnIfExists(programName + Executor.UNDERSCORE + i);
+            Set<PerformanceEntry> results = BaseExecutor.returnIfExists(programName + BaseExecutor.UNDERSCORE + i);
 
             if(results != null) {
                 executionsPerformance.add(results);
@@ -89,8 +89,8 @@ public class Executor {
 
         }
 
-        List<PerformanceStatistic> execStats = Executor.getExecutionsStats(executionsPerformance);
-        Set<PerformanceEntry> processedRes = Executor.averageExecutions(execStats, executionsPerformance.get((0)));
+        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
 
         return processedRes;
     }
@@ -102,19 +102,19 @@ public class Executor {
         int iterations = Options.getIterations();
 
         for(int i = 0; i < iterations; i++) {
-            Set<PerformanceEntry> results = Executor.returnIfExists(programName + Executor.UNDERSCORE + i);
+            Set<PerformanceEntry> results = BaseExecutor.returnIfExists(programName + BaseExecutor.UNDERSCORE + i);
 
             if(results != null) {
                 executionsPerformance.add(results);
                 continue;
             }
 
-            measuredPerformance = Executor.measureConfigurationPerformance(programName + Executor.UNDERSCORE + i, entryPoint, directory, configurationsToExecute);
+            measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, entryPoint, directory, configurationsToExecute);
             executionsPerformance.add(measuredPerformance);
         }
 
-        List<PerformanceStatistic> execStats = Executor.getExecutionsStats(executionsPerformance);
-        Set<PerformanceEntry> processedRes = Executor.averageExecutions(execStats, executionsPerformance.get((0)));
+        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
 
         return processedRes;
     }
@@ -151,16 +151,16 @@ public class Executor {
             }
         }
 
-        String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        String outputFile = BaseExecutor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
-        return Executor.readFromFile(file);
+        return BaseExecutor.readFromFile(file);
     }
 
     public static void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
         // TODO why not just call the writeToFile method?
         System.out.println("Executed regions size: " + executedRegions.size());
-        Executor.writeToFile(programName, configuration, executedRegions);
+        BaseExecutor.writeToFile(programName, configuration, executedRegions);
     }
 
     public static List<PerformanceStatistic> getExecutionsStats(List<Set<PerformanceEntry>> executionsPerformance) {
@@ -265,7 +265,7 @@ public class Executor {
 
     private static void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
         ObjectMapper mapper = new ObjectMapper();
-        String outputFile = Executor.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        String outputFile = BaseExecutor.DIRECTORY + "/" + programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         List<Execution> executions = new ArrayList<>();

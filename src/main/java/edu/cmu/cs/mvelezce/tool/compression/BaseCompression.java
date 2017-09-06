@@ -27,7 +27,7 @@ public abstract class BaseCompression implements Compression {
 
     public void writeToFile(Set<Set<String>> configurationsToExecute) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String outputFile = SimpleCompression.DIRECTORY + "/" + this.getProgramName() + Options.DOT_JSON;
+        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName + Options.DOT_JSON;
         File file = new File(outputFile);
 
         CompressedConfigurations compressedConfigurations = new CompressedConfigurations(configurationsToExecute);

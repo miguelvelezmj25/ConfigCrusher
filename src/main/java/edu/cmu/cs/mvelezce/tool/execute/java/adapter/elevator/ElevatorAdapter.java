@@ -20,7 +20,8 @@ public class ElevatorAdapter extends BaseAdapter {
     };
 
     public ElevatorAdapter(String programName, String mainClass, String directory) {
-        super(programName, mainClass, directory);
+//        super(programName, mainClass, directory);
+        super(null, null, null, null);
     }
 
     public static String[] adaptConfigurationToProgram(Set<String> configuration) {
@@ -60,7 +61,7 @@ public class ElevatorAdapter extends BaseAdapter {
             args.append(" ");
         }
 
-        BaseAdapter.executeJavaProgram(programName, ElevatorMain.ELEVATOR_MAIN, this.mainClass, this.directory, args.toString().trim());
+//        BaseAdapter.executeJavaProgram(programName, ElevatorMain.ELEVATOR_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

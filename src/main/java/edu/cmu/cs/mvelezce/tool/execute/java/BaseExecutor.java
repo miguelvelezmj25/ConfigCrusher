@@ -38,13 +38,15 @@ public abstract class BaseExecutor implements Executor {
     public Set<PerformanceEntry> execute(String[] args) throws IOException {
         Options.getCommandLine(args);
 
-        String outputFile = BaseExecutor.DIRECTORY + "/" + programName + Options.DOT_JSON;
+        String outputFile = BaseExecutor.DIRECTORY + "/" + programName;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
 
         if(file.exists()) {
-            return this.readFromFile(file);
+            // TODO have to aggregate
+            Execution execution = this.readFromFile(file);
+            throw new RuntimeException();
         }
 
         Set<PerformanceEntry> performanceEntries = this.execute();
@@ -67,6 +69,7 @@ public abstract class BaseExecutor implements Executor {
             executionsPerformance.add(results);
         }
 
+        // TODO
 //        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
 //        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
         return null;
@@ -172,12 +175,12 @@ public abstract class BaseExecutor implements Executor {
 //        return processedRes;
 //    }
 
-    // TODO
-    public void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
-        // TODO why not just call the writeToFile method?
-        System.out.println("Executed regions size: " + executedRegions.size());
-        this.writeToFile(programName, configuration, executedRegions);
-    }
+//    // TODO
+//    public void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
+//        // TODO why not just call the writeToFile method?
+//        System.out.println("Executed regions size: " + executedRegions.size());
+//        this.writeToFile(programName, configuration, executedRegions);
+//    }
 
     public static List<PerformanceStatistic> getExecutionsStats(List<Set<PerformanceEntry>> executionsPerformance) {
         Set<PerformanceEntry> entries = executionsPerformance.get(0);
@@ -277,14 +280,30 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public Set<PerformanceEntry> readFromFile(File file) throws IOException {
+    public void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        List<Execution> executions = mapper.readValue(file, new TypeReference<List<Execution>>() {
+        String outputFile = BaseExecutor.DIRECTORY + "/" + programName + "/" + UUID.randomUUID() + Options.DOT_JSON;
+        File file = new File(outputFile);
+        file.getParentFile().mkdirs();
+
+//        List<Execution> executions = new ArrayList<>();
+//
+//        if(file.exists()) {
+//            executions = mapper.readValue(file, new TypeReference<List<Execution>>() {
+//            });
+//        }
+
+        Execution execution = new Execution(configuration, executedRegions);
+        mapper.writeValue(file, execution);
+    }
+
+    @Override
+    public Execution readFromFile(File file) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Execution execution = mapper.readValue(file, new TypeReference<Execution>() {
         });
 
-        // TODO
-//        return null;
-        throw new RuntimeException();
+        return execution;
     }
 
 }

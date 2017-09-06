@@ -5,7 +5,8 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
-import org.json.simple.parser.ParseException;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -14,11 +15,11 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class SleepMain {
+public class SleepMain implements Main {
 
     public static final String SLEEP_MAIN = SleepMain.class.getCanonicalName();
 
-    public static void main(String[] args) throws InterruptedException, IOException, ParseException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         String programName = args[0];
         String mainClass = args[1];
         String[] sleepArgs = Arrays.copyOfRange(args, 2, args.length);
@@ -213,8 +214,17 @@ public class SleepMain {
             throw new RuntimeException("Could not find the main class " + mainClass);
         }
 
-        Set<String> performanceConfiguration = SleepAdapter.adaptConfigurationToPerformanceMeasurement(sleepArgs);
-        Executor executor = new DefaultExecutor();
-        executor.writeToFile(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
+        Main main = new SleepMain();
+        main.logExecution(programName, sleepArgs);
     }
+
+    @Override
+    public void logExecution(String programName, String[] args) throws IOException {
+        Adapter adapter = new SleepAdapter();
+        Set<String> configuration = adapter.configurationAsSet(args);
+
+        Executor executor = new DefaultExecutor();
+        executor.writeToFile(programName, configuration, Regions.getExecutedRegionsTrace());
+    }
+
 }

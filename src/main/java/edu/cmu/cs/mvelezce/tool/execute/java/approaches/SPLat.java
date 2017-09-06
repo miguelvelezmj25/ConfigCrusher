@@ -1,16 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.approaches;
 
-import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
-import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
-import org.json.simple.parser.ParseException;
-
-import java.io.*;
-import java.util.*;
-
 /**
  * Created by mvelezce on 7/9/17.
  */

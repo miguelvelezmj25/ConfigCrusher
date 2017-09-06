@@ -6,9 +6,9 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.pngtastic.PngtasticAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 
 import java.io.File;
@@ -28,8 +28,8 @@ public class DefaultExecutor extends BaseExecutor {
         this(programName, null, null, null);
     }
 
-    public DefaultExecutor(String programName, String mainClass, String dir, Set<Set<String>> configurations) {
-        super(programName, mainClass, dir, configurations);
+    public DefaultExecutor(String programName, String entryPoint, String dir, Set<Set<String>> configurations) {
+        super(programName, entryPoint, dir, configurations);
     }
 
     @Override
@@ -38,19 +38,22 @@ public class DefaultExecutor extends BaseExecutor {
         BaseAdapter baseAdapter;
 
         if(this.getProgramName().contains("elevator")) {
-            baseAdapter = new ElevatorAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
+            baseAdapter = new ElevatorAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
         }
         else if(this.getProgramName().contains("gpl")) {
-            baseAdapter = new GPLAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
+            baseAdapter = new GPLAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
         }
         else if(this.getProgramName().contains("sleep")) {
-            baseAdapter = new SleepAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
+            baseAdapter = new SleepAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
         }
         else if(this.getProgramName().contains("zipme")) {
-            baseAdapter = new ZipmeAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
+            baseAdapter = new ZipmeAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
         }
         else if(this.getProgramName().contains("pngtastic")) {
-            baseAdapter = new PngtasticAdapter(this.getProgramName(), this.getMainClass(), this.getDir());
+            baseAdapter = new PngtasticAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+        }
+        else if(this.getProgramName().contains("running-example")) {
+            baseAdapter = new RunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

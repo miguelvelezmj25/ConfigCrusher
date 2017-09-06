@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.DefaultMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
@@ -15,18 +16,12 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class SleepMain implements Main {
+public class SleepMain extends DefaultMain {
 
     public static final String SLEEP_MAIN = SleepMain.class.getCanonicalName();
 
-    private String programName;
-    private String iteration;
-    private String[] args;
-
     public SleepMain(String programName, String iteration, String[] args) {
-        this.programName = programName;
-        this.iteration = iteration;
-        this.args = args;
+        super(programName, iteration, args);
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
@@ -232,10 +227,10 @@ public class SleepMain implements Main {
     @Override
     public void logExecution() throws IOException {
         Adapter adapter = new SleepAdapter();
-        Set<String> configuration = adapter.configurationAsSet(this.args);
+        Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
-        Executor executor = new DefaultExecutor(this.programName);
-        executor.writeToFile(this.iteration, configuration, Regions.getExecutedRegionsTrace());
+        Executor executor = new DefaultExecutor(this.getProgramName());
+        executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
     }
 
 }

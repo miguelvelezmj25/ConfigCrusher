@@ -4,7 +4,6 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,7 +16,7 @@ public class PngtasticMain {
 
     public static final String PNGTASTIC_MAIN = PngtasticMain.class.getCanonicalName();
 
-    public static void main(String[] args) throws InterruptedException, IOException, ParseException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         String programName = args[0];
         String mainClass = args[1];
         String[] pngtasticArgs = Arrays.copyOfRange(args, 2, args.length);

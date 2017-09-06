@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
+package edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 
@@ -6,17 +6,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by miguelvelez on 4/30/17.
- */
-public class SleepAdapter extends BaseAdapter {
+public class RunningExampleAdapter extends BaseAdapter {
 
-    public SleepAdapter() {
+    public RunningExampleAdapter() {
         this(null, null, null);
     }
 
-    public SleepAdapter(String programName, String mainClass, String directory) {
-        super(programName, mainClass, directory, getSleepOptions());
+    public RunningExampleAdapter(String programName, String entryPoint, String dir) {
+        super(programName, entryPoint, dir, RunningExampleAdapter.getRunningExampleOptions());
     }
 
     @Override
@@ -27,13 +24,13 @@ public class SleepAdapter extends BaseAdapter {
         newArgs[0] = iteration + "";
         System.arraycopy(args, 0, newArgs, 1, args.length);
 
-        this.execute(SleepMain.SLEEP_MAIN, newArgs);
+        this.execute(RunningExampleMain.RUNNING_EXAMPLE_MAIN, newArgs);
     }
 
-    private static List<String> getSleepOptions() {
-        String[] options = {"A", "B", "C", "D", "IA", "DA"};
+
+    public static List<String> getRunningExampleOptions() {
+        String[] options = {"A", "B", "C", "D"};
 
         return Arrays.asList(options);
     }
-
 }

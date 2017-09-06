@@ -1,23 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.performance;
 
-import edu.cmu.cs.mvelezce.*;
-import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.compression.SimpleCompressionTest;
-import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
-import org.json.simple.parser.ParseException;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 /**
  * Created by mvelezce on 4/28/17.
  */

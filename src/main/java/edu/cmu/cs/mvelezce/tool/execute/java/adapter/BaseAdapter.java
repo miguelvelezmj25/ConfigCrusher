@@ -11,7 +11,6 @@ import java.util.*;
 public abstract class BaseAdapter implements Adapter {
 
     private static final String CLASS_CONTAINER = "target/classes/";
-    private static final String JSON_SIMPLE_PATH = "lib/json-simple-1.1.1.jar";
     private static final String JACKSON_PATH = "/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar";
 
     public static final String TEST_DIRECTORY = "test/out/production/test";
@@ -74,7 +73,7 @@ public abstract class BaseAdapter implements Adapter {
     }
 
     @Override
-    public String execute(String mainAdapter, String[] args) {
+    public void execute(String mainAdapter, String[] args) {
         StringBuilder output = new StringBuilder();
 
         try {
@@ -82,8 +81,7 @@ public abstract class BaseAdapter implements Adapter {
             commandList.add("java");
             commandList.add("-Xmx8G");
             commandList.add("-cp");
-            commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":"
-                    + BaseAdapter.JSON_SIMPLE_PATH + ":" + this.directory);
+            commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
             commandList.add(mainAdapter);
             commandList.add(this.programName);
             commandList.add(this.mainClass);
@@ -120,7 +118,6 @@ public abstract class BaseAdapter implements Adapter {
             ie.printStackTrace();
         }
 
-        return null;
     }
 
 }

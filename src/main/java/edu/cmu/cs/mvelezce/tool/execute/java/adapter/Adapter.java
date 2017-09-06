@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public abstract class Adapter {
+public abstract class Adapter implements IAdapter {
 
     public static final String CLASS_CONTAINER = "target/classes/";
 

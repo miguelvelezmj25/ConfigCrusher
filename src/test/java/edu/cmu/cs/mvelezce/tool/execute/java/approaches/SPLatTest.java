@@ -9,10 +9,10 @@ import java.io.IOException;
  * Created by mvelezce on 7/9/17.
  */
 public class SPLatTest {
-    @Test
-    public void testMeasureElevator() throws IOException, ParseException {
-        String programName = "elevator";
-        SPLat.measure(programName);
-    }
+//    @Test
+//    public void testMeasureElevator() throws IOException, ParseException {
+//        String programName = "elevator";
+//        SPLat.measure(programName);
+//    }
 
 }

@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
 
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class SleepAdapter extends Adapter {
+public class SleepAdapter extends BaseAdapter {
 
     public static final String TEST_DIRECTORY = "test/out/production/test";
     private static final String[] CONFIGURATIONS = {"A", "B", "C", "D", "IA", "DA"};
@@ -54,7 +54,7 @@ public class SleepAdapter extends Adapter {
             args.append(" ");
         }
 
-        Adapter.executeJavaProgram(programName, SleepMain.SLEEP_MAIN, this.mainClass, this.directory, args.toString().trim());
+        BaseAdapter.executeJavaProgram(programName, SleepMain.SLEEP_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

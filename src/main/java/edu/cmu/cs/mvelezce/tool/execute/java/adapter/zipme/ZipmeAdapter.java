@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme;
 
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class ZipmeAdapter extends Adapter {
+public class ZipmeAdapter extends BaseAdapter {
 
     private static final String[] CONFIGURATIONS = {
             "FEATURECRC",
@@ -63,7 +63,7 @@ public class ZipmeAdapter extends Adapter {
             args.append(" ");
         }
 
-        Adapter.executeJavaProgram(programName, ZipmeMain.ZIPME_MAIN, this.mainClass, this.directory, args.toString().trim());
+        BaseAdapter.executeJavaProgram(programName, ZipmeMain.ZIPME_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

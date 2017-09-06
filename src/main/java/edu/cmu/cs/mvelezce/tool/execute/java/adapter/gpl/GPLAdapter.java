@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl;
 
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class GPLAdapter extends Adapter {
+public class GPLAdapter extends BaseAdapter {
 
     private static final String[] CONFIGURATIONS = {
 //            "BASE",
@@ -69,7 +69,7 @@ public class GPLAdapter extends Adapter {
             args.append(" ");
         }
 
-        Adapter.executeJavaProgram(programName, GPLMain.GPL_MAIN, this.mainClass, this.directory, args.toString().trim());
+        BaseAdapter.executeJavaProgram(programName, GPLMain.GPL_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

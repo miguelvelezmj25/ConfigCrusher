@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator;
 
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class ElevatorAdapter extends Adapter {
+public class ElevatorAdapter extends BaseAdapter {
 
     private static final String[] CONFIGURATIONS = {
             "FEATUREBASE",
@@ -60,7 +60,7 @@ public class ElevatorAdapter extends Adapter {
             args.append(" ");
         }
 
-        Adapter.executeJavaProgram(programName, ElevatorMain.ELEVATOR_MAIN, this.mainClass, this.directory, args.toString().trim());
+        BaseAdapter.executeJavaProgram(programName, ElevatorMain.ELEVATOR_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

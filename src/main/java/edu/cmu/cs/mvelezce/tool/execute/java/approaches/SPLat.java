@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.ProgramAnalysis;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 import org.json.simple.parser.ParseException;
 
@@ -24,7 +24,7 @@ public class SPLat {
         Map<JavaRegion, Set<Set<String>>> regionsToOptions = ProgramAnalysis.analyze(programName, analysisArgs);
 
         // Get a file with the execution trace of our approach
-        File file = new File(Executor.DIRECTORY + "/" + programName + Executor.UNDERSCORE + 0 + Options.DOT_JSON);
+        File file = new File(BaseExecutor.DIRECTORY + "/" + programName + BaseExecutor.UNDERSCORE + 0 + Options.DOT_JSON);
 
         if(!file.exists()) {
             throw new RuntimeException("The file " + file + " does not exist");
@@ -40,15 +40,15 @@ public class SPLat {
 //        Set<String> splatOptions = new HashSet<>();
 //        JSONParser parser = new JSONParser();
 //        JSONObject cache = (JSONObject) parser.parse(new FileReader(file));
-//        JSONArray result = (JSONArray) cache.get(Executor.EXECUTIONS);
+//        JSONArray result = (JSONArray) cache.get(BaseExecutor.EXECUTIONS);
 //
 //        for(Object resultEntry : result) {
 //            JSONObject execution = (JSONObject) resultEntry;
-//            JSONArray executionTraceResult = (JSONArray) execution.get(Executor.EXECUTION_TRACE);
+//            JSONArray executionTraceResult = (JSONArray) execution.get(BaseExecutor.EXECUTION_TRACE);
 //
 //            for(Object executionTraceResultEntry : executionTraceResult) {
 //                JSONObject regionResult = (JSONObject) executionTraceResultEntry;
-//                String regionID = (String) regionResult.get(Executor.ID);
+//                String regionID = (String) regionResult.get(BaseExecutor.ID);
 //
 //                for(Map.Entry<JavaRegion, Set<String>> regionToOptions : regionsToOptions.entrySet()) {
 //                    if(regionToOptions.getKey().getRegionID().equals(regionID)) {
@@ -119,7 +119,7 @@ public class SPLat {
             splatOptions.addAll(splatConfiguration);
         }
 
-        Set<String> allOptions = Executor.getOptions(programName);
+        Set<String> allOptions = BaseExecutor.getOptions(programName);
         Set<String> optionsNotExecutedBySPLat = new HashSet<>(allOptions);
         optionsNotExecutedBySPLat.removeAll(splatOptions);
 

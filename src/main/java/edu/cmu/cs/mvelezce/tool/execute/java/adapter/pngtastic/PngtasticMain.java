@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.pngtastic;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -29,6 +29,6 @@ public class PngtasticMain {
         }
 
         Set<String> performanceConfiguration = PngtasticAdapter.adaptConfigurationToPerformanceMeasurement(pngtasticArgs);
-        Executor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
+        BaseExecutor.logExecutedRegions(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
     }
 }

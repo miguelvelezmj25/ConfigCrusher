@@ -17,11 +17,12 @@ import java.util.Set;
 /**
  * Created by mvelezce on 7/12/17.
  */
-@JsonDeserialize(using = Execution.ExecutionDeserializer.class)
 public class Execution {
 
     private Set<String> configuration = new HashSet<>();
     private List<Region> trace = new ArrayList<>();
+
+    private Execution() { ; }
 
     public Execution(Set<String> configuration, List<Region> trace) {
         this.configuration = configuration;
@@ -42,32 +43,5 @@ public class Execution {
 
     public void setTrace(List<Region> trace) {
         this.trace = trace;
-    }
-
-    public static class ExecutionDeserializer extends JsonDeserializer<Execution> {
-
-        @Override
-        public Execution deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-            ObjectCodec oc = jsonParser.getCodec();
-            JsonNode node = oc.readTree(jsonParser);
-
-            ObjectMapper mapper = new ObjectMapper();
-            ObjectReader reader = mapper.readerFor(new TypeReference<Set<String>>() {
-            });
-            Set<String> configuration = reader.readValue(node.get("configuration"));
-
-            List<Region> regions = new ArrayList<>();
-            reader = mapper.readerFor(new TypeReference<List<ObjectNode>>() {
-            });
-            List<ObjectNode> trace = reader.readValue(node.get("trace"));
-
-            for(ObjectNode object : trace) {
-                Region region = new Region(object.get("regionID").asText(), object.get("startTime").longValue(),
-                        object.get("endTime").longValue(), object.get("overhead").longValue());
-                regions.add(region);
-            }
-
-            return new Execution(configuration, regions);
-        }
     }
 }

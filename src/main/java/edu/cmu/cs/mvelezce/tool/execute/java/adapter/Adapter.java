@@ -8,7 +8,7 @@ public interface Adapter {
 
     public void execute(Set<String> configuration);
 
-    public String execute(String mainAdapter, String[] args);
+    public void execute(String mainAdapter, String[] args);
 
     public String[] configurationAsMainArguments(Set<String> configuration);
 

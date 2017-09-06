@@ -19,10 +19,21 @@ public class SleepMain implements Main {
 
     public static final String SLEEP_MAIN = SleepMain.class.getCanonicalName();
 
+    private String programName;
+    private String iteration;
+    private String[] args;
+
+    public SleepMain(String programName, String iteration, String[] args) {
+        this.programName = programName;
+        this.iteration = iteration;
+        this.args = args;
+    }
+
     public static void main(String[] args) throws InterruptedException, IOException {
         String programName = args[0];
         String mainClass = args[1];
-        String[] sleepArgs = Arrays.copyOfRange(args, 2, args.length);
+        String iteration = args[2];
+        String[] sleepArgs = Arrays.copyOfRange(args, 3, args.length);
 
         if(mainClass.equals("edu.cmu.cs.mvelezce.Sleep1")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
@@ -214,17 +225,17 @@ public class SleepMain implements Main {
             throw new RuntimeException("Could not find the main class " + mainClass);
         }
 
-        Main main = new SleepMain();
-        main.logExecution(programName, sleepArgs);
+        Main main = new SleepMain(programName, iteration, sleepArgs);
+        main.logExecution();
     }
 
     @Override
-    public void logExecution(String programName, String[] args) throws IOException {
+    public void logExecution() throws IOException {
         Adapter adapter = new SleepAdapter();
-        Set<String> configuration = adapter.configurationAsSet(args);
+        Set<String> configuration = adapter.configurationAsSet(this.args);
 
-        Executor executor = new DefaultExecutor();
-        executor.writeToFile(programName, configuration, Regions.getExecutedRegionsTrace());
+        Executor executor = new DefaultExecutor(this.programName);
+        executor.writeToFile(this.iteration, configuration, Regions.getExecutedRegionsTrace());
     }
 
 }

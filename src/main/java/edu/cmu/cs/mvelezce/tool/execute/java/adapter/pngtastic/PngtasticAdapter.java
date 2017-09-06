@@ -51,6 +51,11 @@ public class PngtasticAdapter extends BaseAdapter {
     }
 
     @Override
+    public void execute(Set<String> configuration, int iteration) {
+
+    }
+
+    @Override
     public void execute(Set<String> configuration) {
         String[] argsArray = PngtasticAdapter.adaptConfigurationToProgram(configuration);
         StringBuilder args = new StringBuilder();

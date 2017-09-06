@@ -11,13 +11,13 @@ import java.util.Set;
 
 public interface Executor {
 
-    public Set<PerformanceEntry> execute(String programName) throws IOException;
+    public Set<PerformanceEntry> execute(int iteration) throws IOException;
 
     public Set<PerformanceEntry> execute(String[] args) throws IOException;
 
     public Set<PerformanceEntry> execute() throws IOException;
 
-    public void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException;
+    public void writeToFile(String iteration, Set<String> configuration, List<Region> executedRegions) throws IOException;
 
     // TODO return performance entry
     public Execution readFromFile(File file) throws IOException;

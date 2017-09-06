@@ -73,8 +73,8 @@ public abstract class BaseAdapter implements Adapter {
         return options;
     }
 
-    // TODO how to do this better?
-    public static String executeJavaProgram(String programName, String mainAdapter, String mainClass, String directory, String[] args) {
+    @Override
+    public String execute(String mainAdapter, String[] args) {
         StringBuilder output = new StringBuilder();
 
         try {
@@ -83,10 +83,10 @@ public abstract class BaseAdapter implements Adapter {
             commandList.add("-Xmx8G");
             commandList.add("-cp");
             commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":"
-                    + BaseAdapter.JSON_SIMPLE_PATH + ":" + directory);
+                    + BaseAdapter.JSON_SIMPLE_PATH + ":" + this.directory);
             commandList.add(mainAdapter);
-            commandList.add(programName);
-            commandList.add(mainClass);
+            commandList.add(this.programName);
+            commandList.add(this.mainClass);
             commandList.addAll(Arrays.asList(args));
 
             String[] command = new String[commandList.size()];

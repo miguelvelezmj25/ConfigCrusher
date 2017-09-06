@@ -7,9 +7,8 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
@@ -36,7 +35,8 @@ public class JavaPipeline {
 
     public static PerformanceModel buildPerformanceModel(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         // Format return statements with method calls
-        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+        // TODO compile both original and instrumented
+//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
         System.out.println("");
 
         // Configuration compression (Language independent)
@@ -48,7 +48,7 @@ public class JavaPipeline {
         System.out.println("");
 
         System.out.println("####################### Instrumenting #######################");
-        Instrumenter instrumenter = new TimerInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
         instrumenter.instrument(args);
         System.out.println("");
 
@@ -74,7 +74,8 @@ public class JavaPipeline {
 
     public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint) throws IOException, ParseException, InterruptedException {
         // Format return statements with method calls
-        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+        // TODO compile both original and instrumented
+//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
         System.out.println("");
 
 //        System.out.println("####################### Partial region and options #######################");
@@ -124,7 +125,8 @@ public class JavaPipeline {
 
     public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, ParseException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         // Format return statements with method calls
-        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+// TODO compile both original and instrumented
+//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
         System.out.println("");
 
         // Configuration compression (Language independent)
@@ -136,7 +138,7 @@ public class JavaPipeline {
         System.out.println("");
 
         System.out.println("####################### Instrumenting #######################");
-        Instrumenter instrumenter = new TimerInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
         instrumenter.instrument(args);
         System.out.println("");
 

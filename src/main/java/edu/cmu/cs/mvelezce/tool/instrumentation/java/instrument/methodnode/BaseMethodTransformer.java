@@ -14,7 +14,7 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
     public BaseMethodTransformer(ClassTransformer classTransformer) {
         this.classTransformer = classTransformer;
     }
-    
+
     @Override
     public void transformMethods() throws IOException {
         Set<ClassNode> classNodes = this.classTransformer.readClasses();
@@ -38,5 +38,9 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
 
             this.classTransformer.writeClass(classNode, this.classTransformer.getPath() + "/" + classNode.name);
         }
+    }
+
+    public ClassTransformer getClassTransformer() {
+        return classTransformer;
     }
 }

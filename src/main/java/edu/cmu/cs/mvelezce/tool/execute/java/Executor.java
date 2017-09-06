@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
 
 import java.io.File;
@@ -16,9 +17,10 @@ public interface Executor {
 
     public Set<PerformanceEntry> execute() throws IOException;
 
-    public void writeToFile(String programIteration, Set<String> configuration, List<Region> executedRegions) throws IOException;
+    public void writeToFile(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException;
 
-    public Set<PerformanceEntry> readFromFile(File file) throws IOException;
+    // TODO return performance entry
+    public Execution readFromFile(File file) throws IOException;
 
     public Set<String> getOptions(File file) throws IOException;
 }

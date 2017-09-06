@@ -29,7 +29,8 @@ public class GPLAdapter extends BaseAdapter {
     };
 
     public GPLAdapter(String programName, String mainClass, String directory) {
-        super(programName, mainClass, directory);
+//        super(programName, mainClass, directory);
+        super(null, null, null, null);
     }
 
     public static String[] adaptConfigurationToProgram(Set<String> configuration) {
@@ -69,7 +70,7 @@ public class GPLAdapter extends BaseAdapter {
             args.append(" ");
         }
 
-        BaseAdapter.executeJavaProgram(programName, GPLMain.GPL_MAIN, this.mainClass, this.directory, args.toString().trim());
+//        BaseAdapter.executeJavaProgram(programName, GPLMain.GPL_MAIN, this.mainClass, this.directory, args.toString().trim());
     }
 
 }

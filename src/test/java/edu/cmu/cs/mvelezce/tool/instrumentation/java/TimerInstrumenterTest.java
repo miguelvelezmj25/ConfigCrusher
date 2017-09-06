@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,7 +15,15 @@ import java.util.Set;
  * Created by miguelvelez on 4/30/17.
  */
 public class TimerInstrumenterTest {
-    // TODO check that the regions are correct since we might have, at this point, java line numbers instead of bytecodeindex
+
+    protected static String srcDir;
+    protected static String classDir;
+
+
+    protected void compile() {
+        Instrumenter compiler = new CompileInstrumenter(TimerInstrumenterTest.srcDir, TimerInstrumenterTest.classDir);
+        compiler.compileFromSource();
+    }
 
     @Test
     public void testElevatorSimple() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
@@ -35,7 +44,7 @@ public class TimerInstrumenterTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        Instrumenter instrumenter = new TimerInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 
@@ -140,7 +149,7 @@ public class TimerInstrumenterTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        Instrumenter instrumenter = new TimerInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 
@@ -163,7 +172,7 @@ public class TimerInstrumenterTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        Instrumenter instrumenter = new TimerInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 
@@ -186,7 +195,7 @@ public class TimerInstrumenterTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        Instrumenter instrumenter = new TimerInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 
@@ -209,15 +218,17 @@ public class TimerInstrumenterTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        Instrumenter instrumenter = new TimerInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 
     @Test
     public void testRunningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String programName = "running-example";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
+        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
+        TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+
+        this.compile();
 
         // Program arguments
 //        String[] args = new String[0];
@@ -232,7 +243,7 @@ public class TimerInstrumenterTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        Instrumenter instrumenter = new TimerInstrumenter(srcDirectory, classDirectory, decisionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(TimerInstrumenterTest.classDir, decisionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 }

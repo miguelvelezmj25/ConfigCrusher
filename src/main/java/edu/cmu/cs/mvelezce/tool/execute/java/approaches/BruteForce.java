@@ -43,8 +43,9 @@ public class BruteForce {
     }
 
     public static Set<PerformanceEntry> repeatProcessMeasure(String programName, int iterations, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
-        Formatter.compile(srcDir, classDir);
-        Formatter.formatReturnWithMethod(classDir);
+// TODO compile both original and instrumented
+        //        Formatter.compile(srcDir, classDir);
+//        Formatter.formatReturnWithMethod(classDir);
 
         String[] args = new String[0];
         Options.getCommandLine(args);

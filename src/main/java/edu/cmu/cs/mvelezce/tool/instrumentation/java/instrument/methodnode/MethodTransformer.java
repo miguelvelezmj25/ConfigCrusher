@@ -17,5 +17,4 @@ public interface MethodTransformer {
 
     public void transformMethods(Set<ClassNode> classNodes) throws IOException;
 
-//    public void setClassTransformer(ClassTransformer classTransformer);
 }

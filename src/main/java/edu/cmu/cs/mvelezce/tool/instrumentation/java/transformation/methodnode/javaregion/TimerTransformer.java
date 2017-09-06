@@ -11,14 +11,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.Set;
 
-public class TimerTransformer extends JavaRegionTransformer {
+public class TimerTransformer extends RegionTransformer {
 
     public TimerTransformer(String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
         super(directory, regions);
     }
 
-    public TimerTransformer(ClassTransformer classTransformer, String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(classTransformer, directory, regions);
+    public TimerTransformer(ClassTransformer classTransformer, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(classTransformer, regions);
     }
 
     @Override

@@ -19,20 +19,18 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.*;
 
-public abstract class JavaRegionTransformer extends BaseMethodTransformer {
+public abstract class RegionTransformer extends BaseMethodTransformer {
 
-    private String directory;
     private Set<JavaRegion> regions;
     private ClassNode currentClassNode = null;
 
-    public JavaRegionTransformer(ClassTransformer classTransformer, String directory, Set<JavaRegion> regions) {
+    public RegionTransformer(ClassTransformer classTransformer, Set<JavaRegion> regions) {
         super(classTransformer);
-        this.directory = directory;
         this.regions = regions;
     }
 
-    public JavaRegionTransformer(String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        this(new DefaultBaseClassTransformer(directory), directory, regions);
+    public RegionTransformer(String directory, Set<JavaRegion> regions) throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
+        this(new DefaultBaseClassTransformer(directory), regions);
     }
 
     public abstract InsnList addInstructionsStartRegion(JavaRegion javaRegion);
@@ -141,6 +139,7 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
         }
     }
 
+    // TODO move down the hierarchy
     private void instrumentStart(LabelNode labelNode, List<JavaRegion> regionsInMethod, InsnList newInstructions) {
         for(JavaRegion javaRegion : regionsInMethod) {
             Label regionOriginalLabel = javaRegion.getStartMethodBlock().getOriginalLabel();
@@ -163,6 +162,7 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
         }
     }
 
+    // TODO move down the hierarchy
     private void instrumentEnd(LabelNode labelNode, List<JavaRegion> regionsInMethod, InsnList newInstructions) {
         for(JavaRegion javaRegion : regionsInMethod) {
             for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
@@ -305,7 +305,8 @@ public abstract class JavaRegionTransformer extends BaseMethodTransformer {
         List<String> javapResult = new ArrayList<>();
 
         try {
-            String[] command = new String[]{"javap", "-classpath", this.directory, "-p", "-c", classPackage + "." + className};
+            String[] command = new String[]{"javap", "-classpath", this.getClassTransformer().getPath(), "-p", "-c",
+                    classPackage + "." + className};
             System.out.println(Arrays.toString(command));
             Process process = Runtime.getRuntime().exec(command);
 

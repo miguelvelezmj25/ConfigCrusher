@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -33,7 +33,7 @@ public class JavaRegionClassTransformerTest {
         String[] args = new String[0];
 
         Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(program, args);
-        Instrumenter instrumenter = new TimerInstrumenter(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, partialRegionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 

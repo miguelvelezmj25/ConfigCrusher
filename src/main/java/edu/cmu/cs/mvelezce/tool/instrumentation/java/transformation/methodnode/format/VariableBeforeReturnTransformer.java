@@ -1,15 +1,23 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.format;
 
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.util.HashSet;
 import java.util.ListIterator;
 import java.util.Set;
 
 public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
+
+    public VariableBeforeReturnTransformer(String directory) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        this(new DefaultBaseClassTransformer(directory));
+
+    }
 
     public VariableBeforeReturnTransformer(ClassTransformer classTransformer) {
         super(classTransformer);
@@ -26,17 +34,25 @@ public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
             while (instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
 
-                if(instruction.getOpcode() >= Opcodes.IRETURN && instruction.getOpcode() <= Opcodes.ARETURN) {
-                    AbstractInsnNode previousInstruction = instruction.getPrevious();
+                if(instruction.getOpcode() < Opcodes.IRETURN || instruction.getOpcode() > Opcodes.ARETURN) {
+                    continue;
+                }
+
+                AbstractInsnNode previousInstruction = instruction.getPrevious();
 
 //                        if(previousInstruction.getOpcode() >= Opcodes.INVOKEVIRTUAL && previousInstruction.getOpcode() <= Opcodes.INVOKEDYNAMIC) {
-                    if(previousInstruction.getType() == AbstractInsnNode.METHOD_INSN) {
-                        MethodInsnNode methodInstruction = (MethodInsnNode) previousInstruction;
+                if(previousInstruction.getType() != AbstractInsnNode.METHOD_INSN) {
+                    continue;
+                }
 
-                        if(!methodNode.name.equals("<init>") && !methodInstruction.owner.equals("java/lang/Object")) {
-                            methodsToInstrument.add(methodNode);
-                        }
-                    }
+                MethodInsnNode methodInstruction = (MethodInsnNode) previousInstruction;
+
+                if(!methodNode.name.equals("<init>") && !methodInstruction.owner.equals("java/lang/Object")) {
+                    methodsToInstrument.add(methodNode);
+                }
+                else {
+                    // TODO check
+                    throw new RuntimeException("somethign");
                 }
             }
         }
@@ -46,8 +62,6 @@ public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
 
     @Override
     public void transformMethod(MethodNode methodNode) {
-        System.out.println("Transforming method " + methodNode.name);
-
         InsnList newInsts = new InsnList();
         InsnList instructions = methodNode.instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
@@ -75,6 +89,7 @@ public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
 
         methodNode.instructions.clear();
         methodNode.instructions.add(newInsts);
+        System.out.println("Transforming method " + methodNode.name);
     }
 
     private InsnList addInstructionsBeforeReturn(AbstractInsnNode returnInst, int maxLocals) {

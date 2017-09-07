@@ -11,16 +11,22 @@ import java.util.*;
 // TODO save this in a json file
 public class PerformanceEntry2 {
     private Set<String> configuration;
-    private Map<Region, Long> regionsToPerformance = new HashMap<>();
-    private Map<Region, Double> regionsToPerformanceHumanReadable = new HashMap<>();
+    private Map<Region, Long> regionsToRawPerformance = new HashMap<>();
+    private Map<Region, Double> regionsToRawPerformanceHumanReadable = new HashMap<>();
     private Map<Region, Set<Region>> regionsToInnerRegions = new HashMap<>();
+    private Map<Region, Long> regionsToProcessedPerformance = new HashMap<>();
+    private Map<Region, Double> regionsToProcessedPerformanceHumanReadable = new HashMap<>();
 
-    public PerformanceEntry2(Set<String> configuration, Map<Region, Long> regionsToPerformance) {
+    private PerformanceEntry2() {
+        ;
+    }
+
+    public PerformanceEntry2(Set<String> configuration, Map<Region, Long> regionsToRawPerformance) {
         this.configuration = configuration;
-        this.regionsToPerformance = regionsToPerformance;
+        this.regionsToRawPerformance = regionsToRawPerformance;
 
         // TODO maybe add a method that changes longs to doubles and the another one that divides by 10^9
-//        this.regionsToPerformanceHumanReadable = regionsToPerformance;
+//        this.regionsToRawPerformanceHumanReadable = regionsToRawPerformance;
     }
 
     public PerformanceEntry2(Execution execution) {
@@ -29,35 +35,66 @@ public class PerformanceEntry2 {
 
         this.calculatePerformance(trace);
         this.calculateInnerRegions(trace);
+        this.calculateProcessedPerformance(trace);
+    }
+
+    private void calculateProcessedPerformance(List<Region> trace) {
+        Stack<Region> executingRegions = new Stack<>();
+        Stack<Long> innerRegionExecutionTime = new Stack<>();
+//        Region previousRegionEntry = null;
+
+        for(Region region : trace) {
+            if(executingRegions.isEmpty() || !executingRegions.peek().getRegionID().equals(region.getRegionID())) {
+                executingRegions.add(region);
+                innerRegionExecutionTime.push(0L);
+            }
+            else {
+                Region top = executingRegions.pop();
+                long regionExecutionTime = region.getEndTime() - top.getStartTime();
+                regionExecutionTime -= innerRegionExecutionTime.pop();
+
+                this.regionsToProcessedPerformance.put(region, regionExecutionTime);
+
+                // TODO to human readable method
+                double humanTime = regionExecutionTime / 1000000000.0;
+                this.regionsToProcessedPerformanceHumanReadable.put(region, humanTime);
+
+                // Adding new inner execution time
+                if(!executingRegions.isEmpty()) {
+                    Stack<Long> added = new Stack<>();
+
+                    while (!innerRegionExecutionTime.isEmpty()) {
+                        long currentInnerRegionExecutionTime = innerRegionExecutionTime.pop();
+                        added.push(currentInnerRegionExecutionTime + regionExecutionTime);
+                    }
+
+                    while (!added.isEmpty()) {
+                        innerRegionExecutionTime.push(added.pop());
+                    }
+                }
+            }
+        }
     }
 
     private void calculatePerformance(List<Region> trace) {
         Stack<Region> executingRegions = new Stack<>();
 
         for(Region region : trace) {
-            if(executingRegions.empty()) {
+            if(executingRegions.empty() || !executingRegions.peek().getRegionID().equals(region.getRegionID())) {
                 executingRegions.add(region);
-
-                continue;
             }
-
-            Region top = executingRegions.peek();
-
-            if(top.getRegionID().equals(region.getRegionID())) {
+            else {
+                Region top = executingRegions.pop();
                 long start = top.getStartTime();
                 long end = region.getEndTime();
                 long time = (end - start);
                 time -= top.getOverhead();
                 time -= region.getOverhead();
-                this.regionsToPerformance.put(region, time);
+                this.regionsToRawPerformance.put(region, time);
 
+                // TODO to human readable method
                 double humanTime = time / 1000000000.0;
-                this.regionsToPerformanceHumanReadable.put(region, humanTime);
-
-                executingRegions.pop();
-            }
-            else {
-                executingRegions.add(region);
+                this.regionsToRawPerformanceHumanReadable.put(region, humanTime);
             }
         }
     }
@@ -67,16 +104,12 @@ public class PerformanceEntry2 {
 
         // Get all regions
         for(Region region : trace) {
-            if(executingRegions.isEmpty()) {
+            if(executingRegions.isEmpty() || !executingRegions.peek().getRegionID().equals(region.getRegionID())) {
                 executingRegions.push(region);
                 this.regionsToInnerRegions.put(region, new HashSet<>());
-            }
-            else if(executingRegions.peek().getRegionID().equals(region.getRegionID())) {
-                executingRegions.pop();
             }
             else {
-                executingRegions.push(region);
-                this.regionsToInnerRegions.put(region, new HashSet<>());
+                executingRegions.pop();
             }
         }
 
@@ -110,59 +143,7 @@ public class PerformanceEntry2 {
 //    }
 //
 //
-//    /**
-//     * Recreating execution trace to calculate real performancemodel of each region
-//     *
-//     * @param executedRegions
-//     */
-//    public void calculateRealPerformance(List<Region> executedRegions) {
-//        Stack<Region> executingRegions = new Stack<>();
-//        Stack<Long> innerRegionExecutionTime = new Stack<>();
-//        Region previousRegionEntry = null;
-//
-//        for(Region executingRegion : executedRegions) {
-//            if(executingRegions.isEmpty()) {
-//                executingRegions.add(executingRegion);
-//                innerRegionExecutionTime.push((long) 0);
-//            }
-//            else if(executingRegions.peek().getRegionID().equals(executingRegion.getRegionID())) {
-//                if(executingRegions.peek().getStartTime() > executingRegion.getEndTime()) {
-//                    throw new RuntimeException("A region has a negative execution time. This might be caused by incorrect instrumentation");
-//                }
-//
-//                Region startInfoRegion = executingRegions.pop();
-//                long regionExecutionTime = executingRegion.getEndTime() - startInfoRegion.getStartTime();
-//
-//                if(!previousRegionEntry.getRegionID().equals(executingRegion.getRegionID())) {
-//                    regionExecutionTime -= innerRegionExecutionTime.peek();
-//                }
-//
-//                this.regionsToExecutionTime.put(executingRegion, regionExecutionTime);
-//                this.regionsToExecutionTime2.put(executingRegion, regionExecutionTime / 1000000000.0);
-//                innerRegionExecutionTime.pop();
-//
-//                // Adding new inner execution time
-//                if(!executingRegions.isEmpty()) {
-//                    Stack<Long> added = new Stack<>();
-//
-//                    while (!innerRegionExecutionTime.isEmpty()) {
-//                        long currentInnerRegionExecutionTime = innerRegionExecutionTime.pop();
-//                        added.push(currentInnerRegionExecutionTime + regionExecutionTime);
-//                    }
-//
-//                    while (!added.isEmpty()) {
-//                        innerRegionExecutionTime.push(added.pop());
-//                    }
-//                }
-//            }
-//            else {
-//                executingRegions.add(executingRegion);
-//                innerRegionExecutionTime.push((long) 0);
-//            }
-//
-//            previousRegionEntry = executingRegion;
-//        }
-//    }
+
 //
 //    public long getTimeOfRegionID(String ID) {
 //        long time = -1;

@@ -1,18 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.serialize;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 7/12/17.
@@ -22,11 +12,45 @@ public class Execution {
     private Set<String> configuration = new HashSet<>();
     private List<Region> trace = new ArrayList<>();
 
-    private Execution() { ; }
+    private Execution() {
+        ;
+    }
 
     public Execution(Set<String> configuration, List<Region> trace) {
         this.configuration = configuration;
         this.trace = trace;
+
+        this.checkTrace();
+    }
+
+    private void checkTrace() {
+        Stack<Region> executingRegions = new Stack<>();
+
+        for(Region region : this.trace) {
+            if(executingRegions.empty()) {
+                executingRegions.add(region);
+
+                continue;
+            }
+
+            Region top = executingRegions.peek();
+
+            if(top.getRegionID().equals(region.getRegionID())) {
+                if(region.getEndTime() < top.getStartTime()) {
+                    throw new RuntimeException("The end time of a future region is less than the start time of previously visited region");
+                }
+
+                executingRegions.pop();
+            }
+            else {
+                executingRegions.add(region);
+            }
+        }
+
+        if(!executingRegions.empty()) {
+            throw new RuntimeException("The execution trace had an executing region that was not ended");
+        }
+
     }
 
     public Set<String> getConfiguration() {

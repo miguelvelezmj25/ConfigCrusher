@@ -166,7 +166,7 @@ public class SPLat {
 //        }
 //
 //        StringBuilder result = new StringBuilder();
-//        result.append("measured,configuration,performance,std");
+//        result.append("measured,configuration,performancemodel,std");
 //        result.append("\n");
 //
 //        for(PerformanceStatistic perfStat : perfStats) {

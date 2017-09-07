@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.performance;
+package edu.cmu.cs.mvelezce.tool.performancemodel;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -146,7 +146,7 @@ public class PerformanceModelTest {
         // Longest configuration
         Set<String> longestConfiguration = new HashSet<>();
 
-        // Configurations to performance
+        // Configurations to performancemodel
         Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
         configurationsToPerformance.put(longestConfiguration, 0.0);
 
@@ -166,7 +166,7 @@ public class PerformanceModelTest {
         Set<String> longestConfiguration = new HashSet<>();
         longestConfiguration.add("A");
 
-        // Configurations to performance
+        // Configurations to performancemodel
         Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
 
         // {} configuration
@@ -195,7 +195,7 @@ public class PerformanceModelTest {
         longestConfiguration.add("A");
         longestConfiguration.add("B");
 
-        // Configurations to performance
+        // Configurations to performancemodel
         Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
 
         // {} configuration
@@ -235,7 +235,7 @@ public class PerformanceModelTest {
         longestConfiguration.add("A");
         longestConfiguration.add("B");
 
-        // Configurations to performance
+        // Configurations to performancemodel
         Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
 
         // {} configuration
@@ -274,7 +274,7 @@ public class PerformanceModelTest {
         Set<String> longestConfiguration = new HashSet<>();
         longestConfiguration.add("A");
 
-        // Configurations to performance
+        // Configurations to performancemodel
         Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
 
         // {} configuration

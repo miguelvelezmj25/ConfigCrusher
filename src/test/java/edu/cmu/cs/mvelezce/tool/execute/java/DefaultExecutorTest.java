@@ -2,20 +2,17 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 import org.junit.Test;
 
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 public class DefaultExecutorTest {
 
     @Test
     public void sleep1() throws Exception {
         String programName = "sleep1";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
         // Program arguments
@@ -36,7 +33,7 @@ public class DefaultExecutorTest {
     @Test
     public void runningExample() throws Exception {
         String programName = "running-example";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/running-example/target/classes";
         String entryPoint = "edu.cmu.cs.mvelezce.Example";
 
         // Program arguments

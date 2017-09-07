@@ -22,9 +22,8 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.instrumentation.sleep.InstrumentVisitor;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
 
 import java.util.*;
 
@@ -78,7 +77,7 @@ public class SleepPipeline {
             regionsToOptions.put(region, options);
         }
 
-//        return PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        return DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
         // TODO
         return null;
     }
@@ -97,7 +96,7 @@ public class SleepPipeline {
             }
 
 //            configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
-            // TODO calculate the performance of other configurations and see, in the future if we can reduce the number of configurations we need to execute
+            // TODO calculate the performancemodel of other configurations and see, in the future if we can reduce the number of configurations we need to execute
         }
 
         return configurationsToPerformance;

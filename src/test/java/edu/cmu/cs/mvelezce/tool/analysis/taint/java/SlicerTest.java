@@ -16,14 +16,14 @@ public class SlicerTest {
 //        // Builds pdg and saves it into temp folder
 //        String name = "Sleep1";
 //        String className = "edu.cmu.cs.mvelezce";
-//        BuildSDG.standardConcBuild("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy",
+//        BuildSDG.standardConcBuild("/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/original/dummy/out/production/dummy",
 //                className + "." + name,
-//                "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep19/" + name + ".pdg");
+//                "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep19/" + name + ".pdg");
     }
 
     @Test
     public void testSleep19() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep19/edu.cmu.cs.mvelezce.Sleep19.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep19/edu.cmu.cs.mvelezce.Sleep19.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep19.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -44,7 +44,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep1() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep1/edu.cmu.cs.mvelezce.Sleep1.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep1/edu.cmu.cs.mvelezce.Sleep1.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -68,7 +68,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep2() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep2/edu.cmu.cs.mvelezce.Sleep2.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep2/edu.cmu.cs.mvelezce.Sleep2.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep2.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -89,7 +89,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep3() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep3/edu.cmu.cs.mvelezce.Sleep3.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep3/edu.cmu.cs.mvelezce.Sleep3.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep3.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -111,7 +111,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep4() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep4/edu.cmu.cs.mvelezce.Sleep4.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep4/edu.cmu.cs.mvelezce.Sleep4.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep4.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -132,7 +132,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep5() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep5/edu.cmu.cs.mvelezce.Sleep5.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep5/edu.cmu.cs.mvelezce.Sleep5.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep5.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -153,7 +153,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep7() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep7/edu.cmu.cs.mvelezce.Sleep7.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep7/edu.cmu.cs.mvelezce.Sleep7.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep7.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -174,7 +174,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep8() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep8/edu.cmu.cs.mvelezce.Sleep8.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep8/edu.cmu.cs.mvelezce.Sleep8.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep8.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -195,7 +195,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep9() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep9/edu.cmu.cs.mvelezce.Sleep9.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep9/edu.cmu.cs.mvelezce.Sleep9.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep9.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -216,7 +216,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep10() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep10/edu.cmu.cs.mvelezce.Sleep10.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep10/edu.cmu.cs.mvelezce.Sleep10.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep10.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -238,7 +238,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep11() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep11/edu.cmu.cs.mvelezce.Sleep11.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep11/edu.cmu.cs.mvelezce.Sleep11.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep11.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -259,7 +259,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep12() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep12/edu.cmu.cs.mvelezce.Sleep12.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep12/edu.cmu.cs.mvelezce.Sleep12.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep12.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -280,7 +280,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep13() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep13/edu.cmu.cs.mvelezce.Sleep13.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep13/edu.cmu.cs.mvelezce.Sleep13.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep13.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -301,7 +301,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep14() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep14/edu.cmu.cs.mvelezce.Sleep14.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep14/edu.cmu.cs.mvelezce.Sleep14.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep14.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -324,7 +324,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep15() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep15/edu.cmu.cs.mvelezce.Sleep15.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep15/edu.cmu.cs.mvelezce.Sleep15.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep15.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -347,7 +347,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep16() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep16/edu.cmu.cs.mvelezce.Sleep16.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep16/edu.cmu.cs.mvelezce.Sleep16.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep16.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -369,7 +369,7 @@ public class SlicerTest {
 
     @Test
     public void testSleep17() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep17/edu.cmu.cs.mvelezce.Sleep17.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep17/edu.cmu.cs.mvelezce.Sleep17.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep17.main";
         String criterionFormat = "booleanValue()";
         List<String> features = new ArrayList<>();
@@ -392,7 +392,7 @@ public class SlicerTest {
 
     @Test
     public void testGetCriterionLabel() throws IOException {
-        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper/src/main/resources/joana/programs/sleep1/edu.cmu.cs.mvelezce.Sleep1.main.pdg";
+        String file = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep1/edu.cmu.cs.mvelezce.Sleep1.main.pdg";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1.main";
         String criterionFormat = "booleanValue()";
 

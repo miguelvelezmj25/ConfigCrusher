@@ -25,13 +25,13 @@ public class VarexJProcessor {
 //        factory.setValidating(true);
 //        factory.setIgnoringElementContentWhitespace(true);
         DocumentBuilder builder = factory.newDocumentBuilder();
-        File coverage = new File("/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/original/gpl/coverage2.xml");
+        File coverage = new File("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/coverage2.xml");
 
         if(!coverage.exists()) {
             throw new RuntimeException("No file");
         }
 
-        String src = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/original/gpl/src/";
+        String src = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/src/";
         String[] extensions = {"java"};
         Collection<File> files = FileUtils.listFiles(new File(src), extensions, true);
 

@@ -9,15 +9,15 @@ import java.lang.reflect.InvocationTargetException;
 
 public class VariableBeforeReturnTransformerTest {
 
-//    String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/original/running-example/src";
-//    String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/original/running-example/target/classes";
-//    String instrumentedClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/running-example/src";
-//    String instrumentedSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/running-example/target/classes";
+//    String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/src";
+//    String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
+//    String instrumentedClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/src";
+//    String instrumentedSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
 
     @Test
     public void testRunningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/running-example/src";
-        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/running-example/target/classes";
+        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/src";
+        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
 
         // Program arguments
 //        String[] args = new String[0];

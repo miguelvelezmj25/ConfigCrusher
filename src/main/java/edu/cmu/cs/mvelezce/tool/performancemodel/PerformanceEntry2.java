@@ -8,6 +8,7 @@ import java.util.*;
 /**
  * Created by mvelezce on 4/10/17.
  */
+// TODO save this in a json file
 public class PerformanceEntry2 {
     private Set<String> configuration;
     private Map<Region, Long> regionsToPerformance = new HashMap<>();

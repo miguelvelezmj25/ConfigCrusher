@@ -16,7 +16,7 @@ public class SlicerTest {
 //        // Builds pdg and saves it into temp folder
 //        String name = "Sleep1";
 //        String className = "edu.cmu.cs.mvelezce";
-//        BuildSDG.standardConcBuild("/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/original/dummy/out/production/dummy",
+//        BuildSDG.standardConcBuild("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy",
 //                className + "." + name,
 //                "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep19/" + name + ".pdg");
     }

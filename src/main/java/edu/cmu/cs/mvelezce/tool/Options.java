@@ -43,7 +43,9 @@ public abstract class Options {
 
     public static void checkIfDeleteResult(File file) throws IOException {
         if(cmd.hasOption(Options.DELRES)) {
-            FileUtils.forceDelete(file);
+            if(file.exists()) {
+                FileUtils.forceDelete(file);
+            }
         }
     }
 

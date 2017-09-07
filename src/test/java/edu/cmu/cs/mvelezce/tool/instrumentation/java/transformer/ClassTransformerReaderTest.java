@@ -42,7 +42,7 @@ public class ClassTransformerReaderTest {
     @Test
     public void testReadClass2() throws Exception {
         ClassTransformerReader reader = new ClassTransformerReader();
-        ClassNode classNode = reader.readClass("/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/original/running-example/target/classes/edu/cmu/cs/mvelezce/Example");
+        ClassNode classNode = reader.readClass("/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes/edu/cmu/cs/mvelezce/Example");
         List<MethodNode> methods = classNode.methods;
 
         for(MethodNode method : methods) {

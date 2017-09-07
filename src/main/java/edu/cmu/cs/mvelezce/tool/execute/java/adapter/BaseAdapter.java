@@ -79,9 +79,8 @@ public abstract class BaseAdapter implements Adapter {
 
     @Override
     public void execute(String mainAdapter, String[] args) {
-        StringBuilder output = new StringBuilder();
-
         try {
+            StringBuilder output = new StringBuilder();
             List<String> commandList = new ArrayList<>();
             commandList.add("java");
             commandList.add("-Xmx8G");
@@ -108,6 +107,7 @@ public abstract class BaseAdapter implements Adapter {
 
             System.out.println(output);
 
+            output = new StringBuilder();
             BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
             while ((string = errorReader.readLine()) != null) {

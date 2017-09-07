@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry2;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 import org.apache.commons.io.FileUtils;
 
@@ -34,7 +35,7 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public Set<PerformanceEntry> execute(String[] args) throws IOException {
+    public Set<PerformanceEntry2> execute(String[] args) throws IOException {
         Options.getCommandLine(args);
 
         String outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
@@ -43,9 +44,9 @@ public abstract class BaseExecutor implements Executor {
         Options.checkIfDeleteResult(outputFile);
 
         if(outputFile.exists()) {
-            // TODO have to aggregate
-            Execution execution = this.readFromFile(outputFile);
-            throw new RuntimeException();
+            // TODO aggregate and averae
+            Set<PerformanceEntry2> results = this.aggregateExecutions(outputFile);
+            return results;
         }
 
         // TODO remove this once we have fixed how to read and aggregate results
@@ -57,7 +58,7 @@ public abstract class BaseExecutor implements Executor {
         }
 
         this.repetitions = Options.getIterations();
-        Set<PerformanceEntry> performanceEntries = this.execute();
+        Set<PerformanceEntry2> performanceEntries = this.execute();
 
         // TODO
 //        if(Options.checkIfSave()) {
@@ -68,18 +69,19 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public Set<PerformanceEntry> execute() throws IOException {
-        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+    public Set<PerformanceEntry2> execute() throws IOException {
+        List<Set<PerformanceEntry2>> executionsPerformance = new ArrayList<>();
 
         for(int i = 0; i < this.repetitions; i++) {
-            Set<PerformanceEntry> results = this.execute(i);
+            Set<PerformanceEntry2> results = this.execute(i);
             executionsPerformance.add(results);
         }
 
-        // TODO
+// TODO average results
 //        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
 //        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
-        return null;
+
+        throw new RuntimeException();
     }
 
     public String getProgramName() {
@@ -100,6 +102,24 @@ public abstract class BaseExecutor implements Executor {
 
     public int getRepetitions() {
         return repetitions;
+    }
+
+    private Set<PerformanceEntry2> averageExecutions(File outputFile) throws IOException {
+// TODO
+        return null;
+    }
+
+
+    private Set<PerformanceEntry2> aggregateExecutions(File outputFile) throws IOException {
+        Collection<File> files = FileUtils.listFiles(outputFile, null, true);
+        Set<PerformanceEntry2> performanceEntries = new HashSet<>();
+
+        for(File file : files) {
+            PerformanceEntry2 result = this.readFromFile(file);
+            performanceEntries.add(result);
+        }
+
+        return performanceEntries;
     }
 
     //    private static Set<PerformanceEntry> returnIfExists(String programName) throws IOException, ParseException {
@@ -306,12 +326,14 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public Execution readFromFile(File file) throws IOException {
+    public PerformanceEntry2 readFromFile(File file) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         Execution execution = mapper.readValue(file, new TypeReference<Execution>() {
         });
 
-        return execution;
+        PerformanceEntry2 performanceEntry = new PerformanceEntry2(execution);
+
+        return performanceEntry;
     }
 
 }

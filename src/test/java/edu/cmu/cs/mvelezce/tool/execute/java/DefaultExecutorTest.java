@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry2;
 import org.junit.Test;
 
 import java.util.Set;
@@ -29,7 +30,7 @@ public class DefaultExecutorTest {
         args[2] = "-i2";
 
         Executor executor = new DefaultExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<PerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
     }
 
     @Test
@@ -50,7 +51,7 @@ public class DefaultExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new DefaultExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<PerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
     }
 
 }

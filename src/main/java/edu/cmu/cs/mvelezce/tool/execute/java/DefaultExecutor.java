@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
-import edu.cmu.cs.mvelezce.tool.Options;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
@@ -9,10 +10,15 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.pngtastic.PngtasticAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
 import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry2;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -33,7 +39,7 @@ public class DefaultExecutor extends BaseExecutor {
     }
 
     @Override
-    public Set<PerformanceEntry> execute(int iteration) throws IOException {
+    public Set<PerformanceEntry2> execute(int iteration) throws IOException {
         // TODO factory pattern or switch statement to create the right adapter
         BaseAdapter baseAdapter;
 
@@ -68,13 +74,26 @@ public class DefaultExecutor extends BaseExecutor {
         }
 
         // TODO get all files from this directory
-        String outputFile = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + Options.DOT_JSON;
-        File file = new File(outputFile);
+        String outputDir = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + "/" + iteration;
+        File outputFile = new File(outputDir);
 
-//        Execution result = this.readFromFile(file);
+        if(!outputFile.exists()) {
+            throw new RuntimeException("The output file could not be found " + outputDir);
+        }
 
-        // TODO
-        return null;
+        Collection<File> files = FileUtils.listFiles(outputFile, null, true);
+        Set<PerformanceEntry2> entries = new HashSet<>();
+
+        for(File file : files) {
+            ObjectMapper mapper = new ObjectMapper();
+            Execution execution = mapper.readValue(file, new TypeReference<Execution>() {
+            });
+
+            PerformanceEntry2 performanceEntry = new PerformanceEntry2(execution);
+            entries.add(performanceEntry);
+        }
+
+        return entries;
     }
 
 }

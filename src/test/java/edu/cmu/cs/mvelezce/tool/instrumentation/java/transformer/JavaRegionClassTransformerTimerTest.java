@@ -29,7 +29,7 @@ public class JavaRegionClassTransformerTimerTest {
         regions.add(region);
 
         // Directory
-        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Get the instruction count in each method
         JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(directory, regions);
@@ -73,7 +73,7 @@ public class JavaRegionClassTransformerTimerTest {
         regions.add(region);
 
         // Directory
-        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Get the instruction count in each method
         JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(directory, regions);
@@ -123,7 +123,7 @@ public class JavaRegionClassTransformerTimerTest {
         regions.add(region);
 
         // Directory
-        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         // Get the instruction count in each method
         JavaRegionClassTransformerTimer timer = new JavaRegionClassTransformerTimer(directory, regions);

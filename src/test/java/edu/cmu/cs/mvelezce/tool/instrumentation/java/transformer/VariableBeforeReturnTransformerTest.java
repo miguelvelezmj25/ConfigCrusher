@@ -11,7 +11,7 @@ public class VariableBeforeReturnTransformerTest {
 
     @Test
     public void testTransform1() throws IOException {
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 
         BasicClassTransformer transformer = new VariableBeforeReturnTransformer(classDirectory);
         transformer.transformClasses();

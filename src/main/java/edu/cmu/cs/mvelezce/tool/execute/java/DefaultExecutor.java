@@ -11,8 +11,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExamp
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -39,7 +38,7 @@ public class DefaultExecutor extends BaseExecutor {
     }
 
     @Override
-    public Set<PerformanceEntry2> execute(int iteration) throws IOException {
+    public Set<PerformanceEntry2> execute(int iteration) throws IOException, InterruptedException {
         // TODO factory pattern or switch statement to create the right adapter
         BaseAdapter baseAdapter;
 
@@ -67,10 +66,6 @@ public class DefaultExecutor extends BaseExecutor {
 
         for(Set<String> configuration : this.getConfigurations()) {
             baseAdapter.execute(configuration, iteration);
-
-            if(!Regions.getExecutingRegions().isEmpty()) {
-                throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");
-            }
         }
 
         // TODO get all files from this directory

@@ -11,8 +11,8 @@ import edu.cmu.cs.mvelezce.sleep.interpreter.TimedSleepInterpreterTest;
 import edu.cmu.cs.mvelezce.tool.analysis.region.SleepRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -115,7 +115,7 @@ public class SleepPipelineTest {
 //        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("AB");
 //        Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 //
-//        // Set of performance entries
+//        // Set of performancemodel entries
 //        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
 //
 //        // Empty configuration
@@ -177,7 +177,7 @@ public class SleepPipelineTest {
 //        Set<Set<String>> optionsSet = SimpleCompressionTest.getOptionsSet("AB");
 //        Set<Set<String>> configurationsToExecute = Helper.getConfigurations(optionsSet.iterator().next());
 //
-//        // Set of performance entries
+//        // Set of performancemodel entries
 //        Set<PerformanceEntry> measuredPerformance = new HashSet<>();
 //
 //        // Empty configuration

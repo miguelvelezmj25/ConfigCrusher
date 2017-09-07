@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,7 @@ public class RunningExampleAdapter extends BaseAdapter {
     }
 
     @Override
-    public void execute(Set<String> configuration, int iteration) {
+    public void execute(Set<String> configuration, int iteration) throws IOException, InterruptedException {
         String[] args = this.configurationAsMainArguments(configuration);
         String[] newArgs = new String[args.length + 1];
 

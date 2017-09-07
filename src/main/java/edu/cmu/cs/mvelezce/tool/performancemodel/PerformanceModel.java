@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.performance;
+package edu.cmu.cs.mvelezce.tool.performancemodel;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
@@ -17,6 +17,8 @@ public class PerformanceModel {
     private List<Map<Set<String>, Double>> tablesOfRegions = new ArrayList<>();
 //    private MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable;
 
+    private PerformanceModel() { ; }
+
     public PerformanceModel(List<Map<Set<String>, Double>> bfTablePerRegion) {
         this.calculateConfigurationInfluence(bfTablePerRegion);
     }
@@ -25,7 +27,7 @@ public class PerformanceModel {
 //        this.baseTime = baseTime;
 //        this.configurationToPerformance = new HashMap<>();
 //
-////        // TODO this is a hacky way of creating an empty performance model. Either add new constructor or move the methods below to a method call
+////        // TODO this is a hacky way of creating an empty performancemodel model. Either add new constructor or move the methods below to a method call
 ////        if(blocks.isEmpty()) {
 ////            return ;
 ////        }

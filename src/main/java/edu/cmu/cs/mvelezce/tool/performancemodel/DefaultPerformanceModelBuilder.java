@@ -1,46 +1,68 @@
-package edu.cmu.cs.mvelezce.tool.performance;
+package edu.cmu.cs.mvelezce.tool.performancemodel;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 4/28/17.
  */
-public class PerformanceModelBuilder {
+public class DefaultPerformanceModelBuilder implements PerformanceModelBuilder{
 
-//    public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
-//
-//    // JSON strings
-//    public static final String MODEL = "model";
-//    public static final String CONFIGURATION = "configuration";
-//    public static final String PERFORMANCE = "performance";
-//    public static final String CONFIGURATION_TO_PERFORMANCE = "configurationToPerformance";
-//
-//    public static PerformanceModel createPerformanceModel(String programName, String[] args, Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) throws IOException {
-//        Options.getCommandLine(args);
-//
-//        String outputFile = PerformanceModelBuilder.DIRECTORY + "/" + programName + Options.DOT_JSON;
-//        File file = new File(outputFile);
-//
-//        Options.checkIfDeleteResult(file);
-//
-//        if(file.exists()) {
-//            try {
-//                return PerformanceModelBuilder.readFromFile(file);
-//            } catch (ParseException pe) {
-//                throw new RuntimeException("Could not parse the cached results");
-//            }
-//        }
-//
-//        PerformanceModel performanceModel = PerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
-//
-//        if(Options.checkIfSave()) {
-//            PerformanceModelBuilder.writeToFile(programName, performanceModel);
-//        }
-//
-//        return performanceModel;
-//    }
-//
-//    public static PerformanceModel createPerformanceModel(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
-////        PerformanceModelBuilder.getOuterRegions(measuredPerformance, regionsToOptions);
-////        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = PerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
+    public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
+
+    private String programName;
+
+    public DefaultPerformanceModelBuilder(String programName) {
+        this.programName = programName;
+    }
+
+    @Override
+    public PerformanceModel createModel(String[] args) throws IOException {
+        Options.getCommandLine(args);
+
+        String outputFile = DefaultPerformanceModelBuilder.DIRECTORY + "/" + this.programName + Options.DOT_JSON;
+        File file = new File(outputFile);
+
+        Options.checkIfDeleteResult(file);
+
+        if(file.exists()) {
+            return this.readFromFile(file);
+        }
+
+        return null;
+    }
+
+    @Override
+    public PerformanceModel createModel(String[] args, Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<String>> regionsToOptions) throws IOException {
+        PerformanceModel performanceModel = this.createModel(args);
+
+        if(performanceModel != null) {
+            return performanceModel;
+        }
+
+        performanceModel = this.createModel(measuredPerformance, regionsToOptions);
+
+        if(Options.checkIfSave()) {
+            this.writeToFile(performanceModel);
+        }
+
+        return performanceModel;
+    }
+
+    @Override
+    public PerformanceModel createModel(Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
+        // TODO
+        throw new RuntimeException();
+
+////        DefaultPerformanceModelBuilder.getOuterRegions(measuredPerformance, regionsToOptions);
+////        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = DefaultPerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
 //        for(PerformanceEntry entry : measuredPerformance) {
 //            for(Map.Entry<Region, Set<Region>> region : entry.getRegionsToInnerRegions().entrySet()) {
 //                System.out.println("############### " + region.getKey().getRegionID());
@@ -77,8 +99,8 @@ public class PerformanceModelBuilder {
 //        List<Map<Set<String>, Double>> bfTablePerRegion = new ArrayList<>(regionsToConfigurationPerformance.values());
 //
 //        return new PerformanceModel(bfTablePerRegion);
-//    }
-//
+    }
+
 //    private static void getOuterRegions(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
 //        Map<Region, Set<Region>> regionsToOuterRegions = new HashMap<>();
 //
@@ -262,129 +284,76 @@ public class PerformanceModelBuilder {
 //
 //        return regionsToInvolvedOptions;
 //    }
+
+
+//    private static void calculateRealPerformanceOfRegion(Region region, Map<Region, Map<Set<String>, Double>> regionsToRawPerformance, Map<Region, Map<Set<String>, Double>> regionsToRealPerformance) {
+//        // Already have real performancemodel
+//        if(regionsToRealPerformance.containsKey(region)) {
+//            return;
+//        }
 //
+//        Set<Region> possibleInnerRegions = Regions.getPossibleInnerRegions(region);
 //
-////    private static void calculateRealPerformanceOfRegion(Region region, Map<Region, Map<Set<String>, Double>> regionsToRawPerformance, Map<Region, Map<Set<String>, Double>> regionsToRealPerformance) {
-////        // Already have real performance
-////        if(regionsToRealPerformance.containsKey(region)) {
-////            return;
-////        }
-////
-////        Set<Region> possibleInnerRegions = Regions.getPossibleInnerRegions(region);
-////
-////        // Region does not have inner regions
-////        if(possibleInnerRegions.isEmpty()) {
-////            regionsToRealPerformance.put(region, regionsToRawPerformance.get(region));
-////            return;
-////        }
-////
-////        // Calculate real performance by subtracting inner performances
-////        Map<Set<String>, Double> configurationsToRealPerformance = regionsToRawPerformance.get(region);
-////
-////        for(Region innerRegion : possibleInnerRegions) {
-////            PerformanceModelBuilder.calculateRealPerformanceOfRegion(innerRegion, regionsToRawPerformance, regionsToRealPerformance);
-////        }
-////
-////        for(Map.Entry<Set<String>, Double> configurationsToRealPerformanceEntry : configurationsToRealPerformance.entrySet()) {
-////            Set<String> parentConfiguration = configurationsToRealPerformanceEntry.getKey();
-////
-////            for(Region innerRegion : possibleInnerRegions) {
-////                double time = configurationsToRealPerformanceEntry.getValue();
-////                Map<Set<String>, Double> innerConfigurationsToRealPerformance = regionsToRealPerformance.get(innerRegion);
-////
-////                if(innerConfigurationsToRealPerformance.keySet().contains(configurationsToRealPerformanceEntry.getKey())) {
-////                    time -= innerConfigurationsToRealPerformance.get(parentConfiguration);
-////                }
-////                else if(parentConfiguration.size() > 1){
-////                    // If there is a region that executed a sub configuration of the current parent configuration
-////                    for(Map.Entry<Set<String>, Double> innerConfigurationToRealPerformance : innerConfigurationsToRealPerformance.entrySet()) {
-////                        Set<String> childConfiguration = innerConfigurationToRealPerformance.getKey();
-////                        Set<String> childConfigurationValueOfParentConfiguration = new HashSet<>(parentConfiguration);
-////                        childConfigurationValueOfParentConfiguration.retainAll(childConfiguration);
-////
-////                        if(!childConfigurationValueOfParentConfiguration.isEmpty() && childConfigurationValueOfParentConfiguration.equals(childConfiguration)) {
-////                            time -= innerConfigurationToRealPerformance.getValue();
-////                        }
-////                    }
-////                }
-////
-////                // Could have subtracted from calculateConfigurationInfluence that was not executed
-////                configurationsToRealPerformance.put(configurationsToRealPerformanceEntry.getKey(), Math.max(0.0, time));
-////            }
-////        }
-////
-////        regionsToRealPerformance.put(region, configurationsToRealPerformance);
-////    }
+//        // Region does not have inner regions
+//        if(possibleInnerRegions.isEmpty()) {
+//            regionsToRealPerformance.put(region, regionsToRawPerformance.get(region));
+//            return;
+//        }
 //
-//    private static void writeToFile(String programName, PerformanceModel performanceModel) throws IOException {
-//        JSONObject model = new JSONObject();
+//        // Calculate real performancemodel by subtracting inner performances
+//        Map<Set<String>, Double> configurationsToRealPerformance = regionsToRawPerformance.get(region);
 //
-////        model.put(PerformanceModelBuilder.BASE_TIME, performanceModel.getBaseTime());
+//        for(Region innerRegion : possibleInnerRegions) {
+//            DefaultPerformanceModelBuilder.calculateRealPerformanceOfRegion(innerRegion, regionsToRawPerformance, regionsToRealPerformance);
+//        }
 //
-//        JSONArray configurationToPerformance = new JSONArray();
+//        for(Map.Entry<Set<String>, Double> configurationsToRealPerformanceEntry : configurationsToRealPerformance.entrySet()) {
+//            Set<String> parentConfiguration = configurationsToRealPerformanceEntry.getKey();
 //
-//        for(Map.Entry<Set<String>, Double> configurationToPerformanceEntry : performanceModel.getConfigurationToPerformance().entrySet()) {
-//            JSONObject configuration = new JSONObject();
-//            configuration.put(PerformanceModelBuilder.PERFORMANCE, configurationToPerformanceEntry.getValue());
+//            for(Region innerRegion : possibleInnerRegions) {
+//                double time = configurationsToRealPerformanceEntry.getValue();
+//                Map<Set<String>, Double> innerConfigurationsToRealPerformance = regionsToRealPerformance.get(innerRegion);
 //
-//            JSONArray values = new JSONArray();
-//            for(String option : configurationToPerformanceEntry.getKey()) {
-//                values.add(option);
+//                if(innerConfigurationsToRealPerformance.keySet().contains(configurationsToRealPerformanceEntry.getKey())) {
+//                    time -= innerConfigurationsToRealPerformance.get(parentConfiguration);
+//                }
+//                else if(parentConfiguration.size() > 1){
+//                    // If there is a region that executed a sub configuration of the current parent configuration
+//                    for(Map.Entry<Set<String>, Double> innerConfigurationToRealPerformance : innerConfigurationsToRealPerformance.entrySet()) {
+//                        Set<String> childConfiguration = innerConfigurationToRealPerformance.getKey();
+//                        Set<String> childConfigurationValueOfParentConfiguration = new HashSet<>(parentConfiguration);
+//                        childConfigurationValueOfParentConfiguration.retainAll(childConfiguration);
+//
+//                        if(!childConfigurationValueOfParentConfiguration.isEmpty() && childConfigurationValueOfParentConfiguration.equals(childConfiguration)) {
+//                            time -= innerConfigurationToRealPerformance.getValue();
+//                        }
+//                    }
+//                }
+//
+//                // Could have subtracted from calculateConfigurationInfluence that was not executed
+//                configurationsToRealPerformance.put(configurationsToRealPerformanceEntry.getKey(), Math.max(0.0, time));
 //            }
-//
-//            configuration.put(PerformanceModelBuilder.CONFIGURATION, values);
-//
-//            configurationToPerformance.add(configuration);
 //        }
 //
-//        model.put(PerformanceModelBuilder.CONFIGURATION_TO_PERFORMANCE, configurationToPerformance);
-//
-//        JSONObject result = new JSONObject();
-//        result.put(PerformanceModelBuilder.MODEL, model);
-//
-//        File directory = new File(PerformanceModelBuilder.DIRECTORY);
-//
-//        if(!directory.exists()) {
-//            directory.mkdirs();
-//        }
-//
-//        String outputFile = PerformanceModelBuilder.DIRECTORY + "/" + programName + Options.DOT_JSON;
-//        File file = new File(outputFile);
-//        FileWriter writer = new FileWriter(file);
-//        writer.write(result.toJSONString());
-//        writer.flush();
-//        writer.close();
+//        regionsToRealPerformance.put(region, configurationsToRealPerformance);
 //    }
-//
-//    private static PerformanceModel readFromFile(File file) throws IOException, ParseException {
-//        JSONParser parser = new JSONParser();
-//        JSONObject result = (JSONObject) parser.parse(new FileReader(file));
-//
-//        JSONObject model = (JSONObject) result.get(PerformanceModelBuilder.MODEL);
-//
-////        double baseTime = (double) model.get(PerformanceModelBuilder.BASE_TIME);
-//        Map<Set<String>, Double> configurationsToPerformances = new HashMap<>();
-//
-//        JSONArray configurationsToPerformancesResult = (JSONArray) model.get(PerformanceModelBuilder.CONFIGURATION_TO_PERFORMANCE);
-//
-//        for(Object entry : configurationsToPerformancesResult) {
-//            JSONObject configurationToPerformanceResult = (JSONObject) entry;
-//
-//            double performance = (double) configurationToPerformanceResult.get(PerformanceModelBuilder.PERFORMANCE);
-//
-//            Set<String> configuration = new HashSet<>();
-//            JSONArray optionsResult = (JSONArray) configurationToPerformanceResult.get(PerformanceModelBuilder.CONFIGURATION);
-//
-//            for(Object optionResult : optionsResult) {
-//                configuration.add((String) optionResult);
-//            }
-//
-//            configurationsToPerformances.put(configuration, performance);
-//        }
-//
-//        PerformanceModel performanceModel = new PerformanceModel(/*baseTime,*/ new ArrayList<>());
-//        performanceModel.setConfigurationToPerformance(configurationsToPerformances);
-//
-//        return performanceModel;
-//    }
+
+    @Override
+    public void writeToFile(PerformanceModel performanceModel) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String outputFile = DefaultPerformanceModelBuilder.DIRECTORY + "/" + this.programName + Options.DOT_JSON;
+        File file = new File(outputFile);
+
+        mapper.writeValue(file, performanceModel);
+    }
+
+    // TODO test
+    @Override
+    public PerformanceModel readFromFile(File file) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        PerformanceModel performanceModel = mapper.readValue(file, new TypeReference<PerformanceModel>() {
+        });
+
+        return performanceModel;
+    }
 }

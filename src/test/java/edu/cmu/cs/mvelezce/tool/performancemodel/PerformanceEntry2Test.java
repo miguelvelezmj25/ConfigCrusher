@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.performance;
+package edu.cmu.cs.mvelezce.tool.performancemodel;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -7,11 +7,9 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Set;
 
-import static org.junit.Assert.*;
-
 public class PerformanceEntry2Test {
     @Test
-    public void testPerformanceEntry2() throws IOException {
+    public void testPerformanceEntry2() throws IOException, InterruptedException {
         String programName = "running-example";
 
         // Program arguments

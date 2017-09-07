@@ -69,12 +69,12 @@ public class BruteForce {
 //        }
 //
 //        StringBuilder result = new StringBuilder();
-//        result.append("measured,configuration,performance,std");
+//        result.append("measured,configuration,performancemodel,std");
 //        result.append("\n");
 //
 //        for(PerformanceStatistic perfStat : perfStats) {
 //            if(perfStat.getRegionsToMean().size() != 1) {
-//                throw new RuntimeException("The performance entry should only have measured the entire program " + perfStat.getRegionsToMean().keySet());
+//                throw new RuntimeException("The performancemodel entry should only have measured the entire program " + perfStat.getRegionsToMean().keySet());
 //            }
 //
 ////            perfStat.setMeasured("true");

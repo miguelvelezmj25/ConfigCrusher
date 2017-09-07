@@ -10,10 +10,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry2;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 
 import java.io.File;
@@ -53,12 +51,12 @@ public class JavaPipeline {
         instrumenter.instrument(args);
         System.out.println("");
 
-        System.out.println("####################### Measure performance #######################");
+        System.out.println("####################### Measure performancemodel #######################");
         Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
         Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
         System.out.println("");
 
-        System.out.println("####################### Build performance model #######################");
+        System.out.println("####################### Build performancemodel model #######################");
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
@@ -67,7 +65,7 @@ public class JavaPipeline {
             regionsToOptions.put(region, entry.getValue());
         }
 
-//        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //        JavaPipeline.savePMPerformance(programName, pm);
 //
@@ -97,7 +95,7 @@ public class JavaPipeline {
 //        Instrumenter.instrument(args, instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
 //        System.out.println("");
 //
-//        System.out.println("####################### Measure performance #######################");
+//        System.out.println("####################### Measure performancemodel #######################");
 //        List<Set<PerformanceEntry2>> executionsPerformance = new ArrayList<>();
 //
 //        Options.getCommandLine(args);
@@ -109,7 +107,7 @@ public class JavaPipeline {
 //        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
 //        System.out.println("");
 //
-//        System.out.println("####################### Build performance model #######################");
+//        System.out.println("####################### Build performancemodel model #######################");
 //        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 //
 //        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
@@ -118,7 +116,7 @@ public class JavaPipeline {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //        JavaPipeline.savePMPerformance(programName, pm, perfStats);
 //
@@ -146,7 +144,7 @@ public class JavaPipeline {
         instrumenter.instrument(args);
         System.out.println("");
 
-        System.out.println("####################### Measure performance #######################");
+        System.out.println("####################### Measure performancemodel #######################");
         Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
         Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
 
@@ -158,7 +156,7 @@ public class JavaPipeline {
 //        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
         System.out.println("");
 
-        System.out.println("####################### Build performance model #######################");
+        System.out.println("####################### Build performancemodel model #######################");
         Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 
         for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
@@ -167,7 +165,7 @@ public class JavaPipeline {
             regionsToOptions.put(region, entry.getValue());
         }
 
-//        PerformanceModel pm = PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //        JavaPipeline.savePMPerformance(programName, pm, null);
 //
@@ -193,11 +191,11 @@ public class JavaPipeline {
 //        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
 //        System.out.println("");
 //
-//        System.out.println("Measure performance");
+//        System.out.println("Measure performancemodel");
 //        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
 //        System.out.println("");
 //
-//        System.out.println("Build performance model");
+//        System.out.println("Build performancemodel model");
 //        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 //
 //        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
@@ -206,7 +204,7 @@ public class JavaPipeline {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        return PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        return DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
         return null; // TODO make change since interface changed
     }
 
@@ -227,11 +225,11 @@ public class JavaPipeline {
 //        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
 //        System.out.println("");
 //
-//        System.out.println("Measure performance");
+//        System.out.println("Measure performancemodel");
 //        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
 //        System.out.println("");
 //
-//        System.out.println("Build performance model");
+//        System.out.println("Build performancemodel model");
 //        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
 //
 //        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
@@ -240,7 +238,7 @@ public class JavaPipeline {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        return PerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        return DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
         return null; // TODO make change since interface changed
     }
 
@@ -273,7 +271,7 @@ public class JavaPipeline {
         Set<Set<String>> configurations = Helper.getConfigurations(options);
 
         StringBuilder result = new StringBuilder();
-        result.append("measured,configuration,performance");
+        result.append("measured,configuration,performancemodel");
         result.append("\n");
 
         for(Set<String> configuration : configurations) {

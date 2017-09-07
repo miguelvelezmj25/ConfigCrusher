@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.performance;
+package edu.cmu.cs.mvelezce.tool.performancemodel;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;

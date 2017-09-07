@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 import org.apache.commons.io.FileUtils;
 
@@ -35,7 +35,7 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public Set<PerformanceEntry2> execute(String[] args) throws IOException {
+    public Set<PerformanceEntry2> execute(String[] args) throws IOException, InterruptedException {
         Options.getCommandLine(args);
 
         String outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
@@ -69,7 +69,7 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public Set<PerformanceEntry2> execute() throws IOException {
+    public Set<PerformanceEntry2> execute() throws IOException, InterruptedException {
         List<Set<PerformanceEntry2>> executionsPerformance = new ArrayList<>();
 
         for(int i = 0; i < this.repetitions; i++) {

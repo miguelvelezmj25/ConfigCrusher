@@ -73,56 +73,55 @@ public abstract class BaseAdapter implements Adapter {
     }
 
     @Override
-    public void execute(Set<String> configuration) {
+    public void execute(Set<String> configuration) throws IOException, InterruptedException {
         this.execute(configuration, 0);
     }
 
     @Override
-    public void execute(String mainAdapter, String[] args) {
-        try {
-            StringBuilder output = new StringBuilder();
-            List<String> commandList = new ArrayList<>();
-            commandList.add("java");
-            commandList.add("-Xmx8G");
-            commandList.add("-cp");
-            commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
-            commandList.add(mainAdapter);
-            commandList.add(this.programName);
-            commandList.add(this.mainClass);
-            commandList.addAll(Arrays.asList(args));
+    public void execute(String mainAdapter, String[] args) throws InterruptedException, IOException {
+        StringBuilder output = new StringBuilder();
+        List<String> commandList = new ArrayList<>();
+        commandList.add("java");
+        commandList.add("-Xmx8G");
+        commandList.add("-cp");
+        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
+        commandList.add(mainAdapter);
+        commandList.add(this.programName);
+        commandList.add(this.mainClass);
+        commandList.addAll(Arrays.asList(args));
 
-            String[] command = new String[commandList.size()];
-            command = commandList.toArray(command);
-            System.out.println(Arrays.toString(command));
-            Process process = Runtime.getRuntime().exec(command);
+        String[] command = new String[commandList.size()];
+        command = commandList.toArray(command);
+        System.out.println(Arrays.toString(command));
+        Process process = Runtime.getRuntime().exec(command);
 
-            BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String string;
+        BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String string;
 
-            while ((string = inputReader.readLine()) != null) {
-                if(!string.isEmpty()) {
-                    output.append(string).append("\n");
-                }
+        while ((string = inputReader.readLine()) != null) {
+            if(!string.isEmpty()) {
+                output.append(string).append("\n");
             }
-
-            System.out.println(output);
-
-            output = new StringBuilder();
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-
-            while ((string = errorReader.readLine()) != null) {
-                if(!string.isEmpty()) {
-                    output.append(string).append("\n");
-                }
-            }
-
-            System.out.println(output);
-
-            process.waitFor();
-        } catch (IOException | InterruptedException ie) {
-            ie.printStackTrace();
         }
 
+        System.out.println(output);
+
+        output = new StringBuilder();
+        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+        while ((string = errorReader.readLine()) != null) {
+            if(!string.isEmpty()) {
+                output.append(string).append("\n");
+            }
+        }
+
+        System.out.println(output);
+
+        process.waitFor();
+
+        if(!output.toString().isEmpty()) {
+            throw new IOException();
+        }
     }
 
 }

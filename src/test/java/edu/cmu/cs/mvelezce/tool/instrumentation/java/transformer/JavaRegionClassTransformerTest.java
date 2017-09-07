@@ -25,8 +25,8 @@ public class JavaRegionClassTransformerTest {
     @Test
     public void testSleep9() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String program = "Sleep9";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String srcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/dummy/";
 
         // Program arguments
         String[] args = new String[0];
@@ -38,7 +38,7 @@ public class JavaRegionClassTransformerTest {
 
     @Test
     public void testCalculateASMStartIndex1() throws IOException {
-        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+        String directory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/dummy/out/production/dummy/";
         String programName = "Dummy3";
         String[] args = new String[0];
 

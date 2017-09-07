@@ -1,13 +1,15 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
-public interface StaticAnalysis {
+// TODO use generics for java region
+public interface StaticAnalysis extends Analysis {
 
     public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException;
 

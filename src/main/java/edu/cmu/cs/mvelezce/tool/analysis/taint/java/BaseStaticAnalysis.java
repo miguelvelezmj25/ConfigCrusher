@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionAndOptions;
 
 import java.io.File;
@@ -49,6 +50,19 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis {
 
         return regionsToOptionsSet;
     }
+
+    // TODO should this be static helper method?
+    public Map<Region, Set<Set<String>>> transform(Map<? extends Region, Set<Set<String>>> regionsToOptionSet) {
+        Map<Region, Set<Set<String>>> result = new HashMap<>();
+
+        for(Map.Entry<? extends Region, Set<Set<String>>> entry : regionsToOptionSet.entrySet()) {
+            Region region = new Region(entry.getKey().getRegionID());
+            result.put(region, entry.getValue());
+        }
+
+        return result;
+    }
+
 
     public String getProgramName() {
         return this.programName;

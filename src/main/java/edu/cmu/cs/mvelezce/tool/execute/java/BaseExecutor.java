@@ -49,7 +49,6 @@ public abstract class BaseExecutor implements Executor {
             return results;
         }
 
-        // TODO remove this once we have fixed how to read and aggregate results
         outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
         outputFile = new File(outputDir);
 

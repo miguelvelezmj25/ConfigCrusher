@@ -22,7 +22,7 @@ public class CompileInstrumenter extends BaseInstrumenter {
 
         try {
             String[] command = new String[]{"javac", //"-cp",
-//                    "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/elevator/lib/*",
+//                    "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/lib/*",
                     "-d", this.getClassDir(), "@" + this.getSrcDir() + "sources.txt"};
             System.out.println(Arrays.toString(command));
             Process process = Runtime.getRuntime().exec(command);

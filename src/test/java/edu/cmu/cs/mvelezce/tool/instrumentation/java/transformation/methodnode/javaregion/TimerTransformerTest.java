@@ -16,7 +16,7 @@ public class TimerTransformerTest {
     @Test
     public void testRunningExample() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "running-example";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/original/running-example/target/classes";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
 
         // Program arguments
         String[] args = new String[0];

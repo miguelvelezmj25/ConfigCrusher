@@ -12,7 +12,7 @@ public class DefaultExecutorTest {
     @Test
     public void sleep1() throws Exception {
         String programName = "sleep1";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
         // Program arguments
@@ -33,7 +33,7 @@ public class DefaultExecutorTest {
     @Test
     public void runningExample() throws Exception {
         String programName = "running-example";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performancemodel-mapper-evaluation/instrumented/running-example/target/classes";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
         String entryPoint = "edu.cmu.cs.mvelezce.Example";
 
         // Program arguments

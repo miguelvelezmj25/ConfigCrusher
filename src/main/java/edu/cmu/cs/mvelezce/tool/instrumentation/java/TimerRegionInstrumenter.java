@@ -15,7 +15,7 @@ import java.util.Set;
 public class TimerRegionInstrumenter extends BaseRegionInstrumenter {
 
     // TODO is this needed?
-    public static final String TARGET_DIRECTORY = "../performancemodel-mapper-evaluation/instrumented";
+    public static final String TARGET_DIRECTORY = "../performance-mapper-evaluation/instrumented";
 
     public TimerRegionInstrumenter(String classDir, Set<JavaRegion> regions) {
         this(null, classDir, regions);

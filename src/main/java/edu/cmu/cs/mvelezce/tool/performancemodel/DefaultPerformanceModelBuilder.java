@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,36 +19,37 @@ public class DefaultPerformanceModelBuilder implements PerformanceModelBuilder{
     public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
 
     private String programName;
-
-    public DefaultPerformanceModelBuilder(String programName) {
+    private Set<PerformanceEntry2> measuredPerformance;
+    private Map<Region, Set<Set<String>>> regionsToOptionSet;
+;
+    public DefaultPerformanceModelBuilder(String programName, Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
         this.programName = programName;
+        this.measuredPerformance = measuredPerformance;
+        this.regionsToOptionSet = regionsToOptionSet;
     }
 
     @Override
     public PerformanceModel createModel(String[] args) throws IOException {
         Options.getCommandLine(args);
 
-        String outputFile = DefaultPerformanceModelBuilder.DIRECTORY + "/" + this.programName + Options.DOT_JSON;
-        File file = new File(outputFile);
+        String outputDir = DefaultPerformanceModelBuilder.DIRECTORY + "/" + this.programName + Options.DOT_JSON;
+        File outputFile = new File(outputDir);
 
-        Options.checkIfDeleteResult(file);
+        Options.checkIfDeleteResult(outputFile);
 
-        if(file.exists()) {
-            return this.readFromFile(file);
+        if(outputFile.exists()) {
+            // TODO check that this just returns
+            return this.readFromFile(outputFile);
         }
 
-        return null;
-    }
+        outputDir = DefaultPerformanceModelBuilder.DIRECTORY + "/" + this.programName;
+        outputFile = new File(outputDir);
 
-    @Override
-    public PerformanceModel createModel(String[] args, Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<String>> regionsToOptions) throws IOException {
-        PerformanceModel performanceModel = this.createModel(args);
-
-        if(performanceModel != null) {
-            return performanceModel;
+        if(outputFile.exists()) {
+            FileUtils.forceDelete(outputFile);
         }
 
-        performanceModel = this.createModel(measuredPerformance, regionsToOptions);
+        PerformanceModel performanceModel = this.createModel();
 
         if(Options.checkIfSave()) {
             this.writeToFile(performanceModel);
@@ -57,7 +59,7 @@ public class DefaultPerformanceModelBuilder implements PerformanceModelBuilder{
     }
 
     @Override
-    public PerformanceModel createModel(Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
+    public PerformanceModel createModel() {
         // TODO
         throw new RuntimeException();
 

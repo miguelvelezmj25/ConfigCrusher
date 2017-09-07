@@ -12,7 +12,12 @@ import java.util.*;
  * Created by mvelezce on 3/9/17.
  */
 public class PerformanceModel {
-    //    private double baseTime;
+
+    private Set<Map<Set<String>, Long>> performanceTables;
+    private Set<Map<Set<String>, Double>> performanceTablesHumandReadable;
+
+
+
     private Map<Set<String>, Double> configurationToPerformance = new HashMap<>();
     private List<Map<Set<String>, Double>> tablesOfRegions = new ArrayList<>();
 //    private MultiValuedMap<Set<String>, Map<Set<String>, Double>> regionToInfluenceTable;

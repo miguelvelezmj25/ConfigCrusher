@@ -13,6 +13,7 @@ import java.util.Set;
 
 public abstract class BaseCompression implements Compression {
 
+    // TODO pass the set to compress as an instance variable
     private String programName = null;
 
     public BaseCompression() { }

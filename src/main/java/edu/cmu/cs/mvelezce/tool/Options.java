@@ -43,12 +43,7 @@ public abstract class Options {
 
     public static void checkIfDeleteResult(File file) throws IOException {
         if(cmd.hasOption(Options.DELRES)) {
-            if(file.isDirectory()) {
-                FileUtils.deleteDirectory(file);
-            }
-            else {
-                file.delete();
-            }
+            FileUtils.forceDelete(file);
         }
     }
 

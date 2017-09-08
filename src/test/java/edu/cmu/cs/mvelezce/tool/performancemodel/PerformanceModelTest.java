@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.performancemodel;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
@@ -11,39 +12,39 @@ public class PerformanceModelTest {
 
     @Test
     public void testEvaluate1() {
-        List<Map<Set<String>, Double>> blocks = new ArrayList<>();
-        Map<Set<String>, Double> block = new HashMap<>();
-        Set<String> configuration = new HashSet<>();
-        block.put(configuration, 0.0);
-
-        configuration = new HashSet<>();
-        configuration.add("A");
-        block.put(configuration, 3.0);
-
-        blocks.add(block);
-
-        block = new HashMap<>();
-        configuration = new HashSet<>();
-        block.put(configuration, 0.0);
-
-        configuration = new HashSet<>();
-        configuration.add("B");
-        block.put(configuration, 1.0);
-
-        blocks.add(block);
-
-        block = new HashMap<>();
-        configuration = new HashSet<>();
-        block.put(configuration, 6.0);
-
-        configuration = new HashSet<>();
-        configuration.add("A");
-        configuration.add("B");
-        block.put(configuration, 6.0);
-
-        blocks.add(block);
-
-        // TODO
+//        List<Map<Set<String>, Double>> blocks = new ArrayList<>();
+//        Map<Set<String>, Double> block = new HashMap<>();
+//        Set<String> configuration = new HashSet<>();
+//        block.put(configuration, 0.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        block.put(configuration, 3.0);
+//
+//        blocks.add(block);
+//
+//        block = new HashMap<>();
+//        configuration = new HashSet<>();
+//        block.put(configuration, 0.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        block.put(configuration, 1.0);
+//
+//        blocks.add(block);
+//
+//        block = new HashMap<>();
+//        configuration = new HashSet<>();
+//        block.put(configuration, 6.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        block.put(configuration, 6.0);
+//
+//        blocks.add(block);
+//
+//        // TODO
 //        PerformanceModel pm = new PerformanceModel(blocks);
 //
 //        long performance = 6;
@@ -69,56 +70,56 @@ public class PerformanceModelTest {
 
     @Test
     public void testEvaluate2() {
-        List<Map<Set<String>, Double>> blocks = new ArrayList<>();
-        Map<Set<String>, Double> block = new HashMap<>();
-        Set<String> configuration = new HashSet<>();
-        block.put(configuration, 0.0);
-
-        configuration = new HashSet<>();
-        configuration.add("A");
-        block.put(configuration, 3.0);
-
-        configuration = new HashSet<>();
-        configuration.add("B");
-        block.put(configuration, 3.0);
-
-        configuration = new HashSet<>();
-        configuration.add("A");
-        configuration.add("B");
-        block.put(configuration, 3.0);
-
-        blocks.add(block);
-
-        block = new HashMap<>();
-        configuration = new HashSet<>();
-        block.put(configuration, 0.0);
-
-        configuration = new HashSet<>();
-        configuration.add("B");
-        block.put(configuration, 1.0);
-
-        blocks.add(block);
-
-        block = new HashMap<>();
-        configuration = new HashSet<>();
-        block.put(configuration, 6.0);
-
-        configuration = new HashSet<>();
-        configuration.add("A");
-        block.put(configuration, 6.0);
-
-        configuration = new HashSet<>();
-        configuration.add("B");
-        block.put(configuration, 6.0);
-
-        configuration = new HashSet<>();
-        configuration.add("A");
-        configuration.add("B");
-        block.put(configuration, 6.0);
-
-        blocks.add(block);
-
-        // TODO
+//        List<Map<Set<String>, Double>> blocks = new ArrayList<>();
+//        Map<Set<String>, Double> block = new HashMap<>();
+//        Set<String> configuration = new HashSet<>();
+//        block.put(configuration, 0.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        block.put(configuration, 3.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        block.put(configuration, 3.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        block.put(configuration, 3.0);
+//
+//        blocks.add(block);
+//
+//        block = new HashMap<>();
+//        configuration = new HashSet<>();
+//        block.put(configuration, 0.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        block.put(configuration, 1.0);
+//
+//        blocks.add(block);
+//
+//        block = new HashMap<>();
+//        configuration = new HashSet<>();
+//        block.put(configuration, 6.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        block.put(configuration, 6.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("B");
+//        block.put(configuration, 6.0);
+//
+//        configuration = new HashSet<>();
+//        configuration.add("A");
+//        configuration.add("B");
+//        block.put(configuration, 6.0);
+//
+//        blocks.add(block);
+//
+//        // TODO
 //        PerformanceModel pm = new PerformanceModel(blocks);
 //
 //        long performance = 6;

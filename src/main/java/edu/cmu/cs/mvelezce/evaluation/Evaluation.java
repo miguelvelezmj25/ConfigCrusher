@@ -1,12 +1,17 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Evaluation {
@@ -44,11 +49,7 @@ public class Evaluation {
                 throw new RuntimeException("This method can only handle approaches that measure 1 region" +
                         " (e.g. Brute force)");
             }
-//            if(perfStat.getRegionsToMean().size() != 1) {
-//                throw new RuntimeException("The performancemodel entry should only have measured the entire program " + perfStat.getRegionsToMean().keySet());
-//            }
-//
-////            perfStat.setMeasured("true");
+
             result.append("true");
             result.append(",");
             result.append('"');
@@ -68,49 +69,44 @@ public class Evaluation {
         writer.close();
     }
 
-//    public void writeConfigurationToPerformance(PerformanceModel performanceModel) {
-//        File file = new File(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
-//
-//        if(file.exists()) {
-//            if(!file.delete()) {
-//                throw new RuntimeException("Could not delete " + file);
-//            }
-//        }
-//
-//        StringBuilder result = new StringBuilder();
-//        result.append("measured,configuration,performancemodel,std");
-//        result.append("\n");
-//
-//        for(PerformanceStatistic perfStat : perfStats) {
-//            if(perfStat.getRegionsToMean().size() != 1) {
-//                throw new RuntimeException("The performancemodel entry should only have measured the entire program " + perfStat.getRegionsToMean().keySet());
-//            }
-//
-////            perfStat.setMeasured("true");
-//            result.append("true");
-//            result.append(",");
-//            result.append('"');
-//            result.append(perfStat.getConfiguration());
-//            result.append('"');
-//            result.append(",");
-//            result.append(perfStat.getRegionsToMean().values().iterator().next() / 1000000000.0);
-//            result.append(",");
-//            result.append(perfStat.getRegionsToStd().values().iterator().next() / 1000000000.0);
-//            result.append("\n");
-//        }
-//
-//        File directory = new File(BruteForce.BF_RES_DIR);
-//
-//        if(!directory.exists()) {
-//            directory.mkdirs();
-//        }
-//
-//        String outputFile = directory + "/" + programName + Options.DOT_CSV;
-//        file = new File(outputFile);
-//        FileWriter writer = new FileWriter(file, true);
-//        writer.write(result.toString());
-//        writer.flush();
-//        writer.close();
-//    }
+    public void writeConfigurationToPerformance(String approach, PerformanceModel performanceModel) throws IOException {
+        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.FULL_DIR + "/"
+                + approach + Evaluation.DOT_CSV;
+        File outputFile = new File(outputDir);
+
+        if(outputFile.exists()) {
+            FileUtils.forceDelete(outputFile);
+        }
+
+        Collection<Map<Set<String>, Long>> performanceTables = performanceModel.getRegionsToPerformanceTables().values();
+        Set<Set<String>> options = new HashSet<>();
+
+        for(Map<Set<String>, Long> entry : performanceTables) {
+            options.addAll(entry.keySet());
+        }
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurations(options);
+
+        StringBuilder result = new StringBuilder();
+        result.append("measured,configuration,performance");//;,std");
+        result.append("\n");
+
+        for(Set<String> configuration : configurations) {
+            result.append("TODO");
+            result.append(",");
+            result.append('"');
+            result.append(configuration);
+            result.append('"');
+            result.append(",");
+            result.append(performanceModel.evaluate(configuration));
+            result.append("\n");
+        }
+
+        outputFile.getParentFile().mkdirs();
+        FileWriter writer = new FileWriter(outputFile, true);
+        writer.write(result.toString());
+        writer.flush();
+        writer.close();
+    }
 
 }

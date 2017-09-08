@@ -630,7 +630,7 @@ public class SimpleCompressionTest {
     }
 
     @Test
-    public void testRunningExample() throws IOException {
+    public void runningExample() throws IOException {
         String programName = "running-example";
 
         // Program arguments
@@ -654,7 +654,7 @@ public class SimpleCompressionTest {
     }
 
     @Test
-    public void testRunningExample1() throws IOException {
+    public void runningExample1() throws IOException {
         String programName = "running-example";
 
         // Program arguments
@@ -663,6 +663,30 @@ public class SimpleCompressionTest {
         Compression compressor = new SimpleCompression(programName);
         Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
         System.out.println(configurationsToExecute.size());
+    }
+
+    @Test
+    public void Sleep1() throws IOException {
+//        String programName = "sleep1";
+//
+//        // Program arguments
+//        String[] args = new String[0];
+//
+////        String[] args = new String[1];
+////        args[0] = "-saveres";
+//
+//        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+//        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+//
+//        Compression compressor = new SimpleCompression(programName, options);
+//        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
+//        System.out.println(configurationsToExecute.size());
     }
 
 }

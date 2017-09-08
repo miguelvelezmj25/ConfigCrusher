@@ -1,12 +1,12 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformer;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
-import jdk.internal.org.objectweb.asm.tree.FieldInsnNode;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
-import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
+import jdk.internal.org.objectweb.asm.tree.*;
 
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.util.Set;
 
 // TODO do i need to update the stack and frame?
@@ -14,14 +14,16 @@ import java.util.Set;
 /**
  * Created by mvelezce on 4/3/17.
  */
-public class JavaRegionClassTransformerPrinter extends JavaRegionClassTransformer {
+public class PrinterTransformer extends RegionTransformer {
 
     private String messageToPrint;
 
-    public JavaRegionClassTransformerPrinter(String directory, Set<JavaRegion> regions, String messageToPrint) {
+    public PrinterTransformer(String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
         super(directory, regions);
+    }
 
-        this.messageToPrint = messageToPrint;
+    public PrinterTransformer(ClassTransformer classTransformer, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(classTransformer, regions);
     }
 
     @Override
@@ -42,5 +44,10 @@ public class JavaRegionClassTransformerPrinter extends JavaRegionClassTransforme
         instructionsAfterRegion.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false));
 
         return instructionsAfterRegion;
+    }
+
+    @Override
+    public void transformMethod(MethodNode methodNode) {
+        throw new RuntimeException();
     }
 }

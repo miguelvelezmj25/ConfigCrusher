@@ -1,16 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
-import edu.cmu.cs.mvelezce.*;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.List;
-
 /**
  * Created by mvelezce on 5/3/17.
  */

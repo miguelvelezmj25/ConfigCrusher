@@ -123,6 +123,7 @@ public class MethodGraphBuilder {
             previousInstruction = instruction;
 
             for(MethodBlock blockWithReturn : blocksWithReturn) {
+                // TODO this is what makes the exit block to have an edge with itself
                 graph.addEdge(blockWithReturn, graph.getExitBlock());
                 blockWithReturn.setWithRet(true);
             }

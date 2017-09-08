@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.performancemodel;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -14,8 +15,9 @@ import java.util.Set;
 public class PerformanceModel {
 
     private long baseTime = 0;
+    private double baseTimeHumanReadable = 0.0;
     private Map<Region, Map<Set<String>, Long>> regionsToPerformanceTables = new HashMap<>();
-    private Map<Region, Map<Set<String>, Long>> regionsToPerformanceTablesHumanReadable = new HashMap<>();
+    private Map<Region, Map<Set<String>, Double>> regionsToPerformanceTablesHumanReadable = new HashMap<>();
 
 
 //    private Map<Set<String>, Double> configurationToPerformance = new HashMap<>();
@@ -34,7 +36,30 @@ public class PerformanceModel {
         this.baseTime = baseTime;
         this.regionsToPerformanceTables = regionsToPerformanceTables;
 
-        // TODO add to human readable method
+        this.baseTimeHumanReadable = PerformanceEntry2.toSeconds(this.baseTime);
+        this.regionsToPerformanceTablesHumanReadable = PerformanceModel.toHumanReadable(this.regionsToPerformanceTables);
+    }
+
+    /**
+     * The assumption is that the values in the tables are in nanoseconds.
+     *
+     * @param regionsToPerformanceTables
+     * @return
+     */
+    private static Map<Region, Map<Set<String>, Double>> toHumanReadable(Map<Region, Map<Set<String>, Long>> regionsToPerformanceTables) {
+        Map<Region, Map<Set<String>, Double>> result = new HashMap<>();
+
+        for(Map.Entry<Region, Map<Set<String>, Long>> regionToTable : regionsToPerformanceTables.entrySet()) {
+            Map<Set<String>, Double> configToNewPerformance = new HashMap<>();
+
+            for(Map.Entry<Set<String>, Long> configToPerformance : regionToTable.getValue().entrySet()) {
+                configToNewPerformance.put(configToPerformance.getKey(), PerformanceEntry2.toSeconds(configToPerformance.getValue()));
+            }
+
+            result.put(regionToTable.getKey(), configToNewPerformance);
+        }
+
+        return result;
     }
 
 //    public PerformanceModel(double baseTime, List<Map<Set<String>, Double>> blocks) {
@@ -205,17 +230,19 @@ public class PerformanceModel {
 
     @Override
     public String toString() {
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+
         StringBuilder pm = new StringBuilder();
 
-        pm.append(this.baseTime);
+        pm.append(decimalFormat.format(this.baseTimeHumanReadable));
         pm.append("\n");
         pm.append("\n");
 
-        for(Map<Set<String>, Long> performanceTables : this.regionsToPerformanceTables.values()) {
-            for(Map.Entry<Set<String>, Long> configurationToPerformance : performanceTables.entrySet()) {
+        for(Map<Set<String>, Double> performanceTables : this.regionsToPerformanceTablesHumanReadable.values()) {
+            for(Map.Entry<Set<String>, Double> configurationToPerformance : performanceTables.entrySet()) {
                 pm.append(configurationToPerformance.getKey());
                 pm.append(" -> ");
-                pm.append(configurationToPerformance.getValue());
+                pm.append(decimalFormat.format(configurationToPerformance.getValue()));
                 pm.append("\n");
             }
 

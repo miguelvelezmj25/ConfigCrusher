@@ -15,6 +15,8 @@ import java.util.Set;
 
 public abstract class BaseCompression implements Compression {
 
+    public static final String DIRECTORY = Options.DIRECTORY + "/compression/java/programs";
+
     // TODO pass the set to compress as an instance variable
     private String programName = null;
     private Set<Set<String>> optionSet;

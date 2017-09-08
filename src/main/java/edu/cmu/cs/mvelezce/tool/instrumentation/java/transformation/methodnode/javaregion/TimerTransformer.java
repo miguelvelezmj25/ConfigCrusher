@@ -271,17 +271,17 @@ public class TimerTransformer extends RegionTransformer {
     private void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
         List<String> javapResult = this.getJavapResult();
         int methodStartIndex = 0;
+        String methodName = methodNode.name;
 
-        if(methodNode.name.startsWith("<init>")) {
+        if(methodName.startsWith("<init>")) {
             // TODO check this
-            throw new RuntimeException();
-//            method = method.replace("<init>", "");
-//            method = tempRegion.getRegionPackage() + "." + tempRegion.getRegionClass() + method;
+            methodName = this.getCurrentClassNode().name;
+            methodName = methodName.replace("/", ".");
         }
 
         // Check if signature matches
         for(String outputLine : javapResult) {
-            if(outputLine.contains(" " + methodNode.name + "(")) {
+            if(outputLine.contains(" " + methodName + "(")) {
                 String formalParametersString = outputLine.substring(outputLine.indexOf("(") + 1, outputLine.indexOf(")"));
                 List<String> formalParameters = Arrays.asList(formalParametersString.split(","));
                 StringBuilder methodDescriptors = new StringBuilder();
@@ -350,24 +350,16 @@ public class TimerTransformer extends RegionTransformer {
                 }
             }
 
-            int outputLineBytecodeIndex;
+            int outputLineBytecodeIndex = -1;
             String outputLineBytecodeIndexString = outputLine.substring(0, outputLine.indexOf(":")).trim();
 
             if(StringUtils.isNumeric(outputLineBytecodeIndexString)) {
                 outputLineBytecodeIndex = Integer.valueOf(outputLineBytecodeIndexString);
             }
-            else {
-                // TODO check this
-                throw new RuntimeException("Something happened");
-            }
 
             if(outputLineBytecodeIndex > currentBytecodeIndex) {
                 instructionNumber++;
                 currentBytecodeIndex = outputLineBytecodeIndex;
-            }
-            else {
-                // TODO check this
-                throw new RuntimeException("Something happened");
             }
 
             if(updatedRegions.size() == regionsInMethod.size()) {

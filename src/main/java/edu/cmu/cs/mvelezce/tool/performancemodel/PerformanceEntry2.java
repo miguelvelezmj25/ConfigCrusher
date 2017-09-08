@@ -21,14 +21,6 @@ public class PerformanceEntry2 {
         ;
     }
 
-//    public PerformanceEntry2(Set<String> configuration, Map<Region, Long> regionsToRawPerformance) {
-//        this.configuration = configuration;
-//        this.regionsToRawPerformance = regionsToRawPerformance;
-//
-//        // TODO maybe add a method that changes longs to doubles and the another one that divides by 10^9
-////        this.regionsToRawPerformanceHumanReadable = regionsToRawPerformance;
-//    }
-
     public PerformanceEntry2(Execution execution) {
         this.configuration = execution.getConfiguration();
         List<Region> trace = execution.getTrace();
@@ -36,6 +28,36 @@ public class PerformanceEntry2 {
         this.calculatePerformance(trace);
         this.calculateInnerRegions(trace);
         this.calculateProcessedPerformance(trace);
+
+        this.regionsToRawPerformanceHumanReadable = PerformanceEntry2.toHumanReadable(this.regionsToRawPerformance);
+        this.regionsToProcessedPerformanceHumanReadable = PerformanceEntry2.toHumanReadable(this.regionsToProcessedPerformance);
+    }
+
+    // TODO where to put this method?
+    /**
+     * The assumption is that the value of type long is in nanoseconds.
+     *
+     * @param nanoSeconds
+     * @return
+     */
+    public static double toSeconds(long nanoSeconds) {
+        return nanoSeconds / 1000000000.0;
+    }
+
+    // TODO where to put this method?
+    /**
+     * The assumption is that the values in the map are in nanoseconds and we transform them to seconds
+     * @param regionsToPerformance
+     * @return
+     */
+    public static Map<Region, Double> toHumanReadable(Map<Region, Long> regionsToPerformance) {
+        Map<Region, Double> result = new HashMap<>();
+
+        for(Map.Entry<Region, Long> entry : regionsToPerformance.entrySet()) {
+            result.put(entry.getKey(), PerformanceEntry2.toSeconds(entry.getValue()));
+        }
+
+        return result;
     }
 
     private void calculateProcessedPerformance(List<Region> trace) {
@@ -54,10 +76,6 @@ public class PerformanceEntry2 {
                 regionExecutionTime -= innerRegionExecutionTime.pop();
 
                 this.regionsToProcessedPerformance.put(region, regionExecutionTime);
-
-                // TODO to human readable method
-                double humanTime = regionExecutionTime / 1000000000.0;
-                this.regionsToProcessedPerformanceHumanReadable.put(region, humanTime);
 
                 // Adding new inner execution time
                 if(!executingRegions.isEmpty()) {
@@ -91,10 +109,6 @@ public class PerformanceEntry2 {
                 time -= top.getOverhead();
                 time -= region.getOverhead();
                 this.regionsToRawPerformance.put(region, time);
-
-                // TODO to human readable method
-                double humanTime = time / 1000000000.0;
-                this.regionsToRawPerformanceHumanReadable.put(region, humanTime);
             }
         }
     }
@@ -155,58 +169,4 @@ public class PerformanceEntry2 {
         return regionsToProcessedPerformanceHumanReadable;
     }
 
-    //
-//    public PerformanceEntry2(Set<String> configuration, Map<Region, Long> regionsToExecutionTime, Map<Region, Set<Region>> regionsToInnerRegions) {
-//        this.configuration = configuration;
-//        this.regionsToExecutionTime = regionsToExecutionTime;
-//        this.regionsToInnerRegions = regionsToInnerRegions;
-//
-//        for(Map.Entry<Region, Long> entry : regionsToExecutionTime.entrySet()) {
-//            this.regionsToExecutionTime2.put(entry.getKey(), entry.getValue() / 1000000000.0);
-//        }
-//    }
-//
-//
-
-//
-//    public long getTimeOfRegionID(String ID) {
-//        long time = -1;
-//
-//        for(Map.Entry<Region, Long> regionToTime : this.regionsToExecutionTime.entrySet()) {
-//            if(regionToTime.getKey().getRegionID().equals(ID)) {
-//                time += regionToTime.getValue();
-//            }
-//        }
-//
-//        return time;
-//    }
-//
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if(this == o) {
-//            return true;
-//        }
-//        if(o == null || getClass() != o.getClass()) {
-//            return false;
-//        }
-//
-//        PerformanceEntry2 that = (PerformanceEntry2) o;
-//
-//        if(!configuration.equals(that.configuration)) {
-//            return false;
-//        }
-//        if(!regionsToExecutionTime.equals(that.regionsToExecutionTime)) {
-//            return false;
-//        }
-//        return regionsToInnerRegions.equals(that.regionsToInnerRegions);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = configuration.hashCode();
-//        result = 31 * result + regionsToExecutionTime.hashCode();
-//        result = 31 * result + regionsToInnerRegions.hashCode();
-//        return result;
-//    }
 }

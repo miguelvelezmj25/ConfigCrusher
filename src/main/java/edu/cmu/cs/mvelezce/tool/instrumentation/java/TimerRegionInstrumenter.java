@@ -6,7 +6,6 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.j
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
 import java.util.Set;
 
 /**

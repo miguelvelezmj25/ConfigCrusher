@@ -1,13 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 
-import java.io.IOException;
 import java.util.Set;
 
 //@JsonDeserialize(using = DecisionAndOptions.DecisionAndOptionsDeserializer.class)
@@ -16,7 +10,9 @@ public class DecisionAndOptions {
     private JavaRegion region;
     private Set<Set<String>> options;
 
-    public DecisionAndOptions() { ; }
+    public DecisionAndOptions() {
+        ;
+    }
 
     public DecisionAndOptions(JavaRegion region, Set<Set<String>> options) {
         this.region = region;

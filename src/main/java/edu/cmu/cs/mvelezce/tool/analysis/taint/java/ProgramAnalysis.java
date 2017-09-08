@@ -1,16 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
-import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionAndOptions;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-
 /**
  * Created by mvelezce on 4/28/17.
  */

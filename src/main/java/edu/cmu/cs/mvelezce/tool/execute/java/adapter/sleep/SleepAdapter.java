@@ -20,6 +20,12 @@ public class SleepAdapter extends BaseAdapter {
         super(programName, mainClass, directory, getSleepOptions());
     }
 
+    private static List<String> getSleepOptions() {
+        String[] options = {"A", "B", "C", "D", "IA", "DA"};
+
+        return Arrays.asList(options);
+    }
+
     @Override
     public void execute(Set<String> configuration, int iteration) throws IOException, InterruptedException {
         String[] args = this.configurationAsMainArguments(configuration);
@@ -29,12 +35,6 @@ public class SleepAdapter extends BaseAdapter {
         System.arraycopy(args, 0, newArgs, 1, args.length);
 
         this.execute(SleepMain.SLEEP_MAIN, newArgs);
-    }
-
-    private static List<String> getSleepOptions() {
-        String[] options = {"A", "B", "C", "D", "IA", "DA"};
-
-        return Arrays.asList(options);
     }
 
 }

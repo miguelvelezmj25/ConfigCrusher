@@ -1,12 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 
-import java.io.*;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.Set;
 
 public abstract class BaseInstrumenter implements Instrumenter {
     private String srcDir;

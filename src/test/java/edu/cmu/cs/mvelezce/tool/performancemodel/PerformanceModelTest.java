@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.performancemodel;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;

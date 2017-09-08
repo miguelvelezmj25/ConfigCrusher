@@ -24,32 +24,6 @@ public abstract class BaseCompression implements Compression {
         this.optionSet = optionSet;
     }
 
-    public String getProgramName() {
-        return this.programName;
-    }
-
-    public Set<Set<String>> getOptionSet() {
-        return this.optionSet;
-    }
-
-    public void writeToFile(Set<Set<String>> configurationsToExecute) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName + Options.DOT_JSON;
-        File file = new File(outputFile);
-
-        CompressedConfigurations compressedConfigurations = new CompressedConfigurations(configurationsToExecute);
-        mapper.writeValue(file, compressedConfigurations);
-    }
-
-    @Override
-    public Set<Set<String>> readFromFile(File file) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        CompressedConfigurations results = mapper.readValue(file, new TypeReference<CompressedConfigurations>() {
-        });
-
-        return results.getCompressedConfigurations();
-    }
-
     // TODO should this be static?
     public static Set<Set<String>> filterOptions(Set<Set<String>> relevantOptionsSet) {
         Set<Set<String>> filteredOptions = new HashSet<>();
@@ -92,6 +66,32 @@ public abstract class BaseCompression implements Compression {
         }
 
         return result;
+    }
+
+    public String getProgramName() {
+        return this.programName;
+    }
+
+    public Set<Set<String>> getOptionSet() {
+        return this.optionSet;
+    }
+
+    public void writeToFile(Set<Set<String>> configurationsToExecute) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName + Options.DOT_JSON;
+        File file = new File(outputFile);
+
+        CompressedConfigurations compressedConfigurations = new CompressedConfigurations(configurationsToExecute);
+        mapper.writeValue(file, compressedConfigurations);
+    }
+
+    @Override
+    public Set<Set<String>> readFromFile(File file) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        CompressedConfigurations results = mapper.readValue(file, new TypeReference<CompressedConfigurations>() {
+        });
+
+        return results.getCompressedConfigurations();
     }
 
 }

@@ -1,9 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
-import org.junit.Test;
-
-import java.io.IOException;
-
 /**
  * Created by mvelezce on 6/28/17.
  */

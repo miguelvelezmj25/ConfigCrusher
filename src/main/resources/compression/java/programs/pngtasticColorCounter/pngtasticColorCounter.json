@@ -1,0 +1,21 @@
+{
+  "compressedConfigurations": [
+    [],
+    [
+      "FREQTHRESHOLD",
+      "TIMEOUT",
+      "LOGLEVEL",
+      "MINALPHA"
+    ],
+    [
+      "FREQTHRESHOLD",
+      "DISTTHRESHOLD",
+      "LOGLEVEL",
+      "MINALPHA"
+    ],
+    [
+      "TIMEOUT",
+      "DISTTHRESHOLD"
+    ]
+  ]
+}

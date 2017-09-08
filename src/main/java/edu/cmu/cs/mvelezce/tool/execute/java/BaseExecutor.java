@@ -34,93 +34,93 @@ public abstract class BaseExecutor implements Executor {
         this.configurations = configurations;
     }
 
-    public static List<PerformanceStatistic> getExecutionsStats(List<Set<PerformanceEntry>> executionsPerformance) {
-        Set<PerformanceEntry> entries = executionsPerformance.get(0);
-        Map<Set<String>, PerformanceStatistic> regionsToPerfStat = new HashMap<>();
-
-        for(PerformanceEntry entry : entries) {
-            Map<Region, List<Long>> regionToValues = new LinkedHashMap<>();
-            PerformanceStatistic perfStat = new PerformanceStatistic(entry.getConfiguration(), regionToValues);
-
-            for(Map.Entry<Region, Long> regionsToTime : entry.getRegionsToExecutionTime().entrySet()) {
-                List<Long> values = new ArrayList<>();
-                values.add(regionsToTime.getValue());
-                regionToValues.put(regionsToTime.getKey(), values);
-            }
-
-            regionsToPerfStat.put(entry.getConfiguration(), perfStat);
-        }
-
-        for(int i = 1; i < executionsPerformance.size(); i++) {
-            entries = executionsPerformance.get(i);
-
-            for(Map.Entry<Set<String>, PerformanceStatistic> regionToPerfStat : regionsToPerfStat.entrySet()) {
-                for(PerformanceEntry entry : entries) {
-                    if(!regionToPerfStat.getKey().equals(entry.getConfiguration())) {
-                        continue;
-                    }
-
-                    if(regionToPerfStat.getValue().getRegionsToValues().size() != entry.getRegionsToExecutionTime().size()) {
-                        throw new RuntimeException("The number of executed regions do not match "
-                                + regionToPerfStat.getValue().getRegionsToValues().size() + " vs "
-                                + entry.getRegionsToExecutionTime().size());
-                    }
-
-                    Iterator<Map.Entry<Region, List<Long>>> regionToPerfStatValuesIter = regionToPerfStat.getValue().getRegionsToValues().entrySet().iterator();
-                    Iterator<Map.Entry<Region, Long>> entryRegionToValuesIter = entry.getRegionsToExecutionTime().entrySet().iterator();
-
-                    while (regionToPerfStatValuesIter.hasNext() && entryRegionToValuesIter.hasNext()) {
-                        Map.Entry<Region, List<Long>> regionToPerfStatValuesEntry = regionToPerfStatValuesIter.next();
-                        Map.Entry<Region, Long> entryRegionToValuesEntry = entryRegionToValuesIter.next();
-
-                        if(!regionToPerfStatValuesEntry.getKey().getRegionID().equals(entryRegionToValuesEntry.getKey().getRegionID())) {
-                            throw new RuntimeException("The regions ID do not match "
-                                    + regionToPerfStatValuesEntry.getKey().getRegionID()
-                                    + " vs " + entryRegionToValuesEntry.getKey().getRegionID());
-                        }
-
-                        regionToPerfStatValuesEntry.getValue().add(entryRegionToValuesEntry.getValue());
-                    }
-                }
-            }
-        }
-
-        List<PerformanceStatistic> perfStats = new ArrayList<>(regionsToPerfStat.values());
-
-        for(PerformanceStatistic perfStat : perfStats) {
-            perfStat.calculateMean();
-            perfStat.calculateStd();
-        }
-
-        return perfStats;
-    }
-
-    public static Set<PerformanceEntry> averageExecutions(List<PerformanceStatistic> execStats, Set<PerformanceEntry> perfEntries) {
-        Set<PerformanceEntry> processedRes = new HashSet<>();
-
-        for(PerformanceStatistic perfStat : execStats) {
-            for(PerformanceEntry perfEntry : perfEntries) {
-                if(!perfStat.getConfiguration().equals(perfEntry.getConfiguration())) {
-                    continue;
-                }
-
-                Map<Region, Long> regionsToTime = new LinkedHashMap<>();
-                Iterator<Map.Entry<Region, Long>> regionIdsToMeanIter = perfStat.getRegionsToMean().entrySet().iterator();
-                Iterator<Map.Entry<Region, Long>> regionsToTimeIter = perfEntry.getRegionsToExecutionTime().entrySet().iterator();
-
-                // TODO check if this is correct
-
-                while (regionIdsToMeanIter.hasNext() && regionsToTimeIter.hasNext()) {
-                    regionsToTime.put(regionsToTimeIter.next().getKey(), regionIdsToMeanIter.next().getValue());
-                }
-
-                PerformanceEntry newPerfEntry = new PerformanceEntry(perfStat.getConfiguration(), regionsToTime, perfEntry.getRegionsToInnerRegions());
-                processedRes.add(newPerfEntry);
-            }
-        }
-
-        return processedRes;
-    }
+//    public static List<PerformanceStatistic> getExecutionsStats(List<Set<PerformanceEntry>> executionsPerformance) {
+//        Set<PerformanceEntry> entries = executionsPerformance.get(0);
+//        Map<Set<String>, PerformanceStatistic> regionsToPerfStat = new HashMap<>();
+//
+//        for(PerformanceEntry entry : entries) {
+//            Map<Region, List<Long>> regionToValues = new LinkedHashMap<>();
+//            PerformanceStatistic perfStat = new PerformanceStatistic(entry.getConfiguration(), regionToValues);
+//
+//            for(Map.Entry<Region, Long> regionsToTime : entry.getRegionsToExecutionTime().entrySet()) {
+//                List<Long> values = new ArrayList<>();
+//                values.add(regionsToTime.getValue());
+//                regionToValues.put(regionsToTime.getKey(), values);
+//            }
+//
+//            regionsToPerfStat.put(entry.getConfiguration(), perfStat);
+//        }
+//
+//        for(int i = 1; i < executionsPerformance.size(); i++) {
+//            entries = executionsPerformance.get(i);
+//
+//            for(Map.Entry<Set<String>, PerformanceStatistic> regionToPerfStat : regionsToPerfStat.entrySet()) {
+//                for(PerformanceEntry entry : entries) {
+//                    if(!regionToPerfStat.getKey().equals(entry.getConfiguration())) {
+//                        continue;
+//                    }
+//
+//                    if(regionToPerfStat.getValue().getRegionsToValues().size() != entry.getRegionsToExecutionTime().size()) {
+//                        throw new RuntimeException("The number of executed regions do not match "
+//                                + regionToPerfStat.getValue().getRegionsToValues().size() + " vs "
+//                                + entry.getRegionsToExecutionTime().size());
+//                    }
+//
+//                    Iterator<Map.Entry<Region, List<Long>>> regionToPerfStatValuesIter = regionToPerfStat.getValue().getRegionsToValues().entrySet().iterator();
+//                    Iterator<Map.Entry<Region, Long>> entryRegionToValuesIter = entry.getRegionsToExecutionTime().entrySet().iterator();
+//
+//                    while (regionToPerfStatValuesIter.hasNext() && entryRegionToValuesIter.hasNext()) {
+//                        Map.Entry<Region, List<Long>> regionToPerfStatValuesEntry = regionToPerfStatValuesIter.next();
+//                        Map.Entry<Region, Long> entryRegionToValuesEntry = entryRegionToValuesIter.next();
+//
+//                        if(!regionToPerfStatValuesEntry.getKey().getRegionID().equals(entryRegionToValuesEntry.getKey().getRegionID())) {
+//                            throw new RuntimeException("The regions ID do not match "
+//                                    + regionToPerfStatValuesEntry.getKey().getRegionID()
+//                                    + " vs " + entryRegionToValuesEntry.getKey().getRegionID());
+//                        }
+//
+//                        regionToPerfStatValuesEntry.getValue().add(entryRegionToValuesEntry.getValue());
+//                    }
+//                }
+//            }
+//        }
+//
+//        List<PerformanceStatistic> perfStats = new ArrayList<>(regionsToPerfStat.values());
+//
+//        for(PerformanceStatistic perfStat : perfStats) {
+//            perfStat.calculateMean();
+//            perfStat.calculateStd();
+//        }
+//
+//        return perfStats;
+//    }
+//
+//    public static Set<PerformanceEntry> averageExecutions(List<PerformanceStatistic> execStats, Set<PerformanceEntry> perfEntries) {
+//        Set<PerformanceEntry> processedRes = new HashSet<>();
+//
+//        for(PerformanceStatistic perfStat : execStats) {
+//            for(PerformanceEntry perfEntry : perfEntries) {
+//                if(!perfStat.getConfiguration().equals(perfEntry.getConfiguration())) {
+//                    continue;
+//                }
+//
+//                Map<Region, Long> regionsToTime = new LinkedHashMap<>();
+//                Iterator<Map.Entry<Region, Long>> regionIdsToMeanIter = perfStat.getRegionsToMean().entrySet().iterator();
+//                Iterator<Map.Entry<Region, Long>> regionsToTimeIter = perfEntry.getRegionsToExecutionTime().entrySet().iterator();
+//
+//                // TODO check if this is correct
+//
+//                while (regionIdsToMeanIter.hasNext() && regionsToTimeIter.hasNext()) {
+//                    regionsToTime.put(regionsToTimeIter.next().getKey(), regionIdsToMeanIter.next().getValue());
+//                }
+//
+//                PerformanceEntry newPerfEntry = new PerformanceEntry(perfStat.getConfiguration(), regionsToTime, perfEntry.getRegionsToInnerRegions());
+//                processedRes.add(newPerfEntry);
+//            }
+//        }
+//
+//        return processedRes;
+//    }
 
     @Override
     public Set<PerformanceEntry2> execute(String[] args) throws IOException, InterruptedException {
@@ -150,18 +150,36 @@ public abstract class BaseExecutor implements Executor {
 
     @Override
     public Set<PerformanceEntry2> execute() throws IOException, InterruptedException {
-        List<Set<PerformanceEntry2>> executionsPerformance = new ArrayList<>();
+        List<Set<PerformanceEntry2>> performanceEntriesList = new ArrayList<>();
 
         for(int i = 0; i < this.repetitions; i++) {
             Set<PerformanceEntry2> results = this.execute(i);
-            executionsPerformance.add(results);
+            performanceEntriesList.add(results);
         }
 
-// TODO average results
-//        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
-//        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
+        // TODO average executions
+//        Set<PerformanceEntry2> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
+//
+////        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+////        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
+//
+//        throw new RuntimeException();
 
-        throw new RuntimeException();
+        return performanceEntriesList.get(0);
+    }
+
+    // TODO should this be static
+    private static Set<PerformanceEntry2> averageExecutions(List<Set<PerformanceEntry2>> performanceEntriesList) {
+        Set<PerformanceEntry2> result = new HashSet<>();
+
+//        for(Set<PerformanceEntry2> performanceEntries : performanceEntriesList) {
+//            for(PerformanceEntry2 performanceEntry : performanceEntries) {
+//                performanceEntry.g
+//            }
+//
+//        }
+
+        return result;
     }
 
     public String getProgramName() {
@@ -271,12 +289,7 @@ public abstract class BaseExecutor implements Executor {
 //        this.writeToFile(programName, configuration, executedRegions);
 //    }
 
-    private Set<PerformanceEntry2> averageExecutions(File outputFile) throws IOException {
-// TODO
-        return null;
-    }
-
-    private Set<PerformanceEntry2> aggregateExecutions(File outputFile) throws IOException {
+    protected Set<PerformanceEntry2> aggregateExecutions(File outputFile) throws IOException {
         Collection<File> files = FileUtils.listFiles(outputFile, null, true);
         Set<PerformanceEntry2> performanceEntries = new HashSet<>();
 

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+// TODO use the interface instead of the performance entry class
 public interface Executor {
 
     public Set<PerformanceEntry2> execute(int iteration) throws IOException, InterruptedException;

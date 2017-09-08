@@ -11,6 +11,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
+// TODO should we save the files that we instrumented for debugging?
 public class TimerRegionInstrumenter extends BaseRegionInstrumenter {
 
     // TODO is this needed?

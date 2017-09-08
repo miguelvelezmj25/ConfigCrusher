@@ -19,7 +19,7 @@ import java.util.*;
  */
 public abstract class BaseExecutor implements Executor {
 
-    public static final String DIRECTORY = Options.DIRECTORY + "/executor/java/programs";
+    public static String DIRECTORY = Options.DIRECTORY + "/executor/java/approach/programs";
 
     private String programName;
     private String entryPoint;

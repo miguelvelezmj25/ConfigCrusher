@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.joana.Slicer;
 import org.junit.Assert;
 import org.junit.Test;
 

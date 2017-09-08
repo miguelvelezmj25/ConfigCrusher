@@ -10,11 +10,9 @@ import java.util.*;
  */
 public abstract class BaseAdapter implements Adapter {
 
+    public static final String TEST_DIRECTORY = "test/out/production/test";
     private static final String CLASS_CONTAINER = "target/classes/";
     private static final String JACKSON_PATH = "/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar";
-
-    public static final String TEST_DIRECTORY = "test/out/production/test";
-
     private String programName;
     private String mainClass;
     private String directory;

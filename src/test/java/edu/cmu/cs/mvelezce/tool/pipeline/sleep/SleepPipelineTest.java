@@ -7,16 +7,13 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.BlockStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
-import edu.cmu.cs.mvelezce.sleep.interpreter.TimedSleepInterpreterTest;
 import edu.cmu.cs.mvelezce.tool.analysis.region.SleepRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.TaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.*;
 
 /**

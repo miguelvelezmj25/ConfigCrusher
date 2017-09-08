@@ -6,7 +6,9 @@ public class CompressedConfigurations {
 
     private Set<Set<String>> compressedConfigurations;
 
-    private CompressedConfigurations() { ; }
+    private CompressedConfigurations() {
+        ;
+    }
 
     public CompressedConfigurations(Set<Set<String>> compressedConfigurations) {
         this.compressedConfigurations = compressedConfigurations;

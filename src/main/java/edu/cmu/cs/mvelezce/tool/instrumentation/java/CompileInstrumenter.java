@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
 import java.util.Arrays;
 
 public class CompileInstrumenter extends BaseInstrumenter {

@@ -1,11 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
 
-import edu.cmu.cs.mvelezce.mongo.connector.scaladriver.ScalaMongoDriverConnector;
-import org.apache.commons.io.FileUtils;
-
-import java.io.*;
-import java.util.*;
-
 /**
  * Created by mvelezce on 6/15/17.
  */

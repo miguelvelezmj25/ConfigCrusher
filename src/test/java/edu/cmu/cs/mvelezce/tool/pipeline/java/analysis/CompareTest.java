@@ -1,10 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.pipeline.java.analysis;
 
-import edu.cmu.cs.mvelezce.tool.execute.java.approaches.BruteForce;
-import edu.cmu.cs.mvelezce.tool.execute.java.approaches.SPLat;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.JavaPipeline;
-import org.junit.Test;
-
 /**
  * Created by mvelezce on 6/30/17.
  */

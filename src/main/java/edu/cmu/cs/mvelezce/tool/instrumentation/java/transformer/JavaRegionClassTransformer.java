@@ -45,7 +45,7 @@ public abstract class JavaRegionClassTransformer extends ClassTransformerBase {
 //            }
 //        }
 //
-         // If post dominator is not part of a strongly connected component, return
+        // If post dominator is not part of a strongly connected component, return
 //        if(problematicStronglyConnectedComponent.isEmpty()) {
 //            return immediatePostDominator;
 //        }

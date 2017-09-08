@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;

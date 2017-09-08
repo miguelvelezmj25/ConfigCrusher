@@ -6,11 +6,9 @@ import java.util.Set;
 
 public interface Compression {
 
+    public Set<Set<String>> compressConfigurations();
+
     public Set<Set<String>> compressConfigurations(String[] args) throws IOException;
-
-    public Set<Set<String>> compressConfigurations(String[] args, Set<Set<String>> relevantOptionsSet) throws IOException;
-
-    public Set<Set<String>> compressConfigurations(Set<Set<String>> relevantOptionsSet);
 
     public void writeToFile(Set<Set<String>> compressedConfigurations) throws IOException;
 

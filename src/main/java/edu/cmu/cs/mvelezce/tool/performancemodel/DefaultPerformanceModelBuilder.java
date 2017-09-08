@@ -46,13 +46,6 @@ public class DefaultPerformanceModelBuilder implements PerformanceModelBuilder {
             return this.readFromFile(outputFile);
         }
 
-        outputDir = DefaultPerformanceModelBuilder.DIRECTORY + "/" + this.programName;
-        outputFile = new File(outputDir);
-
-        if(outputFile.exists()) {
-            FileUtils.forceDelete(outputFile);
-        }
-
         PerformanceModel performanceModel = this.createModel();
 
         if(Options.checkIfSave()) {

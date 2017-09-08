@@ -3,19 +3,21 @@ package edu.cmu.cs.mvelezce.tool.performancemodel;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * Created by mvelezce on 4/10/17.
  */
 // TODO save this in a json file
-public class PerformanceEntry2 {
+public class PerformanceEntry2 implements IPerformanceEntry {
     private Set<String> configuration;
-    private Map<Region, Long> regionsToRawPerformance = new HashMap<>();
-    private Map<Region, Double> regionsToRawPerformanceHumanReadable = new HashMap<>();
-    private Map<Region, Set<Region>> regionsToInnerRegions = new HashMap<>();
-    private Map<Region, Long> regionsToProcessedPerformance = new HashMap<>();
-    private Map<Region, Double> regionsToProcessedPerformanceHumanReadable = new HashMap<>();
+    private Map<Region, Long> regionsToRawPerformance = new LinkedHashMap<>();
+    private Map<Region, Double> regionsToRawPerformanceHumanReadable = new LinkedHashMap<>();
+    private Map<Region, Set<Region>> regionsToInnerRegions = new LinkedHashMap<>();
+    private Map<Region, Long> regionsToProcessedPerformance = new LinkedHashMap<>();
+    private Map<Region, Double> regionsToProcessedPerformanceHumanReadable = new LinkedHashMap<>();
 
     private PerformanceEntry2() {
         ;
@@ -54,7 +56,7 @@ public class PerformanceEntry2 {
      * @return
      */
     public static Map<Region, Double> toHumanReadable(Map<Region, Long> regionsToPerformance) {
-        Map<Region, Double> result = new HashMap<>();
+        Map<Region, Double> result = new LinkedHashMap<>();
 
         for(Map.Entry<Region, Long> entry : regionsToPerformance.entrySet()) {
             result.put(entry.getKey(), PerformanceEntry2.toSeconds(entry.getValue()));
@@ -172,4 +174,13 @@ public class PerformanceEntry2 {
         return regionsToProcessedPerformanceHumanReadable;
     }
 
+    @Override
+    public void writeToFile(IPerformanceEntry performanceEntry) throws IOException {
+
+    }
+
+    @Override
+    public IPerformanceEntry readFromFile(File file) throws IOException {
+        return null;
+    }
 }

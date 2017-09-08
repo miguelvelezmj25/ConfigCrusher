@@ -24,7 +24,7 @@ public class DefaultExecutorTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i2";
+        args[2] = "-i1";
 
         Executor executor = new DefaultExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntry2> measuredPerformance = executor.execute(args);

@@ -67,7 +67,6 @@ public class DefaultExecutor extends BaseExecutor {
             baseAdapter.execute(configuration, iteration);
         }
 
-        // TODO get all files from this directory
         String outputDir = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + "/" + iteration;
         File outputFile = new File(outputDir);
 
@@ -75,19 +74,8 @@ public class DefaultExecutor extends BaseExecutor {
             throw new RuntimeException("The output file could not be found " + outputDir);
         }
 
-        Collection<File> files = FileUtils.listFiles(outputFile, null, true);
-        Set<PerformanceEntry2> entries = new HashSet<>();
-
-        for(File file : files) {
-            ObjectMapper mapper = new ObjectMapper();
-            Execution execution = mapper.readValue(file, new TypeReference<Execution>() {
-            });
-
-            PerformanceEntry2 performanceEntry = new PerformanceEntry2(execution);
-            entries.add(performanceEntry);
-        }
-
-        return entries;
+        Set<PerformanceEntry2> performanceEntries = this.aggregateExecutions(outputFile);
+        return performanceEntries;
     }
 
 }

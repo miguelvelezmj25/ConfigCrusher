@@ -1,10 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.performancemodel;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -199,20 +199,28 @@ public class PerformanceModel {
 ////        this.configurationToPerformance.put(emptyConfiguration, emptyConfigurationPerformance);
 //    }
 
-//    public double evaluate(Set<String> configuration) {
-//        double performance = 0;
-//
-//        for(Map.Entry<Set<String>, Double> entry : this.configurationToPerformance.entrySet()) {
-//            Set<String> configurationValueOfOptionInBlock = new HashSet<>(entry.getKey());
-//            configurationValueOfOptionInBlock.retainAll(configuration);
-//
-//            if(entry.getKey().equals(configurationValueOfOptionInBlock)) {
-//                performance += entry.getValue();
-//            }
-//        }
-//
-//        return performance;
-//    }
+    public double evaluate(Set<String> configuration) {
+        double performance = this.baseTimeHumanReadable;
+
+        for(Map.Entry<Region, Map<Set<String>, Double>> entry : this.regionsToPerformanceTablesHumanReadable.entrySet()) {
+            Set<String> optionsInRegion = new HashSet<>();
+
+            for(Set<String> options : entry.getValue().keySet()) {
+                optionsInRegion.addAll(options);
+            }
+
+            Set<String> configurationValueInRegion = new HashSet<>(configuration);
+            configurationValueInRegion.retainAll(optionsInRegion);
+
+            for(Map.Entry<Set<String>, Double> configurationToPerformance : entry.getValue().entrySet()) {
+                if(configurationToPerformance.getKey().equals(configurationValueInRegion)) {
+                    performance += configurationToPerformance.getValue();
+                }
+            }
+        }
+
+        return performance;
+    }
 //
 //////    public double getBaseTime() {
 //////        return this.baseTime;

@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce;
 
+import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -86,6 +87,7 @@ public class BruteForceExecutorTest {
 
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
 
         args = new String[3];
         args[0] = "-delres";

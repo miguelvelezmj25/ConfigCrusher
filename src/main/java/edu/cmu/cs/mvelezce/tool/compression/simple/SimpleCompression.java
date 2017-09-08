@@ -1,6 +1,7 @@
-package edu.cmu.cs.mvelezce.tool.compression;
+package edu.cmu.cs.mvelezce.tool.compression.simple;
 
 import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.compression.BaseCompression;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

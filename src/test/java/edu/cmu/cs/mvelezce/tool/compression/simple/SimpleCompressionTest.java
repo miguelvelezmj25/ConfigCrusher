@@ -1,9 +1,13 @@
-package edu.cmu.cs.mvelezce.tool.compression;
+package edu.cmu.cs.mvelezce.tool.compression.simple;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
+import edu.cmu.cs.mvelezce.tool.compression.BaseCompression;
+import edu.cmu.cs.mvelezce.tool.compression.BaseCompressionTest;
+import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,24 +20,6 @@ import java.util.*;
  * Created by mvelezce on 4/28/17.
  */
 public class SimpleCompressionTest {
-
-    public static Set<Set<String>> getOptionsSet(String string) {
-        Set<Set<String>> result = new HashSet<>();
-        String[] allOptions = string.split(",");
-
-        for(String options : allOptions) {
-            Set<String> newOption = new HashSet<>();
-            options = options.trim();
-
-            for(int i = 0; i < options.length(); i++) {
-                newOption.add(options.charAt(i) + "");
-            }
-
-            result.add(newOption);
-        }
-
-        return result;
-    }
 
     public static void checktOptionsPermuatationsToGetConfigurationsToExecute(Set<Set<String>> relevantOptionsSet) {
         Collection<List<Set<String>>> permutations = CollectionUtils.permutations(relevantOptionsSet);
@@ -81,7 +67,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, AD, BE");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("AB, AC, AD, BE");
 
         // Program
         String programName = "test1";
@@ -104,7 +90,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABC, BCD");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("ABC, BCD");
 
         // Program
         String programName = "test2";
@@ -127,7 +113,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, BCD");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("AB, BCD");
 
         // Program
         String programName = "test3";
@@ -150,7 +136,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, BC");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("AB, BC");
 
         // Program
         String programName = "test4";
@@ -173,7 +159,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, CDE");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("AB, CDE");
 
         // Program
         String programName = "test5";
@@ -196,7 +182,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, BC");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("AB, AC, BC");
 
         // Program
         String programName = "test6";
@@ -219,7 +205,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, AD, BC, BD");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("AB, AC, AD, BC, BD");
 
         // Program
         String programName = "test7";
@@ -242,7 +228,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, AD, BC, CD");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("AB, AC, AD, BC, CD");
 
         // Program
         String programName = "test8";
@@ -265,7 +251,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABC, CD, BD");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("ABC, CD, BD");
 
         // Program
         String programName = "test9";
@@ -288,7 +274,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABC, CD");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("ABC, CD");
 
         // Program
         String programName = "test10";
@@ -311,7 +297,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABC, DEF");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("ABC, DEF");
 
         // Program
         String programName = "test11";
@@ -334,7 +320,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("");
 
         // Program
         String programName = "test12";
@@ -357,7 +343,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("ABCD, ADXY, ABDX");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("ABCD, ADXY, ABDX");
 
         // Program
         String programName = "test13";
@@ -380,7 +366,7 @@ public class SimpleCompressionTest {
         args[1] = "-saveres";
 
         // Options
-        Set<Set<String>> relevantOptionsSet = SimpleCompressionTest.getOptionsSet("AB, AC, AD, BC, CD, BD");
+        Set<Set<String>> relevantOptionsSet = BaseCompressionTest.getOptionsSet("AB, AC, AD, BC, CD, BD");
 
         // Program
         String programName = "test14";
@@ -393,32 +379,6 @@ public class SimpleCompressionTest {
         Set<Set<String>> outputRead = compressor.compressConfigurations(args);
 
         Assert.assertEquals(outputSave, outputRead);
-    }
-
-    @Test
-    public void filterOptions1() {
-        Set<Set<String>> set = SimpleCompressionTest.getOptionsSet("AB, AC");
-        Assert.assertEquals(set, BaseCompression.filterOptions(set));
-    }
-
-    @Test
-    public void filterOptions2() {
-        Set<Set<String>> set = SimpleCompressionTest.getOptionsSet("ABC, ACD");
-        Assert.assertEquals(set, BaseCompression.filterOptions(set));
-    }
-
-    @Test
-    public void filterOptions3() {
-        Set<Set<String>> set = SimpleCompressionTest.getOptionsSet("AB, ABC");
-        Set<Set<String>> result = SimpleCompressionTest.getOptionsSet("ABC");
-        Assert.assertEquals(result, BaseCompression.filterOptions(set));
-    }
-
-    @Test
-    public void filterOptions4() {
-        Set<Set<String>> set = SimpleCompressionTest.getOptionsSet("AB, ABC, BCD, BC, DEF");
-        Set<Set<String>> result = SimpleCompressionTest.getOptionsSet("ABC, BCD, DEF");
-        Assert.assertEquals(result, BaseCompression.filterOptions(set));
     }
 
     @Test

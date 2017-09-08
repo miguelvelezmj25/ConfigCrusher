@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
+package edu.cmu.cs.mvelezce.tool.analysis.taint.java.lotrack;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.lotrack.LotrackProcessor;

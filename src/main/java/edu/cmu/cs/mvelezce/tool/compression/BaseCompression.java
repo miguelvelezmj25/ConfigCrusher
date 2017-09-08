@@ -15,15 +15,21 @@ public abstract class BaseCompression implements Compression {
 
     // TODO pass the set to compress as an instance variable
     private String programName = null;
+    private Set<Set<String>> optionSet;
 
-    public BaseCompression() { }
+//    public BaseCompression() { }
 
-    public BaseCompression(String programName) {
+    public BaseCompression(String programName, Set<Set<String>> optionSet) {
         this.programName = programName;
+        this.optionSet = optionSet;
     }
 
     public String getProgramName() {
         return this.programName;
+    }
+
+    public Set<Set<String>> getOptionSet() {
+        return this.optionSet;
     }
 
     public void writeToFile(Set<Set<String>> configurationsToExecute) throws IOException {

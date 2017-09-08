@@ -57,8 +57,8 @@ public class SleepPipeline {
         // Configuration compression (Language independent)
         Set<Set<ConstantConfigurationExpression>> relevantSleepOptions = new HashSet<>(relevantRegionsToOptions.values());
         Set<Set<String>> relevantOptions = SleepPipeline.setOfSleepConfigurationSetsToSetOfStringSets(relevantSleepOptions);
-        Compression compression = new SimpleCompression(programFile);
-        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(relevantOptions);
+        Compression compression = new SimpleCompression(programFile, relevantOptions);
+        Set<Set<String>> configurationsToExecute = compression.compressConfigurations();
 
         // Instrumentation (Language dependent)
         TimedProgram timedProgram = SleepPipeline.instrumentRelevantRegions(program); //, relevantRegionsToOptions);

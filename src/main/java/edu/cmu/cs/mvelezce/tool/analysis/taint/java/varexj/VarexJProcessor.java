@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
+package edu.cmu.cs.mvelezce.tool.analysis.taint.java.varexj;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import org.apache.commons.io.FileUtils;

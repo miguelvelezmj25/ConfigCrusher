@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
+package edu.cmu.cs.mvelezce.tool.analysis.taint.java.lotrack;
 
 /**
  * Created by mvelezce on 6/15/17.

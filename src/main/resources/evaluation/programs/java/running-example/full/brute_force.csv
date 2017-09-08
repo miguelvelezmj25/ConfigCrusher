@@ -1,9 +1,9 @@
 measured,configuration,performance
-true,"[B]",0.005567978
-true,"[A, C]",9.011215588
-true,"[A]",2.00925293
-true,"[A, B]",6.011360106
-true,"[B, C]",0.004851796
-true,"[]",0.005298011
-true,"[A, B, C]",13.017526057
-true,"[C]",0.006543172
+true,"[B]",0.006
+true,"[A, C]",9.011
+true,"[A]",2.009
+true,"[A, B]",6.011
+true,"[B, C]",0.005
+true,"[]",0.005
+true,"[A, B, C]",13.018
+true,"[C]",0.007

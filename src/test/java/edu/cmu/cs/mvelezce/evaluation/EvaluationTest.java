@@ -21,11 +21,11 @@ import static org.junit.Assert.*;
 
 public class EvaluationTest {
     @Test
-    public void writeConfigurationToPerformance() throws Exception {
-    }
+    public void compareApproaches1() throws Exception {
+        String programName = "running-example";
 
-    @Test
-    public void writeConfigurationToPerformance1() throws Exception {
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.APPROACH, Evaluation.BRUTE_FORCE);
     }
 
     @Test

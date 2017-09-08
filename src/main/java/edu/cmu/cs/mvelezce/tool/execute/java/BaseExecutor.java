@@ -137,13 +137,6 @@ public abstract class BaseExecutor implements Executor {
             return results;
         }
 
-        outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
-        outputFile = new File(outputDir);
-
-        if(outputFile.exists()) {
-            FileUtils.forceDelete(outputFile);
-        }
-
         this.repetitions = Options.getIterations();
         Set<PerformanceEntry2> performanceEntries = this.execute();
 
@@ -311,13 +304,6 @@ public abstract class BaseExecutor implements Executor {
                 + Options.DOT_JSON;
         File file = new File(outputFile);
         file.getParentFile().mkdirs();
-
-//        List<Execution> executions = new ArrayList<>();
-//
-//        if(file.exists()) {
-//            executions = mapper.readValue(file, new TypeReference<List<Execution>>() {
-//            });
-//        }
 
         Execution execution = new Execution(configuration, executedRegions);
         mapper.writeValue(file, execution);

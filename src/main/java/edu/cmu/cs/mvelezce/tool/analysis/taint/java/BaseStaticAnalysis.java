@@ -23,8 +23,10 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis {
     @Override
     public void writeToFile(Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String outputFile = BaseStaticAnalysis.DIRECTORY + "/" + this.programName + Options.DOT_JSON;
+        String outputFile = BaseStaticAnalysis.DIRECTORY + "/" + this.programName + "/" + this.programName
+                + Options.DOT_JSON;
         File file = new File(outputFile);
+        file.getParentFile().mkdirs();
 
         List<DecisionAndOptions> decisionsAndOptions = new ArrayList<>();
 

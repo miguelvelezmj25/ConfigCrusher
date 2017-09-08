@@ -81,7 +81,13 @@ public class TimerTransformer extends RegionTransformer {
 
     @Override
     public void transformMethod(MethodNode methodNode) {
+
+//        if(methodNode.name.equals("debug")) {
+//            System.out.print("");
+//        }
+
         MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
+
         System.out.println("Before transforming");
         System.out.println(graph.toDotString(methodNode.name));
 

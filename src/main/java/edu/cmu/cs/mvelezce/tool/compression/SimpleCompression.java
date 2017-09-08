@@ -27,35 +27,6 @@ public class SimpleCompression extends BaseCompression {
     }
 
     @Override
-    public Set<Set<String>> compressConfigurations(String[] args) throws IOException {
-        Options.getCommandLine(args);
-
-        String outputFile = SimpleCompression.DIRECTORY + "/" + this.getProgramName();
-        File file = new File(outputFile);
-
-        Options.checkIfDeleteResult(file);
-
-        if(file.exists()) {
-            Collection<File> files = FileUtils.listFiles(file, null, true);
-
-            if(files.size() != 1) {
-                throw new RuntimeException("We expected to find 1 file in the directory, but that is not the case "
-                        + outputFile);
-            }
-
-            return this.readFromFile(files.iterator().next());
-        }
-
-        Set<Set<String>> configurationsToExecute = this.compressConfigurations();
-
-        if(Options.checkIfSave()) {
-            this.writeToFile(configurationsToExecute);
-        }
-
-        return configurationsToExecute;
-    }
-
-    @Override
     public Set<Set<String>> compressConfigurations() {
         // Calculates which options are subsets of other options
         Set<Set<String>> filteredOptions = BaseCompression.filterOptions(this.getOptionSet());

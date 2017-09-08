@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.serialize.CompressedConfigurations;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,35 @@ public abstract class BaseCompression implements Compression {
     public BaseCompression(String programName, Set<Set<String>> optionSet) {
         this.programName = programName;
         this.optionSet = optionSet;
+    }
+
+    @Override
+    public Set<Set<String>> compressConfigurations(String[] args) throws IOException {
+        Options.getCommandLine(args);
+
+        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName;
+        File file = new File(outputFile);
+
+        Options.checkIfDeleteResult(file);
+
+        if(file.exists()) {
+            Collection<File> files = FileUtils.listFiles(file, null, true);
+
+            if(files.size() != 1) {
+                throw new RuntimeException("We expected to find 1 file in the directory, but that is not the case "
+                        + outputFile);
+            }
+
+            return this.readFromFile(files.iterator().next());
+        }
+
+        Set<Set<String>> configurationsToExecute = this.compressConfigurations();
+
+        if(Options.checkIfSave()) {
+            this.writeToFile(configurationsToExecute);
+        }
+
+        return configurationsToExecute;
     }
 
     // TODO should this be static?

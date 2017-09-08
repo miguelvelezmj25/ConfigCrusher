@@ -36,4 +36,15 @@ public class DefaultPerformanceModelBuilderTest {
         builder.createModel(args);
     }
 
+    @Test
+    public void runningExample1() throws Exception {
+        String programName = "running-example";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        PerformanceModelBuilder builder = new DefaultPerformanceModelBuilder(programName);
+        builder.createModel(args);
+    }
+
 }

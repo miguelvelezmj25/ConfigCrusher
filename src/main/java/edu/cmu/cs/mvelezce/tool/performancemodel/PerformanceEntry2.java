@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -45,6 +46,13 @@ public class PerformanceEntry2 implements IPerformanceEntry {
      */
     public static double toSeconds(long nanoSeconds) {
         return nanoSeconds / 1000000000.0;
+    }
+
+    public static double toHumanReadable(double seconds) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+        String value = decimalFormat.format(seconds);
+
+        return Double.valueOf(value);
     }
 
     // TODO where to put this method?
@@ -176,11 +184,13 @@ public class PerformanceEntry2 implements IPerformanceEntry {
 
     @Override
     public void writeToFile(IPerformanceEntry performanceEntry) throws IOException {
-
+        // TODO
+        throw new RuntimeException();
     }
 
     @Override
     public IPerformanceEntry readFromFile(File file) throws IOException {
-        return null;
+        // TODO
+        throw new RuntimeException();
     }
 }

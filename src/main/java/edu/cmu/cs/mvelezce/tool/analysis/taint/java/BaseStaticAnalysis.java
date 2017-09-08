@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionAndOptions;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,35 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis {
 
     public BaseStaticAnalysis(String programName) {
         this.programName = programName;
+    }
+
+    @Override
+    public Map<JavaRegion, Set<Set<String>>> analyze(String[] args) throws IOException {
+        Options.getCommandLine(args);
+
+        String outputFile = BaseStaticAnalysis.DIRECTORY + "/" + this.programName;
+        File file = new File(outputFile);
+
+        Options.checkIfDeleteResult(file);
+
+        if(file.exists()) {
+            Collection<File> files = FileUtils.listFiles(file, null, true);
+
+            if(files.size() != 1) {
+                throw new RuntimeException("We expected to find 1 file in the directory, but that is not the case "
+                        + outputFile);
+            }
+
+            return this.readFromFile(files.iterator().next());
+        }
+
+        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = this.analyze();
+
+        if(Options.checkIfSave()) {
+            this.writeToFile(regionsToOptionsSet);
+        }
+
+        return regionsToOptionsSet;
     }
 
     @Override

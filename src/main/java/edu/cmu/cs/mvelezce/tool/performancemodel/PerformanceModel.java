@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.performancemodel;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 
 import java.text.DecimalFormat;
@@ -28,15 +29,11 @@ public class PerformanceModel {
         ;
     }
 
-//    public PerformanceModel(List<Map<Set<String>, Double>> bfTablePerRegion) {
-//        this.calculateConfigurationInfluence(bfTablePerRegion);
-//    }
-
     public PerformanceModel(long baseTime, Map<Region, Map<Set<String>, Long>> regionsToPerformanceTables) {
         this.baseTime = baseTime;
         this.regionsToPerformanceTables = regionsToPerformanceTables;
 
-        this.baseTimeHumanReadable = PerformanceEntry2.toSeconds(this.baseTime);
+        this.baseTimeHumanReadable = PerformanceEntry2.toHumanReadable(PerformanceEntry2.toSeconds(this.baseTime));
         this.regionsToPerformanceTablesHumanReadable = PerformanceModel.toHumanReadable(this.regionsToPerformanceTables);
     }
 
@@ -53,7 +50,8 @@ public class PerformanceModel {
             Map<Set<String>, Double> configToNewPerformance = new HashMap<>();
 
             for(Map.Entry<Set<String>, Long> configToPerformance : regionToTable.getValue().entrySet()) {
-                configToNewPerformance.put(configToPerformance.getKey(), PerformanceEntry2.toSeconds(configToPerformance.getValue()));
+                double seconds = PerformanceEntry2.toSeconds(configToPerformance.getValue());
+                configToNewPerformance.put(configToPerformance.getKey(), PerformanceEntry2.toHumanReadable(seconds));
             }
 
             result.put(regionToTable.getKey(), configToNewPerformance);
@@ -312,4 +310,98 @@ public class PerformanceModel {
 //    public int hashCode() {
 //        return configurationToPerformance.hashCode();
 //    }
+
+
+    public long getBaseTime() {
+        return baseTime;
+    }
+
+    public void setBaseTime(long baseTime) {
+        this.baseTime = baseTime;
+    }
+
+    public double getBaseTimeHumanReadable() {
+        return baseTimeHumanReadable;
+    }
+
+    public void setBaseTimeHumanReadable(double baseTimeHumanReadable) {
+        this.baseTimeHumanReadable = baseTimeHumanReadable;
+    }
+
+    public Map<Region, Map<Set<String>, Long>> getRegionsToPerformanceTables() {
+        return regionsToPerformanceTables;
+    }
+
+    public void setRegionsToPerformanceTables(Map<Region, Map<Set<String>, Long>> regionsToPerformanceTables) {
+        this.regionsToPerformanceTables = regionsToPerformanceTables;
+    }
+
+    public Map<Region, Map<Set<String>, Double>> getRegionsToPerformanceTablesHumanReadable() {
+        return regionsToPerformanceTablesHumanReadable;
+    }
+
+    public void setRegionsToPerformanceTablesHumanReadable(Map<Region, Map<Set<String>, Double>> regionsToPerformanceTablesHumanReadable) {
+        this.regionsToPerformanceTablesHumanReadable = regionsToPerformanceTablesHumanReadable;
+    }
+
+//    public static class MyMapDeserializer extends KeyDeserializer {
+//
+//        @Override
+//        public Object deserializeKey(String s, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+//            return null;
+//        }
+//    }
+//
+//    public static class YourClassKeyDeserializer extends KeyDeserializer {
+//
+//        @Override
+//        public Object deserializeKey(String s, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+//            return null;
+//        }
+//    }
+//
+//    public static class PerformanceModelDeserializer extends JsonDeserializer<PerformanceModel> {
+//
+////        @Override
+////        public DecisionAndOptions deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+////            ObjectCodec oc = jsonParser.getCodec();
+////            JsonNode node = oc.readTree(jsonParser);
+////
+////            ObjectMapper mapper = new ObjectMapper();
+////            ObjectReader reader = mapper.readerFor(new TypeReference<Set<Set<String>>>() {
+////            });
+////            Set<Set<String>> optionsSet = reader.readValue(node.get("options"));
+////
+////            JsonNode region = node.get("region");
+////
+////            JavaRegion javaRegion = new JavaRegion(region.get("regionID").asText(), region.get("regionPackage").asText(),
+////                    region.get("regionClass").asText(), region.get("regionMethod").asText(),
+////                    region.get("startBytecodeIndex").intValue());
+////
+////            return new DecisionAndOptions(javaRegion, optionsSet);
+////        }
+//
+//        @Override
+//        public PerformanceModel deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+//            ObjectMapper mapper = new ObjectMapper();
+//
+//            SimpleModule simpleModule = new SimpleModule();
+//            simpleModule.addKeyDeserializer(PerformanceModel.class, new YourClassKeyDeserializer());
+//            mapper.registerModule(simpleModule);
+//
+//
+//            ObjectCodec oc = jsonParser.getCodec();
+//            JsonNode node = oc.readTree(jsonParser);
+//
+//            long baseTime = node.get("baseTime").asLong();
+//            double baseTimeHumanReadable = node.get("baseTimeHumanReadable").asDouble();
+//
+//
+//            ObjectReader reader = mapper.readerFor(new TypeReference<Map<Region, Map<Set<String>, Long>>>() {
+//            });
+//            reader.readValue(node.get("regionsToPerformanceTables"));
+//
+//            return null;
+//        }
+
 }

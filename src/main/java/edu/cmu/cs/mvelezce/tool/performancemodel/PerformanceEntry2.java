@@ -21,13 +21,13 @@ public class PerformanceEntry2 {
         ;
     }
 
-    public PerformanceEntry2(Set<String> configuration, Map<Region, Long> regionsToRawPerformance) {
-        this.configuration = configuration;
-        this.regionsToRawPerformance = regionsToRawPerformance;
-
-        // TODO maybe add a method that changes longs to doubles and the another one that divides by 10^9
-//        this.regionsToRawPerformanceHumanReadable = regionsToRawPerformance;
-    }
+//    public PerformanceEntry2(Set<String> configuration, Map<Region, Long> regionsToRawPerformance) {
+//        this.configuration = configuration;
+//        this.regionsToRawPerformance = regionsToRawPerformance;
+//
+//        // TODO maybe add a method that changes longs to doubles and the another one that divides by 10^9
+////        this.regionsToRawPerformanceHumanReadable = regionsToRawPerformance;
+//    }
 
     public PerformanceEntry2(Execution execution) {
         this.configuration = execution.getConfiguration();
@@ -131,7 +131,31 @@ public class PerformanceEntry2 {
         }
     }
 
-//
+    public Set<String> getConfiguration() {
+        return configuration;
+    }
+
+    public Map<Region, Long> getRegionsToRawPerformance() {
+        return regionsToRawPerformance;
+    }
+
+    public Map<Region, Double> getRegionsToRawPerformanceHumanReadable() {
+        return regionsToRawPerformanceHumanReadable;
+    }
+
+    public Map<Region, Set<Region>> getRegionsToInnerRegions() {
+        return regionsToInnerRegions;
+    }
+
+    public Map<Region, Long> getRegionsToProcessedPerformance() {
+        return regionsToProcessedPerformance;
+    }
+
+    public Map<Region, Double> getRegionsToProcessedPerformanceHumanReadable() {
+        return regionsToProcessedPerformanceHumanReadable;
+    }
+
+    //
 //    public PerformanceEntry2(Set<String> configuration, Map<Region, Long> regionsToExecutionTime, Map<Region, Set<Region>> regionsToInnerRegions) {
 //        this.configuration = configuration;
 //        this.regionsToExecutionTime = regionsToExecutionTime;

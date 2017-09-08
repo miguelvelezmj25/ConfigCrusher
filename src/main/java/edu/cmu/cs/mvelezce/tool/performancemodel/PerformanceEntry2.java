@@ -34,6 +34,7 @@ public class PerformanceEntry2 {
     }
 
     // TODO where to put this method?
+
     /**
      * The assumption is that the value of type long is in nanoseconds.
      *
@@ -45,8 +46,10 @@ public class PerformanceEntry2 {
     }
 
     // TODO where to put this method?
+
     /**
      * The assumption is that the values in the map are in nanoseconds and we transform them to seconds
+     *
      * @param regionsToPerformance
      * @return
      */

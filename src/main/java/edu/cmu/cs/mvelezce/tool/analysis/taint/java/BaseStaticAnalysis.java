@@ -13,9 +13,8 @@ import java.util.*;
 
 public abstract class BaseStaticAnalysis implements StaticAnalysis {
 
-    private String programName;
-
     protected static final String DIRECTORY = Options.DIRECTORY + "/analysis/java/programs";
+    private String programName;
 
     public BaseStaticAnalysis(String programName) {
         this.programName = programName;

@@ -17,6 +17,12 @@ public class RunningExampleAdapter extends BaseAdapter {
         super(programName, entryPoint, dir, RunningExampleAdapter.getRunningExampleOptions());
     }
 
+    public static List<String> getRunningExampleOptions() {
+        String[] options = {"A", "B", "C", "D"};
+
+        return Arrays.asList(options);
+    }
+
     @Override
     public void execute(Set<String> configuration, int iteration) throws IOException, InterruptedException {
         String[] args = this.configurationAsMainArguments(configuration);
@@ -26,12 +32,5 @@ public class RunningExampleAdapter extends BaseAdapter {
         System.arraycopy(args, 0, newArgs, 1, args.length);
 
         this.execute(RunningExampleMain.RUNNING_EXAMPLE_MAIN, newArgs);
-    }
-
-
-    public static List<String> getRunningExampleOptions() {
-        String[] options = {"A", "B", "C", "D"};
-
-        return Arrays.asList(options);
     }
 }

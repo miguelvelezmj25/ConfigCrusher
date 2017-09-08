@@ -35,13 +35,23 @@ public class PerformanceEntry {
 
 //        this.calculateInnerRegions(executedRegions);
 //        this.calculateRealPerformance(executedRegions);
-        
+
         this.calculatePerformance(executedRegions);
 
         for(Map.Entry<Region, Long> entry : this.regionsToExecutionTime.entrySet()) {
             if(entry.getKey().getRegionID().equals("program")) {
                 System.out.println(entry.getValue());
             }
+        }
+    }
+
+    public PerformanceEntry(Set<String> configuration, Map<Region, Long> regionsToExecutionTime, Map<Region, Set<Region>> regionsToInnerRegions) {
+        this.configuration = configuration;
+        this.regionsToExecutionTime = regionsToExecutionTime;
+        this.regionsToInnerRegions = regionsToInnerRegions;
+
+        for(Map.Entry<Region, Long> entry : regionsToExecutionTime.entrySet()) {
+            this.regionsToExecutionTime2.put(entry.getKey(), entry.getValue() / 1000000000.0);
         }
     }
 
@@ -74,16 +84,6 @@ public class PerformanceEntry {
             }
         }
 
-    }
-
-    public PerformanceEntry(Set<String> configuration, Map<Region, Long> regionsToExecutionTime, Map<Region, Set<Region>> regionsToInnerRegions) {
-        this.configuration = configuration;
-        this.regionsToExecutionTime = regionsToExecutionTime;
-        this.regionsToInnerRegions = regionsToInnerRegions;
-
-        for(Map.Entry<Region, Long> entry : regionsToExecutionTime.entrySet()) {
-            this.regionsToExecutionTime2.put(entry.getKey(), entry.getValue() / 1000000000.0);
-        }
     }
 
     public void calculateInnerRegions(List<Region> executedRegions) {

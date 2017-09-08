@@ -4,18 +4,12 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
-import edu.cmu.cs.mvelezce.tool.compression.Compression;
-import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 public class DefaultPerformanceModelBuilderTest {
 

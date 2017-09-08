@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.adapter.BFRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
@@ -8,6 +9,7 @@ import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -149,5 +151,15 @@ public class BruteForceExecutor extends BaseExecutor {
 //        writer.flush();
 //        writer.close();
 //    }
+
+    public static Set<Set<String>> getBruteForceConfigurations(Set<Set<String>> configurations) {
+        Set<String> options = new HashSet<>();
+
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
+        }
+
+        return Helper.getConfigurations(options);
+    }
 
 }

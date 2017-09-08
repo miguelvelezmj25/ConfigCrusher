@@ -1,6 +1,6 @@
-package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.adapter;
+package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter;
 
-import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.BruteForceExecutor;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
@@ -39,6 +39,5 @@ public class BFRunningExampleMain extends RunningExampleMain {
         Executor executor = new BruteForceExecutor(this.getProgramName());
         executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
     }
-
 
 }

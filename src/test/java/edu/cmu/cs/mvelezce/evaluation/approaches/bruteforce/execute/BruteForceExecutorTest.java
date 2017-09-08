@@ -1,6 +1,5 @@
-package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce;
+package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 
-import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -11,6 +10,7 @@ import java.io.IOException;
 import java.util.Set;
 
 public class BruteForceExecutorTest {
+
 //    @Test
 //    public void testElevator() throws IOException, ParseException, InterruptedException {
 //        String programName = "elevator";

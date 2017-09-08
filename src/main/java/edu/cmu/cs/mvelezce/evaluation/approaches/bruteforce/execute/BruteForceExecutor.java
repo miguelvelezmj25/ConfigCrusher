@@ -1,10 +1,10 @@
-package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce;
+package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 
-import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.adapter.BFRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.BFRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 
 import java.io.File;
@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by mvelezce on 6/30/17.
- */
 public class BruteForceExecutor extends BaseExecutor {
 
     static {
@@ -32,17 +29,17 @@ public class BruteForceExecutor extends BaseExecutor {
     @Override
     public Set<PerformanceEntry2> execute(int iteration) throws IOException, InterruptedException {
         // TODO factory pattern or switch statement to create the right adapter
-        BaseAdapter baseAdapter;
+        Adapter adapter;
 
         if(this.getProgramName().contains("running-example")) {
-            baseAdapter = new BFRunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+            adapter = new BFRunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());
         }
 
         for(Set<String> configuration : this.getConfigurations()) {
-            baseAdapter.execute(configuration, iteration);
+            adapter.execute(configuration, iteration);
         }
 
         String outputDir = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + "/" + iteration;

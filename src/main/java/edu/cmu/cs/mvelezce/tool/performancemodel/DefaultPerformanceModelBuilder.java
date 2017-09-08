@@ -4,24 +4,28 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * Created by mvelezce on 4/28/17.
  */
-public class DefaultPerformanceModelBuilder implements PerformanceModelBuilder{
+public class DefaultPerformanceModelBuilder implements PerformanceModelBuilder {
 
     public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
 
     private String programName;
     private Set<PerformanceEntry2> measuredPerformance;
     private Map<Region, Set<Set<String>>> regionsToOptionSet;
-;
+    ;
+
     public DefaultPerformanceModelBuilder(String programName, Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
         this.programName = programName;
         this.measuredPerformance = measuredPerformance;
@@ -60,8 +64,70 @@ public class DefaultPerformanceModelBuilder implements PerformanceModelBuilder{
 
     @Override
     public PerformanceModel createModel() {
-        // TODO
-        throw new RuntimeException();
+        Map<Region, Map<Set<String>, Set<Long>>> regionsToPerformanceTable = new HashMap<>();
+
+        for(Map.Entry<Region, Set<Set<String>>> regionToOptionSet : this.regionsToOptionSet.entrySet()) {
+            Region region = regionToOptionSet.getKey();
+            // TODO this might change if we decide to not have a set of set of options for each region
+            Set<String> optionsInRegion = new HashSet<>();
+
+            for(Set<String> options : regionToOptionSet.getValue()) {
+                optionsInRegion.addAll(options);
+            }
+
+            Map<Set<String>, Set<Long>> optionValuesToPerformances = new HashMap<>();
+
+            for(PerformanceEntry2 performanceEntry : this.measuredPerformance) {
+                Set<String> configuration = performanceEntry.getConfiguration();
+                Set<String> optionValueInPerfEntry = new HashSet<>(optionsInRegion);
+                optionValueInPerfEntry.retainAll(configuration);
+
+                long regionTime = 0;
+
+                for(Map.Entry<Region, Long> regionToProcessedPerformance : performanceEntry.getRegionsToProcessedPerformance().entrySet()) {
+                    Region performanceRegion = regionToProcessedPerformance.getKey();
+
+                    if(!performanceRegion.getRegionID().equals(region.getRegionID())) {
+                        continue;
+                    }
+
+                    regionTime += regionToProcessedPerformance.getValue();
+                }
+
+                if(!optionValuesToPerformances.containsKey(optionValueInPerfEntry)) {
+                    optionValuesToPerformances.put(optionValueInPerfEntry, new HashSet<>());
+                }
+
+                optionValuesToPerformances.get(optionValueInPerfEntry).add(regionTime);
+
+            }
+
+            regionsToPerformanceTable.put(region, optionValuesToPerformances);
+        }
+
+        long programTime = 0;
+
+        for(PerformanceEntry2 performanceEntry : this.measuredPerformance) {
+            for(Map.Entry<Region, Long> regionToProcessedPerformance : performanceEntry.getRegionsToProcessedPerformance().entrySet()) {
+                Region region = regionToProcessedPerformance.getKey();
+
+                if(!region.getRegionID().equals(Regions.PROGRAM_REGION_ID)) {
+                    continue;
+                }
+
+                programTime += regionToProcessedPerformance.getValue();
+            }
+
+        }
+
+        programTime /= this.measuredPerformance.size();
+
+        Map<Region, Map<Set<String>, Long>> regionsToAveragePerformanceTable = this.averagePerformance(regionsToPerformanceTable);
+
+        PerformanceModel performanceModel = new PerformanceModel(programTime, regionsToAveragePerformanceTable);
+
+        return performanceModel;
+
 
 ////        DefaultPerformanceModelBuilder.getOuterRegions(measuredPerformance, regionsToOptions);
 ////        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = DefaultPerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
@@ -101,6 +167,32 @@ public class DefaultPerformanceModelBuilder implements PerformanceModelBuilder{
 //        List<Map<Set<String>, Double>> bfTablePerRegion = new ArrayList<>(regionsToConfigurationPerformance.values());
 //
 //        return new PerformanceModel(bfTablePerRegion);
+    }
+
+    private Map<Region, Map<Set<String>, Long>> averagePerformance(Map<Region, Map<Set<String>, Set<Long>>> regionsToPeformanceTable) {
+        Map<Region, Map<Set<String>, Long>> result = new HashMap<>();
+
+        for(Map.Entry<Region, Map<Set<String>, Set<Long>>> regionToPerformanceTable : regionsToPeformanceTable.entrySet()) {
+            Map<Set<String>, Set<Long>> table = regionToPerformanceTable.getValue();
+
+            Map<Set<String>, Long> averagedTable = new HashMap<>();
+
+            for(Map.Entry<Set<String>, Set<Long>> tableEntry : table.entrySet()) {
+                long total = 0;
+
+                for(Long performance : tableEntry.getValue()) {
+                    total += performance;
+                }
+
+                total /= tableEntry.getValue().size();
+
+                averagedTable.put(tableEntry.getKey(), total);
+            }
+
+            result.put(regionToPerformanceTable.getKey(), averagedTable);
+        }
+
+        return result;
     }
 
 //    private static void getOuterRegions(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {

@@ -44,6 +44,7 @@ public abstract class BaseCompression implements Compression {
         return results.getCompressedConfigurations();
     }
 
+    // TODO should this be static?
     public static Set<Set<String>> filterOptions(Set<Set<String>> relevantOptionsSet) {
         Set<Set<String>> filteredOptions = new HashSet<>();
 
@@ -76,6 +77,7 @@ public abstract class BaseCompression implements Compression {
         return filteredOptions;
     }
 
+    // TODO what is this doing?
     public static Set<Set<String>> expandOptions(Collection<Set<Set<String>>> optionsSets) {
         Set<Set<String>> result = new HashSet<>();
 

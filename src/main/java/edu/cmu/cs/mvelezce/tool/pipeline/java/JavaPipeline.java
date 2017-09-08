@@ -288,8 +288,9 @@ public class JavaPipeline {
             result.append(configuration);
             result.append('"');
             result.append(",");
-            double perf = pm.evaluate(configuration);
-            result.append(perf);
+            // TODO
+//            double perf = pm.evaluate(configuration);
+//            result.append(perf);
             result.append("\n");
         }
 

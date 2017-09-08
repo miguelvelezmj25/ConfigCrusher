@@ -20,7 +20,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.BasicBlock;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFG;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.sleep.cfg.CFGBuilder;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
-import edu.cmu.cs.mvelezce.tool.compression.SimpleCompression;
+import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.instrumentation.sleep.InstrumentVisitor;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;

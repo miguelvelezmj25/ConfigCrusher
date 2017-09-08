@@ -78,8 +78,10 @@ public abstract class BaseCompression implements Compression {
 
     public void writeToFile(Set<Set<String>> configurationsToExecute) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName + Options.DOT_JSON;
+        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName + "/" + this.programName
+                + Options.DOT_JSON;
         File file = new File(outputFile);
+        file.getParentFile().mkdirs();
 
         CompressedConfigurations compressedConfigurations = new CompressedConfigurations(configurationsToExecute);
         mapper.writeValue(file, compressedConfigurations);

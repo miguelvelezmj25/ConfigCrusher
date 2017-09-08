@@ -6,7 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.DefaultMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BasetMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class SleepMain extends DefaultMain {
+public class SleepMain extends BasetMain {
 
     public static final String SLEEP_MAIN = SleepMain.class.getCanonicalName();
 
@@ -231,6 +231,11 @@ public class SleepMain extends DefaultMain {
 
         Executor executor = new DefaultExecutor(this.getProgramName());
         executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
+    }
+
+    @Override
+    public void execute(String mainClass, String[] sleepArgs) throws Exception {
+        throw new RuntimeException();
     }
 
 }

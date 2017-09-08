@@ -1,13 +1,59 @@
-package edu.cmu.cs.mvelezce.tool.execute.java.approaches;
+package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce;
+
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.adapter.BFRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 6/30/17.
  */
-public class BruteForce {
+public class BruteForceExecutor extends BaseExecutor {
 
-//    public static final String BF_RES_DIR = Options.DIRECTORY + "/bf_res/java/programs";
-//
-//    public static Set<PerformanceEntry> repeatProcessMeasure(String programName, int iterations) throws IOException, ParseException, InterruptedException {
+    static {
+        DIRECTORY = Options.DIRECTORY + "/executor/java/bruteforce/programs";
+    }
+
+    public BruteForceExecutor(String programName) {
+        this(programName, null, null, null);
+    }
+
+    public BruteForceExecutor(String programName, String entryPoint, String dir, Set<Set<String>> configurations) {
+        super(programName, entryPoint, dir, configurations);
+    }
+
+    @Override
+    public Set<PerformanceEntry2> execute(int iteration) throws IOException, InterruptedException {
+        // TODO factory pattern or switch statement to create the right adapter
+        BaseAdapter baseAdapter;
+
+        if(this.getProgramName().contains("running-example")) {
+            baseAdapter = new BFRunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+        }
+        else {
+            throw new RuntimeException("Could not create an adapter for " + this.getProgramName());
+        }
+
+        for(Set<String> configuration : this.getConfigurations()) {
+            baseAdapter.execute(configuration, iteration);
+        }
+
+        String outputDir = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + "/" + iteration;
+        File outputFile = new File(outputDir);
+
+        if(!outputFile.exists()) {
+            throw new RuntimeException("The output file could not be found " + outputDir);
+        }
+
+        Set<PerformanceEntry2> performanceEntries = this.aggregateExecutions(outputFile);
+        return performanceEntries;
+
+
 //        programName += "-bf";
 //        String[] args = new String[1];
 //        args[0] = "-i" + iterations;
@@ -25,8 +71,8 @@ public class BruteForce {
 //        BruteForce.saveBFPerformance(programName, perfStats);
 //
 //        return measuredPerformance;
-//    }
-//
+    }
+
 //    public static Set<PerformanceEntry> repeatProcessMeasure(String programName, int iterations, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
 //// TODO compile both original and instrumented
 //        //        Formatter.compile(srcDir, classDir);
@@ -58,7 +104,7 @@ public class BruteForce {
 //
 //        return measuredPerformance;
 //    }
-//
+
 //    public static void saveBFPerformance(String programName, List<PerformanceStatistic> perfStats) throws IOException {
 //        File file = new File(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
 //

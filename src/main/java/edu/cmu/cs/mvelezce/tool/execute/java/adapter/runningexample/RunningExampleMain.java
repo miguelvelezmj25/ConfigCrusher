@@ -6,14 +6,14 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.DefaultMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BasetMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
 
-public class RunningExampleMain extends DefaultMain {
+public class RunningExampleMain extends BasetMain {
 
     public static final String RUNNING_EXAMPLE_MAIN = RunningExampleMain.class.getCanonicalName();
 
@@ -21,23 +21,14 @@ public class RunningExampleMain extends DefaultMain {
         super(programName, iteration, args);
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws Exception {
         String programName = args[0];
         String mainClass = args[1];
         String iteration = args[2];
         String[] sleepArgs = Arrays.copyOfRange(args, 3, args.length);
 
-        if(mainClass.contains("Example")) {
-            Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.enter(program.getRegionID());
-            Example.main(sleepArgs);
-            Regions.exit(program.getRegionID());
-        }
-        else {
-            throw new RuntimeException("Could not find the main class " + mainClass);
-        }
-
         Main main = new RunningExampleMain(programName, iteration, sleepArgs);
+        main.execute(mainClass, sleepArgs);
         main.logExecution();
     }
 
@@ -48,5 +39,18 @@ public class RunningExampleMain extends DefaultMain {
 
         Executor executor = new DefaultExecutor(this.getProgramName());
         executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
+    }
+
+    @Override
+    public void execute(String mainClass, String[] args) throws Exception {
+        if(mainClass.contains("Example")) {
+            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Regions.enter(program.getRegionID());
+            Example.main(args);
+            Regions.exit(program.getRegionID());
+        }
+        else {
+            throw new RuntimeException("Could not find the main class " + mainClass);
+        }
     }
 }

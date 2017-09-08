@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
+package edu.cmu.cs.mvelezce.tool.analysis.taint.java.lotrack;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 
@@ -10,6 +10,7 @@ import java.util.Set;
 /**
  * Created by mvelezce on 4/5/17.
  */
+// TODO should we delete this class?
 public class LotrackProcessor {
 
     public static Map<JavaRegion, Set<String>> filterBooleans(Map<JavaRegion, Set<String>> regionToOptions) {

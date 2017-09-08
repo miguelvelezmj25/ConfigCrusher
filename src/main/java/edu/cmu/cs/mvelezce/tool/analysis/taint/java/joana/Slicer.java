@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java;
+package edu.cmu.cs.mvelezce.tool.analysis.taint.java.joana;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.kit.joana.ifc.sdg.core.SecurityNode;

@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -19,10 +18,18 @@ public class TimerInstrumenterTest {
     protected static String srcDir;
     protected static String classDir;
 
-
     protected void compile() {
         Instrumenter compiler = new CompileInstrumenter(TimerInstrumenterTest.srcDir, TimerInstrumenterTest.classDir);
         compiler.compileFromSource();
+    }
+
+    protected void format() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException {
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Instrumenter compiler = new Formatter(TimerInstrumenterTest.srcDir, TimerInstrumenterTest.classDir);
+        compiler.instrument(args);
     }
 
     @Test
@@ -228,7 +235,8 @@ public class TimerInstrumenterTest {
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
 
-        this.compile();
+//        this.compile();
+        this.format();
 
         // Program arguments
 //        String[] args = new String[0];

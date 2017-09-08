@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.serialize.CompressedConfigurations;
+import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

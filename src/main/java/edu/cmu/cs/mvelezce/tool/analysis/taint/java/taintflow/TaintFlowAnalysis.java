@@ -20,35 +20,6 @@ public class TaintFlowAnalysis extends BaseStaticAnalysis {
     }
 
     @Override
-    public Map<JavaRegion, Set<Set<String>>> analyze(String[] args) throws IOException {
-        Options.getCommandLine(args);
-
-        String outputFile = BaseStaticAnalysis.DIRECTORY + "/" + this.getProgramName();
-        File file = new File(outputFile);
-
-        Options.checkIfDeleteResult(file);
-
-        if(file.exists()) {
-            Collection<File> files = FileUtils.listFiles(file, null, true);
-
-            if(files.size() != 1) {
-                throw new RuntimeException("We expected to find 1 file in the directory, but that is not the case "
-                        + outputFile);
-            }
-
-            return this.readFromFile(files.iterator().next());
-        }
-
-        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = this.analyze();
-
-        if(Options.checkIfSave()) {
-            this.writeToFile(regionsToOptionsSet);
-        }
-
-        return regionsToOptionsSet;
-    }
-
-    @Override
     public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
         List<ControlFlowResult> results = this.readTaintFlowResults();
         Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();

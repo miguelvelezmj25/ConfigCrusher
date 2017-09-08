@@ -1,162 +1,73 @@
 package edu.cmu.cs.mvelezce.tool.performancemodel;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 4/28/17.
  */
-public class DefaultPerformanceModelBuilder extends BasePerformanceModelBuilder {
+public abstract class BasePerformanceModelBuilder implements PerformanceModelBuilder {
 
-    public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
+    private static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
 
-    public DefaultPerformanceModelBuilder(String programName, Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
-        super(programName, measuredPerformance, regionsToOptionSet);
+    private String programName;
+    private Set<PerformanceEntry2> measuredPerformance;
+    private Map<Region, Set<Set<String>>> regionsToOptionSet;
+    ;
+
+    public BasePerformanceModelBuilder(String programName, Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
+        this.programName = programName;
+        this.measuredPerformance = measuredPerformance;
+        this.regionsToOptionSet = regionsToOptionSet;
     }
 
-    public DefaultPerformanceModelBuilder(String programName) {
-        this(programName, null, null);
+    public String getProgramName() {
+        return programName;
+    }
+
+    public Set<PerformanceEntry2> getMeasuredPerformance() {
+        return measuredPerformance;
+    }
+
+    public Map<Region, Set<Set<String>>> getRegionsToOptionSet() {
+        return regionsToOptionSet;
     }
 
     @Override
-    public PerformanceModel createModel() {
-        Map<Region, Map<Set<String>, Set<Long>>> regionsToPerformanceTable = new HashMap<>();
+    public PerformanceModel createModel(String[] args) throws IOException {
+        Options.getCommandLine(args);
 
-        for(Map.Entry<Region, Set<Set<String>>> regionToOptionSet : this.getRegionsToOptionSet().entrySet()) {
-            Region region = regionToOptionSet.getKey();
-            // TODO this might change if we decide to not have a set of set of options for each region
-            Set<String> optionsInRegion = new HashSet<>();
+        String outputDir = BasePerformanceModelBuilder.DIRECTORY + "/" + this.programName;
+        File outputFile = new File(outputDir);
 
-            for(Set<String> options : regionToOptionSet.getValue()) {
-                optionsInRegion.addAll(options);
+        Options.checkIfDeleteResult(outputFile);
+
+        if(outputFile.exists()) {
+            Collection<File> files = FileUtils.listFiles(outputFile, null, true);
+
+            if(files.size() != 1) {
+                throw new RuntimeException("We expected to find 1 file in the directory, but that is not the case "
+                        + outputFile);
             }
 
-            Map<Set<String>, Set<Long>> optionValuesToPerformances = new HashMap<>();
-
-            for(PerformanceEntry2 performanceEntry : this.getMeasuredPerformance()) {
-                Set<String> configuration = performanceEntry.getConfiguration();
-                Set<String> optionValueInPerfEntry = new HashSet<>(optionsInRegion);
-                optionValueInPerfEntry.retainAll(configuration);
-
-                long regionTime = 0;
-
-                for(Map.Entry<Region, Long> regionToProcessedPerformance : performanceEntry.getRegionsToProcessedPerformance().entrySet()) {
-                    Region performanceRegion = regionToProcessedPerformance.getKey();
-
-                    if(!performanceRegion.getRegionID().equals(region.getRegionID())) {
-                        continue;
-                    }
-
-                    regionTime += regionToProcessedPerformance.getValue();
-                }
-
-                if(!optionValuesToPerformances.containsKey(optionValueInPerfEntry)) {
-                    optionValuesToPerformances.put(optionValueInPerfEntry, new HashSet<>());
-                }
-
-                optionValuesToPerformances.get(optionValueInPerfEntry).add(regionTime);
-
-            }
-
-            regionsToPerformanceTable.put(region, optionValuesToPerformances);
+            return this.readFromFile(files.iterator().next());
         }
 
-        long programTime = 0;
+        PerformanceModel performanceModel = this.createModel();
 
-        for(PerformanceEntry2 performanceEntry : this.getMeasuredPerformance()) {
-            for(Map.Entry<Region, Long> regionToProcessedPerformance : performanceEntry.getRegionsToProcessedPerformance().entrySet()) {
-                Region region = regionToProcessedPerformance.getKey();
-
-                if(!region.getRegionID().equals(Regions.PROGRAM_REGION_ID)) {
-                    continue;
-                }
-
-                programTime += regionToProcessedPerformance.getValue();
-            }
-
+        if(Options.checkIfSave()) {
+            this.writeToFile(performanceModel);
         }
-
-        programTime /= this.getMeasuredPerformance().size();
-
-        Map<Region, Map<Set<String>, Long>> regionsToAveragePerformanceTable = this.averagePerformance(regionsToPerformanceTable);
-
-        PerformanceModel performanceModel = new PerformanceModel(programTime, regionsToAveragePerformanceTable);
 
         return performanceModel;
-
-
-////        DefaultPerformanceModelBuilder.getOuterRegions(measuredPerformance, regionsToOptions);
-////        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = DefaultPerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
-//        for(PerformanceEntry entry : measuredPerformance) {
-//            for(Map.Entry<Region, Set<Region>> region : entry.getRegionsToInnerRegions().entrySet()) {
-//                System.out.println("############### " + region.getKey().getRegionID());
-//
-//                for(Region inner : region.getValue()) {
-//                    System.out.println(inner.getRegionID());
-//                }
-//            }
-//        }
-//
-//        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = regionsToOptions;
-//        Map<Region, Map<Set<String>, Double>> regionsToConfigurationPerformance = new HashMap<>();
-//
-//        // Building the bf table for each region
-//        for(Map.Entry<Region, Set<String>> entry : regionsToOptionsIncludingInnerRegions.entrySet()) {
-//            Map<Set<String>, Double> configurationsToPerformance = new HashMap<>();
-//            Set<String> entryConfiguration = entry.getValue();
-//
-//            for(PerformanceEntry performanceEntry : measuredPerformance) {
-//                Set<String> configurationValueInMeasuredConfiguration = new HashSet<>(performanceEntry.getConfiguration());
-//                configurationValueInMeasuredConfiguration.retainAll(entryConfiguration);
-//
-//                Region region = entry.getKey();
-//                long executionTime = Math.max(0, performanceEntry.getTimeOfRegionID(region.getRegionID()));
-//                double time = Region.getSecondsExecutionTime(0, executionTime);
-//
-//                configurationsToPerformance.put(configurationValueInMeasuredConfiguration, time);
-//            }
-//
-//            regionsToConfigurationPerformance.put(entry.getKey(), configurationsToPerformance);
-//        }
-//
-//        // We do not have region information here
-//        List<Map<Set<String>, Double>> bfTablePerRegion = new ArrayList<>(regionsToConfigurationPerformance.values());
-//
-//        return new PerformanceModel(bfTablePerRegion);
-    }
-
-    private Map<Region, Map<Set<String>, Long>> averagePerformance(Map<Region, Map<Set<String>, Set<Long>>> regionsToPeformanceTable) {
-        Map<Region, Map<Set<String>, Long>> result = new HashMap<>();
-
-        for(Map.Entry<Region, Map<Set<String>, Set<Long>>> regionToPerformanceTable : regionsToPeformanceTable.entrySet()) {
-            Map<Set<String>, Set<Long>> table = regionToPerformanceTable.getValue();
-
-            Map<Set<String>, Long> averagedTable = new HashMap<>();
-
-            for(Map.Entry<Set<String>, Set<Long>> tableEntry : table.entrySet()) {
-                long total = 0;
-
-                for(Long performance : tableEntry.getValue()) {
-                    total += performance;
-                }
-
-                total /= tableEntry.getValue().size();
-
-                averagedTable.put(tableEntry.getKey(), total);
-            }
-
-            result.put(regionToPerformanceTable.getKey(), averagedTable);
-        }
-
-        return result;
     }
 
 //    private static void getOuterRegions(Set<PerformanceEntry> measuredPerformance, Map<Region, Set<String>> regionsToOptions) {
@@ -396,4 +307,25 @@ public class DefaultPerformanceModelBuilder extends BasePerformanceModelBuilder 
 //        regionsToRealPerformance.put(region, configurationsToRealPerformance);
 //    }
 
+    @Override
+    public void writeToFile(PerformanceModel performanceModel) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String outputFile = BasePerformanceModelBuilder.DIRECTORY + "/" + this.programName + "/" + this.programName
+                + Options.DOT_JSON;
+        File file = new File(outputFile);
+        file.getParentFile().mkdirs();
+
+        mapper.writeValue(file, performanceModel);
+    }
+
+
+    @Override
+    public PerformanceModel readFromFile(File file) throws IOException {
+        throw new UnsupportedOperationException("Have not figured out how to deserialize a performance model");
+//        ObjectMapper mapper = new ObjectMapper();
+//        PerformanceModel performanceModel = mapper.readValue(file, new TypeReference<PerformanceModel>() {
+//        });
+//
+//        return performanceModel;
+    }
 }

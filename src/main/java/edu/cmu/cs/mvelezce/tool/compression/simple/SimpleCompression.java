@@ -13,8 +13,6 @@ import java.util.*;
  */
 public class SimpleCompression extends BaseCompression {
 
-    public static final String DIRECTORY = Options.DIRECTORY + "/compression/java/programs";
-
     public SimpleCompression(Set<Set<String>> optionSet) {
         this(null, optionSet);
     }

@@ -98,4 +98,16 @@ public class BruteForceExecutorTest {
         Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
     }
 
+    @Test
+    public void runningExample1() throws IOException, InterruptedException {
+        String programName = "running-example";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
 }

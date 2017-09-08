@@ -40,9 +40,9 @@ public class JavaPipeline {
 
         // Configuration compression (Language independent)
         System.out.println("####################### Configurations to execute #######################");
-        Compression compression = new SimpleCompression(programName);
         Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args, relevantOptions);
+        Compression compression = new SimpleCompression(programName, relevantOptions);
+        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args);
         JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
         System.out.println("");
 
@@ -133,9 +133,9 @@ public class JavaPipeline {
 
         // Configuration compression (Language independent)
         System.out.println("####################### Configurations to execute #######################");
-        Compression compression = new SimpleCompression(programName);
         Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args, relevantOptions);
+        Compression compression = new SimpleCompression(programName, relevantOptions);
+        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args);
         JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
         System.out.println("");
 

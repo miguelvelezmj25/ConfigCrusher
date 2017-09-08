@@ -13,10 +13,16 @@ public class SimpleCompression extends BaseCompression {
 
     public static final String DIRECTORY = Options.DIRECTORY + "/compression/java/programs";
 
-    public SimpleCompression() { }
+    public SimpleCompression(Set<Set<String>> optionSet) {
+        this(null, optionSet);
+    }
 
     public SimpleCompression(String programName) {
-        super(programName);
+        this(programName, null);
+    }
+
+    public SimpleCompression(String programName, Set<Set<String>> optionSet) {
+        super(programName, optionSet);
     }
 
     @Override
@@ -32,18 +38,7 @@ public class SimpleCompression extends BaseCompression {
             return this.readFromFile(file);
         }
 
-        return null;
-    }
-
-    @Override
-    public Set<Set<String>> compressConfigurations(String[] args, Set<Set<String>> relevantOptionsSet) throws IOException {
-        Set<Set<String>> results = this.compressConfigurations(args);
-
-        if(results != null) {
-            return results;
-        }
-
-        Set<Set<String>> configurationsToExecute = this.compressConfigurations(relevantOptionsSet);
+        Set<Set<String>> configurationsToExecute = this.compressConfigurations();
 
         if(Options.checkIfSave()) {
             this.writeToFile(configurationsToExecute);
@@ -53,9 +48,9 @@ public class SimpleCompression extends BaseCompression {
     }
 
     @Override
-    public Set<Set<String>> compressConfigurations(Set<Set<String>> relevantOptionsSet) {
+    public Set<Set<String>> compressConfigurations() {
         // Calculates which options are subsets of other options
-        Set<Set<String>> filteredOptions = BaseCompression.filterOptions(relevantOptionsSet);
+        Set<Set<String>> filteredOptions = BaseCompression.filterOptions(this.getOptionSet());
 
         // Get the configurations for each option
         Map<Set<String>, Set<Set<String>>> optionsToConfigurationsToExecute = new HashMap<>();
@@ -111,12 +106,8 @@ public class SimpleCompression extends BaseCompression {
         Iterator<Set<String>> largeSet = largeEntry.getValue().iterator();
         Iterator<Set<String>> smallSet = smallEntry.getValue().iterator();
 
-//        System.out.println("entry 1 size: " + largeEntry.getValue().size());
-//        System.out.println("entry 2 size: " + smallEntry.getValue().size());
-
         while (largeSet.hasNext() && smallSet.hasNext()) {
             Set<String> configurationInLargeSet = largeSet.next();
-//            System.out.println("Set1: " + configurationInLargeSet);
 
             Set<String> valuePivotOptionsInLargeSet = new HashSet<>(configurationInLargeSet);
             valuePivotOptionsInLargeSet.retainAll(pivotOptions);
@@ -124,13 +115,11 @@ public class SimpleCompression extends BaseCompression {
 
             while (smallSet.hasNext()) {
                 Set<String> configurationInSmallSet = smallSet.next();
-//                System.out.println("Set2: " + configurationInSmallSet);
 
                 Set<String> valuePivotOptionsInSmallSet = new HashSet<>(configurationInSmallSet);
                 valuePivotOptionsInSmallSet.retainAll(pivotOptions);
 
                 if(valuePivotOptionsInLargeSet.equals(valuePivotOptionsInSmallSet)) {
-//                    System.out.println("Can compress");
                     Set<String> compressedConfiguration = new HashSet<>(configurationInLargeSet);
                     compressedConfiguration.addAll(configurationInSmallSet);
                     configurationsToExecute.add(compressedConfiguration);
@@ -144,8 +133,6 @@ public class SimpleCompression extends BaseCompression {
             if(!merged) {
                 Set<String> compressedConfiguration = new HashSet<>(configurationInLargeSet);
                 configurationsToExecute.add(compressedConfiguration);
-//                System.out.println("Just add");
-//                    throw new RuntimeException("Could not merge the sets");
             }
 
             smallSet = smallEntry.getValue().iterator();
@@ -153,12 +140,10 @@ public class SimpleCompression extends BaseCompression {
 
         while (largeSet.hasNext()) {
             configurationsToExecute.add(largeSet.next());
-//            System.out.println("Added rest from largetset");
         }
 
         while (smallSet.hasNext()) {
             configurationsToExecute.add(smallSet.next());
-//            System.out.println("Added rest from smallset");
         }
     }
 

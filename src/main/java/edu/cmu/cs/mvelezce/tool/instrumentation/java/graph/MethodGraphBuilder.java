@@ -152,30 +152,20 @@ public class MethodGraphBuilder {
     }
 
     private void addEdges(MethodGraph graph) {
-        MethodBlock block = null;
-        LabelNode labelNode;
         InsnList instructions = methodNode.instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
+        AbstractInsnNode instruction = instructionsIterator.next();
+        MethodBlock block = graph.getMethodBlock(instruction);
+
         while (instructionsIterator.hasNext()) {
-            AbstractInsnNode instruction = instructionsIterator.next();
-            int instructionType = instruction.getType();
+            instruction = instructionsIterator.next();
+            MethodBlock possibleBlock = graph.getMethodBlock(instruction);
 
-            if(instructionType == AbstractInsnNode.LABEL) {
-                labelNode = (LabelNode) instruction;
-                MethodBlock possibleBlock = graph.getMethodBlock(labelNode);
-
-                if(possibleBlock == null) {
-                    continue;
-                }
-
-                if(block == null) {
-                    block = possibleBlock;
-                    continue;
-                }
-
+            if(possibleBlock != null) {
                 AbstractInsnNode previousInstruction = instruction.getPrevious();
 
+                // This can happen when the possible block is the target of a jump instruction
                 if(previousInstruction.getType() != AbstractInsnNode.JUMP_INSN) {
                     if(!block.getSuccessors().contains(possibleBlock)) {
                         graph.addEdge(block, possibleBlock);
@@ -184,26 +174,28 @@ public class MethodGraphBuilder {
 
                 block = possibleBlock;
             }
-            else if(instructionType == AbstractInsnNode.JUMP_INSN) {
-                JumpInsnNode jumpInsn = (JumpInsnNode) instruction;
-                MethodBlock destinationBlock = new MethodBlock(jumpInsn.label);
-                graph.addEdge(block, destinationBlock);
 
-                if(jumpInsn.getOpcode() == Opcodes.GOTO) {
-                    continue;
-                }
+            int instructionType = instruction.getType();
 
-                AbstractInsnNode nextInstruction = instruction.getNext();
-
-                if(nextInstruction.getType() == AbstractInsnNode.LABEL) {
-                    labelNode = (LabelNode) nextInstruction;
-                    destinationBlock = graph.getMethodBlock(labelNode);
-                    graph.addEdge(block, destinationBlock);
-                }
-                else {
-                    throw new RuntimeException();
-                }
+            if(instructionType != AbstractInsnNode.JUMP_INSN) {
+                continue;
             }
+
+            JumpInsnNode jumpInsn = (JumpInsnNode) instruction;
+            MethodBlock destinationBlock = graph.getMethodBlock(jumpInsn.label);
+            graph.addEdge(block, destinationBlock);
+
+            if(jumpInsn.getOpcode() == Opcodes.GOTO) {
+                continue;
+            }
+
+            if(jumpInsn.getOpcode() < Opcodes.LCMP || jumpInsn.getOpcode() > Opcodes.IF_ACMPNE) {
+                throw new RuntimeException("New type of jump instruction");
+            }
+
+            AbstractInsnNode nextInstruction = instruction.getNext();
+            destinationBlock = graph.getMethodBlock(nextInstruction);
+            graph.addEdge(block, destinationBlock);
         }
 
     }
@@ -213,28 +205,22 @@ public class MethodGraphBuilder {
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
         AbstractInsnNode instruction = instructionsIterator.next();
-        LabelNode labelNode = (LabelNode) instruction;
-
-        MethodBlock block = graph.getMethodBlock(labelNode);
+        MethodBlock block = graph.getMethodBlock(instruction);
         List<AbstractInsnNode> blockInstructions = block.getInstructions();
         blockInstructions.add(instruction);
 
         while (instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
-            int instructionType = instruction.getType();
+            MethodBlock possibleBlock = graph.getMethodBlock(instruction);
 
-            if(instructionType == AbstractInsnNode.LABEL) {
-                labelNode = (LabelNode) instruction;
-                MethodBlock possibleBlock = graph.getMethodBlock(labelNode);
-
-                if(possibleBlock != null) {
-                    block = possibleBlock;
-                    blockInstructions = block.getInstructions();
-                }
+            if(possibleBlock != null) {
+                block = possibleBlock;
+                blockInstructions = block.getInstructions();
             }
 
             blockInstructions.add(instruction);
         }
+
     }
 
     private void getBlocks(MethodGraph graph) {
@@ -248,8 +234,7 @@ public class MethodGraphBuilder {
             throw new RuntimeException();
         }
 
-        LabelNode labelNode = (LabelNode) instruction;
-        MethodBlock block = new MethodBlock(labelNode);
+        MethodBlock block = new MethodBlock(instruction);
 
         while (instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
@@ -266,15 +251,8 @@ public class MethodGraphBuilder {
             graph.addMethodBlock(block);
 
             AbstractInsnNode nextInstruction = instruction.getNext();
-
-            if(nextInstruction.getType() == AbstractInsnNode.LABEL) {
-                labelNode = (LabelNode) nextInstruction;
-                block = new MethodBlock(labelNode);
-                graph.addMethodBlock(block);
-            }
-            else {
-                throw new RuntimeException("This is a new case");
-            }
+            block = new MethodBlock(nextInstruction);
+            graph.addMethodBlock(block);
         }
     }
 

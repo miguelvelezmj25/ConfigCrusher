@@ -81,15 +81,15 @@ public class TimerTransformer extends RegionTransformer {
 
     @Override
     public void transformMethod(MethodNode methodNode) {
-
-//        if(methodNode.name.equals("debug")) {
-//            System.out.print("");
-//        }
-
-        MethodGraph graph = MethodGraphBuilder.buildMethodGraph(methodNode);
+        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+        MethodGraph graph = builder.build();
 
         System.out.println("Before transforming");
         System.out.println(graph.toDotString(methodNode.name));
+
+        if(methodNode.name.equals("getMergedColors")) {
+            System.out.print("");
+        }
 
         if(graph.getBlocks().size() <= 3) {
 //            System.out.println("Special method that is not instrumented");
@@ -149,9 +149,15 @@ public class TimerTransformer extends RegionTransformer {
         methodNode.instructions.clear();
         methodNode.instructions.add(newInstructions);
 
-        graph = MethodGraphBuilder.buildMethodGraph(methodNode);
+        builder = new MethodGraphBuilder(methodNode);
+        graph = builder.build();
         System.out.println("After transforming");
         System.out.println(graph.toDotString(methodNode.name));
+
+        if(methodNode.name.equals("getMergedColors")) {
+            System.out.print("");
+        }
+
         System.out.print("");
     }
 

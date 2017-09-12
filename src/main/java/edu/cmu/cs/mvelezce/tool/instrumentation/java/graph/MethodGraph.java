@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import jdk.internal.org.objectweb.asm.Label;
+import jdk.internal.org.objectweb.asm.tree.LabelNode;
 
 import java.util.*;
 
@@ -11,13 +12,13 @@ public class MethodGraph {
 
     // TODO create a single exit block for the graph
     private MethodBlock entryBlock = new MethodBlock("entry");
-    private MethodBlock exitBlock;// = new MethodBlock("exit");
+    private MethodBlock exitBlock = new MethodBlock("exit");
     private Map<String, MethodBlock> blocks = new HashMap<>();
     private Map<MethodBlock, Set<MethodBlock>> blocksToDominators = new HashMap<>();
 
     public MethodGraph() {
         this.blocks.put(this.entryBlock.getID(), this.entryBlock);
-//        this.blocks.put(this.exitBlock.getID(), this.exitBlock);
+        this.blocks.put(this.exitBlock.getID(), this.exitBlock);
     }
 
     public MethodBlock getImmediatePostDominator(MethodBlock methodBlock) {
@@ -27,12 +28,12 @@ public class MethodGraph {
     }
 
     public void addMethodBlock(MethodBlock methodBlock) {
-        if(this.blocks.size() == 1) {
-            this.addEdge(this.entryBlock, methodBlock);
-        }
+//        if(this.blocks.size() == 1) {
+//            this.addEdge(this.entryBlock, methodBlock);
+//        }
 
         this.blocks.put(methodBlock.getID(), methodBlock);
-        this.exitBlock = methodBlock;
+//        this.exitBlock = methodBlock;
     }
 
     public void addEdge(MethodBlock from, MethodBlock to) {
@@ -226,21 +227,21 @@ public class MethodGraph {
 
         for(MethodBlock methodBlock : this.blocks.values()) {
             for(MethodBlock successor : methodBlock.getSuccessors()) {
-                if(methodBlock.getLabel().info == null) {
+//                if(methodBlock.getLabel().info == null) {
                     dotString.append(methodBlock.getID());
-                }
-                else {
-                    dotString.append(methodBlock.getLabel().info);
-                }
-
+//                }
+//                else {
+//                    dotString.append(methodBlock.getLabel().info);
+//                }
+//
                 dotString.append(" -> ");
-
-                if(successor.getLabel().info == null) {
+//
+//                if(successor.getLabel().info == null) {
                     dotString.append(successor.getID());
-                }
-                else {
-                    dotString.append(successor.getLabel().info);
-                }
+//                }
+//                else {
+//                    dotString.append(successor.getLabel().info);
+//                }
                 dotString.append(";\n");
             }
         }
@@ -252,6 +253,10 @@ public class MethodGraph {
 
     public MethodBlock getMethodBlock(String ID) {
         return this.blocks.get(ID);
+    }
+
+    public MethodBlock getMethodBlock(LabelNode labelNode) {
+        return this.getMethodBlock(labelNode.hashCode() + "");
     }
 
     public MethodBlock getMethodBlock(Label label) {
@@ -266,6 +271,7 @@ public class MethodGraph {
         return this.blocks.size();
     }
 
+    // TODO how to do this?
     public int getEdgeCount() {
         int edges = 0;
 

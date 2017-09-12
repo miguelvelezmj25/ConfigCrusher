@@ -1,9 +1,59 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
+import edu.cmu.cs.mvelezce.Graph0;
+import edu.cmu.cs.mvelezce.Graph1;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
+import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * Created by mvelezce on 5/3/17.
  */
 public class MethodGraphBuilderTest {
+
+    @Test
+    public void graph0() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(Graph0.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("main")) {
+                continue;
+            }
+
+            MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+            System.out.println(graph.toDotString("main"));
+            Assert.assertEquals(6, graph.getBlocks().size());
+            Assert.assertEquals(6, graph.getEdgeCount());
+        }
+    }
+
+    @Test
+    public void graph1() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(Graph1.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("main")) {
+                continue;
+            }
+
+            MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+            System.out.println(graph.toDotString("main"));
+            Assert.assertEquals(8, graph.getBlocks().size());
+            Assert.assertEquals(9, graph.getEdgeCount());
+        }
+    }
 
 //    @Test
 //    public void testVertex() throws IOException {
@@ -14,7 +64,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("bftNodeSearch")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 //        }
@@ -29,12 +79,12 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("<init>")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 //
 //            if(method.name.equals("checkNeighborAction")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 //        }
@@ -49,7 +99,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("findsVertex")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 //        }
@@ -64,22 +114,22 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("one")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 //
 //            if(method.name.equals("two")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 //
 //            if(method.name.equals("three")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 //
 //            if(method.name.equals("four")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 //        }
@@ -94,7 +144,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //                Assert.assertEquals(9, methodGraph.getBlockCount());
 //                Assert.assertEquals(9, methodGraph.getEdgeCount());
@@ -111,7 +161,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //                Assert.assertEquals(9, methodGraph.getBlockCount());
 //                Assert.assertEquals(9, methodGraph.getEdgeCount());
@@ -128,7 +178,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //                Assert.assertEquals(9, methodGraph.getBlockCount());
 //                Assert.assertEquals(9, methodGraph.getEdgeCount());
@@ -145,12 +195,12 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 ////            if(method.name.equals("main")) {
-////                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+////                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 ////                System.out.println(methodGraph.toDotString(method.name));
 ////            }
 //
 //            if(method.name.equals("method")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //            }
 //        }
@@ -165,7 +215,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //                Assert.assertEquals(9, methodGraph.getBlockCount());
 //                Assert.assertEquals(9, methodGraph.getEdgeCount());
@@ -182,7 +232,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //                Assert.assertEquals(8, methodGraph.getBlockCount());
 //                Assert.assertEquals(8, methodGraph.getEdgeCount());
@@ -199,7 +249,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //                Assert.assertEquals(12, methodGraph.getBlockCount());
 //                Assert.assertEquals(12, methodGraph.getEdgeCount());
@@ -216,7 +266,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                Assert.assertEquals(14, methodGraph.getBlockCount());
 //                Assert.assertEquals(15, methodGraph.getEdgeCount());
 //                System.out.println(methodGraph.toDotString(method.name));
@@ -233,7 +283,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                Assert.assertEquals(9, methodGraph.getBlockCount());
 //                Assert.assertEquals(9, methodGraph.getEdgeCount());
 //                System.out.println(methodGraph.toDotString(method.name));
@@ -250,7 +300,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //                Assert.assertEquals(11, methodGraph.getBlockCount());
 //                Assert.assertEquals(11, methodGraph.getEdgeCount());
@@ -267,7 +317,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //                Assert.assertEquals(11, methodGraph.getBlockCount());
 //                Assert.assertEquals(11, methodGraph.getEdgeCount());
@@ -284,7 +334,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                Assert.assertEquals(14, methodGraph.getBlockCount());
 //                Assert.assertEquals(15, methodGraph.getEdgeCount());
 //                System.out.println(methodGraph.toDotString(method.name));
@@ -301,7 +351,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                Assert.assertEquals(14, methodGraph.getBlockCount());
 //                Assert.assertEquals(15, methodGraph.getEdgeCount());
 //                System.out.println(methodGraph.toDotString(method.name));
@@ -318,7 +368,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                Assert.assertEquals(14, methodGraph.getBlockCount());
 //                Assert.assertEquals(15, methodGraph.getEdgeCount());
 //                System.out.println(methodGraph.toDotString(method.name));
@@ -335,7 +385,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                Assert.assertEquals(14, methodGraph.getBlockCount());
 //                Assert.assertEquals(15, methodGraph.getEdgeCount());
 //                System.out.println(methodGraph.toDotString(method.name));
@@ -352,7 +402,7 @@ public class MethodGraphBuilderTest {
 //
 //        for(MethodNode method : methods) {
 //            if(method.name.equals("main")) {
-//                MethodGraph methodGraph = MethodGraphBuilder.buildMethodGraph(method);
+//                MethodGraph methodGraph = MethodGraphBuilder.build(method);
 //                System.out.println(methodGraph.toDotString(method.name));
 //                Assert.assertEquals(14, methodGraph.getBlockCount());
 //                Assert.assertEquals(15, methodGraph.getEdgeCount());

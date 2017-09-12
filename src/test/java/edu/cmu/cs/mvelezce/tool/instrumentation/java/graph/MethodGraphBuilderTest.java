@@ -263,6 +263,63 @@ public class MethodGraphBuilderTest {
         }
     }
 
+    @Test
+    public void graph13() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(Graph13.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("main")) {
+                continue;
+            }
+
+            MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+            System.out.println(graph.toDotString("main"));
+            Assert.assertEquals(5, graph.getBlocks().size());
+            Assert.assertEquals(4, graph.getEdgeCount());
+        }
+    }
+
+    @Test
+    public void graph14() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(Graph14.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("main")) {
+                continue;
+            }
+
+            MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+            System.out.println(graph.toDotString("main"));
+            Assert.assertEquals(5, graph.getBlocks().size());
+            Assert.assertEquals(4, graph.getEdgeCount());
+        }
+    }
+
+    @Test
+    public void graph15() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(Graph15.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("main")) {
+                continue;
+            }
+
+            MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+            System.out.println(graph.toDotString("main"));
+            Assert.assertEquals(4, graph.getBlocks().size());
+            Assert.assertEquals(3, graph.getEdgeCount());
+        }
+    }
+
 //    @Test
 //    public void testDummy6() throws IOException {
 //        ClassTransformer reader = new DefaultBaseClassTransformer();

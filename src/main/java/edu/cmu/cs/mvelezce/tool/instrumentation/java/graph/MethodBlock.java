@@ -15,7 +15,7 @@ import java.util.Set;
 public class MethodBlock {
 
     private String ID;
-    private LabelNode labelNode;
+    private AbstractInsnNode insnNode = null;
     private Label label;
     private Label originalLabel;
     private List<AbstractInsnNode> instructions = new ArrayList<>();
@@ -46,9 +46,9 @@ public class MethodBlock {
         this(label.toString(), label, label, new ArrayList<>());
     }
 
-    public MethodBlock(LabelNode labelNode) {
-        this.labelNode = labelNode;
-        this.ID = labelNode.hashCode() + "";
+    public MethodBlock(AbstractInsnNode insnNode) {
+        this.insnNode = insnNode;
+        this.ID = MethodBlock.asID(insnNode);
     }
 
     public void addSuccessor(MethodBlock methodBlock) {
@@ -129,5 +129,9 @@ public class MethodBlock {
 //                ", successors=" + successors.size() +
 //                ", predecessors=" + predecessors.size() +
 //                '}';
+    }
+
+    public static String asID(AbstractInsnNode insnNode) {
+        return insnNode.hashCode() + "";
     }
 }

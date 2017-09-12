@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.pngtastic.PngtasticAdapter;
@@ -48,8 +49,11 @@ public class DefaultExecutor extends BaseExecutor {
         else if(this.getProgramName().contains("zipme")) {
             adapter = new ZipmeAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
         }
-        else if(this.getProgramName().contains("pngtastic")) {
-            adapter = new PngtasticAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+//        else if(this.getProgramName().contains("pngtastic")) {
+//            adapter = new PngtasticAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+//        }
+        else if(this.getProgramName().contains("pngtasticColorCounter")) {
+            adapter = new ColorCounterAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
         }
         else if(this.getProgramName().contains("running-example")) {
             adapter = new RunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());

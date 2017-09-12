@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
+import jdk.internal.org.objectweb.asm.tree.LabelNode;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,9 +15,10 @@ import java.util.Set;
 public class MethodBlock {
 
     private String ID;
+    private LabelNode labelNode;
     private Label label;
     private Label originalLabel;
-    private List<AbstractInsnNode> instructions;
+    private List<AbstractInsnNode> instructions = new ArrayList<>();
     private Set<MethodBlock> successors = new HashSet<>();
     private Set<MethodBlock> predecessors = new HashSet<>();
     private boolean withRet = false;
@@ -44,6 +46,10 @@ public class MethodBlock {
         this(label.toString(), label, label, new ArrayList<>());
     }
 
+    public MethodBlock(LabelNode labelNode) {
+        this.labelNode = labelNode;
+        this.ID = labelNode.hashCode() + "";
+    }
 
     public void addSuccessor(MethodBlock methodBlock) {
 //        if(this.successors.size() >= 2) {
@@ -94,24 +100,24 @@ public class MethodBlock {
         this.withRet = withRet;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if(this == o) {
-            return true;
-        }
-        if(o == null || !(o instanceof MethodBlock)) {
-            return false;
-        }
-
-        MethodBlock that = (MethodBlock) o;
-
-        return ID.equals(that.ID);
-    }
-
-    @Override
-    public int hashCode() {
-        return ID.hashCode();
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if(this == o) {
+//            return true;
+//        }
+//        if(o == null || !(o instanceof MethodBlock)) {
+//            return false;
+//        }
+//
+//        MethodBlock that = (MethodBlock) o;
+//
+//        return ID.equals(that.ID);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return ID.hashCode();
+//    }
 
     @Override
     public String toString() {

@@ -29,12 +29,7 @@ public class MethodGraph {
     }
 
     public void addMethodBlock(MethodBlock methodBlock) {
-//        if(this.blocks.size() == 1) {
-//            this.addEdge(this.entryBlock, methodBlock);
-//        }
-
         this.blocks.put(methodBlock.getID(), methodBlock);
-//        this.exitBlock = methodBlock;
     }
 
     public void addEdge(MethodBlock from, MethodBlock to) {

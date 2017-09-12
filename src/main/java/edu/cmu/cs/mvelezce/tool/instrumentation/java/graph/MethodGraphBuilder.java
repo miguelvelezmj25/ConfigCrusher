@@ -167,17 +167,20 @@ public class MethodGraphBuilder {
 
                 // This can happen when the possible block is the target of a jump instruction
                 if(previousInstruction.getType() != AbstractInsnNode.JUMP_INSN) {
-                    if(!block.getSuccessors().contains(possibleBlock)) {
-                        graph.addEdge(block, possibleBlock);
+                    // Check if it is a return statement
+                    int opcode = previousInstruction.getOpcode();
+
+                    if(opcode != Opcodes.RET && (opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN)) {
+                        if(!block.getSuccessors().contains(possibleBlock)) {
+                            graph.addEdge(block, possibleBlock);
+                        }
                     }
                 }
 
                 block = possibleBlock;
             }
 
-            int instructionType = instruction.getType();
-
-            if(instructionType != AbstractInsnNode.JUMP_INSN) {
+            if(instruction.getType() != AbstractInsnNode.JUMP_INSN) {
                 continue;
             }
 
@@ -228,9 +231,8 @@ public class MethodGraphBuilder {
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
         AbstractInsnNode instruction = instructionsIterator.next();
-        int instructionType = instruction.getType();
 
-        if(instructionType != AbstractInsnNode.LABEL) {
+        if(instruction.getType() != AbstractInsnNode.LABEL) {
             throw new RuntimeException();
         }
 
@@ -238,9 +240,8 @@ public class MethodGraphBuilder {
 
         while (instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
-            instructionType = instruction.getType();
 
-            if(instructionType != AbstractInsnNode.JUMP_INSN) {
+            if(instruction.getType() != AbstractInsnNode.JUMP_INSN) {
                 continue;
             }
 

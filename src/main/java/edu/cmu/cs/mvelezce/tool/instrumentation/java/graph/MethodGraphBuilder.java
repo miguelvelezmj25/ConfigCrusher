@@ -180,25 +180,53 @@ public class MethodGraphBuilder {
                 block = possibleBlock;
             }
 
-            if(instruction.getType() != AbstractInsnNode.JUMP_INSN) {
+            int type = instruction.getType();
+
+            if(type != AbstractInsnNode.JUMP_INSN && type != AbstractInsnNode.LOOKUPSWITCH_INSN
+                    && type != AbstractInsnNode.TABLESWITCH_INSN) {
                 continue;
             }
 
-            JumpInsnNode jumpInsn = (JumpInsnNode) instruction;
-            MethodBlock destinationBlock = graph.getMethodBlock(jumpInsn.label);
-            graph.addEdge(block, destinationBlock);
+            if(type == AbstractInsnNode.JUMP_INSN) {
+                JumpInsnNode jumpInsn = (JumpInsnNode) instruction;
+                MethodBlock destinationBlock = graph.getMethodBlock(jumpInsn.label);
+                graph.addEdge(block, destinationBlock);
 
-            if(jumpInsn.getOpcode() == Opcodes.GOTO) {
-                continue;
+                if(jumpInsn.getOpcode() == Opcodes.GOTO) {
+                    continue;
+                }
+
+                if(jumpInsn.getOpcode() < Opcodes.LCMP || jumpInsn.getOpcode() > Opcodes.IF_ACMPNE) {
+                    throw new RuntimeException("New type of jump instruction");
+                }
+
+
+                AbstractInsnNode nextInstruction = instruction.getNext();
+                destinationBlock = graph.getMethodBlock(nextInstruction);
+                graph.addEdge(block, destinationBlock);
             }
+            else {
+                if(type == AbstractInsnNode.TABLESWITCH_INSN) {
+                    TableSwitchInsnNode tableSwitchInsn = (TableSwitchInsnNode) instruction;
+                    MethodBlock destinationBlock = graph.getMethodBlock(tableSwitchInsn.dflt);
+                    graph.addEdge(block, destinationBlock);
 
-            if(jumpInsn.getOpcode() < Opcodes.LCMP || jumpInsn.getOpcode() > Opcodes.IF_ACMPNE) {
-                throw new RuntimeException("New type of jump instruction");
+                    for(LabelNode labelNode : tableSwitchInsn.labels) {
+                        destinationBlock = graph.getMethodBlock(labelNode);
+                        graph.addEdge(block, destinationBlock);
+                    }
+                }
+                else {
+                    LookupSwitchInsnNode lookupSwitchInsn = (LookupSwitchInsnNode) instruction;
+                    MethodBlock destinationBlock = graph.getMethodBlock(lookupSwitchInsn.dflt);
+                    graph.addEdge(block, destinationBlock);
+
+                    for(LabelNode labelNode : lookupSwitchInsn.labels) {
+                        destinationBlock = graph.getMethodBlock(labelNode);
+                        graph.addEdge(block, destinationBlock);
+                    }
+                }
             }
-
-            AbstractInsnNode nextInstruction = instruction.getNext();
-            destinationBlock = graph.getMethodBlock(nextInstruction);
-            graph.addEdge(block, destinationBlock);
         }
 
     }
@@ -241,19 +269,76 @@ public class MethodGraphBuilder {
         while (instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
 
-            if(instruction.getType() != AbstractInsnNode.JUMP_INSN) {
+            int type = instruction.getType();
+
+            if(type != AbstractInsnNode.JUMP_INSN && type != AbstractInsnNode.LOOKUPSWITCH_INSN
+                    && type != AbstractInsnNode.TABLESWITCH_INSN) {
                 continue;
             }
 
             graph.addMethodBlock(block);
 
-            JumpInsnNode jumpInsn = (JumpInsnNode) instruction;
-            block = new MethodBlock(jumpInsn.label);
-            graph.addMethodBlock(block);
+            if(type == AbstractInsnNode.JUMP_INSN) {
+                JumpInsnNode jumpInsn = (JumpInsnNode) instruction;
+                block = graph.getMethodBlock(jumpInsn.label);
 
-            AbstractInsnNode nextInstruction = instruction.getNext();
-            block = new MethodBlock(nextInstruction);
-            graph.addMethodBlock(block);
+                if(block == null) {
+                    block = new MethodBlock(jumpInsn.label);
+                    graph.addMethodBlock(block);
+                }
+
+                AbstractInsnNode nextInstruction = instruction.getNext();
+                block = graph.getMethodBlock(nextInstruction);
+
+                if(block == null) {
+                    block = new MethodBlock(nextInstruction);
+                    graph.addMethodBlock(block);
+                }
+            }
+            else {
+                if(type == AbstractInsnNode.TABLESWITCH_INSN) {
+                    TableSwitchInsnNode tableSwitchInsn = (TableSwitchInsnNode) instruction;
+                    block = graph.getMethodBlock(tableSwitchInsn.dflt);
+
+                    if(block == null) {
+                        block = new MethodBlock(tableSwitchInsn.dflt);
+                        graph.addMethodBlock(block);
+                    }
+
+                    for(LabelNode labelNode : tableSwitchInsn.labels) {
+                        block = graph.getMethodBlock(labelNode);
+
+                        if(block == null) {
+                            block = new MethodBlock(labelNode);
+                            graph.addMethodBlock(block);
+                        }
+                    }
+                }
+                else {
+                    LookupSwitchInsnNode lookupSwitchInsn = (LookupSwitchInsnNode) instruction;
+                    block = graph.getMethodBlock(lookupSwitchInsn.dflt);
+
+                    if(block == null) {
+                        block = new MethodBlock(lookupSwitchInsn.dflt);
+                        graph.addMethodBlock(block);
+                    }
+
+                    for(LabelNode labelNode : lookupSwitchInsn.labels) {
+                        block = graph.getMethodBlock(labelNode);
+
+                        if(block == null) {
+                            block = new MethodBlock(labelNode);
+                            graph.addMethodBlock(block);
+                        }
+                    }
+                }
+
+                if(instruction.getNext().getType() != AbstractInsnNode.LABEL) {
+                    throw new RuntimeException("New case");
+                }
+
+                block = graph.getMethodBlock(instruction.getNext());
+            }
         }
     }
 

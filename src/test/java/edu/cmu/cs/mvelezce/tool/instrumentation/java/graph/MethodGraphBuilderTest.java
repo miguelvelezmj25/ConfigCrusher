@@ -149,6 +149,44 @@ public class MethodGraphBuilderTest {
         }
     }
 
+    @Test
+    public void graph7() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(Graph7.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("main")) {
+                continue;
+            }
+
+            MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+            System.out.println(graph.toDotString("main"));
+            Assert.assertEquals(5, graph.getBlocks().size());
+            Assert.assertEquals(5, graph.getEdgeCount());
+        }
+    }
+
+    @Test
+    public void graph8() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(Graph8.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("main")) {
+                continue;
+            }
+
+            MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+            System.out.println(graph.toDotString("main"));
+            Assert.assertEquals(7, graph.getBlocks().size());
+            Assert.assertEquals(8, graph.getEdgeCount());
+        }
+    }
+
 //    @Test
 //    public void testDummy6() throws IOException {
 //        ClassTransformer reader = new DefaultBaseClassTransformer();

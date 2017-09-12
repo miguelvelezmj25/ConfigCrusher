@@ -170,7 +170,8 @@ public class MethodGraphBuilder {
                     // Check if it is a return statement
                     int opcode = previousInstruction.getOpcode();
 
-                    if(opcode != Opcodes.RET && (opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN)) {
+                    if(opcode != Opcodes.RET && (opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN)
+                            && opcode != Opcodes.ATHROW) {
                         if(!block.getSuccessors().contains(possibleBlock)) {
                             graph.addEdge(block, possibleBlock);
                         }
@@ -181,9 +182,10 @@ public class MethodGraphBuilder {
             }
 
             int type = instruction.getType();
+            int opcode = instruction.getOpcode();
 
             if(type != AbstractInsnNode.JUMP_INSN && type != AbstractInsnNode.LOOKUPSWITCH_INSN
-                    && type != AbstractInsnNode.TABLESWITCH_INSN) {
+                    && type != AbstractInsnNode.TABLESWITCH_INSN && opcode != Opcodes.ATHROW) {
                 continue;
             }
 
@@ -204,6 +206,21 @@ public class MethodGraphBuilder {
                 AbstractInsnNode nextInstruction = instruction.getNext();
                 destinationBlock = graph.getMethodBlock(nextInstruction);
                 graph.addEdge(block, destinationBlock);
+            }
+            else if(opcode == Opcodes.ATHROW) {
+                for(TryCatchBlockNode tryCatchBlock : methodNode.tryCatchBlocks) {
+                    AbstractInsnNode insnNode = tryCatchBlock.start;
+
+                    while(insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
+                        insnNode = insnNode.getNext();
+
+                        if(insnNode == instruction) {
+                            MethodBlock destinationBlock = graph.getMethodBlock(tryCatchBlock.handler);
+                            graph.addEdge(block, destinationBlock);
+                        }
+                    }
+                }
+
             }
             else {
                 if(type == AbstractInsnNode.TABLESWITCH_INSN) {
@@ -265,18 +282,17 @@ public class MethodGraphBuilder {
         }
 
         MethodBlock block = new MethodBlock(instruction);
+        graph.addMethodBlock(block);
 
         while (instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
-
             int type = instruction.getType();
+            int opcode = instruction.getOpcode();
 
             if(type != AbstractInsnNode.JUMP_INSN && type != AbstractInsnNode.LOOKUPSWITCH_INSN
-                    && type != AbstractInsnNode.TABLESWITCH_INSN) {
+                    && type != AbstractInsnNode.TABLESWITCH_INSN && opcode != Opcodes.ATHROW) {
                 continue;
             }
-
-            graph.addMethodBlock(block);
 
             if(type == AbstractInsnNode.JUMP_INSN) {
                 JumpInsnNode jumpInsn = (JumpInsnNode) instruction;
@@ -293,6 +309,20 @@ public class MethodGraphBuilder {
                 if(block == null) {
                     block = new MethodBlock(nextInstruction);
                     graph.addMethodBlock(block);
+                }
+            }
+            else if(opcode == Opcodes.ATHROW) {
+                for(TryCatchBlockNode tryCatchBlock : methodNode.tryCatchBlocks) {
+                    AbstractInsnNode insnNode = tryCatchBlock.start;
+
+                    while(insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
+                        insnNode = insnNode.getNext();
+
+                        if(insnNode == instruction) {
+                            block = new MethodBlock(tryCatchBlock.handler);
+                            graph.addMethodBlock(block);
+                        }
+                    }
                 }
             }
             else {
@@ -336,8 +366,6 @@ public class MethodGraphBuilder {
                 if(instruction.getNext().getType() != AbstractInsnNode.LABEL) {
                     throw new RuntimeException("New case");
                 }
-
-                block = graph.getMethodBlock(instruction.getNext());
             }
         }
     }

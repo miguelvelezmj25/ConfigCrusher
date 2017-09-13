@@ -2,8 +2,13 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
+import jdk.internal.org.objectweb.asm.util.Printer;
+import jdk.internal.org.objectweb.asm.util.Textifier;
+import jdk.internal.org.objectweb.asm.util.TraceMethodVisitor;
 
 import java.util.*;
+
+import static jdk.internal.org.objectweb.asm.Opcodes.ASM4;
 
 /**
  * Created by mvelezce on 5/3/17.
@@ -242,6 +247,36 @@ public class MethodGraph {
 //                else {
 //                    dotString.append(successor.getLabel().info);
 //                }
+                dotString.append(";\n");
+            }
+        }
+
+        dotString.append("}");
+
+        return dotString.toString();
+    }
+
+    public String toDotStringVerbsoe(String methodName) {
+        StringBuilder dotString = new StringBuilder("digraph " + methodName + " {\n");
+        dotString.append("node [shape=record];");
+
+//        Printer p = new Textifier(ASM4);
+//
+//        TraceMethodVisitor t = new TraceMethodVisitor()
+        for(MethodBlock methodBlock : this.blocks.values()) {
+            dotString.append(methodBlock.getID());
+            dotString.append("[label]\"");
+
+            for(AbstractInsnNode instruction : methodBlock.getInstructions()) {
+//                instruction.
+            }
+        }
+
+        for(MethodBlock methodBlock : this.blocks.values()) {
+            for(MethodBlock successor : methodBlock.getSuccessors()) {
+                dotString.append(methodBlock.getID());
+                dotString.append(" -> ");
+                dotString.append(successor.getID());
                 dotString.append(";\n");
             }
         }

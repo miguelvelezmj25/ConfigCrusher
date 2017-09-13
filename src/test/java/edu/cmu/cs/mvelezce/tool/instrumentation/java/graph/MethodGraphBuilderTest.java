@@ -339,6 +339,25 @@ public class MethodGraphBuilderTest {
         }
     }
 
+    @Test
+    public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(Example.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("foo")) {
+                continue;
+            }
+
+            MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+            System.out.println(graph.toDotString("foo"));
+            Assert.assertEquals(8, graph.getBlocks().size());
+            Assert.assertEquals(10, graph.getEdgeCount());
+        }
+    }
+
 //    @Test
 //    public void testDummy6() throws IOException {
 //        ClassTransformer reader = new DefaultBaseClassTransformer();

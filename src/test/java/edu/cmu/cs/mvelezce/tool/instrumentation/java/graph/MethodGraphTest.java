@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
-import jdk.internal.org.objectweb.asm.Label;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -357,32 +356,41 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock entry = new MethodBlock("entry");
+        MethodBlock entry = methodGraph.getEntryBlock();
         MethodBlock a = new MethodBlock("A");
         MethodBlock b = new MethodBlock("B");
         MethodBlock c = new MethodBlock("C");
         MethodBlock d = new MethodBlock("D");
         MethodBlock e = new MethodBlock("E");
+        MethodBlock exit = methodGraph.getExitBlock();
 
         // Add vertices
+        methodGraph.addMethodBlock(entry);
         methodGraph.addMethodBlock(a);
         methodGraph.addMethodBlock(b);
         methodGraph.addMethodBlock(c);
         methodGraph.addMethodBlock(d);
         methodGraph.addMethodBlock(e);
+        methodGraph.addMethodBlock(exit);
 
         // Add edges
+        methodGraph.addEdge(entry, a);
         methodGraph.addEdge(a, b);
         methodGraph.addEdge(a, c);
         methodGraph.addEdge(b, d);
         methodGraph.addEdge(c, d);
         methodGraph.addEdge(d, e);
+        methodGraph.addEdge(e, exit);
 
         System.out.println(methodGraph.toDotString("test"));
 
         // Expected
         Map<MethodBlock, Set<MethodBlock>> expected = new HashMap<>();
         Set<MethodBlock> dominators = new HashSet<>();
+        dominators.add(entry);
+        expected.put(entry, dominators);
+
+        dominators = new HashSet<>();
         dominators.add(entry);
         dominators.add(a);
         expected.put(a, dominators);
@@ -414,7 +422,11 @@ public class MethodGraphTest {
 
         dominators = new HashSet<>();
         dominators.add(entry);
-        expected.put(entry, dominators);
+        dominators.add(a);
+        dominators.add(d);
+        dominators.add(e);
+        dominators.add(exit);
+        expected.put(exit, dominators);
 
         Map<MethodBlock, Set<MethodBlock>> result = methodGraph.getDominators();
         Assert.assertEquals(expected, result);
@@ -426,12 +438,13 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock entry = new MethodBlock("entry");
+        MethodBlock entry = methodGraph.getEntryBlock();
         MethodBlock a = new MethodBlock("A");
         MethodBlock b = new MethodBlock("B");
         MethodBlock c = new MethodBlock("C");
         MethodBlock d = new MethodBlock("D");
         MethodBlock e = new MethodBlock("E");
+        MethodBlock exit = methodGraph.getExitBlock();
 
         // Add vertices
         methodGraph.addMethodBlock(e);
@@ -1318,7 +1331,7 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build methodBlock
-        MethodBlock methodBlock = new MethodBlock(new Label());
+        MethodBlock methodBlock = new MethodBlock("A");
 
         // Add block
         methodGraph.addMethodBlock(methodBlock);
@@ -1333,8 +1346,8 @@ public class MethodGraphTest {
         MethodGraph methodGraph = new MethodGraph();
 
         // Build block
-        MethodBlock source = new MethodBlock(new Label());
-        MethodBlock end = new MethodBlock(new Label());
+        MethodBlock source = new MethodBlock("A");
+        MethodBlock end = new MethodBlock("Z");
 
         // Add vertices
         methodGraph.addMethodBlock(source);

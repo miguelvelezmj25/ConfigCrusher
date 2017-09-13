@@ -194,12 +194,15 @@ public class MethodGraphBuilder {
                 MethodBlock destinationBlock = graph.getMethodBlock(jumpInsn.label);
                 graph.addEdge(block, destinationBlock);
 
-                if(jumpInsn.getOpcode() == Opcodes.GOTO) {
+                if(opcode == Opcodes.GOTO) {
                     continue;
                 }
 
-                if(jumpInsn.getOpcode() < Opcodes.LCMP || jumpInsn.getOpcode() > Opcodes.IF_ACMPNE) {
-                    throw new RuntimeException("New type of jump instruction");
+
+                if(opcode < Opcodes.LCMP || opcode > Opcodes.IF_ACMPNE) {
+                    if(opcode != Opcodes.IFNULL && opcode != Opcodes.IFNONNULL) {
+                        throw new RuntimeException("New type of jump instruction");
+                    }
                 }
 
 

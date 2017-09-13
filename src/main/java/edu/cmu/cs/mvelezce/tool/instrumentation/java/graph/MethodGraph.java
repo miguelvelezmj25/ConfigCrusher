@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
-import jdk.internal.org.objectweb.asm.tree.LabelNode;
 
 import java.util.*;
 
@@ -23,9 +22,10 @@ public class MethodGraph {
     }
 
     public MethodBlock getImmediatePostDominator(MethodBlock methodBlock) {
-//        this.getDominators();
         MethodGraph reversedGraph = this.reverseGraph();
-        return reversedGraph.getImmediateDominator(methodBlock);
+        MethodBlock immediatePostDominator = reversedGraph.getImmediateDominator(methodBlock);
+
+        return this.getMethodBlock(immediatePostDominator.getID());
     }
 
     public void addMethodBlock(MethodBlock methodBlock) {
@@ -37,54 +37,60 @@ public class MethodGraph {
         to.addPredecessor(from);
     }
 
-    public Map<MethodBlock, Set<MethodBlock>> getDominators() {
-        if(this.blocksToDominators.isEmpty()) {
-            for(MethodBlock block : this.blocks.values()) {
-                this.blocksToDominators.put(block, new HashSet<>(this.blocks.values()));
-            }
+    public void calculateDominators() {
+        for(MethodBlock block : this.blocks.values()) {
+            this.blocksToDominators.put(block, new HashSet<>(this.blocks.values()));
+        }
 
-            Set<MethodBlock> dominators = new HashSet<>();
-            dominators.add(this.entryBlock);
-            this.blocksToDominators.put(this.entryBlock, dominators);
+        Set<MethodBlock> dominators = new HashSet<>();
+        dominators.add(this.entryBlock);
+        this.blocksToDominators.put(this.entryBlock, dominators);
 
-            Set<MethodBlock> blocks = new HashSet<>(this.blocks.values());
-            blocks.remove(this.entryBlock);
+        Set<MethodBlock> blocks = new HashSet<>(this.blocks.values());
+        blocks.remove(this.entryBlock);
 
-            boolean change = true;
+        boolean change = true;
 
-            while (change) {
-                change = false;
+        while (change) {
+            change = false;
 
-                for(MethodBlock block : blocks) {
-                    dominators = new HashSet<>();
-                    dominators.add(block);
+            for(MethodBlock block : blocks) {
+                dominators = new HashSet<>();
+                dominators.add(block);
 
-                    Set<MethodBlock> predecessorsDominators = new HashSet<>(this.blocks.values());
+                Set<MethodBlock> predecessorsDominators = new HashSet<>(this.blocks.values());
 
-                    for(MethodBlock predecessor : block.getPredecessors()) {
-                        predecessorsDominators.retainAll(this.blocksToDominators.get(predecessor));
-                    }
+                for(MethodBlock predecessor : block.getPredecessors()) {
+                    predecessorsDominators.retainAll(this.blocksToDominators.get(predecessor));
+                }
 
-                    dominators.addAll(predecessorsDominators);
-                    Set<MethodBlock> previousDominators = this.blocksToDominators.get(block);
+                dominators.addAll(predecessorsDominators);
+                Set<MethodBlock> previousDominators = this.blocksToDominators.get(block);
 
-                    if(!previousDominators.equals(dominators)) {
-                        change = true;
-                        this.blocksToDominators.put(block, dominators);
-                    }
+                if(!previousDominators.equals(dominators)) {
+                    change = true;
+                    this.blocksToDominators.put(block, dominators);
                 }
             }
         }
 
+
 //        for(Map.Entry<MethodBlock, Set<MethodBlock>> blockToDominators : this.blocksToDominators.entrySet()) {
 //            System.out.println(blockToDominators.getKey() + " dominated by " + blockToDominators.getValue());
 //        }
+    }
+
+    public Map<MethodBlock, Set<MethodBlock>> getDominators() {
+        if(this.blocksToDominators.isEmpty()) {
+            this.calculateDominators();
+        }
 
         return this.blocksToDominators;
     }
 
     public MethodBlock getImmediateDominator(MethodBlock start) {
-//        System.out.println(this.toDotString("reverse"));
+        System.out.println(this.toDotString("reverse"));
+
         this.getDominators();
         Set<MethodBlock> dominators = new HashSet<>(this.blocksToDominators.get(start));
         dominators.remove(start);
@@ -114,7 +120,7 @@ public class MethodGraph {
         Set<MethodBlock> blocks = new HashSet<>(this.blocks.values());
 
         for(MethodBlock block : blocks) {
-            MethodBlockReversed newBlock = new MethodBlockReversed(block.getID());
+            MethodBlock newBlock = new MethodBlock(block.getID());
             reversedGraph.addMethodBlock(newBlock);
         }
 
@@ -132,8 +138,6 @@ public class MethodGraph {
 
         reversedGraph.entryBlock = reversedGraph.blocks.get(this.exitBlock.getID());
         reversedGraph.exitBlock = reversedGraph.blocks.get(this.entryBlock.getID());
-
-//        System.out.println(reversedGraph.toDotString("reverse"));
 
         return reversedGraph;
     }
@@ -224,7 +228,7 @@ public class MethodGraph {
         for(MethodBlock methodBlock : this.blocks.values()) {
             for(MethodBlock successor : methodBlock.getSuccessors()) {
 //                if(methodBlock.getLabel().info == null) {
-                    dotString.append(methodBlock.getID());
+                dotString.append(methodBlock.getID());
 //                }
 //                else {
 //                    dotString.append(methodBlock.getLabel().info);
@@ -233,7 +237,7 @@ public class MethodGraph {
                 dotString.append(" -> ");
 //
 //                if(successor.getLabel().info == null) {
-                    dotString.append(successor.getID());
+                dotString.append(successor.getID());
 //                }
 //                else {
 //                    dotString.append(successor.getLabel().info);

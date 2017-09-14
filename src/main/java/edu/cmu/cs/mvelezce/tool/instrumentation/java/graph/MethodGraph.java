@@ -256,36 +256,6 @@ public class MethodGraph {
         return dotString.toString();
     }
 
-    public String toDotStringVerbsoe(String methodName) {
-        StringBuilder dotString = new StringBuilder("digraph " + methodName + " {\n");
-        dotString.append("node [shape=record];");
-
-//        Printer p = new Textifier(ASM4);
-//
-//        TraceMethodVisitor t = new TraceMethodVisitor()
-        for(MethodBlock methodBlock : this.blocks.values()) {
-            dotString.append(methodBlock.getID());
-            dotString.append("[label]\"");
-
-            for(AbstractInsnNode instruction : methodBlock.getInstructions()) {
-//                instruction.
-            }
-        }
-
-        for(MethodBlock methodBlock : this.blocks.values()) {
-            for(MethodBlock successor : methodBlock.getSuccessors()) {
-                dotString.append(methodBlock.getID());
-                dotString.append(" -> ");
-                dotString.append(successor.getID());
-                dotString.append(";\n");
-            }
-        }
-
-        dotString.append("}");
-
-        return dotString.toString();
-    }
-
     public MethodBlock getMethodBlock(String ID) {
         return this.blocks.get(ID);
     }

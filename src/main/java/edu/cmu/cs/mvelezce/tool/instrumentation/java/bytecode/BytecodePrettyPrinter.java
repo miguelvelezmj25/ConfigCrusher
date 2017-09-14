@@ -21,7 +21,7 @@ import java.util.*;
 public class BytecodePrettyPrinter {
 
     private String path;
-    private Map<String, TraceMethodGetter> classToTracer = new HashMap<>();
+    private Map<String, TraceMethodGetter> classesToTracers = new HashMap<>();
 
     public BytecodePrettyPrinter(String path) throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
         this.path = path;
@@ -53,21 +53,19 @@ public class BytecodePrettyPrinter {
                 qualifiedName = qualifiedName.substring(1);
             }
 
-            this.readMethod(qualifiedName);
+            this.readMethodsInClass(qualifiedName);
         }
 
     }
 
-    public void readMethod(String fileName) throws IOException {
+    public void readMethodsInClass(String fileName) throws IOException {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         TraceClassVisitor traceClassVisitor = new TraceClassVisitor(printWriter);
         TraceMethodGetter traceMethodGetter = new TraceMethodGetter(Opcodes.ASM5, traceClassVisitor);
-//        this.classToTracer.add(traceMethodGetter);
-
         ClassNode classNode = this.readClass(fileName);
 
-        this.classToTracer.put(classNode.name, traceMethodGetter);
+        this.classesToTracers.put(classNode.name, traceMethodGetter);
         ClassReader reader = new ClassReader(fileName);
         reader.accept(traceMethodGetter, 0);
     }
@@ -80,4 +78,7 @@ public class BytecodePrettyPrinter {
         return classNode;
     }
 
+    public Map<String, TraceMethodGetter> getClassesToTracers() {
+        return this.classesToTracers;
+    }
 }

@@ -20,7 +20,8 @@ public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
     }
 
     public VariableBeforeReturnTransformer(ClassTransformer classTransformer) {
-        super(classTransformer);
+        // TODO do we really not care about the program name?
+        super("", classTransformer);
     }
 
     @Override

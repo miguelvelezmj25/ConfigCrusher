@@ -1,9 +1,9 @@
 digraph foo {
 node [shape=record];
-282828951 [label="ILOAD 3\lLDC \"f0f47785-a66c-4611-b03c-36239f171448\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lIFEQ L6\l"];
-22069592 [label="L2\lLINENUMBER 40 L2\lFRAME APPEND [I]\lLDC \"4a10695c-5985-49f6-a117-b1c11f3bc28b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"8c1dbbd9-0977-4f65-ac70-554de8f2ded4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 1\lIFEQ L6\l"];
-775931202 [label="L0\lLINENUMBER 32 L0\lLDC \"4a10695c-5985-49f6-a117-b1c11f3bc28b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lICONST_0\lISTORE 3\lL1\lLINENUMBER 34 L1\lILOAD 0\lIFEQ L2\l"];
-1075738627 [label="L6\lLINENUMBER 44 L6\lFRAME SAME\lLDC \"f0f47785-a66c-4611-b03c-36239f171448\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"8c1dbbd9-0977-4f65-ac70-554de8f2ded4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+282828951 [label="ILOAD 3\lLDC \"c1a4cf0e-f24c-4cdc-bb13-2a69d8954511\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lIFEQ L6\l"];
+22069592 [label="L2\lLINENUMBER 40 L2\lFRAME APPEND [I]\lLDC \"af80a507-9b65-4b4c-874f-7a6d2891eb3d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"a1a79ef7-9d6c-42ff-9c57-3687ff40d53d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 1\lIFEQ L6\l"];
+775931202 [label="L0\lLINENUMBER 32 L0\lLDC \"af80a507-9b65-4b4c-874f-7a6d2891eb3d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lICONST_0\lISTORE 3\lL1\lLINENUMBER 34 L1\lILOAD 0\lIFEQ L2\l"];
+1075738627 [label="L6\lLINENUMBER 44 L6\lFRAME SAME\lLDC \"c1a4cf0e-f24c-4cdc-bb13-2a69d8954511\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"a1a79ef7-9d6c-42ff-9c57-3687ff40d53d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 1160003871 [label="L3\lLINENUMBER 35 L3\lLDC 2000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL4\lLINENUMBER 36 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/Example.moo (Z)V\lL5\lLINENUMBER 37 L5\lICONST_1\lISTORE 3\l"];
 394721749 [label="L7\lLINENUMBER 41 L7\lLDC 4000\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
 entry;

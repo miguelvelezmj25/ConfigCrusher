@@ -2,14 +2,15 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.*;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.*;
+import jdk.internal.org.objectweb.asm.util.Printer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
@@ -54,6 +55,43 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         return methodsToInstrument;
+    }
+
+    @Override
+    public void transformMethods(Set<ClassNode> classNodes) throws IOException {
+        for(ClassNode classNode : classNodes) {
+            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+
+            if(methodsToInstrument.isEmpty()) {
+                continue;
+            }
+
+            System.out.println("Transforming class " + classNode.name);
+
+            for(MethodNode methodToInstrument : methodsToInstrument) {
+                this.transformMethod(methodToInstrument);
+            }
+
+            this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
+
+            // TODO if debug
+            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
+            MethodTracer tracer = classInspector.visitClass();
+
+            for(MethodNode methodNode : methodsToInstrument) {
+                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
+                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
+                PrettyMethodGraph prettyGraph = prettyBuilder.build();
+                prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
+
+                try {
+                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+//                System.out.println(prettyGraph.toDotStringVerbose(methodNode.name));
+            }
+        }
     }
 
     protected List<JavaRegion> getRegionsInMethod(MethodNode methodNode) {

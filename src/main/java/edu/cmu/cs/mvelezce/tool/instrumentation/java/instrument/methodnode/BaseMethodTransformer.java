@@ -49,25 +49,6 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
             }
 
             this.classTransformer.writeClass(classNode, this.classTransformer.getPath() + "/" + classNode.name);
-
-            // TODO if debug
-            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
-            MethodTracer tracer = classInspector.visitClass();
-
-            for(MethodNode methodNode : methodsToInstrument) {
-                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
-                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-                PrettyMethodGraph prettyGraph = prettyBuilder.build();
-                prettyGraph.saveDotFile(this.programName, classNode.name, methodNode.name);
-
-                try {
-                    prettyGraph.savePdfFile(this.programName, classNode.name, methodNode.name);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-//                System.out.println(prettyGraph.toDotStringVerbose(methodNode.name));
-            }
-
         }
     }
 

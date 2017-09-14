@@ -22,7 +22,7 @@ public class CompileInstrumenter extends BaseInstrumenter {
         try {
             String[] command = new String[]{"javac", //"-cp",
 //                    "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/lib/*",
-                    "-d", this.getClassDir(), "@" + this.getSrcDir() + "sources.txt"};
+                    "-d", this.getClassDir(), "@" + this.getSrcDir() + "/sources.txt"};
             System.out.println(Arrays.toString(command));
             Process process = Runtime.getRuntime().exec(command);
 
@@ -52,7 +52,7 @@ public class CompileInstrumenter extends BaseInstrumenter {
             Process process = Runtime.getRuntime().exec(command);
 
             BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(this.getSrcDir() + "sources.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(this.getSrcDir() + "/sources.txt"));
             String string;
 
             while ((string = inputReader.readLine()) != null) {

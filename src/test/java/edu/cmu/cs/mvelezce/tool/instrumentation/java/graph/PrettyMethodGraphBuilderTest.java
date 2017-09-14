@@ -1,7 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import edu.cmu.cs.mvelezce.Example;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceMethodGetter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import jdk.internal.org.objectweb.asm.ClassReader;
@@ -24,11 +25,9 @@ public class PrettyMethodGraphBuilderTest {
         String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
         String className = Example.class.getCanonicalName();
         String methodName = "moo";
-        String methodSignature = "moo(Z)V";
         ClassTransformer transformer = new DefaultBaseClassTransformer(path);
         ClassNode classNode = transformer.readClass(className);
 
-        MethodGraph graph = null;
         MethodNode methodNode = null;
 
         for(MethodNode method : classNode.methods) {
@@ -37,20 +36,13 @@ public class PrettyMethodGraphBuilderTest {
             }
 
             methodNode = method;
-            MethodGraphBuilder builder = new MethodGraphBuilder(method);
-            graph = builder.build();
+            break;
         }
 
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        TraceClassVisitor traceClassVisitor = new TraceClassVisitor(printWriter);
-        TraceMethodGetter traceMethodGetter = new TraceMethodGetter(Opcodes.ASM5, traceClassVisitor);
-        ClassReader classReader = new ClassReader(className);
-        classReader.accept(traceMethodGetter, 0);
-
-        Printer printer = traceMethodGetter.getPrinterForMethodSignature(methodSignature);
-
-        PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, graph, printer);
+        TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
+        MethodTracer tracer = classInspector.visitClass();
+        Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
+        PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
         PrettyMethodGraph prettyGraph = prettyBuilder.build();
 
         System.out.println(prettyGraph.toDotStringVerbose(methodName));
@@ -59,14 +51,11 @@ public class PrettyMethodGraphBuilderTest {
     @Test
     public void Graph0() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
-        String className = "edu.cmu.cs.mvelezce.Graph0";
-        String methodName = "main";
-        String methodSignature = "main([Ljava/lang/String;)V";
+        String className = Example.class.getCanonicalName();
+        String methodName = "moo";
         ClassTransformer transformer = new DefaultBaseClassTransformer(path);
-        transformer.readClasses();
         ClassNode classNode = transformer.readClass(className);
 
-        MethodGraph graph = null;
         MethodNode methodNode = null;
 
         for(MethodNode method : classNode.methods) {
@@ -75,20 +64,13 @@ public class PrettyMethodGraphBuilderTest {
             }
 
             methodNode = method;
-            MethodGraphBuilder builder = new MethodGraphBuilder(method);
-            graph = builder.build();
+            break;
         }
 
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        TraceClassVisitor traceClassVisitor = new TraceClassVisitor(printWriter);
-        TraceMethodGetter traceMethodGetter = new TraceMethodGetter(Opcodes.ASM5, traceClassVisitor);
-        ClassReader classReader = new ClassReader(className);
-        classReader.accept(traceMethodGetter, 0);
-
-        Printer printer = traceMethodGetter.getPrinterForMethodSignature(methodSignature);
-
-        PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, graph, printer);
+        TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
+        MethodTracer tracer = classInspector.visitClass();
+        Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
+        PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
         PrettyMethodGraph prettyGraph = prettyBuilder.build();
 
         System.out.println(prettyGraph.toDotStringVerbose(methodName));

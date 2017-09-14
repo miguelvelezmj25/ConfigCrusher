@@ -15,9 +15,11 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
     private MethodGraph graph;
     private Printer printer;
 
-    public PrettyMethodGraphBuilder(MethodNode methodNode, MethodGraph graph, Printer printer) {
+    public PrettyMethodGraphBuilder(MethodNode methodNode, Printer printer) {
         super(methodNode);
-        this.graph = graph;
+
+        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+        this.graph = builder.build();
         this.printer = printer;
     }
 

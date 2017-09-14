@@ -1,16 +1,14 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
-import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class PrettyMethodGraph extends MethodGraph {
 
     public static final String DOT_DOT = ".dot";
+    public static final String DOT_PDF = ".pdf";
 
     public void saveDotFile(String programName, String className, String methodName) throws IOException {
         String dotString = this.toDotStringVerbose(methodName);
@@ -24,55 +22,47 @@ public class PrettyMethodGraph extends MethodGraph {
         writer.println(dotString);
         writer.flush();
         writer.close();
-
-
-//        BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(this.getSrcDir() + "/sources.txt"));
-//        String string;
-//
-//        while ((string = inputReader.readLine()) != null) {
-//            writer.write(string);
-//            writer.write("\n");
-//        }
-//
-//        writer.close();
-//
-//        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-//
-//        while ((string = errorReader.readLine()) != null) {
-//            System.out.println(string);
-//        }
-
-
     }
 
-    public void savePdfFile() {
-//        try {
-//            String[] command = {"find", this.getSrcDir(), "-name", "*.java"};
-//            System.out.println(Arrays.toString(command));
-//            Process process = Runtime.getRuntime().exec(command);
-//
-//            BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//            BufferedWriter writer = new BufferedWriter(new FileWriter(this.getSrcDir() + "/sources.txt"));
-//            String string;
-//
-//            while ((string = inputReader.readLine()) != null) {
-//                writer.write(string);
-//                writer.write("\n");
-//            }
-//
-//            writer.close();
-//
-//            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-//
-//            while ((string = errorReader.readLine()) != null) {
-//                System.out.println(string);
-//            }
-//
-//            process.waitFor();
-//        } catch (IOException | InterruptedException ie) {
-//            ie.printStackTrace();
-//        }
+    public void savePdfFile(String programName, String className, String methodName) throws IOException, InterruptedException {
+        List<String> commandList = new ArrayList<>();
+        commandList.add("dot");
+        commandList.add("-Tpdf");
+        commandList.add(BaseRegionInstrumenter.DIRECTORY + "/" + programName + "/" + className + "/" + methodName
+                + PrettyMethodGraph.DOT_DOT);
+        commandList.add("-o");
+        commandList.add(BaseRegionInstrumenter.DIRECTORY + "/" + programName + "/" + className + "/" + methodName
+                + PrettyMethodGraph.DOT_PDF);
+
+        String[] command = new String[commandList.size()];
+        command = commandList.toArray(command);
+        System.out.println(Arrays.toString(command));
+
+        Process process = Runtime.getRuntime().exec(command);
+        BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        StringBuilder output = new StringBuilder();
+        String string;
+
+        while ((string = inputReader.readLine()) != null) {
+            if(!string.isEmpty()) {
+                output.append(string).append("\n");
+            }
+        }
+
+        System.out.println(output);
+
+        output = new StringBuilder();
+        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+        while ((string = errorReader.readLine()) != null) {
+            if(!string.isEmpty()) {
+                output.append(string).append("\n");
+            }
+        }
+
+        System.out.println(output);
+
+        process.waitFor();
     }
 
     public String toDotStringVerbose(String methodName) {

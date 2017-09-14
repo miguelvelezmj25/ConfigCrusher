@@ -59,6 +59,12 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
                 PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
                 PrettyMethodGraph prettyGraph = prettyBuilder.build();
                 prettyGraph.saveDotFile(this.programName, classNode.name, methodNode.name);
+
+                try {
+                    prettyGraph.savePdfFile(this.programName, classNode.name, methodNode.name);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 //                System.out.println(prettyGraph.toDotStringVerbose(methodNode.name));
             }
 

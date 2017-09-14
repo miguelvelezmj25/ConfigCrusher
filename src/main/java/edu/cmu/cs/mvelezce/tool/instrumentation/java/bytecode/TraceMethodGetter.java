@@ -30,4 +30,8 @@ public class TraceMethodGetter extends ClassVisitor {
     public Map<String, Printer> getMethodToPrinter() {
         return methodToPrinter;
     }
+
+    public Printer getPrinterForMethodSignature(String signature) {
+        return this.methodToPrinter.get(signature);
+    }
 }

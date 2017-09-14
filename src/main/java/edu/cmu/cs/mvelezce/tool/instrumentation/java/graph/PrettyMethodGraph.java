@@ -112,6 +112,22 @@ public class PrettyMethodGraph extends MethodGraph {
             }
         }
 
+        Set<PrettyMethodBlock> instrumentedPrettyBlocks = new HashSet<>();
+
+        for(PrettyMethodBlock prettyBlock : prettyBlocks) {
+            for(String prettyInstruction : prettyBlock.getPrettyInstructions()) {
+                // TODO do not hard code this
+                if(prettyInstruction.contains("Regions.enter") || prettyInstruction.contains("Regions.exit")) {
+                    instrumentedPrettyBlocks.add(prettyBlock);
+                }
+            }
+        }
+
+        for(PrettyMethodBlock prettyBlock : instrumentedPrettyBlocks) {
+            dotString.append(prettyBlock.getID());
+            dotString.append("[fontcolor=\"purple\", penwidth=3, color=\"purple\"];\n");
+        }
+
         dotString.append("}");
 
         return dotString.toString();

@@ -346,13 +346,13 @@ public class MethodGraphBuilderTest {
         ClassNode classNode = reader.readClass(Example.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
-            if(!methodNode.name.equals("foo")) {
+            if(!methodNode.name.equals("moo")) {
                 continue;
             }
 
             MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
             MethodGraph graph = builder.build();
-            System.out.println(graph.toDotString("foo"));
+            System.out.println(graph.toDotString("moo"));
             Assert.assertEquals(8, graph.getBlocks().size());
             Assert.assertEquals(10, graph.getEdgeCount());
         }

@@ -7,7 +7,11 @@ import java.util.Arrays;
 public class CompileInstrumenter extends BaseInstrumenter {
 
     public CompileInstrumenter(String srcDir, String classDir) {
-        super(srcDir, classDir);
+        this("", srcDir, classDir);
+    }
+
+    public CompileInstrumenter(String programName, String srcDir, String classDir) {
+        super(programName, srcDir, classDir);
     }
 
     @Override

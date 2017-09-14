@@ -24,13 +24,13 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     private Set<JavaRegion> regions;
     private ClassNode currentClassNode = null;
 
-    public RegionTransformer(ClassTransformer classTransformer, Set<JavaRegion> regions) {
-        super(classTransformer);
+    public RegionTransformer(String programnName, ClassTransformer classTransformer, Set<JavaRegion> regions) {
+        super(programnName, classTransformer);
         this.regions = regions;
     }
 
-    public RegionTransformer(String directory, Set<JavaRegion> regions) throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-        this(new DefaultBaseClassTransformer(directory), regions);
+    public RegionTransformer(String programName, String directory, Set<JavaRegion> regions) throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
+        this(programName, new DefaultBaseClassTransformer(directory), regions);
     }
 
     public abstract InsnList addInstructionsStartRegion(JavaRegion javaRegion);

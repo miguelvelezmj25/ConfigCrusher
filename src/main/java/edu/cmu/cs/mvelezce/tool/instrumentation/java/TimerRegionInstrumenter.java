@@ -17,17 +17,19 @@ public class TimerRegionInstrumenter extends BaseRegionInstrumenter {
     // TODO is this needed?
     public static final String TARGET_DIRECTORY = "../performance-mapper-evaluation/instrumented";
 
-    public TimerRegionInstrumenter(String classDir, Set<JavaRegion> regions) {
-        this(null, classDir, regions);
+    public TimerRegionInstrumenter(String programName, String classDir, Set<JavaRegion> regions) {
+        this(programName, null, classDir, regions);
     }
 
-    public TimerRegionInstrumenter(String srcDir, String classDir, Set<JavaRegion> regions) {
-        super(srcDir, classDir, regions);
+    // TODO is this even needed?
+    public TimerRegionInstrumenter(String programName, String srcDir, String classDir, Set<JavaRegion> regions) {
+        super(programName, srcDir, classDir, regions);
+
     }
 
     @Override
     public void instrument() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        MethodTransformer methodTransformer = new TimerTransformer(this.getClassDir(), this.getRegions());
+        MethodTransformer methodTransformer = new TimerTransformer(this.getProgramName(), this.getClassDir(), this.getRegions());
         methodTransformer.transformMethods();
     }
 

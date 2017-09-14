@@ -19,9 +19,11 @@ import java.util.Set;
 
 public abstract class BaseMethodTransformer implements MethodTransformer {
 
+    private String programName;
     private ClassTransformer classTransformer;
 
-    public BaseMethodTransformer(ClassTransformer classTransformer) {
+    public BaseMethodTransformer(String programName, ClassTransformer classTransformer) {
+        this.programName = programName;
         this.classTransformer = classTransformer;
     }
 
@@ -56,10 +58,15 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
                 Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
                 PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
                 PrettyMethodGraph prettyGraph = prettyBuilder.build();
-                System.out.println(prettyGraph.toDotStringVerbose(methodNode.name));
+                prettyGraph.saveDotFile(this.programName, classNode.name, methodNode.name);
+//                System.out.println(prettyGraph.toDotStringVerbose(methodNode.name));
             }
 
         }
+    }
+
+    public String getProgramName() {
+        return programName;
     }
 
     public ClassTransformer getClassTransformer() {

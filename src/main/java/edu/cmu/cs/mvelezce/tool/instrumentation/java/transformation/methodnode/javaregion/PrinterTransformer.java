@@ -18,12 +18,12 @@ public class PrinterTransformer extends RegionTransformer {
 
     private String messageToPrint;
 
-    public PrinterTransformer(String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(directory, regions);
+    public PrinterTransformer(String programName, String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(programName, directory, regions);
     }
 
-    public PrinterTransformer(ClassTransformer classTransformer, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(classTransformer, regions);
+    public PrinterTransformer(String programName, ClassTransformer classTransformer, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(programName, classTransformer, regions);
     }
 
     @Override

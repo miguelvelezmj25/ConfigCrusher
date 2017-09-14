@@ -251,7 +251,7 @@ public class TimerInstrumenterTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        Instrumenter instrumenter = new TimerRegionInstrumenter(TimerInstrumenterTest.classDir, decisionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 
@@ -277,7 +277,7 @@ public class TimerInstrumenterTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        Instrumenter instrumenter = new TimerRegionInstrumenter(TimerInstrumenterTest.classDir, decisionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 
@@ -303,7 +303,7 @@ public class TimerInstrumenterTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        Instrumenter instrumenter = new TimerRegionInstrumenter(TimerInstrumenterTest.classDir, decisionsToOptions.keySet());
+        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions.keySet());
         instrumenter.instrument(args);
     }
 }

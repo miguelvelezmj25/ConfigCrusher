@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class BaseInstrumenter implements Instrumenter {
+    private String programName;
     private String srcDir;
     private String classDir;
 
-    public BaseInstrumenter(String srcDir, String classDir) {
+    public BaseInstrumenter(String programName, String srcDir, String classDir) {
+        this.programName = programName;
         this.srcDir = srcDir;
         this.classDir = classDir;
     }
@@ -25,6 +27,10 @@ public abstract class BaseInstrumenter implements Instrumenter {
         if(Options.checkIfSave()) {
             this.instrument();
         }
+    }
+
+    public String getProgramName() {
+        return programName;
     }
 
     public String getSrcDir() {

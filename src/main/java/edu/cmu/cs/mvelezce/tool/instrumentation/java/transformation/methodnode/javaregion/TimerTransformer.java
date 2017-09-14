@@ -2,17 +2,13 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.*;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.*;

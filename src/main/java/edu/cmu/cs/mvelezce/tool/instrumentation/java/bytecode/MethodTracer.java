@@ -9,11 +9,12 @@ import jdk.internal.org.objectweb.asm.util.TraceMethodVisitor;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TraceMethodGetter extends ClassVisitor {
+public class MethodTracer extends ClassVisitor {
 
     private Map<String, Printer> methodToPrinter = new HashMap<>();
 
-    public TraceMethodGetter(int i, ClassVisitor classVisitor) {
+
+    public MethodTracer(int i, ClassVisitor classVisitor) {
         super(i, classVisitor);
     }
 

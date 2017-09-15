@@ -34,9 +34,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this(programName, new DefaultBaseClassTransformer(directory), regions);
     }
 
-    public abstract InsnList addInstructionsStartRegion(JavaRegion javaRegion);
+    public abstract InsnList getInstructionsStartRegion(JavaRegion javaRegion);
 
-    public abstract InsnList addInstructionsEndRegion(JavaRegion javaRegion);
+    public abstract InsnList getInstructionsEndRegion(JavaRegion javaRegion);
 
     @Override
     public Set<MethodNode> getMethodsToInstrument(ClassNode classNode) {
@@ -89,7 +89,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-//                System.out.println(prettyGraph.toDotStringVerbose(methodNode.name));
             }
         }
     }

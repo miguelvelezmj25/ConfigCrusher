@@ -2,13 +2,17 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.*;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.*;
@@ -42,7 +46,9 @@ public class TimerTransformer extends RegionTransformer {
 //        return start;
 //    }
 
-    // TODO why dont we return a new map
+    // TODO why dont we return a new map. If I do not return a new map, it sugguest to users that the passed map will be
+    // transformed. If I return a new map, it sugguest to users that the passed map will remain the same and a new map
+    // is generated
     private void getStartAndEndBlocks(MethodGraph graph, Map<AbstractInsnNode, JavaRegion> instructionsToRegion) {
         for(MethodBlock block : graph.getBlocks()) {
             List<AbstractInsnNode> blockInstructions = block.getInstructions();
@@ -65,22 +71,11 @@ public class TimerTransformer extends RegionTransformer {
                     throw new RuntimeException("Happens when a control flow decision only has 1 successor??????");
 //                        regionsToRemove.add(instructionsToRegion.get(instructionToStartInstrumenting));
                 }
-                else if(graph.getExitBlock() ==  end) {
-                    for(MethodBlock pred : end.getPredecessors()) {
-                        endMethodBlocks.add(pred);
-                    }
+                else if(graph.getExitBlock() == end) {
+                    endMethodBlocks.addAll(end.getPredecessors());
                 }
                 else {
-//                    if(graph.getExitBlock().equals(end)) {
-//                        for(MethodBlock predecessor : graph.getExitBlock().getPredecessors()) {
-//                            if(predecessor.isWithRet()) {
-//                                endMethodBlocks.add(predecessor);
-//                            }
-//                        }
-//                    }
-//                    else {
                     endMethodBlocks.add(end);
-//                    }
                 }
 
                 JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
@@ -93,91 +88,48 @@ public class TimerTransformer extends RegionTransformer {
 
     @Override
     public void transformMethod(MethodNode methodNode) {
+        System.out.println("Before transforming");
         MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
         MethodGraph graph = builder.build();
 
-        System.out.println("Before transforming");
-        System.out.println(graph.toDotString(methodNode.name));
-
-        if(methodNode.name.equals("getMergedColors")) {
-            System.out.print("");
-        }
-
         if(graph.getBlocks().size() <= 3) {
-//            System.out.println("Special method that is not instrumented");
 //            continue;
 //            // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
             throw new RuntimeException("Check this case");
         }
 
-//        // TODO have to call this since looping through the instructions seems to set the index to 0. WEIRD
-//        methodNode.instructions.toArray();
-        // TODO maybe not anymore
-
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
-        List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
-        Collections.reverse(regionsInMethodReversed);
-
         this.calculateASMStartIndex(regionsInMethod, methodNode);
+        InsnList newInstructions;
 
-        Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
+        int startInstructionSize = methodNode.instructions.size();
 
-        for(JavaRegion region : regionsInMethod) {
-            instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
+        if(regionsInMethod.size() == 1) {
+            newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
+        }
+        else {
+            newInstructions = this.instrumentNormal(methodNode, regionsInMethod);
         }
 
-//        Set<JavaRegion> regionsToRemoves = new HashSet<>();
-//        Map<MethodBlock, JavaRegion> specialBlocksToRegions = new HashMap<>();
-//        Set<Set<MethodBlock>> stronglyConnectedComponents = graph.getStronglyConnectedComponents(graph.getEntryBlock());
-//
-//         TODO test
-//        regionsInMethod.removeAll(regionsToRemove);
-//        regionsInMethodReversed.removeAll(regionsToRemove);
-        this.getStartAndEndBlocks(graph, instructionsToRegion);
+        int end = methodNode.instructions.size();
 
-        // TODO test
-//        if(regionsInMethod.isEmpty()) {
-//            return;
-//        }
-
-//        LabelNode currentLabelNode;
-        InsnList newInstructions = new InsnList();
-        InsnList instructions = methodNode.instructions;
-        ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
-
-        while (instructionsIterator.hasNext()) {
-            AbstractInsnNode instruction = instructionsIterator.next();
-            newInstructions.add(instruction);
-
-            MethodBlock block = graph.getMethodBlock(instruction);
-
-            if(block == null) {
-                continue;
-            }
-
-//            if(instruction.getType() == AbstractInsnNode.LABEL) {
-//                currentLabelNode = (LabelNode) instruction;
-
-//                this.instrumentEnd(currentLabelNode, regionsInMethodReversed, newInstructions);
-//                this.instrumentStart(currentLabelNode, regionsInMethod, newInstructions);
-
-            this.instrumentEnd(block, regionsInMethodReversed, newInstructions);
-            this.instrumentStart(block, regionsInMethod, newInstructions);
+        if(end != startInstructionSize) {
+            throw new RuntimeException("We modified the instructions in the node itself instead of creating a new list");
         }
 
         methodNode.instructions.clear();
         methodNode.instructions.add(newInstructions);
 
-        builder = new MethodGraphBuilder(methodNode);
-        graph = builder.build();
         System.out.println("After transforming");
-        System.out.println(graph.toDotString(methodNode.name));
-
+        builder = new MethodGraphBuilder(methodNode);
+        builder.build();
         System.out.print("");
     }
 
     // TODO why dont we return a new list
-    private void instrumentStart(MethodBlock methodBlock, List<JavaRegion> regionsInMethod, InsnList newInstructions) {
+    private InsnList instrumentStart(MethodBlock methodBlock, List<JavaRegion> regionsInMethod) {
+        InsnList newInstructions = new InsnList();
+
         for(JavaRegion javaRegion : regionsInMethod) {
             if(javaRegion.getStartMethodBlock() != methodBlock) {
                 continue;
@@ -190,10 +142,12 @@ public class TimerTransformer extends RegionTransformer {
 //
 //            this.updateLabels(newInstructions, labelNode, startRegionLabelNode);
 
-            InsnList startRegionInstructions = new InsnList();
-//            startRegionInstructions.add(startRegionLabelNode);
-            startRegionInstructions.add(this.addInstructionsStartRegion(javaRegion));
-            newInstructions.add(startRegionInstructions);
+//            InsnList startRegionInstructions = new InsnList();
+////            startRegionInstructions.add(startRegionLabelNode);
+//            startRegionInstructions.add(this.getInstructionsStartRegion(javaRegion));
+//            newInstructions.add(startRegionInstructions);
+
+            newInstructions.add(this.getInstructionsStartRegion(javaRegion));
 
 
 //            Label regionOriginalLabel = javaRegion.getStartMethodBlock().getOriginalLabel();
@@ -211,23 +165,47 @@ public class TimerTransformer extends RegionTransformer {
 //
 //            InsnList startRegionInstructions = new InsnList();
 //            startRegionInstructions.add(startRegionLabelNode);
-//            startRegionInstructions.add(this.addInstructionsStartRegion(javaRegion));
+//            startRegionInstructions.add(this.getInstructionsStartRegion(javaRegion));
 //            newInstructions.add(startRegionInstructions);
         }
+
+        return newInstructions;
     }
 
-    // TODO why dont we return a new list
-    private void instrumentEnd(MethodBlock methodBlock, List<JavaRegion> regionsInMethod, InsnList newInstructions) {
+    private Map<MethodBlock, List<JavaRegion>> addRegionsInBlocksWithReturn(MethodBlock methodBlock, List<JavaRegion> regionsInMethod) {
+        Map<MethodBlock, List<JavaRegion>> blocksToRegions = new HashMap<>();
+
         for(JavaRegion javaRegion : regionsInMethod) {
             for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
-                if(endMethodBlock != methodBlock){
+                if(endMethodBlock != methodBlock) {
                     continue;
                 }
 
+                if(!blocksToRegions.containsKey(endMethodBlock)) {
+                    blocksToRegions.put(endMethodBlock, new ArrayList<>());
+                }
 
-                InsnList endRegionInstructions = new InsnList();
-                endRegionInstructions.add(this.addInstructionsEndRegion(javaRegion));
-                newInstructions.add(endRegionInstructions);
+                blocksToRegions.get(endMethodBlock).add(javaRegion);
+            }
+        }
+
+        return blocksToRegions;
+    }
+
+    // TODO why dont we return a new list
+    private InsnList instrumentEnd(MethodBlock methodBlock, List<JavaRegion> regionsInMethod) {
+        InsnList newInstructions = new InsnList();
+
+        for(JavaRegion javaRegion : regionsInMethod) {
+            for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
+                if(endMethodBlock != methodBlock) {
+                    continue;
+                }
+
+//                InsnList endRegionInstructions = new InsnList();
+//                endRegionInstructions.add(this.getInstructionsEndRegion(javaRegion));
+//                newInstructions.add(endRegionInstructions);
+                newInstructions.add(this.getInstructionsEndRegion(javaRegion));
             }
 
 
@@ -247,36 +225,38 @@ public class TimerTransformer extends RegionTransformer {
 //
 //                InsnList endRegionInstructions = new InsnList();
 //                endRegionInstructions.add(endRegionLabelNode);
-//                endRegionInstructions.add(this.addInstructionsEndRegion(javaRegion));
+//                endRegionInstructions.add(this.getInstructionsEndRegion(javaRegion));
 //                newInstructions.add(endRegionInstructions);
 //            }
         }
+
+        return newInstructions;
     }
 
-    /**
-     * TODO this might execute extra iterations that are not needed since the LabelNodes are the same for both old and new labels, but the info is different
-     *
-     * @param instructions
-     */
-    // TODO why dont we return a new list
-    private void updateLabels(InsnList instructions, LabelNode oldLabel, LabelNode newLabel) {
-        System.out.println(oldLabel.getLabel() + " -> " + newLabel.getLabel().info);
-        int numberOfInstructions = instructions.size();
-        AbstractInsnNode instruction = instructions.getFirst();
-
-        for(int i = 0; i < numberOfInstructions; i++) {
-            if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
-                JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
-
-                if(jumpInsnNode.label == oldLabel) {
-                    jumpInsnNode.label = newLabel;
-                    System.out.println("CHANGE");
-                }
-            }
-
-            instruction = instruction.getNext();
-        }
-    }
+//    /**
+//     * TODO this might execute extra iterations that are not needed since the LabelNodes are the same for both old and new labels, but the info is different
+//     *
+//     * @param instructions
+//     */
+//    // TODO why dont we return a new list
+//    private void updateLabels(InsnList instructions, LabelNode oldLabel, LabelNode newLabel) {
+//        System.out.println(oldLabel.getLabel() + " -> " + newLabel.getLabel().info);
+//        int numberOfInstructions = instructions.size();
+//        AbstractInsnNode instruction = instructions.getFirst();
+//
+//        for(int i = 0; i < numberOfInstructions; i++) {
+//            if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
+//                JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
+//
+//                if(jumpInsnNode.label == oldLabel) {
+//                    jumpInsnNode.label = newLabel;
+//                    System.out.println("CHANGE");
+//                }
+//            }
+//
+//            instruction = instruction.getNext();
+//        }
+//    }
 
     private List<String> getJavapResult() {
         String classPackage = this.getCurrentClassNode().name;
@@ -428,7 +408,7 @@ public class TimerTransformer extends RegionTransformer {
     }
 
     @Override
-    public InsnList addInstructionsStartRegion(JavaRegion javaRegion) {
+    public InsnList getInstructionsStartRegion(JavaRegion javaRegion) {
         InsnList instructionsStartRegion = new InsnList();
         instructionsStartRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
         instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "enter", "(Ljava/lang/String;)V", false));
@@ -437,11 +417,159 @@ public class TimerTransformer extends RegionTransformer {
     }
 
     @Override
-    public InsnList addInstructionsEndRegion(JavaRegion javaRegion) {
+    public InsnList getInstructionsEndRegion(JavaRegion javaRegion) {
         InsnList instructionsEndRegion = new InsnList();
         instructionsEndRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
         instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "exit", "(Ljava/lang/String;)V", false));
 
         return instructionsEndRegion;
     }
+
+    /**
+     * Loop through the instructions to check where to instrument
+     *
+     * @param methodNode
+     * @param regionsInMethod
+     */
+    private InsnList instrumentNormal(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
+        List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
+        Collections.reverse(regionsInMethodReversed);
+
+        Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
+
+        for(JavaRegion region : regionsInMethod) {
+            instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
+        }
+
+//        Set<JavaRegion> regionsToRemoves = new HashSet<>();
+//        Map<MethodBlock, JavaRegion> specialBlocksToRegions = new HashMap<>();
+//        Set<Set<MethodBlock>> stronglyConnectedComponents = graph.getStronglyConnectedComponents(graph.getEntryBlock());
+//
+//         TODO test
+//        regionsInMethod.removeAll(regionsToRemove);
+//        regionsInMethodReversed.removeAll(regionsToRemove);
+        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+        MethodGraph graph = builder.build();
+        this.getStartAndEndBlocks(graph, instructionsToRegion);
+
+        // TODO test
+//        if(regionsInMethod.isEmpty()) {
+//            return;
+//        }
+
+        InsnList newInstructions = new InsnList();
+        InsnList instructions = methodNode.instructions;
+        ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
+
+        while (instructionsIterator.hasNext()) {
+            AbstractInsnNode instruction = instructionsIterator.next();
+            newInstructions.add(instruction);
+
+            MethodBlock block = graph.getMethodBlock(instruction);
+
+            if(block == null) {
+                continue;
+            }
+
+            if(block.isWithReturn()) {
+                instruction = instructionsIterator.next();
+                int opcode = instruction.getOpcode();
+
+                while ((opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN) && opcode != Opcodes.RET) {
+                    newInstructions.add(instruction);
+                    instruction = instructionsIterator.next();
+                    opcode = instruction.getOpcode();
+                }
+
+                InsnList endInstructions = this.instrumentEnd(block, regionsInMethodReversed);
+                newInstructions.add(endInstructions);
+                newInstructions.add(instruction);
+            }
+            else {
+                InsnList endInstructions = this.instrumentEnd(block, regionsInMethodReversed);
+                newInstructions.add(endInstructions);
+                InsnList startInstructions = this.instrumentStart(block, regionsInMethod);
+                newInstructions.add(startInstructions);
+            }
+        }
+
+        return newInstructions;
+    }
+
+    /**
+     * This can be done when there is a single region in a method
+     *
+     * @param methodNode
+     */
+    private InsnList instrumentEntireMethod(MethodNode methodNode, JavaRegion region) {
+        InsnList newInstructions = new InsnList();
+        ListIterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
+
+        // Have to loop through the instructions to avoid changing the current instructions in the method node
+        while (iterator.hasNext()) {
+            newInstructions.add(iterator.next());
+        }
+
+        // Instrument start
+        AbstractInsnNode firstInstruction = newInstructions.getFirst();
+        InsnList startInstructions = this.getInstructionsStartRegion(region);
+        newInstructions.insertBefore(firstInstruction.getNext(), startInstructions);
+
+        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+        MethodGraph graph = builder.build();
+        Set<MethodBlock> endMethodBlocks = graph.getExitBlock().getPredecessors();
+
+        // Instrument all end blocks
+        for(MethodBlock endBlock : endMethodBlocks) {
+            List<AbstractInsnNode> blockInstructions = endBlock.getInstructions();
+            AbstractInsnNode lastInstruction = blockInstructions.get(blockInstructions.size() - 1);
+            int opcodeLastInstruction = lastInstruction.getOpcode();
+
+            if((opcodeLastInstruction < Opcodes.IRETURN || opcodeLastInstruction > Opcodes.RETURN)
+                    && opcodeLastInstruction != Opcodes.RET) {
+                throw new RuntimeException("The last instruction in a method with return is not a return instruction");
+            }
+
+            InsnList endInstructions = this.getInstructionsEndRegion(region);
+            newInstructions.insertBefore(lastInstruction, endInstructions);
+        }
+
+        return newInstructions;
+    }
+
+//    /**
+//     * This is done when we stop instrumenting in a basic block that has return statements
+//     */
+//    private InsnList instrumentEndWithReturn(MethodBlock blockWithReturn, List<JavaRegion> regions) {
+//        InsnList newInstructions = new InsnList();
+//
+//        for(JavaRegion javaRegion : regions) {
+//            for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
+//                if(endMethodBlock != blockWithReturn) {
+//                    continue;
+//                }
+//
+//                List<AbstractInsnNode> blockInstructions = blockWithReturn.getInstructions();
+//
+//                for(AbstractInsnNode insnNode : blockInstructions) {
+//                    newInstructions.add(insnNode);
+//                }
+//
+//                AbstractInsnNode lastInstruction = blockInstructions.get(blockInstructions.size() - 1);
+//                int opcodeLastInstruction = lastInstruction.getOpcode();
+//
+//                if((opcodeLastInstruction < Opcodes.IRETURN || opcodeLastInstruction > Opcodes.RETURN)
+//                        && opcodeLastInstruction != Opcodes.RET) {
+//                    throw new RuntimeException("The last instruction in a method with return is not a return instruction");
+//                }
+//
+//                for(JavaRegion region : regions) {
+//                    InsnList endInstructions = this.getInstructionsEndRegion(region);
+//                    newInstructions.insertBefore(lastInstruction, endInstructions);
+//                }
+//            }
+//        }
+//
+//        return newInstructions;
+//    }
 }

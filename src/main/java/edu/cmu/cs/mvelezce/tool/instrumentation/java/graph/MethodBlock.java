@@ -14,11 +14,10 @@ public class MethodBlock {
 
     private String ID;
     // TODO is this needed?
-    private AbstractInsnNode insnNode = null;
+//    private AbstractInsnNode insnNode = null;
     private List<AbstractInsnNode> instructions = new ArrayList<>();
     private Set<MethodBlock> successors = new HashSet<>();
     private Set<MethodBlock> predecessors = new HashSet<>();
-    private boolean withRet = false;
     private boolean withReturn;
 
 //    public MethodBlock(String ID, Label label, Label originalLabel, List<AbstractInsnNode> instructions) {
@@ -46,7 +45,7 @@ public class MethodBlock {
 
     public MethodBlock(AbstractInsnNode insnNode) {
         this(MethodBlock.asID(insnNode));
-        this.insnNode = insnNode;
+//        this.insnNode = insnNode;
     }
 
     public MethodBlock(String ID) {
@@ -92,10 +91,6 @@ public class MethodBlock {
 
     public Set<MethodBlock> getPredecessors() {
         return this.predecessors;
-    }
-
-    public boolean isWithRet() {
-        return this.withRet;
     }
 
     //    public boolean isWithRet() {
@@ -163,5 +158,9 @@ public class MethodBlock {
 
     public void setWithReturn(boolean withReturn) {
         this.withReturn = withReturn;
+    }
+
+    public boolean isWithReturn() {
+        return withReturn;
     }
 }

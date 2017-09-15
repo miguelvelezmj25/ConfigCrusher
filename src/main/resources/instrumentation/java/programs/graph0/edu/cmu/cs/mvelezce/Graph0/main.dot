@@ -1,16 +1,16 @@
 digraph main {
 node [shape=record];
-1620948027 [label="L4\lLINENUMBER 16 L4\lLCONST_1\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL5\lLINENUMBER 17 L5\lLDC \"b29f1918-0d93-4e89-8b6b-39f27bd9b73e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1431467659 [label="L0\lLINENUMBER 12 L0\lLDC \"b29f1918-0d93-4e89-8b6b-39f27bd9b73e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 13 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lISTORE 1\lL2\lLINENUMBER 15 L2\lILOAD 1\lIFEQ L3\l"];
-1016363973 [label="L3\lLINENUMBER 20 L3\lFRAME APPEND [I]\lLDC 2\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL6\lLINENUMBER 21 L6\lLDC \"b29f1918-0d93-4e89-8b6b-39f27bd9b73e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+19986569 [label="L3\lLINENUMBER 20 L3\lFRAME APPEND [I]\lLDC 2\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL6\lLINENUMBER 21 L6\lLDC \"7fd701d3-b9ae-4b13-9561-ec19e068e84b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+294184992 [label="L4\lLINENUMBER 16 L4\lLCONST_1\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL5\lLINENUMBER 17 L5\lLDC \"7fd701d3-b9ae-4b13-9561-ec19e068e84b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1890187342 [label="L0\lLINENUMBER 12 L0\lLDC \"7fd701d3-b9ae-4b13-9561-ec19e068e84b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 13 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lISTORE 1\lL2\lLINENUMBER 15 L2\lILOAD 1\lIFEQ L3\l"];
 entry;
 exit;
-entry -> 1431467659;
-1620948027 -> exit;
-1431467659 -> 1620948027;
-1431467659 -> 1016363973;
-1016363973 -> exit;
-1620948027[fontcolor="purple", penwidth=3, color="purple"];
-1431467659[fontcolor="purple", penwidth=3, color="purple"];
-1016363973[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1890187342;
+19986569 -> exit;
+294184992 -> exit;
+1890187342 -> 19986569;
+1890187342 -> 294184992;
+19986569[fontcolor="purple", penwidth=3, color="purple"];
+294184992[fontcolor="purple", penwidth=3, color="purple"];
+1890187342[fontcolor="purple", penwidth=3, color="purple"];
 }

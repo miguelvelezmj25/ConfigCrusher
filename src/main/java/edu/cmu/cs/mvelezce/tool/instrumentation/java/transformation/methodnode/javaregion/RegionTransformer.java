@@ -1,37 +1,32 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.*;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
-import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.*;
 import jdk.internal.org.objectweb.asm.util.Printer;
-import org.apache.commons.lang3.StringUtils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.*;
 
 public abstract class RegionTransformer extends BaseMethodTransformer {
 
-    private Set<JavaRegion> regions;
+    private Map<JavaRegion, Set<Set<String>>> regionsToOptionSet;
     private ClassNode currentClassNode = null;
 
-    public RegionTransformer(String programnName, ClassTransformer classTransformer, Set<JavaRegion> regions) {
+    public RegionTransformer(String programnName, ClassTransformer classTransformer, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
         super(programnName, classTransformer);
-        this.regions = regions;
+        this.regionsToOptionSet = regionsToOptionSet;
     }
 
-    public RegionTransformer(String programName, String directory, Set<JavaRegion> regions) throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-        this(programName, new DefaultBaseClassTransformer(directory), regions);
+    public RegionTransformer(String programName, String directory, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
+        this(programName, new DefaultBaseClassTransformer(directory), regionsToOptionSet);
     }
 
     public abstract InsnList getInstructionsStartRegion(JavaRegion javaRegion);
@@ -93,6 +88,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
     }
 
+    public void recalculateRegionsToOption() {
+//        TODO
+    }
+
     protected List<JavaRegion> getRegionsInMethod(MethodNode methodNode) {
         String classPackage = this.currentClassNode.name;
         classPackage = classPackage.substring(0, classPackage.lastIndexOf("/"));
@@ -105,7 +104,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         List<JavaRegion> javaRegions = new ArrayList<>();
 
-        for(JavaRegion javaRegion : this.regions) {
+        for(JavaRegion javaRegion : this.regionsToOptionSet.keySet()) {
             if(javaRegion.getRegionPackage().equals(classPackage) && javaRegion.getRegionClass().equals(className)
                     && javaRegion.getRegionMethod().equals(methodName)) {
                 javaRegions.add(javaRegion);
@@ -127,7 +126,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         List<JavaRegion> regionsInClass = new ArrayList<>();
 
-        for(JavaRegion javaRegion : this.regions) {
+        for(JavaRegion javaRegion : this.regionsToOptionSet.keySet()) {
             if(javaRegion.getRegionPackage().equals(classPackage) && javaRegion.getRegionClass().equals(className)) {
                 regionsInClass.add(javaRegion);
             }

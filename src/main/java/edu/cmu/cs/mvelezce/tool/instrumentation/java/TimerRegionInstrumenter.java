@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.j
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -17,19 +18,13 @@ public class TimerRegionInstrumenter extends BaseRegionInstrumenter {
     // TODO is this needed?
     public static final String TARGET_DIRECTORY = "../performance-mapper-evaluation/instrumented";
 
-    public TimerRegionInstrumenter(String programName, String classDir, Set<JavaRegion> regions) {
-        this(programName, null, classDir, regions);
-    }
-
-    // TODO is this even needed?
-    public TimerRegionInstrumenter(String programName, String srcDir, String classDir, Set<JavaRegion> regions) {
-        super(programName, srcDir, classDir, regions);
-
+    public TimerRegionInstrumenter(String programName, String classDir, Map<JavaRegion, Set<Set<String>>> regionsToOptions) {
+        super(programName, null, classDir, regionsToOptions);
     }
 
     @Override
     public void instrument() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        MethodTransformer methodTransformer = new TimerTransformer(this.getProgramName(), this.getClassDir(), this.getRegions());
+        MethodTransformer methodTransformer = new TimerTransformer(this.getProgramName(), this.getClassDir(), this.getRegionsToOptionSet());
         methodTransformer.transformMethods();
     }
 

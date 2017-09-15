@@ -1,0 +1,16 @@
+{
+  "model": {
+    "configurationToPerformance": [
+      {
+        "performance": 1.2389208329999999,
+        "configuration": []
+      },
+      {
+        "performance": -0.510751668,
+        "configuration": [
+          "A"
+        ]
+      }
+    ]
+  }
+}

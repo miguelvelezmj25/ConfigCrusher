@@ -1,0 +1,57 @@
+{
+  "model": {
+    "configurationToPerformance": [
+      {
+        "performance": 1.4206797349999998,
+        "configuration": []
+      },
+      {
+        "performance": -0.208828927,
+        "configuration": [
+          "A"
+        ]
+      },
+      {
+        "performance": -0.003751412999999928,
+        "configuration": [
+          "B"
+        ]
+      },
+      {
+        "performance": 0.010090679999999953,
+        "configuration": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "performance": -0.009286201999999948,
+        "configuration": [
+          "C"
+        ]
+      },
+      {
+        "performance": 0.010516326999999957,
+        "configuration": [
+          "A",
+          "C"
+        ]
+      },
+      {
+        "performance": 0.0029736299999998826,
+        "configuration": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "performance": -0.005384023999999865,
+        "configuration": [
+          "A",
+          "B",
+          "C"
+        ]
+      }
+    ]
+  }
+}

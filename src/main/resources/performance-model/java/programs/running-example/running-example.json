@@ -1,0 +1,48 @@
+{
+  "baseTime": 5441317,
+  "baseTimeHumanReadable": 0.005,
+  "regionsToPerformanceTables": {
+    "Region{regionID='24ac40a0-4944-4892-b381-23d6ecc55dac', startTime=0, endTime=0, overhead=0}": {
+      "[]": 0,
+      "[A]": 47078,
+      "[C]": 0,
+      "[A, C]": 7003908698
+    },
+    "Region{regionID='f9eb0855-c7bb-4d7b-a5a1-b5356589df31', startTime=0, endTime=0, overhead=0}": {
+      "[]": 16039,
+      "[A]": 2003365897
+    },
+    "Region{regionID='a2f4171f-62f7-4fc7-a491-a6b87e80a0e8', startTime=0, endTime=0, overhead=0}": {
+      "[]": 3852,
+      "[B]": 9042
+    },
+    "Region{regionID='9e07d5ee-1c82-43be-987a-2dbf8bce33d5', startTime=0, endTime=0, overhead=0}": {
+      "[]": 0,
+      "[A]": 0,
+      "[B]": 1243,
+      "[A, B]": 4002964065
+    }
+  },
+  "regionsToPerformanceTablesHumanReadable": {
+    "Region{regionID='24ac40a0-4944-4892-b381-23d6ecc55dac', startTime=0, endTime=0, overhead=0}": {
+      "[]": 0.0,
+      "[A]": 0.0,
+      "[C]": 0.0,
+      "[A, C]": 7.004
+    },
+    "Region{regionID='f9eb0855-c7bb-4d7b-a5a1-b5356589df31', startTime=0, endTime=0, overhead=0}": {
+      "[]": 0.0,
+      "[A]": 2.003
+    },
+    "Region{regionID='a2f4171f-62f7-4fc7-a491-a6b87e80a0e8', startTime=0, endTime=0, overhead=0}": {
+      "[]": 0.0,
+      "[B]": 0.0
+    },
+    "Region{regionID='9e07d5ee-1c82-43be-987a-2dbf8bce33d5', startTime=0, endTime=0, overhead=0}": {
+      "[]": 0.0,
+      "[A]": 0.0,
+      "[B]": 0.0,
+      "[A, B]": 4.003
+    }
+  }
+}

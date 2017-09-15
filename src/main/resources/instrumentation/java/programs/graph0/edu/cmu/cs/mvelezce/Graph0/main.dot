@@ -1,8 +1,8 @@
 digraph main {
 node [shape=record];
-19986569 [label="L3\lLINENUMBER 20 L3\lFRAME APPEND [I]\lLDC 2\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL6\lLINENUMBER 21 L6\lRETURN\l"];
-294184992 [label="L4\lLINENUMBER 16 L4\lLCONST_1\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL5\lLINENUMBER 17 L5\lRETURN\l"];
-1890187342 [label="L0\lLINENUMBER 12 L0\lLDC \"e79f4ee1-a92a-42c4-9f84-192d88f5aac0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 13 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lISTORE 1\lL2\lLINENUMBER 15 L2\lILOAD 1\lIFEQ L3\l"];
+19986569 [label="L3\lLINENUMBER 20 L3\lFRAME APPEND [I]\lLDC \"6d6e8e6c-caa7-44cc-88f7-a2d0b239b683\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC 2\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL6\lLINENUMBER 21 L6\lRETURN\l"];
+294184992 [label="L4\lLINENUMBER 16 L4\lLDC \"6d6e8e6c-caa7-44cc-88f7-a2d0b239b683\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLCONST_1\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL5\lLINENUMBER 17 L5\lRETURN\l"];
+1890187342 [label="L0\lLINENUMBER 12 L0\lLDC \"6d6e8e6c-caa7-44cc-88f7-a2d0b239b683\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 13 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lISTORE 1\lL2\lLINENUMBER 15 L2\lILOAD 1\lIFEQ L3\l"];
 entry;
 exit;
 entry -> 1890187342;
@@ -10,5 +10,7 @@ entry -> 1890187342;
 294184992 -> exit;
 1890187342 -> 19986569;
 1890187342 -> 294184992;
+19986569[fontcolor="purple", penwidth=3, color="purple"];
+294184992[fontcolor="purple", penwidth=3, color="purple"];
 1890187342[fontcolor="purple", penwidth=3, color="purple"];
 }

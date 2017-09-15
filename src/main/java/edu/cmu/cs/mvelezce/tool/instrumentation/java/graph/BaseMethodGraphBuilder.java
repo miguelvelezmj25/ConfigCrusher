@@ -46,6 +46,7 @@ public abstract class BaseMethodGraphBuilder implements IMethodGraphBuilder {
                 int opcode = instruction.getOpcode();
 
                 if(opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
+                    methodBlock.setWithReturn(true);
                     graph.addEdge(methodBlock, graph.getExitBlock());
                 }
             }

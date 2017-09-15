@@ -13,13 +13,13 @@ import java.util.Set;
 public class MethodBlock {
 
     private String ID;
+    // TODO is this needed?
     private AbstractInsnNode insnNode = null;
-    //    private Label label;
-//    private Label originalLabel;
     private List<AbstractInsnNode> instructions = new ArrayList<>();
     private Set<MethodBlock> successors = new HashSet<>();
     private Set<MethodBlock> predecessors = new HashSet<>();
-//    private boolean withRet = false;
+    private boolean withRet = false;
+    private boolean withReturn;
 
 //    public MethodBlock(String ID, Label label, Label originalLabel, List<AbstractInsnNode> instructions) {
 //        this.ID = ID;
@@ -94,7 +94,11 @@ public class MethodBlock {
         return this.predecessors;
     }
 
-//    public boolean isWithRet() {
+    public boolean isWithRet() {
+        return this.withRet;
+    }
+
+    //    public boolean isWithRet() {
 //        return this.withRet;
 //    }
 //
@@ -155,5 +159,9 @@ public class MethodBlock {
 
     public static String asID(AbstractInsnNode insnNode) {
         return insnNode.hashCode() + "";
+    }
+
+    public void setWithReturn(boolean withReturn) {
+        this.withReturn = withReturn;
     }
 }

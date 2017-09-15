@@ -1,9 +1,9 @@
 digraph foo {
 node [shape=record];
-282828951 [label="ILOAD 3\lLDC \"9e07d5ee-1c82-43be-987a-2dbf8bce33d5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lIFEQ L6\l"];
-22069592 [label="L2\lLINENUMBER 40 L2\lFRAME APPEND [I]\lLDC \"f9eb0855-c7bb-4d7b-a5a1-b5356589df31\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"a2f4171f-62f7-4fc7-a491-a6b87e80a0e8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 1\lIFEQ L6\l"];
-775931202 [label="L0\lLINENUMBER 32 L0\lLDC \"f9eb0855-c7bb-4d7b-a5a1-b5356589df31\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lICONST_0\lISTORE 3\lL1\lLINENUMBER 34 L1\lILOAD 0\lIFEQ L2\l"];
-1075738627 [label="L6\lLINENUMBER 44 L6\lFRAME SAME\lLDC \"9e07d5ee-1c82-43be-987a-2dbf8bce33d5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"a2f4171f-62f7-4fc7-a491-a6b87e80a0e8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+282828951 [label="ILOAD 3\lIFEQ L6\l"];
+22069592 [label="L2\lLINENUMBER 40 L2\lFRAME APPEND [I]\lLDC \"569686b5-fa5d-4bcd-8d29-b9d2ced3336b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"b159a96d-3d55-4909-99cc-7f752278270a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 1\lIFEQ L6\l"];
+775931202 [label="L0\lLINENUMBER 32 L0\lLDC \"569686b5-fa5d-4bcd-8d29-b9d2ced3336b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lICONST_0\lISTORE 3\lL1\lLINENUMBER 34 L1\lILOAD 0\lIFEQ L2\l"];
+1075738627 [label="L6\lLINENUMBER 44 L6\lFRAME SAME\lLDC \"b159a96d-3d55-4909-99cc-7f752278270a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 1160003871 [label="L3\lLINENUMBER 35 L3\lLDC 2000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL4\lLINENUMBER 36 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/Example.moo (Z)V\lL5\lLINENUMBER 37 L5\lICONST_1\lISTORE 3\l"];
 394721749 [label="L7\lLINENUMBER 41 L7\lLDC 4000\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
 entry;
@@ -18,7 +18,6 @@ entry -> 775931202;
 1075738627 -> exit;
 1160003871 -> 22069592;
 394721749 -> 1075738627;
-282828951[fontcolor="purple", penwidth=3, color="purple"];
 22069592[fontcolor="purple", penwidth=3, color="purple"];
 775931202[fontcolor="purple", penwidth=3, color="purple"];
 1075738627[fontcolor="purple", penwidth=3, color="purple"];

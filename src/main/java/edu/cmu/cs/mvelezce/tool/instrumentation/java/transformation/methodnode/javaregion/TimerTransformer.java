@@ -66,7 +66,10 @@ public class TimerTransformer extends RegionTransformer {
 
                 Set<MethodBlock> endMethodBlocks = new HashSet<>();
 
-                if(start.getSuccessors().size() == 1 && start.getSuccessors().iterator().next().equals(end)) {
+                if(start == end) {
+                    throw new RuntimeException("Start and end equal");
+                }
+                else if(start.getSuccessors().size() == 1 && start.getSuccessors().iterator().next().equals(end)) {
                     // TODO test
                     throw new RuntimeException("Happens when a control flow decision only has 1 successor??????");
 //                        regionsToRemove.add(instructionsToRegion.get(instructionToStartInstrumenting));

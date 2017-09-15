@@ -65,6 +65,11 @@ public class TimerTransformer extends RegionTransformer {
                     throw new RuntimeException("Happens when a control flow decision only has 1 successor??????");
 //                        regionsToRemove.add(instructionsToRegion.get(instructionToStartInstrumenting));
                 }
+                else if(graph.getExitBlock() ==  end) {
+                    for(MethodBlock pred : end.getPredecessors()) {
+                        endMethodBlocks.add(pred);
+                    }
+                }
                 else {
 //                    if(graph.getExitBlock().equals(end)) {
 //                        for(MethodBlock predecessor : graph.getExitBlock().getPredecessors()) {
@@ -76,11 +81,11 @@ public class TimerTransformer extends RegionTransformer {
 //                    else {
                     endMethodBlocks.add(end);
 //                    }
-
-                    JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
-                    region.setStartMethodBlock(start);
-                    region.setEndMethodBlocks(endMethodBlocks);
                 }
+
+                JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
+                region.setStartMethodBlock(start);
+                region.setEndMethodBlocks(endMethodBlocks);
             }
         }
 

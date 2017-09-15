@@ -1,8 +1,8 @@
 digraph moo {
 node [shape=record];
-1873859565 [label="L0\lLINENUMBER 47 L0\lLDC \"6fd1bf02-8f38-4b35-b9d6-d7982b03037e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
+1873859565 [label="L0\lLINENUMBER 47 L0\lLDC \"8ffcf0e6-24bd-473a-a198-e0dfa2ae6444\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
 1361289747 [label="L2\lLINENUMBER 48 L2\lLDC 7000\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
-1843289228 [label="L1\lLINENUMBER 50 L1\lFRAME SAME\lLDC \"6fd1bf02-8f38-4b35-b9d6-d7982b03037e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1843289228 [label="L1\lLINENUMBER 50 L1\lFRAME SAME\lLDC \"8ffcf0e6-24bd-473a-a198-e0dfa2ae6444\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
 entry -> 1873859565;
@@ -10,4 +10,6 @@ entry -> 1873859565;
 1873859565 -> 1843289228;
 1361289747 -> 1843289228;
 1843289228 -> exit;
+1873859565[fontcolor="purple", penwidth=3, color="purple"];
+1843289228[fontcolor="purple", penwidth=3, color="purple"];
 }

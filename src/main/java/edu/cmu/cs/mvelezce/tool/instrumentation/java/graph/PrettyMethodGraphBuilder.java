@@ -81,6 +81,10 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
             List<String> prettyInstructions = prettyBlock.getPrettyInstructions();
             List<Object> printerInstructions = this.printer.getText();
 
+            for(Object o : printerInstructions) {
+                System.out.println(o.toString().trim());
+            }
+
             for(int i = startIndex; i < endIndex; i++) {
                 prettyInstructions.add(printerInstructions.get(i).toString().trim());
             }

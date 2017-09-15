@@ -284,7 +284,7 @@ public class TimerInstrumenterTest {
     @Test
     public void colorCounter() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String programName = "pngtasticColorCounter";
-        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/src";
+        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
 
 //        this.compile();

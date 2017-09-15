@@ -148,6 +148,39 @@ public class MethodGraph {
     }
 
     /**
+     * BFS implementation
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    public Set<MethodBlock> getReachableBlocks(MethodBlock start, MethodBlock end) {
+        Set<MethodBlock> reachable = new HashSet<>();
+        Queue<MethodBlock> queue = new ArrayDeque<>();
+        queue.offer(start);
+
+        while(!queue.isEmpty()) {
+            MethodBlock currentBlock = queue.poll();
+
+            if(currentBlock == end) {
+                continue;
+            }
+
+            for(MethodBlock succ : currentBlock.getSuccessors()) {
+                if(reachable.contains(succ)) {
+                    continue;
+                }
+
+                reachable.add(succ);
+                queue.add(succ);
+            }
+        }
+
+        return reachable;
+    }
+
+
+    /**
      * Kosaraju's algorithm
      *
      * @param start

@@ -1650,7 +1650,7 @@ public class TimerTransformerTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
-        MethodTransformer methodTransformer = new TimerTransformer(programName, classDirectory, decisionsToOptions.keySet());
+        MethodTransformer methodTransformer = new TimerTransformer(programName, classDirectory, decisionsToOptions);
         methodTransformer.transformMethods();
     }
 

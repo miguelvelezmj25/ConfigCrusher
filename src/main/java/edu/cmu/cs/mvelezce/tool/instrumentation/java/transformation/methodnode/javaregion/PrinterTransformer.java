@@ -7,6 +7,7 @@ import jdk.internal.org.objectweb.asm.tree.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
+import java.util.Map;
 import java.util.Set;
 
 // TODO do i need to update the stack and frame?
@@ -18,12 +19,12 @@ public class PrinterTransformer extends RegionTransformer {
 
     private String messageToPrint;
 
-    public PrinterTransformer(String programName, String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(programName, directory, regions);
+    public PrinterTransformer(String programName, String directory, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(programName, directory, regionsToOptionSet);
     }
 
-    public PrinterTransformer(String programName, ClassTransformer classTransformer, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(programName, classTransformer, regions);
+    public PrinterTransformer(String programName, ClassTransformer classTransformer, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(programName, classTransformer, regionsToOptionSet);
     }
 
     @Override

@@ -33,44 +33,44 @@ public class JavaPipeline {
     public static final String LANGUAGETOOL_PROGRAM = "Languagetool";
 
     public static PerformanceModel buildPerformanceModel(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        // Format return statements with method calls
-        // TODO compile both original and instrumented
-//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
-        System.out.println("");
-
-        // Configuration compression (Language independent)
-        System.out.println("####################### Configurations to execute #######################");
-        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-        Compression compression = new SimpleCompression(programName, relevantOptions);
-        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args);
-        JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
-        System.out.println("");
-
-        System.out.println("####################### Instrumenting #######################");
-        Instrumenter instrumenter = new TimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
-        instrumenter.instrument(args);
-        System.out.println("");
-
-        System.out.println("####################### Measure performancemodel #######################");
-        Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
-        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
-        System.out.println("");
-
-        System.out.println("####################### Build performancemodel model #######################");
-        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
-
-        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            JavaRegion javaRegion = entry.getKey();
-            Region region = new Region(javaRegion.getRegionID());
-            regionsToOptions.put(region, entry.getValue());
-        }
-
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
-//        System.out.println(pm);
-//        JavaPipeline.savePMPerformance(programName, pm);
+//        // Format return statements with method calls
+//        // TODO compile both original and instrumented
+////        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+//        System.out.println("");
 //
-//        return pm;
-        // TODO
+//        // Configuration compression (Language independent)
+//        System.out.println("####################### Configurations to execute #######################");
+//        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+//        Compression compression = new SimpleCompression(programName, relevantOptions);
+//        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args);
+//        JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
+//        System.out.println("");
+//
+//        System.out.println("####################### Instrumenting #######################");
+//        Instrumenter instrumenter = new TimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions);
+//        instrumenter.instrument(args);
+//        System.out.println("");
+//
+//        System.out.println("####################### Measure performancemodel #######################");
+//        Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
+//        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+//        System.out.println("");
+//
+//        System.out.println("####################### Build performancemodel model #######################");
+//        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+//
+//        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+//            JavaRegion javaRegion = entry.getKey();
+//            Region region = new Region(javaRegion.getRegionID());
+//            regionsToOptions.put(region, entry.getValue());
+//        }
+//
+////        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+////        System.out.println(pm);
+////        JavaPipeline.savePMPerformance(programName, pm);
+////
+////        return pm;
+//        // TODO
         return null;
     }
 
@@ -92,7 +92,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("####################### Instrumenting #######################");
-//        Instrumenter.instrument(args, instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
+//        Instrumenter.instrument(args, instrumentSrcDirectory, instrumentClassDirectory, partialRegionsToOptions);
 //        System.out.println("");
 //
 //        System.out.println("####################### Measure performancemodel #######################");
@@ -126,51 +126,51 @@ public class JavaPipeline {
     }
 
     public static PerformanceModel buildPerformanceModelRepeat(String programName, String[] args, String originalSrcDirectory, String originalClassDirectory, String instrumentSrcDirectory, String instrumentClassDirectory, String entryPoint, Map<JavaRegion, Set<String>> partialRegionsToOptions) throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        // Format return statements with method calls
-// TODO compile both original and instrumented
-//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
-        System.out.println("");
-
-        // Configuration compression (Language independent)
-        System.out.println("####################### Configurations to execute #######################");
-        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
-        Compression compression = new SimpleCompression(programName, relevantOptions);
-        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args);
-        JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
-        System.out.println("");
-
-        System.out.println("####################### Instrumenting #######################");
-        Instrumenter instrumenter = new TimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions.keySet());
-        instrumenter.instrument(args);
-        System.out.println("");
-
-        System.out.println("####################### Measure performancemodel #######################");
-        Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
-        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
-
-        // TODO
-
-//        List<Set<PerformanceEntry2>> executionsPerformance = new ArrayList<>();
+//        // Format return statements with method calls
+//// TODO compile both original and instrumented
+////        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+//        System.out.println("");
 //
-//        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
-//        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
-        System.out.println("");
-
-        System.out.println("####################### Build performancemodel model #######################");
-        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
-
-        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
-            JavaRegion javaRegion = entry.getKey();
-            Region region = new Region(javaRegion.getRegionID());
-            regionsToOptions.put(region, entry.getValue());
-        }
-
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
-//        System.out.println(pm);
-//        JavaPipeline.savePMPerformance(programName, pm, null);
+//        // Configuration compression (Language independent)
+//        System.out.println("####################### Configurations to execute #######################");
+//        Set<Set<String>> relevantOptions = new HashSet<>(partialRegionsToOptions.values());
+//        Compression compression = new SimpleCompression(programName, relevantOptions);
+//        Set<Set<String>> configurationsToExecute = compression.compressConfigurations(args);
+//        JavaPipeline.compressionHelper(partialRegionsToOptions.values(), configurationsToExecute);
+//        System.out.println("");
 //
-//        return pm;
-        // TODO
+//        System.out.println("####################### Instrumenting #######################");
+//        Instrumenter instrumenter = new TimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions);
+//        instrumenter.instrument(args);
+//        System.out.println("");
+//
+//        System.out.println("####################### Measure performancemodel #######################");
+//        Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
+//        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+//
+//        // TODO
+//
+////        List<Set<PerformanceEntry2>> executionsPerformance = new ArrayList<>();
+////
+////        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+////        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
+//        System.out.println("");
+//
+//        System.out.println("####################### Build performancemodel model #######################");
+//        Map<Region, Set<String>> regionsToOptions = new HashMap<>();
+//
+//        for(Map.Entry<JavaRegion, Set<String>> entry : partialRegionsToOptions.entrySet()) {
+//            JavaRegion javaRegion = entry.getKey();
+//            Region region = new Region(javaRegion.getRegionID());
+//            regionsToOptions.put(region, entry.getValue());
+//        }
+//
+////        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+////        System.out.println(pm);
+////        JavaPipeline.savePMPerformance(programName, pm, null);
+////
+////        return pm;
+//        // TODO
         return null;
     }
 
@@ -188,7 +188,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("Instrumenting");
-//        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+//        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions);
 //        System.out.println("");
 //
 //        System.out.println("Measure performancemodel");
@@ -222,7 +222,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("Instrumenting");
-//        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions.keySet());
+//        Instrumenter.instrument(args, srcDirectory, classDirectory, partialRegionsToOptions);
 //        System.out.println("");
 //
 //        System.out.println("Measure performancemodel");

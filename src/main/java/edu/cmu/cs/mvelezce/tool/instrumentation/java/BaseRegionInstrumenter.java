@@ -6,17 +6,18 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
 
     public static final String DIRECTORY = Options.DIRECTORY + "/instrumentation/java/programs";
 
-    private Set<JavaRegion> regions;
+    private Map<JavaRegion, Set<Set<String>>> regionsToOptionSet;
 
-    public BaseRegionInstrumenter(String programName, String srcDir, String classDir, Set<JavaRegion> regions) {
+    public BaseRegionInstrumenter(String programName, String srcDir, String classDir, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
         super(programName, srcDir, classDir);
-        this.regions = regions;
+        this.regionsToOptionSet = regionsToOptionSet;
 
         File root = new File(BaseRegionInstrumenter.DIRECTORY + "/" + programName);
 
@@ -29,7 +30,7 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
         }
     }
 
-    public Set<JavaRegion> getRegions() {
-        return regions;
+    public Map<JavaRegion, Set<Set<String>>> getRegionsToOptionSet() {
+        return this.regionsToOptionSet;
     }
 }

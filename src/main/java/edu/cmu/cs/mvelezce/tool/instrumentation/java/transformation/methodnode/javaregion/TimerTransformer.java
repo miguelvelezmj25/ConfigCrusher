@@ -19,12 +19,12 @@ import java.util.*;
 
 public class TimerTransformer extends RegionTransformer {
 
-    public TimerTransformer(String programName, String directory, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(programName, directory, regions);
+    public TimerTransformer(String programName, String directory, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(programName, directory, regionsToOptionSet);
     }
 
-    public TimerTransformer(String programName, ClassTransformer classTransformer, Set<JavaRegion> regions) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(programName, classTransformer, regions);
+    public TimerTransformer(String programName, ClassTransformer classTransformer, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(programName, classTransformer, regionsToOptionSet);
     }
 
     public static MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {

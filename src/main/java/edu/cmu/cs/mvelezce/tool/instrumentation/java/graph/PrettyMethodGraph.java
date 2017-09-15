@@ -91,6 +91,8 @@ public class PrettyMethodGraph extends MethodGraph {
             for(int i = 0; i < prettyInstructions.size(); i++) {
                 String instruction = prettyInstructions.get(i);
                 instruction = instruction.replace("\"", "\\\"");
+                instruction = instruction.replace("<", "\\<");
+                instruction = instruction.replace(">", "\\>");
                 dotString.append(instruction);
                 dotString.append("\\l");
             }

@@ -23,10 +23,6 @@ public class TraceClassInspector {
         TraceClassVisitor traceClassVisitor = new TraceClassVisitor(printWriter);
         MethodTracer methodTracer = new MethodTracer(Opcodes.ASM5, traceClassVisitor);
         ClassReader classReader = new ClassReader(this.className);
-        ClassNode classNode = new ClassNode();
-        classReader.accept(classNode, 0);
-
-
         classReader.accept(methodTracer, 0);
 
         return methodTracer;

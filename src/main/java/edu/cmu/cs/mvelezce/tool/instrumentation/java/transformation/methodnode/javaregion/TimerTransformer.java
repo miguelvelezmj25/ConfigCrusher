@@ -435,8 +435,8 @@ public class TimerTransformer extends RegionTransformer {
      * @param regionsInMethod
      */
     private InsnList instrumentNormal(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
-        List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
-        Collections.reverse(regionsInMethodReversed);
+        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+        MethodGraph graph = builder.build();
 
         Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
@@ -444,21 +444,11 @@ public class TimerTransformer extends RegionTransformer {
             instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
         }
 
-//        Set<JavaRegion> regionsToRemoves = new HashSet<>();
-//        Map<MethodBlock, JavaRegion> specialBlocksToRegions = new HashMap<>();
-//        Set<Set<MethodBlock>> stronglyConnectedComponents = graph.getStronglyConnectedComponents(graph.getEntryBlock());
-//
-//         TODO test
-//        regionsInMethod.removeAll(regionsToRemove);
-//        regionsInMethodReversed.removeAll(regionsToRemove);
-        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
-        MethodGraph graph = builder.build();
         this.getStartAndEndBlocks(graph, instructionsToRegion);
+        this.removeInnerRegions(regionsInMethod, graph);
 
-        // TODO test
-//        if(regionsInMethod.isEmpty()) {
-//            return;
-//        }
+        List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
+        Collections.reverse(regionsInMethodReversed);
 
         InsnList newInstructions = new InsnList();
         InsnList instructions = methodNode.instructions;
@@ -497,6 +487,43 @@ public class TimerTransformer extends RegionTransformer {
         }
 
         return newInstructions;
+    }
+
+    private void removeInnerRegions(List<JavaRegion> regionsInMethod, MethodGraph graph) {
+        Set<JavaRegion> innerRegionsToRemove = new HashSet<>();
+
+        for(JavaRegion region : regionsInMethod) {
+            for(JavaRegion possibleInnerRegion : regionsInMethod) {
+                if(region == possibleInnerRegion) {
+                    continue;
+                }
+
+                Set<MethodBlock> possibleInnerRegionEndBlocks = possibleInnerRegion.getEndMethodBlocks();
+                if(possibleInnerRegionEndBlocks.size() > 1) {
+                    continue;
+                }
+
+                MethodBlock possibleInnerRegionEndBlock = possibleInnerRegionEndBlocks.iterator().next();
+                Set<MethodBlock> regionReachableBlocks = new HashSet<>();
+
+                for(MethodBlock endBlock : region.getEndMethodBlocks()) {
+                    Set<MethodBlock> reachableBlocks = graph.getReachableBlocks(region.getStartMethodBlock(), endBlock);
+                    regionReachableBlocks.addAll(reachableBlocks);
+                }
+
+                if(regionReachableBlocks.contains(possibleInnerRegion.getStartMethodBlock())
+                        && regionReachableBlocks.contains(possibleInnerRegionEndBlock)) {
+                    innerRegionsToRemove.add(possibleInnerRegion);
+                }
+            }
+        }
+
+        regionsInMethod.removeAll(innerRegionsToRemove);
+
+        if(regionsInMethod.isEmpty()) {
+            throw new RuntimeException("The regions in a method cannot be empty after removing inner regions");
+        }
+
     }
 
     /**

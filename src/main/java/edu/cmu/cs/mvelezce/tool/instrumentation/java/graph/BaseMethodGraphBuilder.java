@@ -5,6 +5,8 @@ import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
+import java.util.Set;
+
 public abstract class BaseMethodGraphBuilder implements IMethodGraphBuilder {
 
     private MethodNode methodNode;
@@ -22,6 +24,23 @@ public abstract class BaseMethodGraphBuilder implements IMethodGraphBuilder {
         this.addEdges(graph);
         this.connectEntryNode(graph);
         this.connectExitNode(graph);
+
+        System.out.println(graph.toDotString(methodNode.name));
+        if(!graph.getEntryBlock().getPredecessors().isEmpty()) {
+            throw new RuntimeException("The entry block has predecessors");
+        }
+
+        if(!graph.getExitBlock().getSuccessors().isEmpty()) {
+            throw new RuntimeException("The exit block has successors");
+        }
+
+        Set<MethodBlock> exitPreds = graph.getExitBlock().getPredecessors();
+
+        for(MethodBlock block : exitPreds) {
+            if(!block.isWithReturn()) {
+                throw new RuntimeException("A block(" + block.getID() + ") connected to the exit block does not have a return instruction");
+            }
+        }
 
         return graph;
     }

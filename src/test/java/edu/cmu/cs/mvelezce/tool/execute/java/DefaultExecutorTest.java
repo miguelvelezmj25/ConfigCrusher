@@ -63,13 +63,14 @@ public class DefaultExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+//        args = new String[3];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//        args[2] = "-i1";
 
         Executor executor = new DefaultExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
     }
 
 }

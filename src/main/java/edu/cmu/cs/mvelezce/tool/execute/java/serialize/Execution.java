@@ -20,10 +20,10 @@ public class Execution {
         this.configuration = configuration;
         this.trace = trace;
 
-        this.checkTrace();
+//        this.checkTrace();
     }
 
-    private void checkTrace() {
+    public void checkTrace() {
         Stack<Region> executingRegions = new Stack<>();
 
         for(Region region : this.trace) {
@@ -36,11 +36,13 @@ public class Execution {
             Region top = executingRegions.peek();
 
             if(top.getRegionID().equals(region.getRegionID())) {
-                if(region.getEndTime() < top.getStartTime()) {
-                    throw new RuntimeException("The end time of a future region is less than the start time of previously visited region");
-                }
+                if(top.getStartTime() != 0 && region.getEndTime() != 0) {
+                    if(region.getEndTime() < top.getStartTime()) {
+                        throw new RuntimeException("The end time of a future region is less than the start time of previously visited region");
+                    }
 
-                executingRegions.pop();
+                    executingRegions.pop();
+                }
             }
             else {
                 executingRegions.add(region);

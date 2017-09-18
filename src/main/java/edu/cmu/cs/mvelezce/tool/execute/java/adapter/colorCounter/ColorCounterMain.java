@@ -49,6 +49,7 @@ public class ColorCounterMain extends BasetMain {
             Regions.enter(program.getRegionID());
             Run.main(args);
             Regions.exit(program.getRegionID());
+            System.out.println(Regions.getExecutedRegionsTrace().get(Regions.getExecutedRegionsTrace().size() - 1));
         }
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);

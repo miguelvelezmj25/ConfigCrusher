@@ -76,22 +76,28 @@ public class PerformanceEntry2 implements IPerformanceEntry {
     private void calculateProcessedPerformance(List<Region> trace) {
         Stack<Region> executingRegions = new Stack<>();
         Stack<Long> innerRegionExecutionTime = new Stack<>();
-//        Region previousRegionEntry = null;
 
         for(Region region : trace) {
             if(executingRegions.isEmpty() || !executingRegions.peek().getRegionID().equals(region.getRegionID())) {
                 executingRegions.add(region);
                 innerRegionExecutionTime.push(0L);
             }
-            else {
-                Region top = executingRegions.pop();
-                long regionExecutionTime = region.getEndTime() - top.getStartTime();
-                regionExecutionTime -= innerRegionExecutionTime.pop();
 
-                this.regionsToProcessedPerformance.put(region, regionExecutionTime);
+            Region top = executingRegions.peek();
 
-                // Adding new inner execution time
-                if(!executingRegions.isEmpty()) {
+            if(top.getRegionID().equals(region.getRegionID())) {
+                if(top.getStartTime() != 0 && region.getEndTime() != 0) {
+                    long regionExecutionTime = region.getEndTime() - top.getStartTime();
+                    regionExecutionTime -= innerRegionExecutionTime.pop();
+
+                    this.regionsToProcessedPerformance.put(top, regionExecutionTime);
+                    executingRegions.pop();
+
+                    // Adding new inner execution time
+                    if(executingRegions.isEmpty()) {
+                        continue;
+                    }
+
                     Stack<Long> added = new Stack<>();
 
                     while (!innerRegionExecutionTime.isEmpty()) {
@@ -105,6 +111,10 @@ public class PerformanceEntry2 implements IPerformanceEntry {
                 }
             }
         }
+
+        if(!executingRegions.isEmpty()) {
+            throw new RuntimeException("There were executing regions left that were not processed");
+        }
     }
 
     private void calculatePerformance(List<Region> trace) {
@@ -113,16 +123,34 @@ public class PerformanceEntry2 implements IPerformanceEntry {
         for(Region region : trace) {
             if(executingRegions.empty() || !executingRegions.peek().getRegionID().equals(region.getRegionID())) {
                 executingRegions.add(region);
+                continue;
             }
-            else {
-                Region top = executingRegions.pop();
-                long start = top.getStartTime();
-                long end = region.getEndTime();
-                long time = (end - start);
-                time -= top.getOverhead();
-                time -= region.getOverhead();
-                this.regionsToRawPerformance.put(region, time);
+
+            Region top = executingRegions.peek();
+
+            if(top.getRegionID().equals(region.getRegionID())) {
+                if(top.getStartTime() != 0 && region.getEndTime() != 0) {
+                    long start = top.getStartTime();
+                    long end = region.getEndTime();
+                    long time = (end - start);
+//                    time -= top.getOverhead();
+//                    time -= region.getOverhead();
+                    if(this.regionsToRawPerformance.containsKey(top)) {
+                        throw new RuntimeException("Error");
+                    }
+
+
+                    this.regionsToRawPerformance.put(top, time);
+                    executingRegions.pop();
+                }
+//                else {
+////                    top.setOverhead(top.getOverhead() + region.getOverhead());
+//                }
             }
+        }
+
+        if(!executingRegions.isEmpty()) {
+            throw new RuntimeException("There were executing regions left that were not processed");
         }
     }
 
@@ -133,19 +161,41 @@ public class PerformanceEntry2 implements IPerformanceEntry {
         for(Region region : trace) {
             if(executingRegions.isEmpty() || !executingRegions.peek().getRegionID().equals(region.getRegionID())) {
                 executingRegions.push(region);
-                this.regionsToInnerRegions.put(region, new HashSet<>());
+                continue;
             }
-            else {
-                executingRegions.pop();
+
+            Region top = executingRegions.peek();
+
+            if(top.getRegionID().equals(region.getRegionID())) {
+                if(top.getStartTime() != 0 && region.getEndTime() != 0) {
+                    this.regionsToInnerRegions.put(top, new HashSet<>());
+                    executingRegions.pop();
+                }
             }
+        }
+
+        if(!executingRegions.isEmpty()) {
+            throw new RuntimeException("There were executing regions left that were not processed");
+        }
+
+        if(!this.regionsToRawPerformance.keySet().equals(this.regionsToInnerRegions.keySet())) {
+            throw new RuntimeException("The regions obtained in the raw performance do not match the region obtained" +
+                    " when calculating inner regions");
         }
 
         for(Region region : trace) {
             if(executingRegions.isEmpty()) {
                 executingRegions.push(region);
+
+                continue;
             }
-            else if(executingRegions.peek().getRegionID().equals(region.getRegionID())) {
-                executingRegions.pop();
+
+            Region top = executingRegions.peek();
+
+            if(top.getRegionID().equals(region.getRegionID())) {
+                if(top.getStartTime() != 0 && region.getEndTime() != 0) {
+                    executingRegions.pop();
+                }
             }
             else {
                 for(Region executingRegion : executingRegions) {
@@ -155,6 +205,23 @@ public class PerformanceEntry2 implements IPerformanceEntry {
 
                 executingRegions.push(region);
             }
+
+
+//            else if(executingRegions.peek().getRegionID().equals(region.getRegionID())) {
+//                executingRegions.pop();
+//            }
+//            else {
+//                for(Region executingRegion : executingRegions) {
+//                    Set<Region> innerRegions = this.regionsToInnerRegions.get(executingRegion);
+//                    innerRegions.add(region);
+//                }
+//
+//                executingRegions.push(region);
+//            }
+        }
+
+        if(!executingRegions.isEmpty()) {
+            throw new RuntimeException("There were executing regions left that were not processed");
         }
     }
 
@@ -193,6 +260,10 @@ public class PerformanceEntry2 implements IPerformanceEntry {
         // TODO
         throw new RuntimeException();
     }
+
+//    private void checkSameRegions(Set<Region>) {
+//        if
+//    }
 
 //        private Set<String> configuration;
 //    private Map<Region, Long> regionsToExecutionTime;

@@ -1,0 +1,44 @@
+{
+  "configuration": [
+    "B",
+    "C"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 7897797751100,
+      "endTime": 0,
+      "overhead": 20332
+    },
+    {
+      "regionID": "5dca2d72-233c-40f7-9f2d-46273af89f60",
+      "startTime": 7897803625734,
+      "endTime": 0,
+      "overhead": 4902
+    },
+    {
+      "regionID": "5dca2d72-233c-40f7-9f2d-46273af89f60",
+      "startTime": 0,
+      "endTime": 7897803654020,
+      "overhead": 16866
+    },
+    {
+      "regionID": "68f0ef69-2481-45ed-a238-2c260e608acd",
+      "startTime": 7897803669284,
+      "endTime": 0,
+      "overhead": 2113
+    },
+    {
+      "regionID": "68f0ef69-2481-45ed-a238-2c260e608acd",
+      "startTime": 0,
+      "endTime": 7897803670587,
+      "overhead": 1221
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 7897803675080,
+      "overhead": 1353
+    }
+  ]
+}

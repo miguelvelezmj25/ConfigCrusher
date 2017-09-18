@@ -2,10 +2,12 @@ package edu.cmu.cs.mvelezce.tool.performancemodel;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
 import org.junit.Test;
 
 import java.util.Map;
@@ -20,8 +22,11 @@ public class DefaultPerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = analysis.analyze(args);
+        BaseRegionInstrumenter instrumenter = new TimerRegionInstrumenter(programName);
+        instrumenter.instrument(args);
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+
+        Analysis analysis = new DefaultStaticAnalysis();
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
         Executor executor = new DefaultExecutor(programName);

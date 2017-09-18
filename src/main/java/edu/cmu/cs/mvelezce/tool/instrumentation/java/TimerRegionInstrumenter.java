@@ -15,11 +15,12 @@ import java.util.Set;
 // TODO should we save the files that we instrumented for debugging?
 public class TimerRegionInstrumenter extends BaseRegionInstrumenter {
 
-    // TODO is this needed?
-    public static final String TARGET_DIRECTORY = "../performance-mapper-evaluation/instrumented";
-
     public TimerRegionInstrumenter(String programName, String classDir, Map<JavaRegion, Set<Set<String>>> regionsToOptions) {
         super(programName, null, classDir, regionsToOptions);
+    }
+
+    public TimerRegionInstrumenter(String programName) {
+        super(programName);
     }
 
     @Override

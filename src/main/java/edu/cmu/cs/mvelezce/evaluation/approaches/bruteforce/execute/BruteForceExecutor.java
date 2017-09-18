@@ -32,7 +32,7 @@ public class BruteForceExecutor extends BaseExecutor {
         Adapter adapter;
 
         if(this.getProgramName().contains("running-example")) {
-            adapter = new BFRunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+            adapter = new BFRunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

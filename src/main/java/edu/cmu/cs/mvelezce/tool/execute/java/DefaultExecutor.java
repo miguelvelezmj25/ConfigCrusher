@@ -1,11 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.pngtastic.PngtasticAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
@@ -28,8 +26,8 @@ public class DefaultExecutor extends BaseExecutor {
         this(programName, null, null, null);
     }
 
-    public DefaultExecutor(String programName, String entryPoint, String dir, Set<Set<String>> configurations) {
-        super(programName, entryPoint, dir, configurations);
+    public DefaultExecutor(String programName, String entryPoint, String classDir, Set<Set<String>> configurations) {
+        super(programName, entryPoint, classDir, configurations);
     }
 
     @Override
@@ -38,25 +36,25 @@ public class DefaultExecutor extends BaseExecutor {
         Adapter adapter;
 
         if(this.getProgramName().contains("elevator")) {
-            adapter = new ElevatorAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+            adapter = new ElevatorAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else if(this.getProgramName().contains("gpl")) {
-            adapter = new GPLAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+            adapter = new GPLAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else if(this.getProgramName().contains("sleep")) {
-            adapter = new SleepAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+            adapter = new SleepAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else if(this.getProgramName().contains("zipme")) {
-            adapter = new ZipmeAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+            adapter = new ZipmeAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
 //        else if(this.getProgramName().contains("pngtastic")) {
-//            adapter = new PngtasticAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+//            adapter = new PngtasticAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
 //        }
         else if(this.getProgramName().contains("pngtasticColorCounter")) {
-            adapter = new ColorCounterAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+            adapter = new ColorCounterAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else if(this.getProgramName().contains("running-example")) {
-            adapter = new RunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getDir());
+            adapter = new RunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

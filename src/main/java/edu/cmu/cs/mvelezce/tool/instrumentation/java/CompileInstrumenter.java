@@ -20,7 +20,7 @@ public class CompileInstrumenter extends BaseInstrumenter {
     }
 
     @Override
-    public void compileFromSource() {
+    public void compileFromSource() throws IOException, InterruptedException {
         this.writeFilesToCompile();
 
         try {
@@ -49,33 +49,29 @@ public class CompileInstrumenter extends BaseInstrumenter {
 
     }
 
-    private void writeFilesToCompile() {
-        try {
-            String[] command = {"find", this.getSrcDir(), "-name", "*.java"};
-            System.out.println(Arrays.toString(command));
-            Process process = Runtime.getRuntime().exec(command);
+    private void writeFilesToCompile() throws IOException, InterruptedException {
+        String[] command = {"find", this.getSrcDir(), "-name", "*.java"};
+        System.out.println(Arrays.toString(command));
+        Process process = Runtime.getRuntime().exec(command);
 
-            BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(this.getSrcDir() + "/sources.txt"));
-            String string;
+        BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(this.getSrcDir() + "/sources.txt"));
+        String string;
 
-            while ((string = inputReader.readLine()) != null) {
-                writer.write(string);
-                writer.write("\n");
-            }
-
-            writer.close();
-
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-
-            while ((string = errorReader.readLine()) != null) {
-                System.out.println(string);
-            }
-
-            process.waitFor();
-        } catch (IOException | InterruptedException ie) {
-            ie.printStackTrace();
+        while ((string = inputReader.readLine()) != null) {
+            writer.write(string);
+            writer.write("\n");
         }
+
+        writer.close();
+
+        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+        while ((string = errorReader.readLine()) != null) {
+            System.out.println(string);
+        }
+
+        process.waitFor();
     }
 
 }

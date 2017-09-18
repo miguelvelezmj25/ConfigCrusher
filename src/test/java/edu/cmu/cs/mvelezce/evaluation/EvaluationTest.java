@@ -4,10 +4,12 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEx
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performancemodel.DefaultPerformanceModelBuilder;
@@ -31,14 +33,25 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareColorCounter1() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.APPROACH, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void runningExampleApproach() throws Exception {
         String programName = "running-example";
 
         // arguments
         String[] args = new String[0];
 
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = analysis.analyze(args);
+        BaseRegionInstrumenter instrumenter = new TimerRegionInstrumenter(programName);
+        instrumenter.instrument(args);
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+
+        Analysis analysis = new DefaultStaticAnalysis();
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
         Executor executor = new DefaultExecutor(programName);
@@ -77,8 +90,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = analysis.analyze(args);
+        BaseRegionInstrumenter instrumenter = new TimerRegionInstrumenter(programName);
+        instrumenter.instrument(args);
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+
+        Analysis analysis = new DefaultStaticAnalysis();
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
         Executor executor = new DefaultExecutor(programName);

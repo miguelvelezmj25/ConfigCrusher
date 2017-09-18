@@ -1,12 +1,12 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
-public abstract class BasetMain implements Main {
+public abstract class BaseMain implements Main {
 
     private String programName;
     private String iteration;
     private String[] args;
 
-    public BasetMain(String programName, String iteration, String[] args) {
+    public BaseMain(String programName, String iteration, String[] args) {
         this.programName = programName;
         this.iteration = iteration;
         this.args = args;

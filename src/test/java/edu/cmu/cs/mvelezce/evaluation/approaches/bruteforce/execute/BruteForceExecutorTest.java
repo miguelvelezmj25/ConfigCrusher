@@ -110,4 +110,26 @@ public class BruteForceExecutorTest {
         measuredPerformance.size();
     }
 
+    @Test
+    public void colorCounter() throws IOException, InterruptedException {
+        String programName = "pngtasticColorCounter";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic-counter/out/production/pngtastic-counter";
+        String entryPoint = "com.googlecode.pngtastic.Run";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+    }
+
 }

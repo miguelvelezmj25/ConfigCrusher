@@ -19,6 +19,8 @@ import java.util.*;
 
 public class TimerTransformer extends RegionTransformer {
 
+    private Set<MethodBlock> blocksToInstrumentBeforeReturn = new HashSet<>();
+
     public TimerTransformer(String programName, String directory, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
         super(programName, directory, regionsToOptionSet);
     }
@@ -75,6 +77,7 @@ public class TimerTransformer extends RegionTransformer {
 //                        regionsToRemove.add(instructionsToRegion.get(instructionToStartInstrumenting));
                 }
                 else if(graph.getExitBlock() == end) {
+                    this.blocksToInstrumentBeforeReturn.addAll(end.getPredecessors());
                     endMethodBlocks.addAll(end.getPredecessors());
                 }
                 else {
@@ -103,15 +106,30 @@ public class TimerTransformer extends RegionTransformer {
 
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
         this.calculateASMStartIndex(regionsInMethod, methodNode);
-        InsnList newInstructions;
 
+        InsnList newInstructions;
         int startInstructionSize = methodNode.instructions.size();
 
         if(regionsInMethod.size() == 1) {
             newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
         }
         else {
-            newInstructions = this.instrumentNormal(methodNode, regionsInMethod);
+            Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
+
+            for(JavaRegion region : regionsInMethod) {
+                instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
+            }
+
+            this.getStartAndEndBlocks(graph, instructionsToRegion);
+            this.removeInnerRegions(regionsInMethod, graph);
+
+            if(regionsInMethod.size() == 1) {
+                newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
+            }
+            else {
+                newInstructions = this.instrumentNormal(methodNode, regionsInMethod);
+            }
+
         }
 
         int end = methodNode.instructions.size();
@@ -438,6 +456,7 @@ public class TimerTransformer extends RegionTransformer {
         MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
         MethodGraph graph = builder.build();
 
+        // TODO this is already calculated in the caller
         Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
         for(JavaRegion region : regionsInMethod) {
@@ -445,7 +464,6 @@ public class TimerTransformer extends RegionTransformer {
         }
 
         this.getStartAndEndBlocks(graph, instructionsToRegion);
-        this.removeInnerRegions(regionsInMethod, graph);
 
         List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
         Collections.reverse(regionsInMethodReversed);
@@ -464,7 +482,7 @@ public class TimerTransformer extends RegionTransformer {
                 continue;
             }
 
-            if(block.isWithReturn()) {
+            if(this.blocksToInstrumentBeforeReturn.contains(block)) {
                 instruction = instructionsIterator.next();
                 int opcode = instruction.getOpcode();
 
@@ -482,7 +500,15 @@ public class TimerTransformer extends RegionTransformer {
                 InsnList endInstructions = this.instrumentEnd(block, regionsInMethodReversed);
                 newInstructions.add(endInstructions);
                 InsnList startInstructions = this.instrumentStart(block, regionsInMethod);
+
+                if(startInstructions.size() == 0) {
+                    continue;
+                }
+
                 newInstructions.add(startInstructions);
+
+//                    newInstructions.insertBefore(instruction, startInstructions);
+
             }
         }
 

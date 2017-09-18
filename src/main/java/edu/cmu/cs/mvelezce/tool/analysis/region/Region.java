@@ -82,7 +82,6 @@ public class Region {
     }
 
     public void startTime(long startTime) {
-//        this.resetExecution();
         this.startTime = startTime;
     }
 

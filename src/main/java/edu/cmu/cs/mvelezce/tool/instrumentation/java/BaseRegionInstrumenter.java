@@ -24,6 +24,10 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
         this.regionsToOptionSet = regionsToOptionSet;
     }
 
+    public BaseRegionInstrumenter(String programName) {
+        this(programName, "", "", null);
+    }
+
     @Override
     public void instrument(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {
         Options.getCommandLine(args);

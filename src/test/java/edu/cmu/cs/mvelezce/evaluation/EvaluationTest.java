@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 
 public class EvaluationTest {
     @Test
-    public void compareApproaches1() throws Exception {
+    public void compareRunningExample1() throws Exception {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);

@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter;
+package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.runningexample;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 

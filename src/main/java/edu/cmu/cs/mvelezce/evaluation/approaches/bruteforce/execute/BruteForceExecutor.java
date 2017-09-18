@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 
-import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.BFRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.colorcounter.BFColorCounterAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.runningexample.BFRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
@@ -33,6 +34,9 @@ public class BruteForceExecutor extends BaseExecutor {
 
         if(this.getProgramName().contains("running-example")) {
             adapter = new BFRunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("pngtasticColorCounter")) {
+            adapter = new BFColorCounterAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

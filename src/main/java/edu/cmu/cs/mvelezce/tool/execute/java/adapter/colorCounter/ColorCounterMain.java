@@ -1,20 +1,19 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter;
 
 import com.googlecode.pngtastic.Run;
-import edu.cmu.cs.mvelezce.Example;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BasetMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
 
-public class ColorCounterMain extends BasetMain {
+public class ColorCounterMain extends BaseMain {
 
     public static final String COLORCOUNTER_MAIN = ColorCounterMain.class.getCanonicalName();
 
@@ -49,7 +48,6 @@ public class ColorCounterMain extends BasetMain {
             Regions.enter(program.getRegionID());
             Run.main(args);
             Regions.exit(program.getRegionID());
-            System.out.println(Regions.getExecutedRegionsTrace().get(Regions.getExecutedRegionsTrace().size() - 1));
         }
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);

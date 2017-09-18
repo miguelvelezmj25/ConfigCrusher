@@ -6,14 +6,14 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BasetMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
 
-public class RunningExampleMain extends BasetMain {
+public class RunningExampleMain extends BaseMain {
 
     public static final String RUNNING_EXAMPLE_MAIN = RunningExampleMain.class.getCanonicalName();
 

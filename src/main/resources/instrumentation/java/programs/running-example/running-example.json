@@ -1,0 +1,61 @@
+[
+  {
+    "region": {
+      "regionID": "7371f7f2-b3d5-4cec-8b96-6c9633408e2d",
+      "startTime": 0,
+      "endTime": 0,
+      "overhead": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Example",
+      "regionMethod": "foo(ZZZ)V",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fe1a6563-cd40-4153-9baf-4d91a7085e56",
+      "startTime": 0,
+      "endTime": 0,
+      "overhead": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Example",
+      "regionMethod": "moo(Z)V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "C"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8ab021d2-9b12-44e4-9989-7d4a9ff50efd",
+      "startTime": 0,
+      "endTime": 0,
+      "overhead": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Example",
+      "regionMethod": "foo(ZZZ)V",
+      "startBytecodeIndex": 7,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A"
+      ]
+    ]
+  }
+]

@@ -8,6 +8,8 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performancemodel.DefaultPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
@@ -57,6 +59,46 @@ public class EvaluationTest {
     @Test
     public void runningExampleBruteForce() throws Exception {
         String programName = "running-example";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntry2> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void colorCounterApproach() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        // arguments
+        String[] args = new String[0];
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = analysis.analyze(args);
+        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+
+        Executor executor = new DefaultExecutor(programName);
+        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder builder = new DefaultPerformanceModelBuilder(programName, measuredPerformance,
+                regionsToOptionSet);
+        PerformanceModel performanceModel = builder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.APPROACH, performanceModel);
+    }
+
+    @Test
+    public void colorCounterBruteForce() throws Exception {
+        String programName = "pngtasticColorCounter";
 
         // arguments
         String[] args = new String[0];

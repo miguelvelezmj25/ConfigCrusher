@@ -15,7 +15,7 @@ public class VariableBeforeReturnTransformerTest {
 //    String instrumentedSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
 
     @Test
-    public void testRunningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+    public void testRunningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/src";
         String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
 

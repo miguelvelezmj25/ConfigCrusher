@@ -5,9 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -23,14 +21,14 @@ public abstract class BaseExecutor implements Executor {
 
     private String programName;
     private String entryPoint;
-    private String dir;
+    private String classDir;
     private Set<Set<String>> configurations;
     private int repetitions = 0;
 
-    public BaseExecutor(String programName, String entryPoint, String dir, Set<Set<String>> configurations) {
+    public BaseExecutor(String programName, String entryPoint, String classDir, Set<Set<String>> configurations) {
         this.programName = programName;
         this.entryPoint = entryPoint;
-        this.dir = dir;
+        this.classDir = classDir;
         this.configurations = configurations;
     }
 
@@ -190,8 +188,8 @@ public abstract class BaseExecutor implements Executor {
         return entryPoint;
     }
 
-    public String getDir() {
-        return dir;
+    public String getClassDir() {
+        return classDir;
     }
 
     public Set<Set<String>> getConfigurations() {

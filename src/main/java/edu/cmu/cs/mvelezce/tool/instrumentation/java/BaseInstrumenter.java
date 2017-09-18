@@ -17,7 +17,7 @@ public abstract class BaseInstrumenter implements Instrumenter {
     }
 
     @Override
-    public void instrument(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException {
+    public void instrument(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {
         Options.getCommandLine(args);
 
         if(Options.checkIfDeleteResult()) {

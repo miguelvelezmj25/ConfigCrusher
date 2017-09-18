@@ -20,12 +20,12 @@ public class TimerInstrumenterTest {
     protected static String srcDir;
     protected static String classDir;
 
-    protected void compile() {
+    protected void compile() throws IOException, InterruptedException {
         Instrumenter compiler = new CompileInstrumenter(TimerInstrumenterTest.srcDir, TimerInstrumenterTest.classDir);
         compiler.compileFromSource();
     }
 
-    protected void format() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException {
+    protected void format() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {
         String[] args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
@@ -232,7 +232,7 @@ public class TimerInstrumenterTest {
 //    }
 
     @Test
-    public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+    public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "running-example";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
@@ -258,7 +258,7 @@ public class TimerInstrumenterTest {
     }
 
     @Test
-    public void graph0() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+    public void graph0() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "graph0";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
@@ -284,7 +284,7 @@ public class TimerInstrumenterTest {
     }
 
     @Test
-    public void colorCounter() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+    public void colorCounter() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "pngtasticColorCounter";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";

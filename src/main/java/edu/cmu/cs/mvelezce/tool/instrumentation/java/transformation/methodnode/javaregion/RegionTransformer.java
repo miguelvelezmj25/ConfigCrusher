@@ -135,6 +135,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return regionsInClass;
     }
 
+    public Map<JavaRegion, Set<Set<String>>> getRegionsToOptionSet() {
+        return regionsToOptionSet;
+    }
+
     public ClassNode getCurrentClassNode() {
         return currentClassNode;
     }

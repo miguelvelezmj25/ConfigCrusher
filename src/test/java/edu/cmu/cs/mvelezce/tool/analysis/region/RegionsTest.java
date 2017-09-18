@@ -31,8 +31,6 @@ public class RegionsTest {
         Regions.exit("2");
         Thread.sleep(100L);
 
-        System.out.println(Regions.getExecutingRegions());
-
         long overhead = 0;
 
         for(Region region : Regions.getExecutedRegionsTrace()) {

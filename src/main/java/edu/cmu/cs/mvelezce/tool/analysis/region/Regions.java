@@ -20,7 +20,7 @@ public class Regions {
 //};
 
     private static List<Region> executedRegionsTrace = new ArrayList<>(1_000_000);
-    private static Stack<Region> executingRegions = new Stack<>();
+//    private static Stack<Region> executingRegions = new Stack<>();
 
 //    public static void addRegion(Region region) {
 ////        if(region == null) {
@@ -76,9 +76,9 @@ public class Regions {
     public static void enter(String regionID) {
         long start = System.nanoTime();
         Region region = new Region(regionID);
-//        Regions.addRegion(region);
         region.enter();
         long end = System.nanoTime();
+
         region.setOverhead(end - start);
     }
 
@@ -86,32 +86,39 @@ public class Regions {
     // better and do not exit a region that has not been started
     public static void exit(String regionID) {
         long start = System.nanoTime();
-        if(Regions.executingRegions.peek().getRegionID().equals(regionID)) {
-            Region region = new Region(regionID);
-            region.exit();
-            long end = System.nanoTime();
-            region.setOverhead(end - start);
-//            Regions.addRegion(region);
-        }
-//        boolean exit = false;
-//
-//        for(Region region : Regions.executedRegionsTrace) {
-//            if(region.getRegionID().equals(regionID)) {
-//                exit = true;
-//                break;
-//            }
-//        }
-//
-//        if(exit) {
+        Region region = new Region(regionID);
+        region.exit();
+        long end = System.nanoTime();
+
+        region.setOverhead(end - start);
+
+//        long start = System.nanoTime();
+//        if(Regions.executingRegions.peek().getRegionID().equals(regionID)) {
 //            Region region = new Region(regionID);
 //            region.exit();
-//            Regions.addRegion(region);
+//            long end = System.nanoTime();
+//            region.setOverhead(end - start);
+////            Regions.addRegion(region);
 //        }
+////        boolean exit = false;
+////
+////        for(Region region : Regions.executedRegionsTrace) {
+////            if(region.getRegionID().equals(regionID)) {
+////                exit = true;
+////                break;
+////            }
+////        }
+////
+////        if(exit) {
+////            Region region = new Region(regionID);
+////            region.exit();
+////            Regions.addRegion(region);
+////        }
     }
 
     public static void addExecutingRegion(Region region) {
         Regions.executedRegionsTrace.add(region);
-        Regions.executingRegions.push(region);
+//        Regions.executingRegions.push(region);
     }
 
 //    public static Region getExecutingRegion() {
@@ -128,12 +135,12 @@ public class Regions {
 //            return;
 //        }
 
-        Region executing = Regions.executingRegions.pop();
-        // TODO this is for testing that the region that believes to have executed is the one that was executing
-        if(!region.getRegionID().equals(executing.getRegionID())) {
-            throw new RuntimeException("The region that wanted to be removed " + region.getRegionID() + " from the executing regions is not the last region " +
-                    "to be executing " + executing.getRegionID());
-        }
+//        Region executing = Regions.executingRegions.pop();
+//        // TODO this is for testing that the region that believes to have executed is the one that was executing
+//        if(!region.getRegionID().equals(executing.getRegionID())) {
+//            throw new RuntimeException("The region that wanted to be removed " + region.getRegionID() + " from the executing regions is not the last region " +
+//                    "to be executing " + executing.getRegionID());
+//        }
 
         Regions.executedRegionsTrace.add(region);
 //        System.out.println(" ");
@@ -147,7 +154,7 @@ public class Regions {
 //        return Regions.regions;
 //    }
 
-    public static Stack<Region> getExecutingRegions() {
-        return Regions.executingRegions;
-    }
+//    public static Stack<Region> getExecutingRegions() {
+//        return Regions.executingRegions;
+//    }
 }

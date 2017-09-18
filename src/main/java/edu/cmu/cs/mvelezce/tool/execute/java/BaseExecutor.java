@@ -320,6 +320,7 @@ public abstract class BaseExecutor implements Executor {
 
         Execution execution = new Execution(configuration, executedRegions);
         mapper.writeValue(file, execution);
+        execution.checkTrace();
     }
 
     @Override
@@ -328,6 +329,7 @@ public abstract class BaseExecutor implements Executor {
         Execution execution = mapper.readValue(file, new TypeReference<Execution>() {
         });
 
+        execution.checkTrace();
         PerformanceEntry2 performanceEntry = new PerformanceEntry2(execution);
 
         return performanceEntry;

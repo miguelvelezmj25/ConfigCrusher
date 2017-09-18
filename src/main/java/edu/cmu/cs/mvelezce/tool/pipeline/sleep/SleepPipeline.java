@@ -91,9 +91,9 @@ public class SleepPipeline {
             TimedSleepInterpreter interpreter = new TimedSleepInterpreter(timedProgram);
             interpreter.evaluate(configuration);
 
-            if(!Regions.getExecutingRegions().isEmpty()) {
-                throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");
-            }
+//            if(!Regions.getExecutingRegions().isEmpty()) {
+//                throw new RuntimeException("There program finished executing, but there are methods in the execution stack that did not finish");
+//            }
 
 //            configurationsToPerformance.add(new PerformanceEntry(configuration, Regions.getRegions(), Regions.getProgram()));
             // TODO calculate the performancemodel of other configurations and see, in the future if we can reduce the number of configurations we need to execute

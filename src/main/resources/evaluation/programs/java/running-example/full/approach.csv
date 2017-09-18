@@ -1,9 +1,9 @@
 measured,configuration,performance
 TODO,"[]",0.006
-TODO,"[A]",2.0079999999999996
+TODO,"[A]",2.009
 TODO,"[B]",0.006
 TODO,"[C]",0.006
-TODO,"[A, B]",6.01
+TODO,"[A, B]",6.0120000000000005
 TODO,"[A, C]",9.011
 TODO,"[B, C]",0.006
-TODO,"[A, B, C]",13.013
+TODO,"[A, B, C]",13.014

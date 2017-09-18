@@ -6,7 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BasetMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class SleepMain extends BasetMain {
+public class SleepMain extends BaseMain {
 
     public static final String SLEEP_MAIN = SleepMain.class.getCanonicalName();
 

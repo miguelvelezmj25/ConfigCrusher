@@ -5,12 +5,9 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performancemodel.DefaultPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
@@ -20,8 +17,6 @@ import org.junit.Test;
 
 import java.util.Map;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 public class EvaluationTest {
     @Test

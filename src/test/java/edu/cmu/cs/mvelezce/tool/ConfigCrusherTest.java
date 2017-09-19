@@ -20,7 +20,7 @@ public class ConfigCrusherTest {
         args[2] = "-i1";
 
         ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
-        approach.format();
+        approach.compile();
         PerformanceModel performanceModel = approach.run(args);
 
         performanceModel.toString();
@@ -41,7 +41,7 @@ public class ConfigCrusherTest {
         args[2] = "-i1";
 
         ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
-        approach.format();
+        approach.compile();
         PerformanceModel performanceModel = approach.run(args);
 
         performanceModel.toString();

@@ -237,8 +237,8 @@ public class TimerInstrumenterTest {
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
 
-//        this.compile();
-        this.format();
+        this.compile();
+//        this.format();
 
         // Program arguments
 //        String[] args = new String[0];
@@ -263,8 +263,8 @@ public class TimerInstrumenterTest {
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
 
-//        this.compile();
-        this.format();
+        this.compile();
+//        this.format();
 
         // Program arguments
 //        String[] args = new String[0];
@@ -289,8 +289,8 @@ public class TimerInstrumenterTest {
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
 
-//        this.compile();
-        this.format();
+        this.compile();
+//        this.format();
 
         // Program arguments
 //        String[] args = new String[0];
@@ -315,8 +315,8 @@ public class TimerInstrumenterTest {
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
 
-//        this.compile();
-        this.format();
+        this.compile();
+//        this.format();
 
         // Program arguments
 //        String[] args = new String[0];

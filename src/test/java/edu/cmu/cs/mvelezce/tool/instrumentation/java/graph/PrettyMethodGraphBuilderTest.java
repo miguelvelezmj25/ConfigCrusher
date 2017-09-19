@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
-import com.googlecode.pngtastic.Run;
+import counter.com.googlecode.pngtastic.Run;
 import edu.cmu.cs.mvelezce.Example;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;

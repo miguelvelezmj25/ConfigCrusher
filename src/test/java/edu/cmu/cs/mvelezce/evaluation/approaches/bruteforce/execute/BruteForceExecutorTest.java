@@ -114,7 +114,7 @@ public class BruteForceExecutorTest {
     public void colorCounter() throws IOException, InterruptedException {
         String programName = "pngtasticColorCounter";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic-counter/out/production/pngtastic-counter";
-        String entryPoint = "com.googlecode.pngtastic.Run";
+        String entryPoint = "counter.com.googlecode.pngtastic.Run";
 
         // Program arguments
         String[] args = new String[0];

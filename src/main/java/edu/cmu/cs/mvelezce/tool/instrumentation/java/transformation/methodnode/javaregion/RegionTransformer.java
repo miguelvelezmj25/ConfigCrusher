@@ -69,11 +69,19 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
 
+            if(classNode.name.contains("PngProcessor")) {
+                System.out.println();
+            }
+
             // TODO if debug
             TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
             MethodTracer tracer = classInspector.visitClass();
 
             for(MethodNode methodNode : methodsToInstrument) {
+                if(methodNode.name.equals("processHeadChunks")) {
+                    System.out.println();
+                }
+
                 Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
                 PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
                 PrettyMethodGraph prettyGraph = prettyBuilder.build();

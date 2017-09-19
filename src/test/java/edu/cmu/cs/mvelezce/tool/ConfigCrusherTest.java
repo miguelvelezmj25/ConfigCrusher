@@ -31,7 +31,7 @@ public class ConfigCrusherTest {
         String programName = "pngtasticColorCounter";
         String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter";
         String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
-        String entry = "com.googlecode.pngtastic.Run";
+        String entry = "counter.com.googlecode.pngtastic.Run";
 
         String[] args = new String[0];
 

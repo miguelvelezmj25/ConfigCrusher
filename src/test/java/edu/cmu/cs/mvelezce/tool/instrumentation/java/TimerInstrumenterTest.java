@@ -308,4 +308,30 @@ public class TimerInstrumenterTest {
         Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
+
+    @Test
+    public void optimizer() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
+        String programName = "pngtasticOptimizer";
+        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer";
+        TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
+
+//        this.compile();
+        this.format();
+
+        // Program arguments
+//        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
+        instrumenter.instrument(args);
+    }
 }

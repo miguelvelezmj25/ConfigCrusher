@@ -1,6 +1,6 @@
-package edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter;
+package edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer;
 
-import counter.com.googlecode.pngtastic.Run;
+import com.googlecode.pngtastic.Run;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
@@ -13,11 +13,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
 
-public class ColorCounterMain extends BaseMain {
+public class OptimizerMain extends BaseMain {
 
-    public static final String COLORCOUNTER_MAIN = ColorCounterMain.class.getCanonicalName();
+    public static final String OPTIMIZER_MAIN = OptimizerMain.class.getCanonicalName();
 
-    public ColorCounterMain(String programName, String iteration, String[] args) {
+    public OptimizerMain(String programName, String iteration, String[] args) {
         super(programName, iteration, args);
     }
 
@@ -27,14 +27,14 @@ public class ColorCounterMain extends BaseMain {
         String iteration = args[2];
         String[] sleepArgs = Arrays.copyOfRange(args, 3, args.length);
 
-        Main main = new ColorCounterMain(programName, iteration, sleepArgs);
+        Main main = new OptimizerMain(programName, iteration, sleepArgs);
         main.execute(mainClass, sleepArgs);
         main.logExecution();
     }
 
     @Override
     public void logExecution() throws IOException {
-        Adapter adapter = new ColorCounterAdapter();
+        Adapter adapter = new OptimizerAdapter();
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
         Executor executor = new DefaultExecutor(this.getProgramName());
@@ -46,7 +46,6 @@ public class ColorCounterMain extends BaseMain {
         if(mainClass.contains("Run")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
-            System.out.println(mainClass);
             Run.main(args);
             Regions.exit(program.getRegionID());
         }

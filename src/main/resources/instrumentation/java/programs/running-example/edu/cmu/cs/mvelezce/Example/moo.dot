@@ -1,15 +1,13 @@
 digraph moo {
 node [shape=record];
-361398902 [label="L0\lLINENUMBER 47 L0\lLDC \"b2b1071f-6823-497c-b582-44c80db0adda\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
-2044215423 [label="L2\lLINENUMBER 48 L2\lLDC 7000\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
-1010670443 [label="L1\lLINENUMBER 50 L1\lFRAME SAME\lLDC \"b2b1071f-6823-497c-b582-44c80db0adda\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+641853239 [label="L0\lLINENUMBER 47 L0\lILOAD 0\lIFEQ L1\l"];
+1920467934 [label="L1\lLINENUMBER 50 L1\lFRAME SAME\lRETURN\l"];
+1883840933 [label="L2\lLINENUMBER 48 L2\lLDC 7000\lINVOKESTATIC java/lang/Thread.sleep (J)V\l"];
 entry;
 exit;
-361398902 -> 2044215423;
-361398902 -> 1010670443;
-entry -> 361398902;
-2044215423 -> 1010670443;
-1010670443 -> exit;
-361398902[fontcolor="purple", penwidth=3, color="purple"];
-1010670443[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 641853239;
+641853239 -> 1920467934;
+641853239 -> 1883840933;
+1920467934 -> exit;
+1883840933 -> 1920467934;
 }

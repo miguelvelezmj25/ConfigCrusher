@@ -1,0 +1,39 @@
+digraph addChunk {
+node [shape=record];
+2133668271 [label="L1\lFRAME APPEND [java/lang/String I]\lALOAD 2\lLDC \"IHDR\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
+879706537 [label="L6\lLINENUMBER 190 L6\lFRAME SAME\lLDC \"f206eef9-2ac2-4b7c-8bc9-8fc5b0115178\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngImage.chunks : Ljava/util/List;\lALOAD 1\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL12\lLINENUMBER 191 L12\lRETURN\l"];
+277149580 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getWidth ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.width : J\lL7\lLINENUMBER 179 L7\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getHeight ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.height : J\lL8\lLINENUMBER 180 L8\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getBitDepth ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.bitDepth : S\lL9\lLINENUMBER 181 L9\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getColorType ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.colorType : S\lL10\lLINENUMBER 182 L10\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getInterlace ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.interlace : S\lL11\lLINENUMBER 183 L11\lGOTO L6\l"];
+636953520 [label="L5\lLINENUMBER 186 L5\lFRAME SAME\lALOAD 0\lALOAD 1\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.palette : Loptimizer/com/googlecode/pngtastic/core/PngChunk;\l"];
+779179975 [label="L2\lFRAME SAME\lALOAD 2\lLDC \"PLTE\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
+1955566523 [label="L3\lFRAME SAME\lLDC \"89746a92-10a9-4a23-8a9c-1d17a1609d85\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"f206eef9-2ac2-4b7c-8bc9-8fc5b0115178\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 3\lLOOKUPSWITCH
+      0: L4
+      1: L5
+      default: L6\l"];
+584694804 [label="ICONST_1\lISTORE 3\l"];
+408132785 [label="L0\lLINENUMBER 176 L0\lLDC \"89746a92-10a9-4a23-8a9c-1d17a1609d85\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getTypeString ()Ljava/lang/String;\lASTORE 2\lICONST_M1\lISTORE 3\lALOAD 2\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lLOOKUPSWITCH
+      2246125: L1
+      2458989: L2
+      default: L3\l"];
+709091500 [label="ICONST_0\lISTORE 3\lGOTO L3\l"];
+entry;
+exit;
+2133668271 -> 1955566523;
+2133668271 -> 709091500;
+entry -> 408132785;
+879706537 -> exit;
+277149580 -> 879706537;
+636953520 -> 879706537;
+779179975 -> 1955566523;
+779179975 -> 584694804;
+1955566523 -> 879706537;
+1955566523 -> 277149580;
+1955566523 -> 636953520;
+584694804 -> 1955566523;
+408132785 -> 2133668271;
+408132785 -> 779179975;
+408132785 -> 1955566523;
+709091500 -> 1955566523;
+879706537[fontcolor="purple", penwidth=3, color="purple"];
+1955566523[fontcolor="purple", penwidth=3, color="purple"];
+408132785[fontcolor="purple", penwidth=3, color="purple"];
+}

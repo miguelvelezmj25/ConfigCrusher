@@ -64,8 +64,16 @@ public class TimerTransformer extends RegionTransformer {
                 MethodBlock start = TimerTransformer.getBlockToStartInstrumentingBeforeIt(graph, block);
                 start = graph.getMethodBlock(start.getID());
 
+                if(start == null) {
+                    throw new RuntimeException();
+                }
+
                 MethodBlock end = TimerTransformer.getBlockToEndInstrumentingBeforeIt(graph, block);
                 end = graph.getMethodBlock(end.getID());
+
+                if(end == null) {
+                    throw new RuntimeException();
+                }
 
                 Set<MethodBlock> endMethodBlocks = new HashSet<>();
 
@@ -328,17 +336,27 @@ public class TimerTransformer extends RegionTransformer {
     private void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
         List<String> javapResult = this.getJavapResult();
         int methodStartIndex = 0;
-        String methodName = methodNode.name;
+        String methodNameInJavap = methodNode.name;
 
-        if(methodName.startsWith("<init>")) {
+        if(methodNameInJavap.startsWith("<init>")) {
             // TODO check this
-            methodName = this.getCurrentClassNode().name;
-            methodName = methodName.replace("/", ".");
+            methodNameInJavap = this.getCurrentClassNode().name;
+            methodNameInJavap = methodNameInJavap.replace("/", ".");
+        }
+
+        if(methodNameInJavap.startsWith("<clinit>")) {
+            methodNameInJavap = "  static {};";
+        }
+        else {
+            methodNameInJavap += "(";
         }
 
         // Check if signature matches
         for(String outputLine : javapResult) {
-            if(outputLine.contains(" " + methodName + "(")) {
+            if(outputLine.equals(methodNameInJavap)) {
+                break;
+            }
+            else if(outputLine.contains(" " + methodNameInJavap)) {
                 String formalParametersString = outputLine.substring(outputLine.indexOf("(") + 1, outputLine.indexOf(")"));
                 List<String> formalParameters = Arrays.asList(formalParametersString.split(","));
                 StringBuilder methodDescriptors = new StringBuilder();
@@ -405,6 +423,12 @@ public class TimerTransformer extends RegionTransformer {
                 if(updatedRegions.size() == regionsInMethod.size()) {
                     break;
                 }
+            }
+
+            String outputCommand = outputLine.substring(outputLine.indexOf(":") + 1).trim();
+
+            if(StringUtils.isNumeric(outputCommand)) {
+                continue;
             }
 
             int outputLineBytecodeIndex = -1;
@@ -518,10 +542,31 @@ public class TimerTransformer extends RegionTransformer {
 
     private void removeInnerRegions(List<JavaRegion> regionsInMethod, MethodGraph graph) {
         Map<JavaRegion, Set<JavaRegion>> innerRegionsToRemoveToOuterRegions = new LinkedHashMap<>();
+        graph.calculateDominators();
 
         for(JavaRegion region : regionsInMethod) {
             for(JavaRegion possibleInnerRegion : regionsInMethod) {
                 if(region == possibleInnerRegion) {
+                    continue;
+                }
+
+                MethodBlock regionStartBlock = region.getStartMethodBlock();
+                MethodBlock possibleRegionStartBlock = possibleInnerRegion.getStartMethodBlock();
+
+                if(regionStartBlock == null) {
+                    throw new RuntimeException();
+                }
+                if(possibleRegionStartBlock == null) {
+                    throw new RuntimeException();
+                }
+                if(graph.getDominators() == null) {
+                    throw new RuntimeException();
+                }
+                if(graph.getDominators().get(regionStartBlock) == null) {
+                    throw new RuntimeException();
+                }
+
+                if(graph.getDominators().get(regionStartBlock).contains(possibleRegionStartBlock)) {
                     continue;
                 }
 

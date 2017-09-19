@@ -1,0 +1,15 @@
+digraph error {
+node [shape=record];
+445509811 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"43f335c9-16f5-4503-a5f8-fa274f47e966\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1091233196 [label="L0\lLINENUMBER 52 L0\lLDC \"43f335c9-16f5-4503-a5f8-fa274f47e966\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+2081501023 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+entry;
+exit;
+entry -> 1091233196;
+445509811 -> exit;
+1091233196 -> 445509811;
+1091233196 -> 2081501023;
+2081501023 -> 445509811;
+445509811[fontcolor="purple", penwidth=3, color="purple"];
+1091233196[fontcolor="purple", penwidth=3, color="purple"];
+}

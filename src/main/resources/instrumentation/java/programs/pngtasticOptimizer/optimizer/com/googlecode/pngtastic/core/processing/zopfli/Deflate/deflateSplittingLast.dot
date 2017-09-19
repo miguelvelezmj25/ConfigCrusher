@@ -1,0 +1,27 @@
+digraph deflateSplittingLast {
+node [shape=record];
+600657906 [label="L6\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie optimizer/com/googlecode/pngtastic/core/processing/zopfli/Options I [B I I optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache optimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore I [I I] []\lILOAD 11\lILOAD 9\lIF_ICMPGT L7\l"];
+680865258 [label="L7\lLINENUMBER 286 L7\lFRAME CHOP 2\lLDC \"313e2213-0639-4d49-b331-f19b27fc04ad\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+339581587 [label="L11\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie optimizer/com/googlecode/pngtastic/core/processing/zopfli/Options I [B I I optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache optimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore I [I I I I] [optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie optimizer/com/googlecode/pngtastic/core/processing/zopfli/Deflate$BlockType]\lICONST_0\l"];
+1075996552 [label="ILOAD 2\lIFEQ L11\l"];
+1532800776 [label="L12\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie optimizer/com/googlecode/pngtastic/core/processing/zopfli/Options I [B I I optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache optimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore I [I I I I] [optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie optimizer/com/googlecode/pngtastic/core/processing/zopfli/Deflate$BlockType I]\lALOAD 8\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore.litLens : [C\lALOAD 8\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore.dists : [C\lILOAD 12\lILOAD 13\lALOAD 6\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Deflate.addLzBlock (Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Deflate$BlockType;Z[C[CIILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V\lL13\lLINENUMBER 281 L13\lIINC 11 1\lGOTO L6\l"];
+602858680 [label="L0\lLINENUMBER 273 L0\lLDC \"313e2213-0639-4d49-b331-f19b27fc04ad\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.lmc : Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache;\lASTORE 7\lL1\lLINENUMBER 274 L1\lALOAD 7\lILOAD 5\lILOAD 4\lISUB\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.init (I)V\lL2\lLINENUMBER 276 L2\lALOAD 0\lALOAD 1\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Options.numIterations : I\lALOAD 7\lALOAD 3\lILOAD 4\lILOAD 5\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Squeeze.optimal (Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;ILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache;[BII)Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore;\lASTORE 8\lL3\lLINENUMBER 278 L3\lALOAD 0\lALOAD 8\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore.litLens : [C\lALOAD 8\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore.dists : [C\lALOAD 8\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore.size : I\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/BlockSplitter.splitLz (Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[C[CI)I\lISTORE 9\lL4\lLINENUMBER 280 L4\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.splitPoints : [I\lASTORE 10\lL5\lLINENUMBER 281 L5\lICONST_1\lISTORE 11\l"];
+1519911160 [label="L8\lLINENUMBER 282 L8\lALOAD 10\lILOAD 11\lICONST_1\lISUB\lIALOAD\lISTORE 12\lL9\lLINENUMBER 283 L9\lALOAD 10\lILOAD 11\lIALOAD\lISTORE 13\lL10\lLINENUMBER 284 L10\lALOAD 0\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Deflate$BlockType.DYNAMIC : Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Deflate$BlockType;\lILOAD 11\lILOAD 9\lIF_ICMPNE L11\l"];
+1096411163 [label="ICONST_1\lGOTO L12\l"];
+entry;
+exit;
+600657906 -> 680865258;
+600657906 -> 1519911160;
+entry -> 602858680;
+680865258 -> exit;
+339581587 -> 1532800776;
+1075996552 -> 339581587;
+1075996552 -> 1096411163;
+1532800776 -> 600657906;
+602858680 -> 600657906;
+1519911160 -> 339581587;
+1519911160 -> 1075996552;
+1096411163 -> 1532800776;
+680865258[fontcolor="purple", penwidth=3, color="purple"];
+602858680[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,26 @@
+digraph alloy {
+node [shape=record];
+1139605173 [label="L3\lLINENUMBER 124 L3\lFRAME SAME\lLDC \"cff715e2-592c-4ddb-b1fe-94c5df164020\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.litLens : [I\lSIPUSH 256\lICONST_1\lIASTORE\lL6\lLINENUMBER 126 L6\lALOAD 1\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.dists : [I\lASTORE 3\lL7\lLINENUMBER 127 L7\lICONST_0\lISTORE 4\l"];
+1374664497 [label="L4\lLINENUMBER 122 L4\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.litLens : [I\lILOAD 3\lDUP2\lIALOAD\lALOAD 2\lILOAD 3\lIALOAD\lICONST_2\lIDIV\lIADD\lIASTORE\lL5\lLINENUMBER 121 L5\lIINC 3 1\lGOTO L2\l"];
+1172754912 [label="L9\lLINENUMBER 130 L9\lFRAME SAME\lLDC \"23a6eb2c-2ef5-4d95-88d3-b9d374217d92\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1953251612 [label="L0\lLINENUMBER 120 L0\lALOAD 1\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.litLens : [I\lASTORE 2\lL1\lLINENUMBER 121 L1\lICONST_0\lISTORE 3\l"];
+1641776831 [label="L10\lLINENUMBER 128 L10\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.dists : [I\lILOAD 4\lDUP2\lIALOAD\lALOAD 3\lILOAD 4\lIALOAD\lICONST_2\lIDIV\lIADD\lIASTORE\lL11\lLINENUMBER 127 L11\lIINC 4 1\lGOTO L8\l"];
+1302459274 [label="L8\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats [I [I I] []\lLDC \"23a6eb2c-2ef5-4d95-88d3-b9d374217d92\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 4\lBIPUSH 32\lIF_ICMPGE L9\l"];
+1402211887 [label="L2\lFRAME APPEND [[I I]\lLDC \"cff715e2-592c-4ddb-b1fe-94c5df164020\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 3\lSIPUSH 288\lIF_ICMPGE L3\l"];
+entry;
+exit;
+entry -> 1953251612;
+1139605173 -> 1302459274;
+1374664497 -> 1402211887;
+1172754912 -> exit;
+1953251612 -> 1402211887;
+1641776831 -> 1302459274;
+1302459274 -> 1172754912;
+1302459274 -> 1641776831;
+1402211887 -> 1139605173;
+1402211887 -> 1374664497;
+1139605173[fontcolor="purple", penwidth=3, color="purple"];
+1172754912[fontcolor="purple", penwidth=3, color="purple"];
+1302459274[fontcolor="purple", penwidth=3, color="purple"];
+1402211887[fontcolor="purple", penwidth=3, color="purple"];
+}

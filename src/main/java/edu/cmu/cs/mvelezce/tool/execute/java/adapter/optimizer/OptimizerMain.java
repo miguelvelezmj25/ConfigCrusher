@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer;
 
-import com.googlecode.pngtastic.Run;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
@@ -8,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
+import optimizer.com.googlecode.pngtastic.Run;
 
 import java.io.IOException;
 import java.util.Arrays;

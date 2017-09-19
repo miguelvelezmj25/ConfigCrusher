@@ -1,0 +1,20 @@
+digraph setCompressor {
+node [shape=record];
+137685382 [label="L0\lLINENUMBER 263 L0\lLDC \"72bd1a2b-2646-48f4-a581-bc9ec6a139dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"zopfli\"\lALOAD 1\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+1615668218 [label="L2\lLINENUMBER 264 L2\lALOAD 2\lIFNULL L3\l"];
+482885994 [label="L3\lLINENUMBER 268 L3\lFRAME SAME\lALOAD 0\lNEW optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler\lDUP\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.log : Loptimizer/com/googlecode/pngtastic/core/Logger;\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler.\<init\> (Loptimizer/com/googlecode/pngtastic/core/Logger;)V\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.pngCompressionHandler : Loptimizer/com/googlecode/pngtastic/core/processing/PngCompressionHandler;\l"];
+1823354445 [label="L1\lLINENUMBER 271 L1\lFRAME SAME\lLDC \"72bd1a2b-2646-48f4-a581-bc9ec6a139dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+857732012 [label="L4\lLINENUMBER 265 L4\lALOAD 0\lNEW optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler\lDUP\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.log : Loptimizer/com/googlecode/pngtastic/core/Logger;\lALOAD 2\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler.\<init\> (Loptimizer/com/googlecode/pngtastic/core/Logger;I)V\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.pngCompressionHandler : Loptimizer/com/googlecode/pngtastic/core/processing/PngCompressionHandler;\lGOTO L1\l"];
+entry;
+exit;
+137685382 -> 1615668218;
+137685382 -> 1823354445;
+1615668218 -> 482885994;
+1615668218 -> 857732012;
+482885994 -> 1823354445;
+entry -> 137685382;
+1823354445 -> exit;
+857732012 -> 1823354445;
+137685382[fontcolor="purple", penwidth=3, color="purple"];
+1823354445[fontcolor="purple", penwidth=3, color="purple"];
+}

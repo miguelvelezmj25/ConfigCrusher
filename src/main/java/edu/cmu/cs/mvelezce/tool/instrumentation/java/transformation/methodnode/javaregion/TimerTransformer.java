@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
@@ -17,6 +16,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class TimerTransformer extends RegionTransformer {
 
@@ -117,7 +117,7 @@ public class TimerTransformer extends RegionTransformer {
         this.calculateASMStartIndex(regionsInMethod, methodNode);
 
         InsnList newInstructions;
-        int startInstructionSize = methodNode.instructions.size();
+        int startInstructionCount = methodNode.instructions.size();
 
         if(regionsInMethod.size() == 1) {
             newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
@@ -131,29 +131,63 @@ public class TimerTransformer extends RegionTransformer {
 
             this.getStartAndEndBlocks(graph, instructionsToRegion);
             this.removeInnerRegions(regionsInMethod, graph);
+            this.checkSameOptionsInRegions(regionsInMethod);
 
             if(regionsInMethod.size() == 1) {
                 newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
             }
             else {
-                newInstructions = this.instrumentNormal(methodNode, regionsInMethod);
+                newInstructions = this.instrumentNormal(methodNode, graph, regionsInMethod);
             }
-
         }
 
-        int end = methodNode.instructions.size();
+        int endInstructionCount = methodNode.instructions.size();
 
-        if(end != startInstructionSize) {
+        if(endInstructionCount != startInstructionCount) {
             throw new RuntimeException("We modified the instructions in the node itself instead of creating a new list");
         }
 
         methodNode.instructions.clear();
         methodNode.instructions.add(newInstructions);
 
+        int afterInstrumentationInstructionCount = methodNode.instructions.size();
+
+        if(afterInstrumentationInstructionCount <= endInstructionCount) {
+            throw new RuntimeException("We apparently did not add instrumentation");
+        }
+
         System.out.println("After transforming");
         builder = new MethodGraphBuilder(methodNode);
         builder.build();
         System.out.print("");
+    }
+
+    private void checkSameOptionsInRegions(List<JavaRegion> regionsInMethod) {
+        Iterator<JavaRegion> regionsIterator = regionsInMethod.iterator();
+        JavaRegion region = regionsIterator.next();
+        Map<JavaRegion, Set<Set<String>>> regionsToOptions = this.getRegionsToOptionSet();
+        Set<Set<String>> regionOptions = regionsToOptions.get(region);
+        boolean oneRegion = true;
+
+        while (regionsIterator.hasNext()) {
+            region = regionsIterator.next();
+
+            if(!regionsToOptions.get(region).equals(regionOptions)) {
+                oneRegion = false;
+            }
+        }
+
+        if(!oneRegion) {
+            return;
+        }
+
+        JavaRegion first = regionsInMethod.iterator().next();
+        Predicate<JavaRegion> regionPredicate = r -> r != first;
+        regionsInMethod.removeIf(regionPredicate);
+
+        if(regionsInMethod.size() != 1) {
+            throw new RuntimeException("This is a method that has a single region, but did not end up with 1 region");
+        }
     }
 
     // TODO why dont we return a new list
@@ -477,18 +511,9 @@ public class TimerTransformer extends RegionTransformer {
      * @param methodNode
      * @param regionsInMethod
      */
-    private InsnList instrumentNormal(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
-        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
-        MethodGraph graph = builder.build();
-
-        // TODO this is already calculated in the caller
-        Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
-
-        for(JavaRegion region : regionsInMethod) {
-            instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
-        }
-
-        this.getStartAndEndBlocks(graph, instructionsToRegion);
+    private InsnList instrumentNormal(MethodNode methodNode, MethodGraph graph, List<JavaRegion> regionsInMethod) {
+//        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+//        MethodGraph graph = builder.build();
 
         List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
         Collections.reverse(regionsInMethodReversed);
@@ -541,9 +566,11 @@ public class TimerTransformer extends RegionTransformer {
     }
 
     private void removeInnerRegions(List<JavaRegion> regionsInMethod, MethodGraph graph) {
-        Map<JavaRegion, Set<JavaRegion>> innerRegionsToRemoveToOuterRegions = new LinkedHashMap<>();
-        graph.calculateDominators();
+        Map<JavaRegion, Set<JavaRegion>> regionsToOuterRegionSet = new LinkedHashMap<>();
+        Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegionSet = new LinkedHashMap<>();
+        graph.getDominators();
 
+        // Calculate possible inner regions
         for(JavaRegion region : regionsInMethod) {
             for(JavaRegion possibleInnerRegion : regionsInMethod) {
                 if(region == possibleInnerRegion) {
@@ -552,19 +579,6 @@ public class TimerTransformer extends RegionTransformer {
 
                 MethodBlock regionStartBlock = region.getStartMethodBlock();
                 MethodBlock possibleRegionStartBlock = possibleInnerRegion.getStartMethodBlock();
-
-                if(regionStartBlock == null) {
-                    throw new RuntimeException();
-                }
-                if(possibleRegionStartBlock == null) {
-                    throw new RuntimeException();
-                }
-                if(graph.getDominators() == null) {
-                    throw new RuntimeException();
-                }
-                if(graph.getDominators().get(regionStartBlock) == null) {
-                    throw new RuntimeException();
-                }
 
                 if(graph.getDominators().get(regionStartBlock).contains(possibleRegionStartBlock)) {
                     continue;
@@ -581,129 +595,196 @@ public class TimerTransformer extends RegionTransformer {
                 if(regionReachableBlocks.contains(possibleInnerRegion.getStartMethodBlock())
                         && regionReachableBlocks.containsAll(possibleInnerRegionEndBlocks)) {
 
-                    if(!innerRegionsToRemoveToOuterRegions.containsKey(possibleInnerRegion)) {
-                        innerRegionsToRemoveToOuterRegions.put(possibleInnerRegion, new HashSet<>());
+                    if(!regionsToOuterRegionSet.containsKey(possibleInnerRegion)) {
+                        regionsToOuterRegionSet.put(possibleInnerRegion, new HashSet<>());
                     }
 
-                    innerRegionsToRemoveToOuterRegions.get(possibleInnerRegion).add(region);
+                    regionsToOuterRegionSet.get(possibleInnerRegion).add(region);
+
+                    if(!regionsToInnerRegionSet.containsKey(region)) {
+                        regionsToInnerRegionSet.put(region, new HashSet<>());
+                    }
+
+                    regionsToInnerRegionSet.get(region).add(possibleInnerRegion);
                 }
             }
         }
 
-        regionsInMethod.removeAll(innerRegionsToRemoveToOuterRegions.keySet());
+        Map<JavaRegion, Set<Set<String>>> regionsToOptions = this.getRegionsToOptionSet();
+
+        // Check if remove
+        for(Map.Entry<JavaRegion, Set<JavaRegion>> entry : regionsToInnerRegionSet.entrySet()) {
+            Set<Set<String>> regionOptionSet = regionsToOptions.get(entry.getKey());
+            Set<String> currentOptions = new HashSet<>();
+
+            for(Set<String> options : regionOptionSet) {
+                currentOptions.addAll(options);
+            }
+
+            Set<JavaRegion> innerRegions = entry.getValue();
+
+            for(JavaRegion innerRegion : innerRegions) {
+                Set<Set<String>> innerRegionOptionSet = regionsToOptions.get(innerRegion);
+                Set<String> innerRegionOptions = new HashSet<>();
+
+                for(Set<String> options : innerRegionOptionSet) {
+                    innerRegionOptions.addAll(options);
+                }
+
+                if(currentOptions.equals(innerRegionOptions) || currentOptions.containsAll(innerRegionOptions)
+                        || innerRegionOptions.containsAll(currentOptions)) {
+                    currentOptions = new HashSet<>(innerRegionOptions);
+                }
+                else {
+                    throw new RuntimeException("This is a case that we have not anticipated");
+                }
+            }
+        }
+
+        regionsInMethod.removeAll(regionsToOuterRegionSet.keySet());
 
         if(regionsInMethod.isEmpty()) {
             throw new RuntimeException("The regions in a method cannot be empty after removing inner regions");
         }
 
-        this.updateRegionsToOptions(innerRegionsToRemoveToOuterRegions);
+        this.updateRegionsToOptions(regionsToInnerRegionSet);
+
+        for(JavaRegion regionToRemove : regionsToOuterRegionSet.keySet()) {
+            regionsToOptions.remove(regionToRemove);
+        }
+
+        if(regionsToOptions.isEmpty()) {
+            throw new RuntimeException("The regions in a method cannot be empty after removing inner regions");
+        }
     }
 
-    private void updateRegionsToOptions(Map<JavaRegion, Set<JavaRegion>> innerRegionsToRemoveToOuterRegions) {
-        Set<JavaRegion> regionsToRemove = new HashSet<>(innerRegionsToRemoveToOuterRegions.keySet());
+//    private Set<String> optionsInMethod() {
+//
+//    }
 
-        // Remove redundant inner regions. We want to analyze the maximum chain of inner regions
-        Set<JavaRegion> redundantInnerRegions = new HashSet<>();
-
-        for(Map.Entry<JavaRegion, Set<JavaRegion>> innerRegionToOuterRegions : innerRegionsToRemoveToOuterRegions.entrySet()) {
-            JavaRegion innerRegion = innerRegionToOuterRegions.getKey();
-            Set<JavaRegion> outerRegions = innerRegionToOuterRegions.getValue();
-
-            for(Map.Entry<JavaRegion, Set<JavaRegion>> possibleRedundantInnerRegionToOuterRegions : innerRegionsToRemoveToOuterRegions.entrySet()) {
-                JavaRegion possibleRedundantInnerRegion = possibleRedundantInnerRegionToOuterRegions.getKey();
-                Set<JavaRegion> possibleRedundantOuterRegions = possibleRedundantInnerRegionToOuterRegions.getValue();
-
-                if(innerRegion == possibleRedundantInnerRegion) {
-                    continue;
-                }
-
-                HashSet<Object> possibleRegions = new HashSet<>();
-                possibleRegions.add(possibleRedundantInnerRegion);
-                possibleRegions.addAll(possibleRedundantOuterRegions);
-
-                if(possibleRegions.equals(outerRegions)) {
-                    redundantInnerRegions.add(possibleRedundantInnerRegion);
-                }
-            }
-
-        }
-
-        for(JavaRegion redundantInnerRegion : redundantInnerRegions) {
-            innerRegionsToRemoveToOuterRegions.remove(redundantInnerRegion);
-        }
-
-        Map<JavaRegion, Set<Set<String>>> regionsToOptionSet = this.getRegionsToOptionSet();
-
-        // Check that the outer regions have all inner regions' options
-        for(Map.Entry<JavaRegion, Set<JavaRegion>> innerRegionToOuterRegions : innerRegionsToRemoveToOuterRegions.entrySet()) {
-            JavaRegion innerRegion = innerRegionToOuterRegions.getKey();
-            Set<Set<String>> innerOptionSet = regionsToOptionSet.get(innerRegion);
-
-            Set<String> innerOptions = new HashSet<>();
-
-            for(Set<String> io : innerOptionSet) {
-                innerOptions.addAll(io);
-            }
-
-            for(JavaRegion outerRegion : innerRegionToOuterRegions.getValue()) {
-                Set<Set<String>> outerOptionSet = regionsToOptionSet.get(outerRegion);
-
-                Set<String> outerOptions = new HashSet<>();
-
-                for(Set<String> io : outerOptionSet) {
-                    outerOptions.addAll(io);
-                }
-
-                if(!innerOptions.containsAll(outerOptions)) {
-                    throw new RuntimeException("The inner region (" + innerRegion.getRegionID() + ") does not depend by" +
-                            " all options of the outer region (" + outerRegion.getRegionID() + ")");
-                }
-            }
-        }
-
-        // Update the outer region options
-        for(Map.Entry<JavaRegion, Set<JavaRegion>> innerRegionToOuterRegions : innerRegionsToRemoveToOuterRegions.entrySet()) {
-            Set<String> newOptions = new HashSet<>();
-
-            Set<Set<String>> innerRegionOptionSet = regionsToOptionSet.get(innerRegionToOuterRegions.getKey());
-
-            for(Set<String> innerRegionOptions : innerRegionOptionSet) {
-                newOptions.addAll(innerRegionOptions);
-            }
-//            for(Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionSet : regionsToOptionSet.entrySet()) {
-//                if(!innerRegionToOuterRegions.getValue().contains(regionToOptionSet.getKey())) {
+//    private void pruneRedundantInnerRegions() {
+//        // Remove redundant inner regions. We want to analyze the maximum chain of inner regions
+//        Set<JavaRegion> redundantInnerRegions = new HashSet<>();
+//
+//        for(Map.Entry<JavaRegion, Set<JavaRegion>> innerRegionToOuterRegions : innerRegionsToRemoveToOuterRegions.entrySet()) {
+//            JavaRegion innerRegion = innerRegionToOuterRegions.getKey();
+//            Set<JavaRegion> outerRegions = innerRegionToOuterRegions.getValue();
+//
+//            for(Map.Entry<JavaRegion, Set<JavaRegion>> possibleRedundantInnerRegionToOuterRegions : innerRegionsToRemoveToOuterRegions.entrySet()) {
+//                JavaRegion possibleRedundantInnerRegion = possibleRedundantInnerRegionToOuterRegions.getKey();
+//                Set<JavaRegion> possibleRedundantOuterRegions = possibleRedundantInnerRegionToOuterRegions.getValue();
+//
+//                if(innerRegion == possibleRedundantInnerRegion) {
 //                    continue;
 //                }
 //
-//                Set<Set<String>> outerOptionSet = regionToOptionSet.getValue();
+//                HashSet<Object> possibleRegions = new HashSet<>();
+//                possibleRegions.add(possibleRedundantInnerRegion);
+//                possibleRegions.addAll(possibleRedundantOuterRegions);
 //
-//                for(Set<String> oo : outerOptionSet) {
-//                    newOptions.addAll(oo);
+//                if(possibleRegions.equals(outerRegions)) {
+//                    redundantInnerRegions.add(possibleRedundantInnerRegion);
 //                }
 //            }
+//
+//        }
+//
+//        for(JavaRegion redundantInnerRegion : redundantInnerRegions) {
+//            innerRegionsToRemoveToOuterRegions.remove(redundantInnerRegion);
+//        }
+//    }
+//
+//    private void removeMultiLebelInnerRegions(Map<JavaRegion, Set<JavaRegion>> outerRegionsToInnerRegionSet) {
+//        for(Map.Entry<JavaRegion, Set<JavaRegion>> entry : outerRegionsToInnerRegionSet.entrySet()) {
+//            for(Map.Entry<JavaRegion, Set<JavaRegion>> innerEntry : outerRegionsToInnerRegionSet.entrySet()) {
+//                if(entry.getKey() == innerEntry.getKey()) {
+//                    continue;
+//                }
+//
+//                if(entry.getValue().contains(innerEntry.getKey())) {
+//                    entry.getValue().removeAll(innerEntry.getValue());
+//                }
+//            }
+//        }
+//    }
+//
+//    private void pruneRegionsWithDifferentInnerRegionOptions(Map<JavaRegion, Set<JavaRegion>> outerRegionsToInnerRegionSet) {
+//        Map<JavaRegion, Set<Set<String>>> regionsToOptions = this.getRegionsToOptionSet();
+//        Set<JavaRegion> regionsToPrune = new HashSet<>();
+//
+//        for(Map.Entry<JavaRegion, Set<JavaRegion>> entry : outerRegionsToInnerRegionSet.entrySet()) {
+////            JavaRegion outerRegion = entry.getKey();
+////            Set<Set<String>> outerOptionSet = regionsToOptions.get(outerRegion);
+////
+////            Set<String> outerOptions = new HashSet<>();
+////
+////            for(Set<String> optionSet : outerOptionSet) {
+////                outerOptions.addAll(optionSet);
+////            }
+//
+//
+//        }
+//
+//    }
+//
+    private void updateRegionsToOptions(Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegions) {
+        Map<JavaRegion, Set<Set<String>>> regionsToOptionSet = this.getRegionsToOptionSet();
 
-            for(Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionSet : regionsToOptionSet.entrySet()) {
-                JavaRegion possibleOuterRegion = regionToOptionSet.getKey();
+        for(Map.Entry<JavaRegion, Set<JavaRegion>> entry : regionsToInnerRegions.entrySet()) {
+            Set<String> newOptions = new HashSet<>();
 
-                if(regionsToRemove.contains(possibleOuterRegion)) {
-                    continue;
+            for(JavaRegion innerRegion : entry.getValue()) {
+                Set<Set<String>> innerOptionSet = regionsToOptionSet.get(innerRegion);
+                Set<String> innerOptions = new HashSet<>();
+
+                for(Set<String> options : innerOptionSet) {
+                    innerOptions.addAll(options);
                 }
 
-                if(!innerRegionToOuterRegions.getValue().contains(possibleOuterRegion)) {
-                    continue;
-                }
-
-                for(Set<String> options : regionToOptionSet.getValue()) {
-                    options.addAll(newOptions);
-                }
+                newOptions.addAll(innerOptions);
             }
 
+            Set<Set<String>> regionOptionSet = regionsToOptionSet.get(entry.getKey());
+            Set<String> regionOptions = new HashSet<>();
+
+            for(Set<String> options : regionOptionSet) {
+                regionOptions.addAll(options);
+            }
+
+            newOptions.addAll(regionOptions);
+
+            Set<Set<String>> oldOptionSet = regionsToOptionSet.get(entry.getKey());
+            oldOptionSet.clear();
+            oldOptionSet.add(newOptions);
         }
 
-        // Delete the regions from the variable that was passed to this component
-        for(JavaRegion regionToRemove : regionsToRemove) {
-            regionsToOptionSet.remove(regionToRemove);
-        }
+//
+//        // Check that the outer regions have all inner regions' options
+//        for(Map.Entry<JavaRegion, Set<JavaRegion>> innerRegionToOuterRegions : innerRegionsToRemoveToOuterRegions.entrySet()) {
+//            JavaRegion innerRegion = innerRegionToOuterRegions.getKey();
+//            Set<Set<String>> innerOptionSet = regionsToOptionSet.get(innerRegion);
+//
+//            Set<String> innerOptions = new HashSet<>();
+//
+//            for(Set<String> io : innerOptionSet) {
+//                innerOptions.addAll(io);
+//            }
+//
+//            for(JavaRegion outerRegion : innerRegionToOuterRegions.getValue()) {
+//                Set<Set<String>> outerOptionSet = regionsToOptionSet.get(outerRegion);
+//
+//                Set<String> outerOptions = new HashSet<>();
+//
+//                for(Set<String> io : outerOptionSet) {
+//                    outerOptions.addAll(io);
+//                }
+//
+//                if(!innerOptions.containsAll(outerOptions)) {
+//                    throw new RuntimeException("The inner region (" + innerRegion.getRegionID() + ") does not depend by" +
+//                            " all options of the outer region (" + outerRegion.getRegionID() + ")");
+//                }
+//            }
+//        }
     }
 
     /**

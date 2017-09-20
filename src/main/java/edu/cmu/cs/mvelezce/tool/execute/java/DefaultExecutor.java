@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
@@ -52,6 +53,9 @@ public class DefaultExecutor extends BaseExecutor {
 //        }
         else if(this.getProgramName().contains("pngtasticColorCounter")) {
             adapter = new ColorCounterAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("pngtasticOptimizer")) {
+            adapter = new OptimizerAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else if(this.getProgramName().contains("running-example")) {
             adapter = new RunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());

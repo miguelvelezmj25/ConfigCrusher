@@ -1,8 +1,8 @@
 digraph debug {
 node [shape=record];
-1556730832 [label="L0\lLINENUMBER 32 L0\lLDC \"301783ba-f6bb-4e34-a75d-320d1ecdcfbc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+1556730832 [label="L0\lLINENUMBER 32 L0\lLDC \"0b2615a1-a29a-4d95-bd81-d42340dff86d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
 107075722 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-130211746 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"301783ba-f6bb-4e34-a75d-320d1ecdcfbc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+130211746 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"0b2615a1-a29a-4d95-bd81-d42340dff86d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
 1556730832 -> 107075722;

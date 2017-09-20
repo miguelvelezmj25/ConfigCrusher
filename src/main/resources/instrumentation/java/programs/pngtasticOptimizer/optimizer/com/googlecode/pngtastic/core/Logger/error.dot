@@ -1,7 +1,7 @@
 digraph error {
 node [shape=record];
-437098149 [label="L0\lLINENUMBER 52 L0\lLDC \"5eb0fe48-2389-4e50-a0e6-95402f670157\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
-1510129635 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"5eb0fe48-2389-4e50-a0e6-95402f670157\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+437098149 [label="L0\lLINENUMBER 52 L0\lLDC \"324eef9f-f9ab-4ffb-a264-cfbaf0b5d199\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+1510129635 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"324eef9f-f9ab-4ffb-a264-cfbaf0b5d199\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 2050907347 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
 entry;
 exit;

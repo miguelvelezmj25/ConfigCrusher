@@ -1,7 +1,7 @@
 digraph info {
 node [shape=record];
-1872515144 [label="L0\lLINENUMBER 42 L0\lLDC \"287fc087-18c6-41ac-b0a8-d58210c572ac\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
-1988062951 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"287fc087-18c6-41ac-b0a8-d58210c572ac\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1872515144 [label="L0\lLINENUMBER 42 L0\lLDC \"512d1061-ac52-4f8b-8483-2683bf3537e8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+1988062951 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"512d1061-ac52-4f8b-8483-2683bf3537e8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 1360312263 [label="L1\lLINENUMBER 43 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
 232200992 [label="LDC \"INFO\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L2\l"];
 entry;

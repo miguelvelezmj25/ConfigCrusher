@@ -67,4 +67,17 @@ public class TaintFlowAnalysisTest {
         StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
         analysis.analyze(args);
     }
+
+    @Test
+    public void regions1() throws Exception {
+        String systemName = "regions1";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
 }

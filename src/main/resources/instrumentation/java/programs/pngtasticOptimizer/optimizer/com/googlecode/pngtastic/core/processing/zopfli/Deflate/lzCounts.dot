@@ -1,8 +1,8 @@
 digraph lzCounts {
 node [shape=record];
-790229674 [label="L0\lLINENUMBER 385 L0\lLDC \"9c4f4a6e-c08d-45ca-bf58-ca24e554a419\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Util.LENGTH_SYMBOL : [I\lASTORE 6\lL1\lLINENUMBER 386 L1\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Util.CACHED_DIST_SYMBOL : [I\lASTORE 7\lL2\lLINENUMBER 387 L2\lILOAD 2\lISTORE 8\l"];
+790229674 [label="L0\lLINENUMBER 385 L0\lLDC \"568a826e-7b26-441e-9822-1e5a8ce96bbb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Util.LENGTH_SYMBOL : [I\lASTORE 6\lL1\lLINENUMBER 386 L1\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Util.CACHED_DIST_SYMBOL : [I\lASTORE 7\lL2\lLINENUMBER 387 L2\lILOAD 2\lISTORE 8\l"];
 1778877569 [label="L5\lLINENUMBER 388 L5\lALOAD 1\lILOAD 8\lCALOAD\lISTORE 9\lL6\lLINENUMBER 389 L6\lALOAD 0\lILOAD 8\lCALOAD\lISTORE 10\lL7\lLINENUMBER 390 L7\lILOAD 9\lIFNE L8\l"];
-877363600 [label="L4\lLINENUMBER 399 L4\lFRAME CHOP 2\lALOAD 4\lSIPUSH 256\lICONST_1\lIASTORE\lL12\lLINENUMBER 400 L12\lLDC \"9c4f4a6e-c08d-45ca-bf58-ca24e554a419\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+877363600 [label="L4\lLINENUMBER 399 L4\lFRAME CHOP 2\lALOAD 4\lSIPUSH 256\lICONST_1\lIASTORE\lL12\lLINENUMBER 400 L12\lLDC \"568a826e-7b26-441e-9822-1e5a8ce96bbb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 2042979183 [label="L8\lLINENUMBER 394 L8\lFRAME APPEND [I I]\lALOAD 4\lALOAD 6\lILOAD 10\lIALOAD\lDUP2\lIALOAD\lICONST_1\lIADD\lIASTORE\lL11\lLINENUMBER 395 L11\lALOAD 5\lALOAD 7\lILOAD 9\lIALOAD\lDUP2\lIALOAD\lICONST_1\lIADD\lIASTORE\l"];
 422134367 [label="L9\lLINENUMBER 391 L9\lALOAD 4\lILOAD 10\lDUP2\lIALOAD\lICONST_1\lIADD\lIASTORE\lGOTO L10\l"];
 670283478 [label="L3\lFRAME APPEND [[I [I I]\lILOAD 8\lILOAD 3\lIF_ICMPGE L4\l"];

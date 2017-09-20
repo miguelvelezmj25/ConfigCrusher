@@ -73,4 +73,26 @@ public class ConfigCrusherExecutorTest {
         measuredPerformance.size();
     }
 
+    @Test
+    public void optimizer() throws Exception {
+        String programName = "pngtasticOptimizer";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
+        String entryPoint = "optimizer.com.googlecode.pngtastic.Run";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new DefaultExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
 }

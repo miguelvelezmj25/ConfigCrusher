@@ -48,6 +48,8 @@ public class OptimizerMain extends BaseMain {
             Regions.enter(program.getRegionID());
             Run.main(args);
             Regions.exit(program.getRegionID());
+            System.out.println(Regions.start);
+            System.out.println(Regions.end);
         }
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);

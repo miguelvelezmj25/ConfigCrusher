@@ -10,6 +10,8 @@ import java.util.Stack;
 public class Regions {
 
     public static final String PROGRAM_REGION_ID = "program";
+    public static int end = 0;
+    public static int start = 0;
 
 //    private static Set<Region> regions = new HashSet<>();
 //    private static Set<Region> regions = new HashSet<Region>() {
@@ -19,7 +21,21 @@ public class Regions {
 //    }
 //};
 
-    private static List<Region> executedRegionsTrace = new ArrayList<>(1_000_000);
+    public static void main(String[] args) {
+        System.out.println("Started");
+        long start = System.nanoTime();
+        for(int i = 0; i < 120_000_000; i++) {
+            Regions.enter("dsf");
+            Regions.exit("dsf");
+        }
+        long end = System.nanoTime();
+        long time = end - start;
+        System.out.println("start " + Regions.start);
+        System.out.println("end " + Regions.end);
+        System.out.println(time / 1000000000.0);
+    }
+
+    private static List<Region> executedRegionsTrace = new ArrayList<>(10_000_000);
 //    private static Stack<Region> executingRegions = new Stack<>();
 
 //    public static void addRegion(Region region) {
@@ -74,6 +90,7 @@ public class Regions {
 //    }
 
     public static void enter(String regionID) {
+        start++;
         long start = System.nanoTime();
         Region region = new Region(regionID);
         region.enter();
@@ -85,35 +102,13 @@ public class Regions {
     // TODO hacky way to not call the exit method of a region if it does not exit. This can be fixed if we can instrument
     // better and do not exit a region that has not been started
     public static void exit(String regionID) {
+        end++;
         long start = System.nanoTime();
         Region region = new Region(regionID);
         region.exit();
         long end = System.nanoTime();
 
         region.setOverhead(end - start);
-
-//        long start = System.nanoTime();
-//        if(Regions.executingRegions.peek().getRegionID().equals(regionID)) {
-//            Region region = new Region(regionID);
-//            region.exit();
-//            long end = System.nanoTime();
-//            region.setOverhead(end - start);
-////            Regions.addRegion(region);
-//        }
-////        boolean exit = false;
-////
-////        for(Region region : Regions.executedRegionsTrace) {
-////            if(region.getRegionID().equals(regionID)) {
-////                exit = true;
-////                break;
-////            }
-////        }
-////
-////        if(exit) {
-////            Region region = new Region(regionID);
-////            region.exit();
-////            Regions.addRegion(region);
-////        }
     }
 
     public static void addExecutingRegion(Region region) {

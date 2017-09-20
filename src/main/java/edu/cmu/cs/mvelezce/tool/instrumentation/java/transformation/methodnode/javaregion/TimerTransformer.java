@@ -190,7 +190,6 @@ public class TimerTransformer extends RegionTransformer {
         }
     }
 
-    // TODO why dont we return a new list
     private InsnList instrumentStart(MethodBlock methodBlock, List<JavaRegion> regionsInMethod) {
         InsnList newInstructions = new InsnList();
 
@@ -199,64 +198,32 @@ public class TimerTransformer extends RegionTransformer {
                 continue;
             }
 
-
-//            Label label = new Label();
-//            label.info = labelNode.getLabel() + "000start";
-//            LabelNode startRegionLabelNode = new LabelNode(label);
-//
-//            this.updateLabels(newInstructions, labelNode, startRegionLabelNode);
-
-//            InsnList startRegionInstructions = new InsnList();
-////            startRegionInstructions.add(startRegionLabelNode);
-//            startRegionInstructions.add(this.getInstructionsStartRegion(javaRegion));
-//            newInstructions.add(startRegionInstructions);
-
             newInstructions.add(this.getInstructionsStartRegion(javaRegion));
-
-
-//            Label regionOriginalLabel = javaRegion.getStartMethodBlock().getOriginalLabel();
-//            Label currentLabel = labelNode.getLabel();
-//
-//            if(!regionOriginalLabel.toString().equals(currentLabel.toString())) {
-//                continue;
-//            }
-//
-//            Label label = new Label();
-//            label.info = labelNode.getLabel() + "000start";
-//            LabelNode startRegionLabelNode = new LabelNode(label);
-//
-//            this.updateLabels(newInstructions, labelNode, startRegionLabelNode);
-//
-//            InsnList startRegionInstructions = new InsnList();
-//            startRegionInstructions.add(startRegionLabelNode);
-//            startRegionInstructions.add(this.getInstructionsStartRegion(javaRegion));
-//            newInstructions.add(startRegionInstructions);
         }
 
         return newInstructions;
     }
 
-    private Map<MethodBlock, List<JavaRegion>> addRegionsInBlocksWithReturn(MethodBlock methodBlock, List<JavaRegion> regionsInMethod) {
-        Map<MethodBlock, List<JavaRegion>> blocksToRegions = new HashMap<>();
+//    private Map<MethodBlock, List<JavaRegion>> addRegionsInBlocksWithReturn(MethodBlock methodBlock, List<JavaRegion> regionsInMethod) {
+//        Map<MethodBlock, List<JavaRegion>> blocksToRegions = new HashMap<>();
+//
+//        for(JavaRegion javaRegion : regionsInMethod) {
+//            for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
+//                if(endMethodBlock != methodBlock) {
+//                    continue;
+//                }
+//
+//                if(!blocksToRegions.containsKey(endMethodBlock)) {
+//                    blocksToRegions.put(endMethodBlock, new ArrayList<>());
+//                }
+//
+//                blocksToRegions.get(endMethodBlock).add(javaRegion);
+//            }
+//        }
+//
+//        return blocksToRegions;
+//    }
 
-        for(JavaRegion javaRegion : regionsInMethod) {
-            for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
-                if(endMethodBlock != methodBlock) {
-                    continue;
-                }
-
-                if(!blocksToRegions.containsKey(endMethodBlock)) {
-                    blocksToRegions.put(endMethodBlock, new ArrayList<>());
-                }
-
-                blocksToRegions.get(endMethodBlock).add(javaRegion);
-            }
-        }
-
-        return blocksToRegions;
-    }
-
-    // TODO why dont we return a new list
     private InsnList instrumentEnd(MethodBlock methodBlock, List<JavaRegion> regionsInMethod) {
         InsnList newInstructions = new InsnList();
 
@@ -266,32 +233,9 @@ public class TimerTransformer extends RegionTransformer {
                     continue;
                 }
 
-//                InsnList endRegionInstructions = new InsnList();
-//                endRegionInstructions.add(this.getInstructionsEndRegion(javaRegion));
-//                newInstructions.add(endRegionInstructions);
                 newInstructions.add(this.getInstructionsEndRegion(javaRegion));
             }
 
-
-//            for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
-//                Label regionOriginalLabel = endMethodBlock.getOriginalLabel();
-//                Label currentLabel = labelNode.getLabel();
-//
-//                if(!regionOriginalLabel.toString().equals(currentLabel.toString())) {
-//                    continue;
-//                }
-//
-//                Label label = new Label();
-//                label.info = labelNode.getLabel() + "000end";
-//                LabelNode endRegionLabelNode = new LabelNode(label);
-//
-//                this.updateLabels(newInstructions, labelNode, endRegionLabelNode);
-//
-//                InsnList endRegionInstructions = new InsnList();
-//                endRegionInstructions.add(endRegionLabelNode);
-//                endRegionInstructions.add(this.getInstructionsEndRegion(javaRegion));
-//                newInstructions.add(endRegionInstructions);
-//            }
         }
 
         return newInstructions;
@@ -550,15 +494,7 @@ public class TimerTransformer extends RegionTransformer {
                 InsnList endInstructions = this.instrumentEnd(block, regionsInMethodReversed);
                 newInstructions.add(endInstructions);
                 InsnList startInstructions = this.instrumentStart(block, regionsInMethod);
-
-                if(startInstructions.size() == 0) {
-                    continue;
-                }
-
                 newInstructions.add(startInstructions);
-
-//                    newInstructions.insertBefore(instruction, startInstructions);
-
             }
         }
 
@@ -566,7 +502,7 @@ public class TimerTransformer extends RegionTransformer {
     }
 
     private void removeInnerRegions(List<JavaRegion> regionsInMethod, MethodGraph graph) {
-        Map<JavaRegion, Set<JavaRegion>> regionsToOuterRegionSet = new LinkedHashMap<>();
+//        Map<JavaRegion, Set<JavaRegion>> regionsToOuterRegionSet = new LinkedHashMap<>();
         Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegionSet = new LinkedHashMap<>();
         graph.getDominators();
 
@@ -595,11 +531,11 @@ public class TimerTransformer extends RegionTransformer {
                 if(regionReachableBlocks.contains(possibleInnerRegion.getStartMethodBlock())
                         && regionReachableBlocks.containsAll(possibleInnerRegionEndBlocks)) {
 
-                    if(!regionsToOuterRegionSet.containsKey(possibleInnerRegion)) {
-                        regionsToOuterRegionSet.put(possibleInnerRegion, new HashSet<>());
-                    }
-
-                    regionsToOuterRegionSet.get(possibleInnerRegion).add(region);
+//                    if(!regionsToOuterRegionSet.containsKey(possibleInnerRegion)) {
+//                        regionsToOuterRegionSet.put(possibleInnerRegion, new HashSet<>());
+//                    }
+//
+//                    regionsToOuterRegionSet.get(possibleInnerRegion).add(region);
 
                     if(!regionsToInnerRegionSet.containsKey(region)) {
                         regionsToInnerRegionSet.put(region, new HashSet<>());
@@ -671,71 +607,6 @@ public class TimerTransformer extends RegionTransformer {
 //
 //    }
 
-//    private void pruneRedundantInnerRegions() {
-//        // Remove redundant inner regions. We want to analyze the maximum chain of inner regions
-//        Set<JavaRegion> redundantInnerRegions = new HashSet<>();
-//
-//        for(Map.Entry<JavaRegion, Set<JavaRegion>> innerRegionToOuterRegions : innerRegionsToRemoveToOuterRegions.entrySet()) {
-//            JavaRegion innerRegion = innerRegionToOuterRegions.getKey();
-//            Set<JavaRegion> outerRegions = innerRegionToOuterRegions.getValue();
-//
-//            for(Map.Entry<JavaRegion, Set<JavaRegion>> possibleRedundantInnerRegionToOuterRegions : innerRegionsToRemoveToOuterRegions.entrySet()) {
-//                JavaRegion possibleRedundantInnerRegion = possibleRedundantInnerRegionToOuterRegions.getKey();
-//                Set<JavaRegion> possibleRedundantOuterRegions = possibleRedundantInnerRegionToOuterRegions.getValue();
-//
-//                if(innerRegion == possibleRedundantInnerRegion) {
-//                    continue;
-//                }
-//
-//                HashSet<Object> possibleRegions = new HashSet<>();
-//                possibleRegions.add(possibleRedundantInnerRegion);
-//                possibleRegions.addAll(possibleRedundantOuterRegions);
-//
-//                if(possibleRegions.equals(outerRegions)) {
-//                    redundantInnerRegions.add(possibleRedundantInnerRegion);
-//                }
-//            }
-//
-//        }
-//
-//        for(JavaRegion redundantInnerRegion : redundantInnerRegions) {
-//            innerRegionsToRemoveToOuterRegions.remove(redundantInnerRegion);
-//        }
-//    }
-//
-//    private void removeMultiLebelInnerRegions(Map<JavaRegion, Set<JavaRegion>> outerRegionsToInnerRegionSet) {
-//        for(Map.Entry<JavaRegion, Set<JavaRegion>> entry : outerRegionsToInnerRegionSet.entrySet()) {
-//            for(Map.Entry<JavaRegion, Set<JavaRegion>> innerEntry : outerRegionsToInnerRegionSet.entrySet()) {
-//                if(entry.getKey() == innerEntry.getKey()) {
-//                    continue;
-//                }
-//
-//                if(entry.getValue().contains(innerEntry.getKey())) {
-//                    entry.getValue().removeAll(innerEntry.getValue());
-//                }
-//            }
-//        }
-//    }
-//
-//    private void pruneRegionsWithDifferentInnerRegionOptions(Map<JavaRegion, Set<JavaRegion>> outerRegionsToInnerRegionSet) {
-//        Map<JavaRegion, Set<Set<String>>> regionsToOptions = this.getRegionsToOptionSet();
-//        Set<JavaRegion> regionsToPrune = new HashSet<>();
-//
-//        for(Map.Entry<JavaRegion, Set<JavaRegion>> entry : outerRegionsToInnerRegionSet.entrySet()) {
-////            JavaRegion outerRegion = entry.getKey();
-////            Set<Set<String>> outerOptionSet = regionsToOptions.get(outerRegion);
-////
-////            Set<String> outerOptions = new HashSet<>();
-////
-////            for(Set<String> optionSet : outerOptionSet) {
-////                outerOptions.addAll(optionSet);
-////            }
-//
-//
-//        }
-//
-//    }
-//
     private void updateRegionsToOptions(Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegions) {
         Map<JavaRegion, Set<Set<String>>> regionsToOptionSet = this.getRegionsToOptionSet();
 

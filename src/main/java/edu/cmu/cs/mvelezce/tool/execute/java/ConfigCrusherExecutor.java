@@ -8,7 +8,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
 
 import java.io.File;
 import java.io.IOException;

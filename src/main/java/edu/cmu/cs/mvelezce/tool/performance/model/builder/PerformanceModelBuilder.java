@@ -1,4 +1,6 @@
-package edu.cmu.cs.mvelezce.tool.performancemodel;
+package edu.cmu.cs.mvelezce.tool.performance.model.builder;
+
+import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 
 import java.io.File;
 import java.io.IOException;

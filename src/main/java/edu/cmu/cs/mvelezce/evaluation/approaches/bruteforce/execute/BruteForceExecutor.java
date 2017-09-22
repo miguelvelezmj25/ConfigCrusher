@@ -6,7 +6,7 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
 
 import java.io.File;
 import java.io.IOException;

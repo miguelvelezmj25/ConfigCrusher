@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
 
 import java.io.File;
 import java.io.IOException;

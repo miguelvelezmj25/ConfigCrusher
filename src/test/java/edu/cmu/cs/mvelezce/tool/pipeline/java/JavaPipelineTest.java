@@ -8,7 +8,7 @@ import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.junit.Test;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.performancemodel;
+package edu.cmu.cs.mvelezce.tool.performance.model.builder;
 
 /**
  * Created by mvelezce on 4/28/17.

@@ -13,10 +13,10 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.performancemodel.ConfigCrusherPerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

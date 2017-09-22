@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.performance.model;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class PerformanceModel {
         this.baseTime = baseTime;
         this.regionsToPerformanceTables = regionsToPerformanceTables;
 
-        this.baseTimeHumanReadable = PerformanceEntry2.toHumanReadable(PerformanceEntry2.toSeconds(this.baseTime));
+        this.baseTimeHumanReadable = DefaultPerformanceEntry.toHumanReadable(DefaultPerformanceEntry.toSeconds(this.baseTime));
         this.regionsToPerformanceTablesHumanReadable = PerformanceModel.toHumanReadable(this.regionsToPerformanceTables);
     }
 
@@ -51,8 +51,8 @@ public class PerformanceModel {
             Map<Set<String>, Double> configToNewPerformance = new HashMap<>();
 
             for(Map.Entry<Set<String>, Long> configToPerformance : regionToTable.getValue().entrySet()) {
-                double seconds = PerformanceEntry2.toSeconds(configToPerformance.getValue());
-                configToNewPerformance.put(configToPerformance.getKey(), PerformanceEntry2.toHumanReadable(seconds));
+                double seconds = DefaultPerformanceEntry.toSeconds(configToPerformance.getValue());
+                configToNewPerformance.put(configToPerformance.getKey(), DefaultPerformanceEntry.toHumanReadable(seconds));
             }
 
             result.put(regionToTable.getKey(), configToNewPerformance);

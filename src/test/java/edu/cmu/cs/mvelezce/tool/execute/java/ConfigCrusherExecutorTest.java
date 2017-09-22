@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import org.junit.Test;
 
 import java.util.Set;
@@ -27,7 +27,7 @@ public class ConfigCrusherExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ConfigCrusherExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ConfigCrusherExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
         measuredPerformance.size();
     }
 
@@ -96,7 +96,7 @@ public class ConfigCrusherExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
         measuredPerformance.size();
     }
 

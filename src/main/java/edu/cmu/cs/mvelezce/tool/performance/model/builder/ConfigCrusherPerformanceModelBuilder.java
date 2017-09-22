@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.performance.model.builder;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 
 import java.util.HashMap;
@@ -18,7 +18,7 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
 
     public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
 
-    public ConfigCrusherPerformanceModelBuilder(String programName, Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
+    public ConfigCrusherPerformanceModelBuilder(String programName, Set<DefaultPerformanceEntry> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
         super(programName, measuredPerformance, regionsToOptionSet);
     }
 
@@ -41,7 +41,7 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
 
             Map<Set<String>, Set<Long>> optionValuesToPerformances = new HashMap<>();
 
-            for(PerformanceEntry2 performanceEntry : this.getMeasuredPerformance()) {
+            for(DefaultPerformanceEntry performanceEntry : this.getMeasuredPerformance()) {
                 Set<String> configuration = performanceEntry.getConfiguration();
                 Set<String> optionValueInPerfEntry = new HashSet<>(optionsInRegion);
                 optionValueInPerfEntry.retainAll(configuration);
@@ -71,7 +71,7 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
 
         long programTime = 0;
 
-        for(PerformanceEntry2 performanceEntry : this.getMeasuredPerformance()) {
+        for(DefaultPerformanceEntry performanceEntry : this.getMeasuredPerformance()) {
             for(Map.Entry<Region, Long> regionToProcessedPerformance : performanceEntry.getRegionsToProcessedPerformance().entrySet()) {
                 Region region = regionToProcessedPerformance.getKey();
 

@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
 
@@ -30,7 +30,7 @@ public class Evaluation {
         this.programName = programName;
     }
 
-    public void writeConfigurationToPerformance(String approach, Set<PerformanceEntry2> performanceEntries) throws IOException {
+    public void writeConfigurationToPerformance(String approach, Set<DefaultPerformanceEntry> performanceEntries) throws IOException {
         String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.FULL_DIR + "/"
                 + approach + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
@@ -45,7 +45,7 @@ public class Evaluation {
 
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
-        for(PerformanceEntry2 performanceEntry : performanceEntries) {
+        for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
             if(performanceEntry.getRegionsToProcessedPerformanceHumanReadable().size() != 1) {
                 throw new RuntimeException("This method can only handle approaches that measure 1 region" +
                         " (e.g. Brute force)");

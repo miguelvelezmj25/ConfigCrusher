@@ -14,7 +14,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-public class PrettyMethodGraphBuilderTest {
+public class PrettyDefaultMethodGraphBuilderTest {
 
     @Test
     public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {

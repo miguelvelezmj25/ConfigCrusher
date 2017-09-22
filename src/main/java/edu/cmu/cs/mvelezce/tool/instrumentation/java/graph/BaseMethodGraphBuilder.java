@@ -7,7 +7,7 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 import java.util.Set;
 
-public abstract class BaseMethodGraphBuilder implements IMethodGraphBuilder {
+public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
 
     private MethodNode methodNode;
 

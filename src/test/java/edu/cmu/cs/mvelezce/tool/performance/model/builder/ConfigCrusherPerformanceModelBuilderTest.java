@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.performancemodel;
+package edu.cmu.cs.mvelezce.tool.performance.model.builder;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
@@ -8,6 +8,9 @@ import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 import org.junit.Test;
 
 import java.util.Map;

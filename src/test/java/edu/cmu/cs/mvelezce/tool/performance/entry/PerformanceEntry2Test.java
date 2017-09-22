@@ -1,7 +1,8 @@
-package edu.cmu.cs.mvelezce.tool.performancemodel;
+package edu.cmu.cs.mvelezce.tool.performance.entry;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
 import org.junit.Test;
 
 import java.io.IOException;

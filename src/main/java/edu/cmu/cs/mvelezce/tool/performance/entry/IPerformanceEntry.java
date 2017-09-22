@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.performancemodel;
+package edu.cmu.cs.mvelezce.tool.performance.entry;
 
 import java.io.File;
 import java.io.IOException;

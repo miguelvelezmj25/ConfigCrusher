@@ -1,1 +1,19 @@
-{"configuration":["LOGLEVEL"],"trace":[{"regionID":"program","startTime":1855064203400,"endTime":0,"overhead":19088},{"regionID":"program","startTime":0,"endTime":1860694776890,"overhead":11379}]}
+{
+  "configuration": [
+    "LOGLEVEL"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 1855064203400,
+      "endTime": 0,
+      "overhead": 19088
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 1860694776890,
+      "overhead": 11379
+    }
+  ]
+}

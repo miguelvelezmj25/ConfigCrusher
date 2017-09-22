@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.analysis.region;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Created by miguelvelez on 4/7/17.
@@ -10,9 +9,9 @@ import java.util.Stack;
 public class Regions {
 
     public static final String PROGRAM_REGION_ID = "program";
-    private static List<Region> executedRegionsTrace = new ArrayList<>(100_000_000);
     public static int startCount = 0;
     public static int endCound = 0;
+    private static List<Region> executedRegionsTrace = new ArrayList<>(100_000_000);
 
     public static void main(String[] args) {
         System.out.println("Started");

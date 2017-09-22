@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.lotrack;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.lotrack.LotrackProcessor;
 import org.junit.Assert;
 import org.junit.Test;
 

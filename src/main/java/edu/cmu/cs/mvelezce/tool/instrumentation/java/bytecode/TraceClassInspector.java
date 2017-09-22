@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode;
 
 import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.Opcodes;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.util.TraceClassVisitor;
 
 import java.io.IOException;

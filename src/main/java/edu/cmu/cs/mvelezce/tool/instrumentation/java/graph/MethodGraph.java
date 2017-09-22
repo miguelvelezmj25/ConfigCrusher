@@ -2,13 +2,8 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
-import jdk.internal.org.objectweb.asm.util.Printer;
-import jdk.internal.org.objectweb.asm.util.Textifier;
-import jdk.internal.org.objectweb.asm.util.TraceMethodVisitor;
 
 import java.util.*;
-
-import static jdk.internal.org.objectweb.asm.Opcodes.ASM4;
 
 /**
  * Created by mvelezce on 5/3/17.
@@ -159,7 +154,7 @@ public class MethodGraph {
         Queue<MethodBlock> queue = new ArrayDeque<>();
         queue.offer(start);
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             MethodBlock currentBlock = queue.poll();
 
             if(currentBlock == end) {

@@ -120,6 +120,20 @@ public abstract class BaseExecutor implements Executor {
 //        return processedRes;
 //    }
 
+    // TODO should this be static
+    private static Set<PerformanceEntry2> averageExecutions(List<Set<PerformanceEntry2>> performanceEntriesList) {
+        Set<PerformanceEntry2> result = new HashSet<>();
+
+//        for(Set<PerformanceEntry2> performanceEntries : performanceEntriesList) {
+//            for(PerformanceEntry2 performanceEntry : performanceEntries) {
+//                performanceEntry.g
+//            }
+//
+//        }
+
+        return result;
+    }
+
     @Override
     public Set<PerformanceEntry2> execute(String[] args) throws IOException, InterruptedException {
         Options.getCommandLine(args);
@@ -164,20 +178,6 @@ public abstract class BaseExecutor implements Executor {
 //        throw new RuntimeException();
 
         return performanceEntriesList.get(0);
-    }
-
-    // TODO should this be static
-    private static Set<PerformanceEntry2> averageExecutions(List<Set<PerformanceEntry2>> performanceEntriesList) {
-        Set<PerformanceEntry2> result = new HashSet<>();
-
-//        for(Set<PerformanceEntry2> performanceEntries : performanceEntriesList) {
-//            for(PerformanceEntry2 performanceEntry : performanceEntries) {
-//                performanceEntry.g
-//            }
-//
-//        }
-
-        return result;
     }
 
     public String getProgramName() {

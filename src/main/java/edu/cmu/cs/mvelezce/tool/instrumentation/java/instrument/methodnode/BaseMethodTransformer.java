@@ -1,20 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode;
 
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
-import jdk.internal.org.objectweb.asm.ClassReader;
-import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
-import jdk.internal.org.objectweb.asm.util.Printer;
-import jdk.internal.org.objectweb.asm.util.TraceClassVisitor;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Set;
 
 public abstract class BaseMethodTransformer implements MethodTransformer {

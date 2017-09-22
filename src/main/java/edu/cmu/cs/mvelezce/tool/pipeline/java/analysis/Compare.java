@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java.analysis;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceStatistic;
 
 import java.io.*;
 import java.util.HashSet;
@@ -110,31 +111,31 @@ public class Compare {
             }
 
             result.append('"');
-            result.append(Boolean.valueOf(app1Entry.getMeasured()) && Boolean.valueOf(app2Entry.getMeasured()));
+            result.append(Boolean.valueOf(app1Entry.isMeasured()) && Boolean.valueOf(app2Entry.isMeasured()));
             result.append('"');
             result.append(",");
             result.append('"');
             result.append(configuration);
             result.append('"');
             result.append(",");
-            result.append(app1Entry.getMean());
+//            result.append(app1Entry.getMean());
             result.append(",");
 
-            result.append(app2Entry.getMean());
+//            result.append(app2Entry.getMean());
             result.append(",");
 
-            double absoluteError = Math.abs(app2Entry.getMean() - app1Entry.getMean());
-            double relativeError = absoluteError / app2Entry.getMean() * 100.0;
-            double squaredError = Math.pow(app2Entry.getMean() - app1Entry.getMean(), 2);
-
-            result.append(absoluteError);
-            result.append(",");
-            result.append(relativeError);
-            result.append(",");
-            result.append(squaredError);
-            result.append("\n");
-
-            se += squaredError;
+//            double absoluteError = Math.abs(app2Entry.getMean() - app1Entry.getMean());
+//            double relativeError = absoluteError / app2Entry.getMean() * 100.0;
+//            double squaredError = Math.pow(app2Entry.getMean() - app1Entry.getMean(), 2);
+//
+//            result.append(absoluteError);
+//            result.append(",");
+//            result.append(relativeError);
+//            result.append(",");
+//            result.append(squaredError);
+//            result.append("\n");
+//
+//            se += squaredError;
             entries += 1;
         }
 
@@ -225,18 +226,18 @@ public class Compare {
                 boolean measured = Boolean.valueOf(measuredString);
                 String perfString = strEntries[2 + commaOffset].trim();
 
-                if((strEntries.length - commaOffset) == 3) {
-                    perfStat = new PerformanceStatistic(measured + "", configuration, Double.valueOf(perfString), 0.0);
-                }
-                else if((strEntries.length - commaOffset) == 4) {
-                    String stdString = strEntries[3 + commaOffset].trim();
-                    perfStat = new PerformanceStatistic(measured + "", configuration, Double.valueOf(perfString), Double.valueOf(stdString));
-                }
-                else {
-                    throw new RuntimeException("Could not parse the file");
-                }
-
-                entries.add(perfStat);
+//                if((strEntries.length - commaOffset) == 3) {
+//                    perfStat = new PerformanceStatistic(measured + "", configuration, Double.valueOf(perfString), 0.0);
+//                }
+//                else if((strEntries.length - commaOffset) == 4) {
+//                    String stdString = strEntries[3 + commaOffset].trim();
+//                    perfStat = new PerformanceStatistic(measured + "", configuration, Double.valueOf(perfString), Double.valueOf(stdString));
+//                }
+//                else {
+//                    throw new RuntimeException("Could not parse the file");
+//                }
+//
+//                entries.add(perfStat);
             }
 
         }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import org.apache.commons.io.FileUtils;
 
@@ -120,16 +121,38 @@ public abstract class BaseExecutor implements Executor {
 //        return processedRes;
 //    }
 
-    // TODO should this be static
-    private static Set<DefaultPerformanceEntry> averageExecutions(List<Set<DefaultPerformanceEntry>> performanceEntriesList) {
+    private Set<DefaultPerformanceEntry> averageExecutions(List<Set<DefaultPerformanceEntry>> performanceEntriesList) {
+        Set<DefaultPerformanceEntry> performanceEntrySet = performanceEntriesList.iterator().next();
+        Set<Set<String>> configurations = new HashSet<>();
+
+        for(DefaultPerformanceEntry performanceEntry : performanceEntrySet) {
+            configurations.add(performanceEntry.getConfiguration());
+        }
+
         Set<DefaultPerformanceEntry> result = new HashSet<>();
 
-//        for(Set<DefaultPerformanceEntry> performanceEntries : performanceEntriesList) {
-//            for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
-//                performanceEntry.g
-//            }
-//
-//        }
+        for(Set<String> configuration : configurations) {
+            List<DefaultPerformanceEntry> sameConfigEntries = new ArrayList<>();
+
+            for(Set<DefaultPerformanceEntry> performanceEntries : performanceEntriesList) {
+                for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
+                    if(performanceEntry.getConfiguration().equals(configuration)) {
+                        sameConfigEntries.add(performanceEntry);
+                        break;
+                    }
+                }
+            }
+
+            PerformanceStatistic performanceStatistic = new PerformanceStatistic(true, sameConfigEntries);
+
+            DefaultPerformanceEntry performanceEntry = new DefaultPerformanceEntry(performanceStatistic.getConfiguration());
+            performanceEntry.setRegionsToRawPerformance(performanceStatistic.getRegionsToRawMean());
+            performanceEntry.setRegionsToRawPerformanceHumanReadable(performanceStatistic.getRegionsToRawMeanHumanReadReadable());
+            performanceEntry.setRegionsToProcessedPerformance(performanceStatistic.getRegionsToProcessedMean());
+            performanceEntry.setRegionsToProcessedPerformanceHumanReadable(performanceStatistic.getRegionsToProcessedMeanHumanReadable());
+
+            result.add(performanceEntry);
+        }
 
         return result;
     }
@@ -139,23 +162,30 @@ public abstract class BaseExecutor implements Executor {
         Options.getCommandLine(args);
 
         String outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
-        File outputFile = new File(outputDir);
+        File root = new File(outputDir);
 
-        Options.checkIfDeleteResult(outputFile);
+        Options.checkIfDeleteResult(root);
 
-        if(outputFile.exists()) {
-            // TODO aggregate and averae
-            Set<DefaultPerformanceEntry> results = this.aggregateExecutions(outputFile);
-            return results;
+        if(root.exists()) {
+            List<Set<DefaultPerformanceEntry>> performanceEntriesList = new ArrayList<>();
+
+            int i = 0;
+            File outputFile = new File(root + "/" + i);
+
+            while (outputFile.exists()) {
+                Set<DefaultPerformanceEntry> results = this.aggregateExecutions(root);
+                performanceEntriesList.add(results);
+
+                i++;
+                outputFile = new File(root + "/" + i);
+            }
+
+            Set<DefaultPerformanceEntry> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
+            return averagedPerformanceEntries;
         }
 
         this.repetitions = Options.getIterations();
         Set<DefaultPerformanceEntry> performanceEntries = this.execute();
-
-        // TODO
-//        if(Options.checkIfSave()) {
-//            this.writeToFile(performanceEntries);
-//        }
 
         return performanceEntries;
     }
@@ -169,15 +199,9 @@ public abstract class BaseExecutor implements Executor {
             performanceEntriesList.add(results);
         }
 
-        // TODO average executions
-//        Set<DefaultPerformanceEntry> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
-//
-////        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
-////        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
-//
-//        throw new RuntimeException();
+        Set<DefaultPerformanceEntry> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
 
-        return performanceEntriesList.get(0);
+        return averagedPerformanceEntries;
     }
 
     public String getProgramName() {
@@ -199,93 +223,6 @@ public abstract class BaseExecutor implements Executor {
     public int getRepetitions() {
         return repetitions;
     }
-
-    //    private static Set<PerformanceEntry> returnIfExists(String programName) throws IOException, ParseException {
-//        String outputFile = BaseExecutor.DIRECTORY + "/" + programName + Options.DOT_JSON;
-//        File file = new File(outputFile);
-//
-//        Options.checkIfDeleteResult(file);
-//        Set<PerformanceEntry> measuredPerformance = null;
-//
-//        if(file.exists()) {
-//            try {
-//                measuredPerformance = BaseExecutor.readFromFile(file);
-//            } catch (ParseException pe) {
-//                throw new RuntimeException("Could not parse the cached results");
-//            }
-//        }
-//
-//        return measuredPerformance;
-//    }
-
-//    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args) throws IOException, ParseException {
-//        Options.getCommandLine(args);
-//
-//        return BaseExecutor.returnIfExists(programName);
-//    }
-
-//    public static Set<PerformanceEntry> measureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
-//        Set<PerformanceEntry> results = BaseExecutor.measureConfigurationPerformance(programName, args);
-//
-//        if(results != null) {
-//            return results;
-//        }
-//
-//        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, entryPoint, directory, configurationsToExecute);
-//
-//        return measuredPerformance;
-//    }
-
-//    public static Set<PerformanceEntry> repeatMeasureConfigurationPerformance(String programName, String[] args) throws IOException, ParseException {
-//        Options.getCommandLine(args);
-//        int iterations = Options.getIterations();
-//        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
-//
-//        for(int i = 0; i < iterations; i++) {
-//            Set<PerformanceEntry> results = BaseExecutor.returnIfExists(programName + BaseExecutor.UNDERSCORE + i);
-//
-//            if(results != null) {
-//                executionsPerformance.add(results);
-//            }
-//
-//        }
-//
-//        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
-//        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
-//
-//        return processedRes;
-//    }
-
-//    public static Set<PerformanceEntry> repeatMeasureConfigurationPerformance(String programName, String[] args, String entryPoint, String directory, Set<Set<String>> configurationsToExecute) throws IOException, ParseException {
-//        Options.getCommandLine(args);
-//        Set<PerformanceEntry> measuredPerformance;
-//        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
-//        int iterations = Options.getIterations();
-//
-//        for(int i = 0; i < iterations; i++) {
-//            Set<PerformanceEntry> results = BaseExecutor.returnIfExists(programName + BaseExecutor.UNDERSCORE + i);
-//
-//            if(results != null) {
-//                executionsPerformance.add(results);
-//                continue;
-//            }
-//
-//            measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, entryPoint, directory, configurationsToExecute);
-//            executionsPerformance.add(measuredPerformance);
-//        }
-//
-//        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
-//        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
-//
-//        return processedRes;
-//    }
-
-//    // TODO
-//    public void logExecutedRegions(String programName, Set<String> configuration, List<Region> executedRegions) throws IOException, ParseException {
-//        // TODO why not just call the writeToFile method?
-//        System.out.println("Executed regions size: " + executedRegions.size());
-//        this.writeToFile(programName, configuration, executedRegions);
-//    }
 
     protected Set<DefaultPerformanceEntry> aggregateExecutions(File outputFile) throws IOException {
         Collection<File> files = FileUtils.listFiles(outputFile, null, true);

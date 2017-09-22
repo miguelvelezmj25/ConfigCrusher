@@ -11,7 +11,6 @@ import java.util.*;
 /**
  * Created by mvelezce on 4/10/17.
  */
-// TODO save this in a json file
 public class DefaultPerformanceEntry implements PerformanceEntry {
     private Set<String> configuration;
     private Map<Region, Long> regionsToRawPerformance = new LinkedHashMap<>();
@@ -20,8 +19,10 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
     private Map<Region, Long> regionsToProcessedPerformance = new LinkedHashMap<>();
     private Map<Region, Double> regionsToProcessedPerformanceHumanReadable = new LinkedHashMap<>();
 
-    private DefaultPerformanceEntry() {
-        ;
+    private DefaultPerformanceEntry() { ; }
+
+    public DefaultPerformanceEntry(Set<String> configuration) {
+        this.configuration = configuration;
     }
 
     public DefaultPerformanceEntry(Execution execution) {
@@ -247,6 +248,30 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
 
     public Map<Region, Double> getRegionsToProcessedPerformanceHumanReadable() {
         return regionsToProcessedPerformanceHumanReadable;
+    }
+
+    public void setConfiguration(Set<String> configuration) {
+        this.configuration = configuration;
+    }
+
+    public void setRegionsToRawPerformance(Map<Region, Long> regionsToRawPerformance) {
+        this.regionsToRawPerformance = regionsToRawPerformance;
+    }
+
+    public void setRegionsToRawPerformanceHumanReadable(Map<Region, Double> regionsToRawPerformanceHumanReadable) {
+        this.regionsToRawPerformanceHumanReadable = regionsToRawPerformanceHumanReadable;
+    }
+
+    public void setRegionsToInnerRegions(Map<Region, Set<Region>> regionsToInnerRegions) {
+        this.regionsToInnerRegions = regionsToInnerRegions;
+    }
+
+    public void setRegionsToProcessedPerformance(Map<Region, Long> regionsToProcessedPerformance) {
+        this.regionsToProcessedPerformance = regionsToProcessedPerformance;
+    }
+
+    public void setRegionsToProcessedPerformanceHumanReadable(Map<Region, Double> regionsToProcessedPerformanceHumanReadable) {
+        this.regionsToProcessedPerformanceHumanReadable = regionsToProcessedPerformanceHumanReadable;
     }
 
     @Override

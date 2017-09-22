@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
-import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
@@ -29,14 +29,14 @@ public class ConfigCrusherPerformanceModelBuilderTest {
         Analysis analysis = new DefaultStaticAnalysis();
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-        Executor executor = new DefaultExecutor(programName);
+        Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
 
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        PerformanceModelBuilder builder = new DefaultPerformanceModelBuilder(programName, measuredPerformance,
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
                 regionsToOptionSet);
         builder.createModel(args);
     }
@@ -48,7 +48,7 @@ public class ConfigCrusherPerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        PerformanceModelBuilder builder = new DefaultPerformanceModelBuilder(programName);
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName);
         builder.createModel(args);
     }
 

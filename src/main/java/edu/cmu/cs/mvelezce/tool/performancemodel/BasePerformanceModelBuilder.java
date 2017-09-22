@@ -273,7 +273,7 @@ public abstract class BasePerformanceModelBuilder implements PerformanceModelBui
 //        Map<Set<String>, Double> configurationsToRealPerformance = regionsToRawPerformance.get(region);
 //
 //        for(Region innerRegion : possibleInnerRegions) {
-//            DefaultPerformanceModelBuilder.calculateRealPerformanceOfRegion(innerRegion, regionsToRawPerformance, regionsToRealPerformance);
+//            ConfigCrusherPerformanceModelBuilder.calculateRealPerformanceOfRegion(innerRegion, regionsToRawPerformance, regionsToRealPerformance);
 //        }
 //
 //        for(Map.Entry<Set<String>, Double> configurationsToRealPerformanceEntry : configurationsToRealPerformance.entrySet()) {

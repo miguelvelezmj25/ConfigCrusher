@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry;
 import org.junit.Assert;
 
 import java.util.Map;
@@ -12,29 +11,29 @@ import java.util.Set;
  */
 public class BaseExecutorTest {
 
-    public static void checkExecutionTimes(Set<PerformanceEntry> expectedPerformances, Set<PerformanceEntry> actualPerformances) {
-        for(PerformanceEntry expected : expectedPerformances) {
-            for(PerformanceEntry actual : actualPerformances) {
-                if(expected.getConfiguration().equals(actual.getConfiguration())) {
-                    boolean oneIsEqual = false;
-
-                    for(Map.Entry<Region, Long> actualResultEntry : actual.getRegionsToExecutionTime().entrySet()) {
-                        for(Map.Entry<Region, Long> expectedResultEntry : expected.getRegionsToExecutionTime().entrySet()) {
-                            if(actualResultEntry.getKey().getRegionID().equals(expectedResultEntry.getKey().getRegionID())) {
-                                if(expectedResultEntry.getValue().equals(actualResultEntry.getValue())) {
-                                    oneIsEqual = true;
-                                }
-                            }
-                        }
-                    }
-
-                    Assert.assertTrue(oneIsEqual);
-                }
-            }
-
-            System.out.println();
-        }
-    }
+//    public static void checkExecutionTimes(Set<PerformanceEntry> expectedPerformances, Set<PerformanceEntry> actualPerformances) {
+//        for(PerformanceEntry expected : expectedPerformances) {
+//            for(PerformanceEntry actual : actualPerformances) {
+//                if(expected.getConfiguration().equals(actual.getConfiguration())) {
+//                    boolean oneIsEqual = false;
+//
+//                    for(Map.Entry<Region, Long> actualResultEntry : actual.getRegionsToExecutionTime().entrySet()) {
+//                        for(Map.Entry<Region, Long> expectedResultEntry : expected.getRegionsToExecutionTime().entrySet()) {
+//                            if(actualResultEntry.getKey().getRegionID().equals(expectedResultEntry.getKey().getRegionID())) {
+//                                if(expectedResultEntry.getValue().equals(actualResultEntry.getValue())) {
+//                                    oneIsEqual = true;
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    Assert.assertTrue(oneIsEqual);
+//                }
+//            }
+//
+//            System.out.println();
+//        }
+//    }
 
 //    @Test
 //    public void testGetOptions() throws Exception {

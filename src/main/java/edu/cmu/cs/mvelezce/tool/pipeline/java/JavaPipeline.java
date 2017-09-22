@@ -5,8 +5,8 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -309,10 +309,10 @@ public class JavaPipeline {
         int count = 0;
 
         for(PerformanceStatistic perfStat : perfStats) {
-            for(Long std : perfStat.getRegionsToStd().values()) {
-                avgStd += std / 1000000000.0;
-                count++;
-            }
+//            for(Long std : perfStat.getstd().values()) {
+//                avgStd += std / 1000000000.0;
+//                count++;
+//            }
         }
 
         avgStd = avgStd / count;

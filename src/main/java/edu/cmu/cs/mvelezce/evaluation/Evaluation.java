@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.performance.PerformanceStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
@@ -31,6 +32,10 @@ public class Evaluation {
     }
 
     public void writeConfigurationToPerformance(String approach, Set<DefaultPerformanceEntry> performanceEntries) throws IOException {
+
+
+
+
         String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.FULL_DIR + "/"
                 + approach + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);

@@ -5,11 +5,11 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
-import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.performancemodel.DefaultPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performancemodel.ConfigCrusherPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModelBuilder;
@@ -24,7 +24,7 @@ public class EvaluationTest {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.APPROACH, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
     }
 
     @Test
@@ -32,11 +32,11 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.APPROACH, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
     }
 
     @Test
-    public void runningExampleApproach() throws Exception {
+    public void runningExampleConfigCrusher() throws Exception {
         String programName = "running-example";
 
         // arguments
@@ -49,19 +49,19 @@ public class EvaluationTest {
         Analysis analysis = new DefaultStaticAnalysis();
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-        Executor executor = new DefaultExecutor(programName);
+        Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
 
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        PerformanceModelBuilder builder = new DefaultPerformanceModelBuilder(programName, measuredPerformance,
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
                 regionsToOptionSet);
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.APPROACH, performanceModel);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class EvaluationTest {
     }
 
     @Test
-    public void colorCounterApproach() throws Exception {
+    public void colorCounterConfigCrusher() throws Exception {
         String programName = "pngtasticColorCounter";
 
         // arguments
@@ -92,19 +92,19 @@ public class EvaluationTest {
         Analysis analysis = new DefaultStaticAnalysis();
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-        Executor executor = new DefaultExecutor(programName);
+        Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
 
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        PerformanceModelBuilder builder = new DefaultPerformanceModelBuilder(programName, measuredPerformance,
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
                 regionsToOptionSet);
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.APPROACH, performanceModel);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel);
     }
 
     @Test

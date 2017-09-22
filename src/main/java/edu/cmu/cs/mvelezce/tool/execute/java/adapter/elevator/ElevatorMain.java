@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
-import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class ElevatorMain {
         }
 
         Set<String> performanceConfiguration = ElevatorAdapter.adaptConfigurationToPerformanceMeasurement(elevatorArgs);
-        Executor executor = new DefaultExecutor();
+        Executor executor = new ConfigCrusherExecutor();
         executor.writeToFile(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
     }
 }

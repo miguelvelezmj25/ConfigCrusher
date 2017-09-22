@@ -3,14 +3,8 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
-import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.pipeline.java.analysis.PerformanceStatistic;
 
@@ -52,7 +46,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("####################### Measure performancemodel #######################");
-//        Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
+//        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
 //        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
 //        System.out.println("");
 //
@@ -65,7 +59,7 @@ public class JavaPipeline {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-////        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+////        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
 ////        System.out.println(pm);
 ////        JavaPipeline.savePMPerformance(programName, pm);
 ////
@@ -116,7 +110,7 @@ public class JavaPipeline {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //        JavaPipeline.savePMPerformance(programName, pm, perfStats);
 //
@@ -145,7 +139,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("####################### Measure performancemodel #######################");
-//        Executor executor = new DefaultExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
+//        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
 //        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
 //
 //        // TODO
@@ -165,7 +159,7 @@ public class JavaPipeline {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-////        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+////        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
 ////        System.out.println(pm);
 ////        JavaPipeline.savePMPerformance(programName, pm, null);
 ////
@@ -204,7 +198,7 @@ public class JavaPipeline {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        return DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        return ConfigCrusherPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
         return null; // TODO make change since interface changed
     }
 
@@ -238,7 +232,7 @@ public class JavaPipeline {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        return DefaultPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
+//        return ConfigCrusherPerformanceModelBuilder.createPerformanceModel(programName, args, measuredPerformance, regionsToOptions);
         return null; // TODO make change since interface changed
     }
 

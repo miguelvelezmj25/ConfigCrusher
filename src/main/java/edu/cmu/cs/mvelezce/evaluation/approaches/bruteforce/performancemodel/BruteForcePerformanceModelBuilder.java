@@ -1,14 +1,14 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.performancemodel;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.performancemodel.DefaultPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performancemodel.ConfigCrusherPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
 
 import java.util.Map;
 import java.util.Set;
 
-public class BruteForcePerformanceModelBuilder extends DefaultPerformanceModelBuilder {
+public class BruteForcePerformanceModelBuilder extends ConfigCrusherPerformanceModelBuilder {
 
     // TODO not sure that this will be used
     public BruteForcePerformanceModelBuilder(String programName, Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
@@ -93,8 +93,8 @@ public class BruteForcePerformanceModelBuilder extends DefaultPerformanceModelBu
 //        return performanceModel;
 //
 //
-//////        DefaultPerformanceModelBuilder.getOuterRegions(measuredPerformance, regionsToOptions);
-//////        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = DefaultPerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
+//////        ConfigCrusherPerformanceModelBuilder.getOuterRegions(measuredPerformance, regionsToOptions);
+//////        Map<Region, Set<String>> regionsToOptionsIncludingInnerRegions = ConfigCrusherPerformanceModelBuilder.getOptionsInRegionsWithInnerRegions(measuredPerformance, regionsToOptions);
 ////        for(PerformanceEntry entry : measuredPerformance) {
 ////            for(Map.Entry<Region, Set<Region>> region : entry.getRegionsToInnerRegions().entrySet()) {
 ////                System.out.println("############### " + region.getKey().getRegionID());

@@ -37,44 +37,40 @@ public class Region {
         return endTime - startTime;
     }
 
-    public static double getMilliExecutionTime(long startTime, long endTime) {
-        return Region.getExecutionTime(startTime, endTime) / 1000000.0;
-    }
+//    public static double getMilliExecutionTime(long startTime, long endTime) {
+//        return Region.getExecutionTime(startTime, endTime) / 1000000.0;
+//    }
+//
+//    public static double getSecondsExecutionTime(long startTime, long endTime) {
+//        return Region.getMilliExecutionTime(startTime, endTime) / 1000.0;
+//    }
+//
+//    public static long toNanoTime(int time) {
+//        return ((long) time) * 1000000000;
+//    }
 
-    public static double getSecondsExecutionTime(long startTime, long endTime) {
-        return Region.getMilliExecutionTime(startTime, endTime) / 1000.0;
-    }
-
-    public static long toNanoTime(int time) {
-        return ((long) time) * 1000000000;
-    }
-
-    private void enterRegion() {
-        Regions.addExecutingRegion(this);
-    }
+//    private void enterRegion() {
+//        Regions.addExecutingRegion(this);
+//    }
 
     public void enter() {
-//        this.overhead = System.nanoTime();
-        this.enterRegion();
+//        this.enterRegion();
         this.startTime();
-//        this.overhead = System.nanoTime() - this.overhead;
     }
 
     public void enter(long startTime) {
-        this.enterRegion();
+//        this.enterRegion();
         this.startTime(startTime);
     }
 
     public void exit() {
         this.endTime();
-//        this.overhead = System.nanoTime();
-        Regions.removeExecutingRegion(this);
-//        this.overhead = System.nanoTime() - this.overhead;
+//        Regions.removeExecutingRegion(this);
     }
 
     public void exit(long endTime) {
         this.endTime(endTime);
-        Regions.removeExecutingRegion(this);
+//        Regions.removeExecutingRegion(this);
     }
 
     public void startTime() {

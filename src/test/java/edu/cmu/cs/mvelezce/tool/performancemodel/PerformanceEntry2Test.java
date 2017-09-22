@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.performancemodel;
 
-import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class PerformanceEntry2Test {
         // Program arguments
         String[] args = new String[0];
 
-        Executor executor = new DefaultExecutor(programName);
+        Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntry2> result = executor.execute(args);
         result.size();
     }

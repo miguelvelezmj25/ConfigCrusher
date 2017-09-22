@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
-import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class ZipmeMain {
 
         if(success) {
             Set<String> performanceConfiguration = ZipmeAdapter.adaptConfigurationToPerformanceMeasurement(zipmeArgs);
-            Executor executor = new DefaultExecutor();
+            Executor executor = new ConfigCrusherExecutor();
             executor.writeToFile(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
         }
     }

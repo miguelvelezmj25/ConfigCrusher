@@ -21,7 +21,7 @@ public class Evaluation {
     public static final String DOT_CSV = ".csv";
 
     // TODO use a class or enum>
-    public static final String APPROACH = "approach";
+    public static final String CONFIG_CRUSHER = "config_crusher";
     public static final String BRUTE_FORCE = "brute_force";
 
     private String programName;

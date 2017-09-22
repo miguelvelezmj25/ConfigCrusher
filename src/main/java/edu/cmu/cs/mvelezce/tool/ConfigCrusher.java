@@ -7,13 +7,13 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.BaseCompression;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
-import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.performancemodel.DefaultPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performancemodel.ConfigCrusherPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModelBuilder;
@@ -52,11 +52,11 @@ public class ConfigCrusher {
         Instrumenter instrumenter = new TimerRegionInstrumenter(this.programName, this.classDir, javaRegionsToOptionSet);
         instrumenter.instrument(args);
 
-        Executor executor = new DefaultExecutor(this.programName, this.entry, this.classDir, configurations);
+        Executor executor = new ConfigCrusherExecutor(this.programName, this.entry, this.classDir, configurations);
         Set<PerformanceEntry2> performanceEntries = executor.execute(args);
 
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
-        PerformanceModelBuilder builder = new DefaultPerformanceModelBuilder(this.programName, performanceEntries, regionsToOptionSet);
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(this.programName, performanceEntries, regionsToOptionSet);
         PerformanceModel performanceModel = builder.createModel(args);
 
         return performanceModel;

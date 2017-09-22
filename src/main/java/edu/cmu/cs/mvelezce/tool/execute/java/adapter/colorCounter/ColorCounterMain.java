@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter;
 import counter.com.googlecode.pngtastic.Run;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
-import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
@@ -37,7 +37,7 @@ public class ColorCounterMain extends BaseMain {
         Adapter adapter = new ColorCounterAdapter();
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
-        Executor executor = new DefaultExecutor(this.getProgramName());
+        Executor executor = new ConfigCrusherExecutor(this.getProgramName());
         executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
     }
 
@@ -53,5 +53,8 @@ public class ColorCounterMain extends BaseMain {
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);
         }
+
+        System.out.println("start count " + Regions.startCount);
+        System.out.println("end count " + Regions.endCound);
     }
 }

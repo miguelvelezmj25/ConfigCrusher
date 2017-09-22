@@ -17,17 +17,17 @@ import java.util.Set;
 /**
  * Created by miguelvelez on 4/30/17.
  */
-public class DefaultExecutor extends BaseExecutor {
+public class ConfigCrusherExecutor extends BaseExecutor {
 
-    public DefaultExecutor() {
+    public ConfigCrusherExecutor() {
         this(null);
     }
 
-    public DefaultExecutor(String programName) {
+    public ConfigCrusherExecutor(String programName) {
         this(programName, null, null, null);
     }
 
-    public DefaultExecutor(String programName, String entryPoint, String classDir, Set<Set<String>> configurations) {
+    public ConfigCrusherExecutor(String programName, String entryPoint, String classDir, Set<Set<String>> configurations) {
         super(programName, entryPoint, classDir, configurations);
     }
 

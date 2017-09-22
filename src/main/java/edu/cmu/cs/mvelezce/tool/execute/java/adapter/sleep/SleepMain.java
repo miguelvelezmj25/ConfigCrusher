@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep;
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
-import edu.cmu.cs.mvelezce.tool.execute.java.DefaultExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
@@ -229,7 +229,7 @@ public class SleepMain extends BaseMain {
         Adapter adapter = new SleepAdapter();
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
-        Executor executor = new DefaultExecutor(this.getProgramName());
+        Executor executor = new ConfigCrusherExecutor(this.getProgramName());
         executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
     }
 

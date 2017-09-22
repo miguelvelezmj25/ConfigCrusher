@@ -85,30 +85,41 @@ public class PerformanceEntry2 implements IPerformanceEntry {
 
             Region top = executingRegions.peek();
 
-            if(top.getRegionID().equals(region.getRegionID())) {
-                if(top.getStartTime() != 0 && region.getEndTime() != 0) {
-                    long regionExecutionTime = region.getEndTime() - top.getStartTime();
-                    regionExecutionTime -= innerRegionExecutionTime.pop();
+            if(!top.getRegionID().equals(region.getRegionID())) {
+                continue;
+            }
 
-                    this.regionsToProcessedPerformance.put(top, regionExecutionTime);
-                    executingRegions.pop();
+            if(top.getStartTime() == 0 || region.getEndTime() == 0) {
+                continue;
+            }
 
-                    // Adding new inner execution time
-                    if(executingRegions.isEmpty()) {
-                        continue;
-                    }
+            long start = top.getStartTime();
+            long end = region.getEndTime();
+            long topOverhead = top.getOverhead();
+            long regionExecutionTime = end - start;
+            regionExecutionTime -= topOverhead;
+            regionExecutionTime -= innerRegionExecutionTime.pop();
+            // Thread.sleep might sleep for less time and can give us a negative time
+            regionExecutionTime = Math.max(0, regionExecutionTime);
 
-                    Stack<Long> added = new Stack<>();
+            this.regionsToProcessedPerformance.put(top, regionExecutionTime);
+            executingRegions.pop();
 
-                    while (!innerRegionExecutionTime.isEmpty()) {
-                        long currentInnerRegionExecutionTime = innerRegionExecutionTime.pop();
-                        added.push(currentInnerRegionExecutionTime + regionExecutionTime);
-                    }
+            // Adding new inner execution time
+            if(executingRegions.isEmpty()) {
+                continue;
+            }
 
-                    while (!added.isEmpty()) {
-                        innerRegionExecutionTime.push(added.pop());
-                    }
-                }
+            long regionOverhead = region.getOverhead();
+            Stack<Long> added = new Stack<>();
+
+            while (!innerRegionExecutionTime.isEmpty()) {
+                long currentInnerRegionExecutionTime = innerRegionExecutionTime.pop();
+                added.push(currentInnerRegionExecutionTime + regionExecutionTime + topOverhead + regionOverhead);
+            }
+
+            while (!added.isEmpty()) {
+                innerRegionExecutionTime.push(added.pop());
             }
         }
 
@@ -128,25 +139,27 @@ public class PerformanceEntry2 implements IPerformanceEntry {
 
             Region top = executingRegions.peek();
 
-            if(top.getRegionID().equals(region.getRegionID())) {
-                if(top.getStartTime() != 0 && region.getEndTime() != 0) {
-                    long start = top.getStartTime();
-                    long end = region.getEndTime();
-                    long time = (end - start);
-//                    time -= top.getOverhead();
-//                    time -= region.getOverhead();
-                    if(this.regionsToRawPerformance.containsKey(top)) {
-                        throw new RuntimeException("Error");
-                    }
-
-
-                    this.regionsToRawPerformance.put(top, time);
-                    executingRegions.pop();
-                }
-//                else {
-////                    top.setOverhead(top.getOverhead() + region.getOverhead());
-//                }
+            if(!top.getRegionID().equals(region.getRegionID())) {
+                continue;
             }
+
+            if(top.getStartTime() == 0 || region.getEndTime() == 0) {
+                continue;
+            }
+
+            long start = top.getStartTime();
+            long end = region.getEndTime();
+            long time = end - start;
+            time -= top.getOverhead();
+            // Thread.sleep might sleep for less time and can give us a negative time
+            time = Math.max(0, time);
+
+            if(this.regionsToRawPerformance.containsKey(top)) {
+                throw new RuntimeException("What?");
+            }
+
+            this.regionsToRawPerformance.put(top, time);
+            executingRegions.pop();
         }
 
         if(!executingRegions.isEmpty()) {
@@ -205,19 +218,6 @@ public class PerformanceEntry2 implements IPerformanceEntry {
 
                 executingRegions.push(region);
             }
-
-
-//            else if(executingRegions.peek().getRegionID().equals(region.getRegionID())) {
-//                executingRegions.pop();
-//            }
-//            else {
-//                for(Region executingRegion : executingRegions) {
-//                    Set<Region> innerRegions = this.regionsToInnerRegions.get(executingRegion);
-//                    innerRegions.add(region);
-//                }
-//
-//                executingRegions.push(region);
-//            }
         }
 
         if(!executingRegions.isEmpty()) {

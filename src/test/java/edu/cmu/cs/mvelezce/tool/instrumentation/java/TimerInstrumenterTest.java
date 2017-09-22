@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,7 +24,7 @@ public class TimerInstrumenterTest {
     }
 
     protected void format() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {
-        String[] args = new String[2];
+        args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
@@ -46,7 +44,7 @@ public class TimerInstrumenterTest {
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
 //
-////        String[] args = new String[2];
+////        args = new String[2];
 ////        args[0] = "-delres";
 ////        args[1] = "-saveres";
 //
@@ -75,7 +73,7 @@ public class TimerInstrumenterTest {
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
 //
-////        String[] args = new String[2];
+////        args = new String[2];
 ////        args[0] = "-delres";
 ////        args[1] = "-saveres";
 //
@@ -97,12 +95,12 @@ public class TimerInstrumenterTest {
 //        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
 //
 //        // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 //
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
 //
-////        String[] args = new String[2];
+////        args = new String[2];
 ////        args[0] = "-delres";
 ////        args[1] = "-saveres";
 //
@@ -129,7 +127,7 @@ public class TimerInstrumenterTest {
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
 //
-////        String[] args = new String[2];
+////        args = new String[2];
 ////        args[0] = "-delres";
 ////        args[1] = "-saveres";
 //
@@ -151,7 +149,7 @@ public class TimerInstrumenterTest {
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
 //
-////        String[] args = new String[2];
+////        args = new String[2];
 ////        args[0] = "-delres";
 ////        args[1] = "-saveres";
 //
@@ -174,7 +172,7 @@ public class TimerInstrumenterTest {
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
 //
-////        String[] args = new String[2];
+////        args = new String[2];
 ////        args[0] = "-delres";
 ////        args[1] = "-saveres";
 //
@@ -197,7 +195,7 @@ public class TimerInstrumenterTest {
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
 //
-////        String[] args = new String[2];
+////        args = new String[2];
 ////        args[0] = "-delres";
 ////        args[1] = "-saveres";
 //
@@ -220,7 +218,7 @@ public class TimerInstrumenterTest {
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
 //
-////        String[] args = new String[2];
+////        args = new String[2];
 ////        args[0] = "-delres";
 ////        args[1] = "-saveres";
 //
@@ -241,17 +239,18 @@ public class TimerInstrumenterTest {
 //        this.format();
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
         Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
@@ -267,17 +266,18 @@ public class TimerInstrumenterTest {
 //        this.format();
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
         Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
@@ -293,17 +293,18 @@ public class TimerInstrumenterTest {
 //        this.format();
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
         Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
@@ -319,17 +320,18 @@ public class TimerInstrumenterTest {
 //        this.format();
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
         Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
@@ -345,17 +347,18 @@ public class TimerInstrumenterTest {
 //        this.format();
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
         Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
@@ -371,17 +374,18 @@ public class TimerInstrumenterTest {
 //        this.format();
 
         // Program arguments
-//        String[] args = new String[0];
+        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
-        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 
         Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);

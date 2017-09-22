@@ -23,7 +23,7 @@ public class PerformanceModelBuilderTest {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -53,7 +53,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -75,7 +75,7 @@ public class PerformanceModelBuilderTest {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -105,7 +105,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -135,7 +135,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -165,7 +165,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -195,7 +195,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -225,7 +225,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -255,7 +255,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -285,7 +285,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -315,7 +315,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -345,7 +345,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //
 //        Set<String> log = new HashSet<>();
 //        log.add("LOGLEVEL");
@@ -380,7 +380,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //
 ////        Set<String> log = new HashSet<>();
@@ -415,7 +415,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //
 ////        Set<String> log = new HashSet<>();
@@ -450,7 +450,7 @@ public class PerformanceModelBuilderTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(program, args, measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -472,7 +472,7 @@ public class PerformanceModelBuilderTest {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //    }
 //
 //    @Test
@@ -493,7 +493,7 @@ public class PerformanceModelBuilderTest {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //    }
 //
 //    @Test
@@ -514,7 +514,7 @@ public class PerformanceModelBuilderTest {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //    }
 //
 //    @Test
@@ -535,7 +535,7 @@ public class PerformanceModelBuilderTest {
 //            regionsToOptions.put(region, entry.getValue());
 //        }
 //
-//        PerformanceModel pm = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel pm = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //        System.out.println(pm);
 //    }
 //
@@ -563,10 +563,10 @@ public class PerformanceModelBuilderTest {
 //        args[1] = "-saveres";
 //
 //        // Execute
-//        PerformanceModel outputSave = DefaultPerformanceModelBuilder.createPerformanceModel(Sleep1.CLASS, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel outputSave = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(Sleep1.CLASS, args, measuredPerformance, regionsToOptions);
 //
 //        args = new String[0];
-//        PerformanceModel outputRead = DefaultPerformanceModelBuilder.createPerformanceModel(Sleep1.CLASS, args, measuredPerformance, regionsToOptions);
+//        PerformanceModel outputRead = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(Sleep1.CLASS, args, measuredPerformance, regionsToOptions);
 //
 //        Assert.assertEquals(outputSave, outputRead);
 //    }
@@ -590,7 +590,7 @@ public class PerformanceModelBuilderTest {
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(Sleep1.CLASS, args, Sleep1.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + Sleep1.CLASS, configurationsToExecute);
 //
 //        // Performance model
-//        PerformanceModel performanceModel = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel performanceModel = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //
 //        System.out.println(performanceModel);
 //
@@ -628,7 +628,7 @@ public class PerformanceModelBuilderTest {
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(Sleep2.CLASS, args, Sleep2.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + Sleep2.CLASS, configurationsToExecute);
 //
 //        // Performance model
-//        PerformanceModel performanceModel = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel performanceModel = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //
 //        System.out.println(performanceModel);
 //
@@ -676,7 +676,7 @@ public class PerformanceModelBuilderTest {
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(Sleep3.CLASS, args, Sleep3.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + Sleep3.CLASS, configurationsToExecute);
 //
 //        // Performance model
-//        PerformanceModel performanceModel = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel performanceModel = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //
 //        System.out.println(performanceModel);
 //
@@ -720,7 +720,7 @@ public class PerformanceModelBuilderTest {
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(Sleep4.CLASS, args, Sleep4.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + Sleep4.CLASS, configurationsToExecute);
 //
 //        // Performance model
-//        PerformanceModel performanceModel = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel performanceModel = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //
 //        System.out.println(performanceModel);
 //
@@ -758,7 +758,7 @@ public class PerformanceModelBuilderTest {
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(Sleep7.CLASS, args, Sleep7.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + Sleep7.CLASS, configurationsToExecute);
 //
 //        // Performance model
-//        PerformanceModel performanceModel = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel performanceModel = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //
 //        System.out.println(performanceModel);
 //
@@ -796,7 +796,7 @@ public class PerformanceModelBuilderTest {
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(Sleep8.CLASS, args, Sleep8.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + Sleep8.CLASS, configurationsToExecute);
 //
 //        // Performance model
-//        PerformanceModel performanceModel = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel performanceModel = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //
 //        System.out.println(performanceModel);
 //
@@ -834,7 +834,7 @@ public class PerformanceModelBuilderTest {
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(Sleep9.CLASS, args, Sleep9.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + Sleep9.CLASS, configurationsToExecute);
 //
 //        // Performance model
-//        PerformanceModel performanceModel = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel performanceModel = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //
 //        System.out.println(performanceModel);
 //
@@ -884,7 +884,7 @@ public class PerformanceModelBuilderTest {
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(Sleep10.CLASS, args, Sleep10.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + Sleep10.CLASS, configurationsToExecute);
 //
 //        // Performance model
-//        PerformanceModel performanceModel = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel performanceModel = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //
 //        System.out.println(performanceModel);
 //
@@ -928,7 +928,7 @@ public class PerformanceModelBuilderTest {
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(Sleep13.CLASS, args, Sleep13.FILENAME, TimerRegionInstrumenter.TARGET_DIRECTORY + "/" + Sleep13.CLASS, configurationsToExecute);
 //
 //        // Performance model
-//        PerformanceModel performanceModel = DefaultPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
+//        PerformanceModel performanceModel = ConfigCrusherPerformanceModelBuilder.createPerformanceModel(measuredPerformance, regionsToOptions);
 //
 //        System.out.println(performanceModel);
 //

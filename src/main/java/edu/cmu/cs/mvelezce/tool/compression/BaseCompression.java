@@ -28,35 +28,6 @@ public abstract class BaseCompression implements Compression {
         this.optionSet = optionSet;
     }
 
-    @Override
-    public Set<Set<String>> compressConfigurations(String[] args) throws IOException {
-        Options.getCommandLine(args);
-
-        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName;
-        File file = new File(outputFile);
-
-        Options.checkIfDeleteResult(file);
-
-        if(file.exists()) {
-            Collection<File> files = FileUtils.listFiles(file, null, true);
-
-            if(files.size() != 1) {
-                throw new RuntimeException("We expected to find 1 file in the directory, but that is not the case "
-                        + outputFile);
-            }
-
-            return this.readFromFile(files.iterator().next());
-        }
-
-        Set<Set<String>> configurationsToExecute = this.compressConfigurations();
-
-        if(Options.checkIfSave()) {
-            this.writeToFile(configurationsToExecute);
-        }
-
-        return configurationsToExecute;
-    }
-
     // TODO should this be static?
     public static Set<Set<String>> filterOptions(Set<Set<String>> relevantOptionsSet) {
         Set<Set<String>> filteredOptions = new HashSet<>();
@@ -99,6 +70,35 @@ public abstract class BaseCompression implements Compression {
         }
 
         return result;
+    }
+
+    @Override
+    public Set<Set<String>> compressConfigurations(String[] args) throws IOException {
+        Options.getCommandLine(args);
+
+        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName;
+        File file = new File(outputFile);
+
+        Options.checkIfDeleteResult(file);
+
+        if(file.exists()) {
+            Collection<File> files = FileUtils.listFiles(file, null, true);
+
+            if(files.size() != 1) {
+                throw new RuntimeException("We expected to find 1 file in the directory, but that is not the case "
+                        + outputFile);
+            }
+
+            return this.readFromFile(files.iterator().next());
+        }
+
+        Set<Set<String>> configurationsToExecute = this.compressConfigurations();
+
+        if(Options.checkIfSave()) {
+            this.writeToFile(configurationsToExecute);
+        }
+
+        return configurationsToExecute;
     }
 
     public String getProgramName() {

@@ -52,6 +52,10 @@ public class MethodBlock {
         this.ID = ID;
     }
 
+    public static String asID(AbstractInsnNode insnNode) {
+        return insnNode.hashCode() + "";
+    }
+
     public void addSuccessor(MethodBlock methodBlock) {
 //        if(this.successors.size() >= 2) {
 //            throw new IllegalArgumentException("A method block cannot have more than 2 successors");
@@ -69,10 +73,6 @@ public class MethodBlock {
         this.successors.clear();
     }
 
-    public String getID() {
-        return this.ID;
-    }
-
 //    public Label getLabel() {
 //        return this.label;
 //    }
@@ -81,16 +81,16 @@ public class MethodBlock {
 //        return this.originalLabel;
 //    }
 
+    public String getID() {
+        return this.ID;
+    }
+
     public List<AbstractInsnNode> getInstructions() {
         return this.instructions;
     }
 
     public Set<MethodBlock> getSuccessors() {
         return this.successors;
-    }
-
-    public Set<MethodBlock> getPredecessors() {
-        return this.predecessors;
     }
 
     //    public boolean isWithRet() {
@@ -120,6 +120,9 @@ public class MethodBlock {
 //        return ID.hashCode();
 //    }
 
+    public Set<MethodBlock> getPredecessors() {
+        return this.predecessors;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -152,15 +155,11 @@ public class MethodBlock {
 //                '}';
     }
 
-    public static String asID(AbstractInsnNode insnNode) {
-        return insnNode.hashCode() + "";
+    public boolean isWithReturn() {
+        return withReturn;
     }
 
     public void setWithReturn(boolean withReturn) {
         this.withReturn = withReturn;
-    }
-
-    public boolean isWithReturn() {
-        return withReturn;
     }
 }

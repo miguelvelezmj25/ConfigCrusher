@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.varexj;
 
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.varexj.VarexJProcessor;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 

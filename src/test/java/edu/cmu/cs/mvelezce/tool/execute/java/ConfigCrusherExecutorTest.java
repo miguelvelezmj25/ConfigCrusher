@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class ConfigCrusherExecutorTest {

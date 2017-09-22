@@ -1,13 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
-import edu.cmu.cs.mvelezce.*;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
-import org.junit.Test;
-
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by miguelvelez on 4/30/17.
  */

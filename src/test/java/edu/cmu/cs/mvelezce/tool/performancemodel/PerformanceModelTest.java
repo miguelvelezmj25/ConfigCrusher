@@ -1,9 +1,11 @@
 package edu.cmu.cs.mvelezce.tool.performancemodel;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mvelezce on 3/9/17.

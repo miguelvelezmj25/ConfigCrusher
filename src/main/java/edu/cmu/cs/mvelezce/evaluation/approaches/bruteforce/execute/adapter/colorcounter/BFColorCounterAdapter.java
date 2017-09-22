@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.colorcounter;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 
 import java.io.IOException;
 import java.util.Set;

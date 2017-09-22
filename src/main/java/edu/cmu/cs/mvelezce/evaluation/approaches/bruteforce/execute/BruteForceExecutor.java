@@ -27,53 +27,14 @@ public class BruteForceExecutor extends BaseExecutor {
         super(programName, entryPoint, dir, configurations);
     }
 
-    @Override
-    public Set<PerformanceEntry2> execute(int iteration) throws IOException, InterruptedException {
-        // TODO factory pattern or switch statement to create the right adapter
-        Adapter adapter;
+    public static Set<Set<String>> getBruteForceConfigurations(Set<Set<String>> configurations) {
+        Set<String> options = new HashSet<>();
 
-        if(this.getProgramName().contains("running-example")) {
-            adapter = new BFRunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-        }
-        else if(this.getProgramName().contains("pngtasticColorCounter")) {
-            adapter = new BFColorCounterAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-        }
-        else {
-            throw new RuntimeException("Could not create an adapter for " + this.getProgramName());
+        for(Set<String> configuration : configurations) {
+            options.addAll(configuration);
         }
 
-        for(Set<String> configuration : this.getConfigurations()) {
-            adapter.execute(configuration, iteration);
-        }
-
-        String outputDir = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + "/" + iteration;
-        File outputFile = new File(outputDir);
-
-        if(!outputFile.exists()) {
-            throw new RuntimeException("The output file could not be found " + outputDir);
-        }
-
-        Set<PerformanceEntry2> performanceEntries = this.aggregateExecutions(outputFile);
-        return performanceEntries;
-
-
-//        programName += "-bf";
-//        String[] args = new String[1];
-//        args[0] = "-i" + iterations;
-//        Options.getCommandLine(args);
-//
-//        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
-//
-//        for(int i = 0; i < Options.getIterations(); i++) {
-//            executionsPerformance.add(BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, args));
-//        }
-//
-//        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
-//        Set<PerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
-//        programName = programName.substring(0, programName.indexOf("-"));
-//        BruteForce.saveBFPerformance(programName, perfStats);
-//
-//        return measuredPerformance;
+        return Helper.getConfigurations(options);
     }
 
 //    public static Set<PerformanceEntry> repeatProcessMeasure(String programName, int iterations, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
@@ -153,14 +114,53 @@ public class BruteForceExecutor extends BaseExecutor {
 //        writer.close();
 //    }
 
-    public static Set<Set<String>> getBruteForceConfigurations(Set<Set<String>> configurations) {
-        Set<String> options = new HashSet<>();
+    @Override
+    public Set<PerformanceEntry2> execute(int iteration) throws IOException, InterruptedException {
+        // TODO factory pattern or switch statement to create the right adapter
+        Adapter adapter;
 
-        for(Set<String> configuration : configurations) {
-            options.addAll(configuration);
+        if(this.getProgramName().contains("running-example")) {
+            adapter = new BFRunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("pngtasticColorCounter")) {
+            adapter = new BFColorCounterAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else {
+            throw new RuntimeException("Could not create an adapter for " + this.getProgramName());
         }
 
-        return Helper.getConfigurations(options);
+        for(Set<String> configuration : this.getConfigurations()) {
+            adapter.execute(configuration, iteration);
+        }
+
+        String outputDir = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + "/" + iteration;
+        File outputFile = new File(outputDir);
+
+        if(!outputFile.exists()) {
+            throw new RuntimeException("The output file could not be found " + outputDir);
+        }
+
+        Set<PerformanceEntry2> performanceEntries = this.aggregateExecutions(outputFile);
+        return performanceEntries;
+
+
+//        programName += "-bf";
+//        String[] args = new String[1];
+//        args[0] = "-i" + iterations;
+//        Options.getCommandLine(args);
+//
+//        List<Set<PerformanceEntry>> executionsPerformance = new ArrayList<>();
+//
+//        for(int i = 0; i < Options.getIterations(); i++) {
+//            executionsPerformance.add(BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, args));
+//        }
+//
+//        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+//        Set<PerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
+//        programName = programName.substring(0, programName.indexOf("-"));
+//        BruteForce.saveBFPerformance(programName, perfStats);
+//
+//        return measuredPerformance;
     }
 
 }

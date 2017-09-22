@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.BaseStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionAndOptions;
 import org.apache.commons.io.FileUtils;
 
@@ -37,7 +36,7 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
 
         if(outputFile.exists()) {
 //                FileUtils.forceDelete(outputFile);
-            Collection<File> files = FileUtils.listFiles(outputFile, new String[] {"json"}, false);
+            Collection<File> files = FileUtils.listFiles(outputFile, new String[]{"json"}, false);
 
             if(files.size() != 1) {
                 throw new RuntimeException("We expected to find 1 file in the directory, but that is not the case "

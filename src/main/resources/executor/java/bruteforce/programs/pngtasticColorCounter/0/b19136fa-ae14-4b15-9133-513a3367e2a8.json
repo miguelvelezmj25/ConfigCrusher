@@ -1,1 +1,20 @@
-{"configuration":["DISTTHRESHOLD","LOGLEVEL"],"trace":[{"regionID":"program","startTime":1891438846046,"endTime":0,"overhead":24123},{"regionID":"program","startTime":0,"endTime":1897099744295,"overhead":8539}]}
+{
+  "configuration": [
+    "DISTTHRESHOLD",
+    "LOGLEVEL"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 1891438846046,
+      "endTime": 0,
+      "overhead": 24123
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 1897099744295,
+      "overhead": 8539
+    }
+  ]
+}

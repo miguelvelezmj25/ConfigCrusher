@@ -73,5 +73,7 @@ public abstract class BaseMethodGraphBuilder implements IMethodGraphBuilder {
         }
     }
 
-    public MethodNode getMethodNode() { return this.methodNode; }
+    public MethodNode getMethodNode() {
+        return this.methodNode;
+    }
 }

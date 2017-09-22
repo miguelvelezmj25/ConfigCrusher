@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.DefaultMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
@@ -104,7 +104,7 @@ public class TimerTransformer extends RegionTransformer {
     @Override
     public void transformMethod(MethodNode methodNode) {
         System.out.println("Before transforming");
-        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
         MethodGraph graph = builder.build();
 
         if(graph.getBlocks().size() <= 3) {
@@ -157,7 +157,7 @@ public class TimerTransformer extends RegionTransformer {
         }
 
         System.out.println("After transforming");
-        builder = new MethodGraphBuilder(methodNode);
+        builder = new DefaultMethodGraphBuilder(methodNode);
         builder.build();
         System.out.print("");
     }
@@ -456,7 +456,7 @@ public class TimerTransformer extends RegionTransformer {
      * @param regionsInMethod
      */
     private InsnList instrumentNormal(MethodNode methodNode, MethodGraph graph, List<JavaRegion> regionsInMethod) {
-//        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+//        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
 //        MethodGraph graph = builder.build();
 
         List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
@@ -659,7 +659,7 @@ public class TimerTransformer extends RegionTransformer {
         InsnList startInstructions = this.getInstructionsStartRegion(region);
         newInstructions.insertBefore(firstInstruction.getNext(), startInstructions);
 
-        MethodGraphBuilder builder = new MethodGraphBuilder(methodNode);
+        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
         MethodGraph graph = builder.build();
         Set<MethodBlock> endMethodBlocks = graph.getExitBlock().getPredecessors();
 

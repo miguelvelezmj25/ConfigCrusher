@@ -8,7 +8,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class ConfigCrusherExecutor extends BaseExecutor {
     }
 
     @Override
-    public Set<PerformanceEntry2> execute(int iteration) throws IOException, InterruptedException {
+    public Set<DefaultPerformanceEntry> execute(int iteration) throws IOException, InterruptedException {
         // TODO factory pattern or switch statement to create the right adapter
         Adapter adapter;
 
@@ -75,7 +75,7 @@ public class ConfigCrusherExecutor extends BaseExecutor {
             throw new RuntimeException("The output file could not be found " + outputDir);
         }
 
-        Set<PerformanceEntry2> performanceEntries = this.aggregateExecutions(outputFile);
+        Set<DefaultPerformanceEntry> performanceEntries = this.aggregateExecutions(outputFile);
         return performanceEntries;
     }
 

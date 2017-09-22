@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.performance.model.builder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
 
@@ -21,11 +21,11 @@ public abstract class BasePerformanceModelBuilder implements PerformanceModelBui
     private static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
 
     private String programName;
-    private Set<PerformanceEntry2> measuredPerformance;
+    private Set<DefaultPerformanceEntry> measuredPerformance;
     private Map<Region, Set<Set<String>>> regionsToOptionSet;
     ;
 
-    public BasePerformanceModelBuilder(String programName, Set<PerformanceEntry2> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
+    public BasePerformanceModelBuilder(String programName, Set<DefaultPerformanceEntry> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
         this.programName = programName;
         this.measuredPerformance = measuredPerformance;
         this.regionsToOptionSet = regionsToOptionSet;
@@ -35,7 +35,7 @@ public abstract class BasePerformanceModelBuilder implements PerformanceModelBui
         return programName;
     }
 
-    public Set<PerformanceEntry2> getMeasuredPerformance() {
+    public Set<DefaultPerformanceEntry> getMeasuredPerformance() {
         return measuredPerformance;
     }
 

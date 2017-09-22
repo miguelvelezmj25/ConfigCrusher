@@ -214,7 +214,7 @@ public class MethodGraphBuilder extends BaseMethodGraphBuilder {
                 for(TryCatchBlockNode tryCatchBlock : this.getMethodNode().tryCatchBlocks) {
                     AbstractInsnNode insnNode = tryCatchBlock.start;
 
-                    while(insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
+                    while (insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
                         insnNode = insnNode.getNext();
 
                         if(insnNode == instruction) {
@@ -320,7 +320,7 @@ public class MethodGraphBuilder extends BaseMethodGraphBuilder {
                 for(TryCatchBlockNode tryCatchBlock : this.getMethodNode().tryCatchBlocks) {
                     AbstractInsnNode insnNode = tryCatchBlock.start;
 
-                    while(insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
+                    while (insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
                         insnNode = insnNode.getNext();
 
                         if(insnNode == instruction) {

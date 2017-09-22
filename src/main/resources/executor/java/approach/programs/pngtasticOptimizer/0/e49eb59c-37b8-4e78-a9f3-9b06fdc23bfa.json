@@ -1,1 +1,7 @@
-{"configuration":["ITERATIONS","REMOVEGAMMA"],"trace":[]}
+{
+  "configuration": [
+    "ITERATIONS",
+    "REMOVEGAMMA"
+  ],
+  "trace": []
+}

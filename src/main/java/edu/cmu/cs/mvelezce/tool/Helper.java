@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 // TODO what is this class helping for?
+
 /**
  * Incling class for performing analyses.
  *

@@ -1,1 +1,20 @@
-{"configuration":["B","C"],"trace":[{"regionID":"program","startTime":26047764237832,"endTime":0,"overhead":21982},{"regionID":"program","startTime":0,"endTime":26047770100798,"overhead":9852}]}
+{
+  "configuration": [
+    "B",
+    "C"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 26047764237832,
+      "endTime": 0,
+      "overhead": 21982
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 26047770100798,
+      "overhead": 9852
+    }
+  ]
+}

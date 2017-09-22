@@ -3,11 +3,14 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.*;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
-import jdk.internal.org.objectweb.asm.tree.*;
+import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import jdk.internal.org.objectweb.asm.util.Printer;
 
 import java.io.IOException;

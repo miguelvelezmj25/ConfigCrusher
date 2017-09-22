@@ -17,19 +17,23 @@ public class TimerInstrumenterTest {
 
     protected static String srcDir;
     protected static String classDir;
+    //    @Test
+//    public void testSleep30() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+//        String programName = "sleep30";
+//        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+//        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+//        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+//        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+//
+//        // Format return statements with method calls
+//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+//
+//        // Program arguments
+    String[] args = new String[0];
 
     protected void compile() throws IOException, InterruptedException {
         Instrumenter compiler = new CompileInstrumenter(TimerInstrumenterTest.srcDir, TimerInstrumenterTest.classDir);
         compiler.compileFromSource();
-    }
-
-    protected void format() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        Instrumenter compiler = new Formatter(TimerInstrumenterTest.srcDir, TimerInstrumenterTest.classDir);
-        compiler.instrument(args);
     }
 
 //    @Test
@@ -83,19 +87,14 @@ public class TimerInstrumenterTest {
 //        Instrumenter.instrument(instrumentSrcDirectory, instrumentClassDirectory, decisionsToOptions);
 //    }
 
-//    @Test
-//    public void testSleep30() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-//        String programName = "sleep30";
-//        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-//        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-//        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-//        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-//
-//        // Format return statements with method calls
-//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
-//
-//        // Program arguments
-        String[] args = new String[0];
+    protected void format() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Instrumenter compiler = new Formatter(TimerInstrumenterTest.srcDir, TimerInstrumenterTest.classDir);
+        compiler.instrument(args);
+    }
 //
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";

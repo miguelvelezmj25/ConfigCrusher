@@ -1,1 +1,22 @@
-{"configuration":["FREQTHRESHOLD","DISTTHRESHOLD","TIMEOUT","LOGLEVEL"],"trace":[{"regionID":"program","startTime":1885390387462,"endTime":0,"overhead":21605},{"regionID":"program","startTime":0,"endTime":1890971568672,"overhead":11406}]}
+{
+  "configuration": [
+    "FREQTHRESHOLD",
+    "DISTTHRESHOLD",
+    "TIMEOUT",
+    "LOGLEVEL"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 1885390387462,
+      "endTime": 0,
+      "overhead": 21605
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 1890971568672,
+      "overhead": 11406
+    }
+  ]
+}

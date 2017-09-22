@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -121,11 +121,11 @@ public abstract class BaseExecutor implements Executor {
 //    }
 
     // TODO should this be static
-    private static Set<PerformanceEntry2> averageExecutions(List<Set<PerformanceEntry2>> performanceEntriesList) {
-        Set<PerformanceEntry2> result = new HashSet<>();
+    private static Set<DefaultPerformanceEntry> averageExecutions(List<Set<DefaultPerformanceEntry>> performanceEntriesList) {
+        Set<DefaultPerformanceEntry> result = new HashSet<>();
 
-//        for(Set<PerformanceEntry2> performanceEntries : performanceEntriesList) {
-//            for(PerformanceEntry2 performanceEntry : performanceEntries) {
+//        for(Set<DefaultPerformanceEntry> performanceEntries : performanceEntriesList) {
+//            for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
 //                performanceEntry.g
 //            }
 //
@@ -135,7 +135,7 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public Set<PerformanceEntry2> execute(String[] args) throws IOException, InterruptedException {
+    public Set<DefaultPerformanceEntry> execute(String[] args) throws IOException, InterruptedException {
         Options.getCommandLine(args);
 
         String outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
@@ -145,12 +145,12 @@ public abstract class BaseExecutor implements Executor {
 
         if(outputFile.exists()) {
             // TODO aggregate and averae
-            Set<PerformanceEntry2> results = this.aggregateExecutions(outputFile);
+            Set<DefaultPerformanceEntry> results = this.aggregateExecutions(outputFile);
             return results;
         }
 
         this.repetitions = Options.getIterations();
-        Set<PerformanceEntry2> performanceEntries = this.execute();
+        Set<DefaultPerformanceEntry> performanceEntries = this.execute();
 
         // TODO
 //        if(Options.checkIfSave()) {
@@ -161,16 +161,16 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public Set<PerformanceEntry2> execute() throws IOException, InterruptedException {
-        List<Set<PerformanceEntry2>> performanceEntriesList = new ArrayList<>();
+    public Set<DefaultPerformanceEntry> execute() throws IOException, InterruptedException {
+        List<Set<DefaultPerformanceEntry>> performanceEntriesList = new ArrayList<>();
 
         for(int i = 0; i < this.repetitions; i++) {
-            Set<PerformanceEntry2> results = this.execute(i);
+            Set<DefaultPerformanceEntry> results = this.execute(i);
             performanceEntriesList.add(results);
         }
 
         // TODO average executions
-//        Set<PerformanceEntry2> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
+//        Set<DefaultPerformanceEntry> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
 //
 ////        List<PerformanceStatistic> execStats = BaseExecutor.getExecutionsStats(executionsPerformance);
 ////        Set<PerformanceEntry> processedRes = BaseExecutor.averageExecutions(execStats, executionsPerformance.get((0)));
@@ -287,12 +287,12 @@ public abstract class BaseExecutor implements Executor {
 //        this.writeToFile(programName, configuration, executedRegions);
 //    }
 
-    protected Set<PerformanceEntry2> aggregateExecutions(File outputFile) throws IOException {
+    protected Set<DefaultPerformanceEntry> aggregateExecutions(File outputFile) throws IOException {
         Collection<File> files = FileUtils.listFiles(outputFile, null, true);
-        Set<PerformanceEntry2> performanceEntries = new HashSet<>();
+        Set<DefaultPerformanceEntry> performanceEntries = new HashSet<>();
 
         for(File file : files) {
-            PerformanceEntry2 result = this.readFromFile(file);
+            DefaultPerformanceEntry result = this.readFromFile(file);
             performanceEntries.add(result);
         }
 
@@ -322,13 +322,13 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public PerformanceEntry2 readFromFile(File file) throws IOException {
+    public DefaultPerformanceEntry readFromFile(File file) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         Execution execution = mapper.readValue(file, new TypeReference<Execution>() {
         });
 
         execution.checkTrace();
-        PerformanceEntry2 performanceEntry = new PerformanceEntry2(execution);
+        DefaultPerformanceEntry performanceEntry = new DefaultPerformanceEntry(execution);
 
         return performanceEntry;
     }

@@ -47,7 +47,7 @@ public class JavaPipeline {
 //
 //        System.out.println("####################### Measure performancemodel #######################");
 //        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
-//        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+//        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
 //        System.out.println("");
 //
 //        System.out.println("####################### Build performancemodel model #######################");
@@ -90,7 +90,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("####################### Measure performancemodel #######################");
-//        List<Set<PerformanceEntry2>> executionsPerformance = new ArrayList<>();
+//        List<Set<DefaultPerformanceEntry>> executionsPerformance = new ArrayList<>();
 //
 //        Options.getCommandLine(args);
 //        for(int i = 0; i < Options.getIterations(); i++) {
@@ -98,7 +98,7 @@ public class JavaPipeline {
 //        }
 //
 //        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
-//        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
+//        Set<DefaultPerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
 //        System.out.println("");
 //
 //        System.out.println("####################### Build performancemodel model #######################");
@@ -140,14 +140,14 @@ public class JavaPipeline {
 //
 //        System.out.println("####################### Measure performancemodel #######################");
 //        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, instrumentSrcDirectory, configurationsToExecute);
-//        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+//        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
 //
 //        // TODO
 //
-////        List<Set<PerformanceEntry2>> executionsPerformance = new ArrayList<>();
+////        List<Set<DefaultPerformanceEntry>> executionsPerformance = new ArrayList<>();
 ////
 ////        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
-////        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
+////        Set<DefaultPerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
 //        System.out.println("");
 //
 //        System.out.println("####################### Build performancemodel model #######################");
@@ -186,7 +186,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("Measure performancemodel");
-//        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
+//        Set<DefaultPerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
 //        System.out.println("");
 //
 //        System.out.println("Build performancemodel model");
@@ -220,7 +220,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("Measure performancemodel");
-//        Set<PerformanceEntry2> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
+//        Set<DefaultPerformanceEntry> measuredPerformance = BaseExecutor.measureConfigurationPerformance(programName, args, entryPoint, classDirectory, configurationsToExecute);
 //        System.out.println("");
 //
 //        System.out.println("Build performancemodel model");

@@ -9,8 +9,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 import org.junit.Test;
@@ -50,7 +50,7 @@ public class EvaluationTest {
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
         Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
 
         args = new String[2];
         args[0] = "-delres";
@@ -72,7 +72,7 @@ public class EvaluationTest {
         String[] args = new String[0];
 
         Executor executor = new BruteForceExecutor(programName);
-        Set<PerformanceEntry2> performanceEntries = executor.execute(args);
+        Set<DefaultPerformanceEntry> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
@@ -93,7 +93,7 @@ public class EvaluationTest {
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
         Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntry2> measuredPerformance = executor.execute(args);
+        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
 
         args = new String[2];
         args[0] = "-delres";
@@ -115,7 +115,7 @@ public class EvaluationTest {
         String[] args = new String[0];
 
         Executor executor = new BruteForceExecutor(programName);
-        Set<PerformanceEntry2> performanceEntries = executor.execute(args);
+        Set<DefaultPerformanceEntry> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);

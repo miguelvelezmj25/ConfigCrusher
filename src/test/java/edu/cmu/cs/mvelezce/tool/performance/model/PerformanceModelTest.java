@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.performancemodel;
+package edu.cmu.cs.mvelezce.tool.performance.model;
 
 import org.junit.Test;
 

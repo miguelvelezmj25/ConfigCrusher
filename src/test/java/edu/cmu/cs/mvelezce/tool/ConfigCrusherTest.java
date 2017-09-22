@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool;
 
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.junit.Test;
 
 public class ConfigCrusherTest {

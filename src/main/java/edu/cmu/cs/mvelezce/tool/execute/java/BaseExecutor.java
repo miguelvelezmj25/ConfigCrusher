@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
-import edu.cmu.cs.mvelezce.tool.performancemodel.PerformanceEntry2;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

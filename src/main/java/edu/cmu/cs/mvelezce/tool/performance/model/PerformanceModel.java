@@ -1,6 +1,7 @@
-package edu.cmu.cs.mvelezce.tool.performancemodel;
+package edu.cmu.cs.mvelezce.tool.performance.model;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry2;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;

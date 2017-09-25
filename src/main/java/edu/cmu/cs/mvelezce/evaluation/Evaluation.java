@@ -97,6 +97,7 @@ public class Evaluation {
         for(Set<String> configuration : configurations) {
             PerformanceEntryStatistic performanceStat = null;
 
+            // TODO this should be uncommented
 //            for(PerformanceEntryStatistic performanceEntryStatistic : performanceEntryStatistics) {
 //                if(performanceEntryStatistic.getConfiguration().equals(configuration)) {
 //                    performanceStat = performanceEntryStatistic;

@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceStatistic;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
@@ -31,11 +31,7 @@ public class Evaluation {
         this.programName = programName;
     }
 
-    public void writeConfigurationToPerformance(String approach, Set<DefaultPerformanceEntry> performanceEntries) throws IOException {
-
-
-
-
+    public void writeConfigurationToPerformance(String approach, Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
         String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.FULL_DIR + "/"
                 + approach + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
@@ -95,17 +91,42 @@ public class Evaluation {
         Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurations(options);
 
         StringBuilder result = new StringBuilder();
-        result.append("measured,configuration,performance");//;,std");
+        result.append("measured,configuration,performance,std");
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
-            result.append("TODO");
+            PerformanceEntryStatistic performanceStat = null;
+
+//            for(PerformanceEntryStatistic performanceEntryStatistic : performanceEntryStatistics) {
+//                if(performanceEntryStatistic.getConfiguration().equals(configuration)) {
+//                    performanceStat = performanceEntryStatistic;
+//                    break;
+//                }
+//            }
+
+            if(performanceStat != null) {
+                result.append(true);
+            }
+            else {
+                result.append(false);
+            }
+
             result.append(",");
             result.append('"');
             result.append(configuration);
             result.append('"');
             result.append(",");
             result.append(performanceModel.evaluate(configuration));
+            result.append('"');
+            result.append(",");
+
+            if(performanceStat != null) {
+//                result.append(performanceStat.getProcessedStd());
+            }
+            else {
+                result.append("_");
+            }
+
             result.append("\n");
         }
 

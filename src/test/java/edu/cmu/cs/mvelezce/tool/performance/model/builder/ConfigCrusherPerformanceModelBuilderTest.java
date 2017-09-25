@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.junit.Test;
 
 import java.util.Map;
@@ -31,7 +32,7 @@ public class ConfigCrusherPerformanceModelBuilderTest {
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
         Executor executor = new ConfigCrusherExecutor(programName);
-        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
         args = new String[2];
         args[0] = "-delres";

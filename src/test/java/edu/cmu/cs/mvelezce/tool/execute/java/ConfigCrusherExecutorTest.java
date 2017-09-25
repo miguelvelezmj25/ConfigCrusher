@@ -3,6 +3,9 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
+import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.junit.Test;
 
 import java.util.Set;
@@ -27,7 +30,7 @@ public class ConfigCrusherExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
     }
 
     @Test
@@ -53,7 +56,8 @@ public class ConfigCrusherExecutorTest {
 //        args[2] = "-i2";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
     }
 
     @Test
@@ -74,7 +78,7 @@ public class ConfigCrusherExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
         measuredPerformance.size();
     }
 
@@ -96,7 +100,7 @@ public class ConfigCrusherExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
         measuredPerformance.size();
     }
 

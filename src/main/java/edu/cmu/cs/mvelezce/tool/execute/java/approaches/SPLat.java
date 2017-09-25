@@ -21,7 +21,7 @@ public class SPLat {
 //
 //        Set<String> splatOptions = SPLat.getOptions(file, regionsToOptions);
 //        Set<Set<String>> splatConfigurations = Helper.getConfigurations(splatOptions);
-//        List<PerformanceStatistic> perfStats = SPLat.getTimesFromBF(programName, splatConfigurations);
+//        List<PerformanceEntryStatistic> perfStats = SPLat.getTimesFromBF(programName, splatConfigurations);
 //        SPLat.saveSPLAtPerformance(programName, perfStats);
 //    }
 //
@@ -52,14 +52,14 @@ public class SPLat {
 //        return null; // TODO make change since interface changed
 //    }
 //
-//    public static List<PerformanceStatistic> getTimesFromBF(String programName, Set<Set<String>> configurations) throws IOException, ParseException {
+//    public static List<PerformanceEntryStatistic> getTimesFromBF(String programName, Set<Set<String>> configurations) throws IOException, ParseException {
 //        File file = new File(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
 //
 //        if(!file.exists()) {
 //            throw new RuntimeException("The file " + file.getName() + " does not exist");
 //        }
 //
-//        List<PerformanceStatistic> perfStats = new ArrayList<>();
+//        List<PerformanceEntryStatistic> perfStats = new ArrayList<>();
 //        FileInputStream fstream = new FileInputStream(file);
 //        DataInputStream in = new DataInputStream(fstream);
 //        BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -94,7 +94,7 @@ public class SPLat {
 //                    double std = Double.parseDouble(values[values.length - 1].trim());
 //                    double mean = Double.parseDouble(values[values.length - 2].trim());
 //
-//                    PerformanceStatistic perfStat = new PerformanceStatistic("true", splatConfiguration, mean, std);
+//                    PerformanceEntryStatistic perfStat = new PerformanceEntryStatistic("true", splatConfiguration, mean, std);
 //                    perfStats.add(perfStat);
 //
 //                    break;
@@ -116,7 +116,7 @@ public class SPLat {
 //            return perfStats;
 //        }
 //
-//        List<PerformanceStatistic> perfStatsToAdd = new ArrayList<>();
+//        List<PerformanceEntryStatistic> perfStatsToAdd = new ArrayList<>();
 //        fstream = new FileInputStream(file);
 //        in = new DataInputStream(fstream);
 //        br = new BufferedReader(new InputStreamReader(in));
@@ -143,9 +143,9 @@ public class SPLat {
 //                continue;
 //            }
 //
-//            for(PerformanceStatistic perfStat : perfStats) {
+//            for(PerformanceEntryStatistic perfStat : perfStats) {
 //                if(perfStat.getConfiguration().equals(splatConfig)) {
-//                    PerformanceStatistic newPerfStat = new PerformanceStatistic("false", fullConfig, perfStat.getMean(), perfStat.getStd());
+//                    PerformanceEntryStatistic newPerfStat = new PerformanceEntryStatistic("false", fullConfig, perfStat.getMean(), perfStat.getStd());
 //                    perfStatsToAdd.add(newPerfStat);
 //                }
 //            }
@@ -156,7 +156,7 @@ public class SPLat {
 //        return perfStats;
 //    }
 //
-//    public static void saveSPLAtPerformance(String programName, List<PerformanceStatistic> perfStats) throws IOException {
+//    public static void saveSPLAtPerformance(String programName, List<PerformanceEntryStatistic> perfStats) throws IOException {
 //        File file = new File(SPLat.SPLAT_RES_DIR + "/" + programName + Options.DOT_CSV);
 //
 //        if(file.exists()) {
@@ -169,7 +169,7 @@ public class SPLat {
 //        result.append("measured,configuration,performancemodel,std");
 //        result.append("\n");
 //
-//        for(PerformanceStatistic perfStat : perfStats) {
+//        for(PerformanceEntryStatistic perfStat : perfStats) {
 //            result.append(perfStat.getMeasured());
 //            result.append(",");
 //            result.append('"');

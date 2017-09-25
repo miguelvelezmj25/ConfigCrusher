@@ -16,7 +16,7 @@ public class DefaultPerformanceEntryTest {
         String[] args = new String[0];
 
         Executor executor = new ConfigCrusherExecutor(programName);
-        Set<DefaultPerformanceEntry> result = executor.execute(args);
+        Set<PerformanceEntryStatistic> result = executor.execute(args);
         result.size();
     }
 

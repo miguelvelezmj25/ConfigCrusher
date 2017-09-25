@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.performancemodel;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 
@@ -11,11 +12,11 @@ import java.util.Set;
 public class BruteForcePerformanceModelBuilder extends ConfigCrusherPerformanceModelBuilder {
 
     // TODO not sure that this will be used
-    public BruteForcePerformanceModelBuilder(String programName, Set<DefaultPerformanceEntry> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
+    public BruteForcePerformanceModelBuilder(String programName, Set<PerformanceEntryStatistic> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
         super(programName, measuredPerformance, regionsToOptionSet);
     }
 
-    public BruteForcePerformanceModelBuilder(String programName, Set<DefaultPerformanceEntry> measuredPerformance) {
+    public BruteForcePerformanceModelBuilder(String programName, Set<PerformanceEntryStatistic> measuredPerformance) {
         this(programName, measuredPerformance, null);
 
     }

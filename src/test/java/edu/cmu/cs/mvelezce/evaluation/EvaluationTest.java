@@ -62,7 +62,7 @@ public class EvaluationTest {
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class EvaluationTest {
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
     }
 
     @Test

@@ -349,4 +349,8 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
     public boolean isMeasured() {
         return measured;
     }
+
+    public Map<Region, Double> getRegionsToProcessedStd() {
+        return regionsToProcessedStd;
+    }
 }

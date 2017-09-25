@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
@@ -7,7 +8,11 @@ import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.junit.Test;
+import sun.instrument.InstrumentationImpl;
 
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
+import java.lang.instrument.Instrumentation;
 import java.util.Set;
 
 public class ConfigCrusherExecutorTest {

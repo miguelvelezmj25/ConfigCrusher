@@ -36,6 +36,12 @@ public class TimerTransformer extends RegionTransformer {
     }
 
     public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
+        MethodBlock id = methodGraph.getImmediateDominator(start);
+
+        if(id.getSuccessors().size() == 1 && id.getSuccessors().contains(start)) {
+            return id;
+        }
+
         return start;
     }
 
@@ -111,6 +117,10 @@ public class TimerTransformer extends RegionTransformer {
 //            continue;
 //            // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
             throw new RuntimeException("Check this case");
+        }
+
+        if(methodNode.name.equals("deflateImageDataConcurrently")) {
+            System.out.println();
         }
 
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);

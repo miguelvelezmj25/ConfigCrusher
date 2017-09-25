@@ -353,4 +353,8 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
     public Map<Region, Double> getRegionsToProcessedStd() {
         return regionsToProcessedStd;
     }
+
+    public Map<Region, Double> getRegionsToProcessedStdHumanReadable() {
+        return regionsToProcessedStdHumanReadable;
+    }
 }

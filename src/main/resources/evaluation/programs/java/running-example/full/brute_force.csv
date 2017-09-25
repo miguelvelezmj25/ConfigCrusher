@@ -1,9 +1,9 @@
-measured,configuration,performance
-true,"[C]",0.006
-true,"[A]",2.012
-true,"[A, C]",9.009
-true,"[A, B, C]",13.011
-true,"[B]",0.007
-true,"[B, C]",0.006
-true,"[]",0.007
-true,"[A, B]",6.009
+measured,configuration,performance,std
+true,"[B, C]",0.006,0
+true,"[A, B]",6.012,0.001
+true,"[A, C]",9.01,0.002
+true,"[A]",2.014,0.003
+true,"[C]",0.007,0
+true,"[B]",0.007,0.001
+true,"[A, B, C]",13.018,0.002
+true,"[]",0.008,0

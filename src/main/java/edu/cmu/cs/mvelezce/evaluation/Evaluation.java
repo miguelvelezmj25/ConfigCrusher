@@ -72,7 +72,7 @@ public class Evaluation {
         writer.close();
     }
 
-    public void writeConfigurationToPerformance(String approach, PerformanceModel performanceModel) throws IOException {
+    public void writeConfigurationToPerformance(String approach, PerformanceModel performanceModel, Set<PerformanceEntryStatistic> performanceEntryStats) throws IOException {
         String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.FULL_DIR + "/"
                 + approach + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
@@ -97,13 +97,12 @@ public class Evaluation {
         for(Set<String> configuration : configurations) {
             PerformanceEntryStatistic performanceStat = null;
 
-            // TODO this should be uncommented
-//            for(PerformanceEntryStatistic performanceEntryStatistic : performanceEntryStatistics) {
-//                if(performanceEntryStatistic.getConfiguration().equals(configuration)) {
-//                    performanceStat = performanceEntryStatistic;
-//                    break;
-//                }
-//            }
+            for(PerformanceEntryStatistic performanceEntryStatistic : performanceEntryStats) {
+                if(performanceEntryStatistic.getConfiguration().equals(configuration)) {
+                    performanceStat = performanceEntryStatistic;
+                    break;
+                }
+            }
 
             if(performanceStat != null) {
                 result.append(true);
@@ -120,14 +119,7 @@ public class Evaluation {
             result.append(performanceModel.evaluate(configuration));
             result.append('"');
             result.append(",");
-
-            if(performanceStat != null) {
-//                result.append(performanceStat.getProcessedStd());
-            }
-            else {
-                result.append("_");
-            }
-
+            result.append(performanceModel.evaluateStd(configuration));
             result.append("\n");
         }
 

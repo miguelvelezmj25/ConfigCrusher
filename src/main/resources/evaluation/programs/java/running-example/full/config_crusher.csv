@@ -1,9 +1,9 @@
-measured,configuration,performance
-TODO,"[]",0.008
-TODO,"[A]",2.013
-TODO,"[B]",0.008
-TODO,"[C]",0.008
-TODO,"[A, B]",6.018
-TODO,"[A, C]",9.013
-TODO,"[B, C]",0.008
-TODO,"[A, B, C]",13.018
+measured,configuration,performance,std
+true,"[]",0.006",0.0
+true,"[A]",2.008",0.001
+false,"[B]",0.006",0.0
+false,"[C]",0.006",0.0
+false,"[A, B]",6.009",0.001
+false,"[A, C]",9.009",0.003
+true,"[B, C]",0.006",0.0
+true,"[A, B, C]",13.01",0.003

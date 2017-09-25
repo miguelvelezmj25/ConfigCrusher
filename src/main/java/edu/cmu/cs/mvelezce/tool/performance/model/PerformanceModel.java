@@ -23,22 +23,23 @@ public class PerformanceModel {
     private double baseStdHumanReadable = 0.0;
     private Map<Region, Map<Set<String>, Long>> regionsToPerformanceTables = new HashMap<>();
     private Map<Region, Map<Set<String>, Double>> regionsToPerformanceTablesHumanReadable = new HashMap<>();
-    private Map<Region, Map<Set<String>, Double>> regionsToPerformanceTablesStd = new HashMap();
-    private Map<Region, Map<Set<String>, Double>> regionsToPerformanceTablesStdHumanReadable = new HashMap<>();
+    private Map<Region, Map<Set<String>, Double>> regionsToStdTables = new HashMap<>();
+    private Map<Region, Map<Set<String>, Double>> regionsToStdTablesHumanReadable = new HashMap<>();
 
     private PerformanceModel() {
         ;
     }
 
-    public PerformanceModel(long baseTime, double baseStd, Map<Region, Map<Set<String>, Long>> regionsToPerformanceTables, Map<Region, Map<Set<String>, Double>> regionsToPerformanceTablesStd) {
+
+    public PerformanceModel(long baseTime, double baseStd, Map<Region, Map<Set<String>, Long>> regionsToPerformanceTables, Map<Region, Map<Set<String>, Double>> regionsToStdTables) {
         this.baseTime = baseTime;
         this.baseStd = baseStd;
         this.regionsToPerformanceTables = regionsToPerformanceTables;
-        this.regionsToPerformanceTablesStd = regionsToPerformanceTablesStd;
+        this.regionsToStdTables = regionsToStdTables;
 
         this.baseTimeHumanReadable = DefaultPerformanceEntry.toHumanReadable(DefaultPerformanceEntry.toSeconds(this.baseTime));
         this.regionsToPerformanceTablesHumanReadable = PerformanceModel.toHumanReadablePerformance(this.regionsToPerformanceTables);
-        this.regionsToPerformanceTablesStdHumanReadable = PerformanceModel.toHumanReadableStd(this.regionsToPerformanceTablesStd);
+        this.regionsToStdTablesHumanReadable = PerformanceModel.toHumanReadableStd(this.regionsToStdTables);
     }
 
     /**
@@ -102,11 +103,38 @@ public class PerformanceModel {
             }
         }
 
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+        String perfString = decimalFormat.format(performance);
+        performance = Double.valueOf(perfString);
+
         return performance;
     }
 
     public double evaluateStd(Set<String> configuration) {
-        throw new RuntimeException("Implement");
+        double std = this.baseStdHumanReadable;
+
+        for(Map.Entry<Region, Map<Set<String>, Double>> entry : this.regionsToStdTablesHumanReadable.entrySet()) {
+            Set<String> optionsInRegion = new HashSet<>();
+
+            for(Set<String> options : entry.getValue().keySet()) {
+                optionsInRegion.addAll(options);
+            }
+
+            Set<String> configurationValueInRegion = new HashSet<>(configuration);
+            configurationValueInRegion.retainAll(optionsInRegion);
+
+            for(Map.Entry<Set<String>, Double> configurationToStd : entry.getValue().entrySet()) {
+                if(configurationToStd.getKey().equals(configurationValueInRegion)) {
+                    std += configurationToStd.getValue();
+                }
+            }
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+        String perfString = decimalFormat.format(std);
+        std = Double.valueOf(perfString);
+
+        return std;
     }
 
     @Override
@@ -243,19 +271,19 @@ public class PerformanceModel {
         this.baseStdHumanReadable = baseStdHumanReadable;
     }
 
-    public Map<Region, Map<Set<String>, Double>> getRegionsToPerformanceTablesStd() {
-        return regionsToPerformanceTablesStd;
+    public Map<Region, Map<Set<String>, Double>> getRegionsToStdTables() {
+        return regionsToStdTables;
     }
 
-    public void setRegionsToPerformanceTablesStd(Map<Region, Map<Set<String>, Double>> regionsToPerformanceTablesStd) {
-        this.regionsToPerformanceTablesStd = regionsToPerformanceTablesStd;
+    public void setRegionsToStdTables(Map<Region, Map<Set<String>, Double>> regionsToStdTables) {
+        this.regionsToStdTables = regionsToStdTables;
     }
 
-    public Map<Region, Map<Set<String>, Double>> getRegionsToPerformanceTablesStdHumanReadable() {
-        return regionsToPerformanceTablesStdHumanReadable;
+    public Map<Region, Map<Set<String>, Double>> getRegionsToStdTablesHumanReadable() {
+        return regionsToStdTablesHumanReadable;
     }
 
-    public void setRegionsToPerformanceTablesStdHumanReadable(Map<Region, Map<Set<String>, Double>> regionsToPerformanceTablesStdHumanReadable) {
-        this.regionsToPerformanceTablesStdHumanReadable = regionsToPerformanceTablesStdHumanReadable;
+    public void setRegionsToStdTablesHumanReadable(Map<Region, Map<Set<String>, Double>> regionsToStdTablesHumanReadable) {
+        this.regionsToStdTablesHumanReadable = regionsToStdTablesHumanReadable;
     }
 }

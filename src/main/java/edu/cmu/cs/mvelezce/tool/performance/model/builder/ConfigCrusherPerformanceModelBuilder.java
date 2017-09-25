@@ -66,6 +66,7 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
 //            }
 //        }
 
+        // TODO add these method to the interface
         Map<Region, Map<Set<String>, Long>> regionsToPerformanceTable = this.processPerformance();
         Map<Region, Map<Set<String>, Double>> regionsToStdTable = this.processStd();
         long programTime = this.processProgramTime();

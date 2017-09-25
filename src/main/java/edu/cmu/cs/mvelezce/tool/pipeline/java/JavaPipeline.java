@@ -5,7 +5,7 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceStatistic;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 
 import java.io.File;
@@ -97,7 +97,7 @@ public class JavaPipeline {
 //            executionsPerformance.add(BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, args, entryPoint, instrumentClassDirectory, configurationsToExecute));
 //        }
 //
-//        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+//        List<PerformanceEntryStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
 //        Set<DefaultPerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
 //        System.out.println("");
 //
@@ -146,7 +146,7 @@ public class JavaPipeline {
 //
 ////        List<Set<DefaultPerformanceEntry>> executionsPerformance = new ArrayList<>();
 ////
-////        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+////        List<PerformanceEntryStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
 ////        Set<DefaultPerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
 //        System.out.println("");
 //
@@ -302,13 +302,13 @@ public class JavaPipeline {
         writer.close();
     }
 
-    public static void savePMPerformance(String programName, PerformanceModel pm, List<PerformanceStatistic> perfStats) throws IOException {
+    public static void savePMPerformance(String programName, PerformanceModel pm, List<PerformanceEntryStatistic> perfStats) throws IOException {
         JavaPipeline.savePMPerformance(programName, pm);
 
         double avgStd = 0;
         int count = 0;
 
-        for(PerformanceStatistic perfStat : perfStats) {
+        for(PerformanceEntryStatistic perfStat : perfStats) {
 //            for(Long std : perfStat.getstd().values()) {
 //                avgStd += std / 1000000000.0;
 //                count++;

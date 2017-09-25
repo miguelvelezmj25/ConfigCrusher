@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
 
     public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
 
-    public ConfigCrusherPerformanceModelBuilder(String programName, Set<DefaultPerformanceEntry> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
+    public ConfigCrusherPerformanceModelBuilder(String programName, Set<PerformanceEntryStatistic> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
         super(programName, measuredPerformance, regionsToOptionSet);
     }
 

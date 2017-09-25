@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -95,7 +96,7 @@ public class BruteForceExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
     }
 
     @Test
@@ -106,7 +107,7 @@ public class BruteForceExecutorTest {
         String[] args = new String[0];
 
         Executor executor = new BruteForceExecutor(programName);
-        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
         measuredPerformance.size();
     }
 
@@ -129,7 +130,7 @@ public class BruteForceExecutorTest {
         args[2] = "-i1";
 
         Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<DefaultPerformanceEntry> measuredPerformance = executor.execute(args);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
     }
 
 }

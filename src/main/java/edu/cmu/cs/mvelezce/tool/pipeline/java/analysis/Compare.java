@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.tool.pipeline.java.analysis;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceStatistic;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 
 import java.io.*;
 import java.util.HashSet;
@@ -79,8 +79,8 @@ public class Compare {
         allOptions.remove("");
 
         Set<Set<String>> configurations = Helper.getConfigurations(allOptions);
-        Set<PerformanceStatistic> app1Stats = Compare.createEntries(programName, approach1Dir, configurations);
-        Set<PerformanceStatistic> app2Stats = Compare.createEntries(programName, approach2Dir, configurations);
+        Set<PerformanceEntryStatistic> app1Stats = Compare.createEntries(programName, approach1Dir, configurations);
+        Set<PerformanceEntryStatistic> app2Stats = Compare.createEntries(programName, approach2Dir, configurations);
 
         StringBuilder result = new StringBuilder();
         double se = 0;
@@ -89,10 +89,10 @@ public class Compare {
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
-            PerformanceStatistic app1Entry = null;
-            PerformanceStatistic app2Entry = null;
+            PerformanceEntryStatistic app1Entry = null;
+            PerformanceEntryStatistic app2Entry = null;
 
-            for(PerformanceStatistic entry : app1Stats) {
+            for(PerformanceEntryStatistic entry : app1Stats) {
                 if(!entry.getConfiguration().equals(configuration)) {
                     continue;
                 }
@@ -101,7 +101,7 @@ public class Compare {
                 break;
             }
 
-            for(PerformanceStatistic entry : app2Stats) {
+            for(PerformanceEntryStatistic entry : app2Stats) {
                 if(!entry.getConfiguration().equals(configuration)) {
                     continue;
                 }
@@ -167,8 +167,8 @@ public class Compare {
         writer.close();
     }
 
-    private static Set<PerformanceStatistic> createEntries(String programName, String approachDir, Set<Set<String>> configurations) throws IOException {
-        Set<PerformanceStatistic> entries = new HashSet<>();
+    private static Set<PerformanceEntryStatistic> createEntries(String programName, String approachDir, Set<Set<String>> configurations) throws IOException {
+        Set<PerformanceEntryStatistic> entries = new HashSet<>();
 
         for(Set<String> configuration : configurations) {
             FileInputStream fstream = new FileInputStream(approachDir + "/" + programName + Options.DOT_CSV);
@@ -219,7 +219,7 @@ public class Compare {
                     continue;
                 }
 
-                PerformanceStatistic perfStat;
+                PerformanceEntryStatistic perfStat;
                 int commaOffset = Math.max(0, configuration.size() - 1);
                 String[] strEntries = strLine.split(",");
                 String measuredString = strEntries[0].trim();
@@ -227,11 +227,11 @@ public class Compare {
                 String perfString = strEntries[2 + commaOffset].trim();
 
 //                if((strEntries.length - commaOffset) == 3) {
-//                    perfStat = new PerformanceStatistic(measured + "", configuration, Double.valueOf(perfString), 0.0);
+//                    perfStat = new PerformanceEntryStatistic(measured + "", configuration, Double.valueOf(perfString), 0.0);
 //                }
 //                else if((strEntries.length - commaOffset) == 4) {
 //                    String stdString = strEntries[3 + commaOffset].trim();
-//                    perfStat = new PerformanceStatistic(measured + "", configuration, Double.valueOf(perfString), Double.valueOf(stdString));
+//                    perfStat = new PerformanceEntryStatistic(measured + "", configuration, Double.valueOf(perfString), Double.valueOf(stdString));
 //                }
 //                else {
 //                    throw new RuntimeException("Could not parse the file");

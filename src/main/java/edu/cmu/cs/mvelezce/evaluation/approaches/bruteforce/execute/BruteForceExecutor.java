@@ -61,7 +61,7 @@ public class BruteForceExecutor extends BaseExecutor {
 //            executionsPerformance.add(BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, args, entryPoint, classDir, configurations));
 //        }
 //
-//        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+//        List<PerformanceEntryStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
 //        programName = programName.substring(0, programName.indexOf("-"));
 //        BruteForce.saveBFPerformance(programName, perfStats);
@@ -69,7 +69,7 @@ public class BruteForceExecutor extends BaseExecutor {
 //        return measuredPerformance;
 //    }
 
-//    public static void saveBFPerformance(String programName, List<PerformanceStatistic> perfStats) throws IOException {
+//    public static void saveBFPerformance(String programName, List<PerformanceEntryStatistic> perfStats) throws IOException {
 //        File file = new File(BruteForce.BF_RES_DIR + "/" + programName + Options.DOT_CSV);
 //
 //        if(file.exists()) {
@@ -82,7 +82,7 @@ public class BruteForceExecutor extends BaseExecutor {
 //        result.append("measured,configuration,performancemodel,std");
 //        result.append("\n");
 //
-//        for(PerformanceStatistic perfStat : perfStats) {
+//        for(PerformanceEntryStatistic perfStat : perfStats) {
 //            if(perfStat.getRegionsToMean().size() != 1) {
 //                throw new RuntimeException("The performancemodel entry should only have measured the entire program " + perfStat.getRegionsToMean().keySet());
 //            }
@@ -155,7 +155,7 @@ public class BruteForceExecutor extends BaseExecutor {
 //            executionsPerformance.add(BaseExecutor.measureConfigurationPerformance(programName + BaseExecutor.UNDERSCORE + i, args));
 //        }
 //
-//        List<PerformanceStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
+//        List<PerformanceEntryStatistic> perfStats = BaseExecutor.getExecutionsStats(executionsPerformance);
 //        Set<PerformanceEntry> measuredPerformance = BaseExecutor.averageExecutions(perfStats, executionsPerformance.get(0));
 //        programName = programName.substring(0, programName.indexOf("-"));
 //        BruteForce.saveBFPerformance(programName, perfStats);

@@ -14,6 +14,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
@@ -53,7 +54,7 @@ public class ConfigCrusher {
         instrumenter.instrument(args);
 
         Executor executor = new ConfigCrusherExecutor(this.programName, this.entry, this.classDir, configurations);
-        Set<DefaultPerformanceEntry> performanceEntries = executor.execute(args);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
         PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(this.programName, performanceEntries, regionsToOptionSet);

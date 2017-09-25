@@ -16,7 +16,7 @@ import java.util.Set;
 public class BruteForceExecutor extends BaseExecutor {
 
     static {
-        DIRECTORY = Options.DIRECTORY + "/executor/java/bruteforce/programs";
+        DIRECTORY = BaseExecutor.DIRECTORY + "/bruteforce/programs";
     }
 
     public BruteForceExecutor(String programName) {

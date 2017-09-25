@@ -19,6 +19,10 @@ import java.util.Set;
  */
 public class ConfigCrusherExecutor extends BaseExecutor {
 
+    static {
+        DIRECTORY = BaseExecutor.DIRECTORY + "/configcrusher/programs";
+    }
+
     public ConfigCrusherExecutor() {
         this(null);
     }

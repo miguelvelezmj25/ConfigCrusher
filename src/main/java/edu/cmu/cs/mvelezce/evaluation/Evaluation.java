@@ -41,12 +41,12 @@ public class Evaluation {
         }
 
         StringBuilder result = new StringBuilder();
-        result.append("measured,configuration,performance");//;,std");
+        result.append("measured,configuration,performance,std");
         result.append("\n");
 
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
-        for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
+        for(PerformanceEntryStatistic performanceEntry : performanceEntries) {
             if(performanceEntry.getRegionsToProcessedPerformanceHumanReadable().size() != 1) {
                 throw new RuntimeException("This method can only handle approaches that measure 1 region" +
                         " (e.g. Brute force)");
@@ -60,8 +60,9 @@ public class Evaluation {
             result.append(",");
             double performance = performanceEntry.getRegionsToProcessedPerformanceHumanReadable().values().iterator().next();
             result.append(decimalFormat.format(performance));
-//            result.append(",");
-//            result.append(perfStat.getRegionsToStd().values().iterator().next() / 1000000000.0);
+            result.append(",");
+            double std = performanceEntry.getRegionsToProcessedStdHumanReadable().values().iterator().next();
+            result.append(decimalFormat.format(std));
             result.append("\n");
         }
 

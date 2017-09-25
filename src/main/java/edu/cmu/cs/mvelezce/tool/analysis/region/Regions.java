@@ -31,33 +31,33 @@ public class Regions {
     }
 
     public static void enter(String regionID) {
-        long start = System.nanoTime();
-
-        Region region = new Region(regionID);
-        region.enter();
-
-        Regions.addExecutingRegion(region);
+//        long start = System.nanoTime();
+//
+//        Region region = new Region(regionID);
+//        region.enter();
+//
+//        Regions.addExecutingRegion(region);
         Regions.startCount++;
-
-        long end = System.nanoTime();
-
-        region.setOverhead(end - start);
+//
+//        long end = System.nanoTime();
+//
+//        region.setOverhead(end - start);
     }
 
     // TODO hacky way to not call the exit method of a region if it does not exit. This can be fixed if we can instrument
     // better and do not exit a region that has not been started
     public static void exit(String regionID) {
-        long start = System.nanoTime();
-
-        Region region = new Region(regionID);
-        region.exit();
-
-        Regions.removeExecutingRegion(region);
+//        long start = System.nanoTime();
+//
+//        Region region = new Region(regionID);
+//        region.exit();
+//
+//        Regions.removeExecutingRegion(region);
         Regions.endCound++;
-
-        long end = System.nanoTime();
-
-        region.setOverhead(end - start);
+//
+//        long end = System.nanoTime();
+//
+//        region.setOverhead(end - start);
     }
 
     public static void addExecutingRegion(Region region) {

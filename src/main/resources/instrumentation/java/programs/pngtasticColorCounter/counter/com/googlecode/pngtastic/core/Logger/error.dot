@@ -1,15 +1,15 @@
 digraph error {
 node [shape=record];
-1484673893 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"1df33139-45f1-48c6-b6cd-d00a9041a637\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1136768342 [label="L0\lLINENUMBER 52 L0\lLDC \"1df33139-45f1-48c6-b6cd-d00a9041a637\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
-587003819 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1239759990 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1083962448 [label="L0\lLINENUMBER 52 L0\lLDC \"0979b24c-f0dc-4167-bcce-7445bfc1c4b4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+953742666 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"0979b24c-f0dc-4167-bcce-7445bfc1c4b4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-1484673893 -> exit;
-entry -> 1136768342;
-1136768342 -> 1484673893;
-1136768342 -> 587003819;
-587003819 -> 1484673893;
-1484673893[fontcolor="purple", penwidth=3, color="purple"];
-1136768342[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1083962448;
+1239759990 -> 953742666;
+1083962448 -> 1239759990;
+1083962448 -> 953742666;
+953742666 -> exit;
+1083962448[fontcolor="purple", penwidth=3, color="purple"];
+953742666[fontcolor="purple", penwidth=3, color="purple"];
 }

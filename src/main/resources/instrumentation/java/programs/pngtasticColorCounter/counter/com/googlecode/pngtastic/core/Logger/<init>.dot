@@ -1,20 +1,20 @@
 digraph <init> {
 node [shape=record];
-1169146729 [label="GETSTATIC counter/com/googlecode/pngtastic/core/Logger.LOG_LEVELS : Ljava/util/List;\lALOAD 1\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\lINVOKEINTERFACE java/util/List.contains (Ljava/lang/Object;)Z\lIFNE L3\l"];
-1237598030 [label="L4\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger java/lang/String]\lPUTFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lLDC \"231de288-8fdb-41ac-a430-0f40152767fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-225290371 [label="L2\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger]\lLDC \"NONE\"\lGOTO L4\l"];
-2040352617 [label="L3\lFRAME SAME1 counter/com/googlecode/pngtastic/core/Logger\lALOAD 1\lL5\lLINENUMBER 24 L5\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\l"];
-1558021762 [label="L0\lLINENUMBER 22 L0\lLDC \"231de288-8fdb-41ac-a430-0f40152767fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
+136936250 [label="L4\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger java/lang/String]\lPUTFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lLDC \"986af432-e1c0-4009-af35-c206bfe5ff81\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+2014838114 [label="L3\lFRAME SAME1 counter/com/googlecode/pngtastic/core/Logger\lALOAD 1\lL5\lLINENUMBER 24 L5\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\l"];
+1792550665 [label="L2\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger]\lLDC \"NONE\"\lGOTO L4\l"];
+1359953204 [label="GETSTATIC counter/com/googlecode/pngtastic/core/Logger.LOG_LEVELS : Ljava/util/List;\lALOAD 1\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\lINVOKEINTERFACE java/util/List.contains (Ljava/lang/Object;)Z\lIFNE L3\l"];
+1630678941 [label="L0\lLINENUMBER 22 L0\lLDC \"986af432-e1c0-4009-af35-c206bfe5ff81\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
 entry;
 exit;
-1169146729 -> 225290371;
-1169146729 -> 2040352617;
-entry -> 1558021762;
-1237598030 -> exit;
-225290371 -> 1237598030;
-2040352617 -> 1237598030;
-1558021762 -> 1169146729;
-1558021762 -> 225290371;
-1237598030[fontcolor="purple", penwidth=3, color="purple"];
-1558021762[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1630678941;
+136936250 -> exit;
+2014838114 -> 136936250;
+1792550665 -> 136936250;
+1359953204 -> 2014838114;
+1359953204 -> 1792550665;
+1630678941 -> 1792550665;
+1630678941 -> 1359953204;
+136936250[fontcolor="purple", penwidth=3, color="purple"];
+1630678941[fontcolor="purple", penwidth=3, color="purple"];
 }

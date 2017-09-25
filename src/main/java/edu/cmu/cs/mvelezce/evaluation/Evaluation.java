@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
-import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
 
@@ -118,7 +117,6 @@ public class Evaluation {
             result.append('"');
             result.append(",");
             result.append(performanceModel.evaluate(configuration));
-            result.append('"');
             result.append(",");
             result.append(performanceModel.evaluateStd(configuration));
             result.append("\n");
@@ -201,7 +199,10 @@ public class Evaluation {
 
         while ((strLine = br.readLine()) != null) {
             Set<String> options = new HashSet<>();
-            String optionsString = strLine.substring("true,\"[".length(), strLine.lastIndexOf('"') - 1);
+            int startOptionIndex = strLine.indexOf("[") + 1;
+            int endOptionIndex = strLine.lastIndexOf("]");
+
+            String optionsString = strLine.substring(startOptionIndex, endOptionIndex);
             String[] arrayOptions = optionsString.split(",");
 
             for(int i = 0; i < arrayOptions.length; i++) {
@@ -216,19 +217,11 @@ public class Evaluation {
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
         StringBuilder result = new StringBuilder();
         double se = 0;
-        result.append("measured,configuration,ap1,ap2,absolute error,relative % error,squared error");
+        result.append("measured,configuration," + approach1 + "," + approach1 + "_std," + approach2 + "," + approach2
+                + "_std,absolute error,relative % error,squared error");
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
-            result.append('"');
-            result.append("TODO");
-            result.append('"');
-            result.append(",");
-            result.append('"');
-            result.append(configuration);
-            result.append('"');
-            result.append(",");
-
             fstream = new FileInputStream(outputFile1);
             in = new DataInputStream(fstream);
             br = new BufferedReader(new InputStreamReader(in));
@@ -236,7 +229,10 @@ public class Evaluation {
 
             while ((strLine = br.readLine()) != null) {
                 Set<String> options = new HashSet<>();
-                String optionsString = strLine.substring("true,\"[".length(), strLine.lastIndexOf('"') - 1);
+                int startOptionIndex = strLine.indexOf("[") + 1;
+                int endOptionIndex = strLine.lastIndexOf("]");
+
+                String optionsString = strLine.substring(startOptionIndex, endOptionIndex);
                 String[] arrayOptions = optionsString.split(",");
 
                 for(int i = 0; i < arrayOptions.length; i++) {
@@ -250,9 +246,20 @@ public class Evaluation {
 
             in.close();
 
+            result.append('"');
+            result.append(strLine.substring(0, strLine.indexOf(",")));
+            result.append('"');
+            result.append(",");
+            result.append('"');
+            result.append(configuration);
+            result.append('"');
+            result.append(",");
+
             String[] entries = strLine.split(",");
-            double performance1 = Double.valueOf(entries[entries.length - 1]);
+            double performance1 = Double.valueOf(entries[entries.length - 2]);
             result.append(performance1);
+            result.append(",");
+            result.append(Double.valueOf(entries[entries.length - 1]));
             result.append(",");
 
             fstream = new FileInputStream(outputFile2);
@@ -262,7 +269,10 @@ public class Evaluation {
 
             while ((strLine = br.readLine()) != null) {
                 Set<String> options = new HashSet<>();
-                String optionsString = strLine.substring("true,\"[".length(), strLine.lastIndexOf('"') - 1);
+                int startOptionIndex = strLine.indexOf("[") + 1;
+                int endOptionIndex = strLine.lastIndexOf("]");
+
+                String optionsString = strLine.substring(startOptionIndex, endOptionIndex);
                 String[] arrayOptions = optionsString.split(",");
 
                 for(int i = 0; i < arrayOptions.length; i++) {
@@ -277,12 +287,19 @@ public class Evaluation {
             in.close();
 
             entries = strLine.split(",");
-            double performance2 = Double.valueOf(entries[entries.length - 1]);
+            double performance2 = Double.valueOf(entries[entries.length - 2]);
             result.append(performance2);
+            result.append(",");
+            result.append(Double.valueOf(entries[entries.length - 1]));
             result.append(",");
 
             double absoluteError = Math.abs(performance2 - performance1);
-            double relativeError = absoluteError / performance2 * 100.0;
+            double relativeError = 0.0;
+
+            if(performance2 != 0) {
+                relativeError = absoluteError / performance2 * 100.0;
+            }
+
             double squaredError = Math.pow(performance2 - performance1, 2);
 
             result.append(decimalFormat.format(absoluteError));

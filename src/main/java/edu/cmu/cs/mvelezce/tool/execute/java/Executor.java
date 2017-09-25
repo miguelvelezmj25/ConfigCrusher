@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +14,9 @@ public interface Executor {
 
     public Set<DefaultPerformanceEntry> execute(int iteration) throws IOException, InterruptedException;
 
-    public Set<DefaultPerformanceEntry> execute(String[] args) throws IOException, InterruptedException;
+    public Set<PerformanceEntryStatistic> execute(String[] args) throws IOException, InterruptedException;
 
-    public Set<DefaultPerformanceEntry> execute() throws IOException, InterruptedException;
+    public Set<PerformanceEntryStatistic> execute() throws IOException, InterruptedException;
 
     public void writeToFile(String iteration, Set<String> configuration, List<Region> executedRegions) throws IOException;
 

@@ -37,8 +37,6 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
         this.regionsToProcessedPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToProcessedPerformance);
     }
 
-    // TODO where to put this method?
-
     /**
      * The assumption is that the value of type long is in nanoseconds.
      *
@@ -248,10 +246,6 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
 
     public Map<Region, Double> getRegionsToProcessedPerformanceHumanReadable() {
         return regionsToProcessedPerformanceHumanReadable;
-    }
-
-    public void setConfiguration(Set<String> configuration) {
-        this.configuration = configuration;
     }
 
     public void setRegionsToRawPerformance(Map<Region, Long> regionsToRawPerformance) {

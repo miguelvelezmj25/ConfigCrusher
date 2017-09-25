@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
-import edu.cmu.cs.mvelezce.tool.performance.PerformanceStatistic;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import org.apache.commons.io.FileUtils;
 
@@ -33,13 +33,13 @@ public abstract class BaseExecutor implements Executor {
         this.configurations = configurations;
     }
 
-//    public static List<PerformanceStatistic> getExecutionsStats(List<Set<PerformanceEntry>> executionsPerformance) {
+//    public static List<PerformanceEntryStatistic> getExecutionsStats(List<Set<PerformanceEntry>> executionsPerformance) {
 //        Set<PerformanceEntry> entries = executionsPerformance.get(0);
-//        Map<Set<String>, PerformanceStatistic> regionsToPerfStat = new HashMap<>();
+//        Map<Set<String>, PerformanceEntryStatistic> regionsToPerfStat = new HashMap<>();
 //
 //        for(PerformanceEntry entry : entries) {
 //            Map<Region, List<Long>> regionToValues = new LinkedHashMap<>();
-//            PerformanceStatistic perfStat = new PerformanceStatistic(entry.getConfiguration(), regionToValues);
+//            PerformanceEntryStatistic perfStat = new PerformanceEntryStatistic(entry.getConfiguration(), regionToValues);
 //
 //            for(Map.Entry<Region, Long> regionsToTime : entry.getRegionsToExecutionTime().entrySet()) {
 //                List<Long> values = new ArrayList<>();
@@ -53,7 +53,7 @@ public abstract class BaseExecutor implements Executor {
 //        for(int i = 1; i < executionsPerformance.size(); i++) {
 //            entries = executionsPerformance.get(i);
 //
-//            for(Map.Entry<Set<String>, PerformanceStatistic> regionToPerfStat : regionsToPerfStat.entrySet()) {
+//            for(Map.Entry<Set<String>, PerformanceEntryStatistic> regionToPerfStat : regionsToPerfStat.entrySet()) {
 //                for(PerformanceEntry entry : entries) {
 //                    if(!regionToPerfStat.getKey().equals(entry.getConfiguration())) {
 //                        continue;
@@ -84,9 +84,9 @@ public abstract class BaseExecutor implements Executor {
 //            }
 //        }
 //
-//        List<PerformanceStatistic> perfStats = new ArrayList<>(regionsToPerfStat.values());
+//        List<PerformanceEntryStatistic> perfStats = new ArrayList<>(regionsToPerfStat.values());
 //
-//        for(PerformanceStatistic perfStat : perfStats) {
+//        for(PerformanceEntryStatistic perfStat : perfStats) {
 //            perfStat.calculateMean();
 //            perfStat.calculateStd();
 //        }
@@ -94,10 +94,10 @@ public abstract class BaseExecutor implements Executor {
 //        return perfStats;
 //    }
 //
-//    public static Set<PerformanceEntry> averageExecutions(List<PerformanceStatistic> execStats, Set<PerformanceEntry> perfEntries) {
+//    public static Set<PerformanceEntry> averageExecutions(List<PerformanceEntryStatistic> execStats, Set<PerformanceEntry> perfEntries) {
 //        Set<PerformanceEntry> processedRes = new HashSet<>();
 //
-//        for(PerformanceStatistic perfStat : execStats) {
+//        for(PerformanceEntryStatistic perfStat : execStats) {
 //            for(PerformanceEntry perfEntry : perfEntries) {
 //                if(!perfStat.getConfiguration().equals(perfEntry.getConfiguration())) {
 //                    continue;
@@ -121,16 +121,30 @@ public abstract class BaseExecutor implements Executor {
 //        return processedRes;
 //    }
 
-    private Set<DefaultPerformanceEntry> averageExecutions(List<Set<DefaultPerformanceEntry>> performanceEntriesList) {
+    private Set<PerformanceEntryStatistic> averageExecutions(List<Set<DefaultPerformanceEntry>> performanceEntriesList) {
         Set<DefaultPerformanceEntry> performanceEntrySet = performanceEntriesList.iterator().next();
         Set<Set<String>> configurations = new HashSet<>();
 
+        // Get configurations
         for(DefaultPerformanceEntry performanceEntry : performanceEntrySet) {
             configurations.add(performanceEntry.getConfiguration());
         }
 
-        Set<DefaultPerformanceEntry> result = new HashSet<>();
+        Set<PerformanceEntryStatistic> results = new HashSet<>();
 
+        // Get results
+        for(DefaultPerformanceEntry performanceEntry : performanceEntrySet) {
+            PerformanceEntryStatistic entryStatistic = new PerformanceEntryStatistic(true, performanceEntry.getConfiguration());
+            entryStatistic.setRegionsToRawPerformance(performanceEntry.getRegionsToRawPerformance());
+            entryStatistic.setRegionsToRawPerformanceHumanReadable(performanceEntry.getRegionsToRawPerformanceHumanReadable());
+            entryStatistic.setRegionsToInnerRegions(performanceEntry.getRegionsToInnerRegions());
+            entryStatistic.setRegionsToProcessedPerformance(performanceEntry.getRegionsToProcessedPerformance());
+            entryStatistic.setRegionsToProcessedPerformanceHumanReadable(performanceEntry.getRegionsToProcessedPerformanceHumanReadable());
+
+            results.add(entryStatistic);
+        }
+
+        // Calculate mean
         for(Set<String> configuration : configurations) {
             List<DefaultPerformanceEntry> sameConfigEntries = new ArrayList<>();
 
@@ -143,22 +157,25 @@ public abstract class BaseExecutor implements Executor {
                 }
             }
 
-            PerformanceStatistic performanceStatistic = new PerformanceStatistic(true, sameConfigEntries);
+            for(PerformanceEntryStatistic performanceEntryStatistic : results) {
+                if(!performanceEntryStatistic.getConfiguration().equals(configuration)) {
+                    continue;
+                }
 
-            DefaultPerformanceEntry performanceEntry = new DefaultPerformanceEntry(performanceStatistic.getConfiguration());
-            performanceEntry.setRegionsToRawPerformance(performanceStatistic.getRegionsToRawMean());
-            performanceEntry.setRegionsToRawPerformanceHumanReadable(performanceStatistic.getRegionsToRawMeanHumanReadReadable());
-            performanceEntry.setRegionsToProcessedPerformance(performanceStatistic.getRegionsToProcessedMean());
-            performanceEntry.setRegionsToProcessedPerformanceHumanReadable(performanceStatistic.getRegionsToProcessedMeanHumanReadable());
+                performanceEntryStatistic.calculateMinMax(sameConfigEntries);
+                performanceEntryStatistic.calculateMean(sameConfigEntries);
+                performanceEntryStatistic.calculateStd(sameConfigEntries);
 
-            result.add(performanceEntry);
+                break;
+            }
+
         }
 
-        return result;
+        return results;
     }
 
     @Override
-    public Set<DefaultPerformanceEntry> execute(String[] args) throws IOException, InterruptedException {
+    public Set<PerformanceEntryStatistic> execute(String[] args) throws IOException, InterruptedException {
         Options.getCommandLine(args);
 
         String outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
@@ -173,25 +190,25 @@ public abstract class BaseExecutor implements Executor {
             File outputFile = new File(root + "/" + i);
 
             while (outputFile.exists()) {
-                Set<DefaultPerformanceEntry> results = this.aggregateExecutions(root);
+                Set<DefaultPerformanceEntry> results = this.aggregateExecutions(outputFile);
                 performanceEntriesList.add(results);
 
                 i++;
                 outputFile = new File(root + "/" + i);
             }
 
-            Set<DefaultPerformanceEntry> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
+            Set<PerformanceEntryStatistic> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
             return averagedPerformanceEntries;
         }
 
         this.repetitions = Options.getIterations();
-        Set<DefaultPerformanceEntry> performanceEntries = this.execute();
+        Set<PerformanceEntryStatistic> performanceEntries = this.execute();
 
         return performanceEntries;
     }
 
     @Override
-    public Set<DefaultPerformanceEntry> execute() throws IOException, InterruptedException {
+    public Set<PerformanceEntryStatistic> execute() throws IOException, InterruptedException {
         List<Set<DefaultPerformanceEntry>> performanceEntriesList = new ArrayList<>();
 
         for(int i = 0; i < this.repetitions; i++) {
@@ -199,7 +216,7 @@ public abstract class BaseExecutor implements Executor {
             performanceEntriesList.add(results);
         }
 
-        Set<DefaultPerformanceEntry> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
+        Set<PerformanceEntryStatistic> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);
 
         return averagedPerformanceEntries;
     }
@@ -225,7 +242,7 @@ public abstract class BaseExecutor implements Executor {
     }
 
     protected Set<DefaultPerformanceEntry> aggregateExecutions(File outputFile) throws IOException {
-        Collection<File> files = FileUtils.listFiles(outputFile, null, true);
+        Collection<File> files = FileUtils.listFiles(outputFile, new String[]{"json"}, true);
         Set<DefaultPerformanceEntry> performanceEntries = new HashSet<>();
 
         for(File file : files) {

@@ -1,15 +1,15 @@
 digraph error {
 node [shape=record];
-2036127838 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"324eef9f-f9ab-4ffb-a264-cfbaf0b5d199\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1076607567 [label="L0\lLINENUMBER 52 L0\lLDC \"324eef9f-f9ab-4ffb-a264-cfbaf0b5d199\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
-1509791656 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+88335763 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+573023937 [label="L0\lLINENUMBER 52 L0\lLDC \"baaacce5-cdba-43b5-850b-56b83133d8b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+513279161 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"baaacce5-cdba-43b5-850b-56b83133d8b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 1076607567;
-2036127838 -> exit;
-1076607567 -> 2036127838;
-1076607567 -> 1509791656;
-1509791656 -> 2036127838;
-2036127838[fontcolor="purple", penwidth=3, color="purple"];
-1076607567[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 573023937;
+88335763 -> 513279161;
+573023937 -> 88335763;
+573023937 -> 513279161;
+513279161 -> exit;
+573023937[fontcolor="purple", penwidth=3, color="purple"];
+513279161[fontcolor="purple", penwidth=3, color="purple"];
 }

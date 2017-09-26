@@ -1,18 +1,11 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
-import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
-import org.apache.commons.math3.stat.descriptive.moment.Mean;
-import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.junit.Test;
-import sun.instrument.InstrumentationImpl;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-import java.lang.instrument.Instrumentation;
+import java.util.HashSet;
 import java.util.Set;
 
 public class ConfigCrusherExecutorTest {
@@ -58,7 +51,7 @@ public class ConfigCrusherExecutorTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i2";
+        args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
@@ -77,10 +70,16 @@ public class ConfigCrusherExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
 
+
+        configurations.clear();
+        Set<String> n = new HashSet<>();
+//        n.add("A");
+        configurations.add(n);
+
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i1";
+        args[2] = "-i10";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);

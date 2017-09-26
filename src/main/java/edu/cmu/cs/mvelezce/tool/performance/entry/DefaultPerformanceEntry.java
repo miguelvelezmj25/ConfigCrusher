@@ -94,9 +94,7 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
 
             long start = top.getStartTime();
             long end = region.getEndTime();
-            long topOverhead = top.getOverhead();
             long regionExecutionTime = end - start;
-            regionExecutionTime -= topOverhead;
             regionExecutionTime -= innerRegionExecutionTime.pop();
             // Thread.sleep might sleep for less time and can give us a negative time
             regionExecutionTime = Math.max(0, regionExecutionTime);
@@ -109,12 +107,11 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
                 continue;
             }
 
-            long regionOverhead = region.getOverhead();
             Stack<Long> added = new Stack<>();
 
             while (!innerRegionExecutionTime.isEmpty()) {
                 long currentInnerRegionExecutionTime = innerRegionExecutionTime.pop();
-                added.push(currentInnerRegionExecutionTime + regionExecutionTime + topOverhead + regionOverhead);
+                added.push(currentInnerRegionExecutionTime + regionExecutionTime);
             }
 
             while (!added.isEmpty()) {
@@ -149,7 +146,6 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
             long start = top.getStartTime();
             long end = region.getEndTime();
             long time = end - start;
-            time -= top.getOverhead();
             // Thread.sleep might sleep for less time and can give us a negative time
             time = Math.max(0, time);
 

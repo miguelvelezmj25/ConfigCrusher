@@ -2,8 +2,8 @@ digraph <init> {
 node [shape=record];
 1169146729 [label="SIPUSH 255\lGOTO L2\l"];
 225290371 [label="L1\lFRAME FULL [U I I I I I I] [U I I I I I]\lLDC 65535\l"];
-2040352617 [label="L2\lFRAME FULL [U I I I I I I] [U I I I I I I]\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/PngPixel.\<init\> (IIIIII)V\lL3\lLINENUMBER 24 L3\lLDC \"42ee6b25-ca92-45c3-bba7-6e9d1c607938\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1558021762 [label="L0\lLINENUMBER 21 L0\lLDC \"42ee6b25-ca92-45c3-bba7-6e9d1c607938\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lILOAD 2\lILOAD 3\lILOAD 4\lILOAD 5\lILOAD 6\lIFEQ L1\l"];
+2040352617 [label="L2\lFRAME FULL [U I I I I I I] [U I I I I I I]\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/PngPixel.\<init\> (IIIIII)V\lL3\lLINENUMBER 24 L3\lLDC \"02b36f5b-3501-49a8-8da7-667fe53f1386\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1558021762 [label="L0\lLINENUMBER 21 L0\lLDC \"02b36f5b-3501-49a8-8da7-667fe53f1386\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lILOAD 2\lILOAD 3\lILOAD 4\lILOAD 5\lILOAD 6\lIFEQ L1\l"];
 entry;
 exit;
 1169146729 -> 2040352617;

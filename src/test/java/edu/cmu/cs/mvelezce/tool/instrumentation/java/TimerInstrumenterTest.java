@@ -389,4 +389,34 @@ public class TimerInstrumenterTest {
         Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
+
+    @Test
+    public void prevayler() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
+        String programName = "prevayler";
+        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler";
+        TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/demos/demo1/target/classes";
+//                + System.getProperty("path.separator") + "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/factory/target/classes"
+//                + System.getProperty("path.separator") + "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/core/target/classes";
+
+
+//        this.compile();
+//        this.format();
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+
+        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
+        instrumenter.instrument(args);
+    }
 }

@@ -24,8 +24,10 @@ public class CompileInstrumenter extends BaseInstrumenter {
         this.writeFilesToCompile();
 
         try {
-            String[] command = new String[]{"javac", //"-cp",
-//                    "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/lib/*",
+            String[] command = new String[]{"javac", "-cp",
+                    "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/demos/demo1/target/classes"
+                            + System.getProperty("path.separator") + "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/factory/target/classes"
+                            + System.getProperty("path.separator") + "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/core/target/classes",
                     "-d", this.getClassDir(), "@" + this.getSrcDir() + "/sources.txt"};
             System.out.println(Arrays.toString(command));
             Process process = Runtime.getRuntime().exec(command);

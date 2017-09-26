@@ -1,0 +1,1 @@
+{"configuration":["DISTTHRESHOLD","TIMEOUT","LOGLEVEL","MINALPHA"],"trace":[{"regionID":"program","startTime":1072559774176,"endTime":0,"overhead":26183},{"regionID":"program","startTime":0,"endTime":1078739894992,"overhead":10206}]}

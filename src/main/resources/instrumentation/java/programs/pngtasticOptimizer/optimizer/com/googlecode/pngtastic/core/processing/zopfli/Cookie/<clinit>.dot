@@ -1,17 +1,17 @@
 digraph <clinit> {
 node [shape=record];
-333392524 [label="L7\lFRAME APPEND [I]\lILOAD 0\lBIPUSH 64\lIF_ICMPGE L8\l"];
-1893960929 [label="L8\lLINENUMBER 38 L8\lFRAME SAME\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.intMOnes : [I\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.expand (Ljava/lang/Object;)V\lL13\lLINENUMBER 39 L13\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.charOnes : [C\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.expand (Ljava/lang/Object;)V\lL14\lLINENUMBER 40 L14\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.costMax : [J\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.expand (Ljava/lang/Object;)V\lL15\lLINENUMBER 41 L15\lLDC \"2918fd9e-ce00-420f-b2b2-4d89d770c661\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-749282235 [label="L9\lLINENUMBER 34 L9\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.intMOnes : [I\lILOAD 0\lICONST_M1\lIASTORE\lL10\lLINENUMBER 35 L10\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.charOnes : [C\lILOAD 0\lICONST_1\lCASTORE\lL11\lLINENUMBER 36 L11\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.costMax : [J\lILOAD 0\lLDC 9223372036854775807\lLASTORE\lL12\lLINENUMBER 33 L12\lIINC 0 1\lGOTO L7\l"];
-1208532123 [label="L0\lLINENUMBER 24 L0\lLDC \"2918fd9e-ce00-420f-b2b2-4d89d770c661\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC 65536\lNEWARRAY T_INT\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.intZeroes : [I\lL1\lLINENUMBER 25 L1\lLDC 65536\lNEWARRAY T_CHAR\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.charZeroes : [C\lL2\lLINENUMBER 26 L2\lLDC 65536\lNEWARRAY T_BYTE\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.byteZeroes : [B\lL3\lLINENUMBER 27 L3\lLDC 65536\lNEWARRAY T_INT\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.intMOnes : [I\lL4\lLINENUMBER 28 L4\lLDC 65536\lNEWARRAY T_CHAR\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.charOnes : [C\lL5\lLINENUMBER 29 L5\lLDC 65536\lNEWARRAY T_LONG\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.costMax : [J\lL6\lLINENUMBER 33 L6\lICONST_0\lISTORE 0\l"];
+2085813377 [label="L0\lLINENUMBER 24 L0\lLDC \"f2c77b7f-4f42-401e-90bd-e9b6fd4085f6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC 65536\lNEWARRAY T_INT\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.intZeroes : [I\lL1\lLINENUMBER 25 L1\lLDC 65536\lNEWARRAY T_CHAR\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.charZeroes : [C\lL2\lLINENUMBER 26 L2\lLDC 65536\lNEWARRAY T_BYTE\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.byteZeroes : [B\lL3\lLINENUMBER 27 L3\lLDC 65536\lNEWARRAY T_INT\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.intMOnes : [I\lL4\lLINENUMBER 28 L4\lLDC 65536\lNEWARRAY T_CHAR\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.charOnes : [C\lL5\lLINENUMBER 29 L5\lLDC 65536\lNEWARRAY T_LONG\lPUTSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.costMax : [J\lL6\lLINENUMBER 33 L6\lICONST_0\lISTORE 0\l"];
+1965269980 [label="L8\lLINENUMBER 38 L8\lFRAME SAME\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.intMOnes : [I\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.expand (Ljava/lang/Object;)V\lL13\lLINENUMBER 39 L13\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.charOnes : [C\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.expand (Ljava/lang/Object;)V\lL14\lLINENUMBER 40 L14\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.costMax : [J\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.expand (Ljava/lang/Object;)V\lL15\lLINENUMBER 41 L15\lLDC \"f2c77b7f-4f42-401e-90bd-e9b6fd4085f6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+671536858 [label="L9\lLINENUMBER 34 L9\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.intMOnes : [I\lILOAD 0\lICONST_M1\lIASTORE\lL10\lLINENUMBER 35 L10\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.charOnes : [C\lILOAD 0\lICONST_1\lCASTORE\lL11\lLINENUMBER 36 L11\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.costMax : [J\lILOAD 0\lLDC 9223372036854775807\lLASTORE\lL12\lLINENUMBER 33 L12\lIINC 0 1\lGOTO L7\l"];
+1986677191 [label="L7\lFRAME APPEND [I]\lILOAD 0\lBIPUSH 64\lIF_ICMPGE L8\l"];
 entry;
 exit;
-entry -> 1208532123;
-333392524 -> 1893960929;
-333392524 -> 749282235;
-1893960929 -> exit;
-749282235 -> 333392524;
-1208532123 -> 333392524;
-1893960929[fontcolor="purple", penwidth=3, color="purple"];
-1208532123[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 2085813377;
+2085813377 -> 1986677191;
+1965269980 -> exit;
+671536858 -> 1986677191;
+1986677191 -> 1965269980;
+1986677191 -> 671536858;
+2085813377[fontcolor="purple", penwidth=3, color="purple"];
+1965269980[fontcolor="purple", penwidth=3, color="purple"];
 }

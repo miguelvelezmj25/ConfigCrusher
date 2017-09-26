@@ -10,14 +10,6 @@ public class Region {
     private String regionID;
     private long startTime = 0;
     private long endTime = 0;
-    private long overhead = 0;
-
-    public Region(String regionID, long startTime, long endTime, long overhead) {
-        this.regionID = regionID;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.overhead = overhead;
-    }
 
     public Region(String regionID, long startTime, long endTime) {
         this.regionID = regionID;
@@ -95,7 +87,6 @@ public class Region {
                 "regionID='" + regionID + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", overhead=" + this.overhead +
                 '}';
     }
 
@@ -109,13 +100,5 @@ public class Region {
 
     public long getEndTime() {
         return this.endTime;
-    }
-
-    public long getOverhead() {
-        return this.overhead;
-    }
-
-    public void setOverhead(long overhead) {
-        this.overhead = overhead;
     }
 }

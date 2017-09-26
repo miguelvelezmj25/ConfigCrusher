@@ -30,14 +30,6 @@ public class RegionsTest {
 
         Regions.exit("2");
         Thread.sleep(100L);
-
-        long overhead = 0;
-
-        for(Region region : Regions.getExecutedRegionsTrace()) {
-            overhead += region.getOverhead();
-        }
-
-        System.out.println(overhead / 1000000000.0);
     }
 
 }

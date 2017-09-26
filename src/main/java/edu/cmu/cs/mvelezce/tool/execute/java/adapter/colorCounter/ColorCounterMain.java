@@ -44,11 +44,13 @@ public class ColorCounterMain extends BaseMain {
     @Override
     public void execute(String mainClass, String[] args) throws Exception {
         if(mainClass.contains("Run")) {
+            long start = System.nanoTime();
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());
-            System.out.println(mainClass);
             Run.main(args);
             Regions.exit(program.getRegionID());
+            long end = System.nanoTime();
+            System.out.println("TIME " + (end - start) / 1000000000.0);
         }
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);

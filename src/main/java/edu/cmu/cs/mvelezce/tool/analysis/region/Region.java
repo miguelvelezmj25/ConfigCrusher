@@ -8,8 +8,8 @@ import java.util.UUID;
 public class Region {
 
     private String regionID;
-    private long startTime;
-    private long endTime;
+    private long startTime = 0;
+    private long endTime = 0;
     private long overhead = 0;
 
     public Region(String regionID, long startTime, long endTime, long overhead) {
@@ -26,16 +26,16 @@ public class Region {
     }
 
     public Region(String regionID) {
-        this(regionID, 0, 0);
+        this.regionID = regionID;
     }
 
     public Region() {
         this(UUID.randomUUID().toString());
     }
 
-    public static long getExecutionTime(long startTime, long endTime) {
-        return endTime - startTime;
-    }
+//    public static long getExecutionTime(long startTime, long endTime) {
+//        return endTime - startTime;
+//    }
 
 //    public static double getMilliExecutionTime(long startTime, long endTime) {
 //        return Region.getExecutionTime(startTime, endTime) / 1000000.0;

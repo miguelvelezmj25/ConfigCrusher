@@ -1,15 +1,15 @@
 digraph debug {
 node [shape=record];
-1609124502 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"19818d24-e820-4012-9a4f-383743b6b84e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1671179293 [label="L0\lLINENUMBER 32 L0\lLDC \"19818d24-e820-4012-9a4f-383743b6b84e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
-1144068272 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+195228908 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+914356853 [label="L0\lLINENUMBER 32 L0\lLDC \"bf47546c-2dcf-4272-b73c-667254c20a58\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+1229161065 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"bf47546c-2dcf-4272-b73c-667254c20a58\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 1671179293;
-1609124502 -> exit;
-1671179293 -> 1609124502;
-1671179293 -> 1144068272;
-1144068272 -> 1609124502;
-1609124502[fontcolor="purple", penwidth=3, color="purple"];
-1671179293[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 914356853;
+195228908 -> 1229161065;
+914356853 -> 195228908;
+914356853 -> 1229161065;
+1229161065 -> exit;
+914356853[fontcolor="purple", penwidth=3, color="purple"];
+1229161065[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -11,7 +11,7 @@ public class Regions {
     public static final String PROGRAM_REGION_ID = "program";
     public static int startCount = 0;
     public static int endCound = 0;
-    private static List<Region> executedRegionsTrace = new ArrayList<>(100_000_000);
+    private static List<Region> executedRegionsTrace = new ArrayList<>(1_000_000);
 
     public static void main(String[] args) {
         System.out.println("Started");
@@ -31,19 +31,19 @@ public class Regions {
     }
 
     public static void enter(String regionID) {
-//        Region region = new Region(regionID);
-//        region.enter();
-////
-////        Regions.addExecutingRegion(region);
-//        Regions.startCount++;
+        Region region = new Region(regionID);
+        region.enter();
+
+        Regions.addExecutingRegion(region);
+        Regions.startCount++;
     }
 
     public static void exit(String regionID) {
-//        Region region = new Region(regionID);
-//        region.exit();
-//
-////        Regions.removeExecutingRegion(region);
-//        Regions.endCound++;
+        Region region = new Region(regionID);
+        region.exit();
+
+        Regions.removeExecutingRegion(region);
+        Regions.endCound++;
     }
 
     public static void addExecutingRegion(Region region) {

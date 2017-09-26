@@ -1,1 +1,0 @@
-{"configuration":["FREQTHRESHOLD","LOGLEVEL","MINALPHA"],"trace":[{"regionID":"program","startTime":1446511541777,"endTime":0,"overhead":31048},{"regionID":"program","startTime":0,"endTime":1452666913385,"overhead":10861}]}

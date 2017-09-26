@@ -10,7 +10,6 @@ import java.util.*;
  */
 public abstract class BaseAdapter implements Adapter {
 
-    public static final String TEST_DIRECTORY = "test/out/production/test";
     private static final String CLASS_CONTAINER = "target/classes/";
     private static final String JACKSON_PATH = "/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar";
     private String programName;
@@ -80,7 +79,9 @@ public abstract class BaseAdapter implements Adapter {
         StringBuilder output = new StringBuilder();
         List<String> commandList = new ArrayList<>();
         commandList.add("java");
-        commandList.add("-Xmx8G");
+        commandList.add("-Xms10G");
+        commandList.add("-Xmx10G");
+        commandList.add("-XX:+UseConcMarkSweepGC");
         commandList.add("-cp");
         commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
         commandList.add(mainAdapter);

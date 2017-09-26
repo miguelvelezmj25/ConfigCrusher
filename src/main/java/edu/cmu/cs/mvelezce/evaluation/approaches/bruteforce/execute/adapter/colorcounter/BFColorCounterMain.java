@@ -24,10 +24,10 @@ public class BFColorCounterMain extends ColorCounterMain {
         String programName = args[0];
         String mainClass = args[1];
         String iteration = args[2];
-        String[] sleepArgs = Arrays.copyOfRange(args, 3, args.length);
+        String[] counterArgs = Arrays.copyOfRange(args, 3, args.length);
 
-        Main main = new BFColorCounterMain(programName, iteration, sleepArgs);
-        main.execute(mainClass, sleepArgs);
+        Main main = new BFColorCounterMain(programName, iteration, counterArgs);
+        main.execute(mainClass, counterArgs);
         main.logExecution();
     }
 

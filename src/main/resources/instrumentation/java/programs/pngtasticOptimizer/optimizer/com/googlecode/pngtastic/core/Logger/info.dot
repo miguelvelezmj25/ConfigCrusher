@@ -1,18 +1,18 @@
 digraph info {
 node [shape=record];
-1847637306 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"512d1061-ac52-4f8b-8483-2683bf3537e8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1577592551 [label="L0\lLINENUMBER 42 L0\lLDC \"512d1061-ac52-4f8b-8483-2683bf3537e8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
-148626113 [label="LDC \"INFO\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L2\l"];
-854587510 [label="L1\lLINENUMBER 43 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+514793058 [label="LDC \"INFO\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L2\l"];
+62309924 [label="L1\lLINENUMBER 43 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+775423528 [label="L0\lLINENUMBER 42 L0\lLDC \"51a1341a-f052-4eba-a70e-47af8092255f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+209845522 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"51a1341a-f052-4eba-a70e-47af8092255f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 1577592551;
-1847637306 -> exit;
-1577592551 -> 148626113;
-1577592551 -> 854587510;
-148626113 -> 1847637306;
-148626113 -> 854587510;
-854587510 -> 1847637306;
-1847637306[fontcolor="purple", penwidth=3, color="purple"];
-1577592551[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 775423528;
+514793058 -> 62309924;
+514793058 -> 209845522;
+62309924 -> 209845522;
+775423528 -> 514793058;
+775423528 -> 62309924;
+209845522 -> exit;
+775423528[fontcolor="purple", penwidth=3, color="purple"];
+209845522[fontcolor="purple", penwidth=3, color="purple"];
 }

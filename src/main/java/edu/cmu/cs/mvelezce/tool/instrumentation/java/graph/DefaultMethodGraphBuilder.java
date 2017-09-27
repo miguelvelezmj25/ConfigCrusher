@@ -78,13 +78,18 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
             else if(opcode == Opcodes.ATHROW) {
                 for(TryCatchBlockNode tryCatchBlock : this.getMethodNode().tryCatchBlocks) {
                     AbstractInsnNode insnNode = tryCatchBlock.start;
-                    AbstractInsnNode handlerNode = tryCatchBlock.handler;
+                    AbstractInsnNode endNode = tryCatchBlock.end;
 
-                    while(insnNode != handlerNode && insnNode.getNext() != handlerNode) {
+                    while(insnNode != endNode && insnNode.getNext() != endNode) {
                         insnNode = insnNode.getNext();
 
                         if(insnNode == instruction) {
                             MethodBlock destinationBlock = graph.getMethodBlock(tryCatchBlock.handler);
+
+                            if(destinationBlock == null) {
+                                throw new RuntimeException("Do not have a node for the handler of a try catch block");
+                            }
+
                             graph.addEdge(block, destinationBlock);
                         }
                     }

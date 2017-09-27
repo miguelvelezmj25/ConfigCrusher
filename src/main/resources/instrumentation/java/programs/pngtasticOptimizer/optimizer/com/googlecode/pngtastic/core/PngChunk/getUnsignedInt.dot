@@ -1,17 +1,17 @@
 digraph getUnsignedInt {
 node [shape=record];
-2081952435 [label="L3\lLINENUMBER 119 L3\lFRAME SAME\lLLOAD 2\lLDC \"69b7e2d7-7aef-4224-b234-9e87f8ff9849\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLRETURN\l"];
-1927776715 [label="L0\lLINENUMBER 114 L0\lLDC \"69b7e2d7-7aef-4224-b234-9e87f8ff9849\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLCONST_0\lLSTORE 2\lL1\lLINENUMBER 115 L1\lICONST_0\lISTORE 4\l"];
-971404566 [label="L2\lFRAME APPEND [J I]\lILOAD 4\lICONST_4\lIF_ICMPGE L3\l"];
-1124288521 [label="L4\lLINENUMBER 116 L4\lLLOAD 2\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngChunk.data : [B\lILOAD 1\lILOAD 4\lIADD\lBALOAD\lSIPUSH 255\lIAND\lICONST_3\lILOAD 4\lISUB\lBIPUSH 8\lIMUL\lISHL\lI2L\lLADD\lLSTORE 2\lL5\lLINENUMBER 115 L5\lIINC 4 1\lGOTO L2\l"];
+465909321 [label="L0\lLINENUMBER 114 L0\lLDC \"69b7e2d7-7aef-4224-b234-9e87f8ff9849\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLCONST_0\lLSTORE 2\lL1\lLINENUMBER 115 L1\lICONST_0\lISTORE 4\l"];
+1205419533 [label="L4\lLINENUMBER 116 L4\lLLOAD 2\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngChunk.data : [B\lILOAD 1\lILOAD 4\lIADD\lBALOAD\lSIPUSH 255\lIAND\lICONST_3\lILOAD 4\lISUB\lBIPUSH 8\lIMUL\lISHL\lI2L\lLADD\lLSTORE 2\lL5\lLINENUMBER 115 L5\lIINC 4 1\lGOTO L2\l"];
+143486875 [label="L3\lLINENUMBER 119 L3\lFRAME SAME\lLLOAD 2\lLDC \"69b7e2d7-7aef-4224-b234-9e87f8ff9849\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLRETURN\l"];
+1197176722 [label="L2\lFRAME APPEND [J I]\lILOAD 4\lICONST_4\lIF_ICMPGE L3\l"];
 entry;
 exit;
-entry -> 1927776715;
-2081952435 -> exit;
-1927776715 -> 971404566;
-971404566 -> 2081952435;
-971404566 -> 1124288521;
-1124288521 -> 971404566;
-2081952435[fontcolor="purple", penwidth=3, color="purple"];
-1927776715[fontcolor="purple", penwidth=3, color="purple"];
+465909321 -> 1197176722;
+entry -> 465909321;
+1205419533 -> 1197176722;
+143486875 -> exit;
+1197176722 -> 1205419533;
+1197176722 -> 143486875;
+465909321[fontcolor="purple", penwidth=3, color="purple"];
+143486875[fontcolor="purple", penwidth=3, color="purple"];
 }

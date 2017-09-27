@@ -1,0 +1,22 @@
+digraph receive {
+node [shape=record];
+1864869682 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lTRYCATCHBLOCK L4 L5 L6 java/io/IOException\lL7\lLINENUMBER 97 L7\lLDC \"465760fd-c1d9-4d26-8d90-b4876046bba4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"465760fd-c1d9-4d26-8d90-b4876046bba4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionTimestamp.capsule ()Lorg/prevayler/implementation/Capsule;\l"];
+2123444693 [label="MONITOREXIT\lL1\lGOTO L5\lL2\lFRAME FULL [org/prevayler/implementation/replication/ServerConnection org/prevayler/implementation/TransactionTimestamp org/prevayler/foundation/network/ObjectSocket] [java/lang/Throwable]\lASTORE 3\lALOAD 2\lMONITOREXIT\l"];
+1819776360 [label="INVOKEVIRTUAL org/prevayler/implementation/TransactionTimestamp.executionTime ()Ljava/util/Date;\lINVOKESPECIAL org/prevayler/implementation/TransactionTimestamp.\<init\> (Lorg/prevayler/implementation/Capsule;JLjava/util/Date;)V\lASTORE 1\lL4\lLINENUMBER 102 L4\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._remote : Lorg/prevayler/foundation/network/ObjectSocket;\lDUP\lASTORE 2\lMONITORENTER\lL0\lLINENUMBER 103 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._remote : Lorg/prevayler/foundation/network/ObjectSocket;\lALOAD 1\lINVOKEINTERFACE org/prevayler/foundation/network/ObjectSocket.writeObject (Ljava/lang/Object;)V\lL9\lLINENUMBER 104 L9\lALOAD 2\l"];
+773662650 [label="LINENUMBER 106 L11\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/replication/ServerConnection.close ()V\lL10\lLINENUMBER 108 L10\lFRAME APPEND [java/lang/Object]\lLDC \"465760fd-c1d9-4d26-8d90-b4876046bba4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"465760fd-c1d9-4d26-8d90-b4876046bba4\"\l"];
+255334292 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._remoteCapsule : Lorg/prevayler/implementation/Capsule;\lIF_ACMPNE L4\lL8\lLINENUMBER 98 L8\lNEW org/prevayler/implementation/TransactionTimestamp\lDUP\lACONST_NULL\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionTimestamp.systemVersion ()J\lALOAD 1\l"];
+752684363 [label="L3\lALOAD 3\lATHROW\lL5\l"];
+1641415002 [label="LINENUMBER 107 L5\lFRAME SAME\lGOTO L10\lL6\lLINENUMBER 105 L6\lFRAME FULL [org/prevayler/implementation/replication/ServerConnection org/prevayler/implementation/TransactionTimestamp] [java/io/IOException]\lASTORE 2\lL11\l"];
+entry;
+exit;
+entry -> 1864869682;
+1864869682 -> 1819776360;
+1864869682 -> 255334292;
+1819776360 -> 752684363;
+773662650 -> exit;
+255334292 -> 1819776360;
+752684363 -> 773662650;
+1641415002 -> 773662650;
+1864869682[fontcolor="purple", penwidth=3, color="purple"];
+773662650[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,17 @@
+digraph clock {
+node [shape=record];
+1237550792 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"5bbb575b-bfdf-4f78-8418-be3a827024ff\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\lL3\l"];
+6750210 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
+521081105 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
+2005733474 [label="L0\lLINENUMBER 155 L0\lLDC \"5bbb575b-bfdf-4f78-8418-be3a827024ff\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
+entry;
+exit;
+entry -> 2005733474;
+1237550792 -> exit;
+6750210 -> 1237550792;
+521081105 -> 1237550792;
+2005733474 -> 6750210;
+2005733474 -> 521081105;
+1237550792[fontcolor="purple", penwidth=3, color="purple"];
+2005733474[fontcolor="purple", penwidth=3, color="purple"];
+}

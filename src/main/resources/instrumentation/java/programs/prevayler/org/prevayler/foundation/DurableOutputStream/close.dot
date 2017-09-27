@@ -1,0 +1,30 @@
+digraph close {
+node [shape=record];
+1304117943 [label="ASTORE 3\lALOAD 2\lMONITOREXIT\lL5\lALOAD 3\lATHROW\lL17\l"];
+844112759 [label="INVOKESPECIAL org/prevayler/foundation/DurableOutputStream.internalClose ()V\lL13\lLINENUMBER 224 L13\lALOAD 0\l"];
+739973450 [label="GETFIELD org/prevayler/foundation/DurableOutputStream._fileChannel : Ljava/nio/channels/FileChannel;\lIFNULL L14\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileChannel : Ljava/nio/channels/FileChannel;\lINVOKEVIRTUAL java/nio/channels/FileChannel.isOpen ()Z\lIFEQ L14\lL15\lLINENUMBER 225 L15\lALOAD 0\l"];
+1727361096 [label="L16\lLINENUMBER 228 L16\lALOAD 2\lMONITOREXIT\lL4\lGOTO L17\lL2\lFRAME SAME1 java/lang/Throwable\l"];
+556281560 [label="LINENUMBER 229 L17\lFRAME SAME\lALOAD 1\lMONITOREXIT\lL9\lGOTO L18\lL8\lFRAME FULL [org/prevayler/foundation/DurableOutputStream java/lang/Object] [java/lang/Throwable]\l"];
+1426963578 [label="ASTORE 4\lALOAD 1\lMONITOREXIT\lL10\lALOAD 4\lATHROW\lL18\l"];
+9797126 [label="GETFIELD org/prevayler/foundation/DurableOutputStream._fileChannel : Ljava/nio/channels/FileChannel;\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileChannel : Ljava/nio/channels/FileChannel;\lINVOKEVIRTUAL java/nio/channels/FileChannel.position ()J\lINVOKEVIRTUAL java/nio/channels/FileChannel.truncate (J)Ljava/nio/channels/FileChannel;\lPOP\lL14\lLINENUMBER 227 L14\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileOutputStream : Ljava/io/FileOutputStream;\lINVOKEVIRTUAL java/io/FileOutputStream.close ()V\l"];
+501609049 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L3 L4 L2 null\lTRYCATCHBLOCK L2 L5 L2 null\lTRYCATCHBLOCK L6 L7 L8 null\lTRYCATCHBLOCK L3 L9 L8 null\lTRYCATCHBLOCK L8 L10 L8 null\lL11\lLINENUMBER 216 L11\lLDC \"aaadaa9b-aaf5-4206-9ab0-c45bf3f630ac\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._syncLock : Ljava/lang/Object;\lDUP\lASTORE 1\lMONITORENTER\lL6\lLINENUMBER 217 L6\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._writeLock : Ljava/lang/Object;\lDUP\lASTORE 2\l"];
+838473569 [label="MONITORENTER\lL0\lLINENUMBER 218 L0\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._closed : Z\lIFEQ L3\lL12\lLINENUMBER 219 L12\lALOAD 2\lMONITOREXIT\lL1\l"];
+1922930974 [label="ALOAD 1\lMONITOREXIT\lL7\lLDC \"aaadaa9b-aaf5-4206-9ab0-c45bf3f630ac\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\lL3\lLINENUMBER 222 L3\lFRAME APPEND [java/lang/Object java/lang/Object]\lALOAD 0\l"];
+entry;
+exit;
+844112759 -> 739973450;
+844112759 -> 9797126;
+739973450 -> 9797126;
+1727361096 -> 556281560;
+9797126 -> 1304117943;
+838473569 -> exit;
+1922930974 -> 844112759;
+1922930974 -> 9797126;
+1304117943 -> 1426963578;
+entry -> 501609049;
+1426963578 -> exit;
+501609049 -> 838473569;
+501609049 -> 1922930974;
+501609049[fontcolor="purple", penwidth=3, color="purple"];
+1922930974[fontcolor="purple", penwidth=3, color="purple"];
+}

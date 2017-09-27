@@ -1,0 +1,15 @@
+digraph abort {
+node [shape=record];
+608519258 [label="L2\lLINENUMBER 81 L2\lFRAME SAME\lNEW java/lang/IllegalStateException\lDUP\lALOAD 1\lALOAD 2\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;Ljava/lang/Throwable;)V\lATHROW\lL4\l"];
+1963075870 [label="L3\lLINENUMBER 79 L3\lALOAD 3\lINVOKESPECIAL org/prevayler/foundation/Turn.die ()Lorg/prevayler/foundation/Turn;\lASTORE 3\lGOTO L1\l"];
+1636291061 [label="L0\lLINENUMBER 77 L0\lLDC \"b153b262-9655-4cde-b8fa-cf3b25fd2da8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lASTORE 3\l"];
+397071633 [label="L1\lLINENUMBER 78 L1\lFRAME APPEND [org/prevayler/foundation/Turn]\lALOAD 3\lIFNULL L2\l"];
+entry;
+exit;
+entry -> 1636291061;
+1963075870 -> 397071633;
+1636291061 -> 397071633;
+397071633 -> 608519258;
+397071633 -> 1963075870;
+1636291061[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,14 @@
+digraph nextTransaction {
+node [shape=record];
+1326393666 [label="L1\lLINENUMBER 69 L1\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lI2L\lLADD\lLDC \"eb8db63b-fe15-4176-b09b-ec2bc9fdf185\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLRETURN\lL3\l"];
+1147805316 [label="L0\lLINENUMBER 66 L0\lLDC \"eb8db63b-fe15-4176-b09b-ec2bc9fdf185\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransactionInitialized : Z\lIFNE L1\l"];
+643290333 [label="L2\lLINENUMBER 67 L2\lNEW java/lang/IllegalStateException\lDUP\lLDC \"update() must be called at least once\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+entry -> 1147805316;
+1326393666 -> exit;
+1147805316 -> 1326393666;
+1147805316 -> 643290333;
+1326393666[fontcolor="purple", penwidth=3, color="purple"];
+1147805316[fontcolor="purple", penwidth=3, color="purple"];
+}

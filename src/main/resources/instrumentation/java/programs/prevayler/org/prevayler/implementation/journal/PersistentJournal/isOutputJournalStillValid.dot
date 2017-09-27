@@ -1,0 +1,23 @@
+digraph isOutputJournalStillValid {
+node [shape=record];
+46453164 [label="ALOAD 0\lL3\lLINENUMBER 104 L3\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld ()Z\lIFNE L1\l"];
+2131597042 [label="ICONST_1\lGOTO L4\l"];
+1415289182 [label="L4\lLINENUMBER 102 L4\lFRAME SAME1 I\lLDC \"dae85aeb-77e0-4c48-91f2-f393d5c25921\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL5\l"];
+909282611 [label="ALOAD 0\lL2\lLINENUMBER 103 L2\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig ()Z\lIFNE L1\l"];
+124734309 [label="L0\lLINENUMBER 102 L0\lLDC \"dae85aeb-77e0-4c48-91f2-f393d5c25921\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lIFNULL L1\l"];
+211090736 [label="L1\lFRAME SAME\lICONST_0\l"];
+entry;
+exit;
+entry -> 124734309;
+46453164 -> 2131597042;
+46453164 -> 211090736;
+2131597042 -> 1415289182;
+1415289182 -> exit;
+909282611 -> 46453164;
+909282611 -> 211090736;
+124734309 -> 909282611;
+124734309 -> 211090736;
+211090736 -> 1415289182;
+1415289182[fontcolor="purple", penwidth=3, color="purple"];
+124734309[fontcolor="purple", penwidth=3, color="purple"];
+}

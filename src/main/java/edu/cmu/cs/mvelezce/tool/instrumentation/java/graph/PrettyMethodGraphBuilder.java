@@ -81,8 +81,26 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
             List<String> prettyInstructions = prettyBlock.getPrettyInstructions();
             List<Object> printerInstructions = this.printer.getText();
 
+            int offset = 0;
+
+            for(Object string : printerInstructions) {
+                if(string.toString().contains("TRYCATCHBLOCK")) {
+                    offset++;
+                }
+                else {
+                    break;
+                }
+            }
+
+            if(startIndex != 0) {
+                startIndex += offset;
+            }
+
+            endIndex += offset;
+
             for(int i = startIndex; i < endIndex; i++) {
-                prettyInstructions.add(printerInstructions.get(i).toString().trim());
+                String instruction = printerInstructions.get(i).toString().trim();
+                prettyInstructions.add(instruction);
             }
 
         }

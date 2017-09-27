@@ -1,0 +1,20 @@
+digraph writeObject {
+node [shape=record];
+1607792885 [label="LINENUMBER 137 L11\lALOAD 3\lATHROW\lL9\lLINENUMBER 140 L9\lFRAME SAME\lALOAD 0\lDUP\lGETFIELD org/prevayler/foundation/DurableOutputStream._objectsWritten : I\lICONST_1\lIADD\lPUTFIELD org/prevayler/foundation/DurableOutputStream._objectsWritten : I\lL12\lLINENUMBER 141 L12\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._objectsWritten : I\lALOAD 2\lMONITOREXIT\lL4\l"];
+1728579441 [label="LDC \"already closed\"\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\lL0\lLINENUMBER 134 L0\lFRAME APPEND [java/lang/Object]\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._active : Ljava/io/ByteArrayOutputStream;\lINVOKEVIRTUAL org/prevayler/foundation/Guided.writeTo (Ljava/io/OutputStream;)V\l"];
+1768792843 [label="L1\lLINENUMBER 138 L1\lGOTO L9\lL2\lLINENUMBER 135 L2\lFRAME SAME1 java/io/IOException\lASTORE 3\lL10\lLINENUMBER 136 L10\lALOAD 0\lINVOKESPECIAL org/prevayler/foundation/DurableOutputStream.internalClose ()V\lL11\l"];
+1316557528 [label="LDC \"1fa2f3f3-be70-42bd-8365-8d399a37d79d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL5\lLINENUMBER 142 L5\lFRAME SAME1 java/lang/Throwable\lASTORE 4\lALOAD 2\lMONITOREXIT\lL6\l"];
+1926096844 [label="ALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._closed : Z\lIFEQ L0\lL8\lLINENUMBER 130 L8\lNEW java/io/IOException\lDUP\l"];
+515184459 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lTRYCATCHBLOCK L3 L4 L5 null\lTRYCATCHBLOCK L5 L6 L5 null\lL7\lLINENUMBER 128 L7\lLDC \"1fa2f3f3-be70-42bd-8365-8d399a37d79d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._writeLock : Ljava/lang/Object;\lDUP\lASTORE 2\lMONITORENTER\lL3\lLINENUMBER 129 L3\l"];
+entry;
+exit;
+entry -> 515184459;
+1607792885 -> exit;
+1728579441 -> 1607792885;
+1768792843 -> 1316557528;
+1926096844 -> 1316557528;
+515184459 -> 1728579441;
+515184459 -> 1926096844;
+1316557528[fontcolor="purple", penwidth=3, color="purple"];
+515184459[fontcolor="purple", penwidth=3, color="purple"];
+}

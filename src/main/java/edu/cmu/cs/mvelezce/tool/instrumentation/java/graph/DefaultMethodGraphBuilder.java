@@ -160,7 +160,8 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
             int opcode = instruction.getOpcode();
 
             if(type != AbstractInsnNode.JUMP_INSN && type != AbstractInsnNode.LOOKUPSWITCH_INSN
-                    && type != AbstractInsnNode.TABLESWITCH_INSN && opcode != Opcodes.ATHROW) {
+                    && type != AbstractInsnNode.TABLESWITCH_INSN && opcode != Opcodes.ATHROW
+                    && opcode != Opcodes.RET && (opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN)) {
                 continue;
             }
 
@@ -194,6 +195,30 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                         }
                     }
                 }
+            }
+            else if(opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
+                AbstractInsnNode nextInstruction = instruction.getNext();
+
+                // This is the last instruction of the method
+                if(nextInstruction == null) {
+                    continue;
+                }
+
+                block = graph.getMethodBlock(nextInstruction);
+
+                // This is a return in the middle of the body and there is a block that was already created for the next
+                // instruction
+                if(block != null) {
+                    continue;
+                }
+
+                // This is a return at the end of the method
+                if(nextInstruction.getNext() == null) {
+                    continue;
+                }
+
+                block = new MethodBlock(nextInstruction);
+                graph.addMethodBlock(block);
             }
             else {
                 if(type == AbstractInsnNode.TABLESWITCH_INSN) {

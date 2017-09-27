@@ -1,15 +1,15 @@
 digraph error {
 node [shape=record];
-88335763 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-573023937 [label="L0\lLINENUMBER 52 L0\lLDC \"baaacce5-cdba-43b5-850b-56b83133d8b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
-513279161 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"baaacce5-cdba-43b5-850b-56b83133d8b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1371397528 [label="L0\lLINENUMBER 52 L0\lLDC \"fcea9809-ada2-4e6d-9898-2b22142921b1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+2010426450 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+35419258 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"fcea9809-ada2-4e6d-9898-2b22142921b1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 573023937;
-88335763 -> 513279161;
-573023937 -> 88335763;
-573023937 -> 513279161;
-513279161 -> exit;
-573023937[fontcolor="purple", penwidth=3, color="purple"];
-513279161[fontcolor="purple", penwidth=3, color="purple"];
+1371397528 -> 2010426450;
+1371397528 -> 35419258;
+entry -> 1371397528;
+2010426450 -> 35419258;
+35419258 -> exit;
+1371397528[fontcolor="purple", penwidth=3, color="purple"];
+35419258[fontcolor="purple", penwidth=3, color="purple"];
 }

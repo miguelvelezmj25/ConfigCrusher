@@ -1,16 +1,16 @@
 digraph maxCachedSubLen {
 node [shape=record];
-822359325 [label="L3\lLINENUMBER 122 L3\lICONST_0\lLDC \"f9d6c3d5-56c9-42ec-8c25-6f516d9574d4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
-1676428380 [label="L2\lLINENUMBER 124 L2\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.subLenLen : [B\lILOAD 1\lBIPUSH 8\lIADD\lICONST_1\lISUB\lBALOAD\lSIPUSH 255\lIAND\lICONST_3\lIADD\lLDC \"f9d6c3d5-56c9-42ec-8c25-6f516d9574d4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
-1701646500 [label="L0\lLINENUMBER 120 L0\lLDC \"f9d6c3d5-56c9-42ec-8c25-6f516d9574d4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 1\lBIPUSH 8\lIMUL\lISTORE 1\lL1\lLINENUMBER 121 L1\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.subLenPos : [C\lILOAD 1\lCALOAD\lIFNE L2\l"];
+884860061 [label="L2\lLINENUMBER 124 L2\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.subLenLen : [B\lILOAD 1\lBIPUSH 8\lIADD\lICONST_1\lISUB\lBALOAD\lSIPUSH 255\lIAND\lICONST_3\lIADD\lLDC \"aa4ad584-5898-4563-8c0b-d22c2ea87899\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+603305436 [label="L0\lLINENUMBER 120 L0\lLDC \"aa4ad584-5898-4563-8c0b-d22c2ea87899\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 1\lBIPUSH 8\lIMUL\lISTORE 1\lL1\lLINENUMBER 121 L1\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.subLenPos : [C\lILOAD 1\lCALOAD\lIFNE L2\l"];
+454884231 [label="L3\lLINENUMBER 122 L3\lICONST_0\lLDC \"aa4ad584-5898-4563-8c0b-d22c2ea87899\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
 entry;
 exit;
-822359325 -> exit;
-entry -> 1701646500;
-1676428380 -> exit;
-1701646500 -> 822359325;
-1701646500 -> 1676428380;
-822359325[fontcolor="purple", penwidth=3, color="purple"];
-1676428380[fontcolor="purple", penwidth=3, color="purple"];
-1701646500[fontcolor="purple", penwidth=3, color="purple"];
+884860061 -> exit;
+entry -> 603305436;
+603305436 -> 884860061;
+603305436 -> 454884231;
+454884231 -> exit;
+884860061[fontcolor="purple", penwidth=3, color="purple"];
+603305436[fontcolor="purple", penwidth=3, color="purple"];
+454884231[fontcolor="purple", penwidth=3, color="purple"];
 }

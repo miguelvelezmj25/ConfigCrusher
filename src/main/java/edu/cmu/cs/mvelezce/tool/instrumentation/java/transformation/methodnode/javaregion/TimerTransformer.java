@@ -119,6 +119,10 @@ public class TimerTransformer extends RegionTransformer {
             throw new RuntimeException("Check this case");
         }
 
+        if(methodNode.name.equals("recoverPendingTransactions")) {
+            System.out.println();
+        }
+
 
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
         this.calculateASMStartIndex(regionsInMethod, methodNode);

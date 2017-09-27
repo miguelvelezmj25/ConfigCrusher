@@ -316,7 +316,6 @@ public class DefaultMethodGraphBuilderTest {
 
             DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
             MethodGraph graph = builder.build();
-            System.out.println(graph.toDotString("main"));
             Assert.assertEquals(4, graph.getBlocks().size());
             Assert.assertEquals(3, graph.getEdgeCount());
         }
@@ -364,10 +363,10 @@ public class DefaultMethodGraphBuilderTest {
     public void prevayler() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
-        ClassNode classNode = reader.readClass(DurableOutputStream.class.getCanonicalName());
+        ClassNode classNode = reader.readClass(PersistentJournal.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
-            if(!methodNode.name.equals("writeObject")) {
+            if(!methodNode.name.equals("recoverPendingTransactions")) {
                 continue;
             }
 

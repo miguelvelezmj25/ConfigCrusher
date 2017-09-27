@@ -1,15 +1,15 @@
 digraph debug {
 node [shape=record];
-1730062079 [label="L0\lLINENUMBER 32 L0\lLDC \"4352ce1c-771c-4e07-ac84-73d56476ed67\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
-475157807 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"4352ce1c-771c-4e07-ac84-73d56476ed67\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1573349881 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+2008229299 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"4352ce1c-771c-4e07-ac84-73d56476ed67\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1132369181 [label="L0\lLINENUMBER 32 L0\lLDC \"4352ce1c-771c-4e07-ac84-73d56476ed67\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+1671816300 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
 entry;
 exit;
-entry -> 1730062079;
-1730062079 -> 475157807;
-1730062079 -> 1573349881;
-475157807 -> exit;
-1573349881 -> 475157807;
-1730062079[fontcolor="purple", penwidth=3, color="purple"];
-475157807[fontcolor="purple", penwidth=3, color="purple"];
+2008229299 -> exit;
+entry -> 1132369181;
+1132369181 -> 2008229299;
+1132369181 -> 1671816300;
+1671816300 -> 2008229299;
+2008229299[fontcolor="purple", penwidth=3, color="purple"];
+1132369181[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,21 +1,22 @@
 digraph deflateImageDataConcurrently {
 node [shape=record];
-1659515968 [label="INVOKEINTERFACE java/util/concurrent/ExecutorService.shutdown ()V\lL13\lLINENUMBER 87 L13\lGOTO L14\lL2\lLINENUMBER 84 L2\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler optimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream java/lang/Integer java/util/concurrent/ConcurrentLinkedQueue java/util/ArrayList java/util/concurrent/ExecutorService] [java/lang/InterruptedException]\lASTORE 6\lL4\lLINENUMBER 86 L4\lALOAD 5\l"];
-435914790 [label="FRAME APPEND [java/util/concurrent/ConcurrentLinkedQueue java/util/ArrayList java/util/Iterator]\lALOAD 5\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L10\lALOAD 5\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST java/lang/Integer\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lISTORE 6\lL11\lLINENUMBER 69 L11\lALOAD 4\lNEW optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler$1\lDUP\lALOAD 0\lALOAD 3\lALOAD 1\lILOAD 6\lALOAD 2\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler$1.\<init\> (Loptimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler;Ljava/util/Collection;Loptimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream;ILjava/lang/Integer;)V\lINVOKESTATIC java/util/concurrent/Executors.callable (Ljava/lang/Runnable;)Ljava/util/concurrent/Callable;\lINVOKEINTERFACE java/util/Collection.add (Ljava/lang/Object;)Z\l"];
-1620459733 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lTRYCATCHBLOCK L0 L1 L3 null\lTRYCATCHBLOCK L2 L4 L3 null\lTRYCATCHBLOCK L3 L5 L3 null\lL6\lLINENUMBER 65 L6\lLDC \"cb684439-543a-4ac3-bfc0-443371ccc208\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lNEW java/util/concurrent/ConcurrentLinkedQueue\lDUP\lINVOKESPECIAL java/util/concurrent/ConcurrentLinkedQueue.\<init\> ()V\lASTORE 3\lL7\lLINENUMBER 67 L7\lNEW java/util/ArrayList\lDUP\lINVOKESPECIAL java/util/ArrayList.\<init\> ()V\lASTORE 4\lL8\l"];
-1273958371 [label="ALOAD 5\lINVOKEINTERFACE java/util/concurrent/ExecutorService.shutdown ()V\lALOAD 7\lATHROW\lL14\lLINENUMBER 89 L14\lFRAME SAME\lNEW java/util/ArrayList\lDUP\lALOAD 3\l"];
-664091267 [label="INVOKEINTERFACE java/util/concurrent/ExecutorService.shutdown ()V\lL15\lLINENUMBER 87 L15\lGOTO L14\lL3\lLINENUMBER 86 L3\lFRAME SAME1 java/lang/Throwable\lASTORE 7\lL5\l"];
-2044337856 [label="POP\lL12\lLINENUMBER 79 L12\lGOTO L9\lL10\lLINENUMBER 81 L10\lFRAME SAME\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler.compressionStrategies : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lINVOKESTATIC java/util/concurrent/Executors.newFixedThreadPool (I)Ljava/util/concurrent/ExecutorService;\lASTORE 5\lL0\lLINENUMBER 83 L0\lALOAD 5\lALOAD 4\lINVOKEINTERFACE java/util/concurrent/ExecutorService.invokeAll (Ljava/util/Collection;)Ljava/util/List;\lPOP\lL1\lLINENUMBER 86 L1\lALOAD 5\l"];
-422409467 [label="LINENUMBER 68 L8\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler.compressionStrategies : Ljava/util/List;\lINVOKEINTERFACE java/util/List.iterator ()Ljava/util/Iterator;\lASTORE 5\lL9\l"];
+229995302 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lTRYCATCHBLOCK L0 L1 L3 null\lTRYCATCHBLOCK L2 L4 L3 null\lTRYCATCHBLOCK L3 L5 L3 null\lL6\lLINENUMBER 65 L6\lLDC \"cb684439-543a-4ac3-bfc0-443371ccc208\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lNEW java/util/concurrent/ConcurrentLinkedQueue\lDUP\lINVOKESPECIAL java/util/concurrent/ConcurrentLinkedQueue.\<init\> ()V\lASTORE 3\lL7\lLINENUMBER 67 L7\lNEW java/util/ArrayList\lDUP\lINVOKESPECIAL java/util/ArrayList.\<init\> ()V\lASTORE 4\lL8\lLINENUMBER 68 L8\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler.compressionStrategies : Ljava/util/List;\lINVOKEINTERFACE java/util/List.iterator ()Ljava/util/Iterator;\lASTORE 5\l"];
+443290224 [label="L2\lLINENUMBER 84 L2\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler optimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream java/lang/Integer java/util/concurrent/ConcurrentLinkedQueue java/util/ArrayList java/util/concurrent/ExecutorService] [java/lang/InterruptedException]\lASTORE 6\lL4\lLINENUMBER 86 L4\lALOAD 5\lINVOKEINTERFACE java/util/concurrent/ExecutorService.shutdown ()V\lL15\lLINENUMBER 87 L15\lGOTO L14\l"];
+883455411 [label="L10\lLINENUMBER 81 L10\lFRAME SAME\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler.compressionStrategies : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lINVOKESTATIC java/util/concurrent/Executors.newFixedThreadPool (I)Ljava/util/concurrent/ExecutorService;\lASTORE 5\lL0\lLINENUMBER 83 L0\lALOAD 5\lALOAD 4\lINVOKEINTERFACE java/util/concurrent/ExecutorService.invokeAll (Ljava/util/Collection;)Ljava/util/List;\lPOP\lL1\lLINENUMBER 86 L1\lALOAD 5\lINVOKEINTERFACE java/util/concurrent/ExecutorService.shutdown ()V\lL13\lLINENUMBER 87 L13\lGOTO L14\l"];
+1195942137 [label="ALOAD 5\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST java/lang/Integer\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lISTORE 6\lL11\lLINENUMBER 69 L11\lALOAD 4\lNEW optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler$1\lDUP\lALOAD 0\lALOAD 3\lALOAD 1\lILOAD 6\lALOAD 2\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler$1.\<init\> (Loptimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler;Ljava/util/Collection;Loptimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream;ILjava/lang/Integer;)V\lINVOKESTATIC java/util/concurrent/Executors.callable (Ljava/lang/Runnable;)Ljava/util/concurrent/Callable;\lINVOKEINTERFACE java/util/Collection.add (Ljava/lang/Object;)Z\lPOP\lL12\lLINENUMBER 79 L12\lGOTO L9\l"];
+1259639178 [label="L9\lFRAME APPEND [java/util/concurrent/ConcurrentLinkedQueue java/util/ArrayList java/util/Iterator]\lALOAD 5\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L10\l"];
+413218476 [label="L3\lLINENUMBER 86 L3\lFRAME SAME1 java/lang/Throwable\lASTORE 7\lL5\lALOAD 5\lINVOKEINTERFACE java/util/concurrent/ExecutorService.shutdown ()V\lALOAD 7\lATHROW\l"];
+1830745997 [label="L14\lLINENUMBER 89 L14\lFRAME SAME\lNEW java/util/ArrayList\lDUP\lALOAD 3\lINVOKESPECIAL java/util/ArrayList.\<init\> (Ljava/util/Collection;)V\lLDC \"cb684439-543a-4ac3-bfc0-443371ccc208\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
 entry;
 exit;
-1659515968 -> 1273958371;
-entry -> 1620459733;
-435914790 -> 422409467;
-1620459733 -> 422409467;
-1273958371 -> exit;
-2044337856 -> 1273958371;
-422409467 -> 435914790;
-422409467 -> 2044337856;
-1620459733[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 229995302;
+229995302 -> 1259639178;
+443290224 -> 1830745997;
+883455411 -> 1830745997;
+1195942137 -> 1259639178;
+1259639178 -> 883455411;
+1259639178 -> 1195942137;
+1830745997 -> exit;
+229995302[fontcolor="purple", penwidth=3, color="purple"];
+1830745997[fontcolor="purple", penwidth=3, color="purple"];
 }

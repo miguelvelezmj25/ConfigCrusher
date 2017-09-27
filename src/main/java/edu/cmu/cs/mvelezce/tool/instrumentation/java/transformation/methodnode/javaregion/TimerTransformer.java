@@ -38,7 +38,7 @@ public class TimerTransformer extends RegionTransformer {
     public static MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
         MethodBlock id = methodGraph.getImmediateDominator(start);
 
-        if(id.getSuccessors().size() == 1 && id.getSuccessors().contains(start)) {
+        if(id != methodGraph.getEntryBlock() && id.getSuccessors().size() == 1 && id.getSuccessors().contains(start)) {
             return id;
         }
 

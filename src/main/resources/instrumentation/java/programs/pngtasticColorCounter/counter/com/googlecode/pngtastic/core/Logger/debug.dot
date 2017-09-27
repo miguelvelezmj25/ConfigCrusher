@@ -1,15 +1,15 @@
 digraph debug {
 node [shape=record];
-1839337592 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-259219561 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"aaec0e74-6a77-402f-a183-8f407941477b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-686989583 [label="L0\lLINENUMBER 32 L0\lLDC \"aaec0e74-6a77-402f-a183-8f407941477b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+775386112 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1444635922 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"aaec0e74-6a77-402f-a183-8f407941477b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1955920234 [label="L0\lLINENUMBER 32 L0\lLDC \"aaec0e74-6a77-402f-a183-8f407941477b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 686989583;
-1839337592 -> 259219561;
-259219561 -> exit;
-686989583 -> 1839337592;
-686989583 -> 259219561;
-259219561[fontcolor="purple", penwidth=3, color="purple"];
-686989583[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1955920234;
+775386112 -> 1444635922;
+1444635922 -> exit;
+1955920234 -> 775386112;
+1955920234 -> 1444635922;
+1444635922[fontcolor="purple", penwidth=3, color="purple"];
+1955920234[fontcolor="purple", penwidth=3, color="purple"];
 }

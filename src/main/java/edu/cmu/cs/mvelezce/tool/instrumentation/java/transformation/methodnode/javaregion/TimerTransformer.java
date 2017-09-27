@@ -119,9 +119,6 @@ public class TimerTransformer extends RegionTransformer {
             throw new RuntimeException("Check this case");
         }
 
-        if(methodNode.name.equals("deflateImageDataConcurrently")) {
-            System.out.println();
-        }
 
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
         this.calculateASMStartIndex(regionsInMethod, methodNode);
@@ -681,7 +678,13 @@ public class TimerTransformer extends RegionTransformer {
 
             if((opcodeLastInstruction < Opcodes.IRETURN || opcodeLastInstruction > Opcodes.RETURN)
                     && opcodeLastInstruction != Opcodes.RET) {
-                throw new RuntimeException("The last instruction in a method with return is not a return instruction");
+                lastInstruction = blockInstructions.get(blockInstructions.size() - 2);
+                opcodeLastInstruction = lastInstruction.getOpcode();
+
+                if((opcodeLastInstruction < Opcodes.IRETURN || opcodeLastInstruction > Opcodes.RETURN)
+                        && opcodeLastInstruction != Opcodes.RET) {
+                    throw new RuntimeException("The last instruction in a method with return is not a return instruction");
+                }
             }
 
             InsnList endInstructions = this.getInstructionsEndRegion(region);

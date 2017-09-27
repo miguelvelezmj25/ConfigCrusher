@@ -112,7 +112,7 @@ public class MethodGraph {
             return ids.iterator().next();
         }
 
-        throw new RuntimeException("Could not find an immediate dominator");
+        throw new RuntimeException("Could not find an immediate dominator for " + start.getID());
     }
 
     public MethodGraph reverseGraph() {

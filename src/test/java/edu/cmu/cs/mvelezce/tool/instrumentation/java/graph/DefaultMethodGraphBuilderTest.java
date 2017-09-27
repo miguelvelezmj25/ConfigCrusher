@@ -7,6 +7,8 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
 import org.junit.Test;
+import org.prevayler.foundation.DurableOutputStream;
+import org.prevayler.implementation.journal.PersistentJournal;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -353,6 +355,25 @@ public class DefaultMethodGraphBuilderTest {
             DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
             MethodGraph graph = builder.build();
             System.out.println(graph.toDotString("moo"));
+            Assert.assertEquals(8, graph.getBlocks().size());
+            Assert.assertEquals(10, graph.getEdgeCount());
+        }
+    }
+
+    @Test
+    public void prevayler() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(DurableOutputStream.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("writeObject")) {
+                continue;
+            }
+
+            DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+//            System.out.println(graph.toDotString("recoverPendingTransactions"));
             Assert.assertEquals(8, graph.getBlocks().size());
             Assert.assertEquals(10, graph.getEdgeCount());
         }

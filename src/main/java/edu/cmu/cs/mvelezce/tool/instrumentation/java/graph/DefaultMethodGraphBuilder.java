@@ -144,6 +144,47 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
             blockInstructions.add(instruction);
         }
 
+        // Check if the method does not have a return statement
+        instructionsIterator = instructions.iterator();
+        boolean hasReturn = false;
+
+        while (instructionsIterator.hasNext()) {
+            instruction = instructionsIterator.next();
+            int opcode = instruction.getOpcode();
+
+            if(opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
+                hasReturn = true;
+                break;
+            }
+        }
+
+        if(hasReturn) {
+            return;
+        }
+
+        AbstractInsnNode lastInstruction = instructions.getLast();
+
+        if(lastInstruction.getType() == AbstractInsnNode.LABEL) {
+            lastInstruction = lastInstruction.getPrevious();
+        }
+
+        int lastInstOpcode = lastInstruction.getOpcode();
+
+        if(lastInstOpcode != Opcodes.ATHROW) {
+            throw new RuntimeException("This method does not have a return statement and the last instruction is not" +
+                    " a throw instruction");
+        }
+
+
+        MethodBlock possibleBlock = graph.getMethodBlock(lastInstruction);
+
+        while(possibleBlock == null) {
+            lastInstruction = lastInstruction.getPrevious();
+            possibleBlock = graph.getMethodBlock(lastInstruction);
+        }
+
+        possibleBlock.setWithReturn(true);
+        graph.addEdge(possibleBlock, graph.getExitBlock());
     }
 
     @Override

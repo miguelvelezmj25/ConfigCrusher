@@ -1,0 +1,35 @@
+digraph initializeNextTransaction {
+node [shape=record];
+1814827909 [label="L10\lFRAME SAME1 org/prevayler/implementation/journal/PersistentJournal\lLLOAD 3\l"];
+41031373 [label="L4\lLINENUMBER 152 L4\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"The transaction log has not yet reached transaction \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \". The last logged transaction was \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCONST_1\lLSUB\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \".\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+2052435819 [label="L1\lLINENUMBER 162 L1\lFRAME SAME\lALOAD 0\lICONST_1\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lL9\lLINENUMBER 163 L9\lALOAD 0\lLLOAD 1\lLLOAD 3\lLCMP\lIFLE L10\l"];
+139947936 [label="L6\lLINENUMBER 155 L6\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Unable to find journal file containing transaction \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \". Might have been manually deleted.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1227264471 [label="L3\lLINENUMBER 154 L3\lFRAME SAME\lLLOAD 3\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCMP\lIFGE L5\l"];
+1971519316 [label="L7\lLINENUMBER 160 L7\lFRAME SAME\lLDC \"3d513fa4-bc8b-44e0-af2a-1a2e1018106d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1733581655 [label="L8\lLINENUMBER 158 L8\lNEW java/lang/IllegalStateException\lDUP\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> ()V\lATHROW\l"];
+1435229983 [label="L5\lLINENUMBER 157 L5\lFRAME SAME\lLLOAD 3\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCMP\lIFLE L7\l"];
+1034909474 [label="L11\lFRAME FULL [org/prevayler/implementation/journal/PersistentJournal J J] [org/prevayler/implementation/journal/PersistentJournal J]\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lL12\lLINENUMBER 166 L12\lLDC \"3d513fa4-bc8b-44e0-af2a-1a2e1018106d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\lL13\l"];
+2027317551 [label="L0\lLINENUMBER 150 L0\lLDC \"3d513fa4-bc8b-44e0-af2a-1a2e1018106d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lIFEQ L1\l"];
+1033638837 [label="L2\lLINENUMBER 151 L2\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLLOAD 1\lLCMP\lIFGE L3\l"];
+1597328335 [label="LLOAD 1\lGOTO L11\l"];
+entry;
+exit;
+1814827909 -> 1034909474;
+2052435819 -> 1814827909;
+2052435819 -> 1597328335;
+1227264471 -> 139947936;
+1227264471 -> 1435229983;
+1971519316 -> exit;
+1435229983 -> 1971519316;
+1435229983 -> 1733581655;
+1034909474 -> exit;
+2027317551 -> 2052435819;
+2027317551 -> 1033638837;
+1033638837 -> 41031373;
+1033638837 -> 1227264471;
+1597328335 -> 1034909474;
+entry -> 2027317551;
+1971519316[fontcolor="purple", penwidth=3, color="purple"];
+1034909474[fontcolor="purple", penwidth=3, color="purple"];
+2027317551[fontcolor="purple", penwidth=3, color="purple"];
+}

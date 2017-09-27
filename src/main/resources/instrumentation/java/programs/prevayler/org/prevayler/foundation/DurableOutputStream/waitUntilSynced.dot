@@ -1,0 +1,36 @@
+digraph waitUntilSynced {
+node [shape=record];
+245765246 [label="INVOKEVIRTUAL java/nio/channels/FileChannel.force (Z)V\lL5\lLINENUMBER 207 L5\lFRAME SAME\lGOTO L25\lL6\lLINENUMBER 204 L6\lFRAME SAME1 java/io/IOException\lASTORE 4\lL26\lLINENUMBER 205 L26\lALOAD 0\l"];
+270095066 [label="NEW java/io/IOException\lDUP\lLDC \"already closed\"\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\lL14\lLINENUMBER 181 L14\lFRAME APPEND [java/lang/Object T java/lang/Object]\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._active : Ljava/io/ByteArrayOutputStream;\lASTORE 5\lL16\lLINENUMBER 182 L16\lALOAD 0\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._inactive : Ljava/io/ByteArrayOutputStream;\lPUTFIELD org/prevayler/foundation/DurableOutputStream._active : Ljava/io/ByteArrayOutputStream;\lL17\lLINENUMBER 183 L17\lALOAD 0\lALOAD 5\lPUTFIELD org/prevayler/foundation/DurableOutputStream._inactive : Ljava/io/ByteArrayOutputStream;\lL18\lLINENUMBER 185 L18\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._objectsWritten : I\lISTORE 3\lL19\l"];
+285133380 [label="L23\lLINENUMBER 201 L23\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._journalDiskSync : Z\lIFEQ L5\lL24\l"];
+1354083458 [label="LINENUMBER 174 L7\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._objectsSynced : I\lILOAD 1\lIF_ICMPGE L12\lL13\lLINENUMBER 176 L13\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._writeLock : Ljava/lang/Object;\lDUP\lASTORE 4\lMONITORENTER\l"];
+620557167 [label="LINENUMBER 202 L24\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileChannel : Ljava/nio/channels/FileChannel;\lICONST_0\l"];
+1292040526 [label="ALOAD 2\lMONITOREXIT\lL10\lALOAD 7\lATHROW\lL29\lLINENUMBER 213 L29\l"];
+865667596 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lTRYCATCHBLOCK L4 L5 L6 java/io/IOException\lTRYCATCHBLOCK L7 L8 L9 null\lTRYCATCHBLOCK L9 L10 L9 null\lL11\lLINENUMBER 173 L11\lLDC \"cf006468-88fd-4b22-9903-6255fba2b26b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._syncLock : Ljava/lang/Object;\lDUP\lASTORE 2\lMONITORENTER\lL7\l"];
+726181440 [label="FRAME CHOP 3\lALOAD 2\lMONITOREXIT\lL8\lGOTO L29\lL9\lFRAME SAME1 java/lang/Throwable\lASTORE 7\l"];
+1306834002 [label="DUP\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileSyncCount : I\lICONST_1\lIADD\lPUTFIELD org/prevayler/foundation/DurableOutputStream._fileSyncCount : I\lL12\lLINENUMBER 212 L12\l"];
+1068586139 [label="INVOKESPECIAL org/prevayler/foundation/DurableOutputStream.internalClose ()V\lL27\lLINENUMBER 206 L27\lALOAD 4\lATHROW\lL25\lLINENUMBER 209 L25\lFRAME SAME\lALOAD 0\lILOAD 3\lPUTFIELD org/prevayler/foundation/DurableOutputStream._objectsSynced : I\lL28\lLINENUMBER 210 L28\lALOAD 0\l"];
+50699452 [label="ALOAD 4\lMONITOREXIT\lL3\lALOAD 6\lATHROW\lL4\lLINENUMBER 190 L4\lFRAME FULL [org/prevayler/foundation/DurableOutputStream I java/lang/Object I java/lang/Object java/io/ByteArrayOutputStream] []\lALOAD 0\lINVOKESPECIAL org/prevayler/foundation/DurableOutputStream.preallocate ()V\lL20\lLINENUMBER 197 L20\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._inactive : Ljava/io/ByteArrayOutputStream;\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileOutputStream : Ljava/io/FileOutputStream;\lINVOKEVIRTUAL java/io/ByteArrayOutputStream.writeTo (Ljava/io/OutputStream;)V\lL21\lLINENUMBER 198 L21\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._inactive : Ljava/io/ByteArrayOutputStream;\lINVOKEVIRTUAL java/io/ByteArrayOutputStream.reset ()V\lL22\lLINENUMBER 199 L22\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileOutputStream : Ljava/io/FileOutputStream;\lINVOKEVIRTUAL java/io/FileOutputStream.flush ()V\l"];
+1806431167 [label="L0\lLINENUMBER 177 L0\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._closed : Z\lIFEQ L14\lL15\lLINENUMBER 178 L15\l"];
+2125062626 [label="LINENUMBER 186 L19\lALOAD 4\lMONITOREXIT\lL1\lGOTO L4\lL2\lFRAME SAME1 java/lang/Throwable\lASTORE 6\l"];
+entry;
+exit;
+245765246 -> 726181440;
+270095066 -> 50699452;
+285133380 -> 620557167;
+1354083458 -> 270095066;
+1354083458 -> 1806431167;
+620557167 -> 1068586139;
+1292040526 -> exit;
+865667596 -> 1306834002;
+865667596 -> 1354083458;
+entry -> 865667596;
+1306834002 -> 1292040526;
+1068586139 -> 1306834002;
+50699452 -> 285133380;
+50699452 -> 620557167;
+1806431167 -> 726181440;
+1806431167 -> 2125062626;
+2125062626 -> 726181440;
+865667596[fontcolor="purple", penwidth=3, color="purple"];
+}

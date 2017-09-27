@@ -1,19 +1,19 @@
 digraph start {
 node [shape=record];
-461591680 [label="L1\lLINENUMBER 51 L1\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lIFGE L3\l"];
-894024873 [label="L2\lLINENUMBER 49 L2\lALOAD 0\lINVOKESTATIC org/prevayler/foundation/Cool.wait (Ljava/lang/Object;)V\lGOTO L0\l"];
-1327871893 [label="L3\lLINENUMBER 54 L3\lFRAME SAME\lALOAD 0\lDUP\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lICONST_1\lISUB\lPUTFIELD org/prevayler/foundation/Turn._allowed : I\lL5\lLINENUMBER 55 L5\lLDC \"4dead262-2fe8-4b4f-9038-376915238a06\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
-1260217713 [label="L0\lLINENUMBER 48 L0\lFRAME SAME\lLDC \"4dead262-2fe8-4b4f-9038-376915238a06\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lIFNE L1\l"];
-1874028013 [label="L4\lLINENUMBER 52 L4\lNEW java/lang/IllegalStateException\lDUP\lLDC \"All transaction processing is now aborted, probably due to an earlier IOException.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1681303515 [label="L3\lLINENUMBER 54 L3\lFRAME SAME\lALOAD 0\lDUP\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lICONST_1\lISUB\lPUTFIELD org/prevayler/foundation/Turn._allowed : I\lL5\lLINENUMBER 55 L5\lLDC \"4dead262-2fe8-4b4f-9038-376915238a06\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
+1394557075 [label="L1\lLINENUMBER 51 L1\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lIFGE L3\l"];
+1659840424 [label="L2\lLINENUMBER 49 L2\lALOAD 0\lINVOKESTATIC org/prevayler/foundation/Cool.wait (Ljava/lang/Object;)V\lGOTO L0\l"];
+1119622337 [label="L0\lLINENUMBER 48 L0\lFRAME SAME\lLDC \"4dead262-2fe8-4b4f-9038-376915238a06\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lIFNE L1\l"];
+1175371136 [label="L4\lLINENUMBER 52 L4\lNEW java/lang/IllegalStateException\lDUP\lLDC \"All transaction processing is now aborted, probably due to an earlier IOException.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
 entry;
 exit;
-entry -> 1260217713;
-461591680 -> 1327871893;
-461591680 -> 1874028013;
-894024873 -> 1260217713;
-1327871893 -> exit;
-1260217713 -> 461591680;
-1260217713 -> 894024873;
-1327871893[fontcolor="purple", penwidth=3, color="purple"];
-1260217713[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1119622337;
+1681303515 -> exit;
+1394557075 -> 1681303515;
+1394557075 -> 1175371136;
+1659840424 -> 1119622337;
+1119622337 -> 1394557075;
+1119622337 -> 1659840424;
+1681303515[fontcolor="purple", penwidth=3, color="purple"];
+1119622337[fontcolor="purple", penwidth=3, color="purple"];
 }

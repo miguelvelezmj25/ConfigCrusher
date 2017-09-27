@@ -119,7 +119,7 @@ public class TimerTransformer extends RegionTransformer {
             throw new RuntimeException("Check this case");
         }
 
-        if(methodNode.name.equals("recoverPendingTransactions")) {
+        if(methodNode.name.equals("abort")) {
             System.out.println();
         }
 
@@ -686,7 +686,7 @@ public class TimerTransformer extends RegionTransformer {
                 opcodeLastInstruction = lastInstruction.getOpcode();
 
                 if((opcodeLastInstruction < Opcodes.IRETURN || opcodeLastInstruction > Opcodes.RETURN)
-                        && opcodeLastInstruction != Opcodes.RET) {
+                        && opcodeLastInstruction != Opcodes.RET && opcodeLastInstruction != Opcodes.ATHROW) {
                     throw new RuntimeException("The last instruction in a method with return is not a return instruction");
                 }
             }

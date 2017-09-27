@@ -57,6 +57,10 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
         LabelNode labelNode = (LabelNode) instruction;
         MethodBlock firstBlock = graph.getMethodBlock(labelNode);
         graph.addEdge(graph.getEntryBlock(), firstBlock);
+
+        if(graph.getEntryBlock().getSuccessors().isEmpty()) {
+            throw new RuntimeException("The exit node does not have predecessors");
+        }
     }
 
     @Override
@@ -70,6 +74,10 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
                     graph.addEdge(methodBlock, graph.getExitBlock());
                 }
             }
+        }
+
+        if(graph.getExitBlock().getPredecessors().isEmpty()) {
+            throw new RuntimeException("The exit node does not have predecessors");
         }
     }
 

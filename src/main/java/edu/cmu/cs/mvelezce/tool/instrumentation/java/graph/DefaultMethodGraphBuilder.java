@@ -78,8 +78,9 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
             else if(opcode == Opcodes.ATHROW) {
                 for(TryCatchBlockNode tryCatchBlock : this.getMethodNode().tryCatchBlocks) {
                     AbstractInsnNode insnNode = tryCatchBlock.start;
+                    AbstractInsnNode handlerNode = tryCatchBlock.handler;
 
-                    while (insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
+                    while(insnNode != handlerNode && insnNode.getNext() != handlerNode) {
                         insnNode = insnNode.getNext();
 
                         if(insnNode == instruction) {

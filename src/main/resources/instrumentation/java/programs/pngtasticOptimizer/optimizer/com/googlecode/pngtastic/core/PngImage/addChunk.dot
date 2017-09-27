@@ -1,38 +1,38 @@
 digraph addChunk {
 node [shape=record];
-222179461 [label="L3\lFRAME SAME\lILOAD 3\lLOOKUPSWITCH
+1579610605 [label="L3\lFRAME SAME\lILOAD 3\lLOOKUPSWITCH
       0: L4
       1: L5
       default: L6\l"];
-95640701 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getWidth ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.width : J\lL7\lLINENUMBER 179 L7\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getHeight ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.height : J\lL8\lLINENUMBER 180 L8\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getBitDepth ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.bitDepth : S\lL9\lLINENUMBER 181 L9\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getColorType ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.colorType : S\lL10\lLINENUMBER 182 L10\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getInterlace ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.interlace : S\lL11\lLINENUMBER 183 L11\lGOTO L6\l"];
-676332984 [label="L2\lFRAME SAME\lALOAD 2\lLDC \"PLTE\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
-770109884 [label="L6\lLINENUMBER 190 L6\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngImage.chunks : Ljava/util/List;\lALOAD 1\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL12\lLINENUMBER 191 L12\lLDC \"54a4b415-334d-4784-a6b9-ae75868494ca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-660099921 [label="ICONST_1\lISTORE 3\l"];
-701760998 [label="L5\lLINENUMBER 186 L5\lFRAME SAME\lALOAD 0\lALOAD 1\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.palette : Loptimizer/com/googlecode/pngtastic/core/PngChunk;\l"];
-732176900 [label="L1\lFRAME APPEND [java/lang/String I]\lALOAD 2\lLDC \"IHDR\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
-1528756911 [label="ICONST_0\lISTORE 3\lGOTO L3\l"];
-1267140426 [label="L0\lLINENUMBER 176 L0\lLDC \"54a4b415-334d-4784-a6b9-ae75868494ca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getTypeString ()Ljava/lang/String;\lASTORE 2\lICONST_M1\lISTORE 3\lALOAD 2\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lLOOKUPSWITCH
+1111100957 [label="L5\lLINENUMBER 186 L5\lFRAME SAME\lALOAD 0\lALOAD 1\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.palette : Loptimizer/com/googlecode/pngtastic/core/PngChunk;\l"];
+1515282013 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getWidth ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.width : J\lL7\lLINENUMBER 179 L7\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getHeight ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.height : J\lL8\lLINENUMBER 180 L8\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getBitDepth ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.bitDepth : S\lL9\lLINENUMBER 181 L9\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getColorType ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.colorType : S\lL10\lLINENUMBER 182 L10\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getInterlace ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.interlace : S\lL11\lLINENUMBER 183 L11\lGOTO L6\l"];
+162674722 [label="ICONST_0\lISTORE 3\lGOTO L3\l"];
+1785495362 [label="L6\lLINENUMBER 190 L6\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngImage.chunks : Ljava/util/List;\lALOAD 1\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL12\lLINENUMBER 191 L12\lLDC \"54a4b415-334d-4784-a6b9-ae75868494ca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+633514467 [label="L2\lFRAME SAME\lALOAD 2\lLDC \"PLTE\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
+579983776 [label="L0\lLINENUMBER 176 L0\lLDC \"54a4b415-334d-4784-a6b9-ae75868494ca\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getTypeString ()Ljava/lang/String;\lASTORE 2\lICONST_M1\lISTORE 3\lALOAD 2\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lLOOKUPSWITCH
       2246125: L1
       2458989: L2
       default: L3\l"];
+963014210 [label="L1\lFRAME APPEND [java/lang/String I]\lALOAD 2\lLDC \"IHDR\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
+1626478944 [label="ICONST_1\lISTORE 3\l"];
 entry;
 exit;
-entry -> 1267140426;
-222179461 -> 95640701;
-222179461 -> 770109884;
-222179461 -> 701760998;
-95640701 -> 770109884;
-676332984 -> 222179461;
-676332984 -> 660099921;
-770109884 -> exit;
-660099921 -> 222179461;
-701760998 -> 770109884;
-732176900 -> 222179461;
-732176900 -> 1528756911;
-1528756911 -> 222179461;
-1267140426 -> 222179461;
-1267140426 -> 676332984;
-1267140426 -> 732176900;
-770109884[fontcolor="purple", penwidth=3, color="purple"];
-1267140426[fontcolor="purple", penwidth=3, color="purple"];
+1579610605 -> 1111100957;
+1579610605 -> 1515282013;
+1579610605 -> 1785495362;
+entry -> 579983776;
+1111100957 -> 1785495362;
+1515282013 -> 1785495362;
+162674722 -> 1579610605;
+1785495362 -> exit;
+633514467 -> 1579610605;
+633514467 -> 1626478944;
+579983776 -> 1579610605;
+579983776 -> 633514467;
+579983776 -> 963014210;
+963014210 -> 1579610605;
+963014210 -> 162674722;
+1626478944 -> 1579610605;
+1785495362[fontcolor="purple", penwidth=3, color="purple"];
+579983776[fontcolor="purple", penwidth=3, color="purple"];
 }

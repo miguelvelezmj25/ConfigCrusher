@@ -467,9 +467,7 @@ public class TimerTransformer extends RegionTransformer {
      * @param regionsInMethod
      */
     private InsnList instrumentNormal(MethodNode methodNode, MethodGraph graph, List<JavaRegion> regionsInMethod) {
-//        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-//        MethodGraph graph = builder.build();
-
+        System.out.println("########### " + this.getCurrentClassNode().name + " " + methodNode.name);
         List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
         Collections.reverse(regionsInMethodReversed);
 
@@ -513,7 +511,6 @@ public class TimerTransformer extends RegionTransformer {
     }
 
     private void removeInnerRegions(List<JavaRegion> regionsInMethod, MethodGraph graph) {
-//        Map<JavaRegion, Set<JavaRegion>> regionsToOuterRegionSet = new LinkedHashMap<>();
         Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegionSet = new LinkedHashMap<>();
         graph.getDominators();
 
@@ -541,13 +538,6 @@ public class TimerTransformer extends RegionTransformer {
 
                 if(regionReachableBlocks.contains(possibleInnerRegion.getStartMethodBlock())
                         && regionReachableBlocks.containsAll(possibleInnerRegionEndBlocks)) {
-
-//                    if(!regionsToOuterRegionSet.containsKey(possibleInnerRegion)) {
-//                        regionsToOuterRegionSet.put(possibleInnerRegion, new HashSet<>());
-//                    }
-//
-//                    regionsToOuterRegionSet.get(possibleInnerRegion).add(region);
-
                     if(!regionsToInnerRegionSet.containsKey(region)) {
                         regionsToInnerRegionSet.put(region, new HashSet<>());
                     }
@@ -697,40 +687,4 @@ public class TimerTransformer extends RegionTransformer {
 
         return newInstructions;
     }
-
-//    /**
-//     * This is done when we stop instrumenting in a basic block that has return statements
-//     */
-//    private InsnList instrumentEndWithReturn(MethodBlock blockWithReturn, List<JavaRegion> regions) {
-//        InsnList newInstructions = new InsnList();
-//
-//        for(JavaRegion javaRegion : regions) {
-//            for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
-//                if(endMethodBlock != blockWithReturn) {
-//                    continue;
-//                }
-//
-//                List<AbstractInsnNode> blockInstructions = blockWithReturn.getInstructions();
-//
-//                for(AbstractInsnNode insnNode : blockInstructions) {
-//                    newInstructions.add(insnNode);
-//                }
-//
-//                AbstractInsnNode lastInstruction = blockInstructions.get(blockInstructions.size() - 1);
-//                int opcodeLastInstruction = lastInstruction.getOpcode();
-//
-//                if((opcodeLastInstruction < Opcodes.IRETURN || opcodeLastInstruction > Opcodes.RETURN)
-//                        && opcodeLastInstruction != Opcodes.RET) {
-//                    throw new RuntimeException("The last instruction in a method with return is not a return instruction");
-//                }
-//
-//                for(JavaRegion region : regions) {
-//                    InsnList endInstructions = this.getInstructionsEndRegion(region);
-//                    newInstructions.insertBefore(lastInstruction, endInstructions);
-//                }
-//            }
-//        }
-//
-//        return newInstructions;
-//    }
 }

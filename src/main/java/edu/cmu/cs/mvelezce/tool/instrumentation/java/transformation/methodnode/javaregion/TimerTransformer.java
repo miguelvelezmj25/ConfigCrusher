@@ -21,6 +21,9 @@ import java.util.function.Predicate;
 public class TimerTransformer extends RegionTransformer {
 
     private Set<MethodBlock> blocksToInstrumentBeforeReturn = new HashSet<>();
+    private boolean updatedRegions = false;
+    private Set<MethodNode> updatedIndexMethods = new HashSet<>();
+    private Map<String, List<String>> classToJavapResult = new HashMap<>();
 
     public TimerTransformer(String programName, String directory, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
         super(programName, directory, regionsToOptionSet);
@@ -120,7 +123,10 @@ public class TimerTransformer extends RegionTransformer {
         }
 
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
-        this.calculateASMStartIndex(regionsInMethod, methodNode);
+
+        if(!this.updatedIndexMethods.contains(methodNode)) {
+            this.calculateASMStartIndex(regionsInMethod, methodNode);
+        }
 
         InsnList newInstructions;
         int startInstructionCount = methodNode.instructions.size();
@@ -167,6 +173,14 @@ public class TimerTransformer extends RegionTransformer {
         builder.build();
         System.out.print("");
     }
+
+//    private void updateRegions() {
+//
+//    }
+//
+//    private void instrument() {
+//
+//    }
 
     private void checkSameOptionsInRegions(List<JavaRegion> regionsInMethod) {
         Iterator<JavaRegion> regionsIterator = regionsInMethod.iterator();
@@ -280,7 +294,13 @@ public class TimerTransformer extends RegionTransformer {
         String className = this.getCurrentClassNode().name;
         className = className.substring(className.lastIndexOf("/") + 1);
 
-        List<String> javapResult = new ArrayList<>();
+        List<String> javapResult = this.classToJavapResult.get(className);
+
+        if(javapResult != null) {
+            return javapResult;
+        }
+
+        javapResult = new ArrayList<>();
 
         try {
             String[] command = new String[]{"javap", "-classpath", this.getClassTransformer().getPath(), "-p", "-c",
@@ -312,6 +332,8 @@ public class TimerTransformer extends RegionTransformer {
             System.out.println(javapResult);
             throw new RuntimeException("The output of javap is not expected");
         }
+
+        this.classToJavapResult.put(className, javapResult);
 
         return javapResult;
     }
@@ -435,6 +457,8 @@ public class TimerTransformer extends RegionTransformer {
         if(updatedRegions.size() != regionsInMethod.size()) {
             throw new RuntimeException("Did not update some regions");
         }
+
+        this.updatedIndexMethods.add(methodNode);
     }
 
     @Override
@@ -681,5 +705,9 @@ public class TimerTransformer extends RegionTransformer {
         }
 
         return newInstructions;
+    }
+
+    public boolean isUpdatedRegions() {
+        return updatedRegions;
     }
 }

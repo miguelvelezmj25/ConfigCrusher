@@ -8,7 +8,6 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
 import org.junit.Test;
 import org.prevayler.foundation.DurableOutputStream;
-import org.prevayler.implementation.journal.PersistentJournal;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

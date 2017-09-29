@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;

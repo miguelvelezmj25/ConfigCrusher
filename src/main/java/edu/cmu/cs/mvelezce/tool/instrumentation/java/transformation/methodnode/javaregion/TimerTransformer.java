@@ -119,11 +119,6 @@ public class TimerTransformer extends RegionTransformer {
             throw new RuntimeException("Check this case");
         }
 
-        if(methodNode.name.equals("abort")) {
-            System.out.println();
-        }
-
-
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
         this.calculateASMStartIndex(regionsInMethod, methodNode);
 

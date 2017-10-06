@@ -27,7 +27,6 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.*;
-import java.util.function.Predicate;
 
 // TODO heuristics
 // Remove inner regions if outer regions have the same set or subset of options as the inner regions
@@ -213,7 +212,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             return false;
         }
 
-        boolean updatedRegions = false;
+        boolean updatedRegions;
         Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
         for(JavaRegion region : regionsInMethod) {
@@ -221,46 +220,63 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         this.setStartAndEndBlocks(graph, instructionsToRegion);
-        updatedRegions = this.removeInnerRegions(regionsInMethod, graph);
+        updatedRegions = this.removeInnerRegionsInMethod(regionsInMethod, graph);
 
         if(regionsInMethod.size() == 1) {
             return updatedRegions;
         }
 
-        // TODO
-//        this.joinRegionsWithSameOptions(regionsInMethod);
+        updatedRegions = updatedRegions || this.leaveOneRegionInMethod(regionsInMethod);
 
+        if(regionsInMethod.size() == 1) {
+            return updatedRegions;
+        }
+        // TODO
+//        this.joinConsecutiveRegions(regionsInMethod);
         return updatedRegions;
     }
 
-    private void joinRegionsWithSameOptions(List<JavaRegion> regionsInMethod) {
-        this.joinConsecutiveRegions(regionsInMethod);
-
-        Iterator<JavaRegion> regionsIterator = regionsInMethod.iterator();
-        JavaRegion region = regionsIterator.next();
-        Map<JavaRegion, Set<Set<String>>> regionsToOptions = this.regionsToOptionSet;
-        Set<Set<String>> regionOptions = regionsToOptions.get(region);
+    /**
+     * Remove all regions, but 1, in a method if they have the same options.
+     *
+     * @param regionsInMethod
+     * @return
+     */
+    private boolean leaveOneRegionInMethod(List<JavaRegion> regionsInMethod) {
+        JavaRegion region = regionsInMethod.get(0);
+        Set<Set<String>> regionOptions = this.regionsToOptionSet.get(region);
         boolean oneRegion = true;
 
-        while (regionsIterator.hasNext()) {
-            region = regionsIterator.next();
+        for(int i = 1; i < regionsInMethod.size(); i++) {
+            region = regionsInMethod.get(i);
 
-            if(!regionsToOptions.get(region).equals(regionOptions)) {
+            if(!this.regionsToOptionSet.get(region).equals(regionOptions)) {
                 oneRegion = false;
+                break;
             }
         }
 
         if(!oneRegion) {
-            return;
+            return false;
         }
 
-        JavaRegion first = regionsInMethod.iterator().next();
-        Predicate<JavaRegion> regionPredicate = r -> r != first;
-        regionsInMethod.removeIf(regionPredicate);
+        Set<JavaRegion> regionsToRemove = new HashSet<>();
+
+        for(int i = 1; i < regionsInMethod.size(); i++) {
+            regionsToRemove.add(regionsInMethod.get(i));
+        }
+
+        for(int i = 1; i < regionsInMethod.size(); i++) {
+            regionsInMethod.remove(i);
+        }
 
         if(regionsInMethod.size() != 1) {
             throw new RuntimeException("This is a method that has a single region, but did not end up with 1 region");
         }
+
+        this.removeRegionsInRegionsToOptions(regionsToRemove);
+
+        return true;
     }
 
     private void joinConsecutiveRegions(List<JavaRegion> regionsInMethod) {
@@ -273,7 +289,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @param regionsInMethod
      * @param graph
      */
-    private boolean removeInnerRegions(List<JavaRegion> regionsInMethod, MethodGraph graph) {
+    private boolean removeInnerRegionsInMethod(List<JavaRegion> regionsInMethod, MethodGraph graph) {
         Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegionSet = new LinkedHashMap<>();
         graph.getDominators();
 
@@ -738,6 +754,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     this.removeRegionInMethod(method, callerMethod);
                     worklist.add(callerMethod);
                     updated = true;
+                    break;
                 }
                 else {
                     for(JavaRegion region : regionsInCaller) {

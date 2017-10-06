@@ -1,6 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
@@ -20,14 +22,26 @@ public class PrinterTransformer extends RegionTransformer {
     private String messageToPrint;
 
     public PrinterTransformer(String programName, String directory, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(programName, directory, regionsToOptionSet);
+        super(programName, "", directory, regionsToOptionSet);
+        throw new RuntimeException("Implement");
     }
 
     public PrinterTransformer(String programName, ClassTransformer classTransformer, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(programName, classTransformer, regionsToOptionSet);
+        super(programName, "", classTransformer, regionsToOptionSet);
+        throw new RuntimeException("Implement");
     }
 
     @Override
+    public MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
+        throw new RuntimeException("Implement");
+    }
+
+    @Override
+    public MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
+        throw new RuntimeException("Implement");
+    }
+
+
     public InsnList getInstructionsStartRegion(JavaRegion javaRegion) {
         InsnList instructionsBeforeRegion = new InsnList();
         instructionsBeforeRegion.add(new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
@@ -37,7 +51,6 @@ public class PrinterTransformer extends RegionTransformer {
         return instructionsBeforeRegion;
     }
 
-    @Override
     public InsnList getInstructionsEndRegion(JavaRegion javaRegion) {
         InsnList instructionsAfterRegion = new InsnList();
         instructionsAfterRegion.add(new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));

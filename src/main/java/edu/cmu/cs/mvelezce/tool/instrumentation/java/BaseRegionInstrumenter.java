@@ -18,13 +18,13 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
 
     private Map<JavaRegion, Set<Set<String>>> regionsToOptionSet;
 
-    public BaseRegionInstrumenter(String programName, String srcDir, String classDir, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
-        super(programName, srcDir, classDir);
+    public BaseRegionInstrumenter(String programName, String classDir, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
+        super(programName, null, classDir);
         this.regionsToOptionSet = regionsToOptionSet;
     }
 
     public BaseRegionInstrumenter(String programName) {
-        this(programName, "", "", null);
+        this(programName, null, null);
     }
 
     @Override

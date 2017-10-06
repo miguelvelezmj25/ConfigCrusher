@@ -41,7 +41,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("####################### Instrumenting #######################");
-//        Instrumenter instrumenter = new TimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions);
+//        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions);
 //        instrumenter.instrument(args);
 //        System.out.println("");
 //
@@ -134,7 +134,7 @@ public class JavaPipeline {
 //        System.out.println("");
 //
 //        System.out.println("####################### Instrumenting #######################");
-//        Instrumenter instrumenter = new TimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions);
+//        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(originalSrcDirectory, instrumentClassDirectory, partialRegionsToOptions);
 //        instrumenter.instrument(args);
 //        System.out.println("");
 //

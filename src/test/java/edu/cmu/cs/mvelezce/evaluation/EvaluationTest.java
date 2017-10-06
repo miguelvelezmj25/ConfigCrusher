@@ -8,8 +8,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.TimerRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
@@ -43,7 +42,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        BaseRegionInstrumenter instrumenter = new TimerRegionInstrumenter(programName);
+        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
         instrumenter.instrument(args);
         Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
@@ -86,7 +85,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        BaseRegionInstrumenter instrumenter = new TimerRegionInstrumenter(programName);
+        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
         instrumenter.instrument(args);
         Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 

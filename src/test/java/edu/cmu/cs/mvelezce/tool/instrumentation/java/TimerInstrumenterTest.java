@@ -5,7 +5,6 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -30,7 +29,7 @@ public class TimerInstrumenterTest {
 //        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
 //
 //        // Program arguments
-    String[] args = new String[0];
+//    String[] args = new String[0];
 
     protected void compile() throws IOException, InterruptedException {
         Instrumenter compiler = new CompileInstrumenter(TimerInstrumenterTest.srcDir, TimerInstrumenterTest.classDir);
@@ -56,7 +55,7 @@ public class TimerInstrumenterTest {
 //        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
 //        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 //
-//        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
+//        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
 //        instrumenter.instrument(args);
 //    }
 
@@ -89,7 +88,7 @@ public class TimerInstrumenterTest {
 //    }
 
     protected void format() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {
-        args = new String[2];
+        String[] args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
 
@@ -156,7 +155,7 @@ public class TimerInstrumenterTest {
 //        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
 //        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 //
-//        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
+//        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
 //        instrumenter.instrument(args);
 //    }
 //
@@ -179,7 +178,7 @@ public class TimerInstrumenterTest {
 //        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
 //        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 //
-//        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
+//        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
 //        instrumenter.instrument(args);
 //    }
 //
@@ -202,7 +201,7 @@ public class TimerInstrumenterTest {
 //        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
 //        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 //
-//        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
+//        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
 //        instrumenter.instrument(args);
 //    }
 //
@@ -225,13 +224,14 @@ public class TimerInstrumenterTest {
 //        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
 //        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
 //
-//        Instrumenter instrumenter = new TimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
+//        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(srcDirectory, classDirectory, decisionsToOptions);
 //        instrumenter.instrument(args);
 //    }
 
     @Test
     public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "running-example";
+        String entry = "edu.cmu.cs.mvelezce.Example";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
 
@@ -252,13 +252,14 @@ public class TimerInstrumenterTest {
         args[1] = "-saveres";
 
 
-        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
+        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
 
     @Test
     public void graph0() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "graph0";
+        String entry = "edu.cmu.cs.mvelezce.Graph0";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
 
@@ -279,13 +280,14 @@ public class TimerInstrumenterTest {
         args[1] = "-saveres";
 
 
-        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
+        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
 
     @Test
     public void colorCounter() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "pngtasticColorCounter";
+        String entry = "counter.com.googlecode.pngtastic.Run";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
 
@@ -306,13 +308,14 @@ public class TimerInstrumenterTest {
         args[1] = "-saveres";
 
 
-        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
+        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
 
     @Test
     public void optimizer() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "pngtasticOptimizer";
+        String entry = "optimizer.com.googlecode.pngtastic.Run";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
 
@@ -333,13 +336,14 @@ public class TimerInstrumenterTest {
         args[1] = "-saveres";
 
 
-        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
+        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
 
     @Test
     public void regions0() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "regions0";
+        String entry = "edu.cmu.cs.mvelezce.Regions0";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
 
@@ -360,13 +364,14 @@ public class TimerInstrumenterTest {
         args[1] = "-saveres";
 
 
-        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
+        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
 
     @Test
     public void regions1() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "regions1";
+        String entry = "edu.cmu.cs.mvelezce.Regions1";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
 
@@ -387,7 +392,35 @@ public class TimerInstrumenterTest {
         args[1] = "-saveres";
 
 
-        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
+        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
+        instrumenter.instrument(args);
+    }
+
+    @Test
+    public void regions() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
+        String programName = "regions";
+        String entry = "edu.cmu.cs.mvelezce.Regions";
+        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
+        TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+
+//        this.compile();
+//        this.format();
+
+        // Program arguments
+//        String[] args = new String[0];
+
+        String[] args = new String[1];
+        args[0] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+
+        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
 
@@ -414,7 +447,7 @@ public class TimerInstrumenterTest {
 //        args[1] = "-saveres";
 //
 //
-//        Instrumenter instrumenter = new TimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
+//        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, TimerInstrumenterTest.classDir, decisionsToOptions);
 //        instrumenter.instrument(args);
     }
 }

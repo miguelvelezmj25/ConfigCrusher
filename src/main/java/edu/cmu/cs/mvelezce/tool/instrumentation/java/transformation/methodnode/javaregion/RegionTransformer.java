@@ -131,7 +131,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         while (updatedRegions) {
             updatedRegions = this.processMethodsInClasses(classNodes);
-            updatedRegions = updatedRegions || this.processGraph(methods);
+            updatedRegions = updatedRegions | this.processGraph(methods);
         }
 
         System.out.println(this.regionsToOptionSet.size());
@@ -226,13 +226,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             return updatedRegions;
         }
 
-        updatedRegions = updatedRegions || this.leaveOneRegionInMethod(regionsInMethod);
+        updatedRegions = updatedRegions | this.leaveOneRegionInMethod(regionsInMethod);
 
         if(regionsInMethod.size() == 1) {
             return updatedRegions;
         }
-        // TODO
-//        this.joinConsecutiveRegions(regionsInMethod);
+
+        updatedRegions = updatedRegions | this.joinConsecutiveRegions(regionsInMethod);
+
         return updatedRegions;
     }
 
@@ -266,9 +267,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             regionsToRemove.add(regionsInMethod.get(i));
         }
 
-        for(int i = 1; i < regionsInMethod.size(); i++) {
-            regionsInMethod.remove(i);
-        }
+        regionsInMethod.removeAll(regionsToRemove);
+//        for(int i = 1; i < regionsInMethod.size(); i++) {
+//            regionsInMethod.remove(i);
+//        }
 
         if(regionsInMethod.size() != 1) {
             throw new RuntimeException("This is a method that has a single region, but did not end up with 1 region");
@@ -279,8 +281,54 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return true;
     }
 
-    private void joinConsecutiveRegions(List<JavaRegion> regionsInMethod) {
-        throw new RuntimeException("Implement");
+    private boolean joinConsecutiveRegions(List<JavaRegion> regionsInMethod) {
+        JavaRegion region = regionsInMethod.get(0);
+        Set<Set<String>> regionOptionSet = this.regionsToOptionSet.get(region);
+        Set<String> currentOptions = new HashSet<>();
+
+        for(Set<String> options : regionOptionSet) {
+            currentOptions.addAll(options);
+        }
+
+        Set<JavaRegion> regionsToRemove = new HashSet<>();
+
+        for(int i = 1; i < regionsInMethod.size(); i++) {
+            JavaRegion nextRegion = regionsInMethod.get(i);
+            Set<Set<String>> nextRegionOptionSet = this.regionsToOptionSet.get(nextRegion);
+
+            Set<String> nextOptions = new HashSet<>();
+
+            for(Set<String> options : nextRegionOptionSet) {
+                nextOptions.addAll(options);
+            }
+
+            if(currentOptions.equals(nextOptions) || currentOptions.containsAll(nextOptions)
+                    || nextOptions.containsAll(currentOptions)) {
+                if(region.getEndMethodBlocks().size() != 1) {
+                    throw new RuntimeException("How to handle multiple returns");
+                }
+
+                if(nextRegion.getEndMethodBlocks().size() != 1) {
+                    throw new RuntimeException("How to handle multiple returns");
+                }
+
+                region.setEndMethodBlocks(nextRegion.getEndMethodBlocks());
+                regionsToRemove.add(nextRegion);
+            }
+            else {
+                region = nextRegion;
+                currentOptions = nextOptions;
+            }
+        }
+
+        if(regionsToRemove.isEmpty()) {
+            return false;
+        }
+
+        regionsInMethod.removeAll(regionsToRemove);
+        this.removeRegionsInRegionsToOptions(regionsToRemove);
+
+        return true;
     }
 
     /**
@@ -371,8 +419,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                         innerRegionOptions.addAll(options);
                     }
 
-                    if(currentOptions.equals(innerRegionOptions) /*|| currentOptions.containsAll(innerRegionOptions)*/
-                            || innerRegionOptions.containsAll(currentOptions)) {
+                    if(currentOptions.equals(innerRegionOptions) || innerRegionOptions.containsAll(currentOptions)
+                            || currentOptions.containsAll(innerRegionOptions)) {
                         currentOptions = new HashSet<>(innerRegionOptions);
                     }
                     else {

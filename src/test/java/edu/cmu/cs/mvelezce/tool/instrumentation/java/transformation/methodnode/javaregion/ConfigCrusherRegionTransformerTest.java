@@ -6,7 +6,10 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
+import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -16,6 +19,33 @@ import java.util.Map;
 import java.util.Set;
 
 public class ConfigCrusherRegionTransformerTest {
+
+    private static ConfigCrusherRegionTransformer transformer;
+
+    @Before
+    public void setUp() {
+        try {
+            transformer = new ConfigCrusherRegionTransformer(null, null, "", null) {
+                @Override
+                public InsnList getInstructionsStartRegion(JavaRegion javaRegion) {
+                    return null;
+                }
+
+                @Override
+                public InsnList getInstructionsEndRegion(JavaRegion javaRegion) {
+                    return null;
+                }
+
+                @Override
+                public void transformMethod(MethodNode methodNode) {
+
+                }
+            };
+        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException | MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Test
     public void testGetWhereToStartInstrumenting1() throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
@@ -57,8 +87,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(a, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(c, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
@@ -105,8 +133,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(c, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
     }
@@ -149,8 +175,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(a, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
@@ -192,8 +216,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(b, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
@@ -240,8 +262,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(a, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
@@ -286,8 +306,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(b, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
@@ -334,8 +352,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(x, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
     }
@@ -381,8 +397,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(a, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
     }
@@ -424,8 +438,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(a, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
     }
 
@@ -465,8 +477,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(d, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
     }
@@ -518,8 +528,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(f, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, f));
         Assert.assertEquals(x, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
@@ -574,8 +582,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(x, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, f));
         Assert.assertEquals(a, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
@@ -623,8 +629,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(a, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(c, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
     }
@@ -670,8 +674,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(c, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
@@ -724,8 +726,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(g, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, g));
     }
@@ -777,8 +777,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(i, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, g));
     }
@@ -823,8 +821,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(d, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
@@ -871,8 +867,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(d, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(g, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
     }
@@ -917,8 +911,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(d, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
@@ -965,8 +957,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(d, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(g, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
     }
@@ -1009,8 +999,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(c, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
     }
@@ -1052,8 +1040,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(c, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(f, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
@@ -1101,8 +1087,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(x, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(c, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
@@ -1149,8 +1133,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
@@ -1202,8 +1184,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(x, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(e, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, e));
@@ -1253,8 +1233,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(a, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, x));
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
@@ -1319,8 +1297,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(a, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(d, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
@@ -1388,8 +1364,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(d, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(g, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
         Assert.assertEquals(l, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, g));
@@ -1455,8 +1429,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(a, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(d, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
         Assert.assertEquals(g, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, g));
@@ -1521,8 +1493,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(d, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, a));
         Assert.assertEquals(g, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
         Assert.assertEquals(j, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, g));
@@ -1570,8 +1540,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(b, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(d, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, d));
     }
@@ -1616,8 +1584,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(c, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, b));
         Assert.assertEquals(g, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, d));
@@ -1664,8 +1630,6 @@ public class ConfigCrusherRegionTransformerTest {
             }
         }
 
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
-
         Assert.assertEquals(c, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, c));
         Assert.assertEquals(e, transformer.getBlockToStartInstrumentingBeforeIt(methodGraph, e));
     }
@@ -1710,8 +1674,6 @@ public class ConfigCrusherRegionTransformerTest {
                 System.out.println(block.getID());
             }
         }
-
-        ConfigCrusherRegionTransformer transformer = new ConfigCrusherRegionTransformer();
 
         Assert.assertEquals(e, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, c));
         Assert.assertEquals(f, transformer.getBlockToEndInstrumentingBeforeIt(methodGraph, e));

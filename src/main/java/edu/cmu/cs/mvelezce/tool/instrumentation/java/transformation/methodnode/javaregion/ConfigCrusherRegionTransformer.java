@@ -4,20 +4,18 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.tree.InsnList;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 
-// TODO this class figures out where to start and stop insrumenting
-public class ConfigCrusherRegionTransformer extends RegionTransformer {
-
-    private Set<MethodBlock> blocksToInstrumentBeforeReturn = new HashSet<>();
-    private boolean updatedRegions = false;
+/**
+ * Class to figure out the regions
+ */
+public abstract class ConfigCrusherRegionTransformer extends RegionTransformer {
 
     public ConfigCrusherRegionTransformer(String programName, String entryPoint, String directory, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
         super(programName, entryPoint, directory, regionsToOptionSet);
@@ -27,14 +25,9 @@ public class ConfigCrusherRegionTransformer extends RegionTransformer {
         super(programName, entryPoint, classTransformer, regionsToOptionSet);
     }
 
-    public ConfigCrusherRegionTransformer() throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-        this(null, null, "", null);
-    }
+    public abstract InsnList getInstructionsStartRegion(JavaRegion javaRegion);
 
-    @Override
-    public void transformMethod(MethodNode methodNode) {
-        throw new RuntimeException("Implement");
-    }
+    public abstract InsnList getInstructionsEndRegion(JavaRegion javaRegion);
 
     public MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
         MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);

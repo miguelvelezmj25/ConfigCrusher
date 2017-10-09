@@ -1,18 +1,18 @@
 digraph info {
 node [shape=record];
-1283634655 [label="LDC \"INFO\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L2\l"];
-1743702241 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"4bf96bb5-d70c-4d4c-a429-38e2eccaf4f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-837981622 [label="L0\lLINENUMBER 42 L0\lLDC \"4bf96bb5-d70c-4d4c-a429-38e2eccaf4f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
-2053668237 [label="L1\lLINENUMBER 43 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+855815053 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"4bf96bb5-d70c-4d4c-a429-38e2eccaf4f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+2125436163 [label="L0\lLINENUMBER 42 L0\lLDC \"4bf96bb5-d70c-4d4c-a429-38e2eccaf4f8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+977064091 [label="L1\lLINENUMBER 43 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1522918252 [label="LDC \"INFO\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L2\l"];
 entry;
 exit;
-entry -> 837981622;
-1283634655 -> 1743702241;
-1283634655 -> 2053668237;
-1743702241 -> exit;
-837981622 -> 1283634655;
-837981622 -> 2053668237;
-2053668237 -> 1743702241;
-1743702241[fontcolor="purple", penwidth=3, color="purple"];
-837981622[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 2125436163;
+855815053 -> exit;
+2125436163 -> 977064091;
+2125436163 -> 1522918252;
+977064091 -> 855815053;
+1522918252 -> 855815053;
+1522918252 -> 977064091;
+855815053[fontcolor="purple", penwidth=3, color="purple"];
+2125436163[fontcolor="purple", penwidth=3, color="purple"];
 }

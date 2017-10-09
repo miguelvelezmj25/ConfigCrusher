@@ -20,13 +20,13 @@ public class TimerInstrumenterTest {
     //    @Test
 //    public void testSleep30() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
 //        String programName = "sleep30";
-//        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-//        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+//        String instrumentedSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+//        String instrumentedClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
 //        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //
 //        // Format return statements with method calls
-//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+//        Formatter.format(instrumentedSrcDirectory, instrumentedClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
 //
 //        // Program arguments
 //    String[] args = new String[0];
@@ -62,13 +62,13 @@ public class TimerInstrumenterTest {
 //    @Test
 //    public void testElevator() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
 //        String programName = "elevator";
-//        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
-//        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
+//        String instrumentedSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
+//        String instrumentedClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
 //        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
 //        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
 //
 //        // Format return statements with method calls
-//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+//        Formatter.format(instrumentedSrcDirectory, instrumentedClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
 //
 //
 //        // Program arguments
@@ -112,13 +112,13 @@ public class TimerInstrumenterTest {
 //    @Test
 //    public void testSleep31() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
 //        String programName = "sleep31";
-//        String originalSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-//        String originalClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+//        String instrumentedSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+//        String instrumentedClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //        String instrumentSrcDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
 //        String instrumentClassDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //
 //        // Format return statements with method calls
-//        Formatter.format(originalSrcDirectory, originalClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
+//        Formatter.format(instrumentedSrcDirectory, instrumentedClassDirectory, instrumentSrcDirectory, instrumentClassDirectory);
 //
 //        // Program arguments
 //        String[] args = new String[0];
@@ -307,7 +307,6 @@ public class TimerInstrumenterTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-
         Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
@@ -334,7 +333,6 @@ public class TimerInstrumenterTest {
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
-
 
         Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
@@ -363,7 +361,6 @@ public class TimerInstrumenterTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-
         Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
@@ -391,7 +388,6 @@ public class TimerInstrumenterTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-
         Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }
@@ -403,7 +399,7 @@ public class TimerInstrumenterTest {
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
 
-//        this.compile();
+        this.compile();
 //        this.format();
 
         // Program arguments
@@ -418,7 +414,6 @@ public class TimerInstrumenterTest {
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
-
 
         Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
@@ -428,10 +423,10 @@ public class TimerInstrumenterTest {
     public void regions8() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "regions8";
         String entry = "edu.cmu.cs.mvelezce.Regions8";
-        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy";
-        TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
+        TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
 
-//        this.compile();
+        this.compile();
 //        this.format();
 
         // Program arguments
@@ -446,7 +441,6 @@ public class TimerInstrumenterTest {
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
-
 
         Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
@@ -456,10 +450,10 @@ public class TimerInstrumenterTest {
     public void regions9() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "regions9";
         String entry = "edu.cmu.cs.mvelezce.Regions9";
-        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy";
-        TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
+        TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
 
-//        this.compile();
+        this.compile();
 //        this.format();
 
         // Program arguments
@@ -474,7 +468,6 @@ public class TimerInstrumenterTest {
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
-
 
         Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);

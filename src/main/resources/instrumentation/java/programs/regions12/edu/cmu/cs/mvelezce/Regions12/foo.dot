@@ -1,15 +1,15 @@
 digraph foo {
 node [shape=record];
-848343462 [label="L2\lLINENUMBER 40 L2\lLDC 1000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL3\lLINENUMBER 41 L3\lILOAD 1\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions12.boo (Z)V\lL4\lLINENUMBER 42 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions12.moo (Z)V\l"];
-617142462 [label="L1\lLINENUMBER 44 L1\lFRAME SAME\lLDC \"0148e9af-e651-4b04-878d-1f8dacd5d3d6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1626149608 [label="L0\lLINENUMBER 39 L0\lLDC \"0148e9af-e651-4b04-878d-1f8dacd5d3d6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
+817326538 [label="L0\lLINENUMBER 39 L0\lLDC \"99281161-1818-4794-a1ff-cad1f032187b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
+494006089 [label="L2\lLINENUMBER 40 L2\lLDC 1000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL3\lLINENUMBER 41 L3\lILOAD 1\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions12.boo (Z)V\lL4\lLINENUMBER 42 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions12.moo (Z)V\l"];
+404087007 [label="L1\lLINENUMBER 44 L1\lFRAME SAME\lLDC \"99281161-1818-4794-a1ff-cad1f032187b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 1626149608;
-848343462 -> 617142462;
-617142462 -> exit;
-1626149608 -> 848343462;
-1626149608 -> 617142462;
-617142462[fontcolor="purple", penwidth=3, color="purple"];
-1626149608[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 817326538;
+817326538 -> 494006089;
+817326538 -> 404087007;
+494006089 -> 404087007;
+404087007 -> exit;
+817326538[fontcolor="purple", penwidth=3, color="purple"];
+404087007[fontcolor="purple", penwidth=3, color="purple"];
 }

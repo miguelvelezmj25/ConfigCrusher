@@ -207,11 +207,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
             graph = builder.build();
             this.methodToGraph.put(methodNode, graph);
-        }
 
-        if(graph.getBlocks().size() <= 3) {
-            // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
-            throw new RuntimeException("Check this case");
+            if(graph.getBlocks().size() <= 3) {
+                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
+                throw new RuntimeException("Check this case");
+            }
         }
 
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
@@ -224,31 +224,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.calculateASMStartIndex(regionsInMethod, methodNode);
         }
 
-
-        // TODO update
-        boolean f = false;
-
-        for(JavaRegion region : regionsInMethod) {
-            if(region.getStartMethodBlock() == null || region.getEndMethodBlocks() == null || region.getEndMethodBlocks().isEmpty()) {
-                f = true;
-                break;
-            }
-        }
-
-
-        if(f) {
-            Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
-
-            for(JavaRegion region : regionsInMethod) {
-                instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
-            }
-
-            this.setStartAndEndBlocks(graph, instructionsToRegion);
-        }
-
+        this.setStartAndEndBlocksIfAbsent(methodNode, regionsInMethod);
 
         boolean updatedRegions;
-        updatedRegions = this.removeInnerRegionsInMethod(regionsInMethod, graph);
+        updatedRegions = this.removeInnerRegionsInMethod(methodNode, regionsInMethod);
 
         if(regionsInMethod.size() == 1) {
             return updatedRegions;
@@ -263,6 +242,35 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //        updatedRegions = updatedRegions | this.joinConsecutiveRegions(regionsInMethod);
 
         return updatedRegions;
+    }
+
+    private void setStartAndEndBlocksIfAbsent(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
+        boolean update = false;
+
+        for(JavaRegion region : regionsInMethod) {
+            if(region.getStartMethodBlock() == null || region.getEndMethodBlocks() == null || region.getEndMethodBlocks().isEmpty()) {
+                update = true;
+                break;
+            }
+        }
+
+        if(!update) {
+            return;
+        }
+
+        MethodGraph graph = this.methodToGraph.get(methodNode);
+
+        if(graph == null) {
+            throw new RuntimeException("The graph cannot be null");
+        }
+
+        Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
+
+        for(JavaRegion region : regionsInMethod) {
+            instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
+        }
+
+        this.setStartAndEndBlocks(graph, instructionsToRegion);
     }
 
     /**
@@ -361,9 +369,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * Remove inner regions in a method
      *
      * @param regionsInMethod
-     * @param graph
      */
-    private boolean removeInnerRegionsInMethod(List<JavaRegion> regionsInMethod, MethodGraph graph) {
+    private boolean removeInnerRegionsInMethod(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
+        MethodGraph graph = this.methodToGraph.get(methodNode);
+
+        if(graph == null) {
+            throw new RuntimeException("The graph cannot be null");
+        }
+
         Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegionSet = new LinkedHashMap<>();
         graph.getDominators();
 

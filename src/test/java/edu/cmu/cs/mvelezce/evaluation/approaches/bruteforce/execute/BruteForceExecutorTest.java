@@ -133,4 +133,26 @@ public class BruteForceExecutorTest {
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
     }
 
+    @Test
+    public void regions12() throws IOException, InterruptedException {
+        String programName = "regions12";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";;
+        String entryPoint = "edu.cmu.cs.mvelezce.Regions12";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
 }

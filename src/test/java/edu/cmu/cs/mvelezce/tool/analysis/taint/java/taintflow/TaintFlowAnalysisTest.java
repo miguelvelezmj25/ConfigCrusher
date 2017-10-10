@@ -82,6 +82,84 @@ public class TaintFlowAnalysisTest {
     }
 
     @Test
+    public void regions2() throws Exception {
+        String systemName = "regions2";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions3() throws Exception {
+        String systemName = "regions3";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions4() throws Exception {
+        String systemName = "regions4";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions5() throws Exception {
+        String systemName = "regions5";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions6() throws Exception {
+        String systemName = "regions6";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions7() throws Exception {
+        String systemName = "regions7";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
     public void regions8() throws Exception {
         String systemName = "regions8";
 
@@ -97,6 +175,45 @@ public class TaintFlowAnalysisTest {
     @Test
     public void regions9() throws Exception {
         String systemName = "regions9";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions10() throws Exception {
+        String systemName = "regions10";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions11() throws Exception {
+        String systemName = "regions11";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions12() throws Exception {
+        String systemName = "regions12";
 
         // Program arguments
         String[] args = new String[2];

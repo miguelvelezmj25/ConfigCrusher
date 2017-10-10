@@ -1,0 +1,15 @@
+digraph moo {
+node [shape=record];
+1175613276 [label="L2\lLINENUMBER 48 L2\lLDC 2000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL3\lLINENUMBER 49 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+141195392 [label="L0\lLINENUMBER 47 L0\lLDC \"5db791a4-a594-4cf1-8a1a-7fb73053c39c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
+334517645 [label="L1\lLINENUMBER 51 L1\lFRAME SAME\lLDC \"5db791a4-a594-4cf1-8a1a-7fb73053c39c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 141195392;
+1175613276 -> 334517645;
+141195392 -> 1175613276;
+141195392 -> 334517645;
+334517645 -> exit;
+141195392[fontcolor="purple", penwidth=3, color="purple"];
+334517645[fontcolor="purple", penwidth=3, color="purple"];
+}

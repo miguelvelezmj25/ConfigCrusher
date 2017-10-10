@@ -1,15 +1,22 @@
 package edu.cmu.cs.mvelezce.tool;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.BaseCompression;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
+import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Formatter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Instrumenter;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -42,18 +49,17 @@ public class ConfigCrusher {
         Compression compressor = new SimpleCompression(this.programName, options);
         Set<Set<String>> configurations = compressor.compressConfigurations(args);
 
-        throw new UnsupportedOperationException("Add the root package for each system");
-//        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(this.programName, this.classDir, javaRegionsToOptionSet);
-//        instrumenter.instrument(args);
-//
-//        Executor executor = new ConfigCrusherExecutor(this.programName, this.entry, this.classDir, configurations);
-//        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-//
-//        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
-//        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(this.programName, performanceEntries, regionsToOptionSet);
-//        PerformanceModel performanceModel = builder.createModel(args);
-//
-//        return performanceModel;
+        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(this.programName, this.entry, this.classDir, javaRegionsToOptionSet);
+        instrumenter.instrument(args);
+
+        Executor executor = new ConfigCrusherExecutor(this.programName, this.entry, this.classDir, configurations);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(this.programName, performanceEntries, regionsToOptionSet);
+        PerformanceModel performanceModel = builder.createModel(args);
+
+        return performanceModel;
     }
 
     public void compile() throws IOException, InterruptedException {

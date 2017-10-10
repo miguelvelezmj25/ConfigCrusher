@@ -19,6 +19,8 @@ import soot.*;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 import soot.options.Options;
+import soot.tagkit.BytecodeOffsetTag;
+import soot.tagkit.Tag;
 import soot.util.queue.QueueReader;
 
 import java.io.BufferedReader;
@@ -37,6 +39,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     private ClassNode currentClassNode;
     private Set<MethodNode> methodsWithUpdatedIndexes = new HashSet<>();
     private Map<String, List<String>> classToJavapResult = new HashMap<>();
+    private Map<MethodNode, MethodGraph> methodToGraph = new HashMap<>();
+    private Map<MethodNode, SootMethod> methodNodeToSootMethod = new HashMap<>();
+    private Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
     private CallGraph callGraph;
     private Set<MethodBlock> endRegionBlocksWithReturn = new HashSet<>();
 
@@ -79,14 +84,21 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     @Override
     public void transformMethods(Set<ClassNode> classNodes) throws IOException {
         Set<SootMethod> methods = this.getSystemMethods();
+        this.matchSootToASMMethods(methods, classNodes);
 
+        int initialRegionCount = this.regionsToOptionSet.size();
+        // Remove regions
         boolean updatedRegions = true;
 
         while (updatedRegions) {
             updatedRegions = this.processMethodsInClasses(classNodes);
-//            updatedRegions = updatedRegions | this.processGraph(methods);
+            updatedRegions = updatedRegions | this.processGraph(methods);
         }
 
+        System.out.println("# of regions before optimizing: " + initialRegionCount);
+        System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
+
+        // Instrument
         for(ClassNode classNode : classNodes) {
             Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
 
@@ -119,6 +131,40 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 }
             }
         }
+
+        System.out.println();
+    }
+
+    public void matchSootToASMMethods(Set<SootMethod> sootMethods, Set<ClassNode> classNodes) {
+        for(ClassNode classNode : classNodes) {
+            List<MethodNode> methodNodes = classNode.methods;
+
+            for(MethodNode methodNode : methodNodes) {
+                String classPackageNode = classNode.name;
+                classPackageNode = classPackageNode.substring(0, classPackageNode.lastIndexOf("/"));
+                classPackageNode = classPackageNode.replace("/", ".");
+
+                String classNameNode = classNode.name;
+                classNameNode = classNameNode.substring(classNameNode.lastIndexOf("/") + 1);
+
+                String methodNameNode = methodNode.name + methodNode.desc;
+
+                for(SootMethod sootMethod : sootMethods) {
+                    String classPackageSoot = sootMethod.getDeclaringClass().getPackageName();
+                    String classNameSoot = sootMethod.getDeclaringClass().getShortName();
+                    String methodNameSoot = sootMethod.getBytecodeSignature();
+                    methodNameSoot = methodNameSoot.substring(methodNameSoot.indexOf(" "), methodNameSoot.length() - 1).trim();
+
+                    if(classPackageNode.equals(classPackageSoot) && classNameNode.equals(classNameSoot)
+                            && methodNameNode.equals(methodNameSoot)) {
+                        this.sootMethodToMethodNode.put(sootMethod, methodNode);
+                        this.methodNodeToSootMethod.put(methodNode, sootMethod);
+
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -143,25 +189,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             for(MethodNode methodNode : methodsToInstrument) {
                 updatedMethods = updatedMethods | this.processRegionsInMethod(methodNode);
             }
-
-//            this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
-//
-//            // TODO if debug
-//            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
-//            MethodTracer tracer = classInspector.visitClass();
-//
-//            for(MethodNode methodNode : methodsToInstrument) {
-//                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
-//                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-//                PrettyMethodGraph prettyGraph = prettyBuilder.build();
-//                prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
-//
-//                try {
-//                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
         }
 
         return updatedMethods;
@@ -174,8 +201,13 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @param methodNode
      */
     private boolean processRegionsInMethod(MethodNode methodNode) {
-        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-        MethodGraph graph = builder.build();
+        MethodGraph graph = this.methodToGraph.get(methodNode);
+
+        if(graph == null) {
+            DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
+            graph = builder.build();
+            this.methodToGraph.put(methodNode, graph);
+        }
 
         if(graph.getBlocks().size() <= 3) {
             // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
@@ -192,6 +224,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.calculateASMStartIndex(regionsInMethod, methodNode);
         }
 
+
+        // TODO update
         boolean f = false;
 
         for(JavaRegion region : regionsInMethod) {
@@ -211,7 +245,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             this.setStartAndEndBlocks(graph, instructionsToRegion);
         }
-
 
 
         boolean updatedRegions;
@@ -273,6 +306,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return true;
     }
 
+    // TODO do this after we have done everything else. Then, if there is something updated, repeat everything
     private boolean joinConsecutiveRegions(List<JavaRegion> regionsInMethod) {
         JavaRegion region = regionsInMethod.get(0);
         Set<Set<String>> regionOptionSet = this.regionsToOptionSet.get(region);
@@ -550,13 +584,17 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private List<String> getJavapResult() {
-        String classPackage = this.getCurrentClassNode().name;
+        String classPackage = this.currentClassNode.name;
         classPackage = classPackage.substring(0, classPackage.lastIndexOf("/"));
         classPackage = classPackage.replace("/", ".");
 
-        String className = this.getCurrentClassNode().name;
+        String className = this.currentClassNode.name;
         className = className.substring(className.lastIndexOf("/") + 1);
 
+        return this.getJavapResult(classPackage, className);
+    }
+
+    private List<String> getJavapResult(String classPackage, String className) {
         List<String> javapResult = this.classToJavapResult.get(className);
 
         if(javapResult != null) {
@@ -603,48 +641,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     // TODO why dont we return a new list
     private void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
+        int methodStartIndex = this.getJavapStartIndex(methodNode);
         List<String> javapResult = this.getJavapResult();
-        int methodStartIndex = 0;
-        String methodNameInJavap = methodNode.name;
-
-        if(methodNameInJavap.startsWith("<init>")) {
-            // TODO check this
-            methodNameInJavap = this.getCurrentClassNode().name;
-            methodNameInJavap = methodNameInJavap.replace("/", ".");
-        }
-
-        if(methodNameInJavap.startsWith("<clinit>")) {
-            methodNameInJavap = "  static {};";
-        }
-        else {
-            methodNameInJavap += "(";
-        }
-
-        // Check if signature matches
-        for(String outputLine : javapResult) {
-            if(outputLine.equals(methodNameInJavap)) {
-                break;
-            }
-            else if(outputLine.contains(" " + methodNameInJavap)) {
-                String formalParametersString = outputLine.substring(outputLine.indexOf("(") + 1, outputLine.indexOf(")"));
-                List<String> formalParameters = Arrays.asList(formalParametersString.split(","));
-                StringBuilder methodDescriptors = new StringBuilder();
-
-                for(String formalParameter : formalParameters) {
-                    String methodDescriptor = BytecodeUtils.toBytecodeDescriptor(formalParameter.trim());
-                    methodDescriptors.append(methodDescriptor);
-                }
-
-                String regionDesc = methodNode.desc;
-                String regionFormalParameters = regionDesc.substring(regionDesc.indexOf("(") + 1, regionDesc.indexOf(")"));
-
-                if(methodDescriptors.toString().equals(regionFormalParameters)) {
-                    break;
-                }
-            }
-
-            methodStartIndex++;
-        }
 
         int instructionNumber = 0;
         int currentBytecodeIndex = -1;
@@ -654,6 +652,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         for(int i = (methodStartIndex + javapOffset); i < javapResult.size(); i++) {
             String outputLine = javapResult.get(i);
+
+            if(outputLine.contains(" Code:")) {
+                break;
+            }
 
             if(!outputLine.contains(":")) {
                 continue;
@@ -768,13 +770,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         while (!worklist.isEmpty()) {
             SootMethod method = worklist.remove(0);
-
             List<JavaRegion> regions = this.getRegionsInMethod(method);
 
             if(regions.size() != 1) {
                 continue;
             }
 
+            boolean reachedMainWithoutRegion = false;
+            Set<JavaRegion> regionsWithCall = new HashSet<>();
             List<Edge> callerEdges = this.getCallerEdges(method);
 
             while (!callerEdges.isEmpty()) {
@@ -784,53 +787,271 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
 
                 if(regionsInCaller.isEmpty()) {
+                    // Find regions higher in the call stack
                     List<Edge> edges = this.getCallerEdges(callerMethod);
+
+                    if(edges.isEmpty() && callerMethod.getName().equals("main")) {
+                        reachedMainWithoutRegion = true;
+                        break;
+                    }
+
                     int indexToInsert = Math.max(0, callerEdges.size() - 1);
                     callerEdges.addAll(indexToInsert, edges);
                 }
                 else if(regionsInCaller.size() == 1) {
-
-                }
-                else {
-                    for(JavaRegion region : regionsInCaller) {
-
-                    }
-                }
-            }
-
-//            // Find the first callers that make a call to this method inside a region. This means that methods might have
-//            // regions that do not call this method. In those case, we need to keep exploring up the call stack.
-//            while (!callerEdges.isEmpty()) {
-//                Edge outEdge = callerEdges.remove(0);
-//                SootMethod callerMethod = outEdge.src();
-//
-//                List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
-//
-//                if(regionsInCaller.isEmpty()) {
-//                    List<Edge> edges = this.getCallerEdges(callerMethod);
-//                    int indexToInsert = Math.max(0, callerEdges.size() - 1);
-//                    callerEdges.addAll(indexToInsert, edges);
-//                }
-//                else if(regionsInCaller.size() == 1) {
+//                    throw new RuntimeException("Cannot delete since we need to have a single base time. This means that we can" +
+//                            "remove a region ONLY if it is guarded by other regions.");
 //                    this.removeRegionInMethod(method, callerMethod);
 //                    worklist.add(callerMethod);
 //                    updated = true;
-//                    break;
+                    regionsWithCall.add(regionsInCaller.get(0));
+                    break;
+                }
+                else {
+                    // Find if the call happens inside a region. If not, look higher in the call stack
+                    List<Integer> bytecodeIndexes = new ArrayList<>();
+
+                    for(Tag tag : outEdge.srcUnit().getTags()) {
+                        if(tag instanceof BytecodeOffsetTag) {
+                            int bytecodeIndex = ((BytecodeOffsetTag) tag).getBytecodeOffset();
+                            bytecodeIndexes.add(bytecodeIndex);
+                        }
+                    }
+
+                    if(bytecodeIndexes.isEmpty()) {
+                        throw new RuntimeException("There must be a bytecode index tag");
+                    }
+
+                    int bytecodeIndex;
+
+                    if(bytecodeIndexes.size() == 1) {
+                        bytecodeIndex = bytecodeIndexes.get(0);
+                    }
+                    else {
+                        int index = bytecodeIndexes.indexOf(Collections.min(bytecodeIndexes));
+                        bytecodeIndex = bytecodeIndexes.get(index);
+                    }
+
+                    AbstractInsnNode callerInstruction = this.getASMInstruction(callerMethod, bytecodeIndex);
+                    boolean foundInRegion = false;
+
+                    for(JavaRegion region : regionsInCaller) {
+                        MethodBlock start = region.getStartMethodBlock();
+//
+//                        if(start.getInstructions().contains(callerInstruction)) {
+//                            regionsWithCall.add(region);
+//                            foundInRegion = true;
+//                        }
+//
+                        Set<MethodBlock> ends = region.getEndMethodBlocks();
+//
+//                        for(MethodBlock end : ends) {
+//                            if(end.getInstructions().contains(callerInstruction)) {
+//                                regionsWithCall.add(region);
+//                                foundInRegion = true;
+//                            }
+//                        }
+
+                        Set<MethodBlock> reachableBlocks = new HashSet<>();
+                        MethodGraph graph = this.methodToGraph.get(this.sootMethodToMethodNode.get(callerMethod));
+
+                        for(MethodBlock end : ends) {
+                            Set<MethodBlock> blocks = graph.getReachableBlocks(start, end);
+                            reachableBlocks.addAll(blocks);
+                        }
+
+                        reachableBlocks.remove(start);
+                        reachableBlocks.removeAll(ends);
+
+                        for(MethodBlock block : reachableBlocks) {
+                            if(block.getInstructions().contains(callerInstruction)) {
+                                regionsWithCall.add(region);
+                                foundInRegion = true;
+                            }
+                        }
+                    }
+
+                    if(foundInRegion) {
+                        continue;
+                    }
+
+                    // Find regions higher in the call stack
+                    List<Edge> edges = this.getCallerEdges(callerMethod);
+                    int indexToInsert = Math.max(0, callerEdges.size() - 1);
+                    callerEdges.addAll(indexToInsert, edges);
+                }
+
+            }
+
+            if(reachedMainWithoutRegion || regionsWithCall.isEmpty()) {
+                continue;
+            }
+
+            Set<Set<String>> innerRegionOptionSet = this.regionsToOptionSet.get(regions.get(0));
+            Set<String> innerRegionOptions = new HashSet<>();
+
+            for(Set<String> set : innerRegionOptionSet) {
+                innerRegionOptions.addAll(set);
+            }
+
+            Set<JavaRegion> regionsWithCallWithDifferentOptions = new HashSet<>();
+
+            // Check that the outer options are a set of subset of the inner options. Otherwise, the call is in the
+            // region block, but it is outside of the control flow decision and we do not want to create interactions
+            for(JavaRegion outerRegion : regionsWithCall) {
+                Set<Set<String>> outerRegionOptionSet = this.regionsToOptionSet.get(outerRegion);
+                Set<String> outerRegionOptions = new HashSet<>();
+
+                for(Set<String> set : outerRegionOptionSet) {
+                    outerRegionOptions.addAll(set);
+                }
+//
+//                if(outerRegionOptions.containsAll(innerRegionOptions) && !innerRegionOptions.equals(outerRegionOptions)) {
+//                    throw new RuntimeException("What happened");
 //                }
-//                else {
-//                    for(JavaRegion region : regionsInCaller) {
-////                        throw new RuntimeException("Process");
-////
-////
-////                        // TODO transform unit to asm instruction
-////                        // TODO get all method blocks between the start and end blocks
-////                        // TODO search if the instruction is within the regions
-//                    }
-//                }
-//            }
+
+                if(!outerRegionOptions.equals(innerRegionOptions) && !innerRegionOptions.containsAll(outerRegionOptions)
+                        && !outerRegionOptions.containsAll(innerRegionOptions)) {
+                    regionsWithCallWithDifferentOptions.add(outerRegion);
+                }
+
+            }
+
+            regionsWithCall.removeAll(regionsWithCallWithDifferentOptions);
+
+            if(regionsWithCall.isEmpty()) {
+                continue;
+            }
+
+            Set<JavaRegion> innerRegions = new HashSet<>();
+            innerRegions.add(regions.get(0));
+
+            Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegions = new HashMap<>();
+
+            for(JavaRegion region : regionsWithCall) {
+                regionsToInnerRegions.put(region, innerRegions);
+            }
+
+            this.updateRegionsToOptionsWithOptionsInInnerRegions(regionsToInnerRegions);
+            this.removeRegionsInRegionsToOptions(innerRegions);
+
+            updated = true;
         }
 
         return updated;
+    }
+
+    private int getJavapStartIndex(MethodNode methodNode) {
+        List<String> javapResult = this.getJavapResult();
+        String methodNameInJavap = methodNode.name;
+
+        if(methodNameInJavap.startsWith("<init>")) {
+            methodNameInJavap = this.currentClassNode.name;
+            methodNameInJavap = methodNameInJavap.replace("/", ".");
+        }
+
+        if(methodNameInJavap.startsWith("<clinit>")) {
+            methodNameInJavap = "  static {};";
+        }
+        else {
+            methodNameInJavap += "(";
+        }
+
+        int methodStartIndex = 0;
+
+        // Check if signature matches
+        for(String outputLine : javapResult) {
+            if(outputLine.equals(methodNameInJavap)) {
+                break;
+            }
+            else if(outputLine.contains(" " + methodNameInJavap)) {
+                String formalParametersString = outputLine.substring(outputLine.indexOf("(") + 1, outputLine.indexOf(")"));
+                List<String> formalParameters = Arrays.asList(formalParametersString.split(","));
+                StringBuilder methodDescriptors = new StringBuilder();
+
+                for(String formalParameter : formalParameters) {
+                    String methodDescriptor = BytecodeUtils.toBytecodeDescriptor(formalParameter.trim());
+                    methodDescriptors.append(methodDescriptor);
+                }
+
+                String regionDesc = methodNode.desc;
+                String regionFormalParameters = regionDesc.substring(regionDesc.indexOf("(") + 1, regionDesc.indexOf(")"));
+
+                if(methodDescriptors.toString().equals(regionFormalParameters)) {
+                    break;
+                }
+            }
+
+            methodStartIndex++;
+        }
+
+        return methodStartIndex;
+    }
+
+    private AbstractInsnNode getASMInstruction(SootMethod callerMethod, int bytecodeIndex) {
+        MethodNode methodNode = this.sootMethodToMethodNode.get(callerMethod);
+        int methodStartIndex = this.getJavapStartIndex(methodNode);
+        List<String> javapResult = this.getJavapResult();
+
+        int instructionNumber = 0;
+        int currentBytecodeIndex = -1;
+        // 2 are the lines before the actual code in a method
+        int javapOffset = 2;
+
+        for(int i = (methodStartIndex + javapOffset); i < javapResult.size(); i++) {
+            String outputLine = javapResult.get(i);
+
+            if(outputLine.contains("Code:")) {
+                break;
+            }
+
+            if(!outputLine.contains(":")) {
+                continue;
+            }
+
+            if(outputLine.contains(bytecodeIndex + ":")) {
+                break;
+            }
+
+            String outputCommand = outputLine.substring(outputLine.indexOf(":") + 1).trim();
+
+            if(StringUtils.isNumeric(outputCommand)) {
+                continue;
+            }
+
+            int outputLineBytecodeIndex = -1;
+            String outputLineBytecodeIndexString = outputLine.substring(0, outputLine.indexOf(":")).trim();
+
+            if(StringUtils.isNumeric(outputLineBytecodeIndexString)) {
+                outputLineBytecodeIndex = Integer.valueOf(outputLineBytecodeIndexString);
+            }
+
+            if(outputLineBytecodeIndex > currentBytecodeIndex) {
+                instructionNumber++;
+                currentBytecodeIndex = outputLineBytecodeIndex;
+            }
+        }
+
+        InsnList instructionsList = methodNode.instructions;
+        ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
+        int instructionCounter = -1;
+
+        while (instructions.hasNext()) {
+            AbstractInsnNode instruction = instructions.next();
+
+            if(instruction.getOpcode() >= 0) {
+                instructionCounter++;
+            }
+            else {
+                continue;
+            }
+
+            if(instructionCounter == instructionNumber) {
+                return instruction;
+            }
+        }
+
+        throw new RuntimeException("Could not find the instruction");
     }
 
     /**
@@ -841,13 +1062,13 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      */
     private void removeRegionInMethod(SootMethod method, SootMethod callerMethod) {
         // Get regions in methods
-        List<JavaRegion> regionInMethod = this.getRegionsInMethod(method);
+        List<JavaRegion> regionInMethod = this.getRegionsInMethod(this.sootMethodToMethodNode.get(method));
 
         if(regionInMethod.size() != 1) {
             throw new RuntimeException("The inner method does no have 1 region");
         }
 
-        List<JavaRegion> regionInCallerMethod = this.getRegionsInMethod(callerMethod);
+        List<JavaRegion> regionInCallerMethod = this.getRegionsInMethod(this.sootMethodToMethodNode.get(callerMethod));
 
         if(regionInCallerMethod.size() != 1) {
             throw new RuntimeException("The outer method does no have 1 region");
@@ -885,14 +1106,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         this.updateRegionsToOptionsWithOptionsInInnerRegions(regionsToInnerRegions);
         this.removeRegionsInRegionsToOptions(innerRegions);
-
-//        outerOptions.addAll(innerOptions);
-//
-//        // Update regions to options set
-//        this.regionsToOptionSet.remove(innerRegion);
-//
-//        this.regionsToOptionSet.get(outerRegion).clear();
-//        this.regionsToOptionSet.get(outerRegion).add(outerOptions);
     }
 
     private List<Edge> getCallerEdges(SootMethod method) {
@@ -949,18 +1162,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
 
             methods.add(src.method());
-
-//            MethodOrMethodContext tgt = edge.getTgt();
-//
-//            if(!tgt.method().getDeclaringClass().getPackageName().contains(this.rootPackage)) {
-//                continue;
-//            }
-
         }
 
         return methods;
     }
-
 
     private CallGraph buildCallGraph() {
         initializeSoot();
@@ -1029,13 +1234,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     private List<JavaRegion> getRegionsInMethod(SootMethod sootMethod) {
         String classPackage = sootMethod.getDeclaringClass().getPackageName();
-//        classPackage = classPackage.substring(0, classPackage.lastIndexOf("/"));
-//        classPackage = classPackage.replace("/", ".");
-
-
         String className = sootMethod.getDeclaringClass().getShortName();
-//        className = className.substring(className.lastIndexOf("/") + 1);
-
         String methodName = sootMethod.getBytecodeSignature();
         methodName = methodName.substring(methodName.indexOf(" "), methodName.length() - 1).trim();
 

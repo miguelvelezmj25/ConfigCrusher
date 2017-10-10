@@ -24,6 +24,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
     @Override
     public void transformMethod(MethodNode methodNode) {
+        // TODO use the graph that we already have
         System.out.println("Before transforming");
         DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
         MethodGraph graph = builder.build();

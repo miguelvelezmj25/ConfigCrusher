@@ -1,20 +1,20 @@
 digraph setCompressor {
 node [shape=record];
-1998256271 [label="L4\lLINENUMBER 265 L4\lALOAD 0\lNEW optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler\lDUP\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.log : Loptimizer/com/googlecode/pngtastic/core/Logger;\lALOAD 2\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler.\<init\> (Loptimizer/com/googlecode/pngtastic/core/Logger;I)V\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.pngCompressionHandler : Loptimizer/com/googlecode/pngtastic/core/processing/PngCompressionHandler;\lGOTO L1\l"];
-1403575958 [label="L3\lLINENUMBER 268 L3\lFRAME SAME\lALOAD 0\lNEW optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler\lDUP\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.log : Loptimizer/com/googlecode/pngtastic/core/Logger;\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler.\<init\> (Loptimizer/com/googlecode/pngtastic/core/Logger;)V\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.pngCompressionHandler : Loptimizer/com/googlecode/pngtastic/core/processing/PngCompressionHandler;\l"];
-1033407939 [label="L1\lLINENUMBER 271 L1\lFRAME SAME\lLDC \"9e71cb15-29ad-4576-8143-265b9558bf81\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1361345792 [label="L2\lLINENUMBER 264 L2\lALOAD 2\lIFNULL L3\l"];
-616565462 [label="L0\lLINENUMBER 263 L0\lLDC \"9e71cb15-29ad-4576-8143-265b9558bf81\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"zopfli\"\lALOAD 1\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+775239120 [label="L1\lLINENUMBER 271 L1\lFRAME SAME\lLDC \"9e71cb15-29ad-4576-8143-265b9558bf81\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1902092832 [label="L3\lLINENUMBER 268 L3\lFRAME SAME\lALOAD 0\lNEW optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler\lDUP\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.log : Loptimizer/com/googlecode/pngtastic/core/Logger;\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler.\<init\> (Loptimizer/com/googlecode/pngtastic/core/Logger;)V\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.pngCompressionHandler : Loptimizer/com/googlecode/pngtastic/core/processing/PngCompressionHandler;\l"];
+886896913 [label="L4\lLINENUMBER 265 L4\lALOAD 0\lNEW optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler\lDUP\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.log : Loptimizer/com/googlecode/pngtastic/core/Logger;\lALOAD 2\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/ZopfliCompressionHandler.\<init\> (Loptimizer/com/googlecode/pngtastic/core/Logger;I)V\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngOptimizer.pngCompressionHandler : Loptimizer/com/googlecode/pngtastic/core/processing/PngCompressionHandler;\lGOTO L1\l"];
+395987865 [label="L0\lLINENUMBER 263 L0\lLDC \"9e71cb15-29ad-4576-8143-265b9558bf81\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"zopfli\"\lALOAD 1\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+76084811 [label="L2\lLINENUMBER 264 L2\lALOAD 2\lIFNULL L3\l"];
 entry;
 exit;
-entry -> 616565462;
-1998256271 -> 1033407939;
-1403575958 -> 1033407939;
-1033407939 -> exit;
-1361345792 -> 1998256271;
-1361345792 -> 1403575958;
-616565462 -> 1033407939;
-616565462 -> 1361345792;
-1033407939[fontcolor="purple", penwidth=3, color="purple"];
-616565462[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 395987865;
+775239120 -> exit;
+1902092832 -> 775239120;
+886896913 -> 775239120;
+395987865 -> 775239120;
+395987865 -> 76084811;
+76084811 -> 1902092832;
+76084811 -> 886896913;
+775239120[fontcolor="purple", penwidth=3, color="purple"];
+395987865[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,1 +1,59 @@
-[{"region":{"regionID":"259def65-0027-4233-bb8f-7db01fe90a1a","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions0","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":37,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B"]]},{"region":{"regionID":"9dce5ac3-3927-468f-ae5e-88d94043f97d","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions0","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":45,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B"]]},{"region":{"regionID":"fff99aeb-7466-4d5c-a129-aa6644fba443","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions0","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":53,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","C","D"]]},{"region":{"regionID":"a382910c-b39d-4bd1-8259-259d8b316a7d","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions0","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":30,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A"]]}]
+[
+  {
+    "region": {
+      "regionID": "c5b2e709-3183-4f5b-bab9-dad51f9ad3e2",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions0",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 30,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "01373cf4-78c6-40a8-be0a-89e23c132bcb",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions0",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 37,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "467788db-9bc8-412f-888e-fbd46748bc0d",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions0",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 53,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "C",
+        "D"
+      ]
+    ]
+  }
+]

@@ -1,1 +1,57 @@
-[{"region":{"regionID":"6fb6d9b2-66d6-4f99-a392-3c5295666d82","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions11","regionMethod":"foo(ZZ)V","startBytecodeIndex":1,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B"]]},{"region":{"regionID":"8d0de3a6-df50-4583-bb5f-9f2edadc5781","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions11","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":33,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["B"]]},{"region":{"regionID":"d29964ef-9750-43db-bb35-6e7a9884d7f9","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions11","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":24,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A"]]}]
+[
+  {
+    "region": {
+      "regionID": "c760a148-711a-45a1-ab89-75c91d526def",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions11",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6c1ed47b-5712-4232-95b2-05c06b0be58e",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions11",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 33,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "B"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "98e4ebbd-217e-4a9b-8382-89ea3e70f9c0",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions11",
+      "regionMethod": "foo(ZZ)V",
+      "startBytecodeIndex": 1,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B"
+      ]
+    ]
+  }
+]

@@ -1,1 +1,38 @@
-[{"region":{"regionID":"cc929dc7-9d27-4d20-9be7-6fecefa67dd5","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions9","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":34,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["B"]]},{"region":{"regionID":"f85111f8-fbf6-4890-afb8-e4bbe60f63a5","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions9","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":52,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["B"]]},{"region":{"regionID":"0667f997-3a17-40eb-9978-0d5d7872b1e1","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions9","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":16,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A"]]},{"region":{"regionID":"05951afa-f0d4-41f7-8441-2613f97ca7a4","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions9","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":43,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["B"]]},{"region":{"regionID":"8df83b12-aa48-4ac0-b7d0-91176d0ddd57","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions9","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":25,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A"]]}]
+[
+  {
+    "region": {
+      "regionID": "c4400955-6b1f-4649-981b-88d7ee0b64f2",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions9",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 34,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "B"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e4763068-8af6-467a-bcfc-6adc9c6f6c84",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions9",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 16,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A"
+      ]
+    ]
+  }
+]

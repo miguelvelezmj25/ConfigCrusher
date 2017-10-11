@@ -1,1 +1,22 @@
-[{"region":{"regionID":"da13bf8f-4f8a-475a-81a2-cd7861a69851","startTime":0,"endTime":0,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions2","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B"]]}]
+[
+  {
+    "region": {
+      "regionID": "edfbb795-a848-4ddf-b00b-2122968a2d77",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions2",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B",
+        "C"
+      ]
+    ]
+  }
+]

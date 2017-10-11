@@ -31,18 +31,18 @@ public class Regions {
     }
 
     public static void enter(String regionID) {
-        Region region = new Region(regionID);
-        region.enter();
-
-        Regions.addExecutingRegion(region);
+//        Region region = new Region(regionID);
+//        region.enter();
+//
+//        Regions.addExecutingRegion(region);
         Regions.startCount++;
     }
 
     public static void exit(String regionID) {
-        Region region = new Region(regionID);
-        region.exit();
-
-        Regions.removeExecutingRegion(region);
+//        Region region = new Region(regionID);
+//        region.exit();
+//
+//        Regions.removeExecutingRegion(region);
         Regions.endCound++;
     }
 

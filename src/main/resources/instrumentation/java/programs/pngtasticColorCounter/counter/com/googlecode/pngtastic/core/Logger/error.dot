@@ -1,8 +1,8 @@
 digraph error {
 node [shape=record];
-663126311 [label="L0\lLINENUMBER 52 L0\lLDC \"9ec58fbf-0450-47de-beda-9fea3c9d7493\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+663126311 [label="L0\lLINENUMBER 52 L0\lLDC \"27624d62-6c05-4369-821c-dc079c4e4335\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
 402142579 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1244613626 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"9ec58fbf-0450-47de-beda-9fea3c9d7493\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1244613626 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"27624d62-6c05-4369-821c-dc079c4e4335\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
 entry -> 663126311;

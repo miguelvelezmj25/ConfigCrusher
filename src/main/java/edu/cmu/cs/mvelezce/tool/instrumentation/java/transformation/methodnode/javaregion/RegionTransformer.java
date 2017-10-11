@@ -88,11 +88,18 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         int initialRegionCount = this.regionsToOptionSet.size();
         // Remove regions
-        boolean updatedRegions = true;
+        boolean foo = true;
 
-        while (updatedRegions) {
-            updatedRegions = this.processMethodsInClasses(classNodes);
-            updatedRegions = updatedRegions | this.processGraph(methods);
+        while (foo) {
+            boolean updatedRegions = true;
+
+            while (updatedRegions) {
+                updatedRegions = this.processMethodsInClasses(classNodes);
+                updatedRegions = updatedRegions | this.processGraph(methods);
+            }
+
+            foo = this.processMethodsInClassesAfterRemovingRegions(classNodes);
+//            foo =false;
         }
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
@@ -195,25 +202,40 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     /**
+     * Process the methods after we removed regions to find if we can further remove other methods
+     *
+     * @param classNodes
+     * @return
+     * @throws IOException
+     */
+    private boolean processMethodsInClassesAfterRemovingRegions(Set<ClassNode> classNodes) throws IOException {
+        boolean updatedMethods = false;
+
+        for(ClassNode classNode : classNodes) {
+            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+
+            if(methodsToInstrument.isEmpty()) {
+                continue;
+            }
+
+            System.out.println("Transforming class " + classNode.name);
+
+            for(MethodNode methodNode : methodsToInstrument) {
+                updatedMethods = updatedMethods | this.processRegionsInMethodAfterRemovingRegions(methodNode);
+            }
+        }
+
+        return updatedMethods;
+    }
+
+    /**
      * Process the regions inside the methods. This entails removing inner regions and joining regions with the same
      * options.
      *
      * @param methodNode
      */
     private boolean processRegionsInMethod(MethodNode methodNode) {
-        MethodGraph graph = this.methodToGraph.get(methodNode);
-
-        if(graph == null) {
-            DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-            graph = builder.build();
-            this.methodToGraph.put(methodNode, graph);
-
-            if(graph.getBlocks().size() <= 3) {
-                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
-                throw new RuntimeException("Check this case");
-            }
-        }
-
+        this.buildMethodGraph(methodNode);
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
 
         if(regionsInMethod.size() == 1) {
@@ -239,9 +261,49 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             return updatedRegions;
         }
 
-//        updatedRegions = updatedRegions | this.joinConsecutiveRegions(regionsInMethod);
+        return updatedRegions;
+    }
+
+    /**
+     * Process the regions in the method after removing some regions
+     *
+     * @param methodNode
+     */
+    private boolean processRegionsInMethodAfterRemovingRegions(MethodNode methodNode) {
+        this.buildMethodGraph(methodNode);
+        List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
+
+        if(regionsInMethod.size() == 1) {
+            return false;
+        }
+
+        if(!this.methodsWithUpdatedIndexes.contains(methodNode)) {
+            this.calculateASMStartIndex(regionsInMethod, methodNode);
+        }
+
+        this.setStartAndEndBlocksIfAbsent(methodNode, regionsInMethod);
+
+        boolean updatedRegions;
+        updatedRegions = this.joinConsecutiveRegions(methodNode, regionsInMethod);
 
         return updatedRegions;
+    }
+
+    private MethodGraph buildMethodGraph(MethodNode methodNode) {
+        MethodGraph graph = this.methodToGraph.get(methodNode);
+
+        if(graph == null) {
+            DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
+            graph = builder.build();
+            this.methodToGraph.put(methodNode, graph);
+
+            if(graph.getBlocks().size() <= 3) {
+                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
+                throw new RuntimeException("Check this case");
+            }
+        }
+
+        return graph;
     }
 
     private void setStartAndEndBlocksIfAbsent(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
@@ -314,8 +376,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return true;
     }
 
-    // TODO do this after we have done everything else. Then, if there is something updated, repeat everything
-    private boolean joinConsecutiveRegions(List<JavaRegion> regionsInMethod) {
+    private boolean joinConsecutiveRegions(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
         JavaRegion region = regionsInMethod.get(0);
         Set<Set<String>> regionOptionSet = this.regionsToOptionSet.get(region);
         Set<String> currentOptions = new HashSet<>();
@@ -346,8 +407,17 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     throw new RuntimeException("How to handle multiple returns");
                 }
 
-                region.setEndMethodBlocks(nextRegion.getEndMethodBlocks());
-                regionsToRemove.add(nextRegion);
+                MethodGraph graph = this.methodToGraph.get(methodNode);
+                Set<MethodBlock> reachableBlocks = graph.getReachableBlocks(region.getStartMethodBlock(), region.getEndMethodBlocks().iterator().next());
+
+                if(reachableBlocks.contains(nextRegion.getStartMethodBlock()) && reachableBlocks.containsAll(nextRegion.getEndMethodBlocks())) {
+                    region = nextRegion;
+                    currentOptions = nextOptions;
+                }
+                else {
+                    region.setEndMethodBlocks(nextRegion.getEndMethodBlocks());
+                    regionsToRemove.add(nextRegion);
+                }
             }
             else {
                 region = nextRegion;
@@ -812,13 +882,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     callerEdges.addAll(indexToInsert, edges);
                 }
                 else if(regionsInCaller.size() == 1) {
-//                    throw new RuntimeException("Cannot delete since we need to have a single base time. This means that we can" +
-//                            "remove a region ONLY if it is guarded by other regions.");
-//                    this.removeRegionInMethod(method, callerMethod);
-//                    worklist.add(callerMethod);
-//                    updated = true;
                     regionsWithCall.add(regionsInCaller.get(0));
-                    break;
                 }
                 else {
                     // Find if the call happens inside a region. If not, look higher in the call stack
@@ -849,23 +913,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     boolean foundInRegion = false;
 
                     for(JavaRegion region : regionsInCaller) {
-                        MethodBlock start = region.getStartMethodBlock();
-//
-//                        if(start.getInstructions().contains(callerInstruction)) {
-//                            regionsWithCall.add(region);
-//                            foundInRegion = true;
-//                        }
-//
-                        Set<MethodBlock> ends = region.getEndMethodBlocks();
-//
-//                        for(MethodBlock end : ends) {
-//                            if(end.getInstructions().contains(callerInstruction)) {
-//                                regionsWithCall.add(region);
-//                                foundInRegion = true;
-//                            }
-//                        }
-
                         Set<MethodBlock> reachableBlocks = new HashSet<>();
+                        MethodBlock start = region.getStartMethodBlock();
+                        Set<MethodBlock> ends = region.getEndMethodBlocks();
                         MethodGraph graph = this.methodToGraph.get(this.sootMethodToMethodNode.get(callerMethod));
 
                         for(MethodBlock end : ends) {
@@ -890,6 +940,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
                     // Find regions higher in the call stack
                     List<Edge> edges = this.getCallerEdges(callerMethod);
+
+                    if(edges.isEmpty() && callerMethod.getName().equals("main")) {
+                        reachedMainWithoutRegion = true;
+                        break;
+                    }
+
                     int indexToInsert = Math.max(0, callerEdges.size() - 1);
                     callerEdges.addAll(indexToInsert, edges);
                 }
@@ -918,10 +974,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 for(Set<String> set : outerRegionOptionSet) {
                     outerRegionOptions.addAll(set);
                 }
-//
-//                if(outerRegionOptions.containsAll(innerRegionOptions) && !innerRegionOptions.equals(outerRegionOptions)) {
-//                    throw new RuntimeException("What happened");
-//                }
 
                 if(!outerRegionOptions.equals(innerRegionOptions) && !innerRegionOptions.containsAll(outerRegionOptions)
                         && !outerRegionOptions.containsAll(innerRegionOptions)) {

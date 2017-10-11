@@ -1,1 +1,222 @@
-[{"region":{"regionID":"a6080e33-2a4d-44ba-92d6-2857d5c8e7ae","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":21,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TIMEOUT","DISTTHRESHOLD"]]},{"region":{"regionID":"4b76cd8c-644e-4991-bbf8-8d13f8d7bc9c","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":190,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["FREQTHRESHOLD"]]},{"region":{"regionID":"9ec58fbf-0450-47de-beda-9fea3c9d7493","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"Logger","regionMethod":"error(Ljava/lang/String;[Ljava/lang/Object;)V","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["LOGLEVEL"]]},{"region":{"regionID":"438e15dd-9f58-4bc9-b2f7-7c726ceb993b","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"Logger","regionMethod":"<init>(Ljava/lang/String;)V","startBytecodeIndex":8,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["LOGLEVEL"]]},{"region":{"regionID":"9d3cf40e-fb07-4082-b273-2e573481208f","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":224,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"bad07fa6-9855-4a77-ad61-29799c872eb9","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":173,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["DISTTHRESHOLD"]]},{"region":{"regionID":"bcd7ab0d-f90b-4ba8-840e-50f24bd58da5","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngPixel","regionMethod":"<init>(IIIIIZ)V","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"6a050de2-d960-441a-9c4f-bebfa23907a5","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":442,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["FREQTHRESHOLD","TIMEOUT"]]},{"region":{"regionID":"e1e2d623-4715-4333-88a6-73902cb88c1c","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":207,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["MINALPHA"]]},{"region":{"regionID":"ee07f918-d6c8-46b2-9cce-625c773744c8","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":30,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TIMEOUT","MINALPHA"]]},{"region":{"regionID":"ee89616d-52dd-42ab-9fe5-d57110194077","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":521,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"148a2573-8c64-4942-b0ad-c8ee7add384a","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"Logger","regionMethod":"debug(Ljava/lang/String;[Ljava/lang/Object;)V","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TIMEOUT","LOGLEVEL"]]},{"region":{"regionID":"c58f147b-5337-4ad6-b1b8-ecc85f17eeda","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":241,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["LOGLEVEL"]]},{"region":{"regionID":"0f41e704-1ff3-48cb-8e58-854dca0ece80","startTime":0,"endTime":0,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":150,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TIMEOUT"]]}]
+[
+  {
+    "region": {
+      "regionID": "42a9e203-e02c-4bc7-832f-40333158f675",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 21,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TIMEOUT",
+        "DISTTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "068c6808-23d2-408d-b327-e8b8739a55b1",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 190,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FREQTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "27624d62-6c05-4369-821c-dc079c4e4335",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "error(Ljava/lang/String;[Ljava/lang/Object;)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f6adbc24-1143-414c-ac1b-36b037038f8f",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "<init>(Ljava/lang/String;)V",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "00ee2adf-480c-48c8-b34f-348de05a5b84",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 224,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "cb800156-d672-4ef6-82c7-caaa0b446bba",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 173,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "DISTTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bae60544-5799-43e1-bfa3-8359cace0860",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngPixel",
+      "regionMethod": "<init>(IIIIIZ)V",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "67a8bc15-3745-4ad7-a941-7c46c6aba320",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 442,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2471b539-c033-455e-afbc-a6f153de733e",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 207,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "cb2b0936-4c62-499c-a8bb-3931fe941fa8",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 30,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TIMEOUT",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f1565772-04cf-4c69-85ef-4464348001f9",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "debug(Ljava/lang/String;[Ljava/lang/Object;)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TIMEOUT",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "14bb9374-e646-4146-8881-1819d303795b",
+      "startTime": 0,
+      "endTime": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 241,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  }
+]

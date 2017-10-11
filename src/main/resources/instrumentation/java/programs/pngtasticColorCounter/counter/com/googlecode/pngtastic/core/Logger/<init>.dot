@@ -1,8 +1,8 @@
 digraph <init> {
 node [shape=record];
 1086330138 [label="GETSTATIC counter/com/googlecode/pngtastic/core/Logger.LOG_LEVELS : Ljava/util/List;\lALOAD 1\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\lINVOKEINTERFACE java/util/List.contains (Ljava/lang/Object;)Z\lIFNE L3\l"];
-256206609 [label="L0\lLINENUMBER 22 L0\lLDC \"438e15dd-9f58-4bc9-b2f7-7c726ceb993b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
-1041115776 [label="L4\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger java/lang/String]\lPUTFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lLDC \"438e15dd-9f58-4bc9-b2f7-7c726ceb993b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+256206609 [label="L0\lLINENUMBER 22 L0\lLDC \"f6adbc24-1143-414c-ac1b-36b037038f8f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
+1041115776 [label="L4\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger java/lang/String]\lPUTFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lLDC \"f6adbc24-1143-414c-ac1b-36b037038f8f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 2118232767 [label="L2\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger]\lLDC \"NONE\"\lGOTO L4\l"];
 441957172 [label="L3\lFRAME SAME1 counter/com/googlecode/pngtastic/core/Logger\lALOAD 1\lL5\lLINENUMBER 24 L5\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\l"];
 entry;

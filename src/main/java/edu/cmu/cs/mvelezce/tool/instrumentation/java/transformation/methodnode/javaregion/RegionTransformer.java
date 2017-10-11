@@ -33,6 +33,8 @@ import java.util.*;
 
 public abstract class RegionTransformer extends BaseMethodTransformer {
 
+    private static final String CLINIT_SIGNATURE = "void <clinit>()";
+
     private String entryPoint;
     private String rootPackage;
     private Map<JavaRegion, Set<Set<String>>> regionsToOptionSet;
@@ -52,6 +54,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this.rootPackage = entryPoint.substring(0, entryPoint.indexOf("."));
         this.regionsToOptionSet = regionsToOptionSet;
         this.callGraph = this.buildCallGraph();
+
+        System.out.println("Call graph size: " + this.callGraph.size());
+
     }
 
     public RegionTransformer(String programName, String entryPoint, String directory, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
@@ -102,6 +107,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //            foo =false;
         }
 
+//        this.processMethodsInClasses(classNodes);
+
         System.out.println("# of regions before optimizing: " + initialRegionCount);
         System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
 
@@ -113,7 +120,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            System.out.println("Transforming class " + classNode.name);
+            System.out.println("Transforming class for instrumentation " + classNode.name);
 
             for(MethodNode methodToInstrument : methodsToInstrument) {
                 this.transformMethod(methodToInstrument);
@@ -191,7 +198,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            System.out.println("Transforming class " + classNode.name);
+            System.out.println("Transforming class to remove regions " + classNode.name);
 
             for(MethodNode methodNode : methodsToInstrument) {
                 updatedMethods = updatedMethods | this.processRegionsInMethod(methodNode);
@@ -218,7 +225,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            System.out.println("Transforming class " + classNode.name);
+            System.out.println("Transforming class after removing regions " + classNode.name);
 
             for(MethodNode methodNode : methodsToInstrument) {
                 updatedMethods = updatedMethods | this.processRegionsInMethodAfterRemovingRegions(methodNode);
@@ -262,6 +269,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         return updatedRegions;
+
+//        return false;
     }
 
     /**
@@ -863,13 +872,29 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             Set<JavaRegion> regionsWithCall = new HashSet<>();
             List<Edge> callerEdges = this.getCallerEdges(method);
 
+            if(method.getName().contains("expand")) {
+                System.out.print("");
+            }
+
             while (!callerEdges.isEmpty()) {
+                if(method.getName().contains("expand") && callerEdges.size() > 3) {
+                    for(Edge e : callerEdges) {
+                        System.out.println("caller: " + e.getSrc().method().getSignature());
+                    }
+                    throw new RuntimeException();
+                }
+
                 Edge outEdge = callerEdges.remove(0);
                 SootMethod callerMethod = outEdge.src();
 
                 List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
+                System.out.println(method.getSignature() + " " + callerEdges.size() + " " + worklist.size() + " " + callerMethod.getSignature() + " " + regionsInCaller.size());
 
                 if(regionsInCaller.isEmpty()) {
+                    if(callerMethod.getSubSignature().equals(RegionTransformer.CLINIT_SIGNATURE)) {
+                        continue;
+                    }
+
                     // Find regions higher in the call stack
                     List<Edge> edges = this.getCallerEdges(callerMethod);
 
@@ -935,6 +960,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     }
 
                     if(foundInRegion) {
+                        continue;
+                    }
+
+                    if(callerMethod.getSubSignature().equals(RegionTransformer.CLINIT_SIGNATURE)) {
                         continue;
                     }
 
@@ -1302,6 +1331,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         String className = sootMethod.getDeclaringClass().getShortName();
         String methodName = sootMethod.getBytecodeSignature();
         methodName = methodName.substring(methodName.indexOf(" "), methodName.length() - 1).trim();
+
+        System.out.println("find regions in method: " + classPackage + " " + className + " " + methodName);
 
         List<JavaRegion> javaRegions = new ArrayList<>();
 

@@ -89,7 +89,7 @@ public class MethodGraph {
     }
 
     public MethodBlock getImmediateDominator(MethodBlock start) {
-        System.out.println(this.toDotString("reverse"));
+//        System.out.println(this.toDotString("reverse"));
 
         this.getDominators();
         Set<MethodBlock> dominators = new HashSet<>(this.blocksToDominators.get(start));

@@ -1,15 +1,15 @@
 digraph error {
 node [shape=record];
-311770097 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-803224236 [label="L0\lLINENUMBER 52 L0\lLDC \"76f29cae-63e3-46e9-b964-816fbdd61507\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
-1783877201 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"76f29cae-63e3-46e9-b964-816fbdd61507\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+801845378 [label="L0\lLINENUMBER 52 L0\lLDC \"76f29cae-63e3-46e9-b964-816fbdd61507\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+2120027007 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1854820399 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"76f29cae-63e3-46e9-b964-816fbdd61507\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 803224236;
-311770097 -> 1783877201;
-803224236 -> 311770097;
-803224236 -> 1783877201;
-1783877201 -> exit;
-803224236[fontcolor="purple", penwidth=3, color="purple"];
-1783877201[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 801845378;
+801845378 -> 2120027007;
+801845378 -> 1854820399;
+2120027007 -> 1854820399;
+1854820399 -> exit;
+801845378[fontcolor="purple", penwidth=3, color="purple"];
+1854820399[fontcolor="purple", penwidth=3, color="purple"];
 }

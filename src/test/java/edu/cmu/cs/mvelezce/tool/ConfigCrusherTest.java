@@ -48,6 +48,27 @@ public class ConfigCrusherTest {
     }
 
     @Test
+    public void optimizer() throws Exception {
+        String programName = "pngtasticOptimizer";
+        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer";
+        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
+        String entry = "counter.com.googlecode.pngtastic.Run";
+
+        String[] args = new String[0];
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
+        approach.compile();
+        PerformanceModel performanceModel = approach.run(args);
+
+        performanceModel.toString();
+    }
+
+    @Test
     public void regions12() throws Exception {
         String programName = "regions12";
         String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";

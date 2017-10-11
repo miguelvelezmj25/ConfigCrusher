@@ -1,20 +1,20 @@
 digraph <init> {
 node [shape=record];
-1152954043 [label="L0\lLINENUMBER 22 L0\lLDC \"fe33e381-b2ec-4d80-92a2-06f6765cb6c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
-1440644000 [label="L3\lFRAME SAME1 optimizer/com/googlecode/pngtastic/core/Logger\lALOAD 1\lL5\lLINENUMBER 24 L5\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\l"];
-284411337 [label="GETSTATIC optimizer/com/googlecode/pngtastic/core/Logger.LOG_LEVELS : Ljava/util/List;\lALOAD 1\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\lINVOKEINTERFACE java/util/List.contains (Ljava/lang/Object;)Z\lIFNE L3\l"];
-513427623 [label="L2\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/Logger java/lang/String] [optimizer/com/googlecode/pngtastic/core/Logger]\lLDC \"NONE\"\lGOTO L4\l"];
-1418906326 [label="L4\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/Logger java/lang/String] [optimizer/com/googlecode/pngtastic/core/Logger java/lang/String]\lPUTFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lLDC \"fe33e381-b2ec-4d80-92a2-06f6765cb6c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1889095842 [label="L0\lLINENUMBER 22 L0\lLDC \"fe33e381-b2ec-4d80-92a2-06f6765cb6c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
+467672148 [label="L3\lFRAME SAME1 optimizer/com/googlecode/pngtastic/core/Logger\lALOAD 1\lL5\lLINENUMBER 24 L5\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\l"];
+1655234845 [label="GETSTATIC optimizer/com/googlecode/pngtastic/core/Logger.LOG_LEVELS : Ljava/util/List;\lALOAD 1\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\lINVOKEINTERFACE java/util/List.contains (Ljava/lang/Object;)Z\lIFNE L3\l"];
+356500145 [label="L2\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/Logger java/lang/String] [optimizer/com/googlecode/pngtastic/core/Logger]\lLDC \"NONE\"\lGOTO L4\l"];
+566645706 [label="L4\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/Logger java/lang/String] [optimizer/com/googlecode/pngtastic/core/Logger java/lang/String]\lPUTFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lLDC \"fe33e381-b2ec-4d80-92a2-06f6765cb6c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 1152954043;
-1152954043 -> 284411337;
-1152954043 -> 513427623;
-1440644000 -> 1418906326;
-284411337 -> 1440644000;
-284411337 -> 513427623;
-513427623 -> 1418906326;
-1418906326 -> exit;
-1152954043[fontcolor="purple", penwidth=3, color="purple"];
-1418906326[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1889095842;
+1889095842 -> 1655234845;
+1889095842 -> 356500145;
+467672148 -> 566645706;
+1655234845 -> 467672148;
+1655234845 -> 356500145;
+356500145 -> 566645706;
+566645706 -> exit;
+1889095842[fontcolor="purple", penwidth=3, color="purple"];
+566645706[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -27,7 +27,13 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
 
     public DefaultPerformanceEntry(Execution execution) {
         this.configuration = execution.getConfiguration();
-        execution.getRegionsToProcessedPerformance();
+        Map<String, Long> regionsToPerf = execution.getRegionsToProcessedPerformance();
+
+        for(Map.Entry<String, Long> entry : regionsToPerf.entrySet()) {
+            Region region = new Region(entry.getKey());
+            this.regionsToProcessedPerformance.put(region, entry.getValue());
+        }
+
 //        List<Region> trace = execution.getTrace();
 //
 //        this.calculatePerformance(trace);
@@ -35,7 +41,7 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
 //        this.calculateProcessedPerformance(trace);
 //
 //        this.regionsToRawPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToRawPerformance);
-//        this.regionsToProcessedPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToProcessedPerformance);
+        this.regionsToProcessedPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToProcessedPerformance);
     }
 
 //    public DefaultPerformanceEntry(Execution execution) {

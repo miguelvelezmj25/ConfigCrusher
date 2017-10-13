@@ -17,6 +17,8 @@ public class Regions {
     private static Stack<Long> innerRegionsExecutionTime = new Stack<>();
     private static Map<String, Long> regionsToProcessedPerformance = new HashMap<>();
 
+    private static Map<String, Long> regionsToCount = new HashMap<>();
+
     public static void main(String[] args) {
         System.out.println("Started");
         long start = System.nanoTime();
@@ -34,60 +36,68 @@ public class Regions {
         System.out.println(time / 1000000000.0);
     }
 
-//    public static void enter(RegionID regionID) {
-//        long start = System.nanoTime();
-//        executingRegionsStart.push(start);
-//
-//        Regions.executingRegions.push(regionID.toString());
-//        Regions.innerRegionsExecutionTime.push(0L);
-//        Regions.startCount++;
-//    }
-
     public static void enter(String id) {
-        long start = System.nanoTime();
-        executingRegionsStart.push(start);
-
-        Regions.executingRegions.push(id);
-        Regions.innerRegionsExecutionTime.push(0L);
+//        long start = System.nanoTime();
+//        Regions.executingRegions.push(id);
+//        Regions.executingRegionsStart.push(start);
+//        Regions.innerRegionsExecutionTime.push(0L);
+//
         Regions.startCount++;
+
+
+        Long count = Regions.regionsToCount.get(id);
+
+        if(count == null) {
+            count = 0L;
+        }
+
+        Regions.regionsToCount.put(id, count + 1L);
 
     }
 
     public static void exit(String id) {
-        long end = System.nanoTime();
-        long start = executingRegionsStart.pop();
-        long innerTime = innerRegionsExecutionTime.pop();
-        long regionExecutionTime = end - start - innerTime;
-        long currentRegionExecutionTime = regionExecutionTime;
-
-        String region = Regions.executingRegions.pop();
-        Long time = regionsToProcessedPerformance.get(region);
-
-        if(time != null) {
-            regionExecutionTime += time;
-        }
-
-        regionsToProcessedPerformance.put(region, regionExecutionTime);
-
+//        long end = System.nanoTime();
+//        long start = Regions.executingRegionsStart.pop();
+//        long innerTime = Regions.innerRegionsExecutionTime.pop();
+//        long regionExecutionTime = end - start - innerTime;
+//        long currentRegionExecutionTime = regionExecutionTime;
+//
+//        String region = Regions.executingRegions.pop();
+//        Long time = regionsToProcessedPerformance.get(region);
+//
+//        if(time != null) {
+//            regionExecutionTime += time;
+//        }
+//
+//        regionsToProcessedPerformance.put(region, regionExecutionTime);
+//
         Regions.endCount++;
-
-        if(executingRegions.isEmpty()) {
-            return;
-        }
-
-        Stack<Long> added = new Stack<>();
-
-        while (!innerRegionsExecutionTime.isEmpty()) {
-            long currentInnerRegionExecutionTime = innerRegionsExecutionTime.pop();
-            added.push(currentInnerRegionExecutionTime + currentRegionExecutionTime);
-        }
-
-        while (!added.isEmpty()) {
-            innerRegionsExecutionTime.push(added.pop());
-        }
+//
+////        for(Long l : Regions.innerRegionsExecutionTime) {
+////            l = l + currentRegionExecutionTime;
+////        }
+//
+//        if(executingRegions.isEmpty()) {
+//            return;
+//        }
+//
+//        Stack<Long> added = new Stack<>();
+//
+//        while (!innerRegionsExecutionTime.isEmpty()) {
+//            long currentInnerRegionExecutionTime = innerRegionsExecutionTime.pop();
+//            added.push(currentInnerRegionExecutionTime + currentRegionExecutionTime);
+//        }
+//
+//        while (!added.isEmpty()) {
+//            innerRegionsExecutionTime.push(added.pop());
+//        }
     }
 
     public static Map<String, Long> getRegionsToProcessedPerformance() {
-        return regionsToProcessedPerformance;
+        return regionsToCount;
     }
+
+//    public static Map<String, Long> getRegionsToProcessedPerformance() {
+//        return regionsToProcessedPerformance;
+//    }
 }

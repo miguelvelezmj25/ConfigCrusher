@@ -1,38 +1,38 @@
 digraph addChunk {
 node [shape=record];
-1577223190 [label="ICONST_0\lISTORE 3\lGOTO L3\l"];
-438559513 [label="L6\lLINENUMBER 190 L6\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngImage.chunks : Ljava/util/List;\lALOAD 1\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL12\lLINENUMBER 191 L12\lLDC \"e92112e1-b0e5-4b4f-821e-c61680f410fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1484268933 [label="L0\lLINENUMBER 176 L0\lLDC \"e92112e1-b0e5-4b4f-821e-c61680f410fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getTypeString ()Ljava/lang/String;\lASTORE 2\lICONST_M1\lISTORE 3\lALOAD 2\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lLOOKUPSWITCH
+381867730 [label="ICONST_0\lISTORE 3\lGOTO L3\l"];
+735957741 [label="ICONST_1\lISTORE 3\l"];
+2067781370 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getWidth ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.width : J\lL7\lLINENUMBER 179 L7\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getHeight ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.height : J\lL8\lLINENUMBER 180 L8\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getBitDepth ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.bitDepth : S\lL9\lLINENUMBER 181 L9\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getColorType ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.colorType : S\lL10\lLINENUMBER 182 L10\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getInterlace ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.interlace : S\lL11\lLINENUMBER 183 L11\lGOTO L6\l"];
+1529964620 [label="L0\lLINENUMBER 176 L0\lLDC \"ef592ee5-c086-4b8c-94bc-f5e2f095a3f2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getTypeString ()Ljava/lang/String;\lASTORE 2\lICONST_M1\lISTORE 3\lALOAD 2\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lLOOKUPSWITCH
       2246125: L1
       2458989: L2
       default: L3\l"];
-603879751 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getWidth ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.width : J\lL7\lLINENUMBER 179 L7\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getHeight ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.height : J\lL8\lLINENUMBER 180 L8\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getBitDepth ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.bitDepth : S\lL9\lLINENUMBER 181 L9\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getColorType ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.colorType : S\lL10\lLINENUMBER 182 L10\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getInterlace ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.interlace : S\lL11\lLINENUMBER 183 L11\lGOTO L6\l"];
-1675767349 [label="L1\lFRAME APPEND [java/lang/String I]\lALOAD 2\lLDC \"IHDR\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
-1757604786 [label="ICONST_1\lISTORE 3\l"];
-459645558 [label="L3\lFRAME SAME\lILOAD 3\lLOOKUPSWITCH
+817851970 [label="L6\lLINENUMBER 190 L6\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngImage.chunks : Ljava/util/List;\lALOAD 1\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL12\lLINENUMBER 191 L12\lLDC \"ef592ee5-c086-4b8c-94bc-f5e2f095a3f2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1019227219 [label="L3\lFRAME SAME\lILOAD 3\lLOOKUPSWITCH
       0: L4
       1: L5
       default: L6\l"];
-1196414327 [label="L2\lFRAME SAME\lALOAD 2\lLDC \"PLTE\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
-1771469594 [label="L5\lLINENUMBER 186 L5\lFRAME SAME\lALOAD 0\lALOAD 1\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.palette : Loptimizer/com/googlecode/pngtastic/core/PngChunk;\l"];
+1189197130 [label="L2\lFRAME SAME\lALOAD 2\lLDC \"PLTE\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
+1962795156 [label="L1\lFRAME APPEND [java/lang/String I]\lALOAD 2\lLDC \"IHDR\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
+2076961545 [label="L5\lLINENUMBER 186 L5\lFRAME SAME\lALOAD 0\lALOAD 1\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.palette : Loptimizer/com/googlecode/pngtastic/core/PngChunk;\l"];
 entry;
 exit;
-entry -> 1484268933;
-1577223190 -> 459645558;
-438559513 -> exit;
-1484268933 -> 1675767349;
-1484268933 -> 459645558;
-1484268933 -> 1196414327;
-603879751 -> 438559513;
-1675767349 -> 1577223190;
-1675767349 -> 459645558;
-1757604786 -> 459645558;
-459645558 -> 438559513;
-459645558 -> 603879751;
-459645558 -> 1771469594;
-1196414327 -> 1757604786;
-1196414327 -> 459645558;
-1771469594 -> 438559513;
-438559513[fontcolor="purple", penwidth=3, color="purple"];
-1484268933[fontcolor="purple", penwidth=3, color="purple"];
+381867730 -> 1019227219;
+735957741 -> 1019227219;
+entry -> 1529964620;
+2067781370 -> 817851970;
+1529964620 -> 1019227219;
+1529964620 -> 1189197130;
+1529964620 -> 1962795156;
+817851970 -> exit;
+1019227219 -> 2067781370;
+1019227219 -> 817851970;
+1019227219 -> 2076961545;
+1189197130 -> 735957741;
+1189197130 -> 1019227219;
+1962795156 -> 381867730;
+1962795156 -> 1019227219;
+2076961545 -> 817851970;
+1529964620[fontcolor="purple", penwidth=3, color="purple"];
+817851970[fontcolor="purple", penwidth=3, color="purple"];
 }

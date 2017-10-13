@@ -1,8 +1,8 @@
 digraph <init> {
 node [shape=record];
 216917770 [label="GETSTATIC counter/com/googlecode/pngtastic/core/Logger.LOG_LEVELS : Ljava/util/List;\lALOAD 1\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\lINVOKEINTERFACE java/util/List.contains (Ljava/lang/Object;)Z\lIFNE L3\l"];
-709215984 [label="L4\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger java/lang/String]\lPUTFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lLDC \"d2416e59-845e-49a6-9f5e-7f0abfeb340f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1299269484 [label="L0\lLINENUMBER 22 L0\lLDC \"d2416e59-845e-49a6-9f5e-7f0abfeb340f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
+709215984 [label="L4\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger java/lang/String]\lPUTFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lLDC \"1906a3e0-1ff7-4d30-9727-8b1e4ff72b13\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1299269484 [label="L0\lLINENUMBER 22 L0\lLDC \"1906a3e0-1ff7-4d30-9727-8b1e4ff72b13\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
 307513248 [label="L2\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger]\lLDC \"NONE\"\lGOTO L4\l"];
 1841866242 [label="L3\lFRAME SAME1 counter/com/googlecode/pngtastic/core/Logger\lALOAD 1\lL5\lLINENUMBER 24 L5\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\l"];
 entry;

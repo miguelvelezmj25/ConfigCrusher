@@ -93,9 +93,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         int initialRegionCount = this.regionsToOptionSet.size();
         // Remove regions
-        boolean foo = true;
+        boolean updatedRegionsPostProcessing = true;
 
-        while (foo) {
+        while (updatedRegionsPostProcessing) {
             boolean updatedRegions = true;
 
             while (updatedRegions) {
@@ -103,7 +103,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 updatedRegions = updatedRegions | this.processGraph(methods);
             }
 
-            foo = this.processMethodsInClassesAfterRemovingRegions(classNodes);
+            updatedRegionsPostProcessing = this.processMethodsInClassesAfterRemovingRegions(classNodes);
 //            foo =false;
         }
 

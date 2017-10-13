@@ -872,23 +872,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             Set<JavaRegion> regionsWithCall = new HashSet<>();
             List<Edge> callerEdges = this.getCallerEdges(method);
 
-            if(method.getName().contains("expand")) {
+            if(method.getName().contains("addChunk")) {
                 System.out.print("");
             }
 
             while (!callerEdges.isEmpty()) {
-                if(method.getName().contains("expand") && callerEdges.size() > 3) {
-                    for(Edge e : callerEdges) {
-                        System.out.println("caller: " + e.getSrc().method().getSignature());
-                    }
-                    throw new RuntimeException();
-                }
-
                 Edge outEdge = callerEdges.remove(0);
                 SootMethod callerMethod = outEdge.src();
-
                 List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
-                System.out.println(method.getSignature() + " " + callerEdges.size() + " " + worklist.size() + " " + callerMethod.getSignature() + " " + regionsInCaller.size());
 
                 if(regionsInCaller.isEmpty()) {
                     if(callerMethod.getSubSignature().equals(RegionTransformer.CLINIT_SIGNATURE)) {
@@ -1331,8 +1322,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         String className = sootMethod.getDeclaringClass().getShortName();
         String methodName = sootMethod.getBytecodeSignature();
         methodName = methodName.substring(methodName.indexOf(" "), methodName.length() - 1).trim();
-
-        System.out.println("find regions in method: " + classPackage + " " + className + " " + methodName);
 
         List<JavaRegion> javaRegions = new ArrayList<>();
 

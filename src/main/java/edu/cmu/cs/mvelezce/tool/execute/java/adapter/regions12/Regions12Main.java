@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12;
 
-import edu.cmu.cs.mvelezce.Example;
 import edu.cmu.cs.mvelezce.Regions12;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
@@ -16,7 +15,7 @@ import java.util.Set;
 
 public class Regions12Main extends BaseMain {
 
-    public static final String REGIONS_12_MAIN = Regions12Main.class.getCanonicalName();
+    public static final String REGIONS_12_MAIN = edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Main.class.getCanonicalName();
 
     public Regions12Main(String programName, String iteration, String[] args) {
         super(programName, iteration, args);
@@ -28,7 +27,7 @@ public class Regions12Main extends BaseMain {
         String iteration = args[2];
         String[] sleepArgs = Arrays.copyOfRange(args, 3, args.length);
 
-        Main main = new Regions12Main(programName, iteration, sleepArgs);
+        Main main = new edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Main(programName, iteration, sleepArgs);
         main.execute(mainClass, sleepArgs);
         main.logExecution();
     }
@@ -39,7 +38,7 @@ public class Regions12Main extends BaseMain {
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
         Executor executor = new ConfigCrusherExecutor(this.getProgramName());
-        executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
+        executor.writeToFile(this.getIteration(), configuration, Regions.getRegionsToProcessedPerformance());
     }
 
     @Override
@@ -55,6 +54,6 @@ public class Regions12Main extends BaseMain {
         }
 
         System.out.println("start count " + Regions.startCount);
-        System.out.println("end count " + Regions.endCound);
+        System.out.println("end count " + Regions.endCount);
     }
 }

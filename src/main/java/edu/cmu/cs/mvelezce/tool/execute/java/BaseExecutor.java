@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.region.RegionID;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
@@ -263,17 +264,30 @@ public abstract class BaseExecutor implements Executor {
     }
 
     @Override
-    public void writeToFile(String iteration, Set<String> configuration, List<Region> executedRegions) throws IOException {
+    public void writeToFile(String iteration, Set<String> configuration, Map<String, Long> regionsToProcessedPerformance) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String outputFile = BaseExecutor.DIRECTORY + "/" + this.programName + "/" + iteration + "/" + UUID.randomUUID()
                 + Options.DOT_JSON;
         File file = new File(outputFile);
         file.getParentFile().mkdirs();
 
-        Execution execution = new Execution(configuration, executedRegions);
+        Execution execution = new Execution(configuration, regionsToProcessedPerformance);
         mapper.writeValue(file, execution);
-        execution.checkTrace();
+//        execution.checkTrace();
     }
+
+//    @Override
+//    public void writeToFile(String iteration, Set<String> configuration, List<Region> executedRegions) throws IOException {
+//        ObjectMapper mapper = new ObjectMapper();
+//        String outputFile = BaseExecutor.DIRECTORY + "/" + this.programName + "/" + iteration + "/" + UUID.randomUUID()
+//                + Options.DOT_JSON;
+//        File file = new File(outputFile);
+//        file.getParentFile().mkdirs();
+//
+//        Execution execution = new Execution(configuration, executedRegions);
+//        mapper.writeValue(file, execution);
+////        execution.checkTrace();
+//    }
 
     @Override
     public DefaultPerformanceEntry readFromFile(File file) throws IOException {
@@ -281,7 +295,7 @@ public abstract class BaseExecutor implements Executor {
         Execution execution = mapper.readValue(file, new TypeReference<Execution>() {
         });
 
-        execution.checkTrace();
+//        execution.checkTrace();
         DefaultPerformanceEntry performanceEntry = new DefaultPerformanceEntry(execution);
 
         return performanceEntry;

@@ -24,6 +24,11 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
     @Override
     public void transformMethod(MethodNode methodNode) {
+//        if(methodNode.name.contains("addChunk")) {
+//            return;
+//        }
+
+
         // TODO use the graph that we already have
         System.out.println("Before transforming");
         DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
@@ -102,7 +107,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
     @Override
     public InsnList getInstructionsStartRegion(JavaRegion javaRegion) {
         InsnList instructionsStartRegion = new InsnList();
-        instructionsStartRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
+        instructionsStartRegion.add(new LdcInsnNode(javaRegion.getRegionID().toString()));
         instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "enter", "(Ljava/lang/String;)V", false));
 
         return instructionsStartRegion;
@@ -111,7 +116,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
     @Override
     public InsnList getInstructionsEndRegion(JavaRegion javaRegion) {
         InsnList instructionsEndRegion = new InsnList();
-        instructionsEndRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
+        instructionsEndRegion.add(new LdcInsnNode(javaRegion.getRegionID().toString()));
         instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "exit", "(Ljava/lang/String;)V", false));
 
         return instructionsEndRegion;

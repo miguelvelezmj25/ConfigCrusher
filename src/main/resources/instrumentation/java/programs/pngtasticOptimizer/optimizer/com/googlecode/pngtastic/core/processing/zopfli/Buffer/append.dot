@@ -1,15 +1,15 @@
 digraph append {
 node [shape=record];
-683489691 [label="L1\lLINENUMBER 37 L1\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.data : [B\lALOAD 0\lDUP\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lDUP_X1\lICONST_1\lIADD\lPUTFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lILOAD 1\lBASTORE\lL5\lLINENUMBER 38 L5\lLDC \"23f77d15-422e-49e9-90fc-e8b5c41dedc6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1244600539 [label="L0\lLINENUMBER 32 L0\lLDC \"23f77d15-422e-49e9-90fc-e8b5c41dedc6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.data : [B\lARRAYLENGTH\lIF_ICMPNE L1\l"];
-1762577989 [label="L2\lLINENUMBER 33 L2\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lICONST_2\lIMUL\lNEWARRAY T_BYTE\lASTORE 2\lL3\lLINENUMBER 34 L3\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.data : [B\lICONST_0\lALOAD 2\lICONST_0\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lINVOKESTATIC java/lang/System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V\lL4\lLINENUMBER 35 L4\lALOAD 0\lALOAD 2\lPUTFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.data : [B\l"];
+495848700 [label="L0\lLINENUMBER 32 L0\lLDC \"23f77d15-422e-49e9-90fc-e8b5c41dedc6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.data : [B\lARRAYLENGTH\lIF_ICMPNE L1\l"];
+927675315 [label="L2\lLINENUMBER 33 L2\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lICONST_2\lIMUL\lNEWARRAY T_BYTE\lASTORE 2\lL3\lLINENUMBER 34 L3\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.data : [B\lICONST_0\lALOAD 2\lICONST_0\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lINVOKESTATIC java/lang/System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V\lL4\lLINENUMBER 35 L4\lALOAD 0\lALOAD 2\lPUTFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.data : [B\l"];
+561822941 [label="L1\lLINENUMBER 37 L1\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.data : [B\lALOAD 0\lDUP\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lDUP_X1\lICONST_1\lIADD\lPUTFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lILOAD 1\lBASTORE\lL5\lLINENUMBER 38 L5\lLDC \"23f77d15-422e-49e9-90fc-e8b5c41dedc6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-683489691 -> exit;
-entry -> 1244600539;
-1244600539 -> 683489691;
-1244600539 -> 1762577989;
-1762577989 -> 683489691;
-683489691[fontcolor="purple", penwidth=3, color="purple"];
-1244600539[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 495848700;
+495848700 -> 927675315;
+495848700 -> 561822941;
+927675315 -> 561822941;
+561822941 -> exit;
+495848700[fontcolor="purple", penwidth=3, color="purple"];
+561822941[fontcolor="purple", penwidth=3, color="purple"];
 }

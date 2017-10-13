@@ -230,7 +230,7 @@ public class SleepMain extends BaseMain {
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
         Executor executor = new ConfigCrusherExecutor(this.getProgramName());
-        executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
+        executor.writeToFile(this.getIteration(), configuration, Regions.getRegionsToProcessedPerformance());
     }
 
     @Override

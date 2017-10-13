@@ -79,8 +79,12 @@ public abstract class BaseAdapter implements Adapter {
         StringBuilder output = new StringBuilder();
         List<String> commandList = new ArrayList<>();
         commandList.add("java");
+//        commandList.add("-server");
         commandList.add("-Xms10G");
         commandList.add("-Xmx10G");
+//        commandList.add("-XX:MetaspaceSize=10G");
+//        commandList.add("-XX:MaxMetaspaceSize=10G");
+//        commandList.add("-Xmn10G");
         commandList.add("-XX:+UseConcMarkSweepGC");
         commandList.add("-cp");
         commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
@@ -99,7 +103,8 @@ public abstract class BaseAdapter implements Adapter {
 
         while ((string = inputReader.readLine()) != null) {
             if(!string.isEmpty()) {
-                output.append(string).append("\n");
+                System.out.println(string);
+//                output.append(string).append("\n");
             }
         }
 
@@ -110,7 +115,8 @@ public abstract class BaseAdapter implements Adapter {
 
         while ((string = errorReader.readLine()) != null) {
             if(!string.isEmpty()) {
-                output.append(string).append("\n");
+                System.out.println(string);
+//                output.append(string).append("\n");
             }
         }
 

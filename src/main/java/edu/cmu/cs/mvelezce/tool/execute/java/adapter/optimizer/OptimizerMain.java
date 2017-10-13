@@ -38,7 +38,7 @@ public class OptimizerMain extends BaseMain {
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
         Executor executor = new ConfigCrusherExecutor(this.getProgramName());
-        executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
+        executor.writeToFile(this.getIteration(), configuration, Regions.getRegionsToProcessedPerformance());
     }
 
     @Override
@@ -54,6 +54,6 @@ public class OptimizerMain extends BaseMain {
         }
 
         System.out.println("start count " + Regions.startCount);
-        System.out.println("end count " + Regions.endCound);
+        System.out.println("end count " + Regions.endCount);
     }
 }

@@ -8,13 +8,15 @@ import java.util.UUID;
 public class Region {
 
     private String regionID;
-    private long startTime = 0;
-    private long endTime = 0;
+    private long startTime = -1;
+    private long endTime = -1;
+    private long duration = -1;
 
     public Region(String regionID, long startTime, long endTime) {
         this.regionID = regionID;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.duration = endTime - startTime;
     }
 
     public Region(String regionID) {
@@ -24,22 +26,6 @@ public class Region {
     public Region() {
         this(UUID.randomUUID().toString());
     }
-
-//    public static long getExecutionTime(long startTime, long endTime) {
-//        return endTime - startTime;
-//    }
-
-//    public static double getMilliExecutionTime(long startTime, long endTime) {
-//        return Region.getExecutionTime(startTime, endTime) / 1000000.0;
-//    }
-//
-//    public static double getSecondsExecutionTime(long startTime, long endTime) {
-//        return Region.getMilliExecutionTime(startTime, endTime) / 1000.0;
-//    }
-//
-//    public static long toNanoTime(int time) {
-//        return ((long) time) * 1000000000;
-//    }
 
 //    private void enterRegion() {
 //        Regions.addExecutingRegion(this);
@@ -87,11 +73,12 @@ public class Region {
                 "regionID='" + regionID + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
+                ", duration=" + duration +
                 '}';
     }
 
     public String getRegionID() {
-        return this.regionID;
+        return regionID;
     }
 
     public long getStartTime() {
@@ -100,5 +87,13 @@ public class Region {
 
     public long getEndTime() {
         return this.endTime;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
     }
 }

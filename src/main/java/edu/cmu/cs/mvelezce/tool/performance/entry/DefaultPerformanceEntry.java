@@ -27,15 +27,28 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
 
     public DefaultPerformanceEntry(Execution execution) {
         this.configuration = execution.getConfiguration();
-        List<Region> trace = execution.getTrace();
-
-        this.calculatePerformance(trace);
-        this.calculateInnerRegions(trace);
-        this.calculateProcessedPerformance(trace);
-
-        this.regionsToRawPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToRawPerformance);
-        this.regionsToProcessedPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToProcessedPerformance);
+        execution.getRegionsToProcessedPerformance();
+//        List<Region> trace = execution.getTrace();
+//
+//        this.calculatePerformance(trace);
+//        this.calculateInnerRegions(trace);
+//        this.calculateProcessedPerformance(trace);
+//
+//        this.regionsToRawPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToRawPerformance);
+//        this.regionsToProcessedPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToProcessedPerformance);
     }
+
+//    public DefaultPerformanceEntry(Execution execution) {
+//        this.configuration = execution.getConfiguration();
+//        List<Region> trace = execution.getTrace();
+//
+//        this.calculatePerformance(trace);
+//        this.calculateInnerRegions(trace);
+//        this.calculateProcessedPerformance(trace);
+//
+//        this.regionsToRawPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToRawPerformance);
+//        this.regionsToProcessedPerformanceHumanReadable = DefaultPerformanceEntry.toHumanReadable(this.regionsToProcessedPerformance);
+//    }
 
     /**
      * The assumption is that the value of type long is in nanoseconds.

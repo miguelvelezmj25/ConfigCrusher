@@ -41,7 +41,7 @@ public class InstrumentVisitor extends ReplacerVisitor {
         Statement visitedProgram = super.visitProgram(program);
 
         SleepRegion region = new SleepRegion(program.getBlockStatement());
-        TimedProgram timedProgram = new TimedProgram(region.getRegionID(), visitedProgram);
+        TimedProgram timedProgram = new TimedProgram(region.getRegionID().toString(), visitedProgram);
 //        Regions.addProgram(region);
 
         return timedProgram;
@@ -69,7 +69,7 @@ public class InstrumentVisitor extends ReplacerVisitor {
 
 //                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
             IfStatement hold = (IfStatement) visitedIfStatement;
-            TimedStatement timedStatement = new TimedStatement(region.getRegionID(), hold.getThenBlock());
+            TimedStatement timedStatement = new TimedStatement(region.getRegionID().toString(), hold.getThenBlock());
             return new IfStatement(hold.getCondition(), timedStatement);
 //                }
         }
@@ -98,7 +98,7 @@ public class InstrumentVisitor extends ReplacerVisitor {
 //                this.constraints.pop();
 
 //                if(!this.constraints.contains(this.relevantRegionsToOptions.get(oldRegion))) {
-            return new TimedStatement(region.getRegionID(), visitedSleepStatement);
+            return new TimedStatement(region.getRegionID().toString(), visitedSleepStatement);
 //                }
         }
 

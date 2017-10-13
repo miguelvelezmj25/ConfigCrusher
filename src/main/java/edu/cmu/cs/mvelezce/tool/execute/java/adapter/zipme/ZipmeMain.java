@@ -37,7 +37,7 @@ public class ZipmeMain {
         if(success) {
             Set<String> performanceConfiguration = ZipmeAdapter.adaptConfigurationToPerformanceMeasurement(zipmeArgs);
             Executor executor = new ConfigCrusherExecutor();
-            executor.writeToFile(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
+            executor.writeToFile(programName, performanceConfiguration, Regions.getRegionsToProcessedPerformance());
         }
     }
 }

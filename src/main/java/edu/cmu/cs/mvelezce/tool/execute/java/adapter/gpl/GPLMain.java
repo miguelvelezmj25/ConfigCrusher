@@ -30,6 +30,6 @@ public class GPLMain {
 
         Set<String> performanceConfiguration = GPLAdapter.adaptConfigurationToPerformanceMeasurement(gplArgs);
         Executor executor = new ConfigCrusherExecutor();
-        executor.writeToFile(programName, performanceConfiguration, Regions.getExecutedRegionsTrace());
+        executor.writeToFile(programName, performanceConfiguration, Regions.getRegionsToProcessedPerformance());
     }
 }

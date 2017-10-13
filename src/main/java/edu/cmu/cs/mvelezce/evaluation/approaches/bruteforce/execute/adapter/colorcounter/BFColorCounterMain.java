@@ -37,7 +37,7 @@ public class BFColorCounterMain extends ColorCounterMain {
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
         Executor executor = new BruteForceExecutor(this.getProgramName());
-        executor.writeToFile(this.getIteration(), configuration, Regions.getExecutedRegionsTrace());
+        executor.writeToFile(this.getIteration(), configuration, Regions.getRegionsToProcessedPerformance());
     }
 
 }

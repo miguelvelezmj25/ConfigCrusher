@@ -69,7 +69,7 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
 
         for(Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionsSet : relevantRegionsToOptions.entrySet()) {
             JavaRegion oldRegion = regionToOptionsSet.getKey();
-            JavaRegion newRegion = new JavaRegion(oldRegion.getRegionID(), oldRegion.getRegionPackage(),
+            JavaRegion newRegion = new JavaRegion(oldRegion.getRegionID().toString(), oldRegion.getRegionPackage(),
                     oldRegion.getRegionClass(), oldRegion.getRegionMethod(), oldRegion.getStartBytecodeIndex());
             DecisionAndOptions decisionAndOptions = new DecisionAndOptions(newRegion, regionToOptionsSet.getValue());
             decisionsAndOptions.add(decisionAndOptions);

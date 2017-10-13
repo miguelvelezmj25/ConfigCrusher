@@ -1,15 +1,15 @@
 digraph debug {
 node [shape=record];
-1385126480 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"3582cde6-2ed5-4893-b462-ee2fc909df3d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-475068715 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1033136890 [label="L0\lLINENUMBER 32 L0\lLDC \"3582cde6-2ed5-4893-b462-ee2fc909df3d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+871849759 [label="L0\lLINENUMBER 32 L0\lLDC \"6bef8955-63eb-415e-8b90-2bf286e71e57\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+437142147 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"6bef8955-63eb-415e-8b90-2bf286e71e57\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+296031588 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
 entry;
 exit;
-entry -> 1033136890;
-1385126480 -> exit;
-475068715 -> 1385126480;
-1033136890 -> 1385126480;
-1033136890 -> 475068715;
-1385126480[fontcolor="purple", penwidth=3, color="purple"];
-1033136890[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 871849759;
+871849759 -> 437142147;
+871849759 -> 296031588;
+437142147 -> exit;
+296031588 -> 437142147;
+871849759[fontcolor="purple", penwidth=3, color="purple"];
+437142147[fontcolor="purple", penwidth=3, color="purple"];
 }

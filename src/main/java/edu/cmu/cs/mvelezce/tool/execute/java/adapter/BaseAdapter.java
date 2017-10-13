@@ -98,6 +98,7 @@ public abstract class BaseAdapter implements Adapter {
         System.out.println(Arrays.toString(command));
         Process process = Runtime.getRuntime().exec(command);
 
+        System.out.println("Output: ");
         BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String string;
 
@@ -110,6 +111,7 @@ public abstract class BaseAdapter implements Adapter {
 
         System.out.println(output);
 
+        System.out.println("Errors: ");
         output = new StringBuilder();
         BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 

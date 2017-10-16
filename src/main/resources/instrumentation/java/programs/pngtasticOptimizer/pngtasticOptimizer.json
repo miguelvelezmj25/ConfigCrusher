@@ -1,22 +1,21 @@
 [
   {
     "region": {
-      "regionID": "4af146cb-fc57-49e7-9562-b15d534d22f8",
+      "regionID": "30abe072-bf96-4824-88fe-43e5861ef8b2",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "optimizer.com.googlecode.pngtastic.core",
       "regionClass": "PngOptimizer",
-      "regionMethod": "optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/lang/Integer;)Loptimizer/com/googlecode/pngtastic/core/PngImage;",
+      "regionMethod": "optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;Ljava/lang/String;ZLjava/lang/Integer;)V",
       "startBytecodeIndex": -2147483648,
       "startMethodBlock": null,
       "endMethodBlocks": []
     },
     "options": [
       [
-        "COMPRESSOR",
-        "ITERATIONS",
-        "LOGLEVEL"
+        "LOGLEVEL",
+        "REMOVEGAMMA"
       ]
     ]
   },
@@ -41,13 +40,13 @@
   },
   {
     "region": {
-      "regionID": "c311ca72-83a5-4f65-bec4-016ab8d473fd",
+      "regionID": "4076b3f9-0518-40b7-8fc2-857a02fef7c4",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
-      "regionClass": "Deflate",
-      "regionMethod": "compress(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Options;[BLoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V",
+      "regionPackage": "optimizer.com.googlecode.pngtastic",
+      "regionClass": "PngtasticOptimizer",
+      "regionMethod": "<init>(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;)V",
       "startBytecodeIndex": -2147483648,
       "startMethodBlock": null,
       "endMethodBlocks": []
@@ -55,7 +54,29 @@
     "options": [
       [
         "COMPRESSOR",
-        "ITERATIONS"
+        "ITERATIONS",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1a0977c7-dfba-45cb-b42b-fc0279e751eb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "PngOptimizer",
+      "regionMethod": "optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/lang/Integer;)Loptimizer/com/googlecode/pngtastic/core/PngImage;",
+      "startBytecodeIndex": -2147483648,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "COMPRESSIONLEVEL"
       ]
     ]
   },
@@ -80,48 +101,6 @@
   },
   {
     "region": {
-      "regionID": "b91a70bc-68ec-4efc-9015-5bd5bc5f26aa",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "optimizer.com.googlecode.pngtastic",
-      "regionClass": "PngtasticOptimizer",
-      "regionMethod": "<init>(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;)V",
-      "startBytecodeIndex": -2147483648,
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "options": [
-      [
-        "COMPRESSOR",
-        "ITERATIONS",
-        "LOGLEVEL"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "4344833e-3be4-40d5-a271-5b8ca8b6fbbc",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
-      "regionClass": "PngOptimizer",
-      "regionMethod": "optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;Ljava/lang/String;ZLjava/lang/Integer;)V",
-      "startBytecodeIndex": -2147483648,
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "options": [
-      [
-        "COMPRESSOR",
-        "ITERATIONS",
-        "COMPRESSIONLEVEL"
-      ]
-    ]
-  },
-  {
-    "region": {
       "regionID": "e5251447-fe36-4222-93a0-0decd2501f8d",
       "startTime": -1,
       "endTime": -1,
@@ -136,6 +115,27 @@
     "options": [
       [
         "COMPRESSOR"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1699e13f-a2f5-4295-9243-2641f4eaa80e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "debug(Ljava/lang/String;[Ljava/lang/Object;)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL"
       ]
     ]
   },
@@ -160,26 +160,6 @@
   },
   {
     "region": {
-      "regionID": "11df2bb1-931c-42b7-afd8-b8839743b51e",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
-      "regionClass": "PngProcessor",
-      "regionMethod": "processHeadChunks(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/util/Iterator;)Loptimizer/com/googlecode/pngtastic/core/PngChunk;",
-      "startBytecodeIndex": 30,
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "options": [
-      [
-        "LOGLEVEL",
-        "REMOVEGAMMA"
-      ]
-    ]
-  },
-  {
-    "region": {
       "regionID": "66206490-5eff-45d4-9242-d5699808d7bb",
       "startTime": -1,
       "endTime": -1,
@@ -194,6 +174,27 @@
     "options": [
       [
         "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "67db79e1-9407-4590-b4c5-8529a58eca6f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing",
+      "regionClass": "ZopfliCompressionHandler",
+      "regionMethod": "deflate(Loptimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream;Ljava/lang/Integer;Z)[B",
+      "startBytecodeIndex": -2147483648,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL"
       ]
     ]
   },

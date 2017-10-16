@@ -1,40 +1,4816 @@
 {
-  "baseTime": 3482036,
-  "baseTimeHumanReadable": 0.003,
+  "baseTime": 7452211,
+  "baseTimeHumanReadable": 0.007,
   "regionsToPerformanceTables": {
-    "Region{regionID='e65151df-c3d4-4eba-b6b8-69ac9b72b7f5', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 2273842,
-      "[REMOVEGAMMA]": 2091705
+    "Region{regionID='c7b97ca5-7810-4495-bfd9-edeaefd5d216', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
     },
-    "Region{regionID='fa76d678-aed5-4cb7-9677-8b4298f7c366', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 373006584,
-      "[REMOVEGAMMA]": 379991046
+    "Region{regionID='681b9154-668f-4f04-8d8d-82557fe33ec3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
     },
-    "Region{regionID='ffe684f2-75e6-4171-91f8-56b04025c41f', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 11536,
-      "[REMOVEGAMMA]": 9916
+    "Region{regionID='c2e6d234-8ef5-47eb-bcce-715d4676111d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[COMPRESSIONLEVEL]": 0
     },
-    "Region{regionID='afd50c89-dbc9-46db-8675-25eba4c21ab5', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 167819,
-      "[REMOVEGAMMA]": 160156
+    "Region{regionID='85d6e031-c9f4-4164-8cf9-b17f201812da', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2b056a5d-86ec-484b-baf6-03a415ae3059', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='241d7065-d449-4099-910d-3816efd8a72f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='050609aa-bc4d-4055-bc92-99e3b4fe52de', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2190fa93-5741-4fb8-b019-c6ad2b27ae65', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='871c5913-351b-41f0-8423-a5c964dbe652', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='88504109-c738-4d75-a884-66b5d6803348', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='848f40b0-3d97-40fd-af17-52ce47374b80', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c41821bf-86ad-4a6d-8545-1369ee627b4f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='38573402-ad11-4a68-a823-7f38ed9cd270', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='6e2b7ed8-b861-414b-b700-053974a0d9f6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='378e8935-211d-4fd2-bcf0-133050c58a18', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='770dcdbf-dfa8-425d-9f70-d9d0d8e6b344', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='fa6d1a48-5dca-4150-b456-7de88a6723e6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4b4f37cf-33e9-41f2-9fa0-6cfd67ef2809', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='11e021e7-95cc-40b1-afc2-47bd8adfd3dc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9cbf0080-4b44-4757-957e-68b83293b484', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='93ff153e-98d1-4359-99d0-f15da3a0b637', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ea65dabc-721d-4ca8-8cbf-a97144d7f925', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0920a4fd-f1c0-455b-9b8d-40b2ec88e31f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='6be002b9-4da7-432c-9683-7ba20820517b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='af5eb1dd-d1ea-4e6a-94e0-8655b291c728', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2dc81658-52df-4425-9c0e-54b289f73941', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ba03df34-3851-4e55-9dad-3f5eeec9c129', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='627a252f-fafd-4156-8191-f6ef1c4f6551', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='56aac588-44bb-43dc-be8e-d264c6791355', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='4a130555-0e56-40fa-a874-295f5f4ef2c6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e7b09f18-11b1-461a-8528-97fbb985c3d4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='186962e3-7211-4ee1-b039-95c33897e3b4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='b3837b05-63a0-423e-bd06-5753b7a52180', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d23df445-70d1-43b7-b59c-aba1a4ce7dda', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[COMPRESSIONLEVEL]": 0
+    },
+    "Region{regionID='7371ae20-b574-462b-b0bb-fc88879d847a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='60ef1c05-34af-44af-9252-ce8f1c640633', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8a75c165-64ab-4716-8e0e-b3a8d61661c8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='6ff3caf5-ad14-4bd8-98a5-d2f606cb2174', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='a9ad7ef2-e519-4368-ae69-3432c1cab910', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8607ab86-a640-4e96-91b3-5f892827143f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='1a5f9253-d88e-4d35-b153-4371fdf6a19c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2f3b850a-c817-4a67-b860-80ee674e1d1e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8c37c967-3233-41ee-9d9b-d25bbda8dbe4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2f87912c-fe2f-4e28-a197-bbd33fb5f123', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='1b6c917f-4ecc-45fa-9e72-a38ac4c349f4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='bd44a38b-725f-473d-ad46-f9b0c84bcb81', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0f70840d-d181-4037-94c2-3d915e67b222', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3f9160f6-0638-4ba9-b8dc-4edb4d216d83', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3aa48026-9e08-4ff0-b343-6010c8d72632', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3c443561-752a-46d8-85d0-b35237a957c5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0c6873a3-2769-42fc-be35-5b20505dfe26', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0119e481-5c9f-44ef-987e-85b2167b9571', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3cdc4d26-e75c-412a-a4b8-b44a823e50e4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e9881f55-5c6c-4e6f-9a10-b4609b32e3df', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2fb3429a-4c52-4aa8-a482-59bde191abd6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e5e1211e-afc0-4b08-8ade-0a50337d419f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ac782963-11b0-4305-a342-68b9125694e0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='eb1cd594-e22f-4000-b8a1-74154ee9df39', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='05e3200a-beef-4230-91e1-afb3afe9570c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL]": 0
+    },
+    "Region{regionID='bece0e38-7f5a-49c7-b7dc-18f538f275c7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='78a9dfff-8d04-497c-8ce5-8a758899b9c7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL]": 0
+    },
+    "Region{regionID='1c6d990f-b414-4387-ad91-a795d0fa6471', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3bf04b77-9364-4126-8d52-9318d4f6c1b8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2d1dcd14-95aa-492a-b503-40e403f21c8b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ddc4e237-a4a1-40e8-acae-fe7a92dc8afa', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='73ca465b-54f0-4ed6-9181-5ea7e293c780', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='128b01fd-ce9a-41f2-bd1e-93728eb1c666', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='dd80fd33-eb02-4238-b62e-c7e26ef76388', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='774867e9-b411-4c5c-95b4-1e6fe1fbbdee', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='dec77734-d395-42d4-88f3-e465a1d569c4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='daec8088-550d-4c2d-82bf-01e85ba6f1bd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c664c0f3-1707-42c8-a1df-44ca0362d16c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='11404d09-72d2-4183-94be-87959745daf5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='51ca3d50-952f-4b29-8f54-dc0826a46400', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4785ad48-924f-42d8-bfb5-aedaf20ea06e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='f124693e-4d08-4f3c-9033-54931989ce34', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ef0355a9-a7be-49ed-bdaa-e56a31c56b59', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='499c305f-5d95-4198-9ea3-3a75ddb6fbc7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7c8e654a-ab5b-436c-8770-bab9b1f6bb81', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4a313826-5608-468e-b24a-6cd2da94b6db', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0f808ddc-6e90-4e4d-b85d-b58e900b58c4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e7081c56-8238-4a96-811d-2d66d81a4691', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSIONLEVEL]": 0
+    },
+    "Region{regionID='bb02f3f1-d01e-4d87-9ab6-26d397d4e17e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0fe6b1c0-d3ac-4537-8147-0db467120914', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='01fb9534-b78e-4bb3-ab73-6bad7b48c43d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='434a7afe-4be1-4456-a038-71d965cff22e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e87786fd-9007-43cb-9988-8db21f9feddf', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7f0da30e-3965-46fb-97e5-07dc4aefb13b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[COMPRESSOR, LOGLEVEL]": 0,
+      "[ITERATIONS]": 0,
+      "[ITERATIONS, LOGLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[LOGLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 0
+    },
+    "Region{regionID='e89b09f7-c9c7-406b-8704-c1761aa2960b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4771db3e-05ad-494c-8a4d-5154c3fa1a16', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='058f72f1-26d7-415d-8155-9a545e633a06', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='927374e1-57cb-45e2-b503-f9caa6989d5a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='891d2770-51a2-4c4a-8d98-aa0b139bb930', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d2ec5250-7834-41da-98e9-c917d02cdb86', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='f18dcdd2-4779-4a64-b00b-ae143595106d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='85a805a9-b777-4929-808f-ffcb5671fcea', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='69838c03-67df-494e-a17c-1566ad40ae67', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='d0d4e079-7581-4350-8298-9dff0a77a264', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c0c83779-c059-4682-a638-2e52e022012c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8ae9478d-f46b-470b-99e9-0715b036ae18', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7fb613d6-a678-4b7e-baf0-851215b32b22', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0
+    },
+    "Region{regionID='43942220-7276-4219-994d-2ae34d4031d9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='a79afb52-956a-4aa6-b47e-79fcf3e6fb20', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='98377fbb-7b9b-40f9-9267-e1b51c16190e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9ae4ed55-80ec-48a5-86b2-df01b48e9cd2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d015c0f4-0f4d-44b5-9687-ff01e755fa2f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ca73551a-1b22-483b-a084-0d761679d13d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='048db2b8-818d-445e-b2b5-db5ba15fe6ff', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e38694d7-27ad-400c-9ba2-276ab2bf9508', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4fa8c80c-9e7b-4f59-95e6-161e3667c732', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='50c30f63-f573-4253-af94-b6692757dc0d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='fb41c2c8-f344-41fa-b3ba-22b9f195e98c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='67a88ba8-44c1-4657-b64d-d17f6b15255c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2097fe76-e4eb-45cf-8159-bccd2a120822', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='1c1e4cb7-f7b9-4d6f-bc8c-2526e785fa23', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[COMPRESSIONLEVEL]": 0
+    },
+    "Region{regionID='e475f73b-19e1-421b-b0e3-80688202f27f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='a322771d-f2eb-4030-9f78-fdd0c4454ad8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='06e2d782-fb2f-4a91-9440-3759867c6a71', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d90992a9-c58d-4129-96bc-a4d0e6074074', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2879c9e0-7950-4fa8-ae2b-17b12bab4448', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d2b576f6-2d58-43a3-acd6-7f4ea6d3c90c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5f3971bb-1ace-4252-9466-8d466a6af641', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='439f74c1-2646-4f21-827d-a583fe2a1461', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='923c5cad-415a-4ce4-acb6-a148ca95c9dc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7b19aa53-db4b-414f-b384-730730b6f1e4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='01518ac7-fb3c-4109-a785-71aa5cec2e3d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='464f177f-c8f2-4bda-a36e-c56f7f5d4d0d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='6ff7acf0-d03e-46f7-bc86-29ec12170890', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='74fed458-14a4-46cc-b57f-9dbf80d9ae73', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='f532cb66-3be6-46db-a8c0-47f523c861a5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2716230a-f297-4248-a3d1-593ea09a01f5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='53cd3bc0-a7da-4198-9814-ddb78c861dab', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='06dd55b4-06ba-478a-a8f4-46ae96b996d0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='733d7f96-2a7e-447f-99aa-1dd9b051cad9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='bc235d57-9d9d-49ac-851b-269dd93f5f5b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='35e4cf88-917f-4682-b7e7-f08c7d4dfc39', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0dc7ad46-1e56-4dd6-a99f-07172ee4fb7b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='cf0d0579-ee22-46c7-9766-1990fab727d7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='cdf9e3c5-dcab-4a2c-b2a4-61201830170a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='b809de16-7fb4-4d27-b033-69879dc825c8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='dd6adece-c78b-4c40-beb0-299aa226c0e4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='a70a8409-f3cf-441d-aa97-cc0b11758ba9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2ad32e58-8f43-42cb-8869-bdb7e563c225', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL]": 0
+    },
+    "Region{regionID='239d74de-e724-454f-8d3a-bd57e8438abb', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2f90ce23-a93a-499e-b601-5603e3eb9b75', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8d29a6b0-cd52-462f-8640-171a461e83c5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0f7e72a8-6165-4923-a478-2c5836b440a0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0c34bb04-6278-45e1-b982-d664906749cb', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5e30d16c-b9ea-4b4e-a838-fa254e1ad1de', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4681ce77-7fde-433a-9f22-b7d80a8e13e8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3bce38ee-07d8-48a9-88be-35e4e11e4de0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='cb486804-b2de-4e07-b9b1-a7c6382029fc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7b064bd4-0e7d-459d-b081-1c0d218d9754', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d6f8c60c-7212-4f82-a39a-d95303420391', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0adb61e1-ffff-4558-91c5-b5ac5f10c6d6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='32539d5d-ae73-49a2-8de2-975e3d2c4cd9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7184af2d-aaa3-4824-8148-d68296bb47f3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='11df9f9a-8286-442b-a85b-031f10498458', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='b3541167-73f7-4753-8550-272a951d8232', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='068c91ce-e13a-4fb6-959d-e03952236014', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='158ddefc-c8d3-41e1-913d-b11fcfc8a7e5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c9ca1053-fff1-4c88-bbd5-19da7c674dd5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3e4604ec-d14e-4c9f-b6df-c7506f036a6e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5a408730-7780-41c9-872d-36c3727335a7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d96170e8-18aa-431b-85eb-047101781f66', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='dc66dbf8-262d-4f46-afce-a9453dbe9e70', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='17ae59e6-b8bf-442e-9512-c3d2d510591e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7cb3ae50-ff02-4d08-9332-4c2465a68e82', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ae641123-6aa4-486c-9f17-c5aa2813ea85', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='31232111-f1bb-4851-92a9-e39e5000cf70', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4c68dbad-d183-4e33-8e39-16031351fd7c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d1c66b51-96d3-4133-9c9b-96efd86a4fc5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7160ca61-1c91-4eaf-acff-91b559156c0a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='dbbf6ffe-454a-4ce3-93dd-cca93b81b0e1', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='940ec34f-bc50-4a51-b664-f6f496456972', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='75c3f4f5-2bf3-4e84-a3f7-bf08847d5baf', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='128e87fc-497c-4e4b-ba82-198548c07d59', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='f89d0a4a-d12f-44e6-80d9-41eb42b4b0e0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8f4b4eff-4b75-4bf2-8be1-662f8a02ca9f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='49a8afaa-c2aa-4e35-93f2-835e65ea8b77', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8048a548-b7cc-4ec7-abe1-0f1cb87d6aff', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9d795875-2705-45f7-aba9-52c1f541f007', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9d86e907-1c9f-437f-959c-127de2237d77', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='242dce5b-7105-4226-b52f-00ac9bcc229e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d31d98a6-83dc-427d-8daa-a30ca0a1bc9f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e04e7ce4-520f-476b-8e30-d3dbd94bc0f7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='6ab4141c-4db7-427c-9984-97986781991f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8ee600d7-c31d-41a1-b5a1-ea60341a767c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2b342dc8-4a9a-4f1b-9dce-4ad9fa05c023', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3fbf7b91-a800-461e-a891-6d051fb945af', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='6645eb5e-06f7-42dd-bff8-282fc7ded9c6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='30a13307-5ac6-4361-a0ec-1db203b91c57', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[COMPRESSIONLEVEL]": 0
+    },
+    "Region{regionID='64513b75-162a-4973-b738-fdb1e4494f9e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9dcfb94c-dbd5-4664-a60e-a11fefe651d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL]": 0
+    },
+    "Region{regionID='e58a38c3-7374-49af-bba0-95a70bce6598', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='57fbb524-daa0-4591-a567-3c15a0087b67', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='a567edda-1089-41e7-9bf2-96ad86c361ae', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5a14db6a-7faf-4538-8083-3c1443f60d63', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9ad8c49e-5d40-43dd-8112-fb6e15ac0759', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7968380d-ef3d-446c-a175-851439ea2440', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='288436e0-259f-4ae1-98de-da4dbdce2f6c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='80cb4698-2d4f-458b-9053-be197001f962', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='38701b2c-1313-4251-b536-249d568d98bc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='fd4b950d-7243-4d6e-aefe-7b60aa7ecbe5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='48bc9a47-fc2f-4940-b121-56b9b5502779', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='040bb5db-9f30-429b-8425-68c8e556cf45', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='d0b7241f-6ce1-48bf-979f-329d214b0a56', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='cd22b3ca-a360-46ef-9fe5-ee47222a654f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='b2c445b4-29d9-44b6-908c-62c63860442e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[COMPRESSIONLEVEL]": 0
+    },
+    "Region{regionID='515b771b-4dcd-4602-80ad-99ed3756ba9e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c57b3ee6-d7a9-4adb-adf9-142feb6f342f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='b192dba7-7fa5-452e-b75f-fcff0ce5b7e5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e407cc20-af06-4c9b-954f-189b50ffd87c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='474cb4ac-34ed-4541-851d-2c5fc0193536', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='1d48704d-6190-4a1d-9d69-69017f9e923f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7cc46617-7f24-4869-936f-28ee755408de', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4513d7ba-5336-4f0b-ad1c-c39a56cba06b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9f74d922-a5bc-4436-92b3-98f32634a496', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='b9157636-cce1-4ff6-9a80-2f63371b22f9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3525d0a1-3b8d-4767-aec0-2267a26465e0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2180ac00-3c0c-44aa-b837-7b0bfd3da9fd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e902ff98-8ea1-4a4f-966e-cccc012aaad5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e57f9678-5c32-4fe9-a3a4-158c3b01c13e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='803fddd8-94f4-471d-82ce-504ed327d730', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5838288c-6c52-461f-8dc8-b95454411964', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='f7dfc587-0551-4f57-8d1e-a23f55701a48', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='471be6cb-2e27-4d2e-a28b-04587d07e39a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='55d7b5b7-9e29-4cd6-ad79-ec3fa691fa2b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7d16f0e1-a487-4e58-9ab7-5620c15f8ced', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='bfce1699-8794-4481-9ed0-38c88d58a22f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2e1bd9a1-37f2-4c4e-aaa5-698c4467bc63', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e5c32a9d-0b80-4420-9adb-8617b89c88b0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c60272c1-f4bf-4ae0-9673-82f8f9fa19a9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7ad10cbb-e5a2-4a6d-964b-4b874c856dce', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d70b88fd-3ccd-4dfe-80b9-c5064884a506', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d4df4a99-9cd8-46c8-b50a-f33d1593116e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='fea725a0-39e6-46b1-b9be-4dd5b5807655', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d2f5250f-8a1f-491c-b314-519c89f38d15', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='eb41dd7f-c7b8-4099-9ee6-2aaa1a6a1f2f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='05d75210-8ce3-4202-b958-5967f8cec38a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='65528e4b-e50e-49fd-a177-161e0d0430e8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='953cd395-4fde-4ff0-9b7d-89ddf3024a1c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='cdef3448-b943-436d-95dd-0cbf7eac3cf9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0057e749-36c9-40bc-8204-34c4525d5438', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='1dbf9771-0039-484c-86d4-9f75d9d725fc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='70d1f9e4-2976-46e7-b9dc-800b8df66a1f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='54e248c0-dc8f-492e-aac4-8b8c7e960eed', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d610fa8c-4794-4087-8829-55bd164d97e4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2232bf37-4594-4654-ba56-66f53e64200c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='02ea1e78-b3fd-4e34-bde4-168e1b4e109d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9e20f01b-5fbc-487e-99be-fef1e05a0907', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='acb4d5f1-577f-4c78-826f-42be04810f08', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='33ce7347-6014-4d82-9b59-490330dcb9d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='f6627add-b351-4c2f-ac0e-b81c47a83495', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d2e05207-2aeb-405e-8923-b3b3a2a90a8a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='923695c7-1786-48a9-82ff-36932b4b73ac', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='3b6a06ec-65de-41fe-8411-a51d06e71815', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8ba424e1-6ceb-471e-a872-d40a8ab49a84', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='012814a5-9b3b-4380-9f50-74f7e6c8f7a6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e6d96147-1764-4ff2-a2a4-1e200bfe9628', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='26409dd9-ffb2-4eda-9b90-8e9bfd2816dc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='f28222e4-d24e-4d43-854a-f58391ce645d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='1ef769c7-2bd7-4b23-9a2f-41a01f77eaa8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='914cbe0f-4960-445e-b5ed-2d75cd6ca5f4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='933497fc-c2c4-4326-a4ec-871ae4b06f77', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='a32864b7-4537-4bdd-8867-86576d7ea889', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4ba311ce-cc38-4be4-897e-4c8cdcd0094d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='316aea56-1af1-4261-86cd-80f81b672613', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='fc15c0b4-508f-48ec-a405-6bbe69a640b5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='fc099154-5ce4-4de3-aae4-e16b17bea32f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='dcabda84-c691-4464-91b8-35bfa81affa4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5a0b5786-2133-4a17-a688-1b6da8527e21', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7ad73323-b200-4eaa-aa19-295a0324c179', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='246d4d72-633d-43fe-9aa0-a13fc25332b4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='91008298-0902-410b-9dec-efe0e63f13a8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='44c4a82e-cc90-4fcc-a2d0-78ee3b05be00', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='03af09e0-78a7-4bba-97ea-f338a68b3a17', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='6ce1cf31-3ebf-40ee-8a6f-18f02d9d990b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='680fc454-5e39-4d1f-8ac1-5be6151163de', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e5c875f9-fafb-4cd3-af43-b918975765c1', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='1c735b6c-5c30-45d2-b314-aa38c6771e86', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c1bdb857-5b10-4980-b426-7f94ec6ec8a5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9f955b1e-13e9-4059-9d3c-f12104611483', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='357bebb6-454a-40b0-94ba-7f8ab037b2dd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e87971d4-8899-4d66-ae13-236f88275e07', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d275aa04-73dd-4bbe-a904-e9bbfd7270d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='60fe8f82-3520-4faf-a8f4-fe3825aea274', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='78610151-ae67-4c2d-97de-5933fd460d49', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='780c3ed2-c244-485f-9ff3-b1a26978156a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[ITERATIONS]": 0
+    },
+    "Region{regionID='d49ef6fe-de56-4762-bfc0-2f25a6d4ae4d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='47b797e2-4130-4876-8966-94b356a6c3aa', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='d56c7e54-8d92-43f9-803c-beb18861048e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[COMPRESSIONLEVEL]": 0
+    },
+    "Region{regionID='9ac10064-c421-4951-83d3-80f43df653a5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='56c06ec5-3a43-4bce-b894-ab06b1f41f94', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='851a14d6-f642-415d-a7fc-f26e0984c453', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7c0138b1-1fe7-4f4f-bbe5-66357bf96d04', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2133ee42-9497-4d28-8fc8-91087b8b6845', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='bde59ad4-19b1-4b92-9f9a-52fd3fbc2ad7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='03ce0add-59a0-4564-9e63-088e758590ca', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9a4e5962-0a11-4fe5-b2db-7091fa2ff5d9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='a5e6f717-5997-4bc0-bfe9-1ede09bbe679', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='54a2f94d-3409-44e9-885f-a6fac970047b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5642fc89-ee99-4fd1-832a-34e70bf3f731', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='93ea81bc-f311-4a5b-9645-3f034def57a8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='3da88e20-9918-4b06-bed3-4dac5f95101b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ae207cef-a0a7-440c-9492-2acbca3ada13', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2a697117-cf6a-40cf-8bbe-fb6c47c6a065', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8aca8a58-aace-4eef-b418-e8a268c69d71', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e2e5a784-b097-4ff8-9743-7117c5728d8a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='1d803b73-d2d8-4427-a019-8d17820a3e20', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2a810eb4-2887-4991-a2f6-afb868163918', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='16eb4a3e-264a-4d86-b9f0-52216da70d0e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e4a3a803-a827-47d4-aaa2-5917963688dd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e12ce2fc-52fc-4879-bb28-cfeab8528cf0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='241954a9-35d0-4a01-aac3-f9231c46b884', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='2160837b-d505-4804-84a4-1c9323302cf4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='61501654-d884-45c5-a451-d99170afc8cd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='de71abed-f2a5-4701-a23f-67787ecd520a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='445ba03a-f2d4-4e59-8f45-2503cd0eb3f2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='0bcabedc-4be6-44a4-92be-011273b14edc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9fa2d908-50cc-482e-8283-35d4b3eb0356', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ce4258d3-b379-4d47-aaef-b55f607a400e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ff1ae500-eeaf-429b-8c35-6e803d796e85', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7d4a873c-823e-477f-ab0d-baca33eb592f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[COMPRESSOR, LOGLEVEL]": 0,
+      "[ITERATIONS]": 0,
+      "[ITERATIONS, LOGLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[LOGLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 0
+    },
+    "Region{regionID='4fd926c8-7d0b-4128-8cd2-434d9155b987', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='a6faa9c1-0e67-4464-9832-5c8931af48a8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='54632512-eb4b-45a6-bf2b-0c6d893bd895', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5cd905d6-7bef-4b95-8403-993e4d98a831', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c322e4de-c176-4dc9-b452-40271ab7c2d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c4c42d7d-700d-419d-8d8d-6b6a0a3e766a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9b8a1183-398f-405f-8e13-d836895ae890', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='f92667b0-dad5-46fb-a347-461fe3780e3d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7eab3c03-7269-4ea9-88f4-73c149afefb2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e3986df5-ae12-4d1e-be52-21aa39b940d2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='b7c12430-1806-432d-9b6a-a6f68d62d7a4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2ab4b569-14ea-40ae-a095-ec68822bf299', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7a9d51fa-e02e-4bd7-b5f5-2cc6f8da159a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2b8731ac-781b-48ec-8111-86340d34ae11', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ef18f18c-b723-4035-90e0-26d0fa902686', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='eb436c3f-295f-494b-80ec-5fea49325a0e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='da81c6ef-de05-4f86-8220-a942cdf16c3f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='2769e26a-7d53-4165-b47c-7cd50a15a275', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='401be725-a987-426a-862f-c34728fb6faf', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='026ac348-75dc-48c1-b59a-ea47f4acb847', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='04230219-1940-47c9-b6d4-6223f77de0a7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4f0f2783-2b30-427d-8a17-879ef6333cdd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c18d3bdf-5bf6-4c2d-a65f-937cb1374505', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8b1ca777-92d0-473e-b3a0-80725746a801', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0
+    },
+    "Region{regionID='b3b66b03-72d4-495b-92a8-d9022c5b9b42', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='aa546241-31a9-4959-baeb-aa73bdd9a4f3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5d145b1d-7909-456b-ad98-cce04bec955e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='fc25958f-a76a-4ef3-a719-6191992b9062', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='6904fb40-1e8b-4a5f-ba90-4e74a7b4caf7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='90b00f3b-7bf0-492c-b7f4-b78e0f9b899a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9a84cb24-c306-4576-9808-01c052bb1e97', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='443dc8d3-1e2e-439d-8213-aadf95e47105', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='21a00038-4dc7-48c3-8489-4a6ea23f8bcf', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[COMPRESSIONLEVEL]": 0
+    },
+    "Region{regionID='7fe27588-d5f9-4b11-a4e4-a012e463b811', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL]": 0
+    },
+    "Region{regionID='713c1d42-a738-4a9f-a27f-57d8bc7a3ffd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7dfff78a-32d6-4c9c-a94e-45a0baee775a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0,
+      "[LOGLEVEL]": 0,
+      "[REMOVEGAMMA]": 0
+    },
+    "Region{regionID='b9d0bda5-b366-4fc7-8073-6c678c5f863d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4211eb4e-60bd-4acd-8635-142060dc51a5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9ae30d5f-42e8-4e58-8d1d-630710b1b9f9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c2f17b70-58bf-4d76-b3f4-89545ca5c45b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='ad2128b5-322e-4779-9d1b-01d878750435', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4ab50bfc-166e-4f33-8312-f23f65943010', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4c57cd6f-25d0-4db1-af7b-46658e564a25', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5697dc84-6e1e-46d1-9fcf-dbf6709dd46b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='73254d0a-7b87-4dab-8250-7700e17589b5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='b68cd730-fa87-4289-a911-2aff557a1843', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='56ae6445-cdce-41f2-a58c-bb0a9c86b374', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='c2fd2abd-e102-4b37-a4db-a89e0dc9330f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='cf10c05c-9b99-4ffb-9ade-24e4c685b177', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='dcd1debc-c67a-45d5-a564-4de96363560d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='55bcc196-454c-491b-b120-e2f61cb511d0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='52ea5384-8fc7-4107-adb5-d1736f822107', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='53fbf0e4-9607-4de8-a5d5-41a867beacda', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='9f8f415a-55fa-4d0f-b693-82060c4699ab', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4b7c860d-9237-438e-b5e5-77e536c92a9b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='1e7ee2d8-c8a6-4854-9820-8570ffd701ef', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='eba7854c-7bea-4a90-af7a-23ff7a6c4871', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='54dfa7a5-b320-4841-8646-751a039d34f3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='5d1e2bb2-5bba-4507-9c95-748616a26f04', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='53cf4996-7a69-45bf-89d0-74800d3d532e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='4458c23f-6278-4d5d-af80-dacbd1ce63ce', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e265a4ee-580c-4a81-acc3-9affc7f3a54d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='e8fb06a8-2083-43ca-b818-1901e8324ffb', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='db05ce9e-927a-468c-a74f-a86438036f6b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='8c464417-f7c5-4482-ad0c-7719af6d3b7e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='f816f4bc-4120-456c-9ccf-8c977d795e75', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='7b4031af-ba5e-4267-9ae9-07876759a53c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='08b6902a-5a09-4b8b-8a7e-ce0bdda58756', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='bc6cfad2-56e6-4aea-9dbd-4fca031c9a25', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='bb207a5a-bf56-4499-a389-3eb9c003690c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='826bf17a-8abf-40b8-a62c-df36b1e9528d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='6aaf00a9-1d05-47c1-bef5-0e180bccae35', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='479a751b-e994-4cba-836f-b6aa47cf6b92', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
+    },
+    "Region{regionID='655d4f84-7cab-46e2-91e4-dc95c7163879', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[COMPRESSOR]": 0,
+      "[ITERATIONS]": 0,
+      "[COMPRESSOR, ITERATIONS]": 0
     }
   },
   "regionsToPerformanceTablesHumanReadable": {
-    "Region{regionID='e65151df-c3d4-4eba-b6b8-69ac9b72b7f5', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.002,
-      "[REMOVEGAMMA]": 0.002
+    "Region{regionID='c7b97ca5-7810-4495-bfd9-edeaefd5d216', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
     },
-    "Region{regionID='fa76d678-aed5-4cb7-9677-8b4298f7c366', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.373,
-      "[REMOVEGAMMA]": 0.38
+    "Region{regionID='681b9154-668f-4f04-8d8d-82557fe33ec3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
     },
-    "Region{regionID='ffe684f2-75e6-4171-91f8-56b04025c41f', startTime=-1, endTime=-1, duration=-1}": {
+    "Region{regionID='c2e6d234-8ef5-47eb-bcce-715d4676111d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0.0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[COMPRESSIONLEVEL]": 0.0
+    },
+    "Region{regionID='85d6e031-c9f4-4164-8cf9-b17f201812da', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2b056a5d-86ec-484b-baf6-03a415ae3059', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='241d7065-d449-4099-910d-3816efd8a72f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='050609aa-bc4d-4055-bc92-99e3b4fe52de', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2190fa93-5741-4fb8-b019-c6ad2b27ae65', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='871c5913-351b-41f0-8423-a5c964dbe652', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='88504109-c738-4d75-a884-66b5d6803348', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='848f40b0-3d97-40fd-af17-52ce47374b80', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c41821bf-86ad-4a6d-8545-1369ee627b4f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='38573402-ad11-4a68-a823-7f38ed9cd270', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='6e2b7ed8-b861-414b-b700-053974a0d9f6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='378e8935-211d-4fd2-bcf0-133050c58a18', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='770dcdbf-dfa8-425d-9f70-d9d0d8e6b344', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='fa6d1a48-5dca-4150-b456-7de88a6723e6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4b4f37cf-33e9-41f2-9fa0-6cfd67ef2809', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='11e021e7-95cc-40b1-afc2-47bd8adfd3dc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9cbf0080-4b44-4757-957e-68b83293b484', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='93ff153e-98d1-4359-99d0-f15da3a0b637', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ea65dabc-721d-4ca8-8cbf-a97144d7f925', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0920a4fd-f1c0-455b-9b8d-40b2ec88e31f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='6be002b9-4da7-432c-9683-7ba20820517b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='af5eb1dd-d1ea-4e6a-94e0-8655b291c728', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2dc81658-52df-4425-9c0e-54b289f73941', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ba03df34-3851-4e55-9dad-3f5eeec9c129', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='627a252f-fafd-4156-8191-f6ef1c4f6551', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='56aac588-44bb-43dc-be8e-d264c6791355', startTime=-1, endTime=-1, duration=-1}": {
       "[]": 0.0,
       "[REMOVEGAMMA]": 0.0
     },
-    "Region{regionID='afd50c89-dbc9-46db-8675-25eba4c21ab5', startTime=-1, endTime=-1, duration=-1}": {
+    "Region{regionID='4a130555-0e56-40fa-a874-295f5f4ef2c6', startTime=-1, endTime=-1, duration=-1}": {
       "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e7b09f18-11b1-461a-8528-97fbb985c3d4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='186962e3-7211-4ee1-b039-95c33897e3b4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='b3837b05-63a0-423e-bd06-5753b7a52180', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d23df445-70d1-43b7-b59c-aba1a4ce7dda', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0.0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[COMPRESSIONLEVEL]": 0.0
+    },
+    "Region{regionID='7371ae20-b574-462b-b0bb-fc88879d847a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='60ef1c05-34af-44af-9252-ce8f1c640633', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8a75c165-64ab-4716-8e0e-b3a8d61661c8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='6ff3caf5-ad14-4bd8-98a5-d2f606cb2174', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='a9ad7ef2-e519-4368-ae69-3432c1cab910', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8607ab86-a640-4e96-91b3-5f892827143f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='1a5f9253-d88e-4d35-b153-4371fdf6a19c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2f3b850a-c817-4a67-b860-80ee674e1d1e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8c37c967-3233-41ee-9d9b-d25bbda8dbe4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2f87912c-fe2f-4e28-a197-bbd33fb5f123', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='1b6c917f-4ecc-45fa-9e72-a38ac4c349f4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='bd44a38b-725f-473d-ad46-f9b0c84bcb81', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0f70840d-d181-4037-94c2-3d915e67b222', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3f9160f6-0638-4ba9-b8dc-4edb4d216d83', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3aa48026-9e08-4ff0-b343-6010c8d72632', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3c443561-752a-46d8-85d0-b35237a957c5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0c6873a3-2769-42fc-be35-5b20505dfe26', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0119e481-5c9f-44ef-987e-85b2167b9571', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3cdc4d26-e75c-412a-a4b8-b44a823e50e4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e9881f55-5c6c-4e6f-9a10-b4609b32e3df', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2fb3429a-4c52-4aa8-a482-59bde191abd6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e5e1211e-afc0-4b08-8ade-0a50337d419f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ac782963-11b0-4305-a342-68b9125694e0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='eb1cd594-e22f-4000-b8a1-74154ee9df39', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='05e3200a-beef-4230-91e1-afb3afe9570c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL]": 0.0
+    },
+    "Region{regionID='bece0e38-7f5a-49c7-b7dc-18f538f275c7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='78a9dfff-8d04-497c-8ce5-8a758899b9c7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL]": 0.0
+    },
+    "Region{regionID='1c6d990f-b414-4387-ad91-a795d0fa6471', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3bf04b77-9364-4126-8d52-9318d4f6c1b8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2d1dcd14-95aa-492a-b503-40e403f21c8b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ddc4e237-a4a1-40e8-acae-fe7a92dc8afa', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='73ca465b-54f0-4ed6-9181-5ea7e293c780', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='128b01fd-ce9a-41f2-bd1e-93728eb1c666', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='dd80fd33-eb02-4238-b62e-c7e26ef76388', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='774867e9-b411-4c5c-95b4-1e6fe1fbbdee', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='dec77734-d395-42d4-88f3-e465a1d569c4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='daec8088-550d-4c2d-82bf-01e85ba6f1bd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c664c0f3-1707-42c8-a1df-44ca0362d16c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='11404d09-72d2-4183-94be-87959745daf5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='51ca3d50-952f-4b29-8f54-dc0826a46400', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4785ad48-924f-42d8-bfb5-aedaf20ea06e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='f124693e-4d08-4f3c-9033-54931989ce34', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ef0355a9-a7be-49ed-bdaa-e56a31c56b59', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='499c305f-5d95-4198-9ea3-3a75ddb6fbc7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7c8e654a-ab5b-436c-8770-bab9b1f6bb81', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4a313826-5608-468e-b24a-6cd2da94b6db', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0f808ddc-6e90-4e4d-b85d-b58e900b58c4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e7081c56-8238-4a96-811d-2d66d81a4691', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSIONLEVEL]": 0.0
+    },
+    "Region{regionID='bb02f3f1-d01e-4d87-9ab6-26d397d4e17e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0fe6b1c0-d3ac-4537-8147-0db467120914', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='01fb9534-b78e-4bb3-ab73-6bad7b48c43d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='434a7afe-4be1-4456-a038-71d965cff22e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e87786fd-9007-43cb-9988-8db21f9feddf', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7f0da30e-3965-46fb-97e5-07dc4aefb13b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[COMPRESSOR, LOGLEVEL]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[ITERATIONS, LOGLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 0.0
+    },
+    "Region{regionID='e89b09f7-c9c7-406b-8704-c1761aa2960b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4771db3e-05ad-494c-8a4d-5154c3fa1a16', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='058f72f1-26d7-415d-8155-9a545e633a06', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='927374e1-57cb-45e2-b503-f9caa6989d5a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='891d2770-51a2-4c4a-8d98-aa0b139bb930', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d2ec5250-7834-41da-98e9-c917d02cdb86', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='f18dcdd2-4779-4a64-b00b-ae143595106d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='85a805a9-b777-4929-808f-ffcb5671fcea', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='69838c03-67df-494e-a17c-1566ad40ae67', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
       "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='d0d4e079-7581-4350-8298-9dff0a77a264', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c0c83779-c059-4682-a638-2e52e022012c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8ae9478d-f46b-470b-99e9-0715b036ae18', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7fb613d6-a678-4b7e-baf0-851215b32b22', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0
+    },
+    "Region{regionID='43942220-7276-4219-994d-2ae34d4031d9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='a79afb52-956a-4aa6-b47e-79fcf3e6fb20', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='98377fbb-7b9b-40f9-9267-e1b51c16190e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9ae4ed55-80ec-48a5-86b2-df01b48e9cd2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d015c0f4-0f4d-44b5-9687-ff01e755fa2f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ca73551a-1b22-483b-a084-0d761679d13d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='048db2b8-818d-445e-b2b5-db5ba15fe6ff', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e38694d7-27ad-400c-9ba2-276ab2bf9508', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4fa8c80c-9e7b-4f59-95e6-161e3667c732', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='50c30f63-f573-4253-af94-b6692757dc0d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='fb41c2c8-f344-41fa-b3ba-22b9f195e98c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='67a88ba8-44c1-4657-b64d-d17f6b15255c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2097fe76-e4eb-45cf-8159-bccd2a120822', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='1c1e4cb7-f7b9-4d6f-bc8c-2526e785fa23', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0.0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[COMPRESSIONLEVEL]": 0.0
+    },
+    "Region{regionID='e475f73b-19e1-421b-b0e3-80688202f27f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='a322771d-f2eb-4030-9f78-fdd0c4454ad8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='06e2d782-fb2f-4a91-9440-3759867c6a71', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d90992a9-c58d-4129-96bc-a4d0e6074074', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2879c9e0-7950-4fa8-ae2b-17b12bab4448', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d2b576f6-2d58-43a3-acd6-7f4ea6d3c90c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5f3971bb-1ace-4252-9466-8d466a6af641', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='439f74c1-2646-4f21-827d-a583fe2a1461', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='923c5cad-415a-4ce4-acb6-a148ca95c9dc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7b19aa53-db4b-414f-b384-730730b6f1e4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='01518ac7-fb3c-4109-a785-71aa5cec2e3d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='464f177f-c8f2-4bda-a36e-c56f7f5d4d0d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='6ff7acf0-d03e-46f7-bc86-29ec12170890', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='74fed458-14a4-46cc-b57f-9dbf80d9ae73', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='f532cb66-3be6-46db-a8c0-47f523c861a5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2716230a-f297-4248-a3d1-593ea09a01f5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='53cd3bc0-a7da-4198-9814-ddb78c861dab', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='06dd55b4-06ba-478a-a8f4-46ae96b996d0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='733d7f96-2a7e-447f-99aa-1dd9b051cad9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='bc235d57-9d9d-49ac-851b-269dd93f5f5b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='35e4cf88-917f-4682-b7e7-f08c7d4dfc39', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0dc7ad46-1e56-4dd6-a99f-07172ee4fb7b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='cf0d0579-ee22-46c7-9766-1990fab727d7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='cdf9e3c5-dcab-4a2c-b2a4-61201830170a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='b809de16-7fb4-4d27-b033-69879dc825c8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='dd6adece-c78b-4c40-beb0-299aa226c0e4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='a70a8409-f3cf-441d-aa97-cc0b11758ba9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2ad32e58-8f43-42cb-8869-bdb7e563c225', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL]": 0.0
+    },
+    "Region{regionID='239d74de-e724-454f-8d3a-bd57e8438abb', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2f90ce23-a93a-499e-b601-5603e3eb9b75', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8d29a6b0-cd52-462f-8640-171a461e83c5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0f7e72a8-6165-4923-a478-2c5836b440a0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0c34bb04-6278-45e1-b982-d664906749cb', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5e30d16c-b9ea-4b4e-a838-fa254e1ad1de', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4681ce77-7fde-433a-9f22-b7d80a8e13e8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3bce38ee-07d8-48a9-88be-35e4e11e4de0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='cb486804-b2de-4e07-b9b1-a7c6382029fc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7b064bd4-0e7d-459d-b081-1c0d218d9754', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d6f8c60c-7212-4f82-a39a-d95303420391', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0adb61e1-ffff-4558-91c5-b5ac5f10c6d6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='32539d5d-ae73-49a2-8de2-975e3d2c4cd9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7184af2d-aaa3-4824-8148-d68296bb47f3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='11df9f9a-8286-442b-a85b-031f10498458', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='b3541167-73f7-4753-8550-272a951d8232', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='068c91ce-e13a-4fb6-959d-e03952236014', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='158ddefc-c8d3-41e1-913d-b11fcfc8a7e5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c9ca1053-fff1-4c88-bbd5-19da7c674dd5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3e4604ec-d14e-4c9f-b6df-c7506f036a6e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5a408730-7780-41c9-872d-36c3727335a7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d96170e8-18aa-431b-85eb-047101781f66', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='dc66dbf8-262d-4f46-afce-a9453dbe9e70', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='17ae59e6-b8bf-442e-9512-c3d2d510591e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7cb3ae50-ff02-4d08-9332-4c2465a68e82', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ae641123-6aa4-486c-9f17-c5aa2813ea85', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='31232111-f1bb-4851-92a9-e39e5000cf70', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4c68dbad-d183-4e33-8e39-16031351fd7c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d1c66b51-96d3-4133-9c9b-96efd86a4fc5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7160ca61-1c91-4eaf-acff-91b559156c0a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='dbbf6ffe-454a-4ce3-93dd-cca93b81b0e1', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='940ec34f-bc50-4a51-b664-f6f496456972', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='75c3f4f5-2bf3-4e84-a3f7-bf08847d5baf', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='128e87fc-497c-4e4b-ba82-198548c07d59', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='f89d0a4a-d12f-44e6-80d9-41eb42b4b0e0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8f4b4eff-4b75-4bf2-8be1-662f8a02ca9f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='49a8afaa-c2aa-4e35-93f2-835e65ea8b77', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8048a548-b7cc-4ec7-abe1-0f1cb87d6aff', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9d795875-2705-45f7-aba9-52c1f541f007', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9d86e907-1c9f-437f-959c-127de2237d77', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='242dce5b-7105-4226-b52f-00ac9bcc229e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d31d98a6-83dc-427d-8daa-a30ca0a1bc9f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e04e7ce4-520f-476b-8e30-d3dbd94bc0f7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='6ab4141c-4db7-427c-9984-97986781991f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8ee600d7-c31d-41a1-b5a1-ea60341a767c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2b342dc8-4a9a-4f1b-9dce-4ad9fa05c023', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3fbf7b91-a800-461e-a891-6d051fb945af', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='6645eb5e-06f7-42dd-bff8-282fc7ded9c6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='30a13307-5ac6-4361-a0ec-1db203b91c57', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0.0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[COMPRESSIONLEVEL]": 0.0
+    },
+    "Region{regionID='64513b75-162a-4973-b738-fdb1e4494f9e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9dcfb94c-dbd5-4664-a60e-a11fefe651d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL]": 0.0
+    },
+    "Region{regionID='e58a38c3-7374-49af-bba0-95a70bce6598', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='57fbb524-daa0-4591-a567-3c15a0087b67', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='a567edda-1089-41e7-9bf2-96ad86c361ae', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5a14db6a-7faf-4538-8083-3c1443f60d63', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9ad8c49e-5d40-43dd-8112-fb6e15ac0759', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7968380d-ef3d-446c-a175-851439ea2440', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='288436e0-259f-4ae1-98de-da4dbdce2f6c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='80cb4698-2d4f-458b-9053-be197001f962', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='38701b2c-1313-4251-b536-249d568d98bc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='fd4b950d-7243-4d6e-aefe-7b60aa7ecbe5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='48bc9a47-fc2f-4940-b121-56b9b5502779', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='040bb5db-9f30-429b-8425-68c8e556cf45', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='d0b7241f-6ce1-48bf-979f-329d214b0a56', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='cd22b3ca-a360-46ef-9fe5-ee47222a654f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='b2c445b4-29d9-44b6-908c-62c63860442e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0.0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[COMPRESSIONLEVEL]": 0.0
+    },
+    "Region{regionID='515b771b-4dcd-4602-80ad-99ed3756ba9e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c57b3ee6-d7a9-4adb-adf9-142feb6f342f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='b192dba7-7fa5-452e-b75f-fcff0ce5b7e5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e407cc20-af06-4c9b-954f-189b50ffd87c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='474cb4ac-34ed-4541-851d-2c5fc0193536', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='1d48704d-6190-4a1d-9d69-69017f9e923f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7cc46617-7f24-4869-936f-28ee755408de', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4513d7ba-5336-4f0b-ad1c-c39a56cba06b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9f74d922-a5bc-4436-92b3-98f32634a496', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='b9157636-cce1-4ff6-9a80-2f63371b22f9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3525d0a1-3b8d-4767-aec0-2267a26465e0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2180ac00-3c0c-44aa-b837-7b0bfd3da9fd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e902ff98-8ea1-4a4f-966e-cccc012aaad5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e57f9678-5c32-4fe9-a3a4-158c3b01c13e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='803fddd8-94f4-471d-82ce-504ed327d730', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5838288c-6c52-461f-8dc8-b95454411964', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='f7dfc587-0551-4f57-8d1e-a23f55701a48', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='471be6cb-2e27-4d2e-a28b-04587d07e39a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='55d7b5b7-9e29-4cd6-ad79-ec3fa691fa2b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7d16f0e1-a487-4e58-9ab7-5620c15f8ced', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='bfce1699-8794-4481-9ed0-38c88d58a22f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2e1bd9a1-37f2-4c4e-aaa5-698c4467bc63', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e5c32a9d-0b80-4420-9adb-8617b89c88b0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c60272c1-f4bf-4ae0-9673-82f8f9fa19a9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7ad10cbb-e5a2-4a6d-964b-4b874c856dce', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d70b88fd-3ccd-4dfe-80b9-c5064884a506', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d4df4a99-9cd8-46c8-b50a-f33d1593116e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='fea725a0-39e6-46b1-b9be-4dd5b5807655', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d2f5250f-8a1f-491c-b314-519c89f38d15', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='eb41dd7f-c7b8-4099-9ee6-2aaa1a6a1f2f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='05d75210-8ce3-4202-b958-5967f8cec38a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='65528e4b-e50e-49fd-a177-161e0d0430e8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='953cd395-4fde-4ff0-9b7d-89ddf3024a1c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='cdef3448-b943-436d-95dd-0cbf7eac3cf9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0057e749-36c9-40bc-8204-34c4525d5438', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='1dbf9771-0039-484c-86d4-9f75d9d725fc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='70d1f9e4-2976-46e7-b9dc-800b8df66a1f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='54e248c0-dc8f-492e-aac4-8b8c7e960eed', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d610fa8c-4794-4087-8829-55bd164d97e4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2232bf37-4594-4654-ba56-66f53e64200c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='02ea1e78-b3fd-4e34-bde4-168e1b4e109d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9e20f01b-5fbc-487e-99be-fef1e05a0907', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='acb4d5f1-577f-4c78-826f-42be04810f08', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='33ce7347-6014-4d82-9b59-490330dcb9d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='f6627add-b351-4c2f-ac0e-b81c47a83495', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d2e05207-2aeb-405e-8923-b3b3a2a90a8a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='923695c7-1786-48a9-82ff-36932b4b73ac', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='3b6a06ec-65de-41fe-8411-a51d06e71815', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8ba424e1-6ceb-471e-a872-d40a8ab49a84', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='012814a5-9b3b-4380-9f50-74f7e6c8f7a6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e6d96147-1764-4ff2-a2a4-1e200bfe9628', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='26409dd9-ffb2-4eda-9b90-8e9bfd2816dc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='f28222e4-d24e-4d43-854a-f58391ce645d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='1ef769c7-2bd7-4b23-9a2f-41a01f77eaa8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='914cbe0f-4960-445e-b5ed-2d75cd6ca5f4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='933497fc-c2c4-4326-a4ec-871ae4b06f77', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='a32864b7-4537-4bdd-8867-86576d7ea889', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4ba311ce-cc38-4be4-897e-4c8cdcd0094d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='316aea56-1af1-4261-86cd-80f81b672613', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='fc15c0b4-508f-48ec-a405-6bbe69a640b5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='fc099154-5ce4-4de3-aae4-e16b17bea32f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='dcabda84-c691-4464-91b8-35bfa81affa4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5a0b5786-2133-4a17-a688-1b6da8527e21', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7ad73323-b200-4eaa-aa19-295a0324c179', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='246d4d72-633d-43fe-9aa0-a13fc25332b4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='91008298-0902-410b-9dec-efe0e63f13a8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='44c4a82e-cc90-4fcc-a2d0-78ee3b05be00', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='03af09e0-78a7-4bba-97ea-f338a68b3a17', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='6ce1cf31-3ebf-40ee-8a6f-18f02d9d990b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='680fc454-5e39-4d1f-8ac1-5be6151163de', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e5c875f9-fafb-4cd3-af43-b918975765c1', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='1c735b6c-5c30-45d2-b314-aa38c6771e86', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c1bdb857-5b10-4980-b426-7f94ec6ec8a5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9f955b1e-13e9-4059-9d3c-f12104611483', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='357bebb6-454a-40b0-94ba-7f8ab037b2dd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e87971d4-8899-4d66-ae13-236f88275e07', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d275aa04-73dd-4bbe-a904-e9bbfd7270d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='60fe8f82-3520-4faf-a8f4-fe3825aea274', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='78610151-ae67-4c2d-97de-5933fd460d49', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='780c3ed2-c244-485f-9ff3-b1a26978156a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[ITERATIONS]": 0.0
+    },
+    "Region{regionID='d49ef6fe-de56-4762-bfc0-2f25a6d4ae4d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='47b797e2-4130-4876-8966-94b356a6c3aa', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='d56c7e54-8d92-43f9-803c-beb18861048e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0.0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[COMPRESSIONLEVEL]": 0.0
+    },
+    "Region{regionID='9ac10064-c421-4951-83d3-80f43df653a5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='56c06ec5-3a43-4bce-b894-ab06b1f41f94', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='851a14d6-f642-415d-a7fc-f26e0984c453', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7c0138b1-1fe7-4f4f-bbe5-66357bf96d04', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2133ee42-9497-4d28-8fc8-91087b8b6845', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='bde59ad4-19b1-4b92-9f9a-52fd3fbc2ad7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='03ce0add-59a0-4564-9e63-088e758590ca', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9a4e5962-0a11-4fe5-b2db-7091fa2ff5d9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='a5e6f717-5997-4bc0-bfe9-1ede09bbe679', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='54a2f94d-3409-44e9-885f-a6fac970047b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5642fc89-ee99-4fd1-832a-34e70bf3f731', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='93ea81bc-f311-4a5b-9645-3f034def57a8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='3da88e20-9918-4b06-bed3-4dac5f95101b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ae207cef-a0a7-440c-9492-2acbca3ada13', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2a697117-cf6a-40cf-8bbe-fb6c47c6a065', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8aca8a58-aace-4eef-b418-e8a268c69d71', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e2e5a784-b097-4ff8-9743-7117c5728d8a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='1d803b73-d2d8-4427-a019-8d17820a3e20', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2a810eb4-2887-4991-a2f6-afb868163918', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='16eb4a3e-264a-4d86-b9f0-52216da70d0e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e4a3a803-a827-47d4-aaa2-5917963688dd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e12ce2fc-52fc-4879-bb28-cfeab8528cf0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='241954a9-35d0-4a01-aac3-f9231c46b884', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='2160837b-d505-4804-84a4-1c9323302cf4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='61501654-d884-45c5-a451-d99170afc8cd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='de71abed-f2a5-4701-a23f-67787ecd520a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='445ba03a-f2d4-4e59-8f45-2503cd0eb3f2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='0bcabedc-4be6-44a4-92be-011273b14edc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9fa2d908-50cc-482e-8283-35d4b3eb0356', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ce4258d3-b379-4d47-aaef-b55f607a400e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ff1ae500-eeaf-429b-8c35-6e803d796e85', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7d4a873c-823e-477f-ab0d-baca33eb592f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[COMPRESSOR, LOGLEVEL]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[ITERATIONS, LOGLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 0.0
+    },
+    "Region{regionID='4fd926c8-7d0b-4128-8cd2-434d9155b987', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='a6faa9c1-0e67-4464-9832-5c8931af48a8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='54632512-eb4b-45a6-bf2b-0c6d893bd895', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5cd905d6-7bef-4b95-8403-993e4d98a831', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c322e4de-c176-4dc9-b452-40271ab7c2d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c4c42d7d-700d-419d-8d8d-6b6a0a3e766a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9b8a1183-398f-405f-8e13-d836895ae890', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='f92667b0-dad5-46fb-a347-461fe3780e3d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7eab3c03-7269-4ea9-88f4-73c149afefb2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e3986df5-ae12-4d1e-be52-21aa39b940d2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='b7c12430-1806-432d-9b6a-a6f68d62d7a4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2ab4b569-14ea-40ae-a095-ec68822bf299', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7a9d51fa-e02e-4bd7-b5f5-2cc6f8da159a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2b8731ac-781b-48ec-8111-86340d34ae11', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ef18f18c-b723-4035-90e0-26d0fa902686', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='eb436c3f-295f-494b-80ec-5fea49325a0e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='da81c6ef-de05-4f86-8220-a942cdf16c3f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='2769e26a-7d53-4165-b47c-7cd50a15a275', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='401be725-a987-426a-862f-c34728fb6faf', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='026ac348-75dc-48c1-b59a-ea47f4acb847', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='04230219-1940-47c9-b6d4-6223f77de0a7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4f0f2783-2b30-427d-8a17-879ef6333cdd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c18d3bdf-5bf6-4c2d-a65f-937cb1374505', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8b1ca777-92d0-473e-b3a0-80725746a801', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0
+    },
+    "Region{regionID='b3b66b03-72d4-495b-92a8-d9022c5b9b42', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='aa546241-31a9-4959-baeb-aa73bdd9a4f3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5d145b1d-7909-456b-ad98-cce04bec955e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='fc25958f-a76a-4ef3-a719-6191992b9062', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='6904fb40-1e8b-4a5f-ba90-4e74a7b4caf7', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='90b00f3b-7bf0-492c-b7f4-b78e0f9b899a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9a84cb24-c306-4576-9808-01c052bb1e97', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='443dc8d3-1e2e-439d-8213-aadf95e47105', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='21a00038-4dc7-48c3-8489-4a6ea23f8bcf', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0.0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[COMPRESSIONLEVEL]": 0.0
+    },
+    "Region{regionID='7fe27588-d5f9-4b11-a4e4-a012e463b811', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL]": 0.0
+    },
+    "Region{regionID='713c1d42-a738-4a9f-a27f-57d8bc7a3ffd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7dfff78a-32d6-4c9c-a94e-45a0baee775a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
+      "[LOGLEVEL]": 0.0,
+      "[REMOVEGAMMA]": 0.0
+    },
+    "Region{regionID='b9d0bda5-b366-4fc7-8073-6c678c5f863d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4211eb4e-60bd-4acd-8635-142060dc51a5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9ae30d5f-42e8-4e58-8d1d-630710b1b9f9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c2f17b70-58bf-4d76-b3f4-89545ca5c45b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='ad2128b5-322e-4779-9d1b-01d878750435', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4ab50bfc-166e-4f33-8312-f23f65943010', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4c57cd6f-25d0-4db1-af7b-46658e564a25', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5697dc84-6e1e-46d1-9fcf-dbf6709dd46b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='73254d0a-7b87-4dab-8250-7700e17589b5', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='b68cd730-fa87-4289-a911-2aff557a1843', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='56ae6445-cdce-41f2-a58c-bb0a9c86b374', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='c2fd2abd-e102-4b37-a4db-a89e0dc9330f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='cf10c05c-9b99-4ffb-9ade-24e4c685b177', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='dcd1debc-c67a-45d5-a564-4de96363560d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='55bcc196-454c-491b-b120-e2f61cb511d0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='52ea5384-8fc7-4107-adb5-d1736f822107', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='53fbf0e4-9607-4de8-a5d5-41a867beacda', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='9f8f415a-55fa-4d0f-b693-82060c4699ab', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4b7c860d-9237-438e-b5e5-77e536c92a9b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='1e7ee2d8-c8a6-4854-9820-8570ffd701ef', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='eba7854c-7bea-4a90-af7a-23ff7a6c4871', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='54dfa7a5-b320-4841-8646-751a039d34f3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='5d1e2bb2-5bba-4507-9c95-748616a26f04', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='53cf4996-7a69-45bf-89d0-74800d3d532e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='4458c23f-6278-4d5d-af80-dacbd1ce63ce', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e265a4ee-580c-4a81-acc3-9affc7f3a54d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='e8fb06a8-2083-43ca-b818-1901e8324ffb', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='db05ce9e-927a-468c-a74f-a86438036f6b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='8c464417-f7c5-4482-ad0c-7719af6d3b7e', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='f816f4bc-4120-456c-9ccf-8c977d795e75', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='7b4031af-ba5e-4267-9ae9-07876759a53c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='08b6902a-5a09-4b8b-8a7e-ce0bdda58756', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='bc6cfad2-56e6-4aea-9dbd-4fca031c9a25', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='bb207a5a-bf56-4499-a389-3eb9c003690c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='826bf17a-8abf-40b8-a62c-df36b1e9528d', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='6aaf00a9-1d05-47c1-bef5-0e180bccae35', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='479a751b-e994-4cba-836f-b6aa47cf6b92', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
+    },
+    "Region{regionID='655d4f84-7cab-46e2-91e4-dc95c7163879', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[COMPRESSOR]": 0.0,
+      "[ITERATIONS]": 0.0,
+      "[COMPRESSOR, ITERATIONS]": 0.0
     }
   }
 }

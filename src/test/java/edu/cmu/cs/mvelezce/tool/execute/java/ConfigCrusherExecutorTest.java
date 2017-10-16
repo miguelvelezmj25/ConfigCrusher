@@ -100,7 +100,9 @@ public class ConfigCrusherExecutorTest {
 
 //        configurations.clear();
 //        Set<String> n = new HashSet<>();
-////        n.add("ITERATIONS");
+//        n.add("COMPRESSOR");
+//        n.add("LOGLEVEL");
+//        n.add("REMOVEGAMMA");
 //        configurations.add(n);
 
 

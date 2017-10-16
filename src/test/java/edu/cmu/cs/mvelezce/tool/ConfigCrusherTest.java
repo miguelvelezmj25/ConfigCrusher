@@ -52,7 +52,7 @@ public class ConfigCrusherTest {
         String programName = "pngtasticOptimizer";
         String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer";
         String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
-        String entry = "counter.com.googlecode.pngtastic.Run";
+        String entry = "optimizer.com.googlecode.pngtastic.Run";
 
         String[] args = new String[0];
 

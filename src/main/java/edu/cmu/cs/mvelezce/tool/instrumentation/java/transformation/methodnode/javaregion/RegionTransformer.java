@@ -95,12 +95,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         // Remove regions
         boolean updatedRegionsPostProcessing = true;
 
-        while (updatedRegionsPostProcessing) {
+        while(updatedRegionsPostProcessing) {
             boolean updatedRegions = true;
 
-            while (updatedRegions) {
+            while(updatedRegions) {
                 updatedRegions = this.processMethodsInClasses(classNodes);
-                updatedRegions = updatedRegions | this.processGraph(methods);
+                updatedRegions = updatedRegions | this.processGraph();
             }
 
             updatedRegionsPostProcessing = this.processMethodsInClassesAfterRemovingRegions(classNodes);
@@ -140,7 +140,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
                 try {
                     prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-                } catch (InterruptedException e) {
+                } catch(InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -306,10 +306,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             graph = builder.build();
             this.methodToGraph.put(methodNode, graph);
 
-            if(graph.getBlocks().size() <= 3) {
-                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
-                throw new RuntimeException("Check this case");
-            }
+//            if(graph.getBlocks().size() <= 3) {
+//                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
+//                throw new RuntimeException("Check this case");
+//            }
         }
 
         return graph;
@@ -704,7 +704,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String string;
 
-            while ((string = inputReader.readLine()) != null) {
+            while((string = inputReader.readLine()) != null) {
                 if(!string.isEmpty()) {
                     javapResult.add(string);
                 }
@@ -712,12 +712,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-            while ((string = errorReader.readLine()) != null) {
+            while((string = errorReader.readLine()) != null) {
                 System.out.println(string);
             }
 
             process.waitFor();
-        } catch (IOException | InterruptedException ie) {
+        } catch(IOException | InterruptedException ie) {
             ie.printStackTrace();
         }
 
@@ -766,7 +766,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
                 int instructionCounter = -1;
 
-                while (instructions.hasNext()) {
+                while(instructions.hasNext()) {
                     AbstractInsnNode instruction = instructions.next();
 
                     if(instruction.getOpcode() >= 0) {
@@ -855,14 +855,68 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //        return false;
 //    }
 
-    private boolean processGraph(Set<SootMethod> methods) {
+    private boolean processGraph() {
         boolean updated = false;
-        List<SootMethod> worklist = new LinkedList<>();
-        worklist.addAll(methods);
 
-        while (!worklist.isEmpty()) {
+        // First add the leaf methods
+        Set<SootMethod> leafMethods = new HashSet<>();
+        Set<SootMethod> nonLeafMethods = new HashSet<>();
+        QueueReader<Edge> callEdges = this.callGraph.listener();
+
+        while(callEdges.hasNext()) {
+            Edge edge = callEdges.next();
+            MethodOrMethodContext srcObject = edge.getSrc();
+            SootMethod src = srcObject.method();
+
+            if(!src.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+                continue;
+            }
+
+            MethodOrMethodContext tgtObject = edge.getTgt();
+            SootMethod tgt = tgtObject.method();
+
+            if(!tgt.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+                if(!nonLeafMethods.contains(src)) {
+                    leafMethods.add(src);
+                }
+
+                continue;
+            }
+
+            Iterator<Edge> callees = this.callGraph.edgesOutOf(tgt);
+
+            if(callees.hasNext()) {
+                nonLeafMethods.add(src);
+                nonLeafMethods.add(tgt);
+                leafMethods.remove(src);
+                leafMethods.remove(tgt);
+                continue;
+            }
+
+            if(!nonLeafMethods.contains(tgt)) {
+                leafMethods.add(tgt);
+            }
+        }
+
+        if(leafMethods.isEmpty()) {
+            throw new RuntimeException("There has to be leaf methods");
+        }
+
+        List<SootMethod> worklist = new ArrayList<>();
+        worklist.addAll(leafMethods);
+
+        // Add the rest of the methods
+        worklist.addAll(nonLeafMethods);
+
+        // Process
+        while(!worklist.isEmpty()) {
             SootMethod method = worklist.remove(0);
+            System.out.println(method);
             List<JavaRegion> regions = this.getRegionsInMethod(method);
+
+//            if(method.getName().contains("append") && method.getSignature().contains("Buffer")) {
+//                System.out.println();
+//            }
 
             if(regions.size() != 1) {
                 continue;
@@ -872,11 +926,27 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             Set<JavaRegion> regionsWithCall = new HashSet<>();
             List<Edge> callerEdges = this.getCallerEdges(method);
 
-            if(method.getName().contains("addChunk")) {
-                System.out.print("");
-            }
+//            boolean allEmpty = true;
+//
+//            while(!callerEdges.isEmpty()) {
+//                Edge outEdge = callerEdges.remove(0);
+//                SootMethod callerMethod = outEdge.src();
+//                List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
+//
+//                if(!regionsInCaller.isEmpty()) {
+//                    allEmpty = false;
+//                    break;
+//                }
+//            }
+//
+//            if(allEmpty) {
+//                this.createRegionsInCallers(regions.get(0), this.getCallerEdges(method));
+//                continue;
+//            }
+//
+//            callerEdges = this.getCallerEdges(method);
 
-            while (!callerEdges.isEmpty()) {
+            while(!callerEdges.isEmpty()) {
                 Edge outEdge = callerEdges.remove(0);
                 SootMethod callerMethod = outEdge.src();
                 List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
@@ -1026,6 +1096,38 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return updated;
     }
 
+    private void createRegionsInCallers(JavaRegion region, List<Edge> callerEdges) {
+        Set<Set<String>> optionSet = this.regionsToOptionSet.get(region);
+
+        Set<String> addedRegions = new HashSet<>();
+
+        for(Edge edge : callerEdges) {
+            SootMethod callerMethod = edge.src();
+
+            if(callerMethod.getSignature().contains("bestFixedLengths")) {
+                System.out.println();
+            }
+
+            String classPackage = callerMethod.getDeclaringClass().getPackageName();
+            String className = callerMethod.getDeclaringClass().getShortName();
+            String methodName = callerMethod.getBytecodeSignature();
+            methodName = methodName.substring(methodName.indexOf(" "), methodName.length() - 1).trim();
+
+            String addedRegionsKey = classPackage + " " + className + " " + methodName;
+
+            if(addedRegions.contains(addedRegionsKey)) {
+                continue;
+            }
+
+            addedRegions.add(addedRegionsKey);
+
+            JavaRegion newRegion = new JavaRegion(classPackage, className, methodName);
+            this.regionsToOptionSet.put(newRegion, optionSet);
+        }
+
+        this.regionsToOptionSet.remove(region);
+    }
+
     private int getJavapStartIndex(MethodNode methodNode) {
         List<String> javapResult = this.getJavapResult();
         String methodNameInJavap = methodNode.name;
@@ -1121,7 +1223,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
         int instructionCounter = -1;
 
-        while (instructions.hasNext()) {
+        while(instructions.hasNext()) {
             AbstractInsnNode instruction = instructions.next();
 
             if(instruction.getOpcode() >= 0) {
@@ -1197,7 +1299,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         Iterator<Edge> outEdges = this.callGraph.edgesInto(method);
         List<Edge> callerEdges = new LinkedList<>();
 
-        while (outEdges.hasNext()) {
+        while(outEdges.hasNext()) {
             Edge edge = outEdges.next();
             MethodOrMethodContext src = edge.getSrc();
 
@@ -1238,15 +1340,25 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         Set<SootMethod> methods = new HashSet<>();
         QueueReader<Edge> edges = this.callGraph.listener();
 
-        while (edges.hasNext()) {
+        while(edges.hasNext()) {
             Edge edge = edges.next();
-            MethodOrMethodContext src = edge.getSrc();
+            MethodOrMethodContext srcObject = edge.getSrc();
+            SootMethod src = srcObject.method();
 
-            if(!src.method().getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+            if(!src.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
                 continue;
             }
 
-            methods.add(src.method());
+            methods.add(src);
+
+            MethodOrMethodContext tgtObject = edge.getTgt();
+            SootMethod tgt = tgtObject.method();
+
+            if(!tgt.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+                continue;
+            }
+
+            methods.add(tgt);
         }
 
         return methods;

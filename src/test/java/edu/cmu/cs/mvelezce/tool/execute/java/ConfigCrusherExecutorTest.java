@@ -98,12 +98,14 @@ public class ConfigCrusherExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
 
-//        configurations.clear();
-//        Set<String> n = new HashSet<>();
-//        n.add("COMPRESSOR");
-//        n.add("LOGLEVEL");
-//        n.add("REMOVEGAMMA");
-//        configurations.add(n);
+        configurations.clear();
+        Set<String> n = new HashSet<>();
+        n.add("COMPRESSOR");
+        n.add("LOGLEVEL");
+        n.add("REMOVEGAMMA");
+        n.add("LOGLEVEL");
+        n.add("ITERATIONS");
+        configurations.add(n);
 
 
         args = new String[3];

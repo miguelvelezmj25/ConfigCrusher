@@ -1,0 +1,18 @@
+{
+  "configuration": [
+    "DISTTHRESHOLD",
+    "TIMEOUT"
+  ],
+  "regionsToProcessedPerformance": {
+    "260550d0-4b03-43ba-803e-7f2a4789cf38": 647967,
+    "e29accaf-9476-44a0-9096-e12737233135": 4137934384,
+    "26cd20ec-2688-440b-9801-079d71af760c": 22696,
+    "1f7eead9-7cf7-43eb-b913-89d6941c1885": 2122,
+    "32d22c23-e030-4482-a1b3-c850a7b9872a": 5460,
+    "ff3a8d69-eec1-424c-8391-947135db807b": 1633,
+    "e84d9dea-1caa-43a0-9a06-5e99c7cd5831": 592569,
+    "47d7d847-b701-4acd-8375-f198af4f6917": 1641387075,
+    "program": 5888724,
+    "83e1aed0-3f3c-466f-b871-4190d9ac2c5f": 61536141
+  }
+}

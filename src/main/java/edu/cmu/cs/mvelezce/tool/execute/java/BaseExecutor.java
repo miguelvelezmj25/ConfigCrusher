@@ -212,8 +212,13 @@ public abstract class BaseExecutor implements Executor {
     public Set<PerformanceEntryStatistic> execute() throws IOException, InterruptedException {
         List<Set<DefaultPerformanceEntry>> performanceEntriesList = new ArrayList<>();
 
-        for(int i = 0; i < this.repetitions; i++) {
+        for(int i = -1; i < this.repetitions; i++) {
             Set<DefaultPerformanceEntry> results = this.execute(i);
+
+            if(i < 0) {
+                continue;
+            }
+
             performanceEntriesList.add(results);
         }
 

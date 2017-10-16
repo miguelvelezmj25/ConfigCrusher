@@ -129,7 +129,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
      * @param regionsInMethod
      */
     private InsnList instrumentNormal(MethodNode methodNode, MethodGraph graph, List<JavaRegion> regionsInMethod) {
-        System.out.println("########### " + this.getCurrentClassNode().name + " " + methodNode.name);
+        System.out.println("########### " + this.getMethodNodeToClassNode().get(methodNode).name + " " + methodNode.name);
         List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
         Collections.reverse(regionsInMethodReversed);
 

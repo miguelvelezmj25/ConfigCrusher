@@ -34,11 +34,11 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
         MethodGraph graph = builder.build();
 
-        if(graph.getBlocks().size() <= 3) {
-//            continue;
-            // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
-            throw new RuntimeException("Check this case");
-        }
+//        if(graph.getBlocks().size() <= 3) {
+////            continue;
+//            // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
+//            throw new RuntimeException("Check this case");
+//        }
 
         InsnList newInstructions;
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);

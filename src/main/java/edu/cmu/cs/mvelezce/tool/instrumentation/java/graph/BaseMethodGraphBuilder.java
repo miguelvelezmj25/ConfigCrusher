@@ -25,7 +25,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
         this.connectEntryNode(graph);
         this.connectExitNode(graph);
 
-//        System.out.println(graph.toDotString(methodNode.name));
+        System.out.println(graph.toDotString(methodNode.name));
 
         if(!graph.getEntryBlock().getPredecessors().isEmpty()) {
             throw new RuntimeException("The entry block has predecessors");

@@ -9,10 +9,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassT
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.config.SootConfig;
-import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.tree.*;
 import jdk.internal.org.objectweb.asm.util.Printer;
 import org.apache.commons.lang3.StringUtils;
 import soot.*;
@@ -38,7 +35,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     private String entryPoint;
     private String rootPackage;
     private Map<JavaRegion, Set<Set<String>>> regionsToOptionSet;
-    private ClassNode currentClassNode;
+    private Map<MethodNode, ClassNode> methodNodeToClassNode = new HashMap<>();
     private Set<MethodNode> methodsWithUpdatedIndexes = new HashSet<>();
     private Map<String, List<String>> classToJavapResult = new HashMap<>();
     private Map<MethodNode, MethodGraph> methodToGraph = new HashMap<>();
@@ -75,8 +72,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             return methodsToInstrument;
         }
 
-        this.currentClassNode = classNode;
-
         for(MethodNode methodNode : classNode.methods) {
             if(!this.getRegionsInMethod(methodNode).isEmpty()) {
                 methodsToInstrument.add(methodNode);
@@ -90,6 +85,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     public void transformMethods(Set<ClassNode> classNodes) throws IOException {
         Set<SootMethod> methods = this.getSystemMethods();
         this.matchSootToASMMethods(methods, classNodes);
+
+        for(ClassNode classNode : classNodes) {
+            for(MethodNode methodNode : classNode.methods) {
+                this.methodNodeToClassNode.put(methodNode, classNode);
+            }
+        }
 
         int initialRegionCount = this.regionsToOptionSet.size();
         // Remove regions
@@ -269,7 +270,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         return updatedRegions;
-
 //        return false;
     }
 
@@ -675,12 +675,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     }
 
-    private List<String> getJavapResult() {
-        String classPackage = this.currentClassNode.name;
+    private List<String> getJavapResult(ClassNode classNode) {
+        String classPackage = classNode.name;
         classPackage = classPackage.substring(0, classPackage.lastIndexOf("/"));
         classPackage = classPackage.replace("/", ".");
 
-        String className = this.currentClassNode.name;
+        String className = classNode.name;
         className = className.substring(className.lastIndexOf("/") + 1);
 
         return this.getJavapResult(classPackage, className);
@@ -734,7 +734,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     // TODO why dont we return a new list
     private void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
         int methodStartIndex = this.getJavapStartIndex(methodNode);
-        List<String> javapResult = this.getJavapResult();
+        List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
 
         int instructionNumber = 0;
         int currentBytecodeIndex = -1;
@@ -911,42 +911,40 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         // Process
         while(!worklist.isEmpty()) {
             SootMethod method = worklist.remove(0);
-            System.out.println(method);
             List<JavaRegion> regions = this.getRegionsInMethod(method);
-
-//            if(method.getName().contains("append") && method.getSignature().contains("Buffer")) {
-//                System.out.println();
-//            }
 
             if(regions.size() != 1) {
                 continue;
             }
 
             boolean reachedMainWithoutRegion = false;
-            Set<JavaRegion> regionsWithCall = new HashSet<>();
+            Map<JavaRegion, SootMethod> regionsWithCallToMethods = new HashMap<>();
             List<Edge> callerEdges = this.getCallerEdges(method);
 
-//            boolean allEmpty = true;
-//
-//            while(!callerEdges.isEmpty()) {
-//                Edge outEdge = callerEdges.remove(0);
-//                SootMethod callerMethod = outEdge.src();
-//                List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
-//
-//                if(!regionsInCaller.isEmpty()) {
-//                    allEmpty = false;
-//                    break;
-//                }
-//            }
-//
-//            if(allEmpty) {
-//                this.createRegionsInCallers(regions.get(0), this.getCallerEdges(method));
-//                continue;
-//            }
-//
-//            callerEdges = this.getCallerEdges(method);
+            // Check if all the callers are empty
+            boolean allEmpty = true;
 
             while(!callerEdges.isEmpty()) {
+                Edge outEdge = callerEdges.remove(0);
+                SootMethod callerMethod = outEdge.src();
+                List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
+
+                if(!regionsInCaller.isEmpty()) {
+                    allEmpty = false;
+                    break;
+                }
+            }
+
+            if(allEmpty) {
+                this.createRegionsInCallers(regions.get(0), this.getCallerEdges(method));
+                continue;
+            }
+
+            callerEdges = this.getCallerEdges(method);
+
+            // Check other strategies for each caller
+            while(!callerEdges.isEmpty()) {
+                regionsWithCallToMethods = new HashMap<>();
                 Edge outEdge = callerEdges.remove(0);
                 SootMethod callerMethod = outEdge.src();
                 List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
@@ -968,7 +966,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     callerEdges.addAll(indexToInsert, edges);
                 }
                 else if(regionsInCaller.size() == 1) {
-                    regionsWithCall.add(regionsInCaller.get(0));
+                    regionsWithCallToMethods.put(regionsInCaller.get(0), callerMethod);
                 }
                 else {
                     // Find if the call happens inside a region. If not, look higher in the call stack
@@ -1014,7 +1012,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
                         for(MethodBlock block : reachableBlocks) {
                             if(block.getInstructions().contains(callerInstruction)) {
-                                regionsWithCall.add(region);
+                                regionsWithCallToMethods.put(region, callerMethod);
                                 foundInRegion = true;
                             }
                         }
@@ -1042,7 +1040,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             }
 
-            if(reachedMainWithoutRegion || regionsWithCall.isEmpty()) {
+            if(reachedMainWithoutRegion || regionsWithCallToMethods.isEmpty()) {
                 continue;
             }
 
@@ -1055,9 +1053,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             Set<JavaRegion> regionsWithCallWithDifferentOptions = new HashSet<>();
 
-            // Check that the outer options are a set of subset of the inner options. Otherwise, the call is in the
-            // region block, but it is outside of the control flow decision and we do not want to create interactions
-            for(JavaRegion outerRegion : regionsWithCall) {
+            // Check that the outer options are a set or subset of the inner options. Otherwise, the call is in the
+            // region block, but it is outside of the control flow decision, and we do not want to create interactions
+            for(JavaRegion outerRegion : regionsWithCallToMethods.keySet()) {
                 Set<Set<String>> outerRegionOptionSet = this.regionsToOptionSet.get(outerRegion);
                 Set<String> outerRegionOptions = new HashSet<>();
 
@@ -1069,27 +1067,30 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                         && !outerRegionOptions.containsAll(innerRegionOptions)) {
                     regionsWithCallWithDifferentOptions.add(outerRegion);
                 }
-
             }
 
-            regionsWithCall.removeAll(regionsWithCallWithDifferentOptions);
+            for(JavaRegion region : regionsWithCallWithDifferentOptions) {
+                regionsWithCallToMethods.remove(region);
+            }
 
-            if(regionsWithCall.isEmpty()) {
+            if(regionsWithCallToMethods.isEmpty()) {
                 continue;
             }
 
+            // Update the regions
             Set<JavaRegion> innerRegions = new HashSet<>();
             innerRegions.add(regions.get(0));
 
             Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegions = new HashMap<>();
 
-            for(JavaRegion region : regionsWithCall) {
+            for(JavaRegion region : regionsWithCallToMethods.keySet()) {
                 regionsToInnerRegions.put(region, innerRegions);
             }
 
             this.updateRegionsToOptionsWithOptionsInInnerRegions(regionsToInnerRegions);
             this.removeRegionsInRegionsToOptions(innerRegions);
 
+            worklist.addAll(regionsWithCallToMethods.values());
             updated = true;
         }
 
@@ -1098,15 +1099,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     private void createRegionsInCallers(JavaRegion region, List<Edge> callerEdges) {
         Set<Set<String>> optionSet = this.regionsToOptionSet.get(region);
-
         Set<String> addedRegions = new HashSet<>();
 
         for(Edge edge : callerEdges) {
             SootMethod callerMethod = edge.src();
-
-            if(callerMethod.getSignature().contains("bestFixedLengths")) {
-                System.out.println();
-            }
 
             String classPackage = callerMethod.getDeclaringClass().getPackageName();
             String className = callerMethod.getDeclaringClass().getShortName();
@@ -1129,11 +1125,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private int getJavapStartIndex(MethodNode methodNode) {
-        List<String> javapResult = this.getJavapResult();
+        ClassNode classNode = this.methodNodeToClassNode.get(methodNode);
+        List<String> javapResult = this.getJavapResult(classNode);
         String methodNameInJavap = methodNode.name;
 
         if(methodNameInJavap.startsWith("<init>")) {
-            methodNameInJavap = this.currentClassNode.name;
+            methodNameInJavap = classNode.name;
             methodNameInJavap = methodNameInJavap.replace("/", ".");
         }
 
@@ -1178,7 +1175,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     private AbstractInsnNode getASMInstruction(SootMethod callerMethod, int bytecodeIndex) {
         MethodNode methodNode = this.sootMethodToMethodNode.get(callerMethod);
         int methodStartIndex = this.getJavapStartIndex(methodNode);
-        List<String> javapResult = this.getJavapResult();
+        List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
 
         int instructionNumber = 0;
         int currentBytecodeIndex = -1;
@@ -1234,6 +1231,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
 
             if(instructionCounter == instructionNumber) {
+                if(!(instruction instanceof MethodInsnNode)) {
+                    throw new RuntimeException("The instruction has to be a method call");
+                }
+
                 return instruction;
             }
         }
@@ -1450,11 +1451,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     protected List<JavaRegion> getRegionsInMethod(MethodNode methodNode) {
-        String classPackage = this.currentClassNode.name;
+        ClassNode classNode = this.methodNodeToClassNode.get(methodNode);
+        String classPackage = classNode.name;
         classPackage = classPackage.substring(0, classPackage.lastIndexOf("/"));
         classPackage = classPackage.replace("/", ".");
 
-        String className = this.currentClassNode.name;
+        String className = classNode.name;
         className = className.substring(className.lastIndexOf("/") + 1);
 
         String methodName = methodNode.name + methodNode.desc;
@@ -1492,8 +1494,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return regionsInClass;
     }
 
-    public ClassNode getCurrentClassNode() {
-        return this.currentClassNode;
+    public Map<MethodNode, ClassNode> getMethodNodeToClassNode() {
+        return methodNodeToClassNode;
     }
 
     public Set<MethodBlock> getEndRegionBlocksWithReturn() {

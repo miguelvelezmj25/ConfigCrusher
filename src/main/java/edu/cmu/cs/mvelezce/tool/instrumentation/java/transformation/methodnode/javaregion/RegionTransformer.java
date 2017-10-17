@@ -926,6 +926,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         while(!worklist.isEmpty()) {
             SootMethod method = worklist.remove(0);
             this.pushMethodsUpTheCallGraphToEmptyMethods(method);
+            this.pushMethodsUpTheCallGraphToEmptyOrOneRegionMethods(method);
         }
 
         worklist.addAll(nonLeafMethods);
@@ -934,6 +935,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         while(!worklist.isEmpty()) {
             SootMethod method = worklist.remove(0);
             this.pushMethodsUpTheCallGraphToEmptyMethods(method);
+            this.pushMethodsUpTheCallGraphToEmptyOrOneRegionMethods(method);
         }
 
         // Process all methods
@@ -1116,7 +1118,126 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private void pushMethodsUpTheCallGraphToEmptyOrOneRegionMethods(SootMethod method) {
-        // TODO implement
+        List<SootMethod> worklist = new ArrayList<>();
+        worklist.add(method);
+
+        while(!worklist.isEmpty()) {
+            method = worklist.remove(0);
+            List<JavaRegion> regions = this.getRegionsInMethod(method);
+
+            if(regions.size() != 1) {
+                continue;
+            }
+
+            if(method.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
+                continue;
+            }
+
+            // Check if all the callers have at most one region to push regions up
+            boolean allMethodWithOneRegionMax = true;
+            List<Edge> callerEdges = this.getCallerEdges(method);
+
+            while(!callerEdges.isEmpty()) {
+                Edge outEdge = callerEdges.remove(0);
+                SootMethod callerMethod = outEdge.src();
+                List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
+
+                if(regionsInCaller.size() > 1) {
+                    allMethodWithOneRegionMax = false;
+                    break;
+                }
+            }
+
+            if(!allMethodWithOneRegionMax) {
+                continue;
+            }
+
+            JavaRegion region = regions.get(0);
+
+            Set<Set<String>> innerOptionSet = this.regionsToOptionSet.get(region);
+            Set<String> innerOptions = new HashSet<>();
+
+            for(Set<String> set : innerOptionSet) {
+                innerOptions.addAll(set);
+            }
+
+            boolean canPush = true;
+            callerEdges = this.getCallerEdges(method);
+
+            while(!callerEdges.isEmpty()) {
+                Edge outEdge = callerEdges.remove(0);
+                SootMethod callerMethod = outEdge.src();
+                List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
+
+                if(regionsInCaller.isEmpty()) {
+                    continue;
+                }
+
+                Set<Set<String>> outerOptionSet = this.regionsToOptionSet.get(regionsInCaller.get(0));
+                Set<String> outerOptions = new HashSet<>();
+
+                for(Set<String> set : outerOptionSet) {
+                    outerOptions.addAll(set);
+                }
+
+                if(!outerOptions.equals(innerOptions) && !outerOptions.containsAll(innerOptions)
+                        && !innerOptions.containsAll(outerOptions)) {
+                    canPush = false;
+                    break;
+                }
+            }
+
+            if(!canPush) {
+                continue;
+            }
+
+            // First update the options
+            Set<JavaRegion> regionToRemove = new HashSet<>();
+            regionToRemove.add(region);
+            callerEdges = this.getCallerEdges(method);
+
+            while(!callerEdges.isEmpty()) {
+                Edge outEdge = callerEdges.remove(0);
+                SootMethod callerMethod = outEdge.src();
+                List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
+
+                if(regionsInCaller.isEmpty()) {
+                    continue;
+                }
+
+                Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegions = new HashMap<>();
+                regionsToInnerRegions.put(regionsInCaller.get(0), regionToRemove);
+                this.updateRegionsToOptionsWithOptionsInInnerRegions(regionsToInnerRegions);
+
+                if(this.getRegionsInMethod(callerMethod).size() != 1) {
+                    throw new RuntimeException("Updating the options in the region should not create more regions");
+                }
+            }
+
+            // Then create new regions in the callers with no regions
+            List<Edge> callersWithNoRegions = new ArrayList<>();
+            callerEdges = this.getCallerEdges(method);
+
+            while(!callerEdges.isEmpty()) {
+                Edge outEdge = callerEdges.remove(0);
+                SootMethod callerMethod = outEdge.src();
+                List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
+
+                if(!regionsInCaller.isEmpty()) {
+                    continue;
+                }
+
+                callersWithNoRegions.add(outEdge);
+            }
+
+            this.createRegionsInCallers(region, callersWithNoRegions);
+
+            callerEdges = this.getCallerEdges(method);
+
+            for(Edge callerEdge : callerEdges) {
+                worklist.add(callerEdge.getSrc().method());
+            }
+        }
     }
 
     private void pushMethodsUpTheCallGraphToEmptyMethods(SootMethod method) {
@@ -1135,10 +1256,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            List<Edge> callerEdges = this.getCallerEdges(method);
-
             // Check if all the callers are empty to push regions up
             boolean allEmpty = true;
+            List<Edge> callerEdges = this.getCallerEdges(method);
 
             while(!callerEdges.isEmpty()) {
                 Edge outEdge = callerEdges.remove(0);
@@ -1155,26 +1275,24 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
+            this.createRegionsInCallers(regions.get(0), this.getCallerEdges(method));
+
             callerEdges = this.getCallerEdges(method);
 
             for(Edge callerEdge : callerEdges) {
                 worklist.add(callerEdge.getSrc().method());
             }
-
-            this.createRegionsInCallers(regions.get(0), this.getCallerEdges(method));
         }
     }
 
     private void createRegionsInCallers(JavaRegion region, List<Edge> callerEdges) {
-        Set<Set<String>> optionSet = this.regionsToOptionSet.get(region);
         Set<String> addedRegions = new HashSet<>();
+        Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegions = new HashMap<>();
+        Set<JavaRegion> regionToRemove = new HashSet<>();
+        regionToRemove.add(region);
 
         for(Edge edge : callerEdges) {
             SootMethod callerMethod = edge.src();
-
-            if(callerMethod.getSignature().contains("optimize(")) {
-                System.out.println();
-            }
 
             String classPackage = callerMethod.getDeclaringClass().getPackageName();
             String className = callerMethod.getDeclaringClass().getShortName();
@@ -1191,10 +1309,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             JavaRegion newRegion = new JavaRegion(classPackage, className, methodName);
             System.out.println("Created region: " + newRegion);
-            this.regionsToOptionSet.put(newRegion, optionSet);
+            this.regionsToOptionSet.put(newRegion, new HashSet<>());
+            regionsToInnerRegions.put(newRegion, regionToRemove);
         }
 
-        this.regionsToOptionSet.remove(region);
+        this.updateRegionsToOptionsWithOptionsInInnerRegions(regionsToInnerRegions);
+        this.removeRegionsInRegionsToOptions(regionToRemove);
     }
 
     private int getJavapStartIndex(MethodNode methodNode) {

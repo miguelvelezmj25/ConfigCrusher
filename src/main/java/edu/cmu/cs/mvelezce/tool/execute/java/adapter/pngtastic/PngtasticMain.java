@@ -30,6 +30,7 @@ public class PngtasticMain {
 
         Set<String> performanceConfiguration = PngtasticAdapter.adaptConfigurationToPerformanceMeasurement(pngtasticArgs);
         Executor executor = new ConfigCrusherExecutor();
-        executor.writeToFile(programName, performanceConfiguration, Regions.getRegionsToProcessedPerformance());
+//        executor.writeToFile(programName, performanceConfiguration, Regions.getRegionsToProcessedPerformance());
+        throw new RuntimeException("Check this main");
     }
 }

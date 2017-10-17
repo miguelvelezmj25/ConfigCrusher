@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -32,6 +33,34 @@ public class ConfigCrusherExecutorTest {
     }
 
     @Test
+    public void runningExample1() throws Exception {
+        String programName = "running-example";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+        String entryPoint = "edu.cmu.cs.mvelezce.Example";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+
+//                configurations.clear();
+//        Set<String> n = new HashSet<>();
+//        n.add("A");
+//        configurations.add(n);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
+    @Test
     public void runningExample() throws Exception {
         String programName = "running-example";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
@@ -46,6 +75,34 @@ public class ConfigCrusherExecutorTest {
 //        configurations.clear();
 //        Set<String> n = new HashSet<>();
 //        n.add("A");
+//        configurations.add(n);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
+    @Test
+    public void colorCounter1() throws Exception {
+        String programName = "pngtasticColorCounter";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
+        String entryPoint = "counter.com.googlecode.pngtastic.Run";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+
+//        configurations.clear();
+//        Set<String> n = new HashSet<>();
+////        n.add("A");
 //        configurations.add(n);
 
         args = new String[3];
@@ -107,6 +164,29 @@ public class ConfigCrusherExecutorTest {
         n.add("ITERATIONS");
         configurations.add(n);
 
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
+    @Test
+    public void optimizer1() throws Exception {
+        String programName = "pngtasticOptimizer";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
+        String entryPoint = "optimizer.com.googlecode.pngtastic.Run";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
 
         args = new String[3];
         args[0] = "-delres";

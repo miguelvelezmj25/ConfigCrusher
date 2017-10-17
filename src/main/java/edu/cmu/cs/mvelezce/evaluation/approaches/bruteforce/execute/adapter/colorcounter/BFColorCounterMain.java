@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.col
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
@@ -10,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterMa
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 
 public class BFColorCounterMain extends ColorCounterMain {
@@ -36,8 +38,9 @@ public class BFColorCounterMain extends ColorCounterMain {
         Adapter adapter = new ColorCounterAdapter();
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
-        Executor executor = new BruteForceExecutor(this.getProgramName());
-        executor.writeToFile(this.getIteration(), configuration, Regions.getRegionsToProcessedPerformance());
+        BruteForceExecutor executor = new BruteForceExecutor(this.getProgramName());
+        Map<String, Long> results = executor.getResults();
+        executor.writeToFile(this.getIteration(), configuration, results);
     }
 
 }

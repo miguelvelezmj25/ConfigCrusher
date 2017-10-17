@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -229,8 +230,9 @@ public class SleepMain extends BaseMain {
         Adapter adapter = new SleepAdapter();
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
-        Executor executor = new ConfigCrusherExecutor(this.getProgramName());
-        executor.writeToFile(this.getIteration(), configuration, Regions.getRegionsToProcessedPerformance());
+        ConfigCrusherExecutor executor = new ConfigCrusherExecutor(this.getProgramName());
+        Map<String, Long> results = executor.getResults();
+        executor.writeToFile(this.getIteration(), configuration, results);
     }
 
     @Override

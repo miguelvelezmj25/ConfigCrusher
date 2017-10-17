@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.region.RegionsCounter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
@@ -15,6 +17,7 @@ import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -22,6 +25,7 @@ import java.util.Set;
  */
 public class ConfigCrusherExecutor extends BaseExecutor {
 
+    // TODO change this since it is creating a lot of bugs
     static {
         DIRECTORY = BaseExecutor.DIRECTORY + "/configcrusher/programs";
     }
@@ -36,6 +40,24 @@ public class ConfigCrusherExecutor extends BaseExecutor {
 
     public ConfigCrusherExecutor(String programName, String entryPoint, String classDir, Set<Set<String>> configurations) {
         super(programName, entryPoint, classDir, configurations);
+    }
+
+    public Map<String, Long> getResults() {
+        Map<String, Long> result = RegionsCounter.getRegionsToCount();
+
+        if(!result.isEmpty()) {
+            System.out.println("Start region count: " + RegionsCounter.startCount);
+            System.out.println("Exit region count: " + RegionsCounter.endCount);
+            return result;
+        }
+
+        result = Regions.getRegionsToProcessedPerformance();
+
+        if(!result.isEmpty()) {
+            return result;
+        }
+
+        throw new RuntimeException("No data is available");
     }
 
     @Override

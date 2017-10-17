@@ -23,8 +23,6 @@ public class RegionsTest {
         long end = System.nanoTime();
         long time = end - start;
 
-        System.out.println("start count " + Regions.startCount);
-        System.out.println("end count " + Regions.endCount);
         System.out.println(time / 1000000000.0);
         System.out.println(time / count);
     }

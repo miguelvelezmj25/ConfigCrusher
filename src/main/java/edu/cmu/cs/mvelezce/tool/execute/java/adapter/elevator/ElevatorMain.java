@@ -30,6 +30,7 @@ public class ElevatorMain {
 
         Set<String> performanceConfiguration = ElevatorAdapter.adaptConfigurationToPerformanceMeasurement(elevatorArgs);
         Executor executor = new ConfigCrusherExecutor();
-        executor.writeToFile(programName, performanceConfiguration, Regions.getRegionsToProcessedPerformance());
+//        executor.writeToFile(programName, performanceConfiguration, Regions.getRegionsToProcessedPerformance());
+        throw new RuntimeException("Check this main");
     }
 }

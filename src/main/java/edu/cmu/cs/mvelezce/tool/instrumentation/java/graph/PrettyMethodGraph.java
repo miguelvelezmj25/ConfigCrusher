@@ -119,7 +119,8 @@ public class PrettyMethodGraph extends MethodGraph {
         for(PrettyMethodBlock prettyBlock : prettyBlocks) {
             for(String prettyInstruction : prettyBlock.getPrettyInstructions()) {
                 // TODO do not hard code this
-                if(prettyInstruction.contains("Regions.enter") || prettyInstruction.contains("Regions.exit")) {
+                if((prettyInstruction.contains("Regions") || prettyInstruction.contains("RegionsCounter"))
+                        && (prettyInstruction.contains("enter") || prettyInstruction.contains("exit"))) {
                     instrumentedPrettyBlocks.add(prettyBlock);
                 }
             }

@@ -95,21 +95,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         int initialRegionCount = this.regionsToOptionSet.size();
 
-        // Remove regions
-        boolean updatedRegionsPostProcessing = true;
+        boolean updatedRegions = true;
 
-        while(updatedRegionsPostProcessing) {
-            boolean updatedRegions = true;
-
-            while(updatedRegions) {
-                updatedRegions = this.processMethodsInClasses(classNodes);
-                updatedRegions = updatedRegions | this.processGraph();
-            }
-
-            updatedRegionsPostProcessing = this.processMethodsInClassesAfterRemovingRegions(classNodes);
+        while(updatedRegions) {
+            updatedRegions = this.processMethodsInClasses(classNodes);
+            updatedRegions = updatedRegions | this.processGraph();
         }
-
-//        this.processMethodsInClasses(classNodes);
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
         System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
@@ -211,33 +202,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     /**
-     * Process the methods after we removed regions to find if we can further remove other methods
-     *
-     * @param classNodes
-     * @return
-     * @throws IOException
-     */
-    private boolean processMethodsInClassesAfterRemovingRegions(Set<ClassNode> classNodes) throws IOException {
-        boolean updatedMethods = false;
-
-        for(ClassNode classNode : classNodes) {
-            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-
-            if(methodsToInstrument.isEmpty()) {
-                continue;
-            }
-
-            System.out.println("Transforming class after removing regions " + classNode.name);
-
-            for(MethodNode methodNode : methodsToInstrument) {
-                updatedMethods = updatedMethods | this.processRegionsInMethodAfterRemovingRegions(methodNode);
-            }
-        }
-
-        return updatedMethods;
-    }
-
-    /**
      * Process the regions inside the methods. This entails removing inner regions and joining regions with the same
      * options.
      *
@@ -270,31 +234,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             return updatedRegions;
         }
 
-        return updatedRegions;
-//        return false;
-    }
-
-    /**
-     * Process the regions in the method after removing some regions
-     *
-     * @param methodNode
-     */
-    private boolean processRegionsInMethodAfterRemovingRegions(MethodNode methodNode) {
-        this.buildMethodGraph(methodNode);
-        List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
+        updatedRegions = this.joinConsecutiveRegions(methodNode, regionsInMethod);
 
         if(regionsInMethod.size() == 1) {
-            return false;
+            return updatedRegions;
         }
-
-        if(!this.methodsWithUpdatedIndexes.contains(methodNode)) {
-            this.calculateASMStartIndex(regionsInMethod, methodNode);
-        }
-
-        this.setStartAndEndBlocksIfAbsent(methodNode, regionsInMethod);
-
-        boolean updatedRegions;
-        updatedRegions = this.joinConsecutiveRegions(methodNode, regionsInMethod);
 
         return updatedRegions;
     }
@@ -428,6 +372,16 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     region.setEndMethodBlocks(nextRegion.getEndMethodBlocks());
                     regionsToRemove.add(nextRegion);
                 }
+
+                Set<String> newOptions = new HashSet<>();
+                newOptions.addAll(currentOptions);
+                newOptions.addAll(nextOptions);
+
+                Set<Set<String>> oldOptionSet = this.regionsToOptionSet.get(region);
+                oldOptionSet.clear();
+                oldOptionSet.add(newOptions);
+
+                currentOptions = newOptions;
             }
             else {
                 region = nextRegion;
@@ -1506,24 +1460,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         return callerEdges;
     }
-
-//    private Set<SootMethod> getCallerMethods(SootMethod method) {
-//        Set<SootMethod> methods = new HashSet<>();
-//        Iterator<Edge> outEdges = this.callGraph.edgesInto(method);
-//
-//        while(outEdges.hasNext()) {
-//            Edge edge = outEdges.next();
-//            MethodOrMethodContext src = edge.getSrc();
-//
-//            if(!src.method().getDeclaringClass().getPackageName().contains(this.rootPackage)) {
-//                continue;
-//            }
-//
-//            methods.add(src.method());
-//        }
-//
-//        return methods;
-//    }
 
     /**
      * Get the methods that are used in the system

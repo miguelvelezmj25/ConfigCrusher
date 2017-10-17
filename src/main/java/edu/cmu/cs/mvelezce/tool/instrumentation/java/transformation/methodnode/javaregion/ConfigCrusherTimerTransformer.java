@@ -107,8 +107,9 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
     @Override
     public InsnList getInstructionsStartRegion(JavaRegion javaRegion) {
         InsnList instructionsStartRegion = new InsnList();
-        instructionsStartRegion.add(new LdcInsnNode(javaRegion.getRegionID().toString()));
-        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "enter", "(Ljava/lang/String;)V", false));
+        instructionsStartRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
+//        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "enter", "(Ljava/lang/String;)V", false));
+        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter", "enter", "(Ljava/lang/String;)V", false));
 
         return instructionsStartRegion;
     }
@@ -116,8 +117,9 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
     @Override
     public InsnList getInstructionsEndRegion(JavaRegion javaRegion) {
         InsnList instructionsEndRegion = new InsnList();
-        instructionsEndRegion.add(new LdcInsnNode(javaRegion.getRegionID().toString()));
-        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "exit", "(Ljava/lang/String;)V", false));
+        instructionsEndRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
+//        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "exit", "(Ljava/lang/String;)V", false));
+        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter", "exit", "(Ljava/lang/String;)V", false));
 
         return instructionsEndRegion;
     }

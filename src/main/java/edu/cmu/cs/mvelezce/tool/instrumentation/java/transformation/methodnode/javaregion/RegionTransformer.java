@@ -93,13 +93,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
         }
 
-        int initialRegionCount = this.regionsToOptionSet.size();
+        this.preProcessMethodsInClasses(classNodes);
 
+        int initialRegionCount = this.regionsToOptionSet.size();
         boolean updatedRegions = true;
 
         while(updatedRegions) {
-            updatedRegions = this.processMethodsInClasses(classNodes);
-            updatedRegions = updatedRegions | this.processGraph();
+            updatedRegions = this.processGraph();
+            updatedRegions = updatedRegions | this.processMethodsInClasses(classNodes);
         }
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
@@ -174,6 +175,39 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
     }
 
+    private void preProcessMethodsInClasses(Set<ClassNode> classNodes) throws IOException {
+        for(ClassNode classNode : classNodes) {
+            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+
+            if(methodsToInstrument.isEmpty()) {
+                continue;
+            }
+
+            System.out.println("Preprocessing methods in class " + classNode.name);
+
+            for(MethodNode methodNode : methodsToInstrument) {
+                MethodGraph graph = this.buildMethodGraph(methodNode);
+                List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
+
+                if(regionsInMethod.size() == 1) {
+                    continue;
+                }
+
+                if(!this.methodsWithUpdatedIndexes.contains(methodNode)) {
+                    this.calculateASMStartIndex(regionsInMethod, methodNode);
+                }
+
+                Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
+
+                for(JavaRegion region : regionsInMethod) {
+                    instructionsToRegion.put(methodNode.instructions.get(region.getStartBytecodeIndex()), region);
+                }
+
+                this.setStartAndEndBlocks(graph, instructionsToRegion);
+            }
+        }
+    }
+
     /**
      * Process the methods to find where the regions are in each of them
      *
@@ -208,7 +242,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @param methodNode
      */
     private boolean processRegionsInMethod(MethodNode methodNode) {
-        this.buildMethodGraph(methodNode);
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
 
         if(regionsInMethod.size() == 1) {
@@ -219,6 +252,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.calculateASMStartIndex(regionsInMethod, methodNode);
         }
 
+        this.buildMethodGraph(methodNode);
         this.setStartAndEndBlocksIfAbsent(methodNode, regionsInMethod);
 
         boolean updatedRegions;
@@ -241,23 +275,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         return updatedRegions;
-    }
-
-    private MethodGraph buildMethodGraph(MethodNode methodNode) {
-        MethodGraph graph = this.methodToGraph.get(methodNode);
-
-        if(graph == null) {
-            DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-            graph = builder.build();
-            this.methodToGraph.put(methodNode, graph);
-
-//            if(graph.getBlocks().size() <= 3) {
-//                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
-//                throw new RuntimeException("Check this case");
-//            }
-        }
-
-        return graph;
     }
 
     private void setStartAndEndBlocksIfAbsent(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
@@ -287,6 +304,23 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         this.setStartAndEndBlocks(graph, instructionsToRegion);
+    }
+
+    private MethodGraph buildMethodGraph(MethodNode methodNode) {
+        MethodGraph graph = this.methodToGraph.get(methodNode);
+
+        if(graph == null) {
+            DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
+            graph = builder.build();
+            this.methodToGraph.put(methodNode, graph);
+
+//            if(graph.getBlocks().size() <= 3) {
+//                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
+//                throw new RuntimeException("Check this case");
+//            }
+        }
+
+        return graph;
     }
 
     /**
@@ -408,7 +442,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         MethodGraph graph = this.methodToGraph.get(methodNode);
 
         if(graph == null) {
-            throw new RuntimeException("The graph cannot be null");
+            graph = this.buildMethodGraph(methodNode);
         }
 
         Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegionSet = new LinkedHashMap<>();

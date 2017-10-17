@@ -71,6 +71,10 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         InsnList newInstructions = new InsnList();
 
         for(JavaRegion javaRegion : regionsInMethod) {
+            if(javaRegion.getStartMethodBlock() == null) {
+                System.out.println();
+            }
+
             if(!javaRegion.getStartMethodBlock().equals(methodBlock)) {
                 continue;
             }

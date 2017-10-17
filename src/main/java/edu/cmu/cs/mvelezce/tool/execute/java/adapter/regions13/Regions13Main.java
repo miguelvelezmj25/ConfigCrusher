@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 
 public class Regions13Main extends BaseMain {
@@ -37,8 +38,9 @@ public class Regions13Main extends BaseMain {
         Adapter adapter = new Regions13Adapter();
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
-        Executor executor = new ConfigCrusherExecutor(this.getProgramName());
-        executor.writeToFile(this.getIteration(), configuration, Regions.getRegionsToProcessedPerformance());
+        ConfigCrusherExecutor executor = new ConfigCrusherExecutor(this.getProgramName());
+        Map<String, Long> results = executor.getResults();
+        executor.writeToFile(this.getIteration(), configuration, results);
     }
 
     @Override
@@ -52,8 +54,5 @@ public class Regions13Main extends BaseMain {
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);
         }
-
-        System.out.println("start count " + Regions.startCount);
-        System.out.println("end count " + Regions.endCount);
     }
 }

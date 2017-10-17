@@ -1,0 +1,15 @@
+digraph debug {
+node [shape=record];
+518225018 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"31dcc401-f6d5-488d-9396-4d7012b92040\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+942226723 [label="L0\lLINENUMBER 32 L0\lLDC \"31dcc401-f6d5-488d-9396-4d7012b92040\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+1232329423 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+entry;
+exit;
+entry -> 942226723;
+518225018 -> exit;
+942226723 -> 518225018;
+942226723 -> 1232329423;
+1232329423 -> 518225018;
+518225018[fontcolor="purple", penwidth=3, color="purple"];
+942226723[fontcolor="purple", penwidth=3, color="purple"];
+}

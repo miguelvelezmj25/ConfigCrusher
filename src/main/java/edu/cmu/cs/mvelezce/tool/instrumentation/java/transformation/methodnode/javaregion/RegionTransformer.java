@@ -922,13 +922,21 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         List<SootMethod> worklist = new ArrayList<>();
         worklist.addAll(leafMethods);
 
-        // Push the regions up the call graph first for the leaf methods
+        // Push the regions up the call graph for the leaf methods
         while(!worklist.isEmpty()) {
             SootMethod method = worklist.remove(0);
-            this.pushUpCallGraph(method);
+            this.pushMethodsUpTheCallGraph(method);
         }
 
-        // Add the rest of the methods
+        worklist.addAll(nonLeafMethods);
+
+        // Push the regions up the call graph for the non leaf methods
+        while(!worklist.isEmpty()) {
+            SootMethod method = worklist.remove(0);
+            this.pushMethodsUpTheCallGraph(method);
+        }
+
+        // Process all methods
         worklist.addAll(leafMethods);
         worklist.addAll(nonLeafMethods);
 
@@ -941,7 +949,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            this.pushUpCallGraph(method);
+            this.pushMethodsUpTheCallGraph(method);
             regions = this.getRegionsInMethod(method);
 
             if(regions.size() != 1) {
@@ -1107,7 +1115,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return updated;
     }
 
-    private void pushUpCallGraph(SootMethod method) {
+    private void pushMethodsUpTheCallGraph(SootMethod method) {
         List<SootMethod> worklist = new ArrayList<>();
         worklist.add(method);
 

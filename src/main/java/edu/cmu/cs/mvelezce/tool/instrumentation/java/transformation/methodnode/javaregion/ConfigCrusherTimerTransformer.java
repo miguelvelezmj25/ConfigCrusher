@@ -24,11 +24,6 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
     @Override
     public void transformMethod(MethodNode methodNode) {
-//        if(methodNode.name.contains("addChunk")) {
-//            return;
-//        }
-
-
         // TODO use the graph that we already have
         System.out.println("Before transforming");
         DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
@@ -43,29 +38,29 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         InsnList newInstructions;
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
 //        int startInstructionCount = methodNode.instructions.size();
-//
+
         if(regionsInMethod.size() == 1) {
             newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
         }
         else {
             newInstructions = this.instrumentNormal(methodNode, graph, regionsInMethod);
         }
-//
+
 //        int endInstructionCount = methodNode.instructions.size();
 //
 //        if(endInstructionCount != startInstructionCount) {
 //            throw new RuntimeException("We modified the instructions in the node itself instead of creating a new list");
 //        }
-//
+
         methodNode.instructions.clear();
         methodNode.instructions.add(newInstructions);
-//
+
 //        int afterInstrumentationInstructionCount = methodNode.instructions.size();
-//
+
 //        if(afterInstrumentationInstructionCount <= endInstructionCount) {
 //            throw new RuntimeException("We apparently did not add instrumentation");
 //        }
-//
+
         System.out.println("After transforming");
         builder = new DefaultMethodGraphBuilder(methodNode);
         builder.build();
@@ -108,6 +103,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
     public InsnList getInstructionsStartRegion(JavaRegion javaRegion) {
         InsnList instructionsStartRegion = new InsnList();
         instructionsStartRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
+        // TODO make this prettier
 //        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "enter", "(Ljava/lang/String;)V", false));
         instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter", "enter", "(Ljava/lang/String;)V", false));
 
@@ -118,6 +114,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
     public InsnList getInstructionsEndRegion(JavaRegion javaRegion) {
         InsnList instructionsEndRegion = new InsnList();
         instructionsEndRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
+        // TODO make this prettier
 //        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "exit", "(Ljava/lang/String;)V", false));
         instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter", "exit", "(Ljava/lang/String;)V", false));
 

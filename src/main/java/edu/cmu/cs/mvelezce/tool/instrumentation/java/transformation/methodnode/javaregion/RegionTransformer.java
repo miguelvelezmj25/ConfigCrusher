@@ -9,7 +9,10 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassT
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.config.SootConfig;
-import jdk.internal.org.objectweb.asm.tree.*;
+import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
+import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import jdk.internal.org.objectweb.asm.util.Printer;
 import org.apache.commons.lang3.StringUtils;
 import soot.*;
@@ -97,9 +100,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         int initialRegionCount = this.regionsToOptionSet.size();
         boolean updatedRegions = true;
-
+//
         while(updatedRegions) {
             updatedRegions = this.processGraph();
+//            updatedRegions = this.processMethodsInClasses(classNodes);
             updatedRegions = updatedRegions | this.processMethodsInClasses(classNodes);
         }
 
@@ -262,7 +266,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             return updatedRegions;
         }
 
-        updatedRegions = updatedRegions | this.leaveOneRegionInMethod(regionsInMethod);
+        updatedRegions = this.leaveOneRegionInMethod(regionsInMethod);
 
         if(regionsInMethod.size() == 1) {
             return updatedRegions;
@@ -398,14 +402,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 MethodGraph graph = this.methodToGraph.get(methodNode);
                 Set<MethodBlock> reachableBlocks = graph.getReachableBlocks(region.getStartMethodBlock(), region.getEndMethodBlocks().iterator().next());
 
-                if(reachableBlocks.contains(nextRegion.getStartMethodBlock()) && reachableBlocks.containsAll(nextRegion.getEndMethodBlocks())) {
-                    region = nextRegion;
-                    currentOptions = nextOptions;
-                }
-                else {
+                if(!reachableBlocks.contains(nextRegion.getStartMethodBlock()) || !reachableBlocks.containsAll(nextRegion.getEndMethodBlocks())) {
                     region.setEndMethodBlocks(nextRegion.getEndMethodBlocks());
-                    regionsToRemove.add(nextRegion);
                 }
+
+                regionsToRemove.add(nextRegion);
 
                 Set<String> newOptions = new HashSet<>();
                 newOptions.addAll(currentOptions);
@@ -482,7 +483,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
         }
 
-
         // Validate options in inner regions and check that we can remove all inner regions within a region
         Set<JavaRegion> regionsWithInnerRegionsWithDifferentOptionSet = new HashSet<>();
 
@@ -507,9 +507,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 }
 
                 if(!regionOptions.equals(innerRegionOptions) && !innerRegionOptions.containsAll(regionOptions)) {
-                    throw new RuntimeException("The region " + region.getStartMethodBlock().getID() + " has 1" +
-                            " inner region " + innerRegion.getStartMethodBlock().getID() + ", but the outer options are not a set or" +
-                            " a subset of the inner options");
+                    regionsWithInnerRegionsWithDifferentOptionSet.add(region);
+//                    throw new RuntimeException("The region " + region.getStartMethodBlock().getID() + " has 1" +
+//                            " inner region " + innerRegion.getStartMethodBlock().getID() + ", but the outer options are not a set or" +
+//                            " a subset of the inner options");
                 }
             }
             else {
@@ -807,7 +808,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this.methodsWithUpdatedIndexes.add(methodNode);
     }
 
-    private Set<SootMethod> getLeafMethods() {
+    private Set<SootMethod> getLeafMethodsWithRegions() {
         Set<SootMethod> leafMethods = new HashSet<>();
         Set<SootMethod> nonLeafMethods = new HashSet<>();
         QueueReader<Edge> callEdges = this.callGraph.listener();
@@ -904,7 +905,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         boolean updated = false;
 
         // First add the leaf methods
-        Set<SootMethod> leafMethods = this.getLeafMethods();
+        Set<SootMethod> leafMethods = this.getLeafMethodsWithRegions();
         Set<SootMethod> nonLeafMethods = this.getNonLeafMethods();
 
         List<SootMethod> worklist = new ArrayList<>();
@@ -1412,9 +1413,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
 
             if(instructionCounter == instructionNumber) {
-                if(!(instruction instanceof MethodInsnNode)) {
-                    throw new RuntimeException("The instruction has to be a method call");
-                }
+//                if(!(instruction instanceof MethodInsnNode)) {
+//                    throw new RuntimeException("The instruction has to be a method call");
+//                }
 
                 return instruction;
             }

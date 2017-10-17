@@ -1,6 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.analysis.region;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
 
 /**
  * Created by miguelvelez on 4/7/17.
@@ -17,7 +19,7 @@ public class Regions {
     private static Stack<Long> innerRegionsExecutionTime = new Stack<>();
     private static Map<String, Long> regionsToProcessedPerformance = new HashMap<>();
 
-    private static Map<String, Long> regionsToCount = new HashMap<>();
+//    private static Map<String, Long> regionsToCount = new HashMap<>();
 
     public static void main(String[] args) {
         System.out.println("Started");
@@ -63,13 +65,13 @@ public class Regions {
         long currentRegionExecutionTime = regionExecutionTime;
 
         String region = Regions.executingRegions.pop();
-        Long time = regionsToProcessedPerformance.get(region);
+        Long time = Regions.regionsToProcessedPerformance.get(region);
 
         if(time != null) {
             regionExecutionTime += time;
         }
 
-        regionsToProcessedPerformance.put(region, regionExecutionTime);
+        Regions.regionsToProcessedPerformance.put(region, regionExecutionTime);
 
         Regions.endCount++;
 
@@ -83,12 +85,12 @@ public class Regions {
 
         Stack<Long> added = new Stack<>();
 
-        while (!innerRegionsExecutionTime.isEmpty()) {
+        while(!innerRegionsExecutionTime.isEmpty()) {
             long currentInnerRegionExecutionTime = innerRegionsExecutionTime.pop();
             added.push(currentInnerRegionExecutionTime + currentRegionExecutionTime);
         }
 
-        while (!added.isEmpty()) {
+        while(!added.isEmpty()) {
             innerRegionsExecutionTime.push(added.pop());
         }
     }

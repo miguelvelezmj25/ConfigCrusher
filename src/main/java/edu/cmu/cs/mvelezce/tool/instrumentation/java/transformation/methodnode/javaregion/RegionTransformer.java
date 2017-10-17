@@ -31,6 +31,7 @@ import java.util.*;
 public abstract class RegionTransformer extends BaseMethodTransformer {
 
     private static final String CLINIT_SIGNATURE = "void <clinit>()";
+    private static final String MAIN_SIGNATURE = "void main";
 
     private String entryPoint;
     private String rootPackage;
@@ -93,6 +94,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         int initialRegionCount = this.regionsToOptionSet.size();
+
         // Remove regions
         boolean updatedRegionsPostProcessing = true;
 
@@ -817,47 +819,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this.methodsWithUpdatedIndexes.add(methodNode);
     }
 
-//    private boolean processMethodsInClasses(Set<ClassNode> classNodes) throws IOException {
-//        for(ClassNode classNode : classNodes) {
-//            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-//
-//            if(methodsToInstrument.isEmpty()) {
-//                continue;
-//            }
-//
-//            System.out.println("Transforming class " + classNode.name);
-//
-//            for(MethodNode methodToInstrument : methodsToInstrument) {
-//                this.transformMethod(methodToInstrument);
-//            }
-//
-////            this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
-////
-////            // TODO if debug
-////            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
-////            MethodTracer tracer = classInspector.visitClass();
-////
-////            for(MethodNode methodNode : methodsToInstrument) {
-////                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
-////                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-////                PrettyMethodGraph prettyGraph = prettyBuilder.build();
-////                prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
-////
-////                try {
-////                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-////                } catch (InterruptedException e) {
-////                    e.printStackTrace();
-////                }
-////            }
-//        }
-//
-//        return false;
-//    }
-
-    private boolean processGraph() {
-        boolean updated = false;
-
-        // First add the leaf methods
+    private Set<SootMethod> getLeafMethods() {
         Set<SootMethod> leafMethods = new HashSet<>();
         Set<SootMethod> nonLeafMethods = new HashSet<>();
         QueueReader<Edge> callEdges = this.callGraph.listener();
@@ -882,9 +844,21 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            Iterator<Edge> callees = this.callGraph.edgesOutOf(tgt);
+            // Analyze the if the target is a leaf since we might not have an edge where the target is the source
+            Iterator<Edge> tgtCallees = this.callGraph.edgesOutOf(tgt);
+            boolean allJavaCalls = true;
 
-            if(callees.hasNext()) {
+            while(tgtCallees.hasNext()) {
+                Edge callee = tgtCallees.next();
+
+                // There is a call from the target to another method of this program.
+                if(callee.getTgt().method().getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+                    allJavaCalls = false;
+                    break;
+                }
+            }
+
+            if(!allJavaCalls) {
                 nonLeafMethods.add(src);
                 nonLeafMethods.add(tgt);
                 leafMethods.remove(src);
@@ -895,17 +869,61 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             if(!nonLeafMethods.contains(tgt)) {
                 leafMethods.add(tgt);
             }
+            else {
+                throw new RuntimeException("How can it be that the target has all calls to java methods or no calls," +
+                        " but it was added as a non leaf method?");
+            }
         }
 
         if(leafMethods.isEmpty()) {
             throw new RuntimeException("There has to be leaf methods");
         }
 
+        return leafMethods;
+    }
+
+    private Set<SootMethod> getNonLeafMethods() {
+        Set<SootMethod> nonLeafMethods = new HashSet<>();
+        QueueReader<Edge> callEdges = this.callGraph.listener();
+
+        while(callEdges.hasNext()) {
+            Edge edge = callEdges.next();
+            MethodOrMethodContext srcObject = edge.getSrc();
+            SootMethod src = srcObject.method();
+
+            if(!src.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+                continue;
+            }
+
+            MethodOrMethodContext tgtObject = edge.getTgt();
+            SootMethod tgt = tgtObject.method();
+
+            if(!tgt.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+                continue;
+            }
+
+            nonLeafMethods.add(src);
+        }
+
+        if(nonLeafMethods.isEmpty()) {
+            throw new RuntimeException("There has to be non leaf methods");
+        }
+
+        return nonLeafMethods;
+    }
+
+    private boolean processGraph() {
+        boolean updated = false;
+
+        // First add the leaf methods
+        Set<SootMethod> leafMethods = this.getLeafMethods();
+        Set<SootMethod> nonLeafMethods = this.getNonLeafMethods();
+
         List<SootMethod> worklist = new ArrayList<>();
         worklist.addAll(leafMethods);
 
+        // Push the regions up the call graph first for the leaf methods
         while(!worklist.isEmpty()) {
-            // Push the regions up the call graph
             SootMethod method = worklist.remove(0);
             this.pushUpCallGraph(method);
         }

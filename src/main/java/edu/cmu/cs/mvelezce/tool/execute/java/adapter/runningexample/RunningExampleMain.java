@@ -3,14 +3,15 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample;
 import edu.cmu.cs.mvelezce.Example;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.region.RegionsCounter;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 
 public class RunningExampleMain extends BaseMain {
@@ -37,8 +38,9 @@ public class RunningExampleMain extends BaseMain {
         Adapter adapter = new RunningExampleAdapter();
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
-        Executor executor = new ConfigCrusherExecutor(this.getProgramName());
-        executor.writeToFile(this.getIteration(), configuration, Regions.getRegionsToProcessedPerformance());
+        ConfigCrusherExecutor executor = new ConfigCrusherExecutor(this.getProgramName());
+        Map<String, Long> results = executor.getResults();
+        executor.writeToFile(this.getIteration(), configuration, results);
     }
 
     @Override
@@ -52,8 +54,5 @@ public class RunningExampleMain extends BaseMain {
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);
         }
-
-        System.out.println("start count " + Regions.startCount);
-        System.out.println("end count " + Regions.endCount);
     }
 }

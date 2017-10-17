@@ -10,6 +10,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Main;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 
 public class BFRegions12Main extends Regions12Main {
@@ -36,8 +37,9 @@ public class BFRegions12Main extends Regions12Main {
         Adapter adapter = new Regions12Adapter();
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
-        Executor executor = new BruteForceExecutor(this.getProgramName());
-        executor.writeToFile(this.getIteration(), configuration, Regions.getRegionsToProcessedPerformance());
+        BruteForceExecutor executor = new BruteForceExecutor(this.getProgramName());
+        Map<String, Long> results = executor.getResults();
+        executor.writeToFile(this.getIteration(), configuration, results);
     }
 
 }

@@ -1,10 +1,13 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.colorcounter.BFColorCounterAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.optimizer.BFOptimizerAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regions12.BFRegions12Adapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.runningexample.BFRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
+import edu.cmu.cs.mvelezce.tool.analysis.region.RegionsCounter;
 import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
@@ -12,13 +15,15 @@ import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class BruteForceExecutor extends BaseExecutor {
 
-    static {
-        DIRECTORY = BaseExecutor.DIRECTORY + "/bruteforce/programs";
-    }
+    // TODO this is weird and creating a lot of bugs
+//    static {
+//        DIRECTORY = BaseExecutor.DIRECTORY + "/bruteforce/programs";
+//    }
 
     public BruteForceExecutor(String programName) {
         this(programName, null, null, null);
@@ -36,6 +41,22 @@ public class BruteForceExecutor extends BaseExecutor {
         }
 
         return Helper.getConfigurations(options);
+    }
+
+    public Map<String, Long> getResults() {
+        Map<String, Long> result = RegionsCounter.getRegionsToCount();
+
+        if(result.isEmpty()) {
+            return result;
+        }
+
+        result = Regions.getRegionsToProcessedPerformance();
+
+        if(result.isEmpty()) {
+            return result;
+        }
+
+        throw new RuntimeException("No data is available");
     }
 
 //    public static Set<PerformanceEntry> repeatProcessMeasure(String programName, int iterations, String srcDir, String classDir, String entryPoint) throws IOException, ParseException, InterruptedException {
@@ -128,6 +149,9 @@ public class BruteForceExecutor extends BaseExecutor {
         }
         else if(this.getProgramName().contains("regions12")) {
             adapter = new BFRegions12Adapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("pngtasticOptimizer")) {
+            adapter = new BFOptimizerAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

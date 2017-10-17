@@ -31,7 +31,7 @@ import java.util.*;
 public abstract class RegionTransformer extends BaseMethodTransformer {
 
     private static final String CLINIT_SIGNATURE = "void <clinit>()";
-    private static final String MAIN_SIGNATURE = "void main";
+    private static final String MAIN_SIGNATURE = "void main(java.lang.String[])";
 
     private String entryPoint;
     private String rootPackage;
@@ -925,7 +925,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         // Push the regions up the call graph for the leaf methods
         while(!worklist.isEmpty()) {
             SootMethod method = worklist.remove(0);
-            this.pushMethodsUpTheCallGraph(method);
+            this.pushMethodsUpTheCallGraphToEmptyMethods(method);
         }
 
         worklist.addAll(nonLeafMethods);
@@ -933,7 +933,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         // Push the regions up the call graph for the non leaf methods
         while(!worklist.isEmpty()) {
             SootMethod method = worklist.remove(0);
-            this.pushMethodsUpTheCallGraph(method);
+            this.pushMethodsUpTheCallGraphToEmptyMethods(method);
         }
 
         // Process all methods
@@ -949,7 +949,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            this.pushMethodsUpTheCallGraph(method);
+            this.pushMethodsUpTheCallGraphToEmptyMethods(method);
             regions = this.getRegionsInMethod(method);
 
             if(regions.size() != 1) {
@@ -1115,7 +1115,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return updated;
     }
 
-    private void pushMethodsUpTheCallGraph(SootMethod method) {
+    private void pushMethodsUpTheCallGraphToEmptyOrOneRegionMethods(SootMethod method) {
+        // TODO implement
+    }
+
+    private void pushMethodsUpTheCallGraphToEmptyMethods(SootMethod method) {
         List<SootMethod> worklist = new ArrayList<>();
         worklist.add(method);
 
@@ -1124,7 +1128,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             List<JavaRegion> regions = this.getRegionsInMethod(method);
 
             if(regions.size() != 1) {
-                return;
+                continue;
+            }
+
+            if(method.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
+                continue;
             }
 
             List<Edge> callerEdges = this.getCallerEdges(method);

@@ -44,7 +44,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     private Map<MethodNode, ClassNode> methodNodeToClassNode = new HashMap<>();
     private Set<MethodNode> methodsWithUpdatedIndexes = new HashSet<>();
     private Map<String, List<String>> classToJavapResult = new HashMap<>();
-    private Map<MethodNode, MethodGraph> methodToGraph = new HashMap<>();
+    private Map<MethodNode, MethodGraph> methodsToGraphs = new HashMap<>();
     private Map<MethodNode, SootMethod> methodNodeToSootMethod = new HashMap<>();
     private Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
     private Map<SootMethod, Set<Set<String>>> sootMethodToOptionSet = new HashMap<>();
@@ -318,7 +318,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             return;
         }
 
-        MethodGraph graph = this.methodToGraph.get(methodNode);
+        MethodGraph graph = this.methodsToGraphs.get(methodNode);
 
         if(graph == null) {
             throw new RuntimeException("The graph cannot be null");
@@ -334,12 +334,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private MethodGraph buildMethodGraph(MethodNode methodNode) {
-        MethodGraph graph = this.methodToGraph.get(methodNode);
+        MethodGraph graph = this.methodsToGraphs.get(methodNode);
 
         if(graph == null) {
             DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
             graph = builder.build();
-            this.methodToGraph.put(methodNode, graph);
+            this.methodsToGraphs.put(methodNode, graph);
 
 //            if(graph.getBlocks().size() <= 3) {
 //                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
@@ -422,7 +422,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     throw new RuntimeException("How to handle multiple returns");
                 }
 
-                MethodGraph graph = this.methodToGraph.get(methodNode);
+                MethodGraph graph = this.methodsToGraphs.get(methodNode);
                 Set<MethodBlock> reachableBlocks = graph.getReachableBlocks(region.getStartMethodBlock(), region.getEndMethodBlocks().iterator().next());
 
                 if(!reachableBlocks.contains(nextRegion.getStartMethodBlock()) || !reachableBlocks.containsAll(nextRegion.getEndMethodBlocks())) {
@@ -463,7 +463,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @param regionsInMethod
      */
     private boolean removeInnerRegionsInMethod(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
-        MethodGraph graph = this.methodToGraph.get(methodNode);
+        MethodGraph graph = this.methodsToGraphs.get(methodNode);
 
         if(graph == null) {
             graph = this.buildMethodGraph(methodNode);
@@ -900,7 +900,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         worklist.addAll(this.getLeafMethods());
 
         while(!worklist.isEmpty()) {
-            System.out.println(worklist.size());
             SootMethod sootMethod = worklist.remove(0);
 
             if(sootMethod.getSubSignature().equals(RegionTransformer.CLINIT_SIGNATURE)) {
@@ -1095,7 +1094,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                         Set<MethodBlock> reachableBlocks = new HashSet<>();
                         MethodBlock start = region.getStartMethodBlock();
                         Set<MethodBlock> ends = region.getEndMethodBlocks();
-                        MethodGraph graph = this.methodToGraph.get(this.sootMethodToMethodNode.get(callerMethod));
+                        MethodGraph graph = this.methodsToGraphs.get(this.sootMethodToMethodNode.get(callerMethod));
 
                         for(MethodBlock end : ends) {
                             Set<MethodBlock> blocks = graph.getReachableBlocks(start, end);
@@ -1828,5 +1827,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     public Set<MethodBlock> getEndRegionBlocksWithReturn() {
         return this.endRegionBlocksWithReturn;
+    }
+
+    public Map<MethodNode, MethodGraph> getMethodsToGraphs() {
+        return methodsToGraphs;
     }
 }

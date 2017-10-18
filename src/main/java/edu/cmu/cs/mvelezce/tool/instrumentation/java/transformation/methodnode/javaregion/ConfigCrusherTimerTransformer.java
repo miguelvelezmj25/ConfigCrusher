@@ -24,20 +24,11 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
     @Override
     public void transformMethod(MethodNode methodNode) {
-        // TODO use the graph that we already have
         System.out.println("Before transforming");
-        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-        MethodGraph graph = builder.build();
-
-//        if(graph.getBlocks().size() <= 3) {
-////            continue;
-//            // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
-//            throw new RuntimeException("Check this case");
-//        }
+        MethodGraph graph = this.getMethodsToGraphs().get(methodNode);
 
         InsnList newInstructions;
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
-//        int startInstructionCount = methodNode.instructions.size();
 
         if(regionsInMethod.size() == 1) {
             newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
@@ -46,23 +37,11 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
             newInstructions = this.instrumentNormal(methodNode, graph, regionsInMethod);
         }
 
-//        int endInstructionCount = methodNode.instructions.size();
-//
-//        if(endInstructionCount != startInstructionCount) {
-//            throw new RuntimeException("We modified the instructions in the node itself instead of creating a new list");
-//        }
-
         methodNode.instructions.clear();
         methodNode.instructions.add(newInstructions);
 
-//        int afterInstrumentationInstructionCount = methodNode.instructions.size();
-
-//        if(afterInstrumentationInstructionCount <= endInstructionCount) {
-//            throw new RuntimeException("We apparently did not add instrumentation");
-//        }
-
         System.out.println("After transforming");
-        builder = new DefaultMethodGraphBuilder(methodNode);
+        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
         builder.build();
         System.out.print("");
     }

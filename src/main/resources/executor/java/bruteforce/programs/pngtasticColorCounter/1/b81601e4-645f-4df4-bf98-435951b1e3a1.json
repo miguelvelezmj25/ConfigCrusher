@@ -1,1 +1,19 @@
-{"configuration":["FREQTHRESHOLD","TIMEOUT","LOGLEVEL"],"trace":[{"regionID":"program","startTime":25692986456761,"endTime":0},{"regionID":"program","startTime":0,"endTime":25698511363733}]}
+{
+  "configuration": [
+    "FREQTHRESHOLD",
+    "TIMEOUT",
+    "LOGLEVEL"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 25692986456761,
+      "endTime": 0
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 25698511363733
+    }
+  ]
+}

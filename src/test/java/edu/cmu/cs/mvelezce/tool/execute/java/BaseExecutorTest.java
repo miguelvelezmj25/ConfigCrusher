@@ -1,11 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import org.junit.Assert;
-
-import java.util.Map;
-import java.util.Set;
-
 /**
  * Created by miguelvelez on 4/30/17.
  */

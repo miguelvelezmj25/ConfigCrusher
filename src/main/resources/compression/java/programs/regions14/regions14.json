@@ -1,1 +1,15 @@
-{"compressedConfigurations":[[],["A"],["B"],["A","B"]]}
+{
+  "compressedConfigurations": [
+    [],
+    [
+      "A"
+    ],
+    [
+      "B"
+    ],
+    [
+      "A",
+      "B"
+    ]
+  ]
+}

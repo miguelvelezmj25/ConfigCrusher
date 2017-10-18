@@ -252,7 +252,20 @@ public class TaintFlowAnalysisTest {
 
     @Test
     public void regions15() throws Exception {
-        String systemName = "regions14";
+        String systemName = "regions15";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions16() throws Exception {
+        String systemName = "regions16";
 
         // Program arguments
         String[] args = new String[2];

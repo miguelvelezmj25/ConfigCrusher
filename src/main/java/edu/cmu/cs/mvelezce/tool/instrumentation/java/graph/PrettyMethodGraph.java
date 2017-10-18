@@ -43,7 +43,7 @@ public class PrettyMethodGraph extends MethodGraph {
         StringBuilder output = new StringBuilder();
         String string;
 
-        while ((string = inputReader.readLine()) != null) {
+        while((string = inputReader.readLine()) != null) {
             if(!string.isEmpty()) {
                 output.append(string).append("\n");
             }
@@ -54,7 +54,7 @@ public class PrettyMethodGraph extends MethodGraph {
         output = new StringBuilder();
         BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        while ((string = errorReader.readLine()) != null) {
+        while((string = errorReader.readLine()) != null) {
             if(!string.isEmpty()) {
                 output.append(string).append("\n");
             }

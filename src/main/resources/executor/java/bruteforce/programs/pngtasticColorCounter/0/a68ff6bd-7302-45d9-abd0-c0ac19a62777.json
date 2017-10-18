@@ -1,1 +1,19 @@
-{"configuration":["FREQTHRESHOLD","DISTTHRESHOLD","TIMEOUT"],"trace":[{"regionID":"program","startTime":25350950889619,"endTime":0},{"regionID":"program","startTime":0,"endTime":25356651369494}]}
+{
+  "configuration": [
+    "FREQTHRESHOLD",
+    "DISTTHRESHOLD",
+    "TIMEOUT"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 25350950889619,
+      "endTime": 0
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 25356651369494
+    }
+  ]
+}

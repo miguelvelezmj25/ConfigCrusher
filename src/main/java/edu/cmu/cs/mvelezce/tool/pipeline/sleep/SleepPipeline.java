@@ -4,7 +4,8 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.IfStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by miguelvelez on 2/11/17.

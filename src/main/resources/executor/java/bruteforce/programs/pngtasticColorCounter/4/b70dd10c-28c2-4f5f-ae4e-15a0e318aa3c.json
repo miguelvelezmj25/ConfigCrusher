@@ -1,1 +1,17 @@
-{"configuration":["DISTTHRESHOLD"],"trace":[{"regionID":"program","startTime":26165353389682,"endTime":0},{"regionID":"program","startTime":0,"endTime":26170885701303}]}
+{
+  "configuration": [
+    "DISTTHRESHOLD"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 26165353389682,
+      "endTime": 0
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 26170885701303
+    }
+  ]
+}

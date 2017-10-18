@@ -34,12 +34,38 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
         this.measured = measured;
     }
 
+    /**
+     * The assumption is that the values in the map are in nanoseconds and we transform them to seconds
+     *
+     * @param regionsToPerformance
+     * @return
+     */
+    public static Map<Region, Double> stdToHumanReadable(Map<Region, Double> regionsToPerformance) {
+        Map<Region, Double> result = new LinkedHashMap<>();
+
+        for(Map.Entry<Region, Double> entry : regionsToPerformance.entrySet()) {
+            result.put(entry.getKey(), PerformanceEntryStatistic.toSeconds(entry.getValue()));
+        }
+
+        return result;
+    }
+
+    /**
+     * The assumption is that the value of type long is in nanoseconds.
+     *
+     * @param nanoSeconds
+     * @return
+     */
+    public static double toSeconds(double nanoSeconds) {
+        return nanoSeconds / 1000000000.0;
+    }
+
     private void calculateRawMinMax(int index, List<DefaultPerformanceEntry> performanceEntries) {
         for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
             Iterator<Map.Entry<Region, Long>> performanceEntryIterator = performanceEntry.getRegionsToRawPerformance().entrySet().iterator();
             Iterator<Map.Entry<Region, List<Long>>> regionsToRawMinMaxMeanIterator = this.regionsToRawMinMax.entrySet().iterator();
 
-            while (performanceEntryIterator.hasNext() && regionsToRawMinMaxMeanIterator.hasNext()) {
+            while(performanceEntryIterator.hasNext() && regionsToRawMinMaxMeanIterator.hasNext()) {
                 Map.Entry<Region, Long> entry1 = performanceEntryIterator.next();
                 Map.Entry<Region, List<Long>> entry2 = regionsToRawMinMaxMeanIterator.next();
 
@@ -79,7 +105,7 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
             Iterator<Map.Entry<Region, Long>> performanceEntryIterator = performanceEntry.getRegionsToProcessedPerformance().entrySet().iterator();
             Iterator<Map.Entry<Region, List<Long>>> regionsToProcessedMinMaxMeanIterator = this.regionsToProcessedMinMax.entrySet().iterator();
 
-            while (performanceEntryIterator.hasNext() && regionsToProcessedMinMaxMeanIterator.hasNext()) {
+            while(performanceEntryIterator.hasNext() && regionsToProcessedMinMaxMeanIterator.hasNext()) {
                 Map.Entry<Region, Long> entry1 = performanceEntryIterator.next();
                 Map.Entry<Region, List<Long>> entry2 = regionsToProcessedMinMaxMeanIterator.next();
 
@@ -174,7 +200,7 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
             Iterator<Map.Entry<Region, Long>> performanceEntryIterator = performanceEntry.getRegionsToRawPerformance().entrySet().iterator();
             Iterator<Map.Entry<Region, Long>> regionsToMeanIterator = this.regionsToRawMean.entrySet().iterator();
 
-            while (performanceEntryIterator.hasNext() && regionsToMeanIterator.hasNext()) {
+            while(performanceEntryIterator.hasNext() && regionsToMeanIterator.hasNext()) {
                 Map.Entry<Region, Long> entry1 = performanceEntryIterator.next();
                 Map.Entry<Region, Long> entry2 = regionsToMeanIterator.next();
 
@@ -211,7 +237,7 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
             Iterator<Map.Entry<Region, Long>> performanceEntryIterator = performanceEntry.getRegionsToProcessedPerformance().entrySet().iterator();
             Iterator<Map.Entry<Region, Long>> regionsToMeanIterator = this.regionsToProcessedMean.entrySet().iterator();
 
-            while (performanceEntryIterator.hasNext() && regionsToMeanIterator.hasNext()) {
+            while(performanceEntryIterator.hasNext() && regionsToMeanIterator.hasNext()) {
                 Map.Entry<Region, Long> entry1 = performanceEntryIterator.next();
                 Map.Entry<Region, Long> entry2 = regionsToMeanIterator.next();
 
@@ -318,32 +344,6 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
 
         this.regionsToRawStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToRawStd);
         this.regionsToProcessedStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToProcessedStd);
-    }
-
-    /**
-     * The assumption is that the values in the map are in nanoseconds and we transform them to seconds
-     *
-     * @param regionsToPerformance
-     * @return
-     */
-    public static Map<Region, Double> stdToHumanReadable(Map<Region, Double> regionsToPerformance) {
-        Map<Region, Double> result = new LinkedHashMap<>();
-
-        for(Map.Entry<Region, Double> entry : regionsToPerformance.entrySet()) {
-            result.put(entry.getKey(), PerformanceEntryStatistic.toSeconds(entry.getValue()));
-        }
-
-        return result;
-    }
-
-    /**
-     * The assumption is that the value of type long is in nanoseconds.
-     *
-     * @param nanoSeconds
-     * @return
-     */
-    public static double toSeconds(double nanoSeconds) {
-        return nanoSeconds / 1000000000.0;
     }
 
     public boolean isMeasured() {

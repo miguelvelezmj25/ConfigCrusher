@@ -1,1 +1,17 @@
-{"configuration":["A"],"trace":[{"regionID":"program","startTime":27825970069264,"endTime":0},{"regionID":"program","startTime":0,"endTime":27826978578130}]}
+{
+  "configuration": [
+    "A"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 27825970069264,
+      "endTime": 0
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 27826978578130
+    }
+  ]
+}

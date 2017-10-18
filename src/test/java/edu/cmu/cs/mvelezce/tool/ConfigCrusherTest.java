@@ -89,4 +89,25 @@ public class ConfigCrusherTest {
         performanceModel.toString();
     }
 
+    @Test
+    public void regions16() throws Exception {
+        String programName = "regions16";
+        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
+        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String entry = "edu.cmu.cs.mvelezce.Regions16";
+
+        String[] args = new String[0];
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
+        approach.compile();
+        PerformanceModel performanceModel = approach.run(args);
+
+        performanceModel.toString();
+    }
+
 }

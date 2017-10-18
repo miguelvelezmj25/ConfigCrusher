@@ -1,0 +1,18 @@
+digraph info {
+node [shape=record];
+1837353218 [label="L0\lLINENUMBER 42 L0\lLDC \"924c6b36-2b65-455c-9791-7fc9e108134b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+372875661 [label="LDC \"INFO\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L2\l"];
+310365878 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"924c6b36-2b65-455c-9791-7fc9e108134b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+2035668050 [label="L1\lLINENUMBER 43 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+entry;
+exit;
+1837353218 -> 372875661;
+1837353218 -> 2035668050;
+372875661 -> 310365878;
+372875661 -> 2035668050;
+entry -> 1837353218;
+310365878 -> exit;
+2035668050 -> 310365878;
+1837353218[fontcolor="purple", penwidth=3, color="purple"];
+310365878[fontcolor="purple", penwidth=3, color="purple"];
+}

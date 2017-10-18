@@ -41,7 +41,7 @@ public class ConfigCrusherRegionTransformerTest {
 
                 }
             };
-        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException | MalformedURLException e) {
+        } catch(InvocationTargetException | NoSuchMethodException | IllegalAccessException | MalformedURLException e) {
             e.printStackTrace();
         }
 

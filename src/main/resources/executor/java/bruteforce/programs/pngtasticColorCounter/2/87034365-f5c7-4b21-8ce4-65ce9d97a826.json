@@ -1,1 +1,18 @@
-{"configuration":["FREQTHRESHOLD","MINALPHA"],"trace":[{"regionID":"program","startTime":25805179879536,"endTime":0},{"regionID":"program","startTime":0,"endTime":25810766574568}]}
+{
+  "configuration": [
+    "FREQTHRESHOLD",
+    "MINALPHA"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 25805179879536,
+      "endTime": 0
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 25810766574568
+    }
+  ]
+}

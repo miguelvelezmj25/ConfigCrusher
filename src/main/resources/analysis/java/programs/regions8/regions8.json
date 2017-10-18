@@ -1,1 +1,60 @@
-[{"region":{"regionID":"680cec97-12ac-412c-9c2e-9fddb190dce1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions8","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A"]]},{"region":{"regionID":"4512df7f-4019-4e3e-a7e1-3727b4045065","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions8","regionMethod":"foo()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B"]]},{"region":{"regionID":"769a1ca1-39b3-45c9-b2fb-aa551e616e9a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions8","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":15,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A"]]}]
+[
+  {
+    "region": {
+      "regionID": "680cec97-12ac-412c-9c2e-9fddb190dce1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions8",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4512df7f-4019-4e3e-a7e1-3727b4045065",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions8",
+      "regionMethod": "foo()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "769a1ca1-39b3-45c9-b2fb-aa551e616e9a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions8",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 15,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A"
+      ]
+    ]
+  }
+]

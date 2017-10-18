@@ -1,1 +1,9 @@
-{"configuration":["COMPRESSOR","REMOVEGAMMA"],"regionsToProcessedPerformance":{"program":82507820389}}
+{
+  "configuration": [
+    "COMPRESSOR",
+    "REMOVEGAMMA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 82507820389
+  }
+}

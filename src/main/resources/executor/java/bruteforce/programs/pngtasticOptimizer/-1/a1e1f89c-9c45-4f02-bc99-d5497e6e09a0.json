@@ -1,1 +1,10 @@
-{"configuration":["COMPRESSOR","ITERATIONS","REMOVEGAMMA"],"regionsToProcessedPerformance":{"program":217542590657}}
+{
+  "configuration": [
+    "COMPRESSOR",
+    "ITERATIONS",
+    "REMOVEGAMMA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 217542590657
+  }
+}

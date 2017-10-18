@@ -102,7 +102,7 @@ public abstract class BaseAdapter implements Adapter {
         BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String string;
 
-        while ((string = inputReader.readLine()) != null) {
+        while((string = inputReader.readLine()) != null) {
             if(!string.isEmpty()) {
                 System.out.println(string);
 //                output.append(string).append("\n");
@@ -115,7 +115,7 @@ public abstract class BaseAdapter implements Adapter {
         output = new StringBuilder();
         BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        while ((string = errorReader.readLine()) != null) {
+        while((string = errorReader.readLine()) != null) {
             if(!string.isEmpty()) {
                 System.out.println(string);
 //                output.append(string).append("\n");

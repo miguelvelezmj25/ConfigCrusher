@@ -36,7 +36,7 @@ public abstract class Options {
 
         try {
             Options.cmd = parser.parse(componentOptions, args);
-        } catch (ParseException e) {
+        } catch(ParseException e) {
             throw new RuntimeException("Could not parse the options you provided");
         }
     }

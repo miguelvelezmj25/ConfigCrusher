@@ -52,7 +52,7 @@ public class SimpleCompression extends BaseCompression {
         Iterator<Map.Entry<Set<String>, Set<Set<String>>>> optionsToConfigurationsToExecuteIterator = optionsToConfigurationsToExecute.entrySet().iterator();
         Map.Entry<Set<String>, Set<Set<String>>> entry1 = optionsToConfigurationsToExecuteIterator.next();
 
-        while (optionsToConfigurationsToExecuteIterator.hasNext()) {
+        while(optionsToConfigurationsToExecuteIterator.hasNext()) {
             Map.Entry<Set<String>, Set<Set<String>>> entry2 = optionsToConfigurationsToExecuteIterator.next();
             Set<String> pivotOptions = new HashSet<>(entry1.getKey());
             pivotOptions.retainAll(entry2.getKey());
@@ -80,14 +80,14 @@ public class SimpleCompression extends BaseCompression {
         Iterator<Set<String>> largeSet = largeEntry.getValue().iterator();
         Iterator<Set<String>> smallSet = smallEntry.getValue().iterator();
 
-        while (largeSet.hasNext() && smallSet.hasNext()) {
+        while(largeSet.hasNext() && smallSet.hasNext()) {
             Set<String> configurationInLargeSet = largeSet.next();
 
             Set<String> valuePivotOptionsInLargeSet = new HashSet<>(configurationInLargeSet);
             valuePivotOptionsInLargeSet.retainAll(pivotOptions);
             boolean merged = false;
 
-            while (smallSet.hasNext()) {
+            while(smallSet.hasNext()) {
                 Set<String> configurationInSmallSet = smallSet.next();
 
                 Set<String> valuePivotOptionsInSmallSet = new HashSet<>(configurationInSmallSet);
@@ -112,11 +112,11 @@ public class SimpleCompression extends BaseCompression {
             smallSet = smallEntry.getValue().iterator();
         }
 
-        while (largeSet.hasNext()) {
+        while(largeSet.hasNext()) {
             configurationsToExecute.add(largeSet.next());
         }
 
-        while (smallSet.hasNext()) {
+        while(smallSet.hasNext()) {
             configurationsToExecute.add(smallSet.next());
         }
     }

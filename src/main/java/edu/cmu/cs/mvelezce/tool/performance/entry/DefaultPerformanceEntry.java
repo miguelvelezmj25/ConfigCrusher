@@ -19,7 +19,9 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
     private Map<Region, Long> regionsToProcessedPerformance = new LinkedHashMap<>();
     private Map<Region, Double> regionsToProcessedPerformanceHumanReadable = new LinkedHashMap<>();
 
-    private DefaultPerformanceEntry() { ; }
+    private DefaultPerformanceEntry() {
+        ;
+    }
 
     public DefaultPerformanceEntry(Set<String> configuration) {
         this.configuration = configuration;
@@ -128,12 +130,12 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
 
             Stack<Long> added = new Stack<>();
 
-            while (!innerRegionExecutionTime.isEmpty()) {
+            while(!innerRegionExecutionTime.isEmpty()) {
                 long currentInnerRegionExecutionTime = innerRegionExecutionTime.pop();
                 added.push(currentInnerRegionExecutionTime + regionExecutionTime);
             }
 
-            while (!added.isEmpty()) {
+            while(!added.isEmpty()) {
                 innerRegionExecutionTime.push(added.pop());
             }
         }
@@ -247,36 +249,36 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
         return regionsToRawPerformance;
     }
 
-    public Map<Region, Double> getRegionsToRawPerformanceHumanReadable() {
-        return regionsToRawPerformanceHumanReadable;
-    }
-
-    public Map<Region, Set<Region>> getRegionsToInnerRegions() {
-        return regionsToInnerRegions;
-    }
-
-    public Map<Region, Long> getRegionsToProcessedPerformance() {
-        return regionsToProcessedPerformance;
-    }
-
-    public Map<Region, Double> getRegionsToProcessedPerformanceHumanReadable() {
-        return regionsToProcessedPerformanceHumanReadable;
-    }
-
     public void setRegionsToRawPerformance(Map<Region, Long> regionsToRawPerformance) {
         this.regionsToRawPerformance = regionsToRawPerformance;
+    }
+
+    public Map<Region, Double> getRegionsToRawPerformanceHumanReadable() {
+        return regionsToRawPerformanceHumanReadable;
     }
 
     public void setRegionsToRawPerformanceHumanReadable(Map<Region, Double> regionsToRawPerformanceHumanReadable) {
         this.regionsToRawPerformanceHumanReadable = regionsToRawPerformanceHumanReadable;
     }
 
+    public Map<Region, Set<Region>> getRegionsToInnerRegions() {
+        return regionsToInnerRegions;
+    }
+
     public void setRegionsToInnerRegions(Map<Region, Set<Region>> regionsToInnerRegions) {
         this.regionsToInnerRegions = regionsToInnerRegions;
     }
 
+    public Map<Region, Long> getRegionsToProcessedPerformance() {
+        return regionsToProcessedPerformance;
+    }
+
     public void setRegionsToProcessedPerformance(Map<Region, Long> regionsToProcessedPerformance) {
         this.regionsToProcessedPerformance = regionsToProcessedPerformance;
+    }
+
+    public Map<Region, Double> getRegionsToProcessedPerformanceHumanReadable() {
+        return regionsToProcessedPerformanceHumanReadable;
     }
 
     public void setRegionsToProcessedPerformanceHumanReadable(Map<Region, Double> regionsToProcessedPerformanceHumanReadable) {

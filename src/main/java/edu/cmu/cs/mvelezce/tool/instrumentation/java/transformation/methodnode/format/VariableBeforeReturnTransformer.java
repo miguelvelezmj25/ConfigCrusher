@@ -32,7 +32,7 @@ public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
             InsnList instructions = methodNode.instructions;
             ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-            while (instructionsIterator.hasNext()) {
+            while(instructionsIterator.hasNext()) {
                 AbstractInsnNode instruction = instructionsIterator.next();
 
                 if(instruction.getOpcode() < Opcodes.IRETURN || instruction.getOpcode() > Opcodes.ARETURN) {
@@ -67,7 +67,7 @@ public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
         InsnList instructions = methodNode.instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-        while (instructionsIterator.hasNext()) {
+        while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
 
             if(instruction.getOpcode() >= Opcodes.IRETURN && instruction.getOpcode() <= Opcodes.ARETURN) {

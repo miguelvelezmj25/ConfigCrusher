@@ -21,7 +21,7 @@ public class Helper {
         Enumeration<JarEntry> entries = file.entries();
         List<String> classFiles = new LinkedList<>();
 
-        while (entries.hasMoreElements()) {
+        while(entries.hasMoreElements()) {
             JarEntry entry = entries.nextElement();
 
             if(entry.getName().endsWith(".class")) {

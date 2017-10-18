@@ -1,0 +1,13 @@
+{
+  "configuration": [
+    "A",
+    "B"
+  ],
+  "regionsToProcessedPerformance": {
+    "19580981-12ba-45fe-8a6f-9d0986aefdb4": 1777671,
+    "13677c9a-c101-4430-b057-5abfdd7a2067": 6004153880,
+    "e4e3f41e-ddfd-48c0-933f-67c958f59a49": 70362,
+    "cd3314cf-e7b9-4776-b973-d7204220b770": 1353,
+    "program": 3418759
+  }
+}

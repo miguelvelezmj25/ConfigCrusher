@@ -3,11 +3,9 @@ package edu.cmu.cs.mvelezce.tool.execute.java;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.region.RegionID;
 import edu.cmu.cs.mvelezce.tool.execute.java.serialize.Execution;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -190,7 +188,7 @@ public abstract class BaseExecutor implements Executor {
             int i = 0;
             File outputFile = new File(root + "/" + i);
 
-            while (outputFile.exists()) {
+            while(outputFile.exists()) {
                 Set<DefaultPerformanceEntry> results = this.aggregateExecutions(outputFile);
                 performanceEntriesList.add(results);
 

@@ -29,7 +29,7 @@ public class ZipmeMain {
 //                ZipMain.main(zipmeArgs);
                 Regions.exit(program.getRegionID());
             }
-        } catch (RuntimeException re) {
+        } catch(RuntimeException re) {
             success = false;
             System.out.println("This execution had a runtime exception");
         }

@@ -22,7 +22,7 @@ public class Compare {
         String strLine;
         int bfLineCount = 0;
 
-        while ((strLine = br.readLine()) != null) {
+        while((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
                 bfLineCount++;
             }
@@ -35,7 +35,7 @@ public class Compare {
         br = new BufferedReader(new InputStreamReader(in));
         int pfLineCount = 0;
 
-        while ((strLine = br.readLine()) != null) {
+        while((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
                 pfLineCount++;
             }
@@ -54,14 +54,14 @@ public class Compare {
         br = new BufferedReader(new InputStreamReader(in));
         String header = "";
 
-        while ((strLine = br.readLine()) != null) {
+        while((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
                 header = strLine;
                 break;
             }
         }
 
-        while ((strLine = br.readLine()) != null && !strLine.equals(header)) {
+        while((strLine = br.readLine()) != null && !strLine.equals(header)) {
             if(!strLine.isEmpty() && !strLine.contains("Average")) {
                 Set<String> options = new HashSet<>();
                 String optionsString = strLine.substring(7, strLine.lastIndexOf('"') - 1);
@@ -177,14 +177,14 @@ public class Compare {
             String strLine;
             String header = "";
 
-            while ((strLine = br.readLine()) != null) {
+            while((strLine = br.readLine()) != null) {
                 if(!strLine.isEmpty()) {
                     header = strLine;
                     break;
                 }
             }
 
-            while ((strLine = br.readLine()) != null) {
+            while((strLine = br.readLine()) != null) {
                 if(strLine.isEmpty() || strLine.equals(header) || strLine.contains("Average")) {
                     continue;
                 }

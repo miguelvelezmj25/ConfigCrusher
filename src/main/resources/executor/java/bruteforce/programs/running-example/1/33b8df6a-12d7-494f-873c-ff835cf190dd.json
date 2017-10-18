@@ -1,1 +1,8 @@
-{"configuration":["C"],"regionsToProcessedPerformance":{"program":7884134}}
+{
+  "configuration": [
+    "C"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 7884134
+  }
+}

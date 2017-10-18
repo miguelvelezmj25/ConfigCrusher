@@ -1,1 +1,18 @@
-{"configuration":["DISTTHRESHOLD","MINALPHA"],"trace":[{"regionID":"program","startTime":26189618553838,"endTime":0},{"regionID":"program","startTime":0,"endTime":26195180269780}]}
+{
+  "configuration": [
+    "DISTTHRESHOLD",
+    "MINALPHA"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 26189618553838,
+      "endTime": 0
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 26195180269780
+    }
+  ]
+}

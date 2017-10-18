@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
-import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.junit.Test;
 
@@ -93,7 +92,7 @@ public class BruteForceExecutorTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i2";
+        args[2] = "-i1";
 
         Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
@@ -158,8 +157,32 @@ public class BruteForceExecutorTest {
     @Test
     public void regions12() throws IOException, InterruptedException {
         String programName = "regions12";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";;
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        ;
         String entryPoint = "edu.cmu.cs.mvelezce.Regions12";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
+    @Test
+    public void regions16() throws IOException, InterruptedException {
+        String programName = "regions16";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        ;
+        String entryPoint = "edu.cmu.cs.mvelezce.Regions16";
 
         // Program arguments
         String[] args = new String[0];

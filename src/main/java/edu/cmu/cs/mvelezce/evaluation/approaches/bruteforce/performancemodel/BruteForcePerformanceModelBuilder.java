@@ -1,10 +1,9 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.performancemodel;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
-import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
+import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
 
 import java.util.Map;
 import java.util.Set;

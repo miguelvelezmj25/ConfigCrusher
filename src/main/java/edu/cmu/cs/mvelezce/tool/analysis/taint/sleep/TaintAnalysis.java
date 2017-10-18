@@ -35,7 +35,7 @@ public class TaintAnalysis {
         Queue<BasicBlock> worklist = new LinkedList<>();
         worklist.add(cfg.getEntry());
 
-        while (!worklist.isEmpty()) {
+        while(!worklist.isEmpty()) {
             BasicBlock instruction = worklist.remove();
             instructionsToPossibleTaints.put(instruction, new HashSet<>());
 
@@ -56,7 +56,7 @@ public class TaintAnalysis {
         List<BasicBlock> entry = cfg.getSuccessors(cfg.getEntry());
         worklist.add(entry.get(0));
 
-        while (!worklist.isEmpty()) {
+        while(!worklist.isEmpty()) {
             BasicBlock instruction = worklist.remove();
 
             List<BasicBlock> predecessors = cfg.getPredecessors(instruction);

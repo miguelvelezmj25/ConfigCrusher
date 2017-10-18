@@ -9,7 +9,7 @@ public class BytecodeUtils {
         int arrayDim = 0;
         int i = 0;
         char c = descriptor.charAt(0);
-        while (c == '[') {
+        while(c == '[') {
             ++arrayDim;
             c = descriptor.charAt(++i);
         }
@@ -62,7 +62,7 @@ public class BytecodeUtils {
             StringBuffer sbuf = new StringBuffer(name);
             do {
                 sbuf.append("[]");
-            } while (--arrayDim > 0);
+            } while(--arrayDim > 0);
 
             return sbuf.toString();
         }

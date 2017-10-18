@@ -157,11 +157,11 @@ public class ConfigCrusherExecutorTest {
 
         configurations.clear();
         Set<String> n = new HashSet<>();
-        n.add("COMPRESSOR");
-        n.add("LOGLEVEL");
-        n.add("REMOVEGAMMA");
-        n.add("LOGLEVEL");
-        n.add("ITERATIONS");
+        n.add("COMPRESSIONLEVEL");
+//        n.add("LOGLEVEL");
+//        n.add("REMOVEGAMMA");
+//        n.add("LOGLEVEL");
+//        n.add("ITERATIONS");
         configurations.add(n);
 
 

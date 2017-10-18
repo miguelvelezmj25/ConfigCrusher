@@ -38,7 +38,7 @@ public class ConfigCrusherTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i5";
+        args[2] = "-i1";
 
         ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
         approach.compile();

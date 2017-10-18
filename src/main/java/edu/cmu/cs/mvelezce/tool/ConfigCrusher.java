@@ -43,7 +43,7 @@ public class ConfigCrusher {
 
     public PerformanceModel run(String[] args) throws IOException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InterruptedException {
         StaticAnalysis analysis = new TaintFlowAnalysis(this.programName);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = analysis.analyze();
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = analysis.analyze(args);
 
         Set<Set<String>> options = BaseCompression.expandOptions(javaRegionsToOptionSet.values());
         Compression compressor = new SimpleCompression(this.programName, options);

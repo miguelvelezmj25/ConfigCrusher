@@ -1,17 +1,1 @@
-{
-  "compressedConfigurations": [
-    [],
-    [
-      "A"
-    ],
-    [
-      "B",
-      "C"
-    ],
-    [
-      "A",
-      "B",
-      "C"
-    ]
-  ]
-}
+{"compressedConfigurations":[[],["A"],["B","C"],["A","B","C"]]}

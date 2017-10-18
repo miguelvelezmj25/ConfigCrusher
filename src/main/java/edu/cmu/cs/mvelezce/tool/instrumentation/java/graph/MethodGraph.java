@@ -51,7 +51,7 @@ public class MethodGraph {
 
         boolean change = true;
 
-        while (change) {
+        while(change) {
             change = false;
 
             for(MethodBlock block : blocks) {
@@ -154,7 +154,7 @@ public class MethodGraph {
         Queue<MethodBlock> queue = new ArrayDeque<>();
         queue.offer(start);
 
-        while (!queue.isEmpty()) {
+        while(!queue.isEmpty()) {
             MethodBlock currentBlock = queue.poll();
 
             if(currentBlock == end) {
@@ -187,7 +187,7 @@ public class MethodGraph {
         Stack<MethodBlock> dfs = new Stack<>();
         dfs.push(start);
 
-        while (!dfs.isEmpty()) {
+        while(!dfs.isEmpty()) {
             MethodBlock currentBlock = dfs.peek();
 
             if(currentBlock.getSuccessors().isEmpty()) {
@@ -217,11 +217,11 @@ public class MethodGraph {
         // DFS in order of last visited block from the first pass
         Set<Set<MethodBlock>> stronglyConnectedComponents = new HashSet<>();
 
-        while (!visited.isEmpty()) {
+        while(!visited.isEmpty()) {
             dfs.push(visited.pop());
             Set<MethodBlock> stronglyConnectedComponent = new HashSet<>();
 
-            while (!dfs.isEmpty()) {
+            while(!dfs.isEmpty()) {
                 MethodBlock currentBlock = dfs.peek();
                 currentBlock = reversedGraph.getMethodBlock(currentBlock.getID());
                 stronglyConnectedComponent.add(currentBlock);

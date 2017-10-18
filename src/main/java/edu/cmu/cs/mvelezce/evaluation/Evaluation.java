@@ -160,7 +160,7 @@ public class Evaluation {
         String strLine;
         int approach1LineCount = 0;
 
-        while ((strLine = br.readLine()) != null) {
+        while((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
                 approach1LineCount++;
             }
@@ -173,7 +173,7 @@ public class Evaluation {
         br = new BufferedReader(new InputStreamReader(in));
         int approach2LineCount = 0;
 
-        while ((strLine = br.readLine()) != null) {
+        while((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
                 approach2LineCount++;
             }
@@ -191,13 +191,13 @@ public class Evaluation {
         in = new DataInputStream(fstream);
         br = new BufferedReader(new InputStreamReader(in));
 
-        while ((strLine = br.readLine()) != null) {
+        while((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
                 break;
             }
         }
 
-        while ((strLine = br.readLine()) != null) {
+        while((strLine = br.readLine()) != null) {
             Set<String> options = new HashSet<>();
             int startOptionIndex = strLine.indexOf("[") + 1;
             int endOptionIndex = strLine.lastIndexOf("]");
@@ -227,7 +227,7 @@ public class Evaluation {
             br = new BufferedReader(new InputStreamReader(in));
             br.readLine();
 
-            while ((strLine = br.readLine()) != null) {
+            while((strLine = br.readLine()) != null) {
                 Set<String> options = new HashSet<>();
                 int startOptionIndex = strLine.indexOf("[") + 1;
                 int endOptionIndex = strLine.lastIndexOf("]");
@@ -267,7 +267,7 @@ public class Evaluation {
             br = new BufferedReader(new InputStreamReader(in));
             br.readLine();
 
-            while ((strLine = br.readLine()) != null) {
+            while((strLine = br.readLine()) != null) {
                 Set<String> options = new HashSet<>();
                 int startOptionIndex = strLine.indexOf("[") + 1;
                 int endOptionIndex = strLine.lastIndexOf("]");

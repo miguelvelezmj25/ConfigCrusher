@@ -1,13 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.execute.java;
 
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.region.RegionID;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,7 +17,7 @@ public interface Executor {
 
     public Set<PerformanceEntryStatistic> execute() throws IOException, InterruptedException;
 
-//    public void writeToFile(String iteration, Set<String> configuration, List<Region> executedRegions) throws IOException;
+    //    public void writeToFile(String iteration, Set<String> configuration, List<Region> executedRegions) throws IOException;
 //    public void writeToFile(String iteration, Set<String> configuration, Map<RegionID, Long> regionsToProcessedPerformance) throws IOException;
     public void writeToFile(String iteration, Set<String> configuration, Map<String, Long> regionsToProcessedPerformance) throws IOException;
 

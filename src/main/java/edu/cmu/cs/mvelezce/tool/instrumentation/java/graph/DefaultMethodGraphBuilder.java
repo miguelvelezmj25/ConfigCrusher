@@ -23,7 +23,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
         AbstractInsnNode instruction = instructionsIterator.next();
         MethodBlock block = graph.getMethodBlock(instruction);
 
-        while (instructionsIterator.hasNext()) {
+        while(instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
             MethodBlock possibleBlock = graph.getMethodBlock(instruction);
 
@@ -132,7 +132,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
         List<AbstractInsnNode> blockInstructions = block.getInstructions();
         blockInstructions.add(instruction);
 
-        while (instructionsIterator.hasNext()) {
+        while(instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
             MethodBlock possibleBlock = graph.getMethodBlock(instruction);
 
@@ -148,7 +148,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
         instructionsIterator = instructions.iterator();
         boolean hasReturn = false;
 
-        while (instructionsIterator.hasNext()) {
+        while(instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
             int opcode = instruction.getOpcode();
 
@@ -201,7 +201,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
         MethodBlock block = new MethodBlock(instruction);
         graph.addMethodBlock(block);
 
-        while (instructionsIterator.hasNext()) {
+        while(instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
             int type = instruction.getType();
             int opcode = instruction.getOpcode();
@@ -233,7 +233,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                 for(TryCatchBlockNode tryCatchBlock : this.getMethodNode().tryCatchBlocks) {
                     AbstractInsnNode insnNode = tryCatchBlock.start;
 
-                    while (insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
+                    while(insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
                         insnNode = insnNode.getNext();
 
                         if(insnNode == instruction) {

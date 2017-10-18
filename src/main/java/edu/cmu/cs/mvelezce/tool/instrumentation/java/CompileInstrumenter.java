@@ -51,17 +51,17 @@ public class CompileInstrumenter extends BaseInstrumenter {
             BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String string;
 
-            while (inputReader.readLine() != null) {
+            while(inputReader.readLine() != null) {
             }
 
             BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-            while ((string = errorReader.readLine()) != null) {
+            while((string = errorReader.readLine()) != null) {
                 System.out.println(string);
             }
 
             process.waitFor();
-        } catch (IOException | InterruptedException ie) {
+        } catch(IOException | InterruptedException ie) {
             ie.printStackTrace();
         }
 
@@ -76,7 +76,7 @@ public class CompileInstrumenter extends BaseInstrumenter {
         BufferedWriter writer = new BufferedWriter(new FileWriter(this.getSrcDir() + "/sources.txt"));
         String string;
 
-        while ((string = inputReader.readLine()) != null) {
+        while((string = inputReader.readLine()) != null) {
             writer.write(string);
             writer.write("\n");
         }
@@ -85,7 +85,7 @@ public class CompileInstrumenter extends BaseInstrumenter {
 
         BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        while ((string = errorReader.readLine()) != null) {
+        while((string = errorReader.readLine()) != null) {
             System.out.println(string);
         }
 

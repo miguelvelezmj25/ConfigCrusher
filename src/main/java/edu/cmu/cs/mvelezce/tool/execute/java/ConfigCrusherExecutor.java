@@ -10,6 +10,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions13.Regions13Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions14.Regions14Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions16.Regions16Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
@@ -97,6 +98,9 @@ public class ConfigCrusherExecutor extends BaseExecutor {
         }
         else if(this.getProgramName().contains("regions14")) {
             adapter = new Regions14Adapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("regions16")) {
+            adapter = new Regions16Adapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

@@ -1,1 +1,1318 @@
-[{"region":{"regionID":"9c10204c-684a-449c-b23b-0dccac8593b0","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":230,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["REMOVEGAMMA"]]},{"region":{"regionID":"6af4181c-6c49-43b8-a8a8-ffecae36602c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":269,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["LOGLEVEL"]]},{"region":{"regionID":"07704b29-8230-4118-b189-e60fa1e69a1f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic","regionClass":"PngtasticOptimizer","regionMethod":"<init>(Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;)V","startBytecodeIndex":-2147483648,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["COMPRESSOR","ITERATIONS","LOGLEVEL"]]},{"region":{"regionID":"269358e8-0b70-4dde-8023-fe2a9055cccd","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":250,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["COMPRESSOR"]]},{"region":{"regionID":"abed2196-76d4-4d9d-a4a8-ee3e3d49b887","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic.core","regionClass":"Logger","regionMethod":"debug(Ljava/lang/String;[Ljava/lang/Object;)V","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["COMPRESSOR","ITERATIONS","LOGLEVEL"]]},{"region":{"regionID":"19b087c1-d550-4394-8f26-b794df71cb46","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":240,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["COMPRESSIONLEVEL"]]},{"region":{"regionID":"ff63eca4-8686-4dcb-8bee-47e2f0317e63","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":259,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["ITERATIONS"]]},{"region":{"regionID":"e6f8f479-c4ce-4ea9-94af-3847d47de001","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic.core","regionClass":"PngOptimizer","regionMethod":"optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;Ljava/lang/String;ZLjava/lang/Integer;)V","startBytecodeIndex":-2147483648,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["COMPRESSOR","ITERATIONS","COMPRESSIONLEVEL"]]},{"region":{"regionID":"5a5692a2-b97a-443c-a126-af3eb02df436","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic.core","regionClass":"PngOptimizer","regionMethod":"optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/lang/Integer;)Loptimizer/com/googlecode/pngtastic/core/PngImage;","startBytecodeIndex":-2147483648,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["LOGLEVEL","REMOVEGAMMA"]]},{"region":{"regionID":"9411c198-5dcc-451b-9365-4c277e3bc878","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic.core","regionClass":"PngImage","regionMethod":"addChunk(Loptimizer/com/googlecode/pngtastic/core/PngChunk;)V","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["LOGLEVEL","REMOVEGAMMA"]]}]
+[
+  {
+    "region": {
+      "regionID": "cf8471b8-0e59-4916-8e07-bb0143978b05",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "LongestMatchCache",
+      "regionMethod": "subLenToCache([CII)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a0facba1-d693-4a10-9f48-1014ef3d2613",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "patchDistanceCodesForBuggyDecoders([I)V",
+      "startBytecodeIndex": 12,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0b6b8667-36be-4614-aaf8-3cf40ce95805",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing",
+      "regionClass": "PngtasticCompressionHandler",
+      "regionMethod": "deflate(Loptimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream;Ljava/lang/Integer;Z)[B",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "20564572-b159-41a7-95c5-f2c729f77d92",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Cookie",
+      "regionMethod": "fillCostMax([JI)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "59c891d7-76a3-4523-8910-8e847dd1963d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "deflateSplittingLast(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Options;Z[BIILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V",
+      "startBytecodeIndex": 47,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "5caf19ee-8f78-4545-9191-c11b5a6a1766",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Katajainen",
+      "regionMethod": "boundaryPm(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie$Node;[Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie$Node;[Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie$Node;IIZ)V",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2e73da31-a092-4c33-a5d1-d6bed31b595f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Buffer",
+      "regionMethod": "addHuffmanBits(II)V",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9c10204c-684a-449c-b23b-0dccac8593b0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 230,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "05052c38-dc7f-481a-89f2-b49bf3f01f45",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Squeeze",
+      "regionMethod": "fixedCost(II)J",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6bc8ede5-1020-4b2b-9f20-28fb1bd860ed",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Squeeze",
+      "regionMethod": "optimalRun(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache;[BII[CLoptimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore;)V",
+      "startBytecodeIndex": 38,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "33144bf3-5b11-4577-9136-9bce7bd9a807",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Squeeze",
+      "regionMethod": "bestLengths(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache;I[BIIJLoptimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats;[C[J)V",
+      "startBytecodeIndex": 102,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "49d393a6-e44d-4a39-924d-210177509ad9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "SymbolStats",
+      "regionMethod": "alloy(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats;)V",
+      "startBytecodeIndex": 13,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "200ca209-78dc-43c0-bedc-3291142ab281",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "lengthsToSymbols([III[I[I[I)V",
+      "startBytecodeIndex": 28,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "628eb19c-fe0d-4ce8-858d-82f3b13cb7d5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "lzCounts([C[CII[I[I)V",
+      "startBytecodeIndex": 16,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4096fd11-14c2-4966-a196-6b971ea13fc0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "addLzBlock(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Deflate$BlockType;Z[C[CIILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V",
+      "startBytecodeIndex": 56,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c5aaa371-7dd6-40ab-9ee1-6e3968e34fd2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Squeeze",
+      "regionMethod": "bestFixedLengths(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache;[BII[C[J)V",
+      "startBytecodeIndex": 55,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6af4181c-6c49-43b8-a8a8-ffecae36602c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 269,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1908d421-4299-4e63-a772-816bc80ec625",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "SymbolStats",
+      "regionMethod": "getFreqs(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore;)V",
+      "startBytecodeIndex": 57,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "36bb764a-4b88-444b-83f2-c1ac9fbbe049",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "LongestMatchCache",
+      "regionMethod": "maxCachedSubLen(I)I",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "be4307dd-e500-4c47-acd6-b3853af75920",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing",
+      "regionClass": "PngtasticCompressionHandler",
+      "regionMethod": "deflateImageDataSerially(Loptimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream;Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/util/List;",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8959e343-c397-45bd-94bd-584f2c72a58d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "BlockSplitter",
+      "regionMethod": "findMinimum(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[C[CII)I",
+      "startBytecodeIndex": 16,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2a15deeb-d574-43e7-aead-c737b5073659",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "encodeTree(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[I[IZZZLoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V",
+      "startBytecodeIndex": 12,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8351c5e9-bbd7-4dbe-bc14-5965c7747c06",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "LongestMatchCache",
+      "regionMethod": "init(I)V",
+      "startBytecodeIndex": 48,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2b27c221-0a6a-4b08-a457-73a0cbd275d1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "optimizeHuffmanForRle(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[I)V",
+      "startBytecodeIndex": 14,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d0993ecd-bc9c-4514-8111-471f898a1406",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Cookie",
+      "regionMethod": "<init>(I)V",
+      "startBytecodeIndex": 271,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9739f78a-2c10-4028-aa60-1f223b22214c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "PngOptimizer",
+      "regionMethod": "setCompressor(Ljava/lang/String;Ljava/lang/Integer;)V",
+      "startBytecodeIndex": 5,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8df5e9fb-7cb3-4834-bc07-eaa0235dafae",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "error(Ljava/lang/String;[Ljava/lang/Object;)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "706e2b71-ec09-4aa4-bb9f-4dccade2be8f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "BlockSplitter",
+      "regionMethod": "split(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[BII)I",
+      "startBytecodeIndex": 64,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "269358e8-0b70-4dde-8023-fe2a9055cccd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 250,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "abed2196-76d4-4d9d-a4a8-ee3e3d49b887",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "debug(Ljava/lang/String;[Ljava/lang/Object;)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1581b3c9-e7f8-408a-8c36-4594afcd3788",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "deflateDynamicBlock(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Options;Z[BIILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V",
+      "startBytecodeIndex": 32,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2e7a5cee-677f-4f5f-8e03-1bae4761e09e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "PngChunk",
+      "regionMethod": "getUnsignedInt(I)J",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL",
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d8a446fd-31c0-4ac6-8c3d-97de171820eb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "simulateAddDynamicTree(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[I[I)I",
+      "startBytecodeIndex": 12,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "684c376a-f9f9-4922-a32d-800351dad783",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Hash",
+      "regionMethod": "init([BIII)V",
+      "startBytecodeIndex": 119,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8ea20d88-5f12-4327-b9d5-d69e9067f053",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Hash",
+      "regionMethod": "updateHash([BII)V",
+      "startBytecodeIndex": 20,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0dbea858-43ca-4537-89e8-7242c7d58095",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "addLzData([C[CII[I[I[I[ILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V",
+      "startBytecodeIndex": 28,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1bf40ca1-a53e-4bac-8777-f0f851fdf85d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Cookie",
+      "regionMethod": "expand(Ljava/lang/Object;)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "11d0b5ef-c7d2-4e81-9afb-8e63d62b691f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "SymbolStats",
+      "regionMethod": "calculateLens()V",
+      "startBytecodeIndex": 17,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a73145b2-5d10-4078-ba6e-4f94cfb4b3ea",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "simulateEncodeTree(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[I[IZZZ)I",
+      "startBytecodeIndex": 12,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "19b087c1-d550-4394-8f26-b794df71cb46",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 240,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0c508dde-170f-495f-b1ef-a43353d121a6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Cookie",
+      "regionMethod": "<clinit>()V",
+      "startBytecodeIndex": 47,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e34bdb44-7ce8-45b0-9c13-4f7ebe293078",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "PngProcessor",
+      "regionMethod": "processHeadChunks(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/util/Iterator;)Loptimizer/com/googlecode/pngtastic/core/PngChunk;",
+      "startBytecodeIndex": 30,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL",
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d1081116-29f9-459d-a039-15838082254e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "addDynamicTree(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[I[ILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V",
+      "startBytecodeIndex": 16,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ff63eca4-8686-4dcb-8bee-47e2f0317e63",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 259,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "924c6b36-2b65-455c-9791-7fc9e108134b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "info(Ljava/lang/String;[Ljava/lang/Object;)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b9e5f35f-29a0-4a1b-b314-95d072e4a81e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "calculateFixedBlockSize(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[C[CI)I",
+      "startBytecodeIndex": 39,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1530635b-c549-4106-b9ce-4d1124837223",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "SymbolStats",
+      "regionMethod": "randomizeFreqs(I)I",
+      "startBytecodeIndex": 18,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e4a137a4-76c0-49ee-ab9d-3da834100786",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "getFixedTree([I[I)V",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8478998c-6f87-4b18-8893-00a0a39f1179",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "LongestMatchCache",
+      "regionMethod": "cacheToSubLen(II[C)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1a5fe916-f0f9-4141-bc30-18d3692ae3e1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "greedy(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache;[BIILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore;)V",
+      "startBytecodeIndex": 42,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9061140a-89ff-417e-ae62-a4d122e47242",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Squeeze",
+      "regionMethod": "optimal(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;ILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache;[BII)Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/LzStore;",
+      "startBytecodeIndex": 73,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ea4ac6f2-1c2e-4fee-a4e6-28765b1e0ade",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "findLongestMatch(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache;ILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Hash;[BIII[C)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e3f3c3ff-4ffd-40c3-833c-16f5b50d2280",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Buffer",
+      "regionMethod": "append(B)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "170ecc6d-0711-42b2-95cf-f1ff9547677b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "SymbolStats",
+      "regionMethod": "calculateDists()V",
+      "startBytecodeIndex": 17,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "843a2495-87c8-4be9-abde-d69275976bbb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Util",
+      "regionMethod": "distExtraBitsValue(I)I",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "da3d36e3-9590-4814-bdf7-bc888b36eca3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Katajainen",
+      "regionMethod": "sort([Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie$Node;[Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie$Node;II)V",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ccc12023-cd77-46d9-bae0-197d01bfc5d3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "SymbolStats",
+      "regionMethod": "minCost()J",
+      "startBytecodeIndex": 19,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b64585ca-9a32-4a36-9ecd-e6c0f6c17253",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "<init>(Ljava/lang/String;)V",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bcf13865-e29c-4e4e-b577-a6d1bb7dd050",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "calculateBlockSize(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[C[CII)I",
+      "startBytecodeIndex": 76,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c0f7dcd5-ed00-4b15-a1f8-4d225f711a8c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Deflate",
+      "regionMethod": "deflateSplittingFirst(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Options;Z[BIILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V",
+      "startBytecodeIndex": 21,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d93394e8-a2a6-449c-a1f8-c8a94434b916",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Cookie",
+      "regionMethod": "fill0([CI)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9411c198-5dcc-451b-9365-4c277e3bc878",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "PngImage",
+      "regionMethod": "addChunk(Loptimizer/com/googlecode/pngtastic/core/PngChunk;)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL",
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fdecebd0-4aed-4018-9fdc-2a5e317e54f4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Katajainen",
+      "regionMethod": "lengthLimitedCodeLengths(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[II[I)V",
+      "startBytecodeIndex": 26,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "820a5717-66aa-4267-aa28-6404cf94aa22",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "Buffer",
+      "regionMethod": "addBits(II)V",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6f119f30-68a8-42cc-a3e7-3a678ab47287",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing.zopfli",
+      "regionClass": "BlockSplitter",
+      "regionMethod": "splitLz(Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[C[CI)I",
+      "startBytecodeIndex": 54,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9fc45671-099a-4753-82f2-57445953f3b9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing",
+      "regionClass": "PngtasticCompressionHandler",
+      "regionMethod": "deflateImageData(Loptimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream;ILjava/lang/Integer;)[B",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  }
+]

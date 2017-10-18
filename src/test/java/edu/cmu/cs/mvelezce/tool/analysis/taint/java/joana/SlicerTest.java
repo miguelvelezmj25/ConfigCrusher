@@ -1,12 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.joana;
 
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.*;
-
 /**
  * Created by mvelezce on 6/24/17.
  */

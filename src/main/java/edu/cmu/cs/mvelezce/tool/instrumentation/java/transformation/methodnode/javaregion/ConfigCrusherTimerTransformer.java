@@ -108,8 +108,8 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         InsnList instructionsStartRegion = new InsnList();
         instructionsStartRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
         // TODO make this prettier
-//        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "enter", "(Ljava/lang/String;)V", false));
-        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter", "enter", "(Ljava/lang/String;)V", false));
+        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "enter", "(Ljava/lang/String;)V", false));
+//        instructionsStartRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter", "enter", "(Ljava/lang/String;)V", false));
 
         return instructionsStartRegion;
     }
@@ -119,8 +119,8 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         InsnList instructionsEndRegion = new InsnList();
         instructionsEndRegion.add(new LdcInsnNode(javaRegion.getRegionID()));
         // TODO make this prettier
-//        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "exit", "(Ljava/lang/String;)V", false));
-        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter", "exit", "(Ljava/lang/String;)V", false));
+        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/Regions", "exit", "(Ljava/lang/String;)V", false));
+//        instructionsEndRegion.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter", "exit", "(Ljava/lang/String;)V", false));
 
         return instructionsEndRegion;
     }
@@ -140,7 +140,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         InsnList instructions = methodNode.instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
-        while (instructionsIterator.hasNext()) {
+        while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
             newInstructions.add(instruction);
 
@@ -154,7 +154,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
                 instruction = instructionsIterator.next();
                 int opcode = instruction.getOpcode();
 
-                while ((opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN) && opcode != Opcodes.RET) {
+                while((opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN) && opcode != Opcodes.RET) {
                     newInstructions.add(instruction);
                     instruction = instructionsIterator.next();
                     opcode = instruction.getOpcode();
@@ -189,7 +189,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         ListIterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
 
         // Have to loop through the instructions to avoid changing the current instructions in the method node
-        while (iterator.hasNext()) {
+        while(iterator.hasNext()) {
             newInstructions.add(iterator.next());
         }
 

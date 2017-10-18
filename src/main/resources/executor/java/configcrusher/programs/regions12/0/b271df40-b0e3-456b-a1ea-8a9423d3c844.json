@@ -1,1 +1,15 @@
-{"configuration":["A","B","C"],"regionsToProcessedPerformance":{"program":3795811,"97982329-1bcf-47b0-b8e6-33a6df85c672":2975532,"dde4d16e-e783-46cc-a35a-b9acad848762":5412,"9f752a05-118b-4b97-a418-6d10a3a79fa7":4351,"2034d24f-8d53-47da-b45d-7a0c6bb4bb67":4004775717,"f2c72717-de4e-4506-9742-506903d51e7e":2000570599}}
+{
+  "configuration": [
+    "A",
+    "B",
+    "C"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 3795811,
+    "97982329-1bcf-47b0-b8e6-33a6df85c672": 2975532,
+    "dde4d16e-e783-46cc-a35a-b9acad848762": 5412,
+    "9f752a05-118b-4b97-a418-6d10a3a79fa7": 4351,
+    "2034d24f-8d53-47da-b45d-7a0c6bb4bb67": 4004775717,
+    "f2c72717-de4e-4506-9742-506903d51e7e": 2000570599
+  }
+}

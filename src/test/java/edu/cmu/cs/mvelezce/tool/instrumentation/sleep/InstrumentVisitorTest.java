@@ -7,8 +7,6 @@ import edu.cmu.cs.mvelezce.sleep.ast.statement.BlockStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.SleepStatement;
 import edu.cmu.cs.mvelezce.sleep.ast.statement.Statement;
 import edu.cmu.cs.mvelezce.tool.analysis.region.SleepRegion;
-import edu.cmu.cs.mvelezce.tool.pipeline.sleep.SleepPipeline;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;

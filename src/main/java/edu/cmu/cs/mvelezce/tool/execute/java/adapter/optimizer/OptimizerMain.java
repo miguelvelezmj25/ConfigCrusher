@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
-import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;

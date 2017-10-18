@@ -1,1 +1,19 @@
-{"configuration":["TIMEOUT","LOGLEVEL","MINALPHA"],"trace":[{"regionID":"program","startTime":25558975004871,"endTime":0},{"regionID":"program","startTime":0,"endTime":25564540692988}]}
+{
+  "configuration": [
+    "TIMEOUT",
+    "LOGLEVEL",
+    "MINALPHA"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 25558975004871,
+      "endTime": 0
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 25564540692988
+    }
+  ]
+}

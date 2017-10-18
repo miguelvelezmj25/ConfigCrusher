@@ -1,1 +1,60 @@
-[{"region":{"regionID":"98e4ebbd-217e-4a9b-8382-89ea3e70f9c0","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions11","regionMethod":"foo(ZZ)V","startBytecodeIndex":1,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B"]]},{"region":{"regionID":"c760a148-711a-45a1-ab89-75c91d526def","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions11","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":24,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A"]]},{"region":{"regionID":"6c1ed47b-5712-4232-95b2-05c06b0be58e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions11","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":33,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["B"]]}]
+[
+  {
+    "region": {
+      "regionID": "98e4ebbd-217e-4a9b-8382-89ea3e70f9c0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions11",
+      "regionMethod": "foo(ZZ)V",
+      "startBytecodeIndex": 1,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c760a148-711a-45a1-ab89-75c91d526def",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions11",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6c1ed47b-5712-4232-95b2-05c06b0be58e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions11",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 33,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "B"
+      ]
+    ]
+  }
+]

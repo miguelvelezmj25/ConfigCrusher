@@ -19,7 +19,7 @@ public class CustomClassWriter extends ClassWriter {
         try {
             type3 = Class.forName(type1.replace('/', '.'), false, type5);
             type4 = Class.forName(type2.replace('/', '.'), false, type5);
-        } catch (Exception type7) {
+        } catch(Exception type7) {
             throw new RuntimeException(type7.toString());
         }
 
@@ -32,7 +32,7 @@ public class CustomClassWriter extends ClassWriter {
         else if(!type3.isInterface() && !type4.isInterface()) {
             do {
                 type3 = type3.getSuperclass();
-            } while (!type3.isAssignableFrom(type4));
+            } while(!type3.isAssignableFrom(type4));
 
             return type3.getName().replace('.', '/');
         }

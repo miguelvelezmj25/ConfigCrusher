@@ -3,9 +3,9 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.colorcounter.BFColorCounterAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.optimizer.BFOptimizerAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regions12.BFRegions12Adapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regions16.BFRegions16Adapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.runningexample.BFRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.region.RegionsCounter;
 import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
@@ -21,9 +21,9 @@ import java.util.Set;
 public class BruteForceExecutor extends BaseExecutor {
 
     // TODO this is weird and creating a lot of bugs
-//    static {
-//        DIRECTORY = BaseExecutor.DIRECTORY + "/bruteforce/programs";
-//    }
+    static {
+        DIRECTORY = BaseExecutor.DIRECTORY + "/bruteforce/programs";
+    }
 
     public BruteForceExecutor(String programName) {
         this(programName, null, null, null);
@@ -46,13 +46,13 @@ public class BruteForceExecutor extends BaseExecutor {
     public Map<String, Long> getResults() {
         Map<String, Long> result = RegionsCounter.getRegionsToCount();
 
-        if(result.isEmpty()) {
+        if(!result.isEmpty()) {
             return result;
         }
 
         result = Regions.getRegionsToProcessedPerformance();
 
-        if(result.isEmpty()) {
+        if(!result.isEmpty()) {
             return result;
         }
 
@@ -149,6 +149,9 @@ public class BruteForceExecutor extends BaseExecutor {
         }
         else if(this.getProgramName().contains("regions12")) {
             adapter = new BFRegions12Adapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("regions16")) {
+            adapter = new BFRegions16Adapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else if(this.getProgramName().contains("pngtasticOptimizer")) {
             adapter = new BFOptimizerAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());

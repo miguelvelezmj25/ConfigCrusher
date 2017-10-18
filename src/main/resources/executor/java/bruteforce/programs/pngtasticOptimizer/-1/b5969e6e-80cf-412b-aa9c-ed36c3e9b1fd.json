@@ -1,1 +1,9 @@
-{"configuration":["COMPRESSOR","ITERATIONS"],"regionsToProcessedPerformance":{"program":217627947459}}
+{
+  "configuration": [
+    "COMPRESSOR",
+    "ITERATIONS"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 217627947459
+  }
+}

@@ -1,1 +1,17 @@
-{"configuration":["TIMEOUT"],"trace":[{"regionID":"program","startTime":25509466583389,"endTime":0},{"regionID":"program","startTime":0,"endTime":25515163197449}]}
+{
+  "configuration": [
+    "TIMEOUT"
+  ],
+  "trace": [
+    {
+      "regionID": "program",
+      "startTime": 25509466583389,
+      "endTime": 0
+    },
+    {
+      "regionID": "program",
+      "startTime": 0,
+      "endTime": 25515163197449
+    }
+  ]
+}

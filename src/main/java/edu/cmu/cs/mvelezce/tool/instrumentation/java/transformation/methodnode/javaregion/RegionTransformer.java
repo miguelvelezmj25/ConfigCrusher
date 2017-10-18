@@ -150,7 +150,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
 
-            // TODO if debug
             TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
             MethodTracer tracer = classInspector.visitClass();
 
@@ -832,7 +831,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this.methodsWithUpdatedIndexes.add(methodNode);
     }
 
-    private Set<SootMethod> getLeafMethodsWithRegions() {
+    private Set<SootMethod> getLeafMethods() {
         Set<SootMethod> leafMethods = new HashSet<>();
         Set<SootMethod> nonLeafMethods = new HashSet<>();
         QueueReader<Edge> callEdges = this.callGraph.listener();
@@ -895,6 +894,59 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return leafMethods;
     }
 
+    private Set<SootMethod> getLeafMethodsWithRegions() {
+        Set<SootMethod> leafMethodsWithRegions = new HashSet<>();
+        List<SootMethod> worklist = new ArrayList<>();
+        worklist.addAll(this.getLeafMethods());
+
+        while(!worklist.isEmpty()) {
+            System.out.println(worklist.size());
+            SootMethod sootMethod = worklist.remove(0);
+
+            if(sootMethod.getSubSignature().equals(RegionTransformer.CLINIT_SIGNATURE)) {
+                continue;
+            }
+
+            if(sootMethod.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
+                continue;
+            }
+
+            List<JavaRegion> regions = this.getRegionsInMethod(sootMethod);
+
+            if(!regions.isEmpty()) {
+                leafMethodsWithRegions.add(sootMethod);
+                continue;
+            }
+
+            List<Edge> callerEdges = this.getCallerEdges(sootMethod);
+
+            for(Edge callerEdge : callerEdges) {
+                SootMethod callerMethod = callerEdge.src();
+
+                if(callerMethod.getSubSignature().equals(RegionTransformer.CLINIT_SIGNATURE)) {
+                    continue;
+                }
+
+                if(callerMethod.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
+                    continue;
+                }
+
+                if(worklist.contains(sootMethod)) {
+                    continue;
+                }
+
+                if(sootMethod.equals(callerMethod)) {
+                    continue;
+                }
+
+                int insertIndex = Math.max(0, worklist.size() - 1);
+                worklist.add(insertIndex, callerMethod);
+            }
+        }
+
+        return leafMethodsWithRegions;
+    }
+
     private Set<SootMethod> getNonLeafMethods() {
         Set<SootMethod> nonLeafMethods = new HashSet<>();
         QueueReader<Edge> callEdges = this.callGraph.listener();
@@ -929,14 +981,13 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         boolean updated = false;
 
         // First add the leaf methods
-        // TODO actually get the "leaf nodes that have regions"?
-        Set<SootMethod> leafMethods = this.getLeafMethodsWithRegions();
-        Set<SootMethod> nonLeafMethods = this.getNonLeafMethods();
+        Set<SootMethod> leafMethodsWithRegions = this.getLeafMethodsWithRegions();
+        Set<SootMethod> nonLeafMethodsWithRegions = this.getSystemMethods();
+        nonLeafMethodsWithRegions.removeAll(leafMethodsWithRegions);
 
         List<SootMethod> worklist = new ArrayList<>();
-        worklist.addAll(leafMethods);
+        worklist.addAll(leafMethodsWithRegions);
 
-        // TODO why the leafnodes first?
         // Push the regions up the call graph for the leaf methods
         while(!worklist.isEmpty()) {
             SootMethod method = worklist.remove(0);
@@ -944,7 +995,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             updated = updated | this.pushMethodsUpTheCallGraphToEmptyOrOneRegionMethods(method);
         }
 
-        worklist.addAll(nonLeafMethods);
+        worklist.addAll(nonLeafMethodsWithRegions);
 
         // Push the regions up the call graph for the non leaf methods
         while(!worklist.isEmpty()) {
@@ -954,8 +1005,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         // Process all methods
-        worklist.addAll(leafMethods);
-        worklist.addAll(nonLeafMethods);
+        worklist.addAll(leafMethodsWithRegions);
+        worklist.addAll(nonLeafMethodsWithRegions);
 
         updated = updated | this.processGraphWorklistAlgorithm(worklist);
 

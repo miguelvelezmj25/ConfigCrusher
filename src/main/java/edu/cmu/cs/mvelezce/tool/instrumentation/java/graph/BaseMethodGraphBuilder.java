@@ -10,22 +10,22 @@ import java.util.Set;
 public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
 
     private MethodNode methodNode;
+    private MethodGraph graph;
 
     public BaseMethodGraphBuilder(MethodNode methodNode) {
         this.methodNode = methodNode;
+        this.graph = new MethodGraph();
     }
 
     @Override
     public MethodGraph build() {
-        MethodGraph graph = new MethodGraph();
+        this.getBlocks();
+        this.addInstructions();
+        this.addEdges();
+        this.connectEntryNode();
+        this.connectExitNode();
 
-        this.getBlocks(graph);
-        this.addInstructions(graph);
-        this.addEdges(graph);
-        this.connectEntryNode(graph);
-        this.connectExitNode(graph);
-
-        System.out.println(graph.toDotString(methodNode.name));
+        System.out.println(this.graph.toDotString(this.methodNode.name));
 
         if(!graph.getEntryBlock().getPredecessors().isEmpty()) {
             throw new RuntimeException("The entry block has predecessors");
@@ -47,7 +47,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
     }
 
     @Override
-    public void connectEntryNode(MethodGraph graph) {
+    public void connectEntryNode() {
         AbstractInsnNode instruction = this.methodNode.instructions.getFirst();
 
         if(instruction.getType() != AbstractInsnNode.LABEL) {
@@ -55,33 +55,37 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
         }
 
         LabelNode labelNode = (LabelNode) instruction;
-        MethodBlock firstBlock = graph.getMethodBlock(labelNode);
-        graph.addEdge(graph.getEntryBlock(), firstBlock);
+        MethodBlock firstBlock = this.graph.getMethodBlock(labelNode);
+        this.graph.addEdge(this.graph.getEntryBlock(), firstBlock);
 
-        if(graph.getEntryBlock().getSuccessors().isEmpty()) {
+        if(this.graph.getEntryBlock().getSuccessors().isEmpty()) {
             throw new RuntimeException("The exit node does not have predecessors");
         }
     }
 
     @Override
-    public void connectExitNode(MethodGraph graph) {
-        for(MethodBlock methodBlock : graph.getBlocks()) {
+    public void connectExitNode() {
+        for(MethodBlock methodBlock : this.graph.getBlocks()) {
             for(AbstractInsnNode instruction : methodBlock.getInstructions()) {
                 int opcode = instruction.getOpcode();
 
                 if(opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
                     methodBlock.setWithReturn(true);
-                    graph.addEdge(methodBlock, graph.getExitBlock());
+                    this.graph.addEdge(methodBlock, this.graph.getExitBlock());
                 }
             }
         }
 
-        if(graph.getExitBlock().getPredecessors().isEmpty()) {
+        if(this.graph.getExitBlock().getPredecessors().isEmpty()) {
             throw new RuntimeException("The exit node does not have predecessors");
         }
     }
 
     public MethodNode getMethodNode() {
         return this.methodNode;
+    }
+
+    public MethodGraph getGraph() {
+        return this.graph;
     }
 }

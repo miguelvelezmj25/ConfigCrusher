@@ -4,14 +4,14 @@ public interface MethodGraphBuilder {
 
     public MethodGraph build();
 
-    public void addEdges(MethodGraph graph);
+    public void addEdges();
 
-    public void getBlocks(MethodGraph graph);
+    public void getBlocks();
 
-    public void addInstructions(MethodGraph graph);
+    public void addInstructions();
 
-    public void connectEntryNode(MethodGraph graph);
+    public void connectEntryNode();
 
-    public void connectExitNode(MethodGraph graph);
+    public void connectExitNode();
 
 }

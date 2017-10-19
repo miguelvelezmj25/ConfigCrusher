@@ -16,16 +16,16 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
     }
 
     @Override
-    public void addEdges(MethodGraph graph) {
+    public void addEdges() {
         InsnList instructions = this.getMethodNode().instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
         AbstractInsnNode instruction = instructionsIterator.next();
-        MethodBlock block = graph.getMethodBlock(instruction);
+        MethodBlock block = this.getGraph().getMethodBlock(instruction);
 
         while(instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
-            MethodBlock possibleBlock = graph.getMethodBlock(instruction);
+            MethodBlock possibleBlock = this.getGraph().getMethodBlock(instruction);
 
             if(possibleBlock != null) {
                 AbstractInsnNode previousInstruction = instruction.getPrevious();
@@ -38,7 +38,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                     if(opcode != Opcodes.RET && (opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN)
                             && opcode != Opcodes.ATHROW) {
                         if(!block.getSuccessors().contains(possibleBlock)) {
-                            graph.addEdge(block, possibleBlock);
+                            this.getGraph().addEdge(block, possibleBlock);
                         }
                     }
                 }
@@ -56,8 +56,8 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
 
             if(type == AbstractInsnNode.JUMP_INSN) {
                 JumpInsnNode jumpInsn = (JumpInsnNode) instruction;
-                MethodBlock destinationBlock = graph.getMethodBlock(jumpInsn.label);
-                graph.addEdge(block, destinationBlock);
+                MethodBlock destinationBlock = this.getGraph().getMethodBlock(jumpInsn.label);
+                this.getGraph().addEdge(block, destinationBlock);
 
                 if(opcode == Opcodes.GOTO) {
                     continue;
@@ -72,8 +72,8 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
 
 
                 AbstractInsnNode nextInstruction = instruction.getNext();
-                destinationBlock = graph.getMethodBlock(nextInstruction);
-                graph.addEdge(block, destinationBlock);
+                destinationBlock = this.getGraph().getMethodBlock(nextInstruction);
+                this.getGraph().addEdge(block, destinationBlock);
             }
             else if(opcode == Opcodes.ATHROW) {
                 for(TryCatchBlockNode tryCatchBlock : this.getMethodNode().tryCatchBlocks) {
@@ -84,13 +84,14 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                         insnNode = insnNode.getNext();
 
                         if(insnNode == instruction) {
-                            MethodBlock destinationBlock = graph.getMethodBlock(tryCatchBlock.handler);
+                            MethodBlock destinationBlock = this.getGraph().getMethodBlock(tryCatchBlock.handler);
 
                             if(destinationBlock == null) {
-                                throw new RuntimeException("Do not have a node for the handler of a try catch block");
+                                throw new RuntimeException("Do not have a node for the handler of a try catch block in "
+                                        + this.getMethodNode().name);
                             }
 
-                            graph.addEdge(block, destinationBlock);
+                            this.getGraph().addEdge(block, destinationBlock);
                         }
                     }
                 }
@@ -99,22 +100,22 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
             else {
                 if(type == AbstractInsnNode.TABLESWITCH_INSN) {
                     TableSwitchInsnNode tableSwitchInsn = (TableSwitchInsnNode) instruction;
-                    MethodBlock destinationBlock = graph.getMethodBlock(tableSwitchInsn.dflt);
-                    graph.addEdge(block, destinationBlock);
+                    MethodBlock destinationBlock = this.getGraph().getMethodBlock(tableSwitchInsn.dflt);
+                    this.getGraph().addEdge(block, destinationBlock);
 
                     for(LabelNode labelNode : tableSwitchInsn.labels) {
-                        destinationBlock = graph.getMethodBlock(labelNode);
-                        graph.addEdge(block, destinationBlock);
+                        destinationBlock = this.getGraph().getMethodBlock(labelNode);
+                        this.getGraph().addEdge(block, destinationBlock);
                     }
                 }
                 else {
                     LookupSwitchInsnNode lookupSwitchInsn = (LookupSwitchInsnNode) instruction;
-                    MethodBlock destinationBlock = graph.getMethodBlock(lookupSwitchInsn.dflt);
-                    graph.addEdge(block, destinationBlock);
+                    MethodBlock destinationBlock = this.getGraph().getMethodBlock(lookupSwitchInsn.dflt);
+                    this.getGraph().addEdge(block, destinationBlock);
 
                     for(LabelNode labelNode : lookupSwitchInsn.labels) {
-                        destinationBlock = graph.getMethodBlock(labelNode);
-                        graph.addEdge(block, destinationBlock);
+                        destinationBlock = this.getGraph().getMethodBlock(labelNode);
+                        this.getGraph().addEdge(block, destinationBlock);
                     }
                 }
             }
@@ -123,18 +124,18 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
     }
 
     @Override
-    public void addInstructions(MethodGraph graph) {
+    public void addInstructions() {
         InsnList instructions = this.getMethodNode().instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
         AbstractInsnNode instruction = instructionsIterator.next();
-        MethodBlock block = graph.getMethodBlock(instruction);
+        MethodBlock block = this.getGraph().getMethodBlock(instruction);
         List<AbstractInsnNode> blockInstructions = block.getInstructions();
         blockInstructions.add(instruction);
 
         while(instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
-            MethodBlock possibleBlock = graph.getMethodBlock(instruction);
+            MethodBlock possibleBlock = this.getGraph().getMethodBlock(instruction);
 
             if(possibleBlock != null) {
                 block = possibleBlock;
@@ -176,19 +177,19 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
         }
 
 
-        MethodBlock possibleBlock = graph.getMethodBlock(lastInstruction);
+        MethodBlock possibleBlock = this.getGraph().getMethodBlock(lastInstruction);
 
         while(possibleBlock == null) {
             lastInstruction = lastInstruction.getPrevious();
-            possibleBlock = graph.getMethodBlock(lastInstruction);
+            possibleBlock = this.getGraph().getMethodBlock(lastInstruction);
         }
 
         possibleBlock.setWithReturn(true);
-        graph.addEdge(possibleBlock, graph.getExitBlock());
+        this.getGraph().addEdge(possibleBlock, this.getGraph().getExitBlock());
     }
 
     @Override
-    public void getBlocks(MethodGraph graph) {
+    public void getBlocks() {
         InsnList instructions = this.getMethodNode().instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 
@@ -199,7 +200,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
         }
 
         MethodBlock block = new MethodBlock(instruction);
-        graph.addMethodBlock(block);
+        this.getGraph().addMethodBlock(block);
 
         while(instructionsIterator.hasNext()) {
             instruction = instructionsIterator.next();
@@ -214,19 +215,19 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
 
             if(type == AbstractInsnNode.JUMP_INSN) {
                 JumpInsnNode jumpInsn = (JumpInsnNode) instruction;
-                block = graph.getMethodBlock(jumpInsn.label);
+                block = this.getGraph().getMethodBlock(jumpInsn.label);
 
                 if(block == null) {
                     block = new MethodBlock(jumpInsn.label);
-                    graph.addMethodBlock(block);
+                    this.getGraph().addMethodBlock(block);
                 }
 
                 AbstractInsnNode nextInstruction = instruction.getNext();
-                block = graph.getMethodBlock(nextInstruction);
+                block = this.getGraph().getMethodBlock(nextInstruction);
 
                 if(block == null) {
                     block = new MethodBlock(nextInstruction);
-                    graph.addMethodBlock(block);
+                    this.getGraph().addMethodBlock(block);
                 }
             }
             else if(opcode == Opcodes.ATHROW) {
@@ -238,7 +239,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
 
                         if(insnNode == instruction) {
                             block = new MethodBlock(tryCatchBlock.handler);
-                            graph.addMethodBlock(block);
+                            this.getGraph().addMethodBlock(block);
                         }
                     }
                 }
@@ -251,7 +252,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                     continue;
                 }
 
-                block = graph.getMethodBlock(nextInstruction);
+                block = this.getGraph().getMethodBlock(nextInstruction);
 
                 // This is a return in the middle of the body and there is a block that was already created for the next
                 // instruction
@@ -265,42 +266,42 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                 }
 
                 block = new MethodBlock(nextInstruction);
-                graph.addMethodBlock(block);
+                this.getGraph().addMethodBlock(block);
             }
             else {
                 if(type == AbstractInsnNode.TABLESWITCH_INSN) {
                     TableSwitchInsnNode tableSwitchInsn = (TableSwitchInsnNode) instruction;
-                    block = graph.getMethodBlock(tableSwitchInsn.dflt);
+                    block = this.getGraph().getMethodBlock(tableSwitchInsn.dflt);
 
                     if(block == null) {
                         block = new MethodBlock(tableSwitchInsn.dflt);
-                        graph.addMethodBlock(block);
+                        this.getGraph().addMethodBlock(block);
                     }
 
                     for(LabelNode labelNode : tableSwitchInsn.labels) {
-                        block = graph.getMethodBlock(labelNode);
+                        block = this.getGraph().getMethodBlock(labelNode);
 
                         if(block == null) {
                             block = new MethodBlock(labelNode);
-                            graph.addMethodBlock(block);
+                            this.getGraph().addMethodBlock(block);
                         }
                     }
                 }
                 else {
                     LookupSwitchInsnNode lookupSwitchInsn = (LookupSwitchInsnNode) instruction;
-                    block = graph.getMethodBlock(lookupSwitchInsn.dflt);
+                    block = this.getGraph().getMethodBlock(lookupSwitchInsn.dflt);
 
                     if(block == null) {
                         block = new MethodBlock(lookupSwitchInsn.dflt);
-                        graph.addMethodBlock(block);
+                        this.getGraph().addMethodBlock(block);
                     }
 
                     for(LabelNode labelNode : lookupSwitchInsn.labels) {
-                        block = graph.getMethodBlock(labelNode);
+                        block = this.getGraph().getMethodBlock(labelNode);
 
                         if(block == null) {
                             block = new MethodBlock(labelNode);
-                            graph.addMethodBlock(block);
+                            this.getGraph().addMethodBlock(block);
                         }
                     }
                 }

@@ -8,6 +8,7 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
 import org.junit.Test;
 import org.prevayler.foundation.DurableOutputStream;
+import org.prevayler.implementation.PrevalentSystemGuard;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -362,10 +363,10 @@ public class DefaultMethodGraphBuilderTest {
     public void prevayler() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
-        ClassNode classNode = reader.readClass(DurableOutputStream.class.getCanonicalName());
+        ClassNode classNode = reader.readClass(PrevalentSystemGuard.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
-            if(!methodNode.name.equals("close")) {
+            if(!methodNode.name.equals("receive")) {
                 continue;
             }
 

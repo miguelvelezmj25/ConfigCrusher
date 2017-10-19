@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
 
+    private PrettyMethodGraph prettyGraph;
     private MethodGraph graph;
     private Printer printer;
 
@@ -21,51 +22,50 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
         DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
         this.graph = builder.build();
         this.printer = printer;
+        this.prettyGraph = new PrettyMethodGraph();
     }
 
     @Override
     public PrettyMethodGraph build() {
-        PrettyMethodGraph graph = new PrettyMethodGraph();
+        this.getBlocks();
+        this.addInstructions();
+        this.addEdges();
+        this.connectEntryNode();
+        this.connectExitNode();
 
-        this.getBlocks(graph);
-        this.addInstructions(graph);
-        this.addEdges(graph);
-        this.connectEntryNode(graph);
-        this.connectExitNode(graph);
-
-        return graph;
+        return this.prettyGraph;
     }
 
     @Override
-    public void addEdges(MethodGraph prettyGraph) {
+    public void addEdges() {
         for(MethodBlock block : this.graph.getBlocks()) {
             if(block == this.graph.getEntryBlock() || block == this.graph.getExitBlock()) {
                 continue;
             }
 
-            MethodBlock prettyBlock = prettyGraph.getMethodBlock(block.getID());
+            MethodBlock prettyBlock = this.prettyGraph.getMethodBlock(block.getID());
 
             for(MethodBlock succ : block.getSuccessors()) {
-                MethodBlock prettySucc = prettyGraph.getMethodBlock(succ.getID());
-                prettyGraph.addEdge(prettyBlock, prettySucc);
+                MethodBlock prettySucc = this.prettyGraph.getMethodBlock(succ.getID());
+                this.prettyGraph.addEdge(prettyBlock, prettySucc);
             }
         }
     }
 
     @Override
-    public void getBlocks(MethodGraph prettyGraph) {
+    public void getBlocks() {
         for(MethodBlock block : this.graph.getBlocks()) {
             if(block == this.graph.getEntryBlock() || block == this.graph.getExitBlock()) {
                 continue;
             }
 
             PrettyMethodBlock prettyBlock = new PrettyMethodBlock(block.getID());
-            prettyGraph.addMethodBlock(prettyBlock);
+            this.prettyGraph.addMethodBlock(prettyBlock);
         }
     }
 
     @Override
-    public void addInstructions(MethodGraph prettyGraph) {
+    public void addInstructions() {
         for(MethodBlock block : this.graph.getBlocks()) {
             if(block == this.graph.getEntryBlock() || block == this.graph.getExitBlock()) {
                 continue;
@@ -77,7 +77,7 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
             // Exclusive
             int endIndex = startIndex + blockInstructions.size();
 
-            PrettyMethodBlock prettyBlock = (PrettyMethodBlock) prettyGraph.getMethodBlock(block.getID());
+            PrettyMethodBlock prettyBlock = (PrettyMethodBlock) this.prettyGraph.getMethodBlock(block.getID());
             List<String> prettyInstructions = prettyBlock.getPrettyInstructions();
             List<Object> printerInstructions = this.printer.getText();
 
@@ -107,24 +107,24 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
     }
 
     @Override
-    public void connectEntryNode(MethodGraph prettyGraph) {
+    public void connectEntryNode() {
         MethodBlock entry = this.graph.getEntryBlock();
-        MethodBlock prettyEntry = prettyGraph.getEntryBlock();
+        MethodBlock prettyEntry = this.prettyGraph.getEntryBlock();
 
         for(MethodBlock succ : entry.getSuccessors()) {
-            MethodBlock prettyBlock = prettyGraph.getMethodBlock(succ.getID());
-            prettyGraph.addEdge(prettyEntry, prettyBlock);
+            MethodBlock prettyBlock = this.prettyGraph.getMethodBlock(succ.getID());
+            this.prettyGraph.addEdge(prettyEntry, prettyBlock);
         }
     }
 
     @Override
-    public void connectExitNode(MethodGraph prettyGraph) {
+    public void connectExitNode() {
         MethodBlock exit = this.graph.getExitBlock();
-        MethodBlock prettyExit = prettyGraph.getExitBlock();
+        MethodBlock prettyExit = this.prettyGraph.getExitBlock();
 
         for(MethodBlock pred : exit.getPredecessors()) {
-            MethodBlock prettyBlock = prettyGraph.getMethodBlock(pred.getID());
-            prettyGraph.addEdge(prettyBlock, prettyExit);
+            MethodBlock prettyBlock = this.prettyGraph.getMethodBlock(pred.getID());
+            this.prettyGraph.addEdge(prettyBlock, prettyExit);
         }
     }
 }

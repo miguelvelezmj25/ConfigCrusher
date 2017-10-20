@@ -1,0 +1,16 @@
+digraph journalSerializer {
+node [shape=record];
+767535474 [label="L0\lLINENUMBER 368 L0\lLDC \"9b383129-6269-4a27-bb22-45f7a57540d5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lIFNULL L1\l"];
+1101970356 [label="L2\lLINENUMBER 369 L2\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lLDC \"9b383129-6269-4a27-bb22-45f7a57540d5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1190608890 [label="L1\lLINENUMBER 371 L1\lFRAME SAME\lNEW org/prevayler/foundation/serialization/JavaSerializer\lDUP\lINVOKESPECIAL org/prevayler/foundation/serialization/JavaSerializer.\<init\> ()V\lASTORE 2\lNOP\lL3\lLINENUMBER 65535 L3\lNOP\lALOAD 2\lLDC \"9b383129-6269-4a27-bb22-45f7a57540d5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+767535474 -> 1101970356;
+767535474 -> 1190608890;
+1101970356 -> exit;
+entry -> 767535474;
+1190608890 -> exit;
+767535474[fontcolor="purple", penwidth=3, color="purple"];
+1101970356[fontcolor="purple", penwidth=3, color="purple"];
+1190608890[fontcolor="purple", penwidth=3, color="purple"];
+}

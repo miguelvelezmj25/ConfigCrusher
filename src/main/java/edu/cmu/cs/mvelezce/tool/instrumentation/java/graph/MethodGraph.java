@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
-import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 
 import java.util.*;
@@ -290,10 +289,6 @@ public class MethodGraph {
 
     public MethodBlock getMethodBlock(AbstractInsnNode insnNode) {
         return this.getMethodBlock(MethodBlock.asID(insnNode));
-    }
-
-    public MethodBlock getMethodBlock(Label label) {
-        return this.getMethodBlock(label.toString());
     }
 
     public Set<MethodBlock> getBlocks() {

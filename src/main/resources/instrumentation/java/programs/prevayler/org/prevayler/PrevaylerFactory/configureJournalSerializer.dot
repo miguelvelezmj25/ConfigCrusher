@@ -1,0 +1,14 @@
+digraph configureJournalSerializer {
+node [shape=record];
+1024478363 [label="L3\lLINENUMBER 290 L3\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Read the javadoc to this method.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+705400860 [label="L2\lLINENUMBER 293 L2\lFRAME SAME\lALOAD 0\lALOAD 2\lPUTFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lL4\lLINENUMBER 294 L4\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/PrevaylerFactory._journalSuffix : Ljava/lang/String;\lL5\lLINENUMBER 295 L5\lLDC \"dde4fb7b-6e9a-4b71-afd2-8f32756115a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+79791382 [label="L0\lLINENUMBER 287 L0\lLDC \"dde4fb7b-6e9a-4b71-afd2-8f32756115a5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKESTATIC org/prevayler/implementation/PrevaylerDirectory.checkValidJournalSuffix (Ljava/lang/String;)V\lL1\lLINENUMBER 289 L1\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lIFNULL L2\l"];
+entry;
+exit;
+entry -> 79791382;
+705400860 -> exit;
+79791382 -> 1024478363;
+79791382 -> 705400860;
+705400860[fontcolor="purple", penwidth=3, color="purple"];
+79791382[fontcolor="purple", penwidth=3, color="purple"];
+}

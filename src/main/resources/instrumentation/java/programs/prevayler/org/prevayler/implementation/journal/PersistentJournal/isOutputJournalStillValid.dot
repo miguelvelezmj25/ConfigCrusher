@@ -1,0 +1,25 @@
+digraph isOutputJournalStillValid {
+node [shape=record];
+319450809 [label="L4\lLINENUMBER 102 L4\lFRAME SAME1 I\lLDC \"3c85b83e-fddf-4adc-8318-8354ce28b030\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"0b8aee79-eb1e-43d9-b1e6-e589ab78c7e1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"a885c918-f346-4d60-8b87-85605039777a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1962629977 [label="ICONST_1\lGOTO L4\l"];
+1775305712 [label="ALOAD 0\lLDC \"0b8aee79-eb1e-43d9-b1e6-e589ab78c7e1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lL2\lLINENUMBER 103 L2\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig ()Z\lIFNE L1\l"];
+1157462948 [label="L0\lLINENUMBER 102 L0\lLDC \"a885c918-f346-4d60-8b87-85605039777a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lIFNULL L1\l"];
+1534340040 [label="ALOAD 0\lLDC \"3c85b83e-fddf-4adc-8318-8354ce28b030\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lL3\lLINENUMBER 104 L3\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld ()Z\lIFNE L1\l"];
+586722754 [label="L1\lFRAME SAME\lICONST_0\l"];
+entry;
+exit;
+entry -> 1157462948;
+319450809 -> exit;
+1962629977 -> 319450809;
+1775305712 -> 1534340040;
+1775305712 -> 586722754;
+1157462948 -> 1775305712;
+1157462948 -> 586722754;
+1534340040 -> 1962629977;
+1534340040 -> 586722754;
+586722754 -> 319450809;
+319450809[fontcolor="purple", penwidth=3, color="purple"];
+1775305712[fontcolor="purple", penwidth=3, color="purple"];
+1157462948[fontcolor="purple", penwidth=3, color="purple"];
+1534340040[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,17 @@
+digraph <init> {
+node [shape=record];
+1268629255 [label="LDC 2147483647\lGOTO L4\l"];
+95476731 [label="L3\lFRAME FULL [org/prevayler/foundation/Turn I] [org/prevayler/foundation/Turn]\lICONST_0\l"];
+957683143 [label="L0\lLINENUMBER 12 L0\lLDC \"8331b6f5-d0f5-45d7-a7dd-804eea4be34a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 13 L1\lALOAD 0\lACONST_NULL\lPUTFIELD org/prevayler/foundation/Turn._next : Lorg/prevayler/foundation/Turn;\lL2\lLINENUMBER 14 L2\lALOAD 0\lILOAD 1\lIFEQ L3\l"];
+127401209 [label="L4\lFRAME FULL [org/prevayler/foundation/Turn I] [org/prevayler/foundation/Turn I]\lPUTFIELD org/prevayler/foundation/Turn._allowed : I\lL5\lLINENUMBER 15 L5\lLDC \"8331b6f5-d0f5-45d7-a7dd-804eea4be34a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 957683143;
+1268629255 -> 127401209;
+95476731 -> 127401209;
+957683143 -> 1268629255;
+957683143 -> 95476731;
+127401209 -> exit;
+957683143[fontcolor="purple", penwidth=3, color="purple"];
+127401209[fontcolor="purple", penwidth=3, color="purple"];
+}

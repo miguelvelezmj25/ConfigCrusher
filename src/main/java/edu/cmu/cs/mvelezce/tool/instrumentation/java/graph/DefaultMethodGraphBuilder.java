@@ -174,7 +174,6 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                     " a throw instruction");
         }
 
-
         MethodBlock possibleBlock = this.getGraph().getMethodBlock(lastInstruction);
 
         while(possibleBlock == null) {
@@ -241,24 +240,6 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                             this.getGraph().addMethodBlock(block);
                         }
                     }
-
-
-
-
-
-
-//                    AbstractInsnNode insnNode = tryCatchBlock.start;
-//
-//                    while(insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
-//                        insnNode = insnNode.getNext();
-//
-//                        if(insnNode == instruction) {
-//                            block = new MethodBlock(tryCatchBlock.handler);
-//                            this.getGraph().addMethodBlock(block);
-//                        }
-//                    }
-
-
                 }
             }
             else if(opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {

@@ -1,0 +1,14 @@
+digraph nextTransaction {
+node [shape=record];
+460674260 [label="L1\lLINENUMBER 225 L1\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLDC \"1b3cd414-9d9a-4533-9bbd-72f0de8937a7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLRETURN\l"];
+1473128600 [label="L2\lLINENUMBER 223 L2\lNEW java/lang/IllegalStateException\lDUP\lLDC \"update() must be called at least once\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+2066315072 [label="L0\lLINENUMBER 222 L0\lLDC \"1b3cd414-9d9a-4533-9bbd-72f0de8937a7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lIFNE L1\l"];
+entry;
+exit;
+entry -> 2066315072;
+460674260 -> exit;
+2066315072 -> 460674260;
+2066315072 -> 1473128600;
+460674260[fontcolor="purple", penwidth=3, color="purple"];
+2066315072[fontcolor="purple", penwidth=3, color="purple"];
+}

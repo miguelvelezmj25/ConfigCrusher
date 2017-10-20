@@ -177,8 +177,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         InsnList startInstructions = this.getInstructionsStartRegion(region);
         newInstructions.insertBefore(firstInstruction.getNext(), startInstructions);
 
-        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-        MethodGraph graph = builder.build();
+        MethodGraph graph = this.getMethodsToGraphs().get(methodNode);
         Set<MethodBlock> endMethodBlocks = graph.getExitBlock().getPredecessors();
 
         // Instrument all end blocks
@@ -194,7 +193,9 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
                 if((opcodeLastInstruction < Opcodes.IRETURN || opcodeLastInstruction > Opcodes.RETURN)
                         && opcodeLastInstruction != Opcodes.RET && opcodeLastInstruction != Opcodes.ATHROW) {
-                    throw new RuntimeException("The last instruction in a method with return is not a return instruction");
+                    if(!this.getMethodsToGraphs().get(methodNode).isWithWhileTrue()) {
+                        throw new RuntimeException("The last instruction in a method with return is not a return instruction");
+                    }
                 }
             }
 

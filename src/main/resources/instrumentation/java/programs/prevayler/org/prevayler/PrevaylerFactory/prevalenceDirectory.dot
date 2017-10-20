@@ -1,0 +1,17 @@
+digraph prevalenceDirectory {
+node [shape=record];
+1216899398 [label="L1\lFRAME SAME\lLDC \"Prevalence\"\l"];
+1269855456 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._prevalenceDirectory : Ljava/lang/String;\lGOTO L2\l"];
+400807959 [label="L2\lFRAME SAME1 java/lang/String\lLDC \"6f8852bf-4752-417d-8bd7-73c54a03393a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1879686230 [label="L0\lLINENUMBER 337 L0\lLDC \"6f8852bf-4752-417d-8bd7-73c54a03393a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._prevalenceDirectory : Ljava/lang/String;\lIFNULL L1\l"];
+entry;
+exit;
+entry -> 1879686230;
+1216899398 -> 400807959;
+1269855456 -> 400807959;
+400807959 -> exit;
+1879686230 -> 1216899398;
+1879686230 -> 1269855456;
+400807959[fontcolor="purple", penwidth=3, color="purple"];
+1879686230[fontcolor="purple", penwidth=3, color="purple"];
+}

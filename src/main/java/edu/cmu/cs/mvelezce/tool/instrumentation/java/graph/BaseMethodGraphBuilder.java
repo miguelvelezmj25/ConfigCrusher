@@ -15,7 +15,6 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
     private MethodGraph graph;
 
     public BaseMethodGraphBuilder(MethodNode methodNode) {
-        System.out.println(methodNode.name);
         this.methodNode = methodNode;
         this.graph = new MethodGraph();
     }

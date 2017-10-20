@@ -1,17 +1,17 @@
 digraph bar {
 node [shape=record];
-1033797888 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lL3\lLINENUMBER 54 L3\lLDC \"5df2871f-f7d2-4c48-a3e7-94720d7e2cd0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L4\l"];
-344491810 [label="L2\lLINENUMBER 57 L2\lFRAME SAME1 java/lang/InterruptedException\lASTORE 1\lL5\lLINENUMBER 58 L5\lALOAD 1\lINVOKEVIRTUAL java/lang/InterruptedException.printStackTrace ()V\l"];
-1240628380 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lLDC \"5df2871f-f7d2-4c48-a3e7-94720d7e2cd0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1780817034 [label="L0\lLINENUMBER 56 L0\lLDC 5000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL1\lLINENUMBER 59 L1\lGOTO L4\l"];
+787588639 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lLDC \"5df2871f-f7d2-4c48-a3e7-94720d7e2cd0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1977222203 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lL3\lLINENUMBER 54 L3\lLDC \"5df2871f-f7d2-4c48-a3e7-94720d7e2cd0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L4\l"];
+2077545225 [label="L0\lLINENUMBER 56 L0\lLDC 5000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL1\lLINENUMBER 59 L1\lGOTO L4\l"];
+1985185982 [label="L2\lLINENUMBER 57 L2\lFRAME SAME1 java/lang/InterruptedException\lASTORE 1\lL5\lLINENUMBER 58 L5\lALOAD 1\lINVOKEVIRTUAL java/lang/InterruptedException.printStackTrace ()V\l"];
 entry;
 exit;
-entry -> 1033797888;
-1033797888 -> 1240628380;
-1033797888 -> 1780817034;
-344491810 -> 1240628380;
-1240628380 -> exit;
-1780817034 -> 1240628380;
-1033797888[fontcolor="purple", penwidth=3, color="purple"];
-1240628380[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1977222203;
+787588639 -> exit;
+1977222203 -> 787588639;
+1977222203 -> 2077545225;
+2077545225 -> 787588639;
+1985185982 -> 787588639;
+787588639[fontcolor="purple", penwidth=3, color="purple"];
+1977222203[fontcolor="purple", penwidth=3, color="purple"];
 }

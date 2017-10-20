@@ -63,15 +63,18 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                     continue;
                 }
 
-
                 if(opcode < Opcodes.LCMP || opcode > Opcodes.IF_ACMPNE) {
                     if(opcode != Opcodes.IFNULL && opcode != Opcodes.IFNONNULL) {
                         throw new RuntimeException("New type of jump instruction");
                     }
                 }
 
-
                 AbstractInsnNode nextInstruction = instruction.getNext();
+
+                if(nextInstruction == null) {
+                    throw new RuntimeException("How to handle this?");
+                }
+
                 destinationBlock = this.getGraph().getMethodBlock(nextInstruction);
                 this.getGraph().addEdge(block, destinationBlock);
             }
@@ -161,6 +164,11 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
             return;
         }
 
+        // TODO do not hard code 3. This can happen if the method has a while(true) loop. Then there is no return
+        if(this.getGraph().getBlockCount() == 3) {
+            return;
+        }
+
         AbstractInsnNode lastInstruction = instructions.getLast();
 
         if(lastInstruction.getType() == AbstractInsnNode.LABEL) {
@@ -220,6 +228,11 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                 }
 
                 AbstractInsnNode nextInstruction = instruction.getNext();
+
+                if(nextInstruction == null) {
+                    continue;
+                }
+
                 block = this.getGraph().getMethodBlock(nextInstruction);
 
                 if(block == null) {

@@ -692,12 +692,11 @@ public class TimerInstrumenterTest {
     @Test
     public void prevayler() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "prevayler";
-        String entry = "<org.prevayler.demos.demo1.PrimeNumbers: void main(java.lang.String[])>";
+        String entry = "org.prevayler.demos.demo1.PrimeNumbers";
         TimerInstrumenterTest.srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler";
         TimerInstrumenterTest.classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
 
         this.compile();
-        this.format();
 
         // Program arguments
         String[] args = new String[0];

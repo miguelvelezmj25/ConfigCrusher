@@ -1,20 +1,20 @@
 digraph start {
 node [shape=record];
-642087302 [label="L0\lLINENUMBER 48 L0\lFRAME SAME\lLDC \"f62fbac0-a16f-4815-8799-19c7ddaea713\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lIFNE L1\l"];
-1562221939 [label="L4\lLINENUMBER 52 L4\lNEW java/lang/IllegalStateException\lDUP\lLDC \"All transaction processing is now aborted, probably due to an earlier IOException.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
-771715205 [label="L1\lLINENUMBER 51 L1\lFRAME SAME\lLDC \"f62fbac0-a16f-4815-8799-19c7ddaea713\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"c07a905a-e77f-4dba-ac20-3f121dd7ce9a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lIFGE L3\l"];
-1343838143 [label="L3\lLINENUMBER 54 L3\lFRAME SAME\lLDC \"c07a905a-e77f-4dba-ac20-3f121dd7ce9a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lALOAD 0\lDUP\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lICONST_1\lISUB\lPUTFIELD org/prevayler/foundation/Turn._allowed : I\lL5\lLINENUMBER 55 L5\lRETURN\l"];
-799692219 [label="L2\lLINENUMBER 49 L2\lALOAD 0\lINVOKESTATIC org/prevayler/foundation/Cool.wait (Ljava/lang/Object;)V\lGOTO L0\l"];
+2108408569 [label="L3\lLINENUMBER 54 L3\lFRAME SAME\lLDC \"26a92aa1-ffbf-4eef-9a63-bf76339bf5c7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lALOAD 0\lDUP\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lICONST_1\lISUB\lPUTFIELD org/prevayler/foundation/Turn._allowed : I\lL5\lLINENUMBER 55 L5\lRETURN\l"];
+15095289 [label="L1\lLINENUMBER 51 L1\lFRAME SAME\lLDC \"b780c62f-c1a5-4b16-aee9-57254d3262bf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"26a92aa1-ffbf-4eef-9a63-bf76339bf5c7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lIFGE L3\l"];
+1099073452 [label="L4\lLINENUMBER 52 L4\lNEW java/lang/IllegalStateException\lDUP\lLDC \"All transaction processing is now aborted, probably due to an earlier IOException.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+2108176303 [label="L0\lLINENUMBER 48 L0\lFRAME SAME\lLDC \"b780c62f-c1a5-4b16-aee9-57254d3262bf\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lIFNE L1\l"];
+471948337 [label="L2\lLINENUMBER 49 L2\lALOAD 0\lINVOKESTATIC org/prevayler/foundation/Cool.wait (Ljava/lang/Object;)V\lGOTO L0\l"];
 entry;
 exit;
-entry -> 642087302;
-642087302 -> 771715205;
-642087302 -> 799692219;
-771715205 -> 1562221939;
-771715205 -> 1343838143;
-1343838143 -> exit;
-799692219 -> 642087302;
-642087302[fontcolor="purple", penwidth=3, color="purple"];
-771715205[fontcolor="purple", penwidth=3, color="purple"];
-1343838143[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 2108176303;
+2108408569 -> exit;
+15095289 -> 2108408569;
+15095289 -> 1099073452;
+2108176303 -> 15095289;
+2108176303 -> 471948337;
+471948337 -> 2108176303;
+2108408569[fontcolor="purple", penwidth=3, color="purple"];
+15095289[fontcolor="purple", penwidth=3, color="purple"];
+2108176303[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -5,6 +5,7 @@ import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
+import java.util.ListIterator;
 import java.util.Set;
 
 public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
@@ -19,8 +20,28 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
 
     @Override
     public MethodGraph build() {
+        int instructionCount = 0;
+        ListIterator<AbstractInsnNode> instructionIter = this.methodNode.instructions.iterator();
+
+        while(instructionIter.hasNext()) {
+            instructionIter.next();
+            instructionCount++;
+        }
+
         this.getBlocks();
         this.addInstructions();
+
+        int count = 0;
+
+        for(MethodBlock block : graph.getBlocks()) {
+            count += block.getInstructions().size();
+        }
+
+        if(instructionCount != count) {
+            throw new RuntimeException("The number of instructions in the method does not match the total number of" +
+                    " instructions in the graph");
+        }
+
         this.addEdges();
         this.connectEntryNode();
         this.connectExitNode();

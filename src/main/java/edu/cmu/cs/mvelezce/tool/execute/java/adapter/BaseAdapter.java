@@ -1,6 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
+import org.apache.commons.io.FileUtils;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -76,6 +80,21 @@ public abstract class BaseAdapter implements Adapter {
 
     @Override
     public void execute(String mainAdapter, String[] args) throws InterruptedException, IOException {
+        File m2Dir = new File(CompileInstrumenter.M2_DIR);
+        Collection<File> m2Files = FileUtils.listFiles(m2Dir, new String[]{"jar"}, true);
+
+        StringBuilder cp = new StringBuilder();
+
+        for(File jarFile : m2Files) {
+            cp.append(jarFile);
+            cp.append(CompileInstrumenter.sep);
+        }
+
+        cp.deleteCharAt(cp.length() - 1);
+
+
+
+
         StringBuilder output = new StringBuilder();
         List<String> commandList = new ArrayList<>();
         commandList.add("java");
@@ -87,7 +106,7 @@ public abstract class BaseAdapter implements Adapter {
 //        commandList.add("-Xmn10G");
         commandList.add("-XX:+UseConcMarkSweepGC");
         commandList.add("-cp");
-        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
+        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + cp.toString() + ":" + this.directory);
         commandList.add(mainAdapter);
         commandList.add(this.programName);
         commandList.add(this.mainClass);

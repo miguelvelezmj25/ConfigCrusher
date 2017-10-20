@@ -175,6 +175,37 @@ public class ConfigCrusherExecutorTest {
     }
 
     @Test
+    public void prevayler() throws Exception {
+        String programName = "prevayler";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
+        String entryPoint = "org.prevayler.demos.demo1.PrimeNumbers";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+
+//        configurations.clear();
+//        Set<String> n = new HashSet<>();
+////        n.add("REMOVEGAMMA");
+////        n.add("COMPRESSIONLEVEL");
+////        n.add("COMPRESSOR");
+////        n.add("ITERATIONS");
+////        n.add("LOGLEVEL");
+//        configurations.add(n);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
+    @Test
     public void optimizer1() throws Exception {
         String programName = "pngtasticOptimizer";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";

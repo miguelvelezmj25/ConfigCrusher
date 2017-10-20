@@ -1,0 +1,17 @@
+digraph journalSuffix {
+node [shape=record];
+1028499479 [label="L2\lFRAME SAME1 java/lang/String\lLDC \"5534d717-b05e-45da-9015-d5f3e29ecd01\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1518892279 [label="L0\lLINENUMBER 375 L0\lLDC \"5534d717-b05e-45da-9015-d5f3e29ecd01\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSuffix : Ljava/lang/String;\lIFNULL L1\l"];
+646527043 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSuffix : Ljava/lang/String;\lGOTO L2\l"];
+1614754894 [label="L1\lFRAME SAME\lLDC \"journal\"\l"];
+entry;
+exit;
+entry -> 1518892279;
+1028499479 -> exit;
+1518892279 -> 646527043;
+1518892279 -> 1614754894;
+646527043 -> 1028499479;
+1614754894 -> 1028499479;
+1028499479[fontcolor="purple", penwidth=3, color="purple"];
+1518892279[fontcolor="purple", penwidth=3, color="purple"];
+}

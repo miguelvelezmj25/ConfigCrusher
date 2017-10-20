@@ -1,38 +1,38 @@
 digraph addChunk {
 node [shape=record];
-664840335 [label="L1\lFRAME APPEND [java/lang/String I]\lALOAD 2\lLDC \"IHDR\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
-1503894204 [label="L6\lLINENUMBER 190 L6\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngImage.chunks : Ljava/util/List;\lALOAD 1\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL12\lLINENUMBER 191 L12\lLDC \"3ca62a0b-c69c-4b2a-b01d-18dc7784c13d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-2078650783 [label="ICONST_1\lISTORE 3\l"];
-1433699388 [label="L0\lLINENUMBER 176 L0\lLDC \"3ca62a0b-c69c-4b2a-b01d-18dc7784c13d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getTypeString ()Ljava/lang/String;\lASTORE 2\lICONST_M1\lISTORE 3\lALOAD 2\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lLOOKUPSWITCH
+466885620 [label="L1\lFRAME APPEND [java/lang/String I]\lALOAD 2\lLDC \"IHDR\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
+235166460 [label="L0\lLINENUMBER 176 L0\lLDC \"3ca62a0b-c69c-4b2a-b01d-18dc7784c13d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getTypeString ()Ljava/lang/String;\lASTORE 2\lICONST_M1\lISTORE 3\lALOAD 2\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lLOOKUPSWITCH
       2246125: L1
       2458989: L2
       default: L3\l"];
-1436292054 [label="ICONST_0\lISTORE 3\lGOTO L3\l"];
-167362819 [label="L5\lLINENUMBER 186 L5\lFRAME SAME\lALOAD 0\lALOAD 1\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.palette : Loptimizer/com/googlecode/pngtastic/core/PngChunk;\l"];
-607663625 [label="L2\lFRAME SAME\lALOAD 2\lLDC \"PLTE\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
-1953191813 [label="L3\lFRAME SAME\lILOAD 3\lLOOKUPSWITCH
+1444612545 [label="ICONST_1\lISTORE 3\l"];
+648189109 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getWidth ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.width : J\lL7\lLINENUMBER 179 L7\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getHeight ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.height : J\lL8\lLINENUMBER 180 L8\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getBitDepth ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.bitDepth : S\lL9\lLINENUMBER 181 L9\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getColorType ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.colorType : S\lL10\lLINENUMBER 182 L10\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getInterlace ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.interlace : S\lL11\lLINENUMBER 183 L11\lGOTO L6\l"];
+1839965005 [label="L6\lLINENUMBER 190 L6\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/PngImage.chunks : Ljava/util/List;\lALOAD 1\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL12\lLINENUMBER 191 L12\lLDC \"3ca62a0b-c69c-4b2a-b01d-18dc7784c13d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1438896181 [label="L2\lFRAME SAME\lALOAD 2\lLDC \"PLTE\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L3\l"];
+2034021323 [label="ICONST_0\lISTORE 3\lGOTO L3\l"];
+983357761 [label="L5\lLINENUMBER 186 L5\lFRAME SAME\lALOAD 0\lALOAD 1\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.palette : Loptimizer/com/googlecode/pngtastic/core/PngChunk;\l"];
+710982928 [label="L3\lFRAME SAME\lILOAD 3\lLOOKUPSWITCH
       0: L4
       1: L5
       default: L6\l"];
-1011771391 [label="L4\lLINENUMBER 178 L4\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getWidth ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.width : J\lL7\lLINENUMBER 179 L7\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getHeight ()J\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.height : J\lL8\lLINENUMBER 180 L8\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getBitDepth ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.bitDepth : S\lL9\lLINENUMBER 181 L9\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getColorType ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.colorType : S\lL10\lLINENUMBER 182 L10\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getInterlace ()S\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.interlace : S\lL11\lLINENUMBER 183 L11\lGOTO L6\l"];
 entry;
 exit;
-664840335 -> 1436292054;
-664840335 -> 1953191813;
-1503894204 -> exit;
-entry -> 1433699388;
-2078650783 -> 1953191813;
-1433699388 -> 664840335;
-1433699388 -> 607663625;
-1433699388 -> 1953191813;
-1436292054 -> 1953191813;
-167362819 -> 1503894204;
-607663625 -> 2078650783;
-607663625 -> 1953191813;
-1953191813 -> 1503894204;
-1953191813 -> 167362819;
-1953191813 -> 1011771391;
-1011771391 -> 1503894204;
-1503894204[fontcolor="purple", penwidth=3, color="purple"];
-1433699388[fontcolor="purple", penwidth=3, color="purple"];
+466885620 -> 2034021323;
+466885620 -> 710982928;
+entry -> 235166460;
+235166460 -> 466885620;
+235166460 -> 1438896181;
+235166460 -> 710982928;
+1444612545 -> 710982928;
+648189109 -> 1839965005;
+1839965005 -> exit;
+1438896181 -> 1444612545;
+1438896181 -> 710982928;
+2034021323 -> 710982928;
+983357761 -> 1839965005;
+710982928 -> 648189109;
+710982928 -> 1839965005;
+710982928 -> 983357761;
+235166460[fontcolor="purple", penwidth=3, color="purple"];
+1839965005[fontcolor="purple", penwidth=3, color="purple"];
 }

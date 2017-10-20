@@ -1,9 +1,0 @@
-digraph abort {
-node [shape=record];
-1798111714 [label="L0\lLINENUMBER 211 L0\lLDC \"5956fc1b-26d5-4828-9166-00c486ff016f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 4\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"All transaction processing is now aborted. An IOException was thrown while \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" a .journal file.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lALOAD 1\lINVOKEVIRTUAL org/prevayler/foundation/Guided.abortTurn (Ljava/lang/String;Ljava/lang/Throwable;)V\lL1\lLINENUMBER 212 L1\lLDC \"5956fc1b-26d5-4828-9166-00c486ff016f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-entry;
-exit;
-entry -> 1798111714;
-1798111714 -> exit;
-1798111714[fontcolor="purple", penwidth=3, color="purple"];
-}

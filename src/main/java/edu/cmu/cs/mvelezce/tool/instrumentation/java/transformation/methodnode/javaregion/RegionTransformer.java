@@ -120,9 +120,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
         }
 
+        int initialRegionCount = this.regionsToOptionSet.size();
         this.preProcessMethodsInClasses(classNodes);
 
-        int initialRegionCount = this.regionsToOptionSet.size();
         boolean updatedRegions = true;
 //
         while(updatedRegions) {
@@ -145,6 +145,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             System.out.println("Transforming class for instrumentation " + classNode.name);
 
             for(MethodNode methodToInstrument : methodsToInstrument) {
+                this.buildMethodGraph(methodToInstrument);
                 this.transformMethod(methodToInstrument);
             }
 
@@ -592,6 +593,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     private void removeRegionsInRegionsToOptions(Set<JavaRegion> regionsToRemove) {
         for(JavaRegion region : regionsToRemove) {
+            if(region.getRegionClass().contains("POBox")) {
+                System.out.println();
+            }
             this.regionsToOptionSet.remove(region);
         }
 
@@ -606,13 +610,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @param regionsToInnerRegions
      */
     private void updateRegionsToOptionsWithOptionsInInnerRegions(Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegions) {
-        Map<JavaRegion, Set<Set<String>>> regionsToOptionSet = this.regionsToOptionSet;
-
         for(Map.Entry<JavaRegion, Set<JavaRegion>> entry : regionsToInnerRegions.entrySet()) {
             Set<String> newOptions = new HashSet<>();
 
             for(JavaRegion innerRegion : entry.getValue()) {
-                Set<Set<String>> innerOptionSet = regionsToOptionSet.get(innerRegion);
+                Set<Set<String>> innerOptionSet = this.regionsToOptionSet.get(innerRegion);
                 Set<String> innerOptions = new HashSet<>();
 
                 for(Set<String> options : innerOptionSet) {
@@ -622,7 +624,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 newOptions.addAll(innerOptions);
             }
 
-            Set<Set<String>> regionOptionSet = regionsToOptionSet.get(entry.getKey());
+            if(!this.regionsToOptionSet.containsKey(entry.getKey())) {
+               throw new RuntimeException("There is no region that will have its option set modified");
+            }
+
+            Set<Set<String>> regionOptionSet = this.regionsToOptionSet.get(entry.getKey());
             Set<String> regionOptions = new HashSet<>();
 
             for(Set<String> options : regionOptionSet) {
@@ -631,7 +637,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             newOptions.addAll(regionOptions);
 
-            Set<Set<String>> oldOptionSet = regionsToOptionSet.get(entry.getKey());
+            Set<Set<String>> oldOptionSet = this.regionsToOptionSet.get(entry.getKey());
             oldOptionSet.clear();
             oldOptionSet.add(newOptions);
         }
@@ -1045,6 +1051,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             Map<JavaRegion, SootMethod> regionsWithCallToMethods = new HashMap<>();
             List<Edge> callerEdges = this.getCallerEdges(method);
 
+            if(callerEdges.isEmpty()) {
+                continue;
+            }
+
             // Check other strategies for each caller
             while(!callerEdges.isEmpty()) {
                 reachedMainWithoutRegion = false;
@@ -1222,6 +1232,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             boolean allMethodWithOneRegionMax = true;
             List<Edge> callerEdges = this.getCallerEdges(method);
 
+            if(callerEdges.isEmpty()) {
+                continue;
+            }
+
             while(!callerEdges.isEmpty()) {
                 Edge outEdge = callerEdges.remove(0);
                 SootMethod callerMethod = outEdge.src();
@@ -1383,6 +1397,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             // Check if all the callers are empty to push regions up
             boolean allEmpty = true;
             List<Edge> callerEdges = this.getCallerEdges(method);
+
+            // If the method does not have callers, it might be part of a java interface (e.g., Runnable's run method)
+            if(callerEdges.isEmpty()) {
+                continue;
+            }
 
             while(!callerEdges.isEmpty()) {
                 Edge outEdge = callerEdges.remove(0);

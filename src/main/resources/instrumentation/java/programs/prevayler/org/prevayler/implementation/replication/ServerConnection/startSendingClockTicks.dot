@@ -1,9 +1,9 @@
 digraph startSendingClockTicks {
 node [shape=record];
-272047569 [label="L0\lLINENUMBER 59 L0\lLDC \"b8668364-67ee-4a8b-b765-d1ae42fd57f3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._clockTickSender : Ljava/lang/Thread;\lICONST_1\lINVOKEVIRTUAL java/lang/Thread.setDaemon (Z)V\lL1\lLINENUMBER 60 L1\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._clockTickSender : Ljava/lang/Thread;\lINVOKEVIRTUAL java/lang/Thread.start ()V\lL2\lLINENUMBER 61 L2\lLDC \"b8668364-67ee-4a8b-b765-d1ae42fd57f3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+544893896 [label="L0\lLINENUMBER 59 L0\lLDC \"fb7c788b-1aed-4dbc-8e71-3a347e9a6861\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._clockTickSender : Ljava/lang/Thread;\lICONST_1\lINVOKEVIRTUAL java/lang/Thread.setDaemon (Z)V\lL1\lLINENUMBER 60 L1\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._clockTickSender : Ljava/lang/Thread;\lINVOKEVIRTUAL java/lang/Thread.start ()V\lL2\lLINENUMBER 61 L2\lLDC \"fb7c788b-1aed-4dbc-8e71-3a347e9a6861\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 272047569;
-272047569 -> exit;
-272047569[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 544893896;
+544893896 -> exit;
+544893896[fontcolor="purple", penwidth=3, color="purple"];
 }

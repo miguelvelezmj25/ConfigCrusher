@@ -16,7 +16,8 @@ public class MethodBlock {
     private List<AbstractInsnNode> instructions = new ArrayList<>();
     private Set<MethodBlock> successors = new HashSet<>();
     private Set<MethodBlock> predecessors = new HashSet<>();
-    private boolean withReturn;
+    private boolean withReturn = false;
+    private boolean catchWithoutExplicitThrow = false;
 
     public MethodBlock(AbstractInsnNode insnNode) {
         this(MethodBlock.asID(insnNode));
@@ -93,5 +94,13 @@ public class MethodBlock {
 
     public void setWithReturn(boolean withReturn) {
         this.withReturn = withReturn;
+    }
+
+    public boolean isCatchWithoutExplicitThrow() {
+        return this.catchWithoutExplicitThrow;
+    }
+
+    public void setCatchWithoutExplicitThrow(boolean catchWithoutExplicitThrow) {
+        this.catchWithoutExplicitThrow = catchWithoutExplicitThrow;
     }
 }

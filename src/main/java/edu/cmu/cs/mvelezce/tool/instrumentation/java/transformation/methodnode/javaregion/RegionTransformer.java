@@ -642,6 +642,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     // transformed. If I return a new map, it sugguest to users that the passed map will remain the same and a new map
     // is generated
     private void setStartAndEndBlocks(MethodGraph graph, Map<AbstractInsnNode, JavaRegion> instructionsToRegion) {
+        Set<JavaRegion> regionsInCatchWithoutExplicitThrow = new HashSet<>();
+
         for(MethodBlock block : graph.getBlocks()) {
             List<AbstractInsnNode> blockInstructions = block.getInstructions();
 
@@ -650,15 +652,19 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     continue;
                 }
 
+                if(block.isCatchWithoutExplicitThrow()) {
+                    regionsInCatchWithoutExplicitThrow.add(instructionsToRegion.get(instructionToStartInstrumenting));
+                    continue;
+                }
+
                 MethodBlock start = this.getBlockToStartInstrumentingBeforeIt(graph, block);
-                start = graph.getMethodBlock(start.getID());
+
 
                 if(start == null) {
                     throw new RuntimeException();
                 }
 
                 MethodBlock end = this.getBlockToEndInstrumentingBeforeIt(graph, block);
-                end = graph.getMethodBlock(end.getID());
 
                 if(end == null) {
                     throw new RuntimeException();
@@ -684,6 +690,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 region.setStartMethodBlock(start);
                 region.setEndMethodBlocks(endMethodBlocks);
             }
+        }
+
+        for(JavaRegion javaRegion : regionsInCatchWithoutExplicitThrow) {
+            this.regionsToOptionSet.remove(javaRegion);
         }
 
     }

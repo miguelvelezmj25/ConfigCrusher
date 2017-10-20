@@ -1,0 +1,21 @@
+digraph isOutputJournalTooBig {
+node [shape=record];
+5557427 [label="ICONST_1\lGOTO L3\l"];
+1191544932 [label="L1\lFRAME SAME\lICONST_0\l"];
+181663498 [label="ALOAD 0\lLDC \"0f77097a-d4e6-42ff-93fd-a7903bf1ab36\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lL2\lLINENUMBER 116 L2\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.file ()Ljava/io/File;\lINVOKEVIRTUAL java/io/File.length ()J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalSizeThresholdInBytes : J\lLCMP\lIFLT L1\l"];
+378797968 [label="L0\lLINENUMBER 115 L0\lLDC \"d47a6341-c860-49ff-b5f9-ca132a122a0b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalSizeThresholdInBytes : J\lLCONST_0\lLCMP\lIFEQ L1\l"];
+162716758 [label="L3\lLINENUMBER 115 L3\lFRAME SAME1 I\lLDC \"0f77097a-d4e6-42ff-93fd-a7903bf1ab36\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"d47a6341-c860-49ff-b5f9-ca132a122a0b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+entry;
+exit;
+entry -> 378797968;
+5557427 -> 162716758;
+1191544932 -> 162716758;
+181663498 -> 5557427;
+181663498 -> 1191544932;
+378797968 -> 1191544932;
+378797968 -> 181663498;
+162716758 -> exit;
+181663498[fontcolor="purple", penwidth=3, color="purple"];
+378797968[fontcolor="purple", penwidth=3, color="purple"];
+162716758[fontcolor="purple", penwidth=3, color="purple"];
+}

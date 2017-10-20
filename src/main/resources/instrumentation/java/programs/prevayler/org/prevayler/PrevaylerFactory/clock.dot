@@ -1,0 +1,17 @@
+digraph clock {
+node [shape=record];
+402622480 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
+1821711066 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
+950831464 [label="L0\lLINENUMBER 155 L0\lLDC \"09e724fa-1fea-4e88-abc4-774c077ab054\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
+1739986996 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"09e724fa-1fea-4e88-abc4-774c077ab054\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+entry -> 950831464;
+402622480 -> 1739986996;
+1821711066 -> 1739986996;
+950831464 -> 402622480;
+950831464 -> 1821711066;
+1739986996 -> exit;
+950831464[fontcolor="purple", penwidth=3, color="purple"];
+1739986996[fontcolor="purple", penwidth=3, color="purple"];
+}

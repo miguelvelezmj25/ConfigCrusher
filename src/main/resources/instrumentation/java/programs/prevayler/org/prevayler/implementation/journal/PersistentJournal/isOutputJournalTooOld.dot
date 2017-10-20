@@ -1,0 +1,21 @@
+digraph isOutputJournalTooOld {
+node [shape=record];
+1366677933 [label="L1\lFRAME SAME\lICONST_0\l"];
+184996973 [label="ALOAD 0\lLDC \"ace4852d-b56a-479d-a474-b1eb52af6438\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeTimer : Lorg/prevayler/foundation/StopWatch;\lL2\lLINENUMBER 110 L2\lINVOKEVIRTUAL org/prevayler/foundation/StopWatch.millisEllapsed ()J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeThresholdInMillis : J\lLCMP\lIFLT L1\l"];
+88094983 [label="L0\lLINENUMBER 109 L0\lLDC \"c2c1eae1-66b5-41cb-adeb-773300b8c84e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeThresholdInMillis : J\lLCONST_0\lLCMP\lIFEQ L1\l"];
+106350019 [label="L3\lLINENUMBER 109 L3\lFRAME SAME1 I\lLDC \"ace4852d-b56a-479d-a474-b1eb52af6438\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"c2c1eae1-66b5-41cb-adeb-773300b8c84e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+39476366 [label="ICONST_1\lGOTO L3\l"];
+entry;
+exit;
+entry -> 88094983;
+1366677933 -> 106350019;
+184996973 -> 1366677933;
+184996973 -> 39476366;
+88094983 -> 1366677933;
+88094983 -> 184996973;
+106350019 -> exit;
+39476366 -> 106350019;
+184996973[fontcolor="purple", penwidth=3, color="purple"];
+88094983[fontcolor="purple", penwidth=3, color="purple"];
+106350019[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,24 @@
+digraph findInitialJournalFile {
+node [shape=record];
+488372159 [label="L3\lFRAME APPEND [[Ljava/io/File; I]\lILOAD 4\lIFLT L4\l"];
+1686091139 [label="L0\lLINENUMBER 164 L0\lLDC \"3956216e-0477-4efc-a296-89839c966bb0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/PrevaylerDirectory._directory : Ljava/io/File;\lNEW org/prevayler/implementation/PrevaylerDirectory$1\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory$1.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;)V\lINVOKEVIRTUAL java/io/File.listFiles (Ljava/io/FileFilter;)[Ljava/io/File;\lASTORE 3\lL1\lLINENUMBER 170 L1\lALOAD 3\lNEW org/prevayler/implementation/PrevaylerDirectory$2\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory$2.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;)V\lINVOKESTATIC java/util/Arrays.sort ([Ljava/lang/Object;Ljava/util/Comparator;)V\lL2\lLINENUMBER 178 L2\lALOAD 3\lARRAYLENGTH\lICONST_1\lISUB\lISTORE 4\l"];
+9539718 [label="L5\lLINENUMBER 179 L5\lLDC \"61b5605f-2342-4b1a-94bd-8d39b6f8e356\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 3\lILOAD 4\lAALOAD\lASTORE 5\lL6\lLINENUMBER 180 L6\lALOAD 5\lINVOKESTATIC org/prevayler/implementation/PrevaylerDirectory.journalVersion (Ljava/io/File;)J\lLSTORE 6\lL7\lLINENUMBER 181 L7\lLLOAD 6\lLLOAD 1\lLCMP\lIFGT L8\l"];
+1743224658 [label="L8\lLINENUMBER 178 L8\lFRAME APPEND [java/io/File J]\lIINC 4 -1\lGOTO L3\l"];
+2094260442 [label="L4\lLINENUMBER 186 L4\lFRAME CHOP 2\lACONST_NULL\lLDC \"61b5605f-2342-4b1a-94bd-8d39b6f8e356\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"3956216e-0477-4efc-a296-89839c966bb0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+2125274496 [label="L9\lLINENUMBER 182 L9\lALOAD 5\lLDC \"61b5605f-2342-4b1a-94bd-8d39b6f8e356\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"3956216e-0477-4efc-a296-89839c966bb0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+488372159 -> 9539718;
+488372159 -> 2094260442;
+entry -> 1686091139;
+1686091139 -> 488372159;
+9539718 -> 1743224658;
+9539718 -> 2125274496;
+1743224658 -> 488372159;
+2094260442 -> exit;
+2125274496 -> exit;
+1686091139[fontcolor="purple", penwidth=3, color="purple"];
+9539718[fontcolor="purple", penwidth=3, color="purple"];
+2094260442[fontcolor="purple", penwidth=3, color="purple"];
+2125274496[fontcolor="purple", penwidth=3, color="purple"];
+}

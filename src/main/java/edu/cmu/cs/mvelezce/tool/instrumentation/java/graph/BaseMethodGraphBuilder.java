@@ -4,6 +4,7 @@ import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 
 import java.util.ListIterator;
 import java.util.Set;
@@ -61,6 +62,15 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
         for(MethodBlock block : exitPreds) {
             if(!block.isWithReturn()) {
                 throw new RuntimeException("A block(" + block.getID() + ") connected to the exit block does not have a return instruction");
+            }
+        }
+
+        for(TryCatchBlockNode tryCatchBlockNode : this.methodNode.tryCatchBlocks) {
+            AbstractInsnNode handler = tryCatchBlockNode.handler;
+            MethodBlock block = this.graph.getMethodBlock(handler);
+
+            if(block.getPredecessors().isEmpty()) {
+                block.setCatchWithoutExplicitThrow(true);
             }
         }
 

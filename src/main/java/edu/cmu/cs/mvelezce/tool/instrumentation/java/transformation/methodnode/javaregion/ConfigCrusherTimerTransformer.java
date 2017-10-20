@@ -188,7 +188,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
             int opcodeLastInstruction = lastInstruction.getOpcode();
 
             if((opcodeLastInstruction < Opcodes.IRETURN || opcodeLastInstruction > Opcodes.RETURN)
-                    && opcodeLastInstruction != Opcodes.RET) {
+                    && opcodeLastInstruction != Opcodes.RET && opcodeLastInstruction != Opcodes.ATHROW) {
                 lastInstruction = blockInstructions.get(blockInstructions.size() - 2);
                 opcodeLastInstruction = lastInstruction.getOpcode();
 

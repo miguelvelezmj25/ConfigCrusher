@@ -14,6 +14,7 @@ public class MethodGraph {
     private MethodBlock exitBlock = new MethodBlock("exit");
     private Map<String, MethodBlock> blocks = new HashMap<>();
     private Map<MethodBlock, Set<MethodBlock>> blocksToDominators = new HashMap<>();
+    private boolean withWhileTrue = false;
 
     public MethodGraph() {
         this.blocks.put(this.entryBlock.getID(), this.entryBlock);
@@ -316,6 +317,14 @@ public class MethodGraph {
 
     public MethodBlock getEntryBlock() {
         return this.entryBlock;
+    }
+
+    public boolean isWithWhileTrue() {
+        return withWhileTrue;
+    }
+
+    public void setWithWhileTrue(boolean withWhileTrue) {
+        this.withWhileTrue = withWhileTrue;
     }
 
     @Override

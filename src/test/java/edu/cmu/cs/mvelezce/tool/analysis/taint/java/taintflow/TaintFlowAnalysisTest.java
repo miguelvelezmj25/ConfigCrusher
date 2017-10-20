@@ -1,7 +1,11 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow;
 
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import org.junit.Test;
+
+import java.util.Map;
+import java.util.Set;
 
 public class TaintFlowAnalysisTest {
 
@@ -286,7 +290,7 @@ public class TaintFlowAnalysisTest {
         args[1] = "-saveres";
 
         StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
-        analysis.analyze(args);
+        Map<JavaRegion, Set<Set<String>>> result = analysis.analyze(args);
     }
 
 }

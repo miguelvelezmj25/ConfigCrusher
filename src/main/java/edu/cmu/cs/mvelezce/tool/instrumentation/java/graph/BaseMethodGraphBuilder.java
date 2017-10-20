@@ -15,6 +15,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
     private MethodGraph graph;
 
     public BaseMethodGraphBuilder(MethodNode methodNode) {
+        System.out.println(methodNode.name);
         this.methodNode = methodNode;
         this.graph = new MethodGraph();
     }
@@ -60,7 +61,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
         Set<MethodBlock> exitPreds = graph.getExitBlock().getPredecessors();
 
         for(MethodBlock block : exitPreds) {
-            if(!block.isWithReturn()) {
+            if(!block.isWithReturn() && !this.graph.isWithWhileTrue()) {
                 throw new RuntimeException("A block(" + block.getID() + ") connected to the exit block does not have a return instruction");
             }
         }
@@ -105,6 +106,16 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
                     this.graph.addEdge(methodBlock, this.graph.getExitBlock());
                 }
             }
+        }
+
+        // TODO do not hard code 3. This can happen if the method has a while(true) loop. Then there is no return
+        if(this.getGraph().getBlockCount() == 3) {
+            Set<MethodBlock> blocks = this.graph.getBlocks();
+            blocks.remove(this.graph.getEntryBlock());
+            blocks.remove(this.graph.getExitBlock());
+
+            this.graph.addEdge(blocks.iterator().next(), this.graph.getExitBlock());
+            this.graph.setWithWhileTrue(true);
         }
 
         if(this.graph.getExitBlock().getPredecessors().isEmpty()) {

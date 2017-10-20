@@ -69,7 +69,6 @@ public class DefaultMethodGraphBuilderTest {
 
             DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
             MethodGraph graph = builder.build();
-            System.out.println(graph.toDotString("main"));
             Assert.assertEquals(5, graph.getBlocks().size());
             Assert.assertEquals(5, graph.getEdgeCount());
         }

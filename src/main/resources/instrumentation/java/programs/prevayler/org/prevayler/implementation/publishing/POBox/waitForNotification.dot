@@ -1,0 +1,18 @@
+digraph waitForNotification {
+node [shape=record];
+340097685 [label="L8\lLINENUMBER 50 L8\lFRAME SAME\lALOAD 0\lINVOKESTATIC org/prevayler/foundation/Cool.wait (Ljava/lang/Object;)V\lGOTO L4\l"];
+1213626151 [label="L2\lFRAME FULL [org/prevayler/implementation/publishing/POBox java/lang/Object] [java/lang/Throwable]\lASTORE 2\lALOAD 1\lMONITOREXIT\lL3\lALOAD 2\lATHROW\l"];
+1522549999 [label="L5\lLINENUMBER 52 L5\lFRAME CHOP 1\lALOAD 0\lGETFIELD org/prevayler/implementation/publishing/POBox._queue : Ljava/util/LinkedList;\lINVOKEVIRTUAL java/util/LinkedList.removeFirst ()Ljava/lang/Object;\lCHECKCAST org/prevayler/implementation/TransactionTimestamp\lLDC \"a6903987-fbac-4e87-adae-be7f0ccc2cb6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+415793386 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 46 L4\lFRAME SAME\lLDC \"a6903987-fbac-4e87-adae-be7f0ccc2cb6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/publishing/POBox._queue : Ljava/util/LinkedList;\lINVOKEVIRTUAL java/util/LinkedList.size ()I\lIFNE L5\l"];
+1794893473 [label="L6\lLINENUMBER 47 L6\lALOAD 0\lGETFIELD org/prevayler/implementation/publishing/POBox._emptynessMonitor : Ljava/lang/Object;\lDUP\lASTORE 1\lMONITORENTER\lL0\lLINENUMBER 48 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/publishing/POBox._emptynessMonitor : Ljava/lang/Object;\lINVOKEVIRTUAL java/lang/Object.notify ()V\lL7\lLINENUMBER 49 L7\lALOAD 1\lMONITOREXIT\lL1\lGOTO L8\l"];
+entry;
+exit;
+entry -> 415793386;
+340097685 -> 415793386;
+1522549999 -> exit;
+415793386 -> 1522549999;
+415793386 -> 1794893473;
+1794893473 -> 340097685;
+1522549999[fontcolor="purple", penwidth=3, color="purple"];
+415793386[fontcolor="purple", penwidth=3, color="purple"];
+}

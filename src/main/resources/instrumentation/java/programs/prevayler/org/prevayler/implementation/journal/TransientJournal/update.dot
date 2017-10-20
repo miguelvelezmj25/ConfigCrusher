@@ -1,0 +1,38 @@
+digraph update {
+node [shape=record];
+2103877926 [label="L5\lLINENUMBER 46 L5\lFRAME SAME\lLDC \"538ad36d-e380-450a-add8-f3c70d013cbb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"bafbcd12-8f57-4397-8a0c-f6f311aa9851\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLLOAD 2\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lLSUB\lL2I\lISTORE 4\lL7\lLINENUMBER 47 L7\lILOAD 4\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lIF_ICMPLE L8\l"];
+553629909 [label="L14\lLINENUMBER 57 L14\lFRAME APPEND [org/prevayler/implementation/TransactionTimestamp J]\lLDC \"0a11c31f-c084-4851-9291-8a34559f50cd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lALOAD 1\lALOAD 5\lINVOKEINTERFACE org/prevayler/implementation/publishing/TransactionSubscriber.receive (Lorg/prevayler/implementation/TransactionTimestamp;)V\lL16\lLINENUMBER 58 L16\lIINC 4 1\lL17\lLINENUMBER 59 L17\lGOTO L8\l"];
+975521494 [label="L9\lLINENUMBER 48 L9\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"The transaction journal has not yet reached transaction \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \". The last logged transaction was \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lI2L\lLADD\lLCONST_1\lLSUB\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \".\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1859780907 [label="L1\lLINENUMBER 42 L1\lFRAME SAME\lLDC \"538ad36d-e380-450a-add8-f3c70d013cbb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLLOAD 2\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lLCMP\lIFGE L5\l"];
+288537251 [label="L6\lLINENUMBER 43 L6\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Unable to recover transaction \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \". The oldest recoverable transaction is \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \".\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1921167141 [label="L10\lLINENUMBER 60 L10\lFRAME CHOP 2\lLDC \"ae2f83e9-c93d-4197-8e24-71753267bef6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"e775373a-2c86-412c-b879-b4ebb33d8a7e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+681088021 [label="L0\lLINENUMBER 37 L0\lLDC \"e775373a-2c86-412c-b879-b4ebb33d8a7e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransactionInitialized : Z\lIFNE L1\l"];
+2015215172 [label="L2\lLINENUMBER 38 L2\lALOAD 0\lICONST_1\lPUTFIELD org/prevayler/implementation/journal/TransientJournal._initialTransactionInitialized : Z\lL3\lLINENUMBER 39 L3\lALOAD 0\lLLOAD 2\lPUTFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lL4\lLINENUMBER 40 L4\lLDC \"e775373a-2c86-412c-b879-b4ebb33d8a7e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+813455850 [label="L15\lLINENUMBER 55 L15\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Expected \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 6\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" but was \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 5\lINVOKEVIRTUAL org/prevayler/implementation/TransactionTimestamp.systemVersion ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1986126964 [label="L11\lLINENUMBER 52 L11\lLDC \"0a11c31f-c084-4851-9291-8a34559f50cd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lILOAD 4\lINVOKEINTERFACE java/util/List.get (I)Ljava/lang/Object;\lCHECKCAST org/prevayler/implementation/TransactionTimestamp\lASTORE 5\lL12\lLINENUMBER 53 L12\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lILOAD 4\lI2L\lLADD\lLSTORE 6\lL13\lLINENUMBER 54 L13\lALOAD 5\lINVOKEVIRTUAL org/prevayler/implementation/TransactionTimestamp.systemVersion ()J\lLLOAD 6\lLCMP\lIFEQ L14\l"];
+803152631 [label="L8\lLINENUMBER 51 L8\lFRAME APPEND [I]\lLDC \"bafbcd12-8f57-4397-8a0c-f6f311aa9851\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"ae2f83e9-c93d-4197-8e24-71753267bef6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 4\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lIF_ICMPEQ L10\l"];
+entry;
+exit;
+1921167141 -> exit;
+803152631 -> 1921167141;
+803152631 -> 1986126964;
+2103877926 -> 975521494;
+2103877926 -> 803152631;
+553629909 -> 803152631;
+entry -> 681088021;
+1859780907 -> 2103877926;
+1859780907 -> 288537251;
+681088021 -> 1859780907;
+681088021 -> 2015215172;
+2015215172 -> exit;
+1986126964 -> 553629909;
+1986126964 -> 813455850;
+2103877926[fontcolor="purple", penwidth=3, color="purple"];
+553629909[fontcolor="purple", penwidth=3, color="purple"];
+1859780907[fontcolor="purple", penwidth=3, color="purple"];
+1921167141[fontcolor="purple", penwidth=3, color="purple"];
+681088021[fontcolor="purple", penwidth=3, color="purple"];
+2015215172[fontcolor="purple", penwidth=3, color="purple"];
+1986126964[fontcolor="purple", penwidth=3, color="purple"];
+803152631[fontcolor="purple", penwidth=3, color="purple"];
+}

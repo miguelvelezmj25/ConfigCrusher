@@ -1,0 +1,16 @@
+digraph publishRemoteTransaction {
+node [shape=record];
+1974216084 [label="L2\lLINENUMBER 87 L2\lFRAME SAME1 java/lang/RuntimeException\lASTORE 1\lL6\lLINENUMBER 88 L6\lALOAD 0\lALOAD 1\lINVOKESPECIAL org/prevayler/implementation/replication/ServerConnection.send (Ljava/lang/Object;)V\lL7\lLINENUMBER 91 L7\lGOTO L5\l"];
+2097924669 [label="L5\lLINENUMBER 92 L5\lFRAME SAME\lLDC \"92c57a1d-3543-41ae-843b-ebeb7be04c30\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1648105500 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/RuntimeException\lTRYCATCHBLOCK L0 L1 L3 java/lang/Error\lL4\lLINENUMBER 84 L4\lLDC \"92c57a1d-3543-41ae-843b-ebeb7be04c30\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._remote : Lorg/prevayler/foundation/network/ObjectSocket;\lINVOKEINTERFACE org/prevayler/foundation/network/ObjectSocket.readObject ()Ljava/lang/Object;\lCHECKCAST org/prevayler/implementation/Capsule\lPUTFIELD org/prevayler/implementation/replication/ServerConnection._remoteCapsule : Lorg/prevayler/implementation/Capsule;\lL0\lLINENUMBER 86 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._publisher : Lorg/prevayler/implementation/publishing/TransactionPublisher;\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._remoteCapsule : Lorg/prevayler/implementation/Capsule;\lINVOKEINTERFACE org/prevayler/implementation/publishing/TransactionPublisher.publish (Lorg/prevayler/implementation/Capsule;)V\lL1\lLINENUMBER 91 L1\lGOTO L5\l"];
+952371399 [label="L3\lLINENUMBER 89 L3\lFRAME SAME1 java/lang/Error\lASTORE 1\lL8\lLINENUMBER 90 L8\lALOAD 0\lALOAD 1\lINVOKESPECIAL org/prevayler/implementation/replication/ServerConnection.send (Ljava/lang/Object;)V\l"];
+entry;
+exit;
+entry -> 1648105500;
+1974216084 -> 2097924669;
+2097924669 -> exit;
+1648105500 -> 2097924669;
+952371399 -> 2097924669;
+2097924669[fontcolor="purple", penwidth=3, color="purple"];
+1648105500[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -95,7 +95,6 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                         }
                     }
                 }
-
             }
             else {
                 if(type == AbstractInsnNode.TABLESWITCH_INSN) {
@@ -120,7 +119,6 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                 }
             }
         }
-
     }
 
     @Override
@@ -233,8 +231,9 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
             else if(opcode == Opcodes.ATHROW) {
                 for(TryCatchBlockNode tryCatchBlock : this.getMethodNode().tryCatchBlocks) {
                     AbstractInsnNode insnNode = tryCatchBlock.start;
+                    AbstractInsnNode endNode = tryCatchBlock.end;
 
-                    while(insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
+                    while(insnNode != endNode && insnNode.getNext() != endNode) {
                         insnNode = insnNode.getNext();
 
                         if(insnNode == instruction) {
@@ -242,6 +241,24 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                             this.getGraph().addMethodBlock(block);
                         }
                     }
+
+
+
+
+
+
+//                    AbstractInsnNode insnNode = tryCatchBlock.start;
+//
+//                    while(insnNode.getNext().getType() != AbstractInsnNode.LABEL) {
+//                        insnNode = insnNode.getNext();
+//
+//                        if(insnNode == instruction) {
+//                            block = new MethodBlock(tryCatchBlock.handler);
+//                            this.getGraph().addMethodBlock(block);
+//                        }
+//                    }
+
+
                 }
             }
             else if(opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {

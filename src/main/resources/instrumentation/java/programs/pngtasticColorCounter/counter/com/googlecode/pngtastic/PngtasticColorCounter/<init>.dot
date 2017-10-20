@@ -1,21 +1,21 @@
 digraph <init> {
 node [shape=record];
-925574515 [label="L8\lLINENUMBER 42 L8\lFRAME CHOP 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Processed in %d milliseconds\"\lICONST_1\lANEWARRAY java/lang/Object\lDUP\lICONST_0\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLLOAD 10\lLSUB\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lAASTORE\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL13\lLINENUMBER 43 L13\lLDC \"be06cda4-19de-4ec9-8e87-fd20d3bae966\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-2019896341 [label="TRYCATCHBLOCK L0 L1 L2 counter/com/googlecode/pngtastic/core/PngException\lTRYCATCHBLOCK L0 L1 L2 java/io/IOException\lL3\lLINENUMBER 27 L3\lLDC \"be06cda4-19de-4ec9-8e87-fd20d3bae966\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL4\lLINENUMBER 28 L4\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLSTORE 10\lL5\lLINENUMBER 29 L5\lNEW counter/com/googlecode/pngtastic/core/PngColorCounter\lDUP\lALOAD 2\lDLOAD 3\lDLOAD 5\lILOAD 7\lLLOAD 8\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/PngColorCounter.\<init\> (Ljava/lang/String;DDIJ)V\lASTORE 12\lL6\lLINENUMBER 31 L6\lALOAD 1\lASTORE 13\lALOAD 13\lARRAYLENGTH\lISTORE 14\lICONST_0\lISTORE 15\l"];
-1727895059 [label="ALOAD 13\lILOAD 15\lAALOAD\lASTORE 16\lL0\lLINENUMBER 33 L0\lNEW counter/com/googlecode/pngtastic/core/PngImage\lDUP\lALOAD 16\lALOAD 2\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/PngImage.\<init\> (Ljava/lang/String;Ljava/lang/String;)V\lASTORE 17\lL9\lLINENUMBER 34 L9\lALOAD 12\lALOAD 17\lINVOKEVIRTUAL counter/com/googlecode/pngtastic/core/PngColorCounter.count (Lcounter/com/googlecode/pngtastic/core/PngImage;)V\lL10\lLINENUMBER 36 L10\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 12\lINVOKEVIRTUAL counter/com/googlecode/pngtastic/core/PngColorCounter.getResult ()Lcounter/com/googlecode/pngtastic/core/PngColorCounter$ColorCounterResult;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V\lL1\lLINENUMBER 40 L1\lGOTO L11\l"];
-1547671064 [label="L11\lLINENUMBER 31 L11\lFRAME APPEND [java/lang/Object]\lIINC 15 1\lGOTO L7\l"];
-1669705853 [label="L7\lFRAME FULL [counter/com/googlecode/pngtastic/PngtasticColorCounter [Ljava/lang/String; java/lang/String D D I J J counter/com/googlecode/pngtastic/core/PngColorCounter [Ljava/lang/String; I I] []\lILOAD 15\lILOAD 14\lIF_ICMPGE L8\l"];
-233507854 [label="L2\lLINENUMBER 38 L2\lFRAME FULL [counter/com/googlecode/pngtastic/PngtasticColorCounter [Ljava/lang/String; java/lang/String D D I J J counter/com/googlecode/pngtastic/core/PngColorCounter [Ljava/lang/String; I I java/lang/String] [java/lang/Exception]\lASTORE 17\lL12\lLINENUMBER 39 L12\lALOAD 17\lINVOKEVIRTUAL java/lang/Exception.printStackTrace ()V\l"];
+643557908 [label="TRYCATCHBLOCK L0 L1 L2 counter/com/googlecode/pngtastic/core/PngException\lTRYCATCHBLOCK L0 L1 L2 java/io/IOException\lL3\lLINENUMBER 27 L3\lLDC \"9993a723-6730-489a-86a7-50356a5a742d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL4\lLINENUMBER 28 L4\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLSTORE 10\lL5\lLINENUMBER 29 L5\lNEW counter/com/googlecode/pngtastic/core/PngColorCounter\lDUP\lALOAD 2\lDLOAD 3\lDLOAD 5\lILOAD 7\lLLOAD 8\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/PngColorCounter.\<init\> (Ljava/lang/String;DDIJ)V\lASTORE 12\lL6\lLINENUMBER 31 L6\lALOAD 1\lASTORE 13\lALOAD 13\lARRAYLENGTH\lISTORE 14\lICONST_0\lISTORE 15\l"];
+928199056 [label="L8\lLINENUMBER 42 L8\lFRAME CHOP 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Processed in %d milliseconds\"\lICONST_1\lANEWARRAY java/lang/Object\lDUP\lICONST_0\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLLOAD 10\lLSUB\lINVOKESTATIC java/lang/Long.valueOf (J)Ljava/lang/Long;\lAASTORE\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL13\lLINENUMBER 43 L13\lLDC \"9993a723-6730-489a-86a7-50356a5a742d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1592490843 [label="ALOAD 13\lILOAD 15\lAALOAD\lASTORE 16\lL0\lLINENUMBER 33 L0\lNEW counter/com/googlecode/pngtastic/core/PngImage\lDUP\lALOAD 16\lALOAD 2\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/PngImage.\<init\> (Ljava/lang/String;Ljava/lang/String;)V\lASTORE 17\lL9\lLINENUMBER 34 L9\lALOAD 12\lALOAD 17\lINVOKEVIRTUAL counter/com/googlecode/pngtastic/core/PngColorCounter.count (Lcounter/com/googlecode/pngtastic/core/PngImage;)V\lL10\lLINENUMBER 36 L10\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 12\lINVOKEVIRTUAL counter/com/googlecode/pngtastic/core/PngColorCounter.getResult ()Lcounter/com/googlecode/pngtastic/core/PngColorCounter$ColorCounterResult;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V\lL1\lLINENUMBER 40 L1\lGOTO L11\l"];
+944242305 [label="L2\lLINENUMBER 38 L2\lFRAME FULL [counter/com/googlecode/pngtastic/PngtasticColorCounter [Ljava/lang/String; java/lang/String D D I J J counter/com/googlecode/pngtastic/core/PngColorCounter [Ljava/lang/String; I I java/lang/String] [java/lang/Exception]\lASTORE 17\lL12\lLINENUMBER 39 L12\lALOAD 17\lINVOKEVIRTUAL java/lang/Exception.printStackTrace ()V\l"];
+1094039545 [label="L11\lLINENUMBER 31 L11\lFRAME APPEND [java/lang/Object]\lIINC 15 1\lGOTO L7\l"];
+372676520 [label="L7\lFRAME FULL [counter/com/googlecode/pngtastic/PngtasticColorCounter [Ljava/lang/String; java/lang/String D D I J J counter/com/googlecode/pngtastic/core/PngColorCounter [Ljava/lang/String; I I] []\lILOAD 15\lILOAD 14\lIF_ICMPGE L8\l"];
 entry;
 exit;
-entry -> 2019896341;
-925574515 -> exit;
-2019896341 -> 1669705853;
-1727895059 -> 1547671064;
-1547671064 -> 1669705853;
-1669705853 -> 925574515;
-1669705853 -> 1727895059;
-233507854 -> 1547671064;
-925574515[fontcolor="purple", penwidth=3, color="purple"];
-2019896341[fontcolor="purple", penwidth=3, color="purple"];
+643557908 -> 372676520;
+928199056 -> exit;
+entry -> 643557908;
+1592490843 -> 1094039545;
+944242305 -> 1094039545;
+1094039545 -> 372676520;
+372676520 -> 928199056;
+372676520 -> 1592490843;
+643557908[fontcolor="purple", penwidth=3, color="purple"];
+928199056[fontcolor="purple", penwidth=3, color="purple"];
 }

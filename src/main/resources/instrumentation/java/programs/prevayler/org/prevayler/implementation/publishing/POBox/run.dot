@@ -1,10 +1,10 @@
 digraph run {
 node [shape=record];
-510912994 [label="L0\lLINENUMBER 39 L0\lFRAME SAME\lLDC \"42bda4e5-9569-4990-96ad-c8221fbf15a6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/publishing/POBox.waitForNotification ()Lorg/prevayler/implementation/TransactionTimestamp;\lASTORE 1\lL1\lLINENUMBER 40 L1\lALOAD 0\lGETFIELD org/prevayler/implementation/publishing/POBox._delegate : Lorg/prevayler/implementation/publishing/TransactionSubscriber;\lALOAD 1\lINVOKEINTERFACE org/prevayler/implementation/publishing/TransactionSubscriber.receive (Lorg/prevayler/implementation/TransactionTimestamp;)V\lL2\lLINENUMBER 41 L2\lLDC \"42bda4e5-9569-4990-96ad-c8221fbf15a6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lGOTO L0\l"];
+870726676 [label="L0\lLINENUMBER 39 L0\lFRAME SAME\lLDC \"c98f268b-bf2c-4dd1-9ea6-7685833f958c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/publishing/POBox.waitForNotification ()Lorg/prevayler/implementation/TransactionTimestamp;\lASTORE 1\lL1\lLINENUMBER 40 L1\lALOAD 0\lGETFIELD org/prevayler/implementation/publishing/POBox._delegate : Lorg/prevayler/implementation/publishing/TransactionSubscriber;\lALOAD 1\lINVOKEINTERFACE org/prevayler/implementation/publishing/TransactionSubscriber.receive (Lorg/prevayler/implementation/TransactionTimestamp;)V\lL2\lLINENUMBER 41 L2\lLDC \"c98f268b-bf2c-4dd1-9ea6-7685833f958c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lGOTO L0\l"];
 entry;
 exit;
-510912994 -> 510912994;
-510912994 -> exit;
-entry -> 510912994;
-510912994[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 870726676;
+870726676 -> exit;
+870726676 -> 870726676;
+870726676[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,0 +1,16 @@
+digraph publisher {
+node [shape=record];
+398218018 [label="L0\lLINENUMBER 350 L0\lLDC \"02ef8d17-922b-4bae-8567-c126518cc640\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._remoteServerIpAddress : Ljava/lang/String;\lIFNULL L1\l"];
+1741821353 [label="L1\lLINENUMBER 353 L1\lFRAME SAME\lNEW org/prevayler/implementation/publishing/CentralPublisher\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.clock ()Lorg/prevayler/Clock;\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journal ()Lorg/prevayler/implementation/journal/Journal;\lINVOKESPECIAL org/prevayler/implementation/publishing/CentralPublisher.\<init\> (Lorg/prevayler/Clock;Lorg/prevayler/implementation/journal/Journal;)V\lLDC \"02ef8d17-922b-4bae-8567-c126518cc640\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lARETURN\l"];
+1877546182 [label="L2\lLINENUMBER 351 L2\lNEW org/prevayler/implementation/replication/ClientPublisher\lDUP\lNEW org/prevayler/foundation/network/OldNetworkImpl\lDUP\lINVOKESPECIAL org/prevayler/foundation/network/OldNetworkImpl.\<init\> ()V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._remoteServerIpAddress : Ljava/lang/String;\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._remoteServerPort : I\lINVOKESPECIAL org/prevayler/implementation/replication/ClientPublisher.\<init\> (Lorg/prevayler/foundation/network/OldNetworkImpl;Ljava/lang/String;I)V\lLDC \"02ef8d17-922b-4bae-8567-c126518cc640\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+entry -> 398218018;
+398218018 -> 1741821353;
+398218018 -> 1877546182;
+1741821353 -> exit;
+1877546182 -> exit;
+398218018[fontcolor="purple", penwidth=3, color="purple"];
+1741821353[fontcolor="purple", penwidth=3, color="purple"];
+1877546182[fontcolor="purple", penwidth=3, color="purple"];
+}

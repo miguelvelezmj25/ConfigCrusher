@@ -1,16 +1,16 @@
 digraph journal {
 node [shape=record];
-21319608 [label="L1\lLINENUMBER 361 L1\lFRAME SAME\lNEW org/prevayler/implementation/PrevaylerDirectory\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.prevalenceDirectory ()Ljava/lang/String;\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory.\<init\> (Ljava/lang/String;)V\lASTORE 1\lL3\lLINENUMBER 362 L3\lNEW org/prevayler/implementation/journal/PersistentJournal\lDUP\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSizeThreshold : J\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalAgeThreshold : J\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalDiskSync : Z\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journalSuffix ()Ljava/lang/String;\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.monitor ()Lorg/prevayler/foundation/monitor/Monitor;\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;JJZLjava/lang/String;Lorg/prevayler/foundation/monitor/Monitor;)V\lLDC \"26cd49fe-c954-4f55-8ba2-0198f64aa9c8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lARETURN\l"];
-1401557102 [label="L2\lLINENUMBER 358 L2\lNEW org/prevayler/implementation/journal/TransientJournal\lDUP\lINVOKESPECIAL org/prevayler/implementation/journal/TransientJournal.\<init\> ()V\lLDC \"26cd49fe-c954-4f55-8ba2-0198f64aa9c8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lARETURN\l"];
-981545905 [label="L0\lLINENUMBER 357 L0\lLDC \"26cd49fe-c954-4f55-8ba2-0198f64aa9c8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._transientMode : Z\lIFEQ L1\l"];
+857124333 [label="L1\lLINENUMBER 361 L1\lFRAME SAME\lNEW org/prevayler/implementation/PrevaylerDirectory\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.prevalenceDirectory ()Ljava/lang/String;\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory.\<init\> (Ljava/lang/String;)V\lASTORE 1\lL3\lLINENUMBER 362 L3\lNEW org/prevayler/implementation/journal/PersistentJournal\lDUP\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSizeThreshold : J\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalAgeThreshold : J\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalDiskSync : Z\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journalSuffix ()Ljava/lang/String;\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.monitor ()Lorg/prevayler/foundation/monitor/Monitor;\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;JJZLjava/lang/String;Lorg/prevayler/foundation/monitor/Monitor;)V\lLDC \"26cd49fe-c954-4f55-8ba2-0198f64aa9c8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lARETURN\l"];
+406659781 [label="L0\lLINENUMBER 357 L0\lLDC \"26cd49fe-c954-4f55-8ba2-0198f64aa9c8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._transientMode : Z\lIFEQ L1\l"];
+1871375571 [label="L2\lLINENUMBER 358 L2\lNEW org/prevayler/implementation/journal/TransientJournal\lDUP\lINVOKESPECIAL org/prevayler/implementation/journal/TransientJournal.\<init\> ()V\lLDC \"26cd49fe-c954-4f55-8ba2-0198f64aa9c8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lARETURN\l"];
 entry;
 exit;
-entry -> 981545905;
-21319608 -> exit;
-1401557102 -> exit;
-981545905 -> 21319608;
-981545905 -> 1401557102;
-21319608[fontcolor="purple", penwidth=3, color="purple"];
-1401557102[fontcolor="purple", penwidth=3, color="purple"];
-981545905[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 406659781;
+857124333 -> exit;
+406659781 -> 857124333;
+406659781 -> 1871375571;
+1871375571 -> exit;
+857124333[fontcolor="purple", penwidth=3, color="purple"];
+406659781[fontcolor="purple", penwidth=3, color="purple"];
+1871375571[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,9 +1,0 @@
-digraph pause {
-node [shape=record];
-1050704650 [label="L0\lLINENUMBER 28 L0\lLDC \"35d19d28-de73-4170-9e7e-cc7e62719f9a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 0\lGETFIELD org/prevayler/implementation/clock/PausableClock._realClock : Lorg/prevayler/Clock;\lINVOKEINTERFACE org/prevayler/Clock.time ()Ljava/util/Date;\lINVOKEVIRTUAL org/prevayler/implementation/clock/PausableClock.advanceTo (Ljava/util/Date;)V\lL1\lLINENUMBER 29 L1\lALOAD 0\lALOAD 0\lGETFIELD org/prevayler/implementation/clock/PausableClock._brokenClock : Lorg/prevayler/implementation/clock/BrokenClock;\lPUTFIELD org/prevayler/implementation/clock/PausableClock._activeClock : Lorg/prevayler/Clock;\lL2\lLINENUMBER 30 L2\lLDC \"35d19d28-de73-4170-9e7e-cc7e62719f9a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
-entry;
-exit;
-entry -> 1050704650;
-1050704650 -> exit;
-1050704650[fontcolor="purple", penwidth=3, color="purple"];
-}

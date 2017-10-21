@@ -1,1 +1,32 @@
-{"baseTime":5928606,"baseTimeHumanReadable":0.006,"regionsToPerformanceTables":{"Region{regionID='ee81f5a1-1735-4f01-a9b4-93356d2f1fa3', startTime=-1, endTime=-1, duration=-1}":{"[]":1369,"[A]":3170,"[B]":1315,"[A, B]":2003573069},"Region{regionID='d2c6c68a-6655-4bfc-a8d3-9d14fbac4520', startTime=-1, endTime=-1, duration=-1}":{"[]":4296,"[A]":1003908917,"[C]":3766,"[A, C]":5005163256}},"regionsToPerformanceTablesHumanReadable":{"Region{regionID='ee81f5a1-1735-4f01-a9b4-93356d2f1fa3', startTime=-1, endTime=-1, duration=-1}":{"[]":0.0,"[A]":0.0,"[B]":0.0,"[A, B]":2.004},"Region{regionID='d2c6c68a-6655-4bfc-a8d3-9d14fbac4520', startTime=-1, endTime=-1, duration=-1}":{"[]":0.0,"[A]":1.004,"[C]":0.0,"[A, C]":5.005}}}
+{
+  "baseTime": 0,
+  "baseTimeHumanReadable": 0.0,
+  "regionsToPerformanceTables": {
+    "Region{regionID='7f0329b0-7e39-4a7c-bf40-f8358ec288fc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 2,
+      "[A]": 2,
+      "[C]": 2,
+      "[A, C]": 2
+    },
+    "Region{regionID='8ec1e1a3-f97c-47f8-956b-7aa45a777c37', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 2,
+      "[A]": 2,
+      "[B]": 2,
+      "[A, B]": 2
+    }
+  },
+  "regionsToPerformanceTablesHumanReadable": {
+    "Region{regionID='7f0329b0-7e39-4a7c-bf40-f8358ec288fc', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[A]": 0.0,
+      "[C]": 0.0,
+      "[A, C]": 0.0
+    },
+    "Region{regionID='8ec1e1a3-f97c-47f8-956b-7aa45a777c37', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[A]": 0.0,
+      "[B]": 0.0,
+      "[A, B]": 0.0
+    }
+  }
+}

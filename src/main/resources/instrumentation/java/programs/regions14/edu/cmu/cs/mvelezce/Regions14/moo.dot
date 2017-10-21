@@ -1,18 +1,18 @@
 digraph moo {
 node [shape=record];
-2047247111 [label="L0\lLINENUMBER 54 L0\lLDC \"53b1966c-f72b-4bb5-b112-f0c17dcbb092\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
-1193784882 [label="ILOAD 1\lIFEQ L1\l"];
-1584027565 [label="L1\lLINENUMBER 58 L1\lFRAME SAME\lLDC \"53b1966c-f72b-4bb5-b112-f0c17dcbb092\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-389981503 [label="L2\lLINENUMBER 55 L2\lLDC 2000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL3\lLINENUMBER 56 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1391179638 [label="L0\lLINENUMBER 54 L0\lLDC \"53b1966c-f72b-4bb5-b112-f0c17dcbb092\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L1\l"];
+647883561 [label="L2\lLINENUMBER 55 L2\lLDC 2000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL3\lLINENUMBER 56 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+825998794 [label="ILOAD 1\lIFEQ L1\l"];
+851765407 [label="L1\lLINENUMBER 58 L1\lFRAME SAME\lLDC \"53b1966c-f72b-4bb5-b112-f0c17dcbb092\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 2047247111;
-2047247111 -> 1193784882;
-2047247111 -> 1584027565;
-1193784882 -> 1584027565;
-1193784882 -> 389981503;
-1584027565 -> exit;
-389981503 -> 1584027565;
-2047247111[fontcolor="purple", penwidth=3, color="purple"];
-1584027565[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1391179638;
+1391179638 -> 825998794;
+1391179638 -> 851765407;
+647883561 -> 851765407;
+825998794 -> 647883561;
+825998794 -> 851765407;
+851765407 -> exit;
+1391179638[fontcolor="purple", penwidth=3, color="purple"];
+851765407[fontcolor="purple", penwidth=3, color="purple"];
 }

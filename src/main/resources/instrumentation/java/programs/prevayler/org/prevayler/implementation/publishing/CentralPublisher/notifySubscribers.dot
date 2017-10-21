@@ -1,0 +1,13 @@
+digraph notifySubscribers {
+node [shape=record];
+2125261847 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 79 L3\lLDC \"2a0aea73-587e-43c7-b7af-a8684f8ac5e9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.startTurn ()V\lL0\lLINENUMBER 81 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/publishing/CentralPublisher._pausableClock : Lorg/prevayler/implementation/clock/PausableClock;\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.executionTime ()Ljava/util/Date;\lINVOKEVIRTUAL org/prevayler/implementation/clock/PausableClock.advanceTo (Ljava/util/Date;)V\lL4\lLINENUMBER 82 L4\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.timestamp ()Lorg/prevayler/implementation/TransactionTimestamp;\lINVOKEVIRTUAL org/prevayler/implementation/publishing/CentralPublisher.notifySubscribers (Lorg/prevayler/implementation/TransactionTimestamp;)V\lL1\lLINENUMBER 84 L1\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lL5\lLINENUMBER 85 L5\lGOTO L6\l"];
+1945781290 [label="L6\lLINENUMBER 86 L6\lFRAME SAME\lLDC \"2a0aea73-587e-43c7-b7af-a8684f8ac5e9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+1150759062 [label="L2\lLINENUMBER 84 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 2\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lALOAD 2\lATHROW\l"];
+entry;
+exit;
+entry -> 2125261847;
+2125261847 -> 1945781290;
+1945781290 -> exit;
+2125261847[fontcolor="purple", penwidth=3, color="purple"];
+1945781290[fontcolor="purple", penwidth=3, color="purple"];
+}

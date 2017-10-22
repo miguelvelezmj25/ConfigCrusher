@@ -1,17 +1,17 @@
 digraph monitor {
 node [shape=record];
-279593488 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lGOTO L2\l"];
-171888285 [label="L2\lFRAME SAME1 org/prevayler/foundation/monitor/Monitor\lLDC \"08de550d-03ac-4fbb-bde5-0a179be78afa\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lARETURN\l"];
-1202020319 [label="L1\lFRAME SAME\lNEW org/prevayler/foundation/monitor/SimpleMonitor\lDUP\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lINVOKESPECIAL org/prevayler/foundation/monitor/SimpleMonitor.\<init\> (Ljava/io/PrintStream;)V\l"];
-1405602103 [label="L0\lLINENUMBER 395 L0\lLDC \"08de550d-03ac-4fbb-bde5-0a179be78afa\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lIFNULL L1\l"];
+1359673572 [label="L1\lFRAME SAME\lNEW org/prevayler/foundation/monitor/SimpleMonitor\lDUP\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lINVOKESPECIAL org/prevayler/foundation/monitor/SimpleMonitor.\<init\> (Ljava/io/PrintStream;)V\l"];
+1808758228 [label="L2\lFRAME SAME1 org/prevayler/foundation/monitor/Monitor\lLDC \"cb5b4868-a552-43f9-8c4f-d6bda55246a9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+739920086 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lGOTO L2\l"];
+1760032708 [label="L0\lLINENUMBER 395 L0\lLDC \"cb5b4868-a552-43f9-8c4f-d6bda55246a9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lIFNULL L1\l"];
 entry;
 exit;
-entry -> 1405602103;
-279593488 -> 171888285;
-171888285 -> exit;
-1202020319 -> 171888285;
-1405602103 -> 279593488;
-1405602103 -> 1202020319;
-171888285[fontcolor="purple", penwidth=3, color="purple"];
-1405602103[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1760032708;
+1359673572 -> 1808758228;
+1808758228 -> exit;
+739920086 -> 1808758228;
+1760032708 -> 1359673572;
+1760032708 -> 739920086;
+1808758228[fontcolor="purple", penwidth=3, color="purple"];
+1760032708[fontcolor="purple", penwidth=3, color="purple"];
 }

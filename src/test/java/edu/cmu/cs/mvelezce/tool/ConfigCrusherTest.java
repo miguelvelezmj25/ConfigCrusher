@@ -17,7 +17,7 @@ public class ConfigCrusherTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i1";
+        args[2] = "-i10";
 
         ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
         approach.compile();
@@ -38,7 +38,7 @@ public class ConfigCrusherTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i1";
+        args[2] = "-i10";
 
         ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
         approach.compile();
@@ -59,7 +59,28 @@ public class ConfigCrusherTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i1";
+        args[2] = "-i10";
+
+        ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
+        approach.compile();
+        PerformanceModel performanceModel = approach.run(args);
+
+        performanceModel.toString();
+    }
+
+    @Test
+    public void prevayler() throws Exception {
+        String programName = "prevayler";
+        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
+        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler";
+        String entry = "org.prevayler.demos.demo1.PrimeNumbers";
+
+        String[] args = new String[0];
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i10";
 
         ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
         approach.compile();

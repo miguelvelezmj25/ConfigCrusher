@@ -92,7 +92,7 @@ public class BruteForceExecutorTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i1";
+        args[2] = "-i10";
 
         Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
@@ -126,7 +126,7 @@ public class BruteForceExecutorTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i5";
+        args[2] = "-i10";
 
         Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
@@ -135,7 +135,7 @@ public class BruteForceExecutorTest {
     @Test
     public void optimizer() throws IOException, InterruptedException {
         String programName = "pngtasticOptimizer";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic-optimizer/out/production/pngtastic-optimizer";
         String entryPoint = "optimizer.com.googlecode.pngtastic.Run";
 
         // Program arguments
@@ -148,7 +148,7 @@ public class BruteForceExecutorTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i3";
+        args[2] = "-i10";
 
         Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);

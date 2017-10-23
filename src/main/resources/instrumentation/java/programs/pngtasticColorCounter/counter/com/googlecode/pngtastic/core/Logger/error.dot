@@ -1,0 +1,15 @@
+digraph error {
+node [shape=record];
+504082066 [label="L0\lLINENUMBER 52 L0\lLDC \"7237cdc9-e25c-484c-82e6-0dc777cadc10\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lLDC \"NONE\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+306173024 [label="L1\lLINENUMBER 55 L1\lFRAME SAME\lLDC \"7237cdc9-e25c-484c-82e6-0dc777cadc10\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+1345844369 [label="L2\lLINENUMBER 53 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+entry;
+exit;
+entry -> 504082066;
+504082066 -> 306173024;
+504082066 -> 1345844369;
+306173024 -> exit;
+1345844369 -> 306173024;
+504082066[fontcolor="purple", penwidth=3, color="purple"];
+306173024[fontcolor="purple", penwidth=3, color="purple"];
+}

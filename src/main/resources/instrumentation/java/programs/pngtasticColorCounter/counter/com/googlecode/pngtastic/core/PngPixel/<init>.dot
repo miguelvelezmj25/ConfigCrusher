@@ -1,0 +1,17 @@
+digraph <init> {
+node [shape=record];
+255974271 [label="L0\lLINENUMBER 21 L0\lLDC \"b9b50179-3161-4028-af88-fc712479acb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lILOAD 2\lILOAD 3\lILOAD 4\lILOAD 5\lILOAD 6\lIFEQ L1\l"];
+1308161257 [label="L1\lFRAME FULL [U I I I I I I] [U I I I I I]\lLDC 65535\l"];
+2005222156 [label="SIPUSH 255\lGOTO L2\l"];
+319123198 [label="L2\lFRAME FULL [U I I I I I I] [U I I I I I I]\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/PngPixel.\<init\> (IIIIII)V\lL3\lLINENUMBER 22 L3\lLDC \"b9b50179-3161-4028-af88-fc712479acb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 255974271;
+255974271 -> 1308161257;
+255974271 -> 2005222156;
+1308161257 -> 319123198;
+2005222156 -> 319123198;
+319123198 -> exit;
+255974271[fontcolor="purple", penwidth=3, color="purple"];
+319123198[fontcolor="purple", penwidth=3, color="purple"];
+}

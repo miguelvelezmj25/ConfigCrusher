@@ -1,0 +1,38 @@
+digraph cacheToSubLen {
+node [shape=record];
+476173692 [label="L13\lLINENUMBER 110 L13\lALOAD 3\lILOAD 10\lILOAD 9\lCASTORE\lL14\lLINENUMBER 109 L14\lIINC 10 1\lGOTO L11\l"];
+1750081207 [label="L2\lLINENUMBER 99 L2\lLDC \"b6a0e9f1-4db0-40d6-a97c-51e3b0294259\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+721042116 [label="L1\lLINENUMBER 102 L1\lFRAME SAME\lLDC \"55f66f17-ada4-406a-8823-8390760e1184\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lILOAD 1\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.maxCachedSubLen (I)I\lISTORE 4\lL3\lLINENUMBER 103 L3\lICONST_0\lISTORE 5\lL4\lLINENUMBER 104 L4\lBIPUSH 8\lILOAD 1\lIMUL\lISTORE 6\lL5\lLINENUMBER 105 L5\lILOAD 6\lBIPUSH 8\lIADD\lISTORE 7\l"];
+420757730 [label="L0\lLINENUMBER 98 L0\lLDC \"b6a0e9f1-4db0-40d6-a97c-51e3b0294259\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lILOAD 2\lICONST_3\lIF_ICMPGE L1\l"];
+1696187636 [label="L15\lLINENUMBER 115 L15\lFRAME SAME\lILOAD 8\lICONST_1\lIADD\lISTORE 5\lL17\lLINENUMBER 106 L17\lIINC 6 1\lGOTO L6\l"];
+2002791335 [label="L16\lLINENUMBER 113 L16\lGOTO L7\l"];
+877898465 [label="L7\lLINENUMBER 117 L7\lFRAME CHOP 3\lLDC \"29814393-02e7-4d79-8d2c-c4f87ab87be4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lLDC \"55f66f17-ada4-406a-8823-8390760e1184\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lLDC \"b6a0e9f1-4db0-40d6-a97c-51e3b0294259\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+1957480696 [label="L12\lLINENUMBER 112 L12\lFRAME SAME\lLDC \"0fe849da-e97f-444a-8a3b-9c5dede7df6b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lLDC \"29814393-02e7-4d79-8d2c-c4f87ab87be4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lILOAD 8\lILOAD 4\lIF_ICMPNE L15\l"];
+268169177 [label="L8\lLINENUMBER 107 L8\lLDC \"0fe849da-e97f-444a-8a3b-9c5dede7df6b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.subLenLen : [B\lILOAD 6\lBALOAD\lSIPUSH 255\lIAND\lICONST_3\lIADD\lISTORE 8\lL9\lLINENUMBER 108 L9\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.subLenPos : [C\lILOAD 6\lCALOAD\lISTORE 9\lL10\lLINENUMBER 109 L10\lILOAD 5\lISTORE 10\l"];
+902586547 [label="L11\lFRAME APPEND [I I I]\lILOAD 10\lILOAD 8\lIF_ICMPGT L12\l"];
+1698220546 [label="L6\lLINENUMBER 106 L6\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache I I [C I I I I] []\lILOAD 6\lILOAD 7\lIF_ICMPGE L7\l"];
+entry;
+exit;
+476173692 -> 902586547;
+721042116 -> 1698220546;
+420757730 -> 1750081207;
+420757730 -> 721042116;
+877898465 -> exit;
+902586547 -> 476173692;
+902586547 -> 1957480696;
+1698220546 -> 877898465;
+1698220546 -> 268169177;
+entry -> 420757730;
+1750081207 -> exit;
+1696187636 -> 1698220546;
+2002791335 -> 877898465;
+1957480696 -> 1696187636;
+1957480696 -> 2002791335;
+268169177 -> 902586547;
+1750081207[fontcolor="purple", penwidth=3, color="purple"];
+721042116[fontcolor="purple", penwidth=3, color="purple"];
+420757730[fontcolor="purple", penwidth=3, color="purple"];
+877898465[fontcolor="purple", penwidth=3, color="purple"];
+1957480696[fontcolor="purple", penwidth=3, color="purple"];
+268169177[fontcolor="purple", penwidth=3, color="purple"];
+}

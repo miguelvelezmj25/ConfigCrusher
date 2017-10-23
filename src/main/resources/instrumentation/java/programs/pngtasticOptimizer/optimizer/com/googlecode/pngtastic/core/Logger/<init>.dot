@@ -1,0 +1,21 @@
+digraph <init> {
+node [shape=record];
+190233967 [label="L3\lFRAME SAME1 optimizer/com/googlecode/pngtastic/core/Logger\lALOAD 1\lL5\lLINENUMBER 24 L5\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\l"];
+2003507372 [label="GETSTATIC optimizer/com/googlecode/pngtastic/core/Logger.LOG_LEVELS : Ljava/util/List;\lLDC \"43a0287e-40bf-4b18-ae62-506c72fdc8a4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\lINVOKEINTERFACE java/util/List.contains (Ljava/lang/Object;)Z\lIFNE L3\l"];
+1690203558 [label="L4\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/Logger java/lang/String] [optimizer/com/googlecode/pngtastic/core/Logger java/lang/String]\lLDC \"43a0287e-40bf-4b18-ae62-506c72fdc8a4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lLDC \"1ff35de9-0d76-40b9-b411-eddc6e4d1e19\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lPUTFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lRETURN\l"];
+1320433277 [label="L0\lLINENUMBER 22 L0\lLDC \"1ff35de9-0d76-40b9-b411-eddc6e4d1e19\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
+940205324 [label="L2\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/Logger java/lang/String] [optimizer/com/googlecode/pngtastic/core/Logger]\lLDC \"NONE\"\lGOTO L4\l"];
+entry;
+exit;
+190233967 -> 1690203558;
+entry -> 1320433277;
+2003507372 -> 190233967;
+2003507372 -> 940205324;
+1690203558 -> exit;
+1320433277 -> 2003507372;
+1320433277 -> 940205324;
+940205324 -> 1690203558;
+2003507372[fontcolor="purple", penwidth=3, color="purple"];
+1690203558[fontcolor="purple", penwidth=3, color="purple"];
+1320433277[fontcolor="purple", penwidth=3, color="purple"];
+}

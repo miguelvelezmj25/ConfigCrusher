@@ -1,0 +1,25 @@
+digraph alloy {
+node [shape=record];
+637303023 [label="L4\lLINENUMBER 122 L4\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.litLens : [I\lILOAD 3\lDUP2\lIALOAD\lALOAD 2\lILOAD 3\lIALOAD\lICONST_2\lIDIV\lIADD\lIASTORE\lL5\lLINENUMBER 121 L5\lIINC 3 1\lGOTO L2\l"];
+22035762 [label="L10\lLINENUMBER 128 L10\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.dists : [I\lILOAD 4\lDUP2\lIALOAD\lALOAD 3\lILOAD 4\lIALOAD\lICONST_2\lIDIV\lIADD\lIASTORE\lL11\lLINENUMBER 127 L11\lIINC 4 1\lGOTO L8\l"];
+1202525943 [label="L8\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats [I [I I] []\lILOAD 4\lBIPUSH 32\lIF_ICMPGE L9\l"];
+1444655418 [label="L0\lLINENUMBER 120 L0\lLDC \"480842cd-d2a0-41ce-9675-11d72d96ecd2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 1\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.litLens : [I\lASTORE 2\lL1\lLINENUMBER 121 L1\lICONST_0\lISTORE 3\l"];
+957796349 [label="L9\lLINENUMBER 130 L9\lFRAME SAME\lLDC \"f6a48841-2e8c-455f-bb8f-80dd52216682\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+287648630 [label="L3\lLINENUMBER 124 L3\lFRAME SAME\lLDC \"480842cd-d2a0-41ce-9675-11d72d96ecd2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lLDC \"f6a48841-2e8c-455f-bb8f-80dd52216682\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.litLens : [I\lSIPUSH 256\lICONST_1\lIASTORE\lL6\lLINENUMBER 126 L6\lALOAD 1\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/SymbolStats.dists : [I\lASTORE 3\lL7\lLINENUMBER 127 L7\lICONST_0\lISTORE 4\l"];
+839858919 [label="L2\lFRAME APPEND [[I I]\lILOAD 3\lSIPUSH 288\lIF_ICMPGE L3\l"];
+entry;
+exit;
+637303023 -> 839858919;
+entry -> 1444655418;
+22035762 -> 1202525943;
+1202525943 -> 22035762;
+1202525943 -> 957796349;
+1444655418 -> 839858919;
+957796349 -> exit;
+287648630 -> 1202525943;
+839858919 -> 637303023;
+839858919 -> 287648630;
+1444655418[fontcolor="purple", penwidth=3, color="purple"];
+957796349[fontcolor="purple", penwidth=3, color="purple"];
+287648630[fontcolor="purple", penwidth=3, color="purple"];
+}

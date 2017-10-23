@@ -322,6 +322,17 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
                 }
             }
         }
+
+        for(TryCatchBlockNode tryCatchBlockNode : this.getMethodNode().tryCatchBlocks) {
+            block = this.getGraph().getMethodBlock(tryCatchBlockNode.handler);
+
+            if(block != null) {
+                continue;
+            }
+
+            block = new MethodBlock(tryCatchBlockNode.handler);
+            this.getGraph().addMethodBlock(block);
+        }
     }
 
 }

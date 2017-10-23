@@ -1543,6 +1543,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             methodStartIndex++;
         }
 
+        if(methodStartIndex == javapResult.size()) {
+            throw new RuntimeException("The start of the javap result cannot be the size of the result");
+        }
+
         return methodStartIndex;
     }
 

@@ -10,8 +10,7 @@ import java.util.Map;
 public class RegionsTest {
 
     public static void main(String[] args) {
-        System.out.println("Started");
-        int count = 100;
+        int count = 1_000_000_00;
         long start = System.nanoTime();
 
         for(int i = 0; i < count; i++) {
@@ -19,7 +18,6 @@ public class RegionsTest {
             Regions.exit("dsf");
         }
 
-        Map<String, Long> a = Regions.getRegionsToProcessedPerformance();
         long end = System.nanoTime();
         long time = end - start;
 

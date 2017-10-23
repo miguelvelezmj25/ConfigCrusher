@@ -1,0 +1,17 @@
+digraph expand {
+node [shape=record];
+1049858872 [label="L3\lLINENUMBER 111 L3\lALOAD 0\lICONST_0\lALOAD 0\lILOAD 1\lILOAD 1\lINVOKESTATIC java/lang/System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V\lL4\lLINENUMBER 110 L4\lILOAD 1\lILOAD 1\lIADD\lISTORE 1\lGOTO L1\l"];
+1604045625 [label="L2\lLINENUMBER 113 L2\lFRAME SAME\lLDC \"72e0721e-b7c0-446f-b767-ff598eb1a065\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+1496140242 [label="L0\lLINENUMBER 110 L0\lLDC \"72e0721e-b7c0-446f-b767-ff598eb1a065\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lBIPUSH 64\lISTORE 1\l"];
+905383746 [label="L1\lFRAME APPEND [I]\lILOAD 1\lLDC 65536\lIF_ICMPGE L2\l"];
+entry;
+exit;
+entry -> 1496140242;
+1049858872 -> 905383746;
+1604045625 -> exit;
+1496140242 -> 905383746;
+905383746 -> 1049858872;
+905383746 -> 1604045625;
+1604045625[fontcolor="purple", penwidth=3, color="purple"];
+1496140242[fontcolor="purple", penwidth=3, color="purple"];
+}

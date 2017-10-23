@@ -1,0 +1,30 @@
+digraph deflateSplittingFirst {
+node [shape=record];
+1201142367 [label="L3\lFRAME APPEND [I [I I]\lILOAD 9\lILOAD 7\lIF_ICMPGT L4\l"];
+1610535616 [label="L6\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie optimizer/com/googlecode/pngtastic/core/processing/zopfli/Options I [B I I optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer I [I I] [optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie optimizer/com/googlecode/pngtastic/core/processing/zopfli/Options]\lICONST_0\l"];
+617495997 [label="L4\lLINENUMBER 296 L4\lFRAME SAME\lLDC \"e894bb45-8be6-4ee4-9ee9-9b6257afed1d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+149914552 [label="ICONST_1\lGOTO L7\l"];
+308187186 [label="L5\lLINENUMBER 294 L5\lLDC \"ea55cd67-250e-4f2f-bff8-0a42c60d4504\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lILOAD 9\lILOAD 7\lIF_ICMPNE L6\l"];
+1859538327 [label="L7\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie optimizer/com/googlecode/pngtastic/core/processing/zopfli/Options I [B I I optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer I [I I] [optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie optimizer/com/googlecode/pngtastic/core/processing/zopfli/Options I]\lLDC \"18bb265b-8f0f-42fe-b224-fb8708628fb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lLDC \"ea55cd67-250e-4f2f-bff8-0a42c60d4504\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lALOAD 3\lALOAD 8\lILOAD 9\lICONST_1\lISUB\lIALOAD\lALOAD 8\lILOAD 9\lIALOAD\lALOAD 6\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Deflate.deflateDynamicBlock (Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Options;Z[BIILoptimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer;)V\lL8\lLINENUMBER 293 L8\lIINC 9 1\lGOTO L3\l"];
+200356510 [label="L0\lLINENUMBER 291 L0\lLDC \"e894bb45-8be6-4ee4-9ee9-9b6257afed1d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 3\lILOAD 4\lILOAD 5\lINVOKESTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/BlockSplitter.split (Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;[BII)I\lISTORE 7\lL1\lLINENUMBER 292 L1\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.splitPoints : [I\lASTORE 8\lL2\lLINENUMBER 293 L2\lICONST_1\lISTORE 9\l"];
+1570336355 [label="ILOAD 2\lLDC \"18bb265b-8f0f-42fe-b224-fb8708628fb5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lIFEQ L6\l"];
+entry;
+exit;
+1201142367 -> 617495997;
+1201142367 -> 308187186;
+entry -> 200356510;
+1610535616 -> 1859538327;
+617495997 -> exit;
+149914552 -> 1859538327;
+308187186 -> 1610535616;
+308187186 -> 1570336355;
+1859538327 -> 1201142367;
+200356510 -> 1201142367;
+1570336355 -> 1610535616;
+1570336355 -> 149914552;
+617495997[fontcolor="purple", penwidth=3, color="purple"];
+308187186[fontcolor="purple", penwidth=3, color="purple"];
+1859538327[fontcolor="purple", penwidth=3, color="purple"];
+200356510[fontcolor="purple", penwidth=3, color="purple"];
+1570336355[fontcolor="purple", penwidth=3, color="purple"];
+}

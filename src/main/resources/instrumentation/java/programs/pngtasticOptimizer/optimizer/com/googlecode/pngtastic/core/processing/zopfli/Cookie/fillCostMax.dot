@@ -1,0 +1,24 @@
+digraph fillCostMax {
+node [shape=record];
+900325371 [label="L0\lLINENUMBER 140 L0\lLDC \"5722e236-b995-45d6-a89a-599f38ac51de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lICONST_0\lISTORE 2\l"];
+229294880 [label="L6\lLINENUMBER 144 L6\lILOAD 1\lISTORE 3\l"];
+1980210204 [label="L5\lLINENUMBER 146 L5\lFRAME APPEND [I]\lLDC \"72cc5fed-295f-4542-92b9-1551dddb13ae\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lGETSTATIC optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.costMax : [J\lICONST_0\lALOAD 0\lILOAD 2\lILOAD 3\lILOAD 2\lISUB\lINVOKESTATIC java/lang/System.arraycopy (Ljava/lang/Object;ILjava/lang/Object;II)V\lL7\lLINENUMBER 147 L7\lILOAD 3\lISTORE 2\lL8\lLINENUMBER 148 L8\lGOTO L1\l"];
+1405051922 [label="L2\lLINENUMBER 149 L2\lFRAME CHOP 1\lLDC \"5722e236-b995-45d6-a89a-599f38ac51de\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+631093619 [label="L1\lLINENUMBER 141 L1\lFRAME APPEND [I]\lILOAD 2\lILOAD 1\lIF_ICMPGE L2\l"];
+1449383725 [label="L3\lLINENUMBER 142 L3\lLDC \"72cc5fed-295f-4542-92b9-1551dddb13ae\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lILOAD 2\lLDC 65536\lIADD\lISTORE 3\lL4\lLINENUMBER 143 L4\lILOAD 3\lILOAD 1\lIF_ICMPLE L5\l"];
+entry;
+exit;
+900325371 -> 631093619;
+entry -> 900325371;
+229294880 -> 1980210204;
+1980210204 -> 631093619;
+1405051922 -> exit;
+631093619 -> 1405051922;
+631093619 -> 1449383725;
+1449383725 -> 229294880;
+1449383725 -> 1980210204;
+900325371[fontcolor="purple", penwidth=3, color="purple"];
+1980210204[fontcolor="purple", penwidth=3, color="purple"];
+1405051922[fontcolor="purple", penwidth=3, color="purple"];
+1449383725[fontcolor="purple", penwidth=3, color="purple"];
+}

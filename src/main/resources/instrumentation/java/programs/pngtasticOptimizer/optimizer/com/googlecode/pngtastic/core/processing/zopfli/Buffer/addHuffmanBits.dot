@@ -1,0 +1,24 @@
+digraph addHuffmanBits {
+node [shape=record];
+610979877 [label="L2\lLINENUMBER 60 L2\lFRAME SAME\lLDC \"4dd7a291-d908-4367-8a08-3724c349af17\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+1155735177 [label="L0\lLINENUMBER 52 L0\lLDC \"4dd7a291-d908-4367-8a08-3724c349af17\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lICONST_0\lISTORE 3\l"];
+1749018021 [label="L3\lLINENUMBER 53 L3\lLDC \"34a2e6ec-a8a3-44be-82fc-de1db9590f6b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.bp : I\lIFNE L4\l"];
+196549785 [label="L4\lLINENUMBER 56 L4\lFRAME SAME\lLDC \"34a2e6ec-a8a3-44be-82fc-de1db9590f6b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lILOAD 1\lILOAD 2\lILOAD 3\lISUB\lICONST_1\lISUB\lISHR\lICONST_1\lIAND\lISTORE 4\lL6\lLINENUMBER 57 L6\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.data : [B\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.size : I\lICONST_1\lISUB\lDUP2\lBALOAD\lILOAD 4\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.bp : I\lISHL\lIOR\lI2B\lBASTORE\lL7\lLINENUMBER 58 L7\lALOAD 0\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.bp : I\lICONST_1\lIADD\lBIPUSH 7\lIAND\lPUTFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.bp : I\lL8\lLINENUMBER 52 L8\lIINC 3 1\lGOTO L1\l"];
+635782418 [label="L1\lFRAME APPEND [I]\lILOAD 3\lILOAD 2\lIF_ICMPGE L2\l"];
+1476152368 [label="L5\lLINENUMBER 54 L5\lALOAD 0\lICONST_0\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/processing/zopfli/Buffer.append (B)V\l"];
+entry;
+exit;
+entry -> 1155735177;
+610979877 -> exit;
+1155735177 -> 635782418;
+1749018021 -> 196549785;
+1749018021 -> 1476152368;
+196549785 -> 635782418;
+635782418 -> 610979877;
+635782418 -> 1749018021;
+1476152368 -> 196549785;
+610979877[fontcolor="purple", penwidth=3, color="purple"];
+1155735177[fontcolor="purple", penwidth=3, color="purple"];
+1749018021[fontcolor="purple", penwidth=3, color="purple"];
+196549785[fontcolor="purple", penwidth=3, color="purple"];
+}

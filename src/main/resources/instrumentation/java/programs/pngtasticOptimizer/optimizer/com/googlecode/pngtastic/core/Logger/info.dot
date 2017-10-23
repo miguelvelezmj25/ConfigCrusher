@@ -1,18 +1,19 @@
 digraph info {
 node [shape=record];
-96064495 [label="LDC \"INFO\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L2\l"];
-959870495 [label="L0\lLINENUMBER 42 L0\lLDC \"213da996-39a9-4599-9112-bad5b78bff06\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
-280839437 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"213da996-39a9-4599-9112-bad5b78bff06\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-968471694 [label="L1\lLINENUMBER 43 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1122880342 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"cbfdf024-2a32-4bb3-8546-6b2fc4d3665d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lLDC \"213da996-39a9-4599-9112-bad5b78bff06\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.exit (Ljava/lang/String;)V\lRETURN\l"];
+915733493 [label="L1\lLINENUMBER 43 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+976254481 [label="L0\lLINENUMBER 42 L0\lLDC \"213da996-39a9-4599-9112-bad5b78bff06\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFNE L1\l"];
+1678884287 [label="LDC \"INFO\"\lLDC \"cbfdf024-2a32-4bb3-8546-6b2fc4d3665d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/RegionsCounter.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L2\l"];
 entry;
 exit;
-entry -> 959870495;
-96064495 -> 280839437;
-96064495 -> 968471694;
-959870495 -> 96064495;
-959870495 -> 968471694;
-280839437 -> exit;
-968471694 -> 280839437;
-959870495[fontcolor="purple", penwidth=3, color="purple"];
-280839437[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 976254481;
+1122880342 -> exit;
+915733493 -> 1122880342;
+976254481 -> 915733493;
+976254481 -> 1678884287;
+1678884287 -> 1122880342;
+1678884287 -> 915733493;
+1122880342[fontcolor="purple", penwidth=3, color="purple"];
+976254481[fontcolor="purple", penwidth=3, color="purple"];
+1678884287[fontcolor="purple", penwidth=3, color="purple"];
 }

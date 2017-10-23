@@ -16,6 +16,7 @@ public abstract class BaseAdapter implements Adapter {
 
     private static final String CLASS_CONTAINER = "target/classes/";
     private static final String JACKSON_PATH = "/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar:/Users/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar";
+    private static final String PREVAYLER_PATH = "/Users/mvelezce/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar:/Users/mvelezce/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15.jar:/Users/mvelezce/.m2/repository/com/thoughtworks/xstream/xstream/1.4.5/xstream-1.4.5.jar";
     private String programName;
     private String mainClass;
     private String directory;
@@ -106,7 +107,7 @@ public abstract class BaseAdapter implements Adapter {
 //        commandList.add("-Xmn10G");
         commandList.add("-XX:+UseConcMarkSweepGC");
         commandList.add("-cp");
-        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + cp.toString() + ":" + this.directory);
+        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
         commandList.add(mainAdapter);
         commandList.add(this.programName);
         commandList.add(this.mainClass);

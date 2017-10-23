@@ -189,6 +189,35 @@ public class EvaluationTest {
     }
 
     @Test
+    public void prevaylerConfigCrusher() throws Exception {
+        String programName = "prevayler";
+
+        // arguments
+        String[] args = new String[0];
+
+        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+        instrumenter.instrument(args);
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+
+        Analysis analysis = new DefaultStaticAnalysis();
+        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+
+        Executor executor = new ConfigCrusherExecutor(programName);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
+                regionsToOptionSet);
+        PerformanceModel performanceModel = builder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
+    }
+
+    @Test
     public void regions12ConfigCrusher() throws Exception {
         String programName = "regions12";
 

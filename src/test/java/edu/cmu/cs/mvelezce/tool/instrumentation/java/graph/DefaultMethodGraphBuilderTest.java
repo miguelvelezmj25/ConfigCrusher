@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassT
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import kanzi.io.CompressedOutputStream;
 import org.junit.Assert;
 import org.junit.Test;
 import org.prevayler.implementation.publishing.POBox;
@@ -373,6 +374,23 @@ public class DefaultMethodGraphBuilderTest {
 //            System.out.println(graph.toDotString("recoverPendingTransactions"));
             Assert.assertEquals(8, graph.getBlocks().size());
             Assert.assertEquals(10, graph.getEdgeCount());
+        }
+    }
+
+    @Test
+    public void kanzi() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
+        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassNode classNode = reader.readClass(CompressedOutputStream.class.getCanonicalName());
+
+        for(MethodNode methodNode : classNode.methods) {
+            if(!methodNode.name.equals("write") || !methodNode.desc.equals("(I)V")) {
+                continue;
+            }
+
+            DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
+            MethodGraph graph = builder.build();
+            graph.getBlocks();
         }
     }
 

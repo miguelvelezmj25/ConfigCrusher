@@ -72,10 +72,10 @@ public class ConfigCrusherExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
 
-//        configurations.clear();
-//        Set<String> n = new HashSet<>();
+        configurations.clear();
+        Set<String> n = new HashSet<>();
 //        n.add("A");
-//        configurations.add(n);
+        configurations.add(n);
 
         args = new String[3];
         args[0] = "-delres";
@@ -210,6 +210,29 @@ public class ConfigCrusherExecutorTest {
         String programName = "pngtasticOptimizer";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
         String entryPoint = "optimizer.com.googlecode.pngtastic.Run";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
+    @Test
+    public void prevayler1() throws Exception {
+        String programName = "prevayler";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
+        String entryPoint = "org.prevayler.demos.demo1.PrimeNumbers";
 
         // Program arguments
         String[] args = new String[0];

@@ -25,6 +25,11 @@ public class RegionsCounter {
         RegionsCounter.endCount++;
 
         Long count = RegionsCounter.regionsToCount.get(id);
+
+        if(count == null) {
+            count = 0L;
+        }
+
         RegionsCounter.regionsToCount.put(id, count + 1L);
     }
 

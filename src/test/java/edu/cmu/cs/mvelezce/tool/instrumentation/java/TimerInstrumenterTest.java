@@ -251,7 +251,6 @@ public class TimerInstrumenterTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-
         Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
         instrumenter.instrument(args);
     }

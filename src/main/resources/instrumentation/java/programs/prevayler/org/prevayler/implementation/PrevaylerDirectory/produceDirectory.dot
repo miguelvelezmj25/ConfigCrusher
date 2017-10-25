@@ -1,9 +1,0 @@
-digraph produceDirectory {
-node [shape=record];
-23864076 [label="L0\lLINENUMBER 103 L0\lLDC \"ebf82c4e-e474-4d74-9843-dfa832969358\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/PrevaylerDirectory._directory : Ljava/io/File;\lINVOKESTATIC org/prevayler/foundation/FileManager.produceDirectory (Ljava/io/File;)V\lL1\lLINENUMBER 104 L1\lLDC \"ebf82c4e-e474-4d74-9843-dfa832969358\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-entry;
-exit;
-entry -> 23864076;
-23864076 -> exit;
-23864076[fontcolor="purple", penwidth=3, color="purple"];
-}

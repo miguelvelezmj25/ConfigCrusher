@@ -1,0 +1,9 @@
+digraph <init> {
+node [shape=record];
+1753735633 [label="L0\lLINENUMBER 38 L0\lLDC \"dfd631d8-0f39-4637-baeb-04e52439de5e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lNEW java/io/BufferedInputStream\lDUP\lNEW java/io/FileInputStream\lDUP\lALOAD 1\lINVOKESPECIAL java/io/FileInputStream.\<init\> (Ljava/lang/String;)V\lINVOKESPECIAL java/io/BufferedInputStream.\<init\> (Ljava/io/InputStream;)V\lALOAD 2\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/PngImage.\<init\> (Ljava/io/InputStream;Ljava/lang/String;)V\lL1\lLINENUMBER 39 L1\lALOAD 0\lALOAD 1\lPUTFIELD counter/com/googlecode/pngtastic/core/PngImage.fileName : Ljava/lang/String;\lL2\lLINENUMBER 40 L2\lLDC \"dfd631d8-0f39-4637-baeb-04e52439de5e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 1753735633;
+1753735633 -> exit;
+1753735633[fontcolor="purple", penwidth=3, color="purple"];
+}

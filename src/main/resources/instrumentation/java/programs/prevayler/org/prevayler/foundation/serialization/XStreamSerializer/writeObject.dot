@@ -1,17 +1,17 @@
 digraph writeObject {
 node [shape=record];
-981765041 [label="L1\lFRAME SAME\lNEW java/io/OutputStreamWriter\lDUP\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/foundation/serialization/XStreamSerializer._encoding : Ljava/lang/String;\lINVOKESPECIAL java/io/OutputStreamWriter.\<init\> (Ljava/io/OutputStream;Ljava/lang/String;)V\l"];
-858585274 [label="L0\lLINENUMBER 54 L0\lLDC \"3aa36771-f900-4b65-979f-92f16d94d423\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/serialization/XStreamSerializer._encoding : Ljava/lang/String;\lIFNONNULL L1\l"];
-313338379 [label="NEW java/io/OutputStreamWriter\lDUP\lALOAD 1\lINVOKESPECIAL java/io/OutputStreamWriter.\<init\> (Ljava/io/OutputStream;)V\lGOTO L2\l"];
-352372455 [label="L2\lFRAME SAME1 java/io/OutputStreamWriter\lASTORE 3\lL3\lLINENUMBER 55 L3\lALOAD 0\lINVOKESPECIAL org/prevayler/foundation/serialization/XStreamSerializer.getXStream ()Lcom/thoughtworks/xstream/XStream;\lALOAD 2\lALOAD 3\lINVOKEVIRTUAL com/thoughtworks/xstream/XStream.toXML (Ljava/lang/Object;Ljava/io/Writer;)V\lL4\lLINENUMBER 56 L4\lALOAD 3\lINVOKEVIRTUAL java/io/OutputStreamWriter.flush ()V\lL5\lLINENUMBER 57 L5\lLDC \"3aa36771-f900-4b65-979f-92f16d94d423\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1047280382 [label="L2\lFRAME SAME1 java/io/OutputStreamWriter\lASTORE 3\lL3\lLINENUMBER 55 L3\lALOAD 0\lINVOKESPECIAL org/prevayler/foundation/serialization/XStreamSerializer.getXStream ()Lcom/thoughtworks/xstream/XStream;\lALOAD 2\lALOAD 3\lINVOKEVIRTUAL com/thoughtworks/xstream/XStream.toXML (Ljava/lang/Object;Ljava/io/Writer;)V\lL4\lLINENUMBER 56 L4\lALOAD 3\lINVOKEVIRTUAL java/io/OutputStreamWriter.flush ()V\lL5\lLINENUMBER 57 L5\lLDC \"3aa36771-f900-4b65-979f-92f16d94d423\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1197227214 [label="L0\lLINENUMBER 54 L0\lLDC \"3aa36771-f900-4b65-979f-92f16d94d423\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/serialization/XStreamSerializer._encoding : Ljava/lang/String;\lIFNONNULL L1\l"];
+581114136 [label="L1\lFRAME SAME\lNEW java/io/OutputStreamWriter\lDUP\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/foundation/serialization/XStreamSerializer._encoding : Ljava/lang/String;\lINVOKESPECIAL java/io/OutputStreamWriter.\<init\> (Ljava/io/OutputStream;Ljava/lang/String;)V\l"];
+557898524 [label="NEW java/io/OutputStreamWriter\lDUP\lALOAD 1\lINVOKESPECIAL java/io/OutputStreamWriter.\<init\> (Ljava/io/OutputStream;)V\lGOTO L2\l"];
 entry;
 exit;
-entry -> 858585274;
-981765041 -> 352372455;
-858585274 -> 981765041;
-858585274 -> 313338379;
-313338379 -> 352372455;
-352372455 -> exit;
-858585274[fontcolor="purple", penwidth=3, color="purple"];
-352372455[fontcolor="purple", penwidth=3, color="purple"];
+1047280382 -> exit;
+entry -> 1197227214;
+1197227214 -> 581114136;
+1197227214 -> 557898524;
+581114136 -> 1047280382;
+557898524 -> 1047280382;
+1047280382[fontcolor="purple", penwidth=3, color="purple"];
+1197227214[fontcolor="purple", penwidth=3, color="purple"];
 }

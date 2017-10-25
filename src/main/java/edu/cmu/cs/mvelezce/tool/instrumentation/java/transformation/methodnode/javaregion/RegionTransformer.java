@@ -123,12 +123,20 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         int initialRegionCount = this.regionsToOptionSet.size();
         this.preProcessMethodsInClasses(classNodes);
 
+
+
+//        for(ClassNode classNode : classNodes) {
+//            for(MethodNode methodNode : classNode.methods) {
+//                up1(methodNode);
+//            }
+//        }
+
         boolean updatedRegions = true;
 //
         while(updatedRegions) {
-            updatedRegions = this.processGraph();
+            updatedRegions = this.processMethodsInClasses(classNodes);
+            updatedRegions = updatedRegions | this.processGraph();
 //            updatedRegions = this.processMethodsInClasses(classNodes);
-            updatedRegions = updatedRegions | this.processMethodsInClasses(classNodes);
         }
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
@@ -458,8 +466,77 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return true;
     }
 
+//    public boolean up1(MethodNode methodNode) {
+//        boolean updated = false;
+//        MethodGraph graph = this.methodsToGraphs.get(methodNode);
+//
+//        if(graph == null) {
+//            graph = this.buildMethodGraph(methodNode);
+//        }
+//
+//        MethodBlock entry = graph.getEntryBlock();
+//        MethodBlock exit = graph.getExitBlock();
+//
+//        for(MethodBlock block : graph.getBlocks()) {
+//            if(block == entry || block == exit) {
+//                continue;
+//            }
+//
+//            if(block.getSuccessors().size() == 1) {
+//                MethodBlock succ = block.getSuccessors().iterator().next();
+//                String packageName = this.methodNodeToClassNode.get(methodNode).name;
+//                String className = packageName;
+//                String methodName = methodNode.name;
+//                Set<String> blockDec = getDecision(this.methodNodeToClassNode.get(methodNode), block);
+//                Set<String> succDec = getDecision(succ);
+//
+//                if(!blockDec.equals(succDec) && succDec.containsAll(blockDec)) {
+//                    setDecision(block, succDec);
+//                    updated = true;
+//                }
+//            }
+//            else {
+//                for(MethodBlock succ : block.getSuccessors()) {
+//                    Set<String> blockDec = getDecision(block);
+//                    Set<String> succDec = getDecision(succ);
+//
+//                    if(!blockDec.equals(succDec) && succDec.containsAll(blockDec)) {
+//                        setDecision(block, succDec);
+//                        updated = true;
+//                    }
+//                }
+//
+//            }
+//        }
+//
+//        return updated;
+//    }
+//
+//    public Set<String> getDecision(String packageName, String className, String methodName) {
+//        Set<String> decision = new HashSet<>();
+//
+//        for(Map.Entry<JavaRegion, Set<Set<String>>> entry : this.regionsToOptionSet.entrySet()) {
+//            JavaRegion region = entry.getKey();
+//
+//            if(region.getRegionPackage().equals(packageName) && region.getRegionClass().equals(className)
+//                    && region.getRegionMethod().equals(methodName)) {
+//                for(Set<String> options : entry.getValue()) {
+//                    decision.addAll(options);
+//                }
+//            }
+//
+//        }
+//
+//        return decision;
+//    }
+//
+//    public void setDecision(MethodBlock block, Set<String> descision) {
+//
+//    }
+
     /**
-     * Remove inner regions in a method
+     * Remove inner regions in a method  TODO there might be the case where a region has multiple inner regions and
+     * some of those inner regions can be removed
      *
      * @param regionsInMethod
      */
@@ -530,12 +607,34 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     innerRegionOptions.addAll(options);
                 }
 
-                if(!regionOptions.equals(innerRegionOptions) && !innerRegionOptions.containsAll(regionOptions)) {
+                if(!regionOptions.equals(innerRegionOptions)) {
+                    System.out.println("check");
+                }
+
+                if(!regionOptions.containsAll(innerRegionOptions)) {
+                    System.out.println("check");
+                }
+
+                if(!innerRegionOptions.containsAll(regionOptions)) {
+                    System.out.println("check");
+                }
+
+                // TODO check if the interaction does occur in the global set of interactions
+                if(!regionOptions.equals(innerRegionOptions) && !innerRegionOptions.containsAll(regionOptions)
+                        && !regionOptions.containsAll(innerRegionOptions)) {
                     regionsWithInnerRegionsWithDifferentOptionSet.add(region);
 //                    throw new RuntimeException("The region " + region.getStartMethodBlock().getID() + " has 1" +
 //                            " inner region " + innerRegion.getStartMethodBlock().getID() + ", but the outer options are not a set or" +
 //                            " a subset of the inner options");
                 }
+
+//                if(!regionOptions.equals(innerRegionOptions) && !innerRegionOptions.containsAll(regionOptions)
+//                        ) {
+//                    regionsWithInnerRegionsWithDifferentOptionSet.add(region);
+////                    throw new RuntimeException("The region " + region.getStartMethodBlock().getID() + " has 1" +
+////                            " inner region " + innerRegion.getStartMethodBlock().getID() + ", but the outer options are not a set or" +
+////                            " a subset of the inner options");
+//                }
             }
             else {
                 Set<String> currentOptions = new HashSet<>();
@@ -625,7 +724,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
 
             if(!this.regionsToOptionSet.containsKey(entry.getKey())) {
-               throw new RuntimeException("There is no region that will have its option set modified");
+                throw new RuntimeException("There is no region that will have its option set modified");
             }
 
             Set<Set<String>> regionOptionSet = this.regionsToOptionSet.get(entry.getKey());
@@ -663,8 +762,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     continue;
                 }
 
-                MethodBlock start = this.getBlockToStartInstrumentingBeforeIt(graph, block);
+                if(!graph.getReachableBlocks(block, graph.getExitBlock()).contains(graph.getExitBlock())) {
+                    continue;
+                }
 
+                MethodBlock start = this.getBlockToStartInstrumentingBeforeIt(graph, block);
 
                 if(start == null) {
                     throw new RuntimeException();
@@ -1061,6 +1163,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 regionsWithCallToMethods = new HashMap<>();
                 Edge outEdge = callerEdges.remove(0);
                 SootMethod callerMethod = outEdge.src();
+
+                if(method == callerMethod) {
+                    throw new RuntimeException(method.getName() + " " + method.getDeclaringClass().getName() + " " + "same method and caller method");
+                }
+
                 List<JavaRegion> regionsInCaller = this.getRegionsInMethod(callerMethod);
 
                 if(regionsInCaller.isEmpty()) {
@@ -1076,8 +1183,19 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                         break;
                     }
 
-                    int indexToInsert = Math.max(0, callerEdges.size() - 1);
-                    callerEdges.addAll(indexToInsert, edges);
+                    for(Edge callerEdge : edges) {
+                        SootMethod callerOfCallerMethod = callerEdge.src();
+
+                        if(callerMethod == callerOfCallerMethod) {
+                            continue;
+                        }
+
+                        int insertIndex = Math.max(0, callerEdges.size() - 1);
+                        callerEdges.add(insertIndex, callerEdge);
+                    }
+
+//                    int indexToInsert = Math.max(0, callerEdges.size() - 1);
+//                    callerEdges.addAll(indexToInsert, edges);
                 }
                 else if(regionsInCaller.size() == 1) {
                     regionsWithCallToMethods.put(regionsInCaller.get(0), callerMethod);
@@ -1148,10 +1266,20 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                         break;
                     }
 
-                    int indexToInsert = Math.max(0, callerEdges.size() - 1);
-                    callerEdges.addAll(indexToInsert, edges);
-                }
+                    for(Edge callerEdge : edges) {
+                        SootMethod callerOfCallerMethod = callerEdge.src();
 
+                        if(callerMethod == callerOfCallerMethod) {
+                            continue;
+                        }
+
+                        int insertIndex = Math.max(0, callerEdges.size() - 1);
+                        callerEdges.add(insertIndex, callerEdge);
+                    }
+
+//                    int indexToInsert = Math.max(0, callerEdges.size() - 1);
+//                    callerEdges.addAll(indexToInsert, edges);
+                }
             }
 
             if(reachedMainWithoutRegion || regionsWithCallToMethods.isEmpty()) {
@@ -1232,6 +1360,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             boolean allMethodWithOneRegionMax = true;
             List<Edge> callerEdges = this.getCallerEdges(method);
 
+            // TODO test this logic since we want to continue searching up the call graph
             if(callerEdges.isEmpty()) {
                 continue;
             }
@@ -1290,7 +1419,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            // Check if the region can be pushed if no interactions are created
+            // Check if the region can be pushed if no interactions are created. Interactions can occur with the
+            // current options in a method or the options that a method might have had
             Set<Set<String>> optionSet = this.regionsToOptionSet.get(region);
             boolean canPush = true;
             callerEdges = this.getCallerEdges(method);
@@ -1398,6 +1528,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             boolean allEmpty = true;
             List<Edge> callerEdges = this.getCallerEdges(method);
 
+            // TODO test this logic since we do want to continue looking up the call hirarchy
             // If the method does not have callers, it might be part of a java interface (e.g., Runnable's run method)
             if(callerEdges.isEmpty()) {
                 continue;
@@ -1418,7 +1549,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            // Check if the region can be pushed if no interactions are created
+            // Check if the region can be pushed if no interactions are created with the set of options that the caller
+            // methods might have had
             Set<Set<String>> optionSet = this.regionsToOptionSet.get(region);
             boolean canPush = true;
             callerEdges = this.getCallerEdges(method);
@@ -1676,17 +1808,32 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     private List<Edge> getCallerEdges(SootMethod method) {
         Iterator<Edge> outEdges = this.callGraph.edgesInto(method);
-        List<Edge> callerEdges = new LinkedList<>();
+        List<Edge> worklist = new ArrayList<>();
 
         while(outEdges.hasNext()) {
-            Edge edge = outEdges.next();
+            worklist.add(outEdges.next());
+        }
+
+        List<Edge> callerEdges = new ArrayList<>();
+
+        while(!worklist.isEmpty()) {
+            Edge edge = worklist.remove(0);
             MethodOrMethodContext src = edge.getSrc();
 
             if(!src.method().getDeclaringClass().getPackageName().contains(this.rootPackage)) {
-                continue;
-            }
+                Iterator<Edge> edges = this.callGraph.edgesInto(src);
+                List<Edge> moreEdges = new ArrayList<>();
 
-            callerEdges.add(edge);
+                while(edges.hasNext()) {
+                    moreEdges.add(edges.next());
+                }
+
+                int index = Math.max(0, worklist.size() - 1);
+                worklist.addAll(index, moreEdges);
+            }
+            else {
+                callerEdges.add(edge);
+            }
         }
 
         return callerEdges;

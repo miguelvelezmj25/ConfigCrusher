@@ -1,9 +1,0 @@
-digraph <init> {
-node [shape=record];
-1967522621 [label="L0\lLINENUMBER 24 L0\lLDC \"68da8f50-5d07-4c18-b7cc-3c5ab55e3497\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Thread.\<init\> ()V\lL1\lLINENUMBER 25 L1\lALOAD 0\lALOAD 2\lILOAD 3\lINVOKEVIRTUAL org/prevayler/foundation/network/OldNetworkImpl.openObjectServerSocket (I)Lorg/prevayler/foundation/network/ObjectServerSocket;\lPUTFIELD org/prevayler/implementation/replication/ServerListener._serverSocket : Lorg/prevayler/foundation/network/ObjectServerSocket;\lL2\lLINENUMBER 26 L2\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/implementation/replication/ServerListener._publisher : Lorg/prevayler/implementation/publishing/TransactionPublisher;\lL3\lLINENUMBER 27 L3\lALOAD 0\lICONST_1\lINVOKEVIRTUAL org/prevayler/implementation/replication/ServerListener.setDaemon (Z)V\lL4\lLINENUMBER 28 L4\lALOAD 0\lINVOKEVIRTUAL org/prevayler/implementation/replication/ServerListener.start ()V\lL5\lLINENUMBER 29 L5\lLDC \"68da8f50-5d07-4c18-b7cc-3c5ab55e3497\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-entry;
-exit;
-entry -> 1967522621;
-1967522621 -> exit;
-1967522621[fontcolor="purple", penwidth=3, color="purple"];
-}

@@ -151,6 +151,7 @@ public class MethodGraph {
      */
     public Set<MethodBlock> getReachableBlocks(MethodBlock start, MethodBlock end) {
         Set<MethodBlock> reachable = new HashSet<>();
+        reachable.add(start);
         Queue<MethodBlock> queue = new ArrayDeque<>();
         queue.offer(start);
 

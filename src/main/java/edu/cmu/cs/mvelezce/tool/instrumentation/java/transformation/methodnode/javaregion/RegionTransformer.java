@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.BytecodeUtils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.*;
@@ -122,7 +121,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         int initialRegionCount = this.regionsToOptionSet.size();
         this.preProcessMethodsInClasses(classNodes);
-
 
 
 //        for(ClassNode classNode : classNodes) {
@@ -827,7 +825,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         javapResult = new ArrayList<>();
 
         try {
-            String[] command = new String[]{"javap", "-classpath", this.getClassTransformer().getPath(), "-p", "-c",
+            String[] command = new String[]{"javap", "-classpath", this.getClassTransformer().getPath(), "-p", "-c", "-s",
                     classPackage + "." + className};
             System.out.println(Arrays.toString(command));
             Process process = Runtime.getRuntime().exec(command);
@@ -870,10 +868,18 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         int instructionNumber = 0;
         int currentBytecodeIndex = -1;
         // 2 are the lines before the actual code in a method
-        int javapOffset = 2;
         Set<JavaRegion> updatedRegions = new HashSet<>();
 
-        for(int i = (methodStartIndex + javapOffset); i < javapResult.size(); i++) {
+        for(int i = methodStartIndex; i < javapResult.size(); i++) {
+            methodStartIndex++;
+            String outputLine = javapResult.get(i);
+
+            if(outputLine.contains(" Code:")) {
+                break;
+            }
+        }
+
+        for(int i = methodStartIndex; i < javapResult.size(); i++) {
             String outputLine = javapResult.get(i);
 
             if(outputLine.contains(" Code:")) {
@@ -1641,7 +1647,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         if(methodNameInJavap.startsWith("<clinit>")) {
-            methodNameInJavap = "  static {};";
+            throw new RuntimeException("Check this case");
+//            methodNameInJavap = "  static {};";
         }
         else {
             methodNameInJavap += "(";
@@ -1652,22 +1659,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         // Check if signature matches
         for(String outputLine : javapResult) {
             if(outputLine.equals(methodNameInJavap)) {
-                break;
+                throw new RuntimeException("Check this case");
+//                break;
             }
             else if(outputLine.contains(" " + methodNameInJavap)) {
-                String formalParametersString = outputLine.substring(outputLine.indexOf("(") + 1, outputLine.indexOf(")"));
-                List<String> formalParameters = Arrays.asList(formalParametersString.split(","));
-                StringBuilder methodDescriptors = new StringBuilder();
+                String javapDescriptor = javapResult.get(methodStartIndex + 1).trim();
+                javapDescriptor = javapDescriptor.substring(javapDescriptor.indexOf(" ")).trim();
 
-                for(String formalParameter : formalParameters) {
-                    String methodDescriptor = BytecodeUtils.toBytecodeDescriptor(formalParameter.trim());
-                    methodDescriptors.append(methodDescriptor);
-                }
-
-                String regionDesc = methodNode.desc;
-                String regionFormalParameters = regionDesc.substring(regionDesc.indexOf("(") + 1, regionDesc.indexOf(")"));
-
-                if(methodDescriptors.toString().equals(regionFormalParameters)) {
+                if(javapDescriptor.equals(methodNode.desc)) {
                     break;
                 }
             }
@@ -1689,10 +1688,17 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         int instructionNumber = 0;
         int currentBytecodeIndex = -1;
-        // 2 are the lines before the actual code in a method
-        int javapOffset = 2;
 
-        for(int i = (methodStartIndex + javapOffset); i < javapResult.size(); i++) {
+        for(int i = methodStartIndex; i < javapResult.size(); i++) {
+            methodStartIndex++;
+            String outputLine = javapResult.get(i);
+
+            if(outputLine.contains(" Code:")) {
+                break;
+            }
+        }
+
+        for(int i = methodStartIndex; i < javapResult.size(); i++) {
             String outputLine = javapResult.get(i);
 
             if(outputLine.contains("Code:")) {

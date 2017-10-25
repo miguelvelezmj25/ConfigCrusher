@@ -1,0 +1,9 @@
+digraph realTime {
+node [shape=record];
+1506011769 [label="L0\lLINENUMBER 41 L0\lLDC \"3a5a722a-ffd8-4bb6-b6a7-9d4f2ddf2675\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/clock/PausableClock._realClock : Lorg/prevayler/Clock;\lINVOKEINTERFACE org/prevayler/Clock.time ()Ljava/util/Date;\lLDC \"3a5a722a-ffd8-4bb6-b6a7-9d4f2ddf2675\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+1506011769 -> exit;
+entry -> 1506011769;
+1506011769[fontcolor="purple", penwidth=3, color="purple"];
+}

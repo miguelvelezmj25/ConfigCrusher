@@ -347,11 +347,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
             graph = builder.build();
             this.methodsToGraphs.put(methodNode, graph);
-
-//            if(graph.getBlocks().size() <= 3) {
-//                // TODO this happened in an enum method in which there were two labels in the graph and the first one had the return statement
-//                throw new RuntimeException("Check this case");
-//            }
         }
 
         return graph;
@@ -421,16 +416,13 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             if(currentOptions.equals(nextOptions) || currentOptions.containsAll(nextOptions)
                     || nextOptions.containsAll(currentOptions)) {
-                if(region.getEndMethodBlocks().size() != 1) {
-                    throw new RuntimeException("How to handle multiple returns");
-                }
-
-                if(nextRegion.getEndMethodBlocks().size() != 1) {
-                    throw new RuntimeException("How to handle multiple returns");
-                }
-
                 MethodGraph graph = this.methodsToGraphs.get(methodNode);
-                Set<MethodBlock> reachableBlocks = graph.getReachableBlocks(region.getStartMethodBlock(), region.getEndMethodBlocks().iterator().next());
+                MethodBlock start = region.getStartMethodBlock();
+                Set<MethodBlock> reachableBlocks = new HashSet<>();
+
+                for(MethodBlock exit : region.getEndMethodBlocks()) {
+                    reachableBlocks.addAll(graph.getReachableBlocks(start, exit));
+                }
 
                 if(!reachableBlocks.contains(nextRegion.getStartMethodBlock()) || !reachableBlocks.containsAll(nextRegion.getEndMethodBlocks())) {
                     region.setEndMethodBlocks(nextRegion.getEndMethodBlocks());
@@ -557,6 +549,24 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
                 MethodBlock regionStartBlock = region.getStartMethodBlock();
                 MethodBlock possibleRegionStartBlock = possibleInnerRegion.getStartMethodBlock();
+
+                if(regionStartBlock == null) {
+                    System.out.println();
+                }
+
+                if(possibleRegionStartBlock == null) {
+                    System.out.println();
+                }
+
+                if(graph.getDominators() == null) {
+                    System.out.println();
+                }
+
+                if(graph.getDominators().get(regionStartBlock) == null) {
+                    System.out.println();
+                }
+
+
 
                 // Continue if the possible inner region is an outer region of the current region
                 if(graph.getDominators().get(regionStartBlock).contains(possibleRegionStartBlock)) {
@@ -690,9 +700,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     private void removeRegionsInRegionsToOptions(Set<JavaRegion> regionsToRemove) {
         for(JavaRegion region : regionsToRemove) {
-            if(region.getRegionClass().contains("POBox")) {
-                System.out.println();
-            }
             this.regionsToOptionSet.remove(region);
         }
 
@@ -750,17 +757,21 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         for(MethodBlock block : graph.getBlocks()) {
             List<AbstractInsnNode> blockInstructions = block.getInstructions();
 
-            for(AbstractInsnNode instructionToStartInstrumenting : instructionsToRegion.keySet()) {
-                if(!blockInstructions.contains(instructionToStartInstrumenting)) {
+            for(Map.Entry<AbstractInsnNode, JavaRegion> instructionToRegion : instructionsToRegion.entrySet()) {
+                AbstractInsnNode instruction = instructionToRegion.getKey();
+                JavaRegion region = instructionToRegion.getValue();
+
+                if(!blockInstructions.contains(instruction)) {
                     continue;
                 }
 
                 if(block.isCatchWithoutExplicitThrow()) {
-                    regionsInCatchWithoutExplicitThrow.add(instructionsToRegion.get(instructionToStartInstrumenting));
+                    regionsInCatchWithoutExplicitThrow.add(region);
                     continue;
                 }
 
                 if(!graph.getReachableBlocks(block, graph.getExitBlock()).contains(graph.getExitBlock())) {
+                    this.regionsToOptionSet.remove(region);
                     continue;
                 }
 
@@ -792,7 +803,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     endMethodBlocks.add(end);
                 }
 
-                JavaRegion region = instructionsToRegion.get(instructionToStartInstrumenting);
                 region.setStartMethodBlock(start);
                 region.setEndMethodBlocks(endMethodBlocks);
             }

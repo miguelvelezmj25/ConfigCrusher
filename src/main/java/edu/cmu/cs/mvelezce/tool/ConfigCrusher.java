@@ -48,6 +48,7 @@ public class ConfigCrusher {
         Set<Set<String>> options = BaseCompression.expandOptions(javaRegionsToOptionSet.values());
         Compression compressor = new SimpleCompression(this.programName, options);
         Set<Set<String>> configurations = compressor.compressConfigurations(args);
+        System.out.println("Configurations to sample: " + configurations.size());
 
         Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(this.programName, this.entry, this.classDir, javaRegionsToOptionSet);
         instrumenter.instrument(args);

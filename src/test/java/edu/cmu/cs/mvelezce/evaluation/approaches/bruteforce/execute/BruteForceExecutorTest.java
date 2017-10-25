@@ -88,6 +88,7 @@ public class BruteForceExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
         configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+        System.out.println("Configurations to sample: " + configurations.size());
 
         args = new String[3];
         args[0] = "-delres";
@@ -122,6 +123,7 @@ public class BruteForceExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
         configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+        System.out.println("Configurations to sample: " + configurations.size());
 
         args = new String[3];
         args[0] = "-delres";
@@ -144,6 +146,7 @@ public class BruteForceExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
         configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+        System.out.println("Configurations to sample: " + configurations.size());
 
         args = new String[3];
         args[0] = "-delres";
@@ -167,6 +170,7 @@ public class BruteForceExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
         configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+        System.out.println("Configurations to sample: " + configurations.size());
 
         args = new String[3];
         args[0] = "-delres";
@@ -190,6 +194,7 @@ public class BruteForceExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
         configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+        System.out.println("Configurations to sample: " + configurations.size());
 
         args = new String[3];
         args[0] = "-delres";

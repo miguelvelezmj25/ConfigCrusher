@@ -1,0 +1,19 @@
+digraph next {
+node [shape=record];
+1290977062 [label="L4\lLINENUMBER 36 L4\lALOAD 0\lNEW org/prevayler/foundation/Turn\lDUP\lICONST_0\lINVOKESPECIAL org/prevayler/foundation/Turn.\<init\> (Z)V\lPUTFIELD org/prevayler/foundation/Turn._next : Lorg/prevayler/foundation/Turn;\l"];
+104536191 [label="L2\lLINENUMBER 33 L2\lNEW java/lang/IllegalStateException\lDUP\lLDC \"All transaction processing is now aborted, probably due to an earlier IOException.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+2100922278 [label="L3\lLINENUMBER 38 L3\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._next : Lorg/prevayler/foundation/Turn;\lLDC \"6c3a8c38-1365-4d45-a007-0686bed64859\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+965811562 [label="L0\lLINENUMBER 32 L0\lLDC \"6c3a8c38-1365-4d45-a007-0686bed64859\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lIFGE L1\l"];
+1420648398 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._next : Lorg/prevayler/foundation/Turn;\lIFNONNULL L3\l"];
+entry;
+exit;
+entry -> 965811562;
+1290977062 -> 2100922278;
+2100922278 -> exit;
+965811562 -> 104536191;
+965811562 -> 1420648398;
+1420648398 -> 1290977062;
+1420648398 -> 2100922278;
+2100922278[fontcolor="purple", penwidth=3, color="purple"];
+965811562[fontcolor="purple", penwidth=3, color="purple"];
+}

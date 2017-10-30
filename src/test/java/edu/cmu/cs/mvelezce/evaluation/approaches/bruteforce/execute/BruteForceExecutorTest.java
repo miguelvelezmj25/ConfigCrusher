@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class BruteForceExecutorTest {
@@ -158,6 +159,36 @@ public class BruteForceExecutorTest {
     }
 
     @Test
+    public void prevayler1() throws IOException, InterruptedException {
+        String programName = "prevayler";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/target/classes";
+        String entryPoint = "org.prevayler.demos.demo1.PrimeNumbers";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+        System.out.println("Configurations to sample: " + configurations.size());
+
+        configurations.clear();
+        Set<String> n = new HashSet<>();
+        n.add("FILEAGETHRESHOLD");
+        n.add("MONITOR");
+        n.add("JOURNALSERIALIZER");
+        configurations.add(n);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
+    @Test
     public void prevayler() throws IOException, InterruptedException {
         String programName = "prevayler";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/target/classes";
@@ -174,7 +205,7 @@ public class BruteForceExecutorTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i1";
+        args[2] = "-i3";
 
         Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);

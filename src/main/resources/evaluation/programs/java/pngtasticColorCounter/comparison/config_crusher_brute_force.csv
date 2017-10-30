@@ -32,5 +32,5 @@ measured,configuration,config_crusher,config_crusher_std,brute_force,brute_force
 "false","[FREQTHRESHOLD, DISTTHRESHOLD]",5.794,0.0,5.721,0.059,0.073,1.276,0.005
 "false","[MINALPHA]",5.807,0.0,5.795,0.087,0.012,0.207,0
 
-MSE: 0
-RMSE: 0.002
+MSE: 0.006
+RMSE: 0.078

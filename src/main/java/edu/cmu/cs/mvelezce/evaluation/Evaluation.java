@@ -309,7 +309,7 @@ public class Evaluation {
             result.append(decimalFormat.format(squaredError));
             result.append("\n");
 
-            se = squaredError;
+            se += squaredError;
         }
 
         result.append("\n");

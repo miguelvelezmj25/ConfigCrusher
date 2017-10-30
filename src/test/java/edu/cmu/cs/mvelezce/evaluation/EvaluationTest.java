@@ -44,6 +44,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void comparePrevayler1() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareRegions121() throws Exception {
         String programName = "regions12";
 
@@ -148,6 +156,20 @@ public class EvaluationTest {
     @Test
     public void optimizerBruteForce() throws Exception {
         String programName = "pngtasticOptimizer";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void prevaylerBruteForce() throws Exception {
+        String programName = "prevayler";
 
         // arguments
         String[] args = new String[0];

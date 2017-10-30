@@ -4,5 +4,5 @@ measured,configuration,config_crusher,config_crusher_std,brute_force,brute_force
 "false","[B]",6.013,0.0,5.008,0.0,1.005,20.068,1.01
 "true","[A, B]",6.013,0.0,6.013,0.0,0,0,0
 
-MSE: 0
-RMSE: 0
+MSE: 0.503
+RMSE: 0.709

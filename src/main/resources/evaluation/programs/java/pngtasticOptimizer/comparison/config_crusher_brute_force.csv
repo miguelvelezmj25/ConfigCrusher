@@ -32,5 +32,5 @@ measured,configuration,config_crusher,config_crusher_std,brute_force,brute_force
 "false","[COMPRESSOR, ITERATIONS, LOGLEVEL]",214.254,0.0,211.86,2.106,2.394,1.13,5.731
 "false","[COMPRESSOR, ITERATIONS, LOGLEVEL, REMOVEGAMMA]",214.252,0.0,208.447,1.482,5.805,2.785,33.698
 
-MSE: 1.053
-RMSE: 1.026
+MSE: 6.243
+RMSE: 2.499

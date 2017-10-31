@@ -34,6 +34,7 @@ public class Regions {
 //    }
 
     public static void enter(String id) {
+//        System.out.println("Enter " + id);
         long start = System.nanoTime();
         Regions.executingRegions.push(id);
         Regions.executingRegionsStart.push(start);
@@ -41,6 +42,13 @@ public class Regions {
     }
 
     public static void exit(String id) {
+        if(!Regions.executingRegions.peek().equals(id)) {
+//            System.out.println("Could not exit " + id);
+            return;
+        }
+
+//        System.out.println("Exit " + id);
+
         long end = System.nanoTime();
         long start = Regions.executingRegionsStart.pop();
         long innerTime = Regions.innerRegionsExecutionTime.pop();

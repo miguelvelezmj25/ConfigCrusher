@@ -175,8 +175,11 @@ public class BruteForceExecutorTest {
         configurations.clear();
         Set<String> n = new HashSet<>();
         n.add("FILEAGETHRESHOLD");
+        n.add("DEEPCOPY");
         n.add("MONITOR");
+        n.add("DISKSYNC");
         n.add("JOURNALSERIALIZER");
+        n.add("CLOCK");
         configurations.add(n);
 
         args = new String[3];
@@ -206,6 +209,57 @@ public class BruteForceExecutorTest {
         args[0] = "-delres";
         args[1] = "-saveres";
         args[2] = "-i3";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
+    @Test
+    public void kanzi() throws IOException, InterruptedException {
+        String programName = "kanzi";
+        String entryPoint = "kanzi.Run";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/kanzi/target/classes";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+        System.out.println("Configurations to sample: " + configurations.size());
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i3";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
+    @Test
+    public void kanzi1() throws IOException, InterruptedException {
+        String programName = "kanzi";
+        String entryPoint = "kanzi.Run";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/kanzi/target/classes";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+        System.out.println("Configurations to sample: " + configurations.size());
+
+        configurations.clear();
+        Set<String> n = new HashSet<>();
+//        n.add("FILEAGETHRESHOLD");
+        configurations.add(n);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
 
         Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);

@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.colorcounter.BFColorCounterAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.kanzi.BFKanziAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.optimizer.BFOptimizerAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.prevayler.BFPrevaylerAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regions12.BFRegions12Adapter;
@@ -22,9 +23,9 @@ import java.util.Set;
 public class BruteForceExecutor extends BaseExecutor {
 
     // TODO this is weird and creating a lot of bugs
-    static {
-        DIRECTORY = BaseExecutor.DIRECTORY + "/bruteforce/programs";
-    }
+//    static {
+//        DIRECTORY = BaseExecutor.DIRECTORY + "/bruteforce/programs";
+//    }
 
     public BruteForceExecutor(String programName) {
         this(programName, null, null, null);
@@ -159,6 +160,9 @@ public class BruteForceExecutor extends BaseExecutor {
         }
         else if(this.getProgramName().contains("prevayler")) {
             adapter = new BFPrevaylerAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("kanzi")) {
+            adapter = new BFKanziAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

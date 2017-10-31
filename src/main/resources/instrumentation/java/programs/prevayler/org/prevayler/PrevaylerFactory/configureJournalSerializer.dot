@@ -1,0 +1,14 @@
+digraph configureJournalSerializer {
+node [shape=record];
+297828199 [label="L2\lLINENUMBER 293 L2\lFRAME SAME\lALOAD 0\lALOAD 2\lPUTFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lL4\lLINENUMBER 294 L4\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/PrevaylerFactory._journalSuffix : Ljava/lang/String;\lL5\lLINENUMBER 295 L5\lLDC \"22adff44-1155-4f18-8bba-1c2e8c1112a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1308103350 [label="L0\lLINENUMBER 287 L0\lLDC \"22adff44-1155-4f18-8bba-1c2e8c1112a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKESTATIC org/prevayler/implementation/PrevaylerDirectory.checkValidJournalSuffix (Ljava/lang/String;)V\lL1\lLINENUMBER 289 L1\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lIFNULL L2\l"];
+1588829190 [label="L3\lLINENUMBER 290 L3\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Read the javadoc to this method.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+entry -> 1308103350;
+297828199 -> exit;
+1308103350 -> 297828199;
+1308103350 -> 1588829190;
+297828199[fontcolor="purple", penwidth=3, color="purple"];
+1308103350[fontcolor="purple", penwidth=3, color="purple"];
+}

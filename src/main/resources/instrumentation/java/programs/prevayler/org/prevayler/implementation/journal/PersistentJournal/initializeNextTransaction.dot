@@ -1,0 +1,35 @@
+digraph initializeNextTransaction {
+node [shape=record];
+1675181713 [label="L6\lLINENUMBER 155 L6\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Unable to find journal file containing transaction \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \". Might have been manually deleted.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+252005929 [label="L1\lLINENUMBER 162 L1\lFRAME SAME\lALOAD 0\lICONST_1\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lL9\lLINENUMBER 163 L9\lALOAD 0\lLLOAD 1\lLLOAD 3\lLCMP\lIFLE L10\l"];
+1504217374 [label="L0\lLINENUMBER 150 L0\lLDC \"8ce9daab-83bd-4ee4-8795-5be215ceb190\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lIFEQ L1\l"];
+1899835368 [label="L4\lLINENUMBER 152 L4\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"The transaction log has not yet reached transaction \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \". The last logged transaction was \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCONST_1\lLSUB\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \".\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+170404206 [label="L7\lLINENUMBER 160 L7\lFRAME SAME\lLDC \"8ce9daab-83bd-4ee4-8795-5be215ceb190\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+238074096 [label="LLOAD 1\lGOTO L11\l"];
+1416381408 [label="L5\lLINENUMBER 157 L5\lFRAME SAME\lLLOAD 3\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCMP\lIFLE L7\l"];
+309462444 [label="L8\lLINENUMBER 158 L8\lNEW java/lang/IllegalStateException\lDUP\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> ()V\lATHROW\l"];
+1159234305 [label="L11\lFRAME FULL [org/prevayler/implementation/journal/PersistentJournal J J] [org/prevayler/implementation/journal/PersistentJournal J]\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lL12\lLINENUMBER 166 L12\lLDC \"8ce9daab-83bd-4ee4-8795-5be215ceb190\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1114549657 [label="L2\lLINENUMBER 151 L2\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLLOAD 1\lLCMP\lIFGE L3\l"];
+1816181511 [label="L3\lLINENUMBER 154 L3\lFRAME SAME\lLLOAD 3\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCMP\lIFGE L5\l"];
+615987009 [label="L10\lFRAME SAME1 org/prevayler/implementation/journal/PersistentJournal\lLLOAD 3\l"];
+entry;
+exit;
+252005929 -> 238074096;
+252005929 -> 615987009;
+238074096 -> 1159234305;
+1416381408 -> 170404206;
+1416381408 -> 309462444;
+1159234305 -> exit;
+1114549657 -> 1899835368;
+1114549657 -> 1816181511;
+1816181511 -> 1675181713;
+1816181511 -> 1416381408;
+entry -> 1504217374;
+1504217374 -> 252005929;
+1504217374 -> 1114549657;
+170404206 -> exit;
+615987009 -> 1159234305;
+1504217374[fontcolor="purple", penwidth=3, color="purple"];
+170404206[fontcolor="purple", penwidth=3, color="purple"];
+1159234305[fontcolor="purple", penwidth=3, color="purple"];
+}

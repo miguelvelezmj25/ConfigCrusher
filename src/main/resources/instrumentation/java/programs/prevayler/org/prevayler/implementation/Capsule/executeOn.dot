@@ -1,0 +1,20 @@
+digraph executeOn {
+node [shape=record];
+22786455 [label="L7\lLINENUMBER 75 L7\lFRAME APPEND [java/lang/Object]\lALOAD 1\lDUP\lASTORE 5\lMONITORENTER\lL0\lLINENUMBER 76 L0\lALOAD 0\lALOAD 4\lALOAD 1\lALOAD 2\lINVOKEVIRTUAL org/prevayler/implementation/Capsule.justExecute (Ljava/lang/Object;Ljava/lang/Object;Ljava/util/Date;)V\lL8\lLINENUMBER 77 L8\lALOAD 5\lMONITOREXIT\lL1\lGOTO L9\l"];
+899072157 [label="L5\lLINENUMBER 72 L5\lFRAME SAME\lALOAD 0\lALOAD 3\lINVOKEVIRTUAL org/prevayler/implementation/Capsule.deserialize (Lorg/prevayler/foundation/serialization/Serializer;)Ljava/lang/Object;\lASTORE 4\l"];
+805481721 [label="L2\lFRAME FULL [org/prevayler/implementation/Capsule java/lang/Object java/util/Date org/prevayler/foundation/serialization/Serializer java/lang/Object java/lang/Object] [java/lang/Throwable]\lASTORE 6\lALOAD 5\lMONITOREXIT\lL3\lALOAD 6\lATHROW\l"];
+856883246 [label="L9\lLINENUMBER 78 L9\lFRAME SAME\lLDC \"92f98914-a860-426c-ace5-3fef65f5c1d0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+384074713 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lL4\lLINENUMBER 68 L4\lLDC \"92f98914-a860-426c-ace5-3fef65f5c1d0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/Capsule._directTransaction : Ljava/lang/Object;\lIFNULL L5\l"];
+228669487 [label="L6\lLINENUMBER 69 L6\lALOAD 0\lGETFIELD org/prevayler/implementation/Capsule._directTransaction : Ljava/lang/Object;\lASTORE 4\lGOTO L7\l"];
+entry;
+exit;
+entry -> 384074713;
+22786455 -> 856883246;
+899072157 -> 22786455;
+856883246 -> exit;
+384074713 -> 899072157;
+384074713 -> 228669487;
+228669487 -> 22786455;
+856883246[fontcolor="purple", penwidth=3, color="purple"];
+384074713[fontcolor="purple", penwidth=3, color="purple"];
+}

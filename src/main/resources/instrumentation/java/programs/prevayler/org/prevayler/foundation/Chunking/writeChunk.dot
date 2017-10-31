@@ -1,0 +1,25 @@
+digraph writeChunk {
+node [shape=record];
+438379413 [label="L9\lLINENUMBER 32 L9\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Invalid parameter name '\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 4\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"'\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1877423664 [label="L4\lLINENUMBER 28 L4\lALOAD 2\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST java/util/Map$Entry\lASTORE 3\lL5\lLINENUMBER 29 L5\lALOAD 3\lINVOKEINTERFACE java/util/Map$Entry.getKey ()Ljava/lang/Object;\lCHECKCAST java/lang/String\lASTORE 4\lL6\lLINENUMBER 30 L6\lALOAD 3\lINVOKEINTERFACE java/util/Map$Entry.getValue ()Ljava/lang/Object;\lCHECKCAST java/lang/String\lASTORE 5\lL7\lLINENUMBER 31 L7\lALOAD 4\lINVOKESTATIC org/prevayler/foundation/Chunking.validToken (Ljava/lang/String;)Z\lIFNE L8\l"];
+174296901 [label="L3\lLINENUMBER 42 L3\lFRAME CHOP 3\lALOAD 0\lGETSTATIC org/prevayler/foundation/Chunking.CRLF : [B\lINVOKEVIRTUAL java/io/OutputStream.write ([B)V\lL16\lLINENUMBER 43 L16\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL org/prevayler/foundation/Chunk.getBytes ()[B\lINVOKEVIRTUAL java/io/OutputStream.write ([B)V\lL17\lLINENUMBER 44 L17\lALOAD 0\lGETSTATIC org/prevayler/foundation/Chunking.CRLF : [B\lINVOKEVIRTUAL java/io/OutputStream.write ([B)V\lL18\lLINENUMBER 45 L18\lLDC \"402512be-dd2e-4dcd-9235-80b9188a7d02\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1008981711 [label="L8\lLINENUMBER 34 L8\lFRAME APPEND [java/util/Map$Entry java/lang/String java/lang/String]\lALOAD 5\lINVOKESTATIC org/prevayler/foundation/Chunking.validToken (Ljava/lang/String;)Z\lIFNE L10\l"];
+204381747 [label="L10\lLINENUMBER 37 L10\lFRAME SAME\lALOAD 0\lBIPUSH 59\lINVOKEVIRTUAL java/io/OutputStream.write (I)V\lL12\lLINENUMBER 38 L12\lALOAD 0\lALOAD 4\lLDC \"US-ASCII\"\lINVOKEVIRTUAL java/lang/String.getBytes (Ljava/lang/String;)[B\lINVOKEVIRTUAL java/io/OutputStream.write ([B)V\lL13\lLINENUMBER 39 L13\lALOAD 0\lBIPUSH 61\lINVOKEVIRTUAL java/io/OutputStream.write (I)V\lL14\lLINENUMBER 40 L14\lALOAD 0\lALOAD 5\lLDC \"US-ASCII\"\lINVOKEVIRTUAL java/lang/String.getBytes (Ljava/lang/String;)[B\lINVOKEVIRTUAL java/io/OutputStream.write ([B)V\lL15\lLINENUMBER 41 L15\lGOTO L2\l"];
+1521385264 [label="L11\lLINENUMBER 35 L11\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Invalid parameter value '\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 5\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"'\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+579896984 [label="L0\lLINENUMBER 25 L0\lLDC \"402512be-dd2e-4dcd-9235-80b9188a7d02\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL org/prevayler/foundation/Chunk.getBytes ()[B\lARRAYLENGTH\lINVOKESTATIC java/lang/Integer.toHexString (I)Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\lLDC \"US-ASCII\"\lINVOKEVIRTUAL java/lang/String.getBytes (Ljava/lang/String;)[B\lINVOKEVIRTUAL java/io/OutputStream.write ([B)V\lL1\lLINENUMBER 26 L1\lALOAD 1\lINVOKEVIRTUAL org/prevayler/foundation/Chunk.getParameters ()Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.entrySet ()Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 2\l"];
+2023317252 [label="L2\lLINENUMBER 27 L2\lFRAME APPEND [java/util/Iterator]\lALOAD 2\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L3\l"];
+entry;
+exit;
+entry -> 579896984;
+1877423664 -> 438379413;
+1877423664 -> 1008981711;
+174296901 -> exit;
+1008981711 -> 204381747;
+1008981711 -> 1521385264;
+204381747 -> 2023317252;
+579896984 -> 2023317252;
+2023317252 -> 1877423664;
+2023317252 -> 174296901;
+174296901[fontcolor="purple", penwidth=3, color="purple"];
+579896984[fontcolor="purple", penwidth=3, color="purple"];
+}

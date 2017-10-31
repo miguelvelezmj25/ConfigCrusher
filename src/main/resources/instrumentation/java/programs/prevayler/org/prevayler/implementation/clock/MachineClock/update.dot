@@ -1,0 +1,15 @@
+digraph update {
+node [shape=record];
+927991816 [label="L2\lLINENUMBER 28 L2\lFRAME APPEND [J]\lLDC \"d580f25a-f103-4bad-8be5-b9ddc0bdd75a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+229271124 [label="L3\lLINENUMBER 26 L3\lALOAD 0\lNEW java/util/Date\lDUP\lLLOAD 1\lINVOKESPECIAL java/util/Date.\<init\> (J)V\lINVOKEVIRTUAL org/prevayler/implementation/clock/MachineClock.advanceTo (Ljava/util/Date;)V\l"];
+1539155938 [label="L0\lLINENUMBER 24 L0\lLDC \"d580f25a-f103-4bad-8be5-b9ddc0bdd75a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLSTORE 1\lL1\lLINENUMBER 25 L1\lLLOAD 1\lALOAD 0\lGETFIELD org/prevayler/implementation/clock/MachineClock._millis : J\lLCMP\lIFEQ L2\l"];
+entry;
+exit;
+entry -> 1539155938;
+927991816 -> exit;
+229271124 -> 927991816;
+1539155938 -> 927991816;
+1539155938 -> 229271124;
+927991816[fontcolor="purple", penwidth=3, color="purple"];
+1539155938[fontcolor="purple", penwidth=3, color="purple"];
+}

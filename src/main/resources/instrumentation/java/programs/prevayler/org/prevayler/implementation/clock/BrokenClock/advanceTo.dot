@@ -1,0 +1,16 @@
+digraph advanceTo {
+node [shape=record];
+1785619064 [label="L2\lLINENUMBER 37 L2\lFRAME APPEND [J]\lALOAD 0\lLLOAD 2\lPUTFIELD org/prevayler/implementation/clock/BrokenClock._millis : J\lL4\lLINENUMBER 38 L4\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/implementation/clock/BrokenClock._time : Ljava/util/Date;\lL5\lLINENUMBER 39 L5\lLDC \"39d89587-1a58-4a49-8b57-f7e604e345d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1450686947 [label="L0\lLINENUMBER 33 L0\lLDC \"39d89587-1a58-4a49-8b57-f7e604e345d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKEVIRTUAL java/util/Date.getTime ()J\lLSTORE 2\lL1\lLINENUMBER 34 L1\lLLOAD 2\lALOAD 0\lGETFIELD org/prevayler/implementation/clock/BrokenClock._millis : J\lLCMP\lIFNE L2\l"];
+695130732 [label="L3\lLINENUMBER 35 L3\lLDC \"39d89587-1a58-4a49-8b57-f7e604e345d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 1450686947;
+1785619064 -> exit;
+1450686947 -> 1785619064;
+1450686947 -> 695130732;
+695130732 -> exit;
+1785619064[fontcolor="purple", penwidth=3, color="purple"];
+1450686947[fontcolor="purple", penwidth=3, color="purple"];
+695130732[fontcolor="purple", penwidth=3, color="purple"];
+}

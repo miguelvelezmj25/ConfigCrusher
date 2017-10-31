@@ -1,0 +1,17 @@
+digraph abort {
+node [shape=record];
+765639817 [label="L0\lLINENUMBER 77 L0\lLDC \"a08b9f6b-9ff2-478d-adbe-63cac09793b1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lASTORE 3\l"];
+1221721299 [label="L2\lLINENUMBER 81 L2\lFRAME SAME\lNEW java/lang/IllegalStateException\lDUP\lALOAD 1\lALOAD 2\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;Ljava/lang/Throwable;)V\lLDC \"a08b9f6b-9ff2-478d-adbe-63cac09793b1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lATHROW\l"];
+1145523844 [label="L3\lLINENUMBER 79 L3\lALOAD 3\lINVOKESPECIAL org/prevayler/foundation/Turn.die ()Lorg/prevayler/foundation/Turn;\lASTORE 3\lGOTO L1\l"];
+928803736 [label="L1\lLINENUMBER 78 L1\lFRAME APPEND [org/prevayler/foundation/Turn]\lALOAD 3\lIFNULL L2\l"];
+entry;
+exit;
+entry -> 765639817;
+765639817 -> 928803736;
+1221721299 -> exit;
+1145523844 -> 928803736;
+928803736 -> 1221721299;
+928803736 -> 1145523844;
+765639817[fontcolor="purple", penwidth=3, color="purple"];
+1221721299[fontcolor="purple", penwidth=3, color="purple"];
+}

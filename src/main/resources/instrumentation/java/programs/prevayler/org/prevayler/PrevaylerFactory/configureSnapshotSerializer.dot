@@ -1,0 +1,15 @@
+digraph configureSnapshotSerializer {
+node [shape=record];
+851322446 [label="L0\lLINENUMBER 313 L0\lLDC \"0cd2762f-c438-49e6-b5bd-b18ec84c0b91\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lINVOKESTATIC org/prevayler/implementation/PrevaylerDirectory.checkValidSnapshotSuffix (Ljava/lang/String;)V\lL1\lLINENUMBER 314 L1\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._snapshotSerializers : Ljava/util/Map;\lALOAD 1\lALOAD 2\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\lL2\lLINENUMBER 315 L2\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._primarySnapshotSuffix : Ljava/lang/String;\lIFNONNULL L3\l"];
+1377448232 [label="L3\lLINENUMBER 318 L3\lFRAME SAME\lLDC \"0cd2762f-c438-49e6-b5bd-b18ec84c0b91\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1159859303 [label="L4\lLINENUMBER 316 L4\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/PrevaylerFactory._primarySnapshotSuffix : Ljava/lang/String;\l"];
+entry;
+exit;
+851322446 -> 1377448232;
+851322446 -> 1159859303;
+1377448232 -> exit;
+1159859303 -> 1377448232;
+entry -> 851322446;
+851322446[fontcolor="purple", penwidth=3, color="purple"];
+1377448232[fontcolor="purple", penwidth=3, color="purple"];
+}

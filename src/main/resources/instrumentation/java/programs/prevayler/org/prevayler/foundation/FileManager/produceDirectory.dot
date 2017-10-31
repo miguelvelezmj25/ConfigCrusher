@@ -1,0 +1,21 @@
+digraph produceDirectory {
+node [shape=record];
+718530533 [label="ALOAD 0\lINVOKEVIRTUAL java/io/File.mkdirs ()Z\lIFNE L1\l"];
+23351871 [label="L2\lLINENUMBER 16 L2\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Directory doesn't exist and could not be created: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+899066325 [label="L3\lLINENUMBER 21 L3\lFRAME SAME\lLDC \"c1f1289a-980e-4fa6-b80b-b85b322e6720\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1788050799 [label="L1\lLINENUMBER 18 L1\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL java/io/File.isDirectory ()Z\lIFNE L3\l"];
+1142936077 [label="L4\lLINENUMBER 19 L4\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Path exists but is not a directory: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+2078926331 [label="L0\lLINENUMBER 15 L0\lLDC \"c1f1289a-980e-4fa6-b80b-b85b322e6720\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL java/io/File.exists ()Z\lIFNE L1\l"];
+entry;
+exit;
+entry -> 2078926331;
+718530533 -> 23351871;
+718530533 -> 1788050799;
+899066325 -> exit;
+1788050799 -> 899066325;
+1788050799 -> 1142936077;
+2078926331 -> 718530533;
+2078926331 -> 1788050799;
+899066325[fontcolor="purple", penwidth=3, color="purple"];
+2078926331[fontcolor="purple", penwidth=3, color="purple"];
+}

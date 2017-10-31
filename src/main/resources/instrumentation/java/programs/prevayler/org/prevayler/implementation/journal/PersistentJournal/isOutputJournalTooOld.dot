@@ -1,0 +1,20 @@
+digraph isOutputJournalTooOld {
+node [shape=record];
+288008604 [label="L0\lLINENUMBER 109 L0\lLDC \"23765c39-9766-4fa6-9e38-0a0eaa4088d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeThresholdInMillis : J\lLCONST_0\lLCMP\lIFEQ L1\l"];
+1651613847 [label="L3\lLINENUMBER 109 L3\lFRAME SAME1 I\lLDC \"23765c39-9766-4fa6-9e38-0a0eaa4088d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1960273504 [label="L1\lFRAME SAME\lICONST_0\l"];
+1393078852 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeTimer : Lorg/prevayler/foundation/StopWatch;\lL2\lLINENUMBER 110 L2\lINVOKEVIRTUAL org/prevayler/foundation/StopWatch.millisEllapsed ()J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeThresholdInMillis : J\lLCMP\lIFLT L1\l"];
+651398040 [label="ICONST_1\lGOTO L3\l"];
+entry;
+exit;
+entry -> 288008604;
+288008604 -> 1960273504;
+288008604 -> 1393078852;
+1651613847 -> exit;
+1960273504 -> 1651613847;
+1393078852 -> 1960273504;
+1393078852 -> 651398040;
+651398040 -> 1651613847;
+288008604[fontcolor="purple", penwidth=3, color="purple"];
+1651613847[fontcolor="purple", penwidth=3, color="purple"];
+}

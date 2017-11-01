@@ -1,8 +1,8 @@
 digraph journalSerializer {
 node [shape=record];
-154911166 [label="L0\lLINENUMBER 368 L0\lLDC \"f817cc3a-e640-4819-815a-bd19c2dc24ee\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lIFNULL L1\l"];
-1150936132 [label="L1\lLINENUMBER 371 L1\lFRAME SAME\lNEW org/prevayler/foundation/serialization/JavaSerializer\lDUP\lINVOKESPECIAL org/prevayler/foundation/serialization/JavaSerializer.\<init\> ()V\lLDC \"f817cc3a-e640-4819-815a-bd19c2dc24ee\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
-560041778 [label="L2\lLINENUMBER 369 L2\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lLDC \"f817cc3a-e640-4819-815a-bd19c2dc24ee\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+154911166 [label="L0\lLINENUMBER 368 L0\lLDC \"442ac006-35f5-4a20-9249-3a34d6d805a6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lIFNULL L1\l"];
+1150936132 [label="L1\lLINENUMBER 371 L1\lFRAME SAME\lNEW org/prevayler/foundation/serialization/JavaSerializer\lDUP\lINVOKESPECIAL org/prevayler/foundation/serialization/JavaSerializer.\<init\> ()V\lLDC \"442ac006-35f5-4a20-9249-3a34d6d805a6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+560041778 [label="L2\lLINENUMBER 369 L2\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lLDC \"442ac006-35f5-4a20-9249-3a34d6d805a6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
 entry;
 exit;
 entry -> 154911166;

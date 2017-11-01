@@ -1,1 +1,11 @@
-{"configuration":["DEEPCOPY","TRANSIENTMODE","MONITOR","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":8970124935}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "TRANSIENTMODE",
+    "MONITOR",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8970124935
+  }
+}

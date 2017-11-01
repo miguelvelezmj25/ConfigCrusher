@@ -1,1 +1,11 @@
-{"configuration":["FILEAGETHRESHOLD","TRANSIENTMODE","JOURNALSERIALIZER","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":8623683999}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8623683999
+  }
+}

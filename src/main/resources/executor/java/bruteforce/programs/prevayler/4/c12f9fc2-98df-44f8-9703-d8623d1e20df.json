@@ -1,1 +1,11 @@
-{"configuration":["TRANSIENTMODE","MONITOR","SNAPSHOTSERIALIZER","CLOCK"],"regionsToProcessedPerformance":{"program":5726219833}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "MONITOR",
+    "SNAPSHOTSERIALIZER",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5726219833
+  }
+}

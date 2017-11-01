@@ -1,1 +1,11 @@
-{"configuration":["TRANSIENTMODE","JOURNALSERIALIZER","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":8077229738}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "JOURNALSERIALIZER",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8077229738
+  }
+}

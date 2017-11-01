@@ -1,1 +1,13 @@
-{"configuration":["MONITOR","DISKSYNC","JOURNALSERIALIZER","SNAPSHOTSERIALIZER","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":55312779187}}
+{
+  "configuration": [
+    "MONITOR",
+    "DISKSYNC",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 55312779187
+  }
+}

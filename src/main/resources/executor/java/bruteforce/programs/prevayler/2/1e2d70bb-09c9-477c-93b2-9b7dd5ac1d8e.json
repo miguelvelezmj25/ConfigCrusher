@@ -1,1 +1,14 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","TRANSIENTMODE","DISKSYNC","SNAPSHOTSERIALIZER","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":8320831729}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "DISKSYNC",
+    "SNAPSHOTSERIALIZER",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8320831729
+  }
+}

@@ -1,1 +1,12 @@
-{"configuration":["DEEPCOPY","TRANSIENTMODE","JOURNALSERIALIZER","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":17895136254}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "TRANSIENTMODE",
+    "JOURNALSERIALIZER",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 17895136254
+  }
+}

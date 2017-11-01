@@ -1,1 +1,11 @@
-{"configuration":["DEEPCOPY","TRANSIENTMODE","MONITOR","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":7971557721}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "TRANSIENTMODE",
+    "MONITOR",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 7971557721
+  }
+}

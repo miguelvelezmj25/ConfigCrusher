@@ -1,1 +1,10 @@
-{"configuration":["MONITOR","DISKSYNC","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":49748245805}}
+{
+  "configuration": [
+    "MONITOR",
+    "DISKSYNC",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 49748245805
+  }
+}

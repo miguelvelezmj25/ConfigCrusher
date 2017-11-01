@@ -1,1 +1,14 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","TRANSIENTMODE","DISKSYNC","JOURNALSERIALIZER","SNAPSHOTSERIALIZER","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":17870199774}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "DISKSYNC",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 17870199774
+  }
+}

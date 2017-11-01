@@ -1,1 +1,11 @@
-{"configuration":["DEEPCOPY","DISKSYNC","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":56187086814}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "DISKSYNC",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 56187086814
+  }
+}

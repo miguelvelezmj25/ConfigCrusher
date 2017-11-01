@@ -1,1 +1,13 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","TRANSIENTMODE","MONITOR","JOURNALSERIALIZER","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":18617461090}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "MONITOR",
+    "JOURNALSERIALIZER",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 18617461090
+  }
+}

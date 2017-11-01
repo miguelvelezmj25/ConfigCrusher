@@ -1,1 +1,10 @@
-{"configuration":["TIMEOUT","LOGLEVEL","MINALPHA"],"regionsToProcessedPerformance":{"program":5737661152}}
+{
+  "configuration": [
+    "TIMEOUT",
+    "LOGLEVEL",
+    "MINALPHA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5737661152
+  }
+}

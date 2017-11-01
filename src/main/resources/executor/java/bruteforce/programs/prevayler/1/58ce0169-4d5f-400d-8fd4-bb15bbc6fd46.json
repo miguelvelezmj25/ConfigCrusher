@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","DISKSYNC"],"regionsToProcessedPerformance":{"program":52098717753}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "DISKSYNC"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 52098717753
+  }
+}

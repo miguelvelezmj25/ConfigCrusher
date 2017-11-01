@@ -1,1 +1,11 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":19138461959}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 19138461959
+  }
+}

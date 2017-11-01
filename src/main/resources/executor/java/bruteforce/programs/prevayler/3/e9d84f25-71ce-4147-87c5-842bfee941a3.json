@@ -1,1 +1,12 @@
-{"configuration":["DEEPCOPY","TRANSIENTMODE","MONITOR","DISKSYNC","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":8132172200}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "TRANSIENTMODE",
+    "MONITOR",
+    "DISKSYNC",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8132172200
+  }
+}

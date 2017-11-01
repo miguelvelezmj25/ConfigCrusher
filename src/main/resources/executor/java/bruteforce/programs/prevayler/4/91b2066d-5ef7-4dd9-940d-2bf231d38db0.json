@@ -1,1 +1,13 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","MONITOR","JOURNALSERIALIZER","SNAPSHOTSERIALIZER","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":30832343544}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "MONITOR",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 30832343544
+  }
+}

@@ -1,1 +1,11 @@
-{"configuration":["TRANSIENTMODE","DISKSYNC","JOURNALSERIALIZER","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":9491458392}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "DISKSYNC",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 9491458392
+  }
+}

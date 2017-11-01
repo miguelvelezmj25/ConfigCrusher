@@ -1,1 +1,12 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","TRANSIENTMODE","MONITOR","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":8162138712}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "MONITOR",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8162138712
+  }
+}

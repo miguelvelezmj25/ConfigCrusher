@@ -1,1 +1,13 @@
-{"configuration":["TRANSIENTMODE","MONITOR","DISKSYNC","JOURNALSERIALIZER","SNAPSHOTSERIALIZER","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":8823375381}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "MONITOR",
+    "DISKSYNC",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8823375381
+  }
+}

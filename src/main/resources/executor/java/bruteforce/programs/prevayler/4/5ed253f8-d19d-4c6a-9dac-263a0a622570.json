@@ -1,1 +1,11 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","TRANSIENTMODE","CLOCK"],"regionsToProcessedPerformance":{"program":8205935559}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8205935559
+  }
+}

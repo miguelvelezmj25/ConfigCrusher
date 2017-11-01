@@ -1,1 +1,10 @@
-{"configuration":["FILEAGETHRESHOLD","TRANSIENTMODE","MONITOR"],"regionsToProcessedPerformance":{"program":5754624492}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "MONITOR"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5754624492
+  }
+}

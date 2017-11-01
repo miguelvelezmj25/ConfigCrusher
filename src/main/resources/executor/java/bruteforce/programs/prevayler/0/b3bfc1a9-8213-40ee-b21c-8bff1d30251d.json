@@ -1,1 +1,10 @@
-{"configuration":["FILEAGETHRESHOLD","DISKSYNC","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":49222217688}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "DISKSYNC",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 49222217688
+  }
+}

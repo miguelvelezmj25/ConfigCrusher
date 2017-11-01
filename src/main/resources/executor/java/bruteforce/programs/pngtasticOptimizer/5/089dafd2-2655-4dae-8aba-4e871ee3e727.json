@@ -1,1 +1,10 @@
-{"configuration":["COMPRESSOR","REMOVEGAMMA","COMPRESSIONLEVEL"],"regionsToProcessedPerformance":{"program":79283118022}}
+{
+  "configuration": [
+    "COMPRESSOR",
+    "REMOVEGAMMA",
+    "COMPRESSIONLEVEL"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 79283118022
+  }
+}

@@ -1,1 +1,11 @@
-{"configuration":["FREQTHRESHOLD","DISTTHRESHOLD","LOGLEVEL","MINALPHA"],"regionsToProcessedPerformance":{"program":5782288883}}
+{
+  "configuration": [
+    "FREQTHRESHOLD",
+    "DISTTHRESHOLD",
+    "LOGLEVEL",
+    "MINALPHA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5782288883
+  }
+}

@@ -1,1 +1,422 @@
-[{"region":{"regionID":"2c29021f-7f52-40ba-8ae0-cdfb61386275","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":257,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["FORCE","LEVEL","VERBOSE"]]},{"region":{"regionID":"7712a065-3d2f-40cb-9c5a-7d9aa778a831","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V","startBytecodeIndex":23,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["FORCE"]]},{"region":{"regionID":"e7ef7b2e-e1ba-4632-bf96-894db4120908","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"call()Ljava/lang/Integer;","startBytecodeIndex":117,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TRANSFORM","LEVEL"]]},{"region":{"regionID":"a6c6d708-67d3-48e8-bf9d-b0cd68dfa9ca","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.io","regionClass":"CompressedOutputStream","regionMethod":"write([BII)V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["FORCE","BLOCKSIZE","TRANSFORM","LEVEL","ENTROPY"]]},{"region":{"regionID":"b37d7995-7f3c-4055-a7d0-05a81c3a0999","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V","startBytecodeIndex":133,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TRANSFORM","LEVEL"]]},{"region":{"regionID":"c9cc2ab2-a5b9-4a03-a5bd-21217fcc61e7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"call()Ljava/lang/Integer;","startBytecodeIndex":154,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["LEVEL","ENTROPY"]]},{"region":{"regionID":"996ec663-8e19-4164-bd69-83866cbd2247","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V","startBytecodeIndex":155,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["CHECKSUM"]]},{"region":{"regionID":"de2bec39-1ac4-4077-b730-f7add6ade2d0","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"call()Ljava/lang/Integer;","startBytecodeIndex":5,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["VERBOSE"]]},{"region":{"regionID":"985c2b28-bc5d-4d9a-95a5-db9ddee4c46d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":141,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["BLOCKSIZE"]]},{"region":{"regionID":"8c61abb7-27b9-42ea-aaea-1a58c034e322","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":177,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["CHECKSUM"]]},{"region":{"regionID":"05bc8827-917e-4a6e-8eab-2ff041a53b7f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":132,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["FORCE"]]},{"region":{"regionID":"488a778e-a9ea-4b81-8fc4-674f3ee2af38","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V","startBytecodeIndex":222,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["VERBOSE"]]},{"region":{"regionID":"b85ed427-b5e1-443f-99dd-82926e080c32","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":168,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["TRANSFORM"]]},{"region":{"regionID":"54a6e345-5690-4ae8-8907-d83ba638b05e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":159,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["ENTROPY"]]},{"region":{"regionID":"a6e4ac3d-1b49-4dd0-ba4e-fac874e4dae2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V","startBytecodeIndex":113,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["BLOCKSIZE"]]},{"region":{"regionID":"ce6573cd-8463-4568-9bd0-d718a063ea19","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":150,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["LEVEL"]]},{"region":{"regionID":"11a50977-dfe9-48ff-b4bd-f78aad1b286c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V","startBytecodeIndex":53,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["LEVEL","ENTROPY"]]},{"region":{"regionID":"f1c78de6-72ac-4ce5-8f22-8d31ef0b839a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.io","regionClass":"CompressedOutputStream","regionMethod":"<init>(Ljava/io/OutputStream;IZLjava/util/concurrent/ExecutorService;ILjava/lang/String;Ljava/lang/String;)V","startBytecodeIndex":7,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["CHECKSUM","FORCE","BLOCKSIZE","TRANSFORM","LEVEL","ENTROPY"]]},{"region":{"regionID":"3f428e55-389c-47be-914a-b44e52481f95","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"dispose()V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["CHECKSUM","FORCE","BLOCKSIZE","TRANSFORM","LEVEL","ENTROPY"]]},{"region":{"regionID":"b70d9118-a4f5-4c80-be48-7c584ccebaf6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi.app","regionClass":"BlockCompressor","regionMethod":"call()Ljava/lang/Integer;","startBytecodeIndex":291,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["FORCE","VERBOSE"]]},{"region":{"regionID":"1aa9d94a-ae53-4056-9083-4dda6592f595","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"kanzi","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":123,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["VERBOSE"]]}]
+[
+  {
+    "region": {
+      "regionID": "2c29021f-7f52-40ba-8ae0-cdfb61386275",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 257,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FORCE",
+        "LEVEL",
+        "VERBOSE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7712a065-3d2f-40cb-9c5a-7d9aa778a831",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V",
+      "startBytecodeIndex": 23,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FORCE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e7ef7b2e-e1ba-4632-bf96-894db4120908",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "call()Ljava/lang/Integer;",
+      "startBytecodeIndex": 117,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TRANSFORM",
+        "LEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a6c6d708-67d3-48e8-bf9d-b0cd68dfa9ca",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.io",
+      "regionClass": "CompressedOutputStream",
+      "regionMethod": "write([BII)V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FORCE",
+        "BLOCKSIZE",
+        "TRANSFORM",
+        "LEVEL",
+        "ENTROPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b37d7995-7f3c-4055-a7d0-05a81c3a0999",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V",
+      "startBytecodeIndex": 133,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TRANSFORM",
+        "LEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c9cc2ab2-a5b9-4a03-a5bd-21217fcc61e7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "call()Ljava/lang/Integer;",
+      "startBytecodeIndex": 154,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LEVEL",
+        "ENTROPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "996ec663-8e19-4164-bd69-83866cbd2247",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V",
+      "startBytecodeIndex": 155,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "CHECKSUM"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "de2bec39-1ac4-4077-b730-f7add6ade2d0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "call()Ljava/lang/Integer;",
+      "startBytecodeIndex": 5,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "VERBOSE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "985c2b28-bc5d-4d9a-95a5-db9ddee4c46d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 141,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "BLOCKSIZE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8c61abb7-27b9-42ea-aaea-1a58c034e322",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 177,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "CHECKSUM"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "05bc8827-917e-4a6e-8eab-2ff041a53b7f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 132,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FORCE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "488a778e-a9ea-4b81-8fc4-674f3ee2af38",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V",
+      "startBytecodeIndex": 222,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "VERBOSE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b85ed427-b5e1-443f-99dd-82926e080c32",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 168,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TRANSFORM"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "54a6e345-5690-4ae8-8907-d83ba638b05e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 159,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "ENTROPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a6e4ac3d-1b49-4dd0-ba4e-fac874e4dae2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V",
+      "startBytecodeIndex": 113,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "BLOCKSIZE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ce6573cd-8463-4568-9bd0-d718a063ea19",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 150,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "11a50977-dfe9-48ff-b4bd-f78aad1b286c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "<init>(IZIILjava/lang/String;Ljava/lang/String;ZILjava/util/Map;Ljava/util/concurrent/ExecutorService;)V",
+      "startBytecodeIndex": 53,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LEVEL",
+        "ENTROPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f1c78de6-72ac-4ce5-8f22-8d31ef0b839a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.io",
+      "regionClass": "CompressedOutputStream",
+      "regionMethod": "<init>(Ljava/io/OutputStream;IZLjava/util/concurrent/ExecutorService;ILjava/lang/String;Ljava/lang/String;)V",
+      "startBytecodeIndex": 7,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "CHECKSUM",
+        "FORCE",
+        "BLOCKSIZE",
+        "TRANSFORM",
+        "LEVEL",
+        "ENTROPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3f428e55-389c-47be-914a-b44e52481f95",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "dispose()V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "CHECKSUM",
+        "FORCE",
+        "BLOCKSIZE",
+        "TRANSFORM",
+        "LEVEL",
+        "ENTROPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b70d9118-a4f5-4c80-be48-7c584ccebaf6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi.app",
+      "regionClass": "BlockCompressor",
+      "regionMethod": "call()Ljava/lang/Integer;",
+      "startBytecodeIndex": 291,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FORCE",
+        "VERBOSE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1aa9d94a-ae53-4056-9083-4dda6592f595",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "kanzi",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 123,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "VERBOSE"
+      ]
+    ]
+  }
+]

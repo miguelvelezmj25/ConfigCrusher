@@ -1,1 +1,11 @@
-{"configuration":["DEEPCOPY","MONITOR","DISKSYNC","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":63375065110}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "MONITOR",
+    "DISKSYNC",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 63375065110
+  }
+}

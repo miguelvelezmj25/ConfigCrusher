@@ -1,1 +1,11 @@
-{"configuration":["DEEPCOPY","TRANSIENTMODE","DISKSYNC","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":18208197740}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "TRANSIENTMODE",
+    "DISKSYNC",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 18208197740
+  }
+}

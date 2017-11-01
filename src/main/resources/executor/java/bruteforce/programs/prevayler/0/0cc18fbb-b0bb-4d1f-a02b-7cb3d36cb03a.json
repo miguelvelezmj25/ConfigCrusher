@@ -1,1 +1,13 @@
-{"configuration":["FILEAGETHRESHOLD","TRANSIENTMODE","MONITOR","DISKSYNC","SNAPSHOTSERIALIZER","CLOCK"],"regionsToProcessedPerformance":{"program":5633303787}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "MONITOR",
+    "DISKSYNC",
+    "SNAPSHOTSERIALIZER",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5633303787
+  }
+}

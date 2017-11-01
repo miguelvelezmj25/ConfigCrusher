@@ -1,1 +1,8 @@
-{"configuration":["LOGLEVEL"],"regionsToProcessedPerformance":{"program":5788431379}}
+{
+  "configuration": [
+    "LOGLEVEL"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5788431379
+  }
+}

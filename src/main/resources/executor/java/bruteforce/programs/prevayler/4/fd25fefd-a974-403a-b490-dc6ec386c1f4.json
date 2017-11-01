@@ -1,1 +1,11 @@
-{"configuration":["DISKSYNC","SNAPSHOTSERIALIZER","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":47820619958}}
+{
+  "configuration": [
+    "DISKSYNC",
+    "SNAPSHOTSERIALIZER",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 47820619958
+  }
+}

@@ -1,1 +1,13 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","MONITOR","DISKSYNC","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":54599865071}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "MONITOR",
+    "DISKSYNC",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 54599865071
+  }
+}

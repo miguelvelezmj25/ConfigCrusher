@@ -1,1 +1,12 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","DISKSYNC","JOURNALSERIALIZER","CLOCK"],"regionsToProcessedPerformance":{"program":63287768549}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "DISKSYNC",
+    "JOURNALSERIALIZER",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 63287768549
+  }
+}

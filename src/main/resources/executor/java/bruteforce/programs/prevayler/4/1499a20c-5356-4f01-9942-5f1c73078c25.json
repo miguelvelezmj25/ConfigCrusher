@@ -1,1 +1,10 @@
-{"configuration":["TRANSIENTMODE","JOURNALSERIALIZER","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":8962530308}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8962530308
+  }
+}

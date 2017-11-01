@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","MONITOR","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":14069049520}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "MONITOR",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14069049520
+  }
+}

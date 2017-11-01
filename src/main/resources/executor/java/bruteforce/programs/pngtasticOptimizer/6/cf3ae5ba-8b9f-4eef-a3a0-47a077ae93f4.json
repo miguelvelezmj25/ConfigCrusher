@@ -1,1 +1,8 @@
-{"configuration":["COMPRESSOR"],"regionsToProcessedPerformance":{"program":78581847306}}
+{
+  "configuration": [
+    "COMPRESSOR"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 78581847306
+  }
+}

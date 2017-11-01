@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","SNAPSHOTSERIALIZER","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":18535269669}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "SNAPSHOTSERIALIZER",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 18535269669
+  }
+}

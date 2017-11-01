@@ -1,1 +1,12 @@
-{"configuration":["FILEAGETHRESHOLD","TRANSIENTMODE","MONITOR","DISKSYNC","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":8212819456}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "MONITOR",
+    "DISKSYNC",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8212819456
+  }
+}

@@ -1,1 +1,9 @@
-{"configuration":["MONITOR","DISKSYNC"],"regionsToProcessedPerformance":{"program":44001594515}}
+{
+  "configuration": [
+    "MONITOR",
+    "DISKSYNC"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 44001594515
+  }
+}

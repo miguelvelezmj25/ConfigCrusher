@@ -1,1 +1,10 @@
-{"configuration":["TRANSIENTMODE","JOURNALSERIALIZER","CLOCK"],"regionsToProcessedPerformance":{"program":8398170020}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "JOURNALSERIALIZER",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8398170020
+  }
+}

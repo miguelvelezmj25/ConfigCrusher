@@ -1,1 +1,9 @@
-{"configuration":["DEEPCOPY","DISKSYNC"],"regionsToProcessedPerformance":{"program":49036022299}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "DISKSYNC"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 49036022299
+  }
+}

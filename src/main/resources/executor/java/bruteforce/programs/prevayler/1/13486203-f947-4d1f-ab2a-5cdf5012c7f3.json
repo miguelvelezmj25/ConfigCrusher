@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","TRANSIENTMODE","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":8003225757}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "TRANSIENTMODE",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8003225757
+  }
+}

@@ -1,1 +1,10 @@
-{"configuration":["JOURNALSERIALIZER","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":18547303344}}
+{
+  "configuration": [
+    "JOURNALSERIALIZER",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 18547303344
+  }
+}

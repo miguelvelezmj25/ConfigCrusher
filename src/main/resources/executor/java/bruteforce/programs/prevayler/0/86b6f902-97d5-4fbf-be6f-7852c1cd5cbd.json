@@ -1,1 +1,9 @@
-{"configuration":["DISKSYNC","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":49777074266}}
+{
+  "configuration": [
+    "DISKSYNC",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 49777074266
+  }
+}

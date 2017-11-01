@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","TRANSIENTMODE","CLOCK"],"regionsToProcessedPerformance":{"program":8283357705}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "TRANSIENTMODE",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8283357705
+  }
+}

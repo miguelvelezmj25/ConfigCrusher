@@ -1,1 +1,11 @@
-{"configuration":["FILEAGETHRESHOLD","TRANSIENTMODE","DISKSYNC","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":9106088518}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "DISKSYNC",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 9106088518
+  }
+}

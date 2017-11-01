@@ -1,1 +1,10 @@
-{"configuration":["FILEAGETHRESHOLD","TRANSIENTMODE","CLOCK"],"regionsToProcessedPerformance":{"program":5703850504}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5703850504
+  }
+}

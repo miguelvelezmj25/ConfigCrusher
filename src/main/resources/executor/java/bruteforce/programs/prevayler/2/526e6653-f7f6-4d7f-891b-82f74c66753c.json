@@ -1,1 +1,12 @@
-{"configuration":["DEEPCOPY","TRANSIENTMODE","MONITOR","DISKSYNC","CLOCK"],"regionsToProcessedPerformance":{"program":7958140055}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "TRANSIENTMODE",
+    "MONITOR",
+    "DISKSYNC",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 7958140055
+  }
+}

@@ -1,1 +1,11 @@
-{"configuration":["FILEAGETHRESHOLD","DISKSYNC","SNAPSHOTSERIALIZER","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":47120033828}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "DISKSYNC",
+    "SNAPSHOTSERIALIZER",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 47120033828
+  }
+}

@@ -1,1 +1,11 @@
-{"configuration":["TRANSIENTMODE","MONITOR","JOURNALSERIALIZER","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":8179726449}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "MONITOR",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8179726449
+  }
+}

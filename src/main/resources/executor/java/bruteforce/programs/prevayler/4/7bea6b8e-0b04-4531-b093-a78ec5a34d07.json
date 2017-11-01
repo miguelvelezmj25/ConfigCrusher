@@ -1,1 +1,9 @@
-{"configuration":["FILEAGETHRESHOLD","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":11251520334}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 11251520334
+  }
+}

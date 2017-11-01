@@ -1,1 +1,11 @@
-{"configuration":["TRANSIENTMODE","SNAPSHOTSERIALIZER","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":5859071311}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "SNAPSHOTSERIALIZER",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5859071311
+  }
+}

@@ -1,1 +1,9 @@
-{"configuration":["FREQTHRESHOLD","TIMEOUT"],"regionsToProcessedPerformance":{"program":5685758840}}
+{
+  "configuration": [
+    "FREQTHRESHOLD",
+    "TIMEOUT"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5685758840
+  }
+}

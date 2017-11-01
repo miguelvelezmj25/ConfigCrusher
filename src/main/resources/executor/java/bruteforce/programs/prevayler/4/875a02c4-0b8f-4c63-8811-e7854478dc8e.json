@@ -1,1 +1,9 @@
-{"configuration":["DISKSYNC","CLOCK"],"regionsToProcessedPerformance":{"program":44794714390}}
+{
+  "configuration": [
+    "DISKSYNC",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 44794714390
+  }
+}

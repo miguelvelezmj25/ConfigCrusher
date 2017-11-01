@@ -1,1 +1,8 @@
-{"configuration":["MINALPHA"],"regionsToProcessedPerformance":{"program":5701812022}}
+{
+  "configuration": [
+    "MINALPHA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5701812022
+  }
+}

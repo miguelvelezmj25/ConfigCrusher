@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":26191706180}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 26191706180
+  }
+}

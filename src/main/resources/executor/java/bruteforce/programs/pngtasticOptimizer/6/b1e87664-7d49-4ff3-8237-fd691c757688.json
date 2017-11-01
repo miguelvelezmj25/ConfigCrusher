@@ -1,1 +1,8 @@
-{"configuration":["ITERATIONS"],"regionsToProcessedPerformance":{"program":368120289}}
+{
+  "configuration": [
+    "ITERATIONS"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 368120289
+  }
+}

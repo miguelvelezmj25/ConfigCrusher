@@ -1,1 +1,8 @@
-{"configuration":["CHECKSUM"],"regionsToProcessedPerformance":{"program":310630392}}
+{
+  "configuration": [
+    "CHECKSUM"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 310630392
+  }
+}

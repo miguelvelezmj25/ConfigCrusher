@@ -1,1 +1,11 @@
-{"configuration":["TRANSIENTMODE","MONITOR","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":5654605769}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "MONITOR",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5654605769
+  }
+}

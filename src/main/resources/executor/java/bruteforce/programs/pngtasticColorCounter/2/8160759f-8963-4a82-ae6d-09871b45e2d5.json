@@ -1,1 +1,9 @@
-{"configuration":["FREQTHRESHOLD","DISTTHRESHOLD"],"regionsToProcessedPerformance":{"program":5762231516}}
+{
+  "configuration": [
+    "FREQTHRESHOLD",
+    "DISTTHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5762231516
+  }
+}

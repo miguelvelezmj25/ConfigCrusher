@@ -1,1 +1,10 @@
-{"configuration":["MONITOR","DISKSYNC","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":47525604082}}
+{
+  "configuration": [
+    "MONITOR",
+    "DISKSYNC",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 47525604082
+  }
+}

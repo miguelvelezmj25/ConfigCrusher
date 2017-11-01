@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","MONITOR","CLOCK"],"regionsToProcessedPerformance":{"program":14458817813}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "MONITOR",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14458817813
+  }
+}

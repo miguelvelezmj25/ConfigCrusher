@@ -1,1 +1,9 @@
-{"configuration":["TIMEOUT","LOGLEVEL"],"regionsToProcessedPerformance":{"program":5622151485}}
+{
+  "configuration": [
+    "TIMEOUT",
+    "LOGLEVEL"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5622151485
+  }
+}

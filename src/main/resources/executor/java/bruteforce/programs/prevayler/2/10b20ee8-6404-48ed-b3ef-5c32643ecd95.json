@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","MONITOR"],"regionsToProcessedPerformance":{"program":14963572516}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "MONITOR"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14963572516
+  }
+}

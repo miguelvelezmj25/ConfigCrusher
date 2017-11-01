@@ -1,1 +1,11 @@
-{"configuration":["ITERATIONS","LOGLEVEL","REMOVEGAMMA","COMPRESSIONLEVEL"],"regionsToProcessedPerformance":{"program":6133200896}}
+{
+  "configuration": [
+    "ITERATIONS",
+    "LOGLEVEL",
+    "REMOVEGAMMA",
+    "COMPRESSIONLEVEL"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 6133200896
+  }
+}

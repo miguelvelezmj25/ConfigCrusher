@@ -1,1 +1,9 @@
-{"configuration":["DISTTHRESHOLD","MINALPHA"],"regionsToProcessedPerformance":{"program":5901668795}}
+{
+  "configuration": [
+    "DISTTHRESHOLD",
+    "MINALPHA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5901668795
+  }
+}

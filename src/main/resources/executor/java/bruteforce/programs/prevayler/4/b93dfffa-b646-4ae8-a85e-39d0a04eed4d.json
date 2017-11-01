@@ -1,1 +1,9 @@
-{"configuration":["SNAPSHOTSERIALIZER","CLOCK"],"regionsToProcessedPerformance":{"program":11583668120}}
+{
+  "configuration": [
+    "SNAPSHOTSERIALIZER",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 11583668120
+  }
+}

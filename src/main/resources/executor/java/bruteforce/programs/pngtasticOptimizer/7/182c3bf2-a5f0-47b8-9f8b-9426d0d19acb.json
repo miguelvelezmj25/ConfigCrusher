@@ -1,1 +1,9 @@
-{"configuration":["LOGLEVEL","COMPRESSIONLEVEL"],"regionsToProcessedPerformance":{"program":6097428680}}
+{
+  "configuration": [
+    "LOGLEVEL",
+    "COMPRESSIONLEVEL"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 6097428680
+  }
+}

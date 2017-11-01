@@ -1,1 +1,8 @@
-{"configuration":["JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":15532809312}}
+{
+  "configuration": [
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 15532809312
+  }
+}

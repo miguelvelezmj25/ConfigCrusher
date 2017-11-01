@@ -1,1 +1,10 @@
-{"configuration":["DISTTHRESHOLD","TIMEOUT","MINALPHA"],"regionsToProcessedPerformance":{"program":5682431514}}
+{
+  "configuration": [
+    "DISTTHRESHOLD",
+    "TIMEOUT",
+    "MINALPHA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5682431514
+  }
+}

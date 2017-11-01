@@ -1,1 +1,10 @@
-{"configuration":["FILEAGETHRESHOLD","MONITOR","CLOCK"],"regionsToProcessedPerformance":{"program":10927635764}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "MONITOR",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 10927635764
+  }
+}

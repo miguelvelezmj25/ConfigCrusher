@@ -1,1 +1,8 @@
-{"configuration":["TIMEOUT"],"regionsToProcessedPerformance":{"program":5660479028}}
+{
+  "configuration": [
+    "TIMEOUT"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5660479028
+  }
+}

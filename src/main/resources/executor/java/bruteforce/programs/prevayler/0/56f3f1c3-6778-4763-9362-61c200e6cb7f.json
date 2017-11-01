@@ -1,1 +1,9 @@
-{"configuration":["JOURNALSERIALIZER","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":14795905019}}
+{
+  "configuration": [
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14795905019
+  }
+}

@@ -1,1 +1,10 @@
-{"configuration":["MONITOR","JOURNALSERIALIZER","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":15334194352}}
+{
+  "configuration": [
+    "MONITOR",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 15334194352
+  }
+}

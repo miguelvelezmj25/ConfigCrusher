@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","SNAPSHOTSERIALIZER","CLOCK"],"regionsToProcessedPerformance":{"program":14385085360}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "SNAPSHOTSERIALIZER",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14385085360
+  }
+}

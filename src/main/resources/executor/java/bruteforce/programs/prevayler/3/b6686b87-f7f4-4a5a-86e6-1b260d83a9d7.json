@@ -1,1 +1,8 @@
-{"configuration":["TRANSIENTMODE"],"regionsToProcessedPerformance":{"program":5646069057}}
+{
+  "configuration": [
+    "TRANSIENTMODE"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5646069057
+  }
+}

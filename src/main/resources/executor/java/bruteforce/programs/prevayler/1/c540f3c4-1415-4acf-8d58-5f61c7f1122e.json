@@ -1,1 +1,10 @@
-{"configuration":["DEEPCOPY","JOURNALSERIALIZER","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":25666997013}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "JOURNALSERIALIZER",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 25666997013
+  }
+}

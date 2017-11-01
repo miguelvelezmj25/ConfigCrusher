@@ -1,1 +1,9 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD"],"regionsToProcessedPerformance":{"program":14618085506}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14618085506
+  }
+}

@@ -1,1 +1,9 @@
-{"configuration":["FILEAGETHRESHOLD","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":15338385185}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 15338385185
+  }
+}

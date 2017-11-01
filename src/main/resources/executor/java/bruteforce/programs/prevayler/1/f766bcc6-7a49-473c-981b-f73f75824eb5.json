@@ -1,1 +1,9 @@
-{"configuration":["TRANSIENTMODE","DISKSYNC"],"regionsToProcessedPerformance":{"program":5768954113}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "DISKSYNC"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5768954113
+  }
+}

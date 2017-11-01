@@ -1,1 +1,11 @@
-{"configuration":["DEEPCOPY","FILEAGETHRESHOLD","TRANSIENTMODE","DISKSYNC"],"regionsToProcessedPerformance":{"program":8800925821}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILEAGETHRESHOLD",
+    "TRANSIENTMODE",
+    "DISKSYNC"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 8800925821
+  }
+}

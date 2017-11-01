@@ -11,6 +11,10 @@ import java.util.Set;
  * Created by mvelezce on 3/9/17.
  */
 public class PerformanceModelTest {
+    @Test
+    public void evaluate() throws Exception {
+
+    }
 
     @Test
     public void testEvaluate1() {

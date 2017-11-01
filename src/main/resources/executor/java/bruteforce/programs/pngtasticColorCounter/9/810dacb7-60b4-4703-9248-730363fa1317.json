@@ -1,1 +1,9 @@
-{"configuration":["DISTTHRESHOLD","TIMEOUT"],"regionsToProcessedPerformance":{"program":5720547915}}
+{
+  "configuration": [
+    "DISTTHRESHOLD",
+    "TIMEOUT"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5720547915
+  }
+}

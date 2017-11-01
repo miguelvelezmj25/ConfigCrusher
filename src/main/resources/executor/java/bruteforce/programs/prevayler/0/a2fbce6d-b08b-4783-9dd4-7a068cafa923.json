@@ -1,1 +1,9 @@
-{"configuration":["MONITOR","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":14091052107}}
+{
+  "configuration": [
+    "MONITOR",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14091052107
+  }
+}

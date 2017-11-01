@@ -1,1 +1,23 @@
-{"configuration":["COMPRESSOR","ITERATIONS","LOGLEVEL","COMPRESSIONLEVEL"],"regionsToProcessedPerformance":{"c62f0fd0-c2ad-4a44-ba60-8cc9607423d6":855,"80ebff5e-114e-4e96-be73-77897f478947":201371688682,"defb60a1-3c23-42d9-9917-7d33bf809480":5261638,"1951f80a-2a78-41dc-9114-84f883f78ba0":1301,"program":580206755,"7e04bf66-c9ca-483a-9849-f444f8611abc":3055536,"aa4e8e21-fde9-41f7-b2f2-1dcb1ee392c2":137185,"90c99c3f-b656-4255-bd33-ba3c88f26602":1414,"6fc44114-d075-40ff-9fd2-96772c6d2ccf":10492641,"6b53c0af-4726-427b-b312-6da4d8964afd":2254421,"ad094780-7385-4ba4-89b2-9e632be4f999":219877,"52d64f3f-0765-4e1b-8d2c-8dfe1226cfb5":4878644,"6e9b637c-94bc-4119-bf10-a3b1a027f08f":1083}}
+{
+  "configuration": [
+    "COMPRESSOR",
+    "ITERATIONS",
+    "LOGLEVEL",
+    "COMPRESSIONLEVEL"
+  ],
+  "regionsToProcessedPerformance": {
+    "c62f0fd0-c2ad-4a44-ba60-8cc9607423d6": 855,
+    "80ebff5e-114e-4e96-be73-77897f478947": 201371688682,
+    "defb60a1-3c23-42d9-9917-7d33bf809480": 5261638,
+    "1951f80a-2a78-41dc-9114-84f883f78ba0": 1301,
+    "program": 580206755,
+    "7e04bf66-c9ca-483a-9849-f444f8611abc": 3055536,
+    "aa4e8e21-fde9-41f7-b2f2-1dcb1ee392c2": 137185,
+    "90c99c3f-b656-4255-bd33-ba3c88f26602": 1414,
+    "6fc44114-d075-40ff-9fd2-96772c6d2ccf": 10492641,
+    "6b53c0af-4726-427b-b312-6da4d8964afd": 2254421,
+    "ad094780-7385-4ba4-89b2-9e632be4f999": 219877,
+    "52d64f3f-0765-4e1b-8d2c-8dfe1226cfb5": 4878644,
+    "6e9b637c-94bc-4119-bf10-a3b1a027f08f": 1083
+  }
+}

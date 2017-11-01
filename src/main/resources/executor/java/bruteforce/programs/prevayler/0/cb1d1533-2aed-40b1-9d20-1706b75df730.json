@@ -1,1 +1,8 @@
-{"configuration":["DEEPCOPY"],"regionsToProcessedPerformance":{"program":14486157871}}
+{
+  "configuration": [
+    "DEEPCOPY"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14486157871
+  }
+}

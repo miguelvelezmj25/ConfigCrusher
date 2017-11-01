@@ -1,1 +1,8 @@
-{"configuration":["REMOVEGAMMA"],"regionsToProcessedPerformance":{"program":371300496}}
+{
+  "configuration": [
+    "REMOVEGAMMA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 371300496
+  }
+}

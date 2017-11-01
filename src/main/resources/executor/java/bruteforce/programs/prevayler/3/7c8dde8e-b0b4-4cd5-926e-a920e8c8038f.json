@@ -1,1 +1,9 @@
-{"configuration":["TRANSIENTMODE","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":6154987068}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 6154987068
+  }
+}

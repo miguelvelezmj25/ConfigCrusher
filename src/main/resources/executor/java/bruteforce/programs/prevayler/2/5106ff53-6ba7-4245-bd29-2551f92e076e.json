@@ -1,1 +1,9 @@
-{"configuration":["MONITOR","CLOCK"],"regionsToProcessedPerformance":{"program":11489529129}}
+{
+  "configuration": [
+    "MONITOR",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 11489529129
+  }
+}

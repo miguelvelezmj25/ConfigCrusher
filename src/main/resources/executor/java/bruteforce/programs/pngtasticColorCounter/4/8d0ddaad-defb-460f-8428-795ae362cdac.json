@@ -1,1 +1,8 @@
-{"configuration":["DISTTHRESHOLD"],"regionsToProcessedPerformance":{"program":5742612589}}
+{
+  "configuration": [
+    "DISTTHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5742612589
+  }
+}

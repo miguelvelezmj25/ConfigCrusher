@@ -1,1 +1,9 @@
-{"configuration":["LOGLEVEL","REMOVEGAMMA"],"regionsToProcessedPerformance":{"program":384437831}}
+{
+  "configuration": [
+    "LOGLEVEL",
+    "REMOVEGAMMA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 384437831
+  }
+}

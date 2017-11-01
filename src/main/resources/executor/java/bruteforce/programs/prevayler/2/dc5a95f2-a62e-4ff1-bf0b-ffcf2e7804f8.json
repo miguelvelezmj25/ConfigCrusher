@@ -1,1 +1,10 @@
-{"configuration":["MONITOR","SNAPSHOTSERIALIZER","CLOCK"],"regionsToProcessedPerformance":{"program":11286753003}}
+{
+  "configuration": [
+    "MONITOR",
+    "SNAPSHOTSERIALIZER",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 11286753003
+  }
+}

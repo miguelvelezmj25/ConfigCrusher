@@ -1,1 +1,8 @@
-{"configuration":["FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":13928479514}}
+{
+  "configuration": [
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 13928479514
+  }
+}

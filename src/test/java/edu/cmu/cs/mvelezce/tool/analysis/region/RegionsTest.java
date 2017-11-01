@@ -2,8 +2,6 @@ package edu.cmu.cs.mvelezce.tool.analysis.region;
 
 import org.junit.Test;
 
-import java.util.Map;
-
 /**
  * Created by mvelezce on 7/11/17.
  */

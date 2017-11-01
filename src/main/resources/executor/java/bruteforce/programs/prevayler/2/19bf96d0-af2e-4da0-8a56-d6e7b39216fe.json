@@ -1,1 +1,10 @@
-{"configuration":["TRANSIENTMODE","MONITOR","CLOCK"],"regionsToProcessedPerformance":{"program":6165236207}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "MONITOR",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 6165236207
+  }
+}

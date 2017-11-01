@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerMain;
 
 import java.io.IOException;
 import java.util.Arrays;

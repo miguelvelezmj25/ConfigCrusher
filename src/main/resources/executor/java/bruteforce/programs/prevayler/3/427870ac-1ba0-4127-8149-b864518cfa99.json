@@ -1,1 +1,10 @@
-{"configuration":["FILEAGETHRESHOLD","SNAPSHOTSERIALIZER","CLOCK"],"regionsToProcessedPerformance":{"program":11040024941}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "SNAPSHOTSERIALIZER",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 11040024941
+  }
+}

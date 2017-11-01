@@ -1,1 +1,12 @@
-{"configuration":["CHECKSUM","FORCE","TRANSFORM","VERBOSE","LEVEL"],"regionsToProcessedPerformance":{"program":67001073256}}
+{
+  "configuration": [
+    "CHECKSUM",
+    "FORCE",
+    "TRANSFORM",
+    "VERBOSE",
+    "LEVEL"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 67001073256
+  }
+}

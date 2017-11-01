@@ -1,1 +1,9 @@
-{"configuration":["DEEPCOPY","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":19305653034}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 19305653034
+  }
+}

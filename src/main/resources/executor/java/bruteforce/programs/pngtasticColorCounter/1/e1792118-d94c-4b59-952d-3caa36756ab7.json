@@ -1,1 +1,9 @@
-{"configuration":["LOGLEVEL","MINALPHA"],"regionsToProcessedPerformance":{"program":5763012839}}
+{
+  "configuration": [
+    "LOGLEVEL",
+    "MINALPHA"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5763012839
+  }
+}

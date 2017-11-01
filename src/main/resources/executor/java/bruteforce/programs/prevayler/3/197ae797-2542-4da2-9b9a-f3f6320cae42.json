@@ -1,1 +1,10 @@
-{"configuration":["FILEAGETHRESHOLD","FILESIZETHRESHOLD","CLOCK"],"regionsToProcessedPerformance":{"program":14052117936}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "FILESIZETHRESHOLD",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14052117936
+  }
+}

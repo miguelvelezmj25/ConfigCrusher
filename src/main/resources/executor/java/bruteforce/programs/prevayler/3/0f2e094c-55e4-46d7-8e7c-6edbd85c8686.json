@@ -1,1 +1,9 @@
-{"configuration":["TRANSIENTMODE","CLOCK"],"regionsToProcessedPerformance":{"program":5694611001}}
+{
+  "configuration": [
+    "TRANSIENTMODE",
+    "CLOCK"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 5694611001
+  }
+}

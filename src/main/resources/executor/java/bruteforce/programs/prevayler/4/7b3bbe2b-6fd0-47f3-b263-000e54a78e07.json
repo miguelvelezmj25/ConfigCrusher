@@ -1,1 +1,9 @@
-{"configuration":["DISKSYNC","SNAPSHOTSERIALIZER"],"regionsToProcessedPerformance":{"program":44498082814}}
+{
+  "configuration": [
+    "DISKSYNC",
+    "SNAPSHOTSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 44498082814
+  }
+}

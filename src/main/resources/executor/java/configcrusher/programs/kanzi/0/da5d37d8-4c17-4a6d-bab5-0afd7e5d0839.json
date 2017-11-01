@@ -1,1 +1,31 @@
-{"configuration":["FORCE","BLOCKSIZE","TRANSFORM","LEVEL","ENTROPY"],"regionsToProcessedPerformance":{"e7ef7b2e-e1ba-4632-bf96-894db4120908":93367,"488a778e-a9ea-4b81-8fc4-674f3ee2af38":46812,"1aa9d94a-ae53-4056-9083-4dda6592f595":1018763,"f1c78de6-72ac-4ce5-8f22-8d31ef0b839a":500843831,"b85ed427-b5e1-443f-99dd-82926e080c32":3185,"54a6e345-5690-4ae8-8907-d83ba638b05e":3175,"985c2b28-bc5d-4d9a-95a5-db9ddee4c46d":2332,"program":26727131,"ce6573cd-8463-4568-9bd0-d718a063ea19":13694,"b37d7995-7f3c-4055-a7d0-05a81c3a0999":1569761,"8c61abb7-27b9-42ea-aaea-1a58c034e322":2268,"a6e4ac3d-1b49-4dd0-ba4e-fac874e4dae2":48941,"05bc8827-917e-4a6e-8eab-2ff041a53b7f":2836,"3f428e55-389c-47be-914a-b44e52481f95":60791082142,"996ec663-8e19-4164-bd69-83866cbd2247":6450,"7712a065-3d2f-40cb-9c5a-7d9aa778a831":23704,"de2bec39-1ac4-4077-b730-f7add6ade2d0":4390,"2c29021f-7f52-40ba-8ae0-cdfb61386275":38150865,"11a50977-dfe9-48ff-b4bd-f78aad1b286c":63696,"a6c6d708-67d3-48e8-bf9d-b0cd68dfa9ca":10084735}}
+{
+  "configuration": [
+    "FORCE",
+    "BLOCKSIZE",
+    "TRANSFORM",
+    "LEVEL",
+    "ENTROPY"
+  ],
+  "regionsToProcessedPerformance": {
+    "e7ef7b2e-e1ba-4632-bf96-894db4120908": 93367,
+    "488a778e-a9ea-4b81-8fc4-674f3ee2af38": 46812,
+    "1aa9d94a-ae53-4056-9083-4dda6592f595": 1018763,
+    "f1c78de6-72ac-4ce5-8f22-8d31ef0b839a": 500843831,
+    "b85ed427-b5e1-443f-99dd-82926e080c32": 3185,
+    "54a6e345-5690-4ae8-8907-d83ba638b05e": 3175,
+    "985c2b28-bc5d-4d9a-95a5-db9ddee4c46d": 2332,
+    "program": 26727131,
+    "ce6573cd-8463-4568-9bd0-d718a063ea19": 13694,
+    "b37d7995-7f3c-4055-a7d0-05a81c3a0999": 1569761,
+    "8c61abb7-27b9-42ea-aaea-1a58c034e322": 2268,
+    "a6e4ac3d-1b49-4dd0-ba4e-fac874e4dae2": 48941,
+    "05bc8827-917e-4a6e-8eab-2ff041a53b7f": 2836,
+    "3f428e55-389c-47be-914a-b44e52481f95": 60791082142,
+    "996ec663-8e19-4164-bd69-83866cbd2247": 6450,
+    "7712a065-3d2f-40cb-9c5a-7d9aa778a831": 23704,
+    "de2bec39-1ac4-4077-b730-f7add6ade2d0": 4390,
+    "2c29021f-7f52-40ba-8ae0-cdfb61386275": 38150865,
+    "11a50977-dfe9-48ff-b4bd-f78aad1b286c": 63696,
+    "a6c6d708-67d3-48e8-bf9d-b0cd68dfa9ca": 10084735
+  }
+}

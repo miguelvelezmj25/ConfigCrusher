@@ -69,6 +69,27 @@ public class ConfigCrusherTest {
     }
 
     @Test
+    public void kanzi() throws Exception {
+        String programName = "kanzi";
+        String entry = "kanzi.Run";
+        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi";
+        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
+
+        String[] args = new String[0];
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i10";
+
+        ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
+        approach.compile();
+        PerformanceModel performanceModel = approach.run(args);
+
+        performanceModel.toString();
+    }
+
+    @Test
     public void prevayler() throws Exception {
         String programName = "prevayler";
         String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
@@ -80,7 +101,7 @@ public class ConfigCrusherTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i10";
+        args[2] = "-i1";
 
         ConfigCrusher approach = new ConfigCrusher(programName, srcDir, classDir, entry);
         approach.compile();

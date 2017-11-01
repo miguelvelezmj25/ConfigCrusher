@@ -1,1 +1,9 @@
-{"configuration":["DEEPCOPY","JOURNALSERIALIZER"],"regionsToProcessedPerformance":{"program":25889993304}}
+{
+  "configuration": [
+    "DEEPCOPY",
+    "JOURNALSERIALIZER"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 25889993304
+  }
+}

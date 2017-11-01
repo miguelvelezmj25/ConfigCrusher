@@ -130,7 +130,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //        }
 
         boolean updatedRegions = true;
-//
+
         while(updatedRegions) {
             updatedRegions = this.processMethodsInClasses(classNodes);
             updatedRegions = updatedRegions | this.processGraph();
@@ -565,7 +565,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 if(graph.getDominators().get(regionStartBlock) == null) {
                     System.out.println();
                 }
-
 
 
                 // Continue if the possible inner region is an outer region of the current region

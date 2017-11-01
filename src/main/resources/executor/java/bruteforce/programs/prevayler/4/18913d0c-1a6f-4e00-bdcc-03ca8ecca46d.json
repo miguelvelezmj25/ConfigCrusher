@@ -1,1 +1,9 @@
-{"configuration":["FILEAGETHRESHOLD","FILESIZETHRESHOLD"],"regionsToProcessedPerformance":{"program":14261733799}}
+{
+  "configuration": [
+    "FILEAGETHRESHOLD",
+    "FILESIZETHRESHOLD"
+  ],
+  "regionsToProcessedPerformance": {
+    "program": 14261733799
+  }
+}

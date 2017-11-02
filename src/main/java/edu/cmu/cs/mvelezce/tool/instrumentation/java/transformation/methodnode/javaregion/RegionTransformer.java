@@ -132,10 +132,16 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         boolean updatedRegions = true;
 
         while(updatedRegions) {
-            updatedRegions = this.processMethodsInClasses(classNodes);
+            updatedRegions = this.propagateUpMethodsInClasses(classNodes);
             updatedRegions = updatedRegions | this.processGraph();
 //            updatedRegions = this.processMethodsInClasses(classNodes);
         }
+
+//        while(updatedRegions) {
+//            updatedRegions = this.processMethodsInClasses(classNodes);
+//            updatedRegions = updatedRegions | this.processGraph();
+////            updatedRegions = this.processMethodsInClasses(classNodes);
+//        }
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
         System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
@@ -249,6 +255,33 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @return
      * @throws IOException
      */
+    private boolean propagateUpMethodsInClasses(Set<ClassNode> classNodes) throws IOException {
+        boolean updatedMethods = false;
+
+        for(ClassNode classNode : classNodes) {
+            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+
+            if(methodsToInstrument.isEmpty()) {
+                continue;
+            }
+
+            System.out.println("Transforming class to remove regions " + classNode.name);
+
+            for(MethodNode methodNode : methodsToInstrument) {
+                updatedMethods = updatedMethods | this.propagateUpRegionsInMethod(methodNode);
+            }
+        }
+
+        return updatedMethods;
+    }
+
+    /**
+     * Process the methods to find where the regions are in each of them
+     *
+     * @param classNodes
+     * @return
+     * @throws IOException
+     */
     private boolean processMethodsInClasses(Set<ClassNode> classNodes) throws IOException {
         boolean updatedMethods = false;
 
@@ -267,6 +300,104 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         return updatedMethods;
+    }
+
+    /**
+     *
+     * @param methodNode
+     */
+    private boolean propagateUpRegionsInMethod(MethodNode methodNode) {
+        List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
+
+        if(!this.methodsWithUpdatedIndexes.contains(methodNode)) {
+            this.calculateASMStartIndex(regionsInMethod, methodNode);
+        }
+
+        MethodGraph graph = this.buildMethodGraph(methodNode);
+        Map<MethodBlock, Set<JavaRegion>> blocksToRegionSet = this.matchBlocksToRegionSet(methodNode, graph, regionsInMethod);
+
+//        boolean updatedRegions;
+//        updatedRegions = this.removeInnerRegionsInMethod(methodNode, regionsInMethod);
+//
+//        if(regionsInMethod.size() == 1) {
+//            return updatedRegions;
+//        }
+//
+//        updatedRegions = this.leaveOneRegionInMethod(regionsInMethod);
+//
+//        if(regionsInMethod.size() == 1) {
+//            return updatedRegions;
+//        }
+//
+//        updatedRegions = this.joinConsecutiveRegions(methodNode, regionsInMethod);
+//
+//        if(regionsInMethod.size() == 1) {
+//            return updatedRegions;
+//        }
+//
+//        return updatedRegions;
+
+        throw new RuntimeException("TODO");
+    }
+
+    /**
+     * TODO
+     *
+     * @param methodNode
+     * @param graph
+     * @param regionsInMethod
+     * @return
+     */
+    private Map<MethodBlock, Set<JavaRegion>> matchBlocksToRegionSet(MethodNode methodNode, MethodGraph graph, List<JavaRegion> regionsInMethod) {
+        // Initialize
+        Map<MethodBlock, Set<JavaRegion>> blocksToRegions = new HashMap<>();
+
+        for(MethodBlock block : graph.getBlocks()) {
+            blocksToRegions.put(block, new HashSet<>());
+        }
+
+        // Match instructions to regions
+        Map<AbstractInsnNode, JavaRegion> instructionsToRegions = this.matchInstructionToRegion(methodNode, regionsInMethod);
+
+        // Match blocks to region set. Initially, the set will have only 1 region
+        for(MethodBlock block : graph.getBlocks()) {
+            List<AbstractInsnNode> blockInstructions = block.getInstructions();
+
+            for(Map.Entry<AbstractInsnNode, JavaRegion> instructionToRegion : instructionsToRegions.entrySet()) {
+                if(!blockInstructions.contains(instructionToRegion.getKey())) {
+                    continue;
+                }
+
+                Set<JavaRegion> regions = blocksToRegions.get(block);
+
+                if(!regions.isEmpty()) {
+                    throw new RuntimeException("The region set is not null");
+                }
+
+                blocksToRegions.get(block).add(instructionToRegion.getValue());
+            }
+
+        }
+
+        return blocksToRegions;
+    }
+
+    /**
+     * TODO
+     *
+     * @param methodNode
+     * @param regionsInMethod
+     * @return
+     */
+    private Map<AbstractInsnNode, JavaRegion> matchInstructionToRegion(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
+        InsnList instructions = methodNode.instructions;
+        Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
+
+        for(JavaRegion region : regionsInMethod) {
+            instructionsToRegion.put(instructions.get(region.getStartBytecodeIndex()), region);
+        }
+
+        return instructionsToRegion;
     }
 
     /**

@@ -792,7 +792,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     throw new RuntimeException("Start and end equal");
                 }
                 else if(start.getSuccessors().size() == 1 && start.getSuccessors().iterator().next().equals(end)) {
-                    throw new RuntimeException("Happens when a control flow decision only has 1 successor??????");
+                    throw new RuntimeException("Happens when a control flow decision only has 1 successor? " + start
+                            + " -> " + end);
                 }
                 else if(graph.getExitBlock() == end) {
                     this.endRegionBlocksWithReturn.addAll(end.getPredecessors());

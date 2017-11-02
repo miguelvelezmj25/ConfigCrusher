@@ -48,7 +48,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     private Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
     private Map<SootMethod, Set<Set<String>>> sootMethodToOptionSet = new HashMap<>();
     private Set<MethodBlock> endRegionBlocksWithReturn = new HashSet<>();
-    private Map<MethodNode, Map<MethodBlock, Set<JavaRegion>>> methodToBlockDecisions = new HashMap<>();
+    private Map<MethodNode, LinkedHashMap<MethodBlock, Set<JavaRegion>>> methodToBlockDecisions = new HashMap<>();
 
     public RegionTransformer(String programName, String entryPoint, ClassTransformer classTransformer, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
         super(programName, classTransformer);
@@ -157,11 +157,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //            updatedRegions = this.processMethodsInClasses(classNodes);
         }
 
-//        while(updatedRegions) {
-//            updatedRegions = this.processMethodsInClasses(classNodes);
-//            updatedRegions = updatedRegions | this.processGraph();
-////            updatedRegions = this.processMethodsInClasses(classNodes);
-//        }
+        this.instrument(classNodes);
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
         System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
@@ -394,6 +390,47 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     /**
+     * TODO
+     */
+    private void instrument(Set<ClassNode> classNodes) {
+        List<ClassNode> classWorklist = new ArrayList<>();
+        classWorklist.addAll(classNodes);
+
+        while(!classWorklist.isEmpty()) {
+            ClassNode classNode = classWorklist.remove(0);
+
+            List<MethodNode> methodWorklist = new ArrayList<>();
+            methodWorklist.addAll(classNode.methods);
+
+            while(!methodWorklist.isEmpty()) {
+                MethodNode methodNode = methodWorklist.remove(0);
+
+                this.instrument(methodNode);
+            }
+
+//        for(ClassNode classNode : classNodes) {
+////            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+////
+////            if(methodsToInstrument.isEmpty()) {
+////                continue;
+////            }
+////
+////            System.out.println("Transforming class to remove regions " + classNode.name);
+//
+//            for(MethodNode methodNode : classNode.methods) {
+//                if(this.methodToBlockDecisions.)
+//                updatedMethods = updatedMethods | this.propagateUpRegionsInMethod(methodNode);
+//            }
+//        }
+        }
+    }
+
+    private void instrument(MethodNode methodNode) {
+        MethodGraph graph = this.buildMethodGraph(methodNode);
+
+    }
+
+    /**
      * Process the methods to find where the regions are in each of them
      *
      * @param classNodes
@@ -430,7 +467,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.calculateASMStartIndex(regionsInMethod, methodNode);
         }
 
-        Map<MethodBlock, Set<JavaRegion>> blocksToRegionSet = this.methodToBlockDecisions.get(methodNode);
+        LinkedHashMap<MethodBlock, Set<JavaRegion>> blocksToRegionSet = this.methodToBlockDecisions.get(methodNode);
 
         if(blocksToRegionSet == null) {
             blocksToRegionSet = this.matchBlocksToRegionSet(methodNode, regionsInMethod);
@@ -501,13 +538,30 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @param regionsInMethod
      * @return
      */
-    private Map<MethodBlock, Set<JavaRegion>> matchBlocksToRegionSet(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
+    private LinkedHashMap<MethodBlock, Set<JavaRegion>> matchBlocksToRegionSet(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
         // Initialize
         MethodGraph graph = this.buildMethodGraph(methodNode);
-        Map<MethodBlock, Set<JavaRegion>> blocksToRegions = new HashMap<>();
+        InsnList instructions = methodNode.instructions;
 
-        for(MethodBlock block : graph.getBlocks()) {
-            blocksToRegions.put(block, new HashSet<>());
+        List<MethodBlock> blocks = new ArrayList<>();
+        blocks.addAll(graph.getBlocks());
+        blocks.remove(graph.getEntryBlock());
+        blocks.remove(graph.getExitBlock());
+
+        blocks.sort((o1, o2) -> {
+            int o1Index = instructions.indexOf(o1.getInstructions().get(0));
+            int o2Index = instructions.indexOf(o2.getInstructions().get(0));
+
+            return Integer.compare(o1Index, o2Index);
+        });
+
+        blocks.add(0, graph.getEntryBlock());
+        blocks.add(graph.getExitBlock());
+
+        LinkedHashMap<MethodBlock, Set<JavaRegion>> blocksToRegionSet = new LinkedHashMap<>();
+
+        for(MethodBlock block : blocks) {
+            blocksToRegionSet.put(block, new HashSet<>());
         }
 
         // Match instructions to regions
@@ -522,18 +576,18 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     continue;
                 }
 
-                Set<JavaRegion> regions = blocksToRegions.get(block);
+                Set<JavaRegion> regions = blocksToRegionSet.get(block);
 
                 if(!regions.isEmpty()) {
                     throw new RuntimeException("The region set is not null");
                 }
 
-                blocksToRegions.get(block).add(instructionToRegion.getValue());
+                blocksToRegionSet.get(block).add(instructionToRegion.getValue());
             }
 
         }
 
-        return blocksToRegions;
+        return blocksToRegionSet;
     }
 
     /**

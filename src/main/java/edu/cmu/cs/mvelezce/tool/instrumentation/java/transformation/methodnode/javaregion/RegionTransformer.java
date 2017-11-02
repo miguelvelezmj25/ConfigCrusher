@@ -303,7 +303,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     /**
-     *
      * @param methodNode
      */
     private boolean propagateUpRegionsInMethod(MethodNode methodNode) {
@@ -313,8 +312,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.calculateASMStartIndex(regionsInMethod, methodNode);
         }
 
-        MethodGraph graph = this.buildMethodGraph(methodNode);
-        Map<MethodBlock, Set<JavaRegion>> blocksToRegionSet = this.matchBlocksToRegionSet(methodNode, graph, regionsInMethod);
+        Map<MethodBlock, Set<JavaRegion>> blocksToRegionSet = this.matchBlocksToRegionSet(methodNode, regionsInMethod);
+        this.propagateUpRegions(methodNode, blocksToRegionSet);
 
 //        boolean updatedRegions;
 //        updatedRegions = this.removeInnerRegionsInMethod(methodNode, regionsInMethod);
@@ -340,6 +339,55 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         throw new RuntimeException("TODO");
     }
 
+    private void propagateUpRegions(MethodNode methodNode, Map<MethodBlock, Set<JavaRegion>> blocksToRegionSet) {
+        MethodGraph graph = this.buildMethodGraph(methodNode);
+        MethodBlock alphaBlock = graph.getEntryBlock();
+        List<MethodBlock> worklist = new ArrayList<>();
+        worklist.addAll(blocksToRegionSet.keySet());
+
+        while(!worklist.isEmpty()) {
+            MethodBlock a = worklist.remove(0);
+
+            if(blocksToRegionSet.get(a).isEmpty()) {
+                continue;
+            }
+
+            MethodBlock b = graph.getImmediateDominator(a);
+
+            if(b == alphaBlock) {
+                continue;
+            }
+
+            Set<JavaRegion> bRegions = blocksToRegionSet.get(b);
+            Set<JavaRegion> aRegions = blocksToRegionSet.get(a);
+            Set<String> bDecision = this.getDecision(bRegions);
+            Set<String> aDecision = this.getDecision(aRegions);
+
+            if(!aDecision.containsAll(bDecision)) {
+                continue;
+            }
+
+            for(MethodBlock p : a.getPredecessors()) {
+                blocksToRegionSet.get(p).addAll(aRegions);
+                worklist.add(p);
+            }
+        }
+    }
+
+    private Set<String> getDecision(Set<JavaRegion> regions) {
+        Set<String> decision = new HashSet<>();
+
+        for(JavaRegion region : regions) {
+            Set<Set<String>> optionSet = this.regionsToOptionSet.get(region);
+
+            for(Set<String> options : optionSet) {
+                decision.addAll(options);
+            }
+        }
+
+        return decision;
+    }
+
     /**
      * TODO
      *
@@ -348,8 +396,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @param regionsInMethod
      * @return
      */
-    private Map<MethodBlock, Set<JavaRegion>> matchBlocksToRegionSet(MethodNode methodNode, MethodGraph graph, List<JavaRegion> regionsInMethod) {
+    private Map<MethodBlock, Set<JavaRegion>> matchBlocksToRegionSet(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
         // Initialize
+        MethodGraph graph = this.buildMethodGraph(methodNode);
         Map<MethodBlock, Set<JavaRegion>> blocksToRegions = new HashMap<>();
 
         for(MethodBlock block : graph.getBlocks()) {

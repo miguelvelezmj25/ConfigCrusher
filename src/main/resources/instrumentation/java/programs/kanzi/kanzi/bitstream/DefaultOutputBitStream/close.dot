@@ -1,0 +1,22 @@
+digraph close {
+node [shape=record];
+500440291 [label="L5\lLINENUMBER 172 L5\lFRAME SAME1 java/io/IOException\lASTORE 5\lL19\lLINENUMBER 173 L19\lNEW kanzi/BitStreamException\lDUP\lALOAD 5\lICONST_1\lINVOKESPECIAL kanzi/BitStreamException.\<init\> (Ljava/lang/Throwable;I)V\lATHROW\l"];
+1576291747 [label="TRYCATCHBLOCK L0 L1 L2 kanzi/BitStreamException\lTRYCATCHBLOCK L3 L4 L5 java/io/IOException\lL6\lLINENUMBER 148 L6\lLDC \"dd7e65af-682a-447e-bf8d-9cd46b0211d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL kanzi/bitstream/DefaultOutputBitStream.isClosed ()Z\lICONST_1\lIF_ICMPNE L7\l"];
+103825204 [label="L18\lLINENUMBER 176 L18\lFRAME SAME\lALOAD 0\lICONST_1\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.closed : Z\lL20\lLINENUMBER 177 L20\lALOAD 0\lICONST_0\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.position : I\lL21\lLINENUMBER 181 L21\lALOAD 0\lICONST_M1\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\lL22\lLINENUMBER 182 L22\lALOAD 0\lBIPUSH 8\lNEWARRAY T_BYTE\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.buffer : [B\lL23\lLINENUMBER 183 L23\lALOAD 0\lDUP\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.written : J\lLDC 64\lLSUB\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.written : J\lL24\lLINENUMBER 184 L24\lLDC \"dd7e65af-682a-447e-bf8d-9cd46b0211d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1276712750 [label="L2\lLINENUMBER 162 L2\lFRAME FULL [kanzi/bitstream/DefaultOutputBitStream I I J] [kanzi/BitStreamException]\lASTORE 5\lL14\lLINENUMBER 164 L14\lALOAD 0\lILOAD 2\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.position : I\lL15\lLINENUMBER 165 L15\lALOAD 0\lILOAD 1\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\lL16\lLINENUMBER 166 L16\lALOAD 0\lLLOAD 3\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.current : J\lL17\lLINENUMBER 167 L17\lALOAD 5\lATHROW\l"];
+864013751 [label="L3\lLINENUMBER 171 L3\lFRAME APPEND [I]\lALOAD 0\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.os : Ljava/io/OutputStream;\lINVOKEVIRTUAL java/io/OutputStream.flush ()V\lL4\lLINENUMBER 174 L4\lGOTO L18\l"];
+1448719565 [label="L8\lLINENUMBER 149 L8\lLDC \"dd7e65af-682a-447e-bf8d-9cd46b0211d7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1723177691 [label="L7\lLINENUMBER 152 L7\lFRAME SAME\lALOAD 0\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\lISTORE 1\lL9\lLINENUMBER 153 L9\lALOAD 0\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.position : I\lISTORE 2\lL10\lLINENUMBER 154 L10\lALOAD 0\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.current : J\lLSTORE 3\lL0\lLINENUMBER 158 L0\lBIPUSH 63\lALOAD 0\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\lISUB\lBIPUSH 7\lIADD\lICONST_3\lISHR\lISTORE 5\lL11\lLINENUMBER 159 L11\lALOAD 0\lINVOKESPECIAL kanzi/bitstream/DefaultOutputBitStream.pushCurrent ()V\lL12\lLINENUMBER 160 L12\lALOAD 0\lDUP\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.position : I\lBIPUSH 8\lILOAD 5\lISUB\lISUB\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.position : I\lL13\lLINENUMBER 161 L13\lALOAD 0\lINVOKESPECIAL kanzi/bitstream/DefaultOutputBitStream.flush ()V\lL1\lLINENUMBER 168 L1\lGOTO L3\l"];
+entry;
+exit;
+entry -> 1576291747;
+1576291747 -> 1448719565;
+1576291747 -> 1723177691;
+103825204 -> exit;
+864013751 -> 103825204;
+1448719565 -> exit;
+1723177691 -> 864013751;
+1576291747[fontcolor="purple", penwidth=3, color="purple"];
+103825204[fontcolor="purple", penwidth=3, color="purple"];
+1448719565[fontcolor="purple", penwidth=3, color="purple"];
+}

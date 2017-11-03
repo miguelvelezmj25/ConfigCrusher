@@ -1,17 +1,17 @@
 digraph bar {
 node [shape=record];
-420362581 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lL3\lLINENUMBER 42 L3\lLDC \"582b1d76-0ae4-4d25-b686-85014855902f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC edu/cmu/cs/mvelezce/Regions.D : Z\lIFEQ L4\l"];
-1983619087 [label="L4\lLINENUMBER 49 L4\lFRAME SAME\lLDC \"582b1d76-0ae4-4d25-b686-85014855902f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1851727440 [label="L0\lLINENUMBER 44 L0\lLDC 100\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL1\lLINENUMBER 47 L1\lGOTO L4\l"];
-237480109 [label="L2\lLINENUMBER 45 L2\lFRAME SAME1 java/lang/InterruptedException\lASTORE 0\lL5\lLINENUMBER 46 L5\lALOAD 0\lINVOKEVIRTUAL java/lang/InterruptedException.printStackTrace ()V\l"];
+1860047255 [label="L4\lLINENUMBER 49 L4\lFRAME SAME\lLDC \"582b1d76-0ae4-4d25-b686-85014855902f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+802773836 [label="L2\lLINENUMBER 45 L2\lFRAME SAME1 java/lang/InterruptedException\lASTORE 0\lL5\lLINENUMBER 46 L5\lALOAD 0\lINVOKEVIRTUAL java/lang/InterruptedException.printStackTrace ()V\l"];
+2018270694 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lL3\lLINENUMBER 42 L3\lLDC \"582b1d76-0ae4-4d25-b686-85014855902f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC edu/cmu/cs/mvelezce/Regions.D : Z\lIFEQ L4\l"];
+1372571417 [label="L0\lLINENUMBER 44 L0\lLDC 100\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL1\lLINENUMBER 47 L1\lGOTO L4\l"];
 entry;
 exit;
-entry -> 420362581;
-420362581 -> 1983619087;
-420362581 -> 1851727440;
-1983619087 -> exit;
-1851727440 -> 1983619087;
-237480109 -> 1983619087;
-420362581[fontcolor="purple", penwidth=3, color="purple"];
-1983619087[fontcolor="purple", penwidth=3, color="purple"];
+1860047255 -> exit;
+entry -> 2018270694;
+802773836 -> 1860047255;
+2018270694 -> 1860047255;
+2018270694 -> 1372571417;
+1372571417 -> 1860047255;
+1860047255[fontcolor="purple", penwidth=3, color="purple"];
+2018270694[fontcolor="purple", penwidth=3, color="purple"];
 }

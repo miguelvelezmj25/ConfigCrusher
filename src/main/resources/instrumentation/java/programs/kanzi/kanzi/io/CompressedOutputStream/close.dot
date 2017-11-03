@@ -1,0 +1,31 @@
+digraph close {
+node [shape=record];
+1757983324 [label="L2\lLINENUMBER 383 L2\lFRAME SAME1 kanzi/BitStreamException\lASTORE 1\lL9\lLINENUMBER 384 L9\lNEW kanzi/io/IOException\lDUP\lALOAD 1\lINVOKEVIRTUAL kanzi/BitStreamException.getMessage ()Ljava/lang/String;\lALOAD 1\lINVOKEVIRTUAL kanzi/BitStreamException.getErrorCode ()I\lINVOKESPECIAL kanzi/io/IOException.\<init\> (Ljava/lang/String;I)V\lATHROW\l"];
+1759981581 [label="L4\lLINENUMBER 375 L4\lFRAME SAME\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.sa : Lkanzi/SliceByteArray;\lGETFIELD kanzi/SliceByteArray.index : I\lIFLE L0\l"];
+1796234590 [label="TRYCATCHBLOCK L0 L1 L2 kanzi/BitStreamException\lL3\lLINENUMBER 371 L3\lLDC \"efdfe41f-51bf-40ed-8b67-83fab0363f6d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.closed : Ljava/util/concurrent/atomic/AtomicBoolean;\lICONST_1\lINVOKEVIRTUAL java/util/concurrent/atomic/AtomicBoolean.getAndSet (Z)Z\lICONST_1\lIF_ICMPNE L4\l"];
+2132142410 [label="L0\lLINENUMBER 381 L0\lFRAME SAME\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.obs : Lkanzi/OutputBitStream;\lLDC 128\lBIPUSH 8\lINVOKEINTERFACE kanzi/OutputBitStream.writeBits (JI)I\lPOP\lL7\lLINENUMBER 382 L7\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.obs : Lkanzi/OutputBitStream;\lINVOKEINTERFACE kanzi/OutputBitStream.close ()V\lL1\lLINENUMBER 385 L1\lGOTO L8\l"];
+952584630 [label="L15\lLINENUMBER 397 L15\lFRAME SAME\lLDC \"efdfe41f-51bf-40ed-8b67-83fab0363f6d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1436506373 [label="L5\lLINENUMBER 372 L5\lLDC \"efdfe41f-51bf-40ed-8b67-83fab0363f6d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+377921883 [label="L6\lLINENUMBER 376 L6\lALOAD 0\lINVOKESPECIAL kanzi/io/CompressedOutputStream.processBlock ()V\l"];
+468233100 [label="L16\lLINENUMBER 396 L16\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.buffers : [Lkanzi/SliceByteArray;\lILOAD 1\lNEW kanzi/SliceByteArray\lDUP\lGETSTATIC kanzi/io/CompressedOutputStream.EMPTY_BYTE_ARRAY : [B\lICONST_0\lINVOKESPECIAL kanzi/SliceByteArray.\<init\> ([BI)V\lAASTORE\lL17\lLINENUMBER 395 L17\lIINC 1 1\lGOTO L14\l"];
+1202752734 [label="L8\lLINENUMBER 387 L8\lFRAME SAME\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.listeners : Ljava/util/List;\lINVOKEINTERFACE java/util/List.clear ()V\lL10\lLINENUMBER 391 L10\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.sa : Lkanzi/SliceByteArray;\lGETSTATIC kanzi/io/CompressedOutputStream.EMPTY_BYTE_ARRAY : [B\lPUTFIELD kanzi/SliceByteArray.array : [B\lL11\lLINENUMBER 392 L11\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.sa : Lkanzi/SliceByteArray;\lICONST_0\lPUTFIELD kanzi/SliceByteArray.length : I\lL12\lLINENUMBER 393 L12\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.sa : Lkanzi/SliceByteArray;\lICONST_M1\lPUTFIELD kanzi/SliceByteArray.index : I\lL13\lLINENUMBER 395 L13\lICONST_0\lISTORE 1\l"];
+1484587603 [label="L14\lFRAME APPEND [I]\lILOAD 1\lALOAD 0\lGETFIELD kanzi/io/CompressedOutputStream.buffers : [Lkanzi/SliceByteArray;\lARRAYLENGTH\lIF_ICMPGE L15\l"];
+entry;
+exit;
+952584630 -> exit;
+1436506373 -> exit;
+468233100 -> 1484587603;
+entry -> 1796234590;
+1759981581 -> 2132142410;
+1759981581 -> 377921883;
+1796234590 -> 1759981581;
+1796234590 -> 1436506373;
+2132142410 -> 1202752734;
+377921883 -> 2132142410;
+1202752734 -> 1484587603;
+1484587603 -> 952584630;
+1484587603 -> 468233100;
+1796234590[fontcolor="purple", penwidth=3, color="purple"];
+952584630[fontcolor="purple", penwidth=3, color="purple"];
+1436506373[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,15 +1,15 @@
 digraph woo {
 node [shape=record];
-70510380 [label="L1\lLINENUMBER 39 L1\lFRAME SAME\lLDC \"f8659cfa-d71c-43af-a040-28299e798ad8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-150269767 [label="L2\lLINENUMBER 37 L2\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions.bar ()V\l"];
-228374628 [label="L0\lLINENUMBER 36 L0\lLDC \"f8659cfa-d71c-43af-a040-28299e798ad8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC edu/cmu/cs/mvelezce/Regions.C : Z\lIFEQ L1\l"];
+1677035152 [label="L1\lLINENUMBER 39 L1\lFRAME SAME\lLDC \"f8659cfa-d71c-43af-a040-28299e798ad8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+148611801 [label="L0\lLINENUMBER 36 L0\lLDC \"f8659cfa-d71c-43af-a040-28299e798ad8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC edu/cmu/cs/mvelezce/Regions.C : Z\lIFEQ L1\l"];
+285267896 [label="L2\lLINENUMBER 37 L2\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions.bar ()V\l"];
 entry;
 exit;
-entry -> 228374628;
-70510380 -> exit;
-150269767 -> 70510380;
-228374628 -> 70510380;
-228374628 -> 150269767;
-70510380[fontcolor="purple", penwidth=3, color="purple"];
-228374628[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 148611801;
+1677035152 -> exit;
+148611801 -> 1677035152;
+148611801 -> 285267896;
+285267896 -> 1677035152;
+1677035152[fontcolor="purple", penwidth=3, color="purple"];
+148611801[fontcolor="purple", penwidth=3, color="purple"];
 }

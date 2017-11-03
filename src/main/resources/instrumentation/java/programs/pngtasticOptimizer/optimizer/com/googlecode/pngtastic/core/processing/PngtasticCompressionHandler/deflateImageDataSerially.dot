@@ -1,0 +1,28 @@
+digraph deflateImageDataSerially {
+node [shape=record];
+1801810139 [label="L9\lFRAME APPEND [java/util/List java/util/Iterator]\lALOAD 6\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L10\l"];
+78695250 [label="ALOAD 6\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST java/lang/Integer\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lISTORE 7\lL0\lLINENUMBER 104 L0\lALOAD 4\lALOAD 0\lALOAD 1\lILOAD 7\lALOAD 2\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler.deflateImageData (Loptimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream;ILjava/lang/Integer;)[B\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL1\lLINENUMBER 107 L1\lGOTO L11\l"];
+484233696 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Throwable\lL3\lLINENUMBER 97 L3\lLDC \"4f15fed5-f544-45d1-857b-24e9ddb1d46a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lNEW java/util/ArrayList\lDUP\lINVOKESPECIAL java/util/ArrayList.\<init\> ()V\lASTORE 4\lL4\lLINENUMBER 99 L4\lALOAD 3\lIFNONNULL L5\l"];
+2116536984 [label="L5\lFRAME APPEND [java/util/ArrayList]\lALOAD 3\lL7\lLINENUMBER 100 L7\lINVOKESTATIC java/util/Collections.singletonList (Ljava/lang/Object;)Ljava/util/List;\l"];
+1042956212 [label="L6\lFRAME SAME1 java/util/List\lASTORE 5\lL8\lLINENUMBER 102 L8\lALOAD 5\lINVOKEINTERFACE java/util/List.iterator ()Ljava/util/Iterator;\lASTORE 6\l"];
+1492134288 [label="GETSTATIC optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler.compressionStrategies : Ljava/util/List;\lGOTO L6\l"];
+1574297341 [label="L11\lLINENUMBER 108 L11\lFRAME SAME\lGOTO L9\l"];
+1141090880 [label="L10\lLINENUMBER 110 L10\lFRAME CHOP 1\lALOAD 4\lLDC \"4f15fed5-f544-45d1-857b-24e9ddb1d46a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+854429036 [label="L2\lLINENUMBER 105 L2\lFRAME FULL [optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler optimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream java/lang/Integer java/lang/Integer java/util/ArrayList java/util/List java/util/Iterator I] [java/lang/Throwable]\lASTORE 8\lL12\lLINENUMBER 106 L12\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/PngtasticCompressionHandler.log : Loptimizer/com/googlecode/pngtastic/core/Logger;\lLDC \"Uncaught Exception: %s\"\lICONST_1\lANEWARRAY java/lang/Object\lDUP\lICONST_0\lALOAD 8\lINVOKEVIRTUAL java/lang/Throwable.getMessage ()Ljava/lang/String;\lAASTORE\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/Logger.error (Ljava/lang/String;[Ljava/lang/Object;)V\l"];
+entry;
+exit;
+entry -> 484233696;
+1801810139 -> 78695250;
+1801810139 -> 1141090880;
+78695250 -> 1574297341;
+484233696 -> 2116536984;
+484233696 -> 1492134288;
+2116536984 -> 1042956212;
+1042956212 -> 1801810139;
+1492134288 -> 1042956212;
+1574297341 -> 1801810139;
+1141090880 -> exit;
+854429036 -> 1574297341;
+484233696[fontcolor="purple", penwidth=3, color="purple"];
+1141090880[fontcolor="purple", penwidth=3, color="purple"];
+}

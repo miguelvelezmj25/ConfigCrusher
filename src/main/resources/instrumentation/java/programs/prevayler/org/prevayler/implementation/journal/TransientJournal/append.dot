@@ -1,17 +1,17 @@
 digraph append {
 node [shape=record];
-1824016774 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 23 L3\lLDC \"39c74760-797b-4be0-9ebc-f207f24c38a7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransactionInitialized : Z\lIFNE L4\l"];
-1151066697 [label="L4\lLINENUMBER 27 L4\lFRAME SAME\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.startTurn ()V\lL0\lLINENUMBER 29 L0\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lI2L\lLADD\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.checkSystemVersion (J)V\lL6\lLINENUMBER 30 L6\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.timestamp ()Lorg/prevayler/implementation/TransactionTimestamp;\lINVOKEVIRTUAL org/prevayler/implementation/TransactionTimestamp.cleanCopy ()Lorg/prevayler/implementation/TransactionTimestamp;\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL1\lLINENUMBER 32 L1\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lL7\lLINENUMBER 33 L7\lGOTO L8\l"];
-926299891 [label="L2\lLINENUMBER 32 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 2\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lALOAD 2\lATHROW\l"];
-426551329 [label="L8\lLINENUMBER 34 L8\lFRAME SAME\lLDC \"39c74760-797b-4be0-9ebc-f207f24c38a7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-694971585 [label="L5\lLINENUMBER 24 L5\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Journal.update() has to be called at least once before Journal.journal().\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+748950518 [label="L5\lLINENUMBER 24 L5\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Journal.update() has to be called at least once before Journal.journal().\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+926299891 [label="L4\lLINENUMBER 27 L4\lFRAME SAME\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.startTurn ()V\lL0\lLINENUMBER 29 L0\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lI2L\lLADD\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.checkSystemVersion (J)V\lL6\lLINENUMBER 30 L6\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.timestamp ()Lorg/prevayler/implementation/TransactionTimestamp;\lINVOKEVIRTUAL org/prevayler/implementation/TransactionTimestamp.cleanCopy ()Lorg/prevayler/implementation/TransactionTimestamp;\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL1\lLINENUMBER 32 L1\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lL7\lLINENUMBER 33 L7\lGOTO L8\l"];
+426551329 [label="TRYCATCHBLOCK L0 L1 L2 null\lL3\lLINENUMBER 23 L3\lLDC \"39c74760-797b-4be0-9ebc-f207f24c38a7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransactionInitialized : Z\lIFNE L4\l"];
+439744922 [label="L2\lLINENUMBER 32 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 2\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lALOAD 2\lATHROW\l"];
+1726249159 [label="L8\lLINENUMBER 34 L8\lFRAME SAME\lLDC \"39c74760-797b-4be0-9ebc-f207f24c38a7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 1824016774;
-1824016774 -> 1151066697;
-1824016774 -> 694971585;
-1151066697 -> 426551329;
-426551329 -> exit;
-1824016774[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 426551329;
+926299891 -> 1726249159;
+426551329 -> 748950518;
+426551329 -> 926299891;
+1726249159 -> exit;
 426551329[fontcolor="purple", penwidth=3, color="purple"];
+1726249159[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -104,6 +104,9 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
 
     // TODO make abstract and call from super method
     public Map<Region, Map<Set<String>, Long>> processPerformance() {
+        Set<String> h = new HashSet<>();
+        h.add("FILEAGETHRESHOLD");
+
         Map<Region, Map<Set<String>, Set<Long>>> regionsToPerformanceTable = new HashMap<>();
 
         for(Map.Entry<Region, Set<Set<String>>> regionToOptionSet : this.getRegionsToOptionSet().entrySet()) {
@@ -131,11 +134,19 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
                         continue;
                     }
 
+                    if(regionToOptionSet.getKey().getRegionID().contains("b0983") && optionValueInPerfEntry.equals(h)) {
+                        System.out.println();
+                    }
+
                     regionTime += regionToProcessedPerformance.getValue();
                 }
 
                 if(!optionValuesToPerformances.containsKey(optionValueInPerfEntry)) {
                     optionValuesToPerformances.put(optionValueInPerfEntry, new HashSet<>());
+                }
+
+                if(regionToOptionSet.getKey().getRegionID().contains("b0983") && optionValueInPerfEntry.equals(h)) {
+                    System.out.println();
                 }
 
                 optionValuesToPerformances.get(optionValueInPerfEntry).add(regionTime);

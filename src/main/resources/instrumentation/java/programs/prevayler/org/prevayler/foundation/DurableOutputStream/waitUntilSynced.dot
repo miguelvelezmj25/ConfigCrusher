@@ -1,0 +1,37 @@
+digraph waitUntilSynced {
+node [shape=record];
+2091385571 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lTRYCATCHBLOCK L4 L5 L6 java/io/IOException\lTRYCATCHBLOCK L7 L8 L9 null\lTRYCATCHBLOCK L9 L10 L9 null\lL11\lLINENUMBER 173 L11\lLDC \"7b9910f4-7867-4f25-ae93-2d3bc974cfd9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._syncLock : Ljava/lang/Object;\lDUP\lASTORE 2\lMONITORENTER\lL7\lLINENUMBER 174 L7\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._objectsSynced : I\lILOAD 1\lIF_ICMPGE L12\l"];
+880633989 [label="L2\lFRAME SAME1 java/lang/Throwable\lASTORE 6\lALOAD 4\lMONITOREXIT\lL3\lALOAD 6\lATHROW\l"];
+1791217204 [label="L6\lLINENUMBER 204 L6\lFRAME SAME1 java/io/IOException\lASTORE 4\lL26\lLINENUMBER 205 L26\lALOAD 0\lINVOKESPECIAL org/prevayler/foundation/DurableOutputStream.internalClose ()V\lL27\lLINENUMBER 206 L27\lALOAD 4\lATHROW\l"];
+1728131769 [label="L4\lLINENUMBER 190 L4\lFRAME FULL [org/prevayler/foundation/DurableOutputStream I java/lang/Object I java/lang/Object java/io/ByteArrayOutputStream] []\lALOAD 0\lINVOKESPECIAL org/prevayler/foundation/DurableOutputStream.preallocate ()V\lL20\lLINENUMBER 197 L20\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._inactive : Ljava/io/ByteArrayOutputStream;\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileOutputStream : Ljava/io/FileOutputStream;\lINVOKEVIRTUAL java/io/ByteArrayOutputStream.writeTo (Ljava/io/OutputStream;)V\lL21\lLINENUMBER 198 L21\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._inactive : Ljava/io/ByteArrayOutputStream;\lINVOKEVIRTUAL java/io/ByteArrayOutputStream.reset ()V\lL22\lLINENUMBER 199 L22\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileOutputStream : Ljava/io/FileOutputStream;\lINVOKEVIRTUAL java/io/FileOutputStream.flush ()V\lL23\lLINENUMBER 201 L23\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._journalDiskSync : Z\lIFEQ L5\l"];
+313477108 [label="L9\lFRAME SAME1 java/lang/Throwable\lASTORE 7\lALOAD 2\lMONITOREXIT\lL10\lALOAD 7\lATHROW\l"];
+1824643707 [label="L24\lLINENUMBER 202 L24\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileChannel : Ljava/nio/channels/FileChannel;\lICONST_0\lINVOKEVIRTUAL java/nio/channels/FileChannel.force (Z)V\l"];
+366154707 [label="L12\lLINENUMBER 212 L12\lFRAME CHOP 3\lALOAD 2\lMONITOREXIT\lL8\lGOTO L29\l"];
+866624970 [label="L5\lLINENUMBER 207 L5\lFRAME SAME\lGOTO L25\l"];
+70885616 [label="L25\lLINENUMBER 209 L25\lFRAME SAME\lALOAD 0\lILOAD 3\lPUTFIELD org/prevayler/foundation/DurableOutputStream._objectsSynced : I\lL28\lLINENUMBER 210 L28\lALOAD 0\lDUP\lGETFIELD org/prevayler/foundation/DurableOutputStream._fileSyncCount : I\lICONST_1\lIADD\lPUTFIELD org/prevayler/foundation/DurableOutputStream._fileSyncCount : I\l"];
+96341172 [label="L14\lLINENUMBER 181 L14\lFRAME APPEND [java/lang/Object T java/lang/Object]\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._active : Ljava/io/ByteArrayOutputStream;\lASTORE 5\lL16\lLINENUMBER 182 L16\lALOAD 0\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._inactive : Ljava/io/ByteArrayOutputStream;\lPUTFIELD org/prevayler/foundation/DurableOutputStream._active : Ljava/io/ByteArrayOutputStream;\lL17\lLINENUMBER 183 L17\lALOAD 0\lALOAD 5\lPUTFIELD org/prevayler/foundation/DurableOutputStream._inactive : Ljava/io/ByteArrayOutputStream;\lL18\lLINENUMBER 185 L18\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._objectsWritten : I\lISTORE 3\lL19\lLINENUMBER 186 L19\lALOAD 4\lMONITOREXIT\lL1\lGOTO L4\l"];
+1682227027 [label="L29\lLINENUMBER 213 L29\lFRAME SAME\lLDC \"7b9910f4-7867-4f25-ae93-2d3bc974cfd9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1759106483 [label="L13\lLINENUMBER 176 L13\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._writeLock : Ljava/lang/Object;\lDUP\lASTORE 4\lMONITORENTER\lL0\lLINENUMBER 177 L0\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._closed : Z\lIFEQ L14\l"];
+960346618 [label="L15\lLINENUMBER 178 L15\lNEW java/io/IOException\lDUP\lLDC \"already closed\"\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+2091385571 -> 366154707;
+2091385571 -> 1759106483;
+880633989 -> 313477108;
+1791217204 -> 313477108;
+1728131769 -> 1824643707;
+1728131769 -> 866624970;
+entry -> 2091385571;
+1824643707 -> 866624970;
+366154707 -> 1682227027;
+866624970 -> 70885616;
+70885616 -> 366154707;
+96341172 -> 1728131769;
+1682227027 -> exit;
+1759106483 -> 96341172;
+1759106483 -> 960346618;
+960346618 -> 880633989;
+960346618 -> 313477108;
+2091385571[fontcolor="purple", penwidth=3, color="purple"];
+1682227027[fontcolor="purple", penwidth=3, color="purple"];
+}

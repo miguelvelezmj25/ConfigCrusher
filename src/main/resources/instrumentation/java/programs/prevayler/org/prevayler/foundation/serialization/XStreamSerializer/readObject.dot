@@ -1,0 +1,17 @@
+digraph readObject {
+node [shape=record];
+406477119 [label="L0\lLINENUMBER 60 L0\lLDC \"cc25cd16-991a-4e09-983b-0e4529f0017d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL org/prevayler/foundation/serialization/XStreamSerializer.getXStream ()Lcom/thoughtworks/xstream/XStream;\lALOAD 0\lGETFIELD org/prevayler/foundation/serialization/XStreamSerializer._encoding : Ljava/lang/String;\lIFNONNULL L1\l"];
+844504277 [label="L2\lFRAME FULL [org/prevayler/foundation/serialization/XStreamSerializer java/io/InputStream] [com/thoughtworks/xstream/XStream java/io/InputStreamReader]\lINVOKEVIRTUAL com/thoughtworks/xstream/XStream.fromXML (Ljava/io/Reader;)Ljava/lang/Object;\lLDC \"cc25cd16-991a-4e09-983b-0e4529f0017d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+433133781 [label="L1\lFRAME SAME1 com/thoughtworks/xstream/XStream\lNEW java/io/InputStreamReader\lDUP\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/foundation/serialization/XStreamSerializer._encoding : Ljava/lang/String;\lINVOKESPECIAL java/io/InputStreamReader.\<init\> (Ljava/io/InputStream;Ljava/lang/String;)V\l"];
+2044438780 [label="NEW java/io/InputStreamReader\lDUP\lALOAD 1\lINVOKESPECIAL java/io/InputStreamReader.\<init\> (Ljava/io/InputStream;)V\lGOTO L2\l"];
+entry;
+exit;
+entry -> 406477119;
+406477119 -> 433133781;
+406477119 -> 2044438780;
+844504277 -> exit;
+433133781 -> 844504277;
+2044438780 -> 844504277;
+406477119[fontcolor="purple", penwidth=3, color="purple"];
+844504277[fontcolor="purple", penwidth=3, color="purple"];
+}

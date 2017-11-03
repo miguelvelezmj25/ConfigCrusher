@@ -1,0 +1,14 @@
+digraph checkSystemVersion {
+node [shape=record];
+2039034978 [label="L1\lLINENUMBER 28 L1\lFRAME SAME\lLDC \"8674e541-e504-4ab8-8c78-ac7600f2cb13\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1480343916 [label="L2\lLINENUMBER 26 L2\lNEW java/lang/IllegalStateException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Attempted to process \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD org/prevayler/implementation/TransactionGuide._transactionTimestamp : Lorg/prevayler/implementation/TransactionTimestamp;\lINVOKEVIRTUAL org/prevayler/implementation/TransactionTimestamp.systemVersion ()J\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \" when ready for \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1928115997 [label="L0\lLINENUMBER 25 L0\lLDC \"8674e541-e504-4ab8-8c78-ac7600f2cb13\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/TransactionGuide._transactionTimestamp : Lorg/prevayler/implementation/TransactionTimestamp;\lINVOKEVIRTUAL org/prevayler/implementation/TransactionTimestamp.systemVersion ()J\lLLOAD 1\lLCMP\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 1928115997;
+2039034978 -> exit;
+1928115997 -> 2039034978;
+1928115997 -> 1480343916;
+2039034978[fontcolor="purple", penwidth=3, color="purple"];
+1928115997[fontcolor="purple", penwidth=3, color="purple"];
+}

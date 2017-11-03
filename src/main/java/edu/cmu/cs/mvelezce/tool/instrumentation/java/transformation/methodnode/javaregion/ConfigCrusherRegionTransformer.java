@@ -29,18 +29,4 @@ public abstract class ConfigCrusherRegionTransformer extends RegionTransformer {
 
     public abstract InsnList getInstructionsEndRegion(JavaRegion javaRegion);
 
-    public MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
-        MethodBlock immediatePostDominator = methodGraph.getImmediatePostDominator(start);
-        return immediatePostDominator;
-    }
-
-    public MethodBlock getBlockToStartInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
-        MethodBlock id = methodGraph.getImmediateDominator(start);
-
-        if(id != methodGraph.getEntryBlock() && id.getSuccessors().size() == 1 && id.getSuccessors().contains(start)) {
-            return id;
-        }
-
-        return start;
-    }
 }

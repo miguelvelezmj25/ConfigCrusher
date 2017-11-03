@@ -1,0 +1,20 @@
+digraph writeObject {
+node [shape=record];
+240805199 [label="L9\lLINENUMBER 140 L9\lFRAME SAME\lALOAD 0\lDUP\lGETFIELD org/prevayler/foundation/DurableOutputStream._objectsWritten : I\lICONST_1\lIADD\lPUTFIELD org/prevayler/foundation/DurableOutputStream._objectsWritten : I\lL12\lLINENUMBER 141 L12\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._objectsWritten : I\lALOAD 2\lMONITOREXIT\lL4\lLDC \"f1fcb916-b8be-49f9-99fe-f1902499a043\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+932634391 [label="L5\lLINENUMBER 142 L5\lFRAME SAME1 java/lang/Throwable\lASTORE 4\lALOAD 2\lMONITOREXIT\lL6\lALOAD 4\lATHROW\l"];
+1977627311 [label="L2\lLINENUMBER 135 L2\lFRAME SAME1 java/io/IOException\lASTORE 3\lL10\lLINENUMBER 136 L10\lALOAD 0\lINVOKESPECIAL org/prevayler/foundation/DurableOutputStream.internalClose ()V\lL11\lLINENUMBER 137 L11\lALOAD 3\lATHROW\l"];
+1878704627 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lTRYCATCHBLOCK L3 L4 L5 null\lTRYCATCHBLOCK L5 L6 L5 null\lL7\lLINENUMBER 128 L7\lLDC \"f1fcb916-b8be-49f9-99fe-f1902499a043\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._writeLock : Ljava/lang/Object;\lDUP\lASTORE 2\lMONITORENTER\lL3\lLINENUMBER 129 L3\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._closed : Z\lIFEQ L0\l"];
+947414828 [label="L0\lLINENUMBER 134 L0\lFRAME APPEND [java/lang/Object]\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/foundation/DurableOutputStream._active : Ljava/io/ByteArrayOutputStream;\lINVOKEVIRTUAL org/prevayler/foundation/Guided.writeTo (Ljava/io/OutputStream;)V\lL1\lLINENUMBER 138 L1\lGOTO L9\l"];
+2035431929 [label="L8\lLINENUMBER 130 L8\lNEW java/io/IOException\lDUP\lLDC \"already closed\"\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+240805199 -> exit;
+entry -> 1878704627;
+1977627311 -> 932634391;
+1878704627 -> 947414828;
+1878704627 -> 2035431929;
+947414828 -> 240805199;
+2035431929 -> 932634391;
+240805199[fontcolor="purple", penwidth=3, color="purple"];
+1878704627[fontcolor="purple", penwidth=3, color="purple"];
+}

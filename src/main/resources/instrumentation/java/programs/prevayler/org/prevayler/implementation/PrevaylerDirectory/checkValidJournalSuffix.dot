@@ -1,0 +1,14 @@
+digraph checkValidJournalSuffix {
+node [shape=record];
+1470417524 [label="L0\lLINENUMBER 58 L0\lLDC \"ba957a23-ff37-4875-94a2-75ba7cdad629\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lLDC \"[a-zA-Z0-9]*[Jj]ournal\"\lINVOKEVIRTUAL java/lang/String.matches (Ljava/lang/String;)Z\lIFNE L1\l"];
+377478269 [label="L1\lLINENUMBER 62 L1\lFRAME SAME\lLDC \"ba957a23-ff37-4875-94a2-75ba7cdad629\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1669343837 [label="L2\lLINENUMBER 59 L2\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Journal filename suffix must match /[a-zA-Z0-9]*[Jj]ournal/, but '\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"' does not\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+1470417524 -> 377478269;
+1470417524 -> 1669343837;
+entry -> 1470417524;
+377478269 -> exit;
+1470417524[fontcolor="purple", penwidth=3, color="purple"];
+377478269[fontcolor="purple", penwidth=3, color="purple"];
+}

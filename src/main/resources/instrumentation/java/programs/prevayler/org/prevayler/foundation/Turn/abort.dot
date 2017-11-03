@@ -1,0 +1,17 @@
+digraph abort {
+node [shape=record];
+1007729201 [label="L0\lLINENUMBER 77 L0\lLDC \"0951491d-4ffb-4792-bdec-6b1eb18be338\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lASTORE 3\l"];
+1571835907 [label="L2\lLINENUMBER 81 L2\lFRAME SAME\lNEW java/lang/IllegalStateException\lDUP\lALOAD 1\lALOAD 2\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;Ljava/lang/Throwable;)V\lLDC \"0951491d-4ffb-4792-bdec-6b1eb18be338\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lATHROW\l"];
+840958857 [label="L3\lLINENUMBER 79 L3\lALOAD 3\lINVOKESPECIAL org/prevayler/foundation/Turn.die ()Lorg/prevayler/foundation/Turn;\lASTORE 3\lGOTO L1\l"];
+1474944287 [label="L1\lLINENUMBER 78 L1\lFRAME APPEND [org/prevayler/foundation/Turn]\lALOAD 3\lIFNULL L2\l"];
+entry;
+exit;
+entry -> 1007729201;
+1007729201 -> 1474944287;
+1571835907 -> exit;
+840958857 -> 1474944287;
+1474944287 -> 1571835907;
+1474944287 -> 840958857;
+1007729201[fontcolor="purple", penwidth=3, color="purple"];
+1571835907[fontcolor="purple", penwidth=3, color="purple"];
+}

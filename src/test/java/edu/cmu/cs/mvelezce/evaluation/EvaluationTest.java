@@ -15,6 +15,7 @@ import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerforman
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 

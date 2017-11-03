@@ -1,0 +1,20 @@
+digraph <init> {
+node [shape=record];
+1357557718 [label="L0\lLINENUMBER 22 L0\lLDC \"9e37ea31-dd06-4b49-91f1-e028884e33f2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 23 L1\lALOAD 0\lALOAD 1\lIFNULL L2\l"];
+1562530664 [label="GETSTATIC counter/com/googlecode/pngtastic/core/Logger.LOG_LEVELS : Ljava/util/List;\lALOAD 1\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\lINVOKEINTERFACE java/util/List.contains (Ljava/lang/Object;)Z\lIFNE L3\l"];
+1298690816 [label="L4\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger java/lang/String]\lPUTFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lL6\lLINENUMBER 25 L6\lLDC \"9e37ea31-dd06-4b49-91f1-e028884e33f2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1224339926 [label="L3\lFRAME SAME1 counter/com/googlecode/pngtastic/core/Logger\lALOAD 1\lL5\lLINENUMBER 24 L5\lINVOKEVIRTUAL java/lang/String.toUpperCase ()Ljava/lang/String;\l"];
+576751479 [label="L2\lFRAME FULL [counter/com/googlecode/pngtastic/core/Logger java/lang/String] [counter/com/googlecode/pngtastic/core/Logger]\lLDC \"NONE\"\lGOTO L4\l"];
+entry;
+exit;
+1357557718 -> 1562530664;
+1357557718 -> 576751479;
+entry -> 1357557718;
+1562530664 -> 1224339926;
+1562530664 -> 576751479;
+1298690816 -> exit;
+1224339926 -> 1298690816;
+576751479 -> 1298690816;
+1357557718[fontcolor="purple", penwidth=3, color="purple"];
+1298690816[fontcolor="purple", penwidth=3, color="purple"];
+}

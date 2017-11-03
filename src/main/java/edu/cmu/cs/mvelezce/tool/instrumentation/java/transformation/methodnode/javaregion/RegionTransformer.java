@@ -477,21 +477,29 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
+            if(methodNode.name.contains("getColors")) {
+                System.out.println();
+            }
+
             if(a.getPredecessors().isEmpty()) {
                 throw new RuntimeException("The predecessors cannot be empty " + a.getID());
             }
 
-            this.regionsToOptionSet.remove(bRegion);
-
             for(MethodBlock p : a.getPredecessors()) {
+                if(methodNode.name.contains("getColors")) {
+                    System.out.println();
+                }
+
+                JavaRegion pRegion = blocksToRegions.get(p);
                 JavaRegion newRegion = new JavaRegion(aRegion.getRegionPackage(), aRegion.getRegionClass(), aRegion.getRegionMethod());
                 int index;
 
-                if(bRegion == null) {
+                if(pRegion == null) {
                     index = methodNode.instructions.indexOf(b.getInstructions().get(0));
                 }
                 else {
-                    index = bRegion.getStartBytecodeIndex();
+                    index = pRegion.getStartBytecodeIndex();
+                    this.regionsToOptionSet.remove(pRegion);
                 }
 
                 newRegion.setStartBytecodeIndex(index);
@@ -501,7 +509,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 newOptionSet.add(aDecision);
                 this.regionsToOptionSet.put(newRegion, newOptionSet);
 
-                worklist.add(p);
+                worklist.add(0, p);
                 updated = true;
             }
         }
@@ -1092,19 +1100,30 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         MethodBlock ro = graph.getExitBlock();
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
 
-        // TODO test
-//        Set<JavaRegion> regionsInCatchWithoutExplicitThrow = new HashSet<>();
-//
-//        for(Map.Entry<MethodBlock, JavaRegion> blockToRegion : blocksToRegions.entrySet()) {
-//            if(blockToRegion.getKey().isCatchWithoutExplicitThrow()) {
-//                regionsInCatchWithoutExplicitThrow.add(blockToRegion.getValue());
-//                continue;
-//            }
-//        }
-//
-//        for(JavaRegion javaRegion : regionsInCatchWithoutExplicitThrow) {
-//            this.regionsToOptionSet.remove(javaRegion);
-//        }
+        // Check if there is a region that does not have a connection to the exit block. This happens when regions occur
+        // in handlers not connected to the exit block
+        for(Map.Entry<MethodBlock, JavaRegion> blockToRegion : blocksToRegions.entrySet()) {
+            if(blockToRegion.getValue() == null) {
+                continue;
+            }
+
+            if(!graph.getReachableBlocks(blockToRegion.getKey(), graph.getExitBlock()).contains(graph.getExitBlock())) {
+                throw new RuntimeException("Check");
+//                this.regionsToOptionSet.remove(blockToRegion.getValue());
+            }
+        }
+
+        // Check if there is
+        for(Map.Entry<MethodBlock, JavaRegion> blockToRegion : blocksToRegions.entrySet()) {
+            if(blockToRegion.getValue() == null) {
+                continue;
+            }
+
+            if(blockToRegion.getKey().isCatchWithImplicitThrow()) {
+                throw new RuntimeException("Check");
+//                this.regionsToOptionSet.remove(blockToRegion.getValue());
+            }
+        }
 
         // The entry block should be skipped
         Iterator<Map.Entry<MethodBlock, JavaRegion>> blocksToRegionsIterator = blocksToRegions.entrySet().iterator();
@@ -1122,6 +1141,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             Set<String> aDecision = this.getDecision(aRegion);
             MethodBlock end;
 
+            // TODO this is an optimization and not part of the original algorithm
+            // TODO optimize for regions15
             if(i == 0) {
                 end = graph.getExitBlock();
             }
@@ -1133,8 +1154,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 MethodBlock ipd = graph.getImmediatePostDominator(start);
                 JavaRegion ipdRegion = blocksToRegions.get(ipd);
                 Set<String> ipdDecision = this.getDecision(ipdRegion);
+                MethodBlock ipdNext = graph.getImmediatePostDominator(ipd);
 
-                while(ipd != ro && (aDecision.equals(ipdDecision) || aDecision.containsAll(ipdDecision))) {
+                while(ipd != ro && ipdNext != ro && (aDecision.equals(ipdDecision) || aDecision.containsAll(ipdDecision))) {
                     ipd = graph.getImmediatePostDominator(ipd);
                     ipdRegion = blocksToRegions.get(ipd);
                     ipdDecision = this.getDecision(ipdRegion);
@@ -1184,57 +1206,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 this.regionsToOptionSet.remove(bRegion);
             }
         }
-//
-//        for(Map.Entry<MethodBlock, JavaRegion> blockToRegion : blocksToRegions.entrySet()) {
-//                // TODO test
-////                if(block.isCatchWithoutExplicitThrow()) {
-////                    regionsInCatchWithoutExplicitThrow.add(region);
-////                    continue;
-////                }
-//
-//            // TODO test when there is no connection to the exit block
-////                if(!graph.getReachableBlocks(block, graph.getExitBlock()).contains(graph.getExitBlock())) {
-////                    this.regionsToOptionSet.remove(region);
-////                    continue;
-////                }
-//
-//                MethodBlock start = this.getBlockToStartInstrumentingBeforeIt(graph, block);
-//
-//                if(start == null) {
-//                    throw new RuntimeException();
-//                }
-//
-//                MethodBlock end = this.getBlockToEndInstrumentingBeforeIt(graph, block);
-//
-//                if(end == null) {
-//                    throw new RuntimeException();
-//                }
-//
-//                Set<MethodBlock> endMethodBlocks = new HashSet<>();
-//
-//                if(start == end) {
-//                    throw new RuntimeException("Start and end equal");
-//                }
-//                else if(start.getSuccessors().size() == 1 && start.getSuccessors().iterator().next().equals(end)) {
-//                    throw new RuntimeException("Happens when a control flow decision only has 1 successor? " + start
-//                            + " -> " + end);
-//                }
-//                else if(graph.getExitBlock() == end) {
-//                    this.endRegionBlocksWithReturn.addAll(end.getPredecessors());
-//                    endMethodBlocks.addAll(end.getPredecessors());
-//                }
-//                else {
-//                    endMethodBlocks.add(end);
-//                }
-//
-//                region.setStartMethodBlock(start);
-//                region.setEndMethodBlocks(endMethodBlocks);
-//        }
-
-        // TODO test
-//        for(JavaRegion javaRegion : regionsInCatchWithoutExplicitThrow) {
-//            this.regionsToOptionSet.remove(javaRegion);
-//        }
     }
 
     public MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {
@@ -1269,7 +1240,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     continue;
                 }
 
-                if(block.isCatchWithoutExplicitThrow()) {
+                if(block.isCatchWithImplicitThrow()) {
                     regionsInCatchWithoutExplicitThrow.add(region);
                     continue;
                 }

@@ -1,9 +1,0 @@
-digraph <init> {
-node [shape=record];
-1930683643 [label="L0\lLINENUMBER 42 L0\lLDC \"58a6aed8-c728-4433-a6dd-00d0583c9536\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/PngProcessor.\<init\> (Ljava/lang/String;)V\lL1\lLINENUMBER 44 L1\lALOAD 0\lDLOAD 2\lPUTFIELD counter/com/googlecode/pngtastic/core/PngColorCounter.distThreshold : D\lL2\lLINENUMBER 45 L2\lALOAD 0\lDLOAD 4\lPUTFIELD counter/com/googlecode/pngtastic/core/PngColorCounter.freqThreshold : D\lL3\lLINENUMBER 46 L3\lALOAD 0\lILOAD 6\lPUTFIELD counter/com/googlecode/pngtastic/core/PngColorCounter.minAlpha : I\lL4\lLINENUMBER 47 L4\lALOAD 0\lLLOAD 7\lPUTFIELD counter/com/googlecode/pngtastic/core/PngColorCounter.timeout : J\lL5\lLINENUMBER 49 L5\lALOAD 0\lNEW counter/com/googlecode/pngtastic/core/processing/PngtasticInterlaceHandler\lDUP\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/PngColorCounter.log : Lcounter/com/googlecode/pngtastic/core/Logger;\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/PngColorCounter.pngFilterHandler : Lcounter/com/googlecode/pngtastic/core/processing/PngFilterHandler;\lINVOKESPECIAL counter/com/googlecode/pngtastic/core/processing/PngtasticInterlaceHandler.\<init\> (Lcounter/com/googlecode/pngtastic/core/Logger;Lcounter/com/googlecode/pngtastic/core/processing/PngFilterHandler;)V\lPUTFIELD counter/com/googlecode/pngtastic/core/PngColorCounter.pngInterlaceHandler : Lcounter/com/googlecode/pngtastic/core/processing/PngInterlaceHandler;\lL6\lLINENUMBER 50 L6\lLDC \"58a6aed8-c728-4433-a6dd-00d0583c9536\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-entry;
-exit;
-entry -> 1930683643;
-1930683643 -> exit;
-1930683643[fontcolor="purple", penwidth=3, color="purple"];
-}

@@ -1,21 +1,21 @@
 digraph main {
 node [shape=record];
-1296802565 [label="L9\lLINENUMBER 28 L9\lICONST_1\lISTORE 2\l"];
-97865524 [label="L8\lLINENUMBER 31 L8\lFRAME SAME\lLDC \"3abff671-31fc-4813-bd4b-2293038c071a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lILOAD 1\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions13.foo (ZZ)V\lL10\lLINENUMBER 32 L10\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions13.moo (Z)V\lL11\lLINENUMBER 33 L11\lRETURN\l"];
-1371742881 [label="L0\lLINENUMBER 15 L0\lLDC \"be0fc9b3-a0d2-4fa5-aaf3-4c0631432c71\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 17 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lPUTSTATIC edu/cmu/cs/mvelezce/Regions13.A : Z\lL2\lLINENUMBER 18 L2\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionB (Z)Z\lPUTSTATIC edu/cmu/cs/mvelezce/Regions13.B : Z\lL3\lLINENUMBER 20 L3\lICONST_0\lISTORE 1\lL4\lLINENUMBER 21 L4\lICONST_0\lISTORE 2\lL5\lLINENUMBER 23 L5\lGETSTATIC edu/cmu/cs/mvelezce/Regions13.A : Z\lIFEQ L6\l"];
-462537877 [label="L6\lLINENUMBER 27 L6\lFRAME APPEND [I I]\lLDC \"be0fc9b3-a0d2-4fa5-aaf3-4c0631432c71\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"3abff671-31fc-4813-bd4b-2293038c071a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC edu/cmu/cs/mvelezce/Regions13.B : Z\lIFEQ L8\l"];
-803567403 [label="L7\lLINENUMBER 24 L7\lICONST_1\lISTORE 1\l"];
+451238316 [label="L8\lLINENUMBER 31 L8\lFRAME SAME\lILOAD 1\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions13.foo (ZZ)V\lL10\lLINENUMBER 32 L10\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions13.moo (Z)V\lL11\lLINENUMBER 33 L11\lLDC \"3abff671-31fc-4813-bd4b-2293038c071a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"be0fc9b3-a0d2-4fa5-aaf3-4c0631432c71\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+2107051302 [label="L7\lLINENUMBER 24 L7\lICONST_1\lISTORE 1\l"];
+686533195 [label="L0\lLINENUMBER 15 L0\lLDC \"be0fc9b3-a0d2-4fa5-aaf3-4c0631432c71\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 17 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lPUTSTATIC edu/cmu/cs/mvelezce/Regions13.A : Z\lL2\lLINENUMBER 18 L2\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionB (Z)Z\lPUTSTATIC edu/cmu/cs/mvelezce/Regions13.B : Z\lL3\lLINENUMBER 20 L3\lICONST_0\lISTORE 1\lL4\lLINENUMBER 21 L4\lICONST_0\lISTORE 2\lL5\lLINENUMBER 23 L5\lGETSTATIC edu/cmu/cs/mvelezce/Regions13.A : Z\lIFEQ L6\l"];
+1873346889 [label="L9\lLINENUMBER 28 L9\lICONST_1\lISTORE 2\l"];
+584341178 [label="L6\lLINENUMBER 27 L6\lFRAME APPEND [I I]\lLDC \"3abff671-31fc-4813-bd4b-2293038c071a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC edu/cmu/cs/mvelezce/Regions13.B : Z\lIFEQ L8\l"];
 entry;
 exit;
-entry -> 1371742881;
-1296802565 -> 97865524;
-97865524 -> exit;
-1371742881 -> 462537877;
-1371742881 -> 803567403;
-462537877 -> 1296802565;
-462537877 -> 97865524;
-803567403 -> 462537877;
-97865524[fontcolor="purple", penwidth=3, color="purple"];
-1371742881[fontcolor="purple", penwidth=3, color="purple"];
-462537877[fontcolor="purple", penwidth=3, color="purple"];
+451238316 -> exit;
+entry -> 686533195;
+2107051302 -> 584341178;
+686533195 -> 2107051302;
+686533195 -> 584341178;
+1873346889 -> 451238316;
+584341178 -> 451238316;
+584341178 -> 1873346889;
+451238316[fontcolor="purple", penwidth=3, color="purple"];
+686533195[fontcolor="purple", penwidth=3, color="purple"];
+584341178[fontcolor="purple", penwidth=3, color="purple"];
 }

@@ -1,0 +1,15 @@
+digraph foo {
+node [shape=record];
+12039655 [label="L1\lLINENUMBER 31 L1\lFRAME SAME\lLDC \"eb87bb31-d19e-444e-874b-051e38e4f9a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+715211706 [label="L2\lLINENUMBER 29 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1597132191 [label="L0\lLINENUMBER 28 L0\lLDC \"eb87bb31-d19e-444e-874b-051e38e4f9a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC edu/cmu/cs/mvelezce/Regions2.C : Z\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 1597132191;
+12039655 -> exit;
+715211706 -> 12039655;
+1597132191 -> 12039655;
+1597132191 -> 715211706;
+12039655[fontcolor="purple", penwidth=3, color="purple"];
+1597132191[fontcolor="purple", penwidth=3, color="purple"];
+}

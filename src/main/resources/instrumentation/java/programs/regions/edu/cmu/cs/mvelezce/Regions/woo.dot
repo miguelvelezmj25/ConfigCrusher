@@ -1,0 +1,15 @@
+digraph woo {
+node [shape=record];
+397639322 [label="L2\lLINENUMBER 37 L2\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions.bar ()V\l"];
+219594319 [label="L1\lLINENUMBER 39 L1\lFRAME SAME\lLDC \"f8659cfa-d71c-43af-a040-28299e798ad8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1679022055 [label="L0\lLINENUMBER 36 L0\lLDC \"f8659cfa-d71c-43af-a040-28299e798ad8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC edu/cmu/cs/mvelezce/Regions.C : Z\lIFEQ L1\l"];
+entry;
+exit;
+entry -> 1679022055;
+397639322 -> 219594319;
+219594319 -> exit;
+1679022055 -> 397639322;
+1679022055 -> 219594319;
+219594319[fontcolor="purple", penwidth=3, color="purple"];
+1679022055[fontcolor="purple", penwidth=3, color="purple"];
+}

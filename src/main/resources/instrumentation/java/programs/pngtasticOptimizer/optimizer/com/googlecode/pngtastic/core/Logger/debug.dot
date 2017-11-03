@@ -1,0 +1,15 @@
+digraph debug {
+node [shape=record];
+364452884 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"4a064a8b-32a9-45a4-8e2a-baf61631c047\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+848771378 [label="L0\lLINENUMBER 32 L0\lLDC \"4a064a8b-32a9-45a4-8e2a-baf61631c047\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+1731991322 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+entry;
+exit;
+364452884 -> exit;
+entry -> 848771378;
+848771378 -> 364452884;
+848771378 -> 1731991322;
+1731991322 -> 364452884;
+364452884[fontcolor="purple", penwidth=3, color="purple"];
+848771378[fontcolor="purple", penwidth=3, color="purple"];
+}

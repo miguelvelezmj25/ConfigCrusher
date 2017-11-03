@@ -1,17 +1,17 @@
 digraph bar {
 node [shape=record];
-455735395 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lL3\lLINENUMBER 54 L3\lLDC \"5df2871f-f7d2-4c48-a3e7-94720d7e2cd0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L4\l"];
-839722483 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lLDC \"5df2871f-f7d2-4c48-a3e7-94720d7e2cd0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-1143571914 [label="L2\lLINENUMBER 57 L2\lFRAME SAME1 java/lang/InterruptedException\lASTORE 1\lL5\lLINENUMBER 58 L5\lALOAD 1\lINVOKEVIRTUAL java/lang/InterruptedException.printStackTrace ()V\l"];
-328497346 [label="L0\lLINENUMBER 56 L0\lLDC 5000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL1\lLINENUMBER 59 L1\lGOTO L4\l"];
+1682562709 [label="L2\lLINENUMBER 57 L2\lFRAME SAME1 java/lang/InterruptedException\lASTORE 1\lL5\lLINENUMBER 58 L5\lALOAD 1\lINVOKEVIRTUAL java/lang/InterruptedException.printStackTrace ()V\l"];
+332972222 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/InterruptedException\lL3\lLINENUMBER 54 L3\lLDC \"5df2871f-f7d2-4c48-a3e7-94720d7e2cd0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lIFEQ L4\l"];
+872617069 [label="L0\lLINENUMBER 56 L0\lLDC 5000\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL1\lLINENUMBER 59 L1\lGOTO L4\l"];
+1144833194 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lLDC \"5df2871f-f7d2-4c48-a3e7-94720d7e2cd0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 455735395;
-455735395 -> 839722483;
-455735395 -> 328497346;
-839722483 -> exit;
-1143571914 -> 839722483;
-328497346 -> 839722483;
-455735395[fontcolor="purple", penwidth=3, color="purple"];
-839722483[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 332972222;
+1682562709 -> 1144833194;
+332972222 -> 872617069;
+332972222 -> 1144833194;
+872617069 -> 1144833194;
+1144833194 -> exit;
+332972222[fontcolor="purple", penwidth=3, color="purple"];
+1144833194[fontcolor="purple", penwidth=3, color="purple"];
 }

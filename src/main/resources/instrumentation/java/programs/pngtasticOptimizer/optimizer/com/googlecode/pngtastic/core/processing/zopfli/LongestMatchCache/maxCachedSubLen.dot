@@ -1,0 +1,16 @@
+digraph maxCachedSubLen {
+node [shape=record];
+894742402 [label="L3\lLINENUMBER 122 L3\lICONST_0\lLDC \"455c94ed-b493-4fc2-942f-c4c4e67d0543\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+424333940 [label="L0\lLINENUMBER 120 L0\lLDC \"455c94ed-b493-4fc2-942f-c4c4e67d0543\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 1\lBIPUSH 8\lIMUL\lISTORE 1\lL1\lLINENUMBER 121 L1\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.subLenPos : [C\lILOAD 1\lCALOAD\lIFNE L2\l"];
+407089798 [label="L2\lLINENUMBER 124 L2\lFRAME SAME\lALOAD 0\lGETFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/LongestMatchCache.subLenLen : [B\lILOAD 1\lBIPUSH 8\lIADD\lICONST_1\lISUB\lBALOAD\lSIPUSH 255\lIAND\lICONST_3\lIADD\lLDC \"455c94ed-b493-4fc2-942f-c4c4e67d0543\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+entry;
+exit;
+entry -> 424333940;
+894742402 -> exit;
+424333940 -> 894742402;
+424333940 -> 407089798;
+407089798 -> exit;
+894742402[fontcolor="purple", penwidth=3, color="purple"];
+424333940[fontcolor="purple", penwidth=3, color="purple"];
+407089798[fontcolor="purple", penwidth=3, color="purple"];
+}

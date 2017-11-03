@@ -462,6 +462,15 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
+            JavaRegion aRegion = blocksToRegions.get(a);
+            Set<String> aDecision = this.getDecision(aRegion);
+
+            if(a.isCatchWithImplicitThrow()) {
+                blocksToRegions.put(a, null);
+                this.regionsToOptionSet.remove(aRegion);
+                continue;
+            }
+
             MethodBlock b = graph.getImmediateDominator(a);
 
             if(b == alphaBlock) {
@@ -469,9 +478,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
 
             JavaRegion bRegion = blocksToRegions.get(b);
-            JavaRegion aRegion = blocksToRegions.get(a);
             Set<String> bDecision = this.getDecision(bRegion);
-            Set<String> aDecision = this.getDecision(aRegion);
 
             if(!aDecision.containsAll(bDecision) || aDecision.equals(bDecision)) {
                 continue;
@@ -1113,7 +1120,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
         }
 
-        // Check if there is
+        // Check if there is a catch with an implicit flow
         for(Map.Entry<MethodBlock, JavaRegion> blockToRegion : blocksToRegions.entrySet()) {
             if(blockToRegion.getValue() == null) {
                 continue;
@@ -1202,7 +1209,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                     continue;
                 }
 
-                blocksToRegions.replace(b, null);
+                blocksToRegions.put(b, null);
                 this.regionsToOptionSet.remove(bRegion);
             }
         }
@@ -2133,8 +2140,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         if(methodNameInJavap.startsWith("<clinit>")) {
-            throw new RuntimeException("Check this case");
-//            methodNameInJavap = "  static {};";
+            methodNameInJavap = "  static {};";
         }
         else {
             methodNameInJavap += "(";
@@ -2145,8 +2151,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         // Check if signature matches
         for(String outputLine : javapResult) {
             if(outputLine.equals(methodNameInJavap)) {
-                throw new RuntimeException("Check this case");
-//                break;
+                if(!outputLine.equals("  static {};")) {
+                    throw new RuntimeException("Check this case");
+                }
+
+                break;
             }
             else if(outputLine.contains(" " + methodNameInJavap)) {
                 String javapDescriptor = javapResult.get(methodStartIndex + 1).trim();

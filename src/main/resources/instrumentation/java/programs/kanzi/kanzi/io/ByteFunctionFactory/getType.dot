@@ -1,0 +1,36 @@
+digraph getType {
+node [shape=record];
+1392358574 [label="L11\lLINENUMBER 210 L11\lFRAME CHOP 2\lILOAD 3\lI2S\lLDC \"24a3072e-f93d-4afd-af59-028188768f61\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+48670997 [label="L6\lLINENUMBER 197 L6\lFRAME SAME\lICONST_0\lISTORE 3\lL8\lLINENUMBER 198 L8\lBIPUSH 12\lISTORE 4\lL9\lLINENUMBER 200 L9\lALOAD 2\lASTORE 5\lALOAD 5\lARRAYLENGTH\lISTORE 6\lICONST_0\lISTORE 7\l"];
+1641001011 [label="ALOAD 5\lILOAD 7\lAALOAD\lASTORE 8\lL12\lLINENUMBER 201 L12\lALOAD 0\lALOAD 8\lINVOKESPECIAL kanzi/io/ByteFunctionFactory.getTypeToken (Ljava/lang/String;)S\lISTORE 9\lL13\lLINENUMBER 204 L13\lILOAD 9\lIFEQ L14\l"];
+502646674 [label="L2\lLINENUMBER 184 L2\lALOAD 0\lALOAD 1\lINVOKESPECIAL kanzi/io/ByteFunctionFactory.getTypeToken (Ljava/lang/String;)S\lBIPUSH 12\lISHL\lI2S\lLDC \"24a3072e-f93d-4afd-af59-028188768f61\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+373204870 [label="L4\lLINENUMBER 193 L4\lFRAME APPEND [[Ljava/lang/String;]\lALOAD 2\lARRAYLENGTH\lICONST_4\lIF_ICMPLE L6\l"];
+1824253773 [label="L5\lLINENUMBER 190 L5\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Unknown transform type: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+111603215 [label="L15\lLINENUMBER 205 L15\lILOAD 3\lILOAD 9\lILOAD 4\lISHL\lIOR\lISTORE 3\lL16\lLINENUMBER 206 L16\lIINC 4 -4\l"];
+1456866078 [label="L14\lLINENUMBER 200 L14\lFRAME APPEND [java/lang/String I]\lIINC 7 1\lGOTO L10\l"];
+2129791039 [label="L1\lLINENUMBER 187 L1\lFRAME SAME\lALOAD 1\lLDC \"\\+\"\lINVOKEVIRTUAL java/lang/String.split (Ljava/lang/String;)[Ljava/lang/String;\lASTORE 2\lL3\lLINENUMBER 189 L3\lALOAD 2\lARRAYLENGTH\lIFNE L4\l"];
+832317324 [label="L7\lLINENUMBER 194 L7\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Only 4 transforms allowed: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+960586417 [label="L10\lFRAME FULL [kanzi/io/ByteFunctionFactory java/lang/String [Ljava/lang/String; I I [Ljava/lang/String; I I] []\lILOAD 7\lILOAD 6\lIF_ICMPGE L11\l"];
+1263936801 [label="L0\lLINENUMBER 183 L0\lLDC \"24a3072e-f93d-4afd-af59-028188768f61\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 1\lBIPUSH 43\lINVOKEVIRTUAL java/lang/String.indexOf (I)I\lIFGE L1\l"];
+entry;
+exit;
+1392358574 -> exit;
+502646674 -> exit;
+373204870 -> 48670997;
+373204870 -> 832317324;
+111603215 -> 1456866078;
+2129791039 -> 373204870;
+2129791039 -> 1824253773;
+1263936801 -> 502646674;
+1263936801 -> 2129791039;
+entry -> 1263936801;
+48670997 -> 960586417;
+1641001011 -> 1456866078;
+1641001011 -> 111603215;
+1456866078 -> 960586417;
+960586417 -> 1392358574;
+960586417 -> 1641001011;
+1392358574[fontcolor="purple", penwidth=3, color="purple"];
+502646674[fontcolor="purple", penwidth=3, color="purple"];
+1263936801[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -17,7 +17,7 @@ public class MethodBlock {
     private Set<MethodBlock> successors = new HashSet<>();
     private Set<MethodBlock> predecessors = new HashSet<>();
     private boolean withReturn = false;
-    private boolean catchWithoutExplicitThrow = false;
+    private boolean catchWithImplicitThrow = false;
 
     public MethodBlock(AbstractInsnNode insnNode) {
         this(MethodBlock.asID(insnNode));
@@ -32,10 +32,6 @@ public class MethodBlock {
     }
 
     public void addSuccessor(MethodBlock methodBlock) {
-//        if(this.successors.size() >= 2) {
-//            throw new IllegalArgumentException("A method block cannot have more than 2 successors");
-//        }
-
         successors.add(methodBlock);
     }
 
@@ -96,11 +92,11 @@ public class MethodBlock {
         this.withReturn = withReturn;
     }
 
-    public boolean isCatchWithoutExplicitThrow() {
-        return this.catchWithoutExplicitThrow;
+    public boolean isCatchWithImplicitThrow() {
+        return this.catchWithImplicitThrow;
     }
 
-    public void setCatchWithoutExplicitThrow(boolean catchWithoutExplicitThrow) {
-        this.catchWithoutExplicitThrow = catchWithoutExplicitThrow;
+    public void setCatchWithImplicitThrow(boolean catchWithImplicitThrow) {
+        this.catchWithImplicitThrow = catchWithImplicitThrow;
     }
 }

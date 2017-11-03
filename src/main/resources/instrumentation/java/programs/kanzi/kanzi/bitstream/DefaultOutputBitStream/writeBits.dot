@@ -1,0 +1,30 @@
+digraph writeBits {
+node [shape=record];
+907627344 [label="L2\lLINENUMBER 77 L2\lICONST_0\lLDC \"0eb1c754-b926-44d8-999e-de461bfea9b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1981791665 [label="L13\lLINENUMBER 99 L13\lALOAD 0\lLLOAD 1\lILOAD 4\lLSHL\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.current : J\lL14\lLINENUMBER 100 L14\lALOAD 0\lDUP\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\lILOAD 4\lIADD\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\l"];
+1392070134 [label="L7\lLINENUMBER 95 L7\lFRAME APPEND [I]\lALOAD 0\lDUP\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.current : J\lLLOAD 1\lILOAD 4\lINEG\lLUSHR\lLOR\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.current : J\lL11\lLINENUMBER 96 L11\lALOAD 0\lINVOKESPECIAL kanzi/bitstream/DefaultOutputBitStream.pushCurrent ()V\lL12\lLINENUMBER 98 L12\lILOAD 4\lIFEQ L10\l"];
+1968162456 [label="L3\lLINENUMBER 84 L3\lFRAME SAME\lLLOAD 1\lLDC -1\lILOAD 3\lINEG\lLUSHR\lLAND\lLSTORE 1\lL5\lLINENUMBER 85 L5\lALOAD 0\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\lICONST_1\lIADD\lILOAD 3\lISUB\lISTORE 4\lL6\lLINENUMBER 88 L6\lILOAD 4\lIFLE L7\l"];
+954796439 [label="L0\lLINENUMBER 76 L0\lLDC \"0eb1c754-b926-44d8-999e-de461bfea9b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 3\lIFNE L1\l"];
+257625591 [label="L1\lLINENUMBER 80 L1\lFRAME SAME\lILOAD 3\lBIPUSH 64\lIF_ICMPLE L3\l"];
+85642263 [label="L4\lLINENUMBER 81 L4\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Invalid length: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lLDC \" (must be in [1..64])\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+776396594 [label="L8\lLINENUMBER 90 L8\lALOAD 0\lDUP\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.current : J\lLLOAD 1\lILOAD 4\lLSHL\lLOR\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.current : J\lL9\lLINENUMBER 91 L9\lALOAD 0\lDUP\lGETFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\lILOAD 3\lISUB\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\lGOTO L10\l"];
+632727396 [label="L10\lLINENUMBER 104 L10\lFRAME SAME\lILOAD 3\lLDC \"0eb1c754-b926-44d8-999e-de461bfea9b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+entry;
+exit;
+entry -> 954796439;
+907627344 -> exit;
+1981791665 -> 632727396;
+1392070134 -> 1981791665;
+1392070134 -> 632727396;
+1968162456 -> 1392070134;
+1968162456 -> 776396594;
+954796439 -> 907627344;
+954796439 -> 257625591;
+257625591 -> 1968162456;
+257625591 -> 85642263;
+776396594 -> 632727396;
+632727396 -> exit;
+907627344[fontcolor="purple", penwidth=3, color="purple"];
+954796439[fontcolor="purple", penwidth=3, color="purple"];
+632727396[fontcolor="purple", penwidth=3, color="purple"];
+}

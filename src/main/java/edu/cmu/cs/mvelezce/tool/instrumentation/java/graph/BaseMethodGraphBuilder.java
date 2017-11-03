@@ -70,7 +70,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
             MethodBlock block = this.graph.getMethodBlock(handler);
 
             if(block.getPredecessors().isEmpty()) {
-                block.setCatchWithoutExplicitThrow(true);
+                block.setCatchWithImplicitThrow(true);
             }
         }
 

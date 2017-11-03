@@ -1,0 +1,21 @@
+digraph <init> {
+node [shape=record];
+994030082 [label="L3\lLINENUMBER 35 L3\lNEW java/lang/NullPointerException\lDUP\lLDC \"Invalid null print stream parameter\"\lINVOKESPECIAL java/lang/NullPointerException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1795327778 [label="L2\lLINENUMBER 38 L2\lFRAME FULL [kanzi/app/InfoPrinter I kanzi/app/InfoPrinter$Type java/io/PrintStream] []\lALOAD 0\lALOAD 3\lPUTFIELD kanzi/app/InfoPrinter.ps : Ljava/io/PrintStream;\lL4\lLINENUMBER 39 L4\lALOAD 0\lILOAD 1\lPUTFIELD kanzi/app/InfoPrinter.level : I\lL5\lLINENUMBER 40 L5\lALOAD 0\lALOAD 2\lPUTFIELD kanzi/app/InfoPrinter.type : Lkanzi/app/InfoPrinter$Type;\lL6\lLINENUMBER 41 L6\lALOAD 0\lNEW java/util/concurrent/ConcurrentHashMap\lDUP\lINVOKESPECIAL java/util/concurrent/ConcurrentHashMap.\<init\> ()V\lPUTFIELD kanzi/app/InfoPrinter.map : Ljava/util/Map;\lL7\lLINENUMBER 42 L7\lALOAD 0\lALOAD 2\lGETSTATIC kanzi/app/InfoPrinter$Type.ENCODING : Lkanzi/app/InfoPrinter$Type;\lIF_ACMPNE L8\l"];
+1443475668 [label="L0\lLINENUMBER 33 L0\lLDC \"78dd7329-7e62-4c50-9cc4-055bbbe904e7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 34 L1\lALOAD 3\lIFNONNULL L2\l"];
+263574422 [label="BIPUSH 6\lANEWARRAY kanzi/Event$Type\lDUP\lICONST_0\lGETSTATIC kanzi/Event$Type.COMPRESSION_START : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_1\lGETSTATIC kanzi/Event$Type.BEFORE_TRANSFORM : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_2\lGETSTATIC kanzi/Event$Type.AFTER_TRANSFORM : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_3\lGETSTATIC kanzi/Event$Type.BEFORE_ENTROPY : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_4\lGETSTATIC kanzi/Event$Type.AFTER_ENTROPY : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_5\lGETSTATIC kanzi/Event$Type.COMPRESSION_END : Lkanzi/Event$Type;\lAASTORE\lGOTO L9\l"];
+346119878 [label="L8\lFRAME SAME1 kanzi/app/InfoPrinter\lBIPUSH 6\lANEWARRAY kanzi/Event$Type\lDUP\lICONST_0\lGETSTATIC kanzi/Event$Type.DECOMPRESSION_START : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_1\lGETSTATIC kanzi/Event$Type.BEFORE_ENTROPY : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_2\lGETSTATIC kanzi/Event$Type.AFTER_ENTROPY : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_3\lGETSTATIC kanzi/Event$Type.BEFORE_TRANSFORM : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_4\lGETSTATIC kanzi/Event$Type.AFTER_TRANSFORM : Lkanzi/Event$Type;\lAASTORE\lDUP\lICONST_5\lGETSTATIC kanzi/Event$Type.DECOMPRESSION_END : Lkanzi/Event$Type;\lAASTORE\l"];
+1886486229 [label="L9\lFRAME FULL [kanzi/app/InfoPrinter I kanzi/app/InfoPrinter$Type java/io/PrintStream] [kanzi/app/InfoPrinter [Lkanzi/Event$Type;]\lPUTFIELD kanzi/app/InfoPrinter.thresholds : [Lkanzi/Event$Type;\lL10\lLINENUMBER 61 L10\lLDC \"78dd7329-7e62-4c50-9cc4-055bbbe904e7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 1443475668;
+1795327778 -> 263574422;
+1795327778 -> 346119878;
+1443475668 -> 994030082;
+1443475668 -> 1795327778;
+263574422 -> 1886486229;
+346119878 -> 1886486229;
+1886486229 -> exit;
+1443475668[fontcolor="purple", penwidth=3, color="purple"];
+1886486229[fontcolor="purple", penwidth=3, color="purple"];
+}

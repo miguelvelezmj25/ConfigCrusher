@@ -1,0 +1,43 @@
+digraph getTransformAndCodec {
+node [shape=record];
+1589495365 [label="L4\lLINENUMBER 180 L4\lFRAME SAME\lLDC \"BWT+RANK+ZRLT&FPAQ\"\lLDC \"753e7745-f39f-4348-98ee-9d81466602d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+58216095 [label="L5\lLINENUMBER 183 L5\lFRAME SAME\lLDC \"BWT&CM\"\lLDC \"753e7745-f39f-4348-98ee-9d81466602d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1327304146 [label="L6\lLINENUMBER 186 L6\lFRAME SAME\lLDC \"RLT+TEXT&TPAQ\"\lLDC \"753e7745-f39f-4348-98ee-9d81466602d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+496011647 [label="L0\lLINENUMBER 169 L0\lLDC \"753e7745-f39f-4348-98ee-9d81466602d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lTABLESWITCH
+      0: L1
+      1: L2
+      2: L3
+      3: L4
+      4: L5
+      5: L6
+      default: L7\l"];
+206295976 [label="L7\lLINENUMBER 189 L7\lFRAME SAME\lLDC \"Unknown&Unknown\"\lLDC \"753e7745-f39f-4348-98ee-9d81466602d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1489021718 [label="L1\lLINENUMBER 171 L1\lFRAME SAME\lLDC \"NONE&NONE\"\lLDC \"753e7745-f39f-4348-98ee-9d81466602d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+360393288 [label="L2\lLINENUMBER 174 L2\lFRAME SAME\lLDC \"TEXT+LZ4&HUFFMAN\"\lLDC \"753e7745-f39f-4348-98ee-9d81466602d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+213488361 [label="L3\lLINENUMBER 177 L3\lFRAME SAME\lLDC \"BWT+RANK+ZRLT&ANS0\"\lLDC \"753e7745-f39f-4348-98ee-9d81466602d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+entry -> 496011647;
+1589495365 -> exit;
+58216095 -> exit;
+1327304146 -> exit;
+496011647 -> 1589495365;
+496011647 -> 58216095;
+496011647 -> 1327304146;
+496011647 -> 206295976;
+496011647 -> 1489021718;
+496011647 -> 360393288;
+496011647 -> 213488361;
+206295976 -> exit;
+1489021718 -> exit;
+360393288 -> exit;
+213488361 -> exit;
+1589495365[fontcolor="purple", penwidth=3, color="purple"];
+58216095[fontcolor="purple", penwidth=3, color="purple"];
+1327304146[fontcolor="purple", penwidth=3, color="purple"];
+496011647[fontcolor="purple", penwidth=3, color="purple"];
+206295976[fontcolor="purple", penwidth=3, color="purple"];
+1489021718[fontcolor="purple", penwidth=3, color="purple"];
+360393288[fontcolor="purple", penwidth=3, color="purple"];
+213488361[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -156,7 +156,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
         System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
-        System.out.println();
+        System.out.println("");
     }
 
     private void matchBlocksToDecisions(Set<ClassNode> classNodes) {
@@ -357,9 +357,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            System.out.println("Transforming class to remove regions " + classNode.name);
+            System.out.println("Propagate regions up in class " + classNode.name);
 
             for(MethodNode methodNode : methodsToInstrument) {
+                System.out.println("Propagate regions up in method " + methodNode.name);
                 updatedMethods = updatedMethods | this.propagateUpRegionsInMethod(methodNode);
             }
         }
@@ -449,6 +450,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private boolean propagateUpRegions(MethodNode methodNode, Map<MethodBlock, JavaRegion> blocksToRegions) {
+        this.debugBlockDecisions(methodNode);
+
         boolean updated = false;
         MethodGraph graph = this.getMethodGraph(methodNode);
         MethodBlock alphaBlock = graph.getEntryBlock();
@@ -484,19 +487,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            if(methodNode.name.contains("getColors")) {
-                System.out.println();
-            }
-
             if(a.getPredecessors().isEmpty()) {
                 throw new RuntimeException("The predecessors cannot be empty " + a.getID());
             }
 
             for(MethodBlock p : a.getPredecessors()) {
-                if(methodNode.name.contains("getColors")) {
-                    System.out.println();
-                }
-
                 JavaRegion pRegion = blocksToRegions.get(p);
                 JavaRegion newRegion = new JavaRegion(aRegion.getRegionPackage(), aRegion.getRegionClass(), aRegion.getRegionMethod());
                 int index;
@@ -520,6 +515,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 updated = true;
             }
         }
+
+        this.debugBlockDecisions(methodNode);
 
         return updated;
     }
@@ -905,23 +902,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 MethodBlock regionStartBlock = region.getStartMethodBlock();
                 MethodBlock possibleRegionStartBlock = possibleInnerRegion.getStartMethodBlock();
 
-                if(regionStartBlock == null) {
-                    System.out.println();
-                }
-
-                if(possibleRegionStartBlock == null) {
-                    System.out.println();
-                }
-
-                if(graph.getDominators() == null) {
-                    System.out.println();
-                }
-
-                if(graph.getDominators().get(regionStartBlock) == null) {
-                    System.out.println();
-                }
-
-
                 // Continue if the possible inner region is an outer region of the current region
                 if(graph.getDominators().get(regionStartBlock).contains(possibleRegionStartBlock)) {
                     continue;
@@ -1102,7 +1082,75 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     }
 
+    private void debugBlockDecisions(MethodNode methodNode) {
+        System.out.println("Debugging block decisions for " + methodNode.name);
+        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
+
+        MethodGraph graph = this.getMethodGraph(methodNode);
+        Set<MethodBlock> blocks = graph.getBlocks();
+
+        StringBuilder dotString = new StringBuilder("digraph " + methodNode.name + " {\n");
+        dotString.append("node [shape=record];\n");
+
+        for(MethodBlock block : blocks) {
+            dotString.append(block.getID());
+            dotString.append(" [label=\"");
+            dotString.append(block.getID());
+            dotString.append(" - ");
+
+            JavaRegion region = blocksToRegions.get(block);
+
+            if(region == null) {
+                dotString.append("[]");
+            }
+            else {
+                Set<String> decision = this.getDecision(region);
+                dotString.append(decision);
+            }
+
+            dotString.append("\"];\n");
+        }
+
+        dotString.append(graph.getEntryBlock().getID());
+        dotString.append(";\n");
+        dotString.append(graph.getExitBlock().getID());
+        dotString.append(";\n");
+
+        for(MethodBlock methodBlock : graph.getBlocks()) {
+            for(MethodBlock successor : methodBlock.getSuccessors()) {
+                dotString.append(methodBlock.getID());
+                dotString.append(" -> ");
+                dotString.append(successor.getID());
+                dotString.append(";\n");
+            }
+        }
+
+        dotString.append("}");
+
+        System.out.println(dotString);
+    }
+
+    private void debugBlocksAndRegions(MethodNode methodNode) {
+        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
+        int blocksToDecisionCount = 0;
+
+        for(JavaRegion r : blocksToRegions.values()) {
+            if(r != null) {
+                blocksToDecisionCount++;
+            }
+        }
+
+        int regionsInMethodCount = this.getRegionsInMethod(methodNode).size();
+
+        if(blocksToDecisionCount != regionsInMethodCount) {
+            throw new RuntimeException("The number of regions in a method does not match in the blocks to regions and methods to regions");
+        }
+    }
+
     private void setStartAndEndBlocks(MethodNode methodNode) {
+        this.debugBlocksAndRegions(methodNode);
+        this.debugBlockDecisions(methodNode);
+
         MethodGraph graph = this.getMethodGraph(methodNode);
         MethodBlock ro = graph.getExitBlock();
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
@@ -1114,10 +1162,13 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            if(!graph.getReachableBlocks(blockToRegion.getKey(), graph.getExitBlock()).contains(graph.getExitBlock())) {
-                throw new RuntimeException("Check");
-//                this.regionsToOptionSet.remove(blockToRegion.getValue());
+            if(graph.getReachableBlocks(blockToRegion.getKey(), graph.getExitBlock()).contains(graph.getExitBlock())) {
+                continue;
             }
+
+            this.regionsToOptionSet.remove(blockToRegion.getValue());
+            blocksToRegions.put(blockToRegion.getKey(), null);
+            this.debugBlocksAndRegions(methodNode);
         }
 
         // Check if there is a catch with an implicit flow
@@ -1154,22 +1205,29 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 end = graph.getExitBlock();
             }
             else {
-                if(start.getSuccessors().size() < 2) {
-                    throw new RuntimeException("A control flow decision has less than 2 successors " + start.getID());
-                }
-
                 MethodBlock ipd = graph.getImmediatePostDominator(start);
                 JavaRegion ipdRegion = blocksToRegions.get(ipd);
                 Set<String> ipdDecision = this.getDecision(ipdRegion);
-                MethodBlock ipdNext = graph.getImmediatePostDominator(ipd);
 
-                while(ipd != ro && ipdNext != ro && (aDecision.equals(ipdDecision) || aDecision.containsAll(ipdDecision))) {
-                    ipd = graph.getImmediatePostDominator(ipd);
+                while(ipd != ro && (aDecision.equals(ipdDecision) || aDecision.containsAll(ipdDecision))) {
+                    MethodBlock temp = graph.getImmediatePostDominator(ipd);
+
+                    if(temp == ro & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == ro) {
+                        break;
+                    }
+
+                    ipd = temp;
                     ipdRegion = blocksToRegions.get(ipd);
                     ipdDecision = this.getDecision(ipdRegion);
                 }
 
                 end = ipd;
+
+//                if(start.getSuccessors().size() < 2) {
+//                    System.out.println("THERE WAS A PROBLEM");
+//                    this.debugBlockDecisions(methodNode);
+//                    throw new RuntimeException("A control flow decision has less than 2 successors " + start.getID());
+//                }
             }
 
             Set<MethodBlock> ends = new HashSet<>();
@@ -1203,6 +1261,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             for(MethodBlock b : reachables) {
                 JavaRegion bRegion = blocksToRegions.get(b);
+
+                if(bRegion == null) {
+                    continue;
+                }
+
                 Set<String> bDecision = this.getDecision(bRegion);
 
                 if(!aDecision.equals(bDecision) && !aDecision.containsAll(bDecision)) {
@@ -1211,8 +1274,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
                 blocksToRegions.put(b, null);
                 this.regionsToOptionSet.remove(bRegion);
+                this.debugBlocksAndRegions(methodNode);
             }
         }
+
+        this.debugBlocksAndRegions(methodNode);
     }
 
     public MethodBlock getBlockToEndInstrumentingBeforeIt(MethodGraph methodGraph, MethodBlock start) {

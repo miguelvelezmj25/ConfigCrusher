@@ -1,15 +1,15 @@
 digraph create {
 node [shape=record];
-1932983011 [label="L4\lLINENUMBER 330 L4\lNEW org/prevayler/implementation/replication/ServerListener\lDUP\lALOAD 2\lNEW org/prevayler/foundation/network/OldNetworkImpl\lDUP\lINVOKESPECIAL org/prevayler/foundation/network/OldNetworkImpl.\<init\> ()V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._serverPort : I\lINVOKESPECIAL org/prevayler/implementation/replication/ServerListener.\<init\> (Lorg/prevayler/implementation/publishing/TransactionPublisher;Lorg/prevayler/foundation/network/OldNetworkImpl;I)V\lPOP\l"];
-632501861 [label="L0\lLINENUMBER 327 L0\lLDC \"4e67e0f4-06f4-4677-af58-d5dfeb9ab92e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.snapshotManager ()Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;\lASTORE 1\lL1\lLINENUMBER 328 L1\lALOAD 0\lALOAD 1\lINVOKESPECIAL org/prevayler/PrevaylerFactory.publisher (Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;)Lorg/prevayler/implementation/publishing/TransactionPublisher;\lASTORE 2\lL2\lLINENUMBER 329 L2\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._serverPort : I\lICONST_M1\lIF_ICMPEQ L3\l"];
-1803372144 [label="L3\lLINENUMBER 332 L3\lFRAME APPEND [org/prevayler/implementation/snapshot/GenericSnapshotManager org/prevayler/implementation/publishing/TransactionPublisher]\lNEW org/prevayler/implementation/PrevaylerImpl\lDUP\lALOAD 1\lALOAD 2\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journalSerializer ()Lorg/prevayler/foundation/serialization/Serializer;\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._transactionDeepCopyMode : Z\lINVOKESPECIAL org/prevayler/implementation/PrevaylerImpl.\<init\> (Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;Lorg/prevayler/implementation/publishing/TransactionPublisher;Lorg/prevayler/foundation/serialization/Serializer;Z)V\lLDC \"4e67e0f4-06f4-4677-af58-d5dfeb9ab92e\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+2071636726 [label="L3\lLINENUMBER 332 L3\lFRAME APPEND [org/prevayler/implementation/snapshot/GenericSnapshotManager org/prevayler/implementation/publishing/TransactionPublisher]\lNEW org/prevayler/implementation/PrevaylerImpl\lDUP\lALOAD 1\lALOAD 2\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journalSerializer ()Lorg/prevayler/foundation/serialization/Serializer;\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._transactionDeepCopyMode : Z\lINVOKESPECIAL org/prevayler/implementation/PrevaylerImpl.\<init\> (Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;Lorg/prevayler/implementation/publishing/TransactionPublisher;Lorg/prevayler/foundation/serialization/Serializer;Z)V\lLDC \"9334ffca-7b44-4b47-ba45-57c9bae1af90\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1104302735 [label="L0\lLINENUMBER 327 L0\lLDC \"9334ffca-7b44-4b47-ba45-57c9bae1af90\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.snapshotManager ()Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;\lASTORE 1\lL1\lLINENUMBER 328 L1\lALOAD 0\lALOAD 1\lINVOKESPECIAL org/prevayler/PrevaylerFactory.publisher (Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;)Lorg/prevayler/implementation/publishing/TransactionPublisher;\lASTORE 2\lL2\lLINENUMBER 329 L2\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._serverPort : I\lICONST_M1\lIF_ICMPEQ L3\l"];
+1870661954 [label="L4\lLINENUMBER 330 L4\lNEW org/prevayler/implementation/replication/ServerListener\lDUP\lALOAD 2\lNEW org/prevayler/foundation/network/OldNetworkImpl\lDUP\lINVOKESPECIAL org/prevayler/foundation/network/OldNetworkImpl.\<init\> ()V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._serverPort : I\lINVOKESPECIAL org/prevayler/implementation/replication/ServerListener.\<init\> (Lorg/prevayler/implementation/publishing/TransactionPublisher;Lorg/prevayler/foundation/network/OldNetworkImpl;I)V\lPOP\l"];
 entry;
 exit;
-entry -> 632501861;
-1932983011 -> 1803372144;
-632501861 -> 1932983011;
-632501861 -> 1803372144;
-1803372144 -> exit;
-632501861[fontcolor="purple", penwidth=3, color="purple"];
-1803372144[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1104302735;
+2071636726 -> exit;
+1104302735 -> 2071636726;
+1104302735 -> 1870661954;
+1870661954 -> 2071636726;
+2071636726[fontcolor="purple", penwidth=3, color="purple"];
+1104302735[fontcolor="purple", penwidth=3, color="purple"];
 }

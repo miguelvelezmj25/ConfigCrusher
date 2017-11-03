@@ -154,40 +154,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         this.instrument(classNodes);
 
-//        // Instrument
-//        for(ClassNode classNode : classNodes) {
-//            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-//
-//            if(methodsToInstrument.isEmpty()) {
-//                continue;
-//            }
-//
-//            System.out.println("Transforming class for instrumentation " + classNode.name);
-//
-//            for(MethodNode methodToInstrument : methodsToInstrument) {
-//                this.buildMethodGraph(methodToInstrument);
-//                this.transformMethod(methodToInstrument);
-//            }
-//
-//            this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
-//
-//            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
-//            MethodTracer tracer = classInspector.visitClass();
-//
-//            for(MethodNode methodNode : methodsToInstrument) {
-//                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
-//                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-//                PrettyMethodGraph prettyGraph = prettyBuilder.build();
-//                prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
-//
-//                try {
-//                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-//                } catch(InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-
         System.out.println("# of regions before optimizing: " + initialRegionCount);
         System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
         System.out.println();
@@ -484,7 +450,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     private boolean propagateUpRegions(MethodNode methodNode, Map<MethodBlock, JavaRegion> blocksToRegions) {
         boolean updated = false;
-        MethodGraph graph = this.buildMethodGraph(methodNode);
+        MethodGraph graph = this.getMethodGraph(methodNode);
         MethodBlock alphaBlock = graph.getEntryBlock();
         List<MethodBlock> worklist = new ArrayList<>();
         worklist.addAll(blocksToRegions.keySet());
@@ -643,7 +609,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.calculateASMStartIndex(regionsInMethod, methodNode);
         }
 
-        this.buildMethodGraph(methodNode);
+        this.getMethodGraph(methodNode);
         this.setStartAndEndBlocksIfAbsent(methodNode, regionsInMethod);
 
         boolean updatedRegions;
@@ -697,7 +663,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this.setStartAndEndBlocks(graph, instructionsToRegion);
     }
 
-    private MethodGraph buildMethodGraph(MethodNode methodNode) {
+    private MethodGraph getMethodGraph(MethodNode methodNode) {
         MethodGraph graph = this.methodsToGraphs.get(methodNode);
 
         if(graph == null) {
@@ -705,6 +671,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             graph = builder.build();
             this.methodsToGraphs.put(methodNode, graph);
         }
+
+        return graph;
+    }
+
+    private MethodGraph buildMethodGraph(MethodNode methodNode) {
+        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
+        MethodGraph graph = builder.build();
+        this.methodsToGraphs.put(methodNode, graph);
 
         return graph;
     }
@@ -888,12 +862,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @param regionsInMethod
      */
     private boolean removeInnerRegionsInMethod(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
-        MethodGraph graph = this.methodsToGraphs.get(methodNode);
-
-        if(graph == null) {
-            graph = this.buildMethodGraph(methodNode);
-        }
-
+        MethodGraph graph = this.getMethodGraph(methodNode);
         Map<JavaRegion, Set<JavaRegion>> regionsToInnerRegionSet = new LinkedHashMap<>();
         graph.getDominators();
 
@@ -1105,7 +1074,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private void setStartAndEndBlocks(MethodNode methodNode) {
-        MethodGraph graph = this.buildMethodGraph(methodNode);
+        MethodGraph graph = this.getMethodGraph(methodNode);
         MethodBlock ro = graph.getExitBlock();
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
 

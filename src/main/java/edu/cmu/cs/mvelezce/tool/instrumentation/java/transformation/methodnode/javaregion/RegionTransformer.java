@@ -484,8 +484,17 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.regionsToOptionSet.remove(bRegion);
 
             for(MethodBlock p : a.getPredecessors()) {
+                JavaRegion newRegion = new JavaRegion(aRegion.getRegionPackage(), aRegion.getRegionClass(), aRegion.getRegionMethod());
+                int index;
 
-                JavaRegion newRegion = new JavaRegion(bRegion.getRegionPackage(), bRegion.getRegionClass(), bRegion.getRegionMethod(), bRegion.getStartBytecodeIndex());
+                if(bRegion == null) {
+                    index = methodNode.instructions.indexOf(b.getInstructions().get(0));
+                }
+                else {
+                    index = bRegion.getStartBytecodeIndex();
+                }
+
+                newRegion.setStartBytecodeIndex(index);
                 blocksToRegions.put(p, newRegion);
 
                 Set<Set<String>> newOptionSet = new HashSet<>();
@@ -502,6 +511,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     private Set<String> getDecision(JavaRegion region) {
         Set<String> decision = new HashSet<>();
+
+        if(region == null) {
+            return decision;
+        }
+
         Set<Set<String>> optionSet = this.regionsToOptionSet.get(region);
 
         for(Set<String> options : optionSet) {
@@ -1160,12 +1174,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             for(MethodBlock b : reachables) {
                 JavaRegion bRegion = blocksToRegions.get(b);
-
-                if(bRegion == null) {
-                    continue;
-                }
-
-                Set<String> bDecision = getDecision(bRegion);
+                Set<String> bDecision = this.getDecision(bRegion);
 
                 if(!aDecision.equals(bDecision) && !aDecision.containsAll(bDecision)) {
                     continue;

@@ -1,1 +1,156 @@
-[{"region":{"regionID":"582b1d76-0ae4-4d25-b686-85014855902f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions","regionMethod":"bar()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B","C","D"]]},{"region":{"regionID":"3b41a52c-1ff8-4cf2-9d27-687589da4a7e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions","regionMethod":"woo()V","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B","C","D"]]},{"region":{"regionID":"240bc57d-879a-4f11-8a1f-1674462bb6be","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions","regionMethod":"foo()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B","C","D"]]},{"region":{"regionID":"7437a5f2-498c-4493-a251-a792e857eaab","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":29,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B","C","D"]]},{"region":{"regionID":"993c0b09-d87e-4845-bc5c-31c8a76ed02e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions","regionMethod":"woo()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B","C","D"]]},{"region":{"regionID":"119d0c7a-49c1-43d9-b347-0f5060ad86b6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions","regionMethod":"foo()V","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B","C","D"]]},{"region":{"regionID":"48324eda-cfd7-4f8b-acfd-c923d9d6f52b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"Regions","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":26,"startMethodBlock":null,"endMethodBlocks":[]},"options":[["A","B","C","D"]]}]
+[
+  {
+    "region": {
+      "regionID": "582b1d76-0ae4-4d25-b686-85014855902f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions",
+      "regionMethod": "bar()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3b41a52c-1ff8-4cf2-9d27-687589da4a7e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions",
+      "regionMethod": "woo()V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "240bc57d-879a-4f11-8a1f-1674462bb6be",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions",
+      "regionMethod": "foo()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7437a5f2-498c-4493-a251-a792e857eaab",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 29,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "993c0b09-d87e-4845-bc5c-31c8a76ed02e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions",
+      "regionMethod": "woo()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "119d0c7a-49c1-43d9-b347-0f5060ad86b6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions",
+      "regionMethod": "foo()V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "48324eda-cfd7-4f8b-acfd-c923d9d6f52b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 26,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    ]
+  }
+]

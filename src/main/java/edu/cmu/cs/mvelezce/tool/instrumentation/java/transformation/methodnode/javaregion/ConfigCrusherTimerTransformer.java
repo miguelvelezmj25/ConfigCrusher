@@ -24,7 +24,6 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
     @Override
     public void transformMethod(MethodNode methodNode) {
-        System.out.println("Before transforming");
         MethodGraph graph = this.getMethodsToGraphs().get(methodNode);
 
         InsnList newInstructions;
@@ -34,7 +33,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
             newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
         }
         else {
-            newInstructions = this.instrumentNormal(methodNode, graph, regionsInMethod);
+            newInstructions = this.instrumentRegion(methodNode, graph, regionsInMethod);
         }
 
         methodNode.instructions.clear();
@@ -43,17 +42,13 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         System.out.println("After transforming");
         DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
         builder.build();
-        System.out.print("");
+        System.out.println("");
     }
 
     private InsnList instrumentStart(MethodBlock methodBlock, List<JavaRegion> regionsInMethod) {
         InsnList newInstructions = new InsnList();
 
         for(JavaRegion javaRegion : regionsInMethod) {
-            if(javaRegion.getStartMethodBlock() == null) {
-                System.out.println();
-            }
-
             if(!javaRegion.getStartMethodBlock().equals(methodBlock)) {
                 continue;
             }
@@ -110,14 +105,88 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
      * @param methodNode
      * @param regionsInMethod
      */
-    private InsnList instrumentNormal(MethodNode methodNode, MethodGraph graph, List<JavaRegion> regionsInMethod) {
+    private InsnList instrumentRegion(MethodNode methodNode, MethodGraph graph, List<JavaRegion> regionsInMethod) {
         System.out.println("########### " + this.getMethodNodeToClassNode().get(methodNode).name + " " + methodNode.name);
+
+        InsnList newInstructions = this.instrumentRegionsStartAndEndSameBlock(methodNode, regionsInMethod);
+        methodNode.instructions.clear();
+        methodNode.instructions.add(newInstructions);
+
+        newInstructions = this.instrumentNormal(methodNode, regionsInMethod);
+
+        return newInstructions;
+    }
+
+    private InsnList instrumentRegionsStartAndEndSameBlock(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
+        InsnList newInstructions = new InsnList();
+        ListIterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
+
+        // Have to loop through the instructions to avoid changing the current instructions in the method node
+        while(iterator.hasNext()) {
+            newInstructions.add(iterator.next());
+        }
+
+        List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
+        Collections.reverse(regionsInMethodReversed);
+
+        InsnList instructions = methodNode.instructions;
+        ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
+
+        MethodGraph graph = this.getMethodsToGraphs().get(methodNode);
+
+        while(instructionsIterator.hasNext()) {
+            AbstractInsnNode instruction = instructionsIterator.next();
+            MethodBlock block = graph.getMethodBlock(instruction);
+
+            if(block == null) {
+                continue;
+            }
+
+            for(JavaRegion region : regionsInMethod) {
+                if(!this.startAndEndInSameBlock(region, block)) {
+                    continue;
+                }
+
+                InsnList startInstructions = this.getInstructionsStartRegion(region);
+                newInstructions.insertBefore(instruction.getNext(), startInstructions);
+
+                if(this.getEndRegionBlocksWithReturn().contains(block)) {
+                    instruction = instructionsIterator.next();
+                    int opcode = instruction.getOpcode();
+
+                    while((opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN) && opcode != Opcodes.RET) {
+                        instruction = instructionsIterator.next();
+                        opcode = instruction.getOpcode();
+                    }
+
+                    InsnList endInstructions = this.instrumentEnd(block, regionsInMethodReversed);
+                    newInstructions.add(endInstructions);
+                }
+                else {
+                    AbstractInsnNode lastInst = block.getInstructions().get(block.getInstructions().size() - 1);
+
+                    while(lastInst != instruction) {
+                        instruction = instructionsIterator.next();
+                    }
+
+                    InsnList endInstructions = this.instrumentEnd(block, regionsInMethodReversed);
+                    newInstructions.add(endInstructions);
+                }
+            }
+        }
+
+        return newInstructions;
+    }
+
+    private InsnList instrumentNormal(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
         List<JavaRegion> regionsInMethodReversed = new ArrayList<>(regionsInMethod);
         Collections.reverse(regionsInMethodReversed);
 
         InsnList newInstructions = new InsnList();
         InsnList instructions = methodNode.instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
+
+        MethodGraph graph = this.getMethodsToGraphs().get(methodNode);
 
         while(instructionsIterator.hasNext()) {
             AbstractInsnNode instruction = instructionsIterator.next();
@@ -154,9 +223,21 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         return newInstructions;
     }
 
-//    private Set<String> optionsInMethod() {
-//
-//    }
+    private boolean startAndEndInSameBlock(JavaRegion region, MethodBlock block) {
+        if(region.getStartMethodBlock() != block) {
+            return false;
+        }
+
+        if(region.getEndMethodBlocks().size() != 1) {
+            return false;
+        }
+
+        if(region.getStartMethodBlock() != region.getEndMethodBlocks().iterator().next()) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * This can be done when there is a single region in a method
@@ -205,50 +286,5 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
         return newInstructions;
     }
-
-    //    private Map<MethodBlock, List<JavaRegion>> addRegionsInBlocksWithReturn(MethodBlock methodBlock, List<JavaRegion> regionsInMethod) {
-//        Map<MethodBlock, List<JavaRegion>> blocksToRegions = new HashMap<>();
-//
-//        for(JavaRegion javaRegion : regionsInMethod) {
-//            for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
-//                if(endMethodBlock != methodBlock) {
-//                    continue;
-//                }
-//
-//                if(!blocksToRegions.containsKey(endMethodBlock)) {
-//                    blocksToRegions.put(endMethodBlock, new ArrayList<>());
-//                }
-//
-//                blocksToRegions.get(endMethodBlock).add(javaRegion);
-//            }
-//        }
-//
-//        return blocksToRegions;
-//    }
-
-    //    /**
-//     * TODO this might execute extra iterations that are not needed since the LabelNodes are the same for both old and new labels, but the info is different
-//     *
-//     * @param instructions
-//     */
-//    // TODO why dont we return a new list
-//    private void updateLabels(InsnList instructions, LabelNode oldLabel, LabelNode newLabel) {
-//        System.out.println(oldLabel.getLabel() + " -> " + newLabel.getLabel().info);
-//        int numberOfInstructions = instructions.size();
-//        AbstractInsnNode instruction = instructions.getFirst();
-//
-//        for(int i = 0; i < numberOfInstructions; i++) {
-//            if(instruction.getType() == AbstractInsnNode.JUMP_INSN) {
-//                JumpInsnNode jumpInsnNode = (JumpInsnNode) instruction;
-//
-//                if(jumpInsnNode.label == oldLabel) {
-//                    jumpInsnNode.label = newLabel;
-//                    System.out.println("CHANGE");
-//                }
-//            }
-//
-//            instruction = instruction.getNext();
-//        }
-//    }
 
 }

@@ -364,6 +364,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return updatedMethods;
     }
 
+    /**
+     * TODO
+     *
+     * @return
+     */
     private boolean propagateUpAcrossMethods() {
         boolean updated = false;
 
@@ -373,13 +378,16 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         while(!worklist.isEmpty()) {
             SootMethod a = worklist.remove(0);
+            System.out.println("Propagate regions across method " + a.getName());
 
+            // Check not part of algorithm
             if(a.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
                 continue;
             }
 
             List<JavaRegion> regionsInMethod = this.getRegionsInMethod(a);
 
+            // Optimization
             if(regionsInMethod.isEmpty()) {
                 continue;
             }
@@ -395,7 +403,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             Set<String> aDecision = this.getDecision(aRegion);
 
-            // Nothing to push up
+            // Optimization
             if(aDecision.isEmpty()) {
                 continue;
             }
@@ -408,8 +416,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 MethodNode bMethodNode = this.sootMethodToMethodNode.get(bSootMethod);
                 LinkedHashMap<MethodBlock, JavaRegion> bBlocksToRegions = this.methodsToBlocksDecisions.get(bMethodNode);
 
-                AbstractInsnNode inst = this.getASMInstruction(edge);
-                MethodBlock bBlock = this.getMethodBlockInCallerMethod(edge, inst);
+                AbstractInsnNode inst = this.getASMInstructionFromSrc(edge);
+                MethodBlock bBlock = this.getMethodBlockInCallerMethod(bSootMethod, inst);
+
                 JavaRegion bRegion = bBlocksToRegions.get(bBlock);
                 Set<String> bDecision = this.getDecision(bRegion);
 
@@ -428,10 +437,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             for(Edge edge : edges) {
                 SootMethod bSootMethod = edge.src();
                 MethodNode bMethodNode = this.sootMethodToMethodNode.get(bSootMethod);
+                this.debugBlocksAndRegions(bMethodNode);
                 LinkedHashMap<MethodBlock, JavaRegion> bBlocksToRegions = this.methodsToBlocksDecisions.get(bMethodNode);
 
-                AbstractInsnNode inst = this.getASMInstruction(edge);
-                MethodBlock bBlock = this.getMethodBlockInCallerMethod(edge, inst);
+                AbstractInsnNode inst = this.getASMInstructionFromSrc(edge);
+                MethodBlock bBlock = this.getMethodBlockInCallerMethod(bSootMethod, inst);
+
                 JavaRegion bRegion = bBlocksToRegions.get(bBlock);
 
                 JavaRegion newRegion;
@@ -459,6 +470,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 Set<Set<String>> newOptionSet = new HashSet<>();
                 newOptionSet.add(aDecision);
                 this.regionsToOptionSet.put(newRegion, newOptionSet);
+
+                this.debugBlocksAndRegions(bMethodNode);
             }
 
             edges = this.getCallerEdges(a);
@@ -473,9 +486,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return updated;
     }
 
-    private MethodBlock getMethodBlockInCallerMethod(Edge edge, AbstractInsnNode inst) {
+    private MethodBlock getMethodBlockInCallerMethod(SootMethod sootMethod, AbstractInsnNode inst) {
         MethodBlock block = null;
-        SootMethod sootMethod = edge.src();
         MethodNode methodNode = this.sootMethodToMethodNode.get(sootMethod);
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
 
@@ -492,10 +504,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return block;
     }
 
-    private AbstractInsnNode getASMInstruction(Edge edge) {
-        SootMethod src = edge.src();
+    private AbstractInsnNode getASMInstructionFromSrc(Edge edge) {
         Unit unit = edge.srcUnit();
-
         List<Integer> bytecodeIndexes = new ArrayList<>();
 
         for(Tag tag : unit.getTags()) {
@@ -518,6 +528,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             int index = bytecodeIndexes.indexOf(Collections.min(bytecodeIndexes));
             bytecodeIndex = bytecodeIndexes.get(index);
         }
+
+        SootMethod src = edge.src();
 
         return this.getASMInstruction(src, bytecodeIndex);
     }
@@ -668,7 +680,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 Set<Set<String>> newOptionSet = new HashSet<>();
                 newOptionSet.add(aDecision);
                 this.regionsToOptionSet.put(newRegion, newOptionSet);
+            }
 
+            for(MethodBlock p : a.getPredecessors()) {
                 worklist.add(0, p);
             }
 

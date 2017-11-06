@@ -1,0 +1,17 @@
+digraph publisher {
+node [shape=record];
+1016807786 [label="L0\lLINENUMBER 350 L0\lLDC \"1bd7e03e-32f4-4dcc-83c3-f74e4fcfa5c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._remoteServerIpAddress : Ljava/lang/String;\lIFNULL L1\l"];
+1306754867 [label="L2\lLINENUMBER 351 L2\lNEW org/prevayler/implementation/replication/ClientPublisher\lDUP\lNEW org/prevayler/foundation/network/OldNetworkImpl\lDUP\lINVOKESPECIAL org/prevayler/foundation/network/OldNetworkImpl.\<init\> ()V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._remoteServerIpAddress : Ljava/lang/String;\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._remoteServerPort : I\lINVOKESPECIAL org/prevayler/implementation/replication/ClientPublisher.\<init\> (Lorg/prevayler/foundation/network/OldNetworkImpl;Ljava/lang/String;I)V\lLDC \"1bd7e03e-32f4-4dcc-83c3-f74e4fcfa5c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+375985090 [label="L3\lFRAME FULL [] [java/lang/Throwable]\lNOP\lNOP\l"];
+468552445 [label="L1\lLINENUMBER 353 L1\lFRAME SAME\lLDC \"1d5a12bc-8e43-4c51-84ed-6f7481f57aac\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lNEW org/prevayler/implementation/publishing/CentralPublisher\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.clock ()Lorg/prevayler/Clock;\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journal ()Lorg/prevayler/implementation/journal/Journal;\lINVOKESPECIAL org/prevayler/implementation/publishing/CentralPublisher.\<init\> (Lorg/prevayler/Clock;Lorg/prevayler/implementation/journal/Journal;)V\lLDC \"1d5a12bc-8e43-4c51-84ed-6f7481f57aac\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"1bd7e03e-32f4-4dcc-83c3-f74e4fcfa5c3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+entry -> 1016807786;
+1016807786 -> 1306754867;
+1016807786 -> 468552445;
+1306754867 -> exit;
+468552445 -> exit;
+1016807786[fontcolor="purple", penwidth=3, color="purple"];
+1306754867[fontcolor="purple", penwidth=3, color="purple"];
+468552445[fontcolor="purple", penwidth=3, color="purple"];
+}

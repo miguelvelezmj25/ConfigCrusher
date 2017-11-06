@@ -1,0 +1,530 @@
+[
+  {
+    "region": {
+      "regionID": "d8d21d2d-0c9d-4b6f-9df5-ba0646bfaebb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1bd7e03e-32f4-4dcc-83c3-f74e4fcfa5c3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "publisher(Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;)Lorg/prevayler/implementation/publishing/TransactionPublisher;",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "750d89e2-fca7-4f7a-bf9b-d73d204d1474",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 146,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6d2cb2b1-6969-40b2-8b48-3f9313696b72",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "TransactionCapsule",
+      "regionMethod": "<init>(Lorg/prevayler/Transaction;Lorg/prevayler/foundation/serialization/Serializer;Z)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "DEEPCOPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1d995fa4-d4d5-4af3-a3e6-ee879039c1a3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "journal()Lorg/prevayler/implementation/journal/Journal;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8a008257-5c9c-4aa6-8d9c-940ea7e88572",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "Capsule",
+      "regionMethod": "<init>(Ljava/lang/Object;Lorg/prevayler/foundation/serialization/Serializer;Z)V",
+      "startBytecodeIndex": 12,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "DEEPCOPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d797a2c7-9321-41b7-a256-3c1875cbeeef",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 278,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0ed4aaf3-5f71-4a24-89ed-bd896366bee9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 299,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "SNAPSHOTSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "cff4c52b-e408-420c-880c-a8985e423dd6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 177,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "DISKSYNC"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7b1d670f-2d00-4f10-8617-21f728db20f1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeCalculator",
+      "regionMethod": "start1()V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "da6c1b8c-d2ce-4918-ba93-c4bb691368fc",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "snapshotManager()Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a0b4f2a9-71ff-4d38-ac28-54afa8da7c64",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.replication",
+      "regionClass": "ClientPublisher",
+      "regionMethod": "receiveTransactionFromServer()V",
+      "startBytecodeIndex": 158,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE",
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1d5a12bc-8e43-4c51-84ed-6f7481f57aac",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "publisher(Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;)Lorg/prevayler/implementation/publishing/TransactionPublisher;",
+      "startBytecodeIndex": 26,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7cd7fbd9-05dc-4f34-83cd-49764707e537",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 186,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "43cc93a6-2861-4f77-ae21-d44416413d35",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeCalculator",
+      "regionMethod": "start()V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1c5d85cf-2739-41ba-b9e9-82b766274a60",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.replication",
+      "regionClass": "ClientPublisher",
+      "regionMethod": "receiveTransactionFromServer()V",
+      "startBytecodeIndex": 138,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE",
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f913c51d-0a91-4152-9195-a1f4bc04711b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 387,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "MONITOR",
+        "DISKSYNC",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD",
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a8a72008-8f62-4330-a8da-0c0c721412ff",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "monitor()Lorg/prevayler/foundation/monitor/Monitor;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE",
+        "MONITOR"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b292f365-f238-4c16-a3c3-a3ea8eca02a2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "create()Lorg/prevayler/Prevayler;",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "MONITOR",
+        "DISKSYNC",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD",
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1c71509d-89a6-4d40-931b-d18b4b957f0d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 168,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "DEEPCOPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "cca79c6d-baf8-4bd8-bf27-6633573d5c1c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 437,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "MONITOR",
+        "DISKSYNC",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD",
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3cf42bf4-4b63-4180-a7a2-f7bf88495538",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 204,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "MONITOR"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "968b5756-f6d7-49b2-9340-900168926c2f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation.serialization",
+      "regionClass": "XStreamSerializer",
+      "regionMethod": "writeObject(Ljava/io/OutputStream;Ljava/lang/Object;)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "744bb454-64ba-4270-9ad0-1437927cb644",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "Capsule",
+      "regionMethod": "<init>(Ljava/lang/Object;Lorg/prevayler/foundation/serialization/Serializer;Z)V",
+      "startBytecodeIndex": 30,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3ddbb80f-570f-43c9-adb1-d6c551ecae38",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 195,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ef49fb9b-898e-43e7-96c7-fb1629f85c2a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 408,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "SNAPSHOTSERIALIZER"
+      ]
+    ]
+  }
+]

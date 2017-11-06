@@ -1563,6 +1563,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
                     LinkedHashMap<MethodBlock, JavaRegion> sBlocksToRegions = this.methodsToBlocksDecisions.get(sMethodNode);
 
+                    if(sBlocksToRegions == null) {
+                        // TODO fix this by changing the package name
+                        continue;
+                    }
+
                     for(Map.Entry<MethodBlock, JavaRegion> entry : sBlocksToRegions.entrySet()) {
                         JavaRegion bRegion = entry.getValue();
 

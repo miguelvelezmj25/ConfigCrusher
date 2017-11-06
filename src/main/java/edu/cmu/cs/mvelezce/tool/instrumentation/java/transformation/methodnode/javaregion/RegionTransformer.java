@@ -615,6 +615,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         while(!worklist.isEmpty()) {
             MethodBlock a = worklist.remove(0);
 
+            // Optimization
             if(blocksToRegions.get(a) == null) {
                 continue;
             }
@@ -622,6 +623,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             JavaRegion aRegion = blocksToRegions.get(a);
             Set<String> aDecision = this.getDecision(aRegion);
 
+            // Special case
             if(a.isCatchWithImplicitThrow()) {
 //                blocksToRegions.put(a, null);
 //                this.regionsToOptionSet.remove(aRegion);
@@ -630,6 +632,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             MethodBlock b = graph.getImmediateDominator(a);
 
+            // TODO necessary?
             if(b == alpha) {
                 continue;
             }
@@ -641,6 +644,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
+            // Check
             if(a.getPredecessors().isEmpty()) {
                 throw new RuntimeException("The predecessors cannot be empty " + a.getID());
             }
@@ -666,8 +670,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 this.regionsToOptionSet.put(newRegion, newOptionSet);
 
                 worklist.add(0, p);
-                updated = true;
             }
+
+            updated = true;
         }
 
         this.debugBlockDecisions(methodNode);
@@ -1303,6 +1308,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     /**
      * TODO
+     *
      * @param methodNode
      */
     private void setStartAndEndBlocks(MethodNode methodNode) {
@@ -1400,6 +1406,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     /**
      * TODO
+     *
      * @param methodNode
      */
     private void ignoreCatchWithImplicitThrow(MethodNode methodNode) {
@@ -1493,57 +1500,50 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 Unit unit = this.matchUnit(inst, sootMethod);
                 List<Edge> calleeEdges = this.getCalleeEdges(unit);
 
-                    while(!calleeEdges.isEmpty()) {
-                        Edge outEdge = calleeEdges.remove(0);
-                        SootMethod sSootMethod = outEdge.tgt();
-                        SootMethod sSrc = outEdge.src();
-                        analyzedCallees.add(sSrc);
-                        MethodNode sMethodNode = this.sootMethodToMethodNode.get(sSootMethod);
-                        LinkedHashMap<MethodBlock, JavaRegion> sBlocksToRegions = this.methodsToBlocksDecisions.get(sMethodNode);
+                while(!calleeEdges.isEmpty()) {
+                    Edge outEdge = calleeEdges.remove(0);
+                    SootMethod sSootMethod = outEdge.tgt();
+                    SootMethod sSrc = outEdge.src();
+                    analyzedCallees.add(sSrc);
+                    MethodNode sMethodNode = this.sootMethodToMethodNode.get(sSootMethod);
+                    LinkedHashMap<MethodBlock, JavaRegion> sBlocksToRegions = this.methodsToBlocksDecisions.get(sMethodNode);
 
-                        if(sBlocksToRegions == null) {
-                            List<Edge> moreCallees = this.getCalleeEdges(sSootMethod);
-                            List<Edge> moreEdges = new ArrayList<>();
+                    if(sBlocksToRegions == null) {
+                        List<Edge> moreCallees = this.getCalleeEdges(sSootMethod);
+                        List<Edge> moreEdges = new ArrayList<>();
 
-                            for(Edge anotherCallee : moreCallees) {
-                                if(analyzedCallees.contains(anotherCallee.src())) {
-                                    continue;
-                                }
-
-                                moreEdges.add(anotherCallee);
+                        for(Edge anotherCallee : moreCallees) {
+                            if(analyzedCallees.contains(anotherCallee.src())) {
+                                continue;
                             }
 
-                            calleeEdges.addAll(moreEdges);
+                            moreEdges.add(anotherCallee);
+                        }
 
+                        calleeEdges.addAll(moreEdges);
+
+                        continue;
+                    }
+
+                    for(Map.Entry<MethodBlock, JavaRegion> entry : sBlocksToRegions.entrySet()) {
+                        bRegion = entry.getValue();
+
+                        if(bRegion == null) {
                             continue;
                         }
 
-                        for(Map.Entry<MethodBlock, JavaRegion> entry : sBlocksToRegions.entrySet()) {
-                            bRegion = entry.getValue();
+                        bDecision = this.getDecision(bRegion);
 
-                            if(bRegion == null) {
-                                continue;
-                            }
-
-                            bDecision = this.getDecision(bRegion);
-
-                            if(!aDecision.equals(bDecision) && !aDecision.containsAll(bDecision)) {
-                                continue;
-                            }
-
-                            sBlocksToRegions.put(entry.getKey(), null);
-                            this.regionsToOptionSet.remove(bRegion);
-                            this.debugBlocksAndRegions(methodNode);
+                        if(!aDecision.equals(bDecision) && !aDecision.containsAll(bDecision)) {
+                            continue;
                         }
+
+                        sBlocksToRegions.put(entry.getKey(), null);
+                        this.regionsToOptionSet.remove(bRegion);
+                        this.debugBlocksAndRegions(methodNode);
                     }
                 }
-
-
-
-
-
-
-
+            }
 
 
 //
@@ -1597,6 +1597,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     /**
      * TODO
+     *
      * @param inst
      * @param sootMethod
      * @return

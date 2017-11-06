@@ -149,7 +149,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         while(updatedRegions) {
             updatedRegions = this.propagateUpMethodsInClasses(classNodes);
-//            updatedRegions = updatedRegions | this.processGraph();
+            updatedRegions = updatedRegions | this.propagateUpAcrossMethods();
         }
 
         this.instrument(classNodes);
@@ -347,7 +347,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @return
      * @throws IOException
      */
-    private boolean propagateUpMethodsInClasses(Set<ClassNode> classNodes) throws IOException {
+    private boolean propagateUpMethodsInClasses(Set<ClassNode> classNodes) {
         boolean updatedMethods = false;
 
         for(ClassNode classNode : classNodes) {
@@ -366,6 +366,163 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         return updatedMethods;
+    }
+
+    private boolean propagateUpAcrossMethods() {
+        boolean updated = false;
+
+        Set<SootMethod> methods = this.getSystemMethods();
+        List<SootMethod> worklist = new ArrayList<>();
+        worklist.addAll(methods);
+
+        while(!worklist.isEmpty()) {
+            SootMethod a = worklist.remove(0);
+
+            if(a.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
+                continue;
+            }
+
+            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(a);
+
+            if(regionsInMethod.isEmpty()) {
+                continue;
+            }
+
+            MethodNode methodNode = this.sootMethodToMethodNode.get(a);
+            Collection<JavaRegion> regions = this.methodsToBlocksDecisions.get(methodNode).values();
+            Iterator<JavaRegion> regionsIter = regions.iterator();
+            JavaRegion aRegion = regionsIter.next();
+
+            while(aRegion == null) {
+                aRegion = regionsIter.next();
+            }
+
+            Set<String> aDecision = this.getDecision(aRegion);
+
+            // Nothing to push up
+            if(aDecision.isEmpty()) {
+                continue;
+            }
+
+            boolean canPush = true;
+            List<Edge> edges = this.getCallerEdges(a);
+
+            for(Edge edge : edges) {
+                SootMethod bSootMethod = edge.src();
+                MethodNode bMethodNode = this.sootMethodToMethodNode.get(bSootMethod);
+                LinkedHashMap<MethodBlock, JavaRegion> bBlocksToRegions = this.methodsToBlocksDecisions.get(bMethodNode);
+
+                AbstractInsnNode inst = this.getASMInstruction(edge);
+                MethodBlock bBlock = this.getMethodBlockInCallerMethod(edge, inst);
+                JavaRegion bRegion = bBlocksToRegions.get(bBlock);
+                Set<String> bDecision = this.getDecision(bRegion);
+
+                if(!aDecision.containsAll(bDecision) || aDecision.equals(bDecision)) {
+                    canPush = false;
+                    break;
+                }
+            }
+
+            if(!canPush) {
+                continue;
+            }
+
+            edges = this.getCallerEdges(a);
+
+            for(Edge edge : edges) {
+                SootMethod bSootMethod = edge.src();
+                MethodNode bMethodNode = this.sootMethodToMethodNode.get(bSootMethod);
+                LinkedHashMap<MethodBlock, JavaRegion> bBlocksToRegions = this.methodsToBlocksDecisions.get(bMethodNode);
+
+                AbstractInsnNode inst = this.getASMInstruction(edge);
+                MethodBlock bBlock = this.getMethodBlockInCallerMethod(edge, inst);
+                JavaRegion bRegion = bBlocksToRegions.get(bBlock);
+
+                JavaRegion newRegion;
+                int index;
+
+                if(bRegion == null) {
+                    String classPackage = bSootMethod.getDeclaringClass().getPackageName();
+                    String className = bSootMethod.getDeclaringClass().getShortName();
+                    String methodName = bSootMethod.getBytecodeSignature();
+                    methodName = methodName.substring(methodName.indexOf(" "), methodName.length() - 1).trim();
+
+                    newRegion = new JavaRegion(classPackage, className, methodName);
+                    index = bMethodNode.instructions.indexOf(inst);
+                }
+                else {
+                    newRegion = new JavaRegion(bRegion.getRegionPackage(), bRegion.getRegionClass(), bRegion.getRegionMethod());
+                    index = bRegion.getStartBytecodeIndex();
+                    this.regionsToOptionSet.remove(bRegion);
+                }
+
+                newRegion.setStartBytecodeIndex(index);
+                bBlocksToRegions.put(bBlock, newRegion);
+
+                Set<Set<String>> newOptionSet = new HashSet<>();
+                newOptionSet.add(aDecision);
+                this.regionsToOptionSet.put(newRegion, newOptionSet);
+            }
+
+            edges = this.getCallerEdges(a);
+
+            for(Edge edge : edges) {
+                worklist.add(0, edge.src());
+            }
+
+            updated = true;
+        }
+
+        return updated;
+    }
+
+    private MethodBlock getMethodBlockInCallerMethod(Edge edge, AbstractInsnNode inst) {
+        MethodBlock block = null;
+        SootMethod sootMethod = edge.src();
+        MethodNode methodNode = this.sootMethodToMethodNode.get(sootMethod);
+        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
+
+        for(MethodBlock entry : blocksToRegions.keySet()) {
+            if(!entry.getInstructions().contains(inst)) {
+                continue;
+            }
+
+            block = entry;
+
+            break;
+        }
+
+        return block;
+    }
+
+    private AbstractInsnNode getASMInstruction(Edge edge) {
+        SootMethod src = edge.src();
+        Unit unit = edge.srcUnit();
+
+        List<Integer> bytecodeIndexes = new ArrayList<>();
+
+        for(Tag tag : unit.getTags()) {
+            if(tag instanceof BytecodeOffsetTag) {
+                int bytecodeIndex = ((BytecodeOffsetTag) tag).getBytecodeOffset();
+                bytecodeIndexes.add(bytecodeIndex);
+            }
+        }
+
+        if(bytecodeIndexes.isEmpty()) {
+            throw new RuntimeException("There must be a bytecode index tag");
+        }
+
+        int bytecodeIndex;
+
+        if(bytecodeIndexes.size() == 1) {
+            bytecodeIndex = bytecodeIndexes.get(0);
+        }
+        else {
+            int index = bytecodeIndexes.indexOf(Collections.min(bytecodeIndexes));
+            bytecodeIndex = bytecodeIndexes.get(index);
+        }
+
+        return this.getASMInstruction(src, bytecodeIndex);
     }
 
     /**

@@ -29,6 +29,10 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
             instructionCount++;
         }
 
+        if(instructionCount == 0) {
+            return graph;
+        }
+
         this.getBlocks();
         this.addInstructions();
 

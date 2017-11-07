@@ -1,9 +1,9 @@
 digraph <init> {
 node [shape=record];
-69730622 [label="L0\lLINENUMBER 38 L0\lLDC \"6b0f624e-2144-4bab-8002-db7130ff9ffb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lNEW java/io/BufferedInputStream\lDUP\lNEW java/io/FileInputStream\lDUP\lALOAD 1\lINVOKESPECIAL java/io/FileInputStream.\<init\> (Ljava/lang/String;)V\lINVOKESPECIAL java/io/BufferedInputStream.\<init\> (Ljava/io/InputStream;)V\lALOAD 2\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/PngImage.\<init\> (Ljava/io/InputStream;Ljava/lang/String;)V\lL1\lLINENUMBER 39 L1\lALOAD 0\lALOAD 1\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.fileName : Ljava/lang/String;\lL2\lLINENUMBER 40 L2\lLDC \"6b0f624e-2144-4bab-8002-db7130ff9ffb\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+848077338 [label="L0\lLINENUMBER 38 L0\lLDC \"201be674-5404-4106-afdf-c7bad47f83b9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lNEW java/io/BufferedInputStream\lDUP\lNEW java/io/FileInputStream\lDUP\lALOAD 1\lINVOKESPECIAL java/io/FileInputStream.\<init\> (Ljava/lang/String;)V\lINVOKESPECIAL java/io/BufferedInputStream.\<init\> (Ljava/io/InputStream;)V\lALOAD 2\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/PngImage.\<init\> (Ljava/io/InputStream;Ljava/lang/String;)V\lL1\lLINENUMBER 39 L1\lALOAD 0\lALOAD 1\lPUTFIELD optimizer/com/googlecode/pngtastic/core/PngImage.fileName : Ljava/lang/String;\lL2\lLINENUMBER 40 L2\lLDC \"201be674-5404-4106-afdf-c7bad47f83b9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
-entry -> 69730622;
-69730622 -> exit;
-69730622[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 848077338;
+848077338 -> exit;
+848077338[fontcolor="purple", penwidth=3, color="purple"];
 }

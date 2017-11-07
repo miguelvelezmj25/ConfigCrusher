@@ -1,0 +1,9 @@
+digraph <init> {
+node [shape=record];
+1112344698 [label="L0\lLINENUMBER 42 L0\lLDC \"b39f60a4-7427-424e-9217-22ad700d4508\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 33 L1\lALOAD 0\lICONST_0\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lL2\lLINENUMBER 43 L2\lALOAD 7\lINVOKESTATIC org/prevayler/implementation/PrevaylerDirectory.checkValidJournalSuffix (Ljava/lang/String;)V\lL3\lLINENUMBER 45 L3\lALOAD 0\lALOAD 8\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lL4\lLINENUMBER 46 L4\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._directory : Lorg/prevayler/implementation/PrevaylerDirectory;\lL5\lLINENUMBER 47 L5\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._directory : Lorg/prevayler/implementation/PrevaylerDirectory;\lINVOKEVIRTUAL org/prevayler/implementation/PrevaylerDirectory.produceDirectory ()V\lL6\lLINENUMBER 48 L6\lALOAD 0\lLLOAD 2\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._journalSizeThresholdInBytes : J\lL7\lLINENUMBER 49 L7\lALOAD 0\lLLOAD 4\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeThresholdInMillis : J\lL8\lLINENUMBER 50 L8\lALOAD 0\lILOAD 6\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._journalDiskSync : Z\lL9\lLINENUMBER 51 L9\lALOAD 0\lALOAD 7\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._journalSuffix : Ljava/lang/String;\lL10\lLINENUMBER 52 L10\lLDC \"b39f60a4-7427-424e-9217-22ad700d4508\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 1112344698;
+1112344698 -> exit;
+1112344698[fontcolor="purple", penwidth=3, color="purple"];
+}

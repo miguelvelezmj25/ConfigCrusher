@@ -1,15 +1,15 @@
 digraph debug {
 node [shape=record];
-1372496798 [label="L0\lLINENUMBER 32 L0\lLDC \"802b2a71-c887-44d4-8590-45d9039fb054\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
-2096749644 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1561333019 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"802b2a71-c887-44d4-8590-45d9039fb054\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1558495578 [label="L1\lLINENUMBER 35 L1\lFRAME SAME\lLDC \"802b2a71-c887-44d4-8590-45d9039fb054\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+697376483 [label="L0\lLINENUMBER 32 L0\lLDC \"802b2a71-c887-44d4-8590-45d9039fb054\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lLDC \"DEBUG\"\lALOAD 0\lGETFIELD counter/com/googlecode/pngtastic/core/Logger.logLevel : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L1\l"];
+1883279796 [label="L2\lLINENUMBER 33 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 1\lALOAD 2\lINVOKESTATIC java/lang/String.format (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
 entry;
 exit;
-entry -> 1372496798;
-1372496798 -> 2096749644;
-1372496798 -> 1561333019;
-2096749644 -> 1561333019;
-1561333019 -> exit;
-1372496798[fontcolor="purple", penwidth=3, color="purple"];
-1561333019[fontcolor="purple", penwidth=3, color="purple"];
+1558495578 -> exit;
+entry -> 697376483;
+697376483 -> 1558495578;
+697376483 -> 1883279796;
+1883279796 -> 1558495578;
+1558495578[fontcolor="purple", penwidth=3, color="purple"];
+697376483[fontcolor="purple", penwidth=3, color="purple"];
 }

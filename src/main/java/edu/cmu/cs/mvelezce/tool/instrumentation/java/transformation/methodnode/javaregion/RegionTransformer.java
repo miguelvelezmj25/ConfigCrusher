@@ -172,104 +172,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
     }
 
-//    @Override
-//    public void transformMethods(Set<ClassNode> classNodes) throws IOException {
-//        Set<SootMethod> methods = this.getSystemMethods();
-//        this.matchSootToASMMethods(methods, classNodes);
-//
-//        for(ClassNode classNode : classNodes) {
-//            for(MethodNode methodNode : classNode.methods) {
-//                this.methodNodeToClassNode.put(methodNode, classNode);
-//            }
-//        }
-//
-//        for(Map.Entry<JavaRegion, Set<Set<String>>> entry : this.regionsToOptionSet.entrySet()) {
-//            JavaRegion region = entry.getKey();
-//            String bytecodeSignature = region.getRegionPackage() + "." + region.getRegionClass() + ": " + region.getRegionMethod();
-//
-//            for(SootMethod sootMethod : this.sootMethodToMethodNode.keySet()) {
-//                if(!sootMethod.getBytecodeSignature().contains(bytecodeSignature)) {
-//                    continue;
-//                }
-//
-//                Set<Set<String>> optionSet = this.sootMethodToOptionSet.get(sootMethod);
-//
-//                if(optionSet == null) {
-//                    Set<Set<String>> set = new HashSet<>();
-//                    set.addAll(entry.getValue());
-//                    this.sootMethodToOptionSet.put(sootMethod, set);
-//                }
-//                else {
-//                    optionSet.addAll(entry.getValue());
-//                }
-//
-//            }
-//        }
-//
-//        int initialRegionCount = this.regionsToOptionSet.size();
-//        this.preProcessMethodsInClasses(classNodes);
-//
-//
-////        for(ClassNode classNode : classNodes) {
-////            for(MethodNode methodNode : classNode.methods) {
-////                up1(methodNode);
-////            }
-////        }
-//
-//        boolean updatedRegions = true;
-//
-//        while(updatedRegions) {
-//            updatedRegions = this.propagateUpMethodsInClasses(classNodes);
-////            updatedRegions = updatedRegions | this.processGraph();
-////            updatedRegions = this.processMethodsInClasses(classNodes);
-//        }
-//
-////        while(updatedRegions) {
-////            updatedRegions = this.processMethodsInClasses(classNodes);
-////            updatedRegions = updatedRegions | this.processGraph();
-//////            updatedRegions = this.processMethodsInClasses(classNodes);
-////        }
-//
-//        System.out.println("# of regions before optimizing: " + initialRegionCount);
-//        System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
-//
-//        // Instrument
-//        for(ClassNode classNode : classNodes) {
-//            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-//
-//            if(methodsToInstrument.isEmpty()) {
-//                continue;
-//            }
-//
-//            System.out.println("Transforming class for instrumentation " + classNode.name);
-//
-//            for(MethodNode methodToInstrument : methodsToInstrument) {
-//                this.buildMethodGraph(methodToInstrument);
-//                this.transformMethod(methodToInstrument);
-//            }
-//
-//            this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
-//
-//            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
-//            MethodTracer tracer = classInspector.visitClass();
-//
-//            for(MethodNode methodNode : methodsToInstrument) {
-//                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
-//                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-//                PrettyMethodGraph prettyGraph = prettyBuilder.build();
-//                prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
-//
-//                try {
-//                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-//                } catch(InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//        System.out.println();
-//    }
-
     public void matchSootToASMMethods(Set<SootMethod> sootMethods, Set<ClassNode> classNodes) {
         for(ClassNode classNode : classNodes) {
             List<MethodNode> methodNodes = classNode.methods;
@@ -428,7 +330,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 JavaRegion bRegion = bBlocksToRegions.get(bBlock);
                 Set<String> bDecision = this.getDecision(bRegion);
 
-                if(!aDecision.containsAll(bDecision) || aDecision.equals(bDecision)) {
+                if(!aDecision.containsAll(bDecision) && !aDecision.equals(bDecision) && !bDecision.containsAll(aDecision)) {
                     canPush = false;
                     break;
                 }
@@ -450,6 +352,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 MethodBlock bBlock = this.getMethodBlockInCallerMethod(bSootMethod, inst);
 
                 JavaRegion bRegion = bBlocksToRegions.get(bBlock);
+                Set<String> bDecision = this.getDecision(bRegion);
+
+                if(!(aDecision.containsAll(bDecision) && !aDecision.equals(bDecision))) {
+                    continue;
+                }
 
                 JavaRegion newRegion;
                 int index;
@@ -478,15 +385,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 this.regionsToOptionSet.put(newRegion, newOptionSet);
 
                 this.debugBlocksAndRegions(bMethodNode);
-            }
-
-            edges = this.getCallerEdges(a);
-
-            for(Edge edge : edges) {
+                updated = true;
                 worklist.add(0, edge.src());
             }
-
-            updated = true;
         }
 
         return updated;
@@ -710,7 +611,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 this.regionsToOptionSet.put(newRegion, newOptionSet);
 
                 worklist.add(0, p);
-               updated = true;
+                updated = true;
             }
         }
 
@@ -1441,10 +1342,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 reachables.addAll(graph.getReachableBlocks(start, e));
             }
 
-            reachables.remove(start);
             this.debugBlocksAndRegions(methodNode);
             this.removeRegionsInCallees(methodNode, aDecision, reachables);
             this.debugBlocksAndRegions(methodNode);
+
+            reachables.remove(start);
             this.removeRegionsInMethod(methodNode, aDecision, reachables);
             this.debugBlocksAndRegions(methodNode);
         }
@@ -1513,7 +1415,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             Set<String> bDecision = this.getDecision(bRegion);
 
-            if(!aDecision.equals(bDecision) && !aDecision.containsAll(bDecision)) {
+            if(!(aDecision.equals(bDecision) || aDecision.containsAll(bDecision))) {
                 continue;
             }
 
@@ -1551,13 +1453,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
                 List<Edge> calleeEdges = this.getCalleeEdges(unit);
 
-//                if(calleeEdges.size() > 1) {
-//                    throw new RuntimeException("Check the case where a method call has multiple targets");
-//                }
-
                 while(!calleeEdges.isEmpty()) {
                     Edge outEdge = calleeEdges.remove(0);
-
                     SootMethod sSrc = outEdge.src();
                     analyzedCallees.add(sSrc);
 
@@ -1580,7 +1477,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
                         Set<String> bDecision = this.getDecision(bRegion);
 
-                        if(!aDecision.equals(bDecision) && !aDecision.containsAll(bDecision)) {
+                        if(!(aDecision.equals(bDecision) || aDecision.containsAll(bDecision))) {
                             continue;
                         }
 

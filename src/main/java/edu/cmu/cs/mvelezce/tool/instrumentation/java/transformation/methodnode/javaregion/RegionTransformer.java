@@ -298,6 +298,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 Set<String> bDecision = this.getDecision(bRegion);
 
                 if(!aDecision.containsAll(bDecision) && !aDecision.equals(bDecision) && !bDecision.containsAll(aDecision)) {
+                    this.debugBlockDecisions(methodNode);
+                    System.out.println("Cannot push up to caller " + bSootMethod.getName() + " from " + methodNode.name + " " + bDecision + " -> " + aDecision);
                     canPush = false;
                     break;
                 }
@@ -516,6 +518,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             Set<String> bDecision = this.getDecision(bRegion);
 
             if(!(aDecision.containsAll(bDecision) && !aDecision.equals(bDecision))) {
+                this.debugBlockDecisions(methodNode);
+                System.out.println("Cannot push up to id in " + methodNode.name + " " + bDecision + " -> " + aDecision);
                 continue;
             }
 
@@ -529,6 +533,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 Set<String> pDecision = this.getDecision(pRegion);
 
                 if(!(aDecision.containsAll(pDecision) && !aDecision.equals(pDecision))) {
+                    this.debugBlockDecisions(methodNode);
+                    System.out.println("Cannot push up to predecessor in " + methodNode.name + " " + bDecision + " -> " + aDecision);
                     continue;
                 }
 
@@ -810,7 +816,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 throw new RuntimeException("Start and end equal");
             }
             else if(start.getSuccessors().size() == 1 && start.getSuccessors().iterator().next().equals(end)) {
-                System.out.println("WHAT IS HAPPENING " + methodNode.name);
+//                System.out.println("WHAT IS HAPPENING " + methodNode.name);
                 // TODO check
                 ends.add(start);
 //                throw new RuntimeException("A control flow decision only has 1 successor? " + start + " -> " + end);

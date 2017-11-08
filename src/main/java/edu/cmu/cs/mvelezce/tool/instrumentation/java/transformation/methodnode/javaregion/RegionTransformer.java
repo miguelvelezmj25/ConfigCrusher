@@ -1352,7 +1352,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         while(!worklist.isEmpty()) {
             Edge edge = worklist.remove(0);
-            MethodOrMethodContext src = edge.getSrc();
+            SootMethod src = edge.src();
+
+            if(src.getDeclaringClass().isInterface()) {
+                System.out.println();
+            }
 
             if(!src.method().getDeclaringClass().getPackageName().contains(this.rootPackage)) {
                 Iterator<Edge> edges = this.callGraph.edgesInto(src);

@@ -128,7 +128,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
 
                 if(!this.methodsWithUpdatedIndexes.contains(methodNode)) {
-                    this.calculateASMStartIndex(regionsInMethod, methodNode);
+                    this.calculateASMSIndexes(regionsInMethod, methodNode);
                 }
             }
         }
@@ -473,7 +473,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
 
         if(!this.methodsWithUpdatedIndexes.contains(methodNode)) {
-            this.calculateASMStartIndex(regionsInMethod, methodNode);
+            this.calculateASMSIndexes(regionsInMethod, methodNode);
         }
 
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = this.methodsToBlocksDecisions.get(methodNode);
@@ -1122,7 +1122,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     // TODO why dont we return a new list
-    private void calculateASMStartIndex(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
+    private void calculateASMSIndexes(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
         int methodStartIndex = this.getJavapStartIndex(methodNode);
         List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
 

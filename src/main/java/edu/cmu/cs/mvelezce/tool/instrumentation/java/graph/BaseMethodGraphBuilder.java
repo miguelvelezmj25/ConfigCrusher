@@ -21,16 +21,16 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
 
     @Override
     public MethodGraph build() {
+        if(this.methodNode.instructions.size() == 0) {
+            return graph;
+        }
+
         int instructionCount = 0;
         ListIterator<AbstractInsnNode> instructionIter = this.methodNode.instructions.iterator();
 
         while(instructionIter.hasNext()) {
             instructionIter.next();
             instructionCount++;
-        }
-
-        if(instructionCount == 0) {
-            return graph;
         }
 
         this.getBlocks();

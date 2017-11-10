@@ -9,10 +9,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.Defaul
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.config.SootConfig;
 import jdk.internal.org.objectweb.asm.Opcodes;
-import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.tree.*;
 import org.apache.commons.lang3.StringUtils;
 import soot.*;
 import soot.jimple.toolkits.callgraph.CallGraph;
@@ -154,13 +151,13 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
 
         for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
-            if(method.name.contains("getColors")) {
-                this.debugBlockDecisions(method);
-            }
-
-            if(this.methodNodeToClassNode.get(method).name.contains("Regions21")) {
-                this.debugBlockDecisions(method);
-            }
+//            if(method.name.contains("getColors")) {
+//                this.debugBlockDecisions(method);
+//            }
+//
+//            if(this.methodNodeToClassNode.get(method).name.contains("Regions21")) {
+//                this.debugBlockDecisions(method);
+//            }
         }
 
         while(updatedRegions) {
@@ -170,6 +167,25 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         this.cachedRegionsToOptions();
 
+
+        for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
+//            if(method.name.contains("getHeight") && this.methodNodeToClassNode.get(method).name.contains("PngChunk")) {
+//                this.debugBlockDecisions(method);
+//            }
+//
+//            if(method.name.contains("addChunk")) {
+//                this.debugBlockDecisions(method);
+//            }
+
+            if(method.name.contains("deflateImageDataSerially")) {
+                this.debugBlockDecisions(method);
+            }
+
+            if(method.name.contains("deflateImageData")) {
+                this.debugBlockDecisions(method);
+            }
+        }
+
         this.instrument(classNodes);
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
@@ -178,13 +194,13 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
 
         for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
-            if(method.name.contains("getColors")) {
-                this.debugBlockDecisions(method);
-            }
-
-            if(method.name.contains("optimize")) {
-                this.debugBlockDecisions(method);
-            }
+//            if(method.name.contains("getColors")) {
+//                this.debugBlockDecisions(method);
+//            }
+//
+//            if(method.name.contains("optimize")) {
+//                this.debugBlockDecisions(method);
+//            }
 
 //            if(this.methodNodeToClassNode.get(method).name.contains("Regions20")) {
 //                this.debugBlockDecisions(method);
@@ -386,8 +402,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             newOptionSet.add(decision);
             this.regionsToOptionSet.put(newRegion, newOptionSet);
 
-            this.debugBlocksAndRegions(callerMethodNode);
             methods.add(edge.src());
+            this.debugBlocksAndRegions(callerMethodNode);
         }
 
         return methods;
@@ -429,7 +445,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             Set<String> callerDecision = this.getDecision(callerRegion);
 
             if(!decision.containsAll(callerDecision) && !decision.equals(callerDecision) && !callerDecision.containsAll(decision)) {
-                this.debugBlockDecisions(callerMethodNode);
+//                this.debugBlockDecisions(callerMethodNode);
                 System.out.println("Cannot push up " + decision + " from " + methodNode.name + " to " + callerMethodNode.name + " at " + callerBlock.getID() + " because it has decision " + callerDecision);
                 canPush = false;
                 break;
@@ -514,6 +530,17 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     private void instrument(Set<ClassNode> classNodes) throws IOException {
         for(ClassNode classNode : classNodes) {
             Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+
+            for(MethodNode methodNode : classNode.methods) {
+                if(methodNode.name.contains("getHeight") && classNode.name.contains("PngChunk")) {
+                    this.debugBlockDecisions(methodNode);
+                }
+
+                if(methodNode.name.contains("addChunk")) {
+                    this.debugBlockDecisions(methodNode);
+                }
+            }
+
 
             if(methodsToInstrument.isEmpty()) {
                 continue;
@@ -610,7 +637,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private boolean propagateUpRegions(MethodNode methodNode, Map<MethodBlock, JavaRegion> blocksToRegions) {
-        this.debugBlockDecisions(methodNode);
+//        this.debugBlockDecisions(methodNode);
 
         boolean updated = false;
         List<MethodBlock> worklist = new ArrayList<>();
@@ -660,10 +687,15 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
+            // Optimization
+            if(block.isWithReturn()) {
+                continue;
+            }
+
             this.fillDownRegionsInMethod(methodNode, block);
         }
 
-        this.debugBlockDecisions(methodNode);
+//        this.debugBlockDecisions(methodNode);
 
         return updated;
     }
@@ -685,7 +717,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         Set<String> idDecision = this.getDecision(idRegion);
 
         if(!(blockDecision.containsAll(idDecision) && !blockDecision.equals(idDecision))) {
-            this.debugBlockDecisions(methodNode);
+//            this.debugBlockDecisions(methodNode);
 //                System.out.println("Cannot push up to id in " + methodNode.name + " " + bDecision + " -> " + aDecision);
             return blocks;
         }
@@ -756,22 +788,44 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         JavaRegion blockRegion = blocksToRegions.get(block);
         Set<String> blockDecision = this.getDecision(blockRegion);
 
+        MethodBlock beta = graph.getExitBlock();
         MethodBlock ipd = graph.getImmediatePostDominator(block);
         JavaRegion ipdRegion = blocksToRegions.get(ipd);
         Set<String> ipdDecision = this.getDecision(ipdRegion);
 
-        while(ipd != graph.getExitBlock() && blockDecision.equals(ipdDecision)) {
+        while(ipd != beta && blockDecision.equals(ipdDecision)) {
+//            MethodBlock temp = graph.getImmediatePostDominator(ipd);
             ipd = graph.getImmediatePostDominator(ipd);
+
+//            if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
+//                break;
+//            }
+
+//            ipd = temp;
             ipdRegion = blocksToRegions.get(ipd);
             ipdDecision = this.getDecision(ipdRegion);
         }
 
         Set<MethodBlock> reachables = graph.getReachableBlocks(block, ipd);
+        reachables.remove(beta);
+        List<MethodBlock> orderedReachables = new ArrayList<>();
+        orderedReachables.addAll(reachables);
+
+        orderedReachables.sort((o1, o2) -> {
+            AbstractInsnNode o1Insts = o1.getInstructions().get(0);
+            AbstractInsnNode o2Insts = o2.getInstructions().get(0);
+
+            int o1Index = methodNode.instructions.indexOf(o1Insts);
+            int o2Index = methodNode.instructions.indexOf(o2Insts);
+
+            return Integer.compare(o1Index, o2Index);
+        });
+
         Set<MethodBlock> skip = new HashSet<>();
         skip.add(block);
         skip.add(ipd);
 
-        for(MethodBlock reach : reachables) {
+        for(MethodBlock reach : orderedReachables) {
             if(skip.contains(reach)) {
                 continue;
             }
@@ -779,7 +833,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             JavaRegion reachRegion = blocksToRegions.get(reach);
             Set<String> reachDecision = this.getDecision(reachRegion);
 
-            if(reachDecision.containsAll(blockDecision) && !blockDecision.equals(reachDecision)) {
+            Set<String> intersection = new HashSet<>();
+            intersection.addAll(blockDecision);
+            intersection.retainAll(reachDecision);
+
+            if(!(intersection.equals(blockDecision) || intersection.equals(reachDecision)) && !blockDecision.equals(reachDecision)) {
                 Set<MethodBlock> skipBlocks = graph.getReachableBlocks(reach, ipd);
                 skipBlocks.remove(ipd);
                 skip.addAll(skipBlocks);
@@ -1104,25 +1162,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 }
             }
 
-//            if(methodNode.name.equals("optimize")) {
-//                this.debugBlockDecisions(methodNode);
-//                System.out.println("CHECK");
-//            }
-//
-//            this.debugBlocksAndRegions(methodNode);
-//            this.removeRegionsInCallees(methodNode, aDecision, reachables);
-//
-//            if(methodNode.name.equals("optimize")) {
-//                this.debugBlockDecisions(methodNode);
-//                System.out.println("CHECK");
-//            }
-//
-//            this.debugBlocksAndRegions(methodNode);
-
+            this.removeRegionsInCallees(methodNode, blockDecision, reachables);
             reachables.remove(block);
-
             this.removeRegionsInMethod(methodNode, blockDecision, reachables);
-//            this.debugBlocksAndRegions(methodNode);
         }
     }
 
@@ -1284,31 +1326,185 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //        this.debugBlocksAndRegions(methodNode);
 //    }
 
+//    /**
+//     * TODO
+//     *
+//     * @param methodNode
+//     * @param decision
+//     * @param reachables
+//     */
+//    private void removeRegionsInCallees(MethodNode methodNode, Set<String> decision, Set<MethodBlock> reachables) {
+////        Set<SootMethod> analyzedCallees = new HashSet<>();
+//        SootMethod sootMethod = this.methodNodeToSootMethod.get(methodNode);
+//
+//        for(MethodBlock reach : reachables) {
+////            analyzedCallees.add(sootMethod);
+//
+//            for(AbstractInsnNode inst : reach.getInstructions()) {
+//                // Optimization
+//                if(inst.getOpcode() < 0) {
+//                    continue;
+//                }
+//
+//                // Optimization
+//                if(inst.getOpcode() < Opcodes.GETSTATIC || inst.getOpcode() > Opcodes.MONITOREXIT) {
+//                    continue;
+//                }
+//
+//                // Get caller unit
+//                Unit unit = this.getUnit(inst, sootMethod);
+//
+//                if(unit == null) {
+//                    continue;
+//                }
+//
+//                List<Edge> calleeEdges = this.getCalleeEdges(unit);
+//
+//                for(Edge edge : calleeEdges) {
+//                    SootMethod calleeSootMethod = edge.tgt();
+//                    MethodNode calleeMethodNode = this.sootMethodToMethodNode.get(calleeSootMethod);
+////                    analyzedCallees.add(calleeSootMethod);
+//
+//                    LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this.methodsToBlocksDecisions.get(calleeMethodNode);
+//
+//                    if(calleeBlocksToRegions == null) {
+//                        // TODO fix this by changing the package name
+//                        continue;
+//                    }
+//
+//                    Set<MethodBlock> skip = new HashSet<>();
+//
+//                    for(Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
+//                        if(skip.contains(entry.getKey())) {
+//                            continue;
+//                        }
+//
+//                        JavaRegion calleeRegion = entry.getValue();
+//
+//                        // Optimization
+//                        if(calleeRegion == null) {
+//                            continue;
+//                        }
+//
+//                        Set<String> calleeDecision = this.getCachedDecision(calleeRegion);
+//
+//                        if(!(decision.equals(calleeDecision) || decision.containsAll(calleeDecision))) {
+//                            MethodGraph callegraph = this.getMethodGraph(calleeMethodNode);
+//                            MethodBlock ipd = callegraph.getImmediatePostDominator(entry.getKey());
+//                            Set<MethodBlock> rs = callegraph.getReachableBlocks(entry.getKey(), ipd);
+//                            rs.remove(ipd);
+//                            skip.addAll(rs);
+//                            continue;
+//                        }
+//
+//                        this.debugBlocksAndRegions(calleeMethodNode);
+//                        this.debugBlockDecisions(calleeMethodNode);
+//
+//                        this.regionsToOptionSet.remove(calleeRegion);
+//                        calleeBlocksToRegions.put(entry.getKey(), null);
+//
+//                        this.debugBlocksAndRegions(calleeMethodNode);
+//                        this.debugBlockDecisions(calleeMethodNode);
+//                    }
+//
+////                    skip = new HashSet<>();
+////
+////                    for(Map.Entry<MethodBlock, JavaRegion> entry : targetBlocksToRegions.entrySet()) {
+////                        if(skip.contains(entry.getKey())) {
+////                            continue;
+////                        }
+////
+////                        JavaRegion targetRegion = entry.getValue();
+////
+////                        if(targetRegion == null) {
+////                            continue;
+////                        }
+////
+////                        Set<String> targetDecision = this.getDecision(targetRegion);
+////
+////                        if(!(aDecision.equals(targetDecision) || aDecision.containsAll(targetDecision))) {
+////                            MethodGraph graph = this.getMethodGraph(targetMethodNode);
+////                            MethodBlock ipd = graph.getImmediatePostDominator(entry.getKey());
+////                            Set<MethodBlock> rs = graph.getReachableBlocks(entry.getKey(), ipd);
+////                            rs.remove(ipd);
+////                            skip.addAll(rs);
+////                            continue;
+////                        }
+////
+////                        for(AbstractInsnNode asdf : entry.getKey().getInstructions()) {
+////                            // Optimization
+////                            if(asdf.getOpcode() < 0) {
+////                                continue;
+////                            }
+////
+////                            if(inst.getOpcode() < Opcodes.GETSTATIC || inst.getOpcode() > Opcodes.MONITOREXIT) {
+////                                continue;
+////                            }
+////
+////                            Unit u = this.getUnit(asdf, targetSootMethod);
+////
+////                            if(u == null) {
+////                                continue;
+////                            }
+////
+////                            List<Edge> ces = this.getCalleeEdges(u);
+////
+////                            for(Edge anotherCallee : ces) {
+////                                if(analyzedCallees.contains(anotherCallee.tgt())) {
+////                                    continue;
+////                                }
+////
+////                                calleeEdges.add(anotherCallee);
+////                            }
+////
+////                        }
+////
+////                    }
+//                }
+//            }
+//        }
+//    }
+
     /**
-     * TODO
+     * TODO ignore specia blocks like catch with implicit throw
      *
      * @param methodNode
-     * @param aDecision
+     * @param decision
      * @param reachables
      */
-    private void removeRegionsInCallees(MethodNode methodNode, Set<String> aDecision, Set<MethodBlock> reachables) {
-        this.debugBlocksAndRegions(methodNode);
-        Set<SootMethod> analyzedCallees = new HashSet<>();
+    private void removeRegionsInCallees(MethodNode methodNode, Set<String> decision, Set<MethodBlock> reachables) {
+//        if(methodNode.name.contains("addChunk")) {
+//            System.out.println();
+//        }
 
-        for(MethodBlock b : reachables) {
-            SootMethod sootMethod = this.methodNodeToSootMethod.get(methodNode);
+        Map<MethodBlock, SootMethod> blocksToMethods = new HashMap<>();
+        SootMethod sootMethod = this.methodNodeToSootMethod.get(methodNode);
+
+        for(MethodBlock block : reachables) {
+            blocksToMethods.put(block, sootMethod);
+        }
+
+        Set<SootMethod> analyzedCallees = new HashSet<>();
+        List<MethodBlock> worklist = new ArrayList<>();
+        worklist.addAll(reachables);
+
+        while(!worklist.isEmpty()) {
+            MethodBlock reach = worklist.remove(0);
+            sootMethod = blocksToMethods.get(reach);
             analyzedCallees.add(sootMethod);
 
-            for(AbstractInsnNode inst : b.getInstructions()) {
+            for(AbstractInsnNode inst : reach.getInstructions()) {
                 // Optimization
                 if(inst.getOpcode() < 0) {
                     continue;
                 }
 
+                // Optimization
                 if(inst.getOpcode() < Opcodes.GETSTATIC || inst.getOpcode() > Opcodes.MONITOREXIT) {
                     continue;
                 }
 
+                // Get caller unit
                 Unit unit = this.getUnit(inst, sootMethod);
 
                 if(unit == null) {
@@ -1317,46 +1513,79 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
                 List<Edge> calleeEdges = this.getCalleeEdges(unit);
 
-                while(!calleeEdges.isEmpty()) {
-                    Edge outEdge = calleeEdges.remove(0);
-                    SootMethod targetSootMethod = outEdge.tgt();
-                    MethodNode targetMethodNode = this.sootMethodToMethodNode.get(targetSootMethod);
-                    analyzedCallees.add(targetSootMethod);
+                for(Edge edge : calleeEdges) {
+                    SootMethod calleeSootMethod = edge.tgt();
 
-                    LinkedHashMap<MethodBlock, JavaRegion> targetBlocksToRegions = this.methodsToBlocksDecisions.get(targetMethodNode);
+//                    if(calleeSootMethod.getName().contains("deflateImageDataSerially")) {
+//                        System.out.println();
+//                    }
+//
+//                    if(calleeSootMethod.getName().contains("deflateImageData")) {
+//                        System.out.println();
+//                    }
 
-                    if(targetBlocksToRegions == null) {
+//                    if(calleeSootMethod.getName().contains("addChunk")) {
+//                        System.out.println();
+//                    }
+//
+//                    if(calleeSootMethod.getName().contains("getHeight") && calleeSootMethod.getDeclaringClass().getName().contains("PngChunk")) {
+//                        System.out.println();
+//                    }
+
+                    if(analyzedCallees.contains(calleeSootMethod)) {
+                        continue;
+                    }
+
+                    MethodNode calleeMethodNode = this.sootMethodToMethodNode.get(calleeSootMethod);
+                    LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this.methodsToBlocksDecisions.get(calleeMethodNode);
+
+                    if(calleeBlocksToRegions == null) {
                         // TODO fix this by changing the package name
                         continue;
                     }
 
                     Set<MethodBlock> skip = new HashSet<>();
 
-                    for(Map.Entry<MethodBlock, JavaRegion> entry : targetBlocksToRegions.entrySet()) {
+                    for(Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
                         if(skip.contains(entry.getKey())) {
                             continue;
                         }
 
-                        JavaRegion targetRegion = entry.getValue();
+                        JavaRegion calleeRegion = entry.getValue();
 
-                        if(targetRegion == null) {
+                        // Optimization
+                        if(calleeRegion == null) {
                             continue;
                         }
 
-                        Set<String> targetDecision = this.getCachedDecision(targetRegion);
+                        Set<String> calleeDecision = this.getCachedDecision(calleeRegion);
 
-                        if(!(aDecision.equals(targetDecision) || aDecision.containsAll(targetDecision))) {
-                            MethodGraph graph = this.getMethodGraph(targetMethodNode);
-                            MethodBlock ipd = graph.getImmediatePostDominator(entry.getKey());
-                            Set<MethodBlock> rs = graph.getReachableBlocks(entry.getKey(), ipd);
+                        if(!(decision.equals(calleeDecision) || decision.containsAll(calleeDecision))) {
+                            MethodGraph callegraph = this.getMethodGraph(calleeMethodNode);
+                            MethodBlock ipd = callegraph.getImmediatePostDominator(entry.getKey());
+                            Set<MethodBlock> rs = callegraph.getReachableBlocks(entry.getKey(), ipd);
                             rs.remove(ipd);
                             skip.addAll(rs);
                             continue;
                         }
 
-                        targetBlocksToRegions.put(entry.getKey(), null);
-                        this.regionsToOptionSet.remove(targetRegion);
-                        this.debugBlocksAndRegions(methodNode);
+                        this.debugBlocksAndRegions(calleeMethodNode);
+                        this.debugBlockDecisions(calleeMethodNode);
+
+                        this.regionsToOptionSet.remove(calleeRegion);
+                        calleeBlocksToRegions.put(entry.getKey(), null);
+
+                        this.debugBlocksAndRegions(calleeMethodNode);
+                        this.debugBlockDecisions(calleeMethodNode);
+                    }
+
+                    for(Map.Entry<MethodBlock, JavaRegion> entry : calleeBlocksToRegions.entrySet()) {
+                        if(skip.contains(entry.getKey())) {
+                            continue;
+                        }
+
+                        worklist.add(0, entry.getKey());
+                        blocksToMethods.put(entry.getKey(), calleeSootMethod);
                     }
 
 //                    skip = new HashSet<>();
@@ -1415,8 +1644,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 }
             }
         }
-
-        this.debugBlocksAndRegions(methodNode);
     }
 
     /**
@@ -1461,6 +1688,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             match = unit;
             break;
+        }
+
+        if(match == null && inst instanceof MethodInsnNode) {
+            throw new RuntimeException("There has to be a instruciton that calls a method");
         }
 
 //        if(match == null) {
@@ -1703,7 +1934,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         for(int i = methodStartIndex; i < javapResult.size(); i++) {
             String outputLine = javapResult.get(i);
 
-            if(outputLine.contains("Code:")) {
+            if(outputLine.contains(" Code:")) {
                 break;
             }
 

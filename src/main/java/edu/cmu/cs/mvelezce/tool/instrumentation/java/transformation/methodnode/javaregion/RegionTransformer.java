@@ -1,9 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.*;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.DefaultMethodGraphBuilder;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
@@ -13,7 +13,6 @@ import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
-import jdk.internal.org.objectweb.asm.util.Printer;
 import org.apache.commons.lang3.StringUtils;
 import soot.*;
 import soot.jimple.toolkits.callgraph.CallGraph;
@@ -171,8 +170,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         this.cachedRegionsToOptions();
 
-
-//        this.instrument(classNodes);
+        this.instrument(classNodes);
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
         System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
@@ -525,78 +523,76 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             for(MethodNode methodToInstrument : methodsToInstrument) {
 //                System.out.println("Setting where to instrument method " + methodToInstrument.name);
-                this.debugBlocksAndRegions(methodToInstrument);
                 this.setStartAndEndBlocks(methodToInstrument);
-                this.debugBlocksAndRegions(methodToInstrument);
             }
         }
 
-        for(ClassNode classNode : classNodes) {
-            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-
-            if(methodsToInstrument.isEmpty()) {
-                continue;
-            }
-
-//            System.out.println("Instrumenting class " + classNode.name);
-
-            for(MethodNode methodToInstrument : methodsToInstrument) {
-//                System.out.println("Instrumenting method " + methodToInstrument.name);
-                this.transformMethod(methodToInstrument);
-            }
-
-            this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
-
-            // Debugging
-            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
-            MethodTracer tracer = classInspector.visitClass();
-
-            for(MethodNode methodNode : methodsToInstrument) {
-                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
-                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-                PrettyMethodGraph prettyGraph = prettyBuilder.build();
-                prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
-
-                try {
-                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-                } catch(InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        for(ClassNode classNode : classNodes) {
-            for(MethodNode methodNode : classNode.methods) {
-                List<JavaRegion> regions = this.getRegionsInMethod(methodNode);
-
-                if(regions.size() == 1) {
-                    continue;
-                }
-
-                for(JavaRegion a : regions) {
-                    boolean diff = false;
-
-                    for(JavaRegion b : regions) {
-                        if(a == b) {
-                            continue;
-                        }
-
-                        Set<Set<String>> aD = this.regionsToOptionSet.get(a);
-                        Set<Set<String>> bD = this.regionsToOptionSet.get(b);
-
-                        if(!aD.equals(bD)) {
-                            diff = true;
-                            break;
-                        }
-                    }
-
-                    if(!diff) {
-//                        throw new RuntimeException("There are multiple regions in " + classNode.name + "-" + methodNode.name + " but all have the same options");
-                        System.out.println("There are multiple regions in " + classNode.name + "-" + methodNode.name + " but all have the same options");
-                    }
-                }
-            }
-        }
+//        for(ClassNode classNode : classNodes) {
+//            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+//
+//            if(methodsToInstrument.isEmpty()) {
+//                continue;
+//            }
+//
+////            System.out.println("Instrumenting class " + classNode.name);
+//
+//            for(MethodNode methodToInstrument : methodsToInstrument) {
+////                System.out.println("Instrumenting method " + methodToInstrument.name);
+//                this.transformMethod(methodToInstrument);
+//            }
+//
+//            this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
+//
+//            // Debugging
+//            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
+//            MethodTracer tracer = classInspector.visitClass();
+//
+//            for(MethodNode methodNode : methodsToInstrument) {
+//                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
+//                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
+//                PrettyMethodGraph prettyGraph = prettyBuilder.build();
+//                prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
+//
+//                try {
+//                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
+//                } catch(InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//
+//        for(ClassNode classNode : classNodes) {
+//            for(MethodNode methodNode : classNode.methods) {
+//                List<JavaRegion> regions = this.getRegionsInMethod(methodNode);
+//
+//                if(regions.size() == 1) {
+//                    continue;
+//                }
+//
+//                for(JavaRegion a : regions) {
+//                    boolean diff = false;
+//
+//                    for(JavaRegion b : regions) {
+//                        if(a == b) {
+//                            continue;
+//                        }
+//
+//                        Set<Set<String>> aD = this.regionsToOptionSet.get(a);
+//                        Set<Set<String>> bD = this.regionsToOptionSet.get(b);
+//
+//                        if(!aD.equals(bD)) {
+//                            diff = true;
+//                            break;
+//                        }
+//                    }
+//
+//                    if(!diff) {
+////                        throw new RuntimeException("There are multiple regions in " + classNode.name + "-" + methodNode.name + " but all have the same options");
+//                        System.out.println("There are multiple regions in " + classNode.name + "-" + methodNode.name + " but all have the same options");
+//                    }
+//                }
+//            }
+//        }
     }
 
     /**
@@ -1021,15 +1017,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
      * @param methodNode
      */
     private void setStartAndEndBlocks(MethodNode methodNode) {
-        this.debugBlocksAndRegions(methodNode);
-        this.debugBlockDecisions(methodNode);
-
         // Special cases
         this.ignoreRegionsWithoutConnectionToExit(methodNode);
         this.ignoreCatchWithImplicitThrow(methodNode);
 
         MethodGraph graph = this.getMethodGraph(methodNode);
-        MethodBlock ro = graph.getExitBlock();
+        MethodBlock beta = graph.getExitBlock();
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
 
         // The entry block should be skipped
@@ -1043,10 +1036,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            MethodBlock start = blockToRegion.getKey();
-            JavaRegion aRegion = blocksToRegions.get(start);
-            Set<String> aDecision = this.getDecision(aRegion);
-            MethodBlock end;
+            MethodBlock block = blockToRegion.getKey();
+            JavaRegion region = blockToRegion.getValue();
+            region.setStartMethodBlock(block);
+            Set<String> blockDecision = this.getDecision(region);
 
 //            // TODO optimize for regions15
 //            // Optimization
@@ -1054,16 +1047,16 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //                end = graph.getExitBlock();
 //            }
 //            else {
-            MethodBlock ipd = graph.getImmediatePostDominator(start);
+            MethodBlock ipd = graph.getImmediatePostDominator(block);
             JavaRegion ipdRegion = blocksToRegions.get(ipd);
             Set<String> ipdDecision = this.getDecision(ipdRegion);
 
-            while(ipd != ro && (aDecision.equals(ipdDecision) || aDecision.containsAll(ipdDecision))) {
+            while(ipd != beta && (blockDecision.equals(ipdDecision) || blockDecision.containsAll(ipdDecision))) {
                 MethodBlock temp = graph.getImmediatePostDominator(ipd);
 
                 // Optimization
                 // TODO check the variables might be wrong
-                if(temp == ro & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == ro) {
+                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
                     break;
                 }
 
@@ -1072,18 +1065,17 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 ipdDecision = this.getDecision(ipdRegion);
             }
 
-            end = ipd;
+            MethodBlock end = ipd;
 //            }
 
             Set<MethodBlock> ends = new HashSet<>();
 
-            if(start == end) {
+            if(block == end) {
                 throw new RuntimeException("Start and end equal");
             }
-            else if(start.getSuccessors().size() == 1 && start.getSuccessors().iterator().next().equals(end)) {
-//                System.out.println("WHAT IS HAPPENING " + methodNode.name);
-                ends.add(start);
-//                throw new RuntimeException("A control flow decision only has 1 successor? " + start + " -> " + end);
+            else if(block.getSuccessors().size() == 1 && block.getSuccessors().iterator().next().equals(end)) {
+                ends.add(block);
+//                throw new RuntimeException("A control flow decision only has 1 successor? " + block + " -> " + end);
             }
             else if(graph.getExitBlock() == end) {
                 this.endRegionBlocksWithReturn.addAll(end.getPredecessors());
@@ -1093,29 +1085,21 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 ends.add(end);
             }
 
-            JavaRegion region = blockToRegion.getValue();
-            region.setStartMethodBlock(start);
-            region.setEndMethodBlocks(ends);
-
             // Remove
             Set<MethodBlock> reachables = new HashSet<>();
 
             for(MethodBlock e : ends) {
-                reachables.addAll(graph.getReachableBlocks(start, e));
+                reachables.addAll(graph.getReachableBlocks(block, e));
             }
 
-            // If we only have one node, we do not want to remove it
-            if(!ends.contains(start)) {
-                reachables.removeAll(ends);
-            }
+            reachables.removeAll(ends);
+            reachables.add(block);
 
             // If the ends are connected to the exit node, we want to analyze them
             for(MethodBlock e : ends) {
                 ipd = graph.getImmediatePostDominator(e);
-                if(!(ipd == ro & e.getSuccessors().size() == 1 && e.getSuccessors().iterator().next() == ro)) {
-                    reachables.remove(e);
-                }
-                else {
+
+                if(ipd == beta & e.getSuccessors().size() == 1 && e.getSuccessors().iterator().next() == beta) {
                     reachables.add(e);
                 }
             }
@@ -1134,19 +1118,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //            }
 //
 //            this.debugBlocksAndRegions(methodNode);
-//
-//            reachables.remove(start);
-//
-//            this.removeRegionsInMethod(methodNode, aDecision, reachables);
-//            this.debugBlocksAndRegions(methodNode);
-//
-//            if(methodNode.name.equals("optimize")) {
-//                this.debugBlockDecisions(methodNode);
-//                System.out.println("CHECK");
-//            }
-        }
 
-        this.debugBlocksAndRegions(methodNode);
+            reachables.remove(block);
+
+            this.removeRegionsInMethod(methodNode, blockDecision, reachables);
+//            this.debugBlocksAndRegions(methodNode);
+        }
     }
 
     /**
@@ -1163,11 +1140,15 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-            if(blockToRegion.getKey().isCatchWithImplicitThrow()) {
-                this.regionsToOptionSet.remove(blockToRegion.getValue());
-                blocksToRegions.put(blockToRegion.getKey(), null);
-                this.debugBlocksAndRegions(methodNode);
+            if(!blockToRegion.getKey().isCatchWithImplicitThrow()) {
+                continue;
             }
+
+            this.debugBlocksAndRegions(methodNode);
+            this.regionsToOptionSet.remove(blockToRegion.getValue());
+            blocksToRegions.put(blockToRegion.getKey(), null);
+            this.debugBlocksAndRegions(methodNode);
+
         }
 
     }
@@ -1190,38 +1171,39 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
+            this.debugBlocksAndRegions(methodNode);
             this.regionsToOptionSet.remove(blockToRegion.getValue());
             blocksToRegions.put(blockToRegion.getKey(), null);
             this.debugBlocksAndRegions(methodNode);
         }
     }
 
-    private void removeRegionsInMethod(MethodNode methodNode, Set<String> aDecision, Set<MethodBlock> reachables) {
+    private void removeRegionsInMethod(MethodNode methodNode, Set<String> decision, Set<MethodBlock> reachables) {
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
 
-        for(MethodBlock b : reachables) {
-            JavaRegion bRegion = blocksToRegions.get(b);
+        for(MethodBlock block : reachables) {
+            JavaRegion region = blocksToRegions.get(block);
 
             // Optimization
-            if(bRegion == null) {
+            if(region == null) {
                 continue;
             }
 
-//            if(methodNode.name.equals("getFreqs")) {
-//                this.debugBlockDecisions(methodNode);
-//                System.out.println();
-//            }
-
-            Set<String> bDecision = this.getCachedDecision(bRegion);
+            Set<String> blockDecision = this.getCachedDecision(region);
 //            Set<String> bDecision = this.getDecision(bRegion);
 
-            if(!(aDecision.equals(bDecision) || aDecision.containsAll(bDecision))) {
+            if(!(decision.equals(blockDecision) || decision.containsAll(blockDecision))) {
                 continue;
             }
 
-            blocksToRegions.put(b, null);
-            this.regionsToOptionSet.remove(bRegion);
             this.debugBlocksAndRegions(methodNode);
+            this.debugBlockDecisions(methodNode);
+
+            blocksToRegions.put(block, null);
+            this.regionsToOptionSet.remove(region);
+
+            this.debugBlocksAndRegions(methodNode);
+            this.debugBlockDecisions(methodNode);
         }
     }
 

@@ -654,11 +654,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private List<MethodBlock> propagateUpRegionsInMethod(MethodNode methodNode, MethodBlock block) {
-        if(methodNode.name.contains("optimalRun")) {
-            this.debugBlockDecisions(methodNode);
-        }
-
-
         List<MethodBlock> blocks = new ArrayList<>();
         MethodGraph graph = this.getMethodGraph(methodNode);
         MethodBlock id = graph.getImmediateDominator(block);
@@ -707,7 +702,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             int index;
 
             this.debugBlocksAndRegions(methodNode);
-            this.debugBlockDecisions(methodNode);
+//            this.debugBlockDecisions(methodNode);
 
             if(predRegion == null) {
                 index = methodNode.instructions.indexOf(id.getInstructions().get(0));
@@ -725,7 +720,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.regionsToOptionSet.put(newRegion, newOptionSet);
 
             this.debugBlocksAndRegions(methodNode);
-            this.debugBlockDecisions(methodNode);
+//            this.debugBlockDecisions(methodNode);
 
             blocks.add(0, pred);
         }
@@ -781,7 +776,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
 
             this.debugBlocksAndRegions(methodNode);
-            this.debugBlockDecisions(methodNode);
+//            this.debugBlockDecisions(methodNode);
 
             JavaRegion newRegion = new JavaRegion(blockRegion.getRegionPackage(), blockRegion.getRegionClass(), blockRegion.getRegionMethod());
             int index;
@@ -802,7 +797,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.regionsToOptionSet.put(newRegion, newOptionSet);
 
             this.debugBlocksAndRegions(methodNode);
-            this.debugBlockDecisions(methodNode);
+//            this.debugBlockDecisions(methodNode);
         }
     }
 

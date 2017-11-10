@@ -153,6 +153,17 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         boolean updatedRegions = true;
 
+
+        for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
+            if(method.name.contains("getColors")) {
+                this.debugBlockDecisions(method);
+            }
+
+            if(this.methodNodeToClassNode.get(method).name.contains("Regions21")) {
+                this.debugBlockDecisions(method);
+            }
+        }
+
         while(updatedRegions) {
             updatedRegions = this.propagateUpMethodsInClasses(classNodes);
             updatedRegions = updatedRegions | this.propagateUpAcrossMethods();
@@ -167,6 +178,23 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         System.out.println("# of regions before optimizing: " + initialRegionCount);
         System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
         System.out.println("");
+
+
+        for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
+            if(method.name.contains("getColors")) {
+                this.debugBlockDecisions(method);
+            }
+
+            if(method.name.contains("optimize")) {
+                this.debugBlockDecisions(method);
+            }
+
+
+            if(this.methodNodeToClassNode.get(method).name.contains("Regions21")) {
+                this.debugBlockDecisions(method);
+            }
+        }
+
     }
 
     private void cachedRegionsToOptions() {
@@ -573,27 +601,23 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         List<MethodBlock> worklist = new ArrayList<>();
         worklist.addAll(blocksToRegions.keySet());
 
-        if(methodNode.name.contains("foo")) {
-            System.out.println();
-        }
-
         // Propagate up until a fixed point
         while(!worklist.isEmpty()) {
-            MethodBlock a = worklist.remove(0);
+            MethodBlock block = worklist.remove(0);
 
             // Optimization
-            if(blocksToRegions.get(a) == null) {
+            if(blocksToRegions.get(block) == null) {
                 continue;
             }
 
             // Special case
-            if(a.isCatchWithImplicitThrow()) {
+            if(block.isCatchWithImplicitThrow()) {
 //                blocksToRegions.put(a, null);
 //                this.regionsToOptionSet.remove(aRegion);
                 continue;
             }
 
-            List<MethodBlock> blocks = this.propagateUpRegionsInMethod(methodNode, a);
+            List<MethodBlock> blocks = this.propagateUpRegionsInMethod(methodNode, block);
 
             if(blocks.isEmpty()) {
                 continue;
@@ -607,21 +631,21 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         // Fill the blocks that are guarded by decisions with those decisions
         while(!worklist.isEmpty()) {
-            MethodBlock a = worklist.remove(0);
+            MethodBlock block = worklist.remove(0);
 
             // Optimization
-            if(blocksToRegions.get(a) == null) {
+            if(blocksToRegions.get(block) == null) {
                 continue;
             }
 
             // Special case
-            if(a.isCatchWithImplicitThrow()) {
+            if(block.isCatchWithImplicitThrow()) {
 //                blocksToRegions.put(a, null);
 //                this.regionsToOptionSet.remove(aRegion);
                 continue;
             }
 
-            this.fillDownRegionsInMethod(methodNode, a);
+            this.fillDownRegionsInMethod(methodNode, block);
         }
 
         this.debugBlockDecisions(methodNode);
@@ -630,11 +654,15 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private List<MethodBlock> propagateUpRegionsInMethod(MethodNode methodNode, MethodBlock block) {
+        if(methodNode.name.contains("optimalRun")) {
+            this.debugBlockDecisions(methodNode);
+        }
+
+
         List<MethodBlock> blocks = new ArrayList<>();
         MethodGraph graph = this.getMethodGraph(methodNode);
         MethodBlock id = graph.getImmediateDominator(block);
 
-        // TODO necessary?
         if(id == graph.getEntryBlock()) {
             return blocks;
         }
@@ -658,10 +686,15 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         for(MethodBlock pred : block.getPredecessors()) {
+            // A block might jump to itself
+            if(block == pred) {
+                continue;
+            }
+
             JavaRegion predRegion = blocksToRegions.get(pred);
             Set<String> predDecision = this.getDecision(predRegion);
 
-            if(!(blockDecision.containsAll(predDecision) && !blockDecision.equals(predDecision))) {
+            if(!(blockDecision.containsAll(predDecision) || blockDecision.equals(predDecision))) {
                 this.debugBlockDecisions(methodNode);
                 throw new RuntimeException("Cannot push up decisions from " + block.getID() + " to " + pred.getID());
 
@@ -701,8 +734,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private void fillDownRegionsInMethod(MethodNode methodNode, MethodBlock block) {
-        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
         MethodGraph graph = this.getMethodGraph(methodNode);
+
+        // Optimization
+        if(!graph.isConnectedToExit(block)) {
+            return;
+        }
+
+        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
 
         JavaRegion blockRegion = blocksToRegions.get(block);
         Set<String> blockDecision = this.getDecision(blockRegion);
@@ -744,7 +783,18 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.debugBlocksAndRegions(methodNode);
             this.debugBlockDecisions(methodNode);
 
-            JavaRegion newRegion = new JavaRegion(blockRegion.getRegionPackage(), blockRegion.getRegionClass(), blockRegion.getRegionMethod(), blockRegion.getStartBytecodeIndex());
+            JavaRegion newRegion = new JavaRegion(blockRegion.getRegionPackage(), blockRegion.getRegionClass(), blockRegion.getRegionMethod());
+            int index;
+
+            if(reachRegion == null) {
+                index = blockRegion.getStartBytecodeIndex();
+            }
+            else {
+                index = reachRegion.getStartBytecodeIndex();
+                this.regionsToOptionSet.remove(reachRegion);
+            }
+
+            newRegion.setStartBytecodeIndex(index);
             blocksToRegions.put(reach, newRegion);
 
             Set<Set<String>> newOptionSet = new HashSet<>();
@@ -1727,10 +1777,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         while(!worklist.isEmpty()) {
             Edge edge = worklist.remove(0);
             SootMethod src = edge.src();
-
-            if(src.getDeclaringClass().isInterface()) {
-                System.out.println();
-            }
 
             if(!src.method().getDeclaringClass().getPackageName().contains(this.rootPackage)) {
                 Iterator<Edge> edges = this.callGraph.edgesInto(src);

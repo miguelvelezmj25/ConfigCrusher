@@ -1,0 +1,9 @@
+digraph getHeight {
+node [shape=record];
+1170283006 [label="L0\lLINENUMBER 79 L0\lLDC \"b66b55b4-04c7-4122-bb67-dc5c05e2b91b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lICONST_4\lINVOKEVIRTUAL optimizer/com/googlecode/pngtastic/core/PngChunk.getUnsignedInt (I)J\lLDC \"b66b55b4-04c7-4122-bb67-dc5c05e2b91b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLRETURN\l"];
+entry;
+exit;
+entry -> 1170283006;
+1170283006 -> exit;
+1170283006[fontcolor="purple", penwidth=3, color="purple"];
+}

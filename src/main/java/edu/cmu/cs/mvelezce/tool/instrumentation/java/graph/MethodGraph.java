@@ -272,6 +272,12 @@ public class MethodGraph {
         return dotString.toString();
     }
 
+    public boolean isConnectedToExit(MethodBlock block) {
+        Set<MethodBlock> reachables = this.getReachableBlocks(block, this.exitBlock);
+
+        return reachables.contains(this.exitBlock);
+    }
+
     public MethodBlock getMethodBlock(String ID) {
         return this.blocks.get(ID);
     }

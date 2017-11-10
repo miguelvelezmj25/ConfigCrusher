@@ -1,9 +1,0 @@
-digraph <init> {
-node [shape=record];
-1425719064 [label="L0\lLINENUMBER 25 L0\lLDC \"277caf9d-d38c-44d0-896c-9de3a08d5521\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 26 L1\lALOAD 0\lNEW optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie\lDUP\lILOAD 1\lINVOKESPECIAL optimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie.\<init\> (I)V\lPUTFIELD optimizer/com/googlecode/pngtastic/core/processing/zopfli/Zopfli.cookie : Loptimizer/com/googlecode/pngtastic/core/processing/zopfli/Cookie;\lL2\lLINENUMBER 27 L2\lLDC \"277caf9d-d38c-44d0-896c-9de3a08d5521\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-entry;
-exit;
-entry -> 1425719064;
-1425719064 -> exit;
-1425719064[fontcolor="purple", penwidth=3, color="purple"];
-}

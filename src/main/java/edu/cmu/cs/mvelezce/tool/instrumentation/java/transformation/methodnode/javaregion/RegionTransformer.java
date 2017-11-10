@@ -1,15 +1,16 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.DefaultMethodGraphBuilder;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.*;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.config.SootConfig;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
+import jdk.internal.org.objectweb.asm.util.Printer;
 import org.apache.commons.lang3.StringUtils;
 import soot.*;
 import soot.jimple.toolkits.callgraph.CallGraph;
@@ -554,72 +555,72 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
         }
 
-//        for(ClassNode classNode : classNodes) {
-//            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
-//
-//            if(methodsToInstrument.isEmpty()) {
-//                continue;
-//            }
-//
-////            System.out.println("Instrumenting class " + classNode.name);
-//
-//            for(MethodNode methodToInstrument : methodsToInstrument) {
-////                System.out.println("Instrumenting method " + methodToInstrument.name);
-//                this.transformMethod(methodToInstrument);
-//            }
-//
-//            this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
-//
-//            // Debugging
-//            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
-//            MethodTracer tracer = classInspector.visitClass();
-//
-//            for(MethodNode methodNode : methodsToInstrument) {
-//                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
-//                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-//                PrettyMethodGraph prettyGraph = prettyBuilder.build();
-//                prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
-//
-//                try {
-//                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-//                } catch(InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//        for(ClassNode classNode : classNodes) {
-//            for(MethodNode methodNode : classNode.methods) {
-//                List<JavaRegion> regions = this.getRegionsInMethod(methodNode);
-//
-//                if(regions.size() == 1) {
-//                    continue;
-//                }
-//
-//                for(JavaRegion a : regions) {
-//                    boolean diff = false;
-//
-//                    for(JavaRegion b : regions) {
-//                        if(a == b) {
-//                            continue;
-//                        }
-//
-//                        Set<Set<String>> aD = this.regionsToOptionSet.get(a);
-//                        Set<Set<String>> bD = this.regionsToOptionSet.get(b);
-//
-//                        if(!aD.equals(bD)) {
-//                            diff = true;
-//                            break;
-//                        }
-//                    }
-//
-//                    if(!diff) {
-////                        throw new RuntimeException("There are multiple regions in " + classNode.name + "-" + methodNode.name + " but all have the same options");
-//                        System.out.println("There are multiple regions in " + classNode.name + "-" + methodNode.name + " but all have the same options");
-//                    }
-//                }
-//            }
-//        }
+        for(ClassNode classNode : classNodes) {
+            Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
+
+            if(methodsToInstrument.isEmpty()) {
+                continue;
+            }
+
+//            System.out.println("Instrumenting class " + classNode.name);
+
+            for(MethodNode methodToInstrument : methodsToInstrument) {
+//                System.out.println("Instrumenting method " + methodToInstrument.name);
+                this.transformMethod(methodToInstrument);
+            }
+
+            this.getClassTransformer().writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
+
+            // Debugging
+            TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
+            MethodTracer tracer = classInspector.visitClass();
+
+            for(MethodNode methodNode : methodsToInstrument) {
+                Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
+                PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
+                PrettyMethodGraph prettyGraph = prettyBuilder.build();
+                prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
+
+                try {
+                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
+                } catch(InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        for(ClassNode classNode : classNodes) {
+            for(MethodNode methodNode : classNode.methods) {
+                List<JavaRegion> regions = this.getRegionsInMethod(methodNode);
+
+                if(regions.size() == 1) {
+                    continue;
+                }
+
+                for(JavaRegion a : regions) {
+                    boolean diff = false;
+
+                    for(JavaRegion b : regions) {
+                        if(a == b) {
+                            continue;
+                        }
+
+                        Set<Set<String>> aD = this.regionsToOptionSet.get(a);
+                        Set<Set<String>> bD = this.regionsToOptionSet.get(b);
+
+                        if(!aD.equals(bD)) {
+                            diff = true;
+                            break;
+                        }
+                    }
+
+                    if(!diff) {
+//                        throw new RuntimeException("There are multiple regions in " + classNode.name + "-" + methodNode.name + " but all have the same options");
+                        System.out.println("There are multiple regions in " + classNode.name + "-" + methodNode.name + " but all have the same options");
+                    }
+                }
+            }
+        }
     }
 
     /**

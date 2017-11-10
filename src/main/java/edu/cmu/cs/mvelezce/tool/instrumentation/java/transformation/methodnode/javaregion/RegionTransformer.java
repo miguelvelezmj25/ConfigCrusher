@@ -155,7 +155,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         while(updatedRegions) {
             updatedRegions = this.propagateUpMethodsInClasses(classNodes);
-//            updatedRegions = updatedRegions | this.propagateUpAcrossMethods();
+            updatedRegions = updatedRegions | this.propagateUpAcrossMethods();
         }
 
         this.cachedRegionsToOptions();
@@ -260,122 +260,159 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         List<SootMethod> worklist = new ArrayList<>();
         worklist.addAll(methods);
 
+        // Loop through all the methods until a fixed point
         while(!worklist.isEmpty()) {
-            SootMethod a = worklist.remove(0);
+            SootMethod method = worklist.remove(0);
 //            System.out.println("Propagate regions across method " + a.getName());
 
             // Check not part of algorithm
-            if(a.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
+            if(method.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
                 continue;
             }
 
-            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(a);
+            List<JavaRegion> regionsInMethod = this.getRegionsInMethod(method);
 
-            // Optimization
+            // Optimization nothing to push up
             if(regionsInMethod.isEmpty()) {
                 continue;
             }
 
-            MethodNode methodNode = this.sootMethodToMethodNode.get(a);
-            Collection<JavaRegion> regions = this.methodsToBlocksDecisions.get(methodNode).values();
-            Iterator<JavaRegion> regionsIter = regions.iterator();
-            JavaRegion aRegion = regionsIter.next();
+            MethodNode methodNode = this.sootMethodToMethodNode.get(method);
+            boolean canPropagate = this.canPropagateRegion(methodNode);
 
-            while(aRegion == null) {
-                aRegion = regionsIter.next();
-            }
-
-            Set<String> aDecision = this.getDecision(aRegion);
-
-            // Optimization
-            if(aDecision.isEmpty()) {
+            if(!canPropagate) {
                 continue;
             }
 
-            boolean canPush = true;
-            List<Edge> edges = this.getCallerEdges(a);
+            List<SootMethod> methodsToAnalyze = this.propagateUpRegionInter();
 
-            for(Edge edge : edges) {
-                SootMethod bSootMethod = edge.src();
-
-//                // Check not part of algorithm
-//                if(bSootMethod.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
-//                    canPush = false;
-//                    break;
-//                }
-
-                MethodNode bMethodNode = this.sootMethodToMethodNode.get(bSootMethod);
-                LinkedHashMap<MethodBlock, JavaRegion> bBlocksToRegions = this.methodsToBlocksDecisions.get(bMethodNode);
-
-                AbstractInsnNode inst = this.getASMInstructionFromSrc(edge);
-                MethodBlock bBlock = this.getMethodBlockInCallerMethod(bSootMethod, inst);
-
-                JavaRegion bRegion = bBlocksToRegions.get(bBlock);
-                Set<String> bDecision = this.getDecision(bRegion);
-
-                if(!aDecision.containsAll(bDecision) && !aDecision.equals(bDecision) && !bDecision.containsAll(aDecision)) {
-                    this.debugBlockDecisions(methodNode);
-//                    System.out.println("Cannot push up to caller " + bSootMethod.getName() + " from " + methodNode.name + " " + bDecision + " -> " + aDecision);
-                    canPush = false;
-                    break;
-                }
-            }
-
-            if(!canPush) {
+            if(methodsToAnalyze.isEmpty()) {
                 continue;
             }
 
-            edges = this.getCallerEdges(a);
-
-            for(Edge edge : edges) {
-                SootMethod bSootMethod = edge.src();
-                MethodNode bMethodNode = this.sootMethodToMethodNode.get(bSootMethod);
-                this.debugBlocksAndRegions(bMethodNode);
-                LinkedHashMap<MethodBlock, JavaRegion> bBlocksToRegions = this.methodsToBlocksDecisions.get(bMethodNode);
-
-                AbstractInsnNode inst = this.getASMInstructionFromSrc(edge);
-                MethodBlock bBlock = this.getMethodBlockInCallerMethod(bSootMethod, inst);
-
-                JavaRegion bRegion = bBlocksToRegions.get(bBlock);
-                Set<String> bDecision = this.getDecision(bRegion);
-
-                if(!(aDecision.containsAll(bDecision) && !aDecision.equals(bDecision))) {
-                    continue;
-                }
-
-                JavaRegion newRegion;
-                int index;
-
-                if(bRegion == null) {
-                    String classPackage = bSootMethod.getDeclaringClass().getPackageName();
-                    String className = bSootMethod.getDeclaringClass().getShortName();
-                    String methodName = bSootMethod.getBytecodeSignature();
-                    methodName = methodName.substring(methodName.indexOf(" "), methodName.length() - 1).trim();
-                    index = bMethodNode.instructions.indexOf(inst);
-
-                    newRegion = new JavaRegion(classPackage, className, methodName, index);
-                    this.methodsWithUpdatedIndexes.add(bMethodNode);
-                }
-                else {
-                    index = bRegion.getStartBytecodeIndex();
-
-                    newRegion = new JavaRegion(bRegion.getRegionPackage(), bRegion.getRegionClass(), bRegion.getRegionMethod(), index);
-                    this.regionsToOptionSet.remove(bRegion);
-                }
-
-                bBlocksToRegions.put(bBlock, newRegion);
-
-                Set<Set<String>> newOptionSet = new HashSet<>();
-                newOptionSet.add(aDecision);
-                this.regionsToOptionSet.put(newRegion, newOptionSet);
-
-                this.debugBlocksAndRegions(bMethodNode);
-                updated = true;
-                worklist.add(0, edge.src());
-            }
+            worklist.addAll(0, methodsToAnalyze);
+            updated = true;
         }
 
         return updated;
+    }
+
+    private List<SootMethod> propagateUpRegionInter() {
+        return new ArrayList<>();
+//        edges = this.getCallerEdges(method);
+//
+//        for(Edge edge : edges) {
+//            SootMethod bSootMethod = edge.src();
+//            MethodNode bMethodNode = this.sootMethodToMethodNode.get(bSootMethod);
+//            this.debugBlocksAndRegions(bMethodNode);
+//            LinkedHashMap<MethodBlock, JavaRegion> bBlocksToRegions = this.methodsToBlocksDecisions.get(bMethodNode);
+//
+//            AbstractInsnNode inst = this.getASMInstFromCaller(edge);
+//            MethodBlock bBlock = this.getMethodBlockInCallerMethod(bSootMethod, inst);
+//
+//            JavaRegion bRegion = bBlocksToRegions.get(bBlock);
+//            Set<String> bDecision = this.getDecision(bRegion);
+//
+//            if(!(aDecision.containsAll(bDecision) && !aDecision.equals(bDecision))) {
+//                continue;
+//            }
+//
+//            JavaRegion newRegion;
+//            int index;
+//
+//            if(bRegion == null) {
+//                String classPackage = bSootMethod.getDeclaringClass().getPackageName();
+//                String className = bSootMethod.getDeclaringClass().getShortName();
+//                String methodName = bSootMethod.getBytecodeSignature();
+//                methodName = methodName.substring(methodName.indexOf(" "), methodName.length() - 1).trim();
+//                index = bMethodNode.instructions.indexOf(inst);
+//
+//                newRegion = new JavaRegion(classPackage, className, methodName, index);
+//                this.methodsWithUpdatedIndexes.add(bMethodNode);
+//            }
+//            else {
+//                index = bRegion.getStartBytecodeIndex();
+//
+//                newRegion = new JavaRegion(bRegion.getRegionPackage(), bRegion.getRegionClass(), bRegion.getRegionMethod(), index);
+//                this.regionsToOptionSet.remove(bRegion);
+//            }
+//
+//            bBlocksToRegions.put(bBlock, newRegion);
+//
+//            Set<Set<String>> newOptionSet = new HashSet<>();
+//            newOptionSet.add(aDecision);
+//            this.regionsToOptionSet.put(newRegion, newOptionSet);
+//
+//            this.debugBlocksAndRegions(bMethodNode);
+//            updated = true;
+//            worklist.add(0, edge.src());
+//        }
+    }
+
+    /**
+     * Check with all callers if the region can be pushed up
+     * @param methodNode
+     * @return
+     */
+    private boolean canPropagateRegion(MethodNode methodNode) {
+        boolean canPush = true;
+
+        Collection<JavaRegion> regions = this.methodsToBlocksDecisions.get(methodNode).values();
+        Iterator<JavaRegion> regionsIter = regions.iterator();
+        JavaRegion region = regionsIter.next();
+
+        while(region == null) {
+            region = regionsIter.next();
+        }
+
+        Set<String> decision = this.getDecision(region);
+
+        if(decision.isEmpty()) {
+            throw new RuntimeException("The first decision in " + methodNode.name + " cannot be null");
+        }
+
+        SootMethod sootMethod = this.methodNodeToSootMethod.get(methodNode);
+        List<Edge> edges = this.getCallerEdges(sootMethod);
+
+        for(Edge edge : edges) {
+            SootMethod callerSootMethod = edge.src();
+            MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
+            LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this.methodsToBlocksDecisions.get(callerMethodNode);
+
+            MethodBlock callerBlock = this.getCallerBlock(edge);
+            JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
+            Set<String> callerDecision = this.getDecision(callerRegion);
+
+            if(!decision.containsAll(callerDecision) && !decision.equals(callerDecision) && !callerDecision.containsAll(decision)) {
+                this.debugBlockDecisions(callerMethodNode);
+                System.out.println("Cannot push up " + decision + " from " + methodNode.name + " to " + callerMethodNode.name + " at " + callerBlock.getID() + " because it has decision " + callerDecision);
+                canPush = false;
+                break;
+            }
+        }
+
+        return canPush;
+    }
+
+    private MethodBlock getCallerBlock(Edge edge) {
+        MethodBlock block = null;
+
+        SootMethod callerSootMethod = edge.src();
+        MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
+        AbstractInsnNode inst = this.getASMInstFromCaller(edge);
+        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(callerMethodNode);
+
+        for(MethodBlock entry : blocksToRegions.keySet()) {
+            if(!entry.getInstructions().contains(inst)) {
+                continue;
+            }
+
+            block = entry;
+
+            break;
+        }
+
+        return block;
     }
 
     private MethodBlock getMethodBlockInCallerMethod(SootMethod sootMethod, AbstractInsnNode inst) {
@@ -396,7 +433,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         return block;
     }
 
-    private AbstractInsnNode getASMInstructionFromSrc(Edge edge) {
+    private AbstractInsnNode getASMInstFromCaller(Edge edge) {
         Unit unit = edge.srcUnit();
         List<Integer> bytecodeIndexes = new ArrayList<>();
 

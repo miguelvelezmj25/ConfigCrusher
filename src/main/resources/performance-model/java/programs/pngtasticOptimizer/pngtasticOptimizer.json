@@ -1,52 +1,26 @@
 {
-  "baseTime": 5729302,
-  "baseTimeHumanReadable": 0.006,
+  "baseTime": 598301441,
+  "baseTimeHumanReadable": 0.598,
   "regionsToPerformanceTables": {
-    "Region{regionID='be8e21a9-fcc6-4d8f-b1f7-99230527b6a6', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 349599508,
-      "[COMPRESSOR]": 80422355470,
-      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 206587879264,
-      "[ITERATIONS]": 358190200,
-      "[COMPRESSOR, COMPRESSIONLEVEL]": 78539459773,
-      "[ITERATIONS, COMPRESSIONLEVEL]": 5957481973,
-      "[COMPRESSOR, ITERATIONS]": 214230848559,
-      "[COMPRESSIONLEVEL]": 5971469311
+    "Region{regionID='47dc6e70-31b5-446e-8643-2fdfb56dc12f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 6710000,
+      "[REMOVEGAMMA]": 6913788
     },
-    "Region{regionID='355e6576-2eff-423a-8eb1-ceb4bfc1a7a4', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 3675952,
-      "[LOGLEVEL]": 4360175
+    "Region{regionID='1494c317-ca16-4819-95f2-7b8231c5b166', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 75064010,
+      "[COMPRESSOR]": 293663796,
+      "[ITERATIONS]": 83398532,
+      "[COMPRESSOR, ITERATIONS]": 290722276
     },
-    "Region{regionID='29819f93-61f6-422f-8aba-466969c157e9', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 1109,
-      "[LOGLEVEL]": 1729
+    "Region{regionID='7bcefd2d-78fa-49c0-9500-f36d1acb7b4c', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 13148,
+      "[COMPRESSIONLEVEL]": 12119
     },
-    "Region{regionID='4a064a8b-32a9-45a4-8e2a-baf61631c047', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 56653,
-      "[COMPRESSOR]": 78642,
-      "[COMPRESSOR, LOGLEVEL]": 5623978,
-      "[ITERATIONS]": 60654,
-      "[ITERATIONS, LOGLEVEL]": 5821141,
-      "[COMPRESSOR, ITERATIONS]": 66160,
-      "[LOGLEVEL]": 5693268,
-      "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 4987246
+    "Region{regionID='3de0a470-c537-42ce-bb90-a08225df49eb', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 984,
+      "[COMPRESSOR]": 1730
     },
-    "Region{regionID='6d38e1a1-70a8-456f-9c3c-dbe977ebb0ea', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 170117,
-      "[LOGLEVEL, REMOVEGAMMA]": 158671,
-      "[LOGLEVEL]": 153595,
-      "[REMOVEGAMMA]": 176925
-    },
-    "Region{regionID='213da996-39a9-4599-9112-bad5b78bff06', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 8076,
-      "[LOGLEVEL]": 2017165
-    },
-    "Region{regionID='7a8aaa1f-f545-42d7-9f8c-8804d2df93c9', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 1445029,
-      "[LOGLEVEL, REMOVEGAMMA]": 346341,
-      "[LOGLEVEL]": 1922521,
-      "[REMOVEGAMMA]": 2054230
-    },
-    "Region{regionID='5a4dce7d-b99b-47ff-aa18-be7ac333a71a', startTime=-1, endTime=-1, duration=-1}": {
+    "Region{regionID='8dc147ce-e0d3-4705-a89e-17ad9c814c4f', startTime=-1, endTime=-1, duration=-1}": {
       "[]": 0,
       "[COMPRESSOR]": 0,
       "[COMPRESSOR, LOGLEVEL]": 0,
@@ -56,73 +30,57 @@
       "[LOGLEVEL]": 0,
       "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 0
     },
-    "Region{regionID='3d1bb245-519a-4ea1-ab95-7c9499a3e305', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 733479,
-      "[REMOVEGAMMA]": 781737
+    "Region{regionID='a7ac8272-2a03-43ec-ba64-74e055b7acf2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 770,
+      "[ITERATIONS]": 1000
     },
-    "Region{regionID='037e6ae8-8ec2-41b8-97ec-1863f6a049c2', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 2879540,
-      "[LOGLEVEL]": 2881604
+    "Region{regionID='07b058d9-0466-4430-b871-d1bb1df1b8f6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 6433311,
+      "[LOGLEVEL, REMOVEGAMMA]": 5670769,
+      "[LOGLEVEL]": 6436595,
+      "[REMOVEGAMMA]": 6685501
     },
-    "Region{regionID='2ba019ed-115b-4636-8a8b-d180b858abdc', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 1149,
-      "[COMPRESSOR]": 1873
+    "Region{regionID='8ed1c236-d239-41d4-9fde-4df77c98557b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 111257334,
+      "[COMPRESSOR]": 0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0,
+      "[ITERATIONS]": 128908595,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 6156766690,
+      "[COMPRESSOR, ITERATIONS]": 0,
+      "[COMPRESSIONLEVEL]": 5868227283
     },
-    "Region{regionID='ed4323d1-492b-4d48-85d0-eb18edcc24dd', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 1404,
-      "[COMPRESSIONLEVEL]": 1628
-    },
-    "Region{regionID='4e06dbf8-0e08-404c-acdd-205e99da85a1', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 1113,
-      "[ITERATIONS]": 1279
+    "Region{regionID='dc5d4508-ee3e-4c5a-8b78-053ef3c23158', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 206108569,
+      "[COMPRESSOR]": 83132736722,
+      "[COMPRESSOR, LOGLEVEL]": 82132411819,
+      "[ITERATIONS]": 219602802,
+      "[ITERATIONS, LOGLEVEL]": 226427039,
+      "[COMPRESSOR, ITERATIONS]": 221044058879,
+      "[LOGLEVEL]": 210301020,
+      "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 217921027688
     }
   },
   "regionsToPerformanceTablesHumanReadable": {
-    "Region{regionID='be8e21a9-fcc6-4d8f-b1f7-99230527b6a6', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.35,
-      "[COMPRESSOR]": 80.422,
-      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 206.588,
-      "[ITERATIONS]": 0.358,
-      "[COMPRESSOR, COMPRESSIONLEVEL]": 78.539,
-      "[ITERATIONS, COMPRESSIONLEVEL]": 5.957,
-      "[COMPRESSOR, ITERATIONS]": 214.231,
-      "[COMPRESSIONLEVEL]": 5.971
+    "Region{regionID='47dc6e70-31b5-446e-8643-2fdfb56dc12f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.007,
+      "[REMOVEGAMMA]": 0.007
     },
-    "Region{regionID='355e6576-2eff-423a-8eb1-ceb4bfc1a7a4', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.004,
-      "[LOGLEVEL]": 0.004
+    "Region{regionID='1494c317-ca16-4819-95f2-7b8231c5b166', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.075,
+      "[COMPRESSOR]": 0.294,
+      "[ITERATIONS]": 0.083,
+      "[COMPRESSOR, ITERATIONS]": 0.291
     },
-    "Region{regionID='29819f93-61f6-422f-8aba-466969c157e9', startTime=-1, endTime=-1, duration=-1}": {
+    "Region{regionID='7bcefd2d-78fa-49c0-9500-f36d1acb7b4c', startTime=-1, endTime=-1, duration=-1}": {
       "[]": 0.0,
-      "[LOGLEVEL]": 0.0
+      "[COMPRESSIONLEVEL]": 0.0
     },
-    "Region{regionID='4a064a8b-32a9-45a4-8e2a-baf61631c047', startTime=-1, endTime=-1, duration=-1}": {
+    "Region{regionID='3de0a470-c537-42ce-bb90-a08225df49eb', startTime=-1, endTime=-1, duration=-1}": {
       "[]": 0.0,
-      "[COMPRESSOR]": 0.0,
-      "[COMPRESSOR, LOGLEVEL]": 0.006,
-      "[ITERATIONS]": 0.0,
-      "[ITERATIONS, LOGLEVEL]": 0.006,
-      "[COMPRESSOR, ITERATIONS]": 0.0,
-      "[LOGLEVEL]": 0.006,
-      "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 0.005
+      "[COMPRESSOR]": 0.0
     },
-    "Region{regionID='6d38e1a1-70a8-456f-9c3c-dbe977ebb0ea', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.0,
-      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
-      "[LOGLEVEL]": 0.0,
-      "[REMOVEGAMMA]": 0.0
-    },
-    "Region{regionID='213da996-39a9-4599-9112-bad5b78bff06', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.0,
-      "[LOGLEVEL]": 0.002
-    },
-    "Region{regionID='7a8aaa1f-f545-42d7-9f8c-8804d2df93c9', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.001,
-      "[LOGLEVEL, REMOVEGAMMA]": 0.0,
-      "[LOGLEVEL]": 0.002,
-      "[REMOVEGAMMA]": 0.002
-    },
-    "Region{regionID='5a4dce7d-b99b-47ff-aa18-be7ac333a71a', startTime=-1, endTime=-1, duration=-1}": {
+    "Region{regionID='8dc147ce-e0d3-4705-a89e-17ad9c814c4f', startTime=-1, endTime=-1, duration=-1}": {
       "[]": 0.0,
       "[COMPRESSOR]": 0.0,
       "[COMPRESSOR, LOGLEVEL]": 0.0,
@@ -132,25 +90,35 @@
       "[LOGLEVEL]": 0.0,
       "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 0.0
     },
-    "Region{regionID='3d1bb245-519a-4ea1-ab95-7c9499a3e305', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.001,
-      "[REMOVEGAMMA]": 0.001
-    },
-    "Region{regionID='037e6ae8-8ec2-41b8-97ec-1863f6a049c2', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.003,
-      "[LOGLEVEL]": 0.003
-    },
-    "Region{regionID='2ba019ed-115b-4636-8a8b-d180b858abdc', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.0,
-      "[COMPRESSOR]": 0.0
-    },
-    "Region{regionID='ed4323d1-492b-4d48-85d0-eb18edcc24dd', startTime=-1, endTime=-1, duration=-1}": {
-      "[]": 0.0,
-      "[COMPRESSIONLEVEL]": 0.0
-    },
-    "Region{regionID='4e06dbf8-0e08-404c-acdd-205e99da85a1', startTime=-1, endTime=-1, duration=-1}": {
+    "Region{regionID='a7ac8272-2a03-43ec-ba64-74e055b7acf2', startTime=-1, endTime=-1, duration=-1}": {
       "[]": 0.0,
       "[ITERATIONS]": 0.0
+    },
+    "Region{regionID='07b058d9-0466-4430-b871-d1bb1df1b8f6', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.006,
+      "[LOGLEVEL, REMOVEGAMMA]": 0.006,
+      "[LOGLEVEL]": 0.006,
+      "[REMOVEGAMMA]": 0.007
+    },
+    "Region{regionID='8ed1c236-d239-41d4-9fde-4df77c98557b', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.111,
+      "[COMPRESSOR]": 0.0,
+      "[COMPRESSOR, ITERATIONS, COMPRESSIONLEVEL]": 0.0,
+      "[ITERATIONS]": 0.129,
+      "[COMPRESSOR, COMPRESSIONLEVEL]": 0.0,
+      "[ITERATIONS, COMPRESSIONLEVEL]": 6.157,
+      "[COMPRESSOR, ITERATIONS]": 0.0,
+      "[COMPRESSIONLEVEL]": 5.868
+    },
+    "Region{regionID='dc5d4508-ee3e-4c5a-8b78-053ef3c23158', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.206,
+      "[COMPRESSOR]": 83.133,
+      "[COMPRESSOR, LOGLEVEL]": 82.132,
+      "[ITERATIONS]": 0.22,
+      "[ITERATIONS, LOGLEVEL]": 0.226,
+      "[COMPRESSOR, ITERATIONS]": 221.044,
+      "[LOGLEVEL]": 0.21,
+      "[COMPRESSOR, ITERATIONS, LOGLEVEL]": 217.921
     }
   }
 }

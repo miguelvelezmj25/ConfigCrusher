@@ -1,0 +1,27 @@
+digraph main {
+node [shape=record];
+661394047 [label="L6\lFRAME APPEND [I]\lILOAD 2\lILOAD 1\lIF_ICMPGE L7\l"];
+38333782 [label="L5\lLINENUMBER 18 L5\lBIPUSH 20\lISTORE 1\l"];
+24057879 [label="L7\lLINENUMBER 26 L7\lFRAME SAME\lLDC \"63757aad-c590-4d03-ace8-a1552d38fb77\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+469492805 [label="L4\lLINENUMBER 21 L4\lFRAME APPEND [I]\lICONST_0\lISTORE 2\l"];
+467495535 [label="L9\lLINENUMBER 21 L9\lFRAME SAME\lIINC 2 1\lGOTO L6\l"];
+475546921 [label="L0\lLINENUMBER 11 L0\lLDC \"63757aad-c590-4d03-ace8-a1552d38fb77\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 13 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lPUTSTATIC edu/cmu/cs/mvelezce/Regions21.A : Z\lL2\lLINENUMBER 15 L2\lICONST_5\lISTORE 1\lL3\lLINENUMBER 17 L3\lGETSTATIC edu/cmu/cs/mvelezce/Regions21.A : Z\lIFEQ L4\l"];
+1606444062 [label="L8\lLINENUMBER 22 L8\lILOAD 1\lICONST_2\lIREM\lIFNE L9\l"];
+1589253663 [label="L10\lLINENUMBER 23 L10\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+entry;
+exit;
+entry -> 475546921;
+661394047 -> 24057879;
+661394047 -> 1606444062;
+38333782 -> 469492805;
+24057879 -> exit;
+469492805 -> 661394047;
+467495535 -> 661394047;
+475546921 -> 38333782;
+475546921 -> 469492805;
+1606444062 -> 467495535;
+1606444062 -> 1589253663;
+1589253663 -> 467495535;
+24057879[fontcolor="purple", penwidth=3, color="purple"];
+475546921[fontcolor="purple", penwidth=3, color="purple"];
+}

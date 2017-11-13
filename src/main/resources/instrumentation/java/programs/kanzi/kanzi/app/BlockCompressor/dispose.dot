@@ -1,0 +1,36 @@
+digraph dispose {
+node [shape=record];
+611596442 [label="L8\lLINENUMBER 211 L8\lFRAME SAME\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.pool : Ljava/util/concurrent/ExecutorService;\lIFNULL L11\l"];
+156580200 [label="L5\lLINENUMBER 206 L5\lFRAME SAME1 java/io/IOException\lASTORE 1\lL9\lLINENUMBER 207 L9\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Compression failure: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/io/IOException.getMessage ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL10\lLINENUMBER 208 L10\lBIPUSH -12\lINVOKESTATIC java/lang/System.exit (I)V\l"];
+1995393551 [label="ALOAD 0\lGETFIELD kanzi/app/BlockCompressor.ownPool : Z\lICONST_1\lIF_ICMPNE L11\l"];
+1441072868 [label="L4\lLINENUMBER 209 L4\lFRAME SAME\lGOTO L8\l"];
+1935285408 [label="L12\lLINENUMBER 212 L12\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.pool : Ljava/util/concurrent/ExecutorService;\lINVOKEINTERFACE java/util/concurrent/ExecutorService.shutdown ()V\l"];
+2041538319 [label="L7\lLINENUMBER 204 L7\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.cos : Lkanzi/io/CompressedOutputStream;\lINVOKEVIRTUAL kanzi/io/CompressedOutputStream.close ()V\l"];
+1846042074 [label="L6\lLINENUMBER 196 L6\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.is : Ljava/io/InputStream;\lINVOKEVIRTUAL java/io/InputStream.close ()V\l"];
+809160136 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lTRYCATCHBLOCK L3 L4 L5 java/io/IOException\lL0\lLINENUMBER 195 L0\lLDC \"f30ab727-b5b8-472f-be48-11d77e5f1f3d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.is : Ljava/io/InputStream;\lIFNULL L1\l"];
+1916139110 [label="L3\lLINENUMBER 203 L3\lFRAME SAME\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.cos : Lkanzi/io/CompressedOutputStream;\lIFNULL L4\l"];
+1962597504 [label="L11\lLINENUMBER 214 L11\lFRAME SAME\lLDC \"f30ab727-b5b8-472f-be48-11d77e5f1f3d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1481846279 [label="L1\lLINENUMBER 200 L1\lFRAME SAME\lGOTO L3\l"];
+344404325 [label="L2\lLINENUMBER 198 L2\lFRAME SAME1 java/io/IOException\lASTORE 1\l"];
+entry;
+exit;
+1441072868 -> 611596442;
+1935285408 -> 1962597504;
+2041538319 -> 1441072868;
+809160136 -> 1846042074;
+809160136 -> 1481846279;
+344404325 -> 1916139110;
+entry -> 809160136;
+611596442 -> 1995393551;
+611596442 -> 1962597504;
+156580200 -> 611596442;
+1995393551 -> 1935285408;
+1995393551 -> 1962597504;
+1846042074 -> 1481846279;
+1916139110 -> 1441072868;
+1916139110 -> 2041538319;
+1962597504 -> exit;
+1481846279 -> 1916139110;
+809160136[fontcolor="purple", penwidth=3, color="purple"];
+1962597504[fontcolor="purple", penwidth=3, color="purple"];
+}

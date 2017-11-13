@@ -24,8 +24,6 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
     @Override
     public void transformMethod(MethodNode methodNode) {
-        MethodGraph graph = this.getMethodsToGraphs().get(methodNode);
-
         InsnList newInstructions;
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
 
@@ -33,15 +31,15 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
             newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
         }
         else {
-            newInstructions = this.instrumentRegion(methodNode, graph, regionsInMethod);
+            newInstructions = this.instrumentRegion(methodNode, regionsInMethod);
         }
 
         methodNode.instructions.clear();
         methodNode.instructions.add(newInstructions);
 
-        System.out.println("After transforming");
-        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-        builder.build();
+//        System.out.println("After transforming");
+//        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
+//        builder.build();
         System.out.println("");
     }
 
@@ -105,7 +103,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
      * @param methodNode
      * @param regionsInMethod
      */
-    private InsnList instrumentRegion(MethodNode methodNode, MethodGraph graph, List<JavaRegion> regionsInMethod) {
+    private InsnList instrumentRegion(MethodNode methodNode, List<JavaRegion> regionsInMethod) {
         System.out.println("########### " + this.getMethodNodeToClassNode().get(methodNode).name + " " + methodNode.name);
 
         InsnList newInstructions = this.instrumentRegionsStartAndEndSameBlock(methodNode, regionsInMethod);

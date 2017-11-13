@@ -199,9 +199,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //                this.debugBlockDecisions(method);
 //            }
 //
-//            if(method.name.contains("optimize")) {
-//                this.debugBlockDecisions(method);
-//            }
+            if(method.name.contains("optimize")) {
+                System.out.println(method.desc);
+                this.debugBlockDecisions(method);
+            }
 
 //            if(this.methodNodeToClassNode.get(method).name.contains("Regions20")) {
 //                this.debugBlockDecisions(method);

@@ -1,0 +1,20 @@
+digraph main {
+node [shape=record];
+1228087234 [label="L2\lLINENUMBER 21 L2\lFRAME SAME\lGETSTATIC edu/cmu/cs/mvelezce/Regions8.A : Z\lIFEQ L4\l"];
+649943105 [label="L0\lLINENUMBER 15 L0\lLDC \"8d2f077f-b2b9-468c-a96c-7d3c3a4e9b27\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 17 L1\lGETSTATIC edu/cmu/cs/mvelezce/Regions8.A : Z\lIFEQ L2\l"];
+1515947023 [label="L4\lLINENUMBER 24 L4\lFRAME SAME\lLDC \"8d2f077f-b2b9-468c-a96c-7d3c3a4e9b27\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1886213829 [label="L3\lLINENUMBER 18 L3\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions8.foo ()V\l"];
+384348245 [label="L5\lLINENUMBER 22 L5\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions8.foo ()V\l"];
+entry;
+exit;
+1228087234 -> 1515947023;
+1228087234 -> 384348245;
+entry -> 649943105;
+649943105 -> 1228087234;
+649943105 -> 1886213829;
+1515947023 -> exit;
+1886213829 -> 1228087234;
+384348245 -> 1515947023;
+649943105[fontcolor="purple", penwidth=3, color="purple"];
+1515947023[fontcolor="purple", penwidth=3, color="purple"];
+}

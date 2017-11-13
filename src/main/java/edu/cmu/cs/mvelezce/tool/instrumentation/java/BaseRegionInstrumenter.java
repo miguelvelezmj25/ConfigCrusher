@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionAndOptions;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -69,8 +70,16 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
 
         for(Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionsSet : relevantRegionsToOptions.entrySet()) {
             JavaRegion oldRegion = regionToOptionsSet.getKey();
-            JavaRegion newRegion = new JavaRegion(oldRegion.getRegionID().toString(), oldRegion.getRegionPackage(),
-                    oldRegion.getRegionClass(), oldRegion.getRegionMethod(), oldRegion.getStartBytecodeIndex());
+
+            Set<String> endBlocksIDs = new HashSet<>();
+
+            for(MethodBlock block : oldRegion.getEndMethodBlocks()) {
+                endBlocksIDs.add(block.getID());
+            }
+
+            JavaRegion newRegion = new JavaRegion(oldRegion.getRegionID(), oldRegion.getRegionPackage(),
+                    oldRegion.getRegionClass(), oldRegion.getRegionMethod(), oldRegion.getStartBytecodeIndex(),
+                    oldRegion.getStartMethodBlock().getID(), endBlocksIDs);
             DecisionAndOptions decisionAndOptions = new DecisionAndOptions(newRegion, regionToOptionsSet.getValue());
             decisionsAndOptions.add(decisionAndOptions);
         }

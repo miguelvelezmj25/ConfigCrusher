@@ -939,6 +939,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         MethodGraph graph = this.getMethodGraph(methodNode);
         Set<MethodBlock> blocks = graph.getBlocks();
 
+        if(methodNode.name.equals("init")) {
+            System.out.println();
+        }
+
+        if(methodNode.name.equals("<init>")) {
+            System.out.println();
+        }
+
         StringBuilder dotString = new StringBuilder("digraph " + methodNode.name + " {\n");
         dotString.append("node [shape=record];\n");
 
@@ -1012,51 +1020,42 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         MethodBlock beta = graph.getExitBlock();
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
 
-        // The entry block should be skipped
-        Iterator<Map.Entry<MethodBlock, JavaRegion>> blocksToRegionsIterator = blocksToRegions.entrySet().iterator();
-        blocksToRegionsIterator.next();
+        for(Map.Entry<MethodBlock, JavaRegion> blockToRegion : blocksToRegions.entrySet()) {
+            MethodBlock block = blockToRegion.getKey();
 
-        for(int i = 0; blocksToRegionsIterator.hasNext(); i++) {
-            Map.Entry<MethodBlock, JavaRegion> blockToRegion = blocksToRegionsIterator.next();
-
-            if(blockToRegion.getValue() == null) {
+            // The entry block should be skipped
+            if(graph.getEntryBlock() == block) {
                 continue;
             }
 
-            MethodBlock block = blockToRegion.getKey();
             JavaRegion region = blockToRegion.getValue();
+
+            // Optimization
+            if(region == null) {
+                continue;
+            }
+
             region.setStartMethodBlock(block);
             Set<String> blockDecision = this.getDecision(region);
 
-            MethodBlock end;
-            // TODO optimize for regions15
-            // Optimization
-            if(i == 0) {
-                end = graph.getExitBlock();
-            }
-            else {
-                MethodBlock ipd = graph.getImmediatePostDominator(block);
-                JavaRegion ipdRegion = blocksToRegions.get(ipd);
-                Set<String> ipdDecision = this.getDecision(ipdRegion);
+            MethodBlock ipd = graph.getImmediatePostDominator(block);
+            JavaRegion ipdRegion = blocksToRegions.get(ipd);
+            Set<String> ipdDecision = this.getDecision(ipdRegion);
 
-                while(ipd != beta && (blockDecision.equals(ipdDecision) || blockDecision.containsAll(ipdDecision))) {
-                    MethodBlock temp = graph.getImmediatePostDominator(ipd);
+            while(ipd != beta && (blockDecision.equals(ipdDecision) || blockDecision.containsAll(ipdDecision))) {
+                MethodBlock temp = graph.getImmediatePostDominator(ipd);
 
-                    // Optimization
-                    // TODO check the variables might be wrong
-                    if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
-                        break;
-                    }
-
-                    ipd = temp;
-                    ipdRegion = blocksToRegions.get(ipd);
-                    ipdDecision = this.getDecision(ipdRegion);
+                // Optimization
+                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
+                    break;
                 }
 
-//            MethodBlock end = ipd;
-                end = ipd;
+                ipd = temp;
+                ipdRegion = blocksToRegions.get(ipd);
+                ipdDecision = this.getDecision(ipdRegion);
             }
 
+            MethodBlock end = ipd;
             Set<MethodBlock> ends = new HashSet<>();
 
             if(block == end) {
@@ -1088,7 +1087,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             // If the ends are connected to the exit node, we want to analyze them
             for(MethodBlock e : ends) {
-                MethodBlock ipd = graph.getImmediatePostDominator(e);
+                ipd = graph.getImmediatePostDominator(e);
 
                 if(ipd == beta & e.getSuccessors().size() == 1 && e.getSuccessors().iterator().next() == beta) {
                     reachables.add(e);

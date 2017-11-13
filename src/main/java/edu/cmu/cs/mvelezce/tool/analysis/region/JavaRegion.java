@@ -8,10 +8,6 @@ import java.util.Set;
 /**
  * Created by mvelezce on 4/19/17.
  */
-/*
-JAVA regions are:
-control flow decisions
- */
 public class JavaRegion extends Region {
     private String regionPackage = "";
     private String regionClass = "";
@@ -20,6 +16,8 @@ public class JavaRegion extends Region {
     //    private int javaLineNubmer = Integer.MIN_VALUE;
     private MethodBlock startMethodBlock = null;
     private Set<MethodBlock> endMethodBlocks = new HashSet<>();
+    private String startBlockID = "";
+    private Set<String> endBlocksIDs = new HashSet<>();
 
     private JavaRegion() {
         ;
@@ -60,6 +58,12 @@ public class JavaRegion extends Region {
         this.startBytecodeIndex = startBytecodeIndex;
     }
 
+    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex,
+                      String startBlockID, Set<String> endBlocksIDs) {
+        this(regionId, regionPackage, regionClass, regionMethod, startBytecodeIndex);
+        this.startBlockID = startBlockID;
+        this.endBlocksIDs.addAll(endBlocksIDs);
+    }
 //    public JavaRegion(String regionId, String regionPackage, String regionClass, String regionMethod, int startBytecodeIndex, int endBytecodeIndex) {
 //        this(regionId, regionPackage, regionClass, regionMethod, startBytecodeIndex);
 //        this.endBytecodeIndex = endBytecodeIndex;
@@ -122,4 +126,21 @@ public class JavaRegion extends Region {
 //    public void setJavaLineNubmer(int javaLineNubmer) {
 //        this.javaLineNubmer = javaLineNubmer;
 //    }
+
+
+    public String getStartBlockID() {
+        return startBlockID;
+    }
+
+    public void setStartBlockID(String startBlockID) {
+        this.startBlockID = startBlockID;
+    }
+
+    public Set<String> getEndBlocksIDs() {
+        return endBlocksIDs;
+    }
+
+    public void setEndBlocksIDs(Set<String> endBlocksIDs) {
+        this.endBlocksIDs = endBlocksIDs;
+    }
 }

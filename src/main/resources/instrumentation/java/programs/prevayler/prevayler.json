@@ -1,1 +1,339 @@
-[{"region":{"regionID":"a607be0c-f83d-46f3-82ed-92c555eda3fb","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":278,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"1809401898","endBlocksIDs":["1312409989"]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","JOURNALSERIALIZER","FILESIZETHRESHOLD"]]},{"region":{"regionID":"7cd7fbd9-05dc-4f34-83cd-49764707e537","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":186,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"154568373","endBlocksIDs":["2137661823"]},"options":[["FILESIZETHRESHOLD"]]},{"region":{"regionID":"0ed4aaf3-5f71-4a24-89ed-bd896366bee9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":299,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"1312409989","endBlocksIDs":["1082697966"]},"options":[["SNAPSHOTSERIALIZER"]]},{"region":{"regionID":"750d89e2-fca7-4f7a-bf9b-d73d204d1474","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":146,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"134028194","endBlocksIDs":["810422321"]},"options":[["CLOCK"]]},{"region":{"regionID":"babf028b-f844-4813-bf71-a991393d52f0","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":387,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"1082697966","endBlocksIDs":["282840902"]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","MONITOR","DISKSYNC","JOURNALSERIALIZER","FILESIZETHRESHOLD","CLOCK"]]},{"region":{"regionID":"cff4c52b-e408-420c-880c-a8985e423dd6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":177,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"1640691183","endBlocksIDs":["154568373"]},"options":[["DISKSYNC"]]},{"region":{"regionID":"1c71509d-89a6-4d40-931b-d18b4b957f0d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":168,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"810422321","endBlocksIDs":["1640691183"]},"options":[["DEEPCOPY"]]},{"region":{"regionID":"3cf42bf4-4b63-4180-a7a2-f7bf88495538","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":204,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"235208280","endBlocksIDs":["1809401898"]},"options":[["MONITOR"]]},{"region":{"regionID":"3ddbb80f-570f-43c9-adb1-d6c551ecae38","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":195,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"2137661823","endBlocksIDs":["235208280"]},"options":[["FILEAGETHRESHOLD"]]},{"region":{"regionID":"ef49fb9b-898e-43e7-96c7-fb1629f85c2a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":408,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"282840902","endBlocksIDs":["247058377"]},"options":[["SNAPSHOTSERIALIZER"]]},{"region":{"regionID":"575d55be-d322-4cb4-bce3-81fb08cd9c26","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":425,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"247058377","endBlocksIDs":["247058377"]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","MONITOR","DISKSYNC","JOURNALSERIALIZER","FILESIZETHRESHOLD","CLOCK"]]},{"region":{"regionID":"04b62539-a084-4911-8cd0-9f211bcafb60","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"Capsule","regionMethod":"<init>(Ljava/lang/Object;Lorg/prevayler/foundation/serialization/Serializer;Z)V","startBytecodeIndex":18,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"216030712","endBlocksIDs":["216030712"]},"options":[["JOURNALSERIALIZER"]]},{"region":{"regionID":"093486d4-59a5-4f78-820d-5634aa733c3f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":0,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"1848717749","endBlocksIDs":["247058377"]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"46925316-aae0-41c0-95cc-2ce583804a46","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"TransactionCapsule","regionMethod":"<init>(Lorg/prevayler/Transaction;Lorg/prevayler/foundation/serialization/Serializer;Z)V","startBytecodeIndex":0,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"469742396","endBlocksIDs":["469742396"]},"options":[["DEEPCOPY"]]}]
+[
+  {
+    "region": {
+      "regionID": "61179849-f372-44e7-81da-ace5b268685b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "TransactionCapsule",
+      "regionMethod": "<init>(Lorg/prevayler/Transaction;Lorg/prevayler/foundation/serialization/Serializer;Z)V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "622665058",
+      "endBlocksIDs": [
+        "622665058"
+      ]
+    },
+    "options": [
+      [
+        "DEEPCOPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3cf42bf4-4b63-4180-a7a2-f7bf88495538",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 204,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "373811974",
+      "endBlocksIDs": [
+        "1852437228"
+      ]
+    },
+    "options": [
+      [
+        "MONITOR"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0ed4aaf3-5f71-4a24-89ed-bd896366bee9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 299,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1674296219",
+      "endBlocksIDs": [
+        "1106949030"
+      ]
+    },
+    "options": [
+      [
+        "SNAPSHOTSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9543c356-29fa-4298-92b2-d3200810bde0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 387,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1106949030",
+      "endBlocksIDs": [
+        "1694030785"
+      ]
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "MONITOR",
+        "DISKSYNC",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD",
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3ddbb80f-570f-43c9-adb1-d6c551ecae38",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 195,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1322122707",
+      "endBlocksIDs": [
+        "373811974"
+      ]
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1c71509d-89a6-4d40-931b-d18b4b957f0d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 168,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1319792947",
+      "endBlocksIDs": [
+        "901460297"
+      ]
+    },
+    "options": [
+      [
+        "DEEPCOPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "cff4c52b-e408-420c-880c-a8985e423dd6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 177,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "901460297",
+      "endBlocksIDs": [
+        "1060007054"
+      ]
+    },
+    "options": [
+      [
+        "DISKSYNC"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ef49fb9b-898e-43e7-96c7-fb1629f85c2a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 408,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1694030785",
+      "endBlocksIDs": [
+        "2009265547"
+      ]
+    },
+    "options": [
+      [
+        "SNAPSHOTSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7052c446-9a1d-4c30-8838-23b00b614031",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "460838011",
+      "endBlocksIDs": [
+        "1753679611"
+      ]
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "750d89e2-fca7-4f7a-bf9b-d73d204d1474",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 146,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1753679611",
+      "endBlocksIDs": [
+        "1319792947"
+      ]
+    },
+    "options": [
+      [
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "27a96a27-23cf-4ef5-84e9-89a11b750b33",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 278,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1852437228",
+      "endBlocksIDs": [
+        "1674296219"
+      ]
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "de37e015-f2d8-4913-97aa-959bf628e5b5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "Capsule",
+      "regionMethod": "<init>(Ljava/lang/Object;Lorg/prevayler/foundation/serialization/Serializer;Z)V",
+      "startBytecodeIndex": 18,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1959052957",
+      "endBlocksIDs": [
+        "1959052957"
+      ]
+    },
+    "options": [
+      [
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fe82e0b3-f937-447d-a299-618e58e678c6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 425,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "2009265547",
+      "endBlocksIDs": [
+        "2009265547"
+      ]
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "MONITOR",
+        "DISKSYNC",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD",
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7cd7fbd9-05dc-4f34-83cd-49764707e537",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 186,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1060007054",
+      "endBlocksIDs": [
+        "1322122707"
+      ]
+    },
+    "options": [
+      [
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  }
+]

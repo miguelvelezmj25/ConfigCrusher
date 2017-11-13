@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.DefaultMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
@@ -14,6 +13,8 @@ import java.util.*;
 
 public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransformer {
 
+    private Set<JavaRegion> instrumentedRegionsInSameBlock = new HashSet<>();
+
     public ConfigCrusherTimerTransformer(String programName, String entryPoint, String directory, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
         super(programName, entryPoint, directory, regionsToOptionSet);
     }
@@ -24,22 +25,12 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
     @Override
     public void transformMethod(MethodNode methodNode) {
-        InsnList newInstructions;
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
-
-        if(regionsInMethod.size() == 1) {
-            newInstructions = this.instrumentEntireMethod(methodNode, regionsInMethod.get(0));
-        }
-        else {
-            newInstructions = this.instrumentRegion(methodNode, regionsInMethod);
-        }
+        InsnList newInstructions = this.instrumentRegion(methodNode, regionsInMethod);
 
         methodNode.instructions.clear();
         methodNode.instructions.add(newInstructions);
 
-//        System.out.println("After transforming");
-//        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-//        builder.build();
         System.out.println("");
     }
 
@@ -47,6 +38,10 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         InsnList newInstructions = new InsnList();
 
         for(JavaRegion javaRegion : regionsInMethod) {
+            if(this.instrumentedRegionsInSameBlock.contains(javaRegion)) {
+                continue;
+            }
+
             if(!javaRegion.getStartMethodBlock().equals(methodBlock)) {
                 continue;
             }
@@ -62,6 +57,10 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
         InsnList newInstructions = new InsnList();
 
         for(JavaRegion javaRegion : regionsInMethod) {
+            if(this.instrumentedRegionsInSameBlock.contains(javaRegion)) {
+                continue;
+            }
+
             for(MethodBlock endMethodBlock : javaRegion.getEndMethodBlocks()) {
                 if(!endMethodBlock.equals(methodBlock)) {
                     continue;
@@ -69,7 +68,6 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
 
                 newInstructions.add(this.getInstructionsEndRegion(javaRegion));
             }
-
         }
 
         return newInstructions;
@@ -148,17 +146,10 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
                 InsnList startInstructions = this.getInstructionsStartRegion(region);
                 newInstructions.insertBefore(instruction.getNext(), startInstructions);
 
-                if(this.getEndRegionBlocksWithReturn().contains(block)) {
-                    instruction = instructionsIterator.next();
-                    int opcode = instruction.getOpcode();
-
-                    while((opcode < Opcodes.IRETURN || opcode > Opcodes.RETURN) && opcode != Opcodes.RET) {
-                        instruction = instructionsIterator.next();
-                        opcode = instruction.getOpcode();
-                    }
-
-                    InsnList endInstructions = this.instrumentEnd(block, regionsInMethodReversed);
-                    newInstructions.add(endInstructions);
+                if(this.getEndRegionBlocksWithReturn().contains(block) || block.isWithReturn()) {
+                    InsnList endInstructions = this.getInstructionsEndRegion(region);
+                    AbstractInsnNode lastInstruction = newInstructions.get(newInstructions.size() - 1);
+                    newInstructions.insertBefore(lastInstruction, endInstructions);
                 }
                 else {
                     AbstractInsnNode lastInst = block.getInstructions().get(block.getInstructions().size() - 1);
@@ -167,9 +158,11 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
                         instruction = instructionsIterator.next();
                     }
 
-                    InsnList endInstructions = this.instrumentEnd(block, regionsInMethodReversed);
+                    InsnList endInstructions = this.getInstructionsEndRegion(region);
                     newInstructions.add(endInstructions);
                 }
+
+                this.instrumentedRegionsInSameBlock.add(region);
             }
         }
 

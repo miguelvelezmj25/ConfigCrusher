@@ -1,26 +1,27 @@
 [
   {
     "region": {
-      "regionID": "cae887b0-6842-48ad-9aa7-7222ab1825a8",
+      "regionID": "91615803-7693-4575-9632-b32ccf0905e4",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
       "regionMethod": "count(Lcounter/com/googlecode/pngtastic/core/PngImage;)V",
-      "startBytecodeIndex": 0,
+      "startBytecodeIndex": 111,
       "startMethodBlock": null,
       "endMethodBlocks": []
     },
     "options": [
       [
-        "LOGLEVEL"
+        "DISTTHRESHOLD",
+        "TIMEOUT"
       ]
     ]
   },
   {
     "region": {
-      "regionID": "2781510c-f659-4061-b341-c1b8705fadfa",
+      "regionID": "6f9a58d1-ea5a-404d-afc4-9348163a207e",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
@@ -33,21 +34,21 @@
     },
     "options": [
       [
-        "TIMEOUT",
-        "MINALPHA"
+        "DISTTHRESHOLD",
+        "TIMEOUT"
       ]
     ]
   },
   {
     "region": {
-      "regionID": "3e1b3b8c-7896-4e14-919b-68c5ba55423f",
+      "regionID": "6729aa8b-e724-43ec-90ba-81b15080c361",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "counter.com.googlecode.pngtastic.core",
       "regionClass": "PngColorCounter",
-      "regionMethod": "count(Lcounter/com/googlecode/pngtastic/core/PngImage;)V",
-      "startBytecodeIndex": 111,
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 0,
       "startMethodBlock": null,
       "endMethodBlocks": []
     },
@@ -79,46 +80,26 @@
   },
   {
     "region": {
-      "regionID": "653bfa0e-ecae-4775-9771-73c981ee8867",
+      "regionID": "5b0b2fa7-0dac-42ca-a34a-630d1696869d",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "counter.com.googlecode.pngtastic.core",
-      "regionClass": "PngImage",
-      "regionMethod": "<init>(Ljava/lang/String;Ljava/lang/String;)V",
-      "startBytecodeIndex": 0,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 207,
       "startMethodBlock": null,
       "endMethodBlocks": []
     },
     "options": [
       [
-        "LOGLEVEL"
+        "MINALPHA"
       ]
     ]
   },
   {
     "region": {
-      "regionID": "62092b1f-923f-4cdf-a666-1adcd5a82f30",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "counter.com.googlecode.pngtastic.core",
-      "regionClass": "PngColorCounter",
-      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
-      "startBytecodeIndex": 442,
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "options": [
-      [
-        "FREQTHRESHOLD",
-        "TIMEOUT"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "1e46535d-327f-4351-b1b6-053a12a9353f",
+      "regionID": "1ec975d4-5412-4a6b-85aa-44dacef9581d",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
@@ -137,21 +118,39 @@
   },
   {
     "region": {
-      "regionID": "0cd562de-e289-4536-a008-20cfef516a49",
+      "regionID": "3ef4050c-8ee8-41af-a1b4-caf040cf0c1b",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "counter.com.googlecode.pngtastic.core",
-      "regionClass": "PngColorCounter",
-      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "regionClass": "PngImage",
+      "regionMethod": "<init>(Ljava/lang/String;Ljava/lang/String;)V",
       "startBytecodeIndex": 0,
       "startMethodBlock": null,
       "endMethodBlocks": []
     },
     "options": [
       [
-        "DISTTHRESHOLD",
-        "TIMEOUT"
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "71b88ce4-a787-447a-bc34-05a3230f49e4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 190,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "FREQTHRESHOLD"
       ]
     ]
   },
@@ -165,6 +164,25 @@
       "regionClass": "Run",
       "regionMethod": "main([Ljava/lang/String;)V",
       "startBytecodeIndex": 241,
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7ce5bb9c-5499-40e2-a5c7-480c8bb1f7ca",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "count(Lcounter/com/googlecode/pngtastic/core/PngImage;)V",
+      "startBytecodeIndex": 0,
       "startMethodBlock": null,
       "endMethodBlocks": []
     },
@@ -196,39 +214,21 @@
   },
   {
     "region": {
-      "regionID": "71b88ce4-a787-447a-bc34-05a3230f49e4",
+      "regionID": "62092b1f-923f-4cdf-a666-1adcd5a82f30",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
-      "regionPackage": "counter.com.googlecode.pngtastic",
-      "regionClass": "Run",
-      "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 190,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 442,
       "startMethodBlock": null,
       "endMethodBlocks": []
     },
     "options": [
       [
-        "FREQTHRESHOLD"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "5b0b2fa7-0dac-42ca-a34a-630d1696869d",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "counter.com.googlecode.pngtastic",
-      "regionClass": "Run",
-      "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 207,
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "options": [
-      [
-        "MINALPHA"
+        "FREQTHRESHOLD",
+        "TIMEOUT"
       ]
     ]
   }

@@ -80,4 +80,30 @@ public class ConfigCrusherPerformanceModelBuilderTest {
         PerformanceModel model = builder.createModel(args);
         model.toString();
     }
+
+    @Test
+    public void colorCounter() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+        instrumenter.instrument(args);
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+
+        Analysis analysis = new DefaultStaticAnalysis();
+        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+
+        Executor executor = new ConfigCrusherExecutor(programName);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
+                regionsToOptionSet);
+        builder.createModel(args);
+    }
 }

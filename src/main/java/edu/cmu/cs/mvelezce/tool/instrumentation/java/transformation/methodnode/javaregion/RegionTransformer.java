@@ -150,17 +150,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         boolean updatedRegions = true;
 
-
-        for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
-//            if(method.name.contains("getColors")) {
-//                this.debugBlockDecisions(method);
-//            }
-//
-//            if(this.methodNodeToClassNode.get(method).name.contains("Regions21")) {
-//                this.debugBlockDecisions(method);
-//            }
-        }
-
         while(updatedRegions) {
             updatedRegions = this.propagateUpMethodsInClasses(classNodes);
             updatedRegions = updatedRegions | this.propagateUpAcrossMethods();
@@ -168,51 +157,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         this.cachedRegionsToOptions();
 
-
-        for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
-//            if(method.name.contains("getHeight") && this.methodNodeToClassNode.get(method).name.contains("PngChunk")) {
-//                this.debugBlockDecisions(method);
-//            }
-//
-//            if(method.name.contains("addChunk")) {
-//                this.debugBlockDecisions(method);
-//            }
-
-            if(method.name.contains("deflateImageDataSerially")) {
-                this.debugBlockDecisions(method);
-            }
-
-            if(method.name.contains("deflateImageData")) {
-                this.debugBlockDecisions(method);
-            }
-        }
-
         this.instrument(classNodes);
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
         System.out.println("# of regions after optimizing: " + this.regionsToOptionSet.size());
         System.out.println("");
-
-
-        for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
-//            if(method.name.contains("getColors")) {
-//                this.debugBlockDecisions(method);
-//            }
-//
-            if(method.name.contains("optimize")) {
-                System.out.println(method.desc);
-                this.debugBlockDecisions(method);
-            }
-
-//            if(this.methodNodeToClassNode.get(method).name.contains("Regions20")) {
-//                this.debugBlockDecisions(method);
-//            }
-
-//            if(this.methodNodeToClassNode.get(method).name.contains("Regions21")) {
-//                this.debugBlockDecisions(method);
-//            }
-        }
-
     }
 
     private void cachedRegionsToOptions() {
@@ -283,10 +232,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 continue;
             }
 
-//            System.out.println("Propagate regions up in class " + classNode.name);
+            System.out.println("Propagate regions up in class " + classNode.name);
 
             for(MethodNode methodNode : methodsToInstrument) {
-//                System.out.println("Propagate regions up in method " + methodNode.name);
+                System.out.println("Propagate regions up in method " + methodNode.name);
                 updatedMethods = updatedMethods | this.propagateUpRegionsInMethod(methodNode);
             }
         }
@@ -613,7 +562,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     private boolean propagateUpRegions(MethodNode methodNode, Map<MethodBlock, JavaRegion> blocksToRegions) {
-//        this.debugBlockDecisions(methodNode);
+        this.debugBlockDecisions(methodNode);
 
         boolean updated = false;
         List<MethodBlock> worklist = new ArrayList<>();
@@ -671,7 +620,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.fillDownRegionsInMethod(methodNode, block);
         }
 
-//        this.debugBlockDecisions(methodNode);
+        this.debugBlockDecisions(methodNode);
 
         return updated;
     }
@@ -713,6 +662,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             Set<String> predDecision = this.getDecision(predRegion);
 
             if(!(blockDecision.containsAll(predDecision) || blockDecision.equals(predDecision))) {
+                if(pred.isCatchWithImplicitThrow()) {
+                    continue;
+                }
+
                 this.debugBlockDecisions(methodNode);
                 throw new RuntimeException("Cannot push up decisions from " + block.getID() + " to " + pred.getID());
 
@@ -1075,32 +1028,34 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             region.setStartMethodBlock(block);
             Set<String> blockDecision = this.getDecision(region);
 
-//            // TODO optimize for regions15
-//            // Optimization
-//            if(i == 0) {
-//                end = graph.getExitBlock();
-//            }
-//            else {
-            MethodBlock ipd = graph.getImmediatePostDominator(block);
-            JavaRegion ipdRegion = blocksToRegions.get(ipd);
-            Set<String> ipdDecision = this.getDecision(ipdRegion);
+            MethodBlock end;
+            // TODO optimize for regions15
+            // Optimization
+            if(i == 0) {
+                end = graph.getExitBlock();
+            }
+            else {
+                MethodBlock ipd = graph.getImmediatePostDominator(block);
+                JavaRegion ipdRegion = blocksToRegions.get(ipd);
+                Set<String> ipdDecision = this.getDecision(ipdRegion);
 
-            while(ipd != beta && (blockDecision.equals(ipdDecision) || blockDecision.containsAll(ipdDecision))) {
-                MethodBlock temp = graph.getImmediatePostDominator(ipd);
+                while(ipd != beta && (blockDecision.equals(ipdDecision) || blockDecision.containsAll(ipdDecision))) {
+                    MethodBlock temp = graph.getImmediatePostDominator(ipd);
 
-                // Optimization
-                // TODO check the variables might be wrong
-                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
-                    break;
+                    // Optimization
+                    // TODO check the variables might be wrong
+                    if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
+                        break;
+                    }
+
+                    ipd = temp;
+                    ipdRegion = blocksToRegions.get(ipd);
+                    ipdDecision = this.getDecision(ipdRegion);
                 }
 
-                ipd = temp;
-                ipdRegion = blocksToRegions.get(ipd);
-                ipdDecision = this.getDecision(ipdRegion);
+//            MethodBlock end = ipd;
+                end = ipd;
             }
-
-            MethodBlock end = ipd;
-//            }
 
             Set<MethodBlock> ends = new HashSet<>();
 
@@ -1133,7 +1088,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             // If the ends are connected to the exit node, we want to analyze them
             for(MethodBlock e : ends) {
-                ipd = graph.getImmediatePostDominator(e);
+                MethodBlock ipd = graph.getImmediatePostDominator(e);
 
                 if(ipd == beta & e.getSuccessors().size() == 1 && e.getSuccessors().iterator().next() == beta) {
                     reachables.add(e);

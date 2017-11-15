@@ -210,11 +210,11 @@ public class ConfigCrusherExecutorTest {
         configurations.clear();
         Set<String> n = new HashSet<>();
         n.add("FILEAGETHRESHOLD");
-        n.add("DEEPCOPY");
-        n.add("MONITOR");
+//        n.add("DEEPCOPY");
+//        n.add("MONITOR");
         n.add("DISKSYNC");
-        n.add("JOURNALSERIALIZER");
-        n.add("CLOCK");
+//        n.add("JOURNALSERIALIZER");
+//        n.add("CLOCK");
         configurations.add(n);
 
         args = new String[3];

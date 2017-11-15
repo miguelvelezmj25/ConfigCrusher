@@ -146,21 +146,26 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
                 InsnList startInstructions = this.getInstructionsStartRegion(region);
                 newInstructions.insertBefore(instruction.getNext(), startInstructions);
 
-                if(this.getEndRegionBlocksWithReturn().contains(block) || block.isWithReturn()) {
-                    InsnList endInstructions = this.getInstructionsEndRegion(region);
-                    AbstractInsnNode lastInstruction = newInstructions.get(newInstructions.size() - 1);
-                    newInstructions.insertBefore(lastInstruction, endInstructions);
-                }
-                else {
-                    AbstractInsnNode lastInst = block.getInstructions().get(block.getInstructions().size() - 1);
+                AbstractInsnNode lastInstruction = block.getInstructions().get(block.getInstructions().size() - 1);
+                InsnList endInstructions = this.getInstructionsEndRegion(region);
+                newInstructions.insertBefore(lastInstruction, endInstructions);
 
-                    while(lastInst != instruction) {
-                        instruction = instructionsIterator.next();
-                    }
-
-                    InsnList endInstructions = this.getInstructionsEndRegion(region);
-                    newInstructions.add(endInstructions);
-                }
+//                if(this.getEndRegionBlocksWithReturn().contains(block) || block.isWithReturn()) {
+//                    InsnList endInstructions = this.getInstructionsEndRegion(region);
+//                    AbstractInsnNode lastInstruction = newInstructions.get(newInstructions.size() - 1);
+//                    newInstructions.insertBefore(lastInstruction, endInstructions);
+//                }
+//                else {
+//                    InsnList endInstructions = this.getInstructionsEndRegion(region);
+//                    AbstractInsnNode lastInstruction = block.getInstructions().get(block.getInstructions().size() - 1);
+//                    newInstructions.insertBefore(lastInstruction, endInstructions);
+//
+////                    while(lastInst != instruction) {
+////                        instruction = instructionsIterator.next();
+////                    }
+////
+////                    newInstructions.add(endInstructions);
+//                }
 
                 this.instrumentedRegionsInSameBlock.add(region);
             }

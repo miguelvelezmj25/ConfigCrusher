@@ -1,0 +1,15 @@
+digraph main {
+node [shape=record];
+1156030110 [label="L5\lLINENUMBER 20 L5\lICONST_1\lISTORE 1\l"];
+1084936573 [label="L4\lLINENUMBER 23 L4\lFRAME APPEND [I]\lLDC \"a46d961d-dc0e-41cc-8c2c-5a3388bfbd9c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lILOAD 1\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions23.moo (Z)V\lL6\lLINENUMBER 24 L6\lRETURN\l"];
+912573846 [label="L0\lLINENUMBER 13 L0\lLDC \"a46d961d-dc0e-41cc-8c2c-5a3388bfbd9c\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 15 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lPUTSTATIC edu/cmu/cs/mvelezce/Regions23.A : Z\lL2\lLINENUMBER 17 L2\lICONST_0\lISTORE 1\lL3\lLINENUMBER 19 L3\lGETSTATIC edu/cmu/cs/mvelezce/Regions23.A : Z\lIFEQ L4\l"];
+entry;
+exit;
+1156030110 -> 1084936573;
+entry -> 912573846;
+1084936573 -> exit;
+912573846 -> 1156030110;
+912573846 -> 1084936573;
+1084936573[fontcolor="purple", penwidth=3, color="purple"];
+912573846[fontcolor="purple", penwidth=3, color="purple"];
+}

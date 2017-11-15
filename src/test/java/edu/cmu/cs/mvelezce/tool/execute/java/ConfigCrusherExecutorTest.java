@@ -263,7 +263,11 @@ public class ConfigCrusherExecutorTest {
 
         configurations.clear();
         Set<String> n = new HashSet<>();
+        n.add("CHECKSUM");
+        n.add("BLOCKSIZE");
+        n.add("TRANSFORM");
         n.add("VERBOSE");
+        n.add("LEVEL");
         configurations.add(n);
 
         args = new String[3];

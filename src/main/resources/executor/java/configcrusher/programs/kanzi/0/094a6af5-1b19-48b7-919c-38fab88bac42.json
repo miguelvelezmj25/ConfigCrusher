@@ -1,0 +1,28 @@
+{
+  "configuration": [
+    "CHECKSUM",
+    "BLOCKSIZE",
+    "TRANSFORM",
+    "VERBOSE",
+    "LEVEL"
+  ],
+  "regionsToProcessedPerformance": {
+    "6d550e6e-554d-4e6f-aa9a-f483ca7db0aa": 20075878,
+    "81362aa9-e5da-469c-89eb-81a6dede069c": 63880890305,
+    "a7f25914-db2a-471c-9814-1e7741c04167": 9442845,
+    "b85ed427-b5e1-443f-99dd-82926e080c32": 1626,
+    "54a6e345-5690-4ae8-8907-d83ba638b05e": 790,
+    "985c2b28-bc5d-4d9a-95a5-db9ddee4c46d": 850,
+    "program": 606707778,
+    "ce6573cd-8463-4568-9bd0-d718a063ea19": 791,
+    "8c61abb7-27b9-42ea-aaea-1a58c034e322": 945,
+    "b2d64917-2aaa-449d-a340-f225453362c9": 537080047,
+    "05bc8827-917e-4a6e-8eab-2ff041a53b7f": 1871,
+    "112e4d80-d199-472b-967b-c7159151bf64": 9699088,
+    "996ec663-8e19-4164-bd69-83866cbd2247": 15312,
+    "de2bec39-1ac4-4077-b730-f7add6ade2d0": 2576,
+    "ef44350d-bede-4988-b941-4b0e2c89bbe4": 40808846,
+    "0a1f2579-60c0-49e4-aac8-76fffb6a4090": 529176,
+    "39f66448-5d67-4035-b25d-4d9e2c1e4a7d": 16671288
+  }
+}

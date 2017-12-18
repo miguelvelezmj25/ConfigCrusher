@@ -74,7 +74,10 @@ public class ConfigCrusherExecutorTest {
 
         configurations.clear();
         Set<String> n = new HashSet<>();
-//        n.add("A");
+        n.add("A");
+        n.add("B");
+        n.add("C");
+        n.add("D");
         configurations.add(n);
 
         args = new String[3];
@@ -127,10 +130,11 @@ public class ConfigCrusherExecutorTest {
         Compression compression = new SimpleCompression(programName);
         Set<Set<String>> configurations = compression.compressConfigurations(args);
 
-//        configurations.clear();
-//        Set<String> n = new HashSet<>();
-////        n.add("A");
-//        configurations.add(n);
+        configurations.clear();
+        Set<String> n = new HashSet<>();
+        n.add("MINALPHA");
+        n.add("DISTTHRESHOLD");
+        configurations.add(n);
 
         args = new String[3];
         args[0] = "-delres";

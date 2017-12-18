@@ -1,1 +1,124 @@
-{"baseTime":3316057,"baseTimeHumanReadable":0.003,"regionsToPerformanceTables":{"Region{regionID='c60ea389-cf8c-4284-88bb-0ce726e53756', startTime=-1, endTime=-1, duration=-1}":{"[]":53676291,"[LOGLEVEL]":44089725},"Region{regionID='f103d6b7-ebac-4a97-a32e-5726c4f8b6e8', startTime=-1, endTime=-1, duration=-1}":{"[]":54567,"[LOGLEVEL]":46624},"Region{regionID='dadf200d-c0c7-46a7-9919-fe5ff6af7d20', startTime=-1, endTime=-1, duration=-1}":{"[]":1673477,"[DISTTHRESHOLD]":1716495},"Region{regionID='62c7ac42-83cc-441a-8d4a-1c014045ebc4', startTime=-1, endTime=-1, duration=-1}":{"[]":35615,"[MINALPHA]":27363},"Region{regionID='394ebc2f-f671-498b-b638-cebd0ea46cdf', startTime=-1, endTime=-1, duration=-1}":{"[TIMEOUT, MINALPHA]":4096556781,"[]":4170101970,"[TIMEOUT]":4085472193,"[MINALPHA]":4039912568},"Region{regionID='190c6abf-fc84-4e4f-8cfa-3c6db7af0667', startTime=-1, endTime=-1, duration=-1}":{"[]":1711632837,"[LOGLEVEL]":1565316598},"Region{regionID='a4dd5c95-399f-46b5-a974-1a6c7dbdc1e0', startTime=-1, endTime=-1, duration=-1}":{"[]":16559,"[TIMEOUT, LOGLEVEL]":2996012,"[TIMEOUT]":14012,"[LOGLEVEL]":3374998},"Region{regionID='5dc537fb-b15a-4860-ae8f-ee4e42881af0', startTime=-1, endTime=-1, duration=-1}":{"[]":747022,"[FREQTHRESHOLD, TIMEOUT]":595775,"[FREQTHRESHOLD]":867208,"[TIMEOUT]":579358},"Region{regionID='de24dcc3-d6fd-4030-9870-1d57bb2d9487', startTime=-1, endTime=-1, duration=-1}":{"[]":7001,"[TIMEOUT]":1833},"Region{regionID='b701a782-24f0-4942-8f18-d8ec66db4341', startTime=-1, endTime=-1, duration=-1}":{"[]":11770921,"[TIMEOUT]":9059649,"[DISTTHRESHOLD]":14957873,"[DISTTHRESHOLD, TIMEOUT]":10923308},"Region{regionID='d0b0278e-a004-4504-b491-8abd6c4a88d8', startTime=-1, endTime=-1, duration=-1}":{"[]":1111590,"[TIMEOUT]":1083053,"[DISTTHRESHOLD]":1659394,"[DISTTHRESHOLD, TIMEOUT]":980616},"Region{regionID='86da0c4e-47fe-4789-a71d-c30f12c7a446', startTime=-1, endTime=-1, duration=-1}":{"[]":11044,"[FREQTHRESHOLD]":17906}},"regionsToPerformanceTablesHumanReadable":{"Region{regionID='c60ea389-cf8c-4284-88bb-0ce726e53756', startTime=-1, endTime=-1, duration=-1}":{"[]":0.054,"[LOGLEVEL]":0.044},"Region{regionID='f103d6b7-ebac-4a97-a32e-5726c4f8b6e8', startTime=-1, endTime=-1, duration=-1}":{"[]":0.0,"[LOGLEVEL]":0.0},"Region{regionID='dadf200d-c0c7-46a7-9919-fe5ff6af7d20', startTime=-1, endTime=-1, duration=-1}":{"[]":0.002,"[DISTTHRESHOLD]":0.002},"Region{regionID='62c7ac42-83cc-441a-8d4a-1c014045ebc4', startTime=-1, endTime=-1, duration=-1}":{"[]":0.0,"[MINALPHA]":0.0},"Region{regionID='394ebc2f-f671-498b-b638-cebd0ea46cdf', startTime=-1, endTime=-1, duration=-1}":{"[TIMEOUT, MINALPHA]":4.097,"[]":4.17,"[TIMEOUT]":4.085,"[MINALPHA]":4.04},"Region{regionID='190c6abf-fc84-4e4f-8cfa-3c6db7af0667', startTime=-1, endTime=-1, duration=-1}":{"[]":1.712,"[LOGLEVEL]":1.565},"Region{regionID='a4dd5c95-399f-46b5-a974-1a6c7dbdc1e0', startTime=-1, endTime=-1, duration=-1}":{"[]":0.0,"[TIMEOUT, LOGLEVEL]":0.003,"[TIMEOUT]":0.0,"[LOGLEVEL]":0.003},"Region{regionID='5dc537fb-b15a-4860-ae8f-ee4e42881af0', startTime=-1, endTime=-1, duration=-1}":{"[]":0.001,"[FREQTHRESHOLD, TIMEOUT]":0.001,"[FREQTHRESHOLD]":0.001,"[TIMEOUT]":0.001},"Region{regionID='de24dcc3-d6fd-4030-9870-1d57bb2d9487', startTime=-1, endTime=-1, duration=-1}":{"[]":0.0,"[TIMEOUT]":0.0},"Region{regionID='b701a782-24f0-4942-8f18-d8ec66db4341', startTime=-1, endTime=-1, duration=-1}":{"[]":0.012,"[TIMEOUT]":0.009,"[DISTTHRESHOLD]":0.015,"[DISTTHRESHOLD, TIMEOUT]":0.011},"Region{regionID='d0b0278e-a004-4504-b491-8abd6c4a88d8', startTime=-1, endTime=-1, duration=-1}":{"[]":0.001,"[TIMEOUT]":0.001,"[DISTTHRESHOLD]":0.002,"[DISTTHRESHOLD, TIMEOUT]":0.001},"Region{regionID='86da0c4e-47fe-4789-a71d-c30f12c7a446', startTime=-1, endTime=-1, duration=-1}":{"[]":0.0,"[FREQTHRESHOLD]":0.0}}}
+{
+  "baseTime": 3316057,
+  "baseTimeHumanReadable": 0.003,
+  "regionsToPerformanceTables": {
+    "Region{regionID='c60ea389-cf8c-4284-88bb-0ce726e53756', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 53676291,
+      "[LOGLEVEL]": 44089725
+    },
+    "Region{regionID='f103d6b7-ebac-4a97-a32e-5726c4f8b6e8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 54567,
+      "[LOGLEVEL]": 46624
+    },
+    "Region{regionID='dadf200d-c0c7-46a7-9919-fe5ff6af7d20', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 1673477,
+      "[DISTTHRESHOLD]": 1716495
+    },
+    "Region{regionID='62c7ac42-83cc-441a-8d4a-1c014045ebc4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 35615,
+      "[MINALPHA]": 27363
+    },
+    "Region{regionID='394ebc2f-f671-498b-b638-cebd0ea46cdf', startTime=-1, endTime=-1, duration=-1}": {
+      "[TIMEOUT, MINALPHA]": 4096556781,
+      "[]": 4170101970,
+      "[TIMEOUT]": 4085472193,
+      "[MINALPHA]": 4039912568
+    },
+    "Region{regionID='190c6abf-fc84-4e4f-8cfa-3c6db7af0667', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 1711632837,
+      "[LOGLEVEL]": 1565316598
+    },
+    "Region{regionID='a4dd5c95-399f-46b5-a974-1a6c7dbdc1e0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 16559,
+      "[TIMEOUT, LOGLEVEL]": 2996012,
+      "[TIMEOUT]": 14012,
+      "[LOGLEVEL]": 3374998
+    },
+    "Region{regionID='5dc537fb-b15a-4860-ae8f-ee4e42881af0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 747022,
+      "[FREQTHRESHOLD, TIMEOUT]": 595775,
+      "[FREQTHRESHOLD]": 867208,
+      "[TIMEOUT]": 579358
+    },
+    "Region{regionID='de24dcc3-d6fd-4030-9870-1d57bb2d9487', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 7001,
+      "[TIMEOUT]": 1833
+    },
+    "Region{regionID='b701a782-24f0-4942-8f18-d8ec66db4341', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 11770921,
+      "[TIMEOUT]": 9059649,
+      "[DISTTHRESHOLD]": 14957873,
+      "[DISTTHRESHOLD, TIMEOUT]": 10923308
+    },
+    "Region{regionID='d0b0278e-a004-4504-b491-8abd6c4a88d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 1111590,
+      "[TIMEOUT]": 1083053,
+      "[DISTTHRESHOLD]": 1659394,
+      "[DISTTHRESHOLD, TIMEOUT]": 980616
+    },
+    "Region{regionID='86da0c4e-47fe-4789-a71d-c30f12c7a446', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 11044,
+      "[FREQTHRESHOLD]": 17906
+    }
+  },
+  "regionsToPerformanceTablesHumanReadable": {
+    "Region{regionID='c60ea389-cf8c-4284-88bb-0ce726e53756', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.054,
+      "[LOGLEVEL]": 0.044
+    },
+    "Region{regionID='f103d6b7-ebac-4a97-a32e-5726c4f8b6e8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LOGLEVEL]": 0.0
+    },
+    "Region{regionID='dadf200d-c0c7-46a7-9919-fe5ff6af7d20', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.002,
+      "[DISTTHRESHOLD]": 0.002
+    },
+    "Region{regionID='62c7ac42-83cc-441a-8d4a-1c014045ebc4', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[MINALPHA]": 0.0
+    },
+    "Region{regionID='394ebc2f-f671-498b-b638-cebd0ea46cdf', startTime=-1, endTime=-1, duration=-1}": {
+      "[TIMEOUT, MINALPHA]": 4.097,
+      "[]": 4.17,
+      "[TIMEOUT]": 4.085,
+      "[MINALPHA]": 4.04
+    },
+    "Region{regionID='190c6abf-fc84-4e4f-8cfa-3c6db7af0667', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 1.712,
+      "[LOGLEVEL]": 1.565
+    },
+    "Region{regionID='a4dd5c95-399f-46b5-a974-1a6c7dbdc1e0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[TIMEOUT, LOGLEVEL]": 0.003,
+      "[TIMEOUT]": 0.0,
+      "[LOGLEVEL]": 0.003
+    },
+    "Region{regionID='5dc537fb-b15a-4860-ae8f-ee4e42881af0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.001,
+      "[FREQTHRESHOLD, TIMEOUT]": 0.001,
+      "[FREQTHRESHOLD]": 0.001,
+      "[TIMEOUT]": 0.001
+    },
+    "Region{regionID='de24dcc3-d6fd-4030-9870-1d57bb2d9487', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[TIMEOUT]": 0.0
+    },
+    "Region{regionID='b701a782-24f0-4942-8f18-d8ec66db4341', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.012,
+      "[TIMEOUT]": 0.009,
+      "[DISTTHRESHOLD]": 0.015,
+      "[DISTTHRESHOLD, TIMEOUT]": 0.011
+    },
+    "Region{regionID='d0b0278e-a004-4504-b491-8abd6c4a88d8', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.001,
+      "[TIMEOUT]": 0.001,
+      "[DISTTHRESHOLD]": 0.002,
+      "[DISTTHRESHOLD, TIMEOUT]": 0.001
+    },
+    "Region{regionID='86da0c4e-47fe-4789-a71d-c30f12c7a446', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[FREQTHRESHOLD]": 0.0
+    }
+  }
+}

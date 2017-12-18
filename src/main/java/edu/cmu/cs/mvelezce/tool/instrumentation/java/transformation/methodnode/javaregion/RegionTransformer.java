@@ -1257,9 +1257,9 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                         Set<String> calleeDecision = this.getCachedDecision(calleeRegion);
 
                         if(!(decision.equals(calleeDecision) || decision.containsAll(calleeDecision))) {
-                            MethodGraph callegraph = this.getMethodGraph(calleeMethodNode);
-                            MethodBlock ipd = callegraph.getImmediatePostDominator(entry.getKey());
-                            Set<MethodBlock> rs = callegraph.getReachableBlocks(entry.getKey(), ipd);
+                            MethodGraph calleegraph = this.getMethodGraph(calleeMethodNode);
+                            MethodBlock ipd = calleegraph.getImmediatePostDominator(entry.getKey());
+                            Set<MethodBlock> rs = calleegraph.getReachableBlocks(entry.getKey(), ipd);
                             rs.remove(ipd);
                             skip.addAll(rs);
                             continue;

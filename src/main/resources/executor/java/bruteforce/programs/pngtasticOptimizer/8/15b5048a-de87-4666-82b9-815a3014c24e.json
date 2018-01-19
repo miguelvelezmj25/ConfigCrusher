@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "ITERATIONS",
-    "COMPRESSIONLEVEL"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 6044305454
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "FREQTHRESHOLD",
-    "LOGLEVEL"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 5775459379
-  }
-}

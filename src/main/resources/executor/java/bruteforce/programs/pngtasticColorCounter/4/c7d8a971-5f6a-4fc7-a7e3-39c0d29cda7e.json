@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "TIMEOUT",
-    "MINALPHA"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 5623770342
-  }
-}

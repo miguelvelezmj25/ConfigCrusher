@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "FREQTHRESHOLD",
-    "MINALPHA"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 5719656674
-  }
-}

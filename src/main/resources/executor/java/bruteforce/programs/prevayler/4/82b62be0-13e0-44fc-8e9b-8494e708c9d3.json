@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "TRANSIENTMODE",
-    "FILESIZETHRESHOLD"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 6009797506
-  }
-}

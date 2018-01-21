@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "TRANSIENTMODE",
-    "SNAPSHOTSERIALIZER"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 5941036379
-  }
-}

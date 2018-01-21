@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "DEEPCOPY",
-    "SNAPSHOTSERIALIZER"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 15202352207
-  }
-}

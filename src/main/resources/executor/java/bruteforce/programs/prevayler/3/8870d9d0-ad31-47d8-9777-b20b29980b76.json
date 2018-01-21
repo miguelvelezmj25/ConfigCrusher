@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "DEEPCOPY",
-    "DISKSYNC"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 50568918400
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "DISKSYNC",
-    "JOURNALSERIALIZER"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 49152476046
-  }
-}

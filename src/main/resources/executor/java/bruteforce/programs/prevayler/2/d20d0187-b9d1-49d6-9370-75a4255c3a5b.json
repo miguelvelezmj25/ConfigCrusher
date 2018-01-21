@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "FILEAGETHRESHOLD",
-    "DISKSYNC"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 43758167280
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "MONITOR",
-    "JOURNALSERIALIZER"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 15740671432
-  }
-}

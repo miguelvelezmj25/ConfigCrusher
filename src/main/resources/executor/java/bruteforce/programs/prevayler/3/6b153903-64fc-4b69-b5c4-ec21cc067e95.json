@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "JOURNALSERIALIZER",
-    "SNAPSHOTSERIALIZER"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 14430292638
-  }
-}

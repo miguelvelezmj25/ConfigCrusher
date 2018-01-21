@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "DEEPCOPY",
-    "CLOCK"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 14367708070
-  }
-}

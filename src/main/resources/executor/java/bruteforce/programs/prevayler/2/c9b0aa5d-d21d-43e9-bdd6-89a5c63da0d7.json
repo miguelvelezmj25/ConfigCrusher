@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "DEEPCOPY",
-    "MONITOR"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 14547607099
-  }
-}

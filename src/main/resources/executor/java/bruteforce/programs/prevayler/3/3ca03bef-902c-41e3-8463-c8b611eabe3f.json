@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "MONITOR",
-    "SNAPSHOTSERIALIZER"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 10761114271
-  }
-}

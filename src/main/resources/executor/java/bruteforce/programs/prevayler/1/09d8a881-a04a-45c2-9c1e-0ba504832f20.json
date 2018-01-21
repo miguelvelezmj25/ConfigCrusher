@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "DEEPCOPY",
-    "TRANSIENTMODE"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 8187471640
-  }
-}

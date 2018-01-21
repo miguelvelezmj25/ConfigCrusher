@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "FILESIZETHRESHOLD",
-    "CLOCK"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 14559679841
-  }
-}

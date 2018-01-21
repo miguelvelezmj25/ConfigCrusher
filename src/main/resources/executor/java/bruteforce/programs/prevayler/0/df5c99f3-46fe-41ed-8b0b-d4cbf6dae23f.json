@@ -1,9 +1,0 @@
-{
-  "configuration": [
-    "JOURNALSERIALIZER",
-    "FILESIZETHRESHOLD"
-  ],
-  "regionsToProcessedPerformance": {
-    "program": 19446564558
-  }
-}

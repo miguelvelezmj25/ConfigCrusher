@@ -176,6 +176,26 @@ public class EvaluationTest {
     }
 
     @Test
+    public void colorCounterFeaturewise() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        String script = featurewise.generateRScript(featurewiseEntries);
+        String output = featurewise.execute(script);
+        PerformanceModel performanceModel = featurewise.createModel(output);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+    }
+
+    @Test
     public void optimizerBruteForce() throws Exception {
         String programName = "pngtasticOptimizer";
 

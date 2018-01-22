@@ -30,6 +30,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareRunningExample2() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareColorCounter1() throws Exception {
         String programName = "pngtasticColorCounter";
 

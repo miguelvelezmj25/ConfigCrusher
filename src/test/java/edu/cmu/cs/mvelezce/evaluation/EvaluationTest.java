@@ -124,7 +124,8 @@ public class EvaluationTest {
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
-        featurewise.generateRScript(featurewiseEntries);
+        String script = featurewise.generateRScript(featurewiseEntries);
+        featurewise.execute(script);
 
 //        Evaluation eval = new Evaluation(programName);
 //        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, featurewiseEntries);

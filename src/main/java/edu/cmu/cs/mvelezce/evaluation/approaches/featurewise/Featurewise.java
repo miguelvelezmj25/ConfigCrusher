@@ -13,12 +13,65 @@ import java.util.*;
 public class Featurewise extends Evaluation {
 
     public static final String R_DIR = "/r";
+    public static final String DOT_R = ".R";
 
     public Featurewise(String programName) {
         super(programName);
     }
 
-    public void something(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
+    public void generateRScript(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
+        this.generateRScriptData(performanceEntries);
+
+        Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
+        Set<String> options = this.getOptions(configurations);
+
+        String file = Evaluation.DIRECTORY + "/" + this.getProgramName() + Featurewise.R_DIR + "/"
+                + Evaluation.FEATURE_WISE + Evaluation.DOT_CSV;
+
+        this.generateRScript(file, options);
+    }
+
+    private void generateRScript(String file, Set<String> options) throws IOException {
+        StringBuilder script = new StringBuilder();
+        script.append("feature_wise <- read.csv(\"");
+        script.append(file);
+        script.append("\")");
+        script.append("\n");
+        script.append("model <- lm(time~");
+
+        Iterator<String> optionsIter = options.iterator();
+
+        while(optionsIter.hasNext()) {
+            String option = optionsIter.next();
+            script.append(option);
+
+            if(optionsIter.hasNext()) {
+                script.append("+");
+            }
+        }
+
+        script.append(", data = feature_wise)");
+        script.append("\n");
+        script.append("coef(model)");
+        script.append("\n");
+
+        String outputDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + Featurewise.R_DIR + "/"
+                + Evaluation.FEATURE_WISE + Featurewise.DOT_R;
+        File outputFile = new File(outputDir);
+
+        if(outputFile.exists()) {
+            FileUtils.forceDelete(outputFile);
+        }
+
+        outputFile.getParentFile().mkdirs();
+        FileWriter writer = new FileWriter(outputFile);
+        writer.write(script.toString());
+        writer.flush();
+        writer.close();
+    }
+
+
+    private void generateRScriptData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
         Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
         Set<String> optionsSet = this.getOptions(configurations);
         List<String> options = new ArrayList<>();
@@ -54,7 +107,7 @@ public class Featurewise extends Evaluation {
             result.append("\n");
         }
 
-        String outputDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + "/" + Featurewise.R_DIR + "/"
+        String outputDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + Featurewise.R_DIR + "/"
                 + Evaluation.FEATURE_WISE + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
 

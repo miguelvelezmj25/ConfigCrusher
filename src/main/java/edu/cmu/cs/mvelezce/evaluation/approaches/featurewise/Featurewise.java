@@ -4,9 +4,7 @@ import edu.cmu.cs.mvelezce.evaluation.Evaluation;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.apache.commons.io.FileUtils;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -19,19 +17,61 @@ public class Featurewise extends Evaluation {
         super(programName);
     }
 
-    public void generateRScript(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
-        this.generateRScriptData(performanceEntries);
+    public void execute(String file) throws IOException, InterruptedException {
+        List<String> commandList = new ArrayList<>();
+
+        commandList.add("Rscript");
+        commandList.add(file);
+
+        String[] command = new String[commandList.size()];
+        command = commandList.toArray(command);
+        System.out.println(Arrays.toString(command));
+        Process process = Runtime.getRuntime().exec(command);
+
+        System.out.println("Output: ");
+        BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String string;
+
+        while((string = inputReader.readLine()) != null) {
+            if(!string.isEmpty()) {
+                System.out.println(string);
+//                output.append(string).append("\n");
+            }
+        }
+
+        StringBuilder output = new StringBuilder();
+        System.out.println(output);
+
+        System.out.println("Errors: ");
+        output = new StringBuilder();
+        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+        while((string = errorReader.readLine()) != null) {
+            if(!string.isEmpty()) {
+                System.out.println(string);
+//                output.append(string).append("\n");
+            }
+        }
+
+        System.out.println(output);
+
+        process.waitFor();
+
+        if(!output.toString().isEmpty()) {
+            throw new IOException();
+        }
+    }
+
+    public String generateRScript(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
+        String file = this.generateRScriptData(performanceEntries);
 
         Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
         Set<String> options = this.getOptions(configurations);
 
-        String file = Evaluation.DIRECTORY + "/" + this.getProgramName() + Featurewise.R_DIR + "/"
-                + Evaluation.FEATURE_WISE + Evaluation.DOT_CSV;
-
-        this.generateRScript(file, options);
+        return this.generateRScript(file, options);
     }
 
-    private void generateRScript(String file, Set<String> options) throws IOException {
+    private String generateRScript(String file, Set<String> options) throws IOException {
         StringBuilder script = new StringBuilder();
         script.append("feature_wise <- read.csv(\"");
         script.append(file);
@@ -68,10 +108,12 @@ public class Featurewise extends Evaluation {
         writer.write(script.toString());
         writer.flush();
         writer.close();
+
+        return outputDir;
     }
 
 
-    private void generateRScriptData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
+    private String generateRScriptData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
         Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
         Set<String> optionsSet = this.getOptions(configurations);
         List<String> options = new ArrayList<>();
@@ -120,6 +162,8 @@ public class Featurewise extends Evaluation {
         writer.write(result.toString());
         writer.flush();
         writer.close();
+
+        return outputDir;
     }
 
     public Set<PerformanceEntryStatistic> getFeaturewiseEntries(Set<PerformanceEntryStatistic> performanceEntries) {

@@ -16,6 +16,7 @@ import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerforman
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -123,12 +124,12 @@ public class EvaluationTest {
 
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-
         String script = featurewise.generateRScript(featurewiseEntries);
-        featurewise.execute(script);
+        String output = featurewise.execute(script);
+        PerformanceModel performanceModel = featurewise.createModel(output);
 
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, featurewiseEntries);
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test

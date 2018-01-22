@@ -91,15 +91,6 @@ public class PerformanceModel {
 
 
     public double evaluate(Set<String> configuration) {
-        Set<String> hold = new HashSet<>();
-        hold.add("FILEAGETHRESHOLD");
-        hold.add("MONITOR");
-        hold.add("JOURNALSERIALIZER");
-
-        if(configuration.equals(hold)) {
-            System.out.println();
-        }
-
         double performance = this.baseTimeHumanReadable;
 
         for(Map.Entry<Region, Map<Set<String>, Double>> entry : this.regionsToPerformanceTablesHumanReadable.entrySet()) {

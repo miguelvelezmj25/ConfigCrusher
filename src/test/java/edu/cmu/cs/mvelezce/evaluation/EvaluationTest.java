@@ -121,8 +121,10 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Featurewise featurewise = new Featurewise();
+        Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        featurewise.something(featurewiseEntries);
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, featurewiseEntries);

@@ -1,15 +1,73 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.featurewise;
 
 import edu.cmu.cs.mvelezce.evaluation.Evaluation;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
+import org.apache.commons.io.FileUtils;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.*;
 
-public class Featurewise {
+public class Featurewise extends Evaluation {
+
+    public static final String R_DIR = "/r";
+
+    public Featurewise(String programName) {
+        super(programName);
+    }
+
+    public void something(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
+        Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
+        Set<String> optionsSet = this.getOptions(configurations);
+        List<String> options = new ArrayList<>();
+        options.addAll(optionsSet);
+
+        StringBuilder result = new StringBuilder();
+
+        for(String option : options) {
+            result.append(option);
+            result.append(",");
+        }
+
+        result.append("time");
+        result.append("\n");
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+
+        for(PerformanceEntryStatistic statistic : performanceEntries) {
+            Set<String> configuration = statistic.getConfiguration();
+
+            for(String option : options) {
+                if(configuration.contains(option)) {
+                    result.append("1");
+                } else {
+                    result.append("0");
+                }
+
+                result.append(",");
+            }
+
+            double performance = statistic.getRegionsToProcessedPerformanceHumanReadable().values().iterator().next();
+            result.append(decimalFormat.format(performance));
+            result.append("\n");
+        }
+
+        String outputDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + "/" + Featurewise.R_DIR + "/"
+                + Evaluation.FEATURE_WISE + Evaluation.DOT_CSV;
+        File outputFile = new File(outputDir);
+
+        if(outputFile.exists()) {
+            FileUtils.forceDelete(outputFile);
+        }
+
+        outputFile.getParentFile().mkdirs();
+        FileWriter writer = new FileWriter(outputFile);
+        writer.write(result.toString());
+        writer.flush();
+        writer.close();
+    }
 
     public Set<PerformanceEntryStatistic> getFeaturewiseEntries(Set<PerformanceEntryStatistic> performanceEntries) {
         Set<Set<String>> configurations = this.getConfigurations(performanceEntries);

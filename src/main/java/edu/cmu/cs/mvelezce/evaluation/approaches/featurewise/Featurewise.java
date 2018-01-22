@@ -1,23 +1,99 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.featurewise;
 
 import edu.cmu.cs.mvelezce.evaluation.Evaluation;
+import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePerformanceModel;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
+import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class Featurewise extends Evaluation {
+public class Featurewise {
 
     public static final String R_DIR = "/r";
     public static final String DOT_R = ".R";
+    public static final String INTERCEPT = "(Intercept)";
+    public static final String NA = "NA";
+
+    private String programName;
 
     public Featurewise(String programName) {
-        super(programName);
+        this.programName = programName;
     }
 
-    public void execute(String file) throws IOException, InterruptedException {
+    public PerformanceModel createModel(String output) {
+        Map<Set<String>, Double> configurationToPerformance = this.parseOutput(output);
+
+        Set<String> intercept = new HashSet<>();
+        double baseTime = 0.0;
+
+        for(Map.Entry<Set<String>, Double> entry : configurationToPerformance.entrySet()) {
+            if(entry.getKey().contains(Featurewise.INTERCEPT)) {
+                intercept = entry.getKey();
+                baseTime = entry.getValue();
+
+                break;
+            }
+        }
+
+        configurationToPerformance.remove(intercept);
+
+        Map<Region, Map<Set<String>, Double>> regionToConfigurationPerformance = new HashMap<>();
+        Region programRegion = new Region("program");
+        regionToConfigurationPerformance.put(programRegion, configurationToPerformance);
+
+        PerformanceModel pm = new FeaturewisePerformanceModel(baseTime, regionToConfigurationPerformance);
+
+        return pm;
+    }
+
+    private Map<Set<String>, Double> parseOutput(String output) {
+        String[] r = output.split("\n");
+
+        String[] rawHeader = r[0].split(" ");
+        String[] rawCoefficients = r[1].split(" ");
+
+        List<String> header = this.getDataFromOutput(rawHeader);
+        List<String> coefficients = this.getDataFromOutput(rawCoefficients);
+
+        Map<Set<String>, Double> configurationToPerformance = new HashMap<>();
+
+        for(int i = 0; i < header.size(); i++) {
+            String term = header.get(i);
+            String rawCoefficient = coefficients.get(i);
+            double coefficient = 0.0;
+
+            if(!rawCoefficient.equals(Featurewise.NA)) {
+                coefficient = Double.parseDouble(rawCoefficient);
+            }
+
+            Set<String> configuration = new HashSet<>();
+            configuration.add(term);
+
+            configurationToPerformance.put(configuration, coefficient);
+        }
+
+        return configurationToPerformance;
+    }
+
+    private List<String> getDataFromOutput(String[] array) {
+        List<String> data = new ArrayList<>();
+
+        for(int i = 0; i < array.length; i++) {
+            String element = array[i].trim();
+
+            if(!element.equals(" ") && element.length() > 0) {
+                data.add(element);
+            }
+        }
+
+        return data;
+    }
+
+    public String execute(String file) throws IOException, InterruptedException {
         List<String> commandList = new ArrayList<>();
 
         commandList.add("Rscript");
@@ -32,34 +108,27 @@ public class Featurewise extends Evaluation {
         BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String string;
 
+        StringBuilder output = new StringBuilder();
+
         while((string = inputReader.readLine()) != null) {
             if(!string.isEmpty()) {
                 System.out.println(string);
-//                output.append(string).append("\n");
+                output.append(string).append("\n");
             }
         }
 
-        StringBuilder output = new StringBuilder();
-        System.out.println(output);
-
         System.out.println("Errors: ");
-        output = new StringBuilder();
         BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
         while((string = errorReader.readLine()) != null) {
             if(!string.isEmpty()) {
                 System.out.println(string);
-//                output.append(string).append("\n");
             }
         }
 
-        System.out.println(output);
-
         process.waitFor();
 
-        if(!output.toString().isEmpty()) {
-            throw new IOException();
-        }
+        return output.toString();
     }
 
     public String generateRScript(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
@@ -95,7 +164,7 @@ public class Featurewise extends Evaluation {
         script.append("coef(model)");
         script.append("\n");
 
-        String outputDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + Featurewise.R_DIR + "/"
+        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Featurewise.R_DIR + "/"
                 + Evaluation.FEATURE_WISE + Featurewise.DOT_R;
         File outputFile = new File(outputDir);
 
@@ -149,7 +218,7 @@ public class Featurewise extends Evaluation {
             result.append("\n");
         }
 
-        String outputDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + Featurewise.R_DIR + "/"
+        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Featurewise.R_DIR + "/"
                 + Evaluation.FEATURE_WISE + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
 

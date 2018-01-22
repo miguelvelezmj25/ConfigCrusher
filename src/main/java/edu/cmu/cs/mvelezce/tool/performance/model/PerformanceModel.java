@@ -26,7 +26,7 @@ public class PerformanceModel {
 //    private Map<Region, Map<Set<String>, Double>> regionsToStdTables = new HashMap<>();
 //    private Map<Region, Map<Set<String>, Double>> regionsToStdTablesHumanReadable = new HashMap<>();
 
-    private PerformanceModel() {
+    public PerformanceModel() {
         ;
     }
 

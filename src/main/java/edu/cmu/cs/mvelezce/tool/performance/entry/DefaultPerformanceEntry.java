@@ -68,6 +68,10 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
         return nanoSeconds / 1000000000.0;
     }
 
+    public static long toNanoseconds(double seconds) {
+        return (long) (seconds * 1000000000);
+    }
+
     public static double toHumanReadable(double seconds) {
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
         String value = decimalFormat.format(seconds);

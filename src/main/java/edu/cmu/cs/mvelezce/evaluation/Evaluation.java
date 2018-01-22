@@ -18,11 +18,13 @@ public class Evaluation {
     public static final String DIRECTORY = Options.DIRECTORY + "/evaluation/programs/java";
     public static final String COMPARISON_DIR = "/comparison";
     public static final String FULL_DIR = "/full";
+    public static final String PARTIAL_DIR = "/partial";
     public static final String DOT_CSV = ".csv";
 
     // TODO use a class or enum>
     public static final String CONFIG_CRUSHER = "config_crusher";
     public static final String BRUTE_FORCE = "brute_force";
+    public static final String FEATURE_WISE = "feature_wise";
 
     private String programName;
 

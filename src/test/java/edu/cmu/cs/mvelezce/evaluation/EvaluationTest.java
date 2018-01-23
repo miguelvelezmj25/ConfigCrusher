@@ -182,6 +182,20 @@ public class EvaluationTest {
     }
 
     @Test
+    public void grepBruteForce() throws Exception {
+        String programName = "grep";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
     public void prevaylerBruteForce() throws Exception {
         String programName = "prevayler";
 

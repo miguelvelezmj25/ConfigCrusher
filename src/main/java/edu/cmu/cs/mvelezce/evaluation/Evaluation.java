@@ -23,6 +23,7 @@ public class Evaluation {
     // TODO use a class or enum>
     public static final String CONFIG_CRUSHER = "config_crusher";
     public static final String BRUTE_FORCE = "brute_force";
+    public static final String FEATURE_WISE = "feature_wise";
 
     private String programName;
 
@@ -31,7 +32,7 @@ public class Evaluation {
     }
 
     public void writeConfigurationToPerformance(String approach, Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
-        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.FULL_DIR + "/"
+        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
                 + approach + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
 
@@ -73,7 +74,7 @@ public class Evaluation {
     }
 
     public void writeConfigurationToPerformance(String approach, PerformanceModel performanceModel, Set<PerformanceEntryStatistic> performanceEntryStats) throws IOException {
-        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.FULL_DIR + "/"
+        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
                 + approach + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
 
@@ -328,4 +329,7 @@ public class Evaluation {
         writer.close();
     }
 
+    public String getProgramName() {
+        return this.programName;
+    }
 }

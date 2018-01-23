@@ -151,9 +151,8 @@ public class PerformanceModel {
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
         StringBuilder pm = new StringBuilder();
-
+        pm.append("Base -> ");
         pm.append(decimalFormat.format(this.baseTimeHumanReadable));
-        pm.append("\n");
         pm.append("\n");
 
         for(Map<Set<String>, Double> performanceTables : this.regionsToPerformanceTablesHumanReadable.values()) {

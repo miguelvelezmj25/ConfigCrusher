@@ -18,12 +18,12 @@ import java.util.Set;
  */
 public abstract class BasePerformanceModelBuilder implements PerformanceModelBuilder {
 
-    private static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
+    public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
 
     private String programName;
     private Set<PerformanceEntryStatistic> measuredPerformance;
     private Map<Region, Set<Set<String>>> regionsToOptionSet;
-    ;
+
 
     public BasePerformanceModelBuilder(String programName, Set<PerformanceEntryStatistic> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
         this.programName = programName;

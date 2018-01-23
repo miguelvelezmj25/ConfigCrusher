@@ -1,12 +1,13 @@
-measured,configuration,feature_wise,feature_wise_std,brute_force,brute_force_std,absolute error,relative % error,squared error
+measured,configuration,feature_wise,feature_wise_std,brute_force,brute_force_std,absolute error,relative error,squared error
 "false","[]",0.007,0.0,0.007,0.001,0,0,0
 "true","[A]",2.008,0.0,2.008,0.001,0,0,0
 "true","[B]",0.006,0.0,0.006,0.0,0,0,0
 "true","[C]",0.007,0.0,0.007,0.001,0,0,0
-"false","[A, B]",2.007,0.0,6.012,0.002,4.005,66.617,16.04
-"false","[A, C]",2.008,0.0,9.015,0.002,7.007,77.726,49.098
+"false","[A, B]",2.007,0.0,6.012,0.002,4.005,0.666,16.04
+"false","[A, C]",2.008,0.0,9.015,0.002,7.007,0.777,49.098
 "false","[B, C]",0.006,0.0,0.006,0.0,0,0,0
-"false","[A, B, C]",2.007,0.0,13.014,0.003,11.007,84.578,121.154
+"false","[A, B, C]",2.007,0.0,13.014,0.003,11.007,0.846,121.154
 
 MSE: 23.287
 RMSE: 4.826
+MAPE: 28.615

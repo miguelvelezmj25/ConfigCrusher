@@ -130,6 +130,9 @@ public abstract class BaseExecutor implements Executor {
             }
 
             performanceEntriesList.add(results);
+
+            System.gc();
+            Thread.sleep(5000);
         }
 
         Set<PerformanceEntryStatistic> averagedPerformanceEntries = this.averageExecutions(performanceEntriesList);

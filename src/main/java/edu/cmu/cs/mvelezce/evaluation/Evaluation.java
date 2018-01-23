@@ -218,8 +218,9 @@ public class Evaluation {
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
         StringBuilder result = new StringBuilder();
         double se = 0;
+        double ape = 0;
         result.append("measured,configuration," + approach1 + "," + approach1 + "_std," + approach2 + "," + approach2
-                + "_std,absolute error,relative % error,squared error");
+                + "_std,absolute error,relative error,squared error");
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
@@ -298,7 +299,7 @@ public class Evaluation {
             double relativeError = 0.0;
 
             if(performance2 != 0) {
-                relativeError = absoluteError / performance2 * 100.0;
+                relativeError = absoluteError / performance2;
             }
 
             double squaredError = Math.pow(performance2 - performance1, 2);
@@ -311,6 +312,7 @@ public class Evaluation {
             result.append("\n");
 
             se += squaredError;
+            ape += relativeError;
         }
 
         result.append("\n");
@@ -320,6 +322,10 @@ public class Evaluation {
         result.append("\n");
         result.append("RMSE: ");
         result.append(decimalFormat.format(Math.sqrt(mse)));
+        result.append("\n");
+        result.append("MAPE: ");
+        double mape = ape / configurations.size() * 100;
+        result.append(decimalFormat.format(mape));
         result.append("\n");
 
         outputFile.getParentFile().mkdirs();

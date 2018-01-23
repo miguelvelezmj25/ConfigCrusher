@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
+import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
@@ -46,6 +47,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareColorCounter2() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareOptimizer1() throws Exception {
         String programName = "pngtasticOptimizer";
 
@@ -59,6 +68,22 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void comparePrevayler2() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareKanzi2() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
     }
 
     @Test
@@ -134,7 +159,13 @@ public class EvaluationTest {
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
         String script = featurewise.generateRScript(featurewiseEntries);
         String output = featurewise.execute(script);
-        PerformanceModel performanceModel = featurewise.createModel(output);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
@@ -197,7 +228,13 @@ public class EvaluationTest {
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
         String script = featurewise.generateRScript(featurewiseEntries);
         String output = featurewise.execute(script);
-        PerformanceModel performanceModel = featurewise.createModel(output);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
@@ -229,6 +266,32 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void kanziFeaturewise() throws Exception {
+        String programName = "kanzi";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        String script = featurewise.generateRScript(featurewiseEntries);
+        String output = featurewise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test
@@ -315,6 +378,33 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
+    }
+
+    @Test
+    public void prevaylerFeaturewise() throws Exception {
+        String programName = "prevayler";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        String script = featurewise.generateRScript(featurewiseEntries);
+        String output = featurewise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+        System.out.println(performanceModel);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test

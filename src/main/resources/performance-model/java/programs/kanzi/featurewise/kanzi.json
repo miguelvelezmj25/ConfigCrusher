@@ -1,0 +1,26 @@
+{
+  "baseTime": 0,
+  "baseTimeHumanReadable": 0.238,
+  "regionsToPerformanceTables": {
+    "Region{regionID='program', startTime=-1, endTime=-1, duration=-1}": {
+      "[CHECKSUM]": 52000000,
+      "[FORCE]": 9000000,
+      "[BLOCKSIZE]": 511000000,
+      "[TRANSFORM]": -22000000,
+      "[VERBOSE]": 5000000,
+      "[LEVEL]": 57904000000,
+      "[ENTROPY]": 0
+    }
+  },
+  "regionsToPerformanceTablesHumanReadable": {
+    "Region{regionID='program', startTime=-1, endTime=-1, duration=-1}": {
+      "[CHECKSUM]": 0.052,
+      "[FORCE]": 0.009,
+      "[BLOCKSIZE]": 0.511,
+      "[TRANSFORM]": -0.022,
+      "[VERBOSE]": 0.005,
+      "[LEVEL]": 57.904,
+      "[ENTROPY]": 0.0
+    }
+  }
+}

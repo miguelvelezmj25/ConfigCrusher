@@ -24,74 +24,9 @@ public class Featurewise {
         this.programName = programName;
     }
 
-    public PerformanceModel createModel(String output) {
-        Map<Set<String>, Double> configurationToPerformance = this.parseOutput(output);
-
-        Set<String> intercept = new HashSet<>();
-        double baseTime = 0.0;
-
-        for(Map.Entry<Set<String>, Double> entry : configurationToPerformance.entrySet()) {
-            if(entry.getKey().contains(Featurewise.INTERCEPT)) {
-                intercept = entry.getKey();
-                baseTime = entry.getValue();
-
-                break;
-            }
-        }
-
-        configurationToPerformance.remove(intercept);
-
-        Map<Region, Map<Set<String>, Double>> regionToConfigurationPerformance = new HashMap<>();
-        Region programRegion = new Region("program");
-        regionToConfigurationPerformance.put(programRegion, configurationToPerformance);
-
-        PerformanceModel pm = new FeaturewisePerformanceModel(baseTime, regionToConfigurationPerformance);
-
-        return pm;
-    }
-
-    private Map<Set<String>, Double> parseOutput(String output) {
-        String[] r = output.split("\n");
-
-        String[] rawHeader = r[0].split(" ");
-        String[] rawCoefficients = r[1].split(" ");
-
-        List<String> header = this.getDataFromOutput(rawHeader);
-        List<String> coefficients = this.getDataFromOutput(rawCoefficients);
-
-        Map<Set<String>, Double> configurationToPerformance = new HashMap<>();
-
-        for(int i = 0; i < header.size(); i++) {
-            String term = header.get(i);
-            String rawCoefficient = coefficients.get(i);
-            double coefficient = 0.0;
-
-            if(!rawCoefficient.equals(Featurewise.NA)) {
-                coefficient = Double.parseDouble(rawCoefficient);
-            }
-
-            Set<String> configuration = new HashSet<>();
-            configuration.add(term);
-
-            configurationToPerformance.put(configuration, coefficient);
-        }
-
-        return configurationToPerformance;
-    }
-
-    private List<String> getDataFromOutput(String[] array) {
-        List<String> data = new ArrayList<>();
-
-        for(int i = 0; i < array.length; i++) {
-            String element = array[i].trim();
-
-            if(!element.equals(" ") && element.length() > 0) {
-                data.add(element);
-            }
-        }
-
-        return data;
-    }
+//    public PerformanceModel createModel(String output) {
+//
+//    }
 
     public String execute(String file) throws IOException, InterruptedException {
         List<String> commandList = new ArrayList<>();
@@ -127,6 +62,7 @@ public class Featurewise {
         }
 
         process.waitFor();
+        System.out.println();
 
         return output.toString();
     }

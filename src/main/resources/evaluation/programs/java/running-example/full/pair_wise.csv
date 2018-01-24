@@ -1,0 +1,17 @@
+measured,configuration,performance,std
+true,"[]",1.007,0.0
+true,"[A]",3.012,0.0
+true,"[B]",1.01,0.0
+true,"[C]",1.012,0.0
+true,"[A, B]",7.016,0.0
+true,"[D]",1.008,0.0
+true,"[A, C]",10.021,0.0
+true,"[B, C]",1.007,0.0
+true,"[A, D]",3.011,0.0
+true,"[B, D]",1.013,0.0
+false,"[A, B, C]",14.017,0.0
+true,"[C, D]",1.008,0.0
+false,"[A, B, D]",7.017,0.0
+false,"[A, C, D]",10.015,0.0
+false,"[B, C, D]",1.005,0.0
+false,"[A, B, C, D]",14.013,0.0

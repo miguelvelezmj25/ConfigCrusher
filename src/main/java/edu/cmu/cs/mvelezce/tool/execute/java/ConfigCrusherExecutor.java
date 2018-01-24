@@ -116,6 +116,9 @@ public class ConfigCrusherExecutor extends BaseExecutor {
 
         for(Set<String> configuration : this.getConfigurations()) {
             adapter.execute(configuration, iteration);
+
+            System.gc();
+            Thread.sleep(5000);
         }
 
         String outputDir = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + "/" + iteration;

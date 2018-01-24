@@ -24,6 +24,7 @@ public class Evaluation {
     public static final String CONFIG_CRUSHER = "config_crusher";
     public static final String BRUTE_FORCE = "brute_force";
     public static final String FEATURE_WISE = "feature_wise";
+    public static final String PAIR_WISE = "pair_wise";
 
     private String programName;
 

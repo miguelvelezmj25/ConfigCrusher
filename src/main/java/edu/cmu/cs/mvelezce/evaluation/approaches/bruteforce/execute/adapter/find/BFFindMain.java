@@ -36,6 +36,8 @@ public class BFFindMain extends FindMain {
         Adapter adapter = new FindAdapter();
         Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
+
+
         BruteForceExecutor executor = new BruteForceExecutor(this.getProgramName());
         Map<String, Long> results = executor.getResults();
         executor.writeToFile(this.getIteration(), configuration, results);

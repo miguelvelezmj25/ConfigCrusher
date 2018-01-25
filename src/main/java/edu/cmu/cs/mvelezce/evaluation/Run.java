@@ -13,7 +13,7 @@ public class Run {
     public static void main(String[] args) throws IOException, InterruptedException {
         String programName = "find";
 //        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/find/target/classes";
-        String classDirectory = "/home/mvelezce/performance-mapper-evaluation/original/find/target/classes";
+        String classDirectory = "/home/mvelezce/Documents/performance-mapper-evaluation/original/find/target/classes";
 
         String entryPoint = "org.unix4j.find.Main";
 

@@ -1,0 +1,17 @@
+digraph moo {
+node [shape=record];
+1718708569 [label="L0\lLINENUMBER 33 L0\lFRAME APPEND [java/lang/Object]\lLDC \"99039ca4-9dc6-465e-9903-2b34c74ade7a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 0\lINVOKESTATIC java/lang/Boolean.valueOf (Z)Ljava/lang/Boolean;\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.sink (Ljava/lang/Object;)V\lL6\lLINENUMBER 34 L6\lNEW java/io/ByteArrayOutputStream\lDUP\lINVOKESPECIAL java/io/ByteArrayOutputStream.\<init\> ()V\lASTORE 2\lL7\lLINENUMBER 35 L7\lALOAD 2\lINVOKEVIRTUAL java/io/ByteArrayOutputStream.toByteArray ()[B\lASTORE 3\lL1\lLINENUMBER 38 L1\lLDC \"99039ca4-9dc6-465e-9903-2b34c74ade7a\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lGOTO L8\l"];
+2090866284 [label="L8\lLINENUMBER 39 L8\lFRAME APPEND [java/io/ByteArrayOutputStream [B]\lRETURN\l"];
+1779524436 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Exception\lL3\lLINENUMBER 27 L3\lNEW java/lang/Object\lDUP\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lASTORE 1\lL4\lLINENUMBER 29 L4\lINVOKESTATIC java/lang/Math.random ()D\lDCONST_0\lDCMPL\lIFNE L0\l"];
+499831151 [label="L2\lLINENUMBER 36 L2\lFRAME SAME1 java/lang/Exception\lASTORE 2\lL9\lLINENUMBER 37 L9\lNEW java/lang/Error\lDUP\lLDC \"Unable to serialize transaction\"\lALOAD 2\lINVOKESPECIAL java/lang/Error.\<init\> (Ljava/lang/String;Ljava/lang/Throwable;)V\lATHROW\l"];
+887127653 [label="L5\lLINENUMBER 30 L5\lICONST_0\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 1\l"];
+entry;
+exit;
+entry -> 1779524436;
+1718708569 -> 2090866284;
+2090866284 -> exit;
+1779524436 -> 1718708569;
+1779524436 -> 887127653;
+887127653 -> 1718708569;
+1718708569[fontcolor="purple", penwidth=3, color="purple"];
+}

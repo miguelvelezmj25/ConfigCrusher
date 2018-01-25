@@ -1,0 +1,16 @@
+digraph main {
+node [shape=record];
+37380050 [label="L0\lLINENUMBER 18 L0\lLDC \"8799dd28-ae12-4dc4-b354-c0a02aeda523\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 19 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lISTORE 1\lL2\lLINENUMBER 21 L2\lILOAD 1\lIFEQ L3\l"];
+2023938592 [label="L3\lLINENUMBER 26 L3\lFRAME APPEND [I]\lLDC 2\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL6\lLINENUMBER 27 L6\lLDC \"8799dd28-ae12-4dc4-b354-c0a02aeda523\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+231977479 [label="L4\lLINENUMBER 22 L4\lLCONST_1\lINVOKESTATIC java/lang/Thread.sleep (J)V\lL5\lLINENUMBER 23 L5\lLDC \"8799dd28-ae12-4dc4-b354-c0a02aeda523\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 37380050;
+37380050 -> 2023938592;
+37380050 -> 231977479;
+2023938592 -> exit;
+231977479 -> exit;
+37380050[fontcolor="purple", penwidth=3, color="purple"];
+2023938592[fontcolor="purple", penwidth=3, color="purple"];
+231977479[fontcolor="purple", penwidth=3, color="purple"];
+}

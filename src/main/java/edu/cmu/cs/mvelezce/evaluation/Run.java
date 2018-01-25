@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.find.FindAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 
 import java.io.IOException;
@@ -17,12 +18,12 @@ public class Run {
 
         String entryPoint = "org.unix4j.find.Main";
 
-//        Set<String> options = new HashSet<>(FindAdapter.getFindOptions());
-//        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+        Set<String> options = new HashSet<>(FindAdapter.getFindOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
 
-        Set<String> empty = new HashSet<>();
-        Set<Set<String>> configurations = new HashSet<>();
-        configurations.add(empty);
+//        Set<String> empty = new HashSet<>();
+//        Set<Set<String>> configurations = new HashSet<>();
+//        configurations.add(empty);
 
         System.out.println("Configurations to sample: " + configurations.size());
 

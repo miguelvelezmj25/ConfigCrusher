@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.colorcounter.BFColorCounterAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.find.BFFindAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.grep.BFGrepAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.kanzi.BFKanziAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.optimizer.BFOptimizerAdapter;
@@ -43,6 +44,10 @@ public class BruteForceExecutor extends BaseExecutor {
             options.addAll(configuration);
         }
 
+        return BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+    }
+
+    public static Set<Set<String>> getBruteForceConfigurationsFromOptions(Set<String> options) {
         return Helper.getConfigurations(options);
     }
 
@@ -167,6 +172,9 @@ public class BruteForceExecutor extends BaseExecutor {
         }
         else if(this.getProgramName().contains("grep")) {
             adapter = new BFGrepAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("find")) {
+            adapter = new BFFindAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

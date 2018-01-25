@@ -76,6 +76,11 @@ public class SimpleCompression extends BaseCompression {
         return configurationsToExecute;
     }
 
+    @Override
+    public String getOutputDir() {
+        return BaseCompression.DIRECTORY;
+    }
+
     private void simpleMerging(Map.Entry<Set<String>, Set<Set<String>>> largeEntry, Map.Entry<Set<String>, Set<Set<String>>> smallEntry, Set<String> pivotOptions, Set<Set<String>> configurationsToExecute) {
         Iterator<Set<String>> largeSet = largeEntry.getValue().iterator();
         Iterator<Set<String>> smallSet = smallEntry.getValue().iterator();

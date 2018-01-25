@@ -14,4 +14,6 @@ public interface Compression {
 
     public Set<Set<String>> readFromFile(File file) throws IOException;
 
+    public String getOutputDir();
+
 }

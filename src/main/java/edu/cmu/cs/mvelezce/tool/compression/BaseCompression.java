@@ -76,7 +76,7 @@ public abstract class BaseCompression implements Compression {
     public Set<Set<String>> compressConfigurations(String[] args) throws IOException {
         Options.getCommandLine(args);
 
-        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName;
+        String outputFile = this.getOutputDir() + "/" + this.programName;
         File file = new File(outputFile);
 
         Options.checkIfDeleteResult(file);
@@ -111,7 +111,7 @@ public abstract class BaseCompression implements Compression {
 
     public void writeToFile(Set<Set<String>> configurationsToExecute) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String outputFile = SimpleCompression.DIRECTORY + "/" + this.programName + "/" + this.programName
+        String outputFile = this.getOutputDir() + "/" + this.programName + "/" + this.programName
                 + Options.DOT_JSON;
         File file = new File(outputFile);
         file.getParentFile().mkdirs();

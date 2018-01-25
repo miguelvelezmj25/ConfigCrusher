@@ -57,6 +57,24 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareGrep2() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareGrep3() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+
+
+    @Test
     public void compareColorCounter2() throws Exception {
         String programName = "pngtasticColorCounter";
 
@@ -65,11 +83,35 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareColorCounter3() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareOptimizer1() throws Exception {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareOptimizer2() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareOptimizer3() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
     }
 
     @Test
@@ -89,11 +131,27 @@ public class EvaluationTest {
     }
 
     @Test
+    public void comparePrevayler3() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareKanzi2() throws Exception {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareKanzi3() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
     }
 
     @Test
@@ -277,6 +335,32 @@ public class EvaluationTest {
     }
 
     @Test
+    public void colorCounterPairwise() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        String script = pairwise.generateRScript(pairwiseEntries);
+        String output = pairwise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+    }
+
+    @Test
     public void optimizerBruteForce() throws Exception {
         String programName = "pngtasticOptimizer";
 
@@ -331,6 +415,32 @@ public class EvaluationTest {
     }
 
     @Test
+    public void kanziPairwise() throws Exception {
+        String programName = "kanzi";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        String script = pairwise.generateRScript(pairwiseEntries);
+        String output = pairwise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+    }
+
+    @Test
     public void grepBruteForce() throws Exception {
         String programName = "grep";
 
@@ -345,6 +455,58 @@ public class EvaluationTest {
     }
 
     @Test
+    public void grepFeaturewise() throws Exception {
+        String programName = "grep";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        String script = featurewise.generateRScript(featurewiseEntries);
+        String output = featurewise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+    }
+
+    @Test
+    public void grepPairwise() throws Exception {
+        String programName = "grep";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        String script = pairwise.generateRScript(pairwiseEntries);
+        String output = pairwise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+    }
+
+    @Test
     public void prevaylerBruteForce() throws Exception {
         String programName = "prevayler";
 
@@ -356,6 +518,58 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void prevaylerFeaturewise() throws Exception {
+        String programName = "prevayler";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        String script = featurewise.generateRScript(featurewiseEntries);
+        String output = featurewise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+    }
+
+    @Test
+    public void prevaylerPairwise() throws Exception {
+        String programName = "prevayler";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        String script = pairwise.generateRScript(pairwiseEntries);
+        String output = pairwise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
     }
 
     @Test
@@ -388,6 +602,58 @@ public class EvaluationTest {
     }
 
     @Test
+    public void optimizerFeaturewise() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        String script = featurewise.generateRScript(featurewiseEntries);
+        String output = featurewise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+    }
+
+    @Test
+    public void optimizerPairwise() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        String script = pairwise.generateRScript(pairwiseEntries);
+        String output = pairwise.execute(script);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+    }
+
+    @Test
     public void prevaylerConfigCrusher() throws Exception {
         String programName = "prevayler";
 
@@ -414,33 +680,6 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
-    }
-
-    @Test
-    public void prevaylerFeaturewise() throws Exception {
-        String programName = "prevayler";
-
-        // arguments
-        String[] args = new String[0];
-
-        Executor executor = new BruteForceExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        String script = featurewise.generateRScript(featurewiseEntries);
-        String output = featurewise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-        System.out.println(performanceModel);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test

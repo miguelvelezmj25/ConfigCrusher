@@ -85,7 +85,7 @@ public class Pairwise {
 
         List<String> optionsList = new ArrayList<>(options);
 
-        for(int i = 1; i <= options.size(); i++) {
+        for(int i = 1; i <= 2; i++) {
             Combinations combinations = new Combinations(options.size(), i);
             Iterator<int[]> combinationsIter = combinations.iterator();
 
@@ -108,7 +108,7 @@ public class Pairwise {
 
             }
 
-            if(i < options.size()) {
+            if(i < 2) {
                 script.append("+");
             }
 

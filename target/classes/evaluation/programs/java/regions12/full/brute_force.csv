@@ -1,9 +1,0 @@
-measured,configuration,performance,std
-true,"[A, B]",4.013,0
-true,"[B]",0.006,0
-true,"[B, C]",0.005,0
-true,"[C]",0.005,0
-true,"[A, C]",3.012,0
-true,"[]",0.009,0
-true,"[A]",1.009,0
-true,"[A, B, C]",6.012,0

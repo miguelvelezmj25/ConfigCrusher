@@ -2,17 +2,13 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.SPLatMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.counter.SPLatCounterMain;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.grep.SPLatGrepMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.optimizer.SPLatOptimizerMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.runningexample.SPLatRunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.BaseCompression;
-import edu.cmu.cs.mvelezce.tool.compression.Compression;
-import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
-import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.Set;
 
 public class SPLatExecutor extends BaseCompression {
 
@@ -34,6 +30,9 @@ public class SPLatExecutor extends BaseCompression {
         }
         else if(this.getProgramName().contains("pngtasticOptimizer")) {
             main = new SPLatOptimizerMain();
+        }
+        else if(this.getProgramName().contains("grep")) {
+            main = new SPLatGrepMain();
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

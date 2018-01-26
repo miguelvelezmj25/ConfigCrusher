@@ -50,4 +50,18 @@ public class SPLatExecutorTest {
         System.out.println("Configurations executed: " + configurations.size());
     }
 
+    @Test
+    public void grep() throws IOException {
+        String programName = "grep";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Compression executor = new SPLatExecutor(programName);
+        Set<Set<String>> configurations = executor.compressConfigurations(args);
+        System.out.println("Configurations executed: " + configurations.size());
+    }
+
 }

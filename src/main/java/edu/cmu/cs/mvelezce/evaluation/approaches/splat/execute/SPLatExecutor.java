@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute;
 
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.SPLatMain;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.counter.SPLatCounterMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.runningexample.SPLatRunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.BaseCompression;
@@ -21,10 +23,13 @@ public class SPLatExecutor extends BaseCompression {
 
     @Override
     public Set<Set<String>> compressConfigurations() {
-        SPLatRunningExampleMain main;
+        SPLatMain main;
 
         if(this.getProgramName().contains("running-example")) {
             main = new SPLatRunningExampleMain();
+        }
+        else if(this.getProgramName().contains("pngtasticColorCounter")) {
+            main = new SPLatCounterMain();
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

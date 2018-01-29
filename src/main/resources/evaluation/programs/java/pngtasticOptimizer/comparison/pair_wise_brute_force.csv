@@ -32,6 +32,6 @@ measured,configuration,pair_wise,pair_wise_std,brute_force,brute_force_std,absol
 "false","[COMPRESSOR, ITERATIONS, LOGLEVEL]",215.668,0.0,214.758,1.872,0.91,0.004,0.828
 "false","[COMPRESSOR, ITERATIONS, LOGLEVEL, REMOVEGAMMA]",215.376,0.0,213.723,1.701,1.653,0.008,2.732
 
-MSE: 1.083
-RMSE: 1.041
-MAPE: 1.282
+MSE: 2.166
+RMSE: 1.472
+MAPE: 2.563

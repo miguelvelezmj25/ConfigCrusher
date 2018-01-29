@@ -32,6 +32,6 @@ measured,configuration,pair_wise,pair_wise_std,brute_force,brute_force_std,absol
 "true","[FREQTHRESHOLD, DISTTHRESHOLD]",5.649,0.0,5.649,0.099,0,0,0
 "true","[MINALPHA]",5.707,0.0,5.707,0.068,0,0,0
 
-MSE: 0.156
-RMSE: 0.395
-MAPE: 3.618
+MSE: 0.312
+RMSE: 0.558
+MAPE: 7.236

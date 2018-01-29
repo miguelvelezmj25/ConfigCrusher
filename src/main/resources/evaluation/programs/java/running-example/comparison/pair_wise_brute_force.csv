@@ -17,5 +17,5 @@ measured,configuration,pair_wise,pair_wise_std,brute_force,brute_force_std,absol
 "false","[A, B, C, D]",14.013,0.0,14.02,0.004,0.007,0,0
 
 MSE: 0
-RMSE: 0.003
-MAPE: 0.053
+RMSE: 0.005
+MAPE: 0.169

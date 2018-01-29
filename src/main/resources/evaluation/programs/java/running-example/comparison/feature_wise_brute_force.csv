@@ -16,6 +16,6 @@ measured,configuration,feature_wise,feature_wise_std,brute_force,brute_force_std
 "false","[B, C, D]",1.014,0.0,1.012,0.003,0.002,0.002,0
 "false","[A, B, C, D]",3.018,0.0,14.02,0.004,11.002,0.785,121.044
 
-MSE: 23.26
-RMSE: 4.823
-MAPE: 25.783
+MSE: 31.014
+RMSE: 5.569
+MAPE: 34.377

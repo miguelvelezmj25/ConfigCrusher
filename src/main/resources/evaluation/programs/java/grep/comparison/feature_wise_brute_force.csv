@@ -128,6 +128,6 @@ measured,configuration,feature_wise,feature_wise_std,brute_force,brute_force_std
 "true","[MATCHINGFILES]",1.51,0.0,1.51,0.04,0,0,0
 "false","[FIXEDSTRINGS, WHOLELINE, COUNT, MATCHINGFILES, IGNORECASE]",2.498,0.0,0.692,0.02,1.806,2.61,3.262
 
-MSE: 26.743
-RMSE: 5.171
-MAPE: 443.253
+MSE: 28.29
+RMSE: 5.319
+MAPE: 468.895

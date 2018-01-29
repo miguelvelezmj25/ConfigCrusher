@@ -72,8 +72,6 @@ public class EvaluationTest {
         eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
     }
 
-
-
     @Test
     public void compareColorCounter2() throws Exception {
         String programName = "pngtasticColorCounter";

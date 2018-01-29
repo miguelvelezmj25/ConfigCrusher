@@ -32,6 +32,6 @@ measured,configuration,feature_wise,feature_wise_std,brute_force,brute_force_std
 "false","[FREQTHRESHOLD, DISTTHRESHOLD]",6.308,0.0,5.649,0.099,0.659,0.117,0.434
 "true","[MINALPHA]",5.707,0.0,5.707,0.068,0,0,0
 
-MSE: 0.151
-RMSE: 0.388
-MAPE: 5.09
+MSE: 0.179
+RMSE: 0.422
+MAPE: 6.032

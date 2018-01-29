@@ -220,6 +220,7 @@ public class Evaluation {
         StringBuilder result = new StringBuilder();
         double se = 0;
         double ape = 0;
+        double testCount = 0;
         result.append("measured,configuration," + approach1 + "," + approach1 + "_std," + approach2 + "," + approach2
                 + "_std,absolute error,relative error,squared error");
         result.append("\n");
@@ -249,8 +250,11 @@ public class Evaluation {
 
             in.close();
 
+            String measuredString = strLine.substring(0, strLine.indexOf(","));
+            boolean measured = Boolean.valueOf(measuredString);
+
             result.append('"');
-            result.append(strLine.substring(0, strLine.indexOf(",")));
+            result.append(measuredString);
             result.append('"');
             result.append(",");
             result.append('"');
@@ -313,20 +317,23 @@ public class Evaluation {
             result.append(decimalFormat.format(squaredError));
             result.append("\n");
 
-            se += squaredError;
-            ape += relativeError;
+            if(!measured) {
+                se += squaredError;
+                ape += relativeError;
+                testCount++;
+            }
         }
 
         result.append("\n");
         result.append("MSE: ");
-        double mse = se / configurations.size();
+        double mse = se / testCount;
         result.append(decimalFormat.format(mse));
         result.append("\n");
         result.append("RMSE: ");
         result.append(decimalFormat.format(Math.sqrt(mse)));
         result.append("\n");
         result.append("MAPE: ");
-        double mape = ape / configurations.size() * 100;
+        double mape = ape / testCount * 100;
         result.append(decimalFormat.format(mape));
         result.append("\n");
 

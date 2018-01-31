@@ -87,15 +87,12 @@ public class BruteForceExecutorTest {
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
         String entryPoint = "edu.cmu.cs.mvelezce.Example";
 
-        // Program arguments
-        String[] args = new String[0];
-
-        Compression compression = new SimpleCompression(programName);
-        Set<Set<String>> configurations = compression.compressConfigurations(args);
-        configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
+        Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
         System.out.println("Configurations to sample: " + configurations.size());
 
-        args = new String[3];
+        // Program arguments
+        String[] args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
         args[2] = "-i5";

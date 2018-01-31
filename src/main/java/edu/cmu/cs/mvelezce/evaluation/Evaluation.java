@@ -75,7 +75,7 @@ public class Evaluation {
         writer.close();
     }
 
-    public void writeConfigurationToPerformance(String approach, PerformanceModel performanceModel, Set<PerformanceEntryStatistic> performanceEntryStats) throws IOException {
+    public void writeConfigurationToPerformance(String approach, PerformanceModel performanceModel, Set<PerformanceEntryStatistic> performanceEntryStats, Set<Set<String>> configurations) throws IOException {
         String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
                 + approach + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
@@ -83,15 +83,6 @@ public class Evaluation {
         if(outputFile.exists()) {
             FileUtils.forceDelete(outputFile);
         }
-
-        Collection<Map<Set<String>, Long>> performanceTables = performanceModel.getRegionsToPerformanceTables().values();
-        Set<Set<String>> options = new HashSet<>();
-
-        for(Map<Set<String>, Long> entry : performanceTables) {
-            options.addAll(entry.keySet());
-        }
-
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurations(options);
 
         StringBuilder result = new StringBuilder();
         result.append("measured,configuration,performance,std");

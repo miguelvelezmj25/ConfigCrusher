@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.pairwise;
 
 import edu.cmu.cs.mvelezce.evaluation.Evaluation;
+import edu.cmu.cs.mvelezce.evaluation.approaches.Approach;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.util.Combinations;
@@ -9,135 +10,125 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class Pairwise {
-
-    public static final String R_DIR = "/r";
-    public static final String DOT_R = ".R";
-    public static final String INTERCEPT = "(Intercept)";
-    public static final String NA = "NA";
-
-    private String programName;
+public class Pairwise extends Approach {
 
     public Pairwise(String programName) {
-        this.programName = programName;
+        super(programName);
     }
 
-//    public PerformanceModel createModel(String output) {
+//    public String execute(String file) throws IOException, InterruptedException {
+//        List<String> commandList = new ArrayList<>();
 //
+//        commandList.add("Rscript");
+//        commandList.add(file);
+//
+//        String[] command = new String[commandList.size()];
+//        command = commandList.toArray(command);
+//        System.out.println(Arrays.toString(command));
+//        Process process = Runtime.getRuntime().exec(command);
+//
+//        System.out.println("Output: ");
+//        BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//        String string;
+//
+//        StringBuilder output = new StringBuilder();
+//
+//        while((string = inputReader.readLine()) != null) {
+//            if(!string.isEmpty()) {
+//                System.out.println(string);
+//                output.append(string).append("\n");
+//            }
+//        }
+//
+//        System.out.println("Errors: ");
+//        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+//
+//        while((string = errorReader.readLine()) != null) {
+//            if(!string.isEmpty()) {
+//                System.out.println(string);
+//            }
+//        }
+//
+//        process.waitFor();
+//        System.out.println();
+//
+//        return output.toString();
+//    }
+//
+//    public String generateRScript(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
+//        String file = this.generateRScriptData(performanceEntries);
+//
+//        Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
+//        Set<String> options = this.getOptions(configurations);
+//
+//        return this.generateRScript(file, options);
+//    }
+//
+//    private String generateRScript(String file, Set<String> options) throws IOException {
+//        StringBuilder script = new StringBuilder();
+//        script.append("pair_wise <- read.csv(\"");
+//        script.append(file);
+//        script.append("\")");
+//        script.append("\n");
+//        script.append("model <- lm(time~");
+//
+//
+//        List<String> optionsList = new ArrayList<>(options);
+//
+//        for(int i = 1; i <= 2; i++) {
+//            Combinations combinations = new Combinations(options.size(), i);
+//            Iterator<int[]> combinationsIter = combinations.iterator();
+//
+//            while(combinationsIter.hasNext()) {
+//                int[] combination = combinationsIter.next();
+//
+//                for(int j = 0; j < combination.length; j++) {
+//                    int index = combination[j];
+//                    String term = optionsList.get(index);
+//                    script.append(term);
+//
+//                    if(j < (combination.length - 1)) {
+//                        script.append("*");
+//                    }
+//                }
+//
+//                if(combinationsIter.hasNext()) {
+//                    script.append("+");
+//                }
+//
+//            }
+//
+//            if(i < 2) {
+//                script.append("+");
+//            }
+//
+//        }
+//
+//        script.append(", data = pair_wise)");
+//        script.append("\n");
+//        script.append("coef(model)");
+//        script.append("\n");
+//
+//        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Pairwise.R_DIR + "/"
+//                + Evaluation.PAIR_WISE + Pairwise.DOT_R;
+//        File outputFile = new File(outputDir);
+//
+//        if(outputFile.exists()) {
+//            FileUtils.forceDelete(outputFile);
+//        }
+//
+//        outputFile.getParentFile().mkdirs();
+//        FileWriter writer = new FileWriter(outputFile);
+//        writer.write(script.toString());
+//        writer.flush();
+//        writer.close();
+//
+//        return outputDir;
 //    }
 
-    public String execute(String file) throws IOException, InterruptedException {
-        List<String> commandList = new ArrayList<>();
 
-        commandList.add("Rscript");
-        commandList.add(file);
-
-        String[] command = new String[commandList.size()];
-        command = commandList.toArray(command);
-        System.out.println(Arrays.toString(command));
-        Process process = Runtime.getRuntime().exec(command);
-
-        System.out.println("Output: ");
-        BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String string;
-
-        StringBuilder output = new StringBuilder();
-
-        while((string = inputReader.readLine()) != null) {
-            if(!string.isEmpty()) {
-                System.out.println(string);
-                output.append(string).append("\n");
-            }
-        }
-
-        System.out.println("Errors: ");
-        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-
-        while((string = errorReader.readLine()) != null) {
-            if(!string.isEmpty()) {
-                System.out.println(string);
-            }
-        }
-
-        process.waitFor();
-        System.out.println();
-
-        return output.toString();
-    }
-
-    public String generateRScript(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
-        String file = this.generateRScriptData(performanceEntries);
-
-        Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
-        Set<String> options = this.getOptions(configurations);
-
-        return this.generateRScript(file, options);
-    }
-
-    private String generateRScript(String file, Set<String> options) throws IOException {
-        StringBuilder script = new StringBuilder();
-        script.append("pair_wise <- read.csv(\"");
-        script.append(file);
-        script.append("\")");
-        script.append("\n");
-        script.append("model <- lm(time~");
-
-
-        List<String> optionsList = new ArrayList<>(options);
-
-        for(int i = 1; i <= 2; i++) {
-            Combinations combinations = new Combinations(options.size(), i);
-            Iterator<int[]> combinationsIter = combinations.iterator();
-
-            while(combinationsIter.hasNext()) {
-                int[] combination = combinationsIter.next();
-
-                for(int j = 0; j < combination.length; j++) {
-                    int index = combination[j];
-                    String term = optionsList.get(index);
-                    script.append(term);
-
-                    if(j < (combination.length - 1)) {
-                        script.append("*");
-                    }
-                }
-
-                if(combinationsIter.hasNext()) {
-                    script.append("+");
-                }
-
-            }
-
-            if(i < 2) {
-                script.append("+");
-            }
-
-        }
-
-        script.append(", data = pair_wise)");
-        script.append("\n");
-        script.append("coef(model)");
-        script.append("\n");
-
-        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Pairwise.R_DIR + "/"
-                + Evaluation.PAIR_WISE + Pairwise.DOT_R;
-        File outputFile = new File(outputDir);
-
-        if(outputFile.exists()) {
-            FileUtils.forceDelete(outputFile);
-        }
-
-        outputFile.getParentFile().mkdirs();
-        FileWriter writer = new FileWriter(outputFile);
-        writer.write(script.toString());
-        writer.flush();
-        writer.close();
-
-        return outputDir;
-    }
-
-
-    private String generateRScriptData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
+    @Override
+    public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
         Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
         Set<String> optionsSet = this.getOptions(configurations);
         List<String> options = new ArrayList<>();
@@ -174,7 +165,7 @@ public class Pairwise {
             result.append("\n");
         }
 
-        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Pairwise.R_DIR + "/"
+        String outputDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + Approach.DATA_DIR + "/"
                 + Evaluation.PAIR_WISE + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
 
@@ -187,8 +178,6 @@ public class Pairwise {
         writer.write(result.toString());
         writer.flush();
         writer.close();
-
-        return outputDir;
     }
 
     public Set<PerformanceEntryStatistic> getPairwiseEntries(Set<PerformanceEntryStatistic> performanceEntries) {

@@ -111,6 +111,8 @@ public class MethodGraph {
             return ids.iterator().next();
         }
 
+        this.toDotString("ERROR");
+
         throw new RuntimeException("Could not find an immediate dominator for " + start.getID());
     }
 

@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.find.FindAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.junit.Test;
@@ -126,7 +127,7 @@ public class BruteForceExecutorTest {
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic-optimizer/out/production/pngtastic-optimizer";
         String entryPoint = "optimizer.com.googlecode.pngtastic.Run";
 
-        Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
+        Set<String> options = new HashSet<>(OptimizerAdapter.getOptimizerOptions());
         Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
         System.out.println("Configurations to sample: " + configurations.size());
 

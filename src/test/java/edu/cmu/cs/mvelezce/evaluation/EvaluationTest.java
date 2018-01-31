@@ -13,6 +13,12 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions16.Regions16Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -21,10 +27,7 @@ import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerforman
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class EvaluationTest {
     @Test
@@ -188,6 +191,9 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
+        Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
@@ -197,7 +203,7 @@ public class EvaluationTest {
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
     }
 
     @Test
@@ -309,6 +315,9 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
+        Set<String> options = new HashSet<>(ColorCounterAdapter.getColorCounterOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
@@ -318,7 +327,7 @@ public class EvaluationTest {
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
     }
 
     @Test
@@ -615,6 +624,9 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
+        Set<String> options = new HashSet<>(OptimizerAdapter.getOptimizerOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
@@ -624,7 +636,7 @@ public class EvaluationTest {
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
     }
 
     @Test
@@ -696,6 +708,9 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
+        Set<String> options = new HashSet<>(PrevaylerAdapter.getPrevaylerOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
@@ -705,7 +720,7 @@ public class EvaluationTest {
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
     }
 
     @Test
@@ -725,6 +740,9 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
+        Set<String> options = new HashSet<>(Regions12Adapter.getRegions12Options());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
@@ -734,7 +752,7 @@ public class EvaluationTest {
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
     }
 
     @Test
@@ -754,6 +772,9 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
+        Set<String> options = new HashSet<>(Regions16Adapter.getRegions16Options());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+
         args = new String[2];
         args[0] = "-delres";
         args[1] = "-saveres";
@@ -763,7 +784,7 @@ public class EvaluationTest {
         PerformanceModel performanceModel = builder.createModel(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
     }
 
     @Test

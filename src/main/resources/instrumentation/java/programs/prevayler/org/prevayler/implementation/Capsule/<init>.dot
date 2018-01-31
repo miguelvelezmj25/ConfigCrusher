@@ -1,17 +1,17 @@
 digraph <init> {
 node [shape=record];
-758870154 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Exception\lL3\lLINENUMBER 17 L3\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL4\lLINENUMBER 15 L4\lALOAD 0\lACONST_NULL\lPUTFIELD org/prevayler/implementation/Capsule._directTransaction : Ljava/lang/Object;\lL5\lLINENUMBER 18 L5\lILOAD 3\lIFNE L0\l"];
-1656923255 [label="L2\lLINENUMBER 25 L2\lFRAME SAME1 java/lang/Exception\lASTORE 4\lL10\lLINENUMBER 26 L10\lNEW java/lang/Error\lDUP\lLDC \"Unable to serialize transaction\"\lALOAD 4\lINVOKESPECIAL java/lang/Error.\<init\> (Ljava/lang/String;Ljava/lang/Throwable;)V\lATHROW\l"];
-1827559894 [label="L0\lLINENUMBER 22 L0\lFRAME FULL [org/prevayler/implementation/Capsule java/lang/Object org/prevayler/foundation/serialization/Serializer I] []\lLDC \"2edd6861-dbeb-4553-bff2-473fb15ee154\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lNEW java/io/ByteArrayOutputStream\lDUP\lINVOKESPECIAL java/io/ByteArrayOutputStream.\<init\> ()V\lASTORE 4\lL7\lLINENUMBER 23 L7\lALOAD 2\lALOAD 4\lALOAD 1\lINVOKEINTERFACE org/prevayler/foundation/serialization/Serializer.writeObject (Ljava/io/OutputStream;Ljava/lang/Object;)V\lL8\lLINENUMBER 24 L8\lALOAD 0\lALOAD 4\lINVOKEVIRTUAL java/io/ByteArrayOutputStream.toByteArray ()[B\lPUTFIELD org/prevayler/implementation/Capsule._serialized : [B\lL1\lLINENUMBER 27 L1\lLDC \"2edd6861-dbeb-4553-bff2-473fb15ee154\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lGOTO L9\l"];
-336279900 [label="L9\lLINENUMBER 29 L9\lFRAME APPEND [java/io/ByteArrayOutputStream]\lRETURN\l"];
-484033246 [label="L6\lLINENUMBER 19 L6\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/implementation/Capsule._directTransaction : Ljava/lang/Object;\l"];
+1715350781 [label="L9\lLINENUMBER 29 L9\lFRAME APPEND [java/io/ByteArrayOutputStream]\lRETURN\l"];
+404822164 [label="TRYCATCHBLOCK L0 L1 L2 java/lang/Exception\lL3\lLINENUMBER 17 L3\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL4\lLINENUMBER 15 L4\lALOAD 0\lACONST_NULL\lPUTFIELD org/prevayler/implementation/Capsule._directTransaction : Ljava/lang/Object;\lL5\lLINENUMBER 18 L5\lILOAD 3\lIFNE L0\l"];
+224504884 [label="L0\lLINENUMBER 22 L0\lFRAME FULL [org/prevayler/implementation/Capsule java/lang/Object org/prevayler/foundation/serialization/Serializer I] []\lLDC \"186ddff3-d09a-4044-897a-e0700d197b15\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lNEW java/io/ByteArrayOutputStream\lDUP\lINVOKESPECIAL java/io/ByteArrayOutputStream.\<init\> ()V\lASTORE 4\lL7\lLINENUMBER 23 L7\lALOAD 2\lALOAD 4\lALOAD 1\lINVOKEINTERFACE org/prevayler/foundation/serialization/Serializer.writeObject (Ljava/io/OutputStream;Ljava/lang/Object;)V\lL8\lLINENUMBER 24 L8\lALOAD 0\lALOAD 4\lINVOKEVIRTUAL java/io/ByteArrayOutputStream.toByteArray ()[B\lPUTFIELD org/prevayler/implementation/Capsule._serialized : [B\lL1\lLINENUMBER 27 L1\lLDC \"186ddff3-d09a-4044-897a-e0700d197b15\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lGOTO L9\l"];
+592088095 [label="L6\lLINENUMBER 19 L6\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/implementation/Capsule._directTransaction : Ljava/lang/Object;\l"];
+1993043222 [label="L2\lLINENUMBER 25 L2\lFRAME SAME1 java/lang/Exception\lASTORE 4\lL10\lLINENUMBER 26 L10\lNEW java/lang/Error\lDUP\lLDC \"Unable to serialize transaction\"\lALOAD 4\lINVOKESPECIAL java/lang/Error.\<init\> (Ljava/lang/String;Ljava/lang/Throwable;)V\lATHROW\l"];
 entry;
 exit;
-entry -> 758870154;
-758870154 -> 1827559894;
-758870154 -> 484033246;
-1827559894 -> 336279900;
-336279900 -> exit;
-484033246 -> 1827559894;
-1827559894[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 404822164;
+1715350781 -> exit;
+404822164 -> 224504884;
+404822164 -> 592088095;
+224504884 -> 1715350781;
+592088095 -> 224504884;
+224504884[fontcolor="purple", penwidth=3, color="purple"];
 }

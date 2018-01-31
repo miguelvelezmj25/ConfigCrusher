@@ -5,6 +5,8 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.Pairwise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.model.SPLatPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
@@ -20,6 +22,7 @@ import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilde
 import org.junit.Test;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -212,7 +215,7 @@ public class EvaluationTest {
     }
 
     @Test
-    public void runningExampleFeaturewise() throws Exception {
+    public void runningExampleFeaturewiseGenerateCSVData() throws Exception {
         String programName = "running-example";
 
         // arguments
@@ -223,22 +226,22 @@ public class EvaluationTest {
 
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        String script = featurewise.generateRScript(featurewiseEntries);
-        String output = featurewise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries);
+////        String output = featurewise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test
-    public void runningExamplePairwise() throws Exception {
+    public void runningExamplePairwiseGenerateCSVData() throws Exception {
         String programName = "running-example";
 
         // arguments
@@ -249,19 +252,45 @@ public class EvaluationTest {
 
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        String script = pairwise.generateRScript(pairwiseEntries);
-        String output = pairwise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries);
+////        String output = pairwise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
     }
+
+//    @Test
+//    public void runningExampleSPLat() throws Exception {
+//        String programName = "running-example";
+//
+//        // arguments
+//        String[] args = new String[0];
+//
+//        Executor executor = new BruteForceExecutor(programName);
+//        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+//
+//        SPLat splat = new SPLat(programName);
+//        Set<PerformanceEntryStatistic> pairwiseEntries = splat.getSPLatEntries(performanceEntries);
+//        splat.generateCSVData(pairwiseEntries);
+////        String output = splat.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder splatBuilder = new SPLatPerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = splatBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.SPLAT, performanceModel, pairwiseEntries);
+//    }
 
     @Test
     public void colorCounterConfigCrusher() throws Exception {
@@ -307,7 +336,7 @@ public class EvaluationTest {
     }
 
     @Test
-    public void colorCounterFeaturewise() throws Exception {
+    public void colorCounterFeaturewiseGenerateCSVData() throws Exception {
         String programName = "pngtasticColorCounter";
 
         // arguments
@@ -318,22 +347,21 @@ public class EvaluationTest {
 
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        String script = featurewise.generateRScript(featurewiseEntries);
-        String output = featurewise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries);
+//        String output = featurewise.execute(script);
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test
-    public void colorCounterPairwise() throws Exception {
+    public void colorCounterPairwiseGenerateCSVData() throws Exception {
         String programName = "pngtasticColorCounter";
 
         // arguments
@@ -344,18 +372,18 @@ public class EvaluationTest {
 
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        String script = pairwise.generateRScript(pairwiseEntries);
-        String output = pairwise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries);
+//        String output = pairwise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
     }
 
     @Test
@@ -387,7 +415,7 @@ public class EvaluationTest {
     }
 
     @Test
-    public void kanziFeaturewise() throws Exception {
+    public void kanziFeaturewiseGenerateCSVData() throws Exception {
         String programName = "kanzi";
 
         // arguments
@@ -398,22 +426,22 @@ public class EvaluationTest {
 
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        String script = featurewise.generateRScript(featurewiseEntries);
-        String output = featurewise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries);
+//        String output = featurewise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test
-    public void kanziPairwise() throws Exception {
+    public void kanziPairwiseGenerateCSVData() throws Exception {
         String programName = "kanzi";
 
         // arguments
@@ -424,18 +452,18 @@ public class EvaluationTest {
 
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        String script = pairwise.generateRScript(pairwiseEntries);
-        String output = pairwise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries);
+//        String output = pairwise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
     }
 
     @Test
@@ -453,7 +481,7 @@ public class EvaluationTest {
     }
 
     @Test
-    public void grepFeaturewise() throws Exception {
+    public void grepFeaturewiseGenerateCSVData() throws Exception {
         String programName = "grep";
 
         // arguments
@@ -464,22 +492,22 @@ public class EvaluationTest {
 
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        String script = featurewise.generateRScript(featurewiseEntries);
-        String output = featurewise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries);
+//        String output = featurewise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test
-    public void grepPairwise() throws Exception {
+    public void grepPairwiseGenerateCSVData() throws Exception {
         String programName = "grep";
 
         // arguments
@@ -490,18 +518,18 @@ public class EvaluationTest {
 
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        String script = pairwise.generateRScript(pairwiseEntries);
-        String output = pairwise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries);
+//        String output = pairwise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
     }
 
     @Test
@@ -519,7 +547,7 @@ public class EvaluationTest {
     }
 
     @Test
-    public void prevaylerFeaturewise() throws Exception {
+    public void prevaylerFeaturewiseGenerateCSVData() throws Exception {
         String programName = "prevayler";
 
         // arguments
@@ -530,22 +558,22 @@ public class EvaluationTest {
 
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        String script = featurewise.generateRScript(featurewiseEntries);
-        String output = featurewise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries);
+//        String output = featurewise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test
-    public void prevaylerPairwise() throws Exception {
+    public void prevaylerPairwiseGenerateCSVData() throws Exception {
         String programName = "prevayler";
 
         // arguments
@@ -556,18 +584,18 @@ public class EvaluationTest {
 
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        String script = pairwise.generateRScript(pairwiseEntries);
-        String output = pairwise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries);
+//        String output = pairwise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
     }
 
     @Test
@@ -600,7 +628,7 @@ public class EvaluationTest {
     }
 
     @Test
-    public void optimizerFeaturewise() throws Exception {
+    public void optimizerFeaturewiseGenerateCSVData() throws Exception {
         String programName = "pngtasticOptimizer";
 
         // arguments
@@ -611,22 +639,22 @@ public class EvaluationTest {
 
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        String script = featurewise.generateRScript(featurewiseEntries);
-        String output = featurewise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries);
+//        String output = featurewise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
     }
 
     @Test
-    public void optimizerPairwise() throws Exception {
+    public void optimizerPairwiseGenerateCSVData() throws Exception {
         String programName = "pngtasticOptimizer";
 
         // arguments
@@ -637,18 +665,18 @@ public class EvaluationTest {
 
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        String script = pairwise.generateRScript(pairwiseEntries);
-        String output = pairwise.execute(script);
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries);
+//        String output = pairwise.execute(script);
+//
+//        args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+//
+//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
+//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+//
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
     }
 
     @Test

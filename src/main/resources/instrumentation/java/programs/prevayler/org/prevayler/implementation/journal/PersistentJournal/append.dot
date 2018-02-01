@@ -1,0 +1,38 @@
+digraph append {
+node [shape=record];
+1274334510 [label="L24\lLINENUMBER 86 L24\lFRAME SAME\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.startTurn ()V\lL7\lLINENUMBER 89 L7\lALOAD 3\lIFNULL L8\l"];
+802043108 [label="L9\lLINENUMBER 92 L9\lFRAME SAME1 java/lang/Exception\lASTORE 4\lL27\lLINENUMBER 93 L27\lALOAD 0\lALOAD 4\lALOAD 3\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.file ()Ljava/io/File;\lLDC \"closing\"\lALOAD 1\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.abort (Ljava/lang/Exception;Ljava/io/File;Ljava/lang/String;Lorg/prevayler/foundation/Guided;)V\l"];
+786650270 [label="L6\lLINENUMBER 82 L6\lFRAME SAME1 java/lang/Exception\lASTORE 4\lL25\lLINENUMBER 83 L25\lALOAD 0\lALOAD 4\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.file ()Ljava/io/File;\lLDC \"writing to\"\lALOAD 1\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.abort (Ljava/lang/Exception;Ljava/io/File;Ljava/lang/String;Lorg/prevayler/foundation/Guided;)V\l"];
+1984822003 [label="L26\lLINENUMBER 90 L26\lALOAD 3\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.close ()V\l"];
+1824178544 [label="L4\lLINENUMBER 81 L4\lFRAME FULL [org/prevayler/implementation/journal/PersistentJournal org/prevayler/implementation/TransactionGuide org/prevayler/foundation/DurableOutputStream org/prevayler/foundation/DurableOutputStream] []\lALOAD 2\lALOAD 1\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.sync (Lorg/prevayler/foundation/Guided;)V\lL5\lLINENUMBER 84 L5\lGOTO L24\l"];
+719842853 [label="L18\lLINENUMBER 73 L18\lFRAME APPEND [T org/prevayler/foundation/DurableOutputStream]\lLDC \"1698dabb-d288-4f41-8a19-23cd52940dd7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lDUP\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCONST_1\lLADD\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lL22\lLINENUMBER 75 L22\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lASTORE 2\lL1\lLINENUMBER 77 L1\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lL23\lLINENUMBER 78 L23\lGOTO L4\l"];
+350790003 [label="L8\lLINENUMBER 94 L8\lFRAME SAME\lGOTO L10\l"];
+465425577 [label="L10\lLINENUMBER 96 L10\lFRAME SAME\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lL28\lLINENUMBER 97 L28\lGOTO L29\l"];
+1499959996 [label="L19\lLINENUMBER 68 L19\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lASTORE 3\lL20\lLINENUMBER 69 L20\lALOAD 0\lALOAD 0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lALOAD 1\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.createOutputJournal (JLorg/prevayler/foundation/Guided;)Lorg/prevayler/foundation/DurableOutputStream;\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lL21\lLINENUMBER 70 L21\lALOAD 0\lINVOKESTATIC org/prevayler/foundation/StopWatch.start ()Lorg/prevayler/foundation/StopWatch;\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeTimer : Lorg/prevayler/foundation/StopWatch;\l"];
+1736379417 [label="L11\lLINENUMBER 96 L11\lFRAME SAME1 java/lang/Throwable\lASTORE 5\lL12\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lALOAD 5\lATHROW\l"];
+1148068032 [label="L14\lLINENUMBER 61 L14\lFRAME SAME\lACONST_NULL\lASTORE 3\lL16\lLINENUMBER 63 L16\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.startTurn ()V\lL0\lLINENUMBER 65 L0\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.checkSystemVersion (J)V\lL17\lLINENUMBER 67 L17\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.isOutputJournalStillValid ()Z\lIFNE L18\l"];
+1058123217 [label="L15\lLINENUMBER 57 L15\lNEW java/lang/IllegalStateException\lDUP\lLDC \"Journal.update() has to be called at least once before Journal.append().\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+2130504535 [label="L29\lLINENUMBER 98 L29\lFRAME SAME\lLDC \"1698dabb-d288-4f41-8a19-23cd52940dd7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+2028036703 [label="TRYCATCHBLOCK L0 L1 L2 null\lTRYCATCHBLOCK L2 L3 L2 null\lTRYCATCHBLOCK L4 L5 L6 java/lang/Exception\lTRYCATCHBLOCK L7 L8 L9 java/lang/Exception\lTRYCATCHBLOCK L7 L10 L11 null\lTRYCATCHBLOCK L11 L12 L11 null\lL13\lLINENUMBER 56 L13\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lIFNE L14\l"];
+1593284115 [label="L2\lLINENUMBER 77 L2\lFRAME SAME1 java/lang/Throwable\lASTORE 4\lL3\lALOAD 1\lINVOKEVIRTUAL org/prevayler/implementation/TransactionGuide.endTurn ()V\lALOAD 4\lATHROW\l"];
+entry;
+exit;
+1274334510 -> 1984822003;
+1274334510 -> 350790003;
+802043108 -> 465425577;
+786650270 -> 1274334510;
+1984822003 -> 350790003;
+1824178544 -> 1274334510;
+719842853 -> 1824178544;
+350790003 -> 465425577;
+entry -> 2028036703;
+465425577 -> 2130504535;
+1499959996 -> 719842853;
+1148068032 -> 1499959996;
+1148068032 -> 719842853;
+2130504535 -> exit;
+2028036703 -> 1148068032;
+2028036703 -> 1058123217;
+719842853[fontcolor="purple", penwidth=3, color="purple"];
+2130504535[fontcolor="purple", penwidth=3, color="purple"];
+}

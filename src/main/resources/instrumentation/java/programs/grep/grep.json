@@ -1,0 +1,122 @@
+[
+  {
+    "region": {
+      "regionID": "4dc9371a-17ff-4356-9412-271ac04df750",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 124,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1836184214",
+      "endBlocksIDs": [
+        "1394208704"
+      ]
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "5f37638e-6967-4c5d-ab8c-ee4f111257ba",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 142,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "907561070",
+      "endBlocksIDs": [
+        "1369913459"
+      ]
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b4d2291b-aa9e-4dfe-a9f4-03a30f30573e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 106,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1368316340",
+      "endBlocksIDs": [
+        "552025665"
+      ]
+    },
+    "options": [
+      [
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "92339f0d-d144-4d19-881b-73b40421fc93",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 133,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1394208704",
+      "endBlocksIDs": [
+        "907561070"
+      ]
+    },
+    "options": [
+      [
+        "LINENUMBER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b299e78a-0c32-49a5-81ff-83fd91089338",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 115,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "552025665",
+      "endBlocksIDs": [
+        "1836184214"
+      ]
+    },
+    "options": [
+      [
+        "INVERTMATCH"
+      ]
+    ]
+  }
+]

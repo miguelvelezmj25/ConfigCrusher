@@ -9,10 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Featurewise extends Approach {
 
@@ -164,6 +161,11 @@ public class Featurewise extends Approach {
         writer.write(result.toString());
         writer.flush();
         writer.close();
+    }
+
+    @Override
+    public Map<Set<String>, Double> getLearnedModel(List<String> options) throws IOException {
+        return null;
     }
 
     public Set<PerformanceEntryStatistic> getFeaturewiseEntries(Set<PerformanceEntryStatistic> performanceEntries) {

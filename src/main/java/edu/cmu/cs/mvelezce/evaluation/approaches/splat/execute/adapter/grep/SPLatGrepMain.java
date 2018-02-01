@@ -25,24 +25,24 @@ public class SPLatGrepMain implements SPLatMain {
         splatConfigurations.add(configuration);
         String[] args = adapter.configurationAsMainArguments(configuration);
 
-        Main.splat(args, stack);
-
-        while(!stack.isEmpty()) {
-            String option = stack.peek();
-
-            if(configuration.contains(option)) {
-                configuration = new HashSet<>(configuration);
-                configuration.remove(option);
-                stack.pop();
-            }
-            else {
-                configuration = new HashSet<>(configuration);
-                configuration.add(option);
-                splatConfigurations.add(configuration);
-                args = adapter.configurationAsMainArguments(configuration);
-                Main.splat(args, stack);
-            }
-        }
+//        Main.splat(args, stack);
+//
+//        while(!stack.isEmpty()) {
+//            String option = stack.peek();
+//
+//            if(configuration.contains(option)) {
+//                configuration = new HashSet<>(configuration);
+//                configuration.remove(option);
+//                stack.pop();
+//            }
+//            else {
+//                configuration = new HashSet<>(configuration);
+//                configuration.add(option);
+//                splatConfigurations.add(configuration);
+//                args = adapter.configurationAsMainArguments(configuration);
+//                Main.splat(args, stack);
+//            }
+//        }
 
         return splatConfigurations;
     }

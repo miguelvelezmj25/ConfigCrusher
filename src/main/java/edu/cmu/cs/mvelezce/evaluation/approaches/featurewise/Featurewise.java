@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.featurewise;
 
+import edu.cmu.cs.mvelezce.Feature;
 import edu.cmu.cs.mvelezce.evaluation.Evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.Approach;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -113,9 +114,8 @@ public class Featurewise extends Approach {
     @Override
     public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
         Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
-        Set<String> optionsSet = this.getOptions(configurations);
-        List<String> options = new ArrayList<>();
-        options.addAll(optionsSet);
+        Set<String> optionsSet = Featurewise.getOptions(configurations);
+        List<String> options = new ArrayList<>(optionsSet);
 
         StringBuilder result = new StringBuilder();
 
@@ -187,8 +187,8 @@ public class Featurewise extends Approach {
         return featurewiseEntries;
     }
 
-    private Set<Set<String>> getFeaturewiseConfigurations(Set<Set<String>> configurations) {
-        Set<String> options = this.getOptions(configurations);
+    public static Set<Set<String>> getFeaturewiseConfigurations(Set<Set<String>> configurations) {
+        Set<String> options = Featurewise.getOptions(configurations);
         Set<Set<String>> featurewiseConfigurations = new HashSet<>();
 
         for(String option : options) {
@@ -201,7 +201,7 @@ public class Featurewise extends Approach {
         return featurewiseConfigurations;
     }
 
-    private Set<String> getOptions(Set<Set<String>> configurations) {
+    private static Set<String> getOptions(Set<Set<String>> configurations) {
         Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {

@@ -4,6 +4,8 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEx
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.Pairwise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
+import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
@@ -227,6 +229,50 @@ public class EvaluationTest {
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
+
+    @Test
+    public void runningExampleConfigCrusherSamplingTime() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    }
+
+    @Test
+    public void runningExampleFeaturewiseSamplingTime() throws Exception {
+        String programName = "running-example";
+
+        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+    }
+
+    @Test
+    public void runningExamplePairwiseSamplingTime() throws Exception {
+        String programName = "running-example";
+
+        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+    }
+
+    @Test
+    public void runningExampleSPLatSamplingTime() throws Exception {
+        String programName = "running-example";
+
+        SPLat splat = new SPLat(programName);
+        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+    }
+
 
     @Test
     public void runningExampleFeaturewiseGenerateCSVData() throws Exception {

@@ -254,6 +254,28 @@ public class ConfigCrusherExecutorTest {
     }
 
     @Test
+    public void grep() throws Exception {
+        String programName = "grep";
+        String entryPoint = "org.unix4j.grep.Main";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/grep/target/classes";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i5";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
+    @Test
     public void kanzi1() throws Exception {
         String programName = "kanzi";
         String entryPoint = "kanzi.Run";

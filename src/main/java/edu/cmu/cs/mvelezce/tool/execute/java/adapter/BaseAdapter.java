@@ -106,9 +106,9 @@ public abstract class BaseAdapter implements Adapter {
 //        commandList.add("-Xmn10G");
         commandList.add("-XX:+UseConcMarkSweepGC");
         commandList.add("-cp");
-//        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
+        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
 //        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + cp.toString() + ":" + this.directory);
-        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + KANZI_PATH + ":" + this.directory);
+//        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + KANZI_PATH + ":" + this.directory);
 //        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + PREVAYLER_PATH + ":" + this.directory);
         commandList.add(mainAdapter);
         commandList.add(this.programName);

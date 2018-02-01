@@ -145,15 +145,15 @@ public class Pairwise extends Approach {
             throw new RuntimeException("The terms and coefs files are not the same length");
         }
 
-        File formulaFile = new File(dataDir + "/" + Approach.FORMULA_FILE);
-        String formula = this.parseFile(formulaFile).get(0);
-        List<String> termsNotInFormula = this.removeTermsNoInFormula(rawTerms, formula);
+        File pValueFile = new File(dataDir + "/" + Approach.PVALUES_FILE);
+        List<String> pValues = this.parseFile(pValueFile);
+        List<String> significantTerms = this.removeTermsWithPValueGreaterThan(rawTerms, pValues, 0.05);
 
-        List<Set<String>> terms = this.parseTerms(termsNotInFormula, options);
+        List<Set<String>> terms = this.parseTerms(significantTerms, options);
 
         for(int i = 0; i < terms.size(); i++) {
             Set<String> term = terms.get(i);
-            String rawTerm = termsNotInFormula.get(i);
+            String rawTerm = significantTerms.get(i);
             int index = rawTerms.indexOf(rawTerm);
             String coef = coefs.get(index);
             learnedModel.put(term, Double.valueOf(coef));

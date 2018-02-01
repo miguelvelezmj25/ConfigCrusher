@@ -450,16 +450,36 @@ public class EvaluationTest {
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
         featurewise.generateCSVData(featurewiseEntries);
-//        String output = featurewise.execute(script);
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-//
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+    }
+
+    @Test
+    public void colorCounterFeaturewiseModel() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        List<String> options = ColorCounterAdapter.getColorCounterOptions();
+        Featurewise featurewise = new Featurewise(programName);
+        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
     }
 
     @Test
@@ -475,17 +495,36 @@ public class EvaluationTest {
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
         pairwise.generateCSVData(pairwiseEntries);
-//        String output = pairwise.execute(script);
-//
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-//
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+    }
+
+    @Test
+    public void colorCounterPairwiseModel() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        List<String> options = ColorCounterAdapter.getColorCounterOptions();
+        Pairwise pairwise = new Pairwise(programName);
+        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
     }
 
     @Test

@@ -221,6 +221,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void runningExampleBruteForceSamplingTime() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
     public void runningExampleFeaturewiseGenerateCSVData() throws Exception {
         String programName = "running-example";
 

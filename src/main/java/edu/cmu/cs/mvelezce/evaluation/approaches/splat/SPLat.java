@@ -203,7 +203,7 @@ public class SPLat {
         return splatEntries;
     }
 
-    private Set<Set<String>> getSPLatConfigurations(/*Set<Set<String>> configurations*/) {
+    public Set<Set<String>> getSPLatConfigurations(/*Set<Set<String>> configurations*/) {
         String[] args = new String[0];
         Compression compressor = new SPLatExecutor(programName);
         Set<Set<String>> configurationsToExecute = new HashSet<>();

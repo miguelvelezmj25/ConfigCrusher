@@ -233,21 +233,21 @@ public class Pairwise extends Approach {
         return pairwiseEntries;
     }
 
-    private Set<Set<String>> getPairwiseConfigurations(Set<Set<String>> allConfigurations) {
-        Set<String> options = this.getOptions(allConfigurations);
-        Set<List<String>> pairs = this.getPairs(options);
+    public static Set<Set<String>> getPairwiseConfigurations(Set<Set<String>> allConfigurations) {
+        Set<String> options = Pairwise.getOptions(allConfigurations);
+        Set<List<String>> pairs = Pairwise.getPairs(options);
 
         Set<Set<String>> pairwiseConfigurations = new HashSet<>();
 
         for(List<String> pair : pairs) {
-            Set<Set<String>> pairConfigurations = this.getConfigurations(pair);
+            Set<Set<String>> pairConfigurations = Pairwise.getConfigurations(pair);
             pairwiseConfigurations.addAll(pairConfigurations);
         }
 
         return pairwiseConfigurations;
     }
 
-    private Set<Set<String>> getConfigurations(List<String> pair) {
+    private static Set<Set<String>> getConfigurations(List<String> pair) {
         Set<Set<String>> configurations = new HashSet<>();
 
         Set<String> configuration = new HashSet<>();
@@ -271,7 +271,7 @@ public class Pairwise extends Approach {
         return configurations;
     }
 
-    private Set<List<String>> getPairs(Set<String> options) {
+    private static Set<List<String>> getPairs(Set<String> options) {
         List<String> optionsList = new ArrayList<>(options);
 
         Combinations combinations = new Combinations(options.size(), 2);
@@ -291,7 +291,7 @@ public class Pairwise extends Approach {
         return pairs;
     }
 
-    private Set<String> getOptions(Set<Set<String>> configurations) {
+    private static Set<String> getOptions(Set<Set<String>> configurations) {
         Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {

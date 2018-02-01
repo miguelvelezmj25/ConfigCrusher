@@ -32,6 +32,60 @@ public class Evaluation {
         this.programName = programName;
     }
 
+    public double getTotalSamplingTime(String approach, Set<Set<String>> configurations) throws IOException {
+        double time = 0.0;
+
+        String fileString = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
+                + Evaluation.BRUTE_FORCE + Evaluation.DOT_CSV;
+        File file = new File(fileString);
+
+        List<String> lines = this.parseFullFile(file);
+
+        for(String line : lines) {
+            if(!line.startsWith("true")) {
+                continue;
+            }
+
+            String[] entries = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+            String configString = entries[1];
+            configString = Evaluation.removeSpecialCharsFromConfig(configString);
+            Set<String> config = Evaluation.buildConfig(configString);
+
+            if(!configurations.contains(config)) {
+                continue;
+            }
+
+            Double exec = Double.valueOf(entries[2]);
+            time += exec;
+        }
+
+        return time;
+    }
+
+    private static Set<String> buildConfig(String configString) {
+        Set<String> config = new HashSet<>();
+
+        String[] options = configString.split(",");
+
+        for(int i = 0; i < options.length; i++) {
+            String option = options[i].trim();
+
+            if(!option.isEmpty()) {
+                config.add(option);
+            }
+        }
+
+        return config;
+    }
+
+    private static String removeSpecialCharsFromConfig(String s) {
+        s = s.replaceAll("\"", "");
+        s = s.replaceAll("\\[", "");
+        s = s.replaceAll("]", "");
+
+        return s;
+    }
+
     public double getTotalSamplingTime(String approach) throws IOException {
         double time = 0.0;
 

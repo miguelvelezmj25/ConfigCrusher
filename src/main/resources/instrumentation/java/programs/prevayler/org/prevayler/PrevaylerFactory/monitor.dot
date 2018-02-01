@@ -1,0 +1,17 @@
+digraph monitor {
+node [shape=record];
+2039034978 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lGOTO L2\l"];
+1480343916 [label="L2\lFRAME SAME1 org/prevayler/foundation/monitor/Monitor\lLDC \"c1b6ab00-c158-4853-b62f-7d2b8c0c1278\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+316897970 [label="L0\lLINENUMBER 395 L0\lLDC \"c1b6ab00-c158-4853-b62f-7d2b8c0c1278\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lIFNULL L1\l"];
+1928115997 [label="L1\lFRAME SAME\lNEW org/prevayler/foundation/monitor/SimpleMonitor\lDUP\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lINVOKESPECIAL org/prevayler/foundation/monitor/SimpleMonitor.\<init\> (Ljava/io/PrintStream;)V\l"];
+entry;
+exit;
+entry -> 316897970;
+2039034978 -> 1480343916;
+1480343916 -> exit;
+316897970 -> 2039034978;
+316897970 -> 1928115997;
+1928115997 -> 1480343916;
+1480343916[fontcolor="purple", penwidth=3, color="purple"];
+316897970[fontcolor="purple", penwidth=3, color="purple"];
+}

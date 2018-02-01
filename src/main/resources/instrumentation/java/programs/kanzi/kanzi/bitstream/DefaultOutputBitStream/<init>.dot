@@ -1,0 +1,26 @@
+digraph <init> {
+node [shape=record];
+197670501 [label="L0\lLINENUMBER 35 L0\lLDC \"018612d7-bc56-47ae-86c6-cba207c12f08\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 36 L1\lALOAD 1\lIFNONNULL L2\l"];
+1118220783 [label="L7\lLINENUMBER 45 L7\lNEW java/lang/IllegalArgumentException\lDUP\lLDC \"Invalid buffer size (must be at most 268435456)\"\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+737187137 [label="L4\lLINENUMBER 44 L4\lFRAME SAME\lILOAD 2\lLDC 268435456\lIF_ICMPLE L6\l"];
+2078761279 [label="L2\lLINENUMBER 40 L2\lFRAME FULL [kanzi/bitstream/DefaultOutputBitStream java/io/OutputStream I] []\lILOAD 2\lSIPUSH 1024\lIF_ICMPGE L4\l"];
+64380252 [label="L9\lLINENUMBER 49 L9\lNEW java/lang/IllegalArgumentException\lDUP\lLDC \"Invalid buffer size (must be a multiple of 8)\"\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1842576999 [label="L8\lLINENUMBER 52 L8\lFRAME SAME\lLDC \"018612d7-bc56-47ae-86c6-cba207c12f08\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.os : Ljava/io/OutputStream;\lL10\lLINENUMBER 53 L10\lALOAD 0\lILOAD 2\lNEWARRAY T_BYTE\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.buffer : [B\lL11\lLINENUMBER 54 L11\lALOAD 0\lBIPUSH 63\lPUTFIELD kanzi/bitstream/DefaultOutputBitStream.bitIndex : I\lL12\lLINENUMBER 55 L12\lRETURN\l"];
+1640097092 [label="L5\lLINENUMBER 41 L5\lNEW java/lang/IllegalArgumentException\lDUP\lLDC \"Invalid buffer size (must be at least 1024)\"\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+569347802 [label="L6\lLINENUMBER 48 L6\lFRAME SAME\lILOAD 2\lBIPUSH 7\lIAND\lIFEQ L8\l"];
+1977800985 [label="L3\lLINENUMBER 37 L3\lNEW java/lang/NullPointerException\lDUP\lLDC \"Invalid null output stream parameter\"\lINVOKESPECIAL java/lang/NullPointerException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+197670501 -> 2078761279;
+197670501 -> 1977800985;
+entry -> 197670501;
+737187137 -> 1118220783;
+737187137 -> 569347802;
+2078761279 -> 737187137;
+2078761279 -> 1640097092;
+1842576999 -> exit;
+569347802 -> 64380252;
+569347802 -> 1842576999;
+197670501[fontcolor="purple", penwidth=3, color="purple"];
+1842576999[fontcolor="purple", penwidth=3, color="purple"];
+}

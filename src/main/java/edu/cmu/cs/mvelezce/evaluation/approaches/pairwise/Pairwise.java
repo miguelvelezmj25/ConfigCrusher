@@ -6,7 +6,9 @@ import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.util.Combinations;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -126,6 +128,39 @@ public class Pairwise extends Approach {
 //        return outputDir;
 //    }
 
+    @Override
+    public Map<Set<String>, Double> getLearnedModel(List<String> options) throws IOException {
+        Map<Set<String>, Double> learnedModel = new HashMap<>();
+
+        String dataDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + Approach.DATA_DIR + "/"
+                + Evaluation.PAIR_WISE;
+
+        File termsFile = new File(dataDir + "/" + Approach.TERMS_FILE);
+        List<String> rawTerms = this.parseFile(termsFile);
+
+        File coefsFile = new File(dataDir + "/" + Approach.COEFS_FILE);
+        List<String> coefs = this.parseFile(coefsFile);
+
+        if(rawTerms.size() != coefs.size()) {
+            throw new RuntimeException("The terms and coefs files are not the same length");
+        }
+
+        File pValueFile = new File(dataDir + "/" + Approach.PVALUES_FILE);
+        List<String> pValues = this.parseFile(pValueFile);
+        List<String> significantTerms = this.removeTermsWithPValueGreaterThan(rawTerms, pValues, 0.05);
+
+        List<Set<String>> terms = this.parseTerms(significantTerms, options);
+
+        for(int i = 0; i < terms.size(); i++) {
+            Set<String> term = terms.get(i);
+            String rawTerm = significantTerms.get(i);
+            int index = rawTerms.indexOf(rawTerm);
+            String coef = coefs.get(index);
+            learnedModel.put(term, Double.valueOf(coef));
+        }
+
+        return learnedModel;
+    }
 
     @Override
     public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
@@ -152,8 +187,7 @@ public class Pairwise extends Approach {
             for(String option : options) {
                 if(configuration.contains(option)) {
                     result.append("1");
-                }
-                else {
+                } else {
                     result.append("0");
                 }
 
@@ -199,21 +233,21 @@ public class Pairwise extends Approach {
         return pairwiseEntries;
     }
 
-    private Set<Set<String>> getPairwiseConfigurations(Set<Set<String>> allConfigurations) {
-        Set<String> options = this.getOptions(allConfigurations);
-        Set<List<String>> pairs = this.getPairs(options);
+    public static Set<Set<String>> getPairwiseConfigurations(Set<Set<String>> allConfigurations) {
+        Set<String> options = Pairwise.getOptions(allConfigurations);
+        Set<List<String>> pairs = Pairwise.getPairs(options);
 
         Set<Set<String>> pairwiseConfigurations = new HashSet<>();
 
         for(List<String> pair : pairs) {
-            Set<Set<String>> pairConfigurations = this.getConfigurations(pair);
+            Set<Set<String>> pairConfigurations = Pairwise.getConfigurations(pair);
             pairwiseConfigurations.addAll(pairConfigurations);
         }
 
         return pairwiseConfigurations;
     }
 
-    private Set<Set<String>> getConfigurations(List<String> pair) {
+    private static Set<Set<String>> getConfigurations(List<String> pair) {
         Set<Set<String>> configurations = new HashSet<>();
 
         Set<String> configuration = new HashSet<>();
@@ -237,7 +271,7 @@ public class Pairwise extends Approach {
         return configurations;
     }
 
-    private Set<List<String>> getPairs(Set<String> options) {
+    private static Set<List<String>> getPairs(Set<String> options) {
         List<String> optionsList = new ArrayList<>(options);
 
         Combinations combinations = new Combinations(options.size(), 2);
@@ -257,7 +291,7 @@ public class Pairwise extends Approach {
         return pairs;
     }
 
-    private Set<String> getOptions(Set<Set<String>> configurations) {
+    private static Set<String> getOptions(Set<Set<String>> configurations) {
         Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {

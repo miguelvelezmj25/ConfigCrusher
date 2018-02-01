@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
-import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
@@ -8,9 +7,9 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.text.DecimalFormat;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 public class Evaluation {
@@ -31,6 +30,46 @@ public class Evaluation {
 
     public Evaluation(String programName) {
         this.programName = programName;
+    }
+
+    public double getTotalSamplingTime(String approach) throws IOException {
+        double time = 0.0;
+
+        String fileString = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
+                + approach + Evaluation.DOT_CSV;
+        File file = new File(fileString);
+
+        List<String> lines = this.parseFullFile(file);
+
+        for(String line : lines) {
+            if(!line.startsWith("true")) {
+                continue;
+            }
+
+            String[] entries = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+            Double exec = Double.valueOf(entries[2]);
+            time += exec;
+        }
+
+        return time;
+    }
+
+    private List<String> parseFullFile(File file) throws IOException {
+        FileReader fileReader = new FileReader(file);
+        BufferedReader reader = new BufferedReader(fileReader);
+        String line = "";
+
+        List<String> lines = new ArrayList<>();
+
+        while((line = reader.readLine()) != null) {
+            if(line.isEmpty()) {
+                continue;
+            }
+
+            lines.add(line.trim());
+        }
+
+        return lines;
     }
 
     public void writeConfigurationToPerformance(String approach, Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
@@ -100,8 +139,7 @@ public class Evaluation {
 
             if(performanceStat != null) {
                 result.append(true);
-            }
-            else {
+            } else {
                 result.append(false);
             }
 

@@ -1,0 +1,36 @@
+digraph dispose {
+node [shape=record];
+1599078512 [label="L2\lLINENUMBER 198 L2\lFRAME SAME1 java/io/IOException\lASTORE 1\l"];
+437028769 [label="L7\lLINENUMBER 204 L7\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.cos : Lkanzi/io/CompressedOutputStream;\lINVOKEVIRTUAL kanzi/io/CompressedOutputStream.close ()V\l"];
+1288465094 [label="L8\lLINENUMBER 211 L8\lFRAME SAME\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.pool : Ljava/util/concurrent/ExecutorService;\lIFNULL L11\l"];
+1898404031 [label="L12\lLINENUMBER 212 L12\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.pool : Ljava/util/concurrent/ExecutorService;\lINVOKEINTERFACE java/util/concurrent/ExecutorService.shutdown ()V\l"];
+331395247 [label="L5\lLINENUMBER 206 L5\lFRAME SAME1 java/io/IOException\lASTORE 1\lL9\lLINENUMBER 207 L9\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Compression failure: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/io/IOException.getMessage ()Ljava/lang/String;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL10\lLINENUMBER 208 L10\lBIPUSH -12\lINVOKESTATIC java/lang/System.exit (I)V\l"];
+185013542 [label="L4\lLINENUMBER 209 L4\lFRAME SAME\lGOTO L8\l"];
+1586660337 [label="ALOAD 0\lGETFIELD kanzi/app/BlockCompressor.ownPool : Z\lICONST_1\lIF_ICMPNE L11\l"];
+78251313 [label="L1\lLINENUMBER 200 L1\lFRAME SAME\lGOTO L3\l"];
+978680302 [label="L6\lLINENUMBER 196 L6\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.is : Ljava/io/InputStream;\lINVOKEVIRTUAL java/io/InputStream.close ()V\l"];
+1389402318 [label="L3\lLINENUMBER 203 L3\lFRAME SAME\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.cos : Lkanzi/io/CompressedOutputStream;\lIFNULL L4\l"];
+542980564 [label="L11\lLINENUMBER 214 L11\lFRAME SAME\lLDC \"4f4b344c-c165-4f06-9cab-07d96df99a99\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1060521851 [label="TRYCATCHBLOCK L0 L1 L2 java/io/IOException\lTRYCATCHBLOCK L3 L4 L5 java/io/IOException\lL0\lLINENUMBER 195 L0\lLDC \"4f4b344c-c165-4f06-9cab-07d96df99a99\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD kanzi/app/BlockCompressor.is : Ljava/io/InputStream;\lIFNULL L1\l"];
+entry;
+exit;
+1599078512 -> 1389402318;
+437028769 -> 185013542;
+1288465094 -> 1586660337;
+1288465094 -> 542980564;
+1898404031 -> 542980564;
+331395247 -> 1288465094;
+1586660337 -> 1898404031;
+1586660337 -> 542980564;
+978680302 -> 78251313;
+1389402318 -> 437028769;
+1389402318 -> 185013542;
+1060521851 -> 78251313;
+1060521851 -> 978680302;
+entry -> 1060521851;
+185013542 -> 1288465094;
+78251313 -> 1389402318;
+542980564 -> exit;
+542980564[fontcolor="purple", penwidth=3, color="purple"];
+1060521851[fontcolor="purple", penwidth=3, color="purple"];
+}

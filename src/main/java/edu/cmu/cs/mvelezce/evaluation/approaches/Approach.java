@@ -14,7 +14,7 @@ public abstract class Approach {
     public static final String DATA_DIR = "/data";
     public static final String COEFS_FILE = "coefs.txt";
     public static final String TERMS_FILE = "terms.txt";
-    public static final String FORMULA_FILE = "formula.txt";
+    public static final String PVALUES_FILE = "pValues.txt";
     public static final String INTERCEPT = "(Intercept)";
     public static final String TERM_PREFIX = "x";
     public static final String TERM_DELIMETER = ":";
@@ -77,27 +77,17 @@ public abstract class Approach {
         return lines;
     }
 
-    public List<String> removeTermsNoInFormula(List<String> rawTerms, String formula) {
+    public List<String> removeTermsWithPValueGreaterThan(List<String> rawTerms, List<String> pValues, double pValueLimit) {
         List<String> res = new ArrayList<>();
-        String[] formulaTerms = formula.split(" ");
 
-        for(int i = 0; i < formulaTerms.length; i++) {
-            formulaTerms[i] = formulaTerms[i].trim();
-        }
+        for(int i = 0; i < rawTerms.size(); i++) {
+            String pValueString = pValues.get(i).trim();
+            double pValue = Double.valueOf(pValueString);
 
-        for(int i = 0; i < formulaTerms.length; i++) {
-            formulaTerms[i] = formulaTerms[i].replace("*", ":");
-        }
-
-        Set<String> processedFormulaTerms = new HashSet<>(Arrays.asList(formulaTerms));
-
-        for(String rawTerm : rawTerms) {
-            if(processedFormulaTerms.contains(rawTerm)) {
-                res.add(rawTerm);
+            if(pValue <= pValueLimit) {
+                res.add(rawTerms.get(i));
             }
         }
-
-        res.add(Approach.INTERCEPT);
 
         return res;
     }

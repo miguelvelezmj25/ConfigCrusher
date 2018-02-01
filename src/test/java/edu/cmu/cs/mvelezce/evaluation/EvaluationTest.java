@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
+import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.Pairwise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
@@ -287,17 +288,36 @@ public class EvaluationTest {
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
         featurewise.generateCSVData(featurewiseEntries);
-////        String output = featurewise.execute(script);
-//
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-//
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+    }
+
+    @Test
+    public void runningExampleFeaturewiseModel() throws Exception {
+        String programName = "running-example";
+
+        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
+        Featurewise featurewise = new Featurewise(programName);
+        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
     }
 
     @Test

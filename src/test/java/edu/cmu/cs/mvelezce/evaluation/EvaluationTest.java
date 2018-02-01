@@ -816,6 +816,57 @@ public class EvaluationTest {
     }
 
     @Test
+    public void optimizerFeaturewiseSamplingTime() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        List<String> options = OptimizerAdapter.getOptimizerOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+    }
+
+    @Test
+    public void optimizerPairwiseSamplingTime() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        List<String> options = OptimizerAdapter.getOptimizerOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+    }
+
+    @Test
+    public void optimizerSPLatSamplingTime() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        SPLat splat = new SPLat(programName);
+        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+    }
+
+    @Test
+    public void optimizerBruteForceSamplingTime() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
+    public void optimizerConfigCrusherSamplingTime() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    }
+
+    @Test
     public void prevaylerConfigCrusher() throws Exception {
         String programName = "prevayler";
 

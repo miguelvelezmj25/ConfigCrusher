@@ -469,6 +469,57 @@ public class EvaluationTest {
     }
 
     @Test
+    public void colorCounterFeaturewiseSamplingTime() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        List<String> options = ColorCounterAdapter.getColorCounterOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+    }
+
+    @Test
+    public void colorCounterPairwiseSamplingTime() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        List<String> options = ColorCounterAdapter.getColorCounterOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+    }
+
+    @Test
+    public void colorCounterSPLatSamplingTime() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        SPLat splat = new SPLat(programName);
+        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+    }
+
+    @Test
+    public void colorCounterBruteForceSamplingTime() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
+    public void colorCounterConfigCrusherSamplingTime() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    }
+
+    @Test
     public void optimizerBruteForce() throws Exception {
         String programName = "pngtasticOptimizer";
 

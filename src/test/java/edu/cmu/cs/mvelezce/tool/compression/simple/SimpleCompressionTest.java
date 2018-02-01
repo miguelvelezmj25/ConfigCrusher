@@ -728,11 +728,11 @@ public class SimpleCompressionTest {
         String programName = "kanzi";
 
         // Program arguments
-//        String[] args = new String[0];
-
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+        String[] args = new String[0];
+//
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
 
         StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);

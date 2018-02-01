@@ -256,7 +256,7 @@ public class Evaluation {
 
             String[] entries = strLine.split(",");
             double performance1 = Double.valueOf(entries[entries.length - 2]);
-//            performance1 = Math.max(0, performance1);
+            performance1 = Math.max(0, performance1);
             result.append(performance1);
             result.append(",");
             result.append(Double.valueOf(entries[entries.length - 1]));

@@ -2,11 +2,8 @@ package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
-import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.Pairwise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.model.SPLatPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
@@ -27,7 +24,10 @@ import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerforman
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class EvaluationTest {
     @Test
@@ -259,17 +259,36 @@ public class EvaluationTest {
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
         pairwise.generateCSVData(pairwiseEntries);
-////        String output = pairwise.execute(script);
-//
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-//
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+    }
+
+    @Test
+    public void runningExamplePairwiseModel() throws Exception {
+        String programName = "running-example";
+
+        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
+        Pairwise pairwise = new Pairwise(programName);
+        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
     }
 
 //    @Test

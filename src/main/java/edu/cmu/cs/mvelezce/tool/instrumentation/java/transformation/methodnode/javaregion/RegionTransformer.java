@@ -884,6 +884,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 JavaRegion region = blocksToRegions.get(block);
 
                 if(region != null) {
+                    System.out.println(graph.toDotString("Error"));
+                    System.out.println(block.getID());
                     throw new RuntimeException("The region is not null");
                 }
 

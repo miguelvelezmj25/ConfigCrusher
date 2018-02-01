@@ -17,6 +17,10 @@ fileID = fopen('../../../../../../../../resources/evaluation/programs/java/runni
 fprintf(fileID, '%10.2f\n', coefs)
 fclose(fileID);
 
+pValues = model.Coefficients.pValue
+fileID = fopen('../../../../../../../../resources/evaluation/programs/java/running-example/data/feature_wise/pValues.txt', 'w');
+fprintf(fileID, '%3.2f\n', pValues)
+fclose(fileID);
 
 % pair_wise
 
@@ -35,4 +39,9 @@ fclose(fileID);
 coefs = model.Coefficients.Estimate;
 fileID = fopen('../../../../../../../../resources/evaluation/programs/java/running-example/data/pair_wise/coefs.txt', 'w');
 fprintf(fileID, '%10.2f\n', coefs)
+fclose(fileID);
+
+pValues = model.Coefficients.pValue
+fileID = fopen('../../../../../../../../resources/evaluation/programs/java/running-example/data/pair_wise/pValues.txt', 'w');
+fprintf(fileID, '%3.2f\n', pValues)
 fclose(fileID);

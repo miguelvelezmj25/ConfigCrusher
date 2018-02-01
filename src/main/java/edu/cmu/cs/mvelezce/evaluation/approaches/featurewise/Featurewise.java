@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.featurewise;
 
+import edu.cmu.cs.mvelezce.Feature;
 import edu.cmu.cs.mvelezce.evaluation.Evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.Approach;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -9,10 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Featurewise extends Approach {
 
@@ -116,9 +114,8 @@ public class Featurewise extends Approach {
     @Override
     public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
         Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
-        Set<String> optionsSet = this.getOptions(configurations);
-        List<String> options = new ArrayList<>();
-        options.addAll(optionsSet);
+        Set<String> optionsSet = Featurewise.getOptions(configurations);
+        List<String> options = new ArrayList<>(optionsSet);
 
         StringBuilder result = new StringBuilder();
 
@@ -166,6 +163,40 @@ public class Featurewise extends Approach {
         writer.close();
     }
 
+    @Override
+    public Map<Set<String>, Double> getLearnedModel(List<String> options) throws IOException {
+        Map<Set<String>, Double> learnedModel = new HashMap<>();
+
+        String dataDir = Evaluation.DIRECTORY + "/" + this.getProgramName() + Approach.DATA_DIR + "/"
+                + Evaluation.FEATURE_WISE;
+
+        File termsFile = new File(dataDir + "/" + Approach.TERMS_FILE);
+        List<String> rawTerms = this.parseFile(termsFile);
+
+        File coefsFile = new File(dataDir + "/" + Approach.COEFS_FILE);
+        List<String> coefs = this.parseFile(coefsFile);
+
+        if(rawTerms.size() != coefs.size()) {
+            throw new RuntimeException("The terms and coefs files are not the same length");
+        }
+
+        File pValueFile = new File(dataDir + "/" + Approach.PVALUES_FILE);
+        List<String> pValues = this.parseFile(pValueFile);
+        List<String> significantTerms = this.removeTermsWithPValueGreaterThan(rawTerms, pValues, 0.05);
+
+        List<Set<String>> terms = this.parseTerms(significantTerms, options);
+
+        for(int i = 0; i < terms.size(); i++) {
+            Set<String> term = terms.get(i);
+            String rawTerm = significantTerms.get(i);
+            int index = rawTerms.indexOf(rawTerm);
+            String coef = coefs.get(index);
+            learnedModel.put(term, Double.valueOf(coef));
+        }
+
+        return learnedModel;
+    }
+
     public Set<PerformanceEntryStatistic> getFeaturewiseEntries(Set<PerformanceEntryStatistic> performanceEntries) {
         Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
         Set<Set<String>> featurewiseConfigurations = this.getFeaturewiseConfigurations(configurations);
@@ -185,8 +216,8 @@ public class Featurewise extends Approach {
         return featurewiseEntries;
     }
 
-    private Set<Set<String>> getFeaturewiseConfigurations(Set<Set<String>> configurations) {
-        Set<String> options = this.getOptions(configurations);
+    public static Set<Set<String>> getFeaturewiseConfigurations(Set<Set<String>> configurations) {
+        Set<String> options = Featurewise.getOptions(configurations);
         Set<Set<String>> featurewiseConfigurations = new HashSet<>();
 
         for(String option : options) {
@@ -199,7 +230,7 @@ public class Featurewise extends Approach {
         return featurewiseConfigurations;
     }
 
-    private Set<String> getOptions(Set<Set<String>> configurations) {
+    private static Set<String> getOptions(Set<Set<String>> configurations) {
         Set<String> options = new HashSet<>();
 
         for(Set<String> configuration : configurations) {

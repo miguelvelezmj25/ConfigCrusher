@@ -1,0 +1,21 @@
+digraph main {
+node [shape=record];
+308103108 [label="L10\lLINENUMBER 35 L10\lFRAME SAME\lLDC \"06f93ba1-ea74-4330-8f63-ddfca37628e9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Z)V\lL12\lLINENUMBER 36 L12\lRETURN\l"];
+1651318806 [label="L0\lLINENUMBER 12 L0\lLDC \"3e5a0929-92bb-4089-8e77-75f59b1db9dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 14 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lPUTSTATIC edu/cmu/cs/mvelezce/Regions25.A : Z\lL2\lLINENUMBER 15 L2\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionB (Z)Z\lPUTSTATIC edu/cmu/cs/mvelezce/Regions25.B : Z\lL3\lLINENUMBER 17 L3\lICONST_0\lISTORE 1\lL4\lLINENUMBER 18 L4\lICONST_0\lISTORE 2\lL5\lLINENUMBER 20 L5\lGETSTATIC edu/cmu/cs/mvelezce/Regions25.A : Z\lIFEQ L6\l"];
+760878472 [label="L6\lLINENUMBER 28 L6\lFRAME APPEND [I I]\lLDC \"3e5a0929-92bb-4089-8e77-75f59b1db9dc\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"06f93ba1-ea74-4330-8f63-ddfca37628e9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL8\lLINENUMBER 29 L8\lILOAD 1\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions25.moo (Z)V\lL9\lLINENUMBER 31 L9\lGETSTATIC edu/cmu/cs/mvelezce/Regions25.B : Z\lIFEQ L10\l"];
+1326541986 [label="L7\lLINENUMBER 21 L7\lICONST_1\lISTORE 1\l"];
+423344137 [label="L11\lLINENUMBER 32 L11\lICONST_0\lISTORE 2\l"];
+entry;
+exit;
+entry -> 1651318806;
+308103108 -> exit;
+1651318806 -> 760878472;
+1651318806 -> 1326541986;
+760878472 -> 308103108;
+760878472 -> 423344137;
+1326541986 -> 760878472;
+423344137 -> 308103108;
+308103108[fontcolor="purple", penwidth=3, color="purple"];
+1651318806[fontcolor="purple", penwidth=3, color="purple"];
+760878472[fontcolor="purple", penwidth=3, color="purple"];
+}

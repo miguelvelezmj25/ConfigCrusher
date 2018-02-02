@@ -1,0 +1,15 @@
+digraph moo {
+node [shape=record];
+210737063 [label="L3\lLINENUMBER 42 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"4\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1354314579 [label="L0\lLINENUMBER 39 L0\lLDC \"271bdc6a-209d-4f46-b2dc-f7aecd2ea992\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"3\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 41 L1\lILOAD 0\lIFEQ L2\l"];
+1143499107 [label="L2\lLINENUMBER 45 L2\lFRAME SAME\lLDC \"271bdc6a-209d-4f46-b2dc-f7aecd2ea992\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"5\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL4\lLINENUMBER 52 L4\lRETURN\l"];
+entry;
+exit;
+entry -> 1354314579;
+210737063 -> 1143499107;
+1354314579 -> 210737063;
+1354314579 -> 1143499107;
+1143499107 -> exit;
+1354314579[fontcolor="purple", penwidth=3, color="purple"];
+1143499107[fontcolor="purple", penwidth=3, color="purple"];
+}

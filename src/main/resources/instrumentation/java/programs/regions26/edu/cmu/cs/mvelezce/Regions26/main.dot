@@ -1,0 +1,15 @@
+digraph main {
+node [shape=record];
+234287515 [label="L4\lLINENUMBER 21 L4\lFRAME APPEND [I]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL6\lLINENUMBER 22 L6\lILOAD 1\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions26.moo (Z)V\lL7\lLINENUMBER 24 L7\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"2\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL8\lLINENUMBER 25 L8\lLDC \"a46b6e7a-c436-4ea8-949d-9b0948a805d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+199907649 [label="L0\lLINENUMBER 11 L0\lLDC \"a46b6e7a-c436-4ea8-949d-9b0948a805d2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Sink.init ()V\lL1\lLINENUMBER 13 L1\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/option/Source.getOptionA (Z)Z\lPUTSTATIC edu/cmu/cs/mvelezce/Regions26.A : Z\lL2\lLINENUMBER 15 L2\lICONST_0\lISTORE 1\lL3\lLINENUMBER 17 L3\lGETSTATIC edu/cmu/cs/mvelezce/Regions26.A : Z\lIFEQ L4\l"];
+1837377655 [label="L5\lLINENUMBER 18 L5\lICONST_1\lISTORE 1\l"];
+entry;
+exit;
+entry -> 199907649;
+234287515 -> exit;
+199907649 -> 234287515;
+199907649 -> 1837377655;
+1837377655 -> 234287515;
+234287515[fontcolor="purple", penwidth=3, color="purple"];
+199907649[fontcolor="purple", penwidth=3, color="purple"];
+}

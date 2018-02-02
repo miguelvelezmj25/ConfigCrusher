@@ -1,0 +1,14 @@
+{
+  "baseTime": 0,
+  "baseTimeHumanReadable": 1.01,
+  "regionsToPerformanceTables": {
+    "Region{regionID='program', startTime=-1, endTime=-1, duration=-1}": {
+      "[A]": 2000000000
+    }
+  },
+  "regionsToPerformanceTablesHumanReadable": {
+    "Region{regionID='program', startTime=-1, endTime=-1, duration=-1}": {
+      "[A]": 2.0
+    }
+  }
+}

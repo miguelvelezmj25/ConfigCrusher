@@ -1188,6 +1188,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void prevaylerConfigCrusherSamplingTime() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    }
+
+    @Test
     public void regions12ConfigCrusher() throws Exception {
         String programName = "regions12";
 

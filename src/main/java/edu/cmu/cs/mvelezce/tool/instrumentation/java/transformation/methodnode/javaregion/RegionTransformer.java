@@ -360,6 +360,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             Set<Set<String>> newOptionSet = new HashSet<>();
             newOptionSet.add(decision);
+
+//            this.endRegionBlocksWithReturn.add(callerBlock);
             this.regionsToOptionSet.put(newRegion, newOptionSet);
 
             methods.add(edge.src());
@@ -808,7 +810,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.regionsToOptionSet.put(newRegion, newOptionSet);
 
             this.debugBlocksAndRegions(methodNode);
-//            this.debugBlockDecisions(methodNode);
+            this.debugBlockDecisions(methodNode);
+            System.out.println("");
         }
     }
 
@@ -1061,10 +1064,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             while(ipd != beta && (blockDecision.equals(ipdDecision) || blockDecision.containsAll(ipdDecision))) {
                 MethodBlock temp = graph.getImmediatePostDominator(ipd);
 
-                // Optimization
-                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
-                    break;
-                }
+//                // Optimization
+//                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
+//                    break;
+//                }
 
                 ipd = temp;
                 ipdRegion = blocksToRegions.get(ipd);

@@ -128,6 +128,6 @@ measured,configuration,pair_wise,pair_wise_std,brute_force,brute_force_std,absol
 "false","[FORCE, BLOCKSIZE, TRANSFORM]",0.798,0.0,0.727,0.005,0.071,0.098,0.005
 "false","[CHECKSUM, TRANSFORM, VERBOSE, ENTROPY]",0.324,0.0,0.33,0.006,0.006,0.018,0
 
-MSE: 0.517
-RMSE: 0.719
-MAPE: 2.846
+MSE: 0.897
+RMSE: 0.947
+MAPE: 1.188

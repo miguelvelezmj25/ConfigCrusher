@@ -202,8 +202,8 @@ public class ConfigCrusherExecutorTest {
         n.add("FILEAGETHRESHOLD");
 //        n.add("DEEPCOPY");
 //        n.add("MONITOR");
-        n.add("DISKSYNC");
-//        n.add("JOURNALSERIALIZER");
+//        n.add("DISKSYNC");
+        n.add("SNAPSHOTSERIALIZER");
 //        n.add("CLOCK");
         configurations.add(n);
 

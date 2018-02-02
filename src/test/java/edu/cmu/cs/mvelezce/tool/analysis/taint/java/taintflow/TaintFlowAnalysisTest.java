@@ -359,6 +359,32 @@ public class TaintFlowAnalysisTest {
     }
 
     @Test
+    public void regions25() throws Exception {
+        String systemName = "regions25";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
+    public void regions26() throws Exception {
+        String systemName = "regions26";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
     public void prevayler() throws Exception {
         String systemName = "prevayler";
 

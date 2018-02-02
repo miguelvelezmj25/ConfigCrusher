@@ -5,7 +5,10 @@ import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.find.FindAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.junit.Test;
@@ -146,7 +149,7 @@ public class BruteForceExecutorTest {
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/target/classes";
         String entryPoint = "org.prevayler.demos.demo1.PrimeNumbers";
 
-        Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
+        Set<String> options = new HashSet<>(PrevaylerAdapter.getPrevaylerOptions());
         Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
         System.out.println("Configurations to sample: " + configurations.size());
 
@@ -160,12 +163,40 @@ public class BruteForceExecutorTest {
     }
 
     @Test
+    public void prevayler1() throws IOException, InterruptedException {
+        String programName = "prevayler";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/target/classes";
+        String entryPoint = "org.prevayler.demos.demo1.PrimeNumbers";
+
+        Set<String> options = new HashSet<>(PrevaylerAdapter.getPrevaylerOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+
+        configurations.clear();
+        Set<String> n = new HashSet<>();
+        n.add("FILEAGETHRESHOLD");
+//        n.add("DEEPCOPY");
+//        n.add("MONITOR");
+//        n.add("DISKSYNC");
+        n.add("SNAPSHOTSERIALIZER");
+//        n.add("CLOCK");
+        configurations.add(n);
+
+        String[] args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
+    @Test
     public void kanzi() throws IOException, InterruptedException {
         String programName = "kanzi";
         String entryPoint = "kanzi.Run";
         String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/kanzi/target/classes";
 
-        Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
+        Set<String> options = new HashSet<>(KanziAdapter.getKanziOptions());
         Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
         System.out.println("Configurations to sample: " + configurations.size());
 
@@ -233,7 +264,7 @@ public class BruteForceExecutorTest {
 
         String entryPoint = "org.unix4j.grep.Main";
 
-        Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
+        Set<String> options = new HashSet<>(GrepAdapter.getGrepOptions());
         Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
         System.out.println("Configurations to sample: " + configurations.size());
 

@@ -174,11 +174,20 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         for(ClassNode classNode : classNodes) {
 //            System.out.println("Setting blocks to decisions in class " + classNode.name);
 
+//            if(classNode.name.contains("Regions25")) {
+//                System.out.println();
+//            }
+
             for(MethodNode methodNode : classNode.methods) {
 //                System.out.println("Setting blocks to decisions in method " + methodNode.name);
                 List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
                 LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = this.matchBlocksToRegion(methodNode, regionsInMethod);
                 this.methodsToBlocksDecisions.put(methodNode, blocksToRegionSet);
+
+//                if(classNode.name.contains("Regions25")) {
+//                    this.debugBlockDecisions(methodNode);
+//                    System.out.println();
+//                }
             }
         }
     }
@@ -351,6 +360,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             Set<Set<String>> newOptionSet = new HashSet<>();
             newOptionSet.add(decision);
+
+//            this.endRegionBlocksWithReturn.add(callerBlock);
             this.regionsToOptionSet.put(newRegion, newOptionSet);
 
             methods.add(edge.src());
@@ -799,7 +810,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             this.regionsToOptionSet.put(newRegion, newOptionSet);
 
             this.debugBlocksAndRegions(methodNode);
-//            this.debugBlockDecisions(methodNode);
+            this.debugBlockDecisions(methodNode);
+            System.out.println("");
         }
     }
 
@@ -941,13 +953,13 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         MethodGraph graph = this.getMethodGraph(methodNode);
         Set<MethodBlock> blocks = graph.getBlocks();
 
-        if(methodNode.name.equals("init")) {
-            System.out.println();
-        }
-
-        if(methodNode.name.equals("<init>")) {
-            System.out.println();
-        }
+//        if(methodNode.name.equals("init")) {
+//            System.out.println();
+//        }
+//
+//        if(methodNode.name.equals("<init>")) {
+//            System.out.println();
+//        }
 
         StringBuilder dotString = new StringBuilder("digraph " + methodNode.name + " {\n");
         dotString.append("node [shape=record];\n");
@@ -988,6 +1000,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         dotString.append("}");
 
         System.out.println(dotString);
+//        System.out.println();
     }
 
     private void debugBlocksAndRegions(MethodNode methodNode) {
@@ -1040,6 +1053,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             region.setStartMethodBlock(block);
             Set<String> blockDecision = this.getDecision(region);
 
+//            if(blockDecision.contains("B")) {
+//                System.out.println();
+//            }
+
             MethodBlock ipd = graph.getImmediatePostDominator(block);
             JavaRegion ipdRegion = blocksToRegions.get(ipd);
             Set<String> ipdDecision = this.getDecision(ipdRegion);
@@ -1047,10 +1064,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             while(ipd != beta && (blockDecision.equals(ipdDecision) || blockDecision.containsAll(ipdDecision))) {
                 MethodBlock temp = graph.getImmediatePostDominator(ipd);
 
-                // Optimization
-                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
-                    break;
-                }
+//                // Optimization
+//                if(temp == beta & ipd.getSuccessors().size() == 1 && ipd.getSuccessors().iterator().next() == beta) {
+//                    break;
+//                }
 
                 ipd = temp;
                 ipdRegion = blocksToRegions.get(ipd);
@@ -1089,9 +1106,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             // If the ends are connected to the exit node, we want to analyze them
             for(MethodBlock e : ends) {
+                JavaRegion eRegion = blocksToRegions.get(e);
+                Set<String> eDecision = this.getDecision(eRegion);
                 ipd = graph.getImmediatePostDominator(e);
 
-                if(ipd == beta & e.getSuccessors().size() == 1 && e.getSuccessors().iterator().next() == beta) {
+                if(ipd == beta & e.getSuccessors().size() == 1 && e.getSuccessors().iterator().next() == beta
+                        && (blockDecision.equals(eDecision) || blockDecision.containsAll(eDecision))) {
                     reachables.add(e);
                 }
             }

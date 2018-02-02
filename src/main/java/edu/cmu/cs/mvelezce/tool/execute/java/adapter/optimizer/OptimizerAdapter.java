@@ -18,7 +18,7 @@ public class OptimizerAdapter extends BaseAdapter {
     }
 
     public static List<String> getOptimizerOptions() {
-        String[] options = {"REMOVEGAMMA", "COMPRESSIONLEVEL", "COMPRESSOR", "ITERATIONS", "LOGLEVEL"};
+        String[] options = {"COMPRESSOR", "ITERATIONS", "LOGLEVEL", "COMPRESSIONLEVEL", "REMOVEGAMMA"};
 
         return Arrays.asList(options);
     }

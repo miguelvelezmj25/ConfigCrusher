@@ -1,17 +1,17 @@
 digraph clock {
 node [shape=record];
-302371874 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
-570022263 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"7a17b9d7-15e8-4b4b-b739-dee633effcef\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
-482477974 [label="L0\lLINENUMBER 155 L0\lLDC \"7a17b9d7-15e8-4b4b-b739-dee633effcef\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
-320532765 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
+997608165 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
+1604002497 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+245583342 [label="L0\lLINENUMBER 155 L0\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
+1314589328 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
 entry;
 exit;
-entry -> 482477974;
-302371874 -> 570022263;
-570022263 -> exit;
-482477974 -> 302371874;
-482477974 -> 320532765;
-320532765 -> 570022263;
-570022263[fontcolor="purple", penwidth=3, color="purple"];
-482477974[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 245583342;
+997608165 -> 1604002497;
+1604002497 -> exit;
+245583342 -> 997608165;
+245583342 -> 1314589328;
+1314589328 -> 1604002497;
+1604002497[fontcolor="purple", penwidth=3, color="purple"];
+245583342[fontcolor="purple", penwidth=3, color="purple"];
 }

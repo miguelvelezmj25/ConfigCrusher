@@ -401,7 +401,7 @@ public class Evaluation {
             result.append(decimalFormat.format(squaredError));
             result.append("\n");
 
-            if(!measured) {
+            if(!measured && performance2 >= 1.0) {
                 se += squaredError;
                 ape += relativeError;
                 testCount++;

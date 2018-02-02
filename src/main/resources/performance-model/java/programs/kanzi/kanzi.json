@@ -1,0 +1,524 @@
+{
+  "baseTime": 53918720,
+  "baseTimeHumanReadable": 0.054,
+  "regionsToPerformanceTables": {
+    "Region{regionID='018612d7-bc56-47ae-86c6-cba207c12f08', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 17198,
+      "[FORCE]": 19204,
+      "[BLOCKSIZE]": 20150,
+      "[FORCE, BLOCKSIZE]": 17368
+    },
+    "Region{regionID='ee1d13fe-2e7c-4311-9e6b-9bb51e16588f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 24991,
+      "[FORCE, LEVEL]": 22888,
+      "[FORCE, ENTROPY]": 22004,
+      "[FORCE]": 18445,
+      "[LEVEL, ENTROPY]": 25749,
+      "[LEVEL]": 24520,
+      "[FORCE, LEVEL, ENTROPY]": 23472,
+      "[ENTROPY]": 21017
+    },
+    "Region{regionID='f34ba5fb-80f2-4a8d-a3df-e269b7a27bbd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 17329274,
+      "[VERBOSE]": 17739082
+    },
+    "Region{regionID='7b3665fa-b7ff-4857-8333-1626a550580a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 153620,
+      "[TRANSFORM, LEVEL]": 151976,
+      "[TRANSFORM]": 154111,
+      "[LEVEL]": 156463
+    },
+    "Region{regionID='60f93a76-3547-4f09-9623-6c6c923cc547', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 7844,
+      "[FORCE]": 7522,
+      "[BLOCKSIZE]": 7615,
+      "[FORCE, BLOCKSIZE]": 7527
+    },
+    "Region{regionID='67c89d3e-5e40-4184-9ac9-4d6081df0229', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 1863,
+      "[LEVEL]": 1843
+    },
+    "Region{regionID='864f1ce8-90c0-45a8-a89f-d0865b5b44ac', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 308480092,
+      "[CHECKSUM]": 303723021,
+      "[FORCE]": 311292998,
+      "[CHECKSUM, FORCE]": 307885357
+    },
+    "Region{regionID='4f4b344c-c165-4f06-9cab-07d96df99a99', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 36962641,
+      "[FORCE, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 59282535249,
+      "[CHECKSUM]": 45983719,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 58506453514,
+      "[CHECKSUM, LEVEL, ENTROPY]": 483594698,
+      "[LEVEL, ENTROPY]": 691793083,
+      "[FORCE, BLOCKSIZE, LEVEL, ENTROPY]": 58816575425,
+      "[CHECKSUM, TRANSFORM, LEVEL, ENTROPY]": 417283739,
+      "[CHECKSUM, TRANSFORM, LEVEL]": 412377170,
+      "[CHECKSUM, FORCE, BLOCKSIZE, LEVEL, ENTROPY]": 59637347608,
+      "[TRANSFORM, LEVEL, ENTROPY]": 459978576,
+      "[TRANSFORM, LEVEL]": 425655226,
+      "[CHECKSUM, FORCE, BLOCKSIZE, ENTROPY]": 1743706091,
+      "[CHECKSUM, TRANSFORM]": 34621558,
+      "[TRANSFORM]": 34127845,
+      "[CHECKSUM, FORCE, BLOCKSIZE]": 1667890211,
+      "[FORCE, BLOCKSIZE, ENTROPY]": 1522297755,
+      "[FORCE, BLOCKSIZE]": 1523110846,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, LEVEL]": 59005627276,
+      "[CHECKSUM, BLOCKSIZE, LEVEL]": 59438312610,
+      "[BLOCKSIZE, LEVEL]": 59503025518,
+      "[FORCE, BLOCKSIZE, TRANSFORM, LEVEL]": 59212464380,
+      "[LEVEL]": 457343876,
+      "[BLOCKSIZE, ENTROPY]": 1570084513,
+      "[FORCE, TRANSFORM, ENTROPY]": 39610170,
+      "[CHECKSUM, FORCE, TRANSFORM, ENTROPY]": 31029624,
+      "[FORCE]": 40986490,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, ENTROPY]": 1633470027,
+      "[CHECKSUM, LEVEL]": 410738578,
+      "[CHECKSUM, ENTROPY]": 35020236,
+      "[FORCE, BLOCKSIZE, TRANSFORM, ENTROPY]": 1669269023,
+      "[FORCE, LEVEL, ENTROPY]": 443755794,
+      "[CHECKSUM, FORCE, LEVEL, ENTROPY]": 444021715,
+      "[ENTROPY]": 41203405,
+      "[FORCE, TRANSFORM]": 31794233,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM]": 1546825582,
+      "[CHECKSUM, BLOCKSIZE, LEVEL, ENTROPY]": 59166240462,
+      "[BLOCKSIZE, TRANSFORM]": 1601341349,
+      "[BLOCKSIZE, LEVEL, ENTROPY]": 58874768007,
+      "[BLOCKSIZE]": 1657443318,
+      "[CHECKSUM, FORCE, TRANSFORM]": 31037418,
+      "[CHECKSUM, FORCE]": 37501810,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 58944800668,
+      "[BLOCKSIZE, TRANSFORM, LEVEL]": 59405691889,
+      "[CHECKSUM, BLOCKSIZE, ENTROPY]": 1627790959,
+      "[BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 59758660334,
+      "[CHECKSUM, BLOCKSIZE]": 1707252609,
+      "[CHECKSUM, FORCE, BLOCKSIZE, LEVEL]": 59879604289,
+      "[CHECKSUM, FORCE, TRANSFORM, LEVEL]": 438707320,
+      "[TRANSFORM, ENTROPY]": 36468400,
+      "[CHECKSUM, FORCE, TRANSFORM, LEVEL, ENTROPY]": 507589120,
+      "[FORCE, TRANSFORM, LEVEL]": 455419764,
+      "[FORCE, TRANSFORM, LEVEL, ENTROPY]": 432420247,
+      "[FORCE, LEVEL]": 408140587,
+      "[BLOCKSIZE, TRANSFORM, ENTROPY]": 1549255990,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, ENTROPY]": 1591803046,
+      "[CHECKSUM, FORCE, LEVEL]": 454843092,
+      "[CHECKSUM, TRANSFORM, ENTROPY]": 30907009,
+      "[FORCE, BLOCKSIZE, LEVEL]": 59318726716,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, LEVEL]": 58902902358,
+      "[CHECKSUM, FORCE, ENTROPY]": 30929262,
+      "[FORCE, ENTROPY]": 33237212,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM]": 1682646289,
+      "[FORCE, BLOCKSIZE, TRANSFORM]": 1597078231
+    },
+    "Region{regionID='5b749b61-44e0-4597-98ac-04827c2af6c2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 2281042336,
+      "[FORCE, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 12597507,
+      "[CHECKSUM]": 2504654567,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 9196446,
+      "[CHECKSUM, LEVEL, ENTROPY]": 58541852451,
+      "[LEVEL, ENTROPY]": 59612686473,
+      "[FORCE, BLOCKSIZE, LEVEL, ENTROPY]": 11283508,
+      "[CHECKSUM, TRANSFORM, LEVEL, ENTROPY]": 57503852563,
+      "[CHECKSUM, TRANSFORM, LEVEL]": 57629721864,
+      "[CHECKSUM, FORCE, BLOCKSIZE, LEVEL, ENTROPY]": 9477331,
+      "[TRANSFORM, LEVEL, ENTROPY]": 58564489728,
+      "[TRANSFORM, LEVEL]": 58948955279,
+      "[CHECKSUM, FORCE, BLOCKSIZE, ENTROPY]": 9786065,
+      "[CHECKSUM, TRANSFORM]": 2290354148,
+      "[TRANSFORM]": 2348626741,
+      "[CHECKSUM, FORCE, BLOCKSIZE]": 8531148,
+      "[FORCE, BLOCKSIZE, ENTROPY]": 11352768,
+      "[FORCE, BLOCKSIZE]": 10728677,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, LEVEL]": 11800549,
+      "[CHECKSUM, BLOCKSIZE, LEVEL]": 7999171,
+      "[BLOCKSIZE, LEVEL]": 10232373,
+      "[FORCE, BLOCKSIZE, TRANSFORM, LEVEL]": 14455620,
+      "[LEVEL]": 60049274387,
+      "[BLOCKSIZE, ENTROPY]": 8815327,
+      "[FORCE, TRANSFORM, ENTROPY]": 2247582092,
+      "[CHECKSUM, FORCE, TRANSFORM, ENTROPY]": 2310007747,
+      "[FORCE]": 2254526266,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, ENTROPY]": 7821919,
+      "[CHECKSUM, LEVEL]": 58959338868,
+      "[CHECKSUM, ENTROPY]": 2343415330,
+      "[FORCE, BLOCKSIZE, TRANSFORM, ENTROPY]": 10288693,
+      "[FORCE, LEVEL, ENTROPY]": 58592589464,
+      "[CHECKSUM, FORCE, LEVEL, ENTROPY]": 59643268834,
+      "[ENTROPY]": 2339762424,
+      "[FORCE, TRANSFORM]": 2266811836,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM]": 10567517,
+      "[CHECKSUM, BLOCKSIZE, LEVEL, ENTROPY]": 8500793,
+      "[BLOCKSIZE, TRANSFORM]": 10320522,
+      "[BLOCKSIZE, LEVEL, ENTROPY]": 11208761,
+      "[BLOCKSIZE]": 15238320,
+      "[CHECKSUM, FORCE, TRANSFORM]": 2320216564,
+      "[CHECKSUM, FORCE]": 2335496661,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 9171070,
+      "[BLOCKSIZE, TRANSFORM, LEVEL]": 10298893,
+      "[CHECKSUM, BLOCKSIZE, ENTROPY]": 8796540,
+      "[BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 12029794,
+      "[CHECKSUM, BLOCKSIZE]": 9907200,
+      "[CHECKSUM, FORCE, BLOCKSIZE, LEVEL]": 11253439,
+      "[CHECKSUM, FORCE, TRANSFORM, LEVEL]": 59225698514,
+      "[TRANSFORM, ENTROPY]": 2123715365,
+      "[CHECKSUM, FORCE, TRANSFORM, LEVEL, ENTROPY]": 59237067401,
+      "[FORCE, TRANSFORM, LEVEL]": 59333760945,
+      "[FORCE, TRANSFORM, LEVEL, ENTROPY]": 58327207370,
+      "[FORCE, LEVEL]": 60523066962,
+      "[BLOCKSIZE, TRANSFORM, ENTROPY]": 11271333,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, ENTROPY]": 8339154,
+      "[CHECKSUM, FORCE, LEVEL]": 59853958394,
+      "[CHECKSUM, TRANSFORM, ENTROPY]": 2378755505,
+      "[FORCE, BLOCKSIZE, LEVEL]": 10159937,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, LEVEL]": 8318312,
+      "[CHECKSUM, FORCE, ENTROPY]": 2379453013,
+      "[FORCE, ENTROPY]": 2259316854,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM]": 9750680,
+      "[FORCE, BLOCKSIZE, TRANSFORM]": 11126468
+    },
+    "Region{regionID='9de255f5-e53a-48ef-b302-7fbd0b2f8491', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0,
+      "[LEVEL, ENTROPY]": 0,
+      "[LEVEL]": 0,
+      "[ENTROPY]": 0
+    },
+    "Region{regionID='39b9b91c-226c-4b6e-a836-ce172e4cb006', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 1321373,
+      "[TRANSFORM, LEVEL]": 1227774,
+      "[TRANSFORM]": 1313540,
+      "[LEVEL]": 1331633
+    },
+    "Region{regionID='170213ac-525b-4525-aeeb-1ac1fd0e7835', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 75039,
+      "[FORCE, LEVEL]": 69958,
+      "[FORCE]": 73879,
+      "[FORCE, VERBOSE]": 676640,
+      "[FORCE, LEVEL, VERBOSE]": 724639,
+      "[LEVEL]": 71840,
+      "[VERBOSE]": 565647,
+      "[LEVEL, VERBOSE]": 472402
+    },
+    "Region{regionID='5dfd6f51-0b83-463b-9bc3-d453ef67fd79', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 1971,
+      "[ENTROPY]": 3261
+    },
+    "Region{regionID='ffd39fc6-0bd5-466e-abc6-6256f8878bf3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 1742,
+      "[TRANSFORM]": 2255
+    },
+    "Region{regionID='28c37b9a-de69-4cde-83d2-4999fc01e4d9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 2037,
+      "[BLOCKSIZE]": 1653
+    },
+    "Region{regionID='2e1dfc7c-203b-4000-9056-628c3720a216', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 40981757,
+      "[FORCE]": 42231151,
+      "[FORCE, VERBOSE]": 36037946,
+      "[VERBOSE]": 47179113
+    },
+    "Region{regionID='2140eb35-e553-4002-992d-6617f1ded38a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 1635,
+      "[CHECKSUM]": 2018
+    },
+    "Region{regionID='719c9007-3673-41e9-8bd0-a94c995433ba', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 6992,
+      "[CHECKSUM]": 6540
+    },
+    "Region{regionID='12fea86a-9144-420c-9638-1085d9687276', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 3716693,
+      "[FORCE]": 3630819
+    },
+    "Region{regionID='a287ffad-b0ed-4751-9e10-83366caeee27', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 3983,
+      "[VERBOSE]": 3260
+    },
+    "Region{regionID='2ba8b1c8-b111-438c-a0e2-81624470045a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 74398,
+      "[FORCE, LEVEL]": 76022,
+      "[FORCE, TRANSFORM]": 80077,
+      "[FORCE]": 67844,
+      "[TRANSFORM, LEVEL]": 73700,
+      "[TRANSFORM]": 73937,
+      "[LEVEL]": 71246,
+      "[FORCE, TRANSFORM, LEVEL]": 70854
+    },
+    "Region{regionID='1eb9ac3a-f18e-4912-89e0-a4af38d1a151', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 54676,
+      "[LEVEL, ENTROPY]": 54314,
+      "[LEVEL]": 55408,
+      "[ENTROPY]": 55295
+    },
+    "Region{regionID='abafaa73-4c2c-4e5c-a4e3-c05791713ea0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 2095,
+      "[FORCE]": 2269
+    },
+    "Region{regionID='8da8be8b-c83a-45e4-a5e0-a05779599026', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 31488,
+      "[BLOCKSIZE]": 31887
+    },
+    "Region{regionID='c8c52385-f82d-41af-8b1b-ffe0dd6abd24', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 38454,
+      "[VERBOSE]": 3795636
+    }
+  },
+  "regionsToPerformanceTablesHumanReadable": {
+    "Region{regionID='018612d7-bc56-47ae-86c6-cba207c12f08', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[FORCE]": 0.0,
+      "[BLOCKSIZE]": 0.0,
+      "[FORCE, BLOCKSIZE]": 0.0
+    },
+    "Region{regionID='ee1d13fe-2e7c-4311-9e6b-9bb51e16588f', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[FORCE, LEVEL]": 0.0,
+      "[FORCE, ENTROPY]": 0.0,
+      "[FORCE]": 0.0,
+      "[LEVEL, ENTROPY]": 0.0,
+      "[LEVEL]": 0.0,
+      "[FORCE, LEVEL, ENTROPY]": 0.0,
+      "[ENTROPY]": 0.0
+    },
+    "Region{regionID='f34ba5fb-80f2-4a8d-a3df-e269b7a27bbd', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.017,
+      "[VERBOSE]": 0.018
+    },
+    "Region{regionID='7b3665fa-b7ff-4857-8333-1626a550580a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[TRANSFORM, LEVEL]": 0.0,
+      "[TRANSFORM]": 0.0,
+      "[LEVEL]": 0.0
+    },
+    "Region{regionID='60f93a76-3547-4f09-9623-6c6c923cc547', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[FORCE]": 0.0,
+      "[BLOCKSIZE]": 0.0,
+      "[FORCE, BLOCKSIZE]": 0.0
+    },
+    "Region{regionID='67c89d3e-5e40-4184-9ac9-4d6081df0229', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LEVEL]": 0.0
+    },
+    "Region{regionID='864f1ce8-90c0-45a8-a89f-d0865b5b44ac', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.308,
+      "[CHECKSUM]": 0.304,
+      "[FORCE]": 0.311,
+      "[CHECKSUM, FORCE]": 0.308
+    },
+    "Region{regionID='4f4b344c-c165-4f06-9cab-07d96df99a99', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.037,
+      "[FORCE, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 59.283,
+      "[CHECKSUM]": 0.046,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 58.506,
+      "[CHECKSUM, LEVEL, ENTROPY]": 0.484,
+      "[LEVEL, ENTROPY]": 0.692,
+      "[FORCE, BLOCKSIZE, LEVEL, ENTROPY]": 58.817,
+      "[CHECKSUM, TRANSFORM, LEVEL, ENTROPY]": 0.417,
+      "[CHECKSUM, TRANSFORM, LEVEL]": 0.412,
+      "[CHECKSUM, FORCE, BLOCKSIZE, LEVEL, ENTROPY]": 59.637,
+      "[TRANSFORM, LEVEL, ENTROPY]": 0.46,
+      "[TRANSFORM, LEVEL]": 0.426,
+      "[CHECKSUM, FORCE, BLOCKSIZE, ENTROPY]": 1.744,
+      "[CHECKSUM, TRANSFORM]": 0.035,
+      "[TRANSFORM]": 0.034,
+      "[CHECKSUM, FORCE, BLOCKSIZE]": 1.668,
+      "[FORCE, BLOCKSIZE, ENTROPY]": 1.522,
+      "[FORCE, BLOCKSIZE]": 1.523,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, LEVEL]": 59.006,
+      "[CHECKSUM, BLOCKSIZE, LEVEL]": 59.438,
+      "[BLOCKSIZE, LEVEL]": 59.503,
+      "[FORCE, BLOCKSIZE, TRANSFORM, LEVEL]": 59.212,
+      "[LEVEL]": 0.457,
+      "[BLOCKSIZE, ENTROPY]": 1.57,
+      "[FORCE, TRANSFORM, ENTROPY]": 0.04,
+      "[CHECKSUM, FORCE, TRANSFORM, ENTROPY]": 0.031,
+      "[FORCE]": 0.041,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, ENTROPY]": 1.633,
+      "[CHECKSUM, LEVEL]": 0.411,
+      "[CHECKSUM, ENTROPY]": 0.035,
+      "[FORCE, BLOCKSIZE, TRANSFORM, ENTROPY]": 1.669,
+      "[FORCE, LEVEL, ENTROPY]": 0.444,
+      "[CHECKSUM, FORCE, LEVEL, ENTROPY]": 0.444,
+      "[ENTROPY]": 0.041,
+      "[FORCE, TRANSFORM]": 0.032,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM]": 1.547,
+      "[CHECKSUM, BLOCKSIZE, LEVEL, ENTROPY]": 59.166,
+      "[BLOCKSIZE, TRANSFORM]": 1.601,
+      "[BLOCKSIZE, LEVEL, ENTROPY]": 58.875,
+      "[BLOCKSIZE]": 1.657,
+      "[CHECKSUM, FORCE, TRANSFORM]": 0.031,
+      "[CHECKSUM, FORCE]": 0.038,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 58.945,
+      "[BLOCKSIZE, TRANSFORM, LEVEL]": 59.406,
+      "[CHECKSUM, BLOCKSIZE, ENTROPY]": 1.628,
+      "[BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 59.759,
+      "[CHECKSUM, BLOCKSIZE]": 1.707,
+      "[CHECKSUM, FORCE, BLOCKSIZE, LEVEL]": 59.88,
+      "[CHECKSUM, FORCE, TRANSFORM, LEVEL]": 0.439,
+      "[TRANSFORM, ENTROPY]": 0.036,
+      "[CHECKSUM, FORCE, TRANSFORM, LEVEL, ENTROPY]": 0.508,
+      "[FORCE, TRANSFORM, LEVEL]": 0.455,
+      "[FORCE, TRANSFORM, LEVEL, ENTROPY]": 0.432,
+      "[FORCE, LEVEL]": 0.408,
+      "[BLOCKSIZE, TRANSFORM, ENTROPY]": 1.549,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, ENTROPY]": 1.592,
+      "[CHECKSUM, FORCE, LEVEL]": 0.455,
+      "[CHECKSUM, TRANSFORM, ENTROPY]": 0.031,
+      "[FORCE, BLOCKSIZE, LEVEL]": 59.319,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, LEVEL]": 58.903,
+      "[CHECKSUM, FORCE, ENTROPY]": 0.031,
+      "[FORCE, ENTROPY]": 0.033,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM]": 1.683,
+      "[FORCE, BLOCKSIZE, TRANSFORM]": 1.597
+    },
+    "Region{regionID='5b749b61-44e0-4597-98ac-04827c2af6c2', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 2.281,
+      "[FORCE, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 0.013,
+      "[CHECKSUM]": 2.505,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 0.009,
+      "[CHECKSUM, LEVEL, ENTROPY]": 58.542,
+      "[LEVEL, ENTROPY]": 59.613,
+      "[FORCE, BLOCKSIZE, LEVEL, ENTROPY]": 0.011,
+      "[CHECKSUM, TRANSFORM, LEVEL, ENTROPY]": 57.504,
+      "[CHECKSUM, TRANSFORM, LEVEL]": 57.63,
+      "[CHECKSUM, FORCE, BLOCKSIZE, LEVEL, ENTROPY]": 0.009,
+      "[TRANSFORM, LEVEL, ENTROPY]": 58.564,
+      "[TRANSFORM, LEVEL]": 58.949,
+      "[CHECKSUM, FORCE, BLOCKSIZE, ENTROPY]": 0.01,
+      "[CHECKSUM, TRANSFORM]": 2.29,
+      "[TRANSFORM]": 2.349,
+      "[CHECKSUM, FORCE, BLOCKSIZE]": 0.009,
+      "[FORCE, BLOCKSIZE, ENTROPY]": 0.011,
+      "[FORCE, BLOCKSIZE]": 0.011,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, LEVEL]": 0.012,
+      "[CHECKSUM, BLOCKSIZE, LEVEL]": 0.008,
+      "[BLOCKSIZE, LEVEL]": 0.01,
+      "[FORCE, BLOCKSIZE, TRANSFORM, LEVEL]": 0.014,
+      "[LEVEL]": 60.049,
+      "[BLOCKSIZE, ENTROPY]": 0.009,
+      "[FORCE, TRANSFORM, ENTROPY]": 2.248,
+      "[CHECKSUM, FORCE, TRANSFORM, ENTROPY]": 2.31,
+      "[FORCE]": 2.255,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM, ENTROPY]": 0.008,
+      "[CHECKSUM, LEVEL]": 58.959,
+      "[CHECKSUM, ENTROPY]": 2.343,
+      "[FORCE, BLOCKSIZE, TRANSFORM, ENTROPY]": 0.01,
+      "[FORCE, LEVEL, ENTROPY]": 58.593,
+      "[CHECKSUM, FORCE, LEVEL, ENTROPY]": 59.643,
+      "[ENTROPY]": 2.34,
+      "[FORCE, TRANSFORM]": 2.267,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM]": 0.011,
+      "[CHECKSUM, BLOCKSIZE, LEVEL, ENTROPY]": 0.009,
+      "[BLOCKSIZE, TRANSFORM]": 0.01,
+      "[BLOCKSIZE, LEVEL, ENTROPY]": 0.011,
+      "[BLOCKSIZE]": 0.015,
+      "[CHECKSUM, FORCE, TRANSFORM]": 2.32,
+      "[CHECKSUM, FORCE]": 2.335,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 0.009,
+      "[BLOCKSIZE, TRANSFORM, LEVEL]": 0.01,
+      "[CHECKSUM, BLOCKSIZE, ENTROPY]": 0.009,
+      "[BLOCKSIZE, TRANSFORM, LEVEL, ENTROPY]": 0.012,
+      "[CHECKSUM, BLOCKSIZE]": 0.01,
+      "[CHECKSUM, FORCE, BLOCKSIZE, LEVEL]": 0.011,
+      "[CHECKSUM, FORCE, TRANSFORM, LEVEL]": 59.226,
+      "[TRANSFORM, ENTROPY]": 2.124,
+      "[CHECKSUM, FORCE, TRANSFORM, LEVEL, ENTROPY]": 59.237,
+      "[FORCE, TRANSFORM, LEVEL]": 59.334,
+      "[FORCE, TRANSFORM, LEVEL, ENTROPY]": 58.327,
+      "[FORCE, LEVEL]": 60.523,
+      "[BLOCKSIZE, TRANSFORM, ENTROPY]": 0.011,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, ENTROPY]": 0.008,
+      "[CHECKSUM, FORCE, LEVEL]": 59.854,
+      "[CHECKSUM, TRANSFORM, ENTROPY]": 2.379,
+      "[FORCE, BLOCKSIZE, LEVEL]": 0.01,
+      "[CHECKSUM, BLOCKSIZE, TRANSFORM, LEVEL]": 0.008,
+      "[CHECKSUM, FORCE, ENTROPY]": 2.379,
+      "[FORCE, ENTROPY]": 2.259,
+      "[CHECKSUM, FORCE, BLOCKSIZE, TRANSFORM]": 0.01,
+      "[FORCE, BLOCKSIZE, TRANSFORM]": 0.011
+    },
+    "Region{regionID='9de255f5-e53a-48ef-b302-7fbd0b2f8491', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LEVEL, ENTROPY]": 0.0,
+      "[LEVEL]": 0.0,
+      "[ENTROPY]": 0.0
+    },
+    "Region{regionID='39b9b91c-226c-4b6e-a836-ce172e4cb006', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.001,
+      "[TRANSFORM, LEVEL]": 0.001,
+      "[TRANSFORM]": 0.001,
+      "[LEVEL]": 0.001
+    },
+    "Region{regionID='170213ac-525b-4525-aeeb-1ac1fd0e7835', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[FORCE, LEVEL]": 0.0,
+      "[FORCE]": 0.0,
+      "[FORCE, VERBOSE]": 0.001,
+      "[FORCE, LEVEL, VERBOSE]": 0.001,
+      "[LEVEL]": 0.0,
+      "[VERBOSE]": 0.001,
+      "[LEVEL, VERBOSE]": 0.0
+    },
+    "Region{regionID='5dfd6f51-0b83-463b-9bc3-d453ef67fd79', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[ENTROPY]": 0.0
+    },
+    "Region{regionID='ffd39fc6-0bd5-466e-abc6-6256f8878bf3', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[TRANSFORM]": 0.0
+    },
+    "Region{regionID='28c37b9a-de69-4cde-83d2-4999fc01e4d9', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[BLOCKSIZE]": 0.0
+    },
+    "Region{regionID='2e1dfc7c-203b-4000-9056-628c3720a216', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.041,
+      "[FORCE]": 0.042,
+      "[FORCE, VERBOSE]": 0.036,
+      "[VERBOSE]": 0.047
+    },
+    "Region{regionID='2140eb35-e553-4002-992d-6617f1ded38a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[CHECKSUM]": 0.0
+    },
+    "Region{regionID='719c9007-3673-41e9-8bd0-a94c995433ba', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[CHECKSUM]": 0.0
+    },
+    "Region{regionID='12fea86a-9144-420c-9638-1085d9687276', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.004,
+      "[FORCE]": 0.004
+    },
+    "Region{regionID='a287ffad-b0ed-4751-9e10-83366caeee27', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[VERBOSE]": 0.0
+    },
+    "Region{regionID='2ba8b1c8-b111-438c-a0e2-81624470045a', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[FORCE, LEVEL]": 0.0,
+      "[FORCE, TRANSFORM]": 0.0,
+      "[FORCE]": 0.0,
+      "[TRANSFORM, LEVEL]": 0.0,
+      "[TRANSFORM]": 0.0,
+      "[LEVEL]": 0.0,
+      "[FORCE, TRANSFORM, LEVEL]": 0.0
+    },
+    "Region{regionID='1eb9ac3a-f18e-4912-89e0-a4af38d1a151', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[LEVEL, ENTROPY]": 0.0,
+      "[LEVEL]": 0.0,
+      "[ENTROPY]": 0.0
+    },
+    "Region{regionID='abafaa73-4c2c-4e5c-a4e3-c05791713ea0', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[FORCE]": 0.0
+    },
+    "Region{regionID='8da8be8b-c83a-45e4-a5e0-a05779599026', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[BLOCKSIZE]": 0.0
+    },
+    "Region{regionID='c8c52385-f82d-41af-8b1b-ffe0dd6abd24', startTime=-1, endTime=-1, duration=-1}": {
+      "[]": 0.0,
+      "[VERBOSE]": 0.004
+    }
+  }
+}

@@ -141,6 +141,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareOptimizer4() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void comparePrevayler1() throws Exception {
         String programName = "prevayler";
 
@@ -1034,6 +1042,23 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
+    }
+
+    @Test
+    public void optimizerSPLat() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        SPLat splat = new SPLat(programName);
+        List<Coverage> coverageList = splat.readFileCoverage();
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
     }
 
     @Test

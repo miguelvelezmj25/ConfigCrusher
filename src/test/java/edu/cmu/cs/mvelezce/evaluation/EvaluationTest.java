@@ -109,6 +109,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareColorCounter4() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareOptimizer1() throws Exception {
         String programName = "pngtasticOptimizer";
 
@@ -428,6 +436,23 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
+    }
+
+    @Test
+    public void colorCounterSPLat() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        SPLat splat = new SPLat(programName);
+        List<Coverage> coverageList = splat.readFileCoverage();
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
     }
 
     @Test

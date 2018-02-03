@@ -9,12 +9,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
-public class SPLatOptimizerMain implements SPLatMain {
+public class SPLatOptimizerMain extends SPLatMain {
+
+    public SPLatOptimizerMain(String programName) {
+        super(programName);
+    }
 
     @Override
-    public Set<Set<String>> getSPLatConfigurations(String programName) {
-        if(!programName.contains("Optimizer")) {
-            throw new RuntimeException("Could not find the main class " + programName);
+    public Set<Set<String>> getSPLatConfigurations() {
+        if(!this.getProgramName().contains("Optimizer")) {
+            throw new RuntimeException("Could not find the main class " + this.getProgramName());
         }
 
         Set<Set<String>> splatConfigurations = new HashSet<>();

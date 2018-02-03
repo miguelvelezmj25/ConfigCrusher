@@ -1,12 +1,15 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample;
 
 import edu.cmu.cs.mvelezce.Example;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -44,6 +47,15 @@ public class RunningExampleMain extends BaseMain {
 
     @Override
     public void execute(String mainClass, String[] args) throws Exception {
+        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("running-example");
+        instrumenter.instrument(args);
+        Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
+
+        for(JavaRegion region : regions) {
+            Regions.regionsToOverhead.put(region.getRegionID(),0L);
+        }
+            Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID,0L);
+
         if(mainClass.contains("Example")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());

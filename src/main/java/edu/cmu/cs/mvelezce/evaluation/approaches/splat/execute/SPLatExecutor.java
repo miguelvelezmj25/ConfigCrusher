@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.runningex
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.BaseCompression;
 
+import java.io.IOException;
 import java.util.Set;
 
 public class SPLatExecutor extends BaseCompression {
@@ -23,16 +24,16 @@ public class SPLatExecutor extends BaseCompression {
         SPLatMain main;
 
         if(this.getProgramName().contains("running-example")) {
-            main = new SPLatRunningExampleMain();
+            main = new SPLatRunningExampleMain("running-example");
         }
         else if(this.getProgramName().contains("pngtasticColorCounter")) {
-            main = new SPLatCounterMain();
+            main = new SPLatCounterMain("pngtasticColorCounter");
         }
         else if(this.getProgramName().contains("pngtasticOptimizer")) {
-            main = new SPLatOptimizerMain();
+            main = new SPLatOptimizerMain("pngtasticOptimizer");
         }
         else if(this.getProgramName().contains("grep")) {
-            main = new SPLatGrepMain();
+            main = new SPLatGrepMain("grep");
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());
@@ -40,8 +41,9 @@ public class SPLatExecutor extends BaseCompression {
 
         Set<Set<String>> splatConfigurations;
         try {
-            splatConfigurations = main.getSPLatConfigurations(this.getProgramName());
-        } catch(InterruptedException e) {
+            splatConfigurations = main.getSPLatConfigurations();
+            main.writeToFileCoverage();
+        } catch(InterruptedException | IOException e) {
             throw new RuntimeException("There was an error calculating the splat configurations");
         }
 

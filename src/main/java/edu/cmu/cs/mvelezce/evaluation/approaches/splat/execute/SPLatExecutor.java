@@ -7,8 +7,11 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.optimizer
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.runningexample.SPLatRunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.BaseCompression;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Set;
 
 public class SPLatExecutor extends BaseCompression {
@@ -17,6 +20,36 @@ public class SPLatExecutor extends BaseCompression {
 
     public SPLatExecutor(String programName) {
         super(programName, null);
+    }
+
+    @Override
+    public Set<Set<String>> compressConfigurations(String[] args) throws IOException {
+        Options.getCommandLine(args);
+
+        String outputFile = this.getOutputDir() + "/" + this.getProgramName();
+        File file = new File(outputFile);
+
+        Options.checkIfDeleteResult(file);
+
+        if(file.exists()) {
+            Collection<File> files = FileUtils.listFiles(file, null, true);
+
+            for(File f : files) {
+                if(f.getName().contains(this.getProgramName() + Options.DOT_JSON)) {
+                    return this.readFromFile(f);
+                }
+            }
+
+            throw new RuntimeException("Could not find a file");
+        }
+
+        Set<Set<String>> configurationsToExecute = this.compressConfigurations();
+
+        if(Options.checkIfSave()) {
+            this.writeToFile(configurationsToExecute);
+        }
+
+        return configurationsToExecute;
     }
 
     @Override

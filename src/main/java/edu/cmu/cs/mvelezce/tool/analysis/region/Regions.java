@@ -9,6 +9,8 @@ import java.util.Stack;
  */
 public class Regions {
 
+    public static Map<String, Long> regionsToOverhead = new HashMap<>();
+
     public static final String PROGRAM_REGION_ID = "program";
 
     private static Stack<String> executingRegions = new Stack<>();
@@ -17,20 +19,27 @@ public class Regions {
     private static Map<String, Long> regionsToProcessedPerformance = new HashMap<>();
 
     public static void enter(String id) {
-//        System.out.println("Enter " + id);
+        long os = System.nanoTime();
+
         long start = System.nanoTime();
         Regions.executingRegions.push(id);
         Regions.executingRegionsStart.push(start);
         Regions.innerRegionsExecutionTime.push(0L);
+
+        long overhead = regionsToOverhead.get(id);
+        long oe = System.nanoTime();
+        regionsToOverhead.put(id, overhead + (oe - os));
     }
 
     public static void exit(String id) {
+        long os = System.nanoTime();
+
         if(!Regions.executingRegions.peek().equals(id)) {
-//            System.out.println("Could not exit " + id);
+            long overhead = regionsToOverhead.get(id);
+            long oe = System.nanoTime();
+            regionsToOverhead.put(id, overhead + (oe - os));
             return;
         }
-
-//        System.out.println("Exit " + id);
 
         long end = System.nanoTime();
         long start = Regions.executingRegionsStart.pop();
@@ -61,6 +70,10 @@ public class Regions {
         while(!added.isEmpty()) {
             innerRegionsExecutionTime.push(added.pop());
         }
+
+        long overhead = regionsToOverhead.get(id);
+        long oe = System.nanoTime();
+        regionsToOverhead.put(id, overhead + (oe - os));
     }
 
     public static Map<String, Long> getRegionsToProcessedPerformance() {

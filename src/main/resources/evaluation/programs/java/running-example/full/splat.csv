@@ -1,129 +1,17 @@
 measured,configuration,performance,std
-true,"[]",13.067,0.0
-false,"[B:A]",29.128,0.0
-false,"[B:C]",13.06,0.0
-false,"[A, B, C, A:C]",-2.036,0.0
-false,"[B, C, B:A, B:C, B:A:C]",24.073,0.0
-false,"[B:A, B:C]",29.121,0.0
-false,"[C, A:C, B:C, B:A:C]",20.069,0.0
-false,"[A, C, B:A, B:C, B:A:C]",26.075,0.0
-false,"[B, A:C, B:C, B:A:C]",1.003,0.0
-false,"[A, B, B:A, B:C, B:A:C]",7.009,0.0
-false,"[C, B:A, A:C, B:A:C]",36.137,0.0
-false,"[A, A:C, B:C, B:A:C]",3.005,0.0
-false,"[B, B:A, A:C, B:A:C]",17.071,0.0
-false,"[A, B, C, B:A, A:C]",14.025,0.0
-false,"[A, B:A, A:C, B:A:C]",19.073,0.0
-false,"[A, B, C, A:C, B:C]",-2.043,0.0
-false,"[B, C, B:C, B:A:C]",8.012,0.0
-false,"[B, C, B:A, B:A:C]",24.08,0.0
-false,"[A, B, B:C, B:A:C]",-9.052,0.0
-false,"[A, C, B:C, B:A:C]",10.014,0.0
-false,"[B, A:C, B:A:C]",1.01,0.0
-false,"[A, B, B:A, B:A:C]",7.016,0.0
-false,"[C, A:C, B:A:C]",20.076,0.0
-false,"[A, C, B:A, B:A:C]",26.082,0.0
-false,"[A, A:C, B:A:C]",3.012,0.0
-false,"[A, B, C, B:A, A:C, B:C]",14.018,0.0
-false,"[A, B, B:A:C]",-9.045,0.0
-false,"[B, C, B:A:C]",8.019,0.0
-false,"[A, C, B:A:C]",10.021,0.0
-false,"[A, B, B:A, A:C, B:C, B:A:C]",7.009,0.0
-false,"[A, C, B:A, A:C, B:C, B:A:C]",26.075,0.0
-false,"[B, C, B:A, A:C, B:C, B:A:C]",24.073,0.0
-true,"[A]",3.012,0.0
-true,"[B]",1.01,0.0
-false,"[C]",20.076,0.0
-false,"[A:C]",13.067,0.0
-false,"[A, B:A]",19.073,0.0
-false,"[B, B:A]",17.071,0.0
-false,"[C, B:A]",36.137,0.0
-false,"[A, B:C]",3.005,0.0
-false,"[B, B:C]",1.003,0.0
-false,"[C, B:C]",20.069,0.0
-false,"[B:A, A:C]",29.128,0.0
-false,"[B, C, A:C, B:C, B:A:C]",8.012,0.0
-false,"[A, B, C, B:A, B:C, B:A:C]",14.018,0.0
-false,"[A:C, B:C]",13.06,0.0
-false,"[A, B:A, B:C]",19.066,0.0
-false,"[A, C, A:C, B:C, B:A:C]",10.014,0.0
-false,"[B, C, B:A, A:C, B:A:C]",24.08,0.0
-false,"[A, B, A:C, B:C, B:A:C]",-9.052,0.0
-false,"[C, B:A, B:C]",36.13,0.0
-false,"[A, C, B:A, A:C, B:A:C]",26.082,0.0
-false,"[B, B:A, B:C]",17.064,0.0
-false,"[A, B, B:A, A:C, B:A:C]",7.016,0.0
-false,"[B:A, A:C, B:C]",29.121,0.0
-false,"[A, B, C, B:C, B:A:C]",-2.043,0.0
-false,"[A, C, A:C, B:A:C]",10.021,0.0
-false,"[B, C, A:C, B:A:C]",8.019,0.0
-false,"[A, B, C, B:A, B:A:C]",14.025,0.0
-false,"[A, B, A:C, B:A:C]",-9.045,0.0
-false,"[A, B, C, B:A:C]",-2.036,0.0
-false,"[A, B:A, A:C, B:C, B:A:C]",19.066,0.0
-false,"[B, B:A, A:C, B:C, B:A:C]",17.064,0.0
-false,"[C, B:A, A:C, B:C, B:A:C]",36.13,0.0
-true,"[A, B]",-9.045,0.0
-true,"[A, C]",10.021,0.0
-false,"[B, C]",8.019,0.0
-false,"[A, A:C]",3.012,0.0
-false,"[B, A:C]",1.01,0.0
-false,"[A, B, B:A]",7.016,0.0
-false,"[C, A:C]",20.076,0.0
-false,"[A, C, B:A]",26.082,0.0
-false,"[B, C, B:A]",24.08,0.0
-false,"[A, B, B:C]",-9.052,0.0
-false,"[A, C, B:C]",10.014,0.0
-false,"[B, C, B:C]",8.012,0.0
-false,"[A, B, C, A:C, B:C, B:A:C]",-2.043,0.0
-false,"[B, B:A, A:C]",17.071,0.0
-false,"[A, B, C, B:A, A:C, B:A:C]",14.025,0.0
-false,"[A, B:A, A:C]",19.073,0.0
-false,"[B, A:C, B:C]",1.003,0.0
-false,"[A, B, B:A, B:C]",7.009,0.0
-false,"[C, B:A, A:C]",36.137,0.0
-false,"[A, A:C, B:C]",3.005,0.0
-false,"[B, C, B:A, B:C]",24.073,0.0
-false,"[C, A:C, B:C]",20.069,0.0
-false,"[B:A, B:C, B:A:C]",29.121,0.0
-false,"[A, C, B:A, B:C]",26.075,0.0
-false,"[A, B, C, A:C, B:A:C]",-2.036,0.0
-false,"[A, B:A, A:C, B:C]",19.066,0.0
-false,"[B, B:A, A:C, B:C]",17.064,0.0
-false,"[B:C, B:A:C]",13.06,0.0
-false,"[C, B:A, A:C, B:C]",36.13,0.0
-false,"[B:A, B:A:C]",29.128,0.0
-false,"[B:A:C]",13.067,0.0
-false,"[B:A, A:C, B:C, B:A:C]",29.121,0.0
-true,"[A, B, C]",-2.036,0.0
-false,"[A, B, A:C]",-9.045,0.0
-false,"[A, C, A:C]",10.021,0.0
-false,"[B, C, A:C]",8.019,0.0
-false,"[A, B, C, B:A]",14.025,0.0
-false,"[A, B, C, B:C]",-2.043,0.0
-false,"[A, C, B:A, A:C]",26.082,0.0
-false,"[C, B:A, B:C, B:A:C]",36.13,0.0
-false,"[A, B, B:A, A:C]",7.016,0.0
-false,"[B, B:A, B:C, B:A:C]",17.064,0.0
-false,"[A:C, B:C, B:A:C]",13.06,0.0
-false,"[A, C, A:C, B:C]",10.014,0.0
-false,"[A, B:A, B:C, B:A:C]",19.066,0.0
-false,"[B, C, B:A, A:C]",24.08,0.0
-false,"[A, B, A:C, B:C]",-9.052,0.0
-false,"[B:A, A:C, B:A:C]",29.128,0.0
-false,"[B, C, A:C, B:C]",8.012,0.0
-false,"[A, B, C, B:A, B:C]",14.018,0.0
-false,"[C, B:C, B:A:C]",20.069,0.0
-false,"[C, B:A, B:A:C]",36.137,0.0
-false,"[A, B:C, B:A:C]",3.005,0.0
-false,"[A, C, B:A, A:C, B:C]",26.075,0.0
-false,"[B, B:C, B:A:C]",1.003,0.0
-false,"[B, C, B:A, A:C, B:C]",24.073,0.0
-false,"[A:C, B:A:C]",13.067,0.0
-false,"[A, B:A, B:A:C]",19.073,0.0
-false,"[B, B:A, B:A:C]",17.071,0.0
-false,"[A, B, B:A, A:C, B:C]",7.009,0.0
-false,"[C, B:A:C]",20.076,0.0
-false,"[B, B:A:C]",1.01,0.0
-false,"[A, B:A:C]",3.012,0.0
-false,"[A, B, C, B:A, A:C, B:C, B:A:C]",14.018,0.0
+true,"[]",1.007,0.002
+false,"[C]",1.007,0.002
+false,"[D]",1.007,0.002
+false,"[C, D]",1.007,0.002
+true,"[A]",3.012,0.003
+false,"[A, D]",3.012,0.003
+true,"[B]",1.01,0.002
+false,"[B, C]",1.01,0.002
+false,"[B, D]",1.01,0.002
+false,"[B, C, D]",1.01,0.002
+true,"[A, B]",7.016,0.005
+false,"[A, B, D]",7.016,0.005
+true,"[A, C]",10.021,0.004
+false,"[A, C, D]",10.021,0.004
+true,"[A, B, C]",14.018,0.006
+false,"[A, B, C, D]",14.018,0.006

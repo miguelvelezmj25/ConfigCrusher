@@ -76,9 +76,9 @@ public class SPLatPerformanceModelBuilder implements PerformanceModelBuilder {
             String rawCoefficient = coefficients.get(i);
             double coefficient = 0.0;
 
-            if(!rawCoefficient.equals(SPLat.NA)) {
-                coefficient = Double.parseDouble(rawCoefficient);
-            }
+//            if(!rawCoefficient.equals(SPLat.NA)) {
+//                coefficient = Double.parseDouble(rawCoefficient);
+//            }
 
             Set<String> configuration = new HashSet<>();
             configuration.add(term);

@@ -1,0 +1,348 @@
+[
+  {
+    "config": [],
+    "covered": [
+      [],
+      [
+        "FREQTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "TIMEOUT",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "TIMEOUT",
+        "MINALPHA"
+      ],
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "TIMEOUT",
+      "DISTTHRESHOLD",
+      "LOGLEVEL"
+    ],
+    "covered": [
+      [
+        "TIMEOUT",
+        "DISTTHRESHOLD",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "FREQTHRESHOLD",
+      "TIMEOUT",
+      "DISTTHRESHOLD",
+      "LOGLEVEL"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT",
+        "DISTTHRESHOLD",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "FREQTHRESHOLD",
+      "TIMEOUT",
+      "DISTTHRESHOLD"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT",
+        "DISTTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "TIMEOUT",
+      "LOGLEVEL",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT",
+        "LOGLEVEL",
+        "MINALPHA"
+      ],
+      [
+        "TIMEOUT",
+        "LOGLEVEL",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "TIMEOUT",
+      "DISTTHRESHOLD",
+      "LOGLEVEL",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "TIMEOUT",
+        "DISTTHRESHOLD",
+        "LOGLEVEL",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "DISTTHRESHOLD",
+      "LOGLEVEL"
+    ],
+    "covered": [
+      [
+        "DISTTHRESHOLD",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "FREQTHRESHOLD",
+      "TIMEOUT",
+      "DISTTHRESHOLD",
+      "LOGLEVEL",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT",
+        "DISTTHRESHOLD",
+        "LOGLEVEL",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "DISTTHRESHOLD"
+    ],
+    "covered": [
+      [
+        "DISTTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "TIMEOUT",
+      "DISTTHRESHOLD",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "TIMEOUT",
+        "DISTTHRESHOLD",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "DISTTHRESHOLD",
+      "LOGLEVEL",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "DISTTHRESHOLD",
+        "LOGLEVEL",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "TIMEOUT",
+      "DISTTHRESHOLD"
+    ],
+    "covered": [
+      [
+        "TIMEOUT",
+        "DISTTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "FREQTHRESHOLD",
+      "DISTTHRESHOLD",
+      "LOGLEVEL",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "DISTTHRESHOLD",
+        "LOGLEVEL",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "DISTTHRESHOLD",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "DISTTHRESHOLD",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "FREQTHRESHOLD",
+      "DISTTHRESHOLD",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "DISTTHRESHOLD",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "FREQTHRESHOLD",
+      "TIMEOUT",
+      "DISTTHRESHOLD",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT",
+        "DISTTHRESHOLD",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "FREQTHRESHOLD",
+      "DISTTHRESHOLD",
+      "LOGLEVEL"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "DISTTHRESHOLD",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "TIMEOUT",
+      "LOGLEVEL"
+    ],
+    "covered": [
+      [
+        "TIMEOUT",
+        "LOGLEVEL"
+      ],
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "TIMEOUT"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT"
+      ],
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "FREQTHRESHOLD",
+      "DISTTHRESHOLD"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "DISTTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "LOGLEVEL",
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "LOGLEVEL",
+        "MINALPHA"
+      ],
+      [
+        "LOGLEVEL",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "LOGLEVEL"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "LOGLEVEL"
+      ],
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "MINALPHA"
+    ],
+    "covered": [
+      [
+        "FREQTHRESHOLD",
+        "MINALPHA"
+      ],
+      [
+        "MINALPHA"
+      ]
+    ]
+  }
+]

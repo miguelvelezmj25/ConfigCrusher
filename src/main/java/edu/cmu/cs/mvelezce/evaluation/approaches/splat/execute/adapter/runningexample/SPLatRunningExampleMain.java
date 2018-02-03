@@ -62,30 +62,4 @@ public class SPLatRunningExampleMain extends SPLatMain {
         return splatConfigurations;
     }
 
-    private Set<Set<String>> mapConfigs(Set<String> config, Set<String> optionsNotInStack) {
-        Set<Set<String>> coveredPartialCofigs = Helper.getConfigurations(optionsNotInStack);
-        Set<Set<String>> coveredConfigs = new HashSet<>();
-
-        for(Set<String> partialConfig : coveredPartialCofigs) {
-            Set<String> coveredConfig = new HashSet<>();
-            coveredConfig.addAll(config);
-            coveredConfig.addAll(partialConfig);
-
-            coveredConfigs.add(coveredConfig);
-        }
-
-        return coveredConfigs;
-    }
-
-    private Set<String> getOptionsNotInStack(Stack<String> stack, List<String> options) {
-        Set<String> optionsNotInStack = new HashSet<>();
-
-        for(String option : options) {
-            if(!stack.contains(option)) {
-                optionsNotInStack.add(option);
-            }
-        }
-
-        return optionsNotInStack;
-    }
 }

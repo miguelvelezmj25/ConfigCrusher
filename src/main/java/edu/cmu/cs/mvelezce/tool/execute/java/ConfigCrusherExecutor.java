@@ -57,6 +57,11 @@ public class ConfigCrusherExecutor extends BaseExecutor {
 
         result = Regions.getRegionsToProcessedPerformance();
 
+        for(Map.Entry<String, Long> entry : result.entrySet()) {
+            long overhead = Regions.regionsToOverhead.get(entry.getKey());
+            result.put(entry.getKey(), entry.getValue() - overhead);
+        }
+
         if(!result.isEmpty()) {
             return result;
         }

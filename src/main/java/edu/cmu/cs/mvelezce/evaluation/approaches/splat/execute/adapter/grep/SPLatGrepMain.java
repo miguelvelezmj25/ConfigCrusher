@@ -9,12 +9,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
-public class SPLatGrepMain implements SPLatMain {
+public class SPLatGrepMain extends SPLatMain {
+
+    public SPLatGrepMain(String programName) {
+        super(programName);
+    }
 
     @Override
-    public Set<Set<String>> getSPLatConfigurations(String programName) {
-        if(!programName.contains("grep")) {
-            throw new RuntimeException("Could not find the main class " + programName);
+    public Set<Set<String>> getSPLatConfigurations() {
+        if(!this.getProgramName().contains("grep")) {
+            throw new RuntimeException("Could not find the main class " + this.getProgramName());
         }
 
         Set<Set<String>> splatConfigurations = new HashSet<>();

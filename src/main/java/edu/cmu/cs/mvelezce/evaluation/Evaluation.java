@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
@@ -168,7 +169,72 @@ public class Evaluation {
         writer.close();
     }
 
-    public void writeConfigurationToPerformance(String approach, PerformanceModel performanceModel, Set<PerformanceEntryStatistic> performanceEntryStats, Set<Set<String>> configurations) throws IOException {
+    public void writeConfigurationToPerformance(String approach, List<Coverage> coverageList, Set<PerformanceEntryStatistic> performanceEntryStats) throws IOException {
+        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
+                + approach + Evaluation.DOT_CSV;
+        File outputFile = new File(outputDir);
+
+        if(outputFile.exists()) {
+            FileUtils.forceDelete(outputFile);
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
+        StringBuilder result = new StringBuilder();
+        result.append("measured,configuration,performance,std");
+        result.append("\n");
+
+        for(Coverage coverage : coverageList) {
+            Set<String> config = coverage.getConfig();
+
+            for(PerformanceEntryStatistic entry : performanceEntryStats) {
+                if(!entry.getConfiguration().equals(config)) {
+                    continue;
+                }
+
+                result.append(true);
+                result.append(",");
+                result.append('"');
+                result.append(config);
+                result.append('"');
+                result.append(",");
+                double perf = entry.getRegionsToProcessedPerformanceHumanReadable().values().iterator().next();
+                result.append(decimalFormat.format(perf));
+                result.append(",");
+                double std = entry.getRegionsToProcessedStdHumanReadable().values().iterator().next();
+                result.append(decimalFormat.format(std));
+                result.append("\n");
+
+                Set<Set<String>> covereds = coverage.getCovered();
+
+                for(Set<String> covered : covereds) {
+                    if(covered.equals(config)) {
+                        continue;
+                    }
+
+                    result.append(false);
+                    result.append(",");
+                    result.append('"');
+                    result.append(covered);
+                    result.append('"');
+                    result.append(",");
+                    result.append(decimalFormat.format(perf));
+                    result.append(",");
+                    result.append(decimalFormat.format(std));
+                    result.append("\n");
+                }
+            }
+        }
+
+        outputFile.getParentFile().mkdirs();
+        FileWriter writer = new FileWriter(outputFile);
+        writer.write(result.toString());
+        writer.flush();
+        writer.close();
+    }
+
+    public void writeConfigurationToPerformance(String approach, PerformanceModel
+            performanceModel, Set<PerformanceEntryStatistic> performanceEntryStats, Set<Set<String>> configurations) throws
+            IOException {
         String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
                 + approach + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);

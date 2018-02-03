@@ -1,0 +1,272 @@
+[
+  {
+    "config": [],
+    "covered": [
+      [],
+      [
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "LOGLEVEL",
+      "COMPRESSIONLEVEL"
+    ],
+    "covered": [
+      [
+        "LOGLEVEL",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "ITERATIONS",
+        "LOGLEVEL",
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "COMPRESSOR"
+    ],
+    "covered": [
+      [
+        "COMPRESSOR"
+      ],
+      [
+        "COMPRESSOR",
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "COMPRESSOR",
+      "LOGLEVEL"
+    ],
+    "covered": [
+      [
+        "COMPRESSOR",
+        "LOGLEVEL",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "COMPRESSOR",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "COMPRESSOR",
+      "REMOVEGAMMA"
+    ],
+    "covered": [
+      [
+        "COMPRESSOR",
+        "REMOVEGAMMA",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "COMPRESSOR",
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "COMPRESSOR",
+      "LOGLEVEL",
+      "REMOVEGAMMA"
+    ],
+    "covered": [
+      [
+        "COMPRESSOR",
+        "LOGLEVEL",
+        "REMOVEGAMMA"
+      ],
+      [
+        "COMPRESSOR",
+        "LOGLEVEL",
+        "REMOVEGAMMA",
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "LOGLEVEL",
+      "REMOVEGAMMA"
+    ],
+    "covered": [
+      [
+        "ITERATIONS",
+        "LOGLEVEL",
+        "REMOVEGAMMA"
+      ],
+      [
+        "LOGLEVEL",
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "LOGLEVEL",
+      "REMOVEGAMMA",
+      "COMPRESSIONLEVEL"
+    ],
+    "covered": [
+      [
+        "ITERATIONS",
+        "LOGLEVEL",
+        "REMOVEGAMMA",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "LOGLEVEL",
+        "REMOVEGAMMA",
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "REMOVEGAMMA",
+      "COMPRESSIONLEVEL"
+    ],
+    "covered": [
+      [
+        "ITERATIONS",
+        "REMOVEGAMMA",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "REMOVEGAMMA",
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "COMPRESSOR",
+      "ITERATIONS"
+    ],
+    "covered": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "COMPRESSOR",
+        "ITERATIONS"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "COMPRESSOR",
+      "ITERATIONS",
+      "REMOVEGAMMA"
+    ],
+    "covered": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "REMOVEGAMMA",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "LOGLEVEL"
+    ],
+    "covered": [
+      [
+        "ITERATIONS",
+        "LOGLEVEL"
+      ],
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "COMPRESSIONLEVEL"
+    ],
+    "covered": [
+      [
+        "ITERATIONS",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "REMOVEGAMMA"
+    ],
+    "covered": [
+      [
+        "ITERATIONS",
+        "REMOVEGAMMA"
+      ],
+      [
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "COMPRESSOR",
+      "ITERATIONS",
+      "LOGLEVEL"
+    ],
+    "covered": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "config": [
+      "COMPRESSOR",
+      "ITERATIONS",
+      "LOGLEVEL",
+      "REMOVEGAMMA"
+    ],
+    "covered": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL",
+        "REMOVEGAMMA",
+        "COMPRESSIONLEVEL"
+      ],
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL",
+        "REMOVEGAMMA"
+      ]
+    ]
+  }
+]

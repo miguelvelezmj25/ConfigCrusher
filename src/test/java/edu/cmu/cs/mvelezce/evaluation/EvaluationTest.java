@@ -77,6 +77,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareGrep1() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareGrep2() throws Exception {
         String programName = "grep";
 
@@ -90,6 +98,14 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareGrep4() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
     }
 
     @Test
@@ -944,6 +960,34 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+    }
+
+    @Test
+    public void grepSPLat() throws Exception {
+        String programName = "grep";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        SPLat splat = new SPLat(programName);
+        List<Coverage> coverageList = splat.readFileCoverage();
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+    }
+
+    @Test
+    public void grepSPLatSamplingTime() throws Exception {
+        String programName = "grep";
+
+        SPLat splat = new SPLat(programName);
+        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
     }
 
     @Test

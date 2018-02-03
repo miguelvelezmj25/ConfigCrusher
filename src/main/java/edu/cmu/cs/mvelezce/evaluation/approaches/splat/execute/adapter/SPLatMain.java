@@ -1,13 +1,12 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
 import edu.cmu.cs.mvelezce.tool.Options;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public abstract class SPLatMain {
 
@@ -26,14 +25,19 @@ public abstract class SPLatMain {
         if(this.configsToCovered.isEmpty()) {
             throw new RuntimeException("The coverage map is empty");
         }
+        List<Coverage> coverageList = new ArrayList<>();
+
+        for(Map.Entry<Set<String>, Set<Set<String>>> entry : this.configsToCovered.entrySet()) {
+            Coverage coverage = new Coverage(entry.getKey(), entry.getValue());
+            coverageList.add(coverage);
+        }
 
         ObjectMapper mapper = new ObjectMapper();
         String outputFile = SPLatMain.DIRECTORY + "/" + this.programName + "/coverage" + Options.DOT_JSON;
         File file = new File(outputFile);
         file.getParentFile().mkdirs();
 
-//        CompressedConfigurations compressedConfigurations = new CompressedConfigurations(configurationsToExecute);
-        mapper.writeValue(file, this.configsToCovered);
+        mapper.writeValue(file, coverageList);
     }
 
     public String getProgramName() {

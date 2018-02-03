@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.Pairwise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
@@ -57,6 +58,14 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareRunningExample4() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
     }
 
     @Test
@@ -358,9 +367,7 @@ public class EvaluationTest {
 
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-
         Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
 
         // arguments
@@ -375,31 +382,21 @@ public class EvaluationTest {
         eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
     }
 
-//    @Test
-//    public void runningExampleSPLat() throws Exception {
-//        String programName = "running-example";
-//
-//        // arguments
-//        String[] args = new String[0];
-//
-//        Executor executor = new BruteForceExecutor(programName);
-//        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-//
-//        SPLat splat = new SPLat(programName);
-//        Set<PerformanceEntryStatistic> pairwiseEntries = splat.getSPLatEntries(performanceEntries);
-//        splat.generateCSVData(pairwiseEntries);
-////        String output = splat.execute(script);
-//
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModelBuilder splatBuilder = new SPLatPerformanceModelBuilder(programName, output);
-//        PerformanceModel performanceModel = splatBuilder.createModel(args);
-//
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.SPLAT, performanceModel, pairwiseEntries);
-//    }
+    @Test
+    public void runningExampleSPLat() throws Exception {
+        String programName = "running-example";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        SPLat splat = new SPLat(programName);
+        List<Coverage> coverageList = splat.readFileCoverage();
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+    }
 
     @Test
     public void colorCounterConfigCrusher() throws Exception {

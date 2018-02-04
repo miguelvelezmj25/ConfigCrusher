@@ -787,6 +787,34 @@ public class EvaluationTest {
     }
 
     @Test
+    public void kanziSPLat() throws Exception {
+        String programName = "kanzi";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        SPLat splat = new SPLat(programName);
+        List<Coverage> coverageList = splat.readFileCoverage();
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+    }
+
+    @Test
+    public void kanziSPLatSamplingTime() throws Exception {
+        String programName = "kanzi";
+
+        SPLat splat = new SPLat(programName);
+        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+    }
+
+    @Test
     public void grepBruteForce() throws Exception {
         String programName = "grep";
 

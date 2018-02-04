@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.SPLatMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.counter.SPLatCounterMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.grep.SPLatGrepMain;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.kanzi.SPLatKanziMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.optimizer.SPLatOptimizerMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.runningexample.SPLatRunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.Options;
@@ -67,6 +68,9 @@ public class SPLatExecutor extends BaseCompression {
         }
         else if(this.getProgramName().contains("grep")) {
             main = new SPLatGrepMain("grep");
+        }
+        else if(this.getProgramName().contains("kanzi")) {
+            main = new SPLatKanziMain("kanzi");
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

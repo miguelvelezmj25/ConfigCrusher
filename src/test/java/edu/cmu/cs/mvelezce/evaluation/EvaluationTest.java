@@ -213,6 +213,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareKanzi4() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareRegions121() throws Exception {
         String programName = "regions12";
 

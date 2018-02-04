@@ -1,11 +1,14 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler;
 
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 import org.prevayler.demos.demo1.PrimeNumbers;
 
 import java.io.IOException;
@@ -44,6 +47,15 @@ public class PrevaylerMain extends BaseMain {
 
     @Override
     public void execute(String mainClass, String[] args) throws Exception {
+        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("prevayler");
+        instrumenter.instrument(args);
+        Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
+
+        for(JavaRegion region : regions) {
+            Regions.regionsToOverhead.put(region.getRegionID(),0L);
+        }
+        Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID,0L);
+
         if(mainClass.contains("PrimeNumbers")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
             Regions.enter(program.getRegionID());

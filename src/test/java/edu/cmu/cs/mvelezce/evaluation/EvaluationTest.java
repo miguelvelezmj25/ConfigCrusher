@@ -485,7 +485,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new SPLatExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         SPLat splat = new SPLat(programName);
@@ -502,7 +502,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new BruteForceEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -516,7 +516,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = ColorCounterAdapter.getColorCounterOptions();
@@ -563,7 +563,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = ColorCounterAdapter.getColorCounterOptions();
@@ -661,7 +661,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new BruteForceEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -675,7 +675,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new BruteForceEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -721,7 +721,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = KanziAdapter.getKanziOptions();
@@ -768,7 +768,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = KanziAdapter.getKanziOptions();
@@ -883,7 +883,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new BruteForceEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -929,7 +929,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = GrepAdapter.getGrepOptions();
@@ -976,7 +976,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = GrepAdapter.getGrepOptions();
@@ -1091,7 +1091,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new BruteForceEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -1105,7 +1105,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = PrevaylerAdapter.getPrevaylerOptions();
@@ -1152,7 +1152,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = PrevaylerAdapter.getPrevaylerOptions();
@@ -1248,7 +1248,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = OptimizerAdapter.getOptimizerOptions();
@@ -1295,7 +1295,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         List<String> options = OptimizerAdapter.getOptimizerOptions();
@@ -1497,7 +1497,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new BruteForceEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -1511,7 +1511,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new BruteForceEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);

@@ -25,7 +25,7 @@ public class SPLat extends Approach {
     }
 
     @Override
-    public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries) {
+    public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries, List<String> options) {
         throw new UnsupportedOperationException();
     }
 

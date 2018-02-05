@@ -24,11 +24,6 @@ import java.util.Set;
 
 public class BruteForceExecutor extends BaseExecutor {
 
-    // TODO this is weird and creating a lot of bugs
-    static {
-        DIRECTORY = BaseExecutor.DIRECTORY + "/bruteforce/programs";
-    }
-
     public BruteForceExecutor(String programName) {
         this(programName, null, null, null);
     }
@@ -215,6 +210,11 @@ public class BruteForceExecutor extends BaseExecutor {
 //        BruteForce.saveBFPerformance(programName, perfStats);
 //
 //        return measuredPerformance;
+    }
+
+    @Override
+    public String getOutputDir() {
+        return BaseExecutor.DIRECTORY + "/bruteforce/programs";
     }
 
 }

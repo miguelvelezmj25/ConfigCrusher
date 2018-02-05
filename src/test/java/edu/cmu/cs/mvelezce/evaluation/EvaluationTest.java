@@ -1,9 +1,12 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEvaluationExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
+import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.execute.FeaturewiseExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.Pairwise;
+import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.execute.PairwiseExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
@@ -275,7 +278,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new BruteForceEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -341,12 +344,14 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
 
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries, options);
     }
 
     @Test
@@ -386,12 +391,14 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
 
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries, options);
     }
 
     @Test
@@ -511,9 +518,11 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = ColorCounterAdapter.getColorCounterOptions();
+
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries, options);
     }
 
     @Test
@@ -556,9 +565,11 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = ColorCounterAdapter.getColorCounterOptions();
+
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries, options);
     }
 
     @Test
@@ -712,20 +723,41 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = KanziAdapter.getKanziOptions();
+
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries);
-//        String output = featurewise.execute(script);
-//
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-//
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries, options);
+    }
+
+    @Test
+    public void kanziFeaturewiseModel() throws Exception {
+        String programName = "kanzi";
+
+        List<String> options = KanziAdapter.getKanziOptions();
+        Featurewise featurewise = new Featurewise(programName);
+        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
     }
 
     @Test
@@ -738,20 +770,41 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = KanziAdapter.getKanziOptions();
+
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries);
-//        String output = pairwise.execute(script);
-//
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-//
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries, options);
+    }
+
+    @Test
+    public void kanziPairwiseModel() throws Exception {
+        String programName = "kanzi";
+
+        List<String> options = KanziAdapter.getKanziOptions();
+        Pairwise pairwise = new Pairwise(programName);
+        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
     }
 
     @Test
@@ -878,9 +931,11 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = GrepAdapter.getGrepOptions();
+
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries, options);
     }
 
     @Test
@@ -923,9 +978,11 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = GrepAdapter.getGrepOptions();
+
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries, options);
     }
 
     @Test
@@ -1050,20 +1107,41 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries);
-//        String output = featurewise.execute(script);
-//
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, output);
-//        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
-//
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries, options);
+    }
+
+    @Test
+    public void prevaylerFeaturewiseModel() throws Exception {
+        String programName = "prevayler";
+
+        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+        Featurewise featurewise = new Featurewise(programName);
+        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
     }
 
     @Test
@@ -1076,20 +1154,41 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries);
-//        String output = pairwise.execute(script);
-//
-//        args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-//
-//        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, output);
-//        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-//
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries, options);
+    }
+
+    @Test
+    public void prevaylerPairwiseModel() throws Exception {
+        String programName = "prevayler";
+
+        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+        Pairwise pairwise = new Pairwise(programName);
+        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
     }
 
     @Test
@@ -1151,9 +1250,11 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = OptimizerAdapter.getOptimizerOptions();
+
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries);
+        featurewise.generateCSVData(featurewiseEntries, options);
     }
 
     @Test
@@ -1196,9 +1297,11 @@ public class EvaluationTest {
         Executor executor = new BruteForceExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
+        List<String> options = OptimizerAdapter.getOptimizerOptions();
+
         Pairwise pairwise = new Pairwise(programName);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries);
+        pairwise.generateCSVData(pairwiseEntries, options);
     }
 
     @Test

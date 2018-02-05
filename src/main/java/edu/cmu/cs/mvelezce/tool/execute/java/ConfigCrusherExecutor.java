@@ -29,11 +29,6 @@ import java.util.Set;
  */
 public class ConfigCrusherExecutor extends BaseExecutor {
 
-    // TODO change this since it is creating a lot of bugs
-    static {
-        DIRECTORY = BaseExecutor.DIRECTORY + "/configcrusher/programs";
-    }
-
     public ConfigCrusherExecutor() {
         this(null);
     }
@@ -139,6 +134,11 @@ public class ConfigCrusherExecutor extends BaseExecutor {
 
         Set<DefaultPerformanceEntry> performanceEntries = this.aggregateExecutions(outputFile);
         return performanceEntries;
+    }
+
+    @Override
+    public String getOutputDir() {
+        return BaseExecutor.DIRECTORY + "/configcrusher/programs";
     }
 
 }

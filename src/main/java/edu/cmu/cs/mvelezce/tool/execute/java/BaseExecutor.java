@@ -32,7 +32,7 @@ public abstract class BaseExecutor implements Executor {
         this.configurations = configurations;
     }
 
-    private Set<PerformanceEntryStatistic> averageExecutions(List<Set<DefaultPerformanceEntry>> performanceEntriesList) {
+    protected Set<PerformanceEntryStatistic> averageExecutions(List<Set<DefaultPerformanceEntry>> performanceEntriesList) {
         Set<DefaultPerformanceEntry> performanceEntrySet = performanceEntriesList.iterator().next();
         Set<Set<String>> configurations = new HashSet<>();
 
@@ -89,7 +89,7 @@ public abstract class BaseExecutor implements Executor {
     public Set<PerformanceEntryStatistic> execute(String[] args) throws IOException, InterruptedException {
         Options.getCommandLine(args);
 
-        String outputDir = BaseExecutor.DIRECTORY + "/" + this.programName;
+        String outputDir = this.getOutputDir() + "/" + this.programName;
         File root = new File(outputDir);
 
         Options.checkIfDeleteResult(root);
@@ -184,7 +184,7 @@ public abstract class BaseExecutor implements Executor {
     @Override
     public void writeToFile(String iteration, Set<String> configuration, Map<String, Long> regionsToProcessedPerformance) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String outputFile = BaseExecutor.DIRECTORY + "/" + this.programName + "/" + iteration + "/" + UUID.randomUUID()
+        String outputFile = this.getOutputDir() + "/" + this.programName + "/" + iteration + "/" + UUID.randomUUID()
                 + Options.DOT_JSON;
         File file = new File(outputFile);
         file.getParentFile().mkdirs();

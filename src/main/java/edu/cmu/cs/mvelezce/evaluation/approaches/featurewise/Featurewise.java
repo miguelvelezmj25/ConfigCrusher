@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.featurewise;
 
-import edu.cmu.cs.mvelezce.Feature;
 import edu.cmu.cs.mvelezce.evaluation.Evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.Approach;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -18,105 +17,8 @@ public class Featurewise extends Approach {
         super(programName);
     }
 
-//    public PerformanceModel createModel(String output) {
-//
-//    }
-
-//    public String execute(String file) throws IOException, InterruptedException {
-//        List<String> commandList = new ArrayList<>();
-//
-//        commandList.add("Rscript");
-//        commandList.add(file);
-//
-//        String[] command = new String[commandList.size()];
-//        command = commandList.toArray(command);
-//        System.out.println(Arrays.toString(command));
-//        Process process = Runtime.getRuntime().exec(command);
-//
-//        System.out.println("Output: ");
-//        BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//        String string;
-//
-//        StringBuilder output = new StringBuilder();
-//
-//        while((string = inputReader.readLine()) != null) {
-//            if(!string.isEmpty()) {
-//                System.out.println(string);
-//                output.append(string).append("\n");
-//            }
-//        }
-//
-//        System.out.println("Errors: ");
-//        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-//
-//        while((string = errorReader.readLine()) != null) {
-//            if(!string.isEmpty()) {
-//                System.out.println(string);
-//            }
-//        }
-//
-//        process.waitFor();
-//        System.out.println();
-//
-//        return output.toString();
-//    }
-
-//    public String generateRScript(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
-//        String file = this.generateRScriptData(performanceEntries);
-//
-//        Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
-//        Set<String> options = this.getOptions(configurations);
-//
-//        return this.generateRScript(file, options);
-//    }
-
-//    private String generateRScript(String file, Set<String> options) throws IOException {
-//        StringBuilder script = new StringBuilder();
-//        script.append("feature_wise <- read.csv(\"");
-//        script.append(file);
-//        script.append("\")");
-//        script.append("\n");
-//        script.append("model <- lm(time~");
-//
-//        Iterator<String> optionsIter = options.iterator();
-//
-//        while(optionsIter.hasNext()) {
-//            String option = optionsIter.next();
-//            script.append(option);
-//
-//            if(optionsIter.hasNext()) {
-//                script.append("+");
-//            }
-//        }
-//
-//        script.append(", data = feature_wise)");
-//        script.append("\n");
-//        script.append("coef(model)");
-//        script.append("\n");
-//
-//        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + Featurewise.DATA_DIR + "/"
-//                + Evaluation.FEATURE_WISE + Featurewise.DOT_R;
-//        File outputFile = new File(outputDir);
-//
-//        if(outputFile.exists()) {
-//            FileUtils.forceDelete(outputFile);
-//        }
-//
-//        outputFile.getParentFile().mkdirs();
-//        FileWriter writer = new FileWriter(outputFile);
-//        writer.write(script.toString());
-//        writer.flush();
-//        writer.close();
-//
-//        return outputDir;
-//    }
-
     @Override
-    public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
-        Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
-        Set<String> optionsSet = Featurewise.getOptions(configurations);
-        List<String> options = new ArrayList<>(optionsSet);
-
+    public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries, List<String> options) throws IOException {
         StringBuilder result = new StringBuilder();
 
         for(String option : options) {

@@ -14,4 +14,6 @@ public interface PerformanceModelBuilder {
     public void writeToFile(PerformanceModel performanceModel) throws IOException;
 
     public PerformanceModel readFromFile(File file) throws IOException;
+
+    public String getOutputDir();
 }

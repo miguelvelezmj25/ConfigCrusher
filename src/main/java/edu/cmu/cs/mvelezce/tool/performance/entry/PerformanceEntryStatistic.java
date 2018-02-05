@@ -346,6 +346,86 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
         this.regionsToProcessedStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToProcessedStd);
     }
 
+    public Map<Region, Long> getRegionsRawMin() {
+        Map<Region, Long> result = new HashMap<>();
+
+        for(Map.Entry<Region, List<Long>> entry : this.regionsToRawMinMax.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().get(0));
+        }
+
+        return result;
+    }
+
+    public Map<Region, Double> getRegionsRawMinHumanReadable() {
+        Map<Region, Double> result = new HashMap<>();
+
+        for(Map.Entry<Region, List<Double>> entry : this.regionsToRawMinMaxHumanReadable.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().get(0));
+        }
+
+        return result;
+    }
+
+    public Map<Region, Long> getRegionsProcessedMin() {
+        Map<Region, Long> result = new HashMap<>();
+
+        for(Map.Entry<Region, List<Long>> entry : this.regionsToProcessedMinMax.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().get(0));
+        }
+
+        return result;
+    }
+
+    public Map<Region, Double> getRegionsMinProcessedHumanReadable() {
+        Map<Region, Double> result = new HashMap<>();
+
+        for(Map.Entry<Region, List<Double>> entry : this.regionsToProcessedMinMaxHumanReadable.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().get(0));
+        }
+
+        return result;
+    }
+
+    public Map<Region, Long> getRegionsRawMean() {
+        Map<Region, Long> result = new HashMap<>();
+
+        for(Map.Entry<Region, Long> entry : this.regionsToRawMean.entrySet()) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
+
+    public Map<Region, Double> getRegionsRawMeanHumanReadable() {
+        Map<Region, Double> result = new HashMap<>();
+
+        for(Map.Entry<Region, Double> entry : this.regionsToRawMeanHumanReadable.entrySet()) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
+
+    public Map<Region, Long> getRegionsProcessedMean() {
+        Map<Region, Long> result = new HashMap<>();
+
+        for(Map.Entry<Region, Long> entry : this.regionsToProcessedMean.entrySet()) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
+
+    public Map<Region, Double> getRegionsMeanProcessedHumanReadable() {
+        Map<Region, Double> result = new HashMap<>();
+
+        for(Map.Entry<Region, Double> entry : this.regionsToProcessedMeanHumanReadable.entrySet()) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
+
     public boolean isMeasured() {
         return measured;
     }
@@ -356,5 +436,45 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
 
     public Map<Region, Double> getRegionsToProcessedStdHumanReadable() {
         return regionsToProcessedStdHumanReadable;
+    }
+
+    public Map<Region, List<Long>> getRegionsToRawMinMax() {
+        return regionsToRawMinMax;
+    }
+
+    public Map<Region, Long> getRegionsToRawMean() {
+        return regionsToRawMean;
+    }
+
+    public Map<Region, Double> getRegionsToRawStd() {
+        return regionsToRawStd;
+    }
+
+    public Map<Region, List<Double>> getRegionsToRawMinMaxHumanReadable() {
+        return regionsToRawMinMaxHumanReadable;
+    }
+
+    public Map<Region, Double> getRegionsToRawMeanHumanReadable() {
+        return regionsToRawMeanHumanReadable;
+    }
+
+    public Map<Region, Double> getRegionsToRawStdHumanReadable() {
+        return regionsToRawStdHumanReadable;
+    }
+
+    public Map<Region, List<Long>> getRegionsToProcessedMinMax() {
+        return regionsToProcessedMinMax;
+    }
+
+    public Map<Region, Long> getRegionsToProcessedMean() {
+        return regionsToProcessedMean;
+    }
+
+    public Map<Region, List<Double>> getRegionsToProcessedMinMaxHumanReadable() {
+        return regionsToProcessedMinMaxHumanReadable;
+    }
+
+    public Map<Region, Double> getRegionsToProcessedMeanHumanReadable() {
+        return regionsToProcessedMeanHumanReadable;
     }
 }

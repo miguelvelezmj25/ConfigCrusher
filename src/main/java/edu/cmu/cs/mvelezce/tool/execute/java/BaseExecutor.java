@@ -46,12 +46,12 @@ public abstract class BaseExecutor implements Executor {
         // Get results
         for(DefaultPerformanceEntry performanceEntry : performanceEntrySet) {
             PerformanceEntryStatistic entryStatistic = new PerformanceEntryStatistic(true, performanceEntry.getConfiguration());
-            entryStatistic.setRegionsToRawPerformance(performanceEntry.getRegionsToRawPerformance());
-            entryStatistic.setRegionsToRawPerformanceHumanReadable(performanceEntry.getRegionsToRawPerformanceHumanReadable());
-            entryStatistic.setRegionsToInnerRegions(performanceEntry.getRegionsToInnerRegions());
-            entryStatistic.setRegionsToProcessedPerformance(performanceEntry.getRegionsToProcessedPerformance());
-            entryStatistic.setRegionsToProcessedPerformanceHumanReadable(performanceEntry.getRegionsToProcessedPerformanceHumanReadable());
-
+//            entryStatistic.setRegionsToRawPerformance(performanceEntry.getRegionsToRawPerformance());
+//            entryStatistic.setRegionsToRawPerformanceHumanReadable(performanceEntry.getRegionsToRawPerformanceHumanReadable());
+//            entryStatistic.setRegionsToInnerRegions(performanceEntry.getRegionsToInnerRegions());
+//            entryStatistic.setRegionsToProcessedPerformance(performanceEntry.getRegionsToProcessedPerformance());
+//            entryStatistic.setRegionsToProcessedPerformanceHumanReadable(performanceEntry.getRegionsToProcessedPerformanceHumanReadable());
+//
             results.add(entryStatistic);
         }
 
@@ -80,6 +80,20 @@ public abstract class BaseExecutor implements Executor {
                 break;
             }
 
+        }
+
+        for(PerformanceEntryStatistic performanceEntryStatistic : results) {
+            // Min
+//            performanceEntryStatistic.setRegionsToRawPerformance(performanceEntryStatistic.getRegionsRawMin());
+//            performanceEntryStatistic.setRegionsToRawPerformanceHumanReadable(performanceEntryStatistic.getRegionsRawMinHumanReadable());
+//            performanceEntryStatistic.setRegionsToProcessedPerformance(performanceEntryStatistic.getRegionsProcessedMin());
+//            performanceEntryStatistic.setRegionsToProcessedPerformanceHumanReadable(performanceEntryStatistic.getRegionsMinProcessedHumanReadable());
+
+            // Mean
+            performanceEntryStatistic.setRegionsToRawPerformance(performanceEntryStatistic.getRegionsRawMean());
+            performanceEntryStatistic.setRegionsToRawPerformanceHumanReadable(performanceEntryStatistic.getRegionsRawMeanHumanReadable());
+            performanceEntryStatistic.setRegionsToProcessedPerformance(performanceEntryStatistic.getRegionsProcessedMean());
+            performanceEntryStatistic.setRegionsToProcessedPerformanceHumanReadable(performanceEntryStatistic.getRegionsMeanProcessedHumanReadable());
         }
 
         return results;

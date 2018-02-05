@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBuilder {
 
-    public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
+    public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs/configcrusher";
 
     public ConfigCrusherPerformanceModelBuilder(String programName, Set<PerformanceEntryStatistic> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
         super(programName, measuredPerformance, regionsToOptionSet);
@@ -30,52 +30,17 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
     // TODO write code that will know when multiple regions are executed in separate
     @Override
     public PerformanceModel createModel() {
-//        for(DefaultPerformanceEntry performanceEntry : this.getMeasuredPerformance()) {
-//            Set<String> performanceEntryConfiguration = performanceEntry.getConfiguration();
-//
-//            for(Map.Entry<Region, Long> regionToProcessedPerformance : performanceEntry.getRegionsToProcessedPerformance().entrySet()) {
-//                Region performanceRegion = regionToProcessedPerformance.getKey();
-//
-//                Map<Set<String>, Set<Long>> optionValuesToPerformances = new HashMap<>();
-//
-//                for(Map.Entry<Region, Set<Set<String>>> regionToOptionSet : this.getRegionsToOptionSet().entrySet()) {
-//                    Region region = regionToOptionSet.getKey();
-//
-//                    if(!performanceRegion.getRegionID().equals(region.getRegionID())) {
-//                        continue;
-//                    }
-//
-//                    // TODO this might change if we decide to not have a set of set of options for each region
-//                    Set<String> optionsInRegion = new HashSet<>();
-//
-//                    for(Set<String> options : regionToOptionSet.getValue()) {
-//                        optionsInRegion.addAll(options);
-//                    }
-//
-//                    Set<String> optionValueInPerfEntry = new HashSet<>(optionsInRegion);
-//                    optionValueInPerfEntry.retainAll(performanceEntryConfiguration);
-//
-//                    if(!optionValuesToPerformances.containsKey(optionValueInPerfEntry)) {
-//                        optionValuesToPerformances.put(optionValueInPerfEntry, new HashSet<>());
-//                    }
-//
-//                    optionValuesToPerformances.get(optionValueInPerfEntry).add(regionToProcessedPerformance.getValue());
-//                }
-//
-//                regionsToPerformanceTable.put(performanceRegion, optionValuesToPerformances);
-//            }
-//        }
-
         // TODO add these method to the interface
         Map<Region, Map<Set<String>, Long>> regionsToPerformanceTable = this.processPerformance();
-//        Map<Region, Map<Set<String>, Double>> regionsToStdTable = this.processStd();
         long programTime = this.processProgramTime();
-//        double programStd = this.processProgramStd();
-
-//        PerformanceModel performanceModel = new PerformanceModel(programTime, programStd, regionsToPerformanceTable, regionsToStdTable);
         PerformanceModel performanceModel = new PerformanceModel(programTime, regionsToPerformanceTable);
 
         return performanceModel;
+    }
+
+    @Override
+    public String getOutputDir() {
+        return ConfigCrusherPerformanceModelBuilder.DIRECTORY;
     }
 
     private Map<Region, Map<Set<String>, Long>> averageMultipleExecutions(Map<Region, Map<Set<String>, Set<Long>>> regionsToPerformanceTable) {

@@ -9,9 +9,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/28/17.
@@ -21,9 +19,12 @@ public abstract class BasePerformanceModelBuilder implements PerformanceModelBui
     public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs";
 
     private String programName;
-    private Set<PerformanceEntryStatistic> measuredPerformance;
-    private Map<Region, Set<Set<String>>> regionsToOptionSet;
+    private Set<PerformanceEntryStatistic> measuredPerformance = new HashSet<>();
+    private Map<Region, Set<Set<String>>> regionsToOptionSet = new HashMap<>();
 
+    public BasePerformanceModelBuilder(String programName) {
+        this.programName = programName;
+    }
 
     public BasePerformanceModelBuilder(String programName, Set<PerformanceEntryStatistic> measuredPerformance, Map<Region, Set<Set<String>>> regionsToOptionSet) {
         this.programName = programName;

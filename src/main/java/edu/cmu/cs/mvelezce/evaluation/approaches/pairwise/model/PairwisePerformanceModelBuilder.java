@@ -1,21 +1,20 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.evaluation.approaches.ApproachPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
-import edu.cmu.cs.mvelezce.tool.performance.model.builder.BasePerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class PairwisePerformanceModelBuilder extends ApproachPerformanceModelBuilder {
 
-    public static final String PAIRWISE_DIR = "/pairwise";
+    public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs/pairwise";
 
     public PairwisePerformanceModelBuilder(String programName, Map<Set<String>, Double> learnedModel) {
         super(programName, learnedModel);
@@ -35,47 +34,6 @@ public class PairwisePerformanceModelBuilder extends ApproachPerformanceModelBui
         return pm;
     }
 
-    @Override
-    public PerformanceModel createModel(String[] args) throws IOException {
-        Options.getCommandLine(args);
-
-        String outputDir = BasePerformanceModelBuilder.DIRECTORY + "/" + this.getProgramName()
-                + PairwisePerformanceModelBuilder.PAIRWISE_DIR;
-        File outputFile = new File(outputDir);
-
-        Options.checkIfDeleteResult(outputFile);
-
-        if(outputFile.exists()) {
-            Collection<File> files = FileUtils.listFiles(outputFile, null, true);
-
-            if(files.size() != 1) {
-                throw new RuntimeException("We expected to find 1 file in the directory, but that is not the case "
-                        + outputFile);
-            }
-
-            return this.readFromFile(files.iterator().next());
-        }
-
-        PerformanceModel performanceModel = this.createModel();
-
-        if(Options.checkIfSave()) {
-            this.writeToFile(performanceModel);
-        }
-
-        return performanceModel;
-    }
-
-    @Override
-    public void writeToFile(PerformanceModel performanceModel) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String outputFile = BasePerformanceModelBuilder.DIRECTORY + "/" + this.getProgramName()
-                + PairwisePerformanceModelBuilder.PAIRWISE_DIR + "/" + this.getProgramName()
-                + Options.DOT_JSON;
-        File file = new File(outputFile);
-        file.getParentFile().mkdirs();
-
-        mapper.writeValue(file, performanceModel);
-    }
 
     @Override
     public PerformanceModel readFromFile(File file) throws IOException {
@@ -84,6 +42,6 @@ public class PairwisePerformanceModelBuilder extends ApproachPerformanceModelBui
 
     @Override
     public String getOutputDir() {
-        throw new UnsupportedOperationException("Implement");
+        return PairwisePerformanceModelBuilder.DIRECTORY;
     }
 }

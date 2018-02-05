@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches;
 
-import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -14,13 +13,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class BlackBoxExecutor extends BaseExecutor {
+public class UsesBFExecutor extends BaseExecutor {
 
-    public BlackBoxExecutor(String programName) {
+    public UsesBFExecutor(String programName) {
         this(programName, null, null, null);
     }
 
-    public BlackBoxExecutor(String programName, String entryPoint, String classDir, Set<Set<String>> configurations) {
+    public UsesBFExecutor(String programName, String entryPoint, String classDir, Set<Set<String>> configurations) {
         super(programName, entryPoint, classDir, configurations);
     }
 

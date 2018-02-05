@@ -1,14 +1,12 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.splat;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.evaluation.approaches.Approach;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.SPLatExecutor;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.SPLatCompression;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.SPLatMain;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
-import edu.cmu.cs.mvelezce.tool.compression.serialize.CompressedConfigurations;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 
 import java.io.File;
@@ -70,7 +68,7 @@ public class SPLat extends Approach {
 
     public Set<Set<String>> getSPLatConfigurations() {
         String[] args = new String[0];
-        Compression compressor = new SPLatExecutor(this.getProgramName());
+        Compression compressor = new SPLatCompression(this.getProgramName());
         Set<Set<String>> configurationsToExecute = new HashSet<>();
 
         try {

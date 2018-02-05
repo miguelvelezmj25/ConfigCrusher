@@ -82,4 +82,9 @@ public class FeaturewisePerformanceModelBuilder extends ApproachPerformanceModel
     public PerformanceModel readFromFile(File file) throws IOException {
         throw new UnsupportedOperationException("Have not implemented");
     }
+
+    @Override
+    public String getOutputDir() {
+        throw new UnsupportedOperationException("Implement");
+    }
 }

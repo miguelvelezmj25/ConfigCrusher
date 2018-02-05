@@ -1,1 +1,178 @@
-[{"region":{"regionID":"9cb16ac4-4249-49a0-81ae-670758429bf4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic.core","regionClass":"PngImage","regionMethod":"<init>(Ljava/lang/String;Ljava/lang/String;)V","startBytecodeIndex":0,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"482166003","endBlocksIDs":["482166003"]},"options":[["LOGLEVEL","REMOVEGAMMA"]]},{"region":{"regionID":"d4dbd916-82b3-468c-b28f-eb1c243cbbfd","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":244,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"958505693","endBlocksIDs":["278271574","1172632086"]},"options":[["COMPRESSOR","ITERATIONS","LOGLEVEL"]]},{"region":{"regionID":"93c11200-0d70-48b3-8e98-7c064b1f90db","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic.core.processing","regionClass":"PngtasticCompressionHandler","regionMethod":"deflateImageDataSerially(Loptimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream;Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/util/List;","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"1556394491","endBlocksIDs":["1571383573"]},"options":[["COMPRESSOR","ITERATIONS","COMPRESSIONLEVEL"]]},{"region":{"regionID":"b1a2d21f-f7f6-4b84-a1e1-7ea4d61e2742","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic.core","regionClass":"PngOptimizer","regionMethod":"optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/lang/Integer;)Loptimizer/com/googlecode/pngtastic/core/PngImage;","startBytecodeIndex":87,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"1629181633","endBlocksIDs":["471939025","2048240529"]},"options":[["COMPRESSOR","ITERATIONS","LOGLEVEL"]]},{"region":{"regionID":"78d87fbf-43b0-45c6-b6b8-bd6e20ad9252","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic.core","regionClass":"PngOptimizer","regionMethod":"optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/lang/Integer;)Loptimizer/com/googlecode/pngtastic/core/PngImage;","startBytecodeIndex":72,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"305537392","endBlocksIDs":["471939025","2048240529"]},"options":[["COMPRESSOR","ITERATIONS","LOGLEVEL"]]},{"region":{"regionID":"e01ee183-3582-4c3a-8116-f3284997d5db","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic.core","regionClass":"PngOptimizer","regionMethod":"optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/lang/Integer;)Loptimizer/com/googlecode/pngtastic/core/PngImage;","startBytecodeIndex":0,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"749354401","endBlocksIDs":["471939025","2048240529"]},"options":[["LOGLEVEL","REMOVEGAMMA"]]},{"region":{"regionID":"b1578191-9d40-4322-b40e-15c08afe5483","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"optimizer.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":0,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"1474612961","endBlocksIDs":["278271574","1172632086"]},"options":[["COMPRESSIONLEVEL"]]}]
+[
+  {
+    "region": {
+      "regionID": "9cb16ac4-4249-49a0-81ae-670758429bf4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "PngImage",
+      "regionMethod": "<init>(Ljava/lang/String;Ljava/lang/String;)V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "482166003",
+      "endBlocksIDs": [
+        "482166003"
+      ]
+    },
+    "options": [
+      [
+        "LOGLEVEL",
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d4dbd916-82b3-468c-b28f-eb1c243cbbfd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 244,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "958505693",
+      "endBlocksIDs": [
+        "278271574",
+        "1172632086"
+      ]
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "93c11200-0d70-48b3-8e98-7c064b1f90db",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core.processing",
+      "regionClass": "PngtasticCompressionHandler",
+      "regionMethod": "deflateImageDataSerially(Loptimizer/com/googlecode/pngtastic/core/processing/PngByteArrayOutputStream;Ljava/lang/Integer;Ljava/lang/Integer;)Ljava/util/List;",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1556394491",
+      "endBlocksIDs": [
+        "1571383573"
+      ]
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b1a2d21f-f7f6-4b84-a1e1-7ea4d61e2742",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "PngOptimizer",
+      "regionMethod": "optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/lang/Integer;)Loptimizer/com/googlecode/pngtastic/core/PngImage;",
+      "startBytecodeIndex": 87,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1629181633",
+      "endBlocksIDs": [
+        "471939025",
+        "2048240529"
+      ]
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "78d87fbf-43b0-45c6-b6b8-bd6e20ad9252",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "PngOptimizer",
+      "regionMethod": "optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/lang/Integer;)Loptimizer/com/googlecode/pngtastic/core/PngImage;",
+      "startBytecodeIndex": 72,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "305537392",
+      "endBlocksIDs": [
+        "471939025",
+        "2048240529"
+      ]
+    },
+    "options": [
+      [
+        "COMPRESSOR",
+        "ITERATIONS",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e01ee183-3582-4c3a-8116-f3284997d5db",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic.core",
+      "regionClass": "PngOptimizer",
+      "regionMethod": "optimize(Loptimizer/com/googlecode/pngtastic/core/PngImage;ZLjava/lang/Integer;)Loptimizer/com/googlecode/pngtastic/core/PngImage;",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "749354401",
+      "endBlocksIDs": [
+        "471939025",
+        "2048240529"
+      ]
+    },
+    "options": [
+      [
+        "LOGLEVEL",
+        "REMOVEGAMMA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b1578191-9d40-4322-b40e-15c08afe5483",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "optimizer.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1474612961",
+      "endBlocksIDs": [
+        "278271574",
+        "1172632086"
+      ]
+    },
+    "options": [
+      [
+        "COMPRESSIONLEVEL"
+      ]
+    ]
+  }
+]

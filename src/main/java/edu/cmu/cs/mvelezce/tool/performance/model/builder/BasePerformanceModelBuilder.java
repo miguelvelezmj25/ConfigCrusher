@@ -47,7 +47,7 @@ public abstract class BasePerformanceModelBuilder implements PerformanceModelBui
     public PerformanceModel createModel(String[] args) throws IOException {
         Options.getCommandLine(args);
 
-        String outputDir = BasePerformanceModelBuilder.DIRECTORY + "/" + this.programName;
+        String outputDir = this.getOutputDir() + "/" + this.programName;
         File outputFile = new File(outputDir);
 
         Options.checkIfDeleteResult(outputFile);
@@ -75,7 +75,7 @@ public abstract class BasePerformanceModelBuilder implements PerformanceModelBui
     @Override
     public void writeToFile(PerformanceModel performanceModel) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        String outputFile = BasePerformanceModelBuilder.DIRECTORY + "/" + this.programName + "/" + this.programName
+        String outputFile = this.getOutputDir() + "/" + this.programName + "/" + this.programName
                 + Options.DOT_JSON;
         File file = new File(outputFile);
         file.getParentFile().mkdirs();

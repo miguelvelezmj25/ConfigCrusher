@@ -855,7 +855,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new SPLatExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         SPLat splat = new SPLat(programName);

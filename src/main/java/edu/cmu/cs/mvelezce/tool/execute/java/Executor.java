@@ -24,4 +24,6 @@ public interface Executor {
     public DefaultPerformanceEntry readFromFile(File file) throws IOException;
 
     public Set<String> getOptions(File file) throws IOException;
+
+    public String getOutputDir();
 }

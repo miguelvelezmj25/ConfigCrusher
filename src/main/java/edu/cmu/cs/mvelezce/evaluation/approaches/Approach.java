@@ -25,7 +25,7 @@ public abstract class Approach {
         this.programName = programName;
     }
 
-    public abstract void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException;
+    public abstract void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries, List<String> options) throws IOException;
 
     public abstract Map<Set<String>, Double> getLearnedModel(List<String> options) throws IOException;
 

@@ -2,6 +2,9 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.pairwise;
 
 import edu.cmu.cs.mvelezce.evaluation.Evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.Approach;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.math3.util.Combinations;
@@ -53,11 +56,7 @@ public class Pairwise extends Approach {
     }
 
     @Override
-    public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries) throws IOException {
-        Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
-        Set<String> optionsSet = Pairwise.getOptions(configurations);
-        List<String> options = new ArrayList<>(optionsSet);
-
+    public void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries, List<String> options) throws IOException {
         StringBuilder result = new StringBuilder();
 
         for(String option : options) {

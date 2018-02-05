@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Set;
 
-public class SPLatExecutorTest {
+public class SPLatCompressionTest {
 
     @Test
     public void runningExample() throws IOException {
@@ -17,7 +17,7 @@ public class SPLatExecutorTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatExecutor(programName);
+        Compression executor = new SPLatCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -31,7 +31,7 @@ public class SPLatExecutorTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatExecutor(programName);
+        Compression executor = new SPLatCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -45,7 +45,7 @@ public class SPLatExecutorTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatExecutor(programName);
+        Compression executor = new SPLatCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -59,7 +59,7 @@ public class SPLatExecutorTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatExecutor(programName);
+        Compression executor = new SPLatCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -73,7 +73,7 @@ public class SPLatExecutorTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatExecutor(programName);
+        Compression executor = new SPLatCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -87,7 +87,7 @@ public class SPLatExecutorTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatExecutor(programName);
+        Compression executor = new SPLatCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }

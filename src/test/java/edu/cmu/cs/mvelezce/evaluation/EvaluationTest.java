@@ -10,6 +10,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.execute.PairwiseExecut
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.SPLatExecutor;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
@@ -436,7 +437,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new SPLatExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         SPLat splat = new SPLat(programName);

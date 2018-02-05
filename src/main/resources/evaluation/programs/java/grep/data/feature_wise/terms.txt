@@ -1,3 +1,6 @@
 (Intercept)
+x2
+x3
 x4
 x6
+x7

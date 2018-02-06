@@ -7,10 +7,7 @@ import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by mvelezce on 4/28/17.
@@ -108,6 +105,29 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
 
             regionsToPerformanceTable.put(region, optionValuesToPerformances);
         }
+
+
+        for(Map.Entry<Region, Map<Set<String>, Set<Long>>> entry : regionsToPerformanceTable.entrySet()) {
+            Region region = entry.getKey();
+
+            for(Map.Entry<Set<String>, Set<Long>> entry2 : entry.getValue().entrySet()) {
+                Set<String> conf = entry2.getKey();
+                Set<Long> values = entry2.getValue();
+                long min = Collections.min(values);
+                long max = Collections.max(values);
+
+                if((max - min) >= 1000000000) {
+                    double minD = min / 1000000000.0;
+                    double maxD = max / 1000000000.0;
+                    System.out.println("Region: " + region.getRegionID() + " with conf " + conf + " might be incorrect (" + maxD + " : " + minD + ")");
+
+                    for(Long value : values) {
+                        System.out.println(value / 1000000000.0);
+                    }
+                }
+            }
+        }
+
 
         Map<Region, Map<Set<String>, Long>> regionsToAveragePerformanceTable = this.averageMultipleExecutions(regionsToPerformanceTable);
         return regionsToAveragePerformanceTable;

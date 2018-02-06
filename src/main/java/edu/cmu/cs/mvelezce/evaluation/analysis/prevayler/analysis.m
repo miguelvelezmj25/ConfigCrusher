@@ -1,8 +1,8 @@
 % feature_wise
 
 train = readtable('../../../../../../../../resources/evaluation/programs/java/prevayler/data/feature_wise.csv');
-x_train = table2array(train(:,1:7));
-y_train = table2array(train(:,8:8));
+x_train = table2array(train(:,1:9));
+y_train = table2array(train(:,10:10));
 model = stepwiselm(x_train, y_train, 'linear');
 
 mkdir('../../../../../../../../resources/evaluation/programs/java/prevayler/data/feature_wise/');
@@ -25,8 +25,8 @@ fclose(fileID);
 % pair_wise
 
 train = readtable('../../../../../../../../resources/evaluation/programs/java/prevayler/data/pair_wise.csv');
-x_train = table2array(train(:,1:7));
-y_train = table2array(train(:,8:8));
+x_train = table2array(train(:,1:9));
+y_train = table2array(train(:,10:10));
 model = stepwiselm(x_train, y_train, 'linear');
 
 mkdir('../../../../../../../../resources/evaluation/programs/java/prevayler/data/pair_wise/');

@@ -193,6 +193,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void comparePrevayler4() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareKanzi1() throws Exception {
         String programName = "kanzi";
 
@@ -1099,6 +1107,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void prevaylerBruteForceSamplingTime() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
     public void prevaylerFeaturewiseGenerateCSVData() throws Exception {
         String programName = "prevayler";
 
@@ -1146,6 +1162,18 @@ public class EvaluationTest {
     }
 
     @Test
+    public void prevaylerFeaturewiseSamplingTime() throws Exception {
+        String programName = "prevayler";
+
+        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+    }
+
+    @Test
     public void prevaylerPairwiseGenerateCSVData() throws Exception {
         String programName = "prevayler";
 
@@ -1190,6 +1218,35 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
+    }
+
+    @Test
+    public void prevaylerPairwiseSamplingTime() throws Exception {
+        String programName = "prevayler";
+
+        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+    }
+
+    @Test
+    public void prevaylerSPLat() throws Exception {
+        String programName = "prevayler";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        SPLat splat = new SPLat(programName);
+        List<Coverage> coverageList = splat.readFileCoverage();
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
     }
 
     @Test

@@ -1,1 +1,30 @@
-[{"region":{"regionID":"b9d60924-9573-4fb1-b339-28123e3d00f8","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep","regionClass":"Main","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":0,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"2029896123","endBlocksIDs":["2029896123"]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]}]
+[
+  {
+    "region": {
+      "regionID": "b9d60924-9573-4fb1-b339-28123e3d00f8",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "2029896123",
+      "endBlocksIDs": [
+        "2029896123"
+      ]
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  }
+]

@@ -885,6 +885,20 @@ public class EvaluationTest {
     }
 
     @Test
+    public void findBruteForce() throws Exception {
+        String programName = "find";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
     public void grepBruteForce() throws Exception {
         String programName = "grep";
 

@@ -220,7 +220,7 @@ public class BaseExecutorTest {
 ////    @Test
 ////    public void testZipmeSimple() throws IOException, ParseException {
 ////        String programName = "zipme-simple";
-////        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
+////        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
 ////        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
 ////
 ////        String[] args = new String[0];
@@ -241,7 +241,7 @@ public class BaseExecutorTest {
 //    @Test
 //    public void testElevator() throws IOException, ParseException {
 //        String programName = "elevator";
-//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
+//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 //
 //        String[] args = new String[0];
@@ -263,7 +263,7 @@ public class BaseExecutorTest {
 //    @Test
 //    public void testSleep30() throws IOException, ParseException {
 //        String programName = "sleep30";
-//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep30";
 //
 //        String[] args = new String[0];
@@ -285,7 +285,7 @@ public class BaseExecutorTest {
 //    @Test
 //    public void testSleep31() throws IOException, ParseException {
 //        String programName = "sleep31";
-//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep30";
 //
 //        String[] args = new String[0];
@@ -307,7 +307,7 @@ public class BaseExecutorTest {
 //    @Test
 //    public void testZipme() throws IOException, ParseException {
 //        String programName = "zipme";
-//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
+//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
 //
 //        Set<String> options = BaseExecutor.getOptions(programName);
@@ -331,7 +331,7 @@ public class BaseExecutorTest {
 //    @Test
 //    public void testGPL() throws IOException, ParseException {
 //        String programName = "gpl";
-//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/out/production/gpl/";
+//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/gpl/out/production/gpl/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Main";
 //
 //        String[] args = new String[0];
@@ -359,7 +359,7 @@ public class BaseExecutorTest {
 //    @Test
 //    public void testSleep1() throws IOException, ParseException {
 //        String programName = "sleep1";
-//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 //
 //        String[] args = new String[0];
@@ -378,7 +378,7 @@ public class BaseExecutorTest {
 //    @Test
 //    public void testSleep2() throws IOException, ParseException {
 //        String programName = "Sleep2";
-//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
 //
 //        String[] args = new String[0];

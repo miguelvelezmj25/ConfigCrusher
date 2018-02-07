@@ -14,7 +14,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void sleep1() throws Exception {
         String programName = "sleep1";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
         // Program arguments
@@ -35,7 +35,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void runningExample1() throws Exception {
         String programName = "running-example";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
         String entryPoint = "edu.cmu.cs.mvelezce.Example";
 
         // Program arguments
@@ -63,7 +63,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void runningExample() throws Exception {
         String programName = "running-example";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
         String entryPoint = "edu.cmu.cs.mvelezce.Example";
 
         // Program arguments
@@ -85,7 +85,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void colorCounter1() throws Exception {
         String programName = "pngtasticColorCounter";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
         String entryPoint = "counter.com.googlecode.pngtastic.Run";
 
         // Program arguments
@@ -113,7 +113,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void colorCounter() throws Exception {
         String programName = "pngtasticColorCounter";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
         String entryPoint = "counter.com.googlecode.pngtastic.Run";
 
         // Program arguments
@@ -135,7 +135,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void colorCounter2() throws Exception {
         String programName = "pngtasticColorCounter";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
         String entryPoint = "counter.com.googlecode.pngtastic.Run";
 
         // Program arguments
@@ -161,7 +161,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void optimizer() throws Exception {
         String programName = "pngtasticOptimizer";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
         String entryPoint = "optimizer.com.googlecode.pngtastic.Run";
 
         // Program arguments
@@ -183,7 +183,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void prevayler() throws Exception {
         String programName = "prevayler";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
         String entryPoint = "org.prevayler.demos.demo1.PrimeNumbers";
 
         // Program arguments
@@ -205,7 +205,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void prevayler1() throws Exception {
         String programName = "prevayler";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
         String entryPoint = "org.prevayler.demos.demo1.PrimeNumbers";
 
         // Program arguments
@@ -238,7 +238,7 @@ public class ConfigCrusherExecutorTest {
     public void kanzi() throws Exception {
         String programName = "kanzi";
         String entryPoint = "kanzi.Run";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
 
         // Program arguments
         String[] args = new String[0];
@@ -260,7 +260,7 @@ public class ConfigCrusherExecutorTest {
     public void grep() throws Exception {
         String programName = "grep";
         String entryPoint = "org.unix4j.grep.Main";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/grep/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/grep/target/classes";
 
         // Program arguments
         String[] args = new String[0];
@@ -282,8 +282,8 @@ public class ConfigCrusherExecutorTest {
     public void grep1() throws Exception {
         String programName = "grep";
         String entryPoint = "org.unix4j.grep.Main";
-//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/grep/target/classes";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/grep/target/classes";
+//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/grep/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/grep/target/classes";
 
         // Program arguments
         String[] args = new String[0];
@@ -312,7 +312,7 @@ public class ConfigCrusherExecutorTest {
     public void kanzi1() throws Exception {
         String programName = "kanzi";
         String entryPoint = "kanzi.Run";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
 
         // Program arguments
         String[] args = new String[0];
@@ -342,7 +342,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void optimizer1() throws Exception {
         String programName = "pngtasticOptimizer";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
         String entryPoint = "optimizer.com.googlecode.pngtastic.Run";
 
         // Program arguments
@@ -365,7 +365,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void regions12() throws Exception {
         String programName = "regions12";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String entryPoint = "edu.cmu.cs.mvelezce.Regions12";
 
         // Program arguments
@@ -394,7 +394,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void regions13() throws Exception {
         String programName = "regions13";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String entryPoint = "edu.cmu.cs.mvelezce.Regions13";
 
         // Program arguments
@@ -422,7 +422,7 @@ public class ConfigCrusherExecutorTest {
     @Test
     public void regions14() throws Exception {
         String programName = "regions14";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String entryPoint = "edu.cmu.cs.mvelezce.Regions14";
 
         // Program arguments

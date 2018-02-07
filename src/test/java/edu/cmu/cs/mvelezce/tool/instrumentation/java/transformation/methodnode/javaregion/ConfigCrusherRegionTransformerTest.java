@@ -1683,7 +1683,7 @@ public class ConfigCrusherRegionTransformerTest {
     public void testRunningExample() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "running-example";
         String rootPackage = "edu";
-        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
 
         // Program arguments
         String[] args = new String[0];

@@ -8,8 +8,8 @@ public class ConfigCrusherTest {
     @Test
     public void runningExample() throws Exception {
         String programName = "running-example";
-        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
-        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
+        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
         String entry = "edu.cmu.cs.mvelezce.Example";
 
         String[] args = new String[0];
@@ -29,8 +29,8 @@ public class ConfigCrusherTest {
     @Test
     public void colorCounter() throws Exception {
         String programName = "pngtasticColorCounter";
-        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter";
-        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
+        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter";
+        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
         String entry = "counter.com.googlecode.pngtastic.Run";
 
         String[] args = new String[0];
@@ -50,8 +50,8 @@ public class ConfigCrusherTest {
     @Test
     public void optimizer() throws Exception {
         String programName = "pngtasticOptimizer";
-        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer";
-        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
+        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer";
+        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-optimizer/out/production/pngtastic-optimizer";
         String entry = "optimizer.com.googlecode.pngtastic.Run";
 
         String[] args = new String[0];
@@ -72,8 +72,8 @@ public class ConfigCrusherTest {
     public void kanzi() throws Exception {
         String programName = "kanzi";
         String entry = "kanzi.Run";
-        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi";
-        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
+        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi";
+        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
 
         String[] args = new String[0];
 
@@ -92,8 +92,8 @@ public class ConfigCrusherTest {
     @Test
     public void prevayler() throws Exception {
         String programName = "prevayler";
-        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
-        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler";
+        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
+        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler";
         String entry = "org.prevayler.demos.demo1.PrimeNumbers";
 
         String[] args = new String[0];
@@ -113,8 +113,8 @@ public class ConfigCrusherTest {
     @Test
     public void regions12() throws Exception {
         String programName = "regions12";
-        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
-        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
+        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String entry = "edu.cmu.cs.mvelezce.Regions12";
 
         String[] args = new String[0];
@@ -134,8 +134,8 @@ public class ConfigCrusherTest {
     @Test
     public void regions16() throws Exception {
         String programName = "regions16";
-        String srcDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
-        String classDir = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
+        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String entry = "edu.cmu.cs.mvelezce.Regions16";
 
         String[] args = new String[0];

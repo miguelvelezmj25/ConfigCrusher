@@ -8,12 +8,25 @@ import org.junit.Test;
 public class RegionsTest {
 
     public static void main(String[] args) {
-        int count = 1_000_000_00;
+        Regions.regionsToOverhead.put("a", 0L);
+        Regions.regionsToOverhead.put("b", 0L);
+        Regions.regionsToOverhead.put("c", 0L);
+        Regions.regionsToOverhead.put("d", 0L);
+        Regions.regionsToOverhead.put("e", 0L);
+        int count = 2_000_000_00;
         long start = System.nanoTime();
 
         for(int i = 0; i < count; i++) {
-            Regions.enter("dsf");
-            Regions.exit("dsf");
+            Regions.enter("a");
+            Regions.enter("b");
+            Regions.enter("c");
+
+            Regions.exit("d");
+            Regions.exit("e");
+
+            Regions.exit("c");
+            Regions.exit("b");
+            Regions.exit("a");
         }
 
         long end = System.nanoTime();

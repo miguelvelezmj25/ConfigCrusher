@@ -51,16 +51,21 @@ public class GrepMain extends BaseMain {
         Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
 
         for(JavaRegion region : regions) {
-            Regions.regionsToOverhead.put(region.getRegionID(),0L);
+            Regions.regionsToOverhead.put(region.getRegionID(), 0L);
         }
 
-        Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID,0L);
+        Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID, 0L);
+        Regions.regionsToOverhead.put("b9d60924-9573-ffbb-b339-28123e3d00f8", 0L);
 
         if(mainClass.contains("Main")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
+            System.out.println("entering");
             Regions.enter(program.getRegionID());
+            System.out.println("entering");
             org.unix4j.grep.Main.main(args);
+            System.out.println("exiting");
             Regions.exit(program.getRegionID());
+            System.out.println("exiting");
         }
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);

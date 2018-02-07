@@ -1250,6 +1250,17 @@ public class EvaluationTest {
     }
 
     @Test
+    public void prevaylerSPLatSamplingTime() throws Exception {
+        String programName = "prevayler";
+
+        SPLat splat = new SPLat(programName);
+        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+    }
+
+    @Test
     public void optimizerConfigCrusher() throws Exception {
         String programName = "pngtasticOptimizer";
 

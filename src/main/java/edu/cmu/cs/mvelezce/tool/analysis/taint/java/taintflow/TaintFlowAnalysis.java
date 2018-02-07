@@ -11,7 +11,7 @@ import java.util.*;
 
 public class TaintFlowAnalysis extends BaseStaticAnalysis {
 
-    private static final String TAINTFLOW_OUTPUT_DIR = "/Users/mvelezce/Documents/Programming/Java/Projects/taintflow/src/main/resources/output";
+    private static final String TAINTFLOW_OUTPUT_DIR = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/taintflow/src/main/resources/output";
 
     public TaintFlowAnalysis(String programName) {
         super(programName);

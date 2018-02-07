@@ -16,12 +16,12 @@ public class Output {
 //
 //    public static void main(String[] args) throws NoSuchFieldException {
 //
-//        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/src/";
-////        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/jarchivelib/src/main/java/";
-////        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/java-lame/src/main/java/";
-////        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/src/main/java/";
-////        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/src/";
-////        String root = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/src/";
+//        String root = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/src/";
+////        String root = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/jarchivelib/src/main/java/";
+////        String root = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/java-lame/src/main/java/";
+////        String root = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/src/main/java/";
+////        String root = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/src/";
+////        String root = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/src/";
 //        String[] extensions = {"java"};
 //
 //        Collection<File> files = FileUtils.listFiles(new File(root), extensions, true);

@@ -125,7 +125,7 @@ public class ConfigCrusherExecutor extends BaseExecutor {
             Thread.sleep(5000);
         }
 
-        String outputDir = BaseExecutor.DIRECTORY + "/" + this.getProgramName() + "/" + iteration;
+        String outputDir = this.getOutputDir() + "/" + this.getProgramName() + "/" + iteration;
         File outputFile = new File(outputDir);
 
         if(!outputFile.exists()) {

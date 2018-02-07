@@ -217,11 +217,11 @@ public class ConfigCrusherExecutorTest {
         configurations.clear();
         Set<String> n = new HashSet<>();
         n.add("FILEAGETHRESHOLD");
-//        n.add("DEEPCOPY");
-//        n.add("MONITOR");
-//        n.add("DISKSYNC");
+        n.add("DEEPCOPY");
+        n.add("MONITOR");
+        n.add("DISKSYNC");
         n.add("SNAPSHOTSERIALIZER");
-//        n.add("CLOCK");
+        n.add("CLOCK");
         configurations.add(n);
 
         args = new String[3];
@@ -272,6 +272,36 @@ public class ConfigCrusherExecutorTest {
         args[0] = "-delres";
         args[1] = "-saveres";
         args[2] = "-i5";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
+    @Test
+    public void grep1() throws Exception {
+        String programName = "grep";
+        String entryPoint = "org.unix4j.grep.Main";
+//        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/grep/target/classes";
+        String classDirectory = "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/grep/target/classes";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        configurations.clear();
+
+        Set<String> n = new HashSet<>();
+        n.add("COUNT");
+        n.add("MATCHINGFILES");
+        n.add("IGNORECASE");
+        configurations.add(n);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);

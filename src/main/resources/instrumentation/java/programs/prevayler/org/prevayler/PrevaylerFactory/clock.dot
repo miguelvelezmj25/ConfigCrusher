@@ -1,17 +1,17 @@
 digraph clock {
 node [shape=record];
-997608165 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
-1604002497 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
-245583342 [label="L0\lLINENUMBER 155 L0\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
-1314589328 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
+1275740126 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+128511924 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
+148458782 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
+1383702986 [label="L0\lLINENUMBER 155 L0\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
 entry;
 exit;
-entry -> 245583342;
-997608165 -> 1604002497;
-1604002497 -> exit;
-245583342 -> 997608165;
-245583342 -> 1314589328;
-1314589328 -> 1604002497;
-1604002497[fontcolor="purple", penwidth=3, color="purple"];
-245583342[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1383702986;
+1275740126 -> exit;
+128511924 -> 1275740126;
+148458782 -> 1275740126;
+1383702986 -> 128511924;
+1383702986 -> 148458782;
+1275740126[fontcolor="purple", penwidth=3, color="purple"];
+1383702986[fontcolor="purple", penwidth=3, color="purple"];
 }

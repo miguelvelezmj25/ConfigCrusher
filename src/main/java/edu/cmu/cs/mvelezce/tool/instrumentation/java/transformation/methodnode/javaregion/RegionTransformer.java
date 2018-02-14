@@ -48,6 +48,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     private Set<MethodBlock> endRegionBlocksWithReturn = new HashSet<>();
 
     private Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToBlocksDecisions = new HashMap<>();
+    private Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> cachedMethodsToBlocksDecisions = new HashMap<>();
     private Map<JavaRegion, Set<Set<String>>> cachedRegionsToOptionSet = new HashMap<>();
 
     public RegionTransformer(String programName, String entryPoint, ClassTransformer classTransformer, Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
@@ -156,6 +157,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         this.cachedRegionsToOptions();
+        this.cacheMethodsToBlockDecisions();
 
         this.instrument(classNodes);
 
@@ -167,6 +169,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     private void cachedRegionsToOptions() {
         for(Map.Entry<JavaRegion, Set<Set<String>>> entry : this.regionsToOptionSet.entrySet()) {
             this.cachedRegionsToOptionSet.put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    private void cacheMethodsToBlockDecisions() {
+        for(Map.Entry<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> entry : this.methodsToBlocksDecisions.entrySet()) {
+            this.cachedMethodsToBlocksDecisions.put(entry.getKey(), new LinkedHashMap<>(entry.getValue()));
         }
     }
 
@@ -569,6 +577,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = this.methodsToBlocksDecisions.get(methodNode);
+
         return this.propagateUpRegions(methodNode, blocksToRegionSet);
     }
 
@@ -632,6 +641,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         this.debugBlockDecisions(methodNode);
+
+        if(methodNode.name.equals("publish") && this.methodNodeToClassNode.get(methodNode).name.contains("CentralPublisher")) {
+            System.out.println();
+        }
 
         return updated;
     }
@@ -1034,6 +1047,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         MethodGraph graph = this.getMethodGraph(methodNode);
         MethodBlock beta = graph.getExitBlock();
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions.get(methodNode);
+        LinkedHashMap<MethodBlock, JavaRegion> cachedBlocksToRegions = this.cachedMethodsToBlocksDecisions.get(methodNode);
 
         for(Map.Entry<MethodBlock, JavaRegion> blockToRegion : blocksToRegions.entrySet()) {
             MethodBlock block = blockToRegion.getKey();
@@ -1058,8 +1072,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //            }
 
             MethodBlock ipd = graph.getImmediatePostDominator(block);
-            JavaRegion ipdRegion = blocksToRegions.get(ipd);
-            Set<String> ipdDecision = this.getDecision(ipdRegion);
+            JavaRegion ipdRegion = cachedBlocksToRegions.get(ipd);
+            Set<String> ipdDecision = this.getCachedDecision(ipdRegion);
 
             while(ipd != beta && (blockDecision.equals(ipdDecision) || blockDecision.containsAll(ipdDecision))) {
                 MethodBlock temp = graph.getImmediatePostDominator(ipd);
@@ -1070,8 +1084,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //                }
 
                 ipd = temp;
-                ipdRegion = blocksToRegions.get(ipd);
-                ipdDecision = this.getDecision(ipdRegion);
+                ipdRegion = cachedBlocksToRegions.get(ipd);
+                ipdDecision = this.getCachedDecision(ipdRegion);
             }
 
             MethodBlock end = ipd;
@@ -1106,8 +1120,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
             // If the ends are connected to the exit node, we want to analyze them
             for(MethodBlock e : ends) {
-                JavaRegion eRegion = blocksToRegions.get(e);
-                Set<String> eDecision = this.getDecision(eRegion);
+                JavaRegion eRegion = cachedBlocksToRegions.get(e);
+                Set<String> eDecision = this.getCachedDecision(eRegion);
                 ipd = graph.getImmediatePostDominator(e);
 
                 if(ipd == beta & e.getSuccessors().size() == 1 && e.getSuccessors().iterator().next() == beta

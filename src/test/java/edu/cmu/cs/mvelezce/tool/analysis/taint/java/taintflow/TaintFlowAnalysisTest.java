@@ -449,4 +449,17 @@ public class TaintFlowAnalysisTest {
         Map<JavaRegion, Set<Set<String>>> result = analysis.analyze(args);
     }
 
+    @Test
+    public void density() throws Exception {
+        String systemName = "density";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        Map<JavaRegion, Set<Set<String>>> result = analysis.analyze(args);
+    }
+
 }

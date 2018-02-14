@@ -1,17 +1,17 @@
 digraph monitor {
 node [shape=record];
-1222816951 [label="L2\lFRAME SAME1 org/prevayler/foundation/monitor/Monitor\lLDC \"8e867551-8386-407e-8b7f-f051cea92214\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
-153181179 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lGOTO L2\l"];
-817506767 [label="L0\lLINENUMBER 395 L0\lLDC \"8e867551-8386-407e-8b7f-f051cea92214\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lIFNULL L1\l"];
-1429054811 [label="L1\lFRAME SAME\lNEW org/prevayler/foundation/monitor/SimpleMonitor\lDUP\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lINVOKESPECIAL org/prevayler/foundation/monitor/SimpleMonitor.\<init\> (Ljava/io/PrintStream;)V\l"];
+1336885649 [label="L0\lLINENUMBER 395 L0\lLDC \"8e867551-8386-407e-8b7f-f051cea92214\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lIFNULL L1\l"];
+1586024177 [label="L1\lFRAME SAME\lNEW org/prevayler/foundation/monitor/SimpleMonitor\lDUP\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lINVOKESPECIAL org/prevayler/foundation/monitor/SimpleMonitor.\<init\> (Ljava/io/PrintStream;)V\l"];
+204155794 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lGOTO L2\l"];
+921121811 [label="L2\lFRAME SAME1 org/prevayler/foundation/monitor/Monitor\lLDC \"8e867551-8386-407e-8b7f-f051cea92214\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
 entry;
 exit;
-1222816951 -> exit;
-entry -> 817506767;
-153181179 -> 1222816951;
-817506767 -> 153181179;
-817506767 -> 1429054811;
-1429054811 -> 1222816951;
-1222816951[fontcolor="purple", penwidth=3, color="purple"];
-817506767[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 1336885649;
+1336885649 -> 1586024177;
+1336885649 -> 204155794;
+1586024177 -> 921121811;
+204155794 -> 921121811;
+921121811 -> exit;
+1336885649[fontcolor="purple", penwidth=3, color="purple"];
+921121811[fontcolor="purple", penwidth=3, color="purple"];
 }

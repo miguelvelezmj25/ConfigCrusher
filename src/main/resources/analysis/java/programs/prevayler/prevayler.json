@@ -1,1 +1,1866 @@
-[{"region":{"regionID":"d4f05288-bfc9-4d17-9f20-dc63f9542ea2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"append(Lorg/prevayler/implementation/TransactionGuide;)V","startBytecodeIndex":35,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"ee2b0b35-4a5e-4f3d-851d-ea26c67cee5f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J","startBytecodeIndex":52,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"f046958e-8987-4f29-860d-c4723c0f313a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"initializeNextTransaction(JJ)V","startBytecodeIndex":68,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"93302aed-c49a-4210-9e71-dec3f2067e8c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"PrevalentSystemGuard","regionMethod":"receive(Lorg/prevayler/implementation/TransactionTimestamp;)V","startBytecodeIndex":120,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"8d54001f-f165-434d-b68b-112388772635","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"TransientJournal","regionMethod":"update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V","startBytecodeIndex":199,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"9bb5c065-dae9-4b49-aa83-c59277e29146","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler","regionClass":"PrevaylerFactory","regionMethod":"clock()Lorg/prevayler/Clock;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["CLOCK"]]},{"region":{"regionID":"a80aec24-48e2-430a-a58d-fb9e152a51f6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"close()V","startBytecodeIndex":34,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"8e867551-8386-407e-8b7f-f051cea92214","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler","regionClass":"PrevaylerFactory","regionMethod":"monitor()Lorg/prevayler/foundation/monitor/Monitor;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE","MONITOR"]]},{"region":{"regionID":"7f98e4b4-9317-435e-aef8-d1bc1729878f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"Turn","regionMethod":"next()Lorg/prevayler/foundation/Turn;","startBytecodeIndex":21,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"a8baa6c4-acc2-47c0-9e0a-4e2dcaeb1f0b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":525,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["JOURNALSERIALIZER"]]},{"region":{"regionID":"c46d0123-3827-4d76-ba31-4aee4d344987","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"FileManager","regionMethod":"produceDirectory(Ljava/io/File;)V","startBytecodeIndex":45,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"e623a053-f22a-44b4-a151-1c3a9caa22c8","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"append(Lorg/prevayler/implementation/TransactionGuide;)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"c6b733b9-a4e6-429f-a22a-43aea5d3fac4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"waitUntilSynced(I)V","startBytecodeIndex":12,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"36ee7395-3896-454b-8559-4ccd313f7edb","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"close()V","startBytecodeIndex":18,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"9db1c08e-2f67-49bc-9879-f1b1e8f87f0b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"Turn","regionMethod":"start()V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"94a6d85f-b45f-467f-a92d-4d7d3ec423aa","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":257,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MONITOR"]]},{"region":{"regionID":"66724301-00bd-4462-a575-2b40e0f8da1c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"PrevalentSystemGuard","regionMethod":"receive(Lorg/prevayler/implementation/TransactionTimestamp;)V","startBytecodeIndex":46,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"8abe0c28-2b7b-4404-a08d-0e12cd535cd1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"Chunking","regionMethod":"writeChunk(Ljava/io/OutputStream;Lorg/prevayler/foundation/Chunk;)V","startBytecodeIndex":122,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"7d3858b9-215f-4815-99c8-7494edf07004","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"TransientJournal","regionMethod":"update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"469c3165-f925-4c41-a381-383bbd66e86a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"PrevaylerDirectory","regionMethod":"checkValidJournalSuffix(Ljava/lang/String;)V","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","JOURNALSERIALIZER","FILESIZETHRESHOLD"]]},{"region":{"regionID":"6e179b7f-5e9c-48cb-9f7e-6da80741c3ba","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"waitUntilSynced(I)V","startBytecodeIndex":112,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","DISKSYNC","FILESIZETHRESHOLD"]]},{"region":{"regionID":"9d3d8c5a-b8bd-4962-98e2-371f73149d4e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"waitUntilSynced(I)V","startBytecodeIndex":27,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"1f548577-5858-4099-bf4e-7010acaf4b77","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"PrevaylerDirectory","regionMethod":"findInitialJournalFile(J)Ljava/io/File;","startBytecodeIndex":36,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"1c18d6c8-7b99-4360-adbd-518aee5a73e7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"preallocate()V","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"b770eddf-09ed-4961-af90-b45708854696","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"PrevaylerDirectory","regionMethod":"findInitialJournalFile(J)Ljava/io/File;","startBytecodeIndex":56,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"ed09e0b1-a569-405d-afbe-73f9cb32e980","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"Chunking","regionMethod":"writeChunk(Ljava/io/OutputStream;Lorg/prevayler/foundation/Chunk;)V","startBytecodeIndex":41,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"79e8b3ab-c858-447d-bc05-de4210ebc341","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler","regionClass":"PrevaylerFactory","regionMethod":"prevalenceDirectory()Ljava/lang/String;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"32915e65-45b4-42aa-a9bd-73ad14a5cb29","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"isOutputJournalTooBig()Z","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"ab1c69bc-8eab-4f16-a1e8-416773f4281f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"isOutputJournalTooOld()Z","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"a6b0cba2-abe2-42ef-82b9-e5980a4d4931","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"PrevaylerDirectory","regionMethod":"checkValidSnapshotSuffix(Ljava/lang/String;)V","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["SNAPSHOTSERIALIZER"]]},{"region":{"regionID":"9369bb32-bb9b-4e54-8081-5fdcfd6c4805","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"TransientJournal","regionMethod":"nextTransaction()J","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"8767c2d2-d693-4b9b-acc4-b5fc7db098be","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J","startBytecodeIndex":37,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"8a3aad32-139f-4708-8707-69d1f5c0a11b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J","startBytecodeIndex":217,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"659ac2fd-a811-485e-8724-7cc5000d6b97","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler","regionClass":"PrevaylerFactory","regionMethod":"journal()Lorg/prevayler/implementation/journal/Journal;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"0e657bd9-7e59-4548-9007-c7311af897d1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"preallocate()V","startBytecodeIndex":96,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"d2120061-f203-426f-88c2-a0fe3391ca53","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"writeObject(Lorg/prevayler/foundation/Guided;)I","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"50d5b9c3-bcfa-46cb-9658-e7b094de7bba","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J","startBytecodeIndex":115,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"eda5658e-490b-474d-b054-379a279c254e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler","regionClass":"PrevaylerFactory","regionMethod":"journalSerializer()Lorg/prevayler/foundation/serialization/Serializer;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["JOURNALSERIALIZER"]]},{"region":{"regionID":"8876e627-e907-42cd-a37a-a61220dce18e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"PrevaylerDirectory","regionMethod":"file(JLjava/lang/String;)Ljava/io/File;","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"70408bda-0fa7-4434-bf09-9f7ee793ff70","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":362,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["JOURNALSERIALIZER"]]},{"region":{"regionID":"4c356c0d-54d0-4c67-bb4e-10b2dfb0d121","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"initializeNextTransaction(JJ)V","startBytecodeIndex":109,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"2dd8566a-25e2-4d19-8ce3-a44d7a10fe08","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.clock","regionClass":"MachineClock","regionMethod":"update()V","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["CLOCK"]]},{"region":{"regionID":"27908831-3268-4d5e-8110-8e9eb287bea7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"Capsule","regionMethod":"<init>(Ljava/lang/Object;Lorg/prevayler/foundation/serialization/Serializer;Z)V","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DEEPCOPY"]]},{"region":{"regionID":"f26f0146-8ef2-4194-a068-4b7d961fe8d2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"<init>(Ljava/io/File;ZJ)V","startBytecodeIndex":100,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"b8752b0d-b5b1-4661-8c35-69a323af679c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V","startBytecodeIndex":12,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"a58caa21-8343-4a70-af04-8f9800c71971","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"Capsule","regionMethod":"executeOn(Ljava/lang/Object;Ljava/util/Date;Lorg/prevayler/foundation/serialization/Serializer;)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"10867be8-7bee-4eab-8041-e23ffb944bbf","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"isOutputJournalTooOld()Z","startBytecodeIndex":21,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"03c74758-3d2d-4f6c-a61f-09f534dc73d7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"preallocate()V","startBytecodeIndex":105,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"e030e3d8-581d-4dfd-bd83-1cbd8c8d4de3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"Turn","regionMethod":"abort(Ljava/lang/String;Ljava/lang/Throwable;)V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"34524ca5-6366-48aa-ad4a-2b957ea673bf","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"PrevalentSystemGuard","regionMethod":"receive(Lorg/prevayler/implementation/TransactionTimestamp;)V","startBytecodeIndex":25,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"8d57d4ef-453c-4214-b0ba-f122b8325e39","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"TransientJournal","regionMethod":"update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V","startBytecodeIndex":91,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"fbb655db-5ac0-4230-a5bb-6817182738d8","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"Chunking","regionMethod":"writeChunk(Ljava/io/OutputStream;Lorg/prevayler/foundation/Chunk;)V","startBytecodeIndex":81,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"6d32ac92-693b-4aab-854a-153c8ce3ab25","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation","regionClass":"TransactionGuide","regionMethod":"checkSystemVersion(J)V","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"3ac77e84-18e7-41e0-81e9-e3d8ba59cc85","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"TransientJournal","regionMethod":"update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V","startBytecodeIndex":24,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"b626a390-ccbb-4d8a-8c4e-ffd10caa0f17","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"preallocate()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"37090f9a-6a10-49b1-9977-dc619e2d8471","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"initializeNextTransaction(JJ)V","startBytecodeIndex":13,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"e0ea8bc0-65b8-4d9d-9f7f-ae183a4c4532","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler","regionClass":"PrevaylerFactory","regionMethod":"configureSnapshotSerializer(Ljava/lang/String;Lorg/prevayler/foundation/serialization/Serializer;)V","startBytecodeIndex":20,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["SNAPSHOTSERIALIZER"]]},{"region":{"regionID":"a6456fc9-05a7-433b-b17b-1fc23c4e7681","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation.serialization","regionClass":"XStreamSerializer","regionMethod":"readObject(Ljava/io/InputStream;)Ljava/lang/Object;","startBytecodeIndex":8,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE","JOURNALSERIALIZER"]]},{"region":{"regionID":"42a14896-81d6-401a-a50c-bd4c67edcd28","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"close()V","startBytecodeIndex":44,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"08e6b2aa-50d9-405d-b24e-5cda92fc9bb6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler","regionClass":"PrevaylerFactory","regionMethod":"configureJournalSerializer(Ljava/lang/String;Lorg/prevayler/foundation/serialization/Serializer;)V","startBytecodeIndex":8,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["JOURNALSERIALIZER"]]},{"region":{"regionID":"3a3e7ee6-71ad-44d3-a350-9773b6a24d82","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"isOutputJournalStillValid()Z","startBytecodeIndex":18,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"d00fa7f7-64f0-44aa-9960-5f1b52d5fc9f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"isOutputJournalStillValid()Z","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"74472b9f-df66-47a8-9d5f-a45dc383e800","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"Turn","regionMethod":"<init>(Z)V","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"fbe794f5-b8e8-4492-bbe7-6468f0865190","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"preallocate()V","startBytecodeIndex":69,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"4f5300aa-1059-49a4-89c9-f74b9f2d2bc9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":247,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD"]]},{"region":{"regionID":"64cec049-33a2-493f-ae6e-00c2890e5311","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"append(Lorg/prevayler/implementation/TransactionGuide;)V","startBytecodeIndex":125,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"2dc66190-56f9-4a2c-a198-455bb05fa39e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler","regionClass":"PrevaylerFactory","regionMethod":"journalSuffix()Ljava/lang/String;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE","JOURNALSERIALIZER"]]},{"region":{"regionID":"4bfe8bc5-23d9-4d47-b50c-7267766ecfd3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"Turn","regionMethod":"next()Lorg/prevayler/foundation/Turn;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"b895f097-8239-473b-a6e0-1f31aee1640e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J","startBytecodeIndex":200,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"c9ae6c22-1777-4fbb-af5e-f85c7545f5d4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"FileManager","regionMethod":"produceDirectory(Ljava/io/File;)V","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"61eb3348-1681-417c-a83e-2c1947e18f2d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.clock","regionClass":"BrokenClock","regionMethod":"advanceTo(Ljava/util/Date;)V","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["CLOCK"]]},{"region":{"regionID":"853c0fa6-6a43-417d-a932-f835a3437f9c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"isOutputJournalTooBig()Z","startBytecodeIndex":24,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"19df8960-88be-4b14-aea5-c35ec7a0c43e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation.serialization","regionClass":"XStreamSerializer","regionMethod":"writeObject(Ljava/io/OutputStream;Ljava/lang/Object;)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["JOURNALSERIALIZER"]]},{"region":{"regionID":"440f562c-3fe9-4943-a0eb-733dbcfb0a12","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"nextTransaction()J","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"7cfff733-8cab-4ee6-95e6-bec4fa155d66","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"TransientJournal","regionMethod":"update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V","startBytecodeIndex":162,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"46f7d486-a12f-40be-bc29-103bbde3121e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"TransientJournal","regionMethod":"append(Lorg/prevayler/implementation/TransactionGuide;)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"19e1d5f8-e01d-4e40-bfbc-50912704dce0","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":237,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILESIZETHRESHOLD"]]},{"region":{"regionID":"9b9619b6-4517-41cf-91bc-9429f4fef605","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"Turn","regionMethod":"start()V","startBytecodeIndex":18,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"b0904eaf-a119-439a-b4d0-ac5d7c200409","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"isOutputJournalStillValid()Z","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"0f501d7b-6bfd-43c9-a492-7993546c004f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"initializeNextTransaction(JJ)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"ee7d1196-0231-40e7-96b1-022e165f85b3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"FileManager","regionMethod":"produceDirectory(Ljava/io/File;)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"924ed50f-6e9a-4214-8b28-0503deb83e84","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.implementation.journal","regionClass":"PersistentJournal","regionMethod":"initializeNextTransaction(JJ)V","startBytecodeIndex":130,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TRANSIENTMODE"]]},{"region":{"regionID":"a90775f4-3e1e-4f4e-93b1-4c27fde1246b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":203,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["CLOCK"]]},{"region":{"regionID":"eeff20e4-29f8-498c-83c7-8a1f1ed9be7e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.foundation","regionClass":"DurableOutputStream","regionMethod":"preallocate()V","startBytecodeIndex":61,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FILEAGETHRESHOLD","TRANSIENTMODE","FILESIZETHRESHOLD"]]},{"region":{"regionID":"890aaa9b-a8fe-4b1c-8b7f-acd93432f414","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":395,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["SNAPSHOTSERIALIZER"]]},{"region":{"regionID":"57ec5da3-8934-43ce-8c29-72d17aac0557","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.prevayler.demos.demo1","regionClass":"PrimeNumbers","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":558,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["SNAPSHOTSERIALIZER"]]}]
+[
+  {
+    "region": {
+      "regionID": "d4f05288-bfc9-4d17-9f20-dc63f9542ea2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "append(Lorg/prevayler/implementation/TransactionGuide;)V",
+      "startBytecodeIndex": 35,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ee2b0b35-4a5e-4f3d-851d-ea26c67cee5f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J",
+      "startBytecodeIndex": 52,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f046958e-8987-4f29-860d-c4723c0f313a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "initializeNextTransaction(JJ)V",
+      "startBytecodeIndex": 68,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "93302aed-c49a-4210-9e71-dec3f2067e8c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "PrevalentSystemGuard",
+      "regionMethod": "receive(Lorg/prevayler/implementation/TransactionTimestamp;)V",
+      "startBytecodeIndex": 120,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8d54001f-f165-434d-b68b-112388772635",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "TransientJournal",
+      "regionMethod": "update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V",
+      "startBytecodeIndex": 199,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9bb5c065-dae9-4b49-aa83-c59277e29146",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "clock()Lorg/prevayler/Clock;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a80aec24-48e2-430a-a58d-fb9e152a51f6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "close()V",
+      "startBytecodeIndex": 34,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8e867551-8386-407e-8b7f-f051cea92214",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "monitor()Lorg/prevayler/foundation/monitor/Monitor;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE",
+        "MONITOR"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7f98e4b4-9317-435e-aef8-d1bc1729878f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "Turn",
+      "regionMethod": "next()Lorg/prevayler/foundation/Turn;",
+      "startBytecodeIndex": 21,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a8baa6c4-acc2-47c0-9e0a-4e2dcaeb1f0b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 525,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c46d0123-3827-4d76-ba31-4aee4d344987",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "FileManager",
+      "regionMethod": "produceDirectory(Ljava/io/File;)V",
+      "startBytecodeIndex": 45,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e623a053-f22a-44b4-a151-1c3a9caa22c8",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "append(Lorg/prevayler/implementation/TransactionGuide;)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c6b733b9-a4e6-429f-a22a-43aea5d3fac4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "waitUntilSynced(I)V",
+      "startBytecodeIndex": 12,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "36ee7395-3896-454b-8559-4ccd313f7edb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "close()V",
+      "startBytecodeIndex": 18,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9db1c08e-2f67-49bc-9879-f1b1e8f87f0b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "Turn",
+      "regionMethod": "start()V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "94a6d85f-b45f-467f-a92d-4d7d3ec423aa",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 257,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MONITOR"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "66724301-00bd-4462-a575-2b40e0f8da1c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "PrevalentSystemGuard",
+      "regionMethod": "receive(Lorg/prevayler/implementation/TransactionTimestamp;)V",
+      "startBytecodeIndex": 46,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8abe0c28-2b7b-4404-a08d-0e12cd535cd1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "Chunking",
+      "regionMethod": "writeChunk(Ljava/io/OutputStream;Lorg/prevayler/foundation/Chunk;)V",
+      "startBytecodeIndex": 122,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7d3858b9-215f-4815-99c8-7494edf07004",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "TransientJournal",
+      "regionMethod": "update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "469c3165-f925-4c41-a381-383bbd66e86a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "PrevaylerDirectory",
+      "regionMethod": "checkValidJournalSuffix(Ljava/lang/String;)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "JOURNALSERIALIZER",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6e179b7f-5e9c-48cb-9f7e-6da80741c3ba",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "waitUntilSynced(I)V",
+      "startBytecodeIndex": 112,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "DISKSYNC",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9d3d8c5a-b8bd-4962-98e2-371f73149d4e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "waitUntilSynced(I)V",
+      "startBytecodeIndex": 27,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1f548577-5858-4099-bf4e-7010acaf4b77",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "PrevaylerDirectory",
+      "regionMethod": "findInitialJournalFile(J)Ljava/io/File;",
+      "startBytecodeIndex": 36,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1c18d6c8-7b99-4360-adbd-518aee5a73e7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "preallocate()V",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b770eddf-09ed-4961-af90-b45708854696",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "PrevaylerDirectory",
+      "regionMethod": "findInitialJournalFile(J)Ljava/io/File;",
+      "startBytecodeIndex": 56,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ed09e0b1-a569-405d-afbe-73f9cb32e980",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "Chunking",
+      "regionMethod": "writeChunk(Ljava/io/OutputStream;Lorg/prevayler/foundation/Chunk;)V",
+      "startBytecodeIndex": 41,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "79e8b3ab-c858-447d-bc05-de4210ebc341",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "prevalenceDirectory()Ljava/lang/String;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "32915e65-45b4-42aa-a9bd-73ad14a5cb29",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "isOutputJournalTooBig()Z",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ab1c69bc-8eab-4f16-a1e8-416773f4281f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "isOutputJournalTooOld()Z",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a6b0cba2-abe2-42ef-82b9-e5980a4d4931",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "PrevaylerDirectory",
+      "regionMethod": "checkValidSnapshotSuffix(Ljava/lang/String;)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "SNAPSHOTSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9369bb32-bb9b-4e54-8081-5fdcfd6c4805",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "TransientJournal",
+      "regionMethod": "nextTransaction()J",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8767c2d2-d693-4b9b-acc4-b5fc7db098be",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J",
+      "startBytecodeIndex": 37,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8a3aad32-139f-4708-8707-69d1f5c0a11b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J",
+      "startBytecodeIndex": 217,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "659ac2fd-a811-485e-8724-7cc5000d6b97",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "journal()Lorg/prevayler/implementation/journal/Journal;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0e657bd9-7e59-4548-9007-c7311af897d1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "preallocate()V",
+      "startBytecodeIndex": 96,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d2120061-f203-426f-88c2-a0fe3391ca53",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "writeObject(Lorg/prevayler/foundation/Guided;)I",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "50d5b9c3-bcfa-46cb-9658-e7b094de7bba",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J",
+      "startBytecodeIndex": 115,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "eda5658e-490b-474d-b054-379a279c254e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "journalSerializer()Lorg/prevayler/foundation/serialization/Serializer;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8876e627-e907-42cd-a37a-a61220dce18e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "PrevaylerDirectory",
+      "regionMethod": "file(JLjava/lang/String;)Ljava/io/File;",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "70408bda-0fa7-4434-bf09-9f7ee793ff70",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 362,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4c356c0d-54d0-4c67-bb4e-10b2dfb0d121",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "initializeNextTransaction(JJ)V",
+      "startBytecodeIndex": 109,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2dd8566a-25e2-4d19-8ce3-a44d7a10fe08",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.clock",
+      "regionClass": "MachineClock",
+      "regionMethod": "update()V",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "27908831-3268-4d5e-8110-8e9eb287bea7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "Capsule",
+      "regionMethod": "<init>(Ljava/lang/Object;Lorg/prevayler/foundation/serialization/Serializer;Z)V",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DEEPCOPY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f26f0146-8ef2-4194-a068-4b7d961fe8d2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "<init>(Ljava/io/File;ZJ)V",
+      "startBytecodeIndex": 100,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b8752b0d-b5b1-4661-8c35-69a323af679c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V",
+      "startBytecodeIndex": 12,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a58caa21-8343-4a70-af04-8f9800c71971",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "Capsule",
+      "regionMethod": "executeOn(Ljava/lang/Object;Ljava/util/Date;Lorg/prevayler/foundation/serialization/Serializer;)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "10867be8-7bee-4eab-8041-e23ffb944bbf",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "isOutputJournalTooOld()Z",
+      "startBytecodeIndex": 21,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "03c74758-3d2d-4f6c-a61f-09f534dc73d7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "preallocate()V",
+      "startBytecodeIndex": 105,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e030e3d8-581d-4dfd-bd83-1cbd8c8d4de3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "Turn",
+      "regionMethod": "abort(Ljava/lang/String;Ljava/lang/Throwable;)V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "34524ca5-6366-48aa-ad4a-2b957ea673bf",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "PrevalentSystemGuard",
+      "regionMethod": "receive(Lorg/prevayler/implementation/TransactionTimestamp;)V",
+      "startBytecodeIndex": 25,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8d57d4ef-453c-4214-b0ba-f122b8325e39",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "TransientJournal",
+      "regionMethod": "update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V",
+      "startBytecodeIndex": 91,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fbb655db-5ac0-4230-a5bb-6817182738d8",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "Chunking",
+      "regionMethod": "writeChunk(Ljava/io/OutputStream;Lorg/prevayler/foundation/Chunk;)V",
+      "startBytecodeIndex": 81,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6d32ac92-693b-4aab-854a-153c8ce3ab25",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation",
+      "regionClass": "TransactionGuide",
+      "regionMethod": "checkSystemVersion(J)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3ac77e84-18e7-41e0-81e9-e3d8ba59cc85",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "TransientJournal",
+      "regionMethod": "update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b626a390-ccbb-4d8a-8c4e-ffd10caa0f17",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "preallocate()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "37090f9a-6a10-49b1-9977-dc619e2d8471",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "initializeNextTransaction(JJ)V",
+      "startBytecodeIndex": 13,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e0ea8bc0-65b8-4d9d-9f7f-ae183a4c4532",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "configureSnapshotSerializer(Ljava/lang/String;Lorg/prevayler/foundation/serialization/Serializer;)V",
+      "startBytecodeIndex": 20,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "SNAPSHOTSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a6456fc9-05a7-433b-b17b-1fc23c4e7681",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation.serialization",
+      "regionClass": "XStreamSerializer",
+      "regionMethod": "readObject(Ljava/io/InputStream;)Ljava/lang/Object;",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE",
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "42a14896-81d6-401a-a50c-bd4c67edcd28",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "close()V",
+      "startBytecodeIndex": 44,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "08e6b2aa-50d9-405d-b24e-5cda92fc9bb6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "configureJournalSerializer(Ljava/lang/String;Lorg/prevayler/foundation/serialization/Serializer;)V",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3a3e7ee6-71ad-44d3-a350-9773b6a24d82",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "isOutputJournalStillValid()Z",
+      "startBytecodeIndex": 18,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d00fa7f7-64f0-44aa-9960-5f1b52d5fc9f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "isOutputJournalStillValid()Z",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "74472b9f-df66-47a8-9d5f-a45dc383e800",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "Turn",
+      "regionMethod": "<init>(Z)V",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fbe794f5-b8e8-4492-bbe7-6468f0865190",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "preallocate()V",
+      "startBytecodeIndex": 69,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4f5300aa-1059-49a4-89c9-f74b9f2d2bc9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 247,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "64cec049-33a2-493f-ae6e-00c2890e5311",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "append(Lorg/prevayler/implementation/TransactionGuide;)V",
+      "startBytecodeIndex": 125,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2dc66190-56f9-4a2c-a198-455bb05fa39e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler",
+      "regionClass": "PrevaylerFactory",
+      "regionMethod": "journalSuffix()Ljava/lang/String;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE",
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4bfe8bc5-23d9-4d47-b50c-7267766ecfd3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "Turn",
+      "regionMethod": "next()Lorg/prevayler/foundation/Turn;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b895f097-8239-473b-a6e0-1f31aee1640e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "recoverPendingTransactions(Lorg/prevayler/implementation/publishing/TransactionSubscriber;JLjava/io/File;)J",
+      "startBytecodeIndex": 200,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c9ae6c22-1777-4fbb-af5e-f85c7545f5d4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "FileManager",
+      "regionMethod": "produceDirectory(Ljava/io/File;)V",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "61eb3348-1681-417c-a83e-2c1947e18f2d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.clock",
+      "regionClass": "BrokenClock",
+      "regionMethod": "advanceTo(Ljava/util/Date;)V",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "853c0fa6-6a43-417d-a932-f835a3437f9c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "isOutputJournalTooBig()Z",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "19df8960-88be-4b14-aea5-c35ec7a0c43e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation.serialization",
+      "regionClass": "XStreamSerializer",
+      "regionMethod": "writeObject(Ljava/io/OutputStream;Ljava/lang/Object;)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "JOURNALSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "440f562c-3fe9-4943-a0eb-733dbcfb0a12",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "nextTransaction()J",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7cfff733-8cab-4ee6-95e6-bec4fa155d66",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "TransientJournal",
+      "regionMethod": "update(Lorg/prevayler/implementation/publishing/TransactionSubscriber;J)V",
+      "startBytecodeIndex": 162,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "46f7d486-a12f-40be-bc29-103bbde3121e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "TransientJournal",
+      "regionMethod": "append(Lorg/prevayler/implementation/TransactionGuide;)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "19e1d5f8-e01d-4e40-bfbc-50912704dce0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 237,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9b9619b6-4517-41cf-91bc-9429f4fef605",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "Turn",
+      "regionMethod": "start()V",
+      "startBytecodeIndex": 18,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b0904eaf-a119-439a-b4d0-ac5d7c200409",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "isOutputJournalStillValid()Z",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0f501d7b-6bfd-43c9-a492-7993546c004f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "initializeNextTransaction(JJ)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ee7d1196-0231-40e7-96b1-022e165f85b3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "FileManager",
+      "regionMethod": "produceDirectory(Ljava/io/File;)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "924ed50f-6e9a-4214-8b28-0503deb83e84",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.implementation.journal",
+      "regionClass": "PersistentJournal",
+      "regionMethod": "initializeNextTransaction(JJ)V",
+      "startBytecodeIndex": 130,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TRANSIENTMODE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a90775f4-3e1e-4f4e-93b1-4c27fde1246b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 203,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "CLOCK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "eeff20e4-29f8-498c-83c7-8a1f1ed9be7e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.foundation",
+      "regionClass": "DurableOutputStream",
+      "regionMethod": "preallocate()V",
+      "startBytecodeIndex": 61,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FILEAGETHRESHOLD",
+        "TRANSIENTMODE",
+        "FILESIZETHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "890aaa9b-a8fe-4b1c-8b7f-acd93432f414",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 395,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "SNAPSHOTSERIALIZER"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "57ec5da3-8934-43ce-8c29-72d17aac0557",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.prevayler.demos.demo1",
+      "regionClass": "PrimeNumbers",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 558,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "SNAPSHOTSERIALIZER"
+      ]
+    ]
+  }
+]

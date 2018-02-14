@@ -1,0 +1,88 @@
+[
+  {
+    "region": {
+      "regionID": "8fa6e8df-a82a-4f93-8850-6b48fa32bbb0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions27",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 35,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "A",
+        "B"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c6c1e873-b5a4-4781-9a57-f35da1165f77",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions27",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 28,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "A"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "88025653-b3ad-4e7b-a618-1cdbd441944e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions27",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 42,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "C"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1bab07cf-3dd4-4d7c-84d8-738a48316bbd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "Regions27",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 47,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "C",
+        "D"
+      ]
+    ]
+  }
+]

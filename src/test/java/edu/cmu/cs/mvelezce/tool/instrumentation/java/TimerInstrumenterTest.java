@@ -393,6 +393,33 @@ public class TimerInstrumenterTest {
     }
 
     @Test
+    public void regions27() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
+        String programName = "regions27";
+        String entry = "edu.cmu.cs.mvelezce.Regions27";
+        TimerInstrumenterTest.srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy";
+        TimerInstrumenterTest.classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+
+        this.compile();
+//        this.format();
+
+        // Program arguments
+        String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptions = analysis.analyze(args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Instrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName, entry, TimerInstrumenterTest.classDir, decisionsToOptions);
+        instrumenter.instrument(args);
+    }
+
+    @Test
     public void regions1() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
         String programName = "regions1";
         String entry = "edu.cmu.cs.mvelezce.Regions1";

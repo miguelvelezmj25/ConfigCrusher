@@ -18,7 +18,7 @@ public class RunningExampleAdapter extends BaseAdapter {
     }
 
     public static List<String> getRunningExampleOptions() {
-        String[] options = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"};
+        String[] options = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
         return Arrays.asList(options);
     }

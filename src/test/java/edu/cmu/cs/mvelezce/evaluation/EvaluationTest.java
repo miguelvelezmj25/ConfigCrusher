@@ -276,6 +276,12 @@ public class EvaluationTest {
                 regionsToOptionSet);
         PerformanceModel performanceModel = builder.createModel(args);
 
+        Set<String> conf = new HashSet<>();
+        conf.add("J");
+
+        double res = performanceModel.evaluate(conf);
+
+
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
     }

@@ -28,12 +28,22 @@ public class BruteForceEvaluationExecutor extends BruteForceExecutor {
         }
 
         Collection<File> files = FileUtils.listFilesAndDirs(root, new NotFileFilter(TrueFileFilter.INSTANCE), DirectoryFileFilter.DIRECTORY);
-        List<File> filesList = new ArrayList<>(files);
+
+        List<File> filesList = new ArrayList<>();
+
+        for(File file : files) {
+            String name = file.getName();
+
+            if(StringUtils.isNumeric(name)) {
+                filesList.add(file);
+            }
+        }
+
         Collections.sort(filesList);
 
         List<Set<DefaultPerformanceEntry>> performanceEntriesList = new ArrayList<>();
 
-        for(int i = 0; i < (filesList.size() - 2); i++) {
+        for(int i = 0; i < (filesList.size() - 1); i++) {
             File outputFile = new File(root + "/" + i);
 
             Set<DefaultPerformanceEntry> results = this.aggregateExecutions(outputFile);

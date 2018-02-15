@@ -76,6 +76,7 @@ public abstract class BaseExecutor implements Executor {
                 performanceEntryStatistic.calculateMinMax(sameConfigEntries);
                 performanceEntryStatistic.calculateMean(sameConfigEntries);
                 performanceEntryStatistic.calculateStd(sameConfigEntries);
+//                performanceEntryStatistic.calculateCI(sameConfigEntries);
 
                 break;
             }

@@ -300,8 +300,21 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
             Mean meanCalc = new Mean();
             double mean = meanCalc.evaluate(values);
 
-            StandardDeviation stdCalc = new StandardDeviation(false);
-            double std = stdCalc.evaluate(values, mean);
+            double[] squaredDist = new double[values.length];
+
+            for(int i = 0; i < values.length; i++) {
+                double dist = mean - values[i];
+                squaredDist[i] = Math.pow(dist, 2);
+            }
+
+            double std = 0;
+
+            for(int i = 0; i < values.length; i++) {
+                std += squaredDist[i];
+            }
+
+            std = std / (squaredDist.length - 1);
+            std = Math.sqrt(std);
 
             this.regionsToRawStd.put(region, std);
         }
@@ -336,8 +349,21 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
             Mean meanCalc = new Mean();
             double mean = meanCalc.evaluate(values);
 
-            StandardDeviation stdCalc = new StandardDeviation(false);
-            double std = stdCalc.evaluate(values, mean);
+            double[] squaredDist = new double[values.length];
+
+            for(int i = 0; i < values.length; i++) {
+                double dist = mean - values[i];
+                squaredDist[i] = Math.pow(dist, 2);
+            }
+
+            double std = 0;
+
+            for(int i = 0; i < values.length; i++) {
+                std += squaredDist[i];
+            }
+
+            std = std / (squaredDist.length - 1);
+            std = Math.sqrt(std);
 
             this.regionsToProcessedStd.put(region, std);
         }
@@ -345,6 +371,85 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
         this.regionsToRawStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToRawStd);
         this.regionsToProcessedStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToProcessedStd);
     }
+
+//    public void calculateCI(List<DefaultPerformanceEntry> performanceEntries) {
+//        // Raw data
+//        for(Region region : performanceEntries.iterator().next().getRegionsToRawPerformance().keySet()) {
+//            this.regionsToRawStd.put(region, 0.0);
+//        }
+//
+//        for(Map.Entry<Region, Double> regionToRawStd : this.regionsToRawStd.entrySet()) {
+//            Region region = regionToRawStd.getKey();
+//            List<Double> rawEntries = new ArrayList<>();
+//
+//            for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
+//                for(Map.Entry<Region, Long> regionToRaw : performanceEntry.getRegionsToRawPerformance().entrySet()) {
+//                    if(!region.getRegionID().equals(regionToRaw.getKey().getRegionID())) {
+//                        continue;
+//                    }
+//
+//                    rawEntries.add(regionToRaw.getValue().doubleValue());
+//
+//                    break;
+//                }
+//            }
+//
+//            double[] values = new double[rawEntries.size()];
+//
+//            for(int i = 0; i < values.length; i++) {
+//                values[i] = rawEntries.get(i);
+//            }
+//
+//            Mean meanCalc = new Mean();
+//            double mean = meanCalc.evaluate(values);
+//
+//            StandardDeviation stdCalc = new StandardDeviation(false);
+//            double std = stdCalc.evaluate(values, mean);
+//
+//
+//
+//            this.regionsToRawStd.put(region, std);
+//        }
+//
+//        // Process data
+//        for(Region region : performanceEntries.iterator().next().getRegionsToProcessedPerformance().keySet()) {
+//            this.regionsToProcessedStd.put(region, 0.0);
+//        }
+//
+//        for(Map.Entry<Region, Double> regionToProcessedStd : this.regionsToProcessedStd.entrySet()) {
+//            Region region = regionToProcessedStd.getKey();
+//            List<Double> rawEntries = new ArrayList<>();
+//
+//            for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
+//                for(Map.Entry<Region, Long> regionToProcessed : performanceEntry.getRegionsToProcessedPerformance().entrySet()) {
+//                    if(!region.getRegionID().equals(regionToProcessed.getKey().getRegionID())) {
+//                        continue;
+//                    }
+//
+//                    rawEntries.add(regionToProcessed.getValue().doubleValue());
+//
+//                    break;
+//                }
+//            }
+//
+//            double[] values = new double[rawEntries.size()];
+//
+//            for(int i = 0; i < values.length; i++) {
+//                values[i] = rawEntries.get(i);
+//            }
+//
+//            Mean meanCalc = new Mean();
+//            double mean = meanCalc.evaluate(values);
+//
+//            StandardDeviation stdCalc = new StandardDeviation(false);
+//            double std = stdCalc.evaluate(values, mean);
+//
+//            this.regionsToProcessedStd.put(region, std);
+//        }
+//
+//        this.regionsToRawStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToRawStd);
+//        this.regionsToProcessedStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToProcessedStd);
+//    }
 
     public Map<Region, Long> getRegionsRawMin() {
         Map<Region, Long> result = new HashMap<>();

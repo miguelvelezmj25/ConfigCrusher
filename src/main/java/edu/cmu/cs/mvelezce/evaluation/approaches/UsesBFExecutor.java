@@ -42,9 +42,7 @@ public class UsesBFExecutor extends BaseExecutor {
         Collections.sort(filesList);
 
         File lastFile = filesList.get(filesList.size() - 1);
-        String lastFilePath = lastFile.getPath();
-        int lastSlashIndex = lastFilePath.lastIndexOf("/");
-        String number = lastFilePath.substring(lastSlashIndex + 1).trim();
+        String number = lastFile.getName();
 
         if(!StringUtils.isNumeric(number)) {
             throw new RuntimeException("The last directory is not a sample");

@@ -15,11 +15,13 @@ import org.prevayler.foundation.DurableOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
+
 public class PrettyDefaultMethodGraphBuilderTest {
 
     @Test
     public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
         String className = Example.class.getCanonicalName();
         String methodName = "moo";
         ClassTransformer transformer = new DefaultBaseClassTransformer(path);
@@ -47,7 +49,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
 
     @Test
     public void Graph0() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String className = Example.class.getCanonicalName();
         String methodName = "moo";
         ClassTransformer transformer = new DefaultBaseClassTransformer(path);
@@ -75,7 +77,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
 
     @Test
     public void colorCounter() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
         String className = Run.class.getCanonicalName();
         String methodName = "main";
         ClassTransformer transformer = new DefaultBaseClassTransformer(path);
@@ -103,7 +105,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
 
     @Test
     public void prevayler() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
         String className = DurableOutputStream.class.getCanonicalName();
         String methodName = "close";
         ClassTransformer transformer = new DefaultBaseClassTransformer(path);

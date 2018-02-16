@@ -13,6 +13,8 @@ import org.prevayler.implementation.publishing.POBox;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
+
 /**
  * Created by mvelezce on 5/3/17.
  */
@@ -20,7 +22,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph0() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph0.class.getCanonicalName());
 
@@ -39,7 +41,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph1() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph1.class.getCanonicalName());
 
@@ -58,7 +60,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph2() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph2.class.getCanonicalName());
 
@@ -76,7 +78,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph3() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph3.class.getCanonicalName());
 
@@ -95,7 +97,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph4() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph4.class.getCanonicalName());
 
@@ -114,7 +116,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph5() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph5.class.getCanonicalName());
 
@@ -133,7 +135,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph6() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph6.class.getCanonicalName());
 
@@ -152,7 +154,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph7() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph7.class.getCanonicalName());
 
@@ -171,7 +173,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph8() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph8.class.getCanonicalName());
 
@@ -190,7 +192,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph9() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph9.class.getCanonicalName());
 
@@ -209,7 +211,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph10() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph10.class.getCanonicalName());
 
@@ -228,7 +230,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph11() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph11.class.getCanonicalName());
 
@@ -247,7 +249,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph12() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph12.class.getCanonicalName());
 
@@ -266,7 +268,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph13() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph13.class.getCanonicalName());
 
@@ -285,7 +287,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph14() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph14.class.getCanonicalName());
 
@@ -304,7 +306,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph15() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph15.class.getCanonicalName());
 
@@ -322,7 +324,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void graph16() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph16.class.getCanonicalName());
 
@@ -341,7 +343,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(Example.class.getCanonicalName());
 
@@ -360,7 +362,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void prevayler() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(POBox.class.getCanonicalName());
 
@@ -379,7 +381,7 @@ public class DefaultMethodGraphBuilderTest {
 
     @Test
     public void kanzi() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
+        String path = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
         ClassTransformer reader = new DefaultBaseClassTransformer(path);
         ClassNode classNode = reader.readClass(CompressedOutputStream.class.getCanonicalName());
 

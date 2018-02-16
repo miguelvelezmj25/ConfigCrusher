@@ -392,7 +392,7 @@ public class ProgramAnalysisTest {
 //    @Test
 //    public void testSleep3() throws IOException {
 //        String programName = "sleep3";
-//        String sdgFile = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep3/edu.cmu.cs.mvelezce.Sleep3.main.pdg";
+//        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep3/edu.cmu.cs.mvelezce.Sleep3.main.pdg";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep3.main";
 //        List<String> features = new ArrayList<>();
 //        features.add("A");
@@ -414,7 +414,7 @@ public class ProgramAnalysisTest {
 //    @Test
 //    public void testSleep15() throws IOException {
 //        String programName = "sleep15";
-//        String sdgFile = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep15/edu.cmu.cs.mvelezce.Sleep15.main.pdg";
+//        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep15/edu.cmu.cs.mvelezce.Sleep15.main.pdg";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep15.main";
 //        List<String> features = new ArrayList<>();
 //        features.add("A");
@@ -437,7 +437,7 @@ public class ProgramAnalysisTest {
 //    @Test
 //    public void testSleep17() throws IOException {
 //        String programName = "sleep17";
-//        String sdgFile = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep17/edu.cmu.cs.mvelezce.Sleep17.main.pdg";
+//        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep17/edu.cmu.cs.mvelezce.Sleep17.main.pdg";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep17.main";
 //        List<String> features = new ArrayList<>();
 //        features.add("A");

@@ -7,17 +7,19 @@ import org.junit.Test;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
+
 public class VariableBeforeReturnTransformerTest {
 
-//    String originalClassDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/src";
-//    String originalSrcDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
-//    String instrumentedClassDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/src";
-//    String instrumentedSrcDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+//    String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/src";
+//    String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
+//    String instrumentedClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/src";
+//    String instrumentedSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
 
     @Test
     public void testRunningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
-        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/src";
-        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
+        String srcDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/src";
+        String classDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
 
         // Program arguments
 //        String[] args = new String[0];

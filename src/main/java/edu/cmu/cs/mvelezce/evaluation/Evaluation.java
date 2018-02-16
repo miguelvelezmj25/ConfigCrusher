@@ -137,7 +137,7 @@ public class Evaluation {
         }
 
         StringBuilder result = new StringBuilder();
-        result.append("measured,configuration,performance,std");
+        result.append("measured,configuration,performance,std,minci,maxci");
         result.append("\n");
 
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
@@ -159,6 +159,13 @@ public class Evaluation {
             result.append(",");
             double std = performanceEntry.getRegionsToProcessedStdHumanReadable().values().iterator().next();
             result.append(decimalFormat.format(std));
+            result.append(",");
+            List<Double> ci = performanceEntry.getRegionsToProcessedCIHumanReadable().values().iterator().next();
+            double minCI = ci.get(0);
+            double maxCI = ci.get(1);
+            result.append(decimalFormat.format(minCI));
+            result.append(",");
+            result.append(decimalFormat.format(maxCI));
             result.append("\n");
         }
 

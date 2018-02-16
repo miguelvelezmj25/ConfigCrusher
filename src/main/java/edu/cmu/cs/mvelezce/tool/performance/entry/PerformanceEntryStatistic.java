@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.performance.entry;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
@@ -15,18 +16,22 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
     private Map<Region, List<Long>> regionsToRawMinMax = new LinkedHashMap<>();
     private Map<Region, Long> regionsToRawMean = new LinkedHashMap<>();
     private Map<Region, Double> regionsToRawStd = new LinkedHashMap<>();
+    private Map<Region, List<Double>> regionsToRawCI = new LinkedHashMap<>();
 
     private Map<Region, List<Double>> regionsToRawMinMaxHumanReadable = new LinkedHashMap<>();
     private Map<Region, Double> regionsToRawMeanHumanReadable = new LinkedHashMap<>();
     private Map<Region, Double> regionsToRawStdHumanReadable = new LinkedHashMap<>();
+    private Map<Region, List<Double>> regionsToRawCIHumanReadable = new LinkedHashMap<>();
 
     private Map<Region, List<Long>> regionsToProcessedMinMax = new LinkedHashMap<>();
     private Map<Region, Long> regionsToProcessedMean = new LinkedHashMap<>();
     private Map<Region, Double> regionsToProcessedStd = new LinkedHashMap<>();
+    private Map<Region, List<Double>> regionsToProcessedCI = new LinkedHashMap<>();
 
     private Map<Region, List<Double>> regionsToProcessedMinMaxHumanReadable = new LinkedHashMap<>();
     private Map<Region, Double> regionsToProcessedMeanHumanReadable = new LinkedHashMap<>();
     private Map<Region, Double> regionsToProcessedStdHumanReadable = new LinkedHashMap<>();
+    private Map<Region, List<Double>> regionsToProcessedCIHumanReadable = new LinkedHashMap<>();
 
     public PerformanceEntryStatistic(boolean measured, Set<String> configuration) {
         super(configuration);
@@ -45,6 +50,21 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
 
         for(Map.Entry<Region, Double> entry : regionsToPerformance.entrySet()) {
             result.put(entry.getKey(), PerformanceEntryStatistic.toSeconds(entry.getValue()));
+        }
+
+        return result;
+    }
+
+    public static Map<Region, List<Double>> ciToHumanReadable(Map<Region, List<Double>> regionsToPerformance) {
+        Map<Region, List<Double>> result = new LinkedHashMap<>();
+
+        for(Map.Entry<Region, List<Double>> entry : regionsToPerformance.entrySet()) {
+            List<Double> hrCI = new ArrayList<>(2);
+            List<Double> ci = entry.getValue();
+            hrCI.add(0, PerformanceEntryStatistic.toSeconds(ci.get(0)));
+            hrCI.add(1, PerformanceEntryStatistic.toSeconds(ci.get(1)));
+
+            result.put(entry.getKey(), hrCI);
         }
 
         return result;
@@ -309,12 +329,14 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
 
             double std = 0;
 
-            for(int i = 0; i < values.length; i++) {
-                std += squaredDist[i];
-            }
+            if(squaredDist.length > 1) {
+                for(int i = 0; i < values.length; i++) {
+                    std += squaredDist[i];
+                }
 
-            std = std / (squaredDist.length - 1);
-            std = Math.sqrt(std);
+                std = std / (squaredDist.length - 1);
+                std = Math.sqrt(std);
+            }
 
             this.regionsToRawStd.put(region, std);
         }
@@ -358,12 +380,14 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
 
             double std = 0;
 
-            for(int i = 0; i < values.length; i++) {
-                std += squaredDist[i];
-            }
+            if(squaredDist.length > 1) {
+                for(int i = 0; i < values.length; i++) {
+                    std += squaredDist[i];
+                }
 
-            std = std / (squaredDist.length - 1);
-            std = Math.sqrt(std);
+                std = std / (squaredDist.length - 1);
+                std = Math.sqrt(std);
+            }
 
             this.regionsToProcessedStd.put(region, std);
         }
@@ -372,84 +396,97 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
         this.regionsToProcessedStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToProcessedStd);
     }
 
-//    public void calculateCI(List<DefaultPerformanceEntry> performanceEntries) {
-//        // Raw data
-//        for(Region region : performanceEntries.iterator().next().getRegionsToRawPerformance().keySet()) {
-//            this.regionsToRawStd.put(region, 0.0);
-//        }
-//
-//        for(Map.Entry<Region, Double> regionToRawStd : this.regionsToRawStd.entrySet()) {
-//            Region region = regionToRawStd.getKey();
-//            List<Double> rawEntries = new ArrayList<>();
-//
-//            for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
-//                for(Map.Entry<Region, Long> regionToRaw : performanceEntry.getRegionsToRawPerformance().entrySet()) {
-//                    if(!region.getRegionID().equals(regionToRaw.getKey().getRegionID())) {
-//                        continue;
-//                    }
-//
-//                    rawEntries.add(regionToRaw.getValue().doubleValue());
-//
-//                    break;
-//                }
-//            }
-//
-//            double[] values = new double[rawEntries.size()];
-//
-//            for(int i = 0; i < values.length; i++) {
-//                values[i] = rawEntries.get(i);
-//            }
-//
-//            Mean meanCalc = new Mean();
-//            double mean = meanCalc.evaluate(values);
-//
-//            StandardDeviation stdCalc = new StandardDeviation(false);
-//            double std = stdCalc.evaluate(values, mean);
-//
-//
-//
-//            this.regionsToRawStd.put(region, std);
-//        }
-//
-//        // Process data
-//        for(Region region : performanceEntries.iterator().next().getRegionsToProcessedPerformance().keySet()) {
-//            this.regionsToProcessedStd.put(region, 0.0);
-//        }
-//
-//        for(Map.Entry<Region, Double> regionToProcessedStd : this.regionsToProcessedStd.entrySet()) {
-//            Region region = regionToProcessedStd.getKey();
-//            List<Double> rawEntries = new ArrayList<>();
-//
-//            for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
-//                for(Map.Entry<Region, Long> regionToProcessed : performanceEntry.getRegionsToProcessedPerformance().entrySet()) {
-//                    if(!region.getRegionID().equals(regionToProcessed.getKey().getRegionID())) {
-//                        continue;
-//                    }
-//
-//                    rawEntries.add(regionToProcessed.getValue().doubleValue());
-//
-//                    break;
-//                }
-//            }
-//
-//            double[] values = new double[rawEntries.size()];
-//
-//            for(int i = 0; i < values.length; i++) {
-//                values[i] = rawEntries.get(i);
-//            }
-//
-//            Mean meanCalc = new Mean();
-//            double mean = meanCalc.evaluate(values);
-//
-//            StandardDeviation stdCalc = new StandardDeviation(false);
-//            double std = stdCalc.evaluate(values, mean);
-//
-//            this.regionsToProcessedStd.put(region, std);
-//        }
-//
-//        this.regionsToRawStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToRawStd);
-//        this.regionsToProcessedStdHumanReadable = PerformanceEntryStatistic.stdToHumanReadable(this.regionsToProcessedStd);
-//    }
+    public void calculateCIRaw(List<DefaultPerformanceEntry> performanceEntries) {
+        // Raw data
+        for(Region region : performanceEntries.iterator().next().getRegionsToRawPerformance().keySet()) {
+            this.regionsToRawCI.put(region, new ArrayList<>(2));
+        }
+
+        for(Map.Entry<Region, List<Double>> regionToRawCI : this.regionsToRawCI.entrySet()) {
+            Region region = regionToRawCI.getKey();
+            List<Double> rawEntries = new ArrayList<>();
+
+            for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
+                for(Map.Entry<Region, Long> regionToRaw : performanceEntry.getRegionsToRawPerformance().entrySet()) {
+                    if(!region.getRegionID().equals(regionToRaw.getKey().getRegionID())) {
+                        continue;
+                    }
+
+                    rawEntries.add(regionToRaw.getValue().doubleValue());
+
+                    break;
+                }
+            }
+
+            long mean = this.regionsToRawMean.get(region);
+            double std = this.regionsToRawStd.get(region);
+            int entries = rawEntries.size();
+            TDistribution tdist = new TDistribution(entries - 1);
+            double critVal = tdist.inverseCumulativeProbability(1.0 - (1 - 0.95) / 2);
+
+            double ci = Math.sqrt(entries);
+            ci = std / ci;
+            ci = ci * critVal;
+            double min = mean - ci;
+            double max = mean + ci;
+
+            List<Double> cis = regionToRawCI.getValue();
+            cis.add(0, min);
+            cis.add(1, max);
+        }
+    }
+
+    public void calculateCIProcessed(List<DefaultPerformanceEntry> performanceEntries) {
+        // Process data
+        for(Region region : performanceEntries.iterator().next().getRegionsToProcessedPerformance().keySet()) {
+            this.regionsToProcessedCI.put(region, new ArrayList<>(2));
+        }
+
+        if(performanceEntries.size() < 2) {
+            return;
+        }
+
+        for(Map.Entry<Region, List<Double>> regionToProcessedCI : this.regionsToProcessedCI.entrySet()) {
+            Region region = regionToProcessedCI.getKey();
+            List<Double> rawEntries = new ArrayList<>();
+
+            for(DefaultPerformanceEntry performanceEntry : performanceEntries) {
+                for(Map.Entry<Region, Long> regionToProcessed : performanceEntry.getRegionsToProcessedPerformance().entrySet()) {
+                    if(!region.getRegionID().equals(regionToProcessed.getKey().getRegionID())) {
+                        continue;
+                    }
+
+                    rawEntries.add(regionToProcessed.getValue().doubleValue());
+
+                    break;
+                }
+            }
+
+            long mean = this.regionsToProcessedMean.get(region);
+            double std = this.regionsToProcessedStd.get(region);
+            int entries = rawEntries.size();
+            TDistribution tdist = new TDistribution(entries - 1);
+            double critVal = tdist.inverseCumulativeProbability(1.0 - (1 - 0.95) / 2);
+
+            double ci = Math.sqrt(entries);
+            ci = std / ci;
+            ci = ci * critVal;
+            double min = mean - ci;
+            double max = mean + ci;
+
+            List<Double> cis = regionToProcessedCI.getValue();
+            cis.add(0, min);
+            cis.add(1, max);
+        }
+    }
+
+    public void calculateCI(List<DefaultPerformanceEntry> performanceEntries) {
+        this.calculateCIRaw(performanceEntries);
+        this.calculateCIProcessed(performanceEntries);
+
+        this.regionsToRawCIHumanReadable = PerformanceEntryStatistic.ciToHumanReadable(this.regionsToRawCI);
+        this.regionsToProcessedCIHumanReadable = PerformanceEntryStatistic.ciToHumanReadable(this.regionsToProcessedCI);
+    }
 
     public Map<Region, Long> getRegionsRawMin() {
         Map<Region, Long> result = new HashMap<>();
@@ -541,6 +578,22 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
 
     public Map<Region, Double> getRegionsToProcessedStdHumanReadable() {
         return regionsToProcessedStdHumanReadable;
+    }
+
+    public Map<Region, List<Double>> getRegionsToRawCI() {
+        return regionsToRawCI;
+    }
+
+    public Map<Region, List<Double>> getRegionsToRawCIHumanReadable() {
+        return regionsToRawCIHumanReadable;
+    }
+
+    public Map<Region, List<Double>> getRegionsToProcessedCI() {
+        return regionsToProcessedCI;
+    }
+
+    public Map<Region, List<Double>> getRegionsToProcessedCIHumanReadable() {
+        return regionsToProcessedCIHumanReadable;
     }
 
     public Map<Region, List<Long>> getRegionsToRawMinMax() {

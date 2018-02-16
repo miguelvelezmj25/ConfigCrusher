@@ -32,6 +32,11 @@ measured,configuration,config_crusher,config_crusher_std,brute_force,brute_force
 "false","[FREQTHRESHOLD, DISTTHRESHOLD]",5.471,0.0,5.47,0.095,5.32,5.621,true,0.001,0,0
 "false","[MINALPHA]",5.459,0.0,5.355,0.046,5.282,5.428,false,0.104,0.019,0.011
 
+Total: 32
 MSE: 0.005
 RMSE: 0.07
 MAPE: 1.104
+Measured within ci: 3
+Measured outside ci: 1
+Predicted within ci: 24
+Predicted outside ci: 4

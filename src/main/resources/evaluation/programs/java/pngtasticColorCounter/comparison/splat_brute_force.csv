@@ -32,6 +32,11 @@ measured,configuration,splat,splat_std,brute_force,brute_force_std,brute_force_m
 "true","[FREQTHRESHOLD, DISTTHRESHOLD]",5.374,0,5.47,0.095,5.32,5.621,true,0.096,0.018,0.009
 "true","[MINALPHA]",5.524,0,5.355,0.046,5.282,5.428,false,0.169,0.032,0.029
 
+Total: 32
 MSE: 0.009
 RMSE: 0.096
 MAPE: 1.326
+Measured within ci: 17
+Measured outside ci: 7
+Predicted within ci: 6
+Predicted outside ci: 2

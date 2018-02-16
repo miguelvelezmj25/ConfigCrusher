@@ -26,6 +26,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions16.Regions16Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -107,6 +108,38 @@ public class EvaluationTest {
     @Test
     public void compareGrep4() throws Exception {
         String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareSort1() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareSort2() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareSort3() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareSort4() throws Exception {
+        String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
@@ -930,6 +963,100 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void sortFeaturewiseGenerateCSVData() throws Exception {
+        String programName = "sort";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        List<String> options = SortAdapter.getSortOptions();
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        featurewise.generateCSVData(featurewiseEntries, options);
+    }
+
+    @Test
+    public void sortFeaturewiseModel() throws Exception {
+        String programName = "sort";
+
+        List<String> options = SortAdapter.getSortOptions();
+        Featurewise featurewise = new Featurewise(programName);
+        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
+    }
+
+    @Test
+    public void sortPairwiseGenerateCSVData() throws Exception {
+        String programName = "sort";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        List<String> options = SortAdapter.getSortOptions();
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        pairwise.generateCSVData(pairwiseEntries, options);
+    }
+
+    @Test
+    public void sortPairwiseModel() throws Exception {
+        String programName = "sort";
+
+        List<String> options = SortAdapter.getSortOptions();
+        Pairwise pairwise = new Pairwise(programName);
+        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
     }
 
     @Test

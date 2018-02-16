@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.find.FindAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 
 import java.io.IOException;
@@ -12,17 +12,25 @@ import java.util.Set;
 public class Run {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        String programName = "find";
-//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/find/target/classes";
-        String classDirectory = "/home/mvelezce/Documents/performance-mapper-evaluation/original/find/target/classes";
+        String programName = "sort";
+//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/sort/target/classes";
+        String classDirectory = System.getProperty("user.home") + "/Documents/performance-mapper-evaluation/original/sort/target/classes";
 
-        String entryPoint = "org.unix4j.find.Main";
+        String entryPoint = "org.unix4j.sort.Main";
 
-        Set<String> options = new HashSet<>(FindAdapter.getFindOptions());
+        Set<String> options = new HashSet<>(SortAdapter.getSortOptions());
         Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
 
+        removeSampledConfigurations(programName, configurations);
+
 //        Set<String> empty = new HashSet<>();
-//        Set<Set<String>> configurations = new HashSet<>();
+//        empty.add("MONTHSORT");
+//        empty.add("VERSIONSORT");
+//        empty.add("MERGE");
+//        empty.add("REVERSE");
+//        empty.add("GENERALNUMERICSORT");
+
+//        configurations = new HashSet<>();
 //        configurations.add(empty);
 
         System.out.println("Configurations to sample: " + configurations.size());
@@ -36,6 +44,17 @@ public class Run {
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
     }
 
-}
+    public static void removeSampledConfigurations(String name, Set<Set<String>> configurations) throws IOException, InterruptedException {
+        // arguments
+        String[] args = new String[0];
 
+        Executor executor = new BruteForceExecutor(name);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            configurations.remove(entry.getConfiguration());
+        }
+    }
+
+}
 

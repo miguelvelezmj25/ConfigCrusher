@@ -235,7 +235,7 @@ public class SleepMain extends BaseMain {
     }
 
     @Override
-    public void execute(String mainClass, String[] sleepArgs) throws Exception {
+    public void execute(String mainClass, String[] sleepArgs) {
         throw new RuntimeException();
     }
 

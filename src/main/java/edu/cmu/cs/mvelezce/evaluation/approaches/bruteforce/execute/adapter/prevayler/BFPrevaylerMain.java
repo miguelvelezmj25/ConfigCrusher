@@ -19,7 +19,7 @@ public class BFPrevaylerMain extends PrevaylerMain {
         super(programName, iteration, args);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         String programName = args[0];
         String mainClass = args[1];
         String iteration = args[2];

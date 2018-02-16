@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import java.util.Map;
 import java.util.Set;
 
+import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
+
 public class ConfigCrusherRegionTransformerTest {
 
     private static ConfigCrusherRegionTransformer transformer;
@@ -1683,7 +1685,7 @@ public class ConfigCrusherRegionTransformerTest {
     public void testRunningExample() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         String programName = "running-example";
         String rootPackage = "edu";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
 
         // Program arguments
         String[] args = new String[0];

@@ -18,13 +18,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
+
 public class BruteForceExecutorTest {
 
 //    @Test
 //    public void testElevator() throws IOException, ParseException, InterruptedException {
 //        String programName = "elevator";
-//        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
-//        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
+//        String srcDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
+//        String classDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 //
 //        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 5, srcDir, classDir, entryPoint);
@@ -34,8 +36,8 @@ public class BruteForceExecutorTest {
 //    @Test
 //    public void testPngtastic() throws IOException, ParseException, InterruptedException {
 //        String programName = "pngtastic";
-//        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/";
-//        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/target/classes/";
+//        String srcDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/";
+//        String classDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/target/classes/";
 //        String entryPoint = "com.googlecode.pngtastic.PngtasticColorCounter";
 //
 //        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 1, srcDir, classDir, entryPoint);
@@ -45,8 +47,8 @@ public class BruteForceExecutorTest {
 //    @Test
 //    public void testSleep1() throws IOException, ParseException, InterruptedException {
 //        String programName = "sleep1";
-//        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-//        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+//        String srcDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+//        String classDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 //
 //        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 5, srcDir, classDir, entryPoint);
@@ -56,8 +58,8 @@ public class BruteForceExecutorTest {
 //    @Test
 //    public void testSleep26() throws IOException, ParseException, InterruptedException {
 //        String programName = "sleep26";
-//        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-//        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+//        String srcDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+//        String classDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep26";
 //
 //        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 1, srcDir, classDir, entryPoint);
@@ -67,8 +69,8 @@ public class BruteForceExecutorTest {
 //    @Test
 //    public void testSleep29() throws IOException, ParseException, InterruptedException {
 //        String programName = "sleep29";
-//        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-//        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+//        String srcDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+//        String classDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.Sleep29";
 //
 //        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 1, srcDir, classDir, entryPoint);
@@ -78,8 +80,8 @@ public class BruteForceExecutorTest {
 //    @Test
 //    public void testZipme() throws IOException, ParseException, InterruptedException {
 //        String programName = "zipme";
-//        String srcDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
-//        String classDir = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
+//        String srcDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
+//        String classDir = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
 //        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
 //
 //        Set<PerformanceEntry> measuredPerf = BruteForce.repeatProcessMeasure(programName, 1, srcDir, classDir, entryPoint);
@@ -88,7 +90,7 @@ public class BruteForceExecutorTest {
     @Test
     public void runningExample() throws IOException, InterruptedException {
         String programName = "running-example";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
         String entryPoint = "edu.cmu.cs.mvelezce.Example";
 
         Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
@@ -108,7 +110,7 @@ public class BruteForceExecutorTest {
     @Test
     public void colorCounter() throws IOException, InterruptedException {
         String programName = "pngtasticColorCounter";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic-counter/out/production/pngtastic-counter";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic-counter/out/production/pngtastic-counter";
         String entryPoint = "counter.com.googlecode.pngtastic.Run";
 
         Set<String> options = new HashSet<>(ColorCounterAdapter.getColorCounterOptions());
@@ -127,7 +129,7 @@ public class BruteForceExecutorTest {
     @Test
     public void optimizer() throws IOException, InterruptedException {
         String programName = "pngtasticOptimizer";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic-optimizer/out/production/pngtastic-optimizer";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic-optimizer/out/production/pngtastic-optimizer";
         String entryPoint = "optimizer.com.googlecode.pngtastic.Run";
 
         Set<String> options = new HashSet<>(OptimizerAdapter.getOptimizerOptions());
@@ -146,7 +148,7 @@ public class BruteForceExecutorTest {
     @Test
     public void prevayler() throws IOException, InterruptedException {
         String programName = "prevayler";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/target/classes";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/target/classes";
         String entryPoint = "org.prevayler.demos.demo1.PrimeNumbers";
 
         Set<String> options = new HashSet<>(PrevaylerAdapter.getPrevaylerOptions());
@@ -165,7 +167,7 @@ public class BruteForceExecutorTest {
     @Test
     public void prevayler1() throws IOException, InterruptedException {
         String programName = "prevayler";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/target/classes";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/prevayler/target/classes";
         String entryPoint = "org.prevayler.demos.demo1.PrimeNumbers";
 
         Set<String> options = new HashSet<>(PrevaylerAdapter.getPrevaylerOptions());
@@ -194,7 +196,7 @@ public class BruteForceExecutorTest {
     public void kanzi() throws IOException, InterruptedException {
         String programName = "kanzi";
         String entryPoint = "kanzi.Run";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/kanzi/target/classes";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/kanzi/target/classes";
 
         Set<String> options = new HashSet<>(KanziAdapter.getKanziOptions());
         Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
@@ -212,7 +214,7 @@ public class BruteForceExecutorTest {
     @Test
     public void regions12() throws IOException, InterruptedException {
         String programName = "regions12";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ;
         String entryPoint = "edu.cmu.cs.mvelezce.Regions12";
 
@@ -236,7 +238,7 @@ public class BruteForceExecutorTest {
     @Test
     public void regions16() throws IOException, InterruptedException {
         String programName = "regions16";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
         ;
         String entryPoint = "edu.cmu.cs.mvelezce.Regions16";
 
@@ -260,7 +262,7 @@ public class BruteForceExecutorTest {
     @Test
     public void grep() throws IOException, InterruptedException {
         String programName = "grep";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/grep/target/classes";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/grep/target/classes";
 
         String entryPoint = "org.unix4j.grep.Main";
 
@@ -280,7 +282,7 @@ public class BruteForceExecutorTest {
     @Test
     public void find() throws IOException, InterruptedException {
         String programName = "find";
-        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/find/target/classes";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/find/target/classes";
 
         String entryPoint = "org.unix4j.find.Main";
 

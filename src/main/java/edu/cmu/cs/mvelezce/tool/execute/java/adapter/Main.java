@@ -6,6 +6,6 @@ public interface Main {
 
     public void logExecution() throws IOException;
 
-    public void execute(String mainClass, String[] sleepArgs) throws Exception;
+    public void execute(String mainClass, String[] sleepArgs);
 
 }

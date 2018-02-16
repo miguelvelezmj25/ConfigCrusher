@@ -32,6 +32,11 @@ measured,configuration,feature_wise,feature_wise_std,brute_force,brute_force_std
 "false","[FREQTHRESHOLD, DISTTHRESHOLD]",5.43,0.0,5.47,0.095,5.32,5.621,true,0.04,0.007,0.002
 "true","[MINALPHA]",5.43,0.0,5.355,0.046,5.282,5.428,false,0.075,0.014,0.006
 
+Total: 32
 MSE: 0.003
 RMSE: 0.053
 MAPE: 0.799
+Measured within ci: 4
+Measured outside ci: 1
+Predicted within ci: 25
+Predicted outside ci: 2

@@ -8,10 +8,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Evaluation {
 
@@ -266,7 +263,8 @@ public class Evaluation {
 
             if(performanceStat != null) {
                 result.append(true);
-            } else {
+            }
+            else {
                 result.append(false);
             }
 
@@ -288,24 +286,20 @@ public class Evaluation {
         writer.close();
     }
 
-    public void compareApproaches(String approach1, String approach2) throws IOException {
+    private File checkFileExists(String approach) throws IOException {
         String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.FULL_DIR + "/"
-                + approach1 + Evaluation.DOT_CSV;
-        File outputFile1 = new File(outputDir);
+                + approach + Evaluation.DOT_CSV;
+        File outputFile = new File(outputDir);
 
-        if(!outputFile1.exists()) {
-            throw new IOException("Could not find a full file for " + approach1);
+        if(!outputFile.exists()) {
+            throw new IOException("Could not find a full file for " + approach);
         }
 
-        outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.FULL_DIR + "/"
-                + approach2 + Evaluation.DOT_CSV;
-        File outputFile2 = new File(outputDir);
+        return outputFile;
+    }
 
-        if(!outputFile2.exists()) {
-            throw new IOException("Could not find a full file for " + approach2);
-        }
-
-        outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.COMPARISON_DIR + "/"
+    private File deleteOutputFile(String approach1, String approach2) throws IOException {
+        String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.COMPARISON_DIR + "/"
                 + approach1 + "_" + approach2 + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
 
@@ -313,7 +307,11 @@ public class Evaluation {
             FileUtils.forceDelete(outputFile);
         }
 
-        FileInputStream fstream = new FileInputStream(outputFile1);
+        return outputFile;
+    }
+
+    private void compareLengthsOfFiles(File file1, File file2) throws IOException {
+        FileInputStream fstream = new FileInputStream(file1);
         DataInputStream in = new DataInputStream(fstream);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String strLine;
@@ -327,7 +325,7 @@ public class Evaluation {
 
         in.close();
 
-        fstream = new FileInputStream(outputFile2);
+        fstream = new FileInputStream(file2);
         in = new DataInputStream(fstream);
         br = new BufferedReader(new InputStreamReader(in));
         int approach2LineCount = 0;
@@ -343,13 +341,16 @@ public class Evaluation {
         if(approach1LineCount != approach2LineCount) {
             throw new RuntimeException("The approach files do not have the same length");
         }
+    }
 
+    private Set<Set<String>> getConfigurations(File file) throws IOException {
         Set<Set<String>> configurations = new HashSet<>();
 
-        fstream = new FileInputStream(outputFile1);
-        in = new DataInputStream(fstream);
-        br = new BufferedReader(new InputStreamReader(in));
+        FileInputStream fstream = new FileInputStream(file);
+        DataInputStream in = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
+        String strLine;
         while((strLine = br.readLine()) != null) {
             if(!strLine.isEmpty()) {
                 break;
@@ -373,45 +374,71 @@ public class Evaluation {
 
         in.close();
 
+        return configurations;
+    }
+
+    private Map<Set<String>, List<String>> getData(File file) throws IOException {
+        Map<Set<String>, List<String>> confToData = new HashMap<>();
+        FileInputStream fstream = new FileInputStream(file);
+        DataInputStream in = new DataInputStream(fstream);
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
+        br.readLine();
+
+        String strLine;
+        while((strLine = br.readLine()) != null) {
+            Set<String> conf = new HashSet<>();
+            int startOptionIndex = strLine.indexOf("[") + 1;
+            int endOptionIndex = strLine.lastIndexOf("]");
+
+            String optionsString = strLine.substring(startOptionIndex, endOptionIndex);
+            String[] arrayOptions = optionsString.split(",");
+
+            for(int i = 0; i < arrayOptions.length; i++) {
+                conf.add(arrayOptions[i].trim());
+            }
+
+            List<String> data = new ArrayList<>();
+
+            String measured = strLine.substring(0, strLine.indexOf(","));
+            data.add(measured);
+            String dataString = strLine.substring(endOptionIndex + 3);
+            String[] entries = dataString.split(",");
+            data.addAll(Arrays.asList(entries));
+
+            confToData.put(conf, data);
+        }
+
+        return confToData;
+    }
+
+    public void compareApproaches(String approach1, String approach2) throws IOException {
+        File outputFile1 = this.checkFileExists(approach1);
+        File outputFile2 = this.checkFileExists(approach2);
+        File outputFile = this.deleteOutputFile(approach1, approach2);
+        this.compareLengthsOfFiles(outputFile1, outputFile2);
+
+        Map<Set<String>, List<String>> data1 = this.getData(outputFile1);
+        Map<Set<String>, List<String>> data2 = this.getData(outputFile2);
+
+        Set<Set<String>> configurations = this.getConfigurations(outputFile1);
+
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
         StringBuilder result = new StringBuilder();
         double se = 0;
         double ape = 0;
         double testCount = 0;
         result.append("measured,configuration," + approach1 + "," + approach1 + "_std," + approach2 + "," + approach2
-                + "_std,absolute error,relative error,squared error");
+                + "_std," + approach2 + "_minci," + approach2 + "_maxci,1withinci,absolute error,relative error,squared error");
         result.append("\n");
 
         for(Set<String> configuration : configurations) {
-            fstream = new FileInputStream(outputFile1);
-            in = new DataInputStream(fstream);
-            br = new BufferedReader(new InputStreamReader(in));
-            br.readLine();
+            List<String> perf1 = data1.get(configuration);
+            List<String> perf2 = data2.get(configuration);
 
-            while((strLine = br.readLine()) != null) {
-                Set<String> options = new HashSet<>();
-                int startOptionIndex = strLine.indexOf("[") + 1;
-                int endOptionIndex = strLine.lastIndexOf("]");
-
-                String optionsString = strLine.substring(startOptionIndex, endOptionIndex);
-                String[] arrayOptions = optionsString.split(",");
-
-                for(int i = 0; i < arrayOptions.length; i++) {
-                    options.add(arrayOptions[i].trim());
-                }
-
-                if(configuration.equals(options)) {
-                    break;
-                }
-            }
-
-            in.close();
-
-            String measuredString = strLine.substring(0, strLine.indexOf(","));
-            boolean measured = Boolean.valueOf(measuredString);
+            boolean measured = Boolean.valueOf(perf1.get(0));
 
             result.append('"');
-            result.append(measuredString);
+            result.append(measured);
             result.append('"');
             result.append(",");
             result.append('"');
@@ -419,53 +446,46 @@ public class Evaluation {
             result.append('"');
             result.append(",");
 
-            String[] entries = strLine.split(",");
-            double performance1 = Double.valueOf(entries[entries.length - 2]);
-            performance1 = Math.max(0, performance1);
-            result.append(performance1);
+            String time1s = perf1.get(1);
+            result.append(time1s);
             result.append(",");
-            result.append(Double.valueOf(entries[entries.length - 1]));
+            result.append(perf1.get(2));
             result.append(",");
 
-            fstream = new FileInputStream(outputFile2);
-            in = new DataInputStream(fstream);
-            br = new BufferedReader(new InputStreamReader(in));
-            br.readLine();
+            String time2s = perf2.get(1);
+            result.append(time2s);
+            result.append(",");
+            result.append(perf2.get(2));
+            result.append(",");
 
-            while((strLine = br.readLine()) != null) {
-                Set<String> options = new HashSet<>();
-                int startOptionIndex = strLine.indexOf("[") + 1;
-                int endOptionIndex = strLine.lastIndexOf("]");
+            String minCI = perf2.get(3);
+            String maxCI = perf2.get(4);
+            result.append(minCI);
+            result.append(",");
+            result.append(maxCI);
+            result.append(",");
 
-                String optionsString = strLine.substring(startOptionIndex, endOptionIndex);
-                String[] arrayOptions = optionsString.split(",");
+            double time1 = Double.valueOf(time1s);
+            double minTime2 = Double.valueOf(minCI);
+            double maxTime2 = Double.valueOf(maxCI);
+            boolean within = false;
 
-                for(int i = 0; i < arrayOptions.length; i++) {
-                    options.add(arrayOptions[i].trim());
-                }
-
-                if(configuration.equals(options)) {
-                    break;
-                }
+            if(minTime2 <= time1 && time1 <= maxTime2) {
+                within = true;
             }
 
-            in.close();
-
-            entries = strLine.split(",");
-            double performance2 = Double.valueOf(entries[entries.length - 2]);
-            result.append(performance2);
-            result.append(",");
-            result.append(Double.valueOf(entries[entries.length - 1]));
+            result.append(within);
             result.append(",");
 
-            double absoluteError = Math.abs(performance2 - performance1);
+            Double time2 = Double.valueOf(time2s);
+            double absoluteError = Math.abs(time1 - time2);
             double relativeError = 0.0;
 
-            if(performance2 != 0) {
-                relativeError = absoluteError / performance2;
+            if(time2 != 0) {
+                relativeError = absoluteError / time2;
             }
 
-            double squaredError = Math.pow(performance2 - performance1, 2);
+            double squaredError = Math.pow(time2 - time1, 2);
 
             result.append(decimalFormat.format(absoluteError));
             result.append(",");
@@ -474,7 +494,7 @@ public class Evaluation {
             result.append(decimalFormat.format(squaredError));
             result.append("\n");
 
-            if(!measured && performance2 >= 1.0) {
+            if(!measured /*&& performance2 >= 1.0*/) {
                 se += squaredError;
                 ape += relativeError;
                 testCount++;

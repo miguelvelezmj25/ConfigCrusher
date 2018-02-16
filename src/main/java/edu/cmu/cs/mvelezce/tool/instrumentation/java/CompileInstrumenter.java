@@ -7,9 +7,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
+
 public class CompileInstrumenter extends BaseInstrumenter {
 
-    public static final String M2_DIR = System.getProperty("user.home") + "/.m2/repository";
+    public static final String M2_DIR = USER_HOME + "/.m2/repository";
     public static final String sep = System.getProperty("path.separator");
 
 

@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
+
 /**
  * Created by mvelezce on 6/22/17.
  */
@@ -25,13 +27,13 @@ public class VarexJProcessor {
 //        factory.setValidating(true);
 //        factory.setIgnoringElementContentWhitespace(true);
         DocumentBuilder builder = factory.newDocumentBuilder();
-        File coverage = new File(System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/coverage2.xml");
+        File coverage = new File(USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/coverage2.xml");
 
         if(!coverage.exists()) {
             throw new RuntimeException("No file");
         }
 
-        String src = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/src/";
+        String src = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/gpl/src/";
         String[] extensions = {"java"};
         Collection<File> files = FileUtils.listFiles(new File(src), extensions, true);
 

@@ -11,6 +11,9 @@ import java.io.IOException;
  * Created by mvelezce on 4/28/17.
  */
 public abstract class Options {
+
+    public static final String USER_HOME = System.getProperty("user.home");
+
     public static final String DIRECTORY = "src/main/resources";
     public static final String DOT_JSON = ".json";
     public static final String DOT_CSV = ".csv";

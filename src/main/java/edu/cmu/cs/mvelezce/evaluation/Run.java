@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
+
 public class Run {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         String programName = "sort";
-//        String classDirectory = System.getProperty("user.home") + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/sort/target/classes";
-        String classDirectory = System.getProperty("user.home") + "/Documents/performance-mapper-evaluation/original/sort/target/classes";
+//        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/sort/target/classes";
+        String classDirectory = USER_HOME + "/Documents/performance-mapper-evaluation/original/sort/target/classes";
 
         String entryPoint = "org.unix4j.sort.Main";
 

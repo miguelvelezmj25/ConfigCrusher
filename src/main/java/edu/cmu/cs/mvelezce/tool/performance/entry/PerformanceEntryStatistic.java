@@ -399,7 +399,10 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
     public void calculateCIRaw(List<DefaultPerformanceEntry> performanceEntries) {
         // Raw data
         for(Region region : performanceEntries.iterator().next().getRegionsToRawPerformance().keySet()) {
-            this.regionsToRawCI.put(region, new ArrayList<>(2));
+            List<Double> ci = new ArrayList<>(2);
+            ci.add(0.0);
+            ci.add(0.0);
+            this.regionsToRawCI.put(region, ci);
         }
 
         for(Map.Entry<Region, List<Double>> regionToRawCI : this.regionsToRawCI.entrySet()) {
@@ -439,7 +442,10 @@ public class PerformanceEntryStatistic extends DefaultPerformanceEntry {
     public void calculateCIProcessed(List<DefaultPerformanceEntry> performanceEntries) {
         // Process data
         for(Region region : performanceEntries.iterator().next().getRegionsToProcessedPerformance().keySet()) {
-            this.regionsToProcessedCI.put(region, new ArrayList<>(2));
+            List<Double> ci = new ArrayList<>(2);
+            ci.add(0.0);
+            ci.add(0.0);
+            this.regionsToProcessedCI.put(region, ci);
         }
 
         if(performanceEntries.size() < 2) {

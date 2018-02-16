@@ -427,6 +427,11 @@ public class Evaluation {
         double se = 0;
         double ape = 0;
         double testCount = 0;
+        int measuredWithin = 0;
+        int measuredOutside = 0;
+        int predictedWithin = 0;
+        int predictedOutside = 0;
+
         result.append("measured,configuration," + approach1 + "," + approach1 + "_std," + approach2 + "," + approach2
                 + "_std," + approach2 + "_minci," + approach2 + "_maxci,1withinci,absolute error,relative error,squared error");
         result.append("\n");
@@ -474,6 +479,24 @@ public class Evaluation {
                 within = true;
             }
 
+            if(measured) {
+                if(within) {
+                    measuredWithin++;
+                }
+                else {
+                    measuredOutside++;
+
+                }
+            }
+            else {
+                if(within) {
+                    predictedWithin++;
+                }
+                else {
+                    predictedOutside++;
+                }
+            }
+
             result.append(within);
             result.append(",");
 
@@ -502,6 +525,9 @@ public class Evaluation {
         }
 
         result.append("\n");
+        result.append("Total: ");
+        result.append(configurations.size());
+        result.append("\n");
         result.append("MSE: ");
         double mse = se / testCount;
         result.append(decimalFormat.format(mse));
@@ -512,6 +538,18 @@ public class Evaluation {
         result.append("MAPE: ");
         double mape = ape / testCount * 100;
         result.append(decimalFormat.format(mape));
+        result.append("\n");
+        result.append("Measured within ci: ");
+        result.append(measuredWithin);
+        result.append("\n");
+        result.append("Measured outside ci: ");
+        result.append(measuredOutside);
+        result.append("\n");
+        result.append("Predicted within ci: ");
+        result.append(predictedWithin);
+        result.append("\n");
+        result.append("Predicted outside ci: ");
+        result.append(predictedOutside);
         result.append("\n");
 
         outputFile.getParentFile().mkdirs();

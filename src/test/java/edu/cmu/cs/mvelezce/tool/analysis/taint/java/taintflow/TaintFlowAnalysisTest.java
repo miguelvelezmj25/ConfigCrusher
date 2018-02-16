@@ -398,6 +398,19 @@ public class TaintFlowAnalysisTest {
     }
 
     @Test
+    public void regions28() throws Exception {
+        String systemName = "regions28";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        StaticAnalysis analysis = new TaintFlowAnalysis(systemName);
+        analysis.analyze(args);
+    }
+
+    @Test
     public void prevayler() throws Exception {
         String systemName = "prevayler";
 

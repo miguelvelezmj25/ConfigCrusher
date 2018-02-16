@@ -146,27 +146,14 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
                 InsnList startInstructions = this.getInstructionsStartRegion(region);
                 newInstructions.insertBefore(instruction.getNext(), startInstructions);
 
-                AbstractInsnNode lastInstruction = block.getInstructions().get(block.getInstructions().size() - 1);
                 InsnList endInstructions = this.getInstructionsEndRegion(region);
+                AbstractInsnNode lastInstruction = block.getInstructions().get(block.getInstructions().size() - 1);
+
+                if(block.isWithReturn()) {
+                    lastInstruction = lastInstruction.getPrevious();
+                }
+
                 newInstructions.insertBefore(lastInstruction, endInstructions);
-
-//                if(this.getEndRegionBlocksWithReturn().contains(block) || block.isWithReturn()) {
-//                    InsnList endInstructions = this.getInstructionsEndRegion(region);
-//                    AbstractInsnNode lastInstruction = newInstructions.get(newInstructions.size() - 1);
-//                    newInstructions.insertBefore(lastInstruction, endInstructions);
-//                }
-//                else {
-//                    InsnList endInstructions = this.getInstructionsEndRegion(region);
-//                    AbstractInsnNode lastInstruction = block.getInstructions().get(block.getInstructions().size() - 1);
-//                    newInstructions.insertBefore(lastInstruction, endInstructions);
-//
-////                    while(lastInst != instruction) {
-////                        instruction = instructionsIterator.next();
-////                    }
-////
-////                    newInstructions.add(endInstructions);
-//                }
-
                 this.instrumentedRegionsInSameBlock.add(region);
             }
         }
@@ -195,6 +182,11 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
             }
 
             if(this.getEndRegionBlocksWithReturn().contains(block)) {
+                if(!block.isWithReturn()) {
+                    throw new RuntimeException("The analysis stated that the block had a return, but the graph says " +
+                            "otherwise. It seems like the first if check was necessary. Otherwise, it it redundant");
+                }
+
                 instruction = instructionsIterator.next();
                 int opcode = instruction.getOpcode();
 

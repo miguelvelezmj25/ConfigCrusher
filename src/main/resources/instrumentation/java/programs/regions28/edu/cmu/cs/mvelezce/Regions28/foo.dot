@@ -1,0 +1,13 @@
+digraph foo {
+node [shape=record];
+930317866 [label="FRAME SAME\lRETURN\lL4\lLOCALVARIABLE a Z L0 L4 0\lLOCALVARIABLE b Z L0 L4 1\lMAXSTACK = 1\lMAXLOCALS = 2\l"];
+1944138464 [label="L0\lLINENUMBER 23 L0\lILOAD 0\lINVOKESTATIC edu/cmu/cs/mvelezce/Regions28.moo (Z)V\lL1\lLINENUMBER 25 L1\lILOAD 1\lIFEQ L2\lL3\lLINENUMBER 26 L3\l"];
+611502040 [label="GETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\lL2\lLINENUMBER 28 L2\l"];
+entry;
+exit;
+entry -> 1944138464;
+930317866 -> exit;
+1944138464 -> 930317866;
+1944138464 -> 611502040;
+611502040 -> 930317866;
+}

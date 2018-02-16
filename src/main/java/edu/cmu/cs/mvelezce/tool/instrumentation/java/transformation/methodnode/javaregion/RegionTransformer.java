@@ -159,6 +159,20 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this.cachedRegionsToOptions();
         this.cacheMethodsToBlockDecisions();
 
+
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%");
+
+        for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
+            if(!this.methodNodeToClassNode.get(method).name.contains("Regions28")) {
+                continue;
+            }
+
+            this.debugBlockDecisions(method);
+            System.out.println();
+        }
+
+
+
         this.instrument(classNodes);
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
@@ -520,11 +534,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 PrettyMethodGraph prettyGraph = prettyBuilder.build();
                 prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
 
-                try {
-                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-                } catch(InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
+//                } catch(InterruptedException e) {
+//                    e.printStackTrace();
+//                }
             }
         }
 
@@ -1096,7 +1110,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
             }
             else if(block.getSuccessors().size() == 1 && block.getSuccessors().iterator().next().equals(end)) {
                 ends.add(block);
-//                throw new RuntimeException("A control flow decision only has 1 successor? " + block + " -> " + end);
+
+                if(graph.getExitBlock() == end) {
+                    this.endRegionBlocksWithReturn.add(block);
+                }
             }
             else if(graph.getExitBlock() == end) {
                 this.endRegionBlocksWithReturn.addAll(end.getPredecessors());

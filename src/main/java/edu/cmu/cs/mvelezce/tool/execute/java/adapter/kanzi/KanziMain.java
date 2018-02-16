@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionIns
 import kanzi.Run;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class KanziMain extends BaseMain {
         super(programName, iteration, args);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         String programName = args[0];
         String mainClass = args[1];
         String iteration = args[2];
@@ -46,21 +47,33 @@ public class KanziMain extends BaseMain {
     }
 
     @Override
-    public void execute(String mainClass, String[] args) throws Exception {
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("kanzi");
-        instrumenter.instrument(args);
-        Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
+    public void execute(String mainClass, String[] args) {
+        try {
+            BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("kanzi");
+            instrumenter.instrument(args);
+            Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
 
-        for(JavaRegion region : regions) {
-            Regions.regionsToOverhead.put(region.getRegionID(),0L);
+            for(JavaRegion region : regions) {
+                Regions.regionsToOverhead.put(region.getRegionID(), 0L);
+            }
+            Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID, 0L);
         }
-        Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID,0L);
+        catch(InvocationTargetException | NoSuchMethodException | IOException | IllegalAccessException | InterruptedException e) {
+            throw new RuntimeException("Could not add regions to the Regions class");
+        }
 
         if(mainClass.contains("Run")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            Regions.enter(program.getRegionID());
-            Run.main(args);
-            Regions.exit(program.getRegionID());
+            try {
+                Regions.enter(program.getRegionID());
+                Run.main(args);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                Regions.exit(program.getRegionID());
+            }
         }
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);

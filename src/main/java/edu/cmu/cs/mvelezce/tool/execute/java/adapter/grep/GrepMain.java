@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class GrepMain extends BaseMain {
         super(programName, iteration, args);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         String programName = args[0];
         String mainClass = args[1];
         String iteration = args[2];
@@ -45,27 +46,34 @@ public class GrepMain extends BaseMain {
     }
 
     @Override
-    public void execute(String mainClass, String[] args) throws Exception {
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("grep");
-        instrumenter.instrument(args);
-        Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
+    public void execute(String mainClass, String[] args) {
+        try {
+            BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("grep");
+            instrumenter.instrument(args);
+            Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
 
-        for(JavaRegion region : regions) {
-            Regions.regionsToOverhead.put(region.getRegionID(), 0L);
+            for(JavaRegion region : regions) {
+                Regions.regionsToOverhead.put(region.getRegionID(), 0L);
+            }
+            Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID, 0L);
         }
-
-        Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID, 0L);
-        Regions.regionsToOverhead.put("b9d60924-9573-ffbb-b339-28123e3d00f8", 0L);
+        catch(InvocationTargetException | NoSuchMethodException | IOException | IllegalAccessException | InterruptedException e) {
+            throw new RuntimeException("Could not add regions to the Regions class");
+        }
 
         if(mainClass.contains("Main")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
-            System.out.println("entering");
-            Regions.enter(program.getRegionID());
-            System.out.println("entering");
-            org.unix4j.grep.Main.main(args);
-            System.out.println("exiting");
-            Regions.exit(program.getRegionID());
-            System.out.println("exiting");
+            try {
+
+                Regions.enter(program.getRegionID());
+                org.unix4j.grep.Main.main(args);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                Regions.exit(program.getRegionID());
+            }
         }
         else {
             throw new RuntimeException("Could not find the main class " + mainClass);

@@ -159,20 +159,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this.cachedRegionsToOptions();
         this.cacheMethodsToBlockDecisions();
 
-
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%");
-
-        for(MethodNode method : this.methodsToBlocksDecisions.keySet()) {
-            if(!this.methodNodeToClassNode.get(method).name.contains("Regions28")) {
-                continue;
-            }
-
-            this.debugBlockDecisions(method);
-            System.out.println();
-        }
-
-
-
         this.instrument(classNodes);
 
         System.out.println("# of regions before optimizing: " + initialRegionCount);
@@ -1285,7 +1271,19 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                         continue;
                     }
 
+                    List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
+
+                    if(callerEdges.size() > 1) {
+                        boolean canRemove = this.checkIfCanRemove(decision, callerEdges);
+
+                        if(!canRemove) {
+                            continue;
+                        }
+                    }
+
                     MethodNode calleeMethodNode = this.sootMethodToMethodNode.get(calleeSootMethod);
+
+
                     LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this.methodsToBlocksDecisions.get(calleeMethodNode);
 
                     if(calleeBlocksToRegions == null) {
@@ -1341,6 +1339,40 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
     }
 
+    private boolean checkIfCanRemove(Set<String> decision, List<Edge> callerEdges) {
+        Deque<Edge> worklist = new ArrayDeque<>(callerEdges);
+        Set<Edge> analyzed = new HashSet<>();
+
+        while(!worklist.isEmpty()) {
+            Edge edge = worklist.pop();
+            analyzed.add(edge);
+
+            MethodBlock callerBlock = this.getCallerBlock(edge);
+            SootMethod caller = edge.src();
+            MethodNode method = this.sootMethodToMethodNode.get(caller);
+            LinkedHashMap<MethodBlock, JavaRegion> blockDecisions = this.cachedMethodsToBlocksDecisions.get(method);
+            JavaRegion callerRegion = blockDecisions.get(callerBlock);
+            Set<String> callerDecision = this.getCachedDecision(callerRegion);
+
+            if(callerDecision.isEmpty()) {
+                List<Edge> callers = this.getCallerEdges(caller);
+
+                for(Edge e : callers) {
+                    if(analyzed.contains(e)) {
+                        continue;
+                    }
+
+                    worklist.add(e);
+                }
+            }
+            else if(!(decision.equals(callerDecision) || decision.containsAll(callerDecision))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * TODO
      *
@@ -1386,7 +1418,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         }
 
         if(match == null && inst instanceof MethodInsnNode) {
-            throw new RuntimeException("There has to be a instruciton that calls a method");
+            throw new RuntimeException("There has to be a instruction that calls a method");
         }
 
 //        if(match == null) {

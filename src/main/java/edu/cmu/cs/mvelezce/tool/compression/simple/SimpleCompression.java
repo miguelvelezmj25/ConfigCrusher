@@ -30,8 +30,7 @@ public class SimpleCompression extends BaseCompression {
         Map<Set<String>, Set<Set<String>>> optionsToConfigurationsToExecute = new HashMap<>();
 
         for(Set<String> options : filteredOptions) {
-            Set<Set<String>> configurationsToExecuteForOption = new HashSet<>();
-            configurationsToExecuteForOption.addAll(edu.cmu.cs.mvelezce.tool.Helper.getConfigurations(options));
+            Set<Set<String>> configurationsToExecuteForOption = new HashSet<>(edu.cmu.cs.mvelezce.tool.Helper.getConfigurations(options));
             optionsToConfigurationsToExecute.put(options, configurationsToExecuteForOption);
         }
 
@@ -82,48 +81,66 @@ public class SimpleCompression extends BaseCompression {
     }
 
     private void simpleMerging(Map.Entry<Set<String>, Set<Set<String>>> largeEntry, Map.Entry<Set<String>, Set<Set<String>>> smallEntry, Set<String> pivotOptions, Set<Set<String>> configurationsToExecute) {
-        Iterator<Set<String>> largeSet = largeEntry.getValue().iterator();
-        Iterator<Set<String>> smallSet = smallEntry.getValue().iterator();
+        Map<Set<String>, List<Set<String>>> largePivotToConfigs = this.pivotValueToConfigs(pivotOptions, largeEntry.getValue());
+        Map<Set<String>, List<Set<String>>> smallPivotToConfigs = this.pivotValueToConfigs(pivotOptions, smallEntry.getValue());
+        Set<Set<String>> pivotValues = new HashSet<>();
+        pivotValues.addAll(largePivotToConfigs.keySet());
+        pivotValues.addAll(smallPivotToConfigs.keySet());
 
-        while(largeSet.hasNext() && smallSet.hasNext()) {
-            Set<String> configurationInLargeSet = largeSet.next();
+        for(Set<String> pivotValue : pivotValues) {
+            List<Set<String>> largeConfigs = largePivotToConfigs.get(pivotValue);
+            List<Set<String>> smallConfigs = smallPivotToConfigs.get(pivotValue);
 
-            Set<String> valuePivotOptionsInLargeSet = new HashSet<>(configurationInLargeSet);
-            valuePivotOptionsInLargeSet.retainAll(pivotOptions);
-            boolean merged = false;
+            if(largeConfigs != null && smallConfigs != null) {
+                Iterator<Set<String>> largeSet = largeConfigs.iterator();
+                Iterator<Set<String>> smallSet = smallConfigs.iterator();
 
-            while(smallSet.hasNext()) {
-                Set<String> configurationInSmallSet = smallSet.next();
+                while(largeSet.hasNext() && smallSet.hasNext()) {
+                    Set<String> largeConfig = largeSet.next();
+                    Set<String> smallConfig = smallSet.next();
 
-                Set<String> valuePivotOptionsInSmallSet = new HashSet<>(configurationInSmallSet);
-                valuePivotOptionsInSmallSet.retainAll(pivotOptions);
-
-                if(valuePivotOptionsInLargeSet.equals(valuePivotOptionsInSmallSet)) {
-                    Set<String> compressedConfiguration = new HashSet<>(configurationInLargeSet);
-                    compressedConfiguration.addAll(configurationInSmallSet);
+                    Set<String> compressedConfiguration = new HashSet<>(largeConfig);
+                    compressedConfiguration.addAll(smallConfig);
                     configurationsToExecute.add(compressedConfiguration);
+                }
 
-                    smallEntry.getValue().remove(configurationInSmallSet);
-                    merged = true;
-                    break;
+                while(largeSet.hasNext()) {
+                    configurationsToExecute.add(largeSet.next());
+                }
+
+                while(smallSet.hasNext()) {
+                    configurationsToExecute.add(smallSet.next());
                 }
             }
-
-            if(!merged) {
-                Set<String> compressedConfiguration = new HashSet<>(configurationInLargeSet);
-                configurationsToExecute.add(compressedConfiguration);
+            else if(largeConfigs != null) {
+                configurationsToExecute.addAll(largeConfigs);
+            }
+            else {
+                configurationsToExecute.addAll(smallConfigs);
             }
 
-            smallSet = smallEntry.getValue().iterator();
         }
 
-        while(largeSet.hasNext()) {
-            configurationsToExecute.add(largeSet.next());
+    }
+
+    private Map<Set<String>, List<Set<String>>> pivotValueToConfigs(Set<String> pivot, Set<Set<String>> configs) {
+        Map<Set<String>, List<Set<String>>> pivotValueToConfigs = new HashMap<>();
+
+        for(Set<String> conf : configs) {
+            Set<String> pivotValue = new HashSet<>(conf);
+            pivotValue.retainAll(pivot);
+
+            List<Set<String>> confs = new ArrayList<>();
+
+            if(pivotValueToConfigs.containsKey(pivotValue)) {
+                confs = pivotValueToConfigs.get(pivotValue);
+            }
+
+            confs.add(conf);
+            pivotValueToConfigs.put(pivotValue, confs);
         }
 
-        while(smallSet.hasNext()) {
-            configurationsToExecute.add(smallSet.next());
-        }
+        return pivotValueToConfigs;
     }
 
 }

@@ -1,17 +1,1025 @@
 measured,configuration,performance,std
 true,"[]",1.01,0.0
-true,"[A]",3.01,0.0
-true,"[B]",1.01,0.0
-true,"[C]",1.01,0.0
-true,"[A, B]",7.02,0.0
-true,"[D]",1.01,0.0
-true,"[A, C]",10.02,0.0
-true,"[B, C]",1.01,0.0
-true,"[A, D]",3.01,0.0
-true,"[B, D]",1.01,0.0
-false,"[A, B, C]",14.03,0.0
-true,"[C, D]",1.01,0.0
-false,"[A, B, D]",7.02,0.0
-false,"[A, C, D]",10.02,0.0
-false,"[B, C, D]",1.01,0.0
-false,"[A, B, C, D]",14.03,0.0
+true,"[A]",3.12,0.0
+true,"[B]",1.22,0.0
+true,"[C]",1.32,0.0
+true,"[D]",1.41,0.0
+true,"[E]",1.51,0.0
+true,"[F]",1.62,0.0
+true,"[G]",1.71,0.0
+true,"[H]",1.81,0.0
+true,"[I]",1.92,0.0
+true,"[J]",1.01,0.0
+true,"[A, B]",6.32,0.0
+true,"[A, C]",7.43,0.0
+true,"[B, C]",1.53,0.0
+true,"[A, D]",3.52,0.0
+true,"[B, D]",1.62,0.0
+true,"[A, E]",3.63,0.0
+true,"[C, D]",1.72,0.0
+true,"[B, E]",1.72,0.0
+true,"[A, F]",3.73,0.0
+true,"[C, E]",1.81,0.0
+true,"[B, F]",1.82,0.0
+true,"[A, G]",3.82,0.0
+true,"[D, E]",1.91,0.0
+true,"[C, F]",1.92,0.0
+true,"[B, G]",1.92,0.0
+true,"[A, H]",3.92,0.0
+true,"[D, F]",2.02,0.0
+true,"[C, G]",2.02,0.0
+true,"[B, H]",2.02,0.0
+true,"[A, I]",4.03,0.0
+true,"[E, F]",2.12,0.0
+true,"[D, G]",2.12,0.0
+true,"[C, H]",2.12,0.0
+true,"[B, I]",2.13,0.0
+true,"[A, J]",3.12,0.0
+true,"[E, G]",2.21,0.0
+true,"[D, H]",2.21,0.0
+true,"[C, I]",2.23,0.0
+true,"[B, J]",1.22,0.0
+true,"[F, G]",2.32,0.0
+true,"[E, H]",2.31,0.0
+true,"[D, I]",2.32,0.0
+true,"[C, J]",1.32,0.0
+true,"[F, H]",2.42,0.0
+true,"[E, I]",2.42,0.0
+true,"[D, J]",1.41,0.0
+true,"[G, H]",2.51,0.0
+true,"[F, I]",2.53,0.0
+true,"[E, J]",1.52,0.0
+true,"[G, I]",2.62,0.0
+true,"[F, J]",1.62,0.0
+true,"[H, I]",2.71,0.0
+true,"[G, J]",1.71,0.0
+true,"[H, J]",1.81,0.0
+true,"[I, J]",1.91,0.0
+false,"[A, B, C]",10.63,0.0
+false,"[A, B, D]",6.72,0.0
+false,"[A, C, D]",7.83,0.0
+false,"[A, B, E]",6.83,0.0
+false,"[B, C, D]",1.93,0.0
+false,"[A, C, E]",7.93,0.0
+false,"[A, B, F]",6.92,0.0
+false,"[B, C, E]",2.02,0.0
+false,"[A, D, E]",4.03,0.0
+false,"[A, C, F]",8.03,0.0
+false,"[A, B, G]",7.02,0.0
+false,"[B, D, E]",2.12,0.0
+false,"[B, C, F]",2.12,0.0
+false,"[A, D, F]",4.13,0.0
+false,"[A, C, G]",8.13,0.0
+false,"[A, B, H]",7.12,0.0
+false,"[C, D, E]",2.21,0.0
+false,"[B, D, F]",2.22,0.0
+false,"[A, E, F]",4.24,0.0
+false,"[B, C, G]",2.23,0.0
+false,"[A, D, G]",4.23,0.0
+false,"[A, C, H]",8.23,0.0
+false,"[A, B, I]",7.23,0.0
+false,"[C, D, F]",2.32,0.0
+false,"[B, E, F]",2.32,0.0
+false,"[B, D, G]",2.33,0.0
+false,"[A, E, G]",4.33,0.0
+false,"[B, C, H]",2.33,0.0
+false,"[A, D, H]",4.32,0.0
+false,"[A, C, I]",8.34,0.0
+false,"[A, B, J]",6.32,0.0
+false,"[B, E, G]",2.42,0.0
+false,"[C, E, F]",2.41,0.0
+false,"[C, D, G]",2.43,0.0
+false,"[A, F, G]",4.43,0.0
+false,"[B, D, H]",2.42,0.0
+false,"[A, E, H]",4.43,0.0
+false,"[B, C, I]",2.44,0.0
+false,"[A, D, I]",4.43,0.0
+false,"[A, C, J]",7.43,0.0
+false,"[B, D, I]",2.53,0.0
+false,"[D, E, F]",2.52,0.0
+false,"[C, E, G]",2.51,0.0
+false,"[A, D, J]",3.52,0.0
+false,"[B, F, G]",2.52,0.0
+false,"[C, D, H]",2.52,0.0
+false,"[B, E, H]",2.52,0.0
+false,"[A, F, H]",4.53,0.0
+false,"[A, E, I]",4.54,0.0
+false,"[B, C, J]",1.53,0.0
+false,"[C, F, G]",2.62,0.0
+false,"[D, E, G]",2.62,0.0
+false,"[C, E, H]",2.61,0.0
+false,"[A, E, J]",3.64,0.0
+false,"[B, F, H]",2.62,0.0
+false,"[A, G, H]",4.62,0.0
+false,"[C, D, I]",2.63,0.0
+false,"[B, E, I]",2.63,0.0
+false,"[A, F, I]",4.64,0.0
+false,"[B, D, J]",1.62,0.0
+false,"[C, F, H]",2.72,0.0
+false,"[D, F, G]",2.73,0.0
+false,"[D, E, H]",2.71,0.0
+false,"[B, G, H]",2.72,0.0
+false,"[C, E, I]",2.72,0.0
+false,"[A, F, J]",3.73,0.0
+false,"[B, F, I]",2.73,0.0
+false,"[A, G, I]",4.73,0.0
+false,"[C, D, J]",1.72,0.0
+false,"[B, E, J]",1.73,0.0
+false,"[D, F, H]",2.82,0.0
+false,"[E, F, G]",2.82,0.0
+false,"[A, G, J]",3.82,0.0
+false,"[C, G, H]",2.82,0.0
+false,"[D, E, I]",2.82,0.0
+false,"[C, F, I]",2.83,0.0
+false,"[B, G, I]",2.83,0.0
+false,"[A, H, I]",4.82,0.0
+false,"[C, E, J]",1.82,0.0
+false,"[B, F, J]",1.82,0.0
+false,"[D, G, H]",2.92,0.0
+false,"[E, F, H]",2.92,0.0
+false,"[D, F, I]",2.93,0.0
+false,"[C, G, I]",2.93,0.0
+false,"[B, H, I]",2.92,0.0
+false,"[D, E, J]",1.92,0.0
+false,"[C, F, J]",1.92,0.0
+false,"[B, G, J]",1.92,0.0
+false,"[A, H, J]",3.92,0.0
+false,"[E, G, H]",3.01,0.0
+false,"[E, F, I]",3.03,0.0
+false,"[D, G, I]",3.03,0.0
+false,"[C, H, I]",3.02,0.0
+false,"[D, F, J]",2.02,0.0
+false,"[C, G, J]",2.02,0.0
+false,"[B, H, J]",2.02,0.0
+false,"[A, I, J]",4.02,0.0
+false,"[F, G, H]",3.12,0.0
+false,"[E, G, I]",3.12,0.0
+false,"[D, H, I]",3.11,0.0
+false,"[E, F, J]",2.13,0.0
+false,"[D, G, J]",2.12,0.0
+false,"[C, H, J]",2.12,0.0
+false,"[B, I, J]",2.12,0.0
+false,"[F, G, I]",3.23,0.0
+false,"[E, H, I]",3.21,0.0
+false,"[E, G, J]",2.22,0.0
+false,"[D, H, J]",2.21,0.0
+false,"[C, I, J]",2.22,0.0
+false,"[F, H, I]",3.32,0.0
+false,"[F, G, J]",2.32,0.0
+false,"[E, H, J]",2.32,0.0
+false,"[D, I, J]",2.31,0.0
+false,"[G, H, I]",3.41,0.0
+false,"[F, H, J]",2.42,0.0
+false,"[E, I, J]",2.42,0.0
+false,"[G, H, J]",2.51,0.0
+false,"[F, I, J]",2.52,0.0
+false,"[G, I, J]",2.61,0.0
+false,"[H, I, J]",2.7,0.0
+false,"[A, B, C, D]",11.03,0.0
+false,"[A, B, C, E]",11.13,0.0
+false,"[A, B, D, E]",7.23,0.0
+false,"[A, B, C, F]",11.22,0.0
+false,"[A, C, D, E]",8.33,0.0
+false,"[A, B, D, F]",7.32,0.0
+false,"[A, B, C, G]",11.33,0.0
+false,"[B, C, D, E]",2.42,0.0
+false,"[A, C, D, F]",8.43,0.0
+false,"[A, B, E, F]",7.43,0.0
+false,"[A, B, D, G]",7.43,0.0
+false,"[A, B, C, H]",11.43,0.0
+false,"[B, C, D, F]",2.52,0.0
+false,"[A, C, E, F]",8.53,0.0
+false,"[A, C, D, G]",8.54,0.0
+false,"[A, B, E, G]",7.53,0.0
+false,"[A, B, D, H]",7.52,0.0
+false,"[A, B, C, I]",11.54,0.0
+false,"[B, C, D, G]",2.64,0.0
+false,"[B, C, E, F]",2.61,0.0
+false,"[A, D, E, F]",4.64,0.0
+false,"[A, C, E, G]",8.63,0.0
+false,"[A, B, F, G]",7.62,0.0
+false,"[A, C, D, H]",8.63,0.0
+false,"[A, B, E, H]",7.63,0.0
+false,"[A, B, D, I]",7.63,0.0
+false,"[A, B, C, J]",10.63,0.0
+false,"[B, D, E, F]",2.72,0.0
+false,"[B, C, E, G]",2.72,0.0
+false,"[A, D, E, G]",4.74,0.0
+false,"[A, C, F, G]",8.73,0.0
+false,"[A, B, D, J]",6.72,0.0
+false,"[B, C, D, H]",2.73,0.0
+false,"[A, C, E, H]",8.73,0.0
+false,"[A, B, F, H]",7.72,0.0
+false,"[A, C, D, I]",8.74,0.0
+false,"[A, B, E, I]",7.74,0.0
+false,"[A, C, E, I]",8.84,0.0
+false,"[B, D, E, G]",2.83,0.0
+false,"[C, D, E, F]",2.81,0.0
+false,"[A, B, E, J]",6.84,0.0
+false,"[B, C, F, G]",2.82,0.0
+false,"[A, D, F, G]",4.84,0.0
+false,"[B, C, E, H]",2.82,0.0
+false,"[A, C, D, J]",7.83,0.0
+false,"[A, B, F, I]",7.83,0.0
+false,"[A, D, E, H]",4.83,0.0
+false,"[A, C, F, H]",8.83,0.0
+false,"[A, B, G, H]",7.82,0.0
+false,"[B, C, D, I]",2.84,0.0
+false,"[A, E, F, G]",4.94,0.0
+false,"[C, D, E, G]",2.92,0.0
+false,"[B, D, F, G]",2.93,0.0
+false,"[B, D, E, H]",2.92,0.0
+false,"[A, B, G, I]",7.93,0.0
+false,"[B, C, F, H]",2.92,0.0
+false,"[A, D, F, H]",4.93,0.0
+false,"[B, C, D, J]",1.93,0.0
+false,"[A, C, E, J]",7.94,0.0
+false,"[A, C, G, H]",8.93,0.0
+false,"[B, C, E, I]",2.93,0.0
+false,"[A, B, F, J]",6.92,0.0
+false,"[A, D, E, I]",4.94,0.0
+false,"[A, C, F, I]",8.94,0.0
+false,"[B, D, F, H]",3.02,0.0
+false,"[C, D, E, H]",3.01,0.0
+false,"[C, D, F, G]",3.03,0.0
+false,"[B, E, F, G]",3.02,0.0
+false,"[A, D, E, J]",4.04,0.0
+false,"[A, E, F, H]",5.04,0.0
+false,"[B, C, G, H]",3.03,0.0
+false,"[A, B, G, J]",7.02,0.0
+false,"[A, C, G, I]",9.04,0.0
+false,"[A, D, G, H]",5.03,0.0
+false,"[A, C, F, J]",8.03,0.0
+false,"[B, C, E, J]",2.03,0.0
+false,"[A, B, H, I]",8.02,0.0
+false,"[B, D, E, I]",3.03,0.0
+false,"[B, C, F, I]",3.03,0.0
+false,"[A, D, F, I]",5.04,0.0
+false,"[B, D, F, I]",3.13,0.0
+false,"[C, D, F, H]",3.12,0.0
+false,"[C, E, F, G]",3.11,0.0
+false,"[B, E, F, H]",3.12,0.0
+false,"[A, D, F, J]",4.13,0.0
+false,"[B, D, G, H]",3.13,0.0
+false,"[A, E, G, H]",5.13,0.0
+false,"[A, B, H, J]",7.12,0.0
+false,"[A, D, G, I]",5.14,0.0
+false,"[B, D, E, J]",2.13,0.0
+false,"[C, D, E, I]",3.12,0.0
+false,"[B, C, F, J]",2.12,0.0
+false,"[A, E, F, I]",5.15,0.0
+false,"[A, C, G, J]",8.13,0.0
+false,"[A, C, H, I]",9.13,0.0
+false,"[B, C, G, I]",3.14,0.0
+false,"[C, D, F, I]",3.23,0.0
+false,"[C, D, G, H]",3.23,0.0
+false,"[D, E, F, G]",3.23,0.0
+false,"[C, E, F, H]",3.21,0.0
+false,"[B, E, G, H]",3.22,0.0
+false,"[A, E, F, J]",4.25,0.0
+false,"[A, C, H, J]",8.23,0.0
+false,"[A, F, G, H]",5.23,0.0
+false,"[B, E, F, I]",3.23,0.0
+false,"[B, D, F, J]",2.22,0.0
+false,"[A, B, I, J]",7.22,0.0
+false,"[B, D, G, I]",3.24,0.0
+false,"[A, E, G, I]",5.24,0.0
+false,"[A, D, H, I]",5.22,0.0
+false,"[B, C, H, I]",3.23,0.0
+false,"[B, C, G, J]",2.23,0.0
+false,"[A, D, G, J]",4.23,0.0
+false,"[C, D, E, J]",2.22,0.0
+false,"[B, E, G, I]",3.33,0.0
+false,"[D, E, F, H]",3.32,0.0
+false,"[C, E, G, H]",3.31,0.0
+false,"[B, F, G, H]",3.32,0.0
+false,"[C, E, F, I]",3.32,0.0
+false,"[C, D, G, I]",3.34,0.0
+false,"[A, F, G, I]",5.34,0.0
+false,"[B, E, F, J]",2.33,0.0
+false,"[B, D, H, I]",3.32,0.0
+false,"[C, D, F, J]",2.32,0.0
+false,"[A, E, G, J]",4.34,0.0
+false,"[A, C, I, J]",8.33,0.0
+false,"[B, C, H, J]",2.33,0.0
+false,"[A, E, H, I]",5.33,0.0
+false,"[A, D, H, J]",4.32,0.0
+false,"[B, D, G, J]",2.33,0.0
+false,"[C, F, G, H]",3.42,0.0
+false,"[D, E, G, H]",3.42,0.0
+false,"[D, E, F, I]",3.43,0.0
+false,"[B, E, G, J]",2.43,0.0
+false,"[A, E, H, J]",4.44,0.0
+false,"[C, E, G, I]",3.42,0.0
+false,"[B, F, G, I]",3.43,0.0
+false,"[C, D, H, I]",3.42,0.0
+false,"[B, E, H, I]",3.42,0.0
+false,"[B, C, I, J]",2.43,0.0
+false,"[A, D, I, J]",4.42,0.0
+false,"[B, D, H, J]",2.42,0.0
+false,"[A, F, H, I]",5.43,0.0
+false,"[C, E, F, J]",2.42,0.0
+false,"[A, F, G, J]",4.43,0.0
+false,"[C, D, G, J]",2.43,0.0
+false,"[D, E, F, J]",2.53,0.0
+false,"[D, F, G, H]",3.53,0.0
+false,"[C, D, H, J]",2.52,0.0
+false,"[A, E, I, J]",4.54,0.0
+false,"[D, E, G, I]",3.53,0.0
+false,"[C, F, G, I]",3.53,0.0
+false,"[C, E, H, I]",3.51,0.0
+false,"[B, F, H, I]",3.52,0.0
+false,"[A, G, H, I]",5.52,0.0
+false,"[C, E, G, J]",2.52,0.0
+false,"[B, E, H, J]",2.53,0.0
+false,"[A, F, H, J]",4.53,0.0
+false,"[B, F, G, J]",2.52,0.0
+false,"[B, D, I, J]",2.52,0.0
+false,"[C, F, H, I]",3.62,0.0
+false,"[D, F, G, I]",3.64,0.0
+false,"[E, F, G, H]",3.62,0.0
+false,"[A, G, H, J]",4.62,0.0
+false,"[C, D, I, J]",2.62,0.0
+false,"[D, E, H, I]",3.61,0.0
+false,"[B, G, H, I]",3.62,0.0
+false,"[D, E, G, J]",2.63,0.0
+false,"[C, F, G, J]",2.62,0.0
+false,"[A, F, I, J]",4.63,0.0
+false,"[C, E, H, J]",2.62,0.0
+false,"[B, F, H, J]",2.62,0.0
+false,"[B, E, I, J]",2.63,0.0
+false,"[C, G, H, I]",3.72,0.0
+false,"[E, F, G, I]",3.73,0.0
+false,"[D, F, H, I]",3.72,0.0
+false,"[D, F, G, J]",2.73,0.0
+false,"[D, E, H, J]",2.72,0.0
+false,"[C, F, H, J]",2.72,0.0
+false,"[B, G, H, J]",2.72,0.0
+false,"[C, E, I, J]",2.72,0.0
+false,"[A, G, I, J]",4.72,0.0
+false,"[B, F, I, J]",2.72,0.0
+false,"[D, G, H, I]",3.82,0.0
+false,"[E, F, H, I]",3.82,0.0
+false,"[E, F, G, J]",2.83,0.0
+false,"[D, F, H, J]",2.82,0.0
+false,"[C, G, H, J]",2.82,0.0
+false,"[D, E, I, J]",2.82,0.0
+false,"[C, F, I, J]",2.82,0.0
+false,"[B, G, I, J]",2.82,0.0
+false,"[A, H, I, J]",4.81,0.0
+false,"[E, G, H, I]",3.91,0.0
+false,"[E, F, H, J]",2.93,0.0
+false,"[D, G, H, J]",2.92,0.0
+false,"[D, F, I, J]",2.92,0.0
+false,"[C, G, I, J]",2.92,0.0
+false,"[B, H, I, J]",2.91,0.0
+false,"[F, G, H, I]",4.02,0.0
+false,"[E, G, H, J]",3.02,0.0
+false,"[E, F, I, J]",3.03,0.0
+false,"[D, G, I, J]",3.02,0.0
+false,"[C, H, I, J]",3.01,0.0
+false,"[F, G, H, J]",3.12,0.0
+false,"[E, G, I, J]",3.12,0.0
+false,"[D, H, I, J]",3.1,0.0
+false,"[F, G, I, J]",3.22,0.0
+false,"[E, H, I, J]",3.21,0.0
+false,"[F, H, I, J]",3.31,0.0
+false,"[G, H, I, J]",3.4,0.0
+false,"[A, B, C, D, E]",11.53,0.0
+false,"[A, B, C, D, F]",11.62,0.0
+false,"[A, B, C, E, F]",11.72,0.0
+false,"[A, B, C, D, G]",11.74,0.0
+false,"[A, B, D, E, F]",7.83,0.0
+false,"[A, B, C, E, G]",11.83,0.0
+false,"[A, B, C, D, H]",11.83,0.0
+false,"[A, C, D, E, F]",8.93,0.0
+false,"[A, B, D, E, G]",7.94,0.0
+false,"[A, B, C, F, G]",11.92,0.0
+false,"[A, B, C, E, H]",11.93,0.0
+false,"[A, B, C, D, I]",11.94,0.0
+false,"[B, C, D, E, F]",3.01,0.0
+false,"[A, C, D, E, G]",9.04,0.0
+false,"[A, B, D, F, G]",8.03,0.0
+false,"[A, B, D, E, H]",8.03,0.0
+false,"[A, B, C, F, H]",12.02,0.0
+false,"[A, B, C, E, I]",12.04,0.0
+false,"[A, B, C, D, J]",11.03,0.0
+false,"[A, B, E, F, G]",8.13,0.0
+false,"[B, C, D, E, G]",3.13,0.0
+false,"[A, C, D, F, G]",9.14,0.0
+false,"[A, C, D, E, H]",9.13,0.0
+false,"[A, B, D, F, H]",8.12,0.0
+false,"[A, B, C, G, H]",12.13,0.0
+false,"[A, B, D, E, I]",8.14,0.0
+false,"[A, B, C, F, I]",12.13,0.0
+false,"[A, B, C, E, J]",11.14,0.0
+false,"[B, C, D, F, G]",3.23,0.0
+false,"[A, C, E, F, G]",9.23,0.0
+false,"[B, C, D, E, H]",3.22,0.0
+false,"[A, C, D, F, H]",9.23,0.0
+false,"[A, B, E, F, H]",8.23,0.0
+false,"[A, B, C, F, J]",11.22,0.0
+false,"[A, B, D, E, J]",7.24,0.0
+false,"[A, B, D, G, H]",8.23,0.0
+false,"[A, C, D, E, I]",9.24,0.0
+false,"[A, B, D, F, I]",8.23,0.0
+false,"[A, B, C, G, I]",12.24,0.0
+false,"[A, D, E, F, G]",5.35,0.0
+false,"[B, C, E, F, G]",3.31,0.0
+false,"[B, C, D, F, H]",3.32,0.0
+false,"[A, B, D, F, J]",7.32,0.0
+false,"[A, C, E, F, H]",9.33,0.0
+false,"[A, B, D, G, I]",8.34,0.0
+false,"[A, C, D, E, J]",8.34,0.0
+false,"[A, B, C, G, J]",11.33,0.0
+false,"[A, C, D, G, H]",9.34,0.0
+false,"[A, B, E, G, H]",8.33,0.0
+false,"[B, C, D, E, I]",3.33,0.0
+false,"[A, B, C, H, I]",12.33,0.0
+false,"[A, C, D, F, I]",9.34,0.0
+false,"[A, B, E, F, I]",8.34,0.0
+false,"[A, B, F, G, H]",8.42,0.0
+false,"[B, D, E, F, G]",3.43,0.0
+false,"[B, C, E, F, H]",3.41,0.0
+false,"[A, B, E, G, I]",8.44,0.0
+false,"[B, C, D, E, J]",2.43,0.0
+false,"[A, D, E, F, H]",5.44,0.0
+false,"[B, C, D, G, H]",3.44,0.0
+false,"[A, B, C, H, J]",11.43,0.0
+false,"[A, C, E, G, H]",9.43,0.0
+false,"[B, C, D, F, I]",3.43,0.0
+false,"[A, B, E, F, J]",7.44,0.0
+false,"[A, C, E, F, I]",9.44,0.0
+false,"[A, B, D, H, I]",8.42,0.0
+false,"[A, C, D, G, I]",9.45,0.0
+false,"[A, B, D, G, J]",7.43,0.0
+false,"[A, C, D, F, J]",8.43,0.0
+false,"[B, C, E, G, H]",3.52,0.0
+false,"[C, D, E, F, G]",3.52,0.0
+false,"[B, C, D, F, J]",2.52,0.0
+false,"[A, B, D, H, J]",7.52,0.0
+false,"[B, D, E, F, H]",3.52,0.0
+false,"[A, C, D, G, J]",8.54,0.0
+false,"[A, C, D, H, I]",9.53,0.0
+false,"[A, B, E, H, I]",8.53,0.0
+false,"[A, D, E, G, H]",5.54,0.0
+false,"[A, C, F, G, H]",9.53,0.0
+false,"[B, C, E, F, I]",3.52,0.0
+false,"[A, D, E, F, I]",5.55,0.0
+false,"[B, C, D, G, I]",3.55,0.0
+false,"[A, C, E, F, J]",8.54,0.0
+false,"[A, B, F, G, I]",8.53,0.0
+false,"[A, B, E, G, J]",7.54,0.0
+false,"[A, B, C, I, J]",11.53,0.0
+false,"[A, C, E, G, I]",9.54,0.0
+false,"[C, D, E, F, H]",3.61,0.0
+false,"[B, D, E, G, H]",3.63,0.0
+false,"[B, C, F, G, H]",3.62,0.0
+false,"[A, D, F, G, H]",5.64,0.0
+false,"[B, C, E, F, J]",2.62,0.0
+false,"[B, D, E, F, I]",3.63,0.0
+false,"[B, C, E, G, I]",3.63,0.0
+false,"[A, D, E, G, I]",5.65,0.0
+false,"[A, B, E, H, J]",7.64,0.0
+false,"[A, C, E, H, I]",9.63,0.0
+false,"[A, C, E, G, J]",8.64,0.0
+false,"[A, B, F, G, J]",7.62,0.0
+false,"[A, B, F, H, I]",8.62,0.0
+false,"[A, C, F, G, I]",9.64,0.0
+false,"[B, C, D, G, J]",2.64,0.0
+false,"[B, C, D, H, I]",3.63,0.0
+false,"[A, B, D, I, J]",7.62,0.0
+false,"[A, D, E, F, J]",4.65,0.0
+false,"[A, C, D, H, J]",8.63,0.0
+false,"[A, D, E, H, I]",5.73,0.0
+false,"[C, D, E, G, H]",3.72,0.0
+false,"[B, D, F, G, H]",3.73,0.0
+false,"[A, E, F, G, H]",5.74,0.0
+false,"[A, B, F, H, J]",7.72,0.0
+false,"[C, D, E, F, I]",3.72,0.0
+false,"[B, D, E, G, I]",3.74,0.0
+false,"[B, C, F, G, I]",3.73,0.0
+false,"[A, B, G, H, I]",8.72,0.0
+false,"[B, D, E, F, J]",2.73,0.0
+false,"[A, D, F, G, I]",5.75,0.0
+false,"[A, C, F, H, I]",9.73,0.0
+false,"[B, C, D, H, J]",2.73,0.0
+false,"[A, C, D, I, J]",8.73,0.0
+false,"[A, D, E, G, J]",4.75,0.0
+false,"[B, C, E, H, I]",3.72,0.0
+false,"[B, C, E, G, J]",2.73,0.0
+false,"[A, C, F, G, J]",8.73,0.0
+false,"[A, C, E, H, J]",8.74,0.0
+false,"[A, B, E, I, J]",7.74,0.0
+false,"[C, D, E, G, I]",3.83,0.0
+false,"[C, D, F, G, H]",3.83,0.0
+false,"[A, C, F, H, J]",8.83,0.0
+false,"[B, E, F, G, H]",3.82,0.0
+false,"[B, D, F, G, I]",3.84,0.0
+false,"[A, C, E, I, J]",8.84,0.0
+false,"[A, E, F, G, I]",5.85,0.0
+false,"[B, D, E, H, I]",3.82,0.0
+false,"[C, D, E, F, J]",2.82,0.0
+false,"[B, C, E, H, J]",2.83,0.0
+false,"[B, C, F, H, I]",3.82,0.0
+false,"[B, C, F, G, J]",2.82,0.0
+false,"[A, D, F, G, J]",4.84,0.0
+false,"[A, B, G, H, J]",7.82,0.0
+false,"[B, D, E, G, J]",2.84,0.0
+false,"[A, D, F, H, I]",5.83,0.0
+false,"[A, D, E, H, J]",4.84,0.0
+false,"[B, C, D, I, J]",2.83,0.0
+false,"[A, B, F, I, J]",7.82,0.0
+false,"[A, C, G, H, I]",9.83,0.0
+false,"[C, E, F, G, H]",3.91,0.0
+false,"[C, D, F, G, I]",3.94,0.0
+false,"[B, E, F, G, I]",3.93,0.0
+false,"[C, D, E, H, I]",3.91,0.0
+false,"[B, D, F, H, I]",3.92,0.0
+false,"[A, E, F, H, I]",5.94,0.0
+false,"[A, D, F, H, J]",4.93,0.0
+false,"[B, D, E, H, J]",2.93,0.0
+false,"[B, C, G, H, I]",3.93,0.0
+false,"[B, D, F, G, J]",2.93,0.0
+false,"[A, D, E, I, J]",4.94,0.0
+false,"[A, C, F, I, J]",8.93,0.0
+false,"[A, D, G, H, I]",5.93,0.0
+false,"[C, D, E, G, J]",2.93,0.0
+false,"[B, C, F, H, J]",2.92,0.0
+false,"[A, C, G, H, J]",8.93,0.0
+false,"[B, C, E, I, J]",2.93,0.0
+false,"[A, B, G, I, J]",7.92,0.0
+false,"[A, E, F, G, J]",4.95,0.0
+false,"[C, D, F, H, I]",4.02,0.0
+false,"[D, E, F, G, H]",4.03,0.0
+false,"[C, E, F, G, I]",4.02,0.0
+false,"[B, D, F, H, J]",3.02,0.0
+false,"[A, D, G, H, J]",5.03,0.0
+false,"[B, E, F, H, I]",4.02,0.0
+false,"[B, C, F, I, J]",3.02,0.0
+false,"[B, D, G, H, I]",4.03,0.0
+false,"[A, E, G, H, I]",6.03,0.0
+false,"[C, D, F, G, J]",3.03,0.0
+false,"[A, E, F, H, J]",5.05,0.0
+false,"[B, D, E, I, J]",3.03,0.0
+false,"[B, E, F, G, J]",3.03,0.0
+false,"[A, B, H, I, J]",8.01,0.0
+false,"[A, D, F, I, J]",5.03,0.0
+false,"[A, C, G, I, J]",9.03,0.0
+false,"[C, D, E, H, J]",3.02,0.0
+false,"[B, C, G, H, J]",3.03,0.0
+false,"[A, F, G, H, I]",6.13,0.0
+false,"[D, E, F, G, I]",4.14,0.0
+false,"[C, E, F, H, I]",4.11,0.0
+false,"[B, D, F, I, J]",3.12,0.0
+false,"[C, D, G, H, I]",4.13,0.0
+false,"[B, E, G, H, I]",4.12,0.0
+false,"[C, D, E, I, J]",3.12,0.0
+false,"[A, E, F, I, J]",5.15,0.0
+false,"[A, E, G, H, J]",5.14,0.0
+false,"[C, E, F, G, J]",3.12,0.0
+false,"[C, D, F, H, J]",3.12,0.0
+false,"[A, D, G, I, J]",5.13,0.0
+false,"[B, E, F, H, J]",3.13,0.0
+false,"[B, C, G, I, J]",3.13,0.0
+false,"[B, D, G, H, J]",3.13,0.0
+false,"[A, C, H, I, J]",9.12,0.0
+false,"[D, E, F, H, I]",4.22,0.0
+false,"[C, E, G, H, I]",4.21,0.0
+false,"[B, F, G, H, I]",4.22,0.0
+false,"[D, E, F, G, J]",3.24,0.0
+false,"[C, E, F, H, J]",3.22,0.0
+false,"[B, E, F, I, J]",3.23,0.0
+false,"[B, D, G, I, J]",3.23,0.0
+false,"[A, D, H, I, J]",5.21,0.0
+false,"[C, D, G, H, J]",3.23,0.0
+false,"[B, E, G, H, J]",3.23,0.0
+false,"[A, F, G, H, J]",5.23,0.0
+false,"[B, C, H, I, J]",3.22,0.0
+false,"[C, D, F, I, J]",3.22,0.0
+false,"[A, E, G, I, J]",5.24,0.0
+false,"[B, E, G, I, J]",3.33,0.0
+false,"[D, E, F, H, J]",3.33,0.0
+false,"[D, E, G, H, I]",4.32,0.0
+false,"[A, E, H, I, J]",5.33,0.0
+false,"[C, F, G, H, I]",4.32,0.0
+false,"[C, E, G, H, J]",3.32,0.0
+false,"[B, D, H, I, J]",3.31,0.0
+false,"[B, F, G, H, J]",3.32,0.0
+false,"[C, E, F, I, J]",3.32,0.0
+false,"[C, D, G, I, J]",3.33,0.0
+false,"[A, F, G, I, J]",5.33,0.0
+false,"[C, F, G, H, J]",3.42,0.0
+false,"[D, F, G, H, I]",4.43,0.0
+false,"[D, E, G, H, J]",3.43,0.0
+false,"[D, E, F, I, J]",3.43,0.0
+false,"[C, E, G, I, J]",3.42,0.0
+false,"[B, F, G, I, J]",3.42,0.0
+false,"[C, D, H, I, J]",3.41,0.0
+false,"[B, E, H, I, J]",3.42,0.0
+false,"[A, F, H, I, J]",5.42,0.0
+false,"[E, F, G, H, I]",4.52,0.0
+false,"[D, F, G, H, J]",3.53,0.0
+false,"[D, E, G, I, J]",3.53,0.0
+false,"[C, F, G, I, J]",3.52,0.0
+false,"[C, E, H, I, J]",3.51,0.0
+false,"[B, F, H, I, J]",3.51,0.0
+false,"[A, G, H, I, J]",5.51,0.0
+false,"[E, F, G, H, J]",3.63,0.0
+false,"[D, F, G, I, J]",3.63,0.0
+false,"[D, E, H, I, J]",3.61,0.0
+false,"[C, F, H, I, J]",3.61,0.0
+false,"[B, G, H, I, J]",3.61,0.0
+false,"[E, F, G, I, J]",3.73,0.0
+false,"[D, F, H, I, J]",3.71,0.0
+false,"[C, G, H, I, J]",3.71,0.0
+false,"[E, F, H, I, J]",3.82,0.0
+false,"[D, G, H, I, J]",3.81,0.0
+false,"[E, G, H, I, J]",3.91,0.0
+false,"[F, G, H, I, J]",4.01,0.0
+false,"[A, B, C, D, E, F]",12.12,0.0
+false,"[A, B, C, D, E, G]",12.24,0.0
+false,"[A, B, C, D, F, G]",12.33,0.0
+false,"[A, B, C, D, E, H]",12.33,0.0
+false,"[A, B, C, E, F, G]",12.42,0.0
+false,"[A, B, C, D, F, H]",12.42,0.0
+false,"[A, B, C, D, E, I]",12.44,0.0
+false,"[A, B, D, E, F, G]",8.54,0.0
+false,"[A, B, C, E, F, H]",12.52,0.0
+false,"[A, B, C, D, G, H]",12.54,0.0
+false,"[A, B, C, D, F, I]",12.53,0.0
+false,"[A, B, C, D, E, J]",11.54,0.0
+false,"[A, C, D, E, F, G]",9.64,0.0
+false,"[A, B, D, E, F, H]",8.63,0.0
+false,"[A, B, C, E, G, H]",12.63,0.0
+false,"[A, B, C, E, F, I]",12.63,0.0
+false,"[A, B, C, D, G, I]",12.65,0.0
+false,"[A, B, C, D, F, J]",11.62,0.0
+false,"[A, B, D, E, G, H]",8.74,0.0
+false,"[B, C, D, E, F, G]",3.72,0.0
+false,"[A, C, D, E, F, H]",9.73,0.0
+false,"[A, B, C, F, G, H]",12.72,0.0
+false,"[A, B, D, E, F, I]",8.74,0.0
+false,"[A, B, C, E, G, I]",12.74,0.0
+false,"[A, B, C, D, H, I]",12.73,0.0
+false,"[A, B, C, E, F, J]",11.73,0.0
+false,"[A, B, C, D, G, J]",11.74,0.0
+false,"[A, C, D, E, G, H]",9.84,0.0
+false,"[B, C, D, E, F, H]",3.81,0.0
+false,"[A, B, D, F, G, H]",8.83,0.0
+false,"[A, C, D, E, F, I]",9.84,0.0
+false,"[A, B, D, E, G, I]",8.85,0.0
+false,"[A, B, C, F, G, I]",12.83,0.0
+false,"[A, B, C, E, H, I]",12.83,0.0
+false,"[A, B, D, E, F, J]",7.84,0.0
+false,"[A, B, C, E, G, J]",11.84,0.0
+false,"[A, B, C, D, H, J]",11.83,0.0
+false,"[A, B, E, F, G, H]",8.93,0.0
+false,"[B, C, D, E, G, H]",3.93,0.0
+false,"[A, C, D, F, G, H]",9.94,0.0
+false,"[A, B, C, D, I, J]",11.93,0.0
+false,"[B, C, D, E, F, I]",3.92,0.0
+false,"[A, C, D, E, G, I]",9.95,0.0
+false,"[A, B, D, F, G, I]",8.94,0.0
+false,"[A, B, D, E, H, I]",8.93,0.0
+false,"[A, B, C, F, H, I]",12.92,0.0
+false,"[A, B, C, E, H, J]",11.94,0.0
+false,"[A, B, D, E, G, J]",7.95,0.0
+false,"[A, C, D, E, F, J]",8.94,0.0
+false,"[A, B, C, F, G, J]",11.92,0.0
+false,"[B, C, D, F, G, H]",4.03,0.0
+false,"[A, C, E, F, G, H]",10.03,0.0
+false,"[B, C, D, E, G, I]",4.04,0.0
+false,"[A, C, D, F, G, I]",10.05,0.0
+false,"[A, B, E, F, G, I]",9.04,0.0
+false,"[A, C, D, E, G, J]",9.05,0.0
+false,"[A, C, D, E, H, I]",10.03,0.0
+false,"[A, B, D, F, G, J]",8.03,0.0
+false,"[A, B, D, F, H, I]",9.02,0.0
+false,"[A, B, D, E, H, J]",8.04,0.0
+false,"[A, B, C, F, H, J]",12.02,0.0
+false,"[A, B, C, G, H, I]",13.03,0.0
+false,"[B, C, D, E, F, J]",3.02,0.0
+false,"[A, B, C, E, I, J]",12.04,0.0
+false,"[B, C, E, F, G, H]",4.11,0.0
+false,"[A, D, E, F, G, H]",6.15,0.0
+false,"[B, C, D, F, G, I]",4.14,0.0
+false,"[A, C, E, F, G, I]",10.14,0.0
+false,"[A, B, D, F, H, J]",8.12,0.0
+false,"[B, C, D, E, H, I]",4.12,0.0
+false,"[A, C, D, F, H, I]",10.13,0.0
+false,"[A, B, E, F, H, I]",9.13,0.0
+false,"[A, B, E, F, G, J]",8.14,0.0
+false,"[A, B, C, G, H, J]",12.13,0.0
+false,"[A, C, D, E, H, J]",9.14,0.0
+false,"[A, B, D, G, H, I]",9.13,0.0
+false,"[A, B, C, F, I, J]",12.12,0.0
+false,"[B, C, D, E, G, J]",3.14,0.0
+false,"[A, C, D, F, G, J]",9.14,0.0
+false,"[A, B, D, E, I, J]",8.14,0.0
+false,"[A, C, E, F, H, I]",10.23,0.0
+false,"[B, C, E, F, G, I]",4.22,0.0
+false,"[B, D, E, F, G, H]",4.23,0.0
+false,"[A, B, D, F, I, J]",8.22,0.0
+false,"[A, D, E, F, G, I]",6.26,0.0
+false,"[A, C, D, E, I, J]",9.24,0.0
+false,"[A, B, E, F, H, J]",8.24,0.0
+false,"[B, C, D, F, H, I]",4.22,0.0
+false,"[A, C, D, F, H, J]",9.23,0.0
+false,"[A, C, D, G, H, I]",10.24,0.0
+false,"[A, B, E, G, H, I]",9.23,0.0
+false,"[B, C, D, E, H, J]",3.23,0.0
+false,"[B, C, D, F, G, J]",3.23,0.0
+false,"[A, B, D, G, H, J]",8.23,0.0
+false,"[A, C, E, F, G, J]",9.24,0.0
+false,"[A, B, C, G, I, J]",12.23,0.0
+false,"[B, D, E, F, G, I]",4.34,0.0
+false,"[C, D, E, F, G, H]",4.32,0.0
+false,"[B, C, E, F, H, I]",4.31,0.0
+false,"[B, C, D, E, I, J]",3.33,0.0
+false,"[A, C, D, F, I, J]",9.33,0.0
+false,"[A, B, E, G, H, J]",8.34,0.0
+false,"[A, B, E, F, I, J]",8.34,0.0
+false,"[A, C, E, F, H, J]",9.34,0.0
+false,"[A, C, D, G, H, J]",9.34,0.0
+false,"[A, D, E, F, H, I]",6.34,0.0
+false,"[B, C, D, F, H, J]",3.32,0.0
+false,"[B, C, D, G, H, I]",4.34,0.0
+false,"[A, B, C, H, I, J]",12.32,0.0
+false,"[A, C, E, G, H, I]",10.33,0.0
+false,"[A, B, F, G, H, I]",9.32,0.0
+false,"[B, C, E, F, G, J]",3.32,0.0
+false,"[A, B, D, G, I, J]",8.33,0.0
+false,"[A, D, E, F, G, J]",5.36,0.0
+false,"[A, D, E, G, H, I]",6.44,0.0
+false,"[C, D, E, F, G, I]",4.43,0.0
+false,"[B, C, D, F, I, J]",3.42,0.0
+false,"[A, B, E, G, I, J]",8.44,0.0
+false,"[B, D, E, F, H, I]",4.42,0.0
+false,"[B, C, E, G, H, I]",4.42,0.0
+false,"[A, C, F, G, H, I]",10.43,0.0
+false,"[A, B, F, G, H, J]",8.42,0.0
+false,"[A, C, E, G, H, J]",9.44,0.0
+false,"[A, C, E, F, I, J]",9.44,0.0
+false,"[B, D, E, F, G, J]",3.44,0.0
+false,"[A, C, D, G, I, J]",9.44,0.0
+false,"[B, C, E, F, H, J]",3.42,0.0
+false,"[A, D, E, F, H, J]",5.45,0.0
+false,"[B, C, D, G, H, J]",3.44,0.0
+false,"[A, B, D, H, I, J]",8.41,0.0
+false,"[B, C, E, G, H, J]",3.53,0.0
+false,"[C, D, E, F, H, I]",4.51,0.0
+false,"[B, D, E, G, H, I]",4.53,0.0
+false,"[B, C, F, G, H, I]",4.52,0.0
+false,"[A, D, F, G, H, I]",6.54,0.0
+false,"[C, D, E, F, G, J]",3.53,0.0
+false,"[A, D, E, F, I, J]",5.55,0.0
+false,"[A, C, E, G, I, J]",9.54,0.0
+false,"[A, B, F, G, I, J]",8.52,0.0
+false,"[B, D, E, F, H, J]",3.53,0.0
+false,"[B, C, D, G, I, J]",3.54,0.0
+false,"[A, D, E, G, H, J]",5.55,0.0
+false,"[B, C, E, F, I, J]",3.52,0.0
+false,"[A, C, D, H, I, J]",9.52,0.0
+false,"[A, B, E, H, I, J]",8.53,0.0
+false,"[A, C, F, G, H, J]",9.53,0.0
+false,"[B, D, F, G, H, I]",4.63,0.0
+false,"[C, D, E, G, H, I]",4.62,0.0
+false,"[A, E, F, G, H, I]",6.64,0.0
+false,"[C, D, E, F, H, J]",3.62,0.0
+false,"[A, C, F, G, I, J]",9.63,0.0
+false,"[B, D, E, G, H, J]",3.64,0.0
+false,"[B, C, F, G, H, J]",3.62,0.0
+false,"[B, C, D, H, I, J]",3.62,0.0
+false,"[A, D, F, G, H, J]",5.64,0.0
+false,"[A, D, E, G, I, J]",5.65,0.0
+false,"[B, D, E, F, I, J]",3.63,0.0
+false,"[B, C, E, G, I, J]",3.63,0.0
+false,"[A, C, E, H, I, J]",9.63,0.0
+false,"[A, B, F, H, I, J]",8.61,0.0
+false,"[B, E, F, G, H, I]",4.72,0.0
+false,"[C, D, F, G, H, I]",4.73,0.0
+false,"[B, C, E, H, I, J]",3.72,0.0
+false,"[C, D, E, G, H, J]",3.73,0.0
+false,"[B, D, F, G, H, J]",3.73,0.0
+false,"[A, E, F, G, H, J]",5.75,0.0
+false,"[C, D, E, F, I, J]",3.72,0.0
+false,"[A, D, E, H, I, J]",5.73,0.0
+false,"[B, D, E, G, I, J]",3.74,0.0
+false,"[A, C, F, H, I, J]",9.72,0.0
+false,"[A, B, G, H, I, J]",8.71,0.0
+false,"[B, C, F, G, I, J]",3.72,0.0
+false,"[A, D, F, G, I, J]",5.74,0.0
+false,"[C, E, F, G, H, I]",4.81,0.0
+false,"[C, D, F, G, H, J]",3.83,0.0
+false,"[B, E, F, G, H, J]",3.83,0.0
+false,"[C, D, E, G, I, J]",3.83,0.0
+false,"[B, D, F, G, I, J]",3.83,0.0
+false,"[A, E, F, G, I, J]",5.85,0.0
+false,"[B, D, E, H, I, J]",3.82,0.0
+false,"[B, C, F, H, I, J]",3.81,0.0
+false,"[A, C, G, H, I, J]",9.82,0.0
+false,"[A, D, F, H, I, J]",5.82,0.0
+false,"[B, E, F, G, I, J]",3.93,0.0
+false,"[D, E, F, G, H, I]",4.93,0.0
+false,"[C, E, F, G, H, J]",3.92,0.0
+false,"[C, D, F, G, I, J]",3.93,0.0
+false,"[C, D, E, H, I, J]",3.91,0.0
+false,"[B, D, F, H, I, J]",3.91,0.0
+false,"[A, E, F, H, I, J]",5.94,0.0
+false,"[B, C, G, H, I, J]",3.92,0.0
+false,"[A, D, G, H, I, J]",5.92,0.0
+false,"[D, E, F, G, H, J]",4.04,0.0
+false,"[C, E, F, G, I, J]",4.02,0.0
+false,"[C, D, F, H, I, J]",4.01,0.0
+false,"[B, E, F, H, I, J]",4.02,0.0
+false,"[B, D, G, H, I, J]",4.02,0.0
+false,"[A, E, G, H, I, J]",6.03,0.0
+false,"[D, E, F, G, I, J]",4.14,0.0
+false,"[C, E, F, H, I, J]",4.11,0.0
+false,"[C, D, G, H, I, J]",4.12,0.0
+false,"[B, E, G, H, I, J]",4.12,0.0
+false,"[A, F, G, H, I, J]",6.12,0.0
+false,"[D, E, F, H, I, J]",4.22,0.0
+false,"[C, E, G, H, I, J]",4.21,0.0
+false,"[B, F, G, H, I, J]",4.21,0.0
+false,"[D, E, G, H, I, J]",4.32,0.0
+false,"[C, F, G, H, I, J]",4.31,0.0
+false,"[D, F, G, H, I, J]",4.42,0.0
+false,"[E, F, G, H, I, J]",4.52,0.0
+false,"[A, B, C, D, E, F, G]",12.83,0.0
+false,"[A, B, C, D, E, F, H]",12.92,0.0
+false,"[A, B, C, D, E, G, H]",13.04,0.0
+false,"[A, B, C, D, E, F, I]",13.03,0.0
+false,"[A, B, C, D, F, G, H]",13.13,0.0
+false,"[A, B, C, D, E, G, I]",13.15,0.0
+false,"[A, B, C, D, E, F, J]",12.13,0.0
+false,"[A, B, C, E, F, G, H]",13.22,0.0
+false,"[A, B, C, D, F, G, I]",13.24,0.0
+false,"[A, B, C, D, E, H, I]",13.23,0.0
+false,"[A, B, C, D, E, G, J]",12.25,0.0
+false,"[A, B, D, E, F, G, H]",9.34,0.0
+false,"[A, B, C, E, F, G, I]",13.33,0.0
+false,"[A, B, C, D, F, H, I]",13.32,0.0
+false,"[A, B, C, D, F, G, J]",12.33,0.0
+false,"[A, B, C, D, E, H, J]",12.34,0.0
+false,"[A, C, D, E, F, G, H]",10.44,0.0
+false,"[A, B, D, E, F, G, I]",9.45,0.0
+false,"[A, B, C, E, F, H, I]",13.42,0.0
+false,"[A, B, C, D, G, H, I]",13.44,0.0
+false,"[A, B, C, E, F, G, J]",12.43,0.0
+false,"[A, B, C, D, F, H, J]",12.42,0.0
+false,"[A, B, C, D, E, I, J]",12.44,0.0
+false,"[B, C, D, E, F, G, H]",4.52,0.0
+false,"[A, C, D, E, F, G, I]",10.55,0.0
+false,"[A, B, D, E, F, H, I]",9.53,0.0
+false,"[A, B, C, E, G, H, I]",13.53,0.0
+false,"[A, B, D, E, F, G, J]",8.55,0.0
+false,"[A, B, C, E, F, H, J]",12.53,0.0
+false,"[A, B, C, D, G, H, J]",12.54,0.0
+false,"[A, B, C, D, F, I, J]",12.52,0.0
+false,"[A, B, D, E, G, H, I]",9.64,0.0
+false,"[B, C, D, E, F, G, I]",4.63,0.0
+false,"[A, C, D, E, F, H, I]",10.63,0.0
+false,"[A, B, C, F, G, H, I]",13.62,0.0
+false,"[A, C, D, E, F, G, J]",9.65,0.0
+false,"[A, B, D, E, F, H, J]",8.64,0.0
+false,"[A, B, C, E, G, H, J]",12.64,0.0
+false,"[A, B, C, E, F, I, J]",12.63,0.0
+false,"[A, B, C, D, G, I, J]",12.64,0.0
+false,"[A, B, D, F, G, H, I]",9.73,0.0
+false,"[B, C, D, E, F, H, I]",4.71,0.0
+false,"[A, C, D, E, G, H, I]",10.74,0.0
+false,"[B, C, D, E, F, G, J]",3.73,0.0
+false,"[A, C, D, E, F, H, J]",9.74,0.0
+false,"[A, B, D, E, G, H, J]",8.75,0.0
+false,"[A, B, C, F, G, H, J]",12.72,0.0
+false,"[A, B, D, E, F, I, J]",8.74,0.0
+false,"[A, B, C, E, G, I, J]",12.74,0.0
+false,"[A, B, C, D, H, I, J]",12.72,0.0
+false,"[A, C, D, F, G, H, I]",10.84,0.0
+false,"[B, C, D, E, G, H, I]",4.83,0.0
+false,"[A, B, C, E, H, I, J]",12.83,0.0
+false,"[A, B, E, F, G, H, I]",9.83,0.0
+false,"[B, C, D, E, F, H, J]",3.82,0.0
+false,"[A, C, D, E, G, H, J]",9.85,0.0
+false,"[A, B, D, F, G, H, J]",8.83,0.0
+false,"[A, C, D, E, F, I, J]",9.84,0.0
+false,"[A, B, D, E, G, I, J]",8.85,0.0
+false,"[A, B, C, F, G, I, J]",12.82,0.0
+false,"[A, B, E, F, G, H, J]",8.94,0.0
+false,"[A, C, E, F, G, H, I]",10.93,0.0
+false,"[B, C, D, F, G, H, I]",4.93,0.0
+false,"[B, C, D, E, G, H, J]",3.94,0.0
+false,"[A, C, D, F, G, H, J]",9.94,0.0
+false,"[B, C, D, E, F, I, J]",3.92,0.0
+false,"[A, C, D, E, G, I, J]",9.95,0.0
+false,"[A, B, C, F, H, I, J]",12.91,0.0
+false,"[A, B, D, F, G, I, J]",8.93,0.0
+false,"[A, B, D, E, H, I, J]",8.93,0.0
+false,"[A, C, E, F, G, H, J]",10.04,0.0
+false,"[B, C, E, F, G, H, I]",5.01,0.0
+false,"[A, D, E, F, G, H, I]",7.05,0.0
+false,"[B, C, D, F, G, H, J]",4.03,0.0
+false,"[B, C, D, E, G, I, J]",4.04,0.0
+false,"[A, C, D, F, G, I, J]",10.04,0.0
+false,"[A, B, E, F, G, I, J]",9.04,0.0
+false,"[A, C, D, E, H, I, J]",10.03,0.0
+false,"[A, B, C, G, H, I, J]",13.02,0.0
+false,"[A, B, D, F, H, I, J]",9.01,0.0
+false,"[B, D, E, F, G, H, I]",5.13,0.0
+false,"[B, C, E, F, G, H, J]",4.12,0.0
+false,"[A, D, E, F, G, H, J]",6.16,0.0
+false,"[B, C, D, F, G, I, J]",4.13,0.0
+false,"[A, C, E, F, G, I, J]",10.14,0.0
+false,"[B, C, D, E, H, I, J]",4.12,0.0
+false,"[A, C, D, F, H, I, J]",10.12,0.0
+false,"[A, B, E, F, H, I, J]",9.13,0.0
+false,"[A, B, D, G, H, I, J]",9.12,0.0
+false,"[C, D, E, F, G, H, I]",5.22,0.0
+false,"[B, D, E, F, G, H, J]",4.24,0.0
+false,"[B, C, E, F, G, I, J]",4.22,0.0
+false,"[A, D, E, F, G, I, J]",6.26,0.0
+false,"[B, C, D, F, H, I, J]",4.21,0.0
+false,"[A, C, E, F, H, I, J]",10.23,0.0
+false,"[A, C, D, G, H, I, J]",10.23,0.0
+false,"[A, B, E, G, H, I, J]",9.23,0.0
+false,"[C, D, E, F, G, H, J]",4.33,0.0
+false,"[B, D, E, F, G, I, J]",4.34,0.0
+false,"[B, C, E, F, H, I, J]",4.31,0.0
+false,"[A, D, E, F, H, I, J]",6.34,0.0
+false,"[B, C, D, G, H, I, J]",4.33,0.0
+false,"[A, C, E, G, H, I, J]",10.33,0.0
+false,"[A, B, F, G, H, I, J]",9.31,0.0
+false,"[C, D, E, F, G, I, J]",4.43,0.0
+false,"[B, D, E, F, H, I, J]",4.42,0.0
+false,"[B, C, E, G, H, I, J]",4.42,0.0
+false,"[A, D, E, G, H, I, J]",6.44,0.0
+false,"[A, C, F, G, H, I, J]",10.42,0.0
+false,"[C, D, E, F, H, I, J]",4.51,0.0
+false,"[B, D, E, G, H, I, J]",4.53,0.0
+false,"[B, C, F, G, H, I, J]",4.51,0.0
+false,"[A, D, F, G, H, I, J]",6.53,0.0
+false,"[C, D, E, G, H, I, J]",4.62,0.0
+false,"[B, D, F, G, H, I, J]",4.62,0.0
+false,"[A, E, F, G, H, I, J]",6.64,0.0
+false,"[C, D, F, G, H, I, J]",4.72,0.0
+false,"[B, E, F, G, H, I, J]",4.72,0.0
+false,"[C, E, F, G, H, I, J]",4.81,0.0
+false,"[D, E, F, G, H, I, J]",4.93,0.0
+false,"[A, B, C, D, E, F, G, H]",13.63,0.0
+false,"[A, B, C, D, E, F, G, I]",13.74,0.0
+false,"[A, B, C, D, E, F, H, I]",13.82,0.0
+false,"[A, B, C, D, E, F, G, J]",12.84,0.0
+false,"[A, B, C, D, E, G, H, I]",13.94,0.0
+false,"[A, B, C, D, E, F, H, J]",12.93,0.0
+false,"[A, B, C, D, F, G, H, I]",14.03,0.0
+false,"[A, B, C, D, E, G, H, J]",13.05,0.0
+false,"[A, B, C, D, E, F, I, J]",13.03,0.0
+false,"[A, B, C, E, F, G, H, I]",14.12,0.0
+false,"[A, B, C, D, F, G, H, J]",13.13,0.0
+false,"[A, B, C, D, E, G, I, J]",13.15,0.0
+false,"[A, B, D, E, F, G, H, I]",10.24,0.0
+false,"[A, B, C, E, F, G, H, J]",13.23,0.0
+false,"[A, B, C, D, F, G, I, J]",13.23,0.0
+false,"[A, B, C, D, E, H, I, J]",13.23,0.0
+false,"[A, C, D, E, F, G, H, I]",11.34,0.0
+false,"[A, B, D, E, F, G, H, J]",9.35,0.0
+false,"[A, B, C, E, F, G, I, J]",13.33,0.0
+false,"[A, B, C, D, F, H, I, J]",13.31,0.0
+false,"[B, C, D, E, F, G, H, I]",5.42,0.0
+false,"[A, C, D, E, F, G, H, J]",10.45,0.0
+false,"[A, B, D, E, F, G, I, J]",9.45,0.0
+false,"[A, B, C, E, F, H, I, J]",13.42,0.0
+false,"[A, B, C, D, G, H, I, J]",13.43,0.0
+false,"[B, C, D, E, F, G, H, J]",4.53,0.0
+false,"[A, C, D, E, F, G, I, J]",10.55,0.0
+false,"[A, B, D, E, F, H, I, J]",9.53,0.0
+false,"[A, B, C, E, G, H, I, J]",13.53,0.0
+false,"[B, C, D, E, F, G, I, J]",4.63,0.0
+false,"[A, C, D, E, F, H, I, J]",10.63,0.0
+false,"[A, B, D, E, G, H, I, J]",9.64,0.0
+false,"[A, B, C, F, G, H, I, J]",13.61,0.0
+false,"[B, C, D, E, F, H, I, J]",4.71,0.0
+false,"[A, C, D, E, G, H, I, J]",10.74,0.0
+false,"[A, B, D, F, G, H, I, J]",9.72,0.0
+false,"[B, C, D, E, G, H, I, J]",4.83,0.0
+false,"[A, C, D, F, G, H, I, J]",10.83,0.0
+false,"[A, B, E, F, G, H, I, J]",9.83,0.0
+false,"[B, C, D, F, G, H, I, J]",4.92,0.0
+false,"[A, C, E, F, G, H, I, J]",10.93,0.0
+false,"[B, C, E, F, G, H, I, J]",5.01,0.0
+false,"[A, D, E, F, G, H, I, J]",7.05,0.0
+false,"[B, D, E, F, G, H, I, J]",5.13,0.0
+false,"[C, D, E, F, G, H, I, J]",5.22,0.0
+false,"[A, B, C, D, E, F, G, H, I]",14.53,0.0
+false,"[A, B, C, D, E, F, G, H, J]",13.64,0.0
+false,"[A, B, C, D, E, F, G, I, J]",13.74,0.0
+false,"[A, B, C, D, E, F, H, I, J]",13.82,0.0
+false,"[A, B, C, D, E, G, H, I, J]",13.94,0.0
+false,"[A, B, C, D, F, G, H, I, J]",14.02,0.0
+false,"[A, B, C, E, F, G, H, I, J]",14.12,0.0
+false,"[A, B, D, E, F, G, H, I, J]",10.24,0.0
+false,"[A, C, D, E, F, G, H, I, J]",11.34,0.0
+false,"[B, C, D, E, F, G, H, I, J]",5.42,0.0
+false,"[A, B, C, D, E, F, G, H, I, J]",14.53,0.0

@@ -1,8 +1,8 @@
 % feature_wise
 
 train = readtable('../../../../../../../../resources/evaluation/programs/java/running-example/data/feature_wise.csv');
-x_train = table2array(train(:,1:11));
-y_train = table2array(train(:,12:12));
+x_train = table2array(train(:,1:10));
+y_train = table2array(train(:,11:11));
 model = stepwiselm(x_train, y_train, 'linear');
 
 mkdir('../../../../../../../../resources/evaluation/programs/java/running-example/data/feature_wise/');
@@ -25,8 +25,8 @@ fclose(fileID);
 % pair_wise
 
 train = readtable('../../../../../../../../resources/evaluation/programs/java/running-example/data/pair_wise.csv');
-x_train = table2array(train(:,1:11));
-y_train = table2array(train(:,12:12));
+x_train = table2array(train(:,1:10));
+y_train = table2array(train(:,11:11));
 model = stepwiselm(x_train, y_train, 'linear');
 
 mkdir('../../../../../../../../resources/evaluation/programs/java/running-example/data/pair_wise/');

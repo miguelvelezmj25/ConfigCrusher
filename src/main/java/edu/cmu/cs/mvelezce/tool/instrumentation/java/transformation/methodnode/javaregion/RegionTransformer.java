@@ -534,11 +534,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                 PrettyMethodGraph prettyGraph = prettyBuilder.build();
                 prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
 
-//                try {
-//                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
-//                } catch(InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
+                } catch(InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
 

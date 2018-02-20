@@ -60,7 +60,7 @@ public class DensityMain extends BaseMain {
             throw new RuntimeException("Could not add regions to the Regions class");
         }
 
-        if(mainClass.contains("PrimeNumbers")) {
+        if(mainClass.contains("Main")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);
 
             try {

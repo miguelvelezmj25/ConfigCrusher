@@ -449,4 +449,48 @@ public class ConfigCrusherExecutorTest {
         measuredPerformance.size();
     }
 
+    @Test
+    public void sort() throws Exception {
+        String programName = "sort";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/sort/target/classes";
+        String entryPoint = "org.unix4j.sort.Main";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i5";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
+    @Test
+    public void density() throws Exception {
+        String programName = "density";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/density/target/classes";
+        String entryPoint = "at.favre.tools.dconvert.Main";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
 }

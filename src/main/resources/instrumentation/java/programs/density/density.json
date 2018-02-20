@@ -1,24 +1,129 @@
 [
   {
     "region": {
-      "regionID": "9b561efd-28cc-4660-8f47-8f247affbaf8",
+      "regionID": "cc00f6d4-786a-402f-aabe-3c2624ac7209",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "at.favre.tools.dconvert",
       "regionClass": "Main",
       "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 455,
+      "startBytecodeIndex": 464,
       "startMethodBlock": null,
       "endMethodBlocks": [],
-      "startBlockID": "1949301096",
+      "startBlockID": "725240582",
       "endBlocksIDs": [
-        "908213766"
+        "1114854517"
       ]
     },
     "options": [
       [
-        "SCALEMODE"
+        "DOWNSCALINGALGORITHM"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9322e883-5305-4086-a2e9-b2ee90d95325",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "at.favre.tools.dconvert",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 482,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "721779083",
+      "endBlocksIDs": [
+        "158269968"
+      ]
+    },
+    "options": [
+      [
+        "COMPRESSQUALITY"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "081c8632-590b-45cd-8fb8-54355461d1d8",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "at.favre.tools.dconvert",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 487,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "158269968",
+      "endBlocksIDs": [
+        "133573226",
+        "418935262",
+        "676099952"
+      ]
+    },
+    "options": [
+      [
+        "POSTCONVERTWEBP",
+        "PLATFORM",
+        "ENABLEPNGCRUSH",
+        "ENABLEMOZJPEG"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e5c10f7e-61e9-485d-8ccc-fccee29dfe52",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "at.favre.tools.dconvert.converters",
+      "regionClass": "APlatformConverter",
+      "regionMethod": "convert(Ljava/io/File;Lat/favre/tools/dconvert/arg/Arguments;)Lat/favre/tools/dconvert/converters/Result;",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "518898781",
+      "endBlocksIDs": [
+        "885264643",
+        "1946405930"
+      ]
+    },
+    "options": [
+      [
+        "PLATFORM",
+        "UPSCALINGALGORITHM",
+        "SKIPUPSCALING",
+        "OUTPUTCOMPRESSIONGMODE",
+        "COMPRESSQUALITY",
+        "DOWNSCALINGALGORITHM",
+        "SCALEMODE",
+        "SCALE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c7dafafd-ffa2-4387-8caf-e654980f8b77",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "at.favre.tools.dconvert",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 446,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1486555359",
+      "endBlocksIDs": [
+        "483929421"
+      ]
+    },
+    "options": [
+      [
+        "OUTPUTCOMPRESSIONGMODE"
       ]
     ]
   },
@@ -34,14 +139,39 @@
       "startBytecodeIndex": 437,
       "startMethodBlock": null,
       "endMethodBlocks": [],
-      "startBlockID": "1705384034",
+      "startBlockID": "305244160",
       "endBlocksIDs": [
-        "1012162852"
+        "1486555359"
       ]
     },
     "options": [
       [
         "PLATFORM"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f5936873-ce55-4843-ad31-e96dae73681b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "at.favre.tools.dconvert",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "2087139284",
+      "endBlocksIDs": [
+        "133573226",
+        "418935262",
+        "676099952"
+      ]
+    },
+    "options": [
+      [
+        "SCALE"
       ]
     ]
   },
@@ -57,15 +187,15 @@
       "startBytecodeIndex": 13,
       "startMethodBlock": null,
       "endMethodBlocks": [],
-      "startBlockID": "1393603109",
+      "startBlockID": "360006885",
       "endBlocksIDs": [
-        "1747056923",
-        "1911045472",
-        "440764905",
-        "1372241805",
-        "638223261",
-        "1813190083",
-        "282030384"
+        "1214316440",
+        "686593547",
+        "228129890",
+        "1658655896",
+        "21908821",
+        "294308211",
+        "1582921957"
       ]
     },
     "options": [
@@ -92,9 +222,9 @@
       "startBytecodeIndex": 473,
       "startMethodBlock": null,
       "endMethodBlocks": [],
-      "startBlockID": "1619951174",
+      "startBlockID": "1114854517",
       "endBlocksIDs": [
-        "1871258304"
+        "721779083"
       ]
     },
     "options": [
@@ -105,154 +235,24 @@
   },
   {
     "region": {
-      "regionID": "cc00f6d4-786a-402f-aabe-3c2624ac7209",
+      "regionID": "9b561efd-28cc-4660-8f47-8f247affbaf8",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "at.favre.tools.dconvert",
       "regionClass": "Main",
       "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 464,
+      "startBytecodeIndex": 455,
       "startMethodBlock": null,
       "endMethodBlocks": [],
-      "startBlockID": "908213766",
+      "startBlockID": "483929421",
       "endBlocksIDs": [
-        "1619951174"
+        "725240582"
       ]
     },
     "options": [
       [
-        "DOWNSCALINGALGORITHM"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "b986e765-b826-4262-b0a4-2335a1560113",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "at.favre.tools.dconvert.converters",
-      "regionClass": "APlatformConverter",
-      "regionMethod": "convert(Ljava/io/File;Lat/favre/tools/dconvert/arg/Arguments;)Lat/favre/tools/dconvert/converters/Result;",
-      "startBytecodeIndex": 24,
-      "startMethodBlock": null,
-      "endMethodBlocks": [],
-      "startBlockID": "1956377378",
-      "endBlocksIDs": [
-        "176912212",
-        "1552686861"
-      ]
-    },
-    "options": [
-      [
-        "PLATFORM",
-        "UPSCALINGALGORITHM",
-        "SKIPUPSCALING",
-        "OUTPUTCOMPRESSIONGMODE",
-        "COMPRESSQUALITY",
-        "DOWNSCALINGALGORITHM",
-        "SCALEMODE",
-        "SCALE"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "cd316d9a-0b8d-4ebb-8848-0382392b7247",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "at.favre.tools.dconvert",
-      "regionClass": "Main",
-      "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 487,
-      "startMethodBlock": null,
-      "endMethodBlocks": [],
-      "startBlockID": "504527899",
-      "endBlocksIDs": [
-        "1752161109",
-        "51632319",
-        "390486284"
-      ]
-    },
-    "options": [
-      [
-        "POSTCONVERTWEBP",
-        "PLATFORM",
-        "ENABLEPNGCRUSH",
-        "ENABLEMOZJPEG"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "c7dafafd-ffa2-4387-8caf-e654980f8b77",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "at.favre.tools.dconvert",
-      "regionClass": "Main",
-      "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 446,
-      "startMethodBlock": null,
-      "endMethodBlocks": [],
-      "startBlockID": "1012162852",
-      "endBlocksIDs": [
-        "1949301096"
-      ]
-    },
-    "options": [
-      [
-        "OUTPUTCOMPRESSIONGMODE"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "38551d8f-d176-4101-94a4-5a458c7938f0",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "at.favre.tools.dconvert",
-      "regionClass": "Main",
-      "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 0,
-      "startMethodBlock": null,
-      "endMethodBlocks": [],
-      "startBlockID": "1388402945",
-      "endBlocksIDs": [
-        "1752161109",
-        "51632319",
-        "390486284"
-      ]
-    },
-    "options": [
-      [
-        "SCALE"
-      ]
-    ]
-  },
-  {
-    "region": {
-      "regionID": "9322e883-5305-4086-a2e9-b2ee90d95325",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "at.favre.tools.dconvert",
-      "regionClass": "Main",
-      "regionMethod": "main([Ljava/lang/String;)V",
-      "startBytecodeIndex": 482,
-      "startMethodBlock": null,
-      "endMethodBlocks": [],
-      "startBlockID": "1871258304",
-      "endBlocksIDs": [
-        "504527899"
-      ]
-    },
-    "options": [
-      [
-        "COMPRESSQUALITY"
+        "SCALEMODE"
       ]
     ]
   }

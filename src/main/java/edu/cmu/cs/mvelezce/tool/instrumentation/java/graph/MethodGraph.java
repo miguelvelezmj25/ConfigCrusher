@@ -111,9 +111,38 @@ public class MethodGraph {
             return ids.iterator().next();
         }
 
-        this.toDotString("ERROR");
+        boolean connectedToStart = this.isConnectedToStart(start);
+
+        if(!connectedToStart) {
+            return null;
+        }
 
         throw new RuntimeException("Could not find an immediate dominator for " + start.getID());
+    }
+
+    // TODO should be dfs not bfs
+    private boolean isConnectedToStart(MethodBlock start) {
+        if(start.equals(this.entryBlock)) {
+            return true;
+        }
+
+        Queue<MethodBlock> queue = new ArrayDeque<>(start.getPredecessors());
+
+        if(start.getPredecessors().isEmpty()) {
+            return false;
+        }
+
+        while(!queue.isEmpty()) {
+            MethodBlock cur = queue.poll();
+
+            if(cur.equals(this.entryBlock)) {
+                return true;
+            }
+
+            queue.addAll(cur.getPredecessors());
+        }
+
+        return false;
     }
 
     public MethodGraph reverseGraph() {

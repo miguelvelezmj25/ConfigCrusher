@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.region.RegionsCounter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
@@ -16,6 +17,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions14.Regions14Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions16.Regions16Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
 
@@ -113,6 +115,12 @@ public class ConfigCrusherExecutor extends BaseExecutor {
         }
         else if(this.getProgramName().contains("grep")) {
             adapter = new GrepAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("sort")) {
+            adapter = new SortAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("density")) {
+            adapter = new DensityAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

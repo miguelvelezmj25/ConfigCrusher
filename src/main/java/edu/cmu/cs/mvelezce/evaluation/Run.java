@@ -1,6 +1,9 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
+import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
+import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -14,36 +17,25 @@ import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
 public class Run {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        String programName = "sort";
-//        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/sort/target/classes";
-        String classDirectory = USER_HOME + "/Documents/performance-mapper-evaluation/original/sort/target/classes";
+        String programName = "density";
+//        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/density/target/classes";
+        String classDirectory = USER_HOME + "/Documents/performance-mapper-evaluation/instrumented/density/target/classes";
+        String entryPoint = "at.favre.tools.dconvert.Main";
 
-        String entryPoint = "org.unix4j.sort.Main";
+        // Program arguments
+        args = new String[0];
 
-        Set<String> options = new HashSet<>(SortAdapter.getSortOptions());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
-
-        removeSampledConfigurations(programName, configurations);
-
-//        Set<String> empty = new HashSet<>();
-//        empty.add("MONTHSORT");
-//        empty.add("VERSIONSORT");
-//        empty.add("MERGE");
-//        empty.add("REVERSE");
-//        empty.add("GENERALNUMERICSORT");
-
-//        configurations = new HashSet<>();
-//        configurations.add(empty);
-
-        System.out.println("Configurations to sample: " + configurations.size());
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
 
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
         args[2] = "-i1";
 
-        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
     }
 
     public static void removeSampledConfigurations(String name, Set<Set<String>> configurations) throws IOException, InterruptedException {

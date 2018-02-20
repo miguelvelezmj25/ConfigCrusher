@@ -654,6 +654,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         MethodGraph graph = this.getMethodGraph(methodNode);
         MethodBlock id = graph.getImmediateDominator(block);
 
+        if(id == null) {
+            return blocks;
+        }
+
         if(id == graph.getEntryBlock()) {
             return blocks;
         }
@@ -1030,7 +1034,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         int regionsInMethodCount = regionsInMethod.size();
 
         if(blocksToDecisionCount != regionsInMethodCount) {
-            throw new RuntimeException("The number of regions in " + methodNode.name + " does not match in the blocks to regions and methods to regions");
+            throw new RuntimeException("The number of regions in " + methodNode.name + " does not match in the " +
+                    "blocks-to-regions map and methods-to-regions map");
         }
     }
 

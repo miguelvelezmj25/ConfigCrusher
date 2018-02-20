@@ -1,0 +1,114 @@
+digraph getImageType {
+node [shape=record];
+565887400 [label="BIPUSH 7\lISTORE 3\lGOTO L11\l"];
+1368766140 [label="L19\lLINENUMBER 546 L19\lFRAME SAME\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"unknown file extension \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" in srcFile \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\lL20\l"];
+282030384 [label="L14\lLINENUMBER 535 L14\lFRAME SAME\lGETSTATIC at/favre/tools/dconvert/arg/ImageType.SVG : Lat/favre/tools/dconvert/arg/ImageType;\lLDC \"71decd16-4437-4552-a149-ca2e54d98b5d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1768433006 [label="ICONST_1\lISTORE 3\lGOTO L11\l"];
+385538136 [label="ICONST_2\lISTORE 3\lGOTO L11\l"];
+1393603109 [label="L0\lLINENUMBER 527 L0\lLDC \"71decd16-4437-4552-a149-ca2e54d98b5d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESTATIC at/favre/tools/dconvert/util/MiscUtil.getFileExtensionLowerCase (Ljava/io/File;)Ljava/lang/String;\lASTORE 1\lL1\lLINENUMBER 528 L1\lALOAD 1\lASTORE 2\lICONST_M1\lISTORE 3\lALOAD 2\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lLOOKUPSWITCH
+      97669: L2
+      102340: L3
+      105441: L4
+      111145: L5
+      111297: L6
+      114276: L7
+      114833: L8
+      3268712: L9
+      3559925: L10
+      default: L11\l"];
+1093409488 [label="L3\lFRAME SAME\lALOAD 2\lLDC \"gif\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L11\l"];
+185728218 [label="L5\lFRAME SAME\lALOAD 2\lLDC \"png\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L11\l"];
+763724207 [label="ICONST_5\lISTORE 3\lGOTO L11\l"];
+1747056923 [label="L16\lLINENUMBER 540 L16\lFRAME SAME\lGETSTATIC at/favre/tools/dconvert/arg/ImageType.PSD : Lat/favre/tools/dconvert/arg/ImageType;\lLDC \"71decd16-4437-4552-a149-ca2e54d98b5d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1911045472 [label="L18\lLINENUMBER 544 L18\lFRAME SAME\lGETSTATIC at/favre/tools/dconvert/arg/ImageType.BMP : Lat/favre/tools/dconvert/arg/ImageType;\lLDC \"71decd16-4437-4552-a149-ca2e54d98b5d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+378546236 [label="L2\lFRAME SAME\lALOAD 2\lLDC \"bmp\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L11\l"];
+1836950623 [label="BIPUSH 6\lISTORE 3\lGOTO L11\l"];
+475526220 [label="L6\lFRAME SAME\lALOAD 2\lLDC \"psd\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L11\l"];
+91129657 [label="ICONST_4\lISTORE 3\lGOTO L11\l"];
+2044111787 [label="ICONST_3\lISTORE 3\lGOTO L11\l"];
+1024235404 [label="L7\lFRAME SAME\lALOAD 2\lLDC \"svg\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L11\l"];
+402331978 [label="L4\lFRAME APPEND [java/lang/String java/lang/String I]\lALOAD 2\lLDC \"jpg\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L11\l"];
+1988181398 [label="L9\lFRAME SAME\lALOAD 2\lLDC \"jpeg\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L11\l"];
+440764905 [label="L17\lLINENUMBER 542 L17\lFRAME SAME\lGETSTATIC at/favre/tools/dconvert/arg/ImageType.GIF : Lat/favre/tools/dconvert/arg/ImageType;\lLDC \"71decd16-4437-4552-a149-ca2e54d98b5d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1372241805 [label="L12\lLINENUMBER 531 L12\lFRAME SAME\lGETSTATIC at/favre/tools/dconvert/arg/ImageType.JPG : Lat/favre/tools/dconvert/arg/ImageType;\lLDC \"71decd16-4437-4552-a149-ca2e54d98b5d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+638223261 [label="L13\lLINENUMBER 533 L13\lFRAME SAME\lGETSTATIC at/favre/tools/dconvert/arg/ImageType.PNG : Lat/favre/tools/dconvert/arg/ImageType;\lLDC \"71decd16-4437-4552-a149-ca2e54d98b5d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1920137262 [label="L8\lFRAME SAME\lALOAD 2\lLDC \"tif\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L11\l"];
+1344065001 [label="BIPUSH 8\lISTORE 3\l"];
+213782367 [label="ICONST_0\lISTORE 3\lGOTO L11\l"];
+1440170654 [label="L10\lFRAME SAME\lALOAD 2\lLDC \"tiff\"\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L11\l"];
+2004709742 [label="L11\lFRAME SAME\lILOAD 3\lTABLESWITCH
+      0: L12
+      1: L12
+      2: L13
+      3: L14
+      4: L15
+      5: L15
+      6: L16
+      7: L17
+      8: L18
+      default: L19\l"];
+1813190083 [label="L15\lLINENUMBER 538 L15\lFRAME SAME\lGETSTATIC at/favre/tools/dconvert/arg/ImageType.TIFF : Lat/favre/tools/dconvert/arg/ImageType;\lLDC \"71decd16-4437-4552-a149-ca2e54d98b5d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+565887400 -> 2004709742;
+282030384 -> exit;
+1768433006 -> 2004709742;
+385538136 -> 2004709742;
+1393603109 -> 185728218;
+1393603109 -> 1440170654;
+1393603109 -> 1988181398;
+1393603109 -> 2004709742;
+1393603109 -> 378546236;
+1393603109 -> 475526220;
+1393603109 -> 1920137262;
+1393603109 -> 1024235404;
+1393603109 -> 402331978;
+1393603109 -> 1093409488;
+1093409488 -> 565887400;
+1093409488 -> 2004709742;
+185728218 -> 2004709742;
+185728218 -> 385538136;
+763724207 -> 2004709742;
+1747056923 -> exit;
+1911045472 -> exit;
+378546236 -> 2004709742;
+378546236 -> 1344065001;
+1836950623 -> 2004709742;
+475526220 -> 2004709742;
+475526220 -> 1836950623;
+91129657 -> 2004709742;
+2044111787 -> 2004709742;
+1024235404 -> 2004709742;
+1024235404 -> 2044111787;
+402331978 -> 2004709742;
+402331978 -> 213782367;
+1988181398 -> 2004709742;
+1988181398 -> 1768433006;
+440764905 -> exit;
+1372241805 -> exit;
+638223261 -> exit;
+1920137262 -> 2004709742;
+1920137262 -> 91129657;
+1344065001 -> 2004709742;
+213782367 -> 2004709742;
+entry -> 1393603109;
+1440170654 -> 763724207;
+1440170654 -> 2004709742;
+2004709742 -> 1747056923;
+2004709742 -> 1911045472;
+2004709742 -> 1368766140;
+2004709742 -> 440764905;
+2004709742 -> 1372241805;
+2004709742 -> 638223261;
+2004709742 -> 1813190083;
+2004709742 -> 282030384;
+1813190083 -> exit;
+1747056923[fontcolor="purple", penwidth=3, color="purple"];
+1911045472[fontcolor="purple", penwidth=3, color="purple"];
+440764905[fontcolor="purple", penwidth=3, color="purple"];
+1372241805[fontcolor="purple", penwidth=3, color="purple"];
+638223261[fontcolor="purple", penwidth=3, color="purple"];
+1813190083[fontcolor="purple", penwidth=3, color="purple"];
+282030384[fontcolor="purple", penwidth=3, color="purple"];
+1393603109[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -128,7 +128,6 @@ public class ConfigCrusherPerformanceModelBuilder extends BasePerformanceModelBu
             }
         }
 
-
         Map<Region, Map<Set<String>, Long>> regionsToAveragePerformanceTable = this.averageMultipleExecutions(regionsToPerformanceTable);
         return regionsToAveragePerformanceTable;
     }

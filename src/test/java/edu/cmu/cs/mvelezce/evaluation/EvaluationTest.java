@@ -16,9 +16,12 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
+import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
@@ -1745,6 +1748,40 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void densityConfigCrusher() throws Exception {
+        String programName = "density";
+
+        // arguments
+        String[] args = new String[0];
+
+        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+        instrumenter.instrument(args);
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+
+        Analysis analysis = new DefaultStaticAnalysis();
+        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+
+        Executor executor = new ConfigCrusherExecutor(programName);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
+                regionsToOptionSet);
+        PerformanceModel performanceModel = builder.createModel(args);
+
+        args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
     }
 
 }

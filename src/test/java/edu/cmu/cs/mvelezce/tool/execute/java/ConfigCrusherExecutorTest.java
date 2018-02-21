@@ -197,7 +197,7 @@ public class ConfigCrusherExecutorTest {
         args = new String[3];
         args[0] = "-delres";
         args[1] = "-saveres";
-        args[2] = "-i5";
+        args[2] = "-i1";
 
         Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);

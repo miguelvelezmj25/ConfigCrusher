@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.colorcounter.BFColorCounterAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.density.BFDensityAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.find.BFFindAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.grep.BFGrepAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.kanzi.BFKanziAdapter;
@@ -9,6 +10,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.prev
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regions12.BFRegions12Adapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regions16.BFRegions16Adapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.runningexample.BFRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.sort.BFSortAdapter;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.region.RegionsCounter;
@@ -170,6 +172,12 @@ public class BruteForceExecutor extends BaseExecutor {
         }
         else if(this.getProgramName().contains("find")) {
             adapter = new BFFindAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("sort")) {
+            adapter = new BFSortAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("density")) {
+            adapter = new BFDensityAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

@@ -1,17 +1,17 @@
 digraph clock {
 node [shape=record];
-1275740126 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
-128511924 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
-148458782 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
-1383702986 [label="L0\lLINENUMBER 155 L0\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
+1574589587 [label="L0\lLINENUMBER 155 L0\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
+128511924 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+1383702986 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
+1416760495 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
 entry;
 exit;
-entry -> 1383702986;
-1275740126 -> exit;
-128511924 -> 1275740126;
-148458782 -> 1275740126;
+1574589587 -> 1383702986;
+1574589587 -> 1416760495;
+entry -> 1574589587;
+128511924 -> exit;
 1383702986 -> 128511924;
-1383702986 -> 148458782;
-1275740126[fontcolor="purple", penwidth=3, color="purple"];
-1383702986[fontcolor="purple", penwidth=3, color="purple"];
+1416760495 -> 128511924;
+1574589587[fontcolor="purple", penwidth=3, color="purple"];
+128511924[fontcolor="purple", penwidth=3, color="purple"];
 }

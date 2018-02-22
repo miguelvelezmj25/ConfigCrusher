@@ -1276,18 +1276,24 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
                         continue;
                     }
 
+
+                    if(calleeSootMethod.getDeclaringClass().getName().contains("Turn")){
+//                        this.debugBlockDecisions(ca);
+                        System.out.println();
+                    }
+
+
                     List<Edge> callerEdges = this.getCallerEdges(calleeSootMethod);
 
-                    if(callerEdges.size() > 1) {
+//                    if(callerEdges.size() > 1) {
                         boolean canRemove = this.checkIfCanRemove(decision, callerEdges);
 
                         if(!canRemove) {
                             continue;
                         }
-                    }
+//                    }
 
                     MethodNode calleeMethodNode = this.sootMethodToMethodNode.get(calleeSootMethod);
-
 
                     LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this.methodsToBlocksDecisions.get(calleeMethodNode);
 

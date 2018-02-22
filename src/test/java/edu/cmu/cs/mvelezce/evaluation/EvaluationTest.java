@@ -149,6 +149,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareDensity1() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareColorCounter2() throws Exception {
         String programName = "pngtasticColorCounter";
 
@@ -1739,6 +1747,20 @@ public class EvaluationTest {
     @Test
     public void regions12BruteForce() throws Exception {
         String programName = "regions12";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void densityBruteForce() throws Exception {
+        String programName = "density";
 
         // arguments
         String[] args = new String[0];

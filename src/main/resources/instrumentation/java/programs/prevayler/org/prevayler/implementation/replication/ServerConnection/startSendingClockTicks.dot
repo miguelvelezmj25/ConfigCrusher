@@ -1,6 +1,6 @@
 digraph startSendingClockTicks {
 node [shape=record];
-880981990 [label="L0\lLINENUMBER 59 L0\lLDC \"1997d566-9bb2-4565-8df8-06cbdb3d39a9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._clockTickSender : Ljava/lang/Thread;\lICONST_1\lINVOKEVIRTUAL java/lang/Thread.setDaemon (Z)V\lL1\lLINENUMBER 60 L1\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._clockTickSender : Ljava/lang/Thread;\lINVOKEVIRTUAL java/lang/Thread.start ()V\lL2\lLINENUMBER 61 L2\lLDC \"1997d566-9bb2-4565-8df8-06cbdb3d39a9\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+880981990 [label="L0\lLINENUMBER 59 L0\lLDC \"f6b3c9bf-6713-4849-83fe-302a224cc299\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._clockTickSender : Ljava/lang/Thread;\lICONST_1\lINVOKEVIRTUAL java/lang/Thread.setDaemon (Z)V\lL1\lLINENUMBER 60 L1\lALOAD 0\lGETFIELD org/prevayler/implementation/replication/ServerConnection._clockTickSender : Ljava/lang/Thread;\lINVOKEVIRTUAL java/lang/Thread.start ()V\lL2\lLINENUMBER 61 L2\lLDC \"f6b3c9bf-6713-4849-83fe-302a224cc299\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
 entry;
 exit;
 entry -> 880981990;

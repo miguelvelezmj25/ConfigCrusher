@@ -2,10 +2,7 @@ package edu.cmu.cs.mvelezce.tool;
 
 import org.apache.commons.math3.util.Combinations;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // TODO what is this class helping for?
 
@@ -49,6 +46,58 @@ public class Helper {
 
         configurations.add(new HashSet<>());
         return configurations;
+    }
+
+//    public static void removeSampledConfigurations(String name, Set<Set<String>> configurations) throws IOException, InterruptedException {
+//        // arguments
+//        String[] args = new String[0];
+//
+//        Executor executor = new BruteForceExecutor(name);
+//        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+//
+//        for(PerformanceEntryStatistic entry : performanceEntries) {
+//            configurations.remove(entry.getConfiguration());
+//        }
+//    }
+
+    public static Set<Set<String>> getRandomConfigs(List<String> options, int size) {
+        Set<Set<String>> configs = new HashSet<>(size);
+        int length = options.size();
+
+        Random numOfOpts = new Random();
+
+        while(configs.size() < size) {
+            int num = numOfOpts.nextInt(length + 1);
+            Set<String> config = new HashSet<>(num);
+            Random opts = new Random();
+
+            while(config.size() < num) {
+                int index = opts.nextInt(length);
+                String opt = options.get(index);
+
+                if(!config.contains(opt)) {
+                    config.add(opt);
+                }
+            }
+
+            if(!configs.contains(config)) {
+                configs.add(config);
+            }
+        }
+
+        return configs;
+    }
+
+    public static Set<Set<String>> mergeConfigs(Set<Set<String>> configs1, Set<Set<String>> configs2) {
+        Set<Set<String>> configs = new HashSet<>(configs1);
+
+        for(Set<String> config : configs2) {
+            if(!configs.contains(config)) {
+                configs.add(config);
+            }
+        }
+
+        return configs;
     }
 
 }

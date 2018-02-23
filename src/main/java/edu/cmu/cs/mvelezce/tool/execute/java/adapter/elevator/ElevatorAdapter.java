@@ -2,7 +2,9 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 
-import java.util.HashSet;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,63 +12,34 @@ import java.util.Set;
  */
 public class ElevatorAdapter extends BaseAdapter {
 
-    private static final String[] CONFIGURATIONS = {
-            "FEATUREBASE",
-            "FEATUREWEIGHT",
-            "FEATUREEMPTY",
-            "FEATURETWOTHIRDSFULL",
-            "FEATUREEXECUTIVEFLOOR",
-            "FEATUREOVERLOADED"
-    };
-
-    public ElevatorAdapter(String programName, String mainClass, String directory) {
-//        super(programName, mainClass, directory);
-        super(null, null, null, null);
+    public ElevatorAdapter() {
+        this(null, null, null);
     }
 
-    public static String[] adaptConfigurationToProgram(Set<String> configuration) {
-        String[] sleepConfiguration = new String[ElevatorAdapter.CONFIGURATIONS.length];
-
-        for(int i = 0; i < sleepConfiguration.length; i++) {
-            if(configuration.contains(ElevatorAdapter.CONFIGURATIONS[i])) {
-                sleepConfiguration[i] = "true";
-            }
-            else {
-                sleepConfiguration[i] = "false";
-            }
-        }
-
-        return sleepConfiguration;
+    public ElevatorAdapter(String programName, String entryPoint, String dir) {
+        super(programName, entryPoint, dir, ElevatorAdapter.getElevatorOptions());
     }
 
-    public static Set<String> adaptConfigurationToPerformanceMeasurement(String[] configuration) {
-        Set<String> performanceConfiguration = new HashSet<>();
+    public static List<String> getElevatorOptions() {
+        String[] options = {"BASE",
+                "WEIGHT",
+                "EMPTY",
+                "TWOTHIRDSFULL",
+                "EXECUTIVEFLOOR",
+                "OVERLOADED"};
 
-        for(int i = 0; i < configuration.length; i++) {
-            if(configuration[i].equals("true")) {
-                performanceConfiguration.add(ElevatorAdapter.CONFIGURATIONS[i]);
-            }
-        }
-
-        return performanceConfiguration;
+        return Arrays.asList(options);
     }
 
     @Override
-    public void execute(Set<String> configuration, int iteration) {
+    public void execute(Set<String> configuration, int iteration) throws IOException, InterruptedException {
+        String[] args = this.configurationAsMainArguments(configuration);
+        String[] newArgs = new String[args.length + 1];
 
-    }
+        newArgs[0] = iteration + "";
+        System.arraycopy(args, 0, newArgs, 1, args.length);
 
-    @Override
-    public void execute(Set<String> configuration) {
-        String[] argsArray = ElevatorAdapter.adaptConfigurationToProgram(configuration);
-        StringBuilder args = new StringBuilder();
-
-        for(String arg : argsArray) {
-            args.append(arg);
-            args.append(" ");
-        }
-
-//        BaseAdapter.executeJavaProgram(programName, ElevatorMain.ELEVATOR_MAIN, this.mainClass, this.directory, args.toString().trim());
+        this.execute(ElevatorMain.ELEVATOR_MAIN, newArgs);
     }
 
 }

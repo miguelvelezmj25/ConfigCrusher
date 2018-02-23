@@ -1,1 +1,16 @@
-{"baseTime":0,"baseTimeHumanReadable":1.91,"regionsToPerformanceTables":{"Region{regionID='program', startTime=-1, endTime=-1, duration=-1}":{"[COMPRESSOR]":80910000000,"[COMPRESSIONLEVEL]":5800000000}},"regionsToPerformanceTablesHumanReadable":{"Region{regionID='program', startTime=-1, endTime=-1, duration=-1}":{"[COMPRESSOR]":80.91,"[COMPRESSIONLEVEL]":5.8}}}
+{
+  "baseTime": 0,
+  "baseTimeHumanReadable": 1.91,
+  "regionsToPerformanceTables": {
+    "Region{regionID='program', startTime=-1, endTime=-1, duration=-1}": {
+      "[COMPRESSOR]": 80910000000,
+      "[COMPRESSIONLEVEL]": 5800000000
+    }
+  },
+  "regionsToPerformanceTablesHumanReadable": {
+    "Region{regionID='program', startTime=-1, endTime=-1, duration=-1}": {
+      "[COMPRESSOR]": 80.91,
+      "[COMPRESSIONLEVEL]": 5.8
+    }
+  }
+}

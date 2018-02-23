@@ -92,4 +92,18 @@ public class SPLatCompressionTest {
         System.out.println("Configurations executed: " + configurations.size());
     }
 
+    @Test
+    public void elevator() throws IOException {
+        String programName = "elevator";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Compression executor = new SPLatCompression(programName);
+        Set<Set<String>> configurations = executor.compressConfigurations(args);
+        System.out.println("Configurations executed: " + configurations.size());
+    }
+
 }

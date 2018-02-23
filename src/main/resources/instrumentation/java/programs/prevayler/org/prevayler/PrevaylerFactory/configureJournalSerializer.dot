@@ -1,0 +1,9 @@
+digraph configureJournalSerializer {
+node [shape=record];
+1022896347 [label="L0\lLINENUMBER 276 L0\lLDC \"ae8691fc-ab47-4074-886b-e42ab7f4f1f7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lLDC \"journal\"\lALOAD 1\lINVOKEVIRTUAL org/prevayler/PrevaylerFactory.configureJournalSerializer (Ljava/lang/String;Lorg/prevayler/foundation/serialization/Serializer;)V\lL1\lLINENUMBER 277 L1\lLDC \"ae8691fc-ab47-4074-886b-e42ab7f4f1f7\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 1022896347;
+1022896347 -> exit;
+1022896347[fontcolor="purple", penwidth=3, color="purple"];
+}

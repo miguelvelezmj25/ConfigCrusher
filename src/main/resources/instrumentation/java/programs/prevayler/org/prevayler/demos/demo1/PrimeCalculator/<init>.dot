@@ -1,0 +1,9 @@
+digraph <init> {
+node [shape=record];
+1395280084 [label="L0\lLINENUMBER 15 L0\lLDC \"ba6f9c04-6761-4d1e-8bad-3a0a007a2513\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 16 L1\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/demos/demo1/PrimeCalculator._prevayler : Lorg/prevayler/Prevayler;\lL2\lLINENUMBER 17 L2\lALOAD 0\lALOAD 1\lINVOKEINTERFACE org/prevayler/Prevayler.prevalentSystem ()Ljava/lang/Object;\lCHECKCAST org/prevayler/demos/demo1/NumberKeeper\lPUTFIELD org/prevayler/demos/demo1/PrimeCalculator._numberKeeper : Lorg/prevayler/demos/demo1/NumberKeeper;\lL3\lLINENUMBER 18 L3\lLDC \"ba6f9c04-6761-4d1e-8bad-3a0a007a2513\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 1395280084;
+1395280084 -> exit;
+1395280084[fontcolor="purple", penwidth=3, color="purple"];
+}

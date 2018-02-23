@@ -1,0 +1,9 @@
+digraph abort {
+node [shape=record];
+56672863 [label="L0\lLINENUMBER 211 L0\lLDC \"43a67ead-7dff-4ccf-be7e-85172d5983c4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 4\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"All transaction processing is now aborted. An IOException was thrown while \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" a .journal file.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lALOAD 1\lINVOKEVIRTUAL org/prevayler/foundation/Guided.abortTurn (Ljava/lang/String;Ljava/lang/Throwable;)V\lL1\lLINENUMBER 212 L1\lLDC \"43a67ead-7dff-4ccf-be7e-85172d5983c4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 56672863;
+56672863 -> exit;
+56672863[fontcolor="purple", penwidth=3, color="purple"];
+}

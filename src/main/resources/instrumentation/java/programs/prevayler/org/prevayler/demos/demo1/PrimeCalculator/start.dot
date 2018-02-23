@@ -1,0 +1,29 @@
+digraph start {
+node [shape=record];
+348869200 [label="L6\lLINENUMBER 28 L6\lFRAME APPEND [I]\lILOAD 3\lICONST_5\lIF_ICMPGT L7\l"];
+47026941 [label="L9\lLINENUMBER 38 L9\lFRAME SAME\lIINC 3 1\lGOTO L6\l"];
+660253824 [label="L0\lLINENUMBER 22 L0\lLDC \"83b22cd7-5ca8-47f4-94fb-78c50a32e08f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lICONST_0\lISTORE 1\lL1\lLINENUMBER 23 L1\lICONST_0\lISTORE 2\lL2\lLINENUMBER 24 L2\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/PrimeCalculator._numberKeeper : Lorg/prevayler/demos/demo1/NumberKeeper;\lINVOKEVIRTUAL org/prevayler/demos/demo1/NumberKeeper.lastNumber ()I\lIFNE L3\l"];
+106182409 [label="L8\lLINENUMBER 29 L8\lALOAD 0\lILOAD 3\lINVOKESPECIAL org/prevayler/demos/demo1/PrimeCalculator.isPrime (I)Z\lIFEQ L9\l"];
+1603064293 [label="L3\lFRAME APPEND [I I]\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/PrimeCalculator._numberKeeper : Lorg/prevayler/demos/demo1/NumberKeeper;\lL5\lLINENUMBER 26 L5\lINVOKEVIRTUAL org/prevayler/demos/demo1/NumberKeeper.lastNumber ()I\lICONST_1\lIADD\l"];
+1064229624 [label="L7\lLINENUMBER 40 L7\lFRAME SAME\lLDC \"83b22cd7-5ca8-47f4-94fb-78c50a32e08f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+1294094704 [label="L4\lFRAME SAME1 I\lISTORE 3\l"];
+1572600325 [label="L10\lLINENUMBER 31 L10\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/PrimeCalculator._prevayler : Lorg/prevayler/Prevayler;\lNEW org/prevayler/demos/demo1/NumberStorageTransaction\lDUP\lILOAD 3\lINVOKESPECIAL org/prevayler/demos/demo1/NumberStorageTransaction.\<init\> (I)V\lINVOKEINTERFACE org/prevayler/Prevayler.execute (Lorg/prevayler/Transaction;)V\lL11\lLINENUMBER 33 L11\lILOAD 3\lISTORE 1\lL12\lLINENUMBER 34 L12\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/PrimeCalculator._numberKeeper : Lorg/prevayler/demos/demo1/NumberKeeper;\lINVOKEVIRTUAL org/prevayler/demos/demo1/NumberKeeper.numbers ()Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lISTORE 2\l"];
+1750964246 [label="ICONST_2\lGOTO L4\l"];
+entry;
+exit;
+entry -> 660253824;
+348869200 -> 106182409;
+348869200 -> 1064229624;
+47026941 -> 348869200;
+660253824 -> 1603064293;
+660253824 -> 1750964246;
+106182409 -> 47026941;
+106182409 -> 1572600325;
+1603064293 -> 1294094704;
+1064229624 -> exit;
+1294094704 -> 348869200;
+1572600325 -> 47026941;
+1750964246 -> 1294094704;
+660253824[fontcolor="purple", penwidth=3, color="purple"];
+1064229624[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,17 +1,17 @@
 digraph monitor {
 node [shape=record];
-1336885649 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lGOTO L2\l"];
-289957693 [label="L0\lLINENUMBER 395 L0\lLDC \"8e867551-8386-407e-8b7f-f051cea92214\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lIFNULL L1\l"];
-305465452 [label="L1\lFRAME SAME\lNEW org/prevayler/foundation/monitor/SimpleMonitor\lDUP\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lINVOKESPECIAL org/prevayler/foundation/monitor/SimpleMonitor.\<init\> (Ljava/io/PrintStream;)V\l"];
-1586024177 [label="L2\lFRAME SAME1 org/prevayler/foundation/monitor/Monitor\lLDC \"8e867551-8386-407e-8b7f-f051cea92214\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+310641624 [label="L1\lFRAME SAME\lNEW org/prevayler/foundation/monitor/SimpleMonitor\lDUP\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lINVOKESPECIAL org/prevayler/foundation/monitor/SimpleMonitor.\<init\> (Ljava/io/PrintStream;)V\l"];
+221386635 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lGOTO L2\l"];
+1814929263 [label="L2\lFRAME SAME1 org/prevayler/foundation/monitor/Monitor\lLDC \"f91ab53d-7037-4b52-b957-0cc074dcde75\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+161790871 [label="L0\lLINENUMBER 395 L0\lLDC \"f91ab53d-7037-4b52-b957-0cc074dcde75\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lIFNULL L1\l"];
 entry;
 exit;
-entry -> 289957693;
-1336885649 -> 1586024177;
-289957693 -> 1336885649;
-289957693 -> 305465452;
-305465452 -> 1586024177;
-1586024177 -> exit;
-289957693[fontcolor="purple", penwidth=3, color="purple"];
-1586024177[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 161790871;
+310641624 -> 1814929263;
+221386635 -> 1814929263;
+1814929263 -> exit;
+161790871 -> 310641624;
+161790871 -> 221386635;
+1814929263[fontcolor="purple", penwidth=3, color="purple"];
+161790871[fontcolor="purple", penwidth=3, color="purple"];
 }

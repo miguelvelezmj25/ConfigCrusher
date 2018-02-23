@@ -1,9 +1,0 @@
-digraph <init> {
-node [shape=record];
-1955110590 [label="L0\lLINENUMBER 12 L0\lLDC \"6a0bca62-1493-463d-9341-2e0382e1f243\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lALOAD 2\lILOAD 3\lINVOKESPECIAL org/prevayler/implementation/Capsule.\<init\> (Ljava/lang/Object;Lorg/prevayler/foundation/serialization/Serializer;Z)V\lL1\lLINENUMBER 13 L1\lLDC \"6a0bca62-1493-463d-9341-2e0382e1f243\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
-entry;
-exit;
-entry -> 1955110590;
-1955110590 -> exit;
-1955110590[fontcolor="purple", penwidth=3, color="purple"];
-}

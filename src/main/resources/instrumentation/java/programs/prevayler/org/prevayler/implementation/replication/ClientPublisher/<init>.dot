@@ -1,0 +1,9 @@
+digraph <init> {
+node [shape=record];
+940411662 [label="L0\lLINENUMBER 35 L0\lLDC \"0e77772a-b9ad-4747-bc02-9c88f2732069\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 25 L1\lALOAD 0\lNEW org/prevayler/implementation/clock/BrokenClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/BrokenClock.\<init\> ()V\lPUTFIELD org/prevayler/implementation/replication/ClientPublisher._clock : Lorg/prevayler/implementation/clock/BrokenClock;\lL2\lLINENUMBER 26 L2\lALOAD 0\lNEW java/lang/Object\lDUP\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lPUTFIELD org/prevayler/implementation/replication/ClientPublisher._upToDateMonitor : Ljava/lang/Object;\lL3\lLINENUMBER 27 L3\lALOAD 0\lNEW java/lang/Object\lDUP\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lPUTFIELD org/prevayler/implementation/replication/ClientPublisher._myCapsuleMonitor : Ljava/lang/Object;\lL4\lLINENUMBER 36 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"The replication logic is still under development.\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL5\lLINENUMBER 37 L5\lALOAD 0\lALOAD 1\lALOAD 2\lILOAD 3\lINVOKEVIRTUAL org/prevayler/foundation/network/OldNetworkImpl.openSocket (Ljava/lang/String;I)Lorg/prevayler/foundation/network/ObjectSocket;\lPUTFIELD org/prevayler/implementation/replication/ClientPublisher._server : Lorg/prevayler/foundation/network/ObjectSocket;\lL6\lLINENUMBER 38 L6\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/replication/ClientPublisher.startListening ()V\lL7\lLINENUMBER 39 L7\lLDC \"0e77772a-b9ad-4747-bc02-9c88f2732069\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+entry;
+exit;
+entry -> 940411662;
+940411662 -> exit;
+940411662[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,17 +1,17 @@
 digraph clock {
 node [shape=record];
-1574589587 [label="L0\lLINENUMBER 155 L0\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
-128511924 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"9bb5c065-dae9-4b49-aa83-c59277e29146\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
-1383702986 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
-1416760495 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
+768583959 [label="L0\lLINENUMBER 155 L0\lLDC \"fcfcda70-6716-4706-bf19-835b6fa56a9d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lIFNULL L1\l"];
+1159303129 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
+444638058 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
+969207075 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"fcfcda70-6716-4706-bf19-835b6fa56a9d\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
 entry;
 exit;
-1574589587 -> 1383702986;
-1574589587 -> 1416760495;
-entry -> 1574589587;
-128511924 -> exit;
-1383702986 -> 128511924;
-1416760495 -> 128511924;
-1574589587[fontcolor="purple", penwidth=3, color="purple"];
-128511924[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 768583959;
+768583959 -> 1159303129;
+768583959 -> 444638058;
+1159303129 -> 969207075;
+444638058 -> 969207075;
+969207075 -> exit;
+768583959[fontcolor="purple", penwidth=3, color="purple"];
+969207075[fontcolor="purple", penwidth=3, color="purple"];
 }

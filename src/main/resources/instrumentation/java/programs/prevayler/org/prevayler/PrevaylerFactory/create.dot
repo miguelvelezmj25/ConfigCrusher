@@ -1,16 +1,9 @@
 digraph create {
 node [shape=record];
-613453361 [label="L4\lLINENUMBER 330 L4\lLDC \"2ec348e3-7588-4ac7-a7a9-556c9e88fe12\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lNEW org/prevayler/implementation/replication/ServerListener\lDUP\lALOAD 2\lNEW org/prevayler/foundation/network/OldNetworkImpl\lDUP\lINVOKESPECIAL org/prevayler/foundation/network/OldNetworkImpl.\<init\> ()V\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._serverPort : I\lINVOKESPECIAL org/prevayler/implementation/replication/ServerListener.\<init\> (Lorg/prevayler/implementation/publishing/TransactionPublisher;Lorg/prevayler/foundation/network/OldNetworkImpl;I)V\lPOP\l"];
-663041963 [label="L3\lLINENUMBER 332 L3\lFRAME APPEND [org/prevayler/implementation/snapshot/GenericSnapshotManager org/prevayler/implementation/publishing/TransactionPublisher]\lNEW org/prevayler/implementation/PrevaylerImpl\lDUP\lALOAD 1\lALOAD 2\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journalSerializer ()Lorg/prevayler/foundation/serialization/Serializer;\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._transactionDeepCopyMode : Z\lINVOKESPECIAL org/prevayler/implementation/PrevaylerImpl.\<init\> (Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;Lorg/prevayler/implementation/publishing/TransactionPublisher;Lorg/prevayler/foundation/serialization/Serializer;Z)V\lLDC \"2ec348e3-7588-4ac7-a7a9-556c9e88fe12\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"50e7dc63-c68b-4223-b833-2bd723b6dbd5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
-475078194 [label="L0\lLINENUMBER 327 L0\lLDC \"50e7dc63-c68b-4223-b833-2bd723b6dbd5\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.snapshotManager ()Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;\lASTORE 1\lL1\lLINENUMBER 328 L1\lALOAD 0\lALOAD 1\lINVOKESPECIAL org/prevayler/PrevaylerFactory.publisher (Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;)Lorg/prevayler/implementation/publishing/TransactionPublisher;\lASTORE 2\lL2\lLINENUMBER 329 L2\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._serverPort : I\lICONST_M1\lIF_ICMPEQ L3\l"];
+894086915 [label="L0\lLINENUMBER 327 L0\lLDC \"cd090656-92a5-4134-ad24-3ef4e85afa8b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.snapshotManager ()Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;\lASTORE 1\lL1\lLINENUMBER 328 L1\lALOAD 0\lALOAD 1\lINVOKESPECIAL org/prevayler/PrevaylerFactory.publisher (Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;)Lorg/prevayler/implementation/publishing/TransactionPublisher;\lASTORE 2\lL2\lLINENUMBER 332 L2\lNEW org/prevayler/implementation/PrevaylerImpl\lDUP\lALOAD 1\lALOAD 2\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journalSerializer ()Lorg/prevayler/foundation/serialization/Serializer;\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._transactionDeepCopyMode : Z\lLDC \"cd090656-92a5-4134-ad24-3ef4e85afa8b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lINVOKESPECIAL org/prevayler/implementation/PrevaylerImpl.\<init\> (Lorg/prevayler/implementation/snapshot/GenericSnapshotManager;Lorg/prevayler/implementation/publishing/TransactionPublisher;Lorg/prevayler/foundation/serialization/Serializer;Z)V\lARETURN\l"];
 entry;
 exit;
-entry -> 475078194;
-613453361 -> 663041963;
-663041963 -> exit;
-475078194 -> 613453361;
-475078194 -> 663041963;
-613453361[fontcolor="purple", penwidth=3, color="purple"];
-663041963[fontcolor="purple", penwidth=3, color="purple"];
-475078194[fontcolor="purple", penwidth=3, color="purple"];
+entry -> 894086915;
+894086915 -> exit;
+894086915[fontcolor="purple", penwidth=3, color="purple"];
 }

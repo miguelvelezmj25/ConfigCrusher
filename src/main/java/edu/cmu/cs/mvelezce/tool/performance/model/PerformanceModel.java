@@ -38,17 +38,6 @@ public class PerformanceModel {
         this.regionsToPerformanceTablesHumanReadable = PerformanceModel.toHumanReadablePerformance(this.regionsToPerformanceTables);
     }
 
-//    public PerformanceModel(long baseTime, double baseStd, Map<Region, Map<Set<String>, Long>> regionsToPerformanceTables, Map<Region, Map<Set<String>, Double>> regionsToStdTables) {
-//        this.baseTime = baseTime;
-//        this.baseStd = baseStd;
-//        this.regionsToPerformanceTables = regionsToPerformanceTables;
-//        this.regionsToStdTables = regionsToStdTables;
-//
-//        this.baseTimeHumanReadable = DefaultPerformanceEntry.toHumanReadable(DefaultPerformanceEntry.toSeconds(this.baseTime));
-//        this.regionsToPerformanceTablesHumanReadable = PerformanceModel.toHumanReadablePerformance(this.regionsToPerformanceTables);
-//        this.regionsToStdTablesHumanReadable = PerformanceModel.toHumanReadableStd(this.regionsToStdTables);
-//    }
-
     /**
      * The assumption is that the values in the tables are in nanoseconds.
      *

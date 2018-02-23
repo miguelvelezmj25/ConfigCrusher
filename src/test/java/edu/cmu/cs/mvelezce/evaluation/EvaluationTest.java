@@ -2,6 +2,8 @@ package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEvaluationExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.Family;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.model.FamilyModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.execute.FeaturewiseExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePerformanceModelBuilder;
@@ -38,6 +40,7 @@ import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerforman
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -502,6 +505,24 @@ public class EvaluationTest {
         List<Coverage> coverageList = splat.readFileCoverage();
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+    }
+
+    @Test
+    public void elevatorFamily() throws IOException {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder builder = new FamilyModelBuilder(programName);
+        PerformanceModel performanceModel = builder.createModel(args);
+
+//        SPLat splat = new SPLat(programName);
+//        List<Coverage> coverageList = splat.readFileCoverage();
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
     }
 
     @Test

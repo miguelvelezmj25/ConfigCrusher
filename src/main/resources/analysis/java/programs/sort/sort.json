@@ -1,1 +1,4211 @@
-[{"region":{"regionID":"68a6529b-6750-4e7a-a3a1-920217100a87","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"MergeProcessor","regionMethod":"finish()V","startBytecodeIndex":106,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["UNIQUE"]]},{"region":{"regionID":"bdbe2ca8-0057-4ab0-b04d-c8e2b4659fa9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":128,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"fbeee7c9-5d8f-4149-b354-d79ce61e0443","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":289,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"eb3eca3f-6f49-4275-82e5-8cef89c62b47","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":55,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"e5fcc94b-ed3f-4d03-9122-b88c27b7d468","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":83,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"68473eb4-0240-42be-b9fe-d3e26985c0e5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"TrimBlanksStringComparator","regionMethod":"findEndTrimBlanks(Ljava/lang/CharSequence;)I","startBytecodeIndex":30,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"e162c9e0-a42e-414c-a17a-8231eefcd4b3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.io","regionClass":"WriterOutput","regionMethod":"finish()V","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"87741079-527e-4e67-9e48-cf6db8888138","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":276,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"4178f33a-5c67-4bc8-aa63-1165869ac4e5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortArguments","regionMethod":"getFiles()[Ljava/io/File;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"675cedf4-e8a3-4a35-a0b7-1e49d4223a18","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"OS$2","regionMethod":"isCurrent(Ljava/lang/String;)Z","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"07117634-a72d-4009-b73e-7e7b1bbaabec","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":182,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"a34f0566-49ce-4c55-ae39-f0921d13efd1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":255,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"a869dcf7-774a-488e-900b-81d72a2f9ac9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":319,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"0eb55038-a35b-4dab-b1a2-cc5eacdd9766","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":106,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"21689827-1e9a-4b2b-b397-783d6283122b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"getMergeProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE"]]},{"region":{"regionID":"7e167f02-2f35-4c2f-a5e6-acd83b99aada","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":67,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"311bc90b-874b-482c-a458-634494e57ec9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"TrimBlanksStringComparator","regionMethod":"findEndTrimBlanks(Ljava/lang/CharSequence;)I","startBytecodeIndex":24,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"7d98f414-bc76-4b73-b884-19cc823e7b25","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"MergeProcessor","regionMethod":"finish()V","startBytecodeIndex":101,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["UNIQUE"]]},{"region":{"regionID":"546f0f41-470e-46d9-a58e-2c4e03759372","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"applySign(IZZ)I","startBytecodeIndex":5,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"0295d4ee-7d4a-4a9b-984d-df3e1dd1ad53","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"MergeProcessor","regionMethod":"finish()V","startBytecodeIndex":121,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["UNIQUE"]]},{"region":{"regionID":"893fba8c-a875-4359-ba7f-6250080288af","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":313,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"df30f2f7-a64f-4b23-9a60-cc986ec07ddb","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":135,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"2a5233fa-8a27-41c6-a012-6811d69587ed","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":125,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"01f730c9-3ee4-4bbb-a258-e854a70eea34","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":383,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"afc4a3c4-3a10-462c-b664-cabf14d7f42d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"isWildcardFileName(Ljava/lang/String;)Z","startBytecodeIndex":21,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"c8253733-7c5f-4319-9a4f-f24a3fc1082e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":115,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"9a9057ae-a753-4b33-b502-a1e2a33257ae","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortProcessor","regionMethod":"finish()V","startBytecodeIndex":28,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"b4d872ea-cfd4-4063-8d35-5112f1658251","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ReverseOrderComparator","regionMethod":"reverse(Ljava/util/Comparator;)Ljava/util/Comparator;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"a3e0cf0f-879a-4d5f-8ddd-80f57db4a96a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"AbstractSortProcessor","regionMethod":"initComparator()Ljava/util/Comparator;","startBytecodeIndex":61,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","GENERALNUMRICSORT"]]},{"region":{"regionID":"70c407b8-8d4b-415c-9d89-7535c39cd99f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"MergeProcessor","regionMethod":"finish()V","startBytecodeIndex":19,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["UNIQUE"]]},{"region":{"regionID":"c47a45f8-3275-4e2c-9e8f-a6ffea2f6b44","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"<clinit>()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"55fbaebd-d01f-42a4-816f-6aa0fd444501","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":165,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"2251f30b-9fa6-4551-a7b7-f166e859186f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"getCheckProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":22,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"a6984c88-b395-4e29-8490-41a94375780d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"MergeProcessor","regionMethod":"finish()V","startBytecodeIndex":151,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["UNIQUE"]]},{"region":{"regionID":"8646c810-7913-454c-b731-044ef8c5a3d8","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.command","regionClass":"ExitValueException","regionMethod":"<init>(Ljava/lang/String;I)V","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"94dd9c02-12a5-459a-ba42-5d2367e7ed55","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":254,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"d6e3946c-d586-4e9a-9c75-b3e79b27050f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":87,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"7123d0b5-6685-4a3c-86bf-bd64b70326e2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":69,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"ff2af893-a150-4b1f-b4d3-5ddda3c7baac","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"CheckProcessor","regionMethod":"processLine(Lorg/unix4j/sort/line/Line;)Z","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"3f91dcb1-63fb-4438-af09-f6f2b2adcf23","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"AbstractSortProcessor","regionMethod":"initComparator()Ljava/util/Comparator;","startBytecodeIndex":105,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK","REVERSE"]]},{"region":{"regionID":"3a637ec3-a005-42db-b11d-222adf0c01bd","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"TrimBlanksStringComparator","regionMethod":"findEnd(Ljava/lang/String;)I","startBytecodeIndex":7,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"8185454d-0734-44fb-a95d-206667e72362","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"skipLeadingZeroChars(Ljava/lang/CharSequence;IIC)I","startBytecodeIndex":2,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"b5e44e00-8587-405f-b5ec-db8e7962143a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"AbstractSortProcessor","regionMethod":"initComparator()Ljava/util/Comparator;","startBytecodeIndex":68,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"d771e407-6909-4e5d-9986-90b62cb8a31a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"StringUtil","regionMethod":"findStartTrimWhitespace(Ljava/lang/CharSequence;I)I","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"7594c913-0dc8-48cf-b986-bdef20d6c3f3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"OS","regionMethod":"current()Lorg/unix4j/sort/util/OS;","startBytecodeIndex":22,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"89c68db9-c867-49fb-a7d1-42cda16d0f24","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":353,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"bc26b567-4184-488b-87a8-8a2bb11f847f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"TrimBlanksStringComparator","regionMethod":"findStart(Ljava/lang/String;)I","startBytecodeIndex":7,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"a74840a7-0552-4a6f-af1d-65e92637ecad","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"AbstractSortProcessor","regionMethod":"initComparator()Ljava/util/Comparator;","startBytecodeIndex":24,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","NUMBERICSORT","UNIQUE","CHECK"]]},{"region":{"regionID":"e8000d48-6337-492f-8290-b05dd10e2fbb","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":66,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"c66f9ac2-7b8d-43cb-8a3e-663978a7a0ee","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"MergeProcessor","regionMethod":"finish()V","startBytecodeIndex":46,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["UNIQUE"]]},{"region":{"regionID":"118c3049-00b5-40f0-b602-154bc88ea893","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"StringUtil","regionMethod":"findStartTrimWhitespace(Ljava/lang/CharSequence;I)I","startBytecodeIndex":24,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"a48b0651-1d04-4b5d-9e89-0cf90351ae7d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":131,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"8a7910ad-ff09-4c52-b306-7f9a8fb05cf7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":92,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"7a928c87-bad0-4075-ad30-78bdf720f17d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":407,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"1854ab6e-b9ac-4637-b84f-430ca3052f9a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":97,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"39d3b4a6-6e90-4dd0-bdff-6072d0fd1c86","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"CheckProcessor","regionMethod":"processLine(Lorg/unix4j/sort/line/Line;)Z","startBytecodeIndex":21,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"13744909-2f24-4370-847d-afb1bfb134f6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"AbstractSortProcessor","regionMethod":"initComparator()Ljava/util/Comparator;","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"835da5db-36c8-46f2-b6fe-f8abb2c98bed","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":231,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"be3a2687-433b-4846-a63a-3f70f74d2aed","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"MergeProcessor","regionMethod":"finish()V","startBytecodeIndex":140,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["UNIQUE"]]},{"region":{"regionID":"6db79226-9ac6-47e8-b2e5-a67407cb4ea1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"UniqueSortProcessor","regionMethod":"finish()V","startBytecodeIndex":21,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"265b2784-0071-4967-b799-8f19a1acacb6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":112,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"c4061cd2-f347-4fc0-9ac9-c04b215cd374","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"getFileNameFilter(Ljava/lang/String;)Ljava/io/FilenameFilter;","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"19f62766-bd7c-4d48-a018-31a967dcad2a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":368,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"3401e754-ee99-44e3-af2e-46eb521daf4d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"getSortProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":44,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"6dd7d7d1-22a6-4841-b969-8e81cbb3948f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":146,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"f90fd567-402c-4180-ab8a-5b95f46b3934","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":248,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"f181f310-46fd-4243-9e83-c389ec3c6fa7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"StringUtil","regionMethod":"findEndTrimWhitespace(Ljava/lang/CharSequence;)I","startBytecodeIndex":23,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"25cdb8c7-235f-4707-8a9e-618805076f63","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":145,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"905d73b3-5f6a-48a7-a453-a94f187b3370","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"applySign(IZZ)I","startBytecodeIndex":16,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"895e42bb-dee4-4832-80b6-bdf20f1954e3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":247,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"61255d77-87bc-46f3-909d-a7abd43a4814","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.io","regionClass":"WriterOutput","regionMethod":"processLine(Lorg/unix4j/sort/line/Line;)Z","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"c73a3539-c2f2-4e34-806d-3ec15f1eac57","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":353,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"740b62fe-2953-4fb4-b920-1ea4efacf216","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"TrimBlanksStringComparator","regionMethod":"findStartTrimBlanks(Ljava/lang/CharSequence;)I","startBytecodeIndex":31,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"b882fc47-a5c9-4d09-b387-deb1920eacdc","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"getCheckProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":68,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"8c606293-239a-4f01-90b2-5db819e9217f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"OS$3","regionMethod":"isCurrent(Ljava/lang/String;)Z","startBytecodeIndex":15,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"bedfa44c-0d5e-41dd-a15e-fdf1e096d4e8","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":262,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"481070b6-de67-49ef-b8c0-86e9ffdd787b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":36,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"b0f31d7e-032c-44a8-bc4a-1ce94bffa16a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.io","regionClass":"FileInput","regionMethod":"multiple([Ljava/io/File;)Ljava/util/List;","startBytecodeIndex":15,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"2531b7c7-22fd-4f5c-babd-db38561b82fc","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":140,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"7fa8672f-ee87-432f-b4f8-aa5db358d9ea","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"TrimBlanksStringComparator","regionMethod":"findStartTrimBlanks(Ljava/lang/CharSequence;)I","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"e55256ce-c084-4ba7-ae84-733a4c83d65e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":325,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"51f73053-009f-4dc6-ab56-24532d3472a4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"getCheckProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":79,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"1efe02cb-dfde-44b2-a43d-15e8fe59a496","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":162,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"ca565e64-69a5-4fe9-92cc-985988841e64","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"OS$3","regionMethod":"isCurrent(Ljava/lang/String;)Z","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"6688c6c1-fec9-4548-9375-85d3c99c0dd7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"listFiles(Ljava/io/File;Ljava/util/List;Ljava/util/List;)V","startBytecodeIndex":37,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"56c80882-44a4-4564-b697-05324f39277a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"OS$1","regionMethod":"isCurrent(Ljava/lang/String;)Z","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"2ef33d57-c5dc-49cb-82f4-b8825c3a554e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"AbstractSortProcessor","regionMethod":"initComparator()Ljava/util/Comparator;","startBytecodeIndex":88,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"0165cfe6-abd4-4eb7-971a-427b7f86ac7e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":106,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"ee6fc550-2bd2-4bef-b289-567caf439df5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":120,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"97e3625e-4f90-4d3a-87db-4e20e91642d6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":72,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"bd681d46-cfef-4daf-b149-ad36afd6f62d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"execute(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE"]]},{"region":{"regionID":"27f309d3-a2e3-441a-8d99-cf9ea4837939","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"8fbc9f13-faed-40ab-8915-41aa66e57491","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":320,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"7d3c559a-bf93-4258-a82c-fb18b529d0d3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"getMergeProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":36,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE"]]},{"region":{"regionID":"1cbbe8ce-efcf-4197-8b27-150805b878ad","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":62,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"e9615556-f195-424c-a3cf-94e575de726d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"execute(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":24,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"a9b62f1e-11c1-43bb-a1f4-882dafa84c54","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":29,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"5999c5b7-3610-4f53-a7c3-0a780ca74ce5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":163,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"530817f1-722d-47b2-815f-27b8bf8923aa","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"getFileNameFilter(Ljava/lang/String;)Ljava/io/FilenameFilter;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"2f59f82d-aa77-4928-bc9d-68e3220b63f5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":91,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"7094d5ff-c948-45e2-b7ac-0a6a7c71bc12","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"AbstractSortProcessor","regionMethod":"initComparator()Ljava/util/Comparator;","startBytecodeIndex":47,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","NUMBERICSORT","UNIQUE","CHECK","GENERALNUMRICSORT"]]},{"region":{"regionID":"76d82188-303f-45ad-949d-9ffcb94248f6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"StringUtil","regionMethod":"findEndTrimWhitespace(Ljava/lang/CharSequence;)I","startBytecodeIndex":8,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"aa8990f0-902a-46ec-98ac-5e499e66097a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.context","regionClass":"DefaultExecutionContext","regionMethod":"getLocale()Ljava/util/Locale;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","NUMBERICSORT","UNIQUE","CHECK"]]},{"region":{"regionID":"d26bce12-d94b-4d57-9a5d-571ca84e72d7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":312,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"3815166c-9e8d-4236-90c0-f8644ac54067","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.io","regionClass":"WriterOutput","regionMethod":"finish()V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"2b388208-c116-46e5-9a1a-69c8d2d85ab4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"applySign(IZZ)I","startBytecodeIndex":1,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"5b9340cc-874e-49f9-bf88-fdb8a2219010","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":269,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"fa510f6d-3233-462c-83e3-b017dff58467","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.io","regionClass":"WriterOutput","regionMethod":"processLine(Lorg/unix4j/sort/line/Line;)Z","startBytecodeIndex":60,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"97810e13-9fa2-4908-b570-e61018222dab","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":284,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"d3987c32-ce48-456f-85dd-9cd56d64fd1b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":412,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"9e7d0e14-fb72-43ad-b902-6146a6c3d84c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"isWildcardFileName(Ljava/lang/String;)Z","startBytecodeIndex":88,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"71565d4f-44d0-49db-bc61-ba5d90ba37c4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"expandFiles(Ljava/io/File;[Ljava/lang/String;)Ljava/util/List;","startBytecodeIndex":23,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"27b4a7e5-ae63-4df3-b6da-c30a2a8e0d6b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.io","regionClass":"FileInput","regionMethod":"multiple(Ljava/util/List;)Ljava/util/List;","startBytecodeIndex":23,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"4b39fc6e-5595-481e-ac5c-b653183d81be","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortArguments","regionMethod":"getComparator()Ljava/util/Comparator;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"6ed87f94-8afc-410e-9b5c-dd776c141bac","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":262,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"2d0c699a-efd9-4f77-b4d6-4b7751cf237e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":170,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"74860c4f-1a83-4f08-a820-00cd9bb24217","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"listFiles(Ljava/io/File;Ljava/util/List;Ljava/util/List;)V","startBytecodeIndex":73,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"8126d9fa-58da-42d1-ad0f-a6542f847ece","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"getSortProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":72,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"79a77305-ac7d-4ec6-90ca-509e933d1d31","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":50,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"fefc1997-37b5-461c-bf1a-3b575fb92867","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":403,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"7207403b-d8e7-4cb3-97bb-52628a352736","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"getCheckProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":41,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"0ec8a0bc-d821-4c8b-a9c9-c0ea4a870efb","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"listFiles(Ljava/io/File;Ljava/util/List;Ljava/util/List;)V","startBytecodeIndex":53,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"11ba5ec1-d09c-4cf3-8568-7a970eb13ff7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"skipGroupingSeparatorChars(Ljava/lang/CharSequence;IIC)I","startBytecodeIndex":2,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"918e1b63-1708-407f-8c9e-5bf73fb165a6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"isWildcardFileName(Ljava/lang/String;)Z","startBytecodeIndex":79,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"3ec62452-b6b6-42c1-b075-32cc4185aae5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"OS","regionMethod":"current()Lorg/unix4j/sort/util/OS;","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"0962c123-e763-4b18-8d42-67077e691316","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"MergeProcessor","regionMethod":"finish()V","startBytecodeIndex":90,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["UNIQUE"]]},{"region":{"regionID":"aa9ed362-851f-4557-a3d2-599f5b756727","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":413,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"7efb1ce2-9746-4472-b2e2-bd1dddfca931","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":86,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"b927263f-84b6-4d52-880a-7f0d685b7552","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":418,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"1de56071-3a4a-454b-bd13-2dc3d53faf94","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":27,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"9059af23-fcf3-4627-95e7-49dc23e4c393","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":175,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"151b6185-f45d-4760-9b74-5df33473644f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":154,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"aac1c421-1208-4c8b-971c-add1b24d4305","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":346,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"8ea158d0-4d04-4fc0-92fc-fbb3e252bd23","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":140,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"ba83f45a-a9bf-45e0-b256-c471d47b9e9a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":41,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"c65231b6-220f-44c9-adeb-f8163349de3a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":158,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"a536c2cc-2bde-4368-bc61-1adea76fa268","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":240,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"1ae79657-53df-4382-81d0-c2bacc54bf44","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":243,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"6f90f5dd-ba5d-47c2-b51f-f7db008991f9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"UniqueSortProcessor","regionMethod":"finish()V","startBytecodeIndex":41,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"676d6472-5590-4177-ae3f-ecde2450a075","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"OS$4","regionMethod":"isCurrent(Ljava/lang/String;)Z","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"e71d888c-86fa-49a1-a364-66df4f2ba170","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":178,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"60c8f51c-7f9a-4040-9b6b-d2859c34cdf5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortArguments","regionMethod":"getPaths()[Ljava/lang/String;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"d6e6673a-7c57-4ad8-b5ba-f5aa747f7d4b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":139,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"b121a1fb-466a-44b3-93fc-aaa69bedaa3e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":235,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"4c4dccaf-8843-4966-87d0-fe2eea9ffb32","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":200,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"c8eab547-6370-42c2-99e5-09317dfb1e45","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":96,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"949829c7-b033-49e5-83d5-0047e104edd1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":427,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"a23538c3-99c4-4989-b34e-6c1477303635","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"skipLeadingZeroChars(Ljava/lang/CharSequence;IIC)I","startBytecodeIndex":18,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"847b5cb8-fc62-45d1-85ad-8280a72da7ad","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":187,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"150012aa-0b59-4d42-8d70-189119d61407","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":277,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"31076d9a-522c-493d-8eb5-4a9a803ae18f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":208,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"e52fc28c-41de-4cd5-8e07-019130b94d63","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"TrimBlanksStringComparator","regionMethod":"findEndTrimBlanks(Ljava/lang/CharSequence;)I","startBytecodeIndex":8,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"b88a019b-aa13-4a4a-aa6d-7647d5599882","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortCommand","regionMethod":"getSortProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"7a52afa2-3a6c-41b4-9a27-f2ebe061e6fd","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":358,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"5688c96a-8359-4b1e-9283-ee9cc0fd55db","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"isWildcardFileName(Ljava/lang/String;)Z","startBytecodeIndex":15,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"5ce5dbf7-1248-49b8-b5b5-36e05ad9cf5b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"ScientificNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I","startBytecodeIndex":118,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"11bea345-51ca-4490-8d49-19e85bceb0d8","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.context","regionClass":"DefaultExecutionContext","regionMethod":"getCurrentDirectory()Ljava/io/File;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"addcd8b8-0b27-4721-9157-7c122a2037d1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I","startBytecodeIndex":398,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"fefd4aca-5fe7-4ec3-a83e-00d75b95132f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":74,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"dfda9e39-b198-470d-9e7e-990c42d33ae1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"TrimBlanksStringComparator","regionMethod":"findStartTrimBlanks(Ljava/lang/CharSequence;)I","startBytecodeIndex":25,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"f2e527eb-e3d3-4397-b7e6-dda52d5aab08","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I","startBytecodeIndex":422,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"b53cfb21-3ce5-48d4-ae82-183646a2516f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"SortProcessor","regionMethod":"finish()V","startBytecodeIndex":53,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","UNIQUE","CHECK"]]},{"region":{"regionID":"ea5a9a8f-04aa-4073-a106-c7074ba54076","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util.sort","regionClass":"DecimalNumberStringComparator","regionMethod":"skipGroupingSeparatorChars(Ljava/lang/CharSequence;IIC)I","startBytecodeIndex":14,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]},{"region":{"regionID":"3bb29438-6855-4304-bbbb-8751f198f4e2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V","startBytecodeIndex":98,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"faabcece-1113-4f51-b9c4-9970d21dd06e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.util","regionClass":"FileUtil","regionMethod":"isWildcardFileName(Ljava/lang/String;)Z","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MERGE","CHECK"]]},{"region":{"regionID":"59a9eb78-56d1-450d-ae61-ee113f22aa27","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort.unix.sort","regionClass":"MergeProcessor","regionMethod":"finish()V","startBytecodeIndex":187,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["UNIQUE"]]}]
+[
+  {
+    "region": {
+      "regionID": "68a6529b-6750-4e7a-a3a1-920217100a87",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "MergeProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 106,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "UNIQUE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bdbe2ca8-0057-4ab0-b04d-c8e2b4659fa9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 128,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fbeee7c9-5d8f-4149-b354-d79ce61e0443",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 289,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "eb3eca3f-6f49-4275-82e5-8cef89c62b47",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 55,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e5fcc94b-ed3f-4d03-9122-b88c27b7d468",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 83,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "68473eb4-0240-42be-b9fe-d3e26985c0e5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "TrimBlanksStringComparator",
+      "regionMethod": "findEndTrimBlanks(Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 30,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e162c9e0-a42e-414c-a17a-8231eefcd4b3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.io",
+      "regionClass": "WriterOutput",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "87741079-527e-4e67-9e48-cf6db8888138",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 276,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4178f33a-5c67-4bc8-aa63-1165869ac4e5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortArguments",
+      "regionMethod": "getFiles()[Ljava/io/File;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "675cedf4-e8a3-4a35-a0b7-1e49d4223a18",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "OS$2",
+      "regionMethod": "isCurrent(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "07117634-a72d-4009-b73e-7e7b1bbaabec",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 182,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a34f0566-49ce-4c55-ae39-f0921d13efd1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 255,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a869dcf7-774a-488e-900b-81d72a2f9ac9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 319,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0eb55038-a35b-4dab-b1a2-cc5eacdd9766",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 106,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "21689827-1e9a-4b2b-b397-783d6283122b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "getMergeProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7e167f02-2f35-4c2f-a5e6-acd83b99aada",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 67,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "311bc90b-874b-482c-a458-634494e57ec9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "TrimBlanksStringComparator",
+      "regionMethod": "findEndTrimBlanks(Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7d98f414-bc76-4b73-b884-19cc823e7b25",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "MergeProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 101,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "UNIQUE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "546f0f41-470e-46d9-a58e-2c4e03759372",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "applySign(IZZ)I",
+      "startBytecodeIndex": 5,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0295d4ee-7d4a-4a9b-984d-df3e1dd1ad53",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "MergeProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 121,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "UNIQUE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "893fba8c-a875-4359-ba7f-6250080288af",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 313,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "df30f2f7-a64f-4b23-9a60-cc986ec07ddb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 135,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2a5233fa-8a27-41c6-a012-6811d69587ed",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 125,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "01f730c9-3ee4-4bbb-a258-e854a70eea34",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 383,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "afc4a3c4-3a10-462c-b664-cabf14d7f42d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "isWildcardFileName(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 21,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c8253733-7c5f-4319-9a4f-f24a3fc1082e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 115,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9a9057ae-a753-4b33-b502-a1e2a33257ae",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 28,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b4d872ea-cfd4-4063-8d35-5112f1658251",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ReverseOrderComparator",
+      "regionMethod": "reverse(Ljava/util/Comparator;)Ljava/util/Comparator;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a3e0cf0f-879a-4d5f-8ddd-80f57db4a96a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "AbstractSortProcessor",
+      "regionMethod": "initComparator()Ljava/util/Comparator;",
+      "startBytecodeIndex": 61,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "GENERALNUMRICSORT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "70c407b8-8d4b-415c-9d89-7535c39cd99f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "MergeProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 19,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "UNIQUE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c47a45f8-3275-4e2c-9e8f-a6ffea2f6b44",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "<clinit>()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "55fbaebd-d01f-42a4-816f-6aa0fd444501",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 165,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2251f30b-9fa6-4551-a7b7-f166e859186f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "getCheckProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 22,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a6984c88-b395-4e29-8490-41a94375780d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "MergeProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 151,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "UNIQUE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8646c810-7913-454c-b731-044ef8c5a3d8",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.command",
+      "regionClass": "ExitValueException",
+      "regionMethod": "<init>(Ljava/lang/String;I)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "94dd9c02-12a5-459a-ba42-5d2367e7ed55",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 254,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d6e3946c-d586-4e9a-9c75-b3e79b27050f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 87,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7123d0b5-6685-4a3c-86bf-bd64b70326e2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 69,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ff2af893-a150-4b1f-b4d3-5ddda3c7baac",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "CheckProcessor",
+      "regionMethod": "processLine(Lorg/unix4j/sort/line/Line;)Z",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3f91dcb1-63fb-4438-af09-f6f2b2adcf23",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "AbstractSortProcessor",
+      "regionMethod": "initComparator()Ljava/util/Comparator;",
+      "startBytecodeIndex": 105,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3a637ec3-a005-42db-b11d-222adf0c01bd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "TrimBlanksStringComparator",
+      "regionMethod": "findEnd(Ljava/lang/String;)I",
+      "startBytecodeIndex": 7,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8185454d-0734-44fb-a95d-206667e72362",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "skipLeadingZeroChars(Ljava/lang/CharSequence;IIC)I",
+      "startBytecodeIndex": 2,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b5e44e00-8587-405f-b5ec-db8e7962143a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "AbstractSortProcessor",
+      "regionMethod": "initComparator()Ljava/util/Comparator;",
+      "startBytecodeIndex": 68,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d771e407-6909-4e5d-9986-90b62cb8a31a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "findStartTrimWhitespace(Ljava/lang/CharSequence;I)I",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7594c913-0dc8-48cf-b986-bdef20d6c3f3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "OS",
+      "regionMethod": "current()Lorg/unix4j/sort/util/OS;",
+      "startBytecodeIndex": 22,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "89c68db9-c867-49fb-a7d1-42cda16d0f24",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 353,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bc26b567-4184-488b-87a8-8a2bb11f847f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "TrimBlanksStringComparator",
+      "regionMethod": "findStart(Ljava/lang/String;)I",
+      "startBytecodeIndex": 7,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a74840a7-0552-4a6f-af1d-65e92637ecad",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "AbstractSortProcessor",
+      "regionMethod": "initComparator()Ljava/util/Comparator;",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e8000d48-6337-492f-8290-b05dd10e2fbb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 66,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c66f9ac2-7b8d-43cb-8a3e-663978a7a0ee",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "MergeProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 46,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "UNIQUE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "118c3049-00b5-40f0-b602-154bc88ea893",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "findStartTrimWhitespace(Ljava/lang/CharSequence;I)I",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a48b0651-1d04-4b5d-9e89-0cf90351ae7d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 131,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8a7910ad-ff09-4c52-b306-7f9a8fb05cf7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 92,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7a928c87-bad0-4075-ad30-78bdf720f17d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 407,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1854ab6e-b9ac-4637-b84f-430ca3052f9a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 97,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "39d3b4a6-6e90-4dd0-bdff-6072d0fd1c86",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "CheckProcessor",
+      "regionMethod": "processLine(Lorg/unix4j/sort/line/Line;)Z",
+      "startBytecodeIndex": 21,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "13744909-2f24-4370-847d-afb1bfb134f6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "AbstractSortProcessor",
+      "regionMethod": "initComparator()Ljava/util/Comparator;",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "835da5db-36c8-46f2-b6fe-f8abb2c98bed",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 231,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "be3a2687-433b-4846-a63a-3f70f74d2aed",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "MergeProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 140,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "UNIQUE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6db79226-9ac6-47e8-b2e5-a67407cb4ea1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "UniqueSortProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 21,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "265b2784-0071-4967-b799-8f19a1acacb6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 112,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c4061cd2-f347-4fc0-9ac9-c04b215cd374",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "getFileNameFilter(Ljava/lang/String;)Ljava/io/FilenameFilter;",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "19f62766-bd7c-4d48-a018-31a967dcad2a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 368,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3401e754-ee99-44e3-af2e-46eb521daf4d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "getSortProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 44,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6dd7d7d1-22a6-4841-b969-8e81cbb3948f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 146,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f90fd567-402c-4180-ab8a-5b95f46b3934",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 248,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f181f310-46fd-4243-9e83-c389ec3c6fa7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "findEndTrimWhitespace(Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 23,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "25cdb8c7-235f-4707-8a9e-618805076f63",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 145,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "905d73b3-5f6a-48a7-a453-a94f187b3370",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "applySign(IZZ)I",
+      "startBytecodeIndex": 16,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "895e42bb-dee4-4832-80b6-bdf20f1954e3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 247,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "61255d77-87bc-46f3-909d-a7abd43a4814",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.io",
+      "regionClass": "WriterOutput",
+      "regionMethod": "processLine(Lorg/unix4j/sort/line/Line;)Z",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c73a3539-c2f2-4e34-806d-3ec15f1eac57",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 353,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "740b62fe-2953-4fb4-b920-1ea4efacf216",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "TrimBlanksStringComparator",
+      "regionMethod": "findStartTrimBlanks(Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 31,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b882fc47-a5c9-4d09-b387-deb1920eacdc",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "getCheckProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 68,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8c606293-239a-4f01-90b2-5db819e9217f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "OS$3",
+      "regionMethod": "isCurrent(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 15,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bedfa44c-0d5e-41dd-a15e-fdf1e096d4e8",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 262,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "481070b6-de67-49ef-b8c0-86e9ffdd787b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 36,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b0f31d7e-032c-44a8-bc4a-1ce94bffa16a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.io",
+      "regionClass": "FileInput",
+      "regionMethod": "multiple([Ljava/io/File;)Ljava/util/List;",
+      "startBytecodeIndex": 15,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2531b7c7-22fd-4f5c-babd-db38561b82fc",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 140,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7fa8672f-ee87-432f-b4f8-aa5db358d9ea",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "TrimBlanksStringComparator",
+      "regionMethod": "findStartTrimBlanks(Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e55256ce-c084-4ba7-ae84-733a4c83d65e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 325,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "51f73053-009f-4dc6-ab56-24532d3472a4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "getCheckProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 79,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1efe02cb-dfde-44b2-a43d-15e8fe59a496",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 162,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ca565e64-69a5-4fe9-92cc-985988841e64",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "OS$3",
+      "regionMethod": "isCurrent(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6688c6c1-fec9-4548-9375-85d3c99c0dd7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "listFiles(Ljava/io/File;Ljava/util/List;Ljava/util/List;)V",
+      "startBytecodeIndex": 37,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "56c80882-44a4-4564-b697-05324f39277a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "OS$1",
+      "regionMethod": "isCurrent(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2ef33d57-c5dc-49cb-82f4-b8825c3a554e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "AbstractSortProcessor",
+      "regionMethod": "initComparator()Ljava/util/Comparator;",
+      "startBytecodeIndex": 88,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0165cfe6-abd4-4eb7-971a-427b7f86ac7e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 106,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ee6fc550-2bd2-4bef-b289-567caf439df5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 120,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "97e3625e-4f90-4d3a-87db-4e20e91642d6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 72,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bd681d46-cfef-4daf-b149-ad36afd6f62d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "execute(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "27f309d3-a2e3-441a-8d99-cf9ea4837939",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8fbc9f13-faed-40ab-8915-41aa66e57491",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 320,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7d3c559a-bf93-4258-a82c-fb18b529d0d3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "getMergeProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 36,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1cbbe8ce-efcf-4197-8b27-150805b878ad",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 62,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e9615556-f195-424c-a3cf-94e575de726d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "execute(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a9b62f1e-11c1-43bb-a1f4-882dafa84c54",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 29,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "5999c5b7-3610-4f53-a7c3-0a780ca74ce5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 163,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "530817f1-722d-47b2-815f-27b8bf8923aa",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "getFileNameFilter(Ljava/lang/String;)Ljava/io/FilenameFilter;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2f59f82d-aa77-4928-bc9d-68e3220b63f5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 91,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7094d5ff-c948-45e2-b7ac-0a6a7c71bc12",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "AbstractSortProcessor",
+      "regionMethod": "initComparator()Ljava/util/Comparator;",
+      "startBytecodeIndex": 47,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "GENERALNUMRICSORT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "76d82188-303f-45ad-949d-9ffcb94248f6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "findEndTrimWhitespace(Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "aa8990f0-902a-46ec-98ac-5e499e66097a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.context",
+      "regionClass": "DefaultExecutionContext",
+      "regionMethod": "getLocale()Ljava/util/Locale;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d26bce12-d94b-4d57-9a5d-571ca84e72d7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 312,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3815166c-9e8d-4236-90c0-f8644ac54067",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.io",
+      "regionClass": "WriterOutput",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2b388208-c116-46e5-9a1a-69c8d2d85ab4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "applySign(IZZ)I",
+      "startBytecodeIndex": 1,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "5b9340cc-874e-49f9-bf88-fdb8a2219010",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 269,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fa510f6d-3233-462c-83e3-b017dff58467",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.io",
+      "regionClass": "WriterOutput",
+      "regionMethod": "processLine(Lorg/unix4j/sort/line/Line;)Z",
+      "startBytecodeIndex": 60,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "97810e13-9fa2-4908-b570-e61018222dab",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 284,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d3987c32-ce48-456f-85dd-9cd56d64fd1b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 412,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9e7d0e14-fb72-43ad-b902-6146a6c3d84c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "isWildcardFileName(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 88,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "71565d4f-44d0-49db-bc61-ba5d90ba37c4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "expandFiles(Ljava/io/File;[Ljava/lang/String;)Ljava/util/List;",
+      "startBytecodeIndex": 23,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "27b4a7e5-ae63-4df3-b6da-c30a2a8e0d6b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.io",
+      "regionClass": "FileInput",
+      "regionMethod": "multiple(Ljava/util/List;)Ljava/util/List;",
+      "startBytecodeIndex": 23,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4b39fc6e-5595-481e-ac5c-b653183d81be",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortArguments",
+      "regionMethod": "getComparator()Ljava/util/Comparator;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6ed87f94-8afc-410e-9b5c-dd776c141bac",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 262,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2d0c699a-efd9-4f77-b4d6-4b7751cf237e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 170,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "74860c4f-1a83-4f08-a820-00cd9bb24217",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "listFiles(Ljava/io/File;Ljava/util/List;Ljava/util/List;)V",
+      "startBytecodeIndex": 73,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8126d9fa-58da-42d1-ad0f-a6542f847ece",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "getSortProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 72,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "79a77305-ac7d-4ec6-90ca-509e933d1d31",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 50,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fefc1997-37b5-461c-bf1a-3b575fb92867",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 403,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7207403b-d8e7-4cb3-97bb-52628a352736",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "getCheckProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 41,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0ec8a0bc-d821-4c8b-a9c9-c0ea4a870efb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "listFiles(Ljava/io/File;Ljava/util/List;Ljava/util/List;)V",
+      "startBytecodeIndex": 53,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "11ba5ec1-d09c-4cf3-8568-7a970eb13ff7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "skipGroupingSeparatorChars(Ljava/lang/CharSequence;IIC)I",
+      "startBytecodeIndex": 2,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "918e1b63-1708-407f-8c9e-5bf73fb165a6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "isWildcardFileName(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 79,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3ec62452-b6b6-42c1-b075-32cc4185aae5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "OS",
+      "regionMethod": "current()Lorg/unix4j/sort/util/OS;",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0962c123-e763-4b18-8d42-67077e691316",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "MergeProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 90,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "UNIQUE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "aa9ed362-851f-4557-a3d2-599f5b756727",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 413,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7efb1ce2-9746-4472-b2e2-bd1dddfca931",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 86,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b927263f-84b6-4d52-880a-7f0d685b7552",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 418,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1de56071-3a4a-454b-bd13-2dc3d53faf94",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 27,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9059af23-fcf3-4627-95e7-49dc23e4c393",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 175,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "151b6185-f45d-4760-9b74-5df33473644f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 154,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "aac1c421-1208-4c8b-971c-add1b24d4305",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 346,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8ea158d0-4d04-4fc0-92fc-fbb3e252bd23",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 140,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ba83f45a-a9bf-45e0-b256-c471d47b9e9a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 41,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c65231b6-220f-44c9-adeb-f8163349de3a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 158,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a536c2cc-2bde-4368-bc61-1adea76fa268",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 240,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1ae79657-53df-4382-81d0-c2bacc54bf44",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 243,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6f90f5dd-ba5d-47c2-b51f-f7db008991f9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "UniqueSortProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 41,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "676d6472-5590-4177-ae3f-ecde2450a075",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "OS$4",
+      "regionMethod": "isCurrent(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e71d888c-86fa-49a1-a364-66df4f2ba170",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 178,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "60c8f51c-7f9a-4040-9b6b-d2859c34cdf5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortArguments",
+      "regionMethod": "getPaths()[Ljava/lang/String;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d6e6673a-7c57-4ad8-b5ba-f5aa747f7d4b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 139,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b121a1fb-466a-44b3-93fc-aaa69bedaa3e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 235,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4c4dccaf-8843-4966-87d0-fe2eea9ffb32",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 200,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c8eab547-6370-42c2-99e5-09317dfb1e45",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 96,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "949829c7-b033-49e5-83d5-0047e104edd1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 427,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a23538c3-99c4-4989-b34e-6c1477303635",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "skipLeadingZeroChars(Ljava/lang/CharSequence;IIC)I",
+      "startBytecodeIndex": 18,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "847b5cb8-fc62-45d1-85ad-8280a72da7ad",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 187,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "150012aa-0b59-4d42-8d70-189119d61407",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 277,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "31076d9a-522c-493d-8eb5-4a9a803ae18f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 208,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e52fc28c-41de-4cd5-8e07-019130b94d63",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "TrimBlanksStringComparator",
+      "regionMethod": "findEndTrimBlanks(Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b88a019b-aa13-4a4a-aa6d-7647d5599882",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortCommand",
+      "regionMethod": "getSortProcessor(Lorg/unix4j/sort/context/ExecutionContext;Lorg/unix4j/sort/processor/LineProcessor;Lorg/unix4j/sort/unix/sort/SortArguments;)Lorg/unix4j/sort/processor/LineProcessor;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7a52afa2-3a6c-41b4-9a27-f2ebe061e6fd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 358,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "5688c96a-8359-4b1e-9283-ee9cc0fd55db",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "isWildcardFileName(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 15,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "5ce5dbf7-1248-49b8-b5b5-36e05ad9cf5b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "ScientificNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 118,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "11bea345-51ca-4490-8d49-19e85bceb0d8",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.context",
+      "regionClass": "DefaultExecutionContext",
+      "regionMethod": "getCurrentDirectory()Ljava/io/File;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "addcd8b8-0b27-4721-9157-7c122a2037d1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compareAfterDecimals(Ljava/lang/CharSequence;IICZZLjava/lang/CharSequence;IICZZI)I",
+      "startBytecodeIndex": 398,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fefd4aca-5fe7-4ec3-a83e-00d75b95132f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 74,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "dfda9e39-b198-470d-9e7e-990c42d33ae1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "TrimBlanksStringComparator",
+      "regionMethod": "findStartTrimBlanks(Ljava/lang/CharSequence;)I",
+      "startBytecodeIndex": 25,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f2e527eb-e3d3-4397-b7e6-dda52d5aab08",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "compare(Ljava/lang/CharSequence;IILjava/lang/CharSequence;II)I",
+      "startBytecodeIndex": 422,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b53cfb21-3ce5-48d4-ae82-183646a2516f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "SortProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 53,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "UNIQUE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ea5a9a8f-04aa-4073-a106-c7074ba54076",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util.sort",
+      "regionClass": "DecimalNumberStringComparator",
+      "regionMethod": "skipGroupingSeparatorChars(Ljava/lang/CharSequence;IIC)I",
+      "startBytecodeIndex": 14,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3bb29438-6855-4304-bbbb-8751f198f4e2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "addFileExpanded(Ljava/io/File;Ljava/io/File;Ljava/util/List;)V",
+      "startBytecodeIndex": 98,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "faabcece-1113-4f51-b9c4-9970d21dd06e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.util",
+      "regionClass": "FileUtil",
+      "regionMethod": "isWildcardFileName(Ljava/lang/String;)Z",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MERGE",
+        "CHECK"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "59a9eb78-56d1-450d-ae61-ee113f22aa27",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort.unix.sort",
+      "regionClass": "MergeProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 187,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "UNIQUE"
+      ]
+    ]
+  }
+]

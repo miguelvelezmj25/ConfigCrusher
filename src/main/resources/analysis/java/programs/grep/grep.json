@@ -1,1 +1,1117 @@
-[{"region":{"regionID":"03ca10c6-e57f-4ddf-984f-d3f0ff1148c7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepArguments","regionMethod":"getRegexp()Ljava/lang/String;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"07079baf-76a1-49c7-9739-c4c0fac8db4c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"WriteFilesWithMatchingLinesProcessor","regionMethod":"finish(Lorg/unix4j/grep/io/Input;Lorg/unix4j/grep/processor/LineProcessor;)V","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"9518221e-90a3-4ba6-b427-43bb546ec67f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I","startBytecodeIndex":139,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"55b9eab2-188b-4b44-aee3-e0a59551da62","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"containsIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"9cb9ca26-dea0-4d49-984c-658702592c5f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepCommand","regionMethod":"getFileInputProcessor(Ljava/util/List;Lorg/unix4j/grep/context/ExecutionContext;Lorg/unix4j/grep/processor/LineProcessor;Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/processor/LineProcessor;","startBytecodeIndex":46,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"973c76ad-6ae4-4500-8726-211c8241fb12","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"equalsIgnoreCase(CC)Z","startBytecodeIndex":32,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"ae41caad-10a9-4858-92eb-7d9b9eec3c7a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I","startBytecodeIndex":157,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"0e19fa04-f310-4adb-8a3a-486f68a79360","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I","startBytecodeIndex":1,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"f801b550-347b-4611-84a6-1a6314fa8b24","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"RegexpMatcher","regionMethod":"<init>(Lorg/unix4j/grep/unix/grep/GrepArguments;)V","startBytecodeIndex":8,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","COUNT","MATCHINGFILES"]]},{"region":{"regionID":"1f6d91d5-82c1-481a-806d-626f65b4f55b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepArguments","regionMethod":"getPattern()Ljava/util/regex/Pattern;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","COUNT","MATCHINGFILES"]]},{"region":{"regionID":"5b2b5367-7626-44f2-824a-6e33b4e741c8","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.processor","regionClass":"MultipleInputLineProcessor","regionMethod":"finish()V","startBytecodeIndex":68,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"6c632bd8-98e3-492c-ae76-7a77d7eb734d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.io","regionClass":"WriterOutput","regionMethod":"finish()V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"c5b2a12f-f58f-47b5-91e6-f7a18313fb30","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.line","regionClass":"SimpleLine","regionMethod":"<init>(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)V","startBytecodeIndex":5,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"1eaa4413-6fca-41e5-a9af-7d65f77f84d1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"WriteFilesWithMatchingLinesProcessor","regionMethod":"finish()V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"8a594aa4-7fb0-4322-8b33-9223da3c8286","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I","startBytecodeIndex":104,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"f35e3e92-a045-404f-b0a7-829e1aa22fca","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.line","regionClass":"SimpleLine","regionMethod":"<init>(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)V","startBytecodeIndex":27,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"8a27de5c-3e64-4c08-8b50-a87e7423dc06","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepCommand","regionMethod":"getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;","startBytecodeIndex":89,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["INVERTMATCH","COUNT","MATCHINGFILES"]]},{"region":{"regionID":"e36878be-ae03-4440-b9d2-816a67242e13","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"RegexpMatcher","regionMethod":"<init>(Lorg/unix4j/grep/unix/grep/GrepArguments;)V","startBytecodeIndex":78,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"4f7b4508-b8f8-4c7f-b21c-3a6ea5400bfb","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"CountMatchingLinesProcessor","regionMethod":"finish(Lorg/unix4j/grep/io/Input;Lorg/unix4j/grep/processor/LineProcessor;)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"0fa155f4-d751-42f2-8c86-150538614985","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"WriteFilesWithMatchingLinesProcessor","regionMethod":"finish(Lorg/unix4j/grep/io/Input;Lorg/unix4j/grep/processor/LineProcessor;)V","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"3f266a99-152a-4e4b-8db8-8638e5faf0d3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"WriteMatchingLinesProcessor","regionMethod":"processLine(Lorg/unix4j/grep/line/Line;Z)Z","startBytecodeIndex":1,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"b916d7df-5569-408d-bd22-66f206718f0f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"equalsIgnoreCase(CC)Z","startBytecodeIndex":2,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"1189408c-e287-41f2-8f4a-617767e9e790","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepCommand","regionMethod":"getStandardInputProcessor(Lorg/unix4j/grep/context/ExecutionContext;Lorg/unix4j/grep/processor/LineProcessor;Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/processor/LineProcessor;","startBytecodeIndex":30,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"a4030ccc-01c1-4d35-a9bb-1f32e0024341","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.io","regionClass":"WriterOutput","regionMethod":"processLine(Lorg/unix4j/grep/line/Line;)Z","startBytecodeIndex":60,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"08ef242e-c3c9-4118-84c8-c2b0b8802d8d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.processor","regionClass":"MultipleInputLineProcessor","regionMethod":"finish()V","startBytecodeIndex":93,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"295fdc28-c60d-4ed1-9a2d-dab2374e26b3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.io","regionClass":"WriterOutput","regionMethod":"finish()V","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"c6de8d28-31ba-4077-8d62-c661a073f4ac","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I","startBytecodeIndex":173,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"844de23e-a76b-436f-9895-83a4bbec6fd2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepCommand","regionMethod":"getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;","startBytecodeIndex":18,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"bb7bee0c-75f4-4eaf-a1fc-e3607697df3c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepCommand","regionMethod":"getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","WHOLELINE","COUNT","MATCHINGFILES"]]},{"region":{"regionID":"86b11224-d232-43e9-b4e9-fcf2eb66d30a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepCommand","regionMethod":"getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","COUNT","MATCHINGFILES"]]},{"region":{"regionID":"f47c24a4-5f6b-476c-9b5d-a84aa4ff2e1f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"CountMatchingLinesProcessor","regionMethod":"processLine(Lorg/unix4j/grep/line/Line;)Z","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"3d146384-7345-46f2-b440-da8d30244750","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I","startBytecodeIndex":66,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"03cc827c-449c-490b-82bf-0026b19317d5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepCommand","regionMethod":"getStandardInputProcessor(Lorg/unix4j/grep/context/ExecutionContext;Lorg/unix4j/grep/processor/LineProcessor;Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/processor/LineProcessor;","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"c008c401-b7e9-469a-b54a-84c9d964ebf7","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"InvertedMatcher","regionMethod":"matches(Lorg/unix4j/grep/line/Line;)Z","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"7b308614-3f86-4c75-883c-cff3da077a74","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.processor","regionClass":"MultipleInputLineProcessor","regionMethod":"finish()V","startBytecodeIndex":24,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"5d1c60c2-7728-4bc5-b3fb-78af2ed28db6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.context","regionClass":"DefaultExecutionContext","regionMethod":"getCurrentDirectory()Ljava/io/File;","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT","MATCHINGFILES"]]},{"region":{"regionID":"5d74941e-7ac9-4d6e-86ff-50d3b0d773cb","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"RegexpMatcher","regionMethod":"<init>(Lorg/unix4j/grep/unix/grep/GrepArguments;)V","startBytecodeIndex":26,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","COUNT","MATCHINGFILES"]]},{"region":{"regionID":"12597713-3b24-4a1a-b801-865e5d3d2f1e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I","startBytecodeIndex":84,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"8a09b2f8-eea7-4504-a7da-cac44a56b637","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepCommand","regionMethod":"getFileInputProcessor(Ljava/util/List;Lorg/unix4j/grep/context/ExecutionContext;Lorg/unix4j/grep/processor/LineProcessor;Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/processor/LineProcessor;","startBytecodeIndex":5,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["COUNT"]]},{"region":{"regionID":"df0aa0ff-c4eb-4ffb-bbcd-a585ffd6fad3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"equalsIgnoreCase(CC)Z","startBytecodeIndex":19,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"b9a0a08f-65cc-4600-bc88-fe8d9bdd6987","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I","startBytecodeIndex":114,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"035f6e0d-3d5b-4695-a164-aef6dcd3944a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.io","regionClass":"WriterOutput","regionMethod":"processLine(Lorg/unix4j/grep/line/Line;)Z","startBytecodeIndex":4,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"bb50583d-bbd7-43d2-8a31-895046f642e5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"WriteFilesWithMatchingLinesProcessor","regionMethod":"processLine(Lorg/unix4j/grep/line/Line;)Z","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"22410c9d-e09e-456f-9815-84dcbc3e585c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.util","regionClass":"StringUtil","regionMethod":"indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I","startBytecodeIndex":94,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","INVERTMATCH","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"65ef3c4a-49f5-44d8-be9b-7ad124bd9d71","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"GrepCommand","regionMethod":"getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;","startBytecodeIndex":49,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","WHOLELINE","COUNT","MATCHINGFILES","IGNORECASE"]]},{"region":{"regionID":"d492a64c-9351-41e8-859e-5ac8d95ed472","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.grep.unix.grep","regionClass":"RegexpMatcher","regionMethod":"<init>(Lorg/unix4j/grep/unix/grep/GrepArguments;)V","startBytecodeIndex":33,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FIXEDSTRINGS","WHOLELINE","COUNT","MATCHINGFILES"]]}]
+[
+  {
+    "region": {
+      "regionID": "03ca10c6-e57f-4ddf-984f-d3f0ff1148c7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepArguments",
+      "regionMethod": "getRegexp()Ljava/lang/String;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "07079baf-76a1-49c7-9739-c4c0fac8db4c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "WriteFilesWithMatchingLinesProcessor",
+      "regionMethod": "finish(Lorg/unix4j/grep/io/Input;Lorg/unix4j/grep/processor/LineProcessor;)V",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9518221e-90a3-4ba6-b427-43bb546ec67f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I",
+      "startBytecodeIndex": 139,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "55b9eab2-188b-4b44-aee3-e0a59551da62",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "containsIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9cb9ca26-dea0-4d49-984c-658702592c5f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepCommand",
+      "regionMethod": "getFileInputProcessor(Ljava/util/List;Lorg/unix4j/grep/context/ExecutionContext;Lorg/unix4j/grep/processor/LineProcessor;Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/processor/LineProcessor;",
+      "startBytecodeIndex": 46,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "973c76ad-6ae4-4500-8726-211c8241fb12",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "equalsIgnoreCase(CC)Z",
+      "startBytecodeIndex": 32,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ae41caad-10a9-4858-92eb-7d9b9eec3c7a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I",
+      "startBytecodeIndex": 157,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0e19fa04-f310-4adb-8a3a-486f68a79360",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I",
+      "startBytecodeIndex": 1,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f801b550-347b-4611-84a6-1a6314fa8b24",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "RegexpMatcher",
+      "regionMethod": "<init>(Lorg/unix4j/grep/unix/grep/GrepArguments;)V",
+      "startBytecodeIndex": 8,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1f6d91d5-82c1-481a-806d-626f65b4f55b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepArguments",
+      "regionMethod": "getPattern()Ljava/util/regex/Pattern;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "5b2b5367-7626-44f2-824a-6e33b4e741c8",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.processor",
+      "regionClass": "MultipleInputLineProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 68,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "6c632bd8-98e3-492c-ae76-7a77d7eb734d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.io",
+      "regionClass": "WriterOutput",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c5b2a12f-f58f-47b5-91e6-f7a18313fb30",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.line",
+      "regionClass": "SimpleLine",
+      "regionMethod": "<init>(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)V",
+      "startBytecodeIndex": 5,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1eaa4413-6fca-41e5-a9af-7d65f77f84d1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "WriteFilesWithMatchingLinesProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8a594aa4-7fb0-4322-8b33-9223da3c8286",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I",
+      "startBytecodeIndex": 104,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f35e3e92-a045-404f-b0a7-829e1aa22fca",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.line",
+      "regionClass": "SimpleLine",
+      "regionMethod": "<init>(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)V",
+      "startBytecodeIndex": 27,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8a27de5c-3e64-4c08-8b50-a87e7423dc06",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepCommand",
+      "regionMethod": "getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;",
+      "startBytecodeIndex": 89,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "INVERTMATCH",
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e36878be-ae03-4440-b9d2-816a67242e13",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "RegexpMatcher",
+      "regionMethod": "<init>(Lorg/unix4j/grep/unix/grep/GrepArguments;)V",
+      "startBytecodeIndex": 78,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4f7b4508-b8f8-4c7f-b21c-3a6ea5400bfb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "CountMatchingLinesProcessor",
+      "regionMethod": "finish(Lorg/unix4j/grep/io/Input;Lorg/unix4j/grep/processor/LineProcessor;)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0fa155f4-d751-42f2-8c86-150538614985",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "WriteFilesWithMatchingLinesProcessor",
+      "regionMethod": "finish(Lorg/unix4j/grep/io/Input;Lorg/unix4j/grep/processor/LineProcessor;)V",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3f266a99-152a-4e4b-8db8-8638e5faf0d3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "WriteMatchingLinesProcessor",
+      "regionMethod": "processLine(Lorg/unix4j/grep/line/Line;Z)Z",
+      "startBytecodeIndex": 1,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b916d7df-5569-408d-bd22-66f206718f0f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "equalsIgnoreCase(CC)Z",
+      "startBytecodeIndex": 2,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1189408c-e287-41f2-8f4a-617767e9e790",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepCommand",
+      "regionMethod": "getStandardInputProcessor(Lorg/unix4j/grep/context/ExecutionContext;Lorg/unix4j/grep/processor/LineProcessor;Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/processor/LineProcessor;",
+      "startBytecodeIndex": 30,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a4030ccc-01c1-4d35-a9bb-1f32e0024341",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.io",
+      "regionClass": "WriterOutput",
+      "regionMethod": "processLine(Lorg/unix4j/grep/line/Line;)Z",
+      "startBytecodeIndex": 60,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "08ef242e-c3c9-4118-84c8-c2b0b8802d8d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.processor",
+      "regionClass": "MultipleInputLineProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 93,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "295fdc28-c60d-4ed1-9a2d-dab2374e26b3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.io",
+      "regionClass": "WriterOutput",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c6de8d28-31ba-4077-8d62-c661a073f4ac",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I",
+      "startBytecodeIndex": 173,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "844de23e-a76b-436f-9895-83a4bbec6fd2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepCommand",
+      "regionMethod": "getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;",
+      "startBytecodeIndex": 18,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bb7bee0c-75f4-4eaf-a1fc-e3607697df3c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepCommand",
+      "regionMethod": "getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "86b11224-d232-43e9-b4e9-fcf2eb66d30a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepCommand",
+      "regionMethod": "getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f47c24a4-5f6b-476c-9b5d-a84aa4ff2e1f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "CountMatchingLinesProcessor",
+      "regionMethod": "processLine(Lorg/unix4j/grep/line/Line;)Z",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3d146384-7345-46f2-b440-da8d30244750",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I",
+      "startBytecodeIndex": 66,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "03cc827c-449c-490b-82bf-0026b19317d5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepCommand",
+      "regionMethod": "getStandardInputProcessor(Lorg/unix4j/grep/context/ExecutionContext;Lorg/unix4j/grep/processor/LineProcessor;Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/processor/LineProcessor;",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c008c401-b7e9-469a-b54a-84c9d964ebf7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "InvertedMatcher",
+      "regionMethod": "matches(Lorg/unix4j/grep/line/Line;)Z",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7b308614-3f86-4c75-883c-cff3da077a74",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.processor",
+      "regionClass": "MultipleInputLineProcessor",
+      "regionMethod": "finish()V",
+      "startBytecodeIndex": 24,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "5d1c60c2-7728-4bc5-b3fb-78af2ed28db6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.context",
+      "regionClass": "DefaultExecutionContext",
+      "regionMethod": "getCurrentDirectory()Ljava/io/File;",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "5d74941e-7ac9-4d6e-86ff-50d3b0d773cb",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "RegexpMatcher",
+      "regionMethod": "<init>(Lorg/unix4j/grep/unix/grep/GrepArguments;)V",
+      "startBytecodeIndex": 26,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "12597713-3b24-4a1a-b801-865e5d3d2f1e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I",
+      "startBytecodeIndex": 84,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8a09b2f8-eea7-4504-a7da-cac44a56b637",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepCommand",
+      "regionMethod": "getFileInputProcessor(Ljava/util/List;Lorg/unix4j/grep/context/ExecutionContext;Lorg/unix4j/grep/processor/LineProcessor;Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/processor/LineProcessor;",
+      "startBytecodeIndex": 5,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "COUNT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "df0aa0ff-c4eb-4ffb-bbcd-a585ffd6fad3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "equalsIgnoreCase(CC)Z",
+      "startBytecodeIndex": 19,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b9a0a08f-65cc-4600-bc88-fe8d9bdd6987",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I",
+      "startBytecodeIndex": 114,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "035f6e0d-3d5b-4695-a164-aef6dcd3944a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.io",
+      "regionClass": "WriterOutput",
+      "regionMethod": "processLine(Lorg/unix4j/grep/line/Line;)Z",
+      "startBytecodeIndex": 4,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bb50583d-bbd7-43d2-8a31-895046f642e5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "WriteFilesWithMatchingLinesProcessor",
+      "regionMethod": "processLine(Lorg/unix4j/grep/line/Line;)Z",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "22410c9d-e09e-456f-9815-84dcbc3e585c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.util",
+      "regionClass": "StringUtil",
+      "regionMethod": "indexOfIgnoreCase(Ljava/lang/String;Ljava/lang/String;I)I",
+      "startBytecodeIndex": 94,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "INVERTMATCH",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "65ef3c4a-49f5-44d8-be9b-7ad124bd9d71",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "GrepCommand",
+      "regionMethod": "getMatcher(Lorg/unix4j/grep/unix/grep/GrepArguments;)Lorg/unix4j/grep/unix/grep/LineMatcher;",
+      "startBytecodeIndex": 49,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES",
+        "IGNORECASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d492a64c-9351-41e8-859e-5ac8d95ed472",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.grep.unix.grep",
+      "regionClass": "RegexpMatcher",
+      "regionMethod": "<init>(Lorg/unix4j/grep/unix/grep/GrepArguments;)V",
+      "startBytecodeIndex": 33,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FIXEDSTRINGS",
+        "WHOLELINE",
+        "COUNT",
+        "MATCHINGFILES"
+      ]
+    ]
+  }
+]

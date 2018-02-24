@@ -29,20 +29,11 @@ public class FamilyModelBuilder extends BasePerformanceModelBuilder {
             throw new RuntimeException("Coule not get the family model");
         }
 
-        PerformanceModel pm = new FamilyModel();
-
         if(!model.containsKey(BASE)) {
             throw new RuntimeException("The model does not have a base feature");
         }
 
-        pm.setBaseTimeHumanReadable(model.get(BASE));
-        model.remove(BASE);
-
-        Region progRegion= new Region("program");
-        Map<Region, Map<Set<String>, Double>> regionMap = new HashMap<>();
-        regionMap.put(progRegion, model);
-        pm.setRegionsToPerformanceTablesHumanReadable(regionMap);
-
+        PerformanceModel pm = new FamilyModel(model.get(BASE), model);
         return pm;
     }
 

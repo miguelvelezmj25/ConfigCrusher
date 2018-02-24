@@ -52,18 +52,18 @@ public class ElevatorMain extends BaseMain {
 
     @Override
     public void execute(String mainClass, String[] args) {
-        try {
-            BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("elevator");
-            instrumenter.instrument(args);
-            Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
-
-            for(JavaRegion region : regions) {
-                Regions.regionsToOverhead.put(region.getRegionID(), 0L);
-            }
+//        try {
+//            BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("elevator");
+//            instrumenter.instrument(args);
+//            Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
+//
+//            for(JavaRegion region : regions) {
+//                Regions.regionsToOverhead.put(region.getRegionID(), 0L);
+//            }
             Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID, 0L);
-        } catch(InvocationTargetException | NoSuchMethodException | IOException | IllegalAccessException | InterruptedException e) {
-            throw new RuntimeException("Could not add regions to the Regions class");
-        }
+//        } catch(InvocationTargetException | NoSuchMethodException | IOException | IllegalAccessException | InterruptedException e) {
+//            throw new RuntimeException("Could not add regions to the Regions class");
+//        }
 
         if(mainClass.contains("PL_Interface_impl")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);

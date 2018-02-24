@@ -30,7 +30,7 @@ public class Evaluation {
         this.programName = programName;
     }
 
-    public double getTotalSamplingTime(String approach, Set<Set<String>> configurations) throws IOException {
+    public double getTotalSamplingTime(Set<Set<String>> configurations) throws IOException {
         double time = 0.0;
 
         String fileString = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"

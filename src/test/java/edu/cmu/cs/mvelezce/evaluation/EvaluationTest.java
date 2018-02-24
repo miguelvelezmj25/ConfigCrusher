@@ -179,6 +179,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareDensity3() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareColorCounter2() throws Exception {
         String programName = "pngtasticColorCounter";
 
@@ -391,7 +399,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -403,7 +411,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -414,7 +422,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
 
@@ -708,7 +716,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -720,7 +728,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -731,7 +739,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -927,7 +935,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -939,7 +947,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -967,7 +975,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -1253,7 +1261,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -1265,7 +1273,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -1293,7 +1301,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -1373,7 +1381,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -1431,7 +1439,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -1459,7 +1467,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -1612,7 +1620,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -1624,7 +1632,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -1635,7 +1643,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -1946,24 +1954,32 @@ public class EvaluationTest {
     public void densityFeaturewiseSamplingTime() throws Exception {
         String programName = "density";
 
-        List<String> options = DensityAdapter.getDensityOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+        Set<Set<String>> pairwiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
     public void densityPairwiseSamplingTime() throws Exception {
         String programName = "density";
 
-        List<String> options = DensityAdapter.getDensityOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
 }

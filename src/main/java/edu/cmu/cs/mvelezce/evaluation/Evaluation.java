@@ -273,7 +273,11 @@ public class Evaluation {
             result.append(configuration);
             result.append('"');
             result.append(",");
-            result.append(performanceModel.evaluate(configuration));
+
+            double perf = performanceModel.evaluate(configuration);
+            perf = Math.max(0.0, perf);
+
+            result.append(perf);
             result.append(",");
             result.append(performanceModel.evaluateStd(configuration));
             result.append("\n");

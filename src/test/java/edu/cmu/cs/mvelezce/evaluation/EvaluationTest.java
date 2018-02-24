@@ -3,6 +3,8 @@ package edu.cmu.cs.mvelezce.evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEvaluationExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.Family;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.elevator.ElevatorFM;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.model.FamilyModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.execute.FeaturewiseExecutor;
@@ -24,6 +26,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
@@ -96,6 +99,14 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareElevator5() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.BRUTE_FORCE);
     }
 
     @Test
@@ -535,6 +546,20 @@ public class EvaluationTest {
     }
 
     @Test
+    public void elevatorBruteForce() throws Exception {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
     public void elevatorFamily() throws IOException {
         String programName = "elevator";
 
@@ -543,13 +568,113 @@ public class EvaluationTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        PerformanceModelBuilder builder = new FamilyModelBuilder(programName);
+        FeatureModel fm = new ElevatorFM();
+        PerformanceModelBuilder builder = new FamilyModelBuilder(programName, fm);
         PerformanceModel performanceModel = builder.createModel(args);
 
-//        SPLat splat = new SPLat(programName);
-//        List<Coverage> coverageList = splat.readFileCoverage();
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+        Set<String> optionsSet = new HashSet<>(options);
+
+        Set<PerformanceEntryStatistic> entries = new HashSet<>();
+        PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
+        entries.add(entry);
+
+        Set<Set<String>> configurations = BruteForceEvaluationExecutor.getBruteForceConfigurationsFromOptions(optionsSet);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FAMILY, performanceModel, entries, configurations);
+    }
+
+    @Test
+    public void elevatorFeaturewiseGenerateCSVData() throws Exception {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        featurewise.generateCSVData(featurewiseEntries, options);
+    }
+
+    @Test
+    public void elevatorFeaturewiseModel() throws Exception {
+        String programName = "elevator";
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+        Featurewise featurewise = new Featurewise(programName);
+        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
+    }
+
+    @Test
+    public void elevatorPairwiseGenerateCSVData() throws Exception {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        pairwise.generateCSVData(pairwiseEntries, options);
+    }
+
+    @Test
+    public void elevatorPairwiseModel() throws Exception {
+        String programName = "elevator";
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+        Pairwise pairwise = new Pairwise(programName);
+        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
     }
 
     @Test

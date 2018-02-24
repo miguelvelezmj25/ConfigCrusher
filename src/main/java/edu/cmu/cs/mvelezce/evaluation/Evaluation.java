@@ -23,6 +23,7 @@ public class Evaluation {
     public static final String FEATURE_WISE = "feature_wise";
     public static final String PAIR_WISE = "pair_wise";
     public static final String SPLAT = "splat";
+    public static final String FAMILY = "family";
 
     private String programName;
 

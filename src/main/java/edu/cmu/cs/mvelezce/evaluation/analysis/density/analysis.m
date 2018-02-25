@@ -1,8 +1,8 @@
 % feature_wise
 
 train = readtable('../../../../../../../../resources/evaluation/programs/java/density/data/feature_wise.csv');
-x_train = table2array(train(:,1:26));
-y_train = table2array(train(:,27:27));
+x_train = table2array(train(:,1:22));
+y_train = table2array(train(:,23:23));
 model = stepwiselm(x_train, y_train, 'linear');
 
 mkdir('../../../../../../../../resources/evaluation/programs/java/density/data/feature_wise/');
@@ -25,8 +25,8 @@ fclose(fileID);
 % pair_wise
 
 train = readtable('../../../../../../../../resources/evaluation/programs/java/density/data/pair_wise.csv');
-x_train = table2array(train(:,1:26));
-y_train = table2array(train(:,27:27));
+x_train = table2array(train(:,1:22));
+y_train = table2array(train(:,23:23));
 model = stepwiselm(x_train, y_train, 'linear');
 
 mkdir('../../../../../../../../resources/evaluation/programs/java/density/data/pair_wise/');

@@ -1968,8 +1968,9 @@ public class EvaluationTest {
 
         args = new String[0];
 
-        Compression compression = new SimpleCompression(programName);
-        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);

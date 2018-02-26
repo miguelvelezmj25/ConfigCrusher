@@ -23,6 +23,7 @@ public class Evaluation {
     public static final String FEATURE_WISE = "feature_wise";
     public static final String PAIR_WISE = "pair_wise";
     public static final String SPLAT = "splat";
+    public static final String FAMILY = "family";
 
     private String programName;
 
@@ -30,7 +31,7 @@ public class Evaluation {
         this.programName = programName;
     }
 
-    public double getTotalSamplingTime(String approach, Set<Set<String>> configurations) throws IOException {
+    public double getTotalSamplingTime(Set<Set<String>> configurations) throws IOException {
         double time = 0.0;
 
         String fileString = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
@@ -273,7 +274,11 @@ public class Evaluation {
             result.append(configuration);
             result.append('"');
             result.append(",");
-            result.append(performanceModel.evaluate(configuration));
+
+            double perf = performanceModel.evaluate(configuration);
+            perf = Math.max(0.0, perf);
+
+            result.append(perf);
             result.append(",");
             result.append(performanceModel.evaluateStd(configuration));
             result.append("\n");

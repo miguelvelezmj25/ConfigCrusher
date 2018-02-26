@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.family.model;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.Family;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
@@ -16,8 +17,11 @@ public class FamilyModelBuilder extends BasePerformanceModelBuilder {
 
     public static final String DIRECTORY = Options.DIRECTORY + "/performance-model/java/programs/family";
 
-    public FamilyModelBuilder(String programName) {
+    private FeatureModel fm;
+
+    public FamilyModelBuilder(String programName, FeatureModel fm) {
         super(programName);
+        this.fm = fm;
     }
 
     public PerformanceModel createModel() {
@@ -33,7 +37,7 @@ public class FamilyModelBuilder extends BasePerformanceModelBuilder {
             throw new RuntimeException("The model does not have a base feature");
         }
 
-        PerformanceModel pm = new FamilyModel(model.get(BASE), model);
+        PerformanceModel pm = new FamilyModel(model.get(BASE), model, fm);
         return pm;
     }
 
@@ -62,6 +66,7 @@ public class FamilyModelBuilder extends BasePerformanceModelBuilder {
             for(Map.Entry<Set<String>, Double> entry : aModel.entrySet()) {
                 double cur = model.get(entry.getKey());
                 cur += entry.getValue();
+                cur = Math.round(cur * 100.0) / 100.0;
                 model.put(entry.getKey(), cur);
             }
         }

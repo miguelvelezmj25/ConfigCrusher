@@ -3,6 +3,8 @@ package edu.cmu.cs.mvelezce.evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEvaluationExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.Family;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.elevator.ElevatorFM;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.model.FamilyModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.execute.FeaturewiseExecutor;
@@ -24,6 +26,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
@@ -47,6 +50,17 @@ import java.util.Map;
 import java.util.Set;
 
 public class EvaluationTest {
+
+    private Set<Set<String>> getConfigs(Set<PerformanceEntryStatistic> performanceEntries) {
+        Set<Set<String>> configs = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            configs.add(entry.getConfiguration());
+        }
+
+        return configs;
+    }
+
     @Test
     public void compareRunningExample1() throws Exception {
         String programName = "running-example";
@@ -85,6 +99,14 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareElevator5() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.BRUTE_FORCE);
     }
 
     @Test
@@ -157,6 +179,22 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareDensity2() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareDensity3() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
     }
 
     @Test
@@ -372,7 +410,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -384,7 +422,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -395,7 +433,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
 
@@ -427,12 +465,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -474,10 +511,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -508,6 +546,20 @@ public class EvaluationTest {
     }
 
     @Test
+    public void elevatorBruteForce() throws Exception {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
     public void elevatorFamily() throws IOException {
         String programName = "elevator";
 
@@ -516,13 +568,113 @@ public class EvaluationTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        PerformanceModelBuilder builder = new FamilyModelBuilder(programName);
+        FeatureModel fm = new ElevatorFM();
+        PerformanceModelBuilder builder = new FamilyModelBuilder(programName, fm);
         PerformanceModel performanceModel = builder.createModel(args);
 
-//        SPLat splat = new SPLat(programName);
-//        List<Coverage> coverageList = splat.readFileCoverage();
-//        Evaluation eval = new Evaluation(programName);
-//        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+        Set<String> optionsSet = new HashSet<>(options);
+
+        Set<PerformanceEntryStatistic> entries = new HashSet<>();
+        PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
+        entries.add(entry);
+
+        Set<Set<String>> configurations = BruteForceEvaluationExecutor.getBruteForceConfigurationsFromOptions(optionsSet);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FAMILY, performanceModel, entries, configurations);
+    }
+
+    @Test
+    public void elevatorFeaturewiseGenerateCSVData() throws Exception {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        featurewise.generateCSVData(featurewiseEntries, options);
+    }
+
+    @Test
+    public void elevatorFeaturewiseModel() throws Exception {
+        String programName = "elevator";
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+        Featurewise featurewise = new Featurewise(programName);
+        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
+    }
+
+    @Test
+    public void elevatorPairwiseGenerateCSVData() throws Exception {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        pairwise.generateCSVData(pairwiseEntries, options);
+    }
+
+    @Test
+    public void elevatorPairwiseModel() throws Exception {
+        String programName = "elevator";
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+        Pairwise pairwise = new Pairwise(programName);
+        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
     }
 
     @Test
@@ -616,12 +768,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -663,12 +814,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -691,7 +841,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -703,7 +853,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -714,7 +864,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -821,12 +971,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -868,12 +1017,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -912,7 +1060,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -924,7 +1072,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -952,7 +1100,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -1025,12 +1173,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1072,12 +1219,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1151,12 +1297,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1198,12 +1343,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1242,7 +1386,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -1254,7 +1398,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -1282,7 +1426,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -1335,12 +1479,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1363,7 +1506,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -1394,12 +1537,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1422,7 +1564,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -1450,7 +1592,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -1530,12 +1672,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1577,12 +1718,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1605,7 +1745,7 @@ public class EvaluationTest {
         Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.FEATURE_WISE, featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
     }
 
     @Test
@@ -1617,7 +1757,7 @@ public class EvaluationTest {
         Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.PAIR_WISE, pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
     @Test
@@ -1628,7 +1768,7 @@ public class EvaluationTest {
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.SPLAT, splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test
@@ -1828,8 +1968,9 @@ public class EvaluationTest {
 
         args = new String[0];
 
-        Compression compression = new SimpleCompression(programName);
-        Set<Set<String>> configurations = compression.compressConfigurations(args);
+        executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
@@ -1871,12 +2012,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1918,12 +2058,11 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceExecutor(programName);
+        Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(new HashSet<>(options));
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
         // arguments
         args = new String[2];
@@ -1935,6 +2074,38 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
+    }
+
+    @Test
+    public void densityFeaturewiseSamplingTime() throws Exception {
+        String programName = "density";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+        Set<Set<String>> pairwiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+    }
+
+    @Test
+    public void densityPairwiseSamplingTime() throws Exception {
+        String programName = "density";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
     }
 
 }

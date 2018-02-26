@@ -27,7 +27,7 @@ public class DensityAdapter extends BaseAdapter {
                 "DOWNSCALINGALGORITHM",
                 "UPSCALINGALGORITHM",
                 "COMPRESSQUALITY",
-                "SKIPEXISTINGFILES",
+//                "SKIPEXISTINGFILES",
                 "SKIPUPSCALING",
                 "VERBOSELOG",
                 "INCLUDEANDROIDLDPITVDPI",
@@ -37,13 +37,13 @@ public class DensityAdapter extends BaseAdapter {
                 "ENABLEMOZJPEG",
                 "POSTCONVERTWEBP",
                 "ENABLEANTIALIASING",
-                "DRYRUN",
+//                "DRYRUN",
                 "KEEPUNOPTIMIZEDFILESPOSTPROCESSOR",
                 "ROUNDINGHANDLER",
                 "IOSCREATEIMAGESETFOLDERS",
                 "CLEARDIRBEFORECONVERT",
-                "HELP",
-                "VERSION",
+//                "HELP",
+//                "VERSION",
                 "GUIADVANCEDOPTIONS"
         };
 

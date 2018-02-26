@@ -1,0 +1,18 @@
+digraph <init> {
+node [shape=record];
+1074289331 [label="L5\lLINENUMBER 39 L5\lNEW java/lang/NullPointerException\lDUP\lLDC \"The index cannot be negative\"\lINVOKESPECIAL java/lang/NullPointerException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+119537419 [label="L4\lLINENUMBER 42 L4\lFRAME SAME\lALOAD 0\lALOAD 1\lPUTFIELD kanzi/SliceByteArray.array : [B\lL6\lLINENUMBER 43 L6\lALOAD 0\lALOAD 1\lARRAYLENGTH\lPUTFIELD kanzi/SliceByteArray.length : I\lL7\lLINENUMBER 44 L7\lALOAD 0\lILOAD 2\lPUTFIELD kanzi/SliceByteArray.index : I\lL8\lLINENUMBER 45 L8\lLDC \"8fdde2d6-90b7-493e-9890-0fda6c3cac91\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+192517438 [label="L0\lLINENUMBER 33 L0\lLDC \"8fdde2d6-90b7-493e-9890-0fda6c3cac91\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lL1\lLINENUMBER 34 L1\lALOAD 1\lIFNONNULL L2\l"];
+1915418195 [label="L3\lLINENUMBER 35 L3\lNEW java/lang/NullPointerException\lDUP\lLDC \"The array cannot be null\"\lINVOKESPECIAL java/lang/NullPointerException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+113722330 [label="L2\lLINENUMBER 38 L2\lFRAME FULL [kanzi/SliceByteArray [B I] []\lILOAD 2\lIFGE L4\l"];
+entry;
+exit;
+entry -> 192517438;
+119537419 -> exit;
+192517438 -> 1915418195;
+192517438 -> 113722330;
+113722330 -> 1074289331;
+113722330 -> 119537419;
+119537419[fontcolor="purple", penwidth=3, color="purple"];
+192517438[fontcolor="purple", penwidth=3, color="purple"];
+}

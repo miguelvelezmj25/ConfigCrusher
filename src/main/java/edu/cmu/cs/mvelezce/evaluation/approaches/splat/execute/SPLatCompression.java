@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.SPLatMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.counter.SPLatCounterMain;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.density.SPLatDensityMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.elevator.SPLatElevatorMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.grep.SPLatGrepMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.kanzi.SPLatKanziMain;
@@ -79,6 +80,9 @@ public class SPLatCompression extends BaseCompression {
         }
         else if(this.getProgramName().contains("elevator")) {
             main = new SPLatElevatorMain("elevator");
+        }
+        else if(this.getProgramName().contains("density")) {
+            main = new SPLatDensityMain("density");
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

@@ -320,4 +320,28 @@ public class BruteForceExecutorTest {
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
     }
 
+    @Test
+    public void elevator1() throws IOException, InterruptedException {
+        String programName = "elevator";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/target/classes";
+
+        String entryPoint = "family.PL_Interface_impl";
+
+        Set<String> options = new HashSet<>(ElevatorAdapter.getElevatorOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+        System.out.println("Configurations to sample: " + configurations.size());
+
+        configurations.clear();
+        Set<String> conf = new HashSet<>();
+        configurations.add(conf);
+
+        String[] args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
 }

@@ -1,1 +1,766 @@
-[{"region":{"regionID":"79c5b6b3-ca76-4702-b6cc-a6b566a5d2e4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":108,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"632d8902-d9b7-4716-9dd6-65c840ca030f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":249,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"cc36fd5f-bddb-40de-83f2-992d08c49cdd","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":263,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["MINALPHA"]]},{"region":{"regionID":"c37b2363-f32a-46e8-b6eb-11c205086a80","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":269,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"c71b5128-227b-4a29-9d22-fb088b857f5d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":174,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"e4b4e14a-0af9-449f-a2ba-2b54804c4174","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":162,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"788e7bf5-0a58-42d4-9333-4e6631c6203a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":690,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FREQTHRESHOLD","TIMEOUT"]]},{"region":{"regionID":"aeb963cd-f1f4-4e27-94c8-1d973c021031","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":164,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"c1b3b056-b7ca-4c65-b681-6cf705e25923","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"Logger","regionMethod":"debug(Ljava/lang/String;[Ljava/lang/Object;)V","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT","LOGLEVEL"]]},{"region":{"regionID":"e8b0d4f2-056a-4571-bf40-5c1ffcd08e8b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":181,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DISTTHRESHOLD","TIMEOUT"]]},{"region":{"regionID":"728d2253-4eff-44db-87eb-05b019d745e1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"Logger","regionMethod":"<init>(Ljava/lang/String;)V","startBytecodeIndex":21,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["LOGLEVEL"]]},{"region":{"regionID":"27a25409-cdc2-41a5-b6de-b95d628f0530","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":240,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FREQTHRESHOLD"]]},{"region":{"regionID":"9684dc89-d093-4ad5-94d0-72747c5a0617","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":294,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"c8296fb6-38ed-4614-b305-c0060ff5b1ed","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":217,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DISTTHRESHOLD"]]},{"region":{"regionID":"d7e8148d-0a12-4774-b434-ce7600b524e3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":336,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"83e2759e-bfb3-4768-8dad-913f96a14029","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":833,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"89a071f2-2a59-473b-bccf-dff8bf02afb5","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":63,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"fcdbcd1e-52ce-4b7b-9650-63019e5934af","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":476,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"7f2bff46-340c-4e11-b832-bed0fc4847ba","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"Logger","regionMethod":"error(Ljava/lang/String;[Ljava/lang/Object;)V","startBytecodeIndex":9,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["LOGLEVEL"]]},{"region":{"regionID":"85eff194-f39d-41e3-a941-04a6e14ec9c9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":732,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FREQTHRESHOLD","TIMEOUT"]]},{"region":{"regionID":"e583ae1c-61d4-43b5-98fa-c457006d2664","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":762,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FREQTHRESHOLD","TIMEOUT"]]},{"region":{"regionID":"cb23a2d6-8866-4fd4-86f4-e8982db45831","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":127,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"91302e17-b542-4335-85e3-94cd97a3de85","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":285,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"225a3180-9810-467d-b00e-98603f28dc0a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":147,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"c5bcce22-e51d-423b-ab31-961748505daf","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":42,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"b87c61ca-adf5-4332-be18-c38d7fea4c9a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"Logger","regionMethod":"<init>(Ljava/lang/String;)V","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["LOGLEVEL"]]},{"region":{"regionID":"8ba7a823-1c79-46e8-864e-525141f025dc","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":76,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"2263bca5-eef8-4586-95de-8237141abb33","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":194,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DISTTHRESHOLD","TIMEOUT"]]},{"region":{"regionID":"b0b2aca0-e6fd-4c06-8d44-7060c9670071","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":444,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"4955bf3a-a72a-41b8-97c4-1691a6537ada","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic","regionClass":"Run","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":307,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["LOGLEVEL"]]},{"region":{"regionID":"04a4eb14-7c28-44ab-a17a-5391184e7302","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":612,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT","MINALPHA"]]},{"region":{"regionID":"acff2dbd-0b20-4fb2-b123-b17d1af23c71","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":52,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"a2e30985-2707-4d3a-a371-a7c9fa355a37","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngPixel","regionMethod":"<init>(IIIIIZ)V","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"1f6c6b40-44e8-4e61-b72b-d227fcbcbbc1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":65,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]},{"region":{"regionID":"423a797c-f638-4349-8dc3-a0d0fbe7c410","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":589,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT","MINALPHA"]]},{"region":{"regionID":"2b31af29-9f92-4b3f-802e-51e4118b22af","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"counter.com.googlecode.pngtastic.core","regionClass":"PngColorCounter","regionMethod":"getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;","startBytecodeIndex":31,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["TIMEOUT"]]}]
+[
+  {
+    "region": {
+      "regionID": "79c5b6b3-ca76-4702-b6cc-a6b566a5d2e4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 108,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "632d8902-d9b7-4716-9dd6-65c840ca030f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 249,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "cc36fd5f-bddb-40de-83f2-992d08c49cdd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 263,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c37b2363-f32a-46e8-b6eb-11c205086a80",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 269,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c71b5128-227b-4a29-9d22-fb088b857f5d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 174,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e4b4e14a-0af9-449f-a2ba-2b54804c4174",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 162,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "788e7bf5-0a58-42d4-9333-4e6631c6203a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 690,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "aeb963cd-f1f4-4e27-94c8-1d973c021031",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 164,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c1b3b056-b7ca-4c65-b681-6cf705e25923",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "debug(Ljava/lang/String;[Ljava/lang/Object;)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT",
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e8b0d4f2-056a-4571-bf40-5c1ffcd08e8b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 181,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DISTTHRESHOLD",
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "728d2253-4eff-44db-87eb-05b019d745e1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "<init>(Ljava/lang/String;)V",
+      "startBytecodeIndex": 21,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "27a25409-cdc2-41a5-b6de-b95d628f0530",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 240,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FREQTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9684dc89-d093-4ad5-94d0-72747c5a0617",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 294,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c8296fb6-38ed-4614-b305-c0060ff5b1ed",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 217,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DISTTHRESHOLD"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d7e8148d-0a12-4774-b434-ce7600b524e3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 336,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "83e2759e-bfb3-4768-8dad-913f96a14029",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 833,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "89a071f2-2a59-473b-bccf-dff8bf02afb5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 63,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fcdbcd1e-52ce-4b7b-9650-63019e5934af",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 476,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7f2bff46-340c-4e11-b832-bed0fc4847ba",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "error(Ljava/lang/String;[Ljava/lang/Object;)V",
+      "startBytecodeIndex": 9,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "85eff194-f39d-41e3-a941-04a6e14ec9c9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 732,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e583ae1c-61d4-43b5-98fa-c457006d2664",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 762,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FREQTHRESHOLD",
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "cb23a2d6-8866-4fd4-86f4-e8982db45831",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 127,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "91302e17-b542-4335-85e3-94cd97a3de85",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 285,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "225a3180-9810-467d-b00e-98603f28dc0a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 147,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c5bcce22-e51d-423b-ab31-961748505daf",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 42,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b87c61ca-adf5-4332-be18-c38d7fea4c9a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "Logger",
+      "regionMethod": "<init>(Ljava/lang/String;)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8ba7a823-1c79-46e8-864e-525141f025dc",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 76,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2263bca5-eef8-4586-95de-8237141abb33",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 194,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DISTTHRESHOLD",
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b0b2aca0-e6fd-4c06-8d44-7060c9670071",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 444,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4955bf3a-a72a-41b8-97c4-1691a6537ada",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic",
+      "regionClass": "Run",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 307,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "LOGLEVEL"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "04a4eb14-7c28-44ab-a17a-5391184e7302",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 612,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "acff2dbd-0b20-4fb2-b123-b17d1af23c71",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 52,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "a2e30985-2707-4d3a-a371-a7c9fa355a37",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngPixel",
+      "regionMethod": "<init>(IIIIIZ)V",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "1f6c6b40-44e8-4e61-b72b-d227fcbcbbc1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 65,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "423a797c-f638-4349-8dc3-a0d0fbe7c410",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 589,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT",
+        "MINALPHA"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2b31af29-9f92-4b3f-802e-51e4118b22af",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "counter.com.googlecode.pngtastic.core",
+      "regionClass": "PngColorCounter",
+      "regionMethod": "getMergedColors(Lcounter/com/googlecode/pngtastic/core/PngImage;Ljava/util/List;J)Ljava/util/List;",
+      "startBytecodeIndex": 31,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "TIMEOUT"
+      ]
+    ]
+  }
+]

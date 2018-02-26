@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -26,9 +27,16 @@ public class Evaluation {
     public static final String FAMILY = "family";
 
     private String programName;
+    private FeatureModel fm;
 
     public Evaluation(String programName) {
         this.programName = programName;
+    }
+
+    public Evaluation(String programName, FeatureModel fm) {
+        this(programName);
+
+        this.fm = fm;
     }
 
     public double getTotalSamplingTime(Set<Set<String>> configurations) throws IOException {
@@ -522,9 +530,14 @@ public class Evaluation {
             result.append(decimalFormat.format(squaredError));
             result.append("\n");
 
-            if(!measured /*&& performance2 >= 1.0*/) {
+            if(!measured) {
+                if(this.fm != null && !this.fm.isValidProduct(configuration)) {
+                    continue;
+                }
+
                 se += squaredError;
                 ape += relativeError;
+                System.out.println(configuration);
                 testCount++;
             }
         }

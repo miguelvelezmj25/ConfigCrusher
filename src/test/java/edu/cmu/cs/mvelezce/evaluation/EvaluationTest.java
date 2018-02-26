@@ -105,7 +105,9 @@ public class EvaluationTest {
     public void compareElevator5() throws Exception {
         String programName = "elevator";
 
-        Evaluation eval = new Evaluation(programName);
+        FeatureModel fm = new ElevatorFM();
+
+        Evaluation eval = new Evaluation(programName, fm);
         eval.compareApproaches(Evaluation.FAMILY, Evaluation.BRUTE_FORCE);
     }
 

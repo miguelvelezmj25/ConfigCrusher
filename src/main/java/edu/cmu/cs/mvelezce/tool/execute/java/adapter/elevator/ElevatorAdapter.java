@@ -21,12 +21,14 @@ public class ElevatorAdapter extends BaseAdapter {
     }
 
     public static List<String> getElevatorOptions() {
-        String[] options = {"BASE",
+        String[] options = {
+                "BASE",
+                "OVERLOADED",
                 "WEIGHT",
                 "EMPTY",
                 "TWOTHIRDSFULL",
-                "EXECUTIVEFLOOR",
-                "OVERLOADED"};
+                "EXECUTIVEFLOOR"
+        };
 
         return Arrays.asList(options);
     }

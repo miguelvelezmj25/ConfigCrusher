@@ -101,6 +101,12 @@ public class Featurewise extends Approach {
             learnedModel.put(term, Double.valueOf(coef));
         }
 
+        Set<String> empty = new HashSet<>();
+
+        if(!learnedModel.containsKey(empty)) {
+            learnedModel.put(empty, 0.0);
+        }
+
         return learnedModel;
     }
 

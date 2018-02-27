@@ -65,9 +65,9 @@ measured,configuration,family,family_std,brute_force,brute_force_std,brute_force
 "false","[OVERLOADED, WEIGHT, EMPTY, BASE]",34.037,0.0,34.56,0.614,33.584,35.537,true,0.523,0.015,0.274
 
 Total: 64
-MSE: 1.481
-RMSE: 1.217
-MAPE: 32.692
+MSE: 1.563
+RMSE: 1.25
+MAPE: 3.027
 Measured within ci: 0
 Measured outside ci: 1
 Predicted within ci: 7

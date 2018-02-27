@@ -647,8 +647,9 @@ public class EvaluationTest {
     public void elevatorFeaturewiseModel() throws Exception {
         String programName = "elevator";
 
+        FeatureModel fm = new ElevatorFM();
+        Featurewise featurewise = new Featurewise(programName, fm);
         List<String> options = ElevatorAdapter.getElevatorOptions();
-        Featurewise featurewise = new Featurewise(programName);
         Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
         // arguments
@@ -693,8 +694,9 @@ public class EvaluationTest {
     public void elevatorPairwiseModel() throws Exception {
         String programName = "elevator";
 
+        FeatureModel fm = new ElevatorFM();
+        Pairwise pairwise = new Pairwise(programName, fm);
         List<String> options = ElevatorAdapter.getElevatorOptions();
-        Pairwise pairwise = new Pairwise(programName);
         Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
         // arguments
@@ -722,9 +724,10 @@ public class EvaluationTest {
     public void elevatorFeaturewiseSamplingTime() throws Exception {
         String programName = "elevator";
 
+        FeatureModel fm = new ElevatorFM();
         List<String> options = ElevatorAdapter.getElevatorOptions();
         Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations, fm);
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
@@ -734,9 +737,10 @@ public class EvaluationTest {
     public void elevatorPairwiseSamplingTime() throws Exception {
         String programName = "elevator";
 
+        FeatureModel fm = new ElevatorFM();
         List<String> options = ElevatorAdapter.getElevatorOptions();
         Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations, fm);
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));

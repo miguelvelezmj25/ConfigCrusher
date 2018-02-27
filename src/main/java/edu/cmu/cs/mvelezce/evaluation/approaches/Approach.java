@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches;
 
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.apache.commons.io.FileUtils;
 
@@ -20,9 +21,15 @@ public abstract class Approach {
     public static final String TERM_DELIMETER = ":";
 
     private String programName;
+    private FeatureModel fm;
 
     public Approach(String programName) {
         this.programName = programName;
+    }
+
+    public Approach(String programName, FeatureModel fm) {
+        this.programName = programName;
+        this.fm = fm;
     }
 
     public abstract void generateCSVData(Set<PerformanceEntryStatistic> performanceEntries, List<String> options) throws IOException;
@@ -31,6 +38,10 @@ public abstract class Approach {
 
     public String getProgramName() {
         return programName;
+    }
+
+    public FeatureModel getFm() {
+        return fm;
     }
 
     protected List<Set<String>> parseTerms(List<String> rawTerms, List<String> options) {

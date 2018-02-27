@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.featurewise;
 
 import edu.cmu.cs.mvelezce.evaluation.Evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.Approach;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.apache.commons.io.FileUtils;
 
@@ -15,6 +16,10 @@ public class Featurewise extends Approach {
 
     public Featurewise(String programName) {
         super(programName);
+    }
+
+    public Featurewise(String programName, FeatureModel fm) {
+        super(programName, fm);
     }
 
     @Override
@@ -101,7 +106,16 @@ public class Featurewise extends Approach {
 
     public Set<PerformanceEntryStatistic> getFeaturewiseEntries(Set<PerformanceEntryStatistic> performanceEntries) {
         Set<Set<String>> configurations = this.getConfigurations(performanceEntries);
-        Set<Set<String>> featurewiseConfigurations = this.getFeaturewiseConfigurations(configurations);
+        Set<Set<String>> featurewiseConfigurations;
+
+        if(this.getFm() == null) {
+            featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+
+        }
+        else {
+            featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations, this.getFm());
+
+        }
 
         Set<PerformanceEntryStatistic> featurewiseEntries = new HashSet<>();
 
@@ -118,8 +132,44 @@ public class Featurewise extends Approach {
         return featurewiseEntries;
     }
 
+    public static Set<Set<String>> getFeaturewiseConfigurations(Set<Set<String>> configurations, FeatureModel fm) {
+        Set<String> options = Featurewise.getOptions(configurations);
+        Set<Set<String>> featurewiseConfigurations = new HashSet<>();
+
+        for(String option : options) {
+            if(fm.BASE.equals(option)) {
+                continue;
+            }
+
+            Set<String> configuration = new HashSet<>();
+            configuration.add(option);
+            configuration.add(fm.BASE);
+
+            if(!fm.isValidProduct(configuration)) {
+                continue;
+            }
+
+            featurewiseConfigurations.add(configuration);
+        }
+
+        return featurewiseConfigurations;
+    }
+
     public static Set<Set<String>> getFeaturewiseConfigurations(Set<Set<String>> configurations) {
         Set<String> options = Featurewise.getOptions(configurations);
+        Set<Set<String>> featurewiseConfigurations = new HashSet<>();
+
+        for(String option : options) {
+            Set<String> configuration = new HashSet<>();
+            configuration.add(option);
+
+            featurewiseConfigurations.add(configuration);
+        }
+
+        return featurewiseConfigurations;
+    }
+
+    public static Set<Set<String>> getFeaturewiseConfigurations(Collection<String> options) {
         Set<Set<String>> featurewiseConfigurations = new HashSet<>();
 
         for(String option : options) {

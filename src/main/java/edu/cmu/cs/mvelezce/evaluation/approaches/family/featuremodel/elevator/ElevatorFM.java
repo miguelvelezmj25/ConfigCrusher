@@ -8,7 +8,7 @@ public class ElevatorFM implements FeatureModel {
 
     @Override
     public boolean isValidProduct(Set<String> conf) {
-        if(!conf.contains("BASE")) {
+        if(!conf.contains(FeatureModel.BASE)) {
             return false;
         }
 

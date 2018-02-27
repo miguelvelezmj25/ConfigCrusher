@@ -1,7 +1,9 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.pairwise;
 
+import edu.cmu.cs.mvelezce.Feature;
 import edu.cmu.cs.mvelezce.evaluation.Evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.Approach;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
@@ -19,6 +21,10 @@ public class Pairwise extends Approach {
 
     public Pairwise(String programName) {
         super(programName);
+    }
+
+    public Pairwise(String programName, FeatureModel fm) {
+        super(programName, fm);
     }
 
     @Override
@@ -104,7 +110,17 @@ public class Pairwise extends Approach {
 
     public Set<PerformanceEntryStatistic> getPairwiseEntries(Set<PerformanceEntryStatistic> performanceEntries) {
         Set<Set<String>> allConfigurations = this.getConfigurations(performanceEntries);
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(allConfigurations);
+        Set<Set<String>> pairwiseConfigurations;
+
+        if(this.getFm() == null) {
+         pairwiseConfigurations = Pairwise.getPairwiseConfigurations(allConfigurations);
+        }
+        else {
+            pairwiseConfigurations = Pairwise.getPairwiseConfigurations(allConfigurations, this.getFm());
+        }
+
+
+
 
         Set<PerformanceEntryStatistic> pairwiseEntries = new HashSet<>();
 
@@ -135,6 +151,48 @@ public class Pairwise extends Approach {
         return pairwiseConfigurations;
     }
 
+    public static Set<Set<String>> getPairwiseConfigurations(Set<Set<String>> allConfigurations, FeatureModel fm) {
+        Set<String> options = Pairwise.getOptions(allConfigurations);
+        Set<List<String>> pairs = Pairwise.getPairs(options);
+
+        Set<Set<String>> pairwiseConfigurations = new HashSet<>();
+
+        for(List<String> pair : pairs) {
+            Set<Set<String>> pairConfigurations = Pairwise.getConfigurations(pair);
+
+            for(Set<String> config : pairConfigurations) {
+                if(config.contains(fm.BASE)) {
+                    continue;
+                }
+
+                config.add(fm.BASE);
+
+                if(!fm.isValidProduct(config)) {
+                    continue;
+                }
+
+                pairwiseConfigurations.add(config);
+            }
+
+        }
+
+        return pairwiseConfigurations;
+    }
+
+    public static Set<Set<String>> getPairwiseConfigurations(Collection<String> options) {
+        Set<List<String>> pairs = Pairwise.getPairs(options);
+
+        Set<Set<String>> pairwiseConfigurations = new HashSet<>();
+
+        for(List<String> pair : pairs) {
+            Set<Set<String>> pairConfigurations = Pairwise.getConfigurations(pair);
+            pairwiseConfigurations.addAll(pairConfigurations);
+        }
+
+        return pairwiseConfigurations;
+    }
+
+
     private static Set<Set<String>> getConfigurations(List<String> pair) {
         Set<Set<String>> configurations = new HashSet<>();
 
@@ -159,7 +217,7 @@ public class Pairwise extends Approach {
         return configurations;
     }
 
-    private static Set<List<String>> getPairs(Set<String> options) {
+    private static Set<List<String>> getPairs(Collection<String> options) {
         List<String> optionsList = new ArrayList<>(options);
 
         Combinations combinations = new Combinations(options.size(), 2);

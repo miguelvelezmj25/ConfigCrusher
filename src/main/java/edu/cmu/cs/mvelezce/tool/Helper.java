@@ -60,7 +60,7 @@ public class Helper {
 //        }
 //    }
 
-    public static Set<Set<String>> getRandomConfigs(List<String> options, int size) {
+    public static Set<Set<String>> getRandomConfigs(List<String> options, int size, Set<Set<String>> excludeConfigs) {
         Set<Set<String>> configs = new HashSet<>(size);
         int length = options.size();
 
@@ -80,7 +80,7 @@ public class Helper {
                 }
             }
 
-            if(!configs.contains(config)) {
+            if(!configs.contains(config) && !excludeConfigs.contains(config)) {
                 configs.add(config);
             }
         }

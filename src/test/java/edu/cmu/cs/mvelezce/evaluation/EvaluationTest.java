@@ -102,6 +102,36 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareElevator2() throws Exception {
+        String programName = "elevator";
+
+        FeatureModel fm = new ElevatorFM();
+
+        Evaluation eval = new Evaluation(programName, fm);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareElevator3() throws Exception {
+        String programName = "elevator";
+
+        FeatureModel fm = new ElevatorFM();
+
+        Evaluation eval = new Evaluation(programName, fm);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareElevator4() throws Exception {
+        String programName = "elevator";
+
+        FeatureModel fm = new ElevatorFM();
+
+        Evaluation eval = new Evaluation(programName, fm);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareElevator5() throws Exception {
         String programName = "elevator";
 
@@ -562,6 +592,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void elevatorBruteForceSamplingTime() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
     public void elevatorFamily() throws IOException {
         String programName = "elevator";
 
@@ -597,10 +635,11 @@ public class EvaluationTest {
         Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        List<String> options = ElevatorAdapter.getElevatorOptions();
+        FeatureModel fm = new ElevatorFM();
+        Featurewise featurewise = new Featurewise(programName, fm);
 
-        Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        List<String> options = ElevatorAdapter.getElevatorOptions();
         featurewise.generateCSVData(featurewiseEntries, options);
     }
 
@@ -643,10 +682,10 @@ public class EvaluationTest {
         Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        List<String> options = ElevatorAdapter.getElevatorOptions();
-
-        Pairwise pairwise = new Pairwise(programName);
+        FeatureModel fm = new ElevatorFM();
+        Pairwise pairwise = new Pairwise(programName, fm);
         Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        List<String> options = ElevatorAdapter.getElevatorOptions();
         pairwise.generateCSVData(pairwiseEntries, options);
     }
 
@@ -677,6 +716,58 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
+    }
+
+    @Test
+    public void elevatorFeaturewiseSamplingTime() throws Exception {
+        String programName = "elevator";
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
+    }
+
+    @Test
+    public void elevatorPairwiseSamplingTime() throws Exception {
+        String programName = "elevator";
+
+        List<String> options = ElevatorAdapter.getElevatorOptions();
+        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
+        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+    }
+
+    @Test
+    public void elevatorSPLat() throws Exception {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        SPLat splat = new SPLat(programName);
+        List<Coverage> coverageList = splat.readFileCoverage();
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+    }
+
+    @Test
+    public void elevatorSPLatSamplingTime() throws Exception {
+        String programName = "elevator";
+
+        SPLat splat = new SPLat(programName);
+        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
     }
 
     @Test

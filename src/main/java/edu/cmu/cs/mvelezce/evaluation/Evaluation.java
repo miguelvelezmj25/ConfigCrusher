@@ -535,9 +535,12 @@ public class Evaluation {
                     continue;
                 }
 
+                if(time2 < 1.0) {
+                    continue;
+                }
+
                 se += squaredError;
                 ape += relativeError;
-                System.out.println(configuration);
                 testCount++;
             }
         }

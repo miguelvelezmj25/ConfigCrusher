@@ -182,7 +182,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/macos,windows,intellij+iml,maven,eclipse,java
-/src/main/resources/comparison/java/programs/
-/src/main/resources/perf_res/java/programs/
-/src/main/resources/bf_res/java/programs/
-/src/main/resources/splat_res/java/programs/
+/src/main/java/edu/cmu/cs/mvelezce/evaluation/analysis/stats/.Rhistory

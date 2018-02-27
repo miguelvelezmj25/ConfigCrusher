@@ -58,6 +58,12 @@ public class Pairwise extends Approach {
             learnedModel.put(term, Double.valueOf(coef));
         }
 
+        Set<String> empty = new HashSet<>();
+
+        if(!learnedModel.containsKey(empty)) {
+            learnedModel.put(empty, 0.0);
+        }
+
         return learnedModel;
     }
 
@@ -118,9 +124,6 @@ public class Pairwise extends Approach {
         else {
             pairwiseConfigurations = Pairwise.getPairwiseConfigurations(allConfigurations, this.getFm());
         }
-
-
-
 
         Set<PerformanceEntryStatistic> pairwiseEntries = new HashSet<>();
 

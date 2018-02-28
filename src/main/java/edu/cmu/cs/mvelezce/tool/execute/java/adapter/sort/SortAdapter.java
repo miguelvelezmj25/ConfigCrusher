@@ -18,7 +18,7 @@ public class SortAdapter extends BaseAdapter {
     }
 
     public static List<String> getSortOptions() {
-        String[] options = {"CHECK", "MERGE", "UNIQUE", "IGNORELEADINGBLANKS", "DICTIONARYORDER", "IGNORECASE", "NUMERICSORT", "GENERALNUMERICSORT", "HUMANNUMERICSORT", "MONTHSORT", "VERSIONSORT", "REVERSE"};
+        String[] options = {"CHECK", "MERGE", "UNIQUE", "IGNORELEADINGBLANKS", "DICTIONARYORDER", "IGNORECASE", "NUMBERICSORT", "GENERALNUMRICSORT", "HUMANNUMERICSORT", "MONTHSORT", "VERSIONSORT", "REVERSE"};
 
         return Arrays.asList(options);
     }

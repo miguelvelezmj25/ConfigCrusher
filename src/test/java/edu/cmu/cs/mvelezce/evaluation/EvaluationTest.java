@@ -437,35 +437,61 @@ public class EvaluationTest {
     public void runningExampleFeaturewiseSamplingTime() throws Exception {
         String programName = "running-example";
 
-        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
     }
 
     @Test
     public void runningExamplePairwiseSamplingTime() throws Exception {
         String programName = "running-example";
 
-        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
     }
 
     @Test
     public void runningExampleSPLatSamplingTime() throws Exception {
         String programName = "running-example";
 
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
         SPLat splat = new SPLat(programName);
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
+        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            if(!splatConfigurations.contains(entry.getConfiguration())) {
+                continue;
+            }
+
+            splatEntries.add(entry);
+        }
+
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatEntries));
     }
 
 
@@ -479,10 +505,9 @@ public class EvaluationTest {
         Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
-
         Featurewise featurewise = new Featurewise(programName);
         Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
         featurewise.generateCSVData(featurewiseEntries, options);
     }
 
@@ -724,26 +749,36 @@ public class EvaluationTest {
     public void elevatorFeaturewiseSamplingTime() throws Exception {
         String programName = "elevator";
 
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
         FeatureModel fm = new ElevatorFM();
-        List<String> options = ElevatorAdapter.getElevatorOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations, fm);
+        Featurewise featurewise = new Featurewise(programName, fm);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
     }
 
     @Test
     public void elevatorPairwiseSamplingTime() throws Exception {
         String programName = "elevator";
 
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
         FeatureModel fm = new ElevatorFM();
-        List<String> options = ElevatorAdapter.getElevatorOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations, fm);
+        Pairwise pairwise = new Pairwise(programName, fm);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
     }
 
     @Test
@@ -767,11 +802,14 @@ public class EvaluationTest {
     public void elevatorSPLatSamplingTime() throws Exception {
         String programName = "elevator";
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(performanceEntries));
     }
 
     @Test
@@ -933,35 +971,61 @@ public class EvaluationTest {
     public void colorCounterFeaturewiseSamplingTime() throws Exception {
         String programName = "pngtasticColorCounter";
 
-        List<String> options = ColorCounterAdapter.getColorCounterOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
     }
 
     @Test
     public void colorCounterPairwiseSamplingTime() throws Exception {
         String programName = "pngtasticColorCounter";
 
-        List<String> options = ColorCounterAdapter.getColorCounterOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
     }
 
     @Test
     public void colorCounterSPLatSamplingTime() throws Exception {
         String programName = "pngtasticColorCounter";
 
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
         SPLat splat = new SPLat(programName);
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
+        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            if(!splatConfigurations.contains(entry.getConfiguration())) {
+                continue;
+            }
+
+            splatEntries.add(entry);
+        }
+
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatEntries));
     }
 
     @Test
@@ -1152,24 +1216,34 @@ public class EvaluationTest {
     public void kanziFeaturewiseSamplingTime() throws Exception {
         String programName = "kanzi";
 
-        List<String> options = KanziAdapter.getKanziOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
     }
 
     @Test
     public void kanziPairwiseSamplingTime() throws Exception {
         String programName = "kanzi";
 
-        List<String> options = KanziAdapter.getKanziOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
     }
 
     @Test
@@ -1193,11 +1267,27 @@ public class EvaluationTest {
     public void kanziSPLatSamplingTime() throws Exception {
         String programName = "kanzi";
 
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
         SPLat splat = new SPLat(programName);
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
+        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            if(!splatConfigurations.contains(entry.getConfiguration())) {
+                continue;
+            }
+
+            splatEntries.add(entry);
+        }
+
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatEntries));
     }
 
     @Test
@@ -1478,24 +1568,34 @@ public class EvaluationTest {
     public void grepFeaturewiseSamplingTime() throws Exception {
         String programName = "grep";
 
-        List<String> options = GrepAdapter.getGrepOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
     }
 
     @Test
     public void grepPairwiseSamplingTime() throws Exception {
         String programName = "grep";
 
-        List<String> options = GrepAdapter.getGrepOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
     }
 
     @Test
@@ -1519,11 +1619,27 @@ public class EvaluationTest {
     public void grepSPLatSamplingTime() throws Exception {
         String programName = "grep";
 
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
         SPLat splat = new SPLat(programName);
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
+        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            if(!splatConfigurations.contains(entry.getConfiguration())) {
+                continue;
+            }
+
+            splatEntries.add(entry);
+        }
+
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatEntries));
     }
 
     @Test
@@ -1598,12 +1714,17 @@ public class EvaluationTest {
     public void prevaylerFeaturewiseSamplingTime() throws Exception {
         String programName = "prevayler";
 
-        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
     }
 
     @Test
@@ -1656,12 +1777,17 @@ public class EvaluationTest {
     public void prevaylerPairwiseSamplingTime() throws Exception {
         String programName = "prevayler";
 
-        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
     }
 
     @Test
@@ -1685,11 +1811,27 @@ public class EvaluationTest {
     public void prevaylerSPLatSamplingTime() throws Exception {
         String programName = "prevayler";
 
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
         SPLat splat = new SPLat(programName);
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
+        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            if(!splatConfigurations.contains(entry.getConfiguration())) {
+                continue;
+            }
+
+            splatEntries.add(entry);
+        }
+
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatEntries));
     }
 
     @Test
@@ -1837,35 +1979,61 @@ public class EvaluationTest {
     public void optimizerFeaturewiseSamplingTime() throws Exception {
         String programName = "pngtasticOptimizer";
 
-        List<String> options = OptimizerAdapter.getOptimizerOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> featurewiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
     }
 
     @Test
     public void optimizerPairwiseSamplingTime() throws Exception {
         String programName = "pngtasticOptimizer";
 
-        List<String> options = OptimizerAdapter.getOptimizerOptions();
-        Set<Set<String>> configurations = Helper.getConfigurations(new HashSet<>(options));
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
     }
 
     @Test
     public void optimizerSPLatSamplingTime() throws Exception {
         String programName = "pngtasticOptimizer";
 
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
         SPLat splat = new SPLat(programName);
         Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
 
+        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            if(!splatConfigurations.contains(entry.getConfiguration())) {
+                continue;
+            }
+
+            splatEntries.add(entry);
+        }
+
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatConfigurations));
+        System.out.println(eval.getTotalSamplingTime(splatEntries));
     }
 
     @Test
@@ -2182,11 +2350,12 @@ public class EvaluationTest {
 
         Executor executor = new FeaturewiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
-        Set<Set<String>> pairwiseConfigurations = Featurewise.getFeaturewiseConfigurations(configurations);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
     }
 
     @Test
@@ -2196,13 +2365,14 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new FeaturewiseExecutor(programName);
+        Executor executor = new PairwiseExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
-        Set<Set<String>> pairwiseConfigurations = Pairwise.getPairwiseConfigurations(configurations);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseConfigurations));
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
     }
 
 }

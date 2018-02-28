@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.evaluation;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
 import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
@@ -39,35 +40,35 @@ public class Evaluation {
         this.fm = fm;
     }
 
-    public double getTotalSamplingTime(Set<Set<String>> configurations) throws IOException {
-        double time = 0.0;
-
-        String fileString = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
-                + Evaluation.BRUTE_FORCE + Evaluation.DOT_CSV;
-        File file = new File(fileString);
-
-        List<String> lines = this.parseFullFile(file);
-
-        for(String line : lines) {
-            if(!line.startsWith("true")) {
-                continue;
-            }
-
-            String[] entries = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-            String configString = entries[1];
-            configString = Evaluation.removeSpecialCharsFromConfig(configString);
-            Set<String> config = Evaluation.buildConfig(configString);
-
-            if(!configurations.contains(config)) {
-                continue;
-            }
-
-            Double exec = Double.valueOf(entries[2]);
-            time += exec;
-        }
-
-        return time;
-    }
+//    public double getTotalSamplingTime(Set<Set<String>> configurations) throws IOException {
+//        double time = 0.0;
+//
+//        String fileString = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
+//                + Evaluation.BRUTE_FORCE + Evaluation.DOT_CSV;
+//        File file = new File(fileString);
+//
+//        List<String> lines = this.parseFullFile(file);
+//
+//        for(String line : lines) {
+//            if(!line.startsWith("true")) {
+//                continue;
+//            }
+//
+//            String[] entries = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+//            String configString = entries[1];
+//            configString = Evaluation.removeSpecialCharsFromConfig(configString);
+//            Set<String> config = Evaluation.buildConfig(configString);
+//
+//            if(!configurations.contains(config)) {
+//                continue;
+//            }
+//
+//            Double exec = Double.valueOf(entries[2]);
+//            time += exec;
+//        }
+//
+//        return time;
+//    }
 
     private static Set<String> buildConfig(String configString) {
         Set<String> config = new HashSet<>();
@@ -582,5 +583,19 @@ public class Evaluation {
 
     public String getProgramName() {
         return this.programName;
+    }
+
+    public double getTotalSamplingTime(Set<PerformanceEntryStatistic> entries) {
+        double time = 0.0;
+
+        for(PerformanceEntryStatistic entry : entries) {
+            Map<Region, Double> regionToTime = entry.getRegionsToProcessedPerformanceHumanReadable();
+
+            for(double exec : regionToTime.values()) {
+                time += exec;
+            }
+        }
+
+        return time;
     }
 }

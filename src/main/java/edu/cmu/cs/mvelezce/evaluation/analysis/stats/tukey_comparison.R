@@ -18,11 +18,11 @@ df = data.frame(error = c(cc[cc$measured=="false",]$relative.error,
                           rep("fw", length(fw[fw$measured=="false",]$relative.error)),
                           rep("pw", length(pw[pw$measured=="false",]$relative.error))))
 
-#df = data.frame(error = c(fb[fb$measured=="false",]$relative.error,
+#df = data.frame(error = c(cc[cc$measured=="false",]$relative.error,
 #                          fw[fw$measured=="false",]$relative.error,
 #                          pw[pw$measured=="false",]$relative.error,
 #                          sp[sp$measured=="false",]$relative.error), 
-#                treat = c(rep("fb", length(fb[fb$measured=="false",]$relative.error)),
+#                treat = c(rep("cc", length(cc[cc$measured=="false",]$relative.error)),
 #                          rep("fw", length(fw[fw$measured=="false",]$relative.error)),
 #                          rep("pw", length(pw[pw$measured=="false",]$relative.error)),
 #                          rep("sp", length(sp[sp$measured=="false",]$relative.error))))
@@ -32,7 +32,7 @@ View(df)
 library(nparcomp)
 
 b = nparcomp(error ~ treat, data=df, asy.method = "mult.t",
-            type = "Tukey", alternative = "greater", 
+            type = "Tukey", alternative = "two.side", 
             plot.simci = TRUE, info = FALSE)
 summary(b)
 

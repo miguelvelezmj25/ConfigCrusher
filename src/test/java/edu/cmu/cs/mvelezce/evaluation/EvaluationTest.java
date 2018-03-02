@@ -1467,6 +1467,31 @@ public class EvaluationTest {
     }
 
     @Test
+    public void sortSPLat() throws Exception {
+        String programName = "sort";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        SPLat splat = new SPLat(programName);
+        List<Coverage> coverageList = splat.readFileCoverage();
+
+        int count = 0;
+        for(Coverage c : coverageList) {
+            count += c.getCovered().size();
+        }
+
+        System.out.println(count);
+
+
+//        Evaluation eval = new Evaluation(programName);
+//        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+    }
+
+    @Test
     public void grepConfigCrusher() throws Exception {
         String programName = "grep";
 

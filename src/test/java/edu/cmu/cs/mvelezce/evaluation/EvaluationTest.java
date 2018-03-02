@@ -1333,6 +1333,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void sortBruteForceSamplingTime() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
     public void sortFeaturewiseGenerateCSVData() throws Exception {
         String programName = "sort";
 
@@ -1379,6 +1387,23 @@ public class EvaluationTest {
     }
 
     @Test
+    public void sortFeaturewiseSamplingTime() throws Exception {
+        String programName = "sort";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Featurewise featurewise = new Featurewise(programName);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    }
+
+    @Test
     public void sortPairwiseGenerateCSVData() throws Exception {
         String programName = "sort";
 
@@ -1422,6 +1447,23 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
+    }
+
+    @Test
+    public void sortPairwiseSamplingTime() throws Exception {
+        String programName = "sort";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Pairwise pairwise = new Pairwise(programName);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
     }
 
     @Test

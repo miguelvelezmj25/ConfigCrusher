@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.kanzi.SPL
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.optimizer.SPLatOptimizerMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.prevalyer.SPLatPrevaylerMain;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.runningexample.SPLatRunningExampleMain;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.adapter.sort.SPLatSortMain;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.compression.BaseCompression;
 import org.apache.commons.io.FileUtils;
@@ -83,6 +84,9 @@ public class SPLatCompression extends BaseCompression {
         }
         else if(this.getProgramName().contains("density")) {
             main = new SPLatDensityMain("density");
+        }
+        else if(this.getProgramName().contains("sort")) {
+            main = new SPLatSortMain("sort");
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

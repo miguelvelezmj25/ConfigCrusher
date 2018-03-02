@@ -493,4 +493,35 @@ public class ConfigCrusherExecutorTest {
         measuredPerformance.size();
     }
 
+    @Test
+    public void density1() throws Exception {
+        String programName = "density";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/density/target/classes";
+        String entryPoint = "at.favre.tools.dconvert.Main";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+
+        configurations.clear();
+        Set<String> n = new HashSet<>();
+        n.add("PLATFORM");
+        n.add("UPSCALINGALGORITHM");
+        n.add("OUTPUTCOMPRESSIONGMODE");
+        n.add("DOWNSCALINGALGORITHM");
+        configurations.add(n);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new ConfigCrusherExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        measuredPerformance.size();
+    }
+
+
 }

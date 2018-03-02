@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import org.junit.Test;
 
@@ -281,6 +282,33 @@ public class BruteForceExecutorTest {
     }
 
     @Test
+    public void sort1() throws IOException, InterruptedException {
+        String programName = "sort";
+        String classDirectory = "/Users/miguelvelez/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/sort/target/classes";
+
+        String entryPoint = "org.unix4j.sort.Main";
+
+        Set<String> options = new HashSet<>(SortAdapter.getSortOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+        System.out.println("Configurations to sample: " + configurations.size());
+
+        configurations.clear();
+
+        Set<String> conf = new HashSet<>();
+        conf.add("NUMERICSORT");
+
+        configurations.add(conf);
+
+        String[] args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
+    @Test
     public void find() throws IOException, InterruptedException {
         String programName = "find";
         String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/find/target/classes";
@@ -315,6 +343,40 @@ public class BruteForceExecutorTest {
         args[0] = "-delres";
         args[1] = "-saveres";
         args[2] = "-i5";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
+    @Test
+    public void density1() throws Exception {
+        String programName = "density";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/density/target/classes";
+        String entryPoint = "at.favre.tools.dconvert.Main";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        Compression compression = new SimpleCompression(programName);
+        Set<Set<String>> configurations = compression.compressConfigurations(args);
+
+        configurations.clear();
+        Set<String> n = new HashSet<>();
+
+        n.add("PLATFORM");
+        n.add("UPSCALINGALGORITHM");
+        n.add("OUTPUTCOMPRESSIONGMODE");
+        n.add("DOWNSCALINGALGORITHM");
+
+//        n.add("SKIPUPSCALING");
+//        n.add("SCALEMODE");
+
+        configurations.add(n);
+
+        args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i1";
 
         Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);

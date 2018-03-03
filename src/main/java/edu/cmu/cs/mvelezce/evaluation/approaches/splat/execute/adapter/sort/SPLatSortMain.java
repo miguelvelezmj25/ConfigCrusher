@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import org.unix4j.sort.Main;
 
+import java.io.IOException;
 import java.util.*;
 
 public class SPLatSortMain extends SPLatMain {
@@ -29,7 +30,11 @@ public class SPLatSortMain extends SPLatMain {
         splatConfigurations.add(configuration);
         String[] args = adapter.configurationAsMainArguments(configuration);
 
-        Main.splat(args, stack);
+        try {
+            Main.splat(args, stack);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
         Set<String> optionsNotInStack = this.getOptionsNotInStack(stack, options);
         Set<Set<String>> coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);
@@ -49,7 +54,11 @@ public class SPLatSortMain extends SPLatMain {
                 splatConfigurations.add(configuration);
                 args = adapter.configurationAsMainArguments(configuration);
 
-                Main.splat(args, stack);
+                try {
+                    Main.splat(args, stack);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
 
                 optionsNotInStack = this.getOptionsNotInStack(stack, options);
                 coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);

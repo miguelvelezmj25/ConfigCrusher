@@ -429,12 +429,12 @@ public class Evaluation {
         File outputFile1 = this.checkFileExists(approach1);
         File outputFile2 = this.checkFileExists(approach2);
         File outputFile = this.deleteOutputFile(approach1, approach2);
-        this.compareLengthsOfFiles(outputFile1, outputFile2);
+//        this.compareLengthsOfFiles(outputFile1, outputFile2);
 
         Map<Set<String>, List<String>> data1 = this.getData(outputFile1);
         Map<Set<String>, List<String>> data2 = this.getData(outputFile2);
 
-        Set<Set<String>> configurations = this.getConfigurations(outputFile1);
+        Set<Set<String>> configurations = this.getConfigurations(outputFile2);
 
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
         StringBuilder result = new StringBuilder();
@@ -449,6 +449,14 @@ public class Evaluation {
         result.append("measured,configuration," + approach1 + "," + approach1 + "_std," + approach2 + "," + approach2
                 + "_std," + approach2 + "_minci," + approach2 + "_maxci,1withinci,absolute error,relative error,squared error");
         result.append("\n");
+
+        Set<Set<String>> validCs = new HashSet<>();
+
+//        for(Set<String> configuration : configurations) {
+//            if(this.fm.isValidProduct(configuration)) {
+//                validCs.add(configuration);
+//            }
+//        }
 
         for(Set<String> configuration : configurations) {
             List<String> perf1 = data1.get(configuration);
@@ -536,13 +544,19 @@ public class Evaluation {
                     continue;
                 }
 
+                validCs.remove(configuration);
+
                 if(time2 < 1.0) {
+                    System.out.println("Slip");
                     continue;
                 }
 
                 se += squaredError;
                 ape += relativeError;
                 testCount++;
+            }
+            else {
+                validCs.remove(configuration);
             }
         }
 
@@ -573,12 +587,17 @@ public class Evaluation {
         result.append("Predicted outside ci: ");
         result.append(predictedOutside);
         result.append("\n");
+        result.append("Valid configs: ");
+        result.append(testCount);
+        result.append("\n");
 
         outputFile.getParentFile().mkdirs();
         FileWriter writer = new FileWriter(outputFile);
         writer.write(result.toString());
         writer.flush();
         writer.close();
+
+        System.out.println(validCs);
     }
 
     public String getProgramName() {

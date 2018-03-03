@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEx
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.Family;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.elevator.ElevatorFM;
+import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.email.EmailFM;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.model.FamilyModelBuilder;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.execute.FeaturewiseExecutor;
@@ -27,6 +28,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.email.EmailAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
@@ -134,6 +136,36 @@ public class EvaluationTest {
     @Test
     public void compareElevator5() throws Exception {
         String programName = "elevator";
+
+        FeatureModel fm = new ElevatorFM();
+
+        Evaluation eval = new Evaluation(programName, fm);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareEmail2() throws Exception {
+        String programName = "email";
+
+        FeatureModel fm = new ElevatorFM();
+
+        Evaluation eval = new Evaluation(programName, fm);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareEmail3() throws Exception {
+        String programName = "email";
+
+        FeatureModel fm = new ElevatorFM();
+
+        Evaluation eval = new Evaluation(programName, fm);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
+    public void compareEmail5() throws Exception {
+        String programName = "email";
 
         FeatureModel fm = new ElevatorFM();
 
@@ -603,6 +635,192 @@ public class EvaluationTest {
     }
 
     @Test
+    public void emailBruteForce() throws Exception {
+        String programName = "email";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void emailBruteForceSamplingTime() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
+    public void emailFamily() throws IOException, InterruptedException {
+        String programName = "email";
+
+        // arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        FeatureModel fm = new EmailFM();
+        PerformanceModelBuilder builder = new FamilyModelBuilder(programName, fm);
+        PerformanceModel performanceModel = builder.createModel(args);
+
+        List<String> options = EmailAdapter.getEmailOptions();
+        Set<String> optionsSet = new HashSet<>(options);
+
+        Set<PerformanceEntryStatistic> entries = new HashSet<>();
+        PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
+        entries.add(entry);
+
+        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<Set<String>> configurations = new HashSet<>();
+
+        for(PerformanceEntryStatistic e : performanceEntries) {
+            configurations.add(e.getConfiguration());
+        }
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FAMILY, performanceModel, entries, configurations);
+    }
+
+    @Test
+    public void emailFeaturewiseGenerateCSVData() throws Exception {
+        String programName = "email";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        FeatureModel fm = new EmailFM();
+        Featurewise featurewise = new Featurewise(programName, fm);
+
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+        List<String> options = EmailAdapter.getEmailOptions();
+        featurewise.generateCSVData(featurewiseEntries, options);
+    }
+
+    @Test
+    public void emailFeaturewiseModel() throws Exception {
+        String programName = "email";
+
+        FeatureModel fm = new EmailFM();
+        Featurewise featurewise = new Featurewise(programName, fm);
+        List<String> options = EmailAdapter.getEmailOptions();
+        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
+    }
+
+    @Test
+    public void emailFeaturewiseSamplingTime() throws Exception {
+        String programName = "email";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new FeaturewiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        FeatureModel fm = new EmailFM();
+        Featurewise featurewise = new Featurewise(programName, fm);
+        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    }
+
+    @Test
+    public void emailPairwiseGenerateCSVData() throws Exception {
+        String programName = "email";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        FeatureModel fm = new EmailFM();
+        Pairwise pairwise = new Pairwise(programName, fm);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+        List<String> options = EmailAdapter.getEmailOptions();
+        pairwise.generateCSVData(pairwiseEntries, options);
+    }
+
+    @Test
+    public void emailPairwiseModel() throws Exception {
+        String programName = "email";
+
+        FeatureModel fm = new EmailFM();
+        Pairwise pairwise = new Pairwise(programName, fm);
+        List<String> options = EmailAdapter.getEmailOptions();
+        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+
+        // arguments
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
+        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
+    }
+
+    @Test
+    public void emailPairwiseSamplingTime() throws Exception {
+        String programName = "email";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new PairwiseExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        FeatureModel fm = new EmailFM();
+        Pairwise pairwise = new Pairwise(programName, fm);
+        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    }
+
+    @Test
     public void elevatorBruteForce() throws Exception {
         String programName = "elevator";
 
@@ -625,7 +843,7 @@ public class EvaluationTest {
     }
 
     @Test
-    public void elevatorFamily() throws IOException {
+    public void elevatorFamily() throws IOException, InterruptedException {
         String programName = "elevator";
 
         // arguments
@@ -644,7 +862,14 @@ public class EvaluationTest {
         PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
         entries.add(entry);
 
-        Set<Set<String>> configurations = BruteForceEvaluationExecutor.getBruteForceConfigurationsFromOptions(optionsSet);
+        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Set<Set<String>> configurations = new HashSet<>();
+
+        for(PerformanceEntryStatistic e : performanceEntries) {
+            configurations.add(e.getConfiguration());
+        }
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.FAMILY, performanceModel, entries, configurations);

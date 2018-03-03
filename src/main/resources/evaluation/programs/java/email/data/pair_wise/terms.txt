@@ -1,0 +1,10 @@
+(Intercept)
+x2
+x4
+x5
+x7
+x2:x4
+x2:x7
+x4:x5
+x4:x7
+x5:x7

@@ -1,12 +1,10 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute;
 
-import at.favre.tools.dconvert.Main;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Set;
-import java.util.Stack;
 
 public class SPLatCompressionTest {
 
@@ -111,6 +109,20 @@ public class SPLatCompressionTest {
     @Test
     public void density() throws IOException {
         String programName = "density";
+
+        // Program arguments
+        String[] args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Compression executor = new SPLatCompression(programName);
+        Set<Set<String>> configurations = executor.compressConfigurations(args);
+        System.out.println("Configurations executed: " + configurations.size());
+    }
+
+    @Test
+    public void sort() throws IOException {
+        String programName = "sort";
 
         // Program arguments
         String[] args = new String[2];

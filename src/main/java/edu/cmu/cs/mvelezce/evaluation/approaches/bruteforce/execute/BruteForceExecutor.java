@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.colorcounter.BFColorCounterAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.density.BFDensityAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.elevator.BFElevatorAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.email.BFEmailAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.find.BFFindAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.grep.BFGrepAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.kanzi.BFKanziAdapter;
@@ -183,6 +184,9 @@ public class BruteForceExecutor extends BaseExecutor {
         else if(this.getProgramName().contains("elevator")) {
             adapter = new BFElevatorAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
+        else if(this.getProgramName().contains("email")) {
+            adapter = new BFEmailAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());
         }
@@ -190,8 +194,8 @@ public class BruteForceExecutor extends BaseExecutor {
         for(Set<String> configuration : this.getConfigurations()) {
             adapter.execute(configuration, iteration);
 
-            System.gc();
-            Thread.sleep(5000);
+//            System.gc();
+//            Thread.sleep(5000);
         }
 
         String outputDir = this.getOutputDir() + "/" + this.getProgramName() + "/" + iteration;

@@ -3,7 +3,6 @@ package edu.cmu.cs.mvelezce.evaluation.approaches.family.model;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.Family;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.BasePerformanceModelBuilder;
 import org.apache.commons.io.FileUtils;
@@ -29,7 +28,8 @@ public class FamilyModelBuilder extends BasePerformanceModelBuilder {
 
         try {
             model = this.getModel();
-        } catch(IOException e) {
+        }
+        catch(IOException e) {
             throw new RuntimeException("Coule not get the family model");
         }
 
@@ -99,6 +99,10 @@ public class FamilyModelBuilder extends BasePerformanceModelBuilder {
 
             Set<String> options = this.getOptions(term);
             double time = this.getTime(term);
+
+            if(model.containsKey(options)) {
+                time += model.get(options);
+            }
 
             model.put(options, time);
         }

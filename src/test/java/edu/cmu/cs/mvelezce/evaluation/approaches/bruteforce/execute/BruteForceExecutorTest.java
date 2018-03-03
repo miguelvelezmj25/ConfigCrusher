@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.email.EmailAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.find.FindAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
@@ -336,6 +337,26 @@ public class BruteForceExecutorTest {
         String entryPoint = "family.PL_Interface_impl";
 
         Set<String> options = new HashSet<>(ElevatorAdapter.getElevatorOptions());
+        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+        System.out.println("Configurations to sample: " + configurations.size());
+
+        String[] args = new String[3];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+        args[2] = "-i5";
+
+        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    }
+
+    @Test
+    public void email() throws IOException, InterruptedException {
+        String programName = "email";
+        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/email/target/classes";
+
+        String entryPoint = "family.PL_Interface_impl";
+
+        Set<String> options = new HashSet<>(EmailAdapter.getEmailOptions());
         Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
         System.out.println("Configurations to sample: " + configurations.size());
 

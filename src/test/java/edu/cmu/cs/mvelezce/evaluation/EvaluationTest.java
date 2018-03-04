@@ -526,7 +526,6 @@ public class EvaluationTest {
         System.out.println(eval.getTotalSamplingTime(splatEntries));
     }
 
-
     @Test
     public void runningExampleFeaturewiseGenerateCSVData() throws Exception {
         String programName = "running-example";
@@ -1706,6 +1705,33 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+    }
+
+    @Test
+    public void sortSPLatSamplingTime() throws Exception {
+        String programName = "sort";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new SPLatExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        SPLat splat = new SPLat(programName);
+        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+
+        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            if(!splatConfigurations.contains(entry.getConfiguration())) {
+                continue;
+            }
+
+            splatEntries.add(entry);
+        }
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(splatEntries));
     }
 
     @Test

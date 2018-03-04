@@ -30,41 +30,41 @@ public class SPLatSortMain extends SPLatMain {
         splatConfigurations.add(configuration);
         String[] args = adapter.configurationAsMainArguments(configuration);
 
-        try {
-            Main.splat(args, stack);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        Set<String> optionsNotInStack = this.getOptionsNotInStack(stack, options);
-        Set<Set<String>> coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);
-        configsToCovered.put(configuration, coveredConfigs);
-
-        while(!stack.isEmpty()) {
-            String option = stack.peek();
-
-            if(configuration.contains(option)) {
-                configuration = new HashSet<>(configuration);
-                configuration.remove(option);
-                stack.pop();
-            }
-            else {
-                configuration = new HashSet<>(configuration);
-                configuration.add(option);
-                splatConfigurations.add(configuration);
-                args = adapter.configurationAsMainArguments(configuration);
-
-                try {
-                    Main.splat(args, stack);
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-
-                optionsNotInStack = this.getOptionsNotInStack(stack, options);
-                coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);
-                configsToCovered.put(configuration, coveredConfigs);
-            }
-        }
+//        try {
+//            Main.splat(args, stack);
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        Set<String> optionsNotInStack = this.getOptionsNotInStack(stack, options);
+//        Set<Set<String>> coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);
+//        configsToCovered.put(configuration, coveredConfigs);
+//
+//        while(!stack.isEmpty()) {
+//            String option = stack.peek();
+//
+//            if(configuration.contains(option)) {
+//                configuration = new HashSet<>(configuration);
+//                configuration.remove(option);
+//                stack.pop();
+//            }
+//            else {
+//                configuration = new HashSet<>(configuration);
+//                configuration.add(option);
+//                splatConfigurations.add(configuration);
+//                args = adapter.configurationAsMainArguments(configuration);
+//
+//                try {
+//                    Main.splat(args, stack);
+//                } catch(Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//                optionsNotInStack = this.getOptionsNotInStack(stack, options);
+//                coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);
+//                configsToCovered.put(configuration, coveredConfigs);
+//            }
+//        }
 
         this.setConfigsToCovered(configsToCovered);
 

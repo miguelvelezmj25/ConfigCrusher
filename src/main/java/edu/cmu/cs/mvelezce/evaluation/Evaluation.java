@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureMode
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
@@ -192,6 +193,12 @@ public class Evaluation {
             FileUtils.forceDelete(outputFile);
         }
 
+        Set<Set<String>> bfConfigs = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntryStats) {
+            bfConfigs.add(entry.getConfiguration());
+        }
+
         DecimalFormat decimalFormat = new DecimalFormat("#.###");
         StringBuilder result = new StringBuilder();
         result.append("measured,configuration,performance,std");
@@ -222,6 +229,10 @@ public class Evaluation {
 
                 for(Set<String> covered : covereds) {
                     if(covered.equals(config)) {
+                        continue;
+                    }
+
+                    if(!bfConfigs.contains(covered)) {
                         continue;
                     }
 

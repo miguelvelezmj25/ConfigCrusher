@@ -40,40 +40,40 @@ public class SPLatElevatorMain extends SPLatMain {
         String[] args = adapter.configurationAsMainArguments(configuration);
         splatConfigurations.add(configuration);
 
-        PL_Interface_impl.splat(args, stack);
-
-        Set<String> optionsNotInStack = this.getOptionsNotInStack(stack, options);
-        Set<Set<String>> coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);
-        configsToCovered.put(configuration, coveredConfigs);
-
-        while(!stack.isEmpty()) {
-            String option = stack.peek();
-
-            if(configuration.contains(option)) {
-                configuration = new HashSet<>(configuration);
-                configuration.remove(option);
-                stack.pop();
-            }
-            else {
-                configuration = new HashSet<>(configuration);
-                configuration.add(option);
-
-                boolean valid = fm.isValidProduct(configuration);
-
-                if(!fm.isValidProduct(configuration)) {
-//                    continue;
-                    System.out.println();
-                }
-
-                splatConfigurations.add(configuration);
-                args = adapter.configurationAsMainArguments(configuration);
-                PL_Interface_impl.splat(args, stack);
-
-                optionsNotInStack = this.getOptionsNotInStack(stack, options);
-                coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);
-                configsToCovered.put(configuration, coveredConfigs);
-            }
-        }
+//        PL_Interface_impl.splat(args, stack);
+//
+//        Set<String> optionsNotInStack = this.getOptionsNotInStack(stack, options);
+//        Set<Set<String>> coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);
+//        configsToCovered.put(configuration, coveredConfigs);
+//
+//        while(!stack.isEmpty()) {
+//            String option = stack.peek();
+//
+//            if(configuration.contains(option)) {
+//                configuration = new HashSet<>(configuration);
+//                configuration.remove(option);
+//                stack.pop();
+//            }
+//            else {
+//                configuration = new HashSet<>(configuration);
+//                configuration.add(option);
+//
+//                boolean valid = fm.isValidProduct(configuration);
+//
+//                if(!fm.isValidProduct(configuration)) {
+////                    continue;
+//                    System.out.println();
+//                }
+//
+//                splatConfigurations.add(configuration);
+//                args = adapter.configurationAsMainArguments(configuration);
+//                PL_Interface_impl.splat(args, stack);
+//
+//                optionsNotInStack = this.getOptionsNotInStack(stack, options);
+//                coveredConfigs = this.mapConfigs(configuration, optionsNotInStack);
+//                configsToCovered.put(configuration, coveredConfigs);
+//            }
+//        }
 
         this.setConfigsToCovered(configsToCovered);
 

@@ -10,6 +10,11 @@ title('grep');
 % xlim([-10 400])
 fontset
  
+fig = gcf;
+fig.PaperPositionMode = 'auto';
+fig_pos = fig.PaperPosition;
+fig.PaperSize = [fig_pos(3) fig_pos(4)];
+
 mkdir('../../../../../../../../resources/evaluation/programs/java/grep/plots/');
 fileID = '../../../../../../../../resources/evaluation/programs/java/grep/plots/prediction_error.pdf';
-print(fileID,'-dpdf','-fillpage')
+print(fig, fileID,'-dpdf');

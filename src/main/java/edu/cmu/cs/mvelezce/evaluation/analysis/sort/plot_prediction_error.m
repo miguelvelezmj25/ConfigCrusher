@@ -10,7 +10,11 @@ title('sort');
 ylim([-20 700])
 fontset
 
+fig = gcf;
+fig.PaperPositionMode = 'auto';
+fig_pos = fig.PaperPosition;
+fig.PaperSize = [fig_pos(3) fig_pos(4)];
  
-% mkdir('../../../../../../../../resources/evaluation/programs/java/sort/plots/');
-% fileID = '../../../../../../../../resources/evaluation/programs/java/sort/plots/prediction_error.pdf';
-% print(fileID,'-dpdf','-fillpage')
+mkdir('../../../../../../../../resources/evaluation/programs/java/sort/plots/');
+fileID = '../../../../../../../../resources/evaluation/programs/java/sort/plots/prediction_error.pdf';
+print(fig, fileID,'-dpdf');

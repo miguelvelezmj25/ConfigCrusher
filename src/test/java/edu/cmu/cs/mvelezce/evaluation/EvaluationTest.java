@@ -1565,6 +1565,51 @@ public class EvaluationTest {
     }
 
     @Test
+    public void sortConfigCrusher() throws Exception {
+        String programName = "sort";
+
+        // arguments
+        String[] args = new String[0];
+
+        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+        instrumenter.instrument(args);
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+
+        Analysis analysis = new DefaultStaticAnalysis();
+        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+
+        Executor executor = new ConfigCrusherExecutor(programName);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+
+        executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<Set<String>> configurations = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            configurations.add(entry.getConfiguration());
+        }
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
+                regionsToOptionSet);
+        PerformanceModel performanceModel = builder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
+    }
+
+    @Test
+    public void sortConfigCrusherSamplingTime() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    }
+
+    @Test
     public void sortFeaturewiseGenerateCSVData() throws Exception {
         String programName = "sort";
 

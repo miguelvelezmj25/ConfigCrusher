@@ -1,1 +1,32 @@
-[{"region":{"regionID":"0bfbec36-f848-4687-bffb-573af7b270bb","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"org.unix4j.sort","regionClass":"Main","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":0,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"1010842422","endBlocksIDs":["81183790"]},"options":[["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","CHECK","REVERSE","GENERALNUMRICSORT","IGNORECASE"]]}]
+[
+  {
+    "region": {
+      "regionID": "cf0973a4-2ff7-4a05-9c80-db66fb4f5943",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "org.unix4j.sort",
+      "regionClass": "Main",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 0,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "1010842422",
+      "endBlocksIDs": [
+        "81183790"
+      ]
+    },
+    "options": [
+      [
+        "IGNORELEADINGBLANKS",
+        "MERGE",
+        "NUMBERICSORT",
+        "UNIQUE",
+        "CHECK",
+        "REVERSE",
+        "GENERALNUMRICSORT",
+        "IGNORECASE"
+      ]
+    ]
+  }
+]

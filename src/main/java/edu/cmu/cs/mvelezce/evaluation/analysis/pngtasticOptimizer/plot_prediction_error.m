@@ -9,7 +9,12 @@ ylabel('Prediction Error [MAPE]');
 title('Pngtastic Optimizer');
 xlim([4 20])
 fontset
- 
+
+fig = gcf;
+fig.PaperPositionMode = 'auto';
+fig_pos = fig.PaperPosition;
+fig.PaperSize = [fig_pos(3) fig_pos(4)]; 
+
 mkdir('../../../../../../../../resources/evaluation/programs/java/pngtasticOptimizer/plots/');
 fileID = '../../../../../../../../resources/evaluation/programs/java/pngtasticOptimizer/plots/prediction_error.pdf';
-print(fileID,'-dpdf','-fillpage')
+print(fig, fileID,'-dpdf');

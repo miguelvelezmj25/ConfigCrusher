@@ -10,6 +10,11 @@ title('Pngtastic Counter');
 ylim([0.7 2])
 fontset
  
+fig = gcf;
+fig.PaperPositionMode = 'auto';
+fig_pos = fig.PaperPosition;
+fig.PaperSize = [fig_pos(3) fig_pos(4)];
+
 mkdir('../../../../../../../../resources/evaluation/programs/java/pngtasticColorCounter/plots/');
 fileID = '../../../../../../../../resources/evaluation/programs/java/pngtasticColorCounter/plots/prediction_error.pdf';
-print(fileID,'-dpdf','-fillpage')
+print(fig, fileID,'-dpdf');

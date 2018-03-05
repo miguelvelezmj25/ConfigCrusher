@@ -11,6 +11,11 @@ xlim([-5 600])
 ylim([-2 60])
 fontset
  
+fig = gcf;
+fig.PaperPositionMode = 'auto';
+fig_pos = fig.PaperPosition;
+fig.PaperSize = [fig_pos(3) fig_pos(4)];
+
 mkdir('../../../../../../../../resources/evaluation/programs/java/running-example/plots/');
 fileID = '../../../../../../../../resources/evaluation/programs/java/running-example/plots/prediction_error.pdf';
-print(fileID,'-dpdf','-fillpage')
+print(fig, fileID,'-dpdf');

@@ -1,14 +1,1 @@
-{
-  "configuration": [
-    "IGNORELEADINGBLANKS",
-    "MERGE",
-    "NUMBERICSORT",
-    "UNIQUE",
-    "REVERSE",
-    "IGNORECASE"
-  ],
-  "regionsToProcessedPerformance": {
-    "cf0973a4-2ff7-4a05-9c80-db66fb4f5943": 17508166307,
-    "program": 972137
-  }
-}
+{"configuration":["IGNORELEADINGBLANKS","MERGE","NUMBERICSORT","UNIQUE","REVERSE","IGNORECASE"],"regionsToProcessedPerformance":{"cf0973a4-2ff7-4a05-9c80-db66fb4f5943":17508166307,"program":972137}}

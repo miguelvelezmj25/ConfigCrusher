@@ -1,0 +1,32 @@
+digraph setupSpecifications {
+node [shape=record];
+1933687459 [label="L6\lLINENUMBER 29 L6\lNEW family/TestSpecifications/Specification4\lDUP\lINVOKESPECIAL family/TestSpecifications/Specification4.\<init\> ()V\lPUTSTATIC family/TestSpecifications/SpecificationManager.spec4 : Lfamily/TestSpecifications/Specification4;\lL4\lLINENUMBER 32 L4\lFRAME SAME\l"];
+1895167357 [label="L12\lLINENUMBER 39 L12\lNEW family/TestSpecifications/Specification6\lDUP\lINVOKESPECIAL family/TestSpecifications/Specification6.\<init\> ()V\lPUTSTATIC family/TestSpecifications/SpecificationManager.spec6 : Lfamily/TestSpecifications/Specification6;\l"];
+500058139 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"featureSwitch\"]\l)\l@LfeatureHouse/FeatureSwitchID;(\l[id=26, , thenFeature=\"verify\", , elseFeature=\"featureSwitch\"]\l)\l"];
+583765599 [label="L3\lLINENUMBER 24 L3\lNEW family/TestSpecifications/Specification27\lDUP\lINVOKESPECIAL family/TestSpecifications/Specification27.\<init\> ()V\lPUTSTATIC family/TestSpecifications/SpecificationManager.spec27 : Lfamily/TestSpecifications/Specification27;\lL1\lLINENUMBER 27 L1\lFRAME SAME\l"];
+1165311010 [label="L0\lLINENUMBER 22 L0\lLDC \"8adf4470-d779-4238-9551-dc5bbbe6ac07\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.VERIFY : Z\lIFEQ L1\lL2\lLINENUMBER 23 L2\lNEW family/TestSpecifications/Specification7\lDUP\lINVOKESPECIAL family/TestSpecifications/Specification7.\<init\> ()V\lPUTSTATIC family/TestSpecifications/SpecificationManager.spec7 : Lfamily/TestSpecifications/Specification7;\l"];
+236966591 [label="LDC \"9ff8b7cf-c2d8-4b4b-8509-2ba26a2107a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"97d6b9cd-219f-4876-b7d9-ff268e14fad3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.AUTORESPONDER : Z\lIFEQ L7\l"];
+1763619721 [label="LDC \"97d6b9cd-219f-4876-b7d9-ff268e14fad3\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"bf238e1b-fcea-4045-a1bb-3f85fbb69ea1\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.ENCRYPT : Z\lIFEQ L9\lL10\lLINENUMBER 37 L10\lNEW family/TestSpecifications/Specification1_8\lDUP\lINVOKESPECIAL family/TestSpecifications/Specification1_8.\<init\> ()V\lPUTSTATIC family/TestSpecifications/SpecificationManager.spec1_8 : Lfamily/TestSpecifications/Specification1_8;\lL11\lLINENUMBER 38 L11\lNEW family/TestSpecifications/Specification9\lDUP\lINVOKESPECIAL family/TestSpecifications/Specification9.\<init\> ()V\lPUTSTATIC family/TestSpecifications/SpecificationManager.spec9 : Lfamily/TestSpecifications/Specification9;\l"];
+1650943741 [label="L8\lLINENUMBER 33 L8\lNEW family/TestSpecifications/Specification11\lDUP\lINVOKESPECIAL family/TestSpecifications/Specification11.\<init\> ()V\lPUTSTATIC family/TestSpecifications/SpecificationManager.spec11 : Lfamily/TestSpecifications/Specification11;\lL7\lLINENUMBER 36 L7\lFRAME SAME\l"];
+480291392 [label="LDC \"8adf4470-d779-4238-9551-dc5bbbe6ac07\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"9ff8b7cf-c2d8-4b4b-8509-2ba26a2107a0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.SIGN : Z\lIFEQ L4\lL5\lLINENUMBER 28 L5\lNEW family/TestSpecifications/Specification3\lDUP\lINVOKESPECIAL family/TestSpecifications/Specification3.\<init\> ()V\lPUTSTATIC family/TestSpecifications/SpecificationManager.spec3 : Lfamily/TestSpecifications/Specification3;\l"];
+entry;
+exit;
+entry -> 500058139;
+1933687459 -> 236966591;
+1933687459 -> 1650943741;
+1895167357 -> exit;
+500058139 -> 583765599;
+500058139 -> 1165311010;
+583765599 -> 1933687459;
+583765599 -> 480291392;
+1165311010 -> 583765599;
+236966591 -> 1650943741;
+1763619721 -> 1895167357;
+1650943741 -> 1895167357;
+1650943741 -> 1763619721;
+480291392 -> 1933687459;
+1165311010[fontcolor="purple", penwidth=3, color="purple"];
+236966591[fontcolor="purple", penwidth=3, color="purple"];
+1763619721[fontcolor="purple", penwidth=3, color="purple"];
+480291392[fontcolor="purple", penwidth=3, color="purple"];
+}

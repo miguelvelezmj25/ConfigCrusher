@@ -1,0 +1,22 @@
+digraph bobToAlias {
+node [shape=record];
+1559037239 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"featureSwitch\"]\l)\l@LfeatureHouse/FeatureSwitchID;(\l[id=19, , thenFeature=\"addressbook\", , elseFeature=\"base\"]\l)\l"];
+1860296143 [label="ALOAD 1\lINVOKESTATIC family/EmailSystem/Client.sendEmail (Lfamily/EmailSystem/Client;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I\lPOP\lL9\lLINENUMBER 112 L9\lGOTO L10\lL1\lLINENUMBER 114 L1\lFRAME SAME\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"bobToAlias\"\l"];
+1801653579 [label="L0\lLINENUMBER 103 L0\lLDC \"7e24ab7e-330e-498a-90e4-f41edadb0db8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.ADDRESSBOOK : Z\lIFEQ L1\lL2\l"];
+1155167327 [label="LINENUMBER 104 L2\lGETSTATIC family/Test_Actions.bob : Lfamily/EmailSystem/Client;\lLDC \"AliasForRJHandChuck\"\lINVOKEVIRTUAL family/EmailSystem/Client.getAddressBookReceiversForAlias (Ljava/lang/String;)Ljava/util/List;\lINVOKEINTERFACE java/util/List.isEmpty ()Z\lIFEQ L3\lL4\lLINENUMBER 105 L4\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"AbortedBobToAlias\"\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\l"];
+607504046 [label="INVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL11\lLINENUMBER 115 L11\lICONST_1\lPUTSTATIC family/Test_Actions.executedUnimplementedAction : Z\l"];
+1890190272 [label="POP\lL5\lLINENUMBER 106 L5\lLDC \"7e24ab7e-330e-498a-90e4-f41edadb0db8\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\lL3\lLINENUMBER 108 L3\lFRAME SAME\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"bobToAlias\"\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL6\lLINENUMBER 109 L6\lLDC \"Subject\"\lASTORE 0\lL7\lLINENUMBER 110 L7\lLDC \"Body\"\lASTORE 1\lL8\lLINENUMBER 111 L8\lGETSTATIC family/Test_Actions.bob : Lfamily/EmailSystem/Client;\lLDC \"AliasForRJHandChuck\"\lALOAD 0\l"];
+entry;
+exit;
+1559037239 -> 1860296143;
+1559037239 -> 1801653579;
+entry -> 1559037239;
+1860296143 -> 607504046;
+1801653579 -> 1155167327;
+1801653579 -> 1890190272;
+1155167327 -> exit;
+607504046 -> exit;
+1890190272 -> 607504046;
+1801653579[fontcolor="purple", penwidth=3, color="purple"];
+1890190272[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,17 @@
+digraph resetClients {
+node [shape=record];
+1950682267 [label="L2\lFRAME APPEND [I]\lILOAD 0\lGETSTATIC family/EmailSystem/Client.clients : [Lfamily/EmailSystem/Client;\lARRAYLENGTH\lIF_ICMPGE L3\l"];
+1563321789 [label="L3\lLINENUMBER 204 L3\lFRAME SAME\lLDC \"edae1729-6663-4a68-a8de-b1a9fddf6444\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+625284072 [label="L4\lLINENUMBER 202 L4\lGETSTATIC family/EmailSystem/Client.clients : [Lfamily/EmailSystem/Client;\lILOAD 0\lACONST_NULL\lAASTORE\lL5\lLINENUMBER 201 L5\lIINC 0 1\lGOTO L2\l"];
+1268343946 [label="L0\lLINENUMBER 200 L0\lLDC \"edae1729-6663-4a68-a8de-b1a9fddf6444\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lICONST_1\lPUTSTATIC family/EmailSystem/Client.clientCounter : I\lL1\lLINENUMBER 201 L1\lICONST_0\lISTORE 0\l"];
+entry;
+exit;
+entry -> 1268343946;
+1950682267 -> 1563321789;
+1950682267 -> 625284072;
+1563321789 -> exit;
+625284072 -> 1950682267;
+1268343946 -> 1950682267;
+1563321789[fontcolor="purple", penwidth=3, color="purple"];
+1268343946[fontcolor="purple", penwidth=3, color="purple"];
+}

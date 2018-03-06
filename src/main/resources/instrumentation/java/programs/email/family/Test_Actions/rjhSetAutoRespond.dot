@@ -1,0 +1,16 @@
+digraph rjhSetAutoRespond {
+node [shape=record];
+1169606246 [label="INVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL5\lLINENUMBER 250 L5\lICONST_1\lPUTSTATIC family/Test_Actions.executedUnimplementedAction : Z\l"];
+2025644484 [label="L3\lLINENUMBER 246 L3\lGETSTATIC family/Test_Actions.rjh : Lfamily/EmailSystem/Client;\lICONST_1\lINVOKEVIRTUAL family/EmailSystem/Client.setAutoResponse (Z)V\lGOTO L4\lL1\lLINENUMBER 249 L1\lFRAME SAME\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"rjhSetAutoRespond_NOTIMPL\"\l"];
+413046447 [label="L0\lLINENUMBER 244 L0\lLDC \"3860102a-8a1e-4644-b3d6-80272970db42\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.AUTORESPONDER : Z\lIFEQ L1\lL2\lLINENUMBER 245 L2\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"rjhSetAutoRespond\"\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\l"];
+1002690318 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"featureSwitch\"]\l)\l@LfeatureHouse/FeatureSwitchID;(\l[id=15, , thenFeature=\"autoresponder\", , elseFeature=\"base\"]\l)\l"];
+entry;
+exit;
+entry -> 1002690318;
+1169606246 -> exit;
+2025644484 -> 1169606246;
+413046447 -> 1169606246;
+1002690318 -> 2025644484;
+1002690318 -> 413046447;
+413046447[fontcolor="purple", penwidth=3, color="purple"];
+}

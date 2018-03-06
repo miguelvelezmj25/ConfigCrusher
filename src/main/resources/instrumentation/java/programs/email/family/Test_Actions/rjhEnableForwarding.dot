@@ -1,0 +1,16 @@
+digraph rjhEnableForwarding {
+node [shape=record];
+445936676 [label="L0\lLINENUMBER 170 L0\lLDC \"e6f93997-9800-4250-8bb7-f178cca355fd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.FORWARD : Z\lIFEQ L1\lL2\lLINENUMBER 171 L2\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"rjhEnableForwarding\"\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\l"];
+546704209 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"featureSwitch\"]\l)\l@LfeatureHouse/FeatureSwitchID;(\l[id=24, , thenFeature=\"forward\", , elseFeature=\"base\"]\l)\l"];
+544784138 [label="L3\lLINENUMBER 172 L3\lGETSTATIC family/Test_Actions.rjh : Lfamily/EmailSystem/Client;\lGETSTATIC family/Test_Actions.chuck : Lfamily/EmailSystem/Client;\lINVOKEVIRTUAL family/EmailSystem/Client.setForwardReceiver (Lfamily/EmailSystem/Client;)V\lGOTO L4\lL1\lLINENUMBER 175 L1\lFRAME SAME\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"rjhEnableForwarding_NOTIMPL\"\l"];
+6477484 [label="INVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL5\lLINENUMBER 176 L5\lICONST_1\lPUTSTATIC family/Test_Actions.executedUnimplementedAction : Z\l"];
+entry;
+exit;
+entry -> 546704209;
+445936676 -> 6477484;
+546704209 -> 445936676;
+546704209 -> 544784138;
+544784138 -> 6477484;
+6477484 -> exit;
+445936676[fontcolor="purple", penwidth=3, color="purple"];
+}

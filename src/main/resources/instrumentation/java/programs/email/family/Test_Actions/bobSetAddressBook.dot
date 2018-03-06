@@ -1,0 +1,16 @@
+digraph bobSetAddressBook {
+node [shape=record];
+818618939 [label="L0\lLINENUMBER 88 L0\lLDC \"e3b9bd7a-2f0e-4cfd-8012-242f5c2c7786\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.ADDRESSBOOK : Z\lIFEQ L1\lL2\lLINENUMBER 89 L2\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"bobSetAddressBook\"\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL3\lLINENUMBER 90 L3\lGETSTATIC family/Test_Actions.bob : Lfamily/EmailSystem/Client;\lLDC \"AliasForRJHandChuck\"\lGETSTATIC family/Test_Actions.rjh : Lfamily/EmailSystem/Client;\lINVOKEVIRTUAL family/EmailSystem/Client.getName ()Ljava/lang/String;\lINVOKEVIRTUAL family/EmailSystem/Client.addAddressbookEntry (Ljava/lang/String;Ljava/lang/String;)V\lL4\lLINENUMBER 91 L4\l"];
+1980783296 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"featureSwitch\"]\l)\l@LfeatureHouse/FeatureSwitchID;(\l[id=18, , thenFeature=\"addressbook\", , elseFeature=\"base\"]\l)\l"];
+617662116 [label="INVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL6\lLINENUMBER 95 L6\lICONST_1\lPUTSTATIC family/Test_Actions.executedUnimplementedAction : Z\l"];
+906341142 [label="GETSTATIC family/Test_Actions.bob : Lfamily/EmailSystem/Client;\lLDC \"AliasForRJHandChuck\"\lGETSTATIC family/Test_Actions.chuck : Lfamily/EmailSystem/Client;\lINVOKEVIRTUAL family/EmailSystem/Client.getName ()Ljava/lang/String;\lINVOKEVIRTUAL family/EmailSystem/Client.addAddressbookEntry (Ljava/lang/String;Ljava/lang/String;)V\lGOTO L5\lL1\lLINENUMBER 94 L1\lFRAME SAME\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"bobSetAddressBook_NOTIMPL\"\l"];
+entry;
+exit;
+818618939 -> 617662116;
+entry -> 1980783296;
+1980783296 -> 818618939;
+1980783296 -> 906341142;
+617662116 -> exit;
+906341142 -> 617662116;
+818618939[fontcolor="purple", penwidth=3, color="purple"];
+}

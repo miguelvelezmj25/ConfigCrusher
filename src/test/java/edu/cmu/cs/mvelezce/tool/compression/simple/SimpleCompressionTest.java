@@ -791,6 +791,27 @@ public class SimpleCompressionTest {
     }
 
     @Test
+    public void email() throws IOException {
+        String programName = "email";
+
+        // Program arguments
+        String[] args = new String[0];
+
+        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
+
+        Compression compressor = new SimpleCompression(programName, options);
+        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
+        System.out.println(configurationsToExecute.size());
+    }
+
+    @Test
     public void find() throws IOException {
         String programName = "find";
 

@@ -144,6 +144,16 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareEmail1() throws Exception {
+        String programName = "email";
+
+        FeatureModel fm = new ElevatorFM();
+
+        Evaluation eval = new Evaluation(programName, fm);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+    }
+
+    @Test
     public void compareEmail2() throws Exception {
         String programName = "email";
 
@@ -653,6 +663,43 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
+    public void emailConfigCrusher() throws Exception {
+        String programName = "email";
+
+        // arguments
+        String[] args = new String[0];
+
+        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+        instrumenter.instrument(args);
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+
+        Analysis analysis = new DefaultStaticAnalysis();
+        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+
+        Executor executor = new ConfigCrusherExecutor(programName);
+        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+
+        executor = new BruteForceEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+        Set<Set<String>> configurations = new HashSet<>();
+
+        for(PerformanceEntryStatistic entry : performanceEntries) {
+            configurations.add(entry.getConfiguration());
+        }
+
+        args = new String[2];
+        args[0] = "-delres";
+        args[1] = "-saveres";
+
+        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
+                regionsToOptionSet);
+        PerformanceModel performanceModel = builder.createModel(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
     }
 
     @Test

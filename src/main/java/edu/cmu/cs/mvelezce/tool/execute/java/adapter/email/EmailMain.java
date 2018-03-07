@@ -1,14 +1,18 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter.email;
 
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Main;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 import family.PL_Interface_impl;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -47,18 +51,18 @@ public class EmailMain extends BaseMain {
 
     @Override
     public void execute(String mainClass, String[] args) {
-//        try {
-//            BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("email");
-//            instrumenter.instrument(args);
-//            Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
-//
-//            for(JavaRegion region : regions) {
-//                Regions.regionsToOverhead.put(region.getRegionID(), 0L);
-//            }
+        try {
+            BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter("email");
+            instrumenter.instrument(args);
+            Set<JavaRegion> regions = instrumenter.getRegionsToOptionSet().keySet();
+
+            for(JavaRegion region : regions) {
+                Regions.regionsToOverhead.put(region.getRegionID(), 0L);
+            }
         Regions.regionsToOverhead.put(Regions.PROGRAM_REGION_ID, 0L);
-//        } catch(InvocationTargetException | NoSuchMethodException | IOException | IllegalAccessException | InterruptedException e) {
-//            throw new RuntimeException("Could not add regions to the Regions class");
-//        }
+        } catch(InvocationTargetException | NoSuchMethodException | IOException | IllegalAccessException | InterruptedException e) {
+            throw new RuntimeException("Could not add regions to the Regions class");
+        }
 
         if(mainClass.contains("PL_Interface_impl")) {
             Region program = new Region(Regions.PROGRAM_REGION_ID);

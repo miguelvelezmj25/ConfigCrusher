@@ -1,6 +1,6 @@
 x = [4, 11, 1];
 y = [100, 44.41, 2.34];
-n = ["PW", "FW"', "FB"];
+n = ["FW", "PW"', "FB"];
 
 scatter(x,y,1500,'.');
 text(x, y, n, 'horizontal','left', 'vertical','bottom')

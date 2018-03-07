@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.email.EmailAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gpl.GPLAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
@@ -121,6 +122,9 @@ public class ConfigCrusherExecutor extends BaseExecutor {
         }
         else if(this.getProgramName().contains("density")) {
             adapter = new DensityAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
+        }
+        else if(this.getProgramName().contains("email")) {
+            adapter = new EmailAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else {
             throw new RuntimeException("Could not create an adapter for " + this.getProgramName());

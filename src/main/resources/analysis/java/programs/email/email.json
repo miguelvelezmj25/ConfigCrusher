@@ -1,1 +1,1456 @@
-[{"region":{"regionID":"5d4d77b3-10e8-433b-af34-42c988043ef2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"setup_chuck(Lfamily/EmailSystem/Client;)V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["KEYS","BASE"]]},{"region":{"regionID":"bb2a41cc-3bf8-42d7-b263-e40f5f90aaf1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":103,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"b5b0871d-b850-47df-a330-d02febd43c7b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"getClientByAdress(Ljava/lang/String;)Lfamily/EmailSystem/Client;","startBytecodeIndex":15,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"507f067e-672c-4e6a-b8f9-d45f7b4bbe20","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"verify(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":21,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","SIGN","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"ecb46ce0-9bad-4ecf-ad7b-cdf44111c891","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","SIGN","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"e6f93997-9800-4250-8bb7-f178cca355fd","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"rjhEnableForwarding()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","BASE"]]},{"region":{"regionID":"28f4ac06-61c4-4d8b-9d54-5b29be528efd","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Email","regionMethod":"isReadable()Z","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DECRYPT","FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"e4aece88-b30b-40b3-8e39-978ae1159a8c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":102,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"ea45196d-cc1e-4325-8de7-4e68f047622e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":96,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"aa38dbae-39c3-41a7-8dc1-c73cb5380ae3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"addAddressbookEntry(Ljava/lang/String;Ljava/lang/String;)V","startBytecodeIndex":28,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["ADDRESSBOOK","BASE"]]},{"region":{"regionID":"4623160a-8761-4257-8e02-e94bd2eb4ef1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DECRYPT","FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"8dda09a4-28d7-4767-b29d-949ebc3b3b76","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"bobKeyAdd()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["KEYS","BASE"]]},{"region":{"regionID":"31840800-d788-404a-9568-8f6b1b5b2fa1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":44,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DECRYPT","FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"05fa7fc6-6cf9-4763-8cf7-7fc3a06b0ecd","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"getKeyringPublicKeyByClient(Lfamily/EmailSystem/Client;)I","startBytecodeIndex":35,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"731af5de-967a-4c2a-a9f0-fea32c459cf6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"getKeyringPublicKeyByClient(Lfamily/EmailSystem/Client;)I","startBytecodeIndex":14,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"54afb1ba-e7f6-4872-8cf3-b3958183be20","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"bobToAlias()V","startBytecodeIndex":19,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["ADDRESSBOOK","BASE"]]},{"region":{"regionID":"3dded465-6e8c-48a6-943a-c9bde2c6b6ae","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":14,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"0e6d9ba6-bca1-4480-9307-46d993f23809","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":137,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"b6c93d57-3f39-4b9b-b9fa-736fed23bca9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"rjhDeletePrivateKey()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["KEYS","BASE"]]},{"region":{"regionID":"9a0584e7-fdc5-407b-a58b-df8ccdccb1df","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"rjhKeyAdd()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["KEYS","BASE"]]},{"region":{"regionID":"0deaafc4-1ce4-46ac-bc82-207f7e522b60","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"getAddressBookReceiversForAlias(Ljava/lang/String;)Ljava/util/List;","startBytecodeIndex":14,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"64908c5f-819e-48af-b4bd-f51a8f1398ad","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"sendEmail(Lfamily/EmailSystem/Client;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I","startBytecodeIndex":53,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"bf238e1b-fcea-4045-a1bb-3f85fbb69ea1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.TestSpecifications","regionClass":"SpecificationManager","regionMethod":"setupSpecifications()V","startBytecodeIndex":71,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["ENCRYPT","BASE"]]},{"region":{"regionID":"bdcac6fc-6273-46b4-a769-e231c4958b28","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"verify(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"7a3b119a-2db6-417e-a58b-09358deadedd","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Email","regionMethod":"printMail(Lfamily/EmailSystem/Email;)V","startBytecodeIndex":243,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"734bd52e-7d6a-4c72-9a93-d8ffe30cd3f0","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"getAddressBookReceiversForAlias(Ljava/lang/String;)Ljava/util/List;","startBytecodeIndex":35,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"7d822a74-f0eb-4043-b579-588633dccd4f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"isKeyPairValid(II)Z","startBytecodeIndex":43,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DECRYPT","FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","SIGN","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"ec502d72-238d-4fc0-b3f4-29e5174dbc21","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"isKeyPairValid(II)Z","startBytecodeIndex":32,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DECRYPT","FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","SIGN","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"b13819bc-71d6-48c3-9a36-8a516a086f6f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":26,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DECRYPT","FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"764cfcdc-e03f-4e8e-ac92-6de69a5bc91c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"rjhKeyChange()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["KEYS","BASE"]]},{"region":{"regionID":"fdd83c59-860d-4011-8595-66444bde6ef4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"getClientByAdress(Ljava/lang/String;)Lfamily/EmailSystem/Client;","startBytecodeIndex":30,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"2422b54e-e1c0-41dd-bc24-dc4af9626c25","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"bobKeyChange()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["KEYS","BASE"]]},{"region":{"regionID":"afc82b6b-b667-449c-898b-fa558e42c1b0","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"getClientByAdress(Ljava/lang/String;)Lfamily/EmailSystem/Client;","startBytecodeIndex":7,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"d8063797-2cae-4d65-adb8-da87355d8d0d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"PL_Interface_impl","regionMethod":"start(II)V","startBytecodeIndex":10,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["BASE"]]},{"region":{"regionID":"aa634f80-9565-45c2-99ce-7e9fd1e353e1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":60,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"fdeec451-2614-4b1e-8a19-93209ca74e36","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"PL_Interface_impl","regionMethod":"main([Ljava/lang/String;)V","startBytecodeIndex":144,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["BASE"]]},{"region":{"regionID":"51b38bd7-6daf-4dcb-989f-48a3fe55d3c6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":33,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DECRYPT","FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"7475ef5e-a1a0-48a0-9449-8347fa6d9d62","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"addAddressbookEntry(Ljava/lang/String;Ljava/lang/String;)V","startBytecodeIndex":51,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["ADDRESSBOOK","BASE"]]},{"region":{"regionID":"815b2121-7daf-47f8-8779-d1f58d0c0e4d","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"PL_Interface_impl","regionMethod":"start(II)V","startBytecodeIndex":2,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["BASE"]]},{"region":{"regionID":"8adf4470-d779-4238-9551-dc5bbbe6ac07","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.TestSpecifications","regionClass":"SpecificationManager","regionMethod":"setupSpecifications()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["VERIFY","BASE"]]},{"region":{"regionID":"9610812e-e0fa-42b6-b9bf-a7d193774d86","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"bobToAlias()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["ADDRESSBOOK","BASE"]]},{"region":{"regionID":"fcd1f65d-d6a5-4be2-b8cf-8ebfe4e431e4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":44,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"b28f2bb5-27a3-45c5-a490-780102f857ee","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":120,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"f0b3aed7-52fe-4c85-94b2-c103ee98e643","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":71,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"912e7b7f-b846-4ade-a554-8c56245369ec","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"setup_rjh(Lfamily/EmailSystem/Client;)V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["KEYS","BASE"]]},{"region":{"regionID":"8725cd5d-2442-4114-8930-4d03f0f0c3d3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":114,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"957539bd-e242-458a-9a4d-9cf0b6d2e0d6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Email","regionMethod":"printMail(Lfamily/EmailSystem/Email;)V","startBytecodeIndex":156,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"20391f87-b88f-46b8-8917-77bf7fd47cf2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Email","regionMethod":"printMail(Lfamily/EmailSystem/Email;)V","startBytecodeIndex":187,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","SIGN","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"97d6b9cd-219f-4876-b7d9-ff268e14fad3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.TestSpecifications","regionClass":"SpecificationManager","regionMethod":"setupSpecifications()V","startBytecodeIndex":55,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["AUTORESPONDER","BASE"]]},{"region":{"regionID":"b0504393-e7af-467c-8796-236ef8c2ce59","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":32,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"39c747c6-2dfa-4d5e-82c5-0eb825a64e81","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"resetClients()V","startBytecodeIndex":11,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"817c01a0-9f71-402d-8e01-78ba3daffda2","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"sign(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V","startBytecodeIndex":6,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","SIGN","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"c02ee81c-9ac1-41f7-a871-7e25be554c6b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Email","regionMethod":"isReadable()Z","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"00c36cbe-f680-4801-979e-e09d8c9911fe","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.verificationClasses","regionClass":"FeatureSwitches","regionMethod":"valid_product()Z","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["BASE"]]},{"region":{"regionID":"491f8c8d-f07a-40f9-bbaa-030b4a735e0f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"setup_bob(Lfamily/EmailSystem/Client;)V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["KEYS","BASE"]]},{"region":{"regionID":"aeed450d-aa14-4158-874a-03b05ef376c4","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.EmailSystem","regionClass":"Client","regionMethod":"isKeyPairValid(II)Z","startBytecodeIndex":36,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["DECRYPT","FORWARD","VERIFY","AUTORESPONDER","ENCRYPT","SIGN","ADDRESSBOOK","BASE"]]},{"region":{"regionID":"3860102a-8a1e-4644-b3d6-80272970db42","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"rjhSetAutoRespond()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["AUTORESPONDER","BASE"]]},{"region":{"regionID":"95374da2-82e6-4dae-82e5-f1616a55cc91","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"chuckKeyAdd()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["KEYS","BASE"]]},{"region":{"regionID":"e3b9bd7a-2f0e-4cfd-8012-242f5c2c7786","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family","regionClass":"Test_Actions","regionMethod":"bobSetAddressBook()V","startBytecodeIndex":3,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["ADDRESSBOOK","BASE"]]},{"region":{"regionID":"9ff8b7cf-c2d8-4b4b-8509-2ba26a2107a0","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"family.TestSpecifications","regionClass":"SpecificationManager","regionMethod":"setupSpecifications()V","startBytecodeIndex":29,"startMethodBlock":null,"endMethodBlocks":[],"startBlockID":"","endBlocksIDs":[]},"options":[["SIGN","BASE"]]}]
+[
+  {
+    "region": {
+      "regionID": "5d4d77b3-10e8-433b-af34-42c988043ef2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "setup_chuck(Lfamily/EmailSystem/Client;)V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "KEYS",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bb2a41cc-3bf8-42d7-b263-e40f5f90aaf1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 103,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b5b0871d-b850-47df-a330-d02febd43c7b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "getClientByAdress(Ljava/lang/String;)Lfamily/EmailSystem/Client;",
+      "startBytecodeIndex": 15,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "507f067e-672c-4e6a-b8f9-d45f7b4bbe20",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "verify(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 21,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "SIGN",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ecb46ce0-9bad-4ecf-ad7b-cdf44111c891",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "SIGN",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e6f93997-9800-4250-8bb7-f178cca355fd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "rjhEnableForwarding()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "28f4ac06-61c4-4d8b-9d54-5b29be528efd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Email",
+      "regionMethod": "isReadable()Z",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DECRYPT",
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e4aece88-b30b-40b3-8e39-978ae1159a8c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 102,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ea45196d-cc1e-4325-8de7-4e68f047622e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 96,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "aa38dbae-39c3-41a7-8dc1-c73cb5380ae3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "addAddressbookEntry(Ljava/lang/String;Ljava/lang/String;)V",
+      "startBytecodeIndex": 28,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "4623160a-8761-4257-8e02-e94bd2eb4ef1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DECRYPT",
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8dda09a4-28d7-4767-b29d-949ebc3b3b76",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "bobKeyAdd()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "KEYS",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "31840800-d788-404a-9568-8f6b1b5b2fa1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 44,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DECRYPT",
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "05fa7fc6-6cf9-4763-8cf7-7fc3a06b0ecd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "getKeyringPublicKeyByClient(Lfamily/EmailSystem/Client;)I",
+      "startBytecodeIndex": 35,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "731af5de-967a-4c2a-a9f0-fea32c459cf6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "getKeyringPublicKeyByClient(Lfamily/EmailSystem/Client;)I",
+      "startBytecodeIndex": 14,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "54afb1ba-e7f6-4872-8cf3-b3958183be20",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "bobToAlias()V",
+      "startBytecodeIndex": 19,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3dded465-6e8c-48a6-943a-c9bde2c6b6ae",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 14,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0e6d9ba6-bca1-4480-9307-46d993f23809",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 137,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b6c93d57-3f39-4b9b-b9fa-736fed23bca9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "rjhDeletePrivateKey()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "KEYS",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9a0584e7-fdc5-407b-a58b-df8ccdccb1df",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "rjhKeyAdd()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "KEYS",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "0deaafc4-1ce4-46ac-bc82-207f7e522b60",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "getAddressBookReceiversForAlias(Ljava/lang/String;)Ljava/util/List;",
+      "startBytecodeIndex": 14,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "64908c5f-819e-48af-b4bd-f51a8f1398ad",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "sendEmail(Lfamily/EmailSystem/Client;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I",
+      "startBytecodeIndex": 53,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bf238e1b-fcea-4045-a1bb-3f85fbb69ea1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.TestSpecifications",
+      "regionClass": "SpecificationManager",
+      "regionMethod": "setupSpecifications()V",
+      "startBytecodeIndex": 71,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "ENCRYPT",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "bdcac6fc-6273-46b4-a769-e231c4958b28",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "verify(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7a3b119a-2db6-417e-a58b-09358deadedd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Email",
+      "regionMethod": "printMail(Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 243,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "734bd52e-7d6a-4c72-9a93-d8ffe30cd3f0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "getAddressBookReceiversForAlias(Ljava/lang/String;)Ljava/util/List;",
+      "startBytecodeIndex": 35,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7d822a74-f0eb-4043-b579-588633dccd4f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "isKeyPairValid(II)Z",
+      "startBytecodeIndex": 43,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DECRYPT",
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "SIGN",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ec502d72-238d-4fc0-b3f4-29e5174dbc21",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "isKeyPairValid(II)Z",
+      "startBytecodeIndex": 32,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DECRYPT",
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "SIGN",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b13819bc-71d6-48c3-9a36-8a516a086f6f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 26,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DECRYPT",
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "764cfcdc-e03f-4e8e-ac92-6de69a5bc91c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "rjhKeyChange()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "KEYS",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fdd83c59-860d-4011-8595-66444bde6ef4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "getClientByAdress(Ljava/lang/String;)Lfamily/EmailSystem/Client;",
+      "startBytecodeIndex": 30,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "2422b54e-e1c0-41dd-bc24-dc4af9626c25",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "bobKeyChange()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "KEYS",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "afc82b6b-b667-449c-898b-fa558e42c1b0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "getClientByAdress(Ljava/lang/String;)Lfamily/EmailSystem/Client;",
+      "startBytecodeIndex": 7,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "d8063797-2cae-4d65-adb8-da87355d8d0d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "PL_Interface_impl",
+      "regionMethod": "start(II)V",
+      "startBytecodeIndex": 10,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "aa634f80-9565-45c2-99ce-7e9fd1e353e1",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 60,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fdeec451-2614-4b1e-8a19-93209ca74e36",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "PL_Interface_impl",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startBytecodeIndex": 144,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "51b38bd7-6daf-4dcb-989f-48a3fe55d3c6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 33,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DECRYPT",
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "7475ef5e-a1a0-48a0-9449-8347fa6d9d62",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "addAddressbookEntry(Ljava/lang/String;Ljava/lang/String;)V",
+      "startBytecodeIndex": 51,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "815b2121-7daf-47f8-8779-d1f58d0c0e4d",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "PL_Interface_impl",
+      "regionMethod": "start(II)V",
+      "startBytecodeIndex": 2,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8adf4470-d779-4238-9551-dc5bbbe6ac07",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.TestSpecifications",
+      "regionClass": "SpecificationManager",
+      "regionMethod": "setupSpecifications()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "VERIFY",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9610812e-e0fa-42b6-b9bf-a7d193774d86",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "bobToAlias()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "fcd1f65d-d6a5-4be2-b8cf-8ebfe4e431e4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 44,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b28f2bb5-27a3-45c5-a490-780102f857ee",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 120,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "f0b3aed7-52fe-4c85-94b2-c103ee98e643",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 71,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "912e7b7f-b846-4ade-a554-8c56245369ec",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "setup_rjh(Lfamily/EmailSystem/Client;)V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "KEYS",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "8725cd5d-2442-4114-8930-4d03f0f0c3d3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "incoming(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 114,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "957539bd-e242-458a-9a4d-9cf0b6d2e0d6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Email",
+      "regionMethod": "printMail(Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 156,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "20391f87-b88f-46b8-8917-77bf7fd47cf2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Email",
+      "regionMethod": "printMail(Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 187,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "SIGN",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "97d6b9cd-219f-4876-b7d9-ff268e14fad3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.TestSpecifications",
+      "regionClass": "SpecificationManager",
+      "regionMethod": "setupSpecifications()V",
+      "startBytecodeIndex": 55,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "AUTORESPONDER",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b0504393-e7af-467c-8796-236ef8c2ce59",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "outgoing(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 32,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "39c747c6-2dfa-4d5e-82c5-0eb825a64e81",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "resetClients()V",
+      "startBytecodeIndex": 11,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "817c01a0-9f71-402d-8e01-78ba3daffda2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "sign(Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V",
+      "startBytecodeIndex": 6,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "SIGN",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "c02ee81c-9ac1-41f7-a871-7e25be554c6b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Email",
+      "regionMethod": "isReadable()Z",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "00c36cbe-f680-4801-979e-e09d8c9911fe",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.verificationClasses",
+      "regionClass": "FeatureSwitches",
+      "regionMethod": "valid_product()Z",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "491f8c8d-f07a-40f9-bbaa-030b4a735e0f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "setup_bob(Lfamily/EmailSystem/Client;)V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "KEYS",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "aeed450d-aa14-4158-874a-03b05ef376c4",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.EmailSystem",
+      "regionClass": "Client",
+      "regionMethod": "isKeyPairValid(II)Z",
+      "startBytecodeIndex": 36,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "DECRYPT",
+        "FORWARD",
+        "VERIFY",
+        "AUTORESPONDER",
+        "ENCRYPT",
+        "SIGN",
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "3860102a-8a1e-4644-b3d6-80272970db42",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "rjhSetAutoRespond()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "AUTORESPONDER",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "95374da2-82e6-4dae-82e5-f1616a55cc91",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "chuckKeyAdd()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "KEYS",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "e3b9bd7a-2f0e-4cfd-8012-242f5c2c7786",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family",
+      "regionClass": "Test_Actions",
+      "regionMethod": "bobSetAddressBook()V",
+      "startBytecodeIndex": 3,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "ADDRESSBOOK",
+        "BASE"
+      ]
+    ]
+  },
+  {
+    "region": {
+      "regionID": "9ff8b7cf-c2d8-4b4b-8509-2ba26a2107a0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "family.TestSpecifications",
+      "regionClass": "SpecificationManager",
+      "regionMethod": "setupSpecifications()V",
+      "startBytecodeIndex": 29,
+      "startMethodBlock": null,
+      "endMethodBlocks": [],
+      "startBlockID": "",
+      "endBlocksIDs": []
+    },
+    "options": [
+      [
+        "SIGN",
+        "BASE"
+      ]
+    ]
+  }
+]

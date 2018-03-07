@@ -1,6 +1,6 @@
 x = [3, 9, 1];
 y = [51.09, 1.48, 2.72];
-n = ["PW", "FW"', "FB"];
+n = ["FW", "PW"', "FB"];
 
 scatter(x,y,1500,'.');
 text(x, y, n, 'horizontal','left', 'vertical','bottom')
@@ -19,3 +19,5 @@ fig.PaperSize = [fig_pos(3) fig_pos(4)];
 mkdir('../../../../../../../../resources/evaluation/programs/java/elevator/plots/');
 fileID = '../../../../../../../../resources/evaluation/programs/java/elevator/plots/prediction_error.pdf';
 print(fig, fileID,'-dpdf');
+fileID = '../../../../../../../../resources/evaluation/programs/java/elevator/plots/prediction_error.png';
+print(fig, fileID,'-dpng');

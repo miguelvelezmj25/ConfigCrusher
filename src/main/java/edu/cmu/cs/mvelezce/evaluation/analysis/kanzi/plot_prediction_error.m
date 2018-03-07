@@ -1,6 +1,6 @@
 x = [7, 29, 64, 64];
 y = [1.86, 1.29, 1.21, 2.66];
-n = ["PW", "FW"', "SAD"', "CC"];
+n = ["FW", "PW"', "SAD"', "CC"];
 
 scatter(x,y,1500,'.');
 text(x, y, n, 'horizontal','left', 'vertical','bottom')
@@ -18,3 +18,5 @@ fig.PaperSize = [fig_pos(3) fig_pos(4)];
 mkdir('../../../../../../../../resources/evaluation/programs/java/kanzi/plots/');
 fileID = '../../../../../../../../resources/evaluation/programs/java/kanzi/plots/prediction_error.pdf';
 print(fig, fileID,'-dpdf');
+fileID = '../../../../../../../../resources/evaluation/programs/java/kanzi/plots/prediction_error.png';
+print(fig, fileID,'-dpng');

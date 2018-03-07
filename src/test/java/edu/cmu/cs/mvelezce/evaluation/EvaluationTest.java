@@ -703,6 +703,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void emailConfigCrusherSamplingTime() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    }
+
+    @Test
     public void emailFamily() throws IOException, InterruptedException {
         String programName = "email";
 

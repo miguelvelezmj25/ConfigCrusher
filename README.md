@@ -13,6 +13,10 @@ ConfigCrusher combines static taint analysis and dynamic analysis to identify ho
 Our evaluation using 10 real-world configurable systems shows that ConfigCrusher is more efficient at building performance models that are similar or more accurate than current state-of-the-art black-box and white-box approaches.
 To this end, we discuss the benefits and potential of our white-box performance analysis to outperform other approaches.
 
+## Supplementary material
+
+[Link](https://github.com/miguelvelezmj25/ConfigCrusher/blob/supplementary/src/main/resources/supplementary)
+
 ## License
 
 MIT License

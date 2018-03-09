@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.evaluation.approaches;
+package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;

@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.UsesBFExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.groundtruth.execute.GroundTruthEvaluationExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
@@ -60,6 +61,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareRunningExample0() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
     public void compareRunningExample1() throws Exception {
         String programName = "running-example";
 
@@ -92,6 +101,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareColorCounter0() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
     public void compareColorCounter1() throws Exception {
         String programName = "pngtasticColorCounter";
 
@@ -100,12 +117,18 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareElevator0() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
     public void compareElevator2() throws Exception {
         String programName = "elevator";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
+        Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
@@ -113,9 +136,7 @@ public class EvaluationTest {
     public void compareElevator3() throws Exception {
         String programName = "elevator";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
+        Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
@@ -123,9 +144,7 @@ public class EvaluationTest {
     public void compareElevator4() throws Exception {
         String programName = "elevator";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
+        Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
     }
 
@@ -133,19 +152,23 @@ public class EvaluationTest {
     public void compareElevator5() throws Exception {
         String programName = "elevator";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
+        Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareEmail0() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
     public void compareEmail1() throws Exception {
         String programName = "email";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
+        Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
@@ -153,9 +176,7 @@ public class EvaluationTest {
     public void compareEmail2() throws Exception {
         String programName = "email";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
+        Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
@@ -163,9 +184,7 @@ public class EvaluationTest {
     public void compareEmail3() throws Exception {
         String programName = "email";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
+        Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
@@ -173,10 +192,16 @@ public class EvaluationTest {
     public void compareEmail5() throws Exception {
         String programName = "email";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
+        Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareGrep0() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -212,6 +237,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareSort0() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
     public void compareSort1() throws Exception {
         String programName = "sort";
 
@@ -241,6 +274,14 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareDensity0() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -292,6 +333,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareOptimizer0() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
     public void compareOptimizer1() throws Exception {
         String programName = "pngtasticOptimizer";
 
@@ -324,6 +373,14 @@ public class EvaluationTest {
     }
 
     @Test
+    public void comparePrevayler0() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
     public void comparePrevayler1() throws Exception {
         String programName = "prevayler";
 
@@ -353,6 +410,14 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareKanzi0() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -401,6 +466,28 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void runningExampleBruteForce() throws Exception {
+        String programName = "running-example";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void runningExampleBruteForceSamplingTime() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -662,6 +749,28 @@ public class EvaluationTest {
     }
 
     @Test
+    public void emailBruteForce() throws Exception {
+        String programName = "email";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void emailBruteForceSamplingTime() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
     public void emailConfigCrusher() throws Exception {
         String programName = "email";
 
@@ -893,6 +1002,28 @@ public class EvaluationTest {
     }
 
     @Test
+    public void elevatorBruteForce() throws Exception {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void elevatorBruteForceSamplingTime() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
     public void elevatorFamily() throws IOException, InterruptedException {
         String programName = "elevator";
 
@@ -1085,6 +1216,28 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(performanceEntries));
+    }
+
+    @Test
+    public void colorCounterBruteForce() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void colorCounterBruteForceSamplingTime() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -1345,6 +1498,28 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+    }
+
+    @Test
+    public void kanziBruteForce() throws Exception {
+        String programName = "kanzi";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void kanziBruteForceSamplingTime() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -1616,6 +1791,28 @@ public class EvaluationTest {
     }
 
     @Test
+    public void sortBruteForce() throws Exception {
+        String programName = "sort";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void sortBruteForceSamplingTime() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
     public void sortConfigCrusher() throws Exception {
         String programName = "sort";
 
@@ -1828,6 +2025,28 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(splatEntries));
+    }
+
+    @Test
+    public void grepBruteForce() throws Exception {
+        String programName = "grep";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void grepBruteForceSamplingTime() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -2241,6 +2460,28 @@ public class EvaluationTest {
     }
 
     @Test
+    public void optimizerBruteForce() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void optimizerBruteForceSamplingTime() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
     public void optimizerConfigCrusher() throws Exception {
         String programName = "pngtasticOptimizer";
 
@@ -2459,6 +2700,28 @@ public class EvaluationTest {
     }
 
     @Test
+    public void prevaylerBruteForce() throws Exception {
+        String programName = "prevayler";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void prevaylerBruteForceSamplingTime() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    }
+
+    @Test
     public void prevaylerConfigCrusher() throws Exception {
         String programName = "prevayler";
 
@@ -2610,6 +2873,28 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+    }
+
+    @Test
+    public void densityBruteForce() throws Exception {
+        String programName = "density";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void densityBruteForceSamplingTime() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test

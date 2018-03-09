@@ -27,72 +27,12 @@ public class Evaluation {
     public static final String PAIR_WISE = "pair_wise";
     public static final String SPLAT = "splat";
     public static final String FAMILY = "family";
+    public static final String BRUTE_FORCE = "brute_force";
 
     private String programName;
-    private FeatureModel fm;
 
     public Evaluation(String programName) {
         this.programName = programName;
-    }
-
-    public Evaluation(String programName, FeatureModel fm) {
-        this(programName);
-
-        this.fm = fm;
-    }
-
-//    public double getTotalSamplingTime(Set<Set<String>> configurations) throws IOException {
-//        double time = 0.0;
-//
-//        String fileString = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
-//                + Evaluation.GROUND_TRUTH + Evaluation.DOT_CSV;
-//        File file = new File(fileString);
-//
-//        List<String> lines = this.parseFullFile(file);
-//
-//        for(String line : lines) {
-//            if(!line.startsWith("true")) {
-//                continue;
-//            }
-//
-//            String[] entries = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-//            String configString = entries[1];
-//            configString = Evaluation.removeSpecialCharsFromConfig(configString);
-//            Set<String> config = Evaluation.buildConfig(configString);
-//
-//            if(!configurations.contains(config)) {
-//                continue;
-//            }
-//
-//            Double exec = Double.valueOf(entries[2]);
-//            time += exec;
-//        }
-//
-//        return time;
-//    }
-
-    private static Set<String> buildConfig(String configString) {
-        Set<String> config = new HashSet<>();
-
-        String[] options = configString.split(",");
-
-        for(int i = 0; i < options.length; i++) {
-            String option = options[i].trim();
-
-            if(!option.isEmpty()) {
-                config.add(option);
-            }
-        }
-
-        return config;
-    }
-
-    private static String removeSpecialCharsFromConfig(String s) {
-        s = s.replaceAll("\"", "");
-        s = s.replaceAll("\\[", "");
-        s = s.replaceAll("]", "");
-
-        return s;
     }
 
     public double getTotalSamplingTime(String approach) throws IOException {

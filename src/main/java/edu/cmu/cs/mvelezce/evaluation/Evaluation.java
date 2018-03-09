@@ -261,9 +261,15 @@ public class Evaluation {
         return outputFile;
     }
 
-    private File deleteOutputFile(String approach1, String approach2) throws IOException {
+    private File deleteOutputFile(String approach1, String approach2, boolean all) throws IOException {
+        String version = "predicted";
+
+        if(all) {
+            version = "all";
+        }
+
         String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.COMPARISON_DIR + "/"
-                + approach1 + "_" + approach2 + Evaluation.DOT_CSV;
+                + version + "_" + approach1 + "_" + approach2 + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
 
         if(outputFile.exists()) {
@@ -375,9 +381,13 @@ public class Evaluation {
     }
 
     public void compareApproaches(String approach1, String approach2) throws IOException {
+        this.compareApproaches(approach1, approach2, false);
+    }
+
+    public void compareApproaches(String approach1, String approach2, boolean all) throws IOException {
         File outputFile1 = this.checkFileExists(approach1);
         File outputFile2 = this.checkFileExists(approach2);
-        File outputFile = this.deleteOutputFile(approach1, approach2);
+        File outputFile = this.deleteOutputFile(approach1, approach2, all);
         this.compareLengthsOfFiles(outputFile1, outputFile2);
 
         Map<Set<String>, List<String>> data1 = this.getData(outputFile1);
@@ -442,21 +452,23 @@ public class Evaluation {
                 within = true;
             }
 
-            if(measured) {
-                if(within) {
-                    measuredWithin++;
-                }
-                else {
-                    measuredOutside++;
+            if(!all) {
+                if(measured) {
+                    if(within) {
+                        measuredWithin++;
+                    }
+                    else {
+                        measuredOutside++;
 
-                }
-            }
-            else {
-                if(within) {
-                    predictedWithin++;
+                    }
                 }
                 else {
-                    predictedOutside++;
+                    if(within) {
+                        predictedWithin++;
+                    }
+                    else {
+                        predictedOutside++;
+                    }
                 }
             }
 
@@ -480,10 +492,12 @@ public class Evaluation {
             result.append(decimalFormat.format(squaredError));
             result.append("\n");
 
-            if(!measured && time2 >= 1.0) {
-                se += squaredError;
-                ape += relativeError;
-                testCount++;
+            if(time2 >= 1.0) {
+                if(all || !measured) {
+                    se += squaredError;
+                    ape += relativeError;
+                    testCount++;
+                }
             }
         }
 

@@ -101,6 +101,86 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareAllRunningExample0() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllRunningExample1() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllRunningExample2() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllRunningExample3() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllRunningExample4() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter0() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter1() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter2() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter3() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter4() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
     public void compareColorCounter0() throws Exception {
         String programName = "pngtasticColorCounter";
 
@@ -114,6 +194,46 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllElevator0() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllElevator2() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllElevator3() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllElevator4() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllElevator5() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH, true);
     }
 
     @Test
@@ -157,6 +277,47 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareAllEmail0() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllEmail1() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllEmail2() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllEmail3() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllEmail5() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH, true);
+    }
+
+
+    @Test
     public void compareEmail0() throws Exception {
         String programName = "email";
 
@@ -194,6 +355,46 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllGrep0() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllGrep1() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllGrep2() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllGrep3() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllGrep4() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
     }
 
     @Test
@@ -237,6 +438,46 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareAllSort0() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllSort1() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllSort2() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllSort3() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllSort4() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
     public void compareSort0() throws Exception {
         String programName = "sort";
 
@@ -274,6 +515,38 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllDensity0() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllDensity1() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllDensity2() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllDensity3() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
     }
 
     @Test
@@ -333,6 +606,46 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareAllOptimizer0() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllOptimizer1() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllOptimizer2() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllOptimizer3() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllOptimizer4() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
     public void compareOptimizer0() throws Exception {
         String programName = "pngtasticOptimizer";
 
@@ -373,6 +686,46 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareAllPrevayler0() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllPrevayler1() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllPrevayler2() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllPrevayler3() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllPrevayler4() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
     public void comparePrevayler0() throws Exception {
         String programName = "prevayler";
 
@@ -410,6 +763,46 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllKanzi0() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllKanzi1() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllKanzi2() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllKanzi3() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllKanzi4() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
     }
 
     @Test

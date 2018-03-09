@@ -22,7 +22,7 @@ public class Evaluation {
 
     // TODO use a class or enum>
     public static final String CONFIG_CRUSHER = "config_crusher";
-    public static final String BRUTE_FORCE = "brute_force";
+    public static final String GROUND_TRUTH = "ground_truth";
     public static final String FEATURE_WISE = "feature_wise";
     public static final String PAIR_WISE = "pair_wise";
     public static final String SPLAT = "splat";
@@ -45,7 +45,7 @@ public class Evaluation {
 //        double time = 0.0;
 //
 //        String fileString = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
-//                + Evaluation.BRUTE_FORCE + Evaluation.DOT_CSV;
+//                + Evaluation.GROUND_TRUTH + Evaluation.DOT_CSV;
 //        File file = new File(fileString);
 //
 //        List<String> lines = this.parseFullFile(file);

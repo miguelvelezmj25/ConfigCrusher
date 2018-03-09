@@ -1417,7 +1417,7 @@ measured,configuration,config_crusher,config_crusher_std,ground_truth,ground_tru
 Total: 1414
 MSE: 76.968
 RMSE: 8.773
-MAPE: 7.822
+MAPE: 4.321
 Measured within ci: 198
 Measured outside ci: 58
 Predicted within ci: 421

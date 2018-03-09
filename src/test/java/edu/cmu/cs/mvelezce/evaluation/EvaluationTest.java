@@ -13,9 +13,9 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePe
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.Pairwise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.execute.PairwiseExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.SPLatExecutor;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.Coverage;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.SPLatDelay;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.execute.SPLatDelayExecutor;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
@@ -97,7 +97,7 @@ public class EvaluationTest {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -145,7 +145,7 @@ public class EvaluationTest {
         String programName = "elevator";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -233,7 +233,7 @@ public class EvaluationTest {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -273,7 +273,7 @@ public class EvaluationTest {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -329,7 +329,7 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -369,7 +369,7 @@ public class EvaluationTest {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -409,7 +409,7 @@ public class EvaluationTest {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -449,7 +449,7 @@ public class EvaluationTest {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -593,17 +593,17 @@ public class EvaluationTest {
     }
 
     @Test
-    public void runningExampleSPLatSamplingTime() throws Exception {
+    public void runningExampleSPLatDelaySamplingTime() throws Exception {
         String programName = "running-example";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -711,19 +711,19 @@ public class EvaluationTest {
     }
 
     @Test
-    public void runningExampleSPLat() throws Exception {
+    public void runningExampleSPLatDelay() throws Exception {
         String programName = "running-example";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
@@ -1188,30 +1188,30 @@ public class EvaluationTest {
     }
 
     @Test
-    public void elevatorSPLat() throws Exception {
+    public void elevatorSPLatDelay() throws Exception {
         String programName = "elevator";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void elevatorSPLatSamplingTime() throws Exception {
+    public void elevatorSPLatDelaySamplingTime() throws Exception {
         String programName = "elevator";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -1273,20 +1273,20 @@ public class EvaluationTest {
     }
 
     @Test
-    public void colorCounterSPLat() throws Exception {
+    public void colorCounterSPLatDelay() throws Exception {
         String programName = "pngtasticColorCounter";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
@@ -1430,17 +1430,17 @@ public class EvaluationTest {
     }
 
     @Test
-    public void colorCounterSPLatSamplingTime() throws Exception {
+    public void colorCounterSPLatDelaySamplingTime() throws Exception {
         String programName = "pngtasticColorCounter";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -1697,34 +1697,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void kanziSPLat() throws Exception {
+    public void kanziSPLatDelay() throws Exception {
         String programName = "kanzi";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void kanziSPLatSamplingTime() throws Exception {
+    public void kanziSPLatDelaySamplingTime() throws Exception {
         String programName = "kanzi";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -1984,34 +1984,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void sortSPLat() throws Exception {
+    public void sortSPLatDelay() throws Exception {
         String programName = "sort";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void sortSPLatSamplingTime() throws Exception {
+    public void sortSPLatDelaySamplingTime() throws Exception {
         String programName = "sort";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -2224,34 +2224,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void grepSPLat() throws Exception {
+    public void grepSPLatDelay() throws Exception {
         String programName = "grep";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void grepSPLatSamplingTime() throws Exception {
+    public void grepSPLatDelaySamplingTime() throws Exception {
         String programName = "grep";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -2416,34 +2416,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void prevaylerSPLat() throws Exception {
+    public void prevaylerSPLatDelay() throws Exception {
         String programName = "prevayler";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void prevaylerSPLatSamplingTime() throws Exception {
+    public void prevaylerSPLatDelaySamplingTime() throws Exception {
         String programName = "prevayler";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -2514,20 +2514,20 @@ public class EvaluationTest {
     }
 
     @Test
-    public void optimizerSPLat() throws Exception {
+    public void optimizerSPLatDelay() throws Exception {
         String programName = "pngtasticOptimizer";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
@@ -2657,17 +2657,17 @@ public class EvaluationTest {
     }
 
     @Test
-    public void optimizerSPLatSamplingTime() throws Exception {
+    public void optimizerSPLatDelaySamplingTime() throws Exception {
         String programName = "pngtasticOptimizer";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 

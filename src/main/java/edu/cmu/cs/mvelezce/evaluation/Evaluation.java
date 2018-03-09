@@ -1,10 +1,8 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
-import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.Coverage;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
@@ -25,7 +23,7 @@ public class Evaluation {
     public static final String GROUND_TRUTH = "ground_truth";
     public static final String FEATURE_WISE = "feature_wise";
     public static final String PAIR_WISE = "pair_wise";
-    public static final String SPLAT = "splat";
+    public static final String SPLAT_DELAY = "splat_delay";
     public static final String FAMILY = "family";
     public static final String BRUTE_FORCE = "brute_force";
 

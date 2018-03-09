@@ -1,8 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
-import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEvaluationExecutor;
+import edu.cmu.cs.mvelezce.evaluation.approaches.groundtruth.execute.GroundTruthEvaluationExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
-import edu.cmu.cs.mvelezce.evaluation.approaches.family.Family;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.elevator.ElevatorFM;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.email.EmailFM;
@@ -16,13 +15,10 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerforma
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.SPLatExecutor;
-import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
-import edu.cmu.cs.mvelezce.tool.compression.Compression;
-import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
@@ -68,7 +64,7 @@ public class EvaluationTest {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -76,7 +72,7 @@ public class EvaluationTest {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -84,7 +80,7 @@ public class EvaluationTest {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -92,7 +88,7 @@ public class EvaluationTest {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -100,7 +96,7 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -110,7 +106,7 @@ public class EvaluationTest {
         FeatureModel fm = new ElevatorFM();
 
         Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -120,7 +116,7 @@ public class EvaluationTest {
         FeatureModel fm = new ElevatorFM();
 
         Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -130,7 +126,7 @@ public class EvaluationTest {
         FeatureModel fm = new ElevatorFM();
 
         Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -140,7 +136,7 @@ public class EvaluationTest {
         FeatureModel fm = new ElevatorFM();
 
         Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.FAMILY, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -150,7 +146,7 @@ public class EvaluationTest {
         FeatureModel fm = new ElevatorFM();
 
         Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -160,7 +156,7 @@ public class EvaluationTest {
         FeatureModel fm = new ElevatorFM();
 
         Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -170,7 +166,7 @@ public class EvaluationTest {
         FeatureModel fm = new ElevatorFM();
 
         Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -180,7 +176,7 @@ public class EvaluationTest {
         FeatureModel fm = new ElevatorFM();
 
         Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.FAMILY, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -188,7 +184,7 @@ public class EvaluationTest {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -196,7 +192,7 @@ public class EvaluationTest {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -204,7 +200,7 @@ public class EvaluationTest {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -212,7 +208,7 @@ public class EvaluationTest {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -220,7 +216,7 @@ public class EvaluationTest {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -228,7 +224,7 @@ public class EvaluationTest {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -236,7 +232,7 @@ public class EvaluationTest {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -244,7 +240,7 @@ public class EvaluationTest {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -252,7 +248,7 @@ public class EvaluationTest {
         String programName = "density";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -260,7 +256,7 @@ public class EvaluationTest {
         String programName = "density";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -268,7 +264,7 @@ public class EvaluationTest {
         String programName = "density";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -276,7 +272,7 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -284,7 +280,7 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -292,7 +288,7 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -300,7 +296,7 @@ public class EvaluationTest {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -308,7 +304,7 @@ public class EvaluationTest {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -316,7 +312,7 @@ public class EvaluationTest {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -324,7 +320,7 @@ public class EvaluationTest {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -332,7 +328,7 @@ public class EvaluationTest {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -340,7 +336,7 @@ public class EvaluationTest {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -348,7 +344,7 @@ public class EvaluationTest {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -356,7 +352,7 @@ public class EvaluationTest {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -364,7 +360,7 @@ public class EvaluationTest {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -372,7 +368,7 @@ public class EvaluationTest {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -380,7 +376,7 @@ public class EvaluationTest {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -388,7 +384,7 @@ public class EvaluationTest {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -396,7 +392,7 @@ public class EvaluationTest {
         String programName = "regions12";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -404,7 +400,7 @@ public class EvaluationTest {
         String programName = "regions16";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -446,25 +442,25 @@ public class EvaluationTest {
     }
 
     @Test
-    public void runningExampleBruteForce() throws Exception {
+    public void runningExampleGroundTruth() throws Exception {
         String programName = "running-example";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void runningExampleBruteForceSamplingTime() throws Exception {
+    public void runningExampleGroundTruthSamplingTime() throws Exception {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -644,25 +640,25 @@ public class EvaluationTest {
     }
 
     @Test
-    public void emailBruteForce() throws Exception {
+    public void emailGroundTruth() throws Exception {
         String programName = "email";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void emailBruteForceSamplingTime() throws Exception {
+    public void emailGroundTruthSamplingTime() throws Exception {
         String programName = "email";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -682,7 +678,7 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        executor = new BruteForceEvaluationExecutor(programName);
+        executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
         Set<Set<String>> configurations = new HashSet<>();
 
@@ -730,7 +726,7 @@ public class EvaluationTest {
         PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
         entries.add(entry);
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Set<Set<String>> configurations = new HashSet<>();
@@ -875,25 +871,25 @@ public class EvaluationTest {
     }
 
     @Test
-    public void elevatorBruteForce() throws Exception {
+    public void elevatorGroundTruth() throws Exception {
         String programName = "elevator";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void elevatorBruteForceSamplingTime() throws Exception {
+    public void elevatorGroundTruthSamplingTime() throws Exception {
         String programName = "elevator";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -916,7 +912,7 @@ public class EvaluationTest {
         PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
         entries.add(entry);
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Set<Set<String>> configurations = new HashSet<>();
@@ -1141,17 +1137,17 @@ public class EvaluationTest {
     }
 
     @Test
-    public void colorCounterBruteForce() throws Exception {
+    public void colorCounterGroundTruth() throws Exception {
         String programName = "pngtasticColorCounter";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
@@ -1308,11 +1304,11 @@ public class EvaluationTest {
     }
 
     @Test
-    public void colorCounterBruteForceSamplingTime() throws Exception {
+    public void colorCounterGroundTruthSamplingTime() throws Exception {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -1324,31 +1320,31 @@ public class EvaluationTest {
     }
 
     @Test
-    public void optimizerBruteForce() throws Exception {
+    public void optimizerGroundTruth() throws Exception {
         String programName = "pngtasticOptimizer";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void kanziBruteForce() throws Exception {
+    public void kanziGroundTruth() throws Exception {
         String programName = "kanzi";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
@@ -1476,11 +1472,11 @@ public class EvaluationTest {
     }
 
     @Test
-    public void kanziBruteForceSamplingTime() throws Exception {
+    public void kanziGroundTruthSamplingTime() throws Exception {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -1570,53 +1566,53 @@ public class EvaluationTest {
     }
 
     @Test
-    public void findBruteForce() throws Exception {
+    public void findGroundTruth() throws Exception {
         String programName = "find";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void grepBruteForce() throws Exception {
+    public void grepGroundTruth() throws Exception {
         String programName = "grep";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void sortBruteForce() throws Exception {
+    public void sortGroundTruth() throws Exception {
         String programName = "sort";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void sortBruteForceSamplingTime() throws Exception {
+    public void sortGroundTruthSamplingTime() throws Exception {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -1636,7 +1632,7 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        executor = new BruteForceEvaluationExecutor(programName);
+        executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
         Set<Set<String>> configurations = new HashSet<>();
 
@@ -1959,11 +1955,11 @@ public class EvaluationTest {
     }
 
     @Test
-    public void grepBruteForceSamplingTime() throws Exception {
+    public void grepGroundTruthSamplingTime() throws Exception {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -2053,25 +2049,25 @@ public class EvaluationTest {
     }
 
     @Test
-    public void prevaylerBruteForce() throws Exception {
+    public void prevaylerGroundTruth() throws Exception {
         String programName = "prevayler";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void prevaylerBruteForceSamplingTime() throws Exception {
+    public void prevaylerGroundTruthSamplingTime() throws Exception {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -2447,11 +2443,11 @@ public class EvaluationTest {
     }
 
     @Test
-    public void optimizerBruteForceSamplingTime() throws Exception {
+    public void optimizerGroundTruthSamplingTime() throws Exception {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -2567,53 +2563,53 @@ public class EvaluationTest {
     }
 
     @Test
-    public void regions16BruteForce() throws Exception {
+    public void regions16GroundTruth() throws Exception {
         String programName = "regions16";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void regions12BruteForce() throws Exception {
+    public void regions12GroundTruth() throws Exception {
         String programName = "regions12";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void densityBruteForce() throws Exception {
+    public void densityGroundTruth() throws Exception {
         String programName = "density";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void densityBruteForceSamplingTime() throws Exception {
+    public void densityGroundTruthSamplingTime() throws Exception {
         String programName = "density";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -2643,7 +2639,7 @@ public class EvaluationTest {
 
         args = new String[0];
 
-        executor = new BruteForceEvaluationExecutor(programName);
+        executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
         Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 

@@ -14,13 +14,13 @@ public class CompareTest {
 //    @Test
 //    public void compareElevator2() throws Exception {
 //        String programName = "elevator";
-//        Compare.compare(programName, JavaPipeline.PM_RES_DIR, SPLat.SPLAT_RES_DIR);
+//        Compare.compare(programName, JavaPipeline.PM_RES_DIR, SPLatDelay.SPLAT_RES_DIR);
 //    }
 //
 //    @Test
 //    public void compareElevator3() throws Exception {
 //        String programName = "elevator";
-//        Compare.compare(programName, SPLat.SPLAT_RES_DIR, BruteForce.BF_RES_DIR);
+//        Compare.compare(programName, SPLatDelay.SPLAT_RES_DIR, BruteForce.BF_RES_DIR);
 //    }
 //
 //    @Test

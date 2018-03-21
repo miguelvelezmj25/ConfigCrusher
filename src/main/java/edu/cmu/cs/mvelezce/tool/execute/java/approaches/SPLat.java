@@ -19,10 +19,10 @@ public class SPLat {
 //            throw new RuntimeException("The file " + file + " does not exist");
 //        }
 //
-//        Set<String> splatOptions = SPLat.getOptions(file, regionsToOptions);
+//        Set<String> splatOptions = SPLatDelay.getOptions(file, regionsToOptions);
 //        Set<Set<String>> splatConfigurations = Helper.getConfigurations(splatOptions);
-//        List<PerformanceEntryStatistic> perfStats = SPLat.getTimesFromBF(programName, splatConfigurations);
-//        SPLat.saveSPLAtPerformance(programName, perfStats);
+//        List<PerformanceEntryStatistic> perfStats = SPLatDelay.getTimesFromBF(programName, splatConfigurations);
+//        SPLatDelay.saveSPLAtPerformance(programName, perfStats);
 //    }
 //
 //    public static Set<String> getOptions(File file, Map<JavaRegion, Set<Set<String>>> regionsToOptions) throws IOException, ParseException {
@@ -157,7 +157,7 @@ public class SPLat {
 //    }
 //
 //    public static void saveSPLAtPerformance(String programName, List<PerformanceEntryStatistic> perfStats) throws IOException {
-//        File file = new File(SPLat.SPLAT_RES_DIR + "/" + programName + Options.DOT_CSV);
+//        File file = new File(SPLatDelay.SPLAT_RES_DIR + "/" + programName + Options.DOT_CSV);
 //
 //        if(file.exists()) {
 //            if(!file.delete()) {
@@ -182,7 +182,7 @@ public class SPLat {
 //            result.append("\n");
 //        }
 //
-//        File directory = new File(SPLat.SPLAT_RES_DIR);
+//        File directory = new File(SPLatDelay.SPLAT_RES_DIR);
 //
 //        if(!directory.exists()) {
 //            directory.mkdirs();

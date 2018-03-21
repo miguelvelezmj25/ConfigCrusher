@@ -1,10 +1,8 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
-import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.Coverage;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntry;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.apache.commons.io.FileUtils;
@@ -22,77 +20,17 @@ public class Evaluation {
 
     // TODO use a class or enum>
     public static final String CONFIG_CRUSHER = "config_crusher";
-    public static final String BRUTE_FORCE = "brute_force";
+    public static final String GROUND_TRUTH = "ground_truth";
     public static final String FEATURE_WISE = "feature_wise";
     public static final String PAIR_WISE = "pair_wise";
-    public static final String SPLAT = "splat";
+    public static final String SPLAT_DELAY = "splat_delay";
     public static final String FAMILY = "family";
+    public static final String BRUTE_FORCE = "brute_force";
 
     private String programName;
-    private FeatureModel fm;
 
     public Evaluation(String programName) {
         this.programName = programName;
-    }
-
-    public Evaluation(String programName, FeatureModel fm) {
-        this(programName);
-
-        this.fm = fm;
-    }
-
-//    public double getTotalSamplingTime(Set<Set<String>> configurations) throws IOException {
-//        double time = 0.0;
-//
-//        String fileString = Evaluation.DIRECTORY + "/" + this.programName + Evaluation.FULL_DIR + "/"
-//                + Evaluation.BRUTE_FORCE + Evaluation.DOT_CSV;
-//        File file = new File(fileString);
-//
-//        List<String> lines = this.parseFullFile(file);
-//
-//        for(String line : lines) {
-//            if(!line.startsWith("true")) {
-//                continue;
-//            }
-//
-//            String[] entries = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-//            String configString = entries[1];
-//            configString = Evaluation.removeSpecialCharsFromConfig(configString);
-//            Set<String> config = Evaluation.buildConfig(configString);
-//
-//            if(!configurations.contains(config)) {
-//                continue;
-//            }
-//
-//            Double exec = Double.valueOf(entries[2]);
-//            time += exec;
-//        }
-//
-//        return time;
-//    }
-
-    private static Set<String> buildConfig(String configString) {
-        Set<String> config = new HashSet<>();
-
-        String[] options = configString.split(",");
-
-        for(int i = 0; i < options.length; i++) {
-            String option = options[i].trim();
-
-            if(!option.isEmpty()) {
-                config.add(option);
-            }
-        }
-
-        return config;
-    }
-
-    private static String removeSpecialCharsFromConfig(String s) {
-        s = s.replaceAll("\"", "");
-        s = s.replaceAll("\\[", "");
-        s = s.replaceAll("]", "");
-
-        return s;
     }
 
     public double getTotalSamplingTime(String approach) throws IOException {
@@ -323,9 +261,15 @@ public class Evaluation {
         return outputFile;
     }
 
-    private File deleteOutputFile(String approach1, String approach2) throws IOException {
+    private File deleteOutputFile(String approach1, String approach2, boolean all) throws IOException {
+        String version = "predicted";
+
+        if(all) {
+            version = "all";
+        }
+
         String outputDir = Evaluation.DIRECTORY + "/" + this.programName + "/" + Evaluation.COMPARISON_DIR + "/"
-                + approach1 + "_" + approach2 + Evaluation.DOT_CSV;
+                + version + "_" + approach1 + "_" + approach2 + Evaluation.DOT_CSV;
         File outputFile = new File(outputDir);
 
         if(outputFile.exists()) {
@@ -437,9 +381,13 @@ public class Evaluation {
     }
 
     public void compareApproaches(String approach1, String approach2) throws IOException {
+        this.compareApproaches(approach1, approach2, false);
+    }
+
+    public void compareApproaches(String approach1, String approach2, boolean all) throws IOException {
         File outputFile1 = this.checkFileExists(approach1);
         File outputFile2 = this.checkFileExists(approach2);
-        File outputFile = this.deleteOutputFile(approach1, approach2);
+        File outputFile = this.deleteOutputFile(approach1, approach2, all);
         this.compareLengthsOfFiles(outputFile1, outputFile2);
 
         Map<Set<String>, List<String>> data1 = this.getData(outputFile1);
@@ -504,21 +452,23 @@ public class Evaluation {
                 within = true;
             }
 
-            if(measured) {
-                if(within) {
-                    measuredWithin++;
-                }
-                else {
-                    measuredOutside++;
+            if(!all) {
+                if(measured) {
+                    if(within) {
+                        measuredWithin++;
+                    }
+                    else {
+                        measuredOutside++;
 
-                }
-            }
-            else {
-                if(within) {
-                    predictedWithin++;
+                    }
                 }
                 else {
-                    predictedOutside++;
+                    if(within) {
+                        predictedWithin++;
+                    }
+                    else {
+                        predictedOutside++;
+                    }
                 }
             }
 
@@ -542,10 +492,12 @@ public class Evaluation {
             result.append(decimalFormat.format(squaredError));
             result.append("\n");
 
-            if(!measured && time2 >= 1.0) {
-                se += squaredError;
-                ape += relativeError;
-                testCount++;
+            if(time2 >= 1.0) {
+                if(all || !measured) {
+                    se += squaredError;
+                    ape += relativeError;
+                    testCount++;
+                }
             }
         }
 

@@ -1,8 +1,8 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
-import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEvaluationExecutor;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.UsesBFExecutor;
+import edu.cmu.cs.mvelezce.evaluation.approaches.groundtruth.execute.GroundTruthEvaluationExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
-import edu.cmu.cs.mvelezce.evaluation.approaches.family.Family;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.elevator.ElevatorFM;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.email.EmailFM;
@@ -13,16 +13,13 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePe
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.Pairwise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.execute.PairwiseExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.Coverage;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.SPLat;
-import edu.cmu.cs.mvelezce.evaluation.approaches.splat.execute.SPLatExecutor;
-import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.Coverage;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.SPLatDelay;
+import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.execute.SPLatDelayExecutor;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
-import edu.cmu.cs.mvelezce.tool.compression.Compression;
-import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
@@ -64,11 +61,19 @@ public class EvaluationTest {
     }
 
     @Test
+    public void compareRunningExample0() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
     public void compareRunningExample1() throws Exception {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -76,7 +81,7 @@ public class EvaluationTest {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -84,7 +89,7 @@ public class EvaluationTest {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -92,7 +97,95 @@ public class EvaluationTest {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllRunningExample0() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllRunningExample1() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllRunningExample2() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllRunningExample3() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllRunningExample4() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter0() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter1() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter2() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter3() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllColorCounter4() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareColorCounter0() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -100,87 +193,216 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllElevator0() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllElevator2() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllElevator3() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllElevator4() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllElevator5() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareElevator0() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
     public void compareElevator2() throws Exception {
         String programName = "elevator";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
     public void compareElevator3() throws Exception {
         String programName = "elevator";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
     public void compareElevator4() throws Exception {
         String programName = "elevator";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
     public void compareElevator5() throws Exception {
         String programName = "elevator";
 
-        FeatureModel fm = new ElevatorFM();
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
+    }
 
-        Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.FAMILY, Evaluation.BRUTE_FORCE);
+    @Test
+    public void compareAllEmail0() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllEmail1() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllEmail2() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllEmail3() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllEmail5() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH, true);
+    }
+
+
+    @Test
+    public void compareEmail0() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
     public void compareEmail1() throws Exception {
         String programName = "email";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
     public void compareEmail2() throws Exception {
         String programName = "email";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
     public void compareEmail3() throws Exception {
         String programName = "email";
 
-        FeatureModel fm = new ElevatorFM();
-
-        Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
     public void compareEmail5() throws Exception {
         String programName = "email";
 
-        FeatureModel fm = new ElevatorFM();
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
+    }
 
-        Evaluation eval = new Evaluation(programName, fm);
-        eval.compareApproaches(Evaluation.FAMILY, Evaluation.BRUTE_FORCE);
+    @Test
+    public void compareAllGrep0() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllGrep1() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllGrep2() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllGrep3() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllGrep4() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareGrep0() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -188,7 +410,7 @@ public class EvaluationTest {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -196,7 +418,7 @@ public class EvaluationTest {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -204,7 +426,7 @@ public class EvaluationTest {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -212,7 +434,55 @@ public class EvaluationTest {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllSort0() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllSort1() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllSort2() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllSort3() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllSort4() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareSort0() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -220,7 +490,7 @@ public class EvaluationTest {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -228,7 +498,7 @@ public class EvaluationTest {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -236,7 +506,7 @@ public class EvaluationTest {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -244,7 +514,47 @@ public class EvaluationTest {
         String programName = "sort";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllDensity0() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllDensity1() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllDensity2() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllDensity3() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareDensity0() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -252,7 +562,7 @@ public class EvaluationTest {
         String programName = "density";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -260,7 +570,7 @@ public class EvaluationTest {
         String programName = "density";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -268,7 +578,7 @@ public class EvaluationTest {
         String programName = "density";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -276,7 +586,7 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -284,7 +594,7 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -292,7 +602,55 @@ public class EvaluationTest {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllOptimizer0() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllOptimizer1() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllOptimizer2() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllOptimizer3() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllOptimizer4() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareOptimizer0() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -300,7 +658,7 @@ public class EvaluationTest {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -308,7 +666,7 @@ public class EvaluationTest {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -316,7 +674,7 @@ public class EvaluationTest {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -324,7 +682,55 @@ public class EvaluationTest {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllPrevayler0() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllPrevayler1() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllPrevayler2() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllPrevayler3() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllPrevayler4() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void comparePrevayler0() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -332,7 +738,7 @@ public class EvaluationTest {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -340,7 +746,7 @@ public class EvaluationTest {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -348,7 +754,7 @@ public class EvaluationTest {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -356,7 +762,55 @@ public class EvaluationTest {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void compareAllKanzi0() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllKanzi1() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllKanzi2() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllKanzi3() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareAllKanzi4() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+    }
+
+    @Test
+    public void compareKanzi0() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -364,7 +818,7 @@ public class EvaluationTest {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -372,7 +826,7 @@ public class EvaluationTest {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -380,7 +834,7 @@ public class EvaluationTest {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -388,7 +842,7 @@ public class EvaluationTest {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -396,7 +850,7 @@ public class EvaluationTest {
         String programName = "regions12";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
     }
 
     @Test
@@ -404,7 +858,29 @@ public class EvaluationTest {
         String programName = "regions16";
 
         Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.BRUTE_FORCE);
+        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+    }
+
+    @Test
+    public void runningExampleBruteForce() throws Exception {
+        String programName = "running-example";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void runningExampleBruteForceSamplingTime() throws Exception {
+        String programName = "running-example";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -446,25 +922,25 @@ public class EvaluationTest {
     }
 
     @Test
-    public void runningExampleBruteForce() throws Exception {
+    public void runningExampleGroundTruth() throws Exception {
         String programName = "running-example";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void runningExampleBruteForceSamplingTime() throws Exception {
+    public void runningExampleGroundTruthSamplingTime() throws Exception {
         String programName = "running-example";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -510,17 +986,17 @@ public class EvaluationTest {
     }
 
     @Test
-    public void runningExampleSPLatSamplingTime() throws Exception {
+    public void runningExampleSPLatDelaySamplingTime() throws Exception {
         String programName = "running-example";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -628,19 +1104,41 @@ public class EvaluationTest {
     }
 
     @Test
-    public void runningExampleSPLat() throws Exception {
+    public void runningExampleSPLatDelay() throws Exception {
         String programName = "running-example";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+    }
+
+    @Test
+    public void emailGroundTruth() throws Exception {
+        String programName = "email";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+    }
+
+    @Test
+    public void emailGroundTruthSamplingTime() throws Exception {
+        String programName = "email";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -650,7 +1148,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new UsesBFExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -682,7 +1180,7 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        executor = new BruteForceEvaluationExecutor(programName);
+        executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
         Set<Set<String>> configurations = new HashSet<>();
 
@@ -730,7 +1228,7 @@ public class EvaluationTest {
         PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
         entries.add(entry);
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Set<Set<String>> configurations = new HashSet<>();
@@ -875,13 +1373,35 @@ public class EvaluationTest {
     }
 
     @Test
+    public void elevatorGroundTruth() throws Exception {
+        String programName = "elevator";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+    }
+
+    @Test
+    public void elevatorGroundTruthSamplingTime() throws Exception {
+        String programName = "elevator";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+    }
+
+    @Test
     public void elevatorBruteForce() throws Exception {
         String programName = "elevator";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new UsesBFExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -916,7 +1436,7 @@ public class EvaluationTest {
         PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
         entries.add(entry);
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Set<Set<String>> configurations = new HashSet<>();
@@ -1061,34 +1581,56 @@ public class EvaluationTest {
     }
 
     @Test
-    public void elevatorSPLat() throws Exception {
+    public void elevatorSPLatDelay() throws Exception {
         String programName = "elevator";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void elevatorSPLatSamplingTime() throws Exception {
+    public void elevatorSPLatDelaySamplingTime() throws Exception {
         String programName = "elevator";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(performanceEntries));
+    }
+
+    @Test
+    public void colorCounterBruteForce() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void colorCounterBruteForceSamplingTime() throws Exception {
+        String programName = "pngtasticColorCounter";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -1124,34 +1666,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void colorCounterSPLat() throws Exception {
+    public void colorCounterSPLatDelay() throws Exception {
         String programName = "pngtasticColorCounter";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void colorCounterBruteForce() throws Exception {
+    public void colorCounterGroundTruth() throws Exception {
         String programName = "pngtasticColorCounter";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
@@ -1281,17 +1823,17 @@ public class EvaluationTest {
     }
 
     @Test
-    public void colorCounterSPLatSamplingTime() throws Exception {
+    public void colorCounterSPLatDelaySamplingTime() throws Exception {
         String programName = "pngtasticColorCounter";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -1308,11 +1850,11 @@ public class EvaluationTest {
     }
 
     @Test
-    public void colorCounterBruteForceSamplingTime() throws Exception {
+    public void colorCounterGroundTruthSamplingTime() throws Exception {
         String programName = "pngtasticColorCounter";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -1324,17 +1866,31 @@ public class EvaluationTest {
     }
 
     @Test
-    public void optimizerBruteForce() throws Exception {
+    public void optimizerGroundTruth() throws Exception {
         String programName = "pngtasticOptimizer";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+    }
+
+    @Test
+    public void kanziGroundTruth() throws Exception {
+        String programName = "kanzi";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
@@ -1344,11 +1900,19 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new UsesBFExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
         eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void kanziBruteForceSamplingTime() throws Exception {
+        String programName = "kanzi";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -1476,11 +2040,11 @@ public class EvaluationTest {
     }
 
     @Test
-    public void kanziBruteForceSamplingTime() throws Exception {
+    public void kanziGroundTruthSamplingTime() throws Exception {
         String programName = "kanzi";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -1526,34 +2090,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void kanziSPLat() throws Exception {
+    public void kanziSPLatDelay() throws Exception {
         String programName = "kanzi";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void kanziSPLatSamplingTime() throws Exception {
+    public void kanziSPLatDelaySamplingTime() throws Exception {
         String programName = "kanzi";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -1570,31 +2134,53 @@ public class EvaluationTest {
     }
 
     @Test
-    public void findBruteForce() throws Exception {
+    public void findGroundTruth() throws Exception {
         String programName = "find";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void grepBruteForce() throws Exception {
+    public void grepGroundTruth() throws Exception {
         String programName = "grep";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+    }
+
+    @Test
+    public void sortGroundTruth() throws Exception {
+        String programName = "sort";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+    }
+
+    @Test
+    public void sortGroundTruthSamplingTime() throws Exception {
+        String programName = "sort";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -1604,7 +2190,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new UsesBFExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -1636,7 +2222,7 @@ public class EvaluationTest {
         Executor executor = new ConfigCrusherExecutor(programName);
         Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        executor = new BruteForceEvaluationExecutor(programName);
+        executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
         Set<Set<String>> configurations = new HashSet<>();
 
@@ -1791,34 +2377,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void sortSPLat() throws Exception {
+    public void sortSPLatDelay() throws Exception {
         String programName = "sort";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void sortSPLatSamplingTime() throws Exception {
+    public void sortSPLatDelaySamplingTime() throws Exception {
         String programName = "sort";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -1832,6 +2418,28 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(splatEntries));
+    }
+
+    @Test
+    public void grepBruteForce() throws Exception {
+        String programName = "grep";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void grepBruteForceSamplingTime() throws Exception {
+        String programName = "grep";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -1959,11 +2567,11 @@ public class EvaluationTest {
     }
 
     @Test
-    public void grepBruteForceSamplingTime() throws Exception {
+    public void grepGroundTruthSamplingTime() throws Exception {
         String programName = "grep";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -2009,34 +2617,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void grepSPLat() throws Exception {
+    public void grepSPLatDelay() throws Exception {
         String programName = "grep";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void grepSPLatSamplingTime() throws Exception {
+    public void grepSPLatDelaySamplingTime() throws Exception {
         String programName = "grep";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -2053,25 +2661,25 @@ public class EvaluationTest {
     }
 
     @Test
-    public void prevaylerBruteForce() throws Exception {
+    public void prevaylerGroundTruth() throws Exception {
         String programName = "prevayler";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void prevaylerBruteForceSamplingTime() throws Exception {
+    public void prevaylerGroundTruthSamplingTime() throws Exception {
         String programName = "prevayler";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -2201,34 +2809,34 @@ public class EvaluationTest {
     }
 
     @Test
-    public void prevaylerSPLat() throws Exception {
+    public void prevaylerSPLatDelay() throws Exception {
         String programName = "prevayler";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
-    public void prevaylerSPLatSamplingTime() throws Exception {
+    public void prevaylerSPLatDelaySamplingTime() throws Exception {
         String programName = "prevayler";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -2242,6 +2850,28 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(splatEntries));
+    }
+
+    @Test
+    public void optimizerBruteForce() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void optimizerBruteForceSamplingTime() throws Exception {
+        String programName = "pngtasticOptimizer";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -2277,20 +2907,20 @@ public class EvaluationTest {
     }
 
     @Test
-    public void optimizerSPLat() throws Exception {
+    public void optimizerSPLatDelay() throws Exception {
         String programName = "pngtasticOptimizer";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        List<Coverage> coverageList = splat.readFileCoverage();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        List<Coverage> coverageList = splatDelay.readFileCoverage();
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT, coverageList, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
     }
 
     @Test
@@ -2420,17 +3050,17 @@ public class EvaluationTest {
     }
 
     @Test
-    public void optimizerSPLatSamplingTime() throws Exception {
+    public void optimizerSPLatDelaySamplingTime() throws Exception {
         String programName = "pngtasticOptimizer";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new SPLatExecutor(programName);
+        Executor executor = new SPLatDelayExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLat splat = new SPLat(programName);
-        Set<Set<String>> splatConfigurations = splat.getSPLatConfigurations();
+        SPLatDelay splatDelay = new SPLatDelay(programName);
+        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
         Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
@@ -2447,11 +3077,11 @@ public class EvaluationTest {
     }
 
     @Test
-    public void optimizerBruteForceSamplingTime() throws Exception {
+    public void optimizerGroundTruthSamplingTime() throws Exception {
         String programName = "pngtasticOptimizer";
 
         Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -2460,6 +3090,28 @@ public class EvaluationTest {
 
         Evaluation eval = new Evaluation(programName);
         System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    }
+
+    @Test
+    public void prevaylerBruteForce() throws Exception {
+        String programName = "prevayler";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new UsesBFExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+    }
+
+    @Test
+    public void prevaylerBruteForceSamplingTime() throws Exception {
+        String programName = "prevayler";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
     }
 
     @Test
@@ -2567,31 +3219,53 @@ public class EvaluationTest {
     }
 
     @Test
-    public void regions16BruteForce() throws Exception {
+    public void regions16GroundTruth() throws Exception {
         String programName = "regions16";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
     }
 
     @Test
-    public void regions12BruteForce() throws Exception {
+    public void regions12GroundTruth() throws Exception {
         String programName = "regions12";
 
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+    }
+
+    @Test
+    public void densityGroundTruth() throws Exception {
+        String programName = "density";
+
+        // arguments
+        String[] args = new String[0];
+
+        Executor executor = new GroundTruthEvaluationExecutor(programName);
+        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+
+        Evaluation eval = new Evaluation(programName);
+        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+    }
+
+    @Test
+    public void densityGroundTruthSamplingTime() throws Exception {
+        String programName = "density";
+
+        Evaluation eval = new Evaluation(programName);
+        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
     }
 
     @Test
@@ -2601,7 +3275,7 @@ public class EvaluationTest {
         // arguments
         String[] args = new String[0];
 
-        Executor executor = new BruteForceEvaluationExecutor(programName);
+        Executor executor = new UsesBFExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
         Evaluation eval = new Evaluation(programName);
@@ -2643,7 +3317,7 @@ public class EvaluationTest {
 
         args = new String[0];
 
-        executor = new BruteForceEvaluationExecutor(programName);
+        executor = new GroundTruthEvaluationExecutor(programName);
         Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
         Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 

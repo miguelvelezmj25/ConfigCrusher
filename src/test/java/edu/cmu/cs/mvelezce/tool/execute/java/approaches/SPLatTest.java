@@ -7,7 +7,7 @@ public class SPLatTest {
 //    @Test
 //    public void testMeasureElevator() throws IOException, ParseException {
 //        String programName = "elevator";
-//        SPLat.measure(programName);
+//        SPLatDelay.measure(programName);
 //    }
 
 }

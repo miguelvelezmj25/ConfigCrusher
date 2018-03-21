@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.execute;
 
-import edu.cmu.cs.mvelezce.evaluation.approaches.UsesBFExecutor;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.UsesBFExecutor;
 
 import java.util.*;
 

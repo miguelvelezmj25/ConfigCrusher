@@ -1,0 +1,19 @@
+digraph verify {
+node [shape=record];
+1216889437 [label="LINENUMBER 265 L1\lILOAD 2\lIFEQ L2\lALOAD 1\lLDC \"507f067e-672c-4e6a-b8f9-d45f7b4bbe20\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKEVIRTUAL family/EmailSystem/Email.getEmailSignKey ()I\l"];
+88469686 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"verify\"]\l)\lL0\lLINENUMBER 264 L0\lLDC \"bdcac6fc-6273-46b4-a769-e231c4958b28\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL family/EmailSystem/Email.getEmailFrom ()Lfamily/EmailSystem/Client;\lINVOKEVIRTUAL family/EmailSystem/Client.getKeyringPublicKeyByClient (Lfamily/EmailSystem/Client;)I\lISTORE 2\lL1\l"];
+1017049979 [label="ALOAD 1\lICONST_1\lINVOKEVIRTUAL family/EmailSystem/Email.setIsSignatureVerified (Z)V\lL2\lLINENUMBER 268 L2\lFRAME APPEND [I]\lLDC \"507f067e-672c-4e6a-b8f9-d45f7b4bbe20\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"bdcac6fc-6273-46b4-a769-e231c4958b28\"\l"];
+1015503057 [label="ILOAD 2\lINVOKESTATIC family/EmailSystem/Client.isKeyPairValid (II)Z\lIFEQ L2\lL3\lLINENUMBER 266 L3\l"];
+entry;
+exit;
+1216889437 -> 1017049979;
+1216889437 -> 1015503057;
+entry -> 88469686;
+88469686 -> 1216889437;
+88469686 -> 1017049979;
+1017049979 -> exit;
+1015503057 -> 1017049979;
+1216889437[fontcolor="purple", penwidth=3, color="purple"];
+88469686[fontcolor="purple", penwidth=3, color="purple"];
+1017049979[fontcolor="purple", penwidth=3, color="purple"];
+}

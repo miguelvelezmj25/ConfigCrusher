@@ -1,0 +1,22 @@
+digraph isReadable {
+node [shape=record];
+763937215 [label="L0\lLINENUMBER 65 L0\lLDC \"c02ee81c-9ac1-41f7-a871-7e25be554c6b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.ENCRYPT : Z\lIFEQ L1\lL2\l"];
+879042661 [label="LINENUMBER 66 L2\lLDC \"28f4ac06-61c4-4d8b-9d54-5b29be528efd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL family/EmailSystem/Email.isEncrypted ()Z\lIFNE L3\lL4\lLINENUMBER 67 L4\l"];
+909570727 [label="ICONST_1\lLDC \"28f4ac06-61c4-4d8b-9d54-5b29be528efd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"c02ee81c-9ac1-41f7-a871-7e25be554c6b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL3\lLINENUMBER 70 L3\lFRAME SAME\l"];
+1253641473 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"featureSwitch\"]\l)\l@LfeatureHouse/FeatureSwitchID;(\l[id=12, , thenFeature=\"encrypt\", , elseFeature=\"base\"]\l)\l"];
+124900571 [label="ICONST_0\lLDC \"28f4ac06-61c4-4d8b-9d54-5b29be528efd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"c02ee81c-9ac1-41f7-a871-7e25be554c6b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL1\lLINENUMBER 74 L1\lFRAME SAME\lICONST_1\l"];
+entry;
+exit;
+763937215 -> 879042661;
+763937215 -> 909570727;
+entry -> 1253641473;
+879042661 -> exit;
+909570727 -> exit;
+1253641473 -> 763937215;
+1253641473 -> 124900571;
+124900571 -> exit;
+763937215[fontcolor="purple", penwidth=3, color="purple"];
+879042661[fontcolor="purple", penwidth=3, color="purple"];
+909570727[fontcolor="purple", penwidth=3, color="purple"];
+124900571[fontcolor="purple", penwidth=3, color="purple"];
+}

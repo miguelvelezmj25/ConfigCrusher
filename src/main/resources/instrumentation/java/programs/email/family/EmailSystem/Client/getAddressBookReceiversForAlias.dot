@@ -1,0 +1,25 @@
+digraph getAddressBookReceiversForAlias {
+node [shape=record];
+532299734 [label="ALOAD 2\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L2\lALOAD 2\lLDC \"734bd52e-7d6a-4c72-9a93-d8ffe30cd3f0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST family/EmailSystem/Client$AddressBookEntry\lASTORE 3\lL3\lLINENUMBER 327 L3\lALOAD 3\lINVOKEVIRTUAL family/EmailSystem/Client$AddressBookEntry.getAlias ()Ljava/lang/String;\l"];
+1496969287 [label="GETFIELD family/EmailSystem/Client.addressbook : Ljava/util/ArrayList;\lINVOKEVIRTUAL java/util/ArrayList.iterator ()Ljava/util/Iterator;\lASTORE 2\lL1\lFRAME APPEND [java/util/Iterator]\lLDC \"0deaafc4-1ce4-46ac-bc82-207f7e522b60\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\l"];
+1949877205 [label="LINENUMBER 330 L4\lFRAME APPEND [family/EmailSystem/Client$AddressBookEntry]\lGOTO L1\lL2\lLINENUMBER 331 L2\lFRAME CHOP 1\lINVOKESTATIC java/util/Collections.emptyList ()Ljava/util/List;\lLDC \"734bd52e-7d6a-4c72-9a93-d8ffe30cd3f0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"0deaafc4-1ce4-46ac-bc82-207f7e522b60\"\l"];
+984302294 [label="LDC \"0deaafc4-1ce4-46ac-bc82-207f7e522b60\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\lL4\l"];
+1806545036 [label="ALOAD 1\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L4\lL5\lLINENUMBER 328 L5\lALOAD 3\lINVOKEVIRTUAL family/EmailSystem/Client$AddressBookEntry.getReceivers ()Ljava/util/ArrayList;\lLDC \"734bd52e-7d6a-4c72-9a93-d8ffe30cd3f0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\l"];
+1728502333 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"addressbook\"]\l)\lL0\lLINENUMBER 326 L0\lALOAD 0\l"];
+entry;
+exit;
+entry -> 1728502333;
+532299734 -> 984302294;
+532299734 -> 1806545036;
+1496969287 -> 532299734;
+1496969287 -> 1949877205;
+1949877205 -> exit;
+984302294 -> 1496969287;
+1806545036 -> exit;
+1728502333 -> 1496969287;
+532299734[fontcolor="purple", penwidth=3, color="purple"];
+1496969287[fontcolor="purple", penwidth=3, color="purple"];
+1949877205[fontcolor="purple", penwidth=3, color="purple"];
+984302294[fontcolor="purple", penwidth=3, color="purple"];
+1806545036[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,16 @@
+digraph valid_product {
+node [shape=record];
+675203915 [label="L0\lLINENUMBER 43 L0\lLDC \"00c36cbe-f680-4801-979e-e09d8c9911fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.BASE : Z\lIFNE L1\l"];
+170974144 [label="L1\lLINENUMBER 47 L1\lFRAME SAME\lICONST_1\lLDC \"00c36cbe-f680-4801-979e-e09d8c9911fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+1980780021 [label="L2\lLINENUMBER 44 L2\lICONST_0\lLDC \"00c36cbe-f680-4801-979e-e09d8c9911fe\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+entry;
+exit;
+entry -> 675203915;
+675203915 -> 170974144;
+675203915 -> 1980780021;
+170974144 -> exit;
+1980780021 -> exit;
+675203915[fontcolor="purple", penwidth=3, color="purple"];
+170974144[fontcolor="purple", penwidth=3, color="purple"];
+1980780021[fontcolor="purple", penwidth=3, color="purple"];
+}

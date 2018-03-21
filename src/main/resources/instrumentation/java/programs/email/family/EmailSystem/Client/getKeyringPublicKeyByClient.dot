@@ -1,0 +1,25 @@
+digraph getKeyringPublicKeyByClient {
+node [shape=record];
+528846922 [label="ALOAD 2\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lIFEQ L2\lALOAD 2\lLDC \"05fa7fc6-6cf9-4763-8cf7-7fc3a06b0ecd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST family/EmailSystem/Client$KeyringEntry\lASTORE 3\lL3\lLINENUMBER 305 L3\lALOAD 3\lINVOKEVIRTUAL family/EmailSystem/Client$KeyringEntry.getKeyOwner ()Lfamily/EmailSystem/Client;\l"];
+2049210129 [label="GETFIELD family/EmailSystem/Client.keyring : Ljava/util/ArrayList;\lINVOKEVIRTUAL java/util/ArrayList.iterator ()Ljava/util/Iterator;\lASTORE 2\lL1\lFRAME APPEND [java/util/Iterator]\lLDC \"731af5de-967a-4c2a-a9f0-fea32c459cf6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\l"];
+1365013293 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"keys\"]\l)\lL0\lLINENUMBER 304 L0\lALOAD 0\l"];
+1364051444 [label="LDC \"731af5de-967a-4c2a-a9f0-fea32c459cf6\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL4\l"];
+1525186016 [label="LINENUMBER 308 L4\lFRAME APPEND [family/EmailSystem/Client$KeyringEntry]\lGOTO L1\lL2\lLINENUMBER 309 L2\lFRAME CHOP 1\lICONST_0\lLDC \"05fa7fc6-6cf9-4763-8cf7-7fc3a06b0ecd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"731af5de-967a-4c2a-a9f0-fea32c459cf6\"\l"];
+1664750059 [label="ALOAD 1\lINVOKEVIRTUAL java/lang/Object.equals (Ljava/lang/Object;)Z\lIFEQ L4\lL5\lLINENUMBER 306 L5\lALOAD 3\lINVOKEVIRTUAL family/EmailSystem/Client$KeyringEntry.getPublicKey ()I\lLDC \"05fa7fc6-6cf9-4763-8cf7-7fc3a06b0ecd\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\l"];
+entry;
+exit;
+entry -> 1365013293;
+528846922 -> 1364051444;
+528846922 -> 1664750059;
+2049210129 -> 528846922;
+2049210129 -> 1525186016;
+1365013293 -> 2049210129;
+1364051444 -> 2049210129;
+1525186016 -> exit;
+1664750059 -> exit;
+528846922[fontcolor="purple", penwidth=3, color="purple"];
+2049210129[fontcolor="purple", penwidth=3, color="purple"];
+1364051444[fontcolor="purple", penwidth=3, color="purple"];
+1525186016[fontcolor="purple", penwidth=3, color="purple"];
+1664750059[fontcolor="purple", penwidth=3, color="purple"];
+}

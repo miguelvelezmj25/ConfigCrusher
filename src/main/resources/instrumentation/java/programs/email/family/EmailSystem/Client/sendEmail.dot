@@ -1,0 +1,16 @@
+digraph sendEmail {
+node [shape=record];
+1433690944 [label="L0\lLINENUMBER 159 L0\lLDC \"64908c5f-819e-48af-b4bd-f51a8f1398ad\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lALOAD 1\lALOAD 2\lALOAD 3\lINVOKESTATIC family/EmailSystem/Email.createEmail (Lfamily/EmailSystem/Client;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lfamily/EmailSystem/Email;\lASTORE 4\lL1\lLINENUMBER 160 L1\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"sending Mail \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 4\lINVOKEVIRTUAL family/EmailSystem/Email.getId ()I\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESTATIC family/EmailSystem/Util.prompt (Ljava/lang/String;)V\lL2\lLINENUMBER 161 L2\lALOAD 0\lALOAD 4\lINVOKESTATIC family/EmailSystem/Client.outgoing (Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V\lL3\lLINENUMBER 162 L3\lALOAD 4\lINVOKEVIRTUAL family/EmailSystem/Email.getEmailTo ()Ljava/lang/String;\lINVOKESTATIC family/EmailSystem/Client.getClientByAdress (Ljava/lang/String;)Lfamily/EmailSystem/Client;\lASTORE 5\lL4\lLINENUMBER 163 L4\lALOAD 5\lIFNULL L5\l"];
+2132465734 [label="L6\lLINENUMBER 164 L6\lALOAD 5\lALOAD 4\lINVOKESTATIC family/EmailSystem/Client.incoming (Lfamily/EmailSystem/Client;Lfamily/EmailSystem/Email;)V\lGOTO L7\l"];
+1566238378 [label="L7\lLINENUMBER 169 L7\lFRAME SAME\lICONST_0\lLDC \"64908c5f-819e-48af-b4bd-f51a8f1398ad\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL8\l"];
+1779202806 [label="L5\lLINENUMBER 167 L5\lFRAME APPEND [family/EmailSystem/Email family/EmailSystem/Client]\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Receiver \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" Unknown\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+entry -> 1433690944;
+1433690944 -> 2132465734;
+1433690944 -> 1779202806;
+2132465734 -> 1566238378;
+1566238378 -> exit;
+1433690944[fontcolor="purple", penwidth=3, color="purple"];
+1566238378[fontcolor="purple", penwidth=3, color="purple"];
+}

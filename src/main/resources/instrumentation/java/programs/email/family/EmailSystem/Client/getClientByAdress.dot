@@ -1,0 +1,28 @@
+digraph getClientByAdress {
+node [shape=record];
+2010733041 [label="L1\lFRAME APPEND [I]\lLDC \"afc82b6b-b667-449c-898b-fa558e42c1b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 1\lGETSTATIC family/EmailSystem/Client.clients : [Lfamily/EmailSystem/Client;\lARRAYLENGTH\lIF_ICMPGE L2\l"];
+308998656 [label="GETSTATIC family/EmailSystem/Client.clients : [Lfamily/EmailSystem/Client;\lLDC \"fdd83c59-860d-4011-8595-66444bde6ef4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lILOAD 1\lAALOAD\lINVOKEVIRTUAL family/EmailSystem/Client.getName ()Ljava/lang/String;\lALOAD 0\lINVOKEVIRTUAL java/lang/String.equals (Ljava/lang/Object;)Z\lIFEQ L4\l"];
+81788921 [label="L0\lLINENUMBER 191 L0\lICONST_0\lISTORE 1\l"];
+688176214 [label="L2\lLINENUMBER 196 L2\lFRAME SAME\lACONST_NULL\lLDC \"fdd83c59-860d-4011-8595-66444bde6ef4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"b5b0871d-b850-47df-a330-d02febd43c7b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"afc82b6b-b667-449c-898b-fa558e42c1b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\lL6\l"];
+1773267192 [label="L4\lLINENUMBER 191 L4\lFRAME SAME\lIINC 1 1\lGOTO L1\l"];
+2075283526 [label="L3\lLINENUMBER 192 L3\lLDC \"b5b0871d-b850-47df-a330-d02febd43c7b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/EmailSystem/Client.clients : [Lfamily/EmailSystem/Client;\lILOAD 1\lAALOAD\lIFNULL L4\l"];
+503319063 [label="L5\lLINENUMBER 193 L5\lGETSTATIC family/EmailSystem/Client.clients : [Lfamily/EmailSystem/Client;\lILOAD 1\lAALOAD\lLDC \"fdd83c59-860d-4011-8595-66444bde6ef4\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"b5b0871d-b850-47df-a330-d02febd43c7b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lLDC \"afc82b6b-b667-449c-898b-fa558e42c1b0\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lARETURN\l"];
+entry;
+exit;
+entry -> 81788921;
+2010733041 -> 688176214;
+2010733041 -> 2075283526;
+308998656 -> 1773267192;
+308998656 -> 503319063;
+81788921 -> 2010733041;
+688176214 -> exit;
+1773267192 -> 2010733041;
+2075283526 -> 308998656;
+2075283526 -> 1773267192;
+503319063 -> exit;
+2010733041[fontcolor="purple", penwidth=3, color="purple"];
+308998656[fontcolor="purple", penwidth=3, color="purple"];
+688176214[fontcolor="purple", penwidth=3, color="purple"];
+2075283526[fontcolor="purple", penwidth=3, color="purple"];
+503319063[fontcolor="purple", penwidth=3, color="purple"];
+}

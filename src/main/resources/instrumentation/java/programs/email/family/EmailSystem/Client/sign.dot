@@ -1,0 +1,16 @@
+digraph sign {
+node [shape=record];
+1343796587 [label="L3\lLINENUMBER 245 L3\lLDC \"817c01a0-9f71-402d-8e01-78ba3daffda2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\l"];
+175096252 [label="L2\lLINENUMBER 247 L2\lFRAME APPEND [I]\lALOAD 1\lICONST_1\lINVOKEVIRTUAL family/EmailSystem/Email.setEmailIsSigned (Z)V\lL4\lLINENUMBER 248 L4\lALOAD 1\lILOAD 2\lINVOKEVIRTUAL family/EmailSystem/Email.setEmailSignKey (I)V\lL5\lLINENUMBER 249 L5\lLDC \"817c01a0-9f71-402d-8e01-78ba3daffda2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lRETURN\lL6\l"];
+1516501617 [label="L0\lLINENUMBER 243 L0\lLDC \"817c01a0-9f71-402d-8e01-78ba3daffda2\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lALOAD 0\lINVOKEVIRTUAL family/EmailSystem/Client.getPrivateKey ()I\lISTORE 2\lL1\lLINENUMBER 244 L1\lILOAD 2\lIFNE L2\l"];
+entry;
+exit;
+entry -> 1516501617;
+1343796587 -> exit;
+175096252 -> exit;
+1516501617 -> 1343796587;
+1516501617 -> 175096252;
+1343796587[fontcolor="purple", penwidth=3, color="purple"];
+175096252[fontcolor="purple", penwidth=3, color="purple"];
+1516501617[fontcolor="purple", penwidth=3, color="purple"];
+}

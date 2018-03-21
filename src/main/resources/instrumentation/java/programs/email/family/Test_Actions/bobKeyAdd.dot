@@ -1,0 +1,16 @@
+digraph bobKeyAdd {
+node [shape=record];
+428310651 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"featureSwitch\"]\l)\l@LfeatureHouse/FeatureSwitchID;(\l[id=0, , thenFeature=\"keys\", , elseFeature=\"base\"]\l)\l"];
+1900453377 [label="INVOKEVIRTUAL family/EmailSystem/Client.addKeyringEntry (Lfamily/EmailSystem/Client;I)V\lL4\lLINENUMBER 41 L4\lLDC \"bob added rjhs key\"\lINVOKESTATIC family/EmailSystem/Util.prompt (Ljava/lang/String;)V\lGOTO L5\lL1\lLINENUMBER 44 L1\lFRAME SAME\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"bobKeyAdd_NOTIMPL\"\l"];
+1102819865 [label="L0\lLINENUMBER 37 L0\lLDC \"8dda09a4-28d7-4767-b29d-949ebc3b3b76\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.KEYS : Z\lIFEQ L1\lL2\lLINENUMBER 38 L2\lGETSTATIC family/Test_Actions.actionHistory : Ljava/util/List;\lLDC \"bobKeyAdd\"\lINVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL3\lLINENUMBER 40 L3\lGETSTATIC family/Test_Actions.bob : Lfamily/EmailSystem/Client;\lGETSTATIC family/Test_Actions.rjh : Lfamily/EmailSystem/Client;\lGETSTATIC family/Test_Actions.rjh : Lfamily/EmailSystem/Client;\lINVOKEVIRTUAL family/EmailSystem/Client.getPrivateKey ()I\l"];
+1059776883 [label="INVOKEINTERFACE java/util/List.add (Ljava/lang/Object;)Z\lPOP\lL6\lLINENUMBER 45 L6\lICONST_1\lPUTSTATIC family/Test_Actions.executedUnimplementedAction : Z\l"];
+entry;
+exit;
+entry -> 428310651;
+428310651 -> 1900453377;
+428310651 -> 1102819865;
+1900453377 -> 1059776883;
+1102819865 -> 1059776883;
+1059776883 -> exit;
+1102819865[fontcolor="purple", penwidth=3, color="purple"];
+}

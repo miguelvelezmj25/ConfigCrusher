@@ -1,0 +1,14 @@
+digraph setup_bob {
+node [shape=record];
+1515772738 [label="@LfeatureHouse/FeatureAnnotation;(\l[name=\"featureSwitch\"]\l)\l@LfeatureHouse/FeatureSwitchID;(\l[id=8, , thenFeature=\"keys\", , elseFeature=\"base\"]\l)\l"];
+1772902226 [label="L0\lLINENUMBER 289 L0\lLDC \"491f8c8d-f07a-40f9-bbaa-030b4a735e0f\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lGETSTATIC family/PL_Interface_impl.KEYS : Z\l"];
+35126588 [label="IFEQ L1\lL2\lLINENUMBER 290 L2\lALOAD 0\lBIPUSH 123\lINVOKEVIRTUAL family/EmailSystem/Client.setPrivateKey (I)V\lL1\l"];
+entry;
+exit;
+entry -> 1515772738;
+1515772738 -> 1772902226;
+1515772738 -> 35126588;
+1772902226 -> 35126588;
+35126588 -> exit;
+1772902226[fontcolor="purple", penwidth=3, color="purple"];
+}

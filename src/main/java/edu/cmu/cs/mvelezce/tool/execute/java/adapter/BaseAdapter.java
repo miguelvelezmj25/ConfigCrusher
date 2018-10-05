@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
+import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
 import org.apache.commons.io.FileUtils;
 
@@ -9,154 +10,199 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
-
-/**
- * Created by miguelvelez on 4/30/17.
- */
 public abstract class BaseAdapter implements Adapter {
 
-    private static final String CLASS_CONTAINER = "target/classes/";
-    private static final String JACKSON_PATH = USER_HOME + "/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar:" + USER_HOME + "/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar:" + USER_HOME + "/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar:/home/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar:/home/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar:/home/mvelezce/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar:" + USER_HOME + "/.m2/repository/commons-cli/commons-cli/1.4/commons-cli-1.4.jar:" + USER_HOME + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar";
-    // TODO figure out what prevayler's path is
-    private static final String PREVAYLER_PATH = USER_HOME + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar:" + USER_HOME + "/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15.jar:" + USER_HOME + "/.m2/repository/com/thoughtworks/xstream/xstream/1.4.5/xstream-1.4.5.jar";
-    private static final String KANZI_PATH = USER_HOME + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar";
-    private String programName;
-    private String mainClass;
-    private String directory;
-    private List<String> options;
+  private static final String CLASS_CONTAINER = "target/classes/";
+  private static final String JACKSON_PATH =
+      Options.USER_HOME
+          + "/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar"
+          + CompileInstrumenter.sep
+          + Options.USER_HOME
+          + "/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar"
+          + CompileInstrumenter.sep
+          + Options.USER_HOME
+          + "/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar";
+  private static final String COMMONS_CLI =
+      Options.USER_HOME
+          + "/.m2/repository/commons-cli/commons-cli/1.4/commons-cli-1.4.jar"
+          + CompileInstrumenter.sep
+          + Options.USER_HOME
+          + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar";
+  //  // TODO figure out what prevayler's path is
+  //  private static final String PREVAYLER_PATH =
+  //      Options.USER_HOME
+  //          + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar"
+  //          + Options.USER_HOME
+  //          + "/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15.jar"
+  //          + Options.USER_HOME
+  //          + "/.m2/repository/com/thoughtworks/xstream/xstream/1.4.5/xstream-1.4.5.jar";
+  //  private static final String KANZI_PATH =
+  //      Options.USER_HOME + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar";
 
-    public BaseAdapter(String programName, String mainClass, String directory, List<String> options) {
-        this.programName = programName;
-        this.mainClass = mainClass;
-        this.directory = directory;
-        this.options = options;
+  private String programName;
+  private String mainClass;
+  private String directory;
+  private List<String> options;
+
+  public BaseAdapter(String programName, String mainClass, String directory, List<String> options) {
+    this.programName = programName;
+    this.mainClass = mainClass;
+    this.directory = directory;
+    this.options = options;
+  }
+
+  @Override
+  public Set<String> configurationAsSet(String[] configuration) {
+    Set<String> performanceConfiguration = new HashSet<>();
+
+    for (int i = 0; i < configuration.length; i++) {
+      if (configuration[i].equals("true")) {
+        performanceConfiguration.add(this.options.get(i));
+      }
     }
 
-    @Override
-    public Set<String> configurationAsSet(String[] configuration) {
-        Set<String> performanceConfiguration = new HashSet<>();
+    return performanceConfiguration;
+  }
 
-        for(int i = 0; i < configuration.length; i++) {
-            if(configuration[i].equals("true")) {
-                performanceConfiguration.add(this.options.get(i));
-            }
-        }
+  @Override
+  public String[] configurationAsMainArguments(Set<String> configuration) {
+    String[] sleepConfiguration = new String[this.options.size()];
 
-        return performanceConfiguration;
+    for (int i = 0; i < sleepConfiguration.length; i++) {
+      if (configuration.contains(this.options.get(i))) {
+        sleepConfiguration[i] = "true";
+      } else {
+        sleepConfiguration[i] = "false";
+      }
     }
 
-    @Override
-    public String[] configurationAsMainArguments(Set<String> configuration) {
-        String[] sleepConfiguration = new String[this.options.size()];
+    return sleepConfiguration;
+  }
 
-        for(int i = 0; i < sleepConfiguration.length; i++) {
-            if(configuration.contains(this.options.get(i))) {
-                sleepConfiguration[i] = "true";
-            }
-            else {
-                sleepConfiguration[i] = "false";
-            }
-        }
+  public String getProgramName() {
+    return programName;
+  }
 
-        return sleepConfiguration;
+  public String getMainClass() {
+    return mainClass;
+  }
+
+  public String getDirectory() {
+    return directory;
+  }
+
+  public List<String> getOptions() {
+    return options;
+  }
+
+  @Override
+  public void execute(Set<String> configuration) throws IOException, InterruptedException {
+    this.execute(configuration, 0);
+  }
+
+  @Override
+  public void execute(String mainAdapter, String[] args) throws InterruptedException, IOException {
+    //    String mvnLocalRepo = this.getMVNLocalRepoAsClassPath();
+    List<String> commandList = this.buildCommandAsList(mainAdapter, args);
+    String[] command = this.buildCommand(commandList);
+    Process process = Runtime.getRuntime().exec(command);
+
+    this.processOutput(process);
+    System.out.println();
+    this.processError(process);
+    System.out.println();
+
+    process.waitFor();
+
+    //    if (!output.toString().isEmpty()) {
+    //      throw new IOException();
+    //    }
+  }
+
+  private void processError(Process process) throws IOException {
+    System.out.println("Errors: ");
+    //    output = new StringBuilder();
+    BufferedReader errorReader =
+        new BufferedReader(new InputStreamReader(process.getErrorStream()));
+    String string;
+
+    while ((string = errorReader.readLine()) != null) {
+      if (!string.isEmpty()) {
+        System.out.println(string);
+        //        output.append(string).append("\n");
+      }
     }
 
-    public String getProgramName() {
-        return programName;
+    //    System.out.println(output);
+  }
+
+  private void processOutput(Process process) throws IOException {
+    System.out.println("Output: ");
+    BufferedReader inputReader =
+        new BufferedReader(new InputStreamReader(process.getInputStream()));
+    String string;
+
+    //    StringBuilder output = new StringBuilder();
+
+    while ((string = inputReader.readLine()) != null) {
+      if (!string.isEmpty()) {
+        System.out.println(string);
+        //        output.append(string).append("\n");
+      }
     }
 
-    public String getMainClass() {
-        return mainClass;
+    //    System.out.println(output);
+  }
+
+  private String[] buildCommand(List<String> commandList) {
+    String[] command = new String[commandList.size()];
+    command = commandList.toArray(command);
+    System.out.println(Arrays.toString(command));
+
+    return command;
+  }
+
+  private List<String> buildCommandAsList(String mainAdapter, String[] args) {
+    List<String> commandList = new ArrayList<>();
+    commandList.add("java");
+    commandList.add("-Xms10G");
+    commandList.add("-Xmx10G");
+    commandList.add("-XX:+UseConcMarkSweepGC");
+    commandList.add("-cp");
+    //        commandList.add(this.directory + ":" + BaseAdapter.CLASS_CONTAINER + ":" +
+    // BaseAdapter.JACKSON_PATH + ":" + cp.toString());
+    commandList.add(
+        this.directory
+            + ":"
+            + BaseAdapter.CLASS_CONTAINER
+            + ":"
+            + BaseAdapter.JACKSON_PATH
+            + ":"
+            + BaseAdapter.COMMONS_CLI);
+    commandList.add(mainAdapter);
+    commandList.add(this.programName);
+    commandList.add(this.mainClass);
+    commandList.addAll(Arrays.asList(args));
+
+    return commandList;
+  }
+
+  private String getMVNLocalRepoAsClassPath() {
+    Collection<File> m2Files = getM2Files();
+    StringBuilder m2FilesAsClassPath = new StringBuilder();
+
+    for (File jarFile : m2Files) {
+      m2FilesAsClassPath.append(jarFile);
+      m2FilesAsClassPath.append(CompileInstrumenter.sep);
     }
 
-    public String getDirectory() {
-        return directory;
-    }
+    m2FilesAsClassPath.deleteCharAt(m2FilesAsClassPath.length() - 1);
 
-    public List<String> getOptions() {
-        return options;
-    }
+    return m2FilesAsClassPath.toString();
+  }
 
-    @Override
-    public void execute(Set<String> configuration) throws IOException, InterruptedException {
-        this.execute(configuration, 0);
-    }
-
-    @Override
-    public void execute(String mainAdapter, String[] args) throws InterruptedException, IOException {
-        File m2Dir = new File(CompileInstrumenter.M2_DIR);
-        Collection<File> m2Files = FileUtils.listFiles(m2Dir, new String[]{"jar"}, true);
-
-        StringBuilder cp = new StringBuilder();
-
-        for(File jarFile : m2Files) {
-            cp.append(jarFile);
-            cp.append(CompileInstrumenter.sep);
-        }
-
-        cp.deleteCharAt(cp.length() - 1);
-
-        StringBuilder output = new StringBuilder();
-        List<String> commandList = new ArrayList<>();
-        commandList.add("java");
-//        commandList.add("-server");
-        commandList.add("-Xms10G");
-        commandList.add("-Xmx10G");
-//        commandList.add("-XX:MetaspaceSize=10G");
-//        commandList.add("-XX:MaxMetaspaceSize=10G");
-//        commandList.add("-Xmn10G");
-        commandList.add("-XX:+UseConcMarkSweepGC");
-        commandList.add("-cp");
-//        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + this.directory);
-
-//        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + cp.toString() + ":" + this.directory);
-        commandList.add(this.directory + ":" + BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + cp.toString());
-
-
-//        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + KANZI_PATH + ":" + this.directory);
-//        commandList.add(BaseAdapter.CLASS_CONTAINER + ":" + BaseAdapter.JACKSON_PATH + ":" + PREVAYLER_PATH + ":" + this.directory);
-        commandList.add(mainAdapter);
-        commandList.add(this.programName);
-        commandList.add(this.mainClass);
-        commandList.addAll(Arrays.asList(args));
-
-        String[] command = new String[commandList.size()];
-        command = commandList.toArray(command);
-        System.out.println(Arrays.toString(command));
-        Process process = Runtime.getRuntime().exec(command);
-
-        System.out.println("Output: ");
-        BufferedReader inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String string;
-
-        while((string = inputReader.readLine()) != null) {
-            if(!string.isEmpty()) {
-                System.out.println(string);
-//                output.append(string).append("\n");
-            }
-        }
-
-        System.out.println(output);
-
-        System.out.println("Errors: ");
-        output = new StringBuilder();
-        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-
-        while((string = errorReader.readLine()) != null) {
-            if(!string.isEmpty()) {
-                System.out.println(string);
-//                output.append(string).append("\n");
-            }
-        }
-
-        System.out.println(output);
-
-        process.waitFor();
-
-        if(!output.toString().isEmpty()) {
-            throw new IOException();
-        }
-    }
-
+  private Collection<File> getM2Files() {
+    File m2Dir = new File(CompileInstrumenter.M2_DIR);
+    return FileUtils.listFiles(m2Dir, new String[] {"jar"}, true);
+  }
 }

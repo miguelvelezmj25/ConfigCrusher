@@ -101,16 +101,121 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.8.9</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
 
         <dependency>
             <groupId>ca.mcgill.sable</groupId>
             <artifactId>soot</artifactId>
             <version>3.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.cmu.cs.mvelezce</groupId>
+            <artifactId>running-example</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/running-example/target/running-example-1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>counter.com.googlecode.pngtastic</groupId>
+            <artifactId>pngtastic-counter</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/pngtastic-counter/target/pngtastic-counter-0.1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>family</groupId>
+            <artifactId>elevator</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/elevator/target/elevator-1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.cmu.cs.mvelezce</groupId>
+            <artifactId>dummy</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/dummy/target/dummy-1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>flanglet</groupId>
+            <artifactId>kanzi</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/kanzi/target/kanzi-1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.prevayler</groupId>
+            <artifactId>prevayler</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/prevayler/target/prevayler-1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.unix4j</groupId>
+            <artifactId>grep</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/grep/target/grep-1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.unix4j</groupId>
+            <artifactId>sort</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/sort/target/sort-1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.unix4j</groupId>
+            <artifactId>find</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/find/target/find-1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>at.favre.tools</groupId>
+            <artifactId>convert</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/density/target/convert-1.0-SNAPSHOT.jar
+            </systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>counter.com.googlecode.pngtastic</groupId>
+            <artifactId>pngtastic-optimizer</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>
+                ${project.basedir}/../performance-mapper-evaluation/original/pngtastic-optimizer/target/pngtastic-optimizer-0.1.0-SNAPSHOT.jar
+            </systemPath>
         </dependency>
 
     </dependencies>

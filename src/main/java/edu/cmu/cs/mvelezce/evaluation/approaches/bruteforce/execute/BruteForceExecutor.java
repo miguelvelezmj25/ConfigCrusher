@@ -34,14 +34,15 @@ public class BruteForceExecutor extends BaseExecutor {
   public static void main(String[] args) throws IOException, InterruptedException {
     String program = args[0];
     String classDirectory = args[1];
+    String entryPoint = args[2];
 
     if (program.equals(RunningExampleMain.PROGRAM_NAME)) {
-      executeRunningExample(classDirectory);
+      executeRunningExample(classDirectory, entryPoint);
     }
 
   }
 
-  private static void executeRunningExample(String classDirectory) throws IOException, InterruptedException {
+  private static void executeRunningExample(String classDirectory, String entryPoint) throws IOException, InterruptedException {
     Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
     Set<Set<String>> configurations =
         BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
@@ -56,7 +57,7 @@ public class BruteForceExecutor extends BaseExecutor {
     Executor executor =
         new BruteForceExecutor(
             RunningExampleMain.PROGRAM_NAME,
-            RunningExampleMain.ENTRY_POINT,
+            entryPoint,
             classDirectory,
             configurations);
     executor.execute(args);

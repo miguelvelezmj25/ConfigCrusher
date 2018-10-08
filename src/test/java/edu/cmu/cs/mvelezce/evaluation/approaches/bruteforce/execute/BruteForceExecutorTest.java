@@ -159,6 +159,9 @@ public class BruteForceExecutorTest {
             + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/lucene/analysis/common/target/classes"
             + Options.PATH_SEPARATOR
             + Options.USER_HOME
+            + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/lucene/codecs/target/classes"
+            + Options.PATH_SEPARATOR
+            + Options.USER_HOME
             + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/lucene/jars/core/lucene-core-7.4.0.jar";
     String entryPoint = "org.apache.lucene.demo.IndexFiles";
     String iterations = "5";

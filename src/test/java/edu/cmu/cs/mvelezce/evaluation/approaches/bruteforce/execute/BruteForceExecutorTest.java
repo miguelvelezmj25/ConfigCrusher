@@ -14,6 +14,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
+import java.util.ArrayList;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -93,21 +94,20 @@ public class BruteForceExecutorTest {
     @Test
     public void runningExample() throws IOException, InterruptedException {
         String programName = "running-example";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
+        String classDirectory =
+            USER_HOME
+                + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
         String entryPoint = "edu.cmu.cs.mvelezce.Example";
 
-        Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
-        System.out.println("Configurations to sample: " + configurations.size());
+        List<String> argsList = new ArrayList<>();
+        argsList.add(programName);
+        argsList.add(classDirectory);
+        argsList.add(entryPoint);
 
-        // Program arguments
-        String[] args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i2";
+        String[] args = new String[argsList.size()];
+        args = argsList.toArray(args);
 
-        Executor executor = new BruteForceExecutor(programName, entryPoint, classDirectory, configurations);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+        BruteForceExecutor.main(args);
     }
 
     @Test

@@ -20,7 +20,6 @@ public class RunningExampleMain extends BaseMain {
 
   public static final String RUNNING_EXAMPLE_MAIN = RunningExampleMain.class.getCanonicalName();
   public static final String PROGRAM_NAME = "running-example";
-  public static final String ENTRY_POINT = "edu.cmu.cs.mvelezce.Example";
 
   public RunningExampleMain(String programName, String iteration, String[] args) {
     super(programName, iteration, args);

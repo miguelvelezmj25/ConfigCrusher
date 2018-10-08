@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.emai
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.find.BFFindAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.grep.BFGrepAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.kanzi.BFKanziAdapter;
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.lucene.BFLuceneAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.optimizer.BFOptimizerAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.prevayler.BFPrevaylerAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regions12.BFRegions12Adapter;
@@ -22,6 +23,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.berkeley.BerkeleyAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.berkeley.BerkeleyMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.lucene.LuceneAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.lucene.LuceneMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
@@ -45,9 +48,31 @@ public class BruteForceExecutor extends BaseExecutor {
     else if (program.equals(BerkeleyMain.PROGRAM_NAME)) {
       executeBerkeley(classDirectory, entryPoint, iterations);
     }
+    else if (program.equals(LuceneMain.PROGRAM_NAME)) {
+      executeLucene(classDirectory, entryPoint, iterations);
+    }
     else {
       throw new RuntimeException("Could not find the program " + program + " to run");
     }
+  }
+
+  private static void executeLucene(String classDirectory, String entryPoint, String iterations)
+      throws IOException, InterruptedException {
+    Set<String> options = new HashSet<>(LuceneAdapter.getLuceneOptions());
+    Set<Set<String>> configurations =
+        BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+    System.out.println("Configurations to sample: " + configurations.size());
+
+    // Program arguments
+    String[] args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i" + iterations;
+
+    Executor executor =
+        new BruteForceExecutor(
+            LuceneMain.PROGRAM_NAME, entryPoint, classDirectory, configurations);
+    executor.execute(args);
   }
 
   private static void executeBerkeley(String classDirectory, String entryPoint, String iterations)
@@ -262,6 +287,9 @@ public class BruteForceExecutor extends BaseExecutor {
     }
     else if (programName.equals(BerkeleyMain.PROGRAM_NAME)) {
       adapter = new BFBerkeleyAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.equals(LuceneMain.PROGRAM_NAME)) {
+      adapter = new BFLuceneAdapter(programName, this.getEntryPoint(), this.getClassDir());
     }
     else {
       throw new RuntimeException("Could not create an adapter for " + programName);

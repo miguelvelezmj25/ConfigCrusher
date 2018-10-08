@@ -223,6 +223,16 @@
       </systemPath>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-demo</artifactId>
+      <version>7.4.0</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/lucene/demo/target/lucene-demo-7.4.0.jar
+      </systemPath>
+    </dependency>
+
   </dependencies>
 
   <repositories>

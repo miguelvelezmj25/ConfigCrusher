@@ -33,17 +33,15 @@ public class BruteForceExecutor extends BaseExecutor {
 
   public static void main(String[] args) throws IOException, InterruptedException {
     String program = args[0];
+    String classDirectory = args[1];
 
     if (program.equals(RunningExampleMain.PROGRAM_NAME)) {
-      executeRunningExample();
+      executeRunningExample(classDirectory);
     }
+
   }
 
-  private static void executeRunningExample() throws IOException, InterruptedException {
-    String classDirectory =
-        Options.USER_HOME
-            + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";
-
+  private static void executeRunningExample(String classDirectory) throws IOException, InterruptedException {
     Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
     Set<Set<String>> configurations =
         BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);

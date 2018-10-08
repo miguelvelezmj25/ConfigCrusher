@@ -16,7 +16,8 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class BaseAdapter implements Adapter {
 
-  private static final String CONFIGCRUSHER = "./target/ConfigCrusher-0.1.0-SNAPSHOT.jar";
+  private static final String CONFIGCRUSHER = "./target/classes";
+//  private static final String CONFIGCRUSHER = "./target/ConfigCrusher-0.1.0-SNAPSHOT.jar";
   //  private static final String CLASS_CONTAINER = "target/classes/";
   private static final String PATH_SEPARATOR = ":";
   private static final String JACKSON_PATH =

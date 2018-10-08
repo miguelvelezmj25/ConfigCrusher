@@ -13,6 +13,7 @@ import java.io.IOException;
 public abstract class Options {
 
     public static final String USER_HOME = System.getProperty("user.home");
+    public static final String PATH_SEPARATOR = ":";
 
     public static final String DIRECTORY = "src/main/resources";
     public static final String DOT_JSON = ".json";

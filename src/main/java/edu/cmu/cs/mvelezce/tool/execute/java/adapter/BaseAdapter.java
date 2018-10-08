@@ -2,13 +2,17 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
-import org.apache.commons.io.FileUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import org.apache.commons.io.FileUtils;
 
 public abstract class BaseAdapter implements Adapter {
 
@@ -175,6 +179,8 @@ public abstract class BaseAdapter implements Adapter {
         this.directory
             + ":"
             + BaseAdapter.CLASS_CONTAINER
+            + ":"
+            + "./ConfigCrusher-0.1.0-SNAPSHOT.jar"
             + ":"
             + BaseAdapter.JACKSON_PATH
             + ":"

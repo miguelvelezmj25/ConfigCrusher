@@ -16,8 +16,8 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class BaseAdapter implements Adapter {
 
-  private static final String CONFIGCRUSHER = "./lib/ConfigCrusher-0.1.0-SNAPSHOT.jar";
-  private static final String CLASS_CONTAINER = "target/classes/";
+  private static final String CONFIGCRUSHER = "./target/ConfigCrusher-0.1.0-SNAPSHOT.jar";
+  //  private static final String CLASS_CONTAINER = "target/classes/";
   private static final String PATH_SEPARATOR = ":";
   private static final String JACKSON_PATH =
       Options.USER_HOME
@@ -180,10 +180,10 @@ public abstract class BaseAdapter implements Adapter {
     commandList.add(
         this.directory
             + BaseAdapter.PATH_SEPARATOR
-            + BaseAdapter.CLASS_CONTAINER
-            + BaseAdapter.PATH_SEPARATOR
             + BaseAdapter.CONFIGCRUSHER
             + BaseAdapter.PATH_SEPARATOR
+            //            + BaseAdapter.CLASS_CONTAINER
+            //            + BaseAdapter.PATH_SEPARATOR
             + BaseAdapter.JACKSON_PATH
             + BaseAdapter.PATH_SEPARATOR
             + BaseAdapter.COMMONS_CLI);

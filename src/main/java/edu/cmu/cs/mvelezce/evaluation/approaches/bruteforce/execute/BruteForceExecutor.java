@@ -14,12 +14,13 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.regi
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.runningexample.BFRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.sort.BFSortAdapter;
 import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Regions;
 import edu.cmu.cs.mvelezce.tool.analysis.region.RegionsCounter;
 import edu.cmu.cs.mvelezce.tool.execute.java.BaseExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.berkeley.BerkeleyAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.berkeley.BerkeleyMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.performance.entry.DefaultPerformanceEntry;
@@ -38,11 +39,32 @@ public class BruteForceExecutor extends BaseExecutor {
 
     if (program.equals(RunningExampleMain.PROGRAM_NAME)) {
       executeRunningExample(classDirectory, entryPoint);
+    } else if (program.equals(BerkeleyMain.PROGRAM_NAME)) {
+      executeBerkeley(classDirectory, entryPoint);
     }
-
   }
 
-  private static void executeRunningExample(String classDirectory, String entryPoint) throws IOException, InterruptedException {
+  private static void executeBerkeley(String classDirectory, String entryPoint)
+      throws IOException, InterruptedException {
+    Set<String> options = new HashSet<>(BerkeleyAdapter.getBerkeleyOptions());
+    Set<Set<String>> configurations =
+        BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+    System.out.println("Configurations to sample: " + configurations.size());
+
+    // Program arguments
+    String[] args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
+
+    Executor executor =
+        new BruteForceExecutor(
+            BerkeleyMain.PROGRAM_NAME, entryPoint, classDirectory, configurations);
+    executor.execute(args);
+  }
+
+  private static void executeRunningExample(String classDirectory, String entryPoint)
+      throws IOException, InterruptedException {
     Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
     Set<Set<String>> configurations =
         BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
@@ -56,10 +78,7 @@ public class BruteForceExecutor extends BaseExecutor {
 
     Executor executor =
         new BruteForceExecutor(
-            RunningExampleMain.PROGRAM_NAME,
-            entryPoint,
-            classDirectory,
-            configurations);
+            RunningExampleMain.PROGRAM_NAME, entryPoint, classDirectory, configurations);
     executor.execute(args);
   }
 

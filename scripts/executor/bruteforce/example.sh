@@ -23,6 +23,6 @@ function run {
 }
 
 (
-cd ../
+cd ../../../
 run $CC $M2 $PROGRAM_NAME $CLASS_DIR $ENTRY_POINT
 )

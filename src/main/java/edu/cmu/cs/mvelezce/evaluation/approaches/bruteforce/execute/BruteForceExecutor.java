@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute;
 
+import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.berkeley.BFBerkeleyAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.colorcounter.BFColorCounterAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.density.BFDensityAdapter;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.adapter.elevator.BFElevatorAdapter;
@@ -36,15 +37,20 @@ public class BruteForceExecutor extends BaseExecutor {
     String program = args[0];
     String classDirectory = args[1];
     String entryPoint = args[2];
+    String iterations = args[3];
 
     if (program.equals(RunningExampleMain.PROGRAM_NAME)) {
-      executeRunningExample(classDirectory, entryPoint);
-    } else if (program.equals(BerkeleyMain.PROGRAM_NAME)) {
-      executeBerkeley(classDirectory, entryPoint);
+      executeRunningExample(classDirectory, entryPoint, iterations);
+    }
+    else if (program.equals(BerkeleyMain.PROGRAM_NAME)) {
+      executeBerkeley(classDirectory, entryPoint, iterations);
+    }
+    else {
+      throw new RuntimeException("Could not find the program " + program + " to run");
     }
   }
 
-  private static void executeBerkeley(String classDirectory, String entryPoint)
+  private static void executeBerkeley(String classDirectory, String entryPoint, String iterations)
       throws IOException, InterruptedException {
     Set<String> options = new HashSet<>(BerkeleyAdapter.getBerkeleyOptions());
     Set<Set<String>> configurations =
@@ -55,7 +61,7 @@ public class BruteForceExecutor extends BaseExecutor {
     String[] args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i1";
+    args[2] = "-i" + iterations;
 
     Executor executor =
         new BruteForceExecutor(
@@ -63,7 +69,8 @@ public class BruteForceExecutor extends BaseExecutor {
     executor.execute(args);
   }
 
-  private static void executeRunningExample(String classDirectory, String entryPoint)
+  private static void executeRunningExample(String classDirectory, String entryPoint,
+      String iterations)
       throws IOException, InterruptedException {
     Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
     Set<Set<String>> configurations =
@@ -74,7 +81,7 @@ public class BruteForceExecutor extends BaseExecutor {
     String[] args = new String[3];
     args[0] = "-delres";
     args[1] = "-saveres";
-    args[2] = "-i2";
+    args[2] = "-i" + iterations;
 
     Executor executor =
         new BruteForceExecutor(
@@ -210,46 +217,54 @@ public class BruteForceExecutor extends BaseExecutor {
   public Set<DefaultPerformanceEntry> execute(int iteration)
       throws IOException, InterruptedException {
     // TODO factory pattern or switch statement to create the right adapter
+
+    String programName = this.getProgramName();
     Adapter adapter;
 
-    if (this.getProgramName().contains("running-example")) {
-      adapter =
-          new BFRunningExampleAdapter(
-              this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("pngtasticColorCounter")) {
-      adapter =
-          new BFColorCounterAdapter(
-              this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("regions12")) {
-      adapter =
-          new BFRegions12Adapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("regions16")) {
-      adapter =
-          new BFRegions16Adapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("pngtasticOptimizer")) {
-      adapter =
-          new BFOptimizerAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("prevayler")) {
-      adapter =
-          new BFPrevaylerAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("kanzi")) {
-      adapter = new BFKanziAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("grep")) {
-      adapter = new BFGrepAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("find")) {
-      adapter = new BFFindAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("sort")) {
-      adapter = new BFSortAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("density")) {
-      adapter =
-          new BFDensityAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("elevator")) {
-      adapter =
-          new BFElevatorAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else if (this.getProgramName().contains("email")) {
-      adapter = new BFEmailAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
-    } else {
-      throw new RuntimeException("Could not create an adapter for " + this.getProgramName());
+    if (programName.contains(RunningExampleMain.PROGRAM_NAME)) {
+      adapter = new BFRunningExampleAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("pngtasticColorCounter")) {
+      adapter = new BFColorCounterAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("regions12")) {
+      adapter = new BFRegions12Adapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("regions16")) {
+      adapter = new BFRegions16Adapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("pngtasticOptimizer")) {
+      adapter = new BFOptimizerAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("prevayler")) {
+      adapter = new BFPrevaylerAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("kanzi")) {
+      adapter = new BFKanziAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("grep")) {
+      adapter = new BFGrepAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("find")) {
+      adapter = new BFFindAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("sort")) {
+      adapter = new BFSortAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("density")) {
+      adapter = new BFDensityAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("elevator")) {
+      adapter = new BFElevatorAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.contains("email")) {
+      adapter = new BFEmailAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else if (programName.equals(BerkeleyMain.PROGRAM_NAME)) {
+      adapter = new BFBerkeleyAdapter(programName, this.getEntryPoint(), this.getClassDir());
+    }
+    else {
+      throw new RuntimeException("Could not create an adapter for " + programName);
     }
 
     for (Set<String> configuration : this.getConfigurations()) {
@@ -259,7 +274,7 @@ public class BruteForceExecutor extends BaseExecutor {
       Thread.sleep(5000);
     }
 
-    String outputDir = this.getOutputDir() + "/" + this.getProgramName() + "/" + iteration;
+    String outputDir = this.getOutputDir() + "/" + programName + "/" + iteration;
     File outputFile = new File(outputDir);
 
     if (!outputFile.exists()) {

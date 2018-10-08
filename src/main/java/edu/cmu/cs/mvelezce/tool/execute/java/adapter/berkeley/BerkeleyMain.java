@@ -19,7 +19,7 @@ import java.util.Set;
 public class BerkeleyMain extends BaseMain {
 
   public static final String BERKELEY_MAIN = BerkeleyMain.class.getCanonicalName();
-  public static final String PROGRAM_NAME = "berkeleydb";
+  public static final String PROGRAM_NAME = "berkeley-db";
 
   public BerkeleyMain(String programName, String iteration, String[] args) {
     super(programName, iteration, args);

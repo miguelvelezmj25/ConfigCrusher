@@ -2,8 +2,8 @@
 
 CLASS_DIR=${1}
 
-PROGRAM_NAME=running-example
-ENTRY_POINT=edu.cmu.cs.mvelezce.Example
+PROGRAM_NAME=berkeley-db
+ENTRY_POINT=com.sleepycat.analysis.Run
 ITERATIONS=5
 
 M2=$(echo $HOME)/.m2/repository

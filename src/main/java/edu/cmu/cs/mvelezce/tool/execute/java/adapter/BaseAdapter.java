@@ -16,7 +16,9 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class BaseAdapter implements Adapter {
 
+  private static final String CONFIGCRUSHER = "./lib/ConfigCrusher-0.1.0-SNAPSHOT.jar";
   private static final String CLASS_CONTAINER = "target/classes/";
+  private static final String PATH_SEPARATOR = ":";
   private static final String JACKSON_PATH =
       Options.USER_HOME
           + "/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar"
@@ -177,13 +179,13 @@ public abstract class BaseAdapter implements Adapter {
     // BaseAdapter.JACKSON_PATH + ":" + cp.toString());
     commandList.add(
         this.directory
-            + ":"
+            + BaseAdapter.PATH_SEPARATOR
             + BaseAdapter.CLASS_CONTAINER
-            + ":"
-            + "./ConfigCrusher-0.1.0-SNAPSHOT.jar"
-            + ":"
+            + BaseAdapter.PATH_SEPARATOR
+            + BaseAdapter.CONFIGCRUSHER
+            + BaseAdapter.PATH_SEPARATOR
             + BaseAdapter.JACKSON_PATH
-            + ":"
+            + BaseAdapter.PATH_SEPARATOR
             + BaseAdapter.COMMONS_CLI);
     commandList.add(mainAdapter);
     commandList.add(this.programName);

@@ -1,142 +1,262 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>edu.cmu.cs.mvelezce</groupId>
-    <artifactId>ConfigCrusher</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
-    <inceptionYear>2017</inceptionYear>
-    <packaging>jar</packaging>
-    <name>ConfigCrusher</name>
-    <url>http://www.cs.cmu.edu/~mvelezce/</url>
+  <groupId>edu.cmu.cs.mvelezce</groupId>
+  <artifactId>ConfigCrusher</artifactId>
+  <version>0.2.0-SNAPSHOT</version>
+  <inceptionYear>2017</inceptionYear>
+  <packaging>jar</packaging>
+  <name>ConfigCrusher</name>
+  <url>http://www.cs.cmu.edu/~mvelezce/</url>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
-        </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <version>3.6.1</version>
-        </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-math3</artifactId>
+      <version>3.6.1</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.1</version>
-        </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>4.1</version>
+    </dependency>
 
-        <dependency>
-            <groupId>edu.cmu.cs.mvelezce</groupId>
-            <artifactId>sleep</artifactId>
-            <version>0.1.1-SNAPSHOT</version>
-        </dependency>
+    <dependency>
+      <groupId>edu.cmu.cs.mvelezce</groupId>
+      <artifactId>sleep</artifactId>
+      <version>0.1.1-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/lib/sleep-0.1.1-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
 
-        <dependency>
-            <groupId>edu.cmu.cs.mvelezce</groupId>
-            <artifactId>mongo-connector_2.12</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-        </dependency>
+    <dependency>
+      <groupId>edu.cmu.cs.mvelezce</groupId>
+      <artifactId>mongo-connector_2.12</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/lib/mongo-connector_2.12-0.1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>com.googlecode.json-simple</groupId>-->
-        <!--<artifactId>json-simple</artifactId>-->
-        <!--<version>1.1.1</version>-->
-        <!--</dependency>-->
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <version>1.4</version>
+    </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>com.googlecode.json-simple</groupId>-->
-        <!--<artifactId>json-simple</artifactId>-->
-        <!--<version>1.1.1</version>-->
-        <!--<scope>system</scope>-->
-        <!--<systemPath>${project.basedir}/lib/json-simple-1.1.1.jar</systemPath>-->
-        <!--</dependency>-->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.5</version>
+    </dependency>
 
-        <dependency>
-            <groupId>commons-cli</groupId>
-            <artifactId>commons-cli</artifactId>
-            <version>1.4</version>
-        </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-math3</artifactId>
+      <version>3.6.1</version>
+    </dependency>
 
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.5</version>
-        </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.8.9</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <version>3.6.1</version>
-        </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.8.9</version>
+    </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.8.9</version>
-        </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.8.9</version>
+    </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.8.9</version>
-        </dependency>
+    <dependency>
+      <groupId>ca.mcgill.sable</groupId>
+      <artifactId>soot</artifactId>
+      <version>3.0.0-SNAPSHOT</version>
+    </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.8.9</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
+    <dependency>
+      <groupId>edu.cmu.cs.mvelezce</groupId>
+      <artifactId>running-example</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/running-example/target/running-example-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
 
-        <dependency>
-            <groupId>ca.mcgill.sable</groupId>
-            <artifactId>soot</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
-        </dependency>
+    <dependency>
+      <groupId>counter.com.googlecode.pngtastic</groupId>
+      <artifactId>pngtastic-counter</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/pngtastic-counter/target/pngtastic-counter-0.1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
 
-    </dependencies>
+    <dependency>
+      <groupId>family</groupId>
+      <artifactId>elevator</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/elevator/target/elevator-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
 
-    <repositories>
-        <repository>
-            <id>soot-snapshot</id>
-            <name>soot snapshots</name>
-            <url>https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-snapshot/</url>
-        </repository>
-    </repositories>
+    <dependency>
+      <groupId>edu.cmu.cs.mvelezce</groupId>
+      <artifactId>dummy</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/dummy/target/dummy-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <fork>true</fork>
-                    <compilerArgument>-XDignore.symbol.file</compilerArgument>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <dependency>
+      <groupId>flanglet</groupId>
+      <artifactId>kanzi</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/kanzi/target/kanzi-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>org.prevayler</groupId>
+      <artifactId>prevayler</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/prevayler/target/prevayler-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>org.unix4j</groupId>
+      <artifactId>grep</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/grep/target/grep-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>org.unix4j</groupId>
+      <artifactId>sort</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/sort/target/sort-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>org.unix4j</groupId>
+      <artifactId>find</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/find/target/find-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>at.favre.tools</groupId>
+      <artifactId>convert</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/density/target/convert-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>counter.com.googlecode.pngtastic</groupId>
+      <artifactId>pngtastic-optimizer</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/pngtastic-optimizer/target/pngtastic-optimizer-0.1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sleepycat</groupId>
+      <artifactId>berkeleydb</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/berkeley-db/target/berkeleydb-1.0-SNAPSHOT.jar
+      </systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-demo</artifactId>
+      <version>7.4.0</version>
+      <scope>system</scope>
+      <systemPath>
+        ${project.basedir}/../performance-mapper-evaluation/original/lucene/demo/target/lucene-demo-7.4.0.jar
+      </systemPath>
+    </dependency>
+
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>soot-snapshot</id>
+      <name>soot snapshots</name>
+      <url>https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-snapshot/</url>
+    </repository>
+  </repositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <fork>true</fork>
+          <compilerArgument>-XDignore.symbol.file</compilerArgument>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

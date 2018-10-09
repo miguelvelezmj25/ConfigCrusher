@@ -7,7 +7,7 @@ ENTRY_POINT=com.sleepycat.analysis.Run
 ITERATIONS=5
 
 M2=$(echo $HOME)/.m2/repository
-CC=./target/ConfigCrusher-0.1.0-SNAPSHOT.jar
+CC=./target/classes
 
 function run {
     local cc=$1

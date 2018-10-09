@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
-import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,35 +15,37 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class BaseAdapter implements Adapter {
 
+  public static final String USER_HOME = System.getProperty("user.home");
+  public static final String PATH_SEPARATOR = System.getProperty("path.separator");
+
   private static final String CONFIGCRUSHER = "./target/classes";
-//  private static final String CONFIGCRUSHER = "./target/ConfigCrusher-0.1.0-SNAPSHOT.jar";
+  //  private static final String CONFIGCRUSHER = "./target/ConfigCrusher-0.1.0-SNAPSHOT.jar";
   //  private static final String CLASS_CONTAINER = "target/classes/";
-  private static final String PATH_SEPARATOR = ":";
   private static final String JACKSON_PATH =
-      Options.USER_HOME
+      BaseAdapter.USER_HOME
           + "/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar"
           + CompileInstrumenter.sep
-          + Options.USER_HOME
+          + BaseAdapter.USER_HOME
           + "/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar"
           + CompileInstrumenter.sep
-          + Options.USER_HOME
+          + BaseAdapter.USER_HOME
           + "/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar";
   private static final String COMMONS_CLI =
-      Options.USER_HOME
+      BaseAdapter.USER_HOME
           + "/.m2/repository/commons-cli/commons-cli/1.4/commons-cli-1.4.jar"
           + CompileInstrumenter.sep
-          + Options.USER_HOME
+          + BaseAdapter.USER_HOME
           + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar";
   //  // TODO figure out what prevayler's path is
   //  private static final String PREVAYLER_PATH =
-  //      Options.USER_HOME
+  //      BaseAdapter.USER_HOME
   //          + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar"
-  //          + Options.USER_HOME
+  //          + BaseAdapter.USER_HOME
   //          + "/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15.jar"
-  //          + Options.USER_HOME
+  //          + BaseAdapter.USER_HOME
   //          + "/.m2/repository/com/thoughtworks/xstream/xstream/1.4.5/xstream-1.4.5.jar";
   //  private static final String KANZI_PATH =
-  //      Options.USER_HOME + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar";
+  //      BaseAdapter.USER_HOME + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar";
 
   private String programName;
   private String mainClass;
@@ -78,7 +79,8 @@ public abstract class BaseAdapter implements Adapter {
     for (int i = 0; i < sleepConfiguration.length; i++) {
       if (configuration.contains(this.options.get(i))) {
         sleepConfiguration[i] = "true";
-      } else {
+      }
+      else {
         sleepConfiguration[i] = "false";
       }
     }
@@ -176,8 +178,8 @@ public abstract class BaseAdapter implements Adapter {
     commandList.add("-Xmx10G");
     commandList.add("-XX:+UseConcMarkSweepGC");
     commandList.add("-cp");
-    //        commandList.add(this.directory + ":" + BaseAdapter.CLASS_CONTAINER + ":" +
-    // BaseAdapter.JACKSON_PATH + ":" + cp.toString());
+    //        commandList.add(this.directory + BaseAdapter.PATH_SEPARATOR + BaseAdapter.CLASS_CONTAINER + BaseAdapter.PATH_SEPARATOR +
+    // BaseAdapter.JACKSON_PATH + BaseAdapter.PATH_SEPARATOR + cp.toString());
     commandList.add(
         this.directory
             + BaseAdapter.PATH_SEPARATOR
@@ -212,6 +214,6 @@ public abstract class BaseAdapter implements Adapter {
 
   private Collection<File> getM2Files() {
     File m2Dir = new File(CompileInstrumenter.M2_DIR);
-    return FileUtils.listFiles(m2Dir, new String[] {"jar"}, true);
+    return FileUtils.listFiles(m2Dir, new String[]{"jar"}, true);
   }
 }

@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -19,7 +20,7 @@ public class ConfigCrusherPerformanceModelBuilderTest {
 
     @Test
     public void runningExample() throws Exception {
-        String programName = "running-example";
+        String programName = RunningExampleMain.PROGRAM_NAME;
 
         // Program arguments
         String[] args = new String[0];
@@ -45,7 +46,7 @@ public class ConfigCrusherPerformanceModelBuilderTest {
 
     @Test
     public void runningExample1() throws Exception {
-        String programName = "running-example";
+        String programName = RunningExampleMain.PROGRAM_NAME;
 
         // Program arguments
         String[] args = new String[0];

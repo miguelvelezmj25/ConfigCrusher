@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -232,7 +233,7 @@ public class TimerInstrumenterTest {
 
     @Test
     public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
-        String programName = "running-example";
+        String programName = RunningExampleMain.PROGRAM_NAME;
         String entry = "edu.cmu.cs.mvelezce.Example";
         TimerInstrumenterTest.srcDir = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
         TimerInstrumenterTest.classDir = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";

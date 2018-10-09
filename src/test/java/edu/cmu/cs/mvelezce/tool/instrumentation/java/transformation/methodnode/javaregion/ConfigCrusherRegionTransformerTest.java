@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
@@ -1716,7 +1717,7 @@ public class ConfigCrusherRegionTransformerTest {
   @Test
   public void testRunningExample()
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
     String rootPackage = "edu";
     String classDirectory = BaseAdapter.USER_HOME
         + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";

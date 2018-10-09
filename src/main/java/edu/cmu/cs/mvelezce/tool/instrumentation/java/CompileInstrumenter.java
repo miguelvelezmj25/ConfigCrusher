@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java;
 
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -7,13 +8,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
-
 public class CompileInstrumenter extends BaseInstrumenter {
 
-    public static final String M2_DIR = USER_HOME + "/.m2/repository";
-    public static final String sep = System.getProperty("path.separator");
-
+    public static final String M2_DIR = BaseAdapter.USER_HOME + "/.m2/repository";
 
     public CompileInstrumenter(String srcDir, String classDir) {
         this("", srcDir, classDir);
@@ -40,7 +37,7 @@ public class CompileInstrumenter extends BaseInstrumenter {
 
             for(File jarFile : m2Files) {
                 cp.append(jarFile);
-                cp.append(CompileInstrumenter.sep);
+                cp.append(BaseAdapter.PATH_SEPARATOR);
             }
 
             cp.deleteCharAt(cp.length() - 1);

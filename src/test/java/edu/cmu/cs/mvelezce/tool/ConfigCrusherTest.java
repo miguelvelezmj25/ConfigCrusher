@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.junit.Test;
 
@@ -8,7 +9,7 @@ public class ConfigCrusherTest {
 
     @Test
     public void runningExample() throws Exception {
-        String programName = "running-example";
+        String programName = RunningExampleMain.PROGRAM_NAME;
         String srcDir = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example";
         String classDir = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
         String entry = "edu.cmu.cs.mvelezce.Example";

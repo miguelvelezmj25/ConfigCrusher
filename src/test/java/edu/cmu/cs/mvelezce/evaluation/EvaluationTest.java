@@ -66,7 +66,7 @@ public class EvaluationTest {
 
   @Test
   public void compareRunningExample0() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
@@ -74,7 +74,7 @@ public class EvaluationTest {
 
   @Test
   public void compareRunningExample1() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
@@ -82,7 +82,7 @@ public class EvaluationTest {
 
   @Test
   public void compareRunningExample2() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
@@ -90,7 +90,7 @@ public class EvaluationTest {
 
   @Test
   public void compareRunningExample3() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
@@ -98,7 +98,7 @@ public class EvaluationTest {
 
   @Test
   public void compareRunningExample4() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
@@ -106,7 +106,7 @@ public class EvaluationTest {
 
   @Test
   public void compareAllRunningExample0() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
@@ -114,7 +114,7 @@ public class EvaluationTest {
 
   @Test
   public void compareAllRunningExample1() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
@@ -122,7 +122,7 @@ public class EvaluationTest {
 
   @Test
   public void compareAllRunningExample2() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
@@ -130,7 +130,7 @@ public class EvaluationTest {
 
   @Test
   public void compareAllRunningExample3() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
@@ -138,7 +138,7 @@ public class EvaluationTest {
 
   @Test
   public void compareAllRunningExample4() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
@@ -867,7 +867,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleBruteForce() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     // arguments
     String[] args = new String[0];
@@ -881,7 +881,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleBruteForceSamplingTime() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
@@ -889,7 +889,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleConfigCrusher() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     // arguments
     String[] args = new String[0];
@@ -929,7 +929,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleGroundTruthSamplingTime() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
@@ -937,7 +937,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleConfigCrusherSamplingTime() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
     System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
@@ -945,7 +945,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleFeaturewiseSamplingTime() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     // arguments
     String[] args = new String[0];
@@ -963,7 +963,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExamplePairwiseSamplingTime() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     // arguments
     String[] args = new String[0];
@@ -981,7 +981,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleSPLatDelaySamplingTime() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     // arguments
     String[] args = new String[0];
@@ -1008,7 +1008,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleFeaturewiseGenerateCSVData() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     // arguments
     String[] args = new String[0];
@@ -1025,7 +1025,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleFeaturewiseModel() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     List<String> options = RunningExampleAdapter.getRunningExampleOptions();
     Featurewise featurewise = new Featurewise(programName);
@@ -1057,7 +1057,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExamplePairwiseGenerateCSVData() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     // arguments
     String[] args = new String[0];
@@ -1075,7 +1075,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExamplePairwiseModel() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     List<String> options = RunningExampleAdapter.getRunningExampleOptions();
     Pairwise pairwise = new Pairwise(programName);
@@ -1107,7 +1107,7 @@ public class EvaluationTest {
 
   @Test
   public void runningExampleSPLatDelay() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
     // arguments
     String[] args = new String[0];

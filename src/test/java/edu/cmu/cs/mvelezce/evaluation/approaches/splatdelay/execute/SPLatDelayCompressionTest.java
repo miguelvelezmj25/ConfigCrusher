@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.execute;
 
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ public class SPLatDelayCompressionTest {
 
     @Test
     public void runningExample() throws IOException {
-        String programName = "running-example";
+        String programName = RunningExampleMain.PROGRAM_NAME;
 
         // Program arguments
         String[] args = new String[2];

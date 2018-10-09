@@ -13,6 +13,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import java.io.IOException;
@@ -109,7 +110,7 @@ public class BruteForceExecutorTest {
 
   @Test
   public void runningExample() throws IOException, InterruptedException {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
     String classDirectory =
         BaseAdapter.USER_HOME
             + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/running-example/target/classes";

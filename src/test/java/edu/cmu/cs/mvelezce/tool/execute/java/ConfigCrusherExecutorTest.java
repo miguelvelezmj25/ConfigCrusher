@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceEx
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class ConfigCrusherExecutorTest {
 
   @Test
   public void runningExample1() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
     String classDirectory = BaseAdapter.USER_HOME
         + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
     String entryPoint = "edu.cmu.cs.mvelezce.Example";
@@ -66,7 +67,7 @@ public class ConfigCrusherExecutorTest {
 
   @Test
   public void runningExample() throws Exception {
-    String programName = "running-example";
+    String programName = RunningExampleMain.PROGRAM_NAME;
     String classDirectory = BaseAdapter.USER_HOME
         + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
     String entryPoint = "edu.cmu.cs.mvelezce.Example";

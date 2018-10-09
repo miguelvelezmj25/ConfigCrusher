@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow.TaintFlowAnalysis;
 import edu.cmu.cs.mvelezce.tool.compression.BaseCompressionTest;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -589,7 +590,7 @@ public class SimpleCompressionTest {
 
     @Test
     public void runningExample() throws IOException {
-        String programName = "running-example";
+        String programName = RunningExampleMain.PROGRAM_NAME;
 
         // Program arguments
         String[] args = new String[0];
@@ -614,7 +615,7 @@ public class SimpleCompressionTest {
 
     @Test
     public void runningExample1() throws IOException {
-        String programName = "running-example";
+        String programName = RunningExampleMain.PROGRAM_NAME;
 
         // Program arguments
         String[] args = new String[0];

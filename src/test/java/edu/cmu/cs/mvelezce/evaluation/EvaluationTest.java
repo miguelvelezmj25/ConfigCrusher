@@ -3593,15 +3593,15 @@ public class EvaluationTest {
 
   @Test
   public void berkeleyGroundTruth() throws IOException, InterruptedException {
-    this.runGroundTruth(BerkeleyMain.PROGRAM_NAME);
+    this.analyzeGroundTruth(BerkeleyMain.PROGRAM_NAME);
   }
 
   @Test
   public void luceneGroundTruth() throws IOException, InterruptedException {
-    this.runGroundTruth(LuceneMain.PROGRAM_NAME);
+    this.analyzeGroundTruth(LuceneMain.PROGRAM_NAME);
   }
 
-  private void runGroundTruth(String programName) throws IOException, InterruptedException {
+  private void analyzeGroundTruth(String programName) throws IOException, InterruptedException {
     // arguments
     String[] args = new String[0];
 

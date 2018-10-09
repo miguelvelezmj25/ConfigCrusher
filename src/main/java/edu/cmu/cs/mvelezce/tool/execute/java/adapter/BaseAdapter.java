@@ -24,16 +24,16 @@ public abstract class BaseAdapter implements Adapter {
   private static final String JACKSON_PATH =
       BaseAdapter.USER_HOME
           + "/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar"
-          + CompileInstrumenter.sep
+          + BaseAdapter.PATH_SEPARATOR
           + BaseAdapter.USER_HOME
           + "/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.9/jackson-annotations-2.8.9.jar"
-          + CompileInstrumenter.sep
+          + BaseAdapter.PATH_SEPARATOR
           + BaseAdapter.USER_HOME
           + "/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar";
   private static final String COMMONS_CLI =
       BaseAdapter.USER_HOME
           + "/.m2/repository/commons-cli/commons-cli/1.4/commons-cli-1.4.jar"
-          + CompileInstrumenter.sep
+          + BaseAdapter.PATH_SEPARATOR
           + BaseAdapter.USER_HOME
           + "/.m2/repository/commons-io/commons-io/2.5/commons-io-2.5.jar";
   //  // TODO figure out what prevayler's path is
@@ -204,7 +204,7 @@ public abstract class BaseAdapter implements Adapter {
 
     for (File jarFile : m2Files) {
       m2FilesAsClassPath.append(jarFile);
-      m2FilesAsClassPath.append(CompileInstrumenter.sep);
+      m2FilesAsClassPath.append(BaseAdapter.PATH_SEPARATOR);
     }
 
     m2FilesAsClassPath.deleteCharAt(m2FilesAsClassPath.length() - 1);

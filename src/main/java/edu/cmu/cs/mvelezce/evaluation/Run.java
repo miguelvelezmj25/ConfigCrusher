@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 
@@ -14,14 +15,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
-
 public class Run {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         String programName = "density";
-//        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/density/target/classes";
-        String classDirectory = USER_HOME + "/Documents/performance-mapper-evaluation/instrumented/density/target/classes";
+//        String classDirectory = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/density/target/classes";
+        String classDirectory = BaseAdapter.USER_HOME + "/Documents/performance-mapper-evaluation/instrumented/density/target/classes";
         String entryPoint = "at.favre.tools.dconvert.Main";
 
         // Program arguments

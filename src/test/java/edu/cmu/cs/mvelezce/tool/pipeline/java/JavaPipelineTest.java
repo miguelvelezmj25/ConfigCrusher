@@ -7,37 +7,38 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.compression.simple.SimpleCompression;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
+import org.junit.Test;
 
 /**
  * Created by mvelezce on 4/10/17.
  */
 public class JavaPipelineTest {
 
-    public static final double TIMING_ERROR = 0.5;
+  public static final double TIMING_ERROR = 0.5;
 //    public static final double TIMING_ERROR = 0.05;
 //    public static final double TIMING_ERROR = 1.0;
 
-    @Test
-    public void testSleep14() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep14";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
+  @Test
+  public void testSleep14()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep14";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
 
-        // Program arguments
-        String[] args = new String[0];
+    // Program arguments
+    String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
@@ -46,94 +47,104 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
 
-        // TESTING
-        args = new String[0];
-        Compression compression = new SimpleCompression(programName);
-        Set<Set<String>> configurations = compression.compressConfigurations(args);
-        Set<String> options = new HashSet<>();
+    // TESTING
+    args = new String[0];
+    Compression compression = new SimpleCompression(programName);
+    Set<Set<String>> configurations = compression.compressConfigurations(args);
+    Set<String> options = new HashSet<>();
 
-        for(Set<String> configuration : configurations) {
-            options.addAll(configuration);
-        }
+    for (Set<String> configuration : configurations) {
+      options.addAll(configuration);
+    }
 
-        configurations = Helper.getConfigurations(options);
+    configurations = Helper.getConfigurations(options);
 
-        for(Set<String> configuration : configurations) {
-            System.out.println(configuration);
-            Adapter adapter = new SleepAdapter();
-            String[] sleepConfiguration = adapter.configurationAsMainArguments(configuration);
-            long start = System.nanoTime();
-            Sleep14.main(sleepConfiguration);
-            long end = System.nanoTime();
+    for (Set<String> configuration : configurations) {
+      System.out.println(configuration);
+      Adapter adapter = new SleepAdapter();
+      String[] sleepConfiguration = adapter.configurationAsMainArguments(configuration);
+      long start = System.nanoTime();
+      Sleep14.main(sleepConfiguration);
+      long end = System.nanoTime();
 
-            // TODO
+      // TODO
 //            System.out.println(pm.evaluate(configuration));
 //            System.out.println(Region.getSecondsExecutionTime(start, end));
 //            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
-        }
     }
+  }
 
-    @Test
-    public void testSleep18() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep18";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep18";
+  @Test
+  public void testSleep18()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep18";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep18";
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
 
-        // TESTING
-        args = new String[0];
-        Compression compression = new SimpleCompression(programName);
-        Set<Set<String>> configurations = compression.compressConfigurations(args);
-        Set<String> options = new HashSet<>();
+    // TESTING
+    args = new String[0];
+    Compression compression = new SimpleCompression(programName);
+    Set<Set<String>> configurations = compression.compressConfigurations(args);
+    Set<String> options = new HashSet<>();
 
-        for(Set<String> configuration : configurations) {
-            options.addAll(configuration);
-        }
+    for (Set<String> configuration : configurations) {
+      options.addAll(configuration);
+    }
 
-        configurations = Helper.getConfigurations(options);
+    configurations = Helper.getConfigurations(options);
 
-        for(Set<String> configuration : configurations) {
-            System.out.println(configuration);
-            Adapter adapter = new SleepAdapter();
-            String[] sleepConfiguration = adapter.configurationAsMainArguments(configuration);
-            long start = System.nanoTime();
-            Sleep18.main(sleepConfiguration);
-            long end = System.nanoTime();
+    for (Set<String> configuration : configurations) {
+      System.out.println(configuration);
+      Adapter adapter = new SleepAdapter();
+      String[] sleepConfiguration = adapter.configurationAsMainArguments(configuration);
+      long start = System.nanoTime();
+      Sleep18.main(sleepConfiguration);
+      long end = System.nanoTime();
 
-            // TODO
+      // TODO
 //            System.out.println(pm.evaluate(configuration));
 //            System.out.println(Region.getSecondsExecutionTime(start, end));
 //            Assert.assertEquals(pm.evaluate(configuration), Region.getSecondsExecutionTime(start, end), JavaPipelineTest.TIMING_ERROR);
-        }
     }
+  }
 
-    @Test
-    public void testZip() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "zipme";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/";
-        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
+  @Test
+  public void testZip()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "zipme";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/";
+    String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
 
-        // Program arguments
-        String[] args = new String[0];
+    // Program arguments
+    String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
@@ -142,73 +153,43 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
-        // Program arguments
+    // Program arguments
 //        args = new String[0];
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i5";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
-    }
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+  }
 
-    @Test
-    public void testZipSimple() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "zipme-simple";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/";
-        String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
+  @Test
+  public void testZipSimple()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "zipme-simple";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/out/production/zipme/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/zipme/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/out/production/zipme/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/zipme/";
+    String entryPoint = "edu.cmu.cs.mvelezce.ZipMain";
 
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
-
-        // Program arguments
-//        args = new String[0];
-
-//        args = new String[1];
-//        args[0] = "-saveres";
-
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
-        System.out.println(pm);
-    }
-
-    @Test
-    public void testElevatorSimple() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "elevator-simple";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
-        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
-
-        // Program arguments
-        String[] args = new String[0];
+    // Program arguments
+    String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
@@ -217,916 +198,1148 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
-        // Program arguments
+    // Program arguments
 //        args = new String[0];
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+            instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    System.out.println(pm);
+  }
+
+  @Test
+  public void testElevatorSimple()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "elevator-simple";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
+    String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
+
+    // Program arguments
+    String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+
+    // Program arguments
+//        args = new String[0];
+
+//        args = new String[1];
+//        args[0] = "-saveres";
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, originalSrcDirectory, originalClassDirectory,
+            instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    System.out.println(pm);
 
 //
-    }
+  }
 
-    @Test
-    public void testPngtastic() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "pngtastic";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/target/classes/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic/target/classes/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic/";
-        String entryPoint = "com.googlecode.pngtastic.PngtasticColorCounter";
+  @Test
+  public void testPngtastic()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "pngtastic";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/target/classes/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/pngtastic/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic/target/classes/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic/";
+    String entryPoint = "com.googlecode.pngtastic.PngtasticColorCounter";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testElevator() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "elevator";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
-        String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
+  @Test
+  public void testElevator()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "elevator";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/out/production/elevator/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/elevator/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/out/production/elevator/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/elevator/";
+    String entryPoint = "edu.cmu.cs.mvelezce.PL_Interface_impl";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i5";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i5";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i5";
 
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep1";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
+  @Test
+  public void testSleep1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep1";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i5";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i5";
 
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep3() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep3";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
+  @Test
+  public void testSleep3()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep3";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep21() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep21";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep21";
+  @Test
+  public void testSleep21()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep21";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep21";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep22() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep22";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep22";
+  @Test
+  public void testSleep22()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep22";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep22";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep23() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep23";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep23";
+  @Test
+  public void testSleep23()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep23";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep23";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep24() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep24";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep24";
+  @Test
+  public void testSleep24()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep24";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep24";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep25() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep25";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep25";
+  @Test
+  public void testSleep25()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep25";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep25";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";R
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep26() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep26";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep26";
+  @Test
+  public void testSleep26()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep26";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep26";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep27() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep27";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep27";
+  @Test
+  public void testSleep27()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep27";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep27";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
 
-        // T = + 1.31 + 0.2A - 0.3B + 0.4C
-    }
+    // T = + 1.31 + 0.2A - 0.3B + 0.4C
+  }
 
-    @Test
-    public void testSleep28() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep28";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep28";
+  @Test
+  public void testSleep28()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep28";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep28";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep29() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep29";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep29";
+  @Test
+  public void testSleep29()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep29";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep29";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep2() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep2";
-        String originalClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
-        String originalSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
-        String instrumentClassDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String instrumentSrcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
+  @Test
+  public void testSleep2()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep2";
+    String originalClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy/";
+    String originalSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/";
+    String instrumentClassDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String instrumentSrcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
 
-        // Program arguments
-        String[] args;
-        args = new String[0];
+    // Program arguments
+    String[] args;
+    args = new String[0];
 
-        Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
+    Map<JavaRegion, Set<String>> partialRegionsToOptions = null; // TODO make change since interface changed ProgramAnalysis.analyze(programName, args);
 
 //        args = new String[1];
 //        args[0] = "-saveres";
 //        args[0] = "-i1";
 
-        args = new String[3];
-        args[0] = "-delres";
-        args[1] = "-saveres";
-        args[2] = "-i1";
+    args = new String[3];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+    args[2] = "-i1";
 
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
-                instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
+    JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory,
+        originalClassDirectory,
+        instrumentSrcDirectory, instrumentClassDirectory, entryPoint, partialRegionsToOptions);
 //        JavaPipeline.buildPerformanceModelRepeat(programName, args, originalSrcDirectory, originalClassDirectory,
 //                instrumentSrcDirectory, instrumentClassDirectory, entryPoint);
-    }
+  }
 
-    @Test
-    public void testSleep1_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep1";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep1/edu.cmu.cs.mvelezce.Sleep1.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
+  @Test
+  public void testSleep1_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep1";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep1";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep1/edu.cmu.cs.mvelezce.Sleep1.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep2_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep2";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep2/edu.cmu.cs.mvelezce.Sleep2.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
+  @Test
+  public void testSleep2_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep2";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep2";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep2/edu.cmu.cs.mvelezce.Sleep2.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep3_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep3";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep3/edu.cmu.cs.mvelezce.Sleep3.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
-        features.add("B");
+  @Test
+  public void testSleep3_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep3";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep3";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep3/edu.cmu.cs.mvelezce.Sleep3.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
+    features.add("B");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep4_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep4";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep4/edu.cmu.cs.mvelezce.Sleep4.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
+  @Test
+  public void testSleep4_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep4";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep4/edu.cmu.cs.mvelezce.Sleep4.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep5_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep5";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep5";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep5/edu.cmu.cs.mvelezce.Sleep5.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
+  @Test
+  public void testSleep5_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep5";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep5";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep5/edu.cmu.cs.mvelezce.Sleep5.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep7_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep7";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep7/edu.cmu.cs.mvelezce.Sleep7.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
+  @Test
+  public void testSleep7_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep7";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep7/edu.cmu.cs.mvelezce.Sleep7.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep8_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep8";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep8/edu.cmu.cs.mvelezce.Sleep8.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
+  @Test
+  public void testSleep8_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep8";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep8/edu.cmu.cs.mvelezce.Sleep8.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep9_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep9";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep9";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep9/edu.cmu.cs.mvelezce.Sleep9.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
+  @Test
+  public void testSleep9_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep9";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep9";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep9/edu.cmu.cs.mvelezce.Sleep9.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep10_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep10";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep10/edu.cmu.cs.mvelezce.Sleep10.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
-        features.add("B");
+  @Test
+  public void testSleep10_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep10";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep10/edu.cmu.cs.mvelezce.Sleep10.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
+    features.add("B");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep11_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep11";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep11";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep11/edu.cmu.cs.mvelezce.Sleep11.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
-        features.add("B");
+  @Test
+  public void testSleep11_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep11";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep11";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep11/edu.cmu.cs.mvelezce.Sleep11.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
+    features.add("B");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep12_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep12";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep12/edu.cmu.cs.mvelezce.Sleep12.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
-        features.add("B");
+  @Test
+  public void testSleep12_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep12";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep12/edu.cmu.cs.mvelezce.Sleep12.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
+    features.add("B");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep13_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep13";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep13";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep13/edu.cmu.cs.mvelezce.Sleep13.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
+  @Test
+  public void testSleep13_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep13";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep13";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep13/edu.cmu.cs.mvelezce.Sleep13.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep14_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep14";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep14/edu.cmu.cs.mvelezce.Sleep14.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
-        features.add("B");
-        features.add("C");
+  @Test
+  public void testSleep14_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep14";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep14";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep14/edu.cmu.cs.mvelezce.Sleep14.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
+    features.add("B");
+    features.add("C");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep15_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep15";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep15";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep15/edu.cmu.cs.mvelezce.Sleep15.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
-        features.add("B");
-        features.add("C");
+  @Test
+  public void testSleep15_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep15";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep15";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep15/edu.cmu.cs.mvelezce.Sleep15.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
+    features.add("B");
+    features.add("C");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep16_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep16";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep16";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep16/edu.cmu.cs.mvelezce.Sleep16.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
-        features.add("B");
+  @Test
+  public void testSleep16_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep16";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep16";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep16/edu.cmu.cs.mvelezce.Sleep16.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
+    features.add("B");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep17_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep17";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep17";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep17/edu.cmu.cs.mvelezce.Sleep17.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
-        features.add("B");
-        features.add("C");
+  @Test
+  public void testSleep17_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep17";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep17";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep17/edu.cmu.cs.mvelezce.Sleep17.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
+    features.add("B");
+    features.add("C");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep18_1() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep18";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep18";
-        String sdgFile = USER_HOME + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep18/edu.cmu.cs.mvelezce.Sleep18.main.pdg";
-        List<String> features = new java.util.ArrayList<>();
-        features.add("A");
-        features.add("B");
-        features.add("C");
+  @Test
+  public void testSleep18_1()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep18";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep18";
+    String sdgFile = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performancemodel-mapper/src/main/resources/joana/programs/sleep18/edu.cmu.cs.mvelezce.Sleep18.main.pdg";
+    List<String> features = new java.util.ArrayList<>();
+    features.add("A");
+    features.add("B");
+    features.add("C");
 
-        // Program arguments
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile, features);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint, sdgFile,
+            features);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep4() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep4";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
+  @Test
+  public void testSleep4()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep4";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep4";
 
-        // Program arguments
-        String[] args = new String[0];
+    // Program arguments
+    String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
@@ -1135,42 +1348,24 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep7() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep7";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
+  @Test
+  public void testSleep7()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep7";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep7";
 
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
-
-    }
-
-    @Test
-    public void testSleep8() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep8";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
-
-        // Program arguments
-        String[] args = new String[0];
+    // Program arguments
+    String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
@@ -1179,43 +1374,24 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep9() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep9";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep9";
+  @Test
+  public void testSleep8()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep8";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep8";
 
-        // Program arguments
-        String[] args = new String[0];
-
-//        String[] args = new String[1];
-//        args[0] = "-saveres";
-
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
-
-    }
-
-    @Test
-    public void testSleep10() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        // TODO method 1 and method 2 depend on features so instrumentation is not needed
-        String programName = "sleep10";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
-
-        // Program arguments
-        String[] args = new String[0];
+    // Program arguments
+    String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
@@ -1224,20 +1400,24 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep11() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep11";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep11";
+  @Test
+  public void testSleep9()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep9";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep9";
 
-        // Program arguments
-        String[] args = new String[0];
+    // Program arguments
+    String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
@@ -1246,42 +1426,103 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep12() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep12";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
+  @Test
+  public void testSleep10()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    // TODO method 1 and method 2 depend on features so instrumentation is not needed
+    String programName = "sleep10";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep10";
 
-        // Program arguments
+    // Program arguments
+    String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
+
+  }
+
+  @Test
+  public void testSleep11()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep11";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep11";
+
+    // Program arguments
+    String[] args = new String[0];
+
+//        String[] args = new String[1];
+//        args[0] = "-saveres";
+
+//        String[] args = new String[2];
+//        args[0] = "-delres";
+//        args[1] = "-saveres";
+
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
+
+  }
+
+  @Test
+  public void testSleep12()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep12";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep12";
+
+    // Program arguments
 //        String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
 
-    }
+  }
 
-    @Test
-    public void testSleep13() throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String programName = "sleep13";
-        String srcDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
-        String classDirectory = USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
-        String entryPoint = "edu.cmu.cs.mvelezce.Sleep13";
+  @Test
+  public void testSleep13()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "sleep13";
+    String srcDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/";
+    String classDirectory = BaseAdapter.USER_HOME
+        + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy/";
+    String entryPoint = "edu.cmu.cs.mvelezce.Sleep13";
 
-        // Program arguments
-        String[] args = new String[0];
+    // Program arguments
+    String[] args = new String[0];
 
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
@@ -1290,10 +1531,11 @@ public class JavaPipelineTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        PerformanceModel pm = JavaPipeline.buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
-        System.out.println(pm);
+    PerformanceModel pm = JavaPipeline
+        .buildPerformanceModel(programName, args, srcDirectory, classDirectory, entryPoint);
+    System.out.println(pm);
 
-    }
+  }
 
 //    @Test
 //    public void testInstrumentRelevantRegions1() throws Exception {

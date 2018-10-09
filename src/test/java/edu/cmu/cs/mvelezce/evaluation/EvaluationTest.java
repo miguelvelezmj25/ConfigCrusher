@@ -29,6 +29,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.email.EmailAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.lucene.LuceneMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Adapter;
@@ -3591,9 +3592,16 @@ public class EvaluationTest {
   }
 
   @Test
-  public void berkeleyGroundTruth() throws Exception {
-    String programName = BerkeleyMain.PROGRAM_NAME;
+  public void berkeleyGroundTruth() throws IOException, InterruptedException {
+    this.runGroundTruth(BerkeleyMain.PROGRAM_NAME);
+  }
 
+  @Test
+  public void luceneGroundTruth() throws IOException, InterruptedException {
+    this.runGroundTruth(LuceneMain.PROGRAM_NAME);
+  }
+
+  private void runGroundTruth(String programName) throws IOException, InterruptedException {
     // arguments
     String[] args = new String[0];
 

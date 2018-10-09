@@ -18,7 +18,8 @@ public class LuceneAdapter extends BaseAdapter {
   }
 
   public static List<String> getLuceneOptions() {
-    String[] options = {"CREATE", "RAM_BUFFER_SIZE", "MERGE_POLICY", "CODEC"};
+    String[] options = {"CREATE", "RAM_BUFFER_SIZE", "MERGE_POLICY", "CODEC", "MAX_BUFFERED_DOCS",
+        "USE_COMPOUND_FILE", "MAX_TOKEN_LENGTH"};
 
     return Arrays.asList(options);
   }

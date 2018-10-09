@@ -7,7 +7,7 @@ ENTRY_POINT=org.apache.lucene.demo.IndexFiles
 ITERATIONS=5
 
 M2=$(echo $HOME)/.m2/repository
-CC=./target/ConfigCrusher-0.1.0-SNAPSHOT.jar
+CC=./target/classes
 
 function run {
     local cc=$1

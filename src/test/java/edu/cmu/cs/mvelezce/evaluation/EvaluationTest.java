@@ -24,18 +24,31 @@ import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.berkeley.BerkeleyMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.email.EmailAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.email.EmailMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.find.FindMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.lucene.LuceneMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Main;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions16.Regions16Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions16.Regions16Main;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortMain;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
@@ -50,16 +63,6 @@ import java.util.Set;
 import org.junit.Test;
 
 public class EvaluationTest {
-
-  private Set<Set<String>> getConfigs(Set<PerformanceEntryStatistic> performanceEntries) {
-    Set<Set<String>> configs = new HashSet<>();
-
-    for (PerformanceEntryStatistic entry : performanceEntries) {
-      configs.add(entry.getConfiguration());
-    }
-
-    return configs;
-  }
 
   @Test
   public void compareRunningExample0() throws Exception {
@@ -914,28 +917,14 @@ public class EvaluationTest {
         regionsToOptionSet);
     PerformanceModel performanceModel = builder.createModel(args);
 
-    Set<String> conf = new HashSet<>();
-    conf.add("J");
-
-    double res = performanceModel.evaluate(conf);
-
     Evaluation eval = new Evaluation(programName);
     eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
         measuredPerformance, configurations);
   }
 
   @Test
-  public void runningExampleGroundTruth() throws Exception {
-    String programName = "running-example";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void runningExampleGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(RunningExampleMain.PROGRAM_NAME);
   }
 
   @Test
@@ -1133,17 +1122,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void emailGroundTruth() throws Exception {
-    String programName = "email";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void emailGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(EmailMain.PROGRAM_NAME);
   }
 
   @Test
@@ -1399,17 +1379,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void elevatorGroundTruth() throws Exception {
-    String programName = "elevator";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void elevatorGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(ElevatorMain.PROGRAM_NAME);
   }
 
   @Test
@@ -1723,17 +1694,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void colorCounterGroundTruth() throws Exception {
-    String programName = "pngtasticColorCounter";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void colorCounterGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(ColorCounterMain.PROGRAM_NAME);
   }
 
   @Test
@@ -1916,31 +1878,13 @@ public class EvaluationTest {
   }
 
   @Test
-  public void optimizerGroundTruth() throws Exception {
-    String programName = "pngtasticOptimizer";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void optimizerGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(OptimizerMain.PROGRAM_NAME);
   }
 
   @Test
-  public void kanziGroundTruth() throws Exception {
-    String programName = "kanzi";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void kanziGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(KanziMain.PROGRAM_NAME);
   }
 
   @Test
@@ -2197,45 +2141,18 @@ public class EvaluationTest {
   }
 
   @Test
-  public void findGroundTruth() throws Exception {
-    String programName = "find";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void findGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(FindMain.PROGRAM_NAME);
   }
 
   @Test
-  public void grepGroundTruth() throws Exception {
-    String programName = "grep";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void grepGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(GrepMain.PROGRAM_NAME);
   }
 
   @Test
-  public void sortGroundTruth() throws Exception {
-    String programName = "sort";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void sortGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(SortMain.PROGRAM_NAME);
   }
 
   @Test
@@ -2749,17 +2666,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void prevaylerGroundTruth() throws Exception {
-    String programName = "prevayler";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void prevaylerGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(PrevaylerMain.PROGRAM_NAME);
   }
 
   @Test
@@ -3339,45 +3247,18 @@ public class EvaluationTest {
   }
 
   @Test
-  public void regions16GroundTruth() throws Exception {
-    String programName = "regions16";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void regions16GroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(Regions16Main.PROGRAM_NAME);
   }
 
   @Test
-  public void regions12GroundTruth() throws Exception {
-    String programName = "regions12";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void regions12GroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(Regions12Main.PROGRAM_NAME);
   }
 
   @Test
-  public void densityGroundTruth() throws Exception {
-    String programName = "density";
-
-    // arguments
-    String[] args = new String[0];
-
-    Executor executor = new GroundTruthEvaluationExecutor(programName);
-    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-    Evaluation eval = new Evaluation(programName);
-    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  public void densityGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(DensityMain.PROGRAM_NAME);
   }
 
   @Test
@@ -3610,6 +3491,16 @@ public class EvaluationTest {
 
     Evaluation eval = new Evaluation(programName);
     eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  }
+
+  private Set<Set<String>> getConfigs(Set<PerformanceEntryStatistic> performanceEntries) {
+    Set<Set<String>> configs = new HashSet<>();
+
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      configs.add(entry.getConfiguration());
+    }
+
+    return configs;
   }
 
 }

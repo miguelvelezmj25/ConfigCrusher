@@ -18,7 +18,7 @@ function run {
     local iterations=$6
 
     java -cp \
-      $cc:$m2/commons-io/commons-io/2.5/commons-io-2.5.jar:$m2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar:$m2/commons-cli/commons-cli/1.4/commons-cli-1.4.jar:$m2/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar \
+      $cc:$m2/commons-io/commons-io/2.5/commons-io-2.5.jar:$m2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar:$m2/commons-cli/commons-cli/1.4/commons-cli-1.4.jar:$m2/com/fasterxml/jackson/core/jackson-core/2.8.9/jackson-core-2.8.9.jar:$m2/com/fasterxml/jackson/core/jackson-databind/2.8.9/jackson-databind-2.8.9.jar \
       edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor \
       $program_name \
       $class_dir \

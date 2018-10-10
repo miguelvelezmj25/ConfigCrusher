@@ -884,7 +884,8 @@ public class EvaluationTest {
     String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -937,7 +938,8 @@ public class EvaluationTest {
     String programName = RunningExampleMain.PROGRAM_NAME;
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -955,7 +957,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -973,7 +976,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1000,7 +1004,8 @@ public class EvaluationTest {
     }
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(splatEntries));
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1147,7 +1152,8 @@ public class EvaluationTest {
     String programName = "email";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1194,7 +1200,8 @@ public class EvaluationTest {
     String programName = "email";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1299,7 +1306,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1369,7 +1377,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1401,7 +1410,8 @@ public class EvaluationTest {
     String programName = "elevator";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1557,7 +1567,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1576,7 +1587,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1607,7 +1619,8 @@ public class EvaluationTest {
     Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(performanceEntries));
+    double samplingTime = eval.getTotalSamplingTime(performanceEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1629,7 +1642,8 @@ public class EvaluationTest {
     String programName = "pngtasticColorCounter";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1804,7 +1818,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1822,7 +1837,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1849,7 +1865,8 @@ public class EvaluationTest {
     }
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(splatEntries));
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1862,7 +1879,8 @@ public class EvaluationTest {
     String programName = "pngtasticColorCounter";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -1894,7 +1912,8 @@ public class EvaluationTest {
     String programName = "kanzi";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2042,7 +2061,8 @@ public class EvaluationTest {
     String programName = "kanzi";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2060,7 +2080,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2078,7 +2099,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2122,7 +2144,8 @@ public class EvaluationTest {
     }
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(splatEntries));
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2164,7 +2187,8 @@ public class EvaluationTest {
     String programName = "sort";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2211,7 +2235,8 @@ public class EvaluationTest {
     String programName = "sort";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2279,7 +2304,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2347,7 +2373,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2391,7 +2418,8 @@ public class EvaluationTest {
     }
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(splatEntries));
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2413,7 +2441,8 @@ public class EvaluationTest {
     String programName = "grep";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2561,7 +2590,8 @@ public class EvaluationTest {
     String programName = "grep";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2579,7 +2609,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2597,7 +2628,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2641,7 +2673,8 @@ public class EvaluationTest {
     }
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(splatEntries));
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2719,7 +2752,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2787,7 +2821,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2831,7 +2866,8 @@ public class EvaluationTest {
     }
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(splatEntries));
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -2853,7 +2889,8 @@ public class EvaluationTest {
     String programName = "pngtasticOptimizer";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3023,7 +3060,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3041,7 +3079,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3068,7 +3107,8 @@ public class EvaluationTest {
     }
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(splatEntries));
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3081,7 +3121,8 @@ public class EvaluationTest {
     String programName = "pngtasticOptimizer";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3103,7 +3144,8 @@ public class EvaluationTest {
     String programName = "prevayler";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3146,7 +3188,8 @@ public class EvaluationTest {
     String programName = "prevayler";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3258,7 +3301,8 @@ public class EvaluationTest {
     String programName = "density";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3303,7 +3347,8 @@ public class EvaluationTest {
     String programName = "density";
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3421,7 +3466,8 @@ public class EvaluationTest {
         .getFeaturewiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3439,7 +3485,8 @@ public class EvaluationTest {
         .getPairwiseEntries(performanceEntries);
 
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   @Test
@@ -3459,7 +3506,8 @@ public class EvaluationTest {
 
   private void analyzeGroundTruthSamplingTime(String programName) throws IOException {
     Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH);
+    Evaluation.prettyPrintTime(samplingTime);
   }
 
   private void analyzeGroundTruth(String programName) throws IOException, InterruptedException {

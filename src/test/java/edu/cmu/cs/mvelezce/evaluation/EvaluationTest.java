@@ -928,11 +928,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void runningExampleGroundTruthSamplingTime() throws Exception {
-    String programName = RunningExampleMain.PROGRAM_NAME;
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void runningExampleGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(RunningExampleMain.PROGRAM_NAME);
   }
 
   @Test
@@ -1127,11 +1124,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void emailGroundTruthSamplingTime() throws Exception {
-    String programName = "email";
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void emailGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(EmailMain.PROGRAM_NAME);
   }
 
   @Test
@@ -1384,11 +1378,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void elevatorGroundTruthSamplingTime() throws Exception {
-    String programName = "elevator";
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void elevatorGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(ElevatorMain.PROGRAM_NAME);
   }
 
   @Test
@@ -1862,11 +1853,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void colorCounterGroundTruthSamplingTime() throws Exception {
-    String programName = "pngtasticColorCounter";
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void colorCounterGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(ColorCounterMain.PROGRAM_NAME);
   }
 
   @Test
@@ -2045,11 +2033,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void kanziGroundTruthSamplingTime() throws Exception {
-    String programName = "kanzi";
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void kanziGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(KanziMain.PROGRAM_NAME);
   }
 
   @Test
@@ -2156,11 +2141,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void sortGroundTruthSamplingTime() throws Exception {
-    String programName = "sort";
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void sortGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(SortMain.PROGRAM_NAME);
   }
 
   @Test
@@ -2570,11 +2552,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void grepGroundTruthSamplingTime() throws Exception {
-    String programName = "grep";
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void grepGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(GrepMain.PROGRAM_NAME);
   }
 
   @Test
@@ -2671,11 +2650,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void prevaylerGroundTruthSamplingTime() throws Exception {
-    String programName = "prevayler";
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void prevaylerGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(PrevaylerMain.PROGRAM_NAME);
   }
 
   @Test
@@ -3096,11 +3072,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void optimizerGroundTruthSamplingTime() throws Exception {
-    String programName = "pngtasticOptimizer";
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void optimizerGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(OptimizerMain.PROGRAM_NAME);
   }
 
   @Test
@@ -3262,11 +3235,8 @@ public class EvaluationTest {
   }
 
   @Test
-  public void densityGroundTruthSamplingTime() throws Exception {
-    String programName = "density";
-
-    Evaluation eval = new Evaluation(programName);
-    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
+  public void densityGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(DensityMain.PROGRAM_NAME);
   }
 
   @Test
@@ -3480,6 +3450,16 @@ public class EvaluationTest {
   @Test
   public void luceneGroundTruth() throws IOException, InterruptedException {
     this.analyzeGroundTruth(LuceneMain.PROGRAM_NAME);
+  }
+
+  @Test
+  public void luceneGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(LuceneMain.PROGRAM_NAME);
+  }
+
+  private void analyzeGroundTruthSamplingTime(String programName) throws IOException {
+    Evaluation eval = new Evaluation(programName);
+    System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
   }
 
   private void analyzeGroundTruth(String programName) throws IOException, InterruptedException {

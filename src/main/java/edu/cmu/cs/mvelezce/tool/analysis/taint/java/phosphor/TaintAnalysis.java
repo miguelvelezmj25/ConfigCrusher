@@ -9,7 +9,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class TaintAnalysis {
 
-  static Set<Map<String, Boolean>> getConstraints(Set<Set<String>> taintsAtSinks) {
+  static Set<Map<String, Boolean>> calculateConstraints(Set<Set<String>> taintsAtSinks) {
     if (taintsAtSinks == null || taintsAtSinks.isEmpty()) {
       throw new IllegalArgumentException("The taints at sinks cannot be empty");
     }

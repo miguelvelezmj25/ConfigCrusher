@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class TaintAnalysis {
+public class PhosphorAnalysis {
 
   static Set<Map<String, Boolean>> calculateConstraints(Set<Set<String>> taintsAtSinks) {
     if (taintsAtSinks == null || taintsAtSinks.isEmpty()) {
@@ -17,7 +17,7 @@ public class TaintAnalysis {
     Set<Map<String, Boolean>> constraints = new HashSet<>();
 
     for (Set<String> taintsAtSink : taintsAtSinks) {
-      constraints.addAll(TaintAnalysis.buildConstraints(taintsAtSink));
+      constraints.addAll(PhosphorAnalysis.buildConstraints(taintsAtSink));
     }
 
     return constraints;

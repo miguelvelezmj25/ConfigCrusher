@@ -8,20 +8,20 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TaintAnalysisTest {
+public class PhosphorAnalysisTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void completeConfig_forEmptyConstraint() {
     Map<String, Boolean> emptyConstraintToEvaluate = new HashMap<>();
 
-    TaintAnalysis.completeConfig(emptyConstraintToEvaluate);
+    PhosphorAnalysis.completeConfig(emptyConstraintToEvaluate);
   }
 
   @Test
   public void completeConfig_forConstraint_NotA_NotB() {
     Map<String, Boolean> constraintToEvaluate = this.buildConstraint_notA_notB();
 
-    Set<String> config = TaintAnalysis.completeConfig(constraintToEvaluate);
+    Set<String> config = PhosphorAnalysis.completeConfig(constraintToEvaluate);
     Assert.assertTrue(config.isEmpty());
   }
 
@@ -32,7 +32,7 @@ public class TaintAnalysisTest {
     Set<String> expectedConfig = new HashSet<>();
     expectedConfig.add("A");
 
-    Set<String> config = TaintAnalysis.completeConfig(constraintToEvaluate);
+    Set<String> config = PhosphorAnalysis.completeConfig(constraintToEvaluate);
     Assert.assertEquals(expectedConfig, config);
   }
 
@@ -40,7 +40,7 @@ public class TaintAnalysisTest {
   public void buildConfiguration_forEmptyConstraintToEvaluate() {
     Set<Map<String, Boolean>> emptyConstraintToEvaluate = new HashSet<>();
 
-    TaintAnalysis.buildConfiguration(emptyConstraintToEvaluate);
+    PhosphorAnalysis.buildConfiguration(emptyConstraintToEvaluate);
   }
 
   @Test
@@ -53,7 +53,7 @@ public class TaintAnalysisTest {
     Set<String> expectedConfig = new HashSet<>();
     expectedConfig.add("B");
 
-    Pair<Map<String, Boolean>, Set<String>> results = TaintAnalysis
+    Pair<Map<String, Boolean>, Set<String>> results = PhosphorAnalysis
         .buildConfiguration(constraintsToEvaluate);
 
     Assert.assertEquals(constraint_notA_b, results.getLeft());
@@ -64,7 +64,7 @@ public class TaintAnalysisTest {
   public void buildConstraints_forEmptyTaintsAtSink() {
     Set<String> emptyTaintsAtSink = new HashSet<>();
 
-    TaintAnalysis.buildConstraints(emptyTaintsAtSink);
+    PhosphorAnalysis.buildConstraints(emptyTaintsAtSink);
   }
 
   @Test
@@ -84,7 +84,7 @@ public class TaintAnalysisTest {
     taintsAtSink.add("A");
     taintsAtSink.add("B");
 
-    Set<Map<String, Boolean>> constraints = TaintAnalysis.buildConstraints(taintsAtSink);
+    Set<Map<String, Boolean>> constraints = PhosphorAnalysis.buildConstraints(taintsAtSink);
 
     Assert.assertEquals(expectedConstraints, constraints);
   }
@@ -93,7 +93,7 @@ public class TaintAnalysisTest {
   public void calculateConstraints_forEmptyTaintsAtSinks() {
     Set<Set<String>> emptyTaintsAtSinks = new HashSet<>();
 
-    TaintAnalysis.calculateConstraints(emptyTaintsAtSinks);
+    PhosphorAnalysis.calculateConstraints(emptyTaintsAtSinks);
   }
 
   @Test
@@ -116,7 +116,7 @@ public class TaintAnalysisTest {
     Set<Set<String>> taintsAtSinks = new HashSet<>();
     taintsAtSinks.add(taintsAtSink);
 
-    Set<Map<String, Boolean>> constraints = TaintAnalysis.calculateConstraints(taintsAtSinks);
+    Set<Map<String, Boolean>> constraints = PhosphorAnalysis.calculateConstraints(taintsAtSinks);
 
     Assert.assertEquals(expectedConstraints, constraints);
   }

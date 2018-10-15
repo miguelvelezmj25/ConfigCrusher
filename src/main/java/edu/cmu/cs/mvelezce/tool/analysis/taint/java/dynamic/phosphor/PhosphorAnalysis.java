@@ -27,23 +27,38 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     super(programName);
   }
 
-  void dynamicAnalysis(Set<String> initialConfig, Set<String> options) {
+  void dynamicAnalysis(Set<String> initialConfig, Set<String> options) throws IOException {
     Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
     Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
     constraintsToExplore.add(toConstraint(initialConfig, options));
 
-//    while (!constraintsToExplore.isEmpty()) {
-    Pair<Map<String, Boolean>, Set<String>> configToExplore = buildConfiguration(
-        constraintsToExplore);
-    Map<String, Boolean> constraintToExplore = configToExplore.getLeft();
-    Set<String> config = configToExplore.getRight();
-    exploredConstraints.add(constraintToExplore);
+    while (!constraintsToExplore.isEmpty()) {
+      Pair<Map<String, Boolean>, Set<String>> configToExplore = buildConfiguration(
+          constraintsToExplore);
+      Map<String, Boolean> constraintToExplore = configToExplore.getLeft();
+      Set<String> config = configToExplore.getRight();
+      exploredConstraints.add(constraintToExplore);
 //      // TODO run the analysis
-//      Set<Map<String, Boolean>> currentConstraints = calculateConstraints(taintsAtSinks);
-//      getExploredConstraints(currentConstraints, exploredConstraints);
-//      constraintsToExplore.addAll(currentConstraints);
-//    }
+      Map<String, Set<String>> results = analyzePhosphorResults();
+      Set<Set<String>> taintsAtSinks = new HashSet<>(results.values());
+      Set<Map<String, Boolean>> currentConstraints = calculateConstraints(taintsAtSinks);
+      Set<Map<String, Boolean>> currentExploredConstraints = getExploredConstraints(
+          currentConstraints, exploredConstraints);
+      currentConstraints.removeAll(currentExploredConstraints);
+      constraintsToExplore.addAll(currentConstraints);
+    }
 
+  }
+
+  private Map<String, Set<String>> analyzePhosphorResults() throws IOException {
+    String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
+    Collection<File> serializedFiles = getSerializedFiles(dir);
+
+    if (serializedFiles.size() != 2) {
+      throw new RuntimeException("The directory " + dir + " does not have 2 files.");
+    }
+
+    return readPhosphorTaintResults(serializedFiles);
   }
 
   static Set<Map<String, Boolean>> getExploredConstraints(
@@ -98,7 +113,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
   }
 
-  private static void readPhosphorTaintResults(Collection<File> serializedFiles)
+  private static Map<String, Set<String>> readPhosphorTaintResults(Collection<File> serializedFiles)
       throws IOException {
     Map<String, Set<TaintLabel>> sinksToTaintsFromTaints = new HashMap<>();
     Map<String, Set<TaintLabel>> sinksToTaintsFromStacks = new HashMap<>();
@@ -120,6 +135,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
       System.out.println(entry.getKey() + " --> " + entry.getValue());
     }
+
+    return sinksToTaints;
   }
 
   private static Map<String, Set<String>> changeTaintLabelsToTaints(

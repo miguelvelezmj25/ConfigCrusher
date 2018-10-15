@@ -1,7 +1,9 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.phosphor;
+package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.cc.TaintLabel;
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,26 +17,33 @@ import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class PhosphorAnalysis {
+public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
   private static final String PHOSPHOR_OUTPUT_DIR =
       BaseAdapter.USER_HOME
           + "/Documents/Programming/Java/Projects/phosphor/Phosphor/examples/implicit-optimized";
 
-  private final String programName;
-
   public PhosphorAnalysis(String programName) {
-    this.programName = programName;
+    super(programName);
   }
 
-  public void analyze() throws IOException, ClassNotFoundException {
-    String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.programName;
+  @Override
+  public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
+    String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
     Collection<File> serializedFiles = getSerializedFiles(dir);
 
     if (serializedFiles.size() != 2) {
       throw new RuntimeException("The directory " + dir + " does not have 2 files.");
     }
 
+    readPhosphorTaintResults(serializedFiles);
+
+    return null;
+
+  }
+
+  private static void readPhosphorTaintResults(Collection<File> serializedFiles)
+      throws IOException {
     Map<String, Set<TaintLabel>> sinksToTaintsFromTaints = new HashMap<>();
     Map<String, Set<TaintLabel>> sinksToTaintsFromStacks = new HashMap<>();
 
@@ -47,12 +56,31 @@ public class PhosphorAnalysis {
       }
     }
 
-    Map<String, Set<TaintLabel>> sinksToTaints = merge(sinksToTaintsFromTaints,
+    Map<String, Set<TaintLabel>> sinksToTaintLabels = merge(sinksToTaintsFromTaints,
         sinksToTaintsFromStacks);
 
-    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaints.entrySet()) {
+    Map<String, Set<String>> sinksToTaints = changeTaintLabelsToTaints(sinksToTaintLabels);
+
+    for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
       System.out.println(entry.getKey() + " --> " + entry.getValue());
     }
+  }
+
+  private static Map<String, Set<String>> changeTaintLabelsToTaints(
+      Map<String, Set<TaintLabel>> sinksToTaintLabels) {
+    Map<String, Set<String>> sinksToTaints = new HashMap<>();
+
+    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaintLabels.entrySet()) {
+      Set<String> taints = new HashSet<>();
+
+      for (TaintLabel taintLabel : entry.getValue()) {
+        taints.add(taintLabel.getSource());
+      }
+
+      sinksToTaints.put(entry.getKey(), taints);
+    }
+
+    return sinksToTaints;
   }
 
   private static Map<String, Set<TaintLabel>> merge(Map<String, Set<TaintLabel>> sinksToTaints1,
@@ -76,10 +104,17 @@ public class PhosphorAnalysis {
   }
 
   private static Map<String, Set<TaintLabel>> deserialize(File file)
-      throws IOException, ClassNotFoundException {
+      throws IOException {
     FileInputStream fis = new FileInputStream(file);
     ObjectInputStream ois = new ObjectInputStream(fis);
-    Map<String, Set<TaintLabel>> sinksToTaints = (Map<String, Set<TaintLabel>>) ois.readObject();
+    Map<String, Set<TaintLabel>> sinksToTaints;
+
+    try {
+      sinksToTaints = (Map<String, Set<TaintLabel>>) ois.readObject();
+    } catch (ClassNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+
     ois.close();
     fis.close();
 

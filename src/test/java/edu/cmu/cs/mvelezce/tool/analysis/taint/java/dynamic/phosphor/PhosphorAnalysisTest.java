@@ -1,5 +1,7 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.phosphor;
+package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,11 +14,13 @@ import org.junit.Test;
 public class PhosphorAnalysisTest {
 
   @Test
-  public void analyze_PhosphorRunningExample() throws IOException, ClassNotFoundException {
+  public void analyze_PhosphorRunningExample() throws IOException {
     String programName = "running-example";
 
-    PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
-    analysis.analyze();
+    String[] args = new String[0];
+
+    DynamicAnalysis analysis = new PhosphorAnalysis(programName);
+    analysis.analyze(args);
   }
 
   @Test(expected = IllegalArgumentException.class)

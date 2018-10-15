@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class TaintAnalysisTest {
 
-  @Test(expected = RuntimeException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void completeConfig_forEmptyConstraint() {
     Map<String, Boolean> emptyConstraintToEvaluate = new HashMap<>();
 
@@ -36,6 +36,13 @@ public class TaintAnalysisTest {
     Assert.assertEquals(expectedConfig, config);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void buildConfiguration_forEmptyConstraintToEvaluate() {
+    Set<Map<String, Boolean>> emptyConstraintToEvaluate = new HashSet<>();
+
+    TaintAnalysis.buildConfiguration(emptyConstraintToEvaluate);
+  }
+
   @Test
   public void buildConfiguration_forConstraint_notA_B() {
     Map<String, Boolean> constraint_notA_b = this.buildConstraint_notA_B();
@@ -51,6 +58,35 @@ public class TaintAnalysisTest {
 
     Assert.assertEquals(constraint_notA_b, results.getLeft());
     Assert.assertEquals(expectedConfig, results.getRight());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void buildConstraints_forEmptyTaintsAtSink() {
+    Set<String> emptyTaintsAtSink = new HashSet<>();
+
+    TaintAnalysis.buildConstraints(emptyTaintsAtSink);
+  }
+
+  @Test
+  public void buildConstraints() {
+    Map<String, Boolean> constraint_notA_notB = this.buildConstraint_notA_notB();
+    Map<String, Boolean> constraint_notA_B = this.buildConstraint_notA_B();
+    Map<String, Boolean> constraint_A_notB = this.buildConstraint_A_notB();
+    Map<String, Boolean> constraint_A_B = this.buildConstraint_A_B();
+
+    HashSet<Map<String, Boolean>> expectedConstraints = new HashSet<>();
+    expectedConstraints.add(constraint_notA_notB);
+    expectedConstraints.add(constraint_notA_B);
+    expectedConstraints.add(constraint_A_notB);
+    expectedConstraints.add(constraint_A_B);
+
+    Set<String> taintsAtSink = new HashSet<>();
+    taintsAtSink.add("A");
+    taintsAtSink.add("B");
+
+    Set<Map<String, Boolean>> constraints = TaintAnalysis.buildConstraints(taintsAtSink);
+
+    Assert.assertEquals(expectedConstraints, constraints);
   }
 
   private Map<String, Boolean> buildConstraint_notA_notB() {
@@ -84,4 +120,5 @@ public class TaintAnalysisTest {
 
     return constraint;
   }
+
 }

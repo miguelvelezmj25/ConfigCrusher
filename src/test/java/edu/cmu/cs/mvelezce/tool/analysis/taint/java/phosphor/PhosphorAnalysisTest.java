@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.phosphor;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -9,6 +10,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class PhosphorAnalysisTest {
+
+  @Test
+  public void analyze_PhosphorRunningExample() throws IOException, ClassNotFoundException {
+    String programName = "running-example";
+
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
+    analysis.analyze();
+  }
 
   @Test(expected = IllegalArgumentException.class)
   public void completeConfig_forEmptyConstraint() {

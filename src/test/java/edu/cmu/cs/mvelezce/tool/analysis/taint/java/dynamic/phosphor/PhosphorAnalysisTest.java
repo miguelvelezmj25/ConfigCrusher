@@ -134,7 +134,7 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void removeExploredConstraints_forExplored_notA_notB() {
+  public void getExploredConstraints_forExplored_notA_notB() {
     Map<String, Boolean> constraint_notA_notB = this.buildConstraint_notA_notB();
     Map<String, Boolean> constraint_notA_B = this.buildConstraint_notA_B();
     Map<String, Boolean> constraint_A_notB = this.buildConstraint_A_notB();
@@ -153,27 +153,26 @@ public class PhosphorAnalysisTest {
     Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
     exploredConstraints.add(constraint_notA_notB);
 
-    PhosphorAnalysis.removeExploredConstraints(currentConstraints, exploredConstraints);
+    Set<Map<String, Boolean>> currentExploredConstraints = PhosphorAnalysis
+        .getExploredConstraints(currentConstraints, exploredConstraints);
 
-    Assert.assertEquals(4, currentConstraints.size());
-    Assert.assertTrue(currentConstraints.contains(constraint_A));
-    Assert.assertTrue(currentConstraints.contains(constraint_A_notB));
-    Assert.assertTrue(currentConstraints.contains(constraint_notA_B));
-    Assert.assertTrue(currentConstraints.contains(constraint_A_B));
+    Assert.assertEquals(2, currentExploredConstraints.size());
+    Assert.assertTrue(currentConstraints.contains(constraint_notA));
+    Assert.assertTrue(currentConstraints.contains(constraint_notA_notB));
   }
 
-//  @Test
-//  public void dynamicAnalysis() {
-//    Set<String> initialConfig = new HashSet<>();
-//
-//    Set<String> options = new HashSet<>();
-//    options.add("A");
-//    options.add("B");
-//
-//    String programName = "running-example";
-//    PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
-//    analysis.dynamicAnalysis(initialConfig, options);
-//  }
+  @Test
+  public void dynamicAnalysis() {
+    Set<String> initialConfig = new HashSet<>();
+
+    Set<String> options = new HashSet<>();
+    options.add("A");
+    options.add("B");
+
+    String programName = "running-example";
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
+    analysis.dynamicAnalysis(initialConfig, options);
+  }
 
   private Map<String, Boolean> buildConstraint_notA() {
     Map<String, Boolean> constraint = new HashMap<>();

@@ -27,24 +27,27 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     super(programName);
   }
 
-//  void dynamicAnalysis(Set<String> initialConfig, Set<String> options) {
-//    Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
-//    Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
-//    constraintsToExplore.add(toConstraint(options));
-//
+  void dynamicAnalysis(Set<String> initialConfig, Set<String> options) {
+    Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
+    Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
+    constraintsToExplore.add(toConstraint(initialConfig, options));
+
 //    while (!constraintsToExplore.isEmpty()) {
-//      Pair<Map<String, Boolean>, Set<String>> configToExplore = buildConfiguration(
-//          constraintsToExplore);
-//      exploredConstraints.add(configToExplore.getLeft());
+    Pair<Map<String, Boolean>, Set<String>> configToExplore = buildConfiguration(
+        constraintsToExplore);
+    Map<String, Boolean> constraintToExplore = configToExplore.getLeft();
+    Set<String> config = configToExplore.getRight();
+    exploredConstraints.add(constraintToExplore);
 //      // TODO run the analysis
 //      Set<Map<String, Boolean>> currentConstraints = calculateConstraints(taintsAtSinks);
-//      removeExploredConstraints(currentConstraints, exploredConstraints);
+//      getExploredConstraints(currentConstraints, exploredConstraints);
 //      constraintsToExplore.addAll(currentConstraints);
 //    }
-//
-//  }
 
-  static void removeExploredConstraints(Set<Map<String, Boolean>> currentConstraints,
+  }
+
+  static Set<Map<String, Boolean>> getExploredConstraints(
+      Set<Map<String, Boolean>> currentConstraints,
       Set<Map<String, Boolean>> exploredConstraints) {
     if (currentConstraints == null || currentConstraints.isEmpty()) {
       throw new IllegalArgumentException("The current constraints cannot be empty");
@@ -54,24 +57,26 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       throw new IllegalArgumentException("The explored constraints cannot be empty");
     }
 
-    Set<Map<String, Boolean>> constraintsToRemove = new HashSet<>();
+    Set<Map<String, Boolean>> currentConstraintsAlreadyExplored = new HashSet<>();
 
     for (Map<String, Boolean> currentConstraintsEntry : currentConstraints) {
       for (Map<String, Boolean> exploredConstraintsEntry : exploredConstraints) {
         if (exploredConstraintsEntry.entrySet().containsAll(currentConstraintsEntry.entrySet())) {
-          constraintsToRemove.add(currentConstraintsEntry);
+          currentConstraintsAlreadyExplored.add(currentConstraintsEntry);
         }
       }
     }
 
-    currentConstraints.removeAll(constraintsToRemove);
+    return currentConstraintsAlreadyExplored;
   }
 
-  private Map<String, Boolean> toConstraint(Set<String> options) {
+  private static Map<String, Boolean> toConstraint(Set<String> initialConfig,
+      Set<String> options) {
     Map<String, Boolean> constraint = new HashMap<>();
 
     for (String option : options) {
-      constraint.put(option, false);
+      boolean value = initialConfig.contains(option);
+      constraint.put(option, value);
     }
 
     return constraint;
@@ -207,12 +212,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       Map<String, Boolean> constraint = new HashMap<>();
 
       for (String taint : taintsAtSink) {
-        boolean value = false;
-
-        if (config.contains(taint)) {
-          value = true;
-        }
-
+        boolean value = config.contains(taint);
         constraint.put(taint, value);
       }
 

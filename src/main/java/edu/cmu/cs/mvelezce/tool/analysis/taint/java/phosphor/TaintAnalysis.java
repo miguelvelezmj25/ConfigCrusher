@@ -9,6 +9,20 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class TaintAnalysis {
 
+  static Set<Map<String, Boolean>> getConstraints(Set<Set<String>> taintsAtSinks) {
+    if (taintsAtSinks == null || taintsAtSinks.isEmpty()) {
+      throw new IllegalArgumentException("The taints at sinks cannot be empty");
+    }
+
+    Set<Map<String, Boolean>> constraints = new HashSet<>();
+
+    for (Set<String> taintsAtSink : taintsAtSinks) {
+      constraints.addAll(TaintAnalysis.buildConstraints(taintsAtSink));
+    }
+
+    return constraints;
+  }
+
   /**
    * Builds a set of pratial configurations
    */

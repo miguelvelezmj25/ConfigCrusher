@@ -68,7 +68,7 @@ public class TaintAnalysisTest {
   }
 
   @Test
-  public void buildConstraints() {
+  public void buildConstraints_forTaints_A_B() {
     Map<String, Boolean> constraint_notA_notB = this.buildConstraint_notA_notB();
     Map<String, Boolean> constraint_notA_B = this.buildConstraint_notA_B();
     Map<String, Boolean> constraint_A_notB = this.buildConstraint_A_notB();
@@ -87,6 +87,37 @@ public class TaintAnalysisTest {
     Set<Map<String, Boolean>> constraints = TaintAnalysis.buildConstraints(taintsAtSink);
 
     Assert.assertEquals(expectedConstraints, constraints);
+  }
+
+  @Test
+  public void getConstraints_forTaints_A_B() {
+    Map<String, Boolean> constraint_notA_notB = this.buildConstraint_notA_notB();
+    Map<String, Boolean> constraint_notA_B = this.buildConstraint_notA_B();
+    Map<String, Boolean> constraint_A_notB = this.buildConstraint_A_notB();
+    Map<String, Boolean> constraint_A_B = this.buildConstraint_A_B();
+
+    HashSet<Map<String, Boolean>> expectedConstraints = new HashSet<>();
+    expectedConstraints.add(constraint_notA_notB);
+    expectedConstraints.add(constraint_notA_B);
+    expectedConstraints.add(constraint_A_notB);
+    expectedConstraints.add(constraint_A_B);
+
+    Set<String> taintsAtSink = new HashSet<>();
+    taintsAtSink.add("A");
+    taintsAtSink.add("B");
+
+    Set<Set<String>> taintsAtSinks = new HashSet<>();
+    taintsAtSinks.add(taintsAtSink);
+
+    Set<Map<String, Boolean>> constraints = TaintAnalysis.getConstraints(taintsAtSinks);
+
+    Assert.assertEquals(expectedConstraints, constraints);
+  }
+
+  public void getConstraints_forEmptyTaintsAtSinks() {
+    Set<Set<String>> emptyTaintsAtSinks = new HashSet<>();
+
+    TaintAnalysis.getConstraints(emptyTaintsAtSinks);
   }
 
   private Map<String, Boolean> buildConstraint_notA_notB() {

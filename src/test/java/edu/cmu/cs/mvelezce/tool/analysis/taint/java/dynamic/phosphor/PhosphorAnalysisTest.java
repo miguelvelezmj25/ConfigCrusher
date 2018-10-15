@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import java.io.IOException;
 import java.util.HashMap;
@@ -132,6 +131,62 @@ public class PhosphorAnalysisTest {
     Set<Map<String, Boolean>> constraints = PhosphorAnalysis.calculateConstraints(taintsAtSinks);
 
     Assert.assertEquals(expectedConstraints, constraints);
+  }
+
+  @Test
+  public void removeExploredConstraints_forExplored_notA_notB() {
+    Map<String, Boolean> constraint_notA_notB = this.buildConstraint_notA_notB();
+    Map<String, Boolean> constraint_notA_B = this.buildConstraint_notA_B();
+    Map<String, Boolean> constraint_A_notB = this.buildConstraint_A_notB();
+    Map<String, Boolean> constraint_A_B = this.buildConstraint_A_B();
+    Map<String, Boolean> constraint_notA = this.buildConstraint_notA();
+    Map<String, Boolean> constraint_A = this.buildConstraint_A();
+
+    Set<Map<String, Boolean>> currentConstraints = new HashSet<>();
+    currentConstraints.add(constraint_notA_notB);
+    currentConstraints.add(constraint_notA_B);
+    currentConstraints.add(constraint_A_notB);
+    currentConstraints.add(constraint_A_B);
+    currentConstraints.add(constraint_notA);
+    currentConstraints.add(constraint_A);
+
+    Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
+    exploredConstraints.add(constraint_notA_notB);
+
+    PhosphorAnalysis.removeExploredConstraints(currentConstraints, exploredConstraints);
+
+    Assert.assertEquals(4, currentConstraints.size());
+    Assert.assertTrue(currentConstraints.contains(constraint_A));
+    Assert.assertTrue(currentConstraints.contains(constraint_A_notB));
+    Assert.assertTrue(currentConstraints.contains(constraint_notA_B));
+    Assert.assertTrue(currentConstraints.contains(constraint_A_B));
+  }
+
+//  @Test
+//  public void dynamicAnalysis() {
+//    Set<String> initialConfig = new HashSet<>();
+//
+//    Set<String> options = new HashSet<>();
+//    options.add("A");
+//    options.add("B");
+//
+//    String programName = "running-example";
+//    PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
+//    analysis.dynamicAnalysis(initialConfig, options);
+//  }
+
+  private Map<String, Boolean> buildConstraint_notA() {
+    Map<String, Boolean> constraint = new HashMap<>();
+    constraint.put("A", false);
+
+    return constraint;
+  }
+
+  private Map<String, Boolean> buildConstraint_A() {
+    Map<String, Boolean> constraint = new HashMap<>();
+    constraint.put("A", true);
+
+    return constraint;
   }
 
   private Map<String, Boolean> buildConstraint_notA_notB() {

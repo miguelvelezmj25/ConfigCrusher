@@ -23,9 +23,60 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       BaseAdapter.USER_HOME
           + "/Documents/Programming/Java/Projects/phosphor/Phosphor/examples/implicit-optimized";
 
-  public PhosphorAnalysis(String programName) {
+  PhosphorAnalysis(String programName) {
     super(programName);
   }
+
+//  void dynamicAnalysis(Set<String> initialConfig, Set<String> options) {
+//    Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
+//    Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
+//    constraintsToExplore.add(toConstraint(options));
+//
+//    while (!constraintsToExplore.isEmpty()) {
+//      Pair<Map<String, Boolean>, Set<String>> configToExplore = buildConfiguration(
+//          constraintsToExplore);
+//      exploredConstraints.add(configToExplore.getLeft());
+//      // TODO run the analysis
+//      Set<Map<String, Boolean>> currentConstraints = calculateConstraints(taintsAtSinks);
+//      removeExploredConstraints(currentConstraints, exploredConstraints);
+//      constraintsToExplore.addAll(currentConstraints);
+//    }
+//
+//  }
+
+  static void removeExploredConstraints(Set<Map<String, Boolean>> currentConstraints,
+      Set<Map<String, Boolean>> exploredConstraints) {
+    if (currentConstraints == null || currentConstraints.isEmpty()) {
+      throw new IllegalArgumentException("The current constraints cannot be empty");
+    }
+
+    if (exploredConstraints == null || exploredConstraints.isEmpty()) {
+      throw new IllegalArgumentException("The explored constraints cannot be empty");
+    }
+
+    Set<Map<String, Boolean>> constraintsToRemove = new HashSet<>();
+
+    for (Map<String, Boolean> currentConstraintsEntry : currentConstraints) {
+      for (Map<String, Boolean> exploredConstraintsEntry : exploredConstraints) {
+        if (exploredConstraintsEntry.entrySet().containsAll(currentConstraintsEntry.entrySet())) {
+          constraintsToRemove.add(currentConstraintsEntry);
+        }
+      }
+    }
+
+    currentConstraints.removeAll(constraintsToRemove);
+  }
+
+  private Map<String, Boolean> toConstraint(Set<String> options) {
+    Map<String, Boolean> constraint = new HashMap<>();
+
+    for (String option : options) {
+      constraint.put(option, false);
+    }
+
+    return constraint;
+  }
+
 
   @Override
   public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
@@ -185,6 +236,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     }
 
     Map<String, Boolean> constraintToEvaluate = constraintsToEvaluate.iterator().next();
+    constraintsToEvaluate.remove(constraintToEvaluate);
     Set<String> config = completeConfig(constraintToEvaluate);
 
     return Pair.of(constraintToEvaluate, config);

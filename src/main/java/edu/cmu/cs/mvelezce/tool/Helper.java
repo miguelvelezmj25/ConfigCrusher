@@ -25,27 +25,37 @@ public class Helper {
       throw new IllegalArgumentException("The options passed cannot be null");
     }
 
+    Set<Set<String>> configs = new HashSet<>(getCombinations(options));
+    configs.add(new HashSet<>());
+
+    return configs;
+  }
+
+  public static Set<Set<String>> getCombinations(Set<String> options) {
+    if (options == null) {
+      throw new IllegalArgumentException("The options passed cannot be null");
+    }
+
     List<String> optionsList = new ArrayList<>(options);
-    Set<Set<String>> configs = new HashSet<>();
-    int configMaxLength = options.size();
+    Set<Set<String>> combos = new HashSet<>();
+    int comboMaxLength = options.size();
 
-    for (int i = 1; i <= configMaxLength; i++) {
-      Combinations combos = new Combinations(configMaxLength, i);
+    for (int i = 1; i <= comboMaxLength; i++) {
+      Combinations currentCombos = new Combinations(comboMaxLength, i);
 
-      for (int[] combination : combos) {
-        Set<String> config = new HashSet<>();
+      for (int[] currentCombo : currentCombos) {
+        Set<String> combo = new HashSet<>();
 
-        for (int element : combination) {
-          config.add(optionsList.get(element));
+        for (int element : currentCombo) {
+          combo.add(optionsList.get(element));
         }
 
-        configs.add(config);
+        combos.add(combo);
       }
 
     }
 
-    configs.add(new HashSet<>());
-    return configs;
+    return combos;
   }
 
 //    public static void removeSampledConfigurations(String name, Set<Set<String>> configurations) throws IOException, InterruptedException {

@@ -7,8 +7,11 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,22 +35,44 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
     constraintsToExplore.add(toConstraint(initialConfig, options));
 
-    while (!constraintsToExplore.isEmpty()) {
-      Pair<Map<String, Boolean>, Set<String>> configToExplore = buildConfiguration(
-          constraintsToExplore);
-      Map<String, Boolean> constraintToExplore = configToExplore.getLeft();
-      Set<String> config = configToExplore.getRight();
-      exploredConstraints.add(constraintToExplore);
-//      // TODO run the analysis
-      Map<String, Set<String>> results = analyzePhosphorResults();
-      Set<Set<String>> taintsAtSinks = new HashSet<>(results.values());
-      Set<Map<String, Boolean>> currentConstraints = calculateConstraints(taintsAtSinks);
-      Set<Map<String, Boolean>> currentExploredConstraints = getExploredConstraints(
-          currentConstraints, exploredConstraints);
-      currentConstraints.removeAll(currentExploredConstraints);
-      constraintsToExplore.addAll(currentConstraints);
+//    while (!constraintsToExplore.isEmpty()) {
+//      Pair<Map<String, Boolean>, Set<String>> configToExplore = buildConfiguration(
+//          constraintsToExplore);
+//      Map<String, Boolean> constraintToExplore = configToExplore.getLeft();
+//      Set<String> config = configToExplore.getRight();
+//
+//      getExploringConstraints(constraintToExplore);
+//
+//      exploredConstraints.add(constraintToExplore);
+////      // TODO run the analysis
+//      Map<String, Set<String>> results = analyzePhosphorResults();
+//      Set<Set<String>> taintsAtSinks = new HashSet<>(results.values());
+//      Set<Map<String, Boolean>> currentConstraints = calculateConstraints(taintsAtSinks);
+//      Set<Map<String, Boolean>> currentExploredConstraints = getExploredConstraints(
+//          currentConstraints, exploredConstraints);
+//      currentConstraints.removeAll(currentExploredConstraints);
+//      constraintsToExplore.addAll(currentConstraints);
+//    }
+
+  }
+
+  static Set<Map<String, Boolean>> getExploringConstraints(
+      Map<String, Boolean> constraintToExplore) {
+    Set<Map<String, Boolean>> exploringConstraints = new HashSet<>();
+    Set<String> options = constraintToExplore.keySet();
+    Set<Set<String>> optionsCombinations = Helper.getCombinations(options);
+
+    for(Set<String> optionsCombo : optionsCombinations) {
+      Map<String, Boolean> constraint = new HashMap<>();
+
+      for(String option : optionsCombo) {
+        constraint.put(option, constraintToExplore.get(option));
+      }
+
+      exploringConstraints.add(constraint);
     }
 
+    return exploringConstraints;
   }
 
   private Map<String, Set<String>> analyzePhosphorResults() throws IOException {
@@ -215,7 +240,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   }
 
   /**
-   * Builds a set of pratial configurations
+   * Builds a set of partial configurations
    */
   static Set<Map<String, Boolean>> buildConstraints(Set<String> taintsAtSink) {
     if (taintsAtSink == null || taintsAtSink.isEmpty()) {
@@ -252,11 +277,16 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
     }
 
-    Map<String, Boolean> constraintToEvaluate = constraintsToEvaluate.iterator().next();
-    constraintsToEvaluate.remove(constraintToEvaluate);
+    Map<String, Boolean> constraintToEvaluate = getNextConstraintToEvaluate(constraintsToEvaluate);
     Set<String> config = completeConfig(constraintToEvaluate);
 
     return Pair.of(constraintToEvaluate, config);
+  }
+
+  // TODO optimize how to pick the next constraint to evaluate, maybe pick the one with the most options?
+  private static Map<String, Boolean> getNextConstraintToEvaluate(
+      Set<Map<String, Boolean>> constraintsToEvaluate) {
+    return constraintsToEvaluate.iterator().next();
   }
 
   /**

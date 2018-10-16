@@ -175,6 +175,31 @@ public class PhosphorAnalysisTest {
     analysis.dynamicAnalysis(initialConfig, options);
   }
 
+  @Test
+  public void getExploringConstraints() {
+    Map<String, Boolean> constraint_A_notB = this.buildConstraint_A_notB();
+    Map<String, Boolean> constraint_A = this.buildConstraint_A();
+    Map<String, Boolean> constraint_notB = this.buildConstraint_notB();
+
+    Set<Map<String, Boolean>> expectedExploringConstraints = new HashSet<>();
+    expectedExploringConstraints.add(constraint_A_notB);
+    expectedExploringConstraints.add(constraint_A);
+    expectedExploringConstraints.add(constraint_notB);
+
+    Set<Map<String, Boolean>> exploringConstraints = PhosphorAnalysis
+        .getExploringConstraints(constraint_A_notB);
+
+    Assert.assertEquals(3, exploringConstraints.size());
+    Assert.assertEquals(expectedExploringConstraints, exploringConstraints);
+  }
+
+  private Map<String, Boolean> buildConstraint_notB() {
+    Map<String, Boolean> constraint = new HashMap<>();
+    constraint.put("B", false);
+
+    return constraint;
+  }
+
   private Map<String, Boolean> buildConstraint_notA() {
     Map<String, Boolean> constraint = new HashMap<>();
     constraint.put("A", false);
@@ -220,5 +245,4 @@ public class PhosphorAnalysisTest {
 
     return constraint;
   }
-
 }

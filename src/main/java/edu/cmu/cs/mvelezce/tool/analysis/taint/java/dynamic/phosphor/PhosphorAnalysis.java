@@ -7,11 +7,8 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,7 +33,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     constraintsToExplore.add(toConstraint(initialConfig, options));
 
 //    while (!constraintsToExplore.isEmpty()) {
-//      Pair<Map<String, Boolean>, Set<String>> configToExplore = buildConfiguration(
+//      Pair<Map<String, Boolean>, Set<String>> configToExplore = getNextConstraint(
 //          constraintsToExplore);
 //      Map<String, Boolean> constraintToExplore = configToExplore.getLeft();
 //      Set<String> config = configToExplore.getRight();
@@ -62,10 +59,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     Set<String> options = constraintToExplore.keySet();
     Set<Set<String>> optionsCombinations = Helper.getCombinations(options);
 
-    for(Set<String> optionsCombo : optionsCombinations) {
+    for (Set<String> optionsCombo : optionsCombinations) {
       Map<String, Boolean> constraint = new HashMap<>();
 
-      for(String option : optionsCombo) {
+      for (String option : optionsCombo) {
         constraint.put(option, constraintToExplore.get(option));
       }
 
@@ -271,20 +268,20 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    *
    * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
    */
-  static Pair<Map<String, Boolean>, Set<String>> buildConfiguration(
+  static Pair<Map<String, Boolean>, Set<String>> getNextConstraint(
       Set<Map<String, Boolean>> constraintsToEvaluate) {
     if (constraintsToEvaluate == null || constraintsToEvaluate.isEmpty()) {
       throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
     }
 
-    Map<String, Boolean> constraintToEvaluate = getNextConstraintToEvaluate(constraintsToEvaluate);
-    Set<String> config = completeConfig(constraintToEvaluate);
+    Map<String, Boolean> constraintToEvaluate = pickNextConstraint(constraintsToEvaluate);
+    Set<String> config = buildConfig(constraintToEvaluate);
 
     return Pair.of(constraintToEvaluate, config);
   }
 
-  // TODO optimize how to pick the next constraint to evaluate, maybe pick the one with the most options?
-  private static Map<String, Boolean> getNextConstraintToEvaluate(
+  // TODO optimize how to pick the next constraint to evaluate, maybe pick the one with the most options? Merge constraints?
+  private static Map<String, Boolean> pickNextConstraint(
       Set<Map<String, Boolean>> constraintsToEvaluate) {
     return constraintsToEvaluate.iterator().next();
   }
@@ -296,7 +293,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    *
    * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
    */
-  static Set<String> completeConfig(Map<String, Boolean> constraintToEvaluate) {
+  static Set<String> buildConfig(Map<String, Boolean> constraintToEvaluate) {
     if (constraintToEvaluate == null || constraintToEvaluate.isEmpty()) {
       throw new IllegalArgumentException("The constraint to evaluate should not be empty");
     }

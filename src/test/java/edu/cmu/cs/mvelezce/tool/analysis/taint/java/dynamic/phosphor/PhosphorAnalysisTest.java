@@ -26,14 +26,14 @@ public class PhosphorAnalysisTest {
   public void completeConfig_forEmptyConstraint() {
     Map<String, Boolean> emptyConstraintToEvaluate = new HashMap<>();
 
-    PhosphorAnalysis.completeConfig(emptyConstraintToEvaluate);
+    PhosphorAnalysis.buildConfig(emptyConstraintToEvaluate);
   }
 
   @Test
   public void completeConfig_forConstraint_NotA_NotB() {
     Map<String, Boolean> constraintToEvaluate = this.buildConstraint_notA_notB();
 
-    Set<String> config = PhosphorAnalysis.completeConfig(constraintToEvaluate);
+    Set<String> config = PhosphorAnalysis.buildConfig(constraintToEvaluate);
     Assert.assertTrue(config.isEmpty());
   }
 
@@ -44,19 +44,19 @@ public class PhosphorAnalysisTest {
     Set<String> expectedConfig = new HashSet<>();
     expectedConfig.add("A");
 
-    Set<String> config = PhosphorAnalysis.completeConfig(constraintToEvaluate);
+    Set<String> config = PhosphorAnalysis.buildConfig(constraintToEvaluate);
     Assert.assertEquals(expectedConfig, config);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void buildConfiguration_forEmptyConstraintToEvaluate() {
+  public void getNextConstraint_forEmptyConstraintToEvaluate() {
     Set<Map<String, Boolean>> emptyConstraintToEvaluate = new HashSet<>();
 
-    PhosphorAnalysis.buildConfiguration(emptyConstraintToEvaluate);
+    PhosphorAnalysis.getNextConstraint(emptyConstraintToEvaluate);
   }
 
   @Test
-  public void buildConfiguration_forConstraint_notA_B() {
+  public void getNextConstraint_forConstraint_notA_B() {
     Map<String, Boolean> constraint_notA_b = this.buildConstraint_notA_B();
 
     Set<Map<String, Boolean>> constraintsToEvaluate = new HashSet<>();
@@ -66,7 +66,7 @@ public class PhosphorAnalysisTest {
     expectedConfig.add("B");
 
     Pair<Map<String, Boolean>, Set<String>> results = PhosphorAnalysis
-        .buildConfiguration(constraintsToEvaluate);
+        .getNextConstraint(constraintsToEvaluate);
 
     Assert.assertEquals(constraint_notA_b, results.getLeft());
     Assert.assertEquals(expectedConfig, results.getRight());

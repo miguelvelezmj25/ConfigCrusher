@@ -32,25 +32,31 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
     constraintsToExplore.add(toConstraint(initialConfig, options));
 
-//    while (!constraintsToExplore.isEmpty()) {
-//      Pair<Map<String, Boolean>, Set<String>> configToExplore = getNextConstraint(
-//          constraintsToExplore);
-//      Map<String, Boolean> constraintToExplore = configToExplore.getLeft();
-//      Set<String> config = configToExplore.getRight();
-//
-//      getExploringConstraints(constraintToExplore);
-//
-//      exploredConstraints.add(constraintToExplore);
-////      // TODO run the analysis
-//      Map<String, Set<String>> results = analyzePhosphorResults();
-//      Set<Set<String>> taintsAtSinks = new HashSet<>(results.values());
-//      Set<Map<String, Boolean>> currentConstraints = calculateConstraints(taintsAtSinks);
-//      Set<Map<String, Boolean>> currentExploredConstraints = getExploredConstraints(
-//          currentConstraints, exploredConstraints);
-//      currentConstraints.removeAll(currentExploredConstraints);
-//      constraintsToExplore.addAll(currentConstraints);
-//    }
+    int count = 0;
+    while (!constraintsToExplore.isEmpty()) {
+      Pair<Map<String, Boolean>, Set<String>> nextConstraint = getNextConstraint(
+          constraintsToExplore);
+      Map<String, Boolean> constraintToExplore = nextConstraint.getLeft();
+      Set<String> config = nextConstraint.getRight();
 
+      Set<Map<String, Boolean>> exploringConstraints = getExploringConstraints(constraintToExplore);
+      constraintsToExplore.removeAll(exploringConstraints);
+      exploredConstraints.addAll(exploringConstraints);
+
+//      // TODO run the analysis
+      Map<String, Set<String>> results = analyzePhosphorResults();
+      Set<Set<String>> taintsAtSinks = new HashSet<>(results.values());
+      Set<Map<String, Boolean>> currentConstraints = calculateConstraints(taintsAtSinks);
+
+      Set<Map<String, Boolean>> currentExploredConstraints = getExploredConstraints(
+          currentConstraints, exploredConstraints);
+      currentConstraints.removeAll(currentExploredConstraints);
+      constraintsToExplore.addAll(currentConstraints);
+
+      count++;
+    }
+
+    System.out.println(count);
   }
 
   static Set<Map<String, Boolean>> getExploringConstraints(
@@ -154,9 +160,9 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
     Map<String, Set<String>> sinksToTaints = changeTaintLabelsToTaints(sinksToTaintLabels);
 
-    for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
-      System.out.println(entry.getKey() + " --> " + entry.getValue());
-    }
+//    for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
+//      System.out.println(entry.getKey() + " --> " + entry.getValue());
+//    }
 
     return sinksToTaints;
   }

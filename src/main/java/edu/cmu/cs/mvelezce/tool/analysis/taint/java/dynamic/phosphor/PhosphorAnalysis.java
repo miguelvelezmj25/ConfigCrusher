@@ -98,7 +98,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   }
 
   Set<Set<String>> getConfigsForCC() {
-    Set<Map<String, Boolean>> ccConstraints = this.getCCConstraints();
+    Set<Map<String, Boolean>> ccConstraints = this.getAllConstraints();
     Set<Set<String>> configs = new HashSet<>();
 
     for (Map<String, Boolean> ccConstraint : ccConstraints) {
@@ -110,7 +110,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return configs;
   }
 
-  private Set<Map<String, Boolean>> getCCConstraints() {
+  private Set<Map<String, Boolean>> getAllConstraints() {
     Set<Map<String, Boolean>> ccConstraints = new HashSet<>();
 
     for (Set<Map<String, Boolean>> constraints : this.sinksToConstraints.values()) {
@@ -468,7 +468,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return Pair.of(constraintToEvaluate, config);
   }
 
-  // TODO add test cases
   // TODO optimize how to pick the next constraint to evaluate, maybe pick the one with the most options? Merge constraints?
   static Map<String, Boolean> pickNextConstraint(Set<Map<String, Boolean>> constraintsToEvaluate) {
     if (constraintsToEvaluate.isEmpty()) {
@@ -506,7 +505,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   }
 
   @VisibleForTesting
-  void addSinksToConstraints(Map<String, Set<Map<String, Boolean>>> sinksToConstraints){
+  void addSinksToConstraints(Map<String, Set<Map<String, Boolean>>> sinksToConstraints) {
     this.sinksToConstraints.putAll(sinksToConstraints);
   }
 }

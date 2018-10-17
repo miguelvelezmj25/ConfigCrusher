@@ -321,6 +321,19 @@ public class PhosphorAnalysisTest {
     Assert.assertEquals(expectedConfigs, ccConfigs);
   }
 
+  @Test
+  public void pickNextConstraint_forOneConstraint() {
+    Map<String, Boolean> constraint_A = this.buildConstraint_A();
+
+    Set<Map<String, Boolean>> constraintsToEvaluate = new HashSet<>();
+    constraintsToEvaluate.add(constraint_A);
+
+    Map<String, Boolean> nextConstraint = PhosphorAnalysis
+        .pickNextConstraint(constraintsToEvaluate);
+
+    Assert.assertEquals(constraint_A, nextConstraint);
+  }
+
   private Set<String> buildConfig_A_B() {
     Set<String> config = new HashSet<>();
     config.add("A");
@@ -399,4 +412,5 @@ public class PhosphorAnalysisTest {
 
     return constraint;
   }
+
 }

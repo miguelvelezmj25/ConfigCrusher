@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
+import com.google.common.annotations.VisibleForTesting;
 import edu.cmu.cs.mvelezce.cc.TaintLabel;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
@@ -32,7 +33,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
           + "/Documents/Programming/Java/Projects/phosphor/Phosphor/examples/implicit-optimized";
   private static final String PHOSPHOR_SCRIPTS_DIR = BaseAdapter.USER_HOME
       + "/Documents/Programming/Java/Projects/phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
-
 
   private final Map<String, Set<Map<String, Boolean>>> sinksToConstraints = new HashMap<>();
 
@@ -93,12 +93,31 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     }
 
     System.out.println(count);
-    System.out.println("Constraints to evaluate");
+    // TODO this might be done in the compression step, not in the analysis
+    this.getConfigsForCC();
+  }
 
-    for (Map.Entry<String, Set<Map<String, Boolean>>> entry : this.sinksToConstraints.entrySet()) {
-      System.out.println(entry.getValue());
+  Set<Set<String>> getConfigsForCC() {
+    Set<Map<String, Boolean>> ccConstraints = this.getCCConstraints();
+    Set<Set<String>> configs = new HashSet<>();
+
+    for (Map<String, Boolean> ccConstraint : ccConstraints) {
+      Set<String> config = toConfig(ccConstraint);
+      configs.add(config);
     }
 
+    System.out.println(configs);
+    return configs;
+  }
+
+  private Set<Map<String, Boolean>> getCCConstraints() {
+    Set<Map<String, Boolean>> ccConstraints = new HashSet<>();
+
+    for (Set<Map<String, Boolean>> constraints : this.sinksToConstraints.values()) {
+      ccConstraints.addAll(constraints);
+    }
+
+    return ccConstraints;
   }
 
   /**
@@ -378,11 +397,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       throw new IllegalArgumentException("The taints to sinks map cannot be empty");
     }
 
-    this.addSinks(sinksToTaints.keySet());
-    this.getConstraintsPerSink(sinksToTaints);
-  }
+    this.addNewSinks(sinksToTaints.keySet());
 
-  private void getConstraintsPerSink(Map<String, Set<String>> sinksToTaints) {
     for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
       String sink = entry.getKey();
       Set<String> taintsAtSink = entry.getValue();
@@ -394,7 +410,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     }
   }
 
-  private void addSinks(Set<String> sinks) {
+  private void addNewSinks(Set<String> sinks) {
     for (String sink : sinks) {
       if (!this.sinksToConstraints.containsKey(sink)) {
         this.sinksToConstraints.put(sink, new HashSet<>());
@@ -485,7 +501,12 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return config;
   }
 
-  public Map<String, Set<Map<String, Boolean>>> getSinksToConstraints() {
+  Map<String, Set<Map<String, Boolean>>> getSinksToConstraints() {
     return sinksToConstraints;
+  }
+
+  @VisibleForTesting
+  void addSinksToConstraints(Map<String, Set<Map<String, Boolean>>> sinksToConstraints){
+    this.sinksToConstraints.putAll(sinksToConstraints);
   }
 }

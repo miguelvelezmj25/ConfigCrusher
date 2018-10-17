@@ -4,14 +4,22 @@ import edu.cmu.cs.mvelezce.cc.TaintLabel;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleMain;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
@@ -22,6 +30,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   private static final String PHOSPHOR_OUTPUT_DIR =
       BaseAdapter.USER_HOME
           + "/Documents/Programming/Java/Projects/phosphor/Phosphor/examples/implicit-optimized";
+  private static final String PHOSPHOR_SCRIPTS_DIR = BaseAdapter.USER_HOME
+      + "/Documents/Programming/Java/Projects/phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
 
   PhosphorAnalysis(String programName) {
     super(programName);
@@ -30,26 +40,29 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   void dynamicAnalysis(Set<String> initialConfig, Set<String> options) throws IOException {
     Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
     Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
-    constraintsToExplore.add(toConstraint(initialConfig, options));
+    constraintsToExplore.add(this.toConstraint(initialConfig, options));
 
     int count = 0;
     while (!constraintsToExplore.isEmpty()) {
-      Pair<Map<String, Boolean>, Set<String>> nextConstraint = getNextConstraint(
+      Pair<Map<String, Boolean>, Set<String>> nextConstraint = PhosphorAnalysis.getNextConstraint(
           constraintsToExplore);
       Map<String, Boolean> constraintToExplore = nextConstraint.getLeft();
       Set<String> config = nextConstraint.getRight();
 
-      Set<Map<String, Boolean>> exploringConstraints = getExploringConstraints(constraintToExplore);
+      Set<Map<String, Boolean>> exploringConstraints = PhosphorAnalysis
+          .getExploringConstraints(constraintToExplore);
       constraintsToExplore.removeAll(exploringConstraints);
       exploredConstraints.addAll(exploringConstraints);
 
 //      // TODO run the analysis
-      Map<String, Set<String>> results = analyzePhosphorResults();
+      Map<String, Set<String>> results = this.analyzePhosphorResults();
       Set<Set<String>> taintsAtSinks = new HashSet<>(results.values());
-      Set<Map<String, Boolean>> currentConstraints = calculateConstraints(taintsAtSinks);
+      Set<Map<String, Boolean>> currentConstraints = PhosphorAnalysis
+          .calculateConstraints(taintsAtSinks);
 
-      Set<Map<String, Boolean>> currentExploredConstraints = getExploredConstraints(
-          currentConstraints, exploredConstraints);
+      Set<Map<String, Boolean>> currentExploredConstraints = PhosphorAnalysis
+          .getExploredConstraints(
+              currentConstraints, exploredConstraints);
       currentConstraints.removeAll(currentExploredConstraints);
       constraintsToExplore.addAll(currentConstraints);
 
@@ -57,6 +70,72 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     }
 
     System.out.println(count);
+  }
+
+  void runPhosphorAnalysis(Set<String> config) throws IOException, InterruptedException {
+    if (config == null) {
+      throw new IllegalArgumentException("The configuration cannot be null");
+    }
+
+    ProcessBuilder builder = new ProcessBuilder();
+
+    List<String> commandList = this.buildCommandAsList(this.getProgramName(), config);
+    builder.command(commandList);
+    builder.directory(new File(PHOSPHOR_SCRIPTS_DIR));
+    Process process = builder.start();
+
+    this.processOutput(process);
+    System.out.println();
+    this.processError(process);
+    System.out.println();
+
+    process.waitFor();
+  }
+
+  private void processError(Process process) throws IOException {
+    System.out.println("Errors: ");
+    BufferedReader errorReader =
+        new BufferedReader(new InputStreamReader(process.getErrorStream()));
+    String string;
+
+    while ((string = errorReader.readLine()) != null) {
+      if (!string.isEmpty()) {
+        System.out.println(string);
+      }
+    }
+  }
+
+  private void processOutput(Process process) throws IOException {
+    System.out.println("Output: ");
+    BufferedReader inputReader =
+        new BufferedReader(new InputStreamReader(process.getInputStream()));
+    String string;
+
+    while ((string = inputReader.readLine()) != null) {
+      if (!string.isEmpty()) {
+        System.out.println(string);
+      }
+    }
+  }
+
+  private List<String> buildCommandAsList(String programName, Set<String> config) {
+    List<String> commandList = new ArrayList<>();
+
+    Adapter adapter;
+
+    if (programName.equals(DynamicRunningExampleMain.PROGRAM_NAME)) {
+      commandList.add("./examples.sh");
+      adapter = new DynamicRunningExampleAdapter.Builder().build();
+    }
+    else {
+      throw new RuntimeException("Could not find a phosphor script to run " + programName);
+    }
+
+    String[] configArgs = adapter.configurationAsMainArguments(config);
+    List<String> configList = Arrays.asList(configArgs);
+    commandList.addAll(configList);
+
+    return commandList;
   }
 
   static Set<Map<String, Boolean>> getExploringConstraints(
@@ -80,13 +159,13 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
   private Map<String, Set<String>> analyzePhosphorResults() throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
-    Collection<File> serializedFiles = getSerializedFiles(dir);
+    Collection<File> serializedFiles = this.getSerializedFiles(dir);
 
     if (serializedFiles.size() != 2) {
       throw new RuntimeException("The directory " + dir + " does not have 2 files.");
     }
 
-    return readPhosphorTaintResults(serializedFiles);
+    return this.readPhosphorTaintResults(serializedFiles);
   }
 
   static Set<Map<String, Boolean>> getExploredConstraints(
@@ -113,7 +192,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return currentConstraintsAlreadyExplored;
   }
 
-  private static Map<String, Boolean> toConstraint(Set<String> initialConfig,
+  private Map<String, Boolean> toConstraint(Set<String> initialConfig,
       Set<String> options) {
     Map<String, Boolean> constraint = new HashMap<>();
 
@@ -129,36 +208,36 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   @Override
   public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
-    Collection<File> serializedFiles = getSerializedFiles(dir);
+    Collection<File> serializedFiles = this.getSerializedFiles(dir);
 
     if (serializedFiles.size() != 2) {
       throw new RuntimeException("The directory " + dir + " does not have 2 files.");
     }
 
-    readPhosphorTaintResults(serializedFiles);
+    this.readPhosphorTaintResults(serializedFiles);
 
+    // TODO
     return null;
-
   }
 
-  private static Map<String, Set<String>> readPhosphorTaintResults(Collection<File> serializedFiles)
+  private Map<String, Set<String>> readPhosphorTaintResults(Collection<File> serializedFiles)
       throws IOException {
     Map<String, Set<TaintLabel>> sinksToTaintsFromTaints = new HashMap<>();
     Map<String, Set<TaintLabel>> sinksToTaintsFromStacks = new HashMap<>();
 
     for (File file : serializedFiles) {
       if (file.getName().contains("taints")) {
-        sinksToTaintsFromTaints = deserialize(file);
+        sinksToTaintsFromTaints = this.deserialize(file);
       }
       else {
-        sinksToTaintsFromStacks = deserialize(file);
+        sinksToTaintsFromStacks = this.deserialize(file);
       }
     }
 
-    Map<String, Set<TaintLabel>> sinksToTaintLabels = merge(sinksToTaintsFromTaints,
+    Map<String, Set<TaintLabel>> sinksToTaintLabels = this.merge(sinksToTaintsFromTaints,
         sinksToTaintsFromStacks);
 
-    Map<String, Set<String>> sinksToTaints = changeTaintLabelsToTaints(sinksToTaintLabels);
+    Map<String, Set<String>> sinksToTaints = this.changeTaintLabelsToTaints(sinksToTaintLabels);
 
 //    for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
 //      System.out.println(entry.getKey() + " --> " + entry.getValue());
@@ -167,7 +246,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return sinksToTaints;
   }
 
-  private static Map<String, Set<String>> changeTaintLabelsToTaints(
+  private Map<String, Set<String>> changeTaintLabelsToTaints(
       Map<String, Set<TaintLabel>> sinksToTaintLabels) {
     Map<String, Set<String>> sinksToTaints = new HashMap<>();
 
@@ -184,7 +263,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return sinksToTaints;
   }
 
-  private static Map<String, Set<TaintLabel>> merge(Map<String, Set<TaintLabel>> sinksToTaints1,
+  private Map<String, Set<TaintLabel>> merge(Map<String, Set<TaintLabel>> sinksToTaints1,
       Map<String, Set<TaintLabel>> sinksToTaints2) {
     Map<String, Set<TaintLabel>> sinksToTaints = new HashMap<>(sinksToTaints1);
 
@@ -204,7 +283,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return sinksToTaints;
   }
 
-  private static Map<String, Set<TaintLabel>> deserialize(File file)
+  private Map<String, Set<TaintLabel>> deserialize(File file)
       throws IOException {
     FileInputStream fis = new FileInputStream(file);
     ObjectInputStream ois = new ObjectInputStream(fis);
@@ -222,7 +301,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return sinksToTaints;
   }
 
-  private static Collection<File> getSerializedFiles(String dir) {
+  private Collection<File> getSerializedFiles(String dir) {
     File dirFile = new File(dir);
 
     return FileUtils.listFiles(dirFile, null, false);
@@ -280,14 +359,16 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
     }
 
-    Map<String, Boolean> constraintToEvaluate = pickNextConstraint(constraintsToEvaluate);
-    Set<String> config = buildConfig(constraintToEvaluate);
+    Map<String, Boolean> constraintToEvaluate = PhosphorAnalysis
+        .pickNextConstraint(constraintsToEvaluate);
+    Set<String> config = PhosphorAnalysis.buildConfig(constraintToEvaluate);
 
     return Pair.of(constraintToEvaluate, config);
   }
 
+  // TODO add test cases
   // TODO optimize how to pick the next constraint to evaluate, maybe pick the one with the most options? Merge constraints?
-  private static Map<String, Boolean> pickNextConstraint(
+  static Map<String, Boolean> pickNextConstraint(
       Set<Map<String, Boolean>> constraintsToEvaluate) {
     return constraintsToEvaluate.iterator().next();
   }

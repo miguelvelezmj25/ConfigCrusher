@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleMain;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,7 +15,7 @@ public class PhosphorAnalysisTest {
 
   @Test
   public void analyze_PhosphorRunningExample() throws IOException {
-    String programName = "running-example";
+    String programName = DynamicRunningExampleMain.PROGRAM_NAME;
 
     String[] args = new String[0];
 
@@ -170,7 +171,7 @@ public class PhosphorAnalysisTest {
     options.add("A");
     options.add("B");
 
-    String programName = "running-example";
+    String programName = DynamicRunningExampleMain.PROGRAM_NAME;
     PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
     analysis.dynamicAnalysis(initialConfig, options);
   }
@@ -191,6 +192,15 @@ public class PhosphorAnalysisTest {
 
     Assert.assertEquals(3, exploringConstraints.size());
     Assert.assertEquals(expectedExploringConstraints, exploringConstraints);
+  }
+
+  @Test
+  public void runPhosphorAnalysis() throws IOException, InterruptedException {
+    String programName = DynamicRunningExampleMain.PROGRAM_NAME;
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
+    Set<String> config = new HashSet<>();
+
+    analysis.runPhosphorAnalysis(config);
   }
 
   private Map<String, Boolean> buildConstraint_notB() {

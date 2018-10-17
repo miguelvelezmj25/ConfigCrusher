@@ -50,6 +50,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    */
   void dynamicAnalysis(Set<String> initialConfig, Set<String> options)
       throws IOException, InterruptedException {
+    if (options.isEmpty()) {
+      throw new IllegalArgumentException("The options cannot be empty");
+    }
+
     Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
     Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
     constraintsToExplore.add(PhosphorAnalysis.toConstraint(initialConfig, options));
@@ -198,6 +202,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    */
   static Set<Map<String, Boolean>> getAllCombinationsOfConstraints(
       Map<String, Boolean> constraintToExplore) {
+    if (constraintToExplore.isEmpty()) {
+      throw new IllegalArgumentException("The constraint to explore cannot be empty");
+    }
+
     Set<Map<String, Boolean>> exploringConstraints = new HashSet<>();
     Set<String> options = constraintToExplore.keySet();
     Set<Set<String>> optionsCombinations = Helper.getCombinations(options);
@@ -349,8 +357,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return sinksToTaints;
   }
 
-  private Map<String, Set<TaintLabel>> deserialize(File file)
-      throws IOException {
+  private Map<String, Set<TaintLabel>> deserialize(File file) throws IOException {
     FileInputStream fis = new FileInputStream(file);
     ObjectInputStream ois = new ObjectInputStream(fis);
     Map<String, Set<TaintLabel>> sinksToTaints;

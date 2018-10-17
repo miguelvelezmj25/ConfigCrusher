@@ -33,6 +33,9 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   private static final String PHOSPHOR_SCRIPTS_DIR = BaseAdapter.USER_HOME
       + "/Documents/Programming/Java/Projects/phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
 
+
+  private final Map<String, Set<Map<String, Boolean>>> map = new HashMap<>();
+
   PhosphorAnalysis(String programName) {
     super(programName);
   }
@@ -69,10 +72,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
       // TS := run_taint_analysis(P’, c)
       this.runPhosphorAnalysis(config);
-      Map<String, Set<String>> results = this.analyzePhosphorResults();
+      Map<String, Set<String>> sinksToTaints = this.analyzePhosphorResults();
 
       // CT := range(TS) // TS: S —> P(O)
-      Set<Set<String>> taintsAtSinks = new HashSet<>(results.values());
+      Set<Set<String>> taintsAtSinks = new HashSet<>(sinksToTaints.values());
       // CC := calc_constraints(CT)
       Set<Map<String, Boolean>> constraintsFromAnalysis = PhosphorAnalysis
           .calculateConstraints(taintsAtSinks);
@@ -278,6 +281,25 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return sinksToTaints;
   }
 
+  private void cached(Map<String, Set<String>> sinksToTaints) {
+    this.addSinks(sinksToTaints.keySet());
+  }
+
+  private void addInfo(Map<String, Set<String>> sinksToTaints) {
+    for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
+      String sink = entry.getKey();
+      this.map.get(entry.getKey());
+    }
+  }
+
+  private void addSinks(Set<String> sinks) {
+    for (String sink : sinks) {
+      if (!this.map.containsKey(sink)) {
+        this.map.put(sink, new HashSet<>());
+      }
+    }
+  }
+
   private Map<String, Set<String>> changeTaintLabelsToTaints(
       Map<String, Set<TaintLabel>> sinksToTaintLabels) {
     Map<String, Set<String>> sinksToTaints = new HashMap<>();
@@ -356,6 +378,23 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     }
 
     return constraints;
+  }
+
+  static Map<String, Set<Map<String, Boolean>>> calculateConstraintsPerSink(
+      Map<String, Set<String>> sinksToTaints) {
+    if (sinksToTaints.isEmpty()) {
+      throw new IllegalArgumentException("The taints to sinks map cannot be empty");
+    }
+
+    Map<String, Set<Map<String, Boolean>>> sinksToConstraints = new HashMap<>();
+
+    for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
+      Set<String> taintsAtSink = entry.getValue();
+      Set<Map<String, Boolean>> constraintsAtSink = PhosphorAnalysis.buildConstraints(taintsAtSink);
+      sinksToConstraints.put(entry.getKey(), constraintsAtSink);
+    }
+
+    return sinksToConstraints;
   }
 
   /**

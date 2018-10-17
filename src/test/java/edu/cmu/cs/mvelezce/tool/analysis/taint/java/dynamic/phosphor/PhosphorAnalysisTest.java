@@ -163,7 +163,7 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void dynamicAnalysis() throws IOException, InterruptedException {
+  public void dynamicRunningExample() throws IOException, InterruptedException {
     Set<String> initialConfig = new HashSet<>();
 
     Set<String> options = new HashSet<>();
@@ -200,6 +200,52 @@ public class PhosphorAnalysisTest {
     Set<String> config = new HashSet<>();
 
     analysis.runPhosphorAnalysis(config);
+  }
+
+  @Test
+  public void calculateConstraintsPerSink() {
+    Map<String, Set<String>> sinksToTaints = new HashMap<>();
+    String sink0 = "0";
+    String sink1 = "1";
+
+    Set<String> taints0 = new HashSet<>();
+    taints0.add("A");
+    sinksToTaints.put(sink0, taints0);
+
+    Set<String> taints1 = new HashSet<>();
+    taints1.add("A");
+    taints1.add("B");
+    sinksToTaints.put(sink1, taints1);
+
+    Set<Map<String, Boolean>> expectedConstraintsSink0 = new HashSet<>();
+    Map<String, Boolean> constraint_notA = this.buildConstraint_notA();
+    Map<String, Boolean> constraint_A = this.buildConstraint_A();
+    expectedConstraintsSink0.add(constraint_notA);
+    expectedConstraintsSink0.add(constraint_A);
+
+    Set<Map<String, Boolean>> expectedConstraintsSink1 = new HashSet<>();
+    Map<String, Boolean> constraint_notA_notB = this.buildConstraint_notA_notB();
+    Map<String, Boolean> constraint_notA_B = this.buildConstraint_notA_B();
+    Map<String, Boolean> constraint_A_notB = this.buildConstraint_A_notB();
+    Map<String, Boolean> constraint_A_B = this.buildConstraint_A_B();
+    expectedConstraintsSink1.add(constraint_notA_notB);
+    expectedConstraintsSink1.add(constraint_notA_B);
+    expectedConstraintsSink1.add(constraint_A_notB);
+    expectedConstraintsSink1.add(constraint_A_B);
+
+    Map<String, Set<Map<String, Boolean>>> sinksToConstraints = PhosphorAnalysis
+        .calculateConstraintsPerSink(sinksToTaints);
+
+    Assert.assertEquals(2, sinksToConstraints.size());
+
+    Assert.assertTrue(sinksToConstraints.containsKey(sink0));
+    Set<Map<String, Boolean>> constraintsAtSink0 = sinksToConstraints.get(sink0);
+    Assert.assertEquals(expectedConstraintsSink0, constraintsAtSink0);
+
+    Assert.assertTrue(sinksToConstraints.containsKey(sink1));
+    Set<Map<String, Boolean>> constraintsAtSink1 = sinksToConstraints.get(sink1);
+    Assert.assertEquals(expectedConstraintsSink1, constraintsAtSink1);
+
   }
 
   private Map<String, Boolean> buildConstraint_notB() {

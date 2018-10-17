@@ -176,7 +176,7 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void getExploringConstraints() {
+  public void getAllCombinationsOfConstraints_for3Constraints() {
     Map<String, Boolean> constraint_A_notB = this.buildConstraint_A_notB();
     Map<String, Boolean> constraint_A = this.buildConstraint_A();
     Map<String, Boolean> constraint_notB = this.buildConstraint_notB();
@@ -187,7 +187,7 @@ public class PhosphorAnalysisTest {
     expectedExploringConstraints.add(constraint_notB);
 
     Set<Map<String, Boolean>> exploringConstraints = PhosphorAnalysis
-        .getExploringConstraints(constraint_A_notB);
+        .getAllCombinationsOfConstraints(constraint_A_notB);
 
     Assert.assertEquals(3, exploringConstraints.size());
     Assert.assertEquals(expectedExploringConstraints, exploringConstraints);
@@ -203,7 +203,7 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void calculateConstraintsPerSink() {
+  public void calculateConstraintsPerSink_for2Sinks() {
     Map<String, Set<String>> sinksToTaints = new HashMap<>();
     String sink0 = "0";
     String sink1 = "1";
@@ -233,8 +233,9 @@ public class PhosphorAnalysisTest {
     expectedConstraintsSink1.add(constraint_A_notB);
     expectedConstraintsSink1.add(constraint_A_B);
 
-    Map<String, Set<Map<String, Boolean>>> sinksToConstraints = PhosphorAnalysis
-        .calculateConstraintsPerSink(sinksToTaints);
+    PhosphorAnalysis analysis = new PhosphorAnalysis(DynamicRunningExampleMain.PROGRAM_NAME);
+    analysis.calculateConstraintsPerSink(sinksToTaints);
+    Map<String, Set<Map<String, Boolean>>> sinksToConstraints = analysis.getSinksToConstraints();
 
     Assert.assertEquals(2, sinksToConstraints.size());
 
@@ -300,4 +301,5 @@ public class PhosphorAnalysisTest {
 
     return constraint;
   }
+
 }

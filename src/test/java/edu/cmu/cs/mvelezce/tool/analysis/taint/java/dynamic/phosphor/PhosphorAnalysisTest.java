@@ -163,9 +163,8 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void dynamicAnalysis() throws IOException {
+  public void dynamicAnalysis() throws IOException, InterruptedException {
     Set<String> initialConfig = new HashSet<>();
-    initialConfig.add("A");
 
     Set<String> options = new HashSet<>();
     options.add("A");

@@ -37,7 +37,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     super(programName);
   }
 
-  void dynamicAnalysis(Set<String> initialConfig, Set<String> options) throws IOException {
+  void dynamicAnalysis(Set<String> initialConfig, Set<String> options)
+      throws IOException, InterruptedException {
     Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
     Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
     constraintsToExplore.add(this.toConstraint(initialConfig, options));
@@ -54,7 +55,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       constraintsToExplore.removeAll(exploringConstraints);
       exploredConstraints.addAll(exploringConstraints);
 
-//      // TODO run the analysis
+      this.runPhosphorAnalysis(config);
       Map<String, Set<String>> results = this.analyzePhosphorResults();
       Set<Set<String>> taintsAtSinks = new HashSet<>(results.values());
       Set<Map<String, Boolean>> currentConstraints = PhosphorAnalysis

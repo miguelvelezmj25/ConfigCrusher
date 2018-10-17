@@ -24,28 +24,28 @@ public class PhosphorAnalysisTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void completeConfig_forEmptyConstraint() {
+  public void toConfig_forEmptyConstraint() {
     Map<String, Boolean> emptyConstraintToEvaluate = new HashMap<>();
 
-    PhosphorAnalysis.buildConfig(emptyConstraintToEvaluate);
+    PhosphorAnalysis.toConfig(emptyConstraintToEvaluate);
   }
 
   @Test
-  public void completeConfig_forConstraint_NotA_NotB() {
+  public void toConfig_forConstraint_NotA_NotB() {
     Map<String, Boolean> constraintToEvaluate = this.buildConstraint_notA_notB();
 
-    Set<String> config = PhosphorAnalysis.buildConfig(constraintToEvaluate);
+    Set<String> config = PhosphorAnalysis.toConfig(constraintToEvaluate);
     Assert.assertTrue(config.isEmpty());
   }
 
   @Test
-  public void completeConfig_forConstraint_A_notB() {
+  public void toConfig_forConstraint_A_notB() {
     Map<String, Boolean> constraintToEvaluate = this.buildConstraint_A_notB();
 
     Set<String> expectedConfig = new HashSet<>();
     expectedConfig.add("A");
 
-    Set<String> config = PhosphorAnalysis.buildConfig(constraintToEvaluate);
+    Set<String> config = PhosphorAnalysis.toConfig(constraintToEvaluate);
     Assert.assertEquals(expectedConfig, config);
   }
 
@@ -194,7 +194,7 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void runPhosphorAnalysis() throws IOException, InterruptedException {
+  public void runPhosphorAnalysis_forDynamicRunningExample() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleMain.PROGRAM_NAME;
     PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
     Set<String> config = new HashSet<>();
@@ -249,6 +249,38 @@ public class PhosphorAnalysisTest {
 
   }
 
+  @Test
+  public void toConstraint_forAllOptionsFalse() {
+    Map<String, Boolean> expectedConstraint = this.buildConstraint_notA_notB();
+
+    Set<String> config = new HashSet<>();
+
+    Set<String> options = new HashSet<>();
+    options.add("A");
+    options.add("B");
+
+    Map<String, Boolean> constraint = PhosphorAnalysis.toConstraint(config, options);
+
+    Assert.assertEquals(expectedConstraint, constraint);
+  }
+
+  @Test
+  public void toConstraint_forAllOptionsTrue() {
+    Map<String, Boolean> expectedConstraint = this.buildConstraint_A_B();
+
+    Set<String> config = new HashSet<>();
+    config.add("A");
+    config.add("B");
+
+    Set<String> options = new HashSet<>();
+    options.add("A");
+    options.add("B");
+
+    Map<String, Boolean> constraint = PhosphorAnalysis.toConstraint(config, options);
+
+    Assert.assertEquals(expectedConstraint, constraint);
+  }
+
   private Map<String, Boolean> buildConstraint_notB() {
     Map<String, Boolean> constraint = new HashMap<>();
     constraint.put("B", false);
@@ -301,5 +333,4 @@ public class PhosphorAnalysisTest {
 
     return constraint;
   }
-
 }

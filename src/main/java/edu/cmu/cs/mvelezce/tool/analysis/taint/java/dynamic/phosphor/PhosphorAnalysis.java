@@ -52,7 +52,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       throws IOException, InterruptedException {
     Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
     Set<Map<String, Boolean>> constraintsToExplore = new HashSet<>();
-    constraintsToExplore.add(this.toConstraint(initialConfig, options));
+    constraintsToExplore.add(PhosphorAnalysis.toConstraint(initialConfig, options));
 
     int count = 0;
 
@@ -73,6 +73,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       // TS := run_taint_analysis(P’, c)
       this.runPhosphorAnalysis(config);
       Map<String, Set<String>> sinksToTaints = this.analyzePhosphorResults();
+      this.calculateConstraintsPerSink(sinksToTaints);
 
       // CT := range(TS) // TS: S —> P(O)
       Set<Set<String>> taintsAtSinks = new HashSet<>(sinksToTaints.values());
@@ -92,6 +93,12 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     }
 
     System.out.println(count);
+    System.out.println("Constraints to evaluate");
+
+    for (Map.Entry<String, Set<Map<String, Boolean>>> entry : this.sinksToConstraints.entrySet()) {
+      System.out.println(entry.getValue());
+    }
+
   }
 
   /**
@@ -230,18 +237,20 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return currentConstraintsAlreadyExplored;
   }
 
-  private Map<String, Boolean> toConstraint(Set<String> initialConfig,
-      Set<String> options) {
+  static Map<String, Boolean> toConstraint(Set<String> config, Set<String> options) {
+    if (options.isEmpty()) {
+      throw new IllegalArgumentException("The options cannot be empty");
+    }
+
     Map<String, Boolean> constraint = new HashMap<>();
 
     for (String option : options) {
-      boolean value = initialConfig.contains(option);
+      boolean value = config.contains(option);
       constraint.put(option, value);
     }
 
     return constraint;
   }
-
 
   @Override
   public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
@@ -438,7 +447,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
     Map<String, Boolean> constraintToEvaluate = PhosphorAnalysis
         .pickNextConstraint(constraintsToEvaluate);
-    Set<String> config = PhosphorAnalysis.buildConfig(constraintToEvaluate);
+    Set<String> config = PhosphorAnalysis.toConfig(constraintToEvaluate);
 
     return Pair.of(constraintToEvaluate, config);
   }
@@ -460,14 +469,14 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    *
    * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
    */
-  static Set<String> buildConfig(Map<String, Boolean> constraintToEvaluate) {
-    if (constraintToEvaluate.isEmpty()) {
-      throw new IllegalArgumentException("The constraint to evaluate should not be empty");
+  static Set<String> toConfig(Map<String, Boolean> constraint) {
+    if (constraint.isEmpty()) {
+      throw new IllegalArgumentException("The constraint should not be empty");
     }
 
     Set<String> config = new HashSet<>();
 
-    for (Map.Entry<String, Boolean> entry : constraintToEvaluate.entrySet()) {
+    for (Map.Entry<String, Boolean> entry : constraint.entrySet()) {
       if (entry.getValue()) {
         config.add(entry.getKey());
       }

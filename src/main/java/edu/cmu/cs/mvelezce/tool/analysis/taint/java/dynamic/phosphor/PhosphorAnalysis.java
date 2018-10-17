@@ -37,6 +37,14 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     super(programName);
   }
 
+  /**
+   * Input: P, c in C, O
+   *
+   * Output: TODO
+   *
+   * Input: The program is provided elsewhere. Therefore, there is no need to pass the program to
+   * this method.
+   */
   void dynamicAnalysis(Set<String> initialConfig, Set<String> options)
       throws IOException, InterruptedException {
     Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
@@ -44,28 +52,38 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     constraintsToExplore.add(this.toConstraint(initialConfig, options));
 
     int count = 0;
+
     while (!constraintsToExplore.isEmpty()) {
-      Pair<Map<String, Boolean>, Set<String>> nextConstraint = PhosphorAnalysis.getNextConstraint(
-          constraintsToExplore);
+      // CTE, c := get_next_constraint(CE,O)
+      Pair<Map<String, Boolean>, Set<String>> nextConstraint = PhosphorAnalysis
+          .getNextConstraint(constraintsToExplore);
       Map<String, Boolean> constraintToExplore = nextConstraint.getLeft();
       Set<String> config = nextConstraint.getRight();
 
+      // CE.removeAll(CTE) // all sub constraints
       Set<Map<String, Boolean>> exploringConstraints = PhosphorAnalysis
           .getExploringConstraints(constraintToExplore);
       constraintsToExplore.removeAll(exploringConstraints);
+      // EC.addAll(CTE) // all sub constraints
       exploredConstraints.addAll(exploringConstraints);
 
+      // TS := run_taint_analysis(P’, c)
       this.runPhosphorAnalysis(config);
       Map<String, Set<String>> results = this.analyzePhosphorResults();
+
+      // CT := range(TS) // TS: S —> P(O)
       Set<Set<String>> taintsAtSinks = new HashSet<>(results.values());
-      Set<Map<String, Boolean>> currentConstraints = PhosphorAnalysis
+      // CC := calc_constraints(CT)
+      Set<Map<String, Boolean>> constraintsFromAnalysis = PhosphorAnalysis
           .calculateConstraints(taintsAtSinks);
 
+      // CC.removeAll(EC) // all explored constraints
       Set<Map<String, Boolean>> currentExploredConstraints = PhosphorAnalysis
           .getExploredConstraints(
-              currentConstraints, exploredConstraints);
-      currentConstraints.removeAll(currentExploredConstraints);
-      constraintsToExplore.addAll(currentConstraints);
+              constraintsFromAnalysis, exploredConstraints);
+      constraintsFromAnalysis.removeAll(currentExploredConstraints);
+      // CE.addAll(CC)
+      constraintsToExplore.addAll(constraintsFromAnalysis);
 
       count++;
     }
@@ -73,11 +91,18 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     System.out.println(count);
   }
 
+  /**
+   * Input: P', c in C
+   *
+   * Output: TS S --> P(O)
+   *
+   * Input: There is a script that this method calls to executed the instrumented program.
+   * Therefore, we do not not pass the instrumented program to this method.
+   *
+   * Output: This method only runs the phosphor analysis. There is another method that processes the
+   * results from the analysis.
+   */
   void runPhosphorAnalysis(Set<String> config) throws IOException, InterruptedException {
-    if (config == null) {
-      throw new IllegalArgumentException("The configuration cannot be null");
-    }
-
     ProcessBuilder builder = new ProcessBuilder();
 
     List<String> commandList = this.buildCommandAsList(this.getProgramName(), config);
@@ -158,6 +183,12 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return exploringConstraints;
   }
 
+  /**
+   * Helper method for running the phosphor analysis. This method processes the results of the
+   * analysis and returns the output specified in the algorithm.
+   *
+   * Output: TS: S --> P(O)
+   */
   private Map<String, Set<String>> analyzePhosphorResults() throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
     Collection<File> serializedFiles = this.getSerializedFiles(dir);
@@ -172,11 +203,11 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   static Set<Map<String, Boolean>> getExploredConstraints(
       Set<Map<String, Boolean>> currentConstraints,
       Set<Map<String, Boolean>> exploredConstraints) {
-    if (currentConstraints == null || currentConstraints.isEmpty()) {
+    if (currentConstraints.isEmpty()) {
       throw new IllegalArgumentException("The current constraints cannot be empty");
     }
 
-    if (exploredConstraints == null || exploredConstraints.isEmpty()) {
+    if (exploredConstraints.isEmpty()) {
       throw new IllegalArgumentException("The explored constraints cannot be empty");
     }
 
@@ -308,8 +339,13 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return FileUtils.listFiles(dirFile, null, false);
   }
 
+  /**
+   * Input: CT: P(P(O))
+   *
+   * Output: CC: set of constraint (i.e., partial configs)
+   */
   static Set<Map<String, Boolean>> calculateConstraints(Set<Set<String>> taintsAtSinks) {
-    if (taintsAtSinks == null || taintsAtSinks.isEmpty()) {
+    if (taintsAtSinks.isEmpty()) {
       throw new IllegalArgumentException("The taints at sinks cannot be empty");
     }
 
@@ -323,10 +359,12 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   }
 
   /**
-   * Builds a set of partial configurations
+   * Input: CTS in CT
+   *
+   * Output: CCS in CFA
    */
   static Set<Map<String, Boolean>> buildConstraints(Set<String> taintsAtSink) {
-    if (taintsAtSink == null || taintsAtSink.isEmpty()) {
+    if (taintsAtSink.isEmpty()) {
       throw new IllegalArgumentException("The taints at sink cannot be empty");
     }
 
@@ -348,15 +386,18 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   }
 
   /**
-   * In theory, this method should also take the set of options O of the program. However, since we
-   * represent options set to false by not including them in the set that represents configurations,
-   * there is no need to pass them in the method.
+   * Input: CE, O
+   *
+   * Output: CTE: P(CE), c in C
+   *
+   * Input: since we represent options set to false by not including them in the set that represents
+   * configurations, there is no need to pass them in the method.
    *
    * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
    */
   static Pair<Map<String, Boolean>, Set<String>> getNextConstraint(
       Set<Map<String, Boolean>> constraintsToEvaluate) {
-    if (constraintsToEvaluate == null || constraintsToEvaluate.isEmpty()) {
+    if (constraintsToEvaluate.isEmpty()) {
       throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
     }
 
@@ -369,8 +410,11 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
   // TODO add test cases
   // TODO optimize how to pick the next constraint to evaluate, maybe pick the one with the most options? Merge constraints?
-  static Map<String, Boolean> pickNextConstraint(
-      Set<Map<String, Boolean>> constraintsToEvaluate) {
+  static Map<String, Boolean> pickNextConstraint(Set<Map<String, Boolean>> constraintsToEvaluate) {
+    if (constraintsToEvaluate.isEmpty()) {
+      throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
+    }
+
     return constraintsToEvaluate.iterator().next();
   }
 
@@ -382,7 +426,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
    */
   static Set<String> buildConfig(Map<String, Boolean> constraintToEvaluate) {
-    if (constraintToEvaluate == null || constraintToEvaluate.isEmpty()) {
+    if (constraintToEvaluate.isEmpty()) {
       throw new IllegalArgumentException("The constraint to evaluate should not be empty");
     }
 

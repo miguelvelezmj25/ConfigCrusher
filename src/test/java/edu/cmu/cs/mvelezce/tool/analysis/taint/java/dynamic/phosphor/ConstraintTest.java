@@ -37,7 +37,7 @@ public class ConstraintTest {
 
   @Test
   public void toConstraint_forAllOptionsFalse() {
-    Map<String, Boolean> expectedConstraint = ConstraintTest.buildPartialConfig_notA_notB();
+    Map<String, Boolean> expectedPartialConfig = ConstraintTest.buildPartialConfig_notA_notB();
 
     Set<String> config = new HashSet<>();
 
@@ -45,14 +45,14 @@ public class ConstraintTest {
     options.add("A");
     options.add("B");
 
-    Map<String, Boolean> constraint = Constraint.toConstraint(config, options);
+    Map<String, Boolean> partialConfig = Constraint.toPartialConfig(config, options);
 
-    Assert.assertEquals(expectedConstraint, constraint);
+    Assert.assertEquals(expectedPartialConfig, partialConfig);
   }
 
   @Test
   public void toConstraint_forAllOptionsTrue() {
-    Map<String, Boolean> expectedConstraint = ConstraintTest.buildPartialConfig_A_B();
+    Map<String, Boolean> expectedPartialConfig = ConstraintTest.buildPartialConfig_A_B();
 
     Set<String> config = new HashSet<>();
     config.add("A");
@@ -62,9 +62,9 @@ public class ConstraintTest {
     options.add("A");
     options.add("B");
 
-    Map<String, Boolean> constraint = Constraint.toConstraint(config, options);
+    Map<String, Boolean> partialConfig = Constraint.toPartialConfig(config, options);
 
-    Assert.assertEquals(expectedConstraint, constraint);
+    Assert.assertEquals(expectedPartialConfig, partialConfig);
   }
 
   @Test
@@ -109,6 +109,67 @@ public class ConstraintTest {
     Constraint constraint = new Constraint(partialConfig, context);
 
     Assert.assertFalse(constraint.isValid());
+  }
+
+  @Test
+  public void isSubsetOf_forTrueEqualConstraints() {
+    Constraint constraint0 = new Constraint(buildPartialConfig_A());
+    Constraint constraint1 = new Constraint(buildPartialConfig_A());
+
+    Assert.assertTrue(constraint0.isSubsetOf(constraint1));
+    Assert.assertTrue(constraint1.isSubsetOf(constraint0));
+  }
+
+  @Test
+  public void isSubsetOf_forTrueEqualPartialConfigsEqualCtxs() {
+    Constraint constraint0 = new Constraint(buildPartialConfig_A(), buildPartialConfig_A());
+    Constraint constraint1 = new Constraint(buildPartialConfig_A(), buildPartialConfig_A());
+
+    Assert.assertTrue(constraint0.isSubsetOf(constraint1));
+    Assert.assertTrue(constraint1.isSubsetOf(constraint0));
+  }
+
+  @Test
+  public void isSubsetOf_forTrueDiffPartialConfigsEqualCtxs() {
+    Constraint constraint0 = new Constraint(buildPartialConfig_A(), buildPartialConfig_A());
+    Constraint constraint1 = new Constraint(buildPartialConfig_A_B(), buildPartialConfig_A());
+
+    Assert.assertTrue(constraint0.isSubsetOf(constraint1));
+  }
+
+  @Test
+  public void isSubsetOf_forTrueDiffCtx() {
+    Constraint constraint0 = new Constraint(buildPartialConfig_A(), buildPartialConfig_A());
+    Constraint constraint1 = new Constraint(buildPartialConfig_A_B(), buildPartialConfig_A_B());
+
+    Assert.assertTrue(constraint0.isSubsetOf(constraint1));
+  }
+
+  @Test
+  public void isSubsetOf_forFalseDiffPartialConfigs() {
+    Constraint constraint0 = new Constraint(buildPartialConfig_A());
+    Constraint constraint1 = new Constraint(buildPartialConfig_notA());
+
+    Assert.assertFalse(constraint0.isSubsetOf(constraint1));
+    Assert.assertFalse(constraint1.isSubsetOf(constraint0));
+  }
+
+  @Test
+  public void isSubsetOf_forFalseEqualPartialConfigsDiffCtxs() {
+    Constraint constraint0 = new Constraint(buildPartialConfig_A(), buildPartialConfig_A());
+    Constraint constraint1 = new Constraint(buildPartialConfig_A(), buildPartialConfig_B());
+
+    Assert.assertFalse(constraint0.isSubsetOf(constraint1));
+    Assert.assertFalse(constraint1.isSubsetOf(constraint0));
+  }
+
+  @Test
+  public void isSubsetOf_forFalseDiffCtx() {
+    Constraint constraint0 = new Constraint(buildPartialConfig_A(), buildPartialConfig_A());
+    Constraint constraint1 = new Constraint(buildPartialConfig_A_B(), buildPartialConfig_B());
+
+    Assert.assertFalse(constraint0.isSubsetOf(constraint1));
+    Assert.assertFalse(constraint1.isSubsetOf(constraint0));
   }
 
   static Map<String, Boolean> buildPartialConfig_B() {
@@ -170,5 +231,4 @@ public class ConstraintTest {
 
     return partialConfig;
   }
-
 }

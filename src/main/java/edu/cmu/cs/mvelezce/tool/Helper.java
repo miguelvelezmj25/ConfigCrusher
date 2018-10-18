@@ -7,10 +7,8 @@ import java.util.Random;
 import java.util.Set;
 import org.apache.commons.math3.util.Combinations;
 
-// TODO what is this class helping for?
-
 /**
- * Incling class for performing analyses.
+ * Helping class for performing analyses.
  *
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1
@@ -85,10 +83,7 @@ public class Helper {
       while (config.size() < num) {
         int index = opts.nextInt(length);
         String opt = options.get(index);
-
-        if (!config.contains(opt)) {
-          config.add(opt);
-        }
+        config.add(opt);
       }
 
       if (!configs.contains(config) && !excludeConfigs.contains(config)) {
@@ -102,12 +97,7 @@ public class Helper {
   public static Set<Set<String>> mergeConfigs(Set<Set<String>> configs1,
       Set<Set<String>> configs2) {
     Set<Set<String>> configs = new HashSet<>(configs1);
-
-    for (Set<String> config : configs2) {
-      if (!configs.contains(config)) {
-        configs.add(config);
-      }
-    }
+    configs.addAll(configs2);
 
     return configs;
   }

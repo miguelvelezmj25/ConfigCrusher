@@ -67,6 +67,57 @@ public class ConstraintTest {
     Assert.assertEquals(expectedConstraint, constraint);
   }
 
+  @Test
+  public void isValid_forValidConstraint_ContextNotInPartialConfig() {
+    Map<String, Boolean> partialConfig = buildPartialConfig_A();
+    Map<String, Boolean> context = ConstraintTest.buildPartialConfig_B();
+    Constraint constraint = new Constraint(partialConfig, context);
+
+    Assert.assertTrue(constraint.isValid());
+  }
+
+  @Test
+  public void isValid_forValidConstraint_ContextInPartialConfig() {
+    Map<String, Boolean> partialConfig = buildPartialConfig_A_notB();
+    Map<String, Boolean> context = ConstraintTest.buildPartialConfig_notB();
+    Constraint constraint = new Constraint(partialConfig, context);
+
+    Assert.assertTrue(constraint.isValid());
+  }
+
+  @Test
+  public void isValid_forValidConstraint_TrueContext() {
+    Map<String, Boolean> partialConfig = buildPartialConfig_A_notB();
+    Constraint constraint = new Constraint(partialConfig);
+
+    Assert.assertTrue(constraint.isValid());
+  }
+
+  @Test
+  public void isValid_forValidConstraint_SamePartialConfigAndContext() {
+    Map<String, Boolean> partialConfig = buildPartialConfig_A_notB();
+    Map<String, Boolean> context = ConstraintTest.buildPartialConfig_A_notB();
+    Constraint constraint = new Constraint(partialConfig, context);
+
+    Assert.assertTrue(constraint.isValid());
+  }
+
+  @Test
+  public void isValid_forInvalidConstraint() {
+    Map<String, Boolean> partialConfig = buildPartialConfig_A();
+    Map<String, Boolean> context = ConstraintTest.buildPartialConfig_notA();
+    Constraint constraint = new Constraint(partialConfig, context);
+
+    Assert.assertFalse(constraint.isValid());
+  }
+
+  static Map<String, Boolean> buildPartialConfig_B() {
+    Map<String, Boolean> partialConfig = new HashMap<>();
+    partialConfig.put("B", true);
+
+    return partialConfig;
+  }
+
   static Map<String, Boolean> buildPartialConfig_notB() {
     Map<String, Boolean> partialConfig = new HashMap<>();
     partialConfig.put("B", false);
@@ -119,4 +170,5 @@ public class ConstraintTest {
 
     return partialConfig;
   }
+
 }

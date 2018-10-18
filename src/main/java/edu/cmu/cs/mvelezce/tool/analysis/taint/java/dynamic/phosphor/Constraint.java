@@ -12,6 +12,10 @@ public class Constraint {
   private final Map<String, Boolean> context;
 
   Constraint(Map<String, Boolean> partialConfig, Map<String, Boolean> context) {
+    if (partialConfig.isEmpty()) {
+      throw new IllegalArgumentException("The partial config cannot be empty");
+    }
+
     this.partialConfig = partialConfig;
     this.context = context;
 
@@ -32,6 +36,36 @@ public class Constraint {
 
   public Set<String> getPartialConfigAsSet() {
     return partialConfigAsSet;
+  }
+
+  /**
+   * Checks whether the partial configuration can be executed under the condition specified in the
+   * context.
+   *
+   * Example: partialConfig={A=false, B=false} ctx={A=false} is a valid constraint.
+   * partialConfig={A=false, B=false} ctx={A=true} is an invalid constraint
+   */
+  public boolean isValid() {
+    if(this.context.isEmpty() || this.context.equals(this.partialConfig)) {
+      return true;
+    }
+
+    for (Map.Entry<String, Boolean> entry : this.context.entrySet()) {
+      String option = entry.getKey();
+
+      if (!this.partialConfig.containsKey(option)) {
+        continue;
+      }
+
+      boolean partialConfigValue = this.partialConfig.get(option);
+      boolean value = entry.getValue();
+
+      if (partialConfigValue != value) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /**
@@ -74,9 +108,21 @@ public class Constraint {
 
   @Override
   public String toString() {
+    String partialConfig = "{}";
+
+    if (!this.partialConfig.isEmpty()) {
+      partialConfig = this.partialConfig.toString();
+    }
+
+    String context = "True";
+
+    if (!this.context.isEmpty()) {
+      context = this.context.toString();
+    }
+
     return "Constraint{" +
         "partialConfig=" + partialConfig +
-        ", context=" + context +
+        ", ctx=" + context +
         '}';
   }
 }

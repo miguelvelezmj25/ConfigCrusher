@@ -8,16 +8,15 @@ import java.util.Map;
 import java.util.Set;
 
 // TODO use generics for the ? extends region
-public interface Analysis {
+public interface Analysis<T> {
 
-  Map<JavaRegion, Set<Set<String>>> analyze() throws IOException;
+  Map<JavaRegion, T> analyze() throws IOException;
 
-  Map<JavaRegion, Set<Set<String>>> analyze(String[] args) throws IOException;
+  Map<JavaRegion, T> analyze(String[] args) throws IOException;
 
-  void writeToFile(Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions)
-      throws IOException;
+  void writeToFile(Map<JavaRegion, T> relevantRegionsToOptions) throws IOException;
 
-  Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException;
+  Map<JavaRegion, T> readFromFile(File file) throws IOException;
 
   Map<Region, Set<Set<String>>> transform(
       Map<? extends Region, Set<Set<String>>> regionsToOptionSet);

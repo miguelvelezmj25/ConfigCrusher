@@ -102,7 +102,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   }
 
   @Override
-  public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
+  public Map<JavaRegion, Set<Map<String, Boolean>>> analyze() throws IOException {
     throw new UnsupportedOperationException("Implement");
 //    String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
 //    Collection<File> serializedFiles = this.getSerializedFiles(dir);

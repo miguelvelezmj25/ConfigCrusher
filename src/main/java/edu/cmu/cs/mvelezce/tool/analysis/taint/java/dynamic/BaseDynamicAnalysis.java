@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
-public abstract class BaseDynamicAnalysis implements DynamicAnalysis {
+public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Map<String, Boolean>>> {
 
   protected static final String DIRECTORY = Options.DIRECTORY + "/analysis/java/dynamic/programs";
 
@@ -21,38 +21,40 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis {
   }
 
   @Override
-  public Map<JavaRegion, Set<Set<String>>> analyze(String[] args) throws IOException {
-    Options.getCommandLine(args);
-
-    String outputFile = BaseDynamicAnalysis.DIRECTORY + "/" + this.programName;
-    File file = new File(outputFile);
-
-    Options.checkIfDeleteResult(file);
-
-    if (file.exists()) {
-      Collection<File> files = FileUtils.listFiles(file, null, true);
-
-      if (files.size() != 1) {
-        throw new RuntimeException(
-            "We expected to find 1 file in the directory, but that is not the case "
-                + outputFile);
-      }
-
-      return this.readFromFile(files.iterator().next());
-    }
-
-    Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = this.analyze();
-
-//        if(Options.checkIfSave()) {
-//            this.writeToFile(regionsToOptionsSet);
-//        }
-
-    return regionsToOptionsSet;
+  public Map<JavaRegion, Set<Map<String, Boolean>>> analyze(String[] args) throws IOException {
+    throw new UnsupportedOperationException("Implement");
+//    Options.getCommandLine(args);
+//
+//    String outputFile = BaseDynamicAnalysis.DIRECTORY + "/" + this.programName;
+//    File file = new File(outputFile);
+//
+//    Options.checkIfDeleteResult(file);
+//
+//    if (file.exists()) {
+//      Collection<File> files = FileUtils.listFiles(file, null, true);
+//
+//      if (files.size() != 1) {
+//        throw new RuntimeException(
+//            "We expected to find 1 file in the directory, but that is not the case "
+//                + outputFile);
+//      }
+//
+//      return this.readFromFile(files.iterator().next());
+//    }
+//
+//    Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = this.analyze();
+//
+////        if(Options.checkIfSave()) {
+////            this.writeToFile(regionsToOptionsSet);
+////        }
+//
+//    return regionsToOptionsSet;
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions)
+  public void writeToFile(Map<JavaRegion, Set<Map<String, Boolean>>> relevantRegionsToOptions)
       throws IOException {
+    throw new UnsupportedOperationException("Implement");
 //        ObjectMapper mapper = new ObjectMapper();
 //        String outputFile = BaseDynamicAnalysis.DIRECTORY + "/" + this.programName + "/" + this.programName
 //                + Options.DOT_JSON;
@@ -70,7 +72,8 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis {
   }
 
   @Override
-  public Map<JavaRegion, Set<Set<String>>> readFromFile(File file) {
+  public Map<JavaRegion, Set<Map<String, Boolean>>> readFromFile(File file) {
+    throw new UnsupportedOperationException("Implement");
 //        ObjectMapper mapper = new ObjectMapper();
 //        List<DecisionAndOptions> results = mapper.readValue(file, new TypeReference<List<DecisionAndOptions>>() {
 //        });
@@ -81,12 +84,13 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis {
 //        }
 //
 //        return regionsToOptionsSet;
-    return null;
+//    return null;
   }
 
   // TODO should this be static helper method?
   public Map<Region, Set<Set<String>>> transform(
       Map<? extends Region, Set<Set<String>>> regionsToOptionSet) {
+    throw new UnsupportedOperationException("Implement");
 //        Map<Region, Set<Set<String>>> result = new HashMap<>();
 //
 //        for(Map.Entry<? extends Region, Set<Set<String>>> entry : regionsToOptionSet.entrySet()) {
@@ -95,7 +99,7 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis {
 //        }
 //
 //        return result;
-    return null;
+//    return null;
   }
 
   public String getProgramName() {

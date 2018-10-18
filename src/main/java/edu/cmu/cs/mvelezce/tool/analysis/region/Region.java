@@ -71,7 +71,6 @@ public class Region {
     this.startTime(System.nanoTime());
   }
 
-
   public void enter(long startTime) {
     this.startTime(startTime);
   }

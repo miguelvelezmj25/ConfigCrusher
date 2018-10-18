@@ -9,8 +9,9 @@ import javax.annotation.Nullable;
 public class Constraint {
 
   private final Map<String, Boolean> partialConfig;
-  private final Set<String> partialConfigAsConfig;
   private final Map<String, Boolean> context;
+  private final Map<String, Boolean> constraint = new HashMap<>();
+  private final Set<String> partialConfigAsConfig;
   private final Set<String> constraintAsConfig = new HashSet<>();
 
   @Nullable
@@ -35,6 +36,9 @@ public class Constraint {
     }
 
     this.constraintAsConfig.addAll(this.partialConfigAsConfig);
+
+    this.constraint.putAll(this.partialConfig);
+    this.constraint.putAll(this.context);
   }
 
   Constraint(Map<String, Boolean> partialConfig) {
@@ -45,21 +49,25 @@ public class Constraint {
     return partialConfig;
   }
 
+  public Map<String, Boolean> getContext() {
+    return context;
+  }
+
+  public Map<String, Boolean> getConstraint() {
+    return constraint;
+  }
+
   public Set<String> getPartialConfigAsConfig() {
     return partialConfigAsConfig;
   }
 
-  public Map<String, Boolean> getContext() {
-    return context;
+  public Set<String> getConstraintAsConfig() {
+    return constraintAsConfig;
   }
 
   @Nullable
   public Set<String> getContextAsConfig() {
     return contextAsConfig;
-  }
-
-  public Set<String> getConstraintAsConfig() {
-    return constraintAsConfig;
   }
 
   /**
@@ -93,15 +101,7 @@ public class Constraint {
   }
 
   boolean isSubsetOf(Constraint constraint) {
-    if (this.equals(constraint)) {
-      return true;
-    }
-
-    if (!constraint.partialConfig.entrySet().containsAll(this.partialConfig.entrySet())) {
-      return false;
-    }
-
-    return constraint.context.entrySet().containsAll(this.context.entrySet());
+    return constraint.constraint.entrySet().containsAll(this.constraint.entrySet());
   }
 
   /**

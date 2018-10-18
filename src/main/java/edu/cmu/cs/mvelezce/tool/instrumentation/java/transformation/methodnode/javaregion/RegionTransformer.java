@@ -554,6 +554,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
       TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
       MethodTracer tracer = classInspector.visitClass();
 
+      // TODO there is a bug in the pretty print since it is not showing the instructions that were added
       for (MethodNode methodNode : methodsToInstrument) {
         Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
         PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);

@@ -65,7 +65,7 @@ public class EmailMain extends BaseMain {
     }
 
     if (mainClass.contains("PL_Interface_impl")) {
-      Region program = new Region(Regions.PROGRAM_REGION_ID);
+      Region program = new Region.Builder(Regions.PROGRAM_REGION_ID).build();
 
       try {
         Regions.enter(program.getRegionID());

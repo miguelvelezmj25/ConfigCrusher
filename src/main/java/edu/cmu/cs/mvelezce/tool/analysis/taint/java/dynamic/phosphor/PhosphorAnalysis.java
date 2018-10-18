@@ -101,6 +101,22 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     this.getConfigsForCC();
   }
 
+  @Override
+  public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
+    throw new UnsupportedOperationException("Implement");
+//    String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
+//    Collection<File> serializedFiles = this.getSerializedFiles(dir);
+//
+//    if (serializedFiles.size() != 2) {
+//      throw new RuntimeException("The directory " + dir + " does not have 2 files.");
+//    }
+//
+//    this.readPhosphorTaintResults(serializedFiles);
+//
+//    // TODO
+//    return null;
+  }
+
   Set<Set<String>> getConfigsForCC() {
     Set<Map<String, Boolean>> ccConstraints = this.getAllConstraints();
     Set<Set<String>> configs = new HashSet<>();
@@ -143,10 +159,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     builder.directory(new File(PHOSPHOR_SCRIPTS_DIR));
     Process process = builder.start();
 
-    this.processOutput(process);
-    System.out.println();
-    this.processError(process);
-    System.out.println();
+    Helper.processOutput(process);
+    Helper.processError(process);
 
     process.waitFor();
   }
@@ -279,21 +293,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return constraint;
   }
 
-  @Override
-  public Map<JavaRegion, Set<Set<String>>> analyze() throws IOException {
-    String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
-    Collection<File> serializedFiles = this.getSerializedFiles(dir);
-
-    if (serializedFiles.size() != 2) {
-      throw new RuntimeException("The directory " + dir + " does not have 2 files.");
-    }
-
-    this.readPhosphorTaintResults(serializedFiles);
-
-    // TODO
-    return null;
-  }
-
+  // TODO separate the taints from the taints and from the stacks
   private Map<String, Set<String>> readPhosphorTaintResults(Collection<File> serializedFiles)
       throws IOException {
     Map<String, Set<TaintLabel>> sinksToTaintsFromTaints = new HashMap<>();

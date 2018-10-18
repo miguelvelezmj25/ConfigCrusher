@@ -44,7 +44,7 @@ public class SPLatDelayPerformanceModelBuilder implements PerformanceModelBuilde
         configurationToPerformance.remove(intercept);
 
         Map<Region, Map<Set<String>, Double>> regionToConfigurationPerformance = new HashMap<>();
-        Region programRegion = new Region("program");
+        Region programRegion = new Region.Builder("program").build();
         regionToConfigurationPerformance.put(programRegion, configurationToPerformance);
 
         PerformanceModel pm = new SPLatDelayPerformanceModel(baseTime, regionToConfigurationPerformance);

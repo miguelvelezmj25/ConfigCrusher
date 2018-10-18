@@ -22,7 +22,7 @@ public class PngtasticMain {
         String[] pngtasticArgs = Arrays.copyOfRange(args, 2, args.length);
 
         if(mainClass.equals("com.googlecode.pngtastic.PngtasticColorCounter")) {
-            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Region program = new Region.Builder(Regions.PROGRAM_REGION_ID).build();
             Regions.enter(program.getRegionID());
 //            PngtasticColorCounter.main(pngtasticArgs);
             Regions.exit(program.getRegionID());

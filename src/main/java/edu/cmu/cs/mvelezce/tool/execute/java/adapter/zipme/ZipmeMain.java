@@ -24,7 +24,7 @@ public class ZipmeMain {
 
         try {
             if(mainClass.equals("edu.cmu.cs.mvelezce.ZipMain")) {
-                Region program = new Region(Regions.PROGRAM_REGION_ID);
+                Region program = new Region.Builder(Regions.PROGRAM_REGION_ID).build();
                 Regions.enter(program.getRegionID());
 //                ZipMain.main(zipmeArgs);
                 Regions.exit(program.getRegionID());

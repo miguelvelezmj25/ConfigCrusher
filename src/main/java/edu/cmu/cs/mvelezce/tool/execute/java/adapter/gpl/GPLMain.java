@@ -22,7 +22,7 @@ public class GPLMain {
         String[] gplArgs = Arrays.copyOfRange(args, 2, args.length);
 
         if(mainClass.equals("edu.cmu.cs.mvelezce.Main")) {
-            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Region program = new Region.Builder(Regions.PROGRAM_REGION_ID).build();
             Regions.enter(program.getRegionID());
 //            Main.main(gplArgs);
             Regions.exit(program.getRegionID());

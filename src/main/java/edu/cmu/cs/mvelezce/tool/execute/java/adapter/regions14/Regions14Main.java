@@ -63,7 +63,7 @@ public class Regions14Main extends BaseMain {
         }
 
         if(mainClass.contains("Regions14")) {
-            Region program = new Region(Regions.PROGRAM_REGION_ID);
+            Region program = new Region.Builder(Regions.PROGRAM_REGION_ID).build();
 
             try {
                 Regions.enter(program.getRegionID());

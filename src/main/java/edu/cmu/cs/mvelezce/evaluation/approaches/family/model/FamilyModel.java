@@ -19,7 +19,7 @@ public class FamilyModel extends ApproachPerformanceModel {
         this.setBaseTimeHumanReadable(basetime);
         model.remove(FamilyModelBuilder.BASE);
 
-        Region progRegion= new Region("program");
+        Region progRegion= new Region.Builder("program").build();
         Map<Region, Map<Set<String>, Double>> regionMap = new HashMap<>();
         regionMap.put(progRegion, model);
 

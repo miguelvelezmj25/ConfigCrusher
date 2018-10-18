@@ -32,7 +32,7 @@ public class DefaultPerformanceEntry implements PerformanceEntry {
         Map<String, Long> regionsToPerf = execution.getRegionsToProcessedPerformance();
 
         for(Map.Entry<String, Long> entry : regionsToPerf.entrySet()) {
-            Region region = new Region(entry.getKey());
+            Region region = new Region.Builder(entry.getKey()).build();
             this.regionsToProcessedPerformance.put(region, entry.getValue());
         }
 

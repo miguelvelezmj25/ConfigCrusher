@@ -87,7 +87,7 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis {
         Map<Region, Set<Set<String>>> result = new HashMap<>();
 
         for(Map.Entry<? extends Region, Set<Set<String>>> entry : regionsToOptionSet.entrySet()) {
-            Region region = new Region(entry.getKey().getRegionID());
+            Region region = new Region.Builder(entry.getKey().getRegionID()).build();
             result.put(region, entry.getValue());
         }
 

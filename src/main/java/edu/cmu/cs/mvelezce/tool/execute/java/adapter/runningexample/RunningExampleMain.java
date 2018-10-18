@@ -67,7 +67,7 @@ public class RunningExampleMain extends BaseMain {
     }
 
     if (mainClass.contains("Example")) {
-      Region program = new Region(Regions.PROGRAM_REGION_ID);
+      Region program = new Region.Builder(Regions.PROGRAM_REGION_ID).build();
 
       try {
         Regions.enter(program.getRegionID());

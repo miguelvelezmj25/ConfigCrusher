@@ -65,7 +65,7 @@ public class ConfigCrusher {
 
     public void compile() throws IOException, InterruptedException {
         Instrumenter compiler = new CompileInstrumenter(this.srcDir, this.classDir);
-        compiler.compileFromSource();
+        compiler.compile();
     }
 
     public void format() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {

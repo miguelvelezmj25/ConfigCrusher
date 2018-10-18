@@ -9,11 +9,9 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleMain;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +32,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   private static final String PHOSPHOR_SCRIPTS_DIR = BaseAdapter.USER_HOME
       + "/Documents/Programming/Java/Projects/phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
 
-  private final Map<String, Set<Map<String, Boolean>>> sinksToConstraints = new HashMap<>();
+  private final Map<String, Set<Constraint>> sinksToConstraints = new HashMap<>();
 
   PhosphorAnalysis(String programName) {
     super(programName);
@@ -117,27 +115,27 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 //    return null;
   }
 
-  Set<Set<String>> getConfigsForCC() {
-    Set<Map<String, Boolean>> ccConstraints = this.getAllConstraints();
-    Set<Set<String>> configs = new HashSet<>();
+//  Set<Set<String>> getConfigsForCC() {
+//    Set<Constraint> ccConstraints = this.getAllConstraints();
+//    Set<Set<String>> configs = new HashSet<>();
+//
+//    for (Constraint ccConstraint : ccConstraints) {
+//      Set<String> config = Constraint.toConfig(ccConstraint);
+//      configs.add(config);
+//    }
+//
+//    System.out.println(configs);
+//    return configs;
+//  }
 
-    for (Map<String, Boolean> ccConstraint : ccConstraints) {
-      Set<String> config = Constraint.toConfig(ccConstraint);
-      configs.add(config);
+  private Set<Constraint> getAllConstraints() {
+    Set<Constraint> allConstraints = new HashSet<>();
+
+    for (Set<Constraint> constraints : this.sinksToConstraints.values()) {
+      allConstraints.addAll(constraints);
     }
 
-    System.out.println(configs);
-    return configs;
-  }
-
-  private Set<Map<String, Boolean>> getAllConstraints() {
-    Set<Map<String, Boolean>> ccConstraints = new HashSet<>();
-
-    for (Set<Map<String, Boolean>> constraints : this.sinksToConstraints.values()) {
-      ccConstraints.addAll(constraints);
-    }
-
-    return ccConstraints;
+    return allConstraints;
   }
 
   /**
@@ -163,32 +161,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     Helper.processError(process);
 
     process.waitFor();
-  }
-
-  private void processError(Process process) throws IOException {
-    System.out.println("Errors: ");
-    BufferedReader errorReader =
-        new BufferedReader(new InputStreamReader(process.getErrorStream()));
-    String string;
-
-    while ((string = errorReader.readLine()) != null) {
-      if (!string.isEmpty()) {
-        System.out.println(string);
-      }
-    }
-  }
-
-  private void processOutput(Process process) throws IOException {
-    System.out.println("Output: ");
-    BufferedReader inputReader =
-        new BufferedReader(new InputStreamReader(process.getInputStream()));
-    String string;
-
-    while ((string = inputReader.readLine()) != null) {
-      if (!string.isEmpty()) {
-        System.out.println(string);
-      }
-    }
   }
 
   private List<String> buildCommandAsList(String programName, Set<String> config) {
@@ -243,7 +215,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    *
    * Output: TS: S --> (P(O), P(O))
    */
-  private Pair<Map<String, Set<String>>, Map<String, Set<String>>> analyzePhosphorResults() throws IOException {
+  private Pair<Map<String, Set<String>>, Map<String, Set<String>>> analyzePhosphorResults()
+      throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
     Collection<File> serializedFiles = this.getSerializedFiles(dir);
 
@@ -299,17 +272,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
         .changeTaintLabelsToTaints(sinksToTaintLabelsFromContext);
 
     return Pair.of(sinksToTaintsFromTaints, sinksToTaintsFromContext);
-
-//    Map<String, Set<TaintLabel>> sinksToTaintLabels = this.merge(sinksToTaintsFromTaints,
-//        sinksToTaintsFromStacks);
-//
-//    Map<String, Set<String>> sinksToTaints = this.changeTaintLabelsToTaints(sinksToTaintLabels);
-//
-//    for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
-//      System.out.println(entry.getKey() + " --> " + entry.getValue());
-//    }
-//
-//    return sinksToTaints;
   }
 
   private Map<String, Set<String>> changeTaintLabelsToTaints(
@@ -385,13 +347,15 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     Set<Map<String, Boolean>> constraints = new HashSet<>();
 
     for (Set<String> taintsAtSink : taintsAtSinks) {
-      constraints.addAll(PhosphorAnalysis.buildConstraints(taintsAtSink));
+      constraints.addAll(PhosphorAnalysis.buildPartialConfigs(taintsAtSink));
     }
 
     return constraints;
   }
 
-  void calculateConstraintsPerSink(Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults) {
+  void calculateConstraintsPerSink(
+      Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults,
+      Set<String> config) {
     Map<String, Set<String>> sinksToTaintsFromTaints = sinksToTaintsResults.getLeft();
     Map<String, Set<String>> sinksToTaintsFromContext = sinksToTaintsResults.getRight();
 
@@ -399,17 +363,49 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       throw new IllegalArgumentException("The sinks to taints result cannot be empty");
     }
 
-    this.addNewSinks(sinksToTaintsFromContext.keySet());
+    Set<String> executedSinks = sinksToTaintsFromContext.keySet();
+    this.addNewSinks(executedSinks);
 
-//    for (Map.Entry<String, Set<String>> entry : sinksToTaints.entrySet()) {
-//      String sink = entry.getKey();
-//      Set<String> taintsAtSink = entry.getValue();
-//      Set<Map<String, Boolean>> constraintsAtSink = PhosphorAnalysis.buildConstraints(taintsAtSink);
-//
-//      Set<Map<String, Boolean>> currentConstraints = this.sinksToConstraints.get(sink);
-//      currentConstraints.addAll(constraintsAtSink);
-//      this.sinksToConstraints.put(entry.getKey(), currentConstraints);
-//    }
+    for (String sink : executedSinks) {
+      Set<Constraint> constraintsAtSink = this
+          .buildConstraints(sinksToTaintsFromTaints.get(sink), sinksToTaintsFromContext.get(sink),
+              config);
+
+      this.sinksToConstraints.put(sink, constraintsAtSink);
+    }
+
+  }
+
+  private Set<Constraint> buildConstraints(Set<String> taintsFromTaint,
+      Set<String> taintsFromContext, Set<String> config) {
+    Set<Constraint> constraints = new HashSet<>();
+
+    Set<Map<String, Boolean>> partialConfigs = PhosphorAnalysis
+        .buildPartialConfigs(taintsFromTaint);
+    Map<String, Boolean> context = this.buildContext(taintsFromContext, config);
+
+    for (Map<String, Boolean> partialConfig : partialConfigs) {
+      constraints.add(new Constraint(partialConfig, context));
+    }
+
+    PhosphorAnalysis.removeInvalidConstraints(constraints);
+
+    return constraints;
+  }
+
+  static void removeInvalidConstraints(Set<Constraint> constraints) {
+    constraints.removeIf(constraint -> !constraint.isValid());
+  }
+
+  private Map<String, Boolean> buildContext(Set<String> taintsFromContext,
+      Set<String> config) {
+    Map<String, Boolean> context = new HashMap<>();
+
+    for (String taint : taintsFromContext) {
+      context.put(taint, config.contains(taint));
+    }
+
+    return context;
   }
 
   private void addNewSinks(Set<String> sinks) {
@@ -425,7 +421,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    *
    * Output: CCS in CFA
    */
-  static Set<Map<String, Boolean>> buildConstraints(Set<String> taintsAtSink) {
+  static Set<Map<String, Boolean>> buildPartialConfigs(Set<String> taintsAtSink) {
     if (taintsAtSink.isEmpty()) {
       throw new IllegalArgumentException("The taints at sink cannot be empty");
     }
@@ -479,12 +475,12 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return constraintsToEvaluate.iterator().next();
   }
 
-  Map<String, Set<Map<String, Boolean>>> getSinksToConstraints() {
+  Map<String, Set<Constraint>> getSinksToConstraints() {
     return sinksToConstraints;
   }
 
   @VisibleForTesting
-  void addSinksToConstraints(Map<String, Set<Map<String, Boolean>>> sinksToConstraints) {
+  void addSinksToConstraints(Map<String, Set<Constraint>> sinksToConstraints) {
     this.sinksToConstraints.putAll(sinksToConstraints);
   }
 }

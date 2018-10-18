@@ -1,5 +1,8 @@
 package edu.cmu.cs.mvelezce.tool;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -100,6 +103,36 @@ public class Helper {
     configs.addAll(configs2);
 
     return configs;
+  }
+
+  public static void processOutput(Process process) throws IOException {
+    System.out.println("Output: ");
+    BufferedReader inputReader =
+        new BufferedReader(new InputStreamReader(process.getInputStream()));
+    String string;
+
+    while ((string = inputReader.readLine()) != null) {
+      if (!string.isEmpty()) {
+        System.out.println(string);
+      }
+    }
+
+    System.out.println();
+  }
+
+  public static void processError(Process process) throws IOException {
+    System.out.println("Errors: ");
+    BufferedReader errorReader =
+        new BufferedReader(new InputStreamReader(process.getErrorStream()));
+    String string;
+
+    while ((string = errorReader.readLine()) != null) {
+      if (!string.isEmpty()) {
+        System.out.println(string);
+      }
+    }
+
+    System.out.println();
   }
 
 }

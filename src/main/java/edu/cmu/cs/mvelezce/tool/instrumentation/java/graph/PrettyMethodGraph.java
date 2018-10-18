@@ -69,7 +69,6 @@ public class PrettyMethodGraph extends MethodGraph {
         Set<MethodBlock> blocks = this.getBlocks();
         Set<PrettyMethodBlock> prettyBlocks = new HashSet<>();
 
-
         for(MethodBlock methodBlock : blocks) {
             if(methodBlock == this.getEntryBlock() || methodBlock == this.getExitBlock()) {
                 continue;

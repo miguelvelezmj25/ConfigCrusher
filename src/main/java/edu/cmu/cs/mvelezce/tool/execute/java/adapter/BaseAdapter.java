@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
+import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
 import java.io.BufferedReader;
 import java.io.File;
@@ -116,51 +117,14 @@ public abstract class BaseAdapter implements Adapter {
     String[] command = this.buildCommand(commandList);
     Process process = Runtime.getRuntime().exec(command);
 
-    this.processOutput(process);
-    System.out.println();
-    this.processError(process);
-    System.out.println();
+    Helper.processOutput(process);
+    Helper.processError(process);
 
     process.waitFor();
 
     //    if (!output.toString().isEmpty()) {
     //      throw new IOException();
     //    }
-  }
-
-  private void processError(Process process) throws IOException {
-    System.out.println("Errors: ");
-    //    output = new StringBuilder();
-    BufferedReader errorReader =
-        new BufferedReader(new InputStreamReader(process.getErrorStream()));
-    String string;
-
-    while ((string = errorReader.readLine()) != null) {
-      if (!string.isEmpty()) {
-        System.out.println(string);
-        //        output.append(string).append("\n");
-      }
-    }
-
-    //    System.out.println(output);
-  }
-
-  private void processOutput(Process process) throws IOException {
-    System.out.println("Output: ");
-    BufferedReader inputReader =
-        new BufferedReader(new InputStreamReader(process.getInputStream()));
-    String string;
-
-    //    StringBuilder output = new StringBuilder();
-
-    while ((string = inputReader.readLine()) != null) {
-      if (!string.isEmpty()) {
-        System.out.println(string);
-        //        output.append(string).append("\n");
-      }
-    }
-
-    //    System.out.println(output);
   }
 
   private String[] buildCommand(List<String> commandList) {
@@ -198,22 +162,22 @@ public abstract class BaseAdapter implements Adapter {
     return commandList;
   }
 
-  private String getMVNLocalRepoAsClassPath() {
-    Collection<File> m2Files = getM2Files();
-    StringBuilder m2FilesAsClassPath = new StringBuilder();
-
-    for (File jarFile : m2Files) {
-      m2FilesAsClassPath.append(jarFile);
-      m2FilesAsClassPath.append(BaseAdapter.PATH_SEPARATOR);
-    }
-
-    m2FilesAsClassPath.deleteCharAt(m2FilesAsClassPath.length() - 1);
-
-    return m2FilesAsClassPath.toString();
-  }
-
-  private Collection<File> getM2Files() {
-    File m2Dir = new File(CompileInstrumenter.M2_DIR);
-    return FileUtils.listFiles(m2Dir, new String[]{"jar"}, true);
-  }
+//  private String getMVNLocalRepoAsClassPath() {
+//    Collection<File> m2Files = getM2Files();
+//    StringBuilder m2FilesAsClassPath = new StringBuilder();
+//
+//    for (File jarFile : m2Files) {
+//      m2FilesAsClassPath.append(jarFile);
+//      m2FilesAsClassPath.append(BaseAdapter.PATH_SEPARATOR);
+//    }
+//
+//    m2FilesAsClassPath.deleteCharAt(m2FilesAsClassPath.length() - 1);
+//
+//    return m2FilesAsClassPath.toString();
+//  }
+//
+//  private Collection<File> getM2Files() {
+//    File m2Dir = new File(CompileInstrumenter.M2_DIR);
+//    return FileUtils.listFiles(m2Dir, new String[]{"jar"}, true);
+//  }
 }

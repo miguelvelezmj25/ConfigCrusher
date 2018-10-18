@@ -21,7 +21,7 @@ public abstract class BaseInstrumenter implements Instrumenter {
         Options.getCommandLine(args);
 
         if(Options.checkIfDeleteResult()) {
-            this.compileFromSource();
+            this.compile();
         }
 
         if(Options.checkIfSave()) {

@@ -33,7 +33,7 @@ public class ConfigCrusherTimerRegionInstrumenter extends BaseRegionInstrumenter
     }
 
     @Override
-    public void compileFromSource() {
+    public void compile() {
         // We do not compile since other transformation might have occured to make the instrumentation easier
         return;
     }

@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,7 +35,7 @@ public class TimerInstrumenterTest {
 
     protected void compile() throws IOException, InterruptedException {
         Instrumenter compiler = new CompileInstrumenter(TimerInstrumenterTest.srcDir, TimerInstrumenterTest.classDir);
-        compiler.compileFromSource();
+        compiler.compile();
     }
 
 //    @Test

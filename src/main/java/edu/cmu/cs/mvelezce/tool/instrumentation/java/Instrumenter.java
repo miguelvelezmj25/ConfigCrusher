@@ -5,10 +5,12 @@ import java.lang.reflect.InvocationTargetException;
 
 public interface Instrumenter {
 
-    public void instrument(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException;
+  void instrument(String[] args)
+      throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException;
 
-    public void instrument() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException;
+  void instrument()
+      throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException;
 
-    public void compileFromSource() throws IOException, InterruptedException;
+  void compile() throws IOException, InterruptedException;
 
 }

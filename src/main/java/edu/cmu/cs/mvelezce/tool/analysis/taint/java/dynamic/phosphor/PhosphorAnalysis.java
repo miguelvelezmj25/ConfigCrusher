@@ -66,12 +66,12 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       Constraint currentConstraint = PhosphorAnalysis.getNextConstraint(constraintsToExplore);
 
       // CE.removeAll(CTE)
-      PhosphorAnalysis.removeSubsetConstraintsTODO(currentConstraint, constraintsToExplore);
-//      // EC.addAll(CTE) // all sub constraints
-//      exploredConstraints.addAll(exploringConstraints);
+      PhosphorAnalysis.removeAllConstraints(currentConstraint, constraintsToExplore);
+      // EC.addAll(CTE)
+      exploredConstraints.add(currentConstraint);
 
       Set<String> config = currentConstraint.getConstraintAsConfig();
-//      // TS := run_taint_analysis(P’, c)
+      // TS := run_taint_analysis(P’, c)
 //      this.runPhosphorAnalysis(config);
 //      Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults = this.analyzePhosphorResults();
 //      this.calculateConstraintsPerSink(sinksToTaintsResults);
@@ -98,8 +98,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 //    this.getConfigsForCC();
   }
 
-  static void removeSubsetConstraintsTODO(Constraint constraint, Set<Constraint> constraints) {
-    constraints.removeIf(currentConstraint -> currentConstraint.equals(constraint));
+  static void removeAllConstraints(Constraint constraint, Set<Constraint> constraints) {
     constraints.removeIf(currentConstraint -> currentConstraint.isSubsetOf(constraint));
   }
 
@@ -234,29 +233,29 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return this.readPhosphorTaintResults(serializedFiles);
   }
 
-  static Set<Map<String, Boolean>> getExploredConstraints(
-      Set<Map<String, Boolean>> currentConstraints,
-      Set<Map<String, Boolean>> exploredConstraints) {
-    if (currentConstraints.isEmpty()) {
-      throw new IllegalArgumentException("The current constraints cannot be empty");
-    }
-
-    if (exploredConstraints.isEmpty()) {
-      throw new IllegalArgumentException("The explored constraints cannot be empty");
-    }
-
-    Set<Map<String, Boolean>> currentConstraintsAlreadyExplored = new HashSet<>();
-
-    for (Map<String, Boolean> currentConstraintsEntry : currentConstraints) {
-      for (Map<String, Boolean> exploredConstraintsEntry : exploredConstraints) {
-        if (exploredConstraintsEntry.entrySet().containsAll(currentConstraintsEntry.entrySet())) {
-          currentConstraintsAlreadyExplored.add(currentConstraintsEntry);
-        }
-      }
-    }
-
-    return currentConstraintsAlreadyExplored;
-  }
+//  static Set<Map<String, Boolean>> getExploredConstraints(
+//      Set<Map<String, Boolean>> currentConstraints,
+//      Set<Map<String, Boolean>> exploredConstraints) {
+//    if (currentConstraints.isEmpty()) {
+//      throw new IllegalArgumentException("The current constraints cannot be empty");
+//    }
+//
+//    if (exploredConstraints.isEmpty()) {
+//      throw new IllegalArgumentException("The explored constraints cannot be empty");
+//    }
+//
+//    Set<Map<String, Boolean>> currentConstraintsAlreadyExplored = new HashSet<>();
+//
+//    for (Map<String, Boolean> currentConstraintsEntry : currentConstraints) {
+//      for (Map<String, Boolean> exploredConstraintsEntry : exploredConstraints) {
+//        if (exploredConstraintsEntry.entrySet().containsAll(currentConstraintsEntry.entrySet())) {
+//          currentConstraintsAlreadyExplored.add(currentConstraintsEntry);
+//        }
+//      }
+//    }
+//
+//    return currentConstraintsAlreadyExplored;
+//  }
 
   private Pair<Map<String, Set<String>>, Map<String, Set<String>>> readPhosphorTaintResults(
       Collection<File> serializedFiles)

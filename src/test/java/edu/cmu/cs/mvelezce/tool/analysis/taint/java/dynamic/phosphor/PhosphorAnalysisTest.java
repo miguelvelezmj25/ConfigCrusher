@@ -43,24 +43,24 @@ public class PhosphorAnalysisTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void buildConstraints_forEmptyTaintsAtSink() {
+  public void buildPartialConfigs_forEmptyTaintsAtSink() {
     Set<String> emptyTaintsAtSink = new HashSet<>();
 
     PhosphorAnalysis.buildPartialConfigs(emptyTaintsAtSink);
   }
 
   @Test
-  public void buildConstraints_forTaints_A_B() {
-    Map<String, Boolean> constraint_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
-    Map<String, Boolean> constraint_notA_B = ConstraintTest.buildPartialConfig_notA_B();
-    Map<String, Boolean> constraint_A_notB = ConstraintTest.buildPartialConfig_A_notB();
-    Map<String, Boolean> constraint_A_B = ConstraintTest.buildPartialConfig_A_B();
+  public void buildPartialConfigs_forTaints_A_B() {
+    Map<String, Boolean> partialConfig_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
+    Map<String, Boolean> partialConfig_notA_B = ConstraintTest.buildPartialConfig_notA_B();
+    Map<String, Boolean> partialConfig_A_notB = ConstraintTest.buildPartialConfig_A_notB();
+    Map<String, Boolean> partialConfig_A_B = ConstraintTest.buildPartialConfig_A_B();
 
     HashSet<Map<String, Boolean>> expectedConstraints = new HashSet<>();
-    expectedConstraints.add(constraint_notA_notB);
-    expectedConstraints.add(constraint_notA_B);
-    expectedConstraints.add(constraint_A_notB);
-    expectedConstraints.add(constraint_A_B);
+    expectedConstraints.add(partialConfig_notA_notB);
+    expectedConstraints.add(partialConfig_notA_B);
+    expectedConstraints.add(partialConfig_A_notB);
+    expectedConstraints.add(partialConfig_A_B);
 
     Set<String> taintsAtSink = new HashSet<>();
     taintsAtSink.add("A");
@@ -71,33 +71,33 @@ public class PhosphorAnalysisTest {
     Assert.assertEquals(expectedConstraints, constraints);
   }
 
-  @Test
-  public void getExploredConstraints_forExplored_notA_notB() {
-    Map<String, Boolean> constraint_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
-    Map<String, Boolean> constraint_notA_B = ConstraintTest.buildPartialConfig_notA_B();
-    Map<String, Boolean> constraint_A_notB = ConstraintTest.buildPartialConfig_A_notB();
-    Map<String, Boolean> constraint_A_B = ConstraintTest.buildPartialConfig_A_B();
-    Map<String, Boolean> constraint_notA = ConstraintTest.buildPartialConfig_notA();
-    Map<String, Boolean> constraint_A = ConstraintTest.buildPartialConfig_A();
-
-    Set<Map<String, Boolean>> currentConstraints = new HashSet<>();
-    currentConstraints.add(constraint_notA_notB);
-    currentConstraints.add(constraint_notA_B);
-    currentConstraints.add(constraint_A_notB);
-    currentConstraints.add(constraint_A_B);
-    currentConstraints.add(constraint_notA);
-    currentConstraints.add(constraint_A);
-
-    Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
-    exploredConstraints.add(constraint_notA_notB);
-
-    Set<Map<String, Boolean>> currentExploredConstraints = PhosphorAnalysis
-        .getExploredConstraints(currentConstraints, exploredConstraints);
-
-    Assert.assertEquals(2, currentExploredConstraints.size());
-    Assert.assertTrue(currentConstraints.contains(constraint_notA));
-    Assert.assertTrue(currentConstraints.contains(constraint_notA_notB));
-  }
+//  @Test
+//  public void getExploredConstraints_forExplored_notA_notB() {
+//    Map<String, Boolean> constraint_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
+//    Map<String, Boolean> constraint_notA_B = ConstraintTest.buildPartialConfig_notA_B();
+//    Map<String, Boolean> constraint_A_notB = ConstraintTest.buildPartialConfig_A_notB();
+//    Map<String, Boolean> constraint_A_B = ConstraintTest.buildPartialConfig_A_B();
+//    Map<String, Boolean> constraint_notA = ConstraintTest.buildPartialConfig_notA();
+//    Map<String, Boolean> constraint_A = ConstraintTest.buildPartialConfig_A();
+//
+//    Set<Map<String, Boolean>> currentConstraints = new HashSet<>();
+//    currentConstraints.add(constraint_notA_notB);
+//    currentConstraints.add(constraint_notA_B);
+//    currentConstraints.add(constraint_A_notB);
+//    currentConstraints.add(constraint_A_B);
+//    currentConstraints.add(constraint_notA);
+//    currentConstraints.add(constraint_A);
+//
+//    Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
+//    exploredConstraints.add(constraint_notA_notB);
+//
+//    Set<Map<String, Boolean>> currentExploredConstraints = PhosphorAnalysis
+//        .getExploredConstraints(currentConstraints, exploredConstraints);
+//
+//    Assert.assertEquals(2, currentExploredConstraints.size());
+//    Assert.assertTrue(currentConstraints.contains(constraint_notA));
+//    Assert.assertTrue(currentConstraints.contains(constraint_notA_notB));
+//  }
 
   @Test
   public void dynamicRunningExample() throws IOException, InterruptedException {
@@ -265,6 +265,50 @@ public class PhosphorAnalysisTest {
     PhosphorAnalysis.removeInvalidConstraints(constrains);
 
     Assert.assertEquals(expectedConstraints, constrains);
+  }
+
+  @Test
+  public void removeAllConstraints_forRemovingSubConstraints() {
+    Map<String, Boolean> partialConfig_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
+    Map<String, Boolean> partialConfig_notA = ConstraintTest.buildPartialConfig_notA();
+    Map<String, Boolean> partialConfig_notB = ConstraintTest.buildPartialConfig_notB();
+    Map<String, Boolean> partialConfig_A_B = ConstraintTest.buildPartialConfig_A_B();
+
+    Constraint constraint_notA_notB = new Constraint(partialConfig_notA_notB);
+    Constraint constraint_notB = new Constraint(partialConfig_notB);
+    Constraint constraint_notA = new Constraint(partialConfig_notA);
+    Constraint constraint_A_B = new Constraint(partialConfig_A_B);
+
+    Set<Constraint> constraints = new HashSet<>();
+    constraints.add(constraint_notA_notB);
+    constraints.add(constraint_notA);
+    constraints.add(constraint_notB);
+    constraints.add(constraint_A_B);
+
+    PhosphorAnalysis.removeAllConstraints(constraint_notA_notB, constraints);
+
+    Assert.assertEquals(1, constraints.size());
+    Assert.assertTrue(constraints.contains(constraint_A_B));
+  }
+
+  @Test
+  public void removeAllConstraints_forRemoveAll() {
+    Map<String, Boolean> partialConfig_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
+    Map<String, Boolean> partialConfig_notA = ConstraintTest.buildPartialConfig_notA();
+    Map<String, Boolean> partialConfig_notB = ConstraintTest.buildPartialConfig_notB();
+
+    Constraint constraint_notA_notB = new Constraint(partialConfig_notA_notB);
+    Constraint constraint_notB = new Constraint(partialConfig_notB);
+    Constraint constraint_notA = new Constraint(partialConfig_notA);
+
+    Set<Constraint> constraints = new HashSet<>();
+    constraints.add(constraint_notA_notB);
+    constraints.add(constraint_notA);
+    constraints.add(constraint_notB);
+
+    PhosphorAnalysis.removeAllConstraints(constraint_notA_notB, constraints);
+
+    Assert.assertTrue(constraints.isEmpty());
   }
 
 //  private Set<String> buildConfig_A_B() {

@@ -71,34 +71,6 @@ public class PhosphorAnalysisTest {
     Assert.assertEquals(expectedConstraints, constraints);
   }
 
-//  @Test
-//  public void getExploredConstraints_forExplored_notA_notB() {
-//    Map<String, Boolean> constraint_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
-//    Map<String, Boolean> constraint_notA_B = ConstraintTest.buildPartialConfig_notA_B();
-//    Map<String, Boolean> constraint_A_notB = ConstraintTest.buildPartialConfig_A_notB();
-//    Map<String, Boolean> constraint_A_B = ConstraintTest.buildPartialConfig_A_B();
-//    Map<String, Boolean> constraint_notA = ConstraintTest.buildPartialConfig_notA();
-//    Map<String, Boolean> constraint_A = ConstraintTest.buildPartialConfig_A();
-//
-//    Set<Map<String, Boolean>> currentConstraints = new HashSet<>();
-//    currentConstraints.add(constraint_notA_notB);
-//    currentConstraints.add(constraint_notA_B);
-//    currentConstraints.add(constraint_A_notB);
-//    currentConstraints.add(constraint_A_B);
-//    currentConstraints.add(constraint_notA);
-//    currentConstraints.add(constraint_A);
-//
-//    Set<Map<String, Boolean>> exploredConstraints = new HashSet<>();
-//    exploredConstraints.add(constraint_notA_notB);
-//
-//    Set<Map<String, Boolean>> currentExploredConstraints = PhosphorAnalysis
-//        .getExploredConstraints(currentConstraints, exploredConstraints);
-//
-//    Assert.assertEquals(2, currentExploredConstraints.size());
-//    Assert.assertTrue(currentConstraints.contains(constraint_notA));
-//    Assert.assertTrue(currentConstraints.contains(constraint_notA_notB));
-//  }
-
   @Test
   public void dynamicRunningExample() throws IOException, InterruptedException {
     Set<String> initialConfig = new HashSet<>();
@@ -111,24 +83,6 @@ public class PhosphorAnalysisTest {
     PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
     analysis.dynamicAnalysis(initialConfig, options);
   }
-
-//  @Test
-//  public void getAllCombinationsOfPartialConfigs_for3PartialConfigs() {
-//    Map<String, Boolean> partialConfig_A_notB = ConstraintTest.buildPartialConfig_A_notB();
-//    Map<String, Boolean> partialConfig_A = ConstraintTest.buildPartialConfig_A();
-//    Map<String, Boolean> partialConfig_notB = ConstraintTest.buildPartialConfig_notB();
-//
-//    Set<Map<String, Boolean>> expectedPartialConfigs = new HashSet<>();
-//    expectedPartialConfigs.add(partialConfig_A_notB);
-//    expectedPartialConfigs.add(partialConfig_A);
-//    expectedPartialConfigs.add(partialConfig_notB);
-//
-//    Set<Map<String, Boolean>> exploringConstraints = PhosphorAnalysis
-//        .getAllCombinationsOfPartialConfigs(partialConfig_A_notB);
-//
-//    Assert.assertEquals(3, exploringConstraints.size());
-//    Assert.assertEquals(expectedPartialConfigs, exploringConstraints);
-//  }
 
   @Test
   public void runPhosphorAnalysis_forDynamicRunningExample()
@@ -277,7 +231,7 @@ public class PhosphorAnalysisTest {
     constraints.add(constraint_notB);
     constraints.add(constraint_A_B);
 
-    PhosphorAnalysis.removeAllSubConstraints(constraint_notA_notB, constraints);
+    PhosphorAnalysis.removeAllSubConstraints(constraints, constraint_notA_notB);
 
     Assert.assertEquals(1, constraints.size());
     Assert.assertTrue(constraints.contains(constraint_A_B));
@@ -298,9 +252,58 @@ public class PhosphorAnalysisTest {
     constraints.add(constraint_notA);
     constraints.add(constraint_notB);
 
-    PhosphorAnalysis.removeAllSubConstraints(constraint_notA_notB, constraints);
+    PhosphorAnalysis.removeAllSubConstraints(constraints, constraint_notA_notB);
 
     Assert.assertTrue(constraints.isEmpty());
+  }
+
+  @Test
+  public void removeAllSubConstraints_forEqualConstraints() {
+    Constraint constraint_A_B = new Constraint(ConstraintTest.buildPartialConfig_A_B());
+    Constraint constraint_A_notB = new Constraint(ConstraintTest.buildPartialConfig_A_notB());
+    Constraint constraint_notA_notB = new Constraint(ConstraintTest.buildPartialConfig_notA_notB());
+    Constraint constraint_notA_B = new Constraint(ConstraintTest.buildPartialConfig_notA_B());
+
+    Set<Constraint> constraintsFromAnalysis = new HashSet<>();
+    constraintsFromAnalysis.add(constraint_A_B);
+    constraintsFromAnalysis.add(constraint_A_notB);
+    constraintsFromAnalysis.add(constraint_notA_B);
+    constraintsFromAnalysis.add(constraint_notA_notB);
+
+    Set<Constraint> exploredConstraints = new HashSet<>();
+    exploredConstraints.add(constraint_notA_B);
+    exploredConstraints.add(constraint_notA_notB);
+
+    PhosphorAnalysis.removeAllSubConstraints(constraintsFromAnalysis, exploredConstraints);
+
+    Assert.assertEquals(2, constraintsFromAnalysis.size());
+    Assert.assertTrue(constraintsFromAnalysis.contains(constraint_A_B));
+    Assert.assertTrue(constraintsFromAnalysis.contains(constraint_A_notB));
+  }
+
+  @Test
+  public void removeAllSubConstraints_forSubsetConstraints() {
+    Constraint constraint_A_B = new Constraint(ConstraintTest.buildPartialConfig_A_B());
+    Constraint constraint_A_notB = new Constraint(ConstraintTest.buildPartialConfig_A_notB());
+    Constraint constraint_notA_notB = new Constraint(ConstraintTest.buildPartialConfig_notA_notB());
+    Constraint constraint_notA_B = new Constraint(ConstraintTest.buildPartialConfig_notA_B());
+    Constraint constraint_A = new Constraint(ConstraintTest.buildPartialConfig_A());
+    Constraint constraint_notA = new Constraint(ConstraintTest.buildPartialConfig_notA());
+
+    Set<Constraint> constraintsFromAnalysis = new HashSet<>();
+    constraintsFromAnalysis.add(constraint_A_B);
+    constraintsFromAnalysis.add(constraint_A);
+    constraintsFromAnalysis.add(constraint_notA);
+
+    Set<Constraint> exploredConstraints = new HashSet<>();
+    exploredConstraints.add(constraint_A_B);
+    exploredConstraints.add(constraint_A_notB);
+    exploredConstraints.add(constraint_notA_B);
+    exploredConstraints.add(constraint_notA_notB);
+
+    PhosphorAnalysis.removeAllSubConstraints(constraintsFromAnalysis, exploredConstraints);
+
+    Assert.assertTrue(constraintsFromAnalysis.isEmpty());
   }
 
 //  private Set<String> buildConfig_A_B() {

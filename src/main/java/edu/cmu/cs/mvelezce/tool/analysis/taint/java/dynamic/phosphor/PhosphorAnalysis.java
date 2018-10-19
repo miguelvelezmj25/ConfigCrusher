@@ -40,7 +40,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   /**
    * Input: P, c in C, O
    *
-   * Output: TODO
+   * Output: SC: S —> P(CT)
    *
    * Input: The program is provided elsewhere. Therefore, there is no need to pass the program to
    * this method.
@@ -63,14 +63,16 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     while (!constraintsToExplore.isEmpty()) {
       // CTE := get_next_constraint(CE,O)
       Constraint currentConstraint = PhosphorAnalysis.getNextConstraint(constraintsToExplore);
+      // c:= to_config(CTE)
+      Set<String> config = currentConstraint.getConstraintAsConfig();
+      Map<String, Boolean> configAsPartialConfig = Constraint.toPartialConfig(config, options);
+      currentConstraint = new Constraint(configAsPartialConfig);
 
       // CE.removeAll(CTE)
-      PhosphorAnalysis.removeAllSubConstraints(currentConstraint, constraintsToExplore);
+      PhosphorAnalysis.removeAllSubConstraints(constraintsToExplore, currentConstraint);
       // EC.addAll(CTE)
       exploredConstraints.add(currentConstraint);
 
-      // c:= to_config(CTE)
-      Set<String> config = currentConstraint.getConstraintAsConfig();
       // ST := run_taint_analysis(P’, c)
       this.runPhosphorAnalysis(config);
       Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults = this
@@ -80,20 +82,11 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       Set<Constraint> constraintsFromAnalysis = this
           .getConstraintsFromAnalysis(sinksToTaintsResults, config);
 
-////      // CT := range(ST) // ST: S —> P(O)
-////      Set<Set<String>> taintsAtSinks = new HashSet<>(sinksToTaintsResults.values());
-////      // CC := calc_constraints(CT)
-////      Set<Map<String, Boolean>> constraintsFromAnalysis = PhosphorAnalysis
-////          .calculateConstraints(taintsAtSinks);
-////
-////      // CC.removeAll(EC) // all explored constraints
-////      Set<Map<String, Boolean>> currentExploredConstraints = PhosphorAnalysis
-////          .getExploredConstraints(
-////              constraintsFromAnalysis, exploredConstraints);
-////      constraintsFromAnalysis.removeAll(currentExploredConstraints);
-////      // CE.addAll(CC)
-////      constraintsToExplore.addAll(constraintsFromAnalysis);
-//
+      // CFA.removeAll(EC)
+      PhosphorAnalysis.removeAllSubConstraints(constraintsFromAnalysis, exploredConstraints);
+      // CE.addAll(CC)
+      constraintsToExplore.addAll(constraintsFromAnalysis);
+
       count++;
     }
 
@@ -102,10 +95,17 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 //    this.getConfigsForCC();
   }
 
+  static void removeAllSubConstraints(Set<Constraint> constraintsFromAnalysis,
+      Set<Constraint> exploredConstraints) {
+    for (Constraint explored : exploredConstraints) {
+      removeAllSubConstraints(constraintsFromAnalysis, explored);
+    }
+  }
+
   /**
    * Removes the subconstraints of the passed constraint from passes constraints set.
    */
-  static void removeAllSubConstraints(Constraint constraint, Set<Constraint> constraints) {
+  static void removeAllSubConstraints(Set<Constraint> constraints, Constraint constraint) {
     constraints.removeIf(currentConstraint -> currentConstraint.isSubsetOf(constraint));
   }
 
@@ -293,9 +293,9 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   }
 
   /**
-   * Input: st in ST, c in C
+   * Input: stv ∈ ST.values, c ∈ C
    *
-   * Output: CCS: P(CFA)
+   * Output: CS: P(CFA) // CFA: P(CT)
    *
    * Calculate the constraints at a sink
    */
@@ -370,31 +370,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return constraintsToEvaluate.iterator().next();
   }
 
-//  /**
-//   * Input: CT: P(P(O))
-//   *
-//   * Output: CC: set of constraint (i.e., partial configs)
-//   */
-//  static Set<Map<String, Boolean>> calculateConstraints(Set<Set<String>> taintsAtSinks) {
-//    if (taintsAtSinks.isEmpty()) {
-//      throw new IllegalArgumentException("The taints at sinks cannot be empty");
-//    }
-//
-//    Set<Map<String, Boolean>> constraints = new HashSet<>();
-//
-//    for (Set<String> taintsAtSink : taintsAtSinks) {
-//      constraints.addAll(PhosphorAnalysis.buildPartialConfigs(taintsAtSink));
-//    }
-//
-//    return constraints;
-//  }
-
-//  @VisibleForTesting
-//  void addSinksToConstraints(Map<String, Set<Constraint>> sinksToConstraints) {
-//    this.sinksToConstraints.putAll(sinksToConstraints);
-//  }
-
-  //  Set<Set<String>> getConfigsForCC() {
+//  Set<Set<String>> getConfigsForCC() {
 //    Set<Constraint> ccConstraints = this.getAllConstraints();
 //    Set<Set<String>> configs = new HashSet<>();
 //
@@ -407,71 +383,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 //    return configs;
 //  }
 
-//  private Set<Constraint> getAllConstraints() {
-//    Set<Constraint> allConstraints = new HashSet<>();
-//
-//    for (Set<Constraint> constraints : this.sinksToConstraints.values()) {
-//      allConstraints.addAll(constraints);
-//    }
-//
-//    return allConstraints;
-//  }
-
-  //  /**
-//   * Calculate all constraints and subconstraints of a constraint.
-//   */
-//  static Set<Constraint> getAllCombinationsOfConstraints(Constraint constraint) {
-//    Set<Constraint> allConstraints = new HashSet<>();
-//    Set<Map<String, Boolean>> allPartialConfigs = PhosphorAnalysis
-//        .getAllCombinationsOfPartialConfigs(constraint.getPartialConfig());
-//
-//    return allConstraints;
-//  }
-
-  //  static Set<Map<String, Boolean>> getAllCombinationsOfPartialConfigs(
-//      Map<String, Boolean> partialConfig) {
-//    Set<Map<String, Boolean>> allPartialConfigs = new HashSet<>();
-//    Set<String> options = partialConfig.keySet();
-//    Set<Set<String>> optionsCombinations = Helper.getCombinations(options);
-//
-//    for (Set<String> optionsCombo : optionsCombinations) {
-//      Map<String, Boolean> newPartialConfig = new HashMap<>();
-//
-//      for (String option : optionsCombo) {
-//        newPartialConfig.put(option, partialConfig.get(option));
-//      }
-//
-//      allPartialConfigs.add(newPartialConfig);
-//    }
-//
-//    return allPartialConfigs;
-//  }
-
-  //  static Set<Map<String, Boolean>> getExploredConstraints(
-//      Set<Map<String, Boolean>> currentConstraints,
-//      Set<Map<String, Boolean>> exploredConstraints) {
-//    if (currentConstraints.isEmpty()) {
-//      throw new IllegalArgumentException("The current constraints cannot be empty");
-//    }
-//
-//    if (exploredConstraints.isEmpty()) {
-//      throw new IllegalArgumentException("The explored constraints cannot be empty");
-//    }
-//
-//    Set<Map<String, Boolean>> currentConstraintsAlreadyExplored = new HashSet<>();
-//
-//    for (Map<String, Boolean> currentConstraintsEntry : currentConstraints) {
-//      for (Map<String, Boolean> exploredConstraintsEntry : exploredConstraints) {
-//        if (exploredConstraintsEntry.entrySet().containsAll(currentConstraintsEntry.entrySet())) {
-//          currentConstraintsAlreadyExplored.add(currentConstraintsEntry);
-//        }
-//      }
-//    }
-//
-//    return currentConstraintsAlreadyExplored;
-//  }
-
-  //  private Map<String, Set<TaintLabel>> merge(Map<String, Set<TaintLabel>> sinksToTaints1,
+//  private Map<String, Set<TaintLabel>> merge(Map<String, Set<TaintLabel>> sinksToTaints1,
 //      Map<String, Set<TaintLabel>> sinksToTaints2) {
 //    Map<String, Set<TaintLabel>> sinksToTaints = new HashMap<>(sinksToTaints1);
 //

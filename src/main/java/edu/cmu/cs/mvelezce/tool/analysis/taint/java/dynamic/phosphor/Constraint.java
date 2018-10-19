@@ -10,12 +10,12 @@ public class Constraint {
 
   private final Map<String, Boolean> partialConfig;
   private final Map<String, Boolean> context;
-  private final Map<String, Boolean> constraint = new HashMap<>();
-  private final Set<String> partialConfigAsConfig;
-  private final Set<String> constraintAsConfig = new HashSet<>();
-
-  @Nullable
-  private final Set<String> contextAsConfig;
+//  private final Map<String, Boolean> constraint = new HashMap<>();
+//  private final Set<String> partialConfigAsConfig;
+//  private final Set<String> constraintAsConfig = new HashSet<>();
+//
+//  @Nullable
+//  private final Set<String> contextAsConfig;
 
   Constraint(Map<String, Boolean> partialConfig, Map<String, Boolean> context) {
     if (partialConfig.isEmpty()) {
@@ -25,20 +25,20 @@ public class Constraint {
     this.partialConfig = partialConfig;
     this.context = context;
 
-    this.partialConfigAsConfig = toConfig(this.partialConfig);
-
-    if (this.context.isEmpty()) {
-      this.contextAsConfig = null;
-    }
-    else {
-      this.contextAsConfig = toConfig(this.context);
-      this.constraintAsConfig.addAll(this.contextAsConfig);
-    }
-
-    this.constraintAsConfig.addAll(this.partialConfigAsConfig);
-
-    this.constraint.putAll(this.partialConfig);
-    this.constraint.putAll(this.context);
+//    this.partialConfigAsConfig = toConfig(this.partialConfig);
+//
+//    if (this.context.isEmpty()) {
+//      this.contextAsConfig = null;
+//    }
+//    else {
+//      this.contextAsConfig = toConfig(this.context);
+//      this.constraintAsConfig.addAll(this.contextAsConfig);
+//    }
+//
+//    this.constraintAsConfig.addAll(this.partialConfigAsConfig);
+//
+//    this.constraint.putAll(this.partialConfig);
+//    this.constraint.putAll(this.context);
   }
 
   Constraint(Map<String, Boolean> partialConfig) {
@@ -53,22 +53,22 @@ public class Constraint {
     return context;
   }
 
-  public Map<String, Boolean> getConstraint() {
-    return constraint;
-  }
-
-  public Set<String> getPartialConfigAsConfig() {
-    return partialConfigAsConfig;
-  }
-
-  public Set<String> getConstraintAsConfig() {
-    return constraintAsConfig;
-  }
-
-  @Nullable
-  public Set<String> getContextAsConfig() {
-    return contextAsConfig;
-  }
+//  public Map<String, Boolean> getConstraint() {
+//    return constraint;
+//  }
+//
+//  public Set<String> getPartialConfigAsConfig() {
+//    return partialConfigAsConfig;
+//  }
+//
+//  public Set<String> getConstraintAsConfig() {
+//    return constraintAsConfig;
+//  }
+//
+//  @Nullable
+//  public Set<String> getContextAsConfig() {
+//    return contextAsConfig;
+//  }
 
   /**
    * Checks whether the partial configuration can be executed under the condition specified in the
@@ -101,7 +101,25 @@ public class Constraint {
   }
 
   boolean isSubsetOf(Constraint constraint) {
-    return constraint.constraint.entrySet().containsAll(this.constraint.entrySet());
+    return constraint.getConstraint().entrySet().containsAll(this.getConstraint().entrySet());
+  }
+
+  Map<String, Boolean> getConstraint() {
+    Map<String, Boolean> constraint = new HashMap<>();
+    constraint.putAll(this.partialConfig);
+    constraint.putAll(this.context);
+
+    return constraint;
+  }
+
+  Set<String> getConstraintAsConfig() {
+    Set<String> config = new HashSet<>(toConfig(this.partialConfig));
+
+    if (!this.context.isEmpty()) {
+      config.addAll(toConfig(this.context));
+    }
+
+    return config;
   }
 
   /**
@@ -172,31 +190,16 @@ public class Constraint {
 
     Constraint that = (Constraint) o;
 
-    if (partialConfig != null ? !partialConfig.equals(that.partialConfig)
-        : that.partialConfig != null) {
+    if (!partialConfig.equals(that.partialConfig)) {
       return false;
     }
-    if (partialConfigAsConfig != null ? !partialConfigAsConfig.equals(that.partialConfigAsConfig)
-        : that.partialConfigAsConfig != null) {
-      return false;
-    }
-    if (context != null ? !context.equals(that.context) : that.context != null) {
-      return false;
-    }
-    if (!constraintAsConfig.equals(that.constraintAsConfig)) {
-      return false;
-    }
-    return contextAsConfig != null ? contextAsConfig.equals(that.contextAsConfig)
-        : that.contextAsConfig == null;
+    return context.equals(that.context);
   }
 
   @Override
   public int hashCode() {
-    int result = partialConfig != null ? partialConfig.hashCode() : 0;
-    result = 31 * result + (partialConfigAsConfig != null ? partialConfigAsConfig.hashCode() : 0);
-    result = 31 * result + (context != null ? context.hashCode() : 0);
-    result = 31 * result + constraintAsConfig.hashCode();
-    result = 31 * result + (contextAsConfig != null ? contextAsConfig.hashCode() : 0);
+    int result = partialConfig.hashCode();
+    result = 31 * result + context.hashCode();
     return result;
   }
 

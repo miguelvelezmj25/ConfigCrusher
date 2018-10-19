@@ -1,12 +1,16 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.Constraint;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionToInfo;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
@@ -48,42 +52,43 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
 
     Map<JavaRegion, Set<Constraint>> regionsToOptionsSet = this.analyze();
 
-//        if(Options.checkIfSave()) {
-//            this.writeToFile(regionsToOptionsSet);
-//        }
+    if (Options.checkIfSave()) {
+      this.writeToFile(regionsToOptionsSet);
+    }
 
     return regionsToOptionsSet;
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, Set<Constraint>> relevantRegionsToOptions)
+  public void writeToFile(Map<JavaRegion, Set<Constraint>> regionsToConstraints)
       throws IOException {
-    throw new UnsupportedOperationException("Implement");
-//        ObjectMapper mapper = new ObjectMapper();
-//        String outputFile = BaseDynamicAnalysis.DIRECTORY + "/" + this.programName + "/" + this.programName
-//                + Options.DOT_JSON;
-//        File file = new File(outputFile);
-//        file.getParentFile().mkdirs();
-//
-//        List<DecisionAndOptions> decisionsAndOptions = new ArrayList<>();
-//
-//        for(Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionsSet : relevantRegionsToOptions.entrySet()) {
-//            DecisionAndOptions decisionAndOptions = new DecisionAndOptions(regionToOptionsSet.getKey(), regionToOptionsSet.getValue());
-//            decisionsAndOptions.add(decisionAndOptions);
-//        }
-//
-//        mapper.writeValue(file, decisionsAndOptions);
+    ObjectMapper mapper = new ObjectMapper();
+    String outputFile =
+        BaseDynamicAnalysis.DIRECTORY + "/" + this.programName + "/" + this.programName
+            + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+
+    List<DecisionToInfo> decisionsAndConstraints = new ArrayList<>();
+
+    for (Map.Entry<JavaRegion, Set<Constraint>> entry : regionsToConstraints.entrySet()) {
+      DecisionToInfo<Set<Constraint>> decisionAndOptions = new DecisionToInfo<>(entry.getKey(),
+          entry.getValue());
+      decisionsAndConstraints.add(decisionAndOptions);
+    }
+
+    mapper.writeValue(file, decisionsAndConstraints);
   }
 
   @Override
   public Map<JavaRegion, Set<Constraint>> readFromFile(File file) {
     throw new UnsupportedOperationException("Implement");
 //        ObjectMapper mapper = new ObjectMapper();
-//        List<DecisionAndOptions> results = mapper.readValue(file, new TypeReference<List<DecisionAndOptions>>() {
+//        List<DecisionToInfo> results = mapper.readValue(file, new TypeReference<List<DecisionToInfo>>() {
 //        });
 //        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
 //
-//        for(DecisionAndOptions result : results) {
+//        for(DecisionToInfo result : results) {
 //            regionsToOptionsSet.put(result.getRegion(), result.getOptions());
 //        }
 //

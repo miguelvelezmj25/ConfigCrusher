@@ -264,10 +264,10 @@ public class ProgramAnalysis {
 //        String outputFile = ProgramAnalysis.DIRECTORY + "/" + programName + Options.DOT_JSON;
 //        File file = new File(outputFile);
 //
-//        List<DecisionAndOptions> decisionsAndOptions = new ArrayList<>();
+//        List<DecisionToInfo> decisionsAndOptions = new ArrayList<>();
 //
 //        for(Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionsSet : relevantRegionsToOptions.entrySet()) {
-//            DecisionAndOptions decisionAndOptions = new DecisionAndOptions(regionToOptionsSet.getKey(), regionToOptionsSet.getValue());
+//            DecisionToInfo decisionAndOptions = new DecisionToInfo(regionToOptionsSet.getKey(), regionToOptionsSet.getValue());
 //            decisionsAndOptions.add(decisionAndOptions);
 //        }
 //
@@ -276,11 +276,11 @@ public class ProgramAnalysis {
 //
 //    private static Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException, ParseException {
 //        ObjectMapper mapper = new ObjectMapper();
-//        List<DecisionAndOptions> results = mapper.readValue(file, new TypeReference<List<DecisionAndOptions>>() {
+//        List<DecisionToInfo> results = mapper.readValue(file, new TypeReference<List<DecisionToInfo>>() {
 //        });
 //        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = new HashMap<>();
 //
-//        for(DecisionAndOptions result : results) {
+//        for(DecisionToInfo result : results) {
 //            decisionsToOptionsSet.put(result.getRegion(), result.getOptions());
 //        }
 //

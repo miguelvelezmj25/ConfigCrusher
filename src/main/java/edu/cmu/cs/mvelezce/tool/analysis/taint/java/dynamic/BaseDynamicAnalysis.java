@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -81,18 +83,19 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
   }
 
   @Override
-  public Map<JavaRegion, Set<Constraint>> readFromFile(File file) {
-    throw new UnsupportedOperationException("Implement");
-//        ObjectMapper mapper = new ObjectMapper();
-//        List<DecisionToInfo> results = mapper.readValue(file, new TypeReference<List<DecisionToInfo>>() {
-//        });
-//        Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
-//
-//        for(DecisionToInfo result : results) {
-//            regionsToOptionsSet.put(result.getRegion(), result.getOptions());
-//        }
-//
-//        return regionsToOptionsSet;
+  public Map<JavaRegion, Set<Constraint>> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    List<RegionToInfo<Set<Constraint>>> results = mapper
+        .readValue(file, new TypeReference<List<RegionToInfo>>() {
+        });
+
+    Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
+
+    for (RegionToInfo<Set<Constraint>> result : results) {
+      regionsToConstraints.put(result.getRegion(), result.getInfo());
+    }
+
+    return regionsToConstraints;
   }
 
   // TODO should this be static helper method?

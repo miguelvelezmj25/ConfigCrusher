@@ -30,6 +30,16 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
+  public void dynamicRunningExample_forReadResults() throws IOException {
+    String programName = DynamicRunningExampleMain.PROGRAM_NAME;
+
+    String[] args = new String[0];
+
+    DynamicAnalysis analysis = new PhosphorAnalysis(programName);
+    analysis.analyze(args);
+  }
+
+  @Test
   public void runPhosphorAnalysis_forDynamicRunningExample()
       throws IOException, InterruptedException {
     String programName = DynamicRunningExampleMain.PROGRAM_NAME;

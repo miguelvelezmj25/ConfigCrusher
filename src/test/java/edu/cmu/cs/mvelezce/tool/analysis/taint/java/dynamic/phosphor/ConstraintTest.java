@@ -55,8 +55,7 @@ public class ConstraintTest {
 
   @Test
   public void isValid_forTrueValidConstraint_TrueContext() {
-    Map<String, Boolean> partialConfig = buildPartialConfig_A_notB();
-    Constraint constraint = new Constraint(partialConfig);
+    Constraint constraint = buildConstraint_A_notB();
 
     Assert.assertTrue(constraint.isValid());
   }
@@ -90,8 +89,8 @@ public class ConstraintTest {
 
   @Test
   public void isSubsetOf_forTrueEqualConstraints() {
-    Constraint constraint0 = new Constraint(buildPartialConfig_A());
-    Constraint constraint1 = new Constraint(buildPartialConfig_A());
+    Constraint constraint0 = buildConstraint_A();
+    Constraint constraint1 = buildConstraint_A();
 
     Assert.assertTrue(constraint0.isSubsetOf(constraint1));
     Assert.assertTrue(constraint1.isSubsetOf(constraint0));
@@ -133,7 +132,7 @@ public class ConstraintTest {
   @Test
   public void isSubsetOf_forTrueDiffPartialConfigsAndCtxs() {
     Constraint constraint0 = new Constraint(buildPartialConfig_A(), buildPartialConfig_B());
-    Constraint constraint1 = new Constraint(buildPartialConfig_A_B());
+    Constraint constraint1 = buildConstraint_A_B();
 
     Assert.assertTrue(constraint0.isSubsetOf(constraint1));
     Assert.assertTrue(constraint1.isSubsetOf(constraint0));
@@ -141,7 +140,7 @@ public class ConstraintTest {
 
   @Test
   public void isSubsetOf_forTrueDiffConstraints() {
-    Constraint constraint0 = new Constraint(buildPartialConfig_B());
+    Constraint constraint0 = buildConstraint_B();
     Constraint constraint1 = new Constraint(buildPartialConfig_A(), buildPartialConfig_B());
 
     Assert.assertTrue(constraint0.isSubsetOf(constraint1));
@@ -149,8 +148,8 @@ public class ConstraintTest {
 
   @Test
   public void isSubsetOf_forFalseDiffPartialConfigs0() {
-    Constraint constraint0 = new Constraint(buildPartialConfig_A());
-    Constraint constraint1 = new Constraint(buildPartialConfig_notA());
+    Constraint constraint0 = buildConstraint_A();
+    Constraint constraint1 = buildConstraint_notA();
 
     Assert.assertFalse(constraint0.isSubsetOf(constraint1));
     Assert.assertFalse(constraint1.isSubsetOf(constraint0));
@@ -158,7 +157,7 @@ public class ConstraintTest {
 
   @Test
   public void isSubsetOf_forFalseEqualPartialConfigsDiffCtxs0() {
-    Constraint constraint0 = new Constraint(buildPartialConfig_A());
+    Constraint constraint0 = buildConstraint_A();
     Constraint constraint1 = new Constraint(buildPartialConfig_A(), buildPartialConfig_B());
 
     Assert.assertFalse(constraint1.isSubsetOf(constraint0));
@@ -309,6 +308,54 @@ public class ConstraintTest {
 
     Assert.assertTrue(context.containsKey(A));
     Assert.assertEquals(true, context.get(A));
+  }
+
+  static Constraint buildConstraint_notB() {
+    Map<String, Boolean> partialConfig_notB = ConstraintTest.buildPartialConfig_notB();
+
+    return new Constraint(partialConfig_notB);
+  }
+
+  static Constraint buildConstraint_B() {
+    Map<String, Boolean> partialConfig_B = ConstraintTest.buildPartialConfig_B();
+
+    return new Constraint(partialConfig_B);
+  }
+
+  static Constraint buildConstraint_A() {
+    Map<String, Boolean> partialConfig_A = ConstraintTest.buildPartialConfig_A();
+
+    return new Constraint(partialConfig_A);
+  }
+
+  static Constraint buildConstraint_notA() {
+    Map<String, Boolean> partialConfig_notA = ConstraintTest.buildPartialConfig_notA();
+
+    return new Constraint(partialConfig_notA);
+  }
+
+  static Constraint buildConstraint_A_B() {
+    Map<String, Boolean> partialConfig_A_B = ConstraintTest.buildPartialConfig_A_B();
+
+    return new Constraint(partialConfig_A_B);
+  }
+
+  static Constraint buildConstraint_notA_B() {
+    Map<String, Boolean> partialConfig_notA_B = ConstraintTest.buildPartialConfig_notA_B();
+
+    return new Constraint(partialConfig_notA_B);
+  }
+
+  static Constraint buildConstraint_A_notB() {
+    Map<String, Boolean> partialConfig_A_notB = ConstraintTest.buildPartialConfig_A_notB();
+
+    return new Constraint(partialConfig_A_notB);
+  }
+
+  static Constraint buildConstraint_notA_notB() {
+    Map<String, Boolean> partialConfig_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
+
+    return new Constraint(partialConfig_notA_notB);
   }
 
   static Map<String, Boolean> buildPartialConfig_B() {

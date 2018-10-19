@@ -68,22 +68,21 @@ public class PhosphorAnalysisTest {
     Assert.assertEquals(expectedConstraint, nextConstraint);
   }
 
-//  @Test
-//  public void getNextConstraint_forConstraints() {
-//    Map<String, Boolean> partialConfig_notA_b = ConstraintTest.buildPartialConfig_notA_B();
-//    Map<String, Boolean> partialConfig_notA_b = ConstraintTest.buildPartialConfig_notA_B();
-//    Map<String, Boolean> partialConfig_notA_b = ConstraintTest.buildPartialConfig_notA_B();
-//    Map<String, Boolean> partialConfig_notA_b = ConstraintTest.buildPartialConfig_notA_B();
-//
-//    Constraint expectedConstraint = new Constraint(partialConfig_notA_b);
-//
-//    Set<Constraint> constraints = new HashSet<>();
-//    constraints.add(expectedConstraint);
-//
-//    Constraint nextConstraint = PhosphorAnalysis.getNextConstraint(constraints);
-//
-//    Assert.assertEquals(expectedConstraint, nextConstraint);
-//  }
+  @Test
+  public void getNextConstraint_forConstraints() {
+    Constraint constraint_A = ConstraintTest.buildConstraint_A();
+    Constraint constraint_B = ConstraintTest.buildConstraint_B();
+
+    Set<Constraint> constraints = new HashSet<>();
+    constraints.add(constraint_A);
+    constraints.add(constraint_B);
+
+    Constraint expectedConstraint = ConstraintTest.buildConstraint_A_B();
+
+    Constraint nextConstraint = PhosphorAnalysis.getNextConstraint(constraints);
+
+//    Assert.assertTrue(expectedConstraint.isEqualTo(nextConstraint));
+  }
 
   @Test(expected = IllegalArgumentException.class)
   public void buildPartialConfigs_forEmptyTaintsAtSink() {

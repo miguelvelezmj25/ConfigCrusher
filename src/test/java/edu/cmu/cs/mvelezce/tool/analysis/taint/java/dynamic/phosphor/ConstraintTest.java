@@ -312,7 +312,12 @@ public class ConstraintTest {
 
   @Test
   public void isEqualTo_forFalse() {
+    Constraint constraint_A = ConstraintTest.buildConstraint_A();
+    Constraint constraint_A_True = new Constraint(buildPartialConfig_A(),
+        buildPartialConfig_notB());
 
+    Assert.assertFalse(constraint_A.isEqualTo(constraint_A_True));
+    Assert.assertFalse(constraint_A_True.isEqualTo(constraint_A));
   }
 
   @Test

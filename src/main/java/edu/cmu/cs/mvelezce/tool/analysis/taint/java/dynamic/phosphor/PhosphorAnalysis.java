@@ -404,9 +404,21 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
     }
 
+    Set<Map<String, Boolean>> completeConstraints = getCompleteConstraints(constraintsToEvaluate);
+
     // TODO optimize how to pick the next constraint to evaluate, maybe pick the one with the most options? Merge constraints?
     // TODO check if the constraint we picked is NOT a proper subset of a set left in the constraints set
     return constraintsToEvaluate.iterator().next();
+  }
+
+  private static Set<Map<String, Boolean>> getCompleteConstraints(Set<Constraint> constraints) {
+    Set<Map<String, Boolean>> completeConstraints = new HashSet<>();
+
+    for (Constraint constraint : constraints) {
+      completeConstraints.add(constraint.getCompleteConstraint());
+    }
+
+    return completeConstraints;
   }
 
 //  Set<Set<String>> getConfigsForCC() {

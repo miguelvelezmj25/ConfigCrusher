@@ -29,6 +29,10 @@ public class Constraint {
     return context;
   }
 
+  public Map<String, Boolean> getPartialConfig() {
+    return partialConfig;
+  }
+
   /**
    * Checks whether the partial configuration can be executed under the condition specified in the
    * context.
@@ -60,20 +64,22 @@ public class Constraint {
   }
 
   boolean isSubsetOf(Constraint constraint) {
-    Set<Entry<String, Boolean>> constraintAsConstraint = constraint.getConstraint().entrySet();
-    Set<Entry<String, Boolean>> thisAsConstraint = this.getConstraint().entrySet();
+    Set<Entry<String, Boolean>> constraintAsConstraint = constraint.getCompleteConstraint()
+        .entrySet();
+    Set<Entry<String, Boolean>> thisAsConstraint = this.getCompleteConstraint().entrySet();
 
     return constraintAsConstraint.containsAll(thisAsConstraint);
   }
 
   boolean isEqualTo(Constraint constraint) {
-    Set<Entry<String, Boolean>> constraintAsConstraint = constraint.getConstraint().entrySet();
-    Set<Entry<String, Boolean>> thisAsConstraint = this.getConstraint().entrySet();
+    Set<Entry<String, Boolean>> constraintAsConstraint = constraint.getCompleteConstraint()
+        .entrySet();
+    Set<Entry<String, Boolean>> thisAsConstraint = this.getCompleteConstraint().entrySet();
 
     return constraintAsConstraint.equals(thisAsConstraint);
   }
 
-  private Map<String, Boolean> getConstraint() {
+  Map<String, Boolean> getCompleteConstraint() {
     Map<String, Boolean> constraint = new HashMap<>();
     constraint.putAll(this.partialConfig);
     constraint.putAll(this.context);

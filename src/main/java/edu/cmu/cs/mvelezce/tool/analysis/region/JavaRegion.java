@@ -150,7 +150,7 @@ public class JavaRegion extends Region {
       return this;
     }
 
-    public JavaRegion builder() {
+    public JavaRegion build() {
       return new JavaRegion(this);
     }
   }

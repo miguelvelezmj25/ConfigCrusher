@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.Constraint;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -10,49 +11,52 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
-public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Map<String, Boolean>>> {
+public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constraint>> {
 
   protected static final String DIRECTORY = Options.DIRECTORY + "/analysis/java/dynamic/programs";
 
   private final String programName;
+  private final Set<String> options;
+  private final Set<String> initialConfig;
 
-  public BaseDynamicAnalysis(String programName) {
+  public BaseDynamicAnalysis(String programName, Set<String> options, Set<String> initialConfig) {
     this.programName = programName;
+    this.options = options;
+    this.initialConfig = initialConfig;
   }
 
   @Override
-  public Map<JavaRegion, Set<Map<String, Boolean>>> analyze(String[] args) throws IOException {
-    throw new UnsupportedOperationException("Implement");
-//    Options.getCommandLine(args);
-//
-//    String outputFile = BaseDynamicAnalysis.DIRECTORY + "/" + this.programName;
-//    File file = new File(outputFile);
-//
-//    Options.checkIfDeleteResult(file);
-//
-//    if (file.exists()) {
-//      Collection<File> files = FileUtils.listFiles(file, null, true);
-//
-//      if (files.size() != 1) {
-//        throw new RuntimeException(
-//            "We expected to find 1 file in the directory, but that is not the case "
-//                + outputFile);
-//      }
-//
-//      return this.readFromFile(files.iterator().next());
-//    }
-//
-//    Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = this.analyze();
-//
-////        if(Options.checkIfSave()) {
-////            this.writeToFile(regionsToOptionsSet);
-////        }
-//
-//    return regionsToOptionsSet;
+  public Map<JavaRegion, Set<Constraint>> analyze(String[] args) throws IOException {
+    Options.getCommandLine(args);
+
+    String outputFile = BaseDynamicAnalysis.DIRECTORY + "/" + this.programName;
+    File file = new File(outputFile);
+
+    Options.checkIfDeleteResult(file);
+
+    if (file.exists()) {
+      Collection<File> files = FileUtils.listFiles(file, null, true);
+
+      if (files.size() != 1) {
+        throw new RuntimeException(
+            "We expected to find 1 file in the directory, but that is not the case "
+                + outputFile);
+      }
+
+      return this.readFromFile(files.iterator().next());
+    }
+
+    Map<JavaRegion, Set<Constraint>> regionsToOptionsSet = this.analyze();
+
+//        if(Options.checkIfSave()) {
+//            this.writeToFile(regionsToOptionsSet);
+//        }
+
+    return regionsToOptionsSet;
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, Set<Map<String, Boolean>>> relevantRegionsToOptions)
+  public void writeToFile(Map<JavaRegion, Set<Constraint>> relevantRegionsToOptions)
       throws IOException {
     throw new UnsupportedOperationException("Implement");
 //        ObjectMapper mapper = new ObjectMapper();
@@ -72,7 +76,7 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Map<Str
   }
 
   @Override
-  public Map<JavaRegion, Set<Map<String, Boolean>>> readFromFile(File file) {
+  public Map<JavaRegion, Set<Constraint>> readFromFile(File file) {
     throw new UnsupportedOperationException("Implement");
 //        ObjectMapper mapper = new ObjectMapper();
 //        List<DecisionAndOptions> results = mapper.readValue(file, new TypeReference<List<DecisionAndOptions>>() {
@@ -104,5 +108,13 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Map<Str
 
   public String getProgramName() {
     return this.programName;
+  }
+
+  public Set<String> getOptions() {
+    return options;
+  }
+
+  public Set<String> getInitialConfig() {
+    return initialConfig;
   }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * A Control Flow Graph builder. It implements the Visitor pattern to add each statement to the CFG.
+ * A Control Flow Graph build. It implements the Visitor pattern to add each statement to the CFG.
  *
  * @author Miguel Velez - miguelvelezmj25
  * @version 0.1.0.1
@@ -141,7 +141,7 @@ public class CFGBuilder extends ReturnerVisitor {
     }
 
     /**
-     * Checks if there the builder came from analyzing a IfStatement. This allows to create an edge between the
+     * Checks if there the build came from analyzing a IfStatement. This allows to create an edge between the
      * IfStatement and the BasicBlock after it.
      *
      * @param basicBlock

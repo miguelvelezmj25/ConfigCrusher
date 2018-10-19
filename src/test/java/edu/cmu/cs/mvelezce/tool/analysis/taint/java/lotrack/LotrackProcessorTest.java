@@ -18,7 +18,7 @@ public class LotrackProcessorTest {
 
   @Test
   public void filterRegionsNoOptions1() {
-    JavaRegion region = new JavaRegion.Builder("a", "buildPerformanceModel", "c").builder();
+    JavaRegion region = new JavaRegion.Builder("a", "buildPerformanceModel", "c").build();
     Set<String> options = new HashSet<>();
     Map<JavaRegion, Set<String>> regionToOptions = new HashMap<>();
     regionToOptions.put(region, options);
@@ -28,12 +28,12 @@ public class LotrackProcessorTest {
 
   @Test
   public void filterRegionsNoOptions2() {
-    JavaRegion region = new JavaRegion.Builder("a", "buildPerformanceModel", "c").builder();
+    JavaRegion region = new JavaRegion.Builder("a", "buildPerformanceModel", "c").build();
     Set<String> options = new HashSet<>();
     Map<JavaRegion, Set<String>> regionToOptions = new HashMap<>();
     regionToOptions.put(region, options);
 
-    region = new JavaRegion.Builder("d", "e", "c").builder();
+    region = new JavaRegion.Builder("d", "e", "c").build();
     options = new HashSet<>();
     options.add("String");
     regionToOptions.put(region, options);
@@ -45,7 +45,7 @@ public class LotrackProcessorTest {
   public void filterBooleans() {
     String TRUE = "true";
     String FALSE = "false";
-    JavaRegion region = new JavaRegion.Builder("a", "buildPerformanceModel", "c").builder();
+    JavaRegion region = new JavaRegion.Builder("a", "buildPerformanceModel", "c").build();
     Set<String> options = new HashSet<>();
     options.add(TRUE);
     options.add(FALSE);

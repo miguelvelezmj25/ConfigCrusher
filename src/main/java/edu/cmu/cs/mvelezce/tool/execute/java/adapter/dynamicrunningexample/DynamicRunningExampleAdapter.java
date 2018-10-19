@@ -15,7 +15,7 @@ public class DynamicRunningExampleAdapter extends BaseAdapter {
     super(builder.programName, builder.mainClass, builder.directory, builder.options);
   }
 
-  private static List<String> getListOfOptions() {
+  public static List<String> getListOfOptions() {
     return Arrays.asList(DynamicRunningExampleAdapter.OPTIONS);
   }
 

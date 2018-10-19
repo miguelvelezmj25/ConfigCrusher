@@ -11,7 +11,7 @@ public class CFGBuilderTest {
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
+//        CFGBuilder build = new CFGBuilder();
 //
 //        int steps = 0;
 //        CFG cfg = new CFG();
@@ -59,7 +59,7 @@ public class CFGBuilderTest {
 //        cfg.addEdge(branchStack.pop(), currentBasicBlock);
 //        cfg.addEdge(currentBasicBlock, cfg.getExit());
 //
-//        CFG builtCFG = builder.buildCFG(program);
+//        CFG builtCFG = build.buildCFG(program);
 //
 //        BasicBlock currentBasicBlockCFG = cfg.getSuccessors(cfg.getEntry()).get(0);
 //        BasicBlock currentBasicBlockBuiltCFG = builtCFG.getSuccessors(builtCFG.getEntry()).get(0);
@@ -85,7 +85,7 @@ public class CFGBuilderTest {
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
+//        CFGBuilder build = new CFGBuilder();
 //
 //        int steps = 0;
 //        CFG cfg = new CFG();
@@ -142,7 +142,7 @@ public class CFGBuilderTest {
 //        cfg.addEdge(branchStack.pop(), cfg.getExit());
 //        cfg.addEdge(currentBasicBlock, cfg.getExit());
 //
-//        Assert.assertEquals(cfg, builder.buildCFG(program));
+//        Assert.assertEquals(cfg, build.buildCFG(program));
 //    }
 //
 //    @Test
@@ -151,7 +151,7 @@ public class CFGBuilderTest {
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
+//        CFGBuilder build = new CFGBuilder();
 //
 //        int steps = 0;
 //        CFG cfg = new CFG();
@@ -211,7 +211,7 @@ public class CFGBuilderTest {
 //        cfg.addEdge(branchStack.pop(), cfg.getExit());
 //        cfg.addEdge(currentBasicBlock, cfg.getExit());
 //
-//        Assert.assertEquals(cfg, builder.buildCFG(program));
+//        Assert.assertEquals(cfg, build.buildCFG(program));
 //    }
 //
 //    @Test
@@ -220,7 +220,7 @@ public class CFGBuilderTest {
 //        Lexer lexer = new Lexer(programFile);
 //        Parser parser = new Parser(lexer);
 //        Program program = parser.parse();
-//        CFGBuilder builder = new CFGBuilder();
+//        CFGBuilder build = new CFGBuilder();
 //
 //        int steps = 0;
 //        CFG cfg = new CFG();
@@ -279,7 +279,7 @@ public class CFGBuilderTest {
 //        cfg.addEdge(branchStack.pop(), cfg.getExit());
 //        cfg.addEdge(currentBasicBlock, cfg.getExit());
 //
-//        Assert.assertEquals(cfg, builder.buildCFG(program));
+//        Assert.assertEquals(cfg, build.buildCFG(program));
 //    }
 
 }

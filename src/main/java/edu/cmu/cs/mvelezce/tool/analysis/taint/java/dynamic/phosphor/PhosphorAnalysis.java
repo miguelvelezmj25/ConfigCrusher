@@ -34,7 +34,32 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   private final Map<String, Set<Constraint>> sinksToConstraints = new HashMap<>();
 
   PhosphorAnalysis(String programName) {
-    super(programName);
+    this(programName, new HashSet<>(), new HashSet<>());
+  }
+
+  PhosphorAnalysis(String programName, Set<String> options, Set<String> initialConfig) {
+    super(programName, options, initialConfig);
+  }
+
+  @Override
+  public Map<JavaRegion, Set<Constraint>> analyze() throws IOException {
+    try {
+      this.runDynamicAnalysis(this.getInitialConfig(), this.getOptions());
+    } catch (InterruptedException ie) {
+      throw new RuntimeException("Could not finish running the dynamic analysis", ie);
+    }
+
+    Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
+
+    for (Map.Entry<String, Set<Constraint>> entry : this.sinksToConstraints.entrySet()) {
+      String sink = entry.getKey();
+      JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
+          this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
+
+      regionsToConstraints.put(region, entry.getValue());
+    }
+
+    return regionsToConstraints;
   }
 
   /**
@@ -45,7 +70,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    * Input: The program is provided elsewhere. Therefore, there is no need to pass the program to
    * this method.
    */
-  void dynamicAnalysis(Set<String> initialConfig, Set<String> options)
+  void runDynamicAnalysis(Set<String> initialConfig, Set<String> options)
       throws IOException, InterruptedException {
     if (options.isEmpty()) {
       throw new IllegalArgumentException("The options cannot be empty");
@@ -109,20 +134,34 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     constraints.removeIf(currentConstraint -> currentConstraint.isSubsetOf(constraint));
   }
 
-  @Override
-  public Map<JavaRegion, Set<Map<String, Boolean>>> analyze() throws IOException {
-    throw new UnsupportedOperationException("Implement");
-//    String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
-//    Collection<File> serializedFiles = this.getSerializedFiles(dir);
-//
-//    if (serializedFiles.size() != 2) {
-//      throw new RuntimeException("The directory " + dir + " does not have 2 files.");
-//    }
-//
-//    this.readPhosphorTaintResults(serializedFiles);
-//
-//    // TODO
-//    return null;
+  private int getDecisionOrder(String sink) {
+    int indexOfLastDot = sink.lastIndexOf(".");
+
+    return Integer.valueOf(sink.substring(indexOfLastDot + 1));
+  }
+
+  private String getMethodSignature(String sink) {
+    int indexOfFirstDot = sink.indexOf(".");
+    int indexOfLastDot = sink.lastIndexOf(".");
+
+    return sink.substring(indexOfFirstDot + 1, indexOfLastDot);
+  }
+
+  private String getClassName(String sink) {
+    int indexOfDot = sink.indexOf(".");
+    String packageAndClass = sink.substring(0, indexOfDot);
+    int indexOfLastSlash = packageAndClass.lastIndexOf("/");
+
+    return packageAndClass.substring(indexOfLastSlash + 1);
+  }
+
+  private String getPackageName(String sink) {
+    int indexOfDot = sink.indexOf(".");
+    String packageAndClass = sink.substring(0, indexOfDot);
+    int indexOfLastSlash = packageAndClass.lastIndexOf("/");
+    String packageName = packageAndClass.substring(0, indexOfLastSlash);
+
+    return packageName.replace("/", ".");
   }
 
   /**

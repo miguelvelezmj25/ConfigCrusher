@@ -199,7 +199,7 @@ public class VarexJProcessor {
 
         currentJavaRegion = new JavaRegion.Builder(entryPackage, entryClass, entryMethod)
             .startBytecodeIndex(
-                Math.max(0, entryBytecodeIndexes - 1)).builder();
+                Math.max(0, entryBytecodeIndexes - 1)).build();
         regionsToOptions.put(currentJavaRegion, new HashSet<>(currentUsedTerms));
         System.out.println(
             currentJavaRegion.getRegionPackage() + " " + currentJavaRegion.getRegionClass() + " "

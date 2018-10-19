@@ -29,7 +29,7 @@ public class TaintFlowAnalysis extends BaseStaticAnalysis {
 
     for (ControlFlowResult result : results) {
       JavaRegion region = new JavaRegion.Builder(result.getPackageName(), result.getClassName(),
-          result.getMethodSignature()).startBytecodeIndex(result.getBytecodeIndex()).builder();
+          result.getMethodSignature()).startBytecodeIndex(result.getBytecodeIndex()).build();
 
       // TODO with the current implementation of taintflow, we only have 1 set of options
       Set<Set<String>> optionsSet = new HashSet<>();

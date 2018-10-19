@@ -389,7 +389,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         index = callerMethodNode.instructions.indexOf(callerBlock.getInstructions().get(0));
 
         newRegion = new JavaRegion.Builder(classPackage, className, methodName)
-            .startBytecodeIndex(index).builder();
+            .startBytecodeIndex(index).build();
         this.methodsWithUpdatedIndexes.add(callerMethodNode);
       }
       else {
@@ -397,7 +397,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         newRegion = new JavaRegion.Builder(callerRegion.getRegionPackage(),
             callerRegion.getRegionClass(),
-            callerRegion.getRegionMethod()).startBytecodeIndex(index).builder();
+            callerRegion.getRegionMethod()).startBytecodeIndex(index).build();
         this.regionsToOptionSet.remove(callerRegion);
       }
 
@@ -750,7 +750,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
       }
 
       JavaRegion newRegion = new JavaRegion.Builder(blockRegion.getRegionPackage(),
-          blockRegion.getRegionClass(), blockRegion.getRegionMethod()).builder();
+          blockRegion.getRegionClass(), blockRegion.getRegionMethod()).build();
       int index;
 
       this.debugBlocksAndRegions(methodNode);
@@ -859,7 +859,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 //            this.debugBlockDecisions(methodNode);
 
       JavaRegion newRegion = new JavaRegion.Builder(blockRegion.getRegionPackage(),
-          blockRegion.getRegionClass(), blockRegion.getRegionMethod()).builder();
+          blockRegion.getRegionClass(), blockRegion.getRegionMethod()).build();
       int index;
 
       if (reachRegion == null) {

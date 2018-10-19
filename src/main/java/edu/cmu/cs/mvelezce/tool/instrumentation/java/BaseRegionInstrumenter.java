@@ -92,7 +92,7 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
           oldRegion.getRegionClass(), oldRegion.getRegionMethod())
           .startBytecodeIndex(oldRegion.getStartBytecodeIndex())
           .startBlockID(oldRegion.getStartMethodBlock().getID()).endBlocksIDs(endBlocksIDs)
-          .builder();
+          .build();
       DecisionAndOptions decisionAndOptions = new DecisionAndOptions(newRegion,
           regionToOptionsSet.getValue());
       decisionsAndOptions.add(decisionAndOptions);

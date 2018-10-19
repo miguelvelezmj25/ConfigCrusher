@@ -3,6 +3,8 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleMain;
+import fj.Hash;
+import fj.data.hlist.HPre.HAdd;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -69,19 +71,69 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void getNextConstraint_forConstraints() {
+  public void getNextConstraint_forConstraintsEmptyPivot() {
     Constraint constraint_A = ConstraintTest.buildConstraint_A();
-    Constraint constraint_B = ConstraintTest.buildConstraint_B();
+    Constraint constraint_notB = ConstraintTest.buildConstraint_notB();
 
     Set<Constraint> constraints = new HashSet<>();
     constraints.add(constraint_A);
-    constraints.add(constraint_B);
+    constraints.add(constraint_notB);
 
-    Constraint expectedConstraint = ConstraintTest.buildConstraint_A_B();
+    Constraint expectedConstraint = ConstraintTest.buildConstraint_A_notB();
 
     Constraint nextConstraint = PhosphorAnalysis.getNextConstraint(constraints);
 
-//    Assert.assertTrue(expectedConstraint.isEqualTo(nextConstraint));
+    Assert.assertTrue(expectedConstraint.isEqualTo(nextConstraint));
+  }
+
+  @Test
+  public void getNextConstraint_forConstraintsNonEmptyPivotCannotMerge() {
+    Constraint constraint_A_B = ConstraintTest.buildConstraint_A_B();
+    Constraint constraint_notB = ConstraintTest.buildConstraint_notB();
+
+    Set<Constraint> constraints = new HashSet<>();
+    constraints.add(constraint_A_B);
+    constraints.add(constraint_notB);
+
+    Constraint nextConstraint = PhosphorAnalysis.getNextConstraint(constraints);
+
+    Assert.assertTrue(
+        constraint_A_B.isEqualTo(nextConstraint) || constraint_notB.isEqualTo(nextConstraint));
+  }
+
+  @Test
+  public void getNextConstraint_forPivotWithDiffValues() {
+    Constraint constraint_A_B = ConstraintTest.buildConstraint_A_B();
+    Constraint constraint_notB_C = ConstraintTest.buildConstraint_notB_C();
+
+    Set<Constraint> constraints = new HashSet<>();
+    constraints.add(constraint_A_B);
+    constraints.add(constraint_notB_C);
+
+    Constraint nextConstraint = PhosphorAnalysis.getNextConstraint(constraints);
+
+    Assert.assertTrue(
+        constraint_A_B.isEqualTo(nextConstraint) || constraint_notB_C.isEqualTo(nextConstraint));
+  }
+
+  @Test
+  public void getNextConstraint_forConstraintsNonEmptyPivot() {
+    Constraint constraint_A_notB = ConstraintTest.buildConstraint_A_notB();
+    Constraint constraint_notB_C = ConstraintTest.buildConstraint_notB_C();
+
+    Set<Constraint> constraints = new HashSet<>();
+    constraints.add(constraint_A_notB);
+    constraints.add(constraint_notB_C);
+
+    Map<String, Boolean> expectedConstraintAsConfigWithValues = new HashMap<>();
+    expectedConstraintAsConfigWithValues.put("A", true);
+    expectedConstraintAsConfigWithValues.put("B", false);
+    expectedConstraintAsConfigWithValues.put("C", true);
+    Constraint expectedConstraint = new Constraint(expectedConstraintAsConfigWithValues);
+
+    Constraint nextConstraint = PhosphorAnalysis.getNextConstraint(constraints);
+
+    Assert.assertTrue(expectedConstraint.isEqualTo(nextConstraint));
   }
 
   @Test(expected = IllegalArgumentException.class)

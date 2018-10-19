@@ -329,6 +329,12 @@ public class ConstraintTest {
     Assert.assertTrue(constraint_A_True.isEqualTo(constraint_A));
   }
 
+  static Constraint buildConstraint_notB_C() {
+    Map<String, Boolean> partialConfig_notB_C = ConstraintTest.buildPartialConfig_notB_C();
+
+    return new Constraint(partialConfig_notB_C);
+  }
+
   static Constraint buildConstraint_notB() {
     Map<String, Boolean> partialConfig_notB = ConstraintTest.buildPartialConfig_notB();
 
@@ -440,6 +446,14 @@ public class ConstraintTest {
     Map<String, Boolean> partialConfig = new HashMap<>();
     partialConfig.put("A", true);
     partialConfig.put("B", true);
+
+    return partialConfig;
+  }
+
+  static Map<String, Boolean> buildPartialConfig_notB_C() {
+    Map<String, Boolean> partialConfig = new HashMap<>();
+    partialConfig.put("B", false);
+    partialConfig.put("C", true);
 
     return partialConfig;
   }

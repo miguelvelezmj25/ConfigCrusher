@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -75,6 +76,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     if (options.isEmpty()) {
       throw new IllegalArgumentException("The options cannot be empty");
     }
+
+    // TODO add check to be sure that we are not sampling a constraint that we already sample
 
     Set<Constraint> exploredConstraints = new HashSet<>();
     Set<Constraint> constraintsToExplore = new HashSet<>();
@@ -404,11 +407,59 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
     }
 
-    Set<Map<String, Boolean>> completeConstraints = getCompleteConstraints(constraintsToEvaluate);
+    if (constraintsToEvaluate.size() == 1) {
+      return constraintsToEvaluate.iterator().next();
+    }
 
-    // TODO optimize how to pick the next constraint to evaluate, maybe pick the one with the most options? Merge constraints?
+    // TODO check results if picking the longest constraint first
+    Set<Map<String, Boolean>> completeConstraints = getCompleteConstraints(constraintsToEvaluate);
+    Iterator<Map<String, Boolean>> iter = completeConstraints.iterator();
+    Map<String, Boolean> finalConstraintAsConfigWithValues = new HashMap<>(iter.next());
+
+    while (iter.hasNext()) {
+      Map<String, Boolean> currentConstraintAsConfigWithValues = iter.next();
+      Set<String> pivotOptions = getPivotOptions(finalConstraintAsConfigWithValues,
+          currentConstraintAsConfigWithValues);
+
+      if (pivotOptions.isEmpty()) {
+        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
+      }
+      else {
+        Map<String, Boolean> finalConstraintPivotValues = getPivotValues(
+            finalConstraintAsConfigWithValues, pivotOptions);
+        Map<String, Boolean> currentConstraintPivotValues = getPivotValues(
+            currentConstraintAsConfigWithValues, pivotOptions);
+
+        if (!finalConstraintPivotValues.equals(currentConstraintPivotValues)) {
+          // Could not merge the constraints
+          continue;
+        }
+
+        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
+      }
+    }
+
     // TODO check if the constraint we picked is NOT a proper subset of a set left in the constraints set
-    return constraintsToEvaluate.iterator().next();
+    return new Constraint(finalConstraintAsConfigWithValues);
+  }
+
+  private static Map<String, Boolean> getPivotValues(
+      Map<String, Boolean> constraintAsConfigWithValues, Set<String> pivotOptions) {
+    Map<String, Boolean> pivotValues = new HashMap<>();
+
+    for (String option : pivotOptions) {
+      pivotValues.put(option, constraintAsConfigWithValues.get(option));
+    }
+
+    return pivotValues;
+  }
+
+  private static Set<String> getPivotOptions(Map<String, Boolean> configWaithValues1,
+      Map<String, Boolean> configWaithValues2) {
+    Set<String> pivotOptions = new HashSet<>(configWaithValues1.keySet());
+    pivotOptions.retainAll(configWaithValues2.keySet());
+
+    return pivotOptions;
   }
 
   private static Set<Map<String, Boolean>> getCompleteConstraints(Set<Constraint> constraints) {

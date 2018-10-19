@@ -497,7 +497,7 @@ public class SimpleCompressionTest {
     }
 
     @Test
-    public void testSleep10() throws IOException {
+    public void testSleep10() {
 //        String programName = "sleep10";
 //
 //        // Program arguments
@@ -595,11 +595,7 @@ public class SimpleCompressionTest {
         // Program arguments
         String[] args = new String[0];
 
-//        String[] args = new String[2];
-//        args[0] = "-delres";
-//        args[1] = "-saveres";
-
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -626,7 +622,7 @@ public class SimpleCompressionTest {
     }
 
     @Test
-    public void Sleep1() throws IOException {
+    public void Sleep1() {
 //        String programName = "sleep1";
 //
 //        // Program arguments
@@ -635,7 +631,7 @@ public class SimpleCompressionTest {
 ////        String[] args = new String[1];
 ////        args[0] = "-saveres";
 //
-//        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+//        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
 //        Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 //
 //        args = new String[2];
@@ -660,7 +656,7 @@ public class SimpleCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -685,7 +681,7 @@ public class SimpleCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -710,7 +706,7 @@ public class SimpleCompressionTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -735,7 +731,7 @@ public class SimpleCompressionTest {
 //        args[0] = "-delres";
 //        args[1] = "-saveres";
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -756,7 +752,7 @@ public class SimpleCompressionTest {
         // Program arguments
         String[] args = new String[0];
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -777,7 +773,7 @@ public class SimpleCompressionTest {
         // Program arguments
         String[] args = new String[0];
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -798,7 +794,7 @@ public class SimpleCompressionTest {
         // Program arguments
         String[] args = new String[0];
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -823,7 +819,7 @@ public class SimpleCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -844,7 +840,7 @@ public class SimpleCompressionTest {
         // Program arguments
         String[] args = new String[0];
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -868,7 +864,7 @@ public class SimpleCompressionTest {
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];
@@ -892,7 +888,7 @@ public class SimpleCompressionTest {
 //        String[] args = new String[1];
 //        args[0] = "-saveres";
 
-        StaticAnalysis taintflowAnalysis = new TaintFlowAnalysis(programName);
+        StaticAnalysis<Set<Set<String>>> taintflowAnalysis = new TaintFlowAnalysis(programName);
         Map<JavaRegion, Set<Set<String>>> decisionsToOptionsSet = taintflowAnalysis.analyze(args);
 
         args = new String[2];

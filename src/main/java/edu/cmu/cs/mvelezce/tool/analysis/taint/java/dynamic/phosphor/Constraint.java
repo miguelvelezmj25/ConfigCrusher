@@ -132,14 +132,33 @@ public class Constraint {
       throw new IllegalArgumentException("The options cannot be empty");
     }
 
-    Map<String, Boolean> constraint = new HashMap<>();
-
-    for (String option : options) {
-      boolean value = config.contains(option);
-      constraint.put(option, value);
+    if (!options.containsAll(config)) {
+      throw new IllegalArgumentException(
+          "The config " + config + " is not a subset of the options " + options);
     }
 
-    return constraint;
+    Map<String, Boolean> partialConfig = new HashMap<>();
+
+    for (String option : options) {
+      partialConfig.put(option, config.contains(option));
+    }
+
+    return partialConfig;
+  }
+
+  static Map<String, Boolean> buildContext(@Nullable Set<String> taintsFromContext,
+      Set<String> config) {
+    Map<String, Boolean> context = new HashMap<>();
+
+    if (taintsFromContext == null || taintsFromContext.isEmpty()) {
+      return context;
+    }
+
+    for (String taint : taintsFromContext) {
+      context.put(taint, config.contains(taint));
+    }
+
+    return context;
   }
 
   @Override

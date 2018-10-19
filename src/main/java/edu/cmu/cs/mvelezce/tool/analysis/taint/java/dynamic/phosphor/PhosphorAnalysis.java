@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import com.google.common.annotations.VisibleForTesting;
 import edu.cmu.cs.mvelezce.cc.TaintLabel;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
@@ -66,17 +65,22 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       Constraint currentConstraint = PhosphorAnalysis.getNextConstraint(constraintsToExplore);
 
       // CE.removeAll(CTE)
-      PhosphorAnalysis.removeAllConstraints(currentConstraint, constraintsToExplore);
+      PhosphorAnalysis.removeAllSubConstraints(currentConstraint, constraintsToExplore);
       // EC.addAll(CTE)
       exploredConstraints.add(currentConstraint);
 
+      // c:= to_config(CTE)
       Set<String> config = currentConstraint.getConstraintAsConfig();
-      // TS := run_taint_analysis(P’, c)
-//      this.runPhosphorAnalysis(config);
-//      Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults = this.analyzePhosphorResults();
-//      this.calculateConstraintsPerSink(sinksToTaintsResults);
-//
-////      // CT := range(TS) // TS: S —> P(O)
+      // ST := run_taint_analysis(P’, c)
+      this.runPhosphorAnalysis(config);
+      Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults = this
+          .analyzePhosphorResults();
+
+      // CFA := get_constraints_from_analysis(ST)
+      Set<Constraint> constraintsFromAnalysis = this
+          .getConstraintsFromAnalysis(sinksToTaintsResults, config);
+
+////      // CT := range(ST) // ST: S —> P(O)
 ////      Set<Set<String>> taintsAtSinks = new HashSet<>(sinksToTaintsResults.values());
 ////      // CC := calc_constraints(CT)
 ////      Set<Map<String, Boolean>> constraintsFromAnalysis = PhosphorAnalysis
@@ -98,7 +102,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 //    this.getConfigsForCC();
   }
 
-  static void removeAllConstraints(Constraint constraint, Set<Constraint> constraints) {
+  /**
+   * Removes the subconstraints of the passed constraint from passes constraints set.
+   */
+  static void removeAllSubConstraints(Constraint constraint, Set<Constraint> constraints) {
     constraints.removeIf(currentConstraint -> currentConstraint.isSubsetOf(constraint));
   }
 
@@ -118,33 +125,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 //    return null;
   }
 
-//  Set<Set<String>> getConfigsForCC() {
-//    Set<Constraint> ccConstraints = this.getAllConstraints();
-//    Set<Set<String>> configs = new HashSet<>();
-//
-//    for (Constraint ccConstraint : ccConstraints) {
-//      Set<String> config = Constraint.toConfig(ccConstraint);
-//      configs.add(config);
-//    }
-//
-//    System.out.println(configs);
-//    return configs;
-//  }
-
-  private Set<Constraint> getAllConstraints() {
-    Set<Constraint> allConstraints = new HashSet<>();
-
-    for (Set<Constraint> constraints : this.sinksToConstraints.values()) {
-      allConstraints.addAll(constraints);
-    }
-
-    return allConstraints;
-  }
-
   /**
    * Input: P', c in C
    *
-   * Output: TS S --> P(O)
+   * Output: ST: S --> (P(O), P(O))
    *
    * Input: There is a script that this method calls to executed the instrumented program.
    * Therefore, we do not not pass the instrumented program to this method.
@@ -186,40 +170,13 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return commandList;
   }
 
-//  /**
-//   * Calculate all constraints and subconstraints of a constraint.
-//   */
-//  static Set<Constraint> getAllCombinationsOfConstraints(Constraint constraint) {
-//    Set<Constraint> allConstraints = new HashSet<>();
-//    Set<Map<String, Boolean>> allPartialConfigs = PhosphorAnalysis
-//        .getAllCombinationsOfPartialConfigs(constraint.getPartialConfig());
-//
-//    return allConstraints;
-//  }
-
-  static Set<Map<String, Boolean>> getAllCombinationsOfPartialConfigs(Map<String, Boolean> partialConfig) {
-    Set<Map<String, Boolean>> allPartialConfigs = new HashSet<>();
-    Set<String> options = partialConfig.keySet();
-    Set<Set<String>> optionsCombinations = Helper.getCombinations(options);
-
-    for (Set<String> optionsCombo : optionsCombinations) {
-      Map<String, Boolean> newPartialConfig = new HashMap<>();
-
-      for (String option : optionsCombo) {
-        newPartialConfig.put(option, partialConfig.get(option));
-      }
-
-      allPartialConfigs.add(newPartialConfig);
-    }
-
-    return allPartialConfigs;
-  }
-
   /**
+   * Input: P', c in C
+   *
+   * Output: ST: S --> (P(O), P(O))
+   *
    * Helper method for running the phosphor analysis. This method processes the results of the
    * analysis and returns the output specified in the algorithm.
-   *
-   * Output: TS: S --> (P(O), P(O))
    */
   private Pair<Map<String, Set<String>>, Map<String, Set<String>>> analyzePhosphorResults()
       throws IOException {
@@ -232,30 +189,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
     return this.readPhosphorTaintResults(serializedFiles);
   }
-
-//  static Set<Map<String, Boolean>> getExploredConstraints(
-//      Set<Map<String, Boolean>> currentConstraints,
-//      Set<Map<String, Boolean>> exploredConstraints) {
-//    if (currentConstraints.isEmpty()) {
-//      throw new IllegalArgumentException("The current constraints cannot be empty");
-//    }
-//
-//    if (exploredConstraints.isEmpty()) {
-//      throw new IllegalArgumentException("The explored constraints cannot be empty");
-//    }
-//
-//    Set<Map<String, Boolean>> currentConstraintsAlreadyExplored = new HashSet<>();
-//
-//    for (Map<String, Boolean> currentConstraintsEntry : currentConstraints) {
-//      for (Map<String, Boolean> exploredConstraintsEntry : exploredConstraints) {
-//        if (exploredConstraintsEntry.entrySet().containsAll(currentConstraintsEntry.entrySet())) {
-//          currentConstraintsAlreadyExplored.add(currentConstraintsEntry);
-//        }
-//      }
-//    }
-//
-//    return currentConstraintsAlreadyExplored;
-//  }
 
   private Pair<Map<String, Set<String>>, Map<String, Set<String>>> readPhosphorTaintResults(
       Collection<File> serializedFiles)
@@ -297,26 +230,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return sinksToTaints;
   }
 
-//  private Map<String, Set<TaintLabel>> merge(Map<String, Set<TaintLabel>> sinksToTaints1,
-//      Map<String, Set<TaintLabel>> sinksToTaints2) {
-//    Map<String, Set<TaintLabel>> sinksToTaints = new HashMap<>(sinksToTaints1);
-//
-//    for (String sink : sinksToTaints2.keySet()) {
-//      if (!sinksToTaints.containsKey(sink)) {
-//        sinksToTaints.put(sink, new HashSet<>());
-//      }
-//    }
-//
-//    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaints2.entrySet()) {
-//      String sink = entry.getKey();
-//      Set<TaintLabel> taints = sinksToTaints.get(sink);
-//      taints.addAll(entry.getValue());
-//      sinksToTaints.put(sink, taints);
-//    }
-//
-//    return sinksToTaints;
-//  }
-
   private Map<String, Set<TaintLabel>> deserialize(File file) throws IOException {
     FileInputStream fis = new FileInputStream(file);
     ObjectInputStream ois = new ObjectInputStream(fis);
@@ -340,26 +253,14 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return FileUtils.listFiles(dirFile, null, false);
   }
 
-//  /**
-//   * Input: CT: P(P(O))
-//   *
-//   * Output: CC: set of constraint (i.e., partial configs)
-//   */
-//  static Set<Map<String, Boolean>> calculateConstraints(Set<Set<String>> taintsAtSinks) {
-//    if (taintsAtSinks.isEmpty()) {
-//      throw new IllegalArgumentException("The taints at sinks cannot be empty");
-//    }
-//
-//    Set<Map<String, Boolean>> constraints = new HashSet<>();
-//
-//    for (Set<String> taintsAtSink : taintsAtSinks) {
-//      constraints.addAll(PhosphorAnalysis.buildPartialConfigs(taintsAtSink));
-//    }
-//
-//    return constraints;
-//  }
-
-  void calculateConstraintsPerSink(
+  /**
+   * Input: ST: S --> (P(O), P(O)), c ∈ C
+   *
+   * Output: CFA: P(CT)
+   *
+   * Calculate the constraints from running the dynamic analysis
+   */
+  Set<Constraint> getConstraintsFromAnalysis(
       Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults,
       Set<String> config) {
     Map<String, Set<String>> sinksToTaintsFromTaints = sinksToTaintsResults.getLeft();
@@ -369,26 +270,42 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       throw new IllegalArgumentException("The sinks to taints result cannot be empty");
     }
 
-    Set<String> executedSinks = sinksToTaintsFromContext.keySet();
+    Set<Constraint> constraintsFromAnalysis = new HashSet<>();
+
+    Set<String> executedSinks = new HashSet<>(sinksToTaintsFromTaints.keySet());
+    executedSinks.addAll(sinksToTaintsFromContext.keySet());
     this.addNewSinks(executedSinks);
 
     for (String sink : executedSinks) {
       Set<Constraint> constraintsAtSink = this
-          .buildConstraints(sinksToTaintsFromTaints.get(sink), sinksToTaintsFromContext.get(sink),
+          .getConstraintsAtSink(sinksToTaintsFromTaints.get(sink),
+              sinksToTaintsFromContext.get(sink),
               config);
 
-      this.sinksToConstraints.put(sink, constraintsAtSink);
+      constraintsFromAnalysis.addAll(constraintsAtSink);
+
+      Set<Constraint> oldConstraints = this.sinksToConstraints.get(sink);
+      oldConstraints.addAll(constraintsAtSink);
+      this.sinksToConstraints.put(sink, oldConstraints);
     }
 
+    return constraintsFromAnalysis;
   }
 
-  private Set<Constraint> buildConstraints(Set<String> taintsFromTaint,
+  /**
+   * Input: st in ST, c in C
+   *
+   * Output: CCS: P(CFA)
+   *
+   * Calculate the constraints at a sink
+   */
+  private Set<Constraint> getConstraintsAtSink(Set<String> taintsFromTaint,
       Set<String> taintsFromContext, Set<String> config) {
     Set<Constraint> constraints = new HashSet<>();
 
     Set<Map<String, Boolean>> partialConfigs = PhosphorAnalysis
         .buildPartialConfigs(taintsFromTaint);
-    Map<String, Boolean> context = this.buildContext(taintsFromContext, config);
+    Map<String, Boolean> context = Constraint.buildContext(taintsFromContext, config);
 
     for (Map<String, Boolean> partialConfig : partialConfigs) {
       constraints.add(new Constraint(partialConfig, context));
@@ -403,17 +320,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     constraints.removeIf(constraint -> !constraint.isValid());
   }
 
-  private Map<String, Boolean> buildContext(Set<String> taintsFromContext,
-      Set<String> config) {
-    Map<String, Boolean> context = new HashMap<>();
-
-    for (String taint : taintsFromContext) {
-      context.put(taint, config.contains(taint));
-    }
-
-    return context;
-  }
-
   private void addNewSinks(Set<String> sinks) {
     for (String sink : sinks) {
       if (!this.sinksToConstraints.containsKey(sink)) {
@@ -422,11 +328,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     }
   }
 
-  /**
-   * Input: CTS in CT
-   *
-   * Output: CCS in CFA
-   */
   static Set<Map<String, Boolean>> buildPartialConfigs(Set<String> taintsAtSink) {
     if (taintsAtSink.isEmpty()) {
       throw new IllegalArgumentException("The taints at sink cannot be empty");
@@ -452,7 +353,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   /**
    * Input: CE, O
    *
-   * Output: CTE: P(CE), c in C
+   * Output: CTE: P(CE)
    *
    * Input: since we represent options set to false by not including them in the set that represents
    * configurations, there is no need to pass them in the method.
@@ -465,15 +366,130 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     }
 
     // TODO optimize how to pick the next constraint to evaluate, maybe pick the one with the most options? Merge constraints?
+    // TODO check if the constraint we picked is NOT a proper subset of a set left in the constraints set
     return constraintsToEvaluate.iterator().next();
   }
 
-  Map<String, Set<Constraint>> getSinksToConstraints() {
-    return sinksToConstraints;
-  }
+//  /**
+//   * Input: CT: P(P(O))
+//   *
+//   * Output: CC: set of constraint (i.e., partial configs)
+//   */
+//  static Set<Map<String, Boolean>> calculateConstraints(Set<Set<String>> taintsAtSinks) {
+//    if (taintsAtSinks.isEmpty()) {
+//      throw new IllegalArgumentException("The taints at sinks cannot be empty");
+//    }
+//
+//    Set<Map<String, Boolean>> constraints = new HashSet<>();
+//
+//    for (Set<String> taintsAtSink : taintsAtSinks) {
+//      constraints.addAll(PhosphorAnalysis.buildPartialConfigs(taintsAtSink));
+//    }
+//
+//    return constraints;
+//  }
 
-  @VisibleForTesting
-  void addSinksToConstraints(Map<String, Set<Constraint>> sinksToConstraints) {
-    this.sinksToConstraints.putAll(sinksToConstraints);
-  }
+//  @VisibleForTesting
+//  void addSinksToConstraints(Map<String, Set<Constraint>> sinksToConstraints) {
+//    this.sinksToConstraints.putAll(sinksToConstraints);
+//  }
+
+  //  Set<Set<String>> getConfigsForCC() {
+//    Set<Constraint> ccConstraints = this.getAllConstraints();
+//    Set<Set<String>> configs = new HashSet<>();
+//
+//    for (Constraint ccConstraint : ccConstraints) {
+//      Set<String> config = Constraint.toConfig(ccConstraint);
+//      configs.add(config);
+//    }
+//
+//    System.out.println(configs);
+//    return configs;
+//  }
+
+//  private Set<Constraint> getAllConstraints() {
+//    Set<Constraint> allConstraints = new HashSet<>();
+//
+//    for (Set<Constraint> constraints : this.sinksToConstraints.values()) {
+//      allConstraints.addAll(constraints);
+//    }
+//
+//    return allConstraints;
+//  }
+
+  //  /**
+//   * Calculate all constraints and subconstraints of a constraint.
+//   */
+//  static Set<Constraint> getAllCombinationsOfConstraints(Constraint constraint) {
+//    Set<Constraint> allConstraints = new HashSet<>();
+//    Set<Map<String, Boolean>> allPartialConfigs = PhosphorAnalysis
+//        .getAllCombinationsOfPartialConfigs(constraint.getPartialConfig());
+//
+//    return allConstraints;
+//  }
+
+  //  static Set<Map<String, Boolean>> getAllCombinationsOfPartialConfigs(
+//      Map<String, Boolean> partialConfig) {
+//    Set<Map<String, Boolean>> allPartialConfigs = new HashSet<>();
+//    Set<String> options = partialConfig.keySet();
+//    Set<Set<String>> optionsCombinations = Helper.getCombinations(options);
+//
+//    for (Set<String> optionsCombo : optionsCombinations) {
+//      Map<String, Boolean> newPartialConfig = new HashMap<>();
+//
+//      for (String option : optionsCombo) {
+//        newPartialConfig.put(option, partialConfig.get(option));
+//      }
+//
+//      allPartialConfigs.add(newPartialConfig);
+//    }
+//
+//    return allPartialConfigs;
+//  }
+
+  //  static Set<Map<String, Boolean>> getExploredConstraints(
+//      Set<Map<String, Boolean>> currentConstraints,
+//      Set<Map<String, Boolean>> exploredConstraints) {
+//    if (currentConstraints.isEmpty()) {
+//      throw new IllegalArgumentException("The current constraints cannot be empty");
+//    }
+//
+//    if (exploredConstraints.isEmpty()) {
+//      throw new IllegalArgumentException("The explored constraints cannot be empty");
+//    }
+//
+//    Set<Map<String, Boolean>> currentConstraintsAlreadyExplored = new HashSet<>();
+//
+//    for (Map<String, Boolean> currentConstraintsEntry : currentConstraints) {
+//      for (Map<String, Boolean> exploredConstraintsEntry : exploredConstraints) {
+//        if (exploredConstraintsEntry.entrySet().containsAll(currentConstraintsEntry.entrySet())) {
+//          currentConstraintsAlreadyExplored.add(currentConstraintsEntry);
+//        }
+//      }
+//    }
+//
+//    return currentConstraintsAlreadyExplored;
+//  }
+
+  //  private Map<String, Set<TaintLabel>> merge(Map<String, Set<TaintLabel>> sinksToTaints1,
+//      Map<String, Set<TaintLabel>> sinksToTaints2) {
+//    Map<String, Set<TaintLabel>> sinksToTaints = new HashMap<>(sinksToTaints1);
+//
+//    for (String sink : sinksToTaints2.keySet()) {
+//      if (!sinksToTaints.containsKey(sink)) {
+//        sinksToTaints.put(sink, new HashSet<>());
+//      }
+//    }
+//
+//    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaints2.entrySet()) {
+//      String sink = entry.getKey();
+//      Set<TaintLabel> taints = sinksToTaints.get(sink);
+//      taints.addAll(entry.getValue());
+//      sinksToTaints.put(sink, taints);
+//    }
+//
+//    return sinksToTaints;
+//  }
+
+
 }

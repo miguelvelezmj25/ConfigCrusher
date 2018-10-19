@@ -10,29 +10,29 @@ import org.junit.Test;
 public class ConstraintTest {
 
   @Test(expected = IllegalArgumentException.class)
-  public void toConfig_forEmptyConstraint() {
+  public void toPartialCCConfig_forEmptyConstraint() {
     Map<String, Boolean> emptyPartialConfig = new HashMap<>();
 
-    Constraint.toConfig(emptyPartialConfig);
+    Constraint.toPartialCCConfig(emptyPartialConfig);
   }
 
   @Test
-  public void toConfig_forConstraint_NotA_NotB() {
+  public void toPartialCCConfig_forConstraint_NotA_NotB() {
     Map<String, Boolean> partialConfig = ConstraintTest.buildPartialConfig_notA_notB();
 
-    Set<String> config = Constraint.toConfig(partialConfig);
-    Assert.assertTrue(config.isEmpty());
+    Set<String> partialCCConfig = Constraint.toPartialCCConfig(partialConfig);
+    Assert.assertTrue(partialCCConfig.isEmpty());
   }
 
   @Test
-  public void toConfig_forConstraint_A_notB() {
+  public void toPartialCCConfig_forConstraint_A_notB() {
     Map<String, Boolean> partialConfig = ConstraintTest.buildPartialConfig_A_notB();
 
     Set<String> expectedConfig = new HashSet<>();
     expectedConfig.add("A");
 
-    Set<String> config = Constraint.toConfig(partialConfig);
-    Assert.assertEquals(expectedConfig, config);
+    Set<String> partialCCConfig = Constraint.toPartialCCConfig(partialConfig);
+    Assert.assertEquals(expectedConfig, partialCCConfig);
   }
 
   @Test
@@ -192,8 +192,8 @@ public class ConstraintTest {
   }
 
   @Test
-  public void toPartialConfig_forAllOptionsFalse() {
-    Map<String, Boolean> expectedPartialConfig = ConstraintTest.buildPartialConfig_notA_notB();
+  public void toConfigWithValues_forAllOptionsFalse() {
+    Map<String, Boolean> expectedConfigWithValues = ConstraintTest.buildPartialConfig_notA_notB();
 
     Set<String> config = new HashSet<>();
 
@@ -201,14 +201,14 @@ public class ConstraintTest {
     options.add("A");
     options.add("B");
 
-    Map<String, Boolean> partialConfig = Constraint.toPartialConfig(config, options);
+    Map<String, Boolean> configWithValues = Constraint.toConfigWithValues(config, options);
 
-    Assert.assertEquals(expectedPartialConfig, partialConfig);
+    Assert.assertEquals(expectedConfigWithValues, configWithValues);
   }
 
   @Test
-  public void toPartialConfig_forAllOptionsTrue() {
-    Map<String, Boolean> expectedPartialConfig = ConstraintTest.buildPartialConfig_A_B();
+  public void toConfigWithValues_forAllOptionsTrue() {
+    Map<String, Boolean> expectedWithValues = ConstraintTest.buildPartialConfig_A_B();
 
     Set<String> config = new HashSet<>();
     config.add("A");
@@ -218,13 +218,13 @@ public class ConstraintTest {
     options.add("A");
     options.add("B");
 
-    Map<String, Boolean> partialConfig = Constraint.toPartialConfig(config, options);
+    Map<String, Boolean> configWithValues = Constraint.toConfigWithValues(config, options);
 
-    Assert.assertEquals(expectedPartialConfig, partialConfig);
+    Assert.assertEquals(expectedWithValues, configWithValues);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void toPartialConfig_forInvalidArgs() {
+  public void toConfigWithValues_forInvalidArgs() {
     Set<String> config = new HashSet<>();
     config.add("A");
     config.add("C");
@@ -233,7 +233,7 @@ public class ConstraintTest {
     options.add("A");
     options.add("B");
 
-    Constraint.toPartialConfig(config, options);
+    Constraint.toConfigWithValues(config, options);
   }
 
   @Test

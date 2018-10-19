@@ -79,9 +79,9 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     Set<Constraint> exploredConstraints = new HashSet<>();
     Set<Constraint> constraintsToExplore = new HashSet<>();
     // CE := to_constraint(c)
-    Map<String, Boolean> initialConfigAsPartialConfig = Constraint
-        .toPartialConfig(initialConfig, options);
-    constraintsToExplore.add(new Constraint(initialConfigAsPartialConfig));
+    Map<String, Boolean> initialConfigAsConfigWithValues = Constraint
+        .toConfigWithValues(initialConfig, options);
+    constraintsToExplore.add(new Constraint(initialConfigAsConfigWithValues));
 
     int count = 0;
 
@@ -89,9 +89,9 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       // CTE := get_next_constraint(CE,O)
       Constraint currentConstraint = PhosphorAnalysis.getNextConstraint(constraintsToExplore);
       // c:= to_config(CTE)
-      Set<String> config = currentConstraint.getConstraintAsConfig();
-      Map<String, Boolean> configAsPartialConfig = Constraint.toPartialConfig(config, options);
-      currentConstraint = new Constraint(configAsPartialConfig);
+      Set<String> config = currentConstraint.getConstraintAsPartialConfig();
+      Map<String, Boolean> configWithValues = Constraint.toConfigWithValues(config, options);
+      currentConstraint = new Constraint(configWithValues);
 
       // CE.removeAll(CTE)
       PhosphorAnalysis.removeAllSubConstraints(constraintsToExplore, currentConstraint);
@@ -414,7 +414,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 //    Set<Set<String>> configs = new HashSet<>();
 //
 //    for (Constraint ccConstraint : ccConstraints) {
-//      Set<String> config = Constraint.toConfig(ccConstraint);
+//      Set<String> config = Constraint.toPartialCCConfig(ccConstraint);
 //      configs.add(config);
 //    }
 //

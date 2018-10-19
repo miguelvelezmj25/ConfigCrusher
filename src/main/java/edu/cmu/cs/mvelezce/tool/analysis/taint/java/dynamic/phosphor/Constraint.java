@@ -10,12 +10,6 @@ public class Constraint {
 
   private final Map<String, Boolean> partialConfig;
   private final Map<String, Boolean> context;
-//  private final Map<String, Boolean> constraint = new HashMap<>();
-//  private final Set<String> partialConfigAsConfig;
-//  private final Set<String> constraintAsConfig = new HashSet<>();
-//
-//  @Nullable
-//  private final Set<String> contextAsConfig;
 
   Constraint(Map<String, Boolean> partialConfig, Map<String, Boolean> context) {
     if (partialConfig.isEmpty()) {
@@ -24,21 +18,6 @@ public class Constraint {
 
     this.partialConfig = partialConfig;
     this.context = context;
-
-//    this.partialConfigAsConfig = toConfig(this.partialConfig);
-//
-//    if (this.context.isEmpty()) {
-//      this.contextAsConfig = null;
-//    }
-//    else {
-//      this.contextAsConfig = toConfig(this.context);
-//      this.constraintAsConfig.addAll(this.contextAsConfig);
-//    }
-//
-//    this.constraintAsConfig.addAll(this.partialConfigAsConfig);
-//
-//    this.constraint.putAll(this.partialConfig);
-//    this.constraint.putAll(this.context);
   }
 
   Constraint(Map<String, Boolean> partialConfig) {
@@ -52,23 +31,6 @@ public class Constraint {
   public Map<String, Boolean> getContext() {
     return context;
   }
-
-//  public Map<String, Boolean> getConstraint() {
-//    return constraint;
-//  }
-//
-//  public Set<String> getPartialConfigAsConfig() {
-//    return partialConfigAsConfig;
-//  }
-//
-//  public Set<String> getConstraintAsConfig() {
-//    return constraintAsConfig;
-//  }
-//
-//  @Nullable
-//  public Set<String> getContextAsConfig() {
-//    return contextAsConfig;
-//  }
 
   /**
    * Checks whether the partial configuration can be executed under the condition specified in the
@@ -112,11 +74,11 @@ public class Constraint {
     return constraint;
   }
 
-  Set<String> getConstraintAsConfig() {
-    Set<String> config = new HashSet<>(toConfig(this.partialConfig));
+  Set<String> getConstraintAsPartialConfig() {
+    Set<String> config = new HashSet<>(toPartialCCConfig(this.partialConfig));
 
     if (!this.context.isEmpty()) {
-      config.addAll(toConfig(this.context));
+      config.addAll(toPartialCCConfig(this.context));
     }
 
     return config;
@@ -129,7 +91,7 @@ public class Constraint {
    *
    * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
    */
-  static Set<String> toConfig(Map<String, Boolean> partialConfig) {
+  static Set<String> toPartialCCConfig(Map<String, Boolean> partialConfig) {
     if (partialConfig.isEmpty()) {
       throw new IllegalArgumentException("The partial config should not be empty");
     }
@@ -145,7 +107,7 @@ public class Constraint {
     return config;
   }
 
-  static Map<String, Boolean> toPartialConfig(Set<String> config, Set<String> options) {
+  static Map<String, Boolean> toConfigWithValues(Set<String> config, Set<String> options) {
     if (options.isEmpty()) {
       throw new IllegalArgumentException("The options cannot be empty");
     }
@@ -155,13 +117,13 @@ public class Constraint {
           "The config " + config + " is not a subset of the options " + options);
     }
 
-    Map<String, Boolean> partialConfig = new HashMap<>();
+    Map<String, Boolean> configWithValues = new HashMap<>();
 
     for (String option : options) {
-      partialConfig.put(option, config.contains(option));
+      configWithValues.put(option, config.contains(option));
     }
 
-    return partialConfig;
+    return configWithValues;
   }
 
   static Map<String, Boolean> buildContext(@Nullable Set<String> taintsFromContext,

@@ -90,7 +90,7 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
       JavaRegion newRegion = new JavaRegion.Builder(oldRegion.getRegionID(),
           oldRegion.getRegionPackage(),
           oldRegion.getRegionClass(), oldRegion.getRegionMethod())
-          .startBytecodeIndex(oldRegion.getStartBytecodeIndex())
+          .startBytecodeIndex(oldRegion.getStartRegionIndex())
           .startBlockID(oldRegion.getStartMethodBlock().getID()).endBlocksIDs(endBlocksIDs)
           .build();
       RegionToInfo<Set<Set<String>>> regionToInfo = new RegionToInfo<>(newRegion,

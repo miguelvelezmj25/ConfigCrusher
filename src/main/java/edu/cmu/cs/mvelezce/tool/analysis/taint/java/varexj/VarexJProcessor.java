@@ -204,7 +204,7 @@ public class VarexJProcessor {
         System.out.println(
             currentJavaRegion.getRegionPackage() + " " + currentJavaRegion.getRegionClass() + " "
                 + currentJavaRegion.getRegionMethod() + " " + currentJavaRegion
-                .getStartBytecodeIndex() + " with " + currentUsedTerms);
+                .getStartRegionIndex() + " with " + currentUsedTerms);
       }
 
       currentBytecodeIndex = entryBytecodeIndexes;

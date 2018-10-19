@@ -62,7 +62,7 @@ public class Slicer {
 //                    if(relevantRegion.getRegionPackage().equals(javaRegion.getRegionPackage())
 //                            && relevantRegion.getRegionClass().equals(javaRegion.getRegionClass())
 //                            && relevantRegion.getRegionMethod().equals(javaRegion.getRegionMethod())
-//                            && relevantRegion.getStartBytecodeIndex() == javaRegion.getStartBytecodeIndex()) {
+//                            && relevantRegion.getStartRegionIndex() == javaRegion.getStartRegionIndex()) {
 //                        regionToFeature.getValue().add(featureToLabel.getKey());
 //                        newRegion = false;
 //                        break;

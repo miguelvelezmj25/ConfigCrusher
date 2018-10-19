@@ -393,7 +393,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this.methodsWithUpdatedIndexes.add(callerMethodNode);
       }
       else {
-        index = callerRegion.getStartBytecodeIndex();
+        index = callerRegion.getStartRegionIndex();
 
         newRegion = new JavaRegion.Builder(callerRegion.getRegionPackage(),
             callerRegion.getRegionClass(),
@@ -760,11 +760,11 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         index = methodNode.instructions.indexOf(id.getInstructions().get(0));
       }
       else {
-        index = predRegion.getStartBytecodeIndex();
+        index = predRegion.getStartRegionIndex();
         this.regionsToOptionSet.remove(predRegion);
       }
 
-      newRegion.setStartBytecodeIndex(index);
+      newRegion.setStartRegionIndex(index);
       blocksToRegions.put(pred, newRegion);
 
       Set<Set<String>> newOptionSet = new HashSet<>();
@@ -863,14 +863,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
       int index;
 
       if (reachRegion == null) {
-        index = blockRegion.getStartBytecodeIndex();
+        index = blockRegion.getStartRegionIndex();
       }
       else {
-        index = reachRegion.getStartBytecodeIndex();
+        index = reachRegion.getStartRegionIndex();
         this.regionsToOptionSet.remove(reachRegion);
       }
 
-      newRegion.setStartBytecodeIndex(index);
+      newRegion.setStartRegionIndex(index);
       blocksToRegions.put(reach, newRegion);
 
       Set<Set<String>> newOptionSet = new HashSet<>();
@@ -983,7 +983,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
 
     for (JavaRegion region : regionsInMethod) {
-      instructionsToRegion.put(instructions.get(region.getStartBytecodeIndex()), region);
+      instructionsToRegion.put(instructions.get(region.getStartRegionIndex()), region);
     }
 
     return instructionsToRegion;
@@ -1598,7 +1598,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
           continue;
         }
 
-        if (!outputLine.contains(region.getStartBytecodeIndex() + ":")) {
+        if (!outputLine.contains(region.getStartRegionIndex() + ":")) {
           continue;
         }
 
@@ -1617,7 +1617,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
           }
 
           if (instructionCounter == instructionNumber) {
-            region.setStartBytecodeIndex(instructionsList.indexOf(instruction));
+            region.setStartRegionIndex(instructionsList.indexOf(instruction));
             updatedRegions.add(region);
             break;
           }
@@ -2017,7 +2017,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
       }
     }
 
-    javaRegions.sort(Comparator.comparingInt(JavaRegion::getStartBytecodeIndex));
+    javaRegions.sort(Comparator.comparingInt(JavaRegion::getStartRegionIndex));
 
     return javaRegions;
   }
@@ -2043,7 +2043,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
       }
     }
 
-    javaRegions.sort(Comparator.comparingInt(JavaRegion::getStartBytecodeIndex));
+    javaRegions.sort(Comparator.comparingInt(JavaRegion::getStartRegionIndex));
 
     return javaRegions;
   }

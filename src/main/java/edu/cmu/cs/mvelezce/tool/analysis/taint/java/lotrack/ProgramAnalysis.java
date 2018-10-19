@@ -173,7 +173,7 @@ public class ProgramAnalysis {
 //                if(currentJavaRegion != null && currentJavaRegion.getRegionPackage().equals(entryPackage)
 //                        && currentJavaRegion.getRegionClass().equals(entryClass)
 //                        && currentJavaRegion.getRegionMethod().equals(entryMethod)
-//                        && currentJavaRegion.getStartBytecodeIndex() == currentBytecodeIndex) {
+//                        && currentJavaRegion.getStartRegionIndex() == currentBytecodeIndex) {
 //                    regionsToOptions.get(currentJavaRegion).add(currentUsedTerms);
 //                }
 //                else {
@@ -191,7 +191,7 @@ public class ProgramAnalysis {
 //                    }
 //
 //                    regionsToOptions.put(currentJavaRegion, constraints);
-//                    System.out.println(currentJavaRegion.getRegionClass() + " " + currentJavaRegion.getRegionMethod() + " " + currentJavaRegion.getStartBytecodeIndex() + " with " + currentUsedTerms);
+//                    System.out.println(currentJavaRegion.getRegionClass() + " " + currentJavaRegion.getRegionMethod() + " " + currentJavaRegion.getStartRegionIndex() + " with " + currentUsedTerms);
 //                }
 //            }
 //

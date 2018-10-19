@@ -13,9 +13,9 @@ public class JavaRegion extends Region {
   private final String regionClass;
   private final String regionMethod;
 
+  private int startRegionIndex;
   private String startBlockID;
   private Set<String> endBlocksIDs;
-  private int startBytecodeIndex;
   private MethodBlock startMethodBlock;
   private Set<MethodBlock> endMethodBlocks;
 
@@ -31,7 +31,7 @@ public class JavaRegion extends Region {
     this.regionPackage = builder.regionPackage;
     this.regionClass = builder.regionClass;
     this.regionMethod = builder.regionMethod;
-    this.startBytecodeIndex = builder.startBytecodeIndex;
+    this.startRegionIndex = builder.startBytecodeIndex;
     this.startMethodBlock = builder.startMethodBlock;
     this.endMethodBlocks = builder.endMethodBlocks;
     this.startBlockID = builder.startBlockID;
@@ -50,8 +50,8 @@ public class JavaRegion extends Region {
     return this.regionMethod;
   }
 
-  public int getStartBytecodeIndex() {
-    return this.startBytecodeIndex;
+  public int getStartRegionIndex() {
+    return this.startRegionIndex;
   }
 
   public MethodBlock getStartMethodBlock() {
@@ -78,8 +78,8 @@ public class JavaRegion extends Region {
     this.endBlocksIDs = endBlocksIDs;
   }
 
-  public void setStartBytecodeIndex(int startBytecodeIndex) {
-    this.startBytecodeIndex = startBytecodeIndex;
+  public void setStartRegionIndex(int startRegionIndex) {
+    this.startRegionIndex = startRegionIndex;
   }
 
   public void setStartMethodBlock(MethodBlock startMethodBlock) {
@@ -96,7 +96,7 @@ public class JavaRegion extends Region {
         "regionPackage='" + this.regionPackage + '\'' +
         ", regionClass='" + this.regionClass + '\'' +
         ", regionMethod='" + this.regionMethod + '\'' +
-        ", startBytecodeIndex=" + this.startBytecodeIndex +
+        ", startRegionIndex=" + this.startRegionIndex +
         '}';
   }
 

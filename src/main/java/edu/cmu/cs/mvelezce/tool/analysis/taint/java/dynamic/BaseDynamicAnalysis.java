@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -92,7 +93,7 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
     Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
 
     for (RegionToInfo<Set<Constraint>> result : results) {
-      regionsToConstraints.put(result.getRegion(), result.getInfo());
+      regionsToConstraints.put(result.getRegion(), new HashSet<>(result.getInfo()));
     }
 
     return regionsToConstraints;

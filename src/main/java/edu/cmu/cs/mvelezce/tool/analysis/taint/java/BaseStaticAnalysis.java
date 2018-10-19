@@ -81,7 +81,7 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis<Set<Set<Strin
   public Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     List<RegionToInfo<Set<Set<String>>>> results = mapper
-        .readValue(file, new TypeReference<List<RegionToInfo>>() {
+        .readValue(file, new TypeReference<List<RegionToInfo<Set<Set<String>>>>>() {
         });
     Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
 

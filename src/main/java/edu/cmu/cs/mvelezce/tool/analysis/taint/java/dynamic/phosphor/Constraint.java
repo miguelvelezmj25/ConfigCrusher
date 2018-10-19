@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import javax.annotation.Nullable;
 
@@ -22,10 +23,6 @@ public class Constraint {
 
   Constraint(Map<String, Boolean> partialConfig) {
     this(partialConfig, new HashMap<>());
-  }
-
-  public Map<String, Boolean> getPartialConfig() {
-    return partialConfig;
   }
 
   public Map<String, Boolean> getContext() {
@@ -63,10 +60,12 @@ public class Constraint {
   }
 
   boolean isSubsetOf(Constraint constraint) {
-    return constraint.getConstraint().entrySet().containsAll(this.getConstraint().entrySet());
+    Set<Entry<String, Boolean>> constraintAsConstraint = constraint.getConstraint().entrySet();
+    Set<Entry<String, Boolean>> thisAsConstraint = this.getConstraint().entrySet();
+    return constraintAsConstraint.containsAll(thisAsConstraint);
   }
 
-  Map<String, Boolean> getConstraint() {
+  private Map<String, Boolean> getConstraint() {
     Map<String, Boolean> constraint = new HashMap<>();
     constraint.putAll(this.partialConfig);
     constraint.putAll(this.context);

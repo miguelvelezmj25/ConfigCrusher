@@ -70,7 +70,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    * Input: The program is provided elsewhere. Therefore, there is no need to pass the program to
    * this method.
    */
-  void runDynamicAnalysis(Set<String> initialConfig, Set<String> options)
+  private void runDynamicAnalysis(Set<String> initialConfig, Set<String> options)
       throws IOException, InterruptedException {
     if (options.isEmpty()) {
       throw new IllegalArgumentException("The options cannot be empty");

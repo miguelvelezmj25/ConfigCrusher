@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionToInfo;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import java.io.File;
 import java.io.IOException;
@@ -75,7 +75,7 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
-    List<DecisionToInfo> decisionsAndOptions = new ArrayList<>();
+    List<RegionToInfo> decisionsAndOptions = new ArrayList<>();
 
     for (Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionsSet : relevantRegionsToOptions
         .entrySet()) {
@@ -93,9 +93,9 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
           .startBytecodeIndex(oldRegion.getStartBytecodeIndex())
           .startBlockID(oldRegion.getStartMethodBlock().getID()).endBlocksIDs(endBlocksIDs)
           .build();
-      DecisionToInfo<Set<Set<String>>> decisionToInfo = new DecisionToInfo<>(newRegion,
+      RegionToInfo<Set<Set<String>>> regionToInfo = new RegionToInfo<>(newRegion,
           regionToOptionsSet.getValue());
-      decisionsAndOptions.add(decisionToInfo);
+      decisionsAndOptions.add(regionToInfo);
     }
 
     mapper.writeValue(file, decisionsAndOptions);
@@ -103,12 +103,12 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
 
   public Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    List<DecisionToInfo<Set<Set<String>>>> results = mapper
-        .readValue(file, new TypeReference<List<DecisionToInfo>>() {
+    List<RegionToInfo<Set<Set<String>>>> results = mapper
+        .readValue(file, new TypeReference<List<RegionToInfo>>() {
         });
     Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
 
-    for (DecisionToInfo<Set<Set<String>>> result : results) {
+    for (RegionToInfo<Set<Set<String>>> result : results) {
       regionsToOptionsSet.put(result.getRegion(), result.getInfo());
     }
 

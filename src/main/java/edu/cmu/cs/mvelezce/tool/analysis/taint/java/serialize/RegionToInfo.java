@@ -2,16 +2,16 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 
-public class DecisionToInfo<T> {
+public class RegionToInfo<T> {
 
   private JavaRegion region;
   private T info;
 
-  private DecisionToInfo() {
+  private RegionToInfo() {
     ;
   }
 
-  public DecisionToInfo(JavaRegion region, T info) {
+  public RegionToInfo(JavaRegion region, T info) {
     this.region = region;
     this.info = info;
   }

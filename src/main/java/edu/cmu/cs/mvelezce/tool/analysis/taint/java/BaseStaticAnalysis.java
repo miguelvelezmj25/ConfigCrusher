@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.DecisionToInfo;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,13 +65,13 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis<Set<Set<Strin
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
-    List<DecisionToInfo> decisionsAndOptions = new ArrayList<>();
+    List<RegionToInfo> decisionsAndOptions = new ArrayList<>();
 
     for (Map.Entry<JavaRegion, Set<Set<String>>> regionToOptionsSet : relevantRegionsToOptions
         .entrySet()) {
-      DecisionToInfo<Set<Set<String>>> decisionToInfo = new DecisionToInfo<>(
+      RegionToInfo<Set<Set<String>>> regionToInfo = new RegionToInfo<>(
           regionToOptionsSet.getKey(), regionToOptionsSet.getValue());
-      decisionsAndOptions.add(decisionToInfo);
+      decisionsAndOptions.add(regionToInfo);
     }
 
     mapper.writeValue(file, decisionsAndOptions);
@@ -80,12 +80,12 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis<Set<Set<Strin
   @Override
   public Map<JavaRegion, Set<Set<String>>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    List<DecisionToInfo<Set<Set<String>>>> results = mapper
-        .readValue(file, new TypeReference<List<DecisionToInfo>>() {
+    List<RegionToInfo<Set<Set<String>>>> results = mapper
+        .readValue(file, new TypeReference<List<RegionToInfo>>() {
         });
     Map<JavaRegion, Set<Set<String>>> regionsToOptionsSet = new HashMap<>();
 
-    for (DecisionToInfo<Set<Set<String>>> result : results) {
+    for (RegionToInfo<Set<Set<String>>> result : results) {
       regionsToOptionsSet.put(result.getRegion(), result.getInfo());
     }
 

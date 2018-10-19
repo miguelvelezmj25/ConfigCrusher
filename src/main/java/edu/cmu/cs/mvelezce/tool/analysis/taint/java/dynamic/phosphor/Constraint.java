@@ -62,7 +62,15 @@ public class Constraint {
   boolean isSubsetOf(Constraint constraint) {
     Set<Entry<String, Boolean>> constraintAsConstraint = constraint.getConstraint().entrySet();
     Set<Entry<String, Boolean>> thisAsConstraint = this.getConstraint().entrySet();
+
     return constraintAsConstraint.containsAll(thisAsConstraint);
+  }
+
+  boolean isEqualTo(Constraint constraint) {
+    Set<Entry<String, Boolean>> constraintAsConstraint = constraint.getConstraint().entrySet();
+    Set<Entry<String, Boolean>> thisAsConstraint = this.getConstraint().entrySet();
+
+    return constraintAsConstraint.equals(thisAsConstraint);
   }
 
   private Map<String, Boolean> getConstraint() {

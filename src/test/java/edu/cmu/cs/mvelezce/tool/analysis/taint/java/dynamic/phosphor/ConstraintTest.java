@@ -310,6 +310,20 @@ public class ConstraintTest {
     Assert.assertEquals(true, context.get(A));
   }
 
+  @Test
+  public void isEqualTo_forFalse() {
+
+  }
+
+  @Test
+  public void isEqualTo_forTrue() {
+    Constraint constraint_A = ConstraintTest.buildConstraint_A();
+    Constraint constraint_A_True = new Constraint(buildPartialConfig_A(), buildPartialConfig_A());
+
+    Assert.assertTrue(constraint_A.isEqualTo(constraint_A_True));
+    Assert.assertTrue(constraint_A_True.isEqualTo(constraint_A));
+  }
+
   static Constraint buildConstraint_notB() {
     Map<String, Boolean> partialConfig_notB = ConstraintTest.buildPartialConfig_notB();
 

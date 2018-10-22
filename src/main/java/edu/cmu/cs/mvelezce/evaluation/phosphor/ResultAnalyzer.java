@@ -37,7 +37,7 @@ public class ResultAnalyzer {
 
     List<String[]> data = new ArrayList<>();
     data.add(new String[]{"Sink", "BF Taints", "BF Ctx", "CC Taints", "CC Ctx", "Equal Taints",
-        " Equal Ctxs"});
+        "Equal Ctxs", "Missing taints from CC", "Missing taints from BF", "Missing ctx from CC", "Missing ctx from BF"});
 
     for (JavaRegion region : sinks) {
       List<String> entryList = this.buildEntry(region, bfResults, ccResults);
@@ -54,23 +54,52 @@ public class ResultAnalyzer {
       Map<JavaRegion, Set<Constraint>> ccResults) {
     List<String> entry = new ArrayList<>();
 
+    // "Sink"
     String sink = this.getSink(region);
     entry.add(sink);
 
+    // "BF Taints"
     Set<Constraint> bfConstraints = bfResults.get(region);
     Set<String> bfTaints = this.getTaintsFromTaints(bfConstraints);
     entry.add(bfTaints.toString());
+
+    // "BF Ctx"
     Set<String> bfContext = this.getTaintsFromContext(bfConstraints);
     entry.add(bfContext.toString());
 
+    // "CC Taints"
     Set<Constraint> ccConstraints = ccResults.get(region);
     Set<String> ccTaints = this.getTaintsFromTaints(ccConstraints);
     entry.add(ccTaints.toString());
+
+    // "CC Ctx"
     Set<String> ccContext = this.getTaintsFromContext(ccConstraints);
     entry.add(ccContext.toString());
 
+    //"Equal Taints"
     entry.add(String.valueOf(bfTaints.equals(ccTaints)));
+    // "Equal Ctxs"
     entry.add(String.valueOf(bfContext.equals(ccContext)));
+
+    // "Missing taints from CC"
+    Set<String> missingTaintsFromCC = new HashSet<>(ccTaints);
+    missingTaintsFromCC.removeAll(bfTaints);
+    entry.add(missingTaintsFromCC.toString());
+
+    // "Missing taints from BF"
+    Set<String> missingTaintsFromBF = new HashSet<>(bfTaints);
+    missingTaintsFromBF.removeAll(ccTaints);
+    entry.add(missingTaintsFromBF.toString());
+
+    // "Missing ctx from CC"
+    Set<String> missingCtxFromCC = new HashSet<>(ccContext);
+    missingCtxFromCC.removeAll(bfContext);
+    entry.add(missingCtxFromCC.toString());
+
+    // "Missing ctx from BF"
+    Set<String> missingCtxFromBF = new HashSet<>(bfContext);
+    missingCtxFromBF.removeAll(ccContext);
+    entry.add(missingCtxFromBF.toString());
 
     return entry;
   }

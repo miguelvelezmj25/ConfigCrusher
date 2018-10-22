@@ -310,13 +310,6 @@ public class ConstraintTest {
     Assert.assertEquals(true, context.get(A));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void buildPartialConfigs_forEmptyTaintsAtSink() {
-    Set<String> emptyTaintsAtSink = new HashSet<>();
-
-    Constraint.buildPartialConfigs(emptyTaintsAtSink);
-  }
-
   @Test
   public void buildPartialConfigs_forTaints_A_B() {
     Map<String, Boolean> partialConfig_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();

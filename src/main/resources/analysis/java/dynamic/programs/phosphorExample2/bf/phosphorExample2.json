@@ -1,0 +1,102 @@
+[
+  {
+    "region": {
+      "regionID": "94895f4e-a447-45d8-a8bf-03521de8b6e5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example2",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      {
+        "partialConfig": {
+          "A": true
+        },
+        "context": {}
+      },
+      {
+        "partialConfig": {
+          "A": false
+        },
+        "context": {}
+      }
+    ]
+  },
+  {
+    "region": {
+      "regionID": "b498e118-07c5-44ff-80a0-cdfcd789c881",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example2",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      {
+        "partialConfig": {
+          "B": true
+        },
+        "context": {}
+      },
+      {
+        "partialConfig": {
+          "B": false
+        },
+        "context": {}
+      }
+    ]
+  },
+  {
+    "region": {
+      "regionID": "147efb3f-e6aa-415a-9162-c9b720dc306f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example2",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      {
+        "partialConfig": {
+          "A": false
+        },
+        "context": {
+          "B": false
+        }
+      },
+      {
+        "partialConfig": {},
+        "context": {
+          "B": false
+        }
+      },
+      {
+        "partialConfig": {
+          "A": true
+        },
+        "context": {
+          "B": false
+        }
+      }
+    ]
+  }
+]

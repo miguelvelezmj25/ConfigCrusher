@@ -1,10 +1,27 @@
 package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import java.io.IOException;
 import org.junit.Test;
 
 public class ResultAnalyzerTest {
+
+  @Test
+  public void dynamicRunningExample() throws IOException {
+    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
+
+    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
+    analyzer.analyze();
+  }
+
+  @Test
+  public void example2() throws IOException {
+    String programName = PhosphorExample2Adapter.PROGRAM_NAME;
+
+    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
+    analyzer.analyze();
+  }
 
   @Test
   public void dynamicRunningExamplePhosphorResults() throws IOException {
@@ -20,13 +37,5 @@ public class ResultAnalyzerTest {
 
     ResultAnalyzer analyzer = new ResultAnalyzer(programName);
     analyzer.readBFPhosphorResults();
-  }
-
-  @Test
-  public void dynamicRunningExample() throws IOException {
-    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
-
-    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
-    analyzer.analyze();
   }
 }

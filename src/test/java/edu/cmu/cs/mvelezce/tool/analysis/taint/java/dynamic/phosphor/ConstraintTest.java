@@ -310,6 +310,35 @@ public class ConstraintTest {
     Assert.assertEquals(true, context.get(A));
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void buildPartialConfigs_forEmptyTaintsAtSink() {
+    Set<String> emptyTaintsAtSink = new HashSet<>();
+
+    Constraint.buildPartialConfigs(emptyTaintsAtSink);
+  }
+
+  @Test
+  public void buildPartialConfigs_forTaints_A_B() {
+    Map<String, Boolean> partialConfig_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
+    Map<String, Boolean> partialConfig_notA_B = ConstraintTest.buildPartialConfig_notA_B();
+    Map<String, Boolean> partialConfig_A_notB = ConstraintTest.buildPartialConfig_A_notB();
+    Map<String, Boolean> partialConfig_A_B = ConstraintTest.buildPartialConfig_A_B();
+
+    HashSet<Map<String, Boolean>> expectedConstraints = new HashSet<>();
+    expectedConstraints.add(partialConfig_notA_notB);
+    expectedConstraints.add(partialConfig_notA_B);
+    expectedConstraints.add(partialConfig_A_notB);
+    expectedConstraints.add(partialConfig_A_B);
+
+    Set<String> taintsAtSink = new HashSet<>();
+    taintsAtSink.add("A");
+    taintsAtSink.add("B");
+
+    Set<Map<String, Boolean>> constraints = Constraint.buildPartialConfigs(taintsAtSink);
+
+    Assert.assertEquals(expectedConstraints, constraints);
+  }
+
   @Test
   public void isEqualTo_forFalse() {
     Constraint constraint_A = ConstraintTest.buildConstraint_A();

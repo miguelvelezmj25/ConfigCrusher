@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
+import edu.cmu.cs.mvelezce.tool.Helper;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -14,15 +15,11 @@ public class Constraint {
 
   // Dummy constructor needed for jackson xml
   private Constraint() {
-    this.partialConfig = null;
-    this.context = null;
+    this.partialConfig = new HashMap<>();
+    this.context = new HashMap<>();
   }
 
   Constraint(Map<String, Boolean> partialConfig, Map<String, Boolean> context) {
-    if (partialConfig.isEmpty()) {
-      throw new IllegalArgumentException("The partial config cannot be empty");
-    }
-
     this.partialConfig = partialConfig;
     this.context = context;
   }
@@ -143,6 +140,29 @@ public class Constraint {
     }
 
     return configWithValues;
+  }
+
+  static Set<Map<String, Boolean>> buildPartialConfigs(@Nullable Set<String> taintsAtSink) {
+    Set<Map<String, Boolean>> partialConfigs = new HashSet<>();
+
+    if (taintsAtSink == null || taintsAtSink.isEmpty()) {
+      return partialConfigs;
+    }
+
+    Set<Set<String>> configs = Helper.getConfigurations(taintsAtSink);
+
+    for (Set<String> config : configs) {
+      Map<String, Boolean> partialConfig = new HashMap<>();
+
+      for (String taint : taintsAtSink) {
+        boolean value = config.contains(taint);
+        partialConfig.put(taint, value);
+      }
+
+      partialConfigs.add(partialConfig);
+    }
+
+    return partialConfigs;
   }
 
   static Map<String, Boolean> buildContext(@Nullable Set<String> taintsFromContext,

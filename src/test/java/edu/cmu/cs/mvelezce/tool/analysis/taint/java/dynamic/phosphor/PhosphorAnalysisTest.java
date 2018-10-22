@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +18,21 @@ public class PhosphorAnalysisTest {
   public void dynamicRunningExample() throws IOException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
+    Set<String> initialConfig = new HashSet<>();
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
+  }
+
+  @Test
+  public void example2() throws IOException {
+    String programName = PhosphorExample2Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(PhosphorExample2Adapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
 
     // Program arguments
@@ -131,35 +147,6 @@ public class PhosphorAnalysisTest {
     Constraint nextConstraint = PhosphorAnalysis.getNextConstraint(constraints);
 
     Assert.assertTrue(expectedConstraint.isEqualTo(nextConstraint));
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void buildPartialConfigs_forEmptyTaintsAtSink() {
-    Set<String> emptyTaintsAtSink = new HashSet<>();
-
-    PhosphorAnalysis.buildPartialConfigs(emptyTaintsAtSink);
-  }
-
-  @Test
-  public void buildPartialConfigs_forTaints_A_B() {
-    Map<String, Boolean> partialConfig_notA_notB = ConstraintTest.buildPartialConfig_notA_notB();
-    Map<String, Boolean> partialConfig_notA_B = ConstraintTest.buildPartialConfig_notA_B();
-    Map<String, Boolean> partialConfig_A_notB = ConstraintTest.buildPartialConfig_A_notB();
-    Map<String, Boolean> partialConfig_A_B = ConstraintTest.buildPartialConfig_A_B();
-
-    HashSet<Map<String, Boolean>> expectedConstraints = new HashSet<>();
-    expectedConstraints.add(partialConfig_notA_notB);
-    expectedConstraints.add(partialConfig_notA_B);
-    expectedConstraints.add(partialConfig_A_notB);
-    expectedConstraints.add(partialConfig_A_B);
-
-    Set<String> taintsAtSink = new HashSet<>();
-    taintsAtSink.add("A");
-    taintsAtSink.add("B");
-
-    Set<Map<String, Boolean>> constraints = PhosphorAnalysis.buildPartialConfigs(taintsAtSink);
-
-    Assert.assertEquals(expectedConstraints, constraints);
   }
 
   @Test

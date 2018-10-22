@@ -7,7 +7,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -197,12 +198,17 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
     Adapter adapter;
 
-    if (programName.equals(DynamicRunningExampleAdapter.PROGRAM_NAME)) {
-      commandList.add("./examples.sh");
-      adapter = new DynamicRunningExampleAdapter();
-    }
-    else {
-      throw new RuntimeException("Could not find a phosphor script to run " + programName);
+    switch (programName) {
+      case DynamicRunningExampleAdapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new DynamicRunningExampleAdapter();
+        break;
+      case PhosphorExample2Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new PhosphorExample2Adapter();
+        break;
+      default:
+        throw new RuntimeException("Could not find a phosphor script to run " + programName);
     }
 
     String[] configArgs = adapter.configurationAsMainArguments(config);
@@ -342,13 +348,16 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    *
    * Calculate the constraints at a sink
    */
-  private Set<Constraint> getConstraintsAtSink(Set<String> taintsFromTaint,
-      Set<String> taintsFromContext, Set<String> config) {
+  private Set<Constraint> getConstraintsAtSink(@Nullable Set<String> taintsFromTaint,
+      @Nullable Set<String> taintsFromContext, Set<String> config) {
     Set<Constraint> constraints = new HashSet<>();
 
-    Set<Map<String, Boolean>> partialConfigs = PhosphorAnalysis
-        .buildPartialConfigs(taintsFromTaint);
+    Set<Map<String, Boolean>> partialConfigs = Constraint.buildPartialConfigs(taintsFromTaint);
     Map<String, Boolean> context = Constraint.buildContext(taintsFromContext, config);
+
+    if (partialConfigs.isEmpty()) {
+      partialConfigs.add(new HashMap<>());
+    }
 
     for (Map<String, Boolean> partialConfig : partialConfigs) {
       constraints.add(new Constraint(partialConfig, context));
@@ -369,28 +378,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
         this.sinksToConstraints.put(sink, new HashSet<>());
       }
     }
-  }
-
-  static Set<Map<String, Boolean>> buildPartialConfigs(Set<String> taintsAtSink) {
-    if (taintsAtSink.isEmpty()) {
-      throw new IllegalArgumentException("The taints at sink cannot be empty");
-    }
-
-    Set<Map<String, Boolean>> constraints = new HashSet<>();
-    Set<Set<String>> configs = Helper.getConfigurations(taintsAtSink);
-
-    for (Set<String> config : configs) {
-      Map<String, Boolean> constraint = new HashMap<>();
-
-      for (String taint : taintsAtSink) {
-        boolean value = config.contains(taint);
-        constraint.put(taint, value);
-      }
-
-      constraints.add(constraint);
-    }
-
-    return constraints;
   }
 
   /**

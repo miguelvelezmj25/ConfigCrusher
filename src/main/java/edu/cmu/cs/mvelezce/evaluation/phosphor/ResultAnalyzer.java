@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.Constraint;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorAnalysis;
 import java.io.IOException;
@@ -18,6 +19,14 @@ public class ResultAnalyzer {
 
   void readPhosphorResults() throws IOException {
     DynamicAnalysis<Set<Constraint>> analysis = new PhosphorAnalysis(this.programName);
+
+    String[] args = new String[0];
+    Map<JavaRegion, Set<Constraint>> res = analysis.analyze(args);
+    System.out.println(res);
+  }
+
+  void readBFPhosphorResults() throws IOException {
+    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(this.programName);
 
     String[] args = new String[0];
     Map<JavaRegion, Set<Constraint>> res = analysis.analyze(args);

@@ -7,10 +7,18 @@ import org.junit.Test;
 public class ResultAnalyzerTest {
 
   @Test
-  public void readPhosphorResults() throws IOException {
+  public void dynamicRunningExamplePhosphorResults() throws IOException {
     String programName = DynamicRunningExampleMain.PROGRAM_NAME;
 
     ResultAnalyzer analyzer = new ResultAnalyzer(programName);
     analyzer.readPhosphorResults();
+  }
+
+  @Test
+  public void dynamicRunningExampleBFPhosphorResults() throws IOException {
+    String programName = DynamicRunningExampleMain.PROGRAM_NAME;
+
+    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
+    analyzer.readBFPhosphorResults();
   }
 }

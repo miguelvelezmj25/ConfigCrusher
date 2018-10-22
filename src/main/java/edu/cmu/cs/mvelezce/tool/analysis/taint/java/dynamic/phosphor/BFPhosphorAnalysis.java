@@ -14,6 +14,10 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     super(programName, options, new HashSet<>());
   }
 
+  public BFPhosphorAnalysis(String programName) {
+    super(programName);
+  }
+
   @Override
   protected void runDynamicAnalysis(Set<String> initialConfig, Set<String> options)
       throws IOException, InterruptedException {

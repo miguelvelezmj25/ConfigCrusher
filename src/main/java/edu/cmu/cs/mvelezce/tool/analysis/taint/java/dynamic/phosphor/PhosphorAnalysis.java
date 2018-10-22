@@ -197,9 +197,9 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
     Adapter adapter;
 
-    if (programName.equals(DynamicRunningExampleMain.PROGRAM_NAME)) {
+    if (programName.equals(DynamicRunningExampleAdapter.PROGRAM_NAME)) {
       commandList.add("./examples.sh");
-      adapter = new DynamicRunningExampleAdapter.Builder().build();
+      adapter = new DynamicRunningExampleAdapter();
     }
     else {
       throw new RuntimeException("Could not find a phosphor script to run " + programName);
@@ -208,6 +208,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     String[] configArgs = adapter.configurationAsMainArguments(config);
     List<String> configList = Arrays.asList(configArgs);
     commandList.addAll(configList);
+    commandList.add(adapter.getMainClass());
 
     return commandList;
   }

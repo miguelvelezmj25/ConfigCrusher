@@ -15,7 +15,7 @@ public class Region {
 
   // Needed for saving and reading regions in json
   protected Region() {
-    this.regionID = null;
+    this.regionID = "";
   }
 
   protected Region(Builder builder) {

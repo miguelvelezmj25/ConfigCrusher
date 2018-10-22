@@ -21,9 +21,9 @@ public class JavaRegion extends Region {
 
   // Needed for saving and reading regions in json
   private JavaRegion() {
-    this.regionPackage = null;
-    this.regionClass = null;
-    this.regionMethod = null;
+    this.regionPackage = "";
+    this.regionClass = "";
+    this.regionMethod = "";
   }
 
   private JavaRegion(Builder builder) {
@@ -54,27 +54,22 @@ public class JavaRegion extends Region {
       return false;
     }
 
-    assert regionPackage != null;
     if (!regionPackage.equals(that.regionPackage)) {
       return false;
     }
 
-    assert regionClass != null;
     if (!regionClass.equals(that.regionClass)) {
       return false;
     }
-    assert regionMethod != null;
+
     return regionMethod.equals(that.regionMethod);
   }
 
   // TODO this implementation might brake the implementation in other CC components
   @Override
   public int hashCode() {
-    assert regionPackage != null;
     int result = regionPackage.hashCode();
-    assert regionClass != null;
     result = 31 * result + regionClass.hashCode();
-    assert regionMethod != null;
     result = 31 * result + regionMethod.hashCode();
     result = 31 * result + startRegionIndex;
     return result;

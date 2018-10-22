@@ -11,7 +11,7 @@ public class ResultAnalyzerTest {
     String programName = DynamicRunningExampleMain.PROGRAM_NAME;
 
     ResultAnalyzer analyzer = new ResultAnalyzer(programName);
-    analyzer.readPhosphorResults();
+    analyzer.readCCPhosphorResults();
   }
 
   @Test
@@ -20,5 +20,13 @@ public class ResultAnalyzerTest {
 
     ResultAnalyzer analyzer = new ResultAnalyzer(programName);
     analyzer.readBFPhosphorResults();
+  }
+
+  @Test
+  public void dynamicRunningExample() throws IOException {
+    String programName = DynamicRunningExampleMain.PROGRAM_NAME;
+
+    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
+    analyzer.analyze();
   }
 }

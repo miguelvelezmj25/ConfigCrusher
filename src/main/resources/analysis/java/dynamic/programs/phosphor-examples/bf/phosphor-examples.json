@@ -1,1 +1,96 @@
-[{"region":{"regionID":"bd894464-0f25-4ec9-a5da-59c0402a1cd8","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"RunningExample","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":[{"partialConfig":{"A":true},"context":{}},{"partialConfig":{"A":false},"context":{}}]},{"region":{"regionID":"001793d9-db72-4907-9df6-94eee4d5828f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"RunningExample","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":2,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":[{"partialConfig":{"A":true},"context":{}},{"partialConfig":{"A":false},"context":{}}]},{"region":{"regionID":"ee943e9f-73f4-44bd-b83d-a8979b3ef994","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"RunningExample","regionMethod":"foo(Z)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":[{"partialConfig":{"B":true},"context":{"A":true}},{"partialConfig":{"B":false},"context":{"A":true}}]}]
+[
+  {
+    "region": {
+      "regionID": "bd894464-0f25-4ec9-a5da-59c0402a1cd8",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "RunningExample",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      {
+        "partialConfig": {
+          "A": true
+        },
+        "context": {}
+      },
+      {
+        "partialConfig": {
+          "A": false
+        },
+        "context": {}
+      }
+    ]
+  },
+  {
+    "region": {
+      "regionID": "001793d9-db72-4907-9df6-94eee4d5828f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "RunningExample",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      {
+        "partialConfig": {
+          "A": true
+        },
+        "context": {}
+      },
+      {
+        "partialConfig": {
+          "A": false
+        },
+        "context": {}
+      }
+    ]
+  },
+  {
+    "region": {
+      "regionID": "ee943e9f-73f4-44bd-b83d-a8979b3ef994",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "RunningExample",
+      "regionMethod": "foo(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": [
+      {
+        "partialConfig": {
+          "B": true
+        },
+        "context": {
+          "A": true
+        }
+      },
+      {
+        "partialConfig": {
+          "B": false
+        },
+        "context": {
+          "A": true
+        }
+      }
+    ]
+  }
+]

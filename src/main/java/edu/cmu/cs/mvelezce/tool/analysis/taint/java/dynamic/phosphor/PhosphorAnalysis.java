@@ -34,7 +34,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
   private final Map<String, Set<Constraint>> sinksToConstraints = new HashMap<>();
 
-  PhosphorAnalysis(String programName) {
+  public PhosphorAnalysis(String programName) {
     this(programName, new HashSet<>(), new HashSet<>());
   }
 

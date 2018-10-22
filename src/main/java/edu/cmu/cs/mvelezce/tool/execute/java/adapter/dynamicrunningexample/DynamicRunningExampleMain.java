@@ -11,11 +11,10 @@ import java.util.Set;
 
 public class DynamicRunningExampleMain extends BaseMain {
 
-  public static final String DYNAMIC_RUNNING_EXAMPLE_MAIN = DynamicRunningExampleMain.class
+  static final String DYNAMIC_RUNNING_EXAMPLE_MAIN = DynamicRunningExampleMain.class
       .getCanonicalName();
-  public static final String PROGRAM_NAME = "phosphor-examples";
 
-  public DynamicRunningExampleMain(String programName, String iteration, String[] args) {
+  private DynamicRunningExampleMain(String programName, String iteration, String[] args) {
     super(programName, iteration, args);
   }
 
@@ -32,7 +31,7 @@ public class DynamicRunningExampleMain extends BaseMain {
 
   @Override
   public void logExecution() throws IOException {
-    Adapter adapter = new DynamicRunningExampleAdapter.Builder().build();
+    Adapter adapter = new DynamicRunningExampleAdapter();
     Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
     ConfigCrusherExecutor executor = new ConfigCrusherExecutor(this.getProgramName());

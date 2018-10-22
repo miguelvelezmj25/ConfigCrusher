@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleMain;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,7 +15,7 @@ public class PhosphorAnalysisTest {
 
   @Test
   public void dynamicRunningExample() throws IOException {
-    String programName = DynamicRunningExampleMain.PROGRAM_NAME;
+    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
 
@@ -31,7 +30,7 @@ public class PhosphorAnalysisTest {
 
   @Test
   public void dynamicRunningExample_forReadResults() throws IOException {
-    String programName = DynamicRunningExampleMain.PROGRAM_NAME;
+    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
 
     String[] args = new String[0];
 
@@ -42,7 +41,7 @@ public class PhosphorAnalysisTest {
   @Test
   public void runPhosphorAnalysis_forDynamicRunningExample()
       throws IOException, InterruptedException {
-    String programName = DynamicRunningExampleMain.PROGRAM_NAME;
+    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
     PhosphorAnalysis analysis = new PhosphorAnalysis(programName);
     Set<String> config = new HashSet<>();
 
@@ -195,7 +194,7 @@ public class PhosphorAnalysisTest {
     Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults = Pair
         .of(sinksToTaints, sinksToContexts);
 
-    PhosphorAnalysis analysis = new PhosphorAnalysis(DynamicRunningExampleMain.PROGRAM_NAME);
+    PhosphorAnalysis analysis = new PhosphorAnalysis(DynamicRunningExampleAdapter.PROGRAM_NAME);
     Set<Constraint> constraintsFromAnalysis = analysis
         .getConstraintsFromAnalysis(sinksToTaintsResults, config);
 
@@ -352,7 +351,7 @@ public class PhosphorAnalysisTest {
 //    constraintsSink1.add(constraint_A_B);
 //    sinksToConstraints.put(sink1, constraintsSink1);
 //
-//    PhosphorAnalysis analysis = new PhosphorAnalysis(DynamicRunningExampleMain.PROGRAM_NAME);
+//    PhosphorAnalysis analysis = new PhosphorAnalysis(DynamicRunningExampleAdapter.PROGRAM_NAME);
 //    analysis.addSinksToConstraints(sinksToConstraints);
 //
 //    Set<Set<String>> expectedConfigs = new HashSet<>();

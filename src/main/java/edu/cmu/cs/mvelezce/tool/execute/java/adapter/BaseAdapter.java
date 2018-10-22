@@ -89,18 +89,22 @@ public abstract class BaseAdapter implements Adapter {
     return sleepConfiguration;
   }
 
+  @Override
   public String getProgramName() {
     return programName;
   }
 
+  @Override
   public String getMainClass() {
     return mainClass;
   }
 
+  @Override
   public String getDirectory() {
     return directory;
   }
 
+  @Override
   public List<String> getOptions() {
     return options;
   }

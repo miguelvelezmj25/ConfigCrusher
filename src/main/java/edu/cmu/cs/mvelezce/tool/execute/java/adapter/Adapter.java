@@ -1,18 +1,27 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 public interface Adapter {
 
-    public void execute(Set<String> configuration, int iteration) throws IOException, InterruptedException;
+  void execute(Set<String> configuration, int iteration) throws IOException, InterruptedException;
 
-    public void execute(Set<String> configuration) throws IOException, InterruptedException;
+  void execute(Set<String> configuration) throws IOException, InterruptedException;
 
-    public void execute(String mainAdapter, String[] args) throws InterruptedException, IOException;
+  void execute(String mainAdapter, String[] args) throws InterruptedException, IOException;
 
-    public String[] configurationAsMainArguments(Set<String> configuration);
+  String[] configurationAsMainArguments(Set<String> configuration);
 
-    public Set<String> configurationAsSet(String[] configuration);
+  Set<String> configurationAsSet(String[] configuration);
+
+  String getProgramName();
+
+  String getMainClass();
+
+  String getDirectory();
+
+  List<String> getOptions();
 
 }

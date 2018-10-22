@@ -71,7 +71,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    * Input: The program is provided elsewhere. Therefore, there is no need to pass the program to
    * this method.
    */
-  private void runDynamicAnalysis(Set<String> initialConfig, Set<String> options)
+  protected void runDynamicAnalysis(Set<String> initialConfig, Set<String> options)
       throws IOException, InterruptedException {
     if (options.isEmpty()) {
       throw new IllegalArgumentException("The options cannot be empty");
@@ -220,7 +220,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    * Helper method for running the phosphor analysis. This method processes the results of the
    * analysis and returns the output specified in the algorithm.
    */
-  private Pair<Map<String, Set<String>>, Map<String, Set<String>>> analyzePhosphorResults()
+  protected Pair<Map<String, Set<String>>, Map<String, Set<String>>> analyzePhosphorResults()
       throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
     Collection<File> serializedFiles = this.getSerializedFiles(dir);

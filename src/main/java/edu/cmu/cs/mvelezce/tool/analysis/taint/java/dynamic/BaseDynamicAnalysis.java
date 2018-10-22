@@ -36,7 +36,7 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
   public Map<JavaRegion, Set<Constraint>> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
-    String outputFile = BaseDynamicAnalysis.DIRECTORY + "/" + this.programName;
+    String outputFile = this.outputDir();
     File file = new File(outputFile);
 
     Options.checkIfDeleteResult(file);
@@ -66,9 +66,7 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
   public void writeToFile(Map<JavaRegion, Set<Constraint>> regionsToConstraints)
       throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    String outputFile =
-        BaseDynamicAnalysis.DIRECTORY + "/" + this.programName + "/" + this.programName
-            + Options.DOT_JSON;
+    String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
@@ -112,6 +110,11 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
 //
 //        return result;
 //    return null;
+  }
+
+  @Override
+  public String outputDir() {
+    return BaseDynamicAnalysis.DIRECTORY + "/" + this.programName + "/cc/";
   }
 
   public String getProgramName() {

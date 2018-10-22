@@ -3,8 +3,6 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleMain;
-import fj.Hash;
-import fj.data.hlist.HPre.HAdd;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;

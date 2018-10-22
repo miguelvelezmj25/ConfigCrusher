@@ -18,6 +18,8 @@ public interface Analysis<T> {
 
   Map<JavaRegion, T> readFromFile(File file) throws IOException;
 
+  String outputDir();
+
   Map<Region, Set<Set<String>>> transform(
       Map<? extends Region, Set<Set<String>>> regionsToOptionSet);
 

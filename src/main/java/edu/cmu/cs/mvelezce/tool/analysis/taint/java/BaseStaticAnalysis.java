@@ -29,7 +29,7 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis<Set<Set<Strin
   public Map<JavaRegion, Set<Set<String>>> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
-    String outputFile = BaseStaticAnalysis.DIRECTORY + "/" + this.programName;
+    String outputFile = this.outputDir();
     File file = new File(outputFile);
 
     Options.checkIfDeleteResult(file);
@@ -59,9 +59,7 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis<Set<Set<Strin
   public void writeToFile(Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions)
       throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    String outputFile =
-        BaseStaticAnalysis.DIRECTORY + "/" + this.programName + "/" + this.programName
-            + Options.DOT_JSON;
+    String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
@@ -105,6 +103,10 @@ public abstract class BaseStaticAnalysis implements StaticAnalysis<Set<Set<Strin
     return result;
   }
 
+  @Override
+  public String outputDir() {
+    return BaseStaticAnalysis.DIRECTORY + "/" + this.programName;
+  }
 
   public String getProgramName() {
     return this.programName;

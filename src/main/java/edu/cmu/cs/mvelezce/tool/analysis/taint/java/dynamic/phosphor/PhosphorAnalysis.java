@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -206,6 +207,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
       case PhosphorExample2Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new PhosphorExample2Adapter();
+        break;
+      case PhosphorExample3Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new PhosphorExample3Adapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

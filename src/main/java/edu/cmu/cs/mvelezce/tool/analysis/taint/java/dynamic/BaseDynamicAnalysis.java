@@ -85,7 +85,7 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
   public Map<JavaRegion, Set<Constraint>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     List<RegionToInfo<Set<Constraint>>> results = mapper
-        .readValue(file, new TypeReference<List<RegionToInfo>>() {
+        .readValue(file, new TypeReference<List<RegionToInfo<Set<Constraint>>>>() {
         });
 
     Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();

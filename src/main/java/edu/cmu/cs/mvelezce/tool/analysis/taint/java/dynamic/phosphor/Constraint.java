@@ -12,6 +12,12 @@ public class Constraint {
   private final Map<String, Boolean> partialConfig;
   private final Map<String, Boolean> context;
 
+  // Dummy constructor needed for jackson xml
+  private Constraint() {
+    this.partialConfig = null;
+    this.context = null;
+  }
+
   Constraint(Map<String, Boolean> partialConfig, Map<String, Boolean> context) {
     if (partialConfig.isEmpty()) {
       throw new IllegalArgumentException("The partial config cannot be empty");

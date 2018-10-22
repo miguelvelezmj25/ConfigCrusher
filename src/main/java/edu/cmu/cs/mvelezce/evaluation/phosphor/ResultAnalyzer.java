@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 
 public class ResultAnalyzer {
@@ -35,26 +36,11 @@ public class ResultAnalyzer {
     sinks.addAll(ccResults.keySet());
 
     List<String[]> data = new ArrayList<>();
-    data.add(new String[]{"Sink", "BF Taints", "BF Ctx", "CC Taints", "CC Ctx"});
+    data.add(new String[]{"Sink", "BF Taints", "BF Ctx", "CC Taints", "CC Ctx", "Equal Taints",
+        " Equal Ctxs"});
 
     for (JavaRegion region : sinks) {
-      List<String> entryList = new ArrayList<>();
-
-      String sink = this.getSink(region);
-      entryList.add(sink);
-
-      Set<Constraint> bfConstraints = bfResults.get(region);
-      Set<String> taints = this.getTaintsFromTaints(bfConstraints);
-      entryList.add(taints.toString());
-      Set<String> context = this.getTaintsFromContext(bfConstraints);
-      entryList.add(context.toString());
-
-      Set<Constraint> ccConstraints = bfResults.get(region);
-      taints = this.getTaintsFromTaints(ccConstraints);
-      entryList.add(taints.toString());
-      context = this.getTaintsFromContext(ccConstraints);
-      entryList.add(context.toString());
-
+      List<String> entryList = this.buildEntry(region, bfResults, ccResults);
       String[] entry = new String[entryList.size()];
       entry = entryList.toArray(entry);
       data.add(entry);
@@ -63,8 +49,38 @@ public class ResultAnalyzer {
     this.writeToCSVFile(data);
   }
 
-  private Set<String> getTaintsFromTaints(Set<Constraint> constraints) {
+  private List<String> buildEntry(JavaRegion region,
+      Map<JavaRegion, Set<Constraint>> bfResults,
+      Map<JavaRegion, Set<Constraint>> ccResults) {
+    List<String> entry = new ArrayList<>();
+
+    String sink = this.getSink(region);
+    entry.add(sink);
+
+    Set<Constraint> bfConstraints = bfResults.get(region);
+    Set<String> bfTaints = this.getTaintsFromTaints(bfConstraints);
+    entry.add(bfTaints.toString());
+    Set<String> bfContext = this.getTaintsFromContext(bfConstraints);
+    entry.add(bfContext.toString());
+
+    Set<Constraint> ccConstraints = ccResults.get(region);
+    Set<String> ccTaints = this.getTaintsFromTaints(ccConstraints);
+    entry.add(ccTaints.toString());
+    Set<String> ccContext = this.getTaintsFromContext(ccConstraints);
+    entry.add(ccContext.toString());
+
+    entry.add(String.valueOf(bfTaints.equals(ccTaints)));
+    entry.add(String.valueOf(bfContext.equals(ccContext)));
+
+    return entry;
+  }
+
+  private Set<String> getTaintsFromTaints(@Nullable Set<Constraint> constraints) {
     Set<String> taints = new HashSet<>();
+
+    if (constraints == null) {
+      return taints;
+    }
 
     for (Constraint constraint : constraints) {
       Map<String, Boolean> taintsFromTaints = constraint.getPartialConfig();
@@ -78,8 +94,12 @@ public class ResultAnalyzer {
     return taints;
   }
 
-  private Set<String> getTaintsFromContext(Set<Constraint> constraints) {
+  private Set<String> getTaintsFromContext(@Nullable Set<Constraint> constraints) {
     Set<String> taints = new HashSet<>();
+
+    if (constraints == null) {
+      return taints;
+    }
 
     for (Constraint constraint : constraints) {
       Map<String, Boolean> taintsFromContext = constraint.getContext();

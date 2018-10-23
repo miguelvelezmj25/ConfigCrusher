@@ -18,13 +18,13 @@ import java.util.Set;
 import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 
-public class ResultAnalyzer {
+public class PhosphorResultAnalyzer {
 
   private static final String OUTPUT_DIR = Options.DIRECTORY + "/evaluation/phosphor/programs";
 
   private final String programName;
 
-  ResultAnalyzer(String programName) {
+  PhosphorResultAnalyzer(String programName) {
     this.programName = programName;
   }
 
@@ -147,7 +147,7 @@ public class ResultAnalyzer {
   }
 
   private void writeToCSVFile(List<String[]> data) throws IOException {
-    File outputDir = new File(ResultAnalyzer.OUTPUT_DIR + "/" + this.programName);
+    File outputDir = new File(PhosphorResultAnalyzer.OUTPUT_DIR + "/" + this.programName);
 
     if (outputDir.exists()) {
       FileUtils.forceDelete(outputDir);

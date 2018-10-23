@@ -6,13 +6,13 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorEx
 import java.io.IOException;
 import org.junit.Test;
 
-public class ResultAnalyzerTest {
+public class PhosphorResultAnalyzerTest {
 
   @Test
   public void dynamicRunningExample() throws IOException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
 
-    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);
     analyzer.analyze();
   }
 
@@ -20,7 +20,7 @@ public class ResultAnalyzerTest {
   public void example2() throws IOException {
     String programName = PhosphorExample2Adapter.PROGRAM_NAME;
 
-    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);
     analyzer.analyze();
   }
 
@@ -28,7 +28,7 @@ public class ResultAnalyzerTest {
   public void example3() throws IOException {
     String programName = PhosphorExample3Adapter.PROGRAM_NAME;
 
-    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);
     analyzer.analyze();
   }
 
@@ -36,7 +36,7 @@ public class ResultAnalyzerTest {
   public void dynamicRunningExamplePhosphorResults() throws IOException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
 
-    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);
     analyzer.readCCPhosphorResults();
   }
 
@@ -44,7 +44,7 @@ public class ResultAnalyzerTest {
   public void dynamicRunningExampleBFPhosphorResults() throws IOException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
 
-    ResultAnalyzer analyzer = new ResultAnalyzer(programName);
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);
     analyzer.readBFPhosphorResults();
   }
 }

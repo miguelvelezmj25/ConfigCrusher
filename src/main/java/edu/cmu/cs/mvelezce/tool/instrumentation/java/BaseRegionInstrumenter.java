@@ -25,7 +25,7 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
     }
 
     public BaseRegionInstrumenter(String programName) {
-        this(programName, null, null);
+        this(programName, null, new HashMap<>());
     }
 
     @Override
@@ -36,7 +36,6 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
         Options.checkIfDeleteResult(outputFile);
 
         if(outputFile.exists()) {
-//                FileUtils.forceDelete(outputFile);
             Collection<File> files = FileUtils.listFiles(outputFile, new String[]{"json"}, false);
 
             if(files.size() != 1) {

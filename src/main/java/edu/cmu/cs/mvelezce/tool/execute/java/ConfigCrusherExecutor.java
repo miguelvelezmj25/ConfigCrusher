@@ -17,6 +17,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions13.Regions13Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions14.Regions14Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions16.Regions16Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sleep.SleepAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.zipme.ZipmeAdapter;
@@ -93,7 +94,7 @@ public class ConfigCrusherExecutor extends BaseExecutor {
         else if(this.getProgramName().contains("pngtasticOptimizer")) {
             adapter = new OptimizerAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
-        else if(this.getProgramName().contains("running-example")) {
+        else if(this.getProgramName().contains(RunningExampleMain.PROGRAM_NAME)) {
             adapter = new RunningExampleAdapter(this.getProgramName(), this.getEntryPoint(), this.getClassDir());
         }
         else if(this.getProgramName().contains("regions12")) {

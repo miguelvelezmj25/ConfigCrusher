@@ -5,15 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.BaseStaticAnalysis;
 
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static edu.cmu.cs.mvelezce.tool.Options.USER_HOME;
-
 public class TaintFlowAnalysis extends BaseStaticAnalysis {
 
-    private static final String TAINTFLOW_OUTPUT_DIR = USER_HOME + "/Documents/Programming/Java/Projects/taintflow/src/main/resources/output";
+    private static final String TAINTFLOW_OUTPUT_DIR = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/taintflow/src/main/resources/output";
 
     public TaintFlowAnalysis(String programName) {
         super(programName);

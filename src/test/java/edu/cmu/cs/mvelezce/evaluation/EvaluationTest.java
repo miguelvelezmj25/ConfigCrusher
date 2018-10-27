@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation;
 
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.UsesBFExecutor;
-import edu.cmu.cs.mvelezce.evaluation.approaches.groundtruth.execute.GroundTruthEvaluationExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.bruteforce.execute.BruteForceExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.FeatureModel;
 import edu.cmu.cs.mvelezce.evaluation.approaches.family.featuremodel.elevator.ElevatorFM;
@@ -10,6 +9,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.family.model.FamilyModelBuilder
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.Featurewise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.execute.FeaturewiseExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.featurewise.model.FeaturewisePerformanceModelBuilder;
+import edu.cmu.cs.mvelezce.evaluation.approaches.groundtruth.execute.GroundTruthEvaluationExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.Pairwise;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.execute.PairwiseExecutor;
 import edu.cmu.cs.mvelezce.evaluation.approaches.pairwise.model.PairwisePerformanceModelBuilder;
@@ -22,3441 +22,3513 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.berkeley.BerkeleyMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.colorCounter.ColorCounterMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.density.DensityMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.elevator.ElevatorMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.email.EmailAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.email.EmailMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.find.FindMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.grep.GrepMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.kanzi.KanziMain;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.lucene.LuceneMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.optimizer.OptimizerMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions12.Regions12Main;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions16.Regions16Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.regions16.Regions16Main;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sort.SortMain;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.ConfigCrusherPerformanceModelBuilder;
 import edu.cmu.cs.mvelezce.tool.performance.model.builder.PerformanceModelBuilder;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.junit.Test;
 
 public class EvaluationTest {
 
-    private Set<Set<String>> getConfigs(Set<PerformanceEntryStatistic> performanceEntries) {
-        Set<Set<String>> configs = new HashSet<>();
+  @Test
+  public void compareRunningExample0() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
+
+  @Test
+  public void compareRunningExample1() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
+
+  @Test
+  public void compareRunningExample2() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
+
+  @Test
+  public void compareRunningExample3() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
+
+  @Test
+  public void compareRunningExample4() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+  }
+
+  @Test
+  public void compareAllRunningExample0() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllRunningExample1() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllRunningExample2() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllRunningExample3() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllRunningExample4() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllColorCounter0() throws Exception {
+    String programName = "pngtasticColorCounter";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllColorCounter1() throws Exception {
+    String programName = "pngtasticColorCounter";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllColorCounter2() throws Exception {
+    String programName = "pngtasticColorCounter";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllColorCounter3() throws Exception {
+    String programName = "pngtasticColorCounter";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllColorCounter4() throws Exception {
+    String programName = "pngtasticColorCounter";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareColorCounter0() throws Exception {
+    String programName = "pngtasticColorCounter";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
+
+  @Test
+  public void compareColorCounter1() throws Exception {
+    String programName = "pngtasticColorCounter";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
+
+  @Test
+  public void compareAllElevator0() throws Exception {
+    String programName = "elevator";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllElevator2() throws Exception {
+    String programName = "elevator";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
+
+  @Test
+  public void compareAllElevator3() throws Exception {
+    String programName = "elevator";
+
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            configs.add(entry.getConfiguration());
-        }
+  @Test
+  public void compareAllElevator4() throws Exception {
+    String programName = "elevator";
 
-        return configs;
-    }
-
-    @Test
-    public void compareRunningExample0() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareRunningExample1() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareRunningExample2() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareRunningExample3() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareRunningExample4() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareAllRunningExample0() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllRunningExample1() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllRunningExample2() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllRunningExample3() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllRunningExample4() throws Exception {
-        String programName = "running-example";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllColorCounter0() throws Exception {
-        String programName = "pngtasticColorCounter";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllColorCounter1() throws Exception {
-        String programName = "pngtasticColorCounter";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllColorCounter2() throws Exception {
-        String programName = "pngtasticColorCounter";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllColorCounter3() throws Exception {
-        String programName = "pngtasticColorCounter";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllColorCounter4() throws Exception {
-        String programName = "pngtasticColorCounter";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareColorCounter0() throws Exception {
-        String programName = "pngtasticColorCounter";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareColorCounter1() throws Exception {
-        String programName = "pngtasticColorCounter";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareAllElevator0() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllElevator2() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllElevator3() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllElevator4() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareAllElevator5() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH, true);
-    }
-
-    @Test
-    public void compareElevator0() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareElevator2() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareElevator3() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareElevator4() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
-    }
-
-    @Test
-    public void compareElevator5() throws Exception {
-        String programName = "elevator";
-
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllEmail0() throws Exception {
-        String programName = "email";
+  @Test
+  public void compareAllElevator5() throws Exception {
+    String programName = "elevator";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllEmail1() throws Exception {
-        String programName = "email";
+  @Test
+  public void compareElevator0() throws Exception {
+    String programName = "elevator";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllEmail2() throws Exception {
-        String programName = "email";
+  @Test
+  public void compareElevator2() throws Exception {
+    String programName = "elevator";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllEmail3() throws Exception {
-        String programName = "email";
+  @Test
+  public void compareElevator3() throws Exception {
+    String programName = "elevator";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllEmail5() throws Exception {
-        String programName = "email";
+  @Test
+  public void compareElevator4() throws Exception {
+    String programName = "elevator";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+  }
 
+  @Test
+  public void compareElevator5() throws Exception {
+    String programName = "elevator";
 
-    @Test
-    public void compareEmail0() throws Exception {
-        String programName = "email";
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
+  @Test
+  public void compareAllEmail0() throws Exception {
+    String programName = "email";
 
-    @Test
-    public void compareEmail1() throws Exception {
-        String programName = "email";
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
+  @Test
+  public void compareAllEmail1() throws Exception {
+    String programName = "email";
 
-    @Test
-    public void compareEmail2() throws Exception {
-        String programName = "email";
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
+  @Test
+  public void compareAllEmail2() throws Exception {
+    String programName = "email";
 
-    @Test
-    public void compareEmail3() throws Exception {
-        String programName = "email";
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
+  @Test
+  public void compareAllEmail3() throws Exception {
+    String programName = "email";
 
-    @Test
-    public void compareEmail5() throws Exception {
-        String programName = "email";
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
-    }
+  @Test
+  public void compareAllEmail5() throws Exception {
+    String programName = "email";
 
-    @Test
-    public void compareAllGrep0() throws Exception {
-        String programName = "grep";
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH, true);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
 
-    @Test
-    public void compareAllGrep1() throws Exception {
-        String programName = "grep";
+  @Test
+  public void compareEmail0() throws Exception {
+    String programName = "email";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllGrep2() throws Exception {
-        String programName = "grep";
+  @Test
+  public void compareEmail1() throws Exception {
+    String programName = "email";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllGrep3() throws Exception {
-        String programName = "grep";
+  @Test
+  public void compareEmail2() throws Exception {
+    String programName = "email";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllGrep4() throws Exception {
-        String programName = "grep";
+  @Test
+  public void compareEmail3() throws Exception {
+    String programName = "email";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareGrep0() throws Exception {
-        String programName = "grep";
+  @Test
+  public void compareEmail5() throws Exception {
+    String programName = "email";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FAMILY, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareGrep1() throws Exception {
-        String programName = "grep";
+  @Test
+  public void compareAllGrep0() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareGrep2() throws Exception {
-        String programName = "grep";
+  @Test
+  public void compareAllGrep1() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareGrep3() throws Exception {
-        String programName = "grep";
+  @Test
+  public void compareAllGrep2() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareGrep4() throws Exception {
-        String programName = "grep";
+  @Test
+  public void compareAllGrep3() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllSort0() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareAllGrep4() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllSort1() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareGrep0() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllSort2() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareGrep1() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllSort3() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareGrep2() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllSort4() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareGrep3() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareSort0() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareGrep4() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareSort1() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareAllSort0() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareSort2() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareAllSort1() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareSort3() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareAllSort2() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareSort4() throws Exception {
-        String programName = "sort";
+  @Test
+  public void compareAllSort3() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllDensity0() throws Exception {
-        String programName = "density";
+  @Test
+  public void compareAllSort4() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllDensity1() throws Exception {
-        String programName = "density";
+  @Test
+  public void compareSort0() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllDensity2() throws Exception {
-        String programName = "density";
+  @Test
+  public void compareSort1() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllDensity3() throws Exception {
-        String programName = "density";
+  @Test
+  public void compareSort2() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareDensity0() throws Exception {
-        String programName = "density";
+  @Test
+  public void compareSort3() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareDensity1() throws Exception {
-        String programName = "density";
+  @Test
+  public void compareSort4() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareDensity2() throws Exception {
-        String programName = "density";
+  @Test
+  public void compareAllDensity0() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareDensity3() throws Exception {
-        String programName = "density";
+  @Test
+  public void compareAllDensity1() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareColorCounter2() throws Exception {
-        String programName = "pngtasticColorCounter";
+  @Test
+  public void compareAllDensity2() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareColorCounter3() throws Exception {
-        String programName = "pngtasticColorCounter";
+  @Test
+  public void compareAllDensity3() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareColorCounter4() throws Exception {
-        String programName = "pngtasticColorCounter";
+  @Test
+  public void compareDensity0() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllOptimizer0() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareDensity1() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllOptimizer1() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareDensity2() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllOptimizer2() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareDensity3() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllOptimizer3() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareColorCounter2() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllOptimizer4() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareColorCounter3() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareOptimizer0() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareColorCounter4() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareOptimizer1() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareAllOptimizer0() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareOptimizer2() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareAllOptimizer1() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareOptimizer3() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareAllOptimizer2() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareOptimizer4() throws Exception {
-        String programName = "pngtasticOptimizer";
+  @Test
+  public void compareAllOptimizer3() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllPrevayler0() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareAllOptimizer4() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllPrevayler1() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareOptimizer0() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllPrevayler2() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareOptimizer1() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllPrevayler3() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareOptimizer2() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllPrevayler4() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareOptimizer3() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void comparePrevayler0() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareOptimizer4() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void comparePrevayler1() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareAllPrevayler0() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void comparePrevayler2() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareAllPrevayler1() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void comparePrevayler3() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareAllPrevayler2() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void comparePrevayler4() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void compareAllPrevayler3() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllKanzi0() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void compareAllPrevayler4() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareAllKanzi1() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void comparePrevayler0() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllKanzi2() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void comparePrevayler1() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllKanzi3() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void comparePrevayler2() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareAllKanzi4() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void comparePrevayler3() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareKanzi0() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void comparePrevayler4() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void compareKanzi1() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void compareAllKanzi0() throws Exception {
+    String programName = "kanzi";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareKanzi2() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void compareAllKanzi1() throws Exception {
+    String programName = "kanzi";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareKanzi3() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void compareAllKanzi2() throws Exception {
+    String programName = "kanzi";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareKanzi4() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void compareAllKanzi3() throws Exception {
+    String programName = "kanzi";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareRegions121() throws Exception {
-        String programName = "regions12";
+  @Test
+  public void compareAllKanzi4() throws Exception {
+    String programName = "kanzi";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH, true);
+  }
 
-    @Test
-    public void compareRegions161() throws Exception {
-        String programName = "regions16";
+  @Test
+  public void compareKanzi0() throws Exception {
+    String programName = "kanzi";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.BRUTE_FORCE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void runningExampleBruteForce() throws Exception {
-        String programName = "running-example";
+  @Test
+  public void compareKanzi1() throws Exception {
+    String programName = "kanzi";
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void compareKanzi2() throws Exception {
+    String programName = "kanzi";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.FEATURE_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void runningExampleBruteForceSamplingTime() throws Exception {
-        String programName = "running-example";
+  @Test
+  public void compareKanzi3() throws Exception {
+    String programName = "kanzi";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.PAIR_WISE, Evaluation.GROUND_TRUTH);
+  }
 
-    @Test
-    public void runningExampleConfigCrusher() throws Exception {
-        String programName = "running-example";
+  @Test
+  public void compareKanzi4() throws Exception {
+    String programName = "kanzi";
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.SPLAT_DELAY, Evaluation.GROUND_TRUTH);
+  }
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+  @Test
+  public void compareRegions121() throws Exception {
+    String programName = "regions12";
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+  @Test
+  public void compareRegions161() throws Exception {
+    String programName = "regions16";
 
-        Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+    Evaluation eval = new Evaluation(programName);
+    eval.compareApproaches(Evaluation.CONFIG_CRUSHER, Evaluation.GROUND_TRUTH);
+  }
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+  @Test
+  public void runningExampleBruteForce() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+    // arguments
+    String[] args = new String[0];
 
-        Set<String> conf = new HashSet<>();
-        conf.add("J");
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        double res = performanceModel.evaluate(conf);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
+  @Test
+  public void runningExampleBruteForceSamplingTime() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-    @Test
-    public void runningExampleGroundTruth() throws Exception {
-        String programName = "running-example";
+  @Test
+  public void runningExampleConfigCrusher() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-    @Test
-    public void runningExampleGroundTruthSamplingTime() throws Exception {
-        String programName = "running-example";
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
+    Set<String> options = new HashSet<>(RunningExampleAdapter.getRunningExampleOptions());
+    Set<Set<String>> configurations = BruteForceExecutor
+        .getBruteForceConfigurationsFromOptions(options);
 
-    @Test
-    public void runningExampleConfigCrusherSamplingTime() throws Exception {
-        String programName = "running-example";
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
-    }
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-    @Test
-    public void runningExampleFeaturewiseSamplingTime() throws Exception {
-        String programName = "running-example";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void runningExampleGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(RunningExampleMain.PROGRAM_NAME);
+  }
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void runningExampleGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(RunningExampleMain.PROGRAM_NAME);
+  }
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+  @Test
+  public void runningExampleConfigCrusherSamplingTime() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
-    }
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-    @Test
-    public void runningExamplePairwiseSamplingTime() throws Exception {
-        String programName = "running-example";
+  @Test
+  public void runningExampleFeaturewiseSamplingTime() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
-    }
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-    @Test
-    public void runningExampleSPLatDelaySamplingTime() throws Exception {
-        String programName = "running-example";
+  @Test
+  public void runningExamplePairwiseSamplingTime() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            if(!splatConfigurations.contains(entry.getConfiguration())) {
-                continue;
-            }
+  @Test
+  public void runningExampleSPLatDelaySamplingTime() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-            splatEntries.add(entry);
-        }
+    // arguments
+    String[] args = new String[0];
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatEntries));
-    }
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-    @Test
-    public void runningExampleFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "running-example";
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
-        // arguments
-        String[] args = new String[0];
+    Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      if (!splatConfigurations.contains(entry.getConfiguration())) {
+        continue;
+      }
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
-        featurewise.generateCSVData(featurewiseEntries, options);
+      splatEntries.add(entry);
     }
-
-    @Test
-    public void runningExampleFeaturewiseModel() throws Exception {
-        String programName = "running-example";
-
-        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
-        Featurewise featurewise = new Featurewise(programName);
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+  @Test
+  public void runningExampleFeaturewiseGenerateCSVData() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    List<String> options = RunningExampleAdapter.getRunningExampleOptions();
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
-
-    @Test
-    public void runningExamplePairwiseGenerateCSVData() throws Exception {
-        String programName = "running-example";
+  @Test
+  public void runningExampleFeaturewiseModel() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        // arguments
-        String[] args = new String[0];
+    List<String> options = RunningExampleAdapter.getRunningExampleOptions();
+    Featurewise featurewise = new Featurewise(programName);
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    // arguments
+    String[] args = new String[0];
 
-        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-    @Test
-    public void runningExamplePairwiseModel() throws Exception {
-        String programName = "running-example";
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        List<String> options = RunningExampleAdapter.getRunningExampleOptions();
-        Pairwise pairwise = new Pairwise(programName);
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+  @Test
+  public void runningExamplePairwiseGenerateCSVData() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
-
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+    List<String> options = RunningExampleAdapter.getRunningExampleOptions();
 
-    @Test
-    public void runningExampleSPLatDelay() throws Exception {
-        String programName = "running-example";
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void runningExamplePairwiseModel() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    List<String> options = RunningExampleAdapter.getRunningExampleOptions();
+    Pairwise pairwise = new Pairwise(programName);
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        List<Coverage> coverageList = splatDelay.readFileCoverage();
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void emailGroundTruth() throws Exception {
-        String programName = "email";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        // arguments
-        String[] args = new String[0];
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-    @Test
-    public void emailGroundTruthSamplingTime() throws Exception {
-        String programName = "email";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
+  @Test
+  public void runningExampleSPLatDelay() throws Exception {
+    String programName = RunningExampleMain.PROGRAM_NAME;
 
-    @Test
-    public void emailBruteForce() throws Exception {
-        String programName = "email";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    List<Coverage> coverageList = splatDelay.readFileCoverage();
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+  @Test
+  public void emailGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(EmailMain.PROGRAM_NAME);
+  }
 
-    @Test
-    public void emailBruteForceSamplingTime() throws Exception {
-        String programName = "email";
+  @Test
+  public void emailGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(EmailMain.PROGRAM_NAME);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
-    }
+  @Test
+  public void emailBruteForce() throws Exception {
+    String programName = "email";
 
-    @Test
-    public void emailConfigCrusher() throws Exception {
-        String programName = "email";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+  @Test
+  public void emailBruteForceSamplingTime() throws Exception {
+    String programName = "email";
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<Set<String>> configurations = new HashSet<>();
+  @Test
+  public void emailConfigCrusher() throws Exception {
+    String programName = "email";
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            configurations.add(entry.getConfiguration());
-        }
+    // arguments
+    String[] args = new String[0];
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-    @Test
-    public void emailConfigCrusherSamplingTime() throws Exception {
-        String programName = "email";
+    executor = new GroundTruthEvaluationExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<Set<String>> configurations = new HashSet<>();
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      configurations.add(entry.getConfiguration());
     }
-
-    @Test
-    public void emailFamily() throws IOException, InterruptedException {
-        String programName = "email";
 
-        // arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        FeatureModel fm = new EmailFM();
-        PerformanceModelBuilder builder = new FamilyModelBuilder(programName, fm);
-        PerformanceModel performanceModel = builder.createModel(args);
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        List<String> options = EmailAdapter.getEmailOptions();
-        Set<String> optionsSet = new HashSet<>(options);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        Set<PerformanceEntryStatistic> entries = new HashSet<>();
-        PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
-        entries.add(entry);
+  @Test
+  public void emailConfigCrusherSamplingTime() throws Exception {
+    String programName = "email";
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Set<Set<String>> configurations = new HashSet<>();
+  @Test
+  public void emailFamily() throws IOException, InterruptedException {
+    String programName = "email";
 
-        for(PerformanceEntryStatistic e : performanceEntries) {
-            configurations.add(e.getConfiguration());
-        }
+    // arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FAMILY, performanceModel, entries, configurations);
-    }
+    FeatureModel fm = new EmailFM();
+    PerformanceModelBuilder builder = new FamilyModelBuilder(programName, fm);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-    @Test
-    public void emailFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "email";
+    List<String> options = EmailAdapter.getEmailOptions();
+    Set<String> optionsSet = new HashSet<>(options);
 
-        // arguments
-        String[] args = new String[0];
+    Set<PerformanceEntryStatistic> entries = new HashSet<>();
+    PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
+    entries.add(entry);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new GroundTruthEvaluationExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        FeatureModel fm = new EmailFM();
-        Featurewise featurewise = new Featurewise(programName, fm);
+    Set<Set<String>> configurations = new HashSet<>();
 
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        List<String> options = EmailAdapter.getEmailOptions();
-        featurewise.generateCSVData(featurewiseEntries, options);
+    for (PerformanceEntryStatistic e : performanceEntries) {
+      configurations.add(e.getConfiguration());
     }
-
-    @Test
-    public void emailFeaturewiseModel() throws Exception {
-        String programName = "email";
-
-        FeatureModel fm = new EmailFM();
-        Featurewise featurewise = new Featurewise(programName, fm);
-        List<String> options = EmailAdapter.getEmailOptions();
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FAMILY, performanceModel, entries,
+        configurations);
+  }
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+  @Test
+  public void emailFeaturewiseGenerateCSVData() throws Exception {
+    String programName = "email";
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+    FeatureModel fm = new EmailFM();
+    Featurewise featurewise = new Featurewise(programName, fm);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
-
-    @Test
-    public void emailFeaturewiseSamplingTime() throws Exception {
-        String programName = "email";
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    List<String> options = EmailAdapter.getEmailOptions();
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void emailFeaturewiseModel() throws Exception {
+    String programName = "email";
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    FeatureModel fm = new EmailFM();
+    Featurewise featurewise = new Featurewise(programName, fm);
+    List<String> options = EmailAdapter.getEmailOptions();
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-        FeatureModel fm = new EmailFM();
-        Featurewise featurewise = new Featurewise(programName, fm);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    // arguments
+    String[] args = new String[0];
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
-    }
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-    @Test
-    public void emailPairwiseGenerateCSVData() throws Exception {
-        String programName = "email";
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-        FeatureModel fm = new EmailFM();
-        Pairwise pairwise = new Pairwise(programName, fm);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        List<String> options = EmailAdapter.getEmailOptions();
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-    @Test
-    public void emailPairwiseModel() throws Exception {
-        String programName = "email";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-        FeatureModel fm = new EmailFM();
-        Pairwise pairwise = new Pairwise(programName, fm);
-        List<String> options = EmailAdapter.getEmailOptions();
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+  @Test
+  public void emailFeaturewiseSamplingTime() throws Exception {
+    String programName = "email";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    FeatureModel fm = new EmailFM();
+    Featurewise featurewise = new Featurewise(programName, fm);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+  @Test
+  public void emailPairwiseGenerateCSVData() throws Exception {
+    String programName = "email";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void emailPairwiseSamplingTime() throws Exception {
-        String programName = "email";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    FeatureModel fm = new EmailFM();
+    Pairwise pairwise = new Pairwise(programName, fm);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    List<String> options = EmailAdapter.getEmailOptions();
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void emailPairwiseModel() throws Exception {
+    String programName = "email";
 
-        FeatureModel fm = new EmailFM();
-        Pairwise pairwise = new Pairwise(programName, fm);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    FeatureModel fm = new EmailFM();
+    Pairwise pairwise = new Pairwise(programName, fm);
+    List<String> options = EmailAdapter.getEmailOptions();
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void elevatorGroundTruth() throws Exception {
-        String programName = "elevator";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        // arguments
-        String[] args = new String[0];
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-    @Test
-    public void elevatorGroundTruthSamplingTime() throws Exception {
-        String programName = "elevator";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
+  @Test
+  public void emailPairwiseSamplingTime() throws Exception {
+    String programName = "email";
 
-    @Test
-    public void elevatorBruteForce() throws Exception {
-        String programName = "elevator";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    FeatureModel fm = new EmailFM();
+    Pairwise pairwise = new Pairwise(programName, fm);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-    @Test
-    public void elevatorBruteForceSamplingTime() throws Exception {
-        String programName = "elevator";
+  @Test
+  public void elevatorGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(ElevatorMain.PROGRAM_NAME);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
-    }
+  @Test
+  public void elevatorGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(ElevatorMain.PROGRAM_NAME);
+  }
 
-    @Test
-    public void elevatorFamily() throws IOException, InterruptedException {
-        String programName = "elevator";
+  @Test
+  public void elevatorBruteForce() throws Exception {
+    String programName = "elevator";
 
-        // arguments
-        String[] args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    // arguments
+    String[] args = new String[0];
 
-        FeatureModel fm = new ElevatorFM();
-        PerformanceModelBuilder builder = new FamilyModelBuilder(programName, fm);
-        PerformanceModel performanceModel = builder.createModel(args);
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        List<String> options = ElevatorAdapter.getElevatorOptions();
-        Set<String> optionsSet = new HashSet<>(options);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
-        Set<PerformanceEntryStatistic> entries = new HashSet<>();
-        PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
-        entries.add(entry);
+  @Test
+  public void elevatorBruteForceSamplingTime() throws Exception {
+    String programName = "elevator";
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Set<Set<String>> configurations = new HashSet<>();
+  @Test
+  public void elevatorFamily() throws IOException, InterruptedException {
+    String programName = "elevator";
 
-        for(PerformanceEntryStatistic e : performanceEntries) {
-            configurations.add(e.getConfiguration());
-        }
+    // arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FAMILY, performanceModel, entries, configurations);
-    }
+    FeatureModel fm = new ElevatorFM();
+    PerformanceModelBuilder builder = new FamilyModelBuilder(programName, fm);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-    @Test
-    public void elevatorFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "elevator";
+    List<String> options = ElevatorAdapter.getElevatorOptions();
+    Set<String> optionsSet = new HashSet<>(options);
 
-        // arguments
-        String[] args = new String[0];
+    Set<PerformanceEntryStatistic> entries = new HashSet<>();
+    PerformanceEntryStatistic entry = new PerformanceEntryStatistic(true, optionsSet);
+    entries.add(entry);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new GroundTruthEvaluationExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        FeatureModel fm = new ElevatorFM();
-        Featurewise featurewise = new Featurewise(programName, fm);
+    Set<Set<String>> configurations = new HashSet<>();
 
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        List<String> options = ElevatorAdapter.getElevatorOptions();
-        featurewise.generateCSVData(featurewiseEntries, options);
+    for (PerformanceEntryStatistic e : performanceEntries) {
+      configurations.add(e.getConfiguration());
     }
-
-    @Test
-    public void elevatorFeaturewiseModel() throws Exception {
-        String programName = "elevator";
-
-        FeatureModel fm = new ElevatorFM();
-        Featurewise featurewise = new Featurewise(programName, fm);
-        List<String> options = ElevatorAdapter.getElevatorOptions();
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
-
-        // arguments
-        String[] args = new String[0];
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FAMILY, performanceModel, entries,
+        configurations);
+  }
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+  @Test
+  public void elevatorFeaturewiseGenerateCSVData() throws Exception {
+    String programName = "elevator";
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    // arguments
+    String[] args = new String[0];
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
-
-    @Test
-    public void elevatorPairwiseGenerateCSVData() throws Exception {
-        String programName = "elevator";
-
-        // arguments
-        String[] args = new String[0];
-
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    FeatureModel fm = new ElevatorFM();
+    Featurewise featurewise = new Featurewise(programName, fm);
 
-        FeatureModel fm = new ElevatorFM();
-        Pairwise pairwise = new Pairwise(programName, fm);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        List<String> options = ElevatorAdapter.getElevatorOptions();
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    List<String> options = ElevatorAdapter.getElevatorOptions();
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-    @Test
-    public void elevatorPairwiseModel() throws Exception {
-        String programName = "elevator";
+  @Test
+  public void elevatorFeaturewiseModel() throws Exception {
+    String programName = "elevator";
 
-        FeatureModel fm = new ElevatorFM();
-        Pairwise pairwise = new Pairwise(programName, fm);
-        List<String> options = ElevatorAdapter.getElevatorOptions();
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+    FeatureModel fm = new ElevatorFM();
+    Featurewise featurewise = new Featurewise(programName, fm);
+    List<String> options = ElevatorAdapter.getElevatorOptions();
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-    @Test
-    public void elevatorFeaturewiseSamplingTime() throws Exception {
-        String programName = "elevator";
+  @Test
+  public void elevatorPairwiseGenerateCSVData() throws Exception {
+    String programName = "elevator";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        FeatureModel fm = new ElevatorFM();
-        Featurewise featurewise = new Featurewise(programName, fm);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    FeatureModel fm = new ElevatorFM();
+    Pairwise pairwise = new Pairwise(programName, fm);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    List<String> options = ElevatorAdapter.getElevatorOptions();
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
-    }
+  @Test
+  public void elevatorPairwiseModel() throws Exception {
+    String programName = "elevator";
 
-    @Test
-    public void elevatorPairwiseSamplingTime() throws Exception {
-        String programName = "elevator";
+    FeatureModel fm = new ElevatorFM();
+    Pairwise pairwise = new Pairwise(programName, fm);
+    List<String> options = ElevatorAdapter.getElevatorOptions();
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        FeatureModel fm = new ElevatorFM();
-        Pairwise pairwise = new Pairwise(programName, fm);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
-    }
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-    @Test
-    public void elevatorSPLatDelay() throws Exception {
-        String programName = "elevator";
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void elevatorFeaturewiseSamplingTime() throws Exception {
+    String programName = "elevator";
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        List<Coverage> coverageList = splatDelay.readFileCoverage();
+    // arguments
+    String[] args = new String[0];
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
-    }
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-    @Test
-    public void elevatorSPLatDelaySamplingTime() throws Exception {
-        String programName = "elevator";
+    FeatureModel fm = new ElevatorFM();
+    Featurewise featurewise = new Featurewise(programName, fm);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void elevatorPairwiseSamplingTime() throws Exception {
+    String programName = "elevator";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(performanceEntries));
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void colorCounterBruteForce() throws Exception {
-        String programName = "pngtasticColorCounter";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    FeatureModel fm = new ElevatorFM();
+    Pairwise pairwise = new Pairwise(programName, fm);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+  @Test
+  public void elevatorSPLatDelay() throws Exception {
+    String programName = "elevator";
 
-    @Test
-    public void colorCounterBruteForceSamplingTime() throws Exception {
-        String programName = "pngtasticColorCounter";
+    // arguments
+    String[] args = new String[0];
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
-    }
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-    @Test
-    public void colorCounterConfigCrusher() throws Exception {
-        String programName = "pngtasticColorCounter";
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    List<Coverage> coverageList = splatDelay.readFileCoverage();
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+  }
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+  @Test
+  public void elevatorSPLatDelaySamplingTime() throws Exception {
+    String programName = "elevator";
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<String> options = new HashSet<>(ColorCounterAdapter.getColorCounterOptions());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(performanceEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+  @Test
+  public void colorCounterBruteForce() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+    // arguments
+    String[] args = new String[0];
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-    @Test
-    public void colorCounterSPLatDelay() throws Exception {
-        String programName = "pngtasticColorCounter";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void colorCounterBruteForceSamplingTime() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        List<Coverage> coverageList = splatDelay.readFileCoverage();
+  @Test
+  public void colorCounterConfigCrusher() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void colorCounterGroundTruth() throws Exception {
-        String programName = "pngtasticColorCounter";
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        // arguments
-        String[] args = new String[0];
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+    Set<String> options = new HashSet<>(ColorCounterAdapter.getColorCounterOptions());
+    Set<Set<String>> configurations = BruteForceExecutor
+        .getBruteForceConfigurationsFromOptions(options);
 
-    @Test
-    public void colorCounterFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "pngtasticColorCounter";
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        // arguments
-        String[] args = new String[0];
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        List<String> options = ColorCounterAdapter.getColorCounterOptions();
+  @Test
+  public void colorCounterSPLatDelay() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries, options);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void colorCounterFeaturewiseModel() throws Exception {
-        String programName = "pngtasticColorCounter";
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        List<String> options = ColorCounterAdapter.getColorCounterOptions();
-        Featurewise featurewise = new Featurewise(programName);
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    List<Coverage> coverageList = splatDelay.readFileCoverage();
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+  }
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+  @Test
+  public void colorCounterGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(ColorCounterMain.PROGRAM_NAME);
+  }
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+  @Test
+  public void colorCounterFeaturewiseGenerateCSVData() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    // arguments
+    String[] args = new String[0];
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
+    List<String> options = ColorCounterAdapter.getColorCounterOptions();
 
-    @Test
-    public void colorCounterPairwiseGenerateCSVData() throws Exception {
-        String programName = "pngtasticColorCounter";
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void colorCounterFeaturewiseModel() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    List<String> options = ColorCounterAdapter.getColorCounterOptions();
+    Featurewise featurewise = new Featurewise(programName);
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-        List<String> options = ColorCounterAdapter.getColorCounterOptions();
+    // arguments
+    String[] args = new String[0];
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-    @Test
-    public void colorCounterPairwiseModel() throws Exception {
-        String programName = "pngtasticColorCounter";
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        List<String> options = ColorCounterAdapter.getColorCounterOptions();
-        Pairwise pairwise = new Pairwise(programName);
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        // arguments
-        String[] args = new String[0];
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+  @Test
+  public void colorCounterPairwiseGenerateCSVData() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    // arguments
+    String[] args = new String[0];
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+    List<String> options = ColorCounterAdapter.getColorCounterOptions();
 
-    @Test
-    public void colorCounterFeaturewiseSamplingTime() throws Exception {
-        String programName = "pngtasticColorCounter";
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void colorCounterPairwiseModel() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    List<String> options = ColorCounterAdapter.getColorCounterOptions();
+    Pairwise pairwise = new Pairwise(programName);
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    // arguments
+    String[] args = new String[0];
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
-    }
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-    @Test
-    public void colorCounterPairwiseSamplingTime() throws Exception {
-        String programName = "pngtasticColorCounter";
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
-    }
+  @Test
+  public void colorCounterFeaturewiseSamplingTime() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-    @Test
-    public void colorCounterSPLatDelaySamplingTime() throws Exception {
-        String programName = "pngtasticColorCounter";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+  @Test
+  public void colorCounterPairwiseSamplingTime() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            if(!splatConfigurations.contains(entry.getConfiguration())) {
-                continue;
-            }
+    // arguments
+    String[] args = new String[0];
 
-            splatEntries.add(entry);
-        }
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatEntries));
-    }
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-    @Test
-    public void colorCounterGroundTruthSamplingTime() throws Exception {
-        String programName = "pngtasticColorCounter";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
+  @Test
+  public void colorCounterSPLatDelaySamplingTime() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-    @Test
-    public void colorCounterConfigCrusherSamplingTime() throws Exception {
-        String programName = "pngtasticColorCounter";
+    // arguments
+    String[] args = new String[0];
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
-    }
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-    @Test
-    public void optimizerGroundTruth() throws Exception {
-        String programName = "pngtasticOptimizer";
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
-        // arguments
-        String[] args = new String[0];
+    Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      if (!splatConfigurations.contains(entry.getConfiguration())) {
+        continue;
+      }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+      splatEntries.add(entry);
     }
 
-    @Test
-    public void kanziGroundTruth() throws Exception {
-        String programName = "kanzi";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void colorCounterGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(ColorCounterMain.PROGRAM_NAME);
+  }
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void colorCounterConfigCrusherSamplingTime() throws Exception {
+    String programName = "pngtasticColorCounter";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-    @Test
-    public void kanziBruteForce() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void optimizerGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(OptimizerMain.PROGRAM_NAME);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void kanziGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(KanziMain.PROGRAM_NAME);
+  }
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void kanziBruteForce() throws Exception {
+    String programName = "kanzi";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void kanziBruteForceSamplingTime() throws Exception {
-        String programName = "kanzi";
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
-    @Test
-    public void kanziConfigCrusher() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void kanziBruteForceSamplingTime() throws Exception {
+    String programName = "kanzi";
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+  @Test
+  public void kanziConfigCrusher() throws Exception {
+    String programName = "kanzi";
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        Set<String> options = new HashSet<>(KanziAdapter.getKanziOptions());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+    Set<String> options = new HashSet<>(KanziAdapter.getKanziOptions());
+    Set<Set<String>> configurations = BruteForceExecutor
+        .getBruteForceConfigurationsFromOptions(options);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-    @Test
-    public void kanziFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "kanzi";
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void kanziFeaturewiseGenerateCSVData() throws Exception {
+    String programName = "kanzi";
 
-        List<String> options = KanziAdapter.getKanziOptions();
+    // arguments
+    String[] args = new String[0];
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries, options);
-    }
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-    @Test
-    public void kanziFeaturewiseModel() throws Exception {
-        String programName = "kanzi";
+    List<String> options = KanziAdapter.getKanziOptions();
 
-        List<String> options = KanziAdapter.getKanziOptions();
-        Featurewise featurewise = new Featurewise(programName);
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void kanziFeaturewiseModel() throws Exception {
+    String programName = "kanzi";
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    List<String> options = KanziAdapter.getKanziOptions();
+    Featurewise featurewise = new Featurewise(programName);
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-    @Test
-    public void kanziPairwiseGenerateCSVData() throws Exception {
-        String programName = "kanzi";
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void kanziPairwiseGenerateCSVData() throws Exception {
+    String programName = "kanzi";
 
-        List<String> options = KanziAdapter.getKanziOptions();
+    // arguments
+    String[] args = new String[0];
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-    @Test
-    public void kanziPairwiseModel() throws Exception {
-        String programName = "kanzi";
+    List<String> options = KanziAdapter.getKanziOptions();
 
-        List<String> options = KanziAdapter.getKanziOptions();
-        Pairwise pairwise = new Pairwise(programName);
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void kanziPairwiseModel() throws Exception {
+    String programName = "kanzi";
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    List<String> options = KanziAdapter.getKanziOptions();
+    Pairwise pairwise = new Pairwise(programName);
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-    @Test
-    public void kanziGroundTruthSamplingTime() throws Exception {
-        String programName = "kanzi";
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-    @Test
-    public void kanziConfigCrusherSamplingTime() throws Exception {
-        String programName = "kanzi";
+  @Test
+  public void kanziGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(KanziMain.PROGRAM_NAME);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
-    }
+  @Test
+  public void kanziConfigCrusherSamplingTime() throws Exception {
+    String programName = "kanzi";
 
-    @Test
-    public void kanziFeaturewiseSamplingTime() throws Exception {
-        String programName = "kanzi";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void kanziFeaturewiseSamplingTime() throws Exception {
+    String programName = "kanzi";
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    // arguments
+    String[] args = new String[0];
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
-    }
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-    @Test
-    public void kanziPairwiseSamplingTime() throws Exception {
-        String programName = "kanzi";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void kanziPairwiseSamplingTime() throws Exception {
+    String programName = "kanzi";
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    // arguments
+    String[] args = new String[0];
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
-    }
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-    @Test
-    public void kanziSPLatDelay() throws Exception {
-        String programName = "kanzi";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void kanziSPLatDelay() throws Exception {
+    String programName = "kanzi";
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    // arguments
+    String[] args = new String[0];
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        List<Coverage> coverageList = splatDelay.readFileCoverage();
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
-    }
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    List<Coverage> coverageList = splatDelay.readFileCoverage();
 
-    @Test
-    public void kanziSPLatDelaySamplingTime() throws Exception {
-        String programName = "kanzi";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void kanziSPLatDelaySamplingTime() throws Exception {
+    String programName = "kanzi";
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    // arguments
+    String[] args = new String[0];
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            if(!splatConfigurations.contains(entry.getConfiguration())) {
-                continue;
-            }
+    Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
-            splatEntries.add(entry);
-        }
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      if (!splatConfigurations.contains(entry.getConfiguration())) {
+        continue;
+      }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatEntries));
+      splatEntries.add(entry);
     }
-
-    @Test
-    public void findGroundTruth() throws Exception {
-        String programName = "find";
-
-        // arguments
-        String[] args = new String[0];
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+  @Test
+  public void findGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(FindMain.PROGRAM_NAME);
+  }
 
-    @Test
-    public void grepGroundTruth() throws Exception {
-        String programName = "grep";
+  @Test
+  public void grepGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(GrepMain.PROGRAM_NAME);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void sortGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(SortMain.PROGRAM_NAME);
+  }
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void sortGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(SortMain.PROGRAM_NAME);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+  @Test
+  public void sortBruteForce() throws Exception {
+    String programName = "sort";
 
-    @Test
-    public void sortGroundTruth() throws Exception {
-        String programName = "sort";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+  @Test
+  public void sortBruteForceSamplingTime() throws Exception {
+    String programName = "sort";
 
-    @Test
-    public void sortGroundTruthSamplingTime() throws Exception {
-        String programName = "sort";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
+  @Test
+  public void sortConfigCrusher() throws Exception {
+    String programName = "sort";
 
-    @Test
-    public void sortBruteForce() throws Exception {
-        String programName = "sort";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-    @Test
-    public void sortBruteForceSamplingTime() throws Exception {
-        String programName = "sort";
+    executor = new GroundTruthEvaluationExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<Set<String>> configurations = new HashSet<>();
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      configurations.add(entry.getConfiguration());
     }
 
-    @Test
-    public void sortConfigCrusher() throws Exception {
-        String programName = "sort";
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        // arguments
-        String[] args = new String[0];
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+  @Test
+  public void sortConfigCrusherSamplingTime() throws Exception {
+    String programName = "sort";
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<Set<String>> configurations = new HashSet<>();
+  @Test
+  public void sortFeaturewiseGenerateCSVData() throws Exception {
+    String programName = "sort";
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            configurations.add(entry.getConfiguration());
-        }
+    // arguments
+    String[] args = new String[0];
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+    List<String> options = SortAdapter.getSortOptions();
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-    @Test
-    public void sortConfigCrusherSamplingTime() throws Exception {
-        String programName = "sort";
+  @Test
+  public void sortFeaturewiseModel() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
-    }
+    List<String> options = SortAdapter.getSortOptions();
+    Featurewise featurewise = new Featurewise(programName);
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-    @Test
-    public void sortFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "sort";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        List<String> options = SortAdapter.getSortOptions();
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries, options);
-    }
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-    @Test
-    public void sortFeaturewiseModel() throws Exception {
-        String programName = "sort";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-        List<String> options = SortAdapter.getSortOptions();
-        Featurewise featurewise = new Featurewise(programName);
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+  @Test
+  public void sortFeaturewiseSamplingTime() throws Exception {
+    String programName = "sort";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+  @Test
+  public void sortPairwiseGenerateCSVData() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void sortFeaturewiseSamplingTime() throws Exception {
-        String programName = "sort";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    List<String> options = SortAdapter.getSortOptions();
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+  @Test
+  public void sortPairwiseModel() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
-    }
+    List<String> options = SortAdapter.getSortOptions();
+    Pairwise pairwise = new Pairwise(programName);
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-    @Test
-    public void sortPairwiseGenerateCSVData() throws Exception {
-        String programName = "sort";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        List<String> options = SortAdapter.getSortOptions();
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-    @Test
-    public void sortPairwiseModel() throws Exception {
-        String programName = "sort";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-        List<String> options = SortAdapter.getSortOptions();
-        Pairwise pairwise = new Pairwise(programName);
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+  @Test
+  public void sortPairwiseSamplingTime() throws Exception {
+    String programName = "sort";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+  @Test
+  public void sortSPLatDelay() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void sortPairwiseSamplingTime() throws Exception {
-        String programName = "sort";
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    List<Coverage> coverageList = splatDelay.readFileCoverage();
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+  }
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+  @Test
+  public void sortSPLatDelaySamplingTime() throws Exception {
+    String programName = "sort";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void sortSPLatDelay() throws Exception {
-        String programName = "sort";
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        List<Coverage> coverageList = splatDelay.readFileCoverage();
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      if (!splatConfigurations.contains(entry.getConfiguration())) {
+        continue;
+      }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+      splatEntries.add(entry);
     }
-
-    @Test
-    public void sortSPLatDelaySamplingTime() throws Exception {
-        String programName = "sort";
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void grepBruteForce() throws Exception {
+    String programName = "grep";
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
+    // arguments
+    String[] args = new String[0];
 
-        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            if(!splatConfigurations.contains(entry.getConfiguration())) {
-                continue;
-            }
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
-            splatEntries.add(entry);
-        }
+  @Test
+  public void grepBruteForceSamplingTime() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatEntries));
-    }
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-    @Test
-    public void grepBruteForce() throws Exception {
-        String programName = "grep";
+  @Test
+  public void grepConfigCrusher() throws Exception {
+    String programName = "grep";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-    @Test
-    public void grepBruteForceSamplingTime() throws Exception {
-        String programName = "grep";
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
-    }
+    Set<String> options = new HashSet<>(GrepAdapter.getGrepOptions());
+    Set<Set<String>> configurations = BruteForceExecutor
+        .getBruteForceConfigurationsFromOptions(options);
 
-    @Test
-    public void grepConfigCrusher() throws Exception {
-        String programName = "grep";
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        // arguments
-        String[] args = new String[0];
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+  @Test
+  public void grepFeaturewiseGenerateCSVData() throws Exception {
+    String programName = "grep";
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    // arguments
+    String[] args = new String[0];
 
-        Set<String> options = new HashSet<>(GrepAdapter.getGrepOptions());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    List<String> options = GrepAdapter.getGrepOptions();
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+  @Test
+  public void grepFeaturewiseModel() throws Exception {
+    String programName = "grep";
 
-    @Test
-    public void grepFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "grep";
+    List<String> options = GrepAdapter.getGrepOptions();
+    Featurewise featurewise = new Featurewise(programName);
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        List<String> options = GrepAdapter.getGrepOptions();
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries, options);
-    }
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-    @Test
-    public void grepFeaturewiseModel() throws Exception {
-        String programName = "grep";
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-        List<String> options = GrepAdapter.getGrepOptions();
-        Featurewise featurewise = new Featurewise(programName);
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void grepPairwiseGenerateCSVData() throws Exception {
+    String programName = "grep";
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    // arguments
+    String[] args = new String[0];
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    List<String> options = GrepAdapter.getGrepOptions();
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
+  @Test
+  public void grepPairwiseModel() throws Exception {
+    String programName = "grep";
 
-    @Test
-    public void grepPairwiseGenerateCSVData() throws Exception {
-        String programName = "grep";
+    List<String> options = GrepAdapter.getGrepOptions();
+    Pairwise pairwise = new Pairwise(programName);
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        List<String> options = GrepAdapter.getGrepOptions();
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-    @Test
-    public void grepPairwiseModel() throws Exception {
-        String programName = "grep";
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-        List<String> options = GrepAdapter.getGrepOptions();
-        Pairwise pairwise = new Pairwise(programName);
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void grepGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(GrepMain.PROGRAM_NAME);
+  }
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+  @Test
+  public void grepConfigCrusherSamplingTime() throws Exception {
+    String programName = "grep";
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+  @Test
+  public void grepFeaturewiseSamplingTime() throws Exception {
+    String programName = "grep";
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+    // arguments
+    String[] args = new String[0];
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-    @Test
-    public void grepGroundTruthSamplingTime() throws Exception {
-        String programName = "grep";
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-    @Test
-    public void grepConfigCrusherSamplingTime() throws Exception {
-        String programName = "grep";
+  @Test
+  public void grepPairwiseSamplingTime() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void grepFeaturewiseSamplingTime() throws Exception {
-        String programName = "grep";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+  @Test
+  public void grepSPLatDelay() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void grepPairwiseSamplingTime() throws Exception {
-        String programName = "grep";
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    List<Coverage> coverageList = splatDelay.readFileCoverage();
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+  }
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+  @Test
+  public void grepSPLatDelaySamplingTime() throws Exception {
+    String programName = "grep";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void grepSPLatDelay() throws Exception {
-        String programName = "grep";
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        List<Coverage> coverageList = splatDelay.readFileCoverage();
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      if (!splatConfigurations.contains(entry.getConfiguration())) {
+        continue;
+      }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+      splatEntries.add(entry);
     }
-
-    @Test
-    public void grepSPLatDelaySamplingTime() throws Exception {
-        String programName = "grep";
-
-        // arguments
-        String[] args = new String[0];
-
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+  @Test
+  public void prevaylerGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(PrevaylerMain.PROGRAM_NAME);
+  }
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            if(!splatConfigurations.contains(entry.getConfiguration())) {
-                continue;
-            }
+  @Test
+  public void prevaylerGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(PrevaylerMain.PROGRAM_NAME);
+  }
 
-            splatEntries.add(entry);
-        }
+  @Test
+  public void prevaylerFeaturewiseGenerateCSVData() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatEntries));
-    }
-
-    @Test
-    public void prevaylerGroundTruth() throws Exception {
-        String programName = "prevayler";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    List<String> options = PrevaylerAdapter.getPrevaylerOptions();
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-    @Test
-    public void prevaylerGroundTruthSamplingTime() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void prevaylerFeaturewiseModel() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
+    List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+    Featurewise featurewise = new Featurewise(programName);
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-    @Test
-    public void prevaylerFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "prevayler";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries, options);
-    }
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-    @Test
-    public void prevaylerFeaturewiseModel() throws Exception {
-        String programName = "prevayler";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
-        Featurewise featurewise = new Featurewise(programName);
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+  @Test
+  public void prevaylerFeaturewiseSamplingTime() throws Exception {
+    String programName = "prevayler";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+  @Test
+  public void prevaylerPairwiseGenerateCSVData() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void prevaylerFeaturewiseSamplingTime() throws Exception {
-        String programName = "prevayler";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    List<String> options = PrevaylerAdapter.getPrevaylerOptions();
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+  @Test
+  public void prevaylerPairwiseModel() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
-    }
+    List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+    Pairwise pairwise = new Pairwise(programName);
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-    @Test
-    public void prevaylerPairwiseGenerateCSVData() throws Exception {
-        String programName = "prevayler";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-    @Test
-    public void prevaylerPairwiseModel() throws Exception {
-        String programName = "prevayler";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-        List<String> options = PrevaylerAdapter.getPrevaylerOptions();
-        Pairwise pairwise = new Pairwise(programName);
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+  @Test
+  public void prevaylerPairwiseSamplingTime() throws Exception {
+    String programName = "prevayler";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+  @Test
+  public void prevaylerSPLatDelay() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void prevaylerPairwiseSamplingTime() throws Exception {
-        String programName = "prevayler";
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    List<Coverage> coverageList = splatDelay.readFileCoverage();
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+  }
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+  @Test
+  public void prevaylerSPLatDelaySamplingTime() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void prevaylerSPLatDelay() throws Exception {
-        String programName = "prevayler";
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        List<Coverage> coverageList = splatDelay.readFileCoverage();
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      if (!splatConfigurations.contains(entry.getConfiguration())) {
+        continue;
+      }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+      splatEntries.add(entry);
     }
 
-    @Test
-    public void prevaylerSPLatDelaySamplingTime() throws Exception {
-        String programName = "prevayler";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void optimizerBruteForce() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    // arguments
+    String[] args = new String[0];
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            if(!splatConfigurations.contains(entry.getConfiguration())) {
-                continue;
-            }
+  @Test
+  public void optimizerBruteForceSamplingTime() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-            splatEntries.add(entry);
-        }
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatEntries));
-    }
+  @Test
+  public void optimizerConfigCrusher() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-    @Test
-    public void optimizerBruteForce() throws Exception {
-        String programName = "pngtasticOptimizer";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-    @Test
-    public void optimizerBruteForceSamplingTime() throws Exception {
-        String programName = "pngtasticOptimizer";
+    Set<String> options = new HashSet<>(OptimizerAdapter.getOptimizerOptions());
+    Set<Set<String>> configurations = BruteForceExecutor
+        .getBruteForceConfigurationsFromOptions(options);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
-    }
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-    @Test
-    public void optimizerConfigCrusher() throws Exception {
-        String programName = "pngtasticOptimizer";
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+  @Test
+  public void optimizerSPLatDelay() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<String> options = new HashSet<>(OptimizerAdapter.getOptimizerOptions());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    List<Coverage> coverageList = splatDelay.readFileCoverage();
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
+  }
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+  @Test
+  public void optimizerFeaturewiseGenerateCSVData() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void optimizerSPLatDelay() throws Exception {
-        String programName = "pngtasticOptimizer";
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    List<String> options = OptimizerAdapter.getOptimizerOptions();
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        List<Coverage> coverageList = splatDelay.readFileCoverage();
+  @Test
+  public void optimizerFeaturewiseModel() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.SPLAT_DELAY, coverageList, performanceEntries);
-    }
+    List<String> options = OptimizerAdapter.getOptimizerOptions();
+    Featurewise featurewise = new Featurewise(programName);
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-    @Test
-    public void optimizerFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "pngtasticOptimizer";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        List<String> options = OptimizerAdapter.getOptimizerOptions();
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries, options);
-    }
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-    @Test
-    public void optimizerFeaturewiseModel() throws Exception {
-        String programName = "pngtasticOptimizer";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-        List<String> options = OptimizerAdapter.getOptimizerOptions();
-        Featurewise featurewise = new Featurewise(programName);
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+  @Test
+  public void optimizerPairwiseGenerateCSVData() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    List<String> options = OptimizerAdapter.getOptimizerOptions();
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+  @Test
+  public void optimizerPairwiseModel() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
+    List<String> options = OptimizerAdapter.getOptimizerOptions();
+    Pairwise pairwise = new Pairwise(programName);
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-    @Test
-    public void optimizerPairwiseGenerateCSVData() throws Exception {
-        String programName = "pngtasticOptimizer";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        List<String> options = OptimizerAdapter.getOptimizerOptions();
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-    @Test
-    public void optimizerPairwiseModel() throws Exception {
-        String programName = "pngtasticOptimizer";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-        List<String> options = OptimizerAdapter.getOptimizerOptions();
-        Pairwise pairwise = new Pairwise(programName);
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+  @Test
+  public void optimizerFeaturewiseSamplingTime() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+  @Test
+  public void optimizerPairwiseSamplingTime() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void optimizerFeaturewiseSamplingTime() throws Exception {
-        String programName = "pngtasticOptimizer";
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+  @Test
+  public void optimizerSPLatDelaySamplingTime() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void optimizerPairwiseSamplingTime() throws Exception {
-        String programName = "pngtasticOptimizer";
+    Executor executor = new SPLatDelayExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    SPLatDelay splatDelay = new SPLatDelay(programName);
+    Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      if (!splatConfigurations.contains(entry.getConfiguration())) {
+        continue;
+      }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
+      splatEntries.add(entry);
     }
 
-    @Test
-    public void optimizerSPLatDelaySamplingTime() throws Exception {
-        String programName = "pngtasticOptimizer";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(splatEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        // arguments
-        String[] args = new String[0];
+  @Test
+  public void optimizerGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(OptimizerMain.PROGRAM_NAME);
+  }
 
-        Executor executor = new SPLatDelayExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void optimizerConfigCrusherSamplingTime() throws Exception {
+    String programName = "pngtasticOptimizer";
 
-        SPLatDelay splatDelay = new SPLatDelay(programName);
-        Set<Set<String>> splatConfigurations = splatDelay.getSPLatDelayConfigurations();
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Set<PerformanceEntryStatistic> splatEntries = new HashSet<>();
+  @Test
+  public void prevaylerBruteForce() throws Exception {
+    String programName = "prevayler";
 
-        for(PerformanceEntryStatistic entry : performanceEntries) {
-            if(!splatConfigurations.contains(entry.getConfiguration())) {
-                continue;
-            }
+    // arguments
+    String[] args = new String[0];
 
-            splatEntries.add(entry);
-        }
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(splatEntries));
-    }
-
-    @Test
-    public void optimizerGroundTruthSamplingTime() throws Exception {
-        String programName = "pngtasticOptimizer";
-
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
-
-    @Test
-    public void optimizerConfigCrusherSamplingTime() throws Exception {
-        String programName = "pngtasticOptimizer";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
-    }
-
-    @Test
-    public void prevaylerBruteForce() throws Exception {
-        String programName = "prevayler";
+  @Test
+  public void prevaylerBruteForceSamplingTime() throws Exception {
+    String programName = "prevayler";
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void prevaylerConfigCrusher() throws Exception {
+    String programName = "prevayler";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void prevaylerBruteForceSamplingTime() throws Exception {
-        String programName = "prevayler";
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
-    }
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-    @Test
-    public void prevaylerConfigCrusher() throws Exception {
-        String programName = "prevayler";
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    Set<String> options = new HashSet<>(PrevaylerAdapter.getPrevaylerOptions());
+    Set<Set<String>> configurations = BruteForceExecutor
+        .getBruteForceConfigurationsFromOptions(options);
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        Set<String> options = new HashSet<>(PrevaylerAdapter.getPrevaylerOptions());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+  @Test
+  public void prevaylerConfigCrusherSamplingTime() throws Exception {
+    String programName = "prevayler";
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+  @Test
+  public void regions12ConfigCrusher() throws Exception {
+    String programName = "regions12";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void prevaylerConfigCrusherSamplingTime() throws Exception {
-        String programName = "prevayler";
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
-    }
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-    @Test
-    public void regions12ConfigCrusher() throws Exception {
-        String programName = "regions12";
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    Set<String> options = new HashSet<>(Regions12Adapter.getRegions12Options());
+    Set<Set<String>> configurations = BruteForceExecutor
+        .getBruteForceConfigurationsFromOptions(options);
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        Set<String> options = new HashSet<>(Regions12Adapter.getRegions12Options());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+  @Test
+  public void regions16ConfigCrusher() throws Exception {
+    String programName = "regions16";
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    // arguments
+    String[] args = new String[0];
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-    @Test
-    public void regions16ConfigCrusher() throws Exception {
-        String programName = "regions16";
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    Set<String> options = new HashSet<>(Regions16Adapter.getRegions16Options());
+    Set<Set<String>> configurations = BruteForceExecutor
+        .getBruteForceConfigurationsFromOptions(options);
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        Set<String> options = new HashSet<>(Regions16Adapter.getRegions16Options());
-        Set<Set<String>> configurations = BruteForceExecutor.getBruteForceConfigurationsFromOptions(options);
+  @Test
+  public void regions16GroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(Regions16Main.PROGRAM_NAME);
+  }
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+  @Test
+  public void regions12GroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(Regions12Main.PROGRAM_NAME);
+  }
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+  @Test
+  public void densityGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(DensityMain.PROGRAM_NAME);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+  @Test
+  public void densityGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(DensityMain.PROGRAM_NAME);
+  }
 
-    @Test
-    public void regions16GroundTruth() throws Exception {
-        String programName = "regions16";
+  @Test
+  public void densityBruteForce() throws Exception {
+    String programName = "density";
 
-        // arguments
-        String[] args = new String[0];
+    // arguments
+    String[] args = new String[0];
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new UsesBFExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
+  }
 
-    @Test
-    public void regions12GroundTruth() throws Exception {
-        String programName = "regions12";
+  @Test
+  public void densityBruteForceSamplingTime() throws Exception {
+    String programName = "density";
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void densityConfigCrusher() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void densityGroundTruth() throws Exception {
-        String programName = "density";
+    BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+    instrumenter.instrument(args);
+    Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-        // arguments
-        String[] args = new String[0];
+    Analysis analysis = new DefaultStaticAnalysis();
+    Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
-        Executor executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Executor executor = new ConfigCrusherExecutor(programName);
+    Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
-    }
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-    @Test
-    public void densityGroundTruthSamplingTime() throws Exception {
-        String programName = "density";
+    PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName,
+        measuredPerformance,
+        regionsToOptionSet);
+    PerformanceModel performanceModel = builder.createModel(args);
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH));
-    }
+    args = new String[0];
 
-    @Test
-    public void densityBruteForce() throws Exception {
-        String programName = "density";
+    executor = new GroundTruthEvaluationExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        // arguments
-        String[] args = new String[0];
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel,
+        measuredPerformance, configurations);
+  }
 
-        Executor executor = new UsesBFExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+  @Test
+  public void densityConfigCrusherSamplingTime() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.BRUTE_FORCE, performanceEntries);
-    }
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-    @Test
-    public void densityBruteForceSamplingTime() throws Exception {
-        String programName = "density";
+  @Test
+  public void densityFeaturewiseGenerateCSVData() throws Exception {
+    String programName = "density";
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.BRUTE_FORCE));
-    }
+    // arguments
+    String[] args = new String[0];
 
-    @Test
-    public void densityConfigCrusher() throws Exception {
-        String programName = "density";
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    List<String> options = DensityAdapter.getDensityOptions();
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
-        instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
+    featurewise.generateCSVData(featurewiseEntries, options);
+  }
 
-        Analysis analysis = new DefaultStaticAnalysis();
-        Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
+  @Test
+  public void densityFeaturewiseModel() throws Exception {
+    String programName = "density";
 
-        Executor executor = new ConfigCrusherExecutor(programName);
-        Set<PerformanceEntryStatistic> measuredPerformance = executor.execute(args);
+    List<String> options = DensityAdapter.getDensityOptions();
+    Featurewise featurewise = new Featurewise(programName);
+    Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
 
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    // arguments
+    String[] args = new String[0];
 
-        PerformanceModelBuilder builder = new ConfigCrusherPerformanceModelBuilder(programName, measuredPerformance,
-                regionsToOptionSet);
-        PerformanceModel performanceModel = builder.createModel(args);
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        args = new String[0];
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        executor = new GroundTruthEvaluationExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.CONFIG_CRUSHER, performanceModel, measuredPerformance, configurations);
-    }
+    PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
 
-    @Test
-    public void densityConfigCrusherSamplingTime() throws Exception {
-        String programName = "density";
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel,
+        featurewiseEntries, configurations);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(Evaluation.CONFIG_CRUSHER));
-    }
+  @Test
+  public void densityPairwiseGenerateCSVData() throws Exception {
+    String programName = "density";
 
-    @Test
-    public void densityFeaturewiseGenerateCSVData() throws Exception {
-        String programName = "density";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    List<String> options = DensityAdapter.getDensityOptions();
 
-        List<String> options = DensityAdapter.getDensityOptions();
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
+    pairwise.generateCSVData(pairwiseEntries, options);
+  }
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
-        featurewise.generateCSVData(featurewiseEntries, options);
-    }
+  @Test
+  public void densityPairwiseModel() throws Exception {
+    String programName = "density";
 
-    @Test
-    public void densityFeaturewiseModel() throws Exception {
-        String programName = "density";
+    List<String> options = DensityAdapter.getDensityOptions();
+    Pairwise pairwise = new Pairwise(programName);
+    Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
 
-        List<String> options = DensityAdapter.getDensityOptions();
-        Featurewise featurewise = new Featurewise(programName);
-        Map<Set<String>, Double> learnedModel = featurewise.getLearnedModel(options);
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+    Set<Set<String>> configurations = this.getConfigs(performanceEntries);
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+    // arguments
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+    PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName,
+        learnedModel);
+    PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
 
-        PerformanceModelBuilder featurewiseBuilder = new FeaturewisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = featurewiseBuilder.createModel(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries,
+        configurations);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.FEATURE_WISE, performanceModel, featurewiseEntries, configurations);
-    }
+  @Test
+  public void densityFeaturewiseSamplingTime() throws Exception {
+    String programName = "density";
 
-    @Test
-    public void densityPairwiseGenerateCSVData() throws Exception {
-        String programName = "density";
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new FeaturewiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Featurewise featurewise = new Featurewise(programName);
+    Set<PerformanceEntryStatistic> featurewiseEntries = featurewise
+        .getFeaturewiseEntries(performanceEntries);
 
-        List<String> options = DensityAdapter.getDensityOptions();
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(featurewiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-        pairwise.generateCSVData(pairwiseEntries, options);
-    }
+  @Test
+  public void densityPairwiseSamplingTime() throws Exception {
+    String programName = "density";
 
-    @Test
-    public void densityPairwiseModel() throws Exception {
-        String programName = "density";
+    // arguments
+    String[] args = new String[0];
 
-        List<String> options = DensityAdapter.getDensityOptions();
-        Pairwise pairwise = new Pairwise(programName);
-        Map<Set<String>, Double> learnedModel = pairwise.getLearnedModel(options);
+    Executor executor = new PairwiseExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        // arguments
-        String[] args = new String[0];
+    Pairwise pairwise = new Pairwise(programName);
+    Set<PerformanceEntryStatistic> pairwiseEntries = pairwise
+        .getPairwiseEntries(performanceEntries);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(pairwiseEntries);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-        Set<Set<String>> configurations = this.getConfigs(performanceEntries);
+  @Test
+  public void berkeleyGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(BerkeleyMain.PROGRAM_NAME);
+  }
 
-        // arguments
-        args = new String[2];
-        args[0] = "-delres";
-        args[1] = "-saveres";
+  @Test
+  public void luceneGroundTruth() throws IOException, InterruptedException {
+    this.analyzeGroundTruth(LuceneMain.PROGRAM_NAME);
+  }
 
-        PerformanceModelBuilder pairwiseBuilder = new PairwisePerformanceModelBuilder(programName, learnedModel);
-        PerformanceModel performanceModel = pairwiseBuilder.createModel(args);
+  @Test
+  public void luceneGroundTruthSamplingTime() throws IOException {
+    this.analyzeGroundTruthSamplingTime(LuceneMain.PROGRAM_NAME);
+  }
 
-        Evaluation eval = new Evaluation(programName);
-        eval.writeConfigurationToPerformance(Evaluation.PAIR_WISE, performanceModel, pairwiseEntries, configurations);
-    }
+  private void analyzeGroundTruthSamplingTime(String programName) throws IOException {
+    Evaluation eval = new Evaluation(programName);
+    double samplingTime = eval.getTotalSamplingTime(Evaluation.GROUND_TRUTH);
+    Evaluation.prettyPrintTime(samplingTime);
+  }
 
-    @Test
-    public void densityFeaturewiseSamplingTime() throws Exception {
-        String programName = "density";
+  private void analyzeGroundTruth(String programName) throws IOException, InterruptedException {
+    // arguments
+    String[] args = new String[0];
 
-        // arguments
-        String[] args = new String[0];
+    Executor executor = new GroundTruthEvaluationExecutor(programName);
+    Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
 
-        Executor executor = new FeaturewiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
+    Evaluation eval = new Evaluation(programName);
+    eval.writeConfigurationToPerformance(Evaluation.GROUND_TRUTH, performanceEntries);
+  }
 
-        Featurewise featurewise = new Featurewise(programName);
-        Set<PerformanceEntryStatistic> featurewiseEntries = featurewise.getFeaturewiseEntries(performanceEntries);
+  private Set<Set<String>> getConfigs(Set<PerformanceEntryStatistic> performanceEntries) {
+    Set<Set<String>> configs = new HashSet<>();
 
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(featurewiseEntries));
+    for (PerformanceEntryStatistic entry : performanceEntries) {
+      configs.add(entry.getConfiguration());
     }
 
-    @Test
-    public void densityPairwiseSamplingTime() throws Exception {
-        String programName = "density";
-
-        // arguments
-        String[] args = new String[0];
-
-        Executor executor = new PairwiseExecutor(programName);
-        Set<PerformanceEntryStatistic> performanceEntries = executor.execute(args);
-
-        Pairwise pairwise = new Pairwise(programName);
-        Set<PerformanceEntryStatistic> pairwiseEntries = pairwise.getPairwiseEntries(performanceEntries);
-
-        Evaluation eval = new Evaluation(programName);
-        System.out.println(eval.getTotalSamplingTime(pairwiseEntries));
-    }
+    return configs;
+  }
 
 }

@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.taintflow;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.StaticAnalysis;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
 import org.junit.Test;
 
 import java.util.Map;
@@ -11,7 +12,7 @@ public class TaintFlowAnalysisTest {
 
     @Test
     public void analyzeTest1() throws Exception {
-        String systemName = "running-example";
+        String systemName = RunningExampleMain.PROGRAM_NAME;
 
         // Program arguments
         String[] args = new String[0];
@@ -22,7 +23,7 @@ public class TaintFlowAnalysisTest {
 
     @Test
     public void runningExample() throws Exception {
-        String systemName = "running-example";
+        String systemName = RunningExampleMain.PROGRAM_NAME;
 
         // Program arguments
         String[] args = new String[2];

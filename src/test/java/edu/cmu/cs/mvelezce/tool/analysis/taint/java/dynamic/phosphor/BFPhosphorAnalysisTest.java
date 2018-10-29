@@ -21,7 +21,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -35,7 +35,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -49,7 +49,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(programName, options);
     analysis.analyze(args);
   }
 }

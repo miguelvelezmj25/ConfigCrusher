@@ -81,8 +81,8 @@ public abstract class BaseClassTransformer implements ClassTransformer {
 //        ClassWriter classWriter = new ClassWriter(0);
     classNode.accept(classWriter);
 
-    DataOutputStream output = new DataOutputStream(
-        new FileOutputStream(new File(fileName + ".class")));
+    File outputFile = new File(fileName + ".class");
+    DataOutputStream output = new DataOutputStream(new FileOutputStream(outputFile));
     output.write(classWriter.toByteArray());
     output.flush();
     output.close();

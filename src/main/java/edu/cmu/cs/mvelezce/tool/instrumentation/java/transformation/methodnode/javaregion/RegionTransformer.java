@@ -547,8 +547,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         this.transformMethod(methodToInstrument);
       }
 
-      this.getClassTransformer()
-          .writeClass(classNode, this.getClassTransformer().getPathToClasses() + "/" + classNode.name);
+      this.getClassTransformer().writeClass(classNode);
 
       // Debugging
       TraceClassInspector classInspector = new TraceClassInspector(classNode.name);

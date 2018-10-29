@@ -10,7 +10,7 @@ public class ControlFlowDecisionInstrumenterTest {
   @Test
   public void runningExample()
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
-    String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes/";
+    String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
     MethodTransformer transformer = new ControlFlowDecisionInstrumenter(pathToClasses);
     transformer.transformMethods();
   }

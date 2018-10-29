@@ -21,11 +21,20 @@ import org.apache.commons.io.FileUtils;
 public abstract class BaseClassTransformer implements ClassTransformer {
 
   private final String pathToClasses;
+  private final String outputDir;
 
   public BaseClassTransformer(String pathToClasses)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
+    this(pathToClasses, pathToClasses.replace("original", "instrumented"));
+  }
+
+  public BaseClassTransformer(String pathToClasses, String outputDir)
+      throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
     this.pathToClasses = pathToClasses;
+    this.outputDir = outputDir;
+
     this.addToClassPath(this.pathToClasses);
+    this.removeOutputDir();
   }
 
   private void addToClassPath(String pathToClass)
@@ -73,7 +82,7 @@ public abstract class BaseClassTransformer implements ClassTransformer {
   }
 
   @Override
-  public void writeClass(ClassNode classNode, String fileName) throws IOException {
+  public void writeClass(ClassNode classNode) throws IOException {
     ClassWriter classWriter = new CustomClassWriter(
         ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 //        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
@@ -81,15 +90,53 @@ public abstract class BaseClassTransformer implements ClassTransformer {
 //        ClassWriter classWriter = new ClassWriter(0);
     classNode.accept(classWriter);
 
-    File outputFile = new File(fileName + ".class");
+    this.makeOutputDir(classNode);
+    File outputFile = new File(outputDir + "/" + classNode.name + ".class");
+
     DataOutputStream output = new DataOutputStream(new FileOutputStream(outputFile));
     output.write(classWriter.toByteArray());
     output.flush();
     output.close();
   }
 
+  private void makeOutputDir(ClassNode classNode) {
+    String name = classNode.name;
+    String sourceFile = classNode.sourceFile;
+    String className = sourceFile.replace(".java", "");
+    String packageName = name.replace(className, "");
+
+    File outputDirFile = new File(outputDir + "/" + packageName);
+    outputDirFile.mkdirs();
+  }
+
+  private void removeOutputDir() {
+    File outputDirFile = new File(this.outputDir);
+    this.deleteFolder(outputDirFile);
+  }
+
+  private void deleteFolder(File folder) {
+    File[] files = folder.listFiles();
+    if (files != null) { // some JVMs return null for empty dirs
+      for (File file : files) {
+        if (file.isDirectory()) {
+          deleteFolder(file);
+        }
+        else {
+          file.delete();
+        }
+      }
+    }
+
+    folder.delete();
+  }
+
   @Override
   public String getPathToClasses() {
     return this.pathToClasses;
+  }
+
+  @Override
+  public String getOutputDir() {
+    return outputDir;
   }
 }

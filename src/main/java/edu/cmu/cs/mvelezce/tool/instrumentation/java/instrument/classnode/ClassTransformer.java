@@ -13,10 +13,12 @@ public interface ClassTransformer {
 
   String getPathToClasses();
 
+  String getOutputDir();
+
   Set<ClassNode> readClasses() throws IOException;
 
   ClassNode readClass(String fileName) throws IOException;
 
-  void writeClass(ClassNode classNode, String fileName) throws IOException;
+  void writeClass(ClassNode classNode) throws IOException;
 
 }

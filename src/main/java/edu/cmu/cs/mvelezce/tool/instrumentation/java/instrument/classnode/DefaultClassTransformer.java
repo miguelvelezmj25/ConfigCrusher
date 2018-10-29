@@ -5,7 +5,7 @@ import java.net.MalformedURLException;
 
 public class DefaultClassTransformer extends BaseClassTransformer {
 
-    public DefaultClassTransformer(String path) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        super(path);
+    public DefaultClassTransformer(String pathToClasses) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+        super(pathToClasses);
     }
 }

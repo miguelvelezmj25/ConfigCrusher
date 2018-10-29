@@ -11,7 +11,7 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
  */
 public interface ClassTransformer {
 
-  String getOutputPath();
+  String getPathToClasses();
 
   Set<ClassNode> readClasses() throws IOException;
 

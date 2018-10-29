@@ -20,12 +20,12 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class BaseClassTransformer implements ClassTransformer {
 
-  private final String outputPath;
+  private final String pathToClasses;
 
-  public BaseClassTransformer(String outputPath)
+  public BaseClassTransformer(String pathToClasses)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-    this.outputPath = outputPath;
-    this.addToClassPath(this.outputPath);
+    this.pathToClasses = pathToClasses;
+    this.addToClassPath(this.pathToClasses);
   }
 
   private void addToClassPath(String pathToClass)
@@ -45,12 +45,12 @@ public abstract class BaseClassTransformer implements ClassTransformer {
     Set<ClassNode> classNodes = new HashSet<>();
     String[] extensions = {"class"};
 
-    Collection<File> files = FileUtils.listFiles(new File(this.outputPath), extensions, true);
+    Collection<File> files = FileUtils.listFiles(new File(this.pathToClasses), extensions, true);
 
     for (File file : files) {
       String fullPath = file.getPath();
       String path = fullPath.replace(".class", "");
-      String relativePath = path.replace(this.outputPath, "");
+      String relativePath = path.replace(this.pathToClasses, "");
       String qualifiedName = relativePath.replace("/", ".");
 
       if (qualifiedName.startsWith(".")) {
@@ -89,7 +89,7 @@ public abstract class BaseClassTransformer implements ClassTransformer {
   }
 
   @Override
-  public String getOutputPath() {
-    return this.outputPath;
+  public String getPathToClasses() {
+    return this.pathToClasses;
   }
 }

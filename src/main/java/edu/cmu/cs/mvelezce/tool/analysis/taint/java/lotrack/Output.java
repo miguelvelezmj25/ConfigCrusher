@@ -51,7 +51,7 @@ public class Output {
 //                }
 //
 //                try {
-//                    FileInputStream fstream = new FileInputStream(root + file.getOutputPath().replace(root, ""));
+//                    FileInputStream fstream = new FileInputStream(root + file.getPathToClasses().replace(root, ""));
 //                    DataInputStream in = new DataInputStream(fstream);
 //                    BufferedReader br = new BufferedReader(new InputStreamReader(in));
 //                    String strLine = br.readLine();
@@ -76,7 +76,7 @@ public class Output {
 //            StringBuilder lotrackedFile = new StringBuilder();
 //
 //            try {
-//                FileInputStream fstream = new FileInputStream(root + file.getOutputPath().replace(root, ""));
+//                FileInputStream fstream = new FileInputStream(root + file.getPathToClasses().replace(root, ""));
 //                DataInputStream in = new DataInputStream(fstream);
 //                BufferedReader br = new BufferedReader(new InputStreamReader(in));
 //                String strLine;

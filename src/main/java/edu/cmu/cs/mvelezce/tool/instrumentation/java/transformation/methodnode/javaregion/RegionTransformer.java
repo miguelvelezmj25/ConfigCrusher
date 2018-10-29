@@ -548,7 +548,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
       }
 
       this.getClassTransformer()
-          .writeClass(classNode, this.getClassTransformer().getPath() + "/" + classNode.name);
+          .writeClass(classNode, this.getClassTransformer().getOutputPath() + "/" + classNode.name);
 
       // Debugging
       TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
@@ -1525,7 +1525,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     javapResult = new ArrayList<>();
 
     try {
-      String[] command = new String[]{"javap", "-classpath", this.getClassTransformer().getPath(),
+      String[] command = new String[]{"javap", "-classpath", this.getClassTransformer().getOutputPath(),
           "-p", "-c", "-s",
           classPackage + "." + className};
       System.out.println(Arrays.toString(command));
@@ -1951,7 +1951,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     Options.v().set_no_bodies_for_excluded(true);
     Options.v().set_allow_phantom_refs(true);
-    Options.v().set_soot_classpath(appendClasspath(this.getClassTransformer().getPath(), libPath));
+    Options.v().set_soot_classpath(appendClasspath(this.getClassTransformer().getOutputPath(), libPath));
 
     // Configure the callgraph algorithm
     Options.v().setPhaseOption("cg.spark", "on");

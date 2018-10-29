@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 import edu.cmu.cs.mvelezce.*;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import kanzi.io.CompressedOutputStream;
@@ -22,7 +22,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph0() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph0.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -41,7 +41,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph1() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph1.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -60,7 +60,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph2() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph2.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -78,7 +78,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph3() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph3.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -97,7 +97,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph4() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph4.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -116,7 +116,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph5() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph5.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -135,7 +135,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph6() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph6.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -154,7 +154,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph7() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph7.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -173,7 +173,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph8() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph8.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -192,7 +192,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph9() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph9.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -211,7 +211,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph10() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph10.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -230,7 +230,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph11() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph11.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -249,7 +249,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph12() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph12.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -268,7 +268,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph13() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph13.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -287,7 +287,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph14() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph14.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -306,7 +306,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph15() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph15.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -324,7 +324,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void graph16() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/dummy/out/production/dummy";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Graph16.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -343,7 +343,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(Example.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -362,7 +362,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void prevayler() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/prevayler/target/classes";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(POBox.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -381,7 +381,7 @@ public class DefaultMethodGraphBuilderTest {
     @Test
     public void kanzi() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/kanzi/target/classes";
-        ClassTransformer reader = new DefaultBaseClassTransformer(path);
+        ClassTransformer reader = new DefaultClassTransformer(path);
         ClassNode classNode = reader.readClass(CompressedOutputStream.class.getCanonicalName());
 
         for(MethodNode methodNode : classNode.methods) {
@@ -397,7 +397,7 @@ public class DefaultMethodGraphBuilderTest {
 
 //    @Test
 //    public void testDummy6() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Dummy6.class.getCanonicalName());
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -427,7 +427,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testDummy() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Dummy.class.getCanonicalName());
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -444,7 +444,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testDummy5() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Dummy5.class.getCanonicalName());
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -461,7 +461,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testSleep15() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep15.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -478,7 +478,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testSleep20() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep20.class.getCanonicalName());
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -498,7 +498,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph1() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep1.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -515,7 +515,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph13() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep13.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -532,7 +532,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph2() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep2.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -549,7 +549,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph3() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep3.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -566,7 +566,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph4() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep4.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -583,7 +583,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph5() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep5.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -600,7 +600,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph6() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep6.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -617,7 +617,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph7() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep7.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -634,7 +634,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph8() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep8.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -651,7 +651,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph9() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep9.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -668,7 +668,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph10() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Sleep10.FILENAME);
 //
 //        List<MethodNode> methods = classNode.methods;
@@ -685,7 +685,7 @@ public class DefaultMethodGraphBuilderTest {
 //
 //    @Test
 //    public void testBuildMethodGraph11() throws IOException {
-//        ClassTransformer reader = new DefaultBaseClassTransformer();
+//        ClassTransformer reader = new DefaultClassTransformer();
 //        ClassNode classNode = reader.readClass(Dummy3.class.getCanonicalName());
 //
 //        List<MethodNode> methods = classNode.methods;

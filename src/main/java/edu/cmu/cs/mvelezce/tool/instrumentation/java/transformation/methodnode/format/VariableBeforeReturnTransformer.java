@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.format;
 
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.*;
@@ -15,7 +15,7 @@ import java.util.Set;
 public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
 
     public VariableBeforeReturnTransformer(String directory) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-        this(new DefaultBaseClassTransformer(directory));
+        this(new DefaultClassTransformer(directory));
 
     }
 

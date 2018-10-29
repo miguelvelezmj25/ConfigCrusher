@@ -9,7 +9,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.config.SootConfig;
 import java.io.BufferedReader;
@@ -92,7 +92,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
   public RegionTransformer(String programName, String entryPoint, String directory,
       Map<JavaRegion, Set<Set<String>>> regionsToOptionSet)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-    this(programName, entryPoint, new DefaultBaseClassTransformer(directory), regionsToOptionSet);
+    this(programName, entryPoint, new DefaultClassTransformer(directory), regionsToOptionSet);
   }
 
   @Override

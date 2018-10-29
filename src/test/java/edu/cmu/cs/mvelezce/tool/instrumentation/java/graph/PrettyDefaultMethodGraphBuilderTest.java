@@ -6,7 +6,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultBaseClassTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import jdk.internal.org.objectweb.asm.util.Printer;
@@ -23,7 +23,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
         String className = Example.class.getCanonicalName();
         String methodName = "moo";
-        ClassTransformer transformer = new DefaultBaseClassTransformer(path);
+        ClassTransformer transformer = new DefaultClassTransformer(path);
         ClassNode classNode = transformer.readClass(className);
 
         MethodNode methodNode = null;
@@ -51,7 +51,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/dummy/out/production/dummy";
         String className = Example.class.getCanonicalName();
         String methodName = "moo";
-        ClassTransformer transformer = new DefaultBaseClassTransformer(path);
+        ClassTransformer transformer = new DefaultClassTransformer(path);
         ClassNode classNode = transformer.readClass(className);
 
         MethodNode methodNode = null;
@@ -79,7 +79,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
         String className = Run.class.getCanonicalName();
         String methodName = "main";
-        ClassTransformer transformer = new DefaultBaseClassTransformer(path);
+        ClassTransformer transformer = new DefaultClassTransformer(path);
         ClassNode classNode = transformer.readClass(className);
 
         MethodNode methodNode = null;
@@ -107,7 +107,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
         String className = DurableOutputStream.class.getCanonicalName();
         String methodName = "close";
-        ClassTransformer transformer = new DefaultBaseClassTransformer(path);
+        ClassTransformer transformer = new DefaultClassTransformer(path);
         ClassNode classNode = transformer.readClass(className);
 
         MethodNode methodNode = null;

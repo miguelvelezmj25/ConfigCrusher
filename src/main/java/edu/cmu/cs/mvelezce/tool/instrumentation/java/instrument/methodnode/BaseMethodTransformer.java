@@ -34,7 +34,7 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       System.out.println("Transforming class " + classNode.name);
 
       for (MethodNode methodToInstrument : methodsToInstrument) {
-        this.transformMethod(methodToInstrument);
+        this.transformMethod(methodToInstrument, classNode);
       }
 
       this.classTransformer.writeClass(classNode);

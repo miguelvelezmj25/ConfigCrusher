@@ -9,7 +9,7 @@ public interface MethodTransformer {
 
   Set<MethodNode> getMethodsToInstrument(ClassNode classNode);
 
-  void transformMethod(MethodNode methodNode);
+  void transformMethod(MethodNode methodNode, ClassNode classNode);
 
   void transformMethods() throws IOException;
 

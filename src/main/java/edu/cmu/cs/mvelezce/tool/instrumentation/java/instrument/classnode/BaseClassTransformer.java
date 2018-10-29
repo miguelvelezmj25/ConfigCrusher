@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -100,11 +101,7 @@ public abstract class BaseClassTransformer implements ClassTransformer {
   }
 
   private void makeOutputDir(ClassNode classNode) {
-    String name = classNode.name;
-    String sourceFile = classNode.sourceFile;
-    String className = sourceFile.replace(".java", "");
-    String packageName = name.replace(className, "");
-
+    String packageName = Utils.getPackageName(classNode);
     File outputDirFile = new File(outputDir + "/" + packageName);
     outputDirFile.mkdirs();
   }

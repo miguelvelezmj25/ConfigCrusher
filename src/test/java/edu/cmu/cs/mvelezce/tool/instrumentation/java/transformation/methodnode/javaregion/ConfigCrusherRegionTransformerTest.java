@@ -13,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.Map;
 import java.util.Set;
+import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.junit.Assert;
@@ -38,7 +39,7 @@ public class ConfigCrusherRegionTransformerTest {
         }
 
         @Override
-        public void transformMethod(MethodNode methodNode) {
+        public void transformMethod(MethodNode methodNode, ClassNode classNode) {
 
         }
       };

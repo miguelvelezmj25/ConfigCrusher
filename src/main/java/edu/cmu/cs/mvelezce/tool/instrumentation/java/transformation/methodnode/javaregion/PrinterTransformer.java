@@ -61,7 +61,7 @@ public class PrinterTransformer extends RegionTransformer {
     }
 
     @Override
-    public void transformMethod(MethodNode methodNode) {
+    public void transformMethod(MethodNode methodNode, ClassNode classNode) {
         throw new RuntimeException();
     }
 }

@@ -62,7 +62,7 @@ public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
     }
 
     @Override
-    public void transformMethod(MethodNode methodNode) {
+    public void transformMethod(MethodNode methodNode, ClassNode classNode) {
         InsnList newInsts = new InsnList();
         InsnList instructions = methodNode.instructions;
         ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();

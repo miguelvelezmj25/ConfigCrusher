@@ -544,7 +544,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
       for (MethodNode methodToInstrument : methodsToInstrument) {
 //                System.out.println("Instrumenting method " + methodToInstrument.name);
-        this.transformMethod(methodToInstrument);
+        this.transformMethod(methodToInstrument, classNode);
       }
 
       this.getClassTransformer().writeClass(classNode);

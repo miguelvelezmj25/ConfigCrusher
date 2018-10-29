@@ -24,7 +24,7 @@ public class ConfigCrusherTimerTransformer extends ConfigCrusherRegionTransforme
     }
 
     @Override
-    public void transformMethod(MethodNode methodNode) {
+    public void transformMethod(MethodNode methodNode, ClassNode classNode) {
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
         InsnList newInstructions = this.instrumentRegion(methodNode, regionsInMethod);
 

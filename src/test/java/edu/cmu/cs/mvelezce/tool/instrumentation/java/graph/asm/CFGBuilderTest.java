@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.ControlFlowDecisionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.ExecutionLogger;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class CFGBuilderTest {
 
     CFGBuilder cfgBuilder = new CFGBuilder(owner, methodNode);
     MethodGraph graph = cfgBuilder.buildCFG();
-    System.out.println(graph.toDotString(owner));
+    System.out.println(graph.toDotString(Utils.getClassName(classNode)));
   }
 
   private MethodNode getMainMethod(ClassNode classNode) {

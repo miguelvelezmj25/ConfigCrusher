@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -20,12 +21,12 @@ public class CFGBuilder {
   private final String owner;
   private final MethodNode methodNode;
 
-  CFGBuilder(String owner, MethodNode methodNode) {
+  public CFGBuilder(String owner, MethodNode methodNode) {
     this.owner = owner;
     this.methodNode = methodNode;
   }
 
-  MethodGraph buildCFG() throws AnalyzerException {
+  public MethodGraph buildCFG() throws AnalyzerException {
     Analyzer<BasicValue> analyzer = this.getASMAnalyzer();
     Frame<BasicValue>[] frames = analyzer.getFrames();
     MethodGraph graph = this.addMethodBlocks();
@@ -68,6 +69,27 @@ public class CFGBuilder {
         graph.addEdge(block, succBlock);
       }
     }
+
+    this.connectToEntryBlock(graph, insnList);
+    this.connectToExitBlock(graph);
+  }
+
+  private void connectToExitBlock(MethodGraph graph) {
+    for (MethodBlock methodBlock : graph.getBlocks()) {
+      for (AbstractInsnNode instruction : methodBlock.getInstructions()) {
+        int opcode = instruction.getOpcode();
+
+        if (opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
+          methodBlock.setWithReturn(true);
+          graph.addEdge(methodBlock, graph.getExitBlock());
+        }
+      }
+    }
+  }
+
+  private void connectToEntryBlock(MethodGraph graph, InsnList insnList) {
+    MethodBlock firstBlock = graph.getMethodBlock(insnList.getFirst());
+    graph.addEdge(graph.getEntryBlock(), firstBlock);
   }
 
   private MethodGraph addMethodBlocks() {
@@ -77,6 +99,7 @@ public class CFGBuilder {
     while (insnIter.hasNext()) {
       AbstractInsnNode in = insnIter.next();
       MethodBlock block = new MethodBlock(in);
+      block.getInstructions().add(in);
       graph.addMethodBlock(block);
     }
 

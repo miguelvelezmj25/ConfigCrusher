@@ -1,5 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import java.lang.reflect.InvocationTargetException;
@@ -15,6 +19,7 @@ import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.tree.analysis.AnalyzerException;
 
 public class ControlFlowDecisionInstrumenter extends BaseMethodTransformer {
 
@@ -60,32 +65,51 @@ public class ControlFlowDecisionInstrumenter extends BaseMethodTransformer {
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    throw new UnsupportedOperationException("Implement");
-//    CFGBuilder s = new CFGBuilder();
-//    try {
-//      s.getSome("owner", methodNode);
-//    } catch (AnalyzerException e) {
-//      e.printStackTrace();
-//    }
+    MethodGraph graph = this.getCFG(methodNode, classNode);
 
-//    InsnList insnList = methodNode.instructions;
-//    Iterator<AbstractInsnNode> insnIter = insnList.iterator();
-//    int decisionCount = 0;
-//
-//    String packageName = Utils.getPackageName(classNode);
-//    String className = Utils.getClassName(classNode);
-//    String methodNameAndSignature = methodNode.name + methodNode.desc;
-//
-//    while (insnIter.hasNext()) {
-//      AbstractInsnNode insnNode = insnIter.next();
-//      int opcode = insnNode.getOpcode();
-//
-//      if (opcode >= Opcodes.LCMP && opcode <= Opcodes.IF_ACMPNE) {
-//        decisionCount++;
-//        insnList.insertBefore(insnNode,
-//            this.getLoggingInstructions(packageName, className, methodNameAndSignature,
-//                decisionCount));
-//      }
-//    }
+    String packageName = Utils.getPackageName(classNode);
+    String className = Utils.getClassName(classNode);
+    String methodNameAndSignature = methodNode.name + methodNode.desc;
+
+    InsnList insnList = methodNode.instructions;
+    Iterator<AbstractInsnNode> insnIter = insnList.iterator();
+    int decisionCount = 0;
+
+//    System.out.println(graph.toDotString(methodNode.name));
+
+    while (insnIter.hasNext()) {
+      AbstractInsnNode insnNode = insnIter.next();
+      int opcode = insnNode.getOpcode();
+
+      if (opcode >= Opcodes.LCMP && opcode <= Opcodes.IF_ACMPNE) {
+        decisionCount++;
+        MethodBlock block = graph.getMethodBlock(insnNode);
+        MethodBlock immediatePostDominator = graph.getImmediatePostDominator(block);
+
+        for (MethodBlock succ : block.getSuccessors()) {
+          if (succ.equals(immediatePostDominator)) {
+            continue;
+          }
+
+          insnList.insert(succ.getInstructions().get(0),
+              this.getLoggingInstructions(packageName, className, methodNameAndSignature,
+                  decisionCount));
+        }
+      }
+    }
+  }
+
+  private MethodGraph getCFG(MethodNode methodNode, ClassNode classNode) {
+    CFGBuilder cfgBuilder = new CFGBuilder(classNode.name, methodNode);
+    MethodGraph graph;
+
+    try {
+      graph = cfgBuilder.buildCFG();
+    } catch (AnalyzerException ae) {
+      throw new RuntimeException(
+          "Could not build a control flow graph for method :" + methodNode.name, ae);
+    }
+
+    return graph;
   }
 }

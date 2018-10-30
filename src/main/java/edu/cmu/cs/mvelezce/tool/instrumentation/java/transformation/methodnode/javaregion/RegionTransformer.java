@@ -1529,7 +1529,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     javapResult = new ArrayList<>();
 
     try {
-      String[] command = new String[]{"javap", "-classpath", this.getClassTransformer().getPathToClasses(),
+      String[] command = new String[]{"javap", "-classpath", this.getClassTransformer().getClassPath(),
           "-p", "-c", "-s",
           classPackage + "." + className};
       System.out.println(Arrays.toString(command));
@@ -1955,7 +1955,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
     Options.v().set_no_bodies_for_excluded(true);
     Options.v().set_allow_phantom_refs(true);
-    Options.v().set_soot_classpath(appendClasspath(this.getClassTransformer().getPathToClasses(), libPath));
+    Options.v().set_soot_classpath(appendClasspath(this.getClassTransformer().getClassPath(), libPath));
 
     // Configure the callgraph algorithm
     Options.v().setPhaseOption("cg.spark", "on");

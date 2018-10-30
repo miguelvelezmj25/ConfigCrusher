@@ -21,20 +21,20 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class BaseClassTransformer implements ClassTransformer {
 
-  private final String pathToClasses;
+  private final String classPath;
   private final String outputDir;
 
-  public BaseClassTransformer(String pathToClasses)
+  public BaseClassTransformer(String classPath)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-    this(pathToClasses, pathToClasses.replace("original", "instrumented"));
+    this(classPath, classPath.replace("original", "instrumented"));
   }
 
-  public BaseClassTransformer(String pathToClasses, String outputDir)
+  public BaseClassTransformer(String classPath, String outputDir)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-    this.pathToClasses = pathToClasses;
+    this.classPath = classPath;
     this.outputDir = outputDir;
 
-    this.addToClassPath(this.pathToClasses);
+    this.addToClassPath(this.classPath);
     this.removeOutputDir();
   }
 
@@ -60,12 +60,12 @@ public abstract class BaseClassTransformer implements ClassTransformer {
     Set<ClassNode> classNodes = new HashSet<>();
     String[] extensions = {"class"};
 
-    Collection<File> files = FileUtils.listFiles(new File(this.pathToClasses), extensions, true);
+    Collection<File> files = FileUtils.listFiles(new File(this.classPath), extensions, true);
 
     for (File file : files) {
       String fullPath = file.getPath();
       String path = fullPath.replace(".class", "");
-      String relativePath = path.replace(this.pathToClasses, "");
+      String relativePath = path.replace(this.classPath, "");
       String qualifiedName = relativePath.replace("/", ".");
 
       if (qualifiedName.startsWith(".")) {
@@ -133,8 +133,8 @@ public abstract class BaseClassTransformer implements ClassTransformer {
   }
 
   @Override
-  public String getPathToClasses() {
-    return this.pathToClasses;
+  public String getClassPath() {
+    return this.classPath;
   }
 
   @Override

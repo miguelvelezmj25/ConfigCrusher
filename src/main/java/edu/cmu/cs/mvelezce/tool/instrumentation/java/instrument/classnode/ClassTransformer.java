@@ -17,7 +17,7 @@ public interface ClassTransformer {
 
   void writeClass(ClassNode classNode) throws IOException;
 
-  String getPathToClasses();
+  String getClassPath();
 
   String getOutputDir();
 

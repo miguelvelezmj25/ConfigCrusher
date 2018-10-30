@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import org.junit.Test;
 
-public class ControlFlowDecisionInstrumenterTest {
+public class BranchCoverageInstrumenterTest {
 
   @Test
   public void runningExample()
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
     String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
-    MethodTransformer transformer = new ControlFlowDecisionInstrumenter(pathToClasses);
+    MethodTransformer transformer = new BranchCoverageInstrumenter(pathToClasses);
     transformer.transformMethods();
   }
 }

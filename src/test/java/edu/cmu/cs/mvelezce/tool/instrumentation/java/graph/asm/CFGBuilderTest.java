@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm;
 
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.ControlFlowDecisionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.BranchCoverageInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
@@ -54,7 +54,7 @@ public class CFGBuilderTest {
   private Set<ClassNode> getClassNodes()
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
     String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
-    MethodTransformer transformer = new ControlFlowDecisionInstrumenter(pathToClasses);
+    MethodTransformer transformer = new BranchCoverageInstrumenter(pathToClasses);
     return transformer.getClassTransformer().readClasses();
   }
 }

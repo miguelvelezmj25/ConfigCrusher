@@ -21,9 +21,9 @@ import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import jdk.internal.org.objectweb.asm.tree.analysis.AnalyzerException;
 
-public class ControlFlowDecisionInstrumenter extends BaseMethodTransformer {
+public class BranchCoverageInstrumenter extends BaseMethodTransformer {
 
-  public ControlFlowDecisionInstrumenter(String pathToClasses)
+  public BranchCoverageInstrumenter(String pathToClasses)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
     super(new DefaultClassTransformer(pathToClasses));
   }

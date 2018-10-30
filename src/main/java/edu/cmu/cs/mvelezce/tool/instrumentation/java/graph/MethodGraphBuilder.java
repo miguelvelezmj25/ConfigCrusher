@@ -2,16 +2,16 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 public interface MethodGraphBuilder {
 
-    public MethodGraph build();
+  MethodGraph build();
 
-    public void addEdges();
+  void addEdges();
 
-    public void getBlocks();
+  void getBlocks();
 
-    public void addInstructions();
+  void addInstructions();
 
-    public void connectEntryNode();
+  void connectEntryNode();
 
-    public void connectExitNode();
+  void connectExitNode();
 
 }

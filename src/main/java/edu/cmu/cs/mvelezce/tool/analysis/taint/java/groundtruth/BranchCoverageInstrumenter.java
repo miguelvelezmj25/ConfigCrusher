@@ -121,7 +121,7 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
 
   private static class BranchCoverageClassTransformer extends BaseClassTransformer {
 
-    public BranchCoverageClassTransformer(String pathToClasses,
+    BranchCoverageClassTransformer(String pathToClasses,
         Set<String> classesToTransform)
         throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
       super(pathToClasses, classesToTransform);

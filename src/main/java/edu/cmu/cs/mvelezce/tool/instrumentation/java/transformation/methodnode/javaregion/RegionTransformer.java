@@ -562,7 +562,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
       for (MethodNode methodNode : methodsToInstrument) {
         Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
         PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-        PrettyMethodGraph prettyGraph = prettyBuilder.build();
+        PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
         prettyGraph.saveDotFile(this.programName, classNode.name, methodNode.name);
 
         try {
@@ -997,8 +997,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     MethodGraph graph = this.methodsToGraphs.get(methodNode);
 
     if (graph == null) {
-      DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-      graph = builder.build();
+      DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder();
+      graph = builder.build(methodNode);
       this.methodsToGraphs.put(methodNode, graph);
     }
 
@@ -1006,8 +1006,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
   }
 
   private MethodGraph buildMethodGraph(MethodNode methodNode) {
-    DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-    MethodGraph graph = builder.build();
+    DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder();
+    MethodGraph graph = builder.build(methodNode);
     this.methodsToGraphs.put(methodNode, graph);
 
     return graph;

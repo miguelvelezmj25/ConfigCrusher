@@ -41,7 +41,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
         MethodTracer tracer = classInspector.visitClass();
         Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
         PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-        PrettyMethodGraph prettyGraph = prettyBuilder.build();
+        PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
 
         System.out.println(prettyGraph.toDotStringVerbose(methodName));
     }
@@ -69,7 +69,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
         MethodTracer tracer = classInspector.visitClass();
         Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
         PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-        PrettyMethodGraph prettyGraph = prettyBuilder.build();
+        PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
 
         System.out.println(prettyGraph.toDotStringVerbose(methodName));
     }
@@ -97,7 +97,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
         MethodTracer tracer = classInspector.visitClass();
         Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
         PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-        PrettyMethodGraph prettyGraph = prettyBuilder.build();
+        PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
 
         System.out.println(prettyGraph.toDotStringVerbose(methodName));
     }
@@ -125,7 +125,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
         MethodTracer tracer = classInspector.visitClass();
         Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
         PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
-        PrettyMethodGraph prettyGraph = prettyBuilder.build();
+        PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
 
         System.out.println(prettyGraph.toDotStringVerbose(methodName));
     }

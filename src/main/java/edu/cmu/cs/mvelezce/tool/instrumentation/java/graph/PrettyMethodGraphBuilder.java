@@ -7,6 +7,7 @@ import jdk.internal.org.objectweb.asm.util.Printer;
 
 import java.util.List;
 
+// TODO figure how to structure better the building of a graph and then the pretty graph
 /**
  * Created by mvelezce on 5/3/17.
  */
@@ -17,27 +18,25 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
     private Printer printer;
 
     public PrettyMethodGraphBuilder(MethodNode methodNode, Printer printer) {
-        super(methodNode);
-
-        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder(methodNode);
-        this.graph = builder.build();
+        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder();
+        this.graph = builder.build(methodNode);
         this.printer = printer;
         this.prettyGraph = new PrettyMethodGraph();
     }
 
     @Override
-    public PrettyMethodGraph build() {
-        this.getBlocks();
-        this.addInstructions();
-        this.addEdges();
-        this.connectEntryNode();
-        this.connectExitNode();
+    public PrettyMethodGraph build(MethodNode methodNode) {
+        this.buildBlocks(this.graph, methodNode);
+        this.addInstructions(this.graph, methodNode);
+        this.addEdges(this.graph, methodNode);
+        this.connectEntryNode(this.graph, methodNode);
+        this.connectExitNode(this.graph);
 
         return this.prettyGraph;
     }
 
     @Override
-    public void addEdges() {
+    public void addEdges(MethodGraph graph, MethodNode methodNode) {
         for(MethodBlock block : this.graph.getBlocks()) {
             if(block == this.graph.getEntryBlock() || block == this.graph.getExitBlock()) {
                 continue;
@@ -53,7 +52,7 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
     }
 
     @Override
-    public void getBlocks() {
+    public void buildBlocks(MethodGraph graph, MethodNode methodNode) {
         for(MethodBlock block : this.graph.getBlocks()) {
             if(block == this.graph.getEntryBlock() || block == this.graph.getExitBlock()) {
                 continue;
@@ -65,14 +64,14 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
     }
 
     @Override
-    public void addInstructions() {
+    public void addInstructions(MethodGraph graph, MethodNode methodNode) {
         for(MethodBlock block : this.graph.getBlocks()) {
             if(block == this.graph.getEntryBlock() || block == this.graph.getExitBlock()) {
                 continue;
             }
 
             List<AbstractInsnNode> blockInstructions = block.getInstructions();
-            InsnList methodInstructions = this.getMethodNode().instructions;
+            InsnList methodInstructions = methodNode.instructions;
             int startIndex = methodInstructions.indexOf(blockInstructions.get(0));
             // Exclusive
             int endIndex = startIndex + blockInstructions.size();
@@ -107,7 +106,7 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
     }
 
     @Override
-    public void connectEntryNode() {
+    public void connectEntryNode(MethodGraph graph, MethodNode methodNode) {
         MethodBlock entry = this.graph.getEntryBlock();
         MethodBlock prettyEntry = this.prettyGraph.getEntryBlock();
 
@@ -118,7 +117,7 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
     }
 
     @Override
-    public void connectExitNode() {
+    public void connectExitNode(MethodGraph graph) {
         MethodBlock exit = this.graph.getExitBlock();
         MethodBlock prettyExit = this.prettyGraph.getExitBlock();
 

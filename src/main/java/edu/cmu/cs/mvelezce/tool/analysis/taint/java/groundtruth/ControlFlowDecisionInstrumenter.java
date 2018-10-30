@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.HashSet;
@@ -19,9 +18,9 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 public class ControlFlowDecisionInstrumenter extends BaseMethodTransformer {
 
-  ControlFlowDecisionInstrumenter(String pathToClasses)
+  public ControlFlowDecisionInstrumenter(String pathToClasses)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-    super("", new DefaultClassTransformer(pathToClasses));
+    super(new DefaultClassTransformer(pathToClasses));
   }
 
   private InsnList getLoggingInstructions(String packageName, String className,
@@ -61,24 +60,32 @@ public class ControlFlowDecisionInstrumenter extends BaseMethodTransformer {
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    InsnList insnList = methodNode.instructions;
-    Iterator<AbstractInsnNode> insnIter = insnList.iterator();
-    int decisionCount = 0;
+    throw new UnsupportedOperationException("Implement");
+//    CFGBuilder s = new CFGBuilder();
+//    try {
+//      s.getSome("owner", methodNode);
+//    } catch (AnalyzerException e) {
+//      e.printStackTrace();
+//    }
 
-    String packageName = Utils.getPackageName(classNode);
-    String className = Utils.getClassName(classNode);
-    String methodNameAndSignature = methodNode.name + methodNode.desc;
-
-    while (insnIter.hasNext()) {
-      AbstractInsnNode insnNode = insnIter.next();
-      int opcode = insnNode.getOpcode();
-
-      if (opcode >= Opcodes.LCMP && opcode <= Opcodes.IF_ACMPNE) {
-        decisionCount++;
-        insnList.insertBefore(insnNode,
-            this.getLoggingInstructions(packageName, className, methodNameAndSignature,
-                decisionCount));
-      }
-    }
+//    InsnList insnList = methodNode.instructions;
+//    Iterator<AbstractInsnNode> insnIter = insnList.iterator();
+//    int decisionCount = 0;
+//
+//    String packageName = Utils.getPackageName(classNode);
+//    String className = Utils.getClassName(classNode);
+//    String methodNameAndSignature = methodNode.name + methodNode.desc;
+//
+//    while (insnIter.hasNext()) {
+//      AbstractInsnNode insnNode = insnIter.next();
+//      int opcode = insnNode.getOpcode();
+//
+//      if (opcode >= Opcodes.LCMP && opcode <= Opcodes.IF_ACMPNE) {
+//        decisionCount++;
+//        insnList.insertBefore(insnNode,
+//            this.getLoggingInstructions(packageName, className, methodNameAndSignature,
+//                decisionCount));
+//      }
+//    }
   }
 }

@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.BaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import java.lang.reflect.InvocationTargetException;
@@ -26,6 +27,11 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   public BranchCoverageInstrumenter(String pathToClasses)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
     super(new DefaultClassTransformer(pathToClasses));
+  }
+
+  public BranchCoverageInstrumenter(String pathToClasses, Set<String> classesToAnalyze)
+      throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
+    super(new BranchCoverageClassTransformer(pathToClasses, classesToAnalyze));
   }
 
   private InsnList getLoggingInstructions(String packageName, String className,
@@ -111,5 +117,14 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
     }
 
     return graph;
+  }
+
+  private static class BranchCoverageClassTransformer extends BaseClassTransformer {
+
+    public BranchCoverageClassTransformer(String pathToClasses,
+        Set<String> classesToTransform)
+        throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+      super(pathToClasses, classesToTransform);
+    }
   }
 }

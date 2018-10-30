@@ -26,4 +26,8 @@ public class Utils {
     return sourceFile.replace(".java", "");
   }
 
+  public static String getASMPackageAndClassName(String packageName, String className) {
+    return packageName + "." + className;
+  }
+
 }

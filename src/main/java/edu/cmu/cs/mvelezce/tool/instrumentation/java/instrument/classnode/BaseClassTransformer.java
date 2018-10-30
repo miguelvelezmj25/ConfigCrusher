@@ -21,21 +21,28 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class BaseClassTransformer implements ClassTransformer {
 
-  private final String classPath;
+  private final String pathToClasses;
   private final String outputDir;
+  private final Set<String> classesToTransform = new HashSet<>();
 
-  public BaseClassTransformer(String classPath)
+  public BaseClassTransformer(String pathToClasses)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-    this(classPath, classPath.replace("original", "instrumented"));
+    this(pathToClasses, pathToClasses.replace("original", "instrumented"));
   }
 
-  public BaseClassTransformer(String classPath, String outputDir)
+  public BaseClassTransformer(String pathToClasses, String outputDir)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-    this.classPath = classPath;
+    this.pathToClasses = pathToClasses;
     this.outputDir = outputDir;
 
-    this.addToClassPath(this.classPath);
+    this.addToClassPath(this.pathToClasses);
     this.removeOutputDir();
+  }
+
+  public BaseClassTransformer(String pathToClasses, Set<String> classesToTransform)
+      throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
+    this(pathToClasses);
+    this.classesToTransform.addAll(classesToTransform);
   }
 
   private void addToClassPath(String pathToClass)
@@ -52,7 +59,28 @@ public abstract class BaseClassTransformer implements ClassTransformer {
 
   @Override
   public Set<ClassNode> getClassesToTransform(Set<ClassNode> classNodes) {
-    return classNodes;
+    if (this.classesToTransform.isEmpty()) {
+      return classNodes;
+    }
+
+    Set<ClassNode> classesToTransform = new HashSet<>();
+
+    for (ClassNode classNode : classNodes) {
+      String packageName = Utils.getPackageName(classNode);
+      String className = Utils.getClassName(classNode);
+
+      if (this.classesToTransform
+          .contains(Utils.getASMPackageAndClassName(packageName, className))) {
+        classesToTransform.add(classNode);
+      }
+    }
+
+    if (classesToTransform.isEmpty()) {
+      throw new RuntimeException("Could not find the class nodes for the classes to instrument: "
+          + this.classesToTransform);
+    }
+
+    return classesToTransform;
   }
 
   @Override
@@ -60,12 +88,12 @@ public abstract class BaseClassTransformer implements ClassTransformer {
     Set<ClassNode> classNodes = new HashSet<>();
     String[] extensions = {"class"};
 
-    Collection<File> files = FileUtils.listFiles(new File(this.classPath), extensions, true);
+    Collection<File> files = FileUtils.listFiles(new File(this.pathToClasses), extensions, true);
 
     for (File file : files) {
       String fullPath = file.getPath();
       String path = fullPath.replace(".class", "");
-      String relativePath = path.replace(this.classPath, "");
+      String relativePath = path.replace(this.pathToClasses, "");
       String qualifiedName = relativePath.replace("/", ".");
 
       if (qualifiedName.startsWith(".")) {
@@ -133,8 +161,8 @@ public abstract class BaseClassTransformer implements ClassTransformer {
   }
 
   @Override
-  public String getClassPath() {
-    return this.classPath;
+  public String getPathToClasses() {
+    return this.pathToClasses;
   }
 
   @Override

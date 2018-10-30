@@ -17,6 +17,7 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
   @Override
   public void transformMethods() throws IOException {
     Set<ClassNode> classNodes = this.classTransformer.readClasses();
+    classNodes = this.classTransformer.getClassesToTransform(classNodes);
     this.transformMethods(classNodes);
   }
 

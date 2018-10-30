@@ -51,6 +51,11 @@ public abstract class BaseClassTransformer implements ClassTransformer {
   }
 
   @Override
+  public Set<ClassNode> getClassesToTransform(Set<ClassNode> classNodes) {
+    return classNodes;
+  }
+
+  @Override
   public Set<ClassNode> readClasses() throws IOException {
     Set<ClassNode> classNodes = new HashSet<>();
     String[] extensions = {"class"};

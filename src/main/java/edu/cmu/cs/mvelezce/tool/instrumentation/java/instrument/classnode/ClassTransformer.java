@@ -11,6 +11,8 @@ public interface ClassTransformer {
 
   Set<ClassNode> readClasses() throws IOException;
 
+  Set<ClassNode> getClassesToTransform(Set<ClassNode> classNodes);
+
   ClassNode readClass(String fileName) throws IOException;
 
   void writeClass(ClassNode classNode) throws IOException;

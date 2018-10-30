@@ -59,6 +59,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
   private static final String CLINIT_SIGNATURE = "void <clinit>()";
   private static final String MAIN_SIGNATURE = "void main(java.lang.String[])";
 
+  private final String programName;
+
   private String entryPoint;
   private String rootPackage;
   private Map<JavaRegion, Set<Set<String>>> regionsToOptionSet;
@@ -77,9 +79,12 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
   private Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> cachedMethodsToBlocksDecisions = new HashMap<>();
   private Map<JavaRegion, Set<Set<String>>> cachedRegionsToOptionSet = new HashMap<>();
 
+  // TODO delete programName
   public RegionTransformer(String programName, String entryPoint, ClassTransformer classTransformer,
       Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
-    super(programName, classTransformer);
+    super(classTransformer);
+
+    this.programName = programName;
 
     this.entryPoint = entryPoint;
     this.rootPackage = entryPoint.substring(0, entryPoint.indexOf("."));
@@ -558,10 +563,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
         Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
         PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
         PrettyMethodGraph prettyGraph = prettyBuilder.build();
-        prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
+        prettyGraph.saveDotFile(this.programName, classNode.name, methodNode.name);
 
         try {
-          prettyGraph.savePdfFile(this.getProgramName(), classNode.name, methodNode.name);
+          prettyGraph.savePdfFile(this.programName, classNode.name, methodNode.name);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }

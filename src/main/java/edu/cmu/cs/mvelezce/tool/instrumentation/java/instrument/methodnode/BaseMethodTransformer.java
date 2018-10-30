@@ -8,11 +8,9 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
 public abstract class BaseMethodTransformer implements MethodTransformer {
 
-  private final String programName;
   private final ClassTransformer classTransformer;
 
-  public BaseMethodTransformer(String programName, ClassTransformer classTransformer) {
-    this.programName = programName;
+  public BaseMethodTransformer(ClassTransformer classTransformer) {
     this.classTransformer = classTransformer;
   }
 
@@ -41,10 +39,7 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
     }
   }
 
-  public String getProgramName() {
-    return programName;
-  }
-
+  @Override
   public ClassTransformer getClassTransformer() {
     return classTransformer;
   }

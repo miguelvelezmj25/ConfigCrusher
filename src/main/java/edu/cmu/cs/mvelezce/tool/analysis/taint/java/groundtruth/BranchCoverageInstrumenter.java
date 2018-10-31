@@ -15,6 +15,7 @@ import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.FieldInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
@@ -36,7 +37,6 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
 
   private InsnList getLoggingInstructions(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
-
     InsnList loggingInsns = new InsnList();
     loggingInsns.add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
     loggingInsns.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));
@@ -102,15 +102,39 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
               .getLoggingInstructions(packageName, className, methodNameAndSignature,
                   decisionCount);
 
-          if(succInsn.getType() == AbstractInsnNode.LABEL) {
+          if (succInsn.getType() == AbstractInsnNode.LABEL) {
             insnList.insert(succInsn, loggingInsnList);
           }
-          else{
+          else {
             insnList.insertBefore(succInsn, loggingInsnList);
           }
         }
       }
     }
+
+    if (methodNode.name.contains("main")) {
+      MethodBlock exitBlock = graph.getExitBlock();
+      Set<MethodBlock> preds = exitBlock.getPredecessors();
+
+      for (MethodBlock pred : preds) {
+        AbstractInsnNode predInsn = pred.getInstructions().get(0);
+        insnList.insertBefore(predInsn, this.getPrintingInstructions());
+      }
+    }
+  }
+
+  private InsnList getPrintingInstructions() {
+    InsnList printingInsnList = new InsnList();
+    printingInsnList.add(
+        new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
+    printingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
+        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/BranchCoverageLogger",
+        "getExecutedDecisions", "()Ljava/util/Set;", false));
+    printingInsnList.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL,
+        "java/io/PrintStream", "println", "(Ljava/lang/Object;)V",
+        false));
+
+    return printingInsnList;
   }
 
   private MethodGraph getCFG(MethodNode methodNode, ClassNode classNode) {

@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ExecutionLogger {
+public class BranchCoverageLogger {
 
   private static final Set<String> EXECUTED_DECISIONS = new HashSet<>();
 

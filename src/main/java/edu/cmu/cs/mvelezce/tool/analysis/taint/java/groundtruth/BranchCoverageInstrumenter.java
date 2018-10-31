@@ -41,7 +41,7 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
     loggingInsns.add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
     loggingInsns.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));
     loggingInsns.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
-        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/ExecutionLogger",
+        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/BranchCoverageLogger",
         "logExecutedDecision", "(Ljava/lang/String;I)V", false));
 
     return loggingInsns;

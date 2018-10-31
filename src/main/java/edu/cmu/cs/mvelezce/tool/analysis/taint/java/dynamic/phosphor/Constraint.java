@@ -123,7 +123,7 @@ public class Constraint {
     return config;
   }
 
-  static Map<String, Boolean> toConfigWithValues(Set<String> config, Set<String> options) {
+  public static Map<String, Boolean> toConfigWithValues(Set<String> config, Set<String> options) {
     if (options.isEmpty()) {
       throw new IllegalArgumentException("The options cannot be empty");
     }

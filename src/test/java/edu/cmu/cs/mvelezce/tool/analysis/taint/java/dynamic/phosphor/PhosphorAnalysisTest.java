@@ -16,7 +16,7 @@ import org.junit.Test;
 public class PhosphorAnalysisTest {
 
   @Test
-  public void dynamicRunningExample() throws IOException {
+  public void dynamicRunningExample() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
@@ -31,7 +31,7 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void example2() throws IOException {
+  public void example2() throws IOException, InterruptedException {
     String programName = PhosphorExample2Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(PhosphorExample2Adapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
@@ -46,7 +46,7 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void example3() throws IOException {
+  public void example3() throws IOException, InterruptedException {
     String programName = PhosphorExample3Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(PhosphorExample3Adapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
@@ -61,7 +61,7 @@ public class PhosphorAnalysisTest {
   }
 
   @Test
-  public void dynamicRunningExample_forReadResults() throws IOException {
+  public void dynamicRunningExample_forReadResults() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
 
     String[] args = new String[0];

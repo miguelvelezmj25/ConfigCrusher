@@ -22,4 +22,13 @@ public class BranchCoverageInstrumenterTest {
         classesToTransform);
     transformer.transformMethods();
   }
+
+  @Test
+  public void other()
+      throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
+    String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
+
+    MethodTransformer transformer = new BranchCoverageInstrumenter(pathToClasses);
+    transformer.transformMethods();
+  }
 }

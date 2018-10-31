@@ -59,7 +59,7 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
         AbstractInsnNode insnNode = insnIter.next();
         int opcode = insnNode.getOpcode();
 
-        if (opcode >= Opcodes.LCMP && opcode <= Opcodes.IF_ACMPNE) {
+        if (opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE) {
           methodsToInstrument.add(methodNode);
           break;
         }
@@ -87,7 +87,7 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
       AbstractInsnNode insnNode = insnIter.next();
       int opcode = insnNode.getOpcode();
 
-      if (opcode >= Opcodes.LCMP && opcode <= Opcodes.IF_ACMPNE) {
+      if (opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE) {
         decisionCount++;
         MethodBlock block = graph.getMethodBlock(insnNode);
         MethodBlock immediatePostDominator = graph.getImmediatePostDominator(block);
@@ -97,9 +97,17 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
             continue;
           }
 
-          insnList.insert(succ.getInstructions().get(0),
-              this.getLoggingInstructions(packageName, className, methodNameAndSignature,
-                  decisionCount));
+          AbstractInsnNode succInsn = succ.getInstructions().get(0);
+          InsnList loggingInsnList = this
+              .getLoggingInstructions(packageName, className, methodNameAndSignature,
+                  decisionCount);
+
+          if(succInsn.getType() == AbstractInsnNode.LABEL) {
+            insnList.insert(succInsn, loggingInsnList);
+          }
+          else{
+            insnList.insertBefore(succInsn, loggingInsnList);
+          }
         }
       }
     }

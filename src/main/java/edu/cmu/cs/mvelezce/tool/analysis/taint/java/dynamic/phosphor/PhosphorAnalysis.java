@@ -1,9 +1,12 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.cc.TaintLabel;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
@@ -26,7 +29,7 @@ import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class PhosphorAnalysis extends BaseDynamicAnalysis {
+public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
 
   private static final String PHOSPHOR_OUTPUT_DIR =
       BaseAdapter.USER_HOME
@@ -45,12 +48,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
   }
 
   @Override
-  public Map<JavaRegion, Set<Constraint>> analyze() throws IOException {
-    try {
-      this.runDynamicAnalysis(this.getInitialConfig(), this.getOptions());
-    } catch (InterruptedException ie) {
-      throw new RuntimeException("Could not finish running the dynamic analysis", ie);
-    }
+  public Map<JavaRegion, Set<Constraint>> analyze() throws IOException, InterruptedException {
+    this.runDynamicAnalysis();
 
     Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
 
@@ -65,6 +64,22 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return regionsToConstraints;
   }
 
+  @Override
+  public Map<JavaRegion, Set<Constraint>> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    List<RegionToInfo<Set<Constraint>>> results = mapper
+        .readValue(file, new TypeReference<List<RegionToInfo<Set<Constraint>>>>() {
+        });
+
+    Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
+
+    for (RegionToInfo<Set<Constraint>> result : results) {
+      regionsToConstraints.put(result.getRegion(), new HashSet<>(result.getInfo()));
+    }
+
+    return regionsToConstraints;
+  }
+
   /**
    * Input: P, c in C, O
    *
@@ -73,19 +88,14 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
    * Input: The program is provided elsewhere. Therefore, there is no need to pass the program to
    * this method.
    */
-  protected void runDynamicAnalysis(Set<String> initialConfig, Set<String> options)
-      throws IOException, InterruptedException {
-    if (options.isEmpty()) {
-      throw new IllegalArgumentException("The options cannot be empty");
-    }
-
+  protected void runDynamicAnalysis() throws IOException, InterruptedException {
     // TODO add check to be sure that we are not sampling a constraint that we already sample
 
     Set<Constraint> exploredConstraints = new HashSet<>();
     Set<Constraint> constraintsToExplore = new HashSet<>();
     // CE := to_constraint(c)
-    Map<String, Boolean> initialConfigAsConfigWithValues = Constraint
-        .toConfigWithValues(initialConfig, options);
+    Set<String> options = this.getOptions();
+    Map<String, Boolean> initialConfigAsConfigWithValues = Constraint.toConfigWithValues(this.getInitialConfig(), options);
     constraintsToExplore.add(new Constraint(initialConfigAsConfigWithValues));
 
     int count = 0;
@@ -284,6 +294,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
     return sinksToTaints;
   }
 
+  // TODO check catching and throwing
   private Map<String, Set<TaintLabel>> deserialize(File file) throws IOException {
     FileInputStream fis = new FileInputStream(file);
     ObjectInputStream ois = new ObjectInputStream(fis);
@@ -291,7 +302,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis {
 
     try {
       sinksToTaints = (Map<String, Set<TaintLabel>>) ois.readObject();
-    } catch (ClassNotFoundException e) {
+    }
+    catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
     }
 

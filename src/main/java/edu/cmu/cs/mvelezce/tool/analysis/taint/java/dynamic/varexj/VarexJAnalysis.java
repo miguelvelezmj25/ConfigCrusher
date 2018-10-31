@@ -19,7 +19,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
-public class VarexJAnalysis extends BaseDynamicAnalysis {
+public class VarexJAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
 
   private static final String VAREXJ_OUTPUT_DIR =
       "/Users/mvelezce/Documents/Programming/Java/runtime-EclipseApplication/test/coverage.xml";
@@ -32,7 +32,7 @@ public class VarexJAnalysis extends BaseDynamicAnalysis {
 
   private final Set<JavaRegion> sinks;
 
-  public VarexJAnalysis(String programName, Set<JavaRegion> sinks) {
+  VarexJAnalysis(String programName, Set<JavaRegion> sinks) {
     super(programName, new HashSet<>(), new HashSet<>());
 
     this.sinks = sinks;
@@ -47,6 +47,7 @@ public class VarexJAnalysis extends BaseDynamicAnalysis {
     throw new RuntimeException("Implement");
   }
 
+  // TODO implement
   private Map<JavaRegion, Set<Constraint>> something(Collection<Interaction> programResults) {
     Map<JavaRegion, Set<Constraint>> todo = new HashMap<>();
 
@@ -91,10 +92,10 @@ public class VarexJAnalysis extends BaseDynamicAnalysis {
     String constraintInfo = this.getConstraintInfo((String) value);
     Set<String> taints = new HashSet<>(Arrays.asList(constraintInfo.split("&")));
 
-    if(taints.size() == 1)
+    if (taints.size() == 1) {
+      for (String taint : taints) {
 
-    for (String taint : taints) {
-
+      }
     }
   }
 
@@ -143,7 +144,8 @@ public class VarexJAnalysis extends BaseDynamicAnalysis {
       XMLReader xmlReader = new XMLReader();
 
       return xmlReader.readFromFile(file);
-    } catch (ParserConfigurationException | SAXException | UnsupportedCoverageException e) {
+    }
+    catch (ParserConfigurationException | SAXException | UnsupportedCoverageException e) {
       throw new RuntimeException("There was an error trying to read the output of VarexJ", e);
     }
   }

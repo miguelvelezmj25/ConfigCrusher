@@ -1,24 +1,20 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.Constraint;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
-public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constraint>> {
+public abstract class BaseDynamicAnalysis<T> implements DynamicAnalysis<T> {
 
   protected static final String DIRECTORY = Options.DIRECTORY + "/analysis/java/dynamic/programs";
 
@@ -33,7 +29,7 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
   }
 
   @Override
-  public Map<JavaRegion, Set<Constraint>> analyze(String[] args) throws IOException {
+  public Map<JavaRegion, T> analyze(String[] args) throws IOException, InterruptedException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();
@@ -53,17 +49,17 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
       return this.readFromFile(files.iterator().next());
     }
 
-    Map<JavaRegion, Set<Constraint>> regionsToConstraints = this.analyze();
+    Map<JavaRegion, T> regionsToTypes = this.analyze();
 
     if (Options.checkIfSave()) {
-      this.writeToFile(regionsToConstraints);
+      this.writeToFile(regionsToTypes);
     }
 
-    return regionsToConstraints;
+    return regionsToTypes;
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, Set<Constraint>> regionsToConstraints)
+  public void writeToFile(Map<JavaRegion, T> regionsToConstraints)
       throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
@@ -72,29 +68,12 @@ public abstract class BaseDynamicAnalysis implements DynamicAnalysis<Set<Constra
 
     List<RegionToInfo> decisionsAndConstraints = new ArrayList<>();
 
-    for (Map.Entry<JavaRegion, Set<Constraint>> entry : regionsToConstraints.entrySet()) {
-      RegionToInfo<Set<Constraint>> regionToConstraints = new RegionToInfo<>(entry.getKey(),
-          entry.getValue());
+    for (Map.Entry<JavaRegion, T> entry : regionsToConstraints.entrySet()) {
+      RegionToInfo<T> regionToConstraints = new RegionToInfo<>(entry.getKey(), entry.getValue());
       decisionsAndConstraints.add(regionToConstraints);
     }
 
     mapper.writeValue(file, decisionsAndConstraints);
-  }
-
-  @Override
-  public Map<JavaRegion, Set<Constraint>> readFromFile(File file) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    List<RegionToInfo<Set<Constraint>>> results = mapper
-        .readValue(file, new TypeReference<List<RegionToInfo<Set<Constraint>>>>() {
-        });
-
-    Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
-
-    for (RegionToInfo<Set<Constraint>> result : results) {
-      regionsToConstraints.put(result.getRegion(), new HashSet<>(result.getInfo()));
-    }
-
-    return regionsToConstraints;
   }
 
   @Override

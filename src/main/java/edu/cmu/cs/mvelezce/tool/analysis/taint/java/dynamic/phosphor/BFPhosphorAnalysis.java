@@ -19,13 +19,9 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
   }
 
   @Override
-  protected void runDynamicAnalysis(Set<String> initialConfig, Set<String> options)
-      throws IOException, InterruptedException {
-    if (options.isEmpty()) {
-      throw new IllegalArgumentException("The options cannot be empty");
-    }
+  protected void runDynamicAnalysis() throws IOException, InterruptedException {
 
-    Set<Set<String>> configs = Helper.getConfigurations(options);
+    Set<Set<String>> configs = Helper.getConfigurations(this.getOptions());
 
     for (Set<String> config : configs) {
       // ST := run_taint_analysis(P’, c)

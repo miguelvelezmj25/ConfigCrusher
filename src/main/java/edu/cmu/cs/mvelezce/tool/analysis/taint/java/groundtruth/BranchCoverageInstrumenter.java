@@ -15,7 +15,6 @@ import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.FieldInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
@@ -33,18 +32,6 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   public BranchCoverageInstrumenter(String pathToClasses, Set<String> classesToAnalyze)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
     super(new BranchCoverageClassTransformer(pathToClasses, classesToAnalyze));
-  }
-
-  private InsnList getLoggingInstructions(String packageName, String className,
-      String methodNameAndSignature, int decisionCount) {
-    InsnList loggingInsns = new InsnList();
-    loggingInsns.add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
-    loggingInsns.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));
-    loggingInsns.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
-        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/BranchCoverageLogger",
-        "logExecutedDecision", "(Ljava/lang/String;I)V", false));
-
-    return loggingInsns;
   }
 
   @Override
@@ -118,21 +105,28 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
 
       for (MethodBlock pred : preds) {
         AbstractInsnNode predInsn = pred.getInstructions().get(0);
-        insnList.insertBefore(predInsn, this.getPrintingInstructions());
+        insnList.insertBefore(predInsn, this.getSavingInstructions());
       }
     }
   }
 
-  private InsnList getPrintingInstructions() {
+  private InsnList getLoggingInstructions(String packageName, String className,
+      String methodNameAndSignature, int decisionCount) {
+    InsnList loggingInsns = new InsnList();
+    loggingInsns.add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
+    loggingInsns.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));
+    loggingInsns.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
+        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/BranchCoverageLogger",
+        "logExecutedDecision", "(Ljava/lang/String;I)V", false));
+
+    return loggingInsns;
+  }
+
+  private InsnList getSavingInstructions() {
     InsnList printingInsnList = new InsnList();
-    printingInsnList.add(
-        new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
     printingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
         "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/BranchCoverageLogger",
-        "getExecutedDecisions", "()Ljava/util/Set;", false));
-    printingInsnList.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL,
-        "java/io/PrintStream", "println", "(Ljava/lang/Object;)V",
-        false));
+        "saveExecutedDecisions", "()V", false));
 
     return printingInsnList;
   }
@@ -143,7 +137,8 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
 
     try {
       graph = cfgBuilder.buildCFG();
-    } catch (AnalyzerException ae) {
+    }
+    catch (AnalyzerException ae) {
       throw new RuntimeException(
           "Could not build a control flow graph for method :" + methodNode.name, ae);
     }

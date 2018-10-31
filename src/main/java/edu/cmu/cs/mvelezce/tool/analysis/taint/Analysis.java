@@ -10,9 +10,9 @@ import java.util.Set;
 // TODO use generics for the ? extends region
 public interface Analysis<T> {
 
-  Map<JavaRegion, T> analyze() throws IOException;
+  Map<JavaRegion, T> analyze() throws Exception;
 
-  Map<JavaRegion, T> analyze(String[] args) throws IOException;
+  Map<JavaRegion, T> analyze(String[] args) throws Exception;
 
   void writeToFile(Map<JavaRegion, T> relevantRegionsToOptions) throws IOException;
 

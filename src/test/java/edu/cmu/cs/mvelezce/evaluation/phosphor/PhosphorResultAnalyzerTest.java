@@ -9,7 +9,7 @@ import org.junit.Test;
 public class PhosphorResultAnalyzerTest {
 
   @Test
-  public void dynamicRunningExample() throws IOException {
+  public void dynamicRunningExample() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);
@@ -17,7 +17,7 @@ public class PhosphorResultAnalyzerTest {
   }
 
   @Test
-  public void example2() throws IOException {
+  public void example2() throws IOException, InterruptedException {
     String programName = PhosphorExample2Adapter.PROGRAM_NAME;
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);
@@ -25,7 +25,7 @@ public class PhosphorResultAnalyzerTest {
   }
 
   @Test
-  public void example3() throws IOException {
+  public void example3() throws IOException, InterruptedException {
     String programName = PhosphorExample3Adapter.PROGRAM_NAME;
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);
@@ -33,7 +33,7 @@ public class PhosphorResultAnalyzerTest {
   }
 
   @Test
-  public void dynamicRunningExamplePhosphorResults() throws IOException {
+  public void dynamicRunningExamplePhosphorResults() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);
@@ -41,7 +41,7 @@ public class PhosphorResultAnalyzerTest {
   }
 
   @Test
-  public void dynamicRunningExampleBFPhosphorResults() throws IOException {
+  public void dynamicRunningExampleBFPhosphorResults() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName);

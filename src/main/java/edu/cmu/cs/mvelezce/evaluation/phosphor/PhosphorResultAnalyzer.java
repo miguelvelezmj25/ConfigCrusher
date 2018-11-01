@@ -28,7 +28,7 @@ public class PhosphorResultAnalyzer {
     this.programName = programName;
   }
 
-  void analyze() throws IOException {
+  void analyze() throws IOException, InterruptedException {
     Map<JavaRegion, Set<Constraint>> bfResults = this.readBFPhosphorResults();
     Map<JavaRegion, Set<Constraint>> ccResults = this.readCCPhosphorResults();
 
@@ -37,7 +37,8 @@ public class PhosphorResultAnalyzer {
 
     List<String[]> data = new ArrayList<>();
     data.add(new String[]{"Sink", "BF Taints", "BF Ctx", "CC Taints", "CC Ctx", "Equal Taints",
-        "Equal Ctxs", "Missing taints from CC", "Missing taints from BF", "Missing ctx from CC", "Missing ctx from BF"});
+        "Equal Ctxs", "Missing taints from CC", "Missing taints from BF", "Missing ctx from CC",
+        "Missing ctx from BF"});
 
     for (JavaRegion region : sinks) {
       List<String> entryList = this.buildEntry(region, bfResults, ccResults);
@@ -171,14 +172,16 @@ public class PhosphorResultAnalyzer {
         + region.getStartRegionIndex();
   }
 
-  Map<JavaRegion, Set<Constraint>> readCCPhosphorResults() throws IOException {
+  Map<JavaRegion, Set<Constraint>> readCCPhosphorResults()
+      throws IOException, InterruptedException {
     DynamicAnalysis<Set<Constraint>> analysis = new PhosphorAnalysis(this.programName);
 
     String[] args = new String[0];
     return analysis.analyze(args);
   }
 
-  Map<JavaRegion, Set<Constraint>> readBFPhosphorResults() throws IOException {
+  Map<JavaRegion, Set<Constraint>> readBFPhosphorResults()
+      throws IOException, InterruptedException {
     DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(this.programName);
 
     String[] args = new String[0];

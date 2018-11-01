@@ -13,7 +13,7 @@ import org.junit.Test;
 public class VarexJAnalysisTest {
 
   @Test
-  public void analyze() throws IOException {
+  public void analyze() throws IOException, InterruptedException {
     String programName = PhosphorExample2Adapter.PROGRAM_NAME;
 
     // Program arguments

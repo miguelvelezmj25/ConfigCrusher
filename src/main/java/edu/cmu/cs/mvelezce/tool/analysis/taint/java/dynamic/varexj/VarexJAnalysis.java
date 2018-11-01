@@ -181,7 +181,7 @@ public class VarexJAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, Set<Constraint>> regionsToConstraints) {
+  public void writeToFile(Map<JavaRegion, Set<Constraint>> regionsToInfo) {
     throw new UnsupportedOperationException("Method should not be called");
   }
 
@@ -198,6 +198,6 @@ public class VarexJAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
 
   @Override
   public String outputDir() {
-    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/varexj/";
+    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/varexj";
   }
 }

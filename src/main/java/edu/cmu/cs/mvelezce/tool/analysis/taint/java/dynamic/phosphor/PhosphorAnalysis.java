@@ -82,7 +82,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
 
   @Override
   public String outputDir() {
-    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc/";
+    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc";
   }
 
   /**
@@ -153,36 +153,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
    */
   static void removeAllSubConstraints(Set<Constraint> constraints, Constraint constraint) {
     constraints.removeIf(currentConstraint -> currentConstraint.isSubsetOf(constraint));
-  }
-
-  private int getDecisionOrder(String sink) {
-    int indexOfLastDot = sink.lastIndexOf(".");
-
-    return Integer.valueOf(sink.substring(indexOfLastDot + 1));
-  }
-
-  private String getMethodSignature(String sink) {
-    int indexOfFirstDot = sink.indexOf(".");
-    int indexOfLastDot = sink.lastIndexOf(".");
-
-    return sink.substring(indexOfFirstDot + 1, indexOfLastDot);
-  }
-
-  private String getClassName(String sink) {
-    int indexOfDot = sink.indexOf(".");
-    String packageAndClass = sink.substring(0, indexOfDot);
-    int indexOfLastSlash = packageAndClass.lastIndexOf("/");
-
-    return packageAndClass.substring(indexOfLastSlash + 1);
-  }
-
-  private String getPackageName(String sink) {
-    int indexOfDot = sink.indexOf(".");
-    String packageAndClass = sink.substring(0, indexOfDot);
-    int indexOfLastSlash = packageAndClass.lastIndexOf("/");
-    String packageName = packageAndClass.substring(0, indexOfLastSlash);
-
-    return packageName.replace("/", ".");
   }
 
   /**

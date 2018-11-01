@@ -36,6 +36,6 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
   @Override
   public String outputDir() {
-    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/bf/";
+    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/bf";
   }
 }

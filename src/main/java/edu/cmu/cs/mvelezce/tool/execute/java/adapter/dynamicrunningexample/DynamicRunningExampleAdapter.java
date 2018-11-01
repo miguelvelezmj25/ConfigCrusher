@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class DynamicRunningExampleAdapter extends BaseAdapter {
 
+  // TODO change name
   public static final String PROGRAM_NAME = "phosphor-examples";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.RunningExample";
 

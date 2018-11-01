@@ -92,11 +92,6 @@ public abstract class BaseDynamicAnalysis<T> implements DynamicAnalysis<T> {
 //    return null;
   }
 
-  @Override
-  public String outputDir() {
-    return BaseDynamicAnalysis.DIRECTORY + "/" + this.programName + "/cc/";
-  }
-
   public String getProgramName() {
     return this.programName;
   }

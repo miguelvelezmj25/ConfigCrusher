@@ -80,6 +80,11 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
     return regionsToConstraints;
   }
 
+  @Override
+  public String outputDir() {
+    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc/";
+  }
+
   /**
    * Input: P, c in C, O
    *

@@ -16,6 +16,7 @@ import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
@@ -74,28 +75,16 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
       AbstractInsnNode insnNode = insnIter.next();
       int opcode = insnNode.getOpcode();
 
-      if (opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE) {
+      // TODO change to switch
+      if (opcode == Opcodes.IFEQ) {
         decisionCount++;
-        MethodBlock block = graph.getMethodBlock(insnNode);
-        MethodBlock immediatePostDominator = graph.getImmediatePostDominator(block);
+        InsnList loggingInsnList = this
+            .getIFEQLoggingInsnList(packageName, className, methodNameAndSignature, decisionCount);
 
-        for (MethodBlock succ : block.getSuccessors()) {
-          if (succ.equals(immediatePostDominator)) {
-            continue;
-          }
-
-          AbstractInsnNode succInsn = succ.getInstructions().get(0);
-          InsnList loggingInsnList = this
-              .getLoggingInstructions(packageName, className, methodNameAndSignature,
-                  decisionCount);
-
-          if (succInsn.getType() == AbstractInsnNode.LABEL) {
-            insnList.insert(succInsn, loggingInsnList);
-          }
-          else {
-            insnList.insertBefore(succInsn, loggingInsnList);
-          }
-        }
+        insnList.insertBefore(insnNode, loggingInsnList);
+      }
+      else if (opcode >= Opcodes.IFNE && opcode <= Opcodes.IF_ACMPNE) {
+        throw new UnsupportedOperationException("Implement");
       }
     }
 
@@ -110,25 +99,33 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
     }
   }
 
-  private InsnList getLoggingInstructions(String packageName, String className,
+  private InsnList getIFEQLoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
+    loggingInsns.add(new InsnNode(Opcodes.DUP));
     loggingInsns.add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
     loggingInsns.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));
-    loggingInsns.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
-        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/BranchCoverageLogger",
-        "logExecutedDecision", "(Ljava/lang/String;I)V", false));
+
+    String methodName = "logIFEQDecision";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+
+    loggingInsns.add(new MethodInsnNode(Opcodes.INVOKESTATIC, BranchCoverageLogger.INTERNAL_NAME,
+        methodName, methodDescriptor, false));
 
     return loggingInsns;
   }
 
   private InsnList getSavingInstructions() {
-    InsnList printingInsnList = new InsnList();
-    printingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
-        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/BranchCoverageLogger",
-        "saveExecutedDecisions", "()V", false));
+    InsnList saveInsnList = new InsnList();
 
-    return printingInsnList;
+    String methodName = "saveExecutedDecisions";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+
+    saveInsnList
+        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, BranchCoverageLogger.INTERNAL_NAME,
+            methodName, methodDescriptor, false));
+
+    return saveInsnList;
   }
 
   private MethodGraph getCFG(MethodNode methodNode, ClassNode classNode) {

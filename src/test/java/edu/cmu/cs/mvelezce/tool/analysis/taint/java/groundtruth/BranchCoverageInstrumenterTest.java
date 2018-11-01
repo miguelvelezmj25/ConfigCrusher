@@ -24,7 +24,7 @@ public class BranchCoverageInstrumenterTest {
   }
 
   @Test
-  public void other()
+  public void phosphorExamples()
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
     String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
 

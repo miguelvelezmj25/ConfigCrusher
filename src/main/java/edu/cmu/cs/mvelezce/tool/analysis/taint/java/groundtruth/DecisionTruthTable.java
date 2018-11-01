@@ -3,16 +3,22 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.Constraint;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ExecutionTruthTable {
+public class DecisionTruthTable {
 
   private final Map<Map<String, Boolean>, Boolean> table = new HashMap<>();
   private final Set<String> options;
 
-  ExecutionTruthTable(Set<String> options) {
+  // Dummy constructor needed for jackson xml
+  private DecisionTruthTable() {
+    this.options = new HashSet<>();
+  }
+
+  DecisionTruthTable(Set<String> options) {
     this.options = options;
   }
 
@@ -62,8 +68,8 @@ public class ExecutionTruthTable {
 
       stringBuilder.append("|| ");
 
-      boolean executed = entry.getValue();
-      stringBuilder.append(this.getSingleLetterBoolean(executed));
+      boolean decision = entry.getValue();
+      stringBuilder.append(this.getSingleLetterBoolean(decision));
 
       stringBuilder.append(" |");
       stringBuilder.append("\n");
@@ -79,6 +85,13 @@ public class ExecutionTruthTable {
     }
 
     return "F";
+  }
 
+  public Map<Map<String, Boolean>, Boolean> getTable() {
+    return table;
+  }
+
+  public Set<String> getOptions() {
+    return options;
   }
 }

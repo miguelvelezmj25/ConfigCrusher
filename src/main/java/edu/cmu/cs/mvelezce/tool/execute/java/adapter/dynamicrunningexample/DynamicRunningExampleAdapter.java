@@ -14,11 +14,8 @@ public class DynamicRunningExampleAdapter extends BaseAdapter {
   private static final String[] OPTIONS = {"A", "B"};
 
   public DynamicRunningExampleAdapter() {
-    this("");
-  }
-
-  private DynamicRunningExampleAdapter(String dir) {
-    super(DynamicRunningExampleAdapter.PROGRAM_NAME, DynamicRunningExampleAdapter.MAIN_CLASS, dir,
+    // TODO check that we are passing empty string
+    super(DynamicRunningExampleAdapter.PROGRAM_NAME, DynamicRunningExampleAdapter.MAIN_CLASS, "",
         DynamicRunningExampleAdapter.getListOfOptions());
   }
 

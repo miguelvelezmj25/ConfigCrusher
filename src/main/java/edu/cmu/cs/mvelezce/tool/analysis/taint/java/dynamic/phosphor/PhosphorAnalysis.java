@@ -95,7 +95,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
     Set<Constraint> constraintsToExplore = new HashSet<>();
     // CE := to_constraint(c)
     Set<String> options = this.getOptions();
-    Map<String, Boolean> initialConfigAsConfigWithValues = Constraint.toConfigWithValues(this.getInitialConfig(), options);
+    Map<String, Boolean> initialConfigAsConfigWithValues = Constraint
+        .toConfigWithValues(this.getInitialConfig(), options);
     constraintsToExplore.add(new Constraint(initialConfigAsConfigWithValues));
 
     int count = 0;
@@ -193,7 +194,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
   void runPhosphorAnalysis(Set<String> config) throws IOException, InterruptedException {
     ProcessBuilder builder = new ProcessBuilder();
 
-    List<String> commandList = this.buildCommandAsList(this.getProgramName(), config);
+    List<String> commandList = this.buildCommandAsList(config);
     builder.command(commandList);
     builder.directory(new File(PHOSPHOR_SCRIPTS_DIR));
     Process process = builder.start();
@@ -204,9 +205,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
     process.waitFor();
   }
 
-  private List<String> buildCommandAsList(String programName, Set<String> config) {
+  private List<String> buildCommandAsList(Set<String> config) {
     List<String> commandList = new ArrayList<>();
 
+    String programName = this.getProgramName();
     Adapter adapter;
 
     switch (programName) {

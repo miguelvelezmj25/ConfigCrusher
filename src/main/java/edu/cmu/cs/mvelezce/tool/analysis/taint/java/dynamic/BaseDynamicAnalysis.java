@@ -59,21 +59,21 @@ public abstract class BaseDynamicAnalysis<T> implements DynamicAnalysis<T> {
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, T> regionsToConstraints)
+  public void writeToFile(Map<JavaRegion, T> regionsToInfo)
       throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
-    List<RegionToInfo> decisionsAndConstraints = new ArrayList<>();
+    List<RegionToInfo> decisionsAndInfos = new ArrayList<>();
 
-    for (Map.Entry<JavaRegion, T> entry : regionsToConstraints.entrySet()) {
-      RegionToInfo<T> regionToConstraints = new RegionToInfo<>(entry.getKey(), entry.getValue());
-      decisionsAndConstraints.add(regionToConstraints);
+    for (Map.Entry<JavaRegion, T> entry : regionsToInfo.entrySet()) {
+      RegionToInfo<T> regionToInfo = new RegionToInfo<>(entry.getKey(), entry.getValue());
+      decisionsAndInfos.add(regionToInfo);
     }
 
-    mapper.writeValue(file, decisionsAndConstraints);
+    mapper.writeValue(file, decisionsAndInfos);
   }
 
   @Override
@@ -90,6 +90,36 @@ public abstract class BaseDynamicAnalysis<T> implements DynamicAnalysis<T> {
 //
 //        return result;
 //    return null;
+  }
+
+  protected int getDecisionOrder(String sink) {
+    int indexOfLastDot = sink.lastIndexOf(".");
+
+    return Integer.valueOf(sink.substring(indexOfLastDot + 1));
+  }
+
+  protected String getMethodSignature(String sink) {
+    int indexOfFirstDot = sink.indexOf(".");
+    int indexOfLastDot = sink.lastIndexOf(".");
+
+    return sink.substring(indexOfFirstDot + 1, indexOfLastDot);
+  }
+
+  protected String getClassName(String sink) {
+    int indexOfDot = sink.indexOf(".");
+    String packageAndClass = sink.substring(0, indexOfDot);
+    int indexOfLastSlash = packageAndClass.lastIndexOf("/");
+
+    return packageAndClass.substring(indexOfLastSlash + 1);
+  }
+
+  protected String getPackageName(String sink) {
+    int indexOfDot = sink.indexOf(".");
+    String packageAndClass = sink.substring(0, indexOfDot);
+    int indexOfLastSlash = packageAndClass.lastIndexOf("/");
+    String packageName = packageAndClass.substring(0, indexOfLastSlash);
+
+    return packageName.replace("/", ".");
   }
 
   public String getProgramName() {

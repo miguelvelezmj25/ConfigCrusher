@@ -59,8 +59,7 @@ public abstract class BaseDynamicAnalysis<T> implements DynamicAnalysis<T> {
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, T> regionsToInfo)
-      throws IOException {
+  public void writeToFile(Map<JavaRegion, T> regionsToInfo) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);

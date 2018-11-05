@@ -7,24 +7,25 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.lang3.tuple.MutablePair;
 
-public class DecisionTruthTable {
+public class DecisionBranchCountTable {
 
-  private final Map<Map<String, Boolean>, Boolean> table = new HashMap<>();
+  private final Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = new HashMap<>();
   private final Set<String> options;
 
   // Dummy constructor needed for jackson xml
-  private DecisionTruthTable() {
+  private DecisionBranchCountTable() {
     this.options = new HashSet<>();
   }
 
-  DecisionTruthTable(Set<String> options) {
+  public DecisionBranchCountTable(Set<String> options) {
     this.options = options;
   }
 
-  void addEntry(Set<String> config, boolean value) {
+  void addEntry(Set<String> config, MutablePair<Integer, Integer> thenElseCounts) {
     Map<String, Boolean> configToValues = Constraint.toConfigWithValues(config, this.options);
-    this.table.put(configToValues, value);
+    this.table.put(configToValues, thenElseCounts);
   }
 
   @Override
@@ -41,7 +42,7 @@ public class DecisionTruthTable {
     }
 
     stringBuilder.append("|| ");
-    stringBuilder.append("V |");
+    stringBuilder.append("T | E |");
     stringBuilder.append("\n");
 
     // Break line
@@ -54,7 +55,7 @@ public class DecisionTruthTable {
     stringBuilder.append("\n");
 
     // Entries
-    for (Map.Entry<Map<String, Boolean>, Boolean> entry : this.table.entrySet()) {
+    for (Map.Entry<Map<String, Boolean>, MutablePair<Integer, Integer>> entry : this.table.entrySet()) {
       Map<String, Boolean> configsToValues = entry.getKey();
 
       for (String option : orderedOptions) {
@@ -68,8 +69,10 @@ public class DecisionTruthTable {
 
       stringBuilder.append("|| ");
 
-      boolean decision = entry.getValue();
-      stringBuilder.append(this.getSingleLetterBoolean(decision));
+      MutablePair<Integer, Integer> thenElsePair = entry.getValue();
+      stringBuilder.append(thenElsePair.getLeft());
+      stringBuilder.append(" | ");
+      stringBuilder.append(thenElsePair.getRight());
 
       stringBuilder.append(" |");
       stringBuilder.append("\n");
@@ -87,7 +90,12 @@ public class DecisionTruthTable {
     return "F";
   }
 
-  public Map<Map<String, Boolean>, Boolean> getTable() {
+//  public Map<Map<String, Boolean>, Boolean> getTable() {
+//    return table;
+//  }
+
+
+  public Map<Map<String, Boolean>, MutablePair<Integer, Integer>> getTable() {
     return table;
   }
 

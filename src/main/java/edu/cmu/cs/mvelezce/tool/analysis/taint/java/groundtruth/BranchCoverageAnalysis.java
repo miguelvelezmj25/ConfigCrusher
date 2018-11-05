@@ -1,9 +1,14 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.Constraint;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,26 +16,39 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.jboss.util.file.Files;
 
-public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionTruthTable> {
+public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCountTable> {
 
-  private final Map<String, DecisionTruthTable> sinksToTruthTables = new HashMap<>();
+  private static final String APACHE_COMMONS_PATH =
+      BaseAdapter.USER_HOME
+          + "/.m2/repository/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar";
+
+  private final Map<String, DecisionBranchCountTable> sinksToDecisionTables = new HashMap<>();
+  private final Set<Set<String>> executedConfigs = new HashSet<>();
+
+  BranchCoverageAnalysis(String programName) {
+    this(programName, new HashSet<>());
+  }
 
   BranchCoverageAnalysis(String programName, Set<String> options) {
     super(programName, options, new HashSet<>());
   }
 
   @Override
-  public Map<JavaRegion, DecisionTruthTable> analyze() throws IOException, InterruptedException {
+  public Map<JavaRegion, DecisionBranchCountTable> analyze()
+      throws IOException, InterruptedException {
     Set<Set<String>> configs = Helper.getConfigurations(this.getOptions());
 
     for (Set<String> config : configs) {
+      this.executedConfigs.add(config);
       this.runProgram(config);
 
       try {
@@ -41,23 +59,64 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionTruthTab
       }
     }
 
+    this.padTablesWithNonReachedConfigs();
     Files.delete(BranchCoverageLogger.RESULTS_FILE);
-    Map<JavaRegion, DecisionTruthTable> regionsToConstraints = new HashMap<>();
 
-    for (Map.Entry<String, DecisionTruthTable> entry : this.sinksToTruthTables.entrySet()) {
+    return this.getRegionsToDecisionTables();
+  }
+
+  private Map<JavaRegion, DecisionBranchCountTable> getRegionsToDecisionTables() {
+    Map<JavaRegion, DecisionBranchCountTable> regionsToDecisionTables = new HashMap<>();
+
+    for (Map.Entry<String, DecisionBranchCountTable> entry : this.sinksToDecisionTables
+        .entrySet()) {
       String sink = entry.getKey();
       JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
           this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
 
-      regionsToConstraints.put(region, entry.getValue());
+      regionsToDecisionTables.put(region, entry.getValue());
     }
 
-    return regionsToConstraints;
+    return regionsToDecisionTables;
+  }
+
+  private void padTablesWithNonReachedConfigs() {
+    for (DecisionBranchCountTable decisionBranchTable : this.sinksToDecisionTables.values()) {
+      Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = decisionBranchTable
+          .getTable();
+
+      for (Set<String> config : this.executedConfigs) {
+        Map<String, Boolean> configWithValues = Constraint
+            .toConfigWithValues(config, this.getOptions());
+
+        if (!table.containsKey(configWithValues)) {
+          decisionBranchTable.addEntry(config, MutablePair.of(0, 0));
+        }
+      }
+    }
   }
 
   @Override
-  public Map<JavaRegion, DecisionTruthTable> readFromFile(File file) {
-    throw new UnsupportedOperationException("Implement");
+  public Map<JavaRegion, DecisionBranchCountTable> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    List<RegionToInfo> results = mapper.readValue(file, new TypeReference<List<RegionToInfo>>() {
+    });
+
+    Map<JavaRegion, DecisionBranchCountTable> regionsToDecisionBranchCountTables = new HashMap<>();
+
+    for (RegionToInfo result : results) {
+      Map<String, Collection> info = (Map<String, Collection>) result.getInfo();
+      List<String> options = new ArrayList<>(info.get("options"));
+
+      DecisionBranchCountTable table = new DecisionBranchCountTable(new HashSet<>(options));
+
+      Object s = info.get("table");
+      throw new UnsupportedOperationException("Create a decision table from the results");
+//      regionsToDecisionBranchCountTables.put(result.getRegion(), result.getInfo());
+    }
+
+    return regionsToDecisionBranchCountTables;
+
     //    FileOutputStream fos = new FileOutputStream("table.ser");
 //    ObjectOutputStream oos = new ObjectOutputStream(fos);
 //    oos.writeObject(sinksToTruthTable);
@@ -70,7 +129,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionTruthTab
 //    ois.close();
 //    fis.close();
 
-//    for (Map.Entry<String, DecisionTruthTable> entry : sinksToTruthTable.entrySet()) {
+//    for (Map.Entry<String, DecisionBranchCountTable> entry : sinksToTruthTable.entrySet()) {
 //      System.out.println(entry.getKey());
 //      System.out.println(entry.getValue());
 //
@@ -102,7 +161,9 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionTruthTab
     commandList.add("-cp");
 
     String programName = this.getProgramName();
-    String ccClasspath = "./target/classes";
+    String ccClasspath = "./target/classes"
+        + BaseAdapter.PATH_SEPARATOR
+        + APACHE_COMMONS_PATH;
     Adapter adapter;
 
     switch (programName) {
@@ -124,33 +185,34 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionTruthTab
   }
 
   private void processResults(Set<String> config) throws IOException, ClassNotFoundException {
-    Map<String, Boolean> sinksToDecisions = this.getSinksToDecisions();
-    this.addSinks(sinksToDecisions.keySet());
+    Map<String, MutablePair<Integer, Integer>> sinksToBranchCounts = this.getSinksToBranchCounts();
+    this.addSinks(sinksToBranchCounts.keySet());
 
-    for (Map.Entry<String, Boolean> entry : sinksToDecisions.entrySet()) {
+    for (Map.Entry<String, MutablePair<Integer, Integer>> entry : sinksToBranchCounts.entrySet()) {
       String sink = entry.getKey();
-      DecisionTruthTable decisionTruthTable = this.sinksToTruthTables.get(sink);
-      decisionTruthTable.addEntry(config, entry.getValue());
-      this.sinksToTruthTables.put(sink, decisionTruthTable);
+      DecisionBranchCountTable decisionBranchCountTable = this.sinksToDecisionTables.get(sink);
+      decisionBranchCountTable.addEntry(config, entry.getValue());
+      this.sinksToDecisionTables.put(sink, decisionBranchCountTable);
     }
   }
 
   private void addSinks(Set<String> executedSinks) {
     for (String sink : executedSinks) {
-      if (!this.sinksToTruthTables.containsKey(sink)) {
-        this.sinksToTruthTables.put(sink, new DecisionTruthTable(this.getOptions()));
+      if (!this.sinksToDecisionTables.containsKey(sink)) {
+        this.sinksToDecisionTables.put(sink, new DecisionBranchCountTable(this.getOptions()));
       }
     }
   }
 
-  private Map<String, Boolean> getSinksToDecisions() throws IOException, ClassNotFoundException {
-    Map<String, Boolean> sinksToDecisions;
+  private Map<String, MutablePair<Integer, Integer>> getSinksToBranchCounts()
+      throws IOException, ClassNotFoundException {
+    Map<String, MutablePair<Integer, Integer>> sinksToBranchCounts;
 
     try (FileInputStream fis = new FileInputStream(BranchCoverageLogger.RESULTS_FILE);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
-      sinksToDecisions = (Map<String, Boolean>) ois.readObject();
+      sinksToBranchCounts = (Map<String, MutablePair<Integer, Integer>>) ois.readObject();
     }
 
-    return sinksToDecisions;
+    return sinksToBranchCounts;
   }
 }

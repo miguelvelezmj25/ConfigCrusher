@@ -1,21 +1,16 @@
 package edu.cmu.cs.mvelezce.tool.execute.java.adapter;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.CompileInstrumenter;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.apache.commons.io.FileUtils;
 
 public abstract class BaseAdapter implements Adapter {
 
+  // TODO move to options
   public static final String USER_HOME = System.getProperty("user.home");
   public static final String PATH_SEPARATOR = System.getProperty("path.separator");
 

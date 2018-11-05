@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.jboss.util.file.Files;
@@ -107,12 +108,13 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
     for (RegionToInfo result : results) {
       Map<String, Collection> info = (Map<String, Collection>) result.getInfo();
       List<String> options = new ArrayList<>(info.get("options"));
+      DecisionBranchCountTable decisionTable = new DecisionBranchCountTable(new HashSet<>(options));
 
-      DecisionBranchCountTable table = new DecisionBranchCountTable(new HashSet<>(options));
-
-      Object s = info.get("table");
-      throw new UnsupportedOperationException("Create a decision table from the results");
-//      regionsToDecisionBranchCountTables.put(result.getRegion(), result.getInfo());
+      Map<String, Map<Integer, Integer>> table = (Map<String, Map<Integer, Integer>>) info
+          .get("table");
+      this.buildDecisionTable(table, decisionTable);
+      
+      regionsToDecisionBranchCountTables.put(result.getRegion(), decisionTable);
     }
 
     return regionsToDecisionBranchCountTables;
@@ -135,6 +137,50 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
 //
 //      System.out.println();
 //    }
+  }
+
+  private void buildDecisionTable(Map<String, Map<Integer, Integer>> table,
+      DecisionBranchCountTable decisionTable) {
+    for (Map.Entry<String, Map<Integer, Integer>> entry : table.entrySet()) {
+      Set<String> config = this.parseConfig(entry.getKey());
+      Map<Integer, Integer> pair = entry.getValue();
+
+      if (pair.size() != 1) {
+        throw new RuntimeException("There should be only 1 entry per configuration");
+      }
+
+      Entry<Integer, Integer> savedPair = pair.entrySet().iterator().next();
+      MutablePair<Integer, Integer> thenElseCounts = MutablePair
+          .of(savedPair.getKey(), savedPair.getValue());
+      decisionTable.addEntry(config, thenElseCounts);
+    }
+  }
+
+  private Set<String> parseConfig(String key) {
+    Set<String> config = new HashSet<>();
+
+    String[] entries = key.split(",");
+
+    for (String entry : entries) {
+      entry = entry.replace("{", "");
+      entry = entry.replace("}", "");
+      entry = entry.trim();
+
+      if (!entry.contains("=")) {
+        throw new RuntimeException(
+            "The entry " + entry + " does not have the expected Option = Value format");
+      }
+
+      int equalsIndex = entry.indexOf("=");
+      boolean value = Boolean.valueOf(entry.substring(equalsIndex + 1));
+
+      if (value) {
+        String option = entry.substring(0, equalsIndex);
+        config.add(option);
+      }
+    }
+
+    return config;
   }
 
   @Override

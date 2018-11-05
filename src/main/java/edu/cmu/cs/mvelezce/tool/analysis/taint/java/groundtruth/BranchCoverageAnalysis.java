@@ -113,7 +113,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
       Map<String, Map<Integer, Integer>> table = (Map<String, Map<Integer, Integer>>) info
           .get("table");
       this.buildDecisionTable(table, decisionTable);
-      
+
       regionsToDecisionBranchCountTables.put(result.getRegion(), decisionTable);
     }
 

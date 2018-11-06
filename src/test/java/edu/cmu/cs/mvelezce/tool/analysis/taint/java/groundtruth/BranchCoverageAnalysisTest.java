@@ -38,7 +38,7 @@ public class BranchCoverageAnalysisTest {
   @Test
   public void SimpleExample1() throws IOException, InterruptedException {
     String programName = SimpleExample1Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
+    Set<String> options = new HashSet<>(SimpleExample1Adapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

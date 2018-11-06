@@ -67,6 +67,10 @@ public class SpecificationTest {
         SpecificationTest.getContext(SimpleExample1Adapter.getListOfOptions()));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
         SpecificationTest.getContext(SpecificationTest.setA()));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.3",
+        SpecificationTest.getContext(SimpleExample1Adapter.getListOfOptions()));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.4",
+        SpecificationTest.getContext(SimpleExample1Adapter.getListOfOptions()));
 
     Map<String, Set<Set<String>>> contextResults = SpecificationTest
         .getDecisionsToContexts(decisionInfo);
@@ -77,6 +81,8 @@ public class SpecificationTest {
     Map<String, Set<String>> expectedDecisionsToOptions = new HashMap<>();
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", SpecificationTest.setA());
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", SpecificationTest.setA());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.3", SpecificationTest.emptySet());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.4", SpecificationTest.emptySet());
 
     Map<String, Set<String>> results = SpecificationTest.getDecisionsToOptions(decisionInfo);
 

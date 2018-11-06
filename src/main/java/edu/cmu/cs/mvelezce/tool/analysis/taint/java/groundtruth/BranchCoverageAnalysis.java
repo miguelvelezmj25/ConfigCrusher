@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.apache.commons.lang3.tuple.MutablePair;
 import org.jboss.util.file.Files;
 
 public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
@@ -85,15 +84,14 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   private void padTablesWithNonReachedConfigs() {
     for (DecisionInfo decisionInfo : this.sinksToDecisionInfos.values()) {
       DecisionBranchCountTable decisionBranchTable = decisionInfo.getDecisionBranchTable();
-      Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = decisionBranchTable
-          .getTable();
+      Map<Map<String, Boolean>, ThenElseCounts> table = decisionBranchTable.getTable();
 
       for (Set<String> config : this.executedConfigs) {
         Map<String, Boolean> configWithValues = Constraint
             .toConfigWithValues(config, this.getOptions());
 
         if (!table.containsKey(configWithValues)) {
-          decisionBranchTable.addEntry(config, MutablePair.of(0, 0));
+          decisionBranchTable.addEntry(config, new ThenElseCounts());
         }
       }
     }
@@ -109,14 +107,12 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
     for (RegionToInfo result : results) {
       Map<String, Collection> info = (Map<String, Collection>) result.getInfo();
-      Map<String, Collection> decisionBranchTable = (Map<String, Collection>) info
-          .get("decisionBranchTable");
+      Map<String, Collection> decisionBranchTable = (Map<String, Collection>) info.get("decisionBranchTable");
       Set<String> options = new HashSet<>(decisionBranchTable.get("options"));
 
       DecisionInfo decisionInfo = new DecisionInfo(options);
       DecisionBranchCountTable decisionTable = decisionInfo.getDecisionBranchTable();
-      Map<String, Map<Integer, Integer>> table = (Map<String, Map<Integer, Integer>>) decisionBranchTable
-          .get("table");
+      Map<String, Map<String, Integer>> table = (Map<String, Map<String, Integer>>) decisionBranchTable.get("table");
       this.buildDecisionTable(table, decisionTable);
 
       Set<Set<String>> context = this.getContext((List<List<String>>) info.get("context"));
@@ -138,19 +134,14 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     return context;
   }
 
-  private void buildDecisionTable(Map<String, Map<Integer, Integer>> table,
-      DecisionBranchCountTable decisionTable) {
-    for (Map.Entry<String, Map<Integer, Integer>> entry : table.entrySet()) {
+  private void buildDecisionTable(Map<String, Map<String, Integer>> table, DecisionBranchCountTable decisionTable) {
+    for (Map.Entry<String, Map<String, Integer>> entry : table.entrySet()) {
       Set<String> config = this.parseConfig(entry.getKey());
-      Map<Integer, Integer> pair = entry.getValue();
+      Map<String, Integer> pair = entry.getValue();
 
-      if (pair.size() != 1) {
-        throw new RuntimeException("There should be only 1 entry per configuration");
-      }
-
-      Entry<Integer, Integer> savedPair = pair.entrySet().iterator().next();
-      MutablePair<Integer, Integer> thenElseCounts = MutablePair
-          .of(savedPair.getKey(), savedPair.getValue());
+      ThenElseCounts thenElseCounts = new ThenElseCounts();
+      thenElseCounts.setThenCount(pair.get("thenCount"));
+      thenElseCounts.setElseCount(pair.get("elseCount"));
       decisionTable.addEntry(config, thenElseCounts);
     }
   }
@@ -249,10 +240,10 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   }
 
   private void processResults(Set<String> config) throws IOException, ClassNotFoundException {
-    Map<String, MutablePair<Integer, Integer>> sinksToBranchCounts = this.getSinksToBranchCounts();
+    Map<String, ThenElseCounts> sinksToBranchCounts = this.getSinksToBranchCounts();
     this.addSinks(sinksToBranchCounts.keySet());
 
-    for (Map.Entry<String, MutablePair<Integer, Integer>> entry : sinksToBranchCounts.entrySet()) {
+    for (Entry<String, ThenElseCounts> entry : sinksToBranchCounts.entrySet()) {
       String sink = entry.getKey();
       DecisionInfo decisionInfo = this.sinksToDecisionInfos.get(sink);
       decisionInfo.getContext().add(config);
@@ -270,13 +261,13 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     }
   }
 
-  private Map<String, MutablePair<Integer, Integer>> getSinksToBranchCounts()
+  private Map<String, ThenElseCounts> getSinksToBranchCounts()
       throws IOException, ClassNotFoundException {
-    Map<String, MutablePair<Integer, Integer>> sinksToBranchCounts;
+    Map<String, ThenElseCounts> sinksToBranchCounts;
 
     try (FileInputStream fis = new FileInputStream(BranchCoverageLogger.RESULTS_FILE);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
-      sinksToBranchCounts = (Map<String, MutablePair<Integer, Integer>>) ois.readObject();
+      sinksToBranchCounts = (Map<String, ThenElseCounts>) ois.readObject();
     }
 
     return sinksToBranchCounts;

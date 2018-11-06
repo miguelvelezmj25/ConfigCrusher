@@ -4,14 +4,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import org.apache.commons.lang3.tuple.MutablePair;
 
 public class DynamicAnalysisSpecification {
 
   static Set<String> getMinimalSetOfOptions(DecisionBranchCountTable decisionTable) {
     Set<String> minimalOptionSet = new HashSet<>();
     Set<String> options = decisionTable.getOptions();
-    Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = decisionTable.getTable();
+    Map<Map<String, Boolean>, ThenElseCounts> table = decisionTable.getTable();
 
     for (String option : options) {
       Set<Map<String, Boolean>> configsWithValuesWhereOptionIsFalse = DynamicAnalysisSpecification

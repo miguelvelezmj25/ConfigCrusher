@@ -6,14 +6,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
-import org.apache.commons.lang3.tuple.MutablePair;
 
 public class DecisionBranchCountTable {
 
   private final Set<String> options;
-  // TODO change to elseThenCountClass
-  private final Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = new HashMap<>();
+  private final Map<Map<String, Boolean>, ThenElseCounts> table = new HashMap<>();
 
   // Dummy constructor needed for jackson xml
   private DecisionBranchCountTable() {
@@ -24,7 +23,7 @@ public class DecisionBranchCountTable {
     this.options = options;
   }
 
-  void addEntry(Set<String> config, MutablePair<Integer, Integer> thenElseCounts) {
+  void addEntry(Set<String> config, ThenElseCounts thenElseCounts) {
     Map<String, Boolean> configToValues = Constraint.toConfigWithValues(config, this.options);
     this.table.put(configToValues, thenElseCounts);
   }
@@ -56,7 +55,7 @@ public class DecisionBranchCountTable {
     stringBuilder.append("\n");
 
     // Entries
-    for (Map.Entry<Map<String, Boolean>, MutablePair<Integer, Integer>> entry : this.table.entrySet()) {
+    for (Entry<Map<String, Boolean>, ThenElseCounts> entry : this.table.entrySet()) {
       Map<String, Boolean> configsToValues = entry.getKey();
 
       for (String option : orderedOptions) {
@@ -70,10 +69,10 @@ public class DecisionBranchCountTable {
 
       stringBuilder.append("|| ");
 
-      MutablePair<Integer, Integer> thenElsePair = entry.getValue();
-      stringBuilder.append(thenElsePair.getLeft());
+      ThenElseCounts thenElsePair = entry.getValue();
+      stringBuilder.append(thenElsePair.getThenCount());
       stringBuilder.append(" | ");
-      stringBuilder.append(thenElsePair.getRight());
+      stringBuilder.append(thenElsePair.getElseCount());
 
       stringBuilder.append(" |");
       stringBuilder.append("\n");
@@ -96,7 +95,7 @@ public class DecisionBranchCountTable {
 //  }
 
 
-  public Map<Map<String, Boolean>, MutablePair<Integer, Integer>> getTable() {
+  public Map<Map<String, Boolean>, ThenElseCounts> getTable() {
     return table;
   }
 

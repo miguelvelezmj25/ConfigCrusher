@@ -27,13 +27,13 @@ import java.util.Set;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.jboss.util.file.Files;
 
-public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCountTable> {
+public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
   private static final String APACHE_COMMONS_PATH =
       BaseAdapter.USER_HOME
           + "/.m2/repository/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar";
 
-  private final Map<String, DecisionBranchCountTable> sinksToDecisionTables = new HashMap<>();
+  private final Map<String, DecisionInfo> sinksToDecisionInfos = new HashMap<>();
   private final Set<Set<String>> executedConfigs = new HashSet<>();
 
   BranchCoverageAnalysis(String programName) {
@@ -45,7 +45,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
   }
 
   @Override
-  public Map<JavaRegion, DecisionBranchCountTable> analyze()
+  public Map<JavaRegion, DecisionInfo> analyze()
       throws IOException, InterruptedException {
     Set<Set<String>> configs = Helper.getConfigurations(this.getOptions());
 
@@ -67,11 +67,10 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
     return this.getRegionsToDecisionTables();
   }
 
-  private Map<JavaRegion, DecisionBranchCountTable> getRegionsToDecisionTables() {
-    Map<JavaRegion, DecisionBranchCountTable> regionsToDecisionTables = new HashMap<>();
+  private Map<JavaRegion, DecisionInfo> getRegionsToDecisionTables() {
+    Map<JavaRegion, DecisionInfo> regionsToDecisionTables = new HashMap<>();
 
-    for (Map.Entry<String, DecisionBranchCountTable> entry : this.sinksToDecisionTables
-        .entrySet()) {
+    for (Map.Entry<String, DecisionInfo> entry : this.sinksToDecisionInfos.entrySet()) {
       String sink = entry.getKey();
       JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
           this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
@@ -83,7 +82,8 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
   }
 
   private void padTablesWithNonReachedConfigs() {
-    for (DecisionBranchCountTable decisionBranchTable : this.sinksToDecisionTables.values()) {
+    for (DecisionInfo decisionInfo : this.sinksToDecisionInfos.values()) {
+      DecisionBranchCountTable decisionBranchTable = decisionInfo.getDecisionBranchTable();
       Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = decisionBranchTable
           .getTable();
 
@@ -99,45 +99,32 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
   }
 
   @Override
-  public Map<JavaRegion, DecisionBranchCountTable> readFromFile(File file) throws IOException {
+  public Map<JavaRegion, DecisionInfo> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     List<RegionToInfo> results = mapper.readValue(file, new TypeReference<List<RegionToInfo>>() {
     });
 
-    Map<JavaRegion, DecisionBranchCountTable> regionsToDecisionBranchCountTables = new HashMap<>();
+    Map<JavaRegion, DecisionInfo> regionsToDecisionInfos = new HashMap<>();
 
     for (RegionToInfo result : results) {
       Map<String, Collection> info = (Map<String, Collection>) result.getInfo();
-      List<String> options = new ArrayList<>(info.get("options"));
-      DecisionBranchCountTable decisionTable = new DecisionBranchCountTable(new HashSet<>(options));
+      Map<String, Collection> decisionBranchTable = (Map<String, Collection>) info
+          .get("decisionBranchTable");
+      Set<String> options = new HashSet<>(decisionBranchTable.get("options"));
 
-      Map<String, Map<Integer, Integer>> table = (Map<String, Map<Integer, Integer>>) info
+      DecisionInfo decisionInfo = new DecisionInfo(options);
+      DecisionBranchCountTable decisionTable = decisionInfo.getDecisionBranchTable();
+      Map<String, Map<Integer, Integer>> table = (Map<String, Map<Integer, Integer>>) decisionBranchTable
           .get("table");
       this.buildDecisionTable(table, decisionTable);
 
-      regionsToDecisionBranchCountTables.put(result.getRegion(), decisionTable);
+      Set<Set<String>> context = new HashSet<>(info.get("context"));
+      decisionInfo.getContext().addAll(context);
+
+      regionsToDecisionInfos.put(result.getRegion(), decisionInfo);
     }
 
-    return regionsToDecisionBranchCountTables;
-
-    //    FileOutputStream fos = new FileOutputStream("table.ser");
-//    ObjectOutputStream oos = new ObjectOutputStream(fos);
-//    oos.writeObject(sinksToTruthTable);
-//    oos.close();
-//    fos.close();
-
-//    FileInputStream fis = new FileInputStream("table.ser");
-//    ObjectInputStream ois = new ObjectInputStream(fis);
-//    Map<String, Map<Set<String>, Boolean>> res = (Map<String, Map<Set<String>, Boolean>>) ois.readObject();
-//    ois.close();
-//    fis.close();
-
-//    for (Map.Entry<String, DecisionBranchCountTable> entry : sinksToTruthTable.entrySet()) {
-//      System.out.println(entry.getKey());
-//      System.out.println(entry.getValue());
-//
-//      System.out.println();
-//    }
+    return regionsToDecisionInfos;
   }
 
   private void buildDecisionTable(Map<String, Map<Integer, Integer>> table,
@@ -214,10 +201,12 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
     Adapter adapter;
 
     switch (programName) {
-      // TODO add class path to adapter and use path separator
       case DynamicRunningExampleAdapter.PROGRAM_NAME:
         commandList.add(ccClasspath
-            + ":../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes");
+            + BaseAdapter.PATH_SEPARATOR
+            + DynamicRunningExampleAdapter.INSTRUMENTED_CLASS_PATH
+            + BaseAdapter.PATH_SEPARATOR
+            + DynamicRunningExampleAdapter.ORIGINAL_CLASS_PATH);
         adapter = new DynamicRunningExampleAdapter();
         break;
       case SimpleExample1Adapter.PROGRAM_NAME:
@@ -246,16 +235,18 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
 
     for (Map.Entry<String, MutablePair<Integer, Integer>> entry : sinksToBranchCounts.entrySet()) {
       String sink = entry.getKey();
-      DecisionBranchCountTable decisionBranchCountTable = this.sinksToDecisionTables.get(sink);
+      DecisionInfo decisionInfo = this.sinksToDecisionInfos.get(sink);
+      decisionInfo.getContext().add(config);
+
+      DecisionBranchCountTable decisionBranchCountTable = decisionInfo.getDecisionBranchTable();
       decisionBranchCountTable.addEntry(config, entry.getValue());
-      this.sinksToDecisionTables.put(sink, decisionBranchCountTable);
     }
   }
 
   private void addSinks(Set<String> executedSinks) {
     for (String sink : executedSinks) {
-      if (!this.sinksToDecisionTables.containsKey(sink)) {
-        this.sinksToDecisionTables.put(sink, new DecisionBranchCountTable(this.getOptions()));
+      if (!this.sinksToDecisionInfos.containsKey(sink)) {
+        this.sinksToDecisionInfos.put(sink, new DecisionInfo(this.getOptions()));
       }
     }
   }

@@ -11,8 +11,9 @@ import org.apache.commons.lang3.tuple.MutablePair;
 
 public class DecisionBranchCountTable {
 
-  private final Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = new HashMap<>();
   private final Set<String> options;
+  // TODO change to elseThenCountClass
+  private final Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = new HashMap<>();
 
   // Dummy constructor needed for jackson xml
   private DecisionBranchCountTable() {

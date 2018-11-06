@@ -25,6 +25,17 @@ public class BranchCoverageAnalysisTest {
   }
 
   @Test
+  public void RunningExample_forRead() throws IOException, InterruptedException {
+    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
+
+    // Program arguments
+    String[] args = new String[0];
+
+    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName);
+    analysis.analyze(args);
+  }
+
+  @Test
   public void SimpleExample1() throws IOException, InterruptedException {
     String programName = SimpleExample1Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
@@ -35,17 +46,6 @@ public class BranchCoverageAnalysisTest {
     args[1] = "-saveres";
 
     DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, options);
-    analysis.analyze(args);
-  }
-
-  @Test
-  public void RunningExample_forRead() throws IOException, InterruptedException {
-    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
-
-    // Program arguments
-    String[] args = new String[0];
-
-    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName);
     analysis.analyze(args);
   }
 }

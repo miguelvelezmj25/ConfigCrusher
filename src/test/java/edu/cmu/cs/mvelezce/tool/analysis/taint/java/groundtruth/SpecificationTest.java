@@ -21,15 +21,15 @@ public class SpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionBranchCountTable> analysis = new BranchCoverageAnalysis(programName);
-    Map<JavaRegion, DecisionBranchCountTable> table = analysis.analyze(args);
+    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
+    Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     Map<String, Set<String>> expectedDecisionsToOptions = new HashMap<>();
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", SpecificationTest.setA());
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", SpecificationTest.setA());
     expectedDecisionsToOptions.put("foo(Z)V.1", SpecificationTest.setAB());
 
-    Map<String, Set<String>> results = SpecificationTest.getDecisionToOptions(table);
+    Map<String, Set<String>> results = SpecificationTest.getDecisionToOptions(decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToOptions, results);
   }
@@ -41,27 +41,26 @@ public class SpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionBranchCountTable> analysis = new BranchCoverageAnalysis(programName);
-    Map<JavaRegion, DecisionBranchCountTable> table = analysis.analyze(args);
+    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
+    Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     Map<String, Set<String>> expectedDecisionsToOptions = new HashMap<>();
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", SpecificationTest.setA());
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", SpecificationTest.setA());
 
-    Map<String, Set<String>> results = SpecificationTest.getDecisionToOptions(table);
+    Map<String, Set<String>> results = SpecificationTest.getDecisionToOptions(decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToOptions, results);
   }
 
-  private static Map<String, Set<String>> getDecisionToOptions(
-      Map<JavaRegion, DecisionBranchCountTable> table) {
+  private static Map<String, Set<String>> getDecisionToOptions(Map<JavaRegion, DecisionInfo> decisionInfo) {
     Map<String, Set<String>> results = new HashMap<>();
 
     Specification spec = new Specification();
-    for (Map.Entry<JavaRegion, DecisionBranchCountTable> entry : table.entrySet()) {
+    for (Map.Entry<JavaRegion, DecisionInfo> entry : decisionInfo.entrySet()) {
       JavaRegion region = entry.getKey();
 
-      Set<String> options = spec.getMinimalSetOfOptions(entry.getValue());
+      Set<String> options = spec.getMinimalSetOfOptions(entry.getValue().getDecisionBranchTable());
       results.put(region.getRegionMethod() + "." + region.getStartRegionIndex(), options);
     }
 

@@ -35,6 +35,10 @@ public class Specification {
     return minimalOptionSet;
   }
 
+  Set<Set<String>> getContext(DecisionBranchCountTable decisionBranchCountTable) {
+    throw new UnsupportedOperationException("Implement");
+  }
+
   private Set<Map<String, Boolean>> getConfigsWithValuesWhereOptionIsFalse(String option,
       Set<Map<String, Boolean>> configsWithValues) {
     Set<Map<String, Boolean>> configsWithValuesWhereOptionIsFalse = new HashSet<>();

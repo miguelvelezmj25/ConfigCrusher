@@ -11,6 +11,8 @@ public class DynamicRunningExampleAdapter extends BaseAdapter {
   // TODO change name
   public static final String PROGRAM_NAME = "phosphor-examples";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.RunningExample";
+  public static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
+  public static final String INSTRUMENTED_CLASS_PATH = "../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes";
 
   private static final String[] OPTIONS = {"A", "B"};
 

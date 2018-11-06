@@ -1,0 +1,199 @@
+[
+  {
+    "region": {
+      "regionID": "f1bc81b2-bbaa-45cd-8536-1a55fcad6035",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "1": 0
+          },
+          "{A=true, B=false}": {
+            "0": 1
+          },
+          "{A=false, B=false}": {
+            "1": 0
+          },
+          "{A=true, B=true}": {
+            "0": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "06b65cf6-69f6-408f-845e-317ba2b15bb7",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "1": 0
+          },
+          "{A=true, B=false}": {
+            "0": 1
+          },
+          "{A=false, B=false}": {
+            "1": 0
+          },
+          "{A=true, B=true}": {
+            "0": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "f7569984-9ab3-46df-a448-21205cf15105",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "1": 0
+          },
+          "{A=true, B=false}": {
+            "0": 0
+          },
+          "{A=false, B=false}": {
+            "0": 1
+          },
+          "{A=true, B=true}": {
+            "0": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "8e7426a6-bcca-4523-8706-519d92562d75",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "TimerHelper",
+      "regionMethod": "printExecutionTime()V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "3": 1
+          },
+          "{A=true, B=false}": {
+            "0": 1
+          },
+          "{A=false, B=false}": {
+            "2": 1
+          },
+          "{A=true, B=true}": {
+            "0": 1
+          }
+        }
+      }
+    }
+  }
+]

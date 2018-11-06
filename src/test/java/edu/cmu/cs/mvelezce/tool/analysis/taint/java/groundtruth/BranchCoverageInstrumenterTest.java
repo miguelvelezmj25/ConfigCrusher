@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
 import java.io.IOException;
@@ -17,6 +18,19 @@ public class BranchCoverageInstrumenterTest {
     Set<String> classesToTransform = new HashSet<>();
     classesToTransform
         .add(Utils.getASMPackageAndClassName("edu/cmu/cs/mvelezce", "RunningExample"));
+
+    MethodTransformer transformer = new BranchCoverageInstrumenter(pathToClasses,
+        classesToTransform);
+    transformer.transformMethods();
+  }
+
+  @Test
+  public void simpleExample1()
+      throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
+    String pathToClasses = SimpleExample1Adapter.ORIGINAL_CLASS_PATH;
+    Set<String> classesToTransform = new HashSet<>();
+    classesToTransform
+        .add(Utils.getASMPackageAndClassName("edu/cmu/cs/mvelezce/analysis", "SimpleExample1"));
 
     MethodTransformer transformer = new BranchCoverageInstrumenter(pathToClasses,
         classesToTransform);

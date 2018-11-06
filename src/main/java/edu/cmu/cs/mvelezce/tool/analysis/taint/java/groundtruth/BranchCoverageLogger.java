@@ -12,6 +12,7 @@ import org.apache.commons.lang3.tuple.MutablePair;
 public class BranchCoverageLogger {
 
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
+  // TODO change to elseThenCountClass
   private static final Map<String, MutablePair<Integer, Integer>> DECISIONS_TO_BRANCH_COUNTS = new HashMap<>();
 
   static final String RESULTS_FILE = "results.ser";
@@ -26,27 +27,49 @@ public class BranchCoverageLogger {
     }
   }
 
-  public static void logIFEQDecision(int decisionValue, String methodName, int decisionCount) {
-    String decision = methodName + "." + decisionCount;
-    addDecision(decision);
-    MutablePair<Integer, Integer> thenElseCounts = DECISIONS_TO_BRANCH_COUNTS.get(decision);
+  public static void logIFICMPLEDecision(int value1, int value2, String methodName, int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger.getThenElseCounts(methodName, decisionCount);
 
-    if (decisionValue == 1) {
-      int thenCounts = thenElseCounts.getLeft();
-      thenCounts++;
-      thenElseCounts.setLeft(thenCounts);
-    }
-    else {
+    if (value1 <= value2) {
       int elseCounts = thenElseCounts.getRight();
       elseCounts++;
       thenElseCounts.setRight(elseCounts);
     }
+    else {
+      int thenCounts = thenElseCounts.getLeft();
+      thenCounts++;
+      thenElseCounts.setLeft(thenCounts);
+    }
   }
 
-  private static void addDecision(String decision) {
-    if (!DECISIONS_TO_BRANCH_COUNTS.containsKey(decision)) {
-      MutablePair<Integer, Integer> thenElseCounts = MutablePair.of(0, 0);
-      DECISIONS_TO_BRANCH_COUNTS.put(decision, thenElseCounts);
+  public static void logIFLEDecision(int decisionValue, String methodName, int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger.getThenElseCounts(methodName, decisionCount);
+
+    if (decisionValue <= 0) {
+      int elseCounts = thenElseCounts.getRight();
+      elseCounts++;
+      thenElseCounts.setRight(elseCounts);
+    }
+    else {
+      int thenCounts = thenElseCounts.getLeft();
+      thenCounts++;
+      thenElseCounts.setLeft(thenCounts);
+    }
+  }
+
+  public static void logIFEQDecision(int decisionValue, String methodName, int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger.getThenElseCounts(methodName, decisionCount);
+
+    // If decisionValue == false
+    if (decisionValue == 0) {
+      int elseCounts = thenElseCounts.getRight();
+      elseCounts++;
+      thenElseCounts.setRight(elseCounts);
+    }
+    else {
+      int thenCounts = thenElseCounts.getLeft();
+      thenCounts++;
+      thenElseCounts.setLeft(thenCounts);
     }
   }
 
@@ -60,6 +83,19 @@ public class BranchCoverageLogger {
     }
     catch (IOException ioe) {
       throw new RuntimeException("There was an error serializing the results", ioe);
+    }
+  }
+
+  private static MutablePair<Integer, Integer> getThenElseCounts(String methodName, int decisionCount) {
+    String decision = methodName + "." + decisionCount;
+    BranchCoverageLogger.addDecision(decision);
+    return DECISIONS_TO_BRANCH_COUNTS.get(decision);
+  }
+
+  private static void addDecision(String decision) {
+    if (!DECISIONS_TO_BRANCH_COUNTS.containsKey(decision)) {
+      MutablePair<Integer, Integer> thenElseCounts = MutablePair.of(0, 0);
+      DECISIONS_TO_BRANCH_COUNTS.put(decision, thenElseCounts);
     }
   }
 

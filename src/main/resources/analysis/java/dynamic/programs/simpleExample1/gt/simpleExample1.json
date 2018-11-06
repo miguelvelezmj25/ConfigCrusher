@@ -1,1 +1,149 @@
-[{"region":{"regionID":"ae907f19-234a-4848-a36a-e973a5de1ce0","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":2,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[["A"]],"decisionBranchTable":{"options":["A"],"table":{"{A=false}":{"0":0},"{A=true}":{"0":1}}}}},{"region":{"regionID":"48531d1b-458a-4443-9a04-d43bc6daaef1","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"]],"decisionBranchTable":{"options":["A"],"table":{"{A=false}":{"0":1},"{A=true}":{"1":0}}}}}]
+[
+  {
+    "region": {
+      "regionID": "0037d9fa-7a31-4327-9f3e-c20f05062ee2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 4,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A"
+        ],
+        "table": {
+          "{A=false}": {
+            "2": 3
+          },
+          "{A=true}": {
+            "2": 3
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "c0bbc23c-d3fa-45e8-9985-1910f11e329c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A"
+        ],
+        "table": {
+          "{A=false}": {
+            "5": 1
+          },
+          "{A=true}": {
+            "5": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "718bbfe7-6fbe-4082-a29e-7c78f4739cee",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [
+          "A"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A"
+        ],
+        "table": {
+          "{A=false}": {
+            "0": 0
+          },
+          "{A=true}": {
+            "0": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "e43c0b51-6b9e-49e0-bbbc-6b2d1eb43490",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A"
+        ],
+        "table": {
+          "{A=false}": {
+            "0": 1
+          },
+          "{A=true}": {
+            "1": 0
+          }
+        }
+      }
+    }
+  }
+]

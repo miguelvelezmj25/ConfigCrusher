@@ -10,6 +10,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -213,10 +214,19 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionBranchCo
     Adapter adapter;
 
     switch (programName) {
+      // TODO add class path to adapter and use path separator
       case DynamicRunningExampleAdapter.PROGRAM_NAME:
         commandList.add(ccClasspath
             + ":../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes");
         adapter = new DynamicRunningExampleAdapter();
+        break;
+      case SimpleExample1Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + SimpleExample1Adapter.INSTRUMENTED_CLASS_PATH
+            + BaseAdapter.PATH_SEPARATOR
+            + SimpleExample1Adapter.ORIGINAL_CLASS_PATH);
+        adapter = new SimpleExample1Adapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

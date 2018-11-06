@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.lang3.tuple.MutablePair;
 
-public class Specification {
+public class DynamicAnalysisSpecification {
 
   static Set<String> getMinimalSetOfOptions(DecisionBranchCountTable decisionTable) {
     Set<String> minimalOptionSet = new HashSet<>();
@@ -14,7 +14,7 @@ public class Specification {
     Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = decisionTable.getTable();
 
     for (String option : options) {
-      Set<Map<String, Boolean>> configsWithValuesWhereOptionIsFalse = Specification
+      Set<Map<String, Boolean>> configsWithValuesWhereOptionIsFalse = DynamicAnalysisSpecification
           .getConfigsWithValuesWhereOptionIsFalse(option, table.keySet());
 
       for (Map<String, Boolean> configWithValuesWhereOptionIsFalse : configsWithValuesWhereOptionIsFalse) {

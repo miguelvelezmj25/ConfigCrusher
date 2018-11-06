@@ -16,7 +16,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SpecificationTest {
+public class DynamicAnalysisSpecificationTest {
 
   @Test
   public void RunningExample() throws IOException, InterruptedException {
@@ -32,24 +32,25 @@ public class SpecificationTest {
 
     Map<String, Set<Set<String>>> expectedDecisionToContexts = new HashMap<>();
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.1",
-        SpecificationTest.getContext(programOptions));
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
-        SpecificationTest.getContext(programOptions));
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("foo(Z)V.1",
-        SpecificationTest.getContext(SpecificationTest.setA(), SpecificationTest.setAB()));
+        DynamicAnalysisSpecificationTest
+            .getContext(DynamicAnalysisSpecificationTest.setA(), DynamicAnalysisSpecificationTest.setAB()));
 
-    Map<String, Set<Set<String>>> contextResults = SpecificationTest
+    Map<String, Set<Set<String>>> contextResults = DynamicAnalysisSpecificationTest
         .getDecisionsToContexts(decisionInfo);
 
     Assert.assertEquals(expectedDecisionToContexts, contextResults);
 
     // Set of options
     Map<String, Set<String>> expectedDecisionsToOptions = new HashMap<>();
-    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", SpecificationTest.setA());
-    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", SpecificationTest.setA());
-    expectedDecisionsToOptions.put("foo(Z)V.1", SpecificationTest.setAB());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions.put("foo(Z)V.1", DynamicAnalysisSpecificationTest.setAB());
 
-    Map<String, Set<String>> results = SpecificationTest.getDecisionsToOptions(decisionInfo);
+    Map<String, Set<String>> results = DynamicAnalysisSpecificationTest.getDecisionsToOptions(decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToOptions, results);
   }
@@ -69,27 +70,27 @@ public class SpecificationTest {
 
     Map<String, Set<Set<String>>> expectedDecisionToContexts = new HashMap<>();
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.1",
-        SpecificationTest.getContext(programOptions));
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
-        SpecificationTest.getContext(SpecificationTest.setA()));
+        DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.setA()));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.3",
-        SpecificationTest.getContext(programOptions));
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.4",
-        SpecificationTest.getContext(programOptions));
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
 
-    Map<String, Set<Set<String>>> contextResults = SpecificationTest
+    Map<String, Set<Set<String>>> contextResults = DynamicAnalysisSpecificationTest
         .getDecisionsToContexts(decisionInfo);
 
     Assert.assertEquals(expectedDecisionToContexts, contextResults);
 
     // Set of options
     Map<String, Set<String>> expectedDecisionsToOptions = new HashMap<>();
-    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", SpecificationTest.setA());
-    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", SpecificationTest.setA());
-    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.3", SpecificationTest.emptySet());
-    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.4", SpecificationTest.emptySet());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.3", DynamicAnalysisSpecificationTest.emptySet());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.4", DynamicAnalysisSpecificationTest.emptySet());
 
-    Map<String, Set<String>> results = SpecificationTest.getDecisionsToOptions(decisionInfo);
+    Map<String, Set<String>> results = DynamicAnalysisSpecificationTest.getDecisionsToOptions(decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToOptions, results);
   }
@@ -109,24 +110,25 @@ public class SpecificationTest {
 
     Map<String, Set<Set<String>>> expectedDecisionToContexts = new HashMap<>();
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.1",
-        SpecificationTest.getContext(programOptions));
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
-        SpecificationTest.getContext(programOptions));
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.3",
-        SpecificationTest.getContext(SpecificationTest.emptySet(), SpecificationTest.setB()));
+        DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.emptySet(), DynamicAnalysisSpecificationTest
+            .setB()));
 
-    Map<String, Set<Set<String>>> contextResults = SpecificationTest
+    Map<String, Set<Set<String>>> contextResults = DynamicAnalysisSpecificationTest
         .getDecisionsToContexts(decisionInfo);
 
     Assert.assertEquals(expectedDecisionToContexts, contextResults);
 
     // Set of options
     Map<String, Set<String>> expectedDecisionsToOptions = new HashMap<>();
-    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", SpecificationTest.setA());
-    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", SpecificationTest.setA());
-    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.3", SpecificationTest.setAB());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.3", DynamicAnalysisSpecificationTest.setAB());
 
-    Map<String, Set<String>> results = SpecificationTest.getDecisionsToOptions(decisionInfo);
+    Map<String, Set<String>> results = DynamicAnalysisSpecificationTest.getDecisionsToOptions(decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToOptions, results);
   }
@@ -138,9 +140,9 @@ public class SpecificationTest {
     for (Map.Entry<JavaRegion, DecisionInfo> entry : decisionInfo.entrySet()) {
       JavaRegion region = entry.getKey();
 
-      Set<Set<String>> context = Specification.getContext(entry.getValue());
+      Set<Set<String>> context = DynamicAnalysisSpecification.getContext(entry.getValue());
       decisionsToContexts.put(
-          SpecificationTest.getRegionInfo(region.getRegionMethod(), region.getStartRegionIndex()),
+          DynamicAnalysisSpecificationTest.getRegionInfo(region.getRegionMethod(), region.getStartRegionIndex()),
           context);
     }
 
@@ -167,10 +169,10 @@ public class SpecificationTest {
     for (Map.Entry<JavaRegion, DecisionInfo> entry : decisionInfo.entrySet()) {
       JavaRegion region = entry.getKey();
 
-      Set<String> options = Specification
+      Set<String> options = DynamicAnalysisSpecification
           .getMinimalSetOfOptions(entry.getValue().getDecisionBranchTable());
       decisionsToOptions.put(
-          SpecificationTest.getRegionInfo(region.getRegionMethod(), region.getStartRegionIndex()),
+          DynamicAnalysisSpecificationTest.getRegionInfo(region.getRegionMethod(), region.getStartRegionIndex()),
           options);
     }
 

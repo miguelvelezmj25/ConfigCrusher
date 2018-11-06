@@ -1,1 +1,151 @@
-[{"region":{"regionID":"af25d461-f75c-4fee-811f-2c977119fe87","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"RunningExample","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":2,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"],["B"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"0":1},"{A=true, B=false}":{"1":0},"{A=false, B=false}":{"0":1},"{A=true, B=true}":{"1":0}}}}},{"region":{"regionID":"e88492c3-3c7f-4a41-b594-6c8a3d8f7fce","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"RunningExample","regionMethod":"foo(Z)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[["A"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"0":0},"{A=true, B=false}":{"0":1},"{A=true, B=true}":{"1":0},"{A=false, B=false}":{"0":0}}}}},{"region":{"regionID":"88be0623-3426-4b23-92f0-17a6bd09ac07","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce","regionClass":"RunningExample","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"],["B"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"0":1},"{A=true, B=false}":{"1":0},"{A=false, B=false}":{"0":1},"{A=true, B=true}":{"1":0}}}}}]
+[
+  {
+    "region": {
+      "regionID": "af25d461-f75c-4fee-811f-2c977119fe87",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "RunningExample",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "0": 1
+          },
+          "{A=true, B=false}": {
+            "1": 0
+          },
+          "{A=false, B=false}": {
+            "0": 1
+          },
+          "{A=true, B=true}": {
+            "1": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "e88492c3-3c7f-4a41-b594-6c8a3d8f7fce",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "RunningExample",
+      "regionMethod": "foo(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [
+          "A"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "0": 0
+          },
+          "{A=true, B=false}": {
+            "0": 1
+          },
+          "{A=true, B=true}": {
+            "1": 0
+          },
+          "{A=false, B=false}": {
+            "0": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "88be0623-3426-4b23-92f0-17a6bd09ac07",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce",
+      "regionClass": "RunningExample",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "0": 1
+          },
+          "{A=true, B=false}": {
+            "1": 0
+          },
+          "{A=false, B=false}": {
+            "0": 1
+          },
+          "{A=true, B=true}": {
+            "1": 0
+          }
+        }
+      }
+    }
+  }
+]

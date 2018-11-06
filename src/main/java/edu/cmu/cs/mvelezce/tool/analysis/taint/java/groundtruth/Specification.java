@@ -8,13 +8,13 @@ import org.apache.commons.lang3.tuple.MutablePair;
 
 public class Specification {
 
-  Set<String> getMinimalSetOfOptions(DecisionBranchCountTable decisionTable) {
+  static Set<String> getMinimalSetOfOptions(DecisionBranchCountTable decisionTable) {
     Set<String> minimalOptionSet = new HashSet<>();
     Set<String> options = decisionTable.getOptions();
     Map<Map<String, Boolean>, MutablePair<Integer, Integer>> table = decisionTable.getTable();
 
     for (String option : options) {
-      Set<Map<String, Boolean>> configsWithValuesWhereOptionIsFalse = this
+      Set<Map<String, Boolean>> configsWithValuesWhereOptionIsFalse = Specification
           .getConfigsWithValuesWhereOptionIsFalse(option, table.keySet());
 
       for (Map<String, Boolean> configWithValuesWhereOptionIsFalse : configsWithValuesWhereOptionIsFalse) {
@@ -35,11 +35,11 @@ public class Specification {
     return minimalOptionSet;
   }
 
-  Set<Set<String>> getContext(DecisionBranchCountTable decisionBranchCountTable) {
-    throw new UnsupportedOperationException("Implement");
+  static Set<Set<String>> getContext(DecisionInfo decisionInfo) {
+    return decisionInfo.getContext();
   }
 
-  private Set<Map<String, Boolean>> getConfigsWithValuesWhereOptionIsFalse(String option,
+  private static Set<Map<String, Boolean>> getConfigsWithValuesWhereOptionIsFalse(String option,
       Set<Map<String, Boolean>> configsWithValues) {
     Set<Map<String, Boolean>> configsWithValuesWhereOptionIsFalse = new HashSet<>();
 

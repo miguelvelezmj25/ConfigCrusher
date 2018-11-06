@@ -61,6 +61,19 @@ public class SpecificationTest {
     DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
+    // Context
+    Map<String, Set<Set<String>>> expectedDecisionToContexts = new HashMap<>();
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.1",
+        SpecificationTest.getContext(SimpleExample1Adapter.getListOfOptions()));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
+        SpecificationTest.getContext(SpecificationTest.setA()));
+
+    Map<String, Set<Set<String>>> contextResults = SpecificationTest
+        .getDecisionsToContexts(decisionInfo);
+
+    Assert.assertEquals(expectedDecisionToContexts, contextResults);
+
+    // Set of options
     Map<String, Set<String>> expectedDecisionsToOptions = new HashMap<>();
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", SpecificationTest.setA());
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", SpecificationTest.setA());

@@ -118,13 +118,23 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
           .get("table");
       this.buildDecisionTable(table, decisionTable);
 
-      Set<Set<String>> context = new HashSet<>(info.get("context"));
+      Set<Set<String>> context = this.getContext((List<List<String>>) info.get("context"));
       decisionInfo.getContext().addAll(context);
 
       regionsToDecisionInfos.put(result.getRegion(), decisionInfo);
     }
 
     return regionsToDecisionInfos;
+  }
+
+  private Set<Set<String>> getContext(List<List<String>> configs) {
+    Set<Set<String>> context = new HashSet<>();
+
+    for (List<String> config : configs) {
+      context.add(new HashSet<>(config));
+    }
+
+    return context;
   }
 
   private void buildDecisionTable(Map<String, Map<Integer, Integer>> table,

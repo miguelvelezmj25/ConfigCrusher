@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.IOException;
 import java.util.Arrays;
@@ -27,11 +28,13 @@ public class SpecificationTest {
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     // Context
+    List<String> programOptions = DynamicRunningExampleAdapter.getListOfOptions();
+
     Map<String, Set<Set<String>>> expectedDecisionToContexts = new HashMap<>();
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.1",
-        SpecificationTest.getContext(DynamicRunningExampleAdapter.getListOfOptions()));
+        SpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
-        SpecificationTest.getContext(DynamicRunningExampleAdapter.getListOfOptions()));
+        SpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("foo(Z)V.1",
         SpecificationTest.getContext(SpecificationTest.setA(), SpecificationTest.setAB()));
 
@@ -62,15 +65,17 @@ public class SpecificationTest {
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     // Context
+    List<String> programOptions = SimpleExample1Adapter.getListOfOptions();
+
     Map<String, Set<Set<String>>> expectedDecisionToContexts = new HashMap<>();
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.1",
-        SpecificationTest.getContext(SimpleExample1Adapter.getListOfOptions()));
+        SpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
         SpecificationTest.getContext(SpecificationTest.setA()));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.3",
-        SpecificationTest.getContext(SimpleExample1Adapter.getListOfOptions()));
+        SpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.4",
-        SpecificationTest.getContext(SimpleExample1Adapter.getListOfOptions()));
+        SpecificationTest.getContext(programOptions));
 
     Map<String, Set<Set<String>>> contextResults = SpecificationTest
         .getDecisionsToContexts(decisionInfo);
@@ -83,6 +88,43 @@ public class SpecificationTest {
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", SpecificationTest.setA());
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.3", SpecificationTest.emptySet());
     expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.4", SpecificationTest.emptySet());
+
+    Map<String, Set<String>> results = SpecificationTest.getDecisionsToOptions(decisionInfo);
+
+    Assert.assertEquals(expectedDecisionsToOptions, results);
+  }
+
+  @Test
+  public void example1() throws IOException, InterruptedException {
+    String programName = Example1Adapter.PROGRAM_NAME;
+
+    // Program arguments
+    String[] args = new String[0];
+
+    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
+    Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
+
+    // Context
+    List<String> programOptions = Example1Adapter.getListOfOptions();
+
+    Map<String, Set<Set<String>>> expectedDecisionToContexts = new HashMap<>();
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.1",
+        SpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
+        SpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.3",
+        SpecificationTest.getContext(SpecificationTest.emptySet(), SpecificationTest.setB()));
+
+    Map<String, Set<Set<String>>> contextResults = SpecificationTest
+        .getDecisionsToContexts(decisionInfo);
+
+    Assert.assertEquals(expectedDecisionToContexts, contextResults);
+
+    // Set of options
+    Map<String, Set<String>> expectedDecisionsToOptions = new HashMap<>();
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.1", SpecificationTest.setA());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.2", SpecificationTest.setA());
+    expectedDecisionsToOptions.put("main([Ljava/lang/String;)V.3", SpecificationTest.setAB());
 
     Map<String, Set<String>> results = SpecificationTest.getDecisionsToOptions(decisionInfo);
 

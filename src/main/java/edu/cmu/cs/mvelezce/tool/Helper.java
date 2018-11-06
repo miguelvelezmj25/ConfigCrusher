@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -21,18 +22,18 @@ public class Helper {
   /**
    * Get all combinations of the specified options.
    */
-  public static Set<Set<String>> getConfigurations(Set<String> options) {
+  public static Set<Set<String>> getConfigurations(Collection<String> options) {
     if (options == null) {
       throw new IllegalArgumentException("The options passed cannot be null");
     }
 
-    Set<Set<String>> configs = new HashSet<>(getCombinations(options));
+    Set<Set<String>> configs = new HashSet<>(Helper.getCombinations(options));
     configs.add(new HashSet<>());
 
     return configs;
   }
 
-  public static Set<Set<String>> getCombinations(Set<String> options) {
+  public static Set<Set<String>> getCombinations(Collection<String> options) {
     if (options == null) {
       throw new IllegalArgumentException("The options passed cannot be null");
     }

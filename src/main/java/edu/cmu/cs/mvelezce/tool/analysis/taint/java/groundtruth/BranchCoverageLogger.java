@@ -27,50 +27,143 @@ public class BranchCoverageLogger {
     }
   }
 
-  public static void logIFICMPLEDecision(int value1, int value2, String methodName, int decisionCount) {
-    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger.getThenElseCounts(methodName, decisionCount);
+  public static void logICMPLTDecision(int value1, int value2, String methodName,
+      int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
 
-    if (value1 <= value2) {
-      int elseCounts = thenElseCounts.getRight();
-      elseCounts++;
-      thenElseCounts.setRight(elseCounts);
+    if (value1 < value2) {
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      int thenCounts = thenElseCounts.getLeft();
-      thenCounts++;
-      thenElseCounts.setLeft(thenCounts);
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+    }
+  }
+
+  public static void logICMPEQDecision(int value1, int value2, String methodName,
+      int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
+
+    if (value1 == value2) {
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+    }
+    else {
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+    }
+  }
+
+  public static void logICMPNEDecision(int value1, int value2, String methodName,
+      int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
+
+    if (value1 != value2) {
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+    }
+    else {
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+    }
+  }
+
+  public static void logICMPGEDecision(int value1, int value2, String methodName,
+      int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
+
+    if (value1 >= value2) {
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+    }
+    else {
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+    }
+  }
+
+  public static void logIFICMPGTDecision(int value1, int value2, String methodName,
+      int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
+
+    if (value1 > value2) {
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+    }
+    else {
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+    }
+  }
+
+  public static void logIFICMPLEDecision(int value1, int value2, String methodName,
+      int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
+
+    if (value1 <= value2) {
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+    }
+    else {
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+    }
+  }
+
+  public static void logIFGEDecision(int decisionValue, String methodName, int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
+
+    if (decisionValue >= 0) {
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+    }
+    else {
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+    }
+  }
+
+  public static void logIFNEDecision(int decisionValue, String methodName, int decisionCount) {
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
+
+    if (decisionValue != 0) {
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+    }
+    else {
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
     }
   }
 
   public static void logIFLEDecision(int decisionValue, String methodName, int decisionCount) {
-    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger.getThenElseCounts(methodName, decisionCount);
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
 
     if (decisionValue <= 0) {
-      int elseCounts = thenElseCounts.getRight();
-      elseCounts++;
-      thenElseCounts.setRight(elseCounts);
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      int thenCounts = thenElseCounts.getLeft();
-      thenCounts++;
-      thenElseCounts.setLeft(thenCounts);
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
     }
   }
 
   public static void logIFEQDecision(int decisionValue, String methodName, int decisionCount) {
-    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger.getThenElseCounts(methodName, decisionCount);
+    MutablePair<Integer, Integer> thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
 
     // If decisionValue == false
     if (decisionValue == 0) {
-      int elseCounts = thenElseCounts.getRight();
-      elseCounts++;
-      thenElseCounts.setRight(elseCounts);
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      int thenCounts = thenElseCounts.getLeft();
-      thenCounts++;
-      thenElseCounts.setLeft(thenCounts);
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
     }
+  }
+
+  private static void updatedThenBranchCount(MutablePair<Integer, Integer> thenElseCounts) {
+    int thenCounts = thenElseCounts.getLeft();
+    thenCounts++;
+    thenElseCounts.setLeft(thenCounts);
+  }
+
+  private static void updatedElseBranchCount(MutablePair<Integer, Integer> thenElseCounts) {
+    int elseCounts = thenElseCounts.getRight();
+    elseCounts++;
+    thenElseCounts.setRight(elseCounts);
   }
 
   public static void saveExecutedDecisions() {
@@ -86,7 +179,8 @@ public class BranchCoverageLogger {
     }
   }
 
-  private static MutablePair<Integer, Integer> getThenElseCounts(String methodName, int decisionCount) {
+  private static MutablePair<Integer, Integer> getThenElseCounts(String methodName,
+      int decisionCount) {
     String decision = methodName + "." + decisionCount;
     BranchCoverageLogger.addDecision(decision);
     return DECISIONS_TO_BRANCH_COUNTS.get(decision);

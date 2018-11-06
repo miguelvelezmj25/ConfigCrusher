@@ -75,6 +75,7 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
       AbstractInsnNode insnNode = insnIter.next();
       int opcode = insnNode.getOpcode();
 
+      // TODO add table switch, lookup switch, ifnull, ifnonnull
       if (opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE) {
         decisionCount++;
         InsnList loggingInsnList;
@@ -85,15 +86,62 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
                 .getIFEQLoggingInsnList(packageName, className, methodNameAndSignature,
                     decisionCount);
             break;
+          case Opcodes.IFNE:
+            loggingInsnList = this
+                .getIFNELoggingInsnList(packageName, className, methodNameAndSignature,
+                    decisionCount);
+            break;
+          case Opcodes.IFLT:
+            throw new UnsupportedOperationException("Implement");
+          case Opcodes.IFGE:
+            loggingInsnList = this
+                .getIFGELoggingInsnList(packageName, className, methodNameAndSignature,
+                    decisionCount);
+            break;
+          case Opcodes.IFGT:
+            throw new UnsupportedOperationException("Implement");
           case Opcodes.IFLE:
             loggingInsnList = this
                 .getIFLELoggingInsnList(packageName, className, methodNameAndSignature,
+                    decisionCount);
+            break;
+          case Opcodes.IF_ICMPEQ:
+            loggingInsnList = this
+                .getICMPEQLoggingInsnList(packageName, className, methodNameAndSignature,
+                    decisionCount);
+            break;
+          case Opcodes.IF_ICMPNE:
+            loggingInsnList = this
+                .getICMPNELoggingInsnList(packageName, className, methodNameAndSignature,
+                    decisionCount);
+            break;
+          case Opcodes.IF_ICMPLT:
+            loggingInsnList = this
+                .getICMPLTLoggingInsnList(packageName, className, methodNameAndSignature,
+                    decisionCount);
+            break;
+          case Opcodes.IF_ICMPGE:
+            loggingInsnList = this
+                .getICMPGELoggingInsnList(packageName, className, methodNameAndSignature,
+                    decisionCount);
+            break;
+          case Opcodes.IF_ICMPGT:
+            loggingInsnList = this
+                .getIFICMPGTLoggingInsnList(packageName, className, methodNameAndSignature,
                     decisionCount);
             break;
           case Opcodes.IF_ICMPLE:
             loggingInsnList = this
                 .getIFICMPLELoggingInsnList(packageName, className, methodNameAndSignature,
                     decisionCount);
+            break;
+          case Opcodes.IF_ACMPEQ:
+//            throw new UnsupportedOperationException("Implement");
+            loggingInsnList = new InsnList();
+            break;
+          case Opcodes.IF_ACMPNE:
+//            throw new UnsupportedOperationException("Implement");
+            loggingInsnList = new InsnList();
             break;
           default:
             throw new UnsupportedOperationException("Implement");
@@ -131,6 +179,32 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
     return loggingInsns;
   }
 
+  private InsnList getIFGELoggingInsnList(String packageName, String className,
+      String methodNameAndSignature, int decisionCount) {
+    InsnList loggingInsns = new InsnList();
+    this.addIFCONDInsnsBeforeMethod(loggingInsns, packageName, className, methodNameAndSignature,
+        decisionCount);
+
+    String methodName = "logIFGEDecision";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+
+    return loggingInsns;
+  }
+
+  private InsnList getIFNELoggingInsnList(String packageName, String className,
+      String methodNameAndSignature, int decisionCount) {
+    InsnList loggingInsns = new InsnList();
+    this.addIFCONDInsnsBeforeMethod(loggingInsns, packageName, className, methodNameAndSignature,
+        decisionCount);
+
+    String methodName = "logIFNEDecision";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+
+    return loggingInsns;
+  }
+
   private InsnList getIFEQLoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
@@ -147,10 +221,81 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getIFICMPLELoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className, methodNameAndSignature,
+    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
+        methodNameAndSignature,
         decisionCount);
 
     String methodName = "logIFICMPLEDecision";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+
+    return loggingInsns;
+  }
+
+  private InsnList getICMPEQLoggingInsnList(String packageName, String className,
+      String methodNameAndSignature, int decisionCount) {
+    InsnList loggingInsns = new InsnList();
+    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
+        methodNameAndSignature,
+        decisionCount);
+
+    String methodName = "logICMPEQDecision";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+
+    return loggingInsns;
+  }
+
+  private InsnList getICMPNELoggingInsnList(String packageName, String className,
+      String methodNameAndSignature, int decisionCount) {
+    InsnList loggingInsns = new InsnList();
+    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
+        methodNameAndSignature,
+        decisionCount);
+
+    String methodName = "logICMPNEDecision";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+
+    return loggingInsns;
+  }
+
+  private InsnList getICMPLTLoggingInsnList(String packageName, String className,
+      String methodNameAndSignature, int decisionCount) {
+    InsnList loggingInsns = new InsnList();
+    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
+        methodNameAndSignature,
+        decisionCount);
+
+    String methodName = "logICMPLTDecision";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+
+    return loggingInsns;
+  }
+
+  private InsnList getICMPGELoggingInsnList(String packageName, String className,
+      String methodNameAndSignature, int decisionCount) {
+    InsnList loggingInsns = new InsnList();
+    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
+        methodNameAndSignature,
+        decisionCount);
+
+    String methodName = "logICMPGEDecision";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+
+    return loggingInsns;
+  }
+
+  private InsnList getIFICMPGTLoggingInsnList(String packageName, String className,
+      String methodNameAndSignature, int decisionCount) {
+    InsnList loggingInsns = new InsnList();
+    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
+        methodNameAndSignature,
+        decisionCount);
+
+    String methodName = "logIFICMPGTDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
     this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
 

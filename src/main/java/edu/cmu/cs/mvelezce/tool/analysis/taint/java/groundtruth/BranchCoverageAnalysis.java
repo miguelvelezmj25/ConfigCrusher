@@ -226,7 +226,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
         commandList.add(ccClasspath
             + BaseAdapter.PATH_SEPARATOR
             + PhosphorExample2Adapter.INSTRUMENTED_CLASS_PATH);
-        adapter = new Example1Adapter();
+        adapter = new PhosphorExample2Adapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

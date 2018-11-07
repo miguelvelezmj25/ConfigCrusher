@@ -1,12 +1,12 @@
 [
   {
     "region": {
-      "regionID": "478cd384-ea19-4104-9aaf-48a031c4a6b8",
+      "regionID": "c202ae5d-4b05-4c5d-bbdf-c7a19afba11d",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Example1",
+      "regionClass": "Example2",
       "regionMethod": "main([Ljava/lang/String;)V",
       "startRegionIndex": 1,
       "startBlockID": "",
@@ -35,20 +35,20 @@
         ],
         "table": {
           "{A=false, B=true}": {
-            "thenCount": 1,
-            "elseCount": 0
+            "thenCount": 0,
+            "elseCount": 1
           },
           "{A=true, B=false}": {
-            "thenCount": 0,
-            "elseCount": 1
-          },
-          "{A=false, B=false}": {
             "thenCount": 1,
             "elseCount": 0
           },
-          "{A=true, B=true}": {
+          "{A=false, B=false}": {
             "thenCount": 0,
             "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
           }
         }
       }
@@ -56,12 +56,12 @@
   },
   {
     "region": {
-      "regionID": "94584e48-55e1-4330-87ea-07f2b2d7206e",
+      "regionID": "db405222-2f11-4fe9-bf13-4698601906f6",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Example1",
+      "regionClass": "Example2",
       "regionMethod": "main([Ljava/lang/String;)V",
       "startRegionIndex": 2,
       "startBlockID": "",
@@ -90,12 +90,12 @@
         ],
         "table": {
           "{A=false, B=true}": {
-            "thenCount": 1,
-            "elseCount": 0
-          },
-          "{A=true, B=false}": {
             "thenCount": 0,
             "elseCount": 1
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
           },
           "{A=false, B=false}": {
             "thenCount": 1,
@@ -111,12 +111,12 @@
   },
   {
     "region": {
-      "regionID": "1000c46d-1cbb-4bf5-8895-0e341cfd46d5",
+      "regionID": "de8284a0-c9bd-419f-acf0-6ecdb536e6f3",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Example1",
+      "regionClass": "Example2",
       "regionMethod": "main([Ljava/lang/String;)V",
       "startRegionIndex": 3,
       "startBlockID": "",
@@ -128,7 +128,7 @@
       "context": [
         [],
         [
-          "B"
+          "A"
         ]
       ],
       "decisionBranchTable": {
@@ -138,11 +138,11 @@
         ],
         "table": {
           "{A=false, B=true}": {
-            "thenCount": 1,
+            "thenCount": 0,
             "elseCount": 0
           },
           "{A=true, B=false}": {
-            "thenCount": 0,
+            "thenCount": 1,
             "elseCount": 0
           },
           "{A=false, B=false}": {

@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.IOException;
 import java.util.Arrays;
@@ -155,6 +156,47 @@ public class DynamicAnalysisSpecificationTest {
         .put("main([Ljava/lang/String;)V.1", DynamicAnalysisSpecificationTest.setA());
     expectedDecisionsToOptions
         .put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.3", DynamicAnalysisSpecificationTest.setAB());
+
+    Map<String, Set<String>> results = DynamicAnalysisSpecificationTest
+        .getDecisionsToOptions(decisionInfo);
+
+    Assert.assertEquals(expectedDecisionsToOptions, results);
+  }
+
+  @Test
+  public void phosphorExample2() throws IOException, InterruptedException {
+    String programName = PhosphorExample2Adapter.PROGRAM_NAME;
+
+    // Program arguments
+    String[] args = new String[0];
+
+    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
+    Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
+
+    // Context
+    List<String> programOptions = PhosphorExample2Adapter.getListOfOptions();
+
+    Map<String, Set<Set<String>>> expectedDecisionToContexts = new HashMap<>();
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.1",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.3",
+        DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.setA(), DynamicAnalysisSpecificationTest.emptySet()));
+
+    Map<String, Set<Set<String>>> contextResults = DynamicAnalysisSpecificationTest
+        .getDecisionsToContexts(decisionInfo);
+
+    Assert.assertEquals(expectedDecisionToContexts, contextResults);
+
+    // Set of options
+    Map<String, Set<String>> expectedDecisionsToOptions = new HashMap<>();
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.1", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.setB());
     expectedDecisionsToOptions
         .put("main([Ljava/lang/String;)V.3", DynamicAnalysisSpecificationTest.setAB());
 

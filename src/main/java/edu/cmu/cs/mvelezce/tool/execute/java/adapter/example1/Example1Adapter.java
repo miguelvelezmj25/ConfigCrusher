@@ -8,7 +8,6 @@ import java.util.Set;
 
 public class Example1Adapter extends BaseAdapter {
 
-  // TODO change name
   public static final String PROGRAM_NAME = "example1";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.analysis.Example1";
   public static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
@@ -17,7 +16,7 @@ public class Example1Adapter extends BaseAdapter {
   private static final String[] OPTIONS = {"A", "B"};
 
   public Example1Adapter() {
-    // TODO check that we are passing empty string
+    // TODO check why we are passing empty string
     super(Example1Adapter.PROGRAM_NAME, Example1Adapter.MAIN_CLASS, "",
         Example1Adapter.getListOfOptions());
   }

@@ -10,15 +10,15 @@ public class PhosphorExample2Adapter extends BaseAdapter {
 
   public static final String PROGRAM_NAME = "phosphorExample2";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.analysis.Example2";
+  public static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
+  public static final String INSTRUMENTED_CLASS_PATH = "../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes";
+
 
   private static final String[] OPTIONS = {"A", "B"};
 
   public PhosphorExample2Adapter() {
-    this("");
-  }
-
-  private PhosphorExample2Adapter(String dir) {
-    super(PhosphorExample2Adapter.PROGRAM_NAME, PhosphorExample2Adapter.MAIN_CLASS, dir,
+    // TODO check why we are passing empty string
+    super(PhosphorExample2Adapter.PROGRAM_NAME, PhosphorExample2Adapter.MAIN_CLASS, "",
         PhosphorExample2Adapter.getListOfOptions());
   }
 

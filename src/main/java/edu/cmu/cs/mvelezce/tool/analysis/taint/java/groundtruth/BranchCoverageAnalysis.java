@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -219,6 +220,12 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
         commandList.add(ccClasspath
             + BaseAdapter.PATH_SEPARATOR
             + Example1Adapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new Example1Adapter();
+        break;
+      case PhosphorExample2Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + PhosphorExample2Adapter.INSTRUMENTED_CLASS_PATH);
         adapter = new Example1Adapter();
         break;
       default:

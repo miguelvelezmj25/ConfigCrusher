@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.IOException;
 import java.util.HashSet;
@@ -54,6 +55,20 @@ public class BranchCoverageAnalysisTest {
   public void Example1() throws IOException, InterruptedException {
     String programName = Example1Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(Example1Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, options);
+    analysis.analyze(args);
+  }
+
+  @Test
+  public void PhosphorExample2() throws IOException, InterruptedException {
+    String programName = PhosphorExample2Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(PhosphorExample2Adapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

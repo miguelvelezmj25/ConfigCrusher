@@ -37,24 +37,7 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
 
   @Override
   public Set<MethodNode> getMethodsToInstrument(ClassNode classNode) {
-    Set<MethodNode> methodsToInstrument = new HashSet<>();
-
-    for (MethodNode methodNode : classNode.methods) {
-      InsnList insnList = methodNode.instructions;
-      Iterator<AbstractInsnNode> insnIter = insnList.iterator();
-
-      while (insnIter.hasNext()) {
-        AbstractInsnNode insnNode = insnIter.next();
-        int opcode = insnNode.getOpcode();
-
-        if (opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE) {
-          methodsToInstrument.add(methodNode);
-          break;
-        }
-      }
-    }
-
-    return methodsToInstrument;
+    return new HashSet<>(classNode.methods);
   }
 
   @Override

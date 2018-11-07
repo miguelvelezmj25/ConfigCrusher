@@ -13,7 +13,7 @@ public class SimpleExample1Adapter extends BaseAdapter {
   public static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
   public static final String INSTRUMENTED_CLASS_PATH = "../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes";
 
-  private static final String[] OPTIONS = {"A"};
+  private static final String[] OPTIONS = {"A", "B"};
 
   public SimpleExample1Adapter() {
     // TODO check that we are passing empty string

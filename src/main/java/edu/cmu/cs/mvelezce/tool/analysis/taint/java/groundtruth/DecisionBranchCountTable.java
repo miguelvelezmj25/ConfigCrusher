@@ -90,11 +90,6 @@ public class DecisionBranchCountTable {
     return "F";
   }
 
-//  public Map<Map<String, Boolean>, Boolean> getTable() {
-//    return table;
-//  }
-
-
   public Map<Map<String, Boolean>, ThenElseCounts> getTable() {
     return table;
   }

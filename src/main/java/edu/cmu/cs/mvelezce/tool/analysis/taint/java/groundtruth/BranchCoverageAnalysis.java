@@ -206,25 +206,19 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
       case DynamicRunningExampleAdapter.PROGRAM_NAME:
         commandList.add(ccClasspath
             + BaseAdapter.PATH_SEPARATOR
-            + DynamicRunningExampleAdapter.INSTRUMENTED_CLASS_PATH
-            + BaseAdapter.PATH_SEPARATOR
-            + DynamicRunningExampleAdapter.ORIGINAL_CLASS_PATH);
+            + DynamicRunningExampleAdapter.INSTRUMENTED_CLASS_PATH);
         adapter = new DynamicRunningExampleAdapter();
         break;
       case SimpleExample1Adapter.PROGRAM_NAME:
         commandList.add(ccClasspath
             + BaseAdapter.PATH_SEPARATOR
-            + SimpleExample1Adapter.INSTRUMENTED_CLASS_PATH
-            + BaseAdapter.PATH_SEPARATOR
-            + SimpleExample1Adapter.ORIGINAL_CLASS_PATH);
+            + SimpleExample1Adapter.INSTRUMENTED_CLASS_PATH);
         adapter = new SimpleExample1Adapter();
         break;
       case Example1Adapter.PROGRAM_NAME:
         commandList.add(ccClasspath
             + BaseAdapter.PATH_SEPARATOR
-            + Example1Adapter.INSTRUMENTED_CLASS_PATH
-            + BaseAdapter.PATH_SEPARATOR
-            + Example1Adapter.ORIGINAL_CLASS_PATH);
+            + Example1Adapter.INSTRUMENTED_CLASS_PATH);
         adapter = new Example1Adapter();
         break;
       default:

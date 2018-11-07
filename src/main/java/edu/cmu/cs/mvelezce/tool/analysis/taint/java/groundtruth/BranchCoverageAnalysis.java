@@ -5,12 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.Constraint;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.File;
@@ -81,7 +81,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
     return regionsToDecisionTables;
   }
-  
+
   @Override
   public Map<JavaRegion, DecisionInfo> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
@@ -92,12 +92,14 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
     for (RegionToInfo result : results) {
       Map<String, Collection> info = (Map<String, Collection>) result.getInfo();
-      Map<String, Collection> decisionBranchTable = (Map<String, Collection>) info.get("decisionBranchTable");
+      Map<String, Collection> decisionBranchTable = (Map<String, Collection>) info
+          .get("decisionBranchTable");
       Set<String> options = new HashSet<>(decisionBranchTable.get("options"));
 
       DecisionInfo decisionInfo = new DecisionInfo(options);
       DecisionBranchCountTable decisionTable = decisionInfo.getDecisionBranchTable();
-      Map<String, Map<String, Integer>> table = (Map<String, Map<String, Integer>>) decisionBranchTable.get("table");
+      Map<String, Map<String, Integer>> table = (Map<String, Map<String, Integer>>) decisionBranchTable
+          .get("table");
       this.buildDecisionTable(table, decisionTable);
 
       Set<Set<String>> context = this.getContext((List<List<String>>) info.get("context"));
@@ -119,7 +121,8 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     return context;
   }
 
-  private void buildDecisionTable(Map<String, Map<String, Integer>> table, DecisionBranchCountTable decisionTable) {
+  private void buildDecisionTable(Map<String, Map<String, Integer>> table,
+      DecisionBranchCountTable decisionTable) {
     for (Map.Entry<String, Map<String, Integer>> entry : table.entrySet()) {
       Set<String> config = this.parseConfig(entry.getKey());
       Map<String, Integer> pair = entry.getValue();
@@ -211,6 +214,12 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
             + BaseAdapter.PATH_SEPARATOR
             + PhosphorExample2Adapter.INSTRUMENTED_CLASS_PATH);
         adapter = new PhosphorExample2Adapter();
+        break;
+      case MultiFacetsAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + MultiFacetsAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new MultiFacetsAdapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

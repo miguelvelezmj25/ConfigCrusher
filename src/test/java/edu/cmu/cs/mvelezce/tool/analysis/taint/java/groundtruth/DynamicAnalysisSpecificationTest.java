@@ -52,7 +52,7 @@ public class DynamicAnalysisSpecificationTest {
         .put("main([Ljava/lang/String;)V.1", DynamicAnalysisSpecificationTest.setA());
     expectedDecisionsToOptions
         .put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.setA());
-    expectedDecisionsToOptions.put("foo(Z)V.1", DynamicAnalysisSpecificationTest.setAB());
+    expectedDecisionsToOptions.put("foo(Z)V.1", DynamicAnalysisSpecificationTest.setB());
 
     Map<String, Set<String>> results = DynamicAnalysisSpecificationTest
         .getDecisionsToOptions(decisionInfo);
@@ -102,7 +102,7 @@ public class DynamicAnalysisSpecificationTest {
     expectedDecisionsToOptions
         .put("main([Ljava/lang/String;)V.1", DynamicAnalysisSpecificationTest.setA());
     expectedDecisionsToOptions
-        .put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.setA());
+        .put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.emptySet());
     expectedDecisionsToOptions
         .put("main([Ljava/lang/String;)V.3", DynamicAnalysisSpecificationTest.emptySet());
     expectedDecisionsToOptions
@@ -142,8 +142,7 @@ public class DynamicAnalysisSpecificationTest {
         DynamicAnalysisSpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.3",
         DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.emptySet(),
-            DynamicAnalysisSpecificationTest
-                .setB()));
+            DynamicAnalysisSpecificationTest.setB()));
 
     Map<String, Set<Set<String>>> contextResults = DynamicAnalysisSpecificationTest
         .getDecisionsToContexts(decisionInfo);
@@ -157,7 +156,7 @@ public class DynamicAnalysisSpecificationTest {
     expectedDecisionsToOptions
         .put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.setA());
     expectedDecisionsToOptions
-        .put("main([Ljava/lang/String;)V.3", DynamicAnalysisSpecificationTest.setAB());
+        .put("main([Ljava/lang/String;)V.3", DynamicAnalysisSpecificationTest.setB());
 
     Map<String, Set<String>> results = DynamicAnalysisSpecificationTest
         .getDecisionsToOptions(decisionInfo);
@@ -198,7 +197,7 @@ public class DynamicAnalysisSpecificationTest {
     expectedDecisionsToOptions
         .put("main([Ljava/lang/String;)V.2", DynamicAnalysisSpecificationTest.setB());
     expectedDecisionsToOptions
-        .put("main([Ljava/lang/String;)V.3", DynamicAnalysisSpecificationTest.setAB());
+        .put("main([Ljava/lang/String;)V.3", DynamicAnalysisSpecificationTest.setA());
 
     Map<String, Set<String>> results = DynamicAnalysisSpecificationTest
         .getDecisionsToOptions(decisionInfo);

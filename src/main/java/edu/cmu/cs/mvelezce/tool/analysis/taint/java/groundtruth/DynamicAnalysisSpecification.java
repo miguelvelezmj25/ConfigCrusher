@@ -16,13 +16,21 @@ public class DynamicAnalysisSpecification {
       Set<Map<String, Boolean>> configsWithValuesWhereOptionIsFalse = DynamicAnalysisSpecification
           .getConfigsWithValuesWhereOptionIsFalse(option, table.keySet());
 
+      // Takes care of the case where there are no executed configs with the option set to false
       for (Map<String, Boolean> configWithValuesWhereOptionIsFalse : configsWithValuesWhereOptionIsFalse) {
         Map<String, Boolean> configWithValuesWhereOptionIsTrue = new HashMap<>(
             configWithValuesWhereOptionIsFalse);
         configWithValuesWhereOptionIsTrue.put(option, true);
 
+        ThenElseCounts thenElseCountsWithTrue = table.get(configWithValuesWhereOptionIsTrue);
+
+        // Takes care of the case where there are no executed configs with the option set to true
+        if (thenElseCountsWithTrue == null) {
+          continue;
+        }
+
         boolean equalBranchCounts = table.get(configWithValuesWhereOptionIsFalse)
-            .equals(table.get(configWithValuesWhereOptionIsTrue));
+            .equals(thenElseCountsWithTrue);
 
         if (!equalBranchCounts) {
           minimalOptionSet.add(option);

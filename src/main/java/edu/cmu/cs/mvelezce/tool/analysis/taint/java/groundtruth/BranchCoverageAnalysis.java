@@ -62,7 +62,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
       }
     }
 
-    this.padTablesWithNonReachedConfigs();
+//    this.padTablesWithNonReachedConfigs();
     Files.delete(BranchCoverageLogger.RESULTS_FILE);
 
     return this.getRegionsToDecisionTables();
@@ -81,23 +81,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
     return regionsToDecisionTables;
   }
-
-  private void padTablesWithNonReachedConfigs() {
-    for (DecisionInfo decisionInfo : this.sinksToDecisionInfos.values()) {
-      DecisionBranchCountTable decisionBranchTable = decisionInfo.getDecisionBranchTable();
-      Map<Map<String, Boolean>, ThenElseCounts> table = decisionBranchTable.getTable();
-
-      for (Set<String> config : this.executedConfigs) {
-        Map<String, Boolean> configWithValues = Constraint
-            .toConfigWithValues(config, this.getOptions());
-
-        if (!table.containsKey(configWithValues)) {
-          decisionBranchTable.addEntry(config, new ThenElseCounts());
-        }
-      }
-    }
-  }
-
+  
   @Override
   public Map<JavaRegion, DecisionInfo> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();

@@ -103,6 +103,18 @@ public class BranchCoverageLogger {
     }
   }
 
+  public static void logIFLTDecision(int decisionValue, String methodName, int decisionCount) {
+    ThenElseCounts thenElseCounts = BranchCoverageLogger
+        .getThenElseCounts(methodName, decisionCount);
+
+    if (decisionValue < 0) {
+      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+    }
+    else {
+      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+    }
+  }
+
   public static void logIFGEDecision(int decisionValue, String methodName, int decisionCount) {
     ThenElseCounts thenElseCounts = BranchCoverageLogger
         .getThenElseCounts(methodName, decisionCount);

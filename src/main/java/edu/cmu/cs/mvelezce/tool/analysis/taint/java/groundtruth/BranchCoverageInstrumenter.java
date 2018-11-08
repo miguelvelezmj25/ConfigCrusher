@@ -75,7 +75,10 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
                     decisionCount);
             break;
           case Opcodes.IFLT:
-            throw new UnsupportedOperationException("Implement");
+            loggingInsnList = this
+                .getIFLTLoggingInsnList(packageName, className, methodNameAndSignature,
+                    decisionCount);
+            break;
           case Opcodes.IFGE:
             loggingInsnList = this
                 .getIFGELoggingInsnList(packageName, className, methodNameAndSignature,
@@ -156,6 +159,19 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
         decisionCount);
 
     String methodName = "logIFLEDecision";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+
+    return loggingInsns;
+  }
+
+  private InsnList getIFLTLoggingInsnList(String packageName, String className,
+      String methodNameAndSignature, int decisionCount) {
+    InsnList loggingInsns = new InsnList();
+    this.addIFCONDInsnsBeforeMethod(loggingInsns, packageName, className, methodNameAndSignature,
+        decisionCount);
+
+    String methodName = "logIFLTDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
     this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
 

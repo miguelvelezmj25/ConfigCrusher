@@ -1,1 +1,1070 @@
-[{"region":{"regionID":"287ed618-1383-4476-960e-b248175ffe3e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":5,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"],["B"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true}":{"thenCount":1,"elseCount":0}}}}},{"region":{"regionID":"503d69ec-b48f-4665-9215-e1fd6b97b882","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":4,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"],["B"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"thenCount":2,"elseCount":3},"{A=true, B=false}":{"thenCount":2,"elseCount":3},"{A=false, B=false}":{"thenCount":2,"elseCount":3},"{A=true, B=true}":{"thenCount":2,"elseCount":3}}}}},{"region":{"regionID":"e9b46418-cea2-4ae0-9e9b-2e2e0026a67a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":3,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"],["B"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"thenCount":5,"elseCount":1},"{A=true, B=false}":{"thenCount":5,"elseCount":1},"{A=false, B=false}":{"thenCount":5,"elseCount":1},"{A=true, B=true}":{"thenCount":5,"elseCount":1}}}}},{"region":{"regionID":"ee814f14-312d-40a5-90f3-cf7df64a11b9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":2,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[["A"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=true, B=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true}":{"thenCount":0,"elseCount":1}}}}},{"region":{"regionID":"6bcd23f3-30d5-4c46-bfc2-2c754613ff04","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":8,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"],["B"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"thenCount":3,"elseCount":2},"{A=true, B=false}":{"thenCount":0,"elseCount":2},"{A=false, B=false}":{"thenCount":0,"elseCount":2},"{A=true, B=true}":{"thenCount":3,"elseCount":2}}}}},{"region":{"regionID":"00a432a4-e7ab-4c9c-8b9d-7716ab81ca7e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":7,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"],["B"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"thenCount":5,"elseCount":1},"{A=true, B=false}":{"thenCount":2,"elseCount":1},"{A=false, B=false}":{"thenCount":2,"elseCount":1},"{A=true, B=true}":{"thenCount":5,"elseCount":1}}}}},{"region":{"regionID":"a09d083e-6f98-4b33-97a9-aae801beb278","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":6,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"],["B"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true}":{"thenCount":1,"elseCount":0}}}}},{"region":{"regionID":"42731df3-d2bb-4f11-a913-2956472f0981","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"SimpleExample1","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"context":[[],["A"],["B"],["A","B"]],"decisionBranchTable":{"options":["A","B"],"table":{"{A=false, B=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true}":{"thenCount":1,"elseCount":0}}}}}]
+[
+  {
+    "region": {
+      "regionID": "5449cb0b-3e79-4695-88ba-377c1ac39df9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 5,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "a9fe00f3-f06a-4d77-b15c-352c58dd4ea2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 4,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 2,
+            "elseCount": 3
+          },
+          "{A=true, B=false}": {
+            "thenCount": 2,
+            "elseCount": 3
+          },
+          "{A=false, B=false}": {
+            "thenCount": 2,
+            "elseCount": 3
+          },
+          "{A=true, B=true}": {
+            "thenCount": 2,
+            "elseCount": 3
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "a84a838f-17db-4f9b-afca-0db31ab19543",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 5,
+            "elseCount": 1
+          },
+          "{A=true, B=false}": {
+            "thenCount": 5,
+            "elseCount": 1
+          },
+          "{A=false, B=false}": {
+            "thenCount": 5,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 5,
+            "elseCount": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "4858f12e-afcf-46b5-a161-66c941ec5e5a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "cow(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 2,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "a5b2dd75-d825-46fe-99e8-c61fb493f7ed",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [
+          "A"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=true, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 0,
+            "elseCount": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "9dc53011-eca3-4c13-aac7-bcf5c970ad79",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 9,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "017c2b97-64c3-4897-ac46-35cbd04b5448",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 8,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 3,
+            "elseCount": 2
+          },
+          "{A=true, B=false}": {
+            "thenCount": 0,
+            "elseCount": 2
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 2
+          },
+          "{A=true, B=true}": {
+            "thenCount": 3,
+            "elseCount": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "20c99949-3699-4d4a-b104-ecdf86370995",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 7,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 5,
+            "elseCount": 1
+          },
+          "{A=true, B=false}": {
+            "thenCount": 2,
+            "elseCount": 1
+          },
+          "{A=false, B=false}": {
+            "thenCount": 2,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 5,
+            "elseCount": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "261512b6-72d6-41d2-bd44-c72d2e4d5e83",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 6,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=false, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "66506bbb-1046-4485-9fcc-fd6fee3a052b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "9998a7a5-cb67-4d13-bf1f-e392ce5d636c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "moo(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=true}": {
+            "thenCount": 2,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "e262eef4-49ba-424d-a9ac-11b80a64ea66",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 13,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "d48a7456-5803-4b20-8575-7e18e5bf286e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "foo()V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=true}": {
+            "thenCount": 2,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "3a0760bc-dcfb-40b2-b045-c0df13806afd",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 12,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "69856ef0-062b-40dd-bc56-f735e8897100",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "bar(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=true}": {
+            "thenCount": 2,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "d0ead237-c27b-4585-babc-398ad9202121",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 11,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "c381328e-5dbd-4d5f-a86c-847c8896b81b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 10,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "c5859373-7719-455e-bdbb-3affa4e070e0",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 16,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "e5d7f3d2-ee5c-4df1-a1ae-7caf781303ed",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 15,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=false}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "4c030448-38ec-49d1-96e7-39590b9c9431",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleExample1",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 14,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "context": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ],
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "decisionBranchTable": {
+        "options": [
+          "A",
+          "B"
+        ],
+        "table": {
+          "{A=false, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          },
+          "{A=true, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=false, B=false}": {
+            "thenCount": 0,
+            "elseCount": 1
+          },
+          "{A=true, B=true}": {
+            "thenCount": 1,
+            "elseCount": 0
+          }
+        }
+      }
+    }
+  }
+]

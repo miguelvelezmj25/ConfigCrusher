@@ -92,6 +92,34 @@ public class DynamicAnalysisSpecificationTest {
         DynamicAnalysisSpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.8",
         DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.9",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.10",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.11",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.12",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.13",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.14",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.15",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("main([Ljava/lang/String;)V.16",
+        DynamicAnalysisSpecificationTest.getContext(programOptions));
+    expectedDecisionToContexts.put("foo()V.1",
+        DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.setA(),
+            DynamicAnalysisSpecificationTest.setB(), DynamicAnalysisSpecificationTest.setAB()));
+    expectedDecisionToContexts.put("moo(Z)V.1",
+        DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.setA(),
+            DynamicAnalysisSpecificationTest.setB(), DynamicAnalysisSpecificationTest.setAB()));
+    expectedDecisionToContexts.put("bar(Z)V.1",
+        DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.setA(),
+            DynamicAnalysisSpecificationTest.setB(), DynamicAnalysisSpecificationTest.setAB()));
+    expectedDecisionToContexts.put("cow(Z)V.1",
+        DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.setA(),
+            DynamicAnalysisSpecificationTest.setB(), DynamicAnalysisSpecificationTest.setAB()));
 
     Map<String, Set<Set<String>>> contextResults = DynamicAnalysisSpecificationTest
         .getDecisionsToContexts(decisionInfo);
@@ -116,6 +144,26 @@ public class DynamicAnalysisSpecificationTest {
         .put("main([Ljava/lang/String;)V.7", DynamicAnalysisSpecificationTest.setB());
     expectedDecisionsToOptions
         .put("main([Ljava/lang/String;)V.8", DynamicAnalysisSpecificationTest.setB());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.9", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.10", DynamicAnalysisSpecificationTest.setB());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.11", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.12", DynamicAnalysisSpecificationTest.setB());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.13", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.14", DynamicAnalysisSpecificationTest.setB());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.15", DynamicAnalysisSpecificationTest.setA());
+    expectedDecisionsToOptions
+        .put("main([Ljava/lang/String;)V.16", DynamicAnalysisSpecificationTest.setB());
+    expectedDecisionsToOptions.put("foo()V.1", DynamicAnalysisSpecificationTest.setAB());
+    expectedDecisionsToOptions.put("moo(Z)V.1", DynamicAnalysisSpecificationTest.setAB());
+    expectedDecisionsToOptions.put("bar(Z)V.1", DynamicAnalysisSpecificationTest.setAB());
+    expectedDecisionsToOptions.put("cow(Z)V.1", DynamicAnalysisSpecificationTest.setAB());
 
     Map<String, Set<String>> results = DynamicAnalysisSpecificationTest
         .getDecisionsToOptions(decisionInfo);
@@ -184,7 +232,8 @@ public class DynamicAnalysisSpecificationTest {
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.2",
         DynamicAnalysisSpecificationTest.getContext(programOptions));
     expectedDecisionToContexts.put("main([Ljava/lang/String;)V.3",
-        DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.setA(), DynamicAnalysisSpecificationTest.emptySet()));
+        DynamicAnalysisSpecificationTest.getContext(DynamicAnalysisSpecificationTest.setA(),
+            DynamicAnalysisSpecificationTest.emptySet()));
 
     Map<String, Set<Set<String>>> contextResults = DynamicAnalysisSpecificationTest
         .getDecisionsToContexts(decisionInfo);

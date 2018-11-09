@@ -117,13 +117,7 @@ public abstract class BaseClassTransformer implements ClassTransformer {
 
   @Override
   public void writeClass(ClassNode classNode) throws IOException {
-    ClassWriter classWriter = new CustomClassWriter(
-        ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-//        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-//        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-//        ClassWriter classWriter = new ClassWriter(0);
-    classNode.accept(classWriter);
-
+    ClassWriter classWriter = this.getClassWriter(classNode);
     this.makeOutputDir(classNode);
     File outputFile = new File(outputDir + "/" + classNode.name + ".class");
 
@@ -131,6 +125,18 @@ public abstract class BaseClassTransformer implements ClassTransformer {
     output.write(classWriter.toByteArray());
     output.flush();
     output.close();
+  }
+
+  @Override
+  public ClassWriter getClassWriter(ClassNode classNode) {
+    ClassWriter classWriter = new CustomClassWriter(
+        ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+//        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+//        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+//        ClassWriter classWriter = new ClassWriter(0);
+    classNode.accept(classWriter);
+
+    return classWriter;
   }
 
   private void makeOutputDir(ClassNode classNode) {
@@ -169,4 +175,15 @@ public abstract class BaseClassTransformer implements ClassTransformer {
   public String getOutputDir() {
     return outputDir;
   }
+
+
+  protected ClassNode getModifiedClassNode(ClassNode classNode) {
+    ClassWriter classWriter = this.getClassWriter(classNode);
+    ClassReader classReader = new ClassReader(classWriter.toByteArray());
+    ClassNode newClassNode = new ClassNode();
+    classReader.accept(newClassNode, 0);
+
+    return newClassNode;
+  }
+
 }

@@ -17,13 +17,10 @@ import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.FrameNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
-import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
-import jdk.internal.org.objectweb.asm.tree.LineNumberNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
@@ -46,20 +43,10 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    MethodGraph graph = this.getCFG(methodNode, classNode);
     this.addBranchCoverageLogging(methodNode, classNode);
-    // TODO how to calculate maxs
-//    methodNode.visitMaxs(20, methodNode.maxLocals);
 
-//    this.some(methodNode, graph);
-
-//
-//    ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-//    classNode.accept(cw);
-//    ClassReader cr = new ClassReader(cw.toByteArray());
-//    ClassNode cn = new ClassNode();
-//    cr.accept(cn, 0);
-    this.addInsnsEndMainMethod(methodNode, graph);
+    MethodGraph graph = this.getCFG(methodNode, classNode);
+    this.addInsnsEndMainMethod(methodNode, classNode, graph);
   }
 
 //  private void some(MethodNode methodNode, MethodGraph graph) {
@@ -191,29 +178,36 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
         insnList.insertBefore(insnNode, loggingInsnList);
       }
     }
+
+    this.updateMaxs(methodNode, classNode);
   }
 
-  private void addInsnsEndMainMethod(MethodNode methodNode, MethodGraph graph) {
-    if (methodNode.name.contains("main")) {
-      MethodBlock exitBlock = graph.getExitBlock();
-      Set<MethodBlock> preds = exitBlock.getPredecessors();
+  private void addInsnsEndMainMethod(MethodNode methodNode, ClassNode classNode,
+      MethodGraph graph) {
+    if (!methodNode.name.equals("main") || !methodNode.desc.equals("([Ljava/lang/String;)V")) {
+      return;
+    }
 
-      for (MethodBlock pred : preds) {
-        List<AbstractInsnNode> predInsns = pred.getInstructions();
+    MethodBlock exitBlock = graph.getExitBlock();
+    Set<MethodBlock> preds = exitBlock.getPredecessors();
 
-        for (int i = (predInsns.size() - 1); i >= 0; i--) {
-          AbstractInsnNode insn = predInsns.get(i);
-          int opcode = insn.getOpcode();
+    for (MethodBlock pred : preds) {
+      List<AbstractInsnNode> predInsns = pred.getInstructions();
 
-          if (opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
-            InsnList savingInstructions = this.getSavingInstructions();
-            methodNode.instructions.insertBefore(insn, savingInstructions);
+      for (int i = (predInsns.size() - 1); i >= 0; i--) {
+        AbstractInsnNode insn = predInsns.get(i);
+        int opcode = insn.getOpcode();
 
-            break;
-          }
+        if (opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
+          InsnList savingInstructions = this.getSavingInstructions();
+          methodNode.instructions.insertBefore(insn, savingInstructions);
+
+          break;
         }
       }
     }
+
+    this.updateMaxs(methodNode, classNode);
   }
 
   private InsnList getIFLELoggingInsnList(String packageName, String className,

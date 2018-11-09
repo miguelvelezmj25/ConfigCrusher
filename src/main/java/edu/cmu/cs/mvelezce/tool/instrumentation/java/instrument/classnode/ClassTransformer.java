@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode;
 
 import java.io.IOException;
 import java.util.Set;
+import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 
 /**
@@ -20,5 +21,7 @@ public interface ClassTransformer {
   String getPathToClasses();
 
   String getOutputDir();
+
+  ClassWriter getClassWriter(ClassNode node);
 
 }

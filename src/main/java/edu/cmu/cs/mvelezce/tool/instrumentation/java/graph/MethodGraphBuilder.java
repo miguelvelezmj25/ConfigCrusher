@@ -8,7 +8,7 @@ public interface MethodGraphBuilder {
 
   void addEdges(MethodGraph graph, MethodNode methodNode);
 
-  void buildBlocks(MethodGraph graph, MethodNode methodNode);
+  void addBlocks(MethodGraph graph, MethodNode methodNode);
 
   void addInstructions(MethodGraph graph, MethodNode methodNode);
 

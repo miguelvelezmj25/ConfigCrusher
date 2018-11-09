@@ -40,7 +40,7 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
   }
 
   @Override
-  public void buildBlocks(MethodGraph graph, MethodNode methodNode) {
+  public void addBlocks(MethodGraph graph, MethodNode methodNode) {
     InsnList insnList = methodNode.instructions;
     MethodBlock initialBlock = new MethodBlock(insnList.getFirst());
     graph.addMethodBlock(initialBlock);

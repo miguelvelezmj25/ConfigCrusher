@@ -198,7 +198,7 @@ public class DefaultMethodGraphBuilder extends BaseMethodGraphBuilder {
   }
 
   @Override
-  public void buildBlocks(MethodGraph graph, MethodNode methodNode) {
+  public void addBlocks(MethodGraph graph, MethodNode methodNode) {
     InsnList instructions = methodNode.instructions;
     ListIterator<AbstractInsnNode> instructionsIterator = instructions.iterator();
 

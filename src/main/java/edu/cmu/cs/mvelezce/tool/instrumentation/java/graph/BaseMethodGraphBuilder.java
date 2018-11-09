@@ -20,7 +20,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
 
     int instructionsInMethodNodeCount = this.getNumberOfInstructionsInMethodNode(methodNode);
 
-    this.buildBlocks(graph, methodNode);
+    this.addBlocks(graph, methodNode);
     this.addInstructions(graph, methodNode);
 
     int instructionsInGraphCount = this.getNumberOfInstructionsInGraph(graph);
@@ -131,7 +131,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
 
       throw new UnsupportedOperationException(
           "There seems to be a special case for graphs with 3 blocks. Test it");
-//      Set<MethodBlock> blocks = graph.buildBlocks();
+//      Set<MethodBlock> blocks = graph.addBlocks();
 //      blocks.remove(graph.getEntryBlock());
 //      blocks.remove(graph.getExitBlock());
 //

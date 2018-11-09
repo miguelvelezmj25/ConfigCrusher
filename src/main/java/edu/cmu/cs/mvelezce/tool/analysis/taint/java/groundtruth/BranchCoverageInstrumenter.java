@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.BaseClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
@@ -21,7 +22,6 @@ import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
-import jdk.internal.org.objectweb.asm.tree.analysis.AnalyzerException;
 
 public class BranchCoverageInstrumenter extends BaseMethodTransformer {
 
@@ -340,18 +340,8 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   }
 
   private MethodGraph getCFG(MethodNode methodNode, ClassNode classNode) {
-    CFGBuilder cfgBuilder = new CFGBuilder(classNode.name, methodNode);
-    MethodGraph graph;
-
-    try {
-      graph = cfgBuilder.buildCFG();
-    }
-    catch (AnalyzerException ae) {
-      throw new RuntimeException(
-          "Could not build a control flow graph for method :" + methodNode.name, ae);
-    }
-
-    return graph;
+    MethodGraphBuilder cfgBuilder = new CFGBuilder(classNode.name);
+    return cfgBuilder.build(methodNode);
   }
 
   private static class BranchCoverageClassTransformer extends BaseClassTransformer {

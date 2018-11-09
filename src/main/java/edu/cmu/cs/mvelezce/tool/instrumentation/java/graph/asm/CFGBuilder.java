@@ -1,120 +1,193 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.BaseMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import jdk.internal.org.objectweb.asm.tree.analysis.Analyzer;
 import jdk.internal.org.objectweb.asm.tree.analysis.AnalyzerException;
 import jdk.internal.org.objectweb.asm.tree.analysis.BasicInterpreter;
 import jdk.internal.org.objectweb.asm.tree.analysis.BasicValue;
 import jdk.internal.org.objectweb.asm.tree.analysis.Frame;
 
-public class CFGBuilder {
+public class CFGBuilder extends BaseMethodGraphBuilder {
 
   private final String owner;
-  private final MethodNode methodNode;
 
-  public CFGBuilder(String owner, MethodNode methodNode) {
+  private final Map<CFGNode<BasicValue>, Integer> nodesToIndexes = new HashMap<>();
+  private Analyzer<BasicValue> analyzer;
+
+  public CFGBuilder(String owner) {
     this.owner = owner;
-    this.methodNode = methodNode;
   }
 
-  public MethodGraph buildCFG() throws AnalyzerException {
-    Analyzer<BasicValue> analyzer = this.getASMAnalyzer();
+  @Override
+  public MethodGraph build(MethodNode methodNode) {
+    Analyzer<BasicValue> analyzer = this.getASMAnalyzer(methodNode);
     Frame<BasicValue>[] frames = analyzer.getFrames();
-    MethodGraph graph = this.addMethodBlocks();
-    this.addEdges(graph, frames);
+    this.cacheNodesToIndex(frames);
 
-    return graph;
+    return super.build(methodNode);
   }
 
-  private Analyzer<BasicValue> getASMAnalyzer() throws AnalyzerException {
-    Analyzer<BasicValue> analyzer = new BuildCFGAnalyzer();
-    analyzer.analyze(this.owner, this.methodNode);
+  @Override
+  public void buildBlocks(MethodGraph graph, MethodNode methodNode) {
+    InsnList insnList = methodNode.instructions;
+    MethodBlock initialBlock = new MethodBlock(insnList.getFirst());
+    graph.addMethodBlock(initialBlock);
 
-    return analyzer;
-  }
+    Frame<BasicValue>[] frames = this.analyzer.getFrames();
 
-  private void addEdges(MethodGraph graph, Frame<BasicValue>[] frames) {
-    Map<CFGNode<BasicValue>, Integer> nodesToIndexes = this.cacheNodesToIndex(frames);
-    InsnList insnList = this.methodNode.instructions;
+    for (int i = 1; i < frames.length; i++) {
+      Frame<BasicValue> frame = frames[i];
 
-    for (int i = 0; i < frames.length; i++) {
-      CFGNode<BasicValue> cfgNode = (CFGNode<BasicValue>) frames[i];
-
-      if (cfgNode == null) {
+      if (frame == null) {
         continue;
       }
 
-      Set<CFGNode<BasicValue>> succs = cfgNode.getSuccessors();
-
-      if (succs == null || succs.isEmpty()) {
-        continue;
-      }
-
+      CFGNode<BasicValue> cfgNode = (CFGNode<BasicValue>) frame;
       AbstractInsnNode insn = insnList.get(i);
-      MethodBlock block = graph.getMethodBlock(insn);
+      this.AddPredsBlocks(graph, cfgNode, insn);
+      this.addSuccsBlocks(graph, cfgNode, insnList, insn);
+    }
+  }
+
+  private void AddPredsBlocks(MethodGraph graph, CFGNode<BasicValue> cfgNode,
+      AbstractInsnNode insn) {
+    Set<CFGNode<BasicValue>> preds = cfgNode.getPredecessors();
+
+    if (preds.size() == 1) {
+      return;
+    }
+
+    MethodBlock block = graph.getMethodBlock(insn);
+
+    if (block == null) {
+      block = new MethodBlock(insn);
+      graph.addMethodBlock(block);
+    }
+
+  }
+
+  private void addSuccsBlocks(MethodGraph graph, CFGNode<BasicValue> cfgNode, InsnList insnList,
+      AbstractInsnNode insn) {
+    Set<CFGNode<BasicValue>> succs = cfgNode.getSuccessors();
+
+    if (succs.isEmpty() || succs.size() == 1) {
+      return;
+    }
+
+    int curOpcode = insn.getOpcode();
+
+    if (!((curOpcode >= Opcodes.IFEQ & curOpcode <= Opcodes.IF_ACMPNE)
+        || curOpcode == Opcodes.IFNULL
+        || curOpcode == Opcodes.IFNONNULL)) {
+      throw new RuntimeException("The instruction " + curOpcode
+          + " has multiple successors, but it is not an if comparison");
+    }
+
+    for (CFGNode<BasicValue> succ : succs) {
+      int succIndex = this.nodesToIndexes.get(succ);
+      AbstractInsnNode succInsn = insnList.get(succIndex);
+      MethodBlock succBlock = new MethodBlock(succInsn);
+      graph.addMethodBlock(succBlock);
+    }
+  }
+
+  @Override
+  public void addEdges(MethodGraph graph, MethodNode methodNode) {
+    Frame<BasicValue>[] frames = this.analyzer.getFrames();
+    InsnList insnList = methodNode.instructions;
+
+    MethodBlock entryBlock = graph.getEntryBlock();
+    MethodBlock exitBlock = graph.getExitBlock();
+
+    for (MethodBlock block : graph.getBlocks()) {
+      if (block == entryBlock || block == exitBlock) {
+        continue;
+      }
+
+      List<AbstractInsnNode> blockInsnList = block.getInstructions();
+      AbstractInsnNode lastInsn = blockInsnList.get(blockInsnList.size() - 1);
+      int lastInsnIndex = insnList.indexOf(lastInsn);
+      CFGNode<BasicValue> node = (CFGNode<BasicValue>) frames[lastInsnIndex];
+
+      if (node == null) {
+        continue;
+      }
+
+      Set<CFGNode<BasicValue>> succs = node.getSuccessors();
 
       for (CFGNode<BasicValue> succ : succs) {
-        int succIndex = nodesToIndexes.get(succ);
+        int succIndex = this.nodesToIndexes.get(succ);
         AbstractInsnNode succInsn = insnList.get(succIndex);
         MethodBlock succBlock = graph.getMethodBlock(succInsn);
         graph.addEdge(block, succBlock);
       }
     }
-
-    this.connectToEntryBlock(graph, insnList);
-    this.connectToExitBlock(graph);
   }
 
-  private void connectToExitBlock(MethodGraph graph) {
-    for (MethodBlock methodBlock : graph.getBlocks()) {
-      for (AbstractInsnNode instruction : methodBlock.getInstructions()) {
-        int opcode = instruction.getOpcode();
+  @Override
+  public void addInstructions(MethodGraph graph, MethodNode methodNode) {
+    List<AbstractInsnNode> curInsnList = null;
+    Iterator<AbstractInsnNode> insnIter = methodNode.instructions.iterator();
 
-        if (opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
-          methodBlock.setWithReturn(true);
-          graph.addEdge(methodBlock, graph.getExitBlock());
+    while (insnIter.hasNext()) {
+      AbstractInsnNode insn = insnIter.next();
+      MethodBlock block = graph.getMethodBlock(insn);
+
+      if (block == null) {
+        if (curInsnList == null) {
+          throw new RuntimeException("The current list of instructions cannot be null");
         }
+
+        curInsnList.add(insn);
+      }
+      else {
+        curInsnList = block.getInstructions();
+        curInsnList.add(insn);
       }
     }
   }
 
-  private void connectToEntryBlock(MethodGraph graph, InsnList insnList) {
-    MethodBlock firstBlock = graph.getMethodBlock(insnList.getFirst());
-    graph.addEdge(graph.getEntryBlock(), firstBlock);
-  }
-
-  private MethodGraph addMethodBlocks() {
-    MethodGraph graph = new MethodGraph();
-    Iterator<AbstractInsnNode> insnIter = this.methodNode.instructions.iterator();
-
-    while (insnIter.hasNext()) {
-      AbstractInsnNode in = insnIter.next();
-      MethodBlock block = new MethodBlock(in);
-      block.getInstructions().add(in);
-      graph.addMethodBlock(block);
+  private Analyzer<BasicValue> getASMAnalyzer(MethodNode methodNode) {
+    if (this.analyzer != null) {
+      return this.analyzer;
     }
 
-    return graph;
+    this.analyzer = new BuildCFGAnalyzer();
+
+    try {
+      this.analyzer.analyze(this.owner, methodNode);
+    }
+    catch (AnalyzerException ae) {
+      throw new RuntimeException(
+          "Could not build a control flow graph for method :" + methodNode.name, ae);
+    }
+
+    return this.analyzer;
   }
 
   private Map<CFGNode<BasicValue>, Integer> cacheNodesToIndex(Frame<BasicValue>[] frames) {
-    Map<CFGNode<BasicValue>, Integer> nodesToIndexes = new HashMap<>();
+    if (!this.nodesToIndexes.isEmpty()) {
+      return this.nodesToIndexes;
+    }
 
     for (int i = 0; i < frames.length; i++) {
       CFGNode<BasicValue> cfgNode = (CFGNode<BasicValue>) frames[i];
-      nodesToIndexes.put(cfgNode, i);
+      this.nodesToIndexes.put(cfgNode, i);
     }
 
-    return nodesToIndexes;
+    return this.nodesToIndexes;
   }
 
   private static class BuildCFGAnalyzer extends Analyzer<BasicValue> {
@@ -123,17 +196,33 @@ public class CFGBuilder {
       super(new BasicInterpreter());
     }
 
+    @Override
     protected Frame<BasicValue> newFrame(int nLocals, int nStack) {
       return new CFGNode<>(nLocals, nStack);
     }
 
+    @Override
     protected Frame<BasicValue> newFrame(Frame<? extends BasicValue> src) {
       return new CFGNode<>(src);
     }
 
+    @Override
     protected void newControlFlowEdge(int src, int dst) {
-      CFGNode<BasicValue> cfgNode = (CFGNode<BasicValue>) this.getFrames()[src];
-      cfgNode.getSuccessors().add((CFGNode<BasicValue>) this.getFrames()[dst]);
+      Frame<BasicValue>[] frames = this.getFrames();
+
+      CFGNode<BasicValue> srcNode = (CFGNode<BasicValue>) frames[src];
+      CFGNode<BasicValue> dstNode = (CFGNode<BasicValue>) frames[dst];
+
+      srcNode.getSuccessors().add(dstNode);
+      dstNode.getPredecessors().add(srcNode);
+    }
+
+    protected boolean newControlFlowExceptionEdge(int insnIndex, int successorIndex) {
+      throw new UnsupportedOperationException("Implement");
+    }
+
+    protected boolean newControlFlowExceptionEdge(int insnIndex, TryCatchBlockNode tryCatchBlock) {
+      throw new UnsupportedOperationException("Implement");
     }
   }
 }

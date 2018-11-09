@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
+import javax.annotation.Nullable;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 
 import java.util.*;
@@ -89,7 +90,6 @@ public class MethodGraph {
 
     public MethodBlock getImmediateDominator(MethodBlock start) {
 //        System.out.println(this.toDotString("reverse"));
-
         this.getDominators();
         Set<MethodBlock> dominators = new HashSet<>(this.blocksToDominators.get(start));
         dominators.remove(start);
@@ -313,6 +313,8 @@ public class MethodGraph {
         return this.blocks.get(ID);
     }
 
+    // TODO added this annotation and need to make sure (1) it is correct to add it and (2) callers handle null
+    @Nullable
     public MethodBlock getMethodBlock(AbstractInsnNode insnNode) {
         return this.getMethodBlock(MethodBlock.asID(insnNode));
     }

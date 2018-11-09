@@ -17,10 +17,13 @@ import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.FrameNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
+import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
+import jdk.internal.org.objectweb.asm.tree.LineNumberNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
@@ -44,48 +47,53 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
     this.addBranchCoverageLogging(methodNode, classNode);
+    this.updateMaxs(methodNode, classNode);
 
     MethodGraph graph = this.getCFG(methodNode, classNode);
-    this.addInsnsEndMainMethod(methodNode, classNode, graph);
+    this.some(methodNode, graph);
+    this.updateMaxs(methodNode, classNode);
+
+    this.addInsnsEndMainMethod(methodNode, graph);
+    this.updateMaxs(methodNode, classNode);
   }
 
-//  private void some(MethodNode methodNode, MethodGraph graph) {
-//    InsnList insnList = methodNode.instructions;
-//    MethodBlock entryBlock = graph.getEntryBlock();
-//    MethodBlock exitBlock = graph.getExitBlock();
-//
-//    for (MethodBlock block : graph.getBlocks()) {
-//      if (block == entryBlock || block == exitBlock) {
-//        continue;
-//      }
-//
-//      Set<MethodBlock> succs = block.getSuccessors();
-//
-//      if (succs.size() < 2) {
-//        continue;
-//      }
-//
-//      MethodBlock ipd = graph.getImmediatePostDominator(block);
-//
-//      for (MethodBlock succ : succs) {
-//        if (succ == ipd) {
-//          continue;
-//        }
-//
-//        List<AbstractInsnNode> succInsns = succ.getInstructions();
-//
-//        for (AbstractInsnNode insn : succInsns) {
-//          if (insn instanceof LabelNode || insn instanceof LineNumberNode
-//              || insn instanceof FrameNode) {
-//            continue;
-//          }
-//
-////          System.out.println();
-//
-//        }
-//      }
-//    }
-//  }
+  private void some(MethodNode methodNode, MethodGraph graph) {
+    MethodBlock entryBlock = graph.getEntryBlock();
+    MethodBlock exitBlock = graph.getExitBlock();
+
+    for (MethodBlock block : graph.getBlocks()) {
+      if (block == entryBlock || block == exitBlock) {
+        continue;
+      }
+
+      Set<MethodBlock> succs = block.getSuccessors();
+
+      if (succs.size() < 2) {
+        continue;
+      }
+
+      MethodBlock ipd = graph.getImmediatePostDominator(block);
+      List<AbstractInsnNode> ipdInsns = ipd.getInstructions();
+
+      for (AbstractInsnNode insn : ipdInsns) {
+        if (insn instanceof LabelNode || insn instanceof LineNumberNode
+            || insn instanceof FrameNode) {
+          continue;
+        }
+
+        methodNode.instructions.insertBefore(insn, this.getPopInsnList());
+        break;
+      }
+    }
+
+  }
+
+  private InsnList getPopInsnList() {
+    String methodName = "popExecutingBranch";
+    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
+
+    return this.getInsnListForMethodCall(methodName, methodDescriptor);
+  }
 
   private void addBranchCoverageLogging(MethodNode methodNode, ClassNode classNode) {
     String packageName = Utils.getPackageName(classNode);
@@ -178,12 +186,9 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
         insnList.insertBefore(insnNode, loggingInsnList);
       }
     }
-
-    this.updateMaxs(methodNode, classNode);
   }
 
-  private void addInsnsEndMainMethod(MethodNode methodNode, ClassNode classNode,
-      MethodGraph graph) {
+  private void addInsnsEndMainMethod(MethodNode methodNode, MethodGraph graph) {
     if (!methodNode.name.equals("main") || !methodNode.desc.equals("([Ljava/lang/String;)V")) {
       return;
     }
@@ -199,26 +204,25 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
         int opcode = insn.getOpcode();
 
         if (opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
-          InsnList savingInstructions = this.getSavingInstructions();
+          InsnList savingInstructions = this.getSaveInsnList();
           methodNode.instructions.insertBefore(insn, savingInstructions);
 
           break;
         }
       }
     }
-
-    this.updateMaxs(methodNode, classNode);
   }
 
   private InsnList getIFLELoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFCONDInsnsBeforeMethod(loggingInsns, packageName, className, methodNameAndSignature,
-        decisionCount);
+    loggingInsns
+        .insert(this.getIFCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logIFLEDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -226,12 +230,13 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getIFLTLoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFCONDInsnsBeforeMethod(loggingInsns, packageName, className, methodNameAndSignature,
-        decisionCount);
+    loggingInsns
+        .insert(this.getIFCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logIFLTDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -239,12 +244,13 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getIFGELoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFCONDInsnsBeforeMethod(loggingInsns, packageName, className, methodNameAndSignature,
-        decisionCount);
+    loggingInsns
+        .insert(this.getIFCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logIFGEDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -252,12 +258,13 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getIFNELoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFCONDInsnsBeforeMethod(loggingInsns, packageName, className, methodNameAndSignature,
-        decisionCount);
+    loggingInsns
+        .insert(this.getIFCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logIFNEDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -265,12 +272,13 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getIFEQLoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFCONDInsnsBeforeMethod(loggingInsns, packageName, className, methodNameAndSignature,
-        decisionCount);
+    loggingInsns
+        .insert(this.getIFCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logIFEQDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -278,13 +286,13 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getIFICMPLELoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
-        methodNameAndSignature,
-        decisionCount);
+    loggingInsns.insert(
+        this.getIFICMPCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logIFICMPLEDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -292,13 +300,13 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getICMPEQLoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
-        methodNameAndSignature,
-        decisionCount);
+    loggingInsns.insert(
+        this.getIFICMPCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logICMPEQDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -306,13 +314,13 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getICMPNELoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
-        methodNameAndSignature,
-        decisionCount);
+    loggingInsns.insert(
+        this.getIFICMPCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logICMPNEDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -320,13 +328,13 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getICMPLTLoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
-        methodNameAndSignature,
-        decisionCount);
+    loggingInsns.insert(
+        this.getIFICMPCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logICMPLTDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -334,13 +342,13 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getICMPGELoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
-        methodNameAndSignature,
-        decisionCount);
+    loggingInsns.insert(
+        this.getIFICMPCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logICMPGEDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
@@ -348,43 +356,49 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getIFICMPGTLoggingInsnList(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList loggingInsns = new InsnList();
-    this.addIFICMPCONDInsnsBeforeMethod(loggingInsns, packageName, className,
-        methodNameAndSignature,
-        decisionCount);
+    loggingInsns.insert(
+        this.getIFICMPCONDInsnListBeforeMethod(packageName, className, methodNameAndSignature,
+            decisionCount));
 
     String methodName = "logIFICMPGTDecision";
     String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-    this.addInsnsForMethodCall(loggingInsns, methodName, methodDescriptor);
+    loggingInsns.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
     return loggingInsns;
   }
 
-  private void addInsnsForMethodCall(InsnList loggingInsns, String methodName,
-      String methodDescriptor) {
-    loggingInsns
-        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, BranchCoverageLogger.INTERNAL_NAME,
-            methodName, methodDescriptor, false));
+  private InsnList getInsnListForMethodCall(String methodName, String methodDescriptor) {
+    InsnList insnList = new InsnList();
+
+    insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, BranchCoverageLogger.INTERNAL_NAME,
+        methodName, methodDescriptor, false));
+
+    return insnList;
   }
 
-  private void addIFCONDInsnsBeforeMethod(InsnList loggingInsns, String packageName, String
-      className,
+  private InsnList getIFCONDInsnListBeforeMethod(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
-    loggingInsns.add(new InsnNode(Opcodes.DUP));
-    loggingInsns
-        .add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
-    loggingInsns.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));
+    InsnList insnList = new InsnList();
+    
+    insnList.add(new InsnNode(Opcodes.DUP));
+    insnList.add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
+    insnList.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));
+
+    return insnList;
   }
 
-  private void addIFICMPCONDInsnsBeforeMethod(InsnList loggingInsns, String packageName, String
-      className,
+  private InsnList getIFICMPCONDInsnListBeforeMethod(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
-    loggingInsns.add(new InsnNode(Opcodes.DUP2));
-    loggingInsns
-        .add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
-    loggingInsns.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));
+    InsnList insnList = new InsnList();
+
+    insnList.add(new InsnNode(Opcodes.DUP2));
+    insnList.add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
+    insnList.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));
+
+    return insnList;
   }
 
-  private InsnList getSavingInstructions() {
+  private InsnList getSaveInsnList() {
     InsnList saveInsnList = new InsnList();
 
     String methodName = "saveExecutedDecisions";

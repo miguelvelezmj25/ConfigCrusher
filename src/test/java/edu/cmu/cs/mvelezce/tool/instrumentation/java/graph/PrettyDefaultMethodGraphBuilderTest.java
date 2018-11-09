@@ -19,6 +19,8 @@ import java.lang.reflect.InvocationTargetException;
 
 public class PrettyDefaultMethodGraphBuilderTest {
 
+    // TODO create a new class transformer to read the classes from a given path without deleting the classes in "instrumented"
+
     @Test
     public void runningExample() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/running-example/target/classes";
@@ -133,7 +135,7 @@ public class PrettyDefaultMethodGraphBuilderTest {
 
     @Test
     public void SimpleExample1() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-        String path = SimpleExample1Adapter.ORIGINAL_CLASS_PATH;
+        String path = SimpleExample1Adapter.INSTRUMENTED_CLASS_PATH;
         String className = SimpleExample1Adapter.MAIN_CLASS;
         String methodName = "main";
         ClassTransformer transformer = new DefaultClassTransformer(path);

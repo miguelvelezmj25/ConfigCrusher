@@ -16,6 +16,8 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
     this.classTransformer = classTransformer;
   }
 
+  // TODO override transform method to call the updateMaxs method
+
   @Override
   public void transformMethods() throws IOException {
     Set<ClassNode> classNodes = this.classTransformer.readClasses();

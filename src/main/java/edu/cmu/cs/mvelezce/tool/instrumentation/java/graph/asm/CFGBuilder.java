@@ -20,7 +20,7 @@ import jdk.internal.org.objectweb.asm.tree.analysis.BasicValue;
 import jdk.internal.org.objectweb.asm.tree.analysis.Frame;
 
 public class CFGBuilder extends BaseMethodGraphBuilder {
-
+// TODO add a new label in a basic block to determine the beginning and end of a control flow decision
   private final String owner;
 
   private final Map<CFGNode<BasicValue>, Integer> nodesToIndexes = new HashMap<>();

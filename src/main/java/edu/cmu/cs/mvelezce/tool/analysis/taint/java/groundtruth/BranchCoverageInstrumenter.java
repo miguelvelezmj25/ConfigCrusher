@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
@@ -146,8 +147,19 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
       Set<MethodBlock> preds = exitBlock.getPredecessors();
 
       for (MethodBlock pred : preds) {
-        AbstractInsnNode predInsn = pred.getInstructions().get(0);
-        insnList.insertBefore(predInsn, this.getSavingInstructions());
+        List<AbstractInsnNode> predInsns = pred.getInstructions();
+
+        for (int i = (predInsns.size() - 1); i >= 0; i--) {
+          AbstractInsnNode insn = predInsns.get(i);
+          int opcode = insn.getOpcode();
+
+          if (opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
+            InsnList savingInstructions = this.getSavingInstructions();
+            insnList.insertBefore(insn, savingInstructions);
+
+            break;
+          }
+        }
       }
     }
   }

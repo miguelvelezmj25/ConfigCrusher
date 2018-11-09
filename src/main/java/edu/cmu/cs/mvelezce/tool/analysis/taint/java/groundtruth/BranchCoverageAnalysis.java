@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import org.jboss.util.file.Files;
 
@@ -35,7 +34,6 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
           + "/.m2/repository/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar";
 
   private final Map<String, DecisionInfo> sinksToDecisionInfos = new HashMap<>();
-  private final Set<Set<String>> executedConfigs = new HashSet<>();
 
   BranchCoverageAnalysis(String programName) {
     this(programName, new HashSet<>());
@@ -51,7 +49,6 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     Set<Set<String>> configs = Helper.getConfigurations(this.getOptions());
 
     for (Set<String> config : configs) {
-      this.executedConfigs.add(config);
       this.runProgram(config);
 
       try {
@@ -62,7 +59,6 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
       }
     }
 
-//    this.padTablesWithNonReachedConfigs();
     Files.delete(BranchCoverageLogger.RESULTS_FILE);
 
     return this.getRegionsToDecisionTables();
@@ -91,24 +87,66 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     Map<JavaRegion, DecisionInfo> regionsToDecisionInfos = new HashMap<>();
 
     for (RegionToInfo result : results) {
+      DecisionInfo decisionInfo = new DecisionInfo();
       Map<String, Collection> info = (Map<String, Collection>) result.getInfo();
-      Map<String, Collection> decisionBranchTable = (Map<String, Collection>) info
-          .get("decisionBranchTable");
-      Set<String> options = new HashSet<>(decisionBranchTable.get("options"));
 
-      DecisionInfo decisionInfo = new DecisionInfo(options);
-      DecisionBranchCountTable decisionTable = decisionInfo.getDecisionBranchTable();
-      Map<String, Map<String, Integer>> table = (Map<String, Map<String, Integer>>) decisionBranchTable
-          .get("table");
-      this.buildDecisionTable(table, decisionTable);
-
-      Set<Set<String>> context = this.getContext((List<List<String>>) info.get("context"));
-      decisionInfo.getContext().addAll(context);
+      this.addContextInfo(decisionInfo, info);
+      this.addTableInfo(decisionInfo, info);
 
       regionsToDecisionInfos.put(result.getRegion(), decisionInfo);
     }
 
     return regionsToDecisionInfos;
+  }
+
+  private void addTableInfo(DecisionInfo decisionInfo, Map<String, Collection> info) {
+    Map<String, Map<String, Collection>> stackTracesToCountTables = (Map<String, Map<String, Collection>>) info
+        .get("stackTracesToDecisionBranchTables");
+    Map<List<String>, DecisionBranchCountTable> stacksToTables = decisionInfo
+        .getStackTracesToDecisionBranchTables();
+
+    for (Map.Entry<String, Map<String, Collection>> entry : stackTracesToCountTables.entrySet()) {
+      List<String> stackTrace = this.getStackTrace(entry.getKey());
+      DecisionBranchCountTable decisionTable = this.getDecisionTable(entry.getValue());
+      stacksToTables.put(stackTrace, decisionTable);
+    }
+  }
+
+  private DecisionBranchCountTable getDecisionTable(Map<String, Collection> stringsToEntries) {
+    Set<String> options = new HashSet<>(stringsToEntries.get("options"));
+    DecisionBranchCountTable decisionCountTable = new DecisionBranchCountTable(options);
+    this.addDecisionTableEntries(decisionCountTable, stringsToEntries);
+
+    return decisionCountTable;
+  }
+
+  private void addDecisionTableEntries(DecisionBranchCountTable decisionCountTable,
+      Map<String, Collection> value) {
+    Map<String, Map<String, Integer>> table = (Map<String, Map<String, Integer>>) value
+        .get("table");
+
+    for (Map.Entry<String, Map<String, Integer>> entry : table.entrySet()) {
+      Set<String> config = this.parseConfig(entry.getKey());
+      Map<String, Integer> pair = entry.getValue();
+
+      ThenElseCounts thenElseCounts = new ThenElseCounts();
+      thenElseCounts.setThenCount(pair.get("thenCount"));
+      thenElseCounts.setElseCount(pair.get("elseCount"));
+      decisionCountTable.addEntry(config, thenElseCounts);
+    }
+  }
+
+  private void addContextInfo(DecisionInfo decisionInfo, Map<String, Collection> info) {
+    Map<String, List<List<String>>> stackTracesToContexts = (Map<String, List<List<String>>>) info
+        .get("stackTracesToContexts");
+    Map<List<String>, Set<Set<String>>> stacksToContexts = decisionInfo.getStackTracesToContexts();
+
+    for (Map.Entry<String, List<List<String>>> entry : stackTracesToContexts
+        .entrySet()) {
+      List<String> stackTrace = this.getStackTrace(entry.getKey());
+      Set<Set<String>> context = this.getContext(entry.getValue());
+      stacksToContexts.put(stackTrace, context);
+    }
   }
 
   private Set<Set<String>> getContext(List<List<String>> configs) {
@@ -121,17 +159,18 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     return context;
   }
 
-  private void buildDecisionTable(Map<String, Map<String, Integer>> table,
-      DecisionBranchCountTable decisionTable) {
-    for (Map.Entry<String, Map<String, Integer>> entry : table.entrySet()) {
-      Set<String> config = this.parseConfig(entry.getKey());
-      Map<String, Integer> pair = entry.getValue();
+  private List<String> getStackTrace(String stackTrace) {
+    stackTrace = stackTrace.replace("[", "");
+    stackTrace = stackTrace.replace("]", "");
+    String[] elements = stackTrace.split(",");
 
-      ThenElseCounts thenElseCounts = new ThenElseCounts();
-      thenElseCounts.setThenCount(pair.get("thenCount"));
-      thenElseCounts.setElseCount(pair.get("elseCount"));
-      decisionTable.addEntry(config, thenElseCounts);
+    List<String> list = new ArrayList<>();
+
+    for (String element : elements) {
+      list.add(element.trim());
     }
+
+    return list;
   }
 
   private Set<String> parseConfig(String key) {
@@ -182,6 +221,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   private List<String> buildCommandAsList(Set<String> config) {
     List<String> commandList = new ArrayList<>();
     commandList.add("java");
+//    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");
 
     String programName = this.getProgramName();
@@ -234,36 +274,67 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   }
 
   private void processResults(Set<String> config) throws IOException, ClassNotFoundException {
-    Map<String, ThenElseCounts> sinksToBranchCounts = this.getSinksToBranchCounts();
-    this.addSinks(sinksToBranchCounts.keySet());
+    Map<StackTraceDecision, ThenElseCounts> callSiteDecisionsToBranchCounts = this
+        .getCallSiteDecisionsToBranchCounts();
+    this.addSinks(callSiteDecisionsToBranchCounts.keySet());
 
-    for (Entry<String, ThenElseCounts> entry : sinksToBranchCounts.entrySet()) {
-      String sink = entry.getKey();
+    for (Map.Entry<StackTraceDecision, ThenElseCounts> entry : callSiteDecisionsToBranchCounts
+        .entrySet()) {
+      StackTraceDecision stackTraceDecision = entry.getKey();
+      String sink = stackTraceDecision.getDecision();
       DecisionInfo decisionInfo = this.sinksToDecisionInfos.get(sink);
-      decisionInfo.getContext().add(config);
 
-      DecisionBranchCountTable decisionBranchCountTable = decisionInfo.getDecisionBranchTable();
-      decisionBranchCountTable.addEntry(config, entry.getValue());
+      List<String> stackTrace = stackTraceDecision.getStackTrace();
+      this.updateContext(decisionInfo, stackTrace, config);
+      this.updateTable(decisionInfo, stackTrace, config, entry.getValue());
+    }
+
+  }
+
+  private void updateTable(DecisionInfo decisionInfo, List<String> stackTrace,
+      Set<String> config, ThenElseCounts thenElseCounts) {
+    this.addCountTable(decisionInfo, stackTrace);
+    DecisionBranchCountTable table = decisionInfo.getStackTracesToDecisionBranchTables()
+        .get(stackTrace);
+    table.addEntry(config, thenElseCounts);
+  }
+
+  private void addCountTable(DecisionInfo decisionInfo, List<String> stackTrace) {
+    Map<List<String>, DecisionBranchCountTable> stackTracesToDecisionTables = decisionInfo
+        .getStackTracesToDecisionBranchTables();
+    stackTracesToDecisionTables
+        .putIfAbsent(stackTrace, new DecisionBranchCountTable(this.getOptions()));
+  }
+
+  private void updateContext(DecisionInfo decisionInfo, List<String> stackTrace,
+      Set<String> config) {
+    this.addContext(decisionInfo, stackTrace);
+    Set<Set<String>> callSiteContext = decisionInfo.getStackTracesToContexts().get(stackTrace);
+    callSiteContext.add(config);
+  }
+
+  private void addContext(DecisionInfo decisionInfo, List<String> stackTrace) {
+    Map<List<String>, Set<Set<String>>> stackTracesToContexts = decisionInfo
+        .getStackTracesToContexts();
+    stackTracesToContexts.putIfAbsent(stackTrace, new HashSet<>());
+  }
+
+  private void addSinks(Set<StackTraceDecision> stackTraceDecisions) {
+    for (StackTraceDecision stackTraceDecision : stackTraceDecisions) {
+      String sink = stackTraceDecision.getDecision();
+      this.sinksToDecisionInfos.putIfAbsent(sink, new DecisionInfo());
     }
   }
 
-  private void addSinks(Set<String> executedSinks) {
-    for (String sink : executedSinks) {
-      if (!this.sinksToDecisionInfos.containsKey(sink)) {
-        this.sinksToDecisionInfos.put(sink, new DecisionInfo(this.getOptions()));
-      }
-    }
-  }
-
-  private Map<String, ThenElseCounts> getSinksToBranchCounts()
+  private Map<StackTraceDecision, ThenElseCounts> getCallSiteDecisionsToBranchCounts()
       throws IOException, ClassNotFoundException {
-    Map<String, ThenElseCounts> sinksToBranchCounts;
+    Map<StackTraceDecision, ThenElseCounts> callSiteSinksToBranchCounts;
 
     try (FileInputStream fis = new FileInputStream(BranchCoverageLogger.RESULTS_FILE);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
-      sinksToBranchCounts = (Map<String, ThenElseCounts>) ois.readObject();
+      callSiteSinksToBranchCounts = (Map<StackTraceDecision, ThenElseCounts>) ois.readObject();
     }
 
-    return sinksToBranchCounts;
+    return callSiteSinksToBranchCounts;
   }
 }

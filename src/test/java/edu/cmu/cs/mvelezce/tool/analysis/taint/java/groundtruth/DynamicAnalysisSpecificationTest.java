@@ -328,20 +328,21 @@ public class DynamicAnalysisSpecificationTest {
 
   private static Map<String, Set<String>> getDecisionsToOptions(
       Map<JavaRegion, DecisionInfo> decisionInfo) {
-    Map<String, Set<String>> decisionsToOptions = new HashMap<>();
-
-    for (Map.Entry<JavaRegion, DecisionInfo> entry : decisionInfo.entrySet()) {
-      JavaRegion region = entry.getKey();
-
-      Set<String> options = DynamicAnalysisSpecification
-          .getMinimalSetOfOptions(entry.getValue().getDecisionBranchTable());
-      decisionsToOptions.put(
-          DynamicAnalysisSpecificationTest
-              .getRegionInfo(region.getRegionMethod(), region.getStartRegionIndex()),
-          options);
-    }
-
-    return decisionsToOptions;
+//    Map<String, Set<String>> decisionsToOptions = new HashMap<>();
+//
+//    for (Map.Entry<JavaRegion, DecisionInfo> entry : decisionInfo.entrySet()) {
+//      JavaRegion region = entry.getKey();
+//
+//      Set<String> options = DynamicAnalysisSpecification
+//          .getMinimalSetOfOptions(entry.getValue().getStackTracesToDecisionBranchTables());
+//      decisionsToOptions.put(
+//          DynamicAnalysisSpecificationTest
+//              .getRegionInfo(region.getRegionMethod(), region.getStartRegionIndex()),
+//          options);
+//    }
+//
+//    return decisionsToOptions;
+    throw new UnsupportedOperationException("Implement");
   }
 
   private static Set<String> emptySet() {

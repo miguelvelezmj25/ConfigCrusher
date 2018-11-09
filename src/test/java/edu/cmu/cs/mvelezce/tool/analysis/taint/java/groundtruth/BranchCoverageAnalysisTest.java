@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorEx
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.junit.Test;
 

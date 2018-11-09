@@ -17,13 +17,10 @@ import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.FrameNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
-import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
-import jdk.internal.org.objectweb.asm.tree.LineNumberNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
@@ -50,49 +47,9 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
     this.updateMaxs(methodNode, classNode);
 
     MethodGraph graph = this.getCFG(methodNode, classNode);
-    this.some(methodNode, graph);
-    this.updateMaxs(methodNode, classNode);
 
     this.addInsnsEndMainMethod(methodNode, graph);
     this.updateMaxs(methodNode, classNode);
-  }
-
-  private void some(MethodNode methodNode, MethodGraph graph) {
-    MethodBlock entryBlock = graph.getEntryBlock();
-    MethodBlock exitBlock = graph.getExitBlock();
-
-    for (MethodBlock block : graph.getBlocks()) {
-      if (block == entryBlock || block == exitBlock) {
-        continue;
-      }
-
-      Set<MethodBlock> succs = block.getSuccessors();
-
-      if (succs.size() < 2) {
-        continue;
-      }
-
-      MethodBlock ipd = graph.getImmediatePostDominator(block);
-      List<AbstractInsnNode> ipdInsns = ipd.getInstructions();
-
-      for (AbstractInsnNode insn : ipdInsns) {
-        if (insn instanceof LabelNode || insn instanceof LineNumberNode
-            || insn instanceof FrameNode) {
-          continue;
-        }
-
-        methodNode.instructions.insertBefore(insn, this.getPopInsnList());
-        break;
-      }
-    }
-
-  }
-
-  private InsnList getPopInsnList() {
-    String methodName = "popExecutingBranch";
-    String methodDescriptor = BranchCoverageLogger.getMethodDescriptor(methodName);
-
-    return this.getInsnListForMethodCall(methodName, methodDescriptor);
   }
 
   private void addBranchCoverageLogging(MethodNode methodNode, ClassNode classNode) {
@@ -379,7 +336,7 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   private InsnList getIFCONDInsnListBeforeMethod(String packageName, String className,
       String methodNameAndSignature, int decisionCount) {
     InsnList insnList = new InsnList();
-    
+
     insnList.add(new InsnNode(Opcodes.DUP));
     insnList.add(new LdcInsnNode(packageName + "/" + className + "." + methodNameAndSignature));
     insnList.add(new IntInsnNode(Opcodes.SIPUSH, decisionCount));

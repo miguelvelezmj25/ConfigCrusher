@@ -1,27 +1,20 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class DecisionInfo {
 
-  private final Set<Set<String>> context = new HashSet<>();
-  private final DecisionBranchCountTable decisionBranchTable;
+  private final Map<List<String>, Set<Set<String>>> stackTracesToContexts = new HashMap<>();
+  private final Map<List<String>, DecisionBranchCountTable> stackTracesToDecisionBranchTables = new HashMap<>();
 
-  // Dummy constructor for serializing
-  private DecisionInfo() {
-    this.decisionBranchTable = new DecisionBranchCountTable(new HashSet<>());
+  public Map<List<String>, Set<Set<String>>> getStackTracesToContexts() {
+    return stackTracesToContexts;
   }
 
-  public DecisionInfo(Set<String> options) {
-    this.decisionBranchTable = new DecisionBranchCountTable(options);
-  }
-
-  public Set<Set<String>> getContext() {
-    return context;
-  }
-
-  public DecisionBranchCountTable getDecisionBranchTable() {
-    return decisionBranchTable;
+  public Map<List<String>, DecisionBranchCountTable> getStackTracesToDecisionBranchTables() {
+    return stackTracesToDecisionBranchTables;
   }
 }

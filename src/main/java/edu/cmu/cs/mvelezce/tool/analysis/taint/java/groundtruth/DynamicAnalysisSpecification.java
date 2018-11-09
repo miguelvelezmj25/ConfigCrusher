@@ -43,7 +43,8 @@ public class DynamicAnalysisSpecification {
   }
 
   static Set<Set<String>> getContext(DecisionInfo decisionInfo) {
-    return decisionInfo.getContext();
+//    return decisionInfo.getStackTracesToContexts();
+    throw new UnsupportedOperationException("Implement");
   }
 
   private static Set<Map<String, Boolean>> getConfigsWithValuesWhereOptionIsFalse(String option,

@@ -17,10 +17,13 @@ import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
+import jdk.internal.org.objectweb.asm.tree.FrameNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
+import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
+import jdk.internal.org.objectweb.asm.tree.LineNumberNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
@@ -44,16 +47,67 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
     MethodGraph graph = this.getCFG(methodNode, classNode);
+    this.addBranchCoverageLogging(methodNode, classNode);
+    // TODO how to calculate maxs
+//    methodNode.visitMaxs(20, methodNode.maxLocals);
 
+//    this.some(methodNode, graph);
+
+//
+//    ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+//    classNode.accept(cw);
+//    ClassReader cr = new ClassReader(cw.toByteArray());
+//    ClassNode cn = new ClassNode();
+//    cr.accept(cn, 0);
+    this.addInsnsEndMainMethod(methodNode, graph);
+  }
+
+//  private void some(MethodNode methodNode, MethodGraph graph) {
+//    InsnList insnList = methodNode.instructions;
+//    MethodBlock entryBlock = graph.getEntryBlock();
+//    MethodBlock exitBlock = graph.getExitBlock();
+//
+//    for (MethodBlock block : graph.getBlocks()) {
+//      if (block == entryBlock || block == exitBlock) {
+//        continue;
+//      }
+//
+//      Set<MethodBlock> succs = block.getSuccessors();
+//
+//      if (succs.size() < 2) {
+//        continue;
+//      }
+//
+//      MethodBlock ipd = graph.getImmediatePostDominator(block);
+//
+//      for (MethodBlock succ : succs) {
+//        if (succ == ipd) {
+//          continue;
+//        }
+//
+//        List<AbstractInsnNode> succInsns = succ.getInstructions();
+//
+//        for (AbstractInsnNode insn : succInsns) {
+//          if (insn instanceof LabelNode || insn instanceof LineNumberNode
+//              || insn instanceof FrameNode) {
+//            continue;
+//          }
+//
+////          System.out.println();
+//
+//        }
+//      }
+//    }
+//  }
+
+  private void addBranchCoverageLogging(MethodNode methodNode, ClassNode classNode) {
     String packageName = Utils.getPackageName(classNode);
     String className = Utils.getClassName(classNode);
     String methodNameAndSignature = methodNode.name + methodNode.desc;
-
     InsnList insnList = methodNode.instructions;
+
     Iterator<AbstractInsnNode> insnIter = insnList.iterator();
     int decisionCount = 0;
-
-//    System.out.println(graph.toDotString(methodNode.name));
 
     while (insnIter.hasNext()) {
       AbstractInsnNode insnNode = insnIter.next();
@@ -137,11 +191,9 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
         insnList.insertBefore(insnNode, loggingInsnList);
       }
     }
-
-    this.addInsnsEndMainMethod(methodNode, graph, insnList);
   }
 
-  private void addInsnsEndMainMethod(MethodNode methodNode, MethodGraph graph, InsnList insnList) {
+  private void addInsnsEndMainMethod(MethodNode methodNode, MethodGraph graph) {
     if (methodNode.name.contains("main")) {
       MethodBlock exitBlock = graph.getExitBlock();
       Set<MethodBlock> preds = exitBlock.getPredecessors();
@@ -155,7 +207,7 @@ public class BranchCoverageInstrumenter extends BaseMethodTransformer {
 
           if (opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
             InsnList savingInstructions = this.getSavingInstructions();
-            insnList.insertBefore(insn, savingInstructions);
+            methodNode.instructions.insertBefore(insn, savingInstructions);
 
             break;
           }

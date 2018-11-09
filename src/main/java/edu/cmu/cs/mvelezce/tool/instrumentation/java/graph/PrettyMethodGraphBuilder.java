@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -18,7 +19,9 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
     private Printer printer;
 
     public PrettyMethodGraphBuilder(MethodNode methodNode, Printer printer) {
-        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder();
+//        DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder();
+        // TODO need to pass the actual name of the class
+        BaseMethodGraphBuilder builder = new CFGBuilder("class");
         this.graph = builder.build(methodNode);
         this.printer = printer;
         this.prettyGraph = new PrettyMethodGraph();
@@ -26,7 +29,7 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
 
     @Override
     public PrettyMethodGraph build(MethodNode methodNode) {
-        this.buildBlocks(this.graph, methodNode);
+        this.addBlocks(this.graph, methodNode);
         this.addInstructions(this.graph, methodNode);
         this.addEdges(this.graph, methodNode);
         this.connectEntryNode(this.graph, methodNode);
@@ -52,7 +55,7 @@ public class PrettyMethodGraphBuilder extends BaseMethodGraphBuilder {
     }
 
     @Override
-    public void buildBlocks(MethodGraph graph, MethodNode methodNode) {
+    public void addBlocks(MethodGraph graph, MethodNode methodNode) {
         for(MethodBlock block : this.graph.getBlocks()) {
             if(block == this.graph.getEntryBlock() || block == this.graph.getExitBlock()) {
                 continue;

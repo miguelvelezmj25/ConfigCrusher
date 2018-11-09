@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 import counter.com.googlecode.pngtastic.Run;
 import edu.cmu.cs.mvelezce.Example;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
@@ -107,6 +108,34 @@ public class PrettyDefaultMethodGraphBuilderTest {
         String path = BaseAdapter.USER_HOME + "/Documents/Programming/Java/Projects/performance-mapper-evaluation/instrumented/pngtastic-counter/out/production/pngtastic-counter";
         String className = DurableOutputStream.class.getCanonicalName();
         String methodName = "close";
+        ClassTransformer transformer = new DefaultClassTransformer(path);
+        ClassNode classNode = transformer.readClass(className);
+
+        MethodNode methodNode = null;
+
+        for(MethodNode method : classNode.methods) {
+            if(!method.name.equals(methodName)) {
+                continue;
+            }
+
+            methodNode = method;
+            break;
+        }
+
+        TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
+        MethodTracer tracer = classInspector.visitClass();
+        Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
+        PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
+        PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
+
+        System.out.println(prettyGraph.toDotStringVerbose(methodName));
+    }
+
+    @Test
+    public void SimpleExample1() throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
+        String path = SimpleExample1Adapter.ORIGINAL_CLASS_PATH;
+        String className = SimpleExample1Adapter.MAIN_CLASS;
+        String methodName = "main";
         ClassTransformer transformer = new DefaultClassTransformer(path);
         ClassNode classNode = transformer.readClass(className);
 

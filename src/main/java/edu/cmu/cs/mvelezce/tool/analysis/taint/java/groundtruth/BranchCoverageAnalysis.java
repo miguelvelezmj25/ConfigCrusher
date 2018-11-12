@@ -137,23 +137,22 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   }
 
   private void addContextInfo(DecisionInfo decisionInfo, Map<String, Collection> info) {
-    Map<String, List<List<String>>> stackTracesToContexts = (Map<String, List<List<String>>>) info
-        .get("stackTracesToContexts");
-    Map<List<String>, Set<Set<String>>> stacksToContexts = decisionInfo.getStackTracesToContexts();
+    Map<String, Map> stackTracesToContexts = (Map<String, Map>) info.get("stackTracesToContexts");
+    Map<List<String>, Context> stacksToContexts = decisionInfo.getStackTracesToContexts();
 
-    for (Map.Entry<String, List<List<String>>> entry : stackTracesToContexts
-        .entrySet()) {
+    for (Map.Entry<String, Map> entry : stackTracesToContexts.entrySet()) {
       List<String> stackTrace = this.getStackTrace(entry.getKey());
-      Set<Set<String>> context = this.getContext(entry.getValue());
+      Map<String, List<List<String>>> contexts = entry.getValue();
+      Context context = this.getContext(contexts.get("context"));
       stacksToContexts.put(stackTrace, context);
     }
   }
 
-  private Set<Set<String>> getContext(List<List<String>> configs) {
-    Set<Set<String>> context = new HashSet<>();
+  private Context getContext(List<List<String>> configs) {
+    Context context = new Context();
 
     for (List<String> config : configs) {
-      context.add(new HashSet<>(config));
+      context.addConfig(new HashSet<>(config));
     }
 
     return context;
@@ -309,14 +308,13 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   private void updateContext(DecisionInfo decisionInfo, List<String> stackTrace,
       Set<String> config) {
     this.addContext(decisionInfo, stackTrace);
-    Set<Set<String>> callSiteContext = decisionInfo.getStackTracesToContexts().get(stackTrace);
-    callSiteContext.add(config);
+    Context callSiteContext = decisionInfo.getStackTracesToContexts().get(stackTrace);
+    callSiteContext.addConfig(config);
   }
 
   private void addContext(DecisionInfo decisionInfo, List<String> stackTrace) {
-    Map<List<String>, Set<Set<String>>> stackTracesToContexts = decisionInfo
-        .getStackTracesToContexts();
-    stackTracesToContexts.putIfAbsent(stackTrace, new HashSet<>());
+    Map<List<String>, Context> stackTracesToContexts = decisionInfo.getStackTracesToContexts();
+    stackTracesToContexts.putIfAbsent(stackTrace, new Context());
   }
 
   private void addSinks(Set<StackTraceDecision> stackTraceDecisions) {

@@ -2,7 +2,6 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,10 +41,6 @@ public class DynamicAnalysisSpecification {
 
     return minimalOptionSet;
   }
-
-//  static Map<List<String>, Context> getTracesToContexts(DecisionInfo decisionInfo) {
-//    return decisionInfo.getStackTracesToContexts();
-//  }
 
   private static Set<Map<String, Boolean>> getConfigsWithValuesWhereOptionIsFalse(String option,
       Set<Map<String, Boolean>> configsWithValues) {

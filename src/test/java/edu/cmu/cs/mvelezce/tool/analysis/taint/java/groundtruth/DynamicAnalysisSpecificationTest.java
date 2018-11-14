@@ -78,7 +78,7 @@ public class DynamicAnalysisSpecificationTest {
     putOrAddOptions(expectedDecisionsToTracesAndOptions, MAIN_STRINGS_DECISION_1, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
-    tracesToOptions.put(getTrace("main:21"), setA());
+    tracesToOptions.put(getTrace("main:20"), setA());
     putOrAddOptions(expectedDecisionsToTracesAndOptions, MAIN_STRINGS_DECISION_2, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
@@ -98,7 +98,7 @@ public class DynamicAnalysisSpecificationTest {
         tracesToContexts);
 
     tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:21"), getContext(programOptions));
+    tracesToContexts.put(getTrace("main:20"), getContext(programOptions));
     putOrAddContext(expectedDecisionsToTracesAndContexts, MAIN_STRINGS_DECISION_2,
         tracesToContexts);
 
@@ -222,35 +222,35 @@ public class DynamicAnalysisSpecificationTest {
         tracesToContexts);
 
     tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("foo:86", "main:51"), getContext(setA(), setAB()));
+    tracesToContexts.put(getTrace("foo:87", "main:51"), getContext(setA(), setAB()));
     putOrAddContext(expectedDecisionsToTracesAndContexts, FOO_DECISION_1, tracesToContexts);
 
     tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("foo:86", "main:55"), getContext(setB(), setAB()));
+    tracesToContexts.put(getTrace("foo:87", "main:55"), getContext(setB(), setAB()));
     putOrAddContext(expectedDecisionsToTracesAndContexts, FOO_DECISION_1, tracesToContexts);
 
     tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("moo:92", "main:59"), getContext(setA(), setAB()));
+    tracesToContexts.put(getTrace("moo:93", "main:59"), getContext(setA(), setAB()));
     putOrAddContext(expectedDecisionsToTracesAndContexts, MOO_Z_DECISION_1, tracesToContexts);
 
     tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("moo:92", "main:63"), getContext(setB(), setAB()));
+    tracesToContexts.put(getTrace("moo:93", "main:63"), getContext(setB(), setAB()));
     putOrAddContext(expectedDecisionsToTracesAndContexts, MOO_Z_DECISION_1, tracesToContexts);
 
     tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("bar:98", "main:67"), getContext(setA(), setAB()));
+    tracesToContexts.put(getTrace("bar:99", "main:67"), getContext(setA(), setAB()));
     putOrAddContext(expectedDecisionsToTracesAndContexts, BAR_Z_DECISION_1, tracesToContexts);
 
     tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("bar:98", "main:71"), getContext(setB(), setAB()));
+    tracesToContexts.put(getTrace("bar:99", "main:71"), getContext(setB(), setAB()));
     putOrAddContext(expectedDecisionsToTracesAndContexts, BAR_Z_DECISION_1, tracesToContexts);
 
     tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("cow:104", "main:75"), getContext(setA(), setAB()));
+    tracesToContexts.put(getTrace("cow:105", "main:75"), getContext(setA(), setAB()));
     putOrAddContext(expectedDecisionsToTracesAndContexts, COW_Z_DECISION_1, tracesToContexts);
 
     tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("cow:104", "main:79"), getContext(setB(), setAB()));
+    tracesToContexts.put(getTrace("cow:105", "main:79"), getContext(setB(), setAB()));
     putOrAddContext(expectedDecisionsToTracesAndContexts, COW_Z_DECISION_1, tracesToContexts);
 
     return expectedDecisionsToTracesAndContexts;
@@ -324,35 +324,35 @@ public class DynamicAnalysisSpecificationTest {
     putOrAddOptions(expectedDecisionsToTracesAndOptions, MAIN_STRINGS_DECISION_16, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
-    tracesToOptions.put(getTrace("foo:86", "main:51"), emptySet());
+    tracesToOptions.put(getTrace("foo:87", "main:51"), emptySet());
     putOrAddOptions(expectedDecisionsToTracesAndOptions, FOO_DECISION_1, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
-    tracesToOptions.put(getTrace("foo:86", "main:55"), emptySet());
+    tracesToOptions.put(getTrace("foo:87", "main:55"), emptySet());
     putOrAddOptions(expectedDecisionsToTracesAndOptions, FOO_DECISION_1, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
-    tracesToOptions.put(getTrace("moo:92", "main:59"), emptySet());
+    tracesToOptions.put(getTrace("moo:93", "main:59"), emptySet());
     putOrAddOptions(expectedDecisionsToTracesAndOptions, MOO_Z_DECISION_1, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
-    tracesToOptions.put(getTrace("moo:92", "main:63"), emptySet());
+    tracesToOptions.put(getTrace("moo:93", "main:63"), emptySet());
     putOrAddOptions(expectedDecisionsToTracesAndOptions, MOO_Z_DECISION_1, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
-    tracesToOptions.put(getTrace("bar:98", "main:67"), emptySet());
+    tracesToOptions.put(getTrace("bar:99", "main:67"), emptySet());
     putOrAddOptions(expectedDecisionsToTracesAndOptions, BAR_Z_DECISION_1, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
-    tracesToOptions.put(getTrace("bar:98", "main:71"), emptySet());
+    tracesToOptions.put(getTrace("bar:99", "main:71"), emptySet());
     putOrAddOptions(expectedDecisionsToTracesAndOptions, BAR_Z_DECISION_1, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
-    tracesToOptions.put(getTrace("cow:104", "main:75"), setB());
+    tracesToOptions.put(getTrace("cow:105", "main:75"), setB());
     putOrAddOptions(expectedDecisionsToTracesAndOptions, COW_Z_DECISION_1, tracesToOptions);
 
     tracesToOptions = new HashMap<>();
-    tracesToOptions.put(getTrace("cow:104", "main:79"), setA());
+    tracesToOptions.put(getTrace("cow:105", "main:79"), setA());
     putOrAddOptions(expectedDecisionsToTracesAndOptions, COW_Z_DECISION_1, tracesToOptions);
 
     return expectedDecisionsToTracesAndOptions;

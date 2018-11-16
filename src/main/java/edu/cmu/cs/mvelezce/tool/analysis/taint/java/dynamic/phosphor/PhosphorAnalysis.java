@@ -10,8 +10,12 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
+import edu.columbia.cs.psl.phosphor.runtime.Taint;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -121,17 +125,17 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
 
       // ST := run_taint_analysis(P’, c)
       this.runPhosphorAnalysis(config);
-      Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults = this
+      Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaintsResults = this
           .analyzePhosphorResults();
 
-      // CFA := get_constraints_from_analysis(ST)
-      Set<Constraint> constraintsFromAnalysis = this
-          .getConstraintsFromAnalysis(sinksToTaintsResults, config);
-
-      // CFA.removeAll(EC)
-      PhosphorAnalysis.removeAllSubConstraints(constraintsFromAnalysis, exploredConstraints);
-      // CE.addAll(CC)
-      constraintsToExplore.addAll(constraintsFromAnalysis);
+//      // CFA := get_constraints_from_analysis(ST)
+//      Set<Constraint> constraintsFromAnalysis = this
+//          .getConstraintsFromAnalysis(sinksToTaintsResults, config);
+//
+//      // CFA.removeAll(EC)
+//      PhosphorAnalysis.removeAllSubConstraints(constraintsFromAnalysis, exploredConstraints);
+//      // CE.addAll(CC)
+//      constraintsToExplore.addAll(constraintsFromAnalysis);
 
       count++;
     }
@@ -199,14 +203,26 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
         commandList.add("./examples.sh");
         adapter = new PhosphorExample3Adapter();
         break;
+      case SimpleExample1Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new SimpleExample1Adapter();
+        break;
+      case Example1Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new Example1Adapter();
+        break;
+      case MultiFacetsAdapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new MultiFacetsAdapter();
+        break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);
     }
 
     String[] configArgs = adapter.configurationAsMainArguments(config);
     List<String> configList = Arrays.asList(configArgs);
-    commandList.addAll(configList);
     commandList.add(adapter.getMainClass());
+    commandList.addAll(configList);
 
     return commandList;
   }
@@ -219,66 +235,171 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
    * Helper method for running the phosphor analysis. This method processes the results of the
    * analysis and returns the output specified in the algorithm.
    */
-  protected Pair<Map<String, Set<String>>, Map<String, Set<String>>> analyzePhosphorResults()
+  protected Map<String, Map<Set<String>, Set<Set<String>>>> analyzePhosphorResults()
       throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
     Collection<File> serializedFiles = this.getSerializedFiles(dir);
 
-    if (serializedFiles.size() != 2) {
-      throw new RuntimeException("The directory " + dir + " does not have 2 files.");
+    if (serializedFiles.size() != 1) {
+      throw new RuntimeException("The directory " + dir + " must have 1 file.");
     }
 
-    return this.readPhosphorTaintResults(serializedFiles);
+    return this.readPhosphorTaintResults(serializedFiles.iterator().next());
   }
 
-  private Pair<Map<String, Set<String>>, Map<String, Set<String>>> readPhosphorTaintResults(
-      Collection<File> serializedFiles)
+  private Map<String, Map<Set<String>, Set<Set<String>>>> readPhosphorTaintResults(
+      File serializedFile)
       throws IOException {
-    Map<String, Set<TaintLabel>> sinksToTaintLabelsFromTaints = new HashMap<>();
-    Map<String, Set<TaintLabel>> sinksToTaintLabelsFromContext = new HashMap<>();
+    Map<String, Map<Taint, Set<Set<Taint>>>> sinksToData = this.deserialize(serializedFile);
+    Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> sinksToLabelData = this
+        .getSinksToLabelData(sinksToData);
+    return this.changeLabelsToTaints(sinksToLabelData);
 
-    for (File file : serializedFiles) {
-      if (file.getName().contains("taints")) {
-        sinksToTaintLabelsFromTaints = this.deserialize(file);
-      }
-      else {
-        sinksToTaintLabelsFromContext = this.deserialize(file);
-      }
-    }
-
-    Map<String, Set<String>> sinksToTaintsFromTaints = this
-        .changeTaintLabelsToTaints(sinksToTaintLabelsFromTaints);
-    Map<String, Set<String>> sinksToTaintsFromContext = this
-        .changeTaintLabelsToTaints(sinksToTaintLabelsFromContext);
-
-    return Pair.of(sinksToTaintsFromTaints, sinksToTaintsFromContext);
+//    Map<String, Set<TaintLabel>> sinksToTaintLabelsFromTaints = new HashMap<>();
+//    Map<String, Set<TaintLabel>> sinksToTaintLabelsFromContext = new HashMap<>();
+//
+//    for (File file : serializedFiles) {
+//      if (file.getName().contains("taints")) {
+//        sinksToTaintLabelsFromTaints = this.deserialize(file);
+//      }
+//      else {
+//        sinksToTaintLabelsFromContext = this.deserialize(file);
+//      }
+//    }
+//
+//    Map<String, Set<String>> sinksToTaintsFromTaints = this
+//        .changeTaintLabelsToTaints(sinksToTaintLabelsFromTaints);
+//    Map<String, Set<String>> sinksToTaintsFromContext = this
+//        .changeTaintLabelsToTaints(sinksToTaintLabelsFromContext);
+//
+//    return Pair.of(sinksToTaintsFromTaints, sinksToTaintsFromContext);
   }
 
-  private Map<String, Set<String>> changeTaintLabelsToTaints(
-      Map<String, Set<TaintLabel>> sinksToTaintLabels) {
-    Map<String, Set<String>> sinksToTaints = new HashMap<>();
+  private Map<String, Map<Set<String>, Set<Set<String>>>> changeLabelsToTaints(
+      Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> sinksToLabelData) {
+    Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints = new HashMap<>();
 
-    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaintLabels.entrySet()) {
-      Set<String> taints = new HashSet<>();
-
-      for (TaintLabel taintLabel : entry.getValue()) {
-        taints.add(taintLabel.getSource());
-      }
-
-      sinksToTaints.put(entry.getKey(), taints);
+    for (Map.Entry<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> entry : sinksToLabelData
+        .entrySet()) {
+      Map<Set<String>, Set<Set<String>>> taintData = this
+          .transformDataLabelsToTaints(entry.getValue());
+      sinksToTaints.put(entry.getKey(), taintData);
     }
 
     return sinksToTaints;
   }
 
+  private Map<Set<String>, Set<Set<String>>> transformDataLabelsToTaints(
+      Map<Set<TaintLabel>, Set<Set<TaintLabel>>> contextsToTaintLabels) {
+    Map<Set<String>, Set<Set<String>>> contextsToTaints = new HashMap<>();
+
+    for (Map.Entry<Set<TaintLabel>, Set<Set<TaintLabel>>> entry : contextsToTaintLabels
+        .entrySet()) {
+      Set<String> context = this.transformLabelsToTaints(entry.getKey());
+      Set<Set<String>> taintSets = new HashSet<>();
+
+      for (Set<TaintLabel> LabelSet : entry.getValue()) {
+        Set<String> taintSet = this.transformLabelsToTaints(LabelSet);
+        taintSets.add(taintSet);
+      }
+
+      contextsToTaints.put(context, taintSets);
+    }
+
+    return contextsToTaints;
+  }
+
+  private Set<String> transformLabelsToTaints(Set<TaintLabel> labels) {
+    Set<String> strings = new HashSet<>();
+
+    for (TaintLabel taintLabel : labels) {
+      strings.add(taintLabel.getSource());
+    }
+
+    return strings;
+  }
+
+  private Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> getSinksToLabelData(
+      Map<String, Map<Taint, Set<Set<Taint>>>> sinksToData) {
+    Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> sinksToLabelData = new HashMap<>();
+
+    for (Map.Entry<String, Map<Taint, Set<Set<Taint>>>> entry : sinksToData.entrySet()) {
+      Map<Taint, Set<Set<Taint>>> sinkData = entry.getValue();
+      Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityContextsToLabels = this
+          .getVariabilityContextsToLabels(sinkData);
+      sinksToLabelData.put(entry.getKey(), variabilityContextsToLabels);
+    }
+
+    return sinksToLabelData;
+  }
+
+  private Map<Set<TaintLabel>, Set<Set<TaintLabel>>> getVariabilityContextsToLabels(
+      Map<Taint, Set<Set<Taint>>> sinkData) {
+    Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityContextsToLabels = new HashMap<>();
+
+    for (Map.Entry<Taint, Set<Set<Taint>>> entry : sinkData.entrySet()) {
+      Taint variabilityContextTaint = entry.getKey();
+      Set<TaintLabel> variabilityContext = this.getVariabilityContext(variabilityContextTaint);
+
+      Set<Set<Taint>> executionTaintsSet = entry.getValue();
+      Set<Set<TaintLabel>> executionLabelSet = this.getExecutionLabelSet(executionTaintsSet);
+
+      variabilityContextsToLabels.put(variabilityContext, executionLabelSet);
+    }
+
+    return variabilityContextsToLabels;
+  }
+
+  private Set<Set<TaintLabel>> getExecutionLabelSet(Set<Set<Taint>> executionTaintsSet) {
+    Set<Set<TaintLabel>> executionLabelSet = new HashSet<>();
+
+    for (Set<Taint> taintSet : executionTaintsSet) {
+      Set<TaintLabel> executionLabels = new HashSet<>();
+
+      for (Taint sinkTaint : taintSet) {
+        Set<TaintLabel> labels = sinkTaint.getLabels();
+        executionLabels.addAll(labels);
+      }
+
+      executionLabelSet.add(executionLabels);
+    }
+
+    return executionLabelSet;
+  }
+
+  private Set<TaintLabel> getVariabilityContext(Taint variabilityContext) {
+    if (variabilityContext == null) {
+      return new HashSet<>();
+    }
+
+    return variabilityContext.getLabels();
+  }
+
+//  private Map<String, Set<String>> changeTaintLabelsToTaints(
+//      Map<String, Set<TaintLabel>> sinksToTaintLabels) {
+//    Map<String, Set<String>> sinksToTaints = new HashMap<>();
+//
+//    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaintLabels.entrySet()) {
+//      Set<String> taints = new HashSet<>();
+//
+//      for (TaintLabel taintLabel : entry.getValue()) {
+//        taints.add(taintLabel.getSource());
+//      }
+//
+//      sinksToTaints.put(entry.getKey(), taints);
+//    }
+//
+//    return sinksToTaints;
+//  }
+
   // TODO check catching and throwing
-  private Map<String, Set<TaintLabel>> deserialize(File file) throws IOException {
+  private Map<String, Map<Taint, Set<Set<Taint>>>> deserialize(File file) throws IOException {
     FileInputStream fis = new FileInputStream(file);
     ObjectInputStream ois = new ObjectInputStream(fis);
-    Map<String, Set<TaintLabel>> sinksToTaints;
+    Map<String, Map<Taint, Set<Set<Taint>>>> sinksToData;
 
     try {
-      sinksToTaints = (Map<String, Set<TaintLabel>>) ois.readObject();
+      sinksToData = (Map<String, Map<Taint, Set<Set<Taint>>>>) ois.readObject();
     }
     catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
@@ -287,7 +408,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
     ois.close();
     fis.close();
 
-    return sinksToTaints;
+    return sinksToData;
   }
 
   private Collection<File> getSerializedFiles(String dir) {

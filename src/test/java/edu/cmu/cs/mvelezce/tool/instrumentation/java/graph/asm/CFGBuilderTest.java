@@ -2,6 +2,8 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.BranchCoverageInstrumenter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifand.IfAndAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifor.IfOrAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
@@ -20,7 +22,33 @@ public class CFGBuilderTest {
   public void RunningExample()
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
     Set<ClassNode> classNodes = this.getClassNodes(DynamicRunningExampleAdapter.ORIGINAL_CLASS_PATH);
-    ClassNode classNode = this.getRunningExampleClassNode(classNodes);
+    ClassNode classNode = this.getClassNode(classNodes, DynamicRunningExampleAdapter.PROGRAM_NAME);
+    MethodNode methodNode = this.getMainMethod(classNode);
+    String owner = classNode.name;
+
+    MethodGraphBuilder cfgBuilder = new CFGBuilder(owner);
+    MethodGraph graph = cfgBuilder.build(methodNode);
+    System.out.println(graph.toDotString(Utils.getClassName(classNode)));
+  }
+
+  @Test
+  public void IfAnd()
+      throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
+    Set<ClassNode> classNodes = this.getClassNodes(IfAndAdapter.ORIGINAL_CLASS_PATH);
+    ClassNode classNode = this.getClassNode(classNodes, IfAndAdapter.PROGRAM_NAME);
+    MethodNode methodNode = this.getMainMethod(classNode);
+    String owner = classNode.name;
+
+    MethodGraphBuilder cfgBuilder = new CFGBuilder(owner);
+    MethodGraph graph = cfgBuilder.build(methodNode);
+    System.out.println(graph.toDotString(Utils.getClassName(classNode)));
+  }
+
+  @Test
+  public void IfOr()
+      throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
+    Set<ClassNode> classNodes = this.getClassNodes(IfOrAdapter.ORIGINAL_CLASS_PATH);
+    ClassNode classNode = this.getClassNode(classNodes, IfOrAdapter.PROGRAM_NAME);
     MethodNode methodNode = this.getMainMethod(classNode);
     String owner = classNode.name;
 
@@ -41,9 +69,9 @@ public class CFGBuilderTest {
     throw new RuntimeException("Could not find the main method");
   }
 
-  private ClassNode getRunningExampleClassNode(Set<ClassNode> classNodes) {
+  private ClassNode getClassNode(Set<ClassNode> classNodes, String programName) {
     for (ClassNode classNode : classNodes) {
-      if (classNode.name.contains("RunningExample")) {
+      if (classNode.name.contains(programName)) {
         return classNode;
       }
     }

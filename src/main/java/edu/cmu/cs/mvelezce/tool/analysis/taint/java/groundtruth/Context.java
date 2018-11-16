@@ -11,7 +11,7 @@ public class Context implements Serializable {
 
   private final Set<Set<String>> context = new HashSet<>();
 
-  void addConfig(Set<String> config) {
+  public void addConfig(Set<String> config) {
     this.context.add(config);
   }
 

@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorEx
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.junit.Test;
 
@@ -24,7 +25,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -38,7 +39,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -52,7 +53,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -66,7 +67,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -80,7 +81,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -94,7 +95,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     analysis.analyze(args);
   }
 }

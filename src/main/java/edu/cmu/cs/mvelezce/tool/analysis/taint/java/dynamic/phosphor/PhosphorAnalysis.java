@@ -33,7 +33,8 @@ import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
+// TODO the generics might not be used correctly
+public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
 
   private static final String PHOSPHOR_OUTPUT_DIR =
       BaseAdapter.USER_HOME
@@ -235,7 +236,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
    * Helper method for running the phosphor analysis. This method processes the results of the
    * analysis and returns the output specified in the algorithm.
    */
-  protected Map<String, Map<Set<String>, Set<Set<String>>>> analyzePhosphorResults()
+  Map<String, Map<Set<String>, Set<Set<String>>>> analyzePhosphorResults()
       throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
     Collection<File> serializedFiles = this.getSerializedFiles(dir);

@@ -6,20 +6,20 @@ import java.util.Set;
 
 public class SinkData {
 
-  private final Map<VariabilityContext, Set<Set<String>>> sinkData = new HashMap<>();
+  private final Map<ExecVarCtx, Set<Set<String>>> sinkData = new HashMap<>();
 
   public SinkData() {
   }
 
-  void putIfAbsent(VariabilityContext variabilityContext, Set<Set<String>> executionTaints) {
-    this.sinkData.putIfAbsent(variabilityContext, executionTaints);
+  void putIfAbsent(ExecVarCtx execVarCtx, Set<Set<String>> executionTaints) {
+    this.sinkData.putIfAbsent(execVarCtx, executionTaints);
   }
 
-  Set<Set<String>> getExecutionTaints(VariabilityContext variabilityContext) {
-    return this.sinkData.get(variabilityContext);
+  Set<Set<String>> getExecTaints(ExecVarCtx execVarCtx) {
+    return this.sinkData.get(execVarCtx);
   }
 
-  public Map<VariabilityContext, Set<Set<String>>> getSinkData() {
+  public Map<ExecVarCtx, Set<Set<String>>> getSinkData() {
     return sinkData;
   }
 }

@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class VariabilityContext extends PartialConfig {
+public class ExecVarCtx extends PartialConfig {
 
   @Override
   public String toString() {

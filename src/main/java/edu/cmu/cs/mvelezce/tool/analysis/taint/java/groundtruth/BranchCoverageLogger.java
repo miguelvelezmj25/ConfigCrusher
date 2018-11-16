@@ -208,7 +208,7 @@ public class BranchCoverageLogger {
   }
 
   private static String[] getStackTrace() {
-    int stackTraceOffset = 4;
+    int stackTraceOffset = 5;
     StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
     String[] stackTrace = new String[stackTraceElements.length - stackTraceOffset];
 

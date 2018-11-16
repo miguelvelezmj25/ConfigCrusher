@@ -1,11 +1,16 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -116,6 +121,75 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
     for (String option : sinkVarCtx) {
       execVarCtx.addEntry(option, config.contains(option));
+    }
+
+    return execVarCtx;
+  }
+
+  @Override
+  public Map<JavaRegion, SinkData> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    List<RegionToInfo> results = mapper
+        .readValue(file, new TypeReference<List<RegionToInfo>>() {
+        });
+
+    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
+
+    for (RegionToInfo<SinkData> result : results) {
+      Map<String, Map> info = (Map<String, Map>) result.getInfo();
+      Map<String, List> sinkDataEntries = info.get("sinkData");
+
+      SinkData sinkData = new SinkData();
+
+      for (Map.Entry<String, List> entry : sinkDataEntries.entrySet()) {
+        String execVarCtxStr = entry.getKey();
+        ExecVarCtx execVarCtx = this.getExecVarCtx(execVarCtxStr);
+        List<List<String>> execTaintsList = entry.getValue();
+        Set<Set<String>> executionTaints = this.getExecTaints(execTaintsList);
+
+        sinkData.putIfAbsent(execVarCtx, executionTaints);
+      }
+
+      regionsToConstraints.put(result.getRegion(), sinkData);
+    }
+
+    return regionsToConstraints;
+  }
+
+  private Set<Set<String>> getExecTaints(List<List<String>> execTaintsList) {
+    if (execTaintsList.size() > 1) {
+      throw new UnsupportedOperationException("Implement");
+    }
+
+    Set<Set<String>> execTaints = new HashSet<>();
+
+    for (List<String> taints : execTaintsList) {
+      Set<String> options = new HashSet<>(taints);
+      execTaints.add(options);
+    }
+
+    return execTaints;
+  }
+
+  private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
+    execVarCtxStr = execVarCtxStr.replace("[[", "");
+    execVarCtxStr = execVarCtxStr.replace("]]", "");
+    String[] entries = execVarCtxStr.split("^");
+
+    ExecVarCtx execVarCtx = new ExecVarCtx();
+
+    if (!(entries.length == 1 && "true".equals(entries[0]))) {
+      if (entries.length > 1) {
+        throw new UnsupportedOperationException("Implement");
+      }
+
+      for (String entry : entries) {
+        String notStr = "!";
+        entry = entry.trim();
+        boolean value = !entry.contains(notStr);
+        entry = entry.replace(notStr, "");
+        execVarCtx.addEntry(entry, value);
+      }
     }
 
     return execVarCtx;

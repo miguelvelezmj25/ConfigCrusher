@@ -8,9 +8,6 @@ public class SinkData {
 
   private final Map<ExecVarCtx, Set<Set<String>>> sinkData = new HashMap<>();
 
-  public SinkData() {
-  }
-
   void putIfAbsent(ExecVarCtx execVarCtx, Set<Set<String>> executionTaints) {
     this.sinkData.putIfAbsent(execVarCtx, executionTaints);
   }
@@ -21,5 +18,24 @@ public class SinkData {
 
   public Map<ExecVarCtx, Set<Set<String>>> getSinkData() {
     return sinkData;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    SinkData sinkData1 = (SinkData) o;
+
+    return sinkData.equals(sinkData1.sinkData);
+  }
+
+  @Override
+  public int hashCode() {
+    return sinkData.hashCode();
   }
 }

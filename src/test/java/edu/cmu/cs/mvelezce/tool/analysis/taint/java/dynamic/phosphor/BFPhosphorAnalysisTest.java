@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
+import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class BFPhosphorAnalysisTest {
@@ -26,6 +28,23 @@ public class BFPhosphorAnalysisTest {
     args[1] = "-saveres";
 
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void dynamicRunningExample_forRead() throws IOException, InterruptedException {
+    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
+
+    // Program arguments
+    String[] args = new String[0];
+
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     analysis.analyze(args);
   }
 
@@ -40,7 +59,13 @@ public class BFPhosphorAnalysisTest {
     args[1] = "-saveres";
 
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    analysis.analyze(args);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -54,7 +79,13 @@ public class BFPhosphorAnalysisTest {
     args[1] = "-saveres";
 
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    analysis.analyze(args);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -68,7 +99,13 @@ public class BFPhosphorAnalysisTest {
     args[1] = "-saveres";
 
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    analysis.analyze(args);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -82,7 +119,13 @@ public class BFPhosphorAnalysisTest {
     args[1] = "-saveres";
 
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    analysis.analyze(args);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 
   @Test
@@ -96,6 +139,12 @@ public class BFPhosphorAnalysisTest {
     args[1] = "-saveres";
 
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    analysis.analyze(args);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 }

@@ -9,6 +9,10 @@ public class PartialConfig {
   private Map<String, Boolean> partialConfig = new HashMap<>();
 
   void addEntry(String option, boolean value) {
+    if(!this.partialConfig.isEmpty()) {
+      throw new UnsupportedOperationException("Implement");
+    }
+
     this.partialConfig.put(option, value);
   }
 

@@ -29,9 +29,10 @@ public class ExecVarCtx extends PartialConfig {
         stringBuilder.append(entry.getKey());
 
         if(partialConfigIter.hasNext()) {
-          stringBuilder.append(" ");
-          stringBuilder.append("^");
-          stringBuilder.append(" ");
+          throw new UnsupportedOperationException("Implement");
+//          stringBuilder.append(" ");
+//          stringBuilder.append("^");
+//          stringBuilder.append(" ");
         }
       }
     }

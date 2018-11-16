@@ -166,7 +166,11 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     List<String> list = new ArrayList<>();
 
     for (String element : elements) {
-      list.add(element.trim());
+      element = element.trim();
+
+      if(!element.isEmpty()) {
+        list.add(element);
+      }
     }
 
     return list;

@@ -6,18 +6,18 @@ import java.util.Set;
 
 public class SinkData {
 
-  private final Map<ExecVarCtx, Set<Set<String>>> sinkData = new HashMap<>();
+  private final Map<ExecVarCtx, Set<Set<String>>> data = new HashMap<>();
 
   void putIfAbsent(ExecVarCtx execVarCtx, Set<Set<String>> executionTaints) {
-    this.sinkData.putIfAbsent(execVarCtx, executionTaints);
+    this.data.putIfAbsent(execVarCtx, executionTaints);
   }
 
   Set<Set<String>> getExecTaints(ExecVarCtx execVarCtx) {
-    return this.sinkData.get(execVarCtx);
+    return this.data.get(execVarCtx);
   }
 
-  public Map<ExecVarCtx, Set<Set<String>>> getSinkData() {
-    return sinkData;
+  public Map<ExecVarCtx, Set<Set<String>>> getData() {
+    return data;
   }
 
   @Override
@@ -31,11 +31,11 @@ public class SinkData {
 
     SinkData sinkData1 = (SinkData) o;
 
-    return sinkData.equals(sinkData1.sinkData);
+    return data.equals(sinkData1.data);
   }
 
   @Override
   public int hashCode() {
-    return sinkData.hashCode();
+    return data.hashCode();
   }
 }

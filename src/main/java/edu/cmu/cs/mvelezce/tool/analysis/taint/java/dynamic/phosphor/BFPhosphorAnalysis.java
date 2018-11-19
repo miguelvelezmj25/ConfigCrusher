@@ -72,7 +72,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     for (Map.Entry<String, SinkData> entry : this.sinksToData.entrySet()) {
       SinkData v = entry.getValue();
 
-      for (Map.Entry<ExecVarCtx, Set<Set<String>>> x : v.getSinkData().entrySet()) {
+      for (Map.Entry<ExecVarCtx, Set<Set<String>>> x : v.getData().entrySet()) {
         for (Set<String> s : x.getValue()) {
           System.out.println(entry.getKey() + " --> " + x.getKey() + " --> " + s);
         }
@@ -138,7 +138,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
     for (RegionToInfo<SinkData> result : results) {
       Map<String, Map> info = (Map<String, Map>) result.getInfo();
-      Map<String, List> sinkDataEntries = info.get("sinkData");
+      Map<String, List> sinkDataEntries = info.get("data");
 
       SinkData sinkData = new SinkData();
 

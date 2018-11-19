@@ -358,6 +358,10 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
       Set<TaintLabel> executionLabels = new HashSet<>();
 
       for (Taint sinkTaint : taintSet) {
+        if(sinkTaint == null) {
+          continue;
+        }
+
         Set<TaintLabel> labels = sinkTaint.getLabels();
         executionLabels.addAll(labels);
       }

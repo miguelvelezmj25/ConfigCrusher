@@ -15,6 +15,7 @@ public class Context implements Serializable {
     this.context.add(config);
   }
 
+  // TODO change method name to getConfigs
   public Set<Set<String>> getContext() {
     return context;
   }

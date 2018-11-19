@@ -6,7 +6,6 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.Dynam
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.IOException;
 import java.util.HashSet;

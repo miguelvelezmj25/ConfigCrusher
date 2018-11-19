@@ -35,7 +35,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
   private final Map<String, DecisionInfo> sinksToDecisionInfos = new HashMap<>();
 
-  BranchCoverageAnalysis(String programName) {
+  public BranchCoverageAnalysis(String programName) {
     this(programName, new HashSet<>());
   }
 

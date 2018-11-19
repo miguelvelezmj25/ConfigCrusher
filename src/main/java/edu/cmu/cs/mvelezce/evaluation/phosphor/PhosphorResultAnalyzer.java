@@ -35,28 +35,14 @@ public class PhosphorResultAnalyzer {
   void analyze() throws IOException, InterruptedException {
     Map<JavaRegion, DecisionInfo> dynamicSpecRes = this.readDynamicSpecificationResults();
     Map<JavaRegion, SinkData> bfPhosphorRes = this.readBFPhosphorResults();
-    Set<JavaRegion> specRegionsAnalyzed = new HashSet<>();
+    Set<JavaRegion> specRegionsAnalyzed = this.compareSpecToPhosphor(dynamicSpecRes, bfPhosphorRes);
+    this.checkMissingBFRegions(bfPhosphorRes, specRegionsAnalyzed);
+  }
 
-    for (Map.Entry<JavaRegion, DecisionInfo> dynamicSpec : dynamicSpecRes.entrySet()) {
-      JavaRegion specRegion = dynamicSpec.getKey();
-      specRegionsAnalyzed.add(specRegion);
-
-      System.out.println("Region: " + specRegion);
-
-      SinkData bfSinkData = bfPhosphorRes.get(specRegion);
-
-      if (bfSinkData == null) {
-        System.out.println("Missing from bf");
-      }
-      else {
-        this.compareRegions(dynamicSpec.getValue(), bfSinkData);
-      }
-
-      System.out.println();
-    }
-
-    for(JavaRegion bfAnalyzedRegion : bfPhosphorRes.keySet()) {
-      if(!specRegionsAnalyzed.contains(bfAnalyzedRegion)) {
+  private void checkMissingBFRegions(Map<JavaRegion, SinkData> bfPhosphorRes,
+      Set<JavaRegion> specRegionsAnalyzed) {
+    for (JavaRegion bfAnalyzedRegion : bfPhosphorRes.keySet()) {
+      if (!specRegionsAnalyzed.contains(bfAnalyzedRegion)) {
         System.out.println(bfAnalyzedRegion);
         System.out.println("Missing from spec");
       }
@@ -64,22 +50,65 @@ public class PhosphorResultAnalyzer {
     }
   }
 
-  private void compareRegions(DecisionInfo specDecisionInfo, SinkData bfSinkData) {
-    Map<List<String>, Context> tracesToContexts = specDecisionInfo.getStackTracesToContexts();
-    Map<ExecVarCtx, Set<Set<String>>> data = bfSinkData.getData();
-    this.compareCtxs(tracesToContexts.values(), data.keySet());
-    this.compareOptions(specDecisionInfo, data);
+  private Set<JavaRegion> compareSpecToPhosphor(Map<JavaRegion, DecisionInfo> dynamicSpecRes,
+      Map<JavaRegion, SinkData> bfPhosphorRes) {
+    Set<JavaRegion> specAnalyzedRegions = new HashSet<>();
+
+    for (Map.Entry<JavaRegion, DecisionInfo> dynamicSpec : dynamicSpecRes.entrySet()) {
+      JavaRegion specRegion = dynamicSpec.getKey();
+      specAnalyzedRegions.add(specRegion);
+
+      SinkData bfSinkData = bfPhosphorRes.get(specRegion);
+      StringBuilder errors = new StringBuilder();
+
+      if (bfSinkData == null) {
+        errors.append("Missing from bf");
+      }
+      else {
+        errors.append(this.compareRegions(dynamicSpec.getValue(), bfSinkData));
+      }
+
+      if (errors.length() > 0) {
+        System.out.println("Region: " + specRegion);
+        System.out.println(errors);
+        System.out.println();
+      }
+    }
+
+    return specAnalyzedRegions;
   }
 
-  private void compareOptions(DecisionInfo specInfo, Map<ExecVarCtx, Set<Set<String>>> bfData) {
+  private String compareRegions(DecisionInfo specDecisionInfo, SinkData bfSinkData) {
+    Map<List<String>, Context> tracesToContexts = specDecisionInfo.getStackTracesToContexts();
+    Map<ExecVarCtx, Set<Set<String>>> data = bfSinkData.getData();
+
+    StringBuilder errors = new StringBuilder();
+    String ctxErrors = this.compareCtxs(tracesToContexts.values(), data.keySet());
+    errors.append(ctxErrors);
+    String optionsErrors = this.compareOptions(specDecisionInfo, data);
+    errors.append(optionsErrors);
+
+    return errors.toString();
+  }
+
+  private String compareOptions(DecisionInfo specInfo, Map<ExecVarCtx, Set<Set<String>>> bfData) {
     Map<Expression<String>, Set<Set<String>>> specCtxToOptions = this.getCtxToOptions(specInfo);
     Map<Expression<String>, Set<Set<String>>> bfCtxToOptions = this.getCtxToOptions(bfData);
 
+    StringBuilder errors = new StringBuilder();
+
     if (!specCtxToOptions.equals(bfCtxToOptions)) {
-      System.out.println("WARNING: The options are different");
-      System.out.println("Spec: " + specCtxToOptions);
-      System.out.println("Bf: " + bfCtxToOptions);
+      errors.append("WARNING: The options are different");
+      errors.append("\n");
+      errors.append("Spec: ");
+      errors.append(specCtxToOptions);
+      errors.append("\n");
+      errors.append("Bf: ");
+      errors.append(bfCtxToOptions);
+      errors.append("\n");
     }
+
+    return errors.toString();
   }
 
   private Map<Expression<String>, Set<Set<String>>> getCtxToOptions(DecisionInfo specInfo) {
@@ -118,15 +147,24 @@ public class PhosphorResultAnalyzer {
     return cnfCtxsToOptions;
   }
 
-  private void compareCtxs(Collection<Context> specCtxs, Set<ExecVarCtx> bfCtxs) {
+  private String compareCtxs(Collection<Context> specCtxs, Set<ExecVarCtx> bfCtxs) {
     Set<Expression<String>> specCNFCtxs = this.getSpecCNFCtxs(specCtxs);
     Set<Expression<String>> bfCNFCtxs = this.getBFCNFCtxs(bfCtxs);
 
+    StringBuilder errors = new StringBuilder();
+
     if (!specCNFCtxs.equals(bfCNFCtxs)) {
-      System.out.println("WARNING: contexts are different");
-      System.out.println("Spec: " + specCNFCtxs);
-      System.out.println("BF: " + bfCNFCtxs);
+      errors.append("WARNING: contexts are different");
+      errors.append("\n");
+      errors.append("Spec: ");
+      errors.append(specCNFCtxs);
+      errors.append("\n");
+      errors.append("BF: ");
+      errors.append(bfCNFCtxs);
+      errors.append("\n");
     }
+
+    return errors.toString();
   }
 
   private Set<Expression<String>> getBFCNFCtxs(Set<ExecVarCtx> bfCtxs) {

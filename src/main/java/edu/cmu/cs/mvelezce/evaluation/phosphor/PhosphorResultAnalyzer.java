@@ -190,6 +190,20 @@ public class PhosphorResultAnalyzer {
     return specCNFCtxs;
   }
 
+  private Map<JavaRegion, DecisionInfo> readDynamicSpecificationResults()
+      throws IOException, InterruptedException {
+    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(this.programName);
+    String[] args = new String[0];
+    return analysis.analyze(args);
+  }
+
+  private Map<JavaRegion, SinkData> readBFPhosphorResults()
+      throws IOException, InterruptedException {
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(this.programName);
+    String[] args = new String[0];
+    return analysis.analyze(args);
+  }
+
   //  void analyze() throws IOException, InterruptedException {
 //    Map<JavaRegion, Set<Constraint>> bfResults = this.readBFPhosphorResults();
 //    Map<JavaRegion, Set<Constraint>> ccResults = this.readCCPhosphorResults();
@@ -334,26 +348,5 @@ public class PhosphorResultAnalyzer {
 //        + region.getStartRegionIndex();
 //  }
 //
-  private Map<JavaRegion, DecisionInfo> readDynamicSpecificationResults()
-      throws IOException, InterruptedException {
-    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(this.programName);
-    String[] args = new String[0];
-    return analysis.analyze(args);
-  }
-
-  private Map<JavaRegion, SinkData> readBFPhosphorResults()
-      throws IOException, InterruptedException {
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(this.programName);
-    String[] args = new String[0];
-    return analysis.analyze(args);
-  }
-
-//  Map<JavaRegion, Set<Constraint>> readBFPhosphorResults()
-//      throws IOException, InterruptedException {
-//    DynamicAnalysis<Set<Constraint>> analysis = new BFPhosphorAnalysis(this.programName);
-//
-//    String[] args = new String[0];
-//    return analysis.analyze(args);
-//  }
 
 }

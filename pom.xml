@@ -249,6 +249,12 @@
       </systemPath>
     </dependency>
 
+    <dependency>
+      <groupId>com.bpodgursky</groupId>
+      <artifactId>jbool_expressions</artifactId>
+      <version>1.13</version>
+    </dependency>
+
   </dependencies>
 
   <repositories>

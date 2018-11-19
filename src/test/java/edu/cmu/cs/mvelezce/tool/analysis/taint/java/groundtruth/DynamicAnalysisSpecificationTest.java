@@ -687,4 +687,21 @@ public class DynamicAnalysisSpecificationTest {
     return options;
   }
 
+  @Test
+  public void toCNF() {
+    Context ctx = new Context();
+
+    Set<String> config = new HashSet<>();
+    ctx.addConfig(config);
+
+    config = new HashSet<>();
+    config.add("A");
+    ctx.addConfig(config);
+
+    List<String> options = new ArrayList<>();
+    options.add("A");
+    options.add("B");
+
+    DynamicAnalysisSpecification.toCNF(ctx, options);
+  }
 }

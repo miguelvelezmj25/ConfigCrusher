@@ -128,23 +128,23 @@ public class BFPhosphorAnalysisTest {
     Assert.assertEquals(write, read);
   }
 
-  @Test
-  public void example3() throws IOException, InterruptedException {
-    String programName = PhosphorExample3Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(PhosphorExample3Adapter.getListOfOptions());
-
-    // Program arguments
-    String[] args = new String[2];
-    args[0] = "-delres";
-    args[1] = "-saveres";
-
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
-  }
+//  @Test
+//  public void example3() throws IOException, InterruptedException {
+//    String programName = PhosphorExample3Adapter.PROGRAM_NAME;
+//    Set<String> options = new HashSet<>(PhosphorExample3Adapter.getListOfOptions());
+//
+//    // Program arguments
+//    String[] args = new String[2];
+//    args[0] = "-delres";
+//    args[1] = "-saveres";
+//
+//    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+//    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+//
+//    args = new String[0];
+//    analysis = new BFPhosphorAnalysis(programName);
+//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+//
+//    Assert.assertEquals(write, read);
+//  }
 }

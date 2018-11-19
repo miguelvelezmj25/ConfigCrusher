@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
@@ -157,10 +158,6 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
   }
 
   private Set<Set<String>> getExecTaints(List<List<String>> execTaintsList) {
-    if (execTaintsList.size() > 1) {
-      throw new UnsupportedOperationException("Implement");
-    }
-
     Set<Set<String>> execTaints = new HashSet<>();
 
     for (List<String> taints : execTaintsList) {
@@ -174,15 +171,11 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
   private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
     execVarCtxStr = execVarCtxStr.replace("[[", "");
     execVarCtxStr = execVarCtxStr.replace("]]", "");
-    String[] entries = execVarCtxStr.split("^");
+    String[] entries = execVarCtxStr.split(Pattern.quote("^"));
 
     ExecVarCtx execVarCtx = new ExecVarCtx();
 
     if (!(entries.length == 1 && "true".equals(entries[0]))) {
-      if (entries.length > 1) {
-        throw new UnsupportedOperationException("Implement");
-      }
-
       for (String entry : entries) {
         String notStr = "!";
         entry = entry.trim();

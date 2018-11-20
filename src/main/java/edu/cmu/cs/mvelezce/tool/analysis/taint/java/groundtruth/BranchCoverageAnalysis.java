@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
@@ -35,12 +36,20 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
   private final Map<String, DecisionInfo> sinksToDecisionInfos = new HashMap<>();
 
+  private String mainClass;
+
   public BranchCoverageAnalysis(String programName) {
     this(programName, new HashSet<>());
   }
 
   BranchCoverageAnalysis(String programName, Set<String> options) {
     super(programName, options, new HashSet<>());
+  }
+
+  BranchCoverageAnalysis(String programName, String mainClass, Set<String> options) {
+    this(programName, options);
+
+    this.mainClass = mainClass;
   }
 
   @Override
@@ -168,7 +177,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     for (String element : elements) {
       element = element.trim();
 
-      if(!element.isEmpty()) {
+      if (!element.isEmpty()) {
         list.add(element);
       }
     }
@@ -265,7 +274,15 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
         adapter = new MultiFacetsAdapter();
         break;
       default:
-        throw new RuntimeException("Could not find a phosphor script to run " + programName);
+        if (this.mainClass != null) {
+          commandList.add(ccClasspath
+              + BaseAdapter.PATH_SEPARATOR
+              + AllDynamicAdapter.INSTRUMENTED_CLASS_PATH);
+          adapter = new AllDynamicAdapter(programName, this.mainClass);
+        }
+        else {
+          throw new RuntimeException("Could not find a phosphor script to run " + programName);
+        }
     }
 
     commandList.add(adapter.getMainClass());

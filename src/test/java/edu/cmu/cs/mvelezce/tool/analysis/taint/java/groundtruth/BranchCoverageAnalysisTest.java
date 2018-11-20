@@ -1,17 +1,56 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
+import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 public class BranchCoverageAnalysisTest {
+
+  @Test
+  public void dynamicAll() throws IOException, InterruptedException {
+    Collection<File> files = FileUtils.listFiles(new File(
+            "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/phosphor-examples/src/main/java/edu/cmu/cs/mvelezce/analysis"),
+        new String[]{"java"}, true);
+
+    Set<String> programsWithErrors = new HashSet<>();
+
+    for (File file : files) {
+      String programName = file.getName();
+      programName = programName.replace(".java", "");
+      System.out.println(programName);
+
+      try {
+        String mainClass = AllDynamicAdapter.MAIN_PACKAGE + "." + programName;
+        Set<String> options = new HashSet<>(AllDynamicAdapter.getListOfOptions());
+
+        String[] args = new String[1];
+        args[0] = "-saveres";
+
+        DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, mainClass, options);
+        analysis.analyze(args);
+      }
+      catch (Exception e) {
+        programsWithErrors.add(programName);
+      }
+    }
+
+    System.out.println();
+    System.out.println("####################################");
+    System.out.println("Programs with errors");
+    System.out.println(programsWithErrors);
+  }
+
 
   @Test
   public void RunningExample() throws IOException, InterruptedException {

@@ -5,6 +5,7 @@ import com.bpodgursky.jbool_expressions.Expression;
 import com.bpodgursky.jbool_expressions.Not;
 import com.bpodgursky.jbool_expressions.Or;
 import com.bpodgursky.jbool_expressions.Variable;
+import com.bpodgursky.jbool_expressions.parsers.ExprParser;
 import com.bpodgursky.jbool_expressions.rules.RuleSet;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +48,7 @@ public class DecisionInfo {
     }
 
     Expression<String> expr = Or.of(ands);
+    expr = ExprParser.parse(expr.toString());
     return RuleSet.toCNF(expr);
   }
 

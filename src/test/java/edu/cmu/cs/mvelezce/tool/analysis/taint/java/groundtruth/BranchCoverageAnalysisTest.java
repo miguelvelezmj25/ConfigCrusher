@@ -18,7 +18,7 @@ import org.junit.Test;
 public class BranchCoverageAnalysisTest {
 
   @Test
-  public void dynamicAll() throws IOException, InterruptedException {
+  public void dynamicAll() {
     Collection<File> files = FileUtils.listFiles(new File(
             "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/phosphor-examples/src/main/java/edu/cmu/cs/mvelezce/analysis"),
         new String[]{"java"}, true);
@@ -35,7 +35,7 @@ public class BranchCoverageAnalysisTest {
         Set<String> options = new HashSet<>(AllDynamicAdapter.getListOfOptions());
 
         String[] args = new String[1];
-        args[0] = "-saveres";
+//        args[0] = "-saveres";
 
         DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, mainClass, options);
         analysis.analyze(args);
@@ -50,7 +50,6 @@ public class BranchCoverageAnalysisTest {
     System.out.println("Programs with errors");
     System.out.println(programsWithErrors);
   }
-
 
   @Test
   public void RunningExample() throws IOException, InterruptedException {

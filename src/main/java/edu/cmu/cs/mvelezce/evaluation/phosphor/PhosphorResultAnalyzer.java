@@ -44,7 +44,7 @@ public class PhosphorResultAnalyzer {
     for (JavaRegion bfAnalyzedRegion : bfPhosphorRes.keySet()) {
       if (!specRegionsAnalyzed.contains(bfAnalyzedRegion)) {
         System.out.println(bfAnalyzedRegion);
-        System.out.println("Missing from spec");
+        System.out.println("Region not found in spec");
       }
 
     }
@@ -62,7 +62,7 @@ public class PhosphorResultAnalyzer {
       StringBuilder errors = new StringBuilder();
 
       if (bfSinkData == null) {
-        errors.append("Missing from bf");
+        errors.append("Region not found in bf");
       }
       else {
         errors.append(this.compareRegions(dynamicSpec.getValue(), bfSinkData));

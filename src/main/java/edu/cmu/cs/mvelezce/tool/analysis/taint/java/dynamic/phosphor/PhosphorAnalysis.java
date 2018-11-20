@@ -185,7 +185,8 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
     process.waitFor();
   }
 
-  private List<String> buildCommandAsList(Set<String> config) {
+  // TODO the access level was changed to hardcode some logic to execute all dynamic examples
+  protected List<String> buildCommandAsList(Set<String> config) {
     List<String> commandList = new ArrayList<>();
 
     String programName = this.getProgramName();

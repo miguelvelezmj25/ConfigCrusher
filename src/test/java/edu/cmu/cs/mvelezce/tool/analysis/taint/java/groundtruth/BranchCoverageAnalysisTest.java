@@ -35,7 +35,9 @@ public class BranchCoverageAnalysisTest {
         Set<String> options = new HashSet<>(AllDynamicAdapter.getListOfOptions());
 
         String[] args = new String[1];
-//        args[0] = "-saveres";
+//        String[] args = new String[2];
+        args[0] = "-saveres";
+//        args[1] = "-delres";
 
         DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, mainClass, options);
         analysis.analyze(args);

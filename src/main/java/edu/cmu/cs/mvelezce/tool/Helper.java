@@ -122,6 +122,7 @@ public class Helper {
   }
 
   public static void processError(Process process) throws IOException {
+    StringBuilder stringBuilder = new StringBuilder();
     System.out.println("Errors: ");
     BufferedReader errorReader =
         new BufferedReader(new InputStreamReader(process.getErrorStream()));
@@ -129,7 +130,17 @@ public class Helper {
 
     while ((string = errorReader.readLine()) != null) {
       if (!string.isEmpty()) {
+        stringBuilder.append(string);
         System.out.println(string);
+      }
+    }
+
+    if(stringBuilder.length() != 0) {
+      String potentialErrors = stringBuilder.toString();
+      potentialErrors = potentialErrors.toLowerCase();
+
+      if(potentialErrors.contains("error") || potentialErrors.contains("exception")) {
+        throw new RuntimeException("There was an error in the application code");
       }
     }
 

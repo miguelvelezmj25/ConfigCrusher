@@ -38,7 +38,9 @@ public class BFPhosphorAnalysisTest {
         Set<String> options = new HashSet<>(AllDynamicAdapter.getListOfOptions());
 
         String[] args = new String[1];
+//        String[] args = new String[2];
         args[0] = "-saveres";
+//        args[1] = "-delres";
 
         DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, mainClass,
             options);

@@ -30,8 +30,6 @@ public class PhosphorResultAnalyzerTest {
     for (File file : files) {
       String programName = file.getName();
       programName = programName.replace(".java", "");
-      System.out.println("####################################");
-      System.out.println(programName);
       List<String> options = AllDynamicAdapter.getListOfOptions();
 
       try {
@@ -41,9 +39,6 @@ public class PhosphorResultAnalyzerTest {
       catch (Exception e) {
         programsWithErrors.add(programName);
       }
-
-      System.out.println("####################################");
-      System.out.println();
     }
 
     System.out.println();

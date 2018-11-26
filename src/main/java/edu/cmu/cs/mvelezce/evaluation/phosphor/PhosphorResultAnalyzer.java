@@ -37,10 +37,10 @@ public class PhosphorResultAnalyzer {
     Map<JavaRegion, SinkData> phosphorRes = this.readPhosphorResults();
 
     Set<JavaRegion> specRegionsAnalyzed = this.compareSpecToPhosphor(specRes, phosphorRes);
-    this.checkMissingBFRegions(phosphorRes.keySet(), specRegionsAnalyzed);
+    this.checkMissingPhosphorRegions(phosphorRes.keySet(), specRegionsAnalyzed);
   }
 
-  private void checkMissingBFRegions(Set<JavaRegion> phosphorRegions,
+  private void checkMissingPhosphorRegions(Set<JavaRegion> phosphorRegions,
       Set<JavaRegion> specRegionsAnalyzed) {
     for (JavaRegion phosphorRegion : phosphorRegions) {
       if (!specRegionsAnalyzed.contains(phosphorRegion)) {
@@ -56,6 +56,8 @@ public class PhosphorResultAnalyzer {
       Map<JavaRegion, SinkData> phosphorRes) {
     Set<JavaRegion> specAnalyzedRegions = new HashSet<>();
 
+    StringBuilder allErrors = new StringBuilder();
+
     for (Map.Entry<JavaRegion, DecisionInfo> specEntry : specRes.entrySet()) {
       JavaRegion specRegion = specEntry.getKey();
       specAnalyzedRegions.add(specRegion);
@@ -64,20 +66,54 @@ public class PhosphorResultAnalyzer {
       StringBuilder errors = new StringBuilder();
 
       if (phosphorSinkData == null) {
-        errors.append("Region not found in bf");
+        errors.append(this.checkMissingRegion(specEntry.getValue()));
       }
       else {
         errors.append(this.compareRegions(specEntry.getValue(), phosphorSinkData));
       }
 
       if (errors.length() > 0) {
-        System.out.println("Region: " + specRegion);
-        System.out.println(errors);
-        System.out.println();
+        allErrors.append("Region: ");
+        allErrors.append(specRegion);
+        allErrors.append("\n");
+        allErrors.append(errors);
+        allErrors.append("\n");
       }
     }
 
+    if (allErrors.length() > 0) {
+      System.out.println("####################################");
+      System.out.println(this.programName);
+      System.out.println();
+      System.out.println(allErrors);
+    }
+
     return specAnalyzedRegions;
+  }
+
+  private String checkMissingRegion(DecisionInfo specDecisionInfo) {
+    Map<Expression<String>, Set<Set<String>>> ctxToOptions = this
+        .getSpecCtxToOptions(specDecisionInfo);
+
+    boolean ctxTrue =
+        ctxToOptions.size() == 1 && ctxToOptions.keySet().iterator().next().toLexicographicString()
+            .equals("true");
+    boolean noOptions =
+        ctxToOptions.values().size() == 1 & ctxToOptions.values().iterator().next().size() == 1
+            && ctxToOptions.values().iterator().next().iterator().next().isEmpty();
+
+    if (ctxTrue && noOptions) {
+      return "";
+    }
+
+    StringBuilder errors = new StringBuilder();
+
+    errors.append("Region not found in phosphor");
+    errors.append("\n");
+    errors.append(ctxToOptions);
+    errors.append("\n");
+
+    return errors.toString();
   }
 
   private String compareRegions(DecisionInfo specDecisionInfo, SinkData phosphorSinkData) {
@@ -96,22 +132,22 @@ public class PhosphorResultAnalyzer {
   private String compareOptions(DecisionInfo specInfo,
       Map<ExecVarCtx, Set<Set<String>>> phosphorData) {
     Map<Expression<String>, Set<Set<String>>> specCtxToOptions = this.getSpecCtxToOptions(specInfo);
-    Map<Expression<String>, Set<Set<String>>> bfCtxToOptions = this
+    Map<Expression<String>, Set<Set<String>>> phosphorCtxToOptions = this
         .getPhosphorCtxToOptions(phosphorData);
 
     StringBuilder errors = new StringBuilder();
 
-    if (!specCtxToOptions.equals(bfCtxToOptions)) {
-      errors.append(this.compareConfigs(specCtxToOptions, bfCtxToOptions));
+    if (!specCtxToOptions.equals(phosphorCtxToOptions)) {
+      errors.append(this.compareConfigs(specCtxToOptions, phosphorCtxToOptions));
     }
 
     return errors.toString();
   }
 
   private String compareConfigs(Map<Expression<String>, Set<Set<String>>> specCtxToOptions,
-      Map<Expression<String>, Set<Set<String>>> bfCtxToOptions) {
+      Map<Expression<String>, Set<Set<String>>> phosphorCtxToOptions) {
     Set<Map<String, Boolean>> specConfigs = this.getConfigs(specCtxToOptions);
-    Set<Map<String, Boolean>> phosphorConfigs = this.getConfigs(bfCtxToOptions);
+    Set<Map<String, Boolean>> phosphorConfigs = this.getConfigs(phosphorCtxToOptions);
 
     StringBuilder errors = new StringBuilder();
 
@@ -124,8 +160,8 @@ public class PhosphorResultAnalyzer {
     errors.append("Spec: ");
     errors.append(specCtxToOptions);
     errors.append("\n");
-    errors.append("Bf: ");
-    errors.append(bfCtxToOptions);
+    errors.append("Phosphor: ");
+    errors.append(phosphorCtxToOptions);
     errors.append("\n");
 
     Set<Map<String, Boolean>> missing = new HashSet<>();
@@ -220,10 +256,14 @@ public class PhosphorResultAnalyzer {
       throw new RuntimeException("The ctx " + ctx + " has OR");
     }
 
+    ctx = ctx.replace("(", "");
+    ctx = ctx.replace(")", "");
     String[] options = ctx.split("&");
 
     for (String option : options) {
+      option = option.trim();
       int optionLength = option.length();
+
       if (optionLength < 1 || optionLength > 2) {
         throw new RuntimeException("The option " + option + " does not have the expected format");
       }
@@ -275,33 +315,33 @@ public class PhosphorResultAnalyzer {
 
   private String compareCtxs(Collection<Context> specCtxs, Set<ExecVarCtx> phosphorCtxs) {
     Set<Expression<String>> specCNFCtxs = this.getSpecCNFCtxs(specCtxs);
-    Set<Expression<String>> bfCNFCtxs = this.getBFCNFCtxs(phosphorCtxs);
+    Set<Expression<String>> phosphorCNFCtxs = this.getPhosphorCNFCtxs(phosphorCtxs);
 
     StringBuilder errors = new StringBuilder();
 
-    if (!specCNFCtxs.equals(bfCNFCtxs)) {
+    if (!specCNFCtxs.equals(phosphorCNFCtxs)) {
       errors.append("WARNING: contexts are different");
       errors.append("\n");
       errors.append("Spec: ");
       errors.append(specCNFCtxs);
       errors.append("\n");
-      errors.append("BF: ");
-      errors.append(bfCNFCtxs);
+      errors.append("Phosphor: ");
+      errors.append(phosphorCNFCtxs);
       errors.append("\n");
     }
 
     return errors.toString();
   }
 
-  private Set<Expression<String>> getBFCNFCtxs(Set<ExecVarCtx> bfCtxs) {
-    Set<Expression<String>> bfCNFCtxs = new HashSet<>();
+  private Set<Expression<String>> getPhosphorCNFCtxs(Set<ExecVarCtx> phosphorCtxs) {
+    Set<Expression<String>> phosphorCNFCtxs = new HashSet<>();
 
-    for (ExecVarCtx bfCtx : bfCtxs) {
-      Expression<String> bfCNF = bfCtx.toCNF();
-      bfCNFCtxs.add(bfCNF);
+    for (ExecVarCtx phosphorCtx : phosphorCtxs) {
+      Expression<String> phosphorCNF = phosphorCtx.toCNF();
+      phosphorCNFCtxs.add(phosphorCNF);
     }
 
-    return bfCNFCtxs;
+    return phosphorCNFCtxs;
   }
 
 

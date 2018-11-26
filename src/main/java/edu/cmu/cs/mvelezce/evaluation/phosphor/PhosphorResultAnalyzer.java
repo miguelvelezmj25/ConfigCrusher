@@ -1,7 +1,6 @@
 package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import com.bpodgursky.jbool_expressions.Expression;
-import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorAnalysis;
@@ -22,7 +21,7 @@ import java.util.Set;
 
 public class PhosphorResultAnalyzer {
 
-  private static final String OUTPUT_DIR = Options.DIRECTORY + "/evaluation/phosphor/programs";
+//  private static final String OUTPUT_DIR = Options.DIRECTORY + "/evaluation/phosphor/programs";
 
   private final String programName;
   private final List<String> options;
@@ -33,39 +32,41 @@ public class PhosphorResultAnalyzer {
   }
 
   void analyze() throws IOException, InterruptedException {
-    Map<JavaRegion, DecisionInfo> dynamicSpecRes = this.readDynamicSpecificationResults();
-    Map<JavaRegion, SinkData> bfPhosphorRes = this.readBFPhosphorResults();
-    Set<JavaRegion> specRegionsAnalyzed = this.compareSpecToPhosphor(dynamicSpecRes, bfPhosphorRes);
-    this.checkMissingBFRegions(bfPhosphorRes, specRegionsAnalyzed);
+    Map<JavaRegion, DecisionInfo> specRes = this.readSpecResults();
+    Map<JavaRegion, SinkData> phosphorRes = this.readPhosphorResults();
+
+    Set<JavaRegion> specRegionsAnalyzed = this.compareSpecToPhosphor(specRes, phosphorRes);
+    this.checkMissingBFRegions(phosphorRes.keySet(), specRegionsAnalyzed);
   }
 
-  private void checkMissingBFRegions(Map<JavaRegion, SinkData> bfPhosphorRes,
+  private void checkMissingBFRegions(Set<JavaRegion> phosphorRegions,
       Set<JavaRegion> specRegionsAnalyzed) {
-    for (JavaRegion bfAnalyzedRegion : bfPhosphorRes.keySet()) {
-      if (!specRegionsAnalyzed.contains(bfAnalyzedRegion)) {
-        System.out.println(bfAnalyzedRegion);
+    for (JavaRegion phosphorRegion : phosphorRegions) {
+      if (!specRegionsAnalyzed.contains(phosphorRegion)) {
+        System.out.println(phosphorRegion);
         System.out.println("Region not found in spec");
+        throw new UnsupportedOperationException("Add code to show the information from the spec");
       }
 
     }
   }
 
-  private Set<JavaRegion> compareSpecToPhosphor(Map<JavaRegion, DecisionInfo> dynamicSpecRes,
-      Map<JavaRegion, SinkData> bfPhosphorRes) {
+  private Set<JavaRegion> compareSpecToPhosphor(Map<JavaRegion, DecisionInfo> specRes,
+      Map<JavaRegion, SinkData> phosphorRes) {
     Set<JavaRegion> specAnalyzedRegions = new HashSet<>();
 
-    for (Map.Entry<JavaRegion, DecisionInfo> dynamicSpec : dynamicSpecRes.entrySet()) {
-      JavaRegion specRegion = dynamicSpec.getKey();
+    for (Map.Entry<JavaRegion, DecisionInfo> specEntry : specRes.entrySet()) {
+      JavaRegion specRegion = specEntry.getKey();
       specAnalyzedRegions.add(specRegion);
 
-      SinkData bfSinkData = bfPhosphorRes.get(specRegion);
+      SinkData phosphorSinkData = phosphorRes.get(specRegion);
       StringBuilder errors = new StringBuilder();
 
-      if (bfSinkData == null) {
+      if (phosphorSinkData == null) {
         errors.append("Region not found in bf");
       }
       else {
-        errors.append(this.compareRegions(dynamicSpec.getValue(), bfSinkData));
+        errors.append(this.compareRegions(specEntry.getValue(), phosphorSinkData));
       }
 
       if (errors.length() > 0) {
@@ -78,9 +79,9 @@ public class PhosphorResultAnalyzer {
     return specAnalyzedRegions;
   }
 
-  private String compareRegions(DecisionInfo specDecisionInfo, SinkData bfSinkData) {
+  private String compareRegions(DecisionInfo specDecisionInfo, SinkData phosphorSinkData) {
     Map<List<String>, Context> tracesToContexts = specDecisionInfo.getStackTracesToContexts();
-    Map<ExecVarCtx, Set<Set<String>>> data = bfSinkData.getData();
+    Map<ExecVarCtx, Set<Set<String>>> data = phosphorSinkData.getData();
 
     StringBuilder errors = new StringBuilder();
     String ctxErrors = this.compareCtxs(tracesToContexts.values(), data.keySet());
@@ -91,9 +92,11 @@ public class PhosphorResultAnalyzer {
     return errors.toString();
   }
 
-  private String compareOptions(DecisionInfo specInfo, Map<ExecVarCtx, Set<Set<String>>> bfData) {
-    Map<Expression<String>, Set<Set<String>>> specCtxToOptions = this.getCtxToOptions(specInfo);
-    Map<Expression<String>, Set<Set<String>>> bfCtxToOptions = this.getCtxToOptions(bfData);
+  private String compareOptions(DecisionInfo specInfo,
+      Map<ExecVarCtx, Set<Set<String>>> phosphorData) {
+    Map<Expression<String>, Set<Set<String>>> specCtxToOptions = this.getSpecCtxToOptions(specInfo);
+    Map<Expression<String>, Set<Set<String>>> bfCtxToOptions = this
+        .getPhosphorCtxToOptions(phosphorData);
 
     StringBuilder errors = new StringBuilder();
 
@@ -111,14 +114,14 @@ public class PhosphorResultAnalyzer {
     return errors.toString();
   }
 
-  private Map<Expression<String>, Set<Set<String>>> getCtxToOptions(DecisionInfo specInfo) {
+  private Map<Expression<String>, Set<Set<String>>> getSpecCtxToOptions(DecisionInfo specInfo) {
     Map<Expression<String>, Set<Set<String>>> cnfCtxsToOptions = new HashMap<>();
 
     Map<List<String>, Context> tracesToCtxs = specInfo.getStackTracesToContexts();
     Map<List<String>, DecisionBranchCountTable> tracesToTables = specInfo
         .getStackTracesToDecisionBranchTables();
 
-    for(Context ctx : tracesToCtxs.values()) {
+    for (Context ctx : tracesToCtxs.values()) {
       Expression<String> cnf = DecisionInfo.toCNF(ctx, this.options);
       Set<Set<String>> optionsSet = new HashSet<>();
       cnfCtxsToOptions.put(cnf, optionsSet);
@@ -138,11 +141,11 @@ public class PhosphorResultAnalyzer {
     return cnfCtxsToOptions;
   }
 
-  private Map<Expression<String>, Set<Set<String>>> getCtxToOptions(
-      Map<ExecVarCtx, Set<Set<String>>> bfData) {
+  private Map<Expression<String>, Set<Set<String>>> getPhosphorCtxToOptions(
+      Map<ExecVarCtx, Set<Set<String>>> phosphorData) {
     Map<Expression<String>, Set<Set<String>>> cnfCtxsToOptions = new HashMap<>();
 
-    for (Map.Entry<ExecVarCtx, Set<Set<String>>> entry : bfData.entrySet()) {
+    for (Map.Entry<ExecVarCtx, Set<Set<String>>> entry : phosphorData.entrySet()) {
       Expression<String> cnf = entry.getKey().toCNF();
       cnfCtxsToOptions.put(cnf, entry.getValue());
     }
@@ -150,9 +153,9 @@ public class PhosphorResultAnalyzer {
     return cnfCtxsToOptions;
   }
 
-  private String compareCtxs(Collection<Context> specCtxs, Set<ExecVarCtx> bfCtxs) {
+  private String compareCtxs(Collection<Context> specCtxs, Set<ExecVarCtx> phosphorCtxs) {
     Set<Expression<String>> specCNFCtxs = this.getSpecCNFCtxs(specCtxs);
-    Set<Expression<String>> bfCNFCtxs = this.getBFCNFCtxs(bfCtxs);
+    Set<Expression<String>> bfCNFCtxs = this.getBFCNFCtxs(phosphorCtxs);
 
     StringBuilder errors = new StringBuilder();
 
@@ -193,163 +196,18 @@ public class PhosphorResultAnalyzer {
     return specCNFCtxs;
   }
 
-  private Map<JavaRegion, DecisionInfo> readDynamicSpecificationResults()
+  private Map<JavaRegion, DecisionInfo> readSpecResults()
       throws IOException, InterruptedException {
     DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(this.programName);
     String[] args = new String[0];
     return analysis.analyze(args);
   }
 
-  private Map<JavaRegion, SinkData> readBFPhosphorResults()
+  private Map<JavaRegion, SinkData> readPhosphorResults()
       throws IOException, InterruptedException {
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(this.programName);
     String[] args = new String[0];
     return analysis.analyze(args);
   }
-
-  //  void analyze() throws IOException, InterruptedException {
-//    Map<JavaRegion, Set<Constraint>> bfResults = this.readBFPhosphorResults();
-//    Map<JavaRegion, Set<Constraint>> ccResults = this.readCCPhosphorResults();
-//
-//    Set<JavaRegion> sinks = new HashSet<>(bfResults.keySet());
-//    sinks.addAll(ccResults.keySet());
-//
-//    List<String[]> data = new ArrayList<>();
-//    data.add(new String[]{"Sink", "BF Taints", "BF Ctx", "CC Taints", "CC Ctx", "Equal Taints",
-//        "Equal Ctxs", "Missing taints from CC", "Missing taints from BF", "Missing ctx from CC",
-//        "Missing ctx from BF"});
-//
-//    for (JavaRegion region : sinks) {
-//      List<String> entryList = this.buildEntry(region, bfResults, ccResults);
-//      String[] entry = new String[entryList.size()];
-//      entry = entryList.toArray(entry);
-//      data.add(entry);
-//    }
-//
-//    this.writeToCSVFile(data);
-//  }
-//
-//  private List<String> buildEntry(JavaRegion region,
-//      Map<JavaRegion, Set<Constraint>> bfResults,
-//      Map<JavaRegion, Set<Constraint>> ccResults) {
-//    List<String> entry = new ArrayList<>();
-//
-//    // "Sink"
-//    String sink = this.getSink(region);
-//    entry.add(sink);
-//
-//    // "BF Taints"
-//    Set<Constraint> bfConstraints = bfResults.get(region);
-//    Set<String> bfTaints = this.getTaintsFromTaints(bfConstraints);
-//    entry.add(bfTaints.toString());
-//
-//    // "BF Ctx"
-//    Set<String> bfContext = this.getTaintsFromContext(bfConstraints);
-//    entry.add(bfContext.toString());
-//
-//    // "CC Taints"
-//    Set<Constraint> ccConstraints = ccResults.get(region);
-//    Set<String> ccTaints = this.getTaintsFromTaints(ccConstraints);
-//    entry.add(ccTaints.toString());
-//
-//    // "CC Ctx"
-//    Set<String> ccContext = this.getTaintsFromContext(ccConstraints);
-//    entry.add(ccContext.toString());
-//
-//    //"Equal Taints"
-//    entry.add(String.valueOf(bfTaints.equals(ccTaints)));
-//    // "Equal Ctxs"
-//    entry.add(String.valueOf(bfContext.equals(ccContext)));
-//
-//    // "Missing taints from CC"
-//    Set<String> missingTaintsFromCC = new HashSet<>(ccTaints);
-//    missingTaintsFromCC.removeAll(bfTaints);
-//    entry.add(missingTaintsFromCC.toString());
-//
-//    // "Missing taints from BF"
-//    Set<String> missingTaintsFromBF = new HashSet<>(bfTaints);
-//    missingTaintsFromBF.removeAll(ccTaints);
-//    entry.add(missingTaintsFromBF.toString());
-//
-//    // "Missing ctx from CC"
-//    Set<String> missingCtxFromCC = new HashSet<>(ccContext);
-//    missingCtxFromCC.removeAll(bfContext);
-//    entry.add(missingCtxFromCC.toString());
-//
-//    // "Missing ctx from BF"
-//    Set<String> missingCtxFromBF = new HashSet<>(bfContext);
-//    missingCtxFromBF.removeAll(ccContext);
-//    entry.add(missingCtxFromBF.toString());
-//
-//    return entry;
-//  }
-//
-//  private Set<String> getTaintsFromTaints(@Nullable Set<Constraint> constraints) {
-//    Set<String> taints = new HashSet<>();
-//
-//    if (constraints == null) {
-//      return taints;
-//    }
-//
-//    for (Constraint constraint : constraints) {
-//      Map<String, Boolean> taintsFromTaints = constraint.getPartialConfig();
-//
-//      for (Map.Entry<String, Boolean> entry : taintsFromTaints.entrySet()) {
-//        String taintValue = entry.getKey() + "=" + entry.getValue();
-//        taints.add(taintValue);
-//      }
-//    }
-//
-//    return taints;
-//  }
-//
-//  private Set<String> getTaintsFromContext(@Nullable Set<Constraint> constraints) {
-//    Set<String> taints = new HashSet<>();
-//
-//    if (constraints == null) {
-//      return taints;
-//    }
-//
-//    for (Constraint constraint : constraints) {
-//      Map<String, Boolean> taintsFromContext = constraint.getContext();
-//
-//      for (Map.Entry<String, Boolean> entry : taintsFromContext.entrySet()) {
-//        String contextValue = entry.getKey() + "=" + entry.getValue();
-//        taints.add(contextValue);
-//      }
-//    }
-//
-//    if (taints.isEmpty()) {
-//      taints.add("TRUE");
-//    }
-//
-//    return taints;
-//  }
-//
-//  private void writeToCSVFile(List<String[]> data) throws IOException {
-//    File outputDir = new File(PhosphorResultAnalyzer.OUTPUT_DIR + "/" + this.programName);
-//
-//    if (outputDir.exists()) {
-//      FileUtils.forceDelete(outputDir);
-//    }
-//
-//    outputDir.mkdirs();
-//
-//    FileWriter outputFile = new FileWriter(outputDir + "/compare.csv");
-//    CSVWriter writer = new CSVWriter(outputFile);
-//    writer.writeAll(data);
-//    writer.close();
-//  }
-//
-//  private String getSink(JavaRegion region) {
-//    return region.getRegionPackage()
-//        + "."
-//        + region.getRegionClass()
-//        + "."
-//        + region.getRegionMethod()
-//        + "."
-//        + region.getStartRegionIndex();
-//  }
-//
 
 }

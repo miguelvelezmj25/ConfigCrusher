@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import com.bpodgursky.jbool_expressions.Expression;
+import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorAnalysis;
@@ -101,17 +102,136 @@ public class PhosphorResultAnalyzer {
     StringBuilder errors = new StringBuilder();
 
     if (!specCtxToOptions.equals(bfCtxToOptions)) {
-      errors.append("WARNING: The options are different");
+      errors.append(this.compareConfigs(specCtxToOptions, bfCtxToOptions));
+    }
+
+    return errors.toString();
+  }
+
+  private String compareConfigs(Map<Expression<String>, Set<Set<String>>> specCtxToOptions,
+      Map<Expression<String>, Set<Set<String>>> bfCtxToOptions) {
+    Set<Map<String, Boolean>> specConfigs = this.getConfigs(specCtxToOptions);
+    Set<Map<String, Boolean>> phosphorConfigs = this.getConfigs(bfCtxToOptions);
+
+    StringBuilder errors = new StringBuilder();
+
+    if (specConfigs.equals(phosphorConfigs)) {
+      return errors.toString();
+    }
+
+    errors.append("WARNING: The options are different");
+    errors.append("\n");
+    errors.append("Spec: ");
+    errors.append(specCtxToOptions);
+    errors.append("\n");
+    errors.append("Bf: ");
+    errors.append(bfCtxToOptions);
+    errors.append("\n");
+
+    Set<Map<String, Boolean>> missing = new HashSet<>();
+
+    for (Map<String, Boolean> specConfig : specConfigs) {
+      if (!phosphorConfigs.contains(specConfig)) {
+        missing.add(specConfig);
+      }
+    }
+
+    if (!missing.isEmpty()) {
+      errors.append("Spec will sample the following ");
+      errors.append(missing.size());
+      errors.append(" configurations, but phosphor will not");
       errors.append("\n");
-      errors.append("Spec: ");
-      errors.append(specCtxToOptions);
+      errors.append(missing);
       errors.append("\n");
-      errors.append("Bf: ");
-      errors.append(bfCtxToOptions);
+    }
+
+    missing = new HashSet<>();
+
+    for (Map<String, Boolean> phosphorConfig : phosphorConfigs) {
+      if (!specConfigs.contains(phosphorConfig)) {
+        missing.add(phosphorConfig);
+      }
+    }
+
+    if (!missing.isEmpty()) {
+      errors.append("Phosphor will sample the following ");
+      errors.append(missing.size());
+      errors.append(" configurations, but spec will not");
+      errors.append("\n");
+      errors.append(missing);
       errors.append("\n");
     }
 
     return errors.toString();
+  }
+
+  private Set<Map<String, Boolean>> getConfigs(
+      Map<Expression<String>, Set<Set<String>>> ctxToOptions) {
+    Set<Map<String, Boolean>> configs = new HashSet<>();
+
+    for (Map.Entry<Expression<String>, Set<Set<String>>> entry : ctxToOptions.entrySet()) {
+      Expression<String> expr = entry.getKey();
+      Map<String, Boolean> ctxConfig = this.getCtxConfig(expr);
+
+      Set<Map<String, Boolean>> optionsConfigs = this.getOptionsConfigs(entry.getValue());
+
+      for (Map<String, Boolean> optionsConfig : optionsConfigs) {
+        Map<String, Boolean> config = new HashMap<>();
+        config.putAll(optionsConfig);
+        config.putAll(ctxConfig);
+
+        configs.add(config);
+      }
+
+    }
+
+    return configs;
+  }
+
+  private Set<Map<String, Boolean>> getOptionsConfigs(Set<Set<String>> optionsSets) {
+    Set<Map<String, Boolean>> configs = new HashSet<>();
+
+    for (Set<String> options : optionsSets) {
+      Set<Set<String>> allConfigs = Helper.getConfigurations(options);
+
+      for (Set<String> configSet : allConfigs) {
+        Map<String, Boolean> config = new HashMap<>();
+
+        for (String option : this.options) {
+          config.put(option, configSet.contains(option));
+        }
+
+        configs.add(config);
+      }
+    }
+
+    return configs;
+  }
+
+  private Map<String, Boolean> getCtxConfig(Expression<String> expr) {
+    Map<String, Boolean> config = new HashMap<>();
+    String ctx = expr.toLexicographicString();
+
+    if (ctx.equals("true")) {
+      return config;
+    }
+
+    if (ctx.contains("|")) {
+      throw new RuntimeException("The ctx " + ctx + " has OR");
+    }
+
+    String[] options = ctx.split("&");
+
+    for (String option : options) {
+      int optionLength = option.length();
+      if (optionLength < 1 || optionLength > 2) {
+        throw new RuntimeException("The option " + option + " does not have the expected format");
+      }
+
+      config.put(String.valueOf(option.charAt(option.length() - 1)), !option.contains("!"));
+    }
+
+    return config;
   }
 
   private Map<Expression<String>, Set<Set<String>>> getSpecCtxToOptions(DecisionInfo specInfo) {

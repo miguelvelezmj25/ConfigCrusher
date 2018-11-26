@@ -8,17 +8,17 @@ import java.util.Set;
 
 public class PhosphorExample3Adapter extends BaseAdapter {
 
-  public static final String PROGRAM_NAME = "phosphorExample3";
+  public static final String PROGRAM_NAME = "Example3";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.analysis.Example3";
+  public static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
+  public static final String INSTRUMENTED_CLASS_PATH = "../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes";
 
-  private static final String[] OPTIONS = {"A", "B"};
+
+  private static final String[] OPTIONS = {"A", "B", "C"};
 
   public PhosphorExample3Adapter() {
-    this("");
-  }
-
-  private PhosphorExample3Adapter(String dir) {
-    super(PhosphorExample3Adapter.PROGRAM_NAME, PhosphorExample3Adapter.MAIN_CLASS, dir,
+    // TODO check why we are passing empty string
+    super(PhosphorExample3Adapter.PROGRAM_NAME, PhosphorExample3Adapter.MAIN_CLASS, "",
         PhosphorExample3Adapter.getListOfOptions());
   }
 

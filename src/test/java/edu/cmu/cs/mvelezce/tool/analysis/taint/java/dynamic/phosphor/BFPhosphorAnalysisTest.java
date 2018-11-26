@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.Dynam
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.File;
 import java.io.IOException;
@@ -138,6 +139,26 @@ public class BFPhosphorAnalysisTest {
   public void example2() throws IOException, InterruptedException {
     String programName = PhosphorExample2Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(PhosphorExample2Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void example3() throws IOException, InterruptedException {
+    String programName = PhosphorExample3Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(PhosphorExample3Adapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

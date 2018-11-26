@@ -118,14 +118,18 @@ public class PhosphorResultAnalyzer {
     Map<List<String>, DecisionBranchCountTable> tracesToTables = specInfo
         .getStackTracesToDecisionBranchTables();
 
-    // TODO test that there is a different trace, but the same context, which then leads to two entries with the same context
+    for(Context ctx : tracesToCtxs.values()) {
+      Expression<String> cnf = DecisionInfo.toCNF(ctx, this.options);
+      Set<Set<String>> optionsSet = new HashSet<>();
+      cnfCtxsToOptions.put(cnf, optionsSet);
+    }
 
+
+    // TODO test that there is a different trace, but the same context, which then leads to two entries with the same context
     for (Map.Entry<List<String>, Context> entry : tracesToCtxs.entrySet()) {
       Context ctx = entry.getValue();
       Expression<String> cnf = DecisionInfo.toCNF(ctx, this.options);
-
-      Set<Set<String>> optionsSet = new HashSet<>();
-      cnfCtxsToOptions.put(cnf, optionsSet);
+      Set<Set<String>> optionsSet = cnfCtxsToOptions.get(cnf);
 
       DecisionBranchCountTable table = tracesToTables.get(entry.getKey());
       Set<String> options = DynamicAnalysisSpecification.getMinimalSetOfOptions(table);

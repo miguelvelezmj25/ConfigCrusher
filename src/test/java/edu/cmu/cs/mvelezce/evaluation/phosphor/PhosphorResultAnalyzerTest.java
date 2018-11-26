@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.Dynam
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.File;
 import java.io.IOException;
@@ -82,6 +83,15 @@ public class PhosphorResultAnalyzerTest {
   public void example2() throws IOException, InterruptedException {
     String programName = PhosphorExample2Adapter.PROGRAM_NAME;
     List<String> options = PhosphorExample2Adapter.getListOfOptions();
+
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
+    analyzer.analyze();
+  }
+
+  @Test
+  public void example3() throws IOException, InterruptedException {
+    String programName = PhosphorExample3Adapter.PROGRAM_NAME;
+    List<String> options = PhosphorExample3Adapter.getListOfOptions();
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
     analyzer.analyze();

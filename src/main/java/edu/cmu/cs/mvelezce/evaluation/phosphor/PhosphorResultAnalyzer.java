@@ -124,7 +124,6 @@ public class PhosphorResultAnalyzer {
       cnfCtxsToOptions.put(cnf, optionsSet);
     }
 
-
     // TODO test that there is a different trace, but the same context, which then leads to two entries with the same context
     for (Map.Entry<List<String>, Context> entry : tracesToCtxs.entrySet()) {
       Context ctx = entry.getValue();

@@ -22,7 +22,7 @@ import org.junit.Test;
 public class BFPhosphorAnalysisTest {
 
   @Test
-  public void dynamicAll() throws IOException, InterruptedException {
+  public void dynamicAll() {
     Collection<File> files = FileUtils.listFiles(new File(
             "/Users/mvelezce/Documents/Programming/Java/Projects/performance-mapper-evaluation/original/phosphor-examples/src/main/java/edu/cmu/cs/mvelezce/analysis"),
         new String[]{"java"}, true);

@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.evaluation.phosphor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox.GTOverapproxAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
@@ -92,6 +93,15 @@ public class PhosphorResultAnalyzerTest {
   public void example3() throws IOException, InterruptedException {
     String programName = PhosphorExample3Adapter.PROGRAM_NAME;
     List<String> options = PhosphorExample3Adapter.getListOfOptions();
+
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
+    analyzer.analyze();
+  }
+
+  @Test
+  public void gtOverapprox() throws IOException, InterruptedException {
+    String programName = GTOverapproxAdapter.PROGRAM_NAME;
+    List<String> options = GTOverapproxAdapter.getListOfOptions();
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
     analyzer.analyze();

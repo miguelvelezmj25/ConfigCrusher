@@ -14,6 +14,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.columbia.cs.psl.phosphor.runtime.Taint;
 import java.io.File;
@@ -216,6 +217,10 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
       case MultiFacetsAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new MultiFacetsAdapter();
+        break;
+      case SimpleForExample2Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new SimpleForExample2Adapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

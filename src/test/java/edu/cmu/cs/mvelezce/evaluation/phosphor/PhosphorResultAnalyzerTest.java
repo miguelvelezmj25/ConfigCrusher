@@ -1,12 +1,16 @@
 package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.assertTest2Example.AssertTest2ExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox.GTOverapproxAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.guessANumber.GuessANumberAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifand.IfAndAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample6.PhosphorExample6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.File;
 import java.io.IOException;
@@ -106,6 +110,42 @@ public class PhosphorResultAnalyzerTest {
   public void multiFacets() throws IOException, InterruptedException {
     String programName = MultiFacetsAdapter.PROGRAM_NAME;
     List<String> options = MultiFacetsAdapter.getListOfOptions();
+
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
+    analyzer.analyze();
+  }
+
+  @Test
+  public void ifAnd() throws IOException, InterruptedException {
+    String programName = IfAndAdapter.PROGRAM_NAME;
+    List<String> options = IfAndAdapter.getListOfOptions();
+
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
+    analyzer.analyze();
+  }
+
+  @Test
+  public void assertTest2Example() throws IOException, InterruptedException {
+    String programName = AssertTest2ExampleAdapter.PROGRAM_NAME;
+    List<String> options = AssertTest2ExampleAdapter.getListOfOptions();
+
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
+    analyzer.analyze();
+  }
+
+  @Test
+  public void guessANumber() throws IOException, InterruptedException {
+    String programName = GuessANumberAdapter.PROGRAM_NAME;
+    List<String> options = GuessANumberAdapter.getListOfOptions();
+
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
+    analyzer.analyze();
+  }
+
+  @Test
+  public void example6() throws IOException, InterruptedException {
+    String programName = PhosphorExample6Adapter.PROGRAM_NAME;
+    List<String> options = PhosphorExample6Adapter.getListOfOptions();
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
     analyzer.analyze();

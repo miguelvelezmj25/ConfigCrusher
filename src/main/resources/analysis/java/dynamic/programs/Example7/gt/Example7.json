@@ -1,1 +1,2212 @@
-[{"region":{"regionID":"70e587b9-0070-4edc-9dc4-3980f3636844","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Example7","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":6,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"576b100e-3e83-4f67-9a37-bca281ba532a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Example7","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":7,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"06831506-12b9-4f5d-a1ae-e05d32ba1b44","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Example7","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":8,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[["C"],["A","C"],["B","C"],["A","B","C"],["C","D"],["C","E"],["A","C","D"],["B","C","D"],["A","C","E"],["B","C","E"],["A","B","C","D"],["A","B","C","E"],["C","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"237787e7-b994-412c-8751-5b96b48be66e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Example7","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":2,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"7890d6c5-d422-4d65-8ef3-d30cb022e897","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Example7","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":3,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"5819a7e9-c6fe-4aaa-8275-cb89630645c9","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Example7","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":4,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"8aa2b0cb-3ecd-48d5-8dc2-a45c62b839a3","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Example7","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":5,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[["C"],["A","C"],["B","C"],["A","B","C"],["C","D"],["C","E"],["A","C","D"],["B","C","D"],["A","C","E"],["B","C","E"],["A","B","C","D"],["A","B","C","E"],["C","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"aa4a3e0d-e81a-493a-a3eb-83c6fb7b88aa","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"Example7","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}}]
+[
+  {
+    "region": {
+      "regionID": "70e587b9-0070-4edc-9dc4-3980f3636844",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 6,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "stackTracesToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "stackTracesToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "576b100e-3e83-4f67-9a37-bca281ba532a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 7,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "stackTracesToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "stackTracesToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "06831506-12b9-4f5d-a1ae-e05d32ba1b44",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 8,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "stackTracesToContexts": {
+        "[]": {
+          "context": [
+            [
+              "C"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "stackTracesToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "237787e7-b994-412c-8751-5b96b48be66e",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "stackTracesToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "stackTracesToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "7890d6c5-d422-4d65-8ef3-d30cb022e897",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "stackTracesToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "stackTracesToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "5819a7e9-c6fe-4aaa-8275-cb89630645c9",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 4,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "stackTracesToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "stackTracesToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "8aa2b0cb-3ecd-48d5-8dc2-a45c62b839a3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 5,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "stackTracesToContexts": {
+        "[]": {
+          "context": [
+            [
+              "C"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "stackTracesToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "aa4a3e0d-e81a-493a-a3eb-83c6fb7b88aa",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Example7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "stackTracesToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "stackTracesToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  }
+]

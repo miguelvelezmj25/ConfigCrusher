@@ -123,6 +123,7 @@ public class PhosphorResultAnalyzer {
     StringBuilder errors = new StringBuilder();
     String ctxErrors = this.compareCtxs(tracesToContexts.values(), data.keySet());
     errors.append(ctxErrors);
+
     String optionsErrors = this.compareOptions(specDecisionInfo, data);
     errors.append(optionsErrors);
 
@@ -211,14 +212,26 @@ public class PhosphorResultAnalyzer {
 
       Set<Map<String, Boolean>> optionsConfigs = this.getOptionsConfigs(entry.getValue());
 
-      for (Map<String, Boolean> optionsConfig : optionsConfigs) {
-        Map<String, Boolean> config = new HashMap<>();
-        config.putAll(optionsConfig);
-        config.putAll(ctxConfig);
-
-        configs.add(config);
+      if(ctxConfig.isEmpty() && optionsConfigs.isEmpty()) {
+        continue;
       }
 
+      if (optionsConfigs.isEmpty()) {
+        for(String option : this.options) {
+          ctxConfig.putIfAbsent(option, false);
+        }
+
+        configs.add(ctxConfig);
+      }
+      else {
+        for (Map<String, Boolean> optionsConfig : optionsConfigs) {
+          Map<String, Boolean> config = new HashMap<>();
+          config.putAll(optionsConfig);
+          config.putAll(ctxConfig);
+
+          configs.add(config);
+        }
+      }
     }
 
     return configs;
@@ -228,6 +241,10 @@ public class PhosphorResultAnalyzer {
     Set<Map<String, Boolean>> configs = new HashSet<>();
 
     for (Set<String> options : optionsSets) {
+      if (options.isEmpty()) {
+        continue;
+      }
+
       Set<Set<String>> allConfigs = Helper.getConfigurations(options);
 
       for (Set<String> configSet : allConfigs) {

@@ -1,1 +1,236 @@
-[{"region":{"regionID":"a8c904c4-c85b-49a5-9a7b-cf771bd57061","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":8,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"data":{"[[!A ^ !B ^ C]]":[["A","B","C"]],"[[!A ^ B ^ C]]":[["A","B","C"]]}}},{"region":{"regionID":"1cf58b21-7ad6-4075-bb0b-6ff502aa001c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":3,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"data":{"[[true]]":[["C"]]}}},{"region":{"regionID":"c7c28d73-e50e-49e2-a601-5e65371c7077","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":2,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"data":{"[[true]]":[["B"]]}}},{"region":{"regionID":"f5695b67-63af-49c5-9e8c-063b6119a969","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"data":{"[[true]]":[["A"]]}}},{"region":{"regionID":"33c7d668-45f7-429d-9537-36da8911297a","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":7,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"data":{"[[A ^ !B ^ C]]":[["C"]],"[[!B ^ C]]":[["A"]],"[[!A ^ !B ^ C]]":[["C"]],"[[A ^ B ^ C]]":[["C"]],"[[B ^ C]]":[["A"]],"[[!A ^ B ^ C]]":[["C"]]}}},{"region":{"regionID":"fa2c7e65-18ae-45df-805b-1080393b975c","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":6,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"data":{"[[C]]":[["B"]]}}},{"region":{"regionID":"d45867c1-89f9-4c78-99d2-a1670225fdda","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":5,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"data":{"[[C]]":[["C"]]}}},{"region":{"regionID":"fef13e75-4ced-4577-b1e0-1ada564cedf6","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":4,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"data":{"[[true]]":[["C"]]}}}]
+[
+  {
+    "region": {
+      "regionID": "a8c904c4-c85b-49a5-9a7b-cf771bd57061",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 8,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "[[!A ^ !B ^ C]]": [
+          [
+            "A",
+            "B",
+            "C"
+          ]
+        ],
+        "[[!A ^ B ^ C]]": [
+          [
+            "A",
+            "B",
+            "C"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "1cf58b21-7ad6-4075-bb0b-6ff502aa001c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "[[true]]": [
+          [
+            "C"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "c7c28d73-e50e-49e2-a601-5e65371c7077",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "[[true]]": [
+          [
+            "B"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "f5695b67-63af-49c5-9e8c-063b6119a969",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "[[true]]": [
+          [
+            "A"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "33c7d668-45f7-429d-9537-36da8911297a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 7,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "[[A ^ !B ^ C]]": [
+          [
+            "C"
+          ]
+        ],
+        "[[!B ^ C]]": [
+          [
+            "A"
+          ]
+        ],
+        "[[!A ^ !B ^ C]]": [
+          [
+            "C"
+          ]
+        ],
+        "[[A ^ B ^ C]]": [
+          [
+            "C"
+          ]
+        ],
+        "[[B ^ C]]": [
+          [
+            "A"
+          ]
+        ],
+        "[[!A ^ B ^ C]]": [
+          [
+            "C"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "fa2c7e65-18ae-45df-805b-1080393b975c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 6,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "[[C]]": [
+          [
+            "B"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "d45867c1-89f9-4c78-99d2-a1670225fdda",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 5,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "[[C]]": [
+          [
+            "C"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "fef13e75-4ced-4577-b1e0-1ada564cedf6",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 4,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "[[true]]": [
+          [
+            "C"
+          ]
+        ]
+      }
+    }
+  }
+]

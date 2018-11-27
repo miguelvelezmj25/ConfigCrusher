@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.junit.Test;
 
-public class BranchCoverageInstrumenterTest {
+public class SpecificationInstrumenterTest {
 
   @Test
   public void runningExample()
@@ -19,7 +19,7 @@ public class BranchCoverageInstrumenterTest {
     classesToTransform
         .add(Utils.getASMPackageAndClassName("edu/cmu/cs/mvelezce", "RunningExample"));
 
-    MethodTransformer transformer = new BranchCoverageInstrumenter(pathToClasses,
+    MethodTransformer transformer = new SpecificationInstrumenter(pathToClasses,
         classesToTransform);
     transformer.transformMethods();
   }
@@ -32,7 +32,7 @@ public class BranchCoverageInstrumenterTest {
     classesToTransform
         .add(Utils.getASMPackageAndClassName("edu/cmu/cs/mvelezce/analysis", "SimpleExample1"));
 
-    MethodTransformer transformer = new BranchCoverageInstrumenter(pathToClasses,
+    MethodTransformer transformer = new SpecificationInstrumenter(pathToClasses,
         classesToTransform);
     transformer.transformMethods();
   }
@@ -42,7 +42,7 @@ public class BranchCoverageInstrumenterTest {
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
     String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
 
-    MethodTransformer transformer = new BranchCoverageInstrumenter(pathToClasses);
+    MethodTransformer transformer = new SpecificationInstrumenter(pathToClasses);
     transformer.transformMethods();
   }
 }

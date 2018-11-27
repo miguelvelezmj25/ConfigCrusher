@@ -49,7 +49,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
+    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = DynamicRunningExampleAdapter.getListOfOptions();
@@ -116,7 +116,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
+    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = SimpleExample1Adapter.getListOfOptions();
@@ -365,7 +365,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
+    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = Example1Adapter.getListOfOptions();
@@ -433,7 +433,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
+    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = PhosphorExample2Adapter.getListOfOptions();
@@ -501,7 +501,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(programName);
+    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = MultiFacetsAdapter.getListOfOptions();

@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import org.jboss.util.file.Files;
 
-public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
+public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
   private static final String APACHE_COMMONS_PATH =
       BaseAdapter.USER_HOME
@@ -39,15 +39,15 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
   private String mainClass;
 
-  public BranchCoverageAnalysis(String programName) {
+  public SpecificationAnalysis(String programName) {
     this(programName, new HashSet<>());
   }
 
-  BranchCoverageAnalysis(String programName, Set<String> options) {
+  SpecificationAnalysis(String programName, Set<String> options) {
     super(programName, options, new HashSet<>());
   }
 
-  BranchCoverageAnalysis(String programName, String mainClass, Set<String> options) {
+  SpecificationAnalysis(String programName, String mainClass, Set<String> options) {
     this(programName, options);
 
     this.mainClass = mainClass;
@@ -69,7 +69,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
       }
     }
 
-    Files.delete(BranchCoverageLogger.RESULTS_FILE);
+    Files.delete(SpecificationLogger.RESULTS_FILE);
 
     return this.getRegionsToDecisionTables();
   }
@@ -356,7 +356,7 @@ public class BranchCoverageAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
       throws IOException, ClassNotFoundException {
     Map<StackTraceDecision, ThenElseCounts> callSiteSinksToBranchCounts;
 
-    try (FileInputStream fis = new FileInputStream(BranchCoverageLogger.RESULTS_FILE);
+    try (FileInputStream fis = new FileInputStream(SpecificationLogger.RESULTS_FILE);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
       callSiteSinksToBranchCounts = (Map<StackTraceDecision, ThenElseCounts>) ois.readObject();
     }

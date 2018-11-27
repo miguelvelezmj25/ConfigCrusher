@@ -8,16 +8,16 @@ import java.util.HashMap;
 import java.util.Map;
 import jdk.internal.org.objectweb.asm.Type;
 
-public class BranchCoverageLogger {
+public class SpecificationLogger {
 
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
   private static final Map<StackTraceDecision, ThenElseCounts> STACK_TRACE_DECISIONS_TO_BRANCH_COUNTS = new HashMap<>();
 
   static final String RESULTS_FILE = "results.ser";
-  static final String INTERNAL_NAME = Type.getInternalName(BranchCoverageLogger.class);
+  static final String INTERNAL_NAME = Type.getInternalName(SpecificationLogger.class);
 
   static {
-    Method[] methods = BranchCoverageLogger.class.getDeclaredMethods();
+    Method[] methods = SpecificationLogger.class.getDeclaredMethods();
 
     for (Method method : methods) {
       METHODS_TO_DESCRIPTORS.put(method.getName(), Type.getMethodDescriptor(method));
@@ -38,149 +38,149 @@ public class BranchCoverageLogger {
 
   public static void logICMPLTDecision(int value1, int value2, String methodName,
       int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (value1 < value2) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logICMPEQDecision(int value1, int value2, String methodName,
       int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (value1 == value2) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logICMPNEDecision(int value1, int value2, String methodName,
       int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (value1 != value2) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logICMPGEDecision(int value1, int value2, String methodName,
       int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (value1 >= value2) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logIFICMPGTDecision(int value1, int value2, String methodName,
       int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (value1 > value2) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logIFICMPLEDecision(int value1, int value2, String methodName,
       int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (value1 <= value2) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logIFLTDecision(int decisionValue, String methodName, int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (decisionValue < 0) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logIFGEDecision(int decisionValue, String methodName, int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (decisionValue >= 0) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logIFNEDecision(int decisionValue, String methodName, int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (decisionValue != 0) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logIFLEDecision(int decisionValue, String methodName, int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (decisionValue <= 0) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
 
   public static void logIFEQDecision(int decisionValue, String methodName, int decisionCount) {
-    ThenElseCounts thenElseCounts = BranchCoverageLogger
+    ThenElseCounts thenElseCounts = SpecificationLogger
         .getThenElseCounts(methodName, decisionCount);
 
     if (decisionValue == 0) {
-      BranchCoverageLogger.updatedElseBranchCount(thenElseCounts);
+      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      BranchCoverageLogger.updatedThenBranchCount(thenElseCounts);
+      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
   }
@@ -199,10 +199,10 @@ public class BranchCoverageLogger {
   }
 
   private static ThenElseCounts getThenElseCounts(String methodName, int decisionCount) {
-    String[] stackTrace = BranchCoverageLogger.getStackTrace();
+    String[] stackTrace = SpecificationLogger.getStackTrace();
     String decision = methodName + "." + decisionCount;
     StackTraceDecision stackTraceDecision = new StackTraceDecision(stackTrace, decision);
-    BranchCoverageLogger.addStackTraceDecision(stackTraceDecision);
+    SpecificationLogger.addStackTraceDecision(stackTraceDecision);
 
     return STACK_TRACE_DECISIONS_TO_BRANCH_COUNTS.get(stackTraceDecision);
   }
@@ -234,7 +234,7 @@ public class BranchCoverageLogger {
   }
 
   static String getMethodDescriptor(String methodName) {
-    String methodDescriptor = BranchCoverageLogger.METHODS_TO_DESCRIPTORS.get(methodName);
+    String methodDescriptor = SpecificationLogger.METHODS_TO_DESCRIPTORS.get(methodName);
 
     if (methodDescriptor == null) {
       throw new RuntimeException(

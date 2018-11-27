@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm;
 
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.BranchCoverageInstrumenter;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SpecificationInstrumenter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifand.IfAndAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifor.IfOrAdapter;
@@ -81,7 +81,7 @@ public class CFGBuilderTest {
 
   private Set<ClassNode> getClassNodes(String pathToClasses)
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
-    MethodTransformer transformer = new BranchCoverageInstrumenter(pathToClasses);
+    MethodTransformer transformer = new SpecificationInstrumenter(pathToClasses);
     return transformer.getClassTransformer().readClasses();
   }
 }

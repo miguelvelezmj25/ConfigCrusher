@@ -7,7 +7,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ExecVarCtx;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.SinkData;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.BranchCoverageAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SpecificationAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.Context;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DecisionBranchCountTable;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DecisionInfo;
@@ -375,7 +375,7 @@ public class PhosphorResultAnalyzer {
 
   private Map<JavaRegion, DecisionInfo> readSpecResults()
       throws IOException, InterruptedException {
-    DynamicAnalysis<DecisionInfo> analysis = new BranchCoverageAnalysis(this.programName);
+    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(this.programName);
     String[] args = new String[0];
     return analysis.analyze(args);
   }

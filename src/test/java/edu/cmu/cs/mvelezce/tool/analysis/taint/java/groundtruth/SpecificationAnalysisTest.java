@@ -16,7 +16,7 @@ import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-public class BranchCoverageAnalysisTest {
+public class SpecificationAnalysisTest {
 
   @Test
   public void dynamicAll() {
@@ -40,7 +40,7 @@ public class BranchCoverageAnalysisTest {
         args[0] = "-saveres";
 //        args[1] = "-delres";
 
-        DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, mainClass, options);
+        DynamicAnalysis analysis = new SpecificationAnalysis(programName, mainClass, options);
         analysis.analyze(args);
       }
       catch (Exception e) {
@@ -64,7 +64,7 @@ public class BranchCoverageAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, options);
+    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -75,7 +75,7 @@ public class BranchCoverageAnalysisTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName);
+    DynamicAnalysis analysis = new SpecificationAnalysis(programName);
     analysis.analyze(args);
   }
 
@@ -89,7 +89,7 @@ public class BranchCoverageAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, options);
+    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -103,7 +103,7 @@ public class BranchCoverageAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, options);
+    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -117,7 +117,7 @@ public class BranchCoverageAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, options);
+    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -131,7 +131,7 @@ public class BranchCoverageAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, options);
+    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -145,7 +145,7 @@ public class BranchCoverageAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new BranchCoverageAnalysis(programName, options);
+    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 }

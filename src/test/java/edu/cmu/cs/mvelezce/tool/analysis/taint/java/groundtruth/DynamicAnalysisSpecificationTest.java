@@ -604,8 +604,7 @@ public class DynamicAnalysisSpecificationTest {
 
       for (Map.Entry<List<String>, DecisionBranchCountTable> traceToTable : tracesToTables
           .entrySet()) {
-        Set<String> options = DynamicAnalysisSpecification
-            .getMinimalSetOfOptions(traceToTable.getValue());
+        Set<String> options = SpecificationAnalysis.getMinimalSetOfOptions(traceToTable.getValue());
         tracesToOptions.put(traceToTable.getKey(), options);
       }
 

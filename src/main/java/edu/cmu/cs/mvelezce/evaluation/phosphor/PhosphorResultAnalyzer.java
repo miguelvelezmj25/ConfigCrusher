@@ -7,11 +7,10 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ExecVarCtx;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.SinkData;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SpecificationAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.VariabilityCtx;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DecisionBranchCountTable;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DecisionInfo;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DynamicAnalysisSpecification;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SpecificationAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.VariabilityCtx;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -117,11 +116,13 @@ public class PhosphorResultAnalyzer {
   }
 
   private String compareRegions(DecisionInfo specDecisionInfo, SinkData phosphorSinkData) {
-    Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = specDecisionInfo.getCallingCtxsToVariabilityCtxs();
+    Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = specDecisionInfo
+        .getCallingCtxsToVariabilityCtxs();
     Map<ExecVarCtx, Set<Set<String>>> data = phosphorSinkData.getData();
 
     StringBuilder errors = new StringBuilder();
-    String ctxErrors = this.compareVariabilityCtxs(callingCtxsToVariabilityCtxs.values(), data.keySet());
+    String ctxErrors = this
+        .compareVariabilityCtxs(callingCtxsToVariabilityCtxs.values(), data.keySet());
     errors.append(ctxErrors);
 
     String optionsErrors = this.compareOptions(specDecisionInfo, data);
@@ -212,12 +213,12 @@ public class PhosphorResultAnalyzer {
 
       Set<Map<String, Boolean>> optionsConfigs = this.getOptionsConfigs(entry.getValue());
 
-      if(ctxConfig.isEmpty() && optionsConfigs.isEmpty()) {
+      if (ctxConfig.isEmpty() && optionsConfigs.isEmpty()) {
         continue;
       }
 
       if (optionsConfigs.isEmpty()) {
-        for(String option : this.options) {
+        for (String option : this.options) {
           ctxConfig.putIfAbsent(option, false);
         }
 
@@ -294,7 +295,8 @@ public class PhosphorResultAnalyzer {
   private Map<Expression<String>, Set<Set<String>>> getSpecCtxToOptions(DecisionInfo specInfo) {
     Map<Expression<String>, Set<Set<String>>> cnfCtxsToOptions = new HashMap<>();
 
-    Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = specInfo.getCallingCtxsToVariabilityCtxs();
+    Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = specInfo
+        .getCallingCtxsToVariabilityCtxs();
     Map<List<String>, DecisionBranchCountTable> callingCtxsToTables = specInfo
         .getCallingCtxsToDecisionBranchTables();
 
@@ -311,7 +313,7 @@ public class PhosphorResultAnalyzer {
       Set<Set<String>> optionsSet = cnfCtxsToOptions.get(cnf);
 
       DecisionBranchCountTable table = callingCtxsToTables.get(entry.getKey());
-      Set<String> options = DynamicAnalysisSpecification.getMinimalSetOfOptions(table);
+      Set<String> options = SpecificationAnalysis.getMinimalSetOfOptions(table);
       optionsSet.add(options);
     }
 
@@ -330,7 +332,8 @@ public class PhosphorResultAnalyzer {
     return cnfCtxsToOptions;
   }
 
-  private String compareVariabilityCtxs(Collection<VariabilityCtx> specCtxs, Set<ExecVarCtx> phosphorCtxs) {
+  private String compareVariabilityCtxs(Collection<VariabilityCtx> specCtxs,
+      Set<ExecVarCtx> phosphorCtxs) {
     Set<Expression<String>> specCNFCtxs = this.getSpecCNFCtxs(specCtxs);
     Set<Expression<String>> phosphorCNFCtxs = this.getPhosphorCNFCtxs(phosphorCtxs);
 

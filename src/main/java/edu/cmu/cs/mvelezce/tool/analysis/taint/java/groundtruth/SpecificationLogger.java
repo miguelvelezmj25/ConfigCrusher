@@ -11,7 +11,7 @@ import jdk.internal.org.objectweb.asm.Type;
 public class SpecificationLogger {
 
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
-  private static final Map<StackTraceDecision, ThenElseCounts> STACK_TRACE_DECISIONS_TO_BRANCH_COUNTS = new HashMap<>();
+  private static final Map<CallingContextDecision, ThenElseCounts> CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS = new HashMap<>();
 
   static final String RESULTS_FILE = "results.ser";
   static final String INTERNAL_NAME = Type.getInternalName(SpecificationLogger.class);
@@ -189,7 +189,7 @@ public class SpecificationLogger {
     try {
       FileOutputStream fos = new FileOutputStream(RESULTS_FILE);
       ObjectOutputStream oos = new ObjectOutputStream(fos);
-      oos.writeObject(STACK_TRACE_DECISIONS_TO_BRANCH_COUNTS);
+      oos.writeObject(CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS);
       oos.close();
       fos.close();
     }
@@ -199,37 +199,36 @@ public class SpecificationLogger {
   }
 
   private static ThenElseCounts getThenElseCounts(String methodName, int decisionCount) {
-    String[] stackTrace = SpecificationLogger.getStackTrace();
+    String[] callingContext = SpecificationLogger.getCallingContext();
     String decision = methodName + "." + decisionCount;
-    StackTraceDecision stackTraceDecision = new StackTraceDecision(stackTrace, decision);
-    SpecificationLogger.addStackTraceDecision(stackTraceDecision);
+    CallingContextDecision callingContextDecision = new CallingContextDecision(callingContext, decision);
+    SpecificationLogger.addCallingContextDecision(callingContextDecision);
 
-    return STACK_TRACE_DECISIONS_TO_BRANCH_COUNTS.get(stackTraceDecision);
+    return CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS.get(callingContextDecision);
   }
 
-  private static String[] getStackTrace() {
-    int stackTraceOffset = 5;
-    StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-    String[] stackTrace = new String[stackTraceElements.length - stackTraceOffset];
+  private static String[] getCallingContext() {
+    int callingContextOffset = 5;
+    StackTraceElement[] callingContextElements = Thread.currentThread().getStackTrace();
+    String[] callingContext = new String[callingContextElements.length - callingContextOffset];
 
-    // 4 is the offset in the stack trace
-    for (int i = stackTraceOffset; i < stackTraceElements.length; i++) {
-      StackTraceElement stackTraceElement = stackTraceElements[i];
-      stackTrace[i - stackTraceOffset] = getStackTraceEntry(stackTraceElement.getMethodName(),
-          stackTraceElement.getLineNumber());
+    for (int i = callingContextOffset; i < callingContextElements.length; i++) {
+      StackTraceElement callingContextElement = callingContextElements[i];
+      callingContext[i - callingContextOffset] = getCallingContextEntry(callingContextElement.getMethodName(),
+          callingContextElement.getLineNumber());
     }
 
-    return stackTrace;
+    return callingContext;
   }
 
-  private static String getStackTraceEntry(String methodName, int lineNumber) {
+  private static String getCallingContextEntry(String methodName, int lineNumber) {
     return methodName + ":" + lineNumber;
   }
 
-  private static void addStackTraceDecision(StackTraceDecision stackTraceDecision) {
-    if (!STACK_TRACE_DECISIONS_TO_BRANCH_COUNTS.containsKey(stackTraceDecision)) {
+  private static void addCallingContextDecision(CallingContextDecision callingContextDecision) {
+    if (!CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS.containsKey(callingContextDecision)) {
       ThenElseCounts thenElseCounts = new ThenElseCounts();
-      STACK_TRACE_DECISIONS_TO_BRANCH_COUNTS.put(stackTraceDecision, thenElseCounts);
+      CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS.put(callingContextDecision, thenElseCounts);
     }
   }
 

@@ -15,15 +15,15 @@ import java.util.Set;
 
 public class DecisionInfo {
 
-  private final Map<List<String>, Context> stackTracesToContexts = new HashMap<>();
-  private final Map<List<String>, DecisionBranchCountTable> stackTracesToDecisionBranchTables = new HashMap<>();
+  private final Map<List<String>, Context> callingContextsToContexts = new HashMap<>();
+  private final Map<List<String>, DecisionBranchCountTable> callingContextsToDecisionBranchTables = new HashMap<>();
 
-  public Map<List<String>, Context> getStackTracesToContexts() {
-    return stackTracesToContexts;
+  public Map<List<String>, Context> getCallingContextsToContexts() {
+    return callingContextsToContexts;
   }
 
-  public Map<List<String>, DecisionBranchCountTable> getStackTracesToDecisionBranchTables() {
-    return stackTracesToDecisionBranchTables;
+  public Map<List<String>, DecisionBranchCountTable> getCallingContextsToDecisionBranchTables() {
+    return callingContextsToDecisionBranchTables;
   }
 
   public static Expression<String> toCNF(Context ctx, List<String> options) {
@@ -78,5 +78,29 @@ public class DecisionInfo {
 //    Expression<String> cnf = RuleSet.toCNF(expr);
 //
 //    System.out.println(cnf);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    DecisionInfo that = (DecisionInfo) o;
+
+    if (!callingContextsToContexts.equals(that.callingContextsToContexts)) {
+      return false;
+    }
+    return callingContextsToDecisionBranchTables.equals(that.callingContextsToDecisionBranchTables);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = callingContextsToContexts.hashCode();
+    result = 31 * result + callingContextsToDecisionBranchTables.hashCode();
+    return result;
   }
 }

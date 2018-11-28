@@ -12,8 +12,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SpecificationAnalysisTest {
@@ -35,13 +37,20 @@ public class SpecificationAnalysisTest {
         String mainClass = AllDynamicAdapter.MAIN_PACKAGE + "." + programName;
         Set<String> options = new HashSet<>(AllDynamicAdapter.getListOfOptions());
 
-        String[] args = new String[1];
-//        String[] args = new String[2];
+//        String[] args = new String[1];
+        String[] args = new String[2];
         args[0] = "-saveres";
-//        args[1] = "-delres";
+        args[1] = "-delres";
 
         DynamicAnalysis analysis = new SpecificationAnalysis(programName, mainClass, options);
-        analysis.analyze(args);
+        Map write = analysis.analyze(args);
+
+        args = new String[0];
+        analysis = new SpecificationAnalysis(programName);
+        Map read = analysis.analyze(args);
+
+        Assert.assertEquals(write, read);
+
       }
       catch (Exception e) {
         programsWithErrors.add(programName);
@@ -65,7 +74,13 @@ public class SpecificationAnalysisTest {
     args[1] = "-saveres";
 
     DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
-    analysis.analyze(args);
+    Map write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new SpecificationAnalysis(programName);
+    Map read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 
   @Test

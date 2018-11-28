@@ -1,1 +1,1882 @@
-[{"region":{"regionID":"c5fb2b1f-968a-4a88-8f05-61767a948e1f","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":8,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[["C"],["B","C"],["C","D"],["C","E"],["B","C","D"],["B","C","E"],["C","D","E"],["B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1}}}}}},{"region":{"regionID":"44a3a2b9-0019-4fda-a90a-042965bdad7b","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":3,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"7a2df5da-617a-4260-bfde-7c1fe06292cb","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":2,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"e1621241-e5fa-4411-9f5d-83e77a623cc8","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":1,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"a4854afa-d221-45ce-8612-1c0b8ee23647","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":7,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[["C"],["A","C"],["B","C"],["A","B","C"],["C","D"],["C","E"],["A","C","D"],["B","C","D"],["A","C","E"],["B","C","E"],["A","B","C","D"],["A","B","C","E"],["C","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"36f5064f-9a25-4ad0-8a8a-ff0ae9e38824","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":6,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[["C"],["A","C"],["B","C"],["A","B","C"],["C","D"],["C","E"],["A","C","D"],["B","C","D"],["A","C","E"],["B","C","E"],["A","B","C","D"],["A","B","C","E"],["C","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"a2559de2-90d2-4445-a485-b037899c513e","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":5,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[["C"],["A","C"],["B","C"],["A","B","C"],["C","D"],["C","E"],["A","C","D"],["B","C","D"],["A","C","E"],["B","C","E"],["A","B","C","D"],["A","B","C","E"],["C","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}},{"region":{"regionID":"667d98ec-71cf-4808-902a-26974cedbc47","startTime":-1,"endTime":-1,"duration":-1,"regionPackage":"edu.cmu.cs.mvelezce.analysis","regionClass":"GuessANumber","regionMethod":"main([Ljava/lang/String;)V","startRegionIndex":4,"startBlockID":"","endBlocksIDs":[],"startMethodBlock":null,"endMethodBlocks":[]},"info":{"stackTracesToContexts":{"[]":{"context":[[],["A"],["B"],["C"],["A","B"],["D"],["A","C"],["E"],["B","C"],["A","D"],["B","D"],["A","E"],["A","B","C"],["C","D"],["B","E"],["A","B","D"],["C","E"],["A","C","D"],["A","B","E"],["D","E"],["B","C","D"],["A","C","E"],["B","C","E"],["A","D","E"],["A","B","C","D"],["B","D","E"],["A","B","C","E"],["C","D","E"],["A","B","D","E"],["A","C","D","E"],["B","C","D","E"],["A","B","C","D","E"]]}},"stackTracesToDecisionBranchTables":{"[]":{"options":["A","B","C","D","E"],"table":{"{A=true, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=true, E=false}":{"thenCount":1,"elseCount":0},"{A=false, B=true, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=true}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=true, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=true, D=false, E=false}":{"thenCount":1,"elseCount":0},"{A=true, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=true, E=false}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=true}":{"thenCount":0,"elseCount":1},"{A=false, B=false, C=false, D=false, E=false}":{"thenCount":0,"elseCount":1},"{A=true, B=true, C=true, D=true, E=true}":{"thenCount":1,"elseCount":0}}}}}}]
+[
+  {
+    "region": {
+      "regionID": "f08a1a35-f915-4e99-847d-6552b4df221b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 8,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "callingContextsToContexts": {
+        "[]": {
+          "context": [
+            [
+              "C"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "callingContextsToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "71ca128e-8727-43f6-bf13-739a15a1a86a",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "callingContextsToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "callingContextsToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "852acd8d-e65d-4af7-83fc-c30e3919574c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "callingContextsToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "callingContextsToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "ab6cd58a-b389-4ec8-a358-2982f2ca21e3",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "callingContextsToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "callingContextsToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "688de82f-5d12-4466-b7df-46ee75d3f200",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 7,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "callingContextsToContexts": {
+        "[]": {
+          "context": [
+            [
+              "C"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "callingContextsToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "df4d4d44-d5fd-4afc-bfda-4fc3d9aa6bed",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 6,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "callingContextsToContexts": {
+        "[]": {
+          "context": [
+            [
+              "C"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "callingContextsToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "f2a2de49-6eb5-4199-86c9-fcfeaeafe3f5",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 5,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "callingContextsToContexts": {
+        "[]": {
+          "context": [
+            [
+              "C"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "callingContextsToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "0c3eaa5b-60ef-40c8-af96-7a5a05e5c0ec",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "GuessANumber",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 4,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "callingContextsToContexts": {
+        "[]": {
+          "context": [
+            [],
+            [
+              "A"
+            ],
+            [
+              "B"
+            ],
+            [
+              "C"
+            ],
+            [
+              "A",
+              "B"
+            ],
+            [
+              "D"
+            ],
+            [
+              "A",
+              "C"
+            ],
+            [
+              "E"
+            ],
+            [
+              "B",
+              "C"
+            ],
+            [
+              "A",
+              "D"
+            ],
+            [
+              "B",
+              "D"
+            ],
+            [
+              "A",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C"
+            ],
+            [
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ],
+            [
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "E"
+            ],
+            [
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "C",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "A",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "E"
+            ],
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "B",
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          ]
+        }
+      },
+      "callingContextsToDecisionBranchTables": {
+        "[]": {
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "table": {
+            "{A=true, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=true, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=false, B=true, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=true, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=true, D=false, E=false}": {
+              "thenCount": 1,
+              "elseCount": 0
+            },
+            "{A=true, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=true, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=true}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=false, B=false, C=false, D=false, E=false}": {
+              "thenCount": 0,
+              "elseCount": 1
+            },
+            "{A=true, B=true, C=true, D=true, E=true}": {
+              "thenCount": 1,
+              "elseCount": 0
+            }
+          }
+        }
+      }
+    }
+  }
+]

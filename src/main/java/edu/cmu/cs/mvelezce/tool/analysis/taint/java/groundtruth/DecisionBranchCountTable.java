@@ -97,4 +97,28 @@ public class DecisionBranchCountTable {
   public Set<String> getOptions() {
     return options;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    DecisionBranchCountTable that = (DecisionBranchCountTable) o;
+
+    if (!options.equals(that.options)) {
+      return false;
+    }
+    return table.equals(that.table);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = options.hashCode();
+    result = 31 * result + table.hashCode();
+    return result;
+  }
 }

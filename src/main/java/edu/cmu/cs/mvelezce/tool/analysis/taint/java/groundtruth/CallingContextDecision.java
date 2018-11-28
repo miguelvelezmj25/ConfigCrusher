@@ -4,20 +4,20 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class StackTraceDecision implements Serializable {
+public class CallingContextDecision implements Serializable {
 
   private static final long serialVersionUID = 4363650686966128330L;
 
-  private final List<String> stackTrace;
+  private final List<String> callingContext;
   private final String decision;
 
-  public StackTraceDecision(String[] stackTrace, String decision) {
-    this.stackTrace = Arrays.asList(stackTrace);
+  public CallingContextDecision(String[] callingContext, String decision) {
+    this.callingContext = Arrays.asList(callingContext);
     this.decision = decision;
   }
 
-  public List<String> getStackTrace() {
-    return stackTrace;
+  public List<String> getCallingContext() {
+    return callingContext;
   }
 
   public String getDecision() {
@@ -33,9 +33,9 @@ public class StackTraceDecision implements Serializable {
       return false;
     }
 
-    StackTraceDecision that = (StackTraceDecision) o;
+    CallingContextDecision that = (CallingContextDecision) o;
 
-    if (!stackTrace.equals(that.stackTrace)) {
+    if (!callingContext.equals(that.callingContext)) {
       return false;
     }
     return decision.equals(that.decision);
@@ -43,13 +43,13 @@ public class StackTraceDecision implements Serializable {
 
   @Override
   public int hashCode() {
-    int result = stackTrace.hashCode();
+    int result = callingContext.hashCode();
     result = 31 * result + decision.hashCode();
     return result;
   }
 
   @Override
   public String toString() {
-    return "Stack trace=" + this.stackTrace + ", Decision=" + this.decision;
+    return "Calling context=" + this.callingContext + ", Decision=" + this.decision;
   }
 }

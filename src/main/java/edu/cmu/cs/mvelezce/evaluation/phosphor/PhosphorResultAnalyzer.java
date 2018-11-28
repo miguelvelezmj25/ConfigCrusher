@@ -117,7 +117,7 @@ public class PhosphorResultAnalyzer {
   }
 
   private String compareRegions(DecisionInfo specDecisionInfo, SinkData phosphorSinkData) {
-    Map<List<String>, Context> tracesToContexts = specDecisionInfo.getStackTracesToContexts();
+    Map<List<String>, Context> tracesToContexts = specDecisionInfo.getCallingContextsToContexts();
     Map<ExecVarCtx, Set<Set<String>>> data = phosphorSinkData.getData();
 
     StringBuilder errors = new StringBuilder();
@@ -294,9 +294,9 @@ public class PhosphorResultAnalyzer {
   private Map<Expression<String>, Set<Set<String>>> getSpecCtxToOptions(DecisionInfo specInfo) {
     Map<Expression<String>, Set<Set<String>>> cnfCtxsToOptions = new HashMap<>();
 
-    Map<List<String>, Context> tracesToCtxs = specInfo.getStackTracesToContexts();
+    Map<List<String>, Context> tracesToCtxs = specInfo.getCallingContextsToContexts();
     Map<List<String>, DecisionBranchCountTable> tracesToTables = specInfo
-        .getStackTracesToDecisionBranchTables();
+        .getCallingContextsToDecisionBranchTables();
 
     for (Context ctx : tracesToCtxs.values()) {
       Expression<String> cnf = DecisionInfo.toCNF(ctx, this.options);

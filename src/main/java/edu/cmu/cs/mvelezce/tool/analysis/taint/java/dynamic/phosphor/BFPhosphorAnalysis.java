@@ -143,8 +143,8 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
   private void addExecTaintsFromSink(Map<Set<String>, Set<Set<String>>> sinkResults,
       SinkData sinkData, Set<String> config) {
     for (Map.Entry<Set<String>, Set<Set<String>>> entry : sinkResults.entrySet()) {
-      Set<String> sinkVariabilityContext = entry.getKey();
-      ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVariabilityContext, config);
+      Set<String> sinkVariabilityCtx = entry.getKey();
+      ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVariabilityCtx, config);
       Set<Set<String>> executionTaints = sinkData.getExecTaints(execVarCtx);
       executionTaints.addAll(entry.getValue());
     }

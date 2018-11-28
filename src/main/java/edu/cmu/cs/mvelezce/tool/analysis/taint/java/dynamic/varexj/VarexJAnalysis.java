@@ -55,11 +55,11 @@ public class VarexJAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
         .cachedLineNumbersToInteractions(programResults);
 
     for (JavaRegion sink : this.sinks) {
-      // Gives us the context of the sink being executed
+      // Gives us the ctx of the sink being executed
       int lineNumber = sink.getStartRegionIndex();
-      Interaction sinkContext = lineNumbersToInteractions.get(lineNumber);
+      Interaction sinkCtx = lineNumbersToInteractions.get(lineNumber);
 
-      if (sinkContext == null) {
+      if (sinkCtx == null) {
         throw new RuntimeException("There is no interaction for sink at line " + lineNumber);
       }
 
@@ -70,19 +70,19 @@ public class VarexJAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
         throw new RuntimeException("There is no interaction for sink at line " + lineNumber);
       }
 
-      this.buildContext(sinkContext);
+      this.buildCtx(sinkCtx);
 
     }
 
     return todo;
   }
 
-  private void buildContext(Interaction sinkContext) {
-    if (sinkContext.getInteraction() != 1) {
+  private void buildCtx(Interaction sinkCtx) {
+    if (sinkCtx.getInteraction() != 1) {
       throw new RuntimeException("We do not know how to handle interactions other than 1");
     }
 
-    Object value = sinkContext.getValue();
+    Object value = sinkCtx.getValue();
 
     if (!(value instanceof String)) {
       throw new RuntimeException(

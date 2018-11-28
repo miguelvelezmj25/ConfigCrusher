@@ -54,10 +54,10 @@ public class DynamicAnalysisSpecificationTest {
 
     List<String> programOptions = DynamicRunningExampleAdapter.getListOfOptions();
 
-    // Traces and Contexts
-    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getRunningExampleDecisionsToTracesAndContexts(
+    // Traces and Ctxs
+    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getRunningExampleDecisionsToTracesAndCtxs(
         programOptions);
-    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndContexts(
+    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndCtxs(
         decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToTracesAndVariabilityCtxs,
@@ -89,24 +89,24 @@ public class DynamicAnalysisSpecificationTest {
     return expectedDecisionsToTracesAndOptions;
   }
 
-  private Map<String, Map<List<String>, VariabilityCtx>> getRunningExampleDecisionsToTracesAndContexts(
+  private Map<String, Map<List<String>, VariabilityCtx>> getRunningExampleDecisionsToTracesAndCtxs(
       List<String> programOptions) {
     Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = new HashMap<>();
 
-    Map<List<String>, VariabilityCtx> tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
-        tracesToContexts);
+    Map<List<String>, VariabilityCtx> tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:17"), getContext(setA(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, FOO_Z_DECISION_1,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace("main:17"), getCtx(setA(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, FOO_Z_DECISION_1,
+        tracesToCtxs);
 
     return expectedDecisionsToTracesAndVariabilityCtxs;
   }
@@ -123,10 +123,10 @@ public class DynamicAnalysisSpecificationTest {
 
     List<String> programOptions = SimpleExample1Adapter.getListOfOptions();
 
-    // Traces and Contexts
-    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getSimpleExample1DecisionsToTracesAndContexts(
+    // Traces and Ctxs
+    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getSimpleExample1DecisionsToTracesAndCtxs(
         programOptions);
-    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndContexts(
+    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndCtxs(
         decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToTracesAndVariabilityCtxs,
@@ -140,127 +140,127 @@ public class DynamicAnalysisSpecificationTest {
     Assert.assertEquals(expectedDecisionsToTracesAndOptions, decisionsToTracesAndOptions);
   }
 
-  private Map<String, Map<List<String>, VariabilityCtx>> getSimpleExample1DecisionsToTracesAndContexts(
+  private Map<String, Map<List<String>, VariabilityCtx>> getSimpleExample1DecisionsToTracesAndCtxs(
       List<String> programOptions) {
     Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = new HashMap<>();
 
-    Map<List<String>, VariabilityCtx> tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
-        tracesToContexts);
+    Map<List<String>, VariabilityCtx> tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(setA(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(setA(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_3,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_3,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_4,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_4,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_5,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_5,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_6,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_6,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_7,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_7,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_8,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_8,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_9,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_9,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_10,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_10,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_11,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_11,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_12,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_12,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_13,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_13,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_14,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_14,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_15,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_15,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_16,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_16,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:51"), getContext(setA(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, FOO_DECISION_1, tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace("main:51"), getCtx(setA(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, FOO_DECISION_1, tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:55"), getContext(setB(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, FOO_DECISION_1, tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace("main:55"), getCtx(setB(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, FOO_DECISION_1, tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:59"), getContext(setA(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MOO_Z_DECISION_1,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace("main:59"), getCtx(setA(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MOO_Z_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:63"), getContext(setB(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MOO_Z_DECISION_1,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace("main:63"), getCtx(setB(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MOO_Z_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:67"), getContext(setA(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, BAR_Z_DECISION_1,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace("main:67"), getCtx(setA(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, BAR_Z_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:71"), getContext(setB(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, BAR_Z_DECISION_1,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace("main:71"), getCtx(setB(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, BAR_Z_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:75"), getContext(setA(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, COW_Z_DECISION_1,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace("main:75"), getCtx(setA(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, COW_Z_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace("main:79"), getContext(setB(), setAB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, COW_Z_DECISION_1,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace("main:79"), getCtx(setB(), setAB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, COW_Z_DECISION_1,
+        tracesToCtxs);
 
     return expectedDecisionsToTracesAndVariabilityCtxs;
   }
@@ -379,10 +379,10 @@ public class DynamicAnalysisSpecificationTest {
 
     List<String> programOptions = Example1Adapter.getListOfOptions();
 
-    // Traces and Contexts
-    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getExample1DecisionsToTracesAndContexts(
+    // Traces and Ctxs
+    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getExample1DecisionsToTracesAndCtxs(
         programOptions);
-    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndContexts(
+    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndCtxs(
         decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToTracesAndVariabilityCtxs,
@@ -414,24 +414,24 @@ public class DynamicAnalysisSpecificationTest {
     return expectedDecisionsToTracesAndOptions;
   }
 
-  private Map<String, Map<List<String>, VariabilityCtx>> getExample1DecisionsToTracesAndContexts(
+  private Map<String, Map<List<String>, VariabilityCtx>> getExample1DecisionsToTracesAndCtxs(
       List<String> programOptions) {
     Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = new HashMap<>();
 
-    Map<List<String>, VariabilityCtx> tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
-        tracesToContexts);
+    Map<List<String>, VariabilityCtx> tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(emptySet(), setB()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_3,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(emptySet(), setB()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_3,
+        tracesToCtxs);
 
     return expectedDecisionsToTracesAndVariabilityCtxs;
   }
@@ -448,10 +448,10 @@ public class DynamicAnalysisSpecificationTest {
 
     List<String> programOptions = PhosphorExample2Adapter.getListOfOptions();
 
-    // Traces and Contexts
-    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getExample2DecisionsToTracesAndContexts(
+    // Traces and Ctxs
+    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getExample2DecisionsToTracesAndCtxs(
         programOptions);
-    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndContexts(
+    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndCtxs(
         decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToTracesAndVariabilityCtxs,
@@ -483,24 +483,24 @@ public class DynamicAnalysisSpecificationTest {
     return expectedDecisionsToTracesAndOptions;
   }
 
-  private Map<String, Map<List<String>, VariabilityCtx>> getExample2DecisionsToTracesAndContexts(
+  private Map<String, Map<List<String>, VariabilityCtx>> getExample2DecisionsToTracesAndCtxs(
       List<String> programOptions) {
     Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = new HashMap<>();
 
-    Map<List<String>, VariabilityCtx> tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
-        tracesToContexts);
+    Map<List<String>, VariabilityCtx> tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(emptySet(), setA()));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_3,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(emptySet(), setA()));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_3,
+        tracesToCtxs);
 
     return expectedDecisionsToTracesAndVariabilityCtxs;
   }
@@ -517,10 +517,10 @@ public class DynamicAnalysisSpecificationTest {
 
     List<String> programOptions = MultiFacetsAdapter.getListOfOptions();
 
-    // Traces and Contexts
-    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getMultiFacetsDecisionsToTracesAndContexts(
+    // Traces and Ctxs
+    Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = getMultiFacetsDecisionsToTracesAndCtxs(
         programOptions);
-    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndContexts(
+    Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = getDecisionsToTracesAndCtxs(
         decisionInfo);
 
     Assert.assertEquals(expectedDecisionsToTracesAndVariabilityCtxs,
@@ -552,41 +552,41 @@ public class DynamicAnalysisSpecificationTest {
     return expectedDecisionsToTracesAndOptions;
   }
 
-  private Map<String, Map<List<String>, VariabilityCtx>> getMultiFacetsDecisionsToTracesAndContexts(
+  private Map<String, Map<List<String>, VariabilityCtx>> getMultiFacetsDecisionsToTracesAndCtxs(
       List<String> programOptions) {
     Map<String, Map<List<String>, VariabilityCtx>> expectedDecisionsToTracesAndVariabilityCtxs = new HashMap<>();
 
-    Map<List<String>, VariabilityCtx> tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
-        tracesToContexts);
+    Map<List<String>, VariabilityCtx> tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_1,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_2,
+        tracesToCtxs);
 
-    tracesToContexts = new HashMap<>();
-    tracesToContexts.put(getTrace(), getContext(programOptions));
-    putOrAddContext(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_3,
-        tracesToContexts);
+    tracesToCtxs = new HashMap<>();
+    tracesToCtxs.put(getTrace(), getCtx(programOptions));
+    putOrAddCtx(expectedDecisionsToTracesAndVariabilityCtxs, MAIN_STRINGS_DECISION_3,
+        tracesToCtxs);
 
     return expectedDecisionsToTracesAndVariabilityCtxs;
   }
 
-  private static Map<String, Map<List<String>, VariabilityCtx>> getDecisionsToTracesAndContexts(
+  private static Map<String, Map<List<String>, VariabilityCtx>> getDecisionsToTracesAndCtxs(
       Map<JavaRegion, DecisionInfo> regionsToDecisions) {
     Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs = new HashMap<>();
 
     for (Map.Entry<JavaRegion, DecisionInfo> entry : regionsToDecisions.entrySet()) {
       DecisionInfo decisionInfo = entry.getValue();
-      Map<List<String>, VariabilityCtx> tracesToContexts = decisionInfo
+      Map<List<String>, VariabilityCtx> tracesToCtxs = decisionInfo
           .getCallingCtxsToVariabilityCtxs();
 
       JavaRegion region = entry.getKey();
       decisionsToTracesAndVariabilityCtxs
           .put(getRegionInfo(region.getRegionMethod(), region.getStartRegionIndex()),
-              tracesToContexts);
+              tracesToCtxs);
     }
 
     return decisionsToTracesAndVariabilityCtxs;
@@ -618,16 +618,16 @@ public class DynamicAnalysisSpecificationTest {
     return decisionsToTracesAndOptions;
   }
 
-  private static void putOrAddContext(
+  private static void putOrAddCtx(
       Map<String, Map<List<String>, VariabilityCtx>> decisionsToTracesAndVariabilityCtxs,
-      String decision, Map<List<String>, VariabilityCtx> tracesToContexts) {
+      String decision, Map<List<String>, VariabilityCtx> tracesToCtxs) {
     Map<List<String>, VariabilityCtx> entry = decisionsToTracesAndVariabilityCtxs.get(decision);
 
     if (entry == null) {
-      decisionsToTracesAndVariabilityCtxs.put(decision, tracesToContexts);
+      decisionsToTracesAndVariabilityCtxs.put(decision, tracesToCtxs);
     }
     else {
-      entry.putAll(tracesToContexts);
+      entry.putAll(tracesToCtxs);
     }
   }
 
@@ -653,7 +653,7 @@ public class DynamicAnalysisSpecificationTest {
   }
 
   @SafeVarargs
-  private static VariabilityCtx getContext(Set<String>... configs) {
+  private static VariabilityCtx getCtx(Set<String>... configs) {
     VariabilityCtx variabilityCtx = new VariabilityCtx();
 
     for (Set<String> config : configs) {
@@ -663,7 +663,7 @@ public class DynamicAnalysisSpecificationTest {
     return variabilityCtx;
   }
 
-  private static VariabilityCtx getContext(List<String> options) {
+  private static VariabilityCtx getCtx(List<String> options) {
     VariabilityCtx variabilityCtx = new VariabilityCtx();
     Set<Set<String>> configs = Helper.getConfigurations(options);
 

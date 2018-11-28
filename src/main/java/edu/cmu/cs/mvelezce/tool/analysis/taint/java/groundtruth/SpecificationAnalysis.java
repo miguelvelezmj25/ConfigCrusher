@@ -155,8 +155,8 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
     for (Map.Entry<String, Map> entry : stringCallingCtxsToStringCallingCtxs.entrySet()) {
       List<String> callingCtx = this.getCallingCtx(entry.getKey());
-      Map<String, List<List<String>>> contexts = entry.getValue();
-      VariabilityCtx variabilityCtx = this.getVariabilityCtx(contexts.get("ctx"));
+      Map<String, List<List<String>>> ctxs = entry.getValue();
+      VariabilityCtx variabilityCtx = this.getVariabilityCtx(ctxs.get("ctx"));
       callingCtxsToVariabilityCtxs.put(callingCtx, variabilityCtx);
     }
   }
@@ -347,9 +347,9 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   }
 
   private void addCtxs(DecisionInfo decisionInfo, List<String> callingCtx) {
-    Map<List<String>, VariabilityCtx> callingCtxsToContexts = decisionInfo
+    Map<List<String>, VariabilityCtx> callingCtxsToCtxs = decisionInfo
         .getCallingCtxsToVariabilityCtxs();
-    callingCtxsToContexts.putIfAbsent(callingCtx, new VariabilityCtx());
+    callingCtxsToCtxs.putIfAbsent(callingCtx, new VariabilityCtx());
   }
 
   private void addSinks(Set<CallingCtxDecision> callingCtxDecisions) {

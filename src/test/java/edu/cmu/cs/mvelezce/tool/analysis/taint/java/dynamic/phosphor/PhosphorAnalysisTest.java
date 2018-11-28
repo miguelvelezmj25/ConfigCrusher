@@ -176,26 +176,26 @@ public class PhosphorAnalysisTest {
     config.add(A);
 
     Map<String, Set<String>> sinksToTaints = new HashMap<>();
-    Map<String, Set<String>> sinksToContexts = new HashMap<>();
+    Map<String, Set<String>> sinksToCtxs = new HashMap<>();
 
     Set<String> taints0 = new HashSet<>();
     taints0.add(A);
     sinksToTaints.put(sink0, taints0);
 
-    Set<String> context0 = new HashSet<>();
-    sinksToContexts.put(sink0, context0);
+    Set<String> ctx0 = new HashSet<>();
+    sinksToCtxs.put(sink0, ctx0);
 
     Set<String> taints1 = new HashSet<>();
     taints1.add(A);
     taints1.add(B);
     sinksToTaints.put(sink1, taints1);
 
-    Set<String> context1 = new HashSet<>();
-    context1.add(A);
-    sinksToContexts.put(sink1, context1);
+    Set<String> ctx1 = new HashSet<>();
+    ctx1.add(A);
+    sinksToCtxs.put(sink1, ctx1);
 
     Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults = Pair
-        .of(sinksToTaints, sinksToContexts);
+        .of(sinksToTaints, sinksToCtxs);
 
     PhosphorAnalysis analysis = new PhosphorAnalysis(DynamicRunningExampleAdapter.PROGRAM_NAME);
     Set<Constraint> constraintsFromAnalysis = analysis

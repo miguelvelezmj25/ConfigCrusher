@@ -263,23 +263,23 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
     return this.changeLabelsToTaints(sinksToLabelData);
 
 //    Map<String, Set<TaintLabel>> sinksToTaintLabelsFromTaints = new HashMap<>();
-//    Map<String, Set<TaintLabel>> sinksToTaintLabelsFromContext = new HashMap<>();
+//    Map<String, Set<TaintLabel>> sinksToTaintLabelsFromCtx = new HashMap<>();
 //
 //    for (File file : serializedFiles) {
 //      if (file.getName().contains("taints")) {
 //        sinksToTaintLabelsFromTaints = this.deserialize(file);
 //      }
 //      else {
-//        sinksToTaintLabelsFromContext = this.deserialize(file);
+//        sinksToTaintLabelsFromCtx = this.deserialize(file);
 //      }
 //    }
 //
 //    Map<String, Set<String>> sinksToTaintsFromTaints = this
 //        .changeTaintLabelsToTaints(sinksToTaintLabelsFromTaints);
-//    Map<String, Set<String>> sinksToTaintsFromContext = this
-//        .changeTaintLabelsToTaints(sinksToTaintLabelsFromContext);
+//    Map<String, Set<String>> sinksToTaintsFromCtx = this
+//        .changeTaintLabelsToTaints(sinksToTaintLabelsFromCtx);
 //
-//    return Pair.of(sinksToTaintsFromTaints, sinksToTaintsFromContext);
+//    return Pair.of(sinksToTaintsFromTaints, sinksToTaintsFromCtx);
   }
 
   private Map<String, Map<Set<String>, Set<Set<String>>>> changeLabelsToTaints(
@@ -297,12 +297,12 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
   }
 
   private Map<Set<String>, Set<Set<String>>> transformDataLabelsToTaints(
-      Map<Set<TaintLabel>, Set<Set<TaintLabel>>> contextsToTaintLabels) {
-    Map<Set<String>, Set<Set<String>>> contextsToTaints = new HashMap<>();
+      Map<Set<TaintLabel>, Set<Set<TaintLabel>>> ctxsToTaintLabels) {
+    Map<Set<String>, Set<Set<String>>> ctxsToTaints = new HashMap<>();
 
-    for (Map.Entry<Set<TaintLabel>, Set<Set<TaintLabel>>> entry : contextsToTaintLabels
+    for (Map.Entry<Set<TaintLabel>, Set<Set<TaintLabel>>> entry : ctxsToTaintLabels
         .entrySet()) {
-      Set<String> context = this.transformLabelsToTaints(entry.getKey());
+      Set<String> ctx = this.transformLabelsToTaints(entry.getKey());
       Set<Set<String>> taintSets = new HashSet<>();
 
       for (Set<TaintLabel> LabelSet : entry.getValue()) {
@@ -310,10 +310,10 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
         taintSets.add(taintSet);
       }
 
-      contextsToTaints.put(context, taintSets);
+      ctxsToTaints.put(ctx, taintSets);
     }
 
-    return contextsToTaints;
+    return ctxsToTaints;
   }
 
   private Set<String> transformLabelsToTaints(Set<TaintLabel> labels) {
@@ -332,29 +332,29 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
 
     for (Map.Entry<String, Map<Taint, Set<Set<Taint>>>> entry : sinksToData.entrySet()) {
       Map<Taint, Set<Set<Taint>>> sinkData = entry.getValue();
-      Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityContextsToLabels = this
-          .getVariabilityContextsToLabels(sinkData);
-      sinksToLabelData.put(entry.getKey(), variabilityContextsToLabels);
+      Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityCtxsToLabels = this
+          .getVariabilityCtxsToLabels(sinkData);
+      sinksToLabelData.put(entry.getKey(), variabilityCtxsToLabels);
     }
 
     return sinksToLabelData;
   }
 
-  private Map<Set<TaintLabel>, Set<Set<TaintLabel>>> getVariabilityContextsToLabels(
+  private Map<Set<TaintLabel>, Set<Set<TaintLabel>>> getVariabilityCtxsToLabels(
       Map<Taint, Set<Set<Taint>>> sinkData) {
-    Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityContextsToLabels = new HashMap<>();
+    Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityCtxsToLabels = new HashMap<>();
 
     for (Map.Entry<Taint, Set<Set<Taint>>> entry : sinkData.entrySet()) {
-      Taint variabilityContextTaint = entry.getKey();
-      Set<TaintLabel> variabilityContext = this.getVariabilityContext(variabilityContextTaint);
+      Taint variabilityCtxTaint = entry.getKey();
+      Set<TaintLabel> variabilityCtx = this.getVariabilityCtx(variabilityCtxTaint);
 
       Set<Set<Taint>> executionTaintsSet = entry.getValue();
       Set<Set<TaintLabel>> executionLabelSet = this.getExecutionLabelSet(executionTaintsSet);
 
-      variabilityContextsToLabels.put(variabilityContext, executionLabelSet);
+      variabilityCtxsToLabels.put(variabilityCtx, executionLabelSet);
     }
 
-    return variabilityContextsToLabels;
+    return variabilityCtxsToLabels;
   }
 
   private Set<Set<TaintLabel>> getExecutionLabelSet(Set<Set<Taint>> executionTaintsSet) {
@@ -378,12 +378,12 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
     return executionLabelSet;
   }
 
-  private Set<TaintLabel> getVariabilityContext(Taint variabilityContext) {
-    if (variabilityContext == null) {
+  private Set<TaintLabel> getVariabilityCtx(Taint variabilityCtx) {
+    if (variabilityCtx == null) {
       return new HashSet<>();
     }
 
-    return variabilityContext.getLabels();
+    return variabilityCtx.getLabels();
   }
 
 //  private Map<String, Set<String>> changeTaintLabelsToTaints(
@@ -439,22 +439,22 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
       Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults,
       Set<String> config) {
     Map<String, Set<String>> sinksToTaintsFromTaints = sinksToTaintsResults.getLeft();
-    Map<String, Set<String>> sinksToTaintsFromContext = sinksToTaintsResults.getRight();
+    Map<String, Set<String>> sinksToTaintsFromCtx = sinksToTaintsResults.getRight();
 
-    if (sinksToTaintsFromTaints == null || sinksToTaintsFromContext == null) {
+    if (sinksToTaintsFromTaints == null || sinksToTaintsFromCtx == null) {
       throw new IllegalArgumentException("The sinks to taints result cannot be empty");
     }
 
     Set<Constraint> constraintsFromAnalysis = new HashSet<>();
 
     Set<String> executedSinks = new HashSet<>(sinksToTaintsFromTaints.keySet());
-    executedSinks.addAll(sinksToTaintsFromContext.keySet());
+    executedSinks.addAll(sinksToTaintsFromCtx.keySet());
     this.addNewSinks(executedSinks);
 
     for (String sink : executedSinks) {
       Set<Constraint> constraintsAtSink = this
           .getConstraintsAtSink(sinksToTaintsFromTaints.get(sink),
-              sinksToTaintsFromContext.get(sink),
+              sinksToTaintsFromCtx.get(sink),
               config);
 
       constraintsFromAnalysis.addAll(constraintsAtSink);
@@ -475,18 +475,18 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
    * Calculate the constraints at a sink
    */
   private Set<Constraint> getConstraintsAtSink(@Nullable Set<String> taintsFromTaint,
-      @Nullable Set<String> taintsFromContext, Set<String> config) {
+      @Nullable Set<String> taintsFromCtx, Set<String> config) {
     Set<Constraint> constraints = new HashSet<>();
 
     Set<Map<String, Boolean>> partialConfigs = Constraint.buildPartialConfigs(taintsFromTaint);
-    Map<String, Boolean> context = Constraint.buildContext(taintsFromContext, config);
+    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
 
     if (partialConfigs.isEmpty()) {
       partialConfigs.add(new HashMap<>());
     }
 
     for (Map<String, Boolean> partialConfig : partialConfigs) {
-      constraints.add(new Constraint(partialConfig, context));
+      constraints.add(new Constraint(partialConfig, ctx));
     }
 
     PhosphorAnalysis.removeInvalidConstraints(constraints);

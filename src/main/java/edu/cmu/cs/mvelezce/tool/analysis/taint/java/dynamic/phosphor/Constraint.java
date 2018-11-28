@@ -11,25 +11,25 @@ import javax.annotation.Nullable;
 public class Constraint {
 
   private final Map<String, Boolean> partialConfig;
-  private final Map<String, Boolean> context;
+  private final Map<String, Boolean> ctx;
 
   // Dummy constructor needed for jackson xml
   private Constraint() {
     this.partialConfig = new HashMap<>();
-    this.context = new HashMap<>();
+    this.ctx = new HashMap<>();
   }
 
-  Constraint(Map<String, Boolean> partialConfig, Map<String, Boolean> context) {
+  Constraint(Map<String, Boolean> partialConfig, Map<String, Boolean> ctx) {
     this.partialConfig = partialConfig;
-    this.context = context;
+    this.ctx = ctx;
   }
 
   Constraint(Map<String, Boolean> partialConfig) {
     this(partialConfig, new HashMap<>());
   }
 
-  public Map<String, Boolean> getContext() {
-    return context;
+  public Map<String, Boolean> getCtx() {
+    return ctx;
   }
 
   public Map<String, Boolean> getPartialConfig() {
@@ -38,17 +38,17 @@ public class Constraint {
 
   /**
    * Checks whether the partial configuration can be executed under the condition specified in the
-   * context.
+   * ctx.
    *
    * Example: partialConfig={A=false, B=false} ctx={A=false} is a valid constraint.
    * partialConfig={A=false, B=false} ctx={A=true} is an invalid constraint
    */
   boolean isValid() {
-    if (this.context.isEmpty() || this.context.equals(this.partialConfig)) {
+    if (this.ctx.isEmpty() || this.ctx.equals(this.partialConfig)) {
       return true;
     }
 
-    for (Map.Entry<String, Boolean> entry : this.context.entrySet()) {
+    for (Map.Entry<String, Boolean> entry : this.ctx.entrySet()) {
       String option = entry.getKey();
 
       if (!this.partialConfig.containsKey(option)) {
@@ -85,7 +85,7 @@ public class Constraint {
   Map<String, Boolean> getCompleteConstraint() {
     Map<String, Boolean> constraint = new HashMap<>();
     constraint.putAll(this.partialConfig);
-    constraint.putAll(this.context);
+    constraint.putAll(this.ctx);
 
     return constraint;
   }
@@ -93,8 +93,8 @@ public class Constraint {
   Set<String> getConstraintAsPartialConfig() {
     Set<String> config = new HashSet<>(toPartialCCConfig(this.partialConfig));
 
-    if (!this.context.isEmpty()) {
-      config.addAll(toPartialCCConfig(this.context));
+    if (!this.ctx.isEmpty()) {
+      config.addAll(toPartialCCConfig(this.ctx));
     }
 
     return config;
@@ -165,19 +165,19 @@ public class Constraint {
     return partialConfigs;
   }
 
-  static Map<String, Boolean> buildContext(@Nullable Set<String> taintsFromContext,
+  static Map<String, Boolean> buildCtx(@Nullable Set<String> taintsFromCtx,
       Set<String> config) {
-    Map<String, Boolean> context = new HashMap<>();
+    Map<String, Boolean> ctx = new HashMap<>();
 
-    if (taintsFromContext == null || taintsFromContext.isEmpty()) {
-      return context;
+    if (taintsFromCtx == null || taintsFromCtx.isEmpty()) {
+      return ctx;
     }
 
-    for (String taint : taintsFromContext) {
-      context.put(taint, config.contains(taint));
+    for (String taint : taintsFromCtx) {
+      ctx.put(taint, config.contains(taint));
     }
 
-    return context;
+    return ctx;
   }
 
   @Override
@@ -194,13 +194,13 @@ public class Constraint {
     if (!partialConfig.equals(that.partialConfig)) {
       return false;
     }
-    return context.equals(that.context);
+    return ctx.equals(that.ctx);
   }
 
   @Override
   public int hashCode() {
     int result = partialConfig.hashCode();
-    result = 31 * result + context.hashCode();
+    result = 31 * result + ctx.hashCode();
     return result;
   }
 
@@ -212,15 +212,15 @@ public class Constraint {
       partialConfig = this.partialConfig.toString();
     }
 
-    String context = "True";
+    String ctx = "True";
 
-    if (!this.context.isEmpty()) {
-      context = this.context.toString();
+    if (!this.ctx.isEmpty()) {
+      ctx = this.ctx.toString();
     }
 
     return "Constraint{" +
         "partialConfig=" + partialConfig +
-        ", ctx=" + context +
+        ", ctx=" + ctx +
         '}';
   }
 }

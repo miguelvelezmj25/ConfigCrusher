@@ -304,7 +304,7 @@ public class PhosphorResultAnalyzer {
       cnfCtxsToOptions.put(cnf, optionsSet);
     }
 
-    // TODO test that there is a different trace, but the same context, which then leads to two entries with the same context
+    // TODO test that there is a different trace, but the same ctx, which then leads to two entries with the same ctx
     for (Map.Entry<List<String>, VariabilityCtx> entry : callingCtxsToVariabilityCtxs.entrySet()) {
       VariabilityCtx ctx = entry.getValue();
       Expression<String> cnf = DecisionInfo.toCNF(ctx, this.options);
@@ -337,7 +337,7 @@ public class PhosphorResultAnalyzer {
     StringBuilder errors = new StringBuilder();
 
     if (!specCNFCtxs.equals(phosphorCNFCtxs)) {
-      errors.append("WARNING: contexts are different");
+      errors.append("WARNING: ctxs are different");
       errors.append("\n");
       errors.append("Spec: ");
       errors.append(specCNFCtxs);

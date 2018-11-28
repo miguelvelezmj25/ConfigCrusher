@@ -36,35 +36,35 @@ public class ConstraintTest {
   }
 
   @Test
-  public void isValid_forTrueValidConstraint_ContextNotInPartialConfig() {
+  public void isValid_forTrueValidConstraint_CtxNotInPartialConfig() {
     Map<String, Boolean> partialConfig = buildPartialConfig_A();
-    Map<String, Boolean> context = ConstraintTest.buildPartialConfig_B();
-    Constraint constraint = new Constraint(partialConfig, context);
+    Map<String, Boolean> ctx = ConstraintTest.buildPartialConfig_B();
+    Constraint constraint = new Constraint(partialConfig, ctx);
 
     Assert.assertTrue(constraint.isValid());
   }
 
   @Test
-  public void isValid_forTrueValidConstraint_ContextInPartialConfig() {
+  public void isValid_forTrueValidConstraint_CtxInPartialConfig() {
     Map<String, Boolean> partialConfig = buildPartialConfig_A_notB();
-    Map<String, Boolean> context = ConstraintTest.buildPartialConfig_notB();
-    Constraint constraint = new Constraint(partialConfig, context);
+    Map<String, Boolean> ctx = ConstraintTest.buildPartialConfig_notB();
+    Constraint constraint = new Constraint(partialConfig, ctx);
 
     Assert.assertTrue(constraint.isValid());
   }
 
   @Test
-  public void isValid_forTrueValidConstraint_TrueContext() {
+  public void isValid_forTrueValidConstraint_TrueCtx() {
     Constraint constraint = buildConstraint_A_notB();
 
     Assert.assertTrue(constraint.isValid());
   }
 
   @Test
-  public void isValid_forTrueValidConstraint_SamePartialConfigAndContext() {
+  public void isValid_forTrueValidConstraint_SamePartialConfigAndCtx() {
     Map<String, Boolean> partialConfig = buildPartialConfig_A_notB();
-    Map<String, Boolean> context = ConstraintTest.buildPartialConfig_A_notB();
-    Constraint constraint = new Constraint(partialConfig, context);
+    Map<String, Boolean> ctx = ConstraintTest.buildPartialConfig_A_notB();
+    Constraint constraint = new Constraint(partialConfig, ctx);
 
     Assert.assertTrue(constraint.isValid());
   }
@@ -72,8 +72,8 @@ public class ConstraintTest {
   @Test
   public void isValid_forFalseInvalidConstraint0() {
     Map<String, Boolean> partialConfig = buildPartialConfig_A();
-    Map<String, Boolean> context = ConstraintTest.buildPartialConfig_notA();
-    Constraint constraint = new Constraint(partialConfig, context);
+    Map<String, Boolean> ctx = ConstraintTest.buildPartialConfig_notA();
+    Constraint constraint = new Constraint(partialConfig, ctx);
 
     Assert.assertFalse(constraint.isValid());
   }
@@ -81,8 +81,8 @@ public class ConstraintTest {
   @Test
   public void isValid_forFalseInvalidConstraint1() {
     Map<String, Boolean> partialConfig = buildPartialConfig_A_notB();
-    Map<String, Boolean> context = ConstraintTest.buildPartialConfig_notA_notB();
-    Constraint constraint = new Constraint(partialConfig, context);
+    Map<String, Boolean> ctx = ConstraintTest.buildPartialConfig_notA_notB();
+    Constraint constraint = new Constraint(partialConfig, ctx);
 
     Assert.assertFalse(constraint.isValid());
   }
@@ -236,78 +236,78 @@ public class ConstraintTest {
   }
 
   @Test
-  public void buildContext_forNullContextEmptyConfig() {
-    Set<String> taintsFromContext = null;
+  public void buildCtx_forNullCtxEmptyConfig() {
+    Set<String> taintsFromCtx = null;
     Set<String> config = new HashSet<>();
 
-    Map<String, Boolean> context = Constraint.buildContext(taintsFromContext, config);
+    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
 
-    Assert.assertTrue(context.isEmpty());
+    Assert.assertTrue(ctx.isEmpty());
   }
 
   @Test
-  public void buildContext_forNullContextNonEmptyConfig() {
-    Set<String> taintsFromContext = null;
-
-    Set<String> config = new HashSet<>();
-    config.add("A");
-
-    Map<String, Boolean> context = Constraint.buildContext(taintsFromContext, config);
-
-    Assert.assertTrue(context.isEmpty());
-  }
-
-  @Test
-  public void buildContext_forEmptyContextEmptyConfig() {
-    Set<String> taintsFromContext = new HashSet<>();
-    Set<String> config = new HashSet<>();
-
-    Map<String, Boolean> context = Constraint.buildContext(taintsFromContext, config);
-
-    Assert.assertTrue(context.isEmpty());
-  }
-
-  @Test
-  public void buildContext_forEmptyContextNonEmptyConfig() {
-    Set<String> taintsFromContext = new HashSet<>();
+  public void buildCtx_forNullCtxNonEmptyConfig() {
+    Set<String> taintsFromCtx = null;
 
     Set<String> config = new HashSet<>();
     config.add("A");
 
-    Map<String, Boolean> context = Constraint.buildContext(taintsFromContext, config);
+    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
 
-    Assert.assertTrue(context.isEmpty());
+    Assert.assertTrue(ctx.isEmpty());
   }
 
   @Test
-  public void buildContext_forNonEmptyContextEmptyConfig() {
+  public void buildCtx_forEmptyCtxEmptyConfig() {
+    Set<String> taintsFromCtx = new HashSet<>();
+    Set<String> config = new HashSet<>();
+
+    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
+
+    Assert.assertTrue(ctx.isEmpty());
+  }
+
+  @Test
+  public void buildCtx_forEmptyCtxNonEmptyConfig() {
+    Set<String> taintsFromCtx = new HashSet<>();
+
+    Set<String> config = new HashSet<>();
+    config.add("A");
+
+    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
+
+    Assert.assertTrue(ctx.isEmpty());
+  }
+
+  @Test
+  public void buildCtx_forNonEmptyCtxEmptyConfig() {
     String A = "A";
 
-    Set<String> taintsFromContext = new HashSet<>();
-    taintsFromContext.add(A);
+    Set<String> taintsFromCtx = new HashSet<>();
+    taintsFromCtx.add(A);
 
     Set<String> config = new HashSet<>();
 
-    Map<String, Boolean> context = Constraint.buildContext(taintsFromContext, config);
+    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
 
-    Assert.assertTrue(context.containsKey(A));
-    Assert.assertEquals(false, context.get(A));
+    Assert.assertTrue(ctx.containsKey(A));
+    Assert.assertEquals(false, ctx.get(A));
   }
 
   @Test
-  public void buildContext_forNonEmptyContextNonEmptyConfig() {
+  public void buildCtx_forNonEmptyCtxNonEmptyConfig() {
     String A = "A";
 
-    Set<String> taintsFromContext = new HashSet<>();
-    taintsFromContext.add(A);
+    Set<String> taintsFromCtx = new HashSet<>();
+    taintsFromCtx.add(A);
 
     Set<String> config = new HashSet<>();
     config.add(A);
 
-    Map<String, Boolean> context = Constraint.buildContext(taintsFromContext, config);
+    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
 
-    Assert.assertTrue(context.containsKey(A));
-    Assert.assertEquals(true, context.get(A));
+    Assert.assertTrue(ctx.containsKey(A));
+    Assert.assertEquals(true, ctx.get(A));
   }
 
   @Test

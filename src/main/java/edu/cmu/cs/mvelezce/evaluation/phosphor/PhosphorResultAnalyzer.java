@@ -8,7 +8,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorA
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ExecVarCtx;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.SinkData;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SpecificationAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.Context;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.VariabilityCtx;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DecisionBranchCountTable;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DecisionInfo;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DynamicAnalysisSpecification;
@@ -117,11 +117,11 @@ public class PhosphorResultAnalyzer {
   }
 
   private String compareRegions(DecisionInfo specDecisionInfo, SinkData phosphorSinkData) {
-    Map<List<String>, Context> tracesToContexts = specDecisionInfo.getCallingContextsToContexts();
+    Map<List<String>, VariabilityCtx> callingContextsToVariabilityCtxs = specDecisionInfo.getCallingContextsToVariabilityCtxs();
     Map<ExecVarCtx, Set<Set<String>>> data = phosphorSinkData.getData();
 
     StringBuilder errors = new StringBuilder();
-    String ctxErrors = this.compareCtxs(tracesToContexts.values(), data.keySet());
+    String ctxErrors = this.compareVariabilityCtxs(callingContextsToVariabilityCtxs.values(), data.keySet());
     errors.append(ctxErrors);
 
     String optionsErrors = this.compareOptions(specDecisionInfo, data);
@@ -294,23 +294,23 @@ public class PhosphorResultAnalyzer {
   private Map<Expression<String>, Set<Set<String>>> getSpecCtxToOptions(DecisionInfo specInfo) {
     Map<Expression<String>, Set<Set<String>>> cnfCtxsToOptions = new HashMap<>();
 
-    Map<List<String>, Context> tracesToCtxs = specInfo.getCallingContextsToContexts();
-    Map<List<String>, DecisionBranchCountTable> tracesToTables = specInfo
+    Map<List<String>, VariabilityCtx> callingContextsToVariabilityCtxs = specInfo.getCallingContextsToVariabilityCtxs();
+    Map<List<String>, DecisionBranchCountTable> callingContextsToTables = specInfo
         .getCallingContextsToDecisionBranchTables();
 
-    for (Context ctx : tracesToCtxs.values()) {
-      Expression<String> cnf = DecisionInfo.toCNF(ctx, this.options);
+    for (VariabilityCtx variabilityCtx : callingContextsToVariabilityCtxs.values()) {
+      Expression<String> cnf = DecisionInfo.toCNF(variabilityCtx, this.options);
       Set<Set<String>> optionsSet = new HashSet<>();
       cnfCtxsToOptions.put(cnf, optionsSet);
     }
 
     // TODO test that there is a different trace, but the same context, which then leads to two entries with the same context
-    for (Map.Entry<List<String>, Context> entry : tracesToCtxs.entrySet()) {
-      Context ctx = entry.getValue();
+    for (Map.Entry<List<String>, VariabilityCtx> entry : callingContextsToVariabilityCtxs.entrySet()) {
+      VariabilityCtx ctx = entry.getValue();
       Expression<String> cnf = DecisionInfo.toCNF(ctx, this.options);
       Set<Set<String>> optionsSet = cnfCtxsToOptions.get(cnf);
 
-      DecisionBranchCountTable table = tracesToTables.get(entry.getKey());
+      DecisionBranchCountTable table = callingContextsToTables.get(entry.getKey());
       Set<String> options = DynamicAnalysisSpecification.getMinimalSetOfOptions(table);
       optionsSet.add(options);
     }
@@ -330,7 +330,7 @@ public class PhosphorResultAnalyzer {
     return cnfCtxsToOptions;
   }
 
-  private String compareCtxs(Collection<Context> specCtxs, Set<ExecVarCtx> phosphorCtxs) {
+  private String compareVariabilityCtxs(Collection<VariabilityCtx> specCtxs, Set<ExecVarCtx> phosphorCtxs) {
     Set<Expression<String>> specCNFCtxs = this.getSpecCNFCtxs(specCtxs);
     Set<Expression<String>> phosphorCNFCtxs = this.getPhosphorCNFCtxs(phosphorCtxs);
 
@@ -362,10 +362,10 @@ public class PhosphorResultAnalyzer {
   }
 
 
-  private Set<Expression<String>> getSpecCNFCtxs(Collection<Context> specCtxs) {
+  private Set<Expression<String>> getSpecCNFCtxs(Collection<VariabilityCtx> specCtxs) {
     Set<Expression<String>> specCNFCtxs = new HashSet<>();
 
-    for (Context specCtx : specCtxs) {
+    for (VariabilityCtx specCtx : specCtxs) {
       Expression<String> specCNF = DecisionInfo.toCNF(specCtx, this.options);
       specCNFCtxs.add(specCNF);
     }

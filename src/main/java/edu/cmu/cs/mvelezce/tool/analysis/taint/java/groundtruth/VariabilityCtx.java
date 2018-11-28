@@ -5,19 +5,19 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Context implements Serializable {
+public class VariabilityCtx implements Serializable {
 
   private static final long serialVersionUID = 5228402185734425841L;
 
-  private final Set<Set<String>> context = new HashSet<>();
+  private final Set<Set<String>> ctx = new HashSet<>();
 
   public void addConfig(Set<String> config) {
-    this.context.add(config);
+    this.ctx.add(config);
   }
 
   // TODO change method name to getConfigs
-  public Set<Set<String>> getContext() {
-    return context;
+  public Set<Set<String>> getCtx() {
+    return ctx;
   }
 
   @Override
@@ -29,14 +29,14 @@ public class Context implements Serializable {
       return false;
     }
 
-    Context context1 = (Context) o;
+    VariabilityCtx variabilityCtx1 = (VariabilityCtx) o;
 
-    return context.equals(context1.context);
+    return ctx.equals(variabilityCtx1.ctx);
   }
 
   @Override
   public int hashCode() {
-    return context.hashCode();
+    return ctx.hashCode();
   }
 
   @Override
@@ -44,7 +44,7 @@ public class Context implements Serializable {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("[");
 
-    Iterator<Set<String>> configsIter = this.context.iterator();
+    Iterator<Set<String>> configsIter = this.ctx.iterator();
 
     while (configsIter.hasNext()) {
       Set<String> config = configsIter.next();

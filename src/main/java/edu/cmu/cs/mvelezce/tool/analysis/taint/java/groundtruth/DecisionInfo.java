@@ -15,19 +15,19 @@ import java.util.Set;
 
 public class DecisionInfo {
 
-  private final Map<List<String>, Context> callingContextsToContexts = new HashMap<>();
+  private final Map<List<String>, VariabilityCtx> callingContextsToVariabilityCtxs = new HashMap<>();
   private final Map<List<String>, DecisionBranchCountTable> callingContextsToDecisionBranchTables = new HashMap<>();
 
-  public Map<List<String>, Context> getCallingContextsToContexts() {
-    return callingContextsToContexts;
+  public Map<List<String>, VariabilityCtx> getCallingContextsToVariabilityCtxs() {
+    return callingContextsToVariabilityCtxs;
   }
 
   public Map<List<String>, DecisionBranchCountTable> getCallingContextsToDecisionBranchTables() {
     return callingContextsToDecisionBranchTables;
   }
 
-  public static Expression<String> toCNF(Context ctx, List<String> options) {
-    Set<Set<String>> configs = ctx.getContext();
+  public static Expression<String> toCNF(VariabilityCtx variabilityCtx, List<String> options) {
+    Set<Set<String>> configs = variabilityCtx.getCtx();
     List<And<String>> ands = new ArrayList<>();
 
     for (Set<String> config : configs) {
@@ -52,10 +52,10 @@ public class DecisionInfo {
     return RuleSet.toCNF(expr);
   }
 
-  void toCNF(Context ctx) {
+  void toCNF(VariabilityCtx variabilityCtx) {
     throw new UnsupportedOperationException(
         "First, change how the dynamic analysis stores executed configs");
-//    Set<Set<String>> configs = ctx.getContext();
+//    Set<Set<String>> configs = ctx.getCtx();
 //    List<And<String>> ands = new ArrayList<>();
 //
 //    for (Set<String> config : configs) {
@@ -91,7 +91,7 @@ public class DecisionInfo {
 
     DecisionInfo that = (DecisionInfo) o;
 
-    if (!callingContextsToContexts.equals(that.callingContextsToContexts)) {
+    if (!callingContextsToVariabilityCtxs.equals(that.callingContextsToVariabilityCtxs)) {
       return false;
     }
     return callingContextsToDecisionBranchTables.equals(that.callingContextsToDecisionBranchTables);
@@ -99,7 +99,7 @@ public class DecisionInfo {
 
   @Override
   public int hashCode() {
-    int result = callingContextsToContexts.hashCode();
+    int result = callingContextsToVariabilityCtxs.hashCode();
     result = 31 * result + callingContextsToDecisionBranchTables.hashCode();
     return result;
   }

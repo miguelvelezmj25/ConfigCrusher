@@ -148,27 +148,27 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   }
 
   private void addContextInfo(DecisionInfo decisionInfo, Map<String, Collection> info) {
-    Map<String, Map> stringCallingContextsToContexts = (Map<String, Map>) info
-        .get("callingContextsToContexts");
-    Map<List<String>, Context> callingContextsToContexts = decisionInfo
-        .getCallingContextsToContexts();
+    Map<String, Map> stringCallingContextsToStringCallingCtxs = (Map<String, Map>) info
+        .get("callingContextsToVariabilityCtxs");
+    Map<List<String>, VariabilityCtx> callingContextsToVariabilityCtxs = decisionInfo
+        .getCallingContextsToVariabilityCtxs();
 
-    for (Map.Entry<String, Map> entry : stringCallingContextsToContexts.entrySet()) {
+    for (Map.Entry<String, Map> entry : stringCallingContextsToStringCallingCtxs.entrySet()) {
       List<String> callingContext = this.getCallingContext(entry.getKey());
       Map<String, List<List<String>>> contexts = entry.getValue();
-      Context context = this.getContext(contexts.get("context"));
-      callingContextsToContexts.put(callingContext, context);
+      VariabilityCtx variabilityCtx = this.getContext(contexts.get("ctx"));
+      callingContextsToVariabilityCtxs.put(callingContext, variabilityCtx);
     }
   }
 
-  private Context getContext(List<List<String>> configs) {
-    Context context = new Context();
+  private VariabilityCtx getContext(List<List<String>> configs) {
+    VariabilityCtx variabilityCtx = new VariabilityCtx();
 
     for (List<String> config : configs) {
-      context.addConfig(new HashSet<>(config));
+      variabilityCtx.addConfig(new HashSet<>(config));
     }
 
-    return context;
+    return variabilityCtx;
   }
 
   private List<String> getCallingContext(String callingContext) {
@@ -342,14 +342,14 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   private void updateContext(DecisionInfo decisionInfo, List<String> callingContext,
       Set<String> config) {
     this.addContext(decisionInfo, callingContext);
-    Context callSiteContext = decisionInfo.getCallingContextsToContexts().get(callingContext);
-    callSiteContext.addConfig(config);
+    VariabilityCtx callSiteVariabilityCtx = decisionInfo.getCallingContextsToVariabilityCtxs().get(callingContext);
+    callSiteVariabilityCtx.addConfig(config);
   }
 
   private void addContext(DecisionInfo decisionInfo, List<String> callingContext) {
-    Map<List<String>, Context> callingContextsToContexts = decisionInfo
-        .getCallingContextsToContexts();
-    callingContextsToContexts.putIfAbsent(callingContext, new Context());
+    Map<List<String>, VariabilityCtx> callingContextsToContexts = decisionInfo
+        .getCallingContextsToVariabilityCtxs();
+    callingContextsToContexts.putIfAbsent(callingContext, new VariabilityCtx());
   }
 
   private void addSinks(Set<CallingContextDecision> callingContextDecisions) {

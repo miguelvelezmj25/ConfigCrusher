@@ -117,11 +117,11 @@ public class PhosphorResultAnalyzer {
   }
 
   private String compareRegions(DecisionInfo specDecisionInfo, SinkData phosphorSinkData) {
-    Map<List<String>, VariabilityCtx> callingContextsToVariabilityCtxs = specDecisionInfo.getCallingContextsToVariabilityCtxs();
+    Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = specDecisionInfo.getCallingCtxsToVariabilityCtxs();
     Map<ExecVarCtx, Set<Set<String>>> data = phosphorSinkData.getData();
 
     StringBuilder errors = new StringBuilder();
-    String ctxErrors = this.compareVariabilityCtxs(callingContextsToVariabilityCtxs.values(), data.keySet());
+    String ctxErrors = this.compareVariabilityCtxs(callingCtxsToVariabilityCtxs.values(), data.keySet());
     errors.append(ctxErrors);
 
     String optionsErrors = this.compareOptions(specDecisionInfo, data);
@@ -294,23 +294,23 @@ public class PhosphorResultAnalyzer {
   private Map<Expression<String>, Set<Set<String>>> getSpecCtxToOptions(DecisionInfo specInfo) {
     Map<Expression<String>, Set<Set<String>>> cnfCtxsToOptions = new HashMap<>();
 
-    Map<List<String>, VariabilityCtx> callingContextsToVariabilityCtxs = specInfo.getCallingContextsToVariabilityCtxs();
-    Map<List<String>, DecisionBranchCountTable> callingContextsToTables = specInfo
-        .getCallingContextsToDecisionBranchTables();
+    Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = specInfo.getCallingCtxsToVariabilityCtxs();
+    Map<List<String>, DecisionBranchCountTable> callingCtxsToTables = specInfo
+        .getCallingCtxsToDecisionBranchTables();
 
-    for (VariabilityCtx variabilityCtx : callingContextsToVariabilityCtxs.values()) {
+    for (VariabilityCtx variabilityCtx : callingCtxsToVariabilityCtxs.values()) {
       Expression<String> cnf = DecisionInfo.toCNF(variabilityCtx, this.options);
       Set<Set<String>> optionsSet = new HashSet<>();
       cnfCtxsToOptions.put(cnf, optionsSet);
     }
 
     // TODO test that there is a different trace, but the same context, which then leads to two entries with the same context
-    for (Map.Entry<List<String>, VariabilityCtx> entry : callingContextsToVariabilityCtxs.entrySet()) {
+    for (Map.Entry<List<String>, VariabilityCtx> entry : callingCtxsToVariabilityCtxs.entrySet()) {
       VariabilityCtx ctx = entry.getValue();
       Expression<String> cnf = DecisionInfo.toCNF(ctx, this.options);
       Set<Set<String>> optionsSet = cnfCtxsToOptions.get(cnf);
 
-      DecisionBranchCountTable table = callingContextsToTables.get(entry.getKey());
+      DecisionBranchCountTable table = callingCtxsToTables.get(entry.getKey());
       Set<String> options = DynamicAnalysisSpecification.getMinimalSetOfOptions(table);
       optionsSet.add(options);
     }

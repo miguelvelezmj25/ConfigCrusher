@@ -581,7 +581,7 @@ public class DynamicAnalysisSpecificationTest {
     for (Map.Entry<JavaRegion, DecisionInfo> entry : regionsToDecisions.entrySet()) {
       DecisionInfo decisionInfo = entry.getValue();
       Map<List<String>, VariabilityCtx> tracesToContexts = decisionInfo
-          .getCallingContextsToVariabilityCtxs();
+          .getCallingCtxsToVariabilityCtxs();
 
       JavaRegion region = entry.getKey();
       decisionsToTracesAndVariabilityCtxs
@@ -599,7 +599,7 @@ public class DynamicAnalysisSpecificationTest {
     for (Map.Entry<JavaRegion, DecisionInfo> entry : regionsToDecisions.entrySet()) {
       DecisionInfo decisionInfo = entry.getValue();
       Map<List<String>, DecisionBranchCountTable> tracesToTables = decisionInfo
-          .getCallingContextsToDecisionBranchTables();
+          .getCallingCtxsToDecisionBranchTables();
       Map<List<String>, Set<String>> tracesToOptions = new HashMap<>();
 
       for (Map.Entry<List<String>, DecisionBranchCountTable> traceToTable : tracesToTables

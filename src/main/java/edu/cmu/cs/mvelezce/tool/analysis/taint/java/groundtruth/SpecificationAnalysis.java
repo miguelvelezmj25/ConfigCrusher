@@ -100,7 +100,7 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
       DecisionInfo decisionInfo = new DecisionInfo();
       Map<String, Collection> info = (Map<String, Collection>) result.getInfo();
 
-      this.addContextInfo(decisionInfo, info);
+      this.addCtxsInfo(decisionInfo, info);
       this.addTableInfo(decisionInfo, info);
 
       regionsToDecisionInfos.put(result.getRegion(), decisionInfo);
@@ -110,16 +110,16 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   }
 
   private void addTableInfo(DecisionInfo decisionInfo, Map<String, Collection> info) {
-    Map<String, Map<String, Collection>> callingContextsToCountTables = (Map<String, Map<String, Collection>>) info
-        .get("callingContextsToDecisionBranchTables");
-    Map<List<String>, DecisionBranchCountTable> callingContextsToTables = decisionInfo
-        .getCallingContextsToDecisionBranchTables();
+    Map<String, Map<String, Collection>> callingCtxsToCountTables = (Map<String, Map<String, Collection>>) info
+        .get("callingCtxsToDecisionBranchTables");
+    Map<List<String>, DecisionBranchCountTable> callingCtxsToTables = decisionInfo
+        .getCallingCtxsToDecisionBranchTables();
 
-    for (Map.Entry<String, Map<String, Collection>> entry : callingContextsToCountTables
+    for (Map.Entry<String, Map<String, Collection>> entry : callingCtxsToCountTables
         .entrySet()) {
-      List<String> callingContext = this.getCallingContext(entry.getKey());
+      List<String> callingCtx = this.getCallingCtx(entry.getKey());
       DecisionBranchCountTable decisionTable = this.getDecisionTable(entry.getValue());
-      callingContextsToTables.put(callingContext, decisionTable);
+      callingCtxsToTables.put(callingCtx, decisionTable);
     }
   }
 
@@ -147,21 +147,21 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     }
   }
 
-  private void addContextInfo(DecisionInfo decisionInfo, Map<String, Collection> info) {
-    Map<String, Map> stringCallingContextsToStringCallingCtxs = (Map<String, Map>) info
-        .get("callingContextsToVariabilityCtxs");
-    Map<List<String>, VariabilityCtx> callingContextsToVariabilityCtxs = decisionInfo
-        .getCallingContextsToVariabilityCtxs();
+  private void addCtxsInfo(DecisionInfo decisionInfo, Map<String, Collection> info) {
+    Map<String, Map> stringCallingCtxsToStringCallingCtxs = (Map<String, Map>) info
+        .get("callingCtxsToVariabilityCtxs");
+    Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = decisionInfo
+        .getCallingCtxsToVariabilityCtxs();
 
-    for (Map.Entry<String, Map> entry : stringCallingContextsToStringCallingCtxs.entrySet()) {
-      List<String> callingContext = this.getCallingContext(entry.getKey());
+    for (Map.Entry<String, Map> entry : stringCallingCtxsToStringCallingCtxs.entrySet()) {
+      List<String> callingCtx = this.getCallingCtx(entry.getKey());
       Map<String, List<List<String>>> contexts = entry.getValue();
-      VariabilityCtx variabilityCtx = this.getContext(contexts.get("ctx"));
-      callingContextsToVariabilityCtxs.put(callingContext, variabilityCtx);
+      VariabilityCtx variabilityCtx = this.getVariabilityCtx(contexts.get("ctx"));
+      callingCtxsToVariabilityCtxs.put(callingCtx, variabilityCtx);
     }
   }
 
-  private VariabilityCtx getContext(List<List<String>> configs) {
+  private VariabilityCtx getVariabilityCtx(List<List<String>> configs) {
     VariabilityCtx variabilityCtx = new VariabilityCtx();
 
     for (List<String> config : configs) {
@@ -171,10 +171,10 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
     return variabilityCtx;
   }
 
-  private List<String> getCallingContext(String callingContext) {
-    callingContext = callingContext.replace("[", "");
-    callingContext = callingContext.replace("]", "");
-    String[] elements = callingContext.split(",");
+  private List<String> getCallingCtx(String callingCtx) {
+    callingCtx = callingCtx.replace("[", "");
+    callingCtx = callingCtx.replace("]", "");
+    String[] elements = callingCtx.split(",");
 
     List<String> list = new ArrayList<>();
 
@@ -307,65 +307,65 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   }
 
   private void processResults(Set<String> config) throws IOException, ClassNotFoundException {
-    Map<CallingContextDecision, ThenElseCounts> callSiteDecisionsToBranchCounts = this
+    Map<CallingCtxDecision, ThenElseCounts> callSiteDecisionsToBranchCounts = this
         .getCallSiteDecisionsToBranchCounts();
     this.addSinks(callSiteDecisionsToBranchCounts.keySet());
 
-    for (Map.Entry<CallingContextDecision, ThenElseCounts> entry : callSiteDecisionsToBranchCounts
+    for (Map.Entry<CallingCtxDecision, ThenElseCounts> entry : callSiteDecisionsToBranchCounts
         .entrySet()) {
-      CallingContextDecision callingContextDecision = entry.getKey();
-      String sink = callingContextDecision.getDecision();
+      CallingCtxDecision callingCtxDecision = entry.getKey();
+      String sink = callingCtxDecision.getDecision();
       DecisionInfo decisionInfo = this.sinksToDecisionInfos.get(sink);
 
-      List<String> callingContext = callingContextDecision.getCallingContext();
-      this.updateContext(decisionInfo, callingContext, config);
-      this.updateTable(decisionInfo, callingContext, config, entry.getValue());
+      List<String> callingCtx = callingCtxDecision.getCallingCtx();
+      this.updateCtxs(decisionInfo, callingCtx, config);
+      this.updateTable(decisionInfo, callingCtx, config, entry.getValue());
     }
 
   }
 
-  private void updateTable(DecisionInfo decisionInfo, List<String> callingContext,
+  private void updateTable(DecisionInfo decisionInfo, List<String> callingCtx,
       Set<String> config, ThenElseCounts thenElseCounts) {
-    this.addCountTable(decisionInfo, callingContext);
-    DecisionBranchCountTable table = decisionInfo.getCallingContextsToDecisionBranchTables()
-        .get(callingContext);
+    this.addCountTable(decisionInfo, callingCtx);
+    DecisionBranchCountTable table = decisionInfo.getCallingCtxsToDecisionBranchTables()
+        .get(callingCtx);
     table.addEntry(config, thenElseCounts);
   }
 
-  private void addCountTable(DecisionInfo decisionInfo, List<String> callingContext) {
-    Map<List<String>, DecisionBranchCountTable> callingContextsToDecisionTables = decisionInfo
-        .getCallingContextsToDecisionBranchTables();
-    callingContextsToDecisionTables
-        .putIfAbsent(callingContext, new DecisionBranchCountTable(this.getOptions()));
+  private void addCountTable(DecisionInfo decisionInfo, List<String> callingCtx) {
+    Map<List<String>, DecisionBranchCountTable> callingCtxsToDecisionTables = decisionInfo
+        .getCallingCtxsToDecisionBranchTables();
+    callingCtxsToDecisionTables
+        .putIfAbsent(callingCtx, new DecisionBranchCountTable(this.getOptions()));
   }
 
-  private void updateContext(DecisionInfo decisionInfo, List<String> callingContext,
+  private void updateCtxs(DecisionInfo decisionInfo, List<String> callingCtx,
       Set<String> config) {
-    this.addContext(decisionInfo, callingContext);
-    VariabilityCtx callSiteVariabilityCtx = decisionInfo.getCallingContextsToVariabilityCtxs().get(callingContext);
+    this.addCtxs(decisionInfo, callingCtx);
+    VariabilityCtx callSiteVariabilityCtx = decisionInfo.getCallingCtxsToVariabilityCtxs().get(callingCtx);
     callSiteVariabilityCtx.addConfig(config);
   }
 
-  private void addContext(DecisionInfo decisionInfo, List<String> callingContext) {
-    Map<List<String>, VariabilityCtx> callingContextsToContexts = decisionInfo
-        .getCallingContextsToVariabilityCtxs();
-    callingContextsToContexts.putIfAbsent(callingContext, new VariabilityCtx());
+  private void addCtxs(DecisionInfo decisionInfo, List<String> callingCtx) {
+    Map<List<String>, VariabilityCtx> callingCtxsToContexts = decisionInfo
+        .getCallingCtxsToVariabilityCtxs();
+    callingCtxsToContexts.putIfAbsent(callingCtx, new VariabilityCtx());
   }
 
-  private void addSinks(Set<CallingContextDecision> callingContextDecisions) {
-    for (CallingContextDecision callingContextDecision : callingContextDecisions) {
-      String sink = callingContextDecision.getDecision();
+  private void addSinks(Set<CallingCtxDecision> callingCtxDecisions) {
+    for (CallingCtxDecision callingCtxDecision : callingCtxDecisions) {
+      String sink = callingCtxDecision.getDecision();
       this.sinksToDecisionInfos.putIfAbsent(sink, new DecisionInfo());
     }
   }
 
-  private Map<CallingContextDecision, ThenElseCounts> getCallSiteDecisionsToBranchCounts()
+  private Map<CallingCtxDecision, ThenElseCounts> getCallSiteDecisionsToBranchCounts()
       throws IOException, ClassNotFoundException {
-    Map<CallingContextDecision, ThenElseCounts> callSiteSinksToBranchCounts;
+    Map<CallingCtxDecision, ThenElseCounts> callSiteSinksToBranchCounts;
 
     try (FileInputStream fis = new FileInputStream(SpecificationLogger.RESULTS_FILE);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
-      callSiteSinksToBranchCounts = (Map<CallingContextDecision, ThenElseCounts>) ois.readObject();
+      callSiteSinksToBranchCounts = (Map<CallingCtxDecision, ThenElseCounts>) ois.readObject();
     }
 
     return callSiteSinksToBranchCounts;

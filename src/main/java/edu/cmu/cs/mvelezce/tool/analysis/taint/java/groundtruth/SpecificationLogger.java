@@ -11,7 +11,7 @@ import jdk.internal.org.objectweb.asm.Type;
 public class SpecificationLogger {
 
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
-  private static final Map<CallingContextDecision, ThenElseCounts> CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS = new HashMap<>();
+  private static final Map<CallingCtxDecision, ThenElseCounts> CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS = new HashMap<>();
 
   static final String RESULTS_FILE = "results.ser";
   static final String INTERNAL_NAME = Type.getInternalName(SpecificationLogger.class);
@@ -189,7 +189,7 @@ public class SpecificationLogger {
     try {
       FileOutputStream fos = new FileOutputStream(RESULTS_FILE);
       ObjectOutputStream oos = new ObjectOutputStream(fos);
-      oos.writeObject(CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS);
+      oos.writeObject(CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS);
       oos.close();
       fos.close();
     }
@@ -199,36 +199,36 @@ public class SpecificationLogger {
   }
 
   private static ThenElseCounts getThenElseCounts(String methodName, int decisionCount) {
-    String[] callingContext = SpecificationLogger.getCallingContext();
+    String[] callingCtx = SpecificationLogger.getCallingCtx();
     String decision = methodName + "." + decisionCount;
-    CallingContextDecision callingContextDecision = new CallingContextDecision(callingContext, decision);
-    SpecificationLogger.addCallingContextDecision(callingContextDecision);
+    CallingCtxDecision callingCtxDecision = new CallingCtxDecision(callingCtx, decision);
+    SpecificationLogger.addCallingCtxDecision(callingCtxDecision);
 
-    return CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS.get(callingContextDecision);
+    return CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS.get(callingCtxDecision);
   }
 
-  private static String[] getCallingContext() {
-    int callingContextOffset = 5;
-    StackTraceElement[] callingContextElements = Thread.currentThread().getStackTrace();
-    String[] callingContext = new String[callingContextElements.length - callingContextOffset];
+  private static String[] getCallingCtx() {
+    int callingCtxOffset = 5;
+    StackTraceElement[] callingCtxElements = Thread.currentThread().getStackTrace();
+    String[] callingCtx = new String[callingCtxElements.length - callingCtxOffset];
 
-    for (int i = callingContextOffset; i < callingContextElements.length; i++) {
-      StackTraceElement callingContextElement = callingContextElements[i];
-      callingContext[i - callingContextOffset] = getCallingContextEntry(callingContextElement.getMethodName(),
-          callingContextElement.getLineNumber());
+    for (int i = callingCtxOffset; i < callingCtxElements.length; i++) {
+      StackTraceElement callingCtxElement = callingCtxElements[i];
+      callingCtx[i - callingCtxOffset] = getCallingCtxEntry(callingCtxElement.getMethodName(),
+          callingCtxElement.getLineNumber());
     }
 
-    return callingContext;
+    return callingCtx;
   }
 
-  private static String getCallingContextEntry(String methodName, int lineNumber) {
+  private static String getCallingCtxEntry(String methodName, int lineNumber) {
     return methodName + ":" + lineNumber;
   }
 
-  private static void addCallingContextDecision(CallingContextDecision callingContextDecision) {
-    if (!CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS.containsKey(callingContextDecision)) {
+  private static void addCallingCtxDecision(CallingCtxDecision callingCtxDecision) {
+    if (!CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS.containsKey(callingCtxDecision)) {
       ThenElseCounts thenElseCounts = new ThenElseCounts();
-      CALLING_CONTEXT_DECISIONS_TO_BRANCH_COUNTS.put(callingContextDecision, thenElseCounts);
+      CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS.put(callingCtxDecision, thenElseCounts);
     }
   }
 

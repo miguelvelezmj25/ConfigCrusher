@@ -15,15 +15,15 @@ import java.util.Set;
 
 public class DecisionInfo {
 
-  private final Map<List<String>, VariabilityCtx> callingContextsToVariabilityCtxs = new HashMap<>();
-  private final Map<List<String>, DecisionBranchCountTable> callingContextsToDecisionBranchTables = new HashMap<>();
+  private final Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = new HashMap<>();
+  private final Map<List<String>, DecisionBranchCountTable> callingCtxsToDecisionBranchTables = new HashMap<>();
 
-  public Map<List<String>, VariabilityCtx> getCallingContextsToVariabilityCtxs() {
-    return callingContextsToVariabilityCtxs;
+  public Map<List<String>, VariabilityCtx> getCallingCtxsToVariabilityCtxs() {
+    return callingCtxsToVariabilityCtxs;
   }
 
-  public Map<List<String>, DecisionBranchCountTable> getCallingContextsToDecisionBranchTables() {
-    return callingContextsToDecisionBranchTables;
+  public Map<List<String>, DecisionBranchCountTable> getCallingCtxsToDecisionBranchTables() {
+    return callingCtxsToDecisionBranchTables;
   }
 
   public static Expression<String> toCNF(VariabilityCtx variabilityCtx, List<String> options) {
@@ -91,16 +91,16 @@ public class DecisionInfo {
 
     DecisionInfo that = (DecisionInfo) o;
 
-    if (!callingContextsToVariabilityCtxs.equals(that.callingContextsToVariabilityCtxs)) {
+    if (!callingCtxsToVariabilityCtxs.equals(that.callingCtxsToVariabilityCtxs)) {
       return false;
     }
-    return callingContextsToDecisionBranchTables.equals(that.callingContextsToDecisionBranchTables);
+    return callingCtxsToDecisionBranchTables.equals(that.callingCtxsToDecisionBranchTables);
   }
 
   @Override
   public int hashCode() {
-    int result = callingContextsToVariabilityCtxs.hashCode();
-    result = 31 * result + callingContextsToDecisionBranchTables.hashCode();
+    int result = callingCtxsToVariabilityCtxs.hashCode();
+    result = 31 * result + callingCtxsToDecisionBranchTables.hashCode();
     return result;
   }
 }

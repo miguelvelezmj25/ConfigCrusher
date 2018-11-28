@@ -4,20 +4,20 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class CallingContextDecision implements Serializable {
+public class CallingCtxDecision implements Serializable {
 
   private static final long serialVersionUID = 4363650686966128330L;
 
-  private final List<String> callingContext;
+  private final List<String> callingCtx;
   private final String decision;
 
-  public CallingContextDecision(String[] callingContext, String decision) {
-    this.callingContext = Arrays.asList(callingContext);
+  public CallingCtxDecision(String[] callingCtx, String decision) {
+    this.callingCtx = Arrays.asList(callingCtx);
     this.decision = decision;
   }
 
-  public List<String> getCallingContext() {
-    return callingContext;
+  public List<String> getCallingCtx() {
+    return callingCtx;
   }
 
   public String getDecision() {
@@ -33,9 +33,9 @@ public class CallingContextDecision implements Serializable {
       return false;
     }
 
-    CallingContextDecision that = (CallingContextDecision) o;
+    CallingCtxDecision that = (CallingCtxDecision) o;
 
-    if (!callingContext.equals(that.callingContext)) {
+    if (!callingCtx.equals(that.callingCtx)) {
       return false;
     }
     return decision.equals(that.decision);
@@ -43,13 +43,13 @@ public class CallingContextDecision implements Serializable {
 
   @Override
   public int hashCode() {
-    int result = callingContext.hashCode();
+    int result = callingCtx.hashCode();
     result = 31 * result + decision.hashCode();
     return result;
   }
 
   @Override
   public String toString() {
-    return "Calling context=" + this.callingContext + ", Decision=" + this.decision;
+    return "Calling ctx=" + this.callingCtx + ", Decision=" + this.decision;
   }
 }

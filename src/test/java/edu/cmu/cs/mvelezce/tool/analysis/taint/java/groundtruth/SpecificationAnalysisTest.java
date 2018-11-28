@@ -37,10 +37,10 @@ public class SpecificationAnalysisTest {
         String mainClass = AllDynamicAdapter.MAIN_PACKAGE + "." + programName;
         Set<String> options = new HashSet<>(AllDynamicAdapter.getListOfOptions());
 
-//        String[] args = new String[1];
-        String[] args = new String[2];
+        String[] args = new String[1];
+//        String[] args = new String[2];
         args[0] = "-saveres";
-        args[1] = "-delres";
+//        args[1] = "-delres";
 
         DynamicAnalysis analysis = new SpecificationAnalysis(programName, mainClass, options);
         Map write = analysis.analyze(args);

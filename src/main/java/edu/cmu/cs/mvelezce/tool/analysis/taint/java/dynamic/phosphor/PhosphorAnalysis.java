@@ -11,6 +11,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox.GTOverapproxAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
@@ -43,6 +44,9 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
   private static final String PHOSPHOR_SCRIPTS_DIR = BaseAdapter.USER_HOME
       + "/Documents/Programming/Java/Projects/phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
 
+
+  private final Map<String, SinkData> sinksToData = new HashMap<>();
+
   private final Map<String, Set<Constraint>> sinksToConstraints = new HashMap<>();
 
   public PhosphorAnalysis(String programName) {
@@ -57,17 +61,18 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
   public Map<JavaRegion, Set<Constraint>> analyze() throws IOException, InterruptedException {
     this.runDynamicAnalysis();
 
-    Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
-
-    for (Map.Entry<String, Set<Constraint>> entry : this.sinksToConstraints.entrySet()) {
-      String sink = entry.getKey();
-      JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
-          this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
-
-      regionsToConstraints.put(region, entry.getValue());
-    }
-
-    return regionsToConstraints;
+    throw new UnsupportedOperationException("Implement");
+//    Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
+//
+//    for (Map.Entry<String, Set<Constraint>> entry : this.sinksToConstraints.entrySet()) {
+//      String sink = entry.getKey();
+//      JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
+//          this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
+//
+//      regionsToConstraints.put(region, entry.getValue());
+//    }
+//
+//    return regionsToConstraints;
   }
 
   @Override
@@ -86,11 +91,6 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
     return regionsToConstraints;
   }
 
-  @Override
-  public String outputDir() {
-    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc";
-  }
-
   /**
    * Input: P, c in C, O
    *
@@ -100,51 +100,199 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
    * this method.
    */
   protected void runDynamicAnalysis() throws IOException, InterruptedException {
-    // TODO add check to be sure that we are not sampling a constraint that we already sample
+    Set<Set<String>> exploredConfigs = new HashSet<>();
+    Set<Set<String>> configsToExplore = new HashSet<>();
 
-    Set<Constraint> exploredConstraints = new HashSet<>();
-    Set<Constraint> constraintsToExplore = new HashSet<>();
-    // CE := to_constraint(c)
-    Set<String> options = this.getOptions();
-    Map<String, Boolean> initialConfigAsConfigWithValues = Constraint
-        .toConfigWithValues(this.getInitialConfig(), options);
-    constraintsToExplore.add(new Constraint(initialConfigAsConfigWithValues));
+    configsToExplore.add(this.getInitialConfig());
 
-    int count = 0;
+    while (!configsToExplore.isEmpty()) {
+      Set<String> config = configsToExplore.iterator().next();
+      configsToExplore.remove(config);
+      exploredConfigs.add(config);
 
-    while (!constraintsToExplore.isEmpty()) {
-      // CTE := get_next_constraint(CE,O)
-      Constraint currentConstraint = PhosphorAnalysis.getNextConstraint(constraintsToExplore);
-      // c:= to_config(CTE)
-      Set<String> config = currentConstraint.getConstraintAsPartialConfig();
-      Map<String, Boolean> configWithValues = Constraint.toConfigWithValues(config, options);
-      currentConstraint = new Constraint(configWithValues);
-
-      // CE.removeAll(CTE)
-      PhosphorAnalysis.removeAllSubConstraints(constraintsToExplore, currentConstraint);
-      // EC.addAll(CTE)
-      exploredConstraints.add(currentConstraint);
-
-      // ST := run_taint_analysis(P’, c)
       this.runPhosphorAnalysis(config);
-      Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaintsResults = this
-          .analyzePhosphorResults();
+      Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints = this.analyzePhosphorResults();
 
-//      // CFA := get_constraints_from_analysis(ST)
-//      Set<Constraint> constraintsFromAnalysis = this
-//          .getConstraintsFromAnalysis(sinksToTaintsResults, config);
-//
-//      // CFA.removeAll(EC)
-//      PhosphorAnalysis.removeAllSubConstraints(constraintsFromAnalysis, exploredConstraints);
-//      // CE.addAll(CC)
-//      constraintsToExplore.addAll(constraintsFromAnalysis);
+      this.addSinks(sinksToTaints.keySet());
+      this.addExecVarCtxs(sinksToTaints, config);
+      this.addExecTaints(sinksToTaints, config);
 
-      count++;
+      Set<Set<String>> configsToRun = this.getConfigsToRun();
+      configsToRun.removeAll(exploredConfigs);
+      configsToExplore.addAll(configsToRun);
+      System.out.println();
     }
 
-    System.out.println(count);
-//    // TODO this might be done in the compression step, not in the analysis
-//    this.getConfigsForCC();
+    // TODO add check to be sure that we are not sampling a constraint that we already sample
+
+//    Set<Constraint> exploredConstraints = new HashSet<>();
+//    Set<Constraint> constraintsToExplore = new HashSet<>();
+//    // CE := to_constraint(c)
+//    Set<String> options = this.getOptions();
+//    Map<String, Boolean> initialConfigAsConfigWithValues = Constraint
+//        .toConfigWithValues(this.getInitialConfig(), options);
+//    constraintsToExplore.add(new Constraint(initialConfigAsConfigWithValues));
+//
+//    int count = 0;
+//
+//    while (!constraintsToExplore.isEmpty()) {
+//      // CTE := get_next_constraint(CE,O)
+//      Constraint currentConstraint = PhosphorAnalysis.getNextConstraint(constraintsToExplore);
+//      // c:= to_config(CTE)
+//      Set<String> config = currentConstraint.getConstraintAsPartialConfig();
+//      Map<String, Boolean> configWithValues = Constraint.toConfigWithValues(config, options);
+//      currentConstraint = new Constraint(configWithValues);
+//
+//      // CE.removeAll(CTE)
+//      PhosphorAnalysis.removeAllSubConstraints(constraintsToExplore, currentConstraint);
+//      // EC.addAll(CTE)
+//      exploredConstraints.add(currentConstraint);
+//
+//      // ST := run_taint_analysis(P’, c)
+//      this.runPhosphorAnalysis(config);
+//      Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaintsResults = this
+//          .analyzePhosphorResults();
+//
+////      // CFA := get_constraints_from_analysis(ST)
+////      Set<Constraint> constraintsFromAnalysis = this
+////          .getConstraintsFromAnalysis(sinksToTaintsResults, config);
+////
+////      // CFA.removeAll(EC)
+////      PhosphorAnalysis.removeAllSubConstraints(constraintsFromAnalysis, exploredConstraints);
+////      // CE.addAll(CC)
+////      constraintsToExplore.addAll(constraintsFromAnalysis);
+//
+//      count++;
+//    }
+//
+//    System.out.println(count);
+////    // TODO this might be done in the compression step, not in the analysis
+////    this.getConfigsForCC();
+  }
+
+  private Set<Set<String>> getConfigsToRun() {
+    Set<Map<String, Boolean>> configMapsToRun = this.getConfigMapsToRun();
+
+    Set<Set<String>> configsToRun = new HashSet<>();
+
+    for (Map<String, Boolean> configMapToRun : configMapsToRun) {
+      Set<String> configToRun = new HashSet<>();
+
+      for (Map.Entry<String, Boolean> entry : configMapToRun.entrySet()) {
+        if (entry.getValue()) {
+          configToRun.add(entry.getKey());
+        }
+      }
+
+      configsToRun.add(configToRun);
+    }
+
+    return configsToRun;
+  }
+
+  private Set<Map<String, Boolean>> getConfigMapsToRun() {
+    Set<Map<String, Boolean>> configMapsToRun = new HashSet<>();
+
+    for (SinkData sinkData : this.sinksToData.values()) {
+      Set<Map<String, Boolean>> configsToRunPerSink = this
+          .getConfigsToRunPerSink(sinkData.getData());
+      configMapsToRun.addAll(configsToRunPerSink);
+    }
+
+    return configMapsToRun;
+  }
+
+  private Set<Map<String, Boolean>> getConfigsToRunPerSink(Map<ExecVarCtx, Set<Set<String>>> data) {
+    Set<Map<String, Boolean>> configsToRun = new HashSet<>();
+
+    for (Map.Entry<ExecVarCtx, Set<Set<String>>> entry : data.entrySet()) {
+      ExecVarCtx execVarCtx = entry.getKey();
+      Map<String, Boolean> execVariabilityPartialConfig = execVarCtx.getPartialConfig();
+
+      for (Set<String> options : entry.getValue()) {
+        Set<Map<String, Boolean>> configsToRunPerOptions = this.getConfigsToRunPerOptions(options);
+
+        for (Map<String, Boolean> configToRunPerOptions : configsToRunPerOptions) {
+          configToRunPerOptions.putAll(execVariabilityPartialConfig);
+          configsToRun.add(configToRunPerOptions);
+        }
+      }
+    }
+
+    return configsToRun;
+  }
+
+  private Set<Map<String, Boolean>> getConfigsToRunPerOptions(Set<String> options) {
+    Set<Map<String, Boolean>> configsToRun = new HashSet<>();
+    Set<Set<String>> configsForOptions = Helper.getConfigurations(options);
+
+    for (Set<String> configForOptions : configsForOptions) {
+      Map<String, Boolean> config = new HashMap<>();
+
+      for (String option : this.getOptions()) {
+        config.put(option, false);
+      }
+
+      for (String newOpt : configForOptions) {
+        config.put(newOpt, true);
+      }
+
+      configsToRun.add(config);
+    }
+
+    return configsToRun;
+  }
+
+  private void addSinks(Set<String> sinks) {
+    for (String sink : sinks) {
+      this.sinksToData.putIfAbsent(sink, new SinkData());
+    }
+  }
+
+  private void addExecVarCtxs(Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints,
+      Set<String> config) {
+    for (Map.Entry<String, Map<Set<String>, Set<Set<String>>>> entry : sinksToTaints.entrySet()) {
+      SinkData sinkData = this.sinksToData.get(entry.getKey());
+      Set<Set<String>> sinkVarCtxs = entry.getValue().keySet();
+
+      for (Set<String> sinkVarCtx : sinkVarCtxs) {
+        ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVarCtx, config);
+        sinkData.putIfAbsent(execVarCtx, new HashSet<>());
+      }
+    }
+  }
+
+  private void addExecTaints(Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints,
+      Set<String> config) {
+    for (Map.Entry<String, Map<Set<String>, Set<Set<String>>>> entry : sinksToTaints.entrySet()) {
+      SinkData sinkData = this.sinksToData.get(entry.getKey());
+      this.addExecTaintsFromSink(entry.getValue(), sinkData, config);
+    }
+  }
+
+  private void addExecTaintsFromSink(Map<Set<String>, Set<Set<String>>> sinkResults,
+      SinkData sinkData, Set<String> config) {
+    for (Map.Entry<Set<String>, Set<Set<String>>> entry : sinkResults.entrySet()) {
+      Set<String> sinkVariabilityCtx = entry.getKey();
+      ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVariabilityCtx, config);
+      Set<Set<String>> executionTaints = sinkData.getExecTaints(execVarCtx);
+      executionTaints.addAll(entry.getValue());
+    }
+  }
+
+  private ExecVarCtx getExecVarCtx(Set<String> sinkVarCtx, Set<String> config) {
+    ExecVarCtx execVarCtx = new ExecVarCtx();
+
+    for (String option : sinkVarCtx) {
+      execVarCtx.addEntry(option, config.contains(option));
+    }
+
+    return execVarCtx;
+  }
+
+  @Override
+  public String outputDir() {
+    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc";
   }
 
   static void removeAllSubConstraints(Set<Constraint> constraintsFromAnalysis,
@@ -222,10 +370,15 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
         commandList.add("./examples.sh");
         adapter = new SimpleForExample2Adapter();
         break;
+      case GTOverapproxAdapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new GTOverapproxAdapter();
+        break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);
     }
 
+    // TODO change the following method to take a Config object
     String[] configArgs = adapter.configurationAsMainArguments(config);
     List<String> configList = Arrays.asList(configArgs);
     commandList.add(adapter.getMainClass());
@@ -364,7 +517,7 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
       Set<TaintLabel> executionLabels = new HashSet<>();
 
       for (Taint sinkTaint : taintSet) {
-        if(sinkTaint == null) {
+        if (sinkTaint == null) {
           continue;
         }
 

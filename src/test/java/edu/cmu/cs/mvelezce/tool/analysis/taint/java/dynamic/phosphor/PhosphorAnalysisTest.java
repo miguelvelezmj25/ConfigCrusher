@@ -2,11 +2,15 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox.GTOverapproxAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
@@ -19,6 +23,21 @@ public class PhosphorAnalysisTest {
   public void dynamicRunningExample() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
+    Set<String> initialConfig = new HashSet<>();
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
+  }
+
+  @Test
+  public void gtOverapprox() throws IOException, InterruptedException {
+    String programName = GTOverapproxAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(GTOverapproxAdapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
 
     // Program arguments

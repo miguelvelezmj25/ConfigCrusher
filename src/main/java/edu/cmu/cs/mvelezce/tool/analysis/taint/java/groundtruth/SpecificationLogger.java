@@ -11,7 +11,7 @@ import jdk.internal.org.objectweb.asm.Type;
 public class SpecificationLogger {
 
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
-  private static final Map<CallingCtxDecision, ThenElseCounts> CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS = new HashMap<>();
+  private static final Map<String, ThenElseCounts> DECISIONS_TO_BRANCH_COUNTS = new HashMap<>();
 
   static final String RESULTS_FILE = "results.ser";
   static final String INTERNAL_NAME = Type.getInternalName(SpecificationLogger.class);
@@ -189,7 +189,7 @@ public class SpecificationLogger {
     try {
       FileOutputStream fos = new FileOutputStream(RESULTS_FILE);
       ObjectOutputStream oos = new ObjectOutputStream(fos);
-      oos.writeObject(CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS);
+      oos.writeObject(DECISIONS_TO_BRANCH_COUNTS);
       oos.close();
       fos.close();
     }
@@ -199,12 +199,13 @@ public class SpecificationLogger {
   }
 
   private static ThenElseCounts getThenElseCounts(String methodName, int decisionCount) {
-    String[] callingCtx = SpecificationLogger.getCallingCtx();
+//    String[] callingCtx = SpecificationLogger.getCallingCtx();
     String decision = methodName + "." + decisionCount;
-    CallingCtxDecision callingCtxDecision = new CallingCtxDecision(callingCtx, decision);
-    SpecificationLogger.addCallingCtxDecision(callingCtxDecision);
+    SpecificationLogger.addDecision(decision);
+//    CallingCtxDecision callingCtxDecision = new CallingCtxDecision(callingCtx, decision);
+//    SpecificationLogger.addCallingCtxDecision(callingCtxDecision);
 
-    return CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS.get(callingCtxDecision);
+    return DECISIONS_TO_BRANCH_COUNTS.get(decision);
   }
 
   private static String[] getCallingCtx() {
@@ -225,12 +226,19 @@ public class SpecificationLogger {
     return methodName + ":" + lineNumber;
   }
 
-  private static void addCallingCtxDecision(CallingCtxDecision callingCtxDecision) {
-    if (!CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS.containsKey(callingCtxDecision)) {
+  private static void addDecision(String decision) {
+    if (!DECISIONS_TO_BRANCH_COUNTS.containsKey(decision)) {
       ThenElseCounts thenElseCounts = new ThenElseCounts();
-      CALLING_CTX_DECISIONS_TO_BRANCH_COUNTS.put(callingCtxDecision, thenElseCounts);
+      DECISIONS_TO_BRANCH_COUNTS.put(decision, thenElseCounts);
     }
   }
+
+//  private static void addCallingCtxDecision(CallingCtxDecision callingCtxDecision) {
+//    if (!DECISIONS_TO_BRANCH_COUNTS.containsKey(callingCtxDecision)) {
+//      ThenElseCounts thenElseCounts = new ThenElseCounts();
+//      DECISIONS_TO_BRANCH_COUNTS.put(callingCtxDecision, thenElseCounts);
+//    }
+//  }
 
   static String getMethodDescriptor(String methodName) {
     String methodDescriptor = SpecificationLogger.METHODS_TO_DESCRIPTORS.get(methodName);

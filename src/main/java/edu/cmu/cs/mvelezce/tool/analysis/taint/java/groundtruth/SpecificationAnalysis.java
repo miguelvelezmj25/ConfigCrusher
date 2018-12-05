@@ -240,7 +240,7 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   private List<String> buildCommandAsList(Set<String> config) {
     List<String> commandList = new ArrayList<>();
     commandList.add("java");
-//    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
+    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");
 
     String programName = this.getProgramName();
@@ -307,21 +307,21 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   }
 
   private void processResults(Set<String> config) throws IOException, ClassNotFoundException {
-    Map<CallingCtxDecision, ThenElseCounts> callSiteDecisionsToBranchCounts = this
-        .getCallSiteDecisionsToBranchCounts();
-    this.addSinks(callSiteDecisionsToBranchCounts.keySet());
-
-    for (Map.Entry<CallingCtxDecision, ThenElseCounts> entry : callSiteDecisionsToBranchCounts
-        .entrySet()) {
-      CallingCtxDecision callingCtxDecision = entry.getKey();
-      String sink = callingCtxDecision.getDecision();
-      DecisionInfo decisionInfo = this.sinksToDecisionInfos.get(sink);
-
-      List<String> callingCtx = callingCtxDecision.getCallingCtx();
-      this.updateCtxs(decisionInfo, callingCtx, config);
-      this.updateTable(decisionInfo, callingCtx, config, entry.getValue());
-    }
-
+    throw new UnsupportedOperationException("Implement");
+//    Map<CallingCtxDecision, ThenElseCounts> callSiteDecisionsToBranchCounts = this
+//        .getCallSiteDecisionsToBranchCounts();
+//    this.addSinks(callSiteDecisionsToBranchCounts.keySet());
+//
+//    for (Map.Entry<CallingCtxDecision, ThenElseCounts> entry : callSiteDecisionsToBranchCounts
+//        .entrySet()) {
+//      CallingCtxDecision callingCtxDecision = entry.getKey();
+//      String sink = callingCtxDecision.getDecision();
+//      DecisionInfo decisionInfo = this.sinksToDecisionInfos.get(sink);
+//
+//      List<String> callingCtx = callingCtxDecision.getCallingCtx();
+//      this.updateCtxs(decisionInfo, callingCtx, config);
+//      this.updateTable(decisionInfo, callingCtx, config, entry.getValue());
+//    }
   }
 
   private void updateTable(DecisionInfo decisionInfo, List<String> callingCtx,
@@ -342,7 +342,8 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   private void updateCtxs(DecisionInfo decisionInfo, List<String> callingCtx,
       Set<String> config) {
     this.addCtxs(decisionInfo, callingCtx);
-    VariabilityCtx callSiteVariabilityCtx = decisionInfo.getCallingCtxsToVariabilityCtxs().get(callingCtx);
+    VariabilityCtx callSiteVariabilityCtx = decisionInfo.getCallingCtxsToVariabilityCtxs()
+        .get(callingCtx);
     callSiteVariabilityCtx.addConfig(config);
   }
 
@@ -353,10 +354,11 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
   }
 
   private void addSinks(Set<CallingCtxDecision> callingCtxDecisions) {
-    for (CallingCtxDecision callingCtxDecision : callingCtxDecisions) {
-      String sink = callingCtxDecision.getDecision();
-      this.sinksToDecisionInfos.putIfAbsent(sink, new DecisionInfo());
-    }
+    throw new UnsupportedOperationException("Implement");
+//    for (CallingCtxDecision callingCtxDecision : callingCtxDecisions) {
+//      String sink = callingCtxDecision.getDecision();
+//      this.sinksToDecisionInfos.putIfAbsent(sink, new DecisionInfo());
+//    }
   }
 
   private Map<CallingCtxDecision, ThenElseCounts> getCallSiteDecisionsToBranchCounts()

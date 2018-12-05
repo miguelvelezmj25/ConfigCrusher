@@ -1,14 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,8 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 
+// TODO check what methods are already done in the super class
 public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
   private final Map<String, SinkData> sinksToData = new HashMap<>();
@@ -39,22 +34,22 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     this.mainClass = mainClass;
   }
 
-  @Override
-  public Map<JavaRegion, SinkData> analyze() throws IOException, InterruptedException {
-    this.runDynamicAnalysis();
-
-    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
-
-    for (Map.Entry<String, SinkData> entry : this.sinksToData.entrySet()) {
-      String sink = entry.getKey();
-      JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
-          this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
-
-      regionsToConstraints.put(region, entry.getValue());
-    }
-
-    return regionsToConstraints;
-  }
+//  @Override
+//  public Map<JavaRegion, SinkData> analyze() throws IOException, InterruptedException {
+//    this.runDynamicAnalysis();
+//
+//    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
+//
+//    for (Map.Entry<String, SinkData> entry : this.sinksToData.entrySet()) {
+//      String sink = entry.getKey();
+//      JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
+//          this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
+//
+//      regionsToConstraints.put(region, entry.getValue());
+//    }
+//
+//    return regionsToConstraints;
+//  }
 
   @Override
   protected void runDynamicAnalysis() throws IOException, InterruptedException {
@@ -95,7 +90,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
   // TODO this method is hardcoded to run all dynamic examples
   @Override
   protected List<String> buildCommandAsList(Set config) {
-    if(this.mainClass == null) {
+    if (this.mainClass == null) {
       return super.buildCommandAsList(config);
     }
 
@@ -160,66 +155,66 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     return execVarCtx;
   }
 
-  @Override
-  public Map<JavaRegion, SinkData> readFromFile(File file) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    List<RegionToInfo> results = mapper
-        .readValue(file, new TypeReference<List<RegionToInfo>>() {
-        });
-
-    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
-
-    for (RegionToInfo<SinkData> result : results) {
-      Map<String, Map> info = (Map<String, Map>) result.getInfo();
-      Map<String, List> sinkDataEntries = info.get("data");
-
-      SinkData sinkData = new SinkData();
-
-      for (Map.Entry<String, List> entry : sinkDataEntries.entrySet()) {
-        String execVarCtxStr = entry.getKey();
-        ExecVarCtx execVarCtx = this.getExecVarCtx(execVarCtxStr);
-        List<List<String>> execTaintsList = entry.getValue();
-        Set<Set<String>> executionTaints = this.getExecTaints(execTaintsList);
-
-        sinkData.putIfAbsent(execVarCtx, executionTaints);
-      }
-
-      regionsToConstraints.put(result.getRegion(), sinkData);
-    }
-
-    return regionsToConstraints;
-  }
-
-  private Set<Set<String>> getExecTaints(List<List<String>> execTaintsList) {
-    Set<Set<String>> execTaints = new HashSet<>();
-
-    for (List<String> taints : execTaintsList) {
-      Set<String> options = new HashSet<>(taints);
-      execTaints.add(options);
-    }
-
-    return execTaints;
-  }
-
-  private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
-    execVarCtxStr = execVarCtxStr.replace("[[", "");
-    execVarCtxStr = execVarCtxStr.replace("]]", "");
-    String[] entries = execVarCtxStr.split(Pattern.quote("^"));
-
-    ExecVarCtx execVarCtx = new ExecVarCtx();
-
-    if (!(entries.length == 1 && "true".equals(entries[0]))) {
-      for (String entry : entries) {
-        String notStr = "!";
-        entry = entry.trim();
-        boolean value = !entry.contains(notStr);
-        entry = entry.replace(notStr, "");
-        execVarCtx.addEntry(entry, value);
-      }
-    }
-
-    return execVarCtx;
-  }
+//  @Override
+//  public Map<JavaRegion, SinkData> readFromFile(File file) throws IOException {
+//    ObjectMapper mapper = new ObjectMapper();
+//    List<RegionToInfo> results = mapper
+//        .readValue(file, new TypeReference<List<RegionToInfo>>() {
+//        });
+//
+//    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
+//
+//    for (RegionToInfo<SinkData> result : results) {
+//      Map<String, Map> info = (Map<String, Map>) result.getInfo();
+//      Map<String, List> sinkDataEntries = info.get("data");
+//
+//      SinkData sinkData = new SinkData();
+//
+//      for (Map.Entry<String, List> entry : sinkDataEntries.entrySet()) {
+//        String execVarCtxStr = entry.getKey();
+//        ExecVarCtx execVarCtx = this.getExecVarCtx(execVarCtxStr);
+//        List<List<String>> execTaintsList = entry.getValue();
+//        Set<Set<String>> executionTaints = this.getExecTaints(execTaintsList);
+//
+//        sinkData.putIfAbsent(execVarCtx, executionTaints);
+//      }
+//
+//      regionsToConstraints.put(result.getRegion(), sinkData);
+//    }
+//
+//    return regionsToConstraints;
+//  }
+//
+//  private Set<Set<String>> getExecTaints(List<List<String>> execTaintsList) {
+//    Set<Set<String>> execTaints = new HashSet<>();
+//
+//    for (List<String> taints : execTaintsList) {
+//      Set<String> options = new HashSet<>(taints);
+//      execTaints.add(options);
+//    }
+//
+//    return execTaints;
+//  }
+//
+//  private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
+//    execVarCtxStr = execVarCtxStr.replace("[[", "");
+//    execVarCtxStr = execVarCtxStr.replace("]]", "");
+//    String[] entries = execVarCtxStr.split(Pattern.quote("^"));
+//
+//    ExecVarCtx execVarCtx = new ExecVarCtx();
+//
+//    if (!(entries.length == 1 && "true".equals(entries[0]))) {
+//      for (String entry : entries) {
+//        String notStr = "!";
+//        entry = entry.trim();
+//        boolean value = !entry.contains(notStr);
+//        entry = entry.replace(notStr, "");
+//        execVarCtx.addEntry(entry, value);
+//      }
+//    }
+//
+//    return execVarCtx;
+//  }
 
   @Override
   public String outputDir() {

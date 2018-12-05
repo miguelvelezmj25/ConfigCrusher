@@ -27,16 +27,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Nullable;
+import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
 // TODO the generics might not be used correctly
-public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
+public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 
   private static final String PHOSPHOR_OUTPUT_DIR =
       BaseAdapter.USER_HOME
@@ -44,10 +42,7 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
   private static final String PHOSPHOR_SCRIPTS_DIR = BaseAdapter.USER_HOME
       + "/Documents/Programming/Java/Projects/phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
 
-
   private final Map<String, SinkData> sinksToData = new HashMap<>();
-
-  private final Map<String, Set<Constraint>> sinksToConstraints = new HashMap<>();
 
   public PhosphorAnalysis(String programName) {
     this(programName, new HashSet<>(), new HashSet<>());
@@ -58,37 +53,81 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
   }
 
   @Override
-  public Map<JavaRegion, Set<Constraint>> analyze() throws IOException, InterruptedException {
+  public Map<JavaRegion, SinkData> analyze() throws IOException, InterruptedException {
     this.runDynamicAnalysis();
 
-    throw new UnsupportedOperationException("Implement");
-//    Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
-//
-//    for (Map.Entry<String, Set<Constraint>> entry : this.sinksToConstraints.entrySet()) {
-//      String sink = entry.getKey();
-//      JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
-//          this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
-//
-//      regionsToConstraints.put(region, entry.getValue());
-//    }
-//
-//    return regionsToConstraints;
+    Map<JavaRegion, SinkData> regionsToData = new HashMap<>();
+
+    for (Map.Entry<String, SinkData> entry : this.sinksToData.entrySet()) {
+      String sink = entry.getKey();
+      JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
+          this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
+
+      regionsToData.put(region, entry.getValue());
+    }
+
+    return regionsToData;
   }
 
   @Override
-  public Map<JavaRegion, Set<Constraint>> readFromFile(File file) throws IOException {
+  public Map<JavaRegion, SinkData> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    List<RegionToInfo<Set<Constraint>>> results = mapper
-        .readValue(file, new TypeReference<List<RegionToInfo<Set<Constraint>>>>() {
+    List<RegionToInfo> results = mapper
+        .readValue(file, new TypeReference<List<RegionToInfo>>() {
         });
 
-    Map<JavaRegion, Set<Constraint>> regionsToConstraints = new HashMap<>();
+    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
 
-    for (RegionToInfo<Set<Constraint>> result : results) {
-      regionsToConstraints.put(result.getRegion(), new HashSet<>(result.getInfo()));
+    for (RegionToInfo<SinkData> result : results) {
+      Map<String, Map> info = (Map<String, Map>) result.getInfo();
+      Map<String, List> sinkDataEntries = info.get("data");
+
+      SinkData sinkData = new SinkData();
+
+      for (Map.Entry<String, List> entry : sinkDataEntries.entrySet()) {
+        String execVarCtxStr = entry.getKey();
+        ExecVarCtx execVarCtx = this.getExecVarCtx(execVarCtxStr);
+        List<List<String>> execTaintsList = entry.getValue();
+        Set<Set<String>> executionTaints = this.getExecTaints(execTaintsList);
+
+        sinkData.putIfAbsent(execVarCtx, executionTaints);
+      }
+
+      regionsToConstraints.put(result.getRegion(), sinkData);
     }
 
     return regionsToConstraints;
+  }
+
+  private Set<Set<String>> getExecTaints(List<List<String>> execTaintsList) {
+    Set<Set<String>> execTaints = new HashSet<>();
+
+    for (List<String> taints : execTaintsList) {
+      Set<String> options = new HashSet<>(taints);
+      execTaints.add(options);
+    }
+
+    return execTaints;
+  }
+
+  private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
+    execVarCtxStr = execVarCtxStr.replace("[[", "");
+    execVarCtxStr = execVarCtxStr.replace("]]", "");
+    String[] entries = execVarCtxStr.split(Pattern.quote("^"));
+
+    ExecVarCtx execVarCtx = new ExecVarCtx();
+
+    if (!(entries.length == 1 && "true".equals(entries[0]))) {
+      for (String entry : entries) {
+        String notStr = "!";
+        entry = entry.trim();
+        boolean value = !entry.contains(notStr);
+        entry = entry.replace(notStr, "");
+        execVarCtx.addEntry(entry, value);
+      }
+    }
+
+    return execVarCtx;
   }
 
   /**
@@ -120,7 +159,6 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
       Set<Set<String>> configsToRun = this.getConfigsToRun();
       configsToRun.removeAll(exploredConfigs);
       configsToExplore.addAll(configsToRun);
-      System.out.println();
     }
 
     // TODO add check to be sure that we are not sampling a constraint that we already sample
@@ -172,7 +210,6 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
 
   private Set<Set<String>> getConfigsToRun() {
     Set<Map<String, Boolean>> configMapsToRun = this.getConfigMapsToRun();
-
     Set<Set<String>> configsToRun = new HashSet<>();
 
     for (Map<String, Boolean> configMapToRun : configMapsToRun) {
@@ -295,31 +332,31 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
     return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc";
   }
 
-  static void removeAllSubConstraints(Set<Constraint> constraintsFromAnalysis,
-      Set<Constraint> exploredConstraints) {
-    for (Constraint explored : exploredConstraints) {
-      removeAllSubConstraints(constraintsFromAnalysis, explored);
-    }
-  }
+//  static void removeAllSubConstraints(Set<Constraint> constraintsFromAnalysis,
+//      Set<Constraint> exploredConstraints) {
+//    for (Constraint explored : exploredConstraints) {
+//      removeAllSubConstraints(constraintsFromAnalysis, explored);
+//    }
+//  }
 
-  /**
-   * Removes the subconstraints of the passed constraint from passes constraints set.
-   */
-  static void removeAllSubConstraints(Set<Constraint> constraints, Constraint constraint) {
-    constraints.removeIf(currentConstraint -> currentConstraint.isSubsetOf(constraint));
-  }
+//  /**
+//   * Removes the subconstraints of the passed constraint from passes constraints set.
+//   */
+//  static void removeAllSubConstraints(Set<Constraint> constraints, Constraint constraint) {
+//    constraints.removeIf(currentConstraint -> currentConstraint.isSubsetOf(constraint));
+//  }
 
-  /**
-   * Input: P', c in C
-   *
-   * Output: ST: S --> (P(O), P(O))
-   *
-   * Input: There is a script that this method calls to executed the instrumented program.
-   * Therefore, we do not not pass the instrumented program to this method.
-   *
-   * Output: This method only runs the phosphor analysis. There is another method that processes the
-   * results from the analysis.
-   */
+  //  /**
+//   * Input: P', c in C
+//   *
+//   * Output: ST: S --> (P(O), P(O))
+//   *
+//   * Input: There is a script that this method calls to executed the instrumented program.
+//   * Therefore, we do not not pass the instrumented program to this method.
+//   *
+//   * Output: This method only runs the phosphor analysis. There is another method that processes the
+//   * results from the analysis.
+//   */
   void runPhosphorAnalysis(Set<String> config) throws IOException, InterruptedException {
     ProcessBuilder builder = new ProcessBuilder();
 
@@ -387,14 +424,14 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
     return commandList;
   }
 
-  /**
-   * Input: P', c in C
-   *
-   * Output: ST: S --> (P(O), P(O))
-   *
-   * Helper method for running the phosphor analysis. This method processes the results of the
-   * analysis and returns the output specified in the algorithm.
-   */
+  //  /**
+//   * Input: P', c in C
+//   *
+//   * Output: ST: S --> (P(O), P(O))
+//   *
+//   * Helper method for running the phosphor analysis. This method processes the results of the
+//   * analysis and returns the output specified in the algorithm.
+//   */
   Map<String, Map<Set<String>, Set<Set<String>>>> analyzePhosphorResults()
       throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
@@ -414,25 +451,6 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
     Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> sinksToLabelData = this
         .getSinksToLabelData(sinksToData);
     return this.changeLabelsToTaints(sinksToLabelData);
-
-//    Map<String, Set<TaintLabel>> sinksToTaintLabelsFromTaints = new HashMap<>();
-//    Map<String, Set<TaintLabel>> sinksToTaintLabelsFromCtx = new HashMap<>();
-//
-//    for (File file : serializedFiles) {
-//      if (file.getName().contains("taints")) {
-//        sinksToTaintLabelsFromTaints = this.deserialize(file);
-//      }
-//      else {
-//        sinksToTaintLabelsFromCtx = this.deserialize(file);
-//      }
-//    }
-//
-//    Map<String, Set<String>> sinksToTaintsFromTaints = this
-//        .changeTaintLabelsToTaints(sinksToTaintLabelsFromTaints);
-//    Map<String, Set<String>> sinksToTaintsFromCtx = this
-//        .changeTaintLabelsToTaints(sinksToTaintLabelsFromCtx);
-//
-//    return Pair.of(sinksToTaintsFromTaints, sinksToTaintsFromCtx);
   }
 
   private Map<String, Map<Set<String>, Set<Set<String>>>> changeLabelsToTaints(
@@ -581,163 +599,163 @@ public class PhosphorAnalysis<T> extends BaseDynamicAnalysis<Set<Constraint>> {
     return FileUtils.listFiles(dirFile, null, false);
   }
 
-  /**
-   * Input: ST: S --> (P(O), P(O)), c ∈ C
-   *
-   * Output: CFA: P(CT)
-   *
-   * Calculate the constraints from running the dynamic analysis
-   */
-  Set<Constraint> getConstraintsFromAnalysis(
-      Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults,
-      Set<String> config) {
-    Map<String, Set<String>> sinksToTaintsFromTaints = sinksToTaintsResults.getLeft();
-    Map<String, Set<String>> sinksToTaintsFromCtx = sinksToTaintsResults.getRight();
+//  /**
+//   * Input: ST: S --> (P(O), P(O)), c ∈ C
+//   *
+//   * Output: CFA: P(CT)
+//   *
+//   * Calculate the constraints from running the dynamic analysis
+//   */
+//  Set<Constraint> getConstraintsFromAnalysis(
+//      Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults,
+//      Set<String> config) {
+//    Map<String, Set<String>> sinksToTaintsFromTaints = sinksToTaintsResults.getLeft();
+//    Map<String, Set<String>> sinksToTaintsFromCtx = sinksToTaintsResults.getRight();
+//
+//    if (sinksToTaintsFromTaints == null || sinksToTaintsFromCtx == null) {
+//      throw new IllegalArgumentException("The sinks to taints result cannot be empty");
+//    }
+//
+//    Set<Constraint> constraintsFromAnalysis = new HashSet<>();
+//
+//    Set<String> executedSinks = new HashSet<>(sinksToTaintsFromTaints.keySet());
+//    executedSinks.addAll(sinksToTaintsFromCtx.keySet());
+//    this.addNewSinks(executedSinks);
+//
+//    for (String sink : executedSinks) {
+//      Set<Constraint> constraintsAtSink = this
+//          .getConstraintsAtSink(sinksToTaintsFromTaints.get(sink),
+//              sinksToTaintsFromCtx.get(sink),
+//              config);
+//
+//      constraintsFromAnalysis.addAll(constraintsAtSink);
+//
+//      Set<Constraint> oldConstraints = this.sinksToConstraints.get(sink);
+//      oldConstraints.addAll(constraintsAtSink);
+//      this.sinksToConstraints.put(sink, oldConstraints);
+//    }
+//
+//    return constraintsFromAnalysis;
+//  }
 
-    if (sinksToTaintsFromTaints == null || sinksToTaintsFromCtx == null) {
-      throw new IllegalArgumentException("The sinks to taints result cannot be empty");
-    }
+//  /**
+//   * Input: stv ∈ ST.values, c ∈ C
+//   *
+//   * Output: CS: P(CFA) // CFA: P(CT)
+//   *
+//   * Calculate the constraints at a sink
+//   */
+//  private Set<Constraint> getConstraintsAtSink(@Nullable Set<String> taintsFromTaint,
+//      @Nullable Set<String> taintsFromCtx, Set<String> config) {
+//    Set<Constraint> constraints = new HashSet<>();
+//
+//    Set<Map<String, Boolean>> partialConfigs = Constraint.buildPartialConfigs(taintsFromTaint);
+//    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
+//
+//    if (partialConfigs.isEmpty()) {
+//      partialConfigs.add(new HashMap<>());
+//    }
+//
+//    for (Map<String, Boolean> partialConfig : partialConfigs) {
+//      constraints.add(new Constraint(partialConfig, ctx));
+//    }
+//
+//    PhosphorAnalysis.removeInvalidConstraints(constraints);
+//
+//    return constraints;
+//  }
 
-    Set<Constraint> constraintsFromAnalysis = new HashSet<>();
+//  static void removeInvalidConstraints(Set<Constraint> constraints) {
+//    constraints.removeIf(constraint -> !constraint.isValid());
+//  }
 
-    Set<String> executedSinks = new HashSet<>(sinksToTaintsFromTaints.keySet());
-    executedSinks.addAll(sinksToTaintsFromCtx.keySet());
-    this.addNewSinks(executedSinks);
+//  private void addNewSinks(Set<String> sinks) {
+//    for (String sink : sinks) {
+//      if (!this.sinksToConstraints.containsKey(sink)) {
+//        this.sinksToConstraints.put(sink, new HashSet<>());
+//      }
+//    }
+//  }
 
-    for (String sink : executedSinks) {
-      Set<Constraint> constraintsAtSink = this
-          .getConstraintsAtSink(sinksToTaintsFromTaints.get(sink),
-              sinksToTaintsFromCtx.get(sink),
-              config);
+//  /**
+//   * Input: CE, O
+//   *
+//   * Output: CTE: P(CE)
+//   *
+//   * Input: since we represent options set to false by not including them in the set that represents
+//   * configurations, there is no need to pass them in the method.
+//   *
+//   * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
+//   */
+//  static Constraint getNextConstraint(Set<Constraint> constraintsToEvaluate) {
+//    if (constraintsToEvaluate.isEmpty()) {
+//      throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
+//    }
+//
+//    if (constraintsToEvaluate.size() == 1) {
+//      return constraintsToEvaluate.iterator().next();
+//    }
+//
+//    // TODO check results if picking the longest constraint first
+//    Set<Map<String, Boolean>> completeConstraints = getCompleteConstraints(constraintsToEvaluate);
+//    Iterator<Map<String, Boolean>> iter = completeConstraints.iterator();
+//    Map<String, Boolean> finalConstraintAsConfigWithValues = new HashMap<>(iter.next());
+//
+//    while (iter.hasNext()) {
+//      Map<String, Boolean> currentConstraintAsConfigWithValues = iter.next();
+//      Set<String> pivotOptions = getPivotOptions(finalConstraintAsConfigWithValues,
+//          currentConstraintAsConfigWithValues);
+//
+//      if (pivotOptions.isEmpty()) {
+//        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
+//      }
+//      else {
+//        Map<String, Boolean> finalConstraintPivotValues = getPivotValues(
+//            finalConstraintAsConfigWithValues, pivotOptions);
+//        Map<String, Boolean> currentConstraintPivotValues = getPivotValues(
+//            currentConstraintAsConfigWithValues, pivotOptions);
+//
+//        if (!finalConstraintPivotValues.equals(currentConstraintPivotValues)) {
+//          // Could not merge the constraints
+//          continue;
+//        }
+//
+//        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
+//      }
+//    }
+//
+//    // TODO check if the constraint we picked is NOT a proper subset of a set left in the constraints set
+//    return new Constraint(finalConstraintAsConfigWithValues);
+//  }
 
-      constraintsFromAnalysis.addAll(constraintsAtSink);
+//  private static Map<String, Boolean> getPivotValues(
+//      Map<String, Boolean> constraintAsConfigWithValues, Set<String> pivotOptions) {
+//    Map<String, Boolean> pivotValues = new HashMap<>();
+//
+//    for (String option : pivotOptions) {
+//      pivotValues.put(option, constraintAsConfigWithValues.get(option));
+//    }
+//
+//    return pivotValues;
+//  }
 
-      Set<Constraint> oldConstraints = this.sinksToConstraints.get(sink);
-      oldConstraints.addAll(constraintsAtSink);
-      this.sinksToConstraints.put(sink, oldConstraints);
-    }
+//  private static Set<String> getPivotOptions(Map<String, Boolean> configWaithValues1,
+//      Map<String, Boolean> configWaithValues2) {
+//    Set<String> pivotOptions = new HashSet<>(configWaithValues1.keySet());
+//    pivotOptions.retainAll(configWaithValues2.keySet());
+//
+//    return pivotOptions;
+//  }
 
-    return constraintsFromAnalysis;
-  }
-
-  /**
-   * Input: stv ∈ ST.values, c ∈ C
-   *
-   * Output: CS: P(CFA) // CFA: P(CT)
-   *
-   * Calculate the constraints at a sink
-   */
-  private Set<Constraint> getConstraintsAtSink(@Nullable Set<String> taintsFromTaint,
-      @Nullable Set<String> taintsFromCtx, Set<String> config) {
-    Set<Constraint> constraints = new HashSet<>();
-
-    Set<Map<String, Boolean>> partialConfigs = Constraint.buildPartialConfigs(taintsFromTaint);
-    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
-
-    if (partialConfigs.isEmpty()) {
-      partialConfigs.add(new HashMap<>());
-    }
-
-    for (Map<String, Boolean> partialConfig : partialConfigs) {
-      constraints.add(new Constraint(partialConfig, ctx));
-    }
-
-    PhosphorAnalysis.removeInvalidConstraints(constraints);
-
-    return constraints;
-  }
-
-  static void removeInvalidConstraints(Set<Constraint> constraints) {
-    constraints.removeIf(constraint -> !constraint.isValid());
-  }
-
-  private void addNewSinks(Set<String> sinks) {
-    for (String sink : sinks) {
-      if (!this.sinksToConstraints.containsKey(sink)) {
-        this.sinksToConstraints.put(sink, new HashSet<>());
-      }
-    }
-  }
-
-  /**
-   * Input: CE, O
-   *
-   * Output: CTE: P(CE)
-   *
-   * Input: since we represent options set to false by not including them in the set that represents
-   * configurations, there is no need to pass them in the method.
-   *
-   * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
-   */
-  static Constraint getNextConstraint(Set<Constraint> constraintsToEvaluate) {
-    if (constraintsToEvaluate.isEmpty()) {
-      throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
-    }
-
-    if (constraintsToEvaluate.size() == 1) {
-      return constraintsToEvaluate.iterator().next();
-    }
-
-    // TODO check results if picking the longest constraint first
-    Set<Map<String, Boolean>> completeConstraints = getCompleteConstraints(constraintsToEvaluate);
-    Iterator<Map<String, Boolean>> iter = completeConstraints.iterator();
-    Map<String, Boolean> finalConstraintAsConfigWithValues = new HashMap<>(iter.next());
-
-    while (iter.hasNext()) {
-      Map<String, Boolean> currentConstraintAsConfigWithValues = iter.next();
-      Set<String> pivotOptions = getPivotOptions(finalConstraintAsConfigWithValues,
-          currentConstraintAsConfigWithValues);
-
-      if (pivotOptions.isEmpty()) {
-        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
-      }
-      else {
-        Map<String, Boolean> finalConstraintPivotValues = getPivotValues(
-            finalConstraintAsConfigWithValues, pivotOptions);
-        Map<String, Boolean> currentConstraintPivotValues = getPivotValues(
-            currentConstraintAsConfigWithValues, pivotOptions);
-
-        if (!finalConstraintPivotValues.equals(currentConstraintPivotValues)) {
-          // Could not merge the constraints
-          continue;
-        }
-
-        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
-      }
-    }
-
-    // TODO check if the constraint we picked is NOT a proper subset of a set left in the constraints set
-    return new Constraint(finalConstraintAsConfigWithValues);
-  }
-
-  private static Map<String, Boolean> getPivotValues(
-      Map<String, Boolean> constraintAsConfigWithValues, Set<String> pivotOptions) {
-    Map<String, Boolean> pivotValues = new HashMap<>();
-
-    for (String option : pivotOptions) {
-      pivotValues.put(option, constraintAsConfigWithValues.get(option));
-    }
-
-    return pivotValues;
-  }
-
-  private static Set<String> getPivotOptions(Map<String, Boolean> configWaithValues1,
-      Map<String, Boolean> configWaithValues2) {
-    Set<String> pivotOptions = new HashSet<>(configWaithValues1.keySet());
-    pivotOptions.retainAll(configWaithValues2.keySet());
-
-    return pivotOptions;
-  }
-
-  private static Set<Map<String, Boolean>> getCompleteConstraints(Set<Constraint> constraints) {
-    Set<Map<String, Boolean>> completeConstraints = new HashSet<>();
-
-    for (Constraint constraint : constraints) {
-      completeConstraints.add(constraint.getCompleteConstraint());
-    }
-
-    return completeConstraints;
-  }
+//  private static Set<Map<String, Boolean>> getCompleteConstraints(Set<Constraint> constraints) {
+//    Set<Map<String, Boolean>> completeConstraints = new HashSet<>();
+//
+//    for (Constraint constraint : constraints) {
+//      completeConstraints.add(constraint.getCompleteConstraint());
+//    }
+//
+//    return completeConstraints;
+//  }
 
 //  Set<Set<String>> getConfigsForCC() {
 //    Set<Constraint> ccConstraints = this.getAllConstraints();

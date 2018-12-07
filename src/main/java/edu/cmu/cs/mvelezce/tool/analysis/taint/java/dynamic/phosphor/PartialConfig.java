@@ -12,6 +12,10 @@ public class PartialConfig {
     this.partialConfig.put(option, value);
   }
 
+  void addEntries(Map<String, Boolean> values) {
+    this.partialConfig.putAll(values);
+  }
+
   Set<String> getOptions() {
     return this.partialConfig.keySet();
   }

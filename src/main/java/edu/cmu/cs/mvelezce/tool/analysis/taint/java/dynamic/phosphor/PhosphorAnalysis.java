@@ -13,6 +13,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.Dynam
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
@@ -101,7 +102,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
   private Set<ExecTaints> getExecTaints(List<Map> execTaintsList) {
     Set<ExecTaints> allExecTaints = new HashSet<>();
 
-    for(Map<String, List> map : execTaintsList) {
+    for (Map<String, List> map : execTaintsList) {
       List<List<String>> taintsLists = map.get("taints");
       Set<Set<String>> allTaints = new HashSet<>();
 
@@ -120,8 +121,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
   }
 
   private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
-    execVarCtxStr = execVarCtxStr.replace("[[", "");
-    execVarCtxStr = execVarCtxStr.replace("]]", "");
+    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.LLBRACKET, "");
+    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.RRBRACKET, "");
     String[] entries = execVarCtxStr.split(Pattern.quote("^"));
 
     ExecVarCtx execVarCtx = new ExecVarCtx();
@@ -427,6 +428,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
       case OrContextAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new OrContextAdapter();
+        break;
+      case OrContext2Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new OrContext2Adapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);
@@ -808,18 +813,45 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 //  }
 
   static void printConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
-    throw new UnsupportedOperationException("Implement");
-//    for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
-//      for (Map.Entry<ExecVarCtx, Set<Set<String>>> data : regionToSinkData.getValue().getData()
-//          .entrySet()) {
-//        for (Set<String> options : data.getValue()) {
-//          Set<Set<String>> configs = Helper.getConfigurations(options);
-//          Set<Constraint> constraints = PhosphorAnalysis.getConstraints(configs, options);
-//          System.out
-//              .println(regionToSinkData.getKey() + " -> " + data.getKey() + " --> " + constraints);
-//        }
-//      }
-//    }
+    for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
+      JavaRegion region = regionToSinkData.getKey();
+      SinkData sinkData = regionToSinkData.getValue();
+
+      for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
+        ExecVarCtx execVarCtx = data.getKey();
+        Set<Set<Constraint>> constraints = new HashSet<>();
+
+        for (ExecTaints execTaints : data.getValue()) {
+          Set<Constraint> cs = new HashSet<>();
+
+          for (Set<String> execTaint : execTaints.getTaints()) {
+            Set<Set<String>> configs = Helper.getConfigurations(execTaint);
+            Set<Constraint> execTaintConstraints = PhosphorAnalysis
+                .getConstraints(configs, execTaint);
+
+            for (Constraint constraint : execTaintConstraints) {
+              Constraint c = new Constraint();
+              c.addEntries(constraint.getPartialConfig());
+
+              if (!execVarCtx.getPartialConfig().isEmpty()) {
+                c.addEntries(execVarCtx.getPartialConfig());
+              }
+
+              cs.add(c);
+            }
+          }
+
+          constraints.add(cs);
+        }
+
+        for (Set<Constraint> cs : constraints) {
+          System.out
+              .println(region.getRegionMethod() + ":" + region.getStartRegionIndex() + " -> " + cs);
+        }
+      }
+
+      System.out.println();
+    }
   }
 
   private static Set<Constraint> getConstraints(Set<Set<String>> configs, Set<String> options) {

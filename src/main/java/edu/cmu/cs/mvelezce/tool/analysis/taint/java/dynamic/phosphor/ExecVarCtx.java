@@ -14,6 +14,9 @@ import java.util.Map.Entry;
 
 public class ExecVarCtx extends PartialConfig {
 
+  public static final String LLBRACKET = "\u27E6";
+  public static final String RRBRACKET = "\u27E7";
+
   public Expression<String> toCNF() {
     List<Expression<String>> vars = new ArrayList<>();
 
@@ -38,7 +41,7 @@ public class ExecVarCtx extends PartialConfig {
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("\u27E6");
+    stringBuilder.append(LLBRACKET);
 
     Map<String, Boolean> partialConfig = this.getPartialConfig();
 
@@ -65,7 +68,7 @@ public class ExecVarCtx extends PartialConfig {
       }
     }
 
-    stringBuilder.append("\u27E7");
+    stringBuilder.append(RRBRACKET);
 
     return stringBuilder.toString();
   }

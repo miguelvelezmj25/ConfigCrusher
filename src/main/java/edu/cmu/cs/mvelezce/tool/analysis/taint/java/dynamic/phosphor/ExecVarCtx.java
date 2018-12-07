@@ -38,7 +38,7 @@ public class ExecVarCtx extends PartialConfig {
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("[[");
+    stringBuilder.append("\u27E6");
 
     Map<String, Boolean> partialConfig = this.getPartialConfig();
 
@@ -65,7 +65,7 @@ public class ExecVarCtx extends PartialConfig {
       }
     }
 
-    stringBuilder.append("]]");
+    stringBuilder.append("\u27E7");
 
     return stringBuilder.toString();
   }

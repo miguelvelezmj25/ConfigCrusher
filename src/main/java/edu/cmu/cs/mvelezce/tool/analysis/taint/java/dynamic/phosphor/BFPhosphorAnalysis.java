@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 // TODO check what methods are already done in the super class
@@ -37,10 +36,16 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     Set<Set<String>> configs = Helper.getConfigurations(options);
 
     for (Set<String> config : configs) {
+
+//      config = new HashSet<>();
+//      config.add("A");
+
       this.runPhosphorAnalysis(config);
       this.postProcessPhosphorAnalysis(config);
 //      System.out.println();
     }
+
+    System.out.println();
   }
 
   @Override

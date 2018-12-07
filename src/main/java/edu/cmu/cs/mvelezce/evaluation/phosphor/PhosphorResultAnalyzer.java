@@ -116,19 +116,20 @@ public class PhosphorResultAnalyzer {
   }
 
   private String compareRegions(DecisionInfo specDecisionInfo, SinkData phosphorSinkData) {
-    Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = specDecisionInfo
-        .getCallingCtxsToVariabilityCtxs();
-    Map<ExecVarCtx, Set<Set<String>>> data = phosphorSinkData.getData();
-
-    StringBuilder errors = new StringBuilder();
-    String ctxErrors = this
-        .compareVariabilityCtxs(callingCtxsToVariabilityCtxs.values(), data.keySet());
-    errors.append(ctxErrors);
-
-    String optionsErrors = this.compareOptions(specDecisionInfo, data);
-    errors.append(optionsErrors);
-
-    return errors.toString();
+    throw new UnsupportedOperationException("Implement");
+//    Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = specDecisionInfo
+//        .getCallingCtxsToVariabilityCtxs();
+//    Map<ExecVarCtx, Set<Set<String>>> data = phosphorSinkData.getData();
+//
+//    StringBuilder errors = new StringBuilder();
+//    String ctxErrors = this
+//        .compareVariabilityCtxs(callingCtxsToVariabilityCtxs.values(), data.keySet());
+//    errors.append(ctxErrors);
+//
+//    String optionsErrors = this.compareOptions(specDecisionInfo, data);
+//    errors.append(optionsErrors);
+//
+//    return errors.toString();
   }
 
   private String compareOptions(DecisionInfo specInfo,

@@ -86,8 +86,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
       for (Map.Entry<String, List> entry : sinkDataEntries.entrySet()) {
         String execVarCtxStr = entry.getKey();
         ExecVarCtx execVarCtx = this.getExecVarCtx(execVarCtxStr);
-        List<List<String>> execTaintsList = entry.getValue();
-        Set<Set<String>> executionTaints = this.getExecTaints(execTaintsList);
+        List<Map> execTaintsList = entry.getValue();
+        Set<ExecTaints> executionTaints = this.getExecTaints(execTaintsList);
 
         sinkData.putIfAbsent(execVarCtx, executionTaints);
       }
@@ -98,15 +98,25 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
     return regionsToConstraints;
   }
 
-  private Set<Set<String>> getExecTaints(List<List<String>> execTaintsList) {
-    Set<Set<String>> execTaints = new HashSet<>();
+  private Set<ExecTaints> getExecTaints(List<Map> execTaintsList) {
+    Set<ExecTaints> allExecTaints = new HashSet<>();
 
-    for (List<String> taints : execTaintsList) {
-      Set<String> options = new HashSet<>(taints);
-      execTaints.add(options);
+    for(Map<String, List> map : execTaintsList) {
+      List<List<String>> taintsLists = map.get("taints");
+      Set<Set<String>> allTaints = new HashSet<>();
+
+      for (List<String> taintLIst : taintsLists) {
+        Set<String> taints = new HashSet<>(taintLIst);
+        allTaints.add(taints);
+      }
+
+      ExecTaints execTaints = new ExecTaints();
+      execTaints.addExecTaints(allTaints);
+
+      allExecTaints.add(execTaints);
     }
 
-    return execTaints;
+    return allExecTaints;
   }
 
   private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
@@ -230,15 +240,16 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
   }
 
   private Set<Map<String, Boolean>> getConfigMapsToRun() {
-    Set<Map<String, Boolean>> configMapsToRun = new HashSet<>();
-
-    for (SinkData sinkData : this.sinksToData.values()) {
-      Set<Map<String, Boolean>> configsToRunPerSink = this
-          .getConfigsToRunPerSink(sinkData.getData());
-      configMapsToRun.addAll(configsToRunPerSink);
-    }
-
-    return configMapsToRun;
+    throw new UnsupportedOperationException("Implement");
+//    Set<Map<String, Boolean>> configMapsToRun = new HashSet<>();
+//
+//    for (SinkData sinkData : this.sinksToData.values()) {
+//      Set<Map<String, Boolean>> configsToRunPerSink = this
+//          .getConfigsToRunPerSink(sinkData.getData());
+//      configMapsToRun.addAll(configsToRunPerSink);
+//    }
+//
+//    return configMapsToRun;
   }
 
   private Set<Map<String, Boolean>> getConfigsToRunPerSink(Map<ExecVarCtx, Set<Set<String>>> data) {
@@ -314,8 +325,12 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
     for (Map.Entry<Set<String>, Set<Set<String>>> entry : sinkResults.entrySet()) {
       Set<String> sinkVariabilityCtx = entry.getKey();
       ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVariabilityCtx, config);
-      Set<Set<String>> executionTaints = sinkData.getExecTaints(execVarCtx);
-      executionTaints.addAll(entry.getValue());
+      Set<ExecTaints> executionTaints = sinkData.getExecTaints(execVarCtx);
+
+      ExecTaints execTaints = new ExecTaints();
+      execTaints.addExecTaints(entry.getValue());
+
+      executionTaints.add(execTaints);
     }
   }
 
@@ -793,17 +808,18 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 //  }
 
   static void printConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
-    for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
-      for (Map.Entry<ExecVarCtx, Set<Set<String>>> data : regionToSinkData.getValue().getData()
-          .entrySet()) {
-        for (Set<String> options : data.getValue()) {
-          Set<Set<String>> configs = Helper.getConfigurations(options);
-          Set<Constraint> constraints = PhosphorAnalysis.getConstraints(configs, options);
-          System.out
-              .println(regionToSinkData.getKey() + " -> " + data.getKey() + " --> " + constraints);
-        }
-      }
-    }
+    throw new UnsupportedOperationException("Implement");
+//    for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
+//      for (Map.Entry<ExecVarCtx, Set<Set<String>>> data : regionToSinkData.getValue().getData()
+//          .entrySet()) {
+//        for (Set<String> options : data.getValue()) {
+//          Set<Set<String>> configs = Helper.getConfigurations(options);
+//          Set<Constraint> constraints = PhosphorAnalysis.getConstraints(configs, options);
+//          System.out
+//              .println(regionToSinkData.getKey() + " -> " + data.getKey() + " --> " + constraints);
+//        }
+//      }
+//    }
   }
 
   private static Set<Constraint> getConstraints(Set<Set<String>> configs, Set<String> options) {

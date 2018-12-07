@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.assertTest2Example.AssertTest2ExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox.GTOverapproxAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.guessANumber.GuessANumberAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifand.IfAndAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
@@ -98,9 +98,9 @@ public class PhosphorResultAnalyzerTest {
   }
 
   @Test
-  public void gtOverapprox() throws IOException, InterruptedException {
-    String programName = GTOverapproxAdapter.PROGRAM_NAME;
-    List<String> options = GTOverapproxAdapter.getListOfOptions();
+  public void orContext() throws IOException, InterruptedException {
+    String programName = OrContextAdapter.PROGRAM_NAME;
+    List<String> options = OrContextAdapter.getListOfOptions();
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
     analyzer.analyze();

@@ -11,7 +11,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox.GTOverapproxAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
@@ -274,11 +274,11 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
             + PhosphorExample2Adapter.INSTRUMENTED_CLASS_PATH);
         adapter = new PhosphorExample2Adapter();
         break;
-      case GTOverapproxAdapter.PROGRAM_NAME:
+      case OrContextAdapter.PROGRAM_NAME:
         commandList.add(ccClasspath
             + BaseAdapter.PATH_SEPARATOR
-            + GTOverapproxAdapter.INSTRUMENTED_CLASS_PATH);
-        adapter = new GTOverapproxAdapter();
+            + OrContextAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new OrContextAdapter();
         break;
       case MultiFacetsAdapter.PROGRAM_NAME:
         commandList.add(ccClasspath

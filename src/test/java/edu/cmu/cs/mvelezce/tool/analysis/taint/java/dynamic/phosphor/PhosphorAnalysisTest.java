@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox.GTOverapproxAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import java.io.IOException;
@@ -30,16 +30,26 @@ public class PhosphorAnalysisTest {
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
+    analysis = new PhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
   }
 
   @Test
-  public void gtOverapprox() throws IOException, InterruptedException {
-    String programName = GTOverapproxAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(GTOverapproxAdapter.getListOfOptions());
+  public void readDynamicRunningExample() throws IOException, InterruptedException {
+    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
+    String[] args = new String[0];
+
+    DynamicAnalysis<SinkData> analysis = new PhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+    PhosphorAnalysis.printConstraints(read);
+  }
+
+  @Test
+  public void orContext() throws IOException, InterruptedException {
+    String programName = OrContextAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(OrContextAdapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
 
     // Program arguments
@@ -51,7 +61,7 @@ public class PhosphorAnalysisTest {
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
+    analysis = new PhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
@@ -72,7 +82,7 @@ public class PhosphorAnalysisTest {
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
+    analysis = new PhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
@@ -93,7 +103,7 @@ public class PhosphorAnalysisTest {
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
+    analysis = new PhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);

@@ -4,7 +4,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox.GTOverapproxAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
@@ -151,9 +151,9 @@ public class SpecificationAnalysisTest {
   }
 
   @Test
-  public void GTOverapprox() throws IOException, InterruptedException {
-    String programName = GTOverapproxAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(GTOverapproxAdapter.getListOfOptions());
+  public void OrContext() throws IOException, InterruptedException {
+    String programName = OrContextAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(OrContextAdapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

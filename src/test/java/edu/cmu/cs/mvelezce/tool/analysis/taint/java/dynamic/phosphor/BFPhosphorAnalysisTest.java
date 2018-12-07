@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
@@ -174,6 +175,55 @@ public class BFPhosphorAnalysisTest {
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void readExample3() throws IOException, InterruptedException {
+    String programName = PhosphorExample3Adapter.PROGRAM_NAME;
+
+    String[] args = new String[0];
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+    PhosphorAnalysis.printConstraints(read);
+  }
+
+  @Test
+  public void orContext() throws IOException, InterruptedException {
+    String programName = OrContextAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(OrContextAdapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void readOrContext() throws IOException, InterruptedException {
+    String programName = OrContextAdapter.PROGRAM_NAME;
+
+    String[] args = new String[0];
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    for (Map.Entry<JavaRegion, SinkData> entry : read.entrySet()) {
+      SinkData v = entry.getValue();
+
+      for (Map.Entry<ExecVarCtx, Set<Set<String>>> x : v.getData().entrySet()) {
+        for (Set<String> s : x.getValue()) {
+          System.out.println(entry.getKey() + " --> " + x.getKey() + " --> " + s);
+        }
+      }
+    }
   }
 
   @Test

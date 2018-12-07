@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox;
+package edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
@@ -9,12 +9,11 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
-public class GTOverapproxMain extends BaseMain {
+public class OrContextMain extends BaseMain {
 
-  static final String GT_OVERAPPROX_MAIN = GTOverapproxMain.class
-      .getCanonicalName();
+  static final String OR_CONTEXT_MAIN = OrContextMain.class.getCanonicalName();
 
-  private GTOverapproxMain(String programName, String iteration, String[] args) {
+  private OrContextMain(String programName, String iteration, String[] args) {
     super(programName, iteration, args);
   }
 
@@ -24,14 +23,14 @@ public class GTOverapproxMain extends BaseMain {
     String iteration = args[2];
     String[] sleepArgs = Arrays.copyOfRange(args, 3, args.length);
 
-    Main main = new GTOverapproxMain(programName, iteration, sleepArgs);
+    Main main = new OrContextMain(programName, iteration, sleepArgs);
     main.execute(mainClass, sleepArgs);
     main.logExecution();
   }
 
   @Override
   public void logExecution() throws IOException {
-    Adapter adapter = new GTOverapproxAdapter();
+    Adapter adapter = new OrContextAdapter();
     Set<String> configuration = adapter.configurationAsSet(this.getArgs());
 
     ConfigCrusherExecutor executor = new ConfigCrusherExecutor(this.getProgramName());

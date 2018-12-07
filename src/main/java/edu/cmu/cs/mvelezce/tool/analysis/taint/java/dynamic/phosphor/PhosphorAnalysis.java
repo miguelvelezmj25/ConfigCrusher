@@ -11,8 +11,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.gtOverapprox.GTOverapproxAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
@@ -33,7 +33,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 
-// TODO the generics might not be used correctly
 public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 
   private static final String PHOSPHOR_OUTPUT_DIR =
@@ -138,7 +137,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
    * Input: The program is provided elsewhere. Therefore, there is no need to pass the program to
    * this method.
    */
-  protected void runDynamicAnalysis() throws IOException, InterruptedException {
+  void runDynamicAnalysis() throws IOException, InterruptedException {
     Set<Set<String>> exploredConfigs = new HashSet<>();
     Set<Set<String>> configsToExplore = new HashSet<>();
 
@@ -150,11 +149,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
       exploredConfigs.add(config);
 
       this.runPhosphorAnalysis(config);
-      Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints = this.analyzePhosphorResults();
-
-      this.addSinks(sinksToTaints.keySet());
-      this.addExecVarCtxs(sinksToTaints, config);
-      this.addExecTaints(sinksToTaints, config);
+      this.postProcessPhosphorAnalysis(config);
 
       Set<Set<String>> configsToRun = this.getConfigsToRun();
       configsToRun.removeAll(exploredConfigs);
@@ -206,6 +201,13 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 //    System.out.println(count);
 ////    // TODO this might be done in the compression step, not in the analysis
 ////    this.getConfigsForCC();
+  }
+
+  void postProcessPhosphorAnalysis(Set<String> config) throws IOException {
+    Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints = this.analyzePhosphorResults();
+    this.addSinks(sinksToTaints.keySet());
+    this.addExecVarCtxs(sinksToTaints, config);
+    this.addExecTaints(sinksToTaints, config);
   }
 
   private Set<Set<String>> getConfigsToRun() {
@@ -372,7 +374,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
   }
 
   // TODO the access level was changed to hardcode some logic to execute all dynamic examples
-  protected List<String> buildCommandAsList(Set<String> config) {
+  List<String> buildCommandAsList(Set<String> config) {
     List<String> commandList = new ArrayList<>();
 
     String programName = this.getProgramName();
@@ -407,9 +409,9 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
         commandList.add("./examples.sh");
         adapter = new SimpleForExample2Adapter();
         break;
-      case GTOverapproxAdapter.PROGRAM_NAME:
+      case OrContextAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
-        adapter = new GTOverapproxAdapter();
+        adapter = new OrContextAdapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);
@@ -790,5 +792,40 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 //    return sinksToTaints;
 //  }
 
+  static void printConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
+    for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
+      for (Map.Entry<ExecVarCtx, Set<Set<String>>> data : regionToSinkData.getValue().getData()
+          .entrySet()) {
+        for (Set<String> options : data.getValue()) {
+          Set<Set<String>> configs = Helper.getConfigurations(options);
+          Set<Constraint> constraints = PhosphorAnalysis.getConstraints(configs, options);
+          System.out
+              .println(regionToSinkData.getKey() + " -> " + data.getKey() + " --> " + constraints);
+        }
+      }
+    }
+  }
+
+  private static Set<Constraint> getConstraints(Set<Set<String>> configs, Set<String> options) {
+    Set<Constraint> constraints = new HashSet<>();
+
+    for (Set<String> config : configs) {
+      Constraint constraint = new Constraint();
+
+      for (String option : options) {
+        constraint.addEntry(option, config.contains(option));
+      }
+
+      constraints.add(constraint);
+    }
+
+    return constraints;
+  }
+
+  Map<String, SinkData> getSinksToData() {
+    return sinksToData;
+  }
+
+//  static void getConstraints(Co)
 
 }

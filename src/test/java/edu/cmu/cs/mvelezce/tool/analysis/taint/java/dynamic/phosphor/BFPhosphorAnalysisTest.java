@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext3.OrContext3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorExample8Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
@@ -389,6 +390,36 @@ public class BFPhosphorAnalysisTest {
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void example8() throws IOException, InterruptedException {
+    String programName = PhosphorExample8Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(PhosphorExample8Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void readExample8() throws IOException, InterruptedException {
+    String programName = PhosphorExample8Adapter.PROGRAM_NAME;
+
+    String[] args = new String[0];
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+    PhosphorAnalysis.printConstraints(read);
   }
 
 }

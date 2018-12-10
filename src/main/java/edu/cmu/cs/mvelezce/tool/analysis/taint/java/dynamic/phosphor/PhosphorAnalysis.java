@@ -18,6 +18,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext3.OrContext3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorExample8Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
@@ -408,6 +409,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
       case PhosphorExample2Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new PhosphorExample2Adapter();
+        break;
+      case PhosphorExample8Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new PhosphorExample8Adapter();
         break;
       case PhosphorExample3Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");

@@ -1,12 +1,50 @@
 [
   {
     "region": {
-      "regionID": "6efcfdd4-a3dd-4c6f-b31a-cb48634aeac3",
+      "regionID": "1eefb1d4-8732-4638-9b85-3ae8c6f73fd8",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Example3",
+      "regionClass": "VariabilityContext2",
+      "regionMethod": "foo(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦B⟧": [
+          {
+            "taints": [
+              [
+                "C"
+              ]
+            ]
+          }
+        ],
+        "⟦A⟧": [
+          {
+            "taints": [
+              [
+                "C"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "08b02e67-90cf-4a39-8750-f1d1c266ed58",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "VariabilityContext2",
       "regionMethod": "main([Ljava/lang/String;)V",
       "startRegionIndex": 1,
       "startBlockID": "",
@@ -30,14 +68,14 @@
   },
   {
     "region": {
-      "regionID": "1df4fe85-d4ea-49ea-b609-65777f9cc253",
+      "regionID": "4763e3a9-1dfe-4102-9e1d-f2e89cbb0150",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Example3",
-      "regionMethod": "foo(Z)V",
-      "startRegionIndex": 1,
+      "regionClass": "VariabilityContext2",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
       "startBlockID": "",
       "endBlocksIDs": [],
       "startMethodBlock": null,
@@ -49,19 +87,7 @@
           {
             "taints": [
               [
-                "A"
-              ]
-            ]
-          }
-        ],
-        "⟦A⟧": [
-          {
-            "taints": [
-              [
                 "B"
-              ],
-              [
-                "C"
               ]
             ]
           }

@@ -1,12 +1,78 @@
 [
   {
     "region": {
-      "regionID": "6efcfdd4-a3dd-4c6f-b31a-cb48634aeac3",
+      "regionID": "d16f4bd7-80a3-4509-8445-729aa3c5a782",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Example3",
+      "regionClass": "IfOr2",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": [
+          {
+            "taints": [
+              [
+                "A"
+              ]
+            ]
+          },
+          {
+            "taints": [
+              [
+                "A",
+                "B"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "3a0b1dc5-346e-4686-ada6-672010999e1b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "IfOr2",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦!A⟧": [
+          {
+            "taints": [
+              [
+                "B"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "944ed8f6-5cb0-40c5-a074-6518c15dea8f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "IfOr2",
       "regionMethod": "main([Ljava/lang/String;)V",
       "startRegionIndex": 1,
       "startBlockID": "",
@@ -21,47 +87,6 @@
             "taints": [
               [
                 "A"
-              ]
-            ]
-          }
-        ]
-      }
-    }
-  },
-  {
-    "region": {
-      "regionID": "1df4fe85-d4ea-49ea-b609-65777f9cc253",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Example3",
-      "regionMethod": "foo(Z)V",
-      "startRegionIndex": 1,
-      "startBlockID": "",
-      "endBlocksIDs": [],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": {
-      "data": {
-        "⟦true⟧": [
-          {
-            "taints": [
-              [
-                "A"
-              ]
-            ]
-          }
-        ],
-        "⟦A⟧": [
-          {
-            "taints": [
-              [
-                "B"
-              ],
-              [
-                "C"
               ]
             ]
           }

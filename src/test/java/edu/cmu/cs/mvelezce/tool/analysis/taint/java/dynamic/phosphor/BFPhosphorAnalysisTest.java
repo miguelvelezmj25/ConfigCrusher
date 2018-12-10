@@ -5,13 +5,17 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext3.OrContext3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext2.VariabilityContext2Adapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -188,6 +192,36 @@ public class BFPhosphorAnalysisTest {
   }
 
   @Test
+  public void ifOr2() throws IOException, InterruptedException {
+    String programName = IfOr2Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(IfOr2Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void readIfOr2() throws IOException, InterruptedException {
+    String programName = IfOr2Adapter.PROGRAM_NAME;
+
+    String[] args = new String[0];
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+    PhosphorAnalysis.printConstraints(read);
+  }
+
+  @Test
   public void orContext() throws IOException, InterruptedException {
     String programName = OrContextAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(OrContextAdapter.getListOfOptions());
@@ -248,6 +282,36 @@ public class BFPhosphorAnalysisTest {
   }
 
   @Test
+  public void orContext3() throws IOException, InterruptedException {
+    String programName = OrContext3Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(OrContext3Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void readOrContext3() throws IOException, InterruptedException {
+    String programName = OrContext3Adapter.PROGRAM_NAME;
+
+    String[] args = new String[0];
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+    PhosphorAnalysis.printConstraints(read);
+  }
+
+  @Test
   public void multiFacet() throws IOException, InterruptedException {
     String programName = MultiFacetsAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(MultiFacetsAdapter.getListOfOptions());
@@ -271,6 +335,46 @@ public class BFPhosphorAnalysisTest {
   public void simpleForExample2() throws IOException, InterruptedException {
     String programName = SimpleForExample2Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(SimpleForExample2Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void variabilityContext1() throws IOException, InterruptedException {
+    String programName = VariabilityContext1Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(VariabilityContext1Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void variabilityContext2() throws IOException, InterruptedException {
+    String programName = VariabilityContext2Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(VariabilityContext2Adapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

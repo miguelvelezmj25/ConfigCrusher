@@ -11,13 +11,17 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext3.OrContext3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext2.VariabilityContext2Adapter;
 import edu.columbia.cs.psl.phosphor.runtime.Taint;
 import java.io.File;
 import java.io.FileInputStream;
@@ -432,6 +436,22 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
       case OrContext2Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new OrContext2Adapter();
+        break;
+      case OrContext3Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new OrContext3Adapter();
+        break;
+      case IfOr2Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new IfOr2Adapter();
+        break;
+      case VariabilityContext1Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new VariabilityContext1Adapter();
+        break;
+      case VariabilityContext2Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new VariabilityContext2Adapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

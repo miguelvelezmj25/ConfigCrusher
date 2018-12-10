@@ -1,12 +1,39 @@
 [
   {
     "region": {
-      "regionID": "6efcfdd4-a3dd-4c6f-b31a-cb48634aeac3",
+      "regionID": "db4da222-d020-4acd-8cb0-6c3c9711a597",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Example3",
+      "regionClass": "VariabilityContext1",
+      "regionMethod": "foo(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦A⟧": [
+          {
+            "taints": [
+              []
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "9b03fdc5-1114-46e2-bc47-ad35b39b4caa",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "VariabilityContext1",
       "regionMethod": "main([Ljava/lang/String;)V",
       "startRegionIndex": 1,
       "startBlockID": "",
@@ -21,47 +48,6 @@
             "taints": [
               [
                 "A"
-              ]
-            ]
-          }
-        ]
-      }
-    }
-  },
-  {
-    "region": {
-      "regionID": "1df4fe85-d4ea-49ea-b609-65777f9cc253",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Example3",
-      "regionMethod": "foo(Z)V",
-      "startRegionIndex": 1,
-      "startBlockID": "",
-      "endBlocksIDs": [],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": {
-      "data": {
-        "⟦true⟧": [
-          {
-            "taints": [
-              [
-                "A"
-              ]
-            ]
-          }
-        ],
-        "⟦A⟧": [
-          {
-            "taints": [
-              [
-                "B"
-              ],
-              [
-                "C"
               ]
             ]
           }

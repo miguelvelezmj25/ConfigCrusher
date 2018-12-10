@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
@@ -842,41 +843,57 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
       JavaRegion region = regionToSinkData.getKey();
       SinkData sinkData = regionToSinkData.getValue();
 
-      for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
-        ExecVarCtx execVarCtx = data.getKey();
-        Set<Set<Constraint>> constraints = new HashSet<>();
-
-        for (ExecTaints execTaints : data.getValue()) {
-          Set<Constraint> cs = new HashSet<>();
-
-          for (Set<String> execTaint : execTaints.getTaints()) {
-            Set<Set<String>> configs = Helper.getConfigurations(execTaint);
-            Set<Constraint> execTaintConstraints = PhosphorAnalysis
-                .getConstraints(configs, execTaint);
-
-            for (Constraint constraint : execTaintConstraints) {
-              Constraint c = new Constraint();
-              c.addEntries(constraint.getPartialConfig());
-
-              if (!execVarCtx.getPartialConfig().isEmpty()) {
-                c.addEntries(execVarCtx.getPartialConfig());
-              }
-
-              cs.add(c);
-            }
-          }
-
-          constraints.add(cs);
-        }
-
-        for (Set<Constraint> cs : constraints) {
-          System.out
-              .println(region.getRegionMethod() + ":" + region.getStartRegionIndex() + " -> " + cs);
-        }
-      }
+      printConstraintsForRegion(region, sinkData);
 
       System.out.println();
     }
+  }
+
+  private static void printConstraintsForRegion(JavaRegion region, SinkData sinkData) {
+    for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
+      ExecVarCtx execVarCtx = data.getKey();
+      Set<Set<Constraint>> regionConstraints = getConstraintsForExecVarCtx(execVarCtx, data);
+
+      for (Set<Constraint> cs : regionConstraints) {
+        System.out
+            .println(region.getRegionMethod() + ":" + region.getStartRegionIndex() + " -> " + cs);
+      }
+    }
+  }
+
+  private static Set<Set<Constraint>> getConstraintsForExecVarCtx(ExecVarCtx execVarCtx,
+      Entry<ExecVarCtx, Set<ExecTaints>> data) {
+    Set<Set<Constraint>> regionConstraints = new HashSet<>();
+
+    for (ExecTaints execTaints : data.getValue()) {
+      Set<Constraint> constraints = getConstraintsForExecTaints(execVarCtx, execTaints);
+      regionConstraints.add(constraints);
+    }
+
+    return regionConstraints;
+  }
+
+  private static Set<Constraint> getConstraintsForExecTaints(ExecVarCtx execVarCtx,
+      ExecTaints execTaints) {
+    Set<Constraint> constraints = new HashSet<>();
+
+    for (Set<String> execTaint : execTaints.getTaints()) {
+      Set<Set<String>> configs = Helper.getConfigurations(execTaint);
+      Set<Constraint> execTaintConstraints = PhosphorAnalysis.getConstraints(configs, execTaint);
+
+      for (Constraint execTaintConstraint : execTaintConstraints) {
+        Constraint constraint = new Constraint();
+        constraint.addEntries(execTaintConstraint.getPartialConfig());
+
+        if (!execVarCtx.getPartialConfig().isEmpty()) {
+          constraint.addEntries(execVarCtx.getPartialConfig());
+        }
+
+        constraints.add(constraint);
+      }
+    }
+
+    return constraints;
   }
 
   private static Set<Constraint> getConstraints(Set<Set<String>> configs, Set<String> options) {
@@ -894,11 +911,5 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 
     return constraints;
   }
-
-  Map<String, SinkData> getSinksToData() {
-    return sinksToData;
-  }
-
-//  static void getConstraints(Co)
 
 }

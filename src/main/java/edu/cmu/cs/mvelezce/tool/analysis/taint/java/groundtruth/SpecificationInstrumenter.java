@@ -46,9 +46,7 @@ public class SpecificationInstrumenter extends BaseMethodTransformer {
     this.addBranchCoverageLogging(methodNode, classNode);
     this.updateMaxs(methodNode, classNode);
 
-    MethodGraph graph = this.getCFG(methodNode, classNode);
-
-    this.addInsnsEndMainMethod(methodNode, graph);
+    this.addInsnsEndMainMethod(methodNode, classNode);
     this.updateMaxs(methodNode, classNode);
   }
 
@@ -145,11 +143,13 @@ public class SpecificationInstrumenter extends BaseMethodTransformer {
     }
   }
 
-  private void addInsnsEndMainMethod(MethodNode methodNode, MethodGraph graph) {
+  private void addInsnsEndMainMethod(MethodNode methodNode,
+      ClassNode classNode) {
     if (!methodNode.name.equals("main") || !methodNode.desc.equals("([Ljava/lang/String;)V")) {
       return;
     }
 
+    MethodGraph graph = this.getCFG(methodNode, classNode);
     MethodBlock exitBlock = graph.getExitBlock();
     Set<MethodBlock> preds = exitBlock.getPredecessors();
 

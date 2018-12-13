@@ -24,6 +24,7 @@ import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
+@Deprecated
 public class SpecificationInstrumenter extends BaseMethodTransformer {
 
   public SpecificationInstrumenter(String pathToClasses)
@@ -371,6 +372,16 @@ public class SpecificationInstrumenter extends BaseMethodTransformer {
   private MethodGraph getCFG(MethodNode methodNode, ClassNode classNode) {
     MethodGraphBuilder cfgBuilder = new CFGBuilder(classNode.name);
     return cfgBuilder.build(methodNode);
+  }
+
+  @Override
+  protected String getProgramName() {
+    throw new UnsupportedOperationException("Implement");
+  }
+
+  @Override
+  protected String getDebugDir() {
+    throw new UnsupportedOperationException("Implement");
   }
 
   private static class BranchCoverageClassTransformer extends BaseClassTransformer {

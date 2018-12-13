@@ -16,12 +16,21 @@ public class VariableBeforeReturnTransformer extends BaseMethodTransformer {
 
     public VariableBeforeReturnTransformer(String directory) throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
         this(new DefaultClassTransformer(directory));
-
     }
 
     public VariableBeforeReturnTransformer(ClassTransformer classTransformer) {
         // TODO do we really not care about the program name?
         super(classTransformer);
+    }
+
+    @Override
+    protected String getProgramName() {
+        throw new UnsupportedOperationException("Implement");
+    }
+
+    @Override
+    protected String getDebugDir() {
+        throw new UnsupportedOperationException("Implement");
     }
 
     @Override

@@ -176,14 +176,13 @@ public abstract class BaseClassTransformer implements ClassTransformer {
     return outputDir;
   }
 
-
-  protected ClassNode getModifiedClassNode(ClassNode classNode) {
-    ClassWriter classWriter = this.getClassWriter(classNode);
-    ClassReader classReader = new ClassReader(classWriter.toByteArray());
-    ClassNode newClassNode = new ClassNode();
-    classReader.accept(newClassNode, 0);
-
-    return newClassNode;
-  }
+//  protected ClassNode getModifiedClassNode(ClassNode classNode) {
+//    ClassWriter classWriter = this.getClassWriter(classNode);
+//    ClassReader classReader = new ClassReader(classWriter.toByteArray());
+//    ClassNode newClassNode = new ClassNode();
+//    classReader.accept(newClassNode, 0);
+//
+//    return newClassNode;
+//  }
 
 }

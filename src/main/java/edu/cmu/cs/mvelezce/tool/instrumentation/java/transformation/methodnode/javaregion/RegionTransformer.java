@@ -2083,4 +2083,14 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
   public Map<MethodNode, MethodGraph> getMethodsToGraphs() {
     return methodsToGraphs;
   }
+
+  @Override
+  protected String getProgramName() {
+    return this.programName;
+  }
+
+  @Override
+  protected String getDebugDir() {
+    throw new UnsupportedOperationException("Implement");
+  }
 }

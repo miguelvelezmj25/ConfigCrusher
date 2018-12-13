@@ -1,5 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.MethodTracer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.bytecode.TraceClassInspector;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import java.io.IOException;
 import java.util.Set;
@@ -7,6 +11,7 @@ import jdk.internal.org.objectweb.asm.ClassReader;
 import jdk.internal.org.objectweb.asm.ClassWriter;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import jdk.internal.org.objectweb.asm.util.Printer;
 
 public abstract class BaseMethodTransformer implements MethodTransformer {
 
@@ -16,7 +21,11 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
     this.classTransformer = classTransformer;
   }
 
-  // TODO override transform method to call the updateMaxs method
+  abstract protected String getProgramName();
+
+  abstract protected String getDebugDir();
+
+    // TODO override transform method to call the updateMaxs method
 
   @Override
   public void transformMethods() throws IOException {
@@ -41,6 +50,29 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       }
 
       this.classTransformer.writeClass(classNode);
+      this.debugMethods(classNode, methodsToInstrument);
+    }
+  }
+
+  private void debugMethods(ClassNode classNode, Set<MethodNode> methodsToInstrument) throws IOException {
+    ClassWriter classWriter = this.classTransformer.getClassWriter(classNode);
+    ClassReader classReader = new ClassReader(classWriter.toByteArray());
+
+    TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
+    MethodTracer tracer = classInspector.visitClass(classReader);
+
+    for (MethodNode methodNode : methodsToInstrument) {
+      Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
+      PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
+      PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
+      prettyGraph
+          .saveDotFile(this.getDebugDir(), this.getProgramName(), classNode.name, methodNode.name);
+
+        try {
+          prettyGraph.savePdfFile(this.getDebugDir(), this.getProgramName(), classNode.name, methodNode.name);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
     }
   }
 

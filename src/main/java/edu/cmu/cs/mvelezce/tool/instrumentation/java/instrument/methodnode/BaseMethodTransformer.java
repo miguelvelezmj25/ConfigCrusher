@@ -16,16 +16,22 @@ import jdk.internal.org.objectweb.asm.util.Printer;
 public abstract class BaseMethodTransformer implements MethodTransformer {
 
   private final ClassTransformer classTransformer;
+  private final boolean debug;
+
+  public BaseMethodTransformer(ClassTransformer classTransformer, boolean debug) {
+    this.classTransformer = classTransformer;
+    this.debug = debug;
+  }
 
   public BaseMethodTransformer(ClassTransformer classTransformer) {
-    this.classTransformer = classTransformer;
+    this(classTransformer, false);
   }
 
   abstract protected String getProgramName();
 
   abstract protected String getDebugDir();
 
-    // TODO override transform method to call the updateMaxs method
+  // TODO override transform method to call the updateMaxs method
 
   @Override
   public void transformMethods() throws IOException {
@@ -50,11 +56,15 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       }
 
       this.classTransformer.writeClass(classNode);
-      this.debugMethods(classNode, methodsToInstrument);
+
+      if (debug) {
+        this.debugMethods(classNode, methodsToInstrument);
+      }
     }
   }
 
-  private void debugMethods(ClassNode classNode, Set<MethodNode> methodsToInstrument) throws IOException {
+  private void debugMethods(ClassNode classNode, Set<MethodNode> methodsToInstrument)
+      throws IOException {
     ClassWriter classWriter = this.classTransformer.getClassWriter(classNode);
     ClassReader classReader = new ClassReader(classWriter.toByteArray());
 
@@ -68,11 +78,13 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       prettyGraph
           .saveDotFile(this.getDebugDir(), this.getProgramName(), classNode.name, methodNode.name);
 
-        try {
-          prettyGraph.savePdfFile(this.getDebugDir(), this.getProgramName(), classNode.name, methodNode.name);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
+      try {
+        prettyGraph.savePdfFile(this.getDebugDir(), this.getProgramName(), classNode.name,
+            methodNode.name);
+      }
+      catch (InterruptedException e) {
+        e.printStackTrace();
+      }
     }
   }
 

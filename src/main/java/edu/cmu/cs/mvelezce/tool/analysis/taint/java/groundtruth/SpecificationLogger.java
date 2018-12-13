@@ -4,11 +4,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 import jdk.internal.org.objectweb.asm.Type;
 
 public class SpecificationLogger {
+
+  private static final Map<String, String> ID_TO_SUBTRACE = new HashMap<>();
+  private static final Deque<String> IdStack = new ArrayDeque<>();
 
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
   private static final Map<String, ThenElseCounts> DECISIONS_TO_BRANCH_COUNTS = new HashMap<>();
@@ -147,16 +152,22 @@ public class SpecificationLogger {
   }
 
   public static void logIFNEDecision(int decisionValue, String methodName, int decisionCount) {
-    ThenElseCounts thenElseCounts = SpecificationLogger
-        .getThenElseCounts(methodName, decisionCount);
+//    ThenElseCounts thenElseCounts = SpecificationLogger.getThenElseCounts(methodName, decisionCount);
+
+    System.out.println(IdStack);
+    String id = methodName + ":" + decisionCount;
+//    id = id.hashCode() + "";
 
     if (decisionValue != 0) {
-      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
+      System.out.println(id + " -> False branch");
+//      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
+      System.out.println(id + " -> True branch");
+//      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
+    IdStack.push(id);
   }
 
   public static void logIFLEDecision(int decisionValue, String methodName, int decisionCount) {
@@ -173,19 +184,31 @@ public class SpecificationLogger {
   }
 
   public static void logIFEQDecision(int decisionValue, String methodName, int decisionCount) {
-    ThenElseCounts thenElseCounts = SpecificationLogger
-        .getThenElseCounts(methodName, decisionCount);
+//    ThenElseCounts thenElseCounts = SpecificationLogger
+//        .getThenElseCounts(methodName, decisionCount);
+
+    System.out.println(IdStack);
+    String id = methodName + ":" + decisionCount;
+//    id = id.hashCode() + "";
 
     if (decisionValue == 0) {
-      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
+      System.out.println(id + " -> False branch");
+//      SpecificationLogger.updatedElseBranchCount(thenElseCounts);
     }
     else {
-      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
+      System.out.println(id + " -> True branch");
+//      SpecificationLogger.updatedThenBranchCount(thenElseCounts);
     }
 
+    IdStack.push(id);
   }
 
   public static void saveExecutedDecisions() {
+    if (!SpecificationLogger.IdStack.isEmpty()) {
+      System.out.println(SpecificationLogger.IdStack);
+      throw new RuntimeException("The IdStack is not empty");
+    }
+
     try {
       FileOutputStream fos = new FileOutputStream(RESULTS_FILE);
       ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -196,6 +219,10 @@ public class SpecificationLogger {
     catch (IOException ioe) {
       throw new RuntimeException("There was an error serializing the results", ioe);
     }
+  }
+
+  public static void popFromIdStack() {
+    SpecificationLogger.IdStack.removeFirst();
   }
 
   private static ThenElseCounts getThenElseCounts(String methodName, int decisionCount) {

@@ -1,0 +1,29 @@
+digraph main {
+node [shape=record];
+1595212853 [label="LINENUMBER 25 L14\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 4\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V\lL15\lLINENUMBER 27 L15\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.saveExecutedDecisions ()V\lRETURN\lL13\l"];
+205125520 [label="L11\lLINENUMBER 21 L11\lICONST_M1\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 4\lNOP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.popFromIdStack ()V\lNOP\lL10\l"];
+466002798 [label="L8\lLINENUMBER 17 L8\lICONST_0\lISTORE 6\l"];
+1911006827 [label="DUP\lLDC \"edu/cmu/cs/mvelezce/analysis/Example4.main([Ljava/lang/String;)V\"\lSIPUSH 5\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.logIFEQDecision (ILjava/lang/String;I)V\lIFEQ L13\lL14\l"];
+846492085 [label="FRAME FULL [[Ljava/lang/String; I I I java/lang/Integer I I] []\lNOP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.popFromIdStack ()V\lNOP\lL12\lLINENUMBER 24 L12\lILOAD 3\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/Example4.main([Ljava/lang/String;)V\"\lSIPUSH 4\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.logIFEQDecision (ILjava/lang/String;I)V\lIFEQ L13\lILOAD 5\l"];
+717356484 [label="LINENUMBER 30 L13\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL16\lLINENUMBER 31 L16\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.saveExecutedDecisions ()V\lRETURN\lL17\lLOCALVARIABLE args [Ljava/lang/String; L0 L17 0\l"];
+947679291 [label="ILOAD 6\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/Example4.main([Ljava/lang/String;)V\"\lSIPUSH 3\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.logIFEQDecision (ILjava/lang/String;I)V\lIFEQ L10\l"];
+1654589030 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 10 L2\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.C_2 (Z)Z\lISTORE 3\lL3\lLINENUMBER 12 L3\lACONST_NULL\lASTORE 4\lL4\lLINENUMBER 13 L4\lICONST_1\lISTORE 5\lL5\lLINENUMBER 14 L5\lICONST_1\lISTORE 6\lL6\lLINENUMBER 16 L6\lILOAD 1\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/Example4.main([Ljava/lang/String;)V\"\lSIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.logIFEQDecision (ILjava/lang/String;I)V\lIFEQ L7\l"];
+895947612 [label="L7\lFRAME FULL [[Ljava/lang/String; I I I N I I] []\lNOP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.popFromIdStack ()V\lNOP\lL9\lLINENUMBER 20 L9\lILOAD 2\lDUP\lLDC \"edu/cmu/cs/mvelezce/analysis/Example4.main([Ljava/lang/String;)V\"\lSIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.logIFEQDecision (ILjava/lang/String;I)V\lIFEQ L10\l"];
+entry;
+exit;
+1595212853 -> exit;
+entry -> 1654589030;
+205125520 -> 846492085;
+466002798 -> 895947612;
+1911006827 -> 1595212853;
+1911006827 -> 717356484;
+846492085 -> 1911006827;
+846492085 -> 717356484;
+717356484 -> exit;
+947679291 -> 205125520;
+947679291 -> 846492085;
+1654589030 -> 466002798;
+1654589030 -> 895947612;
+895947612 -> 846492085;
+895947612 -> 947679291;
+}

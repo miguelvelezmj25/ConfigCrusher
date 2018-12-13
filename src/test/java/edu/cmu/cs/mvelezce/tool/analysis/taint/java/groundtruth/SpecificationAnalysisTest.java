@@ -4,6 +4,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example4.Example4Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
@@ -112,6 +113,20 @@ public class SpecificationAnalysisTest {
   public void Example1() throws IOException, InterruptedException {
     String programName = Example1Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(Example1Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
+    analysis.analyze(args);
+  }
+
+  @Test
+  public void Example4() throws IOException, InterruptedException {
+    String programName = Example4Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(Example4Adapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

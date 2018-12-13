@@ -11,6 +11,16 @@ import org.junit.Test;
 public class TraceInstrumenterTest {
 
   @Test
+  public void phosphorExamples()
+      throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
+    String programName = "phosphorExamples";
+    String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
+
+    MethodTransformer transformer = new TraceInstrumenter(programName, pathToClasses);
+    transformer.transformMethods();
+  }
+
+  @Test
   public void runningExample()
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
     String programName = "phosphorExamples";
@@ -19,7 +29,22 @@ public class TraceInstrumenterTest {
     classesToTransform
         .add(Utils.getASMPackageAndClassName("edu/cmu/cs/mvelezce", "RunningExample"));
 
-    MethodTransformer transformer = new TraceInstrumenter(programName, pathToClasses, classesToTransform);
+    MethodTransformer transformer = new TraceInstrumenter(programName, pathToClasses,
+        classesToTransform, true);
+    transformer.transformMethods();
+  }
+
+  @Test
+  public void example4()
+      throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
+    String programName = "example4";
+    String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
+    Set<String> classesToTransform = new HashSet<>();
+    classesToTransform
+        .add(Utils.getASMPackageAndClassName("edu/cmu/cs/mvelezce/analysis", "Example4"));
+
+    MethodTransformer transformer = new TraceInstrumenter(programName, pathToClasses,
+        classesToTransform, true);
     transformer.transformMethods();
   }
 

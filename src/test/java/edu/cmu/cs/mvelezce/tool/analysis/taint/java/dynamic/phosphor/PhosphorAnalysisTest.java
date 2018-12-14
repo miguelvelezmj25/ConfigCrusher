@@ -43,7 +43,7 @@ public class PhosphorAnalysisTest {
 
     DynamicAnalysis<SinkData> analysis = new PhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printConstraints(read);
+    PhosphorAnalysis.printProgramConstraints(read);
   }
 
   @Test

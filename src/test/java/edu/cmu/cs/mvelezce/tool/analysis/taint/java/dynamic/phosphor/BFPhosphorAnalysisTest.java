@@ -6,7 +6,6 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifor.IfOrAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
@@ -101,7 +100,7 @@ public class BFPhosphorAnalysisTest {
     String[] args = new String[0];
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printConstraints(read);
+    PhosphorAnalysis.printProgramConstraints(read);
   }
 
   @Test
@@ -191,7 +190,7 @@ public class BFPhosphorAnalysisTest {
     String[] args = new String[0];
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printConstraints(read);
+    PhosphorAnalysis.printProgramConstraints(read);
   }
 
   @Test
@@ -221,7 +220,7 @@ public class BFPhosphorAnalysisTest {
     String[] args = new String[0];
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printConstraints(read);
+    PhosphorAnalysis.printProgramConstraints(read);
   }
 
   @Test
@@ -251,7 +250,7 @@ public class BFPhosphorAnalysisTest {
     String[] args = new String[0];
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printConstraints(read);
+    PhosphorAnalysis.printProgramConstraints(read);
   }
 
   @Test
@@ -281,7 +280,7 @@ public class BFPhosphorAnalysisTest {
     String[] args = new String[0];
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printConstraints(read);
+    PhosphorAnalysis.printProgramConstraints(read);
   }
 
   @Test
@@ -311,7 +310,7 @@ public class BFPhosphorAnalysisTest {
     String[] args = new String[0];
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printConstraints(read);
+    PhosphorAnalysis.printProgramConstraints(read);
   }
 
   @Test
@@ -421,7 +420,7 @@ public class BFPhosphorAnalysisTest {
     String[] args = new String[0];
     DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printConstraints(read);
+    PhosphorAnalysis.printProgramConstraints(read);
   }
 
   @Test

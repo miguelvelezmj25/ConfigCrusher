@@ -843,36 +843,34 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 //    return sinksToTaints;
 //  }
 
-  static Set<Constraint> printConstraints(Collection<SinkData> sinkDatas) {
+  static Set<Constraint> getProgramConstraints(Collection<SinkData> sinkDatas) {
     Set<Constraint> constraints = new HashSet<>();
 
     for (SinkData sinkData : sinkDatas) {
-      Set<Constraint> constraintsForRegion = printConstraintsForRegion(sinkData);
+      Set<Constraint> constraintsForRegion = getProgramConstraintsForSink(sinkData);
       constraints.addAll(constraintsForRegion);
-
-      System.out.println();
     }
 
     return constraints;
   }
 
-  private static Set<Constraint> printConstraintsForRegion(SinkData sinkData) {
-    Set<Constraint> constraints = new HashSet<>();
+  private static Set<Constraint> getProgramConstraintsForSink(SinkData sinkData) {
+    Set<Constraint> constraintsAtSink = new HashSet<>();
 
     for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
       ExecVarCtx execVarCtx = data.getKey();
-      Set<Set<Constraint>> regionConstraints = getConstraintsForExecVarCtx(execVarCtx, data);
+      Set<Set<Constraint>> allSinkConstraints = PhosphorAnalysis
+          .getConstraintsForExecVarCtx(execVarCtx, data);
 
-      for (Set<Constraint> cs : regionConstraints) {
-        System.out.println(cs);
-        constraints.addAll(cs);
+      for (Set<Constraint> sinkConstraint : allSinkConstraints) {
+        constraintsAtSink.addAll(sinkConstraint);
       }
     }
 
-    return constraints;
+    return constraintsAtSink;
   }
 
-  static void printConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
+  static void printProgramConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
     for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
       JavaRegion region = regionToSinkData.getKey();
       SinkData sinkData = regionToSinkData.getValue();

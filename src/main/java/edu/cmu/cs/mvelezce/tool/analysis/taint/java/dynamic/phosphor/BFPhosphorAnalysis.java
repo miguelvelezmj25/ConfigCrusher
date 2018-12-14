@@ -45,7 +45,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
       this.postProcessPhosphorAnalysis(config);
 
       Set<Constraint> analysisConstraints = BFPhosphorAnalysis
-          .printConstraints(this.getSinksToData().values());
+          .getProgramConstraints(this.getSinksToData().values());
       constraintsToSatisfy.addAll(analysisConstraints);
 
       Set<Constraint> satisfiedConstraintsByConfig = this

@@ -1,16 +1,45 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import edu.cmu.cs.mvelezce.tool.Helper;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
-import javax.annotation.Nullable;
 
 public class Constraint extends PartialConfig {
 
-//  private final Map<String, Boolean> partialConfig;
+  boolean isSubConstraintOf(PartialConfig partialConfig) {
+    return this.isSubPartialConfigOf(partialConfig);
+  }
+
+  static Constraint fromConfig(Set<String> config, Set<String> options) {
+    Constraint constraint = new Constraint();
+
+    for (String option : options) {
+      constraint.addEntry(option, config.contains(option));
+    }
+
+    return constraint;
+  }
+
+  public static Map<String, Boolean> toConfigWithValues(Set<String> config, Set<String> options) {
+    if (options.isEmpty()) {
+      throw new IllegalArgumentException("The options cannot be empty");
+    }
+
+    if (!options.containsAll(config)) {
+      throw new IllegalArgumentException(
+          "The config " + config + " is not a subset of the options " + options);
+    }
+
+    Map<String, Boolean> configWithValues = new HashMap<>();
+
+    for (String option : options) {
+      configWithValues.put(option, config.contains(option));
+    }
+
+    return configWithValues;
+  }
+
+  //  private final Map<String, Boolean> partialConfig;
 //  private final Map<String, Boolean> ctx;
 //
 //  // Dummy constructor needed for jackson xml
@@ -123,24 +152,6 @@ public class Constraint extends PartialConfig {
 //    return config;
 //  }
 //
-  public static Map<String, Boolean> toConfigWithValues(Set<String> config, Set<String> options) {
-    if (options.isEmpty()) {
-      throw new IllegalArgumentException("The options cannot be empty");
-    }
-
-    if (!options.containsAll(config)) {
-      throw new IllegalArgumentException(
-          "The config " + config + " is not a subset of the options " + options);
-    }
-
-    Map<String, Boolean> configWithValues = new HashMap<>();
-
-    for (String option : options) {
-      configWithValues.put(option, config.contains(option));
-    }
-
-    return configWithValues;
-  }
 //
 //  static Set<Map<String, Boolean>> buildPartialConfigs(@Nullable Set<String> taintsAtSink) {
 //    Set<Map<String, Boolean>> partialConfigs = new HashSet<>();

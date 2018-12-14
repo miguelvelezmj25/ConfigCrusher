@@ -16,6 +16,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdap
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext3.OrContext3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext6.OrContext6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorExample8Adapter;
@@ -447,6 +448,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
         commandList.add("./examples.sh");
         adapter = new OrContext3Adapter();
         break;
+      case OrContext6Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new OrContext6Adapter();
+        break;
       case IfOr2Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new IfOr2Adapter();
@@ -838,6 +843,35 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 //    return sinksToTaints;
 //  }
 
+  static Set<Constraint> printConstraints(Collection<SinkData> sinkDatas) {
+    Set<Constraint> constraints = new HashSet<>();
+
+    for (SinkData sinkData : sinkDatas) {
+      Set<Constraint> constraintsForRegion = printConstraintsForRegion(sinkData);
+      constraints.addAll(constraintsForRegion);
+
+      System.out.println();
+    }
+
+    return constraints;
+  }
+
+  private static Set<Constraint> printConstraintsForRegion(SinkData sinkData) {
+    Set<Constraint> constraints = new HashSet<>();
+
+    for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
+      ExecVarCtx execVarCtx = data.getKey();
+      Set<Set<Constraint>> regionConstraints = getConstraintsForExecVarCtx(execVarCtx, data);
+
+      for (Set<Constraint> cs : regionConstraints) {
+        System.out.println(cs);
+        constraints.addAll(cs);
+      }
+    }
+
+    return constraints;
+  }
+
   static void printConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
     for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
       JavaRegion region = regionToSinkData.getKey();
@@ -912,4 +946,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
     return constraints;
   }
 
+  Map<String, SinkData> getSinksToData() {
+    return sinksToData;
+  }
 }

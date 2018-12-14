@@ -20,8 +20,12 @@ public class PartialConfig {
     return this.partialConfig.keySet();
   }
 
-  protected Map<String, Boolean> getPartialConfig() {
+  Map<String, Boolean> getPartialConfig() {
     return partialConfig;
+  }
+
+  boolean isSubPartialConfigOf(PartialConfig partialConfig) {
+    return partialConfig.partialConfig.entrySet().containsAll(this.partialConfig.entrySet());
   }
 
   @Override

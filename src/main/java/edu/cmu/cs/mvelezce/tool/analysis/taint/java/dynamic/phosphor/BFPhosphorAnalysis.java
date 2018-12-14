@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-// TODO check what methods are already done in the super class
 public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
   private String mainClass;
@@ -24,7 +23,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     super(programName);
   }
 
-  public BFPhosphorAnalysis(String programName, String mainClass, Set<String> options) {
+  BFPhosphorAnalysis(String programName, String mainClass, Set<String> options) {
     this(programName, options);
 
     this.mainClass = mainClass;
@@ -35,17 +34,42 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     Set<String> options = this.getOptions();
     Set<Set<String>> configs = Helper.getConfigurations(options);
 
-    for (Set<String> config : configs) {
+    Set<Constraint> constraintsToSatisfy = new HashSet<>();
+    Set<Constraint> satisfiedConstraints = new HashSet<>();
 
-//      config = new HashSet<>();
-//      config.add("A");
+    for (Set<String> config : configs) {
+      Constraint configAsConstraint = Constraint.fromConfig(config, this.getOptions());
+      satisfiedConstraints.add(configAsConstraint);
 
       this.runPhosphorAnalysis(config);
       this.postProcessPhosphorAnalysis(config);
-//      System.out.println();
+
+      Set<Constraint> analysisConstraints = BFPhosphorAnalysis
+          .printConstraints(this.getSinksToData().values());
+      constraintsToSatisfy.addAll(analysisConstraints);
+
+      Set<Constraint> satisfiedConstraintsByConfig = this
+          .getSatisfiedConstraintsByConfig(constraintsToSatisfy, configAsConstraint);
+      satisfiedConstraints.addAll(satisfiedConstraintsByConfig);
+      constraintsToSatisfy.removeAll(satisfiedConstraints);
     }
 
-    System.out.println();
+    if (!constraintsToSatisfy.isEmpty()) {
+      throw new RuntimeException("Not all constraints were satisfied");
+    }
+  }
+
+  private Set<Constraint> getSatisfiedConstraintsByConfig(Set<Constraint> constraints,
+      Constraint configAsConstraint) {
+    Set<Constraint> satisfiedConstraints = new HashSet<>();
+
+    for (Constraint constraint : constraints) {
+      if (constraint.isSubConstraintOf(configAsConstraint)) {
+        satisfiedConstraints.add(constraint);
+      }
+    }
+
+    return satisfiedConstraints;
   }
 
   @Override
@@ -55,7 +79,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
   // TODO this method is hardcoded to run all dynamic examples
   @Override
-  List<String> buildCommandAsList(Set config) {
+  List<String> buildCommandAsList(Set<String> config) {
     if (this.mainClass == null) {
       return super.buildCommandAsList(config);
     }

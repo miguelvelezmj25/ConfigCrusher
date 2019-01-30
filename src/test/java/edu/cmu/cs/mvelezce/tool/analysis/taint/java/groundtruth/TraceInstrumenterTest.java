@@ -14,12 +14,6 @@ import org.junit.Test;
 public class TraceInstrumenterTest {
 
   @Test
-  public void test() {
-    Expression<String> parsedExpression = RuleSet.simplify(
-        ExprParser.parse("(a | v1-1 | v1-2) & (v2-0 | v2-1 | v2-2) & (v3-0 | v3-1 | v3-2)"));
-    System.out.println(parsedExpression);
-  }
-
   public void phosphorExamples()
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
     String programName = "phosphorExamples";

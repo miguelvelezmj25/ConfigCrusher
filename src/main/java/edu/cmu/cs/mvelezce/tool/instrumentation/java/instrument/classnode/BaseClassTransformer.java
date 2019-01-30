@@ -36,7 +36,8 @@ public abstract class BaseClassTransformer implements ClassTransformer {
     this.outputDir = outputDir;
 
     this.addToClassPath(this.pathToClasses);
-    this.removeOutputDir();
+    // TODO do not delete the output directory since we might pass that directory as the source of the files
+//    this.removeOutputDir();
   }
 
   public BaseClassTransformer(String pathToClasses, Set<String> classesToTransform)
@@ -129,9 +130,8 @@ public abstract class BaseClassTransformer implements ClassTransformer {
 
   @Override
   public ClassWriter getClassWriter(ClassNode classNode) {
-    ClassWriter classWriter = new CustomClassWriter(
-        ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-//        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+//    ClassWriter classWriter = new CustomClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 //        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 //        ClassWriter classWriter = new ClassWriter(0);
     classNode.accept(classWriter);

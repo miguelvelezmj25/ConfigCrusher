@@ -60,6 +60,8 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       if (debug) {
         this.debugMethods(classNode);
       }
+
+      break;
     }
   }
 

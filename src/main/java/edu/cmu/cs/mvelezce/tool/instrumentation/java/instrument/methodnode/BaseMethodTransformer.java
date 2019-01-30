@@ -58,20 +58,21 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       this.classTransformer.writeClass(classNode);
 
       if (debug) {
-        this.debugMethods(classNode, methodsToInstrument);
+        this.debugMethods(classNode);
       }
     }
   }
 
-  private void debugMethods(ClassNode classNode, Set<MethodNode> methodsToInstrument)
-      throws IOException {
+  private void debugMethods(ClassNode classNode) throws IOException {
     ClassWriter classWriter = this.classTransformer.getClassWriter(classNode);
     ClassReader classReader = new ClassReader(classWriter.toByteArray());
+    classNode = new ClassNode();
+    classReader.accept(classNode, 0);
 
     TraceClassInspector classInspector = new TraceClassInspector(classNode.name);
     MethodTracer tracer = classInspector.visitClass(classReader);
 
-    for (MethodNode methodNode : methodsToInstrument) {
+    for (MethodNode methodNode : classNode.methods) {
       Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
       PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
       PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);

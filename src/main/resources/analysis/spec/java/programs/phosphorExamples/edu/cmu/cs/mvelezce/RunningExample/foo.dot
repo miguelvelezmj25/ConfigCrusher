@@ -1,15 +1,15 @@
 digraph foo {
 node [shape=record];
-705265961 [label="L0\lLINENUMBER 43 L0\lILOAD 0\lDUP\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lSIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.logIFEQDecision (ILjava/lang/String;I)V\lIFEQ L1\l"];
-317983781 [label="L2\lLINENUMBER 44 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_4\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lGOTO L3\l"];
-428746855 [label="L1\lLINENUMBER 47 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
-987405879 [label="L3\lLINENUMBER 49 L3\lFRAME SAME\lRETURN\lL4\l"];
+209833425 [label="L0\lLINENUMBER 43 L0\lILOAD 0\lDUP\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lSIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.logIFEQDecision (ILjava/lang/String;I)V\lIFEQ L1\l"];
+532854629 [label="L1\lLINENUMBER 47 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+712025048 [label="L3\lFRAME SAME\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SpecificationLogger.popFromIdStack ()V\lL4\lLINENUMBER 49 L4\lRETURN\lL5\l"];
+1971851377 [label="L2\lLINENUMBER 44 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_4\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lGOTO L3\l"];
 entry;
 exit;
-entry -> 705265961;
-705265961 -> 317983781;
-705265961 -> 428746855;
-317983781 -> 987405879;
-428746855 -> 987405879;
-987405879 -> exit;
+entry -> 209833425;
+209833425 -> 532854629;
+209833425 -> 1971851377;
+532854629 -> 712025048;
+712025048 -> exit;
+1971851377 -> 712025048;
 }

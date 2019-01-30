@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.Opcodes;
@@ -61,40 +62,114 @@ public class TraceInstrumenter extends BaseMethodTransformer {
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    this.addBranchCoverageLogging(methodNode, classNode);
+    this.addTraceLogging(methodNode, classNode);
     this.updateMaxs(methodNode, classNode);
 
-    throw new UnsupportedOperationException(
-        "Implement adding insns for IPD by updateding the jump of the"
-            + "blocks that have a direct path from the decision to the IPD, not all predecessors.");
-//    this.addIPDLogging(methodNode, classNode);
-//    this.updateMaxs(methodNode, classNode);
+//    throw new UnsupportedOperationException(
+//        "Implement adding insns for IPD by updateding the jump of the"
+//            + "blocks that have a direct path from the decision to the IPD, not all predecessors.");
+
+    this.addIPDLogging(methodNode, classNode);
+    this.updateMaxs(methodNode, classNode);
 //
 //    this.addInsnsEndMainMethod(methodNode, classNode);
 //    this.updateMaxs(methodNode, classNode);
   }
 
   private void addIPDLogging(MethodNode methodNode, ClassNode classNode) {
+    // TODO handle IPD = exit node
+
     MethodGraph cfg = this.getCFG(methodNode, classNode);
-    System.out.println(cfg.toDotString("some"));
 
-    int count = 0;
-    System.out.println(methodNode.name);
+    InsnList instList = methodNode.instructions;
+    ListIterator<AbstractInsnNode> instListIter = instList.iterator();
 
-    for (MethodBlock methodBlock : cfg.getBlocks()) {
-      if (methodBlock.getSuccessors().size() < 2) {
+    while (instListIter.hasNext()) {
+      AbstractInsnNode insnNode = instListIter.next();
+
+      if (!(insnNode instanceof JumpInsnNode)) {
         continue;
       }
 
-      MethodBlock ipd = cfg.getImmediatePostDominator(methodBlock);
+      System.out.println(cfg.toDotString("dsfd"));
+      Set<MethodBlock> blocks = cfg.getBlocks();
 
-      if (cfg.getExitBlock().equals(ipd)) {
-//        this.addExitBlockLogging(methodNode, ipd);
-      }
-      else {
-//        count = this.addNormalLogging(methodNode, ipd, count);
+      for (MethodBlock methodBlock : blocks) {
+        if (!methodBlock.getInstructions().contains(insnNode)) {
+          continue;
+        }
+
+        if (methodBlock.getSuccessors().size() < 2) {
+          continue;
+        }
+
+        String methodName = "popFromIdStack";
+        String methodDescriptor = SpecificationLogger.getMethodDescriptor(methodName);
+
+        InsnList newInsnList = new InsnList();
+        Label label = new Label();
+        LabelNode labelNode = new LabelNode(label);
+        newInsnList.add(labelNode);
+        newInsnList.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
+
+        MethodBlock ipd = cfg.getImmediatePostDominator(methodBlock);
+        Set<MethodBlock> reachables = cfg.getReachableBlocks(methodBlock, ipd);
+        reachables.remove(ipd);
+
+        AbstractInsnNode labelInsn = ipd.getInstructions().get(0);
+
+        for (MethodBlock reachable : reachables) {
+          List<AbstractInsnNode> insnList = reachable.getInstructions();
+          AbstractInsnNode lastInsn = insnList.get(insnList.size() - 1);
+
+          if (!(lastInsn instanceof JumpInsnNode)) {
+            continue;
+          }
+
+          if (!((JumpInsnNode) lastInsn).label.equals(labelInsn)) {
+            continue;
+          }
+
+          AbstractInsnNode newJumpInsnNode = new JumpInsnNode(lastInsn.getOpcode(), labelNode);
+
+          methodNode.instructions.insertBefore(lastInsn, newJumpInsnNode);
+          methodNode.instructions.remove(lastInsn);
+//          methodNode.instructions.insertBefore(newJumpInsnNode, new InsnNode(Opcodes.NOP));
+        }
+
+//        System.out.println(labelInsn);
+
+        methodNode.instructions.insertBefore(labelInsn, newInsnList);
+
+        cfg = this.getCFG(methodNode, classNode);
+
+        break;
       }
     }
+
+//    Set<MethodBlock> blocksWithControlFlow = new HashSet<>();
+//    MethodGraph cfg = this.getCFG(methodNode, classNode);
+//
+//    // TODO do analysis in order
+//
+//    for (MethodBlock methodBlock : cfg.getBlocks()) {
+//      if (methodBlock.getSuccessors().size() > 1) {
+//        blocksWithControlFlow.add(methodBlock);
+//      }
+//    }
+//
+//    for (MethodBlock methodBlock : blocksWithControlFlow) {
+//      MethodBlock ipd = cfg.getImmediatePostDominator(methodBlock);
+//
+//      if (cfg.getExitBlock().equals(ipd)) {
+//////        this.addExitBlockLogging(methodNode, ipd);
+//      }
+//      else {
+//        this.addNormalLogging(methodNode, methodBlock, ipd, cfg);
+//      }
+//
+//      cfg = this.getCFG(methodNode, classNode);
+//    }
 
 //    InsnList insnList = methodNode.instructions;
 //
@@ -159,68 +234,68 @@ public class TraceInstrumenter extends BaseMethodTransformer {
 
   }
 
-  private int addNormalLogging(MethodNode methodNode, MethodBlock ipd, int count) {
+  private void addNormalLogging(MethodNode methodNode, MethodBlock methodBlock, MethodBlock ipd,
+      MethodGraph cfg) {
+
+    System.out.println(cfg.toDotString("dfsd"));
+
     String methodName = "popFromIdStack";
     String methodDescriptor = SpecificationLogger.getMethodDescriptor(methodName);
 
-    InsnList insnList = new InsnList();
+    Set<MethodBlock> reachables = cfg.getReachableBlocks(methodBlock, ipd);
+    reachables.remove(ipd);
+
+    InsnList newInsnList = new InsnList();
     Label label = new Label();
     LabelNode labelNode = new LabelNode(label);
-    insnList.add(labelNode);
-    insnList.add(new InsnNode(Opcodes.NOP));
-    insnList.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
-    insnList.add(new InsnNode(Opcodes.NOP));
+    newInsnList.add(labelNode);
+    newInsnList.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
 
-    Set<MethodBlock> preds = ipd.getPredecessors();
+    for (MethodBlock reachable : reachables) {
+      List<AbstractInsnNode> insnList = reachable.getInstructions();
+      AbstractInsnNode lastInsn = insnList.get(insnList.size() - 1);
 
-    if (count == 0) {
-      System.out.println("MOVING");
-      for (MethodBlock predMethodBlock : preds) {
-        List<AbstractInsnNode> il = predMethodBlock.getInstructions();
-        AbstractInsnNode lastInsn = il.get(il.size() - 1);
-
-        if (!(lastInsn instanceof JumpInsnNode)) {
-          continue;
-        }
-
-        ((JumpInsnNode) lastInsn).label = labelNode;
-        System.out.println();
+      if (!(lastInsn instanceof JumpInsnNode)) {
+        continue;
       }
 
-      AbstractInsnNode labelInsn = ipd.getInstructions().get(0);
-      methodNode.instructions.insertBefore(labelInsn, insnList);
+      ((JumpInsnNode) lastInsn).label = labelNode;
     }
 
-    if (count == 1) {
-      System.out.println("MOVING");
-      for (MethodBlock predMethodBlock : preds) {
-        List<AbstractInsnNode> il = predMethodBlock.getInstructions();
+    AbstractInsnNode labelInsn = ipd.getInstructions().get(0);
 
-        if (il.size() != 6) {
-          continue;
-        }
+    System.out.println(labelInsn);
 
-        AbstractInsnNode lastInsn = il.get(il.size() - 1);
-
-        if (!(lastInsn instanceof JumpInsnNode)) {
-          continue;
-        }
-
-        ((JumpInsnNode) lastInsn).label = labelNode;
-        System.out.println();
-      }
-
-      AbstractInsnNode labelInsn = ipd.getInstructions().get(0);
-      methodNode.instructions.insertBefore(labelInsn, insnList);
-    }
-
-    count++;
-
-    return count;
+    methodNode.instructions.insertBefore(labelInsn, newInsnList);
+//
+//    InsnList insnList = new InsnList();
+//    Label label = new Label();
+//    LabelNode labelNode = new LabelNode(label);
+//    insnList.add(labelNode);
+//    insnList.add(new InsnNode(Opcodes.NOP));
+//    insnList.add(this.getInsnListForMethodCall(methodName, methodDescriptor));
+//    insnList.add(new InsnNode(Opcodes.NOP));
+//
+//    Set<MethodBlock> preds = ipd.getPredecessors();
+//
+//    for (MethodBlock predMethodBlock : preds) {
+//      List<AbstractInsnNode> il = predMethodBlock.getInstructions();
+//      AbstractInsnNode lastInsn = il.get(il.size() - 1);
+//
+//      if (!(lastInsn instanceof JumpInsnNode)) {
+//        continue;
+//      }
+//
+//      ((JumpInsnNode) lastInsn).label = labelNode;
+//      System.out.println();
+//    }
+//
+//    AbstractInsnNode labelInsn = ipd.getInstructions().get(0);
+//    methodNode.instructions.insertBefore(labelInsn, insnList);
   }
 
 
-  private void addBranchCoverageLogging(MethodNode methodNode, ClassNode classNode) {
+  private void addTraceLogging(MethodNode methodNode, ClassNode classNode) {
     String packageName = Utils.getPackageName(classNode);
     String className = Utils.getClassName(classNode);
     String methodNameAndSignature = methodNode.name + methodNode.desc;

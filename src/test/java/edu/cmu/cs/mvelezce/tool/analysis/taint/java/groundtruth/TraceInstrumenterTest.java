@@ -1,5 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import com.bpodgursky.jbool_expressions.Expression;
+import com.bpodgursky.jbool_expressions.parsers.ExprParser;
+import com.bpodgursky.jbool_expressions.rules.RuleSet;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
 import java.io.IOException;
@@ -11,6 +14,12 @@ import org.junit.Test;
 public class TraceInstrumenterTest {
 
   @Test
+  public void test() {
+    Expression<String> parsedExpression = RuleSet.simplify(
+        ExprParser.parse("(a | v1-1 | v1-2) & (v2-0 | v2-1 | v2-2) & (v3-0 | v3-1 | v3-2)"));
+    System.out.println(parsedExpression);
+  }
+
   public void phosphorExamples()
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
     String programName = "phosphorExamples";
@@ -42,6 +51,20 @@ public class TraceInstrumenterTest {
     Set<String> classesToTransform = new HashSet<>();
     classesToTransform
         .add(Utils.getASMPackageAndClassName("edu/cmu/cs/mvelezce/analysis", "Example4"));
+
+    MethodTransformer transformer = new TraceInstrumenter(programName, pathToClasses,
+        classesToTransform, true);
+    transformer.transformMethods();
+  }
+
+  @Test
+  public void orContext6()
+      throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
+    String programName = "orContext6";
+    String pathToClasses = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
+    Set<String> classesToTransform = new HashSet<>();
+    classesToTransform
+        .add(Utils.getASMPackageAndClassName("edu/cmu/cs/mvelezce/analysis", "OrContext6"));
 
     MethodTransformer transformer = new TraceInstrumenter(programName, pathToClasses,
         classesToTransform, true);

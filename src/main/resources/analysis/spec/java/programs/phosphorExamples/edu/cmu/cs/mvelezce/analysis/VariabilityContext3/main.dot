@@ -1,0 +1,21 @@
+digraph main {
+node [shape=record];
+1177852821 [label="L5\lLINENUMBER 23 L5\lFRAME SAME\lRETURN\lL10\l"];
+392795843 [label="L8\lLINENUMBER 16 L8\lICONST_2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext3.foo (I)V\l"];
+408543908 [label="L6\lLINENUMBER 15 L6\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L7\l"];
+1092382020 [label="L7\lLINENUMBER 18 L7\lFRAME FULL [[Ljava/lang/String; I I I I] []\lILOAD 3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L5\l"];
+1156729376 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 10 L2\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.C_2 (Z)Z\lISTORE 3\lL3\lLINENUMBER 12 L3\lICONST_0\lISTORE 4\lL4\lLINENUMBER 14 L4\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L5\l"];
+378006273 [label="L9\lLINENUMBER 19 L9\lICONST_4\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext3.foo (I)V\l"];
+entry;
+exit;
+entry -> 1156729376;
+1177852821 -> exit;
+392795843 -> 1092382020;
+408543908 -> 392795843;
+408543908 -> 1092382020;
+1092382020 -> 1177852821;
+1092382020 -> 378006273;
+1156729376 -> 1177852821;
+1156729376 -> 408543908;
+378006273 -> 1177852821;
+}

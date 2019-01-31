@@ -1,0 +1,13 @@
+digraph foo {
+node [shape=record];
+214929887 [label="L1\lLINENUMBER 30 L1\lFRAME SAME\lRETURN\lL4\l"];
+1167522035 [label="L0\lLINENUMBER 26 L0\lFRAME SAME\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L1\l"];
+18338606 [label="L2\lLINENUMBER 27 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL3\lLINENUMBER 28 L3\lIINC 0 -1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L0\l"];
+entry;
+exit;
+entry -> 1167522035;
+214929887 -> exit;
+1167522035 -> 214929887;
+1167522035 -> 18338606;
+18338606 -> 1167522035;
+}

@@ -1,0 +1,13 @@
+digraph unnecessaryMethod {
+node [shape=record];
+977650730 [label="L3\lLINENUMBER 30 L3\lILOAD 0\lIRETURN\l"];
+920446957 [label="L2\lLINENUMBER 33 L2\lFRAME APPEND [I]\lILOAD 1\lIRETURN\lL4\l"];
+1526062841 [label="L0\lLINENUMBER 27 L0\lILOAD 0\lISTORE 1\lL1\lLINENUMBER 29 L1\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L2\l"];
+entry;
+exit;
+entry -> 1526062841;
+977650730 -> exit;
+920446957 -> exit;
+1526062841 -> 977650730;
+1526062841 -> 920446957;
+}

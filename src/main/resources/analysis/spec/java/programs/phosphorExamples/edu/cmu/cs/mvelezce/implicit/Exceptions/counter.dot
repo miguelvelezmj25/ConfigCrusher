@@ -1,0 +1,27 @@
+digraph counter {
+node [shape=record];
+1046820071 [label="L0\lLINENUMBER 78 L0\lNEW java/util/LinkedHashMap\lDUP\lINVOKESPECIAL java/util/LinkedHashMap.\<init\> ()V\lASTORE 3\lL1\lLINENUMBER 80 L1\lICONST_0\lISTORE 4\l"];
+1722645488 [label="L2\lFRAME APPEND [java/util/LinkedHashMap I]\lILOAD 4\lICONST_5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPGE L3\l"];
+161938368 [label="L5\lLINENUMBER 85 L5\lFRAME SAME\lICONST_5\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.minAlpha : I\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPLE L7\l"];
+327986890 [label="L3\lLINENUMBER 90 L3\lFRAME SAME\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.minAlpha : I\lINVOKESTATIC edu/columbia/cs/psl/phosphor/runtime/MultiTainter.getTaint (I)Ledu/columbia/cs/psl/phosphor/runtime/Taint;\lASTORE 4\lL9\lLINENUMBER 92 L9\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.timeout : J\lINVOKESTATIC edu/columbia/cs/psl/phosphor/runtime/MultiTainter.getTaint (J)Ledu/columbia/cs/psl/phosphor/runtime/Taint;\lASTORE 4\lL10\lLINENUMBER 94 L10\lRETURN\lL11\l"];
+2056499811 [label="L8\lLINENUMBER 86 L8\lALOAD 3\lACONST_NULL\lICONST_1\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
+81355344 [label="INVOKESTATIC java/lang/System.currentTimeMillis ()J\lLLOAD 1\lLSUB\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.timeout : J\lLCMP\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L5\l"];
+203401172 [label="L6\lLINENUMBER 82 L6\lNEW java/lang/RuntimeException\lDUP\lLDC \"Error\"\lINVOKESPECIAL java/lang/RuntimeException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+890733699 [label="L7\lLINENUMBER 80 L7\lFRAME SAME\lIINC 4 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L2\l"];
+376601041 [label="L4\lLINENUMBER 81 L4\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.timeout : J\lLCONST_0\lLCMP\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L5\l"];
+entry;
+exit;
+entry -> 1046820071;
+1046820071 -> 1722645488;
+1722645488 -> 327986890;
+1722645488 -> 376601041;
+161938368 -> 2056499811;
+161938368 -> 890733699;
+327986890 -> exit;
+2056499811 -> 890733699;
+81355344 -> 161938368;
+81355344 -> 203401172;
+890733699 -> 1722645488;
+376601041 -> 161938368;
+376601041 -> 81355344;
+}

@@ -1,0 +1,15 @@
+digraph printExecutionTime {
+node [shape=record];
+329481770 [label="L3\lLINENUMBER 23 L3\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Total time: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL8\lLINENUMBER 24 L8\lRETURN\lL9\l"];
+1797159635 [label="L0\lLINENUMBER 15 L0\lICONST_0\lISTORE 0\lL1\lLINENUMBER 17 L1\lGETSTATIC edu/cmu/cs/mvelezce/TimerHelper.REGIONS_TO_TIME : Ljava/util/Map;\lINVOKEINTERFACE java/util/Map.entrySet ()Ljava/util/Set;\lINVOKEINTERFACE java/util/Set.iterator ()Ljava/util/Iterator;\lASTORE 1\l"];
+173059685 [label="ALOAD 1\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST java/util/Map$Entry\lASTORE 2\lL4\lLINENUMBER 18 L4\lALOAD 2\lINVOKEINTERFACE java/util/Map$Entry.getValue ()Ljava/lang/Object;\lCHECKCAST java/lang/Integer\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lISTORE 3\lL5\lLINENUMBER 19 L5\lILOAD 0\lILOAD 3\lIADD\lISTORE 0\lL6\lLINENUMBER 20 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 2\lINVOKEINTERFACE java/util/Map$Entry.getKey ()Ljava/lang/Object;\lCHECKCAST java/lang/String\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \" -\> \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lILOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (I)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL7\lLINENUMBER 21 L7\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L2\l"];
+1676010932 [label="L2\lFRAME APPEND [I java/util/Iterator]\lALOAD 1\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L3\l"];
+entry;
+exit;
+entry -> 1797159635;
+329481770 -> exit;
+1797159635 -> 1676010932;
+173059685 -> 1676010932;
+1676010932 -> 329481770;
+1676010932 -> 173059685;
+}

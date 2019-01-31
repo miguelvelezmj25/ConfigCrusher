@@ -1,0 +1,20 @@
+digraph main {
+node [shape=record];
+669725336 [label="L5\lFRAME APPEND [I]\lILOAD 3\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPGT L6\l"];
+537536188 [label="L7\lLINENUMBER 17 L7\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"\"\lINVOKEVIRTUAL java/io/PrintStream.print (Ljava/lang/String;)V\lL8\lLINENUMBER 16 L8\lIINC 3 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L5\l"];
+521342639 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 12 L2\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L3\l"];
+2114629072 [label="L4\lLINENUMBER 13 L4\lICONST_4\lISTORE 2\l"];
+557197074 [label="L3\lLINENUMBER 16 L3\lFRAME APPEND [I I]\lICONST_0\lISTORE 3\l"];
+197491520 [label="L6\lLINENUMBER 19 L6\lFRAME SAME\lRETURN\lL9\l"];
+entry;
+exit;
+entry -> 521342639;
+669725336 -> 537536188;
+669725336 -> 197491520;
+537536188 -> 669725336;
+521342639 -> 2114629072;
+521342639 -> 557197074;
+2114629072 -> 557197074;
+557197074 -> 669725336;
+197491520 -> exit;
+}

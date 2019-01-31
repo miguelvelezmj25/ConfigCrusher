@@ -1,0 +1,28 @@
+digraph main {
+node [shape=record];
+1200546947 [label="L12\lLINENUMBER 24 L12\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1862994526 [label="L8\lLINENUMBER 19 L8\lICONST_1\lISTORE 4\l"];
+1614133563 [label="L7\lLINENUMBER 22 L7\lFRAME SAME\lILOAD 4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L9\l"];
+66724371 [label="L5\lLINENUMBER 18 L5\lFRAME FULL [[Ljava/lang/String; I I I I] []\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L7\l"];
+1037163664 [label="L9\lLINENUMBER 29 L9\lFRAME SAME\lRETURN\lL13\l"];
+839771540 [label="L10\lLINENUMBER 23 L10\lILOAD 3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L11\l"];
+1099552523 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 10 L2\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.C_2 (Z)Z\lISTORE 3\lL3\lLINENUMBER 12 L3\lICONST_0\lISTORE 4\lL4\lLINENUMBER 14 L4\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L5\l"];
+1047934137 [label="L6\lLINENUMBER 15 L6\lICONST_1\lISTORE 4\l"];
+180316302 [label="L11\lLINENUMBER 27 L11\lFRAME SAME\lIINC 4 -1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L7\l"];
+entry;
+exit;
+1200546947 -> 180316302;
+entry -> 1099552523;
+1862994526 -> 1614133563;
+1614133563 -> 1037163664;
+1614133563 -> 839771540;
+66724371 -> 1862994526;
+66724371 -> 1614133563;
+1037163664 -> exit;
+839771540 -> 1200546947;
+839771540 -> 180316302;
+1099552523 -> 66724371;
+1099552523 -> 1047934137;
+1047934137 -> 66724371;
+180316302 -> 1614133563;
+}

@@ -1,0 +1,28 @@
+digraph testAllTypesOfComparisons {
+node [shape=record];
+131582664 [label="L9\lLINENUMBER 56 L9\lFRAME SAME\lALOAD 2\lALOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ACMPNE L11\l"];
+2107873140 [label="L13\lLINENUMBER 63 L13\lFRAME SAME\lRETURN\lL15\l"];
+1875304119 [label="L12\lLINENUMBER 57 L12\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1570160120 [label="L6\lLINENUMBER 52 L6\lFRAME FULL [I java/lang/String java/lang/String I] []\lALOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNULL L9\l"];
+1142653826 [label="L14\lLINENUMBER 61 L14\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1870054092 [label="L7\lLINENUMBER 48 L7\lSIPUSH 1000\lISTORE 3\lL8\lLINENUMBER 49 L8\lLDC \"example1\"\lASTORE 2\l"];
+914293025 [label="L11\lLINENUMBER 60 L11\lFRAME SAME\lILOAD 3\lSIPUSH 500\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPGE L13\l"];
+2003311844 [label="L0\lLINENUMBER 40 L0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"\ntestAllTypesOfComparisons\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 41 L1\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 0\lL2\lLINENUMBER 42 L2\lLDC \"example1\"\lASTORE 1\lL3\lLINENUMBER 44 L3\lACONST_NULL\lASTORE 2\lL4\lLINENUMBER 45 L4\lBIPUSH 100\lISTORE 3\lL5\lLINENUMBER 47 L5\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L6\l"];
+812609309 [label="L10\lLINENUMBER 53 L10\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+entry;
+exit;
+131582664 -> 1875304119;
+131582664 -> 914293025;
+entry -> 2003311844;
+2107873140 -> exit;
+1875304119 -> 914293025;
+1570160120 -> 131582664;
+1570160120 -> 812609309;
+1142653826 -> 2107873140;
+1870054092 -> 1570160120;
+914293025 -> 2107873140;
+914293025 -> 1142653826;
+2003311844 -> 1570160120;
+2003311844 -> 1870054092;
+812609309 -> 131582664;
+}

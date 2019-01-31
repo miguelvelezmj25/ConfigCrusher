@@ -1,0 +1,28 @@
+digraph testBranchNotTaken {
+node [shape=record];
+1642905321 [label="L7\lLINENUMBER 74 L7\lSIPUSH 1000\lISTORE 3\lL8\lLINENUMBER 75 L8\lLDC \"example2\"\lASTORE 2\l"];
+1701388960 [label="L12\lLINENUMBER 83 L12\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+130494156 [label="L0\lLINENUMBER 66 L0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"\ntestBranchNotTaken\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 67 L1\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 0\lL2\lLINENUMBER 68 L2\lLDC \"example2\"\lASTORE 1\lL3\lLINENUMBER 70 L3\lACONST_NULL\lASTORE 2\lL4\lLINENUMBER 71 L4\lBIPUSH 100\lISTORE 3\lL5\lLINENUMBER 73 L5\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L6\l"];
+608174634 [label="L13\lLINENUMBER 89 L13\lFRAME SAME\lRETURN\lL15\l"];
+1148735023 [label="L14\lLINENUMBER 87 L14\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1195403585 [label="L6\lLINENUMBER 78 L6\lFRAME FULL [I java/lang/String java/lang/String I] []\lALOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNULL L9\l"];
+464994546 [label="L10\lLINENUMBER 79 L10\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1643565953 [label="L11\lLINENUMBER 86 L11\lFRAME SAME\lILOAD 3\lSIPUSH 500\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPGE L13\l"];
+624475142 [label="L9\lLINENUMBER 82 L9\lFRAME SAME\lALOAD 2\lALOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ACMPNE L11\l"];
+entry;
+exit;
+entry -> 130494156;
+1642905321 -> 1195403585;
+1701388960 -> 1643565953;
+130494156 -> 1642905321;
+130494156 -> 1195403585;
+608174634 -> exit;
+1148735023 -> 608174634;
+1195403585 -> 464994546;
+1195403585 -> 624475142;
+464994546 -> 624475142;
+1643565953 -> 608174634;
+1643565953 -> 1148735023;
+624475142 -> 1701388960;
+624475142 -> 1643565953;
+}

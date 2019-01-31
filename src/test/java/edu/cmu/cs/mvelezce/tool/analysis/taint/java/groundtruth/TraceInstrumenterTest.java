@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.junit.Test;
 
+@Deprecated
 public class TraceInstrumenterTest {
 
   @Test

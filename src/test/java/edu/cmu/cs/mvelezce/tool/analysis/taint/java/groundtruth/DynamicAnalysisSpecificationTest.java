@@ -19,6 +19,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
+@Deprecated
 public class DynamicAnalysisSpecificationTest {
 
   private static final String MAIN_STRINGS_DECISION_1 = "main([Ljava/lang/String;)V.1";

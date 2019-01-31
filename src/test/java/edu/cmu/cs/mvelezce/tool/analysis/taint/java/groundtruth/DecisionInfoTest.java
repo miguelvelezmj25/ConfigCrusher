@@ -5,6 +5,7 @@ import com.bpodgursky.jbool_expressions.parsers.ExprParser;
 import com.bpodgursky.jbool_expressions.rules.RuleSet;
 import org.junit.Test;
 
+@Deprecated
 public class DecisionInfoTest {
 
   @Test

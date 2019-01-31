@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import java.io.Serializable;
 
+@Deprecated
 public class ThenElseCounts implements Serializable {
 
   private static final long serialVersionUID = -8677374800530611265L;

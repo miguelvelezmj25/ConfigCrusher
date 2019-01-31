@@ -29,6 +29,7 @@ import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
+@Deprecated
 public class TraceInstrumenter extends BaseMethodTransformer {
 
   private final String programName;

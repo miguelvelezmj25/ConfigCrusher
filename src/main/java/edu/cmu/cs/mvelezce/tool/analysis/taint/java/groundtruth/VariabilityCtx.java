@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+@Deprecated
 public class VariabilityCtx implements Serializable {
 
   private static final long serialVersionUID = 5228402185734425841L;

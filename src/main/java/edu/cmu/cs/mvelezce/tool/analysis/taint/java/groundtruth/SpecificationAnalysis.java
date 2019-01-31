@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import org.jboss.util.file.Files;
 
+@Deprecated
 public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
   private static final String APACHE_COMMONS_PATH =

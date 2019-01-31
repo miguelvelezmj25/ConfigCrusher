@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+@Deprecated
 public class CallingCtxDecision implements Serializable {
 
 //  private static final long serialVersionUID = 4363650686966128330L;

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+@Deprecated
 public class DecisionBranchCountTable {
 
   private final Set<String> options;

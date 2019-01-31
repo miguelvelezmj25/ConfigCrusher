@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import jdk.internal.org.objectweb.asm.Type;
 
+@Deprecated
 public class SpecificationLogger {
 
   private static final Map<String, String> ID_TO_SUBTRACE = new HashMap<>();

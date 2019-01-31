@@ -17,7 +17,7 @@ public class SubtracesInstrumenter extends BaseInstrumenter {
   }
 
   @Override
-  public void instrument(String args[])
+  public void instrument(String[] args)
       throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
     Options.getCommandLine(args);
 
@@ -25,16 +25,7 @@ public class SubtracesInstrumenter extends BaseInstrumenter {
     Options.checkIfDeleteResult(outputFile);
 
     if (outputFile.exists()) {
-      throw new UnsupportedOperationException("Implement");
-//      Collection<File> files = FileUtils.listFiles(outputFile, new String[]{"json"}, false);
-//
-//      if (files.size() != 1) {
-//        throw new RuntimeException(
-//            "We expected to find 1 file in the directory, but that is not the case "
-//                + outputFile);
-//      }
-//
-//      return;
+      return;
     }
 
     if (Options.checkIfDeleteResult()) {
@@ -43,7 +34,6 @@ public class SubtracesInstrumenter extends BaseInstrumenter {
 
     if (Options.checkIfSave()) {
       this.instrument();
-      throw new UnsupportedOperationException("Implement what we want to save");
     }
   }
 

@@ -43,6 +43,10 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     for (ClassNode classNode : classNodes) {
+      if(!classNode.name.equals("edu/cmu/cs/mvelezce/analysis/IfOr")) {
+        continue;
+      }
+
       Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
 
       if (methodsToInstrument.isEmpty()) {
@@ -62,6 +66,7 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       }
 
       break;
+
     }
   }
 

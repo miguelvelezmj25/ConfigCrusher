@@ -60,13 +60,13 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    this.addLogging(methodNode, classNode);
+    this.instrumentCFD(methodNode, classNode);
   }
 
-  // TODO name
-  private void addLogging(MethodNode methodNode, ClassNode classNode) {
+  private void instrumentCFD(MethodNode methodNode, ClassNode classNode) {
     InsnList insnList = methodNode.instructions;
     ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
+    String labelPrefix = classNode.name + "." + methodNode.name + methodNode.desc;
     int decisionCount = 0;
 
     while (insnListIter.hasNext()) {
@@ -76,13 +76,11 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
         continue;
       }
 
-      String label = classNode.name + "." + methodNode.name + methodNode.desc + "." + decisionCount;
-
       InsnList loggingInsnList = new InsnList();
 
       loggingInsnList.add(
           new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
-      loggingInsnList.add(new LdcInsnNode(label));
+      loggingInsnList.add(new LdcInsnNode(labelPrefix + "." + decisionCount));
       loggingInsnList.add(
           new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println",
               "(Ljava/lang/String;)V",

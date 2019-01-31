@@ -1,0 +1,13 @@
+digraph sendHeaders {
+node [shape=record];
+1161148117 [label="L0\lLINENUMBER 34 L0\lICONST_0\lISTORE 2\lL1\lLINENUMBER 35 L1\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L2\l"];
+516875052 [label="L2\lLINENUMBER 43 L2\lFRAME APPEND [I]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Done\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL5\lLINENUMBER 44 L5\lRETURN\lL6\l"];
+1131592118 [label="L3\lLINENUMBER 36 L3\lGETSTATIC edu/cmu/cs/mvelezce/analysis/Example5.totalLength : I\lILOAD 0\lISUB\lISTORE 2\lL4\lLINENUMBER 37 L4\lLDC \"response header\"\lPUTSTATIC edu/cmu/cs/mvelezce/analysis/Example5.subject : Ljava/lang/String;\l"];
+entry;
+exit;
+1161148117 -> 516875052;
+1161148117 -> 1131592118;
+entry -> 1161148117;
+516875052 -> exit;
+1131592118 -> 516875052;
+}

@@ -1,0 +1,21 @@
+digraph equals {
+node [shape=record];
+2135449562 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lICONST_1\lIRETURN\lL5\l"];
+1250142026 [label="L2\lLINENUMBER 46 L2\lICONST_1\lIRETURN\l"];
+1261031890 [label="L3\lLINENUMBER 49 L3\lFRAME SAME\lICONST_0\lIRETURN\l"];
+20224131 [label="ALOAD 0\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lALOAD 1\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ACMPEQ L4\l"];
+352598575 [label="L1\lLINENUMBER 48 L1\lFRAME SAME\lALOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNULL L3\l"];
+1281414889 [label="L0\lLINENUMBER 45 L0\lALOAD 0\lALOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ACMPNE L1\l"];
+entry;
+exit;
+entry -> 1281414889;
+2135449562 -> exit;
+1250142026 -> exit;
+1261031890 -> exit;
+20224131 -> 2135449562;
+20224131 -> 1261031890;
+352598575 -> 1261031890;
+352598575 -> 20224131;
+1281414889 -> 1250142026;
+1281414889 -> 352598575;
+}

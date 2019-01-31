@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class SubtracesInstrumenter extends BaseInstrumenter {
 
-  public static final String DIRECTORY = Options.DIRECTORY + "/analysis/spec/java/programs";
+  public static final String DIRECTORY = Options.DIRECTORY + "/analysis/spec/instrument/java/programs";
 
   public SubtracesInstrumenter(String programName, String srcDir, String classDir) {
     super(programName, srcDir, classDir);

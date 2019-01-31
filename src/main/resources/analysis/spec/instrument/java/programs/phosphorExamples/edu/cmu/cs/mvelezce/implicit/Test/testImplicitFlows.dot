@@ -1,0 +1,36 @@
+digraph testImplicitFlows {
+node [shape=record];
+895599632 [label="L14\lLINENUMBER 116 L14\lFRAME SAME\lALOAD 3\lLDC \"example3\"\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ACMPNE L16\l"];
+1508059488 [label="L17\lLINENUMBER 117 L17\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+2095788421 [label="L12\lLINENUMBER 112 L12\lFRAME SAME\lLLOAD 4\lLCONST_0\lLCMP\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L14\l"];
+2143139988 [label="L8\lLINENUMBER 108 L8\lFRAME FULL [I I I java/lang/String J I] []\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L12\l"];
+1312963234 [label="L0\lLINENUMBER 92 L0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"\ntestImplicitFlows\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 93 L1\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 0\lL2\lLINENUMBER 94 L2\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 1\lL3\lLINENUMBER 96 L3\lICONST_0\lISTORE 2\lL4\lLINENUMBER 97 L4\lLDC \"example3\"\lASTORE 3\lL5\lLINENUMBER 98 L5\lLCONST_0\lLSTORE 4\lL6\lLINENUMBER 99 L6\lICONST_0\lISTORE 6\lL7\lLINENUMBER 101 L7\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L8\l"];
+1131184547 [label="L15\lLINENUMBER 113 L15\lLDC \"not example3\"\lASTORE 3\l"];
+2082557120 [label="L16\lLINENUMBER 120 L16\lFRAME SAME\lILOAD 6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L18\l"];
+1845517769 [label="L13\lLINENUMBER 109 L13\lICONST_1\lISTORE 6\l"];
+1620948294 [label="L19\lLINENUMBER 121 L19\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+826865256 [label="L11\lLINENUMBER 104 L11\lLCONST_1\lLSTORE 4\l"];
+1533524862 [label="L18\lLINENUMBER 123 L18\lFRAME SAME\lRETURN\lL20\l"];
+813823788 [label="L9\lLINENUMBER 102 L9\lICONST_1\lISTORE 2\lL10\lLINENUMBER 103 L10\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L8\l"];
+entry;
+exit;
+895599632 -> 1508059488;
+895599632 -> 2082557120;
+1131184547 -> 895599632;
+2082557120 -> 1533524862;
+2082557120 -> 1620948294;
+1845517769 -> 2095788421;
+1620948294 -> 1533524862;
+813823788 -> 2143139988;
+813823788 -> 826865256;
+entry -> 1312963234;
+1508059488 -> 2082557120;
+2095788421 -> 895599632;
+2095788421 -> 1131184547;
+2143139988 -> 2095788421;
+2143139988 -> 1845517769;
+1312963234 -> 2143139988;
+1312963234 -> 813823788;
+826865256 -> 2143139988;
+1533524862 -> exit;
+}

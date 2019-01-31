@@ -1,0 +1,30 @@
+digraph main {
+node [shape=record];
+211649273 [label="ILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L14\l"];
+1073051173 [label="L4\lLINENUMBER 29 L4\lICONST_1\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 3\lL5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L6\l"];
+2088969892 [label="L7\lLINENUMBER 39 L7\lFRAME SAME\lLDC 1000000\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 4\l"];
+1792088662 [label="L0\lLINENUMBER 22 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 23 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 28 L2\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L3\l"];
+1997704619 [label="L8\lLINENUMBER 36 L8\lICONST_0\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 4\lL9\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L10\l"];
+1378559537 [label="L3\lLINENUMBER 32 L3\lFRAME APPEND [I I]\lBIPUSH 50\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lASTORE 3\l"];
+1862347028 [label="L14\lLINENUMBER 50 L14\lFRAME SAME\lRETURN\lL15\l"];
+1775120226 [label="L13\lLINENUMBER 47 L13\lFRAME APPEND [edu/cmu/cs/mvelezce/implicit/Exceptions]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+518167684 [label="L6\lLINENUMBER 35 L6\lFRAME APPEND [java/lang/Integer]\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L7\l"];
+1665308978 [label="L10\lLINENUMBER 42 L10\lFRAME APPEND [java/lang/Integer]\lNEW edu/cmu/cs/mvelezce/implicit/Exceptions\lDUP\lALOAD 4\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lI2L\lALOAD 3\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\lINVOKESPECIAL edu/cmu/cs/mvelezce/implicit/Exceptions.\<init\> (JI)V\lASTORE 5\lL11\lLINENUMBER 43 L11\lALOAD 5\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lINVOKESPECIAL edu/cmu/cs/mvelezce/implicit/Exceptions.counter (J)V\lL12\lLINENUMBER 46 L12\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L13\l"];
+entry;
+exit;
+211649273 -> 1862347028;
+211649273 -> 1775120226;
+1378559537 -> 518167684;
+1775120226 -> 1862347028;
+518167684 -> 2088969892;
+518167684 -> 1997704619;
+1665308978 -> 211649273;
+1665308978 -> 1775120226;
+1073051173 -> 518167684;
+2088969892 -> 1665308978;
+entry -> 1792088662;
+1792088662 -> 1073051173;
+1792088662 -> 1378559537;
+1997704619 -> 1665308978;
+1862347028 -> exit;
+}

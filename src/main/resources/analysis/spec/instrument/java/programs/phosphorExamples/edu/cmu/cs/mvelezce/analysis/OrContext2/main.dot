@@ -1,0 +1,26 @@
+digraph main {
+node [shape=record];
+773066329 [label="L5\lLINENUMBER 18 L5\lFRAME FULL [[Ljava/lang/String; I I I I] []\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L7\l"];
+79706679 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 10 L2\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.C_2 (Z)Z\lISTORE 3\lL3\lLINENUMBER 12 L3\lICONST_0\lISTORE 4\lL4\lLINENUMBER 14 L4\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L5\l"];
+1497538476 [label="L8\lLINENUMBER 19 L8\lICONST_1\lISTORE 4\l"];
+1470772251 [label="L10\lLINENUMBER 23 L10\lILOAD 3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L9\l"];
+1235686146 [label="L6\lLINENUMBER 15 L6\lICONST_1\lISTORE 4\l"];
+1557534595 [label="L7\lLINENUMBER 22 L7\lFRAME SAME\lILOAD 4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L9\l"];
+652481263 [label="L9\lLINENUMBER 27 L9\lFRAME SAME\lRETURN\lL12\l"];
+1256350655 [label="L11\lLINENUMBER 24 L11\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+entry;
+exit;
+773066329 -> 1497538476;
+773066329 -> 1557534595;
+entry -> 79706679;
+79706679 -> 773066329;
+79706679 -> 1235686146;
+1497538476 -> 1557534595;
+1470772251 -> 652481263;
+1470772251 -> 1256350655;
+1235686146 -> 773066329;
+1557534595 -> 1470772251;
+1557534595 -> 652481263;
+652481263 -> exit;
+1256350655 -> 652481263;
+}

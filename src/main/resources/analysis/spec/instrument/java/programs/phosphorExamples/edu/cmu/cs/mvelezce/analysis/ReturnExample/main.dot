@@ -1,0 +1,18 @@
+digraph main {
+node [shape=record];
+285074186 [label="L5\lLINENUMBER 14 L5\lRETURN\l"];
+87242619 [label="L3\lLINENUMBER 11 L3\lRETURN\l"];
+864248990 [label="L2\lLINENUMBER 13 L2\lFRAME APPEND [I]\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L4\l"];
+1100619942 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L2\l"];
+15892131 [label="L4\lLINENUMBER 16 L4\lFRAME SAME\lRETURN\lL6\l"];
+entry;
+exit;
+285074186 -> exit;
+entry -> 1100619942;
+87242619 -> exit;
+864248990 -> 285074186;
+864248990 -> 15892131;
+1100619942 -> 87242619;
+1100619942 -> 864248990;
+15892131 -> exit;
+}

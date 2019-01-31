@@ -1,0 +1,28 @@
+digraph testFields1 {
+node [shape=record];
+479459041 [label="L5\lLINENUMBER 132 L5\lNEW edu/cmu/cs/mvelezce/implicit/Car\lDUP\lLDC \"Chevy\"\lSIPUSH 2014\lICONST_1\lINVOKESPECIAL edu/cmu/cs/mvelezce/implicit/Car.\<init\> (Ljava/lang/String;IZ)V\lASTORE 1\l"];
+1574898980 [label="L14\lLINENUMBER 149 L14\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Chevy\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+319689067 [label="L11\lLINENUMBER 148 L11\lFRAME SAME\lALOAD 1\lINVOKEVIRTUAL edu/cmu/cs/mvelezce/implicit/Car.getYear ()I\lSIPUSH 2015\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPGE L13\l"];
+279566689 [label="L12\lLINENUMBER 145 L12\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"null car\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+238564722 [label="L13\lLINENUMBER 151 L13\lFRAME SAME\lRETURN\lL15\l"];
+1361817590 [label="L0\lLINENUMBER 126 L0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"\ntestFields1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 127 L1\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 0\lL2\lLINENUMBER 129 L2\lNEW edu/cmu/cs/mvelezce/implicit/Car\lDUP\lLDC \"Ford\"\lSIPUSH 2018\lICONST_0\lINVOKESPECIAL edu/cmu/cs/mvelezce/implicit/Car.\<init\> (Ljava/lang/String;IZ)V\lASTORE 1\lL3\lLINENUMBER 131 L3\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L4\l"];
+341372316 [label="L9\lLINENUMBER 144 L9\lFRAME APPEND [edu/cmu/cs/mvelezce/implicit/Car I]\lALOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNONNULL L11\l"];
+1663888181 [label="L4\lLINENUMBER 135 L4\lFRAME APPEND [I edu/cmu/cs/mvelezce/implicit/Car]\lALOAD 1\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Car.copy (Ledu/cmu/cs/mvelezce/implicit/Car;)Ledu/cmu/cs/mvelezce/implicit/Car;\lASTORE 2\lL6\lLINENUMBER 136 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V\lL7\lLINENUMBER 138 L7\lALOAD 2\lINVOKEVIRTUAL edu/cmu/cs/mvelezce/implicit/Car.getYear ()I\lICONST_5\lIADD\lISTORE 3\lL8\lLINENUMBER 140 L8\lILOAD 3\lBIPUSH 12\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPLE L9\l"];
+402695541 [label="L10\lLINENUMBER 141 L10\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"something\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+entry;
+exit;
+479459041 -> 1663888181;
+1574898980 -> 238564722;
+entry -> 1361817590;
+319689067 -> 1574898980;
+319689067 -> 238564722;
+279566689 -> 319689067;
+238564722 -> exit;
+1361817590 -> 479459041;
+1361817590 -> 1663888181;
+341372316 -> 319689067;
+341372316 -> 279566689;
+1663888181 -> 341372316;
+1663888181 -> 402695541;
+402695541 -> 341372316;
+}

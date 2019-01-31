@@ -1,8 +1,0 @@
-digraph setUsed {
-node [shape=record];
-667821226 [label="L0\lLINENUMBER 40 L0\lALOAD 0\lILOAD 1\lPUTFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lL1\lLINENUMBER 41 L1\lRETURN\lL2\l"];
-entry;
-exit;
-entry -> 667821226;
-667821226 -> exit;
-}

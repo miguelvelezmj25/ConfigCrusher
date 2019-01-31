@@ -1,0 +1,21 @@
+digraph main {
+node [shape=record];
+178401052 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 11 L2\lICONST_0\lISTORE 3\lL3\lLINENUMBER 13 L3\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L4\l"];
+1113829504 [label="L7\lLINENUMBER 20 L7\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lSIPUSH 200\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL8\lLINENUMBER 22 L8\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L6\l"];
+720770771 [label="L9\lLINENUMBER 24 L9\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lSIPUSH 300\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
+936219350 [label="L5\lLINENUMBER 15 L5\lICONST_1\lISTORE 3\l"];
+1441243996 [label="L4\lLINENUMBER 18 L4\lFRAME APPEND [I I I]\lILOAD 3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L6\l"];
+1495445111 [label="L6\lLINENUMBER 28 L6\lFRAME SAME\lRETURN\lL10\l"];
+entry;
+exit;
+entry -> 178401052;
+178401052 -> 936219350;
+178401052 -> 1441243996;
+1113829504 -> 720770771;
+1113829504 -> 1495445111;
+720770771 -> 1495445111;
+936219350 -> 1441243996;
+1441243996 -> 1113829504;
+1441243996 -> 1495445111;
+1495445111 -> exit;
+}

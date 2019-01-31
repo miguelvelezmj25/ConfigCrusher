@@ -1,18 +1,18 @@
 digraph main {
 node [shape=record];
-517052730 [label="L7\lLINENUMBER 22 L7\lFRAME SAME\lRETURN\lL9\l"];
-1556995360 [label="L8\lLINENUMBER 19 L8\lICONST_0\lISTORE 4\l"];
-1846406218 [label="L6\lLINENUMBER 15 L6\lICONST_0\lISTORE 3\l"];
-158199555 [label="L5\lLINENUMBER 18 L5\lFRAME FULL [[Ljava/lang/String; I I I I] []\lILOAD 3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L7\l"];
-1448247698 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lILOAD 1\lISTORE 2\lL2\lLINENUMBER 11 L2\lICONST_1\lISTORE 3\lL3\lLINENUMBER 12 L3\lICONST_1\lISTORE 4\lL4\lLINENUMBER 14 L4\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L5\l"];
+667026744 [label="L8\lLINENUMBER 19 L8\lICONST_0\lISTORE 4\l"];
+507084503 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lILOAD 1\lISTORE 2\lL2\lLINENUMBER 11 L2\lICONST_1\lISTORE 3\lL3\lLINENUMBER 12 L3\lICONST_1\lISTORE 4\lL4\lLINENUMBER 14 L4\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/implicit/MultiFacets.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L5\l"];
+1225439493 [label="L5\lLINENUMBER 18 L5\lFRAME FULL [[Ljava/lang/String; I I I I] []\lILOAD 3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/implicit/MultiFacets.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L7\l"];
+1454127753 [label="L6\lLINENUMBER 15 L6\lICONST_0\lISTORE 3\l"];
+1926764753 [label="L7\lLINENUMBER 22 L7\lFRAME SAME\lRETURN\lL9\l"];
 entry;
 exit;
-entry -> 1448247698;
-517052730 -> exit;
-1556995360 -> 517052730;
-1846406218 -> 158199555;
-158199555 -> 517052730;
-158199555 -> 1556995360;
-1448247698 -> 1846406218;
-1448247698 -> 158199555;
+entry -> 507084503;
+667026744 -> 1926764753;
+507084503 -> 1225439493;
+507084503 -> 1454127753;
+1225439493 -> 667026744;
+1225439493 -> 1926764753;
+1454127753 -> 1225439493;
+1926764753 -> exit;
 }

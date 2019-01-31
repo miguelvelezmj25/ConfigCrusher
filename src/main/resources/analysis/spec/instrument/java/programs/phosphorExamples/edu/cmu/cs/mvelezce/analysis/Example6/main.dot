@@ -1,18 +1,18 @@
 digraph main {
 node [shape=record];
-1799521220 [label="L3\lLINENUMBER 16 L3\lFRAME APPEND [I I]\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/Example6.unnecessaryMethod (I)I\lISTORE 2\lL5\lLINENUMBER 18 L5\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L6\l"];
-218654115 [label="L4\lLINENUMBER 13 L4\lBIPUSH 10\lISTORE 2\l"];
-1668004795 [label="L7\lLINENUMBER 19 L7\lIINC 2 1\l"];
-1167792250 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 12 L2\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L3\l"];
-2125346660 [label="L6\lLINENUMBER 22 L6\lFRAME SAME\lBIPUSH 42\lILOAD 2\lIDIV\lISTORE 2\lL8\lLINENUMBER 23 L8\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL9\lLINENUMBER 24 L9\lRETURN\lL10\l"];
+844112759 [label="L7\lLINENUMBER 19 L7\lIINC 2 1\l"];
+9797126 [label="L6\lLINENUMBER 22 L6\lFRAME SAME\lBIPUSH 42\lILOAD 2\lIDIV\lISTORE 2\lL8\lLINENUMBER 23 L8\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lL9\lLINENUMBER 24 L9\lRETURN\lL10\l"];
+501609049 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 12 L2\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L3\l"];
+838473569 [label="L3\lLINENUMBER 16 L3\lFRAME APPEND [I I]\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/Example6.unnecessaryMethod (I)I\lISTORE 2\lL5\lLINENUMBER 18 L5\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L6\l"];
+1922930974 [label="L4\lLINENUMBER 13 L4\lBIPUSH 10\lISTORE 2\l"];
 entry;
 exit;
-entry -> 1167792250;
-1799521220 -> 1668004795;
-1799521220 -> 2125346660;
-218654115 -> 1799521220;
-1668004795 -> 2125346660;
-1167792250 -> 1799521220;
-1167792250 -> 218654115;
-2125346660 -> exit;
+entry -> 501609049;
+844112759 -> 9797126;
+9797126 -> exit;
+501609049 -> 838473569;
+501609049 -> 1922930974;
+838473569 -> 844112759;
+838473569 -> 9797126;
+1922930974 -> 838473569;
 }

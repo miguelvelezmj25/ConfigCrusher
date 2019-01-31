@@ -1,13 +1,13 @@
 digraph cow {
 node [shape=record];
-1032986144 [label="L0\lLINENUMBER 105 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
-917819120 [label="L1\lLINENUMBER 108 L1\lFRAME SAME\lRETURN\lL3\l"];
-263025902 [label="L2\lLINENUMBER 106 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
+1377546660 [label="L2\lLINENUMBER 106 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
+773301025 [label="L0\lLINENUMBER 105 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.cow(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
+905159212 [label="L1\lLINENUMBER 108 L1\lFRAME SAME\lRETURN\lL3\l"];
 entry;
 exit;
-entry -> 1032986144;
-1032986144 -> 917819120;
-1032986144 -> 263025902;
-917819120 -> exit;
-263025902 -> 917819120;
+entry -> 773301025;
+1377546660 -> 905159212;
+773301025 -> 1377546660;
+773301025 -> 905159212;
+905159212 -> exit;
 }

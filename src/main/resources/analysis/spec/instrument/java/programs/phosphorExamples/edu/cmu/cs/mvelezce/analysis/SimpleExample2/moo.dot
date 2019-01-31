@@ -1,13 +1,13 @@
 digraph moo {
 node [shape=record];
-1010306008 [label="L2\lLINENUMBER 30 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
-884502914 [label="L1\lLINENUMBER 32 L1\lFRAME SAME\lRETURN\lL3\l"];
-504355631 [label="L0\lLINENUMBER 29 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
+234740890 [label="L2\lLINENUMBER 30 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
+937277082 [label="L0\lLINENUMBER 29 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample2.moo(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
+882646447 [label="L1\lLINENUMBER 32 L1\lFRAME SAME\lRETURN\lL3\l"];
 entry;
 exit;
-1010306008 -> 884502914;
-entry -> 504355631;
-884502914 -> exit;
-504355631 -> 1010306008;
-504355631 -> 884502914;
+entry -> 937277082;
+234740890 -> 882646447;
+937277082 -> 234740890;
+937277082 -> 882646447;
+882646447 -> exit;
 }

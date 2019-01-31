@@ -1,15 +1,15 @@
 digraph foo {
 node [shape=record];
-1362728240 [label="L3\lLINENUMBER 49 L3\lFRAME SAME\lRETURN\lL4\l"];
-1735507635 [label="L1\lLINENUMBER 47 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
-1578009262 [label="L2\lLINENUMBER 44 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_4\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L3\l"];
-817978763 [label="L0\lLINENUMBER 43 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
+1087440001 [label="L3\lLINENUMBER 49 L3\lFRAME SAME\lRETURN\lL4\l"];
+1774795940 [label="L0\lLINENUMBER 43 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
+1675239551 [label="L1\lLINENUMBER 47 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+389247924 [label="L2\lLINENUMBER 44 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_4\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L3\l"];
 entry;
 exit;
-entry -> 817978763;
-1362728240 -> exit;
-1735507635 -> 1362728240;
-1578009262 -> 1362728240;
-817978763 -> 1735507635;
-817978763 -> 1578009262;
+entry -> 1774795940;
+1087440001 -> exit;
+1774795940 -> 1675239551;
+1774795940 -> 389247924;
+1675239551 -> 1087440001;
+389247924 -> 1087440001;
 }

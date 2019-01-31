@@ -1,13 +1,13 @@
 digraph foo {
 node [shape=record];
-724081353 [label="L0\lLINENUMBER 22 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
-1943266645 [label="L2\lLINENUMBER 23 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
-82517097 [label="L1\lLINENUMBER 25 L1\lFRAME SAME\lRETURN\lL3\l"];
+1630521067 [label="L0\lLINENUMBER 22 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext2.foo(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
+274773041 [label="L1\lLINENUMBER 25 L1\lFRAME SAME\lRETURN\lL3\l"];
+1629911510 [label="L2\lLINENUMBER 23 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
 entry;
 exit;
-entry -> 724081353;
-724081353 -> 1943266645;
-724081353 -> 82517097;
-1943266645 -> 82517097;
-82517097 -> exit;
+entry -> 1630521067;
+1630521067 -> 274773041;
+1630521067 -> 1629911510;
+274773041 -> exit;
+1629911510 -> 274773041;
 }

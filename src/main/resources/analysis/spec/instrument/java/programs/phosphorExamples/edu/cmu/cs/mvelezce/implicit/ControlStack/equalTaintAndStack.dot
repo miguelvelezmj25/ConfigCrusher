@@ -1,16 +1,16 @@
 digraph equalTaintAndStack {
 node [shape=record];
-1586845078 [label="L4\lLINENUMBER 28 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
-2134991632 [label="L2\lLINENUMBER 25 L2\lILOAD 1\lISTORE 2\lL3\lLINENUMBER 27 L3\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
-450003680 [label="L0\lLINENUMBER 24 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Hello\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
-480971771 [label="L1\lLINENUMBER 31 L1\lFRAME SAME\lRETURN\lL5\l"];
+1373419525 [label="L1\lLINENUMBER 31 L1\lFRAME SAME\lRETURN\lL5\l"];
+6444850 [label="L0\lLINENUMBER 24 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
+212683148 [label="L4\lLINENUMBER 28 L4\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1716093734 [label="L2\lLINENUMBER 25 L2\lILOAD 1\lISTORE 2\lL3\lLINENUMBER 27 L3\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 450003680;
-1586845078 -> 480971771;
-2134991632 -> 1586845078;
-2134991632 -> 480971771;
-450003680 -> 2134991632;
-450003680 -> 480971771;
-480971771 -> exit;
+entry -> 6444850;
+1373419525 -> exit;
+6444850 -> 1373419525;
+6444850 -> 1716093734;
+212683148 -> 1373419525;
+1716093734 -> 1373419525;
+1716093734 -> 212683148;
 }

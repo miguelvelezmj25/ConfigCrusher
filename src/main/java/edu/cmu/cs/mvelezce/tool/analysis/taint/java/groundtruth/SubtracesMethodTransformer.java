@@ -81,10 +81,8 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
     while (insnListIter.hasNext()) {
       AbstractInsnNode insnNode = insnListIter.next();
-      int opcode = insnNode.getOpcode();
 
-      if (!((opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE) || opcode == Opcodes.IFNULL
-          || opcode == Opcodes.IFNONNULL)) {
+      if (!this.isCFD(insnNode.getOpcode())) {
         continue;
       }
 
@@ -143,6 +141,11 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     }
   }
 
+  private boolean isCFD(int opcode) {
+    return (opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE) || opcode == Opcodes.IFNULL
+        || opcode == Opcodes.IFNONNULL;
+  }
+
   private LabelNode getLabelNode() {
     Label label = new Label();
     return new LabelNode(label);
@@ -191,7 +194,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
       AbstractInsnNode insnNode = insnListIter.next();
 
       // TODO check the counting with GOTOs
-      if (!(insnNode instanceof JumpInsnNode)) {
+      if (!this.isCFD(insnNode.getOpcode())) {
         continue;
       }
 

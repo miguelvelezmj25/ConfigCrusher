@@ -11,6 +11,9 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample.SimpleForExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleForExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import java.io.File;
 import java.io.IOException;
@@ -113,6 +116,24 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Object> {
             + BaseAdapter.PATH_SEPARATOR
             + MultiFacetsAdapter.INSTRUMENTED_CLASS_PATH);
         adapter = new MultiFacetsAdapter();
+        break;
+      case SimpleForExampleAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + SimpleForExampleAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new SimpleForExampleAdapter();
+        break;
+      case SimpleForExample2Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + SimpleForExample2Adapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new SimpleForExample2Adapter();
+        break;
+      case SimpleForExample3Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + SimpleForExample3Adapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new SimpleForExample3Adapter();
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + programName);

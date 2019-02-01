@@ -9,7 +9,10 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleFor
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SubtracesAnalysisTest {
@@ -94,7 +97,15 @@ public class SubtracesAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SubtracesAnalysis(programName, options);
-    analysis.analyze(args);
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysis(programName,
+        options);
+    Map<Set<String>, List<String>> write = analysis.analyze(args);
+
+    args = new String[0];
+
+    analysis = new SubtracesAnalysis(programName);
+    Map<Set<String>, List<String>> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 }

@@ -1,9 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
@@ -42,6 +43,10 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Map<Set<String>, List
     super(programName, options, new HashSet<>());
   }
 
+  public SubtracesAnalysis(String programName) {
+    this(programName, new HashSet<>());
+  }
+
   @Override
   public Map<Set<String>, List<String>> analyze() throws IOException, InterruptedException {
     Set<Set<String>> configs = Helper.getConfigurations(this.getOptions());
@@ -72,7 +77,56 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Map<Set<String>, List
 
   @Override
   public Map<Set<String>, List<String>> readFromFile(File file) throws IOException {
-    throw new UnsupportedOperationException("Implement");
+    ObjectMapper mapper = new ObjectMapper();
+    List<ConfigToTraceInfo> configToTraceInfoList = mapper
+        .readValue(file, new TypeReference<List<ConfigToTraceInfo>>() {
+        });
+
+    for (ConfigToTraceInfo configToTraceInfo : configToTraceInfoList) {
+      CONFIGS_TO_TRACES.put(configToTraceInfo.getConfig(), configToTraceInfo.getTrace());
+    }
+
+    return CONFIGS_TO_TRACES;
+//
+////        execution.checkTrace();
+//    DefaultPerformanceEntry performanceEntry = new DefaultPerformanceEntry(execution);
+//
+//    return performanceEntry;
+//
+//    ObjectMapper mapper = new ObjectMapper();
+//    List<RegionToInfo> results = mapper.readValue(file, new TypeReference<List<RegionToInfo>>() {
+//    });
+//
+//    Map<JavaRegion, DecisionInfo> regionsToDecisionInfos = new HashMap<>();
+//
+//    for (RegionToInfo result : results) {
+//      DecisionInfo decisionInfo = new DecisionInfo();
+//      Map<String, Collection> info = (Map<String, Collection>) result.getInfo();
+//
+//      this.addCtxsInfo(decisionInfo, info);
+//      this.addTableInfo(decisionInfo, info);
+//
+//      regionsToDecisionInfos.put(result.getRegion(), decisionInfo);
+//    }
+//
+//    return regionsToDecisionInfos;
+  }
+
+  @Override
+  public void writeToFile(Map<Set<String>, List<String>> analysisResults) throws IOException {
+    String outputFile = this.outputDir() + "/" + this.getProgramName() + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+
+    List<ConfigToTraceInfo> infos = new ArrayList<>();
+
+    for (Map.Entry<Set<String>, List<String>> entry : analysisResults.entrySet()) {
+      ConfigToTraceInfo configToTraceInfo = new ConfigToTraceInfo(entry.getKey(), entry.getValue());
+      infos.add(configToTraceInfo);
+    }
+
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(file, infos);
   }
 
   @Override

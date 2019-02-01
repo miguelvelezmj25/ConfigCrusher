@@ -51,24 +51,6 @@ public abstract class BaseDynamicAnalysis<T> implements DynamicAnalysis<T> {
     return analysisResults;
   }
 
-  @Override
-  public void writeToFile(T analysisResults) throws IOException {
-    throw new UnsupportedOperationException("Implement");
-//    ObjectMapper mapper = new ObjectMapper();
-//    String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
-//    File file = new File(outputFile);
-//    file.getParentFile().mkdirs();
-//
-//    List<RegionToInfo> decisionsAndInfos = new ArrayList<>();
-//
-//    for (Map.Entry<JavaRegion, T> entry : analysisResults.entrySet()) {
-//      RegionToInfo<T> regionToInfo = new RegionToInfo<>(entry.getKey(), entry.getValue());
-//      decisionsAndInfos.add(regionToInfo);
-//    }
-//
-//    mapper.writeValue(file, decisionsAndInfos);
-  }
-
   public String getProgramName() {
     return this.programName;
   }

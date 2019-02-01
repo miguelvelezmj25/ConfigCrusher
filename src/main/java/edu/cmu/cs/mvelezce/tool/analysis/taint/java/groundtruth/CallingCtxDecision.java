@@ -1,8 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 
 @Deprecated
 public class CallingCtxDecision implements Serializable {

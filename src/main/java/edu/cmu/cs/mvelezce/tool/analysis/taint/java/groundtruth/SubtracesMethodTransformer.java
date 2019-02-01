@@ -18,6 +18,7 @@ import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.FieldInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
@@ -78,6 +79,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     InsnList insnList = methodNode.instructions;
     ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
     int decisionCount = 0;
+    boolean instrumentedIpdExitBlock = false;
 
     while (insnListIter.hasNext()) {
       AbstractInsnNode insnNode = insnListIter.next();
@@ -104,41 +106,77 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
       MethodBlock ipd = cfg.getImmediatePostDominator(methodBlockWithJumpInsn);
 
       if (ipd.equals(exitBlock)) {
-        throw new UnsupportedOperationException(
-            "Fix how to handle the case where the ipd is the exit block");
+        if (instrumentedIpdExitBlock) {
+          continue;
+        }
+//        throw new UnsupportedOperationException("Handle the cases where the exit block is the ipd");
+        this.instrumentIPDExitNode(cfg, insnList);
+        instrumentedIpdExitBlock = true;
       }
-
-      AbstractInsnNode ipdLabelInsn = ipd.getInstructions().get(0);
-      Set<MethodBlock> reachables = cfg.getReachableBlocks(methodBlockWithJumpInsn, ipd);
-      reachables.remove(ipd);
-
-      LabelNode newIPDLabelNode = this.getLabelNode();
-      InsnList newIPDLoggingInsnList = this
-          .getNewIPDLoggingInsnList(newIPDLabelNode, labelPrefix, decisionCount);
-      insnList.insertBefore(ipd.getInstructions().get(0), newIPDLoggingInsnList);
-
-      for (MethodBlock reachable : reachables) {
-        List<AbstractInsnNode> reachableInstructions = reachable.getInstructions();
-        AbstractInsnNode reachableLastInstruction = reachableInstructions
-            .get(reachableInstructions.size() - 1);
-
-        if (!(reachableLastInstruction instanceof JumpInsnNode)) {
-          continue;
-        }
-
-        if (!((JumpInsnNode) reachableLastInstruction).label.equals(ipdLabelInsn)) {
-          continue;
-        }
-
-        JumpInsnNode newJumpInstruction = new JumpInsnNode(reachableLastInstruction.getOpcode(),
-            newIPDLabelNode);
-        insnList.insertBefore(reachableLastInstruction, newJumpInstruction);
-        insnList.remove(reachableLastInstruction);
+      else {
+        this.instrumentNormalIPD(methodBlockWithJumpInsn, ipd, cfg, labelPrefix, decisionCount,
+            insnList);
       }
 
       decisionCount++;
       cfg = this.getCFG(methodNode, classNode);
     }
+  }
+
+  private void instrumentNormalIPD(MethodBlock methodBlockWithJumpInsn, MethodBlock ipd,
+      MethodGraph cfg, String labelPrefix, int decisionCount, InsnList insnList) {
+    AbstractInsnNode ipdLabelInsn = ipd.getInstructions().get(0);
+    Set<MethodBlock> reachables = cfg.getReachableBlocks(methodBlockWithJumpInsn, ipd);
+    reachables.remove(ipd);
+
+    LabelNode newIPDLabelNode = this.getLabelNode();
+    InsnList newIPDLoggingInsnList = this
+        .getNewIPDLoggingInsnList(newIPDLabelNode, labelPrefix, decisionCount);
+    insnList.insertBefore(ipd.getInstructions().get(0), newIPDLoggingInsnList);
+
+    for (MethodBlock reachable : reachables) {
+      List<AbstractInsnNode> reachableInstructions = reachable.getInstructions();
+      AbstractInsnNode reachableLastInstruction = reachableInstructions
+          .get(reachableInstructions.size() - 1);
+
+      if (!(reachableLastInstruction instanceof JumpInsnNode)) {
+        continue;
+      }
+
+      if (!((JumpInsnNode) reachableLastInstruction).label.equals(ipdLabelInsn)) {
+        continue;
+      }
+
+      JumpInsnNode newJumpInstruction = new JumpInsnNode(reachableLastInstruction.getOpcode(),
+          newIPDLabelNode);
+      insnList.insertBefore(reachableLastInstruction, newJumpInstruction);
+      insnList.remove(reachableLastInstruction);
+    }
+  }
+
+  private void instrumentIPDExitNode(MethodGraph cfg, InsnList insnList) {
+    Set<MethodBlock> exitPreds = cfg.getExitBlock().getPredecessors();
+
+    for (MethodBlock pred : exitPreds) {
+      List<AbstractInsnNode> instructions = pred.getInstructions();
+      AbstractInsnNode returnInsnNode = this.getReturnInsnNode(instructions);
+      InsnList loggingInsnList = this.getIPDExitNodeLoggingInsnList();
+      insnList.insertBefore(returnInsnNode, loggingInsnList);
+    }
+  }
+
+  private AbstractInsnNode getReturnInsnNode(List<AbstractInsnNode> instructions) {
+    for (int i = (instructions.size() - 1); i >= 0; i--) {
+      AbstractInsnNode insnNode = instructions.get(i);
+      int opcode = insnNode.getOpcode();
+
+      if (opcode == Opcodes.RET || (opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN)) {
+        return insnNode;
+      }
+    }
+
+    throw new RuntimeException(
+        "The predecessor of the exit node did not have a return instruction");
   }
 
   private boolean isCFD(int opcode) {
@@ -149,6 +187,20 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   private LabelNode getLabelNode() {
     Label label = new Label();
     return new LabelNode(label);
+  }
+
+  private InsnList getIPDExitNodeLoggingInsnList() {
+    InsnList loggingInsnList = new InsnList();
+
+    loggingInsnList.add(
+        new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
+    loggingInsnList.add(new LdcInsnNode("Exiting what is on the stack"));
+    loggingInsnList.add(
+        new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println",
+            "(Ljava/lang/String;)V",
+            false));
+
+    return loggingInsnList;
   }
 
   private InsnList getNewIPDLoggingInsnList(LabelNode labelNode, String labelPrefix,
@@ -206,7 +258,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   }
 
   private InsnList getCFDLoggingInsnList(String labelPrefix, int decisionCount) {
-    return getInsnList("Entering " + labelPrefix, decisionCount);
+    return this.getInsnList("Entering " + labelPrefix, decisionCount);
   }
 
   private InsnList getInsnList(String labelPrefix, int decisionCount) {

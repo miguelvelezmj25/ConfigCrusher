@@ -1,0 +1,18 @@
+digraph main {
+node [shape=record];
+1875112359 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/ReturnExample.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L2\l"];
+1901190557 [label="L3\lLINENUMBER 11 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting what is on the stack\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lRETURN\l"];
+466473730 [label="L5\lLINENUMBER 14 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting what is on the stack\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lRETURN\l"];
+525953416 [label="L2\lLINENUMBER 13 L2\lFRAME APPEND [I]\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/ReturnExample.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L4\l"];
+1811106066 [label="L4\lLINENUMBER 16 L4\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting what is on the stack\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lRETURN\lL6\l"];
+entry;
+exit;
+entry -> 1875112359;
+1875112359 -> 1901190557;
+1875112359 -> 525953416;
+1901190557 -> exit;
+466473730 -> exit;
+525953416 -> 466473730;
+525953416 -> 1811106066;
+1811106066 -> exit;
+}

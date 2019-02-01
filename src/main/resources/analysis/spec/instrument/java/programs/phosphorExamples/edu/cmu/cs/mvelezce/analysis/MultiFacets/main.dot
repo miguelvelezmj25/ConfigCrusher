@@ -1,0 +1,23 @@
+digraph main {
+node [shape=record];
+559384732 [label="L4\lFRAME APPEND [I I I]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/MultiFacets.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL6\lLINENUMBER 17 L6\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/MultiFacets.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L7\l"];
+244839708 [label="L8\lLINENUMBER 18 L8\lICONST_0\lISTORE 3\l"];
+876029877 [label="L11\lLINENUMBER 22 L11\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
+505323885 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 11 L2\lICONST_1\lISTORE 3\lL3\lLINENUMBER 13 L3\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/MultiFacets.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L4\l"];
+1709778181 [label="L7\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/MultiFacets.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL9\lLINENUMBER 21 L9\lILOAD 3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/MultiFacets.main([Ljava/lang/String;)V.2\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L10\l"];
+691620198 [label="L10\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/MultiFacets.main([Ljava/lang/String;)V.2\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL12\lLINENUMBER 25 L12\lRETURN\lL13\l"];
+1839813660 [label="L5\lLINENUMBER 14 L5\lICONST_0\lISTORE 2\l"];
+entry;
+exit;
+entry -> 505323885;
+559384732 -> 244839708;
+559384732 -> 1709778181;
+244839708 -> 1709778181;
+876029877 -> 691620198;
+505323885 -> 559384732;
+505323885 -> 1839813660;
+1709778181 -> 876029877;
+1709778181 -> 691620198;
+691620198 -> exit;
+1839813660 -> 559384732;
+}

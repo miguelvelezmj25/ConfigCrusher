@@ -1,0 +1,13 @@
+digraph unnecessaryMethod {
+node [shape=record];
+1363130483 [label="L0\lLINENUMBER 27 L0\lILOAD 0\lISTORE 1\lL1\lLINENUMBER 29 L1\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/Example6.unnecessaryMethod(I)I.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L2\l"];
+119202251 [label="L3\lLINENUMBER 30 L3\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting what is on the stack\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIRETURN\l"];
+709531076 [label="L2\lLINENUMBER 33 L2\lFRAME APPEND [I]\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting what is on the stack\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIRETURN\lL4\l"];
+entry;
+exit;
+1363130483 -> 119202251;
+1363130483 -> 709531076;
+entry -> 1363130483;
+119202251 -> exit;
+709531076 -> exit;
+}

@@ -1,0 +1,18 @@
+digraph main {
+node [shape=record];
+2091737737 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 10 L2\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.C_2 (Z)Z\lISTORE 3\lL3\lLINENUMBER 12 L3\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/VariabilityContext2.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L4\l"];
+90529124 [label="L5\lLINENUMBER 13 L5\lILOAD 3\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext2.foo (Z)V\l"];
+1451836841 [label="L7\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/VariabilityContext2.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL9\lLINENUMBER 19 L9\lRETURN\lL10\l"];
+587158481 [label="L4\lFRAME APPEND [I I I]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/VariabilityContext2.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL6\lLINENUMBER 16 L6\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/VariabilityContext2.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L7\l"];
+1093131483 [label="L8\lLINENUMBER 17 L8\lILOAD 3\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext2.foo (Z)V\l"];
+entry;
+exit;
+entry -> 2091737737;
+2091737737 -> 90529124;
+2091737737 -> 587158481;
+90529124 -> 587158481;
+1451836841 -> exit;
+587158481 -> 1451836841;
+587158481 -> 1093131483;
+1093131483 -> 1451836841;
+}

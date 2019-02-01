@@ -1,0 +1,13 @@
+digraph moo {
+node [shape=record];
+209109033 [label="L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/SimpleExample1.moo(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL3\lLINENUMBER 96 L3\lRETURN\lL4\l"];
+296662643 [label="L0\lLINENUMBER 93 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/SimpleExample1.moo(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
+658193 [label="L2\lLINENUMBER 94 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
+entry;
+exit;
+entry -> 296662643;
+209109033 -> exit;
+296662643 -> 209109033;
+296662643 -> 658193;
+658193 -> 209109033;
+}

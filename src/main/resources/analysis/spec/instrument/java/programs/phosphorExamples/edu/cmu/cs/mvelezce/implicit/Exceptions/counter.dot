@@ -1,0 +1,29 @@
+digraph counter {
+node [shape=record];
+1793899405 [label="L10\lLINENUMBER 86 L10\lALOAD 3\lACONST_NULL\lICONST_1\lINVOKESTATIC java/lang/Integer.valueOf (I)Ljava/lang/Integer;\lINVOKEINTERFACE java/util/Map.put (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;\lPOP\l"];
+1064905627 [label="INVOKESTATIC java/lang/System.currentTimeMillis ()J\lLLOAD 1\lLSUB\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.timeout : J\lLCMP\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Exceptions.counter(J)V.2\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L6\l"];
+1260440107 [label="L7\lLINENUMBER 82 L7\lNEW java/lang/RuntimeException\lDUP\lLDC \"Error\"\lINVOKESPECIAL java/lang/RuntimeException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1765702 [label="L9\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/implicit/Exceptions.counter(J)V.3\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL11\lLINENUMBER 80 L11\lIINC 4 1\lGOTO L2\l"];
+1543518287 [label="L0\lLINENUMBER 78 L0\lNEW java/util/LinkedHashMap\lDUP\lINVOKESPECIAL java/util/LinkedHashMap.\<init\> ()V\lASTORE 3\lL1\lLINENUMBER 80 L1\lICONST_0\lISTORE 4\l"];
+464872674 [label="L4\lLINENUMBER 81 L4\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.timeout : J\lLCONST_0\lLCMP\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Exceptions.counter(J)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFLE L5\l"];
+482307698 [label="L6\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/implicit/Exceptions.counter(J)V.2\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1659286984 [label="L3\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/implicit/Exceptions.counter(J)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL12\lLINENUMBER 90 L12\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.minAlpha : I\lINVOKESTATIC edu/columbia/cs/psl/phosphor/runtime/MultiTainter.getTaint (I)Ledu/columbia/cs/psl/phosphor/runtime/Taint;\lASTORE 4\lL13\lLINENUMBER 92 L13\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.timeout : J\lINVOKESTATIC edu/columbia/cs/psl/phosphor/runtime/MultiTainter.getTaint (J)Ledu/columbia/cs/psl/phosphor/runtime/Taint;\lASTORE 4\lL14\lLINENUMBER 94 L14\lRETURN\lL15\l"];
+2072130509 [label="L5\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/implicit/Exceptions.counter(J)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL8\lLINENUMBER 85 L8\lICONST_5\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Exceptions.minAlpha : I\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Exceptions.counter(J)V.3\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPLE L9\l"];
+998242313 [label="L2\lFRAME APPEND [java/util/LinkedHashMap I]\lILOAD 4\lICONST_5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Exceptions.counter(J)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPGE L3\l"];
+entry;
+exit;
+1765702 -> 998242313;
+1543518287 -> 998242313;
+464872674 -> 1064905627;
+464872674 -> 2072130509;
+482307698 -> 2072130509;
+1659286984 -> exit;
+2072130509 -> 1793899405;
+2072130509 -> 1765702;
+entry -> 1543518287;
+1793899405 -> 1765702;
+1064905627 -> 1260440107;
+1064905627 -> 482307698;
+998242313 -> 464872674;
+998242313 -> 1659286984;
+}

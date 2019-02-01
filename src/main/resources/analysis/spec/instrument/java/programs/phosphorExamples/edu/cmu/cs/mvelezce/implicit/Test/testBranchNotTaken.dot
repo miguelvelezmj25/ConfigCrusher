@@ -1,0 +1,28 @@
+digraph testBranchNotTaken {
+node [shape=record];
+1860222958 [label="L11\lLINENUMBER 79 L11\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+960487575 [label="L13\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.2\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL15\lLINENUMBER 86 L15\lILOAD 3\lSIPUSH 500\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.3\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPGE L16\l"];
+95924865 [label="L16\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.3\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL18\lLINENUMBER 89 L18\lRETURN\lL19\l"];
+1235436743 [label="L7\lLINENUMBER 74 L7\lSIPUSH 1000\lISTORE 3\lL8\lLINENUMBER 75 L8\lLDC \"example2\"\lASTORE 2\l"];
+1246343791 [label="L0\lLINENUMBER 66 L0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"\ntestBranchNotTaken\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL1\lLINENUMBER 67 L1\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 0\lL2\lLINENUMBER 68 L2\lLDC \"example2\"\lASTORE 1\lL3\lLINENUMBER 70 L3\lACONST_NULL\lASTORE 2\lL4\lLINENUMBER 71 L4\lBIPUSH 100\lISTORE 3\lL5\lLINENUMBER 73 L5\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L6\l"];
+1858301816 [label="L17\lLINENUMBER 87 L17\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1793662475 [label="L14\lLINENUMBER 83 L14\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lALOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1774039676 [label="L10\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL12\lLINENUMBER 82 L12\lALOAD 2\lALOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.2\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ACMPNE L13\l"];
+245047935 [label="L6\lFRAME FULL [I java/lang/String java/lang/String I] []\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL9\lLINENUMBER 78 L9\lALOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken()V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNULL L10\l"];
+entry;
+exit;
+1860222958 -> 1774039676;
+entry -> 1246343791;
+960487575 -> 95924865;
+960487575 -> 1858301816;
+95924865 -> exit;
+1235436743 -> 245047935;
+1246343791 -> 1235436743;
+1246343791 -> 245047935;
+1858301816 -> 95924865;
+1793662475 -> 960487575;
+1774039676 -> 960487575;
+1774039676 -> 1793662475;
+245047935 -> 1860222958;
+245047935 -> 1774039676;
+}

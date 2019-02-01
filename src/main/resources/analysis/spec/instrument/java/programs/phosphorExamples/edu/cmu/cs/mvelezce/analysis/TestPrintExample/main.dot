@@ -1,0 +1,20 @@
+digraph main {
+node [shape=record];
+965010099 [label="L4\lLINENUMBER 12 L4\lIINC 2 1\l"];
+1057444272 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lICONST_0\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/TestPrintExample.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L3\l"];
+2139268895 [label="L6\lLINENUMBER 18 L6\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
+901464042 [label="L3\lFRAME APPEND [I I]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/TestPrintExample.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL5\lLINENUMBER 14 L5\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/TestPrintExample.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L6\l"];
+1686247174 [label="L8\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/TestPrintExample.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL9\lLINENUMBER 20 L9\lRETURN\lL10\l"];
+2047734670 [label="L7\lLINENUMBER 15 L7\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lILOAD 2\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lGOTO L8\l"];
+entry;
+exit;
+entry -> 1057444272;
+965010099 -> 901464042;
+1057444272 -> 965010099;
+1057444272 -> 901464042;
+2139268895 -> 1686247174;
+901464042 -> 2139268895;
+901464042 -> 2047734670;
+1686247174 -> exit;
+2047734670 -> 1686247174;
+}

@@ -1,0 +1,21 @@
+digraph equals {
+node [shape=record];
+1166476526 [label="L1\lLINENUMBER 48 L1\lFRAME SAME\lALOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNULL L3\l"];
+363850700 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lICONST_1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting what is on the stack\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIRETURN\lL5\l"];
+98717829 [label="L0\lLINENUMBER 45 L0\lALOAD 0\lALOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ACMPNE L1\l"];
+1971738025 [label="L2\lLINENUMBER 46 L2\lICONST_1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting what is on the stack\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIRETURN\l"];
+1169346939 [label="ALOAD 0\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lALOAD 1\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z.2\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ACMPEQ L4\l"];
+1380177712 [label="L3\lLINENUMBER 49 L3\lFRAME SAME\lICONST_0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting what is on the stack\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIRETURN\l"];
+entry;
+exit;
+entry -> 98717829;
+1166476526 -> 1169346939;
+1166476526 -> 1380177712;
+363850700 -> exit;
+98717829 -> 1166476526;
+98717829 -> 1971738025;
+1971738025 -> exit;
+1169346939 -> 363850700;
+1169346939 -> 1380177712;
+1380177712 -> exit;
+}

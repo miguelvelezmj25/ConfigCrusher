@@ -18,19 +18,25 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleFor
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.jboss.util.file.Files;
 
 /**
  * Class to execute the programs that have been instrumented with code to perform subtrace
  * analysis.
  */ // TODO what do we return?
 public class SubtracesAnalysis extends BaseDynamicAnalysis<Object> {
+
+  private static final Map<Set<String>, List<String>> CONFIGS_TO_TRACES = new HashMap<>();
 
   public SubtracesAnalysis(String programName, Set<String> options) {
     super(programName, options, new HashSet<>());
@@ -42,9 +48,26 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Object> {
 
     for (Set<String> config : configs) {
       this.runProgram(config);
+      this.processResults(config);
     }
 
+    Files.delete(SubtracesLogging.RESULTS_FILE);
+
     throw new UnsupportedOperationException("Implement");
+  }
+
+  private void processResults(Set<String> config) throws IOException {
+    List<String> trace = this.getTrace();
+    CONFIGS_TO_TRACES.put(config, trace);
+  }
+
+  private List<String> getTrace() throws IOException {
+    try (FileInputStream fis = new FileInputStream(SubtracesLogging.RESULTS_FILE);
+        ObjectInputStream ois = new ObjectInputStream(fis)) {
+      return (List<String>) ois.readObject();
+    } catch (ClassNotFoundException cnfe) {
+      throw new RuntimeException("There was an error when processing the results", cnfe);
+    }
   }
 
   @Override

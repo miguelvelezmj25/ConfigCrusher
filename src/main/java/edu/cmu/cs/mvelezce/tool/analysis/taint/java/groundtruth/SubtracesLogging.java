@@ -1,5 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ public class SubtracesLogging {
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
 
   static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogging.class);
+  static final String RESULTS_FILE = "results.ser";
 
   static {
     Method[] methods = SubtracesLogging.class.getDeclaredMethods();
@@ -47,8 +51,19 @@ public class SubtracesLogging {
           "The stack that tracked entering and exiting decisions is not empty\n" + STACK);
     }
 
-    for (String element : TRACE) {
-      System.out.println(element);
+//    for (String element : TRACE) {
+//      System.out.println(element);
+//    }
+
+    try {
+      FileOutputStream fos = new FileOutputStream(RESULTS_FILE);
+      ObjectOutputStream oos = new ObjectOutputStream(fos);
+      oos.writeObject(TRACE);
+      oos.close();
+      fos.close();
+    }
+    catch (IOException ioe) {
+      throw new RuntimeException("There was an error serializing the results", ioe);
     }
   }
 

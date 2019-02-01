@@ -1,8 +1,8 @@
 digraph getYear {
 node [shape=record];
-882646447 [label="L0\lLINENUMBER 28 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.year : I\lIRETURN\lL1\l"];
+586207712 [label="L0\lLINENUMBER 28 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.year : I\lIRETURN\lL1\l"];
 entry;
 exit;
-entry -> 882646447;
-882646447 -> exit;
+entry -> 586207712;
+586207712 -> exit;
 }

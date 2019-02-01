@@ -1,21 +1,21 @@
 digraph equals {
 node [shape=record];
-1057468716 [label="L2\lLINENUMBER 46 L2\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitAtReturn ()V\lIRETURN\l"];
-1888924788 [label="ALOAD 0\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lALOAD 1\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIF_ACMPEQ L4\l"];
-1272051933 [label="L1\lLINENUMBER 48 L1\lFRAME SAME\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFNULL L3\l"];
-1016633682 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitAtReturn ()V\lIRETURN\lL5\l"];
-1041547629 [label="L3\lLINENUMBER 49 L3\lFRAME SAME\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitAtReturn ()V\lIRETURN\l"];
-1685407532 [label="L0\lLINENUMBER 45 L0\lALOAD 0\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIF_ACMPNE L1\l"];
+1815100636 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitAtReturn ()V\lIRETURN\lL5\l"];
+1066493943 [label="L0\lLINENUMBER 45 L0\lALOAD 0\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIF_ACMPNE L1\l"];
+1299153829 [label="L1\lLINENUMBER 48 L1\lFRAME SAME\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFNULL L3\l"];
+616331965 [label="L3\lLINENUMBER 49 L3\lFRAME SAME\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitAtReturn ()V\lIRETURN\l"];
+270929666 [label="ALOAD 0\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lALOAD 1\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIF_ACMPEQ L4\l"];
+1785910017 [label="L2\lLINENUMBER 46 L2\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitAtReturn ()V\lIRETURN\l"];
 entry;
 exit;
-1057468716 -> exit;
-1888924788 -> 1016633682;
-1888924788 -> 1041547629;
-entry -> 1685407532;
-1272051933 -> 1888924788;
-1272051933 -> 1041547629;
-1016633682 -> exit;
-1041547629 -> exit;
-1685407532 -> 1057468716;
-1685407532 -> 1272051933;
+1815100636 -> exit;
+entry -> 1066493943;
+1066493943 -> 1299153829;
+1066493943 -> 1785910017;
+1299153829 -> 616331965;
+1299153829 -> 270929666;
+616331965 -> exit;
+270929666 -> 1815100636;
+270929666 -> 616331965;
+1785910017 -> exit;
 }

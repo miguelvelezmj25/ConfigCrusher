@@ -1,8 +1,8 @@
 digraph <clinit> {
 node [shape=record];
-214777426 [label="L0\lLINENUMBER 10 L0\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lPUTSTATIC edu/cmu/cs/mvelezce/analysis/Align.IDSTOCOUNT : Ljava/util/Map;\lL1\lLINENUMBER 11 L1\lNEW java/util/ArrayDeque\lDUP\lINVOKESPECIAL java/util/ArrayDeque.\<init\> ()V\lPUTSTATIC edu/cmu/cs/mvelezce/analysis/Align.STACK : Ljava/util/Deque;\lRETURN\l"];
+938595680 [label="L0\lLINENUMBER 10 L0\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lPUTSTATIC edu/cmu/cs/mvelezce/analysis/Align.IDSTOCOUNT : Ljava/util/Map;\lL1\lLINENUMBER 11 L1\lNEW java/util/ArrayDeque\lDUP\lINVOKESPECIAL java/util/ArrayDeque.\<init\> ()V\lPUTSTATIC edu/cmu/cs/mvelezce/analysis/Align.STACK : Ljava/util/Deque;\lRETURN\l"];
 entry;
 exit;
-214777426 -> exit;
-entry -> 214777426;
+entry -> 938595680;
+938595680 -> exit;
 }

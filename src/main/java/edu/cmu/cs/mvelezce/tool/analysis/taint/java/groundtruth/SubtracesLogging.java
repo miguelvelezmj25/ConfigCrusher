@@ -5,6 +5,8 @@ import java.util.Deque;
 
 public class SubtracesLogging {
 
+  // TODO keep a counter to track the number of times that a label has been executed.
+  // TODO log the decision of the control-flow decision.
   private static final Deque<String> STACK = new ArrayDeque<>();
 
   public static void enterDecision(String labelPrefix, int decisionCount) {

@@ -1,18 +1,18 @@
 digraph main {
 node [shape=record];
-121426872 [label="L5\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\l"];
-1679939676 [label="L6\lLINENUMBER 13 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Some\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
-1745094828 [label="L3\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lL7\lLINENUMBER 18 L7\lRETURN\lL8\l"];
-1775322614 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L3\l"];
-1247678383 [label="L4\lLINENUMBER 12 L4\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L5\l"];
+1064154107 [label="L3\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lL7\lLINENUMBER 18 L7\lRETURN\lL8\l"];
+415565467 [label="L6\lLINENUMBER 13 L6\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Some\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\l"];
+1688782916 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L3\l"];
+1390301622 [label="L4\lLINENUMBER 12 L4\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L5\l"];
+973936431 [label="L5\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/implicit/Nested.main([Ljava/lang/String;)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\l"];
 entry;
 exit;
-121426872 -> 1745094828;
-entry -> 1775322614;
-1679939676 -> 121426872;
-1745094828 -> exit;
-1775322614 -> 1745094828;
-1775322614 -> 1247678383;
-1247678383 -> 121426872;
-1247678383 -> 1679939676;
+entry -> 1688782916;
+1064154107 -> exit;
+415565467 -> 973936431;
+1688782916 -> 1064154107;
+1688782916 -> 1390301622;
+1390301622 -> 415565467;
+1390301622 -> 973936431;
+973936431 -> 1064154107;
 }

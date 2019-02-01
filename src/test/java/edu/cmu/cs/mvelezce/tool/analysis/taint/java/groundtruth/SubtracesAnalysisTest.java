@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.return2Example.Return2Examp
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample.SimpleForExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleForExample3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -73,6 +74,20 @@ public class SubtracesAnalysisTest {
   public void Return2Example() throws IOException, InterruptedException {
     String programName = Return2ExampleAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(Return2ExampleAdapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis analysis = new SubtracesAnalysis(programName, options);
+    analysis.analyze(args);
+  }
+
+  @Test
+  public void Subtraces() throws IOException, InterruptedException {
+    String programName = SubtracesAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

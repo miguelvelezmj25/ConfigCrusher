@@ -1,8 +1,0 @@
-digraph <init> {
-node [shape=record];
-775574071 [label="L0\lLINENUMBER 7 L0\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lRETURN\lL1\l"];
-entry;
-exit;
-entry -> 775574071;
-775574071 -> exit;
-}

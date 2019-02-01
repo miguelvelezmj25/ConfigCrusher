@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 
 import java.util.*;
-
+// TODO check this class for the algorithms and returning null
 /**
  * Created by mvelezce on 5/3/17.
  */
@@ -88,6 +88,7 @@ public class MethodGraph {
         return this.blocksToDominators;
     }
 
+    @Nullable
     public MethodBlock getImmediateDominator(MethodBlock start) {
 //        System.out.println(this.toDotString("reverse"));
         this.getDominators();

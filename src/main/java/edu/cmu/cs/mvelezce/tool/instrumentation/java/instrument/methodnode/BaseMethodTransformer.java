@@ -43,6 +43,10 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     for (ClassNode classNode : classNodes) {
+      if (!classNode.name.contains("analysis/Example1")) { // TODO delme
+        continue;
+      }
+
       Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
 
       if (methodsToInstrument.isEmpty()) {
@@ -82,8 +86,7 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       try {
         prettyGraph.savePdfFile(this.getDebugDir(), this.getProgramName(), classNode.name,
             methodNode.name);
-      }
-      catch (InterruptedException e) {
+      } catch (InterruptedException e) {
         e.printStackTrace();
       }
     }

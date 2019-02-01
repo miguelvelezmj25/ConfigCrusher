@@ -19,6 +19,7 @@ import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.FieldInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.InsnNode;
+import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
@@ -192,13 +193,9 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   private InsnList getIPDExitNodeLoggingInsnList() {
     InsnList loggingInsnList = new InsnList();
 
-    loggingInsnList.add(
-        new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
-    loggingInsnList.add(new LdcInsnNode("Exiting what is on the stack"));
-    loggingInsnList.add(
-        new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println",
-            "(Ljava/lang/String;)V",
-            false));
+    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
+        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging",
+        "exitAtReturn", "()V", false));
 
     return loggingInsnList;
   }
@@ -207,7 +204,11 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
       int decisionCount) {
     InsnList loggingInsnList = new InsnList();
     loggingInsnList.add(labelNode);
-    loggingInsnList.add(this.getInsnList("Exiting " + labelPrefix, decisionCount));
+    loggingInsnList.add(new LdcInsnNode(labelPrefix));
+    loggingInsnList.add(new IntInsnNode(Opcodes.BIPUSH, decisionCount));
+    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
+        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging",
+        "exitDecision", "(Ljava/lang/String;I)V", false));
 
     return loggingInsnList;
   }
@@ -245,7 +246,6 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     while (insnListIter.hasNext()) {
       AbstractInsnNode insnNode = insnListIter.next();
 
-      // TODO check the counting with GOTOs
       if (!this.isCFD(insnNode.getOpcode())) {
         continue;
       }
@@ -258,19 +258,13 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   }
 
   private InsnList getCFDLoggingInsnList(String labelPrefix, int decisionCount) {
-    return this.getInsnList("Entering " + labelPrefix, decisionCount);
-  }
-
-  private InsnList getInsnList(String labelPrefix, int decisionCount) {
     InsnList loggingInsnList = new InsnList();
 
-    loggingInsnList.add(
-        new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
-    loggingInsnList.add(new LdcInsnNode(labelPrefix + "." + decisionCount));
-    loggingInsnList.add(
-        new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println",
-            "(Ljava/lang/String;)V",
-            false));
+    loggingInsnList.add(new LdcInsnNode(labelPrefix));
+    loggingInsnList.add(new IntInsnNode(Opcodes.BIPUSH, decisionCount));
+    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
+        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging",
+        "enterDecision", "(Ljava/lang/String;I)V", false));
 
     return loggingInsnList;
   }

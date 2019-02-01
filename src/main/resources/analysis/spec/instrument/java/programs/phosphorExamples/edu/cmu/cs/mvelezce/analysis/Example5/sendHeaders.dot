@@ -1,13 +1,13 @@
 digraph sendHeaders {
 node [shape=record];
-355281496 [label="L3\lLINENUMBER 35 L3\lGETSTATIC edu/cmu/cs/mvelezce/analysis/Example5.totalLength : I\lILOAD 0\lISUB\lISTORE 2\lL4\lLINENUMBER 36 L4\lLDC \"response header\"\lPUTSTATIC edu/cmu/cs/mvelezce/analysis/Example5.subject : Ljava/lang/String;\l"];
-1968209512 [label="L0\lLINENUMBER 33 L0\lICONST_0\lISTORE 2\lL1\lLINENUMBER 34 L1\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/Example5.sendHeaders(IZ)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L2\l"];
-1353890348 [label="L2\lFRAME APPEND [I]\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/Example5.sendHeaders(IZ)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL5\lLINENUMBER 42 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Done\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL6\lLINENUMBER 43 L6\lRETURN\lL7\l"];
+616662732 [label="L0\lLINENUMBER 33 L0\lICONST_0\lISTORE 2\lL1\lLINENUMBER 34 L1\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Example5.sendHeaders(IZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L2\l"];
+1517873123 [label="L3\lLINENUMBER 35 L3\lGETSTATIC edu/cmu/cs/mvelezce/analysis/Example5.totalLength : I\lILOAD 0\lISUB\lISTORE 2\lL4\lLINENUMBER 36 L4\lLDC \"response header\"\lPUTSTATIC edu/cmu/cs/mvelezce/analysis/Example5.subject : Ljava/lang/String;\l"];
+398685139 [label="L2\lFRAME APPEND [I]\lLDC \"edu/cmu/cs/mvelezce/analysis/Example5.sendHeaders(IZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lL5\lLINENUMBER 42 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Done\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL6\lLINENUMBER 43 L6\lRETURN\lL7\l"];
 entry;
 exit;
-355281496 -> 1353890348;
-entry -> 1968209512;
-1968209512 -> 355281496;
-1968209512 -> 1353890348;
-1353890348 -> exit;
+616662732 -> 1517873123;
+616662732 -> 398685139;
+1517873123 -> 398685139;
+entry -> 616662732;
+398685139 -> exit;
 }

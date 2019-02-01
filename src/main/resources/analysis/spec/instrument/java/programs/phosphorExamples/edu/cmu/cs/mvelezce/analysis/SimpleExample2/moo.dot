@@ -1,13 +1,13 @@
 digraph moo {
 node [shape=record];
-1827573597 [label="L2\lLINENUMBER 30 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
-1801746427 [label="L0\lLINENUMBER 29 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/SimpleExample2.moo(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
-1605770537 [label="L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/SimpleExample2.moo(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL3\lLINENUMBER 32 L3\lRETURN\lL4\l"];
+1497538476 [label="L0\lLINENUMBER 29 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample2.moo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L1\l"];
+1470772251 [label="L1\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample2.moo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 32 L3\lRETURN\lL4\l"];
+652481263 [label="L2\lLINENUMBER 30 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
 entry;
 exit;
-entry -> 1801746427;
-1827573597 -> 1605770537;
-1801746427 -> 1827573597;
-1801746427 -> 1605770537;
-1605770537 -> exit;
+entry -> 1497538476;
+1497538476 -> 1470772251;
+1497538476 -> 652481263;
+1470772251 -> exit;
+652481263 -> 1470772251;
 }

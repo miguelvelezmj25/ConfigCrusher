@@ -1,15 +1,15 @@
 digraph method {
 node [shape=record];
-1746458880 [label="L2\lFRAME SAME\lICONST_0\l"];
-860941277 [label="L0\lLINENUMBER 56 L0\lLDC \"22\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/Align.start (Ljava/lang/String;)V\lL1\lLINENUMBER 57 L1\lILOAD 0\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Entering edu/cmu/cs/mvelezce/analysis/Align.method(II)Z.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPGE L2\l"];
-345986913 [label="ICONST_1\lGOTO L3\l"];
-732118572 [label="L3\lFRAME SAME1 I\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Exiting edu/cmu/cs/mvelezce/analysis/Align.method(II)Z.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIRETURN\lL4\l"];
+2024635671 [label="L0\lLINENUMBER 56 L0\lLDC \"22\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/Align.start (Ljava/lang/String;)V\lL1\lLINENUMBER 57 L1\lILOAD 0\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Align.method(II)Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIF_ICMPGE L2\l"];
+162804020 [label="L3\lFRAME SAME1 I\lLDC \"edu/cmu/cs/mvelezce/analysis/Align.method(II)Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lIRETURN\lL4\l"];
+1963036880 [label="L2\lFRAME SAME\lICONST_0\l"];
+541004871 [label="ICONST_1\lGOTO L3\l"];
 entry;
 exit;
-1746458880 -> 732118572;
-entry -> 860941277;
-860941277 -> 1746458880;
-860941277 -> 345986913;
-345986913 -> 732118572;
-732118572 -> exit;
+2024635671 -> 1963036880;
+2024635671 -> 541004871;
+entry -> 2024635671;
+162804020 -> exit;
+1963036880 -> 162804020;
+541004871 -> 162804020;
 }

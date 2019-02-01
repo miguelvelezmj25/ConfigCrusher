@@ -1,15 +1,15 @@
 digraph hashCode {
 node [shape=record];
-1760763936 [label="L3\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I]\lICONST_0\l"];
-430983166 [label="L4\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I I]\lIADD\lISTORE 1\lL5\lLINENUMBER 69 L5\lILOAD 1\lIRETURN\lL6\l"];
-1083803390 [label="ICONST_1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L4\l"];
-881977454 [label="L0\lLINENUMBER 66 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lISTORE 1\lL1\lLINENUMBER 67 L1\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.year : I\lIADD\lISTORE 1\lL2\lLINENUMBER 68 L2\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L3\l"];
+1129387802 [label="L3\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I]\lICONST_0\l"];
+371440613 [label="L0\lLINENUMBER 66 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lISTORE 1\lL1\lLINENUMBER 67 L1\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.year : I\lIADD\lISTORE 1\lL2\lLINENUMBER 68 L2\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L3\l"];
+2062667107 [label="ICONST_1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L4\l"];
+1009218257 [label="L4\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I I]\lIADD\lISTORE 1\lL5\lLINENUMBER 69 L5\lILOAD 1\lIRETURN\lL6\l"];
 entry;
 exit;
-1760763936 -> 430983166;
-430983166 -> exit;
-entry -> 881977454;
-1083803390 -> 430983166;
-881977454 -> 1760763936;
-881977454 -> 1083803390;
+entry -> 371440613;
+1129387802 -> 1009218257;
+371440613 -> 1129387802;
+371440613 -> 2062667107;
+2062667107 -> 1009218257;
+1009218257 -> exit;
 }

@@ -1,13 +1,13 @@
 digraph foo {
 node [shape=record];
-1380976928 [label="L0\lLINENUMBER 25 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext.foo(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
-293474277 [label="L2\lLINENUMBER 26 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
-413373997 [label="L1\lLINENUMBER 28 L1\lFRAME SAME\lRETURN\lL3\l"];
+576020159 [label="L2\lLINENUMBER 26 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+921420643 [label="L1\lLINENUMBER 28 L1\lFRAME SAME\lRETURN\lL3\l"];
+690686166 [label="L0\lLINENUMBER 25 L0\lILOAD 0\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext.foo(Z)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 1380976928;
-1380976928 -> 293474277;
-1380976928 -> 413373997;
-293474277 -> 413373997;
-413373997 -> exit;
+576020159 -> 921420643;
+entry -> 690686166;
+921420643 -> exit;
+690686166 -> 576020159;
+690686166 -> 921420643;
 }

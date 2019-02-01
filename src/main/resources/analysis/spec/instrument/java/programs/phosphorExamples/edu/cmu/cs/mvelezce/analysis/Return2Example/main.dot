@@ -1,16 +1,16 @@
 digraph main {
 node [shape=record];
-1237550792 [label="L3\lLINENUMBER 13 L3\lFRAME SAME\lRETURN\lL4\l"];
-6750210 [label="ILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/Return2Example.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L3\l"];
-521081105 [label="L2\lLINENUMBER 11 L2\lFRAME APPEND [I]\lRETURN\l"];
-2005733474 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/Return2Example.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L2\l"];
+81009902 [label="ILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/Return2Example.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L3\l"];
+391618063 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 10 L1\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/Return2Example.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFNE L2\l"];
+57748372 [label="L2\lLINENUMBER 11 L2\lFRAME APPEND [I]\lRETURN\l"];
+674483268 [label="L3\lLINENUMBER 13 L3\lFRAME SAME\lRETURN\lL4\l"];
 entry;
 exit;
-entry -> 2005733474;
-1237550792 -> exit;
-6750210 -> 1237550792;
-6750210 -> 521081105;
-521081105 -> exit;
-2005733474 -> 6750210;
-2005733474 -> 521081105;
+entry -> 391618063;
+81009902 -> 57748372;
+81009902 -> 674483268;
+391618063 -> 81009902;
+391618063 -> 57748372;
+57748372 -> exit;
+674483268 -> exit;
 }

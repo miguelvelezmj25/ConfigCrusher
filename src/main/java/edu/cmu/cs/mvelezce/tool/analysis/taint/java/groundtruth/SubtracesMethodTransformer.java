@@ -76,16 +76,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
         continue;
       }
 
-      InsnList loggingInsnList = new InsnList();
-
-      loggingInsnList.add(
-          new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
-      loggingInsnList.add(new LdcInsnNode(labelPrefix + "." + decisionCount));
-      loggingInsnList.add(
-          new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println",
-              "(Ljava/lang/String;)V",
-              false));
-
+      InsnList loggingInsnList = this.getLoggingInsnsList(labelPrefix, decisionCount);
       insnList.insertBefore(insnNode, loggingInsnList);
 
       decisionCount++;
@@ -93,6 +84,21 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
     System.out.println();
   }
+
+  private InsnList getLoggingInsnsList(String labelPrefix, int decisionCount) {
+    InsnList loggingInsnList = new InsnList();
+
+    loggingInsnList.add(
+        new FieldInsnNode(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;"));
+    loggingInsnList.add(new LdcInsnNode(labelPrefix + "." + decisionCount));
+    loggingInsnList.add(
+        new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println",
+            "(Ljava/lang/String;)V",
+            false));
+
+    return loggingInsnList;
+  }
+
 
   public static class Builder {
 

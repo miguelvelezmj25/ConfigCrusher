@@ -1,0 +1,15 @@
+digraph method {
+node [shape=record];
+1944978632 [label="L2\lFRAME SAME\lICONST_0\l"];
+1631086936 [label="L0\lLINENUMBER 56 L0\lLDC \"22\"\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/Align.start (Ljava/lang/String;)V\lL1\lLINENUMBER 57 L1\lILOAD 0\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/Align.method(II)Z.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIF_ICMPGE L2\l"];
+1987169128 [label="ICONST_1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/Align.method(II)Z.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lGOTO L3\l"];
+1239183618 [label="L3\lFRAME SAME1 I\lIRETURN\lL4\l"];
+entry;
+exit;
+entry -> 1631086936;
+1944978632 -> 1239183618;
+1631086936 -> 1944978632;
+1631086936 -> 1987169128;
+1987169128 -> 1239183618;
+1239183618 -> exit;
+}

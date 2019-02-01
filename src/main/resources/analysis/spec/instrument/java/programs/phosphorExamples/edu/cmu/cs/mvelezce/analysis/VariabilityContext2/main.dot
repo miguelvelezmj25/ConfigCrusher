@@ -1,18 +1,18 @@
 digraph main {
 node [shape=record];
-1032986144 [label="L6\lLINENUMBER 19 L6\lFRAME SAME\lRETURN\lL8\l"];
-103887628 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 10 L2\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.C_2 (Z)Z\lISTORE 3\lL3\lLINENUMBER 12 L3\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext2.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L4\l"];
-205962452 [label="L5\lLINENUMBER 13 L5\lILOAD 3\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext2.foo (Z)V\l"];
-1123629720 [label="L4\lLINENUMBER 16 L4\lFRAME APPEND [I I I]\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext2.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L6\l"];
-842326585 [label="L7\lLINENUMBER 17 L7\lILOAD 3\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext2.foo (Z)V\l"];
+863748063 [label="L4\lLINENUMBER 16 L4\lFRAME APPEND [I I I]\lILOAD 2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext2.main([Ljava/lang/String;)V.1\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L6\l"];
+1389984438 [label="L7\lLINENUMBER 17 L7\lILOAD 3\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext2.foo (Z)V\l"];
+1407713529 [label="L5\lLINENUMBER 13 L5\lILOAD 3\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext2.foo (Z)V\l"];
+1302779492 [label="L6\lLINENUMBER 19 L6\lFRAME SAME\lRETURN\lL8\l"];
+177389135 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lALOAD 0\lICONST_1\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.B_1 (Z)Z\lISTORE 2\lL2\lLINENUMBER 10 L2\lALOAD 0\lICONST_2\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.C_2 (Z)Z\lISTORE 3\lL3\lLINENUMBER 12 L3\lILOAD 1\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext2.main([Ljava/lang/String;)V.0\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lIFEQ L4\l"];
 entry;
 exit;
-entry -> 103887628;
-1032986144 -> exit;
-103887628 -> 205962452;
-103887628 -> 1123629720;
-205962452 -> 1123629720;
-1123629720 -> 1032986144;
-1123629720 -> 842326585;
-842326585 -> 1032986144;
+863748063 -> 1389984438;
+863748063 -> 1302779492;
+1389984438 -> 1302779492;
+entry -> 177389135;
+1407713529 -> 863748063;
+1302779492 -> exit;
+177389135 -> 863748063;
+177389135 -> 1407713529;
 }

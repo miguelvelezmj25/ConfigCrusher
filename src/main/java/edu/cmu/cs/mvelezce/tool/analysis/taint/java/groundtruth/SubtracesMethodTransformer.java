@@ -16,9 +16,7 @@ import jdk.internal.org.objectweb.asm.Label;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
-import jdk.internal.org.objectweb.asm.tree.FieldInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
-import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
@@ -73,6 +71,38 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     this.instrumentCFDs(methodNode, labelPrefix);
     methodNode.visitMaxs(200, 200);
     this.instrumentIPDs(methodNode, classNode, labelPrefix);
+    this.instrumentEndMain(methodNode, classNode);
+  }
+
+  private void instrumentEndMain(MethodNode methodNode, ClassNode classNode) {
+    if (!methodNode.name.equals("main") || !methodNode.desc.equals("([Ljava/lang/String;)V")) {
+      return;
+    }
+
+    MethodGraph cfg = this.getCFG(methodNode, classNode);
+    MethodBlock exitBlock = cfg.getExitBlock();
+    Set<MethodBlock> preds = exitBlock.getPredecessors();
+
+    for (MethodBlock pred : preds) {
+      List<AbstractInsnNode> instructions = pred.getInstructions();
+      AbstractInsnNode returnInsnNode = this.getReturnInsnNode(instructions);
+      InsnList savingInstructions = this.getEndMainLogginInsnList();
+      methodNode.instructions.insertBefore(returnInsnNode, savingInstructions);
+    }
+  }
+
+  // TODO check that this logic works in methods with multiple returns
+  private InsnList getEndMainLogginInsnList() {
+    InsnList saveInsnList = new InsnList();
+
+    String methodName = "saveTrace";
+    String methodDescriptor = SubtracesLogging.getMethodDescriptor(methodName);
+
+    saveInsnList
+        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogging.INTERNAL_NAME,
+            methodName, methodDescriptor, false));
+
+    return saveInsnList;
   }
 
   private void instrumentIPDs(MethodNode methodNode, ClassNode classNode, String labelPrefix) {
@@ -193,9 +223,12 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   private InsnList getIPDExitNodeLoggingInsnList() {
     InsnList loggingInsnList = new InsnList();
 
-    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
-        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging",
-        "exitAtReturn", "()V", false));
+    String methodName = "exitAtReturn";
+    String methodDescriptor = SubtracesLogging.getMethodDescriptor(methodName);
+
+    loggingInsnList
+        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogging.INTERNAL_NAME,
+            methodName, methodDescriptor, false));
 
     return loggingInsnList;
   }
@@ -203,12 +236,15 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   private InsnList getNewIPDLoggingInsnList(LabelNode labelNode, String labelPrefix,
       int decisionCount) {
     InsnList loggingInsnList = new InsnList();
+
+    String methodName = "exitDecision";
+    String methodDescriptor = SubtracesLogging.getMethodDescriptor(methodName);
+
     loggingInsnList.add(labelNode);
     loggingInsnList.add(new LdcInsnNode(labelPrefix));
     loggingInsnList.add(new IntInsnNode(Opcodes.BIPUSH, decisionCount));
-    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
-        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging",
-        "exitDecision", "(Ljava/lang/String;I)V", false));
+    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogging.INTERNAL_NAME,
+        methodName, methodDescriptor, false));
 
     return loggingInsnList;
   }
@@ -260,11 +296,14 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   private InsnList getCFDLoggingInsnList(String labelPrefix, int decisionCount) {
     InsnList loggingInsnList = new InsnList();
 
+    String methodName = "enterDecision";
+    String methodDescriptor = SubtracesLogging.getMethodDescriptor(methodName);
+
     loggingInsnList.add(new LdcInsnNode(labelPrefix));
     loggingInsnList.add(new IntInsnNode(Opcodes.BIPUSH, decisionCount));
-    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC,
-        "edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging",
-        "enterDecision", "(Ljava/lang/String;I)V", false));
+    loggingInsnList.add(
+        new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogging.INTERNAL_NAME, methodName,
+            methodDescriptor, false));
 
     return loggingInsnList;
   }

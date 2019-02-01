@@ -1,15 +1,15 @@
 digraph hashCode {
 node [shape=record];
-181805309 [label="ICONST_1\lGOTO L4\l"];
-618204419 [label="L0\lLINENUMBER 66 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lISTORE 1\lL1\lLINENUMBER 67 L1\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.year : I\lIADD\lISTORE 1\lL2\lLINENUMBER 68 L2\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L3\l"];
-1796461912 [label="L3\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I]\lICONST_0\l"];
-473977770 [label="L4\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I I]\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lIADD\lISTORE 1\lL5\lLINENUMBER 69 L5\lILOAD 1\lIRETURN\lL6\l"];
+1775321846 [label="L0\lLINENUMBER 66 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lISTORE 1\lL1\lLINENUMBER 67 L1\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.year : I\lIADD\lISTORE 1\lL2\lLINENUMBER 68 L2\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L3\l"];
+1431852794 [label="ICONST_1\lGOTO L4\l"];
+1466366000 [label="L3\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I]\lICONST_0\l"];
+1320409804 [label="L4\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I I]\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lIADD\lISTORE 1\lL5\lLINENUMBER 69 L5\lILOAD 1\lIRETURN\lL6\l"];
 entry;
 exit;
-181805309 -> 473977770;
-entry -> 618204419;
-618204419 -> 181805309;
-618204419 -> 1796461912;
-1796461912 -> 473977770;
-473977770 -> exit;
+1775321846 -> 1431852794;
+1775321846 -> 1466366000;
+entry -> 1775321846;
+1431852794 -> 1320409804;
+1466366000 -> 1320409804;
+1320409804 -> exit;
 }

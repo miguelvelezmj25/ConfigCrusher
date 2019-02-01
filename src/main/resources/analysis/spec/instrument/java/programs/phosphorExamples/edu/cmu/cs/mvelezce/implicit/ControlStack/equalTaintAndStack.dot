@@ -1,18 +1,18 @@
 digraph equalTaintAndStack {
 node [shape=record];
-1179472741 [label="L1\lFRAME CHOP 1\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lL6\lLINENUMBER 31 L6\lRETURN\lL7\l"];
-749524318 [label="L4\lFRAME APPEND [I]\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\l"];
-943279555 [label="L2\lLINENUMBER 25 L2\lILOAD 1\lISTORE 2\lL3\lLINENUMBER 27 L3\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L4\l"];
-732559171 [label="L5\lLINENUMBER 28 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
-1567317309 [label="L0\lLINENUMBER 24 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L1\l"];
+960858222 [label="L5\lLINENUMBER 28 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+567367986 [label="L0\lLINENUMBER 24 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L1\l"];
+1722389892 [label="L1\lFRAME CHOP 1\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lL6\lLINENUMBER 31 L6\lRETURN\lL7\l"];
+309747389 [label="L4\lFRAME APPEND [I]\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\l"];
+963036793 [label="L2\lLINENUMBER 25 L2\lILOAD 1\lISTORE 2\lL3\lLINENUMBER 27 L3\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L4\l"];
 entry;
 exit;
-entry -> 1567317309;
-1179472741 -> exit;
-749524318 -> 1179472741;
-943279555 -> 749524318;
-943279555 -> 732559171;
-732559171 -> 749524318;
-1567317309 -> 1179472741;
-1567317309 -> 943279555;
+entry -> 567367986;
+960858222 -> 309747389;
+567367986 -> 1722389892;
+567367986 -> 963036793;
+1722389892 -> exit;
+309747389 -> 1722389892;
+963036793 -> 960858222;
+963036793 -> 309747389;
 }

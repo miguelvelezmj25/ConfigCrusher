@@ -1,8 +1,8 @@
 digraph <clinit> {
 node [shape=record];
-1506809545 [label="L0\lLINENUMBER 8 L0\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lPUTSTATIC edu/cmu/cs/mvelezce/TimerHelper.REGIONS_TO_TIME : Ljava/util/Map;\lRETURN\l"];
+1107024580 [label="L0\lLINENUMBER 8 L0\lNEW java/util/HashMap\lDUP\lINVOKESPECIAL java/util/HashMap.\<init\> ()V\lPUTSTATIC edu/cmu/cs/mvelezce/TimerHelper.REGIONS_TO_TIME : Ljava/util/Map;\lRETURN\l"];
 entry;
 exit;
-entry -> 1506809545;
-1506809545 -> exit;
+entry -> 1107024580;
+1107024580 -> exit;
 }

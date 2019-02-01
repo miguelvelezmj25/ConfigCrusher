@@ -29,7 +29,7 @@ import java.util.Set;
 /**
  * Class to execute the programs that have been instrumented with code to perform subtrace
  * analysis.
- */
+ */ // TODO what do we return?
 public class SubtracesAnalysis extends BaseDynamicAnalysis<Object> {
 
   public SubtracesAnalysis(String programName, Set<String> options) {

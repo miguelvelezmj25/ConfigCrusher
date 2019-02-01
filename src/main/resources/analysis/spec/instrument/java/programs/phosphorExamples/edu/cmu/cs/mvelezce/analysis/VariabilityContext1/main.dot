@@ -1,13 +1,13 @@
 digraph main {
 node [shape=record];
-938941445 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext1.main([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L3\l"];
-769172083 [label="L3\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext1.main([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lL6\lLINENUMBER 16 L6\lRETURN\lL7\l"];
-1540606524 [label="L4\lLINENUMBER 12 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext1.foo (Z)V\lL5\lLINENUMBER 13 L5\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext1.foo (Z)V\l"];
+57973803 [label="L4\lLINENUMBER 12 L4\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext1.foo (Z)V\lL5\lLINENUMBER 13 L5\lILOAD 2\lINVOKESTATIC edu/cmu/cs/mvelezce/analysis/VariabilityContext1.foo (Z)V\l"];
+1159395201 [label="L0\lLINENUMBER 8 L0\lALOAD 0\lICONST_0\lAALOAD\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lINVOKESTATIC edu/cmu/cs/mvelezce/taints/Sources.A_0 (Z)Z\lISTORE 1\lL1\lLINENUMBER 9 L1\lICONST_1\lISTORE 2\lL2\lLINENUMBER 11 L2\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext1.main([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L3\l"];
+853956690 [label="L3\lFRAME APPEND [I I]\lLDC \"edu/cmu/cs/mvelezce/analysis/VariabilityContext1.main([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lL6\lLINENUMBER 16 L6\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.saveTrace ()V\lRETURN\lL7\l"];
 entry;
 exit;
-938941445 -> 769172083;
-938941445 -> 1540606524;
-entry -> 938941445;
-769172083 -> exit;
-1540606524 -> 769172083;
+57973803 -> 853956690;
+entry -> 1159395201;
+1159395201 -> 57973803;
+1159395201 -> 853956690;
+853956690 -> exit;
 }

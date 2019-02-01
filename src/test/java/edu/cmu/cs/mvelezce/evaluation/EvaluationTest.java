@@ -18,7 +18,7 @@ import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.SPLatDelay;
 import edu.cmu.cs.mvelezce.evaluation.approaches.splatdelay.execute.SPLatDelayExecutor;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.RegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
@@ -899,7 +899,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -1167,7 +1167,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -1657,7 +1657,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -1927,7 +1927,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -2202,7 +2202,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -2456,7 +2456,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -2904,7 +2904,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -3159,7 +3159,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -3203,7 +3203,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -3238,7 +3238,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);
@@ -3316,7 +3316,7 @@ public class EvaluationTest {
     instrumenter.instrument(args);
     Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
 
-    Analysis analysis = new DefaultStaticAnalysis();
+    RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
     Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
 
     Executor executor = new ConfigCrusherExecutor(programName);

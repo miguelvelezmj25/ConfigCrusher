@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.evaluation.phosphor;
 import com.bpodgursky.jbool_expressions.Expression;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ExecVarCtx;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.SinkData;
@@ -379,14 +379,14 @@ public class PhosphorResultAnalyzer {
 
   private Map<JavaRegion, DecisionInfo> readSpecResults()
       throws IOException, InterruptedException {
-    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(this.programName);
+    DynamicRegionAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(this.programName);
     String[] args = new String[0];
     return analysis.analyze(args);
   }
 
   private Map<JavaRegion, SinkData> readPhosphorResults()
       throws IOException, InterruptedException {
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(this.programName);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(this.programName);
     String[] args = new String[0];
     return analysis.analyze(args);
   }

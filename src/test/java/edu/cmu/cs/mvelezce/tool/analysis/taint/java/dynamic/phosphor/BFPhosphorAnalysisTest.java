@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
@@ -52,7 +52,7 @@ public class BFPhosphorAnalysisTest {
         args[0] = "-saveres";
 //        args[1] = "-delres";
 
-        DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, mainClass,
+        DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, mainClass,
             options);
         Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
@@ -83,7 +83,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -98,7 +98,7 @@ public class BFPhosphorAnalysisTest {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
 
     String[] args = new String[0];
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
     PhosphorAnalysis.printProgramConstraints(read);
   }
@@ -113,7 +113,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -133,7 +133,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -153,7 +153,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -173,7 +173,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -188,7 +188,7 @@ public class BFPhosphorAnalysisTest {
     String programName = PhosphorExample3Adapter.PROGRAM_NAME;
 
     String[] args = new String[0];
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
     PhosphorAnalysis.printProgramConstraints(read);
   }
@@ -203,7 +203,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -218,7 +218,7 @@ public class BFPhosphorAnalysisTest {
     String programName = IfOr2Adapter.PROGRAM_NAME;
 
     String[] args = new String[0];
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
     PhosphorAnalysis.printProgramConstraints(read);
   }
@@ -233,7 +233,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -248,7 +248,7 @@ public class BFPhosphorAnalysisTest {
     String programName = OrContextAdapter.PROGRAM_NAME;
 
     String[] args = new String[0];
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
     PhosphorAnalysis.printProgramConstraints(read);
   }
@@ -263,7 +263,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -278,7 +278,7 @@ public class BFPhosphorAnalysisTest {
     String programName = OrContext2Adapter.PROGRAM_NAME;
 
     String[] args = new String[0];
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
     PhosphorAnalysis.printProgramConstraints(read);
   }
@@ -293,7 +293,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -308,7 +308,7 @@ public class BFPhosphorAnalysisTest {
     String programName = OrContext3Adapter.PROGRAM_NAME;
 
     String[] args = new String[0];
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
     PhosphorAnalysis.printProgramConstraints(read);
   }
@@ -323,7 +323,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -343,7 +343,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -363,7 +363,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -383,7 +383,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -403,7 +403,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -418,7 +418,7 @@ public class BFPhosphorAnalysisTest {
     String programName = PhosphorExample8Adapter.PROGRAM_NAME;
 
     String[] args = new String[0];
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
     PhosphorAnalysis.printProgramConstraints(read);
   }
@@ -433,7 +433,7 @@ public class BFPhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];

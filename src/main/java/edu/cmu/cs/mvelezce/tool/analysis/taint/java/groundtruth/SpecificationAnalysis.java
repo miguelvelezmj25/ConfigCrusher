@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
@@ -30,7 +30,7 @@ import java.util.Set;
 import org.jboss.util.file.Files;
 
 @Deprecated
-public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
+public class SpecificationAnalysis extends BaseDynamicRegionAnalysis<DecisionInfo> {
 
   private static final String APACHE_COMMONS_PATH =
       BaseAdapter.USER_HOME
@@ -222,7 +222,7 @@ public class SpecificationAnalysis extends BaseDynamicAnalysis<DecisionInfo> {
 
   @Override
   public String outputDir() {
-    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/gt";
+    return BaseDynamicRegionAnalysis.DIRECTORY + "/" + this.getProgramName() + "/gt";
   }
 
   private void runProgram(Set<String> config) throws IOException, InterruptedException {

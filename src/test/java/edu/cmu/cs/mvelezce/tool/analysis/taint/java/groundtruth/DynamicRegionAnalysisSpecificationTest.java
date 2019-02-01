@@ -2,7 +2,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
@@ -20,7 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 @Deprecated
-public class DynamicAnalysisSpecificationTest {
+public class DynamicRegionAnalysisSpecificationTest {
 
   private static final String MAIN_STRINGS_DECISION_1 = "main([Ljava/lang/String;)V.1";
   private static final String MAIN_STRINGS_DECISION_2 = "main([Ljava/lang/String;)V.2";
@@ -50,7 +50,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
+    DynamicRegionAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = DynamicRunningExampleAdapter.getListOfOptions();
@@ -119,7 +119,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
+    DynamicRegionAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = SimpleExample1Adapter.getListOfOptions();
@@ -375,7 +375,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
+    DynamicRegionAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = Example1Adapter.getListOfOptions();
@@ -444,7 +444,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
+    DynamicRegionAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = PhosphorExample2Adapter.getListOfOptions();
@@ -513,7 +513,7 @@ public class DynamicAnalysisSpecificationTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
+    DynamicRegionAnalysis<DecisionInfo> analysis = new SpecificationAnalysis(programName);
     Map<JavaRegion, DecisionInfo> decisionInfo = analysis.analyze(args);
 
     List<String> programOptions = MultiFacetsAdapter.getListOfOptions();

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.cc.TaintLabel;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
@@ -41,7 +41,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 
-public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
+public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
   private static final String PHOSPHOR_OUTPUT_DIR =
       BaseAdapter.USER_HOME
@@ -354,7 +354,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<SinkData> {
 
   @Override
   public String outputDir() {
-    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc";
+    return BaseDynamicRegionAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc";
   }
 
 //  static void removeAllSubConstraints(Set<Constraint> constraintsFromAnalysis,

@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
@@ -44,7 +44,7 @@ public class SpecificationAnalysisTest {
         args[0] = "-saveres";
 //        args[1] = "-delres";
 
-        DynamicAnalysis analysis = new SpecificationAnalysis(programName, mainClass, options);
+        DynamicRegionAnalysis analysis = new SpecificationAnalysis(programName, mainClass, options);
         Map write = analysis.analyze(args);
 
         args = new String[0];
@@ -75,7 +75,7 @@ public class SpecificationAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
+    DynamicRegionAnalysis analysis = new SpecificationAnalysis(programName, options);
     Map write = analysis.analyze(args);
 
     args = new String[0];
@@ -92,7 +92,7 @@ public class SpecificationAnalysisTest {
     // Program arguments
     String[] args = new String[0];
 
-    DynamicAnalysis analysis = new SpecificationAnalysis(programName);
+    DynamicRegionAnalysis analysis = new SpecificationAnalysis(programName);
     analysis.analyze(args);
   }
 
@@ -106,7 +106,7 @@ public class SpecificationAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
+    DynamicRegionAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -120,7 +120,7 @@ public class SpecificationAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
+    DynamicRegionAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -134,7 +134,7 @@ public class SpecificationAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
+    DynamicRegionAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -148,7 +148,7 @@ public class SpecificationAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
+    DynamicRegionAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -162,7 +162,7 @@ public class SpecificationAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
+    DynamicRegionAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 
@@ -176,7 +176,7 @@ public class SpecificationAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SpecificationAnalysis(programName, options);
+    DynamicRegionAnalysis analysis = new SpecificationAnalysis(programName, options);
     analysis.analyze(args);
   }
 }

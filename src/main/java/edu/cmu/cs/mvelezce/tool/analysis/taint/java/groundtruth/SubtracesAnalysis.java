@@ -2,8 +2,8 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
@@ -33,8 +33,8 @@ import org.jboss.util.file.Files;
 /**
  * Class to execute the programs that have been instrumented with code to perform subtrace
  * analysis.
- */ // TODO what do we return?
-public class SubtracesAnalysis extends BaseDynamicAnalysis<Object> {
+ */
+public class SubtracesAnalysis extends BaseDynamicAnalysis<Map<Set<String>, List<String>>> {
 
   private static final Map<Set<String>, List<String>> CONFIGS_TO_TRACES = new HashMap<>();
 
@@ -43,7 +43,7 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Object> {
   }
 
   @Override
-  public Map<JavaRegion, Object> analyze() throws IOException, InterruptedException {
+  public Map<Set<String>, List<String>> analyze() throws IOException, InterruptedException {
     Set<Set<String>> configs = Helper.getConfigurations(this.getOptions());
 
     for (Set<String> config : configs) {
@@ -53,7 +53,7 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Object> {
 
     Files.delete(SubtracesLogging.RESULTS_FILE);
 
-    throw new UnsupportedOperationException("Implement");
+    return CONFIGS_TO_TRACES;
   }
 
   private void processResults(Set<String> config) throws IOException {
@@ -71,7 +71,7 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Object> {
   }
 
   @Override
-  public Map<JavaRegion, Object> readFromFile(File file) throws IOException {
+  public Map<Set<String>, List<String>> readFromFile(File file) throws IOException {
     throw new UnsupportedOperationException("Implement");
   }
 

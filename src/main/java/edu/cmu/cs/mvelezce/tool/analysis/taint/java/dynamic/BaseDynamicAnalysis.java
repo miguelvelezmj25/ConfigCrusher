@@ -1,16 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
@@ -29,7 +22,7 @@ public abstract class BaseDynamicAnalysis<T> implements DynamicAnalysis<T> {
   }
 
   @Override
-  public Map<JavaRegion, T> analyze(String[] args) throws IOException, InterruptedException {
+  public T analyze(String[] args) throws IOException, InterruptedException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();
@@ -49,76 +42,31 @@ public abstract class BaseDynamicAnalysis<T> implements DynamicAnalysis<T> {
       return this.readFromFile(files.iterator().next());
     }
 
-    Map<JavaRegion, T> regionsToTypes = this.analyze();
+    T analysisResults = this.analyze();
 
     if (Options.checkIfSave()) {
-      this.writeToFile(regionsToTypes);
+      this.writeToFile(analysisResults);
     }
 
-    return regionsToTypes;
+    return analysisResults;
   }
 
   @Override
-  public void writeToFile(Map<JavaRegion, T> regionsToInfo) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
-    File file = new File(outputFile);
-    file.getParentFile().mkdirs();
-
-    List<RegionToInfo> decisionsAndInfos = new ArrayList<>();
-
-    for (Map.Entry<JavaRegion, T> entry : regionsToInfo.entrySet()) {
-      RegionToInfo<T> regionToInfo = new RegionToInfo<>(entry.getKey(), entry.getValue());
-      decisionsAndInfos.add(regionToInfo);
-    }
-
-    mapper.writeValue(file, decisionsAndInfos);
-  }
-
-  @Override
-  // TODO should this be static helper method?
-  public Map<Region, Set<Set<String>>> transform(
-      Map<? extends Region, Set<Set<String>>> regionsToOptionSet) {
+  public void writeToFile(T analysisResults) throws IOException {
     throw new UnsupportedOperationException("Implement");
-//        Map<Region, Set<Set<String>>> result = new HashMap<>();
+//    ObjectMapper mapper = new ObjectMapper();
+//    String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
+//    File file = new File(outputFile);
+//    file.getParentFile().mkdirs();
 //
-//        for(Map.Entry<? extends Region, Set<Set<String>>> entry : regionsToOptionSet.entrySet()) {
-//            Region region = new Region(entry.getKey().getRegionID());
-//            result.put(region, entry.getValue());
-//        }
+//    List<RegionToInfo> decisionsAndInfos = new ArrayList<>();
 //
-//        return result;
-//    return null;
-  }
-
-  protected int getDecisionOrder(String sink) {
-    int indexOfLastDot = sink.lastIndexOf(".");
-
-    return Integer.valueOf(sink.substring(indexOfLastDot + 1));
-  }
-
-  protected String getMethodSignature(String sink) {
-    int indexOfFirstDot = sink.indexOf(".");
-    int indexOfLastDot = sink.lastIndexOf(".");
-
-    return sink.substring(indexOfFirstDot + 1, indexOfLastDot);
-  }
-
-  protected String getClassName(String sink) {
-    int indexOfDot = sink.indexOf(".");
-    String packageAndClass = sink.substring(0, indexOfDot);
-    int indexOfLastSlash = packageAndClass.lastIndexOf("/");
-
-    return packageAndClass.substring(indexOfLastSlash + 1);
-  }
-
-  protected String getPackageName(String sink) {
-    int indexOfDot = sink.indexOf(".");
-    String packageAndClass = sink.substring(0, indexOfDot);
-    int indexOfLastSlash = packageAndClass.lastIndexOf("/");
-    String packageName = packageAndClass.substring(0, indexOfLastSlash);
-
-    return packageName.replace("/", ".");
+//    for (Map.Entry<JavaRegion, T> entry : analysisResults.entrySet()) {
+//      RegionToInfo<T> regionToInfo = new RegionToInfo<>(entry.getKey(), entry.getValue());
+//      decisionsAndInfos.add(regionToInfo);
+//    }
+//
+//    mapper.writeValue(file, decisionsAndInfos);
   }
 
   public String getProgramName() {

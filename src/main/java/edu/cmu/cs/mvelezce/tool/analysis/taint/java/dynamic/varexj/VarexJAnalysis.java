@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.varexj;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.region.Region;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.Constraint;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
@@ -19,7 +19,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
-public class VarexJAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
+public class VarexJAnalysis extends BaseDynamicRegionAnalysis<Set<Constraint>> {
 
   private static final String VAREXJ_OUTPUT_DIR =
       "/Users/mvelezce/Documents/Programming/Java/runtime-EclipseApplication/test/coverage.xml";
@@ -198,6 +198,6 @@ public class VarexJAnalysis extends BaseDynamicAnalysis<Set<Constraint>> {
 
   @Override
   public String outputDir() {
-    return BaseDynamicAnalysis.DIRECTORY + "/" + this.getProgramName() + "/varexj";
+    return BaseDynamicRegionAnalysis.DIRECTORY + "/" + this.getProgramName() + "/varexj";
   }
 }

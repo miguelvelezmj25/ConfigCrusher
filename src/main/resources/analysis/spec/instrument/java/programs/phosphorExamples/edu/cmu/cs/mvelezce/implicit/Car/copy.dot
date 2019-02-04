@@ -1,8 +1,8 @@
 digraph copy {
 node [shape=record];
-2080065202 [label="L0\lLINENUMBER 16 L0\lNEW edu/cmu/cs/mvelezce/implicit/Car\lDUP\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lSIPUSH 2019\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lINVOKESPECIAL edu/cmu/cs/mvelezce/implicit/Car.\<init\> (Ljava/lang/String;IZ)V\lARETURN\lL1\l"];
+95387183 [label="L0\lLINENUMBER 16 L0\lNEW edu/cmu/cs/mvelezce/implicit/Car\lDUP\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lSIPUSH 2019\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lINVOKESPECIAL edu/cmu/cs/mvelezce/implicit/Car.\<init\> (Ljava/lang/String;IZ)V\lARETURN\lL1\l"];
 entry;
 exit;
-entry -> 2080065202;
-2080065202 -> exit;
+entry -> 95387183;
+95387183 -> exit;
 }

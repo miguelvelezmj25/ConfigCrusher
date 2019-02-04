@@ -35,15 +35,15 @@ import org.jboss.util.file.Files;
  * Class to execute the programs that have been instrumented with code to perform subtrace
  * analysis.
  */
-public class SubtracesAnalysis extends BaseDynamicAnalysis<Map<Set<String>, List<String>>> {
+public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<String>, List<String>>> {
 
   private static final Map<Set<String>, List<String>> CONFIGS_TO_TRACES = new HashMap<>();
 
-  public SubtracesAnalysis(String programName, Set<String> options) {
+  public SubtracesAnalysisExecutor(String programName, Set<String> options) {
     super(programName, options, new HashSet<>());
   }
 
-  public SubtracesAnalysis(String programName) {
+  public SubtracesAnalysisExecutor(String programName) {
     this(programName, new HashSet<>());
   }
 
@@ -56,7 +56,7 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Map<Set<String>, List
       this.processResults(config);
     }
 
-    Files.delete(SubtracesLogging.RESULTS_FILE);
+    Files.delete(SubtracesLogger.RESULTS_FILE);
 
     return CONFIGS_TO_TRACES;
   }
@@ -67,7 +67,7 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Map<Set<String>, List
   }
 
   private List<String> getTrace() throws IOException {
-    try (FileInputStream fis = new FileInputStream(SubtracesLogging.RESULTS_FILE);
+    try (FileInputStream fis = new FileInputStream(SubtracesLogger.RESULTS_FILE);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
       return (List<String>) ois.readObject();
     } catch (ClassNotFoundException cnfe) {

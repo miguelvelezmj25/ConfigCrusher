@@ -34,7 +34,7 @@ public class TracesAlignerTest {
     String programName = SubtracesAdapter.PROGRAM_NAME;
     String[] args = new String[0];
 
-    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysis(programName);
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(programName);
     Map<Set<String>, List<String>> configsToTraces = analysis.analyze(args);
 
     args = new String[2];

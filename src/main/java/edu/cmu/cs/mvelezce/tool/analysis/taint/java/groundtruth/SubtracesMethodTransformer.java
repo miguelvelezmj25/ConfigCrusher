@@ -17,6 +17,7 @@ import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.InsnNode;
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.LabelNode;
@@ -69,9 +70,106 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
     String labelPrefix = classNode.name + "." + methodNode.name + methodNode.desc;
     this.instrumentCFDs(methodNode, labelPrefix);
+    this.instrumentCFDEval(methodNode);
     methodNode.visitMaxs(200, 200);
     this.instrumentIPDs(methodNode, classNode, labelPrefix);
     this.instrumentEndMain(methodNode, classNode);
+  }
+
+  private void instrumentCFDEval(MethodNode methodNode) {
+    InsnList insnList = methodNode.instructions;
+    ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
+
+    while (insnListIter.hasNext()) {
+      AbstractInsnNode insnNode = insnListIter.next();
+
+      if (!this.isCFD(insnNode.getOpcode())) {
+        continue;
+      }
+
+      InsnList loggingInsnList = this.getCFDEvalLoggingInsnList(insnNode.getOpcode());
+      insnList.insertBefore(insnNode, loggingInsnList);
+    }
+  }
+
+  private InsnList getCFDEvalLoggingInsnList(int opcode) {
+    InsnList loggingInsnList;
+
+    switch (opcode) {
+      case Opcodes.IFEQ:
+        loggingInsnList = this.getIF_COND_LoggingInsnList("logIFEQEval");
+        break;
+      case Opcodes.IFNE:
+        loggingInsnList = this.getIF_COND_LoggingInsnList("logIFNEEval");
+        break;
+      case Opcodes.IFLT:
+        loggingInsnList = this.getIF_COND_LoggingInsnList("logIFLTEval");
+        break;
+      case Opcodes.IFGE:
+        loggingInsnList = this.getIF_COND_LoggingInsnList("logIFGEEval");
+        break;
+      case Opcodes.IFGT:
+        loggingInsnList = this.getIF_COND_LoggingInsnList("logIFGTEval");
+        break;
+      case Opcodes.IFLE:
+        loggingInsnList = this.getIF_COND_LoggingInsnList("logIFLEEval");
+        break;
+      case Opcodes.IF_ICMPEQ:
+        loggingInsnList = this.getIF_XXMP_COND_LoggingInsnList("logIF_ICMPEQEval");
+        break;
+      case Opcodes.IF_ICMPNE:
+        loggingInsnList = this.getIF_XXMP_COND_LoggingInsnList("logIF_ICMPNEEval");
+        break;
+      case Opcodes.IF_ICMPLT:
+        loggingInsnList = this.getIF_XXMP_COND_LoggingInsnList("logIF_ICMPLTEval");
+        break;
+      case Opcodes.IF_ICMPGE:
+        loggingInsnList = this.getIF_XXMP_COND_LoggingInsnList("logIF_ICMPGEEval");
+        break;
+      case Opcodes.IF_ICMPGT:
+        loggingInsnList = this.getIF_XXMP_COND_LoggingInsnList("logIF_ICMPGTEval");
+        break;
+      case Opcodes.IF_ICMPLE:
+        loggingInsnList = this.getIF_XXMP_COND_LoggingInsnList("logIF_ICMPLEEval");
+        break;
+      case Opcodes.IF_ACMPEQ:
+        loggingInsnList = getIF_XXMP_COND_LoggingInsnList("logIF_ACMPEQEval");
+        break;
+      case Opcodes.IF_ACMPNE:
+        loggingInsnList = getIF_XXMP_COND_LoggingInsnList("logIF_ACMPNEEval");
+        break;
+      case Opcodes.IFNULL:
+        loggingInsnList = getIF_COND_LoggingInsnList("logIFNULLEval");
+        break;
+      case Opcodes.IFNONNULL:
+        loggingInsnList = getIF_COND_LoggingInsnList("logIFNONNULLEval");
+        break;
+      default:
+        throw new UnsupportedOperationException("Implement opcode: " + opcode);
+    }
+
+    return loggingInsnList;
+  }
+
+  private InsnList getIF_COND_LoggingInsnList(String methodName) {
+    return getCFGEvalInsnList(methodName, Opcodes.DUP);
+  }
+
+  private InsnList getIF_XXMP_COND_LoggingInsnList(String methodName) {
+    return getCFGEvalInsnList(methodName, Opcodes.DUP2);
+  }
+
+  private InsnList getCFGEvalInsnList(String methodName, int dupOpcode) {
+    InsnList loggingInsnList = new InsnList();
+
+    String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
+
+    loggingInsnList.add(new InsnNode(dupOpcode));
+    loggingInsnList.add(
+        new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME, methodName,
+            methodDescriptor, false));
+
+    return loggingInsnList;
   }
 
   private void instrumentEndMain(MethodNode methodNode, ClassNode classNode) {
@@ -96,10 +194,10 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     InsnList saveInsnList = new InsnList();
 
     String methodName = "saveTrace";
-    String methodDescriptor = SubtracesLogging.getMethodDescriptor(methodName);
+    String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
 
     saveInsnList
-        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogging.INTERNAL_NAME,
+        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
             methodName, methodDescriptor, false));
 
     return saveInsnList;
@@ -211,6 +309,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   }
 
   private boolean isCFD(int opcode) {
+    // TODO add table switch, lookup switch
     return (opcode >= Opcodes.IFEQ && opcode <= Opcodes.IF_ACMPNE) || opcode == Opcodes.IFNULL
         || opcode == Opcodes.IFNONNULL;
   }
@@ -224,10 +323,10 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     InsnList loggingInsnList = new InsnList();
 
     String methodName = "exitAtReturn";
-    String methodDescriptor = SubtracesLogging.getMethodDescriptor(methodName);
+    String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
 
     loggingInsnList
-        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogging.INTERNAL_NAME,
+        .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
             methodName, methodDescriptor, false));
 
     return loggingInsnList;
@@ -238,12 +337,12 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     InsnList loggingInsnList = new InsnList();
 
     String methodName = "exitDecision";
-    String methodDescriptor = SubtracesLogging.getMethodDescriptor(methodName);
+    String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
 
     loggingInsnList.add(labelNode);
     loggingInsnList.add(new LdcInsnNode(labelPrefix));
     loggingInsnList.add(new IntInsnNode(Opcodes.BIPUSH, decisionCount));
-    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogging.INTERNAL_NAME,
+    loggingInsnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
         methodName, methodDescriptor, false));
 
     return loggingInsnList;
@@ -297,12 +396,12 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     InsnList loggingInsnList = new InsnList();
 
     String methodName = "enterDecision";
-    String methodDescriptor = SubtracesLogging.getMethodDescriptor(methodName);
+    String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
 
     loggingInsnList.add(new LdcInsnNode(labelPrefix));
     loggingInsnList.add(new IntInsnNode(Opcodes.BIPUSH, decisionCount));
     loggingInsnList.add(
-        new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogging.INTERNAL_NAME, methodName,
+        new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME, methodName,
             methodDescriptor, false));
 
     return loggingInsnList;

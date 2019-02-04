@@ -15,7 +15,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SubtracesAnalysisTest {
+public class SubtracesAnalysisExecutorTest {
 
   @Test
   public void Example1() throws IOException, InterruptedException {
@@ -27,7 +27,7 @@ public class SubtracesAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SubtracesAnalysis(programName, options);
+    DynamicAnalysis analysis = new SubtracesAnalysisExecutor(programName, options);
     analysis.analyze(args);
   }
 
@@ -41,7 +41,7 @@ public class SubtracesAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SubtracesAnalysis(programName, options);
+    DynamicAnalysis analysis = new SubtracesAnalysisExecutor(programName, options);
     analysis.analyze(args);
   }
 
@@ -55,7 +55,7 @@ public class SubtracesAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SubtracesAnalysis(programName, options);
+    DynamicAnalysis analysis = new SubtracesAnalysisExecutor(programName, options);
     analysis.analyze(args);
   }
 
@@ -69,7 +69,7 @@ public class SubtracesAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SubtracesAnalysis(programName, options);
+    DynamicAnalysis analysis = new SubtracesAnalysisExecutor(programName, options);
     analysis.analyze(args);
   }
 
@@ -83,7 +83,7 @@ public class SubtracesAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis analysis = new SubtracesAnalysis(programName, options);
+    DynamicAnalysis analysis = new SubtracesAnalysisExecutor(programName, options);
     analysis.analyze(args);
   }
 
@@ -97,13 +97,13 @@ public class SubtracesAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysis(programName,
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(programName,
         options);
     Map<Set<String>, List<String>> write = analysis.analyze(args);
 
     args = new String[0];
 
-    analysis = new SubtracesAnalysis(programName);
+    analysis = new SubtracesAnalysisExecutor(programName);
     Map<Set<String>, List<String>> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);

@@ -1,13 +1,13 @@
 digraph moo {
 node [shape=record];
-840095827 [label="L2\lLINENUMBER 94 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
-1959219756 [label="L1\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.moo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 96 L3\lRETURN\lL4\l"];
-383882703 [label="L0\lLINENUMBER 93 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.moo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogging.enterDecision (Ljava/lang/String;I)V\lIFEQ L1\l"];
+695650897 [label="L0\lLINENUMBER 93 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.moo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+1795758738 [label="L1\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.moo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 96 L3\lRETURN\lL4\l"];
+1771486148 [label="L2\lLINENUMBER 94 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
 entry;
 exit;
-840095827 -> 1959219756;
-entry -> 383882703;
-1959219756 -> exit;
-383882703 -> 840095827;
-383882703 -> 1959219756;
+entry -> 695650897;
+695650897 -> 1795758738;
+695650897 -> 1771486148;
+1795758738 -> exit;
+1771486148 -> 1795758738;
 }

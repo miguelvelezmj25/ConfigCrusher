@@ -12,22 +12,24 @@ import java.util.List;
 import java.util.Map;
 import jdk.internal.org.objectweb.asm.Type;
 
-public class SubtracesLogging {
+public class SubtracesLogger {
 
   // TODO keep a counter to track the number of times that a label has been executed.
   // TODO log the decision of the control-flow decision.
   private static final String ENTER_DECISION = "Enter ";
   private static final String EXIT_DECISION = "Exit ";
+  private static final String FALSE = "FALSE";
+  private static final String TRUE = "TRUE";
 
   private static final Deque<String> STACK = new ArrayDeque<>();
   private static final List<String> TRACE = new ArrayList<>(100);
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
 
-  static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogging.class);
+  static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogger.class);
   static final String RESULTS_FILE = "results.ser";
 
   static {
-    Method[] methods = SubtracesLogging.class.getDeclaredMethods();
+    Method[] methods = SubtracesLogger.class.getDeclaredMethods();
 
     for (Method method : methods) {
       METHODS_TO_DESCRIPTORS.put(method.getName(), Type.getMethodDescriptor(method));
@@ -50,10 +52,6 @@ public class SubtracesLogging {
       throw new RuntimeException(
           "The stack that tracked entering and exiting decisions is not empty\n" + STACK);
     }
-
-//    for (String element : TRACE) {
-//      System.out.println(element);
-//    }
 
     try {
       FileOutputStream fos = new FileOutputStream(RESULTS_FILE);
@@ -92,6 +90,150 @@ public class SubtracesLogging {
     while (!STACK.isEmpty()) {
       String label = EXIT_DECISION + STACK.removeFirst();
       TRACE.add(label);
+    }
+  }
+
+  public static void logIFEQEval(int value) {
+    if (value == 0) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIFNEEval(int value) {
+    if (value != 0) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIFLTEval(int value) {
+    if (value < 0) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIFGEEval(int value) {
+    if (value >= 0) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIFGTEval(int value) {
+    if (value > 0) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIFLEEval(int value) {
+    if (value <= 0) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIF_ICMPEQEval(int v1, int v2) {
+    if (v1 == v2) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIF_ICMPNEEval(int v1, int v2) {
+    if (v1 != v2) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIF_ICMPLTEval(int v1, int v2) {
+    if (v1 < v2) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIF_ICMPGEEval(int v1, int v2) {
+    if (v1 >= v2) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIF_ICMPGTEval(int v1, int v2) {
+    if (v1 > v2) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIF_ICMPLEEval(int v1, int v2) {
+    if (v1 <= v2) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIF_ACMPEQEval(Object o1, Object o2) {
+    if (o1 == o2) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIF_ACMPNEEval(Object o1, Object o2) {
+    if (o1 != o2) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIFNULLEval(Object object) {
+    if (object == null) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
+    }
+  }
+
+  public static void logIFNONNULLEval(Object object) {
+    if (object != null) {
+      TRACE.add(TRUE);
+    }
+    else {
+      TRACE.add(FALSE);
     }
   }
 

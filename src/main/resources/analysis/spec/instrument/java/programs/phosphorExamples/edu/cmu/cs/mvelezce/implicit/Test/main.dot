@@ -1,8 +1,8 @@
 digraph main {
 node [shape=record];
-1404865662 [label="L0\lLINENUMBER 9 L0\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons ()V\lL1\lLINENUMBER 10 L1\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken ()V\lL2\lLINENUMBER 11 L2\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testImplicitFlows ()V\lL3\lLINENUMBER 12 L3\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testFields1 ()V\lL4\lLINENUMBER 13 L4\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testFields2 ()V\lL5\lLINENUMBER 15 L5\lRETURN\lL6\l"];
+1404149919 [label="L0\lLINENUMBER 9 L0\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testAllTypesOfComparisons ()V\lL1\lLINENUMBER 10 L1\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testBranchNotTaken ()V\lL2\lLINENUMBER 11 L2\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testImplicitFlows ()V\lL3\lLINENUMBER 12 L3\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testFields1 ()V\lL4\lLINENUMBER 13 L4\lINVOKESTATIC edu/cmu/cs/mvelezce/implicit/Test.testFields2 ()V\lL5\lLINENUMBER 15 L5\lRETURN\lL6\l"];
 entry;
 exit;
-1404865662 -> exit;
-entry -> 1404865662;
+entry -> 1404149919;
+1404149919 -> exit;
 }

@@ -25,43 +25,63 @@ public class TraceAligner {
     // TODO encode entries as chars.
   }
 
-  // TODO delme, just testing the alignment of strings
-  public static void align(String x, String y) {
-    StringsComparator comparator = new StringsComparator(x, y);
+  // TODO make private. Only for testing
+  public static String alignStrings(Set<String> strings) {
+    String alignedString = "";
+
+    for (String string : strings) {
+      alignedString = TraceAligner.alignStrings(alignedString, string);
+    }
+
+    return alignedString;
+  }
+
+  private static String alignStrings(String s1, String s2) {
+    StringsComparator comparator = new StringsComparator(s1, s2);
     EditScript<Character> script = comparator.getScript();
 
-    LongestCommonSubSequence lcs = new LongestCommonSubSequence();
-    script.visit(lcs);
-    System.out.println(lcs.lcs);
-    System.out.println(lcs.all);
+    LongestCommonSubSequenceVisitor lcsVisitor = new LongestCommonSubSequenceVisitor();
+    script.visit(lcsVisitor);
+
+    return listOfCharsToString(lcsVisitor.allChars);
+  }
+
+  private static String listOfCharsToString(List<Character> allChars) {
+    StringBuilder stringBuilder = new StringBuilder();
+
+    for (Character character : allChars) {
+      stringBuilder.append(character);
+    }
+
+    return stringBuilder.toString();
   }
 
   private char generateRandomChar() {
     return (char) RANDOM.nextInt(CHAR_MAX_VALUE);
   }
 
-  private static class LongestCommonSubSequence implements CommandVisitor<Character> {
+  private static class LongestCommonSubSequenceVisitor implements CommandVisitor<Character> {
 
-    private final List<Character> lcs = new ArrayList<>();
-    private final List<Character> all = new ArrayList<>();
+    // TODO names
+//    private final List<Character> lcs = new ArrayList<>();
+    private final List<Character> allChars = new ArrayList<>();
 
     @Override
     public void visitInsertCommand(Character c) {
-      System.out.println("insert from second string " + c);
-      all.add(c);
+//      System.out.println("insert from second string " + c);
+      allChars.add(c);
     }
 
     @Override
     public void visitKeepCommand(Character c) {
-      System.out.println("keep from first string " + c);
-      lcs.add(c);
-      all.add(c);
+//      System.out.println("keep from first string " + c);
+      allChars.add(c);
     }
 
     @Override
     public void visitDeleteCommand(Character c) {
-      System.out.println("delete from first string " + c);
-      all.add(c);
+//      System.out.println("delete from first string " + c);
+      allChars.add(c);
     }
   }
 

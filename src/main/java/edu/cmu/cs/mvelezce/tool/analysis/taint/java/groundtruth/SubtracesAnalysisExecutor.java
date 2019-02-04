@@ -108,7 +108,7 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
 
   @Override
   public String outputDir() {
-    return Options.DIRECTORY + "/analysis/spec/subtraces/java/programs/" + this.getProgramName();
+    return Options.DIRECTORY + "/analysis/spec/traces/java/programs/" + this.getProgramName();
   }
 
   private void runProgram(Set<String> config) throws IOException, InterruptedException {

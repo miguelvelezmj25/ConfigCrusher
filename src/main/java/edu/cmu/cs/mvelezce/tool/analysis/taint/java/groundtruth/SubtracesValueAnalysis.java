@@ -18,7 +18,7 @@ import org.apache.commons.io.FileUtils;
 /**
  * Analyses what value each subtrace has.
  */
-public class SubtracesValueAnalysis implements Analysis<Set<ConfigLabelValueInfo>> {
+public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueInfo>> {
 
   private final String programName;
   private final Map<Set<String>, List<String>> configsToTraces;
@@ -38,33 +38,33 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigLabelValueInfo
   }
 
   @Override
-  public Set<ConfigLabelValueInfo> analyze() {
-    Set<ConfigLabelValueInfo> configLabelValues = new HashSet<>();
+  public Set<ConfigSubtraceValueInfo> analyze() {
+    Set<ConfigSubtraceValueInfo> configSubtraceValues = new HashSet<>();
 
     for (Map.Entry<Set<String>, List<String>> entry : this.configsToTraces.entrySet()) {
       Set<String> config = entry.getKey();
       List<String> trace = entry.getValue();
 
-      Map<String, String> labelsToValues = this.getLabelsToValues(trace);
+      Map<String, String> subtracesToValues = this.getSubtracesToValues(trace);
 
-      ConfigLabelValueInfo configLabelValue = new ConfigLabelValueInfo(config, labelsToValues);
-      configLabelValues.add(configLabelValue);
+      ConfigSubtraceValueInfo configSubtraceValue = new ConfigSubtraceValueInfo(config, subtracesToValues);
+      configSubtraceValues.add(configSubtraceValue);
     }
 
-    return configLabelValues;
+    return configSubtraceValues;
   }
 
-  private Map<String, String> getLabelsToValues(List<String> trace) {
-    Map<String, String> labelsToValues = new HashMap<>();
+  private Map<String, String> getSubtracesToValues(List<String> trace) {
+    Map<String, String> subtracesToValues = new HashMap<>();
 
-    for (String label : this.alignedTrace) {
-      labelsToValues.put(label, "");
+    for (String subtrace : this.alignedTrace) {
+      subtracesToValues.put(subtrace, "");
     }
 
     Map<String, Integer> subtracesToIndexes = this.getSubtracesToIndexes(trace);
 
-    for (String label : this.alignedTrace) {
-      int index = subtracesToIndexes.getOrDefault(label, -1);
+    for (String subtrace : this.alignedTrace) {
+      int index = subtracesToIndexes.getOrDefault(subtrace, -1);
 
       if (index < 0 || index == (trace.size() - 1)) {
         continue;
@@ -73,12 +73,12 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigLabelValueInfo
       String subtraces = trace.get(index + 1);
 
       if (!subtraces.startsWith(SubtracesLogger.LABEL)) {
-        labelsToValues.put(label, subtraces);
+        subtracesToValues.put(subtrace, subtraces);
       }
 
     }
 
-    return labelsToValues;
+    return subtracesToValues;
 
   }
 
@@ -93,7 +93,7 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigLabelValueInfo
   }
 
   @Override
-  public Set<ConfigLabelValueInfo> analyze(String[] args) throws IOException {
+  public Set<ConfigSubtraceValueInfo> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();
@@ -113,31 +113,31 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigLabelValueInfo
       return this.readFromFile(files.iterator().next());
     }
 
-    Set<ConfigLabelValueInfo> configLabelValues = this.analyze();
+    Set<ConfigSubtraceValueInfo> configSubtraceValues = this.analyze();
 
     if (Options.checkIfSave()) {
-      this.writeToFile(configLabelValues);
+      this.writeToFile(configSubtraceValues);
     }
 
-    return configLabelValues;
+    return configSubtraceValues;
   }
 
   @Override
-  public Set<ConfigLabelValueInfo> readFromFile(File file) throws IOException {
+  public Set<ConfigSubtraceValueInfo> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
-    return mapper.readValue(file, new TypeReference<Set<ConfigLabelValueInfo>>() {
+    return mapper.readValue(file, new TypeReference<Set<ConfigSubtraceValueInfo>>() {
     });
   }
 
   @Override
-  public void writeToFile(Set<ConfigLabelValueInfo> configLabelValues) throws IOException {
+  public void writeToFile(Set<ConfigSubtraceValueInfo> configTraceValues) throws IOException {
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
 
     ObjectMapper mapper = new ObjectMapper();
-    mapper.writeValue(file, configLabelValues);
+    mapper.writeValue(file, configTraceValues);
   }
 
   @Override

@@ -3,26 +3,26 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 import java.util.Map;
 import java.util.Set;
 
-public class ConfigLabelValueInfo {
+public class ConfigSubtraceValueInfo {
 
   private Set<String> config;
-  private Map<String, String> labelsToValues;
+  private Map<String, String> subtracesToValues;
 
   // Dummy constructor needed for jackson xml
-  private ConfigLabelValueInfo() {
+  private ConfigSubtraceValueInfo() {
   }
 
-  public ConfigLabelValueInfo(Set<String> config, Map<String, String> labelsToValues) {
+  public ConfigSubtraceValueInfo(Set<String> config, Map<String, String> subtracesToValues) {
     this.config = config;
-    this.labelsToValues = labelsToValues;
+    this.subtracesToValues = subtracesToValues;
   }
 
   public Set<String> getConfig() {
     return config;
   }
 
-  public Map<String, String> getLabelsToValues() {
-    return labelsToValues;
+  public Map<String, String> getSubtracesToValues() {
+    return subtracesToValues;
   }
 
   @Override
@@ -34,18 +34,18 @@ public class ConfigLabelValueInfo {
       return false;
     }
 
-    ConfigLabelValueInfo that = (ConfigLabelValueInfo) o;
+    ConfigSubtraceValueInfo that = (ConfigSubtraceValueInfo) o;
 
     if (!config.equals(that.config)) {
       return false;
     }
-    return labelsToValues.equals(that.labelsToValues);
+    return subtracesToValues.equals(that.subtracesToValues);
   }
 
   @Override
   public int hashCode() {
     int result = config.hashCode();
-    result = 31 * result + labelsToValues.hashCode();
+    result = 31 * result + subtracesToValues.hashCode();
     return result;
   }
 }

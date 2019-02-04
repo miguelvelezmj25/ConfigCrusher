@@ -27,15 +27,15 @@ public class SubtracesValueAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    SubtracesValueAnalysis subtracesAnalysis = new SubtracesValueAnalysis(programName,
+    SubtracesValueAnalysis subtracesValueAnalysis = new SubtracesValueAnalysis(programName,
         configsToTraces,
         alignedTrace);
-    Set<ConfigLabelValueInfo> write = subtracesAnalysis.analyze(args);
+    Set<ConfigSubtraceValueInfo> write = subtracesValueAnalysis.analyze(args);
 
     args = new String[0];
 
-    subtracesAnalysis = new SubtracesValueAnalysis(programName);
-    Set<ConfigLabelValueInfo> read = subtracesAnalysis.analyze(args);
+    subtracesValueAnalysis = new SubtracesValueAnalysis(programName);
+    Set<ConfigSubtraceValueInfo> read = subtracesValueAnalysis.analyze(args);
 
     Assert.assertEquals(write, read);
   }

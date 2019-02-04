@@ -1,0 +1,12 @@
+[
+  "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+  "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+  "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+  "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+  "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+  "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+  "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+  "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+  "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
+  "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
+]

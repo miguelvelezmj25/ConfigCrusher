@@ -87,29 +87,6 @@ public class SubtracesAnalysis extends BaseDynamicAnalysis<Map<Set<String>, List
     }
 
     return CONFIGS_TO_TRACES;
-//
-////        execution.checkTrace();
-//    DefaultPerformanceEntry performanceEntry = new DefaultPerformanceEntry(execution);
-//
-//    return performanceEntry;
-//
-//    ObjectMapper mapper = new ObjectMapper();
-//    List<RegionToInfo> results = mapper.readValue(file, new TypeReference<List<RegionToInfo>>() {
-//    });
-//
-//    Map<JavaRegion, DecisionInfo> regionsToDecisionInfos = new HashMap<>();
-//
-//    for (RegionToInfo result : results) {
-//      DecisionInfo decisionInfo = new DecisionInfo();
-//      Map<String, Collection> info = (Map<String, Collection>) result.getInfo();
-//
-//      this.addCtxsInfo(decisionInfo, info);
-//      this.addTableInfo(decisionInfo, info);
-//
-//      regionsToDecisionInfos.put(result.getRegion(), decisionInfo);
-//    }
-//
-//    return regionsToDecisionInfos;
   }
 
   @Override

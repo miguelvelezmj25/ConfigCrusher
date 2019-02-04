@@ -37,8 +37,19 @@ public class TracesAlignerTest {
     DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysis(programName);
     Map<Set<String>, List<String>> configsToTraces = analysis.analyze(args);
 
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
     TracesAligner tracesAligner = new TracesAligner(programName, configsToTraces);
-    List<String> alignedTrace = tracesAligner.align();
+    List<String> write = tracesAligner.align(args);
+
+    args = new String[0];
+
+    tracesAligner = new TracesAligner(programName);
+    List<String> read = tracesAligner.align(args);
+
+    Assert.assertEquals(write, read);
   }
 
 }

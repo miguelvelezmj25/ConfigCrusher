@@ -1,13 +1,20 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.annotations.VisibleForTesting;
+import edu.cmu.cs.mvelezce.tool.Options;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.text.diff.CommandVisitor;
 import org.apache.commons.text.diff.EditScript;
 import org.apache.commons.text.diff.StringsComparator;
@@ -24,6 +31,11 @@ public class TracesAligner {
   private final Map<Character, String> charsToTraceElements = new HashMap<>();
 
 
+  public TracesAligner(String programName) {
+    this.programName = programName;
+    this.configsToTraces = new HashMap<>();
+  }
+
   public TracesAligner(String programName, Map<Set<String>, List<String>> configsToTraces) {
     this.programName = programName;
     this.configsToTraces = configsToTraces;
@@ -36,7 +48,7 @@ public class TracesAligner {
     this.encodeTraceElementsAsChars(uniqueTraceElements);
   }
 
-  public List<String> align() {
+  private List<String> align() {
     Set<String> encodedTraces = this.encodeTracesAsStrings();
     String alignedStrings = alignStrings(encodedTraces);
 
@@ -138,6 +150,55 @@ public class TracesAligner {
 
   private char generateRandomChar() {
     return (char) RANDOM.nextInt(CHAR_MAX_VALUE);
+  }
+
+  public List<String> align(String[] args) throws IOException {
+    Options.getCommandLine(args);
+
+    String outputFile = this.outputDir();
+    File file = new File(outputFile);
+
+    Options.checkIfDeleteResult(file);
+
+    if (file.exists()) {
+      Collection<File> files = FileUtils.listFiles(file, null, true);
+
+      if (files.size() != 1) {
+        throw new RuntimeException(
+            "We expected to find 1 file in the directory, but that is not the case "
+                + outputFile);
+      }
+
+      return this.readFromFile(files.iterator().next());
+    }
+
+    List<String> alignedTrace = this.align();
+
+    if (Options.checkIfSave()) {
+      this.writeToFile(alignedTrace);
+    }
+
+    return alignedTrace;
+  }
+
+  private List<String> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+
+    return mapper.readValue(file, new TypeReference<List<String>>() {
+    });
+  }
+
+  private void writeToFile(List<String> alignedTrace) throws IOException {
+    String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.writeValue(file, alignedTrace);
+  }
+
+  private String outputDir() {
+    return Options.DIRECTORY + "/analysis/spec/alignedTrace/java/programs/" + this.programName;
   }
 
   private static class LongestCommonSubSequenceVisitor implements CommandVisitor<Character> {

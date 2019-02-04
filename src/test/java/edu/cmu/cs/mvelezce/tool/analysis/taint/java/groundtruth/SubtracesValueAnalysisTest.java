@@ -21,7 +21,7 @@ public class SubtracesValueAnalysisTest {
     Map<Set<String>, List<String>> configsToTraces = analysis.analyze(args);
 
     TracesAligner tracesAligner = new TracesAligner(programName, configsToTraces);
-    List<String> alignedTrace = tracesAligner.align(args);
+    List<String> alignedTrace = tracesAligner.analyze(args);
 
     args = new String[2];
     args[0] = "-delres";

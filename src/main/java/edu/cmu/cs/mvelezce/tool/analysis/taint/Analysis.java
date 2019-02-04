@@ -9,7 +9,7 @@ public interface Analysis<T> {
 
   T analyze(String[] args) throws Exception;
 
-  void writeToFile(T relevantRegionsToOptions) throws IOException;
+  void writeToFile(T value) throws IOException;
 
   T readFromFile(File file) throws IOException;
 

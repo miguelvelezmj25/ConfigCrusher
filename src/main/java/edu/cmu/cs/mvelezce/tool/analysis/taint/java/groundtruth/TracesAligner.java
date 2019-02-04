@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.annotations.VisibleForTesting;
 import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,8 +20,10 @@ import org.apache.commons.text.diff.CommandVisitor;
 import org.apache.commons.text.diff.EditScript;
 import org.apache.commons.text.diff.StringsComparator;
 
-// TODO encode aligning trace as aligning strings and use the efficient myers algo.
-public class TracesAligner {
+/**
+ * Encodes traces to string and uses diff algo by Myers
+ */
+public class TracesAligner implements Analysis<List<String>> {
 
   private static final Random RANDOM = new Random();
   private static final int CHAR_MAX_VALUE = Character.MAX_VALUE + 1;
@@ -48,7 +51,8 @@ public class TracesAligner {
     this.encodeTraceElementsAsChars(uniqueTraceElements);
   }
 
-  private List<String> align() {
+  @Override
+  public List<String> analyze() {
     Set<String> encodedTraces = this.encodeTracesAsStrings();
     String alignedStrings = alignStrings(encodedTraces);
 
@@ -169,7 +173,8 @@ public class TracesAligner {
     return (char) RANDOM.nextInt(CHAR_MAX_VALUE);
   }
 
-  List<String> align(String[] args) throws IOException {
+  @Override
+  public List<String> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();
@@ -189,7 +194,7 @@ public class TracesAligner {
       return this.readFromFile(files.iterator().next());
     }
 
-    List<String> alignedTrace = this.align();
+    List<String> alignedTrace = this.analyze();
 
     if (Options.checkIfSave()) {
       this.writeToFile(alignedTrace);
@@ -198,14 +203,16 @@ public class TracesAligner {
     return alignedTrace;
   }
 
-  private List<String> readFromFile(File file) throws IOException {
+  @Override
+  public List<String> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
     return mapper.readValue(file, new TypeReference<List<String>>() {
     });
   }
 
-  private void writeToFile(List<String> alignedTrace) throws IOException {
+  @Override
+  public void writeToFile(List<String> alignedTrace) throws IOException {
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
@@ -214,7 +221,8 @@ public class TracesAligner {
     mapper.writeValue(file, alignedTrace);
   }
 
-  private String outputDir() {
+  @Override
+  public String outputDir() {
     return Options.DIRECTORY + "/analysis/spec/alignedTrace/java/programs/" + this.programName;
   }
 

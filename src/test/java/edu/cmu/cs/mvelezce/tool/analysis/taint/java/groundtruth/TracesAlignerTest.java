@@ -42,12 +42,12 @@ public class TracesAlignerTest {
     args[1] = "-saveres";
 
     TracesAligner tracesAligner = new TracesAligner(programName, configsToTraces);
-    List<String> write = tracesAligner.align(args);
+    List<String> write = tracesAligner.analyze(args);
 
     args = new String[0];
 
     tracesAligner = new TracesAligner(programName);
-    List<String> read = tracesAligner.align(args);
+    List<String> read = tracesAligner.analyze(args);
 
     Assert.assertEquals(write, read);
   }

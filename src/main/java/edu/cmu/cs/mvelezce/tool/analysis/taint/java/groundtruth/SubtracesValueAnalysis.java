@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.Analysis;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import org.apache.commons.io.FileUtils;
 /**
  * Analyses what value each subtrace has.
  */
-public class SubtracesValueAnalysis {
+public class SubtracesValueAnalysis implements Analysis<Set<ConfigLabelValueInfo>> {
 
   private final String programName;
   private final Map<Set<String>, List<String>> configsToTraces;
@@ -36,7 +37,8 @@ public class SubtracesValueAnalysis {
     this.alignedTrace = alignedTrace;
   }
 
-  private Set<ConfigLabelValueInfo> analyze() {
+  @Override
+  public Set<ConfigLabelValueInfo> analyze() {
     Set<ConfigLabelValueInfo> configLabelValues = new HashSet<>();
 
     for (Map.Entry<Set<String>, List<String>> entry : this.configsToTraces.entrySet()) {
@@ -90,7 +92,8 @@ public class SubtracesValueAnalysis {
     return traceElementsToIndexes;
   }
 
-  Set<ConfigLabelValueInfo> analyze(String[] args) throws IOException {
+  @Override
+  public Set<ConfigLabelValueInfo> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();
@@ -119,14 +122,16 @@ public class SubtracesValueAnalysis {
     return configLabelValues;
   }
 
-  private Set<ConfigLabelValueInfo> readFromFile(File file) throws IOException {
+  @Override
+  public Set<ConfigLabelValueInfo> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
     return mapper.readValue(file, new TypeReference<Set<ConfigLabelValueInfo>>() {
     });
   }
 
-  private void writeToFile(Set<ConfigLabelValueInfo> configLabelValues) throws IOException {
+  @Override
+  public void writeToFile(Set<ConfigLabelValueInfo> configLabelValues) throws IOException {
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
@@ -135,7 +140,8 @@ public class SubtracesValueAnalysis {
     mapper.writeValue(file, configLabelValues);
   }
 
-  private String outputDir() {
+  @Override
+  public String outputDir() {
     return Options.DIRECTORY + "/analysis/spec/subtracesvalues/java/programs/" + this.programName;
   }
 

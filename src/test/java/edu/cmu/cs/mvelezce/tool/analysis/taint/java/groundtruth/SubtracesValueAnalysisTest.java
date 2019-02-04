@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SubtracesValueAnalysisTest {
@@ -22,8 +23,20 @@ public class SubtracesValueAnalysisTest {
     TracesAligner tracesAligner = new TracesAligner(programName, configsToTraces);
     List<String> alignedTrace = tracesAligner.align(args);
 
-    SubtracesValueAnalysis subtracesAnalysis = new SubtracesValueAnalysis(programName, configsToTraces,
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    SubtracesValueAnalysis subtracesAnalysis = new SubtracesValueAnalysis(programName,
+        configsToTraces,
         alignedTrace);
-    subtracesAnalysis.analyze();
+    Set<ConfigLabelValueInfo> write = subtracesAnalysis.analyze(args);
+
+    args = new String[0];
+
+    subtracesAnalysis = new SubtracesValueAnalysis(programName);
+    Set<ConfigLabelValueInfo> read = subtracesAnalysis.analyze(args);
+
+    Assert.assertEquals(write, read);
   }
 }

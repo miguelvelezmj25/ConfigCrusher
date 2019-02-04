@@ -31,12 +31,12 @@ public class TracesAligner {
   private final Map<Character, String> charsToTraceElements = new HashMap<>();
 
 
-  public TracesAligner(String programName) {
+  TracesAligner(String programName) {
     this.programName = programName;
     this.configsToTraces = new HashMap<>();
   }
 
-  public TracesAligner(String programName, Map<Set<String>, List<String>> configsToTraces) {
+  TracesAligner(String programName, Map<Set<String>, List<String>> configsToTraces) {
     this.programName = programName;
     this.configsToTraces = configsToTraces;
 
@@ -169,7 +169,7 @@ public class TracesAligner {
     return (char) RANDOM.nextInt(CHAR_MAX_VALUE);
   }
 
-  public List<String> align(String[] args) throws IOException {
+  List<String> align(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();

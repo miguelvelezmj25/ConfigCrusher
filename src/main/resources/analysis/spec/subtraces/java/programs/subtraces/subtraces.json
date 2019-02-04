@@ -2,15 +2,15 @@
   {
     "config": [],
     "trace": [
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -18,18 +18,18 @@
       "A"
     ],
     "trace": [
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
       "FALSE",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -37,18 +37,18 @@
       "B"
     ],
     "trace": [
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
       "FALSE",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -56,15 +56,15 @@
       "C"
     ],
     "trace": [
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -73,21 +73,21 @@
       "B"
     ],
     "trace": [
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
       "FALSE",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
       "FALSE",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -96,18 +96,18 @@
       "C"
     ],
     "trace": [
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
       "FALSE",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -116,18 +116,18 @@
       "C"
     ],
     "trace": [
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
       "TRUE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
       "FALSE",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -137,21 +137,21 @@
       "C"
     ],
     "trace": [
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
       "FALSE",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
       "FALSE",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-      "Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
     ]
   }
 ]

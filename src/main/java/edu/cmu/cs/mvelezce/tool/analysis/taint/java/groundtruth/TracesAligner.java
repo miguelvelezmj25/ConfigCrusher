@@ -73,7 +73,11 @@ public class TracesAligner {
       StringBuilder stringBuilder = new StringBuilder();
 
       for (String traceElement : trace) {
-        stringBuilder.append(this.traceElementsToChars.get(traceElement));
+        Character character = this.traceElementsToChars.get(traceElement);
+
+        if (character != null) {
+          stringBuilder.append(character);
+        }
       }
 
       String encodedTrace = stringBuilder.toString();
@@ -110,10 +114,23 @@ public class TracesAligner {
     Set<String> uniqueTraceElements = new HashSet<>();
 
     for (List<String> trace : this.configsToTraces.values()) {
-      uniqueTraceElements.addAll(trace);
+      List<String> updatedTrace = this.removeCFDEvalFromTrace(trace);
+      uniqueTraceElements.addAll(updatedTrace);
     }
 
     return uniqueTraceElements;
+  }
+
+  private List<String> removeCFDEvalFromTrace(List<String> trace) {
+    List<String> updatedTrace = new ArrayList<>();
+
+    for (String element : trace) {
+      if (element.startsWith(SubtracesLogger.LABEL)) {
+        updatedTrace.add(element);
+      }
+    }
+
+    return updatedTrace;
   }
 
   // TODO name

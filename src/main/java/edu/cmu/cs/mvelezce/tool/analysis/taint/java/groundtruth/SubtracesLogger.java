@@ -14,8 +14,8 @@ import jdk.internal.org.objectweb.asm.Type;
 
 public class SubtracesLogger {
 
+  // TODO hash the label when not debugging?
   // TODO keep a counter to track the number of times that a label has been executed.
-
   private static final String ENTER_DECISION = "Enter ";
   private static final String EXIT_DECISION = "Exit ";
   private static final String FALSE = "FALSE";
@@ -95,7 +95,17 @@ public class SubtracesLogger {
   }
 
   private static String labelAction(String action) {
-    return LABEL + action;
+    StringBuilder stringBuilder = new StringBuilder();
+
+    for (String label : STACK) {
+      stringBuilder.append(label);
+      stringBuilder.append(" ");
+    }
+
+    stringBuilder.append(LABEL);
+    stringBuilder.append(action);
+
+    return stringBuilder.toString();
   }
 
   private static String labelID(String labelPrefix, int decisionCount) {

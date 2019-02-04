@@ -72,6 +72,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     this.instrumentCFDs(methodNode, labelPrefix);
     this.instrumentCFDEval(methodNode);
     methodNode.visitMaxs(200, 200);
+    // TODO do we need to instrument the end?
     this.instrumentIPDs(methodNode, classNode, labelPrefix);
     this.instrumentEndMain(methodNode, classNode);
   }

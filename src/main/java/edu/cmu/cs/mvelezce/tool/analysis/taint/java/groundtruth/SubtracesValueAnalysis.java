@@ -61,19 +61,19 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigLabelValueInfo
       labelsToValues.put(label, "");
     }
 
-    Map<String, Integer> traceElementsToIndexes = this.getTraceElementsToIndexes(trace);
+    Map<String, Integer> subtracesToIndexes = this.getSubtracesToIndexes(trace);
 
     for (String label : this.alignedTrace) {
-      int index = traceElementsToIndexes.getOrDefault(label, -1);
+      int index = subtracesToIndexes.getOrDefault(label, -1);
 
       if (index < 0 || index == (trace.size() - 1)) {
         continue;
       }
 
-      String element = trace.get(index + 1);
+      String subtraces = trace.get(index + 1);
 
-      if (!element.startsWith(SubtracesLogger.LABEL)) {
-        labelsToValues.put(label, element);
+      if (!subtraces.startsWith(SubtracesLogger.LABEL)) {
+        labelsToValues.put(label, subtraces);
       }
 
     }
@@ -82,14 +82,14 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigLabelValueInfo
 
   }
 
-  private Map<String, Integer> getTraceElementsToIndexes(List<String> trace) {
-    Map<String, Integer> traceElementsToIndexes = new HashMap<>();
+  private Map<String, Integer> getSubtracesToIndexes(List<String> trace) {
+    Map<String, Integer> subtracesToIndexes = new HashMap<>();
 
     for (int i = 0; i < trace.size(); i++) {
-      traceElementsToIndexes.put(trace.get(i), i);
+      subtracesToIndexes.put(trace.get(i), i);
     }
 
-    return traceElementsToIndexes;
+    return subtracesToIndexes;
   }
 
   @Override

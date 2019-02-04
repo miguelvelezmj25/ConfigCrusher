@@ -30,8 +30,8 @@ public class TracesAligner implements Analysis<List<String>> {
 
   private final String programName;
   private final Map<Set<String>, List<String>> configsToTraces;
-  private final Map<String, Character> traceElementsToChars = new HashMap<>();
-  private final Map<Character, String> charsToTraceElements = new HashMap<>();
+  private final Map<String, Character> subtracesToChars = new HashMap<>();
+  private final Map<Character, String> charsToSubtraces = new HashMap<>();
 
 
   TracesAligner(String programName) {
@@ -43,12 +43,12 @@ public class TracesAligner implements Analysis<List<String>> {
     this.programName = programName;
     this.configsToTraces = configsToTraces;
 
-    this.encodeTraceElementsAsChars();
+    this.encodeSubtracesAsChars();
   }
 
-  private void encodeTraceElementsAsChars() {
-    Set<String> uniqueTraceElements = this.getUniqueTraceElements();
-    this.encodeTraceElementsAsChars(uniqueTraceElements);
+  private void encodeSubtracesAsChars() {
+    Set<String> uniqueSubtraces = this.getUniqueSubtraces();
+    this.encodeSubtracesAsChars(uniqueSubtraces);
   }
 
   @Override
@@ -63,8 +63,8 @@ public class TracesAligner implements Analysis<List<String>> {
     List<String> alignedTraces = new ArrayList<>();
 
     for (int i = 0; i < alignedStrings.length(); i++) {
-      String traceElement = this.charsToTraceElements.get(alignedStrings.charAt(i));
-      alignedTraces.add(traceElement);
+      String subtrace = this.charsToSubtraces.get(alignedStrings.charAt(i));
+      alignedTraces.add(subtrace);
     }
 
     return alignedTraces;
@@ -76,8 +76,8 @@ public class TracesAligner implements Analysis<List<String>> {
     for (List<String> trace : this.configsToTraces.values()) {
       StringBuilder stringBuilder = new StringBuilder();
 
-      for (String traceElement : trace) {
-        Character character = this.traceElementsToChars.get(traceElement);
+      for (String subtrace : trace) {
+        Character character = this.subtracesToChars.get(subtrace);
 
         if (character != null) {
           stringBuilder.append(character);
@@ -91,13 +91,13 @@ public class TracesAligner implements Analysis<List<String>> {
     return encodedTraces;
   }
 
-  private void encodeTraceElementsAsChars(Set<String> uniqueTraceElements) {
+  private void encodeSubtracesAsChars(Set<String> uniqueSubtraces) {
     Set<Character> usedChars = new HashSet<>();
 
-    for (String element : uniqueTraceElements) {
+    for (String subtrace : uniqueSubtraces) {
       char character = this.getUniqueChar(usedChars);
-      this.traceElementsToChars.put(element, character);
-      this.charsToTraceElements.put(character, element);
+      this.subtracesToChars.put(subtrace, character);
+      this.charsToSubtraces.put(character, subtrace);
     }
   }
 
@@ -114,23 +114,23 @@ public class TracesAligner implements Analysis<List<String>> {
     return character;
   }
 
-  private Set<String> getUniqueTraceElements() {
-    Set<String> uniqueTraceElements = new HashSet<>();
+  private Set<String> getUniqueSubtraces() {
+    Set<String> uniqueSubtraces = new HashSet<>();
 
     for (List<String> trace : this.configsToTraces.values()) {
       List<String> updatedTrace = this.removeCFDEvalFromTrace(trace);
-      uniqueTraceElements.addAll(updatedTrace);
+      uniqueSubtraces.addAll(updatedTrace);
     }
 
-    return uniqueTraceElements;
+    return uniqueSubtraces;
   }
 
   private List<String> removeCFDEvalFromTrace(List<String> trace) {
     List<String> updatedTrace = new ArrayList<>();
 
-    for (String element : trace) {
-      if (element.startsWith(SubtracesLogger.LABEL)) {
-        updatedTrace.add(element);
+    for (String subtrace : trace) {
+      if (subtrace.startsWith(SubtracesLogger.LABEL)) {
+        updatedTrace.add(subtrace);
       }
     }
 

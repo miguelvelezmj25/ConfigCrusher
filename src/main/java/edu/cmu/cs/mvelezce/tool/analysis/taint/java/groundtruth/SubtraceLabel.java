@@ -83,5 +83,6 @@ public class SubtraceLabel {
   @Override
   public String toString() {
     return LABEL + ctx + action + decisionLabel + "-" + execCount;
+//    return LABEL + ctx.size() + " " + action + decisionLabel + "-" + execCount;
   }
 }

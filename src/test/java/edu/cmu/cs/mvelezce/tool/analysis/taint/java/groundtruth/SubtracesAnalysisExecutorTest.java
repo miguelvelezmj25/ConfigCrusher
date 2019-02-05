@@ -61,20 +61,6 @@ public class SubtracesAnalysisExecutorTest {
   }
 
   @Test
-  public void SimpleForExample3() throws IOException, InterruptedException {
-    String programName = SimpleForExample3Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(SimpleForExample3Adapter.getListOfOptions());
-
-    // Program arguments
-    String[] args = new String[2];
-    args[0] = "-delres";
-    args[1] = "-saveres";
-
-    DynamicAnalysis analysis = new SubtracesAnalysisExecutor(programName, options);
-    analysis.analyze(args);
-  }
-
-  @Test
   public void Return2Example() throws IOException, InterruptedException {
     String programName = Return2ExampleAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(Return2ExampleAdapter.getListOfOptions());
@@ -114,6 +100,28 @@ public class SubtracesAnalysisExecutorTest {
   public void Subtraces2() throws IOException, InterruptedException {
     String programName = Subtraces2Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(Subtraces2Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(programName,
+        options);
+    Map<Set<String>, List<String>> write = analysis.analyze(args);
+
+    args = new String[0];
+
+    analysis = new SubtracesAnalysisExecutor(programName);
+    Map<Set<String>, List<String>> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void SimpleForExample3() throws IOException, InterruptedException {
+    String programName = SimpleForExample3Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(SimpleForExample3Adapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

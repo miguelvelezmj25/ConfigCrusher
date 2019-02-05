@@ -72,7 +72,7 @@ public class SubtracesValueAnalysis implements Analysis<Set<ConfigSubtraceValueI
 
       String subtraces = trace.get(index + 1);
 
-      if (!subtraces.startsWith(SubtracesLogger.LABEL)) {
+      if (!subtraces.startsWith(SubtraceLabel.LABEL)) {
         subtracesToValues.put(subtrace, subtraces);
       }
 

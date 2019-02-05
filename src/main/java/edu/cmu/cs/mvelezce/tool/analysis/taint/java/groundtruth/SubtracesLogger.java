@@ -15,17 +15,14 @@ import jdk.internal.org.objectweb.asm.Type;
 public class SubtracesLogger {
 
   // TODO hash the label when not debugging?
-  // TODO keep a counter to track the number of times that a label has been executed.
   private static final String ENTER_DECISION = "Enter ";
   private static final String EXIT_DECISION = "Exit ";
   private static final String FALSE = "FALSE";
   private static final String TRUE = "TRUE";
-  private static final Deque<String> STACK = new ArrayDeque<>();
+  private static final Deque<SubtraceLabel> STACK = new ArrayDeque<>();
   private static final List<String> TRACE = new ArrayList<>(200);
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
-  private static final Map<String, Integer> LABELS_TO_COUNT = new HashMap<>();
-
-  static final String LABEL = "LABEL ";
+  private static final Map<SubtraceLabel, Integer> LABELS_TO_COUNT = new HashMap<>();
 
   static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogger.class);
   static final String RESULTS_FILE = "results.ser";
@@ -68,62 +65,57 @@ public class SubtracesLogger {
   }
 
   public static void enterDecision(String labelPrefix, int decisionCount) {
-    String label = labelAction(ENTER_DECISION) + labelID(labelPrefix, decisionCount);
+    Deque<SubtraceLabel> ctx = getCurrentCtx();
+    String labelID = getLabelID(labelPrefix, decisionCount);
+    SubtraceLabel subtraceLabel = new SubtraceLabel(ENTER_DECISION, ctx, labelID);
 
-    int labelCount = LABELS_TO_COUNT.getOrDefault(label, 0);
+    int labelCount = LABELS_TO_COUNT.getOrDefault(subtraceLabel, 0);
     labelCount++;
-    LABELS_TO_COUNT.put(label, labelCount);
+    subtraceLabel.setExecCount(labelCount);
+    LABELS_TO_COUNT.put(subtraceLabel, labelCount);
 
-    label += "-" + labelCount;
+    TRACE.add(subtraceLabel.toString());
+    STACK.addFirst(subtraceLabel);
+  }
 
-    TRACE.add(label);
-    STACK.addFirst(label);
+  private static Deque<SubtraceLabel> getCurrentCtx() {
+    return new ArrayDeque<>(STACK);
   }
 
   public static void exitDecision(String labelPrefix, int decisionCount) {
-    // TODO the logic in this method might not when executing decisions multiple times or loops.
-    String stackLabel = STACK.removeFirst();
-    String expectedLabel = labelAction(ENTER_DECISION) + labelID(labelPrefix, decisionCount);
+    String exitingLabel = getLabelID(labelPrefix, decisionCount);
 
-    if (!stackLabel.startsWith(expectedLabel)) {
-      throw new RuntimeException(
-          "Expected to exit label " + expectedLabel + ", but exited label " + stackLabel
-              + " instead");
+    while (!STACK.isEmpty() && STACK.peekFirst().getDecisionLabel().equals(exitingLabel)) {
+      SubtraceLabel stackLabel = STACK.removeFirst();
+      Deque<SubtraceLabel> exitingCtx = getCurrentCtx();
+
+      SubtraceLabel expectedLabel = new SubtraceLabel(ENTER_DECISION, exitingCtx, exitingLabel);
+
+      if (!stackLabel.equals(expectedLabel)) {
+        throw new RuntimeException(
+            "Expected to exit label " + expectedLabel + ", but exited label " + stackLabel
+                + " instead");
+      }
+
+      Deque<SubtraceLabel> currentCtx = getCurrentCtx();
+      String labelID = getLabelID(labelPrefix, decisionCount);
+      int execCount = stackLabel.getExecCount();
+      SubtraceLabel subtraceLabel = new SubtraceLabel(EXIT_DECISION, currentCtx, labelID,
+          execCount);
+
+      TRACE.add(subtraceLabel.toString());
     }
-
-    String label =
-        labelAction(EXIT_DECISION) + labelID(labelPrefix, decisionCount) + getExecCount(stackLabel);
-    TRACE.add(label);
-  }
-
-  private static String getExecCount(String stackLabel) {
-    int lastIndexOfCountDelimiter = stackLabel.lastIndexOf("-");
-
-    return stackLabel.substring(lastIndexOfCountDelimiter);
   }
 
   public static void exitAtReturn() {
-    while (!STACK.isEmpty()) {
-      String label = labelAction(EXIT_DECISION) + STACK.removeFirst();
-      TRACE.add(label);
-    }
+    throw new UnsupportedOperationException("Implement with new logic with subtrace labels");
+//    while (!STACK.isEmpty()) {
+//      String label = labelAction(EXIT_DECISION) + STACK.removeFirst();
+//      TRACE.add(label);
+//    }
   }
 
-  private static String labelAction(String action) {
-    StringBuilder stringBuilder = new StringBuilder();
-
-    for (String label : STACK) {
-      stringBuilder.append(label);
-      stringBuilder.append(" ");
-    }
-
-    stringBuilder.append(LABEL);
-    stringBuilder.append(action);
-
-    return stringBuilder.toString();
-  }
-
-  private static String labelID(String labelPrefix, int decisionCount) {
+  private static String getLabelID(String labelPrefix, int decisionCount) {
     return labelPrefix + "." + decisionCount;
   }
 

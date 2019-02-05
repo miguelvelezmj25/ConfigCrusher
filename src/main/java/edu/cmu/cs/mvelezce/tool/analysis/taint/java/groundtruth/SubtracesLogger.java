@@ -21,8 +21,9 @@ public class SubtracesLogger {
   private static final String FALSE = "FALSE";
   private static final String TRUE = "TRUE";
   private static final Deque<String> STACK = new ArrayDeque<>();
-  private static final List<String> TRACE = new ArrayList<>(100);
+  private static final List<String> TRACE = new ArrayList<>(200);
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
+  private static final Map<String, Integer> LABELS_TO_COUNT = new HashMap<>();
 
   static final String LABEL = "LABEL ";
 
@@ -68,8 +69,15 @@ public class SubtracesLogger {
 
   public static void enterDecision(String labelPrefix, int decisionCount) {
     String label = labelAction(ENTER_DECISION) + labelID(labelPrefix, decisionCount);
-    STACK.addFirst(label);
+
+    int labelCount = LABELS_TO_COUNT.getOrDefault(label, 0);
+    labelCount++;
+    LABELS_TO_COUNT.put(label, labelCount);
+
+    label += "-" + labelCount;
+
     TRACE.add(label);
+    STACK.addFirst(label);
   }
 
   public static void exitDecision(String labelPrefix, int decisionCount) {
@@ -77,14 +85,21 @@ public class SubtracesLogger {
     String stackLabel = STACK.removeFirst();
     String expectedLabel = labelAction(ENTER_DECISION) + labelID(labelPrefix, decisionCount);
 
-    if (!expectedLabel.equals(stackLabel)) {
+    if (!stackLabel.startsWith(expectedLabel)) {
       throw new RuntimeException(
           "Expected to exit label " + expectedLabel + ", but exited label " + stackLabel
               + " instead");
     }
 
-    String label = labelAction(EXIT_DECISION) + labelID(labelPrefix, decisionCount);
+    String label =
+        labelAction(EXIT_DECISION) + labelID(labelPrefix, decisionCount) + getExecCount(stackLabel);
     TRACE.add(label);
+  }
+
+  private static String getExecCount(String stackLabel) {
+    int lastIndexOfCountDelimiter = stackLabel.lastIndexOf("-");
+
+    return stackLabel.substring(lastIndexOfCountDelimiter);
   }
 
   public static void exitAtReturn() {

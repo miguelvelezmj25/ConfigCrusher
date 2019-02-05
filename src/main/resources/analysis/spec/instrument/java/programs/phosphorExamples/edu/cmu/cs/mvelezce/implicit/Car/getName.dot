@@ -1,8 +1,8 @@
 digraph getName {
 node [shape=record];
-1998269275 [label="L0\lLINENUMBER 20 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lARETURN\lL1\l"];
+484103705 [label="L0\lLINENUMBER 20 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lARETURN\lL1\l"];
 entry;
 exit;
-entry -> 1998269275;
-1998269275 -> exit;
+entry -> 484103705;
+484103705 -> exit;
 }

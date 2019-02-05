@@ -18,6 +18,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleFor
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleForExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -202,6 +203,12 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
             + BaseAdapter.PATH_SEPARATOR
             + SubtracesAdapter.INSTRUMENTED_CLASS_PATH);
         adapter = new SubtracesAdapter();
+        break;
+      case Subtraces2Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + Subtraces2Adapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new Subtraces2Adapter();
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + programName);

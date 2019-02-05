@@ -1,13 +1,13 @@
 digraph sendHeaders {
 node [shape=record];
-1223893263 [label="L2\lFRAME APPEND [I]\lLDC \"edu/cmu/cs/mvelezce/analysis/Example5.sendHeaders(IZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL5\lLINENUMBER 43 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Done\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL6\lLINENUMBER 44 L6\lRETURN\lL7\l"];
-1094084625 [label="L0\lLINENUMBER 34 L0\lICONST_0\lISTORE 2\lL1\lLINENUMBER 35 L1\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Example5.sendHeaders(IZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L2\l"];
-617018249 [label="L3\lLINENUMBER 36 L3\lGETSTATIC edu/cmu/cs/mvelezce/analysis/Example5.totalLength : I\lILOAD 0\lISUB\lISTORE 2\lL4\lLINENUMBER 37 L4\lLDC \"response header\"\lPUTSTATIC edu/cmu/cs/mvelezce/analysis/Example5.subject : Ljava/lang/String;\l"];
+1947785070 [label="L0\lLINENUMBER 34 L0\lICONST_0\lISTORE 2\lL1\lLINENUMBER 35 L1\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Example5.sendHeaders(IZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L2\l"];
+1612625071 [label="L2\lFRAME APPEND [I]\lLDC \"edu/cmu/cs/mvelezce/analysis/Example5.sendHeaders(IZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL5\lLINENUMBER 43 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lLDC \"Done\"\lINVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V\lL6\lLINENUMBER 44 L6\lRETURN\lL7\l"];
+300804223 [label="L3\lLINENUMBER 36 L3\lGETSTATIC edu/cmu/cs/mvelezce/analysis/Example5.totalLength : I\lILOAD 0\lISUB\lISTORE 2\lL4\lLINENUMBER 37 L4\lLDC \"response header\"\lPUTSTATIC edu/cmu/cs/mvelezce/analysis/Example5.subject : Ljava/lang/String;\l"];
 entry;
 exit;
-1223893263 -> exit;
-entry -> 1094084625;
-1094084625 -> 1223893263;
-1094084625 -> 617018249;
-617018249 -> 1223893263;
+entry -> 1947785070;
+1947785070 -> 1612625071;
+1947785070 -> 300804223;
+1612625071 -> exit;
+300804223 -> 1612625071;
 }

@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample.SimpleForE
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleForExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -91,6 +92,28 @@ public class SubtracesAnalysisExecutorTest {
   public void Subtraces() throws IOException, InterruptedException {
     String programName = SubtracesAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(programName,
+        options);
+    Map<Set<String>, List<String>> write = analysis.analyze(args);
+
+    args = new String[0];
+
+    analysis = new SubtracesAnalysisExecutor(programName);
+    Map<Set<String>, List<String>> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Subtraces2() throws IOException, InterruptedException {
+    String programName = Subtraces2Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(Subtraces2Adapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

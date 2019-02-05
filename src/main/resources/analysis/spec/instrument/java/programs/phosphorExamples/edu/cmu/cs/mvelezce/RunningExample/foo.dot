@@ -1,15 +1,15 @@
 digraph foo {
 node [shape=record];
-379670970 [label="L3\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 49 L4\lRETURN\lL5\l"];
-1529272087 [label="L1\lLINENUMBER 47 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
-1033062816 [label="L2\lLINENUMBER 44 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_4\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lGOTO L3\l"];
-1387530012 [label="L0\lLINENUMBER 43 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+265310554 [label="L1\lLINENUMBER 47 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1457090292 [label="L2\lLINENUMBER 44 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_4\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lGOTO L3\l"];
+1327233716 [label="L0\lLINENUMBER 43 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+1274926929 [label="L3\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 49 L4\lRETURN\lL5\l"];
 entry;
 exit;
-entry -> 1387530012;
-379670970 -> exit;
-1529272087 -> 379670970;
-1033062816 -> 379670970;
-1387530012 -> 1529272087;
-1387530012 -> 1033062816;
+entry -> 1327233716;
+265310554 -> 1274926929;
+1457090292 -> 1274926929;
+1327233716 -> 265310554;
+1327233716 -> 1457090292;
+1274926929 -> exit;
 }

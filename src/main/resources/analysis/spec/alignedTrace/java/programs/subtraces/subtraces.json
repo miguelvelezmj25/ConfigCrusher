@@ -1,12 +1,1 @@
-[
-  "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-  "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0 LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-  "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0 LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-  "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0",
-  "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-  "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1 LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-  "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1 LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0",
-  "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1",
-  "LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2",
-  "LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"
-]
+["LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0","LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0 LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0","LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0 LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0","LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.0","LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1","LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1 LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0","LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1 LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.foo(Z)V.0","LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.1","LABEL Enter edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2","LABEL Exit edu/cmu/cs/mvelezce/analysis/Subtraces.main([Ljava/lang/String;)V.2"]

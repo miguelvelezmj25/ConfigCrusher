@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
@@ -36,11 +35,11 @@ public class SubtracesAnalysis implements Analysis<Set<SubtraceAnalysisInfo>> {
   public Set<SubtraceAnalysisInfo> analyze() {
     Set<String> uniqueSubtraces = this.getUniqueSubtraces();
     Map<String, Set<String>> subtracesToValues = this.getSubtracesToValues(uniqueSubtraces);
-    return this.some(subtracesToValues);
+    return this.getConfigsWithValueInSubtraces(subtracesToValues);
   }
 
-  // TODO rename
-  private Set<SubtraceAnalysisInfo> some(Map<String, Set<String>> subtracesToAllValues) {
+  private Set<SubtraceAnalysisInfo> getConfigsWithValueInSubtraces(
+      Map<String, Set<String>> subtracesToAllValues) {
     Set<SubtraceAnalysisInfo> subtraceAnalysisInfos = new HashSet<>();
 
     for (Map.Entry<String, Set<String>> entry : subtracesToAllValues.entrySet()) {
@@ -49,12 +48,8 @@ public class SubtracesAnalysis implements Analysis<Set<SubtraceAnalysisInfo>> {
 
       Map<String, Set<Set<String>>> valuesToConfigs = new HashMap<>();
 
-//      for (String value : values) {
-//        valuesToConfigs.put(value, new HashSet<>());
-//      }
-
       for (String value : values) {
-        Set<Set<String>> configsWithValue = this.getConfigsWithvalueInSubtrace(value, subtrace);
+        Set<Set<String>> configsWithValue = this.getConfigsWithValueInSubtrace(value, subtrace);
         valuesToConfigs.put(value, configsWithValue);
       }
 
@@ -66,7 +61,7 @@ public class SubtracesAnalysis implements Analysis<Set<SubtraceAnalysisInfo>> {
     return subtraceAnalysisInfos;
   }
 
-  private Set<Set<String>> getConfigsWithvalueInSubtrace(String value, String subtrace) {
+  private Set<Set<String>> getConfigsWithValueInSubtrace(String value, String subtrace) {
     Set<Set<String>> configs = new HashSet<>();
 
     for (ConfigSubtraceValueInfo subtraceValueInfo : this.configSubtraceValues) {

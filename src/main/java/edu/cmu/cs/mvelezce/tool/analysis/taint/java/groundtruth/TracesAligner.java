@@ -137,7 +137,6 @@ public class TracesAligner implements Analysis<List<String>> {
     return updatedTrace;
   }
 
-  // TODO name
   @VisibleForTesting
   static String alignStrings(Set<String> strings) {
     String alignedString = "";

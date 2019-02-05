@@ -60,10 +60,10 @@
     <dependency>
       <groupId>edu.cmu.cs.mvelezce</groupId>
       <artifactId>min-configs</artifactId>
-      <version>0.1.0-</version>
+      <version>0.2.0-SNAPSHOT</version>
       <scope>system</scope>
       <systemPath>
-        ${project.basedir}/lib/min-configs-0.1.0--jar-with-dependencies.jar
+        ${project.basedir}/lib/min-configs-0.2.0-SNAPSHOT-jar-with-dependencies.jar
       </systemPath>
     </dependency>
 

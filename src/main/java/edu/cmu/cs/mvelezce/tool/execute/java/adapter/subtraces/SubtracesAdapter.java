@@ -21,6 +21,7 @@ public class SubtracesAdapter extends BaseAdapter {
         SubtracesAdapter.getListOfOptions());
   }
 
+  // TODO abstract method in base adapter?
   public static List<String> getListOfOptions() {
     return Arrays.asList(SubtracesAdapter.OPTIONS);
   }

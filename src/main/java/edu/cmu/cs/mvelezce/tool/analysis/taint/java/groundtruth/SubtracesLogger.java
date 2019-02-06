@@ -15,8 +15,8 @@ import jdk.internal.org.objectweb.asm.Type;
 public class SubtracesLogger {
 
   // TODO hash the label when not debugging?
-  private static final String ENTER_DECISION = "Enter ";
-  private static final String EXIT_DECISION = "Exit ";
+  private static final String ENTER_DECISION = " Enter ";
+  private static final String EXIT_DECISION = " Exit ";
   private static final String FALSE = "FALSE";
   private static final String TRUE = "TRUE";
   private static final Deque<SubtraceLabel> STACK = new ArrayDeque<>();

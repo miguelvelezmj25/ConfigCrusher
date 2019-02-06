@@ -7,9 +7,13 @@ import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.andContext.AndContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.return2Example.Return2ExampleAdapter;
@@ -20,6 +24,9 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample4.SimpleFor
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces3.Subtraces3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces4.Subtraces4Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,7 +46,7 @@ import org.jboss.util.file.Files;
  */
 public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<String>, List<String>>> {
 
-  private static final Map<Set<String>, List<String>> CONFIGS_TO_TRACES = new HashMap<>();
+  private final Map<Set<String>, List<String>> configsToTraces = new HashMap<>();
 
   public SubtracesAnalysisExecutor(String programName, Set<String> options) {
     super(programName, options, new HashSet<>());
@@ -60,19 +67,20 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
 
     Files.delete(SubtracesLogger.RESULTS_FILE);
 
-    return CONFIGS_TO_TRACES;
+    return configsToTraces;
   }
 
   private void processResults(Set<String> config) throws IOException {
     List<String> trace = this.getTrace();
-    CONFIGS_TO_TRACES.put(config, trace);
+    configsToTraces.put(config, trace);
   }
 
   private List<String> getTrace() throws IOException {
     try (FileInputStream fis = new FileInputStream(SubtracesLogger.RESULTS_FILE);
         ObjectInputStream ois = new ObjectInputStream(fis)) {
       return (List<String>) ois.readObject();
-    } catch (ClassNotFoundException cnfe) {
+    }
+    catch (ClassNotFoundException cnfe) {
       throw new RuntimeException("There was an error when processing the results", cnfe);
     }
   }
@@ -85,10 +93,10 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
         });
 
     for (ConfigToTraceInfo configToTraceInfo : configToTraceInfoList) {
-      CONFIGS_TO_TRACES.put(configToTraceInfo.getConfig(), configToTraceInfo.getTrace());
+      configsToTraces.put(configToTraceInfo.getConfig(), configToTraceInfo.getTrace());
     }
 
-    return CONFIGS_TO_TRACES;
+    return configsToTraces;
   }
 
   @Override
@@ -216,6 +224,48 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
             + BaseAdapter.PATH_SEPARATOR
             + Subtraces2Adapter.INSTRUMENTED_CLASS_PATH);
         adapter = new Subtraces2Adapter();
+        break;
+      case Subtraces3Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + Subtraces3Adapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new Subtraces3Adapter();
+        break;
+      case Subtraces4Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + Subtraces4Adapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new Subtraces4Adapter();
+        break;
+      case NestingAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + NestingAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new NestingAdapter();
+        break;
+      case ImplicitAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + ImplicitAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new ImplicitAdapter();
+        break;
+      case Implicit2Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + Implicit2Adapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new Implicit2Adapter();
+        break;
+      case AndContextAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + AndContextAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new AndContextAdapter();
+        break;
+      case TrivialAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + TrivialAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new TrivialAdapter();
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + programName);

@@ -14,6 +14,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext6.OrContext6Adapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorExample8Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
@@ -74,7 +75,7 @@ public class BFPhosphorAnalysisTest {
   }
 
   @Test
-  public void dynamicRunningExample() throws IOException, InterruptedException {
+  public void RunningExample() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
 

@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.andContext.AndContextAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
@@ -183,6 +184,22 @@ public class SubtracesPipelineTest {
   public void Subtraces4() throws IOException, InterruptedException {
     String programName = Subtraces4Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(Subtraces4Adapter.getListOfOptions());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
+
+    Assert.assertEquals(3, minConfigs.size());
+    System.out.println(minConfigs);
+  }
+
+  @Test
+  public void RunningExample() throws IOException, InterruptedException {
+    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
 
     String[] args = new String[2];
     args[0] = "-delres";

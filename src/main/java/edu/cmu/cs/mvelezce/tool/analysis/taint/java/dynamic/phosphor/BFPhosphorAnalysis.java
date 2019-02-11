@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+// TODO analyze different of picking first configuration to run?
 public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
   private String mainClass;
@@ -57,6 +58,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     if (!constraintsToSatisfy.isEmpty()) {
       throw new RuntimeException("Not all constraints were satisfied");
     }
+
   }
 
   private Set<Constraint> getSatisfiedConstraintsByConfig(Set<Constraint> constraints,

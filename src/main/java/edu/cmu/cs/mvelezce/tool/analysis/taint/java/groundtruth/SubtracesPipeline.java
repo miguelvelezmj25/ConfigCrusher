@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+// TODO measure overhead (time and memory)
 public class SubtracesPipeline {
 
   private final String programName;

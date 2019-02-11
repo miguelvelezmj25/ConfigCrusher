@@ -1,10 +1,11 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
+package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.CallingCtxDecision;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
@@ -29,7 +30,6 @@ import java.util.Map;
 import java.util.Set;
 import org.jboss.util.file.Files;
 
-@Deprecated
 public class SpecificationAnalysis extends BaseDynamicRegionAnalysis<DecisionInfo> {
 
   private static final String APACHE_COMMONS_PATH =

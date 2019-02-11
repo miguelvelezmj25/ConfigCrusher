@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
+package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import com.bpodgursky.jbool_expressions.And;
 import com.bpodgursky.jbool_expressions.Expression;
@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Deprecated
 public class DecisionInfo {
 
   private final Map<List<String>, VariabilityCtx> callingCtxsToVariabilityCtxs = new HashMap<>();

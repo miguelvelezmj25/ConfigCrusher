@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
+package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.Constraint;
 import java.util.ArrayList;
@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-@Deprecated
 public class DecisionBranchCountTable {
 
   private final Set<String> options;

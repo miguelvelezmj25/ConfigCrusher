@@ -1,11 +1,10 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
+package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-@Deprecated
 public class VariabilityCtx implements Serializable {
 
   private static final long serialVersionUID = 5228402185734425841L;

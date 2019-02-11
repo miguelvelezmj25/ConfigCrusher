@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
+package edu.cmu.cs.mvelezce.evaluation.phosphor;
 
 import java.io.Serializable;
 

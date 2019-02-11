@@ -1,5 +1,9 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.evaluation.phosphor.DecisionBranchCountTable;
+import edu.cmu.cs.mvelezce.evaluation.phosphor.DecisionInfo;
+import edu.cmu.cs.mvelezce.evaluation.phosphor.SpecificationAnalysis;
+import edu.cmu.cs.mvelezce.evaluation.phosphor.VariabilityCtx;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicRegionAnalysis;

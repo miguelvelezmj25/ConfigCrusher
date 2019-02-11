@@ -7,10 +7,6 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicRegionAnalysi
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.BFPhosphorAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ExecVarCtx;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.SinkData;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DecisionBranchCountTable;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.DecisionInfo;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SpecificationAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.VariabilityCtx;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;

@@ -1,13 +1,11 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm;
 
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth.SpecificationInstrumenter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifand.IfAndAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifor.IfOrAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Utils;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -21,7 +19,8 @@ public class CFGBuilderTest {
   @Test
   public void RunningExample()
       throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
-    Set<ClassNode> classNodes = this.getClassNodes(DynamicRunningExampleAdapter.ORIGINAL_CLASS_PATH);
+    Set<ClassNode> classNodes = this
+        .getClassNodes(DynamicRunningExampleAdapter.ORIGINAL_CLASS_PATH);
     ClassNode classNode = this.getClassNode(classNodes, DynamicRunningExampleAdapter.PROGRAM_NAME);
     MethodNode methodNode = this.getMainMethod(classNode);
     String owner = classNode.name;
@@ -79,9 +78,10 @@ public class CFGBuilderTest {
     throw new RuntimeException("Could not find a class node for Running Example");
   }
 
-  private Set<ClassNode> getClassNodes(String pathToClasses)
-      throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
-    MethodTransformer transformer = new SpecificationInstrumenter(pathToClasses);
-    return transformer.getClassTransformer().readClasses();
+  private Set<ClassNode> getClassNodes(String pathToClasses) {
+    throw new UnsupportedOperationException("Implement");
+//      throws InvocationTargetException, NoSuchMethodException, IOException, IllegalAccessException {
+//    MethodTransformer transformer = new SubtracesMethodTransformer.Builder("fds", pathToClasses).build();
+//    return transformer.getClassTransformer().readClasses();
   }
 }

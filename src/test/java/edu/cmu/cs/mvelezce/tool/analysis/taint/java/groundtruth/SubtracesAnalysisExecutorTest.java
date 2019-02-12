@@ -84,7 +84,8 @@ public class SubtracesAnalysisExecutorTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(programName,
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(
+        programName,
         options);
     Map<Set<String>, List<String>> write = analysis.analyze(args);
 
@@ -106,7 +107,8 @@ public class SubtracesAnalysisExecutorTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(programName,
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(
+        programName,
         options);
     Map<Set<String>, List<String>> write = analysis.analyze(args);
 
@@ -128,7 +130,8 @@ public class SubtracesAnalysisExecutorTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(programName,
+    DynamicAnalysis<Map<Set<String>, List<String>>> analysis = new SubtracesAnalysisExecutor(
+        programName,
         options);
     Map<Set<String>, List<String>> write = analysis.analyze(args);
 

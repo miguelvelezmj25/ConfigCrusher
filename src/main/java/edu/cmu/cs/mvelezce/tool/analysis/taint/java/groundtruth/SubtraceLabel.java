@@ -75,7 +75,7 @@ public class SubtraceLabel {
   @Override
   public int hashCode() {
     int result = action.hashCode();
-    result = 31 * result + ctx.hashCode();
+    result = 31 * result + new ArrayList<>(ctx).hashCode();
     result = 31 * result + decisionLabel.hashCode();
     return result;
   }

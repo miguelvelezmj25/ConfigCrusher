@@ -22,6 +22,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorEx
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorExample8Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext2.VariabilityContext2Adapter;
 import edu.columbia.cs.psl.phosphor.runtime.Taint;
@@ -463,6 +464,10 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
       case VariabilityContext2Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new VariabilityContext2Adapter();
+        break;
+      case Subtraces2Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new Subtraces2Adapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

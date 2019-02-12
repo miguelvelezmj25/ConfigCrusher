@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorAna
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.SinkData;
 import edu.cmu.cs.mvelezce.tool.compression.Compression;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,6 +21,31 @@ public class PhosphorCompressionTest {
   public void RunningExample() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
+
+    String[] args = new String[0];
+
+    PhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> sinkData = analysis.analyze(args);
+    Collection<SinkData> constraints = sinkData.values();
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    Compression compressor = new PhosphorCompression(programName, options, constraints);
+    Set<Set<String>> write = compressor.compressConfigurations(args);
+
+    args = new String[0];
+
+    Set<Set<String>> read = compressor.compressConfigurations(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Subtraces2() throws IOException, InterruptedException {
+    String programName = Subtraces2Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(Subtraces2Adapter.getListOfOptions());
 
     String[] args = new String[0];
 

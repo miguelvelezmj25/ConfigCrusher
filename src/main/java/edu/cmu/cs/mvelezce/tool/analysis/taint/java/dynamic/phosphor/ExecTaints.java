@@ -3,6 +3,13 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Set of taints that reached a sink.
+ *
+ * The taints are represented as set of options.
+ *
+ * Example: A sink was reached with { {A}, {B} }
+ */
 public class ExecTaints {
 
   private Set<Set<String>> taints = new HashSet<>();

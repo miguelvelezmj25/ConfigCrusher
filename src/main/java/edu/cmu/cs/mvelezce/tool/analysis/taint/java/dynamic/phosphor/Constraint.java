@@ -1,46 +1,48 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
-public class Constraint extends PartialConfig {
+public class Constraint /*extends PartialConfig*/ {
 
-  boolean isSubConstraintOf(PartialConfig partialConfig) {
-    return this.isSubPartialConfigOf(partialConfig);
+  private final PartialConfig ctx;
+  private final PartialConfig partialConfig;
+
+  Constraint(PartialConfig partialConfig) {
+    this(new PartialConfig(), partialConfig);
   }
 
-  static Constraint fromConfig(Set<String> config, Set<String> options) {
-    Constraint constraint = new Constraint();
-
-    for (String option : options) {
-      constraint.addEntry(option, config.contains(option));
-    }
-
-    return constraint;
+  Constraint(PartialConfig ctx, PartialConfig partialConfig) {
+    this.ctx = ctx;
+    this.partialConfig = partialConfig;
   }
 
-  public static Map<String, Boolean> toConfigWithValues(Set<String> config, Set<String> options) {
-    if (options.isEmpty()) {
-      throw new IllegalArgumentException("The options cannot be empty");
-    }
-
-    if (!options.containsAll(config)) {
-      throw new IllegalArgumentException(
-          "The config " + config + " is not a subset of the options " + options);
-    }
-
-    Map<String, Boolean> configWithValues = new HashMap<>();
-
-    for (String option : options) {
-      configWithValues.put(option, config.contains(option));
-    }
-
-    return configWithValues;
+  public PartialConfig getCtx() {
+    return ctx;
   }
 
-  //  private final Map<String, Boolean> partialConfig;
-//  private final Map<String, Boolean> ctx;
+  public PartialConfig getPartialConfig() {
+    return partialConfig;
+  }
+
+  //  public static Map<String, Boolean> toConfigWithValues(Set<String> config, Set<String> options) {
+//    if (options.isEmpty()) {
+//      throw new IllegalArgumentException("The options cannot be empty");
+//    }
+//
+//    if (!options.containsAll(config)) {
+//      throw new IllegalArgumentException(
+//          "The config " + config + " is not a subset of the options " + options);
+//    }
+//
+//    Map<String, Boolean> configWithValues = new HashMap<>();
+//
+//    for (String option : options) {
+//      configWithValues.put(option, config.contains(option));
+//    }
+//
+//    return configWithValues;
+//  }
+
 //
 //  // Dummy constructor needed for jackson xml
 //  private Constraint() {
@@ -48,10 +50,7 @@ public class Constraint extends PartialConfig {
 //    this.ctx = new HashMap<>();
 //  }
 //
-//  Constraint(Map<String, Boolean> partialConfig, Map<String, Boolean> ctx) {
-//    this.partialConfig = partialConfig;
-//    this.ctx = ctx;
-//  }
+
 //
 //  Constraint(Map<String, Boolean> partialConfig) {
 //    this(partialConfig, new HashMap<>());

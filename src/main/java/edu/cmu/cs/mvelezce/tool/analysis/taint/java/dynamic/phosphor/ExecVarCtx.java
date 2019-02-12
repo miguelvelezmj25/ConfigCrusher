@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * Context under which taints reached sinks.
+ */
 public class ExecVarCtx extends PartialConfig {
 
   public static final String LLBRACKET = "\u27E6";

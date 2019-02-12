@@ -35,43 +35,43 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     Set<String> options = this.getOptions();
     Set<Set<String>> configs = Helper.getConfigurations(options);
 
-    Set<Constraint> constraintsToSatisfy = new HashSet<>();
-    Set<Constraint> satisfiedConstraints = new HashSet<>();
+    Set<ConfigConstraint> configConstraintsToSatisfy = new HashSet<>();
+    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
 
     for (Set<String> config : configs) {
-      Constraint configAsConstraint = Constraint.fromConfig(config, this.getOptions());
-      satisfiedConstraints.add(configAsConstraint);
+      ConfigConstraint configConstraint = ConfigConstraint.fromConfig(config, this.getOptions());
+      satisfiedConfigConstraints.add(configConstraint);
 
       this.runPhosphorAnalysis(config);
       this.postProcessPhosphorAnalysis(config);
 
-      Set<Constraint> analysisConstraints = BFPhosphorAnalysis
-          .getProgramConstraints(this.getSinksToData().values());
-      constraintsToSatisfy.addAll(analysisConstraints);
+      Set<ConfigConstraint> analysisConfigConstraints = BFPhosphorAnalysis
+          .getAnalysisConfigConstraints(this.getSinksToData().values());
+      configConstraintsToSatisfy.addAll(analysisConfigConstraints);
 
-      Set<Constraint> satisfiedConstraintsByConfig = this
-          .getSatisfiedConstraintsByConfig(constraintsToSatisfy, configAsConstraint);
-      satisfiedConstraints.addAll(satisfiedConstraintsByConfig);
-      constraintsToSatisfy.removeAll(satisfiedConstraints);
+      Set<ConfigConstraint> satisfiedConstraintsByConfig = this
+          .getSatisfiedConfigConstraintsByConfig(configConstraintsToSatisfy, configConstraint);
+      satisfiedConfigConstraints.addAll(satisfiedConstraintsByConfig);
+      configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
     }
 
-    if (!constraintsToSatisfy.isEmpty()) {
+    if (!configConstraintsToSatisfy.isEmpty()) {
       throw new RuntimeException("Not all constraints were satisfied");
     }
 
   }
 
-  private Set<Constraint> getSatisfiedConstraintsByConfig(Set<Constraint> constraints,
-      Constraint configAsConstraint) {
-    Set<Constraint> satisfiedConstraints = new HashSet<>();
+  private Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
+      Set<ConfigConstraint> configConstraints, ConfigConstraint executedConfigConstraint) {
+    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
 
-    for (Constraint constraint : constraints) {
-      if (constraint.isSubConstraintOf(configAsConstraint)) {
-        satisfiedConstraints.add(constraint);
+    for (ConfigConstraint configConstraint : configConstraints) {
+      if (configConstraint.isSubConstraintOf(executedConfigConstraint)) {
+        satisfiedConfigConstraints.add(configConstraint);
       }
     }
 
-    return satisfiedConstraints;
+    return satisfiedConfigConstraints;
   }
 
   @Override

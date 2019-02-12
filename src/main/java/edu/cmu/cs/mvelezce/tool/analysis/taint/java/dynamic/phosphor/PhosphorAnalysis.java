@@ -843,31 +843,31 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 //    return sinksToTaints;
 //  }
 
-  static Set<Constraint> getProgramConstraints(Collection<SinkData> sinkDatas) {
-    Set<Constraint> constraints = new HashSet<>();
+  static Set<ConfigConstraint> getAnalysisConfigConstraints(Collection<SinkData> sinkDatas) {
+    Set<ConfigConstraint> configConstraints = new HashSet<>();
 
     for (SinkData sinkData : sinkDatas) {
-      Set<Constraint> constraintsForRegion = getProgramConstraintsForSink(sinkData);
-      constraints.addAll(constraintsForRegion);
+      Set<ConfigConstraint> configConstraintsAtSink = getConfigConstraintsAtSink(sinkData);
+      configConstraints.addAll(configConstraintsAtSink);
     }
 
-    return constraints;
+    return configConstraints;
   }
 
-  private static Set<Constraint> getProgramConstraintsForSink(SinkData sinkData) {
-    Set<Constraint> constraintsAtSink = new HashSet<>();
+  private static Set<ConfigConstraint> getConfigConstraintsAtSink(SinkData sinkData) {
+    Set<ConfigConstraint> configConstraintsAtSink = new HashSet<>();
 
     for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
       ExecVarCtx execVarCtx = data.getKey();
-      Set<Set<Constraint>> allSinkConstraints = PhosphorAnalysis
-          .getConstraintsForExecVarCtx(execVarCtx, data);
+      Set<Set<ConfigConstraint>> allSinkConstraints = PhosphorAnalysis
+          .getConfigConstraintsForExecVarCtx(execVarCtx, data);
 
-      for (Set<Constraint> sinkConstraint : allSinkConstraints) {
-        constraintsAtSink.addAll(sinkConstraint);
+      for (Set<ConfigConstraint> sinkConstraint : allSinkConstraints) {
+        configConstraintsAtSink.addAll(sinkConstraint);
       }
     }
 
-    return constraintsAtSink;
+    return configConstraintsAtSink;
   }
 
   static void printProgramConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
@@ -875,73 +875,77 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
       JavaRegion region = regionToSinkData.getKey();
       SinkData sinkData = regionToSinkData.getValue();
 
-      printConstraintsForRegion(region, sinkData);
+      printConfigConstraintsForRegion(region, sinkData);
 
       System.out.println();
     }
   }
 
-  private static void printConstraintsForRegion(JavaRegion region, SinkData sinkData) {
+  private static void printConfigConstraintsForRegion(JavaRegion region, SinkData sinkData) {
     for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
       ExecVarCtx execVarCtx = data.getKey();
-      Set<Set<Constraint>> regionConstraints = getConstraintsForExecVarCtx(execVarCtx, data);
+      Set<Set<ConfigConstraint>> regionConstraints = getConfigConstraintsForExecVarCtx(execVarCtx,
+          data);
 
-      for (Set<Constraint> cs : regionConstraints) {
+      for (Set<ConfigConstraint> cs : regionConstraints) {
         System.out
             .println(region.getRegionMethod() + ":" + region.getStartRegionIndex() + " -> " + cs);
       }
     }
   }
 
-  private static Set<Set<Constraint>> getConstraintsForExecVarCtx(ExecVarCtx execVarCtx,
+  private static Set<Set<ConfigConstraint>> getConfigConstraintsForExecVarCtx(ExecVarCtx execVarCtx,
       Entry<ExecVarCtx, Set<ExecTaints>> data) {
-    Set<Set<Constraint>> regionConstraints = new HashSet<>();
+    Set<Set<ConfigConstraint>> regionConfigConstraints = new HashSet<>();
 
     for (ExecTaints execTaints : data.getValue()) {
-      Set<Constraint> constraints = getConstraintsForExecTaints(execVarCtx, execTaints);
-      regionConstraints.add(constraints);
+      Set<ConfigConstraint> configConstraints = getConfigConstraintsForExecTaints(execVarCtx,
+          execTaints);
+      regionConfigConstraints.add(configConstraints);
     }
 
-    return regionConstraints;
+    return regionConfigConstraints;
   }
 
-  private static Set<Constraint> getConstraintsForExecTaints(ExecVarCtx execVarCtx,
+  private static Set<ConfigConstraint> getConfigConstraintsForExecTaints(ExecVarCtx execVarCtx,
       ExecTaints execTaints) {
-    Set<Constraint> constraints = new HashSet<>();
+    Set<ConfigConstraint> configConstraints = new HashSet<>();
 
     for (Set<String> execTaint : execTaints.getTaints()) {
       Set<Set<String>> configs = Helper.getConfigurations(execTaint);
-      Set<Constraint> execTaintConstraints = PhosphorAnalysis.getConstraints(configs, execTaint);
+      Set<ConfigConstraint> execTaintConstraints = PhosphorAnalysis
+          .getConfigConstraints(configs, execTaint);
 
-      for (Constraint execTaintConstraint : execTaintConstraints) {
-        Constraint constraint = new Constraint();
-        constraint.addEntries(execTaintConstraint.getPartialConfig());
+      for (ConfigConstraint execTaintConstraint : execTaintConstraints) {
+        ConfigConstraint configConstraint = new ConfigConstraint();
+        configConstraint.addEntries(execTaintConstraint.getPartialConfig());
 
         if (!execVarCtx.getPartialConfig().isEmpty()) {
-          constraint.addEntries(execVarCtx.getPartialConfig());
+          configConstraint.addEntries(execVarCtx.getPartialConfig());
         }
 
-        constraints.add(constraint);
+        configConstraints.add(configConstraint);
       }
     }
 
-    return constraints;
+    return configConstraints;
   }
 
-  private static Set<Constraint> getConstraints(Set<Set<String>> configs, Set<String> options) {
-    Set<Constraint> constraints = new HashSet<>();
+  private static Set<ConfigConstraint> getConfigConstraints(Set<Set<String>> configs,
+      Set<String> options) {
+    Set<ConfigConstraint> configConstraints = new HashSet<>();
 
     for (Set<String> config : configs) {
-      Constraint constraint = new Constraint();
+      ConfigConstraint configConstraint = new ConfigConstraint();
 
       for (String option : options) {
-        constraint.addEntry(option, config.contains(option));
+        configConstraint.addEntry(option, config.contains(option));
       }
 
-      constraints.add(constraint);
+      configConstraints.add(configConstraint);
     }
 
-    return constraints;
+    return configConstraints;
   }
 
   Map<String, SinkData> getSinksToData() {

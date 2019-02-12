@@ -1,0 +1,134 @@
+[
+  {
+    "region": {
+      "regionID": "38d49fb0-3818-4649-8c03-6c69079b9f57",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": [
+          {
+            "taints": [
+              [
+                "A"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "ca32b1db-b8de-43db-b0dc-fa974634b118",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": [
+          {
+            "taints": [
+              [
+                "B"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "6eada860-7719-4d36-bf83-3fa551da311f",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": [
+          {
+            "taints": [
+              [
+                "A"
+              ]
+            ]
+          },
+          {
+            "taints": [
+              [
+                "B"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "9d31deb5-56a7-48ef-a0bc-93311fc66e77",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces",
+      "regionMethod": "foo(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦B⟧": [
+          {
+            "taints": [
+              [
+                "C"
+              ]
+            ]
+          }
+        ],
+        "⟦A⟧": [
+          {
+            "taints": [
+              [
+                "C"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

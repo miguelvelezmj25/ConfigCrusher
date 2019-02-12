@@ -8,8 +8,12 @@ public class PartialConfig {
 
   private Map<String, Boolean> partialConfig = new HashMap<>();
 
-  void addEntry(String option, boolean value) {
+  public void addEntry(String option, boolean value) {
     this.partialConfig.put(option, value);
+  }
+
+  public Map<String, Boolean> getPartialConfig() {
+    return partialConfig;
   }
 
   void addEntries(Map<String, Boolean> values) {
@@ -18,10 +22,6 @@ public class PartialConfig {
 
   Set<String> getOptions() {
     return this.partialConfig.keySet();
-  }
-
-  Map<String, Boolean> getPartialConfig() {
-    return partialConfig;
   }
 
   boolean isSubPartialConfigOf(PartialConfig partialConfig) {

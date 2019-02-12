@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import java.util.Set;
+import java.util.Map;
 
 public class Constraint /*extends PartialConfig*/ {
 
@@ -11,7 +11,7 @@ public class Constraint /*extends PartialConfig*/ {
     this(new PartialConfig(), partialConfig);
   }
 
-  Constraint(PartialConfig ctx, PartialConfig partialConfig) {
+  public Constraint(PartialConfig ctx, PartialConfig partialConfig) {
     this.ctx = ctx;
     this.partialConfig = partialConfig;
   }
@@ -22,6 +22,36 @@ public class Constraint /*extends PartialConfig*/ {
 
   public PartialConfig getPartialConfig() {
     return partialConfig;
+  }
+
+  /**
+   * Checks whether the partial configuration can be executed under the condition specified in the
+   * ctx.
+   *
+   * Example: partialConfig={A=false, B=false} ctx={A=false} is a valid constraint.
+   * partialConfig={A=false, B=false} ctx={A=true} is an invalid constraint
+   */
+  boolean isValid() {
+    if (this.ctx.getPartialConfig().isEmpty() || this.ctx.equals(this.partialConfig)) {
+      return true;
+    }
+
+    for (Map.Entry<String, Boolean> entry : this.ctx.getPartialConfig().entrySet()) {
+      String option = entry.getKey();
+
+      if (!this.partialConfig.getPartialConfig().containsKey(option)) {
+        continue;
+      }
+
+      boolean partialConfigValue = this.partialConfig.getPartialConfig().get(option);
+      boolean value = entry.getValue();
+
+      if (partialConfigValue != value) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   //  public static Map<String, Boolean> toConfigWithValues(Set<String> config, Set<String> options) {
@@ -64,35 +94,6 @@ public class Constraint /*extends PartialConfig*/ {
 //    return partialConfig;
 //  }
 //
-//  /**
-//   * Checks whether the partial configuration can be executed under the condition specified in the
-//   * ctx.
-//   *
-//   * Example: partialConfig={A=false, B=false} ctx={A=false} is a valid constraint.
-//   * partialConfig={A=false, B=false} ctx={A=true} is an invalid constraint
-//   */
-//  boolean isValid() {
-//    if (this.ctx.isEmpty() || this.ctx.equals(this.partialConfig)) {
-//      return true;
-//    }
-//
-//    for (Map.Entry<String, Boolean> entry : this.ctx.entrySet()) {
-//      String option = entry.getKey();
-//
-//      if (!this.partialConfig.containsKey(option)) {
-//        continue;
-//      }
-//
-//      boolean partialConfigValue = this.partialConfig.get(option);
-//      boolean value = entry.getValue();
-//
-//      if (partialConfigValue != value) {
-//        return false;
-//      }
-//    }
-//
-//    return true;
-//  }
 //
 //  boolean isSubsetOf(Constraint constraint) {
 //    Set<Entry<String, Boolean>> constraintAsConstraint = constraint.getCompleteConstraint()

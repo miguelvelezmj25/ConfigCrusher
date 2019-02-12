@@ -74,7 +74,7 @@ public abstract class BaseDynamicCompression implements Compression {
 
   @Override
   public String getOutputDir() {
-    return Options.DIRECTORY + "/compression/dynamic/java/programs" + this.programName;
+    return Options.DIRECTORY + "/compression/dynamic/java/programs/" + this.programName;
   }
 
   protected String getProgramName() {

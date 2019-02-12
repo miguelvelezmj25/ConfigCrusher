@@ -6,6 +6,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
@@ -120,6 +122,46 @@ public class BFPhosphorAnalysisTest {
   public void Subtraces2() throws IOException, InterruptedException {
     String programName = Subtraces2Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(Subtraces2Adapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Implicit() throws IOException, InterruptedException {
+    String programName = ImplicitAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(ImplicitAdapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Implicit2() throws IOException, InterruptedException {
+    String programName = Implicit2Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(Implicit2Adapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

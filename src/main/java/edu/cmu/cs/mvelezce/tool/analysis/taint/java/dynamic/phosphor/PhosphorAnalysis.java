@@ -12,6 +12,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
@@ -473,6 +475,14 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
       case Subtraces2Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new Subtraces2Adapter();
+        break;
+      case ImplicitAdapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new ImplicitAdapter();
+        break;
+      case Implicit2Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new Implicit2Adapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

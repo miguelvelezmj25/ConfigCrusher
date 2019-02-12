@@ -149,7 +149,7 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<Set<String>>>> {
   public Set<Set<Set<String>>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
-    return mapper.readValue(file, new TypeReference<Set<Set<String>>>() {
+    return mapper.readValue(file, new TypeReference<Set<Set<Set<String>>>>() {
     });
   }
 

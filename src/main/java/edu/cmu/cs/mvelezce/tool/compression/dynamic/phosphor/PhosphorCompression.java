@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.compression.dynamic.phosphor;
 
+import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ExecTaints;
@@ -26,9 +27,9 @@ public class PhosphorCompression extends BaseDynamicCompression {
   public Set<Set<String>> compressConfigurations() {
     Set<ConfigConstraint> configConstraints = this.getConfigConstraints();
     List<String> constraints = this.getStringConstraints(configConstraints);
+    Set<Set<Set<String>>> satConfigs = MinConfigsGenerator.getSatConfigs(this.getOptions(), constraints);
 
-    throw new UnsupportedOperationException("Implement");
-//    return MinConfigsGenerator.getConfigs(this.getOptions(), constraints);
+    return satConfigs.iterator().next();
   }
 
   private List<String> getStringConstraints(Set<ConfigConstraint> configConstraints) {

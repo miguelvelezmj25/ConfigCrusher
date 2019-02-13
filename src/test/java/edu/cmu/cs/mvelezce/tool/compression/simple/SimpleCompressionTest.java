@@ -29,7 +29,7 @@ public class SimpleCompressionTest {
 
     for (List<Set<String>> permutation : permutations) {
 //            System.out.println("\nPermutation: " + permutation);
-      Compression compression = new SimpleCompression(relevantOptionsSet);
+      Compression<Set<Set<String>>> compression = new SimpleCompression(relevantOptionsSet);
       Set<Set<String>> results = compression.compressConfigurations();
       SimpleCompressionTest.checkConfigurationIsStatisfied(new HashSet<>(permutation), results);
     }
@@ -77,7 +77,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test1";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -100,7 +100,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test2";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -123,7 +123,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test3";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -146,7 +146,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test4";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -169,7 +169,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test5";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -192,7 +192,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test6";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -215,7 +215,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test7";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -238,7 +238,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test8";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -261,7 +261,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test9";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -284,7 +284,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test10";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -307,7 +307,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test11";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -330,7 +330,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test12";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -353,7 +353,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test13";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -377,7 +377,7 @@ public class SimpleCompressionTest {
     // Program
     String programName = "test14";
 
-    Compression compressor = new SimpleCompression(programName, relevantOptionsSet);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, relevantOptionsSet);
     Set<Set<String>> outputSave = compressor.compressConfigurations(args);
 
     args = new String[0];
@@ -405,7 +405,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -428,7 +428,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -451,7 +451,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -475,7 +475,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -498,7 +498,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -521,7 +521,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -544,7 +544,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -567,7 +567,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -590,7 +590,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args, options);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -611,7 +611,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -623,7 +623,7 @@ public class SimpleCompressionTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compressor = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -647,7 +647,7 @@ public class SimpleCompressionTest {
 //
 //        Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 //
-//        Compression compressor = new SimpleCompression(programName, options);
+//        C<Set<Set<Stringompression compressor = new SimpleCompression(programName, options);
 //        Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
 //        System.out.println(configurationsToExecute.size());
   }
@@ -672,7 +672,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -697,7 +697,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -722,7 +722,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -747,7 +747,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -768,7 +768,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -789,7 +789,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -810,7 +810,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -835,7 +835,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -856,7 +856,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -880,7 +880,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }
@@ -904,7 +904,7 @@ public class SimpleCompressionTest {
 
     Set<Set<String>> options = SimpleCompression.expandOptions(decisionsToOptionsSet.values());
 
-    Compression compressor = new SimpleCompression(programName, options);
+    Compression<Set<Set<String>>> compressor = new SimpleCompression(programName, options);
     Set<Set<String>> configurationsToExecute = compressor.compressConfigurations(args);
     System.out.println(configurationsToExecute.size());
   }

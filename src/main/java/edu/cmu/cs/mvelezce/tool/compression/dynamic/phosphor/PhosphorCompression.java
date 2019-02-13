@@ -1,12 +1,17 @@
 package edu.cmu.cs.mvelezce.tool.compression.dynamic.phosphor;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ExecTaints;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ExecVarCtx;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.SinkData;
 import edu.cmu.cs.mvelezce.tool.compression.BaseDynamicCompression;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -16,7 +21,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class PhosphorCompression extends BaseDynamicCompression {
+public class PhosphorCompression extends BaseDynamicCompression<Set<Set<Set<String>>>> {
 
   public PhosphorCompression(String programName, Set<String> options,
       Collection<SinkData> constraints) {
@@ -24,12 +29,11 @@ public class PhosphorCompression extends BaseDynamicCompression {
   }
 
   @Override
-  public Set<Set<String>> compressConfigurations() {
+  public Set<Set<Set<String>>> compressConfigurations() {
     Set<ConfigConstraint> configConstraints = this.getConfigConstraints();
     List<String> constraints = this.getStringConstraints(configConstraints);
-    Set<Set<Set<String>>> satConfigs = MinConfigsGenerator.getSatConfigs(this.getOptions(), constraints);
 
-    return satConfigs.iterator().next();
+    return MinConfigsGenerator.getSatConfigs(this.getOptions(), constraints);
   }
 
   private List<String> getStringConstraints(Set<ConfigConstraint> configConstraints) {
@@ -150,5 +154,18 @@ public class PhosphorCompression extends BaseDynamicCompression {
     }
 
     return configConstraints;
+  }
+
+  @Override
+  public Set<Set<Set<String>>> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+
+    return mapper.readValue(file, new TypeReference<Set<Set<Set<String>>>>() {
+    });
+  }
+
+  @Override
+  public String getOutputDir() {
+    return Options.DIRECTORY + "/compression/phosphor/java/programs/" + this.getProgramName();
   }
 }

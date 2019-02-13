@@ -316,7 +316,7 @@ public class BruteForceExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
     configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
     System.out.println("Configurations to sample: " + configurations.size());
@@ -343,7 +343,7 @@ public class BruteForceExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
     configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
     System.out.println("Configurations to sample: " + configurations.size());
@@ -495,7 +495,7 @@ public class BruteForceExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     configurations.clear();

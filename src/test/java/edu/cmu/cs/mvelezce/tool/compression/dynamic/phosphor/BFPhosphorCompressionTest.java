@@ -18,7 +18,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PhosphorCompressionTest {
+public class BFPhosphorCompressionTest {
 
   @Test
   public void RunningExample() throws IOException, InterruptedException {
@@ -35,12 +35,12 @@ public class PhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression compressor = new PhosphorCompression(programName, options, constraints);
-    Set<Set<String>> write = compressor.compressConfigurations(args);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
-    Set<Set<String>> read = compressor.compressConfigurations(args);
+    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);
   }
@@ -60,12 +60,12 @@ public class PhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression compressor = new PhosphorCompression(programName, options, constraints);
-    Set<Set<String>> write = compressor.compressConfigurations(args);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
-    Set<Set<String>> read = compressor.compressConfigurations(args);
+    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);
   }
@@ -85,12 +85,12 @@ public class PhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression compressor = new PhosphorCompression(programName, options, constraints);
-    Set<Set<String>> write = compressor.compressConfigurations(args);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
-    Set<Set<String>> read = compressor.compressConfigurations(args);
+    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);
   }
@@ -110,12 +110,12 @@ public class PhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression compressor = new PhosphorCompression(programName, options, constraints);
-    Set<Set<String>> write = compressor.compressConfigurations(args);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
-    Set<Set<String>> read = compressor.compressConfigurations(args);
+    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);
   }
@@ -135,12 +135,12 @@ public class PhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression compressor = new PhosphorCompression(programName, options, constraints);
-    Set<Set<String>> write = compressor.compressConfigurations(args);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
-    Set<Set<String>> read = compressor.compressConfigurations(args);
+    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);
   }

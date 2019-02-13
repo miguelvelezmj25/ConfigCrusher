@@ -18,7 +18,7 @@ public class SPLatDelayCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatDelayCompression(programName);
+        Compression<Set<Set<String>>> executor = new SPLatDelayCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -32,7 +32,7 @@ public class SPLatDelayCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatDelayCompression(programName);
+        Compression<Set<Set<String>>> executor = new SPLatDelayCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -46,7 +46,7 @@ public class SPLatDelayCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatDelayCompression(programName);
+        Compression<Set<Set<String>>> executor = new SPLatDelayCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -60,7 +60,7 @@ public class SPLatDelayCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatDelayCompression(programName);
+        Compression<Set<Set<String>>> executor = new SPLatDelayCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -74,7 +74,7 @@ public class SPLatDelayCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatDelayCompression(programName);
+        Compression<Set<Set<String>>> executor = new SPLatDelayCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -88,7 +88,7 @@ public class SPLatDelayCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatDelayCompression(programName);
+        Compression<Set<Set<String>>> executor = new SPLatDelayCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -102,7 +102,7 @@ public class SPLatDelayCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatDelayCompression(programName);
+        Compression<Set<Set<String>>> executor = new SPLatDelayCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -116,7 +116,7 @@ public class SPLatDelayCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatDelayCompression(programName);
+        Compression<Set<Set<String>>> executor = new SPLatDelayCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }
@@ -130,7 +130,7 @@ public class SPLatDelayCompressionTest {
         args[0] = "-delres";
         args[1] = "-saveres";
 
-        Compression executor = new SPLatDelayCompression(programName);
+        Compression<Set<Set<String>>> executor = new SPLatDelayCompression(programName);
         Set<Set<String>> configurations = executor.compressConfigurations(args);
         System.out.println("Configurations executed: " + configurations.size());
     }

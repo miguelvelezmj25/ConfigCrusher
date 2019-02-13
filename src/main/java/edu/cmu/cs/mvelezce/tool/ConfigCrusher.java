@@ -46,7 +46,7 @@ public class ConfigCrusher {
         Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = analysis.analyze(args);
 
         Set<Set<String>> options = BaseCompression.expandOptions(javaRegionsToOptionSet.values());
-        Compression compressor = new SimpleCompression(this.programName, options);
+        Compression<Set<Set<String>>> compressor = new SimpleCompression(this.programName, options);
         Set<Set<String>> configurations = compressor.compressConfigurations(args);
         System.out.println("Configurations to sample: " + configurations.size());
 

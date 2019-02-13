@@ -22,7 +22,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -45,7 +45,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
     configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
 
@@ -75,7 +75,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -99,7 +99,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
     configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
 
@@ -129,7 +129,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -153,7 +153,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     configurations.clear();
@@ -181,7 +181,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -205,7 +205,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -229,7 +229,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     configurations.clear();
@@ -263,7 +263,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -287,7 +287,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -311,7 +311,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -336,7 +336,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
     configurations.clear();
 
@@ -367,7 +367,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     configurations.clear();
@@ -400,7 +400,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
     configurations = BruteForceExecutor.getBruteForceConfigurations(configurations);
 
@@ -425,7 +425,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     configurations.clear();
@@ -456,7 +456,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     configurations.clear();
@@ -486,7 +486,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     configurations.clear();
@@ -516,7 +516,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -540,7 +540,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     args = new String[3];
@@ -564,7 +564,7 @@ public class ConfigCrusherExecutorTest {
     // Program arguments
     String[] args = new String[0];
 
-    Compression compression = new SimpleCompression(programName);
+    Compression<Set<Set<String>>> compression = new SimpleCompression(programName);
     Set<Set<String>> configurations = compression.compressConfigurations(args);
 
     configurations.clear();

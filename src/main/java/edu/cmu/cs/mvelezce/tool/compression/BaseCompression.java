@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
-public abstract class BaseCompression implements Compression {
+public abstract class BaseCompression implements Compression<Set<Set<String>>> {
 
   public static final String DIRECTORY = Options.DIRECTORY + "/compression/java/programs";
 

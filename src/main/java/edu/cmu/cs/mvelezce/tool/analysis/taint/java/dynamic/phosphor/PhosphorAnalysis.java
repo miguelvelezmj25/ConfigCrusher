@@ -2,6 +2,8 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.cmu.cs.mvelezce.cc.SinkEntry;
+import edu.cmu.cs.mvelezce.cc.TaintInfo;
 import edu.cmu.cs.mvelezce.cc.TaintLabel;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
@@ -23,6 +25,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorEx
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorExample8Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleForExample5Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
@@ -441,6 +444,10 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
         commandList.add("./examples.sh");
         adapter = new SimpleForExample2Adapter();
         break;
+      case SimpleForExample5Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new SimpleForExample5Adapter();
+        break;
       case OrContextAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new OrContextAdapter();
@@ -525,10 +532,67 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
   private Map<String, Map<Set<String>, Set<Set<String>>>> readPhosphorTaintResults(
       File serializedFile)
       throws IOException {
-    Map<String, Map<Taint, Set<Set<Taint>>>> sinksToData = this.deserialize(serializedFile);
-    Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> sinksToLabelData = this
-        .getSinksToLabelData(sinksToData);
-    return this.changeLabelsToTaints(sinksToLabelData);
+    List<SinkEntry> sinkEntries = this.deserialize(serializedFile);
+    Map<String, Map<Taint, Set<Taint>>> analysisData = this.getDataFromAnalysis(sinkEntries);
+    Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> analysisDataWithLabels = this
+        .getSinksToLabelData(analysisData);
+    return this.changeLabelsToTaints(analysisDataWithLabels);
+  }
+
+  private Map<String, Map<Taint, Set<Taint>>> getDataFromAnalysis(List<SinkEntry> sinkEntries) {
+    Set<String> sinks = this.getSinksAnalysis(sinkEntries);
+    Map<String, Map<Taint, Set<Taint>>> sinksToTaintInfos = this.addSinksFromAnalysis(sinks);
+    this.addCtxsFromAnalysis(sinksToTaintInfos, sinkEntries);
+    this.addTaintsFromAnalysis(sinksToTaintInfos, sinkEntries);
+
+    return sinksToTaintInfos;
+  }
+
+  private void addTaintsFromAnalysis(Map<String, Map<Taint, Set<Taint>>> sinksToTaintInfos,
+      List<SinkEntry> sinkEntries) {
+    for (SinkEntry sinkEntry : sinkEntries) {
+      TaintInfo taintInfo = sinkEntry.getTaintInfo();
+      Taint ctx = taintInfo.getCtx();
+
+      String sink = sinkEntry.getSink();
+      Map<Taint, Set<Taint>> taintInfos = sinksToTaintInfos.get(sink);
+
+      Set<Taint> taints = taintInfos.get(ctx);
+      Taint taint = taintInfo.getTaint();
+      taints.add(taint);
+    }
+  }
+
+  private Map<String, Map<Taint, Set<Taint>>> addSinksFromAnalysis(Set<String> sinks) {
+    Map<String, Map<Taint, Set<Taint>>> sinksToTaintInfos = new HashMap<>();
+
+    for (String sink : sinks) {
+      sinksToTaintInfos.put(sink, new HashMap<>());
+    }
+
+    return sinksToTaintInfos;
+  }
+
+  private void addCtxsFromAnalysis(Map<String, Map<Taint, Set<Taint>>> sinksToTaintInfos,
+      List<SinkEntry> sinkEntries) {
+    for (SinkEntry sinkEntry : sinkEntries) {
+      TaintInfo taintInfo = sinkEntry.getTaintInfo();
+      Taint ctx = taintInfo.getCtx();
+
+      String sink = sinkEntry.getSink();
+      Map<Taint, Set<Taint>> taintInfos = sinksToTaintInfos.get(sink);
+      taintInfos.put(ctx, new HashSet<>());
+    }
+  }
+
+  private Set<String> getSinksAnalysis(List<SinkEntry> sinkEntries) {
+    Set<String> sinks = new HashSet<>();
+
+    for (SinkEntry sinkEntry : sinkEntries) {
+      sinks.add(sinkEntry.getSink());
+    }
+
+    return sinks;
   }
 
   private Map<String, Map<Set<String>, Set<Set<String>>>> changeLabelsToTaints(
@@ -576,11 +640,11 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
   }
 
   private Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> getSinksToLabelData(
-      Map<String, Map<Taint, Set<Set<Taint>>>> sinksToData) {
+      Map<String, Map<Taint, Set<Taint>>> analysisData) {
     Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> sinksToLabelData = new HashMap<>();
 
-    for (Map.Entry<String, Map<Taint, Set<Set<Taint>>>> entry : sinksToData.entrySet()) {
-      Map<Taint, Set<Set<Taint>>> sinkData = entry.getValue();
+    for (Map.Entry<String, Map<Taint, Set<Taint>>> entry : analysisData.entrySet()) {
+      Map<Taint, Set<Taint>> sinkData = entry.getValue();
       Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityCtxsToLabels = this
           .getVariabilityCtxsToLabels(sinkData);
       sinksToLabelData.put(entry.getKey(), variabilityCtxsToLabels);
@@ -590,15 +654,15 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
   }
 
   private Map<Set<TaintLabel>, Set<Set<TaintLabel>>> getVariabilityCtxsToLabels(
-      Map<Taint, Set<Set<Taint>>> sinkData) {
+      Map<Taint, Set<Taint>> sinkData) {
     Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityCtxsToLabels = new HashMap<>();
 
-    for (Map.Entry<Taint, Set<Set<Taint>>> entry : sinkData.entrySet()) {
+    for (Map.Entry<Taint, Set<Taint>> entry : sinkData.entrySet()) {
       Taint variabilityCtxTaint = entry.getKey();
       Set<TaintLabel> variabilityCtx = this.getVariabilityCtx(variabilityCtxTaint);
 
-      Set<Set<Taint>> executionTaintsSet = entry.getValue();
-      Set<Set<TaintLabel>> executionLabelSet = this.getExecutionLabelSet(executionTaintsSet);
+      Set<Taint> executionTaints = entry.getValue();
+      Set<Set<TaintLabel>> executionLabelSet = this.getExecutionLabelSet(executionTaints);
 
       variabilityCtxsToLabels.put(variabilityCtx, executionLabelSet);
     }
@@ -606,21 +670,12 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     return variabilityCtxsToLabels;
   }
 
-  private Set<Set<TaintLabel>> getExecutionLabelSet(Set<Set<Taint>> executionTaintsSet) {
+  private Set<Set<TaintLabel>> getExecutionLabelSet(Set<Taint> executionTaints) {
     Set<Set<TaintLabel>> executionLabelSet = new HashSet<>();
 
-    for (Set<Taint> taintSet : executionTaintsSet) {
-      Set<TaintLabel> executionLabels = new HashSet<>();
-
-      for (Taint sinkTaint : taintSet) {
-        if (sinkTaint == null) {
-          continue;
-        }
-
-        Set<TaintLabel> labels = sinkTaint.getLabels();
-        executionLabels.addAll(labels);
-      }
-
+    for (Taint taint : executionTaints) {
+      Set<TaintLabel> labels = taint.getLabels();
+      Set<TaintLabel> executionLabels = new HashSet<>(labels);
       executionLabelSet.add(executionLabels);
     }
 
@@ -653,13 +708,14 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 //  }
 
   // TODO check catching and throwing
-  private Map<String, Map<Taint, Set<Set<Taint>>>> deserialize(File file) throws IOException {
+  private List<SinkEntry> deserialize(File file) throws IOException {
     FileInputStream fis = new FileInputStream(file);
     ObjectInputStream ois = new ObjectInputStream(fis);
-    Map<String, Map<Taint, Set<Set<Taint>>>> sinksToData;
+    List<SinkEntry> sinkEntries;
 
     try {
-      sinksToData = (Map<String, Map<Taint, Set<Set<Taint>>>>) ois.readObject();
+      sinkEntries = (List<SinkEntry>) ois.readObject();
+
     }
     catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
@@ -668,7 +724,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     ois.close();
     fis.close();
 
-    return sinksToData;
+    return sinkEntries;
   }
 
   private Collection<File> getSerializedFiles(String dir) {

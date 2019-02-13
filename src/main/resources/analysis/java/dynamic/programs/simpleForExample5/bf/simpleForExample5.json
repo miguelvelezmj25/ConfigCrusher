@@ -1,70 +1,12 @@
 [
   {
     "region": {
-      "regionID": "103952ab-83d8-4531-ac74-06c70fd79b63",
+      "regionID": "9d1e665c-dc27-4039-ae4c-b4abb8835b9b",
       "startTime": -1,
       "endTime": -1,
       "duration": -1,
       "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Subtraces",
-      "regionMethod": "main([Ljava/lang/String;)V",
-      "startRegionIndex": 1,
-      "startBlockID": "",
-      "endBlocksIDs": [],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": {
-      "data": {
-        "⟦true⟧": [
-          {
-            "taints": [
-              [
-                "A"
-              ]
-            ]
-          }
-        ]
-      }
-    }
-  },
-  {
-    "region": {
-      "regionID": "8b51ae60-3582-4f7c-b571-088d52828b9b",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Subtraces",
-      "regionMethod": "main([Ljava/lang/String;)V",
-      "startRegionIndex": 2,
-      "startBlockID": "",
-      "endBlocksIDs": [],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": {
-      "data": {
-        "⟦true⟧": [
-          {
-            "taints": [
-              [
-                "B"
-              ]
-            ]
-          }
-        ]
-      }
-    }
-  },
-  {
-    "region": {
-      "regionID": "73ac6459-2961-48f5-adfe-2dca6f3106e2",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Subtraces",
+      "regionClass": "SimpleForExample5",
       "regionMethod": "main([Ljava/lang/String;)V",
       "startRegionIndex": 3,
       "startBlockID": "",
@@ -89,32 +31,12 @@
               ]
             ]
           }
-        ]
-      }
-    }
-  },
-  {
-    "region": {
-      "regionID": "92e0b7d6-00b0-42f9-8dc6-d02b4e03eda2",
-      "startTime": -1,
-      "endTime": -1,
-      "duration": -1,
-      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
-      "regionClass": "Subtraces",
-      "regionMethod": "foo(Z)V",
-      "startRegionIndex": 1,
-      "startBlockID": "",
-      "endBlocksIDs": [],
-      "startMethodBlock": null,
-      "endMethodBlocks": []
-    },
-    "info": {
-      "data": {
+        ],
         "⟦B⟧": [
           {
             "taints": [
               [
-                "C"
+                "B"
               ]
             ]
           }
@@ -123,7 +45,65 @@
           {
             "taints": [
               [
-                "C"
+                "A"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "d1bb0b22-50aa-4c7d-9550-0f860293c85c",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleForExample5",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": [
+          {
+            "taints": [
+              [
+                "B"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "26e31198-9afb-47c6-a665-c04d833033e2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "SimpleForExample5",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": [
+          {
+            "taints": [
+              [
+                "A"
               ]
             ]
           }

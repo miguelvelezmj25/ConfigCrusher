@@ -10,6 +10,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -35,11 +36,13 @@ public class BFPhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
+        constraints);
     Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
+    compressor = new BFPhosphorCompression(programName);
     Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);
@@ -60,11 +63,13 @@ public class BFPhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
+        constraints);
     Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
+    compressor = new BFPhosphorCompression(programName);
     Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);
@@ -85,11 +90,13 @@ public class BFPhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
+        constraints);
     Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
+    compressor = new BFPhosphorCompression(programName);
     Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);
@@ -110,11 +117,13 @@ public class BFPhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
+        constraints);
     Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
+    compressor = new BFPhosphorCompression(programName);
     Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);
@@ -135,11 +144,40 @@ public class BFPhosphorCompressionTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options, constraints);
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
+        constraints);
     Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
 
     args = new String[0];
 
+    compressor = new BFPhosphorCompression(programName);
+    Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Trivial() throws IOException, InterruptedException {
+    String programName = TrivialAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(TrivialAdapter.getListOfOptions());
+
+    String[] args = new String[0];
+
+    PhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> sinkData = analysis.analyze(args);
+    Collection<SinkData> constraints = sinkData.values();
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName, options,
+        constraints);
+    Set<Set<Set<String>>> write = compressor.compressConfigurations(args);
+
+    args = new String[0];
+
+    compressor = new BFPhosphorCompression(programName);
     Set<Set<Set<String>>> read = compressor.compressConfigurations(args);
 
     Assert.assertEquals(write, read);

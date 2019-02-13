@@ -7,6 +7,10 @@ import java.util.Set;
 
 public class BFPhosphorCompression extends PhosphorCompression {
 
+  public BFPhosphorCompression(String programName) {
+    super(programName);
+  }
+
   public BFPhosphorCompression(String programName, Set<String> options,
       Collection<SinkData> constraints) {
     super(programName, options, constraints);

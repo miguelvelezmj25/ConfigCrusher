@@ -23,6 +23,10 @@ import java.util.Set;
 
 public class PhosphorCompression extends BaseDynamicCompression<Set<Set<Set<String>>>> {
 
+  public PhosphorCompression(String programName) {
+    super(programName, new HashSet<>(), new ArrayList<>());
+  }
+
   public PhosphorCompression(String programName, Set<String> options,
       Collection<SinkData> constraints) {
     super(programName, options, constraints);

@@ -1,13 +1,13 @@
 digraph unnecessaryMethod {
 node [shape=record];
-198347910 [label="L3\lLINENUMBER 30 L3\lILOAD 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\l"];
-394663183 [label="L2\lLINENUMBER 33 L2\lFRAME APPEND [I]\lILOAD 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\lL4\l"];
-194037157 [label="L0\lLINENUMBER 27 L0\lILOAD 0\lISTORE 1\lL1\lLINENUMBER 29 L1\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.unnecessaryMethod(I)I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L2\l"];
+1065251495 [label="L2\lLINENUMBER 33 L2\lFRAME APPEND [I]\lILOAD 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\lL4\l"];
+1979001148 [label="L0\lLINENUMBER 27 L0\lILOAD 0\lISTORE 1\lL1\lLINENUMBER 29 L1\lILOAD 1\lLDC \"edu/cmu/cs/mvelezce/analysis/Example6.unnecessaryMethod(I)I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L2\l"];
+1774138654 [label="L3\lLINENUMBER 30 L3\lILOAD 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\l"];
 entry;
 exit;
-entry -> 194037157;
-198347910 -> exit;
-394663183 -> exit;
-194037157 -> 198347910;
-194037157 -> 394663183;
+entry -> 1979001148;
+1065251495 -> exit;
+1979001148 -> 1065251495;
+1979001148 -> 1774138654;
+1774138654 -> exit;
 }

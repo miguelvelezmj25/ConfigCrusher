@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleForExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample4.SimpleForExample4Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleForExample5Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces3.Subtraces3Adapter;
@@ -69,6 +70,21 @@ public class SubtracesPipelineTest {
   public void SimpleForExample4() throws IOException, InterruptedException {
     String programName = SimpleForExample4Adapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(SimpleForExample4Adapter.getListOfOptions());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
+    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+
+    Assert.assertEquals(3, minConfigs.iterator().next().size());
+  }
+
+  @Test
+  public void SimpleForExample5() throws IOException, InterruptedException {
+    String programName = SimpleForExample5Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(SimpleForExample5Adapter.getListOfOptions());
 
     String[] args = new String[2];
     args[0] = "-delres";

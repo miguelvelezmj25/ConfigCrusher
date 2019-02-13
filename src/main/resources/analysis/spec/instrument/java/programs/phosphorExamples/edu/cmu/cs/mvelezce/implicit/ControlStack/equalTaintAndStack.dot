@@ -1,18 +1,18 @@
 digraph equalTaintAndStack {
 node [shape=record];
-362222883 [label="L1\lFRAME CHOP 1\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL6\lLINENUMBER 31 L6\lRETURN\lL7\l"];
-652004929 [label="L2\lLINENUMBER 25 L2\lILOAD 1\lISTORE 2\lL3\lLINENUMBER 27 L3\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L4\l"];
-848252486 [label="L4\lFRAME APPEND [I]\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\l"];
-745388090 [label="L5\lLINENUMBER 28 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
-1381598369 [label="L0\lLINENUMBER 24 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+2101611295 [label="L0\lLINENUMBER 24 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+2143918319 [label="L4\lFRAME APPEND [I]\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\l"];
+1785194821 [label="L2\lLINENUMBER 25 L2\lILOAD 1\lISTORE 2\lL3\lLINENUMBER 27 L3\lILOAD 2\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L4\l"];
+579367762 [label="L5\lLINENUMBER 28 L5\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1989290443 [label="L1\lFRAME CHOP 1\lLDC \"edu/cmu/cs/mvelezce/implicit/ControlStack.equalTaintAndStack(ZZ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL6\lLINENUMBER 31 L6\lRETURN\lL7\l"];
 entry;
 exit;
-entry -> 1381598369;
-362222883 -> exit;
-652004929 -> 848252486;
-652004929 -> 745388090;
-848252486 -> 362222883;
-745388090 -> 848252486;
-1381598369 -> 362222883;
-1381598369 -> 652004929;
+entry -> 2101611295;
+2101611295 -> 1785194821;
+2101611295 -> 1989290443;
+2143918319 -> 1989290443;
+1785194821 -> 2143918319;
+1785194821 -> 579367762;
+579367762 -> 2143918319;
+1989290443 -> exit;
 }

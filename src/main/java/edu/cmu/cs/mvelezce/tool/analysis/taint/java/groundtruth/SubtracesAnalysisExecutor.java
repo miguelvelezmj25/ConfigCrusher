@@ -21,6 +21,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample.SimpleForE
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleForExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample4.SimpleForExample4Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleForExample5Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
@@ -206,6 +207,12 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
             + BaseAdapter.PATH_SEPARATOR
             + SimpleForExample4Adapter.INSTRUMENTED_CLASS_PATH);
         adapter = new SimpleForExample4Adapter();
+        break;
+      case SimpleForExample5Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + SimpleForExample5Adapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new SimpleForExample5Adapter();
         break;
       case Return2ExampleAdapter.PROGRAM_NAME:
         commandList.add(ccClasspath

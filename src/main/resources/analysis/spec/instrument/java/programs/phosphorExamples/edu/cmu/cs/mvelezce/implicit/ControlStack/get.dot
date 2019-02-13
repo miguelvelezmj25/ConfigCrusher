@@ -1,8 +1,8 @@
 digraph get {
 node [shape=record];
-2079057374 [label="L0\lLINENUMBER 18 L0\lILOAD 0\lIRETURN\lL1\l"];
+889672479 [label="L0\lLINENUMBER 18 L0\lILOAD 0\lIRETURN\lL1\l"];
 entry;
 exit;
-entry -> 2079057374;
-2079057374 -> exit;
+entry -> 889672479;
+889672479 -> exit;
 }

@@ -44,7 +44,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
@@ -84,85 +83,6 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     return regionsToData;
   }
 
-  @Override
-  public Map<JavaRegion, SinkData> readFromFile(File file) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    List<RegionToInfo> results = mapper
-        .readValue(file, new TypeReference<List<RegionToInfo>>() {
-        });
-
-    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
-
-    for (RegionToInfo<SinkData> result : results) {
-      Map<String, Map> info = (Map<String, Map>) result.getInfo();
-      Map<String, List> sinkDataEntries = info.get("data");
-
-      SinkData sinkData = new SinkData();
-
-      for (Map.Entry<String, List> entry : sinkDataEntries.entrySet()) {
-        String execVarCtxStr = entry.getKey();
-        ExecVarCtx execVarCtx = this.getExecVarCtx(execVarCtxStr);
-        List<Map> execTaintsList = entry.getValue();
-        Set<ExecTaints> executionTaints = this.getExecTaints(execTaintsList);
-
-        sinkData.putIfAbsent(execVarCtx, executionTaints);
-      }
-
-      regionsToConstraints.put(result.getRegion(), sinkData);
-    }
-
-    return regionsToConstraints;
-  }
-
-  private Set<ExecTaints> getExecTaints(List<Map> execTaintsList) {
-    Set<ExecTaints> allExecTaints = new HashSet<>();
-
-    for (Map<String, List> map : execTaintsList) {
-      List<List<String>> taintsLists = map.get("taints");
-      Set<Set<String>> allTaints = new HashSet<>();
-
-      for (List<String> taintLIst : taintsLists) {
-        Set<String> taints = new HashSet<>(taintLIst);
-        allTaints.add(taints);
-      }
-
-      ExecTaints execTaints = new ExecTaints();
-      execTaints.addExecTaints(allTaints);
-
-      allExecTaints.add(execTaints);
-    }
-
-    return allExecTaints;
-  }
-
-  private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
-    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.LLBRACKET, "");
-    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.RRBRACKET, "");
-    String[] entries = execVarCtxStr.split(Pattern.quote("^"));
-
-    ExecVarCtx execVarCtx = new ExecVarCtx();
-
-    if (!(entries.length == 1 && "true".equals(entries[0]))) {
-      for (String entry : entries) {
-        String notStr = "!";
-        entry = entry.trim();
-        boolean value = !entry.contains(notStr);
-        entry = entry.replace(notStr, "");
-        execVarCtx.addEntry(entry, value);
-      }
-    }
-
-    return execVarCtx;
-  }
-
-  /**
-   * Input: P, c in C, O
-   *
-   * Output: SC: S —> P(CT)
-   *
-   * Input: The program is provided elsewhere. Therefore, there is no need to pass the program to
-   * this method.
-   */
   void runDynamicAnalysis() throws IOException, InterruptedException {
     Set<Set<String>> exploredConfigs = new HashSet<>();
     Set<Set<String>> configsToExplore = new HashSet<>();
@@ -227,6 +147,71 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 //    System.out.println(count);
 ////    // TODO this might be done in the compression step, not in the analysis
 ////    this.getConfigsForCC();
+  }
+
+  @Override
+  public Map<JavaRegion, SinkData> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    List<RegionToInfo> results = mapper
+        .readValue(file, new TypeReference<List<RegionToInfo>>() {
+        });
+
+    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
+
+    for (RegionToInfo<SinkData> result : results) {
+      Map<String, Map> info = (Map<String, Map>) result.getInfo();
+      Map<String, Map> sinkDataEntries = info.get("data");
+
+      SinkData sinkData = new SinkData();
+
+      for (Map.Entry<String, Map> entry : sinkDataEntries.entrySet()) {
+        String execVarCtxStr = entry.getKey();
+        ExecVarCtx execVarCtx = this.getExecVarCtx(execVarCtxStr);
+        Map<String, List> execTaints = entry.getValue();
+        ExecTaints executionTaints = this.getExecTaints(execTaints);
+
+        sinkData.putIfAbsent(execVarCtx, executionTaints);
+      }
+
+      regionsToConstraints.put(result.getRegion(), sinkData);
+    }
+
+    return regionsToConstraints;
+  }
+
+  private ExecTaints getExecTaints(Map<String, List> map) {
+    List<List<String>> taintsLists = map.get("taints");
+    Set<Set<String>> allTaints = new HashSet<>();
+
+    for (List<String> taintLIst : taintsLists) {
+      Set<String> taints = new HashSet<>(taintLIst);
+      allTaints.add(taints);
+    }
+
+    ExecTaints execTaints = new ExecTaints();
+    execTaints.addExecTaints(allTaints);
+
+    return execTaints;
+  }
+
+  private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
+    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.LLBRACKET, "");
+    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.RRBRACKET, "");
+    String[] entries = execVarCtxStr.split(Pattern.quote("^"));
+
+    ExecVarCtx execVarCtx = new ExecVarCtx();
+
+    if (!(entries.length == 1 && "true".equals(entries[0]))) {
+      for (String entry : entries) {
+        String notStr = "!";
+        entry = entry.trim();
+        boolean value = !entry.contains(notStr);
+        entry = entry.replace(notStr, "");
+        execVarCtx.addEntry(entry, value);
+      }
+    }
+
+    return execVarCtx;
   }
 
   void postProcessPhosphorAnalysis(Set<String> config) throws IOException {
@@ -323,7 +308,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
       for (Set<String> sinkVarCtx : sinkVarCtxs) {
         ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVarCtx, config);
-        sinkData.putIfAbsent(execVarCtx, new HashSet<>());
+        sinkData.putIfAbsent(execVarCtx, new ExecTaints());
       }
     }
   }
@@ -341,12 +326,8 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     for (Map.Entry<Set<String>, Set<Set<String>>> entry : sinkResults.entrySet()) {
       Set<String> sinkVariabilityCtx = entry.getKey();
       ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVariabilityCtx, config);
-      Set<ExecTaints> executionTaints = sinkData.getExecTaints(execVarCtx);
-
-      ExecTaints execTaints = new ExecTaints();
-      execTaints.addExecTaints(entry.getValue());
-
-      executionTaints.add(execTaints);
+      ExecTaints executionTaints = sinkData.getExecTaints(execVarCtx);
+      executionTaints.addExecTaints(entry.getValue());
     }
   }
 
@@ -928,24 +909,25 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     Set<ConfigConstraint> configConstraints = new HashSet<>();
 
     for (SinkData sinkData : sinkDatas) {
-      Set<ConfigConstraint> configConstraintsAtSink = getConfigConstraintsAtSink(sinkData);
+      Set<ConfigConstraint> configConstraintsAtSink = getAnalysisConfigConstraints(
+          sinkData.getData());
       configConstraints.addAll(configConstraintsAtSink);
     }
 
     return configConstraints;
   }
 
-  private static Set<ConfigConstraint> getConfigConstraintsAtSink(SinkData sinkData) {
+  private static Set<ConfigConstraint> getAnalysisConfigConstraints(
+      Map<ExecVarCtx, ExecTaints> sinkData) {
     Set<ConfigConstraint> configConstraintsAtSink = new HashSet<>();
 
-    for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
+    for (Map.Entry<ExecVarCtx, ExecTaints> data : sinkData.entrySet()) {
       ExecVarCtx execVarCtx = data.getKey();
-      Set<Set<ConfigConstraint>> allSinkConstraints = PhosphorAnalysis
-          .getConfigConstraintsForExecVarCtx(execVarCtx, data);
+      ExecTaints execTaints = data.getValue();
+      Set<ConfigConstraint> allSinkConstraints = PhosphorAnalysis
+          .getConfigConstraintsForExecVarCtx(execVarCtx, execTaints);
 
-      for (Set<ConfigConstraint> sinkConstraint : allSinkConstraints) {
-        configConstraintsAtSink.addAll(sinkConstraint);
-      }
+      configConstraintsAtSink.addAll(allSinkConstraints);
     }
 
     return configConstraintsAtSink;
@@ -963,29 +945,22 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
   }
 
   private static void printConfigConstraintsForRegion(JavaRegion region, SinkData sinkData) {
-    for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
-      ExecVarCtx execVarCtx = data.getKey();
-      Set<Set<ConfigConstraint>> regionConstraints = getConfigConstraintsForExecVarCtx(execVarCtx,
-          data);
-
-      for (Set<ConfigConstraint> cs : regionConstraints) {
-        System.out
-            .println(region.getRegionMethod() + ":" + region.getStartRegionIndex() + " -> " + cs);
-      }
-    }
+    throw new UnsupportedOperationException("Implement");
+//    for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
+//      ExecVarCtx execVarCtx = data.getKey();
+//      Set<Set<ConfigConstraint>> regionConstraints = getConfigConstraintsForExecVarCtx(execVarCtx,
+//          data);
+//
+//      for (Set<ConfigConstraint> cs : regionConstraints) {
+//        System.out
+//            .println(region.getRegionMethod() + ":" + region.getStartRegionIndex() + " -> " + cs);
+//      }
+//    }
   }
 
-  private static Set<Set<ConfigConstraint>> getConfigConstraintsForExecVarCtx(ExecVarCtx execVarCtx,
-      Entry<ExecVarCtx, Set<ExecTaints>> data) {
-    Set<Set<ConfigConstraint>> regionConfigConstraints = new HashSet<>();
-
-    for (ExecTaints execTaints : data.getValue()) {
-      Set<ConfigConstraint> configConstraints = getConfigConstraintsForExecTaints(execVarCtx,
-          execTaints);
-      regionConfigConstraints.add(configConstraints);
-    }
-
-    return regionConfigConstraints;
+  private static Set<ConfigConstraint> getConfigConstraintsForExecVarCtx(ExecVarCtx execVarCtx,
+      ExecTaints execTaints) {
+    return getConfigConstraintsForExecTaints(execVarCtx, execTaints);
   }
 
   private static Set<ConfigConstraint> getConfigConstraintsForExecTaints(ExecVarCtx execVarCtx,

@@ -6,17 +6,17 @@ import java.util.Set;
 
 public class SinkData {
 
-  private final Map<ExecVarCtx, Set<ExecTaints>> data = new HashMap<>();
+    private final Map<ExecVarCtx, ExecTaints> data = new HashMap<>();
 
-  void putIfAbsent(ExecVarCtx execVarCtx, Set<ExecTaints> executionTaints) {
+  void putIfAbsent(ExecVarCtx execVarCtx, ExecTaints executionTaints) {
     this.data.putIfAbsent(execVarCtx, executionTaints);
   }
 
-  Set<ExecTaints> getExecTaints(ExecVarCtx execVarCtx) {
+  ExecTaints getExecTaints(ExecVarCtx execVarCtx) {
     return this.data.get(execVarCtx);
   }
 
-  public Map<ExecVarCtx, Set<ExecTaints>> getData() {
+  public Map<ExecVarCtx, ExecTaints> getData() {
     return data;
   }
 

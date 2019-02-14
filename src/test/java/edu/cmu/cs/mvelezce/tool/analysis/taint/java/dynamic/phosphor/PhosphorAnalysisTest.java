@@ -6,6 +6,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.Dynam
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
@@ -14,6 +15,28 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class PhosphorAnalysisTest {
+
+  @Test
+  public void Trivial() throws IOException, InterruptedException {
+    String programName = TrivialAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(TrivialAdapter.getListOfOptions());
+    Set<String> initialConfig = new HashSet<>();
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
 
   @Test
   public void dynamicRunningExample() throws IOException, InterruptedException {
@@ -26,7 +49,8 @@ public class PhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -57,7 +81,8 @@ public class PhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -78,7 +103,8 @@ public class PhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];
@@ -99,7 +125,8 @@ public class PhosphorAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
     Map<JavaRegion, SinkData> write = analysis.analyze(args);
 
     args = new String[0];

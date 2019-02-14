@@ -78,22 +78,21 @@ public class PhosphorCompression extends BaseDynamicCompression<Set<Set<Set<Stri
   }
 
   private Set<ConfigConstraint> getConfigConstraints() {
-    throw new UnsupportedOperationException("implement");
-//    Set<ConfigConstraint> configConstraints = new HashSet<>();
-//
-//    for (SinkData sinkData : this.getConstraints()) {
-//      Map<ExecVarCtx, Set<ExecTaints>> data = sinkData.getData();
-//      Set<ConfigConstraint> configConstraintsAtSink = this.getConfigConstraintsAtSink(data);
-//      configConstraints.addAll(configConstraintsAtSink);
-//    }
-//
-//    return configConstraints;
+    Set<ConfigConstraint> configConstraints = new HashSet<>();
+
+    for (SinkData sinkData : this.getConstraints()) {
+      Map<ExecVarCtx, ExecTaints> data = sinkData.getData();
+      Set<ConfigConstraint> configConstraintsAtSink = this.getConfigConstraintsAtSink(data);
+      configConstraints.addAll(configConstraintsAtSink);
+    }
+
+    return configConstraints;
   }
 
-  private Set<ConfigConstraint> getConfigConstraintsAtSink(Map<ExecVarCtx, Set<ExecTaints>> data) {
+  private Set<ConfigConstraint> getConfigConstraintsAtSink(Map<ExecVarCtx, ExecTaints> data) {
     Set<ConfigConstraint> configConstraintsAtSink = new HashSet<>();
 
-    for (Map.Entry<ExecVarCtx, Set<ExecTaints>> ctxAndTaints : data.entrySet()) {
+    for (Map.Entry<ExecVarCtx, ExecTaints> ctxAndTaints : data.entrySet()) {
       Set<ConfigConstraint> configConstraintsForCtx = this.getConfigConstraintsForCtx(ctxAndTaints);
       configConstraintsAtSink.addAll(configConstraintsForCtx);
     }
@@ -102,19 +101,15 @@ public class PhosphorCompression extends BaseDynamicCompression<Set<Set<Set<Stri
   }
 
   private Set<ConfigConstraint> getConfigConstraintsForCtx(
-      Entry<ExecVarCtx, Set<ExecTaints>> ctxAndTaints) {
-    Set<ConfigConstraint> configConstraintsForCtx = new HashSet<>();
+      Entry<ExecVarCtx, ExecTaints> ctxAndTaints) {
     ExecVarCtx execVarCtx = ctxAndTaints.getKey();
+    ExecTaints execTaints = ctxAndTaints.getValue();
+    Set<Set<String>> taints = execTaints.getTaints();
 
-    for (ExecTaints execTaints : ctxAndTaints.getValue()) {
-      Set<Set<String>> taints = execTaints.getTaints();
+    Set<ConfigConstraint> configConstraintsForTaints = this
+        .getConfigConstraintsForTaints(execVarCtx, taints);
 
-      Set<ConfigConstraint> configConstraintsForTaints = this
-          .getConfigConstraintsForTaints(execVarCtx, taints);
-      configConstraintsForCtx.addAll(configConstraintsForTaints);
-    }
-
-    return configConstraintsForCtx;
+    return new HashSet<>(configConstraintsForTaints);
   }
 
   private Set<ConfigConstraint> getConfigConstraintsForTaints(ExecVarCtx execVarCtx,

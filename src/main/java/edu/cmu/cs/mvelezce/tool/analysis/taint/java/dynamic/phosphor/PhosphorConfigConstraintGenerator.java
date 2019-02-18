@@ -10,21 +10,21 @@ import java.util.Set;
 
 public class PhosphorConfigConstraintGenerator {
 
-  private static final Map<String, Map<ExecVarCtx, ExecConstraints>> SINKS_TO_CONFIG_CONSTRAINTS = new HashMap<>();
+  private final Map<String, Map<ExecVarCtx, ExecConstraints>> sinksToConfigConstraints = new HashMap<>();
 
-  static void updateConstraintsAtSinks(Set<String> config,
+  void updateConstraintsAtSinks(Set<String> config,
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints) {
     addSinks(sinksToAnalysisTaints.keySet());
     addExecVarCtx(sinksToAnalysisTaints, config);
     addOrUpdateConstraints(sinksToAnalysisTaints);
   }
 
-  private static void addOrUpdateConstraints(
+  private void addOrUpdateConstraints(
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints) {
     for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> entry : sinksToAnalysisTaints
         .entrySet()) {
       String sink = entry.getKey();
-      Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints = SINKS_TO_CONFIG_CONSTRAINTS
+      Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints = sinksToConfigConstraints
           .get(sink);
 
       Map<Set<String>, List<Set<String>>> ctxsToTaints = entry.getValue();
@@ -32,7 +32,7 @@ public class PhosphorConfigConstraintGenerator {
     }
   }
 
-  private static void addOrUpdateConstraintsForSink(
+  private void addOrUpdateConstraintsForSink(
       Map<Set<String>, List<Set<String>>> ctxsToTaints,
       Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints) {
     Set<ExecVarCtx> execVarCtxs = execVarCtxsToConfigConstraints.keySet();
@@ -47,7 +47,7 @@ public class PhosphorConfigConstraintGenerator {
 
   }
 
-  private static void addOrUpdateConstraintsForCtx(ExecVarCtx execVarCtx, List<Set<String>> taints,
+  private void addOrUpdateConstraintsForCtx(ExecVarCtx execVarCtx, List<Set<String>> taints,
       ExecConstraints configConstraints) {
     for (Set<String> taint : taints) {
       Set<ConfigConstraint> taintConfigConstraints = getTaintConfigConstraintsForCtx(execVarCtx,
@@ -63,7 +63,7 @@ public class PhosphorConfigConstraintGenerator {
 
   }
 
-  private static Set<ConfigConstraint> getTaintConfigConstraintsForCtx(ExecVarCtx execVarCtx,
+  private Set<ConfigConstraint> getTaintConfigConstraintsForCtx(ExecVarCtx execVarCtx,
       Set<String> taint) {
     Set<ConfigConstraint> taintConfigConstraintsForCtx = new HashSet<>();
     Set<ConfigConstraint> taintConfigConstraints = getTaintConfigConstraints(taint);
@@ -82,13 +82,13 @@ public class PhosphorConfigConstraintGenerator {
     return taintConfigConstraintsForCtx;
   }
 
-  private static Set<ConfigConstraint> getTaintConfigConstraints(Set<String> taint) {
+  private Set<ConfigConstraint> getTaintConfigConstraints(Set<String> taint) {
     Set<Set<String>> configs = Helper.getConfigurations(taint);
     return getConfigConstraints(configs, taint);
   }
 
 
-  private static Set<ConfigConstraint> getConfigConstraints(Set<Set<String>> configs,
+  private Set<ConfigConstraint> getConfigConstraints(Set<Set<String>> configs,
       Set<String> options) {
     Set<ConfigConstraint> configConstraints = new HashSet<>();
 
@@ -105,13 +105,13 @@ public class PhosphorConfigConstraintGenerator {
     return configConstraints;
   }
 
-  private static void addExecVarCtx(
+  private void addExecVarCtx(
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints,
       Set<String> config) {
     for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> entry : sinksToAnalysisTaints
         .entrySet()) {
       String sink = entry.getKey();
-      Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints = SINKS_TO_CONFIG_CONSTRAINTS
+      Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints = sinksToConfigConstraints
           .get(sink);
 
       Map<Set<String>, List<Set<String>>> ctxsToTaints = entry.getValue();
@@ -120,7 +120,7 @@ public class PhosphorConfigConstraintGenerator {
 
   }
 
-  private static void AddExecVarCtxsForSink(Set<Set<String>> ctxs,
+  private void AddExecVarCtxsForSink(Set<Set<String>> ctxs,
       Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints, Set<String> config) {
     for (Set<String> ctx : ctxs) {
       ExecVarCtx execVarCtx = getExecVarCtx(ctx, config);
@@ -128,7 +128,7 @@ public class PhosphorConfigConstraintGenerator {
     }
   }
 
-  private static ExecVarCtx getExecVarCtx(Set<String> ctx, Set<String> config) {
+  private ExecVarCtx getExecVarCtx(Set<String> ctx, Set<String> config) {
     ExecVarCtx execVarCtx = new ExecVarCtx();
 
     for (String option : ctx) {
@@ -138,16 +138,16 @@ public class PhosphorConfigConstraintGenerator {
     return execVarCtx;
   }
 
-  private static void addSinks(Set<String> sinks) {
+  private void addSinks(Set<String> sinks) {
     for (String sink : sinks) {
-      SINKS_TO_CONFIG_CONSTRAINTS.putIfAbsent(sink, new HashMap<>());
+      sinksToConfigConstraints.putIfAbsent(sink, new HashMap<>());
     }
   }
 
-  static Set<ConfigConstraint> getConfigConstraints() {
+  Set<ConfigConstraint> getConfigConstraints() {
     Set<ConfigConstraint> configConstraints = new HashSet<>();
 
-    for (Map<ExecVarCtx, ExecConstraints> constraintsPerCtxAtSinks : SINKS_TO_CONFIG_CONSTRAINTS
+    for (Map<ExecVarCtx, ExecConstraints> constraintsPerCtxAtSinks : sinksToConfigConstraints
         .values()) {
       Collection<ExecConstraints> constraintsAtSink = constraintsPerCtxAtSinks.values();
 
@@ -163,7 +163,7 @@ public class PhosphorConfigConstraintGenerator {
     return configConstraints;
   }
 
-  //  private static void toConfigConstraints(Set<String> config, Set<String> ctx,
+  //  private void toConfigConstraints(Set<String> config, Set<String> ctx,
 //      List<Set<String>> taints) {
 //    Set<ConfigConstraint> configConstraints = new HashSet<>();
 //
@@ -192,7 +192,7 @@ public class PhosphorConfigConstraintGenerator {
 //    return configConstraints;
 //  }
 
-//  private static PartialConfig toPartialConfig(Set<String> ctx, Set<String> config) {
+//  private PartialConfig toPartialConfig(Set<String> ctx, Set<String> config) {
 //    PartialConfig partialConfig = new PartialConfig();
 //
 //    for (String option : options) {
@@ -206,7 +206,7 @@ public class PhosphorConfigConstraintGenerator {
 //    return partialConfig;
 //  }
 
-//  private static Set<ConfigConstraint> getConfigConstraintsForExecTaints(ExecVarCtx execVarCtx,
+//  private Set<ConfigConstraint> getConfigConstraintsForExecTaints(ExecVarCtx execVarCtx,
 //      ExecTaints execTaints, PartialConfig configAsPartialConfig) {
 //    Set<ConfigConstraint> configConstraints = new HashSet<>();
 //    Map<String, Boolean> execVarCtxPartialConfig = execVarCtx.getPartialConfig();
@@ -263,7 +263,7 @@ public class PhosphorConfigConstraintGenerator {
 //  }
 //
 //
-//  private static Set<ConfigConstraint> getConfigConstraintsForExecVarCtx(ExecVarCtx execVarCtx,
+//  private Set<ConfigConstraint> getConfigConstraintsForExecVarCtx(ExecVarCtx execVarCtx,
 //      ExecTaints execTaints, PartialConfig configAsPartialConfig) {
 //    return getConfigConstraintsForExecTaints(execVarCtx, execTaints, configAsPartialConfig);
 //  }

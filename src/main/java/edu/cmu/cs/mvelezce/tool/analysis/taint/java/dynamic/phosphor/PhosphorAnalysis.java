@@ -49,6 +49,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
   private final Map<String, SinkData> sinksToData = new HashMap<>();
   private final PhosphorExecutionAnalysis phosphorExecutionAnalysis;
+  private final PhosphorConfigConstraintGenerator phosphorConfigConstraintGenerator;
   private final ConfigConstraintAnalyzer configConstraintAnalyzer;
 
   public PhosphorAnalysis(String programName) {
@@ -59,6 +60,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     super(programName, options, initialConfig);
 
     this.phosphorExecutionAnalysis = new PhosphorExecutionAnalysis(programName);
+    this.phosphorConfigConstraintGenerator = new PhosphorConfigConstraintGenerator();
     this.configConstraintAnalyzer = new ConfigConstraintAnalyzer(options);
   }
 
@@ -103,9 +105,9 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints = this.phosphorExecutionAnalysis
           .analyzePhosphorResults();
-      PhosphorConfigConstraintGenerator
+      this.phosphorConfigConstraintGenerator
           .updateConstraintsAtSinks(configToExecute, sinksToAnalysisTaints);
-      Set<ConfigConstraint> analysisConfigConstraints = PhosphorConfigConstraintGenerator
+      Set<ConfigConstraint> analysisConfigConstraints = this.phosphorConfigConstraintGenerator
           .getConfigConstraints();
 
       configConstraintsToSatisfy.addAll(analysisConfigConstraints);

@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
 
 public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
@@ -48,6 +49,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
   private final Map<String, SinkData> sinksToData = new HashMap<>();
   private final PhosphorExecutionAnalysis phosphorExecutionAnalysis;
+  private final ConfigConstraintAnalyzer configConstraintAnalyzer;
 
   public PhosphorAnalysis(String programName) {
     this(programName, new HashSet<>(), new HashSet<>());
@@ -57,6 +59,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     super(programName, options, initialConfig);
 
     this.phosphorExecutionAnalysis = new PhosphorExecutionAnalysis(programName);
+    this.configConstraintAnalyzer = new ConfigConstraintAnalyzer(options);
   }
 
   @Override
@@ -85,81 +88,66 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     Set<ConfigConstraint> configConstraintsToSatisfy = new HashSet<>();
     Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
 
-    Set<Set<String>> exploredConfigs = new HashSet<>();
-    Set<Set<String>> configsToExplore = new HashSet<>();
+    Set<ConfigConstraint> exploredConfigConstraints = new HashSet<>();
+    Set<String> configToExecute = this.getInitialConfig();
 
-    configsToExplore.add(this.getInitialConfig());
-
-    while (!configsToExplore.isEmpty()) {
-      Set<String> config = configsToExplore.iterator().next();
-      configsToExplore.remove(config);
-      exploredConfigs.add(config);
-
-      ConfigConstraint configConstraint = ConfigConstraint.fromConfig(config, this.getOptions());
+    while (configToExecute != null) {
+      ConfigConstraint configConstraint = ConfigConstraint
+          .fromConfig(configToExecute, this.getOptions());
+      exploredConfigConstraints.add(configConstraint);
       Set<ConfigConstraint> satisfiedConfigConstraintsByConfig = this.phosphorExecutionAnalysis
           .getSatisfiedConfigConstraintsByConfig(configConstraint);
       satisfiedConfigConstraints.addAll(satisfiedConfigConstraintsByConfig);
 
-      this.runPhosphorAnalysis(config);
+      this.runPhosphorAnalysis(configToExecute);
 
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints = this.phosphorExecutionAnalysis
           .analyzePhosphorResults();
-      PhosphorConfigConstraintGenerator.updateConstraintsAtSinks(config, sinksToAnalysisTaints);
+      PhosphorConfigConstraintGenerator
+          .updateConstraintsAtSinks(configToExecute, sinksToAnalysisTaints);
       Set<ConfigConstraint> analysisConfigConstraints = PhosphorConfigConstraintGenerator
           .getConfigConstraints();
 
       configConstraintsToSatisfy.addAll(analysisConfigConstraints);
       configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
-      System.out.println();
-//      Set<Set<String>> configsToRun = this.getConfigsToRun(config);
-//      configsToRun.removeAll(exploredConfigs);
-//      configsToExplore.addAll(configsToRun);
+
+      Set<Set<String>> configsToRun = this.configConstraintAnalyzer
+          .getConfigsThatSatisfyConfigConstraints(configConstraintsToSatisfy,
+              exploredConfigConstraints);
+
+      configToExecute = this.getConfigToExecute(configsToRun);
+    }
+  }
+
+  @Nullable
+  private Set<String> getConfigToExecute(Set<Set<String>> configsToRun) {
+    if (configsToRun.isEmpty()) {
+      return null;
     }
 
-    // TODO add check to be sure that we are not sampling a constraint that we already sample
-//    Set<Constraint> exploredConstraints = new HashSet<>();
-//    Set<Constraint> constraintsToExplore = new HashSet<>();
-//    // CE := to_constraint(c)
-//    Set<String> options = this.getOptions();
-//    Map<String, Boolean> initialConfigAsConfigWithValues = Constraint
-//        .toConfigWithValues(this.getInitialConfig(), options);
-//    constraintsToExplore.add(new Constraint(initialConfigAsConfigWithValues));
-//
-//    int count = 0;
-//
-//    while (!constraintsToExplore.isEmpty()) {
-//      // CTE := get_next_constraint(CE,O)
-//      Constraint currentConstraint = PhosphorAnalysis.getNextConstraint(constraintsToExplore);
-//      // c:= to_config(CTE)
-//      Set<String> config = currentConstraint.getConstraintAsPartialConfig();
-//      Map<String, Boolean> configWithValues = Constraint.toConfigWithValues(config, options);
-//      currentConstraint = new Constraint(configWithValues);
-//
-//      // CE.removeAll(CTE)
-//      PhosphorAnalysis.removeAllSubConstraints(constraintsToExplore, currentConstraint);
-//      // EC.addAll(CTE)
-//      exploredConstraints.add(currentConstraint);
-//
-//      // ST := run_taint_analysis(P’, c)
-//      this.runPhosphorAnalysis(config);
-//      Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaintsResults = this
-//          .analyzePhosphorResults();
-//
-////      // CFA := get_constraints_from_analysis(ST)
-////      Set<Constraint> constraintsFromAnalysis = this
-////          .getConstraintsFromAnalysis(sinksToTaintsResults, config);
-////
-////      // CFA.removeAll(EC)
-////      PhosphorAnalysis.removeAllSubConstraints(constraintsFromAnalysis, exploredConstraints);
-////      // CE.addAll(CC)
-////      constraintsToExplore.addAll(constraintsFromAnalysis);
-//
-//      count++;
-//    }
-//
-//    System.out.println(count);
-////    // TODO this might be done in the compression step, not in the analysis
-////    this.getConfigsForCC();
+    int maxSize = this.getMaxSizeOfConfigs(configsToRun);
+
+    return this.getConfigOfSize(maxSize, configsToRun);
+  }
+
+  private Set<String> getConfigOfSize(int size, Set<Set<String>> configsToRun) {
+    for (Set<String> config : configsToRun) {
+      if (config.size() == size) {
+        return config;
+      }
+    }
+
+    throw new RuntimeException("Could not find a config with size " + size);
+  }
+
+  private int getMaxSizeOfConfigs(Set<Set<String>> configsToRun) {
+    int maxSize = -1;
+
+    for (Set<String> config : configsToRun) {
+      maxSize = Math.max(maxSize, config.size());
+    }
+
+    return maxSize;
   }
 
   @Override
@@ -315,19 +303,6 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     return commandList;
   }
 
-//  Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
-//      Set<ConfigConstraint> configConstraints, ConfigConstraint executedConfigConstraint) {
-//    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
-//
-//    for (ConfigConstraint configConstraint : configConstraints) {
-//      if (configConstraint.isSubConstraintOf(executedConfigConstraint)) {
-//        satisfiedConfigConstraints.add(configConstraint);
-//      }
-//    }
-//
-//    return satisfiedConfigConstraints;
-//  }
-
   private ExecTaints getExecTaints(Map<String, List> map) {
     List<List<String>> taintsLists = map.get("taints");
     List<Set<String>> allTaints = new ArrayList<>();
@@ -360,6 +335,90 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     return execVarCtx;
   }
 
+  static void printProgramConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
+    throw new UnsupportedOperationException("Implement");
+//    for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
+//      JavaRegion region = regionToSinkData.getKey();
+//      SinkData sinkData = regionToSinkData.getValue();
+//
+//      printConfigConstraintsForRegion(region, sinkData);
+//
+//      System.out.println();
+//    }
+  }
+
+  private static void printConfigConstraintsForRegion(JavaRegion region, SinkData sinkData) {
+    throw new UnsupportedOperationException("Implement");
+//    for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
+//      ExecVarCtx execVarCtx = data.getKey();
+//      Set<Set<ConfigConstraint>> regionConstraints = getConfigConstraintsForExecVarCtx(execVarCtx,
+//          data);
+//
+//      for (Set<ConfigConstraint> cs : regionConstraints) {
+//        System.out
+//            .println(region.getRegionMethod() + ":" + region.getStartRegionIndex() + " -> " + cs);
+//      }
+//    }
+  }
+
+  // TODO add check to be sure that we are not sampling a constraint that we already sample
+//    Set<Constraint> exploredConstraints = new HashSet<>();
+//    Set<Constraint> constraintsToExplore = new HashSet<>();
+//    // CE := to_constraint(c)
+//    Set<String> options = this.getOptions();
+//    Map<String, Boolean> initialConfigAsConfigWithValues = Constraint
+//        .toConfigWithValues(this.getInitialConfig(), options);
+//    constraintsToExplore.add(new Constraint(initialConfigAsConfigWithValues));
+//
+//    int count = 0;
+//
+//    while (!constraintsToExplore.isEmpty()) {
+//      // CTE := get_next_constraint(CE,O)
+//      Constraint currentConstraint = PhosphorAnalysis.getNextConstraint(constraintsToExplore);
+//      // c:= to_config(CTE)
+//      Set<String> config = currentConstraint.getConstraintAsPartialConfig();
+//      Map<String, Boolean> configWithValues = Constraint.toConfigWithValues(config, options);
+//      currentConstraint = new Constraint(configWithValues);
+//
+//      // CE.removeAll(CTE)
+//      PhosphorAnalysis.removeAllSubConstraints(constraintsToExplore, currentConstraint);
+//      // EC.addAll(CTE)
+//      exploredConstraints.add(currentConstraint);
+//
+//      // ST := run_taint_analysis(P’, c)
+//      this.runPhosphorAnalysis(config);
+//      Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaintsResults = this
+//          .analyzePhosphorResults();
+//
+////      // CFA := get_constraints_from_analysis(ST)
+////      Set<Constraint> constraintsFromAnalysis = this
+////          .getConstraintsFromAnalysis(sinksToTaintsResults, config);
+////
+////      // CFA.removeAll(EC)
+////      PhosphorAnalysis.removeAllSubConstraints(constraintsFromAnalysis, exploredConstraints);
+////      // CE.addAll(CC)
+////      constraintsToExplore.addAll(constraintsFromAnalysis);
+//
+//      count++;
+//    }
+//
+//    System.out.println(count);
+////    // TODO this might be done in the compression step, not in the analysis
+////    this.getConfigsForCC();
+
+  //  Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
+//      Set<ConfigConstraint> configConstraints, ConfigConstraint executedConfigConstraint) {
+//    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
+//
+//    for (ConfigConstraint configConstraint : configConstraints) {
+//      if (configConstraint.isSubConstraintOf(executedConfigConstraint)) {
+//        satisfiedConfigConstraints.add(configConstraint);
+//      }
+//    }
+//
+//    return satisfiedConfigConstraints;
+//  }
+
 //  Map<String, Map<Set<String>, List<Set<String>>>> postProcessPhosphorAnalysis()
 //      throws IOException {
 //
@@ -371,24 +430,6 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 //    return this.phosphorExecutionAnalysis.analyzePhosphorResults();
 //  }
 
-//  private Set<Set<String>> getConfigsToRun(Set<String> config) {
-//    Set<Map<String, Boolean>> configMapsToRun = this.getConfigMapsToRun(config);
-//    Set<Set<String>> configsToRun = new HashSet<>();
-//
-//    for (Map<String, Boolean> configMapToRun : configMapsToRun) {
-//      Set<String> configToRun = new HashSet<>();
-//
-//      for (Map.Entry<String, Boolean> entry : configMapToRun.entrySet()) {
-//        if (entry.getValue()) {
-//          configToRun.add(entry.getKey());
-//        }
-//      }
-//
-//      configsToRun.add(configToRun);
-//    }
-//
-//    return configsToRun;
-//  }
 //
 //  private Set<Map<String, Boolean>> getConfigMapsToRun(Set<String> config) {
 //    Set<Map<String, Boolean>> configMapsToRun = new HashSet<>();
@@ -787,32 +828,5 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 //  Map<String, SinkData> getSinksToData() {
 //    return sinksToData;
 //  }
-
-
-  static void printProgramConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
-    throw new UnsupportedOperationException("Implement");
-//    for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
-//      JavaRegion region = regionToSinkData.getKey();
-//      SinkData sinkData = regionToSinkData.getValue();
-//
-//      printConfigConstraintsForRegion(region, sinkData);
-//
-//      System.out.println();
-//    }
-  }
-
-  private static void printConfigConstraintsForRegion(JavaRegion region, SinkData sinkData) {
-    throw new UnsupportedOperationException("Implement");
-//    for (Map.Entry<ExecVarCtx, Set<ExecTaints>> data : sinkData.getData().entrySet()) {
-//      ExecVarCtx execVarCtx = data.getKey();
-//      Set<Set<ConfigConstraint>> regionConstraints = getConfigConstraintsForExecVarCtx(execVarCtx,
-//          data);
-//
-//      for (Set<ConfigConstraint> cs : regionConstraints) {
-//        System.out
-//            .println(region.getRegionMethod() + ":" + region.getStartRegionIndex() + " -> " + cs);
-//      }
-//    }
-  }
 
 }

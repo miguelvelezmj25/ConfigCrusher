@@ -96,7 +96,9 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
       exploredConfigs.add(config);
 
       ConfigConstraint configConstraint = ConfigConstraint.fromConfig(config, this.getOptions());
-      satisfiedConfigConstraints.add(configConstraint);
+      Set<ConfigConstraint> satisfiedConfigConstraintsByConfig = this.phosphorExecutionAnalysis
+          .getSatisfiedConfigConstraintsByConfig(configConstraint);
+      satisfiedConfigConstraints.addAll(satisfiedConfigConstraintsByConfig);
 
       this.runPhosphorAnalysis(config);
 
@@ -106,12 +108,9 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
       Set<ConfigConstraint> analysisConfigConstraints = PhosphorConfigConstraintGenerator
           .getConfigConstraints();
 
-//      configConstraintsToSatisfy.addAll(analysisConfigConstraints);
-//      Set<ConfigConstraint> satisfiedConstraintsByConfig = this
-//          .getSatisfiedConfigConstraintsByConfig(configConstraintsToSatisfy, configConstraint);
-//      satisfiedConfigConstraints.addAll(satisfiedConstraintsByConfig);
-//      configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
-//
+      configConstraintsToSatisfy.addAll(analysisConfigConstraints);
+      configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
+      System.out.println();
 //      Set<Set<String>> configsToRun = this.getConfigsToRun(config);
 //      configsToRun.removeAll(exploredConfigs);
 //      configsToExplore.addAll(configsToRun);
@@ -316,18 +315,18 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     return commandList;
   }
 
-  Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
-      Set<ConfigConstraint> configConstraints, ConfigConstraint executedConfigConstraint) {
-    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
-
-    for (ConfigConstraint configConstraint : configConstraints) {
-      if (configConstraint.isSubConstraintOf(executedConfigConstraint)) {
-        satisfiedConfigConstraints.add(configConstraint);
-      }
-    }
-
-    return satisfiedConfigConstraints;
-  }
+//  Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
+//      Set<ConfigConstraint> configConstraints, ConfigConstraint executedConfigConstraint) {
+//    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
+//
+//    for (ConfigConstraint configConstraint : configConstraints) {
+//      if (configConstraint.isSubConstraintOf(executedConfigConstraint)) {
+//        satisfiedConfigConstraints.add(configConstraint);
+//      }
+//    }
+//
+//    return satisfiedConfigConstraints;
+//  }
 
   private ExecTaints getExecTaints(Map<String, List> map) {
     List<List<String>> taintsLists = map.get("taints");

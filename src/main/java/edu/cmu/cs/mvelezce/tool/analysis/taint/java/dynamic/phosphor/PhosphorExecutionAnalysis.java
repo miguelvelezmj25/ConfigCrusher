@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 import edu.cmu.cs.mvelezce.cc.SinkEntry;
 import edu.cmu.cs.mvelezce.cc.TaintInfo;
 import edu.cmu.cs.mvelezce.cc.TaintLabel;
+import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.columbia.cs.psl.phosphor.runtime.Taint;
 import java.io.File;
@@ -28,6 +29,28 @@ public class PhosphorExecutionAnalysis {
 
   PhosphorExecutionAnalysis(String programName) {
     this.programName = programName;
+  }
+
+  Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
+      ConfigConstraint executedConfigConstraint) {
+    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
+
+    Map<String, Boolean> executedPartialConfig = executedConfigConstraint.getPartialConfig();
+    Set<String> options = executedPartialConfig.keySet();
+    Set<Set<String>> configs = Helper.getConfigurations(options);
+    configs.remove(new HashSet<>());
+
+    for (Set<String> config : configs) {
+      ConfigConstraint configConstraint = new ConfigConstraint();
+
+      for (String option : config) {
+        configConstraint.addEntry(option, executedPartialConfig.get(option));
+      }
+
+      satisfiedConfigConstraints.add(configConstraint);
+    }
+
+    return satisfiedConfigConstraints;
   }
 
   Map<String, Map<Set<String>, List<Set<String>>>> analyzePhosphorResults()

@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,6 +23,18 @@ public class PartialConfig {
 
   Set<String> getOptions() {
     return this.partialConfig.keySet();
+  }
+
+  Set<String> toConfig() {
+    Set<String> config = new HashSet<>();
+
+    for (Map.Entry<String, Boolean> entry : partialConfig.entrySet()) {
+      if (entry.getValue()) {
+        config.add(entry.getKey());
+      }
+    }
+
+    return config;
   }
 
   boolean isSubPartialConfigOf(PartialConfig partialConfig) {

@@ -1,10 +1,11 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
- * Set of taints that reached a sink.
+ * Ordered lists of taints that reached a sink.
  *
  * The taints are represented as set of options.
  *
@@ -12,19 +13,27 @@ import java.util.Set;
  */
 public class ExecTaints {
 
-  private Set<Set<String>> taints = new HashSet<>();
+  private List<Set<String>> taints;
 
-  void addExecTaints(Set<Set<String>> execTaints) {
-    this.taints.addAll(execTaints);
+  public ExecTaints(List<Set<String>> taints) {
+    this.taints = taints;
   }
 
-  public Set<Set<String>> getTaints() {
+  public ExecTaints() {
+    this(new ArrayList<>());
+  }
+
+//  void addExecTaints(List<Set<String>> execTaints) {
+//    this.taints.addAll(execTaints);
+//  }
+
+  public List<Set<String>> getTaints() {
     return taints;
   }
 
-  public void setTaints(Set<Set<String>> taints) {
-    this.taints = taints;
-  }
+//  public void setTaints(Set<Set<String>> taints) {
+//    this.taints = taints;
+//  }
 
   @Override
   public String toString() {

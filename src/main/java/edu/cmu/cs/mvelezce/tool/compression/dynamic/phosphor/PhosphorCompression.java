@@ -104,12 +104,14 @@ public class PhosphorCompression extends BaseDynamicCompression<Set<Set<Set<Stri
       Entry<ExecVarCtx, ExecTaints> ctxAndTaints) {
     ExecVarCtx execVarCtx = ctxAndTaints.getKey();
     ExecTaints execTaints = ctxAndTaints.getValue();
-    Set<Set<String>> taints = execTaints.getTaints();
+    List<Set<String>> taints = execTaints.getTaints();
 
-    Set<ConfigConstraint> configConstraintsForTaints = this
-        .getConfigConstraintsForTaints(execVarCtx, taints);
+    throw new UnsupportedOperationException("Implement");
 
-    return new HashSet<>(configConstraintsForTaints);
+//    Set<ConfigConstraint> configConstraintsForTaints = this
+//        .getConfigConstraintsForTaints(execVarCtx, taints);
+//
+//    return new HashSet<>(configConstraintsForTaints);
   }
 
   private Set<ConfigConstraint> getConfigConstraintsForTaints(ExecVarCtx execVarCtx,

@@ -38,7 +38,7 @@ public class PhosphorConfigConstraintGenerator {
     Set<ExecVarCtx> execVarCtxs = execVarCtxsToConfigConstraints.keySet();
 
     for (ExecVarCtx execVarCtx : execVarCtxs) {
-      Set<String> ctx = execVarCtx.asConfig();
+      Set<String> ctx = execVarCtx.toConfig();
       List<Set<String>> taints = ctxsToTaints.get(ctx);
 
       ExecConstraints configConstraints = execVarCtxsToConfigConstraints.get(execVarCtx);

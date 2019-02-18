@@ -3,9 +3,12 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.DynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces6.Subtraces6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.IOException;
 import java.util.HashSet;
@@ -21,6 +24,78 @@ public class PhosphorAnalysisTest {
     String programName = TrivialAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(TrivialAdapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Subtraces() throws IOException, InterruptedException {
+    String programName = SubtracesAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
+    Set<String> initialConfig = new HashSet<>();
+    initialConfig.add("A");
+    initialConfig.add("B");
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Subtraces6() throws IOException, InterruptedException {
+    String programName = Subtraces6Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(Subtraces6Adapter.getListOfOptions());
+    Set<String> initialConfig = new HashSet<>();
+    initialConfig.add("A");
+//    initialConfig.add("B");
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new BFPhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Implicit() throws IOException, InterruptedException {
+    String programName = ImplicitAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(ImplicitAdapter.getListOfOptions());
+    Set<String> initialConfig = new HashSet<>();
+    initialConfig.add("A");
+    initialConfig.add("B");
 
     // Program arguments
     String[] args = new String[2];

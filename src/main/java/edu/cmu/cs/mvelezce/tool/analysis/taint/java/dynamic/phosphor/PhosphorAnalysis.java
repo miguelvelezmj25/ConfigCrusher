@@ -2,9 +2,6 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.cmu.cs.mvelezce.cc.SinkEntry;
-import edu.cmu.cs.mvelezce.cc.TaintInfo;
-import edu.cmu.cs.mvelezce.cc.TaintLabel;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
@@ -29,34 +26,28 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleFor
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces6.Subtraces6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext2.VariabilityContext2Adapter;
-import edu.columbia.cs.psl.phosphor.runtime.Taint;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-import org.apache.commons.io.FileUtils;
 
 public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
-  private static final String PHOSPHOR_OUTPUT_DIR =
-      BaseAdapter.USER_HOME
-          + "/Documents/Programming/Java/Projects/phosphor/Phosphor/examples/implicit-optimized";
   private static final String PHOSPHOR_SCRIPTS_DIR = BaseAdapter.USER_HOME
       + "/Documents/Programming/Java/Projects/phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
 
   private final Map<String, SinkData> sinksToData = new HashMap<>();
+  private final PhosphorExecutionAnalysis phosphorExecutionAnalysis;
 
   public PhosphorAnalysis(String programName) {
     this(programName, new HashSet<>(), new HashSet<>());
@@ -64,6 +55,8 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
   PhosphorAnalysis(String programName, Set<String> options, Set<String> initialConfig) {
     super(programName, options, initialConfig);
+
+    this.phosphorExecutionAnalysis = new PhosphorExecutionAnalysis(programName);
   }
 
   @Override
@@ -83,7 +76,15 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     return regionsToData;
   }
 
+  @Override
+  public String outputDir() {
+    return BaseDynamicRegionAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc";
+  }
+
   void runDynamicAnalysis() throws IOException, InterruptedException {
+    Set<ConfigConstraint> configConstraintsToSatisfy = new HashSet<>();
+    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
+
     Set<Set<String>> exploredConfigs = new HashSet<>();
     Set<Set<String>> configsToExplore = new HashSet<>();
 
@@ -94,16 +95,29 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
       configsToExplore.remove(config);
       exploredConfigs.add(config);
 
-      this.runPhosphorAnalysis(config);
-      this.postProcessPhosphorAnalysis(config);
+      ConfigConstraint configConstraint = ConfigConstraint.fromConfig(config, this.getOptions());
+      satisfiedConfigConstraints.add(configConstraint);
 
-      Set<Set<String>> configsToRun = this.getConfigsToRun();
-      configsToRun.removeAll(exploredConfigs);
-      configsToExplore.addAll(configsToRun);
+      this.runPhosphorAnalysis(config);
+
+      Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints = this.phosphorExecutionAnalysis
+          .analyzePhosphorResults();
+      PhosphorConfigConstraintGenerator.updateConstraintsAtSinks(config, sinksToAnalysisTaints);
+      Set<ConfigConstraint> analysisConfigConstraints = PhosphorConfigConstraintGenerator
+          .getConfigConstraints();
+
+//      configConstraintsToSatisfy.addAll(analysisConfigConstraints);
+//      Set<ConfigConstraint> satisfiedConstraintsByConfig = this
+//          .getSatisfiedConfigConstraintsByConfig(configConstraintsToSatisfy, configConstraint);
+//      satisfiedConfigConstraints.addAll(satisfiedConstraintsByConfig);
+//      configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
+//
+//      Set<Set<String>> configsToRun = this.getConfigsToRun(config);
+//      configsToRun.removeAll(exploredConfigs);
+//      configsToExplore.addAll(configsToRun);
     }
 
     // TODO add check to be sure that we are not sampling a constraint that we already sample
-
 //    Set<Constraint> exploredConstraints = new HashSet<>();
 //    Set<Constraint> constraintsToExplore = new HashSet<>();
 //    // CE := to_constraint(c)
@@ -179,198 +193,6 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     return regionsToConstraints;
   }
 
-  private ExecTaints getExecTaints(Map<String, List> map) {
-    List<List<String>> taintsLists = map.get("taints");
-    Set<Set<String>> allTaints = new HashSet<>();
-
-    for (List<String> taintLIst : taintsLists) {
-      Set<String> taints = new HashSet<>(taintLIst);
-      allTaints.add(taints);
-    }
-
-    ExecTaints execTaints = new ExecTaints();
-    execTaints.addExecTaints(allTaints);
-
-    return execTaints;
-  }
-
-  private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
-    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.LLBRACKET, "");
-    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.RRBRACKET, "");
-    String[] entries = execVarCtxStr.split(Pattern.quote("^"));
-
-    ExecVarCtx execVarCtx = new ExecVarCtx();
-
-    if (!(entries.length == 1 && "true".equals(entries[0]))) {
-      for (String entry : entries) {
-        String notStr = "!";
-        entry = entry.trim();
-        boolean value = !entry.contains(notStr);
-        entry = entry.replace(notStr, "");
-        execVarCtx.addEntry(entry, value);
-      }
-    }
-
-    return execVarCtx;
-  }
-
-  void postProcessPhosphorAnalysis(Set<String> config) throws IOException {
-    Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints = this.analyzePhosphorResults();
-    this.addSinks(sinksToTaints.keySet());
-    this.addExecVarCtxs(sinksToTaints, config);
-    this.addExecTaints(sinksToTaints, config);
-  }
-
-  private Set<Set<String>> getConfigsToRun() {
-    Set<Map<String, Boolean>> configMapsToRun = this.getConfigMapsToRun();
-    Set<Set<String>> configsToRun = new HashSet<>();
-
-    for (Map<String, Boolean> configMapToRun : configMapsToRun) {
-      Set<String> configToRun = new HashSet<>();
-
-      for (Map.Entry<String, Boolean> entry : configMapToRun.entrySet()) {
-        if (entry.getValue()) {
-          configToRun.add(entry.getKey());
-        }
-      }
-
-      configsToRun.add(configToRun);
-    }
-
-    return configsToRun;
-  }
-
-  private Set<Map<String, Boolean>> getConfigMapsToRun() {
-    throw new UnsupportedOperationException("Implement");
-//    Set<Map<String, Boolean>> configMapsToRun = new HashSet<>();
-//
-//    for (SinkData sinkData : this.sinksToData.values()) {
-//      Set<Map<String, Boolean>> configsToRunPerSink = this
-//          .getConfigsToRunPerSink(sinkData.getData());
-//      configMapsToRun.addAll(configsToRunPerSink);
-//    }
-//
-//    return configMapsToRun;
-  }
-
-  private Set<Map<String, Boolean>> getConfigsToRunPerSink(Map<ExecVarCtx, Set<Set<String>>> data) {
-    Set<Map<String, Boolean>> configsToRun = new HashSet<>();
-
-    for (Map.Entry<ExecVarCtx, Set<Set<String>>> entry : data.entrySet()) {
-      ExecVarCtx execVarCtx = entry.getKey();
-      Map<String, Boolean> execVariabilityPartialConfig = execVarCtx.getPartialConfig();
-
-      for (Set<String> options : entry.getValue()) {
-        Set<Map<String, Boolean>> configsToRunPerOptions = this.getConfigsToRunPerOptions(options);
-
-        for (Map<String, Boolean> configToRunPerOptions : configsToRunPerOptions) {
-          configToRunPerOptions.putAll(execVariabilityPartialConfig);
-          configsToRun.add(configToRunPerOptions);
-        }
-      }
-    }
-
-    return configsToRun;
-  }
-
-  private Set<Map<String, Boolean>> getConfigsToRunPerOptions(Set<String> options) {
-    Set<Map<String, Boolean>> configsToRun = new HashSet<>();
-    Set<Set<String>> configsForOptions = Helper.getConfigurations(options);
-
-    for (Set<String> configForOptions : configsForOptions) {
-      Map<String, Boolean> config = new HashMap<>();
-
-      for (String option : this.getOptions()) {
-        config.put(option, false);
-      }
-
-      for (String newOpt : configForOptions) {
-        config.put(newOpt, true);
-      }
-
-      configsToRun.add(config);
-    }
-
-    return configsToRun;
-  }
-
-  private void addSinks(Set<String> sinks) {
-    for (String sink : sinks) {
-      this.sinksToData.putIfAbsent(sink, new SinkData());
-    }
-  }
-
-  private void addExecVarCtxs(Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints,
-      Set<String> config) {
-    for (Map.Entry<String, Map<Set<String>, Set<Set<String>>>> entry : sinksToTaints.entrySet()) {
-      SinkData sinkData = this.sinksToData.get(entry.getKey());
-      Set<Set<String>> sinkVarCtxs = entry.getValue().keySet();
-
-      for (Set<String> sinkVarCtx : sinkVarCtxs) {
-        ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVarCtx, config);
-        sinkData.putIfAbsent(execVarCtx, new ExecTaints());
-      }
-    }
-  }
-
-  private void addExecTaints(Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints,
-      Set<String> config) {
-    for (Map.Entry<String, Map<Set<String>, Set<Set<String>>>> entry : sinksToTaints.entrySet()) {
-      SinkData sinkData = this.sinksToData.get(entry.getKey());
-      this.addExecTaintsFromSink(entry.getValue(), sinkData, config);
-    }
-  }
-
-  private void addExecTaintsFromSink(Map<Set<String>, Set<Set<String>>> sinkResults,
-      SinkData sinkData, Set<String> config) {
-    for (Map.Entry<Set<String>, Set<Set<String>>> entry : sinkResults.entrySet()) {
-      Set<String> sinkVariabilityCtx = entry.getKey();
-      ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVariabilityCtx, config);
-      ExecTaints executionTaints = sinkData.getExecTaints(execVarCtx);
-      executionTaints.addExecTaints(entry.getValue());
-    }
-  }
-
-  private ExecVarCtx getExecVarCtx(Set<String> sinkVarCtx, Set<String> config) {
-    ExecVarCtx execVarCtx = new ExecVarCtx();
-
-    for (String option : sinkVarCtx) {
-      execVarCtx.addEntry(option, config.contains(option));
-    }
-
-    return execVarCtx;
-  }
-
-  @Override
-  public String outputDir() {
-    return BaseDynamicRegionAnalysis.DIRECTORY + "/" + this.getProgramName() + "/cc";
-  }
-
-//  static void removeAllSubConstraints(Set<Constraint> constraintsFromAnalysis,
-//      Set<Constraint> exploredConstraints) {
-//    for (Constraint explored : exploredConstraints) {
-//      removeAllSubConstraints(constraintsFromAnalysis, explored);
-//    }
-//  }
-
-//  /**
-//   * Removes the subconstraints of the passed constraint from passes constraints set.
-//   */
-//  static void removeAllSubConstraints(Set<Constraint> constraints, Constraint constraint) {
-//    constraints.removeIf(currentConstraint -> currentConstraint.isSubsetOf(constraint));
-//  }
-
-  //  /**
-//   * Input: P', c in C
-//   *
-//   * Output: ST: S --> (P(O), P(O))
-//   *
-//   * Input: There is a script that this method calls to executed the instrumented program.
-//   * Therefore, we do not not pass the instrumented program to this method.
-//   *
-//   * Output: This method only runs the phosphor analysis. There is another method that processes the
-//   * results from the analysis.
-//   */
   void runPhosphorAnalysis(Set<String> config) throws IOException, InterruptedException {
     ProcessBuilder builder = new ProcessBuilder();
 
@@ -465,6 +287,10 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
         commandList.add("./examples.sh");
         adapter = new Subtraces2Adapter();
         break;
+      case Subtraces6Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new Subtraces6Adapter();
+        break;
       case ImplicitAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new ImplicitAdapter();
@@ -490,458 +316,490 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     return commandList;
   }
 
-  //  /**
-//   * Input: P', c in C
-//   *
-//   * Output: ST: S --> (P(O), P(O))
-//   *
-//   * Helper method for running the phosphor analysis. This method processes the results of the
-//   * analysis and returns the output specified in the algorithm.
-//   */
-  Map<String, Map<Set<String>, Set<Set<String>>>> analyzePhosphorResults()
-      throws IOException {
-    String dir = PHOSPHOR_OUTPUT_DIR + "/" + this.getProgramName();
-    Collection<File> serializedFiles = this.getSerializedFiles(dir);
+  Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
+      Set<ConfigConstraint> configConstraints, ConfigConstraint executedConfigConstraint) {
+    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
 
-    if (serializedFiles.size() != 1) {
-      throw new RuntimeException("The directory " + dir + " must have 1 file.");
-    }
-
-    return this.readPhosphorTaintResults(serializedFiles.iterator().next());
-  }
-
-  private Map<String, Map<Set<String>, Set<Set<String>>>> readPhosphorTaintResults(
-      File serializedFile)
-      throws IOException {
-    List<SinkEntry> sinkEntries = this.deserialize(serializedFile);
-    Map<String, Map<Taint, Set<Taint>>> analysisData = this.getDataFromAnalysis(sinkEntries);
-    Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> analysisDataWithLabels = this
-        .getSinksToLabelData(analysisData);
-    return this.changeLabelsToTaints(analysisDataWithLabels);
-  }
-
-  private Map<String, Map<Taint, Set<Taint>>> getDataFromAnalysis(List<SinkEntry> sinkEntries) {
-    Set<String> sinks = this.getSinksAnalysis(sinkEntries);
-    Map<String, Map<Taint, Set<Taint>>> sinksToTaintInfos = this.addSinksFromAnalysis(sinks);
-    this.addCtxsFromAnalysis(sinksToTaintInfos, sinkEntries);
-    this.addTaintsFromAnalysis(sinksToTaintInfos, sinkEntries);
-
-    return sinksToTaintInfos;
-  }
-
-  private void addTaintsFromAnalysis(Map<String, Map<Taint, Set<Taint>>> sinksToTaintInfos,
-      List<SinkEntry> sinkEntries) {
-    for (SinkEntry sinkEntry : sinkEntries) {
-      TaintInfo taintInfo = sinkEntry.getTaintInfo();
-      Taint ctx = taintInfo.getCtx();
-
-      String sink = sinkEntry.getSink();
-      Map<Taint, Set<Taint>> taintInfos = sinksToTaintInfos.get(sink);
-
-      Set<Taint> taints = taintInfos.get(ctx);
-      Taint taint = taintInfo.getTaint();
-      taints.add(taint);
-    }
-  }
-
-  private Map<String, Map<Taint, Set<Taint>>> addSinksFromAnalysis(Set<String> sinks) {
-    Map<String, Map<Taint, Set<Taint>>> sinksToTaintInfos = new HashMap<>();
-
-    for (String sink : sinks) {
-      sinksToTaintInfos.put(sink, new HashMap<>());
-    }
-
-    return sinksToTaintInfos;
-  }
-
-  private void addCtxsFromAnalysis(Map<String, Map<Taint, Set<Taint>>> sinksToTaintInfos,
-      List<SinkEntry> sinkEntries) {
-    for (SinkEntry sinkEntry : sinkEntries) {
-      TaintInfo taintInfo = sinkEntry.getTaintInfo();
-      Taint ctx = taintInfo.getCtx();
-
-      String sink = sinkEntry.getSink();
-      Map<Taint, Set<Taint>> taintInfos = sinksToTaintInfos.get(sink);
-      taintInfos.put(ctx, new HashSet<>());
-    }
-  }
-
-  private Set<String> getSinksAnalysis(List<SinkEntry> sinkEntries) {
-    Set<String> sinks = new HashSet<>();
-
-    for (SinkEntry sinkEntry : sinkEntries) {
-      sinks.add(sinkEntry.getSink());
-    }
-
-    return sinks;
-  }
-
-  private Map<String, Map<Set<String>, Set<Set<String>>>> changeLabelsToTaints(
-      Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> sinksToLabelData) {
-    Map<String, Map<Set<String>, Set<Set<String>>>> sinksToTaints = new HashMap<>();
-
-    for (Map.Entry<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> entry : sinksToLabelData
-        .entrySet()) {
-      Map<Set<String>, Set<Set<String>>> taintData = this
-          .transformDataLabelsToTaints(entry.getValue());
-      sinksToTaints.put(entry.getKey(), taintData);
-    }
-
-    return sinksToTaints;
-  }
-
-  private Map<Set<String>, Set<Set<String>>> transformDataLabelsToTaints(
-      Map<Set<TaintLabel>, Set<Set<TaintLabel>>> ctxsToTaintLabels) {
-    Map<Set<String>, Set<Set<String>>> ctxsToTaints = new HashMap<>();
-
-    for (Map.Entry<Set<TaintLabel>, Set<Set<TaintLabel>>> entry : ctxsToTaintLabels
-        .entrySet()) {
-      Set<String> ctx = this.transformLabelsToTaints(entry.getKey());
-      Set<Set<String>> taintSets = new HashSet<>();
-
-      for (Set<TaintLabel> LabelSet : entry.getValue()) {
-        Set<String> taintSet = this.transformLabelsToTaints(LabelSet);
-        taintSets.add(taintSet);
+    for (ConfigConstraint configConstraint : configConstraints) {
+      if (configConstraint.isSubConstraintOf(executedConfigConstraint)) {
+        satisfiedConfigConstraints.add(configConstraint);
       }
-
-      ctxsToTaints.put(ctx, taintSets);
     }
 
-    return ctxsToTaints;
+    return satisfiedConfigConstraints;
   }
 
-  private Set<String> transformLabelsToTaints(Set<TaintLabel> labels) {
-    Set<String> strings = new HashSet<>();
+  private ExecTaints getExecTaints(Map<String, List> map) {
+    List<List<String>> taintsLists = map.get("taints");
+    List<Set<String>> allTaints = new ArrayList<>();
 
-    for (TaintLabel taintLabel : labels) {
-      strings.add(taintLabel.getSource());
+    for (List<String> taintLIst : taintsLists) {
+      Set<String> taints = new HashSet<>(taintLIst);
+      allTaints.add(taints);
     }
 
-    return strings;
+    return new ExecTaints(allTaints);
   }
 
-  private Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> getSinksToLabelData(
-      Map<String, Map<Taint, Set<Taint>>> analysisData) {
-    Map<String, Map<Set<TaintLabel>, Set<Set<TaintLabel>>>> sinksToLabelData = new HashMap<>();
+  private ExecVarCtx getExecVarCtx(String execVarCtxStr) {
+    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.LLBRACKET, "");
+    execVarCtxStr = execVarCtxStr.replace(ExecVarCtx.RRBRACKET, "");
+    String[] entries = execVarCtxStr.split(Pattern.quote("^"));
 
-    for (Map.Entry<String, Map<Taint, Set<Taint>>> entry : analysisData.entrySet()) {
-      Map<Taint, Set<Taint>> sinkData = entry.getValue();
-      Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityCtxsToLabels = this
-          .getVariabilityCtxsToLabels(sinkData);
-      sinksToLabelData.put(entry.getKey(), variabilityCtxsToLabels);
+    ExecVarCtx execVarCtx = new ExecVarCtx();
+
+    if (!(entries.length == 1 && "true".equals(entries[0]))) {
+      for (String entry : entries) {
+        String notStr = "!";
+        entry = entry.trim();
+        boolean value = !entry.contains(notStr);
+        entry = entry.replace(notStr, "");
+        execVarCtx.addEntry(entry, value);
+      }
     }
 
-    return sinksToLabelData;
+    return execVarCtx;
   }
 
-  private Map<Set<TaintLabel>, Set<Set<TaintLabel>>> getVariabilityCtxsToLabels(
-      Map<Taint, Set<Taint>> sinkData) {
-    Map<Set<TaintLabel>, Set<Set<TaintLabel>>> variabilityCtxsToLabels = new HashMap<>();
-
-    for (Map.Entry<Taint, Set<Taint>> entry : sinkData.entrySet()) {
-      Taint variabilityCtxTaint = entry.getKey();
-      Set<TaintLabel> variabilityCtx = this.getVariabilityCtx(variabilityCtxTaint);
-
-      Set<Taint> executionTaints = entry.getValue();
-      Set<Set<TaintLabel>> executionLabelSet = this.getExecutionLabelSet(executionTaints);
-
-      variabilityCtxsToLabels.put(variabilityCtx, executionLabelSet);
-    }
-
-    return variabilityCtxsToLabels;
-  }
-
-  private Set<Set<TaintLabel>> getExecutionLabelSet(Set<Taint> executionTaints) {
-    Set<Set<TaintLabel>> executionLabelSet = new HashSet<>();
-
-    for (Taint taint : executionTaints) {
-      Set<TaintLabel> labels = taint.getLabels();
-      Set<TaintLabel> executionLabels = new HashSet<>(labels);
-      executionLabelSet.add(executionLabels);
-    }
-
-    return executionLabelSet;
-  }
-
-  private Set<TaintLabel> getVariabilityCtx(Taint variabilityCtx) {
-    if (variabilityCtx == null) {
-      return new HashSet<>();
-    }
-
-    return variabilityCtx.getLabels();
-  }
-
-//  private Map<String, Set<String>> changeTaintLabelsToTaints(
-//      Map<String, Set<TaintLabel>> sinksToTaintLabels) {
-//    Map<String, Set<String>> sinksToTaints = new HashMap<>();
+//  Map<String, Map<Set<String>, List<Set<String>>>> postProcessPhosphorAnalysis()
+//      throws IOException {
 //
-//    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaintLabels.entrySet()) {
-//      Set<String> taints = new HashSet<>();
+////    Map<String, SinkData> sinksToData = new HashMap<>();
+////    this.addSinks(sinksToData, sinksToTaints.keySet());
+////    this.addExecVarCtxs(sinksToData, sinksToTaints, config);
+////    this.addExecTaints(sinksToData, sinksToTaints, config);
 //
-//      for (TaintLabel taintLabel : entry.getValue()) {
-//        taints.add(taintLabel.getSource());
-//      }
-//
-//      sinksToTaints.put(entry.getKey(), taints);
-//    }
-//
-//    return sinksToTaints;
+//    return this.phosphorExecutionAnalysis.analyzePhosphorResults();
 //  }
 
-  // TODO check catching and throwing
-  private List<SinkEntry> deserialize(File file) throws IOException {
-    FileInputStream fis = new FileInputStream(file);
-    ObjectInputStream ois = new ObjectInputStream(fis);
-    List<SinkEntry> sinkEntries;
-
-    try {
-      sinkEntries = (List<SinkEntry>) ois.readObject();
-
-    }
-    catch (ClassNotFoundException e) {
-      throw new RuntimeException(e);
-    }
-
-    ois.close();
-    fis.close();
-
-    return sinkEntries;
-  }
-
-  private Collection<File> getSerializedFiles(String dir) {
-    File dirFile = new File(dir);
-
-    return FileUtils.listFiles(dirFile, null, false);
-  }
-
-//  /**
-//   * Input: ST: S --> (P(O), P(O)), c ∈ C
-//   *
-//   * Output: CFA: P(CT)
-//   *
-//   * Calculate the constraints from running the dynamic analysis
-//   */
-//  Set<Constraint> getConstraintsFromAnalysis(
-//      Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults,
-//      Set<String> config) {
-//    Map<String, Set<String>> sinksToTaintsFromTaints = sinksToTaintsResults.getLeft();
-//    Map<String, Set<String>> sinksToTaintsFromCtx = sinksToTaintsResults.getRight();
+//  private Set<Set<String>> getConfigsToRun(Set<String> config) {
+//    Set<Map<String, Boolean>> configMapsToRun = this.getConfigMapsToRun(config);
+//    Set<Set<String>> configsToRun = new HashSet<>();
 //
-//    if (sinksToTaintsFromTaints == null || sinksToTaintsFromCtx == null) {
-//      throw new IllegalArgumentException("The sinks to taints result cannot be empty");
-//    }
+//    for (Map<String, Boolean> configMapToRun : configMapsToRun) {
+//      Set<String> configToRun = new HashSet<>();
 //
-//    Set<Constraint> constraintsFromAnalysis = new HashSet<>();
-//
-//    Set<String> executedSinks = new HashSet<>(sinksToTaintsFromTaints.keySet());
-//    executedSinks.addAll(sinksToTaintsFromCtx.keySet());
-//    this.addNewSinks(executedSinks);
-//
-//    for (String sink : executedSinks) {
-//      Set<Constraint> constraintsAtSink = this
-//          .getConstraintsAtSink(sinksToTaintsFromTaints.get(sink),
-//              sinksToTaintsFromCtx.get(sink),
-//              config);
-//
-//      constraintsFromAnalysis.addAll(constraintsAtSink);
-//
-//      Set<Constraint> oldConstraints = this.sinksToConstraints.get(sink);
-//      oldConstraints.addAll(constraintsAtSink);
-//      this.sinksToConstraints.put(sink, oldConstraints);
-//    }
-//
-//    return constraintsFromAnalysis;
-//  }
-
-//  /**
-//   * Input: stv ∈ ST.values, c ∈ C
-//   *
-//   * Output: CS: P(CFA) // CFA: P(CT)
-//   *
-//   * Calculate the constraints at a sink
-//   */
-//  private Set<Constraint> getConstraintsAtSink(@Nullable Set<String> taintsFromTaint,
-//      @Nullable Set<String> taintsFromCtx, Set<String> config) {
-//    Set<Constraint> constraints = new HashSet<>();
-//
-//    Set<Map<String, Boolean>> partialConfigs = Constraint.buildPartialConfigs(taintsFromTaint);
-//    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
-//
-//    if (partialConfigs.isEmpty()) {
-//      partialConfigs.add(new HashMap<>());
-//    }
-//
-//    for (Map<String, Boolean> partialConfig : partialConfigs) {
-//      constraints.add(new Constraint(partialConfig, ctx));
-//    }
-//
-//    PhosphorAnalysis.removeInvalidConstraints(constraints);
-//
-//    return constraints;
-//  }
-
-//  static void removeInvalidConstraints(Set<Constraint> constraints) {
-//    constraints.removeIf(constraint -> !constraint.isValid());
-//  }
-
-//  private void addNewSinks(Set<String> sinks) {
-//    for (String sink : sinks) {
-//      if (!this.sinksToConstraints.containsKey(sink)) {
-//        this.sinksToConstraints.put(sink, new HashSet<>());
-//      }
-//    }
-//  }
-
-//  /**
-//   * Input: CE, O
-//   *
-//   * Output: CTE: P(CE)
-//   *
-//   * Input: since we represent options set to false by not including them in the set that represents
-//   * configurations, there is no need to pass them in the method.
-//   *
-//   * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
-//   */
-//  static Constraint getNextConstraint(Set<Constraint> constraintsToEvaluate) {
-//    if (constraintsToEvaluate.isEmpty()) {
-//      throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
-//    }
-//
-//    if (constraintsToEvaluate.size() == 1) {
-//      return constraintsToEvaluate.iterator().next();
-//    }
-//
-//    // TODO check results if picking the longest constraint first
-//    Set<Map<String, Boolean>> completeConstraints = getCompleteConstraints(constraintsToEvaluate);
-//    Iterator<Map<String, Boolean>> iter = completeConstraints.iterator();
-//    Map<String, Boolean> finalConstraintAsConfigWithValues = new HashMap<>(iter.next());
-//
-//    while (iter.hasNext()) {
-//      Map<String, Boolean> currentConstraintAsConfigWithValues = iter.next();
-//      Set<String> pivotOptions = getPivotOptions(finalConstraintAsConfigWithValues,
-//          currentConstraintAsConfigWithValues);
-//
-//      if (pivotOptions.isEmpty()) {
-//        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
-//      }
-//      else {
-//        Map<String, Boolean> finalConstraintPivotValues = getPivotValues(
-//            finalConstraintAsConfigWithValues, pivotOptions);
-//        Map<String, Boolean> currentConstraintPivotValues = getPivotValues(
-//            currentConstraintAsConfigWithValues, pivotOptions);
-//
-//        if (!finalConstraintPivotValues.equals(currentConstraintPivotValues)) {
-//          // Could not merge the constraints
-//          continue;
+//      for (Map.Entry<String, Boolean> entry : configMapToRun.entrySet()) {
+//        if (entry.getValue()) {
+//          configToRun.add(entry.getKey());
 //        }
+//      }
 //
-//        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
+//      configsToRun.add(configToRun);
+//    }
+//
+//    return configsToRun;
+//  }
+//
+//  private Set<Map<String, Boolean>> getConfigMapsToRun(Set<String> config) {
+//    Set<Map<String, Boolean>> configMapsToRun = new HashSet<>();
+//
+//    for (SinkData sinkData : this.sinksToData.values()) {
+//      Set<Map<String, Boolean>> configsToRunPerSink = this
+//          .getConfigsToRunPerSink(sinkData.getData(), config);
+//      configMapsToRun.addAll(configsToRunPerSink);
+//    }
+//
+//    return configMapsToRun;
+//  }
+//
+//  private Set<Map<String, Boolean>> getConfigsToRunPerSink(Map<ExecVarCtx, ExecTaints> data,
+//      Set<String> config) {
+//    Set<Map<String, Boolean>> configsToRun = new HashSet<>();
+//    PartialConfig configToPartialConfig = configToPartialConfig(config, this.getOptions());
+//
+//    for (Map.Entry<ExecVarCtx, ExecTaints> entry : data.entrySet()) {
+//      ExecVarCtx execVarCtx = entry.getKey();
+//      Map<String, Boolean> execVariabilityPartialConfig = execVarCtx.getPartialConfig();
+//      ExecTaints execTaints = entry.getValue();
+//
+//      for (Set<String> options : execTaints.getTaints()) {
+//        Set<Map<String, Boolean>> configsToRunPerOptions = this.getConfigsToRunPerOptions(options);
+//
+//        for (Map<String, Boolean> configToRunPerOptions : configsToRunPerOptions) {
+//          if (!configToPartialConfig.getPartialConfig().equals(execVariabilityPartialConfig)) {
+//            configToRunPerOptions.putAll(execVariabilityPartialConfig);
+//          }
+//
+//          configsToRun.add(configToRunPerOptions);
+//        }
 //      }
 //    }
 //
-//    // TODO check if the constraint we picked is NOT a proper subset of a set left in the constraints set
-//    return new Constraint(finalConstraintAsConfigWithValues);
+//    return configsToRun;
 //  }
-
-//  private static Map<String, Boolean> getPivotValues(
-//      Map<String, Boolean> constraintAsConfigWithValues, Set<String> pivotOptions) {
-//    Map<String, Boolean> pivotValues = new HashMap<>();
 //
-//    for (String option : pivotOptions) {
-//      pivotValues.put(option, constraintAsConfigWithValues.get(option));
+//  private static PartialConfig configToPartialConfig(Set<String> config, Set<String> options) {
+//    PartialConfig partialConfig = new PartialConfig();
+//
+//    for (String option : options) {
+//      partialConfig.addEntry(option, false);
 //    }
 //
-//    return pivotValues;
-//  }
-
-//  private static Set<String> getPivotOptions(Map<String, Boolean> configWaithValues1,
-//      Map<String, Boolean> configWaithValues2) {
-//    Set<String> pivotOptions = new HashSet<>(configWaithValues1.keySet());
-//    pivotOptions.retainAll(configWaithValues2.keySet());
-//
-//    return pivotOptions;
-//  }
-
-//  private static Set<Map<String, Boolean>> getCompleteConstraints(Set<Constraint> constraints) {
-//    Set<Map<String, Boolean>> completeConstraints = new HashSet<>();
-//
-//    for (Constraint constraint : constraints) {
-//      completeConstraints.add(constraint.getCompleteConstraint());
+//    for (String option : config) {
+//      partialConfig.addEntry(option, true);
 //    }
 //
-//    return completeConstraints;
+//    return partialConfig;
 //  }
-
-//  Set<Set<String>> getConfigsForCC() {
-//    Set<Constraint> ccConstraints = this.getAllConstraints();
-//    Set<Set<String>> configs = new HashSet<>();
 //
-//    for (Constraint ccConstraint : ccConstraints) {
-//      Set<String> config = Constraint.toPartialCCConfig(ccConstraint);
-//      configs.add(config);
+//  private Set<Map<String, Boolean>> getConfigsToRunPerOptions(Set<String> options) {
+//    Set<Map<String, Boolean>> configsToRun = new HashSet<>();
+//    Set<Set<String>> configsForOptions = Helper.getConfigurations(options);
+//
+//    for (Set<String> configForOptions : configsForOptions) {
+//      Map<String, Boolean> config = new HashMap<>();
+//
+//      for (String option : this.getOptions()) {
+//        config.put(option, false);
+//      }
+//
+//      for (String newOpt : configForOptions) {
+//        config.put(newOpt, true);
+//      }
+//
+//      configsToRun.add(config);
 //    }
 //
-//    System.out.println(configs);
-//    return configs;
+//    return configsToRun;
 //  }
-
-//  private Map<String, Set<TaintLabel>> merge(Map<String, Set<TaintLabel>> sinksToTaints1,
-//      Map<String, Set<TaintLabel>> sinksToTaints2) {
-//    Map<String, Set<TaintLabel>> sinksToTaints = new HashMap<>(sinksToTaints1);
 //
-//    for (String sink : sinksToTaints2.keySet()) {
-//      if (!sinksToTaints.containsKey(sink)) {
-//        sinksToTaints.put(sink, new HashSet<>());
+//  private void addSinks(Map<String, SinkData> sinksToData, Set<String> sinks) {
+//    for (String sink : sinks) {
+//      sinksToData.putIfAbsent(sink, new SinkData());
+//    }
+//  }
+//
+//  private void addExecVarCtxs(Map<String, SinkData> sinksToData,
+//      Map<String, Map<Set<String>, List<Set<String>>>> sinksToTaints, Set<String> config) {
+//    for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> entry : sinksToTaints.entrySet()) {
+//      SinkData sinkData = sinksToData.get(entry.getKey());
+//      Set<Set<String>> sinkVarCtxs = entry.getValue().keySet();
+//
+//      for (Set<String> sinkVarCtx : sinkVarCtxs) {
+//        ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVarCtx, config);
+//        sinkData.putIfAbsent(execVarCtx, new ExecTaints());
+//      }
+//    }
+//  }
+//
+//  private void addExecTaints(Map<String, SinkData> sinksToData,
+//      Map<String, Map<Set<String>, List<Set<String>>>> sinksToTaints, Set<String> config) {
+//    for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> entry : sinksToTaints.entrySet()) {
+//      SinkData sinkData = sinksToData.get(entry.getKey());
+//      this.addExecTaintsFromSink(entry.getValue(), sinkData, config);
+//    }
+//  }
+//
+//  private void addExecTaintsFromSink(Map<Set<String>, List<Set<String>>> sinkResults,
+//      SinkData sinkData, Set<String> config) {
+//    for (Map.Entry<Set<String>, List<Set<String>>> entry : sinkResults.entrySet()) {
+//      Set<String> sinkVariabilityCtx = entry.getKey();
+//      ExecVarCtx execVarCtx = this.getExecVarCtx(sinkVariabilityCtx, config);
+//      ExecTaints executionTaints = sinkData.getExecTaints(execVarCtx);
+//      executionTaints.addExecTaints(entry.getValue());
+//    }
+//  }
+//
+//  private ExecVarCtx getExecVarCtx(Set<String> sinkVarCtx, Set<String> config) {
+//    ExecVarCtx execVarCtx = new ExecVarCtx();
+//
+//    if (sinkVarCtx.isEmpty()) {
+//      for (String option : this.getOptions()) {
+//        execVarCtx.addEntry(option, config.contains(option));
+//      }
+//    }
+//    else {
+//      for (String option : sinkVarCtx) {
+//        execVarCtx.addEntry(option, config.contains(option));
 //      }
 //    }
 //
-//    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaints2.entrySet()) {
-//      String sink = entry.getKey();
-//      Set<TaintLabel> taints = sinksToTaints.get(sink);
-//      taints.addAll(entry.getValue());
-//      sinksToTaints.put(sink, taints);
+//    return execVarCtx;
+//  }
+//
+//
+////  static void removeAllSubConstraints(Set<Constraint> constraintsFromAnalysis,
+////      Set<Constraint> exploredConstraints) {
+////    for (Constraint explored : exploredConstraints) {
+////      removeAllSubConstraints(constraintsFromAnalysis, explored);
+////    }
+////  }
+//
+////  /**
+////   * Removes the subconstraints of the passed constraint from passes constraints set.
+////   */
+////  static void removeAllSubConstraints(Set<Constraint> constraints, Constraint constraint) {
+////    constraints.removeIf(currentConstraint -> currentConstraint.isSubsetOf(constraint));
+////  }
+
+//
+//  //  /**
+////   * Input: P', c in C
+////   *
+////   * Output: ST: S --> (P(O), P(O))
+////   *
+////   * Helper method for running the phosphor analysis. This method processes the results of the
+////   * analysis and returns the output specified in the algorithm.
+////   */
+//
+
+//
+//
+
+//
+//  private Map<String, Map<Taint, List<Taint>>> addSinksFromAnalysis(Set<String> sinks) {
+//    Map<String, Map<Taint, List<Taint>>> sinksToTaintInfos = new HashMap<>();
+//
+//    for (String sink : sinks) {
+//      sinksToTaintInfos.put(sink, new HashMap<>());
 //    }
 //
-//    return sinksToTaints;
+//    return sinksToTaintInfos;
+//  }
+//
+
+//
+
+//
+//
+
+//
+
+//
+
+//
+
+//
+
+//
+
+//
+////  private Map<String, Set<String>> changeTaintLabelsToTaints(
+////      Map<String, Set<TaintLabel>> sinksToTaintLabels) {
+////    Map<String, Set<String>> sinksToTaints = new HashMap<>();
+////
+////    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaintLabels.entrySet()) {
+////      Set<String> taints = new HashSet<>();
+////
+////      for (TaintLabel taintLabel : entry.getValue()) {
+////        taints.add(taintLabel.getSource());
+////      }
+////
+////      sinksToTaints.put(entry.getKey(), taints);
+////    }
+////
+////    return sinksToTaints;
+////  }
+//
+//
+//
+////  /**
+////   * Input: ST: S --> (P(O), P(O)), c ∈ C
+////   *
+////   * Output: CFA: P(CT)
+////   *
+////   * Calculate the constraints from running the dynamic analysis
+////   */
+////  Set<Constraint> getConstraintsFromAnalysis(
+////      Pair<Map<String, Set<String>>, Map<String, Set<String>>> sinksToTaintsResults,
+////      Set<String> config) {
+////    Map<String, Set<String>> sinksToTaintsFromTaints = sinksToTaintsResults.getLeft();
+////    Map<String, Set<String>> sinksToTaintsFromCtx = sinksToTaintsResults.getRight();
+////
+////    if (sinksToTaintsFromTaints == null || sinksToTaintsFromCtx == null) {
+////      throw new IllegalArgumentException("The sinks to taints result cannot be empty");
+////    }
+////
+////    Set<Constraint> constraintsFromAnalysis = new HashSet<>();
+////
+////    Set<String> executedSinks = new HashSet<>(sinksToTaintsFromTaints.keySet());
+////    executedSinks.addAll(sinksToTaintsFromCtx.keySet());
+////    this.addNewSinks(executedSinks);
+////
+////    for (String sink : executedSinks) {
+////      Set<Constraint> constraintsAtSink = this
+////          .getConstraintsAtSink(sinksToTaintsFromTaints.get(sink),
+////              sinksToTaintsFromCtx.get(sink),
+////              config);
+////
+////      constraintsFromAnalysis.addAll(constraintsAtSink);
+////
+////      Set<Constraint> oldConstraints = this.sinksToConstraints.get(sink);
+////      oldConstraints.addAll(constraintsAtSink);
+////      this.sinksToConstraints.put(sink, oldConstraints);
+////    }
+////
+////    return constraintsFromAnalysis;
+////  }
+//
+////  /**
+////   * Input: stv ∈ ST.values, c ∈ C
+////   *
+////   * Output: CS: P(CFA) // CFA: P(CT)
+////   *
+////   * Calculate the constraints at a sink
+////   */
+////  private Set<Constraint> getConstraintsAtSink(@Nullable Set<String> taintsFromTaint,
+////      @Nullable Set<String> taintsFromCtx, Set<String> config) {
+////    Set<Constraint> constraints = new HashSet<>();
+////
+////    Set<Map<String, Boolean>> partialConfigs = Constraint.buildPartialConfigs(taintsFromTaint);
+////    Map<String, Boolean> ctx = Constraint.buildCtx(taintsFromCtx, config);
+////
+////    if (partialConfigs.isEmpty()) {
+////      partialConfigs.add(new HashMap<>());
+////    }
+////
+////    for (Map<String, Boolean> partialConfig : partialConfigs) {
+////      constraints.add(new Constraint(partialConfig, ctx));
+////    }
+////
+////    PhosphorAnalysis.removeInvalidConstraints(constraints);
+////
+////    return constraints;
+////  }
+//
+////  static void removeInvalidConstraints(Set<Constraint> constraints) {
+////    constraints.removeIf(constraint -> !constraint.isValid());
+////  }
+//
+////  private void addNewSinks(Set<String> sinks) {
+////    for (String sink : sinks) {
+////      if (!this.sinksToConstraints.containsKey(sink)) {
+////        this.sinksToConstraints.put(sink, new HashSet<>());
+////      }
+////    }
+////  }
+//
+////  /**
+////   * Input: CE, O
+////   *
+////   * Output: CTE: P(CE)
+////   *
+////   * Input: since we represent options set to false by not including them in the set that represents
+////   * configurations, there is no need to pass them in the method.
+////   *
+////   * Example: config = {A, C} means that the configurations is A=T, B=F, C=T.
+////   */
+////  static Constraint getNextConstraint(Set<Constraint> constraintsToEvaluate) {
+////    if (constraintsToEvaluate.isEmpty()) {
+////      throw new IllegalArgumentException("The constraints to evaluate cannot be empty");
+////    }
+////
+////    if (constraintsToEvaluate.size() == 1) {
+////      return constraintsToEvaluate.iterator().next();
+////    }
+////
+////    // TODO check results if picking the longest constraint first
+////    Set<Map<String, Boolean>> completeConstraints = getCompleteConstraints(constraintsToEvaluate);
+////    Iterator<Map<String, Boolean>> iter = completeConstraints.iterator();
+////    Map<String, Boolean> finalConstraintAsConfigWithValues = new HashMap<>(iter.next());
+////
+////    while (iter.hasNext()) {
+////      Map<String, Boolean> currentConstraintAsConfigWithValues = iter.next();
+////      Set<String> pivotOptions = getPivotOptions(finalConstraintAsConfigWithValues,
+////          currentConstraintAsConfigWithValues);
+////
+////      if (pivotOptions.isEmpty()) {
+////        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
+////      }
+////      else {
+////        Map<String, Boolean> finalConstraintPivotValues = getPivotValues(
+////            finalConstraintAsConfigWithValues, pivotOptions);
+////        Map<String, Boolean> currentConstraintPivotValues = getPivotValues(
+////            currentConstraintAsConfigWithValues, pivotOptions);
+////
+////        if (!finalConstraintPivotValues.equals(currentConstraintPivotValues)) {
+////          // Could not merge the constraints
+////          continue;
+////        }
+////
+////        finalConstraintAsConfigWithValues.putAll(currentConstraintAsConfigWithValues);
+////      }
+////    }
+////
+////    // TODO check if the constraint we picked is NOT a proper subset of a set left in the constraints set
+////    return new Constraint(finalConstraintAsConfigWithValues);
+////  }
+//
+////  private static Map<String, Boolean> getPivotValues(
+////      Map<String, Boolean> constraintAsConfigWithValues, Set<String> pivotOptions) {
+////    Map<String, Boolean> pivotValues = new HashMap<>();
+////
+////    for (String option : pivotOptions) {
+////      pivotValues.put(option, constraintAsConfigWithValues.get(option));
+////    }
+////
+////    return pivotValues;
+////  }
+//
+////  private static Set<String> getPivotOptions(Map<String, Boolean> configWaithValues1,
+////      Map<String, Boolean> configWaithValues2) {
+////    Set<String> pivotOptions = new HashSet<>(configWaithValues1.keySet());
+////    pivotOptions.retainAll(configWaithValues2.keySet());
+////
+////    return pivotOptions;
+////  }
+//
+////  private static Set<Map<String, Boolean>> getCompleteConstraints(Set<Constraint> constraints) {
+////    Set<Map<String, Boolean>> completeConstraints = new HashSet<>();
+////
+////    for (Constraint constraint : constraints) {
+////      completeConstraints.add(constraint.getCompleteConstraint());
+////    }
+////
+////    return completeConstraints;
+////  }
+//
+////  Set<Set<String>> getConfigsForCC() {
+////    Set<Constraint> ccConstraints = this.getAllConstraints();
+////    Set<Set<String>> configs = new HashSet<>();
+////
+////    for (Constraint ccConstraint : ccConstraints) {
+////      Set<String> config = Constraint.toPartialCCConfig(ccConstraint);
+////      configs.add(config);
+////    }
+////
+////    System.out.println(configs);
+////    return configs;
+////  }
+//
+////  private Map<String, Set<TaintLabel>> merge(Map<String, Set<TaintLabel>> sinksToTaints1,
+////      Map<String, Set<TaintLabel>> sinksToTaints2) {
+////    Map<String, Set<TaintLabel>> sinksToTaints = new HashMap<>(sinksToTaints1);
+////
+////    for (String sink : sinksToTaints2.keySet()) {
+////      if (!sinksToTaints.containsKey(sink)) {
+////        sinksToTaints.put(sink, new HashSet<>());
+////      }
+////    }
+////
+////    for (Map.Entry<String, Set<TaintLabel>> entry : sinksToTaints2.entrySet()) {
+////      String sink = entry.getKey();
+////      Set<TaintLabel> taints = sinksToTaints.get(sink);
+////      taints.addAll(entry.getValue());
+////      sinksToTaints.put(sink, taints);
+////    }
+////
+////    return sinksToTaints;
+////  }
+//
+//  Map<String, SinkData> getSinksToData() {
+//    return sinksToData;
 //  }
 
-  static Set<ConfigConstraint> getAnalysisConfigConstraints(Collection<SinkData> sinkDatas) {
-    Set<ConfigConstraint> configConstraints = new HashSet<>();
-
-    for (SinkData sinkData : sinkDatas) {
-      Set<ConfigConstraint> configConstraintsAtSink = getAnalysisConfigConstraints(
-          sinkData.getData());
-      configConstraints.addAll(configConstraintsAtSink);
-    }
-
-    return configConstraints;
-  }
-
-  private static Set<ConfigConstraint> getAnalysisConfigConstraints(
-      Map<ExecVarCtx, ExecTaints> sinkData) {
-    Set<ConfigConstraint> configConstraintsAtSink = new HashSet<>();
-
-    for (Map.Entry<ExecVarCtx, ExecTaints> data : sinkData.entrySet()) {
-      ExecVarCtx execVarCtx = data.getKey();
-      ExecTaints execTaints = data.getValue();
-      Set<ConfigConstraint> allSinkConstraints = PhosphorAnalysis
-          .getConfigConstraintsForExecVarCtx(execVarCtx, execTaints);
-
-      configConstraintsAtSink.addAll(allSinkConstraints);
-    }
-
-    return configConstraintsAtSink;
-  }
 
   static void printProgramConstraints(Map<JavaRegion, SinkData> regionsToSinkData) {
-    for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
-      JavaRegion region = regionToSinkData.getKey();
-      SinkData sinkData = regionToSinkData.getValue();
-
-      printConfigConstraintsForRegion(region, sinkData);
-
-      System.out.println();
-    }
+    throw new UnsupportedOperationException("Implement");
+//    for (Map.Entry<JavaRegion, SinkData> regionToSinkData : regionsToSinkData.entrySet()) {
+//      JavaRegion region = regionToSinkData.getKey();
+//      SinkData sinkData = regionToSinkData.getValue();
+//
+//      printConfigConstraintsForRegion(region, sinkData);
+//
+//      System.out.println();
+//    }
   }
 
   private static void printConfigConstraintsForRegion(JavaRegion region, SinkData sinkData) {
@@ -958,53 +816,4 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 //    }
   }
 
-  private static Set<ConfigConstraint> getConfigConstraintsForExecVarCtx(ExecVarCtx execVarCtx,
-      ExecTaints execTaints) {
-    return getConfigConstraintsForExecTaints(execVarCtx, execTaints);
-  }
-
-  private static Set<ConfigConstraint> getConfigConstraintsForExecTaints(ExecVarCtx execVarCtx,
-      ExecTaints execTaints) {
-    Set<ConfigConstraint> configConstraints = new HashSet<>();
-
-    for (Set<String> execTaint : execTaints.getTaints()) {
-      Set<Set<String>> configs = Helper.getConfigurations(execTaint);
-      Set<ConfigConstraint> execTaintConstraints = PhosphorAnalysis
-          .getConfigConstraints(configs, execTaint);
-
-      for (ConfigConstraint execTaintConstraint : execTaintConstraints) {
-        ConfigConstraint configConstraint = new ConfigConstraint();
-        configConstraint.addEntries(execTaintConstraint.getPartialConfig());
-
-        if (!execVarCtx.getPartialConfig().isEmpty()) {
-          configConstraint.addEntries(execVarCtx.getPartialConfig());
-        }
-
-        configConstraints.add(configConstraint);
-      }
-    }
-
-    return configConstraints;
-  }
-
-  private static Set<ConfigConstraint> getConfigConstraints(Set<Set<String>> configs,
-      Set<String> options) {
-    Set<ConfigConstraint> configConstraints = new HashSet<>();
-
-    for (Set<String> config : configs) {
-      ConfigConstraint configConstraint = new ConfigConstraint();
-
-      for (String option : options) {
-        configConstraint.addEntry(option, config.contains(option));
-      }
-
-      configConstraints.add(configConstraint);
-    }
-
-    return configConstraints;
-  }
-
-  Map<String, SinkData> getSinksToData() {
-    return sinksToData;
-  }
 }

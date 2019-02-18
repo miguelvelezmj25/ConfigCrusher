@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
@@ -32,46 +31,33 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
   @Override
   void runDynamicAnalysis() throws IOException, InterruptedException {
-    Set<String> options = this.getOptions();
-    Set<Set<String>> configs = Helper.getConfigurations(options);
+    throw new UnsupportedOperationException("implement?");
+//    Set<String> options = this.getOptions();
+//    Set<Set<String>> configs = Helper.getConfigurations(options);
+//
+//    Set<ConfigConstraint> configConstraintsToSatisfy = new HashSet<>();
+//    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
+//
+//    for (Set<String> config : configs) {
+//      ConfigConstraint configConstraint = ConfigConstraint.fromConfig(config, this.getOptions());
+//      satisfiedConfigConstraints.add(configConstraint);
+//
+//      this.runPhosphorAnalysis(config);
+//      this.postProcessPhosphorAnalysis(config);
+//
+//      Set<ConfigConstraint> analysisConfigConstraints = getAnalysisConfigConstraints(this.getSinksToData().values(), config);
+//      configConstraintsToSatisfy.addAll(analysisConfigConstraints);
+//
+//      Set<ConfigConstraint> satisfiedConstraintsByConfig = this
+//          .getSatisfiedConfigConstraintsByConfig(configConstraintsToSatisfy, configConstraint);
+//      satisfiedConfigConstraints.addAll(satisfiedConstraintsByConfig);
+//      configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
+//    }
+//
+//    if (!configConstraintsToSatisfy.isEmpty()) {
+//      throw new RuntimeException("Not all constraints were satisfied");
+//    }
 
-    Set<ConfigConstraint> configConstraintsToSatisfy = new HashSet<>();
-    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
-
-    for (Set<String> config : configs) {
-      ConfigConstraint configConstraint = ConfigConstraint.fromConfig(config, this.getOptions());
-      satisfiedConfigConstraints.add(configConstraint);
-
-      this.runPhosphorAnalysis(config);
-      this.postProcessPhosphorAnalysis(config);
-
-      Set<ConfigConstraint> analysisConfigConstraints = BFPhosphorAnalysis
-          .getAnalysisConfigConstraints(this.getSinksToData().values());
-      configConstraintsToSatisfy.addAll(analysisConfigConstraints);
-
-      Set<ConfigConstraint> satisfiedConstraintsByConfig = this
-          .getSatisfiedConfigConstraintsByConfig(configConstraintsToSatisfy, configConstraint);
-      satisfiedConfigConstraints.addAll(satisfiedConstraintsByConfig);
-      configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
-    }
-
-    if (!configConstraintsToSatisfy.isEmpty()) {
-      throw new RuntimeException("Not all constraints were satisfied");
-    }
-
-  }
-
-  private Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
-      Set<ConfigConstraint> configConstraints, ConfigConstraint executedConfigConstraint) {
-    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
-
-    for (ConfigConstraint configConstraint : configConstraints) {
-      if (configConstraint.isSubConstraintOf(executedConfigConstraint)) {
-        satisfiedConfigConstraints.add(configConstraint);
-      }
-    }
-
-    return satisfiedConfigConstraints;
   }
 
   @Override

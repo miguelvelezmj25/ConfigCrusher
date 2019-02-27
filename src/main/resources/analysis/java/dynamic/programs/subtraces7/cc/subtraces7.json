@@ -1,0 +1,124 @@
+[
+  {
+    "region": {
+      "regionID": "fa58bf80-2e8a-4ae2-a4a1-cc028a2e75da",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": {
+          "configConstraints": [
+            [
+              {
+                "partialConfig": {
+                  "A": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": true
+                }
+              }
+            ]
+          ]
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "5eaee1f4-346b-4fac-ad6d-d64b49fe896b",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": {
+          "configConstraints": [
+            [
+              {
+                "partialConfig": {
+                  "B": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "B": true
+                }
+              }
+            ]
+          ]
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "f47e62c2-8c25-481a-a7ad-801e9ce0dc74",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces7",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": {
+          "configConstraints": [
+            [
+              {
+                "partialConfig": {
+                  "A": false,
+                  "B": true
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": true,
+                  "B": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": false,
+                  "B": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": true,
+                  "B": true
+                }
+              }
+            ]
+          ]
+        }
+      }
+    }
+  }
+]

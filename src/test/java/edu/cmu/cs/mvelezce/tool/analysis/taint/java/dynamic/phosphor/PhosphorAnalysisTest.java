@@ -9,6 +9,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorEx
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sound.SoundAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces6.Subtraces6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces7.Subtraces7Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
@@ -48,8 +49,28 @@ public class PhosphorAnalysisTest {
     String programName = SubtracesAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
-    initialConfig.add("A");
-    initialConfig.add("B");
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new PhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Subtraces2() throws IOException, InterruptedException {
+    String programName = Subtraces2Adapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(Subtraces2Adapter.getListOfOptions());
+    Set<String> initialConfig = new HashSet<>();
 
     // Program arguments
     String[] args = new String[2];

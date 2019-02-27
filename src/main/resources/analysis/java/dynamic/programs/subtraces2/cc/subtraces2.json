@@ -1,0 +1,90 @@
+[
+  {
+    "region": {
+      "regionID": "373369e9-6d0d-45f2-ab00-a9952e67eeee",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces2",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": {
+          "configConstraints": [
+            [
+              {
+                "partialConfig": {
+                  "A": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": true
+                }
+              }
+            ]
+          ]
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "62cd9ba5-8b06-4e8c-aaa7-ebd8736fb381",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Subtraces2",
+      "regionMethod": "foo(Z)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦A⟧": {
+          "configConstraints": [
+            [
+              {
+                "partialConfig": {
+                  "A": true,
+                  "B": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": true,
+                  "B": true
+                }
+              }
+            ],
+            [
+              {
+                "partialConfig": {
+                  "A": true,
+                  "C": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": true,
+                  "C": true
+                }
+              }
+            ]
+          ]
+        }
+      }
+    }
+  }
+]

@@ -1,9 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import edu.cmu.cs.mvelezce.cc.SinkEntry;
-import edu.cmu.cs.mvelezce.cc.TaintInfo;
+import edu.cmu.cs.mvelezce.cc.DecisionInfo;
+import edu.cmu.cs.mvelezce.cc.DecisionTaints;
 import edu.cmu.cs.mvelezce.cc.TaintLabel;
-import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.columbia.cs.psl.phosphor.runtime.Taint;
 import java.io.File;
@@ -31,29 +30,7 @@ public class PhosphorExecutionAnalysis {
     this.programName = programName;
   }
 
-  Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
-      ConfigConstraint executedConfigConstraint) {
-    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
-
-    Map<String, Boolean> executedPartialConfig = executedConfigConstraint.getPartialConfig();
-    Set<String> options = executedPartialConfig.keySet();
-    Set<Set<String>> configs = Helper.getConfigurations(options);
-    configs.remove(new HashSet<>());
-
-    for (Set<String> config : configs) {
-      ConfigConstraint configConstraint = new ConfigConstraint();
-
-      for (String option : config) {
-        configConstraint.addEntry(option, executedPartialConfig.get(option));
-      }
-
-      satisfiedConfigConstraints.add(configConstraint);
-    }
-
-    return satisfiedConfigConstraints;
-  }
-
-  Map<String, Map<Set<String>, List<Set<String>>>> analyzePhosphorResults()
+  Map<String, Map<Set<String>, List<Set<String>>>> getPhosphorResults()
       throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + programName;
     Collection<File> serializedFiles = this.getSerializedFiles(dir);
@@ -62,7 +39,14 @@ public class PhosphorExecutionAnalysis {
       throw new RuntimeException("The directory " + dir + " must have 1 file.");
     }
 
-    return this.readPhosphorTaintResults(serializedFiles.iterator().next());
+    List<DecisionInfo> phosphorTaintResults = this
+        .readPhosphorTaintResults(serializedFiles.iterator().next());
+    Map<String, Map<Taint, List<Taint>>> analysisData = this
+        .getDataFromAnalysis(phosphorTaintResults);
+    Map<String, Map<Set<TaintLabel>, List<Set<TaintLabel>>>> analysisDataWithLabels = this
+        .getSinksToLabelData(analysisData);
+
+    return this.changeLabelsToTaints(analysisDataWithLabels);
   }
 
   private Collection<File> getSerializedFiles(String dir) {
@@ -71,24 +55,18 @@ public class PhosphorExecutionAnalysis {
     return FileUtils.listFiles(dirFile, null, false);
   }
 
-  private Map<String, Map<Set<String>, List<Set<String>>>> readPhosphorTaintResults(
-      File serializedFile) throws IOException {
-    List<SinkEntry> sinkEntries = this.deserialize(serializedFile);
-    Map<String, Map<Taint, List<Taint>>> analysisData = this.getDataFromAnalysis(sinkEntries);
-    Map<String, Map<Set<TaintLabel>, List<Set<TaintLabel>>>> analysisDataWithLabels = this
-        .getSinksToLabelData(analysisData);
-
-    return this.changeLabelsToTaints(analysisDataWithLabels);
+  private List<DecisionInfo> readPhosphorTaintResults(File serializedFile) throws IOException {
+    return this.deserialize(serializedFile);
   }
 
   // TODO check catching and throwing
-  private List<SinkEntry> deserialize(File file) throws IOException {
+  private List<DecisionInfo> deserialize(File file) throws IOException {
     FileInputStream fis = new FileInputStream(file);
     ObjectInputStream ois = new ObjectInputStream(fis);
-    List<SinkEntry> sinkEntries;
+    List<DecisionInfo> decisionInfos;
 
     try {
-      sinkEntries = (List<SinkEntry>) ois.readObject();
+      decisionInfos = (List<DecisionInfo>) ois.readObject();
 
     }
     catch (ClassNotFoundException e) {
@@ -98,36 +76,36 @@ public class PhosphorExecutionAnalysis {
     ois.close();
     fis.close();
 
-    return sinkEntries;
+    return decisionInfos;
   }
 
-  private Map<String, Map<Taint, List<Taint>>> getDataFromAnalysis(List<SinkEntry> sinkEntries) {
-    Set<String> sinks = this.getSinksAnalysis(sinkEntries);
-    Map<String, Map<Taint, List<Taint>>> sinksToTaintInfos = this.addSinksFromAnalysis(sinks);
-    this.addCtxsFromAnalysis(sinksToTaintInfos, sinkEntries);
-    this.addTaintsFromAnalysis(sinksToTaintInfos, sinkEntries);
+  private Map<String, Map<Taint, List<Taint>>> getDataFromAnalysis(
+      List<DecisionInfo> decisionInfos) {
+    Map<String, Map<Taint, List<Taint>>> sinksToDecisionsInfluence = new HashMap<>();
 
-    return sinksToTaintInfos;
+    Set<String> sinks = this.getReachedSinks(decisionInfos);
+    this.addSinksFromAnalysis(sinks, sinksToDecisionsInfluence);
+    this.addExecCtxTaintsFromAnalysis(decisionInfos, sinksToDecisionsInfluence);
+    this.addConditionTaintsFromAnalysis(decisionInfos, sinksToDecisionsInfluence);
+
+    return sinksToDecisionsInfluence;
   }
 
-  private Set<String> getSinksAnalysis(List<SinkEntry> sinkEntries) {
+  private Set<String> getReachedSinks(List<DecisionInfo> decisionInfos) {
     Set<String> sinks = new HashSet<>();
 
-    for (SinkEntry sinkEntry : sinkEntries) {
-      sinks.add(sinkEntry.getSink());
+    for (DecisionInfo decisionInfo : decisionInfos) {
+      sinks.add(decisionInfo.getDecision());
     }
 
     return sinks;
   }
 
-  private Map<String, Map<Taint, List<Taint>>> addSinksFromAnalysis(Set<String> sinks) {
-    Map<String, Map<Taint, List<Taint>>> sinksToTaintInfos = new HashMap<>();
-
+  private void addSinksFromAnalysis(Set<String> sinks,
+      Map<String, Map<Taint, List<Taint>>> sinksToDecisionsInfluence) {
     for (String sink : sinks) {
-      sinksToTaintInfos.put(sink, new HashMap<>());
+      sinksToDecisionsInfluence.put(sink, new HashMap<>());
     }
-
-    return sinksToTaintInfos;
   }
 
   private Map<String, Map<Set<TaintLabel>, List<Set<TaintLabel>>>> getSinksToLabelData(
@@ -158,30 +136,30 @@ public class PhosphorExecutionAnalysis {
     return sinksToTaints;
   }
 
-  private void addCtxsFromAnalysis(Map<String, Map<Taint, List<Taint>>> sinksToTaintInfos,
-      List<SinkEntry> sinkEntries) {
-    for (SinkEntry sinkEntry : sinkEntries) {
-      TaintInfo taintInfo = sinkEntry.getTaintInfo();
-      Taint ctx = taintInfo.getCtx();
+  private void addExecCtxTaintsFromAnalysis(List<DecisionInfo> decisionInfos,
+      Map<String, Map<Taint, List<Taint>>> sinksToDecisionInfluences) {
+    for (DecisionInfo decisionInfo : decisionInfos) {
+      String sink = decisionInfo.getDecision();
+      Map<Taint, List<Taint>> decisionInfluences = sinksToDecisionInfluences.get(sink);
 
-      String sink = sinkEntry.getSink();
-      Map<Taint, List<Taint>> taintInfos = sinksToTaintInfos.get(sink);
-      taintInfos.put(ctx, new ArrayList<>());
+      DecisionTaints decisionTaints = decisionInfo.getDecisionTaints();
+      Taint execCtxTaints = decisionTaints.getExecCtxTaints();
+      decisionInfluences.put(execCtxTaints, new ArrayList<>());
     }
   }
 
-  private void addTaintsFromAnalysis(Map<String, Map<Taint, List<Taint>>> sinksToTaintInfos,
-      List<SinkEntry> sinkEntries) {
-    for (SinkEntry sinkEntry : sinkEntries) {
-      TaintInfo taintInfo = sinkEntry.getTaintInfo();
-      Taint ctx = taintInfo.getCtx();
+  private void addConditionTaintsFromAnalysis(List<DecisionInfo> decisionInfos,
+      Map<String, Map<Taint, List<Taint>>> sinksToDecisionInfluences) {
+    for (DecisionInfo decisionInfo : decisionInfos) {
+      String sink = decisionInfo.getDecision();
+      Map<Taint, List<Taint>> decisionInfluences = sinksToDecisionInfluences.get(sink);
 
-      String sink = sinkEntry.getSink();
-      Map<Taint, List<Taint>> taintInfos = sinksToTaintInfos.get(sink);
+      DecisionTaints decisionTaints = decisionInfo.getDecisionTaints();
+      Taint execCtxTaints = decisionTaints.getExecCtxTaints();
 
-      List<Taint> taints = taintInfos.get(ctx);
-      Taint taint = taintInfo.getTaint();
-      taints.add(taint);
+      List<Taint> conditionInfluences = decisionInfluences.get(execCtxTaints);
+      Taint conditionTaints = decisionTaints.getConditionTaints();
+      conditionInfluences.add(conditionTaints);
     }
   }
 

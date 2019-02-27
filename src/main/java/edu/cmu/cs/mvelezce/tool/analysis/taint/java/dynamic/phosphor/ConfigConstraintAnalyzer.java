@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
+import edu.cmu.cs.mvelezce.tool.Helper;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,6 +15,28 @@ public class ConfigConstraintAnalyzer {
 
   ConfigConstraintAnalyzer(Set<String> options) {
     this.options = options;
+  }
+
+  Set<ConfigConstraint> getSatisfiedConfigConstraintsByConfig(
+      ConfigConstraint executedConfigConstraint) {
+    Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
+
+    Map<String, Boolean> executedPartialConfig = executedConfigConstraint.getPartialConfig();
+    Set<String> options = executedPartialConfig.keySet();
+    Set<Set<String>> configs = Helper.getConfigurations(options);
+    configs.remove(new HashSet<>());
+
+    for (Set<String> config : configs) {
+      ConfigConstraint configConstraint = new ConfigConstraint();
+
+      for (String option : config) {
+        configConstraint.addEntry(option, executedPartialConfig.get(option));
+      }
+
+      satisfiedConfigConstraints.add(configConstraint);
+    }
+
+    return satisfiedConfigConstraints;
   }
 
   Set<Set<String>> getConfigsThatSatisfyConfigConstraints(

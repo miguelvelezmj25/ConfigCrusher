@@ -49,6 +49,8 @@ public class PhosphorAnalysisTest {
     String programName = SubtracesAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
     Set<String> initialConfig = new HashSet<>();
+    initialConfig.add("A");
+    initialConfig.add("B");
 
     // Program arguments
     String[] args = new String[2];

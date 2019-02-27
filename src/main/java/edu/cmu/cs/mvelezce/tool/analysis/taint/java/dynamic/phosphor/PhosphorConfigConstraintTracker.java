@@ -16,7 +16,7 @@ public class PhosphorConfigConstraintTracker {
     return sinksToConfigConstraints;
   }
 
-  void updateConstraintsAtSinks(Set<String> config,
+  void deriveConstraints(Set<String> config,
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints) {
     addSinks(sinksToAnalysisTaints.keySet());
     addOrUpdateExecVarCtx(sinksToAnalysisTaints, config);

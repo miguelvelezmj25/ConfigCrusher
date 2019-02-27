@@ -1,22 +1,24 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class SinkData {
 
-    private final Map<ExecVarCtx, ExecTaints> data = new HashMap<>();
+  private final Map<ExecVarCtx, ExecConfigConstraints> data;
 
-  void putIfAbsent(ExecVarCtx execVarCtx, ExecTaints executionTaints) {
-    this.data.putIfAbsent(execVarCtx, executionTaints);
+  SinkData(Map<ExecVarCtx, ExecConfigConstraints> data) {
+    this.data = data;
   }
 
-  ExecTaints getExecTaints(ExecVarCtx execVarCtx) {
-    return this.data.get(execVarCtx);
-  }
+//  void putIfAbsent(ExecVarCtx execVarCtx, ExecTaints executionTaints) {
+//    this.data.putIfAbsent(execVarCtx, executionTaints);
+//  }
 
-  public Map<ExecVarCtx, ExecTaints> getData() {
+//  ExecTaints getExecTaints(ExecVarCtx execVarCtx) {
+//    return this.data.get(execVarCtx);
+//  }
+
+  public Map<ExecVarCtx, ExecConfigConstraints> getData() {
     return data;
   }
 

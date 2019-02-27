@@ -1,11 +1,8 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
@@ -24,9 +21,11 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorEx
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleForExample5Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sound.SoundAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces6.Subtraces6Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces7.Subtraces7Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext2.VariabilityContext2Adapter;
@@ -47,9 +46,8 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
   private static final String PHOSPHOR_SCRIPTS_DIR = BaseAdapter.USER_HOME
       + "/Documents/Programming/Java/Projects/phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
 
-  private final Map<String, SinkData> sinksToData = new HashMap<>();
   private final PhosphorExecutionAnalysis phosphorExecutionAnalysis;
-  private final PhosphorConfigConstraintGenerator phosphorConfigConstraintGenerator;
+  private final PhosphorConfigConstraintTracker phosphorConfigConstraintTracker;
   private final ConfigConstraintAnalyzer configConstraintAnalyzer;
 
   public PhosphorAnalysis(String programName) {
@@ -60,7 +58,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     super(programName, options, initialConfig);
 
     this.phosphorExecutionAnalysis = new PhosphorExecutionAnalysis(programName);
-    this.phosphorConfigConstraintGenerator = new PhosphorConfigConstraintGenerator();
+    this.phosphorConfigConstraintTracker = new PhosphorConfigConstraintTracker();
     this.configConstraintAnalyzer = new ConfigConstraintAnalyzer(options);
   }
 
@@ -70,12 +68,15 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
     Map<JavaRegion, SinkData> regionsToData = new HashMap<>();
 
-    for (Map.Entry<String, SinkData> entry : this.sinksToData.entrySet()) {
+    for (Map.Entry<String, Map<ExecVarCtx, ExecConfigConstraints>> entry : this.phosphorConfigConstraintTracker
+        .getSinksToConfigConstraints().entrySet()) {
       String sink = entry.getKey();
       JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
           this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
 
-      regionsToData.put(region, entry.getValue());
+      Map<ExecVarCtx, ExecConfigConstraints> data = entry.getValue();
+      SinkData sinkData = new SinkData(data);
+      regionsToData.put(region, sinkData);
     }
 
     return regionsToData;
@@ -103,16 +104,18 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
       this.runPhosphorAnalysis(configToExecute);
 
+      // TODO derive constraints
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints = this.phosphorExecutionAnalysis
           .analyzePhosphorResults();
-      this.phosphorConfigConstraintGenerator
+      this.phosphorConfigConstraintTracker
           .updateConstraintsAtSinks(configToExecute, sinksToAnalysisTaints);
-      Set<ConfigConstraint> analysisConfigConstraints = this.phosphorConfigConstraintGenerator
+      Set<ConfigConstraint> analysisConfigConstraints = this.phosphorConfigConstraintTracker
           .getConfigConstraints();
 
       configConstraintsToSatisfy.addAll(analysisConfigConstraints);
       configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
 
+      // TODO pick next config if we still need to sample something
       Set<Set<String>> configsToRun = this.configConstraintAnalyzer
           .getConfigsThatSatisfyConfigConstraints(configConstraintsToSatisfy,
               exploredConfigConstraints);
@@ -154,32 +157,33 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
   @Override
   public Map<JavaRegion, SinkData> readFromFile(File file) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    List<RegionToInfo> results = mapper
-        .readValue(file, new TypeReference<List<RegionToInfo>>() {
-        });
-
-    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
-
-    for (RegionToInfo<SinkData> result : results) {
-      Map<String, Map> info = (Map<String, Map>) result.getInfo();
-      Map<String, Map> sinkDataEntries = info.get("data");
-
-      SinkData sinkData = new SinkData();
-
-      for (Map.Entry<String, Map> entry : sinkDataEntries.entrySet()) {
-        String execVarCtxStr = entry.getKey();
-        ExecVarCtx execVarCtx = this.getExecVarCtx(execVarCtxStr);
-        Map<String, List> execTaints = entry.getValue();
-        ExecTaints executionTaints = this.getExecTaints(execTaints);
-
-        sinkData.putIfAbsent(execVarCtx, executionTaints);
-      }
-
-      regionsToConstraints.put(result.getRegion(), sinkData);
-    }
-
-    return regionsToConstraints;
+    throw new UnsupportedOperationException("Implement");
+//    ObjectMapper mapper = new ObjectMapper();
+//    List<RegionToInfo> results = mapper
+//        .readValue(file, new TypeReference<List<RegionToInfo>>() {
+//        });
+//
+//    Map<JavaRegion, SinkData> regionsToConstraints = new HashMap<>();
+//
+//    for (RegionToInfo<SinkData> result : results) {
+//      Map<String, Map> info = (Map<String, Map>) result.getInfo();
+//      Map<String, Map> sinkDataEntries = info.get("data");
+//
+//      SinkData sinkData = new SinkData();
+//
+//      for (Map.Entry<String, Map> entry : sinkDataEntries.entrySet()) {
+//        String execVarCtxStr = entry.getKey();
+//        ExecVarCtx execVarCtx = this.getExecVarCtx(execVarCtxStr);
+//        Map<String, List> execTaints = entry.getValue();
+//        ExecTaints executionTaints = this.getExecTaints(execTaints);
+//
+//        sinkData.putIfAbsent(execVarCtx, executionTaints);
+//      }
+//
+//      regionsToConstraints.put(result.getRegion(), sinkData);
+//    }
+//
+//    return regionsToConstraints;
   }
 
   void runPhosphorAnalysis(Set<String> config) throws IOException, InterruptedException {
@@ -280,6 +284,10 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
         commandList.add("./examples.sh");
         adapter = new Subtraces6Adapter();
         break;
+      case Subtraces7Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new Subtraces7Adapter();
+        break;
       case ImplicitAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new ImplicitAdapter();
@@ -291,6 +299,10 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
       case TrivialAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new TrivialAdapter();
+        break;
+      case SoundAdapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new SoundAdapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

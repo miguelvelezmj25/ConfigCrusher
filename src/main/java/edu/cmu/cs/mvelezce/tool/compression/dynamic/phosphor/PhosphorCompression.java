@@ -78,15 +78,16 @@ public class PhosphorCompression extends BaseDynamicCompression<Set<Set<Set<Stri
   }
 
   private Set<ConfigConstraint> getConfigConstraints() {
-    Set<ConfigConstraint> configConstraints = new HashSet<>();
-
-    for (SinkData sinkData : this.getConstraints()) {
-      Map<ExecVarCtx, ExecTaints> data = sinkData.getData();
-      Set<ConfigConstraint> configConstraintsAtSink = this.getConfigConstraintsAtSink(data);
-      configConstraints.addAll(configConstraintsAtSink);
-    }
-
-    return configConstraints;
+    throw new UnsupportedOperationException("Implement");
+//    Set<ConfigConstraint> configConstraints = new HashSet<>();
+//
+//    for (SinkData sinkData : this.getConstraints()) {
+//      Map<ExecVarCtx, ExecTaints> data = sinkData.getData();
+//      Set<ConfigConstraint> configConstraintsAtSink = this.getConfigConstraintsAtSink(data);
+//      configConstraints.addAll(configConstraintsAtSink);
+//    }
+//
+//    return configConstraints;
   }
 
   private Set<ConfigConstraint> getConfigConstraintsAtSink(Map<ExecVarCtx, ExecTaints> data) {

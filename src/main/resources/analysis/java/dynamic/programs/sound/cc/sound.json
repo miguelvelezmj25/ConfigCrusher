@@ -1,0 +1,124 @@
+[
+  {
+    "region": {
+      "regionID": "0ed8fa0d-71d3-4cca-aa2d-02896fa2b4f2",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Sound",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 3,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": {
+          "configConstraints": [
+            [
+              {
+                "partialConfig": {
+                  "A": false,
+                  "B": true
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": true,
+                  "B": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": false,
+                  "B": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": true,
+                  "B": true
+                }
+              }
+            ]
+          ]
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "be25a9b0-34e7-429a-8014-53a06148b805",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Sound",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 2,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": {
+          "configConstraints": [
+            [
+              {
+                "partialConfig": {
+                  "B": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "B": true
+                }
+              }
+            ]
+          ]
+        }
+      }
+    }
+  },
+  {
+    "region": {
+      "regionID": "6d5f630c-8724-48cb-8913-9e5cb832bf58",
+      "startTime": -1,
+      "endTime": -1,
+      "duration": -1,
+      "regionPackage": "edu.cmu.cs.mvelezce.analysis",
+      "regionClass": "Sound",
+      "regionMethod": "main([Ljava/lang/String;)V",
+      "startRegionIndex": 1,
+      "startBlockID": "",
+      "endBlocksIDs": [],
+      "startMethodBlock": null,
+      "endMethodBlocks": []
+    },
+    "info": {
+      "data": {
+        "⟦true⟧": {
+          "configConstraints": [
+            [
+              {
+                "partialConfig": {
+                  "A": false
+                }
+              },
+              {
+                "partialConfig": {
+                  "A": true
+                }
+              }
+            ]
+          ]
+        }
+      }
+    }
+  }
+]

@@ -1,6 +1,5 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import edu.cmu.cs.mvelezce.MinConfigsGenerator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -24,22 +23,26 @@ public class ConfigConstraintAnalyzer {
       return new HashSet<>();
     }
 
-    List<String> constraintsToSatisfy = this.getStringConstraints(configConstraintsToSatisfy);
-    List<String> executedConfigConstraints = this.getStringConstraints(satisfiedConfigConstraints);
-    executedConfigConstraints = this.negateConstraints(executedConfigConstraints);
-
-    List<String> constraints = new ArrayList<>(constraintsToSatisfy);
-    constraints.addAll(executedConfigConstraints);
-
-    Set<Set<Set<String>>> satisfiableConfigsSets = MinConfigsGenerator
-        .getSatConfigs(this.options, constraints);
-
     Set<Set<String>> configs = new HashSet<>();
+    Set<String> config = configConstraintsToSatisfy.iterator().next().toConfig();
+    configs.add(config);
 
-    for (Set<Set<String>> satisfiableConfigs : satisfiableConfigsSets) {
-      configs.addAll(satisfiableConfigs);
-    }
-
+//    List<String> constraintsToSatisfy = this.getStringConstraints(configConstraintsToSatisfy);
+//    List<String> executedConfigConstraints = this.getStringConstraints(satisfiedConfigConstraints);
+//    executedConfigConstraints = this.negateConstraints(executedConfigConstraints);
+//
+//    List<String> constraints = new ArrayList<>(constraintsToSatisfy);
+//    constraints.addAll(executedConfigConstraints);
+//
+//    Set<Set<Set<String>>> satisfiableConfigsSets = MinConfigsGenerator
+//        .getSatConfigs(this.options, constraints);
+//
+//    Set<Set<String>> configs = new HashSet<>();
+//
+//    for (Set<Set<String>> satisfiableConfigs : satisfiableConfigsSets) {
+//      configs.addAll(satisfiableConfigs);
+//    }
+//
     return configs;
   }
 

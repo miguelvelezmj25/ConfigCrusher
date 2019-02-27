@@ -8,59 +8,93 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class PhosphorConfigConstraintGenerator {
+public class PhosphorConfigConstraintTracker {
 
-  private final Map<String, Map<ExecVarCtx, ExecConstraints>> sinksToConfigConstraints = new HashMap<>();
+  private final Map<String, Map<ExecVarCtx, ExecConfigConstraints>> sinksToConfigConstraints = new HashMap<>();
+
+  public Map<String, Map<ExecVarCtx, ExecConfigConstraints>> getSinksToConfigConstraints() {
+    return sinksToConfigConstraints;
+  }
 
   void updateConstraintsAtSinks(Set<String> config,
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints) {
     addSinks(sinksToAnalysisTaints.keySet());
-    addExecVarCtx(sinksToAnalysisTaints, config);
-    addOrUpdateConstraints(sinksToAnalysisTaints);
+    addOrUpdateExecVarCtx(sinksToAnalysisTaints, config);
+    addOrUpdateConfigConstraints(sinksToAnalysisTaints);
   }
 
-  private void addOrUpdateConstraints(
+  private void addOrUpdateConfigConstraints(
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints) {
-    for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> entry : sinksToAnalysisTaints
+    for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> analysisEntry : sinksToAnalysisTaints
         .entrySet()) {
-      String sink = entry.getKey();
-      Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints = sinksToConfigConstraints
-          .get(sink);
+      String analysisSink = analysisEntry.getKey();
+      Map<ExecVarCtx, ExecConfigConstraints> execVarCtxsToConfigConstraints = sinksToConfigConstraints
+          .get(analysisSink);
 
-      Map<Set<String>, List<Set<String>>> ctxsToTaints = entry.getValue();
-      addOrUpdateConstraintsForSink(ctxsToTaints, execVarCtxsToConfigConstraints);
+      Map<Set<String>, List<Set<String>>> analysisCtxsToTaints = analysisEntry.getValue();
+      addOrUpdateConfigConstraintsForSink(analysisCtxsToTaints, execVarCtxsToConfigConstraints);
     }
   }
 
-  private void addOrUpdateConstraintsForSink(
-      Map<Set<String>, List<Set<String>>> ctxsToTaints,
-      Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints) {
+  private void addOrUpdateConfigConstraintsForSink(
+      Map<Set<String>, List<Set<String>>> analysisCtxsToTaints,
+      Map<ExecVarCtx, ExecConfigConstraints> execVarCtxsToConfigConstraints) {
     Set<ExecVarCtx> execVarCtxs = execVarCtxsToConfigConstraints.keySet();
 
     for (ExecVarCtx execVarCtx : execVarCtxs) {
       Set<String> ctx = execVarCtx.toConfig();
-      List<Set<String>> taints = ctxsToTaints.get(ctx);
+      List<Set<String>> analysisTaints = analysisCtxsToTaints.get(ctx);
 
-      ExecConstraints configConstraints = execVarCtxsToConfigConstraints.get(execVarCtx);
-      addOrUpdateConstraintsForCtx(execVarCtx, taints, configConstraints);
+      ExecConfigConstraints execConfigConstraints = execVarCtxsToConfigConstraints.get(execVarCtx);
+      List<Set<ConfigConstraint>> existingExecConfigConstraints = execConfigConstraints
+          .getConfigConstraints();
+      addOrUpdateConfigConstraintsForCtx(execVarCtx, analysisTaints, existingExecConfigConstraints);
     }
 
   }
 
-  private void addOrUpdateConstraintsForCtx(ExecVarCtx execVarCtx, List<Set<String>> taints,
-      ExecConstraints configConstraints) {
-    for (Set<String> taint : taints) {
-      Set<ConfigConstraint> taintConfigConstraints = getTaintConfigConstraintsForCtx(execVarCtx,
-          taint);
+  private void addOrUpdateConfigConstraintsForCtx(ExecVarCtx execVarCtx,
+      List<Set<String>> analysisTaints,
+      List<Set<ConfigConstraint>> existingExecConfigConstraints) {
 
-      if (configConstraints.getConstraints().isEmpty()) {
-        configConstraints.addExecConstraints(taintConfigConstraints);
+    for (int i = 0; i < analysisTaints.size(); i++) {
+      Set<String> analysisTaint = analysisTaints.get(i);
+      Set<ConfigConstraint> analysisTaintConfigConstraints = getTaintConfigConstraintsForCtx(
+          execVarCtx,
+          analysisTaint);
+
+      if (existingExecConfigConstraints.size() <= i) {
+        existingExecConfigConstraints.add(analysisTaintConfigConstraints);
       }
       else {
-        throw new UnsupportedOperationException("Implement");
-      }
-    }
+        Set<ConfigConstraint> execConfigConstraint = existingExecConfigConstraints.get(i);
 
+        if (!execConfigConstraint.equals(analysisTaintConfigConstraints)) {
+          this.updateExistingConfigConstraints(execConfigConstraint,
+              analysisTaintConfigConstraints);
+        }
+      }
+
+    }
+  }
+
+  private void updateExistingConfigConstraints(
+      Set<ConfigConstraint> execConfigConstraint,
+      Set<ConfigConstraint> analysisTaintConfigConstraints) {
+    throw new UnsupportedOperationException("Implement");
+//    Set<ConfigConstraint> allConfigConstraints = new HashSet<>(execConfigConstraint);
+//    allConfigConstraints.addAll(analysisTaintConfigConstraints);
+//
+//    Set<String> options = new HashSet<>();
+//
+//    for (ConfigConstraint configConstraint : allConfigConstraints) {
+//      options.addAll(configConstraint.getOptions());
+//    }
+//
+//    Set<ConfigConstraint> updatedConfigConstraints = getTaintConfigConstraints(options);
+//
+//    execConfigConstraint.clear();
+//    execConfigConstraint.addAll(updatedConfigConstraints);
   }
 
   private Set<ConfigConstraint> getTaintConfigConstraintsForCtx(ExecVarCtx execVarCtx,
@@ -105,27 +139,39 @@ public class PhosphorConfigConstraintGenerator {
     return configConstraints;
   }
 
-  private void addExecVarCtx(
+  private void addOrUpdateExecVarCtx(
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints,
       Set<String> config) {
-    for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> entry : sinksToAnalysisTaints
+    for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> analysisEntry : sinksToAnalysisTaints
         .entrySet()) {
-      String sink = entry.getKey();
-      Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints = sinksToConfigConstraints
-          .get(sink);
+      String analysisSink = analysisEntry.getKey();
+      Map<ExecVarCtx, ExecConfigConstraints> existingExecVarCtxsToConfigConstraints = sinksToConfigConstraints
+          .get(analysisSink);
 
-      Map<Set<String>, List<Set<String>>> ctxsToTaints = entry.getValue();
-      AddExecVarCtxsForSink(ctxsToTaints.keySet(), execVarCtxsToConfigConstraints, config);
+      Map<Set<String>, List<Set<String>>> analysisCtxsToTaints = analysisEntry.getValue();
+      addOrUpdateExecVarCtxsForSink(analysisCtxsToTaints.keySet(),
+          existingExecVarCtxsToConfigConstraints, config);
     }
 
   }
 
-  private void AddExecVarCtxsForSink(Set<Set<String>> ctxs,
-      Map<ExecVarCtx, ExecConstraints> execVarCtxsToConfigConstraints, Set<String> config) {
-    for (Set<String> ctx : ctxs) {
-      ExecVarCtx execVarCtx = getExecVarCtx(ctx, config);
-      execVarCtxsToConfigConstraints.putIfAbsent(execVarCtx, new ExecConstraints());
+  private void addOrUpdateExecVarCtxsForSink(Set<Set<String>> analysisCtxs,
+      Map<ExecVarCtx, ExecConfigConstraints> existingExecVarCtxsToConfigConstraints,
+      Set<String> config) {
+    for (Set<String> analysisCtx : analysisCtxs) {
+      ExecVarCtx analysisExecVarCtx = getExecVarCtx(analysisCtx, config);
+
+      if (existingExecVarCtxsToConfigConstraints.isEmpty()) {
+        existingExecVarCtxsToConfigConstraints.put(analysisExecVarCtx, new ExecConfigConstraints());
+      }
+      else if (!existingExecVarCtxsToConfigConstraints.containsKey(analysisExecVarCtx)) {
+        this.updateExistingExecVarCtxs();
+      }
     }
+  }
+
+  private void updateExistingExecVarCtxs() {
+    throw new UnsupportedOperationException("Implement");
   }
 
   private ExecVarCtx getExecVarCtx(Set<String> ctx, Set<String> config) {
@@ -147,12 +193,12 @@ public class PhosphorConfigConstraintGenerator {
   Set<ConfigConstraint> getConfigConstraints() {
     Set<ConfigConstraint> configConstraints = new HashSet<>();
 
-    for (Map<ExecVarCtx, ExecConstraints> constraintsPerCtxAtSinks : sinksToConfigConstraints
+    for (Map<ExecVarCtx, ExecConfigConstraints> constraintsPerCtxAtSinks : sinksToConfigConstraints
         .values()) {
-      Collection<ExecConstraints> constraintsAtSink = constraintsPerCtxAtSinks.values();
+      Collection<ExecConfigConstraints> constraintsAtSink = constraintsPerCtxAtSinks.values();
 
-      for (ExecConstraints execConstraints : constraintsAtSink) {
-        List<Set<ConfigConstraint>> constraintsPerCtx = execConstraints.getConstraints();
+      for (ExecConfigConstraints execConstraints : constraintsAtSink) {
+        List<Set<ConfigConstraint>> constraintsPerCtx = execConstraints.getConfigConstraints();
 
         for (Set<ConfigConstraint> execConfigConstraints : constraintsPerCtx) {
           configConstraints.addAll(execConfigConstraints);

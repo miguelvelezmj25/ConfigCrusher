@@ -109,9 +109,9 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
           .getPhosphorResults();
       this.phosphorConfigConstraintTracker
           .deriveConstraints(configToExecute, sinksToAnalysisTaints);
+
       Set<ConfigConstraint> analysisConfigConstraints = this.phosphorConfigConstraintTracker
           .getConfigConstraints();
-
       configConstraintsToSatisfy.addAll(analysisConfigConstraints);
       configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
 

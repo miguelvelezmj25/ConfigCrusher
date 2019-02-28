@@ -1,8 +1,8 @@
 digraph <init> {
 node [shape=record];
-662830766 [label="L0\lLINENUMBER 5 L0\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lRETURN\lL1\l"];
+420420938 [label="L0\lLINENUMBER 5 L0\lALOAD 0\lINVOKESPECIAL java/lang/Object.\<init\> ()V\lRETURN\lL1\l"];
 entry;
 exit;
-entry -> 662830766;
-662830766 -> exit;
+entry -> 420420938;
+420420938 -> exit;
 }

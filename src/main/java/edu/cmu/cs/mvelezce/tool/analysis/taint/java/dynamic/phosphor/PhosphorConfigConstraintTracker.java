@@ -19,8 +19,29 @@ public class PhosphorConfigConstraintTracker {
   void deriveConstraints(Set<String> config,
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints) {
     addSinks(sinksToAnalysisTaints.keySet());
-    addOrUpdateExecVarCtx(sinksToAnalysisTaints, config);
+
+    checkDiffExecVarCtx(sinksToAnalysisTaints);
+
+    addExecVarCtx(sinksToAnalysisTaints, config);
     addConfigConstraints(sinksToAnalysisTaints);
+  }
+
+  private void checkDiffExecVarCtx(
+      Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints) {
+    for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> analysisEntry : sinksToAnalysisTaints
+        .entrySet()) {
+      String sink = analysisEntry.getKey();
+      Map<ExecVarCtx, ExecConfigConstraints> r = this.sinksToConfigConstraints.get(sink);
+
+      if (r.isEmpty()) {
+        continue;
+      }
+
+      Map<Set<String>, List<Set<String>>> x = analysisEntry.getValue();
+
+      System.out.println();
+    }
+
   }
 
   private void addConfigConstraints(
@@ -132,7 +153,7 @@ public class PhosphorConfigConstraintTracker {
     return configConstraints;
   }
 
-  private void addOrUpdateExecVarCtx(
+  private void addExecVarCtx(
       Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints,
       Set<String> config) {
     for (Map.Entry<String, Map<Set<String>, List<Set<String>>>> analysisEntry : sinksToAnalysisTaints
@@ -142,13 +163,13 @@ public class PhosphorConfigConstraintTracker {
           .get(analysisSink);
 
       Map<Set<String>, List<Set<String>>> analysisCtxsToTaints = analysisEntry.getValue();
-      addOrUpdateExecVarCtxsForSink(analysisCtxsToTaints.keySet(),
+      addExecVarCtxsForSink(analysisCtxsToTaints.keySet(),
           existingExecVarCtxsToConfigConstraints, config);
     }
 
   }
 
-  private void addOrUpdateExecVarCtxsForSink(Set<Set<String>> analysisCtxs,
+  private void addExecVarCtxsForSink(Set<Set<String>> analysisCtxs,
       Map<ExecVarCtx, ExecConfigConstraints> existingExecVarCtxsToConfigConstraints,
       Set<String> config) {
     for (Set<String> analysisCtx : analysisCtxs) {
@@ -158,12 +179,33 @@ public class PhosphorConfigConstraintTracker {
         existingExecVarCtxsToConfigConstraints.put(analysisExecVarCtx, new ExecConfigConstraints());
       }
       else if (!existingExecVarCtxsToConfigConstraints.containsKey(analysisExecVarCtx)) {
-        this.updateExistingExecVarCtxs();
+        this.addInteractingExecVarCtx(existingExecVarCtxsToConfigConstraints, analysisExecVarCtx);
       }
     }
   }
 
-  private void updateExistingExecVarCtxs() {
+  // TODO check if diff ctxs and diff taints
+  private void addInteractingExecVarCtx(
+      Map<ExecVarCtx, ExecConfigConstraints> existingExecVarCtxsToConfigConstraints,
+      ExecVarCtx analysisExecVarCtx) {
+//    Collection<ExecConfigConstraints> configConstraints = existingExecVarCtxsToConfigConstraints
+//        .values();
+//
+//    Set<ExecConfigConstraints> x = new HashSet<>();
+//
+//    for(ExecConfigConstraints exc : configConstraints) {
+//      x.add(exc);
+//    }
+//
+//    if(x.size() != 1) {
+//      throw new RuntimeException("Expected one execConfigConstraint");
+//    }
+//
+//    ExecConfigConstraints z = x.iterator().next();
+//    Set<ConfigConstraint> p = z.getConfigConstraints().get(0);
+//
+//
+//    existingExecVarCtxsToConfigConstraints.put(analysisExecVarCtx, x.iterator().next());
     throw new UnsupportedOperationException("Implement");
   }
 

@@ -130,9 +130,9 @@ public abstract class BaseClassTransformer implements ClassTransformer {
 
   @Override
   public ClassWriter getClassWriter(ClassNode classNode) {
-//    ClassWriter classWriter = new CustomClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+    ClassWriter classWriter = new CustomClassWriter(ClassWriter.COMPUTE_FRAMES);
 //        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+//    ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 //        ClassWriter classWriter = new ClassWriter(0);
     classNode.accept(classWriter);
 

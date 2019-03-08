@@ -1,15 +1,15 @@
 digraph foo {
 node [shape=record];
-1153241506 [label="L2\lLINENUMBER 44 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_4\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lGOTO L3\l"];
-460422403 [label="L3\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 48 L4\lRETURN\lL5\l"];
-1752515641 [label="L0\lLINENUMBER 43 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
-1448697291 [label="L1\lLINENUMBER 46 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+171594966 [label="L1\lLINENUMBER 46 L1\lFRAME SAME\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\l"];
+1912646804 [label="L3\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 48 L4\lRETURN\lL5\l"];
+712591232 [label="L2\lLINENUMBER 44 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_4\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\lGOTO L3\l"];
+2102026771 [label="L0\lLINENUMBER 43 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/RunningExample.foo(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
 entry;
 exit;
-1153241506 -> 460422403;
-entry -> 1752515641;
-460422403 -> exit;
-1752515641 -> 1153241506;
-1752515641 -> 1448697291;
-1448697291 -> 460422403;
+entry -> 2102026771;
+171594966 -> 1912646804;
+1912646804 -> exit;
+712591232 -> 1912646804;
+2102026771 -> 171594966;
+2102026771 -> 712591232;
 }

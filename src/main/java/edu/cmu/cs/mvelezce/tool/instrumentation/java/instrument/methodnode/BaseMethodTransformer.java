@@ -43,7 +43,9 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     for (ClassNode classNode : classNodes) {
-//      if (!classNode.name.contains("analysis/Return2Example")) { // TODO delme
+//      if (!classNode.name.endsWith("TryCatchFinally")) {
+////      if (!classNode.name.endsWith("journal/PersistentJournal")) {
+////      if (!classNode.name.endsWith("implementation/TransactionTimestamp")) {
 //        continue;
 //      }
 
@@ -86,7 +88,8 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       try {
         prettyGraph.savePdfFile(this.getDebugDir(), this.getProgramName(), classNode.name,
             methodNode.name);
-      } catch (InterruptedException e) {
+      }
+      catch (InterruptedException e) {
         e.printStackTrace();
       }
     }
@@ -97,30 +100,30 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
     return classTransformer;
   }
 
-  protected void updateMaxs(MethodNode methodNode, ClassNode classNode) {
-    MethodNode tmpMethodNode = this.getModifiedMethodNode(methodNode, classNode);
-    methodNode.visitMaxs(tmpMethodNode.maxStack, tmpMethodNode.maxLocals);
-  }
-
-  private MethodNode getModifiedMethodNode(MethodNode methodNode, ClassNode classNode) {
-    ClassWriter classWriter = this.classTransformer.getClassWriter(classNode);
-    ClassNode newClassNode = this.getNewClassNode(classWriter);
-
-    for (MethodNode method : newClassNode.methods) {
-      if (method.name.equals(methodNode.name) && method.desc.equals(methodNode.desc)) {
-        return method;
-      }
-    }
-
-    throw new RuntimeException("Did not find the method");
-  }
-
-  private ClassNode getNewClassNode(ClassWriter classWriter) {
-    ClassReader classReader = new ClassReader(classWriter.toByteArray());
-    ClassNode classNode = new ClassNode();
-    classReader.accept(classNode, 0);
-
-    return classNode;
-  }
+//  protected void updateMaxs(MethodNode methodNode, ClassNode classNode) {
+//    MethodNode tmpMethodNode = this.getModifiedMethodNode(methodNode, classNode);
+//    methodNode.visitMaxs(tmpMethodNode.maxStack, tmpMethodNode.maxLocals);
+//  }
+//
+//  private MethodNode getModifiedMethodNode(MethodNode methodNode, ClassNode classNode) {
+//    ClassWriter classWriter = this.classTransformer.getClassWriter(classNode);
+//    ClassNode newClassNode = this.getNewClassNode(classWriter);
+//
+//    for (MethodNode method : newClassNode.methods) {
+//      if (method.name.equals(methodNode.name) && method.desc.equals(methodNode.desc)) {
+//        return method;
+//      }
+//    }
+//
+//    throw new RuntimeException("Did not find the method");
+//  }
+//
+//  private ClassNode getNewClassNode(ClassWriter classWriter) {
+//    ClassReader classReader = new ClassReader(classWriter.toByteArray());
+//    ClassNode classNode = new ClassNode();
+//    classReader.accept(classNode, 0);
+//
+//    return classNode;
+//  }
 
 }

@@ -1,8 +1,8 @@
 digraph isUsed {
 node [shape=record];
-797127791 [label="L0\lLINENUMBER 36 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lIRETURN\lL1\l"];
+1558425201 [label="L0\lLINENUMBER 36 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lIRETURN\lL1\l"];
 entry;
 exit;
-entry -> 797127791;
-797127791 -> exit;
+entry -> 1558425201;
+1558425201 -> exit;
 }

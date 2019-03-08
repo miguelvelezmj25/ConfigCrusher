@@ -20,7 +20,8 @@ import jdk.internal.org.objectweb.asm.tree.analysis.BasicValue;
 import jdk.internal.org.objectweb.asm.tree.analysis.Frame;
 
 public class CFGBuilder extends BaseMethodGraphBuilder {
-// TODO add a new label in a basic block to determine the beginning and end of a control flow decision
+
+  // TODO add a new label in a basic block to determine the beginning and end of a control flow decision
   private final String owner;
 
   private final Map<CFGNode<BasicValue>, Integer> nodesToIndexes = new HashMap<>();
@@ -59,6 +60,30 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
       this.AddPredsBlocks(graph, cfgNode, insn);
       this.addSuccsBlocks(graph, cfgNode, insnList, insn);
     }
+
+//    for(TryCatchBlockNode tryCatchBlockNode : methodNode.tryCatchBlocks) {
+//      LabelNode start = tryCatchBlockNode.start;
+//      MethodBlock startMethodBlock = graph.getMethodBlock(start);
+//
+//      if(startMethodBlock == null) {
+//        throw new RuntimeException("The start of a try block should be a method block");
+//      }
+//
+//      LabelNode handler = tryCatchBlockNode.handler;
+//      MethodBlock handlerMethodBlock = graph.getMethodBlock(handler);
+//
+//      if(handlerMethodBlock == null) {
+//        throw new RuntimeException("The start of a catch block should be a method block");
+//      }
+//
+//      LabelNode end = tryCatchBlockNode.end;
+//      MethodBlock endMethodBlock = graph.getMethodBlock(end);
+//
+//      if(endMethodBlock == null) {
+//        endMethodBlock = new MethodBlock(end);
+//        graph.addMethodBlock(endMethodBlock);
+//      }
+//    }
   }
 
   private void AddPredsBlocks(MethodGraph graph, CFGNode<BasicValue> cfgNode,
@@ -81,6 +106,29 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
   private void addSuccsBlocks(MethodGraph graph, CFGNode<BasicValue> cfgNode, InsnList insnList,
       AbstractInsnNode insn) {
     Set<CFGNode<BasicValue>> succs = cfgNode.getSuccessors();
+
+//    if (succs.isEmpty()) {
+//      if (insn instanceof JumpInsnNode) {
+//        throw new RuntimeException("A jump instruction does not have any successors!");
+//      }
+//
+//      return;
+//    }
+//
+//    if (succs.size() == 1 && !(insn instanceof JumpInsnNode)) {
+//      return;
+//    }
+//
+//    if (succs.size() > 1) {
+//      int curOpcode = insn.getOpcode();
+//
+//      if (!((curOpcode >= Opcodes.IFEQ & curOpcode <= Opcodes.IF_ACMPNE)
+//          || curOpcode == Opcodes.IFNULL
+//          || curOpcode == Opcodes.IFNONNULL)) {
+//        throw new RuntimeException("The instruction " + curOpcode
+//            + " has multiple successors, but it is not an if comparison");
+//      }
+//    }
 
     if (succs.isEmpty() || succs.size() == 1) {
       return;
@@ -164,7 +212,7 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
       return this.analyzer;
     }
 
-    this.analyzer = new BuildCFGAnalyzer();
+    this.analyzer = new BuildCFGAnalyzer(methodNode);
 
     try {
       this.analyzer.analyze(this.owner, methodNode);
@@ -192,8 +240,12 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
 
   private static class BuildCFGAnalyzer extends Analyzer<BasicValue> {
 
-    BuildCFGAnalyzer() {
+    private InsnList instructions;
+
+    BuildCFGAnalyzer(MethodNode methodNode) {
       super(new BasicInterpreter());
+
+      this.instructions = methodNode.instructions;
     }
 
     @Override
@@ -218,11 +270,13 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
     }
 
     protected boolean newControlFlowExceptionEdge(int insnIndex, int successorIndex) {
-      throw new UnsupportedOperationException("Implement");
+      return true;
     }
 
     protected boolean newControlFlowExceptionEdge(int insnIndex, TryCatchBlockNode tryCatchBlock) {
-      throw new UnsupportedOperationException("Implement");
+      int handlerIndex = this.instructions.indexOf(tryCatchBlock.handler);
+
+      return this.newControlFlowExceptionEdge(insnIndex, handlerIndex);
     }
   }
 }

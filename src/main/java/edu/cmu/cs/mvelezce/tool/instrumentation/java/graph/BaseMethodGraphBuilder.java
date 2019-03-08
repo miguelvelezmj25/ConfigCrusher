@@ -51,6 +51,12 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
       if (block.getPredecessors().isEmpty()) {
         block.setCatchWithImplicitThrow(true);
       }
+
+//      LabelNode start = tryCatchBlockNode.start;
+//      MethodBlock methodBlock = graph.getMethodBlock(start);
+//
+//      MethodBlock methodBlockHandler = graph.getMethodBlock(handler);
+//      graph.addEdge(methodBlock, methodBlockHandler);
     }
   }
 
@@ -123,8 +129,8 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
 
     // TODO do not hard code 3. This can happen if the method has a while(true) loop. Then there is no return
     if (graph.getBlockCount() == 3) {
-      for(MethodBlock block : graph.getBlocks()) {
-        if(block.isWithReturn()) {
+      for (MethodBlock block : graph.getBlocks()) {
+        if (block.isWithReturn()) {
           return;
         }
       }

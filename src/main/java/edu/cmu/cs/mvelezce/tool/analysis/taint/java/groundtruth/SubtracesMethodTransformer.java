@@ -50,6 +50,11 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     Set<MethodNode> methodsToInstrument = new HashSet<>();
 
     for (MethodNode methodNode : classNode.methods) {
+      // TODO handle this cases
+      if (!methodNode.tryCatchBlocks.isEmpty()) {
+        continue;
+      }
+
       InsnList insnList = methodNode.instructions;
       ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
 

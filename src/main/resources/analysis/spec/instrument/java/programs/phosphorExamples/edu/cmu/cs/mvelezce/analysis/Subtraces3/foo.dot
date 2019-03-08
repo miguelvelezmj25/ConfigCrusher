@@ -1,15 +1,15 @@
 digraph foo {
 node [shape=record];
-1163336905 [label="L0\lLINENUMBER 21 L0\lICONST_0\lISTORE 1\l"];
-1299613689 [label="L2\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces3.foo(I)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL5\lLINENUMBER 24 L5\lRETURN\lL6\l"];
-1198250710 [label="L1\lFRAME APPEND [I]\lILOAD 1\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces3.foo(I)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGEEval (II)V\lIF_ICMPGE L2\l"];
-808829052 [label="L3\lLINENUMBER 22 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\lL4\lLINENUMBER 21 L4\lIINC 1 1\lGOTO L1\l"];
+1207765253 [label="L1\lFRAME APPEND [I]\lILOAD 1\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces3.foo(I)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGEEval (II)V\lIF_ICMPGE L2\l"];
+281586672 [label="L3\lLINENUMBER 22 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\lL4\lLINENUMBER 21 L4\lIINC 1 1\lGOTO L1\l"];
+1866296242 [label="L2\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/Subtraces3.foo(I)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL5\lLINENUMBER 24 L5\lRETURN\lL6\l"];
+1161724473 [label="L0\lLINENUMBER 21 L0\lICONST_0\lISTORE 1\l"];
 entry;
 exit;
-entry -> 1163336905;
-1163336905 -> 1198250710;
-1299613689 -> exit;
-1198250710 -> 1299613689;
-1198250710 -> 808829052;
-808829052 -> 1198250710;
+entry -> 1161724473;
+1207765253 -> 281586672;
+1207765253 -> 1866296242;
+281586672 -> 1207765253;
+1866296242 -> exit;
+1161724473 -> 1207765253;
 }

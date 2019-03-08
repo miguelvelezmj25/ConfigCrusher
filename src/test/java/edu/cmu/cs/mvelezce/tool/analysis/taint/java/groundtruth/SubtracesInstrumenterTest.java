@@ -31,4 +31,19 @@ public class SubtracesInstrumenterTest {
     Instrumenter instrumenter = new SubtracesInstrumenter(programName, srcDir, classDir);
     instrumenter.instrument(args);
   }
+
+  @Test
+  public void instrumentPrevayler()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "prevayler";
+    String srcDir = "../performance-mapper-evaluation/instrumented/prevayler";
+    String classDir = "../performance-mapper-evaluation/instrumented/prevayler/target/classes";
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    Instrumenter instrumenter = new SubtracesInstrumenter(programName, srcDir, classDir);
+    instrumenter.instrument(args);
+  }
 }

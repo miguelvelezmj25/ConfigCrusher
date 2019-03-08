@@ -2,10 +2,8 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,11 +58,16 @@ public class PrettyMethodGraph extends MethodGraph {
     command = commandList.toArray(command);
     System.out.println(Arrays.toString(command));
 
-    Process process = Runtime.getRuntime().exec(command);
-    Helper.processOutput(process);
-    Helper.processError(process);
+    try {
+      Process process = Runtime.getRuntime().exec(command);
+      Helper.processOutput(process);
+      Helper.processError(process);
 
-    process.waitFor();
+      process.waitFor();
+    }
+    catch (RuntimeException re) {
+      re.printStackTrace();
+    }
   }
 
   String toDotStringVerbose(String methodName) {

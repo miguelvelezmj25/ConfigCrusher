@@ -1,0 +1,12 @@
+digraph nextTransaction {
+node [shape=record];
+2091617618 [label="L1\lFRAME SAME\lLDC \"org/prevayler/implementation/journal/TransientJournal.nextTransaction()J\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 76 L3\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransaction : J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal.journal : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lI2L\lLADD\lLRETURN\lL4\l"];
+1148867963 [label="L0\lLINENUMBER 74 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/TransientJournal._initialTransactionInitialized : Z\lLDC \"org/prevayler/implementation/journal/TransientJournal.nextTransaction()J\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+337557595 [label="L2\lLINENUMBER 75 L2\lNEW java/lang/IllegalStateException\lDUP\lLDC \"update() must be called at least once\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+entry;
+exit;
+entry -> 1148867963;
+2091617618 -> exit;
+1148867963 -> 2091617618;
+1148867963 -> 337557595;
+}

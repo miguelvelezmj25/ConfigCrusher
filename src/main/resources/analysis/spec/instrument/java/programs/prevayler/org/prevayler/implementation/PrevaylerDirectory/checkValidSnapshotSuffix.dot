@@ -1,0 +1,12 @@
+digraph checkValidSnapshotSuffix {
+node [shape=record];
+861554088 [label="L2\lLINENUMBER 47 L2\lNEW java/lang/IllegalArgumentException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Snapshot filename suffix must match /[a-zA-Z0-9]*[Ss]napshot/, but '\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"' does not\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/lang/IllegalArgumentException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1372745709 [label="L0\lLINENUMBER 46 L0\lALOAD 0\lLDC \"[a-zA-Z0-9]*[Ss]napshot\"\lINVOKEVIRTUAL java/lang/String.matches (Ljava/lang/String;)Z\lLDC \"org/prevayler/implementation/PrevaylerDirectory.checkValidSnapshotSuffix(Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+1736021405 [label="L1\lFRAME SAME\lLDC \"org/prevayler/implementation/PrevaylerDirectory.checkValidSnapshotSuffix(Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 54 L3\lRETURN\lL4\l"];
+entry;
+exit;
+entry -> 1372745709;
+1372745709 -> 861554088;
+1372745709 -> 1736021405;
+1736021405 -> exit;
+}

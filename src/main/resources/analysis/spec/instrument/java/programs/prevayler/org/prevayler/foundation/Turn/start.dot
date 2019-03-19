@@ -1,0 +1,17 @@
+digraph start {
+node [shape=record];
+27632888 [label="L4\lFRAME SAME\lLDC \"org/prevayler/foundation/Turn.start()V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL6\lLINENUMBER 48 L6\lALOAD 0\lDUP\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lICONST_1\lISUB\lPUTFIELD org/prevayler/foundation/Turn._allowed : I\lL7\lLINENUMBER 49 L7\lRETURN\lL8\l"];
+595396133 [label="L5\lLINENUMBER 45 L5\lNEW java/lang/IllegalStateException\lDUP\lLDC \"All transaction processing is now aborted, probably due to an earlier IOException.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+439946124 [label="L1\lFRAME SAME\lLDC \"org/prevayler/foundation/Turn.start()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 44 L3\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lLDC \"org/prevayler/foundation/Turn.start()V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFGEEval (I)V\lIFGE L4\l"];
+863956203 [label="L2\lLINENUMBER 42 L2\lALOAD 0\lINVOKESTATIC org/prevayler/foundation/Cool.wait (Ljava/lang/Object;)V\lGOTO L0\l"];
+1268591854 [label="L0\lLINENUMBER 41 L0\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/foundation/Turn._allowed : I\lLDC \"org/prevayler/foundation/Turn.start()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+entry;
+exit;
+entry -> 1268591854;
+27632888 -> exit;
+439946124 -> 27632888;
+439946124 -> 595396133;
+863956203 -> 1268591854;
+1268591854 -> 439946124;
+1268591854 -> 863956203;
+}

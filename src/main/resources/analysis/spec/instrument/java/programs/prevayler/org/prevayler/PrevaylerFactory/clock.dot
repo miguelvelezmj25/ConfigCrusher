@@ -1,0 +1,15 @@
+digraph clock {
+node [shape=record];
+1820295244 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
+1049228732 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
+630910066 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"org/prevayler/PrevaylerFactory.clock()Lorg/prevayler/Clock;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
+1853858992 [label="L0\lLINENUMBER 185 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lLDC \"org/prevayler/PrevaylerFactory.clock()Lorg/prevayler/Clock;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+entry;
+exit;
+entry -> 1853858992;
+1820295244 -> 630910066;
+1049228732 -> 630910066;
+630910066 -> exit;
+1853858992 -> 1820295244;
+1853858992 -> 1049228732;
+}

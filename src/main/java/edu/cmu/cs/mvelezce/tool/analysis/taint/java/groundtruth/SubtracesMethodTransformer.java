@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.InvalidGraphException;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
@@ -62,6 +63,15 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
         AbstractInsnNode insnNode = insnListIter.next();
 
         if (insnNode instanceof JumpInsnNode) {
+          try {
+            this.getCFG(methodNode, classNode);
+          }
+          catch (InvalidGraphException ige) {
+            System.err.println("Ignoring " + methodNode.name + " from " + classNode.name
+                + " since the graph is invalid");
+            break;
+          }
+
           methodsToInstrument.add(methodNode);
           break;
         }

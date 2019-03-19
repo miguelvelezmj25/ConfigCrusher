@@ -1,0 +1,15 @@
+digraph monitor {
+node [shape=record];
+1352773510 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lGOTO L2\l"];
+604148185 [label="L0\lLINENUMBER 451 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._monitor : Lorg/prevayler/foundation/monitor/Monitor;\lLDC \"org/prevayler/PrevaylerFactory.monitor()Lorg/prevayler/foundation/monitor/Monitor;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+1158614409 [label="L1\lFRAME SAME\lNEW org/prevayler/foundation/monitor/SimpleMonitor\lDUP\lGETSTATIC java/lang/System.err : Ljava/io/PrintStream;\lINVOKESPECIAL org/prevayler/foundation/monitor/SimpleMonitor.\<init\> (Ljava/io/PrintStream;)V\l"];
+1040394205 [label="L2\lFRAME SAME1 org/prevayler/foundation/monitor/Monitor\lLDC \"org/prevayler/PrevaylerFactory.monitor()Lorg/prevayler/foundation/monitor/Monitor;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
+entry;
+exit;
+1352773510 -> 1040394205;
+entry -> 604148185;
+604148185 -> 1352773510;
+604148185 -> 1158614409;
+1158614409 -> 1040394205;
+1040394205 -> exit;
+}

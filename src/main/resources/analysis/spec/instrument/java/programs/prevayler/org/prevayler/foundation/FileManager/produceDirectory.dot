@@ -1,0 +1,21 @@
+digraph produceDirectory {
+node [shape=record];
+769432223 [label="L1\lFRAME SAME\lLDC \"org/prevayler/foundation/FileManager.produceDirectory(Ljava/io/File;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 17 L4\lALOAD 0\lINVOKEVIRTUAL java/io/File.isDirectory ()Z\lLDC \"org/prevayler/foundation/FileManager.produceDirectory(Ljava/io/File;)V\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L5\l"];
+775445710 [label="L0\lLINENUMBER 15 L0\lALOAD 0\lINVOKEVIRTUAL java/io/File.exists ()Z\lLDC \"org/prevayler/foundation/FileManager.produceDirectory(Ljava/io/File;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+712974096 [label="L3\lLINENUMBER 16 L3\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Directory doesn't exist and could not be created: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1187903677 [label="L2\lFRAME SAME\lLDC \"org/prevayler/foundation/FileManager.produceDirectory(Ljava/io/File;)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\l"];
+252480153 [label="L5\lFRAME SAME\lLDC \"org/prevayler/foundation/FileManager.produceDirectory(Ljava/io/File;)V\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL7\lLINENUMBER 19 L7\lRETURN\lL8\l"];
+1946988038 [label="L6\lLINENUMBER 18 L6\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Path exists but is not a directory: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+696933920 [label="ALOAD 0\lINVOKEVIRTUAL java/io/File.mkdirs ()Z\lLDC \"org/prevayler/foundation/FileManager.produceDirectory(Ljava/io/File;)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L2\l"];
+entry;
+exit;
+entry -> 775445710;
+769432223 -> 252480153;
+769432223 -> 1946988038;
+775445710 -> 769432223;
+775445710 -> 696933920;
+1187903677 -> 769432223;
+252480153 -> exit;
+696933920 -> 712974096;
+696933920 -> 1187903677;
+}

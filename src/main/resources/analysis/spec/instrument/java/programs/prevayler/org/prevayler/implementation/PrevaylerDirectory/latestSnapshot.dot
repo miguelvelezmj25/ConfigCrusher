@@ -1,0 +1,24 @@
+digraph latestSnapshot {
+node [shape=record];
+1161542555 [label="L7\lFRAME APPEND [java/io/File J I]\lILOAD 5\lALOAD 1\lARRAYLENGTH\lLDC \"org/prevayler/implementation/PrevaylerDirectory.latestSnapshot()Ljava/io/File;\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGEEval (II)V\lIF_ICMPGE L8\l"];
+386607015 [label="L8\lFRAME CHOP 2\lLDC \"org/prevayler/implementation/PrevaylerDirectory.latestSnapshot()Ljava/io/File;\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL16\lLINENUMBER 163 L16\lALOAD 2\lARETURN\lL17\l"];
+2033788292 [label="L9\lLINENUMBER 156 L9\lALOAD 1\lILOAD 5\lAALOAD\lASTORE 6\lL10\lLINENUMBER 157 L10\lALOAD 6\lINVOKESTATIC org/prevayler/implementation/PrevaylerDirectory.snapshotVersion (Ljava/io/File;)J\lLSTORE 7\lL11\lLINENUMBER 158 L11\lLLOAD 7\lLLOAD 3\lLCMP\lLDC \"org/prevayler/implementation/PrevaylerDirectory.latestSnapshot()Ljava/io/File;\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLEEval (I)V\lIFLE L12\l"];
+336050495 [label="L12\lFRAME APPEND [java/io/File J]\lLDC \"org/prevayler/implementation/PrevaylerDirectory.latestSnapshot()Ljava/io/File;\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL15\lLINENUMBER 155 L15\lIINC 5 1\lGOTO L7\l"];
+217590872 [label="L13\lLINENUMBER 159 L13\lLLOAD 7\lLSTORE 3\lL14\lLINENUMBER 160 L14\lALOAD 6\lASTORE 2\l"];
+188529678 [label="L2\lFRAME APPEND [[Ljava/io/File;]\lLDC \"org/prevayler/implementation/PrevaylerDirectory.latestSnapshot()Ljava/io/File;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 153 L4\lACONST_NULL\lASTORE 2\lL5\lLINENUMBER 154 L5\lLDC -1\lLSTORE 3\lL6\lLINENUMBER 155 L6\lICONST_0\lISTORE 5\l"];
+1726118601 [label="L3\lLINENUMBER 151 L3\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Error reading file list from directory \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD org/prevayler/implementation/PrevaylerDirectory._directory : Ljava/io/File;\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1511067261 [label="L0\lLINENUMBER 149 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/PrevaylerDirectory._directory : Ljava/io/File;\lINVOKEVIRTUAL java/io/File.listFiles ()[Ljava/io/File;\lASTORE 1\lL1\lLINENUMBER 150 L1\lALOAD 1\lLDC \"org/prevayler/implementation/PrevaylerDirectory.latestSnapshot()Ljava/io/File;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNONNULLEval (Ljava/lang/Object;)V\lIFNONNULL L2\l"];
+entry;
+exit;
+1161542555 -> 386607015;
+1161542555 -> 2033788292;
+386607015 -> exit;
+entry -> 1511067261;
+2033788292 -> 336050495;
+2033788292 -> 217590872;
+336050495 -> 1161542555;
+217590872 -> 336050495;
+188529678 -> 1161542555;
+1511067261 -> 188529678;
+1511067261 -> 1726118601;
+}

@@ -43,12 +43,6 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     for (ClassNode classNode : classNodes) {
-//      if (!classNode.name.endsWith("TryCatchFinally")) {
-////      if (!classNode.name.endsWith("journal/PersistentJournal")) {
-////      if (!classNode.name.endsWith("implementation/TransactionTimestamp")) {
-//        continue;
-//      }
-
       Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
 
       if (methodsToInstrument.isEmpty()) {
@@ -64,12 +58,13 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       this.classTransformer.writeClass(classNode);
 
       if (debug) {
-        this.debugMethods(classNode);
+        this.debugMethods(classNode, methodsToInstrument);
       }
     }
   }
 
-  private void debugMethods(ClassNode classNode) throws IOException {
+  private void debugMethods(ClassNode classNode, Set<MethodNode> methodsToInstrument)
+      throws IOException {
     ClassWriter classWriter = this.classTransformer.getClassWriter(classNode);
     ClassReader classReader = new ClassReader(classWriter.toByteArray());
     classNode = new ClassNode();
@@ -79,6 +74,10 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
     MethodTracer tracer = classInspector.visitClass(classReader);
 
     for (MethodNode methodNode : classNode.methods) {
+      if (!this.isMethodToInstrument(methodNode, methodsToInstrument)) {
+        continue;
+      }
+
       Printer printer = tracer.getPrinterForMethodSignature(methodNode.name + methodNode.desc);
       PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
       PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
@@ -93,6 +92,19 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
         e.printStackTrace();
       }
     }
+  }
+
+  private boolean isMethodToInstrument(MethodNode methodNode, Set<MethodNode> methodsToInstrument) {
+    String name = methodNode.name;
+    String desc = methodNode.desc;
+
+    for (MethodNode methodNodeToInstrument : methodsToInstrument) {
+      if (name.equals(methodNodeToInstrument.name) && desc.equals(methodNodeToInstrument.desc)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   @Override

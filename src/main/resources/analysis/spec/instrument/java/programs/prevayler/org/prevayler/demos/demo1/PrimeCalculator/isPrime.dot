@@ -1,0 +1,35 @@
+digraph isPrime {
+node [shape=record];
+786722925 [label="L0\lLINENUMBER 57 L0\lILOAD 1\lICONST_2\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.isPrime(I)Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGEEval (II)V\lIF_ICMPGE L1\l"];
+2034385122 [label="L3\lLINENUMBER 63 L3\lFRAME SAME\lILOAD 1\lICONST_2\lIREM\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.isPrime(I)Z\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L5\l"];
+107285100 [label="L2\lLINENUMBER 58 L2\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\l"];
+1957175487 [label="L4\lLINENUMBER 61 L4\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\l"];
+1395912847 [label="L11\lLINENUMBER 73 L11\lFRAME SAME\lIINC 2 2\lGOTO L8\l"];
+1513124396 [label="L6\lLINENUMBER 64 L6\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\l"];
+1222908765 [label="L10\lLINENUMBER 70 L10\lILOAD 1\lILOAD 2\lIREM\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.isPrime(I)Z\"\lBIPUSH 4\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L11\l"];
+287095360 [label="L9\lLINENUMBER 75 L9\lFRAME SAME\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\lL13\l"];
+612686775 [label="L8\lLINENUMBER 69 L8\lFRAME APPEND [I D]\lILOAD 2\lI2D\lDLOAD 3\lDCMPG\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.isPrime(I)Z\"\lBIPUSH 3\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFGTEval (I)V\lIFGT L9\l"];
+1374212198 [label="L12\lLINENUMBER 71 L12\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\l"];
+1328203744 [label="L5\lLINENUMBER 67 L5\lFRAME SAME\lICONST_3\lISTORE 2\lL7\lLINENUMBER 68 L7\lILOAD 1\lI2D\lINVOKESTATIC java/lang/Math.sqrt (D)D\lINVOKESTATIC java/lang/Math.ceil (D)D\lDSTORE 3\l"];
+105019819 [label="L1\lLINENUMBER 60 L1\lFRAME SAME\lILOAD 1\lICONST_2\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.isPrime(I)Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPNEEval (II)V\lIF_ICMPNE L3\l"];
+entry;
+exit;
+786722925 -> 107285100;
+786722925 -> 105019819;
+2034385122 -> 1513124396;
+2034385122 -> 1328203744;
+1513124396 -> exit;
+287095360 -> exit;
+612686775 -> 1222908765;
+612686775 -> 287095360;
+1374212198 -> exit;
+105019819 -> 2034385122;
+105019819 -> 1957175487;
+entry -> 786722925;
+107285100 -> exit;
+1957175487 -> exit;
+1395912847 -> 612686775;
+1222908765 -> 1395912847;
+1222908765 -> 1374212198;
+1328203744 -> 612686775;
+}

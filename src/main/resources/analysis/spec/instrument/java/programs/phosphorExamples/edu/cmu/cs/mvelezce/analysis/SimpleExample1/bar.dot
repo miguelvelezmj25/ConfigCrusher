@@ -1,13 +1,13 @@
 digraph bar {
 node [shape=record];
-1049710155 [label="L2\lLINENUMBER 98 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
-1946643779 [label="L0\lLINENUMBER 97 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.bar(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
-98058633 [label="L1\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.bar(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 100 L3\lRETURN\lL4\l"];
+1571765149 [label="L1\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.bar(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 100 L3\lRETURN\lL4\l"];
+1472911013 [label="L0\lLINENUMBER 97 L0\lILOAD 0\lLDC \"edu/cmu/cs/mvelezce/analysis/SimpleExample1.bar(Z)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+1321397120 [label="L2\lLINENUMBER 98 L2\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lICONST_1\lINVOKEVIRTUAL java/io/PrintStream.println (I)V\l"];
 entry;
 exit;
-entry -> 1946643779;
-1049710155 -> 98058633;
-1946643779 -> 1049710155;
-1946643779 -> 98058633;
-98058633 -> exit;
+entry -> 1472911013;
+1571765149 -> exit;
+1472911013 -> 1571765149;
+1472911013 -> 1321397120;
+1321397120 -> 1571765149;
 }

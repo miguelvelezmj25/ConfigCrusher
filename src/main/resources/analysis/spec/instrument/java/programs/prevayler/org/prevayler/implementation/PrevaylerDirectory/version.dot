@@ -1,0 +1,13 @@
+digraph version {
+node [shape=record];
+743365178 [label="LDC -1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lLRETURN\l"];
+352959830 [label="L0\lLINENUMBER 93 L0\lALOAD 0\lINVOKEVIRTUAL java/io/File.getName ()Ljava/lang/String;\lASTORE 2\lL1\lLINENUMBER 94 L1\lALOAD 2\lALOAD 1\lINVOKEVIRTUAL java/lang/String.matches (Ljava/lang/String;)Z\lLDC \"org/prevayler/implementation/PrevaylerDirectory.version(Ljava/io/File;Ljava/lang/String;)J\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L2\l"];
+1181479782 [label="L2\lLINENUMBER 95 L2\lFRAME APPEND [java/lang/String]\lALOAD 2\lICONST_0\lALOAD 2\lLDC \".\"\lINVOKEVIRTUAL java/lang/String.indexOf (Ljava/lang/String;)I\lINVOKEVIRTUAL java/lang/String.substring (II)Ljava/lang/String;\lINVOKESTATIC java/lang/Long.parseLong (Ljava/lang/String;)J\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lLRETURN\lL3\l"];
+entry;
+exit;
+entry -> 352959830;
+743365178 -> exit;
+352959830 -> 743365178;
+352959830 -> 1181479782;
+1181479782 -> exit;
+}

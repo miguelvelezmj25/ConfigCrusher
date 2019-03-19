@@ -1,0 +1,13 @@
+digraph close {
+node [shape=record];
+2065923116 [label="L0\lLINENUMBER 233 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lLDC \"org/prevayler/implementation/journal/PersistentJournal.close()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+988138425 [label="L1\lFRAME SAME\lLDC \"org/prevayler/implementation/journal/PersistentJournal.close()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL2\lLINENUMBER 234 L2\lRETURN\lL3\l"];
+1612228258 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.close ()V\l"];
+entry;
+exit;
+entry -> 2065923116;
+2065923116 -> 988138425;
+2065923116 -> 1612228258;
+988138425 -> exit;
+1612228258 -> 988138425;
+}

@@ -1,0 +1,13 @@
+digraph fromChunk {
+node [shape=record];
+1443435931 [label="L3\lLINENUMBER 36 L3\lNEW org/prevayler/implementation/TransactionWithQueryCapsule\lDUP\lALOAD 0\lINVOKEVIRTUAL org/prevayler/foundation/Chunk.getBytes ()[B\lINVOKESPECIAL org/prevayler/implementation/TransactionWithQueryCapsule.\<init\> ([B)V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\l"];
+565372776 [label="L0\lLINENUMBER 34 L0\lALOAD 0\lLDC \"withQuery\"\lINVOKEVIRTUAL org/prevayler/foundation/Chunk.getParameter (Ljava/lang/String;)Ljava/lang/String;\lINVOKESTATIC java/lang/Boolean.valueOf (Ljava/lang/String;)Ljava/lang/Boolean;\lINVOKEVIRTUAL java/lang/Boolean.booleanValue ()Z\lISTORE 1\lL1\lLINENUMBER 35 L1\lILOAD 1\lLDC \"org/prevayler/implementation/Capsule.fromChunk(Lorg/prevayler/foundation/Chunk;)Lorg/prevayler/implementation/Capsule;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L2\l"];
+1462044018 [label="L2\lLINENUMBER 38 L2\lFRAME APPEND [I]\lNEW org/prevayler/implementation/TransactionCapsule\lDUP\lALOAD 0\lINVOKEVIRTUAL org/prevayler/foundation/Chunk.getBytes ()[B\lINVOKESPECIAL org/prevayler/implementation/TransactionCapsule.\<init\> ([B)V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\lL4\l"];
+entry;
+exit;
+1443435931 -> exit;
+entry -> 565372776;
+565372776 -> 1443435931;
+565372776 -> 1462044018;
+1462044018 -> exit;
+}

@@ -14,6 +14,6 @@ public interface MethodGraphBuilder {
 
   void connectEntryNode(MethodGraph graph, MethodNode methodNode);
 
-  void connectExitNode(MethodGraph graph);
+  void connectExitNode(MethodGraph graph, MethodNode methodNode);
 
 }

@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
@@ -33,7 +34,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
 
     this.addEdges(graph, methodNode);
     this.connectEntryNode(graph, methodNode);
-    this.connectExitNode(graph);
+    this.connectExitNode(graph, methodNode);
 
 //        System.out.println(graph.toDotString(methodNode.name));
 
@@ -71,8 +72,13 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
 
     Set<MethodBlock> exitPreds = graph.getExitBlock().getPredecessors();
 
+    if (exitPreds.isEmpty()) {
+      throw new InvalidGraphException(
+          "The graph does not have a connection to the exit block\n" + graph.toDotString("error"));
+    }
+
     for (MethodBlock block : exitPreds) {
-      if (!block.isWithReturn() && !graph.isWithWhileTrue()) {
+      if (!block.isWithReturn() && !block.isWithLastInstruction() && !graph.isWithWhileTrue()) {
         throw new RuntimeException("A block(" + block.getID()
             + ") connected to the exit block does not have a return instruction");
       }
@@ -115,7 +121,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
   }
 
   @Override
-  public void connectExitNode(MethodGraph graph) {
+  public void connectExitNode(MethodGraph graph, MethodNode methodNode) {
     for (MethodBlock methodBlock : graph.getBlocks()) {
       for (AbstractInsnNode instruction : methodBlock.getInstructions()) {
         int opcode = instruction.getOpcode();
@@ -127,6 +133,27 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
       }
     }
 
+    // The last block of a method might not have a return (e.g., ATHROW)
+    AbstractInsnNode lastInstruction = methodNode.instructions.getLast();
+
+    for (MethodBlock methodBlock : graph.getBlocks()) {
+      List<AbstractInsnNode> instructions = methodBlock.getInstructions();
+
+      if (!instructions.contains(lastInstruction)) {
+        continue;
+      }
+
+      if (methodBlock.getInstructions().size() <= 1) {
+        continue;
+      }
+
+      methodBlock.setWithLastInstruction(true);
+
+      if (!methodBlock.getSuccessors().contains(graph.getExitBlock())) {
+        graph.addEdge(methodBlock, graph.getExitBlock());
+      }
+    }
+
     // TODO do not hard code 3. This can happen if the method has a while(true) loop. Then there is no return
     if (graph.getBlockCount() == 3) {
       for (MethodBlock block : graph.getBlocks()) {
@@ -135,7 +162,7 @@ public abstract class BaseMethodGraphBuilder implements MethodGraphBuilder {
         }
       }
 
-      throw new UnsupportedOperationException(
+      throw new InvalidGraphException(
           "There seems to be a special case for graphs with 3 blocks. Test it");
 //      Set<MethodBlock> blocks = graph.addBlocks();
 //      blocks.remove(graph.getEntryBlock());

@@ -1,0 +1,15 @@
+digraph journalSuffix {
+node [shape=record];
+913711668 [label="L2\lFRAME SAME1 java/lang/String\lLDC \"org/prevayler/PrevaylerFactory.journalSuffix()Ljava/lang/String;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
+518953848 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSuffix : Ljava/lang/String;\lGOTO L2\l"];
+1002541036 [label="L1\lFRAME SAME\lLDC \"journal\"\l"];
+488011312 [label="L0\lLINENUMBER 425 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSuffix : Ljava/lang/String;\lLDC \"org/prevayler/PrevaylerFactory.journalSuffix()Ljava/lang/String;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+entry;
+exit;
+entry -> 488011312;
+913711668 -> exit;
+518953848 -> 913711668;
+1002541036 -> 913711668;
+488011312 -> 518953848;
+488011312 -> 1002541036;
+}

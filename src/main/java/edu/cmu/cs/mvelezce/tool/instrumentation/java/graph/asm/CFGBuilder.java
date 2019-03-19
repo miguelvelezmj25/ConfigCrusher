@@ -11,6 +11,7 @@ import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
+import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import jdk.internal.org.objectweb.asm.tree.analysis.Analyzer;
@@ -107,40 +108,27 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
       AbstractInsnNode insn) {
     Set<CFGNode<BasicValue>> succs = cfgNode.getSuccessors();
 
-//    if (succs.isEmpty()) {
-//      if (insn instanceof JumpInsnNode) {
-//        throw new RuntimeException("A jump instruction does not have any successors!");
-//      }
-//
-//      return;
-//    }
-//
-//    if (succs.size() == 1 && !(insn instanceof JumpInsnNode)) {
-//      return;
-//    }
-//
-//    if (succs.size() > 1) {
-//      int curOpcode = insn.getOpcode();
-//
-//      if (!((curOpcode >= Opcodes.IFEQ & curOpcode <= Opcodes.IF_ACMPNE)
-//          || curOpcode == Opcodes.IFNULL
-//          || curOpcode == Opcodes.IFNONNULL)) {
-//        throw new RuntimeException("The instruction " + curOpcode
-//            + " has multiple successors, but it is not an if comparison");
-//      }
-//    }
+    if (succs.isEmpty()) {
+      if (insn instanceof JumpInsnNode) {
+        throw new RuntimeException("A jump instruction does not have any successors!");
+      }
 
-    if (succs.isEmpty() || succs.size() == 1) {
       return;
     }
 
-    int curOpcode = insn.getOpcode();
+    if (succs.size() == 1 && !(insn instanceof JumpInsnNode)) {
+      return;
+    }
 
-    if (!((curOpcode >= Opcodes.IFEQ & curOpcode <= Opcodes.IF_ACMPNE)
-        || curOpcode == Opcodes.IFNULL
-        || curOpcode == Opcodes.IFNONNULL)) {
-      throw new RuntimeException("The instruction " + curOpcode
-          + " has multiple successors, but it is not an if comparison");
+    if (succs.size() > 1) {
+      int curOpcode = insn.getOpcode();
+
+      if (!((curOpcode >= Opcodes.IFEQ & curOpcode <= Opcodes.IF_ACMPNE)
+          || curOpcode == Opcodes.IFNULL
+          || curOpcode == Opcodes.IFNONNULL)) {
+        throw new RuntimeException("The instruction " + curOpcode
+            + " has multiple successors, but it is not an if comparison");
+      }
     }
 
     for (CFGNode<BasicValue> succ : succs) {
@@ -149,6 +137,11 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
       MethodBlock succBlock = new MethodBlock(succInsn);
       graph.addMethodBlock(succBlock);
     }
+
+    // For non-conditional jumps, the next instruction should be in a separate node
+    AbstractInsnNode nextInsn = insn.getNext();
+    MethodBlock block = new MethodBlock(nextInsn);
+    graph.addMethodBlock(block);
   }
 
   @Override

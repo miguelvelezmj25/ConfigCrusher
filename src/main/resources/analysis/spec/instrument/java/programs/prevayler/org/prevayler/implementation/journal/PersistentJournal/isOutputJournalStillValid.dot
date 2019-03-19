@@ -1,0 +1,21 @@
+digraph isOutputJournalStillValid {
+node [shape=record];
+580052883 [label="L0\lLINENUMBER 109 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalStillValid()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+1490901066 [label="ALOAD 0\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig ()Z\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalStillValid()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+35624804 [label="ALOAD 0\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld ()Z\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalStillValid()Z\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+1084448998 [label="L1\lFRAME SAME\lICONST_0\l"];
+86595449 [label="L2\lFRAME SAME1 I\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalStillValid()Z\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalStillValid()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalStillValid()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lIRETURN\lL3\l"];
+931419851 [label="ICONST_1\lGOTO L2\l"];
+entry;
+exit;
+entry -> 580052883;
+580052883 -> 1490901066;
+580052883 -> 1084448998;
+1490901066 -> 35624804;
+1490901066 -> 1084448998;
+35624804 -> 1084448998;
+35624804 -> 931419851;
+1084448998 -> 86595449;
+86595449 -> exit;
+931419851 -> 86595449;
+}

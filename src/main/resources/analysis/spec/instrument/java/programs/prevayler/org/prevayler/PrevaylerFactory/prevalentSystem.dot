@@ -1,0 +1,12 @@
+digraph prevalentSystem {
+node [shape=record];
+2018683696 [label="L2\lLINENUMBER 393 L2\lNEW java/lang/IllegalStateException\lDUP\lLDC \"The prevalent system must be configured.\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+1098338771 [label="L1\lFRAME SAME\lLDC \"org/prevayler/PrevaylerFactory.prevalentSystem()Ljava/lang/Object;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 394 L3\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._prevalentSystem : Ljava/lang/Object;\lARETURN\lL4\l"];
+1034296050 [label="L0\lLINENUMBER 392 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._prevalentSystem : Ljava/lang/Object;\lLDC \"org/prevayler/PrevaylerFactory.prevalentSystem()Ljava/lang/Object;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNONNULLEval (Ljava/lang/Object;)V\lIFNONNULL L1\l"];
+entry;
+exit;
+entry -> 1034296050;
+1098338771 -> exit;
+1034296050 -> 2018683696;
+1034296050 -> 1098338771;
+}

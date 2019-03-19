@@ -1,0 +1,27 @@
+digraph start1 {
+node [shape=record];
+2117938877 [label="L1\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/PrimeCalculator._numberKeeper : Lorg/prevayler/demos/demo1/NumberKeeper;\lINVOKEVIRTUAL org/prevayler/demos/demo1/NumberKeeper.lastNumber ()I\lICONST_1\lIADD\l"];
+685193713 [label="L0\lLINENUMBER 33 L0\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/PrimeCalculator._numberKeeper : Lorg/prevayler/demos/demo1/NumberKeeper;\lINVOKEVIRTUAL org/prevayler/demos/demo1/NumberKeeper.lastNumber ()I\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.start1()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+1328764608 [label="L5\lLINENUMBER 36 L5\lALOAD 0\lILOAD 1\lINVOKESPECIAL org/prevayler/demos/demo1/PrimeCalculator.isPrime (I)Z\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.start1()V\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L6\l"];
+725873428 [label="L2\lFRAME SAME1 I\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.start1()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lISTORE 1\l"];
+1483522397 [label="L4\lFRAME SAME\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.start1()V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL10\lLINENUMBER 46 L10\lRETURN\lL11\l"];
+72893188 [label="L6\lFRAME SAME\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.start1()V\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL9\lLINENUMBER 44 L9\lIINC 1 1\lGOTO L3\l"];
+475871799 [label="ICONST_2\lGOTO L2\l"];
+977952572 [label="L3\lLINENUMBER 35 L3\lFRAME APPEND [I]\lILOAD 1\lLDC 10000000\lLDC \"org/prevayler/demos/demo1/PrimeCalculator.start1()V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ICMPGTEval (II)V\lIF_ICMPGT L4\l"];
+1820545559 [label="L7\lLINENUMBER 38 L7\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/PrimeCalculator._prevayler : Lorg/prevayler/Prevayler;\lNEW org/prevayler/demos/demo1/NumberStorageTransaction\lDUP\lILOAD 1\lINVOKESPECIAL org/prevayler/demos/demo1/NumberStorageTransaction.\<init\> (I)V\lINVOKEINTERFACE org/prevayler/Prevayler.execute (Lorg/prevayler/Transaction;)V\lL8\lLINENUMBER 39 L8\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/PrimeCalculator._numberKeeper : Lorg/prevayler/demos/demo1/NumberKeeper;\lINVOKEVIRTUAL org/prevayler/demos/demo1/NumberKeeper.numbers ()Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lPOP\l"];
+entry;
+exit;
+entry -> 685193713;
+2117938877 -> 725873428;
+685193713 -> 2117938877;
+685193713 -> 475871799;
+1328764608 -> 72893188;
+1328764608 -> 1820545559;
+725873428 -> 977952572;
+1483522397 -> exit;
+72893188 -> 977952572;
+475871799 -> 725873428;
+977952572 -> 1328764608;
+977952572 -> 1483522397;
+1820545559 -> 72893188;
+}

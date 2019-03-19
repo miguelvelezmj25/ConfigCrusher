@@ -1,0 +1,15 @@
+digraph readObject {
+node [shape=record];
+784882213 [label="L2\lFRAME FULL [org/prevayler/foundation/serialization/XStreamSerializer java/io/InputStream] [com/thoughtworks/xstream/XStream java/io/InputStreamReader]\lLDC \"org/prevayler/foundation/serialization/XStreamSerializer.readObject(Ljava/io/InputStream;)Ljava/lang/Object;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 73 L3\lINVOKEVIRTUAL com/thoughtworks/xstream/XStream.fromXML (Ljava/io/Reader;)Ljava/lang/Object;\lL4\lLINENUMBER 72 L4\lARETURN\lL5\l"];
+2017147552 [label="NEW java/io/InputStreamReader\lDUP\lALOAD 1\lINVOKESPECIAL java/io/InputStreamReader.\<init\> (Ljava/io/InputStream;)V\lGOTO L2\l"];
+1859227008 [label="L0\lLINENUMBER 72 L0\lALOAD 0\lINVOKESPECIAL org/prevayler/foundation/serialization/XStreamSerializer.getXStream ()Lcom/thoughtworks/xstream/XStream;\lALOAD 0\lGETFIELD org/prevayler/foundation/serialization/XStreamSerializer._encoding : Ljava/lang/String;\lLDC \"org/prevayler/foundation/serialization/XStreamSerializer.readObject(Ljava/io/InputStream;)Ljava/lang/Object;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNONNULLEval (Ljava/lang/Object;)V\lIFNONNULL L1\l"];
+1277490082 [label="L1\lFRAME SAME1 com/thoughtworks/xstream/XStream\lNEW java/io/InputStreamReader\lDUP\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/foundation/serialization/XStreamSerializer._encoding : Ljava/lang/String;\lINVOKESPECIAL java/io/InputStreamReader.\<init\> (Ljava/io/InputStream;Ljava/lang/String;)V\l"];
+entry;
+exit;
+784882213 -> exit;
+entry -> 1859227008;
+2017147552 -> 784882213;
+1859227008 -> 2017147552;
+1859227008 -> 1277490082;
+1277490082 -> 784882213;
+}

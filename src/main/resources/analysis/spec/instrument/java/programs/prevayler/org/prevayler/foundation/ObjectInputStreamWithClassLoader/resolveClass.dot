@@ -1,0 +1,15 @@
+digraph resolveClass {
+node [shape=record];
+1927406983 [label="L0\lLINENUMBER 24 L0\lALOAD 0\lGETFIELD org/prevayler/foundation/ObjectInputStreamWithClassLoader._loader : Ljava/lang/ClassLoader;\lLDC \"org/prevayler/foundation/ObjectInputStreamWithClassLoader.resolveClass(Ljava/io/ObjectStreamClass;)Ljava/lang/Class;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+1937867829 [label="ALOAD 1\lINVOKEVIRTUAL java/io/ObjectStreamClass.getName ()Ljava/lang/String;\lICONST_0\lALOAD 0\lGETFIELD org/prevayler/foundation/ObjectInputStreamWithClassLoader._loader : Ljava/lang/ClassLoader;\lINVOKESTATIC java/lang/Class.forName (Ljava/lang/String;ZLjava/lang/ClassLoader;)Ljava/lang/Class;\lGOTO L2\l"];
+1345757830 [label="L1\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKESPECIAL java/io/ObjectInputStream.resolveClass (Ljava/io/ObjectStreamClass;)Ljava/lang/Class;\l"];
+802062915 [label="L2\lFRAME SAME1 java/lang/Class\lLDC \"org/prevayler/foundation/ObjectInputStreamWithClassLoader.resolveClass(Ljava/io/ObjectStreamClass;)Ljava/lang/Class;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
+entry;
+exit;
+entry -> 1927406983;
+1927406983 -> 1937867829;
+1927406983 -> 1345757830;
+1937867829 -> 802062915;
+1345757830 -> 802062915;
+802062915 -> exit;
+}

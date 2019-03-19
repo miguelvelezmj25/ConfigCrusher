@@ -1,0 +1,32 @@
+digraph initializeNextTransaction {
+node [shape=record];
+882181333 [label="L1\lLINENUMBER 172 L1\lFRAME SAME\lALOAD 0\lICONST_1\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lL11\lLINENUMBER 173 L11\lALOAD 0\lLLOAD 1\lLLOAD 3\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.initializeNextTransaction(JJ)V\"\lBIPUSH 4\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLEEval (I)V\lIFLE L12\l"];
+880242857 [label="L2\lLINENUMBER 157 L2\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLLOAD 1\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.initializeNextTransaction(JJ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFGEEval (I)V\lIFGE L3\l"];
+48405117 [label="L13\lFRAME FULL [org/prevayler/implementation/journal/PersistentJournal J J] [org/prevayler/implementation/journal/PersistentJournal J]\lLDC \"org/prevayler/implementation/journal/PersistentJournal.initializeNextTransaction(JJ)V\"\lBIPUSH 4\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lPUTFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lL14\lLINENUMBER 175 L14\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lRETURN\lL15\l"];
+686592713 [label="L6\lFRAME SAME\lLDC \"org/prevayler/implementation/journal/PersistentJournal.initializeNextTransaction(JJ)V\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL8\lLINENUMBER 169 L8\lLLOAD 3\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.initializeNextTransaction(JJ)V\"\lBIPUSH 3\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLEEval (I)V\lIFLE L9\l"];
+328041976 [label="L12\lFRAME SAME1 org/prevayler/implementation/journal/PersistentJournal\lLLOAD 3\l"];
+1054542265 [label="LLOAD 1\lGOTO L13\l"];
+655449413 [label="L7\lLINENUMBER 165 L7\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"Unable to find journal file containing transaction \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \". Might have been manually deleted.\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+562964697 [label="L4\lLINENUMBER 158 L4\lNEW java/io/IOException\lDUP\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lLDC \"The transaction log has not yet reached transaction \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLLOAD 1\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \". The last logged transaction was \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCONST_1\lLSUB\lINVOKEVIRTUAL java/lang/StringBuilder.append (J)Ljava/lang/StringBuilder;\lLDC \".\"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKESPECIAL java/io/IOException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+876841784 [label="L3\lFRAME SAME\lLDC \"org/prevayler/implementation/journal/PersistentJournal.initializeNextTransaction(JJ)V\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL5\lLINENUMBER 164 L5\lLLOAD 3\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.initializeNextTransaction(JJ)V\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFGEEval (I)V\lIFGE L6\l"];
+1038419887 [label="L0\lLINENUMBER 156 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lLDC \"org/prevayler/implementation/journal/PersistentJournal.initializeNextTransaction(JJ)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+2005496222 [label="NEW java/lang/IllegalStateException\lDUP\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> ()V\lATHROW\l"];
+1606102556 [label="L9\lFRAME SAME\lLDC \"org/prevayler/implementation/journal/PersistentJournal.initializeNextTransaction(JJ)V\"\lBIPUSH 3\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL10\lLINENUMBER 170 L10\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lRETURN\l"];
+entry;
+exit;
+882181333 -> 328041976;
+882181333 -> 1054542265;
+1606102556 -> exit;
+entry -> 1038419887;
+880242857 -> 562964697;
+880242857 -> 876841784;
+48405117 -> exit;
+686592713 -> 2005496222;
+686592713 -> 1606102556;
+328041976 -> 48405117;
+1054542265 -> 48405117;
+876841784 -> 686592713;
+876841784 -> 655449413;
+1038419887 -> 882181333;
+1038419887 -> 880242857;
+}

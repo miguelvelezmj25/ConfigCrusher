@@ -111,21 +111,21 @@ public class SubtracesLogger {
 //    }
   }
 
-  private static void exitDecision(String exitingLabel, SubtraceLabel stackLabel) {
-    Deque<SubtraceLabel> exitingCtx = getCurrentCtx();
-    SubtraceLabel expectedLabel = new SubtraceLabel(ENTER_DECISION, exitingCtx, exitingLabel);
-
-    if (!stackLabel.equals(expectedLabel)) {
-      throw new RuntimeException(
-          "Expected to exit label " + expectedLabel + ", but exited label " + stackLabel
-              + " instead");
-    }
-
-    int execCount = stackLabel.getExecCount();
-    SubtraceLabel subtraceLabel = new SubtraceLabel(EXIT_DECISION, exitingCtx, exitingLabel,
-        execCount);
-    TRACE.add(subtraceLabel.toString());
-  }
+//  private static void exitDecision(String exitingLabel, SubtraceLabel stackLabel) {
+//    Deque<SubtraceLabel> exitingCtx = getCurrentCtx();
+//    SubtraceLabel expectedLabel = new SubtraceLabel(ENTER_DECISION, exitingCtx, exitingLabel);
+//
+//    if (!stackLabel.equals(expectedLabel)) {
+//      throw new RuntimeException(
+//          "Expected to exit label " + expectedLabel + ", but exited label " + stackLabel
+//              + " instead");
+//    }
+//
+//    int execCount = stackLabel.getExecCount();
+//    SubtraceLabel subtraceLabel = new SubtraceLabel(EXIT_DECISION, exitingCtx, exitingLabel,
+//        execCount);
+//    TRACE.add(subtraceLabel.toString());
+//  }
 
   private static String getLabelID(String labelPrefix, int decisionCount) {
     return labelPrefix + "." + decisionCount;

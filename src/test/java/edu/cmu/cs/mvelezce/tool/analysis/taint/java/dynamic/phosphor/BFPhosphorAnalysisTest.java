@@ -16,6 +16,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext6.OrContext6Adapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorExample8Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleForExample5Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
@@ -567,6 +568,20 @@ public class BFPhosphorAnalysisTest {
     Map<JavaRegion, SinkData> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void Prevayler() throws IOException, InterruptedException {
+    String programName = PrevaylerAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(PrevaylerAdapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
   }
 
 }

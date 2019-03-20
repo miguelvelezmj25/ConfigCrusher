@@ -14,6 +14,11 @@ import jdk.internal.org.objectweb.asm.Type;
 
 public class SubtracesLogger {
 
+  private static long enter = 0;
+  private static long exit = 0;
+  private static long exitReturn = 0;
+
+
   // TODO hash the label when not debugging?
   private static final String ENTER_DECISION = " Enter ";
   private static final String EXIT_DECISION = " Exit ";
@@ -47,6 +52,10 @@ public class SubtracesLogger {
   }
 
   public static void saveTrace() {
+    System.out.println("Entered: " + enter);
+    System.out.println("Exit: " + exit);
+    System.out.println("ExitReturn: " + exitReturn);
+
     if (!STACK.isEmpty()) {
       throw new RuntimeException(
           "The stack that tracked entering and exiting decisions is not empty\n" + STACK);
@@ -65,17 +74,18 @@ public class SubtracesLogger {
   }
 
   public static void enterDecision(String labelPrefix, int decisionCount) {
-    Deque<SubtraceLabel> ctx = getCurrentCtx();
-    String labelID = getLabelID(labelPrefix, decisionCount);
-    SubtraceLabel subtraceLabel = new SubtraceLabel(ENTER_DECISION, ctx, labelID);
-
-    int labelCount = LABELS_TO_COUNT.getOrDefault(subtraceLabel, 0);
-    labelCount++;
-    subtraceLabel.setExecCount(labelCount);
-    LABELS_TO_COUNT.put(subtraceLabel, labelCount);
-
-    TRACE.add(subtraceLabel.toString());
-    STACK.addFirst(subtraceLabel);
+    enter++;
+//    Deque<SubtraceLabel> ctx = getCurrentCtx();
+//    String labelID = getLabelID(labelPrefix, decisionCount);
+//    SubtraceLabel subtraceLabel = new SubtraceLabel(ENTER_DECISION, ctx, labelID);
+//
+//    int labelCount = LABELS_TO_COUNT.getOrDefault(subtraceLabel, 0);
+//    labelCount++;
+//    subtraceLabel.setExecCount(labelCount);
+//    LABELS_TO_COUNT.put(subtraceLabel, labelCount);
+//
+//    TRACE.add(subtraceLabel.toString());
+//    STACK.addFirst(subtraceLabel);
   }
 
   private static Deque<SubtraceLabel> getCurrentCtx() {
@@ -83,20 +93,22 @@ public class SubtracesLogger {
   }
 
   public static void exitDecision(String labelPrefix, int decisionCount) {
-    String exitingLabel = getLabelID(labelPrefix, decisionCount);
-
-    while (!STACK.isEmpty() && STACK.peekFirst().getDecisionLabel().equals(exitingLabel)) {
-      SubtraceLabel stackLabel = STACK.removeFirst();
-      exitDecision(exitingLabel, stackLabel);
-    }
+  exit++;
+//    String exitingLabel = getLabelID(labelPrefix, decisionCount);
+//
+//    while (!STACK.isEmpty() && STACK.peekFirst().getDecisionLabel().equals(exitingLabel)) {
+//      SubtraceLabel stackLabel = STACK.removeFirst();
+//      exitDecision(exitingLabel, stackLabel);
+//    }
   }
 
   public static void exitAtReturn(String labelPrefix) {
-    while (!STACK.isEmpty() && STACK.peekFirst().getDecisionLabel().startsWith(labelPrefix + ".")) {
-      SubtraceLabel stackLabel = STACK.removeFirst();
-      String exitingLabel = stackLabel.getDecisionLabel();
-      exitDecision(exitingLabel, stackLabel);
-    }
+    exitReturn++;
+//    while (!STACK.isEmpty() && STACK.peekFirst().getDecisionLabel().startsWith(labelPrefix + ".")) {
+//      SubtraceLabel stackLabel = STACK.removeFirst();
+//      String exitingLabel = stackLabel.getDecisionLabel();
+//      exitDecision(exitingLabel, stackLabel);
+//    }
   }
 
   private static void exitDecision(String exitingLabel, SubtraceLabel stackLabel) {
@@ -120,147 +132,147 @@ public class SubtracesLogger {
   }
 
   public static void logIFEQEval(int value) {
-    if (value == 0) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (value == 0) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIFNEEval(int value) {
-    if (value != 0) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (value != 0) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIFLTEval(int value) {
-    if (value < 0) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (value < 0) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIFGEEval(int value) {
-    if (value >= 0) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (value >= 0) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIFGTEval(int value) {
-    if (value > 0) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (value > 0) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIFLEEval(int value) {
-    if (value <= 0) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (value <= 0) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIF_ICMPEQEval(int v1, int v2) {
-    if (v1 == v2) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (v1 == v2) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIF_ICMPNEEval(int v1, int v2) {
-    if (v1 != v2) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (v1 != v2) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIF_ICMPLTEval(int v1, int v2) {
-    if (v1 < v2) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (v1 < v2) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIF_ICMPGEEval(int v1, int v2) {
-    if (v1 >= v2) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (v1 >= v2) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIF_ICMPGTEval(int v1, int v2) {
-    if (v1 > v2) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (v1 > v2) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIF_ICMPLEEval(int v1, int v2) {
-    if (v1 <= v2) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (v1 <= v2) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIF_ACMPEQEval(Object o1, Object o2) {
-    if (o1 == o2) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (o1 == o2) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIF_ACMPNEEval(Object o1, Object o2) {
-    if (o1 != o2) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (o1 != o2) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIFNULLEval(Object object) {
-    if (object == null) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (object == null) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
   public static void logIFNONNULLEval(Object object) {
-    if (object != null) {
-      TRACE.add(FALSE);
-    }
-    else {
-      TRACE.add(TRUE);
-    }
+//    if (object != null) {
+//      TRACE.add(FALSE);
+//    }
+//    else {
+//      TRACE.add(TRUE);
+//    }
   }
 
 }

@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sound.SoundAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
@@ -21,6 +22,29 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class PhosphorAnalysisTest {
+
+  @Test
+  public void Prevayler() throws IOException, InterruptedException {
+    String programName = PrevaylerAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(PrevaylerAdapter.getListOfOptions());
+    Set<String> initialConfig = new HashSet<>();
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new PhosphorAnalysis(programName, options,
+        initialConfig);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new PhosphorAnalysis(programName);
+    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
 
   @Test
   public void Trivial() throws IOException, InterruptedException {

@@ -18,6 +18,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext6.OrContext6Adapte
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorExample8Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleForExample5Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
@@ -303,6 +304,11 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
       case SoundAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new SoundAdapter();
+        break;
+      case PrevaylerAdapter.PROGRAM_NAME:
+        commandList.add("./prevayler.sh");
+        commandList.add(PrevaylerAdapter.PROGRAM_NAME);
+        adapter = new PrevaylerAdapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

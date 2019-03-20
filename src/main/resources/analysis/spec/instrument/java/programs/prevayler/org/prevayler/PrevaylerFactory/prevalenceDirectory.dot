@@ -1,15 +1,15 @@
 digraph prevalenceDirectory {
 node [shape=record];
-1335405617 [label="L2\lFRAME SAME1 java/lang/String\lLDC \"org/prevayler/PrevaylerFactory.prevalenceDirectory()Ljava/lang/String;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
-823101957 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._prevalenceDirectory : Ljava/lang/String;\lGOTO L2\l"];
-57665597 [label="L1\lFRAME SAME\lLDC \"Prevalence\"\l"];
-887421753 [label="L0\lLINENUMBER 388 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._prevalenceDirectory : Ljava/lang/String;\lLDC \"org/prevayler/PrevaylerFactory.prevalenceDirectory()Ljava/lang/String;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+1689211988 [label="L2\lFRAME SAME1 java/lang/String\lLDC \"org/prevayler/PrevaylerFactory.prevalenceDirectory()Ljava/lang/String;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
+349346006 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._prevalenceDirectory : Ljava/lang/String;\lGOTO L2\l"];
+1040647394 [label="L1\lFRAME SAME\lLDC \"Prevalence\"\l"];
+1519842251 [label="L0\lLINENUMBER 388 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._prevalenceDirectory : Ljava/lang/String;\lLDC \"org/prevayler/PrevaylerFactory.prevalenceDirectory()Ljava/lang/String;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
 entry;
 exit;
-entry -> 887421753;
-1335405617 -> exit;
-823101957 -> 1335405617;
-57665597 -> 1335405617;
-887421753 -> 823101957;
-887421753 -> 57665597;
+entry -> 1519842251;
+1689211988 -> exit;
+349346006 -> 1689211988;
+1040647394 -> 1689211988;
+1519842251 -> 349346006;
+1519842251 -> 1040647394;
 }

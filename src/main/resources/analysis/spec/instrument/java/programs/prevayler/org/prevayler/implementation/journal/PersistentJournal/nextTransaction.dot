@@ -1,12 +1,12 @@
 digraph nextTransaction {
 node [shape=record];
-1526448027 [label="L2\lLINENUMBER 238 L2\lNEW java/lang/IllegalStateException\lDUP\lLDC \"update() must be called at least once\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
-663196952 [label="L0\lLINENUMBER 237 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lLDC \"org/prevayler/implementation/journal/PersistentJournal.nextTransaction()J\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
-1509969364 [label="L1\lFRAME SAME\lLDC \"org/prevayler/implementation/journal/PersistentJournal.nextTransaction()J\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 239 L3\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLRETURN\lL4\l"];
+1706840265 [label="L0\lLINENUMBER 237 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransactionInitialized : Z\lLDC \"org/prevayler/implementation/journal/PersistentJournal.nextTransaction()J\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+2067271782 [label="L2\lLINENUMBER 238 L2\lNEW java/lang/IllegalStateException\lDUP\lLDC \"update() must be called at least once\"\lINVOKESPECIAL java/lang/IllegalStateException.\<init\> (Ljava/lang/String;)V\lATHROW\l"];
+19919839 [label="L1\lFRAME SAME\lLDC \"org/prevayler/implementation/journal/PersistentJournal.nextTransaction()J\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 239 L3\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._nextTransaction : J\lLRETURN\lL4\l"];
 entry;
 exit;
-entry -> 663196952;
-663196952 -> 1526448027;
-663196952 -> 1509969364;
-1509969364 -> exit;
+entry -> 1706840265;
+1706840265 -> 2067271782;
+1706840265 -> 19919839;
+19919839 -> exit;
 }

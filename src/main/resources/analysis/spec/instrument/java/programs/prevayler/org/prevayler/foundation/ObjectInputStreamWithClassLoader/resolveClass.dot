@@ -1,15 +1,15 @@
 digraph resolveClass {
 node [shape=record];
-2056422015 [label="L2\lFRAME SAME1 java/lang/Class\lLDC \"org/prevayler/foundation/ObjectInputStreamWithClassLoader.resolveClass(Ljava/io/ObjectStreamClass;)Ljava/lang/Class;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
-761069599 [label="ALOAD 1\lINVOKEVIRTUAL java/io/ObjectStreamClass.getName ()Ljava/lang/String;\lICONST_0\lALOAD 0\lGETFIELD org/prevayler/foundation/ObjectInputStreamWithClassLoader._loader : Ljava/lang/ClassLoader;\lINVOKESTATIC java/lang/Class.forName (Ljava/lang/String;ZLjava/lang/ClassLoader;)Ljava/lang/Class;\lGOTO L2\l"];
-2116612432 [label="L0\lLINENUMBER 24 L0\lALOAD 0\lGETFIELD org/prevayler/foundation/ObjectInputStreamWithClassLoader._loader : Ljava/lang/ClassLoader;\lLDC \"org/prevayler/foundation/ObjectInputStreamWithClassLoader.resolveClass(Ljava/io/ObjectStreamClass;)Ljava/lang/Class;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
-598386518 [label="L1\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKESPECIAL java/io/ObjectInputStream.resolveClass (Ljava/io/ObjectStreamClass;)Ljava/lang/Class;\l"];
+1011753918 [label="ALOAD 1\lINVOKEVIRTUAL java/io/ObjectStreamClass.getName ()Ljava/lang/String;\lICONST_0\lALOAD 0\lGETFIELD org/prevayler/foundation/ObjectInputStreamWithClassLoader._loader : Ljava/lang/ClassLoader;\lINVOKESTATIC java/lang/Class.forName (Ljava/lang/String;ZLjava/lang/ClassLoader;)Ljava/lang/Class;\lGOTO L2\l"];
+1885172464 [label="L1\lFRAME SAME\lALOAD 0\lALOAD 1\lINVOKESPECIAL java/io/ObjectInputStream.resolveClass (Ljava/io/ObjectStreamClass;)Ljava/lang/Class;\l"];
+493488482 [label="L2\lFRAME SAME1 java/lang/Class\lLDC \"org/prevayler/foundation/ObjectInputStreamWithClassLoader.resolveClass(Ljava/io/ObjectStreamClass;)Ljava/lang/Class;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
+1534790362 [label="L0\lLINENUMBER 24 L0\lALOAD 0\lGETFIELD org/prevayler/foundation/ObjectInputStreamWithClassLoader._loader : Ljava/lang/ClassLoader;\lLDC \"org/prevayler/foundation/ObjectInputStreamWithClassLoader.resolveClass(Ljava/io/ObjectStreamClass;)Ljava/lang/Class;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
 entry;
 exit;
-2056422015 -> exit;
-entry -> 2116612432;
-761069599 -> 2056422015;
-2116612432 -> 761069599;
-2116612432 -> 598386518;
-598386518 -> 2056422015;
+entry -> 1534790362;
+1011753918 -> 493488482;
+1885172464 -> 493488482;
+493488482 -> exit;
+1534790362 -> 1011753918;
+1534790362 -> 1885172464;
 }

@@ -1,13 +1,13 @@
 digraph close {
 node [shape=record];
-1763030548 [label="L0\lLINENUMBER 233 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lLDC \"org/prevayler/implementation/journal/PersistentJournal.close()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
-772629104 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.close ()V\l"];
-827002195 [label="L1\lFRAME SAME\lLDC \"org/prevayler/implementation/journal/PersistentJournal.close()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL2\lLINENUMBER 234 L2\lRETURN\lL3\l"];
+1212396383 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.close ()V\l"];
+1731085912 [label="L1\lFRAME SAME\lLDC \"org/prevayler/implementation/journal/PersistentJournal.close()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL2\lLINENUMBER 234 L2\lRETURN\lL3\l"];
+1847668536 [label="L0\lLINENUMBER 233 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lLDC \"org/prevayler/implementation/journal/PersistentJournal.close()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
 entry;
 exit;
-entry -> 1763030548;
-1763030548 -> 772629104;
-1763030548 -> 827002195;
-772629104 -> 827002195;
-827002195 -> exit;
+entry -> 1847668536;
+1212396383 -> 1731085912;
+1731085912 -> exit;
+1847668536 -> 1212396383;
+1847668536 -> 1731085912;
 }

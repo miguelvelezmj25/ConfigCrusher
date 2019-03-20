@@ -1,13 +1,13 @@
 digraph update {
 node [shape=record];
-2002174925 [label="L2\lFRAME APPEND [J]\lLDC \"org/prevayler/implementation/clock/MachineClock.update()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 22 L3\lRETURN\lL4\l"];
-1966670937 [label="L0\lLINENUMBER 20 L0\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLSTORE 1\lL1\lLINENUMBER 21 L1\lLLOAD 1\lALOAD 0\lGETFIELD org/prevayler/implementation/clock/MachineClock._millis : J\lLCMP\lLDC \"org/prevayler/implementation/clock/MachineClock.update()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L2\l"];
-588449070 [label="ALOAD 0\lNEW java/util/Date\lDUP\lLLOAD 1\lINVOKESPECIAL java/util/Date.\<init\> (J)V\lINVOKEVIRTUAL org/prevayler/implementation/clock/MachineClock.advanceTo (Ljava/util/Date;)V\l"];
+544966217 [label="ALOAD 0\lNEW java/util/Date\lDUP\lLLOAD 1\lINVOKESPECIAL java/util/Date.\<init\> (J)V\lINVOKEVIRTUAL org/prevayler/implementation/clock/MachineClock.advanceTo (Ljava/util/Date;)V\l"];
+1157943921 [label="L2\lFRAME APPEND [J]\lLDC \"org/prevayler/implementation/clock/MachineClock.update()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 22 L3\lRETURN\lL4\l"];
+379124840 [label="L0\lLINENUMBER 20 L0\lINVOKESTATIC java/lang/System.currentTimeMillis ()J\lLSTORE 1\lL1\lLINENUMBER 21 L1\lLLOAD 1\lALOAD 0\lGETFIELD org/prevayler/implementation/clock/MachineClock._millis : J\lLCMP\lLDC \"org/prevayler/implementation/clock/MachineClock.update()V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L2\l"];
 entry;
 exit;
-entry -> 1966670937;
-2002174925 -> exit;
-1966670937 -> 2002174925;
-1966670937 -> 588449070;
-588449070 -> 2002174925;
+entry -> 379124840;
+544966217 -> 1157943921;
+1157943921 -> exit;
+379124840 -> 544966217;
+379124840 -> 1157943921;
 }

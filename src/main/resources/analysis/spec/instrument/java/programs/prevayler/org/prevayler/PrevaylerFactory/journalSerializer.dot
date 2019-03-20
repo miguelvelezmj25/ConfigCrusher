@@ -1,13 +1,13 @@
 digraph journalSerializer {
 node [shape=record];
-1309147872 [label="L1\lLINENUMBER 421 L1\lFRAME SAME\lNEW org/prevayler/foundation/serialization/JavaSerializer\lDUP\lINVOKESPECIAL org/prevayler/foundation/serialization/JavaSerializer.\<init\> ()V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\lL2\l"];
-1243144433 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\l"];
-1519998011 [label="L0\lLINENUMBER 420 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lLDC \"org/prevayler/PrevaylerFactory.journalSerializer()Lorg/prevayler/foundation/serialization/Serializer;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+1911860918 [label="L1\lLINENUMBER 421 L1\lFRAME SAME\lNEW org/prevayler/foundation/serialization/JavaSerializer\lDUP\lINVOKESPECIAL org/prevayler/foundation/serialization/JavaSerializer.\<init\> ()V\lLDC \"org/prevayler/PrevaylerFactory.journalSerializer()Lorg/prevayler/foundation/serialization/Serializer;\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lARETURN\lL2\l"];
+190091089 [label="L0\lLINENUMBER 420 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lLDC \"org/prevayler/PrevaylerFactory.journalSerializer()Lorg/prevayler/foundation/serialization/Serializer;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+1452764043 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSerializer : Lorg/prevayler/foundation/serialization/Serializer;\lLDC \"org/prevayler/PrevaylerFactory.journalSerializer()Lorg/prevayler/foundation/serialization/Serializer;\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lARETURN\l"];
 entry;
 exit;
-entry -> 1519998011;
-1309147872 -> exit;
-1243144433 -> exit;
-1519998011 -> 1309147872;
-1519998011 -> 1243144433;
+entry -> 190091089;
+1911860918 -> exit;
+190091089 -> 1911860918;
+190091089 -> 1452764043;
+1452764043 -> exit;
 }

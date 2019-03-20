@@ -1,13 +1,13 @@
 digraph notify {
 node [shape=record];
-1879644274 [label="L1\lFRAME SAME\lLDC \"org/prevayler/foundation/monitor/LoggingMonitor.notify(Ljava/lang/Class;Ljava/lang/String;Ljava/io/File;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL2\lLINENUMBER 24 L2\lRETURN\lL3\l"];
-1409215177 [label="ALOAD 0\lALOAD 1\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"\nFile: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL org/prevayler/foundation/monitor/LoggingMonitor.info (Ljava/lang/Class;Ljava/lang/String;)V\l"];
-1903137985 [label="L0\lLINENUMBER 23 L0\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL org/prevayler/foundation/monitor/LoggingMonitor.isInfoEnabled (Ljava/lang/Class;)Z\lLDC \"org/prevayler/foundation/monitor/LoggingMonitor.notify(Ljava/lang/Class;Ljava/lang/String;Ljava/io/File;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+1765745171 [label="L1\lFRAME SAME\lLDC \"org/prevayler/foundation/monitor/LoggingMonitor.notify(Ljava/lang/Class;Ljava/lang/String;Ljava/io/File;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL2\lLINENUMBER 24 L2\lRETURN\lL3\l"];
+1180857642 [label="ALOAD 0\lALOAD 1\lNEW java/lang/StringBuilder\lDUP\lINVOKESPECIAL java/lang/StringBuilder.\<init\> ()V\lALOAD 2\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lLDC \"\nFile: \"\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder;\lALOAD 3\lINVOKEVIRTUAL java/lang/StringBuilder.append (Ljava/lang/Object;)Ljava/lang/StringBuilder;\lINVOKEVIRTUAL java/lang/StringBuilder.toString ()Ljava/lang/String;\lINVOKEVIRTUAL org/prevayler/foundation/monitor/LoggingMonitor.info (Ljava/lang/Class;Ljava/lang/String;)V\l"];
+685438214 [label="L0\lLINENUMBER 23 L0\lALOAD 0\lALOAD 1\lINVOKEVIRTUAL org/prevayler/foundation/monitor/LoggingMonitor.isInfoEnabled (Ljava/lang/Class;)Z\lLDC \"org/prevayler/foundation/monitor/LoggingMonitor.notify(Ljava/lang/Class;Ljava/lang/String;Ljava/io/File;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 1903137985;
-1879644274 -> exit;
-1409215177 -> 1879644274;
-1903137985 -> 1879644274;
-1903137985 -> 1409215177;
+entry -> 685438214;
+1765745171 -> exit;
+1180857642 -> 1765745171;
+685438214 -> 1765745171;
+685438214 -> 1180857642;
 }

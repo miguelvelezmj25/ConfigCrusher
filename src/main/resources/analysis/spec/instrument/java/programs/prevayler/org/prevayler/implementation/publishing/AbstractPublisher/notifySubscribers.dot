@@ -1,15 +1,15 @@
 digraph notifySubscribers {
 node [shape=record];
-1453347620 [label="L1\lLINENUMBER 39 L1\lFRAME APPEND [java/util/Iterator]\lALOAD 2\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lLDC \"org/prevayler/implementation/publishing/AbstractPublisher.notifySubscribers(Lorg/prevayler/implementation/TransactionTimestamp;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L2\l"];
-92694321 [label="L0\lLINENUMBER 38 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/publishing/AbstractPublisher._subscribers : Ljava/util/List;\lINVOKEINTERFACE java/util/List.iterator ()Ljava/util/Iterator;\lASTORE 2\l"];
-875293430 [label="L2\lFRAME SAME\lLDC \"org/prevayler/implementation/publishing/AbstractPublisher.notifySubscribers(Lorg/prevayler/implementation/TransactionTimestamp;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 40 L3\lRETURN\lL4\l"];
-300355969 [label="ALOAD 2\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST org/prevayler/implementation/publishing/TransactionSubscriber\lALOAD 1\lINVOKEINTERFACE org/prevayler/implementation/publishing/TransactionSubscriber.receive (Lorg/prevayler/implementation/TransactionTimestamp;)V\lGOTO L1\l"];
+1004791660 [label="ALOAD 2\lINVOKEINTERFACE java/util/Iterator.next ()Ljava/lang/Object;\lCHECKCAST org/prevayler/implementation/publishing/TransactionSubscriber\lALOAD 1\lINVOKEINTERFACE org/prevayler/implementation/publishing/TransactionSubscriber.receive (Lorg/prevayler/implementation/TransactionTimestamp;)V\lGOTO L1\l"];
+1812442475 [label="L2\lFRAME SAME\lLDC \"org/prevayler/implementation/publishing/AbstractPublisher.notifySubscribers(Lorg/prevayler/implementation/TransactionTimestamp;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 40 L3\lRETURN\lL4\l"];
+2041435954 [label="L1\lLINENUMBER 39 L1\lFRAME APPEND [java/util/Iterator]\lALOAD 2\lINVOKEINTERFACE java/util/Iterator.hasNext ()Z\lLDC \"org/prevayler/implementation/publishing/AbstractPublisher.notifySubscribers(Lorg/prevayler/implementation/TransactionTimestamp;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L2\l"];
+549160372 [label="L0\lLINENUMBER 38 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/publishing/AbstractPublisher._subscribers : Ljava/util/List;\lINVOKEINTERFACE java/util/List.iterator ()Ljava/util/Iterator;\lASTORE 2\l"];
 entry;
 exit;
-1453347620 -> 875293430;
-1453347620 -> 300355969;
-entry -> 92694321;
-92694321 -> 1453347620;
-875293430 -> exit;
-300355969 -> 1453347620;
+1004791660 -> 2041435954;
+1812442475 -> exit;
+entry -> 549160372;
+2041435954 -> 1004791660;
+2041435954 -> 1812442475;
+549160372 -> 2041435954;
 }

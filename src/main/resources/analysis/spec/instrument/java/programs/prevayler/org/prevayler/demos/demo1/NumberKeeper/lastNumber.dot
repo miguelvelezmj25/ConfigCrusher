@@ -1,15 +1,15 @@
 digraph lastNumber {
 node [shape=record];
-1413831821 [label="L0\lLINENUMBER 24 L0\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/NumberKeeper.numbers : Ljava/util/List;\lINVOKEINTERFACE java/util/List.isEmpty ()Z\lLDC \"org/prevayler/demos/demo1/NumberKeeper.lastNumber()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
-134432690 [label="L1\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/NumberKeeper.numbers : Ljava/util/List;\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/NumberKeeper.numbers : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lICONST_1\lISUB\lINVOKEINTERFACE java/util/List.get (I)Ljava/lang/Object;\lCHECKCAST java/lang/Integer\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\l"];
-246833096 [label="ICONST_0\lGOTO L2\l"];
-1557520822 [label="L2\lFRAME SAME1 I\lLDC \"org/prevayler/demos/demo1/NumberKeeper.lastNumber()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lIRETURN\lL3\l"];
+1675122956 [label="L1\lFRAME SAME\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/NumberKeeper.numbers : Ljava/util/List;\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/NumberKeeper.numbers : Ljava/util/List;\lINVOKEINTERFACE java/util/List.size ()I\lICONST_1\lISUB\lINVOKEINTERFACE java/util/List.get (I)Ljava/lang/Object;\lCHECKCAST java/lang/Integer\lINVOKEVIRTUAL java/lang/Integer.intValue ()I\l"];
+1070146065 [label="ICONST_0\lGOTO L2\l"];
+293338808 [label="L2\lFRAME SAME1 I\lLDC \"org/prevayler/demos/demo1/NumberKeeper.lastNumber()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lIRETURN\lL3\l"];
+1320358893 [label="L0\lLINENUMBER 24 L0\lALOAD 0\lGETFIELD org/prevayler/demos/demo1/NumberKeeper.numbers : Ljava/util/List;\lINVOKEINTERFACE java/util/List.isEmpty ()Z\lLDC \"org/prevayler/demos/demo1/NumberKeeper.lastNumber()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
 entry;
 exit;
-entry -> 1413831821;
-1413831821 -> 134432690;
-1413831821 -> 246833096;
-134432690 -> 1557520822;
-246833096 -> 1557520822;
-1557520822 -> exit;
+entry -> 1320358893;
+1675122956 -> 293338808;
+1070146065 -> 293338808;
+293338808 -> exit;
+1320358893 -> 1675122956;
+1320358893 -> 1070146065;
 }

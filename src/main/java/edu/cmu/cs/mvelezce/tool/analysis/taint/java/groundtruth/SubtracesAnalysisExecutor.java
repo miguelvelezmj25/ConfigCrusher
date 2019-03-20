@@ -292,7 +292,9 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
       case PrevaylerAdapter.PROGRAM_NAME:
         commandList.add(ccClasspath
             + BaseAdapter.PATH_SEPARATOR
-            + PrevaylerAdapter.INSTRUMENTED_CLASS_PATH);
+            + PrevaylerAdapter.INSTRUMENTED_CLASS_PATH
+            + BaseAdapter.PATH_SEPARATOR
+            + PrevaylerAdapter.CLASS_PATH);
         adapter = new PrevaylerAdapter();
         break;
       default:

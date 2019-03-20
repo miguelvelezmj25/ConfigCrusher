@@ -1,15 +1,15 @@
 digraph clock {
 node [shape=record];
-1141137903 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
-748127799 [label="L0\lLINENUMBER 185 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lLDC \"org/prevayler/PrevaylerFactory.clock()Lorg/prevayler/Clock;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
-1501019626 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"org/prevayler/PrevaylerFactory.clock()Lorg/prevayler/Clock;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
-1579620531 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
+1495805382 [label="L2\lFRAME SAME1 org/prevayler/Clock\lLDC \"org/prevayler/PrevaylerFactory.clock()Lorg/prevayler/Clock;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lARETURN\lL3\l"];
+124246457 [label="L0\lLINENUMBER 185 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lLDC \"org/prevayler/PrevaylerFactory.clock()Lorg/prevayler/Clock;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+1854597758 [label="ALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._clock : Lorg/prevayler/Clock;\lGOTO L2\l"];
+1497333038 [label="L1\lFRAME SAME\lNEW org/prevayler/implementation/clock/MachineClock\lDUP\lINVOKESPECIAL org/prevayler/implementation/clock/MachineClock.\<init\> ()V\l"];
 entry;
 exit;
-entry -> 748127799;
-1141137903 -> 1501019626;
-748127799 -> 1141137903;
-748127799 -> 1579620531;
-1501019626 -> exit;
-1579620531 -> 1501019626;
+1495805382 -> exit;
+entry -> 124246457;
+124246457 -> 1854597758;
+124246457 -> 1497333038;
+1854597758 -> 1495805382;
+1497333038 -> 1495805382;
 }

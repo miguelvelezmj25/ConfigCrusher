@@ -87,32 +87,32 @@ public class SubtracesLogger {
 
     while (!STACK.isEmpty() && STACK.peekFirst().getDecisionLabel().equals(exitingLabel)) {
       SubtraceLabel stackLabel = STACK.removeFirst();
-      Deque<SubtraceLabel> exitingCtx = getCurrentCtx();
-
-      SubtraceLabel expectedLabel = new SubtraceLabel(ENTER_DECISION, exitingCtx, exitingLabel);
-
-      if (!stackLabel.equals(expectedLabel)) {
-        throw new RuntimeException(
-            "Expected to exit label " + expectedLabel + ", but exited label " + stackLabel
-                + " instead");
-      }
-
-      Deque<SubtraceLabel> currentCtx = getCurrentCtx();
-      String labelID = getLabelID(labelPrefix, decisionCount);
-      int execCount = stackLabel.getExecCount();
-      SubtraceLabel subtraceLabel = new SubtraceLabel(EXIT_DECISION, currentCtx, labelID,
-          execCount);
-
-      TRACE.add(subtraceLabel.toString());
+      exitDecision(exitingLabel, stackLabel);
     }
   }
 
-  public static void exitAtReturn() {
-    throw new UnsupportedOperationException("Implement with new logic with subtrace labels");
-//    while (!STACK.isEmpty()) {
-//      String label = labelAction(EXIT_DECISION) + STACK.removeFirst();
-//      TRACE.add(label);
-//    }
+  public static void exitAtReturn(String labelPrefix) {
+    while (!STACK.isEmpty() && STACK.peekFirst().getDecisionLabel().startsWith(labelPrefix + ".")) {
+      SubtraceLabel stackLabel = STACK.removeFirst();
+      String exitingLabel = stackLabel.getDecisionLabel();
+      exitDecision(exitingLabel, stackLabel);
+    }
+  }
+
+  private static void exitDecision(String exitingLabel, SubtraceLabel stackLabel) {
+    Deque<SubtraceLabel> exitingCtx = getCurrentCtx();
+    SubtraceLabel expectedLabel = new SubtraceLabel(ENTER_DECISION, exitingCtx, exitingLabel);
+
+    if (!stackLabel.equals(expectedLabel)) {
+      throw new RuntimeException(
+          "Expected to exit label " + expectedLabel + ", but exited label " + stackLabel
+              + " instead");
+    }
+
+    int execCount = stackLabel.getExecCount();
+    SubtraceLabel subtraceLabel = new SubtraceLabel(EXIT_DECISION, exitingCtx, exitingLabel,
+        execCount);
+    TRACE.add(subtraceLabel.toString());
   }
 
   private static String getLabelID(String labelPrefix, int decisionCount) {
@@ -121,145 +121,145 @@ public class SubtracesLogger {
 
   public static void logIFEQEval(int value) {
     if (value == 0) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIFNEEval(int value) {
     if (value != 0) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIFLTEval(int value) {
     if (value < 0) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIFGEEval(int value) {
     if (value >= 0) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIFGTEval(int value) {
     if (value > 0) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIFLEEval(int value) {
     if (value <= 0) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIF_ICMPEQEval(int v1, int v2) {
     if (v1 == v2) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIF_ICMPNEEval(int v1, int v2) {
     if (v1 != v2) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIF_ICMPLTEval(int v1, int v2) {
     if (v1 < v2) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIF_ICMPGEEval(int v1, int v2) {
     if (v1 >= v2) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIF_ICMPGTEval(int v1, int v2) {
     if (v1 > v2) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIF_ICMPLEEval(int v1, int v2) {
     if (v1 <= v2) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIF_ACMPEQEval(Object o1, Object o2) {
     if (o1 == o2) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIF_ACMPNEEval(Object o1, Object o2) {
     if (o1 != o2) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIFNULLEval(Object object) {
     if (object == null) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 
   public static void logIFNONNULLEval(Object object) {
     if (object != null) {
-      TRACE.add(TRUE);
+      TRACE.add(FALSE);
     }
     else {
-      TRACE.add(FALSE);
+      TRACE.add(TRUE);
     }
   }
 

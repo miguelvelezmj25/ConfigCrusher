@@ -1,12 +1,12 @@
 digraph result {
 node [shape=record];
-1976617670 [label="L1\lFRAME SAME\lLDC \"org/prevayler/implementation/TransactionWithQueryCapsule.result()Ljava/lang/Object;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL2\lLINENUMBER 39 L2\lALOAD 0\lGETFIELD org/prevayler/implementation/TransactionWithQueryCapsule._queryResult : Ljava/lang/Object;\lARETURN\lL3\l"];
-241403219 [label="L0\lLINENUMBER 38 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/TransactionWithQueryCapsule._queryException : Ljava/lang/Exception;\lLDC \"org/prevayler/implementation/TransactionWithQueryCapsule.result()Ljava/lang/Object;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
-472201306 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/TransactionWithQueryCapsule._queryException : Ljava/lang/Exception;\lATHROW\l"];
+1060210990 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/TransactionWithQueryCapsule._queryException : Ljava/lang/Exception;\lATHROW\l"];
+1649998289 [label="L0\lLINENUMBER 38 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/TransactionWithQueryCapsule._queryException : Ljava/lang/Exception;\lLDC \"org/prevayler/implementation/TransactionWithQueryCapsule.result()Ljava/lang/Object;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L1\l"];
+1020828786 [label="L1\lFRAME SAME\lLDC \"org/prevayler/implementation/TransactionWithQueryCapsule.result()Ljava/lang/Object;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL2\lLINENUMBER 39 L2\lALOAD 0\lGETFIELD org/prevayler/implementation/TransactionWithQueryCapsule._queryResult : Ljava/lang/Object;\lARETURN\lL3\l"];
 entry;
 exit;
-entry -> 241403219;
-1976617670 -> exit;
-241403219 -> 1976617670;
-241403219 -> 472201306;
+entry -> 1649998289;
+1649998289 -> 1060210990;
+1649998289 -> 1020828786;
+1020828786 -> exit;
 }

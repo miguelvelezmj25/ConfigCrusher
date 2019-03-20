@@ -1,13 +1,13 @@
 digraph journal {
 node [shape=record];
-447706039 [label="L1\lLINENUMBER 408 L1\lFRAME SAME\lNEW org/prevayler/implementation/PrevaylerDirectory\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.prevalenceDirectory ()Ljava/lang/String;\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory.\<init\> (Ljava/lang/String;)V\lASTORE 1\lL3\lLINENUMBER 409 L3\lNEW org/prevayler/implementation/journal/PersistentJournal\lDUP\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSizeThreshold : J\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalAgeThreshold : J\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalDiskSync : Z\lALOAD 0\lL4\lLINENUMBER 414 L4\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journalSuffix ()Ljava/lang/String;\lALOAD 0\lL5\lLINENUMBER 415 L5\lINVOKESPECIAL org/prevayler/PrevaylerFactory.monitor ()Lorg/prevayler/foundation/monitor/Monitor;\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;JJZLjava/lang/String;Lorg/prevayler/foundation/monitor/Monitor;)V\lL6\lLINENUMBER 409 L6\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\lL7\l"];
-243860881 [label="L2\lLINENUMBER 406 L2\lNEW org/prevayler/implementation/journal/TransientJournal\lDUP\lINVOKESPECIAL org/prevayler/implementation/journal/TransientJournal.\<init\> ()V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\l"];
-1264377095 [label="L0\lLINENUMBER 405 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._transientMode : Z\lLDC \"org/prevayler/PrevaylerFactory.journal()Lorg/prevayler/implementation/journal/Journal;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+668330752 [label="L1\lLINENUMBER 408 L1\lFRAME SAME\lNEW org/prevayler/implementation/PrevaylerDirectory\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/PrevaylerFactory.prevalenceDirectory ()Ljava/lang/String;\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory.\<init\> (Ljava/lang/String;)V\lASTORE 1\lL3\lLINENUMBER 409 L3\lNEW org/prevayler/implementation/journal/PersistentJournal\lDUP\lALOAD 1\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalSizeThreshold : J\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalAgeThreshold : J\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._journalDiskSync : Z\lALOAD 0\lL4\lLINENUMBER 414 L4\lINVOKESPECIAL org/prevayler/PrevaylerFactory.journalSuffix ()Ljava/lang/String;\lALOAD 0\lL5\lLINENUMBER 415 L5\lINVOKESPECIAL org/prevayler/PrevaylerFactory.monitor ()Lorg/prevayler/foundation/monitor/Monitor;\lINVOKESPECIAL org/prevayler/implementation/journal/PersistentJournal.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;JJZLjava/lang/String;Lorg/prevayler/foundation/monitor/Monitor;)V\lL6\lLINENUMBER 409 L6\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\lL7\l"];
+758417002 [label="L0\lLINENUMBER 405 L0\lALOAD 0\lGETFIELD org/prevayler/PrevaylerFactory._transientMode : Z\lLDC \"org/prevayler/PrevaylerFactory.journal()Lorg/prevayler/implementation/journal/Journal;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+640225682 [label="L2\lLINENUMBER 406 L2\lNEW org/prevayler/implementation/journal/TransientJournal\lDUP\lINVOKESPECIAL org/prevayler/implementation/journal/TransientJournal.\<init\> ()V\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\l"];
 entry;
 exit;
-entry -> 1264377095;
-447706039 -> exit;
-243860881 -> exit;
-1264377095 -> 447706039;
-1264377095 -> 243860881;
+entry -> 758417002;
+668330752 -> exit;
+758417002 -> 668330752;
+758417002 -> 640225682;
+640225682 -> exit;
 }

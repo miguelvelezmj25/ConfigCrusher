@@ -1,13 +1,13 @@
 digraph advanceTo {
 node [shape=record];
-326265195 [label="L2\lLINENUMBER 37 L2\lFRAME APPEND [J]\lALOAD 0\lLLOAD 2\lPUTFIELD org/prevayler/implementation/clock/BrokenClock._millis : J\lL3\lLINENUMBER 38 L3\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/implementation/clock/BrokenClock._time : Ljava/util/Date;\lL4\lLINENUMBER 39 L4\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lRETURN\lL5\l"];
-1553991340 [label="L0\lLINENUMBER 35 L0\lALOAD 1\lINVOKEVIRTUAL java/util/Date.getTime ()J\lLSTORE 2\lL1\lLINENUMBER 36 L1\lLLOAD 2\lALOAD 0\lGETFIELD org/prevayler/implementation/clock/BrokenClock._millis : J\lLCMP\lLDC \"org/prevayler/implementation/clock/BrokenClock.advanceTo(Ljava/util/Date;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L2\l"];
-230944166 [label="INVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lRETURN\l"];
+1591387506 [label="INVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lRETURN\l"];
+1547714604 [label="L0\lLINENUMBER 35 L0\lALOAD 1\lINVOKEVIRTUAL java/util/Date.getTime ()J\lLSTORE 2\lL1\lLINENUMBER 36 L1\lLLOAD 2\lALOAD 0\lGETFIELD org/prevayler/implementation/clock/BrokenClock._millis : J\lLCMP\lLDC \"org/prevayler/implementation/clock/BrokenClock.advanceTo(Ljava/util/Date;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L2\l"];
+428156140 [label="L2\lLINENUMBER 37 L2\lFRAME APPEND [J]\lALOAD 0\lLLOAD 2\lPUTFIELD org/prevayler/implementation/clock/BrokenClock._millis : J\lL3\lLINENUMBER 38 L3\lALOAD 0\lALOAD 1\lPUTFIELD org/prevayler/implementation/clock/BrokenClock._time : Ljava/util/Date;\lL4\lLINENUMBER 39 L4\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lRETURN\lL5\l"];
 entry;
 exit;
-entry -> 1553991340;
-326265195 -> exit;
-1553991340 -> 326265195;
-1553991340 -> 230944166;
-230944166 -> exit;
+entry -> 1547714604;
+1591387506 -> exit;
+1547714604 -> 1591387506;
+1547714604 -> 428156140;
+428156140 -> exit;
 }

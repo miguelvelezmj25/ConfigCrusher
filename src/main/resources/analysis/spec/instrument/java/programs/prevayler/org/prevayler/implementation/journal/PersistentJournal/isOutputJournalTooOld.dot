@@ -1,18 +1,18 @@
 digraph isOutputJournalTooOld {
 node [shape=record];
-141213117 [label="L0\lLINENUMBER 113 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeThresholdInMillis : J\lLCONST_0\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
-135370989 [label="L1\lFRAME SAME\lICONST_0\l"];
-1122059861 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeTimer : Lorg/prevayler/foundation/StopWatch;\lL2\lLINENUMBER 114 L2\lINVOKEVIRTUAL org/prevayler/foundation/StopWatch.millisEllapsed ()J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeThresholdInMillis : J\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLTEval (I)V\lIFLT L1\l"];
-671546968 [label="ICONST_1\lGOTO L3\l"];
-1968974256 [label="L3\lFRAME SAME1 I\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 113 L4\lIRETURN\lL5\l"];
+150814446 [label="L1\lFRAME SAME\lICONST_0\l"];
+228585933 [label="ICONST_1\lGOTO L3\l"];
+744812115 [label="L3\lFRAME SAME1 I\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 113 L4\lIRETURN\lL5\l"];
+1840880761 [label="L0\lLINENUMBER 113 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeThresholdInMillis : J\lLCONST_0\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+62593131 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeTimer : Lorg/prevayler/foundation/StopWatch;\lL2\lLINENUMBER 114 L2\lINVOKEVIRTUAL org/prevayler/foundation/StopWatch.millisEllapsed ()J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalAgeThresholdInMillis : J\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooOld()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLTEval (I)V\lIFLT L1\l"];
 entry;
 exit;
-entry -> 141213117;
-141213117 -> 135370989;
-141213117 -> 1122059861;
-135370989 -> 1968974256;
-1122059861 -> 135370989;
-1122059861 -> 671546968;
-671546968 -> 1968974256;
-1968974256 -> exit;
+entry -> 1840880761;
+150814446 -> 744812115;
+228585933 -> 744812115;
+744812115 -> exit;
+1840880761 -> 150814446;
+1840880761 -> 62593131;
+62593131 -> 228585933;
+62593131 -> 150814446;
 }

@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.Dynam
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleForExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample4.SimpleForExample4Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleForExample5Adapter;
@@ -214,5 +215,20 @@ public class SubtracesPipelineTest {
     Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
     Assert.assertEquals(3, minConfigs.iterator().next().size());
+  }
+
+  @Test
+  public void Prevayler() throws IOException, InterruptedException {
+    String programName = PrevaylerAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(PrevaylerAdapter.getListOfOptions());
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
+    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+
+    System.out.println(minConfigs.iterator().next().size());
   }
 }

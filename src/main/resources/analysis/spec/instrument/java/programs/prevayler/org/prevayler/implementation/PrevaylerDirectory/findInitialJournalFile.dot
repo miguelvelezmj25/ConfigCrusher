@@ -1,20 +1,20 @@
 digraph findInitialJournalFile {
 node [shape=record];
-1386207903 [label="L5\lLINENUMBER 198 L5\lFRAME CHOP 2\lACONST_NULL\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\lL11\l"];
-730815140 [label="L9\lLINENUMBER 190 L9\lFRAME APPEND [java/io/File J]\lIINC 4 -1\lGOTO L4\l"];
-1570860758 [label="L4\lFRAME APPEND [[Ljava/io/File; I]\lILOAD 4\lLDC \"org/prevayler/implementation/PrevaylerDirectory.findInitialJournalFile(J)Ljava/io/File;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLTEval (I)V\lIFLT L5\l"];
-2098087645 [label="L10\lLINENUMBER 194 L10\lALOAD 5\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\l"];
-1882274571 [label="L0\lLINENUMBER 172 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/PrevaylerDirectory._directory : Ljava/io/File;\lNEW org/prevayler/implementation/PrevaylerDirectory$1\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory$1.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;)V\lL1\lLINENUMBER 173 L1\lINVOKEVIRTUAL java/io/File.listFiles (Ljava/io/FileFilter;)[Ljava/io/File;\lASTORE 3\lL2\lLINENUMBER 180 L2\lALOAD 3\lNEW org/prevayler/implementation/PrevaylerDirectory$2\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory$2.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;)V\lINVOKESTATIC java/util/Arrays.sort ([Ljava/lang/Object;Ljava/util/Comparator;)V\lL3\lLINENUMBER 190 L3\lALOAD 3\lARRAYLENGTH\lICONST_1\lISUB\lISTORE 4\l"];
-1145512119 [label="L6\lLINENUMBER 191 L6\lALOAD 3\lILOAD 4\lAALOAD\lASTORE 5\lL7\lLINENUMBER 192 L7\lALOAD 5\lINVOKESTATIC org/prevayler/implementation/PrevaylerDirectory.journalVersion (Ljava/io/File;)J\lLSTORE 6\lL8\lLINENUMBER 193 L8\lLLOAD 6\lLLOAD 1\lLCMP\lLDC \"org/prevayler/implementation/PrevaylerDirectory.findInitialJournalFile(J)Ljava/io/File;\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFGTEval (I)V\lIFGT L9\l"];
+1733034446 [label="L4\lFRAME APPEND [[Ljava/io/File; I]\lILOAD 4\lLDC \"org/prevayler/implementation/PrevaylerDirectory.findInitialJournalFile(J)Ljava/io/File;\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLTEval (I)V\lIFLT L5\l"];
+1352532563 [label="L6\lLINENUMBER 191 L6\lALOAD 3\lILOAD 4\lAALOAD\lASTORE 5\lL7\lLINENUMBER 192 L7\lALOAD 5\lINVOKESTATIC org/prevayler/implementation/PrevaylerDirectory.journalVersion (Ljava/io/File;)J\lLSTORE 6\lL8\lLINENUMBER 193 L8\lLLOAD 6\lLLOAD 1\lLCMP\lLDC \"org/prevayler/implementation/PrevaylerDirectory.findInitialJournalFile(J)Ljava/io/File;\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFGTEval (I)V\lIFGT L9\l"];
+1821332066 [label="L9\lLINENUMBER 190 L9\lFRAME APPEND [java/io/File J]\lIINC 4 -1\lGOTO L4\l"];
+47701845 [label="L0\lLINENUMBER 172 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/PrevaylerDirectory._directory : Ljava/io/File;\lNEW org/prevayler/implementation/PrevaylerDirectory$1\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory$1.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;)V\lL1\lLINENUMBER 173 L1\lINVOKEVIRTUAL java/io/File.listFiles (Ljava/io/FileFilter;)[Ljava/io/File;\lASTORE 3\lL2\lLINENUMBER 180 L2\lALOAD 3\lNEW org/prevayler/implementation/PrevaylerDirectory$2\lDUP\lALOAD 0\lINVOKESPECIAL org/prevayler/implementation/PrevaylerDirectory$2.\<init\> (Lorg/prevayler/implementation/PrevaylerDirectory;)V\lINVOKESTATIC java/util/Arrays.sort ([Ljava/lang/Object;Ljava/util/Comparator;)V\lL3\lLINENUMBER 190 L3\lALOAD 3\lARRAYLENGTH\lICONST_1\lISUB\lISTORE 4\l"];
+1808428108 [label="L10\lLINENUMBER 194 L10\lALOAD 5\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\l"];
+1267443383 [label="L5\lLINENUMBER 198 L5\lFRAME CHOP 2\lACONST_NULL\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lARETURN\lL11\l"];
 entry;
 exit;
-1386207903 -> exit;
-730815140 -> 1570860758;
-entry -> 1882274571;
-1570860758 -> 1386207903;
-1570860758 -> 1145512119;
-2098087645 -> exit;
-1882274571 -> 1570860758;
-1145512119 -> 730815140;
-1145512119 -> 2098087645;
+1733034446 -> 1352532563;
+1733034446 -> 1267443383;
+1352532563 -> 1821332066;
+1352532563 -> 1808428108;
+entry -> 47701845;
+1821332066 -> 1733034446;
+47701845 -> 1733034446;
+1808428108 -> exit;
+1267443383 -> exit;
 }

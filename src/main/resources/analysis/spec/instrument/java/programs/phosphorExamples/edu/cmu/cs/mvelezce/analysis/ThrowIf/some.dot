@@ -1,12 +1,12 @@
 digraph some {
 node [shape=record];
-1342057965 [label="L2\lLINENUMBER 16 L2\lNEW java/lang/RuntimeException\lDUP\lINVOKESPECIAL java/lang/RuntimeException.\<init\> ()V\lATHROW\l"];
-410779933 [label="L1\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.some([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 19 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\lL4\lLINENUMBER 20 L4\lRETURN\lL5\l"];
-486069307 [label="L0\lLINENUMBER 15 L0\lALOAD 1\lARRAYLENGTH\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.some([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
+1760670079 [label="L2\lLINENUMBER 10 L2\lNEW java/lang/RuntimeException\lDUP\lINVOKESPECIAL java/lang/RuntimeException.\<init\> ()V\lATHROW\l"];
+388104475 [label="L1\lFRAME SAME\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.some([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL3\lLINENUMBER 13 L3\lGETSTATIC java/lang/System.out : Ljava/io/PrintStream;\lINVOKEVIRTUAL java/io/PrintStream.println ()V\lL4\lLINENUMBER 14 L4\lRETURN\lL5\l"];
+115433442 [label="L0\lLINENUMBER 9 L0\lALOAD 1\lARRAYLENGTH\lLDC \"edu/cmu/cs/mvelezce/analysis/ThrowIf.some([Ljava/lang/String;)V\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNEEval (I)V\lIFNE L1\l"];
 entry;
 exit;
-entry -> 486069307;
-410779933 -> exit;
-486069307 -> 1342057965;
-486069307 -> 410779933;
+entry -> 115433442;
+388104475 -> exit;
+115433442 -> 1760670079;
+115433442 -> 388104475;
 }

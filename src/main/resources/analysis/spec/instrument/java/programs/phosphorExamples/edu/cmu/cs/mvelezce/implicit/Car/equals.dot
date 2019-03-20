@@ -1,21 +1,21 @@
 digraph equals {
 node [shape=record];
-1047460013 [label="L0\lLINENUMBER 45 L0\lALOAD 0\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ACMPNEEval (Ljava/lang/Object;Ljava/lang/Object;)V\lIF_ACMPNE L1\l"];
-1025309396 [label="L3\lLINENUMBER 49 L3\lFRAME SAME\lICONST_0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\l"];
-879583678 [label="L1\lLINENUMBER 48 L1\lFRAME SAME\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L3\l"];
-1646464088 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\lL5\l"];
-1954471782 [label="ALOAD 0\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lALOAD 1\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ACMPEQEval (Ljava/lang/Object;Ljava/lang/Object;)V\lIF_ACMPEQ L4\l"];
-1431530910 [label="L2\lLINENUMBER 46 L2\lICONST_1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn ()V\lIRETURN\l"];
+2141712584 [label="ALOAD 0\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lALOAD 1\lINVOKEVIRTUAL java/lang/Object.getClass ()Ljava/lang/Class;\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ACMPEQEval (Ljava/lang/Object;Ljava/lang/Object;)V\lIF_ACMPEQ L4\l"];
+1887398112 [label="L3\lLINENUMBER 49 L3\lFRAME SAME\lICONST_0\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lIRETURN\l"];
+911679516 [label="L0\lLINENUMBER 45 L0\lALOAD 0\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP2\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIF_ACMPNEEval (Ljava/lang/Object;Ljava/lang/Object;)V\lIF_ACMPNE L1\l"];
+5724491 [label="L2\lLINENUMBER 46 L2\lICONST_1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lIRETURN\l"];
+1255729829 [label="L4\lLINENUMBER 61 L4\lFRAME SAME\lICONST_1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitAtReturn (Ljava/lang/String;)V\lIRETURN\lL5\l"];
+1126024491 [label="L1\lLINENUMBER 48 L1\lFRAME SAME\lALOAD 1\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.equals(Ljava/lang/Object;)Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFNULLEval (Ljava/lang/Object;)V\lIFNULL L3\l"];
 entry;
 exit;
-entry -> 1047460013;
-1047460013 -> 879583678;
-1047460013 -> 1431530910;
-1025309396 -> exit;
-879583678 -> 1025309396;
-879583678 -> 1954471782;
-1646464088 -> exit;
-1954471782 -> 1025309396;
-1954471782 -> 1646464088;
-1431530910 -> exit;
+entry -> 911679516;
+2141712584 -> 1887398112;
+2141712584 -> 1255729829;
+1887398112 -> exit;
+911679516 -> 5724491;
+911679516 -> 1126024491;
+5724491 -> exit;
+1255729829 -> exit;
+1126024491 -> 2141712584;
+1126024491 -> 1887398112;
 }

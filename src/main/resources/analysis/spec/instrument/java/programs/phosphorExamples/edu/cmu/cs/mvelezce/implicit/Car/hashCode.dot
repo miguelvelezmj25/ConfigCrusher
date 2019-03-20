@@ -1,15 +1,15 @@
 digraph hashCode {
 node [shape=record];
-620557167 [label="L4\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I I]\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lIADD\lISTORE 1\lL5\lLINENUMBER 69 L5\lILOAD 1\lIRETURN\lL6\l"];
-50699452 [label="ICONST_1\lGOTO L4\l"];
-1806431167 [label="L0\lLINENUMBER 66 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lISTORE 1\lL1\lLINENUMBER 67 L1\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.year : I\lIADD\lISTORE 1\lL2\lLINENUMBER 68 L2\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L3\l"];
-2125062626 [label="L3\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I]\lICONST_0\l"];
+632669738 [label="L4\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I I]\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lIADD\lISTORE 1\lL5\lLINENUMBER 69 L5\lILOAD 1\lIRETURN\lL6\l"];
+999297684 [label="L3\lFRAME FULL [edu/cmu/cs/mvelezce/implicit/Car I] [I]\lICONST_0\l"];
+1580068916 [label="ICONST_1\lGOTO L4\l"];
+116214725 [label="L0\lLINENUMBER 66 L0\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.name : Ljava/lang/String;\lINVOKEVIRTUAL java/lang/String.hashCode ()I\lISTORE 1\lL1\lLINENUMBER 67 L1\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.year : I\lIADD\lISTORE 1\lL2\lLINENUMBER 68 L2\lBIPUSH 31\lILOAD 1\lIMUL\lALOAD 0\lGETFIELD edu/cmu/cs/mvelezce/implicit/Car.used : Z\lLDC \"edu/cmu/cs/mvelezce/implicit/Car.hashCode()I\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L3\l"];
 entry;
 exit;
-entry -> 1806431167;
-620557167 -> exit;
-50699452 -> 620557167;
-1806431167 -> 50699452;
-1806431167 -> 2125062626;
-2125062626 -> 620557167;
+entry -> 116214725;
+632669738 -> exit;
+999297684 -> 632669738;
+1580068916 -> 632669738;
+116214725 -> 999297684;
+116214725 -> 1580068916;
 }

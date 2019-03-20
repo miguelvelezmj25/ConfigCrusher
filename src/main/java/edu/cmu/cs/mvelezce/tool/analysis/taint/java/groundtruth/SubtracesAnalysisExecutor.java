@@ -16,7 +16,10 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdap
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.return2Example.Return2ExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.returnExample.ReturnExampleAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.returnExample2.ReturnExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample.SimpleForExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample3.SimpleForExample3Adapter;
@@ -214,6 +217,18 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
             + SimpleForExample5Adapter.INSTRUMENTED_CLASS_PATH);
         adapter = new SimpleForExample5Adapter();
         break;
+      case ReturnExampleAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + ReturnExampleAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new ReturnExampleAdapter();
+        break;
+      case ReturnExample2Adapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + ReturnExample2Adapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new ReturnExample2Adapter();
+        break;
       case Return2ExampleAdapter.PROGRAM_NAME:
         commandList.add(ccClasspath
             + BaseAdapter.PATH_SEPARATOR
@@ -273,6 +288,12 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
             + BaseAdapter.PATH_SEPARATOR
             + TrivialAdapter.INSTRUMENTED_CLASS_PATH);
         adapter = new TrivialAdapter();
+        break;
+      case PrevaylerAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + PrevaylerAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new PrevaylerAdapter();
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + programName);

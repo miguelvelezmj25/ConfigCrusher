@@ -254,8 +254,8 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
         if (instrumentedIpdExitBlock) {
           continue;
         }
-//        throw new UnsupportedOperationException("Handle the cases where the exit block is the ipd");
-        this.instrumentIPDExitNode(cfg, insnList);
+
+        this.instrumentIPDExitNode(cfg, labelPrefix, insnList);
         instrumentedIpdExitBlock = true;
       }
       else {
@@ -299,13 +299,13 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     }
   }
 
-  private void instrumentIPDExitNode(MethodGraph cfg, InsnList insnList) {
+  private void instrumentIPDExitNode(MethodGraph cfg, String labelPrefix, InsnList insnList) {
     Set<MethodBlock> exitPreds = cfg.getExitBlock().getPredecessors();
 
     for (MethodBlock pred : exitPreds) {
       List<AbstractInsnNode> instructions = pred.getInstructions();
       AbstractInsnNode returnInsnNode = this.getReturnInsnNode(instructions);
-      InsnList loggingInsnList = this.getIPDExitNodeLoggingInsnList();
+      InsnList loggingInsnList = this.getIPDExitNodeLoggingInsnList(labelPrefix);
       insnList.insertBefore(returnInsnNode, loggingInsnList);
     }
   }
@@ -335,12 +335,13 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     return new LabelNode(label);
   }
 
-  private InsnList getIPDExitNodeLoggingInsnList() {
+  private InsnList getIPDExitNodeLoggingInsnList(String labelPrefix) {
     InsnList loggingInsnList = new InsnList();
 
     String methodName = "exitAtReturn";
     String methodDescriptor = SubtracesLogger.getMethodDescriptor(methodName);
 
+    loggingInsnList.add(new LdcInsnNode(labelPrefix));
     loggingInsnList
         .add(new MethodInsnNode(Opcodes.INVOKESTATIC, SubtracesLogger.INTERNAL_NAME,
             methodName, methodDescriptor, false));

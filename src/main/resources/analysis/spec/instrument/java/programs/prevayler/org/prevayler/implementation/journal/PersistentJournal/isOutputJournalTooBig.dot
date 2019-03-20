@@ -1,18 +1,18 @@
 digraph isOutputJournalTooBig {
 node [shape=record];
-728602192 [label="L0\lLINENUMBER 118 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalSizeThresholdInBytes : J\lLCONST_0\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
-1763030548 [label="ICONST_1\lGOTO L3\l"];
-772629104 [label="L3\lFRAME SAME1 I\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 118 L4\lIRETURN\lL5\l"];
-579320785 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lL2\lLINENUMBER 119 L2\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.file ()Ljava/io/File;\lINVOKEVIRTUAL java/io/File.length ()J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalSizeThresholdInBytes : J\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLTEval (I)V\lIFLT L1\l"];
-1101450654 [label="L1\lFRAME SAME\lICONST_0\l"];
+1175079221 [label="L3\lFRAME SAME1 I\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.exitDecision (Ljava/lang/String;I)V\lL4\lLINENUMBER 118 L4\lIRETURN\lL5\l"];
+1329237566 [label="L0\lLINENUMBER 118 L0\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalSizeThresholdInBytes : J\lLCONST_0\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig()Z\"\lBIPUSH 0\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFEQEval (I)V\lIFEQ L1\l"];
+1566210014 [label="ICONST_1\lGOTO L3\l"];
+1793185265 [label="ALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._outputJournal : Lorg/prevayler/foundation/DurableOutputStream;\lL2\lLINENUMBER 119 L2\lINVOKEVIRTUAL org/prevayler/foundation/DurableOutputStream.file ()Ljava/io/File;\lINVOKEVIRTUAL java/io/File.length ()J\lALOAD 0\lGETFIELD org/prevayler/implementation/journal/PersistentJournal._journalSizeThresholdInBytes : J\lLCMP\lLDC \"org/prevayler/implementation/journal/PersistentJournal.isOutputJournalTooBig()Z\"\lBIPUSH 1\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.enterDecision (Ljava/lang/String;I)V\lDUP\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/taint/java/groundtruth/SubtracesLogger.logIFLTEval (I)V\lIFLT L1\l"];
+1210372215 [label="L1\lFRAME SAME\lICONST_0\l"];
 entry;
 exit;
-entry -> 728602192;
-728602192 -> 579320785;
-728602192 -> 1101450654;
-1763030548 -> 772629104;
-772629104 -> exit;
-579320785 -> 1763030548;
-579320785 -> 1101450654;
-1101450654 -> 772629104;
+1175079221 -> exit;
+entry -> 1329237566;
+1329237566 -> 1793185265;
+1329237566 -> 1210372215;
+1566210014 -> 1175079221;
+1793185265 -> 1566210014;
+1793185265 -> 1210372215;
+1210372215 -> 1175079221;
 }

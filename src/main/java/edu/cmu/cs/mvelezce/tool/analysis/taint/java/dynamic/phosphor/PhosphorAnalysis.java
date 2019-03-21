@@ -44,8 +44,7 @@ import javax.annotation.Nullable;
 
 public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
 
-  private static final String PHOSPHOR_SCRIPTS_DIR = BaseAdapter.USER_HOME
-      + "/Documents/Programming/Java/Projects/phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
+  private static final String PHOSPHOR_SCRIPTS_DIR = "../phosphor/Phosphor/scripts/run-instrumented/implicit-optimized";
 
   private final PhosphorExecutionAnalysis phosphorExecutionAnalysis;
   private final PhosphorConfigConstraintTracker phosphorConfigConstraintTracker;

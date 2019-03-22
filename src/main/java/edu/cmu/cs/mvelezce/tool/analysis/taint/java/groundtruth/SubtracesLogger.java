@@ -111,6 +111,7 @@ public class SubtracesLogger {
 //    }
   }
 
+  // TODO change name to not collide with public exit decision
 //  private static void exitDecision(String exitingLabel, SubtraceLabel stackLabel) {
 //    Deque<SubtraceLabel> exitingCtx = getCurrentCtx();
 //    SubtraceLabel expectedLabel = new SubtraceLabel(ENTER_DECISION, exitingCtx, exitingLabel);

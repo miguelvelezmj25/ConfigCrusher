@@ -8,6 +8,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
@@ -574,6 +575,20 @@ public class BFPhosphorAnalysisTest {
   public void Prevayler() throws IOException, InterruptedException {
     String programName = PrevaylerAdapter.PROGRAM_NAME;
     Set<String> options = new HashSet<>(PrevaylerAdapter.getListOfOptions());
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
+    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+  }
+
+  @Test
+  public void MeasureDiskOrderedScan() throws IOException, InterruptedException {
+    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    Set<String> options = new HashSet<>(MeasureDiskOrderedScanAdapter.getListOfOptions());
 
     // Program arguments
     String[] args = new String[2];

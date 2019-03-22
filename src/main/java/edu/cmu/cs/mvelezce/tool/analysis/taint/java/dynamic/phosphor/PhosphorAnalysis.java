@@ -10,6 +10,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext2.OrContext2Adapter;
@@ -308,6 +309,11 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
         commandList.add("./prevayler.sh");
         commandList.add(PrevaylerAdapter.PROGRAM_NAME);
         adapter = new PrevaylerAdapter();
+        break;
+      case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
+        commandList.add("./measureDiskOrderedScan.sh");
+        commandList.add(MeasureDiskOrderedScanAdapter.PROGRAM_NAME);
+        adapter = new MeasureDiskOrderedScanAdapter();
         break;
       default:
         throw new RuntimeException("Could not find a phosphor script to run " + programName);

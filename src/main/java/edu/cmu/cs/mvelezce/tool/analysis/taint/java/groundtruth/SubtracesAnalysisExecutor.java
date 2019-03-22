@@ -306,6 +306,7 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
             + BaseAdapter.PATH_SEPARATOR
             + MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH);
         adapter = new MeasureDiskOrderedScanAdapter();
+        ((MeasureDiskOrderedScanAdapter) adapter).preProcess();
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + programName);
@@ -327,4 +328,5 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
 
     return commandList;
   }
+
 }

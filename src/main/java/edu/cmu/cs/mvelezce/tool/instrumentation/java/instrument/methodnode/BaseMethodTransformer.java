@@ -60,10 +60,10 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       }
 
       this.classTransformer.writeClass(classNode);
-//
-//      if (debug) {
-//        this.debugMethods(classNode, methodsToInstrument);
-//      }
+
+      if (debug) {
+        this.debugMethods(classNode, methodsToInstrument);
+      }
     }
   }
 

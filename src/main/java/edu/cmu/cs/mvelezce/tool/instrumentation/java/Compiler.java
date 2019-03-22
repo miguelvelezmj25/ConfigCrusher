@@ -28,6 +28,7 @@ public class Compiler {
     commands.add("mvn");
     commands.add("clean");
     commands.add("compile");
+    commands.add("-DskipTests");
 
     return commands;
   }

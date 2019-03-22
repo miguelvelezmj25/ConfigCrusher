@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.InvalidGraphException;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
@@ -29,11 +31,23 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
   private final String programName;
+  private final Adapter programAdapter;
 
   private SubtracesMethodTransformer(Builder builder)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
     super(new DefaultClassTransformer(builder.classDir), builder.debug);
     this.programName = builder.programName;
+
+    this.programAdapter = this.getProgramAdapter(programName);
+  }
+
+  private Adapter getProgramAdapter(String programName) {
+    switch (programName) {
+      case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
+        return new MeasureDiskOrderedScanAdapter();
+      default:
+        throw new RuntimeException("Could not find a phosphor script to run " + programName);
+    }
   }
 
   @Override
@@ -51,13 +65,59 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     Set<MethodNode> methodsToInstrument = new HashSet<>();
 
     for (MethodNode methodNode : classNode.methods) {
-      // TODO handle this cases
+      // TODO handle these methods
+      if ((classNode.name.equals("com/sleepycat/je/evictor/Evictor") && methodNode.name
+          .equals("getNextTarget"))
+          || (classNode.name.equals("com/sleepycat/je/tree/IN") && methodNode.name
+          .equals("addToMainCache"))) {
+        continue;
+      }
+
+      // TODO handle methods with try catch blocks
       if (!methodNode.tryCatchBlocks.isEmpty()) {
         continue;
       }
 
+      // TODO handle methods with throw instructions
+      boolean hasThrow = false;
       InsnList insnList = methodNode.instructions;
       ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
+
+      while (insnListIter.hasNext()) {
+        AbstractInsnNode insnNode = insnListIter.next();
+
+        if (insnNode.getOpcode() == Opcodes.ATHROW) {
+          hasThrow = true;
+          break;
+        }
+      }
+
+      if (hasThrow) {
+        continue;
+      }
+
+      // TODO handle methods with switch instructions
+      boolean hasSwitch = false;
+      insnList = methodNode.instructions;
+      insnListIter = insnList.iterator();
+
+      while (insnListIter.hasNext()) {
+        AbstractInsnNode insnNode = insnListIter.next();
+        int opcode = insnNode.getOpcode();
+
+        if (opcode == Opcodes.TABLESWITCH || opcode == Opcodes.LOOKUPSWITCH) {
+          hasSwitch = true;
+          break;
+        }
+      }
+
+      if (hasSwitch) {
+        continue;
+      }
+
+      // Check if there is a jump instruction
+      insnList = methodNode.instructions;
+      insnListIter = insnList.iterator();
 
       while (insnListIter.hasNext()) {
         AbstractInsnNode insnNode = insnListIter.next();
@@ -78,7 +138,29 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
       }
     }
 
+    if (this.isMainClass(classNode)) {
+      MethodNode mainMethod = this.getMainMethod(classNode);
+      methodsToInstrument.add(mainMethod);
+    }
+
     return methodsToInstrument;
+  }
+
+  private boolean isMainClass(ClassNode classNode) {
+    String mainClass = MeasureDiskOrderedScanAdapter.MAIN_CLASS;
+    mainClass = mainClass.replaceAll("\\.", "/");
+
+    return classNode.name.equals(mainClass);
+  }
+
+  private MethodNode getMainMethod(ClassNode classNode) {
+    for(MethodNode methodNode : classNode.methods) {
+      if (methodNode.name.equals("main") && methodNode.desc.equals("([Ljava/lang/String;)V")) {
+        return methodNode;
+      }
+    }
+
+    throw new RuntimeException("Could not find main method in " + classNode.name);
   }
 
   @Override
@@ -238,7 +320,8 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
       if (succs.size() < 2) {
         throw new UnsupportedOperationException(
-            "The method block with the jump instruction does not have at least 2 successors. "
+            "In " + methodNode.name
+                + ", the method block with the jump instruction does not have at least 2 successors. "
                 + "Possibly, the control-flow decision has an empty body");
       }
 
@@ -434,7 +517,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     private final String programName;
     private final String classDir;
 
-    private boolean debug = true;
+    private boolean debug = false;
 
     public Builder(String programName, String classDir) {
       this.programName = programName;

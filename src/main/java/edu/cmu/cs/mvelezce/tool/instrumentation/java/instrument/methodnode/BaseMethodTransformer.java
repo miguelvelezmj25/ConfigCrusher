@@ -43,6 +43,10 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
     for (ClassNode classNode : classNodes) {
+      if(!classNode.name.contains("MeasureDiskOrderedScan")) {
+        continue;
+      }
+
       Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
 
       if (methodsToInstrument.isEmpty()) {
@@ -56,10 +60,10 @@ public abstract class BaseMethodTransformer implements MethodTransformer {
       }
 
       this.classTransformer.writeClass(classNode);
-
-      if (debug) {
-        this.debugMethods(classNode, methodsToInstrument);
-      }
+//
+//      if (debug) {
+//        this.debugMethods(classNode, methodsToInstrument);
+//      }
     }
   }
 

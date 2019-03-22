@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.Dynam
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit2.Implicit2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.nesting.NestingAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
@@ -141,6 +142,9 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
   private List<String> buildCommandAsList(Set<String> config) {
     List<String> commandList = new ArrayList<>();
     commandList.add("java");
+    commandList.add("-Xmx12g");
+    commandList.add("-Xms12g");
+    commandList.add("-XX:+UseConcMarkSweepGC");
 //    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");
 
@@ -296,6 +300,12 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
             + BaseAdapter.PATH_SEPARATOR
             + PrevaylerAdapter.CLASS_PATH);
         adapter = new PrevaylerAdapter();
+        break;
+      case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new MeasureDiskOrderedScanAdapter();
         break;
       default:
         throw new RuntimeException("Could not find an adapter for " + programName);

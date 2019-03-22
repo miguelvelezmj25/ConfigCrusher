@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 import edu.cmu.cs.mvelezce.tool.Options;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseInstrumenter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.Compiler;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.Packager;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +49,6 @@ public class SubtracesInstrumenter extends BaseInstrumenter {
 
   @Override
   public void compile() throws IOException, InterruptedException {
-    Compiler.compile(this.getSrcDir());
+    Packager.packageJar(this.getSrcDir());
   }
 }

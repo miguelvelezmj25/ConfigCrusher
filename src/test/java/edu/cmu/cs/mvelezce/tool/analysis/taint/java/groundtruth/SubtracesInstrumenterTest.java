@@ -46,4 +46,19 @@ public class SubtracesInstrumenterTest {
     Instrumenter instrumenter = new SubtracesInstrumenter(programName, srcDir, classDir);
     instrumenter.instrument(args);
   }
+
+  @Test
+  public void instrumentMeasureDiskOrderedScan()
+      throws IOException, InterruptedException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    String programName = "measureDiskOrderedScan";
+    String srcDir = "../performance-mapper-evaluation/instrumented/berkeley-db";
+    String classDir = "../performance-mapper-evaluation/instrumented/berkeley-db/target/classes";
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    Instrumenter instrumenter = new SubtracesInstrumenter(programName, srcDir, classDir);
+    instrumenter.instrument(args);
+  }
 }

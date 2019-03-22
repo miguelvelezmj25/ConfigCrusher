@@ -311,6 +311,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
         adapter = new PrevaylerAdapter();
         break;
       case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
+        commandList.add("sudo");
         commandList.add("./measureDiskOrderedScan.sh");
         commandList.add(MeasureDiskOrderedScanAdapter.PROGRAM_NAME);
         adapter = new MeasureDiskOrderedScanAdapter();

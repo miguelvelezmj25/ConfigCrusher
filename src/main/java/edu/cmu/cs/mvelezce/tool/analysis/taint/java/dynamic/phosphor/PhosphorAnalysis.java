@@ -314,7 +314,6 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
         break;
       case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
         commandList.add("./measureDiskOrderedScan.sh");
-        commandList.add(MeasureDiskOrderedScanAdapter.PROGRAM_NAME);
         adapter = new MeasureDiskOrderedScanAdapter();
         ((MeasureDiskOrderedScanAdapter) adapter).preProcess();
         break;

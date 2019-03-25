@@ -2,6 +2,7 @@ package edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ public class MeasureDiskOrderedScanAdapter extends BaseAdapter {
 
   public static final String PROGRAM_NAME = "measureDiskOrderedScan";
   public static final String MAIN_CLASS = "com.sleepycat.analysis.MeasureDiskOrderedScan";
+  public static final String ORIGINAL_ROOT_DIR = "../performance-mapper-evaluation/original/berkeley-db";
   public static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/berkeley-db/target/classes";
   public static final String INSTRUMENTED_CLASS_PATH = "../performance-mapper-evaluation/instrumented/berkeley-db/target/classes";
 
@@ -44,16 +46,38 @@ public class MeasureDiskOrderedScanAdapter extends BaseAdapter {
   }
 
   public void preProcess() {
+    ProcessBuilder builder = new ProcessBuilder();
+
+    List<String> commandList = new ArrayList<>();
+    commandList.add("sudo");
+    commandList.add("./clean.sh");
+    builder.command(commandList);
+    builder.directory(new File(ORIGINAL_ROOT_DIR));
+
     try {
-      this.removeDir();
-      this.makeDir();
-      this.sync();
-      this.clearCache();
+      Process process = builder.start();
+
+      Helper.processOutput(process);
+      Helper.processError(process);
+
+      process.waitFor();
     }
     catch (IOException | InterruptedException e) {
-      throw new RuntimeException("Could not create the tmp folder to run " + PROGRAM_NAME);
+      System.err.println("Could not clear the cache before running " + PROGRAM_NAME);
     }
   }
+
+//  public void preProcess() {
+//    try {
+//      this.removeDir();
+//      this.makeDir();
+//      this.sync();
+//      this.clearCache();
+//    }
+//    catch (IOException | InterruptedException e) {
+//      throw new RuntimeException("Could not create the tmp folder to run " + PROGRAM_NAME);
+//    }
+//  }
 
   private void clearCache() {
     List<String> commandList = new ArrayList<>();

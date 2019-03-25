@@ -45,7 +45,40 @@ public class MeasureDiskOrderedScanAdapter extends BaseAdapter {
     this.execute(MeasureDiskOrderedScanMain.MEASURE_DISK_ORDERED_SCAN_MAIN, newArgs);
   }
 
+//  public void preProcess() {
+//    ProcessBuilder builder = new ProcessBuilder();
+//
+//    List<String> commandList = new ArrayList<>();
+//    commandList.add("sudo");
+//    commandList.add("./clean.sh");
+//    builder.command(commandList);
+//    builder.directory(new File(ORIGINAL_ROOT_DIR));
+//
+//    try {
+//      Process process = builder.start();
+//
+//      Helper.processOutput(process);
+//      Helper.processError(process);
+//
+//      process.waitFor();
+//    }
+//    catch (IOException | InterruptedException e) {
+//      System.err.println("Could not clear the cache before running " + PROGRAM_NAME);
+//    }
+//  }
+
   public void preProcess() {
+    try {
+      this.removeDir();
+      this.makeDir();
+      this.clean();
+    }
+    catch (IOException | InterruptedException e) {
+      throw new RuntimeException("Could not create the tmp folder to run " + PROGRAM_NAME);
+    }
+  }
+
+  private void clean() throws IOException, InterruptedException {
     ProcessBuilder builder = new ProcessBuilder();
 
     List<String> commandList = new ArrayList<>();
@@ -54,51 +87,12 @@ public class MeasureDiskOrderedScanAdapter extends BaseAdapter {
     builder.command(commandList);
     builder.directory(new File(ORIGINAL_ROOT_DIR));
 
-    try {
-      Process process = builder.start();
+    Process process = builder.start();
 
-      Helper.processOutput(process);
-      Helper.processError(process);
+    Helper.processOutput(process);
+    Helper.processError(process);
 
-      process.waitFor();
-    }
-    catch (IOException | InterruptedException e) {
-      System.err.println("Could not clear the cache before running " + PROGRAM_NAME);
-    }
-  }
-
-//  public void preProcess() {
-//    try {
-//      this.removeDir();
-//      this.makeDir();
-//      this.sync();
-//      this.clearCache();
-//    }
-//    catch (IOException | InterruptedException e) {
-//      throw new RuntimeException("Could not create the tmp folder to run " + PROGRAM_NAME);
-//    }
-//  }
-
-  private void clearCache() {
-    List<String> commandList = new ArrayList<>();
-    commandList.add("echo");
-    commandList.add("3");
-    commandList.add(">");
-    commandList.add("/proc/sys/vm/drop_caches");
-
-    try {
-      runCommand(commandList);
-    }
-    catch (IOException | InterruptedException e) {
-      System.err.println("Could not clear the cache before running " + PROGRAM_NAME);
-    }
-  }
-
-  private void sync() throws IOException, InterruptedException {
-    List<String> commandList = new ArrayList<>();
-    commandList.add("sync");
-
-    runCommand(commandList);
+    process.waitFor();
   }
 
   private void makeDir() throws IOException, InterruptedException {

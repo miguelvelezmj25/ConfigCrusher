@@ -193,6 +193,8 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
     List<String> commandList = this.buildCommandAsList(config);
     builder.command(commandList);
     builder.directory(new File(PHOSPHOR_SCRIPTS_DIR));
+
+    System.out.println("Running program");
     Process process = builder.start();
 
     Helper.processOutput(process);

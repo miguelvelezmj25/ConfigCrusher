@@ -131,6 +131,8 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
 
     List<String> commandList = this.buildCommandAsList(config);
     builder.command(commandList);
+
+    System.out.println("Running program");
     Process process = builder.start();
 
     Helper.processOutput(process);
@@ -141,6 +143,7 @@ public class SubtracesAnalysisExecutor extends BaseDynamicAnalysis<Map<Set<Strin
 
   private List<String> buildCommandAsList(Set<String> config) {
     List<String> commandList = new ArrayList<>();
+    commandList.add("time");
     commandList.add("java");
     commandList.add("-Xmx12g");
     commandList.add("-Xms12g");

@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.groundtruth;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dummy.DummyAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.InvalidGraphException;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
@@ -46,7 +47,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
       case MeasureDiskOrderedScanAdapter.PROGRAM_NAME:
         return new MeasureDiskOrderedScanAdapter();
       default:
-        throw new RuntimeException("Could not find a phosphor script to run " + programName);
+        return new DummyAdapter();
     }
   }
 
@@ -65,13 +66,13 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     Set<MethodNode> methodsToInstrument = new HashSet<>();
 
     for (MethodNode methodNode : classNode.methods) {
-      // TODO handle these methods
-      if ((classNode.name.equals("com/sleepycat/je/evictor/Evictor") && methodNode.name
-          .equals("getNextTarget"))
-          || (classNode.name.equals("com/sleepycat/je/tree/IN") && methodNode.name
-          .equals("addToMainCache"))) {
-        continue;
-      }
+//      // TODO handle these methods
+//      if ((classNode.name.equals("com/sleepycat/je/evictor/Evictor") && methodNode.name
+//          .equals("getNextTarget"))
+//          || (classNode.name.equals("com/sleepycat/je/tree/IN") && methodNode.name
+//          .equals("addToMainCache"))) {
+//        continue;
+//      }
 
       // TODO handle methods with try catch blocks
       if (!methodNode.tryCatchBlocks.isEmpty()) {
@@ -147,14 +148,27 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   }
 
   private boolean isMainClass(ClassNode classNode) {
-    String mainClass = MeasureDiskOrderedScanAdapter.MAIN_CLASS;
-    mainClass = mainClass.replaceAll("\\.", "/");
+    if (programAdapter.getMainClass().isEmpty()) {
 
-    return classNode.name.equals(mainClass);
+      try {
+        getMainMethod(classNode);
+
+        return true;
+      }
+      catch (RuntimeException re) {
+        return false;
+      }
+    }
+    else {
+      String mainClass = programAdapter.getMainClass();
+      mainClass = mainClass.replaceAll("\\.", "/");
+
+      return classNode.name.equals(mainClass);
+    }
   }
 
   private MethodNode getMainMethod(ClassNode classNode) {
-    for(MethodNode methodNode : classNode.methods) {
+    for (MethodNode methodNode : classNode.methods) {
       if (methodNode.name.equals("main") && methodNode.desc.equals("([Ljava/lang/String;)V")) {
         return methodNode;
       }

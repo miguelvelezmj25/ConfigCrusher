@@ -66,13 +66,23 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
     Set<MethodNode> methodsToInstrument = new HashSet<>();
 
     for (MethodNode methodNode : classNode.methods) {
-//      // TODO handle these methods
-//      if ((classNode.name.equals("com/sleepycat/je/evictor/Evictor") && methodNode.name
-//          .equals("getNextTarget"))
-//          || (classNode.name.equals("com/sleepycat/je/tree/IN") && methodNode.name
-//          .equals("addToMainCache"))) {
-//        continue;
-//      }
+      if (this.isMainClass(classNode)) {
+        MethodNode mainMethod = this.getMainMethod(classNode);
+        methodsToInstrument.add(mainMethod);
+
+        continue;
+      }
+
+      // TODO handle these methods
+      if (classNode.name.equals("com/sleepycat/je/tree/IN") && methodNode.name
+          .equals("addToMainCache")) {
+        continue;
+      }
+
+      if (classNode.name.equals("com/sleepycat/je/evictor/Evictor") && methodNode.name
+          .equals("getNextTarget")) {
+        continue;
+      }
 
       // TODO handle methods with try catch blocks
       if (!methodNode.tryCatchBlocks.isEmpty()) {

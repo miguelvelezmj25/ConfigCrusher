@@ -100,7 +100,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
           .fromConfig(configToExecute, this.getOptions());
       exploredConfigConstraints.add(configConstraint);
       Set<ConfigConstraint> satisfiedConfigConstraintsByConfig = this.configConstraintAnalyzer
-          .getSatisfiedConfigConstraintsByConfig(configConstraint);
+          .getSatisfiedConstraintsByConfig(configConstraint);
       satisfiedConfigConstraints.addAll(satisfiedConfigConstraintsByConfig);
 
       this.runPhosphorAnalysis(configToExecute);

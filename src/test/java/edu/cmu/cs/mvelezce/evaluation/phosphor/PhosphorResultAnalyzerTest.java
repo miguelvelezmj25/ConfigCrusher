@@ -12,6 +12,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorEx
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample6.PhosphorExample6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -146,6 +147,15 @@ public class PhosphorResultAnalyzerTest {
   public void example6() throws IOException, InterruptedException {
     String programName = PhosphorExample6Adapter.PROGRAM_NAME;
     List<String> options = PhosphorExample6Adapter.getListOfOptions();
+
+    PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
+    analyzer.analyze();
+  }
+
+  @Test
+  public void trivial() throws IOException, InterruptedException {
+    String programName = TrivialAdapter.PROGRAM_NAME;
+    List<String> options = TrivialAdapter.getListOfOptions();
 
     PhosphorResultAnalyzer analyzer = new PhosphorResultAnalyzer(programName, options);
     analyzer.analyze();

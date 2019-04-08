@@ -2,21 +2,19 @@
   {
     "config": [],
     "trace": [
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0",
       "FALSE",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0-1",
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1-1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1",
       "FALSE",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1-1",
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -24,30 +22,25 @@
       "A"
     ],
     "trace": [
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0",
       "TRUE",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0-1",
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1-1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1",
       "FALSE",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1-1",
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "LABEL [LABEL [LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -55,24 +48,21 @@
       "B"
     ],
     "trace": [
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0",
       "FALSE",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0-1",
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1-1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1",
       "TRUE",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1-1",
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2"
     ]
   },
   {
@@ -81,24 +71,21 @@
       "B"
     ],
     "trace": [
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0",
       "TRUE",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0-1",
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1-1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.0",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1",
       "TRUE",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1-1",
-      "LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "TRUE",
-      "LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2",
       "FALSE",
-      "LABEL [LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1, LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [LABEL [] Enter edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1",
-      "LABEL [] Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2-1"
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/SimpleForExample.main([Ljava/lang/String;)V.2"
     ]
   }
 ]

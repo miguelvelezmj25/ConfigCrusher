@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class ConfigConstraint extends PartialConfig {
 
-  static ConfigConstraint fromConfig(Set<String> config, Set<String> options) {
+  public static ConfigConstraint fromConfig(Set<String> config, Set<String> options) {
     ConfigConstraint configConstraint = new ConfigConstraint();
 
     for (String option : options) {

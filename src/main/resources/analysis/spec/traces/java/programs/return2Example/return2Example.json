@@ -1,0 +1,22 @@
+[
+  {
+    "config": [],
+    "trace": [
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Return2Example.main([Ljava/lang/String;)V.0",
+      "TRUE",
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Return2Example.main([Ljava/lang/String;)V.1",
+      "TRUE",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Return2Example.main([Ljava/lang/String;)V"
+    ]
+  },
+  {
+    "config": [
+      "A"
+    ],
+    "trace": [
+      "LABEL Enter edu/cmu/cs/mvelezce/analysis/Return2Example.main([Ljava/lang/String;)V.0",
+      "FALSE",
+      "LABEL Exit edu/cmu/cs/mvelezce/analysis/Return2Example.main([Ljava/lang/String;)V"
+    ]
+  }
+]

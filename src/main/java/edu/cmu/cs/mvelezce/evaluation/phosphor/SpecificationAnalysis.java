@@ -16,6 +16,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.multifacets.MultiFacetsAdap
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -241,7 +242,7 @@ public class SpecificationAnalysis extends BaseDynamicRegionAnalysis<DecisionInf
   private List<String> buildCommandAsList(Set<String> config) {
     List<String> commandList = new ArrayList<>();
     commandList.add("java");
-    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
+//    commandList.add("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005");
     commandList.add("-cp");
 
     String programName = this.getProgramName();
@@ -286,6 +287,12 @@ public class SpecificationAnalysis extends BaseDynamicRegionAnalysis<DecisionInf
             + BaseAdapter.PATH_SEPARATOR
             + MultiFacetsAdapter.INSTRUMENTED_CLASS_PATH);
         adapter = new MultiFacetsAdapter();
+        break;
+      case TrivialAdapter.PROGRAM_NAME:
+        commandList.add(ccClasspath
+            + BaseAdapter.PATH_SEPARATOR
+            + TrivialAdapter.INSTRUMENTED_CLASS_PATH);
+        adapter = new TrivialAdapter();
         break;
       default:
         if (this.mainClass != null) {

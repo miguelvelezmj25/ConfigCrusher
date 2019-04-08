@@ -19,6 +19,7 @@ public class SubtracesLogger {
   private static final String TRUE = "TRUE";
   private static final List<String> TRACE = new ArrayList<>(200);
   private static final Map<String, String> METHODS_TO_DESCRIPTORS = new HashMap<>();
+  private static final Map<SubtraceLabel, Integer> LABELS_TO_COUNT = new HashMap<>();
 
   static final String INTERNAL_NAME = Type.getInternalName(SubtracesLogger.class);
   static final String RESULTS_FILE = "results.ser";
@@ -55,31 +56,29 @@ public class SubtracesLogger {
     }
   }
 
-  // DO NOT DO STRING CONCATENATION
+  // TODO DO NOT DO STRING CONCATENATION
   public static void enterDecision(String labelPrefix, int decisionCount) {
-    String labelID = getLabelID(labelPrefix, decisionCount);
-    SubtraceLabel subtraceLabel = new SubtraceLabel(ENTER_DECISION, labelID);
-    TRACE.add(subtraceLabel.toString());
+    throw new UnsupportedOperationException("Add count");
+//    String labelID = getLabelID(labelPrefix, decisionCount);
+//    SubtraceLabel subtraceLabel = new SubtraceLabel(ENTER_DECISION, labelID);
+//    TRACE.add(subtraceLabel.toString());
   }
 
+  // TODO DO NOT DO STRING CONCATENATION
   public static void exitDecision(String labelPrefix, int decisionCount) {
     String exitingLabel = getLabelID(labelPrefix, decisionCount);
     exiting(exitingLabel);
   }
 
   public static void exitAtReturn(String labelPrefix) {
-    throw new UnsupportedOperationException("Implement");
-//    while (!STACK.isEmpty() && STACK.peekFirst().getDecisionLabel().startsWith(labelPrefix + ".")) {
-//      SubtraceLabel stackLabel = STACK.removeFirst();
-//      String exitingLabel = stackLabel.getDecisionLabel();
-//      exitDecision(exitingLabel, stackLabel);
-//    }
+    exiting(labelPrefix);
   }
 
   // TODO change name to not collide with public exit decision
   private static void exiting(String exitingLabel) {
-    SubtraceLabel subtraceLabel = new SubtraceLabel(EXIT_DECISION, exitingLabel);
-    TRACE.add(subtraceLabel.toString());
+    throw new UnsupportedOperationException("Add count");
+//    SubtraceLabel subtraceLabel = new SubtraceLabel(EXIT_DECISION, exitingLabel);
+//    TRACE.add(subtraceLabel.toString());
   }
 
   private static String getLabelID(String labelPrefix, int decisionCount) {

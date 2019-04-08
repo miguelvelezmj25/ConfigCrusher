@@ -1,5 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.cc.DecisionTaints;
 import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.Options;
@@ -65,11 +67,11 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
 
   @Override
   public Set<ConfigConstraint> analyze() throws IOException, InterruptedException {
-    this.runConstraintAnalysis();
-    throw new UnsupportedOperationException("Implement");
+    return this.runConstraintAnalysis();
   }
 
-  private void runConstraintAnalysis() throws IOException, InterruptedException {
+  private Set<ConfigConstraint> runConstraintAnalysis() throws IOException, InterruptedException {
+    Set<ConfigConstraint> constraints = new HashSet<>();
     Set<String> options = this.getOptions();
     Set<ConfigConstraint> configConstraintsToSatisfy = new HashSet<>();
     Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
@@ -88,6 +90,7 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
 
       Set<ConfigConstraint> analysisConstraints = this.phosphorConstraintCalculator
           .deriveConstraints(results, config);
+      constraints.addAll(analysisConstraints);
 
       configConstraintsToSatisfy.addAll(analysisConstraints);
       configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
@@ -99,7 +102,7 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
       config = this.getNextConfig(configsToRun);
     }
 
-    System.out.println();
+    return constraints;
   }
 
   @Nullable
@@ -254,17 +257,25 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
   }
 
   @Override
-  public void writeToFile(Set<ConfigConstraint> value) {
-    throw new UnsupportedOperationException("Implement");
+  public void writeToFile(Set<ConfigConstraint> constraints) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+    String outputFile = this.outputDir() + "/" + this.getProgramName() + Options.DOT_JSON;
+    File file = new File(outputFile);
+    file.getParentFile().mkdirs();
+    mapper.writeValue(file, constraints);
   }
 
   @Override
-  public Set<ConfigConstraint> readFromFile(File file) {
-    throw new UnsupportedOperationException("Implement");
+  public Set<ConfigConstraint> readFromFile(File file) throws IOException {
+    ObjectMapper mapper = new ObjectMapper();
+
+    return mapper
+        .readValue(file, new TypeReference<Set<ConfigConstraint>>() {
+        });
   }
 
   @Override
   public String outputDir() {
-    return DIRECTORY + "/" + this.getProgramName() + "/cc";
+    return DIRECTORY + "/" + this.getProgramName() + "/cc/constraints";
   }
 }

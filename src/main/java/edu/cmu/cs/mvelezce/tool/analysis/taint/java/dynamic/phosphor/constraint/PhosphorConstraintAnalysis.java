@@ -33,6 +33,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces6.Subtraces6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces7.Subtraces7Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.throwIf.ThrowIfAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext1.VariabilityContext1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.variabilityContext2.VariabilityContext2Adapter;
@@ -234,6 +235,10 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
       case TrivialAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new TrivialAdapter();
+        break;
+      case ThrowIfAdapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new ThrowIfAdapter();
         break;
       case SoundAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");

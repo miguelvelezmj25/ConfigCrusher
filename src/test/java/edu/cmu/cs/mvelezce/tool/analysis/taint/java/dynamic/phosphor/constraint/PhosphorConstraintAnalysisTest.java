@@ -1,8 +1,10 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample4.SimpleForExample4Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.throwIf.ThrowIfAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import java.io.IOException;
 import java.util.HashSet;
@@ -61,6 +63,50 @@ public class PhosphorConstraintAnalysisTest {
   public void SimpleForExample4() throws IOException, InterruptedException {
     String programName = SimpleForExample4Adapter.PROGRAM_NAME;
     List<String> options = SimpleForExample4Adapter.getListOfOptions();
+    Set<String> initialConfig = new HashSet<>();
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    PhosphorConstraintAnalysis analysis = new PhosphorConstraintAnalysis(programName, options,
+        initialConfig);
+    Set<ConfigConstraint> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new PhosphorConstraintAnalysis(programName);
+    Set<ConfigConstraint> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void MeasureDiskOrderedScan() throws IOException, InterruptedException {
+    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = MeasureDiskOrderedScanAdapter.getListOfOptions();
+    Set<String> initialConfig = new HashSet<>();
+
+    // Program arguments
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    PhosphorConstraintAnalysis analysis = new PhosphorConstraintAnalysis(programName, options,
+        initialConfig);
+    Set<ConfigConstraint> write = analysis.analyze(args);
+
+    args = new String[0];
+    analysis = new PhosphorConstraintAnalysis(programName);
+    Set<ConfigConstraint> read = analysis.analyze(args);
+
+    Assert.assertEquals(write, read);
+  }
+
+  @Test
+  public void ThrowIf() throws IOException, InterruptedException {
+    String programName = ThrowIfAdapter.PROGRAM_NAME;
+    List<String> options = ThrowIfAdapter.getListOfOptions();
     Set<String> initialConfig = new HashSet<>();
 
     // Program arguments

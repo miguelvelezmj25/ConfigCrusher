@@ -40,6 +40,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.Nullable;
 
 public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigConstraint>> {
 
@@ -79,37 +80,35 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
       ConfigConstraint configConstraint = ConfigConstraint.fromConfig(config, options);
       exploredConfigConstraints.add(configConstraint);
       Set<ConfigConstraint> satisfiedConfigConstraintsByConfig = this.configConstraintAnalyzer
-          .getSatisfiedConstraintsByConfig(configConstraint);
+          .getConstraintsSatisfiedByConfig(configConstraint);
       satisfiedConfigConstraints.addAll(satisfiedConfigConstraintsByConfig);
 
       this.runPhosphorAnalysis(config);
       Set<DecisionTaints> results = this.phosphorConstraintExecutionAnalysis.getResults();
 
-      this.phosphorConstraintCalculator.deriveConstraints(results, config);
+      Set<ConfigConstraint> analysisConstraints = this.phosphorConstraintCalculator
+          .deriveConstraints(results, config);
 
-//      this.phosphorConfigConstraintTracker
-//          .deriveConstraints(configToExecute, sinksToAnalysisTaints);
-//
-//      Set<ConfigConstraint> analysisConfigConstraints = this.phosphorConfigConstraintTracker
-//          .getConfigConstraints();
-//      configConstraintsToSatisfy.addAll(analysisConfigConstraints);
-//      configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
-//
-//      // TODO pick next config if we still need to sample something
-//      Set<Set<String>> configsToRun = this.configConstraintAnalyzer
-//          .getConfigsThatSatisfyConfigConstraints(configConstraintsToSatisfy,
-//              exploredConfigConstraints);
-//
-//      configToExecute = this.getConfigToExecute(configsToRun);
-      throw new UnsupportedOperationException("Implement");
+      configConstraintsToSatisfy.addAll(analysisConstraints);
+      configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
+
+      Set<Set<String>> configsToRun = this.configConstraintAnalyzer
+          .getConfigsThatSatisfyConfigConstraints(configConstraintsToSatisfy,
+              exploredConfigConstraints);
+
+      config = this.getNextConfig(configsToRun);
     }
+
+    System.out.println();
   }
 
-  private void method(Set<DecisionTaints> results, Set<String> config) {
-    for(DecisionTaints decisionTaints : results) {
-
+  @Nullable
+  private Set<String> getNextConfig(Set<Set<String>> configsToRun) {
+    if (configsToRun.isEmpty()) {
+      return null;
     }
 
+    return configsToRun.iterator().next();
   }
 
   private void runPhosphorAnalysis(Set<String> config) throws IOException, InterruptedException {

@@ -13,7 +13,7 @@ public class ConfigConstraintAnalyzer {
     this.options = options;
   }
 
-  public Set<ConfigConstraint> getSatisfiedConstraintsByConfig(
+  public Set<ConfigConstraint> getConstraintsSatisfiedByConfig(
       ConfigConstraint executedConfigConstraint) {
     Set<ConfigConstraint> satisfiedConfigConstraints = new HashSet<>();
 
@@ -35,35 +35,34 @@ public class ConfigConstraintAnalyzer {
     return satisfiedConfigConstraints;
   }
 
-  Set<Set<String>> getConfigsThatSatisfyConfigConstraints(
+  public Set<Set<String>> getConfigsThatSatisfyConfigConstraints(
       Set<ConfigConstraint> configConstraintsToSatisfy,
       Set<ConfigConstraint> satisfiedConfigConstraints) {
-    throw new UnsupportedOperationException("Implement");
-//    if (configConstraintsToSatisfy.isEmpty()) {
-//      return new HashSet<>();
-//    }
+    if (configConstraintsToSatisfy.isEmpty()) {
+      return new HashSet<>();
+    }
+
+    Set<Set<String>> configs = new HashSet<>();
+    Set<String> config = configConstraintsToSatisfy.iterator().next().toConfig();
+    configs.add(config);
+
+//    List<String> constraintsToSatisfy = this.getStringConstraints(configConstraintsToSatisfy);
+//    List<String> executedConfigConstraints = this.getStringConstraints(satisfiedConfigConstraints);
+//    executedConfigConstraints = this.negateConstraints(executedConfigConstraints);
+//
+//    List<String> constraints = new ArrayList<>(constraintsToSatisfy);
+//    constraints.addAll(executedConfigConstraints);
+//
+//    Set<Set<Set<String>>> satisfiableConfigsSets = MinConfigsGenerator
+//        .getSatConfigs(this.options, constraints);
 //
 //    Set<Set<String>> configs = new HashSet<>();
-//    Set<String> config = configConstraintsToSatisfy.iterator().next().toConfig();
-//    configs.add(config);
 //
-////    List<String> constraintsToSatisfy = this.getStringConstraints(configConstraintsToSatisfy);
-////    List<String> executedConfigConstraints = this.getStringConstraints(satisfiedConfigConstraints);
-////    executedConfigConstraints = this.negateConstraints(executedConfigConstraints);
-////
-////    List<String> constraints = new ArrayList<>(constraintsToSatisfy);
-////    constraints.addAll(executedConfigConstraints);
-////
-////    Set<Set<Set<String>>> satisfiableConfigsSets = MinConfigsGenerator
-////        .getSatConfigs(this.options, constraints);
-////
-////    Set<Set<String>> configs = new HashSet<>();
-////
-////    for (Set<Set<String>> satisfiableConfigs : satisfiableConfigsSets) {
-////      configs.addAll(satisfiableConfigs);
-////    }
-////
-//    return configs;
+//    for (Set<Set<String>> satisfiableConfigs : satisfiableConfigsSets) {
+//      configs.addAll(satisfiableConfigs);
+//    }
+//
+    return configs;
   }
 
 //  Set<Set<String>> getConfigsThatSatisfyConfigConstraints(

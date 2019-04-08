@@ -4,7 +4,6 @@ import edu.cmu.cs.mvelezce.tool.Helper;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
-import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.ifOr2.IfOr2Adapter;
@@ -100,7 +99,7 @@ public class PhosphorAnalysis extends BaseDynamicRegionAnalysis<SinkData> {
           .fromConfig(configToExecute, this.getOptions());
       exploredConfigConstraints.add(configConstraint);
       Set<ConfigConstraint> satisfiedConfigConstraintsByConfig = this.configConstraintAnalyzer
-          .getSatisfiedConstraintsByConfig(configConstraint);
+          .getConstraintsSatisfiedByConfig(configConstraint);
       satisfiedConfigConstraints.addAll(satisfiedConfigConstraintsByConfig);
 
       this.runPhosphorAnalysis(configToExecute);

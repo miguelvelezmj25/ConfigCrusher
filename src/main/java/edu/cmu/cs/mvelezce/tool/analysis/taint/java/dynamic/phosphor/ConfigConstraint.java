@@ -14,7 +14,7 @@ public class ConfigConstraint extends PartialConfig {
     return configConstraint;
   }
 
-  boolean isSubConstraintOf(ConfigConstraint configConstraint) {
+  public boolean isSubConstraintOf(ConfigConstraint configConstraint) {
     return this.isSubPartialConfigOf(configConstraint);
   }
 

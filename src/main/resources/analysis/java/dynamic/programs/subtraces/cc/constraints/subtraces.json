@@ -32,15 +32,5 @@
       "A": true,
       "C": true
     }
-  },
-  {
-    "partialConfig": {
-      "B": true
-    }
-  },
-  {
-    "partialConfig": {
-      "A": true
-    }
   }
 ]

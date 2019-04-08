@@ -69,8 +69,33 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
 
   @Override
   public Set<ConfigConstraint> analyze() throws IOException, InterruptedException {
-    // TODO optimize results, for example, if one constraint implies the other, remove the other.
-    return this.runConstraintAnalysis();
+    Set<ConfigConstraint> constraints = this.runConstraintAnalysis();
+    return this.getSimplifiedConstraints(constraints);
+  }
+
+  private Set<ConfigConstraint> getSimplifiedConstraints(Set<ConfigConstraint> constraints) {
+    Set<ConfigConstraint> simplifiedConstraints = new HashSet<>();
+
+    for (ConfigConstraint candidateConstraintToAdd : constraints) {
+      boolean add = true;
+
+      for (ConfigConstraint constraint : constraints) {
+        if (candidateConstraintToAdd.equals(constraint)) {
+          continue;
+        }
+
+        if (candidateConstraintToAdd.isSubConstraintOf(constraint)) {
+          add = false;
+          break;
+        }
+      }
+
+      if (add) {
+        simplifiedConstraints.add(candidateConstraintToAdd);
+      }
+    }
+
+    return simplifiedConstraints;
   }
 
   private Set<ConfigConstraint> runConstraintAnalysis() throws IOException, InterruptedException {

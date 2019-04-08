@@ -25,6 +25,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorEx
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample8.PhosphorExample8Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample4.SimpleForExample4Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleForExample5Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sound.SoundAdapter;
@@ -67,6 +68,7 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
 
   @Override
   public Set<ConfigConstraint> analyze() throws IOException, InterruptedException {
+    // TODO optimize results, for example, if one constraint implies the other, remove the other.
     return this.runConstraintAnalysis();
   }
 
@@ -168,6 +170,10 @@ public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigCo
       case SimpleForExample2Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new SimpleForExample2Adapter();
+        break;
+      case SimpleForExample4Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new SimpleForExample4Adapter();
         break;
       case SimpleForExample5Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");

@@ -7,6 +7,7 @@ import edu.columbia.cs.psl.phosphor.runtime.Taint;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.Nullable;
 
 public class PhosphorConstraintCalculator {
 
@@ -60,7 +61,7 @@ public class PhosphorConstraintCalculator {
   }
 
   private Set<String> getContextTaints(DecisionTaints decisionTaints) {
-    Taint contextTaintObject = decisionTaints.getExecCtxTaints();
+    @Nullable Taint contextTaintObject = decisionTaints.getExecCtxTaints();
     Set<String> contextTaints = new HashSet<>();
 
     if (contextTaintObject != null) {

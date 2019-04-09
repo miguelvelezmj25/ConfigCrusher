@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint;
 
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.PhosphorAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample4.SimpleForExample4Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
@@ -26,15 +27,14 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorConstraintAnalysis analysis = new PhosphorConstraintAnalysis(programName, options,
-        initialConfig);
-    Set<ConfigConstraint> write = analysis.analyze(args);
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
 
     args = new String[0];
-    analysis = new PhosphorConstraintAnalysis(programName);
-    Set<ConfigConstraint> read = analysis.analyze(args);
+    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
-    Assert.assertEquals(write, read);
+    Assert.assertFalse(read.isEmpty());
   }
 
   @Test
@@ -48,15 +48,14 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorConstraintAnalysis analysis = new PhosphorConstraintAnalysis(programName, options,
-        initialConfig);
-    Set<ConfigConstraint> write = analysis.analyze(args);
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
 
     args = new String[0];
-    analysis = new PhosphorConstraintAnalysis(programName);
-    Set<ConfigConstraint> read = analysis.analyze(args);
+    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
-    Assert.assertEquals(write, read);
+    Assert.assertFalse(read.isEmpty());
   }
 
   @Test
@@ -70,15 +69,14 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorConstraintAnalysis analysis = new PhosphorConstraintAnalysis(programName, options,
-        initialConfig);
-    Set<ConfigConstraint> write = analysis.analyze(args);
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
 
     args = new String[0];
-    analysis = new PhosphorConstraintAnalysis(programName);
-    Set<ConfigConstraint> read = analysis.analyze(args);
+    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
-    Assert.assertEquals(write, read);
+    Assert.assertFalse(read.isEmpty());
   }
 
   @Test
@@ -92,15 +90,14 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorConstraintAnalysis analysis = new PhosphorConstraintAnalysis(programName, options,
-        initialConfig);
-    Set<ConfigConstraint> write = analysis.analyze(args);
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
 
     args = new String[0];
-    analysis = new PhosphorConstraintAnalysis(programName);
-    Set<ConfigConstraint> read = analysis.analyze(args);
+    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
-    Assert.assertEquals(write, read);
+    Assert.assertFalse(read.isEmpty());
   }
 
   @Test
@@ -114,14 +111,13 @@ public class PhosphorConstraintAnalysisTest {
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    PhosphorConstraintAnalysis analysis = new PhosphorConstraintAnalysis(programName, options,
-        initialConfig);
-    Set<ConfigConstraint> write = analysis.analyze(args);
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
 
     args = new String[0];
-    analysis = new PhosphorConstraintAnalysis(programName);
-    Set<ConfigConstraint> read = analysis.analyze(args);
+    PhosphorConstraintAnalysis constraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    Set<ConfigConstraint> read = constraintAnalysis.analyze(args);
 
-    Assert.assertEquals(write, read);
+    Assert.assertFalse(read.isEmpty());
   }
 }

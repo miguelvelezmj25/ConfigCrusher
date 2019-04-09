@@ -13,11 +13,11 @@ public class PhosphorConstraintCalculator {
 
   private final List<String> options;
 
-  PhosphorConstraintCalculator(List<String> options) {
+  public PhosphorConstraintCalculator(List<String> options) {
     this.options = options;
   }
 
-  Set<ConfigConstraint> deriveConstraints(Set<DecisionTaints> results, Set<String> config) {
+  public Set<ConfigConstraint> deriveConstraints(Set<DecisionTaints> results, Set<String> config) {
     Set<ConfigConstraint> constraints = new HashSet<>();
 
     for (DecisionTaints decisionTaints : results) {

@@ -20,11 +20,11 @@ public class PhosphorConstraintExecutionAnalysis {
 
   private final String programName;
 
-  PhosphorConstraintExecutionAnalysis(String programName) {
+  public PhosphorConstraintExecutionAnalysis(String programName) {
     this.programName = programName;
   }
 
-  Set<DecisionTaints> getResults() throws IOException {
+  public Set<DecisionTaints> getResults() throws IOException {
     String dir = PHOSPHOR_OUTPUT_DIR + "/" + programName;
     Collection<File> serializedFiles = this.getSerializedFiles(dir);
 

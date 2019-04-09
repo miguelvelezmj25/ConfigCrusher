@@ -382,9 +382,10 @@ public class PhosphorResultAnalyzer {
 
   private Map<JavaRegion, SinkData> readPhosphorResults()
       throws IOException, InterruptedException {
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(this.programName);
-    String[] args = new String[0];
-    return analysis.analyze(args);
+    throw new UnsupportedOperationException("The phosphor analysis does not return anything anymore.");
+//    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(this.programName);
+//    String[] args = new String[0];
+//    return analysis.analyze(args);
   }
 
 }

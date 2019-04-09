@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
@@ -53,22 +54,16 @@ public class BFPhosphorAnalysisTest {
 
       try {
         String mainClass = AllDynamicAdapter.MAIN_PACKAGE + "." + programName;
-        Set<String> options = new HashSet<>(AllDynamicAdapter.getListOfOptions());
+        List<String> options = AllDynamicAdapter.getListOfOptions();
 
         String[] args = new String[1];
 //        String[] args = new String[2];
         args[0] = "-saveres";
 //        args[1] = "-delres";
 
-        DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, mainClass,
+        BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, mainClass,
             options);
-        Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-        args = new String[0];
-        analysis = new BFPhosphorAnalysis(programName);
-        Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-        Assert.assertEquals(write, read);
+        analysis.analyze(args);
       }
       catch (Exception e) {
         programsWithErrors.add(programName);
@@ -84,519 +79,393 @@ public class BFPhosphorAnalysisTest {
   @Test
   public void RunningExample() throws IOException, InterruptedException {
     String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(DynamicRunningExampleAdapter.getListOfOptions());
+    List<String> options = DynamicRunningExampleAdapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void Subtraces() throws IOException, InterruptedException {
     String programName = SubtracesAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(SubtracesAdapter.getListOfOptions());
+    List<String> options = SubtracesAdapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void Subtraces2() throws IOException, InterruptedException {
     String programName = Subtraces2Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(Subtraces2Adapter.getListOfOptions());
+    List<String> options = Subtraces2Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void Implicit() throws IOException, InterruptedException {
     String programName = ImplicitAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(ImplicitAdapter.getListOfOptions());
+    List<String> options = ImplicitAdapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void Implicit2() throws IOException, InterruptedException {
     String programName = Implicit2Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(Implicit2Adapter.getListOfOptions());
+    List<String> options = Implicit2Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void Trivial() throws IOException, InterruptedException {
     String programName = TrivialAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(TrivialAdapter.getListOfOptions());
+    List<String> options = TrivialAdapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
-  @Test
-  public void readDynamicRunningExample() throws IOException, InterruptedException {
-    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
-
-    String[] args = new String[0];
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printProgramConstraints(read);
-  }
+//  @Test
+//  public void readDynamicRunningExample() throws IOException, InterruptedException {
+//    String programName = DynamicRunningExampleAdapter.PROGRAM_NAME;
+//
+//    String[] args = new String[0];
+//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+//    PhosphorAnalysis.printProgramConstraints(read);
+//  }
 
   @Test
   public void simpleExample1() throws IOException, InterruptedException {
     String programName = SimpleExample1Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(SimpleExample1Adapter.getListOfOptions());
+    List<String> options = SimpleExample1Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void example1() throws IOException, InterruptedException {
     String programName = Example1Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(Example1Adapter.getListOfOptions());
+    List<String> options = Example1Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void example2() throws IOException, InterruptedException {
     String programName = PhosphorExample2Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(PhosphorExample2Adapter.getListOfOptions());
+    List<String> options = PhosphorExample2Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void example3() throws IOException, InterruptedException {
     String programName = PhosphorExample3Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(PhosphorExample3Adapter.getListOfOptions());
+    List<String> options = PhosphorExample3Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
-  @Test
-  public void readExample3() throws IOException, InterruptedException {
-    String programName = PhosphorExample3Adapter.PROGRAM_NAME;
-
-    String[] args = new String[0];
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printProgramConstraints(read);
-  }
+//  @Test
+//  public void readExample3() throws IOException, InterruptedException {
+//    String programName = PhosphorExample3Adapter.PROGRAM_NAME;
+//
+//    String[] args = new String[0];
+//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+//    PhosphorAnalysis.printProgramConstraints(read);
+//  }
 
   @Test
   public void ifOr2() throws IOException, InterruptedException {
     String programName = IfOr2Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(IfOr2Adapter.getListOfOptions());
+    List<String> options = IfOr2Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
-  @Test
-  public void readIfOr2() throws IOException, InterruptedException {
-    String programName = IfOr2Adapter.PROGRAM_NAME;
-
-    String[] args = new String[0];
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printProgramConstraints(read);
-  }
+//  @Test
+//  public void readIfOr2() throws IOException, InterruptedException {
+//    String programName = IfOr2Adapter.PROGRAM_NAME;
+//
+//    String[] args = new String[0];
+//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+//    PhosphorAnalysis.printProgramConstraints(read);
+//  }
 
   @Test
   public void orContext() throws IOException, InterruptedException {
     String programName = OrContextAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(OrContextAdapter.getListOfOptions());
+    List<String> options = OrContextAdapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
-  @Test
-  public void readOrContext() throws IOException, InterruptedException {
-    String programName = OrContextAdapter.PROGRAM_NAME;
-
-    String[] args = new String[0];
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printProgramConstraints(read);
-  }
+//  @Test
+//  public void readOrContext() throws IOException, InterruptedException {
+//    String programName = OrContextAdapter.PROGRAM_NAME;
+//
+//    String[] args = new String[0];
+//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+//    PhosphorAnalysis.printProgramConstraints(read);
+//  }
 
   @Test
   public void orContext2() throws IOException, InterruptedException {
     String programName = OrContext2Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(OrContext2Adapter.getListOfOptions());
+    List<String> options = OrContext2Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
-  @Test
-  public void readOrContext2() throws IOException, InterruptedException {
-    String programName = OrContext2Adapter.PROGRAM_NAME;
-
-    String[] args = new String[0];
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printProgramConstraints(read);
-  }
+//  @Test
+//  public void readOrContext2() throws IOException, InterruptedException {
+//    String programName = OrContext2Adapter.PROGRAM_NAME;
+//
+//    String[] args = new String[0];
+//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+//    PhosphorAnalysis.printProgramConstraints(read);
+//  }
 
   @Test
   public void orContext3() throws IOException, InterruptedException {
     String programName = OrContext3Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(OrContext3Adapter.getListOfOptions());
+    List<String> options = OrContext3Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
-  @Test
-  public void readOrContext3() throws IOException, InterruptedException {
-    String programName = OrContext3Adapter.PROGRAM_NAME;
-
-    String[] args = new String[0];
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printProgramConstraints(read);
-  }
+//  @Test
+//  public void readOrContext3() throws IOException, InterruptedException {
+//    String programName = OrContext3Adapter.PROGRAM_NAME;
+//
+//    String[] args = new String[0];
+//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+//    PhosphorAnalysis.printProgramConstraints(read);
+//  }
 
   @Test
   public void multiFacet() throws IOException, InterruptedException {
     String programName = MultiFacetsAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(MultiFacetsAdapter.getListOfOptions());
+    List<String> options = MultiFacetsAdapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void simpleForExample2() throws IOException, InterruptedException {
     String programName = SimpleForExample2Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(SimpleForExample2Adapter.getListOfOptions());
+    List<String> options = SimpleForExample2Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void simpleForExample5() throws IOException, InterruptedException {
     String programName = SimpleForExample5Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(SimpleForExample5Adapter.getListOfOptions());
+    List<String> options = SimpleForExample5Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void variabilityContext1() throws IOException, InterruptedException {
     String programName = VariabilityContext1Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(VariabilityContext1Adapter.getListOfOptions());
+    List<String> options = VariabilityContext1Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void variabilityContext2() throws IOException, InterruptedException {
     String programName = VariabilityContext2Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(VariabilityContext2Adapter.getListOfOptions());
+    List<String> options = VariabilityContext2Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void example8() throws IOException, InterruptedException {
     String programName = PhosphorExample8Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(PhosphorExample8Adapter.getListOfOptions());
+    List<String> options = PhosphorExample8Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
-  @Test
-  public void readExample8() throws IOException, InterruptedException {
-    String programName = PhosphorExample8Adapter.PROGRAM_NAME;
-
-    String[] args = new String[0];
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-    PhosphorAnalysis.printProgramConstraints(read);
-  }
+//  @Test
+//  public void readExample8() throws IOException, InterruptedException {
+//    String programName = PhosphorExample8Adapter.PROGRAM_NAME;
+//
+//    String[] args = new String[0];
+//    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName);
+//    Map<JavaRegion, SinkData> read = analysis.analyze(args);
+//    PhosphorAnalysis.printProgramConstraints(read);
+//  }
 
   @Test
   public void orContext6() throws IOException, InterruptedException {
     String programName = OrContext6Adapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(OrContext6Adapter.getListOfOptions());
+    List<String> options = OrContext6Adapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
-
-    args = new String[0];
-    analysis = new BFPhosphorAnalysis(programName);
-    Map<JavaRegion, SinkData> read = analysis.analyze(args);
-
-    Assert.assertEquals(write, read);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void Prevayler() throws IOException, InterruptedException {
     String programName = PrevaylerAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(PrevaylerAdapter.getListOfOptions());
+    List<String> options = PrevaylerAdapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
   @Test
   public void MeasureDiskOrderedScan() throws IOException, InterruptedException {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
-    Set<String> options = new HashSet<>(MeasureDiskOrderedScanAdapter.getListOfOptions());
+    List<String> options = MeasureDiskOrderedScanAdapter.getListOfOptions();
 
     // Program arguments
     String[] args = new String[2];
     args[0] = "-delres";
     args[1] = "-saveres";
 
-    DynamicRegionAnalysis<SinkData> analysis = new BFPhosphorAnalysis(programName, options);
-    Map<JavaRegion, SinkData> write = analysis.analyze(args);
+    BFPhosphorAnalysis analysis = new BFPhosphorAnalysis(programName, options);
+    analysis.analyze(args);
   }
 
 }

@@ -1,1 +1,26 @@
-[{"partialConfig":{"DUPLICATES":false,"SEQUENTIAL":false}},{"partialConfig":{"DUPLICATES":true,"SEQUENTIAL":true}},{"partialConfig":{"DUPLICATES":true,"SEQUENTIAL":false}},{"partialConfig":{"DUPLICATES":false,"SEQUENTIAL":true}}]
+[
+  {
+    "partialConfig": {
+      "DUPLICATES": false,
+      "SEQUENTIAL": false
+    }
+  },
+  {
+    "partialConfig": {
+      "DUPLICATES": true,
+      "SEQUENTIAL": true
+    }
+  },
+  {
+    "partialConfig": {
+      "DUPLICATES": true,
+      "SEQUENTIAL": false
+    }
+  },
+  {
+    "partialConfig": {
+      "DUPLICATES": false,
+      "SEQUENTIAL": true
+    }
+  }
+]

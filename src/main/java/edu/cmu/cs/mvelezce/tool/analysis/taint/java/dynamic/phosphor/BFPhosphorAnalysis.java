@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicRegionAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.alldynamic.AllDynamicAdapter;
@@ -16,7 +17,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
   private String mainClass;
 
-  BFPhosphorAnalysis(String programName, Set<String> options) {
+  BFPhosphorAnalysis(String programName, List<String> options) {
     super(programName, options, new HashSet<>());
   }
 
@@ -24,7 +25,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
     super(programName);
   }
 
-  BFPhosphorAnalysis(String programName, String mainClass, Set<String> options) {
+  BFPhosphorAnalysis(String programName, String mainClass, List<String> options) {
     this(programName, options);
 
     this.mainClass = mainClass;
@@ -70,7 +71,7 @@ public class BFPhosphorAnalysis extends PhosphorAnalysis {
 
   @Override
   public String outputDir() {
-    return BaseDynamicRegionAnalysis.DIRECTORY + "/" + this.getProgramName() + "/bf";
+    return BaseDynamicAnalysis.DIRECTORY  + "/" + this.getProgramName() + "/bf";
   }
 
   // TODO this method is hardcoded to run all dynamic examples

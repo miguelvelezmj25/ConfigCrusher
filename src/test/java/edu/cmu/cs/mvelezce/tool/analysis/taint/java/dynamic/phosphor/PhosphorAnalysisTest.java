@@ -2,10 +2,12 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.implicit.ImplicitAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.orContext.OrContextAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample2.PhosphorExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.phosphorExample3.PhosphorExample3Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample6.SimpleForExample6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sound.SoundAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces2.Subtraces2Adapter;
@@ -24,6 +26,20 @@ public class PhosphorAnalysisTest {
   public void Trivial() throws IOException, InterruptedException {
     String programName = TrivialAdapter.PROGRAM_NAME;
     List<String> options = TrivialAdapter.getListOfOptions();
+    Set<String> initialConfig = new HashSet<>();
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
+  }
+
+  @Test
+  public void SimpleForExample6() throws IOException, InterruptedException {
+    String programName = SimpleForExample6Adapter.PROGRAM_NAME;
+    List<String> options = SimpleForExample6Adapter.getListOfOptions();
     Set<String> initialConfig = new HashSet<>();
 
     String[] args = new String[2];
@@ -185,6 +201,20 @@ public class PhosphorAnalysisTest {
   public void Sound() throws IOException, InterruptedException {
     String programName = SoundAdapter.PROGRAM_NAME;
     List<String> options = SoundAdapter.getListOfOptions();
+    Set<String> initialConfig = new HashSet<>();
+
+    String[] args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    PhosphorAnalysis analysis = new PhosphorAnalysis(programName, options, initialConfig);
+    analysis.analyze(args);
+  }
+
+  @Test
+  public void MeasureDiskOrderedScan() throws IOException, InterruptedException {
+    String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
+    List<String> options = MeasureDiskOrderedScanAdapter.getListOfOptions();
     Set<String> initialConfig = new HashSet<>();
 
     String[] args = new String[2];

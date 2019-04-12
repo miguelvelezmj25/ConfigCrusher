@@ -12,6 +12,7 @@ import java.util.Set;
 
 public class PhosphorConstraintAnalysis extends BaseDynamicAnalysis<Set<ConfigConstraint>> {
 
+  // TODO how do we handle unsoundness of taint analysis?
   private final Set<ConfigConstraint> constraints = new HashSet<>();
 
   public PhosphorConstraintAnalysis(String programName) {

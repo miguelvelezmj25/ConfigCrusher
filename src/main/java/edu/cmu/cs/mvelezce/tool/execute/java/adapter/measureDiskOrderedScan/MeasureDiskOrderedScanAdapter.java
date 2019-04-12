@@ -22,7 +22,7 @@ public class MeasureDiskOrderedScanAdapter extends BaseAdapter {
 
   private static final String HOME_DIR = "tmp";
   private static final String[] OPTIONS = {"DUPLICATES", "SEQUENTIAL", "KEYSONLY",
-      "FILELOGGINGLEVEL"};
+      "FILELOGGINGLEVEL", "JECACHESIZE"};
 
   public MeasureDiskOrderedScanAdapter() {
     // TODO check that we are passing empty string

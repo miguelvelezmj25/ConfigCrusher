@@ -2,11 +2,11 @@ package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
 import edu.cmu.cs.mvelezce.cc.DecisionTaints;
 import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.BaseDynamicAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.PhosphorConstraintAnalysis;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.PhosphorConstraintCalculator;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.constraint.PhosphorConstraintExecutionAnalysis;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.region.PhosphorTaintAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.dynamicrunningexample.DynamicRunningExampleAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.example1.Example1Adapter;
@@ -26,6 +26,7 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.prevayler.PrevaylerAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample2.SimpleForExample2Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample4.SimpleForExample4Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample5.SimpleForExample5Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample6.SimpleForExample6Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleexample1.SimpleExample1Adapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.sound.SoundAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
@@ -41,9 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 
 public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
@@ -54,6 +53,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
   private final PhosphorConstraintExecutionAnalysis phosphorConstraintExecutionAnalysis;
   private final PhosphorConstraintCalculator phosphorConstraintCalculator;
   private final PhosphorConstraintAnalysis phosphorConstraintAnalysis;
+  private final PhosphorTaintAnalysis phosphorTaintAnalysis;
 
 //  private final PhosphorExecutionAnalysis phosphorExecutionAnalysis;
 //  private final PhosphorConfigConstraintTracker phosphorConfigConstraintTracker;
@@ -69,6 +69,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
     this.phosphorConstraintExecutionAnalysis = new PhosphorConstraintExecutionAnalysis(programName);
     this.phosphorConstraintCalculator = new PhosphorConstraintCalculator(options);
     this.phosphorConstraintAnalysis = new PhosphorConstraintAnalysis(programName);
+    this.phosphorTaintAnalysis = new PhosphorTaintAnalysis(programName, options);
 //    this.phosphorExecutionAnalysis = new PhosphorExecutionAnalysis(programName);
 //    this.phosphorConfigConstraintTracker = new PhosphorConfigConstraintTracker();
   }
@@ -81,20 +82,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
     Set<ConfigConstraint> constraints = this.phosphorConstraintAnalysis.analyze();
     this.phosphorConstraintAnalysis.writeToFile(constraints);
 
-//    Map<JavaRegion, SinkData> regionsToData = new HashMap<>();
-//
-//    for (Map.Entry<String, Map<ExecVarCtx, ExecConfigConstraints>> entry : this.phosphorConfigConstraintTracker
-//        .getSinksToConfigConstraints().entrySet()) {
-//      String sink = entry.getKey();
-//      JavaRegion region = new JavaRegion.Builder(this.getPackageName(sink), this.getClassName(sink),
-//          this.getMethodSignature(sink)).startBytecodeIndex(this.getDecisionOrder(sink)).build();
-//
-//      Map<ExecVarCtx, ExecConfigConstraints> data = entry.getValue();
-//      SinkData sinkData = new SinkData(data);
-//      regionsToData.put(region, sinkData);
-//    }
-//
-//    return regionsToData;
+//    this.phosphorTaintAnalysis.analyze();
     return null;
   }
 
@@ -130,6 +118,8 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
 
       this.runPhosphorAnalysis(config);
       Set<DecisionTaints> results = this.phosphorConstraintExecutionAnalysis.getResults();
+
+//      this.phosphorTaintAnalysis.getTaints(results);
 
       Set<ConfigConstraint> analysisConstraints = this.phosphorConstraintCalculator
           .deriveConstraints(results, config);
@@ -247,6 +237,10 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
       case SimpleForExample5Adapter.PROGRAM_NAME:
         commandList.add("./examples.sh");
         adapter = new SimpleForExample5Adapter();
+        break;
+      case SimpleForExample6Adapter.PROGRAM_NAME:
+        commandList.add("./examples.sh");
+        adapter = new SimpleForExample6Adapter();
         break;
       case OrContextAdapter.PROGRAM_NAME:
         commandList.add("./examples.sh");

@@ -1,6 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor;
 
-import edu.cmu.cs.mvelezce.cc.DecisionInfo;
+//import edu.cmu.cs.mvelezce.cc.DecisionInfo;
 import edu.cmu.cs.mvelezce.cc.DecisionTaints;
 import edu.cmu.cs.mvelezce.cc.TaintLabel;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.BaseAdapter;
@@ -39,14 +39,15 @@ public class PhosphorExecutionAnalysis {
       throw new RuntimeException("The directory " + dir + " must have 1 file.");
     }
 
-    List<DecisionInfo> phosphorTaintResults = this
-        .readPhosphorTaintResults(serializedFiles.iterator().next());
-    Map<String, Map<Taint, List<Taint>>> analysisData = this
-        .getDataFromAnalysis(phosphorTaintResults);
-    Map<String, Map<Set<TaintLabel>, List<Set<TaintLabel>>>> analysisDataWithLabels = this
-        .getSinksToLabelData(analysisData);
-
-    return this.changeLabelsToTaints(analysisDataWithLabels);
+//    List<DecisionInfo> phosphorTaintResults = this
+//        .readPhosphorTaintResults(serializedFiles.iterator().next());
+//    Map<String, Map<Taint, List<Taint>>> analysisData = this
+//        .getDataFromAnalysis(phosphorTaintResults);
+//    Map<String, Map<Set<TaintLabel>, List<Set<TaintLabel>>>> analysisDataWithLabels = this
+//        .getSinksToLabelData(analysisData);
+//
+//    return this.changeLabelsToTaints(analysisDataWithLabels);
+    throw new UnsupportedOperationException("Implement");
   }
 
   private Collection<File> getSerializedFiles(String dir) {
@@ -55,51 +56,55 @@ public class PhosphorExecutionAnalysis {
     return FileUtils.listFiles(dirFile, null, false);
   }
 
-  private List<DecisionInfo> readPhosphorTaintResults(File serializedFile) throws IOException {
-    return this.deserialize(serializedFile);
-  }
+  // TODO implement
+//  private List<DecisionInfo> readPhosphorTaintResults(File serializedFile) throws IOException {
+//    return this.deserialize(serializedFile);
+//  }
 
-  // TODO check catching and throwing
-  private List<DecisionInfo> deserialize(File file) throws IOException {
-    FileInputStream fis = new FileInputStream(file);
-    ObjectInputStream ois = new ObjectInputStream(fis);
-    List<DecisionInfo> decisionInfos;
+  // TODO implement
+//  // TODO check catching and throwing
+//  private List<DecisionInfo> deserialize(File file) throws IOException {
+//    FileInputStream fis = new FileInputStream(file);
+//    ObjectInputStream ois = new ObjectInputStream(fis);
+//    List<DecisionInfo> decisionInfos;
+//
+//    try {
+//      decisionInfos = (List<DecisionInfo>) ois.readObject();
+//
+//    }
+//    catch (ClassNotFoundException e) {
+//      throw new RuntimeException(e);
+//    }
+//
+//    ois.close();
+//    fis.close();
+//
+//    return decisionInfos;
+//  }
 
-    try {
-      decisionInfos = (List<DecisionInfo>) ois.readObject();
+  // TODO implement
+//  private Map<String, Map<Taint, List<Taint>>> getDataFromAnalysis(
+//      List<DecisionInfo> decisionInfos) {
+//    Map<String, Map<Taint, List<Taint>>> sinksToDecisionsInfluence = new HashMap<>();
+//
+//    Set<String> sinks = this.getReachedSinks(decisionInfos);
+//    this.addSinksFromAnalysis(sinks, sinksToDecisionsInfluence);
+//    this.addExecCtxTaintsFromAnalysis(decisionInfos, sinksToDecisionsInfluence);
+//    this.addConditionTaintsFromAnalysis(decisionInfos, sinksToDecisionsInfluence);
+//
+//    return sinksToDecisionsInfluence;
+//  }
 
-    }
-    catch (ClassNotFoundException e) {
-      throw new RuntimeException(e);
-    }
-
-    ois.close();
-    fis.close();
-
-    return decisionInfos;
-  }
-
-  private Map<String, Map<Taint, List<Taint>>> getDataFromAnalysis(
-      List<DecisionInfo> decisionInfos) {
-    Map<String, Map<Taint, List<Taint>>> sinksToDecisionsInfluence = new HashMap<>();
-
-    Set<String> sinks = this.getReachedSinks(decisionInfos);
-    this.addSinksFromAnalysis(sinks, sinksToDecisionsInfluence);
-    this.addExecCtxTaintsFromAnalysis(decisionInfos, sinksToDecisionsInfluence);
-    this.addConditionTaintsFromAnalysis(decisionInfos, sinksToDecisionsInfluence);
-
-    return sinksToDecisionsInfluence;
-  }
-
-  private Set<String> getReachedSinks(List<DecisionInfo> decisionInfos) {
-    Set<String> sinks = new HashSet<>();
-
-    for (DecisionInfo decisionInfo : decisionInfos) {
-      sinks.add(decisionInfo.getDecision());
-    }
-
-    return sinks;
-  }
+  // TODO implement
+//  private Set<String> getReachedSinks(List<DecisionInfo> decisionInfos) {
+//    Set<String> sinks = new HashSet<>();
+//
+//    for (DecisionInfo decisionInfo : decisionInfos) {
+//      sinks.add(decisionInfo.getDecision());
+//    }
+//
+//    return sinks;
+//  }
 
   private void addSinksFromAnalysis(Set<String> sinks,
       Map<String, Map<Taint, List<Taint>>> sinksToDecisionsInfluence) {
@@ -136,32 +141,34 @@ public class PhosphorExecutionAnalysis {
     return sinksToTaints;
   }
 
-  private void addExecCtxTaintsFromAnalysis(List<DecisionInfo> decisionInfos,
-      Map<String, Map<Taint, List<Taint>>> sinksToDecisionInfluences) {
-    for (DecisionInfo decisionInfo : decisionInfos) {
-      String sink = decisionInfo.getDecision();
-      Map<Taint, List<Taint>> decisionInfluences = sinksToDecisionInfluences.get(sink);
+  // TODO implement
+//  private void addExecCtxTaintsFromAnalysis(List<DecisionInfo> decisionInfos,
+//      Map<String, Map<Taint, List<Taint>>> sinksToDecisionInfluences) {
+//    for (DecisionInfo decisionInfo : decisionInfos) {
+//      String sink = decisionInfo.getDecision();
+//      Map<Taint, List<Taint>> decisionInfluences = sinksToDecisionInfluences.get(sink);
+//
+//      DecisionTaints decisionTaints = decisionInfo.getDecisionTaints();
+//      Taint execCtxTaints = decisionTaints.getExecCtxTaints();
+//      decisionInfluences.put(execCtxTaints, new ArrayList<>());
+//    }
+//  }
 
-      DecisionTaints decisionTaints = decisionInfo.getDecisionTaints();
-      Taint execCtxTaints = decisionTaints.getExecCtxTaints();
-      decisionInfluences.put(execCtxTaints, new ArrayList<>());
-    }
-  }
-
-  private void addConditionTaintsFromAnalysis(List<DecisionInfo> decisionInfos,
-      Map<String, Map<Taint, List<Taint>>> sinksToDecisionInfluences) {
-    for (DecisionInfo decisionInfo : decisionInfos) {
-      String sink = decisionInfo.getDecision();
-      Map<Taint, List<Taint>> decisionInfluences = sinksToDecisionInfluences.get(sink);
-
-      DecisionTaints decisionTaints = decisionInfo.getDecisionTaints();
-      Taint execCtxTaints = decisionTaints.getExecCtxTaints();
-
-      List<Taint> conditionInfluences = decisionInfluences.get(execCtxTaints);
-      Taint conditionTaints = decisionTaints.getConditionTaints();
-      conditionInfluences.add(conditionTaints);
-    }
-  }
+  // TODO implement
+//  private void addConditionTaintsFromAnalysis(List<DecisionInfo> decisionInfos,
+//      Map<String, Map<Taint, List<Taint>>> sinksToDecisionInfluences) {
+//    for (DecisionInfo decisionInfo : decisionInfos) {
+//      String sink = decisionInfo.getDecision();
+//      Map<Taint, List<Taint>> decisionInfluences = sinksToDecisionInfluences.get(sink);
+//
+//      DecisionTaints decisionTaints = decisionInfo.getDecisionTaints();
+//      Taint execCtxTaints = decisionTaints.getExecCtxTaints();
+//
+//      List<Taint> conditionInfluences = decisionInfluences.get(execCtxTaints);
+//      Taint conditionTaints = decisionTaints.getConditionTaints();
+//      conditionInfluences.add(conditionTaints);
+//    }
+//  }
 
   private Map<Set<TaintLabel>, List<Set<TaintLabel>>> getVariabilityCtxsToLabels(
       Map<Taint, List<Taint>> sinkData) {

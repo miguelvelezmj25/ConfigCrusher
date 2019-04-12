@@ -16,7 +16,7 @@ public class SubtracesPipeline {
     this.options = options;
   }
 
-  public Set<Set<Set<String>>> getMinConfigsToExecute(String[] args)
+  public Set<Set<String>> getMinConfigsToExecute(String[] args)
       throws IOException, InterruptedException {
     Map<Set<String>, List<String>> configsToTraces = this.executeSubtraceInstrumentedProgram(args);
     List<String> alignedTrace = this.alignTraces(args, configsToTraces);
@@ -60,7 +60,7 @@ public class SubtracesPipeline {
     return executor.analyze(args);
   }
 
-  private Set<Set<Set<String>>> getMinConfigsToExecute(String[] args,
+  private Set<Set<String>> getMinConfigsToExecute(String[] args,
       Set<SubtraceAnalysisInfo> subtraceAnalysisInfos)
       throws IOException {
     SatConfigAnalyzer satConfigAnalyzer = new SatConfigAnalyzer(this.programName,

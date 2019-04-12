@@ -32,9 +32,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(3, minConfigs.iterator().next().size());
+    Assert.assertEquals(3, minConfigs.size());
   }
 
   @Test
@@ -47,9 +47,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(3, minConfigs.iterator().next().size());
+    Assert.assertEquals(3, minConfigs.size());
   }
 
   @Test
@@ -62,9 +62,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(2, minConfigs.iterator().next().size());
+    Assert.assertEquals(2, minConfigs.size());
   }
 
   @Test
@@ -77,9 +77,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(3, minConfigs.iterator().next().size());
+    Assert.assertEquals(3, minConfigs.size());
   }
 
   @Test
@@ -92,9 +92,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(3, minConfigs.iterator().next().size());
+    Assert.assertEquals(3, minConfigs.size());
   }
 
   @Test
@@ -107,9 +107,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(2, minConfigs.iterator().next().size());
+    Assert.assertEquals(2, minConfigs.size());
   }
 
   @Test
@@ -122,9 +122,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(4, minConfigs.iterator().next().size());
+    Assert.assertEquals(4, minConfigs.size());
   }
 
   @Test
@@ -137,9 +137,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(2, minConfigs.iterator().next().size());
+    Assert.assertEquals(2, minConfigs.size());
   }
 
   @Test
@@ -152,9 +152,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(2, minConfigs.iterator().next().size());
+    Assert.assertEquals(2, minConfigs.size());
   }
 
   @Test
@@ -167,9 +167,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(3, minConfigs.iterator().next().size());
+    Assert.assertEquals(3, minConfigs.size());
   }
 
   @Test
@@ -182,9 +182,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(2, minConfigs.iterator().next().size());
+    Assert.assertEquals(2, minConfigs.size());
   }
 
   @Test
@@ -197,9 +197,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(3, minConfigs.iterator().next().size());
+    Assert.assertEquals(3, minConfigs.size());
   }
 
   @Test
@@ -212,9 +212,9 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    Assert.assertEquals(3, minConfigs.iterator().next().size());
+    Assert.assertEquals(3, minConfigs.size());
   }
 
   @Test
@@ -227,8 +227,8 @@ public class SubtracesPipelineTest {
     args[1] = "-saveres";
 
     SubtracesPipeline pipeline = new SubtracesPipeline(programName, options);
-    Set<Set<Set<String>>> minConfigs = pipeline.getMinConfigsToExecute(args);
+    Set<Set<String>> minConfigs = pipeline.getMinConfigsToExecute(args);
 
-    System.out.println(minConfigs.iterator().next().size());
+    System.out.println(minConfigs.size());
   }
 }

@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
-public class SatConfigAnalyzer implements Analysis<Set<Set<Set<String>>>> {
+public class SatConfigAnalyzer implements Analysis<Set<Set<String>>> {
 
   private final String programName;
   private final Set<SubtraceAnalysisInfo> subtraceAnalysisInfos;
@@ -37,7 +37,7 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<Set<String>>>> {
   }
 
   @Override
-  public Set<Set<Set<String>>> analyze() {
+  public Set<Set<String>> analyze() {
     List<String> constraints = this.buildStringConstraints();
 
     return MinConfigsGenerator.getSatConfigs(this.options, constraints);
@@ -106,7 +106,7 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<Set<String>>>> {
   }
 
   @Override
-  public Set<Set<Set<String>>> analyze(String[] args) throws IOException {
+  public Set<Set<String>> analyze(String[] args) throws IOException {
     Options.getCommandLine(args);
 
     String outputFile = this.outputDir();
@@ -126,7 +126,7 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<Set<String>>>> {
       return this.readFromFile(files.iterator().next());
     }
 
-    Set<Set<Set<String>>> satConfigs = this.analyze();
+    Set<Set<String>> satConfigs = this.analyze();
 
     if (Options.checkIfSave()) {
       this.writeToFile(satConfigs);
@@ -136,7 +136,7 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<Set<String>>>> {
   }
 
   @Override
-  public void writeToFile(Set<Set<Set<String>>> satConfigs) throws IOException {
+  public void writeToFile(Set<Set<String>> satConfigs) throws IOException {
     String outputFile = this.outputDir() + "/" + this.programName + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
@@ -146,10 +146,10 @@ public class SatConfigAnalyzer implements Analysis<Set<Set<Set<String>>>> {
   }
 
   @Override
-  public Set<Set<Set<String>>> readFromFile(File file) throws IOException {
+  public Set<Set<String>> readFromFile(File file) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
 
-    return mapper.readValue(file, new TypeReference<Set<Set<Set<String>>>>() {
+    return mapper.readValue(file, new TypeReference<Set<Set<String>>>() {
     });
   }
 

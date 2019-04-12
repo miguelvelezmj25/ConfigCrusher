@@ -20,10 +20,10 @@ public class CompareSatConfigsTest {
     String[] args = new String[0];
 
     SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName);
-    Set<Set<Set<String>>> bfSatConfigs = analysis.analyze(args);
+    Set<Set<String>> bfSatConfigs = analysis.analyze(args);
 
-    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName);
-    Set<Set<Set<String>>> bfPhosphorSatConfigs = compressor.compressConfigurations(args);
+    Compression<Set<Set<String>>> compressor = new BFPhosphorCompression(programName);
+    Set<Set<String>> bfPhosphorSatConfigs = compressor.compressConfigurations(args);
 
     Assert.assertTrue(CompareSatConfigs.equalSatConfigs(bfSatConfigs, bfPhosphorSatConfigs));
   }
@@ -34,10 +34,10 @@ public class CompareSatConfigsTest {
     String[] args = new String[0];
 
     SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName);
-    Set<Set<Set<String>>> bfSatConfigs = analysis.analyze(args);
+    Set<Set<String>> bfSatConfigs = analysis.analyze(args);
 
-    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName);
-    Set<Set<Set<String>>> bfPhosphorSatConfigs = compressor.compressConfigurations(args);
+    Compression<Set<Set<String>>> compressor = new BFPhosphorCompression(programName);
+    Set<Set<String>> bfPhosphorSatConfigs = compressor.compressConfigurations(args);
 
     Assert.assertTrue(CompareSatConfigs.equalSatConfigs(bfSatConfigs, bfPhosphorSatConfigs));
   }
@@ -48,10 +48,10 @@ public class CompareSatConfigsTest {
     String[] args = new String[0];
 
     SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName);
-    Set<Set<Set<String>>> bfSatConfigs = analysis.analyze(args);
+    Set<Set<String>> bfSatConfigs = analysis.analyze(args);
 
-    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName);
-    Set<Set<Set<String>>> bfPhosphorSatConfigs = compressor.compressConfigurations(args);
+    Compression<Set<Set<String>>> compressor = new BFPhosphorCompression(programName);
+    Set<Set<String>> bfPhosphorSatConfigs = compressor.compressConfigurations(args);
 
     Assert.assertTrue(CompareSatConfigs.equalSatConfigs(bfSatConfigs, bfPhosphorSatConfigs));
   }
@@ -62,10 +62,10 @@ public class CompareSatConfigsTest {
     String[] args = new String[0];
 
     SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName);
-    Set<Set<Set<String>>> bfSatConfigs = analysis.analyze(args);
+    Set<Set<String>> bfSatConfigs = analysis.analyze(args);
 
-    Compression<Set<Set<Set<String>>>> compressor = new BFPhosphorCompression(programName);
-    Set<Set<Set<String>>> bfPhosphorSatConfigs = compressor.compressConfigurations(args);
+    Compression<Set<Set<String>>> compressor = new BFPhosphorCompression(programName);
+    Set<Set<String>> bfPhosphorSatConfigs = compressor.compressConfigurations(args);
 
     Assert.assertTrue(CompareSatConfigs.equalSatConfigs(bfSatConfigs, bfPhosphorSatConfigs));
   }

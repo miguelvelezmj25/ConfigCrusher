@@ -2,20 +2,19 @@ package edu.cmu.cs.mvelezce.tool.compression;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.tool.Options;
-import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.SinkData;
+import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.ConfigConstraint;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Set;
 
 // TODO make a base class for both static and dynamic results
-public abstract class BaseDynamicCompression<T> extends TopCompression<T> {
+public abstract class BaseDynamicCompression<T> extends AbstractCompression<T> {
 
   private final Set<String> options;
-  private final Collection<SinkData> constraints;
+  private final Set<ConfigConstraint> constraints;
 
   protected BaseDynamicCompression(String programName, Set<String> options,
-      Collection<SinkData> constraints) {
+      Set<ConfigConstraint> constraints) {
     super(programName);
     this.options = options;
     this.constraints = constraints;
@@ -36,7 +35,7 @@ public abstract class BaseDynamicCompression<T> extends TopCompression<T> {
     return Options.DIRECTORY + "/compression/dynamic/java/programs/" + this.getProgramName();
   }
 
-  public Collection<SinkData> getConstraints() {
+  public Set<ConfigConstraint> getConstraints() {
     return constraints;
   }
 

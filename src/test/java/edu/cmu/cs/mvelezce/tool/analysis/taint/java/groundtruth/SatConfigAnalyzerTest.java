@@ -30,12 +30,12 @@ public class SatConfigAnalyzerTest {
     args[1] = "-saveres";
 
     SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName, subtraceAnalysisInfos, options);
-    Set<Set<Set<String>>> write = analysis.analyze(args);
+    Set<Set<String>> write = analysis.analyze(args);
 
     args = new String[0];
 
     analysis = new SatConfigAnalyzer(programName);
-    Set<Set<Set<String>>> read = analysis.analyze(args);
+    Set<Set<String>> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
   }
@@ -58,12 +58,12 @@ public class SatConfigAnalyzerTest {
     args[1] = "-saveres";
 
     SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName, subtraceAnalysisInfos, options);
-    Set<Set<Set<String>>> write = analysis.analyze(args);
+    Set<Set<String>> write = analysis.analyze(args);
 
     args = new String[0];
 
     analysis = new SatConfigAnalyzer(programName);
-    Set<Set<Set<String>>> read = analysis.analyze(args);
+    Set<Set<String>> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
   }
@@ -86,12 +86,12 @@ public class SatConfigAnalyzerTest {
     args[1] = "-saveres";
 
     SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName, subtraceAnalysisInfos, options);
-    Set<Set<Set<String>>> write = analysis.analyze(args);
+    Set<Set<String>> write = analysis.analyze(args);
 
     args = new String[0];
 
     analysis = new SatConfigAnalyzer(programName);
-    Set<Set<Set<String>>> read = analysis.analyze(args);
+    Set<Set<String>> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
   }
@@ -114,12 +114,12 @@ public class SatConfigAnalyzerTest {
     args[1] = "-saveres";
 
     SatConfigAnalyzer analysis = new SatConfigAnalyzer(programName, subtraceAnalysisInfos, options);
-    Set<Set<Set<String>>> write = analysis.analyze(args);
+    Set<Set<String>> write = analysis.analyze(args);
 
     args = new String[0];
 
     analysis = new SatConfigAnalyzer(programName);
-    Set<Set<Set<String>>> read = analysis.analyze(args);
+    Set<Set<String>> read = analysis.analyze(args);
 
     Assert.assertEquals(write, read);
   }

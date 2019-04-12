@@ -1,7 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph;
 
 import edu.cmu.cs.mvelezce.tool.Helper;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.BaseRegionInstrumenter;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;

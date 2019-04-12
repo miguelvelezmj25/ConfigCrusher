@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.instrumentation.java;
+package edu.cmu.cs.mvelezce.tool.instrumentation.java.region;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,69 +8,31 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.serialize.RegionToInfo;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.commons.io.FileUtils;
 
-public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
+public abstract class StaticBaseRegionInstrumenter extends BaseRegionInstrumenter<Set<Set<String>>> {
 
   public static final String DIRECTORY = Options.DIRECTORY + "/instrumentation/java/programs";
 
-  private Map<JavaRegion, Set<Set<String>>> regionsToOptionSet;
-
-  public BaseRegionInstrumenter(String programName, String classDir,
+  public StaticBaseRegionInstrumenter(String programName, String classDir,
       Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
-    super(programName, null, classDir);
-    this.regionsToOptionSet = regionsToOptionSet;
+    super(programName, classDir, regionsToOptionSet);
   }
 
-  public BaseRegionInstrumenter(String programName) {
+  public StaticBaseRegionInstrumenter(String programName) {
     this(programName, null, new HashMap<>());
-  }
-
-  @Override
-  public void instrument(String[] args)
-      throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException, InterruptedException {
-    Options.getCommandLine(args);
-
-    File outputFile = new File(BaseRegionInstrumenter.DIRECTORY + "/" + this.getProgramName());
-    Options.checkIfDeleteResult(outputFile);
-
-    if (outputFile.exists()) {
-      Collection<File> files = FileUtils.listFiles(outputFile, new String[]{"json"}, false);
-
-      if (files.size() != 1) {
-        throw new RuntimeException(
-            "We expected to find 1 file in the directory, but that is not the case "
-                + outputFile);
-      }
-
-      this.regionsToOptionSet = this.readFromFile(files.iterator().next());
-
-      return;
-    }
-
-    if (Options.checkIfDeleteResult()) {
-      this.compile();
-    }
-
-    if (Options.checkIfSave()) {
-      this.instrument();
-      this.writeToFile(this.regionsToOptionSet);
-    }
   }
 
   public void writeToFile(Map<JavaRegion, Set<Set<String>>> relevantRegionsToOptions)
       throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     String outputFile =
-        BaseRegionInstrumenter.DIRECTORY + "/" + this.getProgramName() + "/" + this.getProgramName()
+        StaticBaseRegionInstrumenter.DIRECTORY + "/" + this.getProgramName() + "/" + this.getProgramName()
             + Options.DOT_JSON;
     File file = new File(outputFile);
     file.getParentFile().mkdirs();
@@ -115,8 +77,4 @@ public abstract class BaseRegionInstrumenter extends BaseInstrumenter {
     return regionsToOptionsSet;
   }
 
-
-  public Map<JavaRegion, Set<Set<String>>> getRegionsToOptionSet() {
-    return this.regionsToOptionSet;
-  }
 }

@@ -7,8 +7,8 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.DefaultStaticAnalysis;
 import edu.cmu.cs.mvelezce.tool.execute.java.ConfigCrusherExecutor;
 import edu.cmu.cs.mvelezce.tool.execute.java.Executor;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExampleMain;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.BaseRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.ConfigCrusherTimerRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.BaseRegionInstrumenter;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer.ConfigCrusherTimerRegionInstrumenter;
 import edu.cmu.cs.mvelezce.tool.performance.entry.PerformanceEntryStatistic;
 import edu.cmu.cs.mvelezce.tool.performance.model.PerformanceModel;
 import org.junit.Test;
@@ -25,9 +25,9 @@ public class ConfigCrusherPerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+        BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
         instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
         RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
@@ -62,9 +62,9 @@ public class ConfigCrusherPerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+        BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
         instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
         RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);
@@ -89,9 +89,9 @@ public class ConfigCrusherPerformanceModelBuilderTest {
         // Program arguments
         String[] args = new String[0];
 
-        BaseRegionInstrumenter instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
+        BaseRegionInstrumenter<Set<Set<String>>> instrumenter = new ConfigCrusherTimerRegionInstrumenter(programName);
         instrumenter.instrument(args);
-        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToOptionSet();
+        Map<JavaRegion, Set<Set<String>>> javaRegionsToOptionSet = instrumenter.getRegionsToData();
 
         RegionAnalysis<Set<Set<String>>> analysis = new DefaultStaticAnalysis();
         Map<Region, Set<Set<String>>> regionsToOptionSet = analysis.transform(javaRegionsToOptionSet);

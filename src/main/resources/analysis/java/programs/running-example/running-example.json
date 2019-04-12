@@ -8,13 +8,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 21,
+      "startRegionIndex": 21,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "B"
       ]
@@ -29,13 +29,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 66,
+      "startRegionIndex": 66,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "B"
       ]
@@ -50,13 +50,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 41,
+      "startRegionIndex": 41,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "D",
         "E"
@@ -72,13 +72,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 26,
+      "startRegionIndex": 26,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "A",
         "B"
@@ -94,13 +94,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 46,
+      "startRegionIndex": 46,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "D",
         "E",
@@ -117,13 +117,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 76,
+      "startRegionIndex": 76,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "C"
       ]
@@ -138,13 +138,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 130,
+      "startRegionIndex": 130,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "H"
       ]
@@ -159,13 +159,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 56,
+      "startRegionIndex": 56,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "A"
       ]
@@ -180,13 +180,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 97,
+      "startRegionIndex": 97,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "E"
       ]
@@ -201,13 +201,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 4,
+      "startRegionIndex": 4,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "A"
       ]
@@ -222,13 +222,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 36,
+      "startRegionIndex": 36,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "D"
       ]
@@ -243,13 +243,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 141,
+      "startRegionIndex": 141,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "I"
       ]
@@ -264,13 +264,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "moo(Z)V",
-      "startBytecodeIndex": 1,
+      "startRegionIndex": 1,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "A",
         "C"
@@ -286,13 +286,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 108,
+      "startRegionIndex": 108,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "F"
       ]
@@ -307,13 +307,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 119,
+      "startRegionIndex": 119,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "G"
       ]
@@ -328,13 +328,13 @@
       "regionPackage": "edu.cmu.cs.mvelezce",
       "regionClass": "Example",
       "regionMethod": "foo(ZZZZZZZZZ)V",
-      "startBytecodeIndex": 86,
+      "startRegionIndex": 86,
       "startMethodBlock": null,
       "endMethodBlocks": [],
       "startBlockID": "",
       "endBlocksIDs": []
     },
-    "options": [
+    "info": [
       [
         "D"
       ]

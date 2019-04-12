@@ -11,9 +11,8 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraphBuil
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.config.SootConfig;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.callgraph.CallGraphBuilder;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
@@ -42,14 +41,10 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import jdk.internal.org.objectweb.asm.util.Printer;
 import org.apache.commons.lang3.StringUtils;
 import soot.MethodOrMethodContext;
-import soot.PackManager;
-import soot.Scene;
-import soot.SootClass;
 import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
-import soot.options.Options;
 import soot.tagkit.BytecodeOffsetTag;
 import soot.tagkit.Tag;
 import soot.util.queue.QueueReader;
@@ -58,6 +53,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
   private static final String CLINIT_SIGNATURE = "void <clinit>()";
   private static final String MAIN_SIGNATURE = "void main(java.lang.String[])";
+
 
   private final String programName;
 
@@ -89,9 +85,10 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     this.entryPoint = entryPoint;
     this.rootPackage = entryPoint.substring(0, entryPoint.indexOf("."));
     this.regionsToOptionSet = regionsToOptionSet;
-    this.callGraph = this.buildCallGraph();
 
-//        System.out.println("Call graph size: " + this.callGraph.size());
+    this.callGraph = CallGraphBuilder
+        .buildCallGraph(this.entryPoint, this.getClassTransformer().getPathToClasses());
+    //        System.out.println("Call graph size: " + this.callGraph.size());
   }
 
   public RegionTransformer(String programName, String entryPoint, String directory,
@@ -567,7 +564,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
 
         try {
           prettyGraph.savePdfFile(this.programName, classNode.name, methodNode.name);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
           e.printStackTrace();
         }
       }
@@ -614,7 +612,7 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
   }
 
   /**
-   * @param methodNode
+   *
    */
   private boolean propagateUpRegionsInMethod(MethodNode methodNode) {
     List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
@@ -1529,7 +1527,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     javapResult = new ArrayList<>();
 
     try {
-      String[] command = new String[]{"javap", "-classpath", this.getClassTransformer().getPathToClasses(),
+      String[] command = new String[]{"javap", "-classpath",
+          this.getClassTransformer().getPathToClasses(),
           "-p", "-c", "-s",
           classPackage + "." + className};
       System.out.println(Arrays.toString(command));
@@ -1553,7 +1552,8 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
       }
 
       process.waitFor();
-    } catch (IOException | InterruptedException ie) {
+    }
+    catch (IOException | InterruptedException ie) {
       ie.printStackTrace();
     }
 
@@ -1938,71 +1938,6 @@ public abstract class RegionTransformer extends BaseMethodTransformer {
     }
 
     return methods;
-  }
-
-  private CallGraph buildCallGraph() {
-    initializeSoot();
-    PackManager.v().getPack("wjpp").apply();
-    PackManager.v().getPack("cg").apply();
-
-    return Scene.v().getCallGraph();
-  }
-
-  private void initializeSoot() {
-    String libPath = "/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/jce.jar";
-
-    soot.G.reset();
-
-    Options.v().set_no_bodies_for_excluded(true);
-    Options.v().set_allow_phantom_refs(true);
-    Options.v().set_soot_classpath(appendClasspath(this.getClassTransformer().getPathToClasses(), libPath));
-
-    // Configure the callgraph algorithm
-    Options.v().setPhaseOption("cg.spark", "on");
-    Options.v().setPhaseOption("cg.spark", "string-constants:true");
-
-    // Specify additional options required for the callgraph
-    Options.v().set_whole_program(true);
-    Options.v().setPhaseOption("cg", "trim-clinit:false");
-
-    // do not merge variables (causes problems with PointsToSets)
-    Options.v().setPhaseOption("jb.ulp", "off");
-
-    Options.v().set_src_prec(Options.src_prec_java);
-
-    //at the end of setting: load user settings:
-    new SootConfig().setSootOptions(Options.v());
-
-    // load all entryPoint classes with their bodies
-    Scene.v().addBasicClass(this.entryPoint, SootClass.BODIES);
-    Scene.v().loadNecessaryClasses();
-
-    boolean hasClasses = false;
-//        for(String className : classes) {
-    SootClass c = Scene.v().forceResolve(this.entryPoint, SootClass.BODIES);
-    if (c != null) {
-      c.setApplicationClass();
-      if (!c.isPhantomClass() && !c.isPhantom()) {
-        hasClasses = true;
-      }
-//            }
-    }
-
-    if (!hasClasses) {
-      throw new RuntimeException("Only phantom classes loaded, skipping analysis...");
-    }
-  }
-
-  private String appendClasspath(String appPath, String libPath) {
-    String s = (appPath != null && !appPath.isEmpty()) ? appPath : "";
-
-    if (libPath != null && !libPath.isEmpty()) {
-      if (!s.isEmpty()) {
-        s += File.pathSeparator;
-      }
-      s += libPath;
-    }
-    return s;
   }
 
   private List<JavaRegion> getRegionsInMethod(SootMethod sootMethod) {

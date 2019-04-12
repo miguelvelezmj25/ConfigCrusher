@@ -38,42 +38,43 @@ public class JavaRegion extends Region {
     this.endBlocksIDs = builder.endBlocksIDs;
   }
 
-  // TODO this implementation might brake the implementation in other CC components
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    JavaRegion that = (JavaRegion) o;
-
-    if (startRegionIndex != that.startRegionIndex) {
-      return false;
-    }
-
-    if (!regionPackage.equals(that.regionPackage)) {
-      return false;
-    }
-
-    if (!regionClass.equals(that.regionClass)) {
-      return false;
-    }
-
-    return regionMethod.equals(that.regionMethod);
-  }
-
-  // TODO this implementation might brake the implementation in other CC components
-  @Override
-  public int hashCode() {
-    int result = regionPackage.hashCode();
-    result = 31 * result + regionClass.hashCode();
-    result = 31 * result + regionMethod.hashCode();
-    result = 31 * result + startRegionIndex;
-    return result;
-  }
+//  // TODO this implementation might brake the implementation in other CC components since they are
+  // saved in sets or maps, but the state changes, so the hashcode does not match anymore.
+//  @Override
+//  public boolean equals(Object o) {
+//    if (this == o) {
+//      return true;
+//    }
+//    if (o == null || getClass() != o.getClass()) {
+//      return false;
+//    }
+//
+//    JavaRegion that = (JavaRegion) o;
+//
+//    if (startRegionIndex != that.startRegionIndex) {
+//      return false;
+//    }
+//
+//    if (!regionPackage.equals(that.regionPackage)) {
+//      return false;
+//    }
+//
+//    if (!regionClass.equals(that.regionClass)) {
+//      return false;
+//    }
+//
+//    return regionMethod.equals(that.regionMethod);
+//  }
+//
+//  // TODO this implementation might brake the implementation in other CC components
+//  @Override
+//  public int hashCode() {
+//    int result = regionPackage.hashCode();
+//    result = 31 * result + regionClass.hashCode();
+//    result = 31 * result + regionMethod.hashCode();
+//    result = 31 * result + startRegionIndex;
+//    return result;
+//  }
 
   public String getRegionPackage() {
     return this.regionPackage;

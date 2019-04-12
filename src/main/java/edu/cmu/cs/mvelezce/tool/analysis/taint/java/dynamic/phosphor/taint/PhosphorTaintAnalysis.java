@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.region;
+package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.cmu.cs.mvelezce.cc.DecisionTaints;

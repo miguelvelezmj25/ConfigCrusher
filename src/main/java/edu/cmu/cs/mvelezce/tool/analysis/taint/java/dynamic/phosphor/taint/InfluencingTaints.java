@@ -1,4 +1,4 @@
-package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.region;
+package edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint;
 
 import java.util.HashSet;
 import java.util.Set;

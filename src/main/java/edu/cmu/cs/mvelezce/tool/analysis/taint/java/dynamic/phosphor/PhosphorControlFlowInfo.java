@@ -10,6 +10,14 @@ public class PhosphorControlFlowInfo {
   private final int decisionIndex;
   private final InfluencingTaints influencingTaints;
 
+  private PhosphorControlFlowInfo() {
+    this.packageName = null;
+    this.className = null;
+    this.methodSignature = null;
+    this.decisionIndex = -1;
+    this.influencingTaints = null;
+  }
+
   public PhosphorControlFlowInfo(String packageName, String className, String methodSignature,
       int decisionIndex, InfluencingTaints influencingTaints) {
     this.packageName = packageName;

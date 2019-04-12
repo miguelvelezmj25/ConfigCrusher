@@ -8,6 +8,8 @@ public class InfluencingTaints {
   private final Set<String> context = new HashSet<>();
   private final Set<String> condition = new HashSet<>();
 
+  private InfluencingTaints() { }
+
   InfluencingTaints(Set<String> context, Set<String> condition) {
     this.context.addAll(context);
     this.condition.addAll(condition);

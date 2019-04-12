@@ -1,0 +1,1 @@
+[{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"Subtraces2","methodSignature":"foo(Z)V","decisionIndex":1,"influencingTaints":{"context":["A"],"condition":["B","C"]}},{"packageName":"edu.cmu.cs.mvelezce.analysis","className":"Subtraces2","methodSignature":"main([Ljava/lang/String;)V","decisionIndex":1,"influencingTaints":{"context":[],"condition":["A"]}}]

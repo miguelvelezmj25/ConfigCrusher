@@ -55,9 +55,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
   private final PhosphorConstraintAnalysis phosphorConstraintAnalysis;
   private final PhosphorTaintAnalysis phosphorTaintAnalysis;
 
-//  private final PhosphorExecutionAnalysis phosphorExecutionAnalysis;
-//  private final PhosphorConfigConstraintTracker phosphorConfigConstraintTracker;
-
   public PhosphorAnalysis(String programName) {
     this(programName, new ArrayList<>(), new HashSet<>());
   }
@@ -70,8 +67,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
     this.phosphorConstraintCalculator = new PhosphorConstraintCalculator(options);
     this.phosphorConstraintAnalysis = new PhosphorConstraintAnalysis(programName);
     this.phosphorTaintAnalysis = new PhosphorTaintAnalysis(programName, options);
-//    this.phosphorExecutionAnalysis = new PhosphorExecutionAnalysis(programName);
-//    this.phosphorConfigConstraintTracker = new PhosphorConfigConstraintTracker();
   }
 
   @Nullable
@@ -82,7 +77,9 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
     Set<ConfigConstraint> constraints = this.phosphorConstraintAnalysis.analyze();
     this.phosphorConstraintAnalysis.writeToFile(constraints);
 
-//    this.phosphorTaintAnalysis.analyze();
+    Set<PhosphorControlFlowInfo> phosphorControlFlowInfos = this.phosphorTaintAnalysis.analyze();
+    this.phosphorTaintAnalysis.writeToFile(phosphorControlFlowInfos);
+
     return null;
   }
 
@@ -119,7 +116,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
       this.runPhosphorAnalysis(config);
       Set<DecisionTaints> results = this.phosphorConstraintExecutionAnalysis.getResults();
 
-//      this.phosphorTaintAnalysis.getTaints(results);
+      this.phosphorTaintAnalysis.recordTaints(results);
 
       Set<ConfigConstraint> analysisConstraints = this.phosphorConstraintCalculator
           .deriveConstraints(results, config);
@@ -134,35 +131,6 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
 
       config = this.getNextConfig(configsToRun);
     }
-
-//    while (configToExecute != null) {
-//      ConfigConstraint configConstraint = ConfigConstraint
-//          .fromConfig(configToExecute, this.getOptions());
-//      exploredConfigConstraints.add(configConstraint);
-//      Set<ConfigConstraint> satisfiedConfigConstraintsByConfig = this.configConstraintAnalyzer
-//          .getConstraintsSatisfiedByConfig(configConstraint);
-//      satisfiedConfigConstraints.addAll(satisfiedConfigConstraintsByConfig);
-//
-//      this.runPhosphorAnalysis(configToExecute);
-//
-//      // TODO derive constraints
-//      Map<String, Map<Set<String>, List<Set<String>>>> sinksToAnalysisTaints = this.phosphorExecutionAnalysis
-//          .getPhosphorResults();
-//      this.phosphorConfigConstraintTracker
-//          .deriveConstraints(configToExecute, sinksToAnalysisTaints);
-//
-//      Set<ConfigConstraint> analysisConfigConstraints = this.phosphorConfigConstraintTracker
-//          .getConfigConstraints();
-//      configConstraintsToSatisfy.addAll(analysisConfigConstraints);
-//      configConstraintsToSatisfy.removeAll(satisfiedConfigConstraints);
-//
-//      // TODO pick next config if we still need to sample something
-//      Set<Set<String>> configsToRun = this.configConstraintAnalyzer
-//          .getConfigsThatSatisfyConfigConstraints(configConstraintsToSatisfy,
-//              exploredConfigConstraints);
-//
-//      configToExecute = this.getConfigToExecute(configsToRun);
-//    }
   }
 
   @Nullable
@@ -171,6 +139,7 @@ public class PhosphorAnalysis extends BaseDynamicAnalysis<Void> {
       return null;
     }
 
+    // Optimize
     return configsToRun.iterator().next();
   }
 

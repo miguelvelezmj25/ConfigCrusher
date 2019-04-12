@@ -1,0 +1,579 @@
+[
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "putInternal(Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/CacheMode;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/dbi/PutMode;)Lcom/sleepycat/je/OperationResult;",
+    "decisionIndex": 3,
+    "influencingTaints": {
+      "context": [
+        "DUPLICATES"
+      ],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.recovery",
+    "className": "RecoveryInfo",
+    "methodSignature": "appendLsn(Ljava/lang/StringBuilder;Ljava/lang/String;J)V",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "DaemonThread",
+    "methodSignature": "run()V",
+    "decisionIndex": 2,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "handleClosed(ZZ)V",
+    "decisionIndex": 3,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE"
+      ],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "MemoryBudget",
+    "methodSignature": "<clinit>()V",
+    "decisionIndex": 7,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "DaemonThread",
+    "methodSignature": "run()V",
+    "decisionIndex": 4,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "UtilizationCalculator",
+    "methodSignature": "getBestFile(Ljava/util/SortedMap;Z)Lcom/sleepycat/je/utilint/Pair;",
+    "decisionIndex": 6,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "checkUpdatesAllowed(Lcom/sleepycat/je/dbi/ExpirationInfo;)V",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [
+        "DUPLICATES"
+      ],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.analysis",
+    "className": "MeasureDiskOrderedScan",
+    "methodSignature": "<init>([Ljava/lang/String;)V",
+    "decisionIndex": 3,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FileSummary",
+    "methodSignature": "getObsoleteLNSize()I",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FileProcessor",
+    "methodSignature": "onWakeup()V",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FileSummary",
+    "methodSignature": "calculateObsoleteSize(I)I",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.recovery",
+    "className": "Checkpointer",
+    "methodSignature": "isRunnable(Lcom/sleepycat/je/CheckpointConfig;)Z",
+    "decisionIndex": 12,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.recovery",
+    "className": "Checkpointer",
+    "methodSignature": "isRunnable(Lcom/sleepycat/je/CheckpointConfig;)Z",
+    "decisionIndex": 14,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "DaemonThread",
+    "methodSignature": "run()V",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE",
+        "DUPLICATES",
+        "SEQUENTIAL"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.analysis",
+    "className": "MeasureDiskOrderedScan",
+    "methodSignature": "populate()V",
+    "decisionIndex": 3,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FilesToMigrate",
+    "methodSignature": "hasNext(Ljava/util/SortedMap;Ljava/util/Set;)Z",
+    "decisionIndex": 5,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "close()V",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ],
+      "condition": [
+        "SEQUENTIAL"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "resetKeyComparator()V",
+    "decisionIndex": 3,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE"
+      ],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "setConfigProperties(Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE"
+      ],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "getUtilizationRepairDone()Z",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE"
+      ],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "DaemonThread",
+    "methodSignature": "run()V",
+    "decisionIndex": 7,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "DaemonThread",
+    "methodSignature": "run()V",
+    "decisionIndex": 3,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FileProcessor",
+    "methodSignature": "doClean(ZZZ)I",
+    "decisionIndex": 3,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "DaemonThread",
+    "methodSignature": "run()V",
+    "decisionIndex": 5,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "UtilizationCalculator",
+    "methodSignature": "getBestFile(Ljava/util/SortedMap;Z)Lcom/sleepycat/je/utilint/Pair;",
+    "decisionIndex": 7,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "UtilizationCalculator",
+    "methodSignature": "getBestFile(Ljava/util/SortedMap;Z)Lcom/sleepycat/je/utilint/Pair;",
+    "decisionIndex": 9,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "CursorImpl",
+    "methodSignature": "updateRecordInternal([BLcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/dbi/CursorImpl$LockStanding;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
+    "decisionIndex": 12,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ],
+      "condition": [
+        "SEQUENTIAL"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "<init>(Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/dbi/DatabaseId;Lcom/sleepycat/je/dbi/EnvironmentImpl;Lcom/sleepycat/je/DatabaseConfig;)V",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE"
+      ],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FileSummary",
+    "methodSignature": "utilization(JJ)I",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FileSummary",
+    "methodSignature": "getObsoleteLNSize()I",
+    "decisionIndex": 2,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "Cursor",
+    "methodSignature": "checkUpdatesAllowed()V",
+    "decisionIndex": 3,
+    "influencingTaints": {
+      "context": [
+        "DUPLICATES"
+      ],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FilesToMigrate",
+    "methodSignature": "hasNext(Ljava/util/SortedMap;Ljava/util/Set;)Z",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FileSummary",
+    "methodSignature": "getObsoleteLNSize()I",
+    "decisionIndex": 4,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DbTree",
+    "methodSignature": "checkReplicaWrite(Lcom/sleepycat/je/txn/Locker;Lcom/sleepycat/je/log/ReplicationContext;)V",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE"
+      ],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.recovery",
+    "className": "Checkpointer",
+    "methodSignature": "isRunnable(Lcom/sleepycat/je/CheckpointConfig;)Z",
+    "decisionIndex": 13,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.analysis",
+    "className": "MeasureDiskOrderedScan",
+    "methodSignature": "open()V",
+    "decisionIndex": 2,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je",
+    "className": "DatabaseConfig",
+    "methodSignature": "setSortedDuplicatesVoid(Z)V",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE"
+      ],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.txn",
+    "className": "LockerFactory",
+    "methodSignature": "getReadableLocker(Lcom/sleepycat/je/Database;Lcom/sleepycat/je/txn/Locker;Z)Lcom/sleepycat/je/txn/Locker;",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [
+        "DUPLICATES"
+      ],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "setConfigProperties(Lcom/sleepycat/je/txn/Locker;Ljava/lang/String;Lcom/sleepycat/je/DatabaseConfig;Lcom/sleepycat/je/dbi/EnvironmentImpl;)V",
+    "decisionIndex": 2,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE"
+      ],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "CursorImpl",
+    "methodSignature": "updateRecordInternal([BLcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/dbi/ExpirationInfo;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/DatabaseEntry;Lcom/sleepycat/je/dbi/CursorImpl$LockStanding;Lcom/sleepycat/je/log/ReplicationContext;)Lcom/sleepycat/je/OperationResult;",
+    "decisionIndex": 7,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE",
+        "DUPLICATES"
+      ],
+      "condition": [
+        "SEQUENTIAL"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.dbi",
+    "className": "DatabaseImpl",
+    "methodSignature": "initWithEnvironment()V",
+    "decisionIndex": 5,
+    "influencingTaints": {
+      "context": [
+        "JECACHESIZE"
+      ],
+      "condition": [
+        "DUPLICATES"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.analysis",
+    "className": "MeasureDiskOrderedScan",
+    "methodSignature": "populate()V",
+    "decisionIndex": 2,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "SEQUENTIAL"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.utilint",
+    "className": "DaemonThread",
+    "methodSignature": "run()V",
+    "decisionIndex": 6,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  },
+  {
+    "packageName": "com.sleepycat.je.cleaner",
+    "className": "FileSummary",
+    "methodSignature": "getObsoleteINSize()I",
+    "decisionIndex": 1,
+    "influencingTaints": {
+      "context": [],
+      "condition": [
+        "JECACHESIZE"
+      ]
+    }
+  }
+]

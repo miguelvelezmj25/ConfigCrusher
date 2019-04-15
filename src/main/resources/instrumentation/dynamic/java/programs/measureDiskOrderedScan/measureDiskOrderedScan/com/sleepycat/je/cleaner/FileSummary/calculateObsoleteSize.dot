@@ -1,0 +1,21 @@
+digraph calculateObsoleteSize {
+node [shape=record];
+1426344756 [label="L0\lLINENUMBER 252 L0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lLDC \"1a5e1f28-61a4-4c51-b5fe-5a17ca25bf44\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lIFGT L1\l"];
+685605293 [label="L1\lLINENUMBER 256 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINSize : I\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalLNSize : I\lIADD\lISUB\lISTORE 2\lL3\lLINENUMBER 258 L3\lILOAD 1\lALOAD 0\lL4\lLINENUMBER 259 L4\lINVOKEVIRTUAL com/sleepycat/je/cleaner/FileSummary.getObsoleteINSize ()I\lIADD\lILOAD 2\lIADD\lISTORE 3\lL5\lLINENUMBER 267 L5\lILOAD 3\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lIF_ICMPLE L6\l"];
+1553616699 [label="L7\lLINENUMBER 268 L7\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalSize : I\lISTORE 3\l"];
+733012599 [label="L6\lLINENUMBER 270 L6\lFRAME APPEND [I I]\lILOAD 3\lLDC \"1a5e1f28-61a4-4c51-b5fe-5a17ca25bf44\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL8\l"];
+805976295 [label="L2\lLINENUMBER 253 L2\lICONST_0\lLDC \"1a5e1f28-61a4-4c51-b5fe-5a17ca25bf44\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+entry;
+exit;
+1426344756 -> 685605293;
+1426344756 -> 805976295;
+entry -> 1426344756;
+685605293 -> 1553616699;
+685605293 -> 733012599;
+1553616699 -> 733012599;
+733012599 -> exit;
+805976295 -> exit;
+1426344756[fontcolor="purple", penwidth=3, color="purple"];
+733012599[fontcolor="purple", penwidth=3, color="purple"];
+805976295[fontcolor="purple", penwidth=3, color="purple"];
+}

@@ -1,0 +1,16 @@
+digraph getObsoleteINSize {
+node [shape=record];
+1569908962 [label="L0\lLINENUMBER 222 L0\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINCount : I\lLDC \"db797f26-82fe-48c4-ad82-1890b4aed48b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lIFNE L1\l"];
+215738773 [label="L1\lLINENUMBER 227 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.obsoleteINCount : I\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINCount : I\lINVOKESTATIC java/lang/Math.min (II)I\lISTORE 1\lL3\lLINENUMBER 230 L3\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINSize : I\lI2F\lFSTORE 2\lL4\lLINENUMBER 231 L4\lFLOAD 2\lALOAD 0\lGETFIELD com/sleepycat/je/cleaner/FileSummary.totalINCount : I\lI2F\lFDIV\lFSTORE 3\lL5\lLINENUMBER 232 L5\lILOAD 1\lI2F\lFLOAD 3\lFMUL\lF2I\lLDC \"db797f26-82fe-48c4-ad82-1890b4aed48b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\lL6\l"];
+1412195801 [label="L2\lLINENUMBER 223 L2\lICONST_0\lLDC \"db797f26-82fe-48c4-ad82-1890b4aed48b\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lIRETURN\l"];
+entry;
+exit;
+entry -> 1569908962;
+1569908962 -> 215738773;
+1569908962 -> 1412195801;
+215738773 -> exit;
+1412195801 -> exit;
+1569908962[fontcolor="purple", penwidth=3, color="purple"];
+215738773[fontcolor="purple", penwidth=3, color="purple"];
+1412195801[fontcolor="purple", penwidth=3, color="purple"];
+}

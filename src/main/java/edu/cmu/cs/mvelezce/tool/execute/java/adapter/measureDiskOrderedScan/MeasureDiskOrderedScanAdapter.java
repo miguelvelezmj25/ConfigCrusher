@@ -15,9 +15,10 @@ import java.util.Set;
 public class MeasureDiskOrderedScanAdapter extends BaseAdapter {
 
   public static final String PROGRAM_NAME = "measureDiskOrderedScan";
-  private static final String MAIN_CLASS = "com.sleepycat.analysis.MeasureDiskOrderedScan";
+  public static final String MAIN_CLASS = "com.sleepycat.analysis.MeasureDiskOrderedScan";
   public static final String ORIGINAL_ROOT_DIR = "../performance-mapper-evaluation/original/berkeley-db";
   private static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/berkeley-db/target/classes";
+  public static final String INSTRUMENTED_DIR_PATH = "../performance-mapper-evaluation/instrumented/berkeley-db";
   public static final String INSTRUMENTED_CLASS_PATH = "../performance-mapper-evaluation/instrumented/berkeley-db/target/classes";
 
   private static final String HOME_DIR = "tmp";

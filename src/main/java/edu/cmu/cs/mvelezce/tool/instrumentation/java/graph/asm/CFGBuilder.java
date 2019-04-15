@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.BaseMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.RegionTransformer;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -212,7 +213,8 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
     }
     catch (AnalyzerException ae) {
       throw new RuntimeException(
-          "Could not build a control flow graph for method :" + methodNode.name, ae);
+          "Could not build a control flow graph for method " + RegionTransformer
+              .getMethodName(methodNode), ae);
     }
 
     return this.analyzer;

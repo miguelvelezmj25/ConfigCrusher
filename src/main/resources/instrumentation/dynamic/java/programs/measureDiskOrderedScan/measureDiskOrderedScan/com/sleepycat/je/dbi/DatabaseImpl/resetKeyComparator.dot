@@ -1,0 +1,27 @@
+digraph resetKeyComparator {
+node [shape=record];
+1387948122 [label="L2\lLINENUMBER 1079 L2\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lCHECKCAST com/sleepycat/je/DatabaseComparator\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL3\lLINENUMBER 1080 L3\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getClassLoader ()Ljava/lang/ClassLoader;\lINVOKEINTERFACE com/sleepycat/je/DatabaseComparator.initialize (Ljava/lang/ClassLoader;)V\l"];
+686721068 [label="L7\lLINENUMBER 1092 L7\lFRAME SAME\lALOAD 0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.keyComparator : Ljava/util/Comparator;\l"];
+2027371291 [label="L8\lLINENUMBER 1089 L8\lALOAD 0\lNEW com/sleepycat/je/dbi/DupKeyData$TwoPartKeyComparator\lDUP\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.duplicateComparator : Ljava/util/Comparator;\lINVOKESPECIAL com/sleepycat/je/dbi/DupKeyData$TwoPartKeyComparator.\<init\> (Ljava/util/Comparator;Ljava/util/Comparator;)V\lPUTFIELD com/sleepycat/je/dbi/DatabaseImpl.keyComparator : Ljava/util/Comparator;\lGOTO L9\l"];
+1674999797 [label="L1\lLINENUMBER 1082 L1\lFRAME SAME\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.duplicateComparator : Ljava/util/Comparator;\lINSTANCEOF com/sleepycat/je/DatabaseComparator\lIFEQ L4\l"];
+42684986 [label="L0\lLINENUMBER 1078 L0\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.btreeComparator : Ljava/util/Comparator;\lINSTANCEOF com/sleepycat/je/DatabaseComparator\lIFEQ L1\l"];
+697818620 [label="L5\lLINENUMBER 1083 L5\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.duplicateComparator : Ljava/util/Comparator;\lCHECKCAST com/sleepycat/je/DatabaseComparator\lALOAD 0\lGETFIELD com/sleepycat/je/dbi/DatabaseImpl.envImpl : Lcom/sleepycat/je/dbi/EnvironmentImpl;\lL6\lLINENUMBER 1084 L6\lINVOKEVIRTUAL com/sleepycat/je/dbi/EnvironmentImpl.getClassLoader ()Ljava/lang/ClassLoader;\lINVOKEINTERFACE com/sleepycat/je/DatabaseComparator.initialize (Ljava/lang/ClassLoader;)V\l"];
+1909807998 [label="L4\lLINENUMBER 1088 L4\lFRAME SAME\lALOAD 0\lINVOKEVIRTUAL com/sleepycat/je/dbi/DatabaseImpl.getSortedDuplicates ()Z\lLDC \"36ebd721-b5a0-4969-841f-f5c07ff7ef63\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.enter (Ljava/lang/String;)V\lIFEQ L7\l"];
+595759572 [label="L9\lFRAME SAME\lLDC \"36ebd721-b5a0-4969-841f-f5c07ff7ef63\"\lINVOKESTATIC edu/cmu/cs/mvelezce/tool/analysis/region/Regions.exit (Ljava/lang/String;)V\lL10\lLINENUMBER 1094 L10\lRETURN\lL11\l"];
+entry;
+exit;
+entry -> 42684986;
+1387948122 -> 1674999797;
+686721068 -> 595759572;
+2027371291 -> 595759572;
+1674999797 -> 697818620;
+1674999797 -> 1909807998;
+42684986 -> 1387948122;
+42684986 -> 1674999797;
+697818620 -> 1909807998;
+1909807998 -> 686721068;
+1909807998 -> 2027371291;
+595759572 -> exit;
+1909807998[fontcolor="purple", penwidth=3, color="purple"];
+595759572[fontcolor="purple", penwidth=3, color="purple"];
+}

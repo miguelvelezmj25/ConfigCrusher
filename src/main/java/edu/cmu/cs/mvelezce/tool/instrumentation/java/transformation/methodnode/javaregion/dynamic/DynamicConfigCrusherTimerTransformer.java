@@ -36,7 +36,6 @@ public class DynamicConfigCrusherTimerTransformer extends DynamicConfigCrusherRe
     List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode, classNode);
 
     this.instrumentRegion(methodNode, classNode, regionsInMethod);
-    methodNode.visitMaxs(200, 200);
   }
 
   private void instrumentRegion(MethodNode methodNode, ClassNode classNode,
@@ -45,6 +44,7 @@ public class DynamicConfigCrusherTimerTransformer extends DynamicConfigCrusherRe
     ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
 
     int decisionCount = 0;
+    methodNode.visitMaxs(200, 200);
 
     while (insnListIter.hasNext()) {
       AbstractInsnNode insnNode = insnListIter.next();

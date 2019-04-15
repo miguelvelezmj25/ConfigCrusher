@@ -18,10 +18,6 @@ public abstract class DynamicBaseRegionInstrumenter extends
     super(programName, classDir, regionsToInfluencingTaints);
   }
 
-//  public DynamicBaseRegionInstrumenter(String programName) {
-//    this(programName, null, new HashMap<>());
-//  }
-
   public void writeToFile(Map<JavaRegion, InfluencingTaints> relevantRegionsToOptions)
       throws IOException {
     throw new UnsupportedOperationException("Implement");

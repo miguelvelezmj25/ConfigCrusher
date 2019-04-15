@@ -3,7 +3,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.StaticBaseRegionInstrumenter;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.ConfigCrusherTimerTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.fixed.ConfigCrusherTimerTransformer;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

@@ -8,6 +8,8 @@ import edu.cmu.cs.mvelezce.tool.execute.java.adapter.runningexample.RunningExamp
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.MethodTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.fixed.ConfigCrusherRegionTransformer;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.fixed.ConfigCrusherTimerTransformer;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
@@ -20,7 +22,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ConfigCrusherRegionTransformerTest {
+public class ConfigCrusherStaticRegionTransformerTest {
 
   private static ConfigCrusherRegionTransformer transformer;
 

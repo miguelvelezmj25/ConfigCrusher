@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class DynamicConfigCrusherTimerRegionInstrumenter extends DynamicBaseRegionInstrumenter {
 
-  //  @Nullable
   private final String entryPoint;
 
   public DynamicConfigCrusherTimerRegionInstrumenter(String programName, String entryPoint,
@@ -21,26 +20,15 @@ public class DynamicConfigCrusherTimerRegionInstrumenter extends DynamicBaseRegi
     this.entryPoint = entryPoint;
   }
 
-//  public DynamicConfigCrusherTimerRegionInstrumenter(String programName) {
-//    super(programName);
-//
-//    this.entryPoint = null;
-//  }
-
   @Override
   public void instrument()
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
-//    MethodTransformer methodTransformer = new DynamicConfigCrusherTimerTransformer(this.getProgramName(),
-//        this.entryPoint, this.getClassDir(), this.getRegionsToData());
-//    methodTransformer.transformMethods();
-    throw new UnsupportedOperationException("Implement");
+    MethodTransformer methodTransformer = new DynamicConfigCrusherTimerTransformer(
+        this.getProgramName(),
+        this.entryPoint, this.getClassDir(), this.getRegionsToData());
+    methodTransformer.transformMethods();
   }
 
   @Override
-  public void compile() {
-  }
-
-//  public String getEntryPoint() {
-//    return entryPoint;
-//  }
+  public void compile() { }
 }

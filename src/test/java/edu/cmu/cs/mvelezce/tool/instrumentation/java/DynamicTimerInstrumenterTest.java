@@ -5,6 +5,7 @@ import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.region.Tain
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.InfluencingTaints;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.measureDiskOrderedScan.MeasureDiskOrderedScanAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.simpleForExample6.SimpleForExample6Adapter;
+import edu.cmu.cs.mvelezce.tool.execute.java.adapter.subtraces.SubtracesAdapter;
 import edu.cmu.cs.mvelezce.tool.execute.java.adapter.trivial.TrivialAdapter;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.timer.DynamicConfigCrusherTimerRegionInstrumenter;
 import java.io.IOException;
@@ -76,6 +77,30 @@ public class DynamicTimerInstrumenterTest {
     String classDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH;
 
 //    this.compile(srcDir, classDir);
+
+    String[] args = new String[0];
+
+    TaintPhosphorAnalysis analysis = new TaintPhosphorAnalysis(programName);
+    Map<JavaRegion, InfluencingTaints> decisionsToInfluencingTaints = analysis.analyze(args);
+
+    args = new String[2];
+    args[0] = "-delres";
+    args[1] = "-saveres";
+
+    Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
+        classDir, decisionsToInfluencingTaints);
+    instrumenter.instrument(args);
+  }
+
+  @Test
+  public void subtraces()
+      throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
+    String programName = SubtracesAdapter.PROGRAM_NAME;
+    String entry = SubtracesAdapter.MAIN_CLASS;
+    String srcDir = SubtracesAdapter.INSTRUMENTED_DIR_PATH;
+    String classDir = SubtracesAdapter.INSTRUMENTED_CLASS_PATH;
+
+    this.compile(srcDir, classDir);
 
     String[] args = new String[0];
 

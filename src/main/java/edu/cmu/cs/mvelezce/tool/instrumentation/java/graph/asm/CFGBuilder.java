@@ -3,6 +3,7 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.BaseMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.RegionTransformer;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
+import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.JumpInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
@@ -25,9 +27,13 @@ public class CFGBuilder extends BaseMethodGraphBuilder {
 
   // TODO add a new label in a basic block to determine the beginning and end of a control flow decision
   private final String owner;
-
   private final Map<CFGNode<BasicValue>, Integer> nodesToIndexes = new HashMap<>();
   private Analyzer<BasicValue> analyzer;
+
+  public static MethodGraph getCfg(MethodNode methodNode, ClassNode classNode) {
+    MethodGraphBuilder cfgBuilder = new CFGBuilder(classNode.name);
+    return cfgBuilder.build(methodNode);
+  }
 
   public CFGBuilder(String owner) {
     this.owner = owner;

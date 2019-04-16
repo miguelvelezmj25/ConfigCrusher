@@ -135,7 +135,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
 
         if (insnNode instanceof JumpInsnNode) {
           try {
-            this.getCFG(methodNode, classNode);
+            CFGBuilder.getCfg(methodNode, classNode);
           }
           catch (InvalidGraphException ige) {
             System.err.println("Ignoring " + methodNode.name + " from " + classNode.name
@@ -299,7 +299,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
       return;
     }
 
-    MethodGraph cfg = this.getCFG(methodNode, classNode);
+    MethodGraph cfg = CFGBuilder.getCfg(methodNode, classNode);
     MethodBlock exitBlock = cfg.getExitBlock();
     Set<MethodBlock> preds = exitBlock.getPredecessors();
 
@@ -326,7 +326,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
   }
 
   private void instrumentIPDs(MethodNode methodNode, ClassNode classNode, String labelPrefix) {
-    MethodGraph cfg = this.getCFG(methodNode, classNode);
+    MethodGraph cfg = CFGBuilder.getCfg(methodNode, classNode);
     InsnList insnList = methodNode.instructions;
     ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
     int decisionCount = 0;
@@ -371,7 +371,7 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
       }
 
       decisionCount++;
-      cfg = this.getCFG(methodNode, classNode);
+      cfg = CFGBuilder.getCfg(methodNode, classNode);
     }
   }
 
@@ -529,11 +529,6 @@ public class SubtracesMethodTransformer extends BaseMethodTransformer {
             methodDescriptor, false));
 
     return loggingInsnList;
-  }
-
-  private MethodGraph getCFG(MethodNode methodNode, ClassNode classNode) {
-    MethodGraphBuilder cfgBuilder = new CFGBuilder(classNode.name);
-    return cfgBuilder.build(methodNode);
   }
 
   public static class Builder {

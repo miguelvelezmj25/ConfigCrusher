@@ -74,6 +74,7 @@ public class DynamicConfigCrusherTimerTransformer extends DynamicConfigCrusherRe
   private void instrumentRegionEnd(AbstractInsnNode insnNode, JavaRegion startRegion,
       MethodNode methodNode, ClassNode classNode) {
     InsnList insnList = methodNode.instructions;
+    // TODO do not create a new graph, but rather reuse the existing graph
     MethodGraph cfg = CFGBuilder.getCfg(methodNode, classNode);
 
     MethodBlock methodBlockWithJumpInsn = this.getMethodBlockWithJumpInsn(insnNode, cfg);

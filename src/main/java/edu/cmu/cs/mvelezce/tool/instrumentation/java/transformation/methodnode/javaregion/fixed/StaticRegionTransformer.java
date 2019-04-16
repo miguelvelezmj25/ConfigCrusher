@@ -290,7 +290,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       region = regionsIter.next();
     }
 
-    Set<String> decision = this.getDecision(region);
+    Set<String> decision = this.getSingleDecision(region);
 
     if (decision.isEmpty()) {
       throw new RuntimeException("The first decision in " + methodNode.name + " cannot be null");
@@ -307,7 +307,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
       MethodBlock callerBlock = this.getCallerBlock(edge);
       JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
-      Set<String> callerDecision = this.getDecision(callerRegion);
+      Set<String> callerDecision = this.getSingleDecision(callerRegion);
 
       if (!decision.containsAll(callerDecision) && !decision.equals(callerDecision)
           && !callerDecision.containsAll(decision)) {
@@ -374,7 +374,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       region = regionsIter.next();
     }
 
-    Set<String> decision = this.getDecision(region);
+    Set<String> decision = this.getSingleDecision(region);
 
     if (decision.isEmpty()) {
       throw new RuntimeException("The first decision in " + methodNode.name + " cannot be null");
@@ -391,7 +391,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
       MethodBlock callerBlock = this.getCallerBlock(edge);
       JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
-      Set<String> callerDecision = this.getDecision(callerRegion);
+      Set<String> callerDecision = this.getSingleDecision(callerRegion);
 
       if (!decision.containsAll(callerDecision) && !decision.equals(callerDecision)
           && !callerDecision.containsAll(decision)) {
@@ -656,10 +656,10 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
     JavaRegion blockRegion = blocksToRegions.get(block);
-    Set<String> blockDecision = this.getDecision(blockRegion);
+    Set<String> blockDecision = this.getSingleDecision(blockRegion);
 
     JavaRegion idRegion = blocksToRegions.get(id);
-    Set<String> idDecision = this.getDecision(idRegion);
+    Set<String> idDecision = this.getSingleDecision(idRegion);
 
     if (!(blockDecision.containsAll(idDecision) && !blockDecision.equals(idDecision))) {
 //            this.debugBlockDecisions(methodNode);
@@ -679,7 +679,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       }
 
       JavaRegion predRegion = blocksToRegions.get(pred);
-      Set<String> predDecision = this.getDecision(predRegion);
+      Set<String> predDecision = this.getSingleDecision(predRegion);
 
       if (!(blockDecision.containsAll(predDecision) || blockDecision.equals(predDecision))) {
         if (pred.isCatchWithImplicitThrow()) {
@@ -737,12 +737,12 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
         .get(methodNode);
 
     JavaRegion blockRegion = blocksToRegions.get(block);
-    Set<String> blockDecision = this.getDecision(blockRegion);
+    Set<String> blockDecision = this.getSingleDecision(blockRegion);
 
     MethodBlock beta = graph.getExitBlock();
     MethodBlock ipd = graph.getImmediatePostDominator(block);
     JavaRegion ipdRegion = blocksToRegions.get(ipd);
-    Set<String> ipdDecision = this.getDecision(ipdRegion);
+    Set<String> ipdDecision = this.getSingleDecision(ipdRegion);
 
     while (ipd != beta && blockDecision.equals(ipdDecision)) {
 //            MethodBlock temp = graph.getImmediatePostDominator(ipd);
@@ -754,7 +754,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
 //            ipd = temp;
       ipdRegion = blocksToRegions.get(ipd);
-      ipdDecision = this.getDecision(ipdRegion);
+      ipdDecision = this.getSingleDecision(ipdRegion);
     }
 
     Set<MethodBlock> reachables = graph.getReachableBlocks(block, ipd);
@@ -782,7 +782,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       }
 
       JavaRegion reachRegion = blocksToRegions.get(reach);
-      Set<String> reachDecision = this.getDecision(reachRegion);
+      Set<String> reachDecision = this.getSingleDecision(reachRegion);
 
       Set<String> intersection = new HashSet<>();
       intersection.addAll(blockDecision);
@@ -828,14 +828,14 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     }
   }
 
-  private Set<String> getDecision(JavaRegion region) {
+  private Set<String> getSingleDecision(JavaRegion region) {
     Set<String> decision = new HashSet<>();
 
     if (region == null) {
       return decision;
     }
 
-    Set<Set<String>> optionSet = this.getRegionsToData().get(region);
+    Set<Set<String>> optionSet = this.getDecision(region);
 
     for (Set<String> options : optionSet) {
       decision.addAll(options);
@@ -843,6 +843,17 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
     return decision;
   }
+
+  @Override
+  protected Set<Set<String>> getDecision(JavaRegion region) {
+    if (region == null) {
+      return new HashSet<>();
+    }
+
+    return this.getRegionsToData().get(region);
+  }
+
+
 
   private Set<String> getCachedDecision(JavaRegion region) {
     Set<String> decision = new HashSet<>();
@@ -911,7 +922,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
         dotString.append("[]");
       }
       else {
-        Set<String> decision = this.getDecision(region);
+        Set<String> decision = this.getSingleDecision(region);
         dotString.append(decision);
       }
 
@@ -990,7 +1001,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       }
 
       region.setStartMethodBlock(block);
-      Set<String> blockDecision = this.getDecision(region);
+      Set<String> blockDecision = this.getSingleDecision(region);
 
 //            if(blockDecision.contains("B")) {
 //                System.out.println();
@@ -1133,7 +1144,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       }
 
       Set<String> blockDecision = this.getCachedDecision(region);
-//            Set<String> bDecision = this.getDecision(bRegion);
+//            Set<String> bDecision = this.getSingleDecision(bRegion);
 
       if (!(decision.equals(blockDecision) || decision.containsAll(blockDecision))) {
         continue;

@@ -1,16 +1,13 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.InvalidGraphException;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
-import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 
@@ -23,16 +20,7 @@ public class BlockRegionMatcher {
   }
 
   LinkedHashMap<MethodBlock, JavaRegion> matchBlocksToRegion(MethodNode methodNode,
-      ClassNode classNode, List<JavaRegion> regionsInMethod) {
-    MethodGraph graph;
-
-    try {
-      graph = CFGBuilder.getCfg(methodNode, classNode);
-    }
-    catch (InvalidGraphException ige) {
-      return new LinkedHashMap<>();
-    }
-
+      MethodGraph graph, List<JavaRegion> regionsInMethod) {
     InsnList instructions = methodNode.instructions;
     List<MethodBlock> blocks = getSortedMethodBlocks(instructions, graph);
 

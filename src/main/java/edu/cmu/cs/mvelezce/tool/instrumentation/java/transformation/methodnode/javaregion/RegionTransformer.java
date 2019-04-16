@@ -1,6 +1,7 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.InvalidGraphException;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
@@ -43,6 +44,8 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     this.callGraph = CallGraphBuilder
         .buildCallGraph(entryPoint, classTransformer.getPathToClasses());
   }
+
+  protected abstract T getDecision(JavaRegion javaRegion);
 
   @Override
   public Set<MethodNode> getMethodsToInstrument(ClassNode classNode) {
@@ -89,8 +92,18 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
       for (MethodNode methodNode : classNode.methods) {
 //                System.out.println("Setting blocks to decisions in method " + methodNode.name);
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode, classNode);
-        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = this.blockRegionMatcher
-            .matchBlocksToRegion(methodNode, classNode, regionsInMethod);
+
+        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = new LinkedHashMap<>();
+
+        try {
+          MethodGraph graph = this.getMethodGraph(methodNode, classNode);
+          blocksToRegionSet = this.blockRegionMatcher
+              .matchBlocksToRegion(methodNode, graph, regionsInMethod);
+        }
+        catch (InvalidGraphException ignored) {
+          // TODO is there a better way to implement this logic without ignoring the exception?
+        }
+
         this.getMethodsToDecisionsInBlocks().put(methodNode, blocksToRegionSet);
       }
     }
@@ -148,6 +161,54 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     return instructionsEndRegion;
   }
 
+  protected void debugBlockDecisions(MethodNode methodNode, ClassNode classNode) {
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
+        .get(methodNode);
+
+    MethodGraph graph = this.getMethodGraph(methodNode, classNode);
+    Set<MethodBlock> blocks = graph.getBlocks();
+
+    StringBuilder dotString = new StringBuilder("digraph " + methodNode.name + " {\n");
+    dotString.append("node [shape=record];\n");
+
+    for (MethodBlock block : blocks) {
+      dotString.append(block.getID());
+      dotString.append(" [label=\"");
+      dotString.append(block.getID());
+      dotString.append(" - ");
+
+      JavaRegion region = blocksToRegions.get(block);
+
+      if (region == null) {
+        dotString.append("[]");
+      }
+      else {
+        T decision = this.getDecision(region);
+        dotString.append(decision);
+      }
+
+      dotString.append("\"];\n");
+    }
+
+    dotString.append(graph.getEntryBlock().getID());
+    dotString.append(";\n");
+    dotString.append(graph.getExitBlock().getID());
+    dotString.append(";\n");
+
+    for (MethodBlock methodBlock : graph.getBlocks()) {
+      for (MethodBlock successor : methodBlock.getSuccessors()) {
+        dotString.append(methodBlock.getID());
+        dotString.append(" -> ");
+        dotString.append(successor.getID());
+        dotString.append(";\n");
+      }
+    }
+
+    dotString.append("}");
+
+    System.out.println(dotString);
+  }
+
   @Override
   protected String getProgramName() {
     return this.programName;
@@ -170,7 +231,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     return methodsToDecisionsInBlocks;
   }
 
-  public Map<MethodNode, MethodGraph> getMethodsToGraphs() {
+  protected Map<MethodNode, MethodGraph> getMethodsToGraphs() {
     return methodsToGraphs;
   }
 

@@ -189,7 +189,7 @@ public class MethodGraph {
         while(!queue.isEmpty()) {
             MethodBlock currentBlock = queue.poll();
 
-            if(currentBlock == end) {
+            if(currentBlock.equals(end)) {
                 continue;
             }
 

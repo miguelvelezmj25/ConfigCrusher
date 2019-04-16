@@ -1,11 +1,14 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.callgraph.CallGraphBuilder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,13 +25,17 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   private final String programName;
   private final Map<JavaRegion, T> regionsToData;
   private final CallGraph callGraph;
+  private final Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToDecisionsInBlocks = new HashMap<>();
+  private final BlockRegionMatcher blockRegionMatcher;
 
   public RegionTransformer(String programName, String entryPoint, ClassTransformer classTransformer,
-      Map<JavaRegion, T> regionsToData, boolean debugInstrumentation) {
+      Map<JavaRegion, T> regionsToData, boolean debugInstrumentation,
+      InstructionRegionMatcher instructionRegionMatcher) {
     super(classTransformer, debugInstrumentation);
 
     this.programName = programName;
     this.regionsToData = regionsToData;
+    this.blockRegionMatcher = new BlockRegionMatcher(instructionRegionMatcher);
 
     this.callGraph = CallGraphBuilder
         .buildCallGraph(entryPoint, classTransformer.getPathToClasses());
@@ -72,6 +79,18 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     }
 
     return javaRegions;
+  }
+
+  protected void setBlocksToDecisions(Set<ClassNode> classNodes) {
+    for (ClassNode classNode : classNodes) {
+      for (MethodNode methodNode : classNode.methods) {
+//                System.out.println("Setting blocks to decisions in method " + methodNode.name);
+        List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode, classNode);
+        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = this.blockRegionMatcher
+            .matchBlocksToRegion(methodNode, classNode, regionsInMethod);
+        this.getMethodsToDecisionsInBlocks().put(methodNode, blocksToRegionSet);
+      }
+    }
   }
 
   public static String getClassPackage(ClassNode classNode) {
@@ -131,6 +150,10 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
 
   protected CallGraph getCallGraph() {
     return callGraph;
+  }
+
+  public Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> getMethodsToDecisionsInBlocks() {
+    return methodsToDecisionsInBlocks;
   }
 
   private List<JavaRegion> getRegionsInClass(ClassNode classNode,

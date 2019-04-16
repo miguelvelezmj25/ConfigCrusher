@@ -10,8 +10,6 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.PrettyMethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.callgraph.CallGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.RegionTransformer;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,7 +42,6 @@ import org.apache.commons.lang3.StringUtils;
 import soot.MethodOrMethodContext;
 import soot.SootMethod;
 import soot.Unit;
-import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 import soot.tagkit.BytecodeOffsetTag;
 import soot.tagkit.Tag;
@@ -66,14 +63,15 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   private Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
   private Set<MethodBlock> endRegionBlocksWithReturn = new HashSet<>();
 
-  private Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToBlocksDecisions = new HashMap<>();
   private Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> cachedMethodsToBlocksDecisions = new HashMap<>();
   private Map<JavaRegion, Set<Set<String>>> cachedRegionsToOptionSet = new HashMap<>();
 
   // TODO delete programName
-  public StaticRegionTransformer(String programName, String entryPoint, ClassTransformer classTransformer,
+  public StaticRegionTransformer(String programName, String entryPoint,
+      ClassTransformer classTransformer,
       Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
-    super(programName, entryPoint, classTransformer, regionsToOptionSet, false);
+    super(programName, entryPoint, classTransformer, regionsToOptionSet, false,
+        new StaticInstructionRegionMatcher());
 
     this.rootPackage = entryPoint.substring(0, entryPoint.indexOf("."));
   }
@@ -176,33 +174,11 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   }
 
   private void cacheMethodsToBlockDecisions() {
-    for (Map.Entry<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> entry : this.methodsToBlocksDecisions
+    for (Map.Entry<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> entry : this
+        .getMethodsToDecisionsInBlocks()
         .entrySet()) {
       this.cachedMethodsToBlocksDecisions
           .put(entry.getKey(), new LinkedHashMap<>(entry.getValue()));
-    }
-  }
-
-  private void setBlocksToDecisions(Set<ClassNode> classNodes) {
-    for (ClassNode classNode : classNodes) {
-//            System.out.println("Setting blocks to decisions in class " + classNode.name);
-
-//            if(classNode.name.contains("Regions25")) {
-//                System.out.println();
-//            }
-
-      for (MethodNode methodNode : classNode.methods) {
-//                System.out.println("Setting blocks to decisions in method " + methodNode.name);
-        List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode);
-        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = this
-            .matchBlocksToRegion(methodNode, regionsInMethod);
-        this.methodsToBlocksDecisions.put(methodNode, blocksToRegionSet);
-
-//                if(classNode.name.contains("Regions25")) {
-//                    this.debugBlockDecisions(methodNode);
-//                    System.out.println();
-//                }
-      }
     }
   }
 
@@ -307,7 +283,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   private List<SootMethod> propagateUpRegionInter(SootMethod method) {
     List<SootMethod> methods = new ArrayList<>();
     MethodNode methodNode = this.sootMethodToMethodNode.get(method);
-    Collection<JavaRegion> regions = this.methodsToBlocksDecisions.get(methodNode).values();
+    Collection<JavaRegion> regions = this.getMethodsToDecisionsInBlocks().get(methodNode).values();
     Iterator<JavaRegion> regionsIter = regions.iterator();
     JavaRegion region = regionsIter.next();
 
@@ -326,7 +302,8 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     for (Edge edge : edges) {
       SootMethod callerSootMethod = edge.src();
       MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
-      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this.methodsToBlocksDecisions
+      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
+          .getMethodsToDecisionsInBlocks()
           .get(callerMethodNode);
 
       MethodBlock callerBlock = this.getCallerBlock(edge);
@@ -390,7 +367,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     boolean canPush = true;
 
     MethodNode methodNode = this.sootMethodToMethodNode.get(method);
-    Collection<JavaRegion> regions = this.methodsToBlocksDecisions.get(methodNode).values();
+    Collection<JavaRegion> regions = this.getMethodsToDecisionsInBlocks().get(methodNode).values();
     Iterator<JavaRegion> regionsIter = regions.iterator();
     JavaRegion region = regionsIter.next();
 
@@ -409,7 +386,8 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     for (Edge edge : edges) {
       SootMethod callerSootMethod = edge.src();
       MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
-      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this.methodsToBlocksDecisions
+      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
+          .getMethodsToDecisionsInBlocks()
           .get(callerMethodNode);
 
       MethodBlock callerBlock = this.getCallerBlock(edge);
@@ -436,7 +414,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     SootMethod callerSootMethod = edge.src();
     MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
     AbstractInsnNode inst = this.getASMInstFromCaller(edge);
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(callerMethodNode);
 
     for (MethodBlock entry : blocksToRegions.keySet()) {
@@ -522,7 +500,8 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
       // TODO there is a bug in the pretty print since it is not showing the instructions that were added
       for (MethodNode methodNode : methodsToInstrument) {
-        Printer printer = tracer.getPrinterForMethodSignature(RegionTransformer.getMethodName(methodNode));
+        Printer printer = tracer
+            .getPrinterForMethodSignature(RegionTransformer.getMethodName(methodNode));
         PrettyMethodGraphBuilder prettyBuilder = new PrettyMethodGraphBuilder(methodNode, printer);
         PrettyMethodGraph prettyGraph = prettyBuilder.build(methodNode);
         prettyGraph.saveDotFile(this.getProgramName(), classNode.name, methodNode.name);
@@ -586,7 +565,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       this.calculateASMSIndexes(regionsInMethod, methodNode);
     }
 
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
 
     return this.propagateUpRegions(methodNode, blocksToRegionSet);
@@ -675,7 +654,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       return blocks;
     }
 
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
     JavaRegion blockRegion = blocksToRegions.get(block);
     Set<String> blockDecision = this.getDecision(blockRegion);
@@ -755,7 +734,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       return;
     }
 
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
 
     JavaRegion blockRegion = blocksToRegions.get(block);
@@ -882,80 +861,6 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     return decision;
   }
 
-  /**
-   * TODO
-   */
-  private LinkedHashMap<MethodBlock, JavaRegion> matchBlocksToRegion(MethodNode methodNode,
-      List<JavaRegion> regionsInMethod) {
-    // Initialize
-    MethodGraph graph = this.buildMethodGraph(methodNode);
-    InsnList instructions = methodNode.instructions;
-
-    List<MethodBlock> blocks = new ArrayList<>();
-    blocks.addAll(graph.getBlocks());
-    blocks.remove(graph.getEntryBlock());
-    blocks.remove(graph.getExitBlock());
-
-    blocks.sort((o1, o2) -> {
-      int o1Index = instructions.indexOf(o1.getInstructions().get(0));
-      int o2Index = instructions.indexOf(o2.getInstructions().get(0));
-
-      return Integer.compare(o1Index, o2Index);
-    });
-
-    blocks.add(0, graph.getEntryBlock());
-    blocks.add(graph.getExitBlock());
-
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = new LinkedHashMap<>();
-
-    for (MethodBlock block : blocks) {
-      blocksToRegions.put(block, null);
-    }
-
-    // Match instructions to regions
-    Map<AbstractInsnNode, JavaRegion> instructionsToRegions = this
-        .matchInstructionToRegion(methodNode, regionsInMethod);
-
-    // Match blocks to region set.
-    for (MethodBlock block : graph.getBlocks()) {
-      List<AbstractInsnNode> blockInstructions = block.getInstructions();
-
-      for (Map.Entry<AbstractInsnNode, JavaRegion> instructionToRegion : instructionsToRegions
-          .entrySet()) {
-        if (!blockInstructions.contains(instructionToRegion.getKey())) {
-          continue;
-        }
-
-        JavaRegion region = blocksToRegions.get(block);
-
-        if (region != null) {
-          System.out.println(graph.toDotString("Error"));
-          System.out.println(block.getID());
-          throw new RuntimeException("The region is not null");
-        }
-
-        blocksToRegions.put(block, instructionToRegion.getValue());
-      }
-    }
-
-    return blocksToRegions;
-  }
-
-  /**
-   * TODO
-   */
-  private Map<AbstractInsnNode, JavaRegion> matchInstructionToRegion(MethodNode methodNode,
-      List<JavaRegion> regionsInMethod) {
-    InsnList instructions = methodNode.instructions;
-    Map<AbstractInsnNode, JavaRegion> instructionsToRegion = new HashMap<>();
-
-    for (JavaRegion region : regionsInMethod) {
-      instructionsToRegion.put(instructions.get(region.getStartRegionIndex()), region);
-    }
-
-    return instructionsToRegion;
-  }
-
   private MethodGraph getMethodGraph(MethodNode methodNode) {
     MethodGraph graph = this.methodsToGraphs.get(methodNode);
 
@@ -978,7 +883,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
   private void debugBlockDecisions(MethodNode methodNode) {
 //        System.out.println("Debugging block decisions for " + methodNode.name);
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
 
     MethodGraph graph = this.getMethodGraph(methodNode);
@@ -1035,7 +940,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   }
 
   private void debugBlocksAndRegions(MethodNode methodNode) {
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
     int blocksToDecisionCount = 0;
 
@@ -1065,7 +970,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
     MethodGraph graph = this.getMethodGraph(methodNode);
     MethodBlock beta = graph.getExitBlock();
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
     LinkedHashMap<MethodBlock, JavaRegion> cachedBlocksToRegions = this.cachedMethodsToBlocksDecisions
         .get(methodNode);
@@ -1167,7 +1072,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
    * TODO
    */
   private void ignoreCatchWithImplicitThrow(MethodNode methodNode) {
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
 
     // Check if there is a catch with an implicit flow
@@ -1194,7 +1099,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
    * when regions occur in handlers not connected to the exit block
    */
   private void ignoreRegionsWithoutConnectionToExit(MethodNode methodNode) {
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
     MethodGraph graph = this.getMethodGraph(methodNode);
 
@@ -1217,7 +1122,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
   private void removeRegionsInMethod(MethodNode methodNode, Set<String> decision,
       Set<MethodBlock> reachables) {
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.methodsToBlocksDecisions
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(methodNode);
 
     for (MethodBlock block : reachables) {
@@ -1311,7 +1216,8 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
           MethodNode calleeMethodNode = this.sootMethodToMethodNode.get(calleeSootMethod);
 
-          LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this.methodsToBlocksDecisions
+          LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
+              .getMethodsToDecisionsInBlocks()
               .get(calleeMethodNode);
 
           if (calleeBlocksToRegions == null) {

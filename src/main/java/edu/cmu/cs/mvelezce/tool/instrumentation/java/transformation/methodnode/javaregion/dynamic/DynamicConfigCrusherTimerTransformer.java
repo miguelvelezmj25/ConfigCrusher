@@ -4,7 +4,6 @@ import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.analysis.taint.java.dynamic.phosphor.taint.InfluencingTaints;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
-import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraphBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.region.DynamicBaseRegionInstrumenter;
 import java.lang.reflect.InvocationTargetException;
@@ -75,7 +74,7 @@ public class DynamicConfigCrusherTimerTransformer extends DynamicConfigCrusherRe
   private void instrumentRegionEnd(AbstractInsnNode insnNode, JavaRegion startRegion,
       MethodNode methodNode, ClassNode classNode) {
     InsnList insnList = methodNode.instructions;
-    MethodGraph cfg = this.getCFG(methodNode, classNode);
+    MethodGraph cfg = CFGBuilder.getCfg(methodNode, classNode);
 
     MethodBlock methodBlockWithJumpInsn = this.getMethodBlockWithJumpInsn(insnNode, cfg);
     Set<MethodBlock> succs = methodBlockWithJumpInsn.getSuccessors();
@@ -188,11 +187,6 @@ public class DynamicConfigCrusherTimerTransformer extends DynamicConfigCrusherRe
     loggingInsnList.add(this.getInstructionsEndRegion(javaRegion));
 
     return loggingInsnList;
-  }
-
-  private MethodGraph getCFG(MethodNode methodNode, ClassNode classNode) {
-    MethodGraphBuilder cfgBuilder = new CFGBuilder(classNode.name);
-    return cfgBuilder.build(methodNode);
   }
 
   private MethodBlock getMethodBlockWithJumpInsn(AbstractInsnNode insnNode, MethodGraph cfg) {

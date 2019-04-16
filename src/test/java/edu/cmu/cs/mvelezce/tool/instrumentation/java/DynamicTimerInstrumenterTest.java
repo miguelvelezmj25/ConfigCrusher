@@ -100,7 +100,7 @@ public class DynamicTimerInstrumenterTest {
     String srcDir = SubtracesAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = SubtracesAdapter.INSTRUMENTED_CLASS_PATH;
 
-    this.compile(srcDir, classDir);
+//    this.compile(srcDir, classDir);
 
     String[] args = new String[0];
 

@@ -2,6 +2,8 @@ package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.
 
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
+import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.asm.CFGBuilder;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.methodnode.BaseMethodTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.soot.callgraph.CallGraphBuilder;
@@ -25,8 +27,9 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   private final String programName;
   private final Map<JavaRegion, T> regionsToData;
   private final CallGraph callGraph;
-  private final Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToDecisionsInBlocks = new HashMap<>();
   private final BlockRegionMatcher blockRegionMatcher;
+  private final Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToDecisionsInBlocks = new HashMap<>();
+  private final Map<MethodNode, MethodGraph> methodsToGraphs = new HashMap<>();
 
   public RegionTransformer(String programName, String entryPoint, ClassTransformer classTransformer,
       Map<JavaRegion, T> regionsToData, boolean debugInstrumentation,
@@ -93,6 +96,17 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     }
   }
 
+  protected MethodGraph getMethodGraph(MethodNode methodNode, ClassNode classNode) {
+    MethodGraph graph = this.methodsToGraphs.get(methodNode);
+
+    if (graph == null) {
+      graph = CFGBuilder.getCfg(methodNode, classNode);
+      this.methodsToGraphs.put(methodNode, graph);
+    }
+
+    return graph;
+  }
+
   public static String getClassPackage(ClassNode classNode) {
     String classPackage = classNode.name;
     classPackage = classPackage.substring(0, classPackage.lastIndexOf("/"));
@@ -152,8 +166,12 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     return callGraph;
   }
 
-  public Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> getMethodsToDecisionsInBlocks() {
+  protected Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> getMethodsToDecisionsInBlocks() {
     return methodsToDecisionsInBlocks;
+  }
+
+  public Map<MethodNode, MethodGraph> getMethodsToGraphs() {
+    return methodsToGraphs;
   }
 
   private List<JavaRegion> getRegionsInClass(ClassNode classNode,

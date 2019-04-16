@@ -57,7 +57,6 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   private Map<MethodNode, ClassNode> methodNodeToClassNode = new HashMap<>();
   private Set<MethodNode> methodsWithUpdatedIndexes = new HashSet<>();
   private Map<String, List<String>> classToJavapResult = new HashMap<>();
-  private Map<MethodNode, MethodGraph> methodsToGraphs = new HashMap<>();
   private Map<MethodNode, SootMethod> methodNodeToSootMethod = new HashMap<>();
   private Map<SootMethod, Set<Set<String>>> sootMethodToOptionSet = new HashMap<>();
   private Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
@@ -595,13 +594,13 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
         continue;
       }
 
-      List<MethodBlock> blocks = this.propagateUpRegionsInMethod(methodNode, block);
+      List<MethodBlock> updatedBlocks = this.propagateUpRegionsInMethod(methodNode, block);
 
-      if (blocks.isEmpty()) {
+      if (updatedBlocks.isEmpty()) {
         continue;
       }
 
-      worklist.addAll(0, blocks);
+      worklist.addAll(0, updatedBlocks);
       updated = true;
     }
 
@@ -642,16 +641,16 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   }
 
   private List<MethodBlock> propagateUpRegionsInMethod(MethodNode methodNode, MethodBlock block) {
-    List<MethodBlock> blocks = new ArrayList<>();
+    List<MethodBlock> updatedBlocks = new ArrayList<>();
     MethodGraph graph = this.getMethodGraph(methodNode);
     MethodBlock id = graph.getImmediateDominator(block);
 
     if (id == null) {
-      return blocks;
+      return updatedBlocks;
     }
 
     if (id == graph.getEntryBlock()) {
-      return blocks;
+      return updatedBlocks;
     }
 
     LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
@@ -665,7 +664,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     if (!(blockDecision.containsAll(idDecision) && !blockDecision.equals(idDecision))) {
 //            this.debugBlockDecisions(methodNode);
 //                System.out.println("Cannot push up to id in " + methodNode.name + " " + bDecision + " -> " + aDecision);
-      return blocks;
+      return updatedBlocks;
     }
 
     // Check
@@ -720,10 +719,10 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       this.debugBlocksAndRegions(methodNode);
 //            this.debugBlockDecisions(methodNode);
 
-      blocks.add(0, pred);
+      updatedBlocks.add(0, pred);
     }
 
-    return blocks;
+    return updatedBlocks;
   }
 
   private void fillDownRegionsInMethod(MethodNode methodNode, MethodBlock block) {
@@ -862,12 +861,12 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   }
 
   private MethodGraph getMethodGraph(MethodNode methodNode) {
-    MethodGraph graph = this.methodsToGraphs.get(methodNode);
+    MethodGraph graph = this.getMethodsToGraphs().get(methodNode);
 
     if (graph == null) {
       DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder();
       graph = builder.build(methodNode);
-      this.methodsToGraphs.put(methodNode, graph);
+      this.getMethodsToGraphs().put(methodNode, graph);
     }
 
     return graph;
@@ -876,7 +875,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   private MethodGraph buildMethodGraph(MethodNode methodNode) {
     DefaultMethodGraphBuilder builder = new DefaultMethodGraphBuilder();
     MethodGraph graph = builder.build(methodNode);
-    this.methodsToGraphs.put(methodNode, graph);
+    this.getMethodsToGraphs().put(methodNode, graph);
 
     return graph;
   }
@@ -1833,9 +1832,5 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
   public Set<MethodBlock> getEndRegionBlocksWithReturn() {
     return this.endRegionBlocksWithReturn;
-  }
-
-  public Map<MethodNode, MethodGraph> getMethodsToGraphs() {
-    return methodsToGraphs;
   }
 }

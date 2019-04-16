@@ -10,7 +10,7 @@ public class InfluencingTaints {
 
   private InfluencingTaints() { }
 
-  InfluencingTaints(Set<String> context, Set<String> condition) {
+  public InfluencingTaints(Set<String> context, Set<String> condition) {
     this.context.addAll(context);
     this.condition.addAll(condition);
   }

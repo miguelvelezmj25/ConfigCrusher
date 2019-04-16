@@ -52,17 +52,23 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
       }
 
       for (MethodNode methodNode : methodsToInstrument) {
-        LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this
-            .getMethodsToDecisionsInBlocks().get(methodNode);
-        this.expandUpRegionsInMethod(methodNode, classNode, blocksToRegions);
-        this.expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);g
+        boolean updatedRegions = true;
+
+        while (updatedRegions) {
+          LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this
+              .getMethodsToDecisionsInBlocks().get(methodNode);
+          updatedRegions = this.expandUpRegionsInMethod(methodNode, classNode, blocksToRegions);
+          updatedRegions = updatedRegions | this
+              .expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
+        }
       }
     }
   }
 
   // TODO might be able to abstract this method and most callees to region transformer
-  private void expandDownRegionsInMethod(MethodNode methodNode, ClassNode classNode,
+  private boolean expandDownRegionsInMethod(MethodNode methodNode, ClassNode classNode,
       LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
+    boolean updatedRegions = false;
     List<MethodBlock> worklist = new ArrayList<>(blocksToRegions.keySet());
 
     while (!worklist.isEmpty()) {
@@ -84,11 +90,14 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
         continue;
       }
 
-      this.expandDownRegionInMethod(methodNode, classNode, block, blocksToRegions);
+      updatedRegions = updatedRegions | this
+          .expandDownRegionInMethod(methodNode, classNode, block, blocksToRegions);
     }
+
+    return updatedRegions;
   }
 
-  private void expandDownRegionInMethod(MethodNode methodNode, ClassNode classNode,
+  private boolean expandDownRegionInMethod(MethodNode methodNode, ClassNode classNode,
       MethodBlock block, LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions) {
     MethodGraph graph = this.getMethodGraph(methodNode, classNode);
 
@@ -112,13 +121,14 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
       ipdInfluencingTaints = this.getDecision(ipdRegion);
     }
 
-    this.expandDownInfluencingTaintsInMethod(block, blockInfluencingTaints, ipd, graph,
+    return this.expandDownInfluencingTaintsInMethod(block, blockInfluencingTaints, ipd, graph,
         blocksToRegions);
   }
 
-  private void expandDownInfluencingTaintsInMethod(MethodBlock block,
+  private boolean expandDownInfluencingTaintsInMethod(MethodBlock block,
       InfluencingTaints blockInfluencingTaints, MethodBlock ipd, MethodGraph graph,
       Map<MethodBlock, JavaRegion> blocksToRegions) {
+    boolean updatedRegions = false;
     Set<MethodBlock> reachables = graph.getReachableBlocks(block, ipd);
     reachables.remove(graph.getExitBlock());
 
@@ -165,10 +175,14 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
         continue;
       }
 
+      updatedRegions = true;
+
       JavaRegion reachNewRegion = this
           .addNewReachRegionToMappingOfBlocksToRegions(block, reach, reachRegion, blocksToRegions);
       this.addNewRegionToMappingOfRegionsToData(reachNewRegion, blockInfluencingTaints);
     }
+
+    return updatedRegions;
   }
 
   private boolean canExpandDownToReach(InfluencingTaints thisInfluencingTaints,
@@ -181,8 +195,9 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
   }
 
   // TODO might be able to abstract this method and most callees to region transformer
-  private void expandUpRegionsInMethod(MethodNode methodNode, ClassNode classNode,
+  private boolean expandUpRegionsInMethod(MethodNode methodNode, ClassNode classNode,
       Map<MethodBlock, JavaRegion> blocksToRegions) {
+    boolean updatedRegions = false;
     List<MethodBlock> worklist = new ArrayList<>(blocksToRegions.keySet());
 
     while (!worklist.isEmpty()) {
@@ -200,10 +215,13 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
         continue;
       }
 
+      updatedRegions = true;
+
       // Optimization
       worklist.addAll(0, updatedBlocks);
     }
 
+    return updatedRegions;
   }
 
   private List<MethodBlock> expandUpRegionInMethod(MethodNode methodNode, ClassNode classNode,

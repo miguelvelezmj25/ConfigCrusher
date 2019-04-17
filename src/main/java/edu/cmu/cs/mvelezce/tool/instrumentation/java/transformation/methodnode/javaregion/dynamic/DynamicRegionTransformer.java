@@ -60,6 +60,8 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
           updatedRegions = this.expandUpRegionsInMethod(methodNode, classNode, blocksToRegions);
           updatedRegions = updatedRegions | this
               .expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
+//          this.debugBlockDecisions(methodNode, classNode);
+//          System.out.println();
         }
       }
     }
@@ -226,6 +228,8 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
 
   private List<MethodBlock> expandUpRegionInMethod(MethodNode methodNode, ClassNode classNode,
       MethodBlock block, Map<MethodBlock, JavaRegion> blocksToRegions) {
+//    this.debugBlockDecisions(methodNode, classNode);
+
     List<MethodBlock> updatedBlocks = new ArrayList<>();
     MethodGraph graph = this.getMethodGraph(methodNode, classNode);
     MethodBlock id = graph.getImmediateDominator(block);
@@ -240,7 +244,7 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
     JavaRegion idRegion = blocksToRegions.get(id);
     InfluencingTaints idInfluencingTaints = this.getDecision(idRegion);
 
-    if (!this.canExpandUpToId(blockInfluencingTaints, idInfluencingTaints)) {
+    if (!this.canExpandUp(blockInfluencingTaints, idInfluencingTaints)) {
       return updatedBlocks;
     }
 
@@ -265,13 +269,16 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
       JavaRegion predRegion = blocksToRegions.get(pred);
       InfluencingTaints predInfluencingTaints = this.getDecision(predRegion);
 
-      if (!canExpandUpToPred(blockInfluencingTaints, predInfluencingTaints)) {
-//        if (pred.isCatchWithImplicitThrow()) {
-//          continue;
-//        }
+      if (!canExpandUp(blockInfluencingTaints, predInfluencingTaints)) {
+        // TODO this logic is not similar to the static version. Why is the static version different?
+////        if (pred.isCatchWithImplicitThrow()) {
+////          continue;
+////        }
+////
 //
-        throw new RuntimeException(
-            "Cannot push up decisions from " + block.getID() + " to " + pred.getID());
+//        throw new RuntimeException(
+//            "Cannot push up decisions from " + block.getID() + " to " + pred.getID());
+        continue;
       }
 
       JavaRegion predNewRegion = this
@@ -338,22 +345,6 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
     return newRegion;
   }
 
-  private boolean canExpandUpToPred(InfluencingTaints thisInfluencingTaints,
-      InfluencingTaints predInfluencingTaints) {
-    if (thisInfluencingTaints.equals(predInfluencingTaints)) {
-      return false;
-    }
-
-//    Set<String> thisContextTaints = thisInfluencingTaints.getContext();
-//    Set<String> predContextTaints = predInfluencingTaints.getContext();
-//
-//    if (!thisContextTaints.equals(predContextTaints)) {
-//      throw new RuntimeException("The thisContextTaints do not equal the predContextTaints");
-//    }
-
-    return thisInfluencingTaints.getCondition().containsAll(predInfluencingTaints.getCondition());
-  }
-
   private boolean canExpandDownUpToIPD(MethodBlock ipd, MethodBlock beta,
       InfluencingTaints thisInfluencingTaints,
       InfluencingTaints ipdInfluencingTaints) {
@@ -376,9 +367,9 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
     return thisInfluencingTaints.getCondition().containsAll(ipdInfluencingTaints.getCondition());
   }
 
-  private boolean canExpandUpToId(InfluencingTaints thisInfluencingTaints,
-      InfluencingTaints idInfluencingTaints) {
-    if (thisInfluencingTaints.equals(idInfluencingTaints)) {
+  private boolean canExpandUp(InfluencingTaints thisInfluencingTaints,
+      InfluencingTaints upInfluencingTaints) {
+    if (thisInfluencingTaints.equals(upInfluencingTaints)) {
       return false;
     }
 
@@ -389,7 +380,7 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
 //      throw new RuntimeException("The blockContextTaints do not equal the idContextTaints");
 //    }
 
-    return thisInfluencingTaints.getCondition().containsAll(idInfluencingTaints.getCondition());
+    return thisInfluencingTaints.getCondition().containsAll(upInfluencingTaints.getCondition());
   }
 
   @Override

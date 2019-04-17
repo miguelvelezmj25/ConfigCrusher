@@ -1,5 +1,6 @@
 package edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion;
 
+import com.sun.istack.internal.NotNull;
 import edu.cmu.cs.mvelezce.tool.analysis.region.JavaRegion;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.InvalidGraphException;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodBlock;
@@ -13,9 +14,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import jdk.internal.org.objectweb.asm.Opcodes;
+import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.InsnList;
 import jdk.internal.org.objectweb.asm.tree.LdcInsnNode;
@@ -26,6 +29,7 @@ import soot.jimple.toolkits.callgraph.CallGraph;
 public abstract class RegionTransformer<T> extends BaseMethodTransformer {
 
   private final String programName;
+  private final String entryPoint;
   private final Map<JavaRegion, T> regionsToData;
   private final CallGraph callGraph;
   private final BlockRegionMatcher blockRegionMatcher;
@@ -38,6 +42,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     super(classTransformer, debugInstrumentation);
 
     this.programName = programName;
+    this.entryPoint = entryPoint;
     this.regionsToData = regionsToData;
     this.blockRegionMatcher = new BlockRegionMatcher(instructionRegionMatcher);
 
@@ -56,6 +61,10 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     }
 
     for (MethodNode methodNode : classNode.methods) {
+      if (!this.analyzeMethod(methodNode, classNode)) {
+        continue;
+      }
+
       if (!this.getRegionsInMethod(methodNode, classNode).isEmpty()) {
         methodsToInstrument.add(methodNode);
       }
@@ -90,6 +99,10 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   protected void setBlocksToDecisions(Set<ClassNode> classNodes) {
     for (ClassNode classNode : classNodes) {
       for (MethodNode methodNode : classNode.methods) {
+        if (!this.analyzeMethod(methodNode, classNode)) {
+          continue;
+        }
+
 //                System.out.println("Setting blocks to decisions in method " + methodNode.name);
         List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode, classNode);
 
@@ -209,6 +222,87 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     System.out.println(dotString);
   }
 
+  // TODO temp method to avoid analyzing special methods
+  private boolean analyzeMethod(MethodNode methodNode, ClassNode classNode) {
+    if (this.isMainClass(classNode)) {
+      MethodNode mainMethod = this.getMainMethod(classNode);
+
+      if (methodNode.equals(mainMethod)) {
+        return true;
+      }
+    }
+
+    if (this.isSpecialBerkeleyDbMethod(methodNode, classNode)) {
+      return false;
+    }
+
+    if (!methodNode.tryCatchBlocks.isEmpty()) {
+      return false;
+    }
+
+    if (this.hasThrow(methodNode)) {
+      return false;
+    }
+
+    return !this.hasSwitch(methodNode);
+  }
+
+  private boolean hasSwitch(MethodNode methodNode) {
+    InsnList insnList = methodNode.instructions;
+    ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
+
+    while (insnListIter.hasNext()) {
+      AbstractInsnNode insnNode = insnListIter.next();
+      int opcode = insnNode.getOpcode();
+
+      if (opcode == Opcodes.TABLESWITCH || opcode == Opcodes.LOOKUPSWITCH) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private boolean hasThrow(MethodNode methodNode) {
+    InsnList insnList = methodNode.instructions;
+    ListIterator<AbstractInsnNode> insnListIter = insnList.iterator();
+
+    while (insnListIter.hasNext()) {
+      AbstractInsnNode insnNode = insnListIter.next();
+
+      if (insnNode.getOpcode() == Opcodes.ATHROW) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private boolean isSpecialBerkeleyDbMethod(@NotNull MethodNode methodNode, ClassNode classNode) {
+    if (classNode.name.equals("com/sleepycat/je/tree/IN") && methodNode.name
+        .equals("addToMainCache")) {
+      return false;
+    }
+
+    return !classNode.name.equals("com/sleepycat/je/evictor/Evictor") || !methodNode.name
+        .equals("getNextTarget");
+
+  }
+
+  private boolean isMainClass(ClassNode classNode) {
+    return classNode.name.equals(this.getEntryPoint());
+  }
+
+  private MethodNode getMainMethod(ClassNode classNode) {
+    for (MethodNode methodNode : classNode.methods) {
+      if (methodNode.name.equals("main") && methodNode.desc.equals("([Ljava/lang/String;)V")) {
+        return methodNode;
+      }
+    }
+
+    throw new RuntimeException("Could not find main method in " + classNode.name);
+  }
+
   @Override
   protected String getProgramName() {
     return this.programName;
@@ -225,6 +319,10 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
 
   protected CallGraph getCallGraph() {
     return callGraph;
+  }
+
+  protected String getEntryPoint() {
+    return entryPoint;
   }
 
   protected Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> getMethodsToDecisionsInBlocks() {

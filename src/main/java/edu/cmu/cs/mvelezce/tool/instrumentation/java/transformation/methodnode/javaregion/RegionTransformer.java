@@ -281,12 +281,11 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   private boolean isSpecialBerkeleyDbMethod(@NotNull MethodNode methodNode, ClassNode classNode) {
     if (classNode.name.equals("com/sleepycat/je/tree/IN") && methodNode.name
         .equals("addToMainCache")) {
-      return false;
+      return true;
     }
 
-    return !classNode.name.equals("com/sleepycat/je/evictor/Evictor") || !methodNode.name
+    return classNode.name.equals("com/sleepycat/je/evictor/Evictor") && methodNode.name
         .equals("getNextTarget");
-
   }
 
   private boolean isMainClass(ClassNode classNode) {

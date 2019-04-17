@@ -39,27 +39,20 @@ import jdk.internal.org.objectweb.asm.tree.MethodInsnNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import jdk.internal.org.objectweb.asm.util.Printer;
 import org.apache.commons.lang3.StringUtils;
-import soot.MethodOrMethodContext;
 import soot.SootMethod;
 import soot.Unit;
 import soot.jimple.toolkits.callgraph.Edge;
 import soot.tagkit.BytecodeOffsetTag;
 import soot.tagkit.Tag;
-import soot.util.queue.QueueReader;
 
 public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<String>>> {
 
   private static final String CLINIT_SIGNATURE = "void <clinit>()";
-  private static final String MAIN_SIGNATURE = "void main(java.lang.String[])";
-
-  private String rootPackage;
 
   private Map<MethodNode, ClassNode> methodNodeToClassNode = new HashMap<>();
   private Set<MethodNode> methodsWithUpdatedIndexes = new HashSet<>();
   private Map<String, List<String>> classToJavapResult = new HashMap<>();
-  private Map<MethodNode, SootMethod> methodNodeToSootMethod = new HashMap<>();
   private Map<SootMethod, Set<Set<String>>> sootMethodToOptionSet = new HashMap<>();
-  private Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
   private Set<MethodBlock> endRegionBlocksWithReturn = new HashSet<>();
 
   private Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> cachedMethodsToBlocksDecisions = new HashMap<>();
@@ -71,8 +64,6 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
     super(programName, entryPoint, classTransformer, regionsToOptionSet, false,
         new StaticInstructionRegionMatcher());
-
-    this.rootPackage = entryPoint.substring(0, entryPoint.indexOf("."));
   }
 
   public StaticRegionTransformer(String programName, String entryPoint, String directory,
@@ -96,7 +87,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
           region.getRegionPackage() + "." + region.getRegionClass() + ": " + region
               .getRegionMethod();
 
-      for (SootMethod sootMethod : this.sootMethodToMethodNode.keySet()) {
+      for (SootMethod sootMethod : this.getSootMethodToMethodNode().keySet()) {
         if (!sootMethod.getBytecodeSignature().contains(bytecodeSignature)) {
           continue;
         }
@@ -140,10 +131,10 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
+    super.transformMethods(classNodes);
+
     int initialRegionCount = this.getRegionsToData().size();
 
-    Set<SootMethod> methods = this.getSystemMethods();
-    this.matchSootToASMMethods(methods, classNodes);
     this.matchMethodToClassNodes(classNodes);
     this.calculateASMIndexes(classNodes);
     this.matchMethodsToOptions();
@@ -181,34 +172,6 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     }
   }
 
-  public void matchSootToASMMethods(Set<SootMethod> sootMethods, Set<ClassNode> classNodes) {
-    for (ClassNode classNode : classNodes) {
-      List<MethodNode> methodNodes = classNode.methods;
-      String classPackageNode = RegionTransformer.getClassPackage(classNode);
-      String classNameNode = RegionTransformer.getClassName(classNode);
-
-      for (MethodNode methodNode : methodNodes) {
-        String methodNameNode = RegionTransformer.getMethodName(methodNode);
-
-        for (SootMethod sootMethod : sootMethods) {
-          String classPackageSoot = sootMethod.getDeclaringClass().getPackageName();
-          String classNameSoot = sootMethod.getDeclaringClass().getShortName();
-          String methodNameSoot = sootMethod.getBytecodeSignature();
-          methodNameSoot = methodNameSoot
-              .substring(methodNameSoot.indexOf(" "), methodNameSoot.length() - 1).trim();
-
-          if (classPackageNode.equals(classPackageSoot) && classNameNode.equals(classNameSoot)
-              && methodNameNode.equals(methodNameSoot)) {
-            this.sootMethodToMethodNode.put(sootMethod, methodNode);
-            this.methodNodeToSootMethod.put(methodNode, sootMethod);
-
-            break;
-          }
-        }
-      }
-    }
-  }
-
   /**
    * Process the methods to find where the regions are in each of them
    */
@@ -239,7 +202,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   private boolean propagateUpAcrossMethods() {
     boolean updated = false;
 
-    Set<SootMethod> methods = this.getSystemMethods();
+    Set<SootMethod> methods = this.getApplicationSootMethods();
     List<SootMethod> worklist = new ArrayList<>();
     worklist.addAll(methods);
 
@@ -253,7 +216,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
         continue;
       }
 
-      List<JavaRegion> regionsInMethod = this.getRegionsInMethod(method);
+      List<JavaRegion> regionsInMethod = this.getRegionsInSootMethod(method);
 
       // Optimization nothing to push up
       if (regionsInMethod.isEmpty()) {
@@ -281,7 +244,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
   private List<SootMethod> propagateUpRegionInter(SootMethod method) {
     List<SootMethod> methods = new ArrayList<>();
-    MethodNode methodNode = this.sootMethodToMethodNode.get(method);
+    MethodNode methodNode = this.getSootMethodToMethodNode().get(method);
     Collection<JavaRegion> regions = this.getMethodsToDecisionsInBlocks().get(methodNode).values();
     Iterator<JavaRegion> regionsIter = regions.iterator();
     JavaRegion region = regionsIter.next();
@@ -300,7 +263,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
     for (Edge edge : edges) {
       SootMethod callerSootMethod = edge.src();
-      MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
+      MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
       LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
           .getMethodsToDecisionsInBlocks()
           .get(callerMethodNode);
@@ -365,7 +328,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   private boolean canPropagateRegion(SootMethod method) {
     boolean canPush = true;
 
-    MethodNode methodNode = this.sootMethodToMethodNode.get(method);
+    MethodNode methodNode = this.getSootMethodToMethodNode().get(method);
     Collection<JavaRegion> regions = this.getMethodsToDecisionsInBlocks().get(methodNode).values();
     Iterator<JavaRegion> regionsIter = regions.iterator();
     JavaRegion region = regionsIter.next();
@@ -384,7 +347,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
     for (Edge edge : edges) {
       SootMethod callerSootMethod = edge.src();
-      MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
+      MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
       LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
           .getMethodsToDecisionsInBlocks()
           .get(callerMethodNode);
@@ -411,7 +374,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     MethodBlock block = null;
 
     SootMethod callerSootMethod = edge.src();
-    MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
+    MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
     AbstractInsnNode inst = this.getASMInstFromCaller(edge);
     LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
         .get(callerMethodNode);
@@ -1167,7 +1130,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   private void removeRegionsInCallees(MethodNode methodNode, Set<String> decision,
       Set<MethodBlock> reachables) {
     Map<MethodBlock, SootMethod> blocksToMethods = new HashMap<>();
-    SootMethod sootMethod = this.methodNodeToSootMethod.get(methodNode);
+    SootMethod sootMethod = this.getMethodNodeToSootMethod().get(methodNode);
 
     for (MethodBlock block : reachables) {
       blocksToMethods.put(block, sootMethod);
@@ -1224,7 +1187,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
           }
 //                    }
 
-          MethodNode calleeMethodNode = this.sootMethodToMethodNode.get(calleeSootMethod);
+          MethodNode calleeMethodNode = this.getSootMethodToMethodNode().get(calleeSootMethod);
 
           LinkedHashMap<MethodBlock, JavaRegion> calleeBlocksToRegions = this
               .getMethodsToDecisionsInBlocks()
@@ -1293,7 +1256,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
       MethodBlock callerBlock = this.getCallerBlock(edge);
       SootMethod caller = edge.src();
-      MethodNode method = this.sootMethodToMethodNode.get(caller);
+      MethodNode method = this.getSootMethodToMethodNode().get(caller);
       LinkedHashMap<MethodBlock, JavaRegion> blockDecisions = this.cachedMethodsToBlocksDecisions
           .get(method);
       JavaRegion callerRegion = blockDecisions.get(callerBlock);
@@ -1588,7 +1551,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   }
 
   private AbstractInsnNode getASMInstruction(SootMethod callerMethod, int bytecodeIndex) {
-    MethodNode methodNode = this.sootMethodToMethodNode.get(callerMethod);
+    MethodNode methodNode = this.getSootMethodToMethodNode().get(callerMethod);
     int methodStartIndex = this.getJavapStartIndex(methodNode);
     List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
 
@@ -1679,7 +1642,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       Edge edge = worklist.remove(0);
       SootMethod src = edge.src();
 
-      if (!src.method().getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+      if (!src.method().getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
         Iterator<Edge> edges = this.getCallGraph().edgesInto(src);
         List<Edge> moreEdges = new ArrayList<>();
 
@@ -1715,7 +1678,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       SootMethod src = edge.src();
       analyzedMethods.add(src);
 
-      if (!tgt.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+      if (!tgt.getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
         Iterator<Edge> edges = this.getCallGraph().edgesOutOf(tgt);
         List<Edge> moreEdges = new ArrayList<>();
 
@@ -1761,7 +1724,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
       SootMethod src = edge.src();
       analyzedMethods.add(src);
 
-      if (!tgt.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
+      if (!tgt.getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
         Iterator<Edge> edges = this.getCallGraph().edgesOutOf(tgt);
         List<Edge> moreEdges = new ArrayList<>();
 
@@ -1786,52 +1749,9 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     return callerEdges;
   }
 
-  /**
-   * Get the methods that are used in the system
-   */
-  private Set<SootMethod> getSystemMethods() {
-    Set<SootMethod> methods = new HashSet<>();
-    QueueReader<Edge> edges = this.getCallGraph().listener();
-
-    while (edges.hasNext()) {
-      Edge edge = edges.next();
-      MethodOrMethodContext srcObject = edge.getSrc();
-      SootMethod src = srcObject.method();
-
-      if (!src.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
-        continue;
-      }
-
-      methods.add(src);
-
-      MethodOrMethodContext tgtObject = edge.getTgt();
-      SootMethod tgt = tgtObject.method();
-
-      if (!tgt.getDeclaringClass().getPackageName().contains(this.rootPackage)) {
-        continue;
-      }
-
-      methods.add(tgt);
-    }
-
-    return methods;
-  }
-
-  private List<JavaRegion> getRegionsInMethod(SootMethod sootMethod) {
-    String classPackage = sootMethod.getDeclaringClass().getPackageName();
-    String className = sootMethod.getDeclaringClass().getShortName();
-    String methodName = sootMethod.getBytecodeSignature();
-    methodName = methodName.substring(methodName.indexOf(" "), methodName.length() - 1).trim();
-
-    List<JavaRegion> javaRegions = this.getRegionsWith(classPackage, className, methodName);
-    javaRegions.sort(Comparator.comparingInt(JavaRegion::getStartRegionIndex));
-
-    return javaRegions;
-  }
-
   protected List<JavaRegion> getRegionsInMethod(MethodNode methodNode) {
     ClassNode classNode = this.methodNodeToClassNode.get(methodNode);
-    List<JavaRegion> javaRegions = this.getRegionsInMethod(methodNode, classNode);
+    List<JavaRegion> javaRegions = this.getRegionsInMethodNode(methodNode, classNode);
     javaRegions.sort(Comparator.comparingInt(JavaRegion::getStartRegionIndex));
 
     return javaRegions;

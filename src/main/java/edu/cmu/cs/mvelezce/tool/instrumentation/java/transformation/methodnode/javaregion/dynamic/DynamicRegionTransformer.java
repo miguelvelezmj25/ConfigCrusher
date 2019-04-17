@@ -7,6 +7,7 @@ import edu.cmu.cs.mvelezce.tool.instrumentation.java.graph.MethodGraph;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.ClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.instrument.classnode.DefaultClassTransformer;
 import edu.cmu.cs.mvelezce.tool.instrumentation.java.transformation.methodnode.javaregion.RegionTransformer;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
+import soot.SootMethod;
 
 public abstract class DynamicRegionTransformer extends RegionTransformer<InfluencingTaints> {
 
@@ -36,14 +38,98 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
   }
 
   @Override
-  public void transformMethods(Set<ClassNode> classNodes) {
+  public void transformMethods(Set<ClassNode> classNodes) throws IOException {
+    super.transformMethods(classNodes);
+
     this.setBlocksToDecisions(classNodes);
 
     // TODO propgate in methods, propagate up, repeat
-    this.expandRegionsInMethods(classNodes);
+    boolean updatedMethods = this.expandRegionsInMethods(classNodes);
+    this.propagateRegionsUpClasses();
   }
 
-  private void expandRegionsInMethods(Set<ClassNode> classNodes) {
+  private void propagateRegionsUpClasses() {
+    Set<SootMethod> methods = this.getApplicationSootMethods();
+    List<SootMethod> worklist = new ArrayList<>(methods);
+
+    while (!worklist.isEmpty()) {
+      SootMethod method = worklist.remove(0);
+
+      if (method.getSubSignature().equals(RegionTransformer.MAIN_SIGNATURE)) {
+        continue;
+      }
+
+      List<JavaRegion> regionsInMethod = this.getRegionsInSootMethod(method);
+
+      if (regionsInMethod.isEmpty()) {
+        continue;
+      }
+
+      boolean canPropagateFirstRegionToAllCallers = this
+          .canPropagateFirstRegionToAllCallers(method);
+
+//      if (!canPropagate) {
+//        continue;
+//      }
+//
+//      List<SootMethod> methodsToAnalyze = this.propagateUpRegionInter(method);
+//
+//      if (methodsToAnalyze.isEmpty()) {
+//        continue;
+//      }
+//
+//      worklist.addAll(0, methodsToAnalyze);
+    }
+  }
+
+  private boolean canPropagateFirstRegionToAllCallers(SootMethod method) {
+    boolean canPropagate = true;
+
+    MethodNode methodNode = this.getMethodNode(method);
+//    Collection<JavaRegion> regions = this.getMethodsToDecisionsInBlocks().get(methodNode).values();
+//    Iterator<JavaRegion> regionsIter = regions.iterator();
+//    JavaRegion region = regionsIter.next();
+//
+//    while (region == null) {
+//      region = regionsIter.next();
+//    }
+//
+//    Set<String> decision = this.getSingleDecision(region);
+//
+//    if (decision.isEmpty()) {
+//      throw new RuntimeException("The first decision in " + methodNode.name + " cannot be null");
+//    }
+//
+//    List<Edge> edges = this.getCallerEdges(method);
+//
+//    for (Edge edge : edges) {
+//      SootMethod callerSootMethod = edge.src();
+//      MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
+//      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
+//          .getMethodsToDecisionsInBlocks()
+//          .get(callerMethodNode);
+//
+//      MethodBlock callerBlock = this.getCallerBlock(edge);
+//      JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
+//      Set<String> callerDecision = this.getSingleDecision(callerRegion);
+//
+//      if (!decision.containsAll(callerDecision) && !decision.equals(callerDecision)
+//          && !callerDecision.containsAll(decision)) {
+////                this.debugBlockDecisions(callerMethodNode);
+//        System.out.println("Cannot push up " + decision + " from " + methodNode.name + " to "
+//            + callerMethodNode.name + " at " + callerBlock.getID() + " because it has decision "
+//            + callerDecision);
+//        canPropagate = false;
+//        break;
+//      }
+//    }
+//
+    return canPropagate;
+  }
+
+  private boolean expandRegionsInMethods(Set<ClassNode> classNodes) {
+    boolean updatedMethods = false;
+
     for (ClassNode classNode : classNodes) {
       Set<MethodNode> methodsToInstrument = this.getMethodsToInstrument(classNode);
 
@@ -62,9 +148,13 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
               .expandDownRegionsInMethod(methodNode, classNode, blocksToRegions);
 //          this.debugBlockDecisions(methodNode, classNode);
 //          System.out.println();
+
+          updatedMethods = updatedMethods | updatedRegions;
         }
       }
     }
+
+    return updatedMethods;
   }
 
   // TODO might be able to abstract this method and most callees to region transformer

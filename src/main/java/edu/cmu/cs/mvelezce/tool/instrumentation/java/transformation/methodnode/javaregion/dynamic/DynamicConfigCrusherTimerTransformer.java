@@ -32,7 +32,7 @@ public class DynamicConfigCrusherTimerTransformer extends DynamicConfigCrusherRe
 
   @Override
   public void transformMethod(MethodNode methodNode, ClassNode classNode) {
-    List<JavaRegion> regionsInMethod = this.getRegionsInMethod(methodNode, classNode);
+    List<JavaRegion> regionsInMethod = this.getRegionsInMethodNode(methodNode, classNode);
 
     this.instrumentRegion(methodNode, classNode, regionsInMethod);
   }

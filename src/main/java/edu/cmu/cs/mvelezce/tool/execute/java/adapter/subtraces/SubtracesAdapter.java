@@ -10,6 +10,7 @@ public class SubtracesAdapter extends BaseAdapter {
 
   public static final String PROGRAM_NAME = "subtraces";
   public static final String MAIN_CLASS = "edu.cmu.cs.mvelezce.analysis.Subtraces";
+  public static final String ROOT_PACKAGE = "edu.cmu.cs.mvelezce.analysis";
   public static final String ORIGINAL_CLASS_PATH = "../performance-mapper-evaluation/original/phosphor-examples/target/classes";
   public static final String INSTRUMENTED_DIR_PATH = "../performance-mapper-evaluation/instrumented/phosphor-examples";
   public static final String INSTRUMENTED_CLASS_PATH = "../performance-mapper-evaluation/instrumented/phosphor-examples/target/classes";

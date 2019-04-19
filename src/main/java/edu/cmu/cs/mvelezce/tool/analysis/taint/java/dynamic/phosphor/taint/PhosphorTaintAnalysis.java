@@ -29,17 +29,17 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
 
   @Override
   public Set<PhosphorControlFlowInfo> analyze() throws IOException, InterruptedException {
-    this.removeContextTaintsInConditionTaints();
-    this.removeStatementsWithOnlyEmptyConditionTaints();
-//    this.updatedConditionTaintsIfremoveContextTaintsInConditionTaints();
-
-//    this.checkContextTaintsNotEmpty();
-//    this.checkIfProblematicEntry();
-
-    // TODO we might not be able to always merge the sets of options
-    this.mergeTaints();
-    this.removeContextOptionsInConditionOptions();
-    this.removeStatementsWithOnlyEmptyConditionOptions();
+//    this.removeContextTaintsInConditionTaints();
+//    this.removeStatementsWithOnlyEmptyConditionTaints();
+////    this.updatedConditionTaintsIfremoveContextTaintsInConditionTaints();
+//
+////    this.checkContextTaintsNotEmpty();
+////    this.checkIfProblematicEntry();
+//
+//    // TODO we might not be able to always merge the sets of options
+//    this.mergeTaints();
+//    this.removeContextOptionsInConditionOptions();
+//    this.removeStatementsWithOnlyEmptyConditionOptions();
 
     return this.getPhosphorControlFlowDecisions();
   }
@@ -47,7 +47,8 @@ public class PhosphorTaintAnalysis extends BaseDynamicAnalysis<Set<PhosphorContr
   private Set<PhosphorControlFlowInfo> getPhosphorControlFlowDecisions() {
     Set<PhosphorControlFlowInfo> phosphorControlFlowInfos = new HashSet<>();
 
-    for (Map.Entry<String, InfluencingTaints> entry : this.statementsToOptions.entrySet()) {
+//    for (Map.Entry<String, InfluencingTaints> entry : this.statementsToOptions.entrySet()) {
+    for (Map.Entry<String, Set<InfluencingTaints>> entry : this.statementsToOptionsSet.entrySet()) {
       String statement = entry.getKey();
       String[] statementComponents = statement.split("\\.");
 

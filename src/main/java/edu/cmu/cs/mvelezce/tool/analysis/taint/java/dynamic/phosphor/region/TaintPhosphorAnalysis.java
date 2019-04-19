@@ -36,7 +36,7 @@ public class TaintPhosphorAnalysis extends BaseDynamicRegionAnalysis<Influencing
       JavaRegion region = new JavaRegion.Builder(result.getPackageName(), result.getClassName(),
           result.getMethodSignature()).startBytecodeIndex(result.getDecisionIndex()).build();
 
-      regionsToOptionsSet.put(region, result.getInfluencingTaints());
+      regionsToOptionsSet.put(region, result.getInfluencingTaints().iterator().next());
     }
 
     return regionsToOptionsSet;

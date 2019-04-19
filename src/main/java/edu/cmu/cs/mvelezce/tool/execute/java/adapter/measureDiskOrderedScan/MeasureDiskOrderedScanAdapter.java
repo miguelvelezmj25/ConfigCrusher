@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class MeasureDiskOrderedScanAdapter extends BaseAdapter {
 
-  public static final String PROGRAM_NAME = "measureDiskOrderedScan";
+  public static final String PROGRAM_NAME = "MeasureDiskOrderedScan";
   public static final String MAIN_CLASS = "com.sleepycat.analysis.MeasureDiskOrderedScan";
   public static final String ROOT_PACKAGE = "com.sleepycat";
   public static final String ORIGINAL_ROOT_DIR = "../performance-mapper-evaluation/original/berkeley-db";

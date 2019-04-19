@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,21 +21,23 @@ import java.util.Set;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
 import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import soot.SootMethod;
+import soot.jimple.toolkits.callgraph.Edge;
 
+// TODO have an method expander class and a method propagator class
 public abstract class DynamicRegionTransformer extends RegionTransformer<InfluencingTaints> {
 
   // TODO delete programName
-  private DynamicRegionTransformer(String programName, String entryPoint,
+  private DynamicRegionTransformer(String programName, String entryPoint, String rootPackage,
       ClassTransformer classTransformer,
       Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints) {
-    super(programName, entryPoint, classTransformer, regionsToInfluencingTaints, true,
+    super(programName, entryPoint, rootPackage, classTransformer, regionsToInfluencingTaints, true,
         new DynamicInstructionRegionMatcher());
   }
 
-  DynamicRegionTransformer(String programName, String entryPoint, String directory,
-      Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints)
+  DynamicRegionTransformer(String programName, String entryPoint, String rootPackage,
+      String directory, Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
-    this(programName, entryPoint, new DefaultClassTransformer(directory),
+    this(programName, entryPoint, rootPackage, new DefaultClassTransformer(directory),
         regionsToInfluencingTaints);
   }
 
@@ -68,12 +72,12 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
       boolean canPropagateFirstRegionToAllCallers = this
           .canPropagateFirstRegionToAllCallers(method);
 
-//      if (!canPropagate) {
-//        continue;
-//      }
-//
+      if (!canPropagateFirstRegionToAllCallers) {
+        continue;
+      }
+
 //      List<SootMethod> methodsToAnalyze = this.propagateUpRegionInter(method);
-//
+
 //      if (methodsToAnalyze.isEmpty()) {
 //        continue;
 //      }
@@ -83,48 +87,75 @@ public abstract class DynamicRegionTransformer extends RegionTransformer<Influen
   }
 
   private boolean canPropagateFirstRegionToAllCallers(SootMethod method) {
+    MethodNode methodNode = this.getMethodNode(method);
+    LinkedHashMap<MethodBlock, JavaRegion> blocksToDecisions = this.getMethodsToDecisionsInBlocks()
+        .get(methodNode);
+
+// TODO this check is done since there are some regions in methods that we cannot currently handle in berkeley db
+    if (blocksToDecisions == null) {
+      return false;
+    }
+
+    JavaRegion firstRegion = this.getFirstRegionInMethod(blocksToDecisions);
+    InfluencingTaints influencingTaints = this.getDecision(firstRegion);
+
+    if (influencingTaints.getContext().isEmpty() && influencingTaints.getCondition().isEmpty()) {
+      throw new RuntimeException(
+          "The first influencingTaints in " + methodNode.name + " with regions cannot be null");
+    }
+
+    List<Edge> edges = this.getCallerEdges(method);
+
     boolean canPropagate = true;
 
-    MethodNode methodNode = this.getMethodNode(method);
-//    Collection<JavaRegion> regions = this.getMethodsToDecisionsInBlocks().get(methodNode).values();
-//    Iterator<JavaRegion> regionsIter = regions.iterator();
-//    JavaRegion region = regionsIter.next();
-//
-//    while (region == null) {
-//      region = regionsIter.next();
-//    }
-//
-//    Set<String> decision = this.getSingleDecision(region);
-//
-//    if (decision.isEmpty()) {
-//      throw new RuntimeException("The first decision in " + methodNode.name + " cannot be null");
-//    }
-//
-//    List<Edge> edges = this.getCallerEdges(method);
-//
-//    for (Edge edge : edges) {
-//      SootMethod callerSootMethod = edge.src();
-//      MethodNode callerMethodNode = this.sootMethodToMethodNode.get(callerSootMethod);
-//      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
-//          .getMethodsToDecisionsInBlocks()
-//          .get(callerMethodNode);
-//
-//      MethodBlock callerBlock = this.getCallerBlock(edge);
-//      JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
-//      Set<String> callerDecision = this.getSingleDecision(callerRegion);
-//
-//      if (!decision.containsAll(callerDecision) && !decision.equals(callerDecision)
-//          && !callerDecision.containsAll(decision)) {
-////                this.debugBlockDecisions(callerMethodNode);
-//        System.out.println("Cannot push up " + decision + " from " + methodNode.name + " to "
-//            + callerMethodNode.name + " at " + callerBlock.getID() + " because it has decision "
-//            + callerDecision);
+    for (Edge edge : edges) {
+      SootMethod callerSootMethod = edge.src();
+      MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
+      LinkedHashMap<MethodBlock, JavaRegion> callerBlocksToRegions = this
+          .getMethodsToDecisionsInBlocks()
+          .get(callerMethodNode);
+
+      MethodBlock callerBlock = this.getCallerBlock(edge);
+      JavaRegion callerRegion = callerBlocksToRegions.get(callerBlock);
+      InfluencingTaints callerInfluencingTaints = this.getDecision(callerRegion);
+
+      Set<String> thisContextTaints = influencingTaints.getContext();
+      Set<String> thisConditionTaints = influencingTaints.getCondition();
+
+      Set<String> contextTaintsCaller = callerInfluencingTaints.getContext();
+      Set<String> conditionTaintsCaller = callerInfluencingTaints.getCondition();
+
+      if (!(contextTaintsCaller.containsAll(thisContextTaints) || conditionTaintsCaller
+          .equals(thisContextTaints)) &&
+          !callerInfluencingTaints.equals(influencingTaints)) {
+        throw new UnsupportedOperationException("Handle case");
+
+//      if (!contextTaintsCaller.containsAll(thisContextTaints) && !conditionTaintsCaller
+//          .containsAll(thisConditionTaints)) {
 //        canPropagate = false;
 //        break;
-//      }
-//    }
-//
+
+// OLD //      if (!influencingTaints.containsAll(callerInfluencingTaints) && !influencingTaints
+// OLD //          .equals(callerInfluencingTaints)
+// OLD //          && !callerInfluencingTaints.containsAll(influencingTaints)) {
+//                this.debugBlockDecisions(callerMethodNode);
+      }
+    }
+
     return canPropagate;
+  }
+
+  private JavaRegion getFirstRegionInMethod(
+      LinkedHashMap<MethodBlock, JavaRegion> blocksToDecisions) {
+    Collection<JavaRegion> methodRegions = blocksToDecisions.values();
+    Iterator<JavaRegion> methodRegionsIter = methodRegions.iterator();
+    JavaRegion firstRegion = methodRegionsIter.next();
+
+    while (firstRegion == null) {
+      firstRegion = methodRegionsIter.next();
+    }
+
+    return firstRegion;
   }
 
   private boolean expandRegionsInMethods(Set<ClassNode> classNodes) {

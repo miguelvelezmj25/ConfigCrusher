@@ -37,7 +37,7 @@ public class MethodGraph {
         from.addSuccessor(to);
         to.addPredecessor(from);
     }
-
+// TODO expensive
     public void calculateDominators() {
         for(MethodBlock block : this.blocks.values()) {
             this.blocksToDominators.put(block, new HashSet<>(this.blocks.values()));

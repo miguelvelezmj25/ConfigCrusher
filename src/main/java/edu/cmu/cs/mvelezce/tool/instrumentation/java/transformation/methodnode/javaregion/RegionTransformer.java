@@ -14,11 +14,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import javax.annotation.Nullable;
 import jdk.internal.org.objectweb.asm.Opcodes;
 import jdk.internal.org.objectweb.asm.tree.AbstractInsnNode;
 import jdk.internal.org.objectweb.asm.tree.ClassNode;
@@ -43,34 +45,47 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   private final String rootPackage;
   private final CallGraph callGraph;
   private final Set<SootMethod> applicationSootMethods;
+  private final Map<MethodNode, ClassNode> methodNodeToClassNode = new HashMap<>();
   private final Map<MethodNode, LinkedHashMap<MethodBlock, JavaRegion>> methodsToDecisionsInBlocks = new HashMap<>();
   private final Map<MethodNode, MethodGraph> methodsToGraphs = new HashMap<>();
   private final Map<SootMethod, MethodNode> sootMethodToMethodNode = new HashMap<>();
   private final Map<MethodNode, SootMethod> methodNodeToSootMethod = new HashMap<>();
+  private final ASMBytecodeOffsetFinder asmBytecodeOffsetFinder;
 
-  public RegionTransformer(String programName, String entryPoint, ClassTransformer classTransformer,
-      Map<JavaRegion, T> regionsToData, boolean debugInstrumentation,
-      InstructionRegionMatcher instructionRegionMatcher) {
+  public RegionTransformer(String programName, String entryPoint, String rootPackage,
+      ClassTransformer classTransformer, Map<JavaRegion, T> regionsToData,
+      boolean debugInstrumentation, InstructionRegionMatcher instructionRegionMatcher) {
     super(classTransformer, debugInstrumentation);
 
     this.programName = programName;
     this.entryPoint = entryPoint;
     this.regionsToData = regionsToData;
-    this.blockRegionMatcher = new BlockRegionMatcher(instructionRegionMatcher);
+    this.rootPackage = rootPackage;
 
-    this.rootPackage = entryPoint.substring(0, entryPoint.indexOf("."));
+    this.blockRegionMatcher = new BlockRegionMatcher(instructionRegionMatcher);
+    this.asmBytecodeOffsetFinder = new ASMBytecodeOffsetFinder(classTransformer.getPathToClasses(),
+        this.methodNodeToClassNode);
     this.callGraph = CallGraphBuilder
         .buildCallGraph(entryPoint, classTransformer.getPathToClasses());
     this.applicationSootMethods = this.calculateApplicationSootMethods();
   }
 
-  protected abstract T getDecision(JavaRegion javaRegion);
+  protected abstract T getDecision(@Nullable JavaRegion javaRegion);
 
   @Override
   public void transformMethods(Set<ClassNode> classNodes) throws IOException {
+    this.matchMethodNodesToClassNodes(classNodes);
     SootMethodsToMethodNodesMatcher
         .matchSootMethodsToMethodNodes(classNodes, this.applicationSootMethods,
             this.sootMethodToMethodNode, this.methodNodeToSootMethod);
+  }
+
+  private void matchMethodNodesToClassNodes(Set<ClassNode> classNodes) {
+    for (ClassNode classNode : classNodes) {
+      for (MethodNode methodNode : classNode.methods) {
+        this.methodNodeToClassNode.put(methodNode, classNode);
+      }
+    }
   }
 
   @Override
@@ -129,6 +144,61 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
     return javaRegions;
   }
 
+  protected MethodBlock getCallerBlock(Edge edge) {
+    SootMethod callerSootMethod = edge.src();
+    MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
+    AbstractInsnNode instInCaller = this.asmBytecodeOffsetFinder
+        .getASMInstFromCaller(edge, callerSootMethod, callerMethodNode);
+    Set<MethodBlock> blocks = this.getMethodsToDecisionsInBlocks().get(callerMethodNode).keySet();
+
+    for (MethodBlock block : blocks) {
+      if (!block.getInstructions().contains(instInCaller)) {
+        continue;
+      }
+
+      return block;
+    }
+
+    throw new RuntimeException(
+        "Could not find the instruction in the caller method blocks, however, before it seemed that a null block could be returned");
+  }
+
+  protected List<Edge> getCallerEdges(SootMethod method) {
+    CallGraph callGraph = this.getCallGraph();
+    Iterator<Edge> inEdges = callGraph.edgesInto(method);
+    List<Edge> worklist = new ArrayList<>();
+
+    while (inEdges.hasNext()) {
+      worklist.add(inEdges.next());
+    }
+
+    List<Edge> callerEdges = new ArrayList<>();
+
+    while (!worklist.isEmpty()) {
+      Edge edge = worklist.remove(0);
+      SootMethod src = edge.src();
+
+      if (!src.method().getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
+//        Iterator<Edge> edges = callGraph.edgesInto(src);
+//        List<Edge> moreEdges = new ArrayList<>();
+//
+//        while (edges.hasNext()) {
+//          moreEdges.add(edges.next());
+//        }
+//
+//        int index = Math.max(0, worklist.size() - 1);
+//        worklist.addAll(index, moreEdges);
+        throw new UnsupportedOperationException("Handle this case");
+      }
+      else {
+        callerEdges.add(edge);
+      }
+    }
+
+    return callerEdges;
+  }
+
+  // TODO takes sometime to execute
   protected void setBlocksToDecisions(Set<ClassNode> classNodes) {
     for (ClassNode classNode : classNodes) {
       for (MethodNode methodNode : classNode.methods) {
@@ -138,7 +208,6 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
 
 //                System.out.println("Setting blocks to decisions in method " + methodNode.name);
         List<JavaRegion> regionsInMethod = this.getRegionsInMethodNode(methodNode, classNode);
-
         LinkedHashMap<MethodBlock, JavaRegion> blocksToRegionSet = new LinkedHashMap<>();
 
         try {
@@ -363,7 +432,7 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
   }
 
   private boolean isMainClass(ClassNode classNode) {
-    return classNode.name.equals(this.getEntryPoint());
+    return classNode.name.replace("/", ".").equals(this.getEntryPoint());
   }
 
   private MethodNode getMainMethod(ClassNode classNode) {
@@ -420,6 +489,14 @@ public abstract class RegionTransformer<T> extends BaseMethodTransformer {
 
   protected Set<SootMethod> getApplicationSootMethods() {
     return applicationSootMethods;
+  }
+
+  protected Map<MethodNode, ClassNode> getMethodNodeToClassNode() {
+    return methodNodeToClassNode;
+  }
+
+  protected ASMBytecodeOffsetFinder getAsmBytecodeOffsetFinder() {
+    return asmBytecodeOffsetFinder;
   }
 
   private List<JavaRegion> getRegionsInClass(ClassNode classNode,

@@ -12,23 +12,27 @@ import java.util.Map;
 public class DynamicConfigCrusherTimerRegionInstrumenter extends DynamicBaseRegionInstrumenter {
 
   private final String entryPoint;
+  private final String rootPackage;
 
   public DynamicConfigCrusherTimerRegionInstrumenter(String programName, String entryPoint,
-      String classDir, Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints) {
+      String rootPackage, String classDir,
+      Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints) {
     super(programName, classDir, regionsToInfluencingTaints);
 
     this.entryPoint = entryPoint;
+    this.rootPackage = rootPackage;
   }
 
   @Override
   public void instrument()
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException {
     MethodTransformer methodTransformer = new DynamicConfigCrusherTimerTransformer(
-        this.getProgramName(),
-        this.entryPoint, this.getClassDir(), this.getRegionsToData());
+        this.getProgramName(), this.entryPoint, this.rootPackage, this.getClassDir(),
+        this.getRegionsToData());
     methodTransformer.transformMethods();
   }
 
   @Override
-  public void compile() { }
+  public void compile() {
+  }
 }

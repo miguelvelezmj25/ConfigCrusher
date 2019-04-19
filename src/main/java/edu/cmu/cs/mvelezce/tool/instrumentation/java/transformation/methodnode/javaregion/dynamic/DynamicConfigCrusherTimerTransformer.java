@@ -25,9 +25,10 @@ import jdk.internal.org.objectweb.asm.tree.MethodNode;
 public class DynamicConfigCrusherTimerTransformer extends DynamicConfigCrusherRegionTransformer {
 
   public DynamicConfigCrusherTimerTransformer(String programName, String entryPoint,
-      String directory, Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints)
+      String rootPackage, String directory,
+      Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints)
       throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-    super(programName, entryPoint, directory, regionsToInfluencingTaints);
+    super(programName, entryPoint, rootPackage, directory, regionsToInfluencingTaints);
   }
 
   @Override

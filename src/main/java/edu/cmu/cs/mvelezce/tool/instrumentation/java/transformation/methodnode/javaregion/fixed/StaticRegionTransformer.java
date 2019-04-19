@@ -49,9 +49,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
   private static final String CLINIT_SIGNATURE = "void <clinit>()";
 
-  private Map<MethodNode, ClassNode> methodNodeToClassNode = new HashMap<>();
   private Set<MethodNode> methodsWithUpdatedIndexes = new HashSet<>();
-  private Map<String, List<String>> classToJavapResult = new HashMap<>();
   private Map<SootMethod, Set<Set<String>>> sootMethodToOptionSet = new HashMap<>();
   private Set<MethodBlock> endRegionBlocksWithReturn = new HashSet<>();
 
@@ -62,22 +60,15 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   public StaticRegionTransformer(String programName, String entryPoint,
       ClassTransformer classTransformer,
       Map<JavaRegion, Set<Set<String>>> regionsToOptionSet) {
-    super(programName, entryPoint, classTransformer, regionsToOptionSet, false,
-        new StaticInstructionRegionMatcher());
+    // TODO pass the root package in the constructor
+    super(programName, entryPoint, entryPoint.substring(0, entryPoint.indexOf(".")),
+        classTransformer, regionsToOptionSet, false,  new StaticInstructionRegionMatcher());
   }
 
   public StaticRegionTransformer(String programName, String entryPoint, String directory,
       Map<JavaRegion, Set<Set<String>>> regionsToOptionSet)
       throws NoSuchMethodException, MalformedURLException, IllegalAccessException, InvocationTargetException {
     this(programName, entryPoint, new DefaultClassTransformer(directory), regionsToOptionSet);
-  }
-
-  private void matchMethodToClassNodes(Set<ClassNode> classNodes) {
-    for (ClassNode classNode : classNodes) {
-      for (MethodNode methodNode : classNode.methods) {
-        this.methodNodeToClassNode.put(methodNode, classNode);
-      }
-    }
   }
 
   private void matchMethodsToOptions() {
@@ -109,7 +100,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
   private void calculateASMIndexes(Set<ClassNode> classNodes) {
     for (ClassNode classNode : classNodes) {
-      if (!this.methodNodeToClassNode.containsValue(classNode)) {
+      if (!this.getMethodNodeToClassNode().containsValue(classNode)) {
         continue;
       }
 
@@ -135,7 +126,6 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
     int initialRegionCount = this.getRegionsToData().size();
 
-    this.matchMethodToClassNodes(classNodes);
     this.calculateASMIndexes(classNodes);
     this.matchMethodsToOptions();
     this.setBlocksToDecisions(classNodes);
@@ -370,58 +360,6 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     return canPush;
   }
 
-  private MethodBlock getCallerBlock(Edge edge) {
-    MethodBlock block = null;
-
-    SootMethod callerSootMethod = edge.src();
-    MethodNode callerMethodNode = this.getSootMethodToMethodNode().get(callerSootMethod);
-    AbstractInsnNode inst = this.getASMInstFromCaller(edge);
-    LinkedHashMap<MethodBlock, JavaRegion> blocksToRegions = this.getMethodsToDecisionsInBlocks()
-        .get(callerMethodNode);
-
-    for (MethodBlock entry : blocksToRegions.keySet()) {
-      if (!entry.getInstructions().contains(inst)) {
-        continue;
-      }
-
-      block = entry;
-
-      break;
-    }
-
-    return block;
-  }
-
-  private AbstractInsnNode getASMInstFromCaller(Edge edge) {
-    Unit unit = edge.srcUnit();
-    List<Integer> bytecodeIndexes = new ArrayList<>();
-
-    for (Tag tag : unit.getTags()) {
-      if (tag instanceof BytecodeOffsetTag) {
-        int bytecodeIndex = ((BytecodeOffsetTag) tag).getBytecodeOffset();
-        bytecodeIndexes.add(bytecodeIndex);
-      }
-    }
-
-    if (bytecodeIndexes.isEmpty()) {
-      throw new RuntimeException("There must be a bytecode index tag");
-    }
-
-    int bytecodeIndex;
-
-    if (bytecodeIndexes.size() == 1) {
-      bytecodeIndex = bytecodeIndexes.get(0);
-    }
-    else {
-      int index = bytecodeIndexes.indexOf(Collections.min(bytecodeIndexes));
-      bytecodeIndex = bytecodeIndexes.get(index);
-    }
-
-    SootMethod src = edge.src();
-
-    return this.getASMInstruction(src, bytecodeIndex);
-  }
-
   /**
    * TODO
    */
@@ -595,7 +533,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
 
     this.debugBlockDecisions(methodNode);
 
-    if (methodNode.name.equals("publish") && this.methodNodeToClassNode.get(methodNode).name
+    if (methodNode.name.equals("publish") && this.getMethodNodeToClassNode().get(methodNode).name
         .contains("CentralPublisher")) {
       System.out.println();
     }
@@ -1311,7 +1249,7 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
         bytecodeIndex = bytecodeIndexes.get(index);
       }
 
-      AbstractInsnNode asmInst = this.getASMInstruction(sootMethod, bytecodeIndex);
+      AbstractInsnNode asmInst = this.getAsmBytecodeOffsetFinder().getASMInstruction(this.getMethodNode(sootMethod), sootMethod, bytecodeIndex);
 
       if (inst != asmInst) {
         continue;
@@ -1350,67 +1288,10 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     return start;
   }
 
-  private List<String> getJavapResult(ClassNode classNode) {
-    String classPackage = RegionTransformer.getClassPackage(classNode);
-    String className = RegionTransformer.getClassName(classNode);
-
-    return this.getJavapResult(classPackage, className);
-  }
-
-  private List<String> getJavapResult(String classPackage, String className) {
-    List<String> javapResult = this.classToJavapResult.get(className);
-
-    if (javapResult != null) {
-      return javapResult;
-    }
-
-    javapResult = new ArrayList<>();
-
-    try {
-      String[] command = new String[]{"javap", "-classpath",
-          this.getClassTransformer().getPathToClasses(),
-          "-p", "-c", "-s",
-          classPackage + "." + className};
-      System.out.println(Arrays.toString(command));
-      Process process = Runtime.getRuntime().exec(command);
-
-      BufferedReader inputReader = new BufferedReader(
-          new InputStreamReader(process.getInputStream()));
-      String string;
-
-      while ((string = inputReader.readLine()) != null) {
-        if (!string.isEmpty()) {
-          javapResult.add(string);
-        }
-      }
-
-      BufferedReader errorReader = new BufferedReader(
-          new InputStreamReader(process.getErrorStream()));
-
-      while ((string = errorReader.readLine()) != null) {
-        System.out.println(string);
-      }
-
-      process.waitFor();
-    }
-    catch (IOException | InterruptedException ie) {
-      ie.printStackTrace();
-    }
-
-    if (javapResult.size() < 3) {
-      System.out.println(javapResult);
-      throw new RuntimeException("The output of javap is not expected");
-    }
-
-    this.classToJavapResult.put(className, javapResult);
-
-    return javapResult;
-  }
-
   // TODO why dont we return a new list
   private void calculateASMSIndexes(List<JavaRegion> regionsInMethod, MethodNode methodNode) {
-    int methodStartIndex = this.getJavapStartIndex(methodNode);
-    List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
+    int methodStartIndex = this.getAsmBytecodeOffsetFinder().getJavapStartIndex(methodNode);
+    List<String> javapResult = this.getAsmBytecodeOffsetFinder().getJavapResult(this.getMethodNodeToClassNode().get(methodNode));
 
     int instructionNumber = 0;
     int currentBytecodeIndex = -1;
@@ -1503,164 +1384,6 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
     this.methodsWithUpdatedIndexes.add(methodNode);
   }
 
-  private int getJavapStartIndex(MethodNode methodNode) {
-    ClassNode classNode = this.methodNodeToClassNode.get(methodNode);
-    List<String> javapResult = this.getJavapResult(classNode);
-    String methodNameInJavap = methodNode.name;
-
-    if (methodNameInJavap.startsWith("<init>")) {
-      methodNameInJavap = classNode.name;
-      methodNameInJavap = methodNameInJavap.replace("/", ".");
-    }
-
-    if (methodNameInJavap.startsWith("<clinit>")) {
-      methodNameInJavap = "  static {};";
-    }
-    else {
-      methodNameInJavap += "(";
-    }
-
-    int methodStartIndex = 0;
-
-    // Check if signature matches
-    for (String outputLine : javapResult) {
-      if (outputLine.equals(methodNameInJavap)) {
-        if (!outputLine.equals("  static {};")) {
-          throw new RuntimeException("Check this case");
-        }
-
-        break;
-      }
-      else if (outputLine.contains(" " + methodNameInJavap)) {
-        String javapDescriptor = javapResult.get(methodStartIndex + 1).trim();
-        javapDescriptor = javapDescriptor.substring(javapDescriptor.indexOf(" ")).trim();
-
-        if (javapDescriptor.equals(methodNode.desc)) {
-          break;
-        }
-      }
-
-      methodStartIndex++;
-    }
-
-    if (methodStartIndex == javapResult.size()) {
-      throw new RuntimeException("The start of the javap result cannot be the size of the result");
-    }
-
-    return methodStartIndex;
-  }
-
-  private AbstractInsnNode getASMInstruction(SootMethod callerMethod, int bytecodeIndex) {
-    MethodNode methodNode = this.getSootMethodToMethodNode().get(callerMethod);
-    int methodStartIndex = this.getJavapStartIndex(methodNode);
-    List<String> javapResult = this.getJavapResult(this.methodNodeToClassNode.get(methodNode));
-
-    int instructionNumber = 0;
-    int currentBytecodeIndex = -1;
-
-    for (int i = methodStartIndex; i < javapResult.size(); i++) {
-      methodStartIndex++;
-      String outputLine = javapResult.get(i);
-
-      if (outputLine.contains(" Code:")) {
-        break;
-      }
-    }
-
-    for (int i = methodStartIndex; i < javapResult.size(); i++) {
-      String outputLine = javapResult.get(i);
-
-      if (outputLine.contains(" Code:")) {
-        break;
-      }
-
-      if (!outputLine.contains(":")) {
-        continue;
-      }
-
-      if (outputLine.contains(bytecodeIndex + ":")) {
-        break;
-      }
-
-      String outputCommand = outputLine.substring(outputLine.indexOf(":") + 1).trim();
-
-      if (StringUtils.isNumeric(outputCommand)) {
-        continue;
-      }
-
-      int outputLineBytecodeIndex = -1;
-      String outputLineBytecodeIndexString = outputLine.substring(0, outputLine.indexOf(":"))
-          .trim();
-
-      if (StringUtils.isNumeric(outputLineBytecodeIndexString)) {
-        outputLineBytecodeIndex = Integer.valueOf(outputLineBytecodeIndexString);
-      }
-
-      if (outputLineBytecodeIndex > currentBytecodeIndex) {
-        instructionNumber++;
-        currentBytecodeIndex = outputLineBytecodeIndex;
-      }
-    }
-
-    InsnList instructionsList = methodNode.instructions;
-    ListIterator<AbstractInsnNode> instructions = instructionsList.iterator();
-    int instructionCounter = -1;
-
-    while (instructions.hasNext()) {
-      AbstractInsnNode instruction = instructions.next();
-
-      if (instruction.getOpcode() >= 0) {
-        instructionCounter++;
-      }
-      else {
-        continue;
-      }
-
-      if (instructionCounter == instructionNumber) {
-//                if(!(instruction instanceof MethodInsnNode)) {
-//                    throw new RuntimeException("The instruction has to be a method call");
-//                }
-
-        return instruction;
-      }
-    }
-
-    throw new RuntimeException("Could not find the instruction");
-  }
-
-  private List<Edge> getCallerEdges(SootMethod method) {
-    Iterator<Edge> inEdges = this.getCallGraph().edgesInto(method);
-    List<Edge> worklist = new ArrayList<>();
-
-    while (inEdges.hasNext()) {
-      worklist.add(inEdges.next());
-    }
-
-    List<Edge> callerEdges = new ArrayList<>();
-
-    while (!worklist.isEmpty()) {
-      Edge edge = worklist.remove(0);
-      SootMethod src = edge.src();
-
-      if (!src.method().getDeclaringClass().getPackageName().contains(this.getRootPackage())) {
-        Iterator<Edge> edges = this.getCallGraph().edgesInto(src);
-        List<Edge> moreEdges = new ArrayList<>();
-
-        while (edges.hasNext()) {
-          moreEdges.add(edges.next());
-        }
-
-        int index = Math.max(0, worklist.size() - 1);
-        worklist.addAll(index, moreEdges);
-      }
-      else {
-        callerEdges.add(edge);
-      }
-    }
-
-    return callerEdges;
-  }
-
   private List<Edge> getCalleeEdges(SootMethod method) {
     Iterator<Edge> outEdges = this.getCallGraph().edgesOutOf(method);
     Set<SootMethod> analyzedMethods = new HashSet<>();
@@ -1750,15 +1473,11 @@ public abstract class StaticRegionTransformer extends RegionTransformer<Set<Set<
   }
 
   protected List<JavaRegion> getRegionsInMethod(MethodNode methodNode) {
-    ClassNode classNode = this.methodNodeToClassNode.get(methodNode);
+    ClassNode classNode = this.getMethodNodeToClassNode().get(methodNode);
     List<JavaRegion> javaRegions = this.getRegionsInMethodNode(methodNode, classNode);
     javaRegions.sort(Comparator.comparingInt(JavaRegion::getStartRegionIndex));
 
     return javaRegions;
-  }
-
-  public Map<MethodNode, ClassNode> getMethodNodeToClassNode() {
-    return methodNodeToClassNode;
   }
 
   public Set<MethodBlock> getEndRegionBlocksWithReturn() {

@@ -9,9 +9,10 @@ import java.util.Map;
 public abstract class DynamicConfigCrusherRegionTransformer extends DynamicRegionTransformer {
 
   public DynamicConfigCrusherRegionTransformer(String programName, String entryPoint,
-      String directory, Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints)
+      String rootPackage, String directory,
+      Map<JavaRegion, InfluencingTaints> regionsToInfluencingTaints)
       throws InvocationTargetException, NoSuchMethodException, MalformedURLException, IllegalAccessException {
-    super(programName, entryPoint, directory, regionsToInfluencingTaints);
+    super(programName, entryPoint, rootPackage, directory, regionsToInfluencingTaints);
   }
 
 }

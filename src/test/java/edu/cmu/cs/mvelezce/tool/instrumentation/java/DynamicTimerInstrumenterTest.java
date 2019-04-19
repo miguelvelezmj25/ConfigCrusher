@@ -25,6 +25,7 @@ public class DynamicTimerInstrumenterTest {
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
     String programName = TrivialAdapter.PROGRAM_NAME;
     String entry = TrivialAdapter.MAIN_CLASS;
+    String rootPackage = TrivialAdapter.ROOT_PACKAGE;
     String srcDir = TrivialAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = TrivialAdapter.INSTRUMENTED_CLASS_PATH;
 
@@ -40,7 +41,7 @@ public class DynamicTimerInstrumenterTest {
     args[1] = "-saveres";
 
     Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-        classDir, decisionsToInfluencingTaints);
+        rootPackage, classDir, decisionsToInfluencingTaints);
     instrumenter.instrument(args);
   }
 
@@ -49,6 +50,7 @@ public class DynamicTimerInstrumenterTest {
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
     String programName = SimpleForExample6Adapter.PROGRAM_NAME;
     String entry = SimpleForExample6Adapter.MAIN_CLASS;
+    String rootPackage = SimpleForExample6Adapter.ROOT_PACKAGE;
     String srcDir = SimpleForExample6Adapter.INSTRUMENTED_DIR_PATH;
     String classDir = SimpleForExample6Adapter.INSTRUMENTED_CLASS_PATH;
 
@@ -64,7 +66,7 @@ public class DynamicTimerInstrumenterTest {
     args[1] = "-saveres";
 
     Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-        classDir, decisionsToInfluencingTaints);
+        rootPackage, classDir, decisionsToInfluencingTaints);
     instrumenter.instrument(args);
   }
 
@@ -73,6 +75,7 @@ public class DynamicTimerInstrumenterTest {
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
     String programName = MeasureDiskOrderedScanAdapter.PROGRAM_NAME;
     String entry = MeasureDiskOrderedScanAdapter.MAIN_CLASS;
+    String rootPackage = MeasureDiskOrderedScanAdapter.ROOT_PACKAGE;
     String srcDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = MeasureDiskOrderedScanAdapter.INSTRUMENTED_CLASS_PATH;
 
@@ -88,7 +91,7 @@ public class DynamicTimerInstrumenterTest {
     args[1] = "-saveres";
 
     Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-        classDir, decisionsToInfluencingTaints);
+        rootPackage, classDir, decisionsToInfluencingTaints);
     instrumenter.instrument(args);
   }
 
@@ -97,6 +100,7 @@ public class DynamicTimerInstrumenterTest {
       throws NoSuchMethodException, IOException, IllegalAccessException, InvocationTargetException, InterruptedException {
     String programName = SubtracesAdapter.PROGRAM_NAME;
     String entry = SubtracesAdapter.MAIN_CLASS;
+    String rootPackage = SubtracesAdapter.ROOT_PACKAGE;
     String srcDir = SubtracesAdapter.INSTRUMENTED_DIR_PATH;
     String classDir = SubtracesAdapter.INSTRUMENTED_CLASS_PATH;
 
@@ -112,7 +116,7 @@ public class DynamicTimerInstrumenterTest {
     args[1] = "-saveres";
 
     Instrumenter instrumenter = new DynamicConfigCrusherTimerRegionInstrumenter(programName, entry,
-        classDir, decisionsToInfluencingTaints);
+        rootPackage, classDir, decisionsToInfluencingTaints);
     instrumenter.instrument(args);
   }
 
